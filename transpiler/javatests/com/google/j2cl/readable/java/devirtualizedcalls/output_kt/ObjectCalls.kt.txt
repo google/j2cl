@@ -3,29 +3,29 @@ package devirtualizedcalls
 open class ObjectCalls {
  open fun main() {
   val `object`: kotlin.Any? = (java.lang.Object() as kotlin.Any)
-  `object`!! == `object`
+  (`object`!! as java.lang.Object).equals(`object`)
   (`object`!! as java.lang.Object).hashCode()
   (`object`!! as java.lang.Object).toString()
   (`object`!! as java.lang.Object).getClass()
   val objectCalls: Array<devirtualizedcalls.ObjectCalls?>? = arrayOfNulls<devirtualizedcalls.ObjectCalls?>(1)
-  objectCalls!! == objectCalls
+  (objectCalls!! as java.lang.Object).equals(objectCalls)
   (objectCalls!! as java.lang.Object).hashCode()
   (objectCalls!! as java.lang.Object).toString()
   (objectCalls!! as java.lang.Object).getClass()
  }
 
  open fun test() {
-  this == (java.lang.Object() as kotlin.Any)
+  (this as java.lang.Object).equals((java.lang.Object() as kotlin.Any))
   (this as java.lang.Object).hashCode()
   (this as java.lang.Object).toString()
   (this as java.lang.Object).getClass()
-  this == (java.lang.Object() as kotlin.Any)
+  (this as java.lang.Object).equals((java.lang.Object() as kotlin.Any))
   (this as java.lang.Object).hashCode()
   (this as java.lang.Object).toString()
   (this as java.lang.Object).getClass()
  }
 
  open fun testNotEquals(): Boolean {
-  return this != (java.lang.Object() as kotlin.Any)
+  return !(this as java.lang.Object).equals((java.lang.Object() as kotlin.Any))
  }
 }

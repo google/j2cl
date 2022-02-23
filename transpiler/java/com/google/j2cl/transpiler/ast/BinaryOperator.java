@@ -38,8 +38,6 @@ public enum BinaryOperator implements Operator {
   GREATER_EQUALS(Precedence.RELATIONAL, ">="),
   EQUALS(Precedence.EQUALITY, "=="),
   NOT_EQUALS(Precedence.EQUALITY, "!="),
-  SAME(Precedence.EQUALITY, "==="),
-  NOT_SAME(Precedence.EQUALITY, "!=="),
   BIT_XOR(Precedence.BITWISE_XOR, "^"),
   BIT_AND(Precedence.BITWISE_AND, "&"),
   BIT_OR(Precedence.BITWISE_OR, "|"),
@@ -134,8 +132,6 @@ public enum BinaryOperator implements Operator {
       case LESS_EQUALS:
       case EQUALS:
       case NOT_EQUALS:
-      case SAME:
-      case NOT_SAME:
       case GREATER:
       case GREATER_EQUALS:
         return true;

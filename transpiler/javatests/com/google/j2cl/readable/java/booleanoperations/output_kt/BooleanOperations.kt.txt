@@ -6,8 +6,8 @@ open class BooleanOperations {
   val rs: Boolean = true
   var r: Boolean = true
   val t: Boolean = !!!true
-  r = ls == rs
-  r = ls != rs
+  r = ls === rs
+  r = ls !== rs
   r = ls.xor(rs)
   r = ls.and(rs)
   r = ls.or(rs)
@@ -20,8 +20,8 @@ open class BooleanOperations {
   r = r.xor(rs)
   r = r.and(rs)
   r = r.or(rs)
-  booleanoperations.BooleanOperations.acceptBoolean(ls == rs)
-  booleanoperations.BooleanOperations.acceptBoolean(ls != rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls === rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls !== rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls.xor(rs))
   booleanoperations.BooleanOperations.acceptBoolean(ls.and(rs))
   booleanoperations.BooleanOperations.acceptBoolean(ls.or(rs))
@@ -32,8 +32,8 @@ open class BooleanOperations {
    ls
   })
   var br: kotlin.Boolean?
-  br = ls == rs
-  br = ls != rs
+  br = ls === rs
+  br = ls !== rs
   br = ls.xor(rs)
   br = ls.and(rs)
   br = ls.or(rs)
@@ -43,10 +43,10 @@ open class BooleanOperations {
    ls = rs
    ls
   }
-  if (ls == rs) {
+  if (ls === rs) {
    r = true
   }
-  if (ls != rs) {
+  if (ls !== rs) {
    r = true
   }
   if (ls.xor(rs)) {

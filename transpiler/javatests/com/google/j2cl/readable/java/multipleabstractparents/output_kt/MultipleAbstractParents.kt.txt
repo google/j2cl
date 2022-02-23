@@ -4,9 +4,9 @@ open class MultipleAbstractParents {
  companion object {
   @kotlin.jvm.JvmStatic
   fun main(vararg args: kotlin.String?) {
-   assert(multipleabstractparents.MultipleAbstractParents.ArrayList<kotlin.String?>().getFoo(null)!! == "AbstractCollection")
-   assert(multipleabstractparents.MultipleAbstractParents.StringList().getFoo(null)!! == "AbstractCollection")
-   assert((multipleabstractparents.MultipleAbstractParents.StringList() as multipleabstractparents.MultipleAbstractParents.IStringList?)!!.getFoo(null)!! == "AbstractCollection")
+   assert((multipleabstractparents.MultipleAbstractParents.ArrayList<kotlin.String?>().getFoo(null)!! as java.lang.String).equals("AbstractCollection"))
+   assert((multipleabstractparents.MultipleAbstractParents.StringList().getFoo(null)!! as java.lang.String).equals("AbstractCollection"))
+   assert(((multipleabstractparents.MultipleAbstractParents.StringList() as multipleabstractparents.MultipleAbstractParents.IStringList?)!!.getFoo(null)!! as java.lang.String).equals("AbstractCollection"))
   }
  }
 

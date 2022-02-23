@@ -22,6 +22,6 @@ open class GenericEquals<T> {
    return false
   }
   val other: genericequals.GenericEquals<*>? = obj as genericequals.GenericEquals<*>?
-  return this.value!! == other!!.value
+  return (this.value!! as java.lang.Object).equals(other!!.value)
  }
 }

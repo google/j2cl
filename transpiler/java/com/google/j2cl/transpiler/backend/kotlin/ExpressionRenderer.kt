@@ -125,8 +125,28 @@ private fun Renderer.renderCastExpression(expression: CastExpression) {
 }
 
 private fun Renderer.renderBinaryOperator(operator: BinaryOperator) {
-  render(operator.symbol)
+  render(operator.ktSymbol)
 }
+
+private val BinaryOperator.ktSymbol
+  get() =
+    when (this) {
+      BinaryOperator.TIMES -> "*"
+      BinaryOperator.DIVIDE -> "/"
+      BinaryOperator.REMAINDER -> "%"
+      BinaryOperator.PLUS -> "+"
+      BinaryOperator.MINUS -> "-"
+      BinaryOperator.LESS -> "<"
+      BinaryOperator.GREATER -> ">"
+      BinaryOperator.LESS_EQUALS -> "<="
+      BinaryOperator.GREATER_EQUALS -> ">="
+      BinaryOperator.EQUALS -> "==="
+      BinaryOperator.NOT_EQUALS -> "!=="
+      BinaryOperator.CONDITIONAL_AND -> "&&"
+      BinaryOperator.CONDITIONAL_OR -> "||"
+      BinaryOperator.ASSIGN -> "="
+      else -> throw InternalCompilerError("$this.ktSymbol")
+    }
 
 private fun Renderer.renderExpressionWithComment(expressionWithComment: ExpressionWithComment) {
   // Comments do not count as operations, but parenthesis will be emitted by the

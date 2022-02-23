@@ -56,7 +56,7 @@ open class ForStatement {
    var j: Int = 0
    LABEL@ while (i < 10) {
     LABEL_CONTINUE@ do {
-     if (i == 5) {
+     if (i === 5) {
       break@LABEL_CONTINUE
      }
      if (true) {
@@ -64,7 +64,7 @@ open class ForStatement {
       var l: Int = 0
       LOOP@ while (k < 10) {
        LOOP_CONTINUE@ do {
-        if (j == 5) {
+        if (j === 5) {
          break@LABEL_CONTINUE
         }
        } while (false)

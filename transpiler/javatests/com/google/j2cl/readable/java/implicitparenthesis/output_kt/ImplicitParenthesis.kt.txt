@@ -14,8 +14,8 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = if (primitiveInt == 5) (java.lang.Integer(15) as kotlin.Int) else (java.lang.Integer(30) as kotlin.Int)
-    assert(primitiveInt == 15)
+    primitiveInt = if (primitiveInt === 5) (java.lang.Integer(15) as kotlin.Int) else (java.lang.Integer(30) as kotlin.Int)
+    assert(primitiveInt === 15)
    }
    if (true) {
     primitiveInt = 5
@@ -24,7 +24,7 @@ open class ImplicitParenthesis {
      boxedInt = boxedInt!! + primitiveInt
      boxedInt
     }!!
-    assert(primitiveInt == 15)
+    assert(primitiveInt === 15)
    }
    if (true) {
     primitiveInt = 5
@@ -33,7 +33,7 @@ open class ImplicitParenthesis {
      boxedInt = primitiveInt
      boxedInt
     }!!
-    assert(primitiveInt == 5)
+    assert(primitiveInt === 5)
    }
    if (true) {
     primitiveInt = 5
@@ -43,7 +43,7 @@ open class ImplicitParenthesis {
      boxedInt = boxedInt!! + 1
      `$value`
     }!!
-    assert(primitiveInt == 10)
+    assert(primitiveInt === 10)
    }
    if (true) {
     primitiveInt = 5
@@ -52,7 +52,7 @@ open class ImplicitParenthesis {
      boxedInt = boxedInt!! + 1
      boxedInt
     }!!
-    assert(primitiveInt == 11)
+    assert(primitiveInt === 11)
    }
   }
 
@@ -65,14 +65,14 @@ open class ImplicitParenthesis {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
     primitiveInt = boxedInt!! - primitiveInt
-    assert(primitiveInt == 5)
+    assert(primitiveInt === 5)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
     boxedBoolean = true
-    boxedBoolean = boxedInt!! == primitiveInt
-    assert(boxedBoolean!! == false)
+    boxedBoolean = boxedInt!! === primitiveInt
+    assert(boxedBoolean!! === false)
    }
   }
 

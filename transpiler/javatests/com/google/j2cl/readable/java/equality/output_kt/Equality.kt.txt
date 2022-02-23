@@ -3,17 +3,17 @@ package equality
 open class Equality {
  open fun test() {
   if (true) {
-   assert(false == false)
-   assert(0 != 1)
+   assert(false === false)
+   assert(0 !== 1)
   }
   if (true) {
    assert((java.lang.Object() as kotlin.Any) !== (java.lang.Object() as kotlin.Any))
   }
   if (true) {
-   assert(0.0 == 0.0)
+   assert(0.0 === 0.0)
   }
   if (true) {
-   assert(0.0f == 0.0f)
+   assert(0.0f === 0.0f)
   }
   if (true) {
    assert(null !== (java.lang.Object() as kotlin.Any))

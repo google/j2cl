@@ -83,7 +83,6 @@ import com.google.j2cl.transpiler.passes.NormalizeCatchClauses;
 import com.google.j2cl.transpiler.passes.NormalizeConstructors;
 import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
-import com.google.j2cl.transpiler.passes.NormalizeEqualityKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitializationKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeForEachStatement;
@@ -412,7 +411,6 @@ public enum Backend {
           InsertExplicitArrayCoercionCasts::new,
           ImplementKotlinBitLevelOperators::new,
           InsertNotNullAssertions::new,
-          NormalizeEqualityKotlin::new,
 
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,

@@ -4,7 +4,7 @@ open class Main {
  companion object {
   @kotlin.jvm.JvmStatic
   fun testJsEnumSwitch() {
-   var comparableJsEnum: jsenum.Main.ComparableJsEnum? = if (jsenum.Main.ComparableJsEnum.ONE.getValue() == 1) jsenum.Main.ComparableJsEnum.TWO else null
+   var comparableJsEnum: jsenum.Main.ComparableJsEnum? = if (jsenum.Main.ComparableJsEnum.ONE.getValue() === 1) jsenum.Main.ComparableJsEnum.TWO else null
    SWITCH@ do {
     CASE@ do {
      CASE_1@ do {
@@ -23,7 +23,7 @@ open class Main {
    } while (false)
    val comparable: kotlin.Comparable<*>? = comparableJsEnum
    comparableJsEnum = comparable as jsenum.Main.ComparableJsEnum?
-   var intJsEnum: jsenum.Main.IntJsEnum? = if (jsenum.Main.IntJsEnum.ELEVEN.getValue() == 10) jsenum.Main.IntJsEnum.ELEVEN else null
+   var intJsEnum: jsenum.Main.IntJsEnum? = if (jsenum.Main.IntJsEnum.ELEVEN.getValue() === 10) jsenum.Main.IntJsEnum.ELEVEN else null
    SWITCH_1@ do {
     CASE_2@ do {
      CASE_3@ do {
@@ -63,9 +63,9 @@ open class Main {
     } while (false)
    } while (false)
    (jsenum.Main.NativeStringEnum.ONE as java.lang.Enum<jsenum.Main.NativeStringEnum?>).compareTo(jsenum.Main.NativeStringEnum.THREE)
-   jsenum.Main.NativeStringEnum.ONE == jsenum.Main.NativeStringEnum.THREE
+   (jsenum.Main.NativeStringEnum.ONE as java.lang.Object).equals(jsenum.Main.NativeStringEnum.THREE)
    (jsenum.Main.ComparableJsEnum.ONE as java.lang.Enum<jsenum.Main.ComparableJsEnum?>).compareTo(jsenum.Main.ComparableJsEnum.ZERO)
-   jsenum.Main.ComparableJsEnum.ONE == jsenum.Main.ComparableJsEnum.ZERO
+   (jsenum.Main.ComparableJsEnum.ONE as java.lang.Object).equals(jsenum.Main.ComparableJsEnum.ZERO)
    val supplier: java.util.function.Supplier<jsenum.Main.ComparableJsEnum?>? = java.util.function.Supplier<jsenum.Main.ComparableJsEnum?> (fun(): jsenum.Main.ComparableJsEnum? {
     return jsenum.Main.ComparableJsEnum.ONE
    })
