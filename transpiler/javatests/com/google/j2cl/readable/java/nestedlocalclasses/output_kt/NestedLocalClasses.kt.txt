@@ -3,16 +3,16 @@ package nestedlocalclasses
 open class NestedLocalClasses {
  open fun test(p: Int) {
   val localVar: Int = 1
-  open class `1InnerClass` {
+  open class `$1InnerClass` {
    open fun `fun`() {
     val localVarInInnerClass: Int = 1
-    open class `1InnerInnerClass` {
+    open class `$1InnerInnerClass` {
      @kotlin.jvm.JvmField var fieldInInnerInnerClass: Int = localVar + localVarInInnerClass
     }
-    `1InnerInnerClass`()
-    open class `1ClassIndirectlyCapturingLocal` {
+    `$1InnerInnerClass`()
+    open class `$1ClassIndirectlyCapturingLocal` {
      init {
-      `1InnerInnerClass`()
+      `$1InnerInnerClass`()
      }
     }
    }
@@ -21,8 +21,8 @@ open class NestedLocalClasses {
 
  interface InterfaceWithThisReference {
   fun foo() {
-   open class `1Super`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {}
-   object : `1Super`() {}
+   open class `$1Super`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {}
+   object : `$1Super`() {}
   }
  }
 }

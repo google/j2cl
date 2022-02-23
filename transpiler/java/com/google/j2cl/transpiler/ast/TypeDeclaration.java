@@ -141,7 +141,7 @@ public abstract class TypeDeclaration
   }
 
   /**
-   * Returns the qualifier for the type from the root of the module, @{code ""} if the type is the
+   * Returns the qualifier for the type from the root of the module, {@code ""} if the type is the
    * module root.
    */
   @Memoized
@@ -266,6 +266,74 @@ public abstract class TypeDeclaration
 
   @Nullable
   public abstract JsEnumInfo getJsEnumInfo();
+
+  // TODO(b/216924456): Read from KtType annotation when present.
+  @Nullable
+  @Memoized
+  public KtTypeInfo getKtTypeInfo() {
+    switch (getQualifiedSourceName()) {
+      case "java.lang.Annotation":
+      case "java.lang.Boolean":
+      case "java.lang.Byte":
+      case "java.lang.CharSequence":
+      case "java.lang.Cloneable":
+      case "java.lang.Comparable":
+      case "java.lang.Double":
+      case "java.lang.Enum":
+      case "java.lang.Float":
+      case "java.lang.Long":
+      case "java.lang.Number":
+      case "java.lang.Short":
+      case "java.lang.String":
+      case "java.lang.Throwable":
+        return KtTypeInfo.newBuilder().setPackageName("kotlin").build();
+      case "java.lang.Character":
+        return KtTypeInfo.newBuilder().setPackageName("kotlin").setName("Char").build();
+      case "java.lang.Integer":
+        return KtTypeInfo.newBuilder().setPackageName("kotlin").setName("Int").build();
+      case "java.lang.Object":
+        return KtTypeInfo.newBuilder().setPackageName("kotlin").setName("Any").build();
+      case "java.lang.Iterable":
+        return KtTypeInfo.newBuilder()
+            .setPackageName("kotlin.collections")
+            .setName("MutableIterable")
+            .build();
+      case "java.util.Collection":
+        return KtTypeInfo.newBuilder()
+            .setPackageName("kotlin.collections")
+            .setName("MutableCollection")
+            .build();
+      case "java.util.Iterator":
+        return KtTypeInfo.newBuilder()
+            .setPackageName("kotlin.collections")
+            .setName("MutableIterator")
+            .build();
+      case "java.util.List":
+        return KtTypeInfo.newBuilder()
+            .setPackageName("kotlin.collections")
+            .setName("MutableList")
+            .build();
+      case "java.util.ListIterator":
+        return KtTypeInfo.newBuilder()
+            .setPackageName("kotlin.collections")
+            .setName("MutableListIterator")
+            .build();
+      case "java.util.Map":
+        return KtTypeInfo.newBuilder()
+            .setPackageName("kotlin.collections")
+            .setName("MutableMap")
+            .build();
+      case "java.util.Set":
+        return KtTypeInfo.newBuilder()
+            .setPackageName("kotlin.collections")
+            .setName("MutableSet")
+            .build();
+      case "java.util.Map.Entry":
+        return KtTypeInfo.newBuilder().setName("MutableEntry").build();
+      default:
+        return null;
+    }
+  }
 
   public abstract boolean isDeprecated();
 
@@ -532,6 +600,21 @@ public abstract class TypeDeclaration
   public String getQualifiedSourceName() {
     return AstUtils.buildQualifiedName(
         Streams.concat(Stream.of(getPackageName()), getClassComponents().stream()));
+  }
+
+  @Memoized
+  public String getKtName() {
+    KtTypeInfo ktTypeInfo = getKtTypeInfo();
+    String ktName = ktTypeInfo != null ? ktTypeInfo.getName() : null;
+    return ktName != null ? ktName : getSimpleSourceName();
+  }
+
+  @Nullable
+  @Memoized
+  public String getKtPackageName() {
+    KtTypeInfo ktTypeInfo = getKtTypeInfo();
+    String ktPackageName = ktTypeInfo != null ? ktTypeInfo.getPackageName() : null;
+    return ktPackageName != null ? ktPackageName : getPackageName();
   }
 
   @Memoized

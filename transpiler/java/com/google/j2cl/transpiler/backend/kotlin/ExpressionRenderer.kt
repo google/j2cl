@@ -350,7 +350,7 @@ private fun Renderer.renderThisReference(thisReference: ThisReference) {
 
 private fun Renderer.renderLabelReference(typeDescriptor: DeclaredTypeDescriptor) {
   render("@")
-  renderIdentifier(typeDescriptor.typeDeclaration.classComponents.last())
+  renderIdentifier(typeDescriptor.typeDeclaration.simpleSourceName)
 }
 
 private fun Renderer.renderVariableDeclarationExpression(

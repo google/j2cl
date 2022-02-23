@@ -2,22 +2,22 @@ package nestedgenericclass
 
 open class NestedGenericClass<T> {
  open fun <S> `fun`(t: S?) {
-  open class `1E`<S, S> {}
-  open class `1F`<S> {
+  open class `$1E`<S, S> {}
+  open class `$1F`<S> {
    @kotlin.jvm.JvmField var f: S? = null
   }
-  `1E`<kotlin.Number?, S>()
-  `1F`<S>()
+  `$1E`<kotlin.Number?, S>()
+  `$1F`<S>()
  }
 
  open fun <T_1> bar() {
-  open class `1G`<T, T_1> {
+  open class `$1G`<T, T_1> {
    open fun <T_1> bar() {
-    open class `1H`<T, T_1> {}
-    `1H`<kotlin.Number?, T_1>()
+    open class `$1H`<T, T_1> {}
+    `$1H`<kotlin.Number?, T_1>()
    }
   }
-  `1G`<java.lang.Error?, T_1>().bar()
+  `$1G`<java.lang.Error?, T_1>().bar()
  }
 
  open fun test() {

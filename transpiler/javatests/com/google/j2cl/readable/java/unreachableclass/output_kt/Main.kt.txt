@@ -3,14 +3,14 @@ package unreachableclass
 open class Main {
  init {
   try {} catch (e: java.lang.RuntimeException) {
-   open class `1A` {
+   open class `$1A` {
     internal open fun m() {
-     open class `1B` {
+     open class `$1B` {
       internal fun n() {}
      }
     }
    }
-   `1A`().m()
+   `$1A`().m()
    (object : java.lang.Object() {} as kotlin.Any)
   }
  }

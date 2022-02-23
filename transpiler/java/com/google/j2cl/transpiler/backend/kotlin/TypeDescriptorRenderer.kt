@@ -26,39 +26,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithBound
 
 internal fun Renderer.mapsToKotlin(typeDescriptor: DeclaredTypeDescriptor) =
-  typeDescriptor.typeDeclaration.qualifiedBinaryName.mappedKotlinQualifiedName != null
-
-private val String.mappedKotlinQualifiedName: String?
-  get() =
-    // TODO(b/204287086): Move Kotlin -> Java type translation out of the renderer.
-    when (this) {
-      "java.lang.Annotation" -> "kotlin.Annotation"
-      "java.lang.Boolean" -> "kotlin.Boolean"
-      "java.lang.Byte" -> "kotlin.Byte"
-      "java.lang.Character" -> "kotlin.Char"
-      "java.lang.CharSequence" -> "kotlin.CharSequence"
-      "java.lang.Cloneable" -> "kotlin.Cloneable"
-      "java.lang.Comparable" -> "kotlin.Comparable"
-      "java.lang.Double" -> "kotlin.Double"
-      "java.lang.Enum" -> "kotlin.Enum"
-      "java.lang.Float" -> "kotlin.Float"
-      "java.lang.Integer" -> "kotlin.Int"
-      "java.lang.Iterable" -> "kotlin.collections.MutableIterable"
-      "java.lang.Long" -> "kotlin.Long"
-      "java.lang.Number" -> "kotlin.Number"
-      "java.lang.Object" -> "kotlin.Any"
-      "java.lang.Short" -> "kotlin.Short"
-      "java.lang.String" -> "kotlin.String"
-      "java.lang.Throwable" -> "kotlin.Throwable"
-      "java.util.Collection" -> "kotlin.collections.MutableCollection"
-      "java.util.Iterator" -> "kotlin.collections.MutableIterator"
-      "java.util.List" -> "kotlin.collections.MutableList"
-      "java.util.ListIterator" -> "kotlin.collections.MutableListIterator"
-      "java.util.Map" -> "kotlin.collections.MutableMap"
-      "java.util.Map.Entry" -> "kotlin.collections.MutableMap.MutableEntry"
-      "java.util.Set" -> "kotlin.collections.MutableSet"
-      else -> null
-    }
+  typeDescriptor.typeDeclaration.ktTypeInfo != null
 
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
@@ -121,40 +89,34 @@ private fun Renderer.renderDeclaredTypeDescriptor(
   asName: Boolean,
   projectBounds: Boolean
 ) {
-  // Check if the Java type maps to Kotlin one, ie: java.lang.String -> kotlin.String
-  val mappedKotlinName =
-    declaredTypeDescriptor.qualifiedSourceName.takeUnless { asJava }?.run {
-      mappedKotlinQualifiedName
-    }
+  val typeDeclaration = declaredTypeDescriptor.typeDeclaration
+  val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
 
-  if (mappedKotlinName != null) {
-    // Render the mapped Kotlin type name.
-    renderQualifiedName(mappedKotlinName)
+  // Render the original Java type.
+  if (asSimple || declaredTypeDescriptor.typeDeclaration.isLocal) {
+    // Don't render package name or enclosing type for local types.
+  } else if (enclosingTypeDescriptor != null) {
+    // Render the enclosing type if present.
+    renderDeclaredTypeDescriptor(
+      enclosingTypeDescriptor.toNonNullable(),
+      asJava = asJava,
+      asSimple = asSimple,
+      asName = asName || !typeDeclaration.isCapturingEnclosingInstance,
+      projectBounds = projectBounds
+    )
+    render(".")
   } else {
-    val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
-    // Render the original Java type.
-    if (asSimple || declaredTypeDescriptor.typeDeclaration.isLocal) {
-      // Don't render package name or enclosing type for local types.
-    } else if (enclosingTypeDescriptor != null) {
-      // Render the enclosing type if present.
-      renderDeclaredTypeDescriptor(
-        enclosingTypeDescriptor.toNonNullable(),
-        asJava = asJava,
-        asSimple = asSimple,
-        asName = asName || !declaredTypeDescriptor.typeDeclaration.isCapturingEnclosingInstance,
-        projectBounds = projectBounds
-      )
+    // Render the package name for this top-level type.
+    val packageName = if (asJava) typeDeclaration.packageName else typeDeclaration.ktPackageName
+    if (packageName != null) {
+      renderPackageName(packageName)
       render(".")
-    } else {
-      // Render the package name for this top-level type.
-      declaredTypeDescriptor.typeDeclaration.packageName?.let { packageName ->
-        renderPackageName(packageName)
-        render(".")
-      }
     }
-
-    renderIdentifier(declaredTypeDescriptor.typeDeclaration.classComponents.last())
   }
+
+  val name = if (asJava) typeDeclaration.simpleSourceName else typeDeclaration.ktName
+  renderIdentifier(name)
+
   if (!asName) {
     renderArguments(declaredTypeDescriptor, projectBounds = projectBounds)
     renderNullableSuffix(declaredTypeDescriptor)

@@ -50,7 +50,7 @@ fun Renderer.renderType(type: Type) {
 }
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
-  renderIdentifier(declaration.classComponents.last())
+  renderIdentifier(declaration.simpleSourceName)
   declaration.renderedTypeParameterDescriptors.takeIf { it.isNotEmpty() }?.let { parameters ->
     renderTypeParameters(parameters)
   }

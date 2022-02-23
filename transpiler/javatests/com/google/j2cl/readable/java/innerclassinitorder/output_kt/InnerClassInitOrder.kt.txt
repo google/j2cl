@@ -46,7 +46,7 @@ open class InnerClassInitOrder {
  }
 
  open fun testInnerClassLoop() {
-  abstract class `1AddNumber` {
+  abstract class `$1AddNumber` {
    @kotlin.jvm.JvmField internal var num: Int = 0
 
    constructor(i: Int) {
@@ -55,12 +55,12 @@ open class InnerClassInitOrder {
 
    abstract open fun act()
   }
-  val results: Array<`1AddNumber`?>? = arrayOfNulls<`1AddNumber`?>(10)
+  val results: Array<`$1AddNumber`?>? = arrayOfNulls<`$1AddNumber`?>(10)
   if (true) {
    var i: Int = 0
    LOOP@ while (i < 10) {
     LOOP_CONTINUE@ do {
-     val ap: `1AddNumber`? = object : `1AddNumber`(i) {
+     val ap: `$1AddNumber`? = object : `$1AddNumber`(i) {
       open override fun act() {
        this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + this.num
       }
@@ -175,7 +175,7 @@ open class InnerClassInitOrder {
 
   internal open fun callInner() {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1
-   open class `1ReallyInnerClass` {
+   open class `$1ReallyInnerClass` {
     init {
      this.callReallyInner()
     }
@@ -184,7 +184,7 @@ open class InnerClassInitOrder {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 10
     }
    }
-   `1ReallyInnerClass`()
+   `$1ReallyInnerClass`()
   }
  }
 

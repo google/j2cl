@@ -3,25 +3,25 @@ package simplelocalclass
 open class SimpleLocalClass {
  open fun test(p: Int) {
   val localVar: Int = 1
-  open class `1InnerClass` {
+  open class `$1InnerClass` {
    open fun `fun`(): Int {
     return localVar + p
    }
   }
-  `1InnerClass`().`fun`()
-  open class `1InnerClassWithoutCaptures` {}
-  `1InnerClassWithoutCaptures`()
+  `$1InnerClass`().`fun`()
+  open class `$1InnerClassWithoutCaptures` {}
+  `$1InnerClassWithoutCaptures`()
  }
 
  open fun `fun`() {
   val localVar: Int = 1
-  open class `2InnerClass` {
+  open class `$2InnerClass` {
    @kotlin.jvm.JvmField internal var field: Int = localVar
   }
  }
 
  open fun foo() {
-  open class `1Abc$InnerClass` {}
-  open class `1Klm$InnerClass` {}
+  open class `$1Abc$InnerClass` {}
+  open class `$1Klm$InnerClass` {}
  }
 }
