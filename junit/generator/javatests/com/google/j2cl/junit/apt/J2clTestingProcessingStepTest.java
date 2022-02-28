@@ -104,6 +104,32 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
+  public void testJUnit4NonStaticClassMethod() {
+    assertError(
+        ErrorMessage.NON_STATIC, JUnit4TestCaseWithNonStaticClassMethod.class, "beforeClass");
+  }
+
+  @Test
+  public void testJUnit4NonPublicClassMethod() {
+    assertError(
+        ErrorMessage.NON_PUBLIC, JUnit4TestCaseWithNonPublicClassMethod.class, "beforeClass");
+  }
+
+  @Test
+  public void testJUnit4ArgumentsOnClassMethod() {
+    assertError(
+        ErrorMessage.HAS_ARGS, JUnit4TestCaseWithArgumentsOnClassMethod.class, "beforeClass");
+  }
+
+  @Test
+  public void testJUnit4NonVoidReturnTypeClassMethod() {
+    assertError(
+        ErrorMessage.NON_PROMISE_RETURN,
+        JUnit4TestCaseNonVoidReturnTypeClassMethod.class,
+        "beforeClass");
+  }
+
+  @Test
   public void testJUnit4InnerClass() {
     assertError(ErrorMessage.NON_TOP_LEVEL_TYPE, JUnit4TestCaseOnInnerClass.Inner.class);
   }

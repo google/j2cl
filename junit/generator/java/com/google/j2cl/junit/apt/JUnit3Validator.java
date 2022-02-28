@@ -75,7 +75,7 @@ class JUnit3Validator extends BaseValidator {
   private final boolean validateMethods(List<ExecutableElement> methods) {
     boolean isValid = true;
     for (ExecutableElement executableElement : methods) {
-      isValid &= validateMethodPublic(executableElement);
+      isValid &= validateMethodIsPublic(executableElement);
       isValid &= validateMethodNoArguments(executableElement);
       isValid &= validateMethodVoidReturn(executableElement);
     }

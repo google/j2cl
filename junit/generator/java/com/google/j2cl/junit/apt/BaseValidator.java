@@ -36,7 +36,7 @@ class BaseValidator {
     return true;
   }
 
-  protected final boolean validateMethodPublic(ExecutableElement executableElement) {
+  protected final boolean validateMethodIsPublic(ExecutableElement executableElement) {
     if (!MoreElements.hasModifiers(Modifier.PUBLIC).apply(executableElement)) {
       errorReporter.report(ErrorMessage.NON_PUBLIC, executableElement);
       return false;

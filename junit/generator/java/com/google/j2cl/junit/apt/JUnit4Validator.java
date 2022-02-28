@@ -26,7 +26,9 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -63,23 +65,25 @@ class JUnit4Validator extends BaseValidator {
       isValid = false;
     }
     for (ExecutableElement executableElement : getAllTestMethods(type)) {
-      isValid &= validateMethodPublic(executableElement);
-      isValid &= validateMethodNotStatic(executableElement);
+      isValid &= validateMethodIsPublic(executableElement);
+      isValid &= validateMethodInstanceOrStatic(executableElement);
       isValid &= validateMethodNoArguments(executableElement);
-      isValid &= validateAsync(executableElement);
+      isValid &= validateMethodReturnType(executableElement);
     }
     return isValid;
   }
 
-  private boolean validateMethodNotStatic(ExecutableElement executableElement) {
-    if (executableElement.getModifiers().contains(Modifier.STATIC)) {
-      errorReporter.report(ErrorMessage.IS_STATIC, executableElement);
+  private boolean validateMethodInstanceOrStatic(ExecutableElement executableElement) {
+    boolean isStatic = executableElement.getModifiers().contains(Modifier.STATIC);
+    if (hasClassSetupAnnotation(executableElement) != isStatic) {
+      errorReporter.report(
+          isStatic ? ErrorMessage.IS_STATIC : ErrorMessage.NON_STATIC, executableElement);
       return false;
     }
     return true;
   }
 
-  private boolean validateAsync(ExecutableElement executableElement) {
+  private boolean validateMethodReturnType(ExecutableElement executableElement) {
     Test testAnnotation = executableElement.getAnnotation(Test.class);
     Timeout timeoutAnnotation = executableElement.getAnnotation(Timeout.class);
     long timeout =
@@ -124,9 +128,16 @@ class JUnit4Validator extends BaseValidator {
     return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .filter(
             Predicates.or(
+                TestingPredicates.hasAnnotation(BeforeClass.class),
+                TestingPredicates.hasAnnotation(AfterClass.class),
                 TestingPredicates.hasAnnotation(Test.class),
                 TestingPredicates.hasAnnotation(Before.class),
                 TestingPredicates.hasAnnotation(After.class)))
         .collect(toImmutableList());
+  }
+
+  private static boolean hasClassSetupAnnotation(ExecutableElement executableElement) {
+    return isAnnotationPresent(executableElement, BeforeClass.class)
+        || isAnnotationPresent(executableElement, AfterClass.class);
   }
 }

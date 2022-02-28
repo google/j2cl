@@ -27,6 +27,7 @@ enum ErrorMessage {
           + "@JsFunction or @FunctionalInterface."),
   HAS_ARGS("Method %s cannot have arguments."),
   IS_STATIC("Method %s cannot be static."),
+  NON_STATIC("Class level method %s cannot be non-static."),
   NON_PUBLIC("Method %s cannot be non-public."),
   NON_ASYNC_HAS_TIMEOUT("Method %s has timeout but doesn't return a promise-like type."),
   ASYNC_HAS_EXPECTED_EXCEPTION(
