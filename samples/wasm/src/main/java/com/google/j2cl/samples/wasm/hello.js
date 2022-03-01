@@ -20,4 +20,9 @@ const j2wasm = goog.require('j2wasm');
 
 j2wasm.instantiateStreaming('app.wasm').then((instance) => {
   document.body.innerText = instance.exports.getHelloWorld();
+}, (err) => {
+  document.body.style.color = 'red';
+  document.body.innerText = `Failed to load wasm: ${err}`;
+  // rethrow so it also bubbles up to the console.
+  throw err;
 });
