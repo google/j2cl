@@ -28,7 +28,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
@@ -690,7 +689,7 @@ public abstract class TypeDeclaration
    * (like bridge methods) nor supertype methods that are not overridden in the type.
    */
   @Memoized
-  public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
+  public ImmutableList<MethodDescriptor> getDeclaredMethodDescriptors() {
     return getDeclaredMethodDescriptorsFactory().get(this);
   }
 
@@ -707,7 +706,7 @@ public abstract class TypeDeclaration
    * (like captures) nor supertype fields.
    */
   @Memoized
-  public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
+  public ImmutableList<FieldDescriptor> getDeclaredFieldDescriptors() {
     return getDeclaredFieldDescriptorsFactory().get(this);
   }
 
