@@ -101,6 +101,12 @@ package_sources(
     super_srcs = glob(["super-wasm/**/*.java"]),
 )
 
+package_sources(
+    name = "jre_java_files-j2kt",
+    srcs = BASE_JRE_SRCS,
+    excludes = glob(["super-wasm/**"]),
+)
+
 filegroup(
     name = "jre_native_files",
     srcs = glob(
@@ -190,6 +196,16 @@ java_library(
     ],
 )
 
+java_library(
+    name = "jre_bootclasspath-j2kt",
+    srcs = [":jre_java_files-j2kt"],
+    javacopts = JRE_JAVAC_OPTS,
+    deps = [
+        ":javaemul_internal_annotations",
+        "//third_party:gwt-jsinterop-annotations",
+    ],
+)
+
 jdk_system(
     name = "jdk_system",
     bootclasspath = ":jre_bootclasspath",
@@ -198,6 +214,11 @@ jdk_system(
 jdk_system(
     name = "jdk_system-j2wasm",
     bootclasspath = ":jre_bootclasspath-j2wasm",
+)
+
+jdk_system(
+    name = "jdk_system-j2kt",
+    bootclasspath = ":jre_bootclasspath-j2kt",
 )
 
 default_java_toolchain(
@@ -242,6 +263,29 @@ alias(
     actual = select({
         ":experimental_java11_support": ":j2wasm_java_toolchain_11",
         "//conditions:default": ":j2wasm_java_toolchain_8",
+    }),
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+)
+
+default_java_toolchain(
+    name = "j2kt_java_toolchain_8",
+    bootclasspath = [":jdk_system-j2kt"],
+    source_version = "8",
+    target_version = "8",
+)
+
+default_java_toolchain(
+    name = "j2kt_java_toolchain_11",
+    bootclasspath = [":jdk_system-j2kt"],
+    source_version = "11",
+    target_version = "11",
+)
+
+alias(
+    name = "j2kt_java_toolchain",
+    actual = select({
+        ":experimental_java11_support": ":j2kt_java_toolchain_11",
+        "//conditions:default": ":j2kt_java_toolchain_8",
     }),
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
 )

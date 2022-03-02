@@ -55,6 +55,11 @@ alias(
 )
 
 alias(
+    name = "j2kt_java_toolchain",
+    actual = "//jre/java:j2kt_java_toolchain",
+)
+
+alias(
     name = "j2wasm_jre",
     actual = "//jre/java:jre-j2wasm",
 )
