@@ -69,7 +69,7 @@ def j2cl_library(
         generate_j2kt_library = None,
         generate_j2wasm_library = None,
         **kwargs):
-    """Translates Java source into JS source in a js_common.provider target.
+    """Translates Java source into JS source encapsulated by a JsInfo provider.
 
     See j2cl_java_library.bzl#j2cl_library for the arguments.
 
