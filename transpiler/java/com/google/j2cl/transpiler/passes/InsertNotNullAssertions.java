@@ -41,25 +41,6 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                     ? insertNotNullAssertionIfNeeded(expression)
                     : expression;
               }
-
-              // TODO(b/202430789): Remove when boxing conversions pass is added.
-              @Override
-              public Expression rewriteUnaryNumericPromotionContext(Expression operand) {
-                return insertNotNullAssertionIfNeeded(operand);
-              }
-
-              // TODO(b/202430789): Remove when boxing conversions pass is added.
-              @Override
-              public Expression rewriteBinaryNumericPromotionContext(
-                  TypeDescriptor otherOperandTypeDescriptor, Expression operand) {
-                return insertNotNullAssertionIfNeeded(operand);
-              }
-
-              // TODO(b/202430789): Remove when boxing conversions pass is added.
-              @Override
-              public Expression rewriteBooleanConversionContext(Expression operand) {
-                return insertNotNullAssertionIfNeeded(operand);
-              }
             }));
   }
 

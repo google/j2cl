@@ -14,44 +14,44 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = if (primitiveInt === 5) (java.lang.Integer(15) as kotlin.Int) else (java.lang.Integer(30) as kotlin.Int)
+    primitiveInt = ((if (primitiveInt === 5) (java.lang.Integer(15) as kotlin.Int) else (java.lang.Integer(30) as kotlin.Int)) as java.lang.Integer).intValue()
     assert(primitiveInt === 15)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = run {
-     boxedInt = boxedInt!! + primitiveInt
+    primitiveInt = (run {
+     boxedInt = java.lang.Integer.valueOf((boxedInt!! as java.lang.Integer).intValue() + primitiveInt)
      boxedInt
-    }!!
+    }!! as java.lang.Integer).intValue()
     assert(primitiveInt === 15)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = run {
-     boxedInt = primitiveInt
+    primitiveInt = (run {
+     boxedInt = java.lang.Integer.valueOf(primitiveInt)
      boxedInt
-    }!!
+    }!! as java.lang.Integer).intValue()
     assert(primitiveInt === 5)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = run {
+    primitiveInt = (run {
      val `$value`: kotlin.Int? = boxedInt
-     boxedInt = boxedInt!! + 1
+     boxedInt = java.lang.Integer.valueOf((boxedInt!! as java.lang.Integer).intValue() + 1)
      `$value`
-    }!!
+    }!! as java.lang.Integer).intValue()
     assert(primitiveInt === 10)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = run {
-     boxedInt = boxedInt!! + 1
+    primitiveInt = (run {
+     boxedInt = java.lang.Integer.valueOf((boxedInt!! as java.lang.Integer).intValue() + 1)
      boxedInt
-    }!!
+    }!! as java.lang.Integer).intValue()
     assert(primitiveInt === 11)
    }
   }
@@ -64,15 +64,15 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = boxedInt!! - primitiveInt
+    primitiveInt = (boxedInt!! as java.lang.Integer).intValue() - primitiveInt
     assert(primitiveInt === 5)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    boxedBoolean = true
-    boxedBoolean = boxedInt!! === primitiveInt
-    assert(boxedBoolean!! === false)
+    boxedBoolean = java.lang.Boolean.valueOf(true)
+    boxedBoolean = java.lang.Boolean.valueOf((boxedInt!! as java.lang.Integer).intValue() === primitiveInt)
+    assert((boxedBoolean!! as java.lang.Boolean).booleanValue() === false)
    }
   }
 

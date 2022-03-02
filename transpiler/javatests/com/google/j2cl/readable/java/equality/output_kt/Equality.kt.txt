@@ -10,10 +10,10 @@ open class Equality {
    assert((java.lang.Object() as kotlin.Any) !== (java.lang.Object() as kotlin.Any))
   }
   if (true) {
-   assert(0.0 === 0.0)
+   assert(java.lang.Double.valueOf(0.0) === java.lang.Double.valueOf(0.0))
   }
   if (true) {
-   assert(0.0f === 0.0f)
+   assert(java.lang.Float.valueOf(0.0f) === java.lang.Float.valueOf(0.0f))
   }
   if (true) {
    assert(null !== (java.lang.Object() as kotlin.Any))

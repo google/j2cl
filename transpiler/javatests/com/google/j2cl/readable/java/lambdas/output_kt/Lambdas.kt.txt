@@ -87,7 +87,7 @@ open class Lambdas {
    throw java.lang.RuntimeException()
   }))
   val f: lambdas.Lambdas.Function<*, *>? = lambdas.Lambdas.Function<*, *> (fun(item: T?): kotlin.Any? {
-   return 1L
+   return java.lang.Long.valueOf(1L)
   })
  }
 
@@ -164,7 +164,7 @@ open class Lambdas {
     f1_1!!.apply(null)
    })
    val stringJsSupplier: lambdas.Lambdas.JsSupplier<kotlin.Int?>? = lambdas.Lambdas.JsSupplier<kotlin.Int?> (fun(): kotlin.Int? {
-    return 1
+    return java.lang.Integer.valueOf(1)
    })
    stringJsSupplier!!.get()
    val equals: lambdas.Lambdas.Equals<*>? = stringJsSupplier

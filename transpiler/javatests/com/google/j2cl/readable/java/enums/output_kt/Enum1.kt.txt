@@ -34,7 +34,7 @@ enum class Enum2 {
 
 enum class Enum3 {
  VALUE1(java.util.function.Function<kotlin.Int?, kotlin.Int?> (fun(v: kotlin.Int?): kotlin.Int? {
-  return 1 + v!!
+  return java.lang.Integer.valueOf(1 + (v!! as java.lang.Integer).intValue())
  }));
 
  constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?)

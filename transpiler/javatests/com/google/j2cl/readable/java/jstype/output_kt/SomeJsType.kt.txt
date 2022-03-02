@@ -27,7 +27,7 @@ open class SomeJsType<T> {
 
  open fun testStarAndWildCard(s: jstype.SomeJsType.Star?, w: jstype.SomeJsType.Wildcard?): jstype.SomeJsType.Wildcard? {
   val `object`: kotlin.Any? = (java.lang.Object() as kotlin.Any)
-  val star: jstype.SomeJsType.Star? = 3.0 as kotlin.Any? as jstype.SomeJsType.Star?
+  val star: jstype.SomeJsType.Star? = java.lang.Double.valueOf(3.0) as jstype.SomeJsType.Star?
   return star as jstype.SomeJsType.Wildcard?
  }
 

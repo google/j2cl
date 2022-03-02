@@ -3,7 +3,7 @@ package cast
 open class CastPrimitives {
  open fun testPrimitiveCasts() {
   var b: Byte = 1
-  var c: Char = 1.toChar()
+  var c: Char = '\u0001'
   var s: Short = 1
   var i: Int = 1
   var l: Long = 1L
@@ -74,16 +74,16 @@ open class CastPrimitives {
 
  open fun testUnboxAndWiden() {
   val boxedByte: kotlin.Byte? = java.lang.Byte.valueOf(0.toByte())
-  val s: Short = boxedByte!!.toShort()
-  val i: Int = boxedByte!!.toInt()
-  val l: Long = boxedByte!!.toLong()
-  val f: Float = boxedByte!!.toFloat()
-  val d: Double = boxedByte!!.toDouble()
+  val s: Short = (boxedByte!! as java.lang.Byte).byteValue().toShort()
+  val i: Int = (boxedByte!! as java.lang.Byte).byteValue().toInt()
+  val l: Long = (boxedByte!! as java.lang.Byte).byteValue().toLong()
+  val f: Float = (boxedByte!! as java.lang.Byte).byteValue().toFloat()
+  val d: Double = (boxedByte!! as java.lang.Byte).byteValue().toDouble()
  }
 
  open fun testImplicitArgumentCasts() {
   val b: Byte = 127
-  val c: Char = 65535.toChar()
+  val c: Char = '\uFFFF'
   val s: Short = 32767
   val i: Int = 2147483647
   val l: Long = 9223372036854775807L
@@ -107,7 +107,7 @@ open class CastPrimitives {
 
  open fun testImplicitLongAssignmentCasts() {
   val fbyte: Byte = 11
-  val fchar: Char = 12.toChar()
+  val fchar: Char = '\u000C'
   val fshort: Short = 13
   val fint: Int = 14
   val flong: Long = 15L

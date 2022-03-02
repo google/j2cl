@@ -32,17 +32,17 @@ open class BooleanOperations {
    ls
   })
   var br: kotlin.Boolean?
-  br = ls === rs
-  br = ls !== rs
-  br = ls.xor(rs)
-  br = ls.and(rs)
-  br = ls.or(rs)
-  br = ls && rs
-  br = ls || rs
-  br = run {
+  br = java.lang.Boolean.valueOf(ls === rs)
+  br = java.lang.Boolean.valueOf(ls !== rs)
+  br = java.lang.Boolean.valueOf(ls.xor(rs))
+  br = java.lang.Boolean.valueOf(ls.and(rs))
+  br = java.lang.Boolean.valueOf(ls.or(rs))
+  br = java.lang.Boolean.valueOf(ls && rs)
+  br = java.lang.Boolean.valueOf(ls || rs)
+  br = java.lang.Boolean.valueOf(run {
    ls = rs
    ls
-  }
+  })
   if (ls === rs) {
    r = true
   }

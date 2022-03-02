@@ -14,4 +14,6 @@ package(
 integration_test(
     name = "implicitparenthesis",
     srcs = glob(["*.java"]),
+    # TODO(b/219913874): Translate boxing / unboxing conversions.
+    enable_kt = False,
 )

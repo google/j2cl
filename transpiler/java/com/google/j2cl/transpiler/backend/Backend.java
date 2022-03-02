@@ -397,6 +397,8 @@ public enum Backend {
           NormalizeMultiExpressions::new,
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           RewriteAssignmentExpressions::new,
+          () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
+          () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           NormalizeLiteralsKotlin::new,
           NormalizeFieldInitializationKotlin::new,
           NormalizeLabels::new,
