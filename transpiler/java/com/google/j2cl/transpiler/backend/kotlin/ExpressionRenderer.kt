@@ -239,14 +239,25 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
 internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
   renderInParentheses {
-    val parameters = invocation.target.parameterDescriptors.zip(invocation.arguments)
-    renderCommaSeparated(parameters) { (parameterDescriptor, argument) ->
-      // TODO(b/216523245): Handle spread operator using a pass in the AST.
-      if (parameterDescriptor.isVarargs) {
-        render("*")
-        renderInParentheses { renderExpression(argument) }
-      } else {
-        renderExpression(argument)
+    // Take last argument if it's an array literal passed as a vararg parameter.
+    val varargArrayLiteral =
+      (invocation.arguments.lastOrNull() as? ArrayLiteral).takeIf {
+        invocation.target.parameterDescriptors.lastOrNull()?.isVarargs == true
+      }
+
+    if (varargArrayLiteral != null) {
+      val expandedArguments = invocation.arguments.dropLast(1) + varargArrayLiteral.valueExpressions
+      renderCommaSeparated(expandedArguments) { renderExpression(it) }
+    } else {
+      val parameters = invocation.target.parameterDescriptors.zip(invocation.arguments)
+      renderCommaSeparated(parameters) { (parameterDescriptor, argument) ->
+        // TODO(b/216523245): Handle spread operator using a pass in the AST.
+        if (parameterDescriptor.isVarargs) {
+          render("*")
+          renderInParentheses { renderExpression(argument) }
+        } else {
+          renderExpression(argument)
+        }
       }
     }
   }
@@ -262,15 +273,11 @@ private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
 }
 
 private fun Renderer.renderNewArray(newArray: NewArray) {
-  val literalOrNull = newArray.arrayLiteral
-  if (literalOrNull != null) {
-    renderArrayLiteral(literalOrNull)
-  } else {
-    renderNewArrayOfSize(
-      newArray.typeDescriptor.componentTypeDescriptor!!,
-      newArray.dimensionExpressions.first()
-    )
-  }
+  require(newArray.arrayLiteral == null)
+  renderNewArrayOfSize(
+    newArray.typeDescriptor.componentTypeDescriptor!!,
+    newArray.dimensionExpressions.first()
+  )
 }
 
 private fun Renderer.renderNewArrayOfSize(

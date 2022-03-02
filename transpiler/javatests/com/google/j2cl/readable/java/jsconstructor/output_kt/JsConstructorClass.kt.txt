@@ -80,13 +80,13 @@ open class JsConstructorClass {
  open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
   constructor(i: kotlin.Any?, vararg args: Int): super(*(args))
 
-  constructor(j: Int): this((java.lang.Object() as kotlin.Any), *(intArrayOf(j)))
+  constructor(j: Int): this((java.lang.Object() as kotlin.Any), j)
 
   companion object {
    @kotlin.jvm.JvmStatic
    internal fun subNativeInvocation() {
     val unusedS1: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(2)
-    val unusedS2: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs((java.lang.Object() as kotlin.Any), *(intArrayOf(1, 2, 3)))
+    val unusedS2: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs((java.lang.Object() as kotlin.Any), 1, 2, 3)
    }
   }
  }

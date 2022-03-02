@@ -3,7 +3,7 @@ package varargs
 open class Varargs {
  constructor(vararg args: Int)
 
- constructor(): this(*(intArrayOf(1)))
+ constructor(): this(1)
 
  open fun test(a: Int, vararg args: kotlin.Any?) {}
 
@@ -13,10 +13,10 @@ open class Varargs {
 
  open fun main() {
   val v: varargs.Varargs? = varargs.Varargs()
-  v!!.test(1, *(arrayOf<kotlin.Any?>()))
-  v!!.test(1, *(arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any))))
-  v!!.test(1, *(arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any))))
-  v!!.test(1, *(arrayOf<kotlin.Any?>()))
+  v!!.test(1)
+  v!!.test(1, (java.lang.Object() as kotlin.Any))
+  v!!.test(1, (java.lang.Object() as kotlin.Any))
+  v!!.test(1)
   v!!.test(1, *(arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Any?>))
   v!!.testCloneable(*(arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Cloneable?>))
   v!!.testSerializable(*(arrayOf<Array<kotlin.Any?>?>() as Array<java.io.Serializable?>))
@@ -28,11 +28,11 @@ open class Varargs {
 
   @kotlin.jvm.JvmStatic
   fun <E> bar(a: E?, b: E?) {
-   varargs.Varargs.`fun`(*(arrayOf<E?>(a, b)))
+   varargs.Varargs.`fun`(a, b)
   }
  }
 }
 
 open class Child: varargs.Varargs {
- constructor(): super(*(intArrayOf(1)))
+ constructor(): super(1)
 }

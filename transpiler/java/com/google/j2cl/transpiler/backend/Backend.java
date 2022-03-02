@@ -75,6 +75,7 @@ import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
+import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeArrayLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeBasicCasts;
@@ -392,6 +393,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          NormalizeArrayCreationsKotlin::new,
           NormalizeStaticMemberQualifiers::new,
           () -> new MoveVariableDeclarationsToEnclosingBlock(/* fromSwitchStatementsOnly= */ true),
           NormalizeMultiExpressions::new,
