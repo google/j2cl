@@ -3,10 +3,9 @@
 #
 
 load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2wasm_library")
-load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load(":j2cl_java_toolchain.bzl", "j2cl_java_toolchain")
 load(":package_sources.bzl", "package_sources")
-load(":jdk_system.bzl", "jdk_system")
 
 package(licenses = ["notice"])
 
@@ -206,86 +205,20 @@ java_library(
     ],
 )
 
-jdk_system(
-    name = "jdk_system",
-    bootclasspath = ":jre_bootclasspath",
-)
-
-jdk_system(
-    name = "jdk_system-j2wasm",
-    bootclasspath = ":jre_bootclasspath-j2wasm",
-)
-
-jdk_system(
-    name = "jdk_system-j2kt",
-    bootclasspath = ":jre_bootclasspath-j2kt",
-)
-
-default_java_toolchain(
-    name = "j2cl_java_toolchain_8",
-    bootclasspath = [":jdk_system"],
-    source_version = "8",
-    target_version = "8",
-)
-
-default_java_toolchain(
-    name = "j2cl_java_toolchain_11",
-    bootclasspath = [":jdk_system"],
-    source_version = "11",
-    target_version = "11",
-)
-
-alias(
+j2cl_java_toolchain(
     name = "j2cl_java_toolchain",
-    actual = select({
-        ":experimental_java11_support": ":j2cl_java_toolchain_11",
-        "//conditions:default": ":j2cl_java_toolchain_8",
-    }),
+    bootclasspath = ":jre_bootclasspath",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
 )
 
-default_java_toolchain(
-    name = "j2wasm_java_toolchain_8",
-    bootclasspath = [":jdk_system-j2wasm"],
-    source_version = "8",
-    target_version = "8",
-)
-
-default_java_toolchain(
-    name = "j2wasm_java_toolchain_11",
-    bootclasspath = [":jdk_system-j2wasm"],
-    source_version = "11",
-    target_version = "11",
-)
-
-alias(
+j2cl_java_toolchain(
     name = "j2wasm_java_toolchain",
-    actual = select({
-        ":experimental_java11_support": ":j2wasm_java_toolchain_11",
-        "//conditions:default": ":j2wasm_java_toolchain_8",
-    }),
+    bootclasspath = ":jre_bootclasspath-j2wasm",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
 )
 
-default_java_toolchain(
-    name = "j2kt_java_toolchain_8",
-    bootclasspath = [":jdk_system-j2kt"],
-    source_version = "8",
-    target_version = "8",
-)
-
-default_java_toolchain(
-    name = "j2kt_java_toolchain_11",
-    bootclasspath = [":jdk_system-j2kt"],
-    source_version = "11",
-    target_version = "11",
-)
-
-alias(
+j2cl_java_toolchain(
     name = "j2kt_java_toolchain",
-    actual = select({
-        ":experimental_java11_support": ":j2kt_java_toolchain_11",
-        "//conditions:default": ":j2kt_java_toolchain_8",
-    }),
+    bootclasspath = ":jre_bootclasspath-j2kt",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
 )
