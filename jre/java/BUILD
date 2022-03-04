@@ -85,7 +85,10 @@ BASE_JRE_SRCS = select({
 package_sources(
     name = "jre_java_files",
     srcs = BASE_JRE_SRCS,
-    excludes = glob(["super-wasm/**"]),
+    excludes = glob([
+        "super-wasm/**",
+        "super-kt/**",
+    ]),
 )
 
 package_sources(
@@ -96,14 +99,17 @@ package_sources(
         "java/util/InternalStringMap.java",  # J2WASM HashMap doesn't need it.
         "java/util/AbstractHashMap.java",  # J2WASM HashMap doesn't need it.
         "javaemul/internal/Casts.java",  # J2WASM doesn't need it.
-    ],
+    ] + glob(["super-kt/**"]),
     super_srcs = glob(["super-wasm/**/*.java"]),
 )
 
 package_sources(
     name = "jre_java_files-j2kt",
-    srcs = BASE_JRE_SRCS,
-    excludes = glob(["super-wasm/**"]),
+    srcs = BASE_JRE_SRCS,  # TODO(b/222484176): Stop including J2CL JRE for JS.
+    excludes = glob([
+        "super-wasm/**",
+        "super-kt/**",  # This will be removed once the super-kt tree is ready
+    ]),
 )
 
 filegroup(
