@@ -16,7 +16,6 @@
 package com.google.gwt.emultest.java.util;
 
 import com.google.gwt.junit.client.GWTTestCase;
-
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -31,23 +30,24 @@ public class ObjectsTest extends GWTTestCase {
   }
 
   public void testCompare() {
-    Comparator<Integer> intComparator = new Comparator<Integer>() {
-      @SuppressWarnings("NumberEquality")
-      @Override
-      public int compare(Integer a, Integer b) {
-        if (a == b) {
-          fail("comparator must not be called if a == b");
-        }
+    Comparator<Integer> intComparator =
+        new Comparator<Integer>() {
+          @SuppressWarnings({"BoxedPrimitiveEquality", "NumberEquality"})
+          @Override
+          public int compare(Integer a, Integer b) {
+            if (a == b) {
+              fail("comparator must not be called if a == b");
+            }
 
-        if (a == null) {
-          return -1;
-        }
-        if (b == null) {
-          return 1;
-        }
-        return a.compareTo(b);
-      }
-    };
+            if (a == null) {
+              return -1;
+            }
+            if (b == null) {
+              return 1;
+            }
+            return a.compareTo(b);
+          }
+        };
 
     assertEquals(0, Objects.compare(null, null, intComparator));
     assertEquals(-1, Objects.compare(null, new Integer(12345), intComparator));
