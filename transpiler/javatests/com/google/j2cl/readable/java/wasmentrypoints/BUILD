@@ -10,8 +10,8 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = True,
     wasm_entry_points = [
-        r"emptymethod\.EmptyMethod\.main",
+        r"wasmentrypoints\.WasmEntryPoints\.singleMatchedEntryPoint",
+        r".*\.matchedEntryPointPattern[1-2]",
     ],
 )

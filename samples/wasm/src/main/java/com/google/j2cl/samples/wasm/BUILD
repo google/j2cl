@@ -37,7 +37,7 @@ j2wasm_library(
 # need to have a recent version of binaryen available in your path.
 j2wasm_application(
     name = "app",
-    entry_points = ["com.google.j2cl.samples.wasm.HelloWorld.getHelloWorld"],
+    entry_points = [r"com\.google\.j2cl\.samples\.wasm\.HelloWorld\.getHelloWorld"],
     deps = [":helloworld"],
 )
 

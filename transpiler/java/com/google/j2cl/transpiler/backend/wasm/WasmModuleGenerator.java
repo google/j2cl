@@ -17,10 +17,12 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.lang.String.format;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -44,6 +46,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /** Generates a WASM module containing all the code for the application. */
@@ -51,13 +54,17 @@ public class WasmModuleGenerator {
 
   private final Problems problems;
   private final Output output;
-  private final Set<String> pendingEntryPoints;
+  private final ImmutableSet<Pattern> entryPointPatterns;
+  private final Set<Pattern> matchedEntryPointPatterns;
+  private final Set<String> exportedMethods;
   private final SourceBuilder builder = new SourceBuilder();
   private GenerationEnvironment environment;
 
   public WasmModuleGenerator(Output output, ImmutableSet<String> entryPoints, Problems problems) {
     this.output = output;
-    this.pendingEntryPoints = new HashSet<>(entryPoints);
+    this.entryPointPatterns = entryPoints.stream().map(Pattern::compile).collect(toImmutableSet());
+    this.matchedEntryPointPatterns = new HashSet<>();
+    this.exportedMethods = new HashSet<>();
     this.problems = problems;
   }
 
@@ -94,8 +101,9 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(")");
     output.write("module.wat", builder.build());
-    if (!pendingEntryPoints.isEmpty()) {
-      problems.error("Static entry points %s not found.", pendingEntryPoints);
+    Set<Pattern> unmatchedPatterns = Sets.difference(entryPointPatterns, matchedEntryPointPatterns);
+    if (!unmatchedPatterns.isEmpty()) {
+      problems.error("No entry points matched the following patterns \"%s\".", unmatchedPatterns);
     }
   }
 
@@ -311,8 +319,14 @@ public class WasmModuleGenerator {
           String.format(
               " (import \"imports\" \"%s\") ", method.getDescriptor().getQualifiedJsName()));
     }
-    if (method.isStatic() && pendingEntryPoints.remove(method.getQualifiedBinaryName())) {
-      builder.append(" (export \"" + method.getDescriptor().getName() + "\")");
+
+    if (method.isStatic() && isEntryPoint(method.getQualifiedBinaryName())) {
+      String methodName = method.getDescriptor().getName();
+      if (exportedMethods.add(methodName)) {
+        builder.append(" (export \"" + methodName + "\")");
+      } else {
+        problems.error("More than one method are exported with the same name \"%s\".", methodName);
+      }
     }
     MethodDescriptor methodDescriptor = method.getDescriptor();
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
@@ -411,6 +425,18 @@ public class WasmModuleGenerator {
               "(elem declare func %s)",
               environment.getMethodImplementationName(method.getDescriptor())));
     }
+  }
+
+  private boolean isEntryPoint(String methodName) {
+    // Only the first pattern matching the method will be added, so there will be log error if
+    // patterns are duplicate
+    for (Pattern entryPointPattern : entryPointPatterns) {
+      if (entryPointPattern.matcher(methodName).matches()) {
+        matchedEntryPointPatterns.add(entryPointPattern);
+        return true;
+      }
+    }
+    return false;
   }
 
   private static List<Variable> collectLocals(Method method) {
