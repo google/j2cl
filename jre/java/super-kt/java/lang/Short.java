@@ -317,4 +317,8 @@ public final class Short extends Number implements Comparable<Short> {
             SMALL_VALUES[i + 128] = new Short((short) i);
         }
     }
+
+  public static int hashCode(short s) {
+    return s;
+  }
 }

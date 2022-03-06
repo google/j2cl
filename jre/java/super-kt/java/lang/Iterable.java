@@ -17,6 +17,9 @@
 package java.lang;
 
 import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Consumer;
 
 /**
  * Instances of classes that implement this interface can be used with
@@ -32,4 +35,15 @@ public interface Iterable<T> {
      * @return An {@code Iterator} instance.
      */
     Iterator<T> iterator();
+
+  default void forEach(Consumer<? super T> action) {
+    checkNotNull(action);
+    for (T t : this) {
+      action.accept(t);
+    }
+  }
+
+  default Spliterator<T> spliterator() {
+    return Spliterators.spliteratorUnknownSize(iterator(), 0);
+  }
 }

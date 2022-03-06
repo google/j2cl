@@ -309,4 +309,8 @@ public final class Byte extends Number implements Comparable<Byte> {
             VALUES[i + 128] = new Byte((byte) i);
         }
     }
+
+  public static int hashCode(byte b) {
+    return b;
+  }
 }

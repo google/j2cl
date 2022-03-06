@@ -494,4 +494,8 @@ public final class Float extends Number implements Comparable<Float> {
         }
         return hexString.toString();
     }
+
+  public static int hashCode(float f) {
+    return floatToIntBits(value);
+  }
 }

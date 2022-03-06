@@ -228,4 +228,8 @@ public final class Boolean implements Serializable, Comparable<Boolean> {
     public static Boolean valueOf(boolean b) {
         return b ? Boolean.TRUE : Boolean.FALSE;
     }
+
+  public static int hashCode(boolean value) {
+    return value ? 1231 : 1237;
+  }
 }

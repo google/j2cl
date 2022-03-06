@@ -487,4 +487,9 @@ public final class Double extends Number implements Comparable<Double> {
         }
         return hexString.toString();
     }
+
+  public static int hashCode(double d) {
+    long v = doubleToLongBits(value);
+    return (int) (v ^ (v >>> 32));
+  }
 }

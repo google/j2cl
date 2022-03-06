@@ -109,6 +109,10 @@ public final class Math {
      */
     public static native double acos(double d);
 
+  public static native int addExact(int x, int y);
+
+  public static native long addExact(long x, long y);
+
     /**
      * Returns the closest double approximation of the arc sine of the argument
      * within the range {@code [-pi/2..pi/2]}. The returned result is within 1
@@ -317,6 +321,14 @@ public final class Math {
      * </ul>
      */
     public static native double floor(double d);
+
+  public static native int floorDiv(int dividend, int divisor);
+
+  public static native long floorDiv(long dividend, long divisor);
+
+  public static native int floorMod(int dividend, int divisor);
+
+  public static native long floorMod(long dividend, long divisor);
 
     /**
      * Returns {@code sqrt(}<i>{@code x}</i><sup>{@code 2}</sup>{@code +} <i>
@@ -593,6 +605,14 @@ public final class Math {
         return l1 < l2 ? l1 : l2;
     }
 
+  public static native int multiplyExact(int x, int y);
+
+  public static native long multiplyExact(long x, long y);
+
+  public static native int negateExact(int x);
+
+  public static native long negateExact(long x);
+
     /**
      * Returns the closest double approximation of the result of raising {@code
      * x} to the power of {@code y}.
@@ -824,6 +844,10 @@ public final class Math {
      */
     public static native double sqrt(double d);
 
+  public static native int subtractExact(int x, int y);
+
+  public static native long subtractExact(long x, long y);
+
     /**
      * Returns the closest double approximation of the tangent of the argument.
      * The returned result is within 1 ulp (unit in the last place) of the real
@@ -923,6 +947,8 @@ public final class Math {
     public static double toDegrees(double angrad) {
         return angrad * 180d / PI;
     }
+
+  public static native int toIntExact(long x);
 
     /**
      * Returns the argument's ulp (unit in the last place). The size of a ulp of

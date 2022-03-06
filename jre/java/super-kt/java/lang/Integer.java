@@ -716,4 +716,8 @@ public final class Integer extends Number implements Comparable<Integer> {
             SMALL_VALUES[i + 128] = new Integer(i);
         }
     }
+
+  public static int hashCode(int i) {
+    return i;
+  }
 }

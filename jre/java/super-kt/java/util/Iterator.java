@@ -17,6 +17,8 @@
 
 package java.util;
 
+import java.util.function.Consumer;
+
 /**
  * An iterator over a sequence of objects, such as a collection.
  *
@@ -49,16 +51,23 @@ public interface Iterator<E> {
      */
     public E next();
 
-    /**
-     * Removes the last object returned by {@code next} from the collection.
-     * This method can only be called once between each call to {@code next}.
-     *
-     * @throws UnsupportedOperationException
-     *             if removing is not supported by the collection being
-     *             iterated.
-     * @throws IllegalStateException
-     *             if {@code next} has not been called, or {@code remove} has
-     *             already been called after the last call to {@code next}.
-     */
-    public void remove();
+  /**
+   * Removes the last object returned by {@code next} from the collection. This method can only be
+   * called once between each call to {@code next}.
+   *
+   * @throws UnsupportedOperationException if removing is not supported by the collection being
+   *     iterated.
+   * @throws IllegalStateException if {@code next} has not been called, or {@code remove} has
+   *     already been called after the last call to {@code next}.
+   */
+  default void remove() {
+    throw new UnsupportedOperationException();
+  }
+
+  default void forEachRemaining(Consumer<? super E> consumer) {
+    checkNotNull(consumer);
+    while (hasNext()) {
+      consumer.accept(next());
+    }
+  }
 }

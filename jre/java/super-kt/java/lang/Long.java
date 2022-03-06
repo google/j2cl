@@ -737,4 +737,8 @@ public final class Long extends Number implements Comparable<Long> {
             SMALL_VALUES[i + 128] = new Long(i);
         }
     }
+
+  public static int hashCode(long l) {
+    return (int) (value ^ (value >>> 32));
+  }
 }
