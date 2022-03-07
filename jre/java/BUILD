@@ -68,27 +68,18 @@ j2cl_import(
 
 BASE_JRE_SRCS = select({
     ":experimental_java11_support": glob(
-        ["**/*.java"],
-        exclude = [
-            "javaemul/internal/annotations/**",
-        ],
-    ),
+        ["java*/**/*.java"],
+        exclude = ["javaemul/internal/annotations/**"],
+    ) + ["module-info.java"],
     "//conditions:default": glob(
-        ["**/*.java"],
-        exclude = [
-            "module-info.java",
-            "javaemul/internal/annotations/**",
-        ],
+        ["java*/**/*.java"],
+        exclude = ["javaemul/internal/annotations/**"],
     ),
 })
 
 package_sources(
     name = "jre_java_files",
     srcs = BASE_JRE_SRCS,
-    excludes = glob([
-        "super-wasm/**",
-        "super-kt/**",
-    ]),
 )
 
 package_sources(
@@ -99,25 +90,20 @@ package_sources(
         "java/util/InternalStringMap.java",  # J2WASM HashMap doesn't need it.
         "java/util/AbstractHashMap.java",  # J2WASM HashMap doesn't need it.
         "javaemul/internal/Casts.java",  # J2WASM doesn't need it.
-    ] + glob(["super-kt/**"]),
+    ],
     super_srcs = glob(["super-wasm/**/*.java"]),
 )
 
 package_sources(
     name = "jre_java_files-j2kt",
     srcs = BASE_JRE_SRCS,  # TODO(b/222484176): Stop including J2CL JRE for JS.
-    excludes = glob([
-        "super-wasm/**",
-        "super-kt/**",  # This will be removed once the super-kt tree is ready
-    ]),
 )
 
 filegroup(
     name = "jre_native_files",
     srcs = glob(
-        ["**/*.js"],
+        ["java*/**/*.js"],
         exclude = [
-            "super-wasm/**/*",
             # TODO(b/202311596): Stop excluding externs.js when infra correctly handles them.
             "**/externs.js",
         ],
