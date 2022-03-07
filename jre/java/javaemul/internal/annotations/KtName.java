@@ -22,19 +22,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Maps a Java type and members to Kotlin ones with different names.
+ * Maps Java type members to Kotlin ones with different names.
  *
- * <p>This can only be applied to types, methods, {@code KtProperty} fields and {@code KtFactory}
- * constructors in {@code KtType}-annotated classes/interfaces.
+ * <p>This can only be applied to methods, fields (including {@code KtProperty} fields) and {@code
+ * KtFactory} constructors in {@code KtType}-annotated classes/interfaces.
+ *
+ * <p>"Renaming" a constructor is implemented by replacing constructor invocations with invocations
+ * of the companion method with the specified name. Such constructors cannot be used with {@code
+ * super}.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.CONSTRUCTOR})
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.CONSTRUCTOR})
 @Documented
 public @interface KtName {
 
-  /**
-   * The Kotlin name of the type/native method/property. For top-level types, the name must be
-   * fully-qualified.
-   */
+  /** The Kotlin name of the member. */
   String value();
 }

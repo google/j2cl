@@ -22,8 +22,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Instructs J2KT to replace all references to this Java type with references to a native Kotlin
- * type. To be combined with {@code KtName} whenever Java and Kotlin type names differ.
+ * Instructs J2KT to replace all references to this Java type with references to a type implemented
+ * natively in Kotlin.
  *
  * <ul>
  *   <li>{@code native} methods are interpreted as being implemented in the aliased Kotlin type.
@@ -38,4 +38,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-public @interface KtType {}
+public @interface KtNative {
+  /**
+   * Sets the name of the Kotlin type to use whenever transpiled Java code
+   * references the annotated type.
+   *
+   * <p>The name must be fully-qualified, for top-level types but also for nested types.
+   */
+  String value();
+}
