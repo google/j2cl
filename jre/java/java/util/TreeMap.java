@@ -1,541 +1,57 @@
 /*
- * Copyright 2008 Google Inc.
+ * Copyright (C) 2010 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package java.util;
 
-import static javaemul.internal.InternalPreconditions.checkNotNull;
+import static javaemul.internal.InternalPreconditions.checkConcurrentModification;
+import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
+import static javaemul.internal.InternalPreconditions.checkElement;
+import static javaemul.internal.InternalPreconditions.checkState;
+import static javaemul.internal.InternalPreconditions.isApiChecked;
 
 import java.io.Serializable;
+import jsinterop.annotations.JsEnum;
 
 /**
- * Implements a TreeMap using a red-black tree. This guarantees O(log n)
- * performance on lookups, inserts, and deletes while maintaining linear
- * in-order traversal time. Null keys and values are fully supported if the
- * comparator supports them (the default comparator does not).
- *
- * @param <K> key type
- * @param <V> value type
+ * A map whose entries are sorted by their keys. All optional operations such as {@link #put} and
+ * {@link #remove} are supported.
  */
-public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Serializable {
-  /*
-   * Implementation derived from public domain C implementation as of 5
-   * September 2007 at:
-   * http://eternallyconfuzzled.com/tuts/datastructures/jsw_tut_rbtree.aspx
-   * written by Julienne Walker.
-   *
-   * This version does not require a parent pointer kept in each node.
-   */
+public class TreeMap<K, V> extends AbstractMap<K, V>
+    implements SortedMap<K, V>, NavigableMap<K, V>, Serializable {
 
-  /**
-   * Iterator for <code>descendingMap().entrySet()</code>.
-   */
-  private final class DescendingEntryIterator implements Iterator<Entry<K, V>> {
-    private final ListIterator<Entry<K, V>> iter;
-    private Entry<K, V> last;
-
-    /**
-     * Constructor for <code>DescendingEntryIterator</code>.
-     */
-    public DescendingEntryIterator() {
-      this(SubMapType.All, null, false, null, false);
-    }
-
-    /**
-     * Create an iterator which may return only a restricted range.
-     *
-     * @param fromKey the first key to return in the iterator.
-     * @param toKey the upper bound of keys to return.
-     */
-    public DescendingEntryIterator(SubMapType type,
-        K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
-      List<Entry<K, V>> list = new ArrayList<Entry<K, V>>();
-      inOrderAdd(list, type, TreeMap.this.root,
-          fromKey, fromInclusive, toKey, toInclusive);
-      this.iter = list.listIterator(list.size());
-    }
-
-    @Override
-    public boolean hasNext() {
-      return iter.hasPrevious();
-    }
-
-    @Override
-    public Entry<K, V> next() {
-      return last = iter.previous();
-    }
-
-    @Override
-    public void remove() {
-      iter.remove();
-      removeEntry(last);
-      last = null;
-    }
-  }
-
-  /**
-   * Iterator for <code>EntrySet</code>.
-   */
-  private final class EntryIterator implements Iterator<Entry<K, V>> {
-    private final ListIterator<Entry<K, V>> iter;
-    private Entry<K, V> last;
-
-    /**
-     * Constructor for <code>EntrySetIterator</code>.
-     */
-    public EntryIterator() {
-      this(SubMapType.All, null, false, null, false);
-    }
-
-    /**
-     * Create an iterator which may return only a restricted range.
-     *
-     * @param fromKey the first key to return in the iterator.
-     * @param toKey the upper bound of keys to return.
-     */
-    public EntryIterator(SubMapType type,
-        K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
-      List<Entry<K, V>> list = new ArrayList<Entry<K, V>>();
-      inOrderAdd(list, type, TreeMap.this.root,
-          fromKey, fromInclusive, toKey, toInclusive);
-      this.iter = list.listIterator();
-    }
-
-    @Override
-    public boolean hasNext() {
-      return iter.hasNext();
-    }
-
-    @Override
-    public Entry<K, V> next() {
-      return last = iter.next();
-    }
-
-    @Override
-    public void remove() {
-      iter.remove();
-      removeEntry(last);
-      last = null;
-    }
-  }
-
-  private final class EntrySet extends AbstractNavigableMap.EntrySet {
-    @Override
-    public void clear() {
-      TreeMap.this.clear();
-    }
-  }
-
-  /**
-   * Tree node.
-   *
-   * @param <K> key type
-   * @param <V> value type
-   */
-  private static class Node<K, V> extends SimpleEntry<K, V> {
-    /*
-     * The children are kept in an array to minimize the normal duplication of
-     * code.
-     */
-    @SuppressWarnings("unchecked")
-    protected final Node<K, V>[] child = new Node[2];
-    protected boolean isRed;
-
-    /**
-     * Create a red node.
-     *
-     * @param key
-     * @param value
-     */
-    public Node(K key, V value) {
-      this(key, value, true);
-    }
-
-    /**
-     * Create a node of the specified color.
-     *
-     * @param key
-     * @param value
-     * @param isRed true if this should be a red node, false for black
-     */
-    public Node(K key, V value, boolean isRed) {
-      super(key, value);
-      this.isRed = isRed;
-    }
-  }
-
-  /**
-   * A state object which is passed down the tree for both insert and remove.
-   * All uses make use of the done flag to indicate when no further rebalancing
-   * of the tree is required. Remove methods use the found flag to indicate when
-   * the desired key has been found. value is used both to return the value of a
-   * removed node as well as to pass in a value which must match (used for
-   * entrySet().remove(entry)), and the matchValue flag is used to request this
-   * behavior.
-   *
-   * @param <V> value type
-   */
-  private static class State<V> {
-    public boolean done;
-    public boolean found;
-    public boolean matchValue;
-    public V value;
-
-    @Override
-    public String toString() {
-      return "State: mv=" + matchValue + " value=" + value + " done=" + done + " found=" + found;
-    }
-  }
-
-  private class SubMap extends AbstractNavigableMap<K, V> {
-    private final boolean fromInclusive;
-
-    // valid only if type is Range or Tail
-    private final K fromKey;
-
-    private final boolean toInclusive;
-
-    // valid only if type is Range or Head
-    private final K toKey;
-
-    private final SubMapType type;
-
-    SubMap(SubMapType type,
-        K fromKey, boolean fromInclusive,
-        K toKey, boolean toInclusive) {
-      switch (type) {
-        case Range:
-          if (cmp.compare(toKey, fromKey) < 0) {
-            throw new IllegalArgumentException("subMap: " + toKey
-                + " less than " + fromKey);
-          }
-          break;
-        case Head:
-          // check key for compatibility with comparator
-          cmp.compare(toKey, toKey);
-          break;
-        case Tail:
-          // check key for compatibility with comparator
-          cmp.compare(fromKey, fromKey);
-          break;
-        case All:
-          // no checks are needed
-          break;
-      }
-      this.type = type;
-      this.fromKey = fromKey;
-      this.fromInclusive = fromInclusive;
-      this.toKey = toKey;
-      this.toInclusive = toInclusive;
-    }
-
-    @Override
-    public Comparator<? super K> comparator() {
-      return TreeMap.this.comparator();
-    }
-
-    @Override
-    public Set<Entry<K, V>> entrySet() {
-      return new SubMap.EntrySet();
-    }
-
-    @Override
-    public NavigableMap<K, V> headMap(K toKey, boolean toInclusive) {
-      if (type.toKeyValid() && cmp.compare(toKey, this.toKey) > 0) {
-        throw new IllegalArgumentException("subMap: " + toKey +
-            " greater than " + this.toKey);
-      }
-      if (type.fromKeyValid()) {
-        return TreeMap.this.subMap(fromKey, fromInclusive, toKey, toInclusive);
-      } else {
-        return TreeMap.this.headMap(toKey, toInclusive);
-      }
-    }
-
-    @Override
-    public V put(K key, V value) {
-      if (!inRange(key)) {
-        throw new IllegalArgumentException(key + " outside the range "
-            + fromKey + " to " + toKey);
-      }
-      return TreeMap.this.put(key, value);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public V remove(Object k) {
-      K key = (K) k;
-      if (!inRange(key)) {
-        return null;
-      }
-      return TreeMap.this.remove(key);
-    }
-
-    @Override
-    public int size() {
-      if (getFirstEntry() == null) {
-        return 0;
-      }
-
-      // TODO(jat): more efficient way to do this?
-      int count = 0;
-      for (Iterator<Entry<K, V>> it = entryIterator(); it.hasNext(); it.next()) {
-        count++;
-      }
-      return count;
-    }
-
-    @Override
-    public NavigableMap<K, V> subMap(K newFromKey, boolean newFromInclusive,
-        K newToKey, boolean newToInclusive) {
-      if (type.fromKeyValid() && cmp.compare(newFromKey, fromKey) < 0) {
-        throw new IllegalArgumentException("subMap: " + newFromKey +
-            " less than " + fromKey);
-      }
-      if (type.toKeyValid() && cmp.compare(newToKey, toKey) > 0) {
-        throw new IllegalArgumentException("subMap: " + newToKey +
-            " greater than " + toKey);
-      }
-      return TreeMap.this.subMap(newFromKey, newFromInclusive, newToKey, newToInclusive);
-    }
-
-    @Override
-    public NavigableMap<K, V> tailMap(K fromKey, boolean fromInclusive) {
-      if (type.fromKeyValid() && cmp.compare(fromKey, this.fromKey) < 0) {
-        throw new IllegalArgumentException("subMap: " + fromKey +
-            " less than " + this.fromKey);
-      }
-      if (type.toKeyValid()) {
-        return TreeMap.this.subMap(fromKey, fromInclusive, toKey, toInclusive);
-      } else {
-        return TreeMap.this.tailMap(fromKey, fromInclusive);
-      }
-    }
-
-    @Override
-    Iterator<Entry<K, V>> descendingEntryIterator() {
-      return new DescendingEntryIterator(type, fromKey, fromInclusive, toKey, toInclusive);
-    }
-
-    @Override
-    Iterator<Entry<K, V>> entryIterator() {
-      return new EntryIterator(type, fromKey, fromInclusive, toKey, toInclusive);
-    }
-
-    @Override
-    Entry<K, V> getEntry(K key) {
-      return guardInRange(TreeMap.this.getEntry(key));
-    }
-
-    @Override
-    Entry<K, V> getFirstEntry() {
-      Entry<K, V> entry;
-      if (type.fromKeyValid()) {
-        if (fromInclusive) {
-          entry = TreeMap.this.getCeilingEntry(fromKey);
-        } else {
-          entry = TreeMap.this.getHigherEntry(fromKey);
-        }
-      } else {
-        entry = TreeMap.this.getFirstEntry();
-      }
-      // The map is empty if the first key after fromKey is out of range.
-      return guardInRange(entry);
-    }
-
-    @Override
-    Entry<K, V> getLastEntry() {
-      Entry<K, V> entry;
-      if (type.toKeyValid()) {
-        if (toInclusive) {
-          entry = TreeMap.this.getFloorEntry(toKey);
-        } else {
-          entry = TreeMap.this.getLowerEntry(toKey);
-        }
-      } else {
-        entry = TreeMap.this.getLastEntry();
-      }
-      // The map is empty if the last key before toKey is out of range.
-      return guardInRange(entry);
-    }
-
-    @Override
-    Entry<K, V> getCeilingEntry(K key) {
-      return guardInRange(TreeMap.this.getCeilingEntry(key));
-    }
-
-    @Override
-    Entry<K, V> getFloorEntry(K key) {
-      return guardInRange(TreeMap.this.getFloorEntry(key));
-    }
-
-    @Override
-    Entry<K, V> getHigherEntry(K key) {
-      return guardInRange(TreeMap.this.getHigherEntry(key));
-    }
-
-    @Override
-    Entry<K, V> getLowerEntry(K key) {
-      return guardInRange(TreeMap.this.getLowerEntry(key));
-    }
-
-    @Override
-    boolean removeEntry(Entry<K, V> entry) {
-      return inRange(entry.getKey()) && TreeMap.this.removeEntry(entry);
-    }
-
-    private Entry<K, V> guardInRange(Entry<K, V> entry) {
-      return entry != null && inRange(entry.getKey()) ? entry : null;
-    }
-
-    private boolean inRange(K key) {
-      return TreeMap.this.inRange(type, key, fromKey, fromInclusive, toKey, toInclusive);
-    }
-  }
-
-  private enum SubMapType {
-    All,
-
-    Head {
-      @Override
-      public boolean toKeyValid() {
-        return true;
-      }
-    },
-
-    Range {
-      @Override
-      public boolean fromKeyValid() {
-        return true;
-      }
-
-      @Override
-      public boolean toKeyValid() {
-        return true;
-      }
-    },
-
-    Tail {
-      @Override
-      public boolean fromKeyValid() {
-        return true;
-      }
-    };
-
-    /**
-     * Returns true if this submap type uses a from-key.
-     */
-    public boolean fromKeyValid() {
-      return false;
-    }
-
-    /**
-     * Returns true if this submap type uses a to-key.
-     */
-    public boolean toKeyValid() {
-      return false;
-    }
-  }
-
-  private static final int LEFT = 0;
-  private static final int RIGHT = 1;
-
-  private static int otherChild(int child) {
-    assert (child == 0 || child == 1);
-    return 1 - child;
-  }
-
-  // The comparator to use.
-  private Comparator<? super K> cmp;
-
-  /*
-   * These two fields are just hints to STOB so that it generates serializers
-   * for K and V
-   */
-  @SuppressWarnings("unused")
-  private K exposeKeyType;
-
-  @SuppressWarnings("unused")
-  private V exposeValueType;
-
-  // The root of the tree.
-  private transient Node<K, V> root;
-
-  // The number of nodes in the tree.
-  private int size = 0;
+  private Comparator<? super K> comparator;
+  private Node<K, V> root;
+  private int size;
+  private int modCount;
 
   public TreeMap() {
     this((Comparator<? super K>) null);
   }
 
-  @SuppressWarnings("unchecked")
-  public TreeMap(Comparator<? super K> c) {
-    root = null;
-    cmp = Comparators.nullToNaturalOrder(c);
+  public TreeMap(Comparator<? super K> comparator) {
+    this.comparator = Comparators.nullToNaturalOrder(comparator);
   }
 
-  public TreeMap(Map<? extends K, ? extends V> map) {
+  public TreeMap(Map<? extends K, ? extends V> copyFrom) {
     this();
-    putAll(map);
+    putAll(copyFrom);
   }
 
-  @SuppressWarnings("unchecked")
-  public TreeMap(SortedMap<K, ? extends V> map) {
-    this(checkNotNull(map).comparator());
-    putAll(map); // TODO(jat): more efficient init from sorted map
-  }
-
-  @Override
-  public void clear() {
-    root = null;
-    size = 0;
-  }
-
-  @Override
-  public Comparator<? super K> comparator() {
-    return Comparators.naturalOrderToNull(cmp);
-  }
-
-  @Override
-  public Set<Entry<K, V>> entrySet() {
-    return new EntrySet();
-  }
-
-  @Override
-  public NavigableMap<K, V> headMap(K toKey, boolean inclusive) {
-    return new SubMap(SubMapType.Head, null, false, toKey, inclusive);
-  }
-
-  @Override
-  public V put(K key, V value) {
-    Node<K, V> node = new Node<K, V>(key, value);
-    State<V> state = new State<V>();
-    root = insert(root, node, state);
-    if (!state.found) {
-      ++size;
-    }
-    root.isRed = false;
-    return state.value;
-  }
-
-  @Override
-  @SuppressWarnings("unchecked")
-  public V remove(Object k) {
-    K key = (K) k;
-    State<V> state = new State<V>();
-    removeWithState(key, state);
-    return state.value;
+  public TreeMap(SortedMap<K, ? extends V> copyFrom) {
+    this(copyFrom.comparator());
+    putAll(copyFrom);
   }
 
   @Override
@@ -544,463 +60,1430 @@ public class TreeMap<K, V> extends AbstractNavigableMap<K, V> implements Seriali
   }
 
   @Override
-  public NavigableMap<K, V> subMap(K fromKey, boolean fromInclusive,
-      K toKey, boolean toInclusive) {
-    return new SubMap(SubMapType.Range, fromKey, fromInclusive, toKey, toInclusive);
+  public boolean isEmpty() {
+    return size == 0;
   }
 
   @Override
-  public NavigableMap<K, V> tailMap(K fromKey, boolean inclusive) {
-    return new SubMap(SubMapType.Tail, fromKey, inclusive, null, false);
+  public V get(Object key) {
+    Entry<K, V> entry = findByObject(key);
+    return entry != null ? entry.getValue() : null;
   }
 
-  /**
-   * Returns the first node which compares greater than the given key.
-   *
-   * @param key the key to search for
-   * @return the next node, or null if there is none
+  @Override
+  public boolean containsKey(Object key) {
+    return findByObject(key) != null;
+  }
+
+  @Override
+  public V put(K key, V value) {
+    return putInternal(key, value);
+  }
+
+  @Override
+  public void clear() {
+    root = null;
+    size = 0;
+    structureChanged();
+  }
+
+  private void structureChanged() {
+    if (!isApiChecked()) {
+      // Shouldn't be necessary but JsCompiler chokes on removing modCount so make sure we don't pay
+      // cost for updating the field.
+      return;
+    }
+    this.modCount++;
+  }
+
+  @Override
+  public V remove(Object key) {
+    Node<K, V> node = removeInternalByKey(key);
+    return node != null ? node.getValue() : null;
+  }
+
+  /*
+   * AVL methods
    */
-  private Node<K, V> getNodeAfter(K key, boolean inclusive) {
-    Node<K, V> foundNode = null;
+  @JsEnum
+  private enum Relation {
+    LOWER,
+    FLOOR,
+    CEILING,
+    HIGHER,
+    CREATE;
+
+    /**
+     * Returns a possibly-flipped relation for use in descending views.
+     *
+     * @param ascending false to flip; true to return this.
+     */
+    Relation forOrder(boolean ascending) {
+      if (ascending) {
+        return this;
+      }
+      switch (this) {
+        case LOWER:
+          return HIGHER;
+        case FLOOR:
+          return CEILING;
+        case CEILING:
+          return FLOOR;
+        case HIGHER:
+          return LOWER;
+        default:
+          throw new IllegalStateException();
+      }
+    }
+  }
+
+  private V putInternal(K key, V value) {
+    return find(key, Relation.CREATE).setValue(value);
+  }
+
+  /** Returns the node at or adjacent to the given key, creating it if requested. */
+  private Node<K, V> find(K key, Relation relation) {
+    if (root == null) {
+      if (relation == Relation.CREATE) {
+        root = new Node<K, V>(null, key);
+        size = 1;
+        structureChanged();
+        return root;
+      } else {
+        return null;
+      }
+    }
+    Node<K, V> nearest = root;
+    while (true) {
+      int comparison = comparator.compare(key, nearest.getKey());
+
+      // Found the requested key.
+      if (comparison == 0) {
+        switch (relation) {
+          case LOWER:
+            return nearest.prev();
+          case FLOOR:
+          case CEILING:
+            return nearest;
+          case HIGHER:
+            return nearest.next();
+          case CREATE:
+            return nearest;
+        }
+      }
+
+      Node<K, V> child = (comparison < 0) ? nearest.left : nearest.right;
+      if (child == null) {
+        // Found a nearest node.
+        // Every key not in the tree has up to two nearest nodes, one lower and one higher.
+        switch (relation) {
+          case LOWER:
+          case FLOOR:
+            return comparison < 0 ? nearest.prev() : nearest;
+          case CEILING:
+          case HIGHER:
+            return comparison < 0 ? nearest : nearest.next();
+          case CREATE:
+            Node<K, V> created = new Node<K, V>(nearest, key);
+            if (comparison < 0) {
+              nearest.left = created;
+            } else {
+              nearest.right = created;
+            }
+            size++;
+            structureChanged();
+            rebalance(nearest, true);
+            return created;
+        }
+      }
+      nearest = child;
+    }
+  }
+
+  private K findKey(K key, Relation relation) {
+    return getKeyOrNull(find(key, relation));
+  }
+
+  private Entry<K, V> findEntry(K key, Relation relation) {
+    return immutableCopy(find(key, relation));
+  }
+
+  @SuppressWarnings("unchecked")
+  private Node<K, V> findByObject(Object key) {
     Node<K, V> node = root;
     while (node != null) {
-      int c = cmp.compare(key, node.getKey());
-      if (inclusive && c == 0) {
-        return node;
-      }
-      if (c >= 0) {
-        node = node.child[RIGHT];
-      } else {
-        foundNode = node;
-        node = node.child[LEFT];
-      }
-    }
-    return foundNode;
-  }
-
-  /**
-   * Returns the last node which is strictly less than the given key.
-   *
-   * @param key the key to search for
-   * @return the previous node, or null if there is none
-   */
-  private Node<K, V> getNodeBefore(K key, boolean inclusive) {
-    Node<K, V> foundNode = null;
-    Node<K, V> node = root;
-    while (node != null) {
-      int c = cmp.compare(key, node.getKey());
-      if (inclusive && c == 0) {
-        return node;
-      }
-      if (c <= 0) {
-        node = node.child[LEFT];
-      } else {
-        foundNode = node;
-        node = node.child[RIGHT];
-      }
-    }
-    return foundNode;
-  }
-
-  /**
-   * Used for testing. Validate that the tree meets all red-black correctness
-   * requirements. These include:
-   *
-   * <pre>
-   *  - root is black
-   *  - no children of a red node may be red
-   *  - the black height of every path through the three to a leaf is exactly the same
-   * </pre>
-   *
-   * @throws RuntimeException if any correctness errors are detected.
-   */
-  void assertCorrectness() {
-    assertCorrectness(root, true);
-  }
-
-  @Override
-  Iterator<Entry<K, V>> descendingEntryIterator() {
-    return new DescendingEntryIterator();
-  }
-
-  @Override
-  Iterator<Entry<K, V>> entryIterator() {
-    return new EntryIterator();
-  }
-
-  /**
-   * Internal helper function for public {@link #assertCorrectness()}.
-   *
-   * @param tree the subtree to validate.
-   * @param isRed true if the parent of this node is red.
-   * @return the black height of this subtree.
-   * @throws RuntimeException if this RB-tree is not valid.
-   */
-  private int assertCorrectness(Node<K, V> tree, boolean isRed) {
-    if (tree == null) {
-      return 0;
-    }
-    if (isRed && tree.isRed) {
-      throw new RuntimeException("Two red nodes adjacent");
-    }
-
-    Node<K, V> leftNode = tree.child[LEFT];
-    if (leftNode != null
-        && cmp.compare(leftNode.getKey(), tree.getKey()) > 0) {
-      throw new RuntimeException("Left child " + leftNode
-          + " larger than " + tree);
-    }
-
-    Node<K, V> rightNode = tree.child[RIGHT];
-    if (rightNode != null
-        && cmp.compare(rightNode.getKey(), tree.getKey()) < 0) {
-      throw new RuntimeException("Right child " + rightNode
-          + " smaller than " + tree);
-    }
-
-    int leftHeight = assertCorrectness(leftNode, tree.isRed);
-    int rightHeight = assertCorrectness(rightNode, tree.isRed);
-    if (leftHeight != 0 && rightHeight != 0 && leftHeight != rightHeight) {
-      throw new RuntimeException("Black heights don't match");
-    }
-    return tree.isRed ? leftHeight : leftHeight + 1;
-  }
-
-  /**
-   * Finds an entry given a key and returns the node.
-   *
-   * @param key the search key
-   * @return the node matching the key or null
-   */
-  @Override
-  Entry<K, V> getEntry(K key) {
-    Node<K, V> tree = root;
-    while (tree != null) {
-      int c = cmp.compare(key, tree.getKey());
+      int c = comparator.compare((K) key, node.getKey());
       if (c == 0) {
-        return tree;
+        return node;
       }
-      int childNum = c < 0 ? LEFT : RIGHT;
-      tree = tree.child[childNum];
+      node = c < 0 ? node.left : node.right;
     }
     return null;
   }
 
   /**
-   * Returns the left-most node of the tree, or null if empty.
-   */
-  @Override
-  Entry<K, V> getFirstEntry() {
-    if (root == null) {
-      return null;
-    }
-    Node<K, V> node = root;
-    Node<K, V> nextNode;
-    while ((nextNode = node.child[LEFT]) != null) {
-      node = nextNode;
-    }
-    return node;
-  }
-
-  /**
-   * Returns the right-most node of the tree, or null if empty.
-   */
-  @Override
-  Entry<K, V> getLastEntry() {
-    if (root == null) {
-      return null;
-    }
-    Node<K, V> node = root;
-    Node<K, V> nextNode;
-    while ((nextNode = node.child[RIGHT]) != null) {
-      node = nextNode;
-    }
-    return node;
-  }
-
-  @Override
-  Entry<K, V> getCeilingEntry(K key) {
-    return getNodeAfter(key, true);
-  }
-
-  @Override
-  Entry<K, V> getFloorEntry(K key) {
-    return getNodeBefore(key, true);
-  }
-
-  @Override
-  Entry<K, V> getHigherEntry(K key) {
-    return getNodeAfter(key, false);
-  }
-
-  @Override
-  Entry<K, V> getLowerEntry(K key) {
-    return getNodeBefore(key, false);
-  }
-
-  @Override
-  boolean removeEntry(Entry<K, V> entry) {
-    State<V> state = new State<V>();
-    state.matchValue = true;
-    state.value = entry.getValue();
-    return removeWithState(entry.getKey(), state);
-  }
-
-  private void inOrderAdd(List<Entry<K, V>> list, SubMapType type, Node<K, V> current,
-      K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
-    if (current == null) {
-      return;
-    }
-    // TODO: truncate this recursion if the whole subtree is known to be
-    // outside of bounds?
-    Node<K, V> leftNode = current.child[LEFT];
-    if (leftNode != null) {
-      inOrderAdd(list, type, leftNode,
-          fromKey, fromInclusive, toKey, toInclusive);
-    }
-    if (inRange(type, current.getKey(), fromKey, fromInclusive, toKey, toInclusive)) {
-      list.add(current);
-    }
-    Node<K, V> rightNode = current.child[RIGHT];
-    if (rightNode != null) {
-      inOrderAdd(list, type, rightNode, fromKey, fromInclusive, toKey, toInclusive);
-    }
-  }
-
-  private boolean inRange(SubMapType type, K key,
-      K fromKey, boolean fromInclusive, K toKey, boolean toInclusive) {
-    if (type.fromKeyValid() && smaller(key, fromKey, !fromInclusive)) {
-      return false;
-    }
-    if (type.toKeyValid() && larger(key, toKey, !toInclusive)) {
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * Insert a node into a subtree, collecting state about the insertion.
+   * Returns this map's entry that has the same key and value as {@code entry}, or null if this map
+   * has no such entry.
    *
-   * If the same key already exists, the value of the node is overwritten with
-   * the value from the new node instead.
-   *
-   * @param tree subtree to insert into
-   * @param newNode new node to insert
-   * @param state result of the insertion: state.found true if the key already
-   *          existed in the tree state.value the old value if the key existed
-   * @return the new subtree root
+   * <p>This method uses the comparator for key equality rather than {@code equals}. If this map's
+   * comparator isn't consistent with equals (such as {@code String.CASE_INSENSITIVE_ORDER}), then
+   * {@code remove()} and {@code contains()} will violate the collections API.
    */
-  private Node<K, V> insert(Node<K, V> tree, Node<K, V> newNode, State<V> state) {
-    if (tree == null) {
-      return newNode;
-    } else {
-      int c = cmp.compare(newNode.getKey(), tree.getKey());
-      if (c == 0) {
-        state.value = tree.setValue(newNode.getValue());
-        state.found = true;
-        return tree;
-      }
-      int childNum = c < 0 ? LEFT : RIGHT;
-      tree.child[childNum] = insert(tree.child[childNum], newNode, state);
-      if (isRed(tree.child[childNum])) {
-        if (isRed(tree.child[otherChild(childNum)])) {
-          // both children are red (nulls are black), make both black and me red
-          tree.isRed = true;
-          tree.child[LEFT].isRed = false;
-          tree.child[RIGHT].isRed = false;
-        } else {
-          //
-          if (isRed(tree.child[childNum].child[childNum])) {
-            tree = rotateSingle(tree, otherChild(childNum));
-          } else if (isRed(tree.child[childNum].child[otherChild(childNum)])) {
-            tree = rotateDouble(tree, otherChild(childNum));
-          }
-        }
-      }
-    }
-    return tree;
+  private Node<K, V> findByEntry(Entry<?, ?> entry) {
+    Node<K, V> mine = findByObject(entry.getKey());
+    boolean valuesEqual = mine != null && Objects.equals(mine.getValue(), entry.getValue());
+    return valuesEqual ? mine : null;
   }
 
-  /**
-   * Returns true if <code>node</code> is red. Note that null pointers are
-   * considered black.
-   */
-  private boolean isRed(Node<K, V> node) {
-    return node != null && node.isRed;
-  }
-
-  /**
-   * Returns true if <code>a</code> is greater than or equal to <code>b</code>.
-   */
-  private boolean larger(K a, K b, boolean orEqual) {
-    int compare = cmp.compare(a, b);
-    return compare > 0 || (orEqual && compare == 0);
-  }
-
-  /**
-   * Returns true if <code>a</code> is less than or equal to <code>b</code>.
-   */
-  private boolean smaller(K a, K b, boolean orEqual) {
-    int compare = cmp.compare(a, b);
-    return compare < 0 || (orEqual && compare == 0);
-  }
-
-  /**
-   * Remove a key from the tree, returning whether it was found and its value.
-   *
-   * @param key key to remove
-   * @param state return state, not null
-   * @return true if the value was found
-   */
-  private boolean removeWithState(K key, State<V> state) {
-    if (root == null) {
-      return false;
-    }
-    Node<K, V> found = null;
-    Node<K, V> parent = null;
-
-    // create a fake tree root to minimize special cases for changing the root
-    Node<K, V> head = new Node<K, V>(null, null);
-    int dir = RIGHT;
-    head.child[RIGHT] = root;
-
-    Node<K, V> node = head;
-    while (node.child[dir] != null) {
-      int last = dir;
-      Node<K, V> grandparent = parent;
-      parent = node;
-      node = node.child[dir];
-      int c = cmp.compare(key, node.getKey());
-      dir = c < 0 ? LEFT : RIGHT;
-      if (c == 0 && (!state.matchValue || Objects.equals(node.getValue(), state.value))) {
-        found = node;
-      }
-      if (!isRed(node) && !isRed(node.child[dir])) {
-        if (isRed(node.child[otherChild(dir)])) {
-          parent = parent.child[last] = rotateSingle(node, dir);
-        } else if (!isRed(node.child[otherChild(dir)])) {
-          Node<K, V> sibling = parent.child[otherChild(last)];
-          if (sibling != null) {
-            if (!isRed(sibling.child[otherChild(last)])
-                && !isRed(sibling.child[last])) {
-              parent.isRed = false;
-              sibling.isRed = true;
-              node.isRed = true;
-            } else {
-              assert grandparent != null;
-              int dir2 = grandparent.child[RIGHT] == parent ? RIGHT : LEFT;
-              if (isRed(sibling.child[last])) {
-                grandparent.child[dir2] = rotateDouble(parent, last);
-              } else if (isRed(sibling.child[otherChild(last)])) {
-                grandparent.child[dir2] = rotateSingle(parent, last);
-              }
-              node.isRed = grandparent.child[dir2].isRed = true;
-              grandparent.child[dir2].child[LEFT].isRed = false;
-              grandparent.child[dir2].child[RIGHT].isRed = false;
-            }
-          }
-        }
-      }
-    }
-
-    if (found != null) {
-      state.found = true;
-      state.value = found.getValue();
-      /**
-       * put the "node" values in "found" (the node with key K) and cut "node"
-       * out. However, we do not want to corrupt "found" -- issue 3423. So
-       * create a new node "newNode" to replace the "found" node.
+  /** Removes {@code node} from this tree, rearranging the tree's structure as necessary. */
+  private void removeInternal(Node<K, V> node) {
+    Node<K, V> left = node.left;
+    Node<K, V> right = node.right;
+    Node<K, V> originalParent = node.parent;
+    if (left != null && right != null) {
+      /*
+       * To remove a node with both left and right subtrees, move an
+       * adjacent node from one of those subtrees into this node's place.
        *
-       * TODO: (jat's suggestion) Consider using rebalance to move the deleted
-       * node to a leaf to avoid the extra traversal in replaceNode.
+       * Removing the adjacent node may change this node's subtrees. This
+       * node may no longer have two subtrees once the adjacent node is
+       * gone!
        */
-      if (node != found) {
-        Node<K, V> newNode = new Node<K, V>(node.getKey(), node.getValue());
-        replaceNode(head, found, newNode);
-        if (parent == found) {
-          parent = newNode;
+      Node<K, V> adjacent = (left.height > right.height) ? left.last() : right.first();
+      removeInternal(adjacent); // takes care of rebalance and size--
+      int leftHeight = 0;
+      left = node.left;
+      if (left != null) {
+        leftHeight = left.height;
+        adjacent.left = left;
+        left.parent = adjacent;
+        node.left = null;
+      }
+      int rightHeight = 0;
+      right = node.right;
+      if (right != null) {
+        rightHeight = right.height;
+        adjacent.right = right;
+        right.parent = adjacent;
+        node.right = null;
+      }
+      adjacent.height = Math.max(leftHeight, rightHeight) + 1;
+      replaceInParent(node, adjacent);
+      return;
+    } else if (left != null) {
+      replaceInParent(node, left);
+      node.left = null;
+    } else if (right != null) {
+      replaceInParent(node, right);
+      node.right = null;
+    } else {
+      replaceInParent(node, null);
+    }
+    rebalance(originalParent, false);
+    size--;
+    structureChanged();
+  }
+
+  private Node<K, V> removeInternalByKey(Object key) {
+    Node<K, V> node = findByObject(key);
+    if (node != null) {
+      removeInternal(node);
+    }
+    return node;
+  }
+
+  private void replaceInParent(Node<K, V> node, Node<K, V> replacement) {
+    Node<K, V> parent = node.parent;
+    node.parent = null;
+    if (replacement != null) {
+      replacement.parent = parent;
+    }
+    if (parent != null) {
+      if (parent.left == node) {
+        parent.left = replacement;
+      } else {
+        // assert (parent.right == node);
+        parent.right = replacement;
+      }
+    } else {
+      root = replacement;
+    }
+  }
+
+  /**
+   * Rebalances the tree by making any AVL rotations necessary between the newly-unbalanced node and
+   * the tree's root.
+   *
+   * @param insert true if the node was unbalanced by an insert; false if it was by a removal.
+   */
+  private void rebalance(Node<K, V> unbalanced, boolean insert) {
+    for (Node<K, V> node = unbalanced; node != null; node = node.parent) {
+      Node<K, V> left = node.left;
+      Node<K, V> right = node.right;
+      int leftHeight = left != null ? left.height : 0;
+      int rightHeight = right != null ? right.height : 0;
+      int delta = leftHeight - rightHeight;
+      if (delta == -2) {
+        Node<K, V> rightLeft = right.left;
+        Node<K, V> rightRight = right.right;
+        int rightRightHeight = rightRight != null ? rightRight.height : 0;
+        int rightLeftHeight = rightLeft != null ? rightLeft.height : 0;
+        int rightDelta = rightLeftHeight - rightRightHeight;
+        if (rightDelta == -1 || (rightDelta == 0 && !insert)) {
+          rotateLeft(node); // AVL right right
+        } else {
+          // assert (rightDelta == 1);
+          rotateRight(right); // AVL right left
+          rotateLeft(node);
+        }
+        if (insert) {
+          break; // no further rotations will be necessary
+        }
+      } else if (delta == 2) {
+        Node<K, V> leftLeft = left.left;
+        Node<K, V> leftRight = left.right;
+        int leftRightHeight = leftRight != null ? leftRight.height : 0;
+        int leftLeftHeight = leftLeft != null ? leftLeft.height : 0;
+        int leftDelta = leftLeftHeight - leftRightHeight;
+        if (leftDelta == 1 || (leftDelta == 0 && !insert)) {
+          rotateRight(node); // AVL left left
+        } else {
+          // assert (leftDelta == -1);
+          rotateLeft(left); // AVL left right
+          rotateRight(node);
+        }
+        if (insert) {
+          break; // no further rotations will be necessary
+        }
+      } else if (delta == 0) {
+        node.height = leftHeight + 1; // leftHeight == rightHeight
+        if (insert) {
+          break; // the insert caused balance, so rebalancing is done!
+        }
+      } else {
+        // assert (delta == -1 || delta == 1);
+        node.height = Math.max(leftHeight, rightHeight) + 1;
+        if (!insert) {
+          break; // the height hasn't changed, so rebalancing is done!
         }
       }
+    }
+  }
 
-      // cut "node" out
-      parent.child[parent.child[RIGHT] == node ? RIGHT : LEFT] = node.child[node.child[LEFT] == null
-          ? RIGHT : LEFT];
-      size--;
+  /** Rotates the subtree so that its root's right child is the new root. */
+  private void rotateLeft(Node<K, V> root) {
+    Node<K, V> left = root.left;
+    Node<K, V> pivot = root.right;
+    Node<K, V> pivotLeft = pivot.left;
+    Node<K, V> pivotRight = pivot.right;
+    // move the pivot's left child to the root's right
+    root.right = pivotLeft;
+    if (pivotLeft != null) {
+      pivotLeft.parent = root;
+    }
+    replaceInParent(root, pivot);
+    // move the root to the pivot's left
+    pivot.left = root;
+    root.parent = pivot;
+    // fix heights
+    root.height =
+        Math.max(left != null ? left.height : 0, pivotLeft != null ? pivotLeft.height : 0) + 1;
+    pivot.height = Math.max(root.height, pivotRight != null ? pivotRight.height : 0) + 1;
+  }
+
+  /** Rotates the subtree so that its root's left child is the new root. */
+  private void rotateRight(Node<K, V> root) {
+    Node<K, V> pivot = root.left;
+    Node<K, V> right = root.right;
+    Node<K, V> pivotLeft = pivot.left;
+    Node<K, V> pivotRight = pivot.right;
+    // move the pivot's right child to the root's left
+    root.left = pivotRight;
+    if (pivotRight != null) {
+      pivotRight.parent = root;
+    }
+    replaceInParent(root, pivot);
+    // move the root to the pivot's right
+    pivot.right = root;
+    root.parent = pivot;
+    // fixup heights
+    root.height =
+        Math.max(right != null ? right.height : 0, pivotRight != null ? pivotRight.height : 0) + 1;
+    pivot.height = Math.max(root.height, pivotLeft != null ? pivotLeft.height : 0) + 1;
+  }
+
+  /*
+   * Navigable methods.
+   */
+
+  /**
+   * Returns an immutable version of {@param entry}. Need this because we allow entry to be null, in
+   * which case we return a null SimpleImmutableEntry.
+   */
+  private SimpleImmutableEntry<K, V> immutableCopy(Entry<K, V> entry) {
+    return entry == null ? null : new SimpleImmutableEntry<K, V>(entry);
+  }
+
+  private Node<K, V> getFirst() {
+    return root == null ? null : root.first();
+  }
+
+  private Node<K, V> getLast() {
+    return root == null ? null : root.last();
+  }
+
+  @Override
+  public Entry<K, V> firstEntry() {
+    return immutableCopy(getFirst());
+  }
+
+  private Node<K, V> internalPollFirstEntry() {
+    if (root == null) {
+      return null;
+    }
+    Node<K, V> result = root.first();
+    removeInternal(result);
+    return result;
+  }
+
+  @Override
+  public Entry<K, V> pollFirstEntry() {
+    return immutableCopy(internalPollFirstEntry());
+  }
+
+  @Override
+  public K firstKey() {
+    checkElement(root != null);
+    return root.first().getKey();
+  }
+
+  @Override
+  public Entry<K, V> lastEntry() {
+    return immutableCopy(getLast());
+  }
+
+  private Entry<K, V> internalPollLastEntry() {
+    if (root == null) {
+      return null;
+    }
+    Node<K, V> result = root.last();
+    removeInternal(result);
+    return result;
+  }
+
+  @Override
+  public Entry<K, V> pollLastEntry() {
+    return immutableCopy(internalPollLastEntry());
+  }
+
+  @Override
+  public K lastKey() {
+    checkElement(root != null);
+    return root.last().getKey();
+  }
+
+  @Override
+  public Entry<K, V> lowerEntry(K key) {
+    return findEntry(key, Relation.LOWER);
+  }
+
+  @Override
+  public K lowerKey(K key) {
+    return findKey(key, Relation.LOWER);
+  }
+
+  @Override
+  public Entry<K, V> floorEntry(K key) {
+    return findEntry(key, Relation.FLOOR);
+  }
+
+  @Override
+  public K floorKey(K key) {
+    return findKey(key, Relation.FLOOR);
+  }
+
+  @Override
+  public Entry<K, V> ceilingEntry(K key) {
+    return findEntry(key, Relation.CEILING);
+  }
+
+  @Override
+  public K ceilingKey(K key) {
+    return findKey(key, Relation.CEILING);
+  }
+
+  @Override
+  public Entry<K, V> higherEntry(K key) {
+    return findEntry(key, Relation.HIGHER);
+  }
+
+  @Override
+  public K higherKey(K key) {
+    return findKey(key, Relation.HIGHER);
+  }
+
+  @Override
+  public Comparator<? super K> comparator() {
+    return Comparators.naturalOrderToNull(comparator);
+  }
+
+  /*
+   * View factory methods.
+   */
+
+  private EntrySet entrySet;
+  private KeySet keySet;
+
+  @Override
+  public Set<Entry<K, V>> entrySet() {
+    if (entrySet == null) {
+      entrySet = new EntrySet();
+    }
+    return entrySet;
+  }
+
+  @Override
+  public Set<K> keySet() {
+    return navigableKeySet();
+  }
+
+  @Override
+  public NavigableSet<K> navigableKeySet() {
+    if (keySet == null) {
+      keySet = new KeySet();
+    }
+    return keySet;
+  }
+
+  @Override
+  public NavigableMap<K, V> subMap(K from, boolean fromInclusive, K to, boolean toInclusive) {
+    Bound fromBound = fromInclusive ? Bound.INCLUSIVE : Bound.EXCLUSIVE;
+    Bound toBound = toInclusive ? Bound.INCLUSIVE : Bound.EXCLUSIVE;
+    return new BoundedMap(true, from, fromBound, to, toBound);
+  }
+
+  @Override
+  public SortedMap<K, V> subMap(K fromInclusive, K toExclusive) {
+    return new BoundedMap(true, fromInclusive, Bound.INCLUSIVE, toExclusive, Bound.EXCLUSIVE);
+  }
+
+  @Override
+  public NavigableMap<K, V> headMap(K to, boolean inclusive) {
+    Bound toBound = inclusive ? Bound.INCLUSIVE : Bound.EXCLUSIVE;
+    return new BoundedMap(true, null, Bound.NO_BOUND, to, toBound);
+  }
+
+  @Override
+  public SortedMap<K, V> headMap(K toExclusive) {
+    return new BoundedMap(true, null, Bound.NO_BOUND, toExclusive, Bound.EXCLUSIVE);
+  }
+
+  @Override
+  public NavigableMap<K, V> tailMap(K from, boolean inclusive) {
+    Bound fromBound = inclusive ? Bound.INCLUSIVE : Bound.EXCLUSIVE;
+    return new BoundedMap(true, from, fromBound, null, Bound.NO_BOUND);
+  }
+
+  @Override
+  public SortedMap<K, V> tailMap(K fromInclusive) {
+    return new BoundedMap(true, fromInclusive, Bound.INCLUSIVE, null, Bound.NO_BOUND);
+  }
+
+  @Override
+  public NavigableMap<K, V> descendingMap() {
+    return new BoundedMap(false, null, Bound.NO_BOUND, null, Bound.NO_BOUND);
+  }
+
+  @Override
+  public NavigableSet<K> descendingKeySet() {
+    return new BoundedMap(false, null, Bound.NO_BOUND, null, Bound.NO_BOUND).navigableKeySet();
+  }
+
+  private static class Node<K, V> extends SimpleEntry<K, V> {
+    Node<K, V> parent;
+    Node<K, V> left;
+    Node<K, V> right;
+    int height;
+
+    Node(Node<K, V> parent, K key) {
+      super(key, null);
+      this.parent = parent;
+      this.height = 1;
     }
 
-    root = head.child[RIGHT];
-    if (root != null) {
-      root.isRed = false;
+    /**
+     * Returns the next node in an inorder traversal, or null if this is the last node in the tree.
+     */
+    Node<K, V> next() {
+      if (right != null) {
+        return right.first();
+      }
+      Node<K, V> node = this;
+      Node<K, V> parent = node.parent;
+      while (parent != null) {
+        if (parent.left == node) {
+          return parent;
+        }
+        node = parent;
+        parent = node.parent;
+      }
+      return null;
     }
-    return state.found;
+
+    /**
+     * Returns the previous node in an inorder traversal, or null if this is the first node in the
+     * tree.
+     */
+    Node<K, V> prev() {
+      if (left != null) {
+        return left.last();
+      }
+      Node<K, V> node = this;
+      Node<K, V> parent = node.parent;
+      while (parent != null) {
+        if (parent.right == node) {
+          return parent;
+        }
+        node = parent;
+        parent = node.parent;
+      }
+      return null;
+    }
+
+    /** Returns the first node in this subtree. */
+    Node<K, V> first() {
+      Node<K, V> node = this;
+      Node<K, V> child = node.left;
+      while (child != null) {
+        node = child;
+        child = node.left;
+      }
+      return node;
+    }
+
+    /** Returns the last node in this subtree. */
+    Node<K, V> last() {
+      Node<K, V> node = this;
+      Node<K, V> child = node.right;
+      while (child != null) {
+        node = child;
+        child = node.right;
+      }
+      return node;
+    }
   }
 
   /**
-   * replace 'node' with 'newNode' in the tree rooted at 'head'. Could have
-   * avoided this traversal if each node maintained a parent pointer.
+   * Walk the nodes of the tree left-to-right or right-to-left. Note that in descending iterations,
+   * {@code next} will return the previous node.
    */
-  private void replaceNode(Node<K, V> head, Node<K, V> node, Node<K, V> newNode) {
-    Node<K, V> parent = head;
-    int direction = (parent.getKey() == null || cmp.compare(node.getKey(), parent.getKey()) > 0)
-        ? RIGHT : LEFT; // parent.key == null handles the fake root node
-    while (parent.child[direction] != node) {
-      parent = parent.child[direction];
-      assert parent != null;
-      direction = cmp.compare(node.getKey(), parent.getKey()) > 0 ? RIGHT : LEFT;
+  private abstract class MapIterator<T> implements Iterator<T> {
+    protected Node<K, V> next;
+    protected Node<K, V> last;
+    protected int expectedModCount = modCount;
+
+    MapIterator(Node<K, V> next) {
+      this.next = next;
     }
-    // replace node with newNode
-    parent.child[direction] = newNode;
-    newNode.isRed = node.isRed;
-    newNode.child[LEFT] = node.child[LEFT];
-    newNode.child[RIGHT] = node.child[RIGHT];
-    node.child[LEFT] = null;
-    node.child[RIGHT] = null;
+
+    @Override
+    public boolean hasNext() {
+      return next != null;
+    }
+
+    protected Node<K, V> stepForward() {
+      checkElement(next != null);
+      checkConcurrentModification(modCount, expectedModCount);
+      last = next;
+      next = next.next();
+      return last;
+    }
+
+    protected Node<K, V> stepBackward() {
+      checkElement(next != null);
+      checkConcurrentModification(modCount, expectedModCount);
+      last = next;
+      next = next.prev();
+      return last;
+    }
+
+    @Override
+    public void remove() {
+      checkState(last != null);
+      removeInternal(last);
+      expectedModCount = modCount;
+      last = null;
+    }
   }
 
-  /**
-   * Perform a double rotation, first rotating the child which will become the
-   * root in the opposite direction, then rotating the root in the specified
-   * direction.
-   *
-   * <pre>
-   *           A                                               F
-   *         B   C    becomes (with rotateDirection=0)       A   C
-   *        D E F G                                         B E   G
-   *                                                       D
-   * </pre>
-   *
-   * @param tree root of the subtree to rotate
-   * @param rotateDirection the direction to rotate: 0=left, 1=right
-   * @return the new root of the rotated subtree
+  /*
+   * View implementations.
    */
-  private Node<K, V> rotateDouble(Node<K, V> tree, int rotateDirection) {
-    // free the pointer of the new root
-    int otherChildDir = otherChild(rotateDirection);
-    tree.child[otherChildDir] = rotateSingle(tree.child[otherChildDir], otherChildDir);
-    return rotateSingle(tree, rotateDirection);
+
+  private class EntrySet extends AbstractSet<Map.Entry<K, V>> {
+    @Override
+    public int size() {
+      return size;
+    }
+
+    @Override
+    public Iterator<Entry<K, V>> iterator() {
+      return new MapIterator<Entry<K, V>>(getFirst()) {
+        @Override
+        public Entry<K, V> next() {
+          return stepForward();
+        }
+      };
+    }
+
+    @Override
+    public boolean contains(Object o) {
+      return o instanceof Entry && findByEntry((Entry<?, ?>) o) != null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+      if (!(o instanceof Entry)) {
+        return false;
+      }
+      Node<K, V> node = findByEntry((Entry<?, ?>) o);
+      if (node == null) {
+        return false;
+      }
+      removeInternal(node);
+      return true;
+    }
+
+    @Override
+    public void clear() {
+      TreeMap.this.clear();
+    }
   }
 
-  /**
-   * Perform a single rotation, pushing the root of the subtree to the specified
-   * direction.
-   *
-   * <pre>
-   *      A                                              B
-   *    B   C     becomes (with rotateDirection=1)     D   A
-   *   D E                                              E   C
-   * </pre>
-   *
-   * @param tree the root of the subtree to rotate
-   * @param rotateDirection the direction to rotate: 0=left rotation, 1=right
-   * @return the new root of the rotated subtree
+  private class KeySet extends AbstractSet<K> implements NavigableSet<K> {
+    @Override
+    public int size() {
+      return size;
+    }
+
+    @Override
+    public Iterator<K> iterator() {
+      return new MapIterator<K>(getFirst()) {
+        @Override
+        public K next() {
+          return stepForward().getKey();
+        }
+      };
+    }
+
+    @Override
+    public Iterator<K> descendingIterator() {
+      return new MapIterator<K>(getLast()) {
+        @Override
+        public K next() {
+          return stepBackward().getKey();
+        }
+      };
+    }
+
+    @Override
+    public boolean contains(Object o) {
+      return containsKey(o);
+    }
+
+    @Override
+    public boolean remove(Object key) {
+      return removeInternalByKey(key) != null;
+    }
+
+    @Override
+    public void clear() {
+      TreeMap.this.clear();
+    }
+
+    @Override
+    public Comparator<? super K> comparator() {
+      return TreeMap.this.comparator();
+    }
+
+    /*
+     * Navigable methods.
+     */
+
+    @Override
+    public K first() {
+      return firstKey();
+    }
+
+    @Override
+    public K last() {
+      return lastKey();
+    }
+
+    @Override
+    public K lower(K key) {
+      return lowerKey(key);
+    }
+
+    @Override
+    public K floor(K key) {
+      return floorKey(key);
+    }
+
+    @Override
+    public K ceiling(K key) {
+      return ceilingKey(key);
+    }
+
+    @Override
+    public K higher(K key) {
+      return higherKey(key);
+    }
+
+    @Override
+    public K pollFirst() {
+      return getKeyOrNull(internalPollFirstEntry());
+    }
+
+    @Override
+    public K pollLast() {
+      return getKeyOrNull(internalPollLastEntry());
+    }
+
+    /*
+     * View factory methods.
+     */
+
+    @Override
+    public NavigableSet<K> subSet(K from, boolean fromInclusive, K to, boolean toInclusive) {
+      return TreeMap.this.subMap(from, fromInclusive, to, toInclusive).navigableKeySet();
+    }
+
+    @Override
+    public SortedSet<K> subSet(K fromInclusive, K toExclusive) {
+      return TreeMap.this.subMap(fromInclusive, true, toExclusive, false).navigableKeySet();
+    }
+
+    @Override
+    public NavigableSet<K> headSet(K to, boolean inclusive) {
+      return TreeMap.this.headMap(to, inclusive).navigableKeySet();
+    }
+
+    @Override
+    public SortedSet<K> headSet(K toExclusive) {
+      return TreeMap.this.headMap(toExclusive, false).navigableKeySet();
+    }
+
+    @Override
+    public NavigableSet<K> tailSet(K from, boolean inclusive) {
+      return TreeMap.this.tailMap(from, inclusive).navigableKeySet();
+    }
+
+    @Override
+    public SortedSet<K> tailSet(K fromInclusive) {
+      return TreeMap.this.tailMap(fromInclusive, true).navigableKeySet();
+    }
+
+    @Override
+    public NavigableSet<K> descendingSet() {
+      return new BoundedMap(false, null, Bound.NO_BOUND, null, Bound.NO_BOUND).navigableKeySet();
+    }
+  }
+
+  /*
+   * Bounded views implementations.
    */
-  private Node<K, V> rotateSingle(Node<K, V> tree, int rotateDirection) {
-    int otherChildDir = otherChild(rotateDirection);
-    Node<K, V> save = tree.child[otherChildDir];
-    tree.child[otherChildDir] = save.child[rotateDirection];
-    save.child[rotateDirection] = tree;
-    tree.isRed = true;
-    save.isRed = false;
-    return save;
+
+  @JsEnum
+  private enum Bound {
+    INCLUSIVE,
+    EXCLUSIVE,
+    NO_BOUND
+  }
+
+  /** A map with optional limits on its range. */
+  private final class BoundedMap extends AbstractMap<K, V>
+      implements NavigableMap<K, V>, Serializable {
+    private final boolean ascending;
+    private final K from;
+    private final Bound fromBound;
+    private final K to;
+    private final Bound toBound;
+
+    BoundedMap(boolean ascending, K from, Bound fromBound, K to, Bound toBound) {
+      /*
+       * Validate the bounds. In addition to checking that from <= to, we
+       * verify that the comparator supports our bound objects.
+       */
+      if (fromBound != Bound.NO_BOUND && toBound != Bound.NO_BOUND) {
+        checkCriticalArgument(comparator.compare(from, to) <= 0);
+      } else if (fromBound != Bound.NO_BOUND) {
+        comparator.compare(from, from);
+      } else if (toBound != Bound.NO_BOUND) {
+        comparator.compare(to, to);
+      }
+      this.ascending = ascending;
+      this.from = from;
+      this.fromBound = fromBound;
+      this.to = to;
+      this.toBound = toBound;
+    }
+
+    @Override
+    public boolean isEmpty() {
+      return endpoint(true) == null;
+    }
+
+    @Override
+    public V get(Object key) {
+      return isInBounds(key) ? TreeMap.this.get(key) : null;
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+      return isInBounds(key) && TreeMap.this.containsKey(key);
+    }
+
+    @Override
+    public V put(K key, V value) {
+      checkInBounds(key, fromBound, toBound);
+      return putInternal(key, value);
+    }
+
+    @Override
+    public V remove(Object key) {
+      return isInBounds(key) ? TreeMap.this.remove(key) : null;
+    }
+
+    /** Returns true if the key is in bounds. */
+    @SuppressWarnings("unchecked")
+    private boolean isInBounds(Object key) {
+      return isInBounds((K) key, fromBound, toBound);
+    }
+
+    /**
+     * Returns true if the key is in bounds. Use this overload with Bound.NO_BOUND to skip bounds
+     * checking on either end.
+     */
+    private boolean isInBounds(K key, Bound fromBound, Bound toBound) {
+      if (fromBound == Bound.INCLUSIVE) {
+        if (comparator.compare(key, from) < 0) {
+          return false; // less than from
+        }
+      } else if (fromBound == Bound.EXCLUSIVE) {
+        if (comparator.compare(key, from) <= 0) {
+          return false; // less than or equal to from
+        }
+      }
+      if (toBound == Bound.INCLUSIVE) {
+        if (comparator.compare(key, to) > 0) {
+          return false; // greater than 'to'
+        }
+      } else if (toBound == Bound.EXCLUSIVE) {
+        if (comparator.compare(key, to) >= 0) {
+          return false; // greater than or equal to 'to'
+        }
+      }
+      return true;
+    }
+
+    private void checkInBounds(K key, Bound fromBound, Bound toBound) {
+      if (!isInBounds(key, fromBound, toBound)) {
+        checkCriticalArgument(false, key + " not in range " + from + ".." + to);
+      }
+    }
+
+    /** Returns the entry if it is in bounds, or null if it is out of bounds. */
+    private Node<K, V> bound(Node<K, V> node, Bound fromBound, Bound toBound) {
+      return node != null && isInBounds(node.getKey(), fromBound, toBound) ? node : null;
+    }
+
+    /*
+     * Navigable methods.
+     */
+
+    @Override
+    public Entry<K, V> firstEntry() {
+      return immutableCopy(endpoint(true));
+    }
+
+    @Override
+    public Entry<K, V> pollFirstEntry() {
+      Node<K, V> result = endpoint(true);
+      if (result != null) {
+        removeInternal(result);
+      }
+      return immutableCopy(result);
+    }
+
+    @Override
+    public K firstKey() {
+      Entry<K, V> entry = endpoint(true);
+      checkElement(entry != null);
+      return entry.getKey();
+    }
+
+    @Override
+    public Entry<K, V> lastEntry() {
+      return immutableCopy(endpoint(false));
+    }
+
+    @Override
+    public Entry<K, V> pollLastEntry() {
+      Node<K, V> result = endpoint(false);
+      if (result != null) {
+        removeInternal(result);
+      }
+      return immutableCopy(result);
+    }
+
+    @Override
+    public K lastKey() {
+      Entry<K, V> entry = endpoint(false);
+      checkElement(entry != null);
+      return entry.getKey();
+    }
+
+    /**
+     * @param first true for the first element, false for the last.
+     */
+    private Node<K, V> endpoint(boolean first) {
+      Node<K, V> node = null;
+      if (ascending == first) {
+        switch (fromBound) {
+          case NO_BOUND:
+            node = getFirst();
+            break;
+          case INCLUSIVE:
+            node = find(from, Relation.CEILING);
+            break;
+          case EXCLUSIVE:
+            node = find(from, Relation.HIGHER);
+            break;
+        }
+        return bound(node, Bound.NO_BOUND, toBound);
+      } else {
+        switch (toBound) {
+          case NO_BOUND:
+            node = getLast();
+            break;
+          case INCLUSIVE:
+            node = find(to, Relation.FLOOR);
+            break;
+          case EXCLUSIVE:
+            node = find(to, Relation.LOWER);
+            break;
+        }
+        return bound(node, fromBound, Bound.NO_BOUND);
+      }
+    }
+
+    /**
+     * Performs a find on the underlying tree after constraining it to the bounds of this view.
+     * Examples:
+     *
+     * <p>bound is (A..C) findBounded(B, FLOOR) stays source.find(B, FLOOR)
+     *
+     * <p>bound is (A..C) findBounded(C, FLOOR) becomes source.find(C, LOWER)
+     *
+     * <p>bound is (A..C) findBounded(D, LOWER) becomes source.find(C, LOWER)
+     *
+     * <p>bound is (A..C] findBounded(D, FLOOR) becomes source.find(C, FLOOR)
+     *
+     * <p>bound is (A..C] findBounded(D, LOWER) becomes source.find(C, FLOOR)
+     */
+    private Node<K, V> findBounded(K key, Relation relation) {
+      relation = relation.forOrder(ascending);
+      Bound fromBoundForCheck = fromBound;
+      Bound toBoundForCheck = toBound;
+      if (toBound != Bound.NO_BOUND && (relation == Relation.LOWER || relation == Relation.FLOOR)) {
+        int comparison = comparator.compare(to, key);
+        if (comparison <= 0) {
+          key = to;
+          if (toBound == Bound.EXCLUSIVE) {
+            relation = Relation.LOWER; // 'to' is too high
+          } else if (comparison < 0) {
+            relation = Relation.FLOOR; // we already went lower
+          }
+        }
+        toBoundForCheck = Bound.NO_BOUND; // we've already checked the upper bound
+      }
+      if (fromBound != Bound.NO_BOUND
+          && (relation == Relation.CEILING || relation == Relation.HIGHER)) {
+        int comparison = comparator.compare(from, key);
+        if (comparison >= 0) {
+          key = from;
+          if (fromBound == Bound.EXCLUSIVE) {
+            relation = Relation.HIGHER; // 'from' is too low
+          } else if (comparison > 0) {
+            relation = Relation.CEILING; // we already went higher
+          }
+        }
+        fromBoundForCheck = Bound.NO_BOUND; // we've already checked the lower bound
+      }
+      return bound(find(key, relation), fromBoundForCheck, toBoundForCheck);
+    }
+
+    private K findBoundedKey(K key, Relation relation) {
+      return getKeyOrNull(findBounded(key, relation));
+    }
+
+    private Entry<K, V> findBoundedEntry(K key, Relation relation) {
+      return immutableCopy(findBounded(key, relation));
+    }
+
+    @Override
+    public Entry<K, V> lowerEntry(K key) {
+      return findBoundedEntry(key, Relation.LOWER);
+    }
+
+    @Override
+    public K lowerKey(K key) {
+      return findBoundedKey(key, Relation.LOWER);
+    }
+
+    @Override
+    public Entry<K, V> floorEntry(K key) {
+      return findBoundedEntry(key, Relation.FLOOR);
+    }
+
+    @Override
+    public K floorKey(K key) {
+      return findBoundedKey(key, Relation.FLOOR);
+    }
+
+    @Override
+    public Entry<K, V> ceilingEntry(K key) {
+      return findBoundedEntry(key, Relation.CEILING);
+    }
+
+    @Override
+    public K ceilingKey(K key) {
+      return findBoundedKey(key, Relation.CEILING);
+    }
+
+    @Override
+    public Entry<K, V> higherEntry(K key) {
+      return findBoundedEntry(key, Relation.HIGHER);
+    }
+
+    @Override
+    public K higherKey(K key) {
+      return findBoundedKey(key, Relation.HIGHER);
+    }
+
+    @Override
+    public Comparator<? super K> comparator() {
+      Comparator<? super K> forward = TreeMap.this.comparator();
+      if (ascending) {
+        return forward;
+      } else {
+        return Collections.reverseOrder(forward);
+      }
+    }
+
+    /*
+     * View factory methods.
+     */
+
+    private BoundedEntrySet entrySet;
+    private BoundedKeySet keySet;
+
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+      if (entrySet == null) {
+        entrySet = new BoundedEntrySet();
+      }
+      return entrySet;
+    }
+
+    @Override
+    public Set<K> keySet() {
+      return navigableKeySet();
+    }
+
+    @Override
+    public NavigableSet<K> navigableKeySet() {
+      if (keySet == null) {
+        keySet = new BoundedKeySet();
+      }
+      return keySet;
+    }
+
+    @Override
+    public NavigableMap<K, V> descendingMap() {
+      return new BoundedMap(!ascending, from, fromBound, to, toBound);
+    }
+
+    @Override
+    public NavigableSet<K> descendingKeySet() {
+      return new BoundedMap(!ascending, from, fromBound, to, toBound).navigableKeySet();
+    }
+
+    @Override
+    public NavigableMap<K, V> subMap(K from, boolean fromInclusive, K to, boolean toInclusive) {
+      Bound fromBound = fromInclusive ? Bound.INCLUSIVE : Bound.EXCLUSIVE;
+      Bound toBound = toInclusive ? Bound.INCLUSIVE : Bound.EXCLUSIVE;
+      return subMap(from, fromBound, to, toBound);
+    }
+
+    @Override
+    public NavigableMap<K, V> subMap(K fromInclusive, K toExclusive) {
+      return subMap(fromInclusive, Bound.INCLUSIVE, toExclusive, Bound.EXCLUSIVE);
+    }
+
+    @Override
+    public NavigableMap<K, V> headMap(K to, boolean inclusive) {
+      Bound toBound = inclusive ? Bound.INCLUSIVE : Bound.EXCLUSIVE;
+      return subMap(null, Bound.NO_BOUND, to, toBound);
+    }
+
+    @Override
+    public NavigableMap<K, V> headMap(K toExclusive) {
+      return subMap(null, Bound.NO_BOUND, toExclusive, Bound.EXCLUSIVE);
+    }
+
+    @Override
+    public NavigableMap<K, V> tailMap(K from, boolean inclusive) {
+      Bound fromBound = inclusive ? Bound.INCLUSIVE : Bound.EXCLUSIVE;
+      return subMap(from, fromBound, null, Bound.NO_BOUND);
+    }
+
+    @Override
+    public NavigableMap<K, V> tailMap(K fromInclusive) {
+      return subMap(fromInclusive, Bound.INCLUSIVE, null, Bound.NO_BOUND);
+    }
+
+    private NavigableMap<K, V> subMap(K from, Bound fromBound, K to, Bound toBound) {
+      if (!ascending) {
+        K fromTmp = from;
+        Bound fromBoundTmp = fromBound;
+        from = to;
+        fromBound = toBound;
+        to = fromTmp;
+        toBound = fromBoundTmp;
+      }
+      /*
+       * If both the current and requested bounds are exclusive, the isInBounds check must be
+       * inclusive. For example, to create (C..F) from (A..F), the bound 'F' is in bounds.
+       */
+      if (fromBound == Bound.NO_BOUND) {
+        from = this.from;
+        fromBound = this.fromBound;
+      } else {
+        Bound fromBoundToCheck = fromBound == this.fromBound ? Bound.INCLUSIVE : this.fromBound;
+        checkInBounds(from, fromBoundToCheck, this.toBound);
+      }
+      if (toBound == Bound.NO_BOUND) {
+        to = this.to;
+        toBound = this.toBound;
+      } else {
+        Bound toBoundToCheck = toBound == this.toBound ? Bound.INCLUSIVE : this.toBound;
+        checkInBounds(to, this.fromBound, toBoundToCheck);
+      }
+      return new BoundedMap(ascending, from, fromBound, to, toBound);
+    }
+
+    /*
+     * Bounded view implementations.
+     */
+
+    private abstract class BoundedIterator<T> extends MapIterator<T> {
+      protected BoundedIterator(Node<K, V> next) {
+        super(next);
+      }
+
+      @Override
+      protected Node<K, V> stepForward() {
+        Node<K, V> result = super.stepForward();
+        next = bound(next, Bound.NO_BOUND, toBound);
+        return result;
+      }
+
+      @Override
+      protected Node<K, V> stepBackward() {
+        Node<K, V> result = super.stepBackward();
+        next = bound(next, fromBound, Bound.NO_BOUND);
+        return result;
+      }
+    }
+
+    private final class BoundedEntrySet extends AbstractSet<Entry<K, V>> {
+      @Override
+      public int size() {
+        int count = 0;
+        for (Entry<K, V> ignored : this) {
+          count++;
+        }
+        return count;
+      }
+
+      @Override
+      public boolean isEmpty() {
+        return BoundedMap.this.isEmpty();
+      }
+
+      @Override
+      public Iterator<Entry<K, V>> iterator() {
+        return new BoundedIterator<Entry<K, V>>(endpoint(true)) {
+          @Override
+          public Entry<K, V> next() {
+            return ascending ? stepForward() : stepBackward();
+          }
+        };
+      }
+
+      @Override
+      public boolean contains(Object o) {
+        if (!(o instanceof Entry)) {
+          return false;
+        }
+        Entry<?, ?> entry = (Entry<?, ?>) o;
+        return isInBounds(entry.getKey()) && findByEntry(entry) != null;
+      }
+
+      @Override
+      public boolean remove(Object o) {
+        if (!(o instanceof Entry)) {
+          return false;
+        }
+        Entry<?, ?> entry = (Entry<?, ?>) o;
+        return isInBounds(entry.getKey()) && TreeMap.this.entrySet().remove(entry);
+      }
+    }
+
+    private final class BoundedKeySet extends AbstractSet<K> implements NavigableSet<K> {
+      @Override
+      public int size() {
+        return BoundedMap.this.size();
+      }
+
+      @Override
+      public boolean isEmpty() {
+        return BoundedMap.this.isEmpty();
+      }
+
+      @Override
+      public Iterator<K> iterator() {
+        return new BoundedIterator<K>(endpoint(true)) {
+          @Override
+          public K next() {
+            return (ascending ? stepForward() : stepBackward()).getKey();
+          }
+        };
+      }
+
+      @Override
+      public Iterator<K> descendingIterator() {
+        return new BoundedIterator<K>(endpoint(false)) {
+          @Override
+          public K next() {
+            return (ascending ? stepBackward() : stepForward()).getKey();
+          }
+        };
+      }
+
+      @Override
+      public boolean contains(Object key) {
+        return isInBounds(key) && findByObject(key) != null;
+      }
+
+      @Override
+      public boolean remove(Object key) {
+        return isInBounds(key) && removeInternalByKey(key) != null;
+      }
+
+      /*
+       * Navigable methods.
+       */
+
+      @Override
+      public K first() {
+        return firstKey();
+      }
+
+      @Override
+      public K pollFirst() {
+        return getKeyOrNull(internalPollFirstEntry());
+      }
+
+      @Override
+      public K last() {
+        return lastKey();
+      }
+
+      @Override
+      public K pollLast() {
+        return getKeyOrNull(internalPollLastEntry());
+      }
+
+      @Override
+      public K lower(K key) {
+        return lowerKey(key);
+      }
+
+      @Override
+      public K floor(K key) {
+        return floorKey(key);
+      }
+
+      @Override
+      public K ceiling(K key) {
+        return ceilingKey(key);
+      }
+
+      @Override
+      public K higher(K key) {
+        return higherKey(key);
+      }
+
+      @Override
+      public Comparator<? super K> comparator() {
+        return BoundedMap.this.comparator();
+      }
+
+      /*
+       * View factory methods.
+       */
+
+      @Override
+      public NavigableSet<K> subSet(K from, boolean fromInclusive, K to, boolean toInclusive) {
+        return subMap(from, fromInclusive, to, toInclusive).navigableKeySet();
+      }
+
+      @Override
+      public SortedSet<K> subSet(K fromInclusive, K toExclusive) {
+        return subMap(fromInclusive, toExclusive).navigableKeySet();
+      }
+
+      @Override
+      public NavigableSet<K> headSet(K to, boolean inclusive) {
+        return headMap(to, inclusive).navigableKeySet();
+      }
+
+      @Override
+      public SortedSet<K> headSet(K toExclusive) {
+        return headMap(toExclusive).navigableKeySet();
+      }
+
+      @Override
+      public NavigableSet<K> tailSet(K from, boolean inclusive) {
+        return tailMap(from, inclusive).navigableKeySet();
+      }
+
+      @Override
+      public SortedSet<K> tailSet(K fromInclusive) {
+        return tailMap(fromInclusive).navigableKeySet();
+      }
+
+      @Override
+      public NavigableSet<K> descendingSet() {
+        return new BoundedMap(!ascending, from, fromBound, to, toBound).navigableKeySet();
+      }
+    }
+  }
+
+  private static <K> K getKeyOrNull(Entry<K, ?> entry) {
+    return entry == null ? null : entry.getKey();
   }
 }

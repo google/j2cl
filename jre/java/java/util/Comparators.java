@@ -165,5 +165,9 @@ class Comparators {
     return cmp == INTERNAL_NATURAL_ORDER ? null : cmp;
   }
 
+  static boolean isNaturalOrder(Comparator<?> cmp) {
+    return cmp == INTERNAL_NATURAL_ORDER;
+  }
+
   private Comparators() { }
 }
