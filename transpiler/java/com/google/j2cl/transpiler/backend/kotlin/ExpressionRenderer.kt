@@ -161,7 +161,10 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
-  renderTypeDescriptor(functionExpression.typeDescriptor.functionalInterface!!.toNonNullable())
+  renderTypeDescriptor(
+    functionExpression.typeDescriptor.functionalInterface!!.toNonNullable(),
+    projectBounds = true
+  )
   render(" ")
   renderInParentheses {
     render("fun")
