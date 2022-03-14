@@ -1106,9 +1106,17 @@ class JdtUtils {
     JsEnumInfo jsEnumInfo = JsInteropUtils.getJsEnumInfo(typeBinding);
 
     boolean isNullMarked = isNullMarked(typeBinding, packageInfoCache);
+    IBinding declaringMemberBinding = getDeclaringMethodOrFieldBinding(typeBinding);
+
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeBinding))
         .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
+        .setEnclosingMethodDescriptorFactory(
+            () ->
+                createMethodDescriptor(
+                    declaringMemberBinding instanceof IMethodBinding
+                        ? (IMethodBinding) declaringMemberBinding
+                        : null))
         .setInterfaceTypeDescriptorsFactory(
             () ->
                 createTypeDescriptors(

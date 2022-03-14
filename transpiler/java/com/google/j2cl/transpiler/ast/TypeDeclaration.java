@@ -196,6 +196,15 @@ public abstract class TypeDeclaration
         : enclosingTypeDeclaration.getTopEnclosingDeclaration();
   }
 
+  /** Returns the enclosing method descriptor if the class is a local or an anonymous class. */
+  @Nullable
+  @Memoized
+  public MethodDescriptor getEnclosingMethodDescriptor() {
+    return getEnclosingMethodDescriptorFactory().get();
+  }
+
+  abstract Supplier<MethodDescriptor> getEnclosingMethodDescriptorFactory();
+
   public abstract ImmutableList<TypeVariable> getTypeParameterDescriptors();
 
   public abstract Visibility getVisibility();
@@ -792,6 +801,7 @@ public abstract class TypeDeclaration
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
+        .setEnclosingMethodDescriptorFactory(() -> null)
         .setUnparameterizedTypeDescriptorFactory(unparameterizedFactory)
         .setSuperTypeDescriptorFactory(() -> null);
   }
@@ -817,6 +827,9 @@ public abstract class TypeDeclaration
     public abstract Builder setClassComponents(List<String> classComponents);
 
     public abstract Builder setEnclosingTypeDeclaration(TypeDeclaration enclosingTypeDeclaration);
+
+    public abstract Builder setEnclosingMethodDescriptorFactory(
+        Supplier<MethodDescriptor> enclosingMethodDescriptorFactory);
 
     public abstract Builder setOverlaidTypeDeclaration(TypeDeclaration typeDeclaration);
 
