@@ -10,11 +10,15 @@ def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps =
 
     test_data_all = test_data_java + test_data_j2cl + test_data_j2cl_compiled
 
+    shard_count = len(test_data_all)
+    if shard_count > 50:
+        fail("Attempted to run %d test cases, which exceeds max shards of 50. Manually split test %s into fewer tests" % (shard_count, name))
+
     native.java_test(
         name = name,
         srcs = [name + ".java"],
         data = test_data_all + extra_data,
-        shard_count = len(test_data_all),
+        shard_count = shard_count,
         deps = deps + [
             "//java/com/google/common/base",
             "//third_party/java/junit",
