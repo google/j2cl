@@ -17,300 +17,71 @@
 
 package java.lang;
 
-/**
- * The wrapper for the primitive type {@code byte}.
- *
- * @since 1.1
- */
-@FindBugsSuppressWarnings("DM_NUMBER_CTOR")
+import javaemul.internal.annotations.KtName;
+import javaemul.internal.annotations.KtNative;
+
+@KtNative("kotlin.Byte")
 public final class Byte extends Number implements Comparable<Byte> {
 
-    private static final long serialVersionUID = -7183698231559129828L;
+  public static /* final */ byte MAX_VALUE;
 
-    /**
-     * The value which the receiver represents.
-     */
-    private final byte value;
+  public static /* final */ byte MIN_VALUE;
 
-    /**
-     * The maximum {@code Byte} value, 2<sup>7</sup>-1.
-     */
-    public static final byte MAX_VALUE = (byte) 0x7F;
+  @KtName("SIZE_BYTES")
+  public static /* final */ int SIZE;
 
-    /**
-     * The minimum {@code Byte} value, -2<sup>7</sup>.
-     */
-    public static final byte MIN_VALUE = (byte) 0x80;
+  public static /* final */ Class<Byte> TYPE;
 
-    /**
-     * The number of bits needed to represent a {@code Byte} value in two's
-     * complement form.
-     *
-     * @since 1.5
-     */
-    public static final int SIZE = 8;
+  public Byte(byte value) {}
 
-    /**
-     * The {@link Class} object that represents the primitive type {@code byte}.
-     */
-    @SuppressWarnings("unchecked")
-    public static final Class<Byte> TYPE
-            = (Class<Byte>) byte[].class.getComponentType();
-    // Note: Byte.TYPE can't be set to "byte.class", since *that* is
-    // defined to be "java.lang.Byte.TYPE";
+  public Byte(String string) throws NumberFormatException {}
 
-    /**
-     * Constructs a new {@code Byte} with the specified primitive byte value.
-     *
-     * @param value
-     *            the primitive byte value to store in the new instance.
-     */
-    public Byte(byte value) {
-        this.value = value;
-    }
+  @Override
+  public native byte byteValue();
 
-    /**
-     * Constructs a new {@code Byte} from the specified string.
-     *
-     * @param string
-     *            the string representation of a single byte value.
-     * @throws NumberFormatException
-     *             if {@code string} cannot be parsed as a byte value.
-     * @see #parseByte(String)
-     */
-    public Byte(String string) throws NumberFormatException {
-        this(parseByte(string));
-    }
+  public native int compareTo(Byte object);
 
-    /**
-     * Gets the primitive value of this byte.
-     *
-     * @return this object's primitive value.
-     */
-    @Override
-    public byte byteValue() {
-        return value;
-    }
+  public static native int compare(byte lhs, byte rhs);
 
-    /**
-     * Compares this object to the specified byte object to determine their
-     * relative order.
-     *
-     * @param object
-     *            the byte object to compare this object to.
-     * @return a negative value if the value of this byte is less than the value
-     *         of {@code object}; 0 if the value of this byte and the value of
-     *         {@code object} are equal; a positive value if the value of this
-     *         byte is greater than the value of {@code object}.
-     * @see java.lang.Comparable
-     * @since 1.2
-     */
-    public int compareTo(Byte object) {
-        return compare(value, object.value);
-    }
+  public static native Byte decode(String string) throws NumberFormatException;
 
-    /**
-     * Compares two {@code byte} values.
-     * @return 0 if lhs = rhs, less than 0 if lhs &lt; rhs, and greater than 0 if lhs &gt; rhs.
-     * @since 1.7
-     */
-    public static int compare(byte lhs, byte rhs) {
-        return lhs > rhs ? 1 : (lhs < rhs ? -1 : 0);
-    }
+  @Override
+  public native double doubleValue();
 
-    /**
-     * Parses the specified string and returns a {@code Byte} instance if the
-     * string can be decoded into a single byte value. The string may be an
-     * optional minus sign "-" followed by a hexadecimal ("0x..." or "#..."),
-     * octal ("0..."), or decimal ("...") representation of a byte.
-     *
-     * @param string
-     *            a string representation of a single byte value.
-     * @return a {@code Byte} containing the value represented by {@code string}.
-     * @throws NumberFormatException
-     *             if {@code string} cannot be parsed as a byte value.
-     */
-    public static Byte decode(String string) throws NumberFormatException {
-        int intValue = Integer.decode(string);
-        byte result = (byte) intValue;
-        if (result == intValue) {
-            return valueOf(result);
-        }
-        throw new NumberFormatException("Value out of range for byte: \"" + string + "\"");
-    }
+  @Override
+  public native boolean equals(Object object);
 
-    @Override
-    public double doubleValue() {
-        return value;
-    }
+  @Override
+  public native float floatValue();
 
-    /**
-     * Compares this object with the specified object and indicates if they are
-     * equal. In order to be equal, {@code object} must be an instance of
-     * {@code Byte} and have the same byte value as this object.
-     *
-     * @param object
-     *            the object to compare this byte with.
-     * @return {@code true} if the specified object is equal to this
-     *         {@code Byte}; {@code false} otherwise.
-     */
-    @Override
-    @FindBugsSuppressWarnings("RC_REF_COMPARISON")
-    public boolean equals(Object object) {
-        return (object == this) || ((object instanceof Byte) && (((Byte) object).value == value));
-    }
+  @Override
+  public native int hashCode();
 
-    @Override
-    public float floatValue() {
-        return value;
-    }
+  @Override
+  public native int intValue();
 
-    @Override
-    public int hashCode() {
-        return value;
-    }
+  @Override
+  public native long longValue();
 
-    @Override
-    public int intValue() {
-        return value;
-    }
+  public static native byte parseByte(String string) throws NumberFormatException;
 
-    @Override
-    public long longValue() {
-        return value;
-    }
+  public static native byte parseByte(String string, int radix) throws NumberFormatException;
 
-    /**
-     * Parses the specified string as a signed decimal byte value. The ASCII
-     * character \u002d ('-') is recognized as the minus sign.
-     *
-     * @param string
-     *            the string representation of a single byte value.
-     * @return the primitive byte value represented by {@code string}.
-     * @throws NumberFormatException
-     *             if {@code string} can not be parsed as a byte value.
-     */
-    public static byte parseByte(String string) throws NumberFormatException {
-        return parseByte(string, 10);
-    }
+  @Override
+  public native short shortValue();
 
-    /**
-     * Parses the specified string as a signed byte value using the specified
-     * radix. The ASCII character \u002d ('-') is recognized as the minus sign.
-     *
-     * @param string
-     *            the string representation of a single byte value.
-     * @param radix
-     *            the radix to use when parsing.
-     * @return the primitive byte value represented by {@code string} using
-     *         {@code radix}.
-     * @throws NumberFormatException
-     *             if {@code string} can not be parsed as a byte value, or
-     *             {@code radix < Character.MIN_RADIX ||
-     *             radix > Character.MAX_RADIX}.
-     */
-    public static byte parseByte(String string, int radix) throws NumberFormatException {
-        int intValue = Integer.parseInt(string, radix);
-        byte result = (byte) intValue;
-        if (result == intValue) {
-            return result;
-        }
-        throw new NumberFormatException("Value out of range for byte: \"" + string + "\"");
-    }
+  @Override
+  public native String toString();
 
-    @Override
-    public short shortValue() {
-        return value;
-    }
+  public static native String toHexString(byte b, boolean upperCase);
 
-    @Override
-    public String toString() {
-        return Integer.toString(value);
-    }
+  public static native String toString(byte value);
 
-    /**
-     * Returns a two-digit hex string. That is, -1 becomes "ff" or "FF" and 2 becomes "02".
-     * @hide internal use only
-     */
-    public static String toHexString(byte b, boolean upperCase) {
-        return IntegralToString.byteToHexString(b, upperCase);
-    }
+  public static native Byte valueOf(String string) throws NumberFormatException;
 
-    /**
-     * Returns a string containing a concise, human-readable description of the
-     * specified byte value.
-     *
-     * @param value
-     *            the byte to convert to a string.
-     * @return a printable representation of {@code value}.
-     */
-    public static String toString(byte value) {
-        return Integer.toString(value);
-    }
+  public static native Byte valueOf(String string, int radix) throws NumberFormatException;
 
-    /**
-     * Parses the specified string as a signed decimal byte value.
-     *
-     * @param string
-     *            the string representation of a single byte value.
-     * @return a {@code Byte} instance containing the byte value represented by
-     *         {@code string}.
-     * @throws NumberFormatException
-     *             if {@code string} can not be parsed as a byte value.
-     * @see #parseByte(String)
-     */
-    public static Byte valueOf(String string) throws NumberFormatException {
-        return valueOf(parseByte(string));
-    }
+  public static native Byte valueOf(byte b);
 
-    /**
-     * Parses the specified string as a signed byte value using the specified
-     * radix.
-     *
-     * @param string
-     *            the string representation of a single byte value.
-     * @param radix
-     *            the radix to use when parsing.
-     * @return a {@code Byte} instance containing the byte value represented by
-     *         {@code string} using {@code radix}.
-     * @throws NumberFormatException
-     *             if {@code string} can not be parsed as a byte value, or
-     *             {@code radix < Character.MIN_RADIX ||
-     *             radix > Character.MAX_RADIX}.
-     * @see #parseByte(String, int)
-     */
-    public static Byte valueOf(String string, int radix) throws NumberFormatException {
-        return valueOf(parseByte(string, radix));
-    }
-
-    /**
-     * Returns a {@code Byte} instance for the specified byte value.
-     * <p>
-     * If it is not necessary to get a new {@code Byte} instance, it is
-     * recommended to use this method instead of the constructor, since it
-     * maintains a cache of instances which may result in better performance.
-     *
-     * @param b
-     *            the byte value to store in the instance.
-     * @return a {@code Byte} instance containing {@code b}.
-     * @since 1.5
-     */
-    public static Byte valueOf(byte b) {
-        return VALUES[b + 128];
-    }
-
-    /**
-     * A cache of instances used by {@link Byte#valueOf(byte)} and auto-boxing
-     */
-    private static final Byte[] VALUES = new Byte[256];
-
-    static {
-        for (int i = -128; i < 128; i++) {
-            VALUES[i + 128] = new Byte((byte) i);
-        }
-    }
-
-  public static int hashCode(byte b) {
-    return b;
-  }
+  public static native int hashCode(byte b);
 }

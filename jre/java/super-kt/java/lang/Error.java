@@ -17,58 +17,16 @@
 
 package java.lang;
 
+import javaemul.internal.annotations.KtNative;
 
-/**
- * {@code Error} is the superclass of all classes that represent unrecoverable
- * errors. When errors are thrown, they should not be caught by application
- * code.
- *
- * @see Throwable
- * @see Exception
- * @see RuntimeException
- */
+@KtNative("kotlin.Error")
 public class Error extends Throwable {
 
-    private static final long serialVersionUID = 4980196508277280342L;
+  public Error() {}
 
-    /**
-     * Constructs a new {@code Error} that includes the current stack trace.
-     */
-    public Error() {
-    }
+  public Error(String detailMessage) {}
 
-    /**
-     * Constructs a new {@code Error} with the current stack trace and the
-     * specified detail message.
-     *
-     * @param detailMessage
-     *            the detail message for this error.
-     */
-    public Error(String detailMessage) {
-        super(detailMessage);
-    }
+  public Error(String detailMessage, Throwable throwable) {}
 
-    /**
-     * Constructs a new {@code Error} with the current stack trace, the
-     * specified detail message and the specified cause.
-     *
-     * @param detailMessage
-     *            the detail message for this error.
-     * @param throwable
-     *            the cause of this error.
-     */
-    public Error(String detailMessage, Throwable throwable) {
-        super(detailMessage, throwable);
-    }
-
-    /**
-     * Constructs a new {@code Error} with the current stack trace and the
-     * specified cause.
-     *
-     * @param throwable
-     *            the cause of this error.
-     */
-    public Error(Throwable throwable) {
-        super(throwable);
-    }
+  public Error(Throwable throwable) {}
 }

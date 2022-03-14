@@ -17,57 +17,15 @@
 
 package java.lang;
 
+import javaemul.internal.annotations.KtNative;
 
-/**
- * {@code Exception} is the superclass of all classes that represent recoverable
- * exceptions. When exceptions are thrown, they may be caught by application
- * code.
- *
- * @see Throwable
- * @see Error
- * @see RuntimeException
- */
+@KtNative("kotlin.Exception")
 public class Exception extends Throwable {
-    private static final long serialVersionUID = -3387516993124229948L;
+  public Exception() {}
 
-    /**
-     * Constructs a new {@code Exception} that includes the current stack trace.
-     */
-    public Exception() {
-    }
+  public Exception(String detailMessage) {}
 
-    /**
-     * Constructs a new {@code Exception} with the current stack trace and the
-     * specified detail message.
-     *
-     * @param detailMessage
-     *            the detail message for this exception.
-     */
-    public Exception(String detailMessage) {
-        super(detailMessage);
-    }
+  public Exception(String detailMessage, Throwable throwable) {}
 
-    /**
-     * Constructs a new {@code Exception} with the current stack trace, the
-     * specified detail message and the specified cause.
-     *
-     * @param detailMessage
-     *            the detail message for this exception.
-     * @param throwable
-     *            the cause of this exception.
-     */
-    public Exception(String detailMessage, Throwable throwable) {
-        super(detailMessage, throwable);
-    }
-
-    /**
-     * Constructs a new {@code Exception} with the current stack trace and the
-     * specified cause.
-     *
-     * @param throwable
-     *            the cause of this exception.
-     */
-    public Exception(Throwable throwable) {
-        super(throwable);
-    }
+  public Exception(Throwable throwable) {}
 }

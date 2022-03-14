@@ -18,56 +18,17 @@
 package java.util;
 
 import java.util.function.Consumer;
+import javaemul.internal.annotations.KtNative;
 
-/**
- * An iterator over a sequence of objects, such as a collection.
- *
- * <p>If a collection has been changed since the iterator was created,
- * methods {@code next} and {@code hasNext()} may throw a {@code ConcurrentModificationException}.
- * It is not possible to guarantee that this mechanism works in all cases of unsynchronized
- * concurrent modification. It should only be used for debugging purposes. Iterators with this
- * behavior are called fail-fast iterators.
- *
- * <p>Implementing {@link Iterable} and returning an {@code Iterator} allows your
- * class to be used as a collection with the enhanced for loop.
- *
- * @param <E>
- *            the type of object returned by the iterator.
- */
+@KtNative("kotlin.collections.MutableIterator")
 public interface Iterator<E> {
-    /**
-     * Returns true if there is at least one more element, false otherwise.
-     * @see #next
-     */
-    public boolean hasNext();
 
-    /**
-     * Returns the next object and advances the iterator.
-     *
-     * @return the next object.
-     * @throws NoSuchElementException
-     *             if there are no more elements.
-     * @see #hasNext
-     */
-    public E next();
+  boolean hasNext();
 
-  /**
-   * Removes the last object returned by {@code next} from the collection. This method can only be
-   * called once between each call to {@code next}.
-   *
-   * @throws UnsupportedOperationException if removing is not supported by the collection being
-   *     iterated.
-   * @throws IllegalStateException if {@code next} has not been called, or {@code remove} has
-   *     already been called after the last call to {@code next}.
-   */
-  default void remove() {
-    throw new UnsupportedOperationException();
-  }
+  E next();
 
-  default void forEachRemaining(Consumer<? super E> consumer) {
-    checkNotNull(consumer);
-    while (hasNext()) {
-      consumer.accept(next());
-    }
-  }
+  // TODO(b/222269323): Java 8 methods below do not exist in Kotlin iterators.
+  default void remove() {}
+
+  default void forEachRemaining(Consumer<? super E> consumer) {}
 }

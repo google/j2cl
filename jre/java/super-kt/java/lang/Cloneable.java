@@ -17,16 +17,9 @@
 
 package java.lang;
 
+import javaemul.internal.annotations.KtNative;
 
-/**
- * This (empty) interface must be implemented by all classes that wish to
- * support cloning. The implementation of {@code clone()} in {@code Object}
- * checks if the object being cloned implements this interface and throws
- * {@code CloneNotSupportedException} if it does not.
- *
- * @see Object#clone
- * @see CloneNotSupportedException
- */
+@KtNative("kotlin.Cloneable")
 public interface Cloneable {
-    // Marker interface
+  // Marker interface
 }

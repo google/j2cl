@@ -17,32 +17,10 @@
 
 package java.lang;
 
-import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 
-// TODO(b/223774683): Java Number should implement Serializable. Kotlin Number doesn't.
-@KtNative("kotlin.Number")
-public abstract class Number {
+@KtNative("kotlin.Comparable")
+public interface Comparable<T> {
 
-  public Number() {}
-
-  // TODO(b/222269323): Make this abstract to match Kotlin.
-  @KtName("toByte")
-  public native byte byteValue();
-
-  @KtName("toDouble")
-  public abstract double doubleValue();
-
-  @KtName("toFloat")
-  public abstract float floatValue();
-
-  @KtName("toInt")
-  public abstract int intValue();
-
-  @KtName("toLong")
-  public abstract long longValue();
-
-  // TODO(b/222269323): Make this abstract to match Kotlin.
-  @KtName("toShort")
-  public native short shortValue();
+  int compareTo(T another);
 }

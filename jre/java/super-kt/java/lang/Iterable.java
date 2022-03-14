@@ -18,32 +18,18 @@ package java.lang;
 
 import java.util.Iterator;
 import java.util.Spliterator;
-import java.util.Spliterators;
 import java.util.function.Consumer;
+import javaemul.internal.annotations.KtNative;
 
-/**
- * Instances of classes that implement this interface can be used with
- * the enhanced for loop.
- *
- * @since 1.5
- */
+@KtNative("kotlin.collections.MutableIterable")
 public interface Iterable<T> {
 
-    /**
-     * Returns an {@link Iterator} for the elements in this object.
-     *
-     * @return An {@code Iterator} instance.
-     */
-    Iterator<T> iterator();
+  Iterator<T> iterator();
 
-  default void forEach(Consumer<? super T> action) {
-    checkNotNull(action);
-    for (T t : this) {
-      action.accept(t);
-    }
-  }
+  // TODO(b/222269323): Java 8 methods below do not exist in Kotlin iterables.
+  default void forEach(Consumer<? super T> action) {}
 
   default Spliterator<T> spliterator() {
-    return Spliterators.spliteratorUnknownSize(iterator(), 0);
+    return null;
   }
 }

@@ -17,56 +17,16 @@
 
 package java.lang;
 
-/**
- * {@code RuntimeException} is the superclass of all classes that represent
- * exceptional conditions which occur as a result of executing an application in
- * the VM. Unlike checked exceptions (exceptions where the type
- * doesn't extend {@code RuntimeException} or {@link Error}), the compiler does
- * not require code to handle runtime exceptions.
- */
+import javaemul.internal.annotations.KtNative;
+
+@KtNative("kotlin.RuntimeException")
 public class RuntimeException extends Exception {
 
-    private static final long serialVersionUID = -7034897190745766939L;
+  public RuntimeException() {}
 
-    /**
-     * Constructs a new {@code RuntimeException} that includes the current stack
-     * trace.
-     */
-    public RuntimeException() {
-    }
+  public RuntimeException(String detailMessage) {}
 
-    /**
-     * Constructs a new {@code RuntimeException} with the current stack trace
-     * and the specified detail message.
-     *
-     * @param detailMessage
-     *            the detail message for this exception.
-     */
-    public RuntimeException(String detailMessage) {
-        super(detailMessage);
-    }
+  public RuntimeException(String detailMessage, Throwable throwable) {}
 
-   /**
-     * Constructs a new {@code RuntimeException} with the current stack trace,
-     * the specified detail message and the specified cause.
-     *
-     * @param detailMessage
-     *            the detail message for this exception.
-     * @param throwable
-     *            the cause of this exception.
-     */
-    public RuntimeException(String detailMessage, Throwable throwable) {
-        super(detailMessage, throwable);
-    }
-
-    /**
-     * Constructs a new {@code RuntimeException} with the current stack trace
-     * and the specified cause.
-     *
-     * @param throwable
-     *            the cause of this exception.
-     */
-    public RuntimeException(Throwable throwable) {
-        super(throwable);
-    }
+  public RuntimeException(Throwable throwable) {}
 }

@@ -17,219 +17,47 @@
 
 package java.lang;
 
-import java.io.Serializable;
+import javaemul.internal.annotations.KtNative;
 
-/**
- * The wrapper for the primitive type {@code boolean}.
- *
- * @since 1.0
- */
-public final class Boolean implements Serializable, Comparable<Boolean> {
+// TODO(b/223774683): Java Boolean should implement Serializable. Kotlin Boolean doesn't.
+@KtNative("kotlin.Boolean")
+public final class Boolean implements Comparable<Boolean> {
 
-    private static final long serialVersionUID = -3665804199014368530L;
+  public static /* final */ Class<Boolean> TYPE;
 
-    /**
-     * The boolean value of the receiver.
-     */
-    private final boolean value;
+  public static /* final */ Boolean TRUE;
 
-    /**
-     * The {@link Class} object that represents the primitive type {@code
-     * boolean}.
-     */
-    @SuppressWarnings("unchecked")
-    public static final Class<Boolean> TYPE
-             = (Class<Boolean>) boolean[].class.getComponentType();
-    // Note: Boolean.TYPE can't be set to "boolean.class", since *that* is
-    // defined to be "java.lang.Boolean.TYPE";
+  public static /* final */ Boolean FALSE;
 
-    /**
-     * The {@code Boolean} object that represents the primitive value
-     * {@code true}.
-     */
-    public static final Boolean TRUE = new Boolean(true);
+  public Boolean(String string) {}
 
-    /**
-     * The {@code Boolean} object that represents the primitive value
-     * {@code false}.
-     */
-    public static final Boolean FALSE = new Boolean(false);
+  public Boolean(boolean value) {}
 
-    /**
-     * Constructs a new {@code Boolean} with its boolean value specified by
-     * {@code string}. If {@code string} is not {@code null} and is equal to
-     * "true" using a non-case sensitive comparison, the result will be a
-     * Boolean representing the primitive value {@code true}, otherwise it will
-     * be a Boolean representing the primitive value {@code false}.
-     *
-     * @param string
-     *            the string representing a boolean value.
-     */
-    public Boolean(String string) {
-        this(parseBoolean(string));
-    }
+  public native boolean booleanValue();
 
-    /**
-     * Constructs a new {@code Boolean} with the specified primitive boolean
-     * value.
-     *
-     * @param value
-     *            the primitive boolean value, {@code true} or {@code false}.
-     */
-    public Boolean(boolean value) {
-        this.value = value;
-    }
+  @Override
+  public native boolean equals(Object o);
 
-    /**
-     * Gets the primitive value of this boolean, either {@code true} or
-     * {@code false}.
-     *
-     * @return this object's primitive value, {@code true} or {@code false}.
-     */
-    public boolean booleanValue() {
-        return value;
-    }
+  public native int compareTo(Boolean that);
 
-    /**
-     * Compares this instance with the specified object and indicates if they
-     * are equal. In order to be equal, {@code o} must be an instance of
-     * {@code Boolean} and have the same boolean value as this object.
-     *
-     * @param o
-     *            the object to compare this boolean with.
-     * @return {@code true} if the specified object is equal to this
-     *         {@code Boolean}; {@code false} otherwise.
-     */
-    @Override
-    @FindBugsSuppressWarnings("RC_REF_COMPARISON_BAD_PRACTICE_BOOLEAN")
-    public boolean equals(Object o) {
-        return (o == this) || ((o instanceof Boolean) && (((Boolean) o).value == value));
-    }
+  public static native int compare(boolean lhs, boolean rhs);
 
-    /**
-     * Compares this object to the specified boolean object to determine their
-     * relative order.
-     *
-     * @param that
-     *            the boolean object to compare this object to.
-     * @return 0 if the value of this boolean and the value of {@code that} are
-     *         equal; a positive value if the value of this boolean is
-     *         {@code true} and the value of {@code that} is {@code false}; a
-     *         negative value if the value if this boolean is {@code false} and
-     *         the value of {@code that} is {@code true}.
-     * @see java.lang.Comparable
-     * @since 1.5
-     */
-    public int compareTo(Boolean that) {
-        return compare(value, that.value);
-    }
+  @Override
+  public native int hashCode();
 
-    /**
-     * Compares two {@code boolean} values.
-     * @return 0 if lhs = rhs, less than 0 if lhs &lt; rhs, and greater than 0 if lhs &gt; rhs.
-     *         (Where true &gt; false.)
-     * @since 1.7
-     */
-    public static int compare(boolean lhs, boolean rhs) {
-        return lhs == rhs ? 0 : lhs ? 1 : -1;
-    }
+  @Override
+  public native String toString();
 
-    /**
-     * Returns an integer hash code for this boolean.
-     *
-     * @return this boolean's hash code, which is {@code 1231} for {@code true}
-     *         values and {@code 1237} for {@code false} values.
-     */
-    @Override
-    public int hashCode() {
-        return value ? 1231 : 1237;
-    }
+  // J2KT: Removed for now
+  // public native static boolean getBoolean(String string);
 
-    /**
-     * Returns a string containing a concise, human-readable description of this
-     * boolean.
-     *
-     * @return "true" if the value of this boolean is {@code true}, "false"
-     *         otherwise.
-     */
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
+  public static native boolean parseBoolean(String s);
 
-    /**
-     * Returns the {@code boolean} value of the system property identified by
-     * {@code string}.
-     *
-     * @param string
-     *            the name of the requested system property.
-     * @return {@code true} if the system property named by {@code string}
-     *         exists and it is equal to "true" using case insensitive
-     *         comparison, {@code false} otherwise.
-     * @see System#getProperty(String)
-     */
-    public static boolean getBoolean(String string) {
-        if (string == null || string.length() == 0) {
-            return false;
-        }
-        return (parseBoolean(System.getProperty(string)));
-    }
+  public static native String toString(boolean value);
 
-    /**
-     * Parses the specified string as a {@code boolean}.
-     *
-     * @param s
-     *            the string representation of a boolean value.
-     * @return {@code true} if {@code s} is not {@code null} and is equal to
-     *         {@code "true"} using case insensitive comparison, {@code false}
-     *         otherwise.
-     * @since 1.5
-     */
-    public static boolean parseBoolean(String s) {
-        return "true".equalsIgnoreCase(s);
-    }
+  public static native Boolean valueOf(String string);
 
-    /**
-     * Converts the specified boolean to its string representation.
-     *
-     * @param value
-     *            the boolean to convert.
-     * @return "true" if {@code value} is {@code true}, "false" otherwise.
-     */
-    public static String toString(boolean value) {
-        return String.valueOf(value);
-    }
+  public static native Boolean valueOf(boolean b);
 
-    /**
-     * Parses the specified string as a boolean value.
-     *
-     * @param string
-     *            the string representation of a boolean value.
-     * @return {@code Boolean.TRUE} if {@code string} is equal to "true" using
-     *         case insensitive comparison, {@code Boolean.FALSE} otherwise.
-     * @see #parseBoolean(String)
-     */
-    public static Boolean valueOf(String string) {
-        return parseBoolean(string) ? Boolean.TRUE : Boolean.FALSE;
-    }
-
-    /**
-     * Returns a {@code Boolean} instance for the specified boolean value.
-     * <p>
-     * If it is not necessary to get a new {@code Boolean} instance, it is
-     * recommended to use this method instead of the constructor, since it
-     * returns its static instances, which results in better performance.
-     *
-     * @param b
-     *            the boolean to convert to a {@code Boolean}.
-     * @return {@code Boolean.TRUE} if {@code b} is equal to {@code true},
-     *         {@code Boolean.FALSE} otherwise.
-     */
-    public static Boolean valueOf(boolean b) {
-        return b ? Boolean.TRUE : Boolean.FALSE;
-    }
-
-  public static int hashCode(boolean value) {
-    return value ? 1231 : 1237;
-  }
+  public static native int hashCode(boolean value);
 }
