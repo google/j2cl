@@ -37,6 +37,13 @@ public class DefaultNotNullable {
   private String @NullableType [] f10 = {};
   private Void f11 = null;
   @Nonnull private Object f12 = new Object();
+  private Object f13;
+  @Nullable private Object f14;
+
+  public DefaultNotNullable() {
+    f13 = new Object();
+  }
+
   public String m1(String a, List<Double> b) {
     return "";
   }

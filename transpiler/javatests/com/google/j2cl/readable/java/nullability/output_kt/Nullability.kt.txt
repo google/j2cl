@@ -23,7 +23,13 @@ open class Nullability {
 
  internal var f12: kotlin.collections.MutableList<kotlin.String?>? = java.util.ArrayList<kotlin.String?>()
 
- constructor(a: kotlin.String)
+ internal var f13: kotlin.Any
+
+ internal var f14: kotlin.Any? = null
+
+ constructor(a: kotlin.String) {
+  this.f13 = (java.lang.Object() as kotlin.Any)
+ }
 
  open fun m1(a: kotlin.String, b: kotlin.collections.MutableList<kotlin.Double>, c: kotlin.String?): kotlin.String {
   return ""

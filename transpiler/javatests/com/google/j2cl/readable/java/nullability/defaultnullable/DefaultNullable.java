@@ -41,6 +41,13 @@ public class DefaultNullable {
     return "";
   }
 
+  @Nonnull private Object f13;
+  private Object f14;
+
+  public DefaultNullable() {
+    f13 = new Object();
+  }
+
   @Nullable
   public String m2(@Nullable String a, List<@NullableType Double> b) {
     return null;

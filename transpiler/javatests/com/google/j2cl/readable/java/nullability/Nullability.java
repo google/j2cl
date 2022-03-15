@@ -41,9 +41,13 @@ public class Nullability {
   private @NonNull String[] f10 = {};
   // Conversion from generic type parameter.
   private List<String> f12 = new ArrayList<>();
+  @Nonnull private Object f13;
+  private Object f14;
 
   @JsConstructor
-  public Nullability(@Nonnull String a) {}
+  public Nullability(@Nonnull String a) {
+    f13 = new Object();
+  }
 
   @Nonnull
   public String m1(@Nonnull String a, @Nonnull List<@NonNull Double> b, String c) {
