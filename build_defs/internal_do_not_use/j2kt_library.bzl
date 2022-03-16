@@ -3,5 +3,8 @@
 
 J2KT_LIB_ATTRS = {}
 
-def j2kt_library(**kwargs):
-  pass
+def j2kt_jvm_library(**kwargs):
+    pass
+
+def j2kt_native_library(**kwargs):
+    pass

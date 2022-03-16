@@ -22,7 +22,7 @@ def _j2kt_import_impl(ctx):
         java_info,
     ]
 
-j2kt_import = rule(
+j2kt_jvm_import = rule(
     implementation = _j2kt_import_impl,
     fragments = ["java"],
     attrs = {"jar": attr.label(providers = [JavaInfo])},

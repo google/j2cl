@@ -19,7 +19,10 @@ load(
     "j2cl_library",
     "j2wasm_application",
 )
+load("@bazel_tools//tools/build_defs/apple:ios.bzl", "ios_build_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@bazel_tools//tools/build_defs/kotlin/release/rules/native:native_rules.bzl", "kt_apple_framework")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -37,6 +40,7 @@ def readable_example(
         wasm_entry_points = [],
         generate_kt_readables = True,
         build_kt_readables = True,
+        build_kt_native_readables = False,
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -62,7 +66,8 @@ def readable_example(
         tags = j2cl_library_tags,
         readable_source_maps = True,
         readable_library_info = generate_library_info,
-        generate_j2kt_library = generate_kt_readables,
+        generate_j2kt_jvm_library = generate_kt_readables,
+        generate_j2kt_native_library = generate_kt_readables and build_kt_native_readables,
         **kwargs
     )
 
@@ -116,16 +121,38 @@ def readable_example(
     if generate_kt_readables:
         _readable_diff_test(
             name = "readable_j2kt_golden",
-            target = ":readable-j2kt.kt",
+            target = ":readable-j2kt-jvm.kt",
             dir_out = "output_kt",
             tags = ["j2kt"],
         )
 
         if build_kt_readables:
             build_test(
-                name = "readable_j2kt_build_test",
-                targets = [":libreadable-j2kt.kt.jar"],
+                name = "readable_j2kt_jvm_build_test",
+                targets = [":libreadable-j2kt-jvm.kt.jar"],
                 tags = ["j2kt"],
+            )
+
+        if build_kt_native_readables:
+            write_file(
+                name = "readable_j2kt_module",
+                out = "J2ktModule.kt",
+                content = ["// EmptyFile"],
+                tags = ["j2kt", "ios"],
+            )
+
+            kt_apple_framework(
+                name = "readable_j2kt_test_framework",
+                srcs = ["J2ktModule.kt"],
+                deps = [":readable-j2kt-native"],
+                tags = ["j2kt", "ios"],
+            )
+
+            ios_build_test(
+                name = "readable_j2kt_native_build_test",
+                targets = [":readable_j2kt_test_framework"],
+                minimum_os_version = "10.0",
+                tags = ["j2kt", "ios"],
             )
 
 def _readable_diff_test(name, target, dir_out, tags):

@@ -30,13 +30,19 @@ load(":j2cl_common.bzl", "J2clInfo")
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
 load(":j2cl_util.bzl", "to_parallel_targets")
 load(":j2kt_common.bzl", "j2kt_common")
-load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_library")
+load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_jvm_library", "j2kt_native_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 
-_J2KT_PACKAGES = [
+# Packages that j2cl rule will generage j2kt jvm packages by default. Used to simplify test
+# rules.
+_J2KT_JVM_PACKAGES = [
     "transpiler/javatests/com/google/j2cl/readable/java",
 ]
+
+# Packages that j2cl rule will generage j2kt native packages by default. Used to simplify test
+# rules.
+_J2KT_NATIVE_PACKAGES = []
 
 _J2WASM_PACKAGES = [
     "third_party/java/auto",
@@ -66,7 +72,8 @@ _tree_artifact_proxy = rule(
 def j2cl_library(
         name,
         generate_build_test = None,
-        generate_j2kt_library = None,
+        generate_j2kt_native_library = None,
+        generate_j2kt_jvm_library = None,
         generate_j2wasm_library = None,
         **kwargs):
     """Translates Java source into JS source encapsulated by a JsInfo provider.
@@ -131,23 +138,45 @@ def j2cl_library(
             **j2wasm_args
         )
 
-    j2kt_library_name = j2kt_common.to_j2kt_name(name)
+    j2kt_native_library_name = j2kt_common.to_j2kt_native_name(name)
 
-    if generate_j2kt_library == None:
+    if generate_j2kt_native_library == None:
         # By default refer back to allow list for implicit j2kt target generation.
-        generate_j2kt_library = (
-            not native.existing_rule(j2kt_library_name) and
-            any([p for p in _J2KT_PACKAGES if native.package_name().startswith(p)])
+        generate_j2kt_native_library = (
+            not native.existing_rule(j2kt_native_library_name) and
+            any([p for p in _J2KT_NATIVE_PACKAGES if native.package_name().startswith(p)])
         )
 
-    if generate_j2kt_library:
+    if generate_j2kt_native_library:
         j2kt_args = _filter_j2kt_attrs(dict(kwargs))
 
-        to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_name)
-        to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_name)
+        to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_native_name)
+        to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_native_name)
+        j2kt_args["tags"] = j2kt_args.get("tags", []) + ["j2kt", "ios"]
 
-        j2kt_library(
-            name = j2kt_library_name,
+        j2kt_native_library(
+            name = j2kt_native_library_name,
+            **j2kt_args
+        )
+
+    j2kt_jvm_library_name = j2kt_common.to_j2kt_jvm_name(name)
+
+    if generate_j2kt_jvm_library == None:
+        # By default refer back to allow list for implicit j2kt target generation.
+        generate_j2kt_jvm_library = (
+            not native.existing_rule(j2kt_jvm_library_name) and
+            any([p for p in _J2KT_JVM_PACKAGES if native.package_name().startswith(p)])
+        )
+
+    if generate_j2kt_jvm_library:
+        j2kt_args = _filter_j2kt_attrs(dict(kwargs))
+        j2kt_args["tags"] = j2kt_args.get("tags", []) + ["j2kt"]
+
+        to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_jvm_name)
+        to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_jvm_name)
+
+        j2kt_jvm_library(
+            name = j2kt_jvm_library_name,
             **j2kt_args
         )
 

@@ -148,8 +148,7 @@ j2cl_library(
     javacopts = JRE_JAVAC_OPTS,
     visibility = [
         "//:__pkg__",
-        # Temporary for j2kt_library
-        "//transpiler/javatests:__subpackages__",
+        "//transpiler/javatests/com/google/j2cl/transpiler:__pkg__",
     ],
     exports = [
         # J2CL transpiler optimizations to AutoValue may add this dependency.
