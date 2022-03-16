@@ -1,0 +1,31 @@
+goog.module('nativekttypes.NativeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template S
+ */
+class NativeInterface {
+ 
+ static $clinit() {
+  NativeInterface.$clinit = () =>{};
+  NativeInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nativekttypes_NativeInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nativekttypes_NativeInterface;
+ }
+ 
+ static $loadModules() {}
+}
+NativeInterface.$markImplementor(/**@type {Function}*/ (NativeInterface));
+$Util.$setClassMetadataForInterface(NativeInterface, 'nativekttypes.NativeInterface');
+
+exports = NativeInterface;
+
+//# sourceMappingURL=NativeInterface.js.map

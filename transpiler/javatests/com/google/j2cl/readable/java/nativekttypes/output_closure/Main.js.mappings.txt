@@ -1,0 +1,69 @@
+[Main] => [Main]
+[Main] => [constructor]
+[Main] => [super();] "nativekttypes.Main.<synthetic: ctor_js>"
+[Main] => [/**@type {NativeTopLevel<?string>}*/
+  this.f_topLevelField__nativekttypes_Main;] "nativekttypes.Main.<synthetic: ctor_js>"
+[topLevelField] => [f_topLevelField__nativekttypes_Main]
+[Main] => [/**@type {Nested<?string>}*/
+  this.f_nestedField__nativekttypes_Main;] "nativekttypes.Main.<synthetic: ctor_js>"
+[nestedField] => [f_nestedField__nativekttypes_Main]
+[Main] => [/**@type {Inner<?string, ?string>}*/
+  this.f_innerField__nativekttypes_Main;] "nativekttypes.Main.<synthetic: ctor_js>"
+[innerField] => [f_innerField__nativekttypes_Main]
+[Main] => [$create__]
+[Main] => [Main.$clinit();] "nativekttypes.Main.<synthetic: ctor_create>"
+[Main] => [let $instance = new Main();] "nativekttypes.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__nativekttypes_Main__();] "nativekttypes.Main.<synthetic: ctor_create>"
+[Main] => [return $instance;] "nativekttypes.Main.<synthetic: ctor_create>"
+[Main] => [$ctor__nativekttypes_Main__]
+[Main] => [this.$ctor__java_lang_Object__();] "nativekttypes.Main.<init>"
+[methodArguments] => [m_methodArguments__nativekttypes_NativeTopLevel__nativekttypes_NativeTopLevel_Nested__nativekttypes_NativeTopLevel_Inner]
+[foo] => [foo] "foo"
+[nested] => [nested] "nested"
+[inner] => [inner] "inner"
+[memberAccess] => [m_memberAccess__]
+[NativeTopLevel<String> foo = new NativeTopLevel<>("foo");] => [let foo = /**@type {!NativeTopLevel<?string>}*/ (NativeTopLevel.$create__java_lang_Object('foo'));] "nativekttypes.Main.memberAccess"
+[foo] => [foo] "foo"
+[String fooInstanceMethod = foo.instanceMethod("foo");] => [let fooInstanceMethod = /**@type {?string}*/ ($Casts.$to(foo.instanceMethod('foo'), j_l_String));] "nativekttypes.Main.memberAccess"
+[fooInstanceMethod] => [fooInstanceMethod] "fooInstanceMethod"
+[String fooStaticMethod = foo.staticMethod("foo");] => [let fooStaticMethod = /**@type {?string}*/ ($Casts.$to((foo, NativeTopLevel.staticMethod('foo')), j_l_String));] "nativekttypes.Main.memberAccess"
+[fooStaticMethod] => [fooStaticMethod] "fooStaticMethod"
+[String fooInstanceField = foo.instanceField;] => [let fooInstanceField = /**@type {?string}*/ ($Casts.$to(foo.f_instanceField__nativekttypes_NativeTopLevel, j_l_String));] "nativekttypes.Main.memberAccess"
+[fooInstanceField] => [fooInstanceField] "fooInstanceField"
+[foo.instanceField = "foo";] => [foo.f_instanceField__nativekttypes_NativeTopLevel = 'foo';] "nativekttypes.Main.memberAccess"
+[Object fooStaticField = foo.staticField;] => [let fooStaticField = (foo, NativeTopLevel.f_staticField__nativekttypes_NativeTopLevel);] "nativekttypes.Main.memberAccess"
+[fooStaticField] => [fooStaticField] "fooStaticField"
+[foo.staticField = "foo";] => [NativeTopLevel.f_staticField__nativekttypes_NativeTopLevel = 'foo';] "nativekttypes.Main.memberAccess"
+[NativeTopLevel.Nested<String> nested = new NativeTopLevel.Nested<>("foo");] => [let nested = /**@type {!Nested<?string>}*/ (Nested.$create__java_lang_Object('foo'));] "nativekttypes.Main.memberAccess"
+[nested] => [nested] "nested"
+[String nestedInstanceMethod = nested.instanceMethod("foo");] => [let nestedInstanceMethod = /**@type {?string}*/ ($Casts.$to(nested.instanceMethod('foo'), j_l_String));] "nativekttypes.Main.memberAccess"
+[nestedInstanceMethod] => [nestedInstanceMethod] "nestedInstanceMethod"
+[String nestedStaticMethod = nested.staticMethod("foo");] => [let nestedStaticMethod = /**@type {?string}*/ ($Casts.$to((nested, Nested.staticMethod('foo')), j_l_String));] "nativekttypes.Main.memberAccess"
+[nestedStaticMethod] => [nestedStaticMethod] "nestedStaticMethod"
+[String nestedInstanceField = nested.instanceField;] => [let nestedInstanceField = /**@type {?string}*/ ($Casts.$to(nested.f_instanceField__nativekttypes_NativeTopLevel_Nested, j_l_String));] "nativekttypes.Main.memberAccess"
+[nestedInstanceField] => [nestedInstanceField] "nestedInstanceField"
+[nested.instanceField = "foo";] => [nested.f_instanceField__nativekttypes_NativeTopLevel_Nested = 'foo';] "nativekttypes.Main.memberAccess"
+[Object nestedStaticField = nested.staticField;] => [let nestedStaticField = (nested, Nested.f_staticField__nativekttypes_NativeTopLevel_Nested);] "nativekttypes.Main.memberAccess"
+[nestedStaticField] => [nestedStaticField] "nestedStaticField"
+[nested.staticField = "foo";] => [Nested.f_staticField__nativekttypes_NativeTopLevel_Nested = 'foo';] "nativekttypes.Main.memberAccess"
+[NativeTopLevel<String>.Inner<String> inner = foo.new Inner<String>("foo");] => [let inner = /**@type {!Inner<?string, ?string>}*/ (Inner.$create__nativekttypes_NativeTopLevel__java_lang_Object(foo, 'foo'));] "nativekttypes.Main.memberAccess"
+[inner] => [inner] "inner"
+[typeLiterals] => [m_typeLiterals__]
+[Class<?> c1 = NativeTopLevel.class;] => [let c1 = Class.$get(NativeTopLevel);] "nativekttypes.Main.typeLiterals"
+[c1] => [c1] "c1"
+[Class<?> c2 = NativeTopLevel.Nested.class;] => [let c2 = Class.$get(Nested);] "nativekttypes.Main.typeLiterals"
+[c2] => [c2] "c2"
+[Class<?> c3 = NativeTopLevel.Inner.class;] => [let c3 = Class.$get(Inner);] "nativekttypes.Main.typeLiterals"
+[c3] => [c3] "c3"
+[casts] => [m_casts__]
+[NativeTopLevel<String> o1 = (NativeTopLevel<String>) null;] => [let o1 = /**@type {NativeTopLevel<?string>}*/ (null);] "nativekttypes.Main.casts"
+[o1] => [o1] "o1"
+[NativeTopLevel.Nested<String> o2 = (NativeTopLevel.Nested<String>) null;] => [let o2 = /**@type {Nested<?string>}*/ (null);] "nativekttypes.Main.casts"
+[o2] => [o2] "o2"
+[NativeTopLevel<String>.Inner<String> o3 = (NativeTopLevel<String>.Inner<String>) null;] => [let o3 = /**@type {Inner<?string, ?string>}*/ (null);] "nativekttypes.Main.casts"
+[o3] => [o3] "o3"
+[Main] => [$clinit]
+[Main] => [Main.$clinit = () =>{};] "nativekttypes.Main.<clinit>"
+[Main] => [Main.$loadModules();] "nativekttypes.Main.<clinit>"
+[Main] => [j_l_Object.$clinit();] "nativekttypes.Main.<clinit>"
+

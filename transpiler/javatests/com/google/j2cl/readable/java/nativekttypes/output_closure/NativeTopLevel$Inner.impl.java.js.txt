@@ -1,0 +1,47 @@
+goog.module('nativekttypes.NativeTopLevel.Inner$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NativeTopLevel = goog.forwardDeclare('nativekttypes.NativeTopLevel$impl');
+
+/**
+ * @template I, O
+ */
+class Inner extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {NativeTopLevel<O>}*/
+  this.$outer_this__nativekttypes_NativeTopLevel_Inner;
+ }
+ /** @template I, O @return {!Inner<I, O>} */
+ static $create__nativekttypes_NativeTopLevel__java_lang_Object(/** NativeTopLevel<O> */ $outer_this, /** I */ i) {
+  Inner.$clinit();
+  let $instance = new Inner();
+  $instance.$ctor__nativekttypes_NativeTopLevel_Inner__nativekttypes_NativeTopLevel__java_lang_Object($outer_this, i);
+  return $instance;
+ }
+ 
+ $ctor__nativekttypes_NativeTopLevel_Inner__nativekttypes_NativeTopLevel__java_lang_Object(/** NativeTopLevel<O> */ $outer_this, /** I */ i) {
+  this.$outer_this__nativekttypes_NativeTopLevel_Inner = $outer_this;
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  Inner.$clinit = () =>{};
+  Inner.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Inner;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Inner, 'nativekttypes.NativeTopLevel$Inner');
+
+exports = Inner;
+
+//# sourceMappingURL=NativeTopLevel$Inner.js.map

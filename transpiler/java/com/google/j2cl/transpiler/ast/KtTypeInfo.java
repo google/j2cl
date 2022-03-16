@@ -16,16 +16,11 @@
 package com.google.j2cl.transpiler.ast;
 
 import com.google.auto.value.AutoValue;
-import javax.annotation.Nullable;
 
 /** Kotlin type information. */
 @AutoValue
 public abstract class KtTypeInfo {
-  @Nullable
-  public abstract String getPackageName();
-
-  @Nullable
-  public abstract String getName();
+  public abstract String getQualifiedName();
 
   public abstract Builder toBuilder();
 
@@ -36,9 +31,7 @@ public abstract class KtTypeInfo {
   /** The builder. */
   @AutoValue.Builder
   public abstract static class Builder {
-    public abstract Builder setPackageName(@Nullable String packageName);
-
-    public abstract Builder setName(@Nullable String name);
+    public abstract Builder setQualifiedName(String qualifiedName);
 
     public abstract KtTypeInfo build();
   }

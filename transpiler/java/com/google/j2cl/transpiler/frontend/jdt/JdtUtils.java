@@ -1139,6 +1139,7 @@ class JdtUtils {
         .setLocal(isLocal(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
         .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
+        .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
         .setNullMarked(isNullMarked)
         .setPackageName(packageName)
         .setSuperTypeDescriptorFactory(

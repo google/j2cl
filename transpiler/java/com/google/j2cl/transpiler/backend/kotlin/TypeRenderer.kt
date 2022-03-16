@@ -25,6 +25,13 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 import java.util.stream.Collectors
 
 fun Renderer.renderType(type: Type) {
+  // Don't render KtNative types. We should never see them except readables.
+  if (type.declaration.isKtNative) {
+    render("// native class ")
+    renderIdentifier(type.declaration.simpleSourceName)
+    return
+  }
+
   if (type.isClass && !type.declaration.isFinal) {
     if (type.declaration.isAbstract) render("abstract ") else render("open ")
   }

@@ -1,0 +1,58 @@
+goog.module('nativekttypes.NativeTopLevel$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template O
+ */
+class NativeTopLevel extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {O}*/
+  this.f_instanceField__nativekttypes_NativeTopLevel;
+ }
+ /** @template O @return {!NativeTopLevel<O>} */
+ static $create__java_lang_Object(/** O */ o) {
+  NativeTopLevel.$clinit();
+  let $instance = new NativeTopLevel();
+  $instance.$ctor__nativekttypes_NativeTopLevel__java_lang_Object(o);
+  return $instance;
+ }
+ 
+ $ctor__nativekttypes_NativeTopLevel__java_lang_Object(/** O */ o) {
+  this.$ctor__java_lang_Object__();
+ }
+ // /** @return {O} */
+ // native instanceMethod(/** O */ o) 
+ // /** @template S @return {S} */
+ // native static staticMethod(/** S */ s) 
+ /** @return {*} */
+ static get f_staticField__nativekttypes_NativeTopLevel() {
+  return (NativeTopLevel.$clinit(), NativeTopLevel.$static_staticField__nativekttypes_NativeTopLevel);
+ }
+ 
+ static set f_staticField__nativekttypes_NativeTopLevel(/** * */ value) {
+  (NativeTopLevel.$clinit(), NativeTopLevel.$static_staticField__nativekttypes_NativeTopLevel = value);
+ }
+ 
+ static $clinit() {
+  NativeTopLevel.$clinit = () =>{};
+  NativeTopLevel.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeTopLevel;
+ }
+ 
+ static $loadModules() {}
+}
+/**@private {*}*/
+NativeTopLevel.$static_staticField__nativekttypes_NativeTopLevel;
+$Util.$setClassMetadata(NativeTopLevel, 'nativekttypes.NativeTopLevel');
+
+exports = NativeTopLevel;
+
+//# sourceMappingURL=NativeTopLevel.js.map

@@ -33,6 +33,7 @@ public class FrontendConstants {
   public static final String JS_PACKAGE_ANNOTATION_NAME = "jsinterop.annotations.JsPackage";
   public static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
   public static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
+  public static final String KT_NATIVE_ANNOTATION_NAME = "javaemul.internal.annotations.KtNative";
   public static final String SUPPRESS_WARNINGS_ANNOTATION_NAME = "java.lang.SuppressWarnings";
   public static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
       "javaemul.internal.annotations.DoNotAutobox";

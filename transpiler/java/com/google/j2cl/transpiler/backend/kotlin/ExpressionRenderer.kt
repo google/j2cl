@@ -424,7 +424,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       // TODO(b/206482966): Move the checks in the backend to a verifier pass.
       renderTypeDescriptor(
         memberReference.target.enclosingTypeDescriptor,
-        asJava = true,
+        asJava = mapsToKotlin(memberReference.target.enclosingTypeDescriptor),
         asName = true
       )
       render(".")

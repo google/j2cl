@@ -1,0 +1,43 @@
+package nativekttypes.nativekt
+
+open class KTopLevel<O> {
+ @kotlin.jvm.JvmField var instanceField: O? = null
+
+ constructor(o: O?)
+
+ open fun instanceMethod(o: O?): O? {
+  return o
+ }
+
+ companion object {
+  @kotlin.jvm.JvmField var staticField: kotlin.Any? = null
+
+  @kotlin.jvm.JvmStatic
+  fun <S> staticMethod(s: S?): S? {
+   return s
+  }
+ }
+
+ open class KNested<N> {
+  @kotlin.jvm.JvmField var instanceField: N? = null
+
+  constructor(n: N?)
+
+  open fun instanceMethod(n: N?): N? {
+   return n
+  }
+
+  companion object {
+   @kotlin.jvm.JvmField var staticField: kotlin.Any? = null
+
+   @kotlin.jvm.JvmStatic
+   fun <S> staticMethod(s: S?): S? {
+    return s
+   }
+  }
+ }
+
+ open inner class KInner<I> {
+  constructor(i: I?)
+ }
+}
