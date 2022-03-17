@@ -162,7 +162,7 @@ def main(argv):
   wasm_readable_dirs = get_readable_dirs(
       readable_pattern, "_wasm") if "WASM" in args.platforms else []
   kt_readable_dirs = get_readable_dirs(
-      readable_pattern, "-j2kt") if "J2KT" in args.platforms else []
+      readable_pattern, "-j2kt-jvm") if "J2KT" in args.platforms else []
 
   if not js_readable_dirs and not wasm_readable_dirs and not kt_readable_dirs:
     print("No matching readables!")
