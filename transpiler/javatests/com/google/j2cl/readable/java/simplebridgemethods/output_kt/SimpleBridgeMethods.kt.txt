@@ -1,14 +1,14 @@
 package simplebridgemethods
 
-open class Superclass<T: java.lang.Error?> {
+open class Superclass<T: kotlin.Error?> {
  open fun m1(t: T?) {}
 }
 
-open class Subclass: simplebridgemethods.Superclass<java.lang.AssertionError?>() {
- open override fun m1(a: java.lang.AssertionError?) {}
+open class Subclass: simplebridgemethods.Superclass<kotlin.AssertionError?>() {
+ open override fun m1(a: kotlin.AssertionError?) {}
 }
 
-open class AnotherSubclass: simplebridgemethods.Superclass<java.lang.AssertionError?>() {}
+open class AnotherSubclass: simplebridgemethods.Superclass<kotlin.AssertionError?>() {}
 
 fun interface Callable<V> {
  fun call(v: V?)
@@ -18,7 +18,7 @@ open class Task<T>: simplebridgemethods.Callable<T> {
  open override fun call(t: T?) {}
 }
 
-open class AnotherTask<T: java.lang.AssertionError?>: simplebridgemethods.Callable<simplebridgemethods.Superclass<T>?> {
+open class AnotherTask<T: kotlin.AssertionError?>: simplebridgemethods.Callable<simplebridgemethods.Superclass<T>?> {
  open override fun call(t: simplebridgemethods.Superclass<T>?) {}
 }
 

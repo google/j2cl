@@ -11,7 +11,7 @@ open class LocalNameCollision {
   val com_google_j2cl_readable_localnamecollision_package1_A: Int = 1
   val com_google_j2cl_readable_localnamecollision_package2_A: Int = 1
   val A: Int = 1
-  LocalNameCollision = RuntimeException is localnamecollision.LocalNameCollision || RuntimeException is java.lang.RuntimeException || RuntimeException is localnamecollision.package1.A || RuntimeException is localnamecollision.package2.A || RuntimeException is localnamecollision.Class
+  LocalNameCollision = RuntimeException is localnamecollision.LocalNameCollision || RuntimeException is kotlin.RuntimeException || RuntimeException is localnamecollision.package1.A || RuntimeException is localnamecollision.package2.A || RuntimeException is localnamecollision.Class
   assert(localnamecollision.Asserts().n() === 5)
  }
 

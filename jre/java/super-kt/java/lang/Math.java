@@ -17,9 +17,8 @@
 
 package java.lang;
 
-import javaemul.internal.annotations.KtNative;
-
-@KtNative("javaemul.lang.Math")
+// TODO(b/222484176): This version of the file works for bootclasspath but in its current state it
+// cannot be used as a source file for the J2KT JRE for Kotlin Native.
 public final class Math {
   public static /* final */ double E;
 

@@ -72,7 +72,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
   @kotlin.jvm.JvmStatic
   fun testCastToParamterizedType() {
    val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
-   var cc: cast.CastGenerics<java.lang.Error?, kotlin.Number?>? = o as cast.CastGenerics<java.lang.Error?, kotlin.Number?>?
+   var cc: cast.CastGenerics<kotlin.Error?, kotlin.Number?>? = o as cast.CastGenerics<kotlin.Error?, kotlin.Number?>?
    cc = o as cast.CastGenerics<*, *>?
   }
 

@@ -3,28 +3,28 @@ package trycatch
 open class TryCatch {
  open fun testMultiCatch() {
   try {
-   throw java.lang.ClassCastException()
-  } catch (e: java.lang.NullPointerException) {
+   throw kotlin.ClassCastException()
+  } catch (e: kotlin.NullPointerException) {
    throw e!!
-  } catch (e: java.lang.ClassCastException) {
+  } catch (e: kotlin.ClassCastException) {
    throw e!!
-  } catch (r: java.lang.RuntimeException) {
+  } catch (r: kotlin.RuntimeException) {
    r = null
   }
  }
 
  open fun testEmptyThrowableCatch() {
   try {
-   throw java.lang.ClassCastException()
+   throw kotlin.ClassCastException()
   } catch (e: kotlin.Throwable) {}
   try {
-   throw java.lang.ClassCastException()
-  } catch (e_1: java.lang.Exception) {} catch (e_2: kotlin.Throwable) {}
+   throw kotlin.ClassCastException()
+  } catch (e_1: kotlin.Exception) {} catch (e_2: kotlin.Throwable) {}
  }
 
  open fun testEmptyThrowableRethrow() {
   try {
-   throw java.lang.ClassCastException()
+   throw kotlin.ClassCastException()
   } catch (e: kotlin.Throwable) {
    throw e!!
   }
@@ -40,8 +40,8 @@ open class TryCatch {
   (trycatch.TryCatch.ClosableThing()).use { thing: trycatch.TryCatch.ClosableThing? ->
    (trycatch.TryCatch.ClosableThing()).use { thing2: trycatch.TryCatch.ClosableThing? ->
     try {
-     throw java.lang.Exception()
-    } catch (e: java.lang.Exception) {}
+     throw kotlin.Exception()
+    } catch (e: kotlin.Exception) {}
    }
   }
  }
@@ -52,8 +52,8 @@ open class TryCatch {
   (thing).use { `$resource`: trycatch.TryCatch.ClosableThing? ->
    (thing2).use { `$resource_1`: trycatch.TryCatch.ClosableThing? ->
     try {
-     throw java.lang.Exception()
-    } catch (e: java.lang.Exception) {}
+     throw kotlin.Exception()
+    } catch (e: kotlin.Exception) {}
    }
   }
  }
@@ -61,23 +61,23 @@ open class TryCatch {
  open fun testTryWithResouceOnStaticField() {
   (trycatch.TryCatch.closableThing).use { `$resource`: trycatch.TryCatch.ClosableThing? ->
    try {
-    throw java.lang.Exception()
-   } catch (e: java.lang.Exception) {}
+    throw kotlin.Exception()
+   } catch (e: kotlin.Exception) {}
   }
  }
 
  open fun testNestedTryCatch() {
   try {
-   throw java.lang.Exception()
-  } catch (ae: java.lang.Exception) {
+   throw kotlin.Exception()
+  } catch (ae: kotlin.Exception) {
    try {
-    throw java.lang.Exception()
-   } catch (ie: java.lang.Exception) {}
+    throw kotlin.Exception()
+   } catch (ie: kotlin.Exception) {}
   }
  }
 
  open fun testThrowGenerics() {
-  throw this.getT(java.lang.Exception())!!
+  throw this.getT(kotlin.Exception())!!
  }
 
  internal fun <T> getT(t: T?): T? {

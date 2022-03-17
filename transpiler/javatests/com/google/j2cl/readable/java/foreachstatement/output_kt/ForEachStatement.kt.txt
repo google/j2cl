@@ -12,7 +12,7 @@ open class ForEachStatement {
 
  internal fun testMulticatch() {
   try {
-   throw java.lang.Exception()
+   throw kotlin.Exception()
   } catch (e: foreachstatement.ForEachStatement.Exception1) {
    FOR_EACH@ for (o in e) {}
   } catch (e: foreachstatement.ForEachStatement.Exception2) {
@@ -27,13 +27,13 @@ open class ForEachStatement {
   FOR_EACH_1@ for (s_1 in anotherIterable!!) {}
  }
 
- open class Exception1: kotlin.collections.MutableIterable<kotlin.String?>, java.lang.Exception() {
+ open class Exception1: kotlin.collections.MutableIterable<kotlin.String?>, kotlin.Exception() {
   open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String?>? {
    return null
   }
  }
 
- open class Exception2: kotlin.collections.MutableIterable<kotlin.Any?>, java.lang.Exception() {
+ open class Exception2: kotlin.collections.MutableIterable<kotlin.Any?>, kotlin.Exception() {
   open override fun iterator(): kotlin.collections.MutableIterator<kotlin.Any?>? {
    return null
   }

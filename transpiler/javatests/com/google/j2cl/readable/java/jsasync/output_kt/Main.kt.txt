@@ -3,7 +3,7 @@ package jsasync
 open class Main {
  internal val x: jsasync.Main.IThenable<kotlin.Int?>? = jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(10))
 
- internal open fun emptyAsyncMethod(): jsasync.Main.IThenable<java.lang.Void?>? {
+ internal open fun emptyAsyncMethod(): jsasync.Main.IThenable<kotlin.Unit?>? {
   return null
  }
 
@@ -43,8 +43,8 @@ open class Main {
 
  companion object {
   @kotlin.jvm.JvmStatic
-  internal fun staticAsyncMethod(): jsasync.Main.IThenable<java.lang.Void?>? {
-   return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(null as java.lang.Void?)))
+  internal fun staticAsyncMethod(): jsasync.Main.IThenable<kotlin.Unit?>? {
+   return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(null as kotlin.Unit?)))
   }
 
   @kotlin.jvm.JvmStatic

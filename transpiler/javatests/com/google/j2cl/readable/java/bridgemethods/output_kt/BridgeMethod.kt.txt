@@ -10,7 +10,7 @@ open class SuperParent<T, S> {
  open fun foo(t: T?, s: S?) {}
 }
 
-open class Parent<T: java.lang.Error?>: bridgemethods.SuperParent<T, kotlin.Number?>() {
+open class Parent<T: kotlin.Error?>: bridgemethods.SuperParent<T, kotlin.Number?>() {
  open override fun foo(t: T?, s: kotlin.Number?) {}
 
  open fun <T_1: kotlin.Number?> bar(t: T_1?) {}
@@ -18,8 +18,8 @@ open class Parent<T: java.lang.Error?>: bridgemethods.SuperParent<T, kotlin.Numb
  open fun <T_1> `fun`(t: T_1?) {}
 }
 
-open class BridgeMethod: bridgemethods.SomeInterface<java.lang.AssertionError?, kotlin.Number?>, bridgemethods.Parent<java.lang.AssertionError?>() {
- open override fun foo(a: java.lang.AssertionError?, n: kotlin.Number?) {}
+open class BridgeMethod: bridgemethods.SomeInterface<kotlin.AssertionError?, kotlin.Number?>, bridgemethods.Parent<kotlin.AssertionError?>() {
+ open override fun foo(a: kotlin.AssertionError?, n: kotlin.Number?) {}
 
  open override fun bar(t: kotlin.Number?) {}
 

@@ -17,13 +17,13 @@ open class NestedGenericClass<T> {
     `$1H`<kotlin.Number?, T_1>()
    }
   }
-  `$1G`<java.lang.Error?, T_1>().bar()
+  `$1G`<kotlin.Error?, T_1>().bar()
  }
 
  open fun test() {
   val n: nestedgenericclass.NestedGenericClass<kotlin.Number?>? = nestedgenericclass.NestedGenericClass<kotlin.Number?>()
-  val a: nestedgenericclass.NestedGenericClass<kotlin.Number?>.A<java.lang.Error?>? = n!!.A<java.lang.Error?>()
-  val b: nestedgenericclass.NestedGenericClass<kotlin.Number?>.A<java.lang.Error?>.B<java.lang.Exception?>? = a!!.B<java.lang.Exception?>()
+  val a: nestedgenericclass.NestedGenericClass<kotlin.Number?>.A<kotlin.Error?>? = n!!.A<kotlin.Error?>()
+  val b: nestedgenericclass.NestedGenericClass<kotlin.Number?>.A<kotlin.Error?>.B<kotlin.Exception?>? = a!!.B<kotlin.Exception?>()
   n!!.C()
   n!!.C().D()
  }

@@ -1,7 +1,7 @@
 package annotation
 
 open class Main {
- interface Foo: java.lang.annotation.Annotation {
+ interface Foo: kotlin.Annotation {
   fun bar(): Int
 
   companion object {
@@ -9,7 +9,7 @@ open class Main {
   }
  }
 
- interface Zoo: java.lang.annotation.Annotation {}
+ interface Zoo: kotlin.Annotation {}
 
  open inner class Bar {
   internal open fun baz(): Int {

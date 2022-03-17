@@ -97,6 +97,22 @@ package_sources(
 package_sources(
     name = "jre_java_files-j2kt",
     srcs = BASE_JRE_SRCS,  # TODO(b/222484176): Stop including J2CL JRE for JS.
+    excludes = [
+        # J2KT doesn't need these.
+        "java/lang/JsException.java",
+        "java/lang/IntegralToString.java",
+        "java/lang/RealToString.java",
+    ],
+    # TODO(b/222484176): Expand to all of super-kt once we're not including J2CL
+    #     JRE sources anymore. The excluded files in super-kt are incompatible
+    #     with J2CL JRE sources and were accidentally submitted before the move
+    #     from J2CL JRE to J2KT
+    super_srcs = glob(
+        ["super-kt/java/**/*.java"],
+    ) + [
+        "super-kt/javaemul/internal/Exceptions.java",
+        "super-kt/javaemul/internal/Primitives.java",
+    ],
 )
 
 filegroup(
