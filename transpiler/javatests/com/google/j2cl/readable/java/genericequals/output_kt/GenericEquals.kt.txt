@@ -1,9 +1,9 @@
 package genericequals
 
 open class GenericEquals<T> {
- internal val value: T?
+ @kotlin.jvm.JvmField val value: T?
 
- internal val value2: genericequals.GenericEquals<T>?
+ @kotlin.jvm.JvmField val value2: genericequals.GenericEquals<T>?
 
  constructor(value: T?) {
   this.value = value

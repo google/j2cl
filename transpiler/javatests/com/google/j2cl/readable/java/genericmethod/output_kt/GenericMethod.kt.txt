@@ -90,19 +90,19 @@ open class GenericMethod<T> {
  }
 
  open class SuperContainer<C: genericmethod.GenericMethod.Container<*>?> {
-  internal open fun get(): C? {
+  open fun get(): C? {
    return null
   }
  }
 
  open class Container<CT: genericmethod.GenericMethod.Content?> {
-  internal open fun get(): CT? {
+  open fun get(): CT? {
    return null
   }
  }
 
  open class Content {
-  internal open fun getProp(): kotlin.String? {
+  open fun getProp(): kotlin.String? {
    return null
   }
  }

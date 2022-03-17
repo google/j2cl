@@ -12,7 +12,7 @@ open class Main {
  interface Zoo: kotlin.Annotation {}
 
  open inner class Bar {
-  internal open fun baz(): Int {
+  open fun baz(): Int {
    val foo: annotation.Main.Foo? = null
    foo!!.bar()
    return annotation.Main.Foo.CONSTANT

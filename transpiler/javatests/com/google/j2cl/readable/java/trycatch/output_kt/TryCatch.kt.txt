@@ -80,7 +80,7 @@ open class TryCatch {
   throw this.getT(kotlin.Exception())!!
  }
 
- internal fun <T> getT(t: T?): T? {
+ fun <T> getT(t: T?): T? {
   return t
  }
 
@@ -88,12 +88,12 @@ open class TryCatch {
   throw this.getThrowable()!!
  }
 
- internal fun <T: kotlin.Throwable?> getThrowable(): T? {
+ fun <T: kotlin.Throwable?> getThrowable(): T? {
   return null
  }
 
  companion object {
-  internal val closableThing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  @kotlin.jvm.JvmField val closableThing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
  }
 
  open class ClosableThing: java.lang.AutoCloseable {

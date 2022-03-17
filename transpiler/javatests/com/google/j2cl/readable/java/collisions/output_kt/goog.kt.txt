@@ -5,10 +5,10 @@ open class goog {}
 open class Blah {
  companion object {
   @kotlin.jvm.JvmStatic
-  external internal fun m()
+  external fun m()
 
   @kotlin.jvm.JvmStatic
-  external internal fun getN(): Double
+  external fun getN(): Double
  }
 }
 
@@ -37,7 +37,7 @@ open class Other<T> {
   val o: collisions.Other<T>? = null as collisions.Other<T>?
  }
 
- internal open fun <T_2> m(): T_2? {
+ open fun <T_2> m(): T_2? {
   val T_1: Int = 5
   val o: collisions.Other<T_2>? = null as collisions.Other<T_2>?
   return null
@@ -45,11 +45,11 @@ open class Other<T> {
 }
 
 open class T<T: kotlin.Number?> {
- internal open fun m(): T? {
+ open fun m(): T? {
   return null
  }
 
- internal open fun n(): T? {
+ open fun n(): T? {
   val t: T? = collisions.T<T>().m()
   (t!! as java.lang.Number).byteValue()
   return t

@@ -3,19 +3,19 @@ package jstype
 open class SomeJsType<T> {
  @kotlin.jvm.JvmField var publicField: Int = 0
 
- internal var privateField: Int = 0
+ @kotlin.jvm.JvmField var privateField: Int = 0
 
- @kotlin.jvm.JvmField internal var packageField: Int = 0
+ @kotlin.jvm.JvmField var packageField: Int = 0
 
- @kotlin.jvm.JvmField protected var protectedField: Int = 0
+ @kotlin.jvm.JvmField var protectedField: Int = 0
 
  open fun publicMethod() {}
 
- internal fun privateMethod() {}
+ fun privateMethod() {}
 
- internal open fun packageMethod() {}
+ open fun packageMethod() {}
 
- protected open fun protectedMethod() {}
+ open fun protectedMethod() {}
 
  open fun useFieldsAndMethods() {
   val value: Int = this.publicField + this.privateField + this.packageField + this.protectedField

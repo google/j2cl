@@ -28,7 +28,7 @@ open class Arrays {
   objects2d!![0]!![1] = null
  }
 
- internal open fun testIntArrays() {
+ open fun testIntArrays() {
   var ints: IntArray? = IntArray(100)
   ints = IntArray(0)
   ints = intArrayOf(0, 1)
@@ -41,7 +41,7 @@ open class Arrays {
   ints2d!![0]!![1] = 1
  }
 
- internal open fun testLongArrays() {
+ open fun testLongArrays() {
   var longs: LongArray? = LongArray(100)
   longs = LongArray(0)
   longs = longArrayOf(0L, 1L)
@@ -54,7 +54,7 @@ open class Arrays {
   longs2d!![0]!![1] = 1L
  }
 
- internal open fun testDevirtualizedTypeArrays() {
+ open fun testDevirtualizedTypeArrays() {
   var booleans: Array<kotlin.Boolean?>? = arrayOfNulls<kotlin.Boolean?>(100)
   booleans = arrayOfNulls<kotlin.Boolean?>(0)
   booleans = arrayOf<kotlin.Boolean?>(java.lang.Boolean.valueOf(true), java.lang.Boolean.valueOf(false))
@@ -67,7 +67,7 @@ open class Arrays {
   booleans2d!![0]!![1] = java.lang.Boolean.valueOf(false)
  }
 
- internal open fun testStringArrays() {
+ open fun testStringArrays() {
   var strings: Array<kotlin.String?>? = arrayOfNulls<kotlin.String?>(100)
   strings = arrayOfNulls<kotlin.String?>(0)
   strings = arrayOf<kotlin.String?>(null, null)
@@ -118,6 +118,6 @@ open class Arrays {
  open class NativeType {}
 
  open class ArrayContainer<T> {
-  @kotlin.jvm.JvmField internal var data: Array<T>? = null
+  @kotlin.jvm.JvmField var data: Array<T>? = null
  }
 }

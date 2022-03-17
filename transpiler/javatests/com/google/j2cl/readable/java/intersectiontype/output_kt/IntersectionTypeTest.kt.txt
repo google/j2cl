@@ -77,22 +77,22 @@ open class IntersectionTypeTest<U> {
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun <T> get(t: T?): T? {
+  fun <T> get(t: T?): T? {
    return t
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun <T> m(): T? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
+  fun <T> m(): T? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
    return intersectiontype.IntersectionTypeTest.get((java.lang.Object() as kotlin.Any)) as T?
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun <T> n(): intersectiontype.Getable<T>? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
+  fun <T> n(): intersectiontype.Getable<T>? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
    return null
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun <T> set(t: T?) where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {}
+  fun <T> set(t: T?) where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {}
  }
 
  open inner class MapEntry {

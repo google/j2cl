@@ -1,7 +1,7 @@
 package interfaces
 
 open class Main {
- internal open fun testInterfaceMembers() {
+ open fun testInterfaceMembers() {
   val i: interfaces.Main.Interface<*>? = Implementor()
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
@@ -19,7 +19,7 @@ open class Main {
    this.privateMethod(t)
   }
 
-  internal fun privateMethod(t: T?) {}
+  fun privateMethod(t: T?) {}
 
   companion object {
    @kotlin.jvm.JvmField val a: Int = 1

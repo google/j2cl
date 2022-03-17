@@ -5,11 +5,11 @@ open class LocalClassWithOuterGenerics<A> {
   @kotlin.jvm.JvmStatic
   fun <T> foo() {
    open class `$1Bar`<T> {
-    internal open fun baz(other: `$1Bar`<T>?) {}
+    open fun baz(other: `$1Bar`<T>?) {}
    }
    val bar: `$1Bar`<T>? = `$1Bar`<T>()
    open class `$1Baz`<S, T> {
-    internal open fun qux(foo: `$1Baz`<S, T>?, bar: `$1Baz`<T, T>?, baz: `$1Baz`<kotlin.String?, T>?) {}
+    open fun qux(foo: `$1Baz`<S, T>?, bar: `$1Baz`<T, T>?, baz: `$1Baz`<kotlin.String?, T>?) {}
    }
    val baz: `$1Baz`<kotlin.Any?, T>? = `$1Baz`<kotlin.Any?, T>()
   }

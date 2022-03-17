@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.Variable
-import com.google.j2cl.transpiler.ast.Visibility
 
 internal fun Renderer.renderMember(member: Member, kind: Kind) {
   when (member) {
@@ -56,8 +55,7 @@ private fun Renderer.renderField(field: Field) {
   val isFinal = field.descriptor.isFinal
   val typeDescriptor = field.descriptor.typeDescriptor
 
-  if (!field.descriptor.visibility.isPrivate) render("@kotlin.jvm.JvmField ")
-  renderVisibility(field.descriptor.visibility)
+  render("@kotlin.jvm.JvmField ")
   render(if (isFinal) "val " else "var ")
   renderIdentifier(field.descriptor.name!!)
   render(": ")
@@ -103,9 +101,6 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
 private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, kind: Kind) {
   if (methodDescriptor.isNative) {
     render("external ")
-  }
-  if (!methodDescriptor.isConstructor || kind != Kind.ENUM) {
-    renderVisibility(methodDescriptor.visibility)
   }
   if (kind != Kind.INTERFACE) {
     if (methodDescriptor.isAbstract) render("abstract ")
@@ -156,16 +151,5 @@ private fun Renderer.renderConstructorInvocation(method: Method) {
     render(": ")
     render(if (constructorInvocation.target.inSameTypeAs(method.descriptor)) "this" else "super")
     renderInvocationArguments(constructorInvocation)
-  }
-}
-
-private fun Renderer.renderVisibility(visibility: Visibility) {
-  when (visibility) {
-    Visibility.PUBLIC -> {}
-    Visibility.PROTECTED -> render("protected ")
-    Visibility.PACKAGE_PRIVATE -> render("internal ")
-    // TODO(b/206898384): For now, render Java "private" as Kotlin "internal", since in Kotlin
-    // private members are not visible from other classes in the same file.
-    Visibility.PRIVATE -> render("internal ")
   }
 }

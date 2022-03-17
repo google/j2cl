@@ -2,7 +2,7 @@ package jsproperties
 
 open class Foo {
  companion object {
-  internal var f: Int = 0
+  @kotlin.jvm.JvmField var f: Int = 0
 
   @kotlin.jvm.JvmStatic
   fun getA(): Int {
@@ -27,7 +27,7 @@ open class Foo {
 }
 
 open class Bar {
- internal var f: Int = 0
+ @kotlin.jvm.JvmField var f: Int = 0
 
  open fun getA(): Int {
   return this.f + 1

@@ -1,9 +1,9 @@
 package cast
 
 open class CastGenerics<T, E: kotlin.Number?> {
- @kotlin.jvm.JvmField internal var field: T? = null
+ @kotlin.jvm.JvmField var field: T? = null
 
- internal open fun method(): T? {
+ open fun method(): T? {
   return null
  }
 
@@ -25,7 +25,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
 
  open fun <TT: kotlin.Enum<*>?> outerGenericMethod() {
   open class `$1Nested`<SS, TT: kotlin.Enum<*>?> {
-   internal fun nestedGenericMethod(o: kotlin.Any?) {
+   fun nestedGenericMethod(o: kotlin.Any?) {
     val t: TT? = o as TT?
    }
   }
@@ -99,7 +99,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
  }
 
  open class Container<T> {
-  internal open fun get(): T? {
+  open fun get(): T? {
    return null
   }
  }

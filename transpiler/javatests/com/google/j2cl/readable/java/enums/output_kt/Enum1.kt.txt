@@ -12,7 +12,7 @@ enum class Enum2 {
  VALUE3(),
  VALUE4(5) {};
 
- @kotlin.jvm.JvmField internal var foo: Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
+ @kotlin.jvm.JvmField var foo: Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
 
  constructor(foo: Int) {
   this.foo = foo
@@ -24,11 +24,11 @@ enum class Enum2 {
 
  companion object {
   @kotlin.jvm.JvmStatic
-  internal fun f(o: kotlin.Any?): enums.Enum2? {
+  fun f(o: kotlin.Any?): enums.Enum2? {
    return null
   }
 
-  @kotlin.jvm.JvmField internal var C: enums.Enum2? = enums.Enum2.f((java.lang.Object() as kotlin.Any))
+  @kotlin.jvm.JvmField var C: enums.Enum2? = enums.Enum2.f((java.lang.Object() as kotlin.Any))
  }
 }
 

@@ -69,7 +69,7 @@ open class Lambdas {
   return intf!!.m(e)
  }
 
- internal open fun <T> callWithBiFunction(fn: lambdas.Lambdas.BiFunction<T, kotlin.String?, kotlin.Double?>?): lambdas.Lambdas.GenericFunctionalInterface<T>? {
+ open fun <T> callWithBiFunction(fn: lambdas.Lambdas.BiFunction<T, kotlin.String?, kotlin.Double?>?): lambdas.Lambdas.GenericFunctionalInterface<T>? {
   return null
  }
 
@@ -145,7 +145,7 @@ open class Lambdas {
    })
   }
 
-  internal var identityFunction: lambdas.Lambdas.IdentityFunction? = null
+  @kotlin.jvm.JvmField var identityFunction: lambdas.Lambdas.IdentityFunction? = null
 
   @kotlin.jvm.JvmStatic
   fun <E> identity(): lambdas.Lambdas.GenericJsFunction<E, E>? {

@@ -3,15 +3,15 @@ package anonymousclass
 abstract class SomeClass {
  abstract open fun foo(): kotlin.String?
 
- internal constructor(i: Int)
+ constructor(i: Int)
 }
 
 open class AnonymousClass {
  open fun main() {
   val instance: anonymousclass.SomeClass? = object : SomeClass(1) {
-   @kotlin.jvm.JvmField internal var `object`: kotlin.Any? = this
+   @kotlin.jvm.JvmField var `object`: kotlin.Any? = this
 
-   @kotlin.jvm.JvmField internal var outer: kotlin.Any? = this@AnonymousClass
+   @kotlin.jvm.JvmField var outer: kotlin.Any? = this@AnonymousClass
 
    open override fun foo(): kotlin.String? {
     return "a"

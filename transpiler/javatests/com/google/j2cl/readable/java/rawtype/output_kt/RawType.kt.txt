@@ -1,9 +1,9 @@
 package rawtype
 
 open class RawType {
- @kotlin.jvm.JvmField internal var c: kotlin.Comparable<*>? = null
+ @kotlin.jvm.JvmField var c: kotlin.Comparable<*>? = null
 
- internal open fun test() {
+ open fun test() {
   val unbound: rawtype.RawType.Unbound<*>? = rawtype.RawType.Unbound<kotlin.Any?>()
   val bound: rawtype.RawType.Bound<*>? = rawtype.RawType.Bound<rawtype.RawType?>()
   val boundRecursively: rawtype.RawType.BoundRecursively<*>? = BoundRecursively<rawtype.RawType.BoundRecursively<*>?>()

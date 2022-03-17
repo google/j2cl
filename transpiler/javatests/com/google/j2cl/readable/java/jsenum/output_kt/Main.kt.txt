@@ -75,7 +75,7 @@ open class Main {
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun testBoxUnboxWithTypeInference() {
+  fun testBoxUnboxWithTypeInference() {
    val templatedField: jsenum.Main.TemplatedField<jsenum.Main.ComparableJsEnum?>? = jsenum.Main.TemplatedField<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
    var unboxed: jsenum.Main.ComparableJsEnum? = templatedField!!.getValue()
    unboxed = templatedField!!.value
@@ -86,12 +86,12 @@ open class Main {
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun <T> boxingPassthrough(t: T?): T? {
+  fun <T> boxingPassthrough(t: T?): T? {
    return t
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun boxingWithGenerics() {
+  fun boxingWithGenerics() {
    jsenum.Main.Foo<kotlin.Any?>(java.util.Optional.of(jsenum.Main.IntJsEnum.MINUSONE))
   }
  }
@@ -111,7 +111,7 @@ open class Main {
   TWENTY(20),
   ELEVEN(11);
 
-  internal var value: Int = 0
+  @kotlin.jvm.JvmField var value: Int = 0
 
   open fun getValue(): Int {
    return this.value
@@ -126,7 +126,7 @@ open class Main {
   ONE("ONE"),
   THREE("THREE");
 
-  internal var value: kotlin.String? = null
+  @kotlin.jvm.JvmField var value: kotlin.String? = null
 
   open fun getValue(): kotlin.String? {
    return this.value
@@ -141,7 +141,7 @@ open class Main {
   ONE("ONE"),
   THREE("THREE");
 
-  internal var value: kotlin.String
+  @kotlin.jvm.JvmField var value: kotlin.String
 
   open fun getValue(): kotlin.String? {
    return this.value
@@ -159,18 +159,18 @@ open class Main {
  }
 
  open class TemplatedField<T> {
-  @kotlin.jvm.JvmField internal var value: T? = null
+  @kotlin.jvm.JvmField var value: T? = null
 
-  internal constructor(value: T?) {
+  constructor(value: T?) {
    this.value = value
   }
 
-  internal open fun getValue(): T? {
+  open fun getValue(): T? {
    return this.value
   }
  }
 
  open class Foo<T> {
-  internal constructor(c: java.util.Optional<jsenum.Main.IntJsEnum?>?)
+  constructor(c: java.util.Optional<jsenum.Main.IntJsEnum?>?)
  }
 }

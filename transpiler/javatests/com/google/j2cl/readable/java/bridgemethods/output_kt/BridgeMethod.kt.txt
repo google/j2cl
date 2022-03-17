@@ -102,13 +102,13 @@ open class TestCase102 {
 }
 
 open class ParameterizedParent<T: bridgemethods.ParameterizedParent<T>?> {
- internal open fun <Q: T> m(t: Q?): Q? {
+ open fun <Q: T> m(t: Q?): Q? {
   return null
  }
 }
 
 open class ReparametrerizedChild<E: bridgemethods.ReparametrerizedChild<E>?>: bridgemethods.ParameterizedParent<E>() {
- internal open fun <S: E> m(t: S?): S? {
+ open fun <S: E> m(t: S?): S? {
   return null
  }
 }

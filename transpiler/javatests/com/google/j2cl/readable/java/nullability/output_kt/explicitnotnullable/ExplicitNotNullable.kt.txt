@@ -1,33 +1,33 @@
 package nullability.explicitnotnullable
 
 open class ExplicitNotNullable {
- internal var f1: kotlin.String = "Hello"
+ @kotlin.jvm.JvmField var f1: kotlin.String = "Hello"
 
- internal var f2: kotlin.String? = null
+ @kotlin.jvm.JvmField var f2: kotlin.String? = null
 
- internal var f3: kotlin.String? = null
+ @kotlin.jvm.JvmField var f3: kotlin.String? = null
 
- internal var f4: kotlin.collections.MutableList<kotlin.String> = java.util.ArrayList<kotlin.String?>()
+ @kotlin.jvm.JvmField var f4: kotlin.collections.MutableList<kotlin.String> = java.util.ArrayList<kotlin.String?>()
 
- internal var f5: kotlin.collections.MutableList<kotlin.String>? = java.util.ArrayList<kotlin.String?>()
+ @kotlin.jvm.JvmField var f5: kotlin.collections.MutableList<kotlin.String>? = java.util.ArrayList<kotlin.String?>()
 
- internal var f6: kotlin.collections.MutableList<kotlin.String?> = java.util.ArrayList<kotlin.String?>()
+ @kotlin.jvm.JvmField var f6: kotlin.collections.MutableList<kotlin.String?> = java.util.ArrayList<kotlin.String?>()
 
- internal var f7: kotlin.collections.MutableList<kotlin.String?>? = null
+ @kotlin.jvm.JvmField var f7: kotlin.collections.MutableList<kotlin.String?>? = null
 
- internal var f8: Array<kotlin.String> = arrayOf<kotlin.String?>() as Array<kotlin.String>
+ @kotlin.jvm.JvmField var f8: Array<kotlin.String> = arrayOf<kotlin.String?>() as Array<kotlin.String>
 
- internal var f9: Array<kotlin.String?> = arrayOf<kotlin.String?>()
+ @kotlin.jvm.JvmField var f9: Array<kotlin.String?> = arrayOf<kotlin.String?>()
 
- internal var f10: Array<kotlin.String>? = arrayOf<kotlin.String?>() as Array<kotlin.String>
+ @kotlin.jvm.JvmField var f10: Array<kotlin.String>? = arrayOf<kotlin.String?>() as Array<kotlin.String>
 
- internal var f11: kotlin.Unit? = null
+ @kotlin.jvm.JvmField var f11: kotlin.Unit? = null
 
- internal var f12: kotlin.Any = (java.lang.Object() as kotlin.Any)
+ @kotlin.jvm.JvmField var f12: kotlin.Any = (java.lang.Object() as kotlin.Any)
 
- internal var f13: kotlin.Any
+ @kotlin.jvm.JvmField var f13: kotlin.Any
 
- internal var f14: kotlin.Any? = null
+ @kotlin.jvm.JvmField var f14: kotlin.Any? = null
 
  constructor() {
   this.f13 = (java.lang.Object() as kotlin.Any)

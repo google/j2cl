@@ -47,7 +47,7 @@ open class InnerClassInitOrder {
 
  open fun testInnerClassLoop() {
   abstract class `$1AddNumber` {
-   @kotlin.jvm.JvmField internal var num: Int = 0
+   @kotlin.jvm.JvmField var num: Int = 0
 
    constructor(i: Int) {
     this.num = i
@@ -76,9 +76,9 @@ open class InnerClassInitOrder {
   assert(this.number === 1156)
  }
 
- internal val outer: innerclassinitorder.InnerClassInitOrder.Outer? = innerclassinitorder.InnerClassInitOrder.Outer(1)
+ @kotlin.jvm.JvmField val outer: innerclassinitorder.InnerClassInitOrder.Outer? = innerclassinitorder.InnerClassInitOrder.Outer(1)
 
- internal val outerIsSuper: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper? = this.outer!!.OuterIsSuper(2)
+ @kotlin.jvm.JvmField val outerIsSuper: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper? = this.outer!!.OuterIsSuper(2)
 
  open fun testOuterIsNotSuper() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper!!.OuterIsNotSuper()
@@ -143,13 +143,13 @@ open class InnerClassInitOrder {
  }
 
  open class OuterRefFromSuperCtorBase {
-  internal constructor(o: kotlin.Any?) {
+  constructor(o: kotlin.Any?) {
    (o!! as java.lang.Object).toString()
   }
  }
 
  open inner class OuterRefFromSuperCtorCall: innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase {
-  internal constructor(): super((object : java.lang.Object() {
+  constructor(): super((object : java.lang.Object() {
    open override fun toString(): kotlin.String? {
     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
     return ""
@@ -173,14 +173,14 @@ open class InnerClassInitOrder {
    this.callInner()
   }
 
-  internal open fun callInner() {
+  open fun callInner() {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1
    open class `$1ReallyInnerClass` {
     init {
      this.callReallyInner()
     }
 
-    internal open fun callReallyInner() {
+    open fun callReallyInner() {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 10
     }
    }
@@ -189,23 +189,23 @@ open class InnerClassInitOrder {
  }
 
  open class P1<T1> {
-  @kotlin.jvm.JvmField internal val value: Int
+  @kotlin.jvm.JvmField val value: Int
 
-  internal constructor(): this(1)
+  constructor(): this(1)
 
-  internal constructor(i: Int) {
+  constructor(i: Int) {
    this.value = i
   }
 
   open inner class P2<T2>: innerclassinitorder.InnerClassInitOrder.P1<T1> {
-   internal constructor(): this(1)
+   constructor(): this(1)
 
-   internal constructor(i: Int): super(i)
+   constructor(i: Int): super(i)
 
    open inner class P3<T3>: innerclassinitorder.InnerClassInitOrder.P1<T1>.P2<T2> {
-    internal constructor(): this(1)
+    constructor(): this(1)
 
-    internal constructor(i: Int): super(i)
+    constructor(i: Int): super(i)
    }
   }
  }
@@ -229,9 +229,9 @@ open class InnerClassInitOrder {
  }
 
  open class ESInnerSubclass: innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner {
-  internal constructor(outer: innerclassinitorder.InnerClassInitOrder.ESOuter?): super()
+  constructor(outer: innerclassinitorder.InnerClassInitOrder.ESOuter?): super()
 
-  internal constructor(value: Int, outer: innerclassinitorder.InnerClassInitOrder.ESOuter?): super(value)
+  constructor(value: Int, outer: innerclassinitorder.InnerClassInitOrder.ESOuter?): super(value)
  }
 
  open class ESWGOuter<T> {
@@ -253,13 +253,13 @@ open class InnerClassInitOrder {
  }
 
  open class ESWGInnerSubclass: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>.ESWGInner {
-  internal constructor(outer: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>?): super()
+  constructor(outer: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>?): super()
 
-  internal constructor(value: Int, outer: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>?): super(value)
+  constructor(value: Int, outer: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>?): super(value)
  }
 
  open class Outer {
-  @kotlin.jvm.JvmField protected val value: Int
+  @kotlin.jvm.JvmField val value: Int
 
   constructor(i: Int) {
    this.value = i

@@ -1,11 +1,11 @@
 package strings
 
 open class Strings {
- internal var someString: kotlin.String? = "This is a string literal"
+ @kotlin.jvm.JvmField var someString: kotlin.String? = "This is a string literal"
 
- internal var nonBmpChar: kotlin.String? = "\uD800\uDF46"
+ @kotlin.jvm.JvmField var nonBmpChar: kotlin.String? = "\uD800\uDF46"
 
- internal var wideColon: kotlin.String? = "\uFF1A"
+ @kotlin.jvm.JvmField var wideColon: kotlin.String? = "\uFF1A"
 
  open fun test() {
   var s1: kotlin.String? = null
@@ -58,12 +58,12 @@ open class Strings {
  }
 
  companion object {
-  internal val ESCAPE_CODES: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  @kotlin.jvm.JvmField val ESCAPE_CODES: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
 
-  internal val ESCAPE_CODES_COPY: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  @kotlin.jvm.JvmField val ESCAPE_CODES_COPY: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
 
  open class StringHolder {
-  @kotlin.jvm.JvmField internal var s: kotlin.String? = "A"
+  @kotlin.jvm.JvmField var s: kotlin.String? = "A"
  }
 }

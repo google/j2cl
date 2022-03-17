@@ -5,15 +5,15 @@ open class MethodReferences<T> {
   return java.lang.Boolean.valueOf(true)
  }
 
- internal open fun self(): kotlin.Any? {
+ open fun self(): kotlin.Any? {
   return this
  }
 
- internal open fun sameAs(n: kotlin.Number?): kotlin.Boolean? {
+ open fun sameAs(n: kotlin.Number?): kotlin.Boolean? {
   return java.lang.Boolean.valueOf(false)
  }
 
- internal open fun main() {
+ open fun main() {
   var objectFactory: methodreferences.MethodReferences.Producer<kotlin.Any?>? = methodreferences.MethodReferences.Producer<kotlin.Any?> (fun(): kotlin.Any? {
    return (java.lang.Object() as kotlin.Any)
   })
@@ -87,11 +87,11 @@ open class MethodReferences<T> {
 
  companion object {
   @kotlin.jvm.JvmStatic
-  internal fun m(): kotlin.Any? {
+  fun m(): kotlin.Any? {
    return (java.lang.Object() as kotlin.Any)
   }
 
-  @kotlin.jvm.JvmField internal var staticStringProducer: methodreferences.MethodReferences.Producer<kotlin.String?>? = run {
+  @kotlin.jvm.JvmField var staticStringProducer: methodreferences.MethodReferences.Producer<kotlin.String?>? = run {
    val `$$q`: kotlin.Any? = methodreferences.MethodReferences.m()
    methodreferences.MethodReferences.Producer<kotlin.String?> (fun(): kotlin.String? {
     return (`$$q`!! as java.lang.Object).toString()
@@ -112,7 +112,7 @@ open class MethodReferences<T> {
  }
 
  open inner class ObjectCapturingOuter {
-  internal open fun getMain(): methodreferences.MethodReferences<T>? {
+  open fun getMain(): methodreferences.MethodReferences<T>? {
    return this@MethodReferences
   }
  }

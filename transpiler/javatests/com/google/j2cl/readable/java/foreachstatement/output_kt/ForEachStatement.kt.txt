@@ -10,7 +10,7 @@ open class ForEachStatement {
   }
  }
 
- internal fun testMulticatch() {
+ fun testMulticatch() {
   try {
    throw kotlin.Exception()
   } catch (e: foreachstatement.ForEachStatement.Exception1) {
@@ -20,7 +20,7 @@ open class ForEachStatement {
   }
  }
 
- internal fun <T, U: T> testTypeVariable() where T: kotlin.Any?, T: kotlin.collections.MutableIterable<kotlin.String?>? {
+ fun <T, U: T> testTypeVariable() where T: kotlin.Any?, T: kotlin.collections.MutableIterable<kotlin.String?>? {
   val iterable: U? = null
   FOR_EACH@ for (s in iterable) {}
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
