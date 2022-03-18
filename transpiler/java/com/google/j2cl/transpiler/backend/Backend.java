@@ -121,6 +121,7 @@ import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
+import com.google.j2cl.transpiler.passes.RemoveStatementAsExpressions;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.ResolveCaptures;
@@ -188,6 +189,7 @@ public enum Backend {
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           InsertCastOnNewInstances::new,
+          RemoveStatementAsExpressions::new,
 
           // Runs after all passes that synthesize overlays.
           NormalizeEnumClasses::new,

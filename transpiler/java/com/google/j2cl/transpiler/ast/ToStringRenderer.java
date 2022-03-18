@@ -451,6 +451,12 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterStatementAsExpression(StatementAsExpression expression) {
+        accept(expression.statement);
+        return false;
+      }
+
+      @Override
       public boolean enterSwitchStatement(SwitchStatement switchStatement) {
         print("switch (");
         accept(switchStatement.getSwitchExpression());
