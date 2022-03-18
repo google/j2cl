@@ -25,5 +25,8 @@ public enum ElementType {
     CONSTRUCTOR,
     LOCAL_VARIABLE,
     ANNOTATION_TYPE,
-    PACKAGE
+  PACKAGE,
+  TYPE_PARAMETER,
+  TYPE_USE,
+  MODULE
 }
