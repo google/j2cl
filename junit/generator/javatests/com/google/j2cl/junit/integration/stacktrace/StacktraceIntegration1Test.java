@@ -15,7 +15,10 @@
  */
 package com.google.j2cl.junit.integration.stacktrace;
 
+import static org.junit.Assume.assumeFalse;
+
 import com.google.j2cl.junit.integration.IntegrationTestBase;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -23,6 +26,12 @@ import org.junit.runners.Parameterized;
 /** Integration test for stack trace deobfuscation */
 @RunWith(Parameterized.class)
 public class StacktraceIntegration1Test extends IntegrationTestBase {
+
+  @Before
+  public void assumeNonJ2wasm() {
+    // TODO(b/223396796): J2wasm does not support stacktrace test.
+    assumeFalse(testMode.isJ2wasm());
+  }
 
   @Test
   public void testSimpleThrowingMethod() throws Exception {

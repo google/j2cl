@@ -40,7 +40,9 @@ public abstract class IntegrationTestBase {
   public enum TestMode {
     JAVA(""),
     J2CL_UNCOMPILED("-j2cl"),
-    J2CL_COMPILED("-j2cl_compiled");
+    J2CL_COMPILED("-j2cl_compiled"),
+    J2WASM_UNOPTIMIZED("-j2wasm"),
+    J2WASM_OPTIMIZED("-j2wasm_optimized");
 
     public final String postfix;
 
@@ -51,6 +53,18 @@ public abstract class IntegrationTestBase {
     public boolean isJ2cl() {
       return this == J2CL_UNCOMPILED || this == J2CL_COMPILED;
     }
+
+    public boolean isJ2wasm() {
+      return this == J2WASM_UNOPTIMIZED || this == J2WASM_OPTIMIZED;
+    }
+
+    public boolean isJvm() {
+      return this == JAVA;
+    }
+
+    public boolean isWeb() {
+      return isJ2cl() || isJ2wasm();
+    }
   }
 
   @Parameters(name = "{0}")
@@ -58,7 +72,9 @@ public abstract class IntegrationTestBase {
     return Arrays.asList(
         new TestMode[] {TestMode.JAVA},
         new TestMode[] {TestMode.J2CL_UNCOMPILED},
-        new TestMode[] {TestMode.J2CL_COMPILED});
+        new TestMode[] {TestMode.J2CL_COMPILED},
+        new TestMode[] {TestMode.J2WASM_UNOPTIMIZED},
+        new TestMode[] {TestMode.J2WASM_OPTIMIZED});
   }
 
   @Parameter public TestMode testMode;
@@ -72,6 +88,10 @@ public abstract class IntegrationTestBase {
   }
 
   protected void runStacktraceTest(String testName) throws Exception {
+    if (testMode.isJ2wasm()) {
+      return;
+    }
+
     TestResult testResult =
         newTestResultBuilder().testClassName(testName).addTestFailure("test").build();
 
@@ -132,9 +152,8 @@ public abstract class IntegrationTestBase {
     File executable = getTestDataFile(testName + testMode.postfix);
     assertTrue("Missing the test in classpath", executable.exists());
     List<String> logs = runTestBinary(executable.getAbsolutePath());
-
     // Cleanup log message for jsunit until "Start" log.
-    if (testMode.isJ2cl()) {
+    if (testMode.isWeb()) {
       int startIndex = Iterables.indexOf(logs, x -> x.endsWith("  Start"));
       logs = logs.subList(startIndex, logs.size());
     }

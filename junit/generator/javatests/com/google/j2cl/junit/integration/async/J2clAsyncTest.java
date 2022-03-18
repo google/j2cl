@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.junit.integration.async;
 
+import static org.junit.Assume.assumeFalse;
+
 import com.google.j2cl.junit.async.AsyncTestRunner;
 import com.google.j2cl.junit.async.AsyncTestRunner.ErrorMessage;
 import com.google.j2cl.junit.integration.IntegrationTestBase;
 import com.google.j2cl.junit.integration.TestResult;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -34,6 +37,12 @@ import org.junit.runners.Parameterized;
  */
 @RunWith(Parameterized.class)
 public class J2clAsyncTest extends IntegrationTestBase {
+
+  @Before
+  public void assumeNonJ2wasm() {
+    // TODO(b/223396796): J2wasm does not support async test.
+    assumeFalse(testMode.isJ2wasm());
+  }
 
   @Test
   public void testAfterWithFailingAsyncTest() throws Exception {
@@ -142,10 +151,8 @@ public class J2clAsyncTest extends IntegrationTestBase {
 
   @Test
   public void testListenableFuture() throws Exception {
-    if (testMode.isJ2cl()) {
-      // No j2cl version of this test since guava-j2cl is not available for open-source.
-      return;
-    }
+    // No j2cl version of this test since guava-j2cl is not available for open-source.
+    assumeFalse(testMode.isJ2cl());
 
     String testName = "TestListenableFuture";
     TestResult testResult =
@@ -208,11 +215,9 @@ public class J2clAsyncTest extends IntegrationTestBase {
 
   @Test
   public void testReturnTypeNotStructuralThenable() throws Exception {
-    if (testMode.isJ2cl()) {
-      // No j2cl version of this test since these would be a compile error and thus are handled
-      // in our APT unit tests
-      return;
-    }
+    // No j2cl version of this test since these would be a compile error and thus are handled
+    // in our APT unit tests
+    assumeFalse(testMode.isJ2cl());
 
     String testName = "TestReturnTypeNotStructuralPromise";
 
@@ -232,11 +237,9 @@ public class J2clAsyncTest extends IntegrationTestBase {
 
   @Test
   public void testReturnTypeNotStructuralThenable_thenParameterCount() throws Exception {
-    if (testMode.isJ2cl()) {
-      // No j2cl version of this test since these would be a compile error and thus are handled
-      // in our APT unit tests
-      return;
-    }
+    // No j2cl version of this test since these would be a compile error and thus are handled
+    // in our APT unit tests
+    assumeFalse(testMode.isJ2cl());
 
     String testName = "TestReturnTypeNotStructuralPromiseThenParameterCount";
 
@@ -256,11 +259,9 @@ public class J2clAsyncTest extends IntegrationTestBase {
 
   @Test
   public void testReturnTypeNotStructuralThenable_thenParameterNotJsType() throws Exception {
-    if (testMode.isJ2cl()) {
-      // No j2cl version of this test since these would be a compile error and thus are handled
-      // in our APT unit tests
-      return;
-    }
+    // No j2cl version of this test since these would be a compile error and thus are handled
+    // in our APT unit tests
+    assumeFalse(testMode.isJ2cl());
 
     String testName = "TestReturnTypeNotStructuralPromiseThenParameterNotJsType";
 
@@ -351,11 +352,9 @@ public class J2clAsyncTest extends IntegrationTestBase {
 
   @Test
   public void testWithExpectedException() throws Exception {
-    if (testMode.isJ2cl()) {
-      // No j2cl version of this test since these would be a compile error and thus are handled
-      // in our APT unit tests
-      return;
-    }
+    // No j2cl version of this test since these would be a compile error and thus are handled
+    // in our APT unit tests
+    assumeFalse(testMode.isJ2cl());
 
     String testName = "TestWithExpectedException";
 
@@ -373,11 +372,9 @@ public class J2clAsyncTest extends IntegrationTestBase {
 
   @Test
   public void testTimeOutNotProvided() throws Exception {
-    if (testMode.isJ2cl()) {
-      // No j2cl version of this test since these would be a compile error and thus are handled
-      // in our APT unit tests
-      return;
-    }
+    // No j2cl version of this test since these would be a compile error and thus are handled
+    // in our APT unit tests
+    assumeFalse(testMode.isJ2cl());
 
     String testName = "TestTimeOutNotProvided";
 

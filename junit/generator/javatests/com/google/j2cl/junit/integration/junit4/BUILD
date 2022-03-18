@@ -11,7 +11,8 @@ package(
 # the integration tests to stdout. This can be done with:
 # blaze test --test_arg=--output_command_line junit/generator/javatests/com/google/j2cl/junit/integration/junit4:JUnit4IntegrationTest
 j2cl_test_integration_test(
-    name = "JUnit4IntegrationTest",
+    name = "JUnit4IntegrationTest1",
+    enable_wasm = True,
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:BeforeAndAfterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ChildTest",
@@ -20,6 +21,13 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ExpectedExceptionTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:IgnoreTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:MethodOrderingTest",
+    ],
+)
+
+j2cl_test_integration_test(
+    name = "JUnit4IntegrationTest2",
+    enable_wasm = True,
+    test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleFailingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimplePassingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleSuite",

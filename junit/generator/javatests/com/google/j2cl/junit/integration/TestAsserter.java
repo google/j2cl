@@ -67,8 +67,7 @@ public class TestAsserter {
     int errors = testResult.errors().size();
     int succeeds = testResult.succeeds().size();
     int testCount = fails + errors + succeeds;
-
-    if (testMode.isJ2cl()) {
+    if (testMode.isWeb()) {
       // Like Junit4, J2CL always counts errors as failures
       fails += errors;
       errors = 0;
@@ -148,7 +147,7 @@ public class TestAsserter {
   private void assertTestMethodSucceeded(String method) {
     method = getTestMethodName(method);
 
-    if (testMode.isJ2cl()) {
+    if (testMode.isWeb()) {
       assertLogsContains("%s : PASSED", method);
     } else {
       assertLogsNotContains(getJunitTestFailureMsg(method));
@@ -157,13 +156,18 @@ public class TestAsserter {
 
   private void assertTestMethodFailed(Map.Entry<String, String> testEntry) {
     String method = getTestMethodName(testEntry.getKey());
-    if (testMode.isJ2cl()) {
+    if (testMode.isWeb()) {
       assertLogsContains("%s : FAILED", method);
     } else {
       assertLogsContains(getJunitTestFailureMsg(method));
     }
 
-    assertLogsContains(testEntry.getValue());
+    // TODO(b/149936597): Improve wasm exception and then change this testError to be more specific
+    if (testMode.isJ2wasm()) {
+      assertLogsContains("wasm exception");
+    } else {
+      assertLogsContains(testEntry.getValue());
+    }
   }
 
   private String getJunitTestFailureMsg(String method) {
@@ -173,7 +177,7 @@ public class TestAsserter {
   }
 
   private String getTestMethodName(String methodName) {
-    return testMode.isJ2cl() && !methodName.startsWith("test") ? "test_" + methodName : methodName;
+    return testMode.isWeb() && !methodName.startsWith("test") ? "test_" + methodName : methodName;
   }
 
   private boolean oneLineContains(String shouldContain) {

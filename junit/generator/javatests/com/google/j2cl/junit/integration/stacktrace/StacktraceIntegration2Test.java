@@ -15,7 +15,11 @@
  */
 package com.google.j2cl.junit.integration.stacktrace;
 
+import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
+
 import com.google.j2cl.junit.integration.IntegrationTestBase;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -24,21 +28,26 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class StacktraceIntegration2Test extends IntegrationTestBase {
 
+  @Before
+  public void assumeNonJ2wasm() {
+    // TODO(b/223396796): J2wasm does not support stacktrace test.
+    assumeFalse(testMode.isJ2wasm());
+  }
+
   @Test
   public void testNative() throws Exception {
-    if (!testMode.isJ2cl()) {
-      // test contains native js code and can't be run in pure Java
-      return;
-    }
+    // test contains native js code and can't be run in pure Java or Wasm,
+    // this condition overlaps init but it is acceptable
+    assumeTrue(testMode.isJ2cl());
+
     runStacktraceTest("NativeStacktraceTest");
   }
 
   @Test
   public void testThrowsInNativeJs() throws Exception {
-    if (testMode == TestMode.JAVA) {
-      // uses native methods which wont work in Java
-      return;
-    }
+    // uses native methods which won't work in Java or Wasm
+    assumeTrue(testMode.isJ2cl());
+
     runStacktraceTest("ThrowsInNativeJs");
   }
 

@@ -24,7 +24,7 @@ import org.junit.runners.Parameterized;
 
 /** Integration test for j2cl JUnit4 support. */
 @RunWith(Parameterized.class)
-public class JUnit4IntegrationTest extends IntegrationTestBase {
+public class JUnit4IntegrationTest1 extends IntegrationTestBase {
 
   private interface TestSequencer {
     String[] forTest(String name);
@@ -173,109 +173,6 @@ public class JUnit4IntegrationTest extends IntegrationTestBase {
             .addTestSuccess("parent_c")
             .addJavaLogLineSequence(
                 "a", "b", "b1", "c", "parent_a", "parent_b", "parent_b1", "parent_c")
-            .build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
-  public void testPassingTest() throws Exception {
-    String testName = "SimplePassingTest";
-    TestResult testResult = createTestResultForSimplePassingTest(testName);
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
-  public void testSuite() throws Exception {
-    String testName = "SimpleSuite";
-    TestResult testResult = createTestResultForSimplePassingTest(testName);
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
-  public void testSuiteOfSuite() throws Exception {
-    String testName = "SuiteOfSuite";
-    TestResult testResult = createTestResultForSimplePassingTest(testName);
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  private TestResult createTestResultForSimplePassingTest(String suiteName) {
-    return newTestResultBuilder()
-        .testClassName(suiteName)
-        .addTestSuccess("test")
-        .addTestSuccess("testOther")
-        .addTestSuccess("validTestMethodWithoutPrefix")
-        .addJavaLogLineSequence("test", "testOther", "validTestMethodWithoutPrefix")
-        .addBlackListedWord("should_not_be_in_log")
-        .build();
-  }
-
-  @Test
-  public void testFailingTest() throws Exception {
-    String testName = "SimpleFailingTest";
-    TestResult testResult =
-        newTestResultBuilder()
-            .testClassName(testName)
-            .addTestFailure("test")
-            .addTestFailure("testOther")
-            .addJavaLogLineSequence("test")
-            .addJavaLogLineSequence("testOther")
-            .build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
-  public void testThrowsOnConstruction() throws Exception {
-    String testName = "ThrowsOnConstructionTest";
-    TestResult testResult =
-        newTestResultBuilder()
-            .testClassName(testName)
-            .addTestFailure("b")
-            .addTestSuccess("a")
-            .addTestSuccess("c")
-            .addJavaLogLineSequence(
-                "constructor", "a", "after", "constructor", "constructor", "c", "after")
-            .addBlackListedWord("should_not_be_in_log")
-            .build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
-  public void testThrowsInBefore() throws Exception {
-    String testName = "ThrowsInBeforeTest";
-    TestResult testResult =
-        newTestResultBuilder()
-            .testClassName(testName)
-            .addTestFailure("test")
-            .addTestSuccess("testOther")
-            .addJavaLogLineSequence("before", "before", "testOther")
-            .addBlackListedWord("should_not_be_in_log")
-            .build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
-  public void testThrowsInAfter() throws Exception {
-    String testName = "ThrowsInAfterTest";
-    TestResult testResult =
-        newTestResultBuilder()
-            .testClassName(testName)
-            .addTestFailure("test")
-            .addTestSuccess("testOther")
-            .addJavaLogLineSequence("test", "after", "testOther", "after")
             .build();
 
     List<String> logLines = runTest(testName);

@@ -12,6 +12,7 @@ package(
 # blaze test --test_arg=--output_command_line junit/generator/javatests/com/google/j2cl/junit/integration/junit3:JUnit3IntegrationTest
 j2cl_test_integration_test(
     name = "JUnit3IntegrationTest",
+    enable_wasm = True,
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:MethodOrderingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:ParentMethodTest",
