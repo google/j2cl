@@ -6,23 +6,23 @@ open class ObjectCalls {
   (`object`!! as java.lang.Object).equals(`object`)
   (`object`!! as java.lang.Object).hashCode()
   (`object`!! as java.lang.Object).toString()
-  (`object`!! as java.lang.Object).getClass()
+  (`object`!!)::class.java
   val objectCalls: Array<devirtualizedcalls.ObjectCalls?>? = arrayOfNulls<devirtualizedcalls.ObjectCalls?>(1)
   (objectCalls!! as java.lang.Object).equals(objectCalls)
   (objectCalls!! as java.lang.Object).hashCode()
   (objectCalls!! as java.lang.Object).toString()
-  (objectCalls!! as java.lang.Object).getClass()
+  (objectCalls!!)::class.java
  }
 
  open fun test() {
   (this as java.lang.Object).equals((java.lang.Object() as kotlin.Any))
   (this as java.lang.Object).hashCode()
   (this as java.lang.Object).toString()
-  (this as java.lang.Object).getClass()
+  (this)::class.java
   (this as java.lang.Object).equals((java.lang.Object() as kotlin.Any))
   (this as java.lang.Object).hashCode()
   (this as java.lang.Object).toString()
-  (this as java.lang.Object).getClass()
+  (this)::class.java
  }
 
  open fun testNotEquals(): Boolean {
