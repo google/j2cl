@@ -20,7 +20,7 @@ package java.lang;
 import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 
-@KtNative("kotlin.Number")
+@KtNative("kotlin.Long")
 public final class Long extends Number implements Comparable<Long> {
 
   public static /* final */ long MAX_VALUE;
