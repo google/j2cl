@@ -20,14 +20,15 @@ import com.google.auto.service.AutoService;
 import com.google.common.collect.Lists;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.SupportedOptions;
 import javax.lang.model.SourceVersion;
 
-/**
- * The J2ClTestingProcessor emits a js_unit test JavaScript file for every
- * JUnit4 test.
- */
+/** The J2ClTestingProcessor emits a js_unit test JavaScript file for every JUnit4 test. */
 @AutoService(Processor.class)
+@SupportedOptions({J2clTestingProcessor.JAVAC_OPTS_FLAG_IS_J2WASM_TEST})
 public class J2clTestingProcessor extends BasicAnnotationProcessor {
+
+  static final String JAVAC_OPTS_FLAG_IS_J2WASM_TEST = "isJ2wasmTest";
 
   private J2clTestingProcessingStep step;
 

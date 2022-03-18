@@ -34,10 +34,12 @@ class TemplateWriter {
   private final VelocityEngine velocityEngine = J2clTestingVelocityUtil.createEngine();
   private final ErrorReporter errorReporter;
   private final Filer filer;
+  private final boolean isJ2wasmTest;
 
-  public TemplateWriter(ErrorReporter errorReporter, Filer filer) {
+  public TemplateWriter(ErrorReporter errorReporter, Filer filer, boolean isJ2wasmTest) {
     this.errorReporter = errorReporter;
     this.filer = filer;
+    this.isJ2wasmTest = isJ2wasmTest;
   }
 
   public void writeSummary() {
@@ -58,11 +60,16 @@ class TemplateWriter {
   public void writeTestClass(TestClass testClass) {
     String testSuiteFileName = testClass.qualifiedName().replace('.', '/');
     testSummary.add(testSuiteFileName + ".js");
+    String jsSuite = "com/google/j2cl/junit/apt/JsSuite.vm";
+    String jsUnitAdapter = "com/google/j2cl/junit/apt/JsUnitAdapter.vm";
+    if (isJ2wasmTest) {
+      jsSuite = "com/google/j2cl/junit/apt/WasmJsSuite.vm";
+      jsUnitAdapter = "com/google/j2cl/junit/apt/WasmJsUnitAdapter.vm";
+    }
     try {
-      String mergedJsTemplate = mergeTemplate(testClass, "com/google/j2cl/junit/apt/JsSuite.vm");
+      String mergedJsTemplate = mergeTemplate(testClass, jsSuite);
       writeResource(testSuiteFileName + ".testsuite", mergedJsTemplate);
-      String mergedJavaTemplate =
-          mergeTemplate(testClass, "com/google/j2cl/junit/apt/JsUnitAdapter.vm");
+      String mergedJavaTemplate = mergeTemplate(testClass, jsUnitAdapter);
       writeClass(testClass.jsUnitAdapterQualifiedClassName(), mergedJavaTemplate);
     } catch (Exception e) {
       errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(e));

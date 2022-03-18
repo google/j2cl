@@ -73,6 +73,11 @@ alias(
     actual = "//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations",
 )
 
+alias(
+    name = "internal_junit_annotations-j2wasm",
+    actual = "//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations-j2wasm",
+)
+
 # ***************************************************
 # Tools related
 # **************************************************

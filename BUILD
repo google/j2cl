@@ -37,6 +37,11 @@ alias(
     actual = "//junit/emul/java:junit_emul",
 )
 
+alias(
+    name = "junit-j2wasm",
+    actual = "//junit/emul/java:junit_emul-j2wasm",
+)
+
 # JUnit async runner (EXPERIMENTAL)
 
 alias(

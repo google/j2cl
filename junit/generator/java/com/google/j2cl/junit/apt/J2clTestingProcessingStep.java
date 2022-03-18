@@ -24,7 +24,6 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import java.lang.annotation.Annotation;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
@@ -51,7 +50,9 @@ public class J2clTestingProcessingStep implements ProcessingStep {
     this.errorReporter = new ErrorReporter(processingEnv.getMessager());
     this.junit3Validator = new JUnit3Validator(errorReporter);
     this.junit4Validator = new JUnit4Validator(errorReporter);
-    this.writer = new TemplateWriter(errorReporter, processingEnv.getFiler());
+    boolean isJ2wasmTest =
+        processingEnv.getOptions().containsKey(J2clTestingProcessor.JAVAC_OPTS_FLAG_IS_J2WASM_TEST);
+    this.writer = new TemplateWriter(errorReporter, processingEnv.getFiler(), isJ2wasmTest);
   }
 
   @SuppressWarnings("unchecked")
@@ -130,7 +131,7 @@ public class J2clTestingProcessingStep implements ProcessingStep {
   }
 
   private void handleJUnit4Suite(TypeElement typeElement) {
-    List<String> classes =
+    ImmutableList<String> classes =
         MoreApt.getClassNamesFromAnnotation(typeElement, Suite.SuiteClasses.class, "value");
     if (classes.isEmpty()) {
       errorReporter.report(ErrorMessage.EMPTY_SUITE, typeElement);

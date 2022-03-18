@@ -21,6 +21,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromise;
 import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromiseThenNameRedefined;
@@ -275,6 +276,7 @@ public class J2clTestingProcessingStepTest {
     when(processingEnv.getElementUtils()).thenReturn(compilation.getElements());
     when(processingEnv.getMessager()).thenReturn(messager);
     when(processingEnv.getFiler()).thenReturn(mock(Filer.class));
+    when(processingEnv.getOptions()).thenReturn(ImmutableMap.of());
     return new J2clTestingProcessingStep(processingEnv);
   }
 

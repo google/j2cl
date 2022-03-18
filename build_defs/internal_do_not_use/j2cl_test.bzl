@@ -1,15 +1,22 @@
-"""j2cl_test build macro"""
+"""j2cl_test build macro
+Works similarly to junit_test; see j2cl_test_common.bzl for details
+"""
 
-def j2cl_test(name, **kwargs):
-    """Macro for running a JUnit test cross compiled as a web test"""
+load(":j2cl_test_common.bzl", "j2cl_test_common")
 
-    # No-op until unit testing support implemented for open-source.
-    native.genrule(
-        name = name,
-        deprecation = "\nCAUTION: This is a placeholder. " +
-                      "j2cl_test has not ported to opensource yet." +
-                      "\nHENCE WE DO *NOT* KNOW IF YOUR TEST IS PASSING OR NOT!",
-        cmd = "echo Empty > $@",
-        tags = ["manual"],
-        outs = [name + ".out"],
+# buildifier: disable=function-docstring-args
+def j2cl_test(
+        name,
+        tags = [],
+        **kwargs):
+    """Macro for running a JUnit test cross compiled as a web test
+
+       This macro uses the j2cl_test_tranpile macro to transpile tests and feed
+       them into a jsunit_test.
+    """
+
+    j2cl_test_common(
+        name,
+        tags = tags + ["j2cl"],
+        **kwargs
     )

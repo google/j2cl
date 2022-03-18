@@ -47,12 +47,14 @@ _J2KT_NATIVE_PACKAGES = []
 _J2WASM_PACKAGES = [
     "third_party/java/auto",
     "third_party/java/jbox2d",
+    "third_party/java/junit",
     "third_party/java_src/jbox2d/jbox2dlibrary/src/main/java",
     "third_party/java/jsr250_annotations",
     "third_party/java/jsr330_inject",
     "third_party/java/re2j",
     "third_party/java_src/google_common/current",
     "third_party/java_src/j2cl",
+    "junit",
     "third_party/java_src/jsr330_inject",
     "third_party/java_src/re2j",
 ]
@@ -69,6 +71,7 @@ _tree_artifact_proxy = rule(
     attrs = {"j2cl_library": attr.label()},
 )
 
+# buildifier: disable=function-docstring-args
 def j2cl_library(
         name,
         generate_build_test = None,
@@ -180,12 +183,12 @@ def j2cl_library(
             **j2kt_args
         )
 
-_ALLOWED_ATTRS_KT = [key for key in J2KT_LIB_ATTRS] + ["tags", "visibility"]
+_ALLOWED_ATTRS_KT = [key for key in J2KT_LIB_ATTRS] + ["tags", "visibility", "testonly"]
 
 def _filter_j2kt_attrs(args):
     return {key: args[key] for key in _ALLOWED_ATTRS_KT if key in args}
 
-_ALLOWED_ATTRS_WASM = [key for key in J2WASM_LIB_ATTRS] + ["tags", "visibility"]
+_ALLOWED_ATTRS_WASM = [key for key in J2WASM_LIB_ATTRS] + ["tags", "visibility", "testonly"]
 
 def _filter_j2wasm_attrs(args):
     return {key: args[key] for key in _ALLOWED_ATTRS_WASM if key in args}

@@ -11,6 +11,7 @@ load("//build_defs/internal_do_not_use:j2cl_import.bzl", _j2cl_import = "j2cl_im
 load("//build_defs/internal_do_not_use:j2cl_repo.bzl", _j2cl_import_external = "j2cl_import_external", _j2cl_maven_import_external = "j2cl_maven_import_external")
 load("//build_defs/internal_do_not_use:j2cl_rta.bzl", _j2cl_rta = "j2cl_rta")
 load("//build_defs/internal_do_not_use:j2cl_test.bzl", _j2cl_test = "j2cl_test")
+load("//build_defs/internal_do_not_use:j2wasm_test.bzl", _j2wasm_test = "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2kt_library.bzl", _j2kt_jvm_library = "j2kt_jvm_library", _j2kt_native_library = "j2kt_native_library")
 load("//build_defs/internal_do_not_use:gen_j2cl_tests.bzl", _gen_j2cl_tests = "gen_j2cl_tests")
 load("//build_defs/internal_do_not_use:j2wasm_application.bzl", _j2wasm_application = "j2wasm_application")
@@ -48,6 +49,8 @@ j2kt_jvm_library = _j2kt_jvm_library
 j2wasm_application = _j2wasm_application
 
 j2wasm_library = _j2wasm_library
+
+j2wasm_test = _j2wasm_test
 
 J2CL_OPTIMIZED_DEFS = _J2CL_OPTIMIZED_DEFS
 

@@ -1,0 +1,70 @@
+#macro( methodExecution $testMethod )
+actualTest.${testMethod.javaMethodName()}();
+#end
+#macro( methodExecutions $testMethods )
+  #foreach($testMethod in $testMethods)
+#methodExecution( $testMethod )
+  #end
+#end
+/**
+ * Generated test suite from j2wasm_test target
+ */
+package ${testClass.jsUnitPackageName()};
+
+public class ${testClass.jsUnitAdapterClassName()} {
+  private static ${testClass.qualifiedName()} actualTest;
+
+  public static void setUpPageIn${testClass.simpleName()}() throws Throwable {
+#methodExecutions( $testClass.beforeClassMethods() )
+  }
+
+  public static void tearDownPageIn${testClass.simpleName()}() throws Throwable {
+#methodExecutions( $testClass.afterClassMethods() )
+  }
+
+  public static void setUpIn${testClass.simpleName()}() throws Throwable {
+    actualTest = new ${testClass.qualifiedName()}();
+
+  #methodExecutions(${testClass.beforeMethods()})
+
+  }
+
+  public static void tearDownIn${testClass.simpleName()}() throws Throwable {
+    if (actualTest == null) {
+      // Test failed to be constructed, thus we can not run its teardown
+      return;
+    }
+
+    try {
+
+  #methodExecutions(${testClass.afterMethods()} )
+
+    } catch (Throwable e) {
+        // Ensures that the test instance is always reset to null so that if the
+        // next test fails to construct the instance in the setUp, the instance
+        // will be null and that will prevent the tearDown from running.
+        // J2wasm doesn't support finally so we use a catch and retrow the exception.
+        actualTest = null;
+        throw e;
+    }
+    actualTest = null;
+  }
+
+#foreach($testMethod in ${testClass.testMethods()})
+  public static void ${testMethod.jsTestMethodName()}In${testClass.simpleName()}() throws Throwable {
+
+#if ($testMethod.expectedExceptionQualifiedName())
+    try {
+#end
+    #methodExecution( $testMethod )
+#if ($testMethod.expectedExceptionQualifiedName())
+    } catch (${testMethod.expectedExceptionQualifiedName()} e) {
+      return;
+    }
+
+    throw new Exception("expected exception was not thrown");
+#end
+  }
+#end
+
+}
