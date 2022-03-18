@@ -17,16 +17,16 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.Type;
 
 /** Normalizes array creation for Kotlin, by extracting array literal from new array expression. */
 public class NormalizeArrayCreationsKotlin extends NormalizationPass {
 
   @Override
-  public void applyTo(Type type) {
-    type.accept(
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteNewArray(NewArray newArray) {

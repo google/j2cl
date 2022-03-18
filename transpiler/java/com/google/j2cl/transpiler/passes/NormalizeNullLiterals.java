@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.NullLiteral;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
@@ -28,8 +28,8 @@ import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewrite
 public class NormalizeNullLiterals extends NormalizationPass {
 
   @Override
-  public void applyTo(Type type) {
-    type.accept(
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new ConversionContextVisitor(
             new ContextRewriter() {
               @Override

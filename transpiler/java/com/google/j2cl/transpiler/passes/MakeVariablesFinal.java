@@ -17,9 +17,9 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Operator;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableReference;
@@ -30,13 +30,13 @@ import java.util.Set;
 public class MakeVariablesFinal extends NormalizationPass {
 
   @Override
-  public void applyTo(Type type) {
+  public void applyTo(CompilationUnit compilationUnit) {
     Set<Variable> finalVariables = new HashSet<>();
     // Collect variables that are not assigned outside their declaration.
     // Note that it is safe to do one traversal collecting all declarations and removing them when
     // references are seen because variable references can not appear in the AST before their
     // declaration (that invariant is checked in VerifyReferenceScoping).
-    type.accept(
+    compilationUnit.accept(
         new AbstractVisitor() {
           @Override
           public boolean enterVariable(Variable variable) {

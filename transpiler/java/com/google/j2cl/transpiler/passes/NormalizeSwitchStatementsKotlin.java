@@ -20,6 +20,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BreakStatement;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
@@ -27,7 +28,6 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
-import com.google.j2cl.transpiler.ast.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,8 +81,8 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
   }
 
   @Override
-  public void applyTo(Type type) {
-    type.accept(
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteSwitchStatement(SwitchStatement switchStatement) {

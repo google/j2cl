@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Kind;
@@ -25,15 +26,14 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 
 /** Rewrites certain Java operators to Kotlin method calls. */
 public final class ImplementKotlinBitLevelOperators extends NormalizationPass {
 
   @Override
-  public void applyTo(Type type) {
-    type.accept(
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {

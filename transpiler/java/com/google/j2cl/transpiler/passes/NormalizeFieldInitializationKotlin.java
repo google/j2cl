@@ -16,17 +16,17 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Member;
-import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 
 /** Initializes non-final, nullable fields with explicit default value. */
 public class NormalizeFieldInitializationKotlin extends NormalizationPass {
   @Override
-  public void applyTo(Type type) {
-    type.accept(
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Member rewriteField(Field field) {
