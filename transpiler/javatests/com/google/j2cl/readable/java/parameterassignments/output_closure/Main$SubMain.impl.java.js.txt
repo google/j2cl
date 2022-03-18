@@ -1,0 +1,45 @@
+goog.module('parameterassignments.Main.SubMain$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Main = goog.require('parameterassignments.Main$impl');
+
+class SubMain extends Main {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!SubMain} */
+ static $create__int__int__int(/** number */ nonFinal, /** number */ explicitFinal, /** number */ implicitFinal) {
+  SubMain.$clinit();
+  let $instance = new SubMain();
+  $instance.$ctor__parameterassignments_Main_SubMain__int__int__int(nonFinal, explicitFinal, implicitFinal);
+  return $instance;
+ }
+ 
+ $ctor__parameterassignments_Main_SubMain__int__int__int(/** number */ nonFinal, /** number */ explicitFinal, /** number */ implicitFinal) {
+  this.$ctor__parameterassignments_Main__int__int__int(nonFinal, explicitFinal, implicitFinal);
+  nonFinal = nonFinal + explicitFinal + implicitFinal | 0;
+ }
+ /** @override @return {number} */
+ m_test__int__int__int_$pp_parameterassignments(/** number */ nonFinal, /** number */ explicitFinal, /** number */ implicitFinal) {
+  nonFinal = nonFinal + explicitFinal + implicitFinal | 0;
+  return super.m_test__int__int__int_$pp_parameterassignments(nonFinal, explicitFinal, implicitFinal);
+ }
+ 
+ static $clinit() {
+  SubMain.$clinit = () =>{};
+  SubMain.$loadModules();
+  Main.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubMain;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubMain, 'parameterassignments.Main$SubMain');
+
+exports = SubMain;
+
+//# sourceMappingURL=Main$SubMain.js.map

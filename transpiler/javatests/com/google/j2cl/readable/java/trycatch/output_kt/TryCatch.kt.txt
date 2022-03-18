@@ -9,7 +9,8 @@ open class TryCatch {
   } catch (e: kotlin.ClassCastException) {
    throw e!!
   } catch (r: kotlin.RuntimeException) {
-   r = null
+   var r_1: kotlin.RuntimeException? = r
+   r_1 = null
   }
  }
 

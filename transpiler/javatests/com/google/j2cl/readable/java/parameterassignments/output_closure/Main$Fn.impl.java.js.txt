@@ -1,0 +1,41 @@
+goog.module('parameterassignments.Main.Fn$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('parameterassignments.Main.Fn.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class Fn {
+ /** @abstract @return {number} */
+ m_test__int__int(/** number */ nonFinal, /** number */ implicitFinal) {}
+ /** @return {Fn} */
+ static $adapt(/** ?function(number, number):number */ fn) {
+  Fn.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  Fn.$clinit = () =>{};
+  Fn.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__parameterassignments_Main_Fn = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__parameterassignments_Main_Fn;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('parameterassignments.Main.Fn.$LambdaAdaptor$impl');
+ }
+}
+Fn.$markImplementor(/**@type {Function}*/ (Fn));
+$Util.$setClassMetadataForInterface(Fn, 'parameterassignments.Main$Fn');
+
+exports = Fn;
+
+//# sourceMappingURL=Main$Fn.js.map

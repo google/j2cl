@@ -105,6 +105,7 @@ import com.google.j2cl.transpiler.passes.NormalizeLiteralsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNestedBlocks;
+import com.google.j2cl.transpiler.passes.NormalizeNonFinalVariablesKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizePrimaryConstructors;
@@ -419,6 +420,7 @@ public enum Backend {
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,
           MakeVariablesFinal::new,
+          NormalizeNonFinalVariablesKotlin::new,
 
           // Verification
           VerifySingleAstReference::new,
