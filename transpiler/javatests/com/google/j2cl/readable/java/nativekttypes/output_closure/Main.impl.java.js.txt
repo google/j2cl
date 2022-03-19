@@ -8,6 +8,7 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let NativeTopLevel = goog.forwardDeclare('nativekttypes.NativeTopLevel$impl');
 let Inner = goog.forwardDeclare('nativekttypes.NativeTopLevel.Inner$impl');
 let Nested = goog.forwardDeclare('nativekttypes.NativeTopLevel.Nested$impl');
+let Subclass = goog.forwardDeclare('nativekttypes.Subclass$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Main extends j_l_Object {
@@ -36,13 +37,21 @@ class Main extends j_l_Object {
  m_methodArguments__nativekttypes_NativeTopLevel__nativekttypes_NativeTopLevel_Nested__nativekttypes_NativeTopLevel_Inner(/** NativeTopLevel<?string> */ foo, /** Nested<?string> */ nested, /** Inner<?string, ?string> */ inner) {}
  
  m_memberAccess__() {
-  let foo = /**@type {!NativeTopLevel<?string>}*/ (NativeTopLevel.$create__java_lang_Object('foo'));
-  let fooInstanceMethod = /**@type {?string}*/ ($Casts.$to(foo.instanceMethod('foo'), j_l_String));
-  let fooStaticMethod = /**@type {?string}*/ ($Casts.$to((foo, NativeTopLevel.staticMethod('foo')), j_l_String));
-  let fooInstanceField = /**@type {?string}*/ ($Casts.$to(foo.f_instanceField__nativekttypes_NativeTopLevel, j_l_String));
-  foo.f_instanceField__nativekttypes_NativeTopLevel = 'foo';
-  let fooStaticField = (foo, NativeTopLevel.f_staticField__nativekttypes_NativeTopLevel);
+  let topLevel = /**@type {!NativeTopLevel<?string>}*/ (NativeTopLevel.$create__java_lang_Object('foo'));
+  let fooInstanceMethod = /**@type {?string}*/ ($Casts.$to(topLevel.instanceMethod('foo'), j_l_String));
+  let fooStaticMethod = /**@type {?string}*/ ($Casts.$to((topLevel, NativeTopLevel.staticMethod('foo')), j_l_String));
+  let fooInstanceField = /**@type {?string}*/ ($Casts.$to(topLevel.f_instanceField__nativekttypes_NativeTopLevel, j_l_String));
+  topLevel.f_instanceField__nativekttypes_NativeTopLevel = 'foo';
+  let fooStaticField = (topLevel, NativeTopLevel.f_staticField__nativekttypes_NativeTopLevel);
   NativeTopLevel.f_staticField__nativekttypes_NativeTopLevel = 'foo';
+  let i1 = topLevel.f_fieldToRename__nativekttypes_NativeTopLevel;
+  let i2 = topLevel.methodToRename();
+  let i3 = topLevel.getMethodAsProperty();
+  let i4 = topLevel.nonGetMethodAsProperty();
+  let i5 = topLevel.methodToRenameAsProperty();
+  let i6 = topLevel.f_isFieldToRename__nativekttypes_NativeTopLevel;
+  let i7 = topLevel.isMethodAsProperty();
+  let i8 = topLevel.getstartingmethodAsProperty();
   let nested = /**@type {!Nested<?string>}*/ (Nested.$create__java_lang_Object('foo'));
   let nestedInstanceMethod = /**@type {?string}*/ ($Casts.$to(nested.instanceMethod('foo'), j_l_String));
   let nestedStaticMethod = /**@type {?string}*/ ($Casts.$to((nested, Nested.staticMethod('foo')), j_l_String));
@@ -50,7 +59,11 @@ class Main extends j_l_Object {
   nested.f_instanceField__nativekttypes_NativeTopLevel_Nested = 'foo';
   let nestedStaticField = (nested, Nested.f_staticField__nativekttypes_NativeTopLevel_Nested);
   Nested.f_staticField__nativekttypes_NativeTopLevel_Nested = 'foo';
-  let inner = /**@type {!Inner<?string, ?string>}*/ (Inner.$create__nativekttypes_NativeTopLevel__java_lang_Object(foo, 'foo'));
+  let inner = /**@type {!Inner<?string, ?string>}*/ (Inner.$create__nativekttypes_NativeTopLevel__java_lang_Object(topLevel, 'foo'));
+  let subclass = /**@type {!Subclass<?string>}*/ (new Subclass('foo'));
+  let i9 = subclass.methodToRename();
+  let i10 = subclass.m_interfaceMethod__();
+  let i11 = subclass.m_interfaceMethodToRename__();
  }
  
  m_typeLiterals__() {
@@ -81,6 +94,7 @@ class Main extends j_l_Object {
   NativeTopLevel = goog.module.get('nativekttypes.NativeTopLevel$impl');
   Inner = goog.module.get('nativekttypes.NativeTopLevel.Inner$impl');
   Nested = goog.module.get('nativekttypes.NativeTopLevel.Nested$impl');
+  Subclass = goog.module.get('nativekttypes.Subclass$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }

@@ -3,6 +3,26 @@ package nativekttypes.nativekt
 open class KTopLevel<O> {
  @kotlin.jvm.JvmField var instanceField: O? = null
 
+ @kotlin.jvm.JvmField var renamedField: Int = 0
+
+ open fun renamedMethod(): Int {
+  return 0
+ }
+
+ @kotlin.jvm.JvmField var methodAsProperty: Int = 0
+
+ @kotlin.jvm.JvmField var nonGetMethodAsProperty: Int = 0
+
+ @kotlin.jvm.JvmField var renamedMethodAsProperty: Int = 0
+
+ @kotlin.jvm.JvmField var getRenamedMethodAsProperty: Int = 0
+
+ @kotlin.jvm.JvmField var isRenamedField: Boolean = false
+
+ @kotlin.jvm.JvmField var isMethodAsProperty: Boolean = false
+
+ @kotlin.jvm.JvmField var getstartingmethodAsProperty: Int = 0
+
  constructor(o: O?)
 
  open fun instanceMethod(o: O?): O? {
@@ -25,6 +45,10 @@ open class KTopLevel<O> {
 
   open fun instanceMethod(n: N?): N? {
    return n
+  }
+
+  open fun renamedMethod(): Int {
+   return 0
   }
 
   companion object {

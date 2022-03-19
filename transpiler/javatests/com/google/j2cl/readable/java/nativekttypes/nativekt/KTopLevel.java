@@ -29,6 +29,10 @@ public class KTopLevel<O> {
     public static <S> S staticMethod(S s) {
       return s;
     }
+
+    public int renamedMethod() {
+      return 0;
+    }
   }
 
   public class KInner<I> {
@@ -37,6 +41,19 @@ public class KTopLevel<O> {
 
   public O instanceField;
   public static Object staticField;
+  public int renamedField;
+
+  public int renamedMethod() {
+    return 0;
+  }
+
+  public int methodAsProperty;
+  public int nonGetMethodAsProperty;
+  public int renamedMethodAsProperty;
+  public int getRenamedMethodAsProperty;
+  public boolean isRenamedField;
+  public boolean isMethodAsProperty;
+  public int getstartingmethodAsProperty;
 
   public KTopLevel(O o) {}
 

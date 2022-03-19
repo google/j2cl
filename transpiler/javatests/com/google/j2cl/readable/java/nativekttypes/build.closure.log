@@ -2,7 +2,7 @@ default //third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readabl
 third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
 Originally at:
 third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property instanceMethod never defined on NativeTopLevel
-    String fooInstanceMethod = foo.instanceMethod("foo");
+    String fooInstanceMethod = topLevel.instanceMethod("foo");
     ^^^^^^^^^^^^^^
 
 third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
@@ -10,14 +10,98 @@ Originally at:
 third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_CONFORMANCE_VIOLATION] Violation: Type of property reference is unknown.
   defined in third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt
 The property "instanceMethod" on type "module$exports$nativekttypes$NativeTopLevel$impl<(null|string)>"
-    String fooInstanceMethod = foo.instanceMethod("foo");
+    String fooInstanceMethod = topLevel.instanceMethod("foo");
     ^^^^^^^^^^^^^^
 
 third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
 Originally at:
 third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property staticMethod never defined on module$exports$nativekttypes$NativeTopLevel$impl
-    String fooStaticMethod = foo.staticMethod("foo");
+    String fooStaticMethod = topLevel.staticMethod("foo");
     ^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property methodToRename never defined on NativeTopLevel
+    int i2 = topLevel.methodToRename();
+    ^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_CONFORMANCE_VIOLATION] Violation: Type of property reference is unknown.
+  defined in third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt
+The property "methodToRename" on type "module$exports$nativekttypes$NativeTopLevel$impl<(null|string)>"
+    int i2 = topLevel.methodToRename();
+    ^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property getMethodAsProperty never defined on NativeTopLevel
+    int i3 = topLevel.getMethodAsProperty();
+    ^^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_CONFORMANCE_VIOLATION] Violation: Type of property reference is unknown.
+  defined in third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt
+The property "getMethodAsProperty" on type "module$exports$nativekttypes$NativeTopLevel$impl<(null|string)>"
+    int i3 = topLevel.getMethodAsProperty();
+    ^^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property nonGetMethodAsProperty never defined on NativeTopLevel
+    int i4 = topLevel.nonGetMethodAsProperty();
+    ^^^^^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_CONFORMANCE_VIOLATION] Violation: Type of property reference is unknown.
+  defined in third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt
+The property "nonGetMethodAsProperty" on type "module$exports$nativekttypes$NativeTopLevel$impl<(null|string)>"
+    int i4 = topLevel.nonGetMethodAsProperty();
+    ^^^^^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property methodToRenameAsProperty never defined on NativeTopLevel
+    int i5 = topLevel.methodToRenameAsProperty();
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_CONFORMANCE_VIOLATION] Violation: Type of property reference is unknown.
+  defined in third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt
+The property "methodToRenameAsProperty" on type "module$exports$nativekttypes$NativeTopLevel$impl<(null|string)>"
+    int i5 = topLevel.methodToRenameAsProperty();
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property isMethodAsProperty never defined on NativeTopLevel
+    boolean i7 = topLevel.isMethodAsProperty();
+    ^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_CONFORMANCE_VIOLATION] Violation: Type of property reference is unknown.
+  defined in third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt
+The property "isMethodAsProperty" on type "module$exports$nativekttypes$NativeTopLevel$impl<(null|string)>"
+    boolean i7 = topLevel.isMethodAsProperty();
+    ^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property getstartingmethodAsProperty never defined on NativeTopLevel
+    int i8 = topLevel.getstartingmethodAsProperty();
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_CONFORMANCE_VIOLATION] Violation: Type of property reference is unknown.
+  defined in third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt
+The property "getstartingmethodAsProperty" on type "module$exports$nativekttypes$NativeTopLevel$impl<(null|string)>"
+    int i8 = topLevel.getstartingmethodAsProperty();
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.impl.java.js 
 Originally at:
@@ -39,4 +123,24 @@ third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nat
     String nestedStaticMethod = nested.staticMethod("foo");
     ^^^^^^^^^^^^
 
-0 error(s), 6 warning(s)
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Subclass.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_UNKNOWN_OVERRIDE] property methodToRename not defined on any superclass of module$exports$nativekttypes$Subclass$impl
+  public int methodToRename() {
+             ^^^^^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Subclass.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_INEXISTENT_PROPERTY] Property methodToRename never defined on NativeTopLevel
+    return super.methodToRename();
+    ^^^^^^^^^^^^^^
+
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Subclass.impl.java.js 
+Originally at:
+third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/nativekttypes/readable.js/nativekttypes/Main.java WARNING - [JSC_CONFORMANCE_VIOLATION] Violation: Type of property reference is unknown.
+  defined in third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt
+The property "methodToRename" on type "module$exports$nativekttypes$NativeTopLevel$impl"
+    return super.methodToRename();
+    ^^^^^^^^^^^^^^
+
+0 error(s), 21 warning(s)

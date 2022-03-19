@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Kind;
+import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
@@ -624,6 +625,7 @@ class JdtUtils {
     }
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
+    KtInfo ktInfo = computeKtInfo(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
     boolean isFinal = JdtUtils.isFinal(variableBinding);
     return FieldDescriptor.newBuilder()
@@ -633,6 +635,7 @@ class JdtUtils {
         .setStatic(isStatic)
         .setVisibility(visibility)
         .setJsInfo(jsInfo)
+        .setKtInfo(ktInfo)
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
         .setDeclarationDescriptor(declarationFieldDescriptor)
@@ -657,6 +660,7 @@ class JdtUtils {
     Visibility visibility = getVisibility(methodBinding);
     boolean isDefault = isDefaultMethod(methodBinding);
     JsInfo jsInfo = computeJsInfo(methodBinding);
+    KtInfo ktInfo = computeKtInfo(methodBinding);
 
     boolean isNative =
         Modifier.isNative(methodBinding.getModifiers())
@@ -719,6 +723,7 @@ class JdtUtils {
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)
+        .setKtInfo(ktInfo)
         .setWasmInfo(getWasmInfo(methodBinding))
         .setJsFunction(isOrOverridesJsFunctionMethod(methodBinding))
         .setVisibility(visibility)
@@ -804,6 +809,26 @@ class JdtUtils {
 
     // Don't inherit @JsAsync annotation from overridden methods.
     return JsInfo.Builder.from(defaultJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
+  }
+
+  /** Checks overriding chain to compute KtInfo. */
+  private static KtInfo computeKtInfo(IMethodBinding methodBinding) {
+    KtInfo ktInfo = KtInteropUtils.getKtInfo(methodBinding);
+
+    for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
+      KtInfo overriddenKtInfo = KtInteropUtils.getKtInfo(overriddenMethod);
+      ktInfo =
+          KtInfo.newBuilder()
+              .setProperty(ktInfo.isProperty() || overriddenKtInfo.isProperty())
+              .setName(ktInfo.getName() == null ? overriddenKtInfo.getName() : null)
+              .build();
+    }
+
+    return ktInfo;
+  }
+
+  private static KtInfo computeKtInfo(IVariableBinding variableBinding) {
+    return KtInteropUtils.getKtInfo(variableBinding);
   }
 
   private static boolean hasJsMemberAnnotation(IMethodBinding methodBinding) {

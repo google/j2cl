@@ -1,19 +1,19 @@
 package devirtualizedsupermethodcall
 
 open class SubNumber: kotlin.Number() {
- open override fun intValue(): Int {
+ open override fun toInt(): Int {
   return 0
  }
 
- open override fun longValue(): Long {
+ open override fun toLong(): Long {
   return 0L
  }
 
- open override fun floatValue(): Float {
+ open override fun toFloat(): Float {
   return 0.0f
  }
 
- open override fun doubleValue(): Double {
+ open override fun toDouble(): Double {
   return 0.0
  }
 }
@@ -30,9 +30,9 @@ open class Main {
   fooCallsSuperObjectMethods!!.hashCode()
   val sn: devirtualizedsupermethodcall.SubNumber? = devirtualizedsupermethodcall.SubNumber()
   (sn!! as java.lang.Number).byteValue()
-  sn!!.doubleValue()
-  sn!!.floatValue()
-  sn!!.intValue()
+  sn!!.toDouble()
+  sn!!.toFloat()
+  sn!!.toInt()
   (sn!! as java.lang.Number).shortValue()
  }
 }

@@ -1,0 +1,53 @@
+goog.module('nativekttypes.Subclass$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeInterface = goog.require('nativekttypes.NativeInterface$impl');
+const NativeTopLevel = goog.require('nativekttypes.NativeTopLevel$impl');
+
+/**
+ * @template V
+ * @extends {NativeTopLevel<V>}
+ * @implements {NativeInterface<V>}
+ */
+class Subclass extends NativeTopLevel {
+ 
+ constructor(/** V */ v) {
+  Subclass.$clinit();
+  super();
+  this.$ctor__nativekttypes_Subclass__java_lang_Object(v);
+ }
+ 
+ $ctor__nativekttypes_Subclass__java_lang_Object(/** V */ v) {
+  this.$ctor__nativekttypes_NativeTopLevel__java_lang_Object(v);
+ }
+ /** @override @return {number} */
+ methodToRename() {
+  return super.methodToRename();
+ }
+ /** @override @return {number} */
+ m_interfaceMethod__() {
+  return 0;
+ }
+ /** @override @return {number} */
+ m_interfaceMethodToRename__() {
+  return 0;
+ }
+ 
+ static $clinit() {
+  Subclass.$clinit = () =>{};
+  Subclass.$loadModules();
+  NativeTopLevel.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Subclass;
+ }
+ 
+ static $loadModules() {}
+}
+NativeInterface.$markImplementor(Subclass);
+$Util.$setClassMetadata(Subclass, 'nativekttypes.Subclass');
+
+exports = Subclass;
+
+//# sourceMappingURL=Subclass.js.map

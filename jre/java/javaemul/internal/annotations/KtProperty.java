@@ -23,6 +23,6 @@ import java.lang.annotation.Target;
 
 /** Maps a Java field or getter method to a Kotlin property. May be combined with {@code KtName}. */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target(ElementType.METHOD)
 @Documented
 public @interface KtProperty {}

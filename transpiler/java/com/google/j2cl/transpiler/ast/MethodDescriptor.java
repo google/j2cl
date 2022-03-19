@@ -671,6 +671,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // Default values.
         .setVisibility(Visibility.PUBLIC)
         .setJsInfo(JsInfo.NONE)
+        .setKtInfo(KtInfo.NONE)
         .setAbstract(false)
         .setConstructor(false)
         .setPrimaryConstructor(false)
@@ -951,6 +952,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setVisibility(Visibility visibility);
 
     public abstract Builder setJsInfo(JsInfo jsInfo);
+
+    public abstract Builder setKtInfo(KtInfo ktInfo);
 
     public abstract Builder setOrigin(MethodOrigin methodOrigin);
 

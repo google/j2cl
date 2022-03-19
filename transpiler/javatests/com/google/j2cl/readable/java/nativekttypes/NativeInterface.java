@@ -15,7 +15,13 @@
  */
 package nativekttypes;
 
+import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 
 @KtNative("nativekttypes.nativekt.KInterface")
-public interface NativeInterface<S> {}
+public interface NativeInterface<S> {
+  int interfaceMethod();
+
+  @KtName("renamedInterfaceMethod")
+  int interfaceMethodToRename();
+}

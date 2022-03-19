@@ -28,13 +28,21 @@ public class Main {
       NativeTopLevel<String>.Inner<String> inner) {}
 
   public void memberAccess() {
-    NativeTopLevel<String> foo = new NativeTopLevel<>("foo");
-    String fooInstanceMethod = foo.instanceMethod("foo");
-    String fooStaticMethod = foo.staticMethod("foo");
-    String fooInstanceField = foo.instanceField;
-    foo.instanceField = "foo";
-    Object fooStaticField = foo.staticField;
-    foo.staticField = "foo";
+    NativeTopLevel<String> topLevel = new NativeTopLevel<>("foo");
+    String fooInstanceMethod = topLevel.instanceMethod("foo");
+    String fooStaticMethod = topLevel.staticMethod("foo");
+    String fooInstanceField = topLevel.instanceField;
+    topLevel.instanceField = "foo";
+    Object fooStaticField = topLevel.staticField;
+    topLevel.staticField = "foo";
+    int i1 = topLevel.fieldToRename;
+    int i2 = topLevel.methodToRename();
+    int i3 = topLevel.getMethodAsProperty();
+    int i4 = topLevel.nonGetMethodAsProperty();
+    int i5 = topLevel.methodToRenameAsProperty();
+    boolean i6 = topLevel.isFieldToRename;
+    boolean i7 = topLevel.isMethodAsProperty();
+    int i8 = topLevel.getstartingmethodAsProperty();
 
     NativeTopLevel.Nested<String> nested = new NativeTopLevel.Nested<>("foo");
     String nestedInstanceMethod = nested.instanceMethod("foo");
@@ -44,7 +52,12 @@ public class Main {
     Object nestedStaticField = nested.staticField;
     nested.staticField = "foo";
 
-    NativeTopLevel<String>.Inner<String> inner = foo.new Inner<String>("foo");
+    NativeTopLevel<String>.Inner<String> inner = topLevel.new Inner<String>("foo");
+
+    Subclass<String> subclass = new Subclass<>("foo");
+    int i9 = subclass.methodToRename();
+    int i10 = subclass.interfaceMethod();
+    int i11 = subclass.interfaceMethodToRename();
   }
 
   public void typeLiterals() {
@@ -60,9 +73,24 @@ public class Main {
   }
 }
 
-class Bar<V> extends NativeTopLevel<V> implements NativeInterface<V> {
+class Subclass<V> extends NativeTopLevel<V> implements NativeInterface<V> {
   @JsConstructor
-  Bar(V v) {
+  Subclass(V v) {
     super(v);
+  }
+
+  @Override
+  public int methodToRename() {
+    return super.methodToRename();
+  }
+
+  @Override
+  public int interfaceMethod() {
+    return 0;
+  }
+
+  @Override
+  public int interfaceMethodToRename() {
+    return 0;
   }
 }

@@ -176,6 +176,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         // Default values.
         .setVisibility(Visibility.PUBLIC)
         .setJsInfo(JsInfo.NONE)
+        .setKtInfo(KtInfo.NONE)
         .setCompileTimeConstant(false)
         .setStatic(false)
         .setFinal(false)
@@ -215,6 +216,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setVisibility(Visibility visibility);
 
     public abstract Builder setJsInfo(JsInfo jsInfo);
+
+    public abstract Builder setKtInfo(KtInfo ktInfo);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 

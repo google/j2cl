@@ -158,7 +158,11 @@ private fun Renderer.renderExpressionWithComment(expressionWithComment: Expressi
 
 private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
   renderQualifier(fieldAccess)
-  renderIdentifier(fieldAccess.target.name!!)
+  if (mapsToKotlin(fieldAccess.target.enclosingTypeDescriptor)) {
+    renderIdentifier(fieldAccess.target.name!!)
+  } else {
+    renderIdentifier(fieldAccess.target.ktName)
+  }
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
@@ -246,8 +250,15 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   }
 
   renderQualifier(expression)
-  renderIdentifier(expression.target.name!!)
-  renderInvocationArguments(expression)
+  if (mapsToKotlin(expression.target.enclosingTypeDescriptor)) {
+    renderIdentifier(expression.target.name!!)
+    renderInvocationArguments(expression)
+  } else {
+    renderIdentifier(expression.target.ktName)
+    if (!expression.target.isKtProperty) {
+      renderInvocationArguments(expression)
+    }
+  }
 }
 
 internal fun Renderer.renderInvocationArguments(invocation: Invocation) {

@@ -39,6 +39,21 @@ public abstract class MemberDescriptor
 
   public abstract JsInfo getJsInfo();
 
+  abstract KtInfo getKtInfo();
+
+  public boolean isKtProperty() {
+    return isField() || getKtInfo().isProperty();
+  }
+
+  public String getKtName() {
+    String ktName = getKtInfo().getName();
+    if (ktName != null) {
+      return ktName;
+    }
+    String name = getName();
+    return getKtInfo().isProperty() ? KtInfo.computePropertyName(name) : name;
+  }
+
   public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
   public abstract MemberDescriptor getDeclarationDescriptor();

@@ -15,7 +15,9 @@
  */
 package nativekttypes;
 
+import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
+import javaemul.internal.annotations.KtProperty;
 import jsinterop.annotations.JsMethod;
 
 @KtNative("nativekttypes.nativekt.KTopLevel")
@@ -42,6 +44,42 @@ public class NativeTopLevel<O> {
 
   public O instanceField;
   public static Object staticField;
+
+  @KtName("renamedField")
+  public int fieldToRename;
+
+  @JsMethod
+  @KtName("renamedMethod")
+  public native int methodToRename();
+
+  @JsMethod
+  @KtProperty
+  public native int getMethodAsProperty();
+
+  @JsMethod
+  @KtProperty
+  public native int nonGetMethodAsProperty();
+
+  @JsMethod
+  @KtProperty
+  @KtName("renamedMethodAsProperty")
+  public native int methodToRenameAsProperty();
+
+  @JsMethod
+  @KtProperty
+  @KtName("getRenamedMethodAsProperty")
+  public native int getMethodToRenameAsProperty();
+
+  @KtName("isRenamedField")
+  public boolean isFieldToRename;
+
+  @JsMethod
+  @KtProperty
+  public native boolean isMethodAsProperty();
+
+  @JsMethod
+  @KtProperty
+  public native int getstartingmethodAsProperty();
 
   public NativeTopLevel(O o) {}
 

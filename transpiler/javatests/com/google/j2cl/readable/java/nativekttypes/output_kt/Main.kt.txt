@@ -10,19 +10,27 @@ open class Main {
  open fun methodArguments(foo: nativekttypes.nativekt.KTopLevel<kotlin.String?>?, nested: nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>?, inner: nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>?) {}
 
  open fun memberAccess() {
-  val foo: nativekttypes.nativekt.KTopLevel<kotlin.String?>? = nativekttypes.nativekt.KTopLevel<kotlin.String?>("foo")
-  val fooInstanceMethod: kotlin.String? = foo!!.instanceMethod("foo")
+  val topLevel: nativekttypes.nativekt.KTopLevel<kotlin.String?>? = nativekttypes.nativekt.KTopLevel<kotlin.String?>("foo")
+  val fooInstanceMethod: kotlin.String? = topLevel!!.instanceMethod("foo")
   val fooStaticMethod: kotlin.String? = run {
-   foo
+   topLevel
    nativekttypes.nativekt.KTopLevel.staticMethod("foo")
   }
-  val fooInstanceField: kotlin.String? = foo!!.instanceField
-  foo!!.instanceField = "foo"
+  val fooInstanceField: kotlin.String? = topLevel!!.instanceField
+  topLevel!!.instanceField = "foo"
   val fooStaticField: kotlin.Any? = run {
-   foo
+   topLevel
    nativekttypes.nativekt.KTopLevel.staticField
   }
   nativekttypes.nativekt.KTopLevel.staticField = "foo"
+  val i1: Int = topLevel!!.renamedField
+  val i2: Int = topLevel!!.renamedMethod()
+  val i3: Int = topLevel!!.methodAsProperty
+  val i4: Int = topLevel!!.nonGetMethodAsProperty
+  val i5: Int = topLevel!!.renamedMethodAsProperty
+  val i6: Boolean = topLevel!!.isRenamedField
+  val i7: Boolean = topLevel!!.isMethodAsProperty
+  val i8: Int = topLevel!!.getstartingmethodAsProperty
   val nested: nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>? = nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>("foo")
   val nestedInstanceMethod: kotlin.String? = nested!!.instanceMethod("foo")
   val nestedStaticMethod: kotlin.String? = run {
@@ -36,7 +44,11 @@ open class Main {
    nativekttypes.nativekt.KTopLevel.KNested.staticField
   }
   nativekttypes.nativekt.KTopLevel.KNested.staticField = "foo"
-  val inner: nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>? = foo!!.KInner<kotlin.String?>("foo")
+  val inner: nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>? = topLevel!!.KInner<kotlin.String?>("foo")
+  val subclass: nativekttypes.Subclass<kotlin.String?>? = nativekttypes.Subclass<kotlin.String?>("foo")
+  val i9: Int = subclass!!.renamedMethod()
+  val i10: Int = subclass!!.interfaceMethod()
+  val i11: Int = subclass!!.renamedInterfaceMethod()
  }
 
  open fun typeLiterals() {
@@ -52,6 +64,18 @@ open class Main {
  }
 }
 
-open class Bar<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nativekt.KTopLevel<V> {
+open class Subclass<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nativekt.KTopLevel<V> {
  constructor(v: V?): super(v)
+
+ open override fun renamedMethod(): Int {
+  return super.renamedMethod()
+ }
+
+ open override fun interfaceMethod(): Int {
+  return 0
+ }
+
+ open override fun renamedInterfaceMethod(): Int {
+  return 0
+ }
 }

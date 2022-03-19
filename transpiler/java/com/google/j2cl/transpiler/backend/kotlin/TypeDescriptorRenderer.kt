@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithBound
 
+// TODO(b/216924456): Remove when KtNative annotations are present in the sources.
 internal fun Renderer.mapsToKotlin(typeDescriptor: DeclaredTypeDescriptor) =
   typeDescriptor.typeDeclaration.qualifiedBinaryName.mappedKotlinQualifiedName != null
 

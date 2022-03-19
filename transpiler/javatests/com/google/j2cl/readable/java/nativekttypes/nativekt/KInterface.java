@@ -15,4 +15,8 @@
  */
 package nativekttypes.nativekt;
 
-public interface KInterface<V> {}
+public interface KInterface<V> {
+  int interfaceMethod();
+
+  int renamedInterfaceMethod();
+}
