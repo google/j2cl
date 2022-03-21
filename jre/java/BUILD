@@ -2,7 +2,7 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
-load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2wasm_library")
+load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2kt_native_library", "j2wasm_library")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load(":j2cl_java_toolchain.bzl", "j2cl_java_toolchain")
 load(":package_sources.bzl", "package_sources")
@@ -66,6 +66,14 @@ j2cl_import(
     ],
 )
 
+j2kt_native_library(
+    name = "javaemul_internal_annotations-j2kt-native",
+    srcs = glob(["javaemul/internal/annotations/Kt*.java"]),
+    visibility = [
+        "//transpiler/javatests:__subpackages__",
+    ],
+)
+
 BASE_JRE_SRCS = select({
     ":experimental_java11_support": glob(
         ["java*/**/*.java"],
@@ -94,14 +102,19 @@ package_sources(
     super_srcs = glob(["super-wasm/**/*.java"]),
 )
 
+# Note that j2kt uses different sources for bootclasspath (shared between j2kt
+# native and j2kt jvm) and runtime jre (native using a mix of transpiled and
+# hand-written Kotlin JRE emulation code, jvm omitting most JRE emulation code
+# and falling back on the Java JRE).
 package_sources(
-    name = "jre_java_files-j2kt",
+    name = "bootclasspath_java_files-j2kt",
     srcs = BASE_JRE_SRCS,  # TODO(b/222484176): Stop including J2CL JRE for JS.
     excludes = [
-        # J2KT doesn't need these.
+        # J2KT doesn't need these/they don't work with the super-kt supersourced types.
         "java/lang/JsException.java",
         "java/lang/IntegralToString.java",
         "java/lang/RealToString.java",
+        "javaemul/internal/Casts.java",
     ],
     # TODO(b/222484176): Expand to all of super-kt once we're not including J2CL
     #     JRE sources anymore. The excluded files in super-kt are incompatible
@@ -113,6 +126,13 @@ package_sources(
         "super-kt/javaemul/internal/Exceptions.java",
         "super-kt/javaemul/internal/Primitives.java",
     ],
+)
+
+package_sources(
+    name = "jre_java_files-j2kt-native",
+    srcs = glob(
+        ["super-kt/**/*.java"],
+    ),
 )
 
 filegroup(
@@ -179,6 +199,21 @@ j2cl_library(
     ],
 )
 
+j2kt_native_library(
+    name = "jre-j2kt-native",
+    srcs = [
+        ":jre_java_files-j2kt-native",
+    ],
+    javacopts = JRE_JAVAC_OPTS,
+    visibility = [
+        # Temporary for j2kt_library
+        "//transpiler/javatests:__subpackages__",
+    ],
+    deps = [
+        ":javaemul_internal_annotations-j2kt-native",
+    ],
+)
+
 # Note that these two targets below are separately compiled as a java_library
 # to avoid circular dependency.
 java_library(
@@ -204,7 +239,7 @@ java_library(
 
 java_library(
     name = "jre_bootclasspath-j2kt",
-    srcs = [":jre_java_files-j2kt"],
+    srcs = [":bootclasspath_java_files-j2kt"],
     javacopts = JRE_JAVAC_OPTS,
     deps = [
         ":javaemul_internal_annotations",
