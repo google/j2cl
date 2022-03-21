@@ -21,7 +21,7 @@ open class Main {
 
  class AFunction: jsoptional.Main.Function {
   open override fun f1(i: kotlin.String?, vararg args: kotlin.Any?): kotlin.Any? {
-   return args!![0]
+   return (args as Array<kotlin.Any?>?)!![0]
   }
  }
 

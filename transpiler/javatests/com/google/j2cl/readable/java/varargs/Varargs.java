@@ -18,6 +18,8 @@ package varargs;
 import java.io.Serializable;
 
 public class Varargs {
+  private Object[] args;
+
   public Varargs(int... args) {}
 
   public Varargs() {
@@ -29,6 +31,10 @@ public class Varargs {
   public void testCloneable(Cloneable... args) {}
 
   public void testSerializable(Serializable... args) {}
+
+  public void testAssignment(Object... args) {
+    this.args = args;
+  }
 
   public static <T> void fun(T... elements) {}
 

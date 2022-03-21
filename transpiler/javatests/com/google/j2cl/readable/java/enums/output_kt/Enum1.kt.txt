@@ -20,7 +20,7 @@ enum class Enum2 {
 
  constructor(foo: kotlin.Enum<*>?): this((foo!! as java.lang.Enum<*>).ordinal())
 
- constructor(vararg somePars: kotlin.Any?): this(somePars!!.size)
+ constructor(vararg somePars: kotlin.Any?): this((somePars as Array<kotlin.Any?>?)!!.size)
 
  companion object {
   @kotlin.jvm.JvmStatic

@@ -1,6 +1,8 @@
 package varargs
 
 open class Varargs {
+ @kotlin.jvm.JvmField var args: Array<kotlin.Any?>? = null
+
  constructor(vararg args: Int)
 
  constructor(): this(1)
@@ -10,6 +12,10 @@ open class Varargs {
  open fun testCloneable(vararg args: kotlin.Cloneable?) {}
 
  open fun testSerializable(vararg args: java.io.Serializable?) {}
+
+ open fun testAssignment(vararg args: kotlin.Any?) {
+  this.args = args as Array<kotlin.Any?>?
+ }
 
  open fun main() {
   val v: varargs.Varargs? = varargs.Varargs()

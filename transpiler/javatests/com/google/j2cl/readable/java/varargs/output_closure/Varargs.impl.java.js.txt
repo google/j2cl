@@ -12,6 +12,8 @@ class Varargs extends j_l_Object {
  /** @protected */
  constructor() {
   super();
+  /**@type {Array<*>}*/
+  this.f_args__varargs_Varargs_;
  }
  //Factory method corresponding to constructor 'Varargs(int...)'.
  /** @return {!Varargs} */
@@ -45,6 +47,10 @@ class Varargs extends j_l_Object {
  m_testCloneable__arrayOf_java_lang_Cloneable(/** Array<(Cloneable|Array)> */ args) {}
  
  m_testSerializable__arrayOf_java_io_Serializable(/** Array<(Serializable|Array)> */ args) {}
+ 
+ m_testAssignment__arrayOf_java_lang_Object(/** Array<*> */ args) {
+  this.f_args__varargs_Varargs_ = args;
+ }
  /** @template T */
  static m_fun__arrayOf_java_lang_Object(/** Array<T> */ elements) {
   Varargs.$clinit();
