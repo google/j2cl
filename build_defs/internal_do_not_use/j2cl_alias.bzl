@@ -35,11 +35,6 @@ def j2cl_alias(name, actual):
     )
 
     native.alias(
-        name = j2kt_common.to_j2kt_native_name(name),
-        actual = to_parallel_target(actual, j2kt_common.to_j2kt_native_name),
-    )
-
-    native.alias(
         name = j2wasm_common.to_j2wasm_name(name),
         actual = to_parallel_target(actual, j2wasm_common.to_j2wasm_name),
     )
