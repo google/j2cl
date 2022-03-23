@@ -139,9 +139,23 @@ private fun Renderer.renderEnumValues(type: Type) {
 
 // TODO(b/216796920): Remove when the bug is fixed.
 internal val TypeDeclaration.renderedTypeParameterDescriptors: List<TypeVariable>
+  get() = typeParameterDescriptors.take(renderedTypeParameterCount)
+
+// TODO(b/216796920): Remove when the bug is fixed.
+internal val TypeDeclaration.renderedTypeParameterCount: Int
   get() {
-    val enclosingTypeDeclaration = enclosingTypeDeclaration
-    return if (enclosingTypeDeclaration == null || !isCapturingEnclosingInstance)
-      typeParameterDescriptors
-    else typeParameterDescriptors.dropLast(enclosingTypeDeclaration.typeParameterDescriptors.size)
+    val enclosingInstanceTypeParameterCount =
+      enclosingTypeDeclaration
+        ?.takeIf { isCapturingEnclosingInstance }
+        ?.typeParameterDescriptors
+        ?.size
+        ?: 0
+
+    val enclosingMethodTypeParameterCount =
+      enclosingMethodDescriptor?.typeParameterTypeDescriptors?.size ?: 0
+
+    return typeParameterDescriptors
+      .size
+      .minus(enclosingInstanceTypeParameterCount)
+      .minus(enclosingMethodTypeParameterCount)
   }

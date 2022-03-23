@@ -260,9 +260,4 @@ private fun DeclaredTypeDescriptor.renderedTypeArgumentDescriptors(
 
 // TODO(b/216796920): Remove when the bug is fixed.
 private val DeclaredTypeDescriptor.renderedTypeArgumentDescriptors: List<TypeDescriptor>
-  get() {
-    val enclosingTypeDescriptor = enclosingTypeDescriptor
-    return if (enclosingTypeDescriptor == null || !typeDeclaration.isCapturingEnclosingInstance)
-      typeArgumentDescriptors
-    else typeArgumentDescriptors.dropLast(enclosingTypeDescriptor.typeArgumentDescriptors.size)
-  }
+  get() = typeArgumentDescriptors.take(typeDeclaration.renderedTypeParameterCount)
