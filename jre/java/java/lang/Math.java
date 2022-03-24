@@ -53,8 +53,11 @@ public final class Math {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.abs")
   public static native float abs(float x);
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.abs")
-  public static native int abs(int x);
+  public static int abs(int x) {
+    // This relies on J2cl's 32-bit integer coercion so that
+    // abs(Integer.MIN_VALUE) correctly equals Integer.MIN_VALUE.
+    return x < 0 ? -x : x;
+  }
 
   public static long abs(long x) {
     return x < 0 ? -x : x;

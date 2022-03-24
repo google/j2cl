@@ -75,6 +75,80 @@ public class MathTest extends GWTTestCase {
     assertNaN(v);
   }
 
+  public void testAbsInt() {
+    assertEquals(1, Math.abs(-1));
+    assertEquals(1, Math.abs(1));
+    assertEquals(0, Math.abs(0));
+    assertEquals(Integer.MAX_VALUE, Math.abs(Integer.MAX_VALUE));
+    assertEquals(Integer.MIN_VALUE, Math.abs(Integer.MIN_VALUE));
+  }
+
+  public void testAbsLong() {
+    assertEquals(1L, Math.abs(-1L));
+    assertEquals(1L, Math.abs(1L));
+    assertEquals(0L, Math.abs(0L));
+    assertEquals(Long.MAX_VALUE, Math.abs(Long.MAX_VALUE));
+    assertEquals(Long.MIN_VALUE, Math.abs(Long.MIN_VALUE));
+  }
+
+  public void testAddExactInt() {
+    assertEquals(2, Math.addExact(1, 1));
+    assertEquals(-2, Math.addExact(-1, -1));
+    assertEquals(0, Math.addExact(0, 0));
+    assertEquals(Integer.MIN_VALUE, Math.addExact(Integer.MIN_VALUE + 1, -1));
+    assertEquals(Integer.MAX_VALUE, Math.addExact(Integer.MAX_VALUE - 1, 1));
+
+    try {
+      Math.addExact(Integer.MAX_VALUE, 1);
+      fail("addExact(Integer.MAX_VALUE, 1)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+
+    try {
+      Math.addExact(1, Integer.MAX_VALUE);
+      fail("addExact(1, Integer.MAX_VALUE)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+
+    try {
+      Math.addExact(Integer.MIN_VALUE, -1);
+      fail("addExact(Integer.MIN_VALUE, -1)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
+  public void testAddExactLong() {
+    assertEquals(2L, Math.addExact(1L, 1L));
+    assertEquals(-2L, Math.addExact(-1L, -1L));
+    assertEquals(0L, Math.addExact(0L, 0L));
+    assertEquals(Long.MIN_VALUE, Math.addExact(Long.MIN_VALUE + 1L, -1L));
+    assertEquals(Long.MAX_VALUE, Math.addExact(Long.MAX_VALUE - 1L, 1L));
+
+    try {
+      Math.addExact(Long.MAX_VALUE, 1L);
+      fail("addExact(Long.MAX_VALUE, 1L)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+
+    try {
+      Math.addExact(1L, Long.MAX_VALUE);
+      fail("addExact(1L, Long.MAX_VALUE)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+
+    try {
+      Math.addExact(Long.MIN_VALUE, -1L);
+      fail("addExact(Long.MIN_VALUE, -1L)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
   public void testAsin() {
     assertNaN(Math.asin(Double.NaN));
     assertNaN(Math.asin(1.1));
@@ -224,6 +298,30 @@ public class MathTest extends GWTTestCase {
     assertEquals(Double.POSITIVE_INFINITY, v);
   }
 
+  public void testDecrementExactInt() {
+    assertEquals(-1, Math.decrementExact(0));
+    assertEquals(Integer.MIN_VALUE, Math.decrementExact(Integer.MIN_VALUE + 1));
+
+    try {
+      Math.decrementExact(Integer.MIN_VALUE);
+      fail("decrementExact(Integer.MIN_VALUE)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
+  public void testDecrementExactLong() {
+    assertEquals(-1L, Math.decrementExact(0L));
+    assertEquals(Long.MIN_VALUE, Math.decrementExact(Long.MIN_VALUE + 1L));
+
+    try {
+      Math.decrementExact(Long.MIN_VALUE);
+      fail("decrementExact(Long.MIN_VALUE)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
   public void testExp() {
     assertNaN(Math.exp(Double.NaN));
     assertEquals(Double.POSITIVE_INFINITY, Math.exp(Double.POSITIVE_INFINITY));
@@ -292,6 +390,81 @@ public class MathTest extends GWTTestCase {
     assertEquals(5, Math.hypot(3, 4));
   }
 
+  public void testIncrementExactInt() {
+    assertEquals(1, Math.incrementExact(0));
+    assertEquals(Integer.MAX_VALUE, Math.incrementExact(Integer.MAX_VALUE - 1));
+
+    try {
+      Math.incrementExact(Integer.MAX_VALUE);
+      fail("incrementExact(Integer.MAX_VALUE)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
+  public void testIncrementExactLong() {
+    assertEquals(1L, Math.incrementExact(0L));
+    assertEquals(Long.MAX_VALUE, Math.incrementExact(Long.MAX_VALUE - 1L));
+
+    try {
+      Math.incrementExact(Long.MAX_VALUE);
+      fail("incrementExact(Long.MAX_VALUE)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
+  public void testLog() {
+    assertNaN(Math.log(Double.NaN));
+    assertNaN(Math.log(Double.NEGATIVE_INFINITY));
+    assertNaN(Math.log(-1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log(0.0));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log(-0.0));
+
+    double v = Math.log(Math.E);
+    assertEquals(1.0, v, 1e-15);
+
+    for (double d = -10; d < 10; d += 0.5) {
+      double answer = Math.log(Math.exp(d));
+      assertEquals(d, answer, 0.000000001);
+    }
+  }
+
+  public void testLog10() {
+    assertNaN(Math.log10(Double.NaN));
+    assertNaN(Math.log10(Double.NEGATIVE_INFINITY));
+    assertNaN(Math.log10(-1));
+    assertNaN(Math.log10(-2541.057456872342));
+    assertNaN(Math.log10(-0.1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log10(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(0.0));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(-0.0));
+    assertEquals(3.0, Math.log10(1000.0), 1e-15);
+    assertEquals(14.0, Math.log10(Math.pow(10, 14)));
+    assertEquals(3.73895612695404, Math.log10(5482.2158), 1e-15);
+    assertEquals(308.25471555991675, Math.log10(Double.MAX_VALUE));
+    assertEquals(-323.30621534311575, Math.log10(Double.MIN_VALUE), 1e-10);
+  }
+
+  public void testLog1p() {
+    assertNaN(Math.log1p(Double.NaN));
+    assertNaN(Math.log1p(-2));
+    assertNaN(Math.log1p(Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log1p(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log1p(-1));
+    assertEquals(Double.MIN_VALUE, Math.log1p(Double.MIN_VALUE), 1e-25);
+    assertEquals(709.782712893384, Math.log1p(Double.MAX_VALUE));
+    assertPositiveZero(Math.log1p(0.0));
+    assertNegativeZero(Math.log1p(-0.0));
+
+    assertEquals(-0.693147180, Math.log1p(-0.5), 1e-7);
+    assertEquals(1.313261687, Math.log1p(Math.E), 1e-7);
+    assertEquals(-0.2941782295312541, Math.log1p(-0.254856327), 1e-7);
+    assertEquals(7.368050685564151, Math.log1p(1583.542));
+    assertEquals(0.4633708685409921, Math.log1p(0.5894227), 1e-15);
+  }
+
   public void testMax() {
     assertEquals(2d, Math.max(1d, 2d));
     assertEquals(2d, Math.max(2d, 1d));
@@ -356,55 +529,82 @@ public class MathTest extends GWTTestCase {
     assertTrue(Float.isNaN(Math.min(Float.NEGATIVE_INFINITY, Float.NaN)));
   }
 
-  public void testLog() {
-    assertNaN(Math.log(Double.NaN));
-    assertNaN(Math.log(Double.NEGATIVE_INFINITY));
-    assertNaN(Math.log(-1));
-    assertEquals(Double.POSITIVE_INFINITY, Math.log(Double.POSITIVE_INFINITY));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log(0.0));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log(-0.0));
+  public void testMultiplyExactInt() {
+    assertEquals(0, Math.multiplyExact(0, 1));
+    assertEquals(1, Math.multiplyExact(1, 1));
+    assertEquals(-1, Math.multiplyExact(-1, 1));
+    assertEquals(1, Math.multiplyExact(-1, -1));
+    assertEquals(2, Math.multiplyExact(1, 2));
+    assertEquals(4, Math.multiplyExact(2, 2));
+    assertEquals(2147483646, Math.multiplyExact(1073741823, 2));
+    assertEquals(-2147483648, Math.multiplyExact(-1073741824, 2));
 
-    double v = Math.log(Math.E);
-    assertEquals(1.0, v, 1e-15);
+    try {
+      Math.multiplyExact(1073741824, 2);
+      fail("multiplyExact(1073741824, 2)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
 
-    for (double d = -10; d < 10; d += 0.5) {
-      double answer = Math.log(Math.exp(d));
-      assertEquals(d, answer, 0.000000001);
+    try {
+      Math.multiplyExact(-1073741825, 2);
+      fail("multiplyExact(-1073741825, 2)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
     }
   }
 
-  public void testLog10() {
-    assertNaN(Math.log10(Double.NaN));
-    assertNaN(Math.log10(Double.NEGATIVE_INFINITY));
-    assertNaN(Math.log10(-1));
-    assertNaN(Math.log10(-2541.057456872342));
-    assertNaN(Math.log10(-0.1));
-    assertEquals(Double.POSITIVE_INFINITY, Math.log10(Double.POSITIVE_INFINITY));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(0.0));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(-0.0));
-    assertEquals(3.0, Math.log10(1000.0), 1e-15);
-    assertEquals(14.0, Math.log10(Math.pow(10, 14)));
-    assertEquals(3.73895612695404, Math.log10(5482.2158), 1e-15);
-    assertEquals(308.25471555991675, Math.log10(Double.MAX_VALUE));
-    assertEquals(-323.30621534311575, Math.log10(Double.MIN_VALUE), 1e-10);
+  public void testMultiplyExactLong() {
+    assertEquals(0L, Math.multiplyExact(0L, 1L));
+    assertEquals(1L, Math.multiplyExact(1L, 1L));
+    assertEquals(-1L, Math.multiplyExact(-1L, 1L));
+    assertEquals(1L, Math.multiplyExact(-1L, -1L));
+    assertEquals(2L, Math.multiplyExact(1L, 2L));
+    assertEquals(4L, Math.multiplyExact(2L, 2L));
+    assertEquals(9_223_372_036_854_775_806L, Math.multiplyExact(4_611_686_018_427_387_903L, 2L));
+    assertEquals(-9_223_372_036_854_775_808L, Math.multiplyExact(-4_611_686_018_427_387_904L, 2L));
+
+    try {
+      Math.multiplyExact(4_611_686_018_427_387_904L, 2L);
+      fail("multiplyExact(4_611_686_018_427_387_904L, 2L)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+
+    try {
+      Math.multiplyExact(-4_611_686_018_427_387_905L, 2L);
+      fail("multiplyExact(-4_611_686_018_427_387_905L, 2L)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
   }
 
-  public void testLog1p() {
-    assertNaN(Math.log1p(Double.NaN));
-    assertNaN(Math.log1p(-2));
-    assertNaN(Math.log1p(Double.NEGATIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY, Math.log1p(Double.POSITIVE_INFINITY));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log1p(-1));
-    assertEquals(Double.MIN_VALUE, Math.log1p(Double.MIN_VALUE), 1e-25);
-    assertEquals(709.782712893384, Math.log1p(Double.MAX_VALUE));
-    assertPositiveZero(Math.log1p(0.0));
-    assertNegativeZero(Math.log1p(-0.0));
+  public void testNegateExactInt() {
+    assertEquals(-1, Math.negateExact(1));
+    assertEquals(1, Math.negateExact(-1));
+    assertEquals(-Integer.MAX_VALUE, Math.negateExact(Integer.MAX_VALUE));
+    assertEquals(Integer.MAX_VALUE, Math.negateExact(Integer.MIN_VALUE + 1));
 
-    assertEquals(-0.693147180, Math.log1p(-0.5), 1e-7);
-    assertEquals(1.313261687, Math.log1p(Math.E), 1e-7);
-    assertEquals(-0.2941782295312541, Math.log1p(-0.254856327), 1e-7);
-    assertEquals(7.368050685564151, Math.log1p(1583.542));
-    assertEquals(0.4633708685409921, Math.log1p(0.5894227), 1e-15);
+    try {
+      Math.negateExact(Integer.MIN_VALUE);
+      fail("negateExact(Integer.MIN_VALUE)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
+  public void testNegateExactLong() {
+    assertEquals(-1L, Math.negateExact(1L));
+    assertEquals(1L, Math.negateExact(-1L));
+    assertEquals(-Long.MAX_VALUE, Math.negateExact(Long.MAX_VALUE));
+    assertEquals(Long.MAX_VALUE, Math.negateExact(Long.MIN_VALUE + 1));
+
+    try {
+      Math.negateExact(Long.MIN_VALUE);
+      fail("negateExact(Long.MIN_VALUE)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
   }
 
   public void testPow() {
@@ -572,6 +772,50 @@ public class MathTest extends GWTTestCase {
     assertEquals(1.732050807, Math.sqrt(3), 1e-7);
   }
 
+  public void testSubtractExactInt() {
+    assertEquals(1, Math.subtractExact(2, 1));
+    assertEquals(-1, Math.subtractExact(-2, -1));
+    assertEquals(0, Math.subtractExact(0, 0));
+    assertEquals(Integer.MIN_VALUE, Math.subtractExact(Integer.MIN_VALUE + 1, 1));
+    assertEquals(Integer.MAX_VALUE, Math.subtractExact(Integer.MAX_VALUE - 1, -1));
+
+    try {
+      Math.subtractExact(Integer.MIN_VALUE, 1);
+      fail("subtractExact(Integer.MIN_VALUE, 1)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+
+    try {
+      Math.subtractExact(Integer.MAX_VALUE, -1);
+      fail("subtractExact(Integer.MAX_VALUE, -1)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
+  public void testSubtractExactLong() {
+    assertEquals(1L, Math.subtractExact(2L, 1L));
+    assertEquals(-1L, Math.subtractExact(-2L, -1L));
+    assertEquals(0L, Math.subtractExact(0L, 0L));
+    assertEquals(Long.MIN_VALUE, Math.subtractExact(Long.MIN_VALUE + 1L, 1L));
+    assertEquals(Long.MAX_VALUE, Math.subtractExact(Long.MAX_VALUE - 1L, -1L));
+
+    try {
+      Math.subtractExact(Long.MIN_VALUE, 1L);
+      fail("subtractExact(Long.MIN_VALUE, 1L)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+
+    try {
+      Math.subtractExact(Long.MAX_VALUE, -1L);
+      fail("subtractExact(Long.MAX_VALUE, -1L)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+  }
+
   public void testTan() {
     double v = Math.tan(0.0);
     assertPositiveZero(v);
@@ -606,6 +850,26 @@ public class MathTest extends GWTTestCase {
     assertEquals(-1.0, v, 1e-7);
     v = Math.tanh(Double.POSITIVE_INFINITY);
     assertEquals(1.0, v, 1e-7);
+  }
+
+  public void testToIntExact() {
+    assertEquals(0, Math.toIntExact(0L));
+    assertEquals(Integer.MIN_VALUE, Math.toIntExact((long) Integer.MIN_VALUE));
+    assertEquals(Integer.MAX_VALUE, Math.toIntExact((long) Integer.MAX_VALUE));
+
+    try {
+      Math.toIntExact((long) Integer.MIN_VALUE - 1L);
+      fail("incrementExact(Integer.MIN_VALUE - 1L)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
+
+    try {
+      Math.toIntExact((long) Integer.MAX_VALUE + 1L);
+      fail("incrementExact(Integer.MAX_VALUE + 1L)");
+    } catch (ArithmeticException e) {
+      // Expected behavior
+    }
   }
 
   public void testScalb() {
