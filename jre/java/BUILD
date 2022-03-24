@@ -156,6 +156,11 @@ closure_js_library(
     ),
 )
 
+filegroup(
+    name = "jre_native_files-j2kt-native",
+    srcs = glob(["super-kt/**/*.kt"]),
+)
+
 j2wasm_library(
     name = "jre-j2wasm",
     srcs = [
@@ -203,11 +208,13 @@ j2kt_native_library(
     name = "jre-j2kt-native",
     srcs = [
         ":jre_java_files-j2kt-native",
+        ":jre_native_files-j2kt-native",
     ],
     javacopts = JRE_JAVAC_OPTS,
     visibility = [
         # Temporary for j2kt_library
         "//transpiler/javatests:__subpackages__",
+        "//benchmarking:__subpackages__",
     ],
     deps = [
         ":javaemul_internal_annotations-j2kt-native",
