@@ -141,8 +141,9 @@ def get_js_files_by_test_name(test_targets):
 def _get_test_name(target):
   """Returns the test name for a target."""
 
-  pattern = re.compile(INTEGRATION_ROOT + r"(\w+):[\w-]+((.\w+)?)")
-  return pattern.search(target).group(1) + pattern.search(target).group(2)
+  pattern = re.compile(INTEGRATION_ROOT + r"((?:java|kotlin))/(\w+):[\w-]+((.\w+)?)")
+  search_results = pattern.search(target)
+  return search_results.group(2) + "/" + search_results.group(1) + search_results.group(3)
 
 
 CLOSURE_LICENSE = """/*

@@ -21,7 +21,7 @@ genrule(
     name = "tree_artifact_integration_tests_warnings_whitelist",
     srcs = ["integration_tests_warnings_whitelist.txt"],
     outs = ["tree_artifact_integration_tests_warnings_whitelist.txt"],
-    cmd = " sed -e 's/\\(third_party\\/java_src\\/j2cl\\/transpiler\\/javatests\\/com\\/google\\/j2cl\\/integration.*\\.js\\).zip!/\\1/g' " +
+    cmd = " sed -e 's/\\(third_party\\/java_src\\/j2cl\\/transpiler\\/javatests\\/com\\/google\\/j2cl\\/integration\\/java.*\\.js\\).zip!/\\1/g' " +
           " $< > $@",
     message = "Generating tree artifact whitelist",
 )
