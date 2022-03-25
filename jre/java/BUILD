@@ -2,7 +2,7 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
-load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2kt_native_library", "j2wasm_library")
+load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2kt_jvm_library", "j2kt_native_library", "j2wasm_library")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load(":j2cl_java_toolchain.bzl", "j2cl_java_toolchain")
 load(":package_sources.bzl", "package_sources")
@@ -157,6 +157,12 @@ closure_js_library(
 )
 
 filegroup(
+    name = "jre_native_files-j2kt-jvm",
+    # JVM doesn't need "JRE" emulation per se, but it needs the glue code the transpiler references.
+    srcs = glob(["super-kt/javaemul/**/*.kt"]),
+)
+
+filegroup(
     name = "jre_native_files-j2kt-native",
     srcs = glob(["super-kt/**/*.kt"]),
 )
@@ -201,6 +207,22 @@ j2cl_library(
         "//third_party:closure_math_long",
         "//third_party:closure_reflect",
         "//third_party:gwt-jsinterop-annotations-j2cl",
+    ],
+)
+
+j2kt_jvm_library(
+    name = "jre-j2kt-jvm",
+    srcs = [
+        ":jre_native_files-j2kt-jvm",
+    ],
+    javacopts = JRE_JAVAC_OPTS,
+    visibility = [
+        # Temporary for j2kt_library
+        "//transpiler/javatests:__subpackages__",
+        "//benchmarking:__subpackages__",
+    ],
+    deps = [
+        ":javaemul_internal_annotations-j2kt-jvm",
     ],
 )
 
