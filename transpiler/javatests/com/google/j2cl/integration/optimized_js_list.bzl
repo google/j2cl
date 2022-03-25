@@ -382,4 +382,6 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/java/wideningfloatconversion:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/java/wideningprimitiveconversion:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/java/wideningprimitiveconversion:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/finallyblock:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/finallyblock:optimized_js.esnext",
 ]
