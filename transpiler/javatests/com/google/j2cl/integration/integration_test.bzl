@@ -89,7 +89,7 @@ def integration_test(
         srcs = ["TestHarness_test.js"],
         deps = [
             ":" + name,
-            "@io_bazel_rules_closure//closure/library:testing",
+            "@com_google_javascript_closure_library//closure/goog/testing:testsuite",
         ],
         # closure_js_test test infra is flaky so avoid noise in builds.
         flaky = True,

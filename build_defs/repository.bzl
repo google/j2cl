@@ -3,11 +3,21 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def load_j2cl_repo_deps():
+    # TODO(b/211017789):Use old proto version until maven issue is fixed.
+    http_archive(
+        name = "com_google_protobuf",
+        strip_prefix = "protobuf-3.15.3",
+        sha256 = "b10bf4e2d1a7586f54e64a5d9e7837e5188fc75ae69e36f215eb01def4f9721b",
+        urls = [
+            "https://github.com/protocolbuffers/protobuf/archive/v3.15.3.tar.gz",
+        ],
+    )
+
     _github_repo(
         name = "io_bazel_rules_closure",
         repo = "bazelbuild/rules_closure",
-        tag = "60194f63aa04181e06e1f763156538e4a623a942",
-        sha256 = "2bab61d7747353009cf68391f07b099e680f35ec1a81c39ca5a31030216a0474",
+        tag = "1d8c08055488d15c4eaa7e70f9bdfba1b2c83b5b",
+        sha256 = "6032db43d2ce09570a0de94b3a2b5e24654a9232c45e0d418b5314867adf4173",
     )
 
     _github_repo(
@@ -21,7 +31,7 @@ def load_j2cl_repo_deps():
         name = "io_bazel_rules_kotlin",
         repo = "bazelbuild/rules_kotlin",
         tag = "legacy-1.3.0-rc3",
-        sha256 = "54678552125753d9fc0a37736d140f1d2e69778d3e52cf454df41a913b964ede"
+        sha256 = "54678552125753d9fc0a37736d140f1d2e69778d3e52cf454df41a913b964ede",
     )
 
     # Add other closure repo deps that need to loaded beforehand.

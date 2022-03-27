@@ -155,17 +155,17 @@ alias(
 
 alias(
     name = "closure_testcase",
-    actual = "@io_bazel_rules_closure//closure/library/testing:testcase",
+    actual = "@com_google_javascript_closure_library//closure/goog/testing:testcase",
 )
 
 alias(
     name = "closure_reflect",
-    actual = "@io_bazel_rules_closure//closure/library/reflect",
+    actual = "@com_google_javascript_closure_library//closure/goog/reflect",
 )
 
 alias(
     name = "closure_math_long",
-    actual = "@io_bazel_rules_closure//closure/library/math:long",
+    actual = "@com_google_javascript_closure_library//closure/goog/math:long",
 )
 
 alias(
