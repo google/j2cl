@@ -68,9 +68,16 @@ j2cl_import(
 
 j2kt_native_library(
     name = "javaemul_internal_annotations-j2kt-native",
-    srcs = glob(["javaemul/internal/annotations/Kt*.java"]),
+    srcs = glob(
+        ["javaemul/internal/annotations/*.java"],
+        # TODO(b/227166206): This is only excluded because there's no java.lang.Class emulation yet.
+        exclude = ["javaemul/internal/annotations/SpecializeMethod.java"],
+    ),
     visibility = [
         "//transpiler/javatests:__subpackages__",
+    ],
+    deps = [
+        ":j2kt_support-j2kt-native",
     ],
 )
 
@@ -157,14 +164,13 @@ closure_js_library(
 )
 
 filegroup(
-    name = "jre_native_files-j2kt-jvm",
-    # JVM doesn't need "JRE" emulation per se, but it needs the glue code the transpiler references.
+    name = "j2kt_support_files-j2kt",
     srcs = glob(["super-kt/javaemul/**/*.kt"]),
 )
 
 filegroup(
     name = "jre_native_files-j2kt-native",
-    srcs = glob(["super-kt/**/*.kt"]),
+    srcs = glob(["super-kt/java/**/*.kt"]),
 )
 
 j2wasm_library(
@@ -211,9 +217,9 @@ j2cl_library(
 )
 
 j2kt_jvm_library(
-    name = "jre-j2kt-jvm",
+    name = "j2kt_support-j2kt-jvm",
     srcs = [
-        ":jre_native_files-j2kt-jvm",
+        ":j2kt_support_files-j2kt",
     ],
     javacopts = JRE_JAVAC_OPTS,
     visibility = [
@@ -221,8 +227,18 @@ j2kt_jvm_library(
         "//transpiler/javatests:__subpackages__",
         "//benchmarking:__subpackages__",
     ],
-    deps = [
-        ":javaemul_internal_annotations-j2kt-jvm",
+)
+
+j2kt_native_library(
+    name = "j2kt_support-j2kt-native",
+    srcs = [
+        ":j2kt_support_files-j2kt",
+    ],
+    javacopts = JRE_JAVAC_OPTS,
+    visibility = [
+        # Temporary for j2kt_library
+        "//transpiler/javatests:__subpackages__",
+        "//benchmarking:__subpackages__",
     ],
 )
 
@@ -239,6 +255,7 @@ j2kt_native_library(
         "//benchmarking:__subpackages__",
     ],
     deps = [
+        ":j2kt_support-j2kt-native",
         ":javaemul_internal_annotations-j2kt-native",
     ],
 )
