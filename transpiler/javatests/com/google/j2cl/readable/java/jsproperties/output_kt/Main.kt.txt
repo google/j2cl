@@ -2,46 +2,46 @@ package jsproperties
 
 open class Foo {
  companion object {
-  @kotlin.jvm.JvmField var f: Int = 0
+  @kotlin.jvm.JvmField var f: kotlin.Int = 0
 
   @kotlin.jvm.JvmStatic
-  fun getA(): Int {
+  fun getA(): kotlin.Int {
    return jsproperties.Foo.f + 1
   }
 
   @kotlin.jvm.JvmStatic
-  fun setA(x: Int) {
+  fun setA(x: kotlin.Int) {
    jsproperties.Foo.f = x + 2
   }
 
   @kotlin.jvm.JvmStatic
-  fun getB(): Int {
+  fun getB(): kotlin.Int {
    return jsproperties.Foo.f + 3
   }
 
   @kotlin.jvm.JvmStatic
-  fun setB(x: Int) {
+  fun setB(x: kotlin.Int) {
    jsproperties.Foo.f = x + 4
   }
  }
 }
 
 open class Bar {
- @kotlin.jvm.JvmField var f: Int = 0
+ @kotlin.jvm.JvmField var f: kotlin.Int = 0
 
- open fun getA(): Int {
+ open fun getA(): kotlin.Int {
   return this.f + 1
  }
 
- open fun setA(x: Int) {
+ open fun setA(x: kotlin.Int) {
   this.f = x + 2
  }
 
- open fun getB(): Int {
+ open fun getB(): kotlin.Int {
   return this.f + 3
  }
 
- open fun setB(x: Int) {
+ open fun setB(x: kotlin.Int) {
   this.f = x + 4
  }
 }
@@ -51,7 +51,7 @@ open class NativeFoo {
 
  companion object {
   @kotlin.jvm.JvmStatic
-  external fun getB(): Double
+  external fun getB(): kotlin.Double
  }
 }
 

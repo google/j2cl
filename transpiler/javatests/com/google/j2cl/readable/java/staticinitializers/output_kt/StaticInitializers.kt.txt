@@ -2,17 +2,17 @@ package staticinitializers
 
 open class StaticInitializers {
  companion object {
-  @kotlin.jvm.JvmField var a: Int = 5
+  @kotlin.jvm.JvmField var a: kotlin.Int = 5
 
-  @kotlin.jvm.JvmField var b: Int = staticinitializers.StaticInitializers.a * 2
+  @kotlin.jvm.JvmField var b: kotlin.Int = staticinitializers.StaticInitializers.a * 2
 
   init {
    staticinitializers.StaticInitializers.a = 10
-   val duplicated: Int = 0
+   val duplicated: kotlin.Int = 0
   }
 
   init {
-   val duplicated_1: Int = 1
+   val duplicated_1: kotlin.Int = 1
   }
  }
 }

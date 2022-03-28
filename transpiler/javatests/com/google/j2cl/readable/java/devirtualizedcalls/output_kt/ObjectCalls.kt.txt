@@ -7,7 +7,7 @@ open class ObjectCalls {
   (`object`!! as java.lang.Object).hashCode()
   (`object`!! as java.lang.Object).toString()
   (`object`!!)::class.java
-  val objectCalls: Array<devirtualizedcalls.ObjectCalls?>? = arrayOfNulls<devirtualizedcalls.ObjectCalls?>(1)
+  val objectCalls: kotlin.Array<devirtualizedcalls.ObjectCalls?>? = kotlin.arrayOfNulls<devirtualizedcalls.ObjectCalls?>(1)
   (objectCalls!! as java.lang.Object).equals(objectCalls)
   (objectCalls!! as java.lang.Object).hashCode()
   (objectCalls!! as java.lang.Object).toString()
@@ -25,7 +25,7 @@ open class ObjectCalls {
   (this)::class.java
  }
 
- open fun testNotEquals(): Boolean {
+ open fun testNotEquals(): kotlin.Boolean {
   return !(this as java.lang.Object).equals((java.lang.Object() as kotlin.Any))
  }
 }

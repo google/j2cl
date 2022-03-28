@@ -1,16 +1,16 @@
 package localclasswithconstructor
 
 open class LocalClassWithConstructor {
- open fun test(p: Int) {
-  val localVar: Int = 1
+ open fun test(p: kotlin.Int) {
+  val localVar: kotlin.Int = 1
   open class `$1LocalClass` {
-   @kotlin.jvm.JvmField var field: Int = 0
+   @kotlin.jvm.JvmField var field: kotlin.Int = 0
 
-   constructor(a: Int, b: Int) {
+   constructor(a: kotlin.Int, b: kotlin.Int) {
     this.field = localVar + a + b
    }
 
-   constructor(a: Int): this(a, p) {
+   constructor(a: kotlin.Int): this(a, p) {
     this.field = localVar
    }
   }

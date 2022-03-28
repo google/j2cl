@@ -2,15 +2,15 @@ package localclassinheritance
 
 open class LocalClassInheritance {
  open fun test() {
-  val f: Int = 1
+  val f: kotlin.Int = 1
   open class `$1Parent` {
    open fun n() {
-    val i: Int = f
+    val i: kotlin.Int = f
    }
   }
   open class `$1Child`: `$1Parent`() {
    open override fun n() {
-    val i: Int = f
+    val i: kotlin.Int = f
    }
   }
  }

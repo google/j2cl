@@ -8,7 +8,7 @@ open class Main {
  }
 
  open fun asyncMethod(): jsasync.Main.IThenable<kotlin.Int?>? {
-  val result: Int = (jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(7)))!! as java.lang.Integer).intValue()
+  val result: kotlin.Int = (jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(7)))!! as java.lang.Integer).intValue()
   return this.parametricAsyncMethod(java.lang.Integer.valueOf(result))
  }
 

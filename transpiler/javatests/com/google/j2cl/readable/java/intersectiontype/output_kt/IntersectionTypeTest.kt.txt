@@ -5,17 +5,17 @@ fun interface Getable<T> {
 }
 
 fun interface Setable {
- fun set(i: Int)
+ fun set(i: kotlin.Int)
 }
 
 interface Serial {}
 
 fun interface Cmp {
- fun cmp(): Int
+ fun cmp(): kotlin.Int
 }
 
 fun interface Cmp2<T> {
- fun cmp(a: Int): Int
+ fun cmp(a: kotlin.Int): kotlin.Int
 }
 
 open class IntersectionTypeTest<U> {
@@ -57,14 +57,14 @@ open class IntersectionTypeTest<U> {
 
   @kotlin.jvm.JvmStatic
   fun method(): intersectiontype.Cmp? {
-   return intersectiontype.Cmp (fun(): Int {
+   return intersectiontype.Cmp (fun(): kotlin.Int {
     return 1
    }) as intersectiontype.Cmp? /* & intersectiontype.Serial? */
   }
 
   @kotlin.jvm.JvmStatic
   fun method2(): intersectiontype.Cmp2<*>? {
-   return intersectiontype.Cmp2<kotlin.Any?> (fun(a: Int): Int {
+   return intersectiontype.Cmp2<kotlin.Any?> (fun(a: kotlin.Int): kotlin.Int {
     return 1
    }) as intersectiontype.Cmp2<*>? /* & intersectiontype.Serial? */
   }

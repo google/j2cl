@@ -1,7 +1,7 @@
 package innerclassinitorder
 
 open class InnerClassInitOrder {
- @kotlin.jvm.JvmField var number: Int = 0
+ @kotlin.jvm.JvmField var number: kotlin.Int = 0
 
  open fun testOuterThisFromSuperCall() {
   OuterRefFromSuperCtorCall()
@@ -47,17 +47,17 @@ open class InnerClassInitOrder {
 
  open fun testInnerClassLoop() {
   abstract class `$1AddNumber` {
-   @kotlin.jvm.JvmField var num: Int = 0
+   @kotlin.jvm.JvmField var num: kotlin.Int = 0
 
-   constructor(i: Int) {
+   constructor(i: kotlin.Int) {
     this.num = i
    }
 
    abstract open fun act()
   }
-  val results: Array<`$1AddNumber`?>? = arrayOfNulls<`$1AddNumber`?>(10)
+  val results: kotlin.Array<`$1AddNumber`?>? = kotlin.arrayOfNulls<`$1AddNumber`?>(10)
   if (true) {
-   var i: Int = 0
+   var i: kotlin.Int = 0
    LOOP@ while (i < 10) {
     LOOP_CONTINUE@ do {
      val ap: `$1AddNumber`? = object : `$1AddNumber`(i) {
@@ -189,23 +189,23 @@ open class InnerClassInitOrder {
  }
 
  open class P1<T1> {
-  @kotlin.jvm.JvmField val value: Int
+  @kotlin.jvm.JvmField val value: kotlin.Int
 
   constructor(): this(1)
 
-  constructor(i: Int) {
+  constructor(i: kotlin.Int) {
    this.value = i
   }
 
   open inner class P2<T2>: innerclassinitorder.InnerClassInitOrder.P1<T1> {
    constructor(): this(1)
 
-   constructor(i: Int): super(i)
+   constructor(i: kotlin.Int): super(i)
 
    open inner class P3<T3>: innerclassinitorder.InnerClassInitOrder.P1<T1>.P2<T2> {
     constructor(): this(1)
 
-    constructor(i: Int): super(i)
+    constructor(i: kotlin.Int): super(i)
    }
   }
  }
@@ -216,13 +216,13 @@ open class InnerClassInitOrder {
   }
 
   open inner class ESInner {
-   @kotlin.jvm.JvmField var value: Int = 0
+   @kotlin.jvm.JvmField var value: kotlin.Int = 0
 
    constructor() {
     this.value = 1
    }
 
-   constructor(value: Int) {
+   constructor(value: kotlin.Int) {
     this.value = value
    }
   }
@@ -231,7 +231,7 @@ open class InnerClassInitOrder {
  open class ESInnerSubclass: innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner {
   constructor(outer: innerclassinitorder.InnerClassInitOrder.ESOuter?): super()
 
-  constructor(value: Int, outer: innerclassinitorder.InnerClassInitOrder.ESOuter?): super(value)
+  constructor(value: kotlin.Int, outer: innerclassinitorder.InnerClassInitOrder.ESOuter?): super(value)
  }
 
  open class ESWGOuter<T> {
@@ -240,13 +240,13 @@ open class InnerClassInitOrder {
   }
 
   open inner class ESWGInner {
-   @kotlin.jvm.JvmField var value: Int = 0
+   @kotlin.jvm.JvmField var value: kotlin.Int = 0
 
    constructor() {
     this.value = 1
    }
 
-   constructor(value: Int) {
+   constructor(value: kotlin.Int) {
     this.value = value
    }
   }
@@ -255,40 +255,40 @@ open class InnerClassInitOrder {
  open class ESWGInnerSubclass: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>.ESWGInner {
   constructor(outer: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>?): super()
 
-  constructor(value: Int, outer: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>?): super(value)
+  constructor(value: kotlin.Int, outer: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>?): super(value)
  }
 
  open class Outer {
-  @kotlin.jvm.JvmField val value: Int
+  @kotlin.jvm.JvmField val value: kotlin.Int
 
-  constructor(i: Int) {
+  constructor(i: kotlin.Int) {
    this.value = i
   }
 
-  open fun checkDispatch(): Int {
+  open fun checkDispatch(): kotlin.Int {
    return 1
   }
 
   open inner class OuterIsNotSuper {
-   open fun getValue(): Int {
+   open fun getValue(): kotlin.Int {
     return this@Outer.value
    }
   }
 
   open inner class OuterIsSuper: innerclassinitorder.InnerClassInitOrder.Outer {
-   constructor(i: Int): super(i)
+   constructor(i: kotlin.Int): super(i)
 
-   open override fun checkDispatch(): Int {
+   open override fun checkDispatch(): kotlin.Int {
     return 2
    }
 
-   open fun checkDispatchFromSub1(): Int {
+   open fun checkDispatchFromSub1(): kotlin.Int {
     return super.checkDispatch()
    }
 
-   open fun checkDispatchFromSub2(): Int {
+   open fun checkDispatchFromSub2(): kotlin.Int {
     return object : Outer(1) {
-     open fun go(): Int {
+     open fun go(): kotlin.Int {
       return this@OuterIsSuper.checkDispatch()
      }
     }.go()

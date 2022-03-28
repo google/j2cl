@@ -11,15 +11,15 @@ open class CastGenerics<T, E: kotlin.Number?> {
   val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
   val e: E? = o as E?
   val t: T? = o as T?
-  val es: Array<E>? = o as Array<E>?
-  val ts: Array<T>? = o as Array<T>?
+  val es: kotlin.Array<E>? = o as kotlin.Array<E>?
+  val ts: kotlin.Array<T>? = o as kotlin.Array<T>?
  }
 
  open fun <S, V: kotlin.Enum<V>?> testCastToMethodTypeVariable() {
   val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
   val s: S? = o as S?
   var c: kotlin.Any? = o as cast.CastGenerics<S, kotlin.Number?>?
-  c = o as Array<S>?
+  c = o as kotlin.Array<S>?
   c = o as V?
  }
 
@@ -49,18 +49,18 @@ open class CastGenerics<T, E: kotlin.Number?> {
    val containerU: cast.CastGenerics.Container<U>? = null
    containerU!!.get()!!.mA()
    containerU!!.get()!!.mB()
-   val containerArrT: cast.CastGenerics.Container<Array<T_1>?>? = null
-   val arrT: Array<T_1>? = containerArrT!!.get()
+   val containerArrT: cast.CastGenerics.Container<kotlin.Array<T_1>?>? = null
+   val arrT: kotlin.Array<T_1>? = containerArrT!!.get()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
-   var arrA: Array<cast.CastGenerics.A?>? = containerArrT!!.get() as Array<cast.CastGenerics.A?>
-   var arrB: Array<cast.CastGenerics.B?>? = containerArrT!!.get() as Array<cast.CastGenerics.B?>
-   val containerArrU: cast.CastGenerics.Container<Array<U>?>? = null
-   val arrU: Array<U>? = containerArrU!!.get()
+   var arrA: kotlin.Array<cast.CastGenerics.A?>? = containerArrT!!.get() as kotlin.Array<cast.CastGenerics.A?>
+   var arrB: kotlin.Array<cast.CastGenerics.B?>? = containerArrT!!.get() as kotlin.Array<cast.CastGenerics.B?>
+   val containerArrU: cast.CastGenerics.Container<kotlin.Array<U>?>? = null
+   val arrU: kotlin.Array<U>? = containerArrU!!.get()
    arrU!![0]!!.mA()
    arrU!![0]!!.mB()
-   arrA = containerArrU!!.get() as Array<cast.CastGenerics.A?>
-   arrB = containerArrU!!.get() as Array<cast.CastGenerics.B?>
+   arrA = containerArrU!!.get() as kotlin.Array<cast.CastGenerics.A?>
+   arrB = containerArrU!!.get() as kotlin.Array<cast.CastGenerics.B?>
    val containerBase: cast.CastGenerics.Container<cast.CastGenerics.BaseImplementor?>? = null
    containerBase!!.get()!!.mA()
    containerBase!!.get()!!.mB()

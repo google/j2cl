@@ -1,11 +1,11 @@
 package jsoptional
 
 open class Main {
- open fun method1(i1: Int, d: kotlin.Double?, i: kotlin.Int?) {}
+ open fun method1(i1: kotlin.Int, d: kotlin.Double?, i: kotlin.Int?) {}
 
  open fun method2(s1: kotlin.String?, d: kotlin.Double?, vararg i: kotlin.Boolean?) {}
 
- @kotlin.jvm.JvmField var f: jsoptional.Main.Function? = jsoptional.Main.Function (fun(s: kotlin.String?, varargs: Array<kotlin.Any?>?): kotlin.Any? {
+ @kotlin.jvm.JvmField var f: jsoptional.Main.Function? = jsoptional.Main.Function (fun(s: kotlin.String?, varargs: kotlin.Array<kotlin.Any?>?): kotlin.Any? {
   return s
  })
 
@@ -21,7 +21,7 @@ open class Main {
 
  class AFunction: jsoptional.Main.Function {
   open override fun f1(i: kotlin.String?, vararg args: kotlin.Any?): kotlin.Any? {
-   return (args as Array<kotlin.Any?>?)!![0]
+   return (args as kotlin.Array<kotlin.Any?>?)!![0]
   }
  }
 

@@ -12,15 +12,15 @@ enum class Enum2 {
  VALUE3(),
  VALUE4(5) {};
 
- @kotlin.jvm.JvmField var foo: Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
+ @kotlin.jvm.JvmField var foo: kotlin.Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
 
- constructor(foo: Int) {
+ constructor(foo: kotlin.Int) {
   this.foo = foo
  }
 
  constructor(foo: kotlin.Enum<*>?): this((foo!! as java.lang.Enum<*>).ordinal())
 
- constructor(vararg somePars: kotlin.Any?): this((somePars as Array<kotlin.Any?>?)!!.size)
+ constructor(vararg somePars: kotlin.Any?): this((somePars as kotlin.Array<kotlin.Any?>?)!!.size)
 
  companion object {
   @kotlin.jvm.JvmStatic

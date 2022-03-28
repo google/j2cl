@@ -1,25 +1,25 @@
 package devirtualizedsupermethodcall
 
 open class SubNumber: kotlin.Number() {
- open override fun toInt(): Int {
+ open override fun toInt(): kotlin.Int {
   return 0
  }
 
- open override fun toLong(): Long {
+ open override fun toLong(): kotlin.Long {
   return 0L
  }
 
- open override fun toFloat(): Float {
+ open override fun toFloat(): kotlin.Float {
   return 0.0f
  }
 
- open override fun toDouble(): Double {
+ open override fun toDouble(): kotlin.Double {
   return 0.0
  }
 }
 
 open class FooCallsSuperObjectMethod {
- open override fun hashCode(): Int {
+ open override fun hashCode(): kotlin.Int {
   return (super as java.lang.Object).hashCode()
  }
 }

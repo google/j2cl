@@ -1,7 +1,7 @@
 package mixednestings
 
 fun interface MyInterface {
- fun `fun`(a: Int): Int
+ fun `fun`(a: kotlin.Int): kotlin.Int
 }
 
 open class MixedNestings {
@@ -18,19 +18,19 @@ open class MixedNestings {
    open class `$1B` {
     open fun bb() {}
 
-    open fun b(): Int {
+    open fun b(): kotlin.Int {
      val i: mixednestings.MyInterface? = object : MyInterface {
-      open override fun `fun`(a: Int): Int {
-       val ii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(n: Int): Int {
+      open override fun `fun`(a: kotlin.Int): kotlin.Int {
+       val ii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(n: kotlin.Int): kotlin.Int {
         this@MixedNestings.mm()
         this@A.aa()
         this@`$1B`.bb()
-        val iii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(m: Int): Int {
+        val iii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(m: kotlin.Int): kotlin.Int {
          this@MixedNestings.mm()
          this@A.aa()
          this@`$1B`.bb()
          return object : MyInterface {
-          open override fun `fun`(b: Int): Int {
+          open override fun `fun`(b: kotlin.Int): kotlin.Int {
            return b
           }
          }.`fun`(100)

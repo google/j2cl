@@ -8,7 +8,7 @@ open class Blah {
   external fun m()
 
   @kotlin.jvm.JvmStatic
-  external fun getN(): Double
+  external fun getN(): kotlin.Double
  }
 }
 
@@ -16,29 +16,29 @@ open class foo {}
 
 open class bar {
  init {
-  val foo: Int
-  val bar: Int
-  val goog: Int
-  val flip: Int
-  val window: Int
+  val foo: kotlin.Int
+  val bar: kotlin.Int
+  val goog: kotlin.Int
+  val flip: kotlin.Int
+  val window: kotlin.Int
   collisions.Blah.m()
   collisions.Blah.getN()
   collisions.Blah()
   collisions.goog()
   collisions.foo()
-  val delete: Int = 1
-  val undefined: Int = 3
+  val delete: kotlin.Int = 1
+  val undefined: kotlin.Int = 3
  }
 }
 
 open class Other<T> {
  init {
-  val T_1: Int = 3
+  val T_1: kotlin.Int = 3
   val o: collisions.Other<T>? = null as collisions.Other<T>?
  }
 
  open fun <T_2> m(): T_2? {
-  val T_1: Int = 5
+  val T_1: kotlin.Int = 5
   val o: collisions.Other<T_2>? = null as collisions.Other<T_2>?
   return null
  }

@@ -1,7 +1,7 @@
 package instanceinnerclass
 
 open class InstanceInnerClass {
- @kotlin.jvm.JvmField var instanceField: Int = 0
+ @kotlin.jvm.JvmField var instanceField: kotlin.Int = 0
 
  open fun funOuter() {}
 
@@ -10,7 +10,7 @@ open class InstanceInnerClass {
  }
 
  open inner class InnerClass {
-  @kotlin.jvm.JvmField var field: Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
+  @kotlin.jvm.JvmField var field: kotlin.Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
 
   @kotlin.jvm.JvmField var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this@InstanceInnerClass
 

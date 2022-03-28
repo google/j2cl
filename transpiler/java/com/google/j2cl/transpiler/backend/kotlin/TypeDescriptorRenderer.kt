@@ -95,16 +95,16 @@ private fun Renderer.renderArrayTypeDescriptor(
   asName: Boolean
 ) {
   when (val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!) {
-    PrimitiveTypes.BOOLEAN -> render("BooleanArray")
-    PrimitiveTypes.CHAR -> render("CharArray")
-    PrimitiveTypes.BYTE -> render("ByteArray")
-    PrimitiveTypes.SHORT -> render("ShortArray")
-    PrimitiveTypes.INT -> render("IntArray")
-    PrimitiveTypes.LONG -> render("LongArray")
-    PrimitiveTypes.FLOAT -> render("FloatArray")
-    PrimitiveTypes.DOUBLE -> render("DoubleArray")
+    PrimitiveTypes.BOOLEAN -> render("kotlin.BooleanArray")
+    PrimitiveTypes.CHAR -> render("kotlin.CharArray")
+    PrimitiveTypes.BYTE -> render("kotlin.ByteArray")
+    PrimitiveTypes.SHORT -> render("kotlin.ShortArray")
+    PrimitiveTypes.INT -> render("kotlin.IntArray")
+    PrimitiveTypes.LONG -> render("kotlin.LongArray")
+    PrimitiveTypes.FLOAT -> render("kotlin.FloatArray")
+    PrimitiveTypes.DOUBLE -> render("kotlin.DoubleArray")
     else -> {
-      render("Array")
+      render("kotlin.Array")
       if (!asName) {
         renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor, isArgument = true) }
       }
@@ -187,15 +187,15 @@ private fun Renderer.renderPrimitiveTypeDescriptor(
 ) {
   render(
     when (primitiveTypeDescriptor) {
-      PrimitiveTypes.VOID -> "Unit"
-      PrimitiveTypes.BOOLEAN -> "Boolean"
-      PrimitiveTypes.CHAR -> "Char"
-      PrimitiveTypes.BYTE -> "Byte"
-      PrimitiveTypes.SHORT -> "Short"
-      PrimitiveTypes.INT -> "Int"
-      PrimitiveTypes.LONG -> "Long"
-      PrimitiveTypes.FLOAT -> "Float"
-      PrimitiveTypes.DOUBLE -> "Double"
+      PrimitiveTypes.VOID -> "kotlin.Unit"
+      PrimitiveTypes.BOOLEAN -> "kotlin.Boolean"
+      PrimitiveTypes.CHAR -> "kotlin.Char"
+      PrimitiveTypes.BYTE -> "kotlin.Byte"
+      PrimitiveTypes.SHORT -> "kotlin.Short"
+      PrimitiveTypes.INT -> "kotlin.Int"
+      PrimitiveTypes.LONG -> "kotlin.Long"
+      PrimitiveTypes.FLOAT -> "kotlin.Float"
+      PrimitiveTypes.DOUBLE -> "kotlin.Double"
       else -> throw InternalCompilerError("Unhandled $primitiveTypeDescriptor")
     }
   )

@@ -1,13 +1,13 @@
 package simplelongs
 
 open class SimpleLongs {
- @kotlin.jvm.JvmField var foo: Long = 0L
+ @kotlin.jvm.JvmField var foo: kotlin.Long = 0L
 
- open fun getBar(): Long {
+ open fun getBar(): kotlin.Long {
   return 0L
  }
 
- @kotlin.jvm.JvmField var sideEffect: Int = 0
+ @kotlin.jvm.JvmField var sideEffect: kotlin.Int = 0
 
  open fun getWithSideEffect(): simplelongs.SimpleLongs? {
   this.sideEffect = this.sideEffect + 1
@@ -15,51 +15,51 @@ open class SimpleLongs {
  }
 
  open fun main() {
-  var a: Long = 0L
+  var a: kotlin.Long = 0L
   a = - 100000L
   a = 100000L
-  var b: Long = - 2147483648L
+  var b: kotlin.Long = - 2147483648L
   b = 2147483648L
   b = java.lang.Long.MIN_VALUE
   b = 9223372036854775807L
-  var c: Long = a + b
+  var c: kotlin.Long = a + b
   c = a / b
-  var e: Long = run {
+  var e: kotlin.Long = kotlin.run {
    a = a + 1L
    a
   }
-  e = run {
+  e = kotlin.run {
    val `$qualifier`: simplelongs.SimpleLongs = this
-   val `$value`: Long = this.foo + 1L
+   val `$value`: kotlin.Long = this.foo + 1L
    `$qualifier`.foo = `$value`
    `$value`
   }
-  e = run {
+  e = kotlin.run {
    val `$qualifier_1`: simplelongs.SimpleLongs? = this.getWithSideEffect()
-   run {
+   kotlin.run {
     val `$qualifier_2`: simplelongs.SimpleLongs? = `$qualifier_1`
-    val `$value_1`: Long = `$qualifier_1`!!.foo + 1L
+    val `$value_1`: kotlin.Long = `$qualifier_1`!!.foo + 1L
     `$qualifier_2`!!.foo = `$value_1`
     `$value_1`
    }
   }
-  var f: Long = run {
-   val `$value_2`: Long = a
+  var f: kotlin.Long = kotlin.run {
+   val `$value_2`: kotlin.Long = a
    a = a + 1L
    `$value_2`
   }
-  f = run {
-   val `$value_3`: Long = this.foo
+  f = kotlin.run {
+   val `$value_3`: kotlin.Long = this.foo
    this.foo = this.foo + 1L
    `$value_3`
   }
-  f = run {
+  f = kotlin.run {
    val `$qualifier_3`: simplelongs.SimpleLongs? = this.getWithSideEffect()
-   val `$value_4`: Long = `$qualifier_3`!!.foo
+   val `$value_4`: kotlin.Long = `$qualifier_3`!!.foo
    `$qualifier_3`!!.foo = `$qualifier_3`!!.foo + 1L
    `$value_4`
   }
-  var g: Long = this.foo
+  var g: kotlin.Long = this.foo
   g = this.getBar()
  }
 }

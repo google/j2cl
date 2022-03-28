@@ -13,11 +13,11 @@ open class Main {
 
  @kotlin.jvm.JvmField var f7: kotlin.collections.MutableList<kotlin.String?>? = null
 
- @kotlin.jvm.JvmField var f8: Array<kotlin.String> = arrayOf<kotlin.String>()
+ @kotlin.jvm.JvmField var f8: kotlin.Array<kotlin.String> = kotlin.arrayOf<kotlin.String>()
 
- @kotlin.jvm.JvmField var f9: Array<kotlin.String?> = arrayOf<kotlin.String?>()
+ @kotlin.jvm.JvmField var f9: kotlin.Array<kotlin.String?> = kotlin.arrayOf<kotlin.String?>()
 
- @kotlin.jvm.JvmField var f10: Array<kotlin.String>? = arrayOf<kotlin.String>()
+ @kotlin.jvm.JvmField var f10: kotlin.Array<kotlin.String>? = kotlin.arrayOf<kotlin.String>()
 
  @kotlin.jvm.JvmField var f12: kotlin.collections.MutableList<kotlin.String?>? = java.util.ArrayList<kotlin.String?>()
 
@@ -42,19 +42,19 @@ open class Main {
  }
 
  open class StringComparator: java.util.Comparator<kotlin.String> {
-  open override fun compare(a: kotlin.String, b: kotlin.String): Int {
+  open override fun compare(a: kotlin.String, b: kotlin.String): kotlin.Int {
    return 0
   }
  }
 
  open class NullableStringComparator: java.util.Comparator<kotlin.String?> {
-  open override fun compare(a: kotlin.String?, b: kotlin.String?): Int {
+  open override fun compare(a: kotlin.String?, b: kotlin.String?): kotlin.Int {
    return 0
   }
  }
 
  open class NonNullableStringSubNullableComparator: jsnonnull.Main.NullableStringComparator() {
-  open override fun compare(a: kotlin.String, b: kotlin.String): Int {
+  open override fun compare(a: kotlin.String, b: kotlin.String): kotlin.Int {
    return 0
   }
  }
@@ -62,12 +62,12 @@ open class Main {
  interface NonNullableTemplatedReturn<T> {
   fun get(): T?
 
-  fun getArray(): Array<T>?
+  fun getArray(): kotlin.Array<T>?
  }
 
  interface NonNullableTemplate<T> {
   fun get(): T?
 
-  fun getArray(): Array<T>?
+  fun getArray(): kotlin.Array<T>?
  }
 }

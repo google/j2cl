@@ -1,13 +1,13 @@
 package nestedlocalclasses
 
 open class NestedLocalClasses {
- open fun test(p: Int) {
-  val localVar: Int = 1
+ open fun test(p: kotlin.Int) {
+  val localVar: kotlin.Int = 1
   open class `$1InnerClass` {
    open fun `fun`() {
-    val localVarInInnerClass: Int = 1
+    val localVarInInnerClass: kotlin.Int = 1
     open class `$1InnerInnerClass` {
-     @kotlin.jvm.JvmField var fieldInInnerInnerClass: Int = localVar + localVarInInnerClass
+     @kotlin.jvm.JvmField var fieldInInnerInnerClass: kotlin.Int = localVar + localVarInInnerClass
     }
     `$1InnerInnerClass`()
     open class `$1ClassIndirectlyCapturingLocal` {

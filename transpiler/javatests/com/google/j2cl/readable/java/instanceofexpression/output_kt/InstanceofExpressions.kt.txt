@@ -3,7 +3,7 @@ package instanceofexpression
 open class InstanceofExpressions {
  open fun testInstanceofClass() {
   val `object`: kotlin.Any? = instanceofexpression.InstanceofExpressions()
-  var b: Boolean
+  var b: kotlin.Boolean
   b = `object` is kotlin.Any
   b = `object` is instanceofexpression.InstanceofExpressions
   b = `object` is kotlin.String
@@ -11,14 +11,14 @@ open class InstanceofExpressions {
 
  open fun testInstanceofInterface() {
   val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
-  var b: Boolean
+  var b: kotlin.Boolean
   b = o is java.io.Serializable
   b = object : Serializable {} is java.io.Serializable
  }
 
  open fun testInstanceofBoxedType() {
   val b: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
-  var a: Boolean = b is kotlin.Byte
+  var a: kotlin.Boolean = b is kotlin.Byte
   a = b is kotlin.Double
   a = b is kotlin.Float
   a = b is kotlin.Int
@@ -35,22 +35,22 @@ open class InstanceofExpressions {
 
  open fun testInstanceOfArray() {
   val `object`: kotlin.Any? = (java.lang.Object() as kotlin.Any)
-  val objectArray: Array<kotlin.Any?>? = arrayOfNulls<kotlin.Any?>(0)
-  val objectDoubleArray: Array<Array<kotlin.Any?>?>? = arrayOfNulls<Array<kotlin.Any?>?>(0)
-  val stringArray: Array<kotlin.String?>? = arrayOfNulls<kotlin.String?>(0)
-  var a: Boolean
-  a = `object` is Array<kotlin.Any?>
-  a = `object` is Array<Array<kotlin.String?>?>
-  a = `object` is Array<kotlin.Any?>
-  a = `object` is Array<Array<kotlin.String?>?>
-  a = objectArray is Array<kotlin.Any?>
-  a = objectArray is Array<kotlin.String?>
-  a = objectArray is Array<Array<kotlin.Any?>?>
-  a = objectArray is Array<Array<kotlin.String?>?>
-  a = objectDoubleArray is Array<kotlin.Any?>
-  a = objectDoubleArray is Array<Array<kotlin.Any?>?>
-  a = objectDoubleArray is Array<Array<kotlin.String?>?>
-  a = stringArray is Array<kotlin.Any?>
-  a = stringArray is Array<kotlin.String?>
+  val objectArray: kotlin.Array<kotlin.Any?>? = kotlin.arrayOfNulls<kotlin.Any?>(0)
+  val objectDoubleArray: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>?>(0)
+  val stringArray: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.String?>(0)
+  var a: kotlin.Boolean
+  a = `object` is kotlin.Array<kotlin.Any?>
+  a = `object` is kotlin.Array<kotlin.Array<kotlin.String?>?>
+  a = `object` is kotlin.Array<kotlin.Any?>
+  a = `object` is kotlin.Array<kotlin.Array<kotlin.String?>?>
+  a = objectArray is kotlin.Array<kotlin.Any?>
+  a = objectArray is kotlin.Array<kotlin.String?>
+  a = objectArray is kotlin.Array<kotlin.Array<kotlin.Any?>?>
+  a = objectArray is kotlin.Array<kotlin.Array<kotlin.String?>?>
+  a = objectDoubleArray is kotlin.Array<kotlin.Any?>
+  a = objectDoubleArray is kotlin.Array<kotlin.Array<kotlin.Any?>?>
+  a = objectDoubleArray is kotlin.Array<kotlin.Array<kotlin.String?>?>
+  a = stringArray is kotlin.Array<kotlin.Any?>
+  a = stringArray is kotlin.Array<kotlin.String?>
  }
 }

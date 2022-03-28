@@ -2,13 +2,13 @@ package cast
 
 open class CastPrimitives {
  open fun testPrimitiveCasts() {
-  var b: Byte = 1
-  var c: Char = '\u0001'
-  var s: Short = 1
-  var i: Int = 1
-  var l: Long = 1L
-  var f: Float = 1.1f
-  var d: Double = 1.1
+  var b: kotlin.Byte = 1
+  var c: kotlin.Char = '\u0001'
+  var s: kotlin.Short = 1
+  var i: kotlin.Int = 1
+  var l: kotlin.Long = 1L
+  var f: kotlin.Float = 1.1f
+  var d: kotlin.Double = 1.1
   b = b
   c = b.toInt().toChar()
   s = b.toShort()
@@ -62,33 +62,33 @@ open class CastPrimitives {
 
  open fun testReferenceToPrimitive() {
   val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
-  val bool: Boolean = o as Boolean
-  val b: Byte = o as Byte
-  val c: Char = o as Char
-  val s: Short = o as Short
-  val i: Int = o as Int
-  val l: Long = o as Long
-  val f: Float = o as Float
-  val d: Double = o as Double
+  val bool: kotlin.Boolean = o as kotlin.Boolean
+  val b: kotlin.Byte = o as kotlin.Byte
+  val c: kotlin.Char = o as kotlin.Char
+  val s: kotlin.Short = o as kotlin.Short
+  val i: kotlin.Int = o as kotlin.Int
+  val l: kotlin.Long = o as kotlin.Long
+  val f: kotlin.Float = o as kotlin.Float
+  val d: kotlin.Double = o as kotlin.Double
  }
 
  open fun testUnboxAndWiden() {
   val boxedByte: kotlin.Byte? = java.lang.Byte.valueOf(0.toByte())
-  val s: Short = (boxedByte!! as java.lang.Byte).byteValue().toShort()
-  val i: Int = (boxedByte!! as java.lang.Byte).byteValue().toInt()
-  val l: Long = (boxedByte!! as java.lang.Byte).byteValue().toLong()
-  val f: Float = (boxedByte!! as java.lang.Byte).byteValue().toFloat()
-  val d: Double = (boxedByte!! as java.lang.Byte).byteValue().toDouble()
+  val s: kotlin.Short = (boxedByte!! as java.lang.Byte).byteValue().toShort()
+  val i: kotlin.Int = (boxedByte!! as java.lang.Byte).byteValue().toInt()
+  val l: kotlin.Long = (boxedByte!! as java.lang.Byte).byteValue().toLong()
+  val f: kotlin.Float = (boxedByte!! as java.lang.Byte).byteValue().toFloat()
+  val d: kotlin.Double = (boxedByte!! as java.lang.Byte).byteValue().toDouble()
  }
 
  open fun testImplicitArgumentCasts() {
-  val b: Byte = 127
-  val c: Char = '\uFFFF'
-  val s: Short = 32767
-  val i: Int = 2147483647
-  val l: Long = 9223372036854775807L
-  val f: Float = 3.4028235E38f
-  val d: Double = 1.7976931348623157E308
+  val b: kotlin.Byte = 127
+  val c: kotlin.Char = '\uFFFF'
+  val s: kotlin.Short = 32767
+  val i: kotlin.Int = 2147483647
+  val l: kotlin.Long = 9223372036854775807L
+  val f: kotlin.Float = 3.4028235E38f
+  val d: kotlin.Double = 1.7976931348623157E308
   cast.CastPrimitives.getShort(b.toShort())
   cast.CastPrimitives.getInt(b.toInt())
   cast.CastPrimitives.getLong(b.toLong())
@@ -106,14 +106,14 @@ open class CastPrimitives {
  }
 
  open fun testImplicitLongAssignmentCasts() {
-  val fbyte: Byte = 11
-  val fchar: Char = '\u000C'
-  val fshort: Short = 13
-  val fint: Int = 14
-  val flong: Long = 15L
-  val ffloat: Float = 16.0f
-  val fdouble: Double = 17.0
-  var tlong: Long = 0L
+  val fbyte: kotlin.Byte = 11
+  val fchar: kotlin.Char = '\u000C'
+  val fshort: kotlin.Short = 13
+  val fint: kotlin.Int = 14
+  val flong: kotlin.Long = 15L
+  val ffloat: kotlin.Float = 16.0f
+  val fdouble: kotlin.Double = 17.0
+  var tlong: kotlin.Long = 0L
   if (true) {
    tlong = fbyte.toLong()
    tlong = flong
@@ -147,36 +147,36 @@ open class CastPrimitives {
 
  companion object {
   @kotlin.jvm.JvmStatic
-  fun getShort(value: Short): Short {
+  fun getShort(value: kotlin.Short): kotlin.Short {
    return value
   }
 
   @kotlin.jvm.JvmStatic
-  fun getInt(value: Int): Int {
+  fun getInt(value: kotlin.Int): kotlin.Int {
    return value
   }
 
   @kotlin.jvm.JvmStatic
-  fun getLong(value: Long): Long {
+  fun getLong(value: kotlin.Long): kotlin.Long {
    return value
   }
 
   @kotlin.jvm.JvmStatic
-  fun getFloat(value: Float): Float {
+  fun getFloat(value: kotlin.Float): kotlin.Float {
    return value
   }
 
   @kotlin.jvm.JvmStatic
-  fun getDouble(value: Double): Double {
+  fun getDouble(value: kotlin.Double): kotlin.Double {
    return value
   }
  }
 
  open class IntValueHolder {
-  constructor(value: Int)
+  constructor(value: kotlin.Int)
  }
 
  open class LongValueHolder {
-  constructor(value: Long)
+  constructor(value: kotlin.Long)
  }
 }

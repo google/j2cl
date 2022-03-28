@@ -1,14 +1,14 @@
 package cascadingconstructor
 
 open class CascadingConstructor {
- @kotlin.jvm.JvmField var a: Int = 0
+ @kotlin.jvm.JvmField var a: kotlin.Int = 0
 
- @kotlin.jvm.JvmField var b: Int = 0
+ @kotlin.jvm.JvmField var b: kotlin.Int = 0
 
- constructor(a: Int, b: Int) {
+ constructor(a: kotlin.Int, b: kotlin.Int) {
   this.a = a
   this.b = b
  }
 
- constructor(a: Int): this(a, a * 2)
+ constructor(a: kotlin.Int): this(a, a * 2)
 }

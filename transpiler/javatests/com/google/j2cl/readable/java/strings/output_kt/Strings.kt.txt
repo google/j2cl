@@ -16,8 +16,8 @@ open class Strings {
   s3 = "" + s1 + s1 + s2 + null + "a"
   s3 = "a" + s1 + s1 + s2 + null
   var s4: kotlin.String?
-  val c1: Char = 'F'
-  val c2: Char = 'o'
+  val c1: kotlin.Char = 'F'
+  val c2: kotlin.Char = 'o'
   s4 = "" + (c1.code + c2.code) + "o"
   s4 = "" + s4 + ("" + 1L + "")
   s4 = "" + s4 + 1L
@@ -26,27 +26,27 @@ open class Strings {
   s4 = "" + s4 + 1.0
   s4 = "" + s4 + 1.0f
   s4 = "" + s4 + 1.toShort()
-  run {
+  kotlin.run {
    val `$qualifier`: strings.Strings.StringHolder = strings.Strings.StringHolder()
-   run {
+   kotlin.run {
     val `$qualifier_1`: strings.Strings.StringHolder = `$qualifier`
     val `$value`: kotlin.String? = "" + `$qualifier`.s + s4
     `$qualifier_1`.s = `$value`
     `$value`
    }
   }
-  run {
+  kotlin.run {
    val `$qualifier_2`: strings.Strings.StringHolder = strings.Strings.StringHolder()
-   run {
+   kotlin.run {
     val `$qualifier_3`: strings.Strings.StringHolder = `$qualifier_2`
     val `$value_1`: kotlin.String? = "" + `$qualifier_2`.s + c1
     `$qualifier_3`.s = `$value_1`
     `$value_1`
    }
   }
-  run {
+  kotlin.run {
    val `$qualifier_4`: strings.Strings.StringHolder = strings.Strings.StringHolder()
-   run {
+   kotlin.run {
     val `$qualifier_5`: strings.Strings.StringHolder = `$qualifier_4`
     val `$value_2`: kotlin.String? = "" + `$qualifier_4`.s + "o"
     `$qualifier_5`.s = `$value_2`

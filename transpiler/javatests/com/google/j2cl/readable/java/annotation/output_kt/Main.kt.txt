@@ -2,17 +2,17 @@ package annotation
 
 open class Main {
  interface Foo: kotlin.Annotation {
-  fun bar(): Int
+  fun bar(): kotlin.Int
 
   companion object {
-   @kotlin.jvm.JvmField val CONSTANT: Int = 123
+   @kotlin.jvm.JvmField val CONSTANT: kotlin.Int = 123
   }
  }
 
  interface Zoo: kotlin.Annotation {}
 
  open inner class Bar {
-  open fun baz(): Int {
+  open fun baz(): kotlin.Int {
    val foo: annotation.Main.Foo? = null
    foo!!.bar()
    return annotation.Main.Foo.CONSTANT

@@ -93,16 +93,16 @@ private fun Renderer.renderArrayLength(arrayLength: ArrayLength) {
 
 private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
   when (val componentTypeDescriptor = arrayLiteral.typeDescriptor.componentTypeDescriptor!!) {
-    PrimitiveTypes.BOOLEAN -> render("booleanArrayOf")
-    PrimitiveTypes.CHAR -> render("charArrayOf")
-    PrimitiveTypes.BYTE -> render("byteArrayOf")
-    PrimitiveTypes.SHORT -> render("shortArrayOf")
-    PrimitiveTypes.INT -> render("intArrayOf")
-    PrimitiveTypes.LONG -> render("longArrayOf")
-    PrimitiveTypes.FLOAT -> render("floatArrayOf")
-    PrimitiveTypes.DOUBLE -> render("doubleArrayOf")
+    PrimitiveTypes.BOOLEAN -> render("kotlin.booleanArrayOf")
+    PrimitiveTypes.CHAR -> render("kotlin.charArrayOf")
+    PrimitiveTypes.BYTE -> render("kotlin.byteArrayOf")
+    PrimitiveTypes.SHORT -> render("kotlin.shortArrayOf")
+    PrimitiveTypes.INT -> render("kotlin.intArrayOf")
+    PrimitiveTypes.LONG -> render("kotlin.longArrayOf")
+    PrimitiveTypes.FLOAT -> render("kotlin.floatArrayOf")
+    PrimitiveTypes.DOUBLE -> render("kotlin.doubleArrayOf")
     else -> {
-      render("arrayOf")
+      render("kotlin.arrayOf")
       renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
     }
   }
@@ -288,7 +288,7 @@ internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
 }
 
 private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
-  render("run ")
+  render("kotlin.run ")
   renderInCurlyBrackets {
     renderStartingWithNewLines(multiExpression.expressions) { expression ->
       renderExpression(expression)
@@ -309,16 +309,16 @@ private fun Renderer.renderNewArrayOfSize(
   sizeExpression: Expression
 ) {
   when (componentTypeDescriptor) {
-    PrimitiveTypes.BOOLEAN -> render("BooleanArray")
-    PrimitiveTypes.CHAR -> render("CharArray")
-    PrimitiveTypes.BYTE -> render("ByteArray")
-    PrimitiveTypes.SHORT -> render("ShortArray")
-    PrimitiveTypes.INT -> render("IntArray")
-    PrimitiveTypes.LONG -> render("LongArray")
-    PrimitiveTypes.FLOAT -> render("FloatArray")
-    PrimitiveTypes.DOUBLE -> render("DoubleArray")
+    PrimitiveTypes.BOOLEAN -> render("kotlin.BooleanArray")
+    PrimitiveTypes.CHAR -> render("kotlin.CharArray")
+    PrimitiveTypes.BYTE -> render("kotlin.ByteArray")
+    PrimitiveTypes.SHORT -> render("kotlin.ShortArray")
+    PrimitiveTypes.INT -> render("kotlin.IntArray")
+    PrimitiveTypes.LONG -> render("kotlin.LongArray")
+    PrimitiveTypes.FLOAT -> render("kotlin.FloatArray")
+    PrimitiveTypes.DOUBLE -> render("kotlin.DoubleArray")
     else -> {
-      render("arrayOfNulls")
+      render("kotlin.arrayOfNulls")
       renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
     }
   }

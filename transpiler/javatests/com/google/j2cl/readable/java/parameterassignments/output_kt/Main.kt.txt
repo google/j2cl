@@ -1,38 +1,38 @@
 package parameterassignments
 
 open class Main {
- constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): this(nonFinal, explicitFinal, implicitFinal, true) {
-  var nonFinal_1: Int = nonFinal
+ constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): this(nonFinal, explicitFinal, implicitFinal, true) {
+  var nonFinal_1: kotlin.Int = nonFinal
  }
 
- constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int, flag: Boolean) {
-  var nonFinal_1: Int = nonFinal
+ constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int, flag: kotlin.Boolean) {
+  var nonFinal_1: kotlin.Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
- open fun test(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
-  var nonFinal_1: Int = nonFinal
+ open fun test(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int {
+  var nonFinal_1: kotlin.Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   return nonFinal_1
  }
 
- @kotlin.jvm.JvmField val fn: parameterassignments.Main.Fn? = parameterassignments.Main.Fn (fun(nonFinal: Int, implicitFinal: Int): Int {
-  var nonFinal_1: Int = nonFinal
+ @kotlin.jvm.JvmField val fn: parameterassignments.Main.Fn? = parameterassignments.Main.Fn (fun(nonFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int {
+  var nonFinal_1: kotlin.Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
   return nonFinal_1
  })
 
  fun interface Fn {
-  fun test(nonFinal: Int, implicitFinal: Int): Int
+  fun test(nonFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int
  }
 
  open class SubMain: parameterassignments.Main {
-  constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): super(nonFinal, explicitFinal, implicitFinal) {
-   var nonFinal_1: Int = nonFinal
+  constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): super(nonFinal, explicitFinal, implicitFinal) {
+   var nonFinal_1: kotlin.Int = nonFinal
   }
 
-  open override fun test(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
-   var nonFinal_1: Int = nonFinal
+  open override fun test(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int {
+   var nonFinal_1: kotlin.Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
    return super.test(nonFinal_1, explicitFinal, implicitFinal)
   }

@@ -1,19 +1,19 @@
 package interfacejsbridge
 
 fun interface MyJsInterface {
- fun foo(a: Int): Int
+ fun foo(a: kotlin.Int): kotlin.Int
 }
 
 fun interface MyInterface {
- fun foo(a: Int): Int
+ fun foo(a: kotlin.Int): kotlin.Int
 }
 
 fun interface SubInterface: interfacejsbridge.MyJsInterface, interfacejsbridge.MyInterface {
- override fun foo(a: Int): Int
+ override fun foo(a: kotlin.Int): kotlin.Int
 }
 
 open class InterfaceImpl: interfacejsbridge.SubInterface {
- open override fun foo(a: Int): Int {
+ open override fun foo(a: kotlin.Int): kotlin.Int {
   return 0
  }
 }

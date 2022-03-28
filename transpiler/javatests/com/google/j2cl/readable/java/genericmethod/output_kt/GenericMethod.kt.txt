@@ -25,7 +25,7 @@ open class GenericMethod<T> {
   return null
  }
 
- open fun <T_1> `fun`(array: Array<T_1>?): Array<T_1>? {
+ open fun <T_1> `fun`(array: kotlin.Array<T_1>?): kotlin.Array<T_1>? {
   return array
  }
 
@@ -44,7 +44,7 @@ open class GenericMethod<T> {
   g!!.`fun`((java.lang.Object() as kotlin.Any))
   g!!.`fun`(kotlin.Exception())
   g!!.`fun`(kotlin.Error())
-  g!!.`fun`(arrayOf<kotlin.String?>("asdf"))
+  g!!.`fun`(kotlin.arrayOf<kotlin.String?>("asdf"))
   var s: kotlin.String? = this.checked()
   s = this.unchecked()
  }

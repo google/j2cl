@@ -1,10 +1,10 @@
 package simplelocalclass
 
 open class SimpleLocalClass {
- open fun test(p: Int) {
-  val localVar: Int = 1
+ open fun test(p: kotlin.Int) {
+  val localVar: kotlin.Int = 1
   open class `$1InnerClass` {
-   open fun `fun`(): Int {
+   open fun `fun`(): kotlin.Int {
     return localVar + p
    }
   }
@@ -14,9 +14,9 @@ open class SimpleLocalClass {
  }
 
  open fun `fun`() {
-  val localVar: Int = 1
+  val localVar: kotlin.Int = 1
   open class `$2InnerClass` {
-   @kotlin.jvm.JvmField var field: Int = localVar
+   @kotlin.jvm.JvmField var field: kotlin.Int = localVar
   }
  }
 

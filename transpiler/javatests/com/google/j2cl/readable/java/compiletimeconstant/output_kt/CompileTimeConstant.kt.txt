@@ -1,11 +1,11 @@
 package compiletimeconstant
 
 open class CompileTimeConstant {
- @kotlin.jvm.JvmField val A2: Int = 10
+ @kotlin.jvm.JvmField val A2: kotlin.Int = 10
 
- @kotlin.jvm.JvmField val B2: Int = 20
+ @kotlin.jvm.JvmField val B2: kotlin.Int = 20
 
- @kotlin.jvm.JvmField val C2: Int = 200
+ @kotlin.jvm.JvmField val C2: kotlin.Int = 200
 
  @kotlin.jvm.JvmField val D2: kotlin.String? = "Tur\"tle"
 
@@ -13,14 +13,14 @@ open class CompileTimeConstant {
 
  @kotlin.jvm.JvmField val F2: kotlin.String? = "Tur\"tleDo\"ve"
 
- @kotlin.jvm.JvmField val G2: Long = 10000L
+ @kotlin.jvm.JvmField val G2: kotlin.Long = 10000L
 
- @kotlin.jvm.JvmField val H2: Char = 'A'
+ @kotlin.jvm.JvmField val H2: kotlin.Char = 'A'
 
- @kotlin.jvm.JvmField val I2: Boolean = true
+ @kotlin.jvm.JvmField val I2: kotlin.Boolean = true
 
  init {
-  val b: Boolean = this.I2
+  val b: kotlin.Boolean = this.I2
   val s: kotlin.String? = "" + compiletimeconstant.CompileTimeConstant.G + compiletimeconstant.CompileTimeConstant.F
   val l: kotlin.String? = compiletimeconstant.CompileTimeConstant.L
   val m: kotlin.String? = compiletimeconstant.CompileTimeConstant.M
@@ -31,11 +31,11 @@ open class CompileTimeConstant {
  companion object {
   @kotlin.jvm.JvmField val OBJ: kotlin.Any? = null
 
-  @kotlin.jvm.JvmField val A: Int = 10
+  @kotlin.jvm.JvmField val A: kotlin.Int = 10
 
-  @kotlin.jvm.JvmField val B: Int = 20
+  @kotlin.jvm.JvmField val B: kotlin.Int = 20
 
-  @kotlin.jvm.JvmField val C: Int = 200
+  @kotlin.jvm.JvmField val C: kotlin.Int = 200
 
   @kotlin.jvm.JvmField val D: kotlin.String? = "Tur\"tle"
 
@@ -53,11 +53,11 @@ open class CompileTimeConstant {
 
   @kotlin.jvm.JvmField val N: kotlin.String? = "ThisIsALongStringAlsoButLonger"
 
-  @kotlin.jvm.JvmField val G: Long = 10000L
+  @kotlin.jvm.JvmField val G: kotlin.Long = 10000L
 
-  @kotlin.jvm.JvmField val H: Char = 'A'
+  @kotlin.jvm.JvmField val H: kotlin.Char = 'A'
 
-  @kotlin.jvm.JvmField val I: Boolean = true
+  @kotlin.jvm.JvmField val I: kotlin.Boolean = true
 
   @kotlin.jvm.JvmField val classLiteral: java.lang.Class<*>? = compiletimeconstant.CompileTimeConstant::class.java
  }

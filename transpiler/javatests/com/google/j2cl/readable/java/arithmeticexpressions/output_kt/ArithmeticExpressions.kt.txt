@@ -2,12 +2,12 @@ package arithmeticexpressions
 
 open class ArithmeticExpressions {
  open fun testCoercions() {
-  var b: Byte = 1L.toByte()
-  var c: Char = 1L.toInt().toChar()
-  var s: Short = 1L.toShort()
-  var i: Int = 1L.toInt()
-  var f: Float = 1.0f
-  var d: Double = 1.0
+  var b: kotlin.Byte = 1L.toByte()
+  var c: kotlin.Char = 1L.toInt().toChar()
+  var s: kotlin.Short = 1L.toShort()
+  var i: kotlin.Int = 1L.toInt()
+  var f: kotlin.Float = 1.0f
+  var d: kotlin.Double = 1.0
   b = 9223372036854775807L.toByte()
   c = 9223372036854775807L.toInt().toChar()
   s = 9223372036854775807L.toShort()
@@ -15,71 +15,71 @@ open class ArithmeticExpressions {
   f = 9.223372E18f
   d = 9.223372036854776E18
   val o: kotlin.Any? = java.lang.Character.valueOf(c)
-  s = (o as Char).code.toShort()
+  s = (o as kotlin.Char).code.toShort()
  }
 
  open fun testPrimitives() {
-  var a: Int = 10
-  val b: Int = run {
-   val `$value`: Int = a
+  var a: kotlin.Int = 10
+  val b: kotlin.Int = kotlin.run {
+   val `$value`: kotlin.Int = a
    a = a + 1
    `$value`
   }
-  val c: Int = run {
-   val `$value_1`: Int = a
+  val c: kotlin.Int = kotlin.run {
+   val `$value_1`: kotlin.Int = a
    a = a - 1
    `$value_1`
   }
-  val d: Int = run {
+  val d: kotlin.Int = kotlin.run {
    a = a + 1
    a
   }
-  val e: Int = run {
+  val e: kotlin.Int = kotlin.run {
    a = a - 1
    a
   }
-  val f: Int = - a
-  val g: Int = + a
-  val h: Int = a.inv()
-  val i: Int = 1 + 1 + 2 - 5
-  val j: Int = (1 + 2) * (3 + 4)
-  val p: Int = 1 / 2 * 3 % 4
-  val r: Int = - -2147483648
-  val t: Int = - - - 1
-  val u: Int = + + + 1
-  val v: Int = - + - 1
-  val w: Int = 5 - - 4
-  var k: Boolean = !(1 + 2 + 3 === 4)
-  val l: Boolean = 1 + 2 !== 4
-  val m: Boolean = java.lang.Long.MAX_VALUE.toDouble() !== 9.223372036854778E18
-  val o: Double = ((5 + 1) / 2).toDouble() - 0.0
+  val f: kotlin.Int = - a
+  val g: kotlin.Int = + a
+  val h: kotlin.Int = a.inv()
+  val i: kotlin.Int = 1 + 1 + 2 - 5
+  val j: kotlin.Int = (1 + 2) * (3 + 4)
+  val p: kotlin.Int = 1 / 2 * 3 % 4
+  val r: kotlin.Int = - -2147483648
+  val t: kotlin.Int = - - - 1
+  val u: kotlin.Int = + + + 1
+  val v: kotlin.Int = - + - 1
+  val w: kotlin.Int = 5 - - 4
+  var k: kotlin.Boolean = !(1 + 2 + 3 === 4)
+  val l: kotlin.Boolean = 1 + 2 !== 4
+  val m: kotlin.Boolean = java.lang.Long.MAX_VALUE.toDouble() !== 9.223372036854778E18
+  val o: kotlin.Double = ((5 + 1) / 2).toDouble() - 0.0
   a = a.shl(31L.toInt())
   a = a.shl(1L.toInt())
   a = (a.toLong() + 1L).toInt()
   a = (a.toLong() / 1L).toInt()
   a = (a.toDouble() + java.lang.Double.MAX_VALUE).toInt()
   k = k.or(true)
-  var s: Short = 10
-  k = run {
+  var s: kotlin.Short = 10
+  k = kotlin.run {
    s = (s.toInt() + 1).toShort()
    s
   }.toInt() === 10
-  var q: Int = 3.shr(2)
+  var q: kotlin.Int = 3.shr(2)
   q = 3.ushr(2)
-  val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
-  val y: Char = 'y'
+  val x: kotlin.Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
+  val y: kotlin.Char = 'y'
   val z: kotlin.Long? = java.lang.Long.valueOf(121L)
   k = y.code.toLong() === (z!! as java.lang.Long).longValue()
  }
 
- @kotlin.jvm.JvmField var bar: Long = run {
-  val `$value`: Long = arithmeticexpressions.ArithmeticExpressions.foo
+ @kotlin.jvm.JvmField var bar: kotlin.Long = kotlin.run {
+  val `$value`: kotlin.Long = arithmeticexpressions.ArithmeticExpressions.foo
   arithmeticexpressions.ArithmeticExpressions.foo = arithmeticexpressions.ArithmeticExpressions.foo + 1L
   `$value`
  }
 
  open fun testCompoundArray() {
-  val ints: IntArray? = null as IntArray
+  val ints: kotlin.IntArray? = null as kotlin.IntArray
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] - 1
   ints!![0] = ints!![0] * 1
@@ -93,75 +93,75 @@ open class ArithmeticExpressions {
   ints!![0] = ints!![0].ushr(1)
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] + 1
-  var i: Int = 0
-  run {
-   val `$array`: IntArray? = ints
-   val `$index`: Int = run {
-    val `$value`: Int = i
+  var i: kotlin.Int = 0
+  kotlin.run {
+   val `$array`: kotlin.IntArray? = ints
+   val `$index`: kotlin.Int = kotlin.run {
+    val `$value`: kotlin.Int = i
     i = i + 1
     `$value`
    }
-   run {
-    val `$array_1`: IntArray? = `$array`
-    val `$index_1`: Int = `$index`
-    val `$value_1`: Int = `$array`!![`$index`] + 1
+   kotlin.run {
+    val `$array_1`: kotlin.IntArray? = `$array`
+    val `$index_1`: kotlin.Int = `$index`
+    val `$value_1`: kotlin.Int = `$array`!![`$index`] + 1
     `$array_1`!![`$index_1`] = `$value_1`
     `$value_1`
    }
   }
-  run {
-   val `$array_2`: IntArray? = ints
-   val `$index_2`: Int = run {
+  kotlin.run {
+   val `$array_2`: kotlin.IntArray? = ints
+   val `$index_2`: kotlin.Int = kotlin.run {
     i = i + 1
     i
    }
-   run {
-    val `$array_3`: IntArray? = `$array_2`
-    val `$index_3`: Int = `$index_2`
-    val `$value_2`: Int = `$array_2`!![`$index_2`] + 1
+   kotlin.run {
+    val `$array_3`: kotlin.IntArray? = `$array_2`
+    val `$index_3`: kotlin.Int = `$index_2`
+    val `$value_2`: kotlin.Int = `$array_2`!![`$index_2`] + 1
     `$array_3`!![`$index_3`] = `$value_2`
     `$value_2`
    }
   }
-  run {
-   val `$array_4`: IntArray? = ints
-   val `$index_4`: Int = run {
-    val `$value_3`: Int = i
+  kotlin.run {
+   val `$array_4`: kotlin.IntArray? = ints
+   val `$index_4`: kotlin.Int = kotlin.run {
+    val `$value_3`: kotlin.Int = i
     i = i + 1
     `$value_3`
    }
-   run {
-    val `$array_5`: IntArray? = `$array_4`
-    val `$index_5`: Int = `$index_4`
-    val `$value_4`: Int = `$array_4`!![`$index_4`] / 1
+   kotlin.run {
+    val `$array_5`: kotlin.IntArray? = `$array_4`
+    val `$index_5`: kotlin.Int = `$index_4`
+    val `$value_4`: kotlin.Int = `$array_4`!![`$index_4`] / 1
     `$array_5`!![`$index_5`] = `$value_4`
     `$value_4`
    }
   }
-  val longs: LongArray? = null as LongArray
+  val longs: kotlin.LongArray? = null as kotlin.LongArray
   longs!![0] = longs!![0] + 1L
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
-  run {
-   val `$array_6`: LongArray? = arithmeticexpressions.ArithmeticExpressions.getLongArray()
-   val `$index_6`: Int = 0
-   run {
-    val `$array_7`: LongArray? = `$array_6`
-    val `$index_7`: Int = `$index_6`
-    val `$value_5`: Long = `$array_6`!![`$index_6`] + 1L
+  kotlin.run {
+   val `$array_6`: kotlin.LongArray? = arithmeticexpressions.ArithmeticExpressions.getLongArray()
+   val `$index_6`: kotlin.Int = 0
+   kotlin.run {
+    val `$array_7`: kotlin.LongArray? = `$array_6`
+    val `$index_7`: kotlin.Int = `$index_6`
+    val `$value_5`: kotlin.Long = `$array_6`!![`$index_6`] + 1L
     `$array_7`!![`$index_7`] = `$value_5`
     `$value_5`
    }
   }
-  val booleans: BooleanArray? = null as BooleanArray
+  val booleans: kotlin.BooleanArray? = null as kotlin.BooleanArray
   booleans!![0] = booleans!![0].or(true)
-  val strings: Array<kotlin.String?>? = null as Array<kotlin.String?>
+  val strings: kotlin.Array<kotlin.String?>? = null as kotlin.Array<kotlin.String?>
   strings!![0] = "" + strings!![0] + null
-  val shorts: ShortArray? = null as ShortArray
-  val b: Boolean = run {
-   val `$array_8`: ShortArray? = shorts
-   val `$index_8`: Int = 0
-   val `$value_6`: Short = (shorts!![0].toInt() + 1).toShort()
+  val shorts: kotlin.ShortArray? = null as kotlin.ShortArray
+  val b: kotlin.Boolean = kotlin.run {
+   val `$array_8`: kotlin.ShortArray? = shorts
+   val `$index_8`: kotlin.Int = 0
+   val `$value_6`: kotlin.Short = (shorts!![0].toInt() + 1).toShort()
    `$array_8`!![`$index_8`] = `$value_6`
    `$value_6`
   }.toInt() === 10
@@ -171,26 +171,26 @@ open class ArithmeticExpressions {
   var c: kotlin.Int? = java.lang.Integer.valueOf(1000)
   var d: kotlin.Int? = java.lang.Integer.valueOf(10000)
   d = java.lang.Integer.valueOf((d!! as java.lang.Integer).intValue() + (c!! as java.lang.Integer).intValue())
-  var i: Int = 43
+  var i: kotlin.Int = 43
   d = java.lang.Integer.valueOf((d!! as java.lang.Integer).intValue() + i)
   d = java.lang.Integer.valueOf((d!! as java.lang.Integer).intValue().shl(i))
   i = i + (c!! as java.lang.Integer).intValue()
-  var e: kotlin.Int? = run {
+  var e: kotlin.Int? = kotlin.run {
    c = java.lang.Integer.valueOf((c!! as java.lang.Integer).intValue() + 1)
    c
   }
-  e = run {
+  e = kotlin.run {
    c = java.lang.Integer.valueOf((c!! as java.lang.Integer).intValue() + 1)
    c
   }
   var e2: kotlin.Double? = java.lang.Double.valueOf(100.0)
   e2 = java.lang.Double.valueOf((e2!! as java.lang.Double).doubleValue() + 1.0)
-  var f: kotlin.Int? = run {
+  var f: kotlin.Int? = kotlin.run {
    val `$value`: kotlin.Int? = c
    c = java.lang.Integer.valueOf((c!! as java.lang.Integer).intValue() + 1)
    `$value`
   }
-  f = run {
+  f = kotlin.run {
    val `$value_1`: kotlin.Int? = c
    c = java.lang.Integer.valueOf((c!! as java.lang.Integer).intValue() + 1)
    `$value_1`
@@ -199,11 +199,11 @@ open class ArithmeticExpressions {
   b = java.lang.Byte.valueOf(((b!! as java.lang.Byte).byteValue().toInt() + 1).toByte())
   var ch: kotlin.Char? = java.lang.Character.valueOf('c')
   ch = java.lang.Character.valueOf(((ch!! as java.lang.Character).charValue().code + 1).toChar())
-  (run {
+  (kotlin.run {
    f = java.lang.Integer.valueOf((f!! as java.lang.Integer).intValue() + 1)
    f
   }!! as java.lang.Integer).intValue()
-  (run {
+  (kotlin.run {
    val `$value_2`: kotlin.Int? = f
    f = java.lang.Integer.valueOf((f!! as java.lang.Integer).intValue() - 1)
    `$value_2`
@@ -213,29 +213,29 @@ open class ArithmeticExpressions {
   }
   val ref: `$1Ref`<kotlin.Int?>? = null
   ref!!.field = java.lang.Integer.valueOf((ref!!.field!! as java.lang.Integer).intValue() + 1)
-  val n: Int = 1 + (ref!!.field!! as java.lang.Integer).intValue()
+  val n: kotlin.Int = 1 + (ref!!.field!! as java.lang.Integer).intValue()
  }
 
- @kotlin.jvm.JvmField var intField: Long = 0L
+ @kotlin.jvm.JvmField var intField: kotlin.Long = 0L
 
  open fun testExtendedOperands() {
   var boxedInteger: kotlin.Int? = java.lang.Integer.valueOf(3)
-  var i: Int
-  var l: Long
-  var d: Double
+  var i: kotlin.Int
+  var l: kotlin.Long
+  var d: kotlin.Double
   l = (2 - (boxedInteger!! as java.lang.Integer).intValue()).toLong() - 2L
   l = 2.or((boxedInteger!! as java.lang.Integer).intValue()).toLong().or(2L)
   l = 1000000L * l * 60L * 60L * 24L
   l = (24 * 60 * 60).toLong() * l * 1000000L
-  d = run {
-   l = run {
+  d = kotlin.run {
+   l = kotlin.run {
     i = 20
     i
    }.toLong()
    l
   }.toDouble()
-  l = (run {
-   boxedInteger = java.lang.Integer.valueOf(run {
+  l = (kotlin.run {
+   boxedInteger = java.lang.Integer.valueOf(kotlin.run {
     i = 20
     i
    })
@@ -246,23 +246,23 @@ open class ArithmeticExpressions {
  }
 
  companion object {
-  @kotlin.jvm.JvmField val FLOAT_CONSTANT: Float = 1.1f
+  @kotlin.jvm.JvmField val FLOAT_CONSTANT: kotlin.Float = 1.1f
 
-  @kotlin.jvm.JvmField val DOUBLE_CONSTANT: Double = 1.100000023841858
+  @kotlin.jvm.JvmField val DOUBLE_CONSTANT: kotlin.Double = 1.100000023841858
 
-  @kotlin.jvm.JvmField val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
+  @kotlin.jvm.JvmField val DOUBLE_CONSTANT_WITH_ARITHMETIC: kotlin.Double = 2.200000047683716
 
-  @kotlin.jvm.JvmField var one: Long = 1L
+  @kotlin.jvm.JvmField var one: kotlin.Long = 1L
 
-  @kotlin.jvm.JvmField var foo: Long = run {
-   val `$value`: Long = arithmeticexpressions.ArithmeticExpressions.one
+  @kotlin.jvm.JvmField var foo: kotlin.Long = kotlin.run {
+   val `$value`: kotlin.Long = arithmeticexpressions.ArithmeticExpressions.one
    arithmeticexpressions.ArithmeticExpressions.one = arithmeticexpressions.ArithmeticExpressions.one + 1L
    `$value`
   }
 
   @kotlin.jvm.JvmStatic
-  fun getLongArray(): LongArray? {
-   return null as LongArray
+  fun getLongArray(): kotlin.LongArray? {
+   return null as kotlin.LongArray
   }
 
   @kotlin.jvm.JvmStatic
@@ -272,11 +272,11 @@ open class ArithmeticExpressions {
 
   @kotlin.jvm.JvmStatic
   fun testSideEffect() {
-   run {
+   kotlin.run {
     val `$qualifier`: arithmeticexpressions.ArithmeticExpressions? = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect()
-    run {
+    kotlin.run {
      val `$qualifier_1`: arithmeticexpressions.ArithmeticExpressions? = `$qualifier`
-     val `$value`: Long = `$qualifier`!!.intField + 5L
+     val `$value`: kotlin.Long = `$qualifier`!!.intField + 5L
      `$qualifier_1`!!.intField = `$value`
      `$value`
     }
@@ -288,12 +288,12 @@ open class ArithmeticExpressions {
    return null
   }
 
-  @kotlin.jvm.JvmField var counter: Long = 0L
+  @kotlin.jvm.JvmField var counter: kotlin.Long = 0L
 
   @kotlin.jvm.JvmStatic
-  fun incrementCounter(): Long {
-   return run {
-    val `$value`: Long = arithmeticexpressions.ArithmeticExpressions.counter + 1L
+  fun incrementCounter(): kotlin.Long {
+   return kotlin.run {
+    val `$value`: kotlin.Long = arithmeticexpressions.ArithmeticExpressions.counter + 1L
     arithmeticexpressions.ArithmeticExpressions.counter = `$value`
     `$value`
    }

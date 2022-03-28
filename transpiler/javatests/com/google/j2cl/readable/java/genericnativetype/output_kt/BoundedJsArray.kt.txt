@@ -1,7 +1,7 @@
 package genericnativetype
 
 open class BoundedJsArray<V> {
- constructor(size: Int)
+ constructor(size: kotlin.Int)
 
  companion object {
   @kotlin.jvm.JvmStatic
@@ -11,7 +11,7 @@ open class BoundedJsArray<V> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <V_1> create(size: Int): genericnativetype.BoundedJsArray<V_1>? {
+  fun <V_1> create(size: kotlin.Int): genericnativetype.BoundedJsArray<V_1>? {
    val array: genericnativetype.BoundedJsArray<V_1>? = genericnativetype.BoundedJsArray<V_1>(size)
    return array
   }

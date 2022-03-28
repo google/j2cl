@@ -2,12 +2,12 @@ package instancequalifieronstaticfield
 
 open class InstanceQualifiers {
  companion object {
-  @kotlin.jvm.JvmField var staticField: Int = 100
+  @kotlin.jvm.JvmField var staticField: kotlin.Int = 100
 
-  @kotlin.jvm.JvmField var sideEffectCount: Int = 0
+  @kotlin.jvm.JvmField var sideEffectCount: kotlin.Int = 0
 
   @kotlin.jvm.JvmStatic
-  fun getStaticValue(): Int {
+  fun getStaticValue(): kotlin.Int {
    return instancequalifieronstaticfield.InstanceQualifiers.staticField
   }
 
@@ -19,7 +19,7 @@ open class InstanceQualifiers {
   @kotlin.jvm.JvmStatic
   fun main(vararg args: kotlin.String?) {
    val main: instancequalifieronstaticfield.InstanceQualifiers? = instancequalifieronstaticfield.InstanceQualifiers()
-   var i: Int = 0
+   var i: kotlin.Int = 0
    if (true) {
     instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
    }
@@ -31,15 +31,15 @@ open class InstanceQualifiers {
     }
    }
    if (true) {
-    i = run {
+    i = kotlin.run {
      main
      instancequalifieronstaticfield.InstanceQualifiers.staticField
     }
-    i = run {
+    i = kotlin.run {
      main
      instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
     }
-    i = run {
+    i = kotlin.run {
      main
      instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
      instancequalifieronstaticfield.InstanceQualifiers.staticField
@@ -56,7 +56,7 @@ open class InstanceQualifiers {
     if (true) {
      instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
      instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-     instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + run {
+     instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + kotlin.run {
       main
       instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
       instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()

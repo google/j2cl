@@ -2,9 +2,9 @@ package ternaryexpression
 
 open class TernaryExpression {
  open fun test() {
-  val a: Boolean = true
-  val number: Int = if (a) 1 else 2
-  val b: Boolean = if (number === 1) number === 2 else number === 1
-  val value: Int = ((if (b) (java.lang.Integer(15) as kotlin.Int) else (java.lang.Integer(30) as kotlin.Int)) as java.lang.Integer).intValue()
+  val a: kotlin.Boolean = true
+  val number: kotlin.Int = if (a) 1 else 2
+  val b: kotlin.Boolean = if (number === 1) number === 2 else number === 1
+  val value: kotlin.Int = ((if (b) (java.lang.Integer(15) as kotlin.Int) else (java.lang.Integer(30) as kotlin.Int)) as java.lang.Integer).intValue()
  }
 }

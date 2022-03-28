@@ -1,20 +1,20 @@
 package varargs
 
 open class Varargs {
- @kotlin.jvm.JvmField var args: Array<kotlin.Any?>? = null
+ @kotlin.jvm.JvmField var args: kotlin.Array<kotlin.Any?>? = null
 
- constructor(vararg args: Int)
+ constructor(vararg args: kotlin.Int)
 
  constructor(): this(1)
 
- open fun test(a: Int, vararg args: kotlin.Any?) {}
+ open fun test(a: kotlin.Int, vararg args: kotlin.Any?) {}
 
  open fun testCloneable(vararg args: kotlin.Cloneable?) {}
 
  open fun testSerializable(vararg args: java.io.Serializable?) {}
 
  open fun testAssignment(vararg args: kotlin.Any?) {
-  this.args = args as Array<kotlin.Any?>?
+  this.args = args as kotlin.Array<kotlin.Any?>?
  }
 
  open fun main() {
@@ -23,9 +23,9 @@ open class Varargs {
   v!!.test(1, (java.lang.Object() as kotlin.Any))
   v!!.test(1, (java.lang.Object() as kotlin.Any))
   v!!.test(1)
-  v!!.test(1, *(arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Any?>))
-  v!!.testCloneable(*(arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Cloneable?>))
-  v!!.testSerializable(*(arrayOf<Array<kotlin.Any?>?>() as Array<java.io.Serializable?>))
+  v!!.test(1, *(kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>() as kotlin.Array<kotlin.Any?>))
+  v!!.testCloneable(*(kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>() as kotlin.Array<kotlin.Cloneable?>))
+  v!!.testSerializable(*(kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>() as kotlin.Array<java.io.Serializable?>))
  }
 
  companion object {

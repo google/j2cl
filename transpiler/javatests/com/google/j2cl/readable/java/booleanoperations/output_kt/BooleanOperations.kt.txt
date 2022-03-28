@@ -2,10 +2,10 @@ package booleanoperations
 
 open class BooleanOperations {
  open fun test() {
-  var ls: Boolean = true
-  val rs: Boolean = true
-  var r: Boolean = true
-  val t: Boolean = !!!true
+  var ls: kotlin.Boolean = true
+  val rs: kotlin.Boolean = true
+  var r: kotlin.Boolean = true
+  val t: kotlin.Boolean = !!!true
   r = ls === rs
   r = ls !== rs
   r = ls.xor(rs)
@@ -13,7 +13,7 @@ open class BooleanOperations {
   r = ls.or(rs)
   r = ls && rs
   r = ls || rs
-  r = run {
+  r = kotlin.run {
    ls = rs
    ls
   }
@@ -27,7 +27,7 @@ open class BooleanOperations {
   booleanoperations.BooleanOperations.acceptBoolean(ls.or(rs))
   booleanoperations.BooleanOperations.acceptBoolean(ls && rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls || rs)
-  booleanoperations.BooleanOperations.acceptBoolean(run {
+  booleanoperations.BooleanOperations.acceptBoolean(kotlin.run {
    ls = rs
    ls
   })
@@ -39,7 +39,7 @@ open class BooleanOperations {
   br = java.lang.Boolean.valueOf(ls.or(rs))
   br = java.lang.Boolean.valueOf(ls && rs)
   br = java.lang.Boolean.valueOf(ls || rs)
-  br = java.lang.Boolean.valueOf(run {
+  br = java.lang.Boolean.valueOf(kotlin.run {
    ls = rs
    ls
   })
@@ -65,7 +65,7 @@ open class BooleanOperations {
    r = true
   }
   open class `$1Outer` {
-   @kotlin.jvm.JvmField var b: Boolean = false
+   @kotlin.jvm.JvmField var b: kotlin.Boolean = false
 
    open inner class Inner {
     init {
@@ -76,7 +76,7 @@ open class BooleanOperations {
   val finalOuter: `$1Outer`? = `$1Outer`()
   finalOuter!!.b = finalOuter!!.b.or(true)
   var outer: `$1Outer`? = `$1Outer`()
-  outer!!.b = outer!!.b.or(run {
+  outer!!.b = outer!!.b.or(kotlin.run {
    outer = null
    outer
   } === null)
@@ -84,6 +84,6 @@ open class BooleanOperations {
 
  companion object {
   @kotlin.jvm.JvmStatic
-  fun acceptBoolean(b: Boolean) {}
+  fun acceptBoolean(b: kotlin.Boolean) {}
  }
 }

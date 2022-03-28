@@ -19,7 +19,7 @@ open class InferReturn<T> {
   fun main() {
    val list: java.util.ArrayList<kotlin.Any?>? = inferreturn.InferReturn.newArrayList("foo")
    inferreturn.InferReturn.acceptsArrayListOfObject(list)
-   val array: Array<kotlin.Any?>? = inferreturn.InferReturn.newArray("foo") as Array<kotlin.Any?>
+   val array: kotlin.Array<kotlin.Any?>? = inferreturn.InferReturn.newArray("foo") as kotlin.Array<kotlin.Any?>
    inferreturn.InferReturn.acceptsArrayOfObject(array)
   }
 
@@ -29,14 +29,14 @@ open class InferReturn<T> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <V> newArray(foo: V?): Array<V>? {
-   return arrayOfNulls<kotlin.Any?>(0) as Array<V>?
+  fun <V> newArray(foo: V?): kotlin.Array<V>? {
+   return kotlin.arrayOfNulls<kotlin.Any?>(0) as kotlin.Array<V>?
   }
 
   @kotlin.jvm.JvmStatic
   fun acceptsArrayListOfObject(foo: java.util.ArrayList<kotlin.Any?>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun acceptsArrayOfObject(foo: Array<kotlin.Any?>?) {}
+  fun acceptsArrayOfObject(foo: kotlin.Array<kotlin.Any?>?) {}
  }
 }

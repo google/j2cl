@@ -1,41 +1,41 @@
 package lambdas
 
 open class Lambdas {
- @kotlin.jvm.JvmField var field: Int = 100
+ @kotlin.jvm.JvmField var field: kotlin.Int = 100
 
- open fun call(intf: lambdas.Lambdas.FunctionalInterface?, n: Int): Int {
+ open fun call(intf: lambdas.Lambdas.FunctionalInterface?, n: kotlin.Int): kotlin.Int {
   return this.field + intf!!.m(n)
  }
 
  open fun testLambdaExpressionStyle() {
-  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: Int): Int {
+  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: kotlin.Int): kotlin.Int {
    return i + 1
   }), 10)
  }
 
  open fun testLambdaBlockStyle() {
-  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: Int): Int {
+  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: kotlin.Int): kotlin.Int {
    return i + 2
   }), 10)
  }
 
  open fun testLambdaCaptureField() {
-  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: Int): Int {
+  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: kotlin.Int): kotlin.Int {
    return this.field + i + 1
   }), 10)
  }
 
  open fun testLambdaCaptureLocal() {
-  val x: Int = 1
-  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: Int): Int {
+  val x: kotlin.Int = 1
+  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: kotlin.Int): kotlin.Int {
    return x + i + 1
   }), 10)
  }
 
  open fun testLambdaCaptureFieldAndLocal() {
-  val x: Int = 1
-  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: Int): Int {
-   val y: Int = 1
+  val x: kotlin.Int = 1
+  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: kotlin.Int): kotlin.Int {
+   val y: kotlin.Int = 1
    return x + y + this.field + i + 1
   }), 10)
  }
@@ -43,7 +43,7 @@ open class Lambdas {
  open fun funOuter() {}
 
  open fun testLambdaCallOuterFunction() {
-  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: Int): Int {
+  this.call(lambdas.Lambdas.FunctionalInterface (fun(i: kotlin.Int): kotlin.Int {
    this.funOuter()
    this.funOuter()
    this@Lambdas.funOuter()
@@ -112,7 +112,7 @@ open class Lambdas {
  companion object {
   @kotlin.jvm.JvmStatic
   fun testLambdaInStaticContext() {
-   val f: lambdas.Lambdas.FunctionalInterface? = lambdas.Lambdas.FunctionalInterface (fun(i: Int): Int {
+   val f: lambdas.Lambdas.FunctionalInterface? = lambdas.Lambdas.FunctionalInterface (fun(i: kotlin.Int): kotlin.Int {
     return i
    })
   }
@@ -187,7 +187,7 @@ open class Lambdas {
  }
 
  fun interface FunctionalInterface {
-  fun m(i: Int): Int
+  fun m(i: kotlin.Int): kotlin.Int
  }
 
  fun interface Functional<T> {
@@ -226,18 +226,18 @@ open class Lambdas {
  }
 
  open class Parent {
-  @kotlin.jvm.JvmField var fieldInParent: Int = 0
+  @kotlin.jvm.JvmField var fieldInParent: kotlin.Int = 0
 
   open fun funInParent() {}
  }
 
  open class LambdaInSubClass: lambdas.Lambdas.Parent() {
   open fun testLambdaInSubclass() {
-   val l: lambdas.Lambdas.FunctionalInterface? = lambdas.Lambdas.FunctionalInterface (fun(i: Int): Int {
+   val l: lambdas.Lambdas.FunctionalInterface? = lambdas.Lambdas.FunctionalInterface (fun(i: kotlin.Int): kotlin.Int {
     this.funInParent()
     this.funInParent()
     this@LambdaInSubClass.funInParent()
-    var a: Int = this.fieldInParent
+    var a: kotlin.Int = this.fieldInParent
     a = this.fieldInParent
     a = this@LambdaInSubClass.fieldInParent
     return a
@@ -264,7 +264,7 @@ open class Lambdas {
  }
 
  interface Equals<T> {
-  fun equals(o: kotlin.Any?): Boolean
+  fun equals(o: kotlin.Any?): kotlin.Boolean
 
   fun get(): T? {
    return null

@@ -3,7 +3,7 @@ package supermethodcall
 open class GrandParent {
  open fun grandParentSimplest() {}
 
- open fun grandParentWithParams(foo: Int) {}
+ open fun grandParentWithParams(foo: kotlin.Int) {}
 
  open fun grandParentWithChangingReturn(): kotlin.Any? {
   return null
@@ -13,7 +13,7 @@ open class GrandParent {
 open class Parent: supermethodcall.GrandParent() {
  open fun parentSimplest() {}
 
- open fun parentWithParams(foo: Int) {}
+ open fun parentWithParams(foo: kotlin.Int) {}
 
  open fun parentWithChangingReturn(): kotlin.Any? {
   return null
@@ -25,7 +25,7 @@ open class Child: supermethodcall.Parent() {
   super.parentSimplest()
  }
 
- open override fun parentWithParams(foo: Int) {
+ open override fun parentWithParams(foo: kotlin.Int) {
   super.parentWithParams(foo)
  }
 
@@ -38,7 +38,7 @@ open class Child: supermethodcall.Parent() {
   super.grandParentSimplest()
  }
 
- open override fun grandParentWithParams(foo: Int) {
+ open override fun grandParentWithParams(foo: kotlin.Int) {
   super.grandParentWithParams(foo)
  }
 

@@ -1,47 +1,47 @@
 package instancejsmethods
 
 fun interface MyInterface {
- fun intfFoo(): Int
+ fun intfFoo(): kotlin.Int
 }
 
 open class SuperParent {
- open fun `fun`(a: Int, b: Int): Int {
+ open fun `fun`(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
   return a + b + 111
  }
 
- open fun bar(a: Int, b: Int): Int {
+ open fun bar(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
   return a * b + 222
  }
 }
 
 open class Parent: instancejsmethods.SuperParent() {
- open override fun `fun`(a: Int, b: Int): Int {
+ open override fun `fun`(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
   return a + b
  }
 
- open override fun bar(a: Int, b: Int): Int {
+ open override fun bar(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
   return a * b
  }
 
- open fun foo(a: Int): Int {
+ open fun foo(a: kotlin.Int): kotlin.Int {
   return a
  }
 }
 
 open class Child: instancejsmethods.MyInterface, instancejsmethods.Parent() {
- open override fun `fun`(a: Int, b: Int): Int {
+ open override fun `fun`(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
   return a + b + 1
  }
 
- open override fun bar(a: Int, b: Int): Int {
+ open override fun bar(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
   return a * b + 1
  }
 
- open override fun foo(a: Int): Int {
+ open override fun foo(a: kotlin.Int): kotlin.Int {
   return a
  }
 
- open override fun intfFoo(): Int {
+ open override fun intfFoo(): kotlin.Int {
   return 1
  }
 }

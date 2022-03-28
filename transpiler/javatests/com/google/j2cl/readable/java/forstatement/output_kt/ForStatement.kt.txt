@@ -3,8 +3,8 @@ package forstatement
 open class ForStatement {
  open fun test() {
   if (true) {
-   var i: Int = 0
-   var count: Int = 0
+   var i: kotlin.Int = 0
+   var count: kotlin.Int = 0
    LOOP@ while (i < 100) {
     LOOP_CONTINUE@ do {
      count = count + 1
@@ -13,8 +13,8 @@ open class ForStatement {
    }
   }
   if (true) {
-   var l: Long = 0L
-   var count_1: Long = 0L
+   var l: kotlin.Long = 0L
+   var count_1: kotlin.Long = 0L
    LOOP_1@ while (l < 100L) {
     LOOP_CONTINUE_1@ do {
      count_1 = count_1 + 1L
@@ -23,18 +23,18 @@ open class ForStatement {
     l = l + 1L
    }
   }
-  var a: Boolean = false
+  var a: kotlin.Boolean = false
   if (true) {
-   LOOP_2@ while (run {
+   LOOP_2@ while (kotlin.run {
     a = a.or(true)
     a
    }) {
     LOOP_CONTINUE_2@ do {} while (false)
    }
   }
-  var b: Boolean = false
+  var b: kotlin.Boolean = false
   if (true) {
-   LOOP_3@ while (run {
+   LOOP_3@ while (kotlin.run {
     b = a
     b
    }) {
@@ -52,16 +52,16 @@ open class ForStatement {
 
  open fun testContinue() {
   if (true) {
-   var i: Int = 0
-   var j: Int = 0
+   var i: kotlin.Int = 0
+   var j: kotlin.Int = 0
    LABEL@ while (i < 10) {
     LABEL_CONTINUE@ do {
      if (i === 5) {
       break@LABEL_CONTINUE
      }
      if (true) {
-      var k: Int = 0
-      var l: Int = 0
+      var k: kotlin.Int = 0
+      var l: kotlin.Int = 0
       LOOP@ while (k < 10) {
        LOOP_CONTINUE@ do {
         if (j === 5) {
@@ -81,7 +81,7 @@ open class ForStatement {
 
  companion object {
   @kotlin.jvm.JvmStatic
-  fun returnsValue(): Int {
+  fun returnsValue(): kotlin.Int {
    return 1
   }
  }

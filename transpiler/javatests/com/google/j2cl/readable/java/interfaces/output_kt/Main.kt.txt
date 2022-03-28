@@ -6,7 +6,7 @@ open class Main {
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
   interfaces.Main.Interface.staticInterfaceMethod()
-  val x: Int = run {
+  val x: kotlin.Int = kotlin.run {
    Implementor()
    interfaces.Main.Interface.a
   } + interfaces.Main.Interface.b
@@ -22,9 +22,9 @@ open class Main {
   fun privateMethod(t: T?) {}
 
   companion object {
-   @kotlin.jvm.JvmField val a: Int = 1
+   @kotlin.jvm.JvmField val a: kotlin.Int = 1
 
-   @kotlin.jvm.JvmField val b: Int = 2
+   @kotlin.jvm.JvmField val b: kotlin.Int = 2
 
    @kotlin.jvm.JvmStatic
    fun staticInterfaceMethod() {}

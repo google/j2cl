@@ -1,17 +1,17 @@
 package staticfieldaccesslevels
 
 open class StaticFieldAccessLevels {
- open fun test(): Int {
+ open fun test(): kotlin.Int {
   return if (staticfieldaccesslevels.StaticFieldAccessLevels.b) staticfieldaccesslevels.StaticFieldAccessLevels.a else staticfieldaccesslevels.StaticFieldAccessLevels.d
  }
 
  companion object {
-  @kotlin.jvm.JvmField var a: Int = 0
+  @kotlin.jvm.JvmField var a: kotlin.Int = 0
 
-  @kotlin.jvm.JvmField var b: Boolean = false
+  @kotlin.jvm.JvmField var b: kotlin.Boolean = false
 
   @kotlin.jvm.JvmField var c: kotlin.Any? = null
 
-  @kotlin.jvm.JvmField var d: Int = 0
+  @kotlin.jvm.JvmField var d: kotlin.Int = 0
  }
 }

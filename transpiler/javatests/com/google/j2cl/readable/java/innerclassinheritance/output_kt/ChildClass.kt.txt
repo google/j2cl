@@ -1,19 +1,19 @@
 package innerclassinheritance
 
 open class ParentOuter {
- @kotlin.jvm.JvmField var fieldInParentOuter: Int = 0
+ @kotlin.jvm.JvmField var fieldInParentOuter: kotlin.Int = 0
 
  open fun funInParentOuter() {}
 }
 
 open class ParentInner {
- @kotlin.jvm.JvmField var fieldInParentInner: Int = 0
+ @kotlin.jvm.JvmField var fieldInParentInner: kotlin.Int = 0
 
  open fun funInParentInner() {}
 }
 
 open class ChildClass: innerclassinheritance.ParentOuter() {
- @kotlin.jvm.JvmField var fieldInOuter: Int = 0
+ @kotlin.jvm.JvmField var fieldInOuter: kotlin.Int = 0
 
  open fun funInOuter() {}
 
@@ -35,11 +35,11 @@ open class ChildClass: innerclassinheritance.ParentOuter() {
  }
 
  open inner class InnerClass: innerclassinheritance.ParentInner() {
-  @kotlin.jvm.JvmField var fieldInInner: Int = 0
+  @kotlin.jvm.JvmField var fieldInInner: kotlin.Int = 0
 
   open fun funInInner() {}
 
-  open fun testInnerClass(): Int {
+  open fun testInnerClass(): kotlin.Int {
    this@ChildClass.funInParentOuter()
    this@ChildClass.funInParentOuter()
    this@ChildClass.funInOuter()
@@ -48,7 +48,7 @@ open class ChildClass: innerclassinheritance.ParentOuter() {
    this.funInParentInner()
    this.funInInner()
    this.funInInner()
-   var a: Int = this@ChildClass.fieldInParentOuter
+   var a: kotlin.Int = this@ChildClass.fieldInParentOuter
    a = this@ChildClass.fieldInParentOuter
    a = this@ChildClass.fieldInOuter
    a = this@ChildClass.fieldInOuter

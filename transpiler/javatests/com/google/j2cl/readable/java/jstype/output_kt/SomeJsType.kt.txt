@@ -1,13 +1,13 @@
 package jstype
 
 open class SomeJsType<T> {
- @kotlin.jvm.JvmField var publicField: Int = 0
+ @kotlin.jvm.JvmField var publicField: kotlin.Int = 0
 
- @kotlin.jvm.JvmField var privateField: Int = 0
+ @kotlin.jvm.JvmField var privateField: kotlin.Int = 0
 
- @kotlin.jvm.JvmField var packageField: Int = 0
+ @kotlin.jvm.JvmField var packageField: kotlin.Int = 0
 
- @kotlin.jvm.JvmField var protectedField: Int = 0
+ @kotlin.jvm.JvmField var protectedField: kotlin.Int = 0
 
  open fun publicMethod() {}
 
@@ -18,7 +18,7 @@ open class SomeJsType<T> {
  open fun protectedMethod() {}
 
  open fun useFieldsAndMethods() {
-  val value: Int = this.publicField + this.privateField + this.packageField + this.protectedField
+  val value: kotlin.Int = this.publicField + this.privateField + this.packageField + this.protectedField
   this.publicMethod()
   this.privateMethod()
   this.packageMethod()

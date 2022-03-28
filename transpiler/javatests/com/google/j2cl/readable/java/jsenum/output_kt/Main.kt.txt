@@ -42,8 +42,8 @@ open class Main {
    } while (false)
    val o: kotlin.Any? = intJsEnum
    intJsEnum = o as jsenum.Main.IntJsEnum?
-   val equal: Boolean = intJsEnum === jsenum.Main.IntJsEnum.TWENTY
-   var isInstance: Boolean = intJsEnum is jsenum.Main.IntJsEnum
+   val equal: kotlin.Boolean = intJsEnum === jsenum.Main.IntJsEnum.TWENTY
+   var isInstance: kotlin.Boolean = intJsEnum is jsenum.Main.IntJsEnum
    isInstance = intJsEnum is kotlin.Comparable<*>
    val stringJsEnum: jsenum.Main.StringJsEnum? = if (jsenum.Main.StringJsEnum.ONE.getValue() === "10") jsenum.Main.StringJsEnum.THREE else null
    SWITCH_2@ do {
@@ -80,9 +80,9 @@ open class Main {
    var unboxed: jsenum.Main.ComparableJsEnum? = templatedField!!.getValue()
    unboxed = templatedField!!.value
    templatedField!!.value = jsenum.Main.ComparableJsEnum.ONE
-   java.util.Arrays.asList(*(arrayOf<kotlin.Any?>(jsenum.Main.ComparableJsEnum.ONE) as Array<jsenum.Main.ComparableJsEnum?>))
+   java.util.Arrays.asList(*(kotlin.arrayOf<kotlin.Any?>(jsenum.Main.ComparableJsEnum.ONE) as kotlin.Array<jsenum.Main.ComparableJsEnum?>))
    (templatedField!!.getValue()!! as java.lang.Enum<jsenum.Main.ComparableJsEnum?>).ordinal()
-   val b: Boolean = jsenum.Main.ComparableJsEnum.ONE === jsenum.Main.boxingPassthrough(jsenum.Main.ComparableJsEnum.ONE)
+   val b: kotlin.Boolean = jsenum.Main.ComparableJsEnum.ONE === jsenum.Main.boxingPassthrough(jsenum.Main.ComparableJsEnum.ONE)
   }
 
   @kotlin.jvm.JvmStatic
@@ -101,7 +101,7 @@ open class Main {
   ONE,
   TWO;
 
-  open fun getValue(): Int {
+  open fun getValue(): kotlin.Int {
    return (this as java.lang.Enum<jsenum.Main.ComparableJsEnum?>).ordinal()
   }
  }
@@ -111,13 +111,13 @@ open class Main {
   TWENTY(20),
   ELEVEN(11);
 
-  @kotlin.jvm.JvmField var value: Int = 0
+  @kotlin.jvm.JvmField var value: kotlin.Int = 0
 
-  open fun getValue(): Int {
+  open fun getValue(): kotlin.Int {
    return this.value
   }
 
-  constructor(value: Int) {
+  constructor(value: kotlin.Int) {
    this.value = value
   }
  }

@@ -9,7 +9,7 @@ open class ImplicitParenthesis {
  companion object {
   @kotlin.jvm.JvmStatic
   fun examples() {
-   var primitiveInt: Int
+   var primitiveInt: kotlin.Int
    var boxedInt: kotlin.Int?
    if (true) {
     primitiveInt = 5
@@ -20,7 +20,7 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = (run {
+    primitiveInt = (kotlin.run {
      boxedInt = java.lang.Integer.valueOf((boxedInt!! as java.lang.Integer).intValue() + primitiveInt)
      boxedInt
     }!! as java.lang.Integer).intValue()
@@ -29,7 +29,7 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = (run {
+    primitiveInt = (kotlin.run {
      boxedInt = java.lang.Integer.valueOf(primitiveInt)
      boxedInt
     }!! as java.lang.Integer).intValue()
@@ -38,7 +38,7 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = (run {
+    primitiveInt = (kotlin.run {
      val `$value`: kotlin.Int? = boxedInt
      boxedInt = java.lang.Integer.valueOf((boxedInt!! as java.lang.Integer).intValue() + 1)
      `$value`
@@ -48,7 +48,7 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = (java.lang.Integer(10) as kotlin.Int)
-    primitiveInt = (run {
+    primitiveInt = (kotlin.run {
      boxedInt = java.lang.Integer.valueOf((boxedInt!! as java.lang.Integer).intValue() + 1)
      boxedInt
     }!! as java.lang.Integer).intValue()
@@ -58,7 +58,7 @@ open class ImplicitParenthesis {
 
   @kotlin.jvm.JvmStatic
   fun nonExamples() {
-   var primitiveInt: Int
+   var primitiveInt: kotlin.Int
    var boxedInt: kotlin.Int?
    var boxedBoolean: kotlin.Boolean?
    if (true) {

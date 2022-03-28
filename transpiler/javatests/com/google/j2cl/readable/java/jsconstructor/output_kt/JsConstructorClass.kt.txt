@@ -2,9 +2,9 @@ package jsconstructor
 
 open class JsConstructorClass {
  open class A {
-  @kotlin.jvm.JvmField var fA: Int = 1
+  @kotlin.jvm.JvmField var fA: kotlin.Int = 1
 
-  constructor(x: Int) {
+  constructor(x: kotlin.Int) {
    this.fA = x
   }
 
@@ -12,9 +12,9 @@ open class JsConstructorClass {
  }
 
  open class B: jsconstructor.JsConstructorClass.A {
-  @kotlin.jvm.JvmField var fB: Int = 2
+  @kotlin.jvm.JvmField var fB: kotlin.Int = 2
 
-  constructor(x: Int): super(x + 1) {
+  constructor(x: kotlin.Int): super(x + 1) {
    this.fB = 3
   }
 
@@ -22,37 +22,37 @@ open class JsConstructorClass {
    this.fB = 4
   }
 
-  constructor(x: Int, y: Int): this(x + y) {
+  constructor(x: kotlin.Int, y: kotlin.Int): this(x + y) {
    this.fB = x * y
   }
  }
 
  open class C: jsconstructor.JsConstructorClass.B {
-  @kotlin.jvm.JvmField var fC: Int = 1
+  @kotlin.jvm.JvmField var fC: kotlin.Int = 1
 
-  constructor(x: Int): super(x * 2) {
+  constructor(x: kotlin.Int): super(x * 2) {
    this.fC = 6
   }
 
-  constructor(x: Int, y: Int): this(x + y) {
+  constructor(x: kotlin.Int, y: kotlin.Int): this(x + y) {
    this.fC = 7
   }
  }
 
  open class D: jsconstructor.JsConstructorClass.B {
-  @kotlin.jvm.JvmField var fD: Int = 8
+  @kotlin.jvm.JvmField var fD: kotlin.Int = 8
 
   constructor(): super(9) {
    this.fD = 10
   }
 
-  constructor(x: Int): this() {
+  constructor(x: kotlin.Int): this() {
    this.fD = x
   }
  }
 
  open class E: jsconstructor.JsConstructorClass.C {
-  @kotlin.jvm.JvmField var fE: Int = 11
+  @kotlin.jvm.JvmField var fE: kotlin.Int = 11
 
   constructor(): super(10) {
    this.fE = 12
@@ -60,9 +60,9 @@ open class JsConstructorClass {
  }
 
  open class F: jsconstructor.JsConstructorClass.C {
-  @kotlin.jvm.JvmField var fF: Int = 13
+  @kotlin.jvm.JvmField var fF: kotlin.Int = 13
 
-  constructor(x: Int): super(x + 2) {
+  constructor(x: kotlin.Int): super(x + 2) {
    this.fF = x + 3
   }
  }
@@ -74,13 +74,13 @@ open class JsConstructorClass {
  }
 
  open class Varargs: jsconstructor.JsConstructorClass.A {
-  constructor(vararg args: Int): super(args!![1])
+  constructor(vararg args: kotlin.Int): super(args!![1])
  }
 
  open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
-  constructor(i: kotlin.Any?, vararg args: Int): super(*(args))
+  constructor(i: kotlin.Any?, vararg args: kotlin.Int): super(*(args))
 
-  constructor(j: Int): this((java.lang.Object() as kotlin.Any), j)
+  constructor(j: kotlin.Int): this((java.lang.Object() as kotlin.Any), j)
 
   companion object {
    @kotlin.jvm.JvmStatic
@@ -92,7 +92,7 @@ open class JsConstructorClass {
  }
 
  open inner class InstanceVarargs: jsconstructor.JsConstructorClass.A {
-  constructor(vararg args: Int): super(args!![1])
+  constructor(vararg args: kotlin.Int): super(args!![1])
  }
 
  open class RegularType {
