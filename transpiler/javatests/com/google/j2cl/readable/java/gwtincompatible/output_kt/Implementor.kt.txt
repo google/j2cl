@@ -1,5 +1,7 @@
 package gwtincompatible
 
+import javaemul.lang.*
+
 open class Implementor: gwtincompatible.Interface, gwtincompatible.Interface.NestedInterface, gwtincompatible.Interface.ClassWithAbstractMethod() {
  open fun compatibleMethod() {
   val a: kotlin.Int = 4
