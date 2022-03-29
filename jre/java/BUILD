@@ -16,6 +16,14 @@ config_setting(
     },
 )
 
+# Packages that may use j2kt_jvm_library/j2kt_native_library and need visibility
+# for the J2KT JRE targets.
+ALLOWED_J2KT_PACKAGES = [
+    "//third_party/java_src/jsinterop_annotations/java/jsinterop/annotations:__pkg__",
+    "//transpiler/javatests:__subpackages__",
+    "//benchmarking:__subpackages__",
+]
+
 JRE_JAVAC_VERSION_OPTS = select({
     ":experimental_java11_support": [
         # Remove the system (aka pre Java9 'bootclasspath').
@@ -222,11 +230,7 @@ j2kt_jvm_library(
         ":j2kt_support_files-j2kt",
     ],
     javacopts = JRE_JAVAC_OPTS,
-    visibility = [
-        # Temporary for j2kt_library
-        "//transpiler/javatests:__subpackages__",
-        "//benchmarking:__subpackages__",
-    ],
+    visibility = ALLOWED_J2KT_PACKAGES,
 )
 
 j2kt_native_library(
@@ -235,11 +239,7 @@ j2kt_native_library(
         ":j2kt_support_files-j2kt",
     ],
     javacopts = JRE_JAVAC_OPTS,
-    visibility = [
-        # Temporary for j2kt_library
-        "//transpiler/javatests:__subpackages__",
-        "//benchmarking:__subpackages__",
-    ],
+    visibility = ALLOWED_J2KT_PACKAGES,
 )
 
 j2kt_native_library(
@@ -249,11 +249,7 @@ j2kt_native_library(
         ":jre_native_files-j2kt-native",
     ],
     javacopts = JRE_JAVAC_OPTS,
-    visibility = [
-        # Temporary for j2kt_library
-        "//transpiler/javatests:__subpackages__",
-        "//benchmarking:__subpackages__",
-    ],
+    visibility = ALLOWED_J2KT_PACKAGES,
     deps = [
         ":j2kt_support-j2kt-native",
         ":javaemul_internal_annotations-j2kt-native",
