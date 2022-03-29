@@ -23,7 +23,7 @@ open class HashFunctions {
   fun <T: kotlin.Enum<T>?> enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
    return object : overwrittentypevariables.HashFunction<T> {
     open override fun apply(input: T?): kotlin.String? {
-     return "" + (input!! as java.lang.Enum<T>).ordinal()
+     return "" + input!!.ordinal
     }
    }
   }

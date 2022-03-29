@@ -16,14 +16,14 @@
 package javaemul.lang
 
 /**
- * Pseudo-constructor for emulated java.lang.Double.
+ * Pseudo-constructor for emulated java.lang.Int.
  *
  * See regular JRE API documentation for other methods in this file.
  */
-operator fun Double.Companion.invoke(d: Double) = d
+operator fun Int.Companion.invoke(i: Int) = i
 
-fun Double.Companion.valueOf(d: Double) = d
+fun Int.Companion.valueOf(i: Int) = i
 
-fun Double.Companion.compare(d1: Double, d2: Double) = d1.compareTo(d2)
+fun Int.Companion.compare(i1: Int, i2: Int) = i1.compareTo(i2)
 
-fun Double.Companion.isNaN(d: Double) = d.isNaN()
+fun Int.Companion.toHexString(i: Int) = i.toString(16)

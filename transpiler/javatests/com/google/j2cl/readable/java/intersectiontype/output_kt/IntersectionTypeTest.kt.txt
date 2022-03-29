@@ -85,7 +85,7 @@ open class IntersectionTypeTest<U> {
 
   @kotlin.jvm.JvmStatic
   fun <T> m(): T? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
-   return intersectiontype.IntersectionTypeTest.get((java.lang.Object() as kotlin.Any)) as T?
+   return intersectiontype.IntersectionTypeTest.get(kotlin.Any()) as T?
   }
 
   @kotlin.jvm.JvmStatic

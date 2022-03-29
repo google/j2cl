@@ -89,19 +89,19 @@ open class Lambdas {
    throw kotlin.RuntimeException()
   }))
   val f: lambdas.Lambdas.Function<*, *>? = lambdas.Lambdas.Function<*, *> (fun(item: T?): kotlin.Any? {
-   return java.lang.Long.valueOf(1L)
+   return kotlin.Long.valueOf(1L)
   })
  }
 
  open fun testLambdaReturningVoidAsExpression() {
   val runner: lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid? = lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (fun() {
-   (java.lang.Object() as kotlin.Any)
+   kotlin.Any()
   })
  }
 
  open fun testAnonymousInsideLambda() {
   val runner: lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid? = lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (fun() {
-   (object : java.lang.Object() {} as kotlin.Any)
+   object : Any() {}
   })
  }
 
@@ -166,7 +166,7 @@ open class Lambdas {
     f1_1!!.apply(null)
    })
    val stringJsSupplier: lambdas.Lambdas.JsSupplier<kotlin.Int?>? = lambdas.Lambdas.JsSupplier<kotlin.Int?> (fun(): kotlin.Int? {
-    return java.lang.Integer.valueOf(1)
+    return kotlin.Int.valueOf(1)
    })
    stringJsSupplier!!.get()
    val equals: lambdas.Lambdas.Equals<*>? = stringJsSupplier

@@ -12,14 +12,14 @@ open class InstanceofExpressions {
  }
 
  open fun testInstanceofInterface() {
-  val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+  val o: kotlin.Any? = kotlin.Any()
   var b: kotlin.Boolean
   b = o is java.io.Serializable
   b = object : Serializable {} is java.io.Serializable
  }
 
  open fun testInstanceofBoxedType() {
-  val b: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
+  val b: kotlin.Any? = kotlin.Int(1)
   var a: kotlin.Boolean = b is kotlin.Byte
   a = b is kotlin.Double
   a = b is kotlin.Float
@@ -36,7 +36,7 @@ open class InstanceofExpressions {
  }
 
  open fun testInstanceOfArray() {
-  val `object`: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+  val `object`: kotlin.Any? = kotlin.Any()
   val objectArray: kotlin.Array<kotlin.Any?>? = kotlin.arrayOfNulls<kotlin.Any?>(0)
   val objectDoubleArray: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>?>(0)
   val stringArray: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.String?>(0)

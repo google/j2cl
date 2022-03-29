@@ -9,17 +9,17 @@ open class Equality {
    assert(0 !== 1)
   }
   if (true) {
-   assert((java.lang.Object() as kotlin.Any) !== (java.lang.Object() as kotlin.Any))
+   assert(kotlin.Any() !== kotlin.Any())
   }
   if (true) {
-   assert(java.lang.Double.valueOf(0.0) === java.lang.Double.valueOf(0.0))
+   assert(kotlin.Double.valueOf(0.0) === kotlin.Double.valueOf(0.0))
   }
   if (true) {
-   assert(java.lang.Float.valueOf(0.0f) === java.lang.Float.valueOf(0.0f))
+   assert(kotlin.Float.valueOf(0.0f) === kotlin.Float.valueOf(0.0f))
   }
   if (true) {
-   assert(null !== (java.lang.Object() as kotlin.Any))
-   assert((java.lang.Object() as kotlin.Any) !== null)
+   assert(null !== kotlin.Any())
+   assert(kotlin.Any() !== null)
   }
  }
 }

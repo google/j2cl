@@ -5,9 +5,9 @@ import javaemul.lang.*
 open class StringCalls {
  open fun main() {
   val literal: kotlin.String? = "String"
-  val sub: kotlin.String? = (literal!! as java.lang.String).substring(1)
-  val sub2: kotlin.String? = (literal!! as java.lang.String).substring(2, 3)
-  val trimmed: kotlin.String? = (literal!! as java.lang.String).trim()
-  val newString: kotlin.String? = (literal!! as java.lang.String).toString()
+  val sub: kotlin.String? = literal!!.substring(1)
+  val sub2: kotlin.String? = literal!!.substring(2, 3)
+  val trimmed: kotlin.String? = literal!!.trim()
+  val newString: kotlin.String? = literal!!.toString()
  }
 }

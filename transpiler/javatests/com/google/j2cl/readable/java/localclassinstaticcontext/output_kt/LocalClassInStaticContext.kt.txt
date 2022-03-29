@@ -4,23 +4,23 @@ import javaemul.lang.*
 
 open class LocalClassInStaticContext {
  companion object {
-  @kotlin.jvm.JvmField var f: kotlin.Any? = (object : java.lang.Object() {} as kotlin.Any)
+  @kotlin.jvm.JvmField var f: kotlin.Any? = object : kotlin.Any() {}
 
   @kotlin.jvm.JvmStatic
   fun test() {
    open class `$1A` {}
    `$1A`()
-   val a: kotlin.Any? = (object : java.lang.Object() {
+   val a: kotlin.Any? = object : kotlin.Any() {
     open fun m() {
      `$1A`()
     }
-   } as kotlin.Any)
+   }
   }
 
   init {
    open class `$1B` {}
    `$1B`()
-   val b: kotlin.Any? = (object : java.lang.Object() {} as kotlin.Any)
+   val b: kotlin.Any? = object : kotlin.Any() {}
   }
  }
 

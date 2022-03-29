@@ -22,7 +22,7 @@ open class SubNumber: kotlin.Number() {
 
 open class FooCallsSuperObjectMethod {
  open override fun hashCode(): kotlin.Int {
-  return (super as java.lang.Object).hashCode()
+  return super.hashCode()
  }
 }
 
@@ -31,10 +31,10 @@ open class Main {
   val fooCallsSuperObjectMethods: devirtualizedsupermethodcall.FooCallsSuperObjectMethod? = devirtualizedsupermethodcall.FooCallsSuperObjectMethod()
   fooCallsSuperObjectMethods!!.hashCode()
   val sn: devirtualizedsupermethodcall.SubNumber? = devirtualizedsupermethodcall.SubNumber()
-  (sn!! as java.lang.Number).byteValue()
+  sn!!.toByte()
   sn!!.toDouble()
   sn!!.toFloat()
   sn!!.toInt()
-  (sn!! as java.lang.Number).shortValue()
+  sn!!.toShort()
  }
 }

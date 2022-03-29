@@ -63,7 +63,7 @@ open class CastPrimitives {
  }
 
  open fun testReferenceToPrimitive() {
-  val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+  val o: kotlin.Any? = kotlin.Any()
   val bool: kotlin.Boolean = o as kotlin.Boolean
   val b: kotlin.Byte = o as kotlin.Byte
   val c: kotlin.Char = o as kotlin.Char
@@ -75,12 +75,12 @@ open class CastPrimitives {
  }
 
  open fun testUnboxAndWiden() {
-  val boxedByte: kotlin.Byte? = java.lang.Byte.valueOf(0.toByte())
-  val s: kotlin.Short = (boxedByte!! as java.lang.Byte).byteValue().toShort()
-  val i: kotlin.Int = (boxedByte!! as java.lang.Byte).byteValue().toInt()
-  val l: kotlin.Long = (boxedByte!! as java.lang.Byte).byteValue().toLong()
-  val f: kotlin.Float = (boxedByte!! as java.lang.Byte).byteValue().toFloat()
-  val d: kotlin.Double = (boxedByte!! as java.lang.Byte).byteValue().toDouble()
+  val boxedByte: kotlin.Byte? = kotlin.Byte.valueOf(0.toByte())
+  val s: kotlin.Short = boxedByte!!.toByte().toShort()
+  val i: kotlin.Int = boxedByte!!.toByte().toInt()
+  val l: kotlin.Long = boxedByte!!.toByte().toLong()
+  val f: kotlin.Float = boxedByte!!.toByte().toFloat()
+  val d: kotlin.Double = boxedByte!!.toByte().toDouble()
  }
 
  open fun testImplicitArgumentCasts() {

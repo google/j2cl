@@ -10,7 +10,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
  }
 
  open fun testCastToTypeVariable() {
-  val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
+  val o: kotlin.Any? = kotlin.Int(1)
   val e: E? = o as E?
   val t: T? = o as T?
   val es: kotlin.Array<E>? = o as kotlin.Array<E>?
@@ -18,7 +18,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
  }
 
  open fun <S, V: kotlin.Enum<V>?> testCastToMethodTypeVariable() {
-  val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
+  val o: kotlin.Any? = kotlin.Int(1)
   val s: S? = o as S?
   var c: kotlin.Any? = o as cast.CastGenerics<S, kotlin.Number?>?
   c = o as kotlin.Array<S>?
@@ -73,7 +73,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
 
   @kotlin.jvm.JvmStatic
   fun testCastToParamterizedType() {
-   val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
+   val o: kotlin.Any? = kotlin.Int(1)
    var cc: cast.CastGenerics<kotlin.Error?, kotlin.Number?>? = o as cast.CastGenerics<kotlin.Error?, kotlin.Number?>?
    cc = o as cast.CastGenerics<*, *>?
   }

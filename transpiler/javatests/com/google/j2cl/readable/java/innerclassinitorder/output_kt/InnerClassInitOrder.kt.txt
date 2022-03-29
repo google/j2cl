@@ -146,28 +146,28 @@ open class InnerClassInitOrder {
 
  open class OuterRefFromSuperCtorBase {
   constructor(o: kotlin.Any?) {
-   (o!! as java.lang.Object).toString()
+   o!!.toString()
   }
  }
 
  open inner class OuterRefFromSuperCtorCall: innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase {
-  constructor(): super((object : java.lang.Object() {
+  constructor(): super(object : Any() {
    open override fun toString(): kotlin.String? {
     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
     return ""
    }
-  } as kotlin.Any))
+  })
  }
 
  open inner class OuterRefFromThisCtorCall: innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase {
   constructor(`object`: kotlin.Any?): super(`object`)
 
-  constructor(): this((object : java.lang.Object() {
+  constructor(): this(object : Any() {
    open override fun toString(): kotlin.String? {
     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1000
     return ""
    }
-  } as kotlin.Any))
+  })
  }
 
  open inner class InnerClass {

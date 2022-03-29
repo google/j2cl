@@ -4,7 +4,7 @@ import javaemul.lang.*
 
 open class MethodReferences<T> {
  open fun isA(): kotlin.Boolean? {
-  return java.lang.Boolean.valueOf(true)
+  return kotlin.Boolean.valueOf(true)
  }
 
  open fun self(): kotlin.Any? {
@@ -12,12 +12,12 @@ open class MethodReferences<T> {
  }
 
  open fun sameAs(n: kotlin.Number?): kotlin.Boolean? {
-  return java.lang.Boolean.valueOf(false)
+  return kotlin.Boolean.valueOf(false)
  }
 
  open fun main() {
   var objectFactory: methodreferences.MethodReferences.Producer<kotlin.Any?>? = methodreferences.MethodReferences.Producer<kotlin.Any?> (fun(): kotlin.Any? {
-   return (java.lang.Object() as kotlin.Any)
+   return kotlin.Any()
   })
   objectFactory = methodreferences.MethodReferences.Producer<kotlin.Any?> (fun(): kotlin.Any? {
    return methodreferences.MethodReferences.m()
@@ -35,7 +35,7 @@ open class MethodReferences<T> {
    return this.sameAs(arg0_1)
   })
   val objectPredicate: methodreferences.MethodReferences.Predicate<methodreferences.MethodReferences<T>?>? = methodreferences.MethodReferences.Predicate<methodreferences.MethodReferences<T>?> (fun(arg0_2: methodreferences.MethodReferences<T>?): kotlin.Boolean {
-   return (arg0_2!!.isA()!! as java.lang.Boolean).booleanValue()
+   return arg0_2!!.isA()!!.booleanValue()
   })
   val objectCapturingOuterProducer: methodreferences.MethodReferences.Producer<methodreferences.MethodReferences<T>.ObjectCapturingOuter?>? = methodreferences.MethodReferences.Producer<methodreferences.MethodReferences<T>.ObjectCapturingOuter?> (fun(): methodreferences.MethodReferences<T>.ObjectCapturingOuter? {
    return ObjectCapturingOuter()
@@ -53,13 +53,13 @@ open class MethodReferences<T> {
    return arg0_4!!.self()
   })
   val arrayFactory: methodreferences.MethodReferences.Function<kotlin.Int?, kotlin.Array<kotlin.Any?>?>? = methodreferences.MethodReferences.Function<kotlin.Int?, kotlin.Array<kotlin.Any?>?> (fun(arg0_5: kotlin.Int?): kotlin.Array<kotlin.Any?>? {
-   return kotlin.arrayOfNulls<kotlin.Any?>((arg0_5!! as java.lang.Integer).intValue())
+   return kotlin.arrayOfNulls<kotlin.Any?>(arg0_5!!.toInt())
   })
   val superToStringProducer: methodreferences.MethodReferences.Producer<kotlin.String?>? = methodreferences.MethodReferences.Producer<kotlin.String?> (fun(): kotlin.String? {
-   return (this as java.lang.Object).toString()
+   return this.toString()
   })
   var jsobjectFactory: methodreferences.MethodReferences.JsProducer<kotlin.Any?>? = methodreferences.MethodReferences.JsProducer<kotlin.Any?> (fun(): kotlin.Any? {
-   return (java.lang.Object() as kotlin.Any)
+   return kotlin.Any()
   })
   jsobjectFactory = methodreferences.MethodReferences.JsProducer<kotlin.Any?> (fun(): kotlin.Any? {
    return methodreferences.MethodReferences.m()
@@ -74,10 +74,10 @@ open class MethodReferences<T> {
    return arg0_6!!.self()
   })
   val jsarrayFactory: methodreferences.MethodReferences.JsFunctionInterface<kotlin.Int?, kotlin.Array<kotlin.Any?>?>? = methodreferences.MethodReferences.JsFunctionInterface<kotlin.Int?, kotlin.Array<kotlin.Any?>?> (fun(arg0_7: kotlin.Int?): kotlin.Array<kotlin.Any?>? {
-   return kotlin.arrayOfNulls<kotlin.Any?>((arg0_7!! as java.lang.Integer).intValue())
+   return kotlin.arrayOfNulls<kotlin.Any?>(arg0_7!!.toInt())
   })
   val jsSuperToStringProducer: methodreferences.MethodReferences.JsProducer<kotlin.String?>? = methodreferences.MethodReferences.JsProducer<kotlin.String?> (fun(): kotlin.String? {
-   return (this as java.lang.Object).toString()
+   return this.toString()
   })
   val jsbiFunction: methodreferences.MethodReferences.JsBiFunction<methodreferences.MethodReferences<T>?, kotlin.Number?, kotlin.Boolean?>? = methodreferences.MethodReferences.JsBiFunction<methodreferences.MethodReferences<T>?, kotlin.Number?, kotlin.Boolean?> (fun(arg0_8: methodreferences.MethodReferences<T>?, arg1_1: kotlin.Number?): kotlin.Boolean? {
    return arg0_8!!.sameAs(arg1_1)
@@ -90,13 +90,13 @@ open class MethodReferences<T> {
  companion object {
   @kotlin.jvm.JvmStatic
   fun m(): kotlin.Any? {
-   return (java.lang.Object() as kotlin.Any)
+   return kotlin.Any()
   }
 
   @kotlin.jvm.JvmField var staticStringProducer: methodreferences.MethodReferences.Producer<kotlin.String?>? = kotlin.run {
    val `$$q`: kotlin.Any? = methodreferences.MethodReferences.m()
    methodreferences.MethodReferences.Producer<kotlin.String?> (fun(): kotlin.String? {
-    return (`$$q`!! as java.lang.Object).toString()
+    return `$$q`!!.toString()
    })
   }
  }

@@ -4,7 +4,7 @@ import javaemul.lang.*
 
 open class CharSequenceCalls {
  open fun test(cs: kotlin.CharSequence?) {
-  (cs!! as java.lang.CharSequence).charAt(0)
+  cs!!.get(0)
  }
 
  open fun main() {

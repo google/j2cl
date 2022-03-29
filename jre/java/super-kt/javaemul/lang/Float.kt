@@ -16,14 +16,14 @@
 package javaemul.lang
 
 /**
- * Pseudo-constructor for emulated java.lang.Double.
+ * Pseudo-constructor for emulated java.lang.Float.
  *
  * See regular JRE API documentation for other methods in this file.
  */
-operator fun Double.Companion.invoke(d: Double) = d
+operator fun Float.Companion.invoke(f: Float) = f
 
-fun Double.Companion.valueOf(d: Double) = d
+fun Float.Companion.valueOf(f: Float) = f
 
-fun Double.Companion.compare(d1: Double, d2: Double) = d1.compareTo(d2)
+fun Float.Companion.compare(f1: Float, f2: Float) = f1.compareTo(f2)
 
-fun Double.Companion.isNaN(d: Double) = d.isNaN()
+fun Float.Companion.isNaN(f: Float) = f.isNaN()

@@ -82,13 +82,13 @@ open class JsConstructorClass {
  open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
   constructor(i: kotlin.Any?, vararg args: kotlin.Int): super(*(args))
 
-  constructor(j: kotlin.Int): this((java.lang.Object() as kotlin.Any), j)
+  constructor(j: kotlin.Int): this(kotlin.Any(), j)
 
   companion object {
    @kotlin.jvm.JvmStatic
    fun subNativeInvocation() {
     val unusedS1: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(2)
-    val unusedS2: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs((java.lang.Object() as kotlin.Any), 1, 2, 3)
+    val unusedS2: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(kotlin.Any(), 1, 2, 3)
    }
   }
  }
@@ -104,6 +104,6 @@ open class JsConstructorClass {
  open class JsConstructorSubtypeOfRegularType: jsconstructor.JsConstructorClass.RegularType {
   constructor(`object`: kotlin.Any?): super(`object`)
 
-  constructor(): this((java.lang.Object() as kotlin.Any))
+  constructor(): this(kotlin.Any())
  }
 }

@@ -4,17 +4,17 @@ import javaemul.lang.*
 
 open class Casts {
  open fun testCastToClass() {
-  val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+  val o: kotlin.Any? = kotlin.Any()
   val c: cast.Casts? = o as cast.Casts?
  }
 
  open fun testCasToInterface() {
-  val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+  val o: kotlin.Any? = kotlin.Any()
   val s: java.io.Serializable? = o as java.io.Serializable?
  }
 
  open fun testCastToBoxedType() {
-  val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
+  val o: kotlin.Any? = kotlin.Int(1)
   val b: kotlin.Byte? = o as kotlin.Byte?
   val d: kotlin.Double? = o as kotlin.Double?
   val f: kotlin.Float? = o as kotlin.Float?
@@ -34,13 +34,13 @@ open class Casts {
  fun functionForInstanceofTest() {}
 
  open fun testCastObjectAfterInstanceOf() {
-  var o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+  var o: kotlin.Any? = kotlin.Any()
   if (o is cast.Casts) {
    val c: cast.Casts? = o as cast.Casts?
   }
   if (o is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
-   o = (java.lang.Object() as kotlin.Any)
+   o = kotlin.Any()
    val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
   if (o is cast.Casts) {
@@ -50,7 +50,7 @@ open class Casts {
   }
   if (o is cast.Casts) {
    val cAvoidsCastsTo_2: cast.Casts? = o as cast.Casts?
-   o = (java.lang.Object() as kotlin.Any)
+   o = kotlin.Any()
    val cAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
   if (o is cast.Casts) {
@@ -67,7 +67,7 @@ open class Casts {
   }
   if (foo!!.field is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = foo!!.field as cast.Casts?
-   foo!!.field = (java.lang.Object() as kotlin.Any)
+   foo!!.field = kotlin.Any()
    val cNotAvoidCastsTo: cast.Casts? = foo!!.field as cast.Casts?
   }
   if (foo!!.field is cast.Casts) {
@@ -90,10 +90,10 @@ open class Casts {
  }
 
  open inner class Foo {
-  @kotlin.jvm.JvmField var field: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+  @kotlin.jvm.JvmField var field: kotlin.Any? = kotlin.Any()
 
   open fun method(): kotlin.Any? {
-   return (java.lang.Object() as kotlin.Any)
+   return kotlin.Any()
   }
  }
 }

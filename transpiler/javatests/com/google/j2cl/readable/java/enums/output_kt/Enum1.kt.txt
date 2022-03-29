@@ -14,13 +14,13 @@ enum class Enum2 {
  VALUE3(),
  VALUE4(5) {};
 
- @kotlin.jvm.JvmField var foo: kotlin.Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
+ @kotlin.jvm.JvmField var foo: kotlin.Int = enums.Enum1.V1.ordinal
 
  constructor(foo: kotlin.Int) {
   this.foo = foo
  }
 
- constructor(foo: kotlin.Enum<*>?): this((foo!! as java.lang.Enum<*>).ordinal())
+ constructor(foo: kotlin.Enum<*>?): this(foo!!.ordinal)
 
  constructor(vararg somePars: kotlin.Any?): this((somePars as kotlin.Array<kotlin.Any?>?)!!.size)
 
@@ -30,13 +30,13 @@ enum class Enum2 {
    return null
   }
 
-  @kotlin.jvm.JvmField var C: enums.Enum2? = enums.Enum2.f((java.lang.Object() as kotlin.Any))
+  @kotlin.jvm.JvmField var C: enums.Enum2? = enums.Enum2.f(kotlin.Any())
  }
 }
 
 enum class Enum3 {
  VALUE1(java.util.function.Function<kotlin.Int?, kotlin.Int?> (fun(v: kotlin.Int?): kotlin.Int? {
-  return java.lang.Integer.valueOf(1 + (v!! as java.lang.Integer).intValue())
+  return kotlin.Int.valueOf(1 + v!!.toInt())
  }));
 
  constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?)

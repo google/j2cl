@@ -16,14 +16,12 @@
 package javaemul.lang
 
 /**
- * Pseudo-constructor for emulated java.lang.Double.
+ * Pseudo-constructor for emulated java.lang.Boolean.
  *
  * See regular JRE API documentation for other methods in this file.
  */
-operator fun Double.Companion.invoke(d: Double) = d
+operator fun Boolean.Companion.invoke(b: Boolean) = b
 
-fun Double.Companion.valueOf(d: Double) = d
+fun Boolean.Companion.valueOf(b: Boolean) = b
 
-fun Double.Companion.compare(d1: Double, d2: Double) = d1.compareTo(d2)
-
-fun Double.Companion.isNaN(d: Double) = d.isNaN()
+fun Boolean.booleanValue() = this

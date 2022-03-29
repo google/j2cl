@@ -22,8 +22,8 @@ open class Varargs {
  open fun main() {
   val v: varargs.Varargs? = varargs.Varargs()
   v!!.test(1)
-  v!!.test(1, (java.lang.Object() as kotlin.Any))
-  v!!.test(1, (java.lang.Object() as kotlin.Any))
+  v!!.test(1, kotlin.Any())
+  v!!.test(1, kotlin.Any())
   v!!.test(1)
   v!!.test(1, *(kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>() as kotlin.Array<kotlin.Any?>))
   v!!.testCloneable(*(kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>() as kotlin.Array<kotlin.Cloneable?>))

@@ -59,14 +59,14 @@ open class Arrays {
  open fun testDevirtualizedTypeArrays() {
   var booleans: kotlin.Array<kotlin.Boolean?>? = kotlin.arrayOfNulls<kotlin.Boolean?>(100)
   booleans = kotlin.arrayOfNulls<kotlin.Boolean?>(0)
-  booleans = kotlin.arrayOf<kotlin.Boolean?>(java.lang.Boolean.valueOf(true), java.lang.Boolean.valueOf(false))
+  booleans = kotlin.arrayOf<kotlin.Boolean?>(kotlin.Boolean.valueOf(true), kotlin.Boolean.valueOf(false))
   var booleans2d: kotlin.Array<kotlin.Array<kotlin.Boolean?>?>? = kotlin.arrayOfNulls<kotlin.Array<kotlin.Boolean?>?>(5)
-  booleans2d = kotlin.arrayOf<kotlin.Array<kotlin.Boolean?>?>(kotlin.arrayOf<kotlin.Boolean?>(java.lang.Boolean.valueOf(true), java.lang.Boolean.valueOf(false)), null as kotlin.Array<kotlin.Boolean?>)
+  booleans2d = kotlin.arrayOf<kotlin.Array<kotlin.Boolean?>?>(kotlin.arrayOf<kotlin.Boolean?>(kotlin.Boolean.valueOf(true), kotlin.Boolean.valueOf(false)), null as kotlin.Array<kotlin.Boolean?>)
   booleans2d = kotlin.arrayOfNulls<kotlin.Array<kotlin.Boolean?>?>(20)
-  var b: kotlin.Boolean = (booleans!![0]!! as java.lang.Boolean).booleanValue()
-  b = (booleans2d!![0]!![1]!! as java.lang.Boolean).booleanValue()
-  booleans!![0] = java.lang.Boolean.valueOf(true)
-  booleans2d!![0]!![1] = java.lang.Boolean.valueOf(false)
+  var b: kotlin.Boolean = booleans!![0]!!.booleanValue()
+  b = booleans2d!![0]!![1]!!.booleanValue()
+  booleans!![0] = kotlin.Boolean.valueOf(true)
+  booleans2d!![0]!![1] = kotlin.Boolean.valueOf(false)
  }
 
  open fun testStringArrays() {

@@ -158,11 +158,7 @@ private fun Renderer.renderExpressionWithComment(expressionWithComment: Expressi
 
 private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
   renderQualifier(fieldAccess)
-  if (mapsToKotlin(fieldAccess.target.enclosingTypeDescriptor)) {
-    renderIdentifier(fieldAccess.target.name!!)
-  } else {
-    renderIdentifier(fieldAccess.target.ktName)
-  }
+  renderIdentifier(fieldAccess.target.ktName)
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
@@ -250,14 +246,9 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   }
 
   renderQualifier(expression)
-  if (mapsToKotlin(expression.target.enclosingTypeDescriptor)) {
-    renderIdentifier(expression.target.name!!)
+  renderIdentifier(expression.target.ktName)
+  if (!expression.target.isKtProperty) {
     renderInvocationArguments(expression)
-  } else {
-    renderIdentifier(expression.target.ktName)
-    if (!expression.target.isKtProperty) {
-      renderInvocationArguments(expression)
-    }
   }
 }
 
@@ -329,43 +320,24 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   renderQualifier(expression)
 
   var typeDescriptor = expression.typeDescriptor.nonAnonymousTypeDescriptor.toNonNullable()
-  if (mapsToKotlin(typeDescriptor)) {
-    // If Java type maps to a Kotlin type (ie: java.lang.Double -> kotlin.Double), create an
-    // instance of the Java type and cast to Kotlin type, like:
-    // - (java.lang.Double("123") as kotlin.Double).
-    // TODO(b/216924456): Remove when proper Java-Kotlin member translation is implemented
-    renderInParentheses {
-      if (expression.anonymousInnerClass != null) {
-        render("object : ")
-      }
-      renderTypeDescriptor(typeDescriptor, asJava = true, asName = true, projectBounds = true)
-      if (typeDescriptor.isClass) {
-        renderInvocationArguments(expression)
-      }
-      expression.anonymousInnerClass?.let { renderTypeBody(it) }
-      render(" as ")
-      renderTypeDescriptor(typeDescriptor, asName = true)
-    }
-  } else {
-    if (expression.anonymousInnerClass != null) {
-      render("object : ")
-    }
-
-    // Render fully-qualified type name if there's no qualifier, otherwise render qualifier and
-    // simple type name.
-    renderTypeDescriptor(
-      typeDescriptor,
-      asSimple = expression.qualifier != null,
-      projectBounds = true
-    )
-
-    // Render invocation for classes only - interfaces don't need it.
-    if (typeDescriptor.isClass) {
-      renderInvocationArguments(expression)
-    }
-
-    expression.anonymousInnerClass?.let { renderTypeBody(it) }
+  if (expression.anonymousInnerClass != null) {
+    render("object : ")
   }
+
+  // Render fully-qualified type name if there's no qualifier, otherwise render qualifier and
+  // simple type name.
+  renderTypeDescriptor(
+    typeDescriptor,
+    asSimple = expression.qualifier != null,
+    projectBounds = true
+  )
+
+  // Render invocation for classes only - interfaces don't need it.
+  if (typeDescriptor.isClass) {
+    renderInvocationArguments(expression)
+  }
+
+  expression.anonymousInnerClass?.let { renderTypeBody(it) }
 }
 
 private val DeclaredTypeDescriptor.nonAnonymousTypeDescriptor: DeclaredTypeDescriptor
@@ -443,11 +415,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
   if (qualifier == null) {
     if (memberReference.target.isStatic) {
       // TODO(b/206482966): Move the checks in the backend to a verifier pass.
-      renderTypeDescriptor(
-        memberReference.target.enclosingTypeDescriptor,
-        asJava = mapsToKotlin(memberReference.target.enclosingTypeDescriptor),
-        asName = true
-      )
+      renderTypeDescriptor(memberReference.target.enclosingTypeDescriptor, asName = true)
       render(".")
     }
   } else {
@@ -456,19 +424,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       // TODO(b/219950593): Implement a pass which will remove unnecessary qualifiers, and then
       // remove this `if` branch.
     } else if (memberReference.target.isInstanceMember || !qualifier.isNonQualifiedThisReference) {
-      // TODO(b/216924456): Remove when Java-Kotlin member translation is implemented
-      if (mapsToKotlin(memberReference.target.enclosingTypeDescriptor)) {
-        renderInParentheses {
-          renderLeftSubExpression(memberReference, qualifier)
-          render(" as ")
-          renderTypeDescriptor(
-            memberReference.target.enclosingTypeDescriptor.toNonNullable(),
-            asJava = true
-          )
-        }
-      } else {
-        renderLeftSubExpression(memberReference, qualifier)
-      }
+      renderLeftSubExpression(memberReference, qualifier)
       render(".")
     }
   }

@@ -16,7 +16,7 @@ open class ArithmeticExpressions {
   i = 9223372036854775807L.toInt()
   f = 9.223372E18f
   d = 9.223372036854776E18
-  val o: kotlin.Any? = java.lang.Character.valueOf(c)
+  val o: kotlin.Any? = kotlin.Char.valueOf(c)
   s = (o as kotlin.Char).code.toShort()
  }
 
@@ -53,13 +53,13 @@ open class ArithmeticExpressions {
   val w: kotlin.Int = 5 - - 4
   var k: kotlin.Boolean = !(1 + 2 + 3 === 4)
   val l: kotlin.Boolean = 1 + 2 !== 4
-  val m: kotlin.Boolean = java.lang.Long.MAX_VALUE.toDouble() !== 9.223372036854778E18
+  val m: kotlin.Boolean = kotlin.Long.MAX_VALUE.toDouble() !== 9.223372036854778E18
   val o: kotlin.Double = ((5 + 1) / 2).toDouble() - 0.0
   a = a.shl(31L.toInt())
   a = a.shl(1L.toInt())
   a = (a.toLong() + 1L).toInt()
   a = (a.toLong() / 1L).toInt()
-  a = (a.toDouble() + java.lang.Double.MAX_VALUE).toInt()
+  a = (a.toDouble() + kotlin.Double.MAX_VALUE).toInt()
   k = k.or(true)
   var s: kotlin.Short = 10
   k = kotlin.run {
@@ -70,8 +70,8 @@ open class ArithmeticExpressions {
   q = 3.ushr(2)
   val x: kotlin.Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
   val y: kotlin.Char = 'y'
-  val z: kotlin.Long? = java.lang.Long.valueOf(121L)
-  k = y.code.toLong() === (z!! as java.lang.Long).longValue()
+  val z: kotlin.Long? = kotlin.Long.valueOf(121L)
+  k = y.code.toLong() === z!!.toLong()
  }
 
  @kotlin.jvm.JvmField var bar: kotlin.Long = kotlin.run {
@@ -170,63 +170,63 @@ open class ArithmeticExpressions {
  }
 
  open fun testCompoundBoxedTypes() {
-  var c: kotlin.Int? = java.lang.Integer.valueOf(1000)
-  var d: kotlin.Int? = java.lang.Integer.valueOf(10000)
-  d = java.lang.Integer.valueOf((d!! as java.lang.Integer).intValue() + (c!! as java.lang.Integer).intValue())
+  var c: kotlin.Int? = kotlin.Int.valueOf(1000)
+  var d: kotlin.Int? = kotlin.Int.valueOf(10000)
+  d = kotlin.Int.valueOf(d!!.toInt() + c!!.toInt())
   var i: kotlin.Int = 43
-  d = java.lang.Integer.valueOf((d!! as java.lang.Integer).intValue() + i)
-  d = java.lang.Integer.valueOf((d!! as java.lang.Integer).intValue().shl(i))
-  i = i + (c!! as java.lang.Integer).intValue()
+  d = kotlin.Int.valueOf(d!!.toInt() + i)
+  d = kotlin.Int.valueOf(d!!.toInt().shl(i))
+  i = i + c!!.toInt()
   var e: kotlin.Int? = kotlin.run {
-   c = java.lang.Integer.valueOf((c!! as java.lang.Integer).intValue() + 1)
+   c = kotlin.Int.valueOf(c!!.toInt() + 1)
    c
   }
   e = kotlin.run {
-   c = java.lang.Integer.valueOf((c!! as java.lang.Integer).intValue() + 1)
+   c = kotlin.Int.valueOf(c!!.toInt() + 1)
    c
   }
-  var e2: kotlin.Double? = java.lang.Double.valueOf(100.0)
-  e2 = java.lang.Double.valueOf((e2!! as java.lang.Double).doubleValue() + 1.0)
+  var e2: kotlin.Double? = kotlin.Double.valueOf(100.0)
+  e2 = kotlin.Double.valueOf(e2!!.toDouble() + 1.0)
   var f: kotlin.Int? = kotlin.run {
    val `$value`: kotlin.Int? = c
-   c = java.lang.Integer.valueOf((c!! as java.lang.Integer).intValue() + 1)
+   c = kotlin.Int.valueOf(c!!.toInt() + 1)
    `$value`
   }
   f = kotlin.run {
    val `$value_1`: kotlin.Int? = c
-   c = java.lang.Integer.valueOf((c!! as java.lang.Integer).intValue() + 1)
+   c = kotlin.Int.valueOf(c!!.toInt() + 1)
    `$value_1`
   }
-  var b: kotlin.Byte? = java.lang.Byte.valueOf(0)
-  b = java.lang.Byte.valueOf(((b!! as java.lang.Byte).byteValue().toInt() + 1).toByte())
-  var ch: kotlin.Char? = java.lang.Character.valueOf('c')
-  ch = java.lang.Character.valueOf(((ch!! as java.lang.Character).charValue().code + 1).toChar())
-  (kotlin.run {
-   f = java.lang.Integer.valueOf((f!! as java.lang.Integer).intValue() + 1)
+  var b: kotlin.Byte? = kotlin.Byte.valueOf(0)
+  b = kotlin.Byte.valueOf((b!!.toByte().toInt() + 1).toByte())
+  var ch: kotlin.Char? = kotlin.Char.valueOf('c')
+  ch = kotlin.Char.valueOf((ch!!.charValue().code + 1).toChar())
+  kotlin.run {
+   f = kotlin.Int.valueOf(f!!.toInt() + 1)
    f
-  }!! as java.lang.Integer).intValue()
-  (kotlin.run {
+  }!!.toInt()
+  kotlin.run {
    val `$value_2`: kotlin.Int? = f
-   f = java.lang.Integer.valueOf((f!! as java.lang.Integer).intValue() - 1)
+   f = kotlin.Int.valueOf(f!!.toInt() - 1)
    `$value_2`
-  }!! as java.lang.Integer).intValue()
+  }!!.toInt()
   open class `$1Ref`<T> {
    @kotlin.jvm.JvmField var field: T? = null
   }
   val ref: `$1Ref`<kotlin.Int?>? = null
-  ref!!.field = java.lang.Integer.valueOf((ref!!.field!! as java.lang.Integer).intValue() + 1)
-  val n: kotlin.Int = 1 + (ref!!.field!! as java.lang.Integer).intValue()
+  ref!!.field = kotlin.Int.valueOf(ref!!.field!!.toInt() + 1)
+  val n: kotlin.Int = 1 + ref!!.field!!.toInt()
  }
 
  @kotlin.jvm.JvmField var intField: kotlin.Long = 0L
 
  open fun testExtendedOperands() {
-  var boxedInteger: kotlin.Int? = java.lang.Integer.valueOf(3)
+  var boxedInteger: kotlin.Int? = kotlin.Int.valueOf(3)
   var i: kotlin.Int
   var l: kotlin.Long
   var d: kotlin.Double
-  l = (2 - (boxedInteger!! as java.lang.Integer).intValue()).toLong() - 2L
-  l = 2.or((boxedInteger!! as java.lang.Integer).intValue()).toLong().or(2L)
+  l = (2 - boxedInteger!!.toInt()).toLong() - 2L
+  l = 2.or(boxedInteger!!.toInt()).toLong().or(2L)
   l = 1000000L * l * 60L * 60L * 24L
   l = (24 * 60 * 60).toLong() * l * 1000000L
   d = kotlin.run {
@@ -236,14 +236,14 @@ open class ArithmeticExpressions {
    }.toLong()
    l
   }.toDouble()
-  l = (kotlin.run {
-   boxedInteger = java.lang.Integer.valueOf(kotlin.run {
+  l = kotlin.run {
+   boxedInteger = kotlin.Int.valueOf(kotlin.run {
     i = 20
     i
    })
    boxedInteger
-  }!! as java.lang.Integer).intValue().toLong()
-  l = (i + (boxedInteger!! as java.lang.Integer).intValue()).toLong() + l + 20L
+  }!!.toInt().toLong()
+  l = (i + boxedInteger!!.toInt()).toLong() + l + 20L
   d = (20L + l).toDouble() + d
  }
 
