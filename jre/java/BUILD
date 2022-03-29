@@ -173,12 +173,17 @@ closure_js_library(
 
 filegroup(
     name = "j2kt_support_files-j2kt",
-    srcs = glob(["super-kt/javaemul/**/*.kt"]),
+    srcs = glob(
+        ["super-kt/javaemul/**/*.kt"],
+        # TODO(b/227166206): Make this a real class, and not a collection of
+        # extension methods. So that it can be in java/lang not javaemul/lang.
+        exclude = ["super-kt/javaemul/lang/Class.kt"],
+    ),
 )
 
 filegroup(
     name = "jre_native_files-j2kt-native",
-    srcs = glob(["super-kt/java/**/*.kt"]),
+    srcs = glob(["super-kt/java/**/*.kt"]) + ["super-kt/javaemul/lang/Class.kt"],
 )
 
 j2wasm_library(
