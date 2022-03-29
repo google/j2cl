@@ -14,4 +14,6 @@ package(
 integration_test(
     name = "instancequalifieronstaticfield",
     srcs = glob(["*.java"]),
+    # TODO(b/227349235): Getting InvalidMutabilityException with old memory model
+    enable_kt_native = False,
 )

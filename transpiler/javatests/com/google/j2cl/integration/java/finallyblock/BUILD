@@ -13,6 +13,8 @@ package(
 integration_test(
     name = "finallyblock",
     srcs = glob(["*.java"]),
+    # TODO(b/227349235): Getting InvalidMutabilityException with old memory model
+    enable_kt_native = False,
     # TODO(b/170691676): Enable when full try/catch/finally semantics are
     # implemented.
     enable_wasm = False,

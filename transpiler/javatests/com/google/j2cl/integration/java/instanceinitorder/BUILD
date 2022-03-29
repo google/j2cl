@@ -13,4 +13,6 @@ package(
 integration_test(
     name = "instanceinitorder",
     srcs = glob(["*.java"]),
+    # TODO(b/227349235): Getting InvalidMutabilityException with old memory model
+    enable_kt_native = False,
 )
