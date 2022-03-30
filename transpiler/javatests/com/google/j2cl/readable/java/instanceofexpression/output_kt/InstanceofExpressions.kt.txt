@@ -37,9 +37,9 @@ open class InstanceofExpressions {
 
  open fun testInstanceOfArray() {
   val `object`: kotlin.Any? = kotlin.Any()
-  val objectArray: kotlin.Array<kotlin.Any?>? = kotlin.arrayOfNulls<kotlin.Any?>(0)
-  val objectDoubleArray: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>?>(0)
-  val stringArray: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.String?>(0)
+  val objectArray: kotlin.Array<kotlin.Any?>? = kotlin.arrayOfNulls<kotlin.Any>(0)
+  val objectDoubleArray: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>>(0)
+  val stringArray: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.String>(0)
   var a: kotlin.Boolean
   a = `object` is kotlin.Array<kotlin.Any?>
   a = `object` is kotlin.Array<kotlin.Array<kotlin.String?>?>

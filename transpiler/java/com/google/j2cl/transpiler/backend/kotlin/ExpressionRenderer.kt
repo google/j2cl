@@ -19,6 +19,7 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayAccess
 import com.google.j2cl.transpiler.ast.ArrayLength
 import com.google.j2cl.transpiler.ast.ArrayLiteral
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.BinaryExpression
 import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.BooleanLiteral
@@ -42,6 +43,7 @@ import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PostfixExpression
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.PrefixOperator
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
@@ -289,15 +291,47 @@ private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
 
 private fun Renderer.renderNewArray(newArray: NewArray) {
   require(newArray.arrayLiteral == null)
-  renderNewArrayOfSize(
-    newArray.typeDescriptor.componentTypeDescriptor!!,
-    newArray.dimensionExpressions.first()
-  )
+  val dimensions = newArray.dimensionExpressions.iterator()
+  val firstDimension = dimensions.next()
+  renderNewArray(newArray.typeDescriptor, firstDimension, dimensions)
 }
 
-private fun Renderer.renderNewArrayOfSize(
-  componentTypeDescriptor: TypeDescriptor,
-  sizeExpression: Expression
+private fun Renderer.renderNewArray(
+  arrayTypeDescriptor: ArrayTypeDescriptor,
+  firstDimension: Expression,
+  remainingDimensions: Iterator<Expression>
+) {
+  val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
+  if (!remainingDimensions.hasNext()) {
+    if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
+      renderPrimitiveArrayOf(componentTypeDescriptor, firstDimension)
+    } else {
+      renderArrayOfNulls(componentTypeDescriptor, firstDimension)
+    }
+  } else {
+    val nextDimension = remainingDimensions.next()
+    if (nextDimension is NullLiteral) {
+      renderArrayOfNulls(componentTypeDescriptor, firstDimension)
+    } else {
+      render("kotlin.Array")
+      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
+      renderInParentheses { renderExpression(firstDimension) }
+      render(" ")
+      renderInCurlyBrackets {
+        renderNewLine()
+        renderNewArray(
+          componentTypeDescriptor as ArrayTypeDescriptor,
+          nextDimension,
+          remainingDimensions
+        )
+      }
+    }
+  }
+}
+
+private fun Renderer.renderPrimitiveArrayOf(
+  componentTypeDescriptor: PrimitiveTypeDescriptor,
+  dimension: Expression
 ) {
   when (componentTypeDescriptor) {
     PrimitiveTypes.BOOLEAN -> render("kotlin.BooleanArray")
@@ -308,12 +342,18 @@ private fun Renderer.renderNewArrayOfSize(
     PrimitiveTypes.LONG -> render("kotlin.LongArray")
     PrimitiveTypes.FLOAT -> render("kotlin.FloatArray")
     PrimitiveTypes.DOUBLE -> render("kotlin.DoubleArray")
-    else -> {
-      render("kotlin.arrayOfNulls")
-      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
-    }
+    else -> throw InternalCompilerError("renderPrimitiveArrayOf($componentTypeDescriptor)")
   }
-  renderInParentheses { renderExpression(sizeExpression) }
+  renderInParentheses { renderExpression(dimension) }
+}
+
+private fun Renderer.renderArrayOfNulls(
+  componentTypeDescriptor: TypeDescriptor,
+  dimension: Expression
+) {
+  render("kotlin.arrayOfNulls")
+  renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonNullable()) }
+  renderInParentheses { renderExpression(dimension) }
 }
 
 private fun Renderer.renderNewInstance(expression: NewInstance) {
