@@ -175,7 +175,7 @@ object Math {
     return r
   }
 
-  fun substractExact(x: Long, y: Long): Long {
+  fun subtractExact(x: Long, y: Long): Long {
     val r = x - y
     // "Hacker's Delight" Overflow if the arguments have different signs and
     // the sign of the result is different than the sign of x
