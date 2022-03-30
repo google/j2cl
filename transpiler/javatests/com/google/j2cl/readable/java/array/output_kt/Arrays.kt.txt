@@ -6,13 +6,13 @@ open class Arrays {
  open fun testObjectArray() {
   var objects: kotlin.Array<kotlin.Any?>? = kotlin.arrayOfNulls<kotlin.Any>(100)
   objects = kotlin.arrayOfNulls<kotlin.Any>(0)
-  objects = kotlin.arrayOf<kotlin.Any?>(null, null)
+  objects = kotlin.arrayOf<kotlin.Any?>(null, null) as kotlin.Array<kotlin.Any?>?
   var objects2d: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.Array<kotlin.Array<kotlin.Any?>?>(5) {
    kotlin.arrayOfNulls<kotlin.Any>(10)
   }
-  objects2d = kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>(kotlin.arrayOf<kotlin.Any?>(null, null), null as kotlin.Array<kotlin.Any?>)
+  objects2d = kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>(kotlin.arrayOf<kotlin.Any?>(null, null) as kotlin.Array<kotlin.Any?>?, null as kotlin.Array<kotlin.Any?>?) as kotlin.Array<kotlin.Array<kotlin.Any?>?>?
   objects2d = kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>>(20)
-  val arrayLiteral2d: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>(kotlin.arrayOf<kotlin.Any?>(null, null), null as kotlin.Array<kotlin.Any?>)
+  val arrayLiteral2d: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOf<kotlin.Array<kotlin.Any?>?>(kotlin.arrayOf<kotlin.Any?>(null, null) as kotlin.Array<kotlin.Any?>?, null as kotlin.Array<kotlin.Any?>?) as kotlin.Array<kotlin.Array<kotlin.Any?>?>?
   var `object`: kotlin.Any? = objects!![0]
   `object` = objects2d!![0]!![1]
   objects!![0] = null
@@ -22,11 +22,11 @@ open class Arrays {
  open fun testJavaTypeArray() {
   var objects: kotlin.Array<array.Arrays.SomeObject?>? = kotlin.arrayOfNulls<array.Arrays.SomeObject>(100)
   objects = kotlin.arrayOfNulls<array.Arrays.SomeObject>(0)
-  objects = kotlin.arrayOf<array.Arrays.SomeObject?>(null, null)
+  objects = kotlin.arrayOf<array.Arrays.SomeObject?>(null, null) as kotlin.Array<array.Arrays.SomeObject?>?
   var objects2d: kotlin.Array<kotlin.Array<array.Arrays.SomeObject?>?>? = kotlin.Array<kotlin.Array<array.Arrays.SomeObject?>?>(5) {
    kotlin.arrayOfNulls<array.Arrays.SomeObject>(10)
   }
-  objects2d = kotlin.arrayOf<kotlin.Array<array.Arrays.SomeObject?>?>(kotlin.arrayOf<array.Arrays.SomeObject?>(null, null), null as kotlin.Array<array.Arrays.SomeObject?>)
+  objects2d = kotlin.arrayOf<kotlin.Array<array.Arrays.SomeObject?>?>(kotlin.arrayOf<array.Arrays.SomeObject?>(null, null) as kotlin.Array<array.Arrays.SomeObject?>?, null as kotlin.Array<array.Arrays.SomeObject?>?) as kotlin.Array<kotlin.Array<array.Arrays.SomeObject?>?>?
   objects2d = kotlin.arrayOfNulls<kotlin.Array<array.Arrays.SomeObject?>>(20)
   var someObject: array.Arrays.SomeObject? = objects!![0]
   someObject = objects2d!![0]!![1]
@@ -41,7 +41,7 @@ open class Arrays {
   var ints2d: kotlin.Array<kotlin.IntArray?>? = kotlin.Array<kotlin.IntArray?>(5) {
    kotlin.IntArray(10)
   }
-  ints2d = kotlin.arrayOf<kotlin.IntArray?>(kotlin.intArrayOf(1, 2), null as kotlin.IntArray)
+  ints2d = kotlin.arrayOf<kotlin.IntArray?>(kotlin.intArrayOf(1, 2), null) as kotlin.Array<kotlin.IntArray?>?
   ints2d = kotlin.arrayOfNulls<kotlin.IntArray>(20)
   var n: kotlin.Int = ints!![0]
   n = ints2d!![0]!![1]
@@ -56,7 +56,7 @@ open class Arrays {
   var longs2d: kotlin.Array<kotlin.LongArray?>? = kotlin.Array<kotlin.LongArray?>(5) {
    kotlin.LongArray(10)
   }
-  longs2d = kotlin.arrayOf<kotlin.LongArray?>(kotlin.longArrayOf(1L, 2L), null as kotlin.LongArray)
+  longs2d = kotlin.arrayOf<kotlin.LongArray?>(kotlin.longArrayOf(1L, 2L), null) as kotlin.Array<kotlin.LongArray?>?
   longs2d = kotlin.arrayOfNulls<kotlin.LongArray>(20)
   var n: kotlin.Long = longs!![0]
   n = longs2d!![0]!![1]
@@ -67,11 +67,11 @@ open class Arrays {
  open fun testDevirtualizedTypeArrays() {
   var booleans: kotlin.Array<kotlin.Boolean?>? = kotlin.arrayOfNulls<kotlin.Boolean>(100)
   booleans = kotlin.arrayOfNulls<kotlin.Boolean>(0)
-  booleans = kotlin.arrayOf<kotlin.Boolean?>(kotlin.Boolean.valueOf(true), kotlin.Boolean.valueOf(false))
+  booleans = kotlin.arrayOf<kotlin.Boolean?>(kotlin.Boolean.valueOf(true), kotlin.Boolean.valueOf(false)) as kotlin.Array<kotlin.Boolean?>?
   var booleans2d: kotlin.Array<kotlin.Array<kotlin.Boolean?>?>? = kotlin.Array<kotlin.Array<kotlin.Boolean?>?>(5) {
    kotlin.arrayOfNulls<kotlin.Boolean>(10)
   }
-  booleans2d = kotlin.arrayOf<kotlin.Array<kotlin.Boolean?>?>(kotlin.arrayOf<kotlin.Boolean?>(kotlin.Boolean.valueOf(true), kotlin.Boolean.valueOf(false)), null as kotlin.Array<kotlin.Boolean?>)
+  booleans2d = kotlin.arrayOf<kotlin.Array<kotlin.Boolean?>?>(kotlin.arrayOf<kotlin.Boolean?>(kotlin.Boolean.valueOf(true), kotlin.Boolean.valueOf(false)) as kotlin.Array<kotlin.Boolean?>?, null as kotlin.Array<kotlin.Boolean?>?) as kotlin.Array<kotlin.Array<kotlin.Boolean?>?>?
   booleans2d = kotlin.arrayOfNulls<kotlin.Array<kotlin.Boolean?>>(20)
   var b: kotlin.Boolean = booleans!![0]!!.booleanValue()
   b = booleans2d!![0]!![1]!!.booleanValue()
@@ -82,11 +82,11 @@ open class Arrays {
  open fun testStringArrays() {
   var strings: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.String>(100)
   strings = kotlin.arrayOfNulls<kotlin.String>(0)
-  strings = kotlin.arrayOf<kotlin.String?>(null, null)
+  strings = kotlin.arrayOf<kotlin.String?>(null, null) as kotlin.Array<kotlin.String?>?
   var strings2d: kotlin.Array<kotlin.Array<kotlin.String?>?>? = kotlin.Array<kotlin.Array<kotlin.String?>?>(5) {
    kotlin.arrayOfNulls<kotlin.String>(10)
   }
-  strings2d = kotlin.arrayOf<kotlin.Array<kotlin.String?>?>(kotlin.arrayOf<kotlin.String?>(null, null), null as kotlin.Array<kotlin.String?>)
+  strings2d = kotlin.arrayOf<kotlin.Array<kotlin.String?>?>(kotlin.arrayOf<kotlin.String?>(null, null) as kotlin.Array<kotlin.String?>?, null as kotlin.Array<kotlin.String?>?) as kotlin.Array<kotlin.Array<kotlin.String?>?>?
   strings2d = kotlin.arrayOfNulls<kotlin.Array<kotlin.String?>>(20)
   var b: kotlin.String? = strings!![0]
   b = strings2d!![0]!![1]
@@ -97,11 +97,11 @@ open class Arrays {
  open fun testNativeArray() {
   var nativeObjects: kotlin.Array<array.Arrays.NativeType?>? = kotlin.arrayOfNulls<array.Arrays.NativeType>(100)
   nativeObjects = kotlin.arrayOfNulls<array.Arrays.NativeType>(0)
-  nativeObjects = kotlin.arrayOf<array.Arrays.NativeType?>(null, null)
+  nativeObjects = kotlin.arrayOf<array.Arrays.NativeType?>(null, null) as kotlin.Array<array.Arrays.NativeType?>?
   var nativeObjects2d: kotlin.Array<kotlin.Array<array.Arrays.NativeType?>?>? = kotlin.Array<kotlin.Array<array.Arrays.NativeType?>?>(5) {
    kotlin.arrayOfNulls<array.Arrays.NativeType>(10)
   }
-  nativeObjects2d = kotlin.arrayOf<kotlin.Array<array.Arrays.NativeType?>?>(kotlin.arrayOf<array.Arrays.NativeType?>(null, null), null as kotlin.Array<array.Arrays.NativeType?>)
+  nativeObjects2d = kotlin.arrayOf<kotlin.Array<array.Arrays.NativeType?>?>(kotlin.arrayOf<array.Arrays.NativeType?>(null, null) as kotlin.Array<array.Arrays.NativeType?>?, null as kotlin.Array<array.Arrays.NativeType?>?) as kotlin.Array<kotlin.Array<array.Arrays.NativeType?>?>?
   nativeObjects2d = kotlin.arrayOfNulls<kotlin.Array<array.Arrays.NativeType?>>(20)
   var nativeObject: array.Arrays.NativeType? = nativeObjects!![0]
   nativeObject = nativeObjects2d!![0]!![1]
@@ -115,9 +115,9 @@ open class Arrays {
  }
 
  open fun testCovariance() {
-  var objectArray: kotlin.Array<kotlin.Any?>? = null as kotlin.Array<kotlin.Any?>
-  val stringArray: kotlin.Array<kotlin.String?>? = null as kotlin.Array<kotlin.String?>
-  objectArray = stringArray as kotlin.Array<kotlin.Any?>
+  var objectArray: kotlin.Array<kotlin.Any?>? = null as kotlin.Array<kotlin.Any?>?
+  val stringArray: kotlin.Array<kotlin.String?>? = null as kotlin.Array<kotlin.String?>?
+  objectArray = stringArray as kotlin.Array<kotlin.Any?>?
  }
 
  open fun testArraysSupertypeClosureTypes() {

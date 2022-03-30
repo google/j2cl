@@ -17,11 +17,13 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
@@ -47,15 +49,27 @@ public class InsertExplicitArrayCoercionCasts extends NormalizationPass {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
-                TypeDescriptor typeDescriptor = expression.getTypeDescriptor().toNonNullable();
-                TypeDescriptor castTypeDescriptor = inferredTypeDescriptor.toNonNullable();
+                TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
                 return inferredTypeDescriptor.isArray()
-                        && !castTypeDescriptor.equals(typeDescriptor)
+                        && !inferredTypeDescriptor.isPrimitiveArray()
+                        && !inferredTypeDescriptor.equals(expressionTypeDescriptor)
                     ? CastExpression.newBuilder()
                         .setExpression(expression)
-                        .setCastTypeDescriptor(castTypeDescriptor)
+                        .setCastTypeDescriptor(inferredTypeDescriptor)
                         .build()
                     : expression;
+              }
+
+              @Override
+              public Expression rewriteMethodInvocationContext(
+                  ParameterDescriptor inferredParameterDescriptor,
+                  ParameterDescriptor actualParameterDescriptor,
+                  Expression argument) {
+                // Don't rewrite vararg array literals.
+                return actualParameterDescriptor.isVarargs() && argument instanceof ArrayLiteral
+                    ? argument
+                    : super.rewriteMethodInvocationContext(
+                        inferredParameterDescriptor, actualParameterDescriptor, argument);
               }
             }));
 

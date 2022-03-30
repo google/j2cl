@@ -75,6 +75,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /** Returns whether the described type is an array of primitive type. */
+  public boolean isPrimitiveArray() {
+    return false;
+  }
+
   /** Returns whether the described type is a class. */
   public boolean isClass() {
     return false;

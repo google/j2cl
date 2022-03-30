@@ -102,6 +102,11 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public boolean isPrimitiveArray() {
+    return getComponentTypeDescriptor().isPrimitive();
+  }
+
+  @Override
   @Memoized
   public ArrayTypeDescriptor toUnparameterizedTypeDescriptor() {
     return toBuilder()

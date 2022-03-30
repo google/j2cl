@@ -272,6 +272,8 @@ internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
         if (parameterDescriptor.isVarargs) {
           render("*")
           renderInParentheses { renderExpression(argument) }
+          // Spread operator requires non-null array.
+          if (argument.typeDescriptor.isNullable) render("!!")
         } else {
           renderExpression(argument)
         }

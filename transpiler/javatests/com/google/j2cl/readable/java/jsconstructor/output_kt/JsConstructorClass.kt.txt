@@ -80,7 +80,7 @@ open class JsConstructorClass {
  }
 
  open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
-  constructor(i: kotlin.Any?, vararg args: kotlin.Int): super(*(args))
+  constructor(i: kotlin.Any?, vararg args: kotlin.Int): super(*(args)!!)
 
   constructor(j: kotlin.Int): this(kotlin.Any(), j)
 

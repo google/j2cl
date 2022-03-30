@@ -415,9 +415,9 @@ public enum Backend {
           InsertWideningPrimitiveConversionsKotlin::new,
           InsertNarrowingPrimitiveConversionsKotlin::new,
           NormalizeBasicCasts::new,
-          InsertExplicitArrayCoercionCasts::new,
           ImplementKotlinBitLevelOperators::new,
           InsertNotNullAssertions::new,
+          InsertExplicitArrayCoercionCasts::new,
 
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,

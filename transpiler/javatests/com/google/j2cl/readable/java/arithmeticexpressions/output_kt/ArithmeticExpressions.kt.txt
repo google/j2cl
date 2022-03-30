@@ -81,7 +81,7 @@ open class ArithmeticExpressions {
  }
 
  open fun testCompoundArray() {
-  val ints: kotlin.IntArray? = null as kotlin.IntArray
+  val ints: kotlin.IntArray? = null
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] - 1
   ints!![0] = ints!![0] * 1
@@ -140,7 +140,7 @@ open class ArithmeticExpressions {
     `$value_4`
    }
   }
-  val longs: kotlin.LongArray? = null as kotlin.LongArray
+  val longs: kotlin.LongArray? = null
   longs!![0] = longs!![0] + 1L
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
@@ -155,11 +155,11 @@ open class ArithmeticExpressions {
     `$value_5`
    }
   }
-  val booleans: kotlin.BooleanArray? = null as kotlin.BooleanArray
+  val booleans: kotlin.BooleanArray? = null
   booleans!![0] = booleans!![0].or(true)
-  val strings: kotlin.Array<kotlin.String?>? = null as kotlin.Array<kotlin.String?>
+  val strings: kotlin.Array<kotlin.String?>? = null as kotlin.Array<kotlin.String?>?
   strings!![0] = "" + strings!![0] + null
-  val shorts: kotlin.ShortArray? = null as kotlin.ShortArray
+  val shorts: kotlin.ShortArray? = null
   val b: kotlin.Boolean = kotlin.run {
    val `$array_8`: kotlin.ShortArray? = shorts
    val `$index_8`: kotlin.Int = 0
@@ -264,7 +264,7 @@ open class ArithmeticExpressions {
 
   @kotlin.jvm.JvmStatic
   fun getLongArray(): kotlin.LongArray? {
-   return null as kotlin.LongArray
+   return null
   }
 
   @kotlin.jvm.JvmStatic
