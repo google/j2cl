@@ -10,8 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/219913874): Translate boxing / unboxing conversions.
-    build_kt_readables = False,
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
