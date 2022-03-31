@@ -79,6 +79,7 @@ public enum Frontend {
                 kotlinParser
                     .getMethod("parseFiles", List.class)
                     .invoke(parserInstance, options.getSources());
+        problems.abortIfHasErrors();
         return compilationUnits;
       } catch (Exception e) {
         Throwables.throwIfUnchecked(e);
