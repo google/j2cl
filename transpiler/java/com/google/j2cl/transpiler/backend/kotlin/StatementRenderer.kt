@@ -34,7 +34,6 @@ import com.google.j2cl.transpiler.ast.SwitchStatement
 import com.google.j2cl.transpiler.ast.ThrowStatement
 import com.google.j2cl.transpiler.ast.TryStatement
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.WhileStatement
 
 fun Renderer.renderStatement(statement: Statement) {
@@ -187,55 +186,29 @@ private fun Renderer.renderThrowStatement(throwStatement: ThrowStatement) {
 }
 
 private fun Renderer.renderTryStatement(tryStatement: TryStatement) {
-  renderTryStatement(
-    tryStatement,
-    tryStatement.resourceDeclarations.flatMap { it.fragments }.iterator()
-  )
-}
-
-private fun Renderer.renderTryStatement(
-  tryStatement: TryStatement,
-  resourceDeclarationFragments: Iterator<VariableDeclarationFragment>
-) {
-  if (resourceDeclarationFragments.hasNext()) {
-    // Render resource declaration fragments as "use" extension method call.
-    // TODO(b/202119991): Implement as a normalization pass, once extension functions are supported
-    // in the AST.
-    val resourceDeclarationFragment = resourceDeclarationFragments.next()
-    resourceDeclarationFragment.initializer.let { renderInParentheses { renderExpression(it) } }
-    render(".use ")
-    renderInCurlyBrackets {
-      render(" ")
-      renderVariable(resourceDeclarationFragment.variable)
-      render(" -> ")
-      renderNewLine()
-      renderTryStatement(tryStatement, resourceDeclarationFragments)
-    }
-  } else {
-    // Render try/catch/finally.
-    render("try ")
-    renderStatement(tryStatement.body)
-    tryStatement.catchClauses.forEach { catchClause ->
-      val catchVariable = catchClause.exceptionVariable
-      // Duplicate catch block for each type in the union, which are not available in Kotlin.
-      val catchTypeDescriptors =
-        catchVariable.typeDescriptor.let {
-          if (it is UnionTypeDescriptor) it.unionTypeDescriptors else listOf(it)
-        }
-      catchTypeDescriptors.forEach { catchType ->
-        render(" catch ")
-        renderInParentheses {
-          renderName(catchVariable)
-          render(": ")
-          renderTypeDescriptor(catchType.toNonNullable())
-        }
-        render(" ")
-        renderBlock(catchClause.body)
+  // Render try/catch/finally.
+  render("try ")
+  renderStatement(tryStatement.body)
+  tryStatement.catchClauses.forEach { catchClause ->
+    val catchVariable = catchClause.exceptionVariable
+    // Duplicate catch block for each type in the union, which are not available in Kotlin.
+    val catchTypeDescriptors =
+      catchVariable.typeDescriptor.let {
+        if (it is UnionTypeDescriptor) it.unionTypeDescriptors else listOf(it)
       }
+    catchTypeDescriptors.forEach { catchType ->
+      render(" catch ")
+      renderInParentheses {
+        renderName(catchVariable)
+        render(": ")
+        renderTypeDescriptor(catchType.toNonNullable())
+      }
+      render(" ")
+      renderBlock(catchClause.body)
     }
-    tryStatement.finallyBlock?.let {
-      render(" finally ")
-      renderStatement(it)
-    }
+  }
+  tryStatement.finallyBlock?.let {
+    render(" finally ")
+    renderStatement(it)
   }
 }

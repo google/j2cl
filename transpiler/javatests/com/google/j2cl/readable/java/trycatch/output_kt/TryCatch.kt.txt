@@ -40,33 +40,62 @@ open class TryCatch {
  }
 
  open fun testTryWithResource() {
-  (trycatch.TryCatch.ClosableThing()).use { thing: trycatch.TryCatch.ClosableThing? ->
-   (trycatch.TryCatch.ClosableThing()).use { thing2: trycatch.TryCatch.ClosableThing? ->
-    try {
-     throw kotlin.Exception()
-    } catch (e: kotlin.Exception) {}
+  try {
+   var `$primaryExc`: kotlin.Throwable? = null
+   var thing: trycatch.TryCatch.ClosableThing? = null
+   var thing2: trycatch.TryCatch.ClosableThing? = null
+   try {
+    thing = trycatch.TryCatch.ClosableThing()
+    thing2 = trycatch.TryCatch.ClosableThing()
+    throw kotlin.Exception()
+   } catch (`$exceptionFromTry`: kotlin.Throwable) {
+    `$primaryExc` = `$exceptionFromTry`
+    throw `$exceptionFromTry`!!
+   } finally {
+    `$primaryExc` = javaemul.internal.Exceptions.safeClose(thing2, `$primaryExc`)
+    `$primaryExc` = javaemul.internal.Exceptions.safeClose(thing, `$primaryExc`)
+    if (`$primaryExc` !== null) throw `$primaryExc`!!
    }
-  }
+  } catch (e: kotlin.Exception) {}
  }
 
  open fun testTryWithResourceJava9() {
   val thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
   val thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
-  (thing).use { `$resource`: trycatch.TryCatch.ClosableThing? ->
-   (thing2).use { `$resource_1`: trycatch.TryCatch.ClosableThing? ->
-    try {
-     throw kotlin.Exception()
-    } catch (e: kotlin.Exception) {}
+  try {
+   var `$primaryExc`: kotlin.Throwable? = null
+   var `$resource`: trycatch.TryCatch.ClosableThing? = null
+   var `$resource_1`: trycatch.TryCatch.ClosableThing? = null
+   try {
+    `$resource` = thing
+    `$resource_1` = thing2
+    throw kotlin.Exception()
+   } catch (`$exceptionFromTry`: kotlin.Throwable) {
+    `$primaryExc` = `$exceptionFromTry`
+    throw `$exceptionFromTry`!!
+   } finally {
+    `$primaryExc` = javaemul.internal.Exceptions.safeClose(`$resource_1`, `$primaryExc`)
+    `$primaryExc` = javaemul.internal.Exceptions.safeClose(`$resource`, `$primaryExc`)
+    if (`$primaryExc` !== null) throw `$primaryExc`!!
    }
-  }
+  } catch (e: kotlin.Exception) {}
  }
 
  open fun testTryWithResouceOnStaticField() {
-  (trycatch.TryCatch.closableThing).use { `$resource`: trycatch.TryCatch.ClosableThing? ->
+  try {
+   var `$primaryExc`: kotlin.Throwable? = null
+   var `$resource`: trycatch.TryCatch.ClosableThing? = null
    try {
+    `$resource` = trycatch.TryCatch.closableThing
     throw kotlin.Exception()
-   } catch (e: kotlin.Exception) {}
-  }
+   } catch (`$exceptionFromTry`: kotlin.Throwable) {
+    `$primaryExc` = `$exceptionFromTry`
+    throw `$exceptionFromTry`!!
+   } finally {
+    `$primaryExc` = javaemul.internal.Exceptions.safeClose(`$resource`, `$primaryExc`)
+    if (`$primaryExc` !== null) throw `$primaryExc`!!
+   }
+  } catch (e: kotlin.Exception) {}
  }
 
  open fun testNestedTryCatch() {

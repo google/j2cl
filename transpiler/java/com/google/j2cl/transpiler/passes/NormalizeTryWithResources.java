@@ -98,8 +98,8 @@ public class NormalizeTryWithResources extends NormalizationPass {
    * let thing = null;
    * let thing2 = null;
    * try {
-   *   let thing = ClosableThing.$create();
-   *   let thing2 = ClosableThing.$create();
+   *   thing = ClosableThing.$create();
+   *   thing2 = ClosableThing.$create();
    *   ...
    * } catch ($exceptionFromTry) {
    *   $primaryExc = $exceptionFromTry;
@@ -124,7 +124,8 @@ public class NormalizeTryWithResources extends NormalizationPass {
     List<Statement> transformedStatements = new ArrayList<>();
     transformedStatements.add(
         VariableDeclarationExpression.newBuilder()
-            .addVariableDeclarations(primaryException)
+            .addVariableDeclaration(
+                primaryException, primaryException.getTypeDescriptor().getNullValue())
             .build()
             // TODO(b/65465035): this should be the source position for the variable declaration,
             // but it is not currently available.
@@ -136,14 +137,17 @@ public class NormalizeTryWithResources extends NormalizationPass {
         tryStatement.getResourceDeclarations();
     for (VariableDeclarationExpression declaration : resourceDeclarations) {
       VariableDeclarationFragment originalResourceDeclaration = declaration.getFragments().get(0);
+      Variable originalVariable = originalResourceDeclaration.getVariable();
+      originalVariable.setFinal(false);
       transformedStatements.add(
           VariableDeclarationExpression.newBuilder()
-              .addVariableDeclarations(originalResourceDeclaration.getVariable())
+              .addVariableDeclaration(
+                  originalVariable, originalVariable.getTypeDescriptor().getNullValue())
               .build()
               .makeStatement(sourcePosition));
 
       Expression assignResourceInitializer =
-          BinaryExpression.Builder.asAssignmentTo(originalResourceDeclaration.getVariable())
+          BinaryExpression.Builder.asAssignmentTo(originalVariable)
               .setRightOperand(originalResourceDeclaration.getInitializer())
               .build();
       tryBlockBodyStatements.add(assignResourceInitializer.makeStatement(sourcePosition));

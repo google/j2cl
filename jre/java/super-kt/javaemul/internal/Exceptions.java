@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2022 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,5 +15,26 @@
  */
 package javaemul.internal;
 
-/** Exists solely to make j2cl happy. */
-class Exceptions {}
+/** Exception utilities. */
+public class Exceptions {
+
+  /**
+   * A try with resource block uses safeClose to close resources that have been opened. If an
+   * exception occurred during the resource initialization or in the try block, it is passed in here
+   * so that we can add suppressed exceptions to it if the resource fails to close.
+   */
+  public static Throwable safeClose(AutoCloseable resource, Throwable currentException) {
+    if (resource == null) {
+      return currentException;
+    }
+    try {
+      resource.close();
+    } catch (Throwable t) {
+      if (currentException == null) {
+        return t;
+      }
+      currentException.addSuppressed(t);
+    }
+    return currentException;
+  }
+}

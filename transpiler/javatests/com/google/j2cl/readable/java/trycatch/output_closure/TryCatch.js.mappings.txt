@@ -97,22 +97,22 @@
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
     }] => [try {
-   let /** Throwable */ $primaryExc;
+   let $primaryExc = null;
 ...   }
   }] "trycatch.TryCatch.testTryWithResource"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [let /** Throwable */ $primaryExc;] "trycatch.TryCatch.testTryWithResource"
+    }] => [let $primaryExc = null;] "trycatch.TryCatch.testTryWithResource"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [let /** ClosableThing */ thing;] "trycatch.TryCatch.testTryWithResource"
+    }] => [let thing = null;] "trycatch.TryCatch.testTryWithResource"
 [thing] => [thing] "thing"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [let /** ClosableThing */ thing2;] "trycatch.TryCatch.testTryWithResource"
+    }] => [let thing2 = null;] "trycatch.TryCatch.testTryWithResource"
 [thing2] => [thing2] "thing2"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
@@ -184,21 +184,21 @@
       throw new Exception();
 ...      // expected empty body.
     }] => [try {
-   let /** Throwable */ $primaryExc;
+   let $primaryExc = null;
 ...   }
   }] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [let /** Throwable */ $primaryExc;] "trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let $primaryExc = null;] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [let /** ClosableThing */ $resource;] "trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let $resource = null;] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [let /** ClosableThing */ $resource_1;] "trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let $resource_1 = null;] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
@@ -265,17 +265,17 @@
       throw new Exception();
 ...      // expected empty body
     }] => [try {
-   let /** Throwable */ $primaryExc;
+   let $primaryExc = null;
 ...   }
   }] "trycatch.TryCatch.testTryWithResouceOnStaticField"
 [try (closableThing) {
       throw new Exception();
 ...      // expected empty body
-    }] => [let /** Throwable */ $primaryExc;] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+    }] => [let $primaryExc = null;] "trycatch.TryCatch.testTryWithResouceOnStaticField"
 [try (closableThing) {
       throw new Exception();
 ...      // expected empty body
-    }] => [let /** ClosableThing */ $resource;] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+    }] => [let $resource = null;] "trycatch.TryCatch.testTryWithResouceOnStaticField"
 [try (closableThing) {
       throw new Exception();
 ...      // expected empty body

@@ -145,9 +145,8 @@ package_sources(
 
 package_sources(
     name = "jre_java_files-j2kt-native",
-    srcs = glob(
-        ["super-kt/**/*.java"],
-    ),
+    srcs = ["java/lang/AutoCloseable.java"],
+    super_srcs = glob(["super-kt/java/**/*.java"]),
 )
 
 filegroup(
