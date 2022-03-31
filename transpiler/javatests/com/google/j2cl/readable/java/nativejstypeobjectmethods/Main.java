@@ -15,12 +15,14 @@
  */
 package nativejstypeobjectmethods;
 
+import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsType;
 
 public class Main {
   @JsType(isNative = true, namespace = "test.foo")
   public static class NativeJsTypeWithToString {
     @Override
+    @JsNonNull
     public native String toString();
   }
 

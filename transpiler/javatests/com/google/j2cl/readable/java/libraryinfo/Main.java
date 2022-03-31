@@ -18,6 +18,7 @@ package libraryinfo;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -97,6 +98,7 @@ public class Main {
   }
 
   @Override
+  @JsNonNull
   public String toString() {
     return super.toString();
   }

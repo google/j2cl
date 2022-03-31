@@ -22,6 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -126,6 +127,7 @@ public class JsTypeObjectMethodsTest {
     }
 
     @Override
+    @JsNonNull
     public String toString() {
       return "(Sub)myValue: " + myValue;
     }
@@ -137,6 +139,7 @@ public class JsTypeObjectMethodsTest {
 
     int hashCode();
 
+    @JsNonNull
     String toString();
   }
 
@@ -171,6 +174,7 @@ public class JsTypeObjectMethodsTest {
 
     public native int hashCode();
 
+    @JsNonNull
     public native String toString();
   }
 
@@ -185,6 +189,7 @@ public class JsTypeObjectMethodsTest {
 
     int hashCode();
 
+    @JsNonNull
     String toString();
   }
 

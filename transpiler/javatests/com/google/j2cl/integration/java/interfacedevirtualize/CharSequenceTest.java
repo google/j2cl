@@ -17,6 +17,8 @@ package interfacedevirtualize;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import jsinterop.annotations.JsNonNull;
+
 /**
  * Test CharSequence Interface on all devirtualized classes that implement it.
  */
@@ -52,6 +54,7 @@ public class CharSequenceTest {
           }
 
           @Override
+          @JsNonNull
           public String toString() {
             return s.toString();
           }
@@ -108,6 +111,7 @@ public class CharSequenceTest {
           }
 
           @Override
+          @JsNonNull
           public String toString() {
             return "sub" + super.toString();
           }

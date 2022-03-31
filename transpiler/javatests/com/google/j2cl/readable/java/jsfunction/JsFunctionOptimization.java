@@ -64,11 +64,10 @@ public class JsFunctionOptimization {
                         + x
                         + var
                         + new Object() {
-                          @Override
-                          public String toString() {
+                          public String sayHey() {
                             return "Hey";
                           }
-                        }.toString();
+                        }.sayHey();
                   }
                 };
           }

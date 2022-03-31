@@ -13,5 +13,7 @@ readable_example(
     # TODO(b/204793387): Figure out LibraryInfo for J2KT.
     generate_kt_readables = False,
     generate_library_info = True,
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = [
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+    ],
 )

@@ -18,8 +18,8 @@ package aptgeneratorplugin;
 public class Foo {
   // Use an annotation, to trigger the APT DummyProcessor.
   @Override
-  public String toString() {
+  public int hashCode() {
     // This can only compile if the APT synthesizes the "Dummy" class.
-    return Dummy.class.getSimpleName();
+    return Dummy.class.hashCode();
   }
 }

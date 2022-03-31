@@ -4011,13 +4011,13 @@
 ;;; void AutoValueWithOverrides.$ctor()
 (func $$ctor__void_$p_autovalue_AutoValueWithOverrides@autovalue.AutoValueWithOverrides
  (param $this (ref null $autovalue.AutoValueWithOverrides))
- ;;@ autovalue/AutoValueWithOverrides.java:21:22
+ ;;@ autovalue/AutoValueWithOverrides.java:22:22
  (block
   ;; autovalue.AutoValueWithOverrides.$clinit();
-  ;;@ autovalue/AutoValueWithOverrides.java:21:22
+  ;;@ autovalue/AutoValueWithOverrides.java:22:22
   (call $$clinit__void@autovalue.AutoValueWithOverrides )
   ;; BaseClass.this.$ctor();
-  ;;@ autovalue/AutoValueWithOverrides.java:21:22
+  ;;@ autovalue/AutoValueWithOverrides.java:22:22
   (call $$ctor__void_$p_autovalue_BaseClass@autovalue.BaseClass (local.get $this))
  )
 )
@@ -4028,12 +4028,12 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result i32)
- ;;@ autovalue/AutoValueWithOverrides.java:25:17
+ ;;@ autovalue/AutoValueWithOverrides.java:26:17
  (local $this (ref null $autovalue.AutoValueWithOverrides))
  (local.set $this (ref.cast_static $autovalue.AutoValueWithOverrides (local.get $this.untyped)))
  (block
   ;; return false;
-  ;;@ autovalue/AutoValueWithOverrides.java:26:4
+  ;;@ autovalue/AutoValueWithOverrides.java:27:4
   (return (i32.const 0))
  )
 )
@@ -4044,12 +4044,12 @@
  (type $function.m_hashCode__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
- ;;@ autovalue/AutoValueWithOverrides.java:30:13
+ ;;@ autovalue/AutoValueWithOverrides.java:31:13
  (local $this (ref null $autovalue.AutoValueWithOverrides))
  (local.set $this (ref.cast_static $autovalue.AutoValueWithOverrides (local.get $this.untyped)))
  (block
   ;; return 1;
-  ;;@ autovalue/AutoValueWithOverrides.java:31:4
+  ;;@ autovalue/AutoValueWithOverrides.java:32:4
   (return (i32.const 1))
  )
 )
@@ -4060,12 +4060,12 @@
  (type $function.m_toString__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
- ;;@ autovalue/AutoValueWithOverrides.java:35:16
+ ;;@ autovalue/AutoValueWithOverrides.java:37:16
  (local $this (ref null $autovalue.AutoValueWithOverrides))
  (local.set $this (ref.cast_static $autovalue.AutoValueWithOverrides (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.StringPool.$getString_|x|();
-  ;;@ autovalue/AutoValueWithOverrides.java:36:4
+  ;;@ autovalue/AutoValueWithOverrides.java:38:4
   (return (call $function.no.side.effects.$getString_|x|__java_lang_String (ref.func $$getString_|x|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
@@ -4073,22 +4073,22 @@
 
 ;;; void AutoValueWithOverrides.$clinit()
 (func $$clinit__void@autovalue.AutoValueWithOverrides
- ;;@ autovalue/AutoValueWithOverrides.java:21:22
+ ;;@ autovalue/AutoValueWithOverrides.java:22:22
  (block
   ;; if (autovalue.AutoValueWithOverrides.$initialized) return;
-  ;;@ autovalue/AutoValueWithOverrides.java:21:22
+  ;;@ autovalue/AutoValueWithOverrides.java:22:22
   (if (global.get $f_$initialized__autovalue_AutoValueWithOverrides)
    (then
     ;; return;
-    ;;@ autovalue/AutoValueWithOverrides.java:21:22
+    ;;@ autovalue/AutoValueWithOverrides.java:22:22
     (return )
    )
   )
   ;; (autovalue.AutoValueWithOverrides.$initialized = true);
-  ;;@ autovalue/AutoValueWithOverrides.java:21:22
+  ;;@ autovalue/AutoValueWithOverrides.java:22:22
   (global.set $f_$initialized__autovalue_AutoValueWithOverrides (i32.const 1))
   ;; autovalue.BaseClass.$clinit();
-  ;;@ autovalue/AutoValueWithOverrides.java:21:22
+  ;;@ autovalue/AutoValueWithOverrides.java:22:22
   (call $$clinit__void@autovalue.BaseClass )
  )
 )

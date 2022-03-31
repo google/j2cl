@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Dummy = goog.forwardDeclare('aptgeneratordep.Dummy$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 class Foo extends j_l_Object {
  /** @protected */
@@ -22,9 +23,9 @@ class Foo extends j_l_Object {
  $ctor__aptgeneratordep_Foo__() {
   this.$ctor__java_lang_Object__();
  }
- /** @override @return {?string} */
- toString() {
-  return Class.$get(Dummy).m_getSimpleName__();
+ /** @override @return {number} */
+ hashCode() {
+  return $Objects.m_hashCode__java_lang_Object(Class.$get(Dummy));
  }
  
  static $clinit() {
@@ -40,6 +41,7 @@ class Foo extends j_l_Object {
  static $loadModules() {
   Dummy = goog.module.get('aptgeneratordep.Dummy$impl');
   Class = goog.module.get('java.lang.Class$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
 }
 $Util.$setClassMetadata(Foo, 'aptgeneratordep.Foo');

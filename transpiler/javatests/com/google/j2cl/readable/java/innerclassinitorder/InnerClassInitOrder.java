@@ -23,19 +23,20 @@ public class InnerClassInitOrder {
 
   static class OuterRefFromSuperCtorBase {
     OuterRefFromSuperCtorBase(Object o) {
-      o.toString();
+      o.hashCode();
     }
   }
 
   class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
     OuterRefFromSuperCtorCall() {
-      super(new Object() {
-        @Override
-        public String toString() {
-          number += 100;
-          return "";
-        }
-      });
+      super(
+          new Object() {
+            @Override
+            public int hashCode() {
+              number += 100;
+              return 0;
+            }
+          });
     }
   }
 
@@ -45,13 +46,14 @@ public class InnerClassInitOrder {
     }
 
     public OuterRefFromThisCtorCall() {
-      this(new Object() {
-        @Override
-        public String toString() {
-          number += 1000;
-          return "";
-        }
-      });
+      this(
+          new Object() {
+            @Override
+            public int hashCode() {
+              number += 1000;
+              return 0;
+            }
+          });
     }
   }
 

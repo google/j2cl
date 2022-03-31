@@ -15,6 +15,8 @@
  */
 package devirtualizedsupermethodcall;
 
+import jsinterop.annotations.JsNonNull;
+
 public class FooCallsSuperObjectMethods {
   @Override
   public int hashCode() {
@@ -27,6 +29,7 @@ public class FooCallsSuperObjectMethods {
   }
 
   @Override
+  @JsNonNull
   public String toString() {
     return super.toString();
   }

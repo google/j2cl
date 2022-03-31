@@ -16,6 +16,7 @@
 package autovalue;
 
 import com.google.auto.value.AutoValue;
+import jsinterop.annotations.JsNonNull;
 
 @AutoValue
 public abstract class AutoValueWithOverrides extends BaseClass {
@@ -32,6 +33,7 @@ public abstract class AutoValueWithOverrides extends BaseClass {
   }
 
   @Override
+  @JsNonNull
   public String toString() {
     return "x";
   }
