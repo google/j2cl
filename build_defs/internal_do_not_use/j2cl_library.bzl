@@ -38,6 +38,7 @@ load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 # rules.
 _J2KT_JVM_PACKAGES = [
     "transpiler/javatests/com/google/j2cl/readable/java",
+    "benchmarking/java/com/google/j2cl/benchmarks/octane/raytrace",
 ]
 
 # Packages that j2cl rule will generage j2kt native packages by default. Used to simplify test
