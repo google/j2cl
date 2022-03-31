@@ -49,10 +49,7 @@ public class InsertExplicitArrayCoercionCasts extends NormalizationPass {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
-                TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
-                return inferredTypeDescriptor.isArray()
-                        && !inferredTypeDescriptor.isPrimitiveArray()
-                        && !inferredTypeDescriptor.equals(expressionTypeDescriptor)
+                return needsCast(inferredTypeDescriptor, expression.getTypeDescriptor())
                     ? CastExpression.newBuilder()
                         .setExpression(expression)
                         .setCastTypeDescriptor(inferredTypeDescriptor)
@@ -107,5 +104,12 @@ public class InsertExplicitArrayCoercionCasts extends NormalizationPass {
             return method;
           }
         });
+  }
+
+  private static boolean needsCast(TypeDescriptor expected, TypeDescriptor actual) {
+    return expected.isArray()
+        && actual.isArray()
+        && !expected.isPrimitiveArray()
+        && !expected.toNonNullable().equals(actual.toNonNullable());
   }
 }

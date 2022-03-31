@@ -37,7 +37,7 @@ public class NewArray extends Expression {
       ArrayTypeDescriptor typeDescriptor,
       List<Expression> dimensionExpressions,
       ArrayLiteral arrayLiteral) {
-    this.typeDescriptor = checkNotNull(typeDescriptor);
+    this.typeDescriptor = checkNotNull(typeDescriptor.toNonNullable());
     this.dimensionExpressions.addAll(checkNotNull(dimensionExpressions));
     this.arrayLiteral = arrayLiteral;
     checkArgument(typeDescriptor.getDimensions() == dimensionExpressions.size());
