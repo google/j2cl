@@ -98,6 +98,9 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
             runtime_deps = [":%s-lib-j2wasm" % name],
             extra_defs = extra_defs,
             optimizeWasm = False,
+            javacopts = [
+                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+            ],
         )
 
         j2wasm_test(
@@ -108,6 +111,9 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
             runtime_deps = [":%s-lib-j2wasm" % name],
             extra_defs = extra_defs,
             optimizeWasm = True,
+            javacopts = [
+                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+            ],
         )
 
     j2cl_test(
@@ -118,6 +124,9 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
         test_class = test_class,
         runtime_deps = [":%s-lib-j2cl" % name],
         extra_defs = extra_defs,
+        javacopts = [
+            "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+        ],
     )
 
     j2cl_test(
@@ -127,12 +136,18 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
         test_class = test_class,
         runtime_deps = [":%s-lib-j2cl" % name],
         extra_defs = extra_defs,
+        javacopts = [
+            "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+        ],
     )
 
     native.java_test(
         name = name,
         tags = tags,
         runtime_deps = [":%s-lib" % name],
+        javacopts = [
+            "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+        ],
     )
 
 def java_and_j2cl_library(
