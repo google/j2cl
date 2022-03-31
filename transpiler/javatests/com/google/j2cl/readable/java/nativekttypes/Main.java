@@ -85,12 +85,52 @@ class Subclass<V> extends NativeTopLevel<V> implements NativeInterface<V> {
   }
 
   @Override
+  public int getMethodAsProperty() {
+    return super.getMethodAsProperty();
+  }
+
+  @Override
+  public int nonGetMethodAsProperty() {
+    return super.nonGetMethodAsProperty();
+  }
+
+  @Override
+  public int methodToRenameAsProperty() {
+    return super.methodToRenameAsProperty();
+  }
+
+  @Override
+  public int getMethodToRenameAsProperty() {
+    return super.getMethodToRenameAsProperty();
+  }
+
+  @Override
+  public boolean isMethodAsProperty() {
+    return super.isMethodAsProperty();
+  }
+
+  @Override
+  public int getstartingmethodAsProperty() {
+    return super.getstartingmethodAsProperty();
+  }
+
+  @Override
   public int interfaceMethod() {
     return 0;
   }
 
   @Override
   public int interfaceMethodToRename() {
+    return 0;
+  }
+
+  @Override
+  public int getInterfaceMethodAsProperty() {
+    return 0;
+  }
+
+  @Override
+  public int interfaceMethodToRenameAsProperty() {
     return 0;
   }
 }

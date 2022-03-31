@@ -11,19 +11,31 @@ open class KTopLevel<O> {
   return 0
  }
 
- @kotlin.jvm.JvmField var methodAsProperty: kotlin.Int = 0
+ open val methodAsProperty: kotlin.Int get() {
+  return 0
+ }
 
- @kotlin.jvm.JvmField var nonGetMethodAsProperty: kotlin.Int = 0
+ open val nonGetMethodAsProperty: kotlin.Int get() {
+  return 0
+ }
 
- @kotlin.jvm.JvmField var renamedMethodAsProperty: kotlin.Int = 0
+ open val renamedMethodAsProperty: kotlin.Int get() {
+  return 0
+ }
 
- @kotlin.jvm.JvmField var getRenamedMethodAsProperty: kotlin.Int = 0
+ open val getRenamedMethodAsProperty: kotlin.Int get() {
+  return 0
+ }
 
  @kotlin.jvm.JvmField var isRenamedField: kotlin.Boolean = false
 
- @kotlin.jvm.JvmField var isMethodAsProperty: kotlin.Boolean = false
+ open val isMethodAsProperty: kotlin.Boolean get() {
+  return false
+ }
 
- @kotlin.jvm.JvmField var getstartingmethodAsProperty: kotlin.Int = 0
+ open val getstartingmethodAsProperty: kotlin.Int get() {
+  return 0
+ }
 
  constructor(o: O?)
 

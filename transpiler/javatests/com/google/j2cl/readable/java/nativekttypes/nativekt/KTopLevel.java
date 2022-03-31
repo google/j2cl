@@ -15,6 +15,9 @@
  */
 package nativekttypes.nativekt;
 
+import javaemul.internal.annotations.KtName;
+import javaemul.internal.annotations.KtProperty;
+
 public class KTopLevel<O> {
   public static class KNested<N> {
     public N instanceField;
@@ -47,13 +50,38 @@ public class KTopLevel<O> {
     return 0;
   }
 
-  public int methodAsProperty;
-  public int nonGetMethodAsProperty;
-  public int renamedMethodAsProperty;
-  public int getRenamedMethodAsProperty;
+  @KtProperty
+  public int methodAsProperty() {
+    return 0;
+  }
+
+  @KtProperty
+  public int nonGetMethodAsProperty() {
+    return 0;
+  }
+
+  @KtProperty
+  public int renamedMethodAsProperty() {
+    return 0;
+  }
+
+  @KtProperty
+  @KtName("getRenamedMethodAsProperty")
+  public int getRenamedMethodAsProperty() {
+    return 0;
+  }
+
   public boolean isRenamedField;
-  public boolean isMethodAsProperty;
-  public int getstartingmethodAsProperty;
+
+  @KtProperty
+  public boolean isMethodAsProperty() {
+    return false;
+  }
+
+  @KtProperty
+  public int getstartingmethodAsProperty() {
+    return 0;
+  }
 
   public KTopLevel(O o) {}
 

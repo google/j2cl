@@ -15,8 +15,16 @@
  */
 package nativekttypes.nativekt;
 
+import javaemul.internal.annotations.KtProperty;
+
 public interface KInterface<V> {
   int interfaceMethod();
 
   int renamedInterfaceMethod();
+
+  @KtProperty
+  int interfaceMethodAsProperty();
+
+  @KtProperty
+  int renamedInterfaceMethodAsProperty();
 }

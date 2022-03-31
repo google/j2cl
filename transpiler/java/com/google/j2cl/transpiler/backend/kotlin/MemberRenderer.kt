@@ -46,6 +46,7 @@ private fun Renderer.renderMethod(method: Method, kind: Kind) {
     // Constructors with no statements can be rendered without curly braces.
     if (!method.isConstructor || statements.isNotEmpty()) {
       render(" ")
+      if (method.descriptor.isKtProperty) render("get() ")
       renderInCurlyBrackets { renderStartingWithNewLines(statements) { renderStatement(it) } }
     }
   }
@@ -81,21 +82,22 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
   if (methodDescriptor.isConstructor) {
     render("constructor")
   } else {
-    render("fun ")
+    render(if (method.descriptor.isKtProperty) "val " else "fun ")
     if (methodDescriptor.typeParameterTypeDescriptors.isNotEmpty()) {
       renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors)
       render(" ")
     }
     renderIdentifier(methodDescriptor.ktName)
   }
-  renderMethodParameters(method)
+  if (!method.descriptor.isKtProperty) {
+    renderMethodParameters(method)
+  }
   if (methodDescriptor.isConstructor) {
     renderConstructorInvocation(method)
   } else {
     renderMethodReturnType(methodDescriptor)
   }
   renderWhereClause(methodDescriptor.typeParameterTypeDescriptors)
-  // TODO(b/202527616): Render this() and super() constructor calls after ":".
 }
 
 private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, kind: Kind) {
