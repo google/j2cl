@@ -123,7 +123,7 @@ public class StatementTranspiler {
             () -> {
               builder.append("do ");
               render(doWhileStatement.getBody());
-              builder.append("while (");
+              builder.append(" while (");
               renderExpression(doWhileStatement.getConditionExpression());
               builder.append(");");
             });
