@@ -145,7 +145,11 @@ package_sources(
 
 package_sources(
     name = "jre_java_files-j2kt-native",
-    srcs = ["java/lang/AutoCloseable.java"],
+    # TODO(b/222484176): Eventually, J2KT JRE should stop using J2CL JRE-for-JS sources.
+    srcs = [
+        "java/lang/AutoCloseable.java",
+        "java/lang/Runnable.java",
+    ],
     super_srcs = glob(["super-kt/java/**/*.java"]),
 )
 
