@@ -39,6 +39,6 @@ public class ThrowsInConstructorTest extends StacktraceTestBase {
   }
 
   private void constructsInner() {
-    new InnerClass(new Object());
+    InnerClass unused = new InnerClass(new Object());
   }
 }

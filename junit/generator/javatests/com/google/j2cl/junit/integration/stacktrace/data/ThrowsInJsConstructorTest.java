@@ -36,6 +36,6 @@ public class ThrowsInJsConstructorTest extends StacktraceTestBase {
   }
 
   private void constructsInner() {
-    new InnerClass();
+    InnerClass unused = new InnerClass();
   }
 }

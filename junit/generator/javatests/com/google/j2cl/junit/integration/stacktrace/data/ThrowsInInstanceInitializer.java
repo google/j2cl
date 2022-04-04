@@ -33,6 +33,6 @@ public class ThrowsInInstanceInitializer extends StacktraceTestBase {
 
   @Test
   public void test() {
-    new InnerClass();
+    InnerClass unused = new InnerClass();
   }
 }
