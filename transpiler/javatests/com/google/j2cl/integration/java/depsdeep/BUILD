@@ -14,7 +14,6 @@ package(
 integration_test(
     name = "depsdeep",
     srcs = ["Main.java"],
-    enable_kt = False,
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/java/depsdeep/bar",
         "//transpiler/javatests/com/google/j2cl/integration/java/depsdeep/foo",

@@ -26,4 +26,4 @@ fun Int.Companion.valueOf(i: Int) = i
 
 fun Int.Companion.compare(i1: Int, i2: Int) = i1.compareTo(i2)
 
-fun Int.Companion.toHexString(i: Int) = i.toString(16)
+fun Int.Companion.toHexString(i: Int) = i.toUInt().toString(16)

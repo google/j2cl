@@ -14,7 +14,6 @@ package(
 integration_test(
     name = "objectchilddevirtualcalls",
     srcs = glob(["*.java"]),
-    enable_kt = False,
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
