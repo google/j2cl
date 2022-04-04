@@ -45,7 +45,7 @@ public class NormalizePrimaryConstructors extends NormalizationPass {
 
     List<Statement> initStatements =
         type.getInstanceMembers().stream()
-            .filter(m -> m.isField() || m.isInitializerBlock())
+            .filter(m -> (m.isField() && ((Field) m).hasInitializer()) || m.isInitializerBlock())
             .map(this::collectStatements)
             .collect(toList());
 
