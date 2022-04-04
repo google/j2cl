@@ -15,5 +15,14 @@
  */
 package java.lang
 
-// TODO(b/227166206): Add separate java.lang.Class emulation.
-typealias Class<T> = kotlin.reflect.KClass<T>
+import kotlin.reflect.KClass
+
+/**
+ * Implementation of java.lang.Class used in Kotlin Native. The constructor and the `kClass`
+ * property are not accessible in Java.
+ */
+class Class<T : Any>(val kClass: KClass<T>) {
+  fun getName() = kClass.qualifiedName
+  fun getCanonicalName() = kClass.qualifiedName
+  fun getSimpleName() = kClass.simpleName
+}

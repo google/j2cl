@@ -15,16 +15,11 @@
  */
 package javaemul.lang
 
+import java.lang.Class
 import kotlin.reflect.KClass
 
-// TODO(b/227166206): Add an implementation that's closer to JLS.
+private val classMap: MutableMap<KClass<*>, Class<*>> = mutableMapOf()
 
-// Placeholder implementations of java.lang.Class methods used in j2cl integration tests. Note that
-// the name methods do not match JLS except in some trivial cases.
-
-val <T : Any> KClass<T>.java
-  get() = this
-
-fun <T : Any> KClass<T>.getName() = qualifiedName
-
-fun <T : Any> KClass<T>.getCanonicalName() = qualifiedName
+// TODO(b/227166206): Add synchronization to make it thread-safe.
+val <T : Any> KClass<T>.java: Class<T>
+  get() = classMap.getOrPut(this) { Class(this) } as Class<T>
