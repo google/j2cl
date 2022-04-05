@@ -28,8 +28,17 @@ public class MathTest extends GWTTestCase {
     assertTrue(isNegativeZero(x));
   }
 
+  private static void assertNegativeZero(float x) {
+    assertTrue(isNegativeZero(x));
+  }
+
   private static void assertPositiveZero(double x) {
     assertEquals(0.0, x);
+    assertFalse(isNegativeZero(x));
+  }
+
+  private static void assertPositiveZero(float x) {
+    assertEquals(0.0f, x);
     assertFalse(isNegativeZero(x));
   }
 
@@ -37,12 +46,24 @@ public class MathTest extends GWTTestCase {
     assertTrue(Double.isNaN(x));
   }
 
+  private static void assertNaN(float x) {
+    assertTrue(Float.isNaN(x));
+  }
+
   private static void assertEquals(double expected, double actual) {
     assertEquals(expected, actual, 0.0);
   }
 
+  private static void assertEquals(float expected, float actual) {
+    assertEquals(expected, actual, 0.0f);
+  }
+
   private static boolean isNegativeZero(double x) {
     return Double.doubleToLongBits(-0.0) == Double.doubleToLongBits(x);
+  }
+
+  private static boolean isNegativeZero(float x) {
+    return Float.floatToIntBits(-0.0f) == Float.floatToIntBits(x);
   }
 
   @Override
@@ -75,7 +96,7 @@ public class MathTest extends GWTTestCase {
     assertNaN(v);
   }
 
-  public void testAbsInt() {
+  public void testAbs_int() {
     assertEquals(1, Math.abs(-1));
     assertEquals(1, Math.abs(1));
     assertEquals(0, Math.abs(0));
@@ -83,7 +104,7 @@ public class MathTest extends GWTTestCase {
     assertEquals(Integer.MIN_VALUE, Math.abs(Integer.MIN_VALUE));
   }
 
-  public void testAbsLong() {
+  public void testAbs_long() {
     assertEquals(1L, Math.abs(-1L));
     assertEquals(1L, Math.abs(1L));
     assertEquals(0L, Math.abs(0L));
@@ -91,7 +112,7 @@ public class MathTest extends GWTTestCase {
     assertEquals(Long.MIN_VALUE, Math.abs(Long.MIN_VALUE));
   }
 
-  public void testAddExactInt() {
+  public void testAddExact_int() {
     assertEquals(2, Math.addExact(1, 1));
     assertEquals(-2, Math.addExact(-1, -1));
     assertEquals(0, Math.addExact(0, 0));
@@ -120,7 +141,7 @@ public class MathTest extends GWTTestCase {
     }
   }
 
-  public void testAddExactLong() {
+  public void testAddExact_long() {
     assertEquals(2L, Math.addExact(1L, 1L));
     assertEquals(-2L, Math.addExact(-1L, -1L));
     assertEquals(0L, Math.addExact(0L, 0L));
@@ -298,7 +319,7 @@ public class MathTest extends GWTTestCase {
     assertEquals(Double.POSITIVE_INFINITY, v);
   }
 
-  public void testDecrementExactInt() {
+  public void testDecrementExact_int() {
     assertEquals(-1, Math.decrementExact(0));
     assertEquals(Integer.MIN_VALUE, Math.decrementExact(Integer.MIN_VALUE + 1));
 
@@ -310,7 +331,7 @@ public class MathTest extends GWTTestCase {
     }
   }
 
-  public void testDecrementExactLong() {
+  public void testDecrementExact_long() {
     assertEquals(-1L, Math.decrementExact(0L));
     assertEquals(Long.MIN_VALUE, Math.decrementExact(Long.MIN_VALUE + 1L));
 
@@ -390,7 +411,7 @@ public class MathTest extends GWTTestCase {
     assertEquals(5, Math.hypot(3, 4));
   }
 
-  public void testIncrementExactInt() {
+  public void testIncrementExact_int() {
     assertEquals(1, Math.incrementExact(0));
     assertEquals(Integer.MAX_VALUE, Math.incrementExact(Integer.MAX_VALUE - 1));
 
@@ -402,7 +423,7 @@ public class MathTest extends GWTTestCase {
     }
   }
 
-  public void testIncrementExactLong() {
+  public void testIncrementExact_long() {
     assertEquals(1L, Math.incrementExact(0L));
     assertEquals(Long.MAX_VALUE, Math.incrementExact(Long.MAX_VALUE - 1L));
 
@@ -449,6 +470,7 @@ public class MathTest extends GWTTestCase {
 
   public void testLog1p() {
     assertNaN(Math.log1p(Double.NaN));
+    assertNaN(Math.log1p(-1.1));
     assertNaN(Math.log1p(-2));
     assertNaN(Math.log1p(Double.NEGATIVE_INFINITY));
     assertEquals(Double.POSITIVE_INFINITY, Math.log1p(Double.POSITIVE_INFINITY));
@@ -529,7 +551,7 @@ public class MathTest extends GWTTestCase {
     assertTrue(Float.isNaN(Math.min(Float.NEGATIVE_INFINITY, Float.NaN)));
   }
 
-  public void testMultiplyExactInt() {
+  public void testMultiplyExact_int() {
     assertEquals(0, Math.multiplyExact(0, 1));
     assertEquals(1, Math.multiplyExact(1, 1));
     assertEquals(-1, Math.multiplyExact(-1, 1));
@@ -554,7 +576,7 @@ public class MathTest extends GWTTestCase {
     }
   }
 
-  public void testMultiplyExactLong() {
+  public void testMultiplyExact_long() {
     assertEquals(0L, Math.multiplyExact(0L, 1L));
     assertEquals(1L, Math.multiplyExact(1L, 1L));
     assertEquals(-1L, Math.multiplyExact(-1L, 1L));
@@ -579,7 +601,7 @@ public class MathTest extends GWTTestCase {
     }
   }
 
-  public void testNegateExactInt() {
+  public void testNegateExact_int() {
     assertEquals(-1, Math.negateExact(1));
     assertEquals(1, Math.negateExact(-1));
     assertEquals(-Integer.MAX_VALUE, Math.negateExact(Integer.MAX_VALUE));
@@ -593,7 +615,7 @@ public class MathTest extends GWTTestCase {
     }
   }
 
-  public void testNegateExactLong() {
+  public void testNegateExact_long() {
     assertEquals(-1L, Math.negateExact(1L));
     assertEquals(1L, Math.negateExact(-1L));
     assertEquals(-Long.MAX_VALUE, Math.negateExact(Long.MAX_VALUE));
@@ -725,6 +747,18 @@ public class MathTest extends GWTTestCase {
     assertEquals(1.0, Math.signum(Double.POSITIVE_INFINITY));
   }
 
+  public void testSignum_float() {
+    assertNaN(Math.signum(Float.NaN));
+    assertNegativeZero(Math.signum(-0.0f));
+    assertPositiveZero(Math.signum(0.0f));
+    assertEquals(-1f, Math.signum(-2f));
+    assertEquals(1f, Math.signum(2f));
+    assertEquals(-1.0f, Math.signum(-Float.MAX_VALUE));
+    assertEquals(1.0f, Math.signum(Float.MAX_VALUE));
+    assertEquals(-1.0f, Math.signum(Float.NEGATIVE_INFINITY));
+    assertEquals(1.0f, Math.signum(Float.POSITIVE_INFINITY));
+  }
+
   public void testSin() {
     double v = Math.sin(0.0);
     assertPositiveZero(v);
@@ -772,7 +806,7 @@ public class MathTest extends GWTTestCase {
     assertEquals(1.732050807, Math.sqrt(3), 1e-7);
   }
 
-  public void testSubtractExactInt() {
+  public void testSubtractExact_int() {
     assertEquals(1, Math.subtractExact(2, 1));
     assertEquals(-1, Math.subtractExact(-2, -1));
     assertEquals(0, Math.subtractExact(0, 0));
@@ -794,7 +828,7 @@ public class MathTest extends GWTTestCase {
     }
   }
 
-  public void testSubtractExactLong() {
+  public void testSubtractExact_long() {
     assertEquals(1L, Math.subtractExact(2L, 1L));
     assertEquals(-1L, Math.subtractExact(-2L, -1L));
     assertEquals(0L, Math.subtractExact(0L, 0L));
