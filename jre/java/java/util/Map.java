@@ -206,4 +206,7 @@ public interface Map<K, V> {
   int size();
 
   @JsNonNull Collection<V> values();
+
+  // Note: Explicit equals override helps an experimental JSpecify nullness checker.
+  boolean equals(Object o);
 }
