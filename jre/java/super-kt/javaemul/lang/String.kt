@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2022 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,15 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package java.lang;
+package javaemul.lang
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+/**
+ * Pseudo-constructor for emulated java.lang.String.
+ *
+ * See regular JRE API documentation for other methods in this file.
+ */
+operator fun String.Companion.invoke(a: CharArray) = a.concatToString()
 
-@Documented
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = ElementType.TYPE)
-public @interface FunctionalInterface {}
+fun String.Companion.valueOf(c: Char) = c.toString()

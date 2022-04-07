@@ -131,11 +131,32 @@ package_sources(
 package_sources(
     name = "jre_java_files-j2kt-native",
     # TODO(b/222484176): Eventually, J2KT JRE should stop using J2CL JRE-for-JS sources.
-    srcs = [
-        "java/lang/AutoCloseable.java",
-        "java/lang/Runnable.java",
-    ],
-    super_srcs = glob(["super-kt/java/**/*.java"]),
+    srcs = glob(
+        [
+            "java/lang/*.java",
+            "java/lang/annotations/*.java",
+        ],
+        exclude = [
+            # Package-private helper that's not necessary for J2KT
+            "java/lang/IntegralToString.java",
+            # Does not apply to J2KT
+            "java/lang/JsException.java",
+            # TODO(b/228304843): Blocked by lack of InternalPreconditions
+            # Also relies on String concat optimizations only implemented in JS VMs.
+            "java/lang/AbstractStringBuilder.java",
+            # Needs AbstractStringBuilder. Excessive String concat. Also http://b/224969395.
+            "java/lang/StringBuffer.java",
+            # TODO(b/223774683): Blocked by lack of java.io.Serializable plan
+            "java/lang/StackTraceElement.java",
+            # TODO(b/224765929): System needs emulation different from J2CL
+            "java/lang/System.java",
+            # TODO(b/227554489): java.util.function.* not available yet
+            "java/lang/ThreadLocal.java",
+        ],
+    ),
+    super_srcs = glob(
+        ["super-kt/**/*.java"],
+    ),
 )
 
 filegroup(
@@ -246,6 +267,7 @@ j2kt_native_library(
     deps = [
         ":j2kt_support-j2kt-native",
         ":javaemul_internal_annotations-j2kt-native",
+        "//third_party:gwt-jsinterop-annotations-j2kt-native",
     ],
 )
 
