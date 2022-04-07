@@ -1,12 +1,16 @@
 Integration tests size report:
 **************************************
-There are 0 optimized size changes.
-Total size (of already existing tests) did not change.
+There are 2 optimized size changes.
+Total optimized size (of already existing tests) changed from
+  2023641 to 2017171 bytes (100%->99.7%) and from
+  729772 to 727897 bytes (100%->99.7%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+      12371    11451 wasm/java.esnext (-7.4%)
+      12904    11949 wasm/java (-7.4%)
 
 
 Expansion report highlights:
@@ -22,11 +26,11 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    3997852  3997852 box2d_default/java (unchanged)
-    2182161  2182161 box2d_default/java.minified (unchanged)
-    1150377  1150377 box2d_default/java.rta (unchanged)
-    2406950  2406950 emptyclass/java (unchanged)
-    1444598  1444598 emptyclass/java.minified (unchanged)
+    3995882  3995882 box2d_default/java (unchanged)
+    2180860  2180860 box2d_default/java.minified (unchanged)
+    1150250  1150250 box2d_default/java.rta (unchanged)
+    2405117  2405117 emptyclass/java (unchanged)
+    1443364  1443364 emptyclass/java.minified (unchanged)
      685130   685130 emptyclass/java.rta (unchanged)
 
 
@@ -207,8 +211,8 @@ All reports:
          22       22 interfacejsbridge/java.esnext (unchanged)
        1461     1461 interfaces/java (unchanged)
        1054     1054 interfaces/java.esnext (unchanged)
-         -1     1765 interfaces/kotlin (new)
-         -1     1356 interfaces/kotlin.esnext (new)
+       1765     1765 interfaces/kotlin (unchanged)
+       1356     1356 interfaces/kotlin.esnext (unchanged)
        1513     1513 intersectiontype/java (unchanged)
        1137     1137 intersectiontype/java.esnext (unchanged)
        1218     1218 iteratormethodresolution/java (unchanged)
@@ -415,8 +419,8 @@ All reports:
        3351     3351 varargs/java.esnext (unchanged)
         985      985 variables/java (unchanged)
         647      647 variables/java.esnext (unchanged)
-      12934    12934 wasm/java (unchanged)
-      12388    12388 wasm/java.esnext (unchanged)
+      12904    11949 wasm/java (-7.4%)
+      12371    11451 wasm/java.esnext (-7.4%)
         924      924 whilestatement/java (unchanged)
         589      589 whilestatement/java.esnext (unchanged)
         925      925 whilestatement/kotlin (unchanged)

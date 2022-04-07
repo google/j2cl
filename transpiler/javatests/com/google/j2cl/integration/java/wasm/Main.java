@@ -16,7 +16,6 @@
 package wasm;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
-import static com.google.j2cl.integration.testing.Asserts.assertEqualsDelta;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
@@ -41,7 +40,6 @@ public class Main {
     testDynamicClassMethodDispatch();
     testSwitch();
     testWasmAnnotation();
-    testMath();
     testClassLiterals();
     testTry();
     testArrayInstanceOf();
@@ -130,135 +128,6 @@ public class Main {
   @JsMethod // Exist to keep to test running under closure output
   @Wasm("i32.mul")
   private static native int multiply(int x, int y);
-
-  private static void testMath() {
-    assertEquals(Double.NaN, Math.log(Double.NaN));
-    assertEquals(Double.NaN, Math.log(Double.NEGATIVE_INFINITY));
-    assertEquals(Double.NaN, Math.log(-1));
-    assertEquals(Double.POSITIVE_INFINITY, Math.log(Double.POSITIVE_INFINITY));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log(0.0));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log(-0.0));
-    assertEqualsDelta(1.0, Math.log(Math.E), 1e-15);
-
-    for (double d = -10; d < 10; d += 0.5) {
-      double answer = Math.log(Math.exp(d));
-      assertEqualsDelta(d, answer, 0.000000001);
-    }
-
-    assertEquals(Double.NaN, Math.log10(-2541.057456872342));
-    assertEquals(Double.NaN, Math.log10(-0.1));
-    assertEquals(Double.POSITIVE_INFINITY, Math.log10(Double.POSITIVE_INFINITY));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(0.0));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(-0.0));
-    assertEqualsDelta(3.0, Math.log10(1000.0), 1e-15);
-    assertEquals(14.0, Math.log10(Math.pow(10, 14)));
-    assertEqualsDelta(3.73895612695404, Math.log10(5482.2158), 1e-15);
-    assertEquals(308.25471555991675, Math.log10(Double.MAX_VALUE));
-    assertEqualsDelta(-323.30621534311575, Math.log10(Double.MIN_VALUE), 1e-10);
-
-    assertEquals(Double.NaN, Math.log1p(Double.NaN));
-    assertEquals(Double.NaN, Math.log1p(-2));
-    assertEquals(Double.NaN, Math.log1p(Double.NEGATIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY, Math.log1p(Double.POSITIVE_INFINITY));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.log1p(-1));
-    assertEqualsDelta(Double.MIN_VALUE, Math.log1p(Double.MIN_VALUE), 1e-25);
-    assertEquals(709.782712893384, Math.log1p(Double.MAX_VALUE));
-    assertEquals(0.0, Math.log1p(0.0));
-    assertEquals(-0.0, Math.log1p(-0.0));
-
-    assertEqualsDelta(-0.693147180, Math.log1p(-0.5), 1e-7);
-    assertEqualsDelta(1.313261687, Math.log1p(Math.E), 1e-7);
-    assertEqualsDelta(-0.2941782295312541, Math.log1p(-0.254856327), 1e-7);
-    assertEquals(7.368050685564151, Math.log1p(1583.542));
-    assertEqualsDelta(0.4633708685409921, Math.log1p(0.5894227), 1e-15);
-
-    assertEquals(Double.NaN, Math.exp(Double.NaN));
-    assertEquals(Double.POSITIVE_INFINITY, Math.exp(Double.POSITIVE_INFINITY));
-    assertEquals(0.0, Math.exp(Double.NEGATIVE_INFINITY));
-    assertEquals(1.0, Math.exp(0));
-    assertEqualsDelta(0.36787944117144, Math.exp(-1), 0.000001);
-    assertEqualsDelta(2.718281, Math.exp(1), 0.000001);
-
-    assertEquals(-0.0, Math.expm1(-0.0));
-    assertEquals(0.0, Math.expm1(0.0));
-    assertEquals(Double.NaN, Math.expm1(Double.NaN));
-    assertEquals(Double.POSITIVE_INFINITY, Math.expm1(Double.POSITIVE_INFINITY));
-    assertEquals(-1.0, Math.expm1(Double.NEGATIVE_INFINITY));
-    int x = +1;
-    assertEqualsDelta(-0.632, Math.expm1(-1), 0.001);
-    assertEqualsDelta(1.718, Math.expm1(1), 0.001);
-
-    assertEquals(1.0, Math.pow(2, 0.0));
-    assertEquals(1.0, Math.pow(2, -0.0));
-    assertEquals(2.0, Math.pow(2, 1));
-    assertEquals(-2.0, Math.pow(-2, 1));
-    assertEquals(Double.NaN, Math.pow(1, Double.NaN));
-    assertEquals(Double.NaN, Math.pow(Double.NaN, Double.NaN));
-    assertEquals(Double.NaN, Math.pow(Double.NaN, 1));
-    assertEquals(1.0, Math.pow(Double.NaN, 0.0));
-    assertEquals(1.0, Math.pow(Double.NaN, -0.0));
-    assertEquals(Double.POSITIVE_INFINITY, Math.pow(1.1, Double.POSITIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-1.1, Double.POSITIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY, Math.pow(0.9, Double.NEGATIVE_INFINITY));
-    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-0.9, Double.NEGATIVE_INFINITY));
-    assertEquals(0.0, Math.pow(1.1, Double.NEGATIVE_INFINITY));
-    assertEquals(0.0, Math.pow(-1.1, Double.NEGATIVE_INFINITY));
-    assertEquals(0.0, Math.pow(0.9, Double.POSITIVE_INFINITY));
-    assertEquals(0.0, Math.pow(-0.9, Double.POSITIVE_INFINITY));
-    assertEquals(Double.NaN, Math.pow(1, Double.POSITIVE_INFINITY));
-    assertEquals(Double.NaN, Math.pow(-1, Double.POSITIVE_INFINITY));
-    assertEquals(Double.NaN, Math.pow(1, Double.NEGATIVE_INFINITY));
-    assertEquals(Double.NaN, Math.pow(-1, Double.NEGATIVE_INFINITY));
-    assertEquals(0.0, Math.pow(0.0, 1));
-    assertEquals(0.0, Math.pow(Double.POSITIVE_INFINITY, -1));
-    assertEquals(Double.POSITIVE_INFINITY, Math.pow(0.0, -1));
-    assertEquals(Double.POSITIVE_INFINITY, Math.pow(Double.POSITIVE_INFINITY, 1));
-    assertEquals(0.0, Math.pow(-0.0, 2));
-    assertEquals(0.0, Math.pow(Double.NEGATIVE_INFINITY, -2));
-    assertEquals(-0.0, Math.pow(-0.0, 1));
-    assertEquals(-0.0, Math.pow(Double.NEGATIVE_INFINITY, -1));
-    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-0.0, -2));
-    assertEquals(Double.POSITIVE_INFINITY, Math.pow(Double.NEGATIVE_INFINITY, 2));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.pow(-0.0, -1));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.pow(Double.NEGATIVE_INFINITY, 1));
-    assertEquals(Double.NEGATIVE_INFINITY, Math.pow(-10.0, 3.093403029238847E15));
-
-    for (int scaleFactor = -32; scaleFactor <= 32; scaleFactor++) {
-      assertEquals(Double.NaN, Math.scalb(Double.NaN, scaleFactor));
-      assertEquals(Double.POSITIVE_INFINITY, Math.scalb(Double.POSITIVE_INFINITY, scaleFactor));
-      assertEquals(Double.NEGATIVE_INFINITY, Math.scalb(Double.NEGATIVE_INFINITY, scaleFactor));
-      assertEquals(0.0, Math.scalb(0.0, scaleFactor));
-      assertEquals(-0.0, Math.scalb(-0.0, scaleFactor));
-    }
-
-    assertEquals(40.0d, Math.scalb(5d, 3));
-    assertEquals(40.0f, Math.scalb(5f, 3));
-
-    assertEquals(64.0d, Math.scalb(64d, 0));
-    assertEquals(64.0f, Math.scalb(64f, 0));
-
-    // Cases in which we can't use integer shift (|scaleFactor| >= 31):
-
-    assertEquals(2147483648.0d, Math.scalb(1d, 31));
-    assertEquals(4294967296.0d, Math.scalb(1d, 32));
-    assertEqualsDelta(2.3283064e-10d, Math.scalb(1d, -32), 1e-7d);
-
-    assertEquals(2147483648.0f, Math.scalb(1f, 31));
-    assertEquals(4294967296.0f, Math.scalb(1f, 32));
-    assertEqualsDelta(2.3283064e-10f, Math.scalb(1f, -32), 1e-7f);
-
-    assertTrue(1 == Math.round(0.5f));
-    assertTrue(Integer.MAX_VALUE == Math.round(Float.POSITIVE_INFINITY));
-    assertTrue(Integer.MIN_VALUE == Math.round(Float.NEGATIVE_INFINITY));
-    assertTrue(0 == Math.round(Float.NaN));
-
-    assertTrue(1L == Math.round(0.5d));
-    assertTrue(Long.MIN_VALUE == Math.round(-Double.MAX_VALUE));
-    assertTrue(Long.MAX_VALUE == Math.round(Double.POSITIVE_INFINITY));
-    assertTrue(Long.MAX_VALUE == Math.round(Double.MAX_VALUE));
-    assertTrue(Long.MIN_VALUE == Math.round(Double.NEGATIVE_INFINITY));
-    assertTrue(0L == Math.round(Double.NaN));
-  }
 
   private static class SomeClass {}
 
