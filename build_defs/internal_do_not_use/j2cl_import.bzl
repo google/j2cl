@@ -24,7 +24,7 @@ j2cl_library(
 
 load(":j2cl_java_library.bzl", "j2cl_java_import")
 load(":j2kt_common.bzl", "j2kt_common")
-load(":j2kt_import.bzl", "j2kt_jvm_import")
+load(":j2kt_import.bzl", "j2kt_jvm_import", "j2kt_native_import")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_import.bzl", "j2wasm_import")
 
@@ -58,6 +58,13 @@ def j2cl_import(
 
     j2kt_jvm_import(
         name = j2kt_common.to_j2kt_jvm_name(name),
+        jar = jar,
+        visibility = visibility,
+        **kwargs
+    )
+
+    j2kt_native_import(
+        name = j2kt_common.to_j2kt_native_name(name),
         jar = jar,
         visibility = visibility,
         **kwargs

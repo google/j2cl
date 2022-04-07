@@ -17,12 +17,19 @@ def _j2kt_import_impl(ctx):
                 transitive_srcs = depset(),
                 transitive_classpath = java_info.compile_jars,
                 java_info = java_info,
+                import_only = True,
             ),
         ),
         java_info,
     ]
 
 j2kt_jvm_import = rule(
+    implementation = _j2kt_import_impl,
+    fragments = ["java"],
+    attrs = {"jar": attr.label(providers = [JavaInfo])},
+)
+
+j2kt_native_import = rule(
     implementation = _j2kt_import_impl,
     fragments = ["java"],
     attrs = {"jar": attr.label(providers = [JavaInfo])},

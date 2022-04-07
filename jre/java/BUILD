@@ -74,21 +74,6 @@ j2cl_import(
     ],
 )
 
-j2kt_native_library(
-    name = "javaemul_internal_annotations-j2kt-native",
-    srcs = glob(
-        ["javaemul/internal/annotations/*.java"],
-        # TODO(b/227166206): This is only excluded because there's no java.lang.Class emulation yet.
-        exclude = ["javaemul/internal/annotations/SpecializeMethod.java"],
-    ),
-    visibility = [
-        "//transpiler/javatests:__subpackages__",
-    ],
-    deps = [
-        ":j2kt_support-j2kt-native",
-    ],
-)
-
 BASE_JRE_SRCS = select({
     ":experimental_java11_support": glob(
         ["java*/**/*.java"],
