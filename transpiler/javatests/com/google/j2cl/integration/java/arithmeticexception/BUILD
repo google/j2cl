@@ -15,6 +15,4 @@ integration_test(
     srcs = glob(["*.java"]),
     closure_defines = {"jre.checks.numeric": "'ENABLED'"},
     enable_kt = True,
-    # TODO(b/227357882): Missing ArithmeticException on divide by zero
-    enable_kt_native = False,
 )
