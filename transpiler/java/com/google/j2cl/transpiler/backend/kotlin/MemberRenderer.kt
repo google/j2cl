@@ -105,8 +105,9 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, k
     render("external ")
   }
   if (kind != Kind.INTERFACE) {
-    if (methodDescriptor.isAbstract) render("abstract ")
-    if (!methodDescriptor.isFinal &&
+    if (methodDescriptor.isAbstract) {
+      render("abstract ")
+    } else if (!methodDescriptor.isFinal &&
         !methodDescriptor.isConstructor &&
         !methodDescriptor.isStatic &&
         !methodDescriptor.visibility.isPrivate
