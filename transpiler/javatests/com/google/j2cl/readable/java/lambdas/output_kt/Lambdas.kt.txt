@@ -88,7 +88,7 @@ open class Lambdas {
   this.callWithBiFunction(lambdas.Lambdas.BiFunction<kotlin.Any?, kotlin.String?, kotlin.Double?> (fun(x: kotlin.Any?, y: kotlin.String?): kotlin.Double? {
    throw kotlin.RuntimeException()
   }))
-  val f: lambdas.Lambdas.Function<*, *>? = lambdas.Lambdas.Function<*, *> (fun(item: T?): kotlin.Any? {
+  val f: lambdas.Lambdas.Function<*, *>? = lambdas.Lambdas.Function<*, *> (fun(item: T?): * {
    return kotlin.Long.valueOf(1L)
   })
  }
@@ -142,7 +142,7 @@ open class Lambdas {
 
   @kotlin.jvm.JvmStatic
   fun testLambdaCallingStaticMethod() {
-   val f: lambdas.Lambdas.Function<kotlin.Any?, *>? = lambdas.Lambdas.Function<kotlin.Any?, *> (fun(l: kotlin.Any?): kotlin.Any? {
+   val f: lambdas.Lambdas.Function<kotlin.Any?, *>? = lambdas.Lambdas.Function<kotlin.Any?, *> (fun(l: kotlin.Any?): * {
     return lambdas.Lambdas.m()
    })
   }

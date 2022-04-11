@@ -169,9 +169,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   abstract DescriptorFactory<MethodDescriptor> getSingleAbstractMethodDescriptorFactory();
 
   @Nullable
-  abstract DescriptorFactory<MethodDescriptor> getJsFunctionMethodDescriptorFactory();
-
-  @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
 
   @Nullable
@@ -208,7 +205,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   @Nullable
   public MethodDescriptor getJsFunctionMethodDescriptor() {
-    return getJsFunctionMethodDescriptorFactory().get(this);
+    // TODO(b/208830469): When a function expression is a JsFunction we remove the type parameters
+    // from the method descriptor. This is due to closure not supporting template variables in
+    // function types. This removal instead should happen in the backend when emitting the type.
+    return getDeclaredMethodDescriptors().stream()
+        .filter(MethodDescriptor::isJsFunction)
+        .findFirst()
+        .map(MethodDescriptor::withoutTypeParameters)
+        .orElse(null);
   }
 
   @Override
@@ -1000,11 +1004,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
                 getInterfaceTypeDescriptors().stream()
                     .map(t -> t.specializeTypeVariables(parameterization))
                     .collect(toImmutableList()))
-        .setJsFunctionMethodDescriptorFactory(
-            () ->
-                getJsFunctionMethodDescriptor() != null
-                    ? getJsFunctionMethodDescriptor().specializeTypeVariables(parameterization)
-                    : null)
         .setSingleAbstractMethodDescriptorFactory(
             () ->
                 getSingleAbstractMethodDescriptor() != null
@@ -1047,7 +1046,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
-        .setJsFunctionMethodDescriptorFactory(() -> null)
         .setSuperTypeDescriptorFactory(() -> null);
   }
 
@@ -1070,15 +1068,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         Supplier<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory) {
       return setInterfaceTypeDescriptorsFactory(
           typeDescriptor -> interfaceTypeDescriptorsFactory.get());
-    }
-
-    public abstract Builder setJsFunctionMethodDescriptorFactory(
-        DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory);
-
-    public Builder setJsFunctionMethodDescriptorFactory(
-        Supplier<MethodDescriptor> jsFunctionMethodDescriptorFactory) {
-      return setJsFunctionMethodDescriptorFactory(
-          typeDescriptor -> jsFunctionMethodDescriptorFactory.get());
     }
 
     public abstract Builder setSingleAbstractMethodDescriptorFactory(

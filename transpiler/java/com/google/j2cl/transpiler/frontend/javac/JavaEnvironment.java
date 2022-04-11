@@ -54,7 +54,6 @@ import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.ClassSymbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
-import com.sun.tools.javac.code.Symbol.TypeSymbol;
 import com.sun.tools.javac.code.Symbol.VarSymbol;
 import com.sun.tools.javac.code.TargetType;
 import com.sun.tools.javac.code.Type;
@@ -1129,7 +1128,6 @@ class JavaEnvironment {
                               ((ClassSymbol) classType.asElement()).asType(), internalTypes),
                       getFunctionalInterfaceMethodDecl(classType));
                 })
-            .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(classType))
             .setTypeArgumentDescriptors(
                 createTypeDescriptors(getTypeArguments(classType), inNullMarkedScope))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
@@ -1435,55 +1433,6 @@ class JavaEnvironment {
     }
     checkArgument(isFunctionalInterface(type));
     return type;
-  }
-
-  private MethodDescriptor getJsFunctionMethodDescriptor(DeclaredType type) {
-    ClassSymbol classSymbol = (ClassSymbol) type.asElement();
-    DeclaredTypeDescriptor declaredTypeDescriptor = createDeclaredTypeDescriptor(type);
-    if (JsInteropUtils.isJsFunction(classSymbol) && getFunctionalInterfaceMethod(type) != null) {
-      // type.getFunctionalInterfaceMethod returns in some cases the method declaration
-      // instead of the method with the corresponding parameterization. Note: this is observed in
-      // the case when a type is parameterized with a wildcard, e.g. JsFunction<?>.
-      // MethodSymbol jsFunctionMethodBinding =
-      //     getMethods(classSymbol).stream()
-      //         .filter(methodSymbol -> methodSymbol == getFunctionalInterfaceMethod(type))
-      //         .findFirst()
-      //         .get();
-      MethodSymbol jsFunctionMethodBinding = getFunctionalInterfaceMethod(type);
-      return createMethodDescriptor(
-              declaredTypeDescriptor,
-              (MethodSymbol) jsFunctionMethodBinding.asMemberOf((ClassType) type, internalTypes),
-              getFunctionalInterfaceMethodDecl(type))
-          .withoutTypeParameters();
-    }
-
-    // Find implementation method that corresponds to JsFunction.
-    Optional<Type> jsFunctionInterface =
-        classSymbol.getInterfaces().stream()
-            .map(Type::asElement)
-            .filter(JsInteropUtils::isJsFunction)
-            .map(TypeSymbol::asType)
-            .findFirst();
-
-    return jsFunctionInterface
-        .map(this::getFunctionalInterfaceMethod)
-        .flatMap(jsFunctionMethod -> getOverrideInType((ClassType) type, jsFunctionMethod))
-        .map(
-            methodSymbol ->
-                createMethodDescriptor(
-                        declaredTypeDescriptor,
-                        (MethodSymbol) methodSymbol.asMemberOf((ClassType) type, internalTypes),
-                        methodSymbol)
-                    .withoutTypeParameters())
-        .orElse(null);
-  }
-
-  private Optional<MethodSymbol> getOverrideInType(ClassType type, MethodSymbol method) {
-    ClassSymbol classSymbol = (ClassSymbol) type.asElement();
-    return getDeclaredMethods(type).stream()
-        .map(MethodDeclarationPair::getDeclarationMethodSymbol)
-        .filter(m -> m.overrides(method, classSymbol, internalTypes, false))
-        .findFirst();
   }
 
   MethodDescriptor getJsFunctionMethodDescriptor(TypeMirror type) {

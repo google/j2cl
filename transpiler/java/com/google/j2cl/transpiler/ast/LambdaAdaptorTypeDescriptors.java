@@ -202,8 +202,6 @@ public final class LambdaAdaptorTypeDescriptors {
             jsfunctionTypeDescriptor ->
                 createJsFunctionMethodDescriptor(
                     jsfunctionTypeDescriptor, jsFunctionMethodDescriptor))
-        .setJsFunctionMethodDescriptorFactory(
-            DeclaredTypeDescriptor::getSingleAbstractMethodDescriptor)
         .setDeclaredMethodDescriptorsFactory(
             jsfunctionTypeDescriptor ->
                 ImmutableList.of(jsfunctionTypeDescriptor.getSingleAbstractMethodDescriptor()))

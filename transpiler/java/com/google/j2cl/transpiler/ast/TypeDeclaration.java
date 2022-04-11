@@ -525,11 +525,6 @@ public abstract class TypeDeclaration
                 getDeclaredMethodDescriptors().stream()
                     .map(MethodDescriptor::toRawMemberDescriptor)
                     .collect(toImmutableList()))
-        .setJsFunctionMethodDescriptorFactory(
-            () ->
-                applyOrNull(
-                    toUnparameterizedTypeDescriptor().getJsFunctionMethodDescriptor(),
-                    t -> t.toRawMemberDescriptor()))
         .setSingleAbstractMethodDescriptorFactory(
             () ->
                 applyOrNull(

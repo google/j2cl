@@ -57,7 +57,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 import org.eclipse.jdt.core.dom.AST;
@@ -885,43 +884,6 @@ class JdtUtils {
     return typeBinding.isLocal();
   }
 
-  /** Returns the MethodDescriptor for the JsFunction method. */
-  private static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
-    if (JsInteropUtils.isJsFunction(typeBinding)
-        && typeBinding.getFunctionalInterfaceMethod() != null) {
-      // typeBinding.getFunctionalInterfaceMethod returns in some cases the method declaration
-      // instead of the method with the corresponding parameterization. Note: this is observed in
-      // the case when a type is parameterized with a wildcard, e.g. JsFunction<?>.
-      IMethodBinding jsFunctionMethodBinding =
-          Arrays.stream(typeBinding.getDeclaredMethods())
-              .filter(
-                  methodBinding ->
-                      methodBinding.getMethodDeclaration()
-                          == typeBinding.getFunctionalInterfaceMethod().getMethodDeclaration())
-              .findFirst()
-              .get();
-      return createMethodDescriptor(jsFunctionMethodBinding).withoutTypeParameters();
-    }
-
-    // Find implementation method that corresponds to JsFunction.
-    Optional<ITypeBinding> jsFunctionInterface =
-        Arrays.stream(typeBinding.getInterfaces()).filter(JsInteropUtils::isJsFunction).findFirst();
-
-    return jsFunctionInterface
-        .map(ITypeBinding::getFunctionalInterfaceMethod)
-        .flatMap(jsFunctionMethod -> getOverrideInType(typeBinding, jsFunctionMethod))
-        .map(MethodDescriptor::withoutTypeParameters)
-        .orElse(null);
-  }
-
-  private static Optional<MethodDescriptor> getOverrideInType(
-      ITypeBinding typeBinding, IMethodBinding methodBinding) {
-    return Arrays.stream(typeBinding.getDeclaredMethods())
-        .filter(m -> m.overrides(methodBinding))
-        .findFirst()
-        .map(JdtUtils::createMethodDescriptor);
-  }
-
   private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
       List<ITypeBinding> typeBindings, boolean inNullMarkedScope, Class<T> clazz) {
     return typeBindings.stream()
@@ -1011,9 +973,7 @@ class JdtUtils {
                         typeBinding.getInterfaces(),
                         inNullMarkedScope,
                         DeclaredTypeDescriptor.class))
-            .setSingleAbstractMethodDescriptorFactory(
-                () -> createMethodDescriptor(typeBinding.getFunctionalInterfaceMethod()))
-            .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
+            .setSingleAbstractMethodDescriptorFactory(() -> getFunctionInterfaceMethod(typeBinding))
             .setSuperTypeDescriptorFactory(
                 () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), inNullMarkedScope))
             .setTypeArgumentDescriptors(
@@ -1023,6 +983,25 @@ class JdtUtils {
             .build();
     putTypeDescriptorInCache(inNullMarkedScope, typeBinding, typeDescriptor);
     return typeDescriptor;
+  }
+
+  private static MethodDescriptor getFunctionInterfaceMethod(ITypeBinding typeBinding) {
+    IMethodBinding functionalInterfaceMethod = typeBinding.getFunctionalInterfaceMethod();
+    if (!typeBinding.isInterface() || functionalInterfaceMethod == null) {
+      return null;
+    }
+    // typeBinding.getFunctionalInterfaceMethod returns in some cases the method declaration
+    // instead of the method with the corresponding parameterization. Note: this is observed in
+    // the case when a type is parameterized with a wildcard, e.g. JsFunction<?>.
+    return createMethodDescriptor(
+        Arrays.stream(typeBinding.getDeclaredMethods())
+            .filter(
+                methodBinding ->
+                    methodBinding
+                        .getMethodDeclaration()
+                        .equals(functionalInterfaceMethod.getMethodDeclaration()))
+            .findFirst()
+            .orElse(functionalInterfaceMethod));
   }
 
   private static final ThreadLocal<Map<ITypeBinding, DeclaredTypeDescriptor>>
