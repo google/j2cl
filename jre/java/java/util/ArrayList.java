@@ -50,10 +50,8 @@ import javaemul.internal.ArrayHelper;
 public class ArrayList<E> extends AbstractList<E> implements List<E>,
     Cloneable, RandomAccess, Serializable {
 
-  /**
-   * This field holds a JavaScript array.
-   */
-  private transient E[] array = (E[]) new Object[0];
+  /** This field holds a JavaScript array. */
+  private final E[] array = (E[]) new Object[0];
 
   /**
    * Ensures that RPC will consider type parameter E to be exposed. It will be
@@ -208,26 +206,22 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>,
   public boolean removeIf(Predicate<? super E> filter) {
     checkNotNull(filter);
 
-    E[] newArray = null;
     int newIndex = 0;
     for (int index = 0; index < array.length; ++index) {
       E e = array[index];
 
-      if (filter.test(e)) {
-        if (newArray == null) {
-          newArray = ArrayHelper.clone(array, 0, index);
-          newIndex = index;
+      if (!filter.test(e)) {
+        if (newIndex != index) {
+          array[newIndex] = e;
         }
-      } else if (newArray != null) {
-        newArray[newIndex++] = e;
+        newIndex++;
       }
     }
-
-    if (newArray == null) {
-      return false;
+    if (newIndex != array.length) {
+      setSize(newIndex);
+      return true;
     }
-    array = newArray;
-    return true;
+    return false;
   }
 
   @Override
