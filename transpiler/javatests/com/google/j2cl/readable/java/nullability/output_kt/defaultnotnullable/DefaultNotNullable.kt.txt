@@ -45,11 +45,19 @@ open class DefaultNotNullable {
 
  open fun m3(vararg args: kotlin.String?) {}
 
- fun interface ParameterizedInterface<T> {
-  fun add(t: T?)
+ interface ParameterizedInterface<T> {
+  fun add(t: T?): T?
+
+  fun nullableAdd(t: T?): T?
  }
 
  open inner class ImplementsParameterizedInterface: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface<kotlin.String> {
-  open override fun add(s: kotlin.String?) {}
+  open override fun add(s: kotlin.String?): kotlin.String {
+   return "Hey"
+  }
+
+  open override fun nullableAdd(s: kotlin.String?): kotlin.String? {
+   return "Hey"
+  }
  }
 }

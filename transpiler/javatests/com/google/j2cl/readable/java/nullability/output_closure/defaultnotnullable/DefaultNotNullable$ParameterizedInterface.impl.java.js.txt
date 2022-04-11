@@ -2,20 +2,15 @@ goog.module('nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInte
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.$LambdaAdaptor$impl');
-
 /**
  * @interface
  * @template T
  */
 class ParameterizedInterface {
- /** @abstract */
+ /** @abstract @return {T} */
  m_add__java_lang_Object(/** T */ t) {}
- /** @template T @return {ParameterizedInterface<T>} */
- static $adapt(/** ?function(T):void */ fn) {
-  ParameterizedInterface.$clinit();
-  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
- }
+ /** @abstract @return {T} */
+ m_nullableAdd__java_lang_Object(/** T */ t) {}
  
  static $clinit() {
   ParameterizedInterface.$clinit = () =>{};
@@ -30,9 +25,7 @@ class ParameterizedInterface {
   return instance != null && !!instance.$implements__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedInterface;
  }
  
- static $loadModules() {
-  $LambdaAdaptor = goog.module.get('nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.$LambdaAdaptor$impl');
- }
+ static $loadModules() {}
 }
 ParameterizedInterface.$markImplementor(/**@type {Function}*/ (ParameterizedInterface));
 $Util.$setClassMetadataForInterface(ParameterizedInterface, 'nullability.defaultnotnullable.DefaultNotNullable$ParameterizedInterface');

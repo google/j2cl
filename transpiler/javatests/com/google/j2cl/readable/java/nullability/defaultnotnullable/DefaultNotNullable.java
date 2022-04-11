@@ -58,11 +58,21 @@ public class DefaultNotNullable {
   }
 
   interface ParameterizedInterface<T> {
-    void add(T t);
+    // Exposes the problems described in b/68726480.
+    T add(T t);
+
+    @Nullable
+    T nullableAdd(@Nullable T t);
   }
 
   class ImplementsParameterizedInterface implements ParameterizedInterface<String> {
     @Override
-    public void add(String s) {}
+    public String add(String s) {
+      return "Hey";
+    }
+
+    public @Nullable String nullableAdd(@Nullable String s) {
+      return "Hey";
+    }
   }
 }
