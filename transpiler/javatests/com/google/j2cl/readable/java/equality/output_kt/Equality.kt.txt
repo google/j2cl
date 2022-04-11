@@ -4,22 +4,12 @@ import javaemul.lang.*
 
 open class Equality {
  open fun test() {
-  if (true) {
-   assert(false === false)
-   assert(0 !== 1)
-  }
-  if (true) {
-   assert(kotlin.Any() !== kotlin.Any())
-  }
-  if (true) {
-   assert(kotlin.Double.valueOf(0.0) === kotlin.Double.valueOf(0.0))
-  }
-  if (true) {
-   assert(kotlin.Float.valueOf(0.0f) === kotlin.Float.valueOf(0.0f))
-  }
-  if (true) {
-   assert(null !== kotlin.Any())
-   assert(kotlin.Any() !== null)
-  }
+  assert(false === false)
+  assert(0 !== 1)
+  assert(kotlin.Any() !== kotlin.Any())
+  assert(kotlin.Double.valueOf(0.0) === kotlin.Double.valueOf(0.0))
+  assert(kotlin.Float.valueOf(0.0f) === kotlin.Float.valueOf(0.0f))
+  assert(null !== kotlin.Any())
+  assert(kotlin.Any() !== null)
  }
 }

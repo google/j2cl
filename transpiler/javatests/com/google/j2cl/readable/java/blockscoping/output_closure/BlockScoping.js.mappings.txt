@@ -8,11 +8,20 @@
 [BlockScoping] => [return $instance;] "blockscoping.BlockScoping.<synthetic: ctor_create>"
 [BlockScoping] => [$ctor__blockscoping_BlockScoping__]
 [BlockScoping] => [this.$ctor__java_lang_Object__();] "blockscoping.BlockScoping.<init>"
-[main] => [m_main__]
-[int i = 0;] => [let i = 0;] "blockscoping.BlockScoping.main"
+[localScopes] => [m_localScopes__]
+[int i = 0;] => [let i = 0;] "blockscoping.BlockScoping.localScopes"
 [i] => [i] "i"
-[int i = 1;] => [let i_1 = 1;] "blockscoping.BlockScoping.main"
+[int i = 1;] => [let i_1 = 1;] "blockscoping.BlockScoping.localScopes"
 [i] => [i_1] "i"
+[nestedScopes] => [m_nestedScopes__]
+[int x;] => [let /** number */ x;] "blockscoping.BlockScoping.nestedScopes"
+[x] => [x] "x"
+[int y;] => [let /** number */ y;] "blockscoping.BlockScoping.nestedScopes"
+[y] => [y] "y"
+[x = 1;] => [x = 1;] "blockscoping.BlockScoping.nestedScopes"
+[y = 1;] => [y = 1;] "blockscoping.BlockScoping.nestedScopes"
+[y = y + 1;] => [y = y + 1 | 0;] "blockscoping.BlockScoping.nestedScopes"
+[x = x + 1;] => [x = x + 1 | 0;] "blockscoping.BlockScoping.nestedScopes"
 [BlockScoping] => [$clinit]
 [BlockScoping] => [BlockScoping.$clinit = () =>{};] "blockscoping.BlockScoping.<clinit>"
 [BlockScoping] => [BlockScoping.$loadModules();] "blockscoping.BlockScoping.<clinit>"

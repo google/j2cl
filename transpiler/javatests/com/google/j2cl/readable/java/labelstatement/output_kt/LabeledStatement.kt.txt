@@ -4,12 +4,10 @@ import javaemul.lang.*
 
 open class LabeledStatement {
  open fun loopStatements() {
-  if (true) {
-   LABEL@ while (true) {
-    LABEL_CONTINUE@ do {
-     break@LABEL
-    } while (false)
-   }
+  LABEL@ while (true) {
+   LABEL_CONTINUE@ do {
+    break@LABEL
+   } while (false)
   }
  }
 

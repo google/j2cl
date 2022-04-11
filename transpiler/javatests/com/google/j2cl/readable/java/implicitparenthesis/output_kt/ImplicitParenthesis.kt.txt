@@ -13,49 +13,39 @@ open class ImplicitParenthesis {
   fun examples() {
    var primitiveInt: kotlin.Int
    var boxedInt: kotlin.Int?
-   if (true) {
-    primitiveInt = 5
-    boxedInt = kotlin.Int(10)
-    primitiveInt = (if (primitiveInt === 5) kotlin.Int(15) else kotlin.Int(30)).toInt()
-    assert(primitiveInt === 15)
-   }
-   if (true) {
-    primitiveInt = 5
-    boxedInt = kotlin.Int(10)
-    primitiveInt = kotlin.run {
-     boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + primitiveInt)
-     boxedInt
-    }!!.toInt()
-    assert(primitiveInt === 15)
-   }
-   if (true) {
-    primitiveInt = 5
-    boxedInt = kotlin.Int(10)
-    primitiveInt = kotlin.run {
-     boxedInt = kotlin.Int.valueOf(primitiveInt)
-     boxedInt
-    }!!.toInt()
-    assert(primitiveInt === 5)
-   }
-   if (true) {
-    primitiveInt = 5
-    boxedInt = kotlin.Int(10)
-    primitiveInt = kotlin.run {
-     val `$value`: kotlin.Int? = boxedInt
-     boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + 1)
-     `$value`
-    }!!.toInt()
-    assert(primitiveInt === 10)
-   }
-   if (true) {
-    primitiveInt = 5
-    boxedInt = kotlin.Int(10)
-    primitiveInt = kotlin.run {
-     boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + 1)
-     boxedInt
-    }!!.toInt()
-    assert(primitiveInt === 11)
-   }
+   primitiveInt = 5
+   boxedInt = kotlin.Int(10)
+   primitiveInt = (if (primitiveInt === 5) kotlin.Int(15) else kotlin.Int(30)).toInt()
+   assert(primitiveInt === 15)
+   primitiveInt = 5
+   boxedInt = kotlin.Int(10)
+   primitiveInt = kotlin.run {
+    boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + primitiveInt)
+    boxedInt
+   }!!.toInt()
+   assert(primitiveInt === 15)
+   primitiveInt = 5
+   boxedInt = kotlin.Int(10)
+   primitiveInt = kotlin.run {
+    boxedInt = kotlin.Int.valueOf(primitiveInt)
+    boxedInt
+   }!!.toInt()
+   assert(primitiveInt === 5)
+   primitiveInt = 5
+   boxedInt = kotlin.Int(10)
+   primitiveInt = kotlin.run {
+    val `$value`: kotlin.Int? = boxedInt
+    boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + 1)
+    `$value`
+   }!!.toInt()
+   assert(primitiveInt === 10)
+   primitiveInt = 5
+   boxedInt = kotlin.Int(10)
+   primitiveInt = kotlin.run {
+    boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + 1)
+    boxedInt
+   }!!.toInt()
+   assert(primitiveInt === 11)
   }
 
   @kotlin.jvm.JvmStatic
@@ -63,19 +53,15 @@ open class ImplicitParenthesis {
    var primitiveInt: kotlin.Int
    var boxedInt: kotlin.Int?
    var boxedBoolean: kotlin.Boolean?
-   if (true) {
-    primitiveInt = 5
-    boxedInt = kotlin.Int(10)
-    primitiveInt = boxedInt!!.toInt() - primitiveInt
-    assert(primitiveInt === 5)
-   }
-   if (true) {
-    primitiveInt = 5
-    boxedInt = kotlin.Int(10)
-    boxedBoolean = kotlin.Boolean.valueOf(true)
-    boxedBoolean = kotlin.Boolean.valueOf(boxedInt!!.toInt() === primitiveInt)
-    assert(boxedBoolean!!.booleanValue() === false)
-   }
+   primitiveInt = 5
+   boxedInt = kotlin.Int(10)
+   primitiveInt = boxedInt!!.toInt() - primitiveInt
+   assert(primitiveInt === 5)
+   primitiveInt = 5
+   boxedInt = kotlin.Int(10)
+   boxedBoolean = kotlin.Boolean.valueOf(true)
+   boxedBoolean = kotlin.Boolean.valueOf(boxedInt!!.toInt() === primitiveInt)
+   assert(boxedBoolean!!.booleanValue() === false)
   }
 
   @kotlin.jvm.JvmStatic

@@ -104,7 +104,6 @@ import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLiteralsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
-import com.google.j2cl.transpiler.passes.NormalizeNestedBlocks;
 import com.google.j2cl.transpiler.passes.NormalizeNonFinalVariablesKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
@@ -120,6 +119,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
+import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveStatementAsExpressions;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
@@ -411,7 +411,6 @@ public enum Backend {
           NormalizeForStatements::new,
           NormalizeSwitchStatementsKotlin::new,
           NormalizeLabeledStatements::new,
-          NormalizeNestedBlocks::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
           InsertWideningPrimitiveConversionsKotlin::new,
           InsertNarrowingPrimitiveConversionsKotlin::new,
@@ -424,6 +423,7 @@ public enum Backend {
           InsertStringConversionsKotlin::new,
           MakeVariablesFinal::new,
           NormalizeNonFinalVariablesKotlin::new,
+          RemoveNestedBlocks::new,
 
           // Verification
           VerifySingleAstReference::new,

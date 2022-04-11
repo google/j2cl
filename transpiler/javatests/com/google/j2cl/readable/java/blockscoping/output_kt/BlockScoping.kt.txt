@@ -3,12 +3,17 @@ package blockscoping
 import javaemul.lang.*
 
 open class BlockScoping {
- open fun main() {
-  if (true) {
-   val i: kotlin.Int = 0
-  }
-  if (true) {
-   val i_1: kotlin.Int = 1
-  }
+ open fun localScopes() {
+  val i: kotlin.Int = 0
+  val i_1: kotlin.Int = 1
+ }
+
+ open fun nestedScopes() {
+  var x: kotlin.Int
+  var y: kotlin.Int
+  x = 1
+  y = 1
+  y = y + 1
+  x = x + 1
  }
 }

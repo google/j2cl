@@ -4,12 +4,10 @@ import javaemul.lang.*
 
 open class ContinueStatement {
  open fun test() {
-  if (true) {
-   LOOP@ while (true) {
-    LOOP_CONTINUE@ do {
-     break@LOOP_CONTINUE
-    } while (false)
-   }
+  LOOP@ while (true) {
+   LOOP_CONTINUE@ do {
+    break@LOOP_CONTINUE
+   } while (false)
   }
  }
 }

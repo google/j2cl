@@ -45,5 +45,12 @@ public class Main {
       int i = 44;
       assertTrue(i == 44);
     }
+
+    int x;
+    {
+      x = 1;
+    }
+    x = x + 1;
+    assertTrue(x == 2);
   }
 }

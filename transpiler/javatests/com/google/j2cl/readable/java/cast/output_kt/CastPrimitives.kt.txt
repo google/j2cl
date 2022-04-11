@@ -116,35 +116,21 @@ open class CastPrimitives {
   val ffloat: kotlin.Float = 16.0f
   val fdouble: kotlin.Double = 17.0
   var tlong: kotlin.Long = 0L
-  if (true) {
-   tlong = fbyte.toLong()
-   tlong = flong
-  }
-  if (true) {
-   tlong = fint.toLong()
-   tlong = tlong + fint.toLong()
-   tlong = tlong.shl(fint)
-  }
-  if (true) {
-   tlong = tlong + fchar.code.toLong()
-   tlong = tlong + flong
-   tlong = (tlong.toFloat() + ffloat).toLong()
-  }
-  if (true) {
-   tlong = flong * fint.toLong()
-   tlong = flong.shr(fint)
-  }
-  if (true) {
-   tlong = flong + fshort.toLong()
-   tlong = flong + flong
-  }
-  if (true) {
-   tlong = flong.shl(tlong.toInt())
-   tlong = tlong.shl(flong.toInt())
-  }
-  if (true) {
-   tlong = (0 + 1).toLong() + 2L
-  }
+  tlong = fbyte.toLong()
+  tlong = flong
+  tlong = fint.toLong()
+  tlong = tlong + fint.toLong()
+  tlong = tlong.shl(fint)
+  tlong = tlong + fchar.code.toLong()
+  tlong = tlong + flong
+  tlong = (tlong.toFloat() + ffloat).toLong()
+  tlong = flong * fint.toLong()
+  tlong = flong.shr(fint)
+  tlong = flong + fshort.toLong()
+  tlong = flong + flong
+  tlong = flong.shl(tlong.toInt())
+  tlong = tlong.shl(flong.toInt())
+  tlong = (0 + 1).toLong() + 2L
  }
 
  companion object {

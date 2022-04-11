@@ -15,30 +15,32 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
-import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.SwitchCase;
+import java.util.stream.Stream;
 
-/** Normalization pass which rewrites "{...}" block statements to "if (true) {...}". */
-public class NormalizeNestedBlocks extends NormalizationPass {
+/** Normalization pass which removes nested blocks. */
+public class RemoveNestedBlocks extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteBlock(Block block) {
-            // Rewrite nested block statements only.
-            return getParent() instanceof Block || getParent() instanceof SwitchCase
-                ? IfStatement.newBuilder()
-                    .setSourcePosition(block.getSourcePosition())
-                    .setConditionExpression(BooleanLiteral.get(true))
-                    .setThenStatement(block)
-                    .build()
-                : block;
+            return Block.Builder.from(block)
+                .setStatements(
+                    block.getStatements().stream()
+                        .flatMap(
+                            statement ->
+                                statement instanceof Block
+                                    ? ((Block) statement).getStatements().stream()
+                                    : Stream.of(statement))
+                        .collect(toImmutableList()))
+                .build();
           }
         });
   }

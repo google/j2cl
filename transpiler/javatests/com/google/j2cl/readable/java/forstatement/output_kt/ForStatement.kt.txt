@@ -4,80 +4,66 @@ import javaemul.lang.*
 
 open class ForStatement {
  open fun test() {
-  if (true) {
-   var i: kotlin.Int = 0
-   var count: kotlin.Int = 0
-   LOOP@ while (i < 100) {
-    LOOP_CONTINUE@ do {
-     count = count + 1
-    } while (false)
-    i = i + 1
-   }
+  var i: kotlin.Int = 0
+  var count: kotlin.Int = 0
+  LOOP@ while (i < 100) {
+   LOOP_CONTINUE@ do {
+    count = count + 1
+   } while (false)
+   i = i + 1
   }
-  if (true) {
-   var l: kotlin.Long = 0L
-   var count_1: kotlin.Long = 0L
-   LOOP_1@ while (l < 100L) {
-    LOOP_CONTINUE_1@ do {
-     count_1 = count_1 + 1L
-    } while (false)
-    l = l + 1L
-    l = l + 1L
-   }
+  var l: kotlin.Long = 0L
+  var count_1: kotlin.Long = 0L
+  LOOP_1@ while (l < 100L) {
+   LOOP_CONTINUE_1@ do {
+    count_1 = count_1 + 1L
+   } while (false)
+   l = l + 1L
+   l = l + 1L
   }
   var a: kotlin.Boolean = false
-  if (true) {
-   LOOP_2@ while (kotlin.run {
-    a = a.or(true)
-    a
-   }) {
-    LOOP_CONTINUE_2@ do {} while (false)
-   }
+  LOOP_2@ while (kotlin.run {
+   a = a.or(true)
+   a
+  }) {
+   LOOP_CONTINUE_2@ do {} while (false)
   }
   var b: kotlin.Boolean = false
-  if (true) {
-   LOOP_3@ while (kotlin.run {
-    b = a
-    b
-   }) {
-    LOOP_CONTINUE_3@ do {} while (false)
-   }
+  LOOP_3@ while (kotlin.run {
+   b = a
+   b
+  }) {
+   LOOP_CONTINUE_3@ do {} while (false)
   }
-  if (true) {
+  forstatement.ForStatement.returnsValue()
+  LOOP_4@ while (true) {
+   LOOP_CONTINUE_4@ do {} while (false)
    forstatement.ForStatement.returnsValue()
-   LOOP_4@ while (true) {
-    LOOP_CONTINUE_4@ do {} while (false)
-    forstatement.ForStatement.returnsValue()
-   }
   }
  }
 
  open fun testContinue() {
-  if (true) {
-   var i: kotlin.Int = 0
-   var j: kotlin.Int = 0
-   LABEL@ while (i < 10) {
-    LABEL_CONTINUE@ do {
-     if (i === 5) {
-      break@LABEL_CONTINUE
-     }
-     if (true) {
-      var k: kotlin.Int = 0
-      var l: kotlin.Int = 0
-      LOOP@ while (k < 10) {
-       LOOP_CONTINUE@ do {
-        if (j === 5) {
-         break@LABEL_CONTINUE
-        }
-       } while (false)
-       k = k + 1
-       l = l + 1
+  var i: kotlin.Int = 0
+  var j: kotlin.Int = 0
+  LABEL@ while (i < 10) {
+   LABEL_CONTINUE@ do {
+    if (i === 5) {
+     break@LABEL_CONTINUE
+    }
+    var k: kotlin.Int = 0
+    var l: kotlin.Int = 0
+    LOOP@ while (k < 10) {
+     LOOP_CONTINUE@ do {
+      if (j === 5) {
+       break@LABEL_CONTINUE
       }
-     }
-    } while (false)
-    i = i + 1
-    j = j + 1
-   }
+     } while (false)
+     k = k + 1
+     l = l + 1
+    }
+   } while (false)
+   i = i + 1
+   j = j + 1
   }
  }
 

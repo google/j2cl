@@ -22,49 +22,33 @@ open class InstanceQualifiers {
   fun main(vararg args: kotlin.String?) {
    val main: instancequalifieronstaticfield.InstanceQualifiers? = instancequalifieronstaticfield.InstanceQualifiers()
    var i: kotlin.Int = 0
-   if (true) {
-    instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
+   instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
+   instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
+   instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+   instancequalifieronstaticfield.InstanceQualifiers.staticField = 300
+   i = kotlin.run {
+    main
+    instancequalifieronstaticfield.InstanceQualifiers.staticField
    }
-   if (true) {
-    instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
-    if (true) {
-     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-     instancequalifieronstaticfield.InstanceQualifiers.staticField = 300
-    }
+   i = kotlin.run {
+    main
+    instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
    }
-   if (true) {
-    i = kotlin.run {
-     main
-     instancequalifieronstaticfield.InstanceQualifiers.staticField
-    }
-    i = kotlin.run {
-     main
-     instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
-    }
-    i = kotlin.run {
-     main
-     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-     instancequalifieronstaticfield.InstanceQualifiers.staticField
-    }
+   i = kotlin.run {
+    main
+    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+    instancequalifieronstaticfield.InstanceQualifiers.staticField
    }
-   if (true) {
-    instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + 100
-    if (true) {
-     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-     instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + 100
-    }
-   }
-   if (true) {
-    if (true) {
-     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-     instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + kotlin.run {
-      main
-      instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-      instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-      instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
-     }
-    }
+   instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + 100
+   instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+   instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + 100
+   instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+   instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+   instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + kotlin.run {
+    main
+    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+    instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
    }
   }
  }

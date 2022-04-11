@@ -17,12 +17,26 @@ package blockscoping;
 
 public class BlockScoping {
   @SuppressWarnings("unused")
-  public void main() {
+  public void localScopes() {
     {
       int i = 0;
     }
     {
       int i = 1;
     }
+  }
+
+  @SuppressWarnings("unused")
+  public void nestedScopes() {
+    int x;
+    int y;
+    {
+      x = 1;
+      {
+        y = 1;
+      }
+      y = y + 1;
+    }
+    x = x + 1;
   }
 }

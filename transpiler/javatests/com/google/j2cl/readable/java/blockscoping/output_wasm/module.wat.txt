@@ -8,7 +8,8 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@blockscoping.BlockScoping)
-  (ref.func $m_main__void@blockscoping.BlockScoping)
+  (ref.func $m_localScopes__void@blockscoping.BlockScoping)
+  (ref.func $m_nestedScopes__void@blockscoping.BlockScoping)
  )
 )
 
@@ -28,7 +29,8 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_main__void (ref $function.m_main__void))
+ (field $m_localScopes__void (ref $function.m_localScopes__void))
+ (field $m_nestedScopes__void (ref $function.m_nestedScopes__void))
   $java.lang.Object.vtable)
 )
 
@@ -64,9 +66,9 @@
  )
 )
 
-;;; void BlockScoping.main()
-(func $m_main__void@blockscoping.BlockScoping
- (type $function.m_main__void)
+;;; void BlockScoping.localScopes()
+(func $m_localScopes__void@blockscoping.BlockScoping
+ (type $function.m_localScopes__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ blockscoping/BlockScoping.java:20:14
  (local $i i32)
@@ -86,7 +88,43 @@
   )
  )
 )
-(elem declare func $m_main__void@blockscoping.BlockScoping)
+(elem declare func $m_localScopes__void@blockscoping.BlockScoping)
+
+;;; void BlockScoping.nestedScopes()
+(func $m_nestedScopes__void@blockscoping.BlockScoping
+ (type $function.m_nestedScopes__void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ blockscoping/BlockScoping.java:30:14
+ (local $x i32)
+ (local $y i32)
+ (local $this (ref null $blockscoping.BlockScoping))
+ (local.set $this (ref.cast_static $blockscoping.BlockScoping (local.get $this.untyped)))
+ (block
+  ;; int x;
+  ;;@ blockscoping/BlockScoping.java:31:4
+  
+  ;; int y;
+  ;;@ blockscoping/BlockScoping.java:32:4
+  
+  (block
+   ;; (x = 1);
+   ;;@ blockscoping/BlockScoping.java:34:6
+   (local.set $x (i32.const 1))
+   (block
+    ;; (y = 1);
+    ;;@ blockscoping/BlockScoping.java:36:8
+    (local.set $y (i32.const 1))
+   )
+   ;; (y = (y + 1));
+   ;;@ blockscoping/BlockScoping.java:38:6
+   (local.set $y (i32.add (local.get $y) (i32.const 1)))
+  )
+  ;; (x = (x + 1));
+  ;;@ blockscoping/BlockScoping.java:40:4
+  (local.set $x (i32.add (local.get $x) (i32.const 1)))
+ )
+)
+(elem declare func $m_nestedScopes__void@blockscoping.BlockScoping)
 
 ;;; void BlockScoping.$clinit()
 (func $$clinit__void@blockscoping.BlockScoping

@@ -20,13 +20,26 @@ class BlockScoping extends j_l_Object {
   this.$ctor__java_lang_Object__();
  }
  
- m_main__() {
+ m_localScopes__() {
   {
    let i = 0;
   }
   {
    let i_1 = 1;
   }
+ }
+ 
+ m_nestedScopes__() {
+  let /** number */ x;
+  let /** number */ y;
+  {
+   x = 1;
+   {
+    y = 1;
+   }
+   y = y + 1 | 0;
+  }
+  x = x + 1 | 0;
  }
  
  static $clinit() {

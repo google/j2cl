@@ -58,19 +58,17 @@ open class InnerClassInitOrder {
    abstract fun act()
   }
   val results: kotlin.Array<`$1AddNumber`?>? = kotlin.arrayOfNulls<`$1AddNumber`>(10)
-  if (true) {
-   var i: kotlin.Int = 0
-   LOOP@ while (i < 10) {
-    LOOP_CONTINUE@ do {
-     val ap: `$1AddNumber`? = object : `$1AddNumber`(i) {
-      open override fun act() {
-       this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + this.num
-      }
+  var i: kotlin.Int = 0
+  LOOP@ while (i < 10) {
+   LOOP_CONTINUE@ do {
+    val ap: `$1AddNumber`? = object : `$1AddNumber`(i) {
+     open override fun act() {
+      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + this.num
      }
-     results!![i] = ap
-    } while (false)
-    i = i + 1
-   }
+    }
+    results!![i] = ap
+   } while (false)
+   i = i + 1
   }
   FOR_EACH@ for (theAp in results!!) {
    theAp!!.act()
