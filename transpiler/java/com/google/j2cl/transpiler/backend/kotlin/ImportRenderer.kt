@@ -41,5 +41,6 @@ private fun Renderer.render(import: Import) {
 private val CompilationUnit.imports: Set<Import>
   get() = buildSet {
     add(starImport("javaemul", "lang"))
+    add(starImport("kotlin", "jvm"))
     // TODO(b/226922954): Add imports for types and members.
   }

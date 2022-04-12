@@ -1,6 +1,7 @@
 package jsasync
 
 import javaemul.lang.*
+import kotlin.jvm.*
 
 open class Main {
  @kotlin.jvm.JvmField val x: jsasync.Main.IThenable<kotlin.Int?>? = jsasync.Main.Promise.resolve(kotlin.Int.valueOf(10))
