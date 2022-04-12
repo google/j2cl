@@ -41,18 +41,26 @@ open class InstanceofExpressions {
   val objectDoubleArray: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>>(0)
   val stringArray: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.String>(0)
   var a: kotlin.Boolean
-  a = `object` is kotlin.Array<kotlin.Any?>
-  a = `object` is kotlin.Array<kotlin.Array<kotlin.String?>?>
-  a = `object` is kotlin.Array<kotlin.Any?>
-  a = `object` is kotlin.Array<kotlin.Array<kotlin.String?>?>
-  a = objectArray is kotlin.Array<kotlin.Any?>
-  a = objectArray is kotlin.Array<kotlin.String?>
-  a = objectArray is kotlin.Array<kotlin.Array<kotlin.Any?>?>
-  a = objectArray is kotlin.Array<kotlin.Array<kotlin.String?>?>
-  a = objectDoubleArray is kotlin.Array<kotlin.Any?>
-  a = objectDoubleArray is kotlin.Array<kotlin.Array<kotlin.Any?>?>
-  a = objectDoubleArray is kotlin.Array<kotlin.Array<kotlin.String?>?>
-  a = stringArray is kotlin.Array<kotlin.Any?>
-  a = stringArray is kotlin.Array<kotlin.String?>
+  a = `object` is kotlin.Array<*>
+  a = `object` is kotlin.Array<*>
+  a = `object` is kotlin.Array<*>
+  a = `object` is kotlin.Array<*>
+  a = objectArray is kotlin.Array<*>
+  a = objectArray is kotlin.Array<*>
+  a = objectArray is kotlin.Array<*>
+  a = objectArray is kotlin.Array<*>
+  a = objectDoubleArray is kotlin.Array<*>
+  a = objectDoubleArray is kotlin.Array<*>
+  a = objectDoubleArray is kotlin.Array<*>
+  a = stringArray is kotlin.Array<*>
+  a = stringArray is kotlin.Array<*>
+  a = `object` is kotlin.ByteArray
+  a = `object` is kotlin.ShortArray
+  a = `object` is kotlin.IntArray
+  a = `object` is kotlin.LongArray
+  a = `object` is kotlin.FloatArray
+  a = `object` is kotlin.DoubleArray
+  a = `object` is kotlin.CharArray
+  a = `object` is kotlin.BooleanArray
  }
 }

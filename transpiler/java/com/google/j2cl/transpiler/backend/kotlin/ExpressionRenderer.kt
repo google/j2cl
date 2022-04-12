@@ -49,7 +49,7 @@ import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
@@ -185,7 +185,15 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
 private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOfExpression) {
   renderExpression(instanceOfExpression.expression)
   render(" is ")
-  renderTypeDescriptor(instanceOfExpression.testTypeDescriptor.toNonNullable())
+
+  val testTypeDescriptor = instanceOfExpression.testTypeDescriptor
+  if (testTypeDescriptor is ArrayTypeDescriptor &&
+      !testTypeDescriptor.componentTypeDescriptor!!.isPrimitive
+  ) {
+    render("kotlin.Array<*>")
+  } else {
+    renderTypeDescriptor(instanceOfExpression.testTypeDescriptor.toNonNullable())
+  }
 }
 
 private fun Renderer.renderLiteral(literal: Literal) {
@@ -239,7 +247,7 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
   val methodDescriptor = expression.target
-  if (TypeDescriptors.isJavaLangObject(methodDescriptor.enclosingTypeDescriptor) &&
+  if (isJavaLangObject(methodDescriptor.enclosingTypeDescriptor) &&
       methodDescriptor.signature == "getClass()"
   ) {
     renderInParentheses { renderExpression(expression.qualifier) }

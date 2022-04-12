@@ -76,5 +76,14 @@ public class InstanceofExpressions {
 
     a = stringArray instanceof Object[];
     a = stringArray instanceof String[];
+
+    a = object instanceof byte[];
+    a = object instanceof short[];
+    a = object instanceof int[];
+    a = object instanceof long[];
+    a = object instanceof float[];
+    a = object instanceof double[];
+    a = object instanceof char[];
+    a = object instanceof boolean[];
   }
 }

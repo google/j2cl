@@ -283,6 +283,30 @@
   ;; (a = stringArray instanceof String[]);
   ;;@ instanceofexpression/InstanceofExpressions.java:78:4
   (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfObject (local.get $stringArray)))
+  ;; (a = object instanceof byte[]);
+  ;;@ instanceofexpression/InstanceofExpressions.java:80:4
+  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfByte (local.get $object)))
+  ;; (a = object instanceof short[]);
+  ;;@ instanceofexpression/InstanceofExpressions.java:81:4
+  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfShort (local.get $object)))
+  ;; (a = object instanceof int[]);
+  ;;@ instanceofexpression/InstanceofExpressions.java:82:4
+  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfInt (local.get $object)))
+  ;; (a = object instanceof long[]);
+  ;;@ instanceofexpression/InstanceofExpressions.java:83:4
+  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfLong (local.get $object)))
+  ;; (a = object instanceof float[]);
+  ;;@ instanceofexpression/InstanceofExpressions.java:84:4
+  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfFloat (local.get $object)))
+  ;; (a = object instanceof double[]);
+  ;;@ instanceofexpression/InstanceofExpressions.java:85:4
+  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfDouble (local.get $object)))
+  ;; (a = object instanceof char[]);
+  ;;@ instanceofexpression/InstanceofExpressions.java:86:4
+  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfChar (local.get $object)))
+  ;; (a = object instanceof boolean[]);
+  ;;@ instanceofexpression/InstanceofExpressions.java:87:4
+  (local.set $a (ref.test_static $javaemul.internal.WasmArray.OfBoolean (local.get $object)))
  )
 )
 (elem declare func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions)

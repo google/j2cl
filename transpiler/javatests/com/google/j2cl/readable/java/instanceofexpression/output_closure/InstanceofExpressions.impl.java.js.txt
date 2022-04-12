@@ -17,6 +17,14 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $$byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
+let $$char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
+let $$double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
+let $$float = goog.forwardDeclare('vmbootstrap.primitives.$float$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+let $$short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
 
 class InstanceofExpressions extends j_l_Object {
  /** @protected */
@@ -86,6 +94,14 @@ class InstanceofExpressions extends j_l_Object {
   a = $Arrays.$instanceIsOfType(objectDoubleArray, j_l_String, 2);
   a = !$Equality.$same(stringArray, null);
   a = !$Equality.$same(stringArray, null);
+  a = $Arrays.$instanceIsOfType(object, $$byte, 1);
+  a = $Arrays.$instanceIsOfType(object, $$short, 1);
+  a = $Arrays.$instanceIsOfType(object, $$int, 1);
+  a = $Arrays.$instanceIsOfType(object, $$long, 1);
+  a = $Arrays.$instanceIsOfType(object, $$float, 1);
+  a = $Arrays.$instanceIsOfType(object, $$double, 1);
+  a = $Arrays.$instanceIsOfType(object, $$char, 1);
+  a = $Arrays.$instanceIsOfType(object, $$boolean, 1);
  }
  
  static $clinit() {
@@ -113,6 +129,14 @@ class InstanceofExpressions extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+  $$byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
+  $$char = goog.module.get('vmbootstrap.primitives.$char$impl');
+  $$double = goog.module.get('vmbootstrap.primitives.$double$impl');
+  $$float = goog.module.get('vmbootstrap.primitives.$float$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
+  $$short = goog.module.get('vmbootstrap.primitives.$short$impl');
  }
 }
 $Util.$setClassMetadata(InstanceofExpressions, 'instanceofexpression.InstanceofExpressions');
