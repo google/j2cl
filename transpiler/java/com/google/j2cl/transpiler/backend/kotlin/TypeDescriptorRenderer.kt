@@ -27,7 +27,9 @@ import com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithBound
 
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
-  isArgument: Boolean = false,
+  // TODO(b/68726480): Currently, all TypeVariables are hardcoded as nullable.
+  // Remove this parameter when TypeVariable models nullability correctly.
+  skipTypeVariableNullability: Boolean = false,
   projectBounds: Boolean = false,
   asSimple: Boolean = false,
   asName: Boolean = false
@@ -42,7 +44,8 @@ internal fun Renderer.renderTypeDescriptor(
         projectBounds = projectBounds
       )
     is PrimitiveTypeDescriptor -> renderPrimitiveTypeDescriptor(typeDescriptor)
-    is TypeVariable -> renderTypeVariable(typeDescriptor, isArgument = isArgument)
+    is TypeVariable ->
+      renderTypeVariable(typeDescriptor, skipNullability = skipTypeVariableNullability)
     is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
     else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
   }
@@ -68,7 +71,7 @@ private fun Renderer.renderArrayTypeDescriptor(
     else -> {
       render("kotlin.Array")
       if (!asName) {
-        renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor, isArgument = true) }
+        renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
       }
     }
   }
@@ -124,7 +127,9 @@ internal fun Renderer.renderArguments(
   val arguments = declaredTypeDescriptor.renderedTypeArgumentDescriptors(projectBounds)
   if (arguments.isNotEmpty()) {
     renderInAngleBrackets {
-      renderCommaSeparated(arguments) { renderTypeDescriptor(it, isArgument = true) }
+      renderCommaSeparated(arguments) {
+        renderTypeDescriptor(it, skipTypeVariableNullability = true)
+      }
     }
   } else if (parameters.isNotEmpty()) {
     renderInAngleBrackets { renderCommaSeparated(parameters) { render("*") } }
@@ -150,12 +155,12 @@ private fun Renderer.renderPrimitiveTypeDescriptor(
   )
 }
 
-private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, isArgument: Boolean) {
+private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, skipNullability: Boolean) {
   if (typeVariable.isWildcardOrCapture) {
     render("*")
   } else {
     renderName(typeVariable)
-    if (!isArgument) renderNullableSuffix(typeVariable)
+    if (!skipNullability) renderNullableSuffix(typeVariable)
   }
 }
 
