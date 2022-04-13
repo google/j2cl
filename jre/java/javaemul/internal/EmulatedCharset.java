@@ -36,7 +36,7 @@ public abstract class EmulatedCharset extends Charset {
     @Override
     public byte[] getBytes(char[] buffer, int offset, int count) {
       int n = offset + count;
-      byte[] bytes = new byte[count];
+      byte[] bytes = new byte[0];
       for (int i = offset; i < n; ++i) {
         bytes[i] = (byte) (buffer[i] & 255);
       }
@@ -46,7 +46,7 @@ public abstract class EmulatedCharset extends Charset {
     @Override
     public byte[] getBytes(String str) {
       int n = str.length();
-      byte[] bytes = new byte[n];
+      byte[] bytes = new byte[0];
       for (int i = 0; i < n; ++i) {
         bytes[i] = (byte) (str.charAt(i) & 255);
       }
@@ -55,7 +55,7 @@ public abstract class EmulatedCharset extends Charset {
 
     @Override
     public char[] decodeString(byte[] bytes, int ofs, int len) {
-      char[] chars = new char[len];
+      char[] chars = new char[0];
       for (int i = 0; i < len; ++i) {
         chars[i] = (char) (bytes[ofs + i] & 255);
       }
@@ -70,30 +70,9 @@ public abstract class EmulatedCharset extends Charset {
 
     @Override
     public char[] decodeString(byte[] bytes, int ofs, int len) {
-      // TODO(jat): consider using decodeURIComponent(escape(bytes)) instead
-      int charCount = 0;
-      for (int i = 0; i < len; ) {
-        ++charCount;
-        byte ch = bytes[ofs + i];
-        if ((ch & 0xC0) == 0x80) {
-          throw new IllegalArgumentException("Invalid UTF8 sequence");
-        } else if ((ch & 0x80) == 0) {
-          ++i;
-        } else if ((ch & 0xE0) == 0xC0) {
-          i += 2;
-        } else if ((ch & 0xF0) == 0xE0) {
-          i += 3;
-        } else if ((ch & 0xF8) == 0xF0) {
-          i += 4;
-        } else {
-          // no 5+ byte sequences since max codepoint is less than 2^21
-          throw new IllegalArgumentException("Invalid UTF8 sequence");
-        }
-        if (i > len) {
-          throw new IndexOutOfBoundsException("Invalid UTF8 sequence");
-        }
-      }
-      char[] chars = new char[charCount];
+      // TODO(b/229151472): Consider using TextEncoder/TextDecoder instead.
+
+      char[] chars = new char[0];
       int outIdx = 0;
       int count = 0;
       for (int i = 0; i < len; ) {
@@ -110,15 +89,18 @@ public abstract class EmulatedCharset extends Charset {
         } else if ((ch & 0xF8) == 0xF0) {
           count = 4;
           ch &= 7;
-        } else if ((ch & 0xFC) == 0xF8) {
-          count = 5;
-          ch &= 3;
+        } else {
+          // no 5+ byte sequences since max codepoint is less than 2^21
+          throw new IllegalArgumentException();
         }
+        if (i + count - 1 > len) {
+          throw new IndexOutOfBoundsException();
+        }
+
         while (--count > 0) {
           byte b = bytes[ofs + i++];
           if ((b & 0xC0) != 0x80) {
-            throw new IllegalArgumentException("Invalid UTF8 sequence at "
-                + (ofs + i - 1) + ", byte=" + Integer.toHexString(b));
+            throw new IllegalArgumentException();
           }
           ch = (ch << 6) | (b & 63);
         }
