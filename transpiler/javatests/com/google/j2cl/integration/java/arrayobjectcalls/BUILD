@@ -13,6 +13,4 @@ package(
 integration_test(
     name = "arrayobjectcalls",
     srcs = glob(["*.java"]),
-    # TODO(b/227166206): Problem with getClass() emulation for arrays.
-    enable_kt_native = False,
 )
