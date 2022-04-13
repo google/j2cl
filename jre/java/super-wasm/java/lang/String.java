@@ -886,8 +886,17 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   /** Returns a String using the char values provided as a JavaScript array. */
+  public static String fromJsString(WasmExtern jsString) {
+    char[] array = new char[getLength(jsString)];
+    for (int i = 0; i < array.length; i++) {
+      array[i] = getCharAt(jsString, i);
+    }
+    return String.fromInternalArray(array);
+  }
+
+  /** Returns a String using the char values provided as a JavaScript array. */
   public static String fromJsArray(WasmExtern buffer) {
-    char[] array = new char[getBufferSize(buffer)];
+    char[] array = new char[getLength(buffer)];
     for (int i = 0; i < array.length; i++) {
       array[i] = getBufferAt(buffer, i);
     }
@@ -905,8 +914,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   private static native char getBufferAt(WasmExtern o, int i);
 
   @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native int getBufferSize(WasmExtern o);
+  private static native WasmExtern bufferToString(WasmExtern o);
 
   @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native WasmExtern bufferToString(WasmExtern o);
+  private static native int getLength(WasmExtern o);
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native char getCharAt(WasmExtern o, int i);
 }

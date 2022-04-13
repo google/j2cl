@@ -85,12 +85,13 @@ function createImportObject(userImports) {
     'performance.now': () => performance.now(),
 
     // Utilites to interop strings and arrays. From String.java.
+    'getLength': s => s.length,
+    'getCharAt': (s, i) => s.charAt(i),
     // TODO(b/193532287): These will be removed after Array interop support in
     // WASM is implemented.
     'createBuffer': size => new Array(size),
     'setBufferAt': (buffer, index, value) => buffer[index] = value,
     'getBufferAt': (buffer, index) => buffer[index],
-    'getBufferSize': buffer => buffer.length,
     'bufferToString': buffer => String.fromCharCode.apply(null, buffer),
 
     // The following are declared in the JRE but unimplemented for now.
