@@ -33,10 +33,10 @@ def main(argv):
   repo_util.build_original_and_modified([js_target], [js_target])
 
   print("  Formatting")
-  orig_js_file = "/tmp/orig.%s.js" % test_name
+  orig_js_file = "/tmp/orig.%s.js" % test_name.replace("/", ".")
   shutil.copyfile(repo_util.get_j2size_repo_path() + "/" + js_file_path,
                   orig_js_file)
-  modified_js_file = "/tmp/modified.%s.js" % test_name
+  modified_js_file = "/tmp/modified.%s.js" % test_name.replace("/", ".")
   shutil.copyfile(js_file_path, modified_js_file)
   repo_util.run_cmd(["clang-format", "-i", orig_js_file, modified_js_file])
 
