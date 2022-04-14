@@ -239,16 +239,7 @@ j2cl_library(
 )
 
 j2kt_jvm_library(
-    name = "j2kt_support-j2kt-jvm",
-    srcs = [
-        ":j2kt_support_files-j2kt",
-    ],
-    javacopts = JRE_JAVAC_OPTS,
-    visibility = ALLOWED_J2KT_PACKAGES,
-)
-
-j2kt_native_library(
-    name = "j2kt_support-j2kt-native",
+    name = "jre-j2kt-jvm",
     srcs = [
         ":j2kt_support_files-j2kt",
     ],
@@ -259,13 +250,13 @@ j2kt_native_library(
 j2kt_native_library(
     name = "jre-j2kt-native",
     srcs = [
+        ":j2kt_support_files-j2kt",
         ":jre_java_files-j2kt-native",
         ":jre_native_files-j2kt-native",
     ],
     javacopts = JRE_JAVAC_OPTS,
     visibility = ALLOWED_J2KT_PACKAGES,
     deps = [
-        ":j2kt_support-j2kt-native",
         ":javaemul_internal_annotations-j2kt-native",
         "//third_party:gwt-jsinterop-annotations-j2kt-native",
     ],
