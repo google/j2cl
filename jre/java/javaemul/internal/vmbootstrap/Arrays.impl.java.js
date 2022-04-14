@@ -89,8 +89,7 @@ class Arrays {
     if (length == null) {
       return null;
     }
-    // TODO(b/229137602): Use Array when it stops confusing JsCompiler.
-    const array = new goog.global.Array(length);
+    let array = [];
     if (metadata) {
       array.$$arrayMetadata = metadata;
     }
@@ -106,11 +105,15 @@ class Arrays {
       }
     } else {
       // Contains leaf type values.
-      // We only initialize if initial value is different than JS default value.
       if (leafTypeInitialValue !== undefined) {
+        // Replace with Array.fill() when there is broad browser support.
         for (let index = 0; index < length; index++) {
           array[index] = leafTypeInitialValue;
         }
+      } else {
+        // Object leaf types don't need a defined initial value because the
+        // Javascript array's default of 'undefined' works fine.
+        array.length = length;
       }
     }
 
