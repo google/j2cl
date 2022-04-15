@@ -56,18 +56,16 @@ public abstract class Reader {
     return (read(chr) == -1) ? -1 : chr[0];
   }
 
-  /**
-   * Attempts to fill {@code buf} with characters up to the size of the array.
-   */
-  public int read(char[] buf) {
+  /** Attempts to fill {@code buf} with characters up to the size of the array. */
+  public int read(char[] buf) throws IOException {
     return read(buf, 0, buf.length);
   }
 
   /**
-   * Attempts to fill {@code buf} with up to {@code len} characters. Characters
-   * will be stored in {@code buf} starting at index {@code off}.
+   * Attempts to fill {@code buf} with up to {@code len} characters. Characters will be stored in
+   * {@code buf} starting at index {@code off}.
    */
-  public abstract int read(char[] buf, int off, int len);
+  public abstract int read(char[] buf, int off, int len) throws IOException;
 
   /**
    * Returns whether the stream is ready for reading characters.
