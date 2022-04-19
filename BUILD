@@ -68,7 +68,7 @@ alias(
 
 bool_flag(
     name = "enable_experimental_java11_support",
-    build_setting_default = False,
+    build_setting_default = True,
 )
 
 # TODO(b/135123615): Temporary support for selecting frontend. Once javac becomes the frontend for
