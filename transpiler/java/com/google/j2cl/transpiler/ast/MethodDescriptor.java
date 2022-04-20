@@ -457,9 +457,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return true;
     }
 
-    return getJavaOverriddenMethodDescriptors().stream()
-        .map(MethodDescriptor::getEnclosingTypeDescriptor)
-        .anyMatch(TypeDescriptors::isJavaLangObject);
+    return TypeDescriptors.get().javaLangObject.getDeclaredMethodDescriptors().stream()
+        .anyMatch(this::isOverride);
   }
 
   @Override
