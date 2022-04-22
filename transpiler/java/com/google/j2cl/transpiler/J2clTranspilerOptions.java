@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -78,6 +79,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
     public abstract Builder setWasmRemoveAssertStatement(boolean wasmRemoveAssertStatement);
 
     public abstract Builder setNullMarkedSupported(boolean isNullMarkedSupported);
+
+    public abstract Builder setKotlincOptions(ImmutableList<String> kotlincOptions);
 
     abstract J2clTranspilerOptions autoBuild();
 

@@ -80,6 +80,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       hidden = true)
   Frontend frontEnd = Frontend.JDT;
 
+  @Option(name = "-kotlincOptions", hidden = true)
+  List<String> kotlincOptions = new ArrayList<>();
+
   private J2clCommandLineRunner() {
     super("j2cl");
   }
@@ -116,6 +119,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setOptimizeAutoValue(this.optimizeAutoValue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
+        .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
         .setBackend(Backend.CLOSURE)
         .build();
   }

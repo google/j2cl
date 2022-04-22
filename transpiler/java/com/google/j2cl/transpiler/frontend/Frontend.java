@@ -72,7 +72,8 @@ public enum Frontend {
             Class.forName("com.google.j2cl.transpiler.frontend.kotlin.KotlinParser");
         Constructor<?> parserCtor =
             Iterables.getOnlyElement(Arrays.asList(kotlinParser.getDeclaredConstructors()));
-        Object parserInstance = parserCtor.newInstance(options.getClasspaths(), problems);
+        Object parserInstance =
+            parserCtor.newInstance(options.getClasspaths(), options.getKotlincOptions(), problems);
         @SuppressWarnings("unchecked")
         List<CompilationUnit> compilationUnits =
             (List<CompilationUnit>)

@@ -27,4 +27,6 @@ public interface FrontendOptions {
   boolean getGenerateKytheIndexingMetadata();
 
   boolean isNullMarkedSupported();
+
+  ImmutableList<String> getKotlincOptions();
 }

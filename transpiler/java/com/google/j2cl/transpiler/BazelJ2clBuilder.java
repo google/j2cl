@@ -113,6 +113,9 @@ final class BazelJ2clBuilder extends BazelWorker {
       hidden = true)
   protected Backend backend = Backend.CLOSURE;
 
+  @Option(name = "-kotlincOptions", hidden = true)
+  protected List<String> kotlincOptions = new ArrayList<>();
+
   @Option(name = "-experimentalGenerateWasmExport", hidden = true)
   protected List<String> wasmEntryPoints = new ArrayList<>();
 
@@ -188,6 +191,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
         .setWasmRemoveAssertStatement(wasmRemoveAssertStatement)
         .setNullMarkedSupported(this.enableJSpecifySupport)
+        .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
         .build();
   }
 
