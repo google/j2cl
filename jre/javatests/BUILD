@@ -17,11 +17,7 @@ j2cl_library(
     srcs = glob([
         "**/*.java",
         "**/*.js",
-    ]) + [
-        # Bootstrap files are dropped in compiled mode so we add it as a srcs here.
-        # TODO(b/62039178): Remove this.
-        ":test_defines",
-    ],
+    ]),
     generate_build_test = False,
     javacopts = [
         "-Xep:DoNotCall:OFF",
@@ -89,15 +85,8 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Emul",
-    bootstrap_files = [":test_defines"],
     shard_count = 16,
     test_class = "com.google.j2cl.jre.EmulSuite",
-)
-
-genrule(
-    name = "test_defines",
-    outs = ["test_defines.js"],
-    cmd = "echo \"/** @define {string} */ var someConfigurationProperty='conf';\" > $@",
 )
 
 j2cl_multi_test(

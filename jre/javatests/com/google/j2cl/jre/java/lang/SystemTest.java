@@ -16,7 +16,6 @@
 package com.google.j2cl.jre.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import com.google.j2cl.jre.testing.TestUtils;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -308,20 +307,6 @@ public class SystemTest extends GWTTestCase {
     Object o = new Object();
     assertEquals(System.identityHashCode(o), System.identityHashCode(o));
     assertNotSame(System.identityHashCode(o), System.identityHashCode(new Object()));
-  }
-
-  public void testGetProperty() {
-    if (TestUtils.isJvm()) {
-      return;
-    }
-    assertEquals("conf", System.getProperty("someConfigurationProperty"));
-    assertEquals("conf", System.getProperty("someConfigurationProperty", "default"));
-
-    String someConf = System.getProperty("nonExistent", "default");
-    assertEquals("default", someConf);
-
-    // Note that default is not a String literal.
-    assertEquals("default", System.getProperty("otherNonExistent", someConf));
   }
 
   public void testNanoTime() {
