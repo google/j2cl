@@ -26,6 +26,7 @@ public class AdvancedJUnit3TestCase extends AdvancedJUnit3TestCaseParent {
   public void notTest() {}
 
   // Not considered a test as the method has parameters
+  @SuppressWarnings("JUnit3TestNotRun")
   public void testHasParamsSoNotATest(Object o) {}
 
   @Override

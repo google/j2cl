@@ -22,6 +22,7 @@ import junit.framework.TestCase;
  */
 
 public class JUnit3TestCaseWithArgumentsOnTestMethod extends TestCase {
+  @SuppressWarnings("JUnit3TestNotRun")
   public void testIllegal(@SuppressWarnings("unused") Object o) {}
 
   public void test1() {}
