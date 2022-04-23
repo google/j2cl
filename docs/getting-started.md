@@ -7,9 +7,9 @@
 
 J2CL enables seamless use of Java in your JavaScript applications. One of the
 things that makes J2CL unique is: it gives you the complete freedom of choice!
-You can use J2CL to just make some Java code accessible from JavaScript
-or go all the way to create a whole application with it; whatever best suits
-your needs.
+You can use J2CL to just make some Java code accessible from JavaScript or go
+all the way to create a whole application with it; whatever best suits your
+needs.
 
 To understand what this means please take a look at the simple hello world
 sample that demonstrates how extensively Java and JavaScript could work together
