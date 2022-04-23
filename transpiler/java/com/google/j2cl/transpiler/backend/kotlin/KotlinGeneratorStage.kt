@@ -48,7 +48,8 @@ private fun String.trimTrailingWhitespaces() = lines().joinToString("\n") { it.t
 private val Library.nameToIdentifierMap
   get() =
     buildMap<HasName, String> {
-      compilationUnits.stream().flatMap { it.streamTypes() }.forEach { type ->
-        putAll(computeUniqueNames(emptySet(), type))
-      }
+      compilationUnits
+        .stream()
+        .flatMap { it.streamTypes() }
+        .forEach { type -> putAll(computeUniqueNames(emptySet(), type)) }
     }

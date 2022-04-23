@@ -58,15 +58,14 @@ fun Renderer.renderType(type: Type) {
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
   renderIdentifier(declaration.simpleSourceName)
-  declaration.renderedTypeParameterDescriptors.takeIf { it.isNotEmpty() }?.let { parameters ->
-    renderTypeParameters(parameters)
-  }
+  declaration.renderedTypeParameterDescriptors
+    .takeIf { it.isNotEmpty() }
+    ?.let { parameters -> renderTypeParameters(parameters) }
 }
 
 private fun Renderer.renderSuperTypes(type: Type) {
   val superTypes =
-    type
-      .superTypesStream
+    type.superTypesStream
       .filter { !isJavaLangObject(it) }
       .filter { !isJavaLangEnum(it) }
       .collect(Collectors.toList())
@@ -154,8 +153,7 @@ internal val TypeDeclaration.renderedTypeParameterCount: Int
     val enclosingMethodTypeParameterCount =
       enclosingMethodDescriptor?.typeParameterTypeDescriptors?.size ?: 0
 
-    return typeParameterDescriptors
-      .size
+    return typeParameterDescriptors.size
       .minus(enclosingInstanceTypeParameterCount)
       .minus(enclosingMethodTypeParameterCount)
   }

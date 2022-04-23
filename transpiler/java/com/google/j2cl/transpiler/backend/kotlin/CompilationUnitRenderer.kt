@@ -24,12 +24,14 @@ internal fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
 }
 
 private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {
-  compilationUnit.packageName.takeIf { it.isNotEmpty() }?.let { packageName ->
-    render("package ")
-    renderPackageName(packageName)
-    renderNewLine()
-    renderNewLine()
-  }
+  compilationUnit.packageName
+    .takeIf { it.isNotEmpty() }
+    ?.let { packageName ->
+      render("package ")
+      renderPackageName(packageName)
+      renderNewLine()
+      renderNewLine()
+    }
 }
 
 private fun Renderer.renderTypes(compilationUnit: CompilationUnit) {
