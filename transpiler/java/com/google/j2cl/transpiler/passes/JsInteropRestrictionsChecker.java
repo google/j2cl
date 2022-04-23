@@ -1492,7 +1492,8 @@ public class JsInteropRestrictionsChecker {
           .getIntersectionTypeDescriptors()
           .forEach(t -> addReferencedTypes(t, referencedTypes));
     } else if (typeDescriptor.isTypeVariable()) {
-      addReferencedTypes(((TypeVariable) typeDescriptor).getBoundTypeDescriptor(), referencedTypes);
+      addReferencedTypes(
+          ((TypeVariable) typeDescriptor).getUpperBoundTypeDescriptor(), referencedTypes);
     } else {
       checkState(typeDescriptor.isPrimitive());
     }

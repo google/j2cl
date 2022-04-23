@@ -119,7 +119,7 @@ public class TypeDescriptors {
   }
 
   public static TypeVariable getUnknownType() {
-    return TypeVariable.createWildcardWithBound(get().javaLangObject);
+    return TypeVariable.createWildcard();
   }
 
   static DeclaredTypeDescriptor getBoxTypeFromPrimitiveType(PrimitiveTypeDescriptor primitiveType) {

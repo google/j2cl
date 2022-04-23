@@ -5,9 +5,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('genericmethod.GenericMethod.$1$impl');
 let $1LocalClass = goog.forwardDeclare('genericmethod.GenericMethod.$1LocalClass$impl');
+let Consumer = goog.forwardDeclare('genericmethod.GenericMethod.Consumer$impl');
 let Container = goog.forwardDeclare('genericmethod.GenericMethod.Container$impl');
 let Content = goog.forwardDeclare('genericmethod.GenericMethod.Content$impl');
 let SuperContainer = goog.forwardDeclare('genericmethod.GenericMethod.SuperContainer$impl');
+let Supplier = goog.forwardDeclare('genericmethod.GenericMethod.Supplier$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
@@ -112,6 +114,16 @@ class GenericMethod extends j_l_Object {
   let deepContent = /**@type {SuperContainer<Container<C>>}*/ ($Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer)).m_get___$pp_genericmethod().m_get___$pp_genericmethod();
   GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp___$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(deepContent);
+ }
+ /** @template V */
+ static m_testLowerWildcardBound__genericmethod_GenericMethod_Consumer__java_lang_Object(/** Consumer<?> */ consumer, /** V */ v) {
+  GenericMethod.$clinit();
+  consumer.m_accept__java_lang_Object(v);
+ }
+ /** @template V @return {V} */
+ static m_testUpperWildcardBound__genericmethod_GenericMethod_Supplier(/** Supplier<?> */ supplier) {
+  GenericMethod.$clinit();
+  return supplier.m_get__();
  }
  
  static $clinit() {

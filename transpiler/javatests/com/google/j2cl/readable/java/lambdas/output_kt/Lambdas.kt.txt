@@ -89,7 +89,7 @@ open class Lambdas {
   this.callWithBiFunction(lambdas.Lambdas.BiFunction<kotlin.Any?, kotlin.String?, kotlin.Double?> (fun(x: kotlin.Any?, y: kotlin.String?): kotlin.Double? {
    throw kotlin.RuntimeException()
   }))
-  val f: lambdas.Lambdas.Function<*, *>? = lambdas.Lambdas.Function<*, *> (fun(item: T?): * {
+  val f: lambdas.Lambdas.Function<in T?, *>? = lambdas.Lambdas.Function<in T?, *> (fun(item: T?): * {
    return kotlin.Long.valueOf(1L)
   })
  }
@@ -204,7 +204,7 @@ open class Lambdas {
  fun interface BiFunction<T, U, R> {
   fun apply(t: T?, u: U?): R?
 
-  fun <V> andThen(after: lambdas.Lambdas.Function<*, *>?): lambdas.Lambdas.BiFunction<T, U, V>? {
+  fun <V> andThen(after: lambdas.Lambdas.Function<in R?, out V?>?): lambdas.Lambdas.BiFunction<T, U, V>? {
    return lambdas.Lambdas.BiFunction<T, U, V> (fun(t: T?, u: U?): V? {
     return after!!.apply(this.apply(t, u))
    })

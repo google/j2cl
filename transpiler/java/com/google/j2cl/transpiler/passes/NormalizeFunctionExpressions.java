@@ -74,7 +74,7 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
         // care of having the right parameter type without the problem of introducing type
         // variables that are not in the current context. (this is a hack).
         TypeVariable targetType =
-            TypeVariable.createWildcardWithBound(declaredParameterTypeDescriptor);
+            TypeVariable.createWildcardWithUpperBound(declaredParameterTypeDescriptor);
 
         Variable newParameter =
             Variable.Builder.from(parameter).setTypeDescriptor(targetType).build();

@@ -21,7 +21,7 @@ import kotlin.reflect.KClass
  * Implementation of java.lang.Class used in Kotlin Native. The constructor and the `kClass`
  * property are not accessible in Java.
  */
-class Class<T : Any>(val kClass: KClass<T>) {
+class Class<T>(val kClass: KClass<*>) {
   fun getName() = kClass.qualifiedName
   fun getCanonicalName() = kClass.qualifiedName
   fun getSimpleName() = kClass.simpleName

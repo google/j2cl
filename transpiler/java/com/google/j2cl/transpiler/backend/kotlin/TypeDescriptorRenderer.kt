@@ -22,8 +22,9 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
-import com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithBound
+import com.google.j2cl.transpiler.ast.TypeVariable.createWildcard
 
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
@@ -157,7 +158,20 @@ private fun Renderer.renderPrimitiveTypeDescriptor(
 
 private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, skipNullability: Boolean) {
   if (typeVariable.isWildcardOrCapture) {
-    render("*")
+    val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
+    if (lowerBoundTypeDescriptor != null) {
+      render("in ")
+      renderTypeDescriptor(lowerBoundTypeDescriptor)
+    } else {
+      val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
+      if (isJavaLangObject(boundTypeDescriptor)) {
+        // TODO(b/202428351): Render upper type bounds if necessary.
+        render("*")
+      } else {
+        render("out ")
+        renderTypeDescriptor(boundTypeDescriptor)
+      }
+    }
   } else {
     renderName(typeVariable)
     if (!skipNullability) renderNullableSuffix(typeVariable)
@@ -205,8 +219,8 @@ private fun DeclaredTypeDescriptor.renderedTypeArgumentDescriptors(
   val projectedTypeDescriptor =
     typeDescriptor.specializeTypeVariables { variable ->
       if (variablesProjectedToBounds.contains(variable))
-        variable.boundTypeDescriptor.toRawTypeDescriptor()
-      else createWildcardWithBound(variable.boundTypeDescriptor)
+        variable.upperBoundTypeDescriptor.toRawTypeDescriptor()
+      else createWildcard()
     }
 
   return projectedTypeDescriptor.typeArgumentDescriptors

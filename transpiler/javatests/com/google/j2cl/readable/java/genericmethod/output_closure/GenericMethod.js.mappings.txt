@@ -95,6 +95,19 @@
 [deepContent] => [deepContent] "deepContent"
 [acceptsString(deepContent.getProp());] => [GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp___$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [acceptsContent(deepContent);] => [GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(deepContent);] "genericmethod.GenericMethod.testErasureCast_typeVariable"
+[testLowerWildcardBound] => [m_testLowerWildcardBound__genericmethod_GenericMethod_Consumer__java_lang_Object]
+[consumer] => [consumer] "consumer"
+[v] => [v] "v"
+[{
+    consumer.accept(v);
+  }] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testLowerWildcardBound"
+[consumer.accept(v);] => [consumer.m_accept__java_lang_Object(v);] "genericmethod.GenericMethod.testLowerWildcardBound"
+[testUpperWildcardBound] => [m_testUpperWildcardBound__genericmethod_GenericMethod_Supplier]
+[supplier] => [supplier] "supplier"
+[{
+    return supplier.get();
+  }] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testUpperWildcardBound"
+[return supplier.get();] => [return supplier.m_get__();] "genericmethod.GenericMethod.testUpperWildcardBound"
 [GenericMethod] => [$clinit]
 [GenericMethod] => [GenericMethod.$clinit = () =>{};] "genericmethod.GenericMethod.<clinit>"
 [GenericMethod] => [GenericMethod.$loadModules();] "genericmethod.GenericMethod.<clinit>"

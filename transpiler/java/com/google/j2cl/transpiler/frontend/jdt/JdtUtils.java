@@ -310,22 +310,33 @@ class JdtUtils {
   }
 
   private static TypeDescriptor createTypeVariable(ITypeBinding typeBinding) {
-    Supplier<TypeDescriptor> boundTypeDescriptorFactory = () -> getTypeBound(typeBinding);
+    Supplier<TypeDescriptor> upperBoundTypeDescriptorFactory =
+        () -> getUpperBoundTypeDescriptor(typeBinding);
 
     return TypeVariable.newBuilder()
-        .setBoundTypeDescriptorSupplier(boundTypeDescriptorFactory)
+        .setUpperBoundTypeDescriptorSupplier(upperBoundTypeDescriptorFactory)
+        .setLowerBoundTypeDescriptor(getLowerBoundTypeDescriptor(typeBinding))
         .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
         .setUniqueKey(typeBinding.getKey())
         .setName(typeBinding.getName())
         .build();
   }
 
-  private static TypeDescriptor getTypeBound(ITypeBinding typeBinding) {
+  private static TypeDescriptor getLowerBoundTypeDescriptor(ITypeBinding typeBinding) {
+    // TODO(b/190520117): Handle nullability annotations in bounds.
+    ITypeBinding bound = typeBinding.getBound();
+    return bound != null && !typeBinding.isUpperbound() ? createTypeDescriptor(bound) : null;
+  }
+
+  private static TypeDescriptor getUpperBoundTypeDescriptor(ITypeBinding typeBinding) {
+    // TODO(b/190520117): Handle nullability annotations in bounds.
     ITypeBinding[] bounds = typeBinding.getTypeBounds();
     if (bounds == null || bounds.length == 0) {
-      return TypeDescriptors.get().javaLangObject;
+      ITypeBinding bound = typeBinding.getBound();
+      return bound != null && typeBinding.isUpperbound()
+          ? createTypeDescriptor(bound)
+          : TypeDescriptors.get().javaLangObject;
     }
-    // TODO(b/190520117): Handle nullability annotations in bounds.
     if (bounds.length == 1) {
       return createTypeDescriptor(bounds[0]);
     }

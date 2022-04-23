@@ -29,7 +29,6 @@ import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -151,6 +150,6 @@ public class NormalizeJsDocCastExpressions extends NormalizationPass {
     return typeVariable.isWildcardOrCapture()
             || typeVariablesByMember.containsEntry(member, typeVariable)
         ? typeVariable
-        : TypeVariable.createWildcardWithBound(TypeDescriptors.get().javaLangObject);
+        : TypeVariable.createWildcard();
   }
 }

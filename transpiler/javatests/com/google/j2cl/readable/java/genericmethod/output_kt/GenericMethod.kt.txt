@@ -61,15 +61,15 @@ open class GenericMethod<T> {
 
   @kotlin.jvm.JvmStatic
   fun testErasureCast_wildcard() {
-   val list: java.util.List<genericmethod.GenericMethod.Container<*>?>? = null
+   val list: java.util.List<genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>? = null
    val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
-   val nestedWildcardList: java.util.List<genericmethod.GenericMethod.SuperContainer<*>?>? = null
+   val nestedWildcardList: java.util.List<genericmethod.GenericMethod.SuperContainer<out genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>?>? = null
    val nestedContent: genericmethod.GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
-   val deepWildcardList: java.util.List<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<*>?>?>? = null
+   val deepWildcardList: java.util.List<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>?>? = null
    val deepContent: genericmethod.GenericMethod.Content? = deepWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
@@ -90,9 +90,19 @@ open class GenericMethod<T> {
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }
+
+  @kotlin.jvm.JvmStatic
+  fun <V> testLowerWildcardBound(consumer: genericmethod.GenericMethod.Consumer<in V?>?, v: V?) {
+   consumer!!.accept(v)
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <V> testUpperWildcardBound(supplier: genericmethod.GenericMethod.Supplier<out V?>?): V? {
+   return supplier!!.get()
+  }
  }
 
- open class SuperContainer<C: genericmethod.GenericMethod.Container<*>?> {
+ open class SuperContainer<C: genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?> {
   open fun get(): C? {
    return null
   }
@@ -108,5 +118,13 @@ open class GenericMethod<T> {
   open fun getProp(): kotlin.String? {
    return null
   }
+ }
+
+ fun interface Consumer<V> {
+  fun accept(v: V?)
+ }
+
+ fun interface Supplier<V> {
+  fun get(): V?
  }
 }

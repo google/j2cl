@@ -126,4 +126,20 @@ public class GenericMethod<T> {
     acceptsString(deepContent.getProp());
     acceptsContent(deepContent);
   }
+
+  interface Consumer<V> {
+    void accept(V v);
+  }
+
+  interface Supplier<V> {
+    V get();
+  }
+
+  static <V> void testLowerWildcardBound(Consumer<? super V> consumer, V v) {
+    consumer.accept(v);
+  }
+
+  static <V> V testUpperWildcardBound(Supplier<? extends V> supplier) {
+    return supplier.get();
+  }
 }

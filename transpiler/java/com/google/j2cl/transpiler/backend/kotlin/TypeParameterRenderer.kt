@@ -33,9 +33,9 @@ internal fun Renderer.renderWhereClause(typeVariables: List<TypeVariable>) {
   }
 }
 
-private val TypeVariable.boundTypeDescriptors: List<TypeDescriptor>
+private val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
   get() =
-    boundTypeDescriptor.run {
+    upperBoundTypeDescriptor.run {
       if (this is IntersectionTypeDescriptor) {
         intersectionTypeDescriptors
       } else {
@@ -45,7 +45,7 @@ private val TypeVariable.boundTypeDescriptors: List<TypeDescriptor>
 
 private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
   renderName(typeVariable)
-  typeVariable.boundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
+  typeVariable.upperBoundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
     render(": ")
     renderTypeDescriptor(boundTypeDescriptor, skipTypeVariableNullability = true)
   }
@@ -54,7 +54,8 @@ private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
 private data class WhereClauseItem(val hasName: HasName, val boundTypeDescriptor: TypeDescriptor)
 
 private val TypeVariable.whereClauseItems: List<WhereClauseItem>
-  get() = boundTypeDescriptors.takeIf { it.size > 1 }?.map { WhereClauseItem(this, it) } ?: listOf()
+  get() =
+    upperBoundTypeDescriptors.takeIf { it.size > 1 }?.map { WhereClauseItem(this, it) } ?: listOf()
 
 private fun Renderer.render(whereClauseItem: WhereClauseItem) {
   renderName(whereClauseItem.hasName)

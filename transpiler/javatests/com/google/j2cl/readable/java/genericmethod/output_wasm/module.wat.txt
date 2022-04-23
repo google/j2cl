@@ -13,6 +13,12 @@
 ;;; Code for genericmethod.GenericMethod.Content [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_Content (mut i32) (i32.const 0))
 
+;;; Code for genericmethod.GenericMethod.Consumer [static fields]
+(global $f_$initialized__genericmethod_GenericMethod_Consumer (mut i32) (i32.const 0))
+
+;;; Code for genericmethod.GenericMethod.Supplier [static fields]
+(global $f_$initialized__genericmethod_GenericMethod_Supplier (mut i32) (i32.const 0))
+
 ;;; Code for genericmethod.GenericMethod.1LocalClass [static fields]
 (global $f_$initialized__genericmethod_GenericMethod_1LocalClass (mut i32) (i32.const 0))
 
@@ -521,6 +527,36 @@
  )
 )
 
+;;; void GenericMethod.testLowerWildcardBound(Consumer<? super V> consumer, V v)
+(func $m_testLowerWildcardBound__genericmethod_GenericMethod_Consumer__java_lang_Object__void@genericmethod.GenericMethod
+ (param $consumer (ref null $java.lang.Object))
+ (param $v (ref null $java.lang.Object))
+ ;;@ genericmethod/GenericMethod.java:138:18
+ (block
+  ;; genericmethod.GenericMethod.$clinit();
+  ;;@ genericmethod/GenericMethod.java:138:76
+  (call $$clinit__void@genericmethod.GenericMethod )
+  ;; consumer.accept(v);
+  ;;@ genericmethod/GenericMethod.java:139:4
+  (call_ref (local.get $consumer)(local.get $v)(struct.get $genericmethod.GenericMethod.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast_static $genericmethod.GenericMethod.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $consumer)) (i32.const -1))) ))
+ )
+)
+
+;;; V GenericMethod.testUpperWildcardBound(Supplier<? extends V> supplier)
+(func $m_testUpperWildcardBound__genericmethod_GenericMethod_Supplier__java_lang_Object@genericmethod.GenericMethod
+ (param $supplier (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ genericmethod/GenericMethod.java:142:15
+ (block
+  ;; genericmethod.GenericMethod.$clinit();
+  ;;@ genericmethod/GenericMethod.java:142:70
+  (call $$clinit__void@genericmethod.GenericMethod )
+  ;; return supplier.get();
+  ;;@ genericmethod/GenericMethod.java:143:4
+  (return (call_ref (local.get $supplier)(struct.get $genericmethod.GenericMethod.Supplier.vtable $m_get__java_lang_Object (ref.cast_static $genericmethod.GenericMethod.Supplier.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $supplier)) (i32.const -1))) )))
+ )
+)
+
 ;;; void GenericMethod.$clinit()
 (func $$clinit__void@genericmethod.GenericMethod
  ;;@ genericmethod/GenericMethod.java:21:13
@@ -982,6 +1018,78 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Content)
+
+;;; Code for genericmethod.GenericMethod.Consumer [INTERFACE]
+(type $genericmethod.GenericMethod.Consumer.vtable (struct_subtype 
+ (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
+  data)
+)
+
+;;; void Consumer.$clinit()
+(func $$clinit__void@genericmethod.GenericMethod.Consumer
+ ;;@ genericmethod/GenericMethod.java:130:12
+ (block
+  ;; if (genericmethod.GenericMethod.Consumer.$initialized) return;
+  ;;@ genericmethod/GenericMethod.java:130:12
+  (if (global.get $f_$initialized__genericmethod_GenericMethod_Consumer)
+   (then
+    ;; return;
+    ;;@ genericmethod/GenericMethod.java:130:12
+    (return )
+   )
+  )
+  ;; (genericmethod.GenericMethod.Consumer.$initialized = true);
+  ;;@ genericmethod/GenericMethod.java:130:12
+  (global.set $f_$initialized__genericmethod_GenericMethod_Consumer (i32.const 1))
+ )
+)
+
+;;; Class<?> Consumer.getClass()
+(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Consumer
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Consumer();
+  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.Consumer__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.Consumer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Consumer)
+
+;;; Code for genericmethod.GenericMethod.Supplier [INTERFACE]
+(type $genericmethod.GenericMethod.Supplier.vtable (struct_subtype 
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+  data)
+)
+
+;;; void Supplier.$clinit()
+(func $$clinit__void@genericmethod.GenericMethod.Supplier
+ ;;@ genericmethod/GenericMethod.java:134:12
+ (block
+  ;; if (genericmethod.GenericMethod.Supplier.$initialized) return;
+  ;;@ genericmethod/GenericMethod.java:134:12
+  (if (global.get $f_$initialized__genericmethod_GenericMethod_Supplier)
+   (then
+    ;; return;
+    ;;@ genericmethod/GenericMethod.java:134:12
+    (return )
+   )
+  )
+  ;; (genericmethod.GenericMethod.Supplier.$initialized = true);
+  ;;@ genericmethod/GenericMethod.java:134:12
+  (global.set $f_$initialized__genericmethod_GenericMethod_Supplier (i32.const 1))
+ )
+)
+
+;;; Class<?> Supplier.getClass()
+(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Supplier
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Supplier();
+  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.Supplier__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.Supplier__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Supplier)
 
 ;;; Code for genericmethod.GenericMethod.1LocalClass [CLASS]
 (type $genericmethod.GenericMethod.1LocalClass (struct_subtype 

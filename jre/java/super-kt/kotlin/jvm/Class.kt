@@ -22,4 +22,4 @@ private val classMap: MutableMap<KClass<*>, Class<*>> = mutableMapOf()
 
 // TODO(b/227166206): Add synchronization to make it thread-safe.
 val <T : Any> KClass<T>.java: Class<T>
-  get() = classMap.getOrPut(this) { Class(this) } as Class<T>
+  get() = classMap.getOrPut(this) { Class<T>(this) } as Class<T>

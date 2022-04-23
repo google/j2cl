@@ -1,0 +1,42 @@
+goog.module('genericmethod.GenericMethod.Consumer$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('genericmethod.GenericMethod.Consumer.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template V
+ */
+class Consumer {
+ /** @abstract */
+ m_accept__java_lang_Object(/** V */ v) {}
+ /** @template V @return {Consumer<V>} */
+ static $adapt(/** ?function(V):void */ fn) {
+  Consumer.$clinit();
+  return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
+ }
+ 
+ static $clinit() {
+  Consumer.$clinit = () =>{};
+  Consumer.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__genericmethod_GenericMethod_Consumer = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__genericmethod_GenericMethod_Consumer;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('genericmethod.GenericMethod.Consumer.$LambdaAdaptor$impl');
+ }
+}
+Consumer.$markImplementor(/**@type {Function}*/ (Consumer));
+$Util.$setClassMetadataForInterface(Consumer, 'genericmethod.GenericMethod$Consumer');
+
+exports = Consumer;
+
+//# sourceMappingURL=GenericMethod$Consumer.js.map

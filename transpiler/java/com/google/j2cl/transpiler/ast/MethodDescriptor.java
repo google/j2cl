@@ -394,7 +394,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             specializeTypeVariables(
                 p ->
                     typeParameters.contains(p)
-                        ? TypeVariable.createWildcardWithBound(p.getBoundTypeDescriptor())
+                        ? TypeVariable.createWildcardWithUpperBound(p.getUpperBoundTypeDescriptor())
                         : p))
         .setDeclarationDescriptor(
             isDeclaration() ? null : getDeclarationDescriptor().withoutTypeParameters())

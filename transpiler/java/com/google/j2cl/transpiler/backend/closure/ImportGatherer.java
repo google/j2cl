@@ -319,12 +319,12 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   /**
-   * Type bounds may be implicitly referred from other compilation units that are compiled
+   * Type upper bounds may be implicitly referred from other compilation units that are compiled
    * separately due to synthesized erasure casts. In order for these classes to be preserved and not
    * pruned by AJD, we should create a dependency to the bound.
    */
   private void collectTypeDescriptorsIntroducedByTypeBounds(TypeVariable typeVariable) {
-    TypeDescriptor boundTypeDescriptor = typeVariable.getBoundTypeDescriptor();
+    TypeDescriptor boundTypeDescriptor = typeVariable.getUpperBoundTypeDescriptor();
 
     if (TypeDescriptors.isJavaLangObject(boundTypeDescriptor)) {
       // Effectively unbounded and will not result in erasure casts.

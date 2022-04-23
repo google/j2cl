@@ -1,0 +1,42 @@
+goog.module('genericmethod.GenericMethod.Supplier$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('genericmethod.GenericMethod.Supplier.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template V
+ */
+class Supplier {
+ /** @abstract @return {V} */
+ m_get__() {}
+ /** @template V @return {Supplier<V>} */
+ static $adapt(/** ?function():V */ fn) {
+  Supplier.$clinit();
+  return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
+ }
+ 
+ static $clinit() {
+  Supplier.$clinit = () =>{};
+  Supplier.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__genericmethod_GenericMethod_Supplier = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__genericmethod_GenericMethod_Supplier;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('genericmethod.GenericMethod.Supplier.$LambdaAdaptor$impl');
+ }
+}
+Supplier.$markImplementor(/**@type {Function}*/ (Supplier));
+$Util.$setClassMetadataForInterface(Supplier, 'genericmethod.GenericMethod$Supplier');
+
+exports = Supplier;
+
+//# sourceMappingURL=GenericMethod$Supplier.js.map

@@ -381,7 +381,7 @@ class JavaEnvironment {
 
     List<String> classComponents = getClassComponents(typeVariable);
     return TypeVariable.newBuilder()
-        .setBoundTypeDescriptorSupplier(boundTypeDescriptorFactory)
+        .setUpperBoundTypeDescriptorSupplier(boundTypeDescriptorFactory)
         .setWildcardOrCapture(false)
         .setUniqueKey(
             classComponents.stream().collect(Collectors.joining("::"))
@@ -394,7 +394,7 @@ class JavaEnvironment {
 
   private TypeVariable createWildcardTypeVariable(TypeMirror bound) {
     return TypeVariable.newBuilder()
-        .setBoundTypeDescriptorSupplier(() -> createTypeDescriptor(bound))
+        .setUpperBoundTypeDescriptorSupplier(() -> createTypeDescriptor(bound))
         .setWildcardOrCapture(true)
         .setName("?")
         .setUniqueKey("::?::" + (bound != null ? bound.toString() : ""))
@@ -777,8 +777,9 @@ class JavaEnvironment {
             typeDescriptor, rest.subList(innerCount - 1, rest.size()), isNullable);
       case WILDCARD:
         TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-        return TypeVariable.createWildcardWithBound(
-            applyNullabilityAnnotation(typeVariable.getBoundTypeDescriptor(), rest, isNullable));
+        return TypeVariable.createWildcardWithUpperBound(
+            applyNullabilityAnnotation(
+                typeVariable.getUpperBoundTypeDescriptor(), rest, isNullable));
     }
     return typeDescriptor;
   }
