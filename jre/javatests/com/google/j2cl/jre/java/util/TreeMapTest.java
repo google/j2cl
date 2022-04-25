@@ -2564,8 +2564,8 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
       Map<K, V> destMap = createMap();
       destMap.put(keys[0], values[0]);
       try {
-        // This throws in dev mode because we're putting a second
-        // entry in the map and the TreeMap calls the compare method.
+        // This throws because we're putting a second entry in the map and the TreeMap calls the
+        // compare method.
         destMap.putAll(sourceMap);
         fail("ClassCastException expected");
       } catch (ClassCastException expected) {

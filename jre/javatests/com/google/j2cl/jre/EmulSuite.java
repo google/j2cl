@@ -28,7 +28,6 @@ import com.google.j2cl.jre.java.io.WriterTest;
 import com.google.j2cl.jre.java.lang.BooleanTest;
 import com.google.j2cl.jre.java.lang.ByteTest;
 import com.google.j2cl.jre.java.lang.CharacterTest;
-import com.google.j2cl.jre.java.lang.CompilerConstantStringTest;
 import com.google.j2cl.jre.java.lang.DoubleEqualsSemanticsTest;
 import com.google.j2cl.jre.java.lang.DoubleTest;
 import com.google.j2cl.jre.java.lang.FloatEqualsSemanticsTest;
@@ -84,7 +83,6 @@ import org.junit.runners.Suite.SuiteClasses;
   BooleanTest.class,
   ByteTest.class,
   CharacterTest.class,
-  CompilerConstantStringTest.class,
   DoubleTest.class,
   DoubleEqualsSemanticsTest.class,
   FloatTest.class,

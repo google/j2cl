@@ -22,13 +22,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Locale;
 
-/**
- * TODO: COMPILER OPTIMIZATIONS HAVE MADE THIS TEST NOT ACTUALLY TEST ANYTHING!
- * NEED A VERSION THAT DOESN'T USE STATICALLY DETERMINABLE STRINGS!
- *
- * See individual method TODOs for ones that still need work -- the ones without
- * comments are already protected against optimization.
- */
+/** Tests java.lang.String. */
 public class StringTest extends GWTTestCase {
 
   @Override
@@ -211,17 +205,17 @@ public class StringTest extends GWTTestCase {
     assertEquals("bcd", str);
     try {
       new String(bytes, 1, 6);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
@@ -241,32 +235,32 @@ public class StringTest extends GWTTestCase {
     assertEquals("ßçÐ", str);
     try {
       new String(bytes, 1, 6, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 1, 6, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
@@ -287,32 +281,32 @@ public class StringTest extends GWTTestCase {
     assertEquals("ßçÐ", str);
     try {
       new String(bytes, 2, 12, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 12, 2, encoding);
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 2, 12, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 12, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in Development Mode", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
@@ -490,16 +484,9 @@ public class StringTest extends GWTTestCase {
       assertEquals("Unexpected hash for string " + testString, expectedHash,
           testString.hashCode());
 
-      /*
-       * Verify that the resulting hash code is numeric, since this is not
-       * enforced in Production Mode.
-       */
-      String str = Integer.toString(expectedHash);
-      for (int j = 0; j < str.length(); ++j) {
-        char ch = str.charAt(j);
-        assertTrue("Bad character '" + ch + "' (U+0" + Integer.toHexString(ch)
-            + ")", ch == '-' || ch == ' ' || Character.isDigit(ch));
-      }
+      // Verify that the resulting hash code is numeric (might not be if it is collided with a
+      // property).
+      assertEquals(expectedHash, Integer.parseInt(Integer.toString(expectedHash)));
 
       // get hashes again to verify the values are constant for a given string
       assertEquals(expectedHash, testStrings[i].hashCode());

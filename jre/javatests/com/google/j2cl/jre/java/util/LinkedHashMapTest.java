@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import com.google.j2cl.jre.testing.TestUtils;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -496,7 +495,7 @@ public class LinkedHashMapTest extends TestMap {
     srcMap.put(INTEGER_2, INTEGER_22);
     srcMap.put(INTEGER_3, INTEGER_33);
 
-    LinkedHashMap<Integer, Integer> hashMap = cloneLinkedHashMap(srcMap);
+    LinkedHashMap<Integer, Integer> hashMap = new LinkedHashMap<Integer, Integer>(srcMap);
     assertFalse(hashMap.isEmpty());
     assertTrue(hashMap.size() == SIZE_THREE);
 
@@ -687,7 +686,7 @@ public class LinkedHashMapTest extends TestMap {
     hashMap.put(KEY_1, VALUE_1);
     hashMap.put(KEY_2, VALUE_2);
     hashMap.put(KEY_3, VALUE_3);
-    LinkedHashMap<String, String> srcMap = cloneLinkedHashMap(hashMap);
+    LinkedHashMap<String, String> srcMap = new LinkedHashMap<String, String>(hashMap);
     hashMap.putAll(srcMap);
     assertEquals(SIZE_THREE, hashMap.size());
 
@@ -726,24 +725,6 @@ public class LinkedHashMapTest extends TestMap {
   @Override
   protected Map<?, ?> makeEmptyMap() {
     return new LinkedHashMap<Object, Object>();
-  }
-
-  /**
-   * This method exists because java 1.5 no longer has LinkedHashMap(LinkedHashMap), replacing it
-   * with LinkedHashMap(Map<? extends K, ? extends V> m). Nevertheless, we want to use it in
-   * Production Mode to test that Production Mode function.
-   *
-   * @param hashMap the LinkedHashMap to be copied
-   * @return the copy
-   */
-  private <K, V> LinkedHashMap<K, V> cloneLinkedHashMap(LinkedHashMap<K, V> hashMap) {
-    if (!TestUtils.isJvm()) {
-      return new LinkedHashMap<K, V>(hashMap);
-    } else {
-      LinkedHashMap<K, V> m = new LinkedHashMap<K, V>();
-      m.putAll(hashMap);
-      return m;
-    }
   }
 
   private Iterator<Map.Entry<Number, Object>> iterateThrough(

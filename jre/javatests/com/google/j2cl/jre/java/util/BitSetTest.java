@@ -807,7 +807,7 @@ public class BitSetTest extends EmulTestBase {
 
   public void testHashCode() {
     // Note: Oracle's hashCode() implementation creates many collisions when
-    // testSize is big, causing this test to fail in development mode.
+    // testSize is big, causing this test to fail in JVM.
     // Since this is an "unimportant test" as suggested by the original author,
     // we can just test with a small number.
     int testSize = 25;

@@ -487,8 +487,7 @@ public class IdentityHashMapTest extends TestMap {
     hashMap1.put(new Foo(), VALUE_1);
     hashMap2.put(new Foo(), VALUE_1);
     if (!TestUtils.isJvm()) {
-      // Only reliable in Production Mode since Development Mode can have
-      // identity hash collisions.
+      // Only reliable in Web since JVM can have identity hash collisions.
       assertFalse(hashMap1.hashCode() == hashMap2.hashCode());
     }
   }

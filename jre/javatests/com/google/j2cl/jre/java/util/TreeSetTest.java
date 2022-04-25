@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import com.google.j2cl.jre.testing.TestUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -192,9 +191,8 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
       try {
         Set untypedSet = set;
         untypedSet.add(getConflictingKey());
-        assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
-      } catch (ClassCastException e) {
-        // expected outcome
+        fail("ClassCastException expected");
+      } catch (ClassCastException expected) {
       }
     }
   }
@@ -355,11 +353,11 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
       Set<E> destSet = createSet();
       destSet.add(getKeys()[0]);
       try {
-        // This throws in dev mode because we're putting a second entry in
-        // the set and TreeSet calls the compare method to order them.
+        // This throws because we're putting a second entry in the set and TreeSet calls the compare
+        // method to order them.
         destSet.addAll(sourceSet);
-        assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
-      } catch (ClassCastException e) {
+        fail("ClassCastException expected");
+      } catch (ClassCastException expected) {
         // expected outcome
       }
     }
@@ -593,9 +591,8 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     set.add(getKeys()[0]);
     try {
       set.contains(getConflictingKey());
-      assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
-    } catch (ClassCastException e) {
-      // expected outcome
+      fail("ClassCastException expected");
+    } catch (ClassCastException expected) {
     }
   }
 
@@ -780,9 +777,8 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     } else {
       try {
         sortedSet.headSet(getConflictingKey());
-        assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
-      } catch (ClassCastException e) {
-        // expected outcome
+        fail("ClassCastException expected");
+      } catch (ClassCastException expected) {
       }
     }
   }
@@ -1026,9 +1022,8 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
       set.add(getKeys()[0]);
       try {
         set.remove(getConflictingKey());
-        assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
-      } catch (ClassCastException e) {
-        // expected outcome
+        fail("ClassCastException expected");
+      } catch (ClassCastException expected) {
       }
     }
   }
@@ -1096,21 +1091,13 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     sortedSet.add(getKeys()[0]);
     try {
       sortedSet.subSet(getConflictingKey(), getKeys()[0]);
-      assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
-    } catch (IllegalArgumentException e) {
-      // since we can't ensure CCEs in Production Mode, we may get IAE
-      assertTrue("IllegalArgumentException in Development Mode", !TestUtils.isJvm());
-    } catch (ClassCastException e) {
-      // expected outcome
+      fail("ClassCastException expected");
+    } catch (ClassCastException expected) {
     }
     try {
       sortedSet.subSet(getKeys()[0], getConflictingKey());
-      assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
-    } catch (IllegalArgumentException e) {
-      // since we can't ensure CCEs in Production Mode, we may get IAE
-      assertTrue("IllegalArgumentException in Development Mode", !TestUtils.isJvm());
-    } catch (ClassCastException e) {
-      // expected outcome
+      fail("ClassCastException expected");
+    } catch (ClassCastException expected) {
     }
   }
 
@@ -1328,9 +1315,8 @@ abstract class TreeSetTest<E extends Comparable<E>> extends TestSet {
     } else {
       try {
         sortedSet.tailSet(getConflictingKey());
-        assertTrue("CCE expected in Development Mode", !TestUtils.isJvm());
-      } catch (ClassCastException e) {
-        // expected outcome
+        fail("ClassCastException expected");
+      } catch (ClassCastException expected) {
       }
     }
   }

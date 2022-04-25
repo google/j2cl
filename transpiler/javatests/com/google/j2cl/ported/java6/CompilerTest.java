@@ -685,44 +685,36 @@ public class CompilerTest {
     }
   }
 
-  /**
-   * Make sure that the compiler does not crash itself on user code that divides by zero. The actual
-   * behavior varies by the numeric type and whether it is Development Mode or Production Mode, but
-   * the important thing is that the compiler does not crash.
-   */
+  /** Make sure that the compiler does not crash itself on user code that divides by zero. */
   @SuppressWarnings({"divzero", "ConstantOverflow"})
   @Test
   public void testDivByZero() {
     assertTrue(Double.isNaN(0.0 / 0.0));
 
     try {
-      // 0 / 0 is currently 0 in Production Mode.
       assertEquals(0, 0 / 0);
+      fail("expected an ArithmeticException");
     } catch (ArithmeticException expected) {
-      // expected in Development Mode
     }
 
     try {
       volatileLong = 0L / 0;
       fail("expected an ArithmeticException");
     } catch (ArithmeticException expected) {
-      // expected
     }
 
     assertTrue(Double.isNaN(0.0 % 0.0));
 
     try {
-      // 0 % 0 is currently NaN in Production Mode.
       assertTrue(Double.isNaN(0 % 0));
+      fail("expected an ArithmeticException");
     } catch (ArithmeticException expected) {
-      // expected in Development Mode
     }
 
     try {
       volatileLong = 0L % 0;
       fail("expected an ArithmeticException");
     } catch (ArithmeticException expected) {
-      // expected
     }
   }
 
