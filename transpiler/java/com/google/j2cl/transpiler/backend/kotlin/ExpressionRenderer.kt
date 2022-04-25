@@ -114,7 +114,18 @@ private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
 }
 
 private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
-  renderLeftSubExpression(expression, expression.leftOperand)
+  // Java and Kotlin does not allow initializing static final fields with type qualifier, so it
+  // needs to be rendered without the qualifier.
+  val leftOperand = expression.leftOperand
+  if (leftOperand is FieldAccess &&
+      expression.operator.isAssignmentOperator &&
+      leftOperand.target.isStatic &&
+      leftOperand.target.isFinal
+  ) {
+    renderIdentifier(leftOperand.target.ktName)
+  } else {
+    renderLeftSubExpression(expression, expression.leftOperand)
+  }
   render(" ")
   renderBinaryOperator(expression.operator)
   render(" ")

@@ -1,6 +1,7 @@
 ;;; Code for staticinitializers.StaticInitializers [static fields]
 (global $f_a__staticinitializers_StaticInitializers (mut i32) (i32.const 0))
 (global $f_b__staticinitializers_StaticInitializers (mut i32) (i32.const 0))
+(global $f_c__staticinitializers_StaticInitializers (mut i32) (i32.const 0))
 (global $f_$initialized__staticinitializers_StaticInitializers (mut i32) (i32.const 0))
 
 ;;; Code for staticinitializers.StaticInitializers [vtable.init]
@@ -92,13 +93,16 @@
   ;;@ staticinitializers/StaticInitializers.java:21:2
   (global.set $f_b__staticinitializers_StaticInitializers (i32.mul (global.get $f_a__staticinitializers_StaticInitializers) (i32.const 2)))
   ;; (staticinitializers.StaticInitializers.a = 10);
-  ;;@ staticinitializers/StaticInitializers.java:24:4
+  ;;@ staticinitializers/StaticInitializers.java:26:4
   (global.set $f_a__staticinitializers_StaticInitializers (i32.const 10))
-  ;; int duplicated = 0;
-  ;;@ staticinitializers/StaticInitializers.java:25:4
-  (local.set $duplicated (i32.const 0))
+  ;; (staticinitializers.StaticInitializers.c = (staticinitializers.StaticInitializers.a + staticinitializers.StaticInitializers.b));
+  ;;@ staticinitializers/StaticInitializers.java:27:4
+  (global.set $f_c__staticinitializers_StaticInitializers (i32.add (global.get $f_a__staticinitializers_StaticInitializers) (global.get $f_b__staticinitializers_StaticInitializers)))
+  ;; int duplicated = staticinitializers.StaticInitializers.c;
+  ;;@ staticinitializers/StaticInitializers.java:28:4
+  (local.set $duplicated (global.get $f_c__staticinitializers_StaticInitializers))
   ;; int duplicated = 1;
-  ;;@ staticinitializers/StaticInitializers.java:29:4
+  ;;@ staticinitializers/StaticInitializers.java:32:4
   (local.set $duplicated_1 (i32.const 1))
  )
 )

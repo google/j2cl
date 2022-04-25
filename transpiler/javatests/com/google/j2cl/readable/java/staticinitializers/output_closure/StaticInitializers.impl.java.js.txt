@@ -35,6 +35,10 @@ class StaticInitializers extends j_l_Object {
  static set f_b__staticinitializers_StaticInitializers(/** number */ value) {
   (StaticInitializers.$clinit(), StaticInitializers.$static_b__staticinitializers_StaticInitializers = value);
  }
+ /** @return {number} */
+ static get f_c__staticinitializers_StaticInitializers() {
+  return (StaticInitializers.$clinit(), StaticInitializers.$static_c__staticinitializers_StaticInitializers);
+ }
  
  static $clinit() {
   StaticInitializers.$clinit = () =>{};
@@ -43,7 +47,8 @@ class StaticInitializers extends j_l_Object {
   StaticInitializers.$static_a__staticinitializers_StaticInitializers = 5;
   StaticInitializers.$static_b__staticinitializers_StaticInitializers = Math.imul(StaticInitializers.$static_a__staticinitializers_StaticInitializers, 2);
   StaticInitializers.$static_a__staticinitializers_StaticInitializers = 10;
-  let duplicated = 0;
+  StaticInitializers.$static_c__staticinitializers_StaticInitializers = StaticInitializers.$static_a__staticinitializers_StaticInitializers + StaticInitializers.$static_b__staticinitializers_StaticInitializers | 0;
+  let duplicated = StaticInitializers.$static_c__staticinitializers_StaticInitializers;
   let duplicated_1 = 1;
  }
  /** @return {boolean} */
@@ -57,6 +62,8 @@ class StaticInitializers extends j_l_Object {
 StaticInitializers.$static_a__staticinitializers_StaticInitializers = 0;
 /**@private {number}*/
 StaticInitializers.$static_b__staticinitializers_StaticInitializers = 0;
+/**@private {number}*/
+StaticInitializers.$static_c__staticinitializers_StaticInitializers = 0;
 $Util.$setClassMetadata(StaticInitializers, 'staticinitializers.StaticInitializers');
 
 exports = StaticInitializers;

@@ -20,9 +20,12 @@ public class StaticInitializers {
 
   public static int b = a * 2;
 
+  public static final int c;
+
   static {
     a = 10;
-    int duplicated = 0;
+    c = a + b;
+    int duplicated = c;
   }
 
   static {

@@ -9,9 +9,12 @@ open class StaticInitializers {
 
   @kotlin.jvm.JvmField var b: kotlin.Int = staticinitializers.StaticInitializers.a * 2
 
+  @kotlin.jvm.JvmField val c: kotlin.Int
+
   init {
    staticinitializers.StaticInitializers.a = 10
-   val duplicated: kotlin.Int = 0
+   c = staticinitializers.StaticInitializers.a + staticinitializers.StaticInitializers.b
+   val duplicated: kotlin.Int = staticinitializers.StaticInitializers.c
   }
 
   init {
