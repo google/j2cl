@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-
+import com.google.j2cl.common.visitor.ProcessorError;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Type;
 
@@ -25,7 +25,11 @@ public abstract class NormalizationPass {
 
   public final void execute(CompilationUnit compilationUnit) {
     currentCompilationUnit = compilationUnit;
-    applyTo(compilationUnit);
+    try {
+      applyTo(compilationUnit);
+    } catch (RuntimeException | Error e) {
+      throw new ProcessorError(compilationUnit.getFilePath(), compilationUnit.getFilePath(), e);
+    }
     currentCompilationUnit = null;
   }
 
