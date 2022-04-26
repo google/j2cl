@@ -86,6 +86,11 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             verifyMemberUniqueness(method);
             // All native methods should be empty.
             checkState(!method.isNative() || method.getBody().getStatements().isEmpty());
+            // Concrete types shouldn't have abstract methods
+            checkState(
+                !method.isAbstract()
+                    || getCurrentType().isAbstract()
+                    || getCurrentType().isInterface());
           }
 
           @Override
