@@ -22,7 +22,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit
 /** Kotlin frontend is not supported yet in open-source due to build related issues. */
 class KotlinParser(private val classpathEntries: List<String>, private val kotlincopts: List<String>, private val problems: Problems) {
 
-  fun parseFiles(filePaths: List<SourceUtils.FileInfo>): List<CompilationUnit> {
+  fun parseFiles(filePaths: List<SourceUtils.FileInfo>, commonFilePaths: List<SourceUtils.FileInfo>): List<CompilationUnit> {
     return emptyList()
   }
 }

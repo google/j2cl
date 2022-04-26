@@ -54,6 +54,8 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setNativeSources(List<FileInfo> files);
 
+    public abstract Builder setKotlinCommonSources(List<FileInfo> infos);
+
     public abstract Builder setClasspaths(List<String> entries);
 
     public abstract Builder setOutput(Output output);

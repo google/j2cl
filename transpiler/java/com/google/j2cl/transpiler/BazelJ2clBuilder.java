@@ -53,6 +53,12 @@ final class BazelJ2clBuilder extends BazelWorker {
   protected List<String> sources = new ArrayList<>();
 
   @Option(
+      name = "-ktcommonsources",
+      metaVar = "<common source files>",
+      usage = "Specifies individual files and jars/zips of Kotlin common sources.")
+  protected List<String> kotlinCommonSources = new ArrayList<>();
+
+  @Option(
       name = "-classpath",
       required = true,
       metaVar = "<path>",
@@ -159,8 +165,12 @@ final class BazelJ2clBuilder extends BazelWorker {
     ImmutableList<FileInfo> allKotlinSources =
         allSources.stream().filter(p -> p.sourcePath().endsWith(".kt")).collect(toImmutableList());
 
+    ImmutableList<FileInfo> kotlinCommonSources =
+        SourceUtils.getAllSources(this.kotlinCommonSources, problems).collect(toImmutableList());
+
     // TODO(dramaix): add support for transpiling java and kotlin simultaneously.
-    if (!allJavaSources.isEmpty() && !allKotlinSources.isEmpty()) {
+    if (!allJavaSources.isEmpty()
+        && (!allKotlinSources.isEmpty() || !kotlinCommonSources.isEmpty())) {
       throw new AssertionError(
           "Transpilation of Java and Kotlin files together is not supported yet.");
     }
@@ -178,6 +188,7 @@ final class BazelJ2clBuilder extends BazelWorker {
     return J2clTranspilerOptions.newBuilder()
         .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
         .setNativeSources(allNativeSources)
+        .setKotlinCommonSources(kotlinCommonSources)
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(output)
         .setLibraryInfoOutput(this.libraryInfoOutput)
