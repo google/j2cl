@@ -41,7 +41,7 @@ public class BinaryExpression extends Expression {
     this.typeDescriptor =
         binaryOperationResultType(
             operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor());
-    checkArgument(!operator.isAssignmentOperator() || leftOperand.isLValue());
+    checkArgument(!operator.isSimpleOrCompoundAssignment() || leftOperand.isLValue());
   }
 
   public Expression getLeftOperand() {
@@ -68,7 +68,7 @@ public class BinaryExpression extends Expression {
     // current declared type descriptor if the expression is an assignment or the precomputed
     // type for the expression if it is not.
 
-    if (operator.isAssignmentOperator()) {
+    if (operator.isSimpleOrCompoundAssignment()) {
       // From the perspective of the type of binary expression as a value, which is used for
       // conversions on assignment, etc., an assignment (which includes compound assignments) has
       // the same type as the lhs. (e.g.)
@@ -116,6 +116,11 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public boolean isSimpleAssignment() {
+    return getOperator().isSimpleAssignment();
+  }
+
+  @Override
   public BinaryExpression clone() {
     return newBuilder()
         .setLeftOperand(leftOperand.clone())
@@ -133,7 +138,7 @@ public class BinaryExpression extends Expression {
   private static TypeDescriptor binaryOperationResultType(
       BinaryOperator operator, TypeDescriptor leftOperandType, TypeDescriptor rightOperandType) {
 
-    if (operator.isAssignmentOperator()) {
+    if (operator.isSimpleOrCompoundAssignment()) {
       return leftOperandType;
     }
 

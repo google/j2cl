@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.OperationExpansionUtils;
@@ -34,7 +33,7 @@ public class RewriteAssignmentExpressions extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteBinaryExpression(BinaryExpression expression) {
-            if (expression.getOperator() == BinaryOperator.ASSIGN
+            if (expression.isSimpleAssignment()
                 && AstUtils.isExpressionResultUsed(expression, getParent())) {
               return OperationExpansionUtils.expandAssignmentExpression(expression);
             }

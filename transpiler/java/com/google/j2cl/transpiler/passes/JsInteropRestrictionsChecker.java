@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -556,7 +555,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     BinaryExpression binaryExpression = (BinaryExpression) expression;
-    if (binaryExpression.getOperator() != BinaryOperator.ASSIGN
+    if (!binaryExpression.isSimpleAssignment()
         || !(binaryExpression.getRightOperand() instanceof VariableReference)
         || !(binaryExpression.getLeftOperand() instanceof FieldAccess)) {
       return false;
@@ -832,7 +831,7 @@ public class JsInteropRestrictionsChecker {
         new AbstractVisitor() {
           @Override
           public void exitBinaryExpression(BinaryExpression binaryExpression) {
-            if (!binaryExpression.getOperator().isAssignmentOperator()) {
+            if (!binaryExpression.getOperator().isSimpleOrCompoundAssignment()) {
               return;
             }
             Expression lhs = binaryExpression.getLeftOperand();

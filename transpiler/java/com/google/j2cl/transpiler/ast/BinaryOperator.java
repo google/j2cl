@@ -84,12 +84,17 @@ public enum BinaryOperator implements Operator {
 
   @Override
   public boolean hasSideEffect() {
-    return isAssignmentOperator();
+    return isSimpleOrCompoundAssignment();
+  }
+
+  /** Returns true for plain assignment but not true compound assignment operators. */
+  public boolean isSimpleAssignment() {
+    return this == ASSIGN;
   }
 
   /** Returns true for plain assignment and compound assignment operators. */
-  public boolean isAssignmentOperator() {
-    return this == ASSIGN || isCompoundAssignment();
+  public boolean isSimpleOrCompoundAssignment() {
+    return isSimpleAssignment() || isCompoundAssignment();
   }
 
   public boolean isCompoundAssignment() {

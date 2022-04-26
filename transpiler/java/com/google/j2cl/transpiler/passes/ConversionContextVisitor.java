@@ -251,7 +251,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     Expression rightOperand = binaryExpression.getRightOperand();
 
     // assignment context
-    if (AstUtils.matchesAssignmentContext(binaryExpression.getOperator())) {
+    if (AstUtils.matchesAssignmentContext(binaryExpression)) {
       rightOperand =
           contextRewriter.rewriteAssignmentContext(
               leftOperand.getTypeDescriptor(),

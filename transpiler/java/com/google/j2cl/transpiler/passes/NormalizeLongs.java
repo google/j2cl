@@ -48,14 +48,13 @@ public class NormalizeLongs extends NormalizationPass {
                     && !TypeDescriptors.isPrimitiveBoolean(returnTypeDescriptor))) {
               return binaryExpression;
             }
-            BinaryOperator operator = binaryExpression.getOperator();
             // Skips assignment because it doesn't need special handling.
-            if (operator == BinaryOperator.ASSIGN) {
+            if (binaryExpression.isSimpleAssignment()) {
               return binaryExpression;
             }
 
             return RuntimeMethods.createLongUtilsMethodCall(
-                getLongOperationFunctionName(operator),
+                getLongOperationFunctionName(binaryExpression.getOperator()),
                 returnTypeDescriptor,
                 leftOperand,
                 rightOperand);

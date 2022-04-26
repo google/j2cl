@@ -118,7 +118,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
   // needs to be rendered without the qualifier.
   val leftOperand = expression.leftOperand
   if (leftOperand is FieldAccess &&
-      expression.operator.isAssignmentOperator &&
+      expression.isSimpleAssignment &&
       leftOperand.target.isStatic &&
       leftOperand.target.isFinal
   ) {

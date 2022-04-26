@@ -259,7 +259,7 @@ public class AstUtils {
     } else if (parent instanceof BinaryExpression) {
       // The value of the lhs of an assignment is overwritten and not used.
       BinaryExpression parentBinaryExpression = (BinaryExpression) parent;
-      return parentBinaryExpression.getOperator() != BinaryOperator.ASSIGN
+      return !parentBinaryExpression.isSimpleAssignment()
           || expression == parentBinaryExpression.getRightOperand();
     } else {
       return true;
@@ -272,8 +272,8 @@ public class AstUtils {
    * <p>Note that compound assignments are excluded here. The assignment context arising from
    * compound assignments requires the expression to be rewritten into a plain assignment.
    */
-  public static boolean matchesAssignmentContext(BinaryOperator binaryOperator) {
-    return binaryOperator == BinaryOperator.ASSIGN;
+  public static boolean matchesAssignmentContext(BinaryExpression expression) {
+    return expression.isSimpleAssignment();
   }
 
   /** See JLS 5.4. */

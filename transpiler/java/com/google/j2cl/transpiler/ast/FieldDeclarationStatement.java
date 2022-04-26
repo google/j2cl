@@ -45,9 +45,7 @@ public class FieldDeclarationStatement extends Statement {
     this.isConst = isConst;
     this.isDeprecated = isDeprecated;
     checkArgument(
-        expression instanceof FieldAccess
-            || (expression instanceof BinaryExpression
-                && ((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN),
+        expression instanceof FieldAccess || expression.isSimpleAssignment(),
         "Declaration annotations can only applied to assignments and field references.");
   }
 

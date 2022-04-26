@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
@@ -182,12 +181,12 @@ public class OptimizeEnums extends NormalizationPass {
   }
 
   private static boolean isTrivialFieldAssignment(Expression expression) {
-    if (!(expression instanceof BinaryExpression)
-        || ((BinaryExpression) expression).getOperator() != BinaryOperator.ASSIGN) {
+    if (!expression.isSimpleAssignment()) {
       return false;
     }
-    Expression left = ((BinaryExpression) expression).getLeftOperand();
-    Expression right = ((BinaryExpression) expression).getRightOperand();
+    BinaryExpression binaryExpression = (BinaryExpression) expression;
+    Expression left = binaryExpression.getLeftOperand();
+    Expression right = binaryExpression.getRightOperand();
     if (!(left instanceof FieldAccess
         && ((FieldAccess) left).getQualifier() instanceof ThisReference)) {
       return false;

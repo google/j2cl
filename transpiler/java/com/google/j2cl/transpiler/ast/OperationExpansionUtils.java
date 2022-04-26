@@ -200,7 +200,7 @@ public class OperationExpansionUtils {
   }
 
   public static Expression expandAssignmentExpression(BinaryExpression binaryExpression) {
-    checkArgument(binaryExpression.getOperator() == BinaryOperator.ASSIGN);
+    checkArgument(binaryExpression.isSimpleAssignment());
 
     List<VariableDeclarationFragment> temporaryVariables = new ArrayList<>();
     Expression newLhs = decomposeLhs(binaryExpression.getLeftOperand(), temporaryVariables);

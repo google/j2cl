@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
@@ -31,7 +30,7 @@ public class ArrayAccessNormalizer extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Expression rewriteBinaryExpression(BinaryExpression expression) {
-            if (expression.getOperator() == BinaryOperator.ASSIGN
+            if (expression.isSimpleAssignment()
                 && expression.getLeftOperand() instanceof ArrayAccess) {
               ArrayAccess leftSide = (ArrayAccess) expression.getLeftOperand();
               return RuntimeMethods.createArraySetMethodCall(

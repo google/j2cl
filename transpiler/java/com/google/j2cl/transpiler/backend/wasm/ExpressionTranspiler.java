@@ -27,7 +27,6 @@ import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
@@ -90,8 +89,7 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterBinaryExpression(BinaryExpression expression) {
-        BinaryOperator operator = expression.getOperator();
-        if (operator == BinaryOperator.ASSIGN) {
+        if (expression.isSimpleAssignment()) {
           return renderAssignment(expression.getLeftOperand(), expression.getRightOperand());
         }
 
@@ -569,10 +567,7 @@ final class ExpressionTranspiler {
     // Even though per our Java based AST an assignment is an expression that returns the value of
     // its rhs, the AST is transformed so that the resulting value is never used and the assignment
     // can be safely considered not to produce a value.
-    boolean isAssignmentExpression =
-        expression instanceof BinaryExpression
-            && ((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN;
-    return isPrimitiveVoid(expression.getTypeDescriptor()) || isAssignmentExpression;
+    return isPrimitiveVoid(expression.getTypeDescriptor()) || expression.isSimpleAssignment();
   }
 
   private ExpressionTranspiler() {}
