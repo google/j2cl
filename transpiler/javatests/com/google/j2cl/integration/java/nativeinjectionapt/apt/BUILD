@@ -20,5 +20,7 @@ j2cl_library(
     name = "annotation",
     srcs = ["RunApt.java"],
     exported_plugins = [":apt"],
+    generate_j2kt_jvm_library = False,
+    generate_j2kt_native_library = False,
     visibility = ["//transpiler/javatests/com/google/j2cl/integration/java/nativeinjectionapt:__pkg__"],
 )

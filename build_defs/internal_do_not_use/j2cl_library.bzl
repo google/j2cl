@@ -127,6 +127,8 @@ def j2cl_library(
     if args.get("srcs") and (generate_build_test == None or generate_build_test):
         build_test(name, kwargs.get("tags", []))
 
+    auto_generated_targets_tags = kwargs.get("tags", []) + ["manual", "notap", "no-ide"]
+
     j2wasm_library_name = j2wasm_common.to_j2wasm_name(name)
 
     if generate_j2wasm_library == None:
@@ -141,10 +143,10 @@ def j2cl_library(
 
         to_parallel_targets("deps", j2wasm_args, j2wasm_common.to_j2wasm_name)
         to_parallel_targets("exports", j2wasm_args, j2wasm_common.to_j2wasm_name)
-        j2wasm_args["tags"] = j2wasm_args.get("tags", []) + ["manual", "notap", "j2wasm", "no-ide"]
 
         j2wasm_library(
             name = j2wasm_library_name,
+            tags = auto_generated_targets_tags + ["j2wasm"],
             **j2wasm_args
         )
 
@@ -162,10 +164,10 @@ def j2cl_library(
 
         to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_native_name)
         to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_native_name)
-        j2kt_args["tags"] = j2kt_args.get("tags", []) + ["j2kt", "ios"]
 
         j2kt_native_library(
             name = j2kt_native_library_name,
+            tags = auto_generated_targets_tags + ["j2kt", "ios"],
             **j2kt_args
         )
 
@@ -180,22 +182,22 @@ def j2cl_library(
 
     if generate_j2kt_jvm_library:
         j2kt_args = _filter_j2kt_attrs(dict(kwargs))
-        j2kt_args["tags"] = j2kt_args.get("tags", []) + ["j2kt"]
 
         to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_jvm_name)
         to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_jvm_name)
 
         j2kt_jvm_library(
             name = j2kt_jvm_library_name,
+            tags = auto_generated_targets_tags + ["j2kt"],
             **j2kt_args
         )
 
-_ALLOWED_ATTRS_KT = [key for key in J2KT_LIB_ATTRS] + ["tags", "visibility", "testonly"]
+_ALLOWED_ATTRS_KT = [key for key in J2KT_LIB_ATTRS] + ["visibility", "testonly"]
 
 def _filter_j2kt_attrs(args):
     return {key: args[key] for key in _ALLOWED_ATTRS_KT if key in args}
 
-_ALLOWED_ATTRS_WASM = [key for key in J2WASM_LIB_ATTRS] + ["tags", "visibility", "testonly"]
+_ALLOWED_ATTRS_WASM = [key for key in J2WASM_LIB_ATTRS] + ["visibility", "testonly"]
 
 def _filter_j2wasm_attrs(args):
     return {key: args[key] for key in _ALLOWED_ATTRS_WASM if key in args}

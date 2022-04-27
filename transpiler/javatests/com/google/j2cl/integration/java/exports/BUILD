@@ -11,15 +11,21 @@ package(
 j2cl_library(
     name = "Foo",
     srcs = ["Foo.java"],
+    generate_j2kt_jvm_library = False,
+    generate_j2kt_native_library = False,
 )
 
 j2cl_library(
     name = "Bar",
     srcs = ["Bar.java"],
+    generate_j2kt_jvm_library = False,
+    generate_j2kt_native_library = False,
 )
 
 j2cl_library(
     name = "ExportLayerOne",
+    generate_j2kt_jvm_library = False,
+    generate_j2kt_native_library = False,
     exports = [
         ":Bar",
         ":Foo",
@@ -28,6 +34,8 @@ j2cl_library(
 
 j2cl_library(
     name = "ExportLayerTwo",
+    generate_j2kt_jvm_library = False,
+    generate_j2kt_native_library = False,
     exports = [":ExportLayerOne"],
 )
 

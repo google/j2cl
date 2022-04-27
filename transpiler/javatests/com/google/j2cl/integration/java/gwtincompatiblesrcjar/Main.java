@@ -45,7 +45,7 @@ public class Main {
     INCOMPATIBLE {
       @Override
       void method() {
-        new SimpleDateFormat();
+        SimpleDateFormat unused = new SimpleDateFormat();
       }
     };
 
