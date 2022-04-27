@@ -394,6 +394,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/finallyblock:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/interfaces:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/interfaces:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/methodreferences:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/methodreferences:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/unaryexpressions:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/unaryexpressions:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/whenstatement:optimized_js",
