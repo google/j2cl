@@ -384,6 +384,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/java/wideningfloatconversion:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/java/wideningprimitiveconversion:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/java/wideningprimitiveconversion:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/abstractinnerclass:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/abstractinnerclass:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/binaryexpressions:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/binaryexpressions:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/dowhilestatement:optimized_js",
