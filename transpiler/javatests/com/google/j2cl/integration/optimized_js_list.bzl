@@ -392,6 +392,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/binaryexpressions:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/dowhilestatement:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/dowhilestatement:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/extensionmembers:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/kotlin/extensionmembers:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/finallyblock:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/finallyblock:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/kotlin/interfaces:optimized_js",
