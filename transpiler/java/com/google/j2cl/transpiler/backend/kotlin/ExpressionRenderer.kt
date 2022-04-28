@@ -105,7 +105,9 @@ private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
     PrimitiveTypes.DOUBLE -> render("kotlin.doubleArrayOf")
     else -> {
       render("kotlin.arrayOf")
-      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
+      renderInAngleBrackets {
+        renderTypeDescriptor(componentTypeDescriptor, TypeDescriptorUsage.REFERENCE)
+      }
     }
   }
   renderInParentheses {
@@ -135,7 +137,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
 private fun Renderer.renderCastExpression(expression: CastExpression) {
   renderExpression(expression.expression)
   render(" as ")
-  renderTypeDescriptor(expression.castTypeDescriptor)
+  renderTypeDescriptor(expression.castTypeDescriptor, TypeDescriptorUsage.REFERENCE)
 }
 
 private fun Renderer.renderBinaryOperator(operator: BinaryOperator) {
@@ -177,7 +179,7 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
   renderTypeDescriptor(
     functionExpression.typeDescriptor.functionalInterface!!.toNonNullable(),
-    projectBounds = true
+    TypeDescriptorUsage.SUPER_TYPE
   )
   render(" ")
   renderInParentheses {
@@ -196,14 +198,16 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
 private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOfExpression) {
   renderExpression(instanceOfExpression.expression)
   render(" is ")
-
   val testTypeDescriptor = instanceOfExpression.testTypeDescriptor
   if (testTypeDescriptor is ArrayTypeDescriptor &&
       !testTypeDescriptor.componentTypeDescriptor!!.isPrimitive
   ) {
     render("kotlin.Array<*>")
   } else {
-    renderTypeDescriptor(instanceOfExpression.testTypeDescriptor.toNonNullable())
+    renderTypeDescriptor(
+      instanceOfExpression.testTypeDescriptor.toNonNullable(),
+      TypeDescriptorUsage.REFERENCE
+    )
   }
 }
 
@@ -227,7 +231,7 @@ private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
-  renderTypeDescriptor(typeLiteral.referencedTypeDescriptor, asName = true)
+  renderTypeDescriptor(typeLiteral.referencedTypeDescriptor, TypeDescriptorUsage.QUALIFIED_NAME)
   render("::class.java")
 }
 
@@ -335,7 +339,9 @@ private fun Renderer.renderNewArray(
       renderArrayOfNulls(componentTypeDescriptor, firstDimension)
     } else {
       render("kotlin.Array")
-      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
+      renderInAngleBrackets {
+        renderTypeDescriptor(componentTypeDescriptor, TypeDescriptorUsage.ARGUMENT)
+      }
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
       renderInCurlyBrackets {
@@ -373,7 +379,9 @@ private fun Renderer.renderArrayOfNulls(
   dimension: Expression
 ) {
   render("kotlin.arrayOfNulls")
-  renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonNullable()) }
+  renderInAngleBrackets {
+    renderTypeDescriptor(componentTypeDescriptor.toNonNullable(), TypeDescriptorUsage.ARGUMENT)
+  }
   renderInParentheses { renderExpression(dimension) }
 }
 
@@ -387,10 +395,11 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
 
   // Render fully-qualified type name if there's no qualifier, otherwise render qualifier and
   // simple type name.
+  val typeDeclaration = expression.typeDescriptor.typeDeclaration
   renderTypeDescriptor(
     typeDescriptor,
-    asSimple = expression.qualifier != null,
-    projectBounds = true
+    TypeDescriptorUsage.SUPER_TYPE,
+    asSimple = typeDeclaration.isCapturingEnclosingInstance
   )
 
   // Render invocation for classes only - interfaces don't need it.
@@ -468,7 +477,7 @@ fun Renderer.renderVariable(variable: Variable) {
   }
 
   render(": ")
-  renderTypeDescriptor(typeDescriptor)
+  renderTypeDescriptor(typeDescriptor, TypeDescriptorUsage.REFERENCE)
 }
 
 private fun Renderer.renderQualifier(memberReference: MemberReference) {
@@ -476,7 +485,10 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
   if (qualifier == null) {
     if (memberReference.target.isStatic) {
       // TODO(b/206482966): Move the checks in the backend to a verifier pass.
-      renderTypeDescriptor(memberReference.target.enclosingTypeDescriptor, asName = true)
+      renderTypeDescriptor(
+        memberReference.target.enclosingTypeDescriptor,
+        TypeDescriptorUsage.QUALIFIED_NAME
+      )
       render(".")
     }
   } else {

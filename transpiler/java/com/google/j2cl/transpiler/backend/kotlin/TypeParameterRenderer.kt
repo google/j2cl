@@ -47,7 +47,7 @@ private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
   renderName(typeVariable)
   typeVariable.upperBoundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
     render(": ")
-    renderTypeDescriptor(boundTypeDescriptor, skipTypeVariableNullability = true)
+    renderTypeDescriptor(boundTypeDescriptor, TypeDescriptorUsage.ARGUMENT)
   }
 }
 
@@ -60,5 +60,5 @@ private val TypeVariable.whereClauseItems: List<WhereClauseItem>
 private fun Renderer.render(whereClauseItem: WhereClauseItem) {
   renderName(whereClauseItem.hasName)
   render(": ")
-  renderTypeDescriptor(whereClauseItem.boundTypeDescriptor, skipTypeVariableNullability = true)
+  renderTypeDescriptor(whereClauseItem.boundTypeDescriptor, TypeDescriptorUsage.ARGUMENT)
 }
