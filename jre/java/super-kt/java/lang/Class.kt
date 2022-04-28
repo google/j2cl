@@ -25,4 +25,18 @@ class Class<T>(val kClass: KClass<*>) {
   fun getName() = kClass.qualifiedName
   fun getCanonicalName() = kClass.qualifiedName
   fun getSimpleName() = kClass.simpleName
+  fun isArray() = arrayKClassSet.contains(kClass)
 }
+
+private val arrayKClassSet =
+  setOf<KClass<*>>(
+    ByteArray::class,
+    ShortArray::class,
+    IntArray::class,
+    LongArray::class,
+    FloatArray::class,
+    DoubleArray::class,
+    BooleanArray::class,
+    CharArray::class,
+    Array::class
+  )
