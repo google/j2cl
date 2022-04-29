@@ -155,7 +155,7 @@ package_sources(
         ],
     ),
     super_srcs = glob(
-        ["super-kt/**/*.java"],
+        ["super-kt/java/**/*.java"],
     ),
 )
 
@@ -183,7 +183,10 @@ closure_js_library(
 filegroup(
     name = "j2kt_support_files-j2kt",
     srcs = glob(
-        ["super-kt/javaemul/**/*.kt"],
+        [
+            "super-kt/javaemul/**/*.kt",
+            "super-kt/javaemul/**/*.java",
+        ],
     ),
 )
 
