@@ -89,6 +89,10 @@
 [set(m());] => [IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(IntersectionTypeTest.m_m__());] "intersectiontype.IntersectionTypeTest.testMethodCall"
 [Getable<?> g = n();] => [let g = /**@type {Getable<A>}*/ (IntersectionTypeTest.m_n__());] "intersectiontype.IntersectionTypeTest.testMethodCall"
 [g] => [g] "g"
+[callOnIntersetionTypes] => [m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType]
+[t] => [t] "t"
+[t.cmp();] => [/**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__();] "intersectiontype.IntersectionTypeTest.callOnIntersetionTypes"
+[((SomeConcreteType & Cmp) null).cmp();] => [/**@type {!Cmp}*/ ($Casts.$to(null, Cmp)).m_cmp__();] "intersectiontype.IntersectionTypeTest.callOnIntersetionTypes"
 [IntersectionTypeTest] => [$clinit]
 [IntersectionTypeTest] => [IntersectionTypeTest.$clinit = () =>{};] "intersectiontype.IntersectionTypeTest.<clinit>"
 [IntersectionTypeTest] => [IntersectionTypeTest.$loadModules();] "intersectiontype.IntersectionTypeTest.<clinit>"

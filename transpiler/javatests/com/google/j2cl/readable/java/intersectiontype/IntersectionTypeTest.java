@@ -108,4 +108,11 @@ public class IntersectionTypeTest<U> {
     set(m());
     Getable<?> g = n();
   }
+
+  private static class SomeConcreteType {}
+
+  private static <T extends SomeConcreteType & Cmp> void callOnIntersetionTypes(T t) {
+    t.cmp();
+    ((SomeConcreteType & Cmp) null).cmp();
+  }
 }

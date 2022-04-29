@@ -34,6 +34,9 @@
 ;;; Code for intersectiontype.IntersectionTypeTest.EmptyB [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyB (mut i32) (i32.const 0))
 
+;;; Code for intersectiontype.IntersectionTypeTest.SomeConcreteType [static fields]
+(global $f_$initialized__intersectiontype_IntersectionTypeTest_SomeConcreteType (mut i32) (i32.const 0))
+
 ;;; Code for intersectiontype.IntersectionTypeTest [vtable.init]
 (global $intersectiontype.IntersectionTypeTest.vtable (ref $intersectiontype.IntersectionTypeTest.vtable) 
  (struct.new $intersectiontype.IntersectionTypeTest.vtable
@@ -119,6 +122,20 @@
 
 ;;; Code for intersectiontype.IntersectionTypeTest.A [itable.init]
 (global $intersectiontype.IntersectionTypeTest.A.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for intersectiontype.IntersectionTypeTest.SomeConcreteType [vtable.init]
+(global $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable (ref $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable) 
+ (struct.new $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType)
+ )
+)
+
+;;; Code for intersectiontype.IntersectionTypeTest.SomeConcreteType [itable.init]
+(global $intersectiontype.IntersectionTypeTest.SomeConcreteType.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for intersectiontype.Getable [INTERFACE]
@@ -563,6 +580,32 @@
  )
 )
 (elem declare func $m_testMethodCall__void@intersectiontype.IntersectionTypeTest)
+
+;;; void IntersectionTypeTest.callOnIntersetionTypes(T t)
+(func $m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType__void@intersectiontype.IntersectionTypeTest
+ (param $t (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
+ ;;@ intersectiontype/IntersectionTypeTest.java:114:57
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $$qualifier_1 (ref null $java.lang.Object))
+ (block
+  (block
+   ;; Cmp $qualifier = ((Cmp) t);
+   ;;@ intersectiontype/IntersectionTypeTest.java:115:4
+   (local.set $$qualifier (local.get $t))
+   ;; $qualifier.cmp();
+   ;;@ intersectiontype/IntersectionTypeTest.java:115:4
+   (drop (call_ref (local.get $$qualifier)(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast_static $intersectiontype.Cmp.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 1))) )))
+  )
+  (block
+   ;; Cmp $qualifier = ((Cmp) (((SomeConcreteType&Cmp)) null));
+   ;;@ intersectiontype/IntersectionTypeTest.java:116:4
+   (local.set $$qualifier_1 (ref.cast_static $intersectiontype.IntersectionTypeTest.SomeConcreteType (ref.null $java.lang.Object)))
+   ;; $qualifier.cmp();
+   ;;@ intersectiontype/IntersectionTypeTest.java:116:4
+   (drop (call_ref (local.get $$qualifier_1)(struct.get $intersectiontype.Cmp.vtable $m_cmp__int (ref.cast_static $intersectiontype.Cmp.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_1)) (i32.const 1))) )))
+  )
+ )
+)
 
 ;;; void IntersectionTypeTest.$clinit()
 (func $$clinit__void@intersectiontype.IntersectionTypeTest
@@ -1057,3 +1100,83 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyB)
+
+;;; Code for intersectiontype.IntersectionTypeTest.SomeConcreteType [CLASS]
+(type $intersectiontype.IntersectionTypeTest.SomeConcreteType (struct_subtype 
+ (field $vtable (ref $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; SomeConcreteType SomeConcreteType.$create()
+(func $$create__intersectiontype_IntersectionTypeTest_SomeConcreteType@intersectiontype.IntersectionTypeTest.SomeConcreteType
+ (result (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
+ ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+ (local $$instance (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
+ (block
+  ;; SomeConcreteType $instance = new SomeConcreteType.<init>();
+  ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.SomeConcreteType (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.SomeConcreteType.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+  (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest_SomeConcreteType@intersectiontype.IntersectionTypeTest.SomeConcreteType (local.get $$instance))
+  ;; return $instance;
+  ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SomeConcreteType.$ctor()
+(func $$ctor__void_$p_intersectiontype_IntersectionTypeTest_SomeConcreteType@intersectiontype.IntersectionTypeTest.SomeConcreteType
+ (param $this (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
+ ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+ (block
+  ;; Object.this.$ctor();
+  ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; void SomeConcreteType.$clinit()
+(func $$clinit__void@intersectiontype.IntersectionTypeTest.SomeConcreteType
+ ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+ (block
+  ;; if (intersectiontype.IntersectionTypeTest.SomeConcreteType.$initialized) return;
+  ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+  (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_SomeConcreteType)
+   (then
+    ;; return;
+    ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+    (return )
+   )
+  )
+  ;; (intersectiontype.IntersectionTypeTest.SomeConcreteType.$initialized = true);
+  ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+  (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_SomeConcreteType (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ intersectiontype/IntersectionTypeTest.java:112:23
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> SomeConcreteType.getClass()
+(func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
+ (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.SomeConcreteType (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.SomeConcreteType();
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.SomeConcreteType__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.SomeConcreteType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.SomeConcreteType)

@@ -16,7 +16,11 @@
 package interfaces;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+
+import java.util.Iterator;
+import jsinterop.annotations.JsNonNull;
 
 /** Test basic interface functionality. */
 @SuppressWarnings("StaticQualifiedUsingExpression")
@@ -30,6 +34,7 @@ public class Main {
     testStaticMethods();
     testPrivateMethods();
     testDiamondProperty();
+    testCallWithDifferentNullMarking();
   }
 
   public interface SomeInterface {
@@ -113,6 +118,8 @@ public class Main {
 
   static class StringList implements List<String> {}
 
+  static class YetAnotherStringList extends YetAnotherList<String> {}
+
   static class AnotherStringList implements List<String> {
     @Override
     public int add(String elem) {
@@ -141,6 +148,7 @@ public class Main {
     assertTrue(new SomeOtherList<Object>().add(null) == LIST_ADD);
     assertTrue(new YetAnotherList<Object>().add(null) == LIST_ADD);
     assertTrue(new StringList().add(null) == LIST_ADD);
+    assertTrue(new YetAnotherStringList().add(null) == LIST_ADD);
     assertTrue(new AnotherStringList().add(null) == ANOTHER_STRING_LIST_ADD);
     assertTrue(new AnotherCollection<Object>().add(null) == ANOTHER_LIST_INTERFACE_ADD);
   }
@@ -258,5 +266,24 @@ public class Main {
     dr = c;
     assertEquals(C.NAME, dr.name(null));
     assertEquals(C.NAME, c.name(null));
+  }
+
+  abstract static class NullableIterator<E> implements Iterator<E> {}
+
+  private static void testCallWithDifferentNullMarking() {
+    NullableIterator<String> x =
+        new NullableIterator<>() {
+          public boolean hasNext() {
+            return false;
+          }
+
+          public String next() {
+            return null;
+          }
+        };
+    assertFalse(x.hasNext());
+
+    NullableIterator<@JsNonNull String> x2 = x;
+    assertFalse(x2.hasNext());
   }
 }

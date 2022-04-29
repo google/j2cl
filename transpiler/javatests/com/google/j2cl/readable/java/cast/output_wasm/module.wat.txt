@@ -439,7 +439,7 @@
    (local.set $$qualifier_9 (ref.cast_static $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase))))))
    ;; $qualifier.mA();
    ;;@ cast/CastGenerics.java:76:4
-   (call_ref (local.get $$qualifier_9)(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_9)) (i32.const 0))) ))
+   (call_ref (local.get $$qualifier_9)(struct.get $cast.CastGenerics.BaseImplementor.vtable $m_mA__void (struct.get $cast.CastGenerics.BaseImplementor $vtable(local.get $$qualifier_9))))
   )
   (block
    ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
@@ -447,7 +447,7 @@
    (local.set $$qualifier_10 (ref.cast_static $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase))))))
    ;; $qualifier.mB();
    ;;@ cast/CastGenerics.java:77:4
-   (call_ref (local.get $$qualifier_10)(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_10)) (i32.const 1))) ))
+   (call_ref (local.get $$qualifier_10)(struct.get $cast.CastGenerics.BaseImplementor.vtable $m_mB__void (struct.get $cast.CastGenerics.BaseImplementor $vtable(local.get $$qualifier_10))))
   )
   ;; Container<Implementor> containerImplementor = null;
   ;;@ cast/CastGenerics.java:79:4
@@ -811,6 +811,8 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_mA__void (ref $function.m_mA__void))
+ (field $m_mB__void (ref $function.m_mB__void))
   $java.lang.Object.vtable)
 )
 

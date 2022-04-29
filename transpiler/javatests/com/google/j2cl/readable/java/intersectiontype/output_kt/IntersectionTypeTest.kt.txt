@@ -96,6 +96,12 @@ open class IntersectionTypeTest<U> {
 
   @kotlin.jvm.JvmStatic
   fun <T> set(t: T?) where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {}
+
+  @kotlin.jvm.JvmStatic
+  fun <T> callOnIntersetionTypes(t: T?) where T: intersectiontype.IntersectionTypeTest.SomeConcreteType?, T: intersectiontype.Cmp? {
+   t!!.cmp()
+   (null as intersectiontype.IntersectionTypeTest.SomeConcreteType? /* & intersectiontype.Cmp? */)!!.cmp()
+  }
  }
 
  open inner class MapEntry {
@@ -109,4 +115,6 @@ open class IntersectionTypeTest<U> {
  interface EmptyA {}
 
  interface EmptyB {}
+
+ open class SomeConcreteType {}
 }

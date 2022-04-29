@@ -11,6 +11,7 @@ let $LambdaAdaptor$2 = goog.forwardDeclare('intersectiontype.IntersectionTypeTes
 let A = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.A$impl');
 let EmptyA = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.EmptyA$impl');
 let EmptyB = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.EmptyB$impl');
+let SomeConcreteType = goog.forwardDeclare('intersectiontype.IntersectionTypeTest.SomeConcreteType$impl');
 let Setable = goog.forwardDeclare('intersectiontype.Setable$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
@@ -105,6 +106,11 @@ class IntersectionTypeTest extends j_l_Object {
   IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(IntersectionTypeTest.m_m__());
   let g = /**@type {Getable<A>}*/ (IntersectionTypeTest.m_n__());
  }
+ /** @template T */
+ static m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType(/** T */ t) {
+  /**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__();
+  /**@type {!Cmp}*/ ($Casts.$to(null, Cmp)).m_cmp__();
+ }
  
  static $clinit() {
   IntersectionTypeTest.$clinit = () =>{};
@@ -117,6 +123,7 @@ class IntersectionTypeTest extends j_l_Object {
  }
  
  static $loadModules() {
+  Cmp = goog.module.get('intersectiontype.Cmp$impl');
   Getable = goog.module.get('intersectiontype.Getable$impl');
   $LambdaAdaptor$1 = goog.module.get('intersectiontype.IntersectionTypeTest.$LambdaAdaptor$1$impl');
   $LambdaAdaptor$2 = goog.module.get('intersectiontype.IntersectionTypeTest.$LambdaAdaptor$2$impl');

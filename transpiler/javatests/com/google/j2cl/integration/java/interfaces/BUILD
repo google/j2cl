@@ -16,4 +16,7 @@ integration_test(
     srcs = glob(["*.java"]),
     enable_kt = False,
     j2cl_library_tags = ["manual"],
+    deps = [
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+    ],
 )

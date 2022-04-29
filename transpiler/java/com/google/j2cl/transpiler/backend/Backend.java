@@ -132,6 +132,7 @@ import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringConcatenation;
+import com.google.j2cl.transpiler.passes.UpgradeInterfaceDispatch;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
 import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
@@ -368,6 +369,7 @@ public enum Backend {
           NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
           RemoveNoopStatements::new,
+          UpgradeInterfaceDispatch::new,
 
           // Post-verifications
           VerifySingleAstReference::new,
