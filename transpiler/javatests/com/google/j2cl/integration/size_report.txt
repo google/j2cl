@@ -1,21 +1,27 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 12 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2067850 to 2068064 bytes (100%->100.0%) and from
-  747048 to 747081 bytes (100%->100.0%) gzipped.
+  2068064 to 2068105 bytes (100%->100.0%) and from
+  747081 to 746938 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+        606      580 dowhilestatement/kotlin.esnext (-4.3%)
+       3376     3235 arrayreadwrite/kotlin.esnext (-4.2%)
+       3693     3559 arrayreadwrite/kotlin (-3.6%)
+        945      919 dowhilestatement/kotlin (-2.8%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       1061     1077 interfaces/java.esnext (1.5%)
-       1469     1486 interfaces/java (1.2%)
+       1100     1203 whenstatement/kotlin.esnext (9.4%)
+       1440     1541 whenstatement/kotlin (7.0%)
+        597      602 whilestatement/kotlin.esnext (0.8%)
+        936      943 whilestatement/kotlin (0.7%)
 
 
 Incremental size reports (non-gzip):
@@ -67,8 +73,8 @@ All reports:
         350      350 arrayoutofbounds/java.esnext (unchanged)
        3820     3820 arrayreadwrite/java (unchanged)
        3495     3495 arrayreadwrite/java.esnext (unchanged)
-       3693     3693 arrayreadwrite/kotlin (unchanged)
-       3376     3376 arrayreadwrite/kotlin.esnext (unchanged)
+       3693     3559 arrayreadwrite/kotlin (-3.6%)
+       3376     3235 arrayreadwrite/kotlin.esnext (-4.2%)
          22       22 assertremoved/java (unchanged)
          22       22 assertremoved/java.esnext (unchanged)
        2949     2949 assertsimple/java (unchanged)
@@ -139,8 +145,8 @@ All reports:
         670      670 devirtualizedsupermethodcall/java.esnext (unchanged)
         944      944 dowhilestatement/java (unchanged)
         600      600 dowhilestatement/java.esnext (unchanged)
-        945      945 dowhilestatement/kotlin (unchanged)
-        606      606 dowhilestatement/kotlin.esnext (unchanged)
+        945      919 dowhilestatement/kotlin (-2.8%)
+        606      580 dowhilestatement/kotlin.esnext (-4.3%)
          22       22 emptyclass/java (unchanged)
          22       22 emptyclass/java.esnext (unchanged)
          22       22 emptyclasswithfields/java (unchanged)
@@ -215,8 +221,8 @@ All reports:
        3225     3225 interfacedevirtualize/java.esnext (unchanged)
          22       22 interfacejsbridge/java (unchanged)
          22       22 interfacejsbridge/java.esnext (unchanged)
-       1469     1486 interfaces/java (1.2%)
-       1061     1077 interfaces/java.esnext (1.5%)
+       1486     1486 interfaces/java (unchanged)
+       1077     1077 interfaces/java.esnext (unchanged)
        1770     1770 interfaces/kotlin (unchanged)
        1365     1365 interfaces/kotlin.esnext (unchanged)
        1523     1523 intersectiontype/java (unchanged)
@@ -279,8 +285,8 @@ All reports:
        2223     2223 longoperationsinglesideeffect/java.esnext (unchanged)
        3046     3046 methodreferences/java (unchanged)
        2747     2747 methodreferences/java.esnext (unchanged)
-       2136     2136 methodreferences/kotlin (unchanged)
-       1755     1755 methodreferences/kotlin.esnext (unchanged)
+       2136     2137 methodreferences/kotlin (0.0%)
+       1755     1753 methodreferences/kotlin.esnext (-0.1%)
        2789     2789 morebridgemethods/java (unchanged)
        2192     2192 morebridgemethods/java.esnext (unchanged)
        1055     1055 multipleabstractparents/java (unchanged)
@@ -417,8 +423,8 @@ All reports:
         693      693 typewildcards/java.esnext (unchanged)
        1164     1164 unaryexpressions/java (unchanged)
         840      840 unaryexpressions/java.esnext (unchanged)
-        990      990 unaryexpressions/kotlin (unchanged)
-        651      651 unaryexpressions/kotlin.esnext (unchanged)
+        990      972 unaryexpressions/kotlin (-1.8%)
+        651      638 unaryexpressions/kotlin.esnext (-2.0%)
        3545     3545 underflowoverflowconversion/java (unchanged)
        3206     3206 underflowoverflowconversion/java.esnext (unchanged)
         179      179 unusedmultiexpressionreturn/java (unchanged)
@@ -431,12 +437,12 @@ All reports:
       11452    11452 wasm/java.esnext (unchanged)
          22       22 wasmjsinterop/java (unchanged)
          22       22 wasmjsinterop/java.esnext (unchanged)
-       1440     1440 whenstatement/kotlin (unchanged)
-       1100     1100 whenstatement/kotlin.esnext (unchanged)
+       1440     1541 whenstatement/kotlin (7.0%)
+       1100     1203 whenstatement/kotlin.esnext (9.4%)
         934      934 whilestatement/java (unchanged)
         596      596 whilestatement/java.esnext (unchanged)
-        936      936 whilestatement/kotlin (unchanged)
-        597      597 whilestatement/kotlin.esnext (unchanged)
+        936      943 whilestatement/kotlin (0.7%)
+        597      602 whilestatement/kotlin.esnext (0.8%)
        1990     1990 wideningfloatconversion/java (unchanged)
        1660     1660 wideningfloatconversion/java.esnext (unchanged)
        2724     2724 wideningprimitiveconversion/java (unchanged)

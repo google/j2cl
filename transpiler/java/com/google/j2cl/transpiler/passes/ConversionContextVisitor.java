@@ -57,7 +57,6 @@ import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.StatementAsExpression;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
@@ -409,7 +408,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || expression instanceof JavaScriptConstructorReference
         // expressions that needs only subexpressions to be handled
         || expression instanceof MultiExpression
-        || expression instanceof StatementAsExpression
         || expression instanceof ExpressionWithComment
         || expression instanceof FunctionExpression
         || expression instanceof VariableDeclarationExpression
