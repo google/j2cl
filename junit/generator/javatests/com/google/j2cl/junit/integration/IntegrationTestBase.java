@@ -165,8 +165,8 @@ public abstract class IntegrationTestBase {
             .map(
                 line ->
                     line.replace(
-                        "third_party/java_src/j2cl/jre/java/jre.js.zip!/",
-                        "third_party/java_src/j2cl/jre/java/jre.js/"))
+                        "jre/java/jre.js.zip!/",
+                        "jre/java/jre.js/"))
             .collect(toImmutableList());
 
     return logs;
@@ -209,7 +209,7 @@ public abstract class IntegrationTestBase {
   }
 
   protected File getTestDataFile(String fileName) {
-    String javaTestsRoot = "third_party/java_src/j2cl/junit/generator/javatests/";
+    String javaTestsRoot = "junit/generator/javatests/";
     return new File(javaTestsRoot + getTestDataPackage().replace('.', '/'), fileName);
   }
 

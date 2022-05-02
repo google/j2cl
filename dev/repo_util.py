@@ -21,12 +21,12 @@ import signal
 import subprocess
 import zlib
 
-INTEGRATION_ROOT = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/integration/"
+INTEGRATION_ROOT = "transpiler/javatests/com/google/j2cl/integration/"
 OBFUSCATED_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:optimized_js%s"
 READABLE_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:readable_optimized_js%s"
 SIZE_REPORT = INTEGRATION_ROOT + "size_report.txt"
 TEST_LIST = INTEGRATION_ROOT + "optimized_js_list.bzl"
-BENCH_ROOT = "third_party/java_src/j2cl/benchmarking/java/com/google/j2cl/benchmarks/"
+BENCH_ROOT = "benchmarking/java/com/google/j2cl/benchmarks/"
 JVM_BENCH_PATTERN = BENCH_ROOT + "%s"
 J2CL_BENCH_PATTERN = BENCH_ROOT + "%s-j2cl"
 J2WASM_BENCH_PATTERN = BENCH_ROOT + "%s-j2wasm"
