@@ -55,5 +55,5 @@ jre.logging.simpleConsoleHandler =
 // Provide a stub for field preserver to make things work without full
 // compilation.
 if (!COMPILED || goog.DEBUG) {
-  goog.global.$J2CL_PRESERVE$ = function(/** ...* */ e) {};
+  globalThis.$J2CL_PRESERVE$ = function(/** ...* */ e) {};
 }
