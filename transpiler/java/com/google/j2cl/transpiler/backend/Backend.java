@@ -70,6 +70,7 @@ import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnType
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
+import com.google.j2cl.transpiler.passes.J2KtRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
@@ -388,6 +389,11 @@ public enum Backend {
     }
 
     @Override
+    public void checkRestrictions(BackendOptions options, Library library, Problems problems) {
+      J2KtRestrictionsChecker.check(library, problems);
+    }
+
+    @Override
     public ImmutableList<Supplier<NormalizationPass>> getPassFactories(BackendOptions options) {
       return ImmutableList.of(
           // Pre-verifications
@@ -435,6 +441,8 @@ public enum Backend {
 
   public abstract ImmutableList<Supplier<NormalizationPass>> getPassFactories(
       BackendOptions options);
+
+  public void checkRestrictions(BackendOptions options, Library library, Problems problems) {}
 
   public abstract void generateOutputs(BackendOptions options, Library library, Problems problems);
 }

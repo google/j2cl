@@ -89,12 +89,17 @@ class J2clTranspiler {
   }
 
   private void checkLibrary(Library library) {
+    // Always check JS-interop restrictions.
     JsInteropRestrictionsChecker.check(
         library,
         problems,
         /* enableWasm= */ options.getBackend() == Backend.WASM,
         /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
         /* optimizeAutoValue= */ options.getOptimizeAutoValue());
+
+    // Check additional backend-specific restrictions.
+    options.getBackend().checkRestrictions(options, library, problems);
+
     problems.abortIfHasErrors();
   }
 

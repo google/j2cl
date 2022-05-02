@@ -60,7 +60,16 @@ java_test(
     data = [":jre_bundle_deploy.jar"],
     deps = [
         ":TranspilerTester",
-        "//third_party:guava",
+        "//third_party:junit",
+    ],
+)
+
+java_test(
+    name = "J2KtRestrictionsCheckerTest",
+    srcs = ["J2KtRestrictionsCheckerTest.java"],
+    data = [":jre_bundle_deploy.jar"],
+    deps = [
+        ":TranspilerTester",
         "//third_party:junit",
     ],
 )

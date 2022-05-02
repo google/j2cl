@@ -86,6 +86,15 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       hidden = true)
   Frontend frontEnd = Frontend.JDT;
 
+  @Option(
+      name = "-backend",
+      metaVar = "(CLOSURE | WASM | KOTLIN)",
+      usage =
+          "Select the backend to use: CLOSURE (default), WASM (experimental), KOTLIN"
+              + " (experimental).",
+      hidden = true)
+  Backend backend = Backend.CLOSURE;
+
   @Option(name = "-kotlincOptions", hidden = true)
   List<String> kotlincOptions = new ArrayList<>();
 
@@ -129,7 +138,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
         .setKotlincOptions(ImmutableList.copyOf(kotlincOptions))
-        .setBackend(Backend.CLOSURE)
+        .setBackend(this.backend)
         .build();
   }
 

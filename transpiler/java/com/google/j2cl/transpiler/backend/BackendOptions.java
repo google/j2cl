@@ -48,4 +48,6 @@ public interface BackendOptions {
   boolean getEmitReadableSourceMap();
 
   boolean getGenerateKytheIndexingMetadata();
+
+  boolean isNullMarkedSupported();
 }
