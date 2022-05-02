@@ -199,6 +199,11 @@ def _golden_output_impl(ctx):
         # 'input' is the output tree artifact of the transpiler.
         if not input.path.endswith(".kt"):
             excluded_extensions.append("kt")
+
+        # TODO(b/217479735): Remove after fixing sourcemapping
+        if "/kotlin/" in input.path:
+            excluded_extensions.append("mappings")
+
         exclusion_filter = " -o ".join(["-name *.%s" % ext for ext in excluded_extensions])
 
         ctx.actions.run_shell(
