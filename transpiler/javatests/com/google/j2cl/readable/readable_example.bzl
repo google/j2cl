@@ -55,6 +55,13 @@ def readable_example(
       **kwargs: passes to j2cl_library
     """
 
+    if any([src for src in srcs if src.endswith(".kt")]):
+        # J2KT doesn't make sense for Kotlin Frontend.
+        generate_kt_readables = False
+
+        # WASM is currently not planned for Kotlin Frontend.
+        generate_wasm_readables = False
+
     # Transpile the Java files.
     j2cl_library(
         name = "readable",
