@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import java.util.Iterator;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -143,6 +144,29 @@ public final class ArrayHelper {
 
   public static void sort(Object array, CompareFunction fn) {
     asNativeArray(array).sort(fn);
+  }
+
+  public static <T> Iterator<T> arrayIterator(T[] array) {
+    return new ArrayIterator<>(array);
+  }
+
+  private static final class ArrayIterator<T> implements Iterator<T> {
+    private int index = 0;
+    private T[] array;
+
+    private ArrayIterator(T[] array) {
+      this.array = array;
+    }
+
+    @Override
+    public boolean hasNext() {
+      return index < array.length;
+    }
+
+    @Override
+    public T next() {
+      return array[index++];
+    }
   }
 
   private static NativeArray asNativeArray(Object array) {

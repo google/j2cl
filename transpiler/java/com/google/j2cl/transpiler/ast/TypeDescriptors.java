@@ -70,6 +70,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfBoolean;
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfObject;
 
+  public DeclaredTypeDescriptor javaemulInternalArrayHelper;
   public DeclaredTypeDescriptor javaemulInternalAsserts;
   public DeclaredTypeDescriptor javaemulInternalValueType;
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
@@ -626,6 +627,9 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.WasmArray.OfObject":
           typeDescriptors.javaemulInternalWasmArrayOfObject = referenceType;
+          break;
+        case "javaemul.internal.ArrayHelper":
+          typeDescriptors.javaemulInternalArrayHelper = referenceType;
           break;
         case "javaemul.internal.Asserts":
           typeDescriptors.javaemulInternalAsserts = referenceType;

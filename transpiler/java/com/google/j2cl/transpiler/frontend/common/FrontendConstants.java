@@ -59,6 +59,7 @@ public class FrontendConstants {
           "java.lang.StringBuilder",
           "java.lang.Throwable",
           "java.util.Iterator",
+          "javaemul.internal.ArrayHelper",
           "javaemul.internal.Asserts",
           "javaemul.internal.ValueType",
           "javaemul.internal.InternalPreconditions",
