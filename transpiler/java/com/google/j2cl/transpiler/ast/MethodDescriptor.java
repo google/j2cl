@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -301,6 +300,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Type parameters declared in the method. */
   public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
 
+  public abstract ImmutableList<TypeDescriptor> getTypeArgumentTypeDescriptors();
+
   public boolean isParameterOptional(int i) {
     return getParameterDescriptors().get(i).isJsOptional();
   }
@@ -373,6 +374,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return toBuilder()
         .setEnclosingTypeDescriptor(getEnclosingTypeDescriptor().toRawTypeDescriptor())
         .setTypeParameterTypeDescriptors(ImmutableList.of())
+        .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .setReturnTypeDescriptor(getReturnTypeDescriptor().toRawTypeDescriptor())
         .setParameterDescriptors(
             getParameterDescriptors().stream()
@@ -399,6 +401,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setDeclarationDescriptor(
             isDeclaration() ? null : getDeclarationDescriptor().withoutTypeParameters())
         .setTypeParameterTypeDescriptors(ImmutableList.of())
+        .setTypeArgumentTypeDescriptors(ImmutableList.of())
         .build();
   }
 
@@ -686,8 +689,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setUncheckedCast(false)
         .setSideEffectFree(false)
         .setOrigin(MethodOrigin.SOURCE)
-        .setParameterDescriptors(Collections.emptyList())
-        .setTypeParameterTypeDescriptors(Collections.emptyList());
+        .setParameterDescriptors(ImmutableList.of())
+        .setTypeParameterTypeDescriptors(ImmutableList.of())
+        .setTypeArgumentTypeDescriptors(ImmutableList.of());
   }
 
   /** Returns a description that is useful for error messages. */
@@ -1005,6 +1009,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return setParameterDescriptors();
     }
 
+    public abstract Builder setTypeArgumentTypeDescriptors(List<TypeDescriptor> typeArguments);
+
     abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
 
     abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
@@ -1078,6 +1084,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       checkState(getName().isPresent());
 
       MethodDescriptor methodDescriptor = autoBuild();
+
+      if (methodDescriptor.isDeclaration()) {
+        checkState(methodDescriptor.getTypeArgumentTypeDescriptors().isEmpty());
+      }
 
       MethodDescriptor internedMethodDescriptor = interner.intern(methodDescriptor);
       if (internedMethodDescriptor == methodDescriptor) {

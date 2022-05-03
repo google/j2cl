@@ -702,6 +702,9 @@ class JdtUtils {
             .transform(JdtUtils::createTypeDescriptor)
             .transform(TypeVariable.class::cast);
 
+    ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors =
+        convertTypeArguments(methodBinding.getTypeArguments(), inNullMarkedScope);
+
     ImmutableList.Builder<ParameterDescriptor> parameterDescriptorBuilder = ImmutableList.builder();
     for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
       parameterDescriptorBuilder.add(
@@ -732,6 +735,7 @@ class JdtUtils {
         .setDeclarationDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+        .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
         .setJsInfo(jsInfo)
         .setKtInfo(ktInfo)
         .setWasmInfo(getWasmInfo(methodBinding))
@@ -750,6 +754,13 @@ class JdtUtils {
         .setDeprecated(isDeprecated(methodBinding))
         .setUncheckedCast(hasUncheckedCast)
         .build();
+  }
+
+  private static ImmutableList<TypeDescriptor> convertTypeArguments(
+      ITypeBinding[] typeArguments, boolean isNullMarked) {
+    return JdtUtils.<ITypeBinding>asTypedList(Arrays.asList(typeArguments)).stream()
+        .map(t -> JdtUtils.createTypeDescriptor(t, isNullMarked))
+        .collect(toImmutableList());
   }
 
   private static String getWasmInfo(IMethodBinding binding) {

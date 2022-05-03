@@ -43,6 +43,8 @@
 [String s = checked();] => [let s = /**@type {?string}*/ ($Casts.$to(this.m_checked__(), j_l_String));] "genericmethod.GenericMethod.test"
 [s] => [s] "s"
 [s = unchecked();] => [s = /**@type {?string}*/ (this.m_unchecked__());] "genericmethod.GenericMethod.test"
+[this.<Content>checked().getProp();] => [/**@type {Content}*/ ($Casts.$to(this.m_checked__(), Content)).m_getProp___$pp_genericmethod();] "genericmethod.GenericMethod.test"
+[this.<Content>unchecked().getProp();] => [/**@type {Content}*/ (this.m_unchecked__()).m_getProp___$pp_genericmethod();] "genericmethod.GenericMethod.test"
 [acceptsContent] => [m_acceptsContent__genericmethod_GenericMethod_Content]
 [content] => [content] "content"
 [{}] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.acceptsContent"

@@ -42,14 +42,16 @@ open class GenericMethod<T> {
 
  open fun test() {
   val g: genericmethod.GenericMethod<kotlin.Number?>? = genericmethod.GenericMethod<kotlin.Number?>()
-  g!!.foo(g, g)
-  g!!.foo(kotlin.Error(), kotlin.Exception())
+  g!!.foo<genericmethod.GenericMethod<kotlin.Number?>?, genericmethod.GenericMethod<kotlin.Number?>?>(g, g)
+  g!!.foo<kotlin.Error?, kotlin.Exception?>(kotlin.Error(), kotlin.Exception())
   g!!.`fun`(kotlin.Any())
-  g!!.`fun`(kotlin.Exception())
-  g!!.`fun`(kotlin.Error())
-  g!!.`fun`(kotlin.arrayOf<kotlin.String?>("asdf"))
-  var s: kotlin.String? = this.checked()
-  s = this.unchecked()
+  g!!.`fun`<kotlin.Exception?>(kotlin.Exception())
+  g!!.`fun`<kotlin.Error?>(kotlin.Error())
+  g!!.`fun`<kotlin.String?>(kotlin.arrayOf<kotlin.String?>("asdf"))
+  var s: kotlin.String? = this.checked<kotlin.String?>()
+  s = this.unchecked<kotlin.String?>()
+  this.checked<genericmethod.GenericMethod.Content?>()!!.getProp()
+  this.unchecked<genericmethod.GenericMethod.Content?>()!!.getProp()
  }
 
  companion object {

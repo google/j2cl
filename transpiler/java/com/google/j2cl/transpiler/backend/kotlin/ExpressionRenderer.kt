@@ -273,7 +273,16 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   renderQualifier(expression)
   renderIdentifier(expression.target.ktName)
   if (!expression.target.isKtProperty) {
+    renderTypeArguments(expression.target.typeArgumentTypeDescriptors)
     renderInvocationArguments(expression)
+  }
+}
+
+private fun Renderer.renderTypeArguments(typeArguments: List<TypeDescriptor>) {
+  if (typeArguments.isNotEmpty()) {
+    renderInAngleBrackets {
+      renderCommaSeparated(typeArguments) { renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT) }
+    }
   }
 }
 

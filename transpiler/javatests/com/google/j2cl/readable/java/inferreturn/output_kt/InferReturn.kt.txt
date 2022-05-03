@@ -13,16 +13,16 @@ open class InferReturn<T> {
   @kotlin.jvm.JvmStatic
   fun tightenType(foo: inferreturn.InferReturn<kotlin.String?>?): inferreturn.InferReturn<inferreturn.InferReturn<kotlin.String?>?>? {
    if (foo !== null) {
-    return inferreturn.InferReturn.inferGeneric(foo)
+    return inferreturn.InferReturn.inferGeneric<inferreturn.InferReturn<kotlin.String?>?>(foo)
    }
    return null
   }
 
   @kotlin.jvm.JvmStatic
   fun main() {
-   val list: java.util.ArrayList<kotlin.Any?>? = inferreturn.InferReturn.newArrayList("foo")
+   val list: java.util.ArrayList<kotlin.Any?>? = inferreturn.InferReturn.newArrayList<kotlin.Any?>("foo")
    inferreturn.InferReturn.acceptsArrayListOfObject(list)
-   val array: kotlin.Array<kotlin.Any?>? = inferreturn.InferReturn.newArray("foo") as kotlin.Array<kotlin.Any?>?
+   val array: kotlin.Array<kotlin.Any?>? = inferreturn.InferReturn.newArray<kotlin.String?>("foo") as kotlin.Array<kotlin.Any?>?
    inferreturn.InferReturn.acceptsArrayOfObject(array)
   }
 

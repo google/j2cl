@@ -27,10 +27,10 @@ open class IntersectionTypeTest<U> {
  }
 
  open fun testMethodCall() {
-  val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m()
-  intersectiontype.IntersectionTypeTest.set(o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */)
-  intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m())
-  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n()
+  val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>()
+  intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>(o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */)
+  intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>(intersectiontype.IntersectionTypeTest.m<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>())
+  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>()
  }
 
  companion object {
@@ -86,7 +86,7 @@ open class IntersectionTypeTest<U> {
 
   @kotlin.jvm.JvmStatic
   fun <T> m(): T? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
-   return intersectiontype.IntersectionTypeTest.get(kotlin.Any()) as T?
+   return intersectiontype.IntersectionTypeTest.get<kotlin.Any?>(kotlin.Any()) as T?
   }
 
   @kotlin.jvm.JvmStatic

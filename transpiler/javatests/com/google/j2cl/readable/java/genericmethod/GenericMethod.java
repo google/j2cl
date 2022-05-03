@@ -69,6 +69,9 @@ public class GenericMethod<T> {
 
     String s = checked();
     s = unchecked();
+
+    this.<Content>checked().getProp();
+    this.<Content>unchecked().getProp();
   }
 
   static class SuperContainer<C extends Container<?>> {
