@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google Inc.
+ * Copyright 2022 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -14,22 +14,4 @@
 package java.lang.invoke;
 
 /** Exists solely to make javac happy. */
-public class LambdaMetafactory {
-  public static CallSite metafactory(
-      MethodHandles.Lookup caller,
-      String interfaceMethodName,
-      MethodType factoryType,
-      MethodType interfaceMethodType,
-      MethodHandle implementation,
-      MethodType dynamicMethodType) {
-    return null;
-  }
-
-  public static CallSite altMetafactory(
-      MethodHandles.Lookup caller,
-      String interfaceMethodName,
-      MethodType factoryType,
-      Object... a) {
-    return null;
-  }
-}
+public class CallSite {}
