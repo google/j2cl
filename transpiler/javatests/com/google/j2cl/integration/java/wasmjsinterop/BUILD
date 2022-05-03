@@ -10,5 +10,4 @@ package(
 integration_test(
     name = "wasmjsinterop",
     srcs = glob(["*.java"]),
-    enable_kt = False,
 )

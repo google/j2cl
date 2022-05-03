@@ -27,7 +27,7 @@ open class Number {
  }
 
  fun interface NativeFunction<T> {
-  external fun apply(thisContext: kotlin.Any?, argsArray: kotlin.IntArray?): T?
+  fun apply(thisContext: kotlin.Any?, argsArray: kotlin.IntArray?): T?
  }
 
  interface MyLiteralType {}

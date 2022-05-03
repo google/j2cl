@@ -10,7 +10,5 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/202433397): Generate overrides for methods. = False,
-    build_kt_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

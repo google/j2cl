@@ -101,10 +101,10 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
 }
 
 private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, kind: Kind) {
-  if (methodDescriptor.isNative) {
-    render("external ")
-  }
   if (kind != Kind.INTERFACE) {
+    if (methodDescriptor.isNative) {
+      render("external ")
+    }
     if (methodDescriptor.isAbstract) {
       render("abstract ")
     } else if (!methodDescriptor.isFinal &&

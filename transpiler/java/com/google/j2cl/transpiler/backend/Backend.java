@@ -94,6 +94,7 @@ import com.google.j2cl.transpiler.passes.NormalizeInstanceCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceOfs;
 import com.google.j2cl.transpiler.passes.NormalizeInstantiationThroughFactoryMethods;
 import com.google.j2cl.transpiler.passes.NormalizeInterfaceMethods;
+import com.google.j2cl.transpiler.passes.NormalizeInterfaces;
 import com.google.j2cl.transpiler.passes.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsDocCastExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeJsEnums;
@@ -402,6 +403,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          NormalizeInterfaces::new,
           NormalizeTryWithResources::new,
           NormalizeArrayCreationsKotlin::new,
           NormalizeStaticMemberQualifiers::new,

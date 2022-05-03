@@ -253,11 +253,11 @@ open class Lambdas {
  }
 
  fun interface Thenable<T> {
-  external fun then(f1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, T>?, f2: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>?)
+  fun then(f1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, T>?, f2: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>?)
  }
 
  fun interface AnotherThenable<T> {
-  external fun then(f1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, T>?, f2: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>?)
+  fun then(f1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, T>?, f2: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>?)
  }
 
  class IdentityFunction: lambdas.Lambdas.GenericJsFunction<kotlin.Any?, kotlin.Any?> {
@@ -267,8 +267,6 @@ open class Lambdas {
  }
 
  interface Equals<T> {
-  fun equals(o: kotlin.Any?): kotlin.Boolean
-
   fun get(): T? {
    return null
   }

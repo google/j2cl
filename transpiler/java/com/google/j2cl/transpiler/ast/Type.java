@@ -158,10 +158,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return members;
   }
 
-  public void setMembers(List<Member> members) {
-    this.members = members;
-  }
-
   public void addMember(Member member) {
     members.add(checkNotNull(member));
   }
