@@ -20,8 +20,10 @@ package javaemul.lang
  *
  * See regular JRE API documentation for other methods in this file.
  */
-operator fun Boolean.Companion.invoke(b: Boolean) = b
+operator fun Boolean.Companion.invoke(b: Boolean): Boolean = b
 
-fun Boolean.Companion.valueOf(b: Boolean) = b
+fun Boolean.Companion.valueOf(b: Boolean): Boolean = b
 
-fun Boolean.booleanValue() = this
+fun Boolean.booleanValue(): Boolean = this
+
+fun Boolean.Companion.hashCode(b: Boolean): Int = b.hashCode()

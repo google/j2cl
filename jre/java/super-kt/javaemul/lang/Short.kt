@@ -16,24 +16,24 @@
 package javaemul.lang
 
 /**
- * Pseudo-constructor for emulated java.lang.Float.
+ * Pseudo-constructor for emulated java.lang.Short.
  *
  * See regular JRE API documentation for other methods in this file.
  */
-operator fun Float.Companion.invoke(f: Float): Float = f
+operator fun Short.Companion.invoke(s: Short): Short = s
 
-fun Float.Companion.valueOf(f: Float): Float = f
+fun Short.Companion.valueOf(s: Short): Short = s
 
-fun Float.Companion.valueOf(s: String): Float = s.toFloat()
+fun Short.Companion.valueOf(str: String): Short = str.toShort()
 
-fun Float.Companion.compare(f1: Float, f2: Float): Int = f1.compareTo(f2)
+fun Short.Companion.valueOf(s: String, radix: Int): Short = s.toShort(radix)
 
-fun Float.Companion.toString(f: Float): String = f.toString()
+fun Short.Companion.compare(s1: Short, s2: Short): Int = s1.compareTo(s2)
 
-fun Float.Companion.parseFloat(s: String): Float = s.toFloat()
+fun Short.Companion.toString(s: Short): String = s.toString()
 
-fun Float.Companion.hashCode(f: Float): Int = f.hashCode()
+fun Short.Companion.parseShort(str: String): Short = str.toShort()
 
-fun Float.Companion.isNaN(f: Float): Boolean = f.isNaN()
+fun Short.Companion.parseShort(s: String, radix: Int): Short = s.toShort(radix)
 
-fun Float.Companion.isInfinite(f: Float): Boolean = f.isInfinite()
+fun Short.Companion.hashCode(s: Short): Int = s.hashCode()

@@ -16,24 +16,24 @@
 package javaemul.lang
 
 /**
- * Pseudo-constructor for emulated java.lang.Float.
+ * Pseudo-constructor for emulated java.lang.Byte.
  *
  * See regular JRE API documentation for other methods in this file.
  */
-operator fun Float.Companion.invoke(f: Float): Float = f
+operator fun Byte.Companion.invoke(b: Byte): Byte = b
 
-fun Float.Companion.valueOf(f: Float): Float = f
+fun Byte.Companion.valueOf(b: Byte): Byte = b
 
-fun Float.Companion.valueOf(s: String): Float = s.toFloat()
+fun Byte.Companion.valueOf(s: String): Byte = s.toByte()
 
-fun Float.Companion.compare(f1: Float, f2: Float): Int = f1.compareTo(f2)
+fun Byte.Companion.valueOf(s: String, radix: Int): Byte = s.toByte(radix)
 
-fun Float.Companion.toString(f: Float): String = f.toString()
+fun Byte.Companion.compare(b1: Byte, b2: Byte): Int = b1.compareTo(b2)
 
-fun Float.Companion.parseFloat(s: String): Float = s.toFloat()
+fun Byte.Companion.toString(b: Byte): String = b.toString()
 
-fun Float.Companion.hashCode(f: Float): Int = f.hashCode()
+fun Byte.Companion.parseByte(s: String): Byte = s.toByte()
 
-fun Float.Companion.isNaN(f: Float): Boolean = f.isNaN()
+fun Byte.Companion.parseByte(s: String, radix: Int): Byte = s.toByte(radix)
 
-fun Float.Companion.isInfinite(f: Float): Boolean = f.isInfinite()
+fun Byte.Companion.hashCode(b: Byte): Int = b.hashCode()

@@ -174,6 +174,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/java/intersectiontype:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/java/iteratormethodresolution:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/java/iteratormethodresolution:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/java/j2ktjre:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/java/j2ktjre:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/java/jsasync:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/java/jsasync:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/java/jsbridgebackward:optimized_js",
