@@ -3,9 +3,7 @@ load(
     "readable_example",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),

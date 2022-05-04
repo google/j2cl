@@ -3,11 +3,8 @@ load(
     "readable_example",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
-# Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
     # TODO(b/202430789): Support boxing/unboxing of primitive conversions in J2KT

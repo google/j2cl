@@ -4,11 +4,8 @@ load(
     "readable_example",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
-# Creates verification target
 readable_example(
     srcs = ["TypeAnnotations.java"],
     # TODO(b/202428351): Add support for generics.

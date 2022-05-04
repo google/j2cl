@@ -4,16 +4,13 @@ load(
     "readable_example",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 closure_js_library(
     name = "externs",
     srcs = ["foo_externs.js"],
 )
 
-# Creates verification target
 readable_example(
     srcs = glob([
         "*.java",

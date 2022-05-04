@@ -4,9 +4,7 @@ load(
 )
 load("//build_defs:rules.bzl", "j2cl_library")
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 j2cl_library(
     name = "annotation",
@@ -21,7 +19,6 @@ j2cl_library(
     deps = [":annotation"],
 )
 
-# Creates verification target
 readable_example(
     srcs = [
         "Implementor.java",

@@ -3,11 +3,8 @@ load(
     "readable_example",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
-# Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
     # TODO(b/204594816): Render explicit labels in return from lambdas.

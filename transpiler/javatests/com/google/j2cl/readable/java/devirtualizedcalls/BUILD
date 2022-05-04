@@ -3,11 +3,8 @@ load(
     "readable_example",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
-# Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
     # TODO(b/202429268): Support explicit type coercion (there are likely other issuse but this one
