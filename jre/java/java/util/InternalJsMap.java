@@ -51,6 +51,8 @@ class InternalJsMap<V> {
 
   native V get(String key);
 
+  native boolean has(String key);
+
   native void set(int key, V value);
 
   native void set(String key, V value);

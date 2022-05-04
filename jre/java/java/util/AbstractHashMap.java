@@ -22,7 +22,6 @@ import static javaemul.internal.InternalPreconditions.checkState;
 import static javaemul.internal.InternalPreconditions.isApiChecked;
 
 import javaemul.internal.JsUtils;
-import javaemul.internal.annotations.SpecializeMethod;
 
 /**
  * Implementation of Map interface based on a hash table. <a
@@ -175,11 +174,11 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     this.modCount++;
   }
 
-  @SpecializeMethod(params = {String.class}, target = "hasStringValue")
   @Override
   public boolean containsKey(Object key) {
     return key instanceof String
-        ? hasStringValue(JsUtils.uncheckedCast(key)) : hasHashValue(key);
+        ? stringMap.contains(JsUtils.uncheckedCast(key))
+        : hashCodeMap.getEntry(key) != null;
   }
 
   @Override
@@ -201,25 +200,25 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     return new EntrySet();
   }
 
-  @SpecializeMethod(params = {String.class}, target = "getStringValue")
   @Override
   public V get(Object key) {
     return key instanceof String
-        ? getStringValue(JsUtils.uncheckedCast(key)) : getHashValue(key);
+        ? stringMap.get(JsUtils.uncheckedCast(key))
+        : getEntryValueOrNull(hashCodeMap.getEntry(key));
   }
 
-  @SpecializeMethod(params = {String.class, Object.class}, target = "putStringValue")
   @Override
   public V put(K key, V value) {
     return key instanceof String
-        ? putStringValue(JsUtils.uncheckedCast(key), value) : putHashValue(key, value);
+        ? stringMap.put(JsUtils.uncheckedCast(key), value)
+        : hashCodeMap.put(key, value);
   }
 
-  @SpecializeMethod(params = {String.class}, target = "removeStringValue")
   @Override
   public V remove(Object key) {
     return key instanceof String
-        ? removeStringValue(JsUtils.uncheckedCast(key)) : removeHashValue(key);
+        ? stringMap.remove(JsUtils.uncheckedCast(key))
+        : hashCodeMap.remove(key);
   }
 
   @Override
@@ -239,74 +238,4 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
    */
   abstract int getHashCode(Object key);
 
-  /**
-   * Returns the Map.Entry whose key is Object equal to <code>key</code>,
-   * provided that <code>key</code>'s hash code is <code>hashCode</code>;
-   * or <code>null</code> if no such Map.Entry exists at the specified
-   * hashCode.
-   */
-  private V getHashValue(Object key) {
-    return getEntryValueOrNull(hashCodeMap.getEntry(key));
-  }
-
-  /**
-   * Returns the value for the given key in the stringMap. Returns
-   * <code>null</code> if the specified key does not exist.
-   */
-  private V getStringValue(String key) {
-    return key == null ? getHashValue(null) : stringMap.get(key);
-  }
-
-  /**
-   * Returns true if the a key exists in the hashCodeMap that is Object equal to
-   * <code>key</code>, provided that <code>key</code>'s hash code is
-   * <code>hashCode</code>.
-   */
-  private boolean hasHashValue(Object key) {
-    return hashCodeMap.getEntry(key) != null;
-  }
-
-  /**
-   * Returns true if the given key exists in the stringMap.
-   */
-  private boolean hasStringValue(String key) {
-    return key == null ? hasHashValue(null) : stringMap.contains(key);
-  }
-
-  /**
-   * Sets the specified key to the specified value in the hashCodeMap. Returns
-   * the value previously at that key. Returns <code>null</code> if the
-   * specified key did not exist.
-   */
-  private V putHashValue(K key, V value) {
-    return hashCodeMap.put(key, value);
-  }
-
-  /**
-   * Sets the specified key to the specified value in the stringMap. Returns the
-   * value previously at that key. Returns <code>null</code> if the specified
-   * key did not exist.
-   */
-  private V putStringValue(String key, V value) {
-    return key == null ? putHashValue(null, value) : stringMap.put(key, value);
-  }
-
-  /**
-   * Removes the pair whose key is Object equal to <code>key</code> from
-   * <code>hashCodeMap</code>, provided that <code>key</code>'s hash code
-   * is <code>hashCode</code>. Returns the value that was associated with the
-   * removed key, or null if no such key existed.
-   */
-  private V removeHashValue(Object key) {
-    return hashCodeMap.remove(key);
-  }
-
-  /**
-   * Removes the specified key from the stringMap and returns the value that was
-   * previously there. Returns <code>null</code> if the specified key does not
-   * exist.
-   */
-  private V removeStringValue(String key) {
-    return key == null ? removeHashValue(null) : stringMap.remove(key);
-  }
 }

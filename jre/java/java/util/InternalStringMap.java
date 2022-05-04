@@ -40,7 +40,7 @@ class InternalStringMap<K, V> implements Iterable<Entry<K, V>> {
   }
 
   public boolean contains(String key) {
-    return !JsUtils.isUndefined(backingMap.get(key));
+    return backingMap.has(key);
   }
 
   public V get(String key) {

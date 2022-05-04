@@ -1,12 +1,18 @@
 Integration tests size report:
 **************************************
-There are 0 optimized size changes.
-Total size (of already existing tests) did not change.
+There are 6 optimized size changes.
+Total optimized size (of already existing tests) changed from
+  2137092 to 2136060 bytes (100%->100.0%) and from
+  771903 to 771605 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+       3431     3380 loggingstripped/java.esnext (-1.5%)
+       3914     3868 loggingstripped/java (-1.2%)
+       4108     4063 logging/java.esnext (-1.1%)
+       4636     4590 logging/java (-1.0%)
 
 
 Expansion report highlights:
@@ -22,12 +28,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    3999421  3999421 box2d_default/java (unchanged)
-    2181941  2181941 box2d_default/java.minified (unchanged)
-    1151549  1151549 box2d_default/java.rta (unchanged)
-    2408656  2408656 emptyclass/java (unchanged)
-    1444443  1444443 emptyclass/java.minified (unchanged)
-     686670   686670 emptyclass/java.rta (unchanged)
+    3999421  3997281 box2d_default/java (-0.1%)
+    2181941  2181096 box2d_default/java.minified (-0.0%)
+    1151549  1150704 box2d_default/java.rta (-0.1%)
+    2408656  2406516 emptyclass/java (-0.1%)
+    1444443  1443598 emptyclass/java.minified (-0.1%)
+     686670   685825 emptyclass/java.rta (-0.1%)
 
 
 All reports:
@@ -225,8 +231,8 @@ All reports:
        1148     1148 intersectiontype/java.esnext (unchanged)
        1227     1227 iteratormethodresolution/java (unchanged)
         873      873 iteratormethodresolution/java.esnext (unchanged)
-         -1     5123 j2ktjre/java (new)
-         -1     4737 j2ktjre/java.esnext (new)
+       5123     5123 j2ktjre/java (unchanged)
+       4737     4737 j2ktjre/java.esnext (unchanged)
        2270     2270 jsasync/java (unchanged)
        1042     1042 jsasync/java.esnext (unchanged)
          22       22 jsbridgebackward/java (unchanged)
@@ -273,10 +279,10 @@ All reports:
        1820     1820 lambdas/java.esnext (unchanged)
         984      984 localgenericclassinitjustonce/java (unchanged)
         634      634 localgenericclassinitjustonce/java.esnext (unchanged)
-       4636     4636 logging/java (unchanged)
-       4108     4108 logging/java.esnext (unchanged)
-       3914     3914 loggingstripped/java (unchanged)
-       3431     3431 loggingstripped/java.esnext (unchanged)
+       4636     4590 logging/java (-1.0%)
+       4108     4063 logging/java.esnext (-1.1%)
+       3914     3868 loggingstripped/java (-1.2%)
+       3431     3380 loggingstripped/java.esnext (-1.5%)
        2755     2755 longimplicitcasts/java (unchanged)
        2429     2429 longimplicitcasts/java.esnext (unchanged)
        2522     2522 longoperationsinglesideeffect/java (unchanged)
@@ -433,8 +439,8 @@ All reports:
        3358     3358 varargs/java.esnext (unchanged)
         994      994 variables/java (unchanged)
         653      653 variables/java.esnext (unchanged)
-      11951    11951 wasm/java (unchanged)
-      11452    11452 wasm/java.esnext (unchanged)
+      11951    11906 wasm/java (-0.4%)
+      11452    11387 wasm/java.esnext (-0.6%)
          22       22 wasmjsinterop/java (unchanged)
          22       22 wasmjsinterop/java.esnext (unchanged)
        1541     1541 whenstatement/kotlin (unchanged)
