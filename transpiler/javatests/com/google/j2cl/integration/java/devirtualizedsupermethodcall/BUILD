@@ -3,14 +3,8 @@ load(
     "integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
-# Creates targets
-# blaze build :optimized_js
-# blaze test :compiled_test
-# blaze test :uncompiled_test
 integration_test(
     name = "devirtualizedsupermethodcall",
     srcs = glob(["*.java"]),

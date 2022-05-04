@@ -4,9 +4,7 @@ load(
     "integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 j2cl_library(
     name = "SuperParent",
@@ -37,10 +35,6 @@ j2cl_library(
     ],
 )
 
-# Creates targets
-# blaze build :optimized_js
-# blaze test :compiled_test
-# blaze test :uncompiled_test
 integration_test(
     name = "instancejsmethods",
     srcs = [

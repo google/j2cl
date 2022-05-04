@@ -3,9 +3,7 @@ load(
     "integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 integration_test(
     name = "j2ktjre",

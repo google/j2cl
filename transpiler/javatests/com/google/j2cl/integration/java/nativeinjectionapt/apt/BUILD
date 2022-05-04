@@ -1,8 +1,6 @@
 load("//build_defs:rules.bzl", "j2cl_library")
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 java_plugin(
     name = "apt",

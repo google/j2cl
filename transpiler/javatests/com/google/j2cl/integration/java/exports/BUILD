@@ -4,9 +4,7 @@ load(
     "integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 j2cl_library(
     name = "Foo",
@@ -39,9 +37,6 @@ j2cl_library(
     exports = [":ExportLayerOne"],
 )
 
-# Creates targets
-# blaze build :optimized_js
-# blaze test :readable_js
 integration_test(
     name = "exports",
     srcs = ["Main.java"],

@@ -4,9 +4,7 @@ load(
 )
 load("//build_defs:rules.bzl", "j2wasm_library")
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 # Provide a custom j2wasm_library. Double and float are two different primitives
 # types in wasm

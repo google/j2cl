@@ -4,9 +4,7 @@ load(
     "integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 j2cl_library(
     name = "MainRootType",
@@ -14,10 +12,6 @@ j2cl_library(
     srcs = ["MainRootType.java"],
 )
 
-# Creates targets
-# blaze build :optimized_js
-# blaze test :compiled_test
-# blaze test :uncompiled_test
 integration_test(
     name = "multipleroottypes",
     # Src's JUST the Main class and gets MainRootType as a dependency. Do not

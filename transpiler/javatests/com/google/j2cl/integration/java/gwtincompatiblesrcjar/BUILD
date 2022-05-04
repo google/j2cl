@@ -3,9 +3,7 @@ load(
     "integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 java_library(
     name = "gwtincompatibleMain",
@@ -24,10 +22,6 @@ java_library(
     srcs = ["Other.java"],
 )
 
-# Creates targets
-# blaze build :optimized_js
-# blaze test :compiled_test
-# blaze test :uncompiled_test
 integration_test(
     name = "gwtincompatible-with-srcjar",
     srcs = [

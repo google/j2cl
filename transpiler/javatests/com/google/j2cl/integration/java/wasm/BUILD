@@ -4,9 +4,7 @@ load(
 )
 load("//build_defs:rules.bzl", "j2wasm_library")
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 # Provide a custom j2wasm_library so no .js files passed to target.
 j2wasm_library(
@@ -20,10 +18,6 @@ j2wasm_library(
     ],
 )
 
-# Creates targets
-# blaze build :optimized_js
-# blaze test :compiled_test
-# blaze test :uncompiled_test
 integration_test(
     name = "wasm",
     srcs = glob([

@@ -3,13 +3,8 @@ load(
     "integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
-# Creates targets
-# blaze build :optimized_js
-# blaze test :readable_js
 integration_test(
     name = "staticblocklocalvar",
     srcs = glob(["*.java"]),
