@@ -44,7 +44,13 @@ public abstract class UnaryExpression extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
+    if (getOperator() == PrefixOperator.SPREAD) {
+      // Not a Java operation on primitives.
+      return operand.getTypeDescriptor();
+    }
+
     if (getOperator().hasSideEffect()) {
+      // JLS 5.6.1: increment and decrement operations are not subject to unary
       return operand.getTypeDescriptor();
     }
 
