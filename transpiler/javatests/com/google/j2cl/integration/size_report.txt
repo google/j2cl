@@ -1,9 +1,9 @@
 Integration tests size report:
 **************************************
-There are 6 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2136060 to 2138066 bytes (100%->100.1%) and from
-  771605 to 772494 bytes (100%->100.1%) gzipped.
+  2148199 to 2151731 bytes (100%->100.2%) and from
+  776061 to 777359 bytes (100%->100.2%) gzipped.
 
 
 Shrinkage report highlights:
@@ -14,10 +14,10 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
         old      new
-        638      776 unaryexpressions/kotlin.esnext (21.6%)
-        972     1100 unaryexpressions/kotlin (13.2%)
-       2156     2348 binaryexpressions/kotlin.esnext (8.9%)
-       2495     2677 binaryexpressions/kotlin (7.3%)
+       1203     1487 whenstatement/kotlin.esnext (23.6%)
+       1516     1870 varargs/kotlin.esnext (23.4%)
+       1541     1835 whenstatement/kotlin (19.1%)
+       2051     2417 varargs/kotlin (17.8%)
 
 
 Incremental size reports (non-gzip):
@@ -71,8 +71,8 @@ All reports:
         350      350 arrayoutofbounds/java.esnext (unchanged)
        3820     3820 arrayreadwrite/java (unchanged)
        3495     3495 arrayreadwrite/java.esnext (unchanged)
-       3559     3681 arrayreadwrite/kotlin (3.4%)
-       3235     3362 arrayreadwrite/kotlin.esnext (3.9%)
+       3681     3681 arrayreadwrite/kotlin (unchanged)
+       3362     3362 arrayreadwrite/kotlin.esnext (unchanged)
          22       22 assertremoved/java (unchanged)
          22       22 assertremoved/java.esnext (unchanged)
        2949     2949 assertsimple/java (unchanged)
@@ -89,8 +89,8 @@ All reports:
         657      657 backwardbridgemethod/kotlin.esnext (unchanged)
        2716     2716 binaryexpressions/java (unchanged)
        2400     2400 binaryexpressions/java.esnext (unchanged)
-       2495     2677 binaryexpressions/kotlin (7.3%)
-       2156     2348 binaryexpressions/kotlin.esnext (8.9%)
+       2677     2677 binaryexpressions/kotlin (unchanged)
+       2348     2348 binaryexpressions/kotlin.esnext (unchanged)
         926      926 blockscoping/java (unchanged)
         584      584 blockscoping/java.esnext (unchanged)
       26806    26806 box2d_default/java (unchanged)
@@ -157,12 +157,18 @@ All reports:
          22       22 emptyclasswithparent/java.esnext (unchanged)
        1071     1071 enummethods/java (unchanged)
         718      718 enummethods/java.esnext (unchanged)
+         -1     1091 enummethods/kotlin (new)
+         -1      737 enummethods/kotlin.esnext (new)
        1692     1692 enumobfuscation/java (unchanged)
        1286     1286 enumobfuscation/java.esnext (unchanged)
        1903     1903 enums/java (unchanged)
        1537     1537 enums/java.esnext (unchanged)
+         -1     1363 enums/kotlin (new)
+         -1     1004 enums/kotlin.esnext (new)
        1751     1751 enumspecialfunctions/java (unchanged)
        1416     1416 enumspecialfunctions/java.esnext (unchanged)
+         -1     1994 enumspecialfunctions/kotlin (new)
+         -1     1656 enumspecialfunctions/kotlin.esnext (new)
        1176     1176 exceptionnotcaught/java (unchanged)
         837      837 exceptionnotcaught/java.esnext (unchanged)
         941      941 exports/java (unchanged)
@@ -339,6 +345,8 @@ All reports:
        1146     1146 objectdevirtualcalls/java.esnext (unchanged)
        1791     1791 optimizedenums/java (unchanged)
        1403     1403 optimizedenums/java.esnext (unchanged)
+         -1     1360 optimizedenums/kotlin (new)
+         -1     1000 optimizedenums/kotlin.esnext (new)
         923      923 overloadedmethods/java (unchanged)
         579      579 overloadedmethods/java.esnext (unchanged)
        1006     1006 overridingclassmethods/java (unchanged)
@@ -429,24 +437,24 @@ All reports:
         693      693 typewildcards/java.esnext (unchanged)
        1164     1164 unaryexpressions/java (unchanged)
         840      840 unaryexpressions/java.esnext (unchanged)
-        972     1100 unaryexpressions/kotlin (13.2%)
-        638      776 unaryexpressions/kotlin.esnext (21.6%)
+       1100     1100 unaryexpressions/kotlin (unchanged)
+        776      776 unaryexpressions/kotlin.esnext (unchanged)
        3545     3545 underflowoverflowconversion/java (unchanged)
        3206     3206 underflowoverflowconversion/java.esnext (unchanged)
         179      179 unusedmultiexpressionreturn/java (unchanged)
         183      183 unusedmultiexpressionreturn/java.esnext (unchanged)
        3741     3741 varargs/java (unchanged)
        3358     3358 varargs/java.esnext (unchanged)
-         -1     2051 varargs/kotlin (new)
-         -1     1516 varargs/kotlin.esnext (new)
+       2051     2417 varargs/kotlin (17.8%)
+       1516     1870 varargs/kotlin.esnext (23.4%)
         994      994 variables/java (unchanged)
         653      653 variables/java.esnext (unchanged)
       11906    11906 wasm/java (unchanged)
       11387    11387 wasm/java.esnext (unchanged)
          22       22 wasmjsinterop/java (unchanged)
          22       22 wasmjsinterop/java.esnext (unchanged)
-       1541     1541 whenstatement/kotlin (unchanged)
-       1203     1203 whenstatement/kotlin.esnext (unchanged)
+       1541     1835 whenstatement/kotlin (19.1%)
+       1203     1487 whenstatement/kotlin.esnext (23.6%)
         934      934 whilestatement/java (unchanged)
         596      596 whilestatement/java.esnext (unchanged)
         943      943 whilestatement/kotlin (unchanged)
