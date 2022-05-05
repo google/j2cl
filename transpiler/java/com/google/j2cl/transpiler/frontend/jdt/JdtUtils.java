@@ -706,7 +706,15 @@ class JdtUtils {
         convertTypeArguments(methodBinding.getTypeArguments(), inNullMarkedScope);
 
     ImmutableList.Builder<ParameterDescriptor> parameterDescriptorBuilder = ImmutableList.builder();
-    for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
+    // The descriptor needs to have the same number of parameters as its declaration, however in
+    // some cases with lambdas (see b/231457578) jdt adds synthetic parameters at the beginning.
+    // Hence we keep just the last n parameters, where n is the number of parameters in
+    // the declaration binding.
+    int firstNonSyntheticParameter =
+        methodBinding.getParameterTypes().length
+            - methodBinding.getMethodDeclaration().getParameterTypes().length;
+
+    for (int i = firstNonSyntheticParameter; i < methodBinding.getParameterTypes().length; i++) {
       parameterDescriptorBuilder.add(
           ParameterDescriptor.newBuilder()
               .setTypeDescriptor(
