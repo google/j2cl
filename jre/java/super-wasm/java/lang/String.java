@@ -27,6 +27,7 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.StringJoiner;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.HasNoSideEffects;
@@ -727,6 +728,22 @@ public final class String implements Serializable, Comparable<String>, CharSeque
       return this;
     }
     return new String(start, end - start + 1, value);
+  }
+
+  public static String join(CharSequence delimiter, CharSequence... elements) {
+    StringJoiner joiner = new StringJoiner(delimiter);
+    for (CharSequence e : elements) {
+      joiner.add(e);
+    }
+    return joiner.toString();
+  }
+
+  public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements) {
+    StringJoiner joiner = new StringJoiner(delimiter);
+    for (CharSequence e : elements) {
+      joiner.add(e);
+    }
+    return joiner.toString();
   }
 
   public static String valueOf(char[] data) {
