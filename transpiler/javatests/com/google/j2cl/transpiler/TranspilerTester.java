@@ -227,7 +227,7 @@ public class TranspilerTester {
   }
 
   private static String toTestPath(String path) {
-    return path;
+    return "" + path;
   }
 
   public TranspilerTester setArgs(String... args) {
