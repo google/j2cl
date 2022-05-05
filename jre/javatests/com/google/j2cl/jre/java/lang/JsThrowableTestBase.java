@@ -22,10 +22,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-/**
- * Base class that provides utilities for testing subclasses of Throwable.
- */
-public abstract class ThrowableTestBase extends GWTTestCase {
+/** Base class that provides utilities for testing subclasses of Throwable. */
+public abstract class JsThrowableTestBase extends GWTTestCase {
 
   @JsFunction
   interface Thrower {
@@ -33,7 +31,9 @@ public abstract class ThrowableTestBase extends GWTTestCase {
   }
 
   @JsMethod
-  protected static native Throwable createJsException(Object wrapped);
+  protected static Throwable createJsException(Object wrapped) {
+    return Throwable.of(wrapped);
+  }
 
   @JsMethod
   protected static native void throwNative(Object e);

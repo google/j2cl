@@ -13,28 +13,16 @@
  */
 package com.google.j2cl.jre.java.lang;
 
-import com.google.j2cl.jre.testing.TestUtils;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-/**
- * Unit tests for JsException behavior.
- */
-public class JsExceptionTest extends ThrowableTestBase {
+/** Unit tests for JsException behavior. */
+public class JsExceptionTest extends JsThrowableTestBase {
 
   @Override
   public String getModuleName() {
     return "com.google.gwt.emultest.EmulSuite";
-  }
-
-  // Override removed here to make the test compile in J2CL.
-  // @Override
-  public void runTest() throws Throwable {
-    // Do not run  these tests in JVM.
-    if (TestUtils.isJvm()) {
-      return;
-    }
   }
 
   public void testCatchJava() {
@@ -122,7 +110,7 @@ public class JsExceptionTest extends ThrowableTestBase {
 
   private static void throwTypeError() {
     Object nullObject = null;
-    nullObject.getClass();
+    Object unused = nullObject.getClass();
   }
 
   @JsType(isNative = true, namespace = "<window>")

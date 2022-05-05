@@ -11,6 +11,11 @@ package(
     licenses = ["notice"],  # Apache 2.0
 )
 
+JS_ONLY_SRCS = glob([
+    "**/Js*.java",
+    "**/*.js",
+])
+
 j2cl_library(
     name = "emul_tests_lib",
     testonly = 1,
@@ -36,12 +41,15 @@ j2cl_library(
     ],
 )
 
-# This runs all GWTTestCases for emul in a pure JRE, this way we can make sure that our tests
+# This runs all test for JRE in JVM. This way we can make sure that our tests
 # assert the right behaviour for the JRE emulation.
 java_test(
     name = "AllEmulTest_Java",
     size = "small",
-    srcs = glob(["**/*.java"]),
+    srcs = glob(
+        ["**/*.java"],
+        exclude = JS_ONLY_SRCS,
+    ),
     javacopts = [
         "-Xep:DoNotCall:OFF",
         "-Xep:IdentityBinaryExpression:OFF",
@@ -93,6 +101,11 @@ j2cl_multi_test(
     name = "EmulJava8",
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulJava8Suite",
+)
+
+j2cl_multi_test(
+    name = "JsSuite",
+    test_class = "com.google.j2cl.jre.JsSuite",
 )
 
 # A smoke check that verifies es5 transpiled test works

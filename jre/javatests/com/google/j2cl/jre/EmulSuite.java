@@ -33,10 +33,8 @@ import com.google.j2cl.jre.java.lang.DoubleTest;
 import com.google.j2cl.jre.java.lang.FloatEqualsSemanticsTest;
 import com.google.j2cl.jre.java.lang.FloatTest;
 import com.google.j2cl.jre.java.lang.IntegerTest;
-import com.google.j2cl.jre.java.lang.JsExceptionTest;
 import com.google.j2cl.jre.java.lang.LongTest;
 import com.google.j2cl.jre.java.lang.MathTest;
-import com.google.j2cl.jre.java.lang.NullPointerExceptionTest;
 import com.google.j2cl.jre.java.lang.ObjectTest;
 import com.google.j2cl.jre.java.lang.ShortTest;
 import com.google.j2cl.jre.java.lang.StringBufferTest;
@@ -88,10 +86,8 @@ import org.junit.runners.Suite.SuiteClasses;
   FloatTest.class,
   FloatEqualsSemanticsTest.class,
   IntegerTest.class,
-  JsExceptionTest.class,
   LongTest.class,
   MathTest.class,
-  NullPointerExceptionTest.class,
   ObjectTest.class,
   ShortTest.class,
   StringBufferTest.class,
