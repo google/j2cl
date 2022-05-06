@@ -24,7 +24,7 @@ import static javaemul.internal.InternalPreconditions.checkState;
  * J2CL compatible implementation of EnumSet. Notably, some methods are unsupported since
  * Enum#getDeclaringClass is unsupported for code size reasons.
  */
-public class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
+public class EnumSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable {
   private HashSet<E> set = new HashSet<>();
 
   EnumSet() {}

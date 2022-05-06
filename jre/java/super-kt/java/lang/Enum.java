@@ -39,7 +39,6 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E> {
   @Override
   public final native int hashCode();
 
-  @Override
   protected final native Object clone() throws CloneNotSupportedException;
 
   public final native int compareTo(E o);

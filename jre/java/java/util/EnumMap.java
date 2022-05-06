@@ -22,13 +22,12 @@ import javaemul.internal.ArrayHelper;
 
 /**
  * A {@link java.util.Map} of {@link Enum}s. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/EnumMap.html">[Sun
- * docs]</a>
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/EnumMap.html">[Sun docs]</a>
  *
  * @param <K> key type
  * @param <V> value type
  */
-public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
+public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> implements Cloneable {
 
   private final class EntrySet extends AbstractSet<Entry<K, V>> {
 

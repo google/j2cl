@@ -21,5 +21,6 @@ import javaemul.internal.annotations.KtNative;
 
 @KtNative("kotlin.Cloneable")
 public interface Cloneable {
-  // Marker interface
+  // In Kotlin, clone() is a method of Cloneable, but not of Object/Any
+  Object clone() throws CloneNotSupportedException;
 }

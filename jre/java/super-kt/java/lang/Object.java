@@ -38,9 +38,8 @@ import javaemul.internal.annotations.KtNative;
 public class Object {
   public Object() {}
 
-  // TODO(b/222269323): Decide what to do with clone(). This does not exist in kotlin.Any. Needs
-  // to be declared to avoid errors with @Override in subclasses.
-  protected native Object clone() throws CloneNotSupportedException;
+  // TODO(b/222269323): Decide what to do with clone(). This does not exist in kotlin.Any.
+  // protected native Object clone() throws CloneNotSupportedException;
 
   public native boolean equals(Object o);
 

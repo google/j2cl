@@ -23,15 +23,13 @@ import javaemul.internal.LongUtils;
 
 /**
  * This implementation uses a dense array holding bit groups of size 31 to keep track of when bits
- * are set to true or false. Using 31 bits keeps our implementation within the range of V8's
- * "tagged small integer" and improves performance. Using a dense array also makes access faster on
- * V8.
+ * are set to true or false. Using 31 bits keeps our implementation within the range of V8's "tagged
+ * small integer" and improves performance. Using a dense array also makes access faster on V8.
  *
- * Not yet implemented:
- * public static BitSet valueOf(ByteBuffer)
- * public static BitSet valueOf(LongBuffer)
+ * <p>Not yet implemented: public static BitSet valueOf(ByteBuffer) public static BitSet
+ * valueOf(LongBuffer)
  */
-public class BitSet {
+public class BitSet implements Cloneable {
   private static final int WORD_MASK = 0x7fffffff;
   private static final int BITS_PER_WORD = 31;
 
