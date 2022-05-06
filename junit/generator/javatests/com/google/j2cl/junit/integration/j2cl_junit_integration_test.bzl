@@ -97,7 +97,7 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
             test_class = test_class,
             runtime_deps = [":%s-lib-j2wasm" % name],
             extra_defs = extra_defs,
-            optimizeWasm = False,
+            optimize = False,
             javacopts = [
                 "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
             ],
@@ -110,7 +110,7 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
             test_class = test_class,
             runtime_deps = [":%s-lib-j2wasm" % name],
             extra_defs = extra_defs,
-            optimizeWasm = True,
+            optimize = True,
             javacopts = [
                 "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
             ],

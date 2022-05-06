@@ -9,18 +9,15 @@ def j2wasm_test(
         name,
         data = [],
         tags = [],
-        optimizeWasm = False,
+        optimize = False,
         **kwargs):
     """Macro for running a JUnit test cross compiled as a web test.
 
     Args:
-        optimizeWasm: Flag indicating if wasm compilation is optimized or not.
+        optimize: Flag indicating if wasm compilation is optimized or not.
     """
 
-    is_optimized_suffix = ""
-    if not optimizeWasm:
-        is_optimized_suffix += "_dev"
-
+    is_optimized_suffix = "" if optimize else "_dev"
     extra_data = [":" + name + "_generated_suite_j2wasm_application" + is_optimized_suffix]
 
     j2cl_test_common(
@@ -28,7 +25,7 @@ def j2wasm_test(
         data = data + extra_data,
         compile = 0,
         isJ2wasmTest = True,
-        optimizeWasm = optimizeWasm,
+        optimizeWasm = optimize,
         browsers = None,
         default_browser = "//:chrome-wasmdev-linux",
         tags = tags + ["j2wasm"],
