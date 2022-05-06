@@ -15,7 +15,7 @@
  */
 package compiletimeconstant;
 
-public class CompileTimeConstant {
+public class CompileTimeConstant<T> {
   public static final Object OBJ = null;
 
   public static final int A = 10;

@@ -7,6 +7,9 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 
+/**
+ * @template T
+ */
 class CompileTimeConstant extends j_l_Object {
  /** @protected */
  constructor() {
@@ -30,7 +33,7 @@ class CompileTimeConstant extends j_l_Object {
   /**@const {boolean}*/
   this.f_I2__compiletimeconstant_CompileTimeConstant = true;
  }
- /** @return {!CompileTimeConstant} */
+ /** @template T @return {!CompileTimeConstant<T>} */
  static $create__() {
   CompileTimeConstant.$clinit();
   let $instance = new CompileTimeConstant();

@@ -53,7 +53,13 @@ public class NormalizeInstanceCompileTimeConstants extends NormalizationPass {
           }
 
           private FieldDescriptor toStatic(FieldDescriptor fieldDescriptor) {
-            return FieldDescriptor.Builder.from(fieldDescriptor).setStatic(true).build();
+            return FieldDescriptor.Builder.from(fieldDescriptor)
+                .setStatic(true)
+                .setDeclarationDescriptor(
+                    fieldDescriptor.isDeclaration()
+                        ? null
+                        : toStatic(fieldDescriptor.getDeclarationDescriptor()))
+                .build();
           }
         });
   }
