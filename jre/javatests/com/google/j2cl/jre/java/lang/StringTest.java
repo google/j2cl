@@ -518,21 +518,6 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  @SuppressWarnings("ReturnValueIgnored")
-  public void testIntern() {
-    String s1 = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
-    String s2 = String.valueOf(new char[] {'a', 'b', 'c', 'd', 'e', 'f'});
-    assertTrue("strings not equal", s1.equals(s2));
-    assertSame("interns are not the same reference", s1.intern(), s2.intern());
-
-    try {
-      returnNull().intern();
-      fail();
-    } catch (NullPointerException e) {
-      // expected
-    }
-  }
-
   public void testLastIndexOf() {
     String x = "abcdeabcdef";
     assertEquals(9, x.lastIndexOf("e"));

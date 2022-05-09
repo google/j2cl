@@ -16,15 +16,17 @@
 package com.google.j2cl.jre;
 
 import com.google.j2cl.jre.java.lang.JsExceptionTest;
+import com.google.j2cl.jre.java.lang.JsStringTest;
 import com.google.j2cl.jre.java.lang.JsThrowableTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/** Test JRE emulations. */
+/** Test JRE emulations only in JS. */
 @RunWith(Suite.class)
 @SuiteClasses({
   JsExceptionTest.class,
   JsThrowableTest.class,
+  JsStringTest.class,
 })
 public class JsSuite {}
