@@ -83,9 +83,9 @@ open class Main {
    var unboxed: jsenum.Main.ComparableJsEnum? = templatedField!!.getValue()
    unboxed = templatedField!!.value
    templatedField!!.value = jsenum.Main.ComparableJsEnum.ONE
-   java.util.Arrays.asList<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
+   java.util.Arrays.asList(jsenum.Main.ComparableJsEnum.ONE)
    templatedField!!.getValue()!!.ordinal
-   val b: kotlin.Boolean = jsenum.Main.ComparableJsEnum.ONE === jsenum.Main.boxingPassthrough<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
+   val b: kotlin.Boolean = jsenum.Main.ComparableJsEnum.ONE === jsenum.Main.boxingPassthrough(jsenum.Main.ComparableJsEnum.ONE)
   }
 
   @kotlin.jvm.JvmStatic
@@ -95,7 +95,7 @@ open class Main {
 
   @kotlin.jvm.JvmStatic
   fun boxingWithGenerics() {
-   jsenum.Main.Foo<kotlin.Any?>(java.util.Optional.of<jsenum.Main.IntJsEnum?>(jsenum.Main.IntJsEnum.MINUSONE))
+   jsenum.Main.Foo<kotlin.Any?>(java.util.Optional.of(jsenum.Main.IntJsEnum.MINUSONE))
   }
  }
 

@@ -17,7 +17,7 @@ open class Main {
   val fooInstanceMethod: kotlin.String? = topLevel!!.instanceMethod("foo")
   val fooStaticMethod: kotlin.String? = kotlin.run {
    topLevel
-   nativekttypes.nativekt.KTopLevel.staticMethod<kotlin.String?>("foo")
+   nativekttypes.nativekt.KTopLevel.staticMethod("foo")
   }
   val fooInstanceField: kotlin.String? = topLevel!!.instanceField
   topLevel!!.instanceField = "foo"
@@ -38,7 +38,7 @@ open class Main {
   val nestedInstanceMethod: kotlin.String? = nested!!.instanceMethod("foo")
   val nestedStaticMethod: kotlin.String? = kotlin.run {
    nested
-   nativekttypes.nativekt.KTopLevel.KNested.staticMethod<kotlin.String?>("foo")
+   nativekttypes.nativekt.KTopLevel.KNested.staticMethod("foo")
   }
   val nestedInstanceField: kotlin.String? = nested!!.instanceField
   nested!!.instanceField = "foo"

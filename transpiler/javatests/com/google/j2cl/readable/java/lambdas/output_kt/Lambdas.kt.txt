@@ -77,16 +77,16 @@ open class Lambdas {
  }
 
  open fun <T: kotlin.Enum<T>?> testLambdaWithGenerics() {
-  this.callWithTypeVariable<kotlin.Error?>(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Error?> (fun(i: kotlin.Error?): kotlin.Error? {
+  this.callWithTypeVariable(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Error?> (fun(i: kotlin.Error?): kotlin.Error? {
    return i
   }), kotlin.Error())
   this.callParameterized(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Error?> (fun(i_1: kotlin.Error?): kotlin.Error? {
    return i_1
   }), kotlin.Error())
-  lambdas.Lambdas.callTypeVariableWithBounds<T>(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Enum<T>?> (fun(i_2: kotlin.Enum<T>?): kotlin.Enum<T>? {
+  lambdas.Lambdas.callTypeVariableWithBounds(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Enum<T>?> (fun(i_2: kotlin.Enum<T>?): kotlin.Enum<T>? {
    return i_2
   }), null as kotlin.Enum<T>?)
-  this.callWithBiFunction<kotlin.Any?>(lambdas.Lambdas.BiFunction<kotlin.Any?, kotlin.String?, kotlin.Double?> (fun(x: kotlin.Any?, y: kotlin.String?): kotlin.Double? {
+  this.callWithBiFunction(lambdas.Lambdas.BiFunction<kotlin.Any?, kotlin.String?, kotlin.Double?> (fun(x: kotlin.Any?, y: kotlin.String?): kotlin.Double? {
    throw kotlin.RuntimeException()
   }))
   val f: lambdas.Lambdas.Function<in T?, *>? = lambdas.Lambdas.Function<in T?, *> (fun(item: T?): * {
