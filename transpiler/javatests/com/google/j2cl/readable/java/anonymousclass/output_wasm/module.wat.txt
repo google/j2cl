@@ -134,7 +134,7 @@
  ;;@ anonymousclass/AnonymousClass.java:24:13
  (local $$instance (ref null $anonymousclass.AnonymousClass))
  (block
-  ;; AnonymousClass $instance = new AnonymousClass.<init>();
+  ;; AnonymousClass $instance = new AnonymousClass.<init>(0);
   ;;@ anonymousclass/AnonymousClass.java:24:13
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass (ref.as_non_null (global.get $anonymousclass.AnonymousClass.vtable)) (ref.as_non_null (global.get $anonymousclass.AnonymousClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -277,7 +277,7 @@
  ;;@ anonymousclass/AnonymousClass.java:27:25
  (local $$instance (ref null $anonymousclass.AnonymousClass.1))
  (block
-  ;; <anonymous> extends SomeClass $instance = new $1.<init>($outer_this,$_0);
+  ;; <anonymous> extends SomeClass $instance = new $1.<init>(0,null,null,null);
   ;;@ anonymousclass/AnonymousClass.java:27:25
   (local.set $$instance (struct.new $anonymousclass.AnonymousClass.1 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.vtable)) (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.itable)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor($outer_this,$_0);
@@ -400,7 +400,7 @@
  ;;@ anonymousclass/AnonymousClass.java:40:23
  (local $$instance (ref null $anonymousclass.SomeInterface.1))
  (block
-  ;; <anonymous> extends SomeClass $instance = new $1.<init>($_0);
+  ;; <anonymous> extends SomeClass $instance = new $1.<init>(0);
   ;;@ anonymousclass/AnonymousClass.java:40:23
   (local.set $$instance (struct.new $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.itable)) (i32.const 0)))
   ;; $instance.$ctor($_0);

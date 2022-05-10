@@ -88,7 +88,7 @@
  ;;@ unreachableclass/Main.java:18:13
  (local $$instance (ref null $unreachableclass.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ unreachableclass/Main.java:18:13
   (local.set $$instance (struct.new $unreachableclass.Main (ref.as_non_null (global.get $unreachableclass.Main.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -208,7 +208,7 @@
  (field $vtable (ref $unreachableclass.Main.1.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__unreachableclass_Main_1 (mut (ref null $unreachableclass.Main)))
+ (field $$outer_this__unreachableclass_Main_1 (ref null $unreachableclass.Main))
   $java.lang.Object)
 )
 (type $unreachableclass.Main.1.vtable (struct_subtype 
@@ -226,9 +226,9 @@
  ;;@ unreachableclass/Main.java:30:19
  (local $$instance (ref null $unreachableclass.Main.1))
  (block
-  ;; <anonymous> extends Object $instance = new $1.<init>($outer_this);
+  ;; <anonymous> extends Object $instance = new $1.<init>(0,$outer_this);
   ;;@ unreachableclass/Main.java:30:19
-  (local.set $$instance (struct.new $unreachableclass.Main.1 (ref.as_non_null (global.get $unreachableclass.Main.1.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1.itable)) (i32.const 0) (ref.null $unreachableclass.Main)))
+  (local.set $$instance (struct.new $unreachableclass.Main.1 (ref.as_non_null (global.get $unreachableclass.Main.1.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:30:19
   (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1@unreachableclass.Main.1 (local.get $$instance)(local.get $$outer_this))
@@ -247,9 +247,6 @@
   ;; unreachableclass.Main.1.$clinit();
   ;;@ unreachableclass/Main.java:30:19
   (call $$clinit__void@unreachableclass.Main.1 )
-  ;; ($1.this.this = $outer_this);
-  ;;@ unreachableclass/Main.java:30:19
-  (struct.set $unreachableclass.Main.1 $$outer_this__unreachableclass_Main_1(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ unreachableclass/Main.java:30:19
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -297,7 +294,7 @@
  (field $vtable (ref $unreachableclass.Main.1A.1B.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__unreachableclass_Main_1A_1B (mut (ref null $unreachableclass.Main.1A)))
+ (field $$outer_this__unreachableclass_Main_1A_1B (ref null $unreachableclass.Main.1A))
   $java.lang.Object)
 )
 (type $unreachableclass.Main.1A.1B.vtable (struct_subtype 
@@ -315,9 +312,9 @@
  ;;@ unreachableclass/Main.java:24:16
  (local $$instance (ref null $unreachableclass.Main.1A.1B))
  (block
-  ;; B $instance = new $1B.<init>($outer_this);
+  ;; B $instance = new $1B.<init>(0,$outer_this);
   ;;@ unreachableclass/Main.java:24:16
-  (local.set $$instance (struct.new $unreachableclass.Main.1A.1B (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.itable)) (i32.const 0) (ref.null $unreachableclass.Main.1A)))
+  (local.set $$instance (struct.new $unreachableclass.Main.1A.1B (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:24:16
   (call $$ctor__unreachableclass_Main_1A__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B (local.get $$instance)(local.get $$outer_this))
@@ -336,9 +333,6 @@
   ;; unreachableclass.Main.1A.1B.$clinit();
   ;;@ unreachableclass/Main.java:24:16
   (call $$clinit__void@unreachableclass.Main.1A.1B )
-  ;; ($1B.this.this = $outer_this);
-  ;;@ unreachableclass/Main.java:24:16
-  (struct.set $unreachableclass.Main.1A.1B $$outer_this__unreachableclass_Main_1A_1B(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ unreachableclass/Main.java:24:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -394,7 +388,7 @@
  (field $vtable (ref $unreachableclass.Main.1A.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__unreachableclass_Main_1A (mut (ref null $unreachableclass.Main)))
+ (field $$outer_this__unreachableclass_Main_1A (ref null $unreachableclass.Main))
   $java.lang.Object)
 )
 (type $unreachableclass.Main.1A.vtable (struct_subtype 
@@ -413,9 +407,9 @@
  ;;@ unreachableclass/Main.java:22:12
  (local $$instance (ref null $unreachableclass.Main.1A))
  (block
-  ;; A $instance = new $1A.<init>($outer_this);
+  ;; A $instance = new $1A.<init>(0,$outer_this);
   ;;@ unreachableclass/Main.java:22:12
-  (local.set $$instance (struct.new $unreachableclass.Main.1A (ref.as_non_null (global.get $unreachableclass.Main.1A.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.itable)) (i32.const 0) (ref.null $unreachableclass.Main)))
+  (local.set $$instance (struct.new $unreachableclass.Main.1A (ref.as_non_null (global.get $unreachableclass.Main.1A.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:22:12
   (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1A@unreachableclass.Main.1A (local.get $$instance)(local.get $$outer_this))
@@ -434,9 +428,6 @@
   ;; unreachableclass.Main.1A.$clinit();
   ;;@ unreachableclass/Main.java:22:12
   (call $$clinit__void@unreachableclass.Main.1A )
-  ;; ($1A.this.this = $outer_this);
-  ;;@ unreachableclass/Main.java:22:12
-  (struct.set $unreachableclass.Main.1A $$outer_this__unreachableclass_Main_1A(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ unreachableclass/Main.java:22:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

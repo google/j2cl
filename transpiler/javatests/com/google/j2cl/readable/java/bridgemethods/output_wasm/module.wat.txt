@@ -626,7 +626,7 @@
  ;;@ bridgemethods/AccidentalOverride.java:22:6
  (local $$instance (ref null $bridgemethods.A))
  (block
-  ;; A<T, S> $instance = new A.<init>();
+  ;; A<T, S> $instance = new A.<init>(0);
   ;;@ bridgemethods/AccidentalOverride.java:22:6
   (local.set $$instance (struct.new $bridgemethods.A (ref.as_non_null (global.get $bridgemethods.A.vtable)) (ref.as_non_null (global.get $bridgemethods.A.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -745,7 +745,7 @@
  ;;@ bridgemethods/AccidentalOverride.java:32:6
  (local $$instance (ref null $bridgemethods.B))
  (block
-  ;; B $instance = new B.<init>();
+  ;; B $instance = new B.<init>(0);
   ;;@ bridgemethods/AccidentalOverride.java:32:6
   (local.set $$instance (struct.new $bridgemethods.B (ref.as_non_null (global.get $bridgemethods.B.vtable)) (ref.as_non_null (global.get $bridgemethods.B.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -903,7 +903,7 @@
  ;;@ bridgemethods/AccidentalOverride.java:48:6
  (local $$instance (ref null $bridgemethods.AccidentalOverride))
  (block
-  ;; AccidentalOverride $instance = new AccidentalOverride.<init>();
+  ;; AccidentalOverride $instance = new AccidentalOverride.<init>(0);
   ;;@ bridgemethods/AccidentalOverride.java:48:6
   (local.set $$instance (struct.new $bridgemethods.AccidentalOverride (ref.as_non_null (global.get $bridgemethods.AccidentalOverride.vtable)) (ref.as_non_null (global.get $bridgemethods.AccidentalOverride.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1074,7 +1074,7 @@
  ;;@ bridgemethods/BridgeMethod.java:26:6
  (local $$instance (ref null $bridgemethods.SuperParent))
  (block
-  ;; SuperParent<T, S> $instance = new SuperParent.<init>();
+  ;; SuperParent<T, S> $instance = new SuperParent.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:26:6
   (local.set $$instance (struct.new $bridgemethods.SuperParent (ref.as_non_null (global.get $bridgemethods.SuperParent.vtable)) (ref.as_non_null (global.get $bridgemethods.SuperParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1175,7 +1175,7 @@
  ;;@ bridgemethods/BridgeMethod.java:30:6
  (local $$instance (ref null $bridgemethods.Parent))
  (block
-  ;; Parent<T> $instance = new Parent.<init>();
+  ;; Parent<T> $instance = new Parent.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:30:6
   (local.set $$instance (struct.new $bridgemethods.Parent (ref.as_non_null (global.get $bridgemethods.Parent.vtable)) (ref.as_non_null (global.get $bridgemethods.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1322,7 +1322,7 @@
  ;;@ bridgemethods/BridgeMethod.java:42:13
  (local $$instance (ref null $bridgemethods.BridgeMethod))
  (block
-  ;; BridgeMethod $instance = new BridgeMethod.<init>();
+  ;; BridgeMethod $instance = new BridgeMethod.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:42:13
   (local.set $$instance (struct.new $bridgemethods.BridgeMethod (ref.as_non_null (global.get $bridgemethods.BridgeMethod.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethod.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1520,7 +1520,7 @@
  ;;@ bridgemethods/BridgeMethod.java:61:6
  (local $$instance (ref null $bridgemethods.DualUnrelatedBridges))
  (block
-  ;; DualUnrelatedBridges $instance = new DualUnrelatedBridges.<init>();
+  ;; DualUnrelatedBridges $instance = new DualUnrelatedBridges.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:61:6
   (local.set $$instance (struct.new $bridgemethods.DualUnrelatedBridges (ref.as_non_null (global.get $bridgemethods.DualUnrelatedBridges.vtable)) (ref.as_non_null (global.get $bridgemethods.DualUnrelatedBridges.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1684,7 +1684,7 @@
  ;;@ bridgemethods/BridgeMethod.java:72:6
  (local $$instance (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
  (block
-  ;; SuperDualUnrelatedAccidentalBridges $instance = new SuperDualUnrelatedAccidentalBridges.<init>();
+  ;; SuperDualUnrelatedAccidentalBridges $instance = new SuperDualUnrelatedAccidentalBridges.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:72:6
   (local.set $$instance (struct.new $bridgemethods.SuperDualUnrelatedAccidentalBridges (ref.as_non_null (global.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)) (ref.as_non_null (global.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1800,7 +1800,7 @@
  ;;@ bridgemethods/BridgeMethod.java:78:6
  (local $$instance (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
  (block
-  ;; DualUnrelatedAccidentalBridges $instance = new DualUnrelatedAccidentalBridges.<init>();
+  ;; DualUnrelatedAccidentalBridges $instance = new DualUnrelatedAccidentalBridges.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:78:6
   (local.set $$instance (struct.new $bridgemethods.DualUnrelatedAccidentalBridges (ref.as_non_null (global.get $bridgemethods.DualUnrelatedAccidentalBridges.vtable)) (ref.as_non_null (global.get $bridgemethods.DualUnrelatedAccidentalBridges.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1971,7 +1971,7 @@
  ;;@ bridgemethods/BridgeMethod.java:89:6
  (local $$instance (ref null $bridgemethods.ClassWithParameterizedGet))
  (block
-  ;; ClassWithParameterizedGet<T> $instance = new ClassWithParameterizedGet.<init>();
+  ;; ClassWithParameterizedGet<T> $instance = new ClassWithParameterizedGet.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:89:6
   (local.set $$instance (struct.new $bridgemethods.ClassWithParameterizedGet (ref.as_non_null (global.get $bridgemethods.ClassWithParameterizedGet.vtable)) (ref.as_non_null (global.get $bridgemethods.ClassWithParameterizedGet.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2074,7 +2074,7 @@
  ;;@ bridgemethods/BridgeMethod.java:95:6
  (local $$instance (ref null $bridgemethods.AccidentalOverrideBridge))
  (block
-  ;; AccidentalOverrideBridge $instance = new AccidentalOverrideBridge.<init>();
+  ;; AccidentalOverrideBridge $instance = new AccidentalOverrideBridge.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:95:6
   (local.set $$instance (struct.new $bridgemethods.AccidentalOverrideBridge (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.vtable)) (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2210,7 +2210,7 @@
  ;;@ bridgemethods/BridgeMethod.java:104:6
  (local $$instance (ref null $bridgemethods.TestCase10036))
  (block
-  ;; TestCase10036 $instance = new TestCase10036.<init>();
+  ;; TestCase10036 $instance = new TestCase10036.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:104:6
   (local.set $$instance (struct.new $bridgemethods.TestCase10036 (ref.as_non_null (global.get $bridgemethods.TestCase10036.vtable)) (ref.as_non_null (global.get $bridgemethods.TestCase10036.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2293,7 +2293,7 @@
  ;;@ bridgemethods/BridgeMethod.java:129:6
  (local $$instance (ref null $bridgemethods.TestCase102))
  (block
-  ;; TestCase102 $instance = new TestCase102.<init>();
+  ;; TestCase102 $instance = new TestCase102.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:129:6
   (local.set $$instance (struct.new $bridgemethods.TestCase102 (ref.as_non_null (global.get $bridgemethods.TestCase102.vtable)) (ref.as_non_null (global.get $bridgemethods.TestCase102.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2377,7 +2377,7 @@
  ;;@ bridgemethods/BridgeMethod.java:153:6
  (local $$instance (ref null $bridgemethods.ParameterizedParent))
  (block
-  ;; ParameterizedParent<T> $instance = new ParameterizedParent.<init>();
+  ;; ParameterizedParent<T> $instance = new ParameterizedParent.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:153:6
   (local.set $$instance (struct.new $bridgemethods.ParameterizedParent (ref.as_non_null (global.get $bridgemethods.ParameterizedParent.vtable)) (ref.as_non_null (global.get $bridgemethods.ParameterizedParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2479,7 +2479,7 @@
  ;;@ bridgemethods/BridgeMethod.java:159:6
  (local $$instance (ref null $bridgemethods.ReparametrerizedChild))
  (block
-  ;; ReparametrerizedChild<E> $instance = new ReparametrerizedChild.<init>();
+  ;; ReparametrerizedChild<E> $instance = new ReparametrerizedChild.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:159:6
   (local.set $$instance (struct.new $bridgemethods.ReparametrerizedChild (ref.as_non_null (global.get $bridgemethods.ReparametrerizedChild.vtable)) (ref.as_non_null (global.get $bridgemethods.ReparametrerizedChild.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2598,7 +2598,7 @@
  ;;@ bridgemethods/BridgeMethod.java:165:6
  (local $$instance (ref null $bridgemethods.LeafChild))
  (block
-  ;; LeafChild $instance = new LeafChild.<init>();
+  ;; LeafChild $instance = new LeafChild.<init>(0);
   ;;@ bridgemethods/BridgeMethod.java:165:6
   (local.set $$instance (struct.new $bridgemethods.LeafChild (ref.as_non_null (global.get $bridgemethods.LeafChild.vtable)) (ref.as_non_null (global.get $bridgemethods.LeafChild.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2969,7 +2969,7 @@
  (field $vtable (ref $bridgemethods.TestCase102.C.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__bridgemethods_TestCase102_C (mut (ref null $bridgemethods.TestCase102)))
+ (field $$outer_this__bridgemethods_TestCase102_C (ref null $bridgemethods.TestCase102))
   $bridgemethods.TestCase102.B)
 )
 (type $bridgemethods.TestCase102.C.vtable (struct_subtype 
@@ -2989,9 +2989,9 @@
  ;;@ bridgemethods/BridgeMethod.java:144:8
  (local $$instance (ref null $bridgemethods.TestCase102.C))
  (block
-  ;; C<B1> $instance = new C.<init>($outer_this);
+  ;; C<B1> $instance = new C.<init>(0,$outer_this);
   ;;@ bridgemethods/BridgeMethod.java:144:8
-  (local.set $$instance (struct.new $bridgemethods.TestCase102.C (ref.as_non_null (global.get $bridgemethods.TestCase102.C.vtable)) (ref.as_non_null (global.get $bridgemethods.TestCase102.C.itable)) (i32.const 0) (ref.null $bridgemethods.TestCase102)))
+  (local.set $$instance (struct.new $bridgemethods.TestCase102.C (ref.as_non_null (global.get $bridgemethods.TestCase102.C.vtable)) (ref.as_non_null (global.get $bridgemethods.TestCase102.C.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ bridgemethods/BridgeMethod.java:144:8
   (call $$ctor__bridgemethods_TestCase102__void_$p_bridgemethods_TestCase102_C@bridgemethods.TestCase102.C (local.get $$instance)(local.get $$outer_this))
@@ -3010,9 +3010,6 @@
   ;; bridgemethods.TestCase102.C.$clinit();
   ;;@ bridgemethods/BridgeMethod.java:144:8
   (call $$clinit__void@bridgemethods.TestCase102.C )
-  ;; (C.this.this = $outer_this);
-  ;;@ bridgemethods/BridgeMethod.java:144:8
-  (struct.set $bridgemethods.TestCase102.C $$outer_this__bridgemethods_TestCase102_C(local.get $this) (local.get $$outer_this))
   ;; B.this.$ctor();
   ;;@ bridgemethods/BridgeMethod.java:144:8
   (call $$ctor__void_$p_bridgemethods_TestCase102_B@bridgemethods.TestCase102.B (local.get $this))
@@ -3102,7 +3099,7 @@
  ;;@ bridgemethods/BridgeMethodDefault.java:20:6
  (local $$instance (ref null $bridgemethods.BridgeMethodDefault))
  (block
-  ;; BridgeMethodDefault $instance = new BridgeMethodDefault.<init>();
+  ;; BridgeMethodDefault $instance = new BridgeMethodDefault.<init>(0);
   ;;@ bridgemethods/BridgeMethodDefault.java:20:6
   (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -3269,7 +3266,7 @@
  ;;@ bridgemethods/BridgeMethodDefault.java:30:15
  (local $$instance (ref null $bridgemethods.BridgeMethodDefault.A))
  (block
-  ;; A $instance = new A.<init>();
+  ;; A $instance = new A.<init>(0);
   ;;@ bridgemethods/BridgeMethodDefault.java:30:15
   (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.A (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.A.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.A.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -3434,7 +3431,7 @@
  ;;@ bridgemethods/BridgeMethodDefault.java:38:15
  (local $$instance (ref null $bridgemethods.BridgeMethodDefault.B))
  (block
-  ;; B $instance = new B.<init>();
+  ;; B $instance = new B.<init>(0);
   ;;@ bridgemethods/BridgeMethodDefault.java:38:15
   (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.B (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.B.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.B.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -3536,7 +3533,7 @@
  ;;@ bridgemethods/BridgeMethodShadowedSignature.java:20:13
  (local $$instance (ref null $bridgemethods.BridgeMethodShadowedSignature))
  (block
-  ;; BridgeMethodShadowedSignature $instance = new BridgeMethodShadowedSignature.<init>();
+  ;; BridgeMethodShadowedSignature $instance = new BridgeMethodShadowedSignature.<init>(0);
   ;;@ bridgemethods/BridgeMethodShadowedSignature.java:20:13
   (local.set $$instance (struct.new $bridgemethods.BridgeMethodShadowedSignature (ref.as_non_null (global.get $bridgemethods.BridgeMethodShadowedSignature.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodShadowedSignature.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -3726,7 +3723,7 @@
  ;;@ bridgemethods/BridgeMethodShadowedSignature.java:32:15
  (local $$instance (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
  (block
-  ;; C<C1> $instance = new C.<init>();
+  ;; C<C1> $instance = new C.<init>(0);
   ;;@ bridgemethods/BridgeMethodShadowedSignature.java:32:15
   (local.set $$instance (struct.new $bridgemethods.BridgeMethodShadowedSignature.C (ref.as_non_null (global.get $bridgemethods.BridgeMethodShadowedSignature.C.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodShadowedSignature.C.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -3880,7 +3877,7 @@
  ;;@ bridgemethods/EnumMap.java:22:6
  (local $$instance (ref null $bridgemethods.AbstractMap))
  (block
-  ;; AbstractMap<K, V> $instance = new AbstractMap.<init>();
+  ;; AbstractMap<K, V> $instance = new AbstractMap.<init>(0);
   ;;@ bridgemethods/EnumMap.java:22:6
   (local.set $$instance (struct.new $bridgemethods.AbstractMap (ref.as_non_null (global.get $bridgemethods.AbstractMap.vtable)) (ref.as_non_null (global.get $bridgemethods.AbstractMap.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -3983,7 +3980,7 @@
  ;;@ bridgemethods/EnumMap.java:29:13
  (local $$instance (ref null $bridgemethods.EnumMap))
  (block
-  ;; EnumMap<K, V> $instance = new EnumMap.<init>();
+  ;; EnumMap<K, V> $instance = new EnumMap.<init>(0);
   ;;@ bridgemethods/EnumMap.java:29:13
   (local.set $$instance (struct.new $bridgemethods.EnumMap (ref.as_non_null (global.get $bridgemethods.EnumMap.vtable)) (ref.as_non_null (global.get $bridgemethods.EnumMap.itable)) (i32.const 0)))
   ;; $instance.$ctor();

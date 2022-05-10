@@ -257,7 +257,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:41:13
  (local $$instance (ref null $jsconstructor.JsConstructorClass))
  (block
-  ;; JsConstructorClass $instance = new JsConstructorClass.<init>();
+  ;; JsConstructorClass $instance = new JsConstructorClass.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:41:13
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -342,7 +342,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:48:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.A))
  (block
-  ;; A $instance = new A.<init>(x);
+  ;; A $instance = new A.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:48:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.A (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.A.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.A.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(x);
@@ -381,7 +381,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:52:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.A))
  (block
-  ;; A $instance = new A.<init>();
+  ;; A $instance = new A.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:52:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.A (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.A.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.A.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -481,7 +481,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:62:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.B))
  (block
-  ;; B $instance = new B.<init>(x);
+  ;; B $instance = new B.<init>(0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:62:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.B (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(x);
@@ -520,7 +520,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:67:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.B))
  (block
-  ;; B $instance = new B.<init>();
+  ;; B $instance = new B.<init>(0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:67:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.B (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -557,7 +557,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:72:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.B))
  (block
-  ;; B $instance = new B.<init>(x,y);
+  ;; B $instance = new B.<init>(0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:72:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.B (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.B.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(x,y);
@@ -660,7 +660,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:85:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.C))
  (block
-  ;; C $instance = new C.<init>(x);
+  ;; C $instance = new C.<init>(0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:85:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.C (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.C.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.C.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(x);
@@ -701,7 +701,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:90:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.C))
  (block
-  ;; C $instance = new C.<init>(x,y);
+  ;; C $instance = new C.<init>(0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:90:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.C (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.C.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.C.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(x,y);
@@ -803,7 +803,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:103:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.D))
  (block
-  ;; D $instance = new D.<init>();
+  ;; D $instance = new D.<init>(0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:103:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.D (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.D.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.D.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -842,7 +842,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:108:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.D))
  (block
-  ;; D $instance = new D.<init>(x);
+  ;; D $instance = new D.<init>(0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:108:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.D (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.D.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.D.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(x);
@@ -944,7 +944,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:121:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.E))
  (block
-  ;; E $instance = new E.<init>();
+  ;; E $instance = new E.<init>(0,0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:121:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.E (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.E.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.E.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1049,7 +1049,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:134:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.F))
  (block
-  ;; F $instance = new F.<init>(x);
+  ;; F $instance = new F.<init>(0,0,0,0,0);
   ;;@ jsconstructor/JsConstructorClass.java:134:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.F (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.F.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.F.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(x);
@@ -1150,7 +1150,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:144:22
  (local $$instance (ref null $jsconstructor.JsConstructorClass.G))
  (block
-  ;; G $instance = new G.<init>();
+  ;; G $instance = new G.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:144:22
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.G (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.G.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.G.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1233,7 +1233,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:149:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.H))
  (block
-  ;; H $instance = new H.<init>();
+  ;; H $instance = new H.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:149:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.H (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.H.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.H.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1318,7 +1318,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:154:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.Varargs))
  (block
-  ;; Varargs $instance = new Varargs.<init>(args);
+  ;; Varargs $instance = new Varargs.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:154:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.Varargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.Varargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.Varargs.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(args);
@@ -1405,7 +1405,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:161:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (block
-  ;; SubVarargs $instance = new SubVarargs.<init>(i,args);
+  ;; SubVarargs $instance = new SubVarargs.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:161:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(i,args);
@@ -1440,7 +1440,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:165:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (block
-  ;; SubVarargs $instance = new SubVarargs.<init>(j);
+  ;; SubVarargs $instance = new SubVarargs.<init>(0,0);
   ;;@ jsconstructor/JsConstructorClass.java:165:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(j);
@@ -1527,7 +1527,7 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
- (field $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs (mut (ref null $jsconstructor.JsConstructorClass)))
+ (field $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs (ref null $jsconstructor.JsConstructorClass))
   $jsconstructor.JsConstructorClass.A)
 )
 (type $jsconstructor.JsConstructorClass.InstanceVarargs.vtable (struct_subtype 
@@ -1546,9 +1546,9 @@
  ;;@ jsconstructor/JsConstructorClass.java:178:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
  (block
-  ;; InstanceVarargs $instance = new InstanceVarargs.<init>($outer_this,args);
+  ;; InstanceVarargs $instance = new InstanceVarargs.<init>(0,0,$outer_this);
   ;;@ jsconstructor/JsConstructorClass.java:178:11
-  (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.InstanceVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.InstanceVarargs.itable)) (i32.const 0) (i32.const 0) (ref.null $jsconstructor.JsConstructorClass)))
+  (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.InstanceVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.InstanceVarargs.itable)) (i32.const 0) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this,args);
   ;;@ jsconstructor/JsConstructorClass.java:178:11
   (call $$ctor__jsconstructor_JsConstructorClass__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_InstanceVarargs@jsconstructor.JsConstructorClass.InstanceVarargs (local.get $$instance)(local.get $$outer_this)(local.get $args))
@@ -1568,9 +1568,6 @@
   ;; jsconstructor.JsConstructorClass.InstanceVarargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:178:40
   (call $$clinit__void@jsconstructor.JsConstructorClass.InstanceVarargs )
-  ;; (InstanceVarargs.this.this = $outer_this);
-  ;;@ jsconstructor/JsConstructorClass.java:176:15
-  (struct.set $jsconstructor.JsConstructorClass.InstanceVarargs $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs(local.get $this) (local.get $$outer_this))
   ;; A.this.$ctor(args.elements[1]);
   ;;@ jsconstructor/JsConstructorClass.java:179:6
   (call $$ctor__int__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (local.get $this)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $args)) (i32.const 1)))
@@ -1635,7 +1632,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:184:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.RegularType))
  (block
-  ;; RegularType $instance = new RegularType.<init>(b);
+  ;; RegularType $instance = new RegularType.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:184:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.RegularType (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.RegularType.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.RegularType.itable)) (i32.const 0)))
   ;; $instance.$ctor(b);
@@ -1720,7 +1717,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:189:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (block
-  ;; JsConstructorSubtypeOfRegularType $instance = new JsConstructorSubtypeOfRegularType.<init>(object);
+  ;; JsConstructorSubtypeOfRegularType $instance = new JsConstructorSubtypeOfRegularType.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:189:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.itable)) (i32.const 0)))
   ;; $instance.$ctor(object);
@@ -1753,7 +1750,7 @@
  ;;@ jsconstructor/JsConstructorClass.java:193:11
  (local $$instance (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (block
-  ;; JsConstructorSubtypeOfRegularType $instance = new JsConstructorSubtypeOfRegularType.<init>();
+  ;; JsConstructorSubtypeOfRegularType $instance = new JsConstructorSubtypeOfRegularType.<init>(0);
   ;;@ jsconstructor/JsConstructorClass.java:193:11
   (local.set $$instance (struct.new $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.itable)) (i32.const 0)))
   ;; $instance.$ctor();

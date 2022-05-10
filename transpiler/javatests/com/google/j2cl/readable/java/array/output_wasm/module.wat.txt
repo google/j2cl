@@ -111,7 +111,7 @@
  ;;@ array/Arrays.java:22:13
  (local $$instance (ref null $array.Arrays))
  (block
-  ;; Arrays $instance = new Arrays.<init>();
+  ;; Arrays $instance = new Arrays.<init>(0);
   ;;@ array/Arrays.java:22:13
   (local.set $$instance (struct.new $array.Arrays (ref.as_non_null (global.get $array.Arrays.vtable)) (ref.as_non_null (global.get $array.Arrays.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -592,7 +592,7 @@
  (field $vtable (ref $array.Arrays.SomeObject.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__array_Arrays_SomeObject (mut (ref null $array.Arrays)))
+ (field $$outer_this__array_Arrays_SomeObject (ref null $array.Arrays))
   $java.lang.Object)
 )
 (type $array.Arrays.SomeObject.vtable (struct_subtype 
@@ -610,9 +610,9 @@
  ;;@ array/Arrays.java:42:16
  (local $$instance (ref null $array.Arrays.SomeObject))
  (block
-  ;; SomeObject $instance = new SomeObject.<init>($outer_this);
+  ;; SomeObject $instance = new SomeObject.<init>(0,$outer_this);
   ;;@ array/Arrays.java:42:16
-  (local.set $$instance (struct.new $array.Arrays.SomeObject (ref.as_non_null (global.get $array.Arrays.SomeObject.vtable)) (ref.as_non_null (global.get $array.Arrays.SomeObject.itable)) (i32.const 0) (ref.null $array.Arrays)))
+  (local.set $$instance (struct.new $array.Arrays.SomeObject (ref.as_non_null (global.get $array.Arrays.SomeObject.vtable)) (ref.as_non_null (global.get $array.Arrays.SomeObject.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ array/Arrays.java:42:16
   (call $$ctor__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject (local.get $$instance)(local.get $$outer_this))
@@ -628,9 +628,6 @@
  (param $$outer_this (ref null $array.Arrays))
  ;;@ array/Arrays.java:42:16
  (block
-  ;; (SomeObject.this.this = $outer_this);
-  ;;@ array/Arrays.java:42:16
-  (struct.set $array.Arrays.SomeObject $$outer_this__array_Arrays_SomeObject(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ array/Arrays.java:42:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -694,7 +691,7 @@
  ;;@ array/Arrays.java:136:23
  (local $$instance (ref null $array.Arrays.NativeType))
  (block
-  ;; NativeType $instance = new NativeType.<init>();
+  ;; NativeType $instance = new NativeType.<init>(0);
   ;;@ array/Arrays.java:136:23
   (local.set $$instance (struct.new $array.Arrays.NativeType (ref.as_non_null (global.get $array.Arrays.NativeType.vtable)) (ref.as_non_null (global.get $array.Arrays.NativeType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -778,7 +775,7 @@
  ;;@ array/Arrays.java:167:23
  (local $$instance (ref null $array.Arrays.ArrayContainer))
  (block
-  ;; ArrayContainer<T> $instance = new ArrayContainer.<init>();
+  ;; ArrayContainer<T> $instance = new ArrayContainer.<init>(0,null);
   ;;@ array/Arrays.java:167:23
   (local.set $$instance (struct.new $array.Arrays.ArrayContainer (ref.as_non_null (global.get $array.Arrays.ArrayContainer.vtable)) (ref.as_non_null (global.get $array.Arrays.ArrayContainer.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;; $instance.$ctor();

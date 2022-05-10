@@ -55,7 +55,7 @@
  ;;@ nestednativetype/NativeArray.java:23:19
  (local $$instance (ref null $nestednativetype.NativeArray))
  (block
-  ;; NativeArray $instance = new NativeArray.<init>();
+  ;; NativeArray $instance = new NativeArray.<init>(0);
   ;;@ nestednativetype/NativeArray.java:23:19
   (local.set $$instance (struct.new $nestednativetype.NativeArray (ref.as_non_null (global.get $nestednativetype.NativeArray.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -138,7 +138,7 @@
  (field $vtable (ref $nestednativetype.NativeArray.1.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__nestednativetype_NativeArray_1 (mut (ref null $nestednativetype.NativeArray)))
+ (field $$outer_this__nestednativetype_NativeArray_1 (ref null $nestednativetype.NativeArray))
   $java.lang.Object)
 )
 (type $nestednativetype.NativeArray.1.vtable (struct_subtype 
@@ -156,9 +156,9 @@
  ;;@ nestednativetype/NativeArray.java:26:24
  (local $$instance (ref null $nestednativetype.NativeArray.1))
  (block
-  ;; <anonymous> extends Object $instance = new $1.<init>($outer_this);
+  ;; <anonymous> extends Object $instance = new $1.<init>(0,$outer_this);
   ;;@ nestednativetype/NativeArray.java:26:24
-  (local.set $$instance (struct.new $nestednativetype.NativeArray.1 (ref.as_non_null (global.get $nestednativetype.NativeArray.1.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.1.itable)) (i32.const 0) (ref.null $nestednativetype.NativeArray)))
+  (local.set $$instance (struct.new $nestednativetype.NativeArray.1 (ref.as_non_null (global.get $nestednativetype.NativeArray.1.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ nestednativetype/NativeArray.java:26:24
   (call $$ctor__nestednativetype_NativeArray__void_$p_nestednativetype_NativeArray_1@nestednativetype.NativeArray.1 (local.get $$instance)(local.get $$outer_this))
@@ -177,9 +177,6 @@
   ;; nestednativetype.NativeArray.1.$clinit();
   ;;@ nestednativetype/NativeArray.java:26:24
   (call $$clinit__void@nestednativetype.NativeArray.1 )
-  ;; ($1.this.this = $outer_this);
-  ;;@ nestednativetype/NativeArray.java:26:24
-  (struct.set $nestednativetype.NativeArray.1 $$outer_this__nestednativetype_NativeArray_1(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ nestednativetype/NativeArray.java:26:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

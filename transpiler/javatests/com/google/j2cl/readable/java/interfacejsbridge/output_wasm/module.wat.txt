@@ -182,7 +182,7 @@
  ;;@ interfacejsbridge/InterfaceImpl.java:34:13
  (local $$instance (ref null $interfacejsbridge.InterfaceImpl))
  (block
-  ;; InterfaceImpl $instance = new InterfaceImpl.<init>();
+  ;; InterfaceImpl $instance = new InterfaceImpl.<init>(0);
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
   (local.set $$instance (struct.new $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -283,7 +283,7 @@
  ;;@ interfacejsbridge/Main.java:18:13
  (local $$instance (ref null $interfacejsbridge.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ interfacejsbridge/Main.java:18:13
   (local.set $$instance (struct.new $interfacejsbridge.Main (ref.as_non_null (global.get $interfacejsbridge.Main.vtable)) (ref.as_non_null (global.get $interfacejsbridge.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();

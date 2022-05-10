@@ -36,7 +36,7 @@
  ;;@ publicconstructor/PublicConstructor.java:19:9
  (local $$instance (ref null $publicconstructor.PublicConstructor))
  (block
-  ;; PublicConstructor $instance = new PublicConstructor.<init>();
+  ;; PublicConstructor $instance = new PublicConstructor.<init>(0);
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor();

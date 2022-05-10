@@ -73,7 +73,7 @@
  ;;@ circularimportuse/Left.java:18:13
  (local $$instance (ref null $circularimportuse.Left))
  (block
-  ;; Left $instance = new Left.<init>();
+  ;; Left $instance = new Left.<init>(0);
   ;;@ circularimportuse/Left.java:18:13
   (local.set $$instance (struct.new $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -172,7 +172,7 @@
  ;;@ circularimportuse/Main.java:18:13
  (local $$instance (ref null $circularimportuse.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ circularimportuse/Main.java:18:13
   (local.set $$instance (struct.new $circularimportuse.Main (ref.as_non_null (global.get $circularimportuse.Main.vtable)) (ref.as_non_null (global.get $circularimportuse.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -275,7 +275,7 @@
  ;;@ circularimportuse/Right.java:18:13
  (local $$instance (ref null $circularimportuse.Right))
  (block
-  ;; Right $instance = new Right.<init>();
+  ;; Right $instance = new Right.<init>(0);
   ;;@ circularimportuse/Right.java:18:13
   (local.set $$instance (struct.new $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0)))
   ;; $instance.$ctor();

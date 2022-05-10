@@ -55,7 +55,7 @@
  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
  (local $$instance (ref null $localclasswithconstructor.LocalClassWithConstructor))
  (block
-  ;; LocalClassWithConstructor $instance = new LocalClassWithConstructor.<init>();
+  ;; LocalClassWithConstructor $instance = new LocalClassWithConstructor.<init>(0);
   ;;@ localclasswithconstructor/LocalClassWithConstructor.java:18:13
   (local.set $$instance (struct.new $localclasswithconstructor.LocalClassWithConstructor (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.vtable)) (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -142,10 +142,10 @@
  (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut (ref null $localclasswithconstructor.LocalClassWithConstructor)))
+ (field $$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (ref null $localclasswithconstructor.LocalClassWithConstructor))
  (field $f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))
- (field $$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))
- (field $$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))
+ (field $$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass i32)
+ (field $$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass i32)
   $java.lang.Object)
 )
 (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct_subtype 
@@ -167,9 +167,9 @@
  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
  (local $$instance (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  (block
-  ;; LocalClass $instance = new $1LocalClass.<init>($outer_this,$captured_localVar,$captured_p,a,b);
+  ;; LocalClass $instance = new $1LocalClass.<init>(0,$outer_this,0,$captured_localVar,$captured_p);
   ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
-  (local.set $$instance (struct.new $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable)) (i32.const 0) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (local.get $$captured_localVar) (local.get $$captured_p)))
   ;; $instance.$ctor($outer_this,$captured_localVar,$captured_p,a,b);
   ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:13
   (call $$ctor__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int__void_$p_localclasswithconstructor_LocalClassWithConstructor_1LocalClass@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p)(local.get $a)(local.get $b))
@@ -192,15 +192,6 @@
   ;; localclasswithconstructor.LocalClassWithConstructor.1LocalClass.$clinit();
   ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:38
   (call $$clinit__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass )
-  ;; ($1LocalClass.this.this = $outer_this);
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:22:10
-  (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass(local.get $this) (local.get $$outer_this))
-  ;; ($1LocalClass.this.localVar = $captured_localVar);
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:20:14
-  (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass(local.get $this) (local.get $$captured_localVar))
-  ;; ($1LocalClass.this.p = $captured_p);
-  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:19:29
-  (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass(local.get $this) (local.get $$captured_p))
   ;; Object.this.$ctor();
   ;;@ localclasswithconstructor/LocalClassWithConstructor.java:25:38
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -220,9 +211,9 @@
  ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
  (local $$instance (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  (block
-  ;; LocalClass $instance = new $1LocalClass.<init>($outer_this,$captured_localVar,$captured_p,a);
+  ;; LocalClass $instance = new $1LocalClass.<init>(0,$outer_this,0,$captured_localVar,$captured_p);
   ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
-  (local.set $$instance (struct.new $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable)) (i32.const 0) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (local.get $$captured_localVar) (local.get $$captured_p)))
   ;; $instance.$ctor($outer_this,$captured_localVar,$captured_p,a);
   ;;@ localclasswithconstructor/LocalClassWithConstructor.java:29:13
   (call $$ctor__localclasswithconstructor_LocalClassWithConstructor__int__int__int__void_$p_localclasswithconstructor_LocalClassWithConstructor_1LocalClass@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p)(local.get $a))

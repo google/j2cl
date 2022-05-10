@@ -36,7 +36,7 @@
  ;;@ newinstance/NewInstanceExpr.java:18:13
  (local $$instance (ref null $newinstance.NewInstanceExpr))
  (block
-  ;; NewInstanceExpr $instance = new NewInstanceExpr.<init>();
+  ;; NewInstanceExpr $instance = new NewInstanceExpr.<init>(0);
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (local.set $$instance (struct.new $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $newinstance.NewInstanceExpr.itable)) (i32.const 0)))
   ;; $instance.$ctor();

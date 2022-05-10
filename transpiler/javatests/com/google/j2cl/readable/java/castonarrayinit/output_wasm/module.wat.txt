@@ -53,7 +53,7 @@
  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
  (local $$instance (ref null $castonarrayinit.CastOnArrayInit))
  (block
-  ;; CastOnArrayInit $instance = new CastOnArrayInit.<init>();
+  ;; CastOnArrayInit $instance = new CastOnArrayInit.<init>(0);
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (local.set $$instance (struct.new $castonarrayinit.CastOnArrayInit (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -168,7 +168,7 @@
  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
  (local $$instance (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (block
-  ;; Foo<T> $instance = new Foo.<init>();
+  ;; Foo<T> $instance = new Foo.<init>(0);
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (local.set $$instance (struct.new $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();

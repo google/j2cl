@@ -143,7 +143,7 @@
  ;;@ typewildcards/TypeWildCards.java:21:6
  (local $$instance (ref null $typewildcards.GenericType))
  (block
-  ;; GenericType<T> $instance = new GenericType.<init>();
+  ;; GenericType<T> $instance = new GenericType.<init>(0);
   ;;@ typewildcards/TypeWildCards.java:21:6
   (local.set $$instance (struct.new $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -232,7 +232,7 @@
  ;;@ typewildcards/TypeWildCards.java:23:13
  (local $$instance (ref null $typewildcards.TypeWildCards))
  (block
-  ;; TypeWildCards $instance = new TypeWildCards.<init>();
+  ;; TypeWildCards $instance = new TypeWildCards.<init>(0);
   ;;@ typewildcards/TypeWildCards.java:23:13
   (local.set $$instance (struct.new $typewildcards.TypeWildCards (ref.as_non_null (global.get $typewildcards.TypeWildCards.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -496,7 +496,7 @@
  ;;@ typewildcards/TypeWildCards.java:92:12
  (local $$instance (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (block
-  ;; $LambdaImplementor$1<T, R> $instance = new $LambdaImplementor$1.<init>();
+  ;; $LambdaImplementor$1<T, R> $instance = new $LambdaImplementor$1.<init>(0);
   ;;@ typewildcards/TypeWildCards.java:92:12
   (local.set $$instance (struct.new $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -724,7 +724,7 @@
  ;;@ typewildcards/TypeWildCards.java:44:23
  (local $$instance (ref null $typewildcards.TypeWildCards.A))
  (block
-  ;; A $instance = new A.<init>();
+  ;; A $instance = new A.<init>(0,0);
   ;;@ typewildcards/TypeWildCards.java:44:23
   (local.set $$instance (struct.new $typewildcards.TypeWildCards.A (ref.as_non_null (global.get $typewildcards.TypeWildCards.A.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.A.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -872,7 +872,7 @@
  (field $vtable (ref $typewildcards.TypeWildCards.Element.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__typewildcards_TypeWildCards_Element (mut (ref null $typewildcards.TypeWildCards)))
+ (field $$outer_this__typewildcards_TypeWildCards_Element (ref null $typewildcards.TypeWildCards))
   $java.lang.Object)
 )
 (type $typewildcards.TypeWildCards.Element.vtable (struct_subtype 
@@ -892,9 +892,6 @@
   ;; typewildcards.TypeWildCards.Element.$clinit();
   ;;@ typewildcards/TypeWildCards.java:70:24
   (call $$clinit__void@typewildcards.TypeWildCards.Element )
-  ;; (Element.this.this = $outer_this);
-  ;;@ typewildcards/TypeWildCards.java:70:24
-  (struct.set $typewildcards.TypeWildCards.Element $$outer_this__typewildcards_TypeWildCards_Element(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ typewildcards/TypeWildCards.java:70:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -928,7 +925,7 @@
  (field $vtable (ref $typewildcards.TypeWildCards.OtherElement.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards)))
+ (field $$outer_this__typewildcards_TypeWildCards_OtherElement (ref null $typewildcards.TypeWildCards))
   $java.lang.Object)
 )
 (type $typewildcards.TypeWildCards.OtherElement.vtable (struct_subtype 
@@ -948,9 +945,6 @@
   ;; typewildcards.TypeWildCards.OtherElement.$clinit();
   ;;@ typewildcards/TypeWildCards.java:72:24
   (call $$clinit__void@typewildcards.TypeWildCards.OtherElement )
-  ;; (OtherElement.this.this = $outer_this);
-  ;;@ typewildcards/TypeWildCards.java:72:24
-  (struct.set $typewildcards.TypeWildCards.OtherElement $$outer_this__typewildcards_TypeWildCards_OtherElement(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ typewildcards/TypeWildCards.java:72:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -984,8 +978,8 @@
  (field $vtable (ref $typewildcards.TypeWildCards.SubOtherElement.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards)))
- (field $$outer_this__typewildcards_TypeWildCards_SubOtherElement (mut (ref null $typewildcards.TypeWildCards)))
+ (field $$outer_this__typewildcards_TypeWildCards_OtherElement (ref null $typewildcards.TypeWildCards))
+ (field $$outer_this__typewildcards_TypeWildCards_SubOtherElement (ref null $typewildcards.TypeWildCards))
   $typewildcards.TypeWildCards.OtherElement)
 )
 (type $typewildcards.TypeWildCards.SubOtherElement.vtable (struct_subtype 
@@ -1005,9 +999,6 @@
   ;; typewildcards.TypeWildCards.SubOtherElement.$clinit();
   ;;@ typewildcards/TypeWildCards.java:74:24
   (call $$clinit__void@typewildcards.TypeWildCards.SubOtherElement )
-  ;; (SubOtherElement.this.this = $outer_this);
-  ;;@ typewildcards/TypeWildCards.java:74:24
-  (struct.set $typewildcards.TypeWildCards.SubOtherElement $$outer_this__typewildcards_TypeWildCards_SubOtherElement(local.get $this) (local.get $$outer_this))
   ;; OtherElement.this.$ctor($outer_this);
   ;;@ typewildcards/TypeWildCards.java:74:24
   (call $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_OtherElement@typewildcards.TypeWildCards.OtherElement (local.get $this)(local.get $$outer_this))
@@ -1041,7 +1032,7 @@
  (field $vtable (ref $typewildcards.TypeWildCards.Foo.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__typewildcards_TypeWildCards_Foo (mut (ref null $typewildcards.TypeWildCards)))
+ (field $$outer_this__typewildcards_TypeWildCards_Foo (ref null $typewildcards.TypeWildCards))
   $typewildcards.GenericType)
 )
 (type $typewildcards.TypeWildCards.Foo.vtable (struct_subtype 
@@ -1059,9 +1050,9 @@
  ;;@ typewildcards/TypeWildCards.java:98:8
  (local $$instance (ref null $typewildcards.TypeWildCards.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>($outer_this);
+  ;; Foo $instance = new Foo.<init>(0,$outer_this);
   ;;@ typewildcards/TypeWildCards.java:98:8
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (ref.null $typewildcards.TypeWildCards)))
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ typewildcards/TypeWildCards.java:98:8
   (call $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_Foo@typewildcards.TypeWildCards.Foo (local.get $$instance)(local.get $$outer_this))
@@ -1080,9 +1071,6 @@
   ;; typewildcards.TypeWildCards.Foo.$clinit();
   ;;@ typewildcards/TypeWildCards.java:98:8
   (call $$clinit__void@typewildcards.TypeWildCards.Foo )
-  ;; (Foo.this.this = $outer_this);
-  ;;@ typewildcards/TypeWildCards.java:98:8
-  (struct.set $typewildcards.TypeWildCards.Foo $$outer_this__typewildcards_TypeWildCards_Foo(local.get $this) (local.get $$outer_this))
   ;; GenericType.this.$ctor();
   ;;@ typewildcards/TypeWildCards.java:98:8
   (call $$ctor__void_$p_typewildcards_GenericType@typewildcards.GenericType (local.get $this))

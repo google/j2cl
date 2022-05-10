@@ -129,7 +129,7 @@
  ;;@ deprecated/DeprecatedExample.java:37:9
  (local $$instance (ref null $deprecated.DeprecatedExample))
  (block
-  ;; DeprecatedExample $instance = new DeprecatedExample.<init>();
+  ;; DeprecatedExample $instance = new DeprecatedExample.<init>(0,null);
   ;;@ deprecated/DeprecatedExample.java:37:9
   (local.set $$instance (struct.new $deprecated.DeprecatedExample (ref.as_non_null (global.get $deprecated.DeprecatedExample.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.itable)) (i32.const 0) (ref.null $java.lang.String)))
   ;; $instance.$ctor();
@@ -307,7 +307,7 @@
  ;;@ deprecated/DeprecatedExample.java:55:7
  (local $$instance (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
  (block
-  ;; DeprecatedEnum $instance = new DeprecatedEnum.<init>($name,$ordinal);
+  ;; DeprecatedEnum $instance = new DeprecatedEnum.<init>(0,null,0);
   ;;@ deprecated/DeprecatedExample.java:55:7
   (local.set $$instance (struct.new $deprecated.DeprecatedExample.DeprecatedEnum (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
@@ -447,7 +447,7 @@
  ;;@ deprecated/DeprecatedExample.java:62:7
  (local $$instance (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
  (block
-  ;; DeprecatedJsEnum $instance = new DeprecatedJsEnum.<init>($name,$ordinal);
+  ;; DeprecatedJsEnum $instance = new DeprecatedJsEnum.<init>(0,null,0);
   ;;@ deprecated/DeprecatedExample.java:62:7
   (local.set $$instance (struct.new $deprecated.DeprecatedExample.DeprecatedJsEnum (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);

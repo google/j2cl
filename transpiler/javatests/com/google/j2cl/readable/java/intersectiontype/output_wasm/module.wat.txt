@@ -340,7 +340,7 @@
  ;;@ intersectiontype/IntersectionTypeTest.java:37:13
  (local $$instance (ref null $intersectiontype.IntersectionTypeTest))
  (block
-  ;; IntersectionTypeTest<U> $instance = new IntersectionTypeTest.<init>();
+  ;; IntersectionTypeTest<U> $instance = new IntersectionTypeTest.<init>(0);
   ;;@ intersectiontype/IntersectionTypeTest.java:37:13
   (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -665,7 +665,7 @@
  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
  (local $$instance (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
  (block
-  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>(0);
   ;;@ intersectiontype/IntersectionTypeTest.java:71:26
   (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -765,7 +765,7 @@
  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
  (local $$instance (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
  (block
-  ;; $LambdaImplementor$2<T> $instance = new $LambdaImplementor$2.<init>();
+  ;; $LambdaImplementor$2<T> $instance = new $LambdaImplementor$2.<init>(0);
   ;;@ intersectiontype/IntersectionTypeTest.java:76:27
   (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -849,7 +849,7 @@
  (field $vtable (ref $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (mut (ref null $intersectiontype.IntersectionTypeTest)))
+ (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (ref null $intersectiontype.IntersectionTypeTest))
   $java.lang.Object)
 )
 (type $intersectiontype.IntersectionTypeTest.MapEntry.vtable (struct_subtype 
@@ -868,9 +868,9 @@
  ;;@ intersectiontype/IntersectionTypeTest.java:43:8
  (local $$instance (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (block
-  ;; MapEntry<U> $instance = new MapEntry.<init>($outer_this);
+  ;; MapEntry<U> $instance = new MapEntry.<init>(0,$outer_this);
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
-  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.MapEntry (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.itable)) (i32.const 0) (ref.null $intersectiontype.IntersectionTypeTest)))
+  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.MapEntry (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
   (call $$ctor__intersectiontype_IntersectionTypeTest__void_$p_intersectiontype_IntersectionTypeTest_MapEntry@intersectiontype.IntersectionTypeTest.MapEntry (local.get $$instance)(local.get $$outer_this))
@@ -889,9 +889,6 @@
   ;; intersectiontype.IntersectionTypeTest.MapEntry.$clinit();
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
   (call $$clinit__void@intersectiontype.IntersectionTypeTest.MapEntry )
-  ;; (MapEntry.this.this = $outer_this);
-  ;;@ intersectiontype/IntersectionTypeTest.java:43:8
-  (struct.set $intersectiontype.IntersectionTypeTest.MapEntry $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -972,7 +969,7 @@
  ;;@ intersectiontype/IntersectionTypeTest.java:79:23
  (local $$instance (ref null $intersectiontype.IntersectionTypeTest.A))
  (block
-  ;; A $instance = new A.<init>();
+  ;; A $instance = new A.<init>(0);
   ;;@ intersectiontype/IntersectionTypeTest.java:79:23
   (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.A (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.A.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.A.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1122,7 +1119,7 @@
  ;;@ intersectiontype/IntersectionTypeTest.java:112:23
  (local $$instance (ref null $intersectiontype.IntersectionTypeTest.SomeConcreteType))
  (block
-  ;; SomeConcreteType $instance = new SomeConcreteType.<init>();
+  ;; SomeConcreteType $instance = new SomeConcreteType.<init>(0);
   ;;@ intersectiontype/IntersectionTypeTest.java:112:23
   (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.SomeConcreteType (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.SomeConcreteType.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.SomeConcreteType.itable)) (i32.const 0)))
   ;; $instance.$ctor();

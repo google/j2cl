@@ -36,7 +36,7 @@
  ;;@ staticconstant/StaticConstant.java:18:13
  (local $$instance (ref null $staticconstant.StaticConstant))
  (block
-  ;; StaticConstant $instance = new StaticConstant.<init>();
+  ;; StaticConstant $instance = new StaticConstant.<init>(0);
   ;;@ staticconstant/StaticConstant.java:18:13
   (local.set $$instance (struct.new $staticconstant.StaticConstant (ref.as_non_null (global.get $staticconstant.StaticConstant.vtable)) (ref.as_non_null (global.get $staticconstant.StaticConstant.itable)) (i32.const 0)))
   ;; $instance.$ctor();

@@ -156,7 +156,7 @@
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
  (local $$instance (ref null $anonymousinnerclass.A))
  (block
-  ;; A $instance = new A.<init>();
+  ;; A $instance = new A.<init>(0);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
   (local.set $$instance (struct.new $anonymousinnerclass.A (ref.as_non_null (global.get $anonymousinnerclass.A.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -240,7 +240,7 @@
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
  (local $$instance (ref null $anonymousinnerclass.AnonymousInnerClass))
  (block
-  ;; AnonymousInnerClass $instance = new AnonymousInnerClass.<init>();
+  ;; AnonymousInnerClass $instance = new AnonymousInnerClass.<init>(0);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
   (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -336,7 +336,7 @@
  (field $vtable (ref $anonymousinnerclass.A.B.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__anonymousinnerclass_A_B (mut (ref null $anonymousinnerclass.A)))
+ (field $$outer_this__anonymousinnerclass_A_B (ref null $anonymousinnerclass.A))
   $java.lang.Object)
 )
 (type $anonymousinnerclass.A.B.vtable (struct_subtype 
@@ -354,9 +354,9 @@
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
  (local $$instance (ref null $anonymousinnerclass.A.B))
  (block
-  ;; B $instance = new B.<init>($outer_this);
+  ;; B $instance = new B.<init>(0,$outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-  (local.set $$instance (struct.new $anonymousinnerclass.A.B (ref.as_non_null (global.get $anonymousinnerclass.A.B.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.B.itable)) (i32.const 0) (ref.null $anonymousinnerclass.A)))
+  (local.set $$instance (struct.new $anonymousinnerclass.A.B (ref.as_non_null (global.get $anonymousinnerclass.A.B.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.B.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
   (call $$ctor__anonymousinnerclass_A__void_$p_anonymousinnerclass_A_B@anonymousinnerclass.A.B (local.get $$instance)(local.get $$outer_this))
@@ -375,9 +375,6 @@
   ;; anonymousinnerclass.A.B.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
   (call $$clinit__void@anonymousinnerclass.A.B )
-  ;; (B.this.this = $outer_this);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-  (struct.set $anonymousinnerclass.A.B $$outer_this__anonymousinnerclass_A_B(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -425,8 +422,8 @@
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.1.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
- (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
+ (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1 (ref null $anonymousinnerclass.AnonymousInnerClass))
   $anonymousinnerclass.AnonymousInnerClass.InnerClass)
 )
 (type $anonymousinnerclass.AnonymousInnerClass.1.vtable (struct_subtype 
@@ -444,9 +441,9 @@
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
  (local $$instance (ref null $anonymousinnerclass.AnonymousInnerClass.1))
  (block
-  ;; <anonymous> extends InnerClass $instance = new $1.<init>($outer_this);
+  ;; <anonymous> extends InnerClass $instance = new $1.<init>(0,$outer_this,$outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.1 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.1 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__void_$p_anonymousinnerclass_AnonymousInnerClass_1@anonymousinnerclass.AnonymousInnerClass.1 (local.get $$instance)(local.get $$outer_this))
@@ -465,9 +462,6 @@
   ;; anonymousinnerclass.AnonymousInnerClass.1.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1 )
-  ;; ($1.this.this = $outer_this);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-  (struct.set $anonymousinnerclass.AnonymousInnerClass.1 $$outer_this__anonymousinnerclass_AnonymousInnerClass_1(local.get $this) (local.get $$outer_this))
   ;; InnerClass.this.$ctor($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__void_$p_anonymousinnerclass_AnonymousInnerClass_InnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass (local.get $this)(local.get $$outer_this))
@@ -515,9 +509,9 @@
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.2.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__anonymousinnerclass_A_B (mut (ref null $anonymousinnerclass.A)))
- (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_2 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
- (field $$captured_a__anonymousinnerclass_AnonymousInnerClass_2 (mut (ref null $anonymousinnerclass.A)))
+ (field $$outer_this__anonymousinnerclass_A_B (ref null $anonymousinnerclass.A))
+ (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_2 (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $$captured_a__anonymousinnerclass_AnonymousInnerClass_2 (ref null $anonymousinnerclass.A))
   $anonymousinnerclass.A.B)
 )
 (type $anonymousinnerclass.AnonymousInnerClass.2.vtable (struct_subtype 
@@ -536,9 +530,9 @@
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
  (local $$instance (ref null $anonymousinnerclass.AnonymousInnerClass.2))
  (block
-  ;; <anonymous> extends B $instance = new $2.<init>($outer_this,$captured_a);
+  ;; <anonymous> extends B $instance = new $2.<init>(0,$captured_a,$outer_this,$captured_a);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.2 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.itable)) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.A)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.2 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.itable)) (i32.const 0) (local.get $$captured_a) (local.get $$outer_this) (local.get $$captured_a)))
   ;; $instance.$ctor($outer_this,$captured_a);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__void_$p_anonymousinnerclass_AnonymousInnerClass_2@anonymousinnerclass.AnonymousInnerClass.2 (local.get $$instance)(local.get $$outer_this)(local.get $$captured_a))
@@ -558,12 +552,6 @@
   ;; anonymousinnerclass.AnonymousInnerClass.2.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.2 )
-  ;; ($2.this.this = $outer_this);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-  (struct.set $anonymousinnerclass.AnonymousInnerClass.2 $$outer_this__anonymousinnerclass_AnonymousInnerClass_2(local.get $this) (local.get $$outer_this))
-  ;; ($2.this.a = $captured_a);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:28:6
-  (struct.set $anonymousinnerclass.AnonymousInnerClass.2 $$captured_a__anonymousinnerclass_AnonymousInnerClass_2(local.get $this) (local.get $$captured_a))
   ;; B.this.$ctor($captured_a);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
   (call $$ctor__anonymousinnerclass_A__void_$p_anonymousinnerclass_A_B@anonymousinnerclass.A.B (local.get $this)(local.get $$captured_a))
@@ -611,11 +599,11 @@
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.3.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
+ (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C (ref null $anonymousinnerclass.AnonymousInnerClass))
  (field $f_fInC__anonymousinnerclass_AnonymousInnerClass_1C (mut i32))
- (field $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C (mut i32))
- (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_3 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
- (field $$captured_arg__anonymousinnerclass_AnonymousInnerClass_3 (mut i32))
+ (field $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C i32)
+ (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_3 (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $$captured_arg__anonymousinnerclass_AnonymousInnerClass_3 i32)
   $anonymousinnerclass.AnonymousInnerClass.1C)
 )
 (type $anonymousinnerclass.AnonymousInnerClass.3.vtable (struct_subtype 
@@ -634,9 +622,9 @@
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
  (local $$instance (ref null $anonymousinnerclass.AnonymousInnerClass.3))
  (block
-  ;; <anonymous> extends C $instance = new $3.<init>($outer_this,$captured_arg);
+  ;; <anonymous> extends C $instance = new $3.<init>(0,$outer_this,0,$captured_arg,$outer_this,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.3 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.3 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (local.get $$captured_arg) (local.get $$outer_this) (local.get $$captured_arg)))
   ;; $instance.$ctor($outer_this,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__int__void_$p_anonymousinnerclass_AnonymousInnerClass_3@anonymousinnerclass.AnonymousInnerClass.3 (local.get $$instance)(local.get $$outer_this)(local.get $$captured_arg))
@@ -656,12 +644,6 @@
   ;; anonymousinnerclass.AnonymousInnerClass.3.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.3 )
-  ;; ($3.this.this = $outer_this);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-  (struct.set $anonymousinnerclass.AnonymousInnerClass.3 $$outer_this__anonymousinnerclass_AnonymousInnerClass_3(local.get $this) (local.get $$outer_this))
-  ;; ($3.this.arg = $captured_arg);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:26:29
-  (struct.set $anonymousinnerclass.AnonymousInnerClass.3 $$captured_arg__anonymousinnerclass_AnonymousInnerClass_3(local.get $this) (local.get $$captured_arg))
   ;; $1C.this.$ctor($outer_this,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__int__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C (local.get $this)(local.get $$outer_this)(local.get $$captured_arg))
@@ -709,7 +691,7 @@
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
+ (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass (ref null $anonymousinnerclass.AnonymousInnerClass))
   $java.lang.Object)
 )
 (type $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable (struct_subtype 
@@ -727,9 +709,9 @@
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
  (local $$instance (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
  (block
-  ;; InnerClass $instance = new InnerClass.<init>($outer_this);
+  ;; InnerClass $instance = new InnerClass.<init>(0,$outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.InnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.InnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__void_$p_anonymousinnerclass_AnonymousInnerClass_InnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass (local.get $$instance)(local.get $$outer_this))
@@ -748,9 +730,6 @@
   ;; anonymousinnerclass.AnonymousInnerClass.InnerClass.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.InnerClass )
-  ;; (InnerClass.this.this = $outer_this);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-  (struct.set $anonymousinnerclass.AnonymousInnerClass.InnerClass $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -798,9 +777,9 @@
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.1C.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
+ (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C (ref null $anonymousinnerclass.AnonymousInnerClass))
  (field $f_fInC__anonymousinnerclass_AnonymousInnerClass_1C (mut i32))
- (field $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C (mut i32))
+ (field $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C i32)
   $java.lang.Object)
 )
 (type $anonymousinnerclass.AnonymousInnerClass.1C.vtable (struct_subtype 
@@ -819,9 +798,9 @@
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
  (local $$instance (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
  (block
-  ;; C $instance = new $1C.<init>($outer_this,$captured_arg);
+  ;; C $instance = new $1C.<init>(0,$outer_this,0,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.1C (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $anonymousinnerclass.AnonymousInnerClass.1C (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (local.get $$captured_arg)))
   ;; $instance.$ctor($outer_this,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__int__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C (local.get $$instance)(local.get $$outer_this)(local.get $$captured_arg))
@@ -841,12 +820,6 @@
   ;; anonymousinnerclass.AnonymousInnerClass.1C.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1C )
-  ;; ($1C.this.this = $outer_this);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-  (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this) (local.get $$outer_this))
-  ;; ($1C.this.arg = $captured_arg);
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:26:29
-  (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this) (local.get $$captured_arg))
   ;; Object.this.$ctor();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

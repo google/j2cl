@@ -36,7 +36,7 @@
  ;;@ emptymethod/EmptyMethod.java:18:13
  (local $$instance (ref null $emptymethod.EmptyMethod))
  (block
-  ;; EmptyMethod $instance = new EmptyMethod.<init>();
+  ;; EmptyMethod $instance = new EmptyMethod.<init>(0);
   ;;@ emptymethod/EmptyMethod.java:18:13
   (local.set $$instance (struct.new $emptymethod.EmptyMethod (ref.as_non_null (global.get $emptymethod.EmptyMethod.vtable)) (ref.as_non_null (global.get $emptymethod.EmptyMethod.itable)) (i32.const 0)))
   ;; $instance.$ctor();

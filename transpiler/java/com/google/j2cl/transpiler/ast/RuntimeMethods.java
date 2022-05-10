@@ -65,7 +65,7 @@ public class RuntimeMethods {
         .build();
   }
 
-  /** Create a call to javaemul.internal.WasmArrayHelper.createArray method. */
+  /** Create a call to javaemul.internal.WasmArrayHelper.createMultiDimensional method. */
   public static MethodCall createCreateMultiDimensionalArrayCall(
       Expression dimensions, Expression leafType) {
     return MethodCall.Builder.from(

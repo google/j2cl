@@ -74,7 +74,7 @@
  ;;@ interfaces/Main.java:18:13
  (local $$instance (ref null $interfaces.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ interfaces/Main.java:18:13
   (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $interfaces.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -294,7 +294,7 @@
  (field $vtable (ref $interfaces.Main.Implementor.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__interfaces_Main_Implementor (mut (ref null $interfaces.Main)))
+ (field $$outer_this__interfaces_Main_Implementor (ref null $interfaces.Main))
   $java.lang.Object)
 )
 (type $interfaces.Main.Implementor.vtable (struct_subtype 
@@ -315,9 +315,9 @@
  ;;@ interfaces/Main.java:41:8
  (local $$instance (ref null $interfaces.Main.Implementor))
  (block
-  ;; Implementor $instance = new Implementor.<init>($outer_this);
+  ;; Implementor $instance = new Implementor.<init>(0,$outer_this);
   ;;@ interfaces/Main.java:41:8
-  (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main)))
+  (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ interfaces/Main.java:41:8
   (call $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor (local.get $$instance)(local.get $$outer_this))
@@ -336,9 +336,6 @@
   ;; interfaces.Main.Implementor.$clinit();
   ;;@ interfaces/Main.java:41:8
   (call $$clinit__void@interfaces.Main.Implementor )
-  ;; (Implementor.this.this = $outer_this);
-  ;;@ interfaces/Main.java:41:8
-  (struct.set $interfaces.Main.Implementor $$outer_this__interfaces_Main_Implementor(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ interfaces/Main.java:41:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -436,7 +433,7 @@
  (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__interfaces_Main_AbstractImplementor (mut (ref null $interfaces.Main)))
+ (field $$outer_this__interfaces_Main_AbstractImplementor (ref null $interfaces.Main))
   $java.lang.Object)
 )
 (type $interfaces.Main.AbstractImplementor.vtable (struct_subtype 
@@ -458,9 +455,6 @@
   ;; interfaces.Main.AbstractImplementor.$clinit();
   ;;@ interfaces/Main.java:47:17
   (call $$clinit__void@interfaces.Main.AbstractImplementor )
-  ;; (AbstractImplementor.this.this = $outer_this);
-  ;;@ interfaces/Main.java:47:17
-  (struct.set $interfaces.Main.AbstractImplementor $$outer_this__interfaces_Main_AbstractImplementor(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ interfaces/Main.java:47:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

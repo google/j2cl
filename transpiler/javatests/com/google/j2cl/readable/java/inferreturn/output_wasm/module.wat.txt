@@ -36,7 +36,7 @@
  ;;@ inferreturn/InferReturn.java:21:13
  (local $$instance (ref null $inferreturn.InferReturn))
  (block
-  ;; InferReturn<T> $instance = new InferReturn.<init>();
+  ;; InferReturn<T> $instance = new InferReturn.<init>(0);
   ;;@ inferreturn/InferReturn.java:21:13
   (local.set $$instance (struct.new $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $inferreturn.InferReturn.itable)) (i32.const 0)))
   ;; $instance.$ctor();

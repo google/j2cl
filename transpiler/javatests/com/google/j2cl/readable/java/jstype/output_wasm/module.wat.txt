@@ -56,7 +56,7 @@
  ;;@ jstype/SomeJsType.java:22:13
  (local $$instance (ref null $jstype.SomeJsType))
  (block
-  ;; SomeJsType<T> $instance = new SomeJsType.<init>();
+  ;; SomeJsType<T> $instance = new SomeJsType.<init>(0,0,0,0,0);
   ;;@ jstype/SomeJsType.java:22:13
   (local.set $$instance (struct.new $jstype.SomeJsType (ref.as_non_null (global.get $jstype.SomeJsType.vtable)) (ref.as_non_null (global.get $jstype.SomeJsType.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();

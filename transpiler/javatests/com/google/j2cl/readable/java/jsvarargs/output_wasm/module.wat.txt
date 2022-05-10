@@ -218,7 +218,7 @@
  ;;@ jsvarargs/Main.java:86:9
  (local $$instance (ref null $jsvarargs.Main))
  (block
-  ;; Main $instance = new Main.<init>(f);
+  ;; Main $instance = new Main.<init>(0,0);
   ;;@ jsvarargs/Main.java:86:9
   (local.set $$instance (struct.new $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(f);
@@ -724,7 +724,7 @@
  ;;@ jsvarargs/Main.java:241:34
  (local $$instance (ref null $jsvarargs.Main.$LambdaImplementor$1))
  (block
-  ;; $LambdaImplementor$1<T> $instance = new $LambdaImplementor$1.<init>();
+  ;; $LambdaImplementor$1<T> $instance = new $LambdaImplementor$1.<init>(0);
   ;;@ jsvarargs/Main.java:241:34
   (local.set $$instance (struct.new $jsvarargs.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsvarargs.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -834,7 +834,7 @@
  ;;@ jsvarargs/Main.java:29:11
  (local $$instance (ref null $jsvarargs.Main.NativeObject))
  (block
-  ;; NativeObject $instance = new NativeObject.<init>(pars);
+  ;; NativeObject $instance = new NativeObject.<init>(0);
   ;;@ jsvarargs/Main.java:29:11
   (local.set $$instance (struct.new $jsvarargs.Main.NativeObject (ref.as_non_null (global.get $jsvarargs.Main.NativeObject.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.NativeObject.itable)) (i32.const 0)))
   ;; $instance.$ctor(pars);
@@ -920,7 +920,7 @@
  ;;@ jsvarargs/Main.java:34:11
  (local $$instance (ref null $jsvarargs.Main.SubVarargsConstructorClass))
  (block
-  ;; SubVarargsConstructorClass $instance = new SubVarargsConstructorClass.<init>(i,args);
+  ;; SubVarargsConstructorClass $instance = new SubVarargsConstructorClass.<init>(0);
   ;;@ jsvarargs/Main.java:34:11
   (local.set $$instance (struct.new $jsvarargs.Main.SubVarargsConstructorClass (ref.as_non_null (global.get $jsvarargs.Main.SubVarargsConstructorClass.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.SubVarargsConstructorClass.itable)) (i32.const 0)))
   ;; $instance.$ctor(i,args);
@@ -1137,7 +1137,7 @@
  ;;@ jsvarargs/Main.java:54:21
  (local $$instance (ref null $jsvarargs.Main.AFunction))
  (block
-  ;; AFunction $instance = new AFunction.<init>();
+  ;; AFunction $instance = new AFunction.<init>(0);
   ;;@ jsvarargs/Main.java:54:21
   (local.set $$instance (struct.new $jsvarargs.Main.AFunction (ref.as_non_null (global.get $jsvarargs.Main.AFunction.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.AFunction.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1249,7 +1249,7 @@
  ;;@ jsvarargs/Main.java:63:11
  (local $$instance (ref null $jsvarargs.Main.SubMain))
  (block
-  ;; SubMain $instance = new SubMain.<init>();
+  ;; SubMain $instance = new SubMain.<init>(0,0);
   ;;@ jsvarargs/Main.java:63:11
   (local.set $$instance (struct.new $jsvarargs.Main.SubMain (ref.as_non_null (global.get $jsvarargs.Main.SubMain.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.SubMain.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1417,7 +1417,7 @@
  ;;@ jsvarargs/QualifiedSuperMethodCall.java:19:9
  (local $$instance (ref null $jsvarargs.QualifiedSuperMethodCall))
  (block
-  ;; QualifiedSuperMethodCall $instance = new QualifiedSuperMethodCall.<init>();
+  ;; QualifiedSuperMethodCall $instance = new QualifiedSuperMethodCall.<init>(0,0);
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:19:9
   (local.set $$instance (struct.new $jsvarargs.QualifiedSuperMethodCall (ref.as_non_null (global.get $jsvarargs.QualifiedSuperMethodCall.vtable)) (ref.as_non_null (global.get $jsvarargs.QualifiedSuperMethodCall.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1484,7 +1484,7 @@
  (field $vtable (ref $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass (mut (ref null $jsvarargs.QualifiedSuperMethodCall)))
+ (field $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass (ref null $jsvarargs.QualifiedSuperMethodCall))
   $java.lang.Object)
 )
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (struct_subtype 
@@ -1503,9 +1503,9 @@
  ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
  (local $$instance (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (block
-  ;; InnerClass $instance = new InnerClass.<init>($outer_this);
+  ;; InnerClass $instance = new InnerClass.<init>(0,$outer_this);
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-  (local.set $$instance (struct.new $jsvarargs.QualifiedSuperMethodCall.InnerClass (ref.as_non_null (global.get $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)) (ref.as_non_null (global.get $jsvarargs.QualifiedSuperMethodCall.InnerClass.itable)) (i32.const 0) (ref.null $jsvarargs.QualifiedSuperMethodCall)))
+  (local.set $$instance (struct.new $jsvarargs.QualifiedSuperMethodCall.InnerClass (ref.as_non_null (global.get $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)) (ref.as_non_null (global.get $jsvarargs.QualifiedSuperMethodCall.InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
   (call $$ctor__jsvarargs_QualifiedSuperMethodCall__void_$p_jsvarargs_QualifiedSuperMethodCall_InnerClass@jsvarargs.QualifiedSuperMethodCall.InnerClass (local.get $$instance)(local.get $$outer_this))
@@ -1524,9 +1524,6 @@
   ;; jsvarargs.QualifiedSuperMethodCall.InnerClass.$clinit();
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
   (call $$clinit__void@jsvarargs.QualifiedSuperMethodCall.InnerClass )
-  ;; (InnerClass.this.this = $outer_this);
-  ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-  (struct.set $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

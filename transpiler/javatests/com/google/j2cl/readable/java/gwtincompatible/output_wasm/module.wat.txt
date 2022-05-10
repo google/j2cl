@@ -125,7 +125,7 @@
  ;;@ gwtincompatible/Implementor.java:20:13
  (local $$instance (ref null $gwtincompatible.Implementor))
  (block
-  ;; Implementor $instance = new Implementor.<init>();
+  ;; Implementor $instance = new Implementor.<init>(0);
   ;;@ gwtincompatible/Implementor.java:20:13
   (local.set $$instance (struct.new $gwtincompatible.Implementor (ref.as_non_null (global.get $gwtincompatible.Implementor.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -234,7 +234,7 @@
  ;;@ gwtincompatible/Implementor.java:39:15
  (local $$instance (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (block
-  ;; <anonymous> extends SomeEnum $instance = new $1.<init>($name,$ordinal);
+  ;; <anonymous> extends SomeEnum $instance = new $1.<init>(0,null,0);
   ;;@ gwtincompatible/Implementor.java:39:15
   (local.set $$instance (struct.new $gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);

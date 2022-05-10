@@ -79,7 +79,7 @@
  ;;@ importglobaljstypes/Date.java:27:13
  (local $$instance (ref null $importglobaljstypes.Date))
  (block
-  ;; Date $instance = new Date.<init>();
+  ;; Date $instance = new Date.<init>(0);
   ;;@ importglobaljstypes/Date.java:27:13
   (local.set $$instance (struct.new $importglobaljstypes.Date (ref.as_non_null (global.get $importglobaljstypes.Date.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -194,7 +194,7 @@
  ;;@ importglobaljstypes/Date.java:38:22
  (local $$instance (ref null $importglobaljstypes.Date.NativeDate))
  (block
-  ;; NativeDate $instance = new NativeDate.<init>();
+  ;; NativeDate $instance = new NativeDate.<init>(0);
   ;;@ importglobaljstypes/Date.java:38:22
   (local.set $$instance (struct.new $importglobaljstypes.Date.NativeDate (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -283,7 +283,7 @@
  ;;@ importglobaljstypes/Number.java:27:13
  (local $$instance (ref null $importglobaljstypes.Number))
  (block
-  ;; Number $instance = new Number.<init>();
+  ;; Number $instance = new Number.<init>(0);
   ;;@ importglobaljstypes/Number.java:27:13
   (local.set $$instance (struct.new $importglobaljstypes.Number (ref.as_non_null (global.get $importglobaljstypes.Number.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Number.itable)) (i32.const 0)))
   ;; $instance.$ctor();

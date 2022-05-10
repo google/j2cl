@@ -64,10 +64,8 @@ public class ImplementArraysAsClasses extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public boolean shouldProcessType(Type type) {
-            // We do not expect any access to the native arrays outside of these class.
-            return TypeDescriptors.get()
-                .javaemulInternalWasmArray
-                .equals(type.getSuperTypeDescriptor());
+            // We do not expect any access to the native arrays outside of these classes.
+            return TypeDescriptors.isWasmArraySubtype(type.getTypeDescriptor());
           }
 
           @Override

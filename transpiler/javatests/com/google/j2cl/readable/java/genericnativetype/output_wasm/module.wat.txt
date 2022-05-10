@@ -54,7 +54,7 @@
  ;;@ genericnativetype/BoundedJsArray.java:24:10
  (local $$instance (ref null $genericnativetype.BoundedJsArray))
  (block
-  ;; BoundedJsArray<V> $instance = new BoundedJsArray.<init>(size);
+  ;; BoundedJsArray<V> $instance = new BoundedJsArray.<init>(0);
   ;;@ genericnativetype/BoundedJsArray.java:24:10
   (local.set $$instance (struct.new $genericnativetype.BoundedJsArray (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.itable)) (i32.const 0)))
   ;; $instance.$ctor(size);
@@ -175,7 +175,7 @@
  ;;@ genericnativetype/BoundedJsArrays.java:19:10
  (local $$instance (ref null $genericnativetype.BoundedJsArrays))
  (block
-  ;; BoundedJsArrays $instance = new BoundedJsArrays.<init>();
+  ;; BoundedJsArrays $instance = new BoundedJsArrays.<init>(0);
   ;;@ genericnativetype/BoundedJsArrays.java:19:10
   (local.set $$instance (struct.new $genericnativetype.BoundedJsArrays (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.itable)) (i32.const 0)))
   ;; $instance.$ctor();

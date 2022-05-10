@@ -72,7 +72,7 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass))
  (block
-  ;; OuterClass $instance = new OuterClass.<init>();
+  ;; OuterClass $instance = new OuterClass.<init>(0);
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
   (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.vtable)) (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -154,7 +154,7 @@
  (field $vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
+ (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (field $f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
  (field $f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
   $java.lang.Object)
@@ -174,9 +174,9 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  (block
-  ;; InnerInnerClass $instance = new InnerInnerClass.<init>($outer_this);
+  ;; InnerInnerClass $instance = new InnerInnerClass.<init>(0,$outer_this,null,null);
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
-  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable)) (i32.const 0) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass)))
+  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable)) (i32.const 0) (local.get $$outer_this) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass)))
   ;; $instance.$ctor($outer_this);
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$ctor__nestedinstanceinnerclass_OuterClass_InnerClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $$instance)(local.get $$outer_this))
@@ -195,9 +195,6 @@
   ;; nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$clinit();
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$clinit__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass )
-  ;; (InnerInnerClass.this.this = $outer_this);
-  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
-  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -262,7 +259,7 @@
  (field $vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
+ (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass (ref null $nestedinstanceinnerclass.OuterClass))
   $java.lang.Object)
 )
 (type $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (struct_subtype 
@@ -280,9 +277,9 @@
  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (block
-  ;; InnerClass $instance = new InnerClass.<init>($outer_this);
+  ;; InnerClass $instance = new InnerClass.<init>(0,$outer_this);
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
-  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.itable)) (i32.const 0) (ref.null $nestedinstanceinnerclass.OuterClass)))
+  (local.set $$instance (struct.new $nestedinstanceinnerclass.OuterClass.InnerClass (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (ref.as_non_null (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$ctor__nestedinstanceinnerclass_OuterClass__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass (local.get $$instance)(local.get $$outer_this))
@@ -301,9 +298,6 @@
   ;; nestedinstanceinnerclass.OuterClass.InnerClass.$clinit();
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$clinit__void@nestedinstanceinnerclass.OuterClass.InnerClass )
-  ;; (InnerClass.this.this = $outer_this);
-  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
-  (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

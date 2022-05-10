@@ -121,7 +121,7 @@
  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (local $$instance (ref null $genericanddefaultmethods.GenericClass))
  (block
-  ;; GenericClass<T> $instance = new GenericClass.<init>();
+  ;; GenericClass<T> $instance = new GenericClass.<init>(0);
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (local.set $$instance (struct.new $genericanddefaultmethods.GenericClass (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -231,7 +231,7 @@
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (local $$instance (ref null $genericanddefaultmethods.ConcreteClass))
  (block
-  ;; ConcreteClass $instance = new ConcreteClass.<init>();
+  ;; ConcreteClass $instance = new ConcreteClass.<init>(0);
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (local.set $$instance (struct.new $genericanddefaultmethods.ConcreteClass (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();

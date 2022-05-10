@@ -98,7 +98,7 @@
  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
  (local $$instance (ref null $jsbridgebackward.A))
  (block
-  ;; A $instance = new A.<init>();
+  ;; A $instance = new A.<init>(0);
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (local.set $$instance (struct.new $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $jsbridgebackward.A.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -199,7 +199,7 @@
  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
  (local $$instance (ref null $jsbridgebackward.InterfaceImpl))
  (block
-  ;; InterfaceImpl $instance = new InterfaceImpl.<init>();
+  ;; InterfaceImpl $instance = new InterfaceImpl.<init>(0);
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (local.set $$instance (struct.new $jsbridgebackward.InterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();

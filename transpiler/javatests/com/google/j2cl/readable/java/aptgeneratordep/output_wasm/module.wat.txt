@@ -53,7 +53,7 @@
  ;;@ aptgeneratordep/Dummy.java:3:13
  (local $$instance (ref null $aptgeneratordep.Dummy))
  (block
-  ;; Dummy $instance = new Dummy.<init>();
+  ;; Dummy $instance = new Dummy.<init>(0);
   ;;@ aptgeneratordep/Dummy.java:3:13
   (local.set $$instance (struct.new $aptgeneratordep.Dummy (ref.as_non_null (global.get $aptgeneratordep.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratordep.Dummy.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -136,7 +136,7 @@
  ;;@ aptgeneratordep/Foo.java:18:13
  (local $$instance (ref null $aptgeneratordep.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>();
+  ;; Foo $instance = new Foo.<init>(0);
   ;;@ aptgeneratordep/Foo.java:18:13
   (local.set $$instance (struct.new $aptgeneratordep.Foo (ref.as_non_null (global.get $aptgeneratordep.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratordep.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();

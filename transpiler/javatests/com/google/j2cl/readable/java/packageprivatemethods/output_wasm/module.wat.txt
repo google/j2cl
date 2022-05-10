@@ -97,7 +97,7 @@
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (local $$instance (ref null $packageprivatemethods.package1.Child))
  (block
-  ;; Child $instance = new Child.<init>();
+  ;; Child $instance = new Child.<init>(0);
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (local.set $$instance (struct.new $packageprivatemethods.package1.Child (ref.as_non_null (global.get $packageprivatemethods.package1.Child.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.Child.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -363,7 +363,7 @@
  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
  (local $$instance (ref null $packageprivatemethods.package1.SuperParent))
  (block
-  ;; SuperParent $instance = new SuperParent.<init>();
+  ;; SuperParent $instance = new SuperParent.<init>(0);
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (local.set $$instance (struct.new $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -506,7 +506,7 @@
  ;;@ packageprivatemethods/package2/SubChild.java:20:13
  (local $$instance (ref null $packageprivatemethods.package2.SubChild))
  (block
-  ;; SubChild $instance = new SubChild.<init>();
+  ;; SubChild $instance = new SubChild.<init>(0);
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (local.set $$instance (struct.new $packageprivatemethods.package2.SubChild (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.itable)) (i32.const 0)))
   ;; $instance.$ctor();

@@ -191,7 +191,7 @@
  ;;@ jsasync/Main.java:24:13
  (local $$instance (ref null $jsasync.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0,null);
   ;;@ jsasync/Main.java:24:13
   (local.set $$instance (struct.new $jsasync.Main (ref.as_non_null (global.get $jsasync.Main.vtable)) (ref.as_non_null (global.get $jsasync.Main.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
@@ -398,7 +398,7 @@
  ;;@ jsasync/Main.java:51:23
  (local $$instance (ref null $jsasync.Main.$LambdaImplementor$1))
  (block
-  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>(0);
   ;;@ jsasync/Main.java:51:23
   (local.set $$instance (struct.new $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -481,7 +481,7 @@
  (field $vtable (ref $jsasync.Main.1.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__jsasync_Main_1 (mut (ref null $jsasync.Main)))
+ (field $$outer_this__jsasync_Main_1 (ref null $jsasync.Main))
   $java.lang.Object)
 )
 (type $jsasync.Main.1.vtable (struct_subtype 
@@ -500,9 +500,9 @@
  ;;@ jsasync/Main.java:54:28
  (local $$instance (ref null $jsasync.Main.1))
  (block
-  ;; <anonymous> implements BaseInterface $instance = new $1.<init>($outer_this);
+  ;; <anonymous> implements BaseInterface $instance = new $1.<init>(0,$outer_this);
   ;;@ jsasync/Main.java:54:28
-  (local.set $$instance (struct.new $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (ref.null $jsasync.Main)))
+  (local.set $$instance (struct.new $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:54:28
   (call $$ctor__jsasync_Main__void_$p_jsasync_Main_1@jsasync.Main.1 (local.get $$instance)(local.get $$outer_this))
@@ -521,9 +521,6 @@
   ;; jsasync.Main.1.$clinit();
   ;;@ jsasync/Main.java:54:28
   (call $$clinit__void@jsasync.Main.1 )
-  ;; ($1.this.this = $outer_this);
-  ;;@ jsasync/Main.java:54:28
-  (struct.set $jsasync.Main.1 $$outer_this__jsasync_Main_1(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:54:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -604,7 +601,7 @@
  ;;@ jsasync/Main.java:62:33
  (local $$instance (ref null $jsasync.Main.$LambdaImplementor$2))
  (block
-  ;; $LambdaImplementor$2 $instance = new $LambdaImplementor$2.<init>();
+  ;; $LambdaImplementor$2 $instance = new $LambdaImplementor$2.<init>(0);
   ;;@ jsasync/Main.java:62:33
   (local.set $$instance (struct.new $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -687,7 +684,7 @@
  (field $vtable (ref $jsasync.Main.2.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__jsasync_Main_2 (mut (ref null $jsasync.Main)))
+ (field $$outer_this__jsasync_Main_2 (ref null $jsasync.Main))
   $java.lang.Object)
 )
 (type $jsasync.Main.2.vtable (struct_subtype 
@@ -706,9 +703,9 @@
  ;;@ jsasync/Main.java:65:34
  (local $$instance (ref null $jsasync.Main.2))
  (block
-  ;; <anonymous> implements JsFunctionInterface $instance = new $2.<init>($outer_this);
+  ;; <anonymous> implements JsFunctionInterface $instance = new $2.<init>(0,$outer_this);
   ;;@ jsasync/Main.java:65:34
-  (local.set $$instance (struct.new $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (ref.null $jsasync.Main)))
+  (local.set $$instance (struct.new $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:65:34
   (call $$ctor__jsasync_Main__void_$p_jsasync_Main_2@jsasync.Main.2 (local.get $$instance)(local.get $$outer_this))
@@ -727,9 +724,6 @@
   ;; jsasync.Main.2.$clinit();
   ;;@ jsasync/Main.java:65:34
   (call $$clinit__void@jsasync.Main.2 )
-  ;; ($2.this.this = $outer_this);
-  ;;@ jsasync/Main.java:65:34
-  (struct.set $jsasync.Main.2 $$outer_this__jsasync_Main_2(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:65:34
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -793,7 +787,7 @@
  (field $vtable (ref $jsasync.Main.3.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__jsasync_Main_3 (mut (ref null $jsasync.Main)))
+ (field $$outer_this__jsasync_Main_3 (ref null $jsasync.Main))
   $java.lang.Object)
 )
 (type $jsasync.Main.3.vtable (struct_subtype 
@@ -812,9 +806,9 @@
  ;;@ jsasync/Main.java:76:34
  (local $$instance (ref null $jsasync.Main.3))
  (block
-  ;; <anonymous> implements JsFunctionInterface $instance = new $3.<init>($outer_this);
+  ;; <anonymous> implements JsFunctionInterface $instance = new $3.<init>(0,$outer_this);
   ;;@ jsasync/Main.java:76:34
-  (local.set $$instance (struct.new $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (ref.null $jsasync.Main)))
+  (local.set $$instance (struct.new $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:76:34
   (call $$ctor__jsasync_Main__void_$p_jsasync_Main_3@jsasync.Main.3 (local.get $$instance)(local.get $$outer_this))
@@ -833,9 +827,6 @@
   ;; jsasync.Main.3.$clinit();
   ;;@ jsasync/Main.java:76:34
   (call $$clinit__void@jsasync.Main.3 )
-  ;; ($3.this.this = $outer_this);
-  ;;@ jsasync/Main.java:76:34
-  (struct.set $jsasync.Main.3 $$outer_this__jsasync_Main_3(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:76:34
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -1147,7 +1138,7 @@
  ;;@ jsasync/Main.java:119:23
  (local $$instance (ref null $jsasync.Main.Promise))
  (block
-  ;; Promise<T> $instance = new Promise.<init>();
+  ;; Promise<T> $instance = new Promise.<init>(0);
   ;;@ jsasync/Main.java:119:23
   (local.set $$instance (struct.new $jsasync.Main.Promise (ref.as_non_null (global.get $jsasync.Main.Promise.vtable)) (ref.as_non_null (global.get $jsasync.Main.Promise.itable)) (i32.const 0)))
   ;; $instance.$ctor();

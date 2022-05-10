@@ -72,7 +72,7 @@
  ;;@ booleanoperations/BooleanOperations.java:18:13
  (local $$instance (ref null $booleanoperations.BooleanOperations))
  (block
-  ;; BooleanOperations $instance = new BooleanOperations.<init>();
+  ;; BooleanOperations $instance = new BooleanOperations.<init>(0);
   ;;@ booleanoperations/BooleanOperations.java:18:13
   (local.set $$instance (struct.new $booleanoperations.BooleanOperations (ref.as_non_null (global.get $booleanoperations.BooleanOperations.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -363,7 +363,7 @@
  (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__booleanoperations_BooleanOperations_1Outer_Inner (mut (ref null $booleanoperations.BooleanOperations.1Outer)))
+ (field $$outer_this__booleanoperations_BooleanOperations_1Outer_Inner (ref null $booleanoperations.BooleanOperations.1Outer))
   $java.lang.Object)
 )
 (type $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct_subtype 
@@ -381,9 +381,9 @@
  ;;@ booleanoperations/BooleanOperations.java:94:12
  (local $$instance (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
  (block
-  ;; Inner $instance = new Inner.<init>($outer_this);
+  ;; Inner $instance = new Inner.<init>(0,$outer_this);
   ;;@ booleanoperations/BooleanOperations.java:94:12
-  (local.set $$instance (struct.new $booleanoperations.BooleanOperations.1Outer.Inner (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.Inner.itable)) (i32.const 0) (ref.null $booleanoperations.BooleanOperations.1Outer)))
+  (local.set $$instance (struct.new $booleanoperations.BooleanOperations.1Outer.Inner (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.Inner.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ booleanoperations/BooleanOperations.java:94:12
   (call $$ctor__booleanoperations_BooleanOperations_1Outer__void_$p_booleanoperations_BooleanOperations_1Outer_Inner@booleanoperations.BooleanOperations.1Outer.Inner (local.get $$instance)(local.get $$outer_this))
@@ -402,9 +402,6 @@
   ;; booleanoperations.BooleanOperations.1Outer.Inner.$clinit();
   ;;@ booleanoperations/BooleanOperations.java:94:12
   (call $$clinit__void@booleanoperations.BooleanOperations.1Outer.Inner )
-  ;; (Inner.this.this = $outer_this);
-  ;;@ booleanoperations/BooleanOperations.java:94:12
-  (struct.set $booleanoperations.BooleanOperations.1Outer.Inner $$outer_this__booleanoperations_BooleanOperations_1Outer_Inner(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ booleanoperations/BooleanOperations.java:94:12
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -466,7 +463,7 @@
  (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__booleanoperations_BooleanOperations_1Outer (mut (ref null $booleanoperations.BooleanOperations)))
+ (field $$outer_this__booleanoperations_BooleanOperations_1Outer (ref null $booleanoperations.BooleanOperations))
  (field $f_b__booleanoperations_BooleanOperations_1Outer (mut i8))
   $java.lang.Object)
 )
@@ -485,9 +482,9 @@
  ;;@ booleanoperations/BooleanOperations.java:91:10
  (local $$instance (ref null $booleanoperations.BooleanOperations.1Outer))
  (block
-  ;; Outer $instance = new $1Outer.<init>($outer_this);
+  ;; Outer $instance = new $1Outer.<init>(0,$outer_this,false);
   ;;@ booleanoperations/BooleanOperations.java:91:10
-  (local.set $$instance (struct.new $booleanoperations.BooleanOperations.1Outer (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.itable)) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0)))
+  (local.set $$instance (struct.new $booleanoperations.BooleanOperations.1Outer (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0)))
   ;; $instance.$ctor($outer_this);
   ;;@ booleanoperations/BooleanOperations.java:91:10
   (call $$ctor__booleanoperations_BooleanOperations__void_$p_booleanoperations_BooleanOperations_1Outer@booleanoperations.BooleanOperations.1Outer (local.get $$instance)(local.get $$outer_this))
@@ -506,9 +503,6 @@
   ;; booleanoperations.BooleanOperations.1Outer.$clinit();
   ;;@ booleanoperations/BooleanOperations.java:91:10
   (call $$clinit__void@booleanoperations.BooleanOperations.1Outer )
-  ;; ($1Outer.this.this = $outer_this);
-  ;;@ booleanoperations/BooleanOperations.java:91:10
-  (struct.set $booleanoperations.BooleanOperations.1Outer $$outer_this__booleanoperations_BooleanOperations_1Outer(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ booleanoperations/BooleanOperations.java:91:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

@@ -45,7 +45,7 @@
  ;;@ abstractinnerclass/InnerClasses.java:18:13
  (local $$instance (ref null $abstractinnerclass.InnerClasses))
  (block
-  ;; InnerClasses $instance = new InnerClasses.<init>();
+  ;; InnerClasses $instance = new InnerClasses.<init>(0);
   ;;@ abstractinnerclass/InnerClasses.java:18:13
   (local.set $$instance (struct.new $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -216,7 +216,7 @@
  (field $vtable (ref $abstractinnerclass.InnerClasses.C.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__abstractinnerclass_InnerClasses_C (mut (ref null $abstractinnerclass.InnerClasses)))
+ (field $$outer_this__abstractinnerclass_InnerClasses_C (ref null $abstractinnerclass.InnerClasses))
   $java.lang.Object)
 )
 (type $abstractinnerclass.InnerClasses.C.vtable (struct_subtype 
@@ -238,9 +238,6 @@
   ;; abstractinnerclass.InnerClasses.C.$clinit();
   ;;@ abstractinnerclass/InnerClasses.java:29:17
   (call $$clinit__void@abstractinnerclass.InnerClasses.C )
-  ;; (C.this.this = $outer_this);
-  ;;@ abstractinnerclass/InnerClasses.java:29:17
-  (struct.set $abstractinnerclass.InnerClasses.C $$outer_this__abstractinnerclass_InnerClasses_C(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:29:17
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

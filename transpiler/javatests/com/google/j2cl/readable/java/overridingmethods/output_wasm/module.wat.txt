@@ -99,7 +99,7 @@
  ;;@ overridingmethods/Child.java:22:6
  (local $$instance (ref null $overridingmethods.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>();
+  ;; Parent $instance = new Parent.<init>(0);
   ;;@ overridingmethods/Child.java:22:6
   (local.set $$instance (struct.new $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $overridingmethods.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -196,7 +196,7 @@
  ;;@ overridingmethods/Child.java:26:13
  (local $$instance (ref null $overridingmethods.Child))
  (block
-  ;; Child $instance = new Child.<init>();
+  ;; Child $instance = new Child.<init>(0);
   ;;@ overridingmethods/Child.java:26:13
   (local.set $$instance (struct.new $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0)))
   ;; $instance.$ctor();

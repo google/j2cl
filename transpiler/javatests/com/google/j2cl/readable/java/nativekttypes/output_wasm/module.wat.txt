@@ -213,7 +213,7 @@
  ;;@ nativekttypes/Main.java:20:13
  (local $$instance (ref null $nativekttypes.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0,null,null,null);
   ;;@ nativekttypes/Main.java:20:13
   (local.set $$instance (struct.new $nativekttypes.Main (ref.as_non_null (global.get $nativekttypes.Main.vtable)) (ref.as_non_null (global.get $nativekttypes.Main.itable)) (i32.const 0) (ref.null $nativekttypes.NativeTopLevel) (ref.null $nativekttypes.NativeTopLevel.Nested) (ref.null $nativekttypes.NativeTopLevel.Inner)))
   ;; $instance.$ctor();
@@ -515,7 +515,7 @@
  ;;@ nativekttypes/Main.java:78:2
  (local $$instance (ref null $nativekttypes.Subclass))
  (block
-  ;; Subclass<V> $instance = new Subclass.<init>(v);
+  ;; Subclass<V> $instance = new Subclass.<init>(0,null,0,false);
   ;;@ nativekttypes/Main.java:78:2
   (local.set $$instance (struct.new $nativekttypes.Subclass (ref.as_non_null (global.get $nativekttypes.Subclass.vtable)) (ref.as_non_null (global.get $nativekttypes.Subclass.itable)) (i32.const 0) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(v);
@@ -924,7 +924,7 @@
  ;;@ nativekttypes/NativeTopLevel.java:84:9
  (local $$instance (ref null $nativekttypes.NativeTopLevel))
  (block
-  ;; NativeTopLevel<O> $instance = new NativeTopLevel.<init>(o);
+  ;; NativeTopLevel<O> $instance = new NativeTopLevel.<init>(0,null,0,false);
   ;;@ nativekttypes/NativeTopLevel.java:84:9
   (local.set $$instance (struct.new $nativekttypes.NativeTopLevel (ref.as_non_null (global.get $nativekttypes.NativeTopLevel.vtable)) (ref.as_non_null (global.get $nativekttypes.NativeTopLevel.itable)) (i32.const 0) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(o);
@@ -1036,7 +1036,7 @@
  ;;@ nativekttypes/NativeTopLevel.java:31:11
  (local $$instance (ref null $nativekttypes.NativeTopLevel.Nested))
  (block
-  ;; Nested<N> $instance = new Nested.<init>(n);
+  ;; Nested<N> $instance = new Nested.<init>(0,null);
   ;;@ nativekttypes/NativeTopLevel.java:31:11
   (local.set $$instance (struct.new $nativekttypes.NativeTopLevel.Nested (ref.as_non_null (global.get $nativekttypes.NativeTopLevel.Nested.vtable)) (ref.as_non_null (global.get $nativekttypes.NativeTopLevel.Nested.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(n);
@@ -1129,7 +1129,7 @@
  (field $vtable (ref $nativekttypes.NativeTopLevel.Inner.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__nativekttypes_NativeTopLevel_Inner (mut (ref null $nativekttypes.NativeTopLevel)))
+ (field $$outer_this__nativekttypes_NativeTopLevel_Inner (ref null $nativekttypes.NativeTopLevel))
   $java.lang.Object)
 )
 (type $nativekttypes.NativeTopLevel.Inner.vtable (struct_subtype 
@@ -1148,9 +1148,9 @@
  ;;@ nativekttypes/NativeTopLevel.java:42:11
  (local $$instance (ref null $nativekttypes.NativeTopLevel.Inner))
  (block
-  ;; Inner<I, O> $instance = new Inner.<init>($outer_this,i);
+  ;; Inner<I, O> $instance = new Inner.<init>(0,$outer_this);
   ;;@ nativekttypes/NativeTopLevel.java:42:11
-  (local.set $$instance (struct.new $nativekttypes.NativeTopLevel.Inner (ref.as_non_null (global.get $nativekttypes.NativeTopLevel.Inner.vtable)) (ref.as_non_null (global.get $nativekttypes.NativeTopLevel.Inner.itable)) (i32.const 0) (ref.null $nativekttypes.NativeTopLevel)))
+  (local.set $$instance (struct.new $nativekttypes.NativeTopLevel.Inner (ref.as_non_null (global.get $nativekttypes.NativeTopLevel.Inner.vtable)) (ref.as_non_null (global.get $nativekttypes.NativeTopLevel.Inner.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this,i);
   ;;@ nativekttypes/NativeTopLevel.java:42:11
   (call $$ctor__nativekttypes_NativeTopLevel__java_lang_Object__void_$p_nativekttypes_NativeTopLevel_Inner@nativekttypes.NativeTopLevel.Inner (local.get $$instance)(local.get $$outer_this)(local.get $i))
@@ -1170,9 +1170,6 @@
   ;; nativekttypes.NativeTopLevel.Inner.$clinit();
   ;;@ nativekttypes/NativeTopLevel.java:42:22
   (call $$clinit__void@nativekttypes.NativeTopLevel.Inner )
-  ;; (Inner.this.this = $outer_this);
-  ;;@ nativekttypes/NativeTopLevel.java:41:15
-  (struct.set $nativekttypes.NativeTopLevel.Inner $$outer_this__nativekttypes_NativeTopLevel_Inner(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ nativekttypes/NativeTopLevel.java:42:22
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -1399,7 +1396,7 @@
  ;;@ nativekttypes/nativekt/KTopLevel.java:86:9
  (local $$instance (ref null $nativekttypes.nativekt.KTopLevel))
  (block
-  ;; KTopLevel<O> $instance = new KTopLevel.<init>(o);
+  ;; KTopLevel<O> $instance = new KTopLevel.<init>(0,null,0,false);
   ;;@ nativekttypes/nativekt/KTopLevel.java:86:9
   (local.set $$instance (struct.new $nativekttypes.nativekt.KTopLevel (ref.as_non_null (global.get $nativekttypes.nativekt.KTopLevel.vtable)) (ref.as_non_null (global.get $nativekttypes.nativekt.KTopLevel.itable)) (i32.const 0) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(o);
@@ -1519,7 +1516,7 @@
  ;;@ nativekttypes/nativekt/KTopLevel.java:26:11
  (local $$instance (ref null $nativekttypes.nativekt.KTopLevel.KNested))
  (block
-  ;; KNested<N> $instance = new KNested.<init>(n);
+  ;; KNested<N> $instance = new KNested.<init>(0,null);
   ;;@ nativekttypes/nativekt/KTopLevel.java:26:11
   (local.set $$instance (struct.new $nativekttypes.nativekt.KTopLevel.KNested (ref.as_non_null (global.get $nativekttypes.nativekt.KTopLevel.KNested.vtable)) (ref.as_non_null (global.get $nativekttypes.nativekt.KTopLevel.KNested.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(n);
@@ -1635,7 +1632,7 @@
  (field $vtable (ref $nativekttypes.nativekt.KTopLevel.KInner.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__nativekttypes_nativekt_KTopLevel_KInner (mut (ref null $nativekttypes.nativekt.KTopLevel)))
+ (field $$outer_this__nativekttypes_nativekt_KTopLevel_KInner (ref null $nativekttypes.nativekt.KTopLevel))
   $java.lang.Object)
 )
 (type $nativekttypes.nativekt.KTopLevel.KInner.vtable (struct_subtype 
@@ -1654,9 +1651,9 @@
  ;;@ nativekttypes/nativekt/KTopLevel.java:42:11
  (local $$instance (ref null $nativekttypes.nativekt.KTopLevel.KInner))
  (block
-  ;; KInner<I, O> $instance = new KInner.<init>($outer_this,i);
+  ;; KInner<I, O> $instance = new KInner.<init>(0,$outer_this);
   ;;@ nativekttypes/nativekt/KTopLevel.java:42:11
-  (local.set $$instance (struct.new $nativekttypes.nativekt.KTopLevel.KInner (ref.as_non_null (global.get $nativekttypes.nativekt.KTopLevel.KInner.vtable)) (ref.as_non_null (global.get $nativekttypes.nativekt.KTopLevel.KInner.itable)) (i32.const 0) (ref.null $nativekttypes.nativekt.KTopLevel)))
+  (local.set $$instance (struct.new $nativekttypes.nativekt.KTopLevel.KInner (ref.as_non_null (global.get $nativekttypes.nativekt.KTopLevel.KInner.vtable)) (ref.as_non_null (global.get $nativekttypes.nativekt.KTopLevel.KInner.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this,i);
   ;;@ nativekttypes/nativekt/KTopLevel.java:42:11
   (call $$ctor__nativekttypes_nativekt_KTopLevel__java_lang_Object__void_$p_nativekttypes_nativekt_KTopLevel_KInner@nativekttypes.nativekt.KTopLevel.KInner (local.get $$instance)(local.get $$outer_this)(local.get $i))
@@ -1676,9 +1673,6 @@
   ;; nativekttypes.nativekt.KTopLevel.KInner.$clinit();
   ;;@ nativekttypes/nativekt/KTopLevel.java:42:23
   (call $$clinit__void@nativekttypes.nativekt.KTopLevel.KInner )
-  ;; (KInner.this.this = $outer_this);
-  ;;@ nativekttypes/nativekt/KTopLevel.java:41:15
-  (struct.set $nativekttypes.nativekt.KTopLevel.KInner $$outer_this__nativekttypes_nativekt_KTopLevel_KInner(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ nativekttypes/nativekt/KTopLevel.java:42:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

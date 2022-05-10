@@ -53,7 +53,7 @@
  ;;@ srcjar/Foo.java:21:13
  (local $$instance (ref null $srcjar.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>();
+  ;; Foo $instance = new Foo.<init>(0);
   ;;@ srcjar/Foo.java:21:13
   (local.set $$instance (struct.new $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -136,7 +136,7 @@
  ;;@ srcjar/Srcjar.java:18:13
  (local $$instance (ref null $srcjar.Srcjar))
  (block
-  ;; Srcjar $instance = new Srcjar.<init>();
+  ;; Srcjar $instance = new Srcjar.<init>(0);
   ;;@ srcjar/Srcjar.java:18:13
   (local.set $$instance (struct.new $srcjar.Srcjar (ref.as_non_null (global.get $srcjar.Srcjar.vtable)) (ref.as_non_null (global.get $srcjar.Srcjar.itable)) (i32.const 0)))
   ;; $instance.$ctor();

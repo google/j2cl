@@ -1,0 +1,116 @@
+package wasmimmutablefields
+
+import javaemul.lang.*
+import kotlin.jvm.*
+
+open class WasmImmutableFields {}
+
+open class AssignmentsInDeclaration {
+ @kotlin.jvm.JvmField val compileTimeConstant: kotlin.Int = 12
+
+ @kotlin.jvm.JvmField val stringLiteral: kotlin.String? = "Hello World"
+
+ @kotlin.jvm.JvmField val newArray: kotlin.Array<kotlin.Any?>? = kotlin.arrayOfNulls<kotlin.Any>(4)
+
+ @kotlin.jvm.JvmField val newArrayMultidimensional: kotlin.Array<kotlin.Array<kotlin.Array<kotlin.Any?>?>?>? = kotlin.Array<kotlin.Array<kotlin.Array<kotlin.Any?>?>?>(3) {
+  kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>>(4)
+ }
+
+ @kotlin.jvm.JvmField val arrayLiteral: kotlin.IntArray? = kotlin.intArrayOf(1, 2, 3, 4)
+
+ @kotlin.jvm.JvmField val arrayLiteralMultidimensional: kotlin.Array<kotlin.IntArray?>? = kotlin.arrayOf<kotlin.IntArray?>(kotlin.intArrayOf(1, 2), kotlin.intArrayOf(3, 4))
+
+ @kotlin.jvm.JvmField val classLiteral: java.lang.Class<*>? = wasmimmutablefields.WasmImmutableFields::class.java
+
+ @kotlin.jvm.JvmField val withCast: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any? as kotlin.Array<kotlin.String?>?
+}
+
+open class AssignmentsInInitializer {
+ @kotlin.jvm.JvmField val compileTimeConstant: kotlin.Int
+
+ @kotlin.jvm.JvmField val stringLiteral: kotlin.String?
+
+ @kotlin.jvm.JvmField val newArray: kotlin.Array<kotlin.Any?>?
+
+ @kotlin.jvm.JvmField val newArrayMultidimensional: kotlin.Array<kotlin.Array<kotlin.Array<kotlin.Any?>?>?>?
+
+ @kotlin.jvm.JvmField val arrayLiteral: kotlin.IntArray?
+
+ @kotlin.jvm.JvmField val arrayLiteralMultidimensional: kotlin.Array<kotlin.IntArray?>?
+
+ @kotlin.jvm.JvmField val classLiteral: java.lang.Class<*>?
+
+ @kotlin.jvm.JvmField val withCast: kotlin.Array<kotlin.String?>?
+
+ init {
+  this.compileTimeConstant = 12
+  this.stringLiteral = "Hello World"
+  this.newArray = kotlin.arrayOfNulls<kotlin.Any>(4)
+  this.newArrayMultidimensional = kotlin.Array<kotlin.Array<kotlin.Array<kotlin.Any?>?>?>(3) {
+   kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>>(4)
+  }
+  this.arrayLiteral = kotlin.intArrayOf(1, 2, 3, 4)
+  this.arrayLiteralMultidimensional = kotlin.arrayOf<kotlin.IntArray?>(kotlin.intArrayOf(1, 2), kotlin.intArrayOf(3, 4))
+  this.classLiteral = wasmimmutablefields.WasmImmutableFields::class.java
+  this.withCast = kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any? as kotlin.Array<kotlin.String?>?
+ }
+}
+
+open class AssignmentsInConstructor {
+ @kotlin.jvm.JvmField val compileTimeConstant: kotlin.Int
+
+ @kotlin.jvm.JvmField val stringLiteral: kotlin.String?
+
+ @kotlin.jvm.JvmField val newArray: kotlin.Array<kotlin.Any?>?
+
+ @kotlin.jvm.JvmField val newArrayMultidimensional: kotlin.Array<kotlin.Array<kotlin.Array<kotlin.Any?>?>?>?
+
+ @kotlin.jvm.JvmField val arrayLiteral: kotlin.IntArray?
+
+ @kotlin.jvm.JvmField val arrayLiteralMultidimensional: kotlin.Array<kotlin.IntArray?>?
+
+ @kotlin.jvm.JvmField val classLiteral: java.lang.Class<*>?
+
+ @kotlin.jvm.JvmField val withCast: kotlin.Array<kotlin.String?>?
+
+ @kotlin.jvm.JvmField val fromParameter: kotlin.Any?
+
+ @kotlin.jvm.JvmField val finalFieldReference: kotlin.String?
+
+ constructor(parameter: kotlin.Any?, intParameter: kotlin.Int, par: wasmimmutablefields.AssignmentsInConstructor?) {
+  this.compileTimeConstant = 12
+  this.stringLiteral = "Hello World"
+  this.newArray = kotlin.arrayOfNulls<kotlin.Any>(intParameter)
+  this.newArrayMultidimensional = kotlin.Array<kotlin.Array<kotlin.Array<kotlin.Any?>?>?>(intParameter) {
+   kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>>(4)
+  }
+  this.arrayLiteral = kotlin.intArrayOf(1, 2, intParameter, 4)
+  this.arrayLiteralMultidimensional = kotlin.arrayOf<kotlin.IntArray?>(kotlin.intArrayOf(1, intParameter), kotlin.intArrayOf(3, 4))
+  this.classLiteral = wasmimmutablefields.WasmImmutableFields::class.java
+  this.withCast = kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any? as kotlin.Array<kotlin.String?>?
+  this.fromParameter = parameter
+  this.finalFieldReference = par!!.stringLiteral
+ }
+}
+
+open class OptimizesWithThisConstructorDelegation {
+ @kotlin.jvm.JvmField val optimizeableField: kotlin.Int
+
+ constructor() {
+  this.optimizeableField = 2
+ }
+
+ constructor(parameter: kotlin.Int) {
+  this.optimizeableField = parameter
+ }
+
+ constructor(parameter: kotlin.Short): this(parameter.toInt())
+}
+
+open class OptimizesWithSuperConstructorDelegation: wasmimmutablefields.OptimizesWithThisConstructorDelegation {
+ constructor()
+
+ constructor(parameter: kotlin.Int): super(parameter)
+
+ constructor(parameter: kotlin.Short): this(parameter.toInt())
+}

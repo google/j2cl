@@ -71,7 +71,7 @@
  ;;@ packageinfosubpackage/Foo.java:20:13
  (local $$instance (ref null $packageinfosubpackage.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>();
+  ;; Foo $instance = new Foo.<init>(0,null);
   ;;@ packageinfosubpackage/Foo.java:20:13
   (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfosubpackage.Foo.NativeBar)))
   ;; $instance.$ctor();
@@ -168,7 +168,7 @@
  ;;@ packageinfosubpackage/Foo.java:23:23
  (local $$instance (ref null $packageinfosubpackage.Foo.NativeBar))
  (block
-  ;; NativeBar $instance = new NativeBar.<init>();
+  ;; NativeBar $instance = new NativeBar.<init>(0);
   ;;@ packageinfosubpackage/Foo.java:23:23
   (local.set $$instance (struct.new $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -251,7 +251,7 @@
  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
  (local $$instance (ref null $packageinfosubpackage.subpackage.Bar))
  (block
-  ;; Bar $instance = new Bar.<init>();
+  ;; Bar $instance = new Bar.<init>(0);
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (local.set $$instance (struct.new $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.itable)) (i32.const 0)))
   ;; $instance.$ctor();

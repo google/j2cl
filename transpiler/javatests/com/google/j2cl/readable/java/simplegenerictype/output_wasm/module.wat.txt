@@ -42,7 +42,7 @@
  ;;@ simplegenerictype/SimpleGenericType.java:22:9
  (local $$instance (ref null $simplegenerictype.SimpleGenericType))
  (block
-  ;; SimpleGenericType<T, S> $instance = new SimpleGenericType.<init>(t,s);
+  ;; SimpleGenericType<T, S> $instance = new SimpleGenericType.<init>(0,null,null);
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (local.set $$instance (struct.new $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(t,s);

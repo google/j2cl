@@ -44,7 +44,7 @@
  ;;@ jstypewithdefault/SomeJsType.java:20:13
  (local $$instance (ref null $jstypewithdefault.SomeJsType))
  (block
-  ;; SomeJsType $instance = new SomeJsType.<init>();
+  ;; SomeJsType $instance = new SomeJsType.<init>(0);
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (local.set $$instance (struct.new $jstypewithdefault.SomeJsType (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.vtable)) (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.itable)) (i32.const 0)))
   ;; $instance.$ctor();

@@ -53,7 +53,7 @@
  ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
  (local $$instance (ref null $staticnestedclass.StaticNestedClassParent))
  (block
-  ;; StaticNestedClassParent $instance = new StaticNestedClassParent.<init>();
+  ;; StaticNestedClassParent $instance = new StaticNestedClassParent.<init>(0);
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -136,7 +136,7 @@
  ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
  (local $$instance (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (block
-  ;; StaticNestedClass $instance = new StaticNestedClass.<init>();
+  ;; StaticNestedClass $instance = new StaticNestedClass.<init>(0);
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();

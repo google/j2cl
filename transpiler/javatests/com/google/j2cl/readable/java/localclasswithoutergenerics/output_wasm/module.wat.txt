@@ -72,7 +72,7 @@
  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
  (local $$instance (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
  (block
-  ;; LocalClassWithOuterGenerics<A> $instance = new LocalClassWithOuterGenerics.<init>();
+  ;; LocalClassWithOuterGenerics<A> $instance = new LocalClassWithOuterGenerics.<init>(0);
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
   (local.set $$instance (struct.new $localclasswithoutergenerics.LocalClassWithOuterGenerics (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -174,7 +174,7 @@
  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
  (local $$instance (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (block
-  ;; Bar<T> $instance = new $1Bar.<init>();
+  ;; Bar<T> $instance = new $1Bar.<init>(0);
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
   (local.set $$instance (struct.new $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -271,7 +271,7 @@
  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
  (local $$instance (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (block
-  ;; Baz<S, T> $instance = new $1Baz.<init>();
+  ;; Baz<S, T> $instance = new $1Baz.<init>(0);
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
   (local.set $$instance (struct.new $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable)) (i32.const 0)))
   ;; $instance.$ctor();

@@ -36,7 +36,7 @@
  ;;@ privateconstructor/PrivateConstructor.java:19:10
  (local $$instance (ref null $privateconstructor.PrivateConstructor))
  (block
-  ;; PrivateConstructor $instance = new PrivateConstructor.<init>();
+  ;; PrivateConstructor $instance = new PrivateConstructor.<init>(0);
   ;;@ privateconstructor/PrivateConstructor.java:19:10
   (local.set $$instance (struct.new $privateconstructor.PrivateConstructor (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.vtable)) (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor();

@@ -119,6 +119,11 @@ public abstract class MemberDescriptor
     return false;
   }
 
+  /** Returns true if this member is the instance initializer method. */
+  public boolean isInitMethod() {
+    return getOrigin() == MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER;
+  }
+
   public boolean isDefaultMethod() {
     return false;
   }

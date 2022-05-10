@@ -36,7 +36,7 @@
  ;;@ emptyclass/EmptyClass.java:18:13
  (local $$instance (ref null $emptyclass.EmptyClass))
  (block
-  ;; EmptyClass $instance = new EmptyClass.<init>();
+  ;; EmptyClass $instance = new EmptyClass.<init>(0);
   ;;@ emptyclass/EmptyClass.java:18:13
   (local.set $$instance (struct.new $emptyclass.EmptyClass (ref.as_non_null (global.get $emptyclass.EmptyClass.vtable)) (ref.as_non_null (global.get $emptyclass.EmptyClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();

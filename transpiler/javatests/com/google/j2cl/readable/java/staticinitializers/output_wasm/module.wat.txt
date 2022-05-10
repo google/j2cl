@@ -39,7 +39,7 @@
  ;;@ staticinitializers/StaticInitializers.java:18:13
  (local $$instance (ref null $staticinitializers.StaticInitializers))
  (block
-  ;; StaticInitializers $instance = new StaticInitializers.<init>();
+  ;; StaticInitializers $instance = new StaticInitializers.<init>(0);
   ;;@ staticinitializers/StaticInitializers.java:18:13
   (local.set $$instance (struct.new $staticinitializers.StaticInitializers (ref.as_non_null (global.get $staticinitializers.StaticInitializers.vtable)) (ref.as_non_null (global.get $staticinitializers.StaticInitializers.itable)) (i32.const 0)))
   ;; $instance.$ctor();

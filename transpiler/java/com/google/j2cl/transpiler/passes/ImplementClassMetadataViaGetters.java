@@ -102,9 +102,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
 
   private static Expression getTypeLiteral(
       SourcePosition sourcePosition, DeclaredTypeDescriptor typeDescriptor) {
-    if (TypeDescriptors.get()
-        .javaemulInternalWasmArray
-        .isSameBaseType(typeDescriptor.getSuperTypeDescriptor())) {
+    if (TypeDescriptors.isWasmArraySubtype(typeDescriptor)) {
       // This is a WasmArray implementation class, hence we need to return the type literal for
       // the corresponding array type.
       // TODO(b/184675805): Remove or refactor workaround when full support for array class

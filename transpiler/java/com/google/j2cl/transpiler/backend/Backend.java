@@ -337,10 +337,10 @@ public enum Backend {
           StaticallyEvaluateStringConcatenation::new,
           ImplementStringConcatenation::new,
           InsertNarrowingReferenceConversions::new,
-          () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed */ true),
-          () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed */ true),
-          () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble */ false),
-          () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening */ true),
+          () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
+          () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
+          () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble= */ false),
+          () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening= */ true),
           ImplementDivisionOperations::new,
           ImplementFloatingPointRemainderOperation::new,
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
@@ -366,6 +366,7 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
+          MakeVariablesFinal::new,
           NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
           RemoveNoopStatements::new,

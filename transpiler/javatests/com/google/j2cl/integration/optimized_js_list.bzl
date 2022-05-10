@@ -378,6 +378,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/java/variables:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/java/wasm:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/java/wasm:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/java/wasmimmutablefields:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/java/wasmimmutablefields:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/java/wasmjsinterop:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/java/wasmjsinterop:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/java/whilestatement:optimized_js",

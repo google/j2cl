@@ -86,7 +86,7 @@
  ;;@ accidentaloverride/AccidentalOverride.java:18:6
  (local $$instance (ref null $accidentaloverride.Parent))
  (block
-  ;; Parent<T> $instance = new Parent.<init>();
+  ;; Parent<T> $instance = new Parent.<init>(0);
   ;;@ accidentaloverride/AccidentalOverride.java:18:6
   (local.set $$instance (struct.new $accidentaloverride.Parent (ref.as_non_null (global.get $accidentaloverride.Parent.vtable)) (ref.as_non_null (global.get $accidentaloverride.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -221,7 +221,7 @@
  ;;@ accidentaloverride/AccidentalOverride.java:31:6
  (local $$instance (ref null $accidentaloverride.AnotherAccidentalOverride))
  (block
-  ;; AnotherAccidentalOverride $instance = new AnotherAccidentalOverride.<init>();
+  ;; AnotherAccidentalOverride $instance = new AnotherAccidentalOverride.<init>(0);
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
   (local.set $$instance (struct.new $accidentaloverride.AnotherAccidentalOverride (ref.as_non_null (global.get $accidentaloverride.AnotherAccidentalOverride.vtable)) (ref.as_non_null (global.get $accidentaloverride.AnotherAccidentalOverride.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -354,7 +354,7 @@
  ;;@ accidentaloverride/AccidentalOverride.java:41:13
  (local $$instance (ref null $accidentaloverride.AccidentalOverride))
  (block
-  ;; AccidentalOverride $instance = new AccidentalOverride.<init>();
+  ;; AccidentalOverride $instance = new AccidentalOverride.<init>(0);
   ;;@ accidentaloverride/AccidentalOverride.java:41:13
   (local.set $$instance (struct.new $accidentaloverride.AccidentalOverride (ref.as_non_null (global.get $accidentaloverride.AccidentalOverride.vtable)) (ref.as_non_null (global.get $accidentaloverride.AccidentalOverride.itable)) (i32.const 0)))
   ;; $instance.$ctor();

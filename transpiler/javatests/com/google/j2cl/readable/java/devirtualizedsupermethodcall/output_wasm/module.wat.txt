@@ -86,7 +86,7 @@
  ;;@ devirtualizedsupermethodcall/Main.java:18:6
  (local $$instance (ref null $devirtualizedsupermethodcall.SubNumber))
  (block
-  ;; SubNumber $instance = new SubNumber.<init>();
+  ;; SubNumber $instance = new SubNumber.<init>(0);
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
   (local.set $$instance (struct.new $devirtualizedsupermethodcall.SubNumber (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -233,7 +233,7 @@
  ;;@ devirtualizedsupermethodcall/Main.java:40:6
  (local $$instance (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (block
-  ;; FooCallsSuperObjectMethod $instance = new FooCallsSuperObjectMethod.<init>();
+  ;; FooCallsSuperObjectMethod $instance = new FooCallsSuperObjectMethod.<init>(0);
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
   (local.set $$instance (struct.new $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -333,7 +333,7 @@
  ;;@ devirtualizedsupermethodcall/Main.java:47:13
  (local $$instance (ref null $devirtualizedsupermethodcall.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
   (local.set $$instance (struct.new $devirtualizedsupermethodcall.Main (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();

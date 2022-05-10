@@ -77,7 +77,7 @@
  ;;@ switchstatement/SwitchStatement.java:18:5
  (local $$instance (ref null $switchstatement.Numbers))
  (block
-  ;; Numbers $instance = new Numbers.<init>($name,$ordinal);
+  ;; Numbers $instance = new Numbers.<init>(0,null,0);
   ;;@ switchstatement/SwitchStatement.java:18:5
   (local.set $$instance (struct.new $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
@@ -212,7 +212,7 @@
  ;;@ switchstatement/SwitchStatement.java:23:13
  (local $$instance (ref null $switchstatement.SwitchStatement))
  (block
-  ;; SwitchStatement $instance = new SwitchStatement.<init>();
+  ;; SwitchStatement $instance = new SwitchStatement.<init>(0);
   ;;@ switchstatement/SwitchStatement.java:23:13
   (local.set $$instance (struct.new $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $switchstatement.SwitchStatement.itable)) (i32.const 0)))
   ;; $instance.$ctor();

@@ -96,7 +96,7 @@
  ;;@ jsproperties/Main.java:22:6
  (local $$instance (ref null $jsproperties.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>();
+  ;; Foo $instance = new Foo.<init>(0);
   ;;@ jsproperties/Main.java:22:6
   (local.set $$instance (struct.new $jsproperties.Foo (ref.as_non_null (global.get $jsproperties.Foo.vtable)) (ref.as_non_null (global.get $jsproperties.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -240,7 +240,7 @@
  ;;@ jsproperties/Main.java:47:6
  (local $$instance (ref null $jsproperties.Bar))
  (block
-  ;; Bar $instance = new Bar.<init>();
+  ;; Bar $instance = new Bar.<init>(0,0);
   ;;@ jsproperties/Main.java:47:6
   (local.set $$instance (struct.new $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -388,7 +388,7 @@
  ;;@ jsproperties/Main.java:72:6
  (local $$instance (ref null $jsproperties.NativeFoo))
  (block
-  ;; NativeFoo $instance = new NativeFoo.<init>();
+  ;; NativeFoo $instance = new NativeFoo.<init>(0);
   ;;@ jsproperties/Main.java:72:6
   (local.set $$instance (struct.new $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -493,7 +493,7 @@
  ;;@ jsproperties/Main.java:80:13
  (local $$instance (ref null $jsproperties.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ jsproperties/Main.java:80:13
   (local.set $$instance (struct.new $jsproperties.Main (ref.as_non_null (global.get $jsproperties.Main.vtable)) (ref.as_non_null (global.get $jsproperties.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();

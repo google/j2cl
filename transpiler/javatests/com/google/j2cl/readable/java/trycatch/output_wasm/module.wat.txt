@@ -78,7 +78,7 @@
  ;;@ trycatch/TryCatch.java:18:13
  (local $$instance (ref null $trycatch.TryCatch))
  (block
-  ;; TryCatch $instance = new TryCatch.<init>();
+  ;; TryCatch $instance = new TryCatch.<init>(0);
   ;;@ trycatch/TryCatch.java:18:13
   (local.set $$instance (struct.new $trycatch.TryCatch (ref.as_non_null (global.get $trycatch.TryCatch.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -764,7 +764,7 @@
  ;;@ trycatch/TryCatch.java:61:15
  (local $$instance (ref null $trycatch.TryCatch.ClosableThing))
  (block
-  ;; ClosableThing $instance = new ClosableThing.<init>();
+  ;; ClosableThing $instance = new ClosableThing.<init>(0);
   ;;@ trycatch/TryCatch.java:61:15
   (local.set $$instance (struct.new $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0)))
   ;; $instance.$ctor();

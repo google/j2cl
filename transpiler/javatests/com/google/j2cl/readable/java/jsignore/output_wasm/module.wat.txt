@@ -39,7 +39,7 @@
  ;;@ jsignore/JsIgnoreExample.java:22:13
  (local $$instance (ref null $jsignore.JsIgnoreExample))
  (block
-  ;; JsIgnoreExample $instance = new JsIgnoreExample.<init>();
+  ;; JsIgnoreExample $instance = new JsIgnoreExample.<init>(0);
   ;;@ jsignore/JsIgnoreExample.java:22:13
   (local.set $$instance (struct.new $jsignore.JsIgnoreExample (ref.as_non_null (global.get $jsignore.JsIgnoreExample.vtable)) (ref.as_non_null (global.get $jsignore.JsIgnoreExample.itable)) (i32.const 0)))
   ;; $instance.$ctor();

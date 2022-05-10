@@ -170,7 +170,7 @@
  ;;@ genericmethod/GenericMethod.java:21:13
  (local $$instance (ref null $genericmethod.GenericMethod))
  (block
-  ;; GenericMethod<T> $instance = new GenericMethod.<init>();
+  ;; GenericMethod<T> $instance = new GenericMethod.<init>(0);
   ;;@ genericmethod/GenericMethod.java:21:13
   (local.set $$instance (struct.new $genericmethod.GenericMethod (ref.as_non_null (global.get $genericmethod.GenericMethod.vtable)) (ref.as_non_null (global.get $genericmethod.GenericMethod.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -616,7 +616,7 @@
  (field $vtable (ref $genericmethod.GenericMethod.1.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__genericmethod_GenericMethod_1 (mut (ref null $genericmethod.GenericMethod)))
+ (field $$outer_this__genericmethod_GenericMethod_1 (ref null $genericmethod.GenericMethod))
   $genericmethod.GenericMethod)
 )
 (type $genericmethod.GenericMethod.1.vtable (struct_subtype 
@@ -645,9 +645,9 @@
  ;;@ genericmethod/GenericMethod.java:29:27
  (local $$instance (ref null $genericmethod.GenericMethod.1))
  (block
-  ;; <anonymous> extends GenericMethod<T><T, T> $instance = new $1.<init>($outer_this);
+  ;; <anonymous> extends GenericMethod<T><T, T> $instance = new $1.<init>(0,$outer_this);
   ;;@ genericmethod/GenericMethod.java:29:27
-  (local.set $$instance (struct.new $genericmethod.GenericMethod.1 (ref.as_non_null (global.get $genericmethod.GenericMethod.1.vtable)) (ref.as_non_null (global.get $genericmethod.GenericMethod.1.itable)) (i32.const 0) (ref.null $genericmethod.GenericMethod)))
+  (local.set $$instance (struct.new $genericmethod.GenericMethod.1 (ref.as_non_null (global.get $genericmethod.GenericMethod.1.vtable)) (ref.as_non_null (global.get $genericmethod.GenericMethod.1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ genericmethod/GenericMethod.java:29:27
   (call $$ctor__genericmethod_GenericMethod__void_$p_genericmethod_GenericMethod_1@genericmethod.GenericMethod.1 (local.get $$instance)(local.get $$outer_this))
@@ -666,9 +666,6 @@
   ;; genericmethod.GenericMethod.1.$clinit();
   ;;@ genericmethod/GenericMethod.java:29:27
   (call $$clinit__void@genericmethod.GenericMethod.1 )
-  ;; ($1.this.this = $outer_this);
-  ;;@ genericmethod/GenericMethod.java:29:27
-  (struct.set $genericmethod.GenericMethod.1 $$outer_this__genericmethod_GenericMethod_1(local.get $this) (local.get $$outer_this))
   ;; GenericMethod.this.$ctor();
   ;;@ genericmethod/GenericMethod.java:29:27
   (call $$ctor__void_$p_genericmethod_GenericMethod@genericmethod.GenericMethod (local.get $this))
@@ -759,7 +756,7 @@
  ;;@ genericmethod/GenericMethod.java:77:15
  (local $$instance (ref null $genericmethod.GenericMethod.SuperContainer))
  (block
-  ;; SuperContainer<C> $instance = new SuperContainer.<init>();
+  ;; SuperContainer<C> $instance = new SuperContainer.<init>(0);
   ;;@ genericmethod/GenericMethod.java:77:15
   (local.set $$instance (struct.new $genericmethod.GenericMethod.SuperContainer (ref.as_non_null (global.get $genericmethod.GenericMethod.SuperContainer.vtable)) (ref.as_non_null (global.get $genericmethod.GenericMethod.SuperContainer.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -859,7 +856,7 @@
  ;;@ genericmethod/GenericMethod.java:83:15
  (local $$instance (ref null $genericmethod.GenericMethod.Container))
  (block
-  ;; Container<CT> $instance = new Container.<init>();
+  ;; Container<CT> $instance = new Container.<init>(0);
   ;;@ genericmethod/GenericMethod.java:83:15
   (local.set $$instance (struct.new $genericmethod.GenericMethod.Container (ref.as_non_null (global.get $genericmethod.GenericMethod.Container.vtable)) (ref.as_non_null (global.get $genericmethod.GenericMethod.Container.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -959,7 +956,7 @@
  ;;@ genericmethod/GenericMethod.java:89:15
  (local $$instance (ref null $genericmethod.GenericMethod.Content))
  (block
-  ;; Content $instance = new Content.<init>();
+  ;; Content $instance = new Content.<init>(0);
   ;;@ genericmethod/GenericMethod.java:89:15
   (local.set $$instance (struct.new $genericmethod.GenericMethod.Content (ref.as_non_null (global.get $genericmethod.GenericMethod.Content.vtable)) (ref.as_non_null (global.get $genericmethod.GenericMethod.Content.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1114,7 +1111,7 @@
  (field $vtable (ref $genericmethod.GenericMethod.1LocalClass.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__genericmethod_GenericMethod_1LocalClass (mut (ref null $genericmethod.GenericMethod)))
+ (field $$outer_this__genericmethod_GenericMethod_1LocalClass (ref null $genericmethod.GenericMethod))
   $genericmethod.GenericMethod)
 )
 (type $genericmethod.GenericMethod.1LocalClass.vtable (struct_subtype 
@@ -1143,9 +1140,9 @@
  ;;@ genericmethod/GenericMethod.java:35:10
  (local $$instance (ref null $genericmethod.GenericMethod.1LocalClass))
  (block
-  ;; LocalClass<T, T, T> $instance = new $1LocalClass.<init>($outer_this);
+  ;; LocalClass<T, T, T> $instance = new $1LocalClass.<init>(0,$outer_this);
   ;;@ genericmethod/GenericMethod.java:35:10
-  (local.set $$instance (struct.new $genericmethod.GenericMethod.1LocalClass (ref.as_non_null (global.get $genericmethod.GenericMethod.1LocalClass.vtable)) (ref.as_non_null (global.get $genericmethod.GenericMethod.1LocalClass.itable)) (i32.const 0) (ref.null $genericmethod.GenericMethod)))
+  (local.set $$instance (struct.new $genericmethod.GenericMethod.1LocalClass (ref.as_non_null (global.get $genericmethod.GenericMethod.1LocalClass.vtable)) (ref.as_non_null (global.get $genericmethod.GenericMethod.1LocalClass.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ genericmethod/GenericMethod.java:35:10
   (call $$ctor__genericmethod_GenericMethod__void_$p_genericmethod_GenericMethod_1LocalClass@genericmethod.GenericMethod.1LocalClass (local.get $$instance)(local.get $$outer_this))
@@ -1164,9 +1161,6 @@
   ;; genericmethod.GenericMethod.1LocalClass.$clinit();
   ;;@ genericmethod/GenericMethod.java:35:10
   (call $$clinit__void@genericmethod.GenericMethod.1LocalClass )
-  ;; ($1LocalClass.this.this = $outer_this);
-  ;;@ genericmethod/GenericMethod.java:35:10
-  (struct.set $genericmethod.GenericMethod.1LocalClass $$outer_this__genericmethod_GenericMethod_1LocalClass(local.get $this) (local.get $$outer_this))
   ;; GenericMethod.this.$ctor();
   ;;@ genericmethod/GenericMethod.java:35:10
   (call $$ctor__void_$p_genericmethod_GenericMethod@genericmethod.GenericMethod (local.get $this))

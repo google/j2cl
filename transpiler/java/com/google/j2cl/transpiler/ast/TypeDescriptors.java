@@ -300,6 +300,15 @@ public class TypeDescriptors {
             TypeDescriptors.get().javaemulInternalBoxedComparableLightEnum);
   }
 
+  public static boolean isWasmArraySubtype(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor superTypeDescriptor =
+          ((DeclaredTypeDescriptor) typeDescriptor).getSuperTypeDescriptor();
+      return get().javaemulInternalWasmArray.isSameBaseType(superTypeDescriptor);
+    }
+    return false;
+  }
+
   public static TypeDescriptor getEnumBoxType(TypeDescriptor typeDescriptor) {
     checkState(AstUtils.isNonNativeJsEnum(typeDescriptor));
     TypeDescriptor boxType =

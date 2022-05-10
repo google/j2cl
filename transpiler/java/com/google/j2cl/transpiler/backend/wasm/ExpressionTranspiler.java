@@ -460,16 +460,16 @@ final class ExpressionTranspiler {
         // assigning immutable fields at construction. See b/178738025 for an alternative design
         // that might have better runtime tradeoffs.
 
-        // Initialize instance fields to their default values. Note that struct.new_default_with_rtt
-        // cannot be used here since the vtable needs to an immutable field to enable sub-typing
-        // hence will need to be initialized at construction.
-        environment
-            .getWasmTypeLayout(newInstance.getTypeDescriptor().getTypeDeclaration())
-            .getAllInstanceFields()
+        // Initialize instance fields to their default values, whose initial values are represented
+        // as arguments.
+        // Note that struct.new_default_with_rtt cannot be used here since the vtable needs to an
+        // immutable field to enable sub-typing hence will need to be initialized at construction.
+        newInstance
+            .getArguments()
             .forEach(
-                f -> {
+                e -> {
                   sourceBuilder.append(" ");
-                  render(f.getDescriptor().getTypeDescriptor().getDefaultValue());
+                  render(e);
                 });
 
         sourceBuilder.append(")");

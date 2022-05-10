@@ -135,7 +135,7 @@
  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
  (local $$instance (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (block
-  ;; GenericInterfaceGenericImpl<T> $instance = new GenericInterfaceGenericImpl.<init>();
+  ;; GenericInterfaceGenericImpl<T> $instance = new GenericInterfaceGenericImpl.<init>(0);
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (local.set $$instance (struct.new $implementsgenericinterface.GenericInterfaceGenericImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -218,7 +218,7 @@
  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
  (local $$instance (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (block
-  ;; GenericInterfaceImpl $instance = new GenericInterfaceImpl.<init>();
+  ;; GenericInterfaceImpl $instance = new GenericInterfaceImpl.<init>(0);
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (local.set $$instance (struct.new $implementsgenericinterface.GenericInterfaceImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();

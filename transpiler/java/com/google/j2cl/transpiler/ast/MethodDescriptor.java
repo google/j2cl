@@ -333,10 +333,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Nullable
   public abstract MethodDescriptor getBridgeTarget();
 
-  public boolean isInit() {
-    return getOrigin() == MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER;
-  }
-
   /**
    * Returns the descriptor of the method declaration. A method descriptor might describe a
    * specialized version of a method, e.g.

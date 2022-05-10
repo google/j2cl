@@ -32,18 +32,21 @@ public class Field extends Member {
   private final SourcePosition nameSourcePosition;
   // Only valid for enum fields, where it is >= 0.
   private int enumOrdinal;
+  private boolean isImmutable;
 
   private Field(
       SourcePosition sourcePosition,
       FieldDescriptor fieldDescriptor,
       Expression initializer,
       int enumOrdinal,
+      boolean isImmutable,
       SourcePosition nameSourcePosition) {
     super(sourcePosition);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.initializer = initializer;
     this.nameSourcePosition = checkNotNull(nameSourcePosition);
     this.enumOrdinal = enumOrdinal;
+    this.isImmutable = isImmutable;
   }
 
   @Override
@@ -77,6 +80,23 @@ public class Field extends Member {
     return getDescriptor().isEnumConstant();
   }
 
+  /**
+   * Returns true is this field is immutable and its initialization can be hoisted.
+   *
+   * <p>In some platforms, e.g. WASM, it is beneficial to declare fields as immutable and initialize
+   * them at instantiation. Since in Java it is possible to observe uninitialized values even for
+   * final fields with initializers, a non-local analysis needs to be performed to decide whether a
+   * field can be marked immutable.
+   */
+  public boolean isImmutable() {
+    return isImmutable;
+  }
+
+  /** Marks a field as immutable. */
+  public void setImmutable(boolean isImmutable) {
+    this.isImmutable = isImmutable;
+  }
+
   public void setEnumOrdinal(int ordinal) {
     checkState(isEnumField());
     this.enumOrdinal = ordinal;
@@ -100,6 +120,7 @@ public class Field extends Member {
     private SourcePosition sourcePosition;
     private SourcePosition nameSourcePosition = SourcePosition.NONE;
     private int enumOrdinal = -1;
+    private boolean isImmutable = false;
 
     public static Builder from(Field field) {
       Builder builder = new Builder();
@@ -108,6 +129,7 @@ public class Field extends Member {
       builder.sourcePosition = field.getSourcePosition();
       builder.nameSourcePosition = field.getNameSourcePosition();
       builder.enumOrdinal = field.enumOrdinal;
+      builder.isImmutable = field.isImmutable;
       return builder;
     }
 
@@ -122,6 +144,11 @@ public class Field extends Member {
 
     public Builder setInitializer(Expression initializer) {
       this.initializer = initializer;
+      return this;
+    }
+
+    public Builder setImmutable(boolean isImmutable) {
+      this.isImmutable = isImmutable;
       return this;
     }
 
@@ -149,6 +176,7 @@ public class Field extends Member {
           fieldDescriptor,
           initializer,
           enumOrdinal,
+          isImmutable,
           nameSourcePosition);
     }
   }

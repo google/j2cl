@@ -66,7 +66,7 @@
  ;;@ jsmethod/JsMethodExample.java:25:13
  (local $$instance (ref null $jsmethod.JsMethodExample))
  (block
-  ;; JsMethodExample $instance = new JsMethodExample.<init>();
+  ;; JsMethodExample $instance = new JsMethodExample.<init>(0);
   ;;@ jsmethod/JsMethodExample.java:25:13
   (local.set $$instance (struct.new $jsmethod.JsMethodExample (ref.as_non_null (global.get $jsmethod.JsMethodExample.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -285,7 +285,7 @@
  ;;@ jsmethod/JsMethodExample.java:54:15
  (local $$instance (ref null $jsmethod.JsMethodExample.Sub))
  (block
-  ;; Sub $instance = new Sub.<init>();
+  ;; Sub $instance = new Sub.<init>(0);
   ;;@ jsmethod/JsMethodExample.java:54:15
   (local.set $$instance (struct.new $jsmethod.JsMethodExample.Sub (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.itable)) (i32.const 0)))
   ;; $instance.$ctor();

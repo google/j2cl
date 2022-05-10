@@ -124,7 +124,7 @@
  ;;@ collisions/goog.java:23:13
  (local $$instance (ref null $collisions.goog))
  (block
-  ;; goog $instance = new goog.<init>();
+  ;; goog $instance = new goog.<init>(0);
   ;;@ collisions/goog.java:23:13
   (local.set $$instance (struct.new $collisions.goog (ref.as_non_null (global.get $collisions.goog.vtable)) (ref.as_non_null (global.get $collisions.goog.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -207,7 +207,7 @@
  ;;@ collisions/goog.java:26:6
  (local $$instance (ref null $collisions.Blah))
  (block
-  ;; Blah $instance = new Blah.<init>();
+  ;; Blah $instance = new Blah.<init>(0);
   ;;@ collisions/goog.java:26:6
   (local.set $$instance (struct.new $collisions.Blah (ref.as_non_null (global.get $collisions.Blah.vtable)) (ref.as_non_null (global.get $collisions.Blah.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -299,7 +299,7 @@
  ;;@ collisions/goog.java:34:6
  (local $$instance (ref null $collisions.foo))
  (block
-  ;; foo $instance = new foo.<init>();
+  ;; foo $instance = new foo.<init>(0);
   ;;@ collisions/goog.java:34:6
   (local.set $$instance (struct.new $collisions.foo (ref.as_non_null (global.get $collisions.foo.vtable)) (ref.as_non_null (global.get $collisions.foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -382,7 +382,7 @@
  ;;@ collisions/goog.java:36:6
  (local $$instance (ref null $collisions.bar))
  (block
-  ;; bar $instance = new bar.<init>();
+  ;; bar $instance = new bar.<init>(0);
   ;;@ collisions/goog.java:36:6
   (local.set $$instance (struct.new $collisions.bar (ref.as_non_null (global.get $collisions.bar.vtable)) (ref.as_non_null (global.get $collisions.bar.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -508,7 +508,7 @@
  ;;@ collisions/goog.java:51:6
  (local $$instance (ref null $collisions.Other))
  (block
-  ;; Other<T> $instance = new Other.<init>();
+  ;; Other<T> $instance = new Other.<init>(0);
   ;;@ collisions/goog.java:51:6
   (local.set $$instance (struct.new $collisions.Other (ref.as_non_null (global.get $collisions.Other.vtable)) (ref.as_non_null (global.get $collisions.Other.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -636,7 +636,7 @@
  ;;@ collisions/goog.java:64:6
  (local $$instance (ref null $collisions.T))
  (block
-  ;; T<T> $instance = new T.<init>();
+  ;; T<T> $instance = new T.<init>(0);
   ;;@ collisions/goog.java:64:6
   (local.set $$instance (struct.new $collisions.T (ref.as_non_null (global.get $collisions.T.vtable)) (ref.as_non_null (global.get $collisions.T.itable)) (i32.const 0)))
   ;; $instance.$ctor();

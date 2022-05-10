@@ -36,7 +36,7 @@
  ;;@ objectmap/ObjectMap.java:23:13
  (local $$instance (ref null $objectmap.ObjectMap))
  (block
-  ;; ObjectMap<T> $instance = new ObjectMap.<init>();
+  ;; ObjectMap<T> $instance = new ObjectMap.<init>(0);
   ;;@ objectmap/ObjectMap.java:23:13
   (local.set $$instance (struct.new $objectmap.ObjectMap (ref.as_non_null (global.get $objectmap.ObjectMap.vtable)) (ref.as_non_null (global.get $objectmap.ObjectMap.itable)) (i32.const 0)))
   ;; $instance.$ctor();

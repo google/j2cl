@@ -368,7 +368,7 @@
  ;;@ nullability/Nullability.java:48:9
  (local $$instance (ref null $nullability.Nullability))
  (block
-  ;; Nullability $instance = new Nullability.<init>(a);
+  ;; Nullability $instance = new Nullability.<init>(0,null,null,null,null,null,null,null,null,null,null,null,null,null);
   ;;@ nullability/Nullability.java:48:9
   (local.set $$instance (struct.new $nullability.Nullability (ref.as_non_null (global.get $nullability.Nullability.vtable)) (ref.as_non_null (global.get $nullability.Nullability.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(a);
@@ -569,7 +569,7 @@
  ;;@ nullability/Nullability.java:68:15
  (local $$instance (ref null $nullability.Nullability.Foo))
  (block
-  ;; Foo<T> $instance = new Foo.<init>();
+  ;; Foo<T> $instance = new Foo.<init>(0);
   ;;@ nullability/Nullability.java:68:15
   (local.set $$instance (struct.new $nullability.Nullability.Foo (ref.as_non_null (global.get $nullability.Nullability.Foo.vtable)) (ref.as_non_null (global.get $nullability.Nullability.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -718,7 +718,7 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_modCount__java_util_AbstractList (mut i32))
- (field $f_array__java_util_ArrayList_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ (field $f_array__java_util_ArrayList_ (ref null $javaemul.internal.WasmArray.OfObject))
  (field $f_exposeElement__java_util_ArrayList_ (mut (ref null $java.lang.Object)))
   $java.util.ArrayList)
 )
@@ -773,9 +773,9 @@
  ;;@ nullability/Nullability.java:89:22
  (local $$instance (ref null $nullability.Nullability.StringList))
  (block
-  ;; StringList $instance = new StringList.<init>();
+  ;; StringList $instance = new StringList.<init>(0,0,((E[]) javaemul.internal.WasmArray.OfObject.$create(0)),null);
   ;;@ nullability/Nullability.java:89:22
-  (local.set $$instance (struct.new $nullability.Nullability.StringList (ref.as_non_null (global.get $nullability.Nullability.StringList.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.Nullability.StringList (ref.as_non_null (global.get $nullability.Nullability.StringList.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringList.itable)) (i32.const 0) (i32.const 0) (ref.cast_static $javaemul.internal.WasmArray.OfObject (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0))) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/Nullability.java:89:22
   (call $$ctor__void_$p_nullability_Nullability_StringList@nullability.Nullability.StringList (local.get $$instance))
@@ -865,7 +865,7 @@
  ;;@ nullability/Nullability.java:92:22
  (local $$instance (ref null $nullability.Nullability.StringComparator))
  (block
-  ;; StringComparator $instance = new StringComparator.<init>();
+  ;; StringComparator $instance = new StringComparator.<init>(0);
   ;;@ nullability/Nullability.java:92:22
   (local.set $$instance (struct.new $nullability.Nullability.StringComparator (ref.as_non_null (global.get $nullability.Nullability.StringComparator.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringComparator.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1115,7 +1115,7 @@
  ;;@ nullability/Nullability.java:100:22
  (local $$instance (ref null $nullability.Nullability.NullableStringComparator))
  (block
-  ;; NullableStringComparator $instance = new NullableStringComparator.<init>();
+  ;; NullableStringComparator $instance = new NullableStringComparator.<init>(0);
   ;;@ nullability/Nullability.java:100:22
   (local.set $$instance (struct.new $nullability.Nullability.NullableStringComparator (ref.as_non_null (global.get $nullability.Nullability.NullableStringComparator.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NullableStringComparator.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1394,7 +1394,7 @@
  ;;@ nullability/Nullability.java:112:22
  (local $$instance (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (block
-  ;; NullableTemplatedReturnOverride $instance = new NullableTemplatedReturnOverride.<init>();
+  ;; NullableTemplatedReturnOverride $instance = new NullableTemplatedReturnOverride.<init>(0);
   ;;@ nullability/Nullability.java:112:22
   (local.set $$instance (struct.new $nullability.Nullability.NullableTemplatedReturnOverride (ref.as_non_null (global.get $nullability.Nullability.NullableTemplatedReturnOverride.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NullableTemplatedReturnOverride.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1526,7 +1526,7 @@
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:43:9
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable))
  (block
-  ;; DefaultNotNullable $instance = new DefaultNotNullable.<init>();
+  ;; DefaultNotNullable $instance = new DefaultNotNullable.<init>(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:43:9
   (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
@@ -1729,7 +1729,7 @@
  (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface (mut (ref null $nullability.defaultnotnullable.DefaultNotNullable)))
+ (field $$outer_this__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface (ref null $nullability.defaultnotnullable.DefaultNotNullable))
   $java.lang.Object)
 )
 (type $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable (struct_subtype 
@@ -1751,9 +1751,9 @@
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:68:8
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
  (block
-  ;; ImplementsParameterizedInterface $instance = new ImplementsParameterizedInterface.<init>($outer_this);
+  ;; ImplementsParameterizedInterface $instance = new ImplementsParameterizedInterface.<init>(0,$outer_this);
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:68:8
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable)) (i32.const 0) (ref.null $nullability.defaultnotnullable.DefaultNotNullable)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:68:8
   (call $$ctor__nullability_defaultnotnullable_DefaultNotNullable__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (local.get $$instance)(local.get $$outer_this))
@@ -1772,9 +1772,6 @@
   ;; nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.$clinit();
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:68:8
   (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface )
-  ;; (ImplementsParameterizedInterface.this.this = $outer_this);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:68:8
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $$outer_this__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:68:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -1941,7 +1938,7 @@
  ;;@ nullability/defaultnullable/DefaultNullable.java:47:9
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable))
  (block
-  ;; DefaultNullable $instance = new DefaultNullable.<init>();
+  ;; DefaultNullable $instance = new DefaultNullable.<init>(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   ;;@ nullability/defaultnullable/DefaultNullable.java:47:9
   (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
@@ -2122,7 +2119,7 @@
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:45:9
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
  (block
-  ;; ExplicitNotNullable $instance = new ExplicitNotNullable.<init>();
+  ;; ExplicitNotNullable $instance = new ExplicitNotNullable.<init>(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:45:9
   (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();

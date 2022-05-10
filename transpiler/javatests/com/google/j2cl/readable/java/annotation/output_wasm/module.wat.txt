@@ -60,7 +60,7 @@
  ;;@ annotation/Main.java:18:13
  (local $$instance (ref null $annotation.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ annotation/Main.java:18:13
   (local.set $$instance (struct.new $annotation.Main (ref.as_non_null (global.get $annotation.Main.vtable)) (ref.as_non_null (global.get $annotation.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -198,7 +198,7 @@
  (field $vtable (ref $annotation.Main.Bar.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__annotation_Main_Bar (mut (ref null $annotation.Main)))
+ (field $$outer_this__annotation_Main_Bar (ref null $annotation.Main))
   $java.lang.Object)
 )
 (type $annotation.Main.Bar.vtable (struct_subtype 
@@ -217,9 +217,9 @@
  ;;@ annotation/Main.java:30:8
  (local $$instance (ref null $annotation.Main.Bar))
  (block
-  ;; Bar $instance = new Bar.<init>($outer_this);
+  ;; Bar $instance = new Bar.<init>(0,$outer_this);
   ;;@ annotation/Main.java:30:8
-  (local.set $$instance (struct.new $annotation.Main.Bar (ref.as_non_null (global.get $annotation.Main.Bar.vtable)) (ref.as_non_null (global.get $annotation.Main.Bar.itable)) (i32.const 0) (ref.null $annotation.Main)))
+  (local.set $$instance (struct.new $annotation.Main.Bar (ref.as_non_null (global.get $annotation.Main.Bar.vtable)) (ref.as_non_null (global.get $annotation.Main.Bar.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ annotation/Main.java:30:8
   (call $$ctor__annotation_Main__void_$p_annotation_Main_Bar@annotation.Main.Bar (local.get $$instance)(local.get $$outer_this))
@@ -238,9 +238,6 @@
   ;; annotation.Main.Bar.$clinit();
   ;;@ annotation/Main.java:30:8
   (call $$clinit__void@annotation.Main.Bar )
-  ;; (Bar.this.this = $outer_this);
-  ;;@ annotation/Main.java:30:8
-  (struct.set $annotation.Main.Bar $$outer_this__annotation_Main_Bar(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ annotation/Main.java:30:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

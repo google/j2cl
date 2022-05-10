@@ -141,7 +141,7 @@
  ;;@ instancejsmethods/Main.java:24:6
  (local $$instance (ref null $instancejsmethods.SuperParent))
  (block
-  ;; SuperParent $instance = new SuperParent.<init>();
+  ;; SuperParent $instance = new SuperParent.<init>(0);
   ;;@ instancejsmethods/Main.java:24:6
   (local.set $$instance (struct.new $instancejsmethods.SuperParent (ref.as_non_null (global.get $instancejsmethods.SuperParent.vtable)) (ref.as_non_null (global.get $instancejsmethods.SuperParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -263,7 +263,7 @@
  ;;@ instancejsmethods/Main.java:34:6
  (local $$instance (ref null $instancejsmethods.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>();
+  ;; Parent $instance = new Parent.<init>(0);
   ;;@ instancejsmethods/Main.java:34:6
   (local.set $$instance (struct.new $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $instancejsmethods.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -403,7 +403,7 @@
  ;;@ instancejsmethods/Main.java:68:6
  (local $$instance (ref null $instancejsmethods.Child))
  (block
-  ;; Child $instance = new Child.<init>();
+  ;; Child $instance = new Child.<init>(0);
   ;;@ instancejsmethods/Main.java:68:6
   (local.set $$instance (struct.new $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -556,7 +556,7 @@
  ;;@ instancejsmethods/Main.java:114:13
  (local $$instance (ref null $instancejsmethods.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ instancejsmethods/Main.java:114:13
   (local.set $$instance (struct.new $instancejsmethods.Main (ref.as_non_null (global.get $instancejsmethods.Main.vtable)) (ref.as_non_null (global.get $instancejsmethods.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();

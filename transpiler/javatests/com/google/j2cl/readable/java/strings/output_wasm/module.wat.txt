@@ -58,7 +58,7 @@
  ;;@ strings/Strings.java:18:13
  (local $$instance (ref null $strings.Strings))
  (block
-  ;; Strings $instance = new Strings.<init>();
+  ;; Strings $instance = new Strings.<init>(0,null,null,null);
   ;;@ strings/Strings.java:18:13
   (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $strings.Strings.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
   ;; $instance.$ctor();
@@ -375,7 +375,7 @@
  ;;@ strings/Strings.java:25:23
  (local $$instance (ref null $strings.Strings.StringHolder))
  (block
-  ;; StringHolder $instance = new StringHolder.<init>();
+  ;; StringHolder $instance = new StringHolder.<init>(0,null);
   ;;@ strings/Strings.java:25:23
   (local.set $$instance (struct.new $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String)))
   ;; $instance.$ctor();

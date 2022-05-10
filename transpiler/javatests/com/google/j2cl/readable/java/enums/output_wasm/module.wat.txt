@@ -176,7 +176,7 @@
  ;;@ enums/Enum1.java:20:12
  (local $$instance (ref null $enums.Enum1))
  (block
-  ;; Enum1 $instance = new Enum1.<init>($name,$ordinal);
+  ;; Enum1 $instance = new Enum1.<init>(0,null,0);
   ;;@ enums/Enum1.java:20:12
   (local.set $$instance (struct.new $enums.Enum1 (ref.as_non_null (global.get $enums.Enum1.vtable)) (ref.as_non_null (global.get $enums.Enum1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
@@ -321,7 +321,7 @@
  ;;@ enums/Enum1.java:33:2
  (local $$instance (ref null $enums.Enum2))
  (block
-  ;; Enum2 $instance = new Enum2.<init>($name,$ordinal,foo);
+  ;; Enum2 $instance = new Enum2.<init>(0,null,0,0);
   ;;@ enums/Enum1.java:33:2
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,foo);
@@ -371,7 +371,7 @@
  ;;@ enums/Enum1.java:37:2
  (local $$instance (ref null $enums.Enum2))
  (block
-  ;; Enum2 $instance = new Enum2.<init>($name,$ordinal,foo);
+  ;; Enum2 $instance = new Enum2.<init>(0,null,0,0);
   ;;@ enums/Enum1.java:37:2
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,foo);
@@ -412,7 +412,7 @@
  ;;@ enums/Enum1.java:41:2
  (local $$instance (ref null $enums.Enum2))
  (block
-  ;; Enum2 $instance = new Enum2.<init>($name,$ordinal,somePars);
+  ;; Enum2 $instance = new Enum2.<init>(0,null,0,0);
   ;;@ enums/Enum1.java:41:2
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,somePars);
@@ -602,7 +602,7 @@
  ;;@ enums/Enum1.java:55:2
  (local $$instance (ref null $enums.Enum3))
  (block
-  ;; Enum3 $instance = new Enum3.<init>($name,$ordinal,function);
+  ;; Enum3 $instance = new Enum3.<init>(0,null,0);
   ;;@ enums/Enum1.java:55:2
   (local.set $$instance (struct.new $enums.Enum3 (ref.as_non_null (global.get $enums.Enum3.vtable)) (ref.as_non_null (global.get $enums.Enum3.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,function);
@@ -745,7 +745,7 @@
  ;;@ enums/Enum1.java:29:12
  (local $$instance (ref null $enums.Enum2.1))
  (block
-  ;; <anonymous> extends Enum2 $instance = new $1.<init>($name,$ordinal,$_0);
+  ;; <anonymous> extends Enum2 $instance = new $1.<init>(0,null,0,0);
   ;;@ enums/Enum1.java:29:12
   (local.set $$instance (struct.new $enums.Enum2.1 (ref.as_non_null (global.get $enums.Enum2.1.vtable)) (ref.as_non_null (global.get $enums.Enum2.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,$_0);
@@ -834,7 +834,7 @@
  ;;@ enums/Enum1.java:53:9
  (local $$instance (ref null $enums.Enum3.$LambdaImplementor$1))
  (block
-  ;; $LambdaImplementor$1<T, R> $instance = new $LambdaImplementor$1.<init>();
+  ;; $LambdaImplementor$1<T, R> $instance = new $LambdaImplementor$1.<init>(0);
   ;;@ enums/Enum1.java:53:9
   (local.set $$instance (struct.new $enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();

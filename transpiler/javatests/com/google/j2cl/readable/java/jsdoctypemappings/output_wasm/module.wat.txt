@@ -163,7 +163,7 @@
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
  (local $$instance (ref null $jsdoctypemappings.JsDocTypeMappings))
  (block
-  ;; JsDocTypeMappings $instance = new JsDocTypeMappings.<init>();
+  ;; JsDocTypeMappings $instance = new JsDocTypeMappings.<init>(0);
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
   (local.set $$instance (struct.new $jsdoctypemappings.JsDocTypeMappings (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -806,7 +806,7 @@
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
  (local $$instance (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType))
  (block
-  ;; NativeType $instance = new NativeType.<init>();
+  ;; NativeType $instance = new NativeType.<init>(0);
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
   (local.set $$instance (struct.new $jsdoctypemappings.JsDocTypeMappings.NativeType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -873,7 +873,7 @@
  (field $vtable (ref $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__jsdoctypemappings_JsDocTypeMappings_ExportedType (mut (ref null $jsdoctypemappings.JsDocTypeMappings)))
+ (field $$outer_this__jsdoctypemappings_JsDocTypeMappings_ExportedType (ref null $jsdoctypemappings.JsDocTypeMappings))
   $java.lang.Object)
 )
 (type $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable (struct_subtype 
@@ -891,9 +891,9 @@
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
  (local $$instance (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
  (block
-  ;; ExportedType $instance = new ExportedType.<init>($outer_this);
+  ;; ExportedType $instance = new ExportedType.<init>(0,$outer_this);
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
-  (local.set $$instance (struct.new $jsdoctypemappings.JsDocTypeMappings.ExportedType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable)) (i32.const 0) (ref.null $jsdoctypemappings.JsDocTypeMappings)))
+  (local.set $$instance (struct.new $jsdoctypemappings.JsDocTypeMappings.ExportedType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
   (call $$ctor__jsdoctypemappings_JsDocTypeMappings__void_$p_jsdoctypemappings_JsDocTypeMappings_ExportedType@jsdoctypemappings.JsDocTypeMappings.ExportedType (local.get $$instance)(local.get $$outer_this))
@@ -912,9 +912,6 @@
   ;; jsdoctypemappings.JsDocTypeMappings.ExportedType.$clinit();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
   (call $$clinit__void@jsdoctypemappings.JsDocTypeMappings.ExportedType )
-  ;; (ExportedType.this.this = $outer_this);
-  ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
-  (struct.set $jsdoctypemappings.JsDocTypeMappings.ExportedType $$outer_this__jsdoctypemappings_JsDocTypeMappings_ExportedType(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

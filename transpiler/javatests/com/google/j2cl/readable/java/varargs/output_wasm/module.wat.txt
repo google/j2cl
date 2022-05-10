@@ -70,7 +70,7 @@
  ;;@ varargs/Varargs.java:23:9
  (local $$instance (ref null $varargs.Varargs))
  (block
-  ;; Varargs $instance = new Varargs.<init>(args);
+  ;; Varargs $instance = new Varargs.<init>(0,null);
   ;;@ varargs/Varargs.java:23:9
   (local.set $$instance (struct.new $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $varargs.Varargs.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;; $instance.$ctor(args);
@@ -103,7 +103,7 @@
  ;;@ varargs/Varargs.java:25:9
  (local $$instance (ref null $varargs.Varargs))
  (block
-  ;; Varargs $instance = new Varargs.<init>();
+  ;; Varargs $instance = new Varargs.<init>(0,null);
   ;;@ varargs/Varargs.java:25:9
   (local.set $$instance (struct.new $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $varargs.Varargs.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;; $instance.$ctor();
@@ -311,7 +311,7 @@
  ;;@ varargs/Varargs.java:58:9
  (local $$instance (ref null $varargs.Child))
  (block
-  ;; Child $instance = new Child.<init>();
+  ;; Child $instance = new Child.<init>(0,null);
   ;;@ varargs/Varargs.java:58:9
   (local.set $$instance (struct.new $varargs.Child (ref.as_non_null (global.get $varargs.Child.vtable)) (ref.as_non_null (global.get $varargs.Child.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;; $instance.$ctor();

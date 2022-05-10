@@ -346,8 +346,8 @@
  (field $vtable (ref $autovalue.$$AutoValue_AutoValueWithExtensions.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ (mut i32))
- (field $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (mut (ref null $java.lang.String)))
+ (field $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ i32)
+ (field $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (ref null $java.lang.String))
   $autovalue.AutoValueWithExtensions)
 )
 (type $autovalue.$$AutoValue_AutoValueWithExtensions.vtable (struct_subtype 
@@ -375,9 +375,6 @@
   ;; AutoValueWithExtensions.this.$ctor();
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:15:26
   (call $$ctor__void_$p_autovalue_AutoValueWithExtensions@autovalue.AutoValueWithExtensions (local.get $this))
-  ;; ($$AutoValue_AutoValueWithExtensions.this.intField = intField);
-  ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:16:4
-  (struct.set $autovalue.$$AutoValue_AutoValueWithExtensions $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_(local.get $this) (local.get $intField))
   ;; if (javaemul.internal.Platform.isNull(stringField)) {
   ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:17:4
   (if (ref.is_null (local.get $stringField))
@@ -389,9 +386,6 @@
     )
    )
   )
-  ;; ($$AutoValue_AutoValueWithExtensions.this.stringField = stringField);
-  ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:20:4
-  (struct.set $autovalue.$$AutoValue_AutoValueWithExtensions $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_(local.get $this) (local.get $stringField))
  )
 )
 
@@ -555,8 +549,8 @@
  (field $vtable (ref $autovalue.$AutoValue_AutoValueWithExtensions.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ (mut i32))
- (field $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (mut (ref null $java.lang.String)))
+ (field $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ i32)
+ (field $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (ref null $java.lang.String))
   $autovalue.$$AutoValue_AutoValueWithExtensions)
 )
 (type $autovalue.$AutoValue_AutoValueWithExtensions.vtable (struct_subtype 
@@ -714,7 +708,7 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_userField1__autovalue_Parent (mut i32))
  (field $f_userField2__autovalue_AutoValueWithFields (mut i32))
- (field $f_intField__autovalue_$AutoValue_AutoValueWithFields_ (mut i32))
+ (field $f_intField__autovalue_$AutoValue_AutoValueWithFields_ i32)
   $autovalue.AutoValueWithFields)
 )
 (type $autovalue.$AutoValue_AutoValueWithFields.vtable (struct_subtype 
@@ -739,9 +733,6 @@
   ;; AutoValueWithFields.this.$ctor();
   ;;@ autovalue/$AutoValue_AutoValueWithFields.java:12:20
   (call $$ctor__void_$p_autovalue_AutoValueWithFields@autovalue.AutoValueWithFields (local.get $this))
-  ;; ($AutoValue_AutoValueWithFields.this.intField = intField);
-  ;;@ autovalue/$AutoValue_AutoValueWithFields.java:13:4
-  (struct.set $autovalue.$AutoValue_AutoValueWithFields $f_intField__autovalue_$AutoValue_AutoValueWithFields_(local.get $this) (local.get $intField))
  )
 )
 
@@ -880,8 +871,8 @@
  (field $vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_ (mut i8))
- (field $f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_ (mut (ref null $java.lang.Double)))
+ (field $f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_ i8)
+ (field $f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_ (ref null $java.lang.Double))
   $autovalue.AutoValueWithBuilder)
 )
 (type $autovalue.AutoValue_AutoValueWithBuilder.vtable (struct_subtype 
@@ -903,9 +894,9 @@
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:12:10
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithBuilder))
  (block
-  ;; AutoValue_AutoValueWithBuilder $instance = new AutoValue_AutoValueWithBuilder.<init>(booleanField,nullableField);
+  ;; AutoValue_AutoValueWithBuilder $instance = new AutoValue_AutoValueWithBuilder.<init>(0,booleanField,nullableField);
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:12:10
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.itable)) (i32.const 0) (local.get $booleanField) (local.get $nullableField)))
   ;; $instance.$ctor(booleanField,nullableField);
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:12:10
   (call $$ctor__boolean__java_lang_Double__void_$p_autovalue_AutoValue_AutoValueWithBuilder@autovalue.AutoValue_AutoValueWithBuilder (local.get $$instance)(local.get $booleanField)(local.get $nullableField))
@@ -928,12 +919,6 @@
   ;; AutoValueWithBuilder.this.$ctor();
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:14:55
   (call $$ctor__void_$p_autovalue_AutoValueWithBuilder@autovalue.AutoValueWithBuilder (local.get $this))
-  ;; (AutoValue_AutoValueWithBuilder.this.booleanField = booleanField);
-  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:15:4
-  (struct.set $autovalue.AutoValue_AutoValueWithBuilder $f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_(local.get $this) (local.get $booleanField))
-  ;; (AutoValue_AutoValueWithBuilder.this.nullableField = nullableField);
-  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:16:4
-  (struct.set $autovalue.AutoValue_AutoValueWithBuilder $f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_(local.get $this) (local.get $nullableField))
  )
 )
 
@@ -1149,7 +1134,7 @@
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:70:4
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
  (block
-  ;; Builder $instance = new Builder.<init>();
+  ;; Builder $instance = new Builder.<init>(0,false,null,0);
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:70:4
   (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder.Builder (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1182,7 +1167,7 @@
  ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:72:12
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithBuilder.Builder))
  (block
-  ;; Builder $instance = new Builder.<init>(source);
+  ;; Builder $instance = new Builder.<init>(0,false,null,0);
   ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:72:12
   (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithBuilder.Builder (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithBuilder.Builder.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Double) (i32.const 0)))
   ;; $instance.$ctor(source);
@@ -1339,8 +1324,8 @@
  (field $vtable (ref $autovalue.AutoValue_AutoValueWithExtensions.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ (mut i32))
- (field $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (mut (ref null $java.lang.String)))
+ (field $f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ i32)
+ (field $f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ (ref null $java.lang.String))
  (field $f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_ (mut i32))
  (field $f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_ (mut i8))
   $autovalue.$AutoValue_AutoValueWithExtensions)
@@ -1365,9 +1350,9 @@
  ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:2
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithExtensions))
  (block
-  ;; AutoValue_AutoValueWithExtensions $instance = new AutoValue_AutoValueWithExtensions.<init>(intField$,stringField$);
+  ;; AutoValue_AutoValueWithExtensions $instance = new AutoValue_AutoValueWithExtensions.<init>(0,intField$,stringField$,0,false);
   ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithExtensions (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithExtensions (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.itable)) (i32.const 0) (local.get $intField$) (local.get $stringField$) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(intField$,stringField$);
   ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:2
   (call $$ctor__int__java_lang_String__void_$p_autovalue_AutoValue_AutoValueWithExtensions@autovalue.AutoValue_AutoValueWithExtensions (local.get $$instance)(local.get $intField$)(local.get $stringField$))
@@ -1481,7 +1466,7 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_userField1__autovalue_Parent (mut i32))
  (field $f_userField2__autovalue_AutoValueWithFields (mut i32))
- (field $f_intField__autovalue_$AutoValue_AutoValueWithFields_ (mut i32))
+ (field $f_intField__autovalue_$AutoValue_AutoValueWithFields_ i32)
  (field $f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_ (mut i32))
  (field $f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_ (mut i8))
   $autovalue.$AutoValue_AutoValueWithFields)
@@ -1503,9 +1488,9 @@
  ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:2
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithFields))
  (block
-  ;; AutoValue_AutoValueWithFields $instance = new AutoValue_AutoValueWithFields.<init>(intField$);
+  ;; AutoValue_AutoValueWithFields $instance = new AutoValue_AutoValueWithFields.<init>(0,0,0,intField$,0,false);
   ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithFields (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithFields (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (local.get $intField$) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(intField$);
   ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:2
   (call $$ctor__int__void_$p_autovalue_AutoValue_AutoValueWithFields@autovalue.AutoValue_AutoValueWithFields (local.get $$instance)(local.get $intField$))
@@ -1616,7 +1601,7 @@
  (field $vtable (ref $autovalue.AutoValue_AutoValueWithGenerics.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ (mut i8))
+ (field $f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_ i8)
   $autovalue.AutoValueWithGenerics)
 )
 (type $autovalue.AutoValue_AutoValueWithGenerics.vtable (struct_subtype 
@@ -1635,9 +1620,9 @@
  ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:11:2
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithGenerics))
  (block
-  ;; AutoValue_AutoValueWithGenerics<T> $instance = new AutoValue_AutoValueWithGenerics.<init>(booleanField);
+  ;; AutoValue_AutoValueWithGenerics<T> $instance = new AutoValue_AutoValueWithGenerics.<init>(0,booleanField);
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:11:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithGenerics (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithGenerics.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithGenerics.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithGenerics (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithGenerics.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithGenerics.itable)) (i32.const 0) (local.get $booleanField)))
   ;; $instance.$ctor(booleanField);
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:11:2
   (call $$ctor__boolean__void_$p_autovalue_AutoValue_AutoValueWithGenerics@autovalue.AutoValue_AutoValueWithGenerics (local.get $$instance)(local.get $booleanField))
@@ -1659,9 +1644,6 @@
   ;; AutoValueWithGenerics.this.$ctor();
   ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:12:28
   (call $$ctor__void_$p_autovalue_AutoValueWithGenerics@autovalue.AutoValueWithGenerics (local.get $this))
-  ;; (AutoValue_AutoValueWithGenerics.this.booleanField = booleanField);
-  ;;@ autovalue/AutoValue_AutoValueWithGenerics.java:13:4
-  (struct.set $autovalue.AutoValue_AutoValueWithGenerics $f_booleanField__autovalue_AutoValue_AutoValueWithGenerics_(local.get $this) (local.get $booleanField))
  )
 )
 
@@ -1814,8 +1796,8 @@
  (field $vtable (ref $autovalue.AutoValue_AutoValueWithOverrides.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ (mut i32))
- (field $f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ (mut i8))
+ (field $f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ i32)
+ (field $f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ i8)
   $autovalue.AutoValueWithOverrides)
 )
 (type $autovalue.AutoValue_AutoValueWithOverrides.vtable (struct_subtype 
@@ -1836,9 +1818,9 @@
  ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:12:2
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithOverrides))
  (block
-  ;; AutoValue_AutoValueWithOverrides $instance = new AutoValue_AutoValueWithOverrides.<init>(baseField,booleanField);
+  ;; AutoValue_AutoValueWithOverrides $instance = new AutoValue_AutoValueWithOverrides.<init>(0,baseField,booleanField);
   ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:12:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithOverrides (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithOverrides.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithOverrides.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithOverrides (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithOverrides.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithOverrides.itable)) (i32.const 0) (local.get $baseField) (local.get $booleanField)))
   ;; $instance.$ctor(baseField,booleanField);
   ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:12:2
   (call $$ctor__int__boolean__void_$p_autovalue_AutoValue_AutoValueWithOverrides@autovalue.AutoValue_AutoValueWithOverrides (local.get $$instance)(local.get $baseField)(local.get $booleanField))
@@ -1861,12 +1843,6 @@
   ;; AutoValueWithOverrides.this.$ctor();
   ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:14:28
   (call $$ctor__void_$p_autovalue_AutoValueWithOverrides@autovalue.AutoValueWithOverrides (local.get $this))
-  ;; (AutoValue_AutoValueWithOverrides.this.baseField = baseField);
-  ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:15:4
-  (struct.set $autovalue.AutoValue_AutoValueWithOverrides $f_baseField__autovalue_AutoValue_AutoValueWithOverrides_(local.get $this) (local.get $baseField))
-  ;; (AutoValue_AutoValueWithOverrides.this.booleanField = booleanField);
-  ;;@ autovalue/AutoValue_AutoValueWithOverrides.java:16:4
-  (struct.set $autovalue.AutoValue_AutoValueWithOverrides $f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_(local.get $this) (local.get $booleanField))
  )
 )
 
@@ -1943,7 +1919,7 @@
  (field $vtable (ref $autovalue.AutoValue_DefaultConstructorAutoValue.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ (mut i8))
+ (field $f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ i8)
   $autovalue.DefaultConstructorAutoValue)
 )
 (type $autovalue.AutoValue_DefaultConstructorAutoValue.vtable (struct_subtype 
@@ -1962,9 +1938,9 @@
  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:11:10
  (local $$instance (ref null $autovalue.AutoValue_DefaultConstructorAutoValue))
  (block
-  ;; AutoValue_DefaultConstructorAutoValue $instance = new AutoValue_DefaultConstructorAutoValue.<init>(booleanField);
+  ;; AutoValue_DefaultConstructorAutoValue $instance = new AutoValue_DefaultConstructorAutoValue.<init>(0,booleanField);
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:11:10
-  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultConstructorAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultConstructorAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.itable)) (i32.const 0) (local.get $booleanField)))
   ;; $instance.$ctor(booleanField);
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:11:10
   (call $$ctor__boolean__void_$p_autovalue_AutoValue_DefaultConstructorAutoValue@autovalue.AutoValue_DefaultConstructorAutoValue (local.get $$instance)(local.get $booleanField))
@@ -1986,9 +1962,6 @@
   ;; DefaultConstructorAutoValue.this.$ctor();
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:12:28
   (call $$ctor__void_$p_autovalue_DefaultConstructorAutoValue@autovalue.DefaultConstructorAutoValue (local.get $this))
-  ;; (AutoValue_DefaultConstructorAutoValue.this.booleanField = booleanField);
-  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:13:4
-  (struct.set $autovalue.AutoValue_DefaultConstructorAutoValue $f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_(local.get $this) (local.get $booleanField))
  )
 )
 
@@ -2161,7 +2134,7 @@
  ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:51:4
  (local $$instance (ref null $autovalue.AutoValue_DefaultConstructorAutoValue.Builder))
  (block
-  ;; Builder $instance = new Builder.<init>();
+  ;; Builder $instance = new Builder.<init>(0,false,0);
   ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:51:4
   (local.set $$instance (struct.new $autovalue.AutoValue_DefaultConstructorAutoValue.Builder (ref.as_non_null (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_DefaultConstructorAutoValue.Builder.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2288,8 +2261,8 @@
  (field $vtable (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_ (mut i32))
- (field $f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_ (mut i8))
+ (field $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_ i32)
+ (field $f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_ i8)
   $autovalue.DefaultNonEmptyConstructorAutoValue)
 )
 (type $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable (struct_subtype 
@@ -2308,9 +2281,9 @@
  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:11:10
  (local $$instance (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue))
  (block
-  ;; AutoValue_DefaultNonEmptyConstructorAutoValue $instance = new AutoValue_DefaultNonEmptyConstructorAutoValue.<init>(booleanField);
+  ;; AutoValue_DefaultNonEmptyConstructorAutoValue $instance = new AutoValue_DefaultNonEmptyConstructorAutoValue.<init>(0,1,booleanField);
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:11:10
-  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.itable)) (i32.const 0) (i32.const 1) (local.get $booleanField)))
   ;; $instance.$ctor(booleanField);
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:11:10
   (call $$ctor__boolean__void_$p_autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue (local.get $$instance)(local.get $booleanField))
@@ -2332,9 +2305,6 @@
   ;; DefaultNonEmptyConstructorAutoValue.this.$ctor();
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:12:28
   (call $$ctor__void_$p_autovalue_DefaultNonEmptyConstructorAutoValue@autovalue.DefaultNonEmptyConstructorAutoValue (local.get $this))
-  ;; (AutoValue_DefaultNonEmptyConstructorAutoValue.this.booleanField = booleanField);
-  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:13:4
-  (struct.set $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue $f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_(local.get $this) (local.get $booleanField))
  )
 )
 
@@ -2487,7 +2457,7 @@
  (field $vtable (ref $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_Builder_ (mut i32))
+ (field $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_Builder_ i32)
  (field $f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ (mut i8))
  (field $f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ (mut i8))
   $autovalue.DefaultNonEmptyConstructorAutoValue.Builder)
@@ -2508,9 +2478,9 @@
  ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:51:4
  (local $$instance (ref null $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder))
  (block
-  ;; Builder $instance = new Builder.<init>();
+  ;; Builder $instance = new Builder.<init>(0,1,false,0);
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:51:4
-  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.itable)) (i32.const 0) (i32.const 1) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:51:4
   (call $$ctor__void_$p_autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder (local.get $$instance))
@@ -2651,7 +2621,7 @@
  ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:10
  (local $$instance (ref null $autovalue.AutoValue_EmptyAutoValue))
  (block
-  ;; AutoValue_EmptyAutoValue $instance = new AutoValue_EmptyAutoValue.<init>();
+  ;; AutoValue_EmptyAutoValue $instance = new AutoValue_EmptyAutoValue.<init>(0);
   ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:10
   (local.set $$instance (struct.new $autovalue.AutoValue_EmptyAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2810,7 +2780,7 @@
  ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:4
  (local $$instance (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
  (block
-  ;; Builder $instance = new Builder.<init>();
+  ;; Builder $instance = new Builder.<init>(0);
   ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:4
   (local.set $$instance (struct.new $autovalue.AutoValue_EmptyAutoValue.Builder (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.Builder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.Builder.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2893,9 +2863,9 @@
  (field $vtable (ref $autovalue.AutoValue_ExtendingAutoValue.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_baseField__autovalue_AutoValue_ExtendingAutoValue_ (mut i32))
- (field $f_booleanField__autovalue_AutoValue_ExtendingAutoValue_ (mut i8))
- (field $f_stringField__autovalue_AutoValue_ExtendingAutoValue_ (mut (ref null $java.lang.String)))
+ (field $f_baseField__autovalue_AutoValue_ExtendingAutoValue_ i32)
+ (field $f_booleanField__autovalue_AutoValue_ExtendingAutoValue_ i8)
+ (field $f_stringField__autovalue_AutoValue_ExtendingAutoValue_ (ref null $java.lang.String))
   $autovalue.ExtendingAutoValue)
 )
 (type $autovalue.AutoValue_ExtendingAutoValue.vtable (struct_subtype 
@@ -2918,9 +2888,9 @@
  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:15:2
  (local $$instance (ref null $autovalue.AutoValue_ExtendingAutoValue))
  (block
-  ;; AutoValue_ExtendingAutoValue $instance = new AutoValue_ExtendingAutoValue.<init>(baseField,booleanField,stringField);
+  ;; AutoValue_ExtendingAutoValue $instance = new AutoValue_ExtendingAutoValue.<init>(0,baseField,booleanField,stringField);
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:15:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_ExtendingAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_ExtendingAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_ExtendingAutoValue.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_ExtendingAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_ExtendingAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_ExtendingAutoValue.itable)) (i32.const 0) (local.get $baseField) (local.get $booleanField) (local.get $stringField)))
   ;; $instance.$ctor(baseField,booleanField,stringField);
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:15:2
   (call $$ctor__int__boolean__java_lang_String__void_$p_autovalue_AutoValue_ExtendingAutoValue@autovalue.AutoValue_ExtendingAutoValue (local.get $$instance)(local.get $baseField)(local.get $booleanField)(local.get $stringField))
@@ -2944,12 +2914,6 @@
   ;; ExtendingAutoValue.this.$ctor();
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:18:26
   (call $$ctor__void_$p_autovalue_ExtendingAutoValue@autovalue.ExtendingAutoValue (local.get $this))
-  ;; (AutoValue_ExtendingAutoValue.this.baseField = baseField);
-  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:19:4
-  (struct.set $autovalue.AutoValue_ExtendingAutoValue $f_baseField__autovalue_AutoValue_ExtendingAutoValue_(local.get $this) (local.get $baseField))
-  ;; (AutoValue_ExtendingAutoValue.this.booleanField = booleanField);
-  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:20:4
-  (struct.set $autovalue.AutoValue_ExtendingAutoValue $f_booleanField__autovalue_AutoValue_ExtendingAutoValue_(local.get $this) (local.get $booleanField))
   ;; if (javaemul.internal.Platform.isNull(stringField)) {
   ;;@ autovalue/AutoValue_ExtendingAutoValue.java:21:4
   (if (ref.is_null (local.get $stringField))
@@ -2961,9 +2925,6 @@
     )
    )
   )
-  ;; (AutoValue_ExtendingAutoValue.this.stringField = stringField);
-  ;;@ autovalue/AutoValue_ExtendingAutoValue.java:24:4
-  (struct.set $autovalue.AutoValue_ExtendingAutoValue $f_stringField__autovalue_AutoValue_ExtendingAutoValue_(local.get $this) (local.get $stringField))
  )
 )
 
@@ -3169,12 +3130,12 @@
  (field $f_intField__autovalue_SimpleAutoValue_ (mut i32))
  (field $f_field1__autovalue_SimpleAutoValue_ (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
  (field $f_field2__autovalue_SimpleAutoValue_ (mut (ref null $autovalue.AutoValue_SimpleAutoValue)))
- (field $f_intField__autovalue_AutoValue_SimpleAutoValue_ (mut i32))
- (field $f_booleanField__autovalue_AutoValue_SimpleAutoValue_ (mut i8))
- (field $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.String)))
- (field $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.Double)))
- (field $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $java.lang.Double)))
- (field $f_arrayField__autovalue_AutoValue_SimpleAutoValue_ (mut (ref null $javaemul.internal.WasmArray.OfInt)))
+ (field $f_intField__autovalue_AutoValue_SimpleAutoValue_ i32)
+ (field $f_booleanField__autovalue_AutoValue_SimpleAutoValue_ i8)
+ (field $f_stringField__autovalue_AutoValue_SimpleAutoValue_ (ref null $java.lang.String))
+ (field $f_doubleField__autovalue_AutoValue_SimpleAutoValue_ (ref null $java.lang.Double))
+ (field $f_nullableField__autovalue_AutoValue_SimpleAutoValue_ (ref null $java.lang.Double))
+ (field $f_arrayField__autovalue_AutoValue_SimpleAutoValue_ (ref null $javaemul.internal.WasmArray.OfInt))
   $autovalue.SimpleAutoValue)
 )
 (type $autovalue.AutoValue_SimpleAutoValue.vtable (struct_subtype 
@@ -3203,9 +3164,9 @@
  ;;@ autovalue/AutoValue_SimpleAutoValue.java:21:2
  (local $$instance (ref null $autovalue.AutoValue_SimpleAutoValue))
  (block
-  ;; AutoValue_SimpleAutoValue $instance = new AutoValue_SimpleAutoValue.<init>(intField,booleanField,stringField,doubleField,nullableField,arrayField);
+  ;; AutoValue_SimpleAutoValue $instance = new AutoValue_SimpleAutoValue.<init>(0,0,null,null,intField,booleanField,stringField,doubleField,nullableField,arrayField);
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:21:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_SimpleAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_SimpleAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_SimpleAutoValue.itable)) (i32.const 0) (i32.const 0) (ref.null $autovalue.AutoValue_SimpleAutoValue) (ref.null $autovalue.AutoValue_SimpleAutoValue) (i32.const 0) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Double) (ref.null $java.lang.Double) (ref.null $javaemul.internal.WasmArray.OfInt)))
+  (local.set $$instance (struct.new $autovalue.AutoValue_SimpleAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_SimpleAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_SimpleAutoValue.itable)) (i32.const 0) (i32.const 0) (ref.null $autovalue.AutoValue_SimpleAutoValue) (ref.null $autovalue.AutoValue_SimpleAutoValue) (local.get $intField) (local.get $booleanField) (local.get $stringField) (local.get $doubleField) (local.get $nullableField) (local.get $arrayField)))
   ;; $instance.$ctor(intField,booleanField,stringField,doubleField,nullableField,arrayField);
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:21:2
   (call $$ctor__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__void_$p_autovalue_AutoValue_SimpleAutoValue@autovalue.AutoValue_SimpleAutoValue (local.get $$instance)(local.get $intField)(local.get $booleanField)(local.get $stringField)(local.get $doubleField)(local.get $nullableField)(local.get $arrayField))
@@ -3232,12 +3193,6 @@
   ;; SimpleAutoValue.this.$ctor();
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:27:24
   (call $$ctor__void_$p_autovalue_SimpleAutoValue@autovalue.SimpleAutoValue (local.get $this))
-  ;; (AutoValue_SimpleAutoValue.this.intField = intField);
-  ;;@ autovalue/AutoValue_SimpleAutoValue.java:28:4
-  (struct.set $autovalue.AutoValue_SimpleAutoValue $f_intField__autovalue_AutoValue_SimpleAutoValue_(local.get $this) (local.get $intField))
-  ;; (AutoValue_SimpleAutoValue.this.booleanField = booleanField);
-  ;;@ autovalue/AutoValue_SimpleAutoValue.java:29:4
-  (struct.set $autovalue.AutoValue_SimpleAutoValue $f_booleanField__autovalue_AutoValue_SimpleAutoValue_(local.get $this) (local.get $booleanField))
   ;; if (javaemul.internal.Platform.isNull(stringField)) {
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:30:4
   (if (ref.is_null (local.get $stringField))
@@ -3249,9 +3204,6 @@
     )
    )
   )
-  ;; (AutoValue_SimpleAutoValue.this.stringField = stringField);
-  ;;@ autovalue/AutoValue_SimpleAutoValue.java:33:4
-  (struct.set $autovalue.AutoValue_SimpleAutoValue $f_stringField__autovalue_AutoValue_SimpleAutoValue_(local.get $this) (local.get $stringField))
   ;; if (javaemul.internal.Platform.isNull(doubleField)) {
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:34:4
   (if (ref.is_null (local.get $doubleField))
@@ -3263,12 +3215,6 @@
     )
    )
   )
-  ;; (AutoValue_SimpleAutoValue.this.doubleField = doubleField);
-  ;;@ autovalue/AutoValue_SimpleAutoValue.java:37:4
-  (struct.set $autovalue.AutoValue_SimpleAutoValue $f_doubleField__autovalue_AutoValue_SimpleAutoValue_(local.get $this) (local.get $doubleField))
-  ;; (AutoValue_SimpleAutoValue.this.nullableField = nullableField);
-  ;;@ autovalue/AutoValue_SimpleAutoValue.java:38:4
-  (struct.set $autovalue.AutoValue_SimpleAutoValue $f_nullableField__autovalue_AutoValue_SimpleAutoValue_(local.get $this) (local.get $nullableField))
   ;; if (javaemul.internal.Platform.isNull(arrayField)) {
   ;;@ autovalue/AutoValue_SimpleAutoValue.java:39:4
   (if (ref.is_null (local.get $arrayField))
@@ -3280,9 +3226,6 @@
     )
    )
   )
-  ;; (AutoValue_SimpleAutoValue.this.arrayField = arrayField);
-  ;;@ autovalue/AutoValue_SimpleAutoValue.java:42:4
-  (struct.set $autovalue.AutoValue_SimpleAutoValue $f_arrayField__autovalue_AutoValue_SimpleAutoValue_(local.get $this) (local.get $arrayField))
  )
 )
 
@@ -3863,7 +3806,7 @@
  ;;@ autovalue/AutoValueWithFields.java:33:6
  (local $$instance (ref null $autovalue.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>();
+  ;; Parent $instance = new Parent.<init>(0,0);
   ;;@ autovalue/AutoValueWithFields.java:33:6
   (local.set $$instance (struct.new $autovalue.Parent (ref.as_non_null (global.get $autovalue.Parent.vtable)) (ref.as_non_null (global.get $autovalue.Parent.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
@@ -4277,7 +4220,7 @@
  (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_ (mut i32))
+ (field $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_ i32)
   $java.lang.Object)
 )
 (type $autovalue.DefaultNonEmptyConstructorAutoValue.vtable (struct_subtype 
@@ -4300,9 +4243,6 @@
   ;; Object.this.$ctor();
   ;;@ autovalue/DefaultNonEmptyConstructorAutoValue.java:25:40
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
-  ;; (DefaultNonEmptyConstructorAutoValue.this.field = 1);
-  ;;@ autovalue/DefaultNonEmptyConstructorAutoValue.java:26:4
-  (struct.set $autovalue.DefaultNonEmptyConstructorAutoValue $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_(local.get $this) (i32.const 1))
  )
 )
 
@@ -4355,7 +4295,7 @@
  (field $vtable (ref $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_Builder_ (mut i32))
+ (field $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_Builder_ i32)
   $java.lang.Object)
 )
 (type $autovalue.DefaultNonEmptyConstructorAutoValue.Builder.vtable (struct_subtype 
@@ -4379,9 +4319,6 @@
   ;; Object.this.$ctor();
   ;;@ autovalue/DefaultNonEmptyConstructorAutoValue.java:36:14
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
-  ;; (Builder.this.field = 1);
-  ;;@ autovalue/DefaultNonEmptyConstructorAutoValue.java:37:6
-  (struct.set $autovalue.DefaultNonEmptyConstructorAutoValue.Builder $f_field__autovalue_DefaultNonEmptyConstructorAutoValue_Builder_(local.get $this) (i32.const 1))
  )
 )
 

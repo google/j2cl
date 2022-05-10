@@ -207,7 +207,7 @@
  ;;@ libraryinfo/Main.java:26:13
  (local $$instance (ref null $libraryinfo.Main))
  (block
-  ;; Main $instance = new Main.<init>();
+  ;; Main $instance = new Main.<init>(0);
   ;;@ libraryinfo/Main.java:26:13
   (local.set $$instance (struct.new $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -376,7 +376,7 @@
  ;;@ libraryinfo/Main.java:85:17
  (local $$instance (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (block
-  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>(0);
   ;;@ libraryinfo/Main.java:85:17
   (local.set $$instance (struct.new $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -476,7 +476,7 @@
  ;;@ libraryinfo/Main.java:90:17
  (local $$instance (ref null $libraryinfo.Main.1))
  (block
-  ;; <anonymous> extends Object $instance = new $1.<init>();
+  ;; <anonymous> extends Object $instance = new $1.<init>(0);
   ;;@ libraryinfo/Main.java:90:17
   (local.set $$instance (struct.new $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -717,7 +717,7 @@
  ;;@ libraryinfo/Main.java:55:29
  (local $$instance (ref null $libraryinfo.Main.FunctionImpl))
  (block
-  ;; FunctionImpl $instance = new FunctionImpl.<init>();
+  ;; FunctionImpl $instance = new FunctionImpl.<init>(0);
   ;;@ libraryinfo/Main.java:55:29
   (local.set $$instance (struct.new $libraryinfo.Main.FunctionImpl (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -822,7 +822,7 @@
  ;;@ libraryinfo/Main.java:60:7
  (local $$instance (ref null $libraryinfo.Main.MyJsEnum))
  (block
-  ;; MyJsEnum $instance = new MyJsEnum.<init>($name,$ordinal);
+  ;; MyJsEnum $instance = new MyJsEnum.<init>(0,null,0);
   ;;@ libraryinfo/Main.java:60:7
   (local.set $$instance (struct.new $libraryinfo.Main.MyJsEnum (ref.as_non_null (global.get $libraryinfo.Main.MyJsEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
@@ -968,7 +968,7 @@
  ;;@ libraryinfo/Main.java:66:7
  (local $$instance (ref null $libraryinfo.Main.MyEnum))
  (block
-  ;; MyEnum $instance = new MyEnum.<init>($name,$ordinal);
+  ;; MyEnum $instance = new MyEnum.<init>(0,null,0);
   ;;@ libraryinfo/Main.java:66:7
   (local.set $$instance (struct.new $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
@@ -1103,7 +1103,7 @@
  ;;@ libraryinfo/Main.java:75:11
  (local $$instance (ref null $libraryinfo.Main.MyJsType))
  (block
-  ;; MyJsType $instance = new MyJsType.<init>();
+  ;; MyJsType $instance = new MyJsType.<init>(0,null);
   ;;@ libraryinfo/Main.java:75:11
   (local.set $$instance (struct.new $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
@@ -1173,7 +1173,7 @@
  (field $vtable (ref $libraryinfo.Main.Foo.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__libraryinfo_Main_Foo (mut (ref null $libraryinfo.Main)))
+ (field $$outer_this__libraryinfo_Main_Foo (ref null $libraryinfo.Main))
   $java.lang.Object)
 )
 (type $libraryinfo.Main.Foo.vtable (struct_subtype 
@@ -1192,9 +1192,9 @@
  ;;@ libraryinfo/Main.java:109:15
  (local $$instance (ref null $libraryinfo.Main.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>($outer_this);
+  ;; Foo $instance = new Foo.<init>(0,$outer_this);
   ;;@ libraryinfo/Main.java:109:15
-  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.Foo.itable)) (i32.const 0) (ref.null $libraryinfo.Main)))
+  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.Foo.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ libraryinfo/Main.java:109:15
   (call $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo (local.get $$instance)(local.get $$outer_this))
@@ -1213,9 +1213,6 @@
   ;; libraryinfo.Main.Foo.$clinit();
   ;;@ libraryinfo/Main.java:109:15
   (call $$clinit__void@libraryinfo.Main.Foo )
-  ;; (Foo.this.this = $outer_this);
-  ;;@ libraryinfo/Main.java:109:15
-  (struct.set $libraryinfo.Main.Foo $$outer_this__libraryinfo_Main_Foo(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ libraryinfo/Main.java:109:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))

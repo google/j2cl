@@ -90,7 +90,7 @@
  ;;@ supermethodcall/Child.java:18:6
  (local $$instance (ref null $supermethodcall.GrandParent))
  (block
-  ;; GrandParent $instance = new GrandParent.<init>();
+  ;; GrandParent $instance = new GrandParent.<init>(0);
   ;;@ supermethodcall/Child.java:18:6
   (local.set $$instance (struct.new $supermethodcall.GrandParent (ref.as_non_null (global.get $supermethodcall.GrandParent.vtable)) (ref.as_non_null (global.get $supermethodcall.GrandParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -220,7 +220,7 @@
  ;;@ supermethodcall/Child.java:29:6
  (local $$instance (ref null $supermethodcall.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>();
+  ;; Parent $instance = new Parent.<init>(0);
   ;;@ supermethodcall/Child.java:29:6
   (local.set $$instance (struct.new $supermethodcall.Parent (ref.as_non_null (global.get $supermethodcall.Parent.vtable)) (ref.as_non_null (global.get $supermethodcall.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -352,7 +352,7 @@
  ;;@ supermethodcall/Child.java:40:13
  (local $$instance (ref null $supermethodcall.Child))
  (block
-  ;; Child $instance = new Child.<init>();
+  ;; Child $instance = new Child.<init>(0);
   ;;@ supermethodcall/Child.java:40:13
   (local.set $$instance (struct.new $supermethodcall.Child (ref.as_non_null (global.get $supermethodcall.Child.vtable)) (ref.as_non_null (global.get $supermethodcall.Child.itable)) (i32.const 0)))
   ;; $instance.$ctor();

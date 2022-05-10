@@ -40,7 +40,7 @@
  ;;@ genericconstructor/GenericConstructor.java:20:13
  (local $$instance (ref null $genericconstructor.GenericConstructor))
  (block
-  ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(s,t);
+  ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(0);
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor(s,t);
@@ -75,7 +75,7 @@
  ;;@ genericconstructor/GenericConstructor.java:23:13
  (local $$instance (ref null $genericconstructor.GenericConstructor))
  (block
-  ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(t);
+  ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(0);
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor(t);

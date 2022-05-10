@@ -175,7 +175,7 @@
  ;;@ jsnonnull/Main.java:42:9
  (local $$instance (ref null $jsnonnull.Main))
  (block
-  ;; Main $instance = new Main.<init>(a);
+  ;; Main $instance = new Main.<init>(0,null,null,null,null,null,null,null,null,null,null);
   ;;@ jsnonnull/Main.java:42:9
   (local.set $$instance (struct.new $jsnonnull.Main (ref.as_non_null (global.get $jsnonnull.Main.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(a);
@@ -413,7 +413,7 @@
  ;;@ jsnonnull/Main.java:66:22
  (local $$instance (ref null $jsnonnull.Main.StringComparator))
  (block
-  ;; StringComparator $instance = new StringComparator.<init>();
+  ;; StringComparator $instance = new StringComparator.<init>(0);
   ;;@ jsnonnull/Main.java:66:22
   (local.set $$instance (struct.new $jsnonnull.Main.StringComparator (ref.as_non_null (global.get $jsnonnull.Main.StringComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.StringComparator.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -663,7 +663,7 @@
  ;;@ jsnonnull/Main.java:74:22
  (local $$instance (ref null $jsnonnull.Main.NullableStringComparator))
  (block
-  ;; NullableStringComparator $instance = new NullableStringComparator.<init>();
+  ;; NullableStringComparator $instance = new NullableStringComparator.<init>(0);
   ;;@ jsnonnull/Main.java:74:22
   (local.set $$instance (struct.new $jsnonnull.Main.NullableStringComparator (ref.as_non_null (global.get $jsnonnull.Main.NullableStringComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.NullableStringComparator.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -913,7 +913,7 @@
  ;;@ jsnonnull/Main.java:81:22
  (local $$instance (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (block
-  ;; NonNullableStringSubNullableComparator $instance = new NonNullableStringSubNullableComparator.<init>();
+  ;; NonNullableStringSubNullableComparator $instance = new NonNullableStringSubNullableComparator.<init>(0);
   ;;@ jsnonnull/Main.java:81:22
   (local.set $$instance (struct.new $jsnonnull.Main.NonNullableStringSubNullableComparator (ref.as_non_null (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.itable)) (i32.const 0)))
   ;; $instance.$ctor();

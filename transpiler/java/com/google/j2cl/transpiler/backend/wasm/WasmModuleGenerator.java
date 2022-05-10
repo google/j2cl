@@ -471,12 +471,11 @@ public class WasmModuleGenerator {
     WasmTypeLayout wasmType = environment.getWasmTypeLayout(type.getDeclaration());
     for (Field field : wasmType.getAllInstanceFields()) {
       builder.newLine();
-      builder.append(
-          "(field "
-              + environment.getFieldName(field)
-              + " (mut "
-              + environment.getWasmFieldType(field.getDescriptor().getTypeDescriptor())
-              + "))");
+      String fieldType = environment.getWasmFieldType(field.getDescriptor().getTypeDescriptor());
+      if (!field.isImmutable()) {
+        fieldType = format("(mut %s)", fieldType);
+      }
+      builder.append(format("(field %s %s)", environment.getFieldName(field), fieldType));
     }
   }
 

@@ -79,7 +79,7 @@
  ;;@ functiontype/FunctionImpl.java:20:13
  (local $$instance (ref null $functiontype.FunctionImpl))
  (block
-  ;; FunctionImpl $instance = new FunctionImpl.<init>();
+  ;; FunctionImpl $instance = new FunctionImpl.<init>(0);
   ;;@ functiontype/FunctionImpl.java:20:13
   (local.set $$instance (struct.new $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();

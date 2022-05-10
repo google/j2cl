@@ -105,7 +105,7 @@
  ;;@ exception/MyException.java:19:2
  (local $$instance (ref null $exception.MyException))
  (block
-  ;; MyException $instance = new MyException.<init>();
+  ;; MyException $instance = new MyException.<init>(0,null,null,null,null,false,false,null);
   ;;@ exception/MyException.java:19:2
   (local.set $$instance (struct.new $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
@@ -138,7 +138,7 @@
  ;;@ exception/MyException.java:21:2
  (local $$instance (ref null $exception.MyException))
  (block
-  ;; MyException $instance = new MyException.<init>(cause);
+  ;; MyException $instance = new MyException.<init>(0,null,null,null,null,false,false,null);
   ;;@ exception/MyException.java:21:2
   (local.set $$instance (struct.new $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(cause);
@@ -242,7 +242,7 @@
  ;;@ exception/MyJsException.java:23:9
  (local $$instance (ref null $exception.MyJsException))
  (block
-  ;; MyJsException $instance = new MyJsException.<init>();
+  ;; MyJsException $instance = new MyJsException.<init>(0,null,null,null,null,false,false,null);
   ;;@ exception/MyJsException.java:23:9
   (local.set $$instance (struct.new $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
@@ -275,7 +275,7 @@
  ;;@ exception/MyJsException.java:26:9
  (local $$instance (ref null $exception.MyJsException))
  (block
-  ;; MyJsException $instance = new MyJsException.<init>(cause);
+  ;; MyJsException $instance = new MyJsException.<init>(0,null,null,null,null,false,false,null);
   ;;@ exception/MyJsException.java:26:9
   (local.set $$instance (struct.new $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(cause);

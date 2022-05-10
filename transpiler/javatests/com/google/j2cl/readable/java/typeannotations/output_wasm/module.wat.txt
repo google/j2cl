@@ -316,7 +316,7 @@
  ;;@ typeannotations/TypeAnnotations.java:30:6
  (local $$instance (ref null $typeannotations.Parent))
  (block
-  ;; Parent $instance = new Parent.<init>();
+  ;; Parent $instance = new Parent.<init>(0);
   ;;@ typeannotations/TypeAnnotations.java:30:6
   (local.set $$instance (struct.new $typeannotations.Parent (ref.as_non_null (global.get $typeannotations.Parent.vtable)) (ref.as_non_null (global.get $typeannotations.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -440,7 +440,7 @@
  ;;@ typeannotations/TypeAnnotations.java:40:6
  (local $$instance (ref null $typeannotations.ChildWithNullableParent))
  (block
-  ;; ChildWithNullableParent $instance = new ChildWithNullableParent.<init>();
+  ;; ChildWithNullableParent $instance = new ChildWithNullableParent.<init>(0);
   ;;@ typeannotations/TypeAnnotations.java:40:6
   (local.set $$instance (struct.new $typeannotations.ChildWithNullableParent (ref.as_non_null (global.get $typeannotations.ChildWithNullableParent.vtable)) (ref.as_non_null (global.get $typeannotations.ChildWithNullableParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -584,7 +584,7 @@
  ;;@ typeannotations/TypeAnnotations.java:45:6
  (local $$instance (ref null $typeannotations.ChildWithNonNullableParent))
  (block
-  ;; ChildWithNonNullableParent $instance = new ChildWithNonNullableParent.<init>();
+  ;; ChildWithNonNullableParent $instance = new ChildWithNonNullableParent.<init>(0);
   ;;@ typeannotations/TypeAnnotations.java:45:6
   (local.set $$instance (struct.new $typeannotations.ChildWithNonNullableParent (ref.as_non_null (global.get $typeannotations.ChildWithNonNullableParent.vtable)) (ref.as_non_null (global.get $typeannotations.ChildWithNonNullableParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -723,7 +723,7 @@
  ;;@ typeannotations/TypeAnnotations.java:50:13
  (local $$instance (ref null $typeannotations.TypeAnnotations))
  (block
-  ;; TypeAnnotations $instance = new TypeAnnotations.<init>();
+  ;; TypeAnnotations $instance = new TypeAnnotations.<init>(0);
   ;;@ typeannotations/TypeAnnotations.java:50:13
   (local.set $$instance (struct.new $typeannotations.TypeAnnotations (ref.as_non_null (global.get $typeannotations.TypeAnnotations.vtable)) (ref.as_non_null (global.get $typeannotations.TypeAnnotations.itable)) (i32.const 0)))
   ;; $instance.$ctor();

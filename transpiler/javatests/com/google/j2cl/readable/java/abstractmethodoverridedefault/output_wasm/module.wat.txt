@@ -71,7 +71,7 @@
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
  (local $$instance (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  (block
-  ;; AbstractMethodOverrideDefault $instance = new AbstractMethodOverrideDefault.<init>();
+  ;; AbstractMethodOverrideDefault $instance = new AbstractMethodOverrideDefault.<init>(0);
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
   (local.set $$instance (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -398,7 +398,7 @@
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
  (local $$instance (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (block
-  ;; C $instance = new C.<init>();
+  ;; C $instance = new C.<init>(0);
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
   (local.set $$instance (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable)) (i32.const 0)))
   ;; $instance.$ctor();

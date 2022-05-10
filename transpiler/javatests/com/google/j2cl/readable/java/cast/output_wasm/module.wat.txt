@@ -254,7 +254,7 @@
  ;;@ cast/CastGenerics.java:18:13
  (local $$instance (ref null $cast.CastGenerics))
  (block
-  ;; CastGenerics<T, E> $instance = new CastGenerics.<init>();
+  ;; CastGenerics<T, E> $instance = new CastGenerics.<init>(0,null);
   ;;@ cast/CastGenerics.java:18:13
   (local.set $$instance (struct.new $cast.CastGenerics (ref.as_non_null (global.get $cast.CastGenerics.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
@@ -665,7 +665,7 @@
  ;;@ cast/CastGenerics.java:131:24
  (local $$instance (ref null $cast.CastGenerics.1))
  (block
-  ;; <anonymous> extends Foo<T><T> $instance = new $1.<init>();
+  ;; <anonymous> extends Foo<T><T> $instance = new $1.<init>(0);
   ;;@ cast/CastGenerics.java:131:24
   (local.set $$instance (struct.new $cast.CastGenerics.1 (ref.as_non_null (global.get $cast.CastGenerics.1.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -875,7 +875,7 @@
  ;;@ cast/CastGenerics.java:35:23
  (local $$instance (ref null $cast.CastGenerics.Implementor))
  (block
-  ;; Implementor $instance = new Implementor.<init>();
+  ;; Implementor $instance = new Implementor.<init>(0);
   ;;@ cast/CastGenerics.java:35:23
   (local.set $$instance (struct.new $cast.CastGenerics.Implementor (ref.as_non_null (global.get $cast.CastGenerics.Implementor.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.Implementor.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -980,7 +980,7 @@
  ;;@ cast/CastGenerics.java:41:23
  (local $$instance (ref null $cast.CastGenerics.Container))
  (block
-  ;; Container<T> $instance = new Container.<init>();
+  ;; Container<T> $instance = new Container.<init>(0);
   ;;@ cast/CastGenerics.java:41:23
   (local.set $$instance (struct.new $cast.CastGenerics.Container (ref.as_non_null (global.get $cast.CastGenerics.Container.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.Container.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1146,7 +1146,7 @@
  ;;@ cast/CastGenerics.java:134:22
  (local $$instance (ref null $cast.CastGenerics.Foo))
  (block
-  ;; Foo<V> $instance = new Foo.<init>();
+  ;; Foo<V> $instance = new Foo.<init>(0);
   ;;@ cast/CastGenerics.java:134:22
   (local.set $$instance (struct.new $cast.CastGenerics.Foo (ref.as_non_null (global.get $cast.CastGenerics.Foo.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1213,7 +1213,7 @@
  (field $vtable (ref $cast.CastGenerics.1Nested.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__cast_CastGenerics_1Nested (mut (ref null $cast.CastGenerics)))
+ (field $$outer_this__cast_CastGenerics_1Nested (ref null $cast.CastGenerics))
   $java.lang.Object)
 )
 (type $cast.CastGenerics.1Nested.vtable (struct_subtype 
@@ -1231,9 +1231,9 @@
  ;;@ cast/CastGenerics.java:111:10
  (local $$instance (ref null $cast.CastGenerics.1Nested))
  (block
-  ;; Nested<SS, TT, T, E> $instance = new $1Nested.<init>($outer_this);
+  ;; Nested<SS, TT, T, E> $instance = new $1Nested.<init>(0,$outer_this);
   ;;@ cast/CastGenerics.java:111:10
-  (local.set $$instance (struct.new $cast.CastGenerics.1Nested (ref.as_non_null (global.get $cast.CastGenerics.1Nested.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.1Nested.itable)) (i32.const 0) (ref.null $cast.CastGenerics)))
+  (local.set $$instance (struct.new $cast.CastGenerics.1Nested (ref.as_non_null (global.get $cast.CastGenerics.1Nested.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.1Nested.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ cast/CastGenerics.java:111:10
   (call $$ctor__cast_CastGenerics__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested (local.get $$instance)(local.get $$outer_this))
@@ -1252,9 +1252,6 @@
   ;; cast.CastGenerics.1Nested.$clinit();
   ;;@ cast/CastGenerics.java:111:10
   (call $$clinit__void@cast.CastGenerics.1Nested )
-  ;; ($1Nested.this.this = $outer_this);
-  ;;@ cast/CastGenerics.java:111:10
-  (struct.set $cast.CastGenerics.1Nested $$outer_this__cast_CastGenerics_1Nested(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ cast/CastGenerics.java:111:10
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
@@ -1336,7 +1333,7 @@
  ;;@ cast/CastPrimitives.java:18:13
  (local $$instance (ref null $cast.CastPrimitives))
  (block
-  ;; CastPrimitives $instance = new CastPrimitives.<init>();
+  ;; CastPrimitives $instance = new CastPrimitives.<init>(0);
   ;;@ cast/CastPrimitives.java:18:13
   (local.set $$instance (struct.new $cast.CastPrimitives (ref.as_non_null (global.get $cast.CastPrimitives.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -1968,7 +1965,7 @@
  ;;@ cast/CastPrimitives.java:158:4
  (local $$instance (ref null $cast.CastPrimitives.IntValueHolder))
  (block
-  ;; IntValueHolder $instance = new IntValueHolder.<init>(value);
+  ;; IntValueHolder $instance = new IntValueHolder.<init>(0);
   ;;@ cast/CastPrimitives.java:158:4
   (local.set $$instance (struct.new $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.itable)) (i32.const 0)))
   ;; $instance.$ctor(value);
@@ -2053,7 +2050,7 @@
  ;;@ cast/CastPrimitives.java:162:4
  (local $$instance (ref null $cast.CastPrimitives.LongValueHolder))
  (block
-  ;; LongValueHolder $instance = new LongValueHolder.<init>(value);
+  ;; LongValueHolder $instance = new LongValueHolder.<init>(0);
   ;;@ cast/CastPrimitives.java:162:4
   (local.set $$instance (struct.new $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.itable)) (i32.const 0)))
   ;; $instance.$ctor(value);
@@ -2144,7 +2141,7 @@
  ;;@ cast/Casts.java:20:13
  (local $$instance (ref null $cast.Casts))
  (block
-  ;; Casts $instance = new Casts.<init>();
+  ;; Casts $instance = new Casts.<init>(0);
   ;;@ cast/Casts.java:20:13
   (local.set $$instance (struct.new $cast.Casts (ref.as_non_null (global.get $cast.Casts.vtable)) (ref.as_non_null (global.get $cast.Casts.itable)) (i32.const 0)))
   ;; $instance.$ctor();
@@ -2548,7 +2545,7 @@
  (field $vtable (ref $cast.Casts.Foo.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__cast_Casts_Foo (mut (ref null $cast.Casts)))
+ (field $$outer_this__cast_Casts_Foo (ref null $cast.Casts))
  (field $f_field__cast_Casts_Foo (mut (ref null $java.lang.Object)))
   $java.lang.Object)
 )
@@ -2568,9 +2565,9 @@
  ;;@ cast/Casts.java:80:16
  (local $$instance (ref null $cast.Casts.Foo))
  (block
-  ;; Foo $instance = new Foo.<init>($outer_this);
+  ;; Foo $instance = new Foo.<init>(0,$outer_this,null);
   ;;@ cast/Casts.java:80:16
-  (local.set $$instance (struct.new $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (local.get $$outer_this) (ref.null $java.lang.Object)))
   ;; $instance.$ctor($outer_this);
   ;;@ cast/Casts.java:80:16
   (call $$ctor__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (local.get $$instance)(local.get $$outer_this))
@@ -2589,9 +2586,6 @@
   ;; cast.Casts.Foo.$clinit();
   ;;@ cast/Casts.java:80:16
   (call $$clinit__void@cast.Casts.Foo )
-  ;; (Foo.this.this = $outer_this);
-  ;;@ cast/Casts.java:80:16
-  (struct.set $cast.Casts.Foo $$outer_this__cast_Casts_Foo(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ cast/Casts.java:80:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
