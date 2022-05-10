@@ -71,6 +71,7 @@ import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
 import com.google.j2cl.transpiler.passes.J2KtRestrictionsChecker;
+import com.google.j2cl.transpiler.passes.MakeFieldsFinal;
 import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
@@ -366,6 +367,9 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
+
+          // Passes required for immutable fields.
+          MakeFieldsFinal::new,
           MakeVariablesFinal::new,
           NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,

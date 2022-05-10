@@ -144,15 +144,15 @@
  (field $vtable (ref $jsnonnull.Main.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f1__jsnonnull_Main_ (mut (ref null $java.lang.String)))
- (field $f_f2__jsnonnull_Main_ (mut (ref null $java.lang.String)))
+ (field $f_f1__jsnonnull_Main_ (ref null $java.lang.String))
+ (field $f_f2__jsnonnull_Main_ (ref null $java.lang.String))
  (field $f_f4__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
  (field $f_f5__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
  (field $f_f6__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
- (field $f_f7__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
- (field $f_f8__jsnonnull_Main_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f9__jsnonnull_Main_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f10__jsnonnull_Main_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ (field $f_f7__jsnonnull_Main_ (ref null $java.lang.Object))
+ (field $f_f8__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f9__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f10__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
  (field $f_f12__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
   $java.lang.Object)
 )
@@ -175,9 +175,9 @@
  ;;@ jsnonnull/Main.java:42:9
  (local $$instance (ref null $jsnonnull.Main))
  (block
-  ;; Main $instance = new Main.<init>(0,null,null,null,null,null,null,null,null,null,null);
+  ;; Main $instance = new Main.<init>(0,javaemul.internal.StringPool.$getString_|Hello|(),null,null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null);
   ;;@ jsnonnull/Main.java:42:9
-  (local.set $$instance (struct.new $jsnonnull.Main (ref.as_non_null (global.get $jsnonnull.Main.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $jsnonnull.Main (ref.as_non_null (global.get $jsnonnull.Main.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(a);
   ;;@ jsnonnull/Main.java:42:9
   (call $$ctor__java_lang_String__void_$p_jsnonnull_Main@jsnonnull.Main (local.get $$instance)(local.get $a))
@@ -278,12 +278,6 @@
  (param $this (ref null $jsnonnull.Main))
  ;;@ jsnonnull/Main.java:26:13
  (block
-  ;; (Main.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
-  ;;@ jsnonnull/Main.java:27:2
-  (struct.set $jsnonnull.Main $f_f1__jsnonnull_Main_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; (Main.this.f2 = null);
-  ;;@ jsnonnull/Main.java:28:2
-  (struct.set $jsnonnull.Main $f_f2__jsnonnull_Main_(local.get $this) (ref.null $java.lang.String))
   ;; (Main.this.f4 = java.util.ArrayList.$create());
   ;;@ jsnonnull/Main.java:29:2
   (struct.set $jsnonnull.Main $f_f4__jsnonnull_Main_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
@@ -293,18 +287,6 @@
   ;; (Main.this.f6 = java.util.ArrayList.$create());
   ;;@ jsnonnull/Main.java:31:2
   (struct.set $jsnonnull.Main $f_f6__jsnonnull_Main_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
-  ;; (Main.this.f7 = null);
-  ;;@ jsnonnull/Main.java:32:2
-  (struct.set $jsnonnull.Main $f_f7__jsnonnull_Main_(local.get $this) (ref.null $java.lang.Object))
-  ;; (Main.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ jsnonnull/Main.java:33:2
-  (struct.set $jsnonnull.Main $f_f8__jsnonnull_Main_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (Main.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ jsnonnull/Main.java:35:2
-  (struct.set $jsnonnull.Main $f_f9__jsnonnull_Main_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (Main.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ jsnonnull/Main.java:37:2
-  (struct.set $jsnonnull.Main $f_f10__jsnonnull_Main_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (Main.this.f12 = java.util.ArrayList.$create());
   ;;@ jsnonnull/Main.java:39:2
   (struct.set $jsnonnull.Main $f_f12__jsnonnull_Main_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))

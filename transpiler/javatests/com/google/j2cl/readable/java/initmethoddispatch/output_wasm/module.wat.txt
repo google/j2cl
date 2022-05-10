@@ -20,7 +20,7 @@
  (field $vtable (ref $initmethoddispatch.InitMethodDispatch.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_value__initmethoddispatch_InitMethodDispatch (mut i32))
+ (field $f_value__initmethoddispatch_InitMethodDispatch i32)
   $java.lang.Object)
 )
 (type $initmethoddispatch.InitMethodDispatch.vtable (struct_subtype 
@@ -37,9 +37,9 @@
  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
  (local $$instance (ref null $initmethoddispatch.InitMethodDispatch))
  (block
-  ;; InitMethodDispatch<T> $instance = new InitMethodDispatch.<init>(0,0);
+  ;; InitMethodDispatch<T> $instance = new InitMethodDispatch.<init>(0,1);
   ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
-  (local.set $$instance (struct.new $initmethoddispatch.InitMethodDispatch (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.vtable)) (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $initmethoddispatch.InitMethodDispatch (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.vtable)) (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.itable)) (i32.const 0) (i32.const 1)))
   ;; $instance.$ctor();
   ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
   (call $$ctor__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch (local.get $$instance))
@@ -70,9 +70,9 @@
  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
  (local $$instance (ref null $initmethoddispatch.InitMethodDispatch))
  (block
-  ;; InitMethodDispatch<T> $instance = new InitMethodDispatch.<init>(0,0);
+  ;; InitMethodDispatch<T> $instance = new InitMethodDispatch.<init>(0,i);
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
-  (local.set $$instance (struct.new $initmethoddispatch.InitMethodDispatch (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.vtable)) (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $initmethoddispatch.InitMethodDispatch (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.vtable)) (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.itable)) (i32.const 0) (local.get $i)))
   ;; $instance.$ctor(i);
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
   (call $$ctor__int__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch (local.get $$instance)(local.get $i))
@@ -94,9 +94,6 @@
   ;; Object.this.$ctor();
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:28
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
-  ;; (InitMethodDispatch.this.value = i);
-  ;;@ initmethoddispatch/InitMethodDispatch.java:28:4
-  (struct.set $initmethoddispatch.InitMethodDispatch $f_value__initmethoddispatch_InitMethodDispatch(local.get $this) (local.get $i))
  )
 )
 

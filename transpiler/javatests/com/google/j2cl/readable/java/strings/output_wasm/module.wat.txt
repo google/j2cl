@@ -38,9 +38,9 @@
  (field $vtable (ref $strings.Strings.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_someString__strings_Strings_ (mut (ref null $java.lang.String)))
- (field $f_nonBmpChar__strings_Strings_ (mut (ref null $java.lang.String)))
- (field $f_wideColon__strings_Strings_ (mut (ref null $java.lang.String)))
+ (field $f_someString__strings_Strings_ (ref null $java.lang.String))
+ (field $f_nonBmpChar__strings_Strings_ (ref null $java.lang.String))
+ (field $f_wideColon__strings_Strings_ (ref null $java.lang.String))
   $java.lang.Object)
 )
 (type $strings.Strings.vtable (struct_subtype 
@@ -58,9 +58,9 @@
  ;;@ strings/Strings.java:18:13
  (local $$instance (ref null $strings.Strings))
  (block
-  ;; Strings $instance = new Strings.<init>(0,null,null,null);
+  ;; Strings $instance = new Strings.<init>(0,javaemul.internal.StringPool.$getString_|This_is_a_st...|(),javaemul.internal.StringPool.$getString_|_|_19(),javaemul.internal.StringPool.$getString_|_|_20());
   ;;@ strings/Strings.java:18:13
-  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $strings.Strings.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $strings.Strings.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|This_is_a_st...|__java_lang_String (ref.func $$getString_|This_is_a_st...|__java_lang_String@javaemul.internal.StringPool) ) (call $function.no.side.effects.$getString_|_|_19__java_lang_String (ref.func $$getString_|_|_19__java_lang_String@javaemul.internal.StringPool) ) (call $function.no.side.effects.$getString_|_|_20__java_lang_String (ref.func $$getString_|_|_20__java_lang_String@javaemul.internal.StringPool) )))
   ;; $instance.$ctor();
   ;;@ strings/Strings.java:18:13
   (call $$ctor__void_$p_strings_Strings@strings.Strings (local.get $$instance))
@@ -305,15 +305,6 @@
  (param $this (ref null $strings.Strings))
  ;;@ strings/Strings.java:18:13
  (block
-  ;; (Strings.this.someString = javaemul.internal.StringPool.$getString_|This_is_a_st...|());
-  ;;@ strings/Strings.java:19:2
-  (struct.set $strings.Strings $f_someString__strings_Strings_(local.get $this) (call $function.no.side.effects.$getString_|This_is_a_st...|__java_lang_String (ref.func $$getString_|This_is_a_st...|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; (Strings.this.nonBmpChar = javaemul.internal.StringPool.$getString_|_|_19());
-  ;;@ strings/Strings.java:21:2
-  (struct.set $strings.Strings $f_nonBmpChar__strings_Strings_(local.get $this) (call $function.no.side.effects.$getString_|_|_19__java_lang_String (ref.func $$getString_|_|_19__java_lang_String@javaemul.internal.StringPool) ))
-  ;; (Strings.this.wideColon = javaemul.internal.StringPool.$getString_|_|_20());
-  ;;@ strings/Strings.java:22:2
-  (struct.set $strings.Strings $f_wideColon__strings_Strings_(local.get $this) (call $function.no.side.effects.$getString_|_|_20__java_lang_String (ref.func $$getString_|_|_20__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 

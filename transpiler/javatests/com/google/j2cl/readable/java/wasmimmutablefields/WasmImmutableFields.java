@@ -18,25 +18,25 @@ package wasmimmutablefields;
 public class WasmImmutableFields {}
 
 class AssignmentsInDeclaration {
-  final int compileTimeConstant = 12;
-  final String stringLiteral = "Hello World";
-  final Object[] newArray = new Object[4];
-  final Object[][][] newArrayMultidimensional = new Object[3][4][];
-  final int[] arrayLiteral = {1, 2, 3, 4};
-  final int[][] arrayLiteralMultidimensional = {{1, 2}, {3, 4}};
-  final Class<?> classLiteral = WasmImmutableFields.class;
-  final String[] withCast = (String[]) (Object) new Object[0];
+  int compileTimeConstant = 12;
+  String stringLiteral = "Hello World";
+  Object[] newArray = new Object[4];
+  Object[][][] newArrayMultidimensional = new Object[3][4][];
+  int[] arrayLiteral = {1, 2, 3, 4};
+  int[][] arrayLiteralMultidimensional = {{1, 2}, {3, 4}};
+  Class<?> classLiteral = WasmImmutableFields.class;
+  String[] withCast = (String[]) (Object) new Object[0];
 }
 
 class AssignmentsInInitializer {
-  final int compileTimeConstant;
-  final String stringLiteral;
-  final Object[] newArray;
-  final Object[][][] newArrayMultidimensional;
-  final int[] arrayLiteral;
-  final int[][] arrayLiteralMultidimensional;
-  final Class<?> classLiteral;
-  final String[] withCast;
+  int compileTimeConstant;
+  String stringLiteral;
+  Object[] newArray;
+  Object[][][] newArrayMultidimensional;
+  int[] arrayLiteral;
+  int[][] arrayLiteralMultidimensional;
+  Class<?> classLiteral;
+  String[] withCast;
 
   {
     compileTimeConstant = 12;
@@ -51,16 +51,16 @@ class AssignmentsInInitializer {
 }
 
 class AssignmentsInConstructor {
-  final int compileTimeConstant;
-  final String stringLiteral;
-  final Object[] newArray;
-  final Object[][][] newArrayMultidimensional;
-  final int[] arrayLiteral;
-  final int[][] arrayLiteralMultidimensional;
-  final Class<?> classLiteral;
-  final String[] withCast;
-  final Object fromParameter;
-  final String finalFieldReference;
+  int compileTimeConstant;
+  String stringLiteral;
+  Object[] newArray;
+  Object[][][] newArrayMultidimensional;
+  int[] arrayLiteral;
+  int[][] arrayLiteralMultidimensional;
+  Class<?> classLiteral;
+  String[] withCast;
+  Object fromParameter;
+  String finalFieldReference;
 
   AssignmentsInConstructor(Object parameter, int intParameter, AssignmentsInConstructor par) {
     compileTimeConstant = 12;
@@ -77,7 +77,7 @@ class AssignmentsInConstructor {
 }
 
 class OptimizesWithThisConstructorDelegation {
-  final int optimizeableField;
+  int optimizeableField;
 
   OptimizesWithThisConstructorDelegation() {
     optimizeableField = 2;
@@ -103,5 +103,57 @@ class OptimizesWithSuperConstructorDelegation extends OptimizesWithThisConstruct
 
   OptimizesWithSuperConstructorDelegation(short parameter) {
     this((int) parameter);
+  }
+}
+
+class FinalizerTest {
+  int effectivelyFinalField = 1;
+  int readInInit = effectivelyFinalField; // A valid read.
+
+  int writtenOutsideConstructor = 1;
+  int readBeforeWrite;
+  int writtenInDelegatingConstructor = 1;
+  int compoundAssignment;
+  int effectivelyFinalButNotOptimizedIfBranches;
+  int effectivelyFinalButNotOptimizedNestedBlock;
+  int writtenInInitAndConstructor = 1;
+  int writtenInInitializerAndInDelegatingConstructor = 1;
+  int writtenOnlyInDelegatingConstructor;
+
+  FinalizerTest() {
+    readBeforeWrite = readBeforeWrite + 1;
+
+    // A valid read.
+    int i = effectivelyFinalField;
+
+    compoundAssignment++;
+    if (i == 3) {
+      effectivelyFinalButNotOptimizedIfBranches = 1;
+    } else {
+      effectivelyFinalButNotOptimizedIfBranches = 1;
+    }
+    {
+      effectivelyFinalButNotOptimizedNestedBlock = 1;
+    }
+    writtenInInitAndConstructor = 1;
+  }
+
+  FinalizerTest(int x) {
+    this();
+
+    // A valid read.
+    int i = effectivelyFinalField;
+
+    writtenInDelegatingConstructor = 1;
+    writtenOnlyInDelegatingConstructor = 1;
+    writtenInInitializerAndInDelegatingConstructor = 1;
+  }
+
+  void foo() {
+    FinalizerTest o = null;
+    o.writtenOutsideConstructor = 1;
+
+    // A valid read.
+    int i = effectivelyFinalField;
   }
 }

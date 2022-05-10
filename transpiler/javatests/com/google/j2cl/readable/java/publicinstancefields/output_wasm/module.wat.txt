@@ -20,7 +20,7 @@
  (field $vtable (ref $publicinstancefields.PublicInstanceFields.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_a__publicinstancefields_PublicInstanceFields (mut i32))
+ (field $f_a__publicinstancefields_PublicInstanceFields i32)
  (field $f_b__publicinstancefields_PublicInstanceFields (mut i32))
   $java.lang.Object)
 )
@@ -38,9 +38,9 @@
  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
  (local $$instance (ref null $publicinstancefields.PublicInstanceFields))
  (block
-  ;; PublicInstanceFields $instance = new PublicInstanceFields.<init>(0,0,0);
+  ;; PublicInstanceFields $instance = new PublicInstanceFields.<init>(0,1,0);
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
-  (local.set $$instance (struct.new $publicinstancefields.PublicInstanceFields (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.vtable)) (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $publicinstancefields.PublicInstanceFields (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.vtable)) (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.itable)) (i32.const 0) (i32.const 1) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (call $$ctor__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields (local.get $$instance))
@@ -72,9 +72,6 @@
  (param $this (ref null $publicinstancefields.PublicInstanceFields))
  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
  (block
-  ;; (PublicInstanceFields.this.a = 1);
-  ;;@ publicinstancefields/PublicInstanceFields.java:19:2
-  (struct.set $publicinstancefields.PublicInstanceFields $f_a__publicinstancefields_PublicInstanceFields(local.get $this) (i32.const 1))
  )
 )
 

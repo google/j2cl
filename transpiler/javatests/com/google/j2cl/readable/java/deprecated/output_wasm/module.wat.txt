@@ -87,7 +87,7 @@
  (field $vtable (ref $deprecated.DeprecatedExample.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_deprecatedInstanceField__deprecated_DeprecatedExample (mut (ref null $java.lang.String)))
+ (field $f_deprecatedInstanceField__deprecated_DeprecatedExample (ref null $java.lang.String))
   $java.lang.Object)
 )
 (type $deprecated.DeprecatedExample.vtable (struct_subtype 
@@ -129,9 +129,9 @@
  ;;@ deprecated/DeprecatedExample.java:37:9
  (local $$instance (ref null $deprecated.DeprecatedExample))
  (block
-  ;; DeprecatedExample $instance = new DeprecatedExample.<init>(0,null);
+  ;; DeprecatedExample $instance = new DeprecatedExample.<init>(0,javaemul.internal.StringPool.$getString_|deprecated_f...|());
   ;;@ deprecated/DeprecatedExample.java:37:9
-  (local.set $$instance (struct.new $deprecated.DeprecatedExample (ref.as_non_null (global.get $deprecated.DeprecatedExample.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.itable)) (i32.const 0) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $deprecated.DeprecatedExample (ref.as_non_null (global.get $deprecated.DeprecatedExample.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|deprecated_f...|__java_lang_String (ref.func $$getString_|deprecated_f...|__java_lang_String@javaemul.internal.StringPool) )))
   ;; $instance.$ctor();
   ;;@ deprecated/DeprecatedExample.java:37:9
   (call $$ctor__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (local.get $$instance))
@@ -163,9 +163,6 @@
  (param $this (ref null $deprecated.DeprecatedExample))
  ;;@ deprecated/DeprecatedExample.java:25:13
  (block
-  ;; (DeprecatedExample.this.deprecatedInstanceField = javaemul.internal.StringPool.$getString_|deprecated_f...|());
-  ;;@ deprecated/DeprecatedExample.java:28:2
-  (struct.set $deprecated.DeprecatedExample $f_deprecatedInstanceField__deprecated_DeprecatedExample(local.get $this) (call $function.no.side.effects.$getString_|deprecated_f...|__java_lang_String (ref.func $$getString_|deprecated_f...|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 

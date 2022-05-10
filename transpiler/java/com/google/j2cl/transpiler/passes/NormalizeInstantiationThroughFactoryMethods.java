@@ -556,16 +556,18 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
    * executed.
    */
   private static boolean isValidImmutableFieldInitializer(Expression rhs) {
-    // NewArray should have been lowered at the point this pass is run, otherwise it needs to be
-    // handled in this method.
-    checkState(!(rhs instanceof NewArray));
-
     if (rhs instanceof VariableReference) {
       Variable variable = ((VariableReference) rhs).getTarget();
       // A reference to a final parameter of the constructor can be hoisted.
       return variable.isParameter() && variable.isFinal();
     }
 
+    if (rhs instanceof NewArray) {
+      NewArray newArray = (NewArray) rhs;
+      checkState(newArray.getArrayLiteral() == null);
+      return newArray.getDimensionExpressions().stream()
+          .allMatch(NormalizeInstantiationThroughFactoryMethods::isValidImmutableFieldInitializer);
+    }
     if (rhs instanceof ArrayLiteral) {
       ArrayLiteral arrayLiteral = (ArrayLiteral) rhs;
       return arrayLiteral.getValueExpressions().stream()

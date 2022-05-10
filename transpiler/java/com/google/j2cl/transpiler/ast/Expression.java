@@ -66,6 +66,14 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return false;
   }
 
+  /**
+   * Returns true if the expression is an assignment (including compound assignments, pre/post
+   * increments and decrements).
+   */
+  public boolean isSimpleOrCompoundAssignment() {
+    return false;
+  }
+
   /** Returns true if the expression value can be computed at compile time. */
   public boolean isCompileTimeConstant() {
     return false;

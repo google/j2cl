@@ -16,6 +16,9 @@
 ;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [static fields]
 (global $f_$initialized__wasmimmutablefields_OptimizesWithSuperConstructorDelegation (mut i32) (i32.const 0))
 
+;;; Code for wasmimmutablefields.FinalizerTest [static fields]
+(global $f_$initialized__wasmimmutablefields_FinalizerTest (mut i32) (i32.const 0))
+
 ;;; Code for wasmimmutablefields.WasmImmutableFields [vtable.init]
 (global $wasmimmutablefields.WasmImmutableFields.vtable (ref $wasmimmutablefields.WasmImmutableFields.vtable) 
  (struct.new $wasmimmutablefields.WasmImmutableFields.vtable
@@ -98,6 +101,21 @@
 
 ;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [itable.init]
 (global $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for wasmimmutablefields.FinalizerTest [vtable.init]
+(global $wasmimmutablefields.FinalizerTest.vtable (ref $wasmimmutablefields.FinalizerTest.vtable) 
+ (struct.new $wasmimmutablefields.FinalizerTest.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@wasmimmutablefields.FinalizerTest)
+  (ref.func $m_foo__void_$pp_wasmimmutablefields@wasmimmutablefields.FinalizerTest)
+ )
+)
+
+;;; Code for wasmimmutablefields.FinalizerTest [itable.init]
+(global $wasmimmutablefields.FinalizerTest.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for wasmimmutablefields.WasmImmutableFields [CLASS]
@@ -188,6 +206,8 @@
  (field $vtable (ref $wasmimmutablefields.AssignmentsInDeclaration.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInDeclaration i32)
+ (field $f_stringLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $java.lang.String))
  (field $f_newArray__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
  (field $f_newArrayMultidimensional__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
  (field $f_arrayLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfInt))
@@ -210,9 +230,9 @@
  ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
  (local $$instance (ref null $wasmimmutablefields.AssignmentsInDeclaration))
  (block
-  ;; AssignmentsInDeclaration $instance = new AssignmentsInDeclaration.<init>(0,javaemul.internal.WasmArray.OfObject.$create(4),javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([3,4,-1]),-1),javaemul.internal.WasmArray.OfInt.$create([1,2,3,4]),javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfInt.$create([1,2]),javaemul.internal.WasmArray.OfInt.$create([3,4])]),javaemul.internal.ClassLiteralPool.$getWasmimmutablefields.WasmImmutableFields(),((String[]) ((Object) javaemul.internal.WasmArray.OfObject.$create(0))));
+  ;; AssignmentsInDeclaration $instance = new AssignmentsInDeclaration.<init>(0,12,javaemul.internal.StringPool.$getString_|Hello_World|(),javaemul.internal.WasmArray.OfObject.$create(4),javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([3,4,-1]),-1),javaemul.internal.WasmArray.OfInt.$create([1,2,3,4]),javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfInt.$create([1,2]),javaemul.internal.WasmArray.OfInt.$create([3,4])]),javaemul.internal.ClassLiteralPool.$getWasmimmutablefields.WasmImmutableFields(),((String[]) ((Object) javaemul.internal.WasmArray.OfObject.$create(0))));
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
-  (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInDeclaration (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInDeclaration.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInDeclaration.itable)) (i32.const 0) (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 4)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4)(i32.const -1)))(i32.const -1)) (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)(i32.const 3)(i32.const 4))) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4))))) (call $function.no.side.effects.$getWasmimmutablefields.WasmImmutableFields__java_lang_Class (ref.func $$getWasmimmutablefields.WasmImmutableFields__java_lang_Class@javaemul.internal.ClassLiteralPool) ) (ref.cast_static $javaemul.internal.WasmArray.OfObject (ref.cast_static $java.lang.Object (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0))))))
+  (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInDeclaration (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInDeclaration.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInDeclaration.itable)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@javaemul.internal.StringPool) ) (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 4)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4)(i32.const -1)))(i32.const -1)) (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)(i32.const 3)(i32.const 4))) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4))))) (call $function.no.side.effects.$getWasmimmutablefields.WasmImmutableFields__java_lang_Class (ref.func $$getWasmimmutablefields.WasmImmutableFields__java_lang_Class@javaemul.internal.ClassLiteralPool) ) (ref.cast_static $javaemul.internal.WasmArray.OfObject (ref.cast_static $java.lang.Object (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0))))))
   ;; $instance.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
   (call $$ctor__void_$p_wasmimmutablefields_AssignmentsInDeclaration@wasmimmutablefields.AssignmentsInDeclaration (local.get $$instance))
@@ -787,3 +807,229 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.OptimizesWithSuperConstructorDelegation)
+
+;;; Code for wasmimmutablefields.FinalizerTest [CLASS]
+(type $wasmimmutablefields.FinalizerTest (struct_subtype 
+ (field $vtable (ref $wasmimmutablefields.FinalizerTest.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest i32)
+ (field $f_readInInit__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_writtenOutsideConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_readBeforeWrite__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_writtenInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_compoundAssignment__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_effectivelyFinalButNotOptimizedIfBranches__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_effectivelyFinalButNotOptimizedNestedBlock__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_writtenInInitAndConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_writtenInInitializerAndInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+ (field $f_writtenOnlyInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+  $java.lang.Object)
+)
+(type $wasmimmutablefields.FinalizerTest.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__void_$pp_wasmimmutablefields (ref $function.m_foo__void_$pp_wasmimmutablefields))
+  $java.lang.Object.vtable)
+)
+
+;;; FinalizerTest FinalizerTest.$create()
+(func $$create__wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest
+ (result (ref null $wasmimmutablefields.FinalizerTest))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:123:2
+ (local $$instance (ref null $wasmimmutablefields.FinalizerTest))
+ (block
+  ;; FinalizerTest $instance = new FinalizerTest.<init>(0,1,0,0,0,0,0,0,0,0,0,0);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:123:2
+  (local.set $$instance (struct.new $wasmimmutablefields.FinalizerTest (ref.as_non_null (global.get $wasmimmutablefields.FinalizerTest.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.FinalizerTest.itable)) (i32.const 0) (i32.const 1) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:123:2
+  (call $$ctor__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (local.get $$instance))
+  ;; return $instance;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:123:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void FinalizerTest.$ctor()
+(func $$ctor__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest
+ (param $this (ref null $wasmimmutablefields.FinalizerTest))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:123:2
+ (local $i i32)
+ (block
+  ;; wasmimmutablefields.FinalizerTest.$clinit();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:123:18
+  (call $$clinit__void@wasmimmutablefields.FinalizerTest )
+  ;; Object.this.$ctor();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:123:18
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  ;; FinalizerTest.this.$init();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:123:18
+  (call $$init__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (local.get $this))
+  ;; (FinalizerTest.this.readBeforeWrite = (FinalizerTest.this.readBeforeWrite + 1));
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:124:4
+  (struct.set $wasmimmutablefields.FinalizerTest $f_readBeforeWrite__wasmimmutablefields_FinalizerTest(local.get $this) (i32.add (struct.get $wasmimmutablefields.FinalizerTest $f_readBeforeWrite__wasmimmutablefields_FinalizerTest(local.get $this)) (i32.const 1)))
+  ;; int i = FinalizerTest.this.effectivelyFinalField;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:127:4
+  (local.set $i (struct.get $wasmimmutablefields.FinalizerTest $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest(local.get $this)))
+  ;; (FinalizerTest.this.compoundAssignment = (FinalizerTest.this.compoundAssignment + 1));
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:129:4
+  (struct.set $wasmimmutablefields.FinalizerTest $f_compoundAssignment__wasmimmutablefields_FinalizerTest(local.get $this) (i32.add (struct.get $wasmimmutablefields.FinalizerTest $f_compoundAssignment__wasmimmutablefields_FinalizerTest(local.get $this)) (i32.const 1)))
+  ;; if ((i == 3)) {
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:130:4
+  (if (i32.eq (local.get $i) (i32.const 3))
+   (then
+    (block
+     ;; (FinalizerTest.this.effectivelyFinalButNotOptimizedIfBranches = 1);
+     ;;@ wasmimmutablefields/WasmImmutableFields.java:131:6
+     (struct.set $wasmimmutablefields.FinalizerTest $f_effectivelyFinalButNotOptimizedIfBranches__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+    )
+   )(else
+    (block
+     ;; (FinalizerTest.this.effectivelyFinalButNotOptimizedIfBranches = 1);
+     ;;@ wasmimmutablefields/WasmImmutableFields.java:133:6
+     (struct.set $wasmimmutablefields.FinalizerTest $f_effectivelyFinalButNotOptimizedIfBranches__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+    )
+   )
+  )
+  (block
+   ;; (FinalizerTest.this.effectivelyFinalButNotOptimizedNestedBlock = 1);
+   ;;@ wasmimmutablefields/WasmImmutableFields.java:136:6
+   (struct.set $wasmimmutablefields.FinalizerTest $f_effectivelyFinalButNotOptimizedNestedBlock__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+  )
+  ;; (FinalizerTest.this.writtenInInitAndConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:138:4
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenInInitAndConstructor__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+ )
+)
+
+;;; FinalizerTest FinalizerTest.$create(int x)
+(func $$create__int__wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest
+ (param $x i32)
+ (result (ref null $wasmimmutablefields.FinalizerTest))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:141:2
+ (local $$instance (ref null $wasmimmutablefields.FinalizerTest))
+ (block
+  ;; FinalizerTest $instance = new FinalizerTest.<init>(0,1,0,0,0,0,0,0,0,0,0,0);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:141:2
+  (local.set $$instance (struct.new $wasmimmutablefields.FinalizerTest (ref.as_non_null (global.get $wasmimmutablefields.FinalizerTest.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.FinalizerTest.itable)) (i32.const 0) (i32.const 1) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
+  ;; $instance.$ctor(x);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:141:2
+  (call $$ctor__int__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (local.get $$instance)(local.get $x))
+  ;; return $instance;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:141:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void FinalizerTest.$ctor(int x)
+(func $$ctor__int__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest
+ (param $this (ref null $wasmimmutablefields.FinalizerTest))
+ (param $x i32)
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:141:2
+ (local $i i32)
+ (block
+  ;; wasmimmutablefields.FinalizerTest.$clinit();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:141:23
+  (call $$clinit__void@wasmimmutablefields.FinalizerTest )
+  ;; FinalizerTest.this.$ctor();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:142:4
+  (call $$ctor__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (local.get $this))
+  ;; int i = FinalizerTest.this.effectivelyFinalField;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:145:4
+  (local.set $i (struct.get $wasmimmutablefields.FinalizerTest $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest(local.get $this)))
+  ;; (FinalizerTest.this.writtenInDelegatingConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:147:4
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenInDelegatingConstructor__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+  ;; (FinalizerTest.this.writtenOnlyInDelegatingConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:148:4
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenOnlyInDelegatingConstructor__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+  ;; (FinalizerTest.this.writtenInInitializerAndInDelegatingConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:149:4
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenInInitializerAndInDelegatingConstructor__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+ )
+)
+
+;;; void FinalizerTest.foo()
+(func $m_foo__void_$pp_wasmimmutablefields@wasmimmutablefields.FinalizerTest
+ (type $function.m_foo__void_$pp_wasmimmutablefields)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:152:7
+ (local $o (ref null $wasmimmutablefields.FinalizerTest))
+ (local $i i32)
+ (local $this (ref null $wasmimmutablefields.FinalizerTest))
+ (local.set $this (ref.cast_static $wasmimmutablefields.FinalizerTest (local.get $this.untyped)))
+ (block
+  ;; FinalizerTest o = null;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:153:4
+  (local.set $o (ref.null $wasmimmutablefields.FinalizerTest))
+  ;; (o.writtenOutsideConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:154:4
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenOutsideConstructor__wasmimmutablefields_FinalizerTest(local.get $o) (i32.const 1))
+  ;; int i = FinalizerTest.this.effectivelyFinalField;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:157:4
+  (local.set $i (struct.get $wasmimmutablefields.FinalizerTest $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest(local.get $this)))
+ )
+)
+(elem declare func $m_foo__void_$pp_wasmimmutablefields@wasmimmutablefields.FinalizerTest)
+
+;;; void FinalizerTest.$init()
+(func $$init__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest
+ (param $this (ref null $wasmimmutablefields.FinalizerTest))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:109:6
+ (block
+  ;; (FinalizerTest.this.readInInit = FinalizerTest.this.effectivelyFinalField);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:111:2
+  (struct.set $wasmimmutablefields.FinalizerTest $f_readInInit__wasmimmutablefields_FinalizerTest(local.get $this) (struct.get $wasmimmutablefields.FinalizerTest $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest(local.get $this)))
+  ;; (FinalizerTest.this.writtenOutsideConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:113:2
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenOutsideConstructor__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+  ;; (FinalizerTest.this.writtenInDelegatingConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:115:2
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenInDelegatingConstructor__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+  ;; (FinalizerTest.this.writtenInInitAndConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:119:2
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenInInitAndConstructor__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+  ;; (FinalizerTest.this.writtenInInitializerAndInDelegatingConstructor = 1);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:120:2
+  (struct.set $wasmimmutablefields.FinalizerTest $f_writtenInInitializerAndInDelegatingConstructor__wasmimmutablefields_FinalizerTest(local.get $this) (i32.const 1))
+ )
+)
+
+;;; void FinalizerTest.$clinit()
+(func $$clinit__void@wasmimmutablefields.FinalizerTest
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:109:6
+ (block
+  ;; if (wasmimmutablefields.FinalizerTest.$initialized) return;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:109:6
+  (if (global.get $f_$initialized__wasmimmutablefields_FinalizerTest)
+   (then
+    ;; return;
+    ;;@ wasmimmutablefields/WasmImmutableFields.java:109:6
+    (return )
+   )
+  )
+  ;; (wasmimmutablefields.FinalizerTest.$initialized = true);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:109:6
+  (global.set $f_$initialized__wasmimmutablefields_FinalizerTest (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:109:6
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> FinalizerTest.getClass()
+(func $m_getClass__java_lang_Class@wasmimmutablefields.FinalizerTest
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $wasmimmutablefields.FinalizerTest))
+ (local.set $this (ref.cast_static $wasmimmutablefields.FinalizerTest (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getWasmimmutablefields.FinalizerTest();
+  (return (call $function.no.side.effects.$getWasmimmutablefields.FinalizerTest__java_lang_Class (ref.func $$getWasmimmutablefields.FinalizerTest__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.FinalizerTest)

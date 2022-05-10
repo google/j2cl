@@ -20,9 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
-/**
- * Class for unary expressions.
- */
+/** Class for unary expressions. */
 @Visitable
 public abstract class UnaryExpression extends Expression {
   @Visitable Expression operand;
@@ -40,6 +38,11 @@ public abstract class UnaryExpression extends Expression {
   @Override
   public boolean isCompileTimeConstant() {
     return !getOperator().hasSideEffect() && getOperand().isCompileTimeConstant();
+  }
+
+  @Override
+  public boolean isSimpleOrCompoundAssignment() {
+    return getOperator().hasSideEffect();
   }
 
   @Override

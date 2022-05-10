@@ -1,0 +1,108 @@
+goog.module('wasmimmutablefields.FinalizerTest$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class FinalizerTest extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_effectivelyFinalField__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_readInInit__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_writtenOutsideConstructor__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_readBeforeWrite__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_writtenInDelegatingConstructor__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_compoundAssignment__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_effectivelyFinalButNotOptimizedIfBranches__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_effectivelyFinalButNotOptimizedNestedBlock__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_writtenInInitAndConstructor__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_writtenInInitializerAndInDelegatingConstructor__wasmimmutablefields_FinalizerTest = 0;
+  /**@type {number}*/
+  this.f_writtenOnlyInDelegatingConstructor__wasmimmutablefields_FinalizerTest = 0;
+ }
+ //Factory method corresponding to constructor 'FinalizerTest()'.
+ /** @return {!FinalizerTest} */
+ static $create__() {
+  FinalizerTest.$clinit();
+  let $instance = new FinalizerTest();
+  $instance.$ctor__wasmimmutablefields_FinalizerTest__();
+  return $instance;
+ }
+ //Initialization from constructor 'FinalizerTest()'.
+ 
+ $ctor__wasmimmutablefields_FinalizerTest__() {
+  this.$ctor__java_lang_Object__();
+  this.$init___$p_wasmimmutablefields_FinalizerTest();
+  this.f_readBeforeWrite__wasmimmutablefields_FinalizerTest = this.f_readBeforeWrite__wasmimmutablefields_FinalizerTest + 1 | 0;
+  let i = this.f_effectivelyFinalField__wasmimmutablefields_FinalizerTest;
+  this.f_compoundAssignment__wasmimmutablefields_FinalizerTest = this.f_compoundAssignment__wasmimmutablefields_FinalizerTest + 1 | 0;
+  if (i == 3) {
+   this.f_effectivelyFinalButNotOptimizedIfBranches__wasmimmutablefields_FinalizerTest = 1;
+  } else {
+   this.f_effectivelyFinalButNotOptimizedIfBranches__wasmimmutablefields_FinalizerTest = 1;
+  }
+  {
+   this.f_effectivelyFinalButNotOptimizedNestedBlock__wasmimmutablefields_FinalizerTest = 1;
+  }
+  this.f_writtenInInitAndConstructor__wasmimmutablefields_FinalizerTest = 1;
+ }
+ //Factory method corresponding to constructor 'FinalizerTest(int)'.
+ /** @return {!FinalizerTest} */
+ static $create__int(/** number */ x) {
+  FinalizerTest.$clinit();
+  let $instance = new FinalizerTest();
+  $instance.$ctor__wasmimmutablefields_FinalizerTest__int(x);
+  return $instance;
+ }
+ //Initialization from constructor 'FinalizerTest(int)'.
+ 
+ $ctor__wasmimmutablefields_FinalizerTest__int(/** number */ x) {
+  this.$ctor__wasmimmutablefields_FinalizerTest__();
+  let i = this.f_effectivelyFinalField__wasmimmutablefields_FinalizerTest;
+  this.f_writtenInDelegatingConstructor__wasmimmutablefields_FinalizerTest = 1;
+  this.f_writtenOnlyInDelegatingConstructor__wasmimmutablefields_FinalizerTest = 1;
+  this.f_writtenInInitializerAndInDelegatingConstructor__wasmimmutablefields_FinalizerTest = 1;
+ }
+ 
+ m_foo___$pp_wasmimmutablefields() {
+  let o = null;
+  o.f_writtenOutsideConstructor__wasmimmutablefields_FinalizerTest = 1;
+  let i = this.f_effectivelyFinalField__wasmimmutablefields_FinalizerTest;
+ }
+ /** @private */
+ $init___$p_wasmimmutablefields_FinalizerTest() {
+  this.f_effectivelyFinalField__wasmimmutablefields_FinalizerTest = 1;
+  this.f_readInInit__wasmimmutablefields_FinalizerTest = this.f_effectivelyFinalField__wasmimmutablefields_FinalizerTest;
+  this.f_writtenOutsideConstructor__wasmimmutablefields_FinalizerTest = 1;
+  this.f_writtenInDelegatingConstructor__wasmimmutablefields_FinalizerTest = 1;
+  this.f_writtenInInitAndConstructor__wasmimmutablefields_FinalizerTest = 1;
+  this.f_writtenInInitializerAndInDelegatingConstructor__wasmimmutablefields_FinalizerTest = 1;
+ }
+ 
+ static $clinit() {
+  FinalizerTest.$clinit = () =>{};
+  FinalizerTest.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FinalizerTest;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(FinalizerTest, 'wasmimmutablefields.FinalizerTest');
+
+exports = FinalizerTest;
+
+//# sourceMappingURL=FinalizerTest.js.map

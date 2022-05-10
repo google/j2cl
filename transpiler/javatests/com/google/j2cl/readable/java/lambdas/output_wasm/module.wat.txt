@@ -790,7 +790,7 @@
  (field $vtable (ref $lambdas.Lambdas.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__lambdas_Lambdas (mut i32))
+ (field $f_field__lambdas_Lambdas i32)
   $java.lang.Object)
 )
 (type $lambdas.Lambdas.vtable (struct_subtype 
@@ -823,9 +823,9 @@
  ;;@ lambdas/Lambdas.java:24:13
  (local $$instance (ref null $lambdas.Lambdas))
  (block
-  ;; Lambdas $instance = new Lambdas.<init>(0,0);
+  ;; Lambdas $instance = new Lambdas.<init>(0,100);
   ;;@ lambdas/Lambdas.java:24:13
-  (local.set $$instance (struct.new $lambdas.Lambdas (ref.as_non_null (global.get $lambdas.Lambdas.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $lambdas.Lambdas (ref.as_non_null (global.get $lambdas.Lambdas.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.itable)) (i32.const 0) (i32.const 100)))
   ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:24:13
   (call $$ctor__void_$p_lambdas_Lambdas@lambdas.Lambdas (local.get $$instance))
@@ -1282,9 +1282,6 @@
  (param $this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:24:13
  (block
-  ;; (Lambdas.this.field = 100);
-  ;;@ lambdas/Lambdas.java:25:2
-  (struct.set $lambdas.Lambdas $f_field__lambdas_Lambdas(local.get $this) (i32.const 100))
  )
 )
 

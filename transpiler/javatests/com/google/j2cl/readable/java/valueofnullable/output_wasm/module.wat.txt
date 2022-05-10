@@ -20,8 +20,8 @@
  (field $vtable (ref $valueofnullable.ValueOfNullable.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_nullableString__valueofnullable_ValueOfNullable (mut (ref null $java.lang.String)))
- (field $f_someChar__valueofnullable_ValueOfNullable (mut i16))
+ (field $f_nullableString__valueofnullable_ValueOfNullable (ref null $java.lang.String))
+ (field $f_someChar__valueofnullable_ValueOfNullable i16)
  (field $f_result__valueofnullable_ValueOfNullable (mut (ref null $java.lang.String)))
   $java.lang.Object)
 )
@@ -39,9 +39,9 @@
  ;;@ valueofnullable/ValueOfNullable.java:18:13
  (local $$instance (ref null $valueofnullable.ValueOfNullable))
  (block
-  ;; ValueOfNullable $instance = new ValueOfNullable.<init>(0,null,0,null);
+  ;; ValueOfNullable $instance = new ValueOfNullable.<init>(0,javaemul.internal.StringPool.$getString_|b|(),97,null);
   ;;@ valueofnullable/ValueOfNullable.java:18:13
-  (local.set $$instance (struct.new $valueofnullable.ValueOfNullable (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.vtable)) (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (ref.null $java.lang.String)))
+  (local.set $$instance (struct.new $valueofnullable.ValueOfNullable (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.vtable)) (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|b|__java_lang_String (ref.func $$getString_|b|__java_lang_String@javaemul.internal.StringPool) ) (i32.const 97) (ref.null $java.lang.String)))
   ;; $instance.$ctor();
   ;;@ valueofnullable/ValueOfNullable.java:18:13
   (call $$ctor__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable (local.get $$instance))
@@ -74,12 +74,6 @@
  ;;@ valueofnullable/ValueOfNullable.java:18:13
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (block
-  ;; (ValueOfNullable.this.nullableString = javaemul.internal.StringPool.$getString_|b|());
-  ;;@ valueofnullable/ValueOfNullable.java:19:2
-  (struct.set $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this) (call $function.no.side.effects.$getString_|b|__java_lang_String (ref.func $$getString_|b|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; (ValueOfNullable.this.someChar = 97);
-  ;;@ valueofnullable/ValueOfNullable.java:20:2
-  (struct.set $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this) (i32.const 97))
   ;; (ValueOfNullable.this.result = (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(ValueOfNullable.this.someChar),$stringBuilder.append(ValueOfNullable.this.nullableString),$stringBuilder.toString()));
   ;;@ valueofnullable/ValueOfNullable.java:21:2
   (struct.set $valueofnullable.ValueOfNullable $f_result__valueofnullable_ValueOfNullable(local.get $this) (block (result (ref null $java.lang.String))

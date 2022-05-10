@@ -257,7 +257,7 @@
  (field $vtable (ref $jsinnerclass.Main.Outer.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_a__jsinnerclass_Main_Outer (mut i32))
+ (field $f_a__jsinnerclass_Main_Outer i32)
   $java.lang.Object)
 )
 (type $jsinnerclass.Main.Outer.vtable (struct_subtype 
@@ -275,9 +275,9 @@
  ;;@ jsinnerclass/Main.java:21:15
  (local $$instance (ref null $jsinnerclass.Main.Outer))
  (block
-  ;; Outer $instance = new Outer.<init>(0,0);
+  ;; Outer $instance = new Outer.<init>(0,2);
   ;;@ jsinnerclass/Main.java:21:15
-  (local.set $$instance (struct.new $jsinnerclass.Main.Outer (ref.as_non_null (global.get $jsinnerclass.Main.Outer.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $jsinnerclass.Main.Outer (ref.as_non_null (global.get $jsinnerclass.Main.Outer.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.itable)) (i32.const 0) (i32.const 2)))
   ;; $instance.$ctor();
   ;;@ jsinnerclass/Main.java:21:15
   (call $$ctor__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (local.get $$instance))
@@ -329,9 +329,6 @@
  (param $this (ref null $jsinnerclass.Main.Outer))
  ;;@ jsinnerclass/Main.java:21:15
  (block
-  ;; (Outer.this.a = 2);
-  ;;@ jsinnerclass/Main.java:22:4
-  (struct.set $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this) (i32.const 2))
  )
 )
 

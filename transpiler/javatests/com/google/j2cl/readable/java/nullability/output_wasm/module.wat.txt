@@ -334,16 +334,16 @@
  (field $vtable (ref $nullability.Nullability.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f1__nullability_Nullability_ (mut (ref null $java.lang.String)))
- (field $f_f2__nullability_Nullability_ (mut (ref null $java.lang.String)))
- (field $f_f3__nullability_Nullability_ (mut (ref null $java.lang.String)))
+ (field $f_f1__nullability_Nullability_ (ref null $java.lang.String))
+ (field $f_f2__nullability_Nullability_ (ref null $java.lang.String))
+ (field $f_f3__nullability_Nullability_ (ref null $java.lang.String))
  (field $f_f4__nullability_Nullability_ (mut (ref null $java.lang.Object)))
  (field $f_f5__nullability_Nullability_ (mut (ref null $java.lang.Object)))
  (field $f_f6__nullability_Nullability_ (mut (ref null $java.lang.Object)))
- (field $f_f7__nullability_Nullability_ (mut (ref null $java.lang.Object)))
- (field $f_f8__nullability_Nullability_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f9__nullability_Nullability_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f10__nullability_Nullability_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ (field $f_f7__nullability_Nullability_ (ref null $java.lang.Object))
+ (field $f_f8__nullability_Nullability_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f9__nullability_Nullability_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f10__nullability_Nullability_ (ref null $javaemul.internal.WasmArray.OfObject))
  (field $f_f12__nullability_Nullability_ (mut (ref null $java.lang.Object)))
  (field $f_f13__nullability_Nullability_ (mut (ref null $java.lang.Object)))
  (field $f_f14__nullability_Nullability_ (mut (ref null $java.lang.Object)))
@@ -368,9 +368,9 @@
  ;;@ nullability/Nullability.java:48:9
  (local $$instance (ref null $nullability.Nullability))
  (block
-  ;; Nullability $instance = new Nullability.<init>(0,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  ;; Nullability $instance = new Nullability.<init>(0,javaemul.internal.StringPool.$getString_|Hello|(),null,null,null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null,null,null);
   ;;@ nullability/Nullability.java:48:9
-  (local.set $$instance (struct.new $nullability.Nullability (ref.as_non_null (global.get $nullability.Nullability.vtable)) (ref.as_non_null (global.get $nullability.Nullability.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.Nullability (ref.as_non_null (global.get $nullability.Nullability.vtable)) (ref.as_non_null (global.get $nullability.Nullability.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(a);
   ;;@ nullability/Nullability.java:48:9
   (call $$ctor__java_lang_String__void_$p_nullability_Nullability@nullability.Nullability (local.get $$instance)(local.get $a))
@@ -474,15 +474,6 @@
  (param $this (ref null $nullability.Nullability))
  ;;@ nullability/Nullability.java:29:13
  (block
-  ;; (Nullability.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
-  ;;@ nullability/Nullability.java:30:2
-  (struct.set $nullability.Nullability $f_f1__nullability_Nullability_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; (Nullability.this.f2 = null);
-  ;;@ nullability/Nullability.java:31:2
-  (struct.set $nullability.Nullability $f_f2__nullability_Nullability_(local.get $this) (ref.null $java.lang.String))
-  ;; (Nullability.this.f3 = null);
-  ;;@ nullability/Nullability.java:32:2
-  (struct.set $nullability.Nullability $f_f3__nullability_Nullability_(local.get $this) (ref.null $java.lang.String))
   ;; (Nullability.this.f4 = java.util.ArrayList.$create());
   ;;@ nullability/Nullability.java:33:2
   (struct.set $nullability.Nullability $f_f4__nullability_Nullability_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
@@ -492,18 +483,6 @@
   ;; (Nullability.this.f6 = java.util.ArrayList.$create());
   ;;@ nullability/Nullability.java:35:2
   (struct.set $nullability.Nullability $f_f6__nullability_Nullability_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
-  ;; (Nullability.this.f7 = null);
-  ;;@ nullability/Nullability.java:36:2
-  (struct.set $nullability.Nullability $f_f7__nullability_Nullability_(local.get $this) (ref.null $java.lang.Object))
-  ;; (Nullability.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/Nullability.java:37:2
-  (struct.set $nullability.Nullability $f_f8__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (Nullability.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/Nullability.java:39:2
-  (struct.set $nullability.Nullability $f_f9__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (Nullability.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/Nullability.java:41:2
-  (struct.set $nullability.Nullability $f_f10__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (Nullability.this.f12 = java.util.ArrayList.$create());
   ;;@ nullability/Nullability.java:43:2
   (struct.set $nullability.Nullability $f_f12__nullability_Nullability_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
@@ -1493,17 +1472,17 @@
  (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f1__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.String)))
- (field $f_f2__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.String)))
- (field $f_f3__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.String)))
+ (field $f_f1__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $java.lang.String))
+ (field $f_f2__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $java.lang.String))
+ (field $f_f3__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $java.lang.String))
  (field $f_f4__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f5__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f6__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object)))
- (field $f_f7__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object)))
- (field $f_f8__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f9__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f10__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f11__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Void)))
+ (field $f_f7__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $java.lang.Object))
+ (field $f_f8__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f9__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f10__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f11__nullability_defaultnotnullable_DefaultNotNullable_ (ref null $java.lang.Void))
  (field $f_f12__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f13__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f14__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object)))
@@ -1526,9 +1505,9 @@
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:43:9
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable))
  (block
-  ;; DefaultNotNullable $instance = new DefaultNotNullable.<init>(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  ;; DefaultNotNullable $instance = new DefaultNotNullable.<init>(0,javaemul.internal.StringPool.$getString_|Hello|(),null,null,null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null,null,null,null);
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:43:9
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:43:9
   (call $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable@nullability.defaultnotnullable.DefaultNotNullable (local.get $$instance))
@@ -1612,15 +1591,6 @@
  (param $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:25:13
  (block
-  ;; (DefaultNotNullable.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:26:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f1__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; (DefaultNotNullable.this.f2 = null);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:27:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f2__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (ref.null $java.lang.String))
-  ;; (DefaultNotNullable.this.f3 = null);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:28:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f3__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (ref.null $java.lang.String))
   ;; (DefaultNotNullable.this.f4 = java.util.ArrayList.$create());
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:29:2
   (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f4__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
@@ -1630,21 +1600,6 @@
   ;; (DefaultNotNullable.this.f6 = java.util.ArrayList.$create());
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:31:2
   (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f6__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
-  ;; (DefaultNotNullable.this.f7 = null);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:32:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f7__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (ref.null $java.lang.Object))
-  ;; (DefaultNotNullable.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:33:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f8__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (DefaultNotNullable.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:35:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f9__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (DefaultNotNullable.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:37:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f10__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (DefaultNotNullable.this.f11 = null);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:38:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f11__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (ref.null $java.lang.Void))
   ;; (DefaultNotNullable.this.f12 = java.lang.Object.$create());
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:39:2
   (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f12__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__java_lang_Object@java.lang.Object ))
@@ -1887,17 +1842,17 @@
  (field $vtable (ref $nullability.defaultnullable.DefaultNullable.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f1__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.String)))
- (field $f_f2__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.String)))
- (field $f_f3__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.String)))
+ (field $f_f1__nullability_defaultnullable_DefaultNullable_ (ref null $java.lang.String))
+ (field $f_f2__nullability_defaultnullable_DefaultNullable_ (ref null $java.lang.String))
+ (field $f_f3__nullability_defaultnullable_DefaultNullable_ (ref null $java.lang.String))
  (field $f_f4__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f5__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f6__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
- (field $f_f7__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
- (field $f_f8__nullability_defaultnullable_DefaultNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f9__nullability_defaultnullable_DefaultNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f10__nullability_defaultnullable_DefaultNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f11__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Void)))
+ (field $f_f7__nullability_defaultnullable_DefaultNullable_ (ref null $java.lang.Object))
+ (field $f_f8__nullability_defaultnullable_DefaultNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f9__nullability_defaultnullable_DefaultNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f10__nullability_defaultnullable_DefaultNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f11__nullability_defaultnullable_DefaultNullable_ (ref null $java.lang.Void))
  (field $f_f12__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f13__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f14__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
@@ -1938,9 +1893,9 @@
  ;;@ nullability/defaultnullable/DefaultNullable.java:47:9
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable))
  (block
-  ;; DefaultNullable $instance = new DefaultNullable.<init>(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  ;; DefaultNullable $instance = new DefaultNullable.<init>(0,javaemul.internal.StringPool.$getString_|Hello|(),null,null,null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null,null,null,null);
   ;;@ nullability/defaultnullable/DefaultNullable.java:47:9
-  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/defaultnullable/DefaultNullable.java:47:9
   (call $$ctor__void_$p_nullability_defaultnullable_DefaultNullable@nullability.defaultnullable.DefaultNullable (local.get $$instance))
@@ -2006,15 +1961,6 @@
  (param $this (ref null $nullability.defaultnullable.DefaultNullable))
  ;;@ nullability/defaultnullable/DefaultNullable.java:25:13
  (block
-  ;; (DefaultNullable.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
-  ;;@ nullability/defaultnullable/DefaultNullable.java:26:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f1__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; (DefaultNullable.this.f2 = null);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:27:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f2__nullability_defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.String))
-  ;; (DefaultNullable.this.f3 = null);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:28:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f3__nullability_defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.String))
   ;; (DefaultNullable.this.f4 = java.util.ArrayList.$create());
   ;;@ nullability/defaultnullable/DefaultNullable.java:29:2
   (struct.set $nullability.defaultnullable.DefaultNullable $f_f4__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
@@ -2024,21 +1970,6 @@
   ;; (DefaultNullable.this.f6 = java.util.ArrayList.$create());
   ;;@ nullability/defaultnullable/DefaultNullable.java:31:2
   (struct.set $nullability.defaultnullable.DefaultNullable $f_f6__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
-  ;; (DefaultNullable.this.f7 = null);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:32:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f7__nullability_defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.Object))
-  ;; (DefaultNullable.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/defaultnullable/DefaultNullable.java:33:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f8__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (DefaultNullable.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/defaultnullable/DefaultNullable.java:35:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f9__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (DefaultNullable.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/defaultnullable/DefaultNullable.java:37:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f10__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (DefaultNullable.this.f11 = null);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:38:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f11__nullability_defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.Void))
   ;; (DefaultNullable.this.f12 = java.lang.Object.$create());
   ;;@ nullability/defaultnullable/DefaultNullable.java:39:2
   (struct.set $nullability.defaultnullable.DefaultNullable $f_f12__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__java_lang_Object@java.lang.Object ))
@@ -2086,17 +2017,17 @@
  (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.String)))
- (field $f_f2__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.String)))
- (field $f_f3__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.String)))
+ (field $f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $java.lang.String))
+ (field $f_f2__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $java.lang.String))
+ (field $f_f3__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $java.lang.String))
  (field $f_f4__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f5__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f6__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object)))
- (field $f_f7__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object)))
- (field $f_f8__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f9__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f10__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f11__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Void)))
+ (field $f_f7__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $java.lang.Object))
+ (field $f_f8__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f9__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f10__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_f11__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $java.lang.Void))
  (field $f_f12__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f13__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object)))
  (field $f_f14__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object)))
@@ -2119,9 +2050,9 @@
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:45:9
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
  (block
-  ;; ExplicitNotNullable $instance = new ExplicitNotNullable.<init>(0,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  ;; ExplicitNotNullable $instance = new ExplicitNotNullable.<init>(0,javaemul.internal.StringPool.$getString_|Hello|(),null,null,null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null,null,null,null);
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:45:9
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:45:9
   (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable@nullability.explicitnotnullable.ExplicitNotNullable (local.get $$instance))
@@ -2205,15 +2136,6 @@
  (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:27:13
  (block
-  ;; (ExplicitNotNullable.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:28:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f1__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; (ExplicitNotNullable.this.f2 = null);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:29:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f2__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (ref.null $java.lang.String))
-  ;; (ExplicitNotNullable.this.f3 = null);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:30:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f3__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (ref.null $java.lang.String))
   ;; (ExplicitNotNullable.this.f4 = java.util.ArrayList.$create());
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:31:2
   (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f4__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
@@ -2223,21 +2145,6 @@
   ;; (ExplicitNotNullable.this.f6 = java.util.ArrayList.$create());
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:33:2
   (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f6__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
-  ;; (ExplicitNotNullable.this.f7 = null);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:34:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f7__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (ref.null $java.lang.Object))
-  ;; (ExplicitNotNullable.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:35:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f8__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (ExplicitNotNullable.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:37:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f9__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (ExplicitNotNullable.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:39:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f10__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
-  ;; (ExplicitNotNullable.this.f11 = null);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:40:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f11__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (ref.null $java.lang.Void))
   ;; (ExplicitNotNullable.this.f12 = java.lang.Object.$create());
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:41:2
   (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f12__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__java_lang_Object@java.lang.Object ))

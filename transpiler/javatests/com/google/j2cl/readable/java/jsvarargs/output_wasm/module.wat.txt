@@ -190,7 +190,7 @@
  (field $vtable (ref $jsvarargs.Main.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__jsvarargs_Main (mut i32))
+ (field $f_field__jsvarargs_Main i32)
   $java.lang.Object)
 )
 (type $jsvarargs.Main.vtable (struct_subtype 
@@ -218,9 +218,9 @@
  ;;@ jsvarargs/Main.java:86:9
  (local $$instance (ref null $jsvarargs.Main))
  (block
-  ;; Main $instance = new Main.<init>(0,0);
+  ;; Main $instance = new Main.<init>(0,f);
   ;;@ jsvarargs/Main.java:86:9
-  (local.set $$instance (struct.new $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (local.get $f)))
   ;; $instance.$ctor(f);
   ;;@ jsvarargs/Main.java:86:9
   (call $$ctor__int__void_$p_jsvarargs_Main@jsvarargs.Main (local.get $$instance)(local.get $f))
@@ -242,9 +242,6 @@
   ;; Object.this.$ctor();
   ;;@ jsvarargs/Main.java:86:21
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
-  ;; (Main.this.field = f);
-  ;;@ jsvarargs/Main.java:87:4
-  (struct.set $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this) (local.get $f))
  )
 )
 
@@ -1222,7 +1219,7 @@
  (field $vtable (ref $jsvarargs.Main.SubMain.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__jsvarargs_Main (mut i32))
+ (field $f_field__jsvarargs_Main i32)
   $jsvarargs.Main)
 )
 (type $jsvarargs.Main.SubMain.vtable (struct_subtype 
@@ -1249,9 +1246,9 @@
  ;;@ jsvarargs/Main.java:63:11
  (local $$instance (ref null $jsvarargs.Main.SubMain))
  (block
-  ;; SubMain $instance = new SubMain.<init>(0,0);
+  ;; SubMain $instance = new SubMain.<init>(0,10);
   ;;@ jsvarargs/Main.java:63:11
-  (local.set $$instance (struct.new $jsvarargs.Main.SubMain (ref.as_non_null (global.get $jsvarargs.Main.SubMain.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.SubMain.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $jsvarargs.Main.SubMain (ref.as_non_null (global.get $jsvarargs.Main.SubMain.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.SubMain.itable)) (i32.const 0) (i32.const 10)))
   ;; $instance.$ctor();
   ;;@ jsvarargs/Main.java:63:11
   (call $$ctor__void_$p_jsvarargs_Main_SubMain@jsvarargs.Main.SubMain (local.get $$instance))
@@ -1390,7 +1387,7 @@
  (field $vtable (ref $jsvarargs.QualifiedSuperMethodCall.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__jsvarargs_Main (mut i32))
+ (field $f_field__jsvarargs_Main i32)
   $jsvarargs.Main)
 )
 (type $jsvarargs.QualifiedSuperMethodCall.vtable (struct_subtype 

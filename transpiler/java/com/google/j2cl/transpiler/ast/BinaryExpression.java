@@ -121,6 +121,11 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public boolean isSimpleOrCompoundAssignment() {
+    return getOperator().isSimpleOrCompoundAssignment();
+  }
+
+  @Override
   public BinaryExpression clone() {
     return newBuilder()
         .setLeftOperand(leftOperand.clone())

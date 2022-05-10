@@ -621,7 +621,7 @@
  (field $vtable (ref $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f__localclassinstaticcontext_LocalClassInStaticContext_C (mut i32))
+ (field $f_f__localclassinstaticcontext_LocalClassInStaticContext_C i32)
   $java.lang.Object)
 )
 (type $localclassinstaticcontext.LocalClassInStaticContext.C.vtable (struct_subtype 
@@ -639,9 +639,9 @@
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
  (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  (block
-  ;; C $instance = new C.<init>(0,0);
+  ;; C $instance = new C.<init>(0,1);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
-  (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.C (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.itable)) (i32.const 0) (i32.const 0)))
+  (local.set $$instance (struct.new $localclassinstaticcontext.LocalClassInStaticContext.C (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.itable)) (i32.const 0) (i32.const 1)))
   ;; $instance.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C (local.get $$instance))
@@ -694,9 +694,6 @@
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
  (block
-  ;; (C.this.f = 1);
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:43:4
-  (struct.set $localclassinstaticcontext.LocalClassInStaticContext.C $f_f__localclassinstaticcontext_LocalClassInStaticContext_C(local.get $this) (i32.const 1))
  )
 )
 
