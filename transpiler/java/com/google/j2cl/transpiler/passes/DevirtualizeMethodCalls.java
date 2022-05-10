@@ -25,10 +25,9 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
-import java.util.Map;
 
 /**
  * Devirtualizes method calls to instance methods of Object, unboxed types (Boolean, Double, String)
@@ -37,7 +36,7 @@ import java.util.Map;
 public class DevirtualizeMethodCalls extends NormalizationPass {
 
   /**
-   * Mapping from the TypeDescriptor, whose instance methods should be devirtualized, to the
+   * Mapping from the TypeDeclaration, whose instance methods should be devirtualized, to the
    * TypeDescriptor that contains the devirtualized static methods that should be dispatched to.
    *
    * <p>The instance methods of unboxed types (Boolean, Double, String) are translated to
@@ -45,20 +44,31 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
    * Object and the super classes/interfaces of unboxed types are translated to the trampoline
    * methods which are implemented in corresponding types (Objects, Numbers, etc.).
    */
-  private final Map<TypeDescriptor, DeclaredTypeDescriptor> devirtualizeTargetByOriginType =
-      ImmutableMap.<TypeDescriptor, DeclaredTypeDescriptor>builder()
-          .put(TypeDescriptors.get().javaLangObject, BootstrapType.OBJECTS.getDescriptor())
-          .put(TypeDescriptors.get().javaLangBoolean, TypeDescriptors.get().javaLangBoolean)
-          .put(TypeDescriptors.get().javaLangDouble, TypeDescriptors.get().javaLangDouble)
-          .put(TypeDescriptors.get().javaLangString, TypeDescriptors.get().javaLangString)
-          .put(TypeDescriptors.get().javaLangNumber, BootstrapType.NUMBERS.getDescriptor())
-          .put(
-              TypeDescriptors.get().javaLangComparable.toRawTypeDescriptor(),
-              BootstrapType.COMPARABLES.getDescriptor())
-          .put(
-              TypeDescriptors.get().javaLangCharSequence,
-              BootstrapType.CHAR_SEQUENCES.getDescriptor())
-          .build();
+  private final ImmutableMap<TypeDeclaration, DeclaredTypeDescriptor>
+      devirtualizeTargetByOriginType =
+          ImmutableMap.<TypeDeclaration, DeclaredTypeDescriptor>builder()
+              .put(
+                  TypeDescriptors.get().javaLangObject.getTypeDeclaration(),
+                  BootstrapType.OBJECTS.getDescriptor())
+              .put(
+                  TypeDescriptors.get().javaLangBoolean.getTypeDeclaration(),
+                  TypeDescriptors.get().javaLangBoolean)
+              .put(
+                  TypeDescriptors.get().javaLangDouble.getTypeDeclaration(),
+                  TypeDescriptors.get().javaLangDouble)
+              .put(
+                  TypeDescriptors.get().javaLangString.getTypeDeclaration(),
+                  TypeDescriptors.get().javaLangString)
+              .put(
+                  TypeDescriptors.get().javaLangNumber.getTypeDeclaration(),
+                  BootstrapType.NUMBERS.getDescriptor())
+              .put(
+                  TypeDescriptors.get().javaLangComparable.getTypeDeclaration(),
+                  BootstrapType.COMPARABLES.getDescriptor())
+              .put(
+                  TypeDescriptors.get().javaLangCharSequence.getTypeDeclaration(),
+                  BootstrapType.CHAR_SEQUENCES.getDescriptor())
+              .build();
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -94,7 +104,8 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
             }
 
             DeclaredTypeDescriptor targetType =
-                devirtualizeTargetByOriginType.get(originType.toRawTypeDescriptor());
+                devirtualizeTargetByOriginType.get(originType.getTypeDeclaration());
+
             if (targetType == null) {
               return methodCall;
             }
