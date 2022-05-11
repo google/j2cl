@@ -16,13 +16,15 @@ JS_ONLY_SRCS = glob([
     "**/*.js",
 ])
 
+SRCS = glob(
+    ["**/*.java"],
+    exclude = JS_ONLY_SRCS,
+)
+
 j2cl_library(
     name = "emul_tests_lib",
     testonly = 1,
-    srcs = glob([
-        "**/*.java",
-        "**/*.js",
-    ]),
+    srcs = SRCS,
     generate_build_test = False,
     javacopts = [
         "-Xep:DoNotCall:OFF",
@@ -41,15 +43,12 @@ j2cl_library(
     ],
 )
 
-# This runs all test for JRE in JVM. This way we can make sure that our tests
+# This runs all test for emul in JVM, this way we can make sure that our tests
 # assert the right behaviour for the JRE emulation.
 java_test(
     name = "AllEmulTest_Java",
     size = "small",
-    srcs = glob(
-        ["**/*.java"],
-        exclude = JS_ONLY_SRCS,
-    ),
+    srcs = SRCS,
     javacopts = [
         "-Xep:DoNotCall:OFF",
         "-Xep:IdentityBinaryExpression:OFF",
@@ -69,43 +68,67 @@ java_test(
 
 j2cl_multi_test(
     name = "BigDecimal",
+    enable_wasm = False,  # b/229006894
     shard_count = 5,
     test_class = "com.google.j2cl.jre.BigDecimalSuite",
+    deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "BigInteger",
     shard_count = 8,
     test_class = "com.google.j2cl.jre.BigIntegerSuite",
+    deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "Collections",
+    enable_wasm = False,  # b/229006894
     shard_count = 16,
     test_class = "com.google.j2cl.jre.CollectionsSuite",
+    deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "Concurrent",
     shard_count = 5,
     test_class = "com.google.j2cl.jre.ConcurrentSuite",
+    deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "Emul",
+    enable_wasm = False,  # b/229006894
     shard_count = 16,
     test_class = "com.google.j2cl.jre.EmulSuite",
+    deps = [":emul_tests_lib"],
 )
 
 j2cl_multi_test(
     name = "EmulJava8",
+    enable_wasm = False,  # b/229006894
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulJava8Suite",
+    deps = [":emul_tests_lib"],
+)
+
+j2cl_library(
+    name = "js_tests_lib",
+    testonly = 1,
+    srcs = JS_ONLY_SRCS,
+    generate_build_test = False,
+    deps = [
+        ":gwt_test_case-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:junit-j2cl",
+    ],
 )
 
 j2cl_multi_test(
     name = "JsSuite",
+    enable_wasm = False,
     test_class = "com.google.j2cl.jre.JsSuite",
+    deps = [":js_tests_lib"],
 )
 
 # A smoke check that verifies es5 transpiled test works

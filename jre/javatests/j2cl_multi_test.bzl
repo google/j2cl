@@ -12,10 +12,9 @@ j2cl_multi_test(
 
 """
 
-load("//build_defs:rules.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_test", "j2wasm_test")
 
-def j2cl_multi_test(name, test_class, **kwargs):
-    deps = [":emul_tests_lib", "//third_party/java/junit:junit-j2cl"]
+def j2cl_multi_test(name, test_class, deps, enable_wasm = True, **kwargs):
     j2cl_test(
         name = name,
         test_class = test_class,
@@ -36,3 +35,19 @@ def j2cl_multi_test(name, test_class, **kwargs):
         ],
         **kwargs
     )
+
+    if enable_wasm:
+        j2wasm_deps = [dep + "-j2wasm" for dep in deps]
+        j2wasm_test(
+            name = name + "-j2wasm",
+            test_class = test_class,
+            runtime_deps = j2wasm_deps,
+            **kwargs
+        )
+        j2wasm_test(
+            name = name + "-j2wasm_optimized",
+            test_class = test_class,
+            runtime_deps = j2wasm_deps,
+            optimize = 1,
+            **kwargs
+        )
