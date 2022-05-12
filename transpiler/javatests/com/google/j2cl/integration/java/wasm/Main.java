@@ -17,12 +17,14 @@ package wasm;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
+import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.annotations.Wasm;
@@ -46,6 +48,7 @@ public class Main {
     testArrayGetClass();
     testWasmArrayApis();
     testArrayList();
+    testHashMap();
     testLinkedHashMap();
     testSystemArrayCopy();
     testString();
@@ -277,6 +280,35 @@ public class Main {
     assertEquals(list.toArray(), new Object[] {});
     list.add("z");
     assertEquals(list.toArray(), new Object[] {"z"});
+  }
+
+  private static void testHashMap() {
+    HashMap<String, String> map = new HashMap<>();
+    map.put("a", "A");
+    map.put("b", "B");
+    map.put("c", "C");
+
+    String value =
+        map.computeIfAbsent(
+            "a",
+            k -> {
+              fail();
+              return null;
+            });
+    assertEquals("A", value);
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+
+    map.remove("a");
+    value = map.computeIfAbsent("a", String::toUpperCase);
+    assertEquals("A", value);
+    assertTrue(map.containsKey("a"));
+    assertEquals("A", map.get("a"));
+
+    map.remove("a");
+    value = map.computeIfAbsent("a", k -> null);
+    assertNull(value);
+    assertFalse(map.containsKey("a"));
   }
 
   private static void testLinkedHashMap() {

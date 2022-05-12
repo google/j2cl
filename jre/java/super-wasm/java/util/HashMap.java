@@ -17,6 +17,7 @@
 package java.util;
 
 import java.io.Serializable;
+import java.util.function.Function;
 
 /** Wasm specific {@code HashMap} implementation based on Android. */
 public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Serializable {
@@ -233,6 +234,31 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     return entryForNullKey != null && value.equals(entryForNullKey.value);
   }
 
+  public V computeIfAbsent(K key, Function<? super K, ? extends V> remappingFunction) {
+    if (key == null) {
+      return computeValueForNullKeyIfAbsent(remappingFunction);
+    }
+    int hash = secondaryHash(key.hashCode());
+    HashMapEntry<K, V>[] tab = table;
+    int index = hash & (tab.length - 1);
+    for (HashMapEntry<K, V> e = tab[index]; e != null; e = e.next) {
+      if (e.hash == hash && key.equals(e.key)) {
+        return e.value;
+      }
+    }
+    V value = remappingFunction.apply(key);
+    if (value != null) {
+      // No entry for (non-null) key is present; create one
+      modCount++;
+      if (size++ > threshold) {
+        tab = doubleCapacity();
+        index = hash & (tab.length - 1);
+      }
+      addNewEntry(key, value, hash, index);
+    }
+    return value;
+  }
+
   @Override
   public V put(K key, V value) {
     if (key == null) {
@@ -271,6 +297,21 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
       V oldValue = entry.value;
       entry.value = value;
       return oldValue;
+    }
+  }
+
+  private V computeValueForNullKeyIfAbsent(Function<? super K, ? extends V> remappingFunction) {
+    HashMapEntry<K, V> entry = entryForNullKey;
+    if (entry == null) {
+      V value = remappingFunction.apply(null);
+      if (value != null) {
+        addNewEntryForNullKey(value);
+        size++;
+        modCount++;
+      }
+      return null;
+    } else {
+      return entry.value;
     }
   }
 
