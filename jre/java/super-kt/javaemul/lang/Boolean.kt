@@ -22,8 +22,16 @@ package javaemul.lang
  */
 operator fun Boolean.Companion.invoke(b: Boolean): Boolean = b
 
+val Boolean.Companion.TRUE: Boolean
+  inline get() = true
+
+val Boolean.Companion.FALSE: Boolean
+  inline get() = false
+
 fun Boolean.Companion.valueOf(b: Boolean): Boolean = b
 
 fun Boolean.booleanValue(): Boolean = this
 
 fun Boolean.Companion.hashCode(b: Boolean): Int = b.hashCode()
+
+fun Boolean.Companion.toString(b: Boolean): String = b.toString()

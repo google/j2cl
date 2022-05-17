@@ -25,12 +25,24 @@ public class Main {
   }
 
   private static void testPrimitives() {
+    testBoolean();
     testInt();
     testLong();
     testDouble();
     testShort();
     testByte();
     testFloat();
+  }
+
+  private static void testBoolean() {
+    assertEquals((Object) true, Boolean.TRUE);
+    assertEquals((Object) false, Boolean.FALSE);
+    assertTrue(Boolean.TRUE.booleanValue());
+    assertFalse(Boolean.FALSE.booleanValue());
+    assertEquals("true", Boolean.toString(true));
+    assertEquals("false", Boolean.toString(false));
+    assertTrue((Object) Boolean.TRUE == (Object) Boolean.valueOf(true));
+    assertTrue((Object) Boolean.FALSE == (Object) Boolean.valueOf(false));
   }
 
   private static void testInt() {

@@ -8,4 +8,5 @@ package(licenses = ["notice"])
 integration_test(
     name = "j2ktjre",
     srcs = glob(["*.java"]),
+    enable_wasm = False,
 )
