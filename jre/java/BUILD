@@ -22,6 +22,7 @@ ALLOWED_J2KT_PACKAGES = [
     "//third_party/java_src/jsinterop_annotations/java/jsinterop/annotations:__pkg__",
     "//transpiler/javatests:__subpackages__",
     "//benchmarking:__subpackages__",
+    "//third_party/java_src/xplat/kmpbench:__subpackages__",
 ]
 
 JRE_JAVAC_VERSION_OPTS = select({
