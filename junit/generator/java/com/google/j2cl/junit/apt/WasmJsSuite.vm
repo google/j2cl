@@ -7,7 +7,7 @@ const testSuite = goog.require('goog.testing.testSuite');
 const TestCase = goog.require('goog.testing.TestCase');
 const j2wasm = goog.require('j2wasm');
 
-let instance;
+let exports;
 
 testSuite({
   async setUpPage() {
@@ -20,26 +20,27 @@ testSuite({
     const userImports = {
       'goog.testing.TestCase.saveMessage': msg => TestCase.getActiveTestCase().saveMessage(msg)
     }
-    instance = await j2wasm.instantiateStreaming(absolutePath, userImports);
-
-    instance.exports.setUpPageIn${testClass.simpleName()}();
-  },
-
-  setUp() {
-    instance.exports.setUpIn${testClass.simpleName()}();
+    const instance = await j2wasm.instantiateStreaming(absolutePath, userImports);
+    exports = instance.exports;
+    exports.setUpPageIn${testClass.simpleName()}();
   },
 
   tearDownPage() {
-    instance.exports.tearDownPageIn${testClass.simpleName()}();
+    // Note that exports might be null due to a failed instantiation.
+    exports?.tearDownPageIn${testClass.simpleName()}();
+  },
+
+  setUp() {
+    exports.setUpIn${testClass.simpleName()}();
   },
 
   tearDown() {
-    instance.exports.tearDownIn${testClass.simpleName()}();
+    exports.tearDownIn${testClass.simpleName()}();
   },
 
 #foreach($testMethod in ${testClass.testMethods()})
   ${testMethod.jsTestMethodName()}() {
-    instance.exports.${testMethod.jsTestMethodName()}In${testClass.simpleName()}();
+    exports.${testMethod.jsTestMethodName()}In${testClass.simpleName()}();
   },
 
 #end
