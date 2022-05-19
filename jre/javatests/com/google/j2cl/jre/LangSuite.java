@@ -31,7 +31,6 @@ import com.google.j2cl.jre.java.lang.StringBufferTest;
 import com.google.j2cl.jre.java.lang.StringTest;
 import com.google.j2cl.jre.java.lang.SystemTest;
 import com.google.j2cl.jre.java.lang.ThreadLocalTest;
-import com.google.j2cl.jre.java.lang.ThrowableStackTraceEmulTest;
 import com.google.j2cl.jre.java.lang.ThrowableTest;
 import com.google.j2cl.jre.java.lang.TypeTest;
 import com.google.j2cl.jre.java.lang.reflect.ArrayTest;
@@ -60,7 +59,6 @@ import org.junit.runners.Suite.SuiteClasses;
   SystemTest.class,
   ThreadLocalTest.class,
   ThrowableTest.class,
-  ThrowableStackTraceEmulTest.class,
   TypeTest.class,
 })
 public class LangSuite {}
