@@ -99,7 +99,7 @@ j2cl_multi_test(
 j2cl_multi_test(
     name = "Emul",
     enable_wasm = False,  # b/229006894
-    shard_count = 16,
+    shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulSuite",
     deps = [":emul_tests_lib"],
 )
@@ -109,6 +109,14 @@ j2cl_multi_test(
     enable_wasm = False,  # b/229006894
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulJava8Suite",
+    deps = [":emul_tests_lib"],
+)
+
+j2cl_multi_test(
+    name = "Lang",
+    enable_wasm = False,  # b/229006894
+    shard_count = 8,
+    test_class = "com.google.j2cl.jre.LangSuite",
     deps = [":emul_tests_lib"],
 )
 

@@ -25,28 +25,7 @@ import com.google.j2cl.jre.java.io.OutputStreamTest;
 import com.google.j2cl.jre.java.io.OutputStreamWriterTest;
 import com.google.j2cl.jre.java.io.PrintStreamTest;
 import com.google.j2cl.jre.java.io.WriterTest;
-import com.google.j2cl.jre.java.lang.BooleanTest;
-import com.google.j2cl.jre.java.lang.ByteTest;
-import com.google.j2cl.jre.java.lang.CharacterTest;
-import com.google.j2cl.jre.java.lang.DoubleEqualsSemanticsTest;
-import com.google.j2cl.jre.java.lang.DoubleTest;
-import com.google.j2cl.jre.java.lang.FloatEqualsSemanticsTest;
-import com.google.j2cl.jre.java.lang.FloatTest;
-import com.google.j2cl.jre.java.lang.IntegerTest;
-import com.google.j2cl.jre.java.lang.LongTest;
-import com.google.j2cl.jre.java.lang.MathTest;
-import com.google.j2cl.jre.java.lang.ObjectTest;
-import com.google.j2cl.jre.java.lang.ShortTest;
-import com.google.j2cl.jre.java.lang.StringBufferTest;
-import com.google.j2cl.jre.java.lang.StringTest;
-import com.google.j2cl.jre.java.lang.SystemTest;
-import com.google.j2cl.jre.java.lang.ThreadLocalTest;
-import com.google.j2cl.jre.java.lang.ThrowableStackTraceEmulTest;
-import com.google.j2cl.jre.java.lang.ThrowableTest;
-import com.google.j2cl.jre.java.lang.TypeTest;
-import com.google.j2cl.jre.java.lang.reflect.ArrayTest;
 import com.google.j2cl.jre.java.math.MathContextTest;
-import com.google.j2cl.jre.java.math.MathContextWithObfuscatedEnumsTest;
 import com.google.j2cl.jre.java.math.RoundingModeTest;
 import com.google.j2cl.jre.java.nio.charset.CharsetTest;
 import com.google.j2cl.jre.java.nio.charset.StandardCharsetsTest;
@@ -77,30 +56,6 @@ import org.junit.runners.Suite.SuiteClasses;
   PrintStreamTest.class,
   WriterTest.class,
 
-  // -- java.lang
-  BooleanTest.class,
-  ByteTest.class,
-  CharacterTest.class,
-  DoubleTest.class,
-  DoubleEqualsSemanticsTest.class,
-  FloatTest.class,
-  FloatEqualsSemanticsTest.class,
-  IntegerTest.class,
-  LongTest.class,
-  MathTest.class,
-  ObjectTest.class,
-  ShortTest.class,
-  StringBufferTest.class,
-  StringTest.class,
-  SystemTest.class,
-  ThreadLocalTest.class,
-  ThrowableTest.class,
-  ThrowableStackTraceEmulTest.class,
-  TypeTest.class,
-
-  // java.lang.reflect
-  ArrayTest.class,
-
   // -- java.math
   // BigDecimal is tested in {@link BigDecimalSuite}
   // BigInteger is tested in {@link BigIntegerSuite}
@@ -124,8 +79,5 @@ import org.junit.runners.Suite.SuiteClasses;
   DateTest.class,
   ObjectsTest.class,
   RandomTest.class,
-
-  // Put last to reduce number of times the test framework switches modules
-  MathContextWithObfuscatedEnumsTest.class,
 })
 public class EmulSuite {}

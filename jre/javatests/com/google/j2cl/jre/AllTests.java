@@ -28,5 +28,6 @@ import org.junit.runners.Suite.SuiteClasses;
   ConcurrentSuite.class,
   EmulSuite.class,
   EmulJava8Suite.class,
+  LangSuite.class,
 })
 public class AllTests {}
