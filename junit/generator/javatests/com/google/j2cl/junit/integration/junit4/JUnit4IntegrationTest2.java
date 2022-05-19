@@ -106,7 +106,7 @@ public class JUnit4IntegrationTest2 extends IntegrationTestBase {
             .testClassName(testName)
             .addTestFailure("test")
             .addTestSuccess("testOther")
-            .addJavaLogLineSequence("before", "before", "testOther")
+            .addJavaLogLineSequence("before", "after", "before", "testOther", "after")
             .addBlackListedWord("should_not_be_in_log")
             .build();
 

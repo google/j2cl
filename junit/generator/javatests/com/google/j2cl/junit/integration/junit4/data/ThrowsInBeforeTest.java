@@ -16,6 +16,7 @@
 package com.google.j2cl.junit.integration.junit4.data;
 
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -42,6 +43,11 @@ public class ThrowsInBeforeTest {
       first = false;
       throw new RuntimeException("failure in before()");
     }
+  }
+
+  @After
+  public void after() {
+    TestCaseLogger.log("after");
   }
 
   @Test
