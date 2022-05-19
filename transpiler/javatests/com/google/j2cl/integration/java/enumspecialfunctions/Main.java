@@ -72,8 +72,8 @@ public class Main {
 
     try {
       Planet.valueOf(null);
-      fail("Should have thrown IllegalArgumentException.");
-    } catch (IllegalArgumentException e) {
+      fail("Should have thrown NullPointerException.");
+    } catch (NullPointerException e) {
       // do nothing.
     }
 

@@ -15,6 +15,8 @@
  */
 package javaemul.internal;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,9 +35,7 @@ class Enums {
   }
 
   public static <V> V getValueFromNameAndMap(String name, Map<String, V> map) {
-    if (name == null) {
-      throw new IllegalArgumentException();
-    }
+    checkCriticalNotNull(name);
     V enumValue = map.get(name);
     if (enumValue == null) {
       throw new IllegalArgumentException();

@@ -16,6 +16,7 @@
 package javaemul.internal;
 
 import static javaemul.internal.InternalPreconditions.checkArgument;
+import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
 
 import java.io.Serializable;
 import javaemul.internal.annotations.UncheckedCast;
@@ -51,9 +52,7 @@ class Enums {
 
   @UncheckedCast
   public static <V> V getValueFromNameAndMap(String name, NativeMap<String, V> map) {
-    if (name == null) {
-      throw new IllegalArgumentException();
-    }
+    checkCriticalNotNull(name);
     V enumValue = map.get(name);
     if (enumValue == null) {
       throw new IllegalArgumentException();
