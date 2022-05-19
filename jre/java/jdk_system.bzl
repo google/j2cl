@@ -1,12 +1,7 @@
 """Helpers to create a JDK system module."""
 
-load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
-
 def _jdk_system(ctx):
     bootclasspath = ctx.file.bootclasspath
-    if not ctx.attr._modules_enabled[BuildSettingInfo].value:
-        return [DefaultInfo(files = depset([bootclasspath]))]
-
     system = ctx.actions.declare_directory("%s" % ctx.label.name)
     java_runtime = ctx.attr._runtime[java_common.JavaRuntimeInfo]
     zip_tool = ctx.executable._zip
@@ -64,9 +59,6 @@ jdk_system = rule(
             executable = True,
             cfg = "host",
             default = Label("@bazel_tools//tools/zip:zipper"),
-        ),
-        "_modules_enabled": attr.label(
-            default = Label("//:enable_experimental_java11_support"),
         ),
     },
 )

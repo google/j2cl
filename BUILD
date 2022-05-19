@@ -3,7 +3,7 @@
 
 load("//build_defs:rules.bzl", "j2cl_alias")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
-load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
+load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 
 package(
     default_visibility = ["//visibility:public"],
@@ -64,11 +64,6 @@ alias(
 alias(
     name = "minifier",
     actual = "//tools/java/com/google/j2cl/tools/minifier",
-)
-
-bool_flag(
-    name = "enable_experimental_java11_support",
-    build_setting_default = True,
 )
 
 # TODO(b/135123615): Temporary support for selecting frontend. Once javac becomes the frontend for
