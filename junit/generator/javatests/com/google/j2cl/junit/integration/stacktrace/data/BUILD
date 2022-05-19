@@ -7,7 +7,7 @@ load(
 
 package(
     default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace:__pkg__"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 j2cl_test_integration_test_data(

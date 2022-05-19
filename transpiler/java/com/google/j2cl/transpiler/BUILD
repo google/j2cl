@@ -1,6 +1,4 @@
-package(
-    licenses = ["notice"],
-)
+package(licenses = ["notice"])
 
 java_library(
     name = "transpiler_lib",

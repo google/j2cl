@@ -3,9 +3,7 @@ load(
     "j2cl_test_integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 # For debugging purposes it can be helpful to have the test log results of
 # the integration tests to stdout. This can be done with:

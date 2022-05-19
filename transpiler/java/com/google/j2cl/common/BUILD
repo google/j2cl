@@ -3,7 +3,7 @@ package(
         "//tools:__subpackages__",
         "//transpiler:__subpackages__",
     ],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 java_library(

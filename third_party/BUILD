@@ -5,7 +5,7 @@ load("//build_defs:rules.bzl", "j2cl_alias", "j2cl_import", "j2cl_library")
 
 package(
     default_visibility = ["//:__subpackages__"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 alias(

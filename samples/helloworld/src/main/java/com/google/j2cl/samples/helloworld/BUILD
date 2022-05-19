@@ -1,9 +1,7 @@
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_application")
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 closure_js_library(
     name = "app",

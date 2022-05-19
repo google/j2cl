@@ -2,7 +2,7 @@ load("//build_defs:rules.bzl", "j2cl_library", "j2wasm_library")
 
 package(
     default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration:__subpackages__"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 java_library(

@@ -4,9 +4,7 @@ load(
 )
 load("//java/com/google/protobuf/contrib/gwt:j2cl_proto.bzl", "j2cl_proto_library")
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 proto_library(
     name = "foo",

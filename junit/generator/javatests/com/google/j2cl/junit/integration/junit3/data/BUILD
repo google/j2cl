@@ -6,7 +6,7 @@ load(
 
 package(
     default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration/junit3:__pkg__"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 java_and_j2cl_library(

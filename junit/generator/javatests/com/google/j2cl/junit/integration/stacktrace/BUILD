@@ -3,9 +3,7 @@ load(
     "j2cl_test_integration_test",
 )
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 # Note that tests are manually sharded to avoid hitting 50 hard shard limit.
 

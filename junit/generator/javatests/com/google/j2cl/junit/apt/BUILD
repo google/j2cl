@@ -1,6 +1,4 @@
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 java_library(
     name = "junit_processor_library",

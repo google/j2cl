@@ -2,7 +2,7 @@ load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_library")
 
 package(
     default_visibility = ["//visibility:public"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 # This is the bazel target that compiles our J2CL library. Note that our HelloWorld library

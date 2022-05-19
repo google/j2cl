@@ -1,6 +1,6 @@
 package(
     default_visibility = ["//transpiler/javatests/com/google/j2cl/readable:__subpackages__"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 filegroup(

@@ -1,6 +1,6 @@
 package(
     default_visibility = ["//tools/javatests/com/google/j2cl/tools/rta:__subpackages__"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 java_library(

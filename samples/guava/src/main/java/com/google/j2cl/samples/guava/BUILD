@@ -1,8 +1,6 @@
 load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_application", "j2cl_library")
 
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 j2cl_library(
     name = "helloguavalib",

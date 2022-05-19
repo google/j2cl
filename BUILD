@@ -7,7 +7,7 @@ load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
 
 package(
     default_visibility = ["//visibility:public"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 exports_files(["LICENSE"])
