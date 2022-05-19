@@ -193,12 +193,26 @@ public class RuntimeMethods {
 
   /** Create a call to InternalPreconditions.checkNotNull method. */
   public static MethodCall createCheckNotNullCall(Expression argument) {
-    return MethodCall.Builder.from(
-            TypeDescriptors.get()
-                .javaemulInternalPreconditions
-                .getMethodDescriptor("checkNotNull", TypeDescriptors.get().javaLangObject))
-        .setArguments(argument)
-        .build();
+    return createCheckNotNullCall(argument, false);
+  }
+
+  /**
+   * Create a call to InternalPreconditions.checkNotNull method with specialization of the type
+   * parameter.
+   */
+  public static MethodCall createCheckNotNullCall(
+      Expression argument, boolean specializeTypeParameter) {
+    // TODO(b/68726480): checkNotNull should return a non-nullable T.
+    MethodDescriptor checkNotNull =
+        TypeDescriptors.get()
+            .javaemulInternalPreconditions
+            .getMethodDescriptor("checkNotNull", TypeDescriptors.get().javaLangObject);
+    if (specializeTypeParameter) {
+      checkNotNull =
+          checkNotNull.specializeTypeVariables(
+              (TypeVariable unused) -> argument.getTypeDescriptor());
+    }
+    return MethodCall.Builder.from(checkNotNull).setArguments(argument).build();
   }
 
   /** Create a call to an LongUtils method. */
