@@ -9,6 +9,13 @@ load(":package_sources.bzl", "package_sources")
 
 package(licenses = ["notice"])
 
+config_setting(
+    name = "experimental_java11_support",
+    flag_values = {
+        "//:enable_experimental_java11_support": "True",
+    },
+)
+
 # Packages that may use j2kt_jvm_library/j2kt_native_library and need visibility
 # for the J2KT JRE targets.
 ALLOWED_J2KT_PACKAGES = [
@@ -18,25 +25,33 @@ ALLOWED_J2KT_PACKAGES = [
     "//third_party/java_src/xplat/kmpbench:__subpackages__",
 ]
 
-JRE_JAVAC_VERSION_OPTS = [
-    # Remove the system (aka pre Java9 'bootclasspath').
-    # We need this to compile JRE otherwise it will result in a split package for JRE sources.
-    "--system",
-    "none",
-    # Make sure java.base could be redefined, since we are redeclaring files for java.base.
-    "--patch-module",
-    "java.base=.",
-    # Allow JRE classes are allowed to depend on the jsinterop annotations
-    "--add-reads",
-    "java.base=ALL-UNNAMED",
-    # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
-    "-XDstringConcat=inline",
-    # Enable Java 11 for the JRE sources
-    "-source",
-    "11",
-    "-target",
-    "11",
-]
+JRE_JAVAC_VERSION_OPTS = select({
+    ":experimental_java11_support": [
+        # Remove the system (aka pre Java9 'bootclasspath').
+        # We need this to compile JRE otherwise it will result in a split package for JRE sources.
+        "--system",
+        "none",
+        # Make sure java.base could be redefined, since we are redeclaring files for java.base.
+        "--patch-module",
+        "java.base=.",
+        # Allow JRE classes are allowed to depend on the jsinterop annotations
+        "--add-reads",
+        "java.base=ALL-UNNAMED",
+        # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
+        "-XDstringConcat=inline",
+        # Enable Java 11 for the JRE sources
+        "-source",
+        "11",
+        "-target",
+        "11",
+    ],
+    "//conditions:default": [
+        "-source",
+        "8",
+        "-target",
+        "8",
+    ],
+})
 
 JRE_JAVAC_OPTS = JRE_JAVAC_VERSION_OPTS + [
     # Avoid log site injection which introduces calls to unsupported APIs
@@ -60,10 +75,16 @@ j2cl_import(
     ],
 )
 
-BASE_JRE_SRCS = glob(
-    ["java*/**/*.java"],
-    exclude = ["javaemul/internal/annotations/**"],
-) + ["module-info.java"]
+BASE_JRE_SRCS = select({
+    ":experimental_java11_support": glob(
+        ["java*/**/*.java"],
+        exclude = ["javaemul/internal/annotations/**"],
+    ) + ["module-info.java"],
+    "//conditions:default": glob(
+        ["java*/**/*.java"],
+        exclude = ["javaemul/internal/annotations/**"],
+    ),
+})
 
 package_sources(
     name = "jre_java_files",
