@@ -30,6 +30,19 @@ public class IntegerTest extends GWTTestCase {
 
   public void testBadStrings() {
     try {
+      new Integer("");
+      fail("expected NumberFormatException");
+    } catch (NumberFormatException e) {
+      // Expected behavior
+    }
+    try {
+      Integer.parseInt("");
+      fail("expected NumberFormatException");
+    } catch (NumberFormatException e) {
+      // Expected behavior
+    }
+
+    try {
       new Integer("05abcd");
       fail("Constructor should have thrown NumberFormatException");
     } catch (NumberFormatException e) {

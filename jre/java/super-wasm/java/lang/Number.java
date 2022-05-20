@@ -16,7 +16,6 @@
 package java.lang;
 
 import java.io.Serializable;
-import javaemul.internal.NativeRegExp;
 import javaemul.internal.WasmExtern;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -109,26 +108,27 @@ public abstract class Number implements Serializable {
    */
   protected static int __parseAndValidateInt(String s, int radix, int lowerBound, int upperBound)
       throws NumberFormatException {
-    if (s == null || s.isEmpty()) {
-      throw NumberFormatException.forInputString(s);
+    int length = getLength(s);
+    if (length > 0) {
+      if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
+        throw NumberFormatException.forRadix(radix);
+      }
+      char c = s.charAt(0);
+      boolean negative = c == '-';
+      int startIndex = negative || c == '+' ? 1 : 0;
+      if (startIndex < length) {
+        return parseInt(s, startIndex, length, lowerBound, radix, negative);
+      }
     }
-    if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
-      throw NumberFormatException.forRadix(radix);
-    }
-
-    char c = s.charAt(0);
-    boolean negative = c == '-';
-    int startIndex = negative || c == '+' ? 1 : 0;
-
-    return parseInt(s, startIndex, lowerBound, radix, negative);
+    throw NumberFormatException.forInputString(s);
   }
 
-  private static int parseInt(String string, int offset, int minValue, int radix, boolean negative)
+  private static int parseInt(
+      String string, int offset, int length, int minValue, int radix, boolean negative)
       throws NumberFormatException {
     // Note that we are accumulating result as negative values to handle edge case around MIN_VALUE.
     int result = 0;
     int maxDivByRadix = minValue / radix;
-    int length = string.length();
     while (offset < length) {
       int digit = Character.digit(string.charAt(offset++), radix);
       // Check if a valid digit or if multiplying by radixPower will overflow
@@ -159,26 +159,26 @@ public abstract class Number implements Serializable {
    *     the result.
    */
   protected static long __parseAndValidateLong(String s, int radix) throws NumberFormatException {
-    if (s == null || s.isEmpty()) {
-      throw NumberFormatException.forInputString(s);
+    int length = getLength(s);
+    if (length > 0) {
+      if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
+        throw NumberFormatException.forRadix(radix);
+      }
+      char c = s.charAt(0);
+      boolean negative = c == '-';
+      int startIndex = negative || c == '+' ? 1 : 0;
+      if (startIndex < length) {
+        return parseLong(s, startIndex, length, radix, negative);
+      }
     }
-    if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
-      throw NumberFormatException.forRadix(radix);
-    }
-
-    char c = s.charAt(0);
-    boolean negative = c == '-';
-    int startIndex = negative || c == '+' ? 1 : 0;
-
-    return parseLong(s, startIndex, radix, negative);
+    throw NumberFormatException.forInputString(s);
   }
 
-  private static long parseLong(String string, int offset, int radix, boolean negative)
+  private static long parseLong(String string, int offset, int length, int radix, boolean negative)
       throws NumberFormatException {
     // Note that we are accumulating result as negative values to handle edge case around MIN_VALUE.
     long result = 0;
     long maxDivByRadix = Long.MIN_VALUE / radix;
-    int length = string.length();
     while (offset < length) {
       int digit = Character.digit(string.charAt(offset++), radix);
       // Check if a valid digit or if multiplying by radixPower will overflow
@@ -202,6 +202,10 @@ public abstract class Number implements Serializable {
     }
 
     return result;
+  }
+
+  private static int getLength(String s) {
+    return s == null ? 0 : s.length();
   }
 
   // CHECKSTYLE_ON
