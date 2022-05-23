@@ -15,13 +15,15 @@
  */
 package wasmjsinterop;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+
 /** Tests J2WASM jsinterop features. */
 public final class Main {
   public static void main(String... args) throws Exception {
     String empty = "";
-    assertEquals(empty, String.fromJsString(String.toJsString(empty)));
+    assertEquals(empty, String.fromJsString(empty.toJsString()));
 
     String foo = "String with special chars like $'%$\"^";
-    assertEquals(foo, String.fromJsString(String.toJsString(foo)));
+    assertEquals(foo, String.fromJsString(foo.toJsString()));
   }
 }

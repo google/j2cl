@@ -86,7 +86,8 @@ function createImportObject(userImports) {
 
     // Utilites to interop strings and arrays. From String.java.
     'getLength': s => s.length,
-    'getCharAt': (s, i) => s.charAt(i),
+    'getCharAt': (s, i) => s.charCodeAt(i),
+    'replace': (s, regex, replacement) => s.replace(regex, replacement),
     // TODO(b/193532287): These will be removed after Array interop support in
     // WASM is implemented.
     'createBuffer': size => new Array(size),
