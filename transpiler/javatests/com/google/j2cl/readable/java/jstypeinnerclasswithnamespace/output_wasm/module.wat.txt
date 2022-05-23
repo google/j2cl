@@ -58,7 +58,7 @@
   (local.set $$instance (struct.new $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)) (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-  (call $$ctor__void_$p_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (local.get $$instance))
+  (call $$ctor__void_$p_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
   (return (local.get $$instance))
@@ -75,7 +75,7 @@
   (call $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace )
   ;; Object.this.$ctor();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -104,7 +104,7 @@
 ;;; Class<?> JsTypeInnerClassWithNamespace.getClass()
 (func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
  (local.set $this (ref.cast_static $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (local.get $this.untyped)))
@@ -141,7 +141,7 @@
   (local.set $$instance (struct.new $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)) (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-  (call $$ctor__void_$p_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (local.get $$instance))
+  (call $$ctor__void_$p_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
   (return (local.get $$instance))
@@ -158,7 +158,7 @@
   (call $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass )
   ;; Object.this.$ctor();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -187,7 +187,7 @@
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
  (local.set $this (ref.cast_static $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (local.get $this.untyped)))

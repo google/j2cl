@@ -44,7 +44,7 @@
   (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.itable)) (i32.const 0) (local.get $id) (i32.const 0)))
   ;; $instance.$ctor(id);
   ;;@ multipleconstructors/MultipleConstructors.java:22:9
-  (call $$ctor__int__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (local.get $$instance)(local.get $id))
+  (call $$ctor__int__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (ref.as_non_null (local.get $$instance))(local.get $id))
   ;; return $instance;
   ;;@ multipleconstructors/MultipleConstructors.java:22:9
   (return (local.get $$instance))
@@ -62,7 +62,7 @@
   (call $$clinit__void@multipleconstructors.MultipleConstructors )
   ;; Object.this.$ctor();
   ;;@ multipleconstructors/MultipleConstructors.java:22:38
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; (MultipleConstructors.this.flag = (id == 0));
   ;;@ multipleconstructors/MultipleConstructors.java:24:4
   (struct.set $multipleconstructors.MultipleConstructors $f_flag__multipleconstructors_MultipleConstructors_(local.get $this) (i32.eq (local.get $id) (i32.const 0)))
@@ -81,7 +81,7 @@
   (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.itable)) (i32.const 0) (i32.sub (i32.const 0) (i32.const 1)) (i32.const 0)))
   ;; $instance.$ctor(flag);
   ;;@ multipleconstructors/MultipleConstructors.java:27:9
-  (call $$ctor__boolean__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (local.get $$instance)(local.get $flag))
+  (call $$ctor__boolean__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (ref.as_non_null (local.get $$instance))(local.get $flag))
   ;; return $instance;
   ;;@ multipleconstructors/MultipleConstructors.java:27:9
   (return (local.get $$instance))
@@ -99,7 +99,7 @@
   (call $$clinit__void@multipleconstructors.MultipleConstructors )
   ;; Object.this.$ctor();
   ;;@ multipleconstructors/MultipleConstructors.java:27:44
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; (MultipleConstructors.this.flag = flag);
   ;;@ multipleconstructors/MultipleConstructors.java:29:4
   (struct.set $multipleconstructors.MultipleConstructors $f_flag__multipleconstructors_MultipleConstructors_(local.get $this) (local.get $flag))
@@ -119,7 +119,7 @@
   (local.set $$instance (struct.new $multipleconstructors.MultipleConstructors (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.vtable)) (ref.as_non_null (global.get $multipleconstructors.MultipleConstructors.itable)) (i32.const 0) (local.get $id) (i32.const 0)))
   ;; $instance.$ctor(id,flag);
   ;;@ multipleconstructors/MultipleConstructors.java:32:9
-  (call $$ctor__int__boolean__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (local.get $$instance)(local.get $id)(local.get $flag))
+  (call $$ctor__int__boolean__void_$p_multipleconstructors_MultipleConstructors@multipleconstructors.MultipleConstructors (ref.as_non_null (local.get $$instance))(local.get $id)(local.get $flag))
   ;; return $instance;
   ;;@ multipleconstructors/MultipleConstructors.java:32:9
   (return (local.get $$instance))
@@ -138,7 +138,7 @@
   (call $$clinit__void@multipleconstructors.MultipleConstructors )
   ;; Object.this.$ctor();
   ;;@ multipleconstructors/MultipleConstructors.java:32:52
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; (MultipleConstructors.this.flag = flag);
   ;;@ multipleconstructors/MultipleConstructors.java:34:4
   (struct.set $multipleconstructors.MultipleConstructors $f_flag__multipleconstructors_MultipleConstructors_(local.get $this) (local.get $flag))
@@ -170,7 +170,7 @@
 ;;; Class<?> MultipleConstructors.getClass()
 (func $m_getClass__java_lang_Class@multipleconstructors.MultipleConstructors
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipleconstructors.MultipleConstructors))
  (local.set $this (ref.cast_static $multipleconstructors.MultipleConstructors (local.get $this.untyped)))

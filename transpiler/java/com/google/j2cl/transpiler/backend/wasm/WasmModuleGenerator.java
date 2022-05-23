@@ -185,7 +185,8 @@ public class WasmModuleGenerator {
       // Add the implicit parameter
       builder.append(
           String.format(
-              " (param %s)", environment.getWasmType(TypeDescriptors.get().javaLangObject)));
+              " (param (ref %s))",
+              environment.getWasmTypeName(TypeDescriptors.get().javaLangObject)));
     }
     methodDescriptor
         .getDispatchParameterTypeDescriptors()
@@ -344,8 +345,8 @@ public class WasmModuleGenerator {
       builder.newLine();
       builder.append(
           String.format(
-              "(param $this.untyped %s)",
-              environment.getWasmType(TypeDescriptors.get().javaLangObject)));
+              "(param $this.untyped (ref %s))",
+              environment.getWasmTypeName(TypeDescriptors.get().javaLangObject)));
     } else if (!method.isStatic()) {
       // Private methods and constructors receive the instance with the actual type.
       builder.newLine();

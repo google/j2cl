@@ -91,7 +91,7 @@
   (local.set $$instance (struct.new $devirtualizedsupermethodcall.SubNumber (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
-  (call $$ctor__void_$p_devirtualizedsupermethodcall_SubNumber@devirtualizedsupermethodcall.SubNumber (local.get $$instance))
+  (call $$ctor__void_$p_devirtualizedsupermethodcall_SubNumber@devirtualizedsupermethodcall.SubNumber (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
   (return (local.get $$instance))
@@ -108,14 +108,14 @@
   (call $$clinit__void@devirtualizedsupermethodcall.SubNumber )
   ;; Number.this.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
-  (call $$ctor__void_$p_java_lang_Number@java.lang.Number (local.get $this))
+  (call $$ctor__void_$p_java_lang_Number@java.lang.Number (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int SubNumber.intValue()
 (func $m_intValue__int@devirtualizedsupermethodcall.SubNumber
  (type $function.m_intValue__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ devirtualizedsupermethodcall/Main.java:20:13
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -131,7 +131,7 @@
 ;;; long SubNumber.longValue()
 (func $m_longValue__long@devirtualizedsupermethodcall.SubNumber
  (type $function.m_longValue__long)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i64)
  ;;@ devirtualizedsupermethodcall/Main.java:25:14
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -147,7 +147,7 @@
 ;;; float SubNumber.floatValue()
 (func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber
  (type $function.m_floatValue__float)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result f32)
  ;;@ devirtualizedsupermethodcall/Main.java:30:15
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -163,7 +163,7 @@
 ;;; double SubNumber.doubleValue()
 (func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber
  (type $function.m_doubleValue__double)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result f64)
  ;;@ devirtualizedsupermethodcall/Main.java:35:16
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -201,7 +201,7 @@
 ;;; Class<?> SubNumber.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.SubNumber
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.SubNumber (local.get $this.untyped)))
@@ -238,7 +238,7 @@
   (local.set $$instance (struct.new $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
-  (call $$ctor__void_$p_devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (local.get $$instance))
+  (call $$ctor__void_$p_devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
   (return (local.get $$instance))
@@ -255,14 +255,14 @@
   (call $$clinit__void@devirtualizedsupermethodcall.FooCallsSuperObjectMethod )
   ;; Object.this.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int FooCallsSuperObjectMethod.hashCode()
 (func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
  (type $function.m_hashCode__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ devirtualizedsupermethodcall/Main.java:42:13
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
@@ -270,7 +270,7 @@
  (block
   ;; return super.hashCode();
   ;;@ devirtualizedsupermethodcall/Main.java:43:4
-  (return (call $m_hashCode__int@java.lang.Object (local.get $this)))
+  (return (call $m_hashCode__int@java.lang.Object (ref.as_non_null (local.get $this))))
  )
 )
 (elem declare func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
@@ -300,7 +300,7 @@
 ;;; Class<?> FooCallsSuperObjectMethod.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (local.get $this.untyped)))
@@ -338,7 +338,7 @@
   (local.set $$instance (struct.new $devirtualizedsupermethodcall.Main (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
-  (call $$ctor__void_$p_devirtualizedsupermethodcall_Main@devirtualizedsupermethodcall.Main (local.get $$instance))
+  (call $$ctor__void_$p_devirtualizedsupermethodcall_Main@devirtualizedsupermethodcall.Main (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
   (return (local.get $$instance))
@@ -355,14 +355,14 @@
   (call $$clinit__void@devirtualizedsupermethodcall.Main )
   ;; Object.this.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Main.main()
 (func $m_main__void@devirtualizedsupermethodcall.Main
  (type $function.m_main__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ devirtualizedsupermethodcall/Main.java:48:14
  (local $fooCallsSuperObjectMethods (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (local $sn (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -374,25 +374,25 @@
   (local.set $fooCallsSuperObjectMethods (call $$create__devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod ))
   ;; fooCallsSuperObjectMethods.hashCode();
   ;;@ devirtualizedsupermethodcall/Main.java:50:4
-  (drop (call_ref (local.get $fooCallsSuperObjectMethods)(struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable $m_hashCode__int (struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod $vtable(local.get $fooCallsSuperObjectMethods)))))
+  (drop (call_ref (ref.as_non_null (local.get $fooCallsSuperObjectMethods))(struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable $m_hashCode__int (struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod $vtable(local.get $fooCallsSuperObjectMethods)))))
   ;; SubNumber sn = devirtualizedsupermethodcall.SubNumber.$create();
   ;;@ devirtualizedsupermethodcall/Main.java:52:4
   (local.set $sn (call $$create__devirtualizedsupermethodcall_SubNumber@devirtualizedsupermethodcall.SubNumber ))
   ;; sn.byteValue();
   ;;@ devirtualizedsupermethodcall/Main.java:53:4
-  (drop (call_ref (local.get $sn)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $sn)))))
+  (drop (call_ref (ref.as_non_null (local.get $sn))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $sn)))))
   ;; sn.doubleValue();
   ;;@ devirtualizedsupermethodcall/Main.java:54:4
-  (drop (call_ref (local.get $sn)(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_doubleValue__double (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
+  (drop (call_ref (ref.as_non_null (local.get $sn))(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_doubleValue__double (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
   ;; sn.floatValue();
   ;;@ devirtualizedsupermethodcall/Main.java:55:4
-  (drop (call_ref (local.get $sn)(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_floatValue__float (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
+  (drop (call_ref (ref.as_non_null (local.get $sn))(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_floatValue__float (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
   ;; sn.intValue();
   ;;@ devirtualizedsupermethodcall/Main.java:56:4
-  (drop (call_ref (local.get $sn)(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_intValue__int (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
+  (drop (call_ref (ref.as_non_null (local.get $sn))(struct.get $devirtualizedsupermethodcall.SubNumber.vtable $m_intValue__int (struct.get $devirtualizedsupermethodcall.SubNumber $vtable(local.get $sn)))))
   ;; sn.shortValue();
   ;;@ devirtualizedsupermethodcall/Main.java:57:4
-  (drop (call_ref (local.get $sn)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $sn)))))
+  (drop (call_ref (ref.as_non_null (local.get $sn))(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $sn)))))
  )
 )
 (elem declare func $m_main__void@devirtualizedsupermethodcall.Main)
@@ -422,7 +422,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.Main))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.Main (local.get $this.untyped)))

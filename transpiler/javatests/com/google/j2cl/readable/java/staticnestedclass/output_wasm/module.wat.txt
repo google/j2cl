@@ -58,7 +58,7 @@
   (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
-  (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent@staticnestedclass.StaticNestedClassParent (local.get $$instance))
+  (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent@staticnestedclass.StaticNestedClassParent (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (return (local.get $$instance))
@@ -75,7 +75,7 @@
   (call $$clinit__void@staticnestedclass.StaticNestedClassParent )
   ;; Object.this.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -104,7 +104,7 @@
 ;;; Class<?> StaticNestedClassParent.getClass()
 (func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticnestedclass.StaticNestedClassParent))
  (local.set $this (ref.cast_static $staticnestedclass.StaticNestedClassParent (local.get $this.untyped)))
@@ -141,7 +141,7 @@
   (local.set $$instance (struct.new $staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
-  (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent_StaticNestedClass@staticnestedclass.StaticNestedClassParent.StaticNestedClass (local.get $$instance))
+  (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent_StaticNestedClass@staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (return (local.get $$instance))
@@ -158,7 +158,7 @@
   (call $$clinit__void@staticnestedclass.StaticNestedClassParent.StaticNestedClass )
   ;; Object.this.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -187,7 +187,7 @@
 ;;; Class<?> StaticNestedClass.getClass()
 (func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (local.set $this (ref.cast_static $staticnestedclass.StaticNestedClassParent.StaticNestedClass (local.get $this.untyped)))

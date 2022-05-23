@@ -45,7 +45,7 @@
   (local.set $$instance (struct.new $jsdocreturn.JsDocReturn (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.vtable)) (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
-  (call $$ctor__void_$p_jsdocreturn_JsDocReturn@jsdocreturn.JsDocReturn (local.get $$instance))
+  (call $$ctor__void_$p_jsdocreturn_JsDocReturn@jsdocreturn.JsDocReturn (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsdocreturn/JsDocReturn.java:18:13
   (return (local.get $$instance))
@@ -62,14 +62,14 @@
   (call $$clinit__void@jsdocreturn.JsDocReturn )
   ;; Object.this.$ctor();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void JsDocReturn.test1()
 (func $m_test1__void@jsdocreturn.JsDocReturn
  (type $function.m_test1__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ jsdocreturn/JsDocReturn.java:19:14
  (local $this (ref null $jsdocreturn.JsDocReturn))
  (local.set $this (ref.cast_static $jsdocreturn.JsDocReturn (local.get $this.untyped)))
@@ -81,7 +81,7 @@
 ;;; int JsDocReturn.test2()
 (func $m_test2__int@jsdocreturn.JsDocReturn
  (type $function.m_test2__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ jsdocreturn/JsDocReturn.java:21:13
  (local $this (ref null $jsdocreturn.JsDocReturn))
@@ -119,7 +119,7 @@
 ;;; Class<?> JsDocReturn.getClass()
 (func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdocreturn.JsDocReturn))
  (local.set $this (ref.cast_static $jsdocreturn.JsDocReturn (local.get $this.untyped)))

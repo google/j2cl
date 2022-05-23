@@ -43,7 +43,7 @@
   (local.set $$instance (struct.new $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $ifstatement.IfStatement.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ ifstatement/IfStatement.java:18:13
-  (call $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement (local.get $$instance))
+  (call $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ ifstatement/IfStatement.java:18:13
   (return (local.get $$instance))
@@ -60,14 +60,14 @@
   (call $$clinit__void@ifstatement.IfStatement )
   ;; Object.this.$ctor();
   ;;@ ifstatement/IfStatement.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void IfStatement.test()
 (func $m_test__void@ifstatement.IfStatement
  (type $function.m_test__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ ifstatement/IfStatement.java:19:14
  (local $a i32)
  (local $b i32)
@@ -153,7 +153,7 @@
 ;;; Class<?> IfStatement.getClass()
 (func $m_getClass__java_lang_Class@ifstatement.IfStatement
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $ifstatement.IfStatement))
  (local.set $this (ref.cast_static $ifstatement.IfStatement (local.get $this.untyped)))

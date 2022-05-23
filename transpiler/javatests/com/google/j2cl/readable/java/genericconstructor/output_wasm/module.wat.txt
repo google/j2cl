@@ -45,7 +45,7 @@
   (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor(s,t);
   ;;@ genericconstructor/GenericConstructor.java:20:13
-  (call $$ctor__java_lang_Object__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (local.get $$instance)(local.get $s)(local.get $t))
+  (call $$ctor__java_lang_Object__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (ref.as_non_null (local.get $$instance))(local.get $s)(local.get $t))
   ;; return $instance;
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (return (local.get $$instance))
@@ -64,7 +64,7 @@
   (call $$clinit__void@genericconstructor.GenericConstructor )
   ;; Object.this.$ctor();
   ;;@ genericconstructor/GenericConstructor.java:20:42
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -80,7 +80,7 @@
   (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor(t);
   ;;@ genericconstructor/GenericConstructor.java:23:13
-  (call $$ctor__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (local.get $$instance)(local.get $t))
+  (call $$ctor__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (ref.as_non_null (local.get $$instance))(local.get $t))
   ;; return $instance;
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (return (local.get $$instance))
@@ -98,14 +98,14 @@
   (call $$clinit__void@genericconstructor.GenericConstructor )
   ;; Object.this.$ctor();
   ;;@ genericconstructor/GenericConstructor.java:23:37
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void GenericConstructor.test()
 (func $m_test__void@genericconstructor.GenericConstructor
  (type $function.m_test__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ genericconstructor/GenericConstructor.java:25:14
  (local $this (ref null $genericconstructor.GenericConstructor))
  (local.set $this (ref.cast_static $genericconstructor.GenericConstructor (local.get $this.untyped)))
@@ -145,7 +145,7 @@
 ;;; Class<?> GenericConstructor.getClass()
 (func $m_getClass__java_lang_Class@genericconstructor.GenericConstructor
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericconstructor.GenericConstructor))
  (local.set $this (ref.cast_static $genericconstructor.GenericConstructor (local.get $this.untyped)))

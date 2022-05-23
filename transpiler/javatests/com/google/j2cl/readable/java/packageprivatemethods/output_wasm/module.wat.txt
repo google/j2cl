@@ -102,7 +102,7 @@
   (local.set $$instance (struct.new $packageprivatemethods.package1.Child (ref.as_non_null (global.get $packageprivatemethods.package1.Child.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.Child.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (local.get $$instance))
+  (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (return (local.get $$instance))
@@ -119,14 +119,14 @@
   (call $$clinit__void@packageprivatemethods.package1.Child )
   ;; Parent.this.$ctor();
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (call $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent (local.get $this))
+  (call $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int Child.foo(int a)
 (func $m_foo__int__int@packageprivatemethods.package1.Child
  (type $function.m_foo__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:21:13
@@ -143,7 +143,7 @@
 ;;; int Child.fun(int a, int b)
 (func $m_fun__int__int__int@packageprivatemethods.package1.Child
  (type $function.m_fun__int__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (result i32)
@@ -161,7 +161,7 @@
 ;;; int Child.bar(int a, int b, int c)
 (func $m_bar__int__int__int__int@packageprivatemethods.package1.Child
  (type $function.m_bar__int__int__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (param $c i32)
@@ -180,7 +180,7 @@
 ;;; int Child.foo(int arg0)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
  (type $function.m_foo__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:18:13
@@ -189,7 +189,7 @@
  (block
   ;; return Child.this.foo(arg0);
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (return (call_ref (local.get $this)(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_foo__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
+  (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_foo__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
@@ -197,7 +197,7 @@
 ;;; int Child.fun(int arg0, int arg1)
 (func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
  (type $function.m_fun__int__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 i32)
  (result i32)
@@ -207,7 +207,7 @@
  (block
   ;; return Child.this.fun(arg0,arg1);
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (return (call_ref (local.get $this)(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_fun__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
+  (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_fun__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
@@ -237,7 +237,7 @@
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@packageprivatemethods.package1.Child
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
@@ -277,14 +277,14 @@
   (call $$clinit__void@packageprivatemethods.package1.Parent )
   ;; SuperParent.this.$ctor();
   ;;@ packageprivatemethods/package1/Parent.java:18:22
-  (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (local.get $this))
+  (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int Parent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
  (type $function.m_foo__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
  ;;@ packageprivatemethods/package1/Parent.java:21:6
@@ -301,7 +301,7 @@
 ;;; int Parent.bar(int arg0, int arg1, int arg2)
 (func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
  (type $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 i32)
  (param $arg2 i32)
@@ -312,7 +312,7 @@
  (block
   ;; return Parent.this.bar(arg0,arg1,arg2);
   ;;@ packageprivatemethods/package1/Parent.java:18:22
-  (return (call_ref (local.get $this)(local.get $arg0)(local.get $arg1)(local.get $arg2)(struct.get $packageprivatemethods.package1.Parent.vtable $m_bar__int__int__int__int (struct.get $packageprivatemethods.package1.Parent $vtable(local.get $this)))))
+  (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(local.get $arg2)(struct.get $packageprivatemethods.package1.Parent.vtable $m_bar__int__int__int__int (struct.get $packageprivatemethods.package1.Parent $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
@@ -368,7 +368,7 @@
   (local.set $$instance (struct.new $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
-  (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (local.get $$instance))
+  (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (return (local.get $$instance))
@@ -385,14 +385,14 @@
   (call $$clinit__void@packageprivatemethods.package1.SuperParent )
   ;; Object.this.$ctor();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int SuperParent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
  (type $function.m_foo__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
  ;;@ packageprivatemethods/package1/SuperParent.java:20:6
@@ -409,7 +409,7 @@
 ;;; int SuperParent.fun(int a, int b)
 (func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
  (type $function.m_fun__int__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (result i32)
@@ -427,7 +427,7 @@
 ;;; int SuperParent.bar(int a, int b, int c)
 (func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
  (type $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (param $c i32)
@@ -468,7 +468,7 @@
 ;;; Class<?> SuperParent.getClass()
 (func $m_getClass__java_lang_Class@packageprivatemethods.package1.SuperParent
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
@@ -511,7 +511,7 @@
   (local.set $$instance (struct.new $packageprivatemethods.package2.SubChild (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
-  (call $$ctor__void_$p_packageprivatemethods_package2_SubChild@packageprivatemethods.package2.SubChild (local.get $$instance))
+  (call $$ctor__void_$p_packageprivatemethods_package2_SubChild@packageprivatemethods.package2.SubChild (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (return (local.get $$instance))
@@ -528,14 +528,14 @@
   (call $$clinit__void@packageprivatemethods.package2.SubChild )
   ;; Child.this.$ctor();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
-  (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (local.get $this))
+  (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int SubChild.foo(int a)
 (func $m_foo__int__int@packageprivatemethods.package2.SubChild
  (type $function.m_foo__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
  ;;@ packageprivatemethods/package2/SubChild.java:22:13
@@ -574,7 +574,7 @@
 ;;; Class<?> SubChild.getClass()
 (func $m_getClass__java_lang_Class@packageprivatemethods.package2.SubChild
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package2.SubChild))
  (local.set $this (ref.cast_static $packageprivatemethods.package2.SubChild (local.get $this.untyped)))
@@ -615,14 +615,14 @@
   (call $$clinit__void@packageprivatemethods.package2.SubParent )
   ;; Parent.this.$ctor();
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
-  (call $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent (local.get $this))
+  (call $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int SubParent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent
  (type $function.m_foo__int__int_$pp_packageprivatemethods_package2)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
  ;;@ packageprivatemethods/package2/SubParent.java:21:6

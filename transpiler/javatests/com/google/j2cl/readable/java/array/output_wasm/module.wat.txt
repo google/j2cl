@@ -116,7 +116,7 @@
   (local.set $$instance (struct.new $array.Arrays (ref.as_non_null (global.get $array.Arrays.vtable)) (ref.as_non_null (global.get $array.Arrays.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ array/Arrays.java:22:13
-  (call $$ctor__void_$p_array_Arrays@array.Arrays (local.get $$instance))
+  (call $$ctor__void_$p_array_Arrays@array.Arrays (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ array/Arrays.java:22:13
   (return (local.get $$instance))
@@ -133,14 +133,14 @@
   (call $$clinit__void@array.Arrays )
   ;; Object.this.$ctor();
   ;;@ array/Arrays.java:22:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Arrays.testObjectArray()
 (func $m_testObjectArray__void@array.Arrays
  (type $function.m_testObjectArray__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:23:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objects2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -189,7 +189,7 @@
 ;;; void Arrays.testJavaTypeArray()
 (func $m_testJavaTypeArray__void@array.Arrays
  (type $function.m_testJavaTypeArray__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:44:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objects2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -234,7 +234,7 @@
 ;;; void Arrays.testIntArrays()
 (func $m_testIntArrays__void_$pp_array@array.Arrays
  (type $function.m_testIntArrays__void_$pp_array)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:62:7
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
  (local $ints2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -279,7 +279,7 @@
 ;;; void Arrays.testLongArrays()
 (func $m_testLongArrays__void_$pp_array@array.Arrays
  (type $function.m_testLongArrays__void_$pp_array)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:80:7
  (local $longs (ref null $javaemul.internal.WasmArray.OfLong))
  (local $longs2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -324,7 +324,7 @@
 ;;; void Arrays.testDevirtualizedTypeArrays()
 (func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays
  (type $function.m_testDevirtualizedTypeArrays__void_$pp_array)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:99:7
  (local $booleans (ref null $javaemul.internal.WasmArray.OfObject))
  (local $booleans2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -356,13 +356,13 @@
   ;;@ array/Arrays.java:109:4
   (local.set $b (block (result i32)
    (local.set $$qualifier (ref.cast_static $java.lang.Boolean (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans)) (i32.const 0))))
-   (call_ref (local.get $$qualifier)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
   ))
   ;; (b = (Boolean $qualifier = ((Boolean) ((Boolean[]) booleans2d.elements[0]).elements[1]),$qualifier.booleanValue()));
   ;;@ array/Arrays.java:110:4
   (local.set $b (block (result i32)
    (local.set $$qualifier_1 (ref.cast_static $java.lang.Boolean (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans2d)) (i32.const 0)))) (i32.const 1))))
-   (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_1))))
+   (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_1))))
   ))
   ;; (booleans.elements[0] = java.lang.Boolean.valueOf(true));
   ;;@ array/Arrays.java:113:4
@@ -377,7 +377,7 @@
 ;;; void Arrays.testStringArrays()
 (func $m_testStringArrays__void_$pp_array@array.Arrays
  (type $function.m_testStringArrays__void_$pp_array)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:117:7
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
  (local $strings2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -422,7 +422,7 @@
 ;;; void Arrays.testNativeArray()
 (func $m_testNativeArray__void@array.Arrays
  (type $function.m_testNativeArray__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:138:14
  (local $nativeObjects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $nativeObjects2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -467,7 +467,7 @@
 ;;; void Arrays.testErasureCastsOnArrayAccess()
 (func $m_testErasureCastsOnArrayAccess__void@array.Arrays
  (type $function.m_testErasureCastsOnArrayAccess__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:156:14
  (local $container (ref null $array.Arrays.ArrayContainer))
  (local $s (ref null $java.lang.String))
@@ -487,7 +487,7 @@
 ;;; void Arrays.testCovariance()
 (func $m_testCovariance__void@array.Arrays
  (type $function.m_testCovariance__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:161:14
  (local $objectArray (ref null $javaemul.internal.WasmArray.OfObject))
  (local $stringArray (ref null $javaemul.internal.WasmArray.OfObject))
@@ -510,17 +510,17 @@
 ;;; void Arrays.testArraysSupertypeClosureTypes()
 (func $m_testArraysSupertypeClosureTypes__void@array.Arrays
  (type $function.m_testArraysSupertypeClosureTypes__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ array/Arrays.java:171:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; Arrays.this.consumesCloneable(javaemul.internal.WasmArray.OfObject.$create(10));
   ;;@ array/Arrays.java:172:4
-  (call_ref (local.get $this)(call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
   ;; Arrays.this.consumesSerializable(javaemul.internal.WasmArray.OfObject.$create(10));
   ;;@ array/Arrays.java:173:4
-  (call_ref (local.get $this)(call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
  )
 )
 (elem declare func $m_testArraysSupertypeClosureTypes__void@array.Arrays)
@@ -528,7 +528,7 @@
 ;;; void Arrays.consumesCloneable(Cloneable cloneable)
 (func $m_consumesCloneable__java_lang_Cloneable__void@array.Arrays
  (type $function.m_consumesCloneable__java_lang_Cloneable__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
  ;;@ array/Arrays.java:176:14
  (local $this (ref null $array.Arrays))
@@ -541,7 +541,7 @@
 ;;; void Arrays.consumesSerializable(Serializable serializable)
 (func $m_consumesSerializable__java_io_Serializable__void@array.Arrays
  (type $function.m_consumesSerializable__java_io_Serializable__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
  ;;@ array/Arrays.java:178:14
  (local $this (ref null $array.Arrays))
@@ -576,7 +576,7 @@
 ;;; Class<?> Arrays.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
@@ -615,7 +615,7 @@
   (local.set $$instance (struct.new $array.Arrays.SomeObject (ref.as_non_null (global.get $array.Arrays.SomeObject.vtable)) (ref.as_non_null (global.get $array.Arrays.SomeObject.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ array/Arrays.java:42:16
-  (call $$ctor__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ array/Arrays.java:42:16
   (return (local.get $$instance))
@@ -630,7 +630,7 @@
  (block
   ;; Object.this.$ctor();
   ;;@ array/Arrays.java:42:16
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -659,7 +659,7 @@
 ;;; Class<?> SomeObject.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.SomeObject
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.SomeObject))
  (local.set $this (ref.cast_static $array.Arrays.SomeObject (local.get $this.untyped)))
@@ -696,7 +696,7 @@
   (local.set $$instance (struct.new $array.Arrays.NativeType (ref.as_non_null (global.get $array.Arrays.NativeType.vtable)) (ref.as_non_null (global.get $array.Arrays.NativeType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ array/Arrays.java:136:23
-  (call $$ctor__void_$p_array_Arrays_NativeType@array.Arrays.NativeType (local.get $$instance))
+  (call $$ctor__void_$p_array_Arrays_NativeType@array.Arrays.NativeType (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ array/Arrays.java:136:23
   (return (local.get $$instance))
@@ -713,7 +713,7 @@
   (call $$clinit__void@array.Arrays.NativeType )
   ;; Object.this.$ctor();
   ;;@ array/Arrays.java:136:23
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -742,7 +742,7 @@
 ;;; Class<?> NativeType.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.NativeType
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.NativeType))
  (local.set $this (ref.cast_static $array.Arrays.NativeType (local.get $this.untyped)))
@@ -780,7 +780,7 @@
   (local.set $$instance (struct.new $array.Arrays.ArrayContainer (ref.as_non_null (global.get $array.Arrays.ArrayContainer.vtable)) (ref.as_non_null (global.get $array.Arrays.ArrayContainer.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;; $instance.$ctor();
   ;;@ array/Arrays.java:167:23
-  (call $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer (local.get $$instance))
+  (call $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ array/Arrays.java:167:23
   (return (local.get $$instance))
@@ -794,7 +794,7 @@
  (block
   ;; Object.this.$ctor();
   ;;@ array/Arrays.java:167:23
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -823,7 +823,7 @@
 ;;; Class<?> ArrayContainer.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.ArrayContainer))
  (local.set $this (ref.cast_static $array.Arrays.ArrayContainer (local.get $this.untyped)))

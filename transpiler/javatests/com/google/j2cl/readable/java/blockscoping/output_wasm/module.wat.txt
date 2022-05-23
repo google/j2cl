@@ -45,7 +45,7 @@
   (local.set $$instance (struct.new $blockscoping.BlockScoping (ref.as_non_null (global.get $blockscoping.BlockScoping.vtable)) (ref.as_non_null (global.get $blockscoping.BlockScoping.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ blockscoping/BlockScoping.java:18:13
-  (call $$ctor__void_$p_blockscoping_BlockScoping@blockscoping.BlockScoping (local.get $$instance))
+  (call $$ctor__void_$p_blockscoping_BlockScoping@blockscoping.BlockScoping (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ blockscoping/BlockScoping.java:18:13
   (return (local.get $$instance))
@@ -62,14 +62,14 @@
   (call $$clinit__void@blockscoping.BlockScoping )
   ;; Object.this.$ctor();
   ;;@ blockscoping/BlockScoping.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void BlockScoping.localScopes()
 (func $m_localScopes__void@blockscoping.BlockScoping
  (type $function.m_localScopes__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ blockscoping/BlockScoping.java:20:14
  (local $i i32)
  (local $i_1 i32)
@@ -93,7 +93,7 @@
 ;;; void BlockScoping.nestedScopes()
 (func $m_nestedScopes__void@blockscoping.BlockScoping
  (type $function.m_nestedScopes__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ blockscoping/BlockScoping.java:30:14
  (local $x i32)
  (local $y i32)
@@ -151,7 +151,7 @@
 ;;; Class<?> BlockScoping.getClass()
 (func $m_getClass__java_lang_Class@blockscoping.BlockScoping
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $blockscoping.BlockScoping))
  (local.set $this (ref.cast_static $blockscoping.BlockScoping (local.get $this.untyped)))

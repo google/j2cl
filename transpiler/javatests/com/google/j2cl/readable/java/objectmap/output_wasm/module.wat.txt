@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $objectmap.ObjectMap (ref.as_non_null (global.get $objectmap.ObjectMap.vtable)) (ref.as_non_null (global.get $objectmap.ObjectMap.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ objectmap/ObjectMap.java:23:13
-  (call $$ctor__void_$p_objectmap_ObjectMap@objectmap.ObjectMap (local.get $$instance))
+  (call $$ctor__void_$p_objectmap_ObjectMap@objectmap.ObjectMap (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ objectmap/ObjectMap.java:23:13
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@objectmap.ObjectMap )
   ;; Object.this.$ctor();
   ;;@ objectmap/ObjectMap.java:23:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -115,7 +115,7 @@
 ;;; Class<?> ObjectMap.getClass()
 (func $m_getClass__java_lang_Class@objectmap.ObjectMap
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $objectmap.ObjectMap))
  (local.set $this (ref.cast_static $objectmap.ObjectMap (local.get $this.untyped)))

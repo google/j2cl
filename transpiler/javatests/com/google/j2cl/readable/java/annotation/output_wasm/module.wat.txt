@@ -65,7 +65,7 @@
   (local.set $$instance (struct.new $annotation.Main (ref.as_non_null (global.get $annotation.Main.vtable)) (ref.as_non_null (global.get $annotation.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ annotation/Main.java:18:13
-  (call $$ctor__void_$p_annotation_Main@annotation.Main (local.get $$instance))
+  (call $$ctor__void_$p_annotation_Main@annotation.Main (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ annotation/Main.java:18:13
   (return (local.get $$instance))
@@ -82,7 +82,7 @@
   (call $$clinit__void@annotation.Main )
   ;; Object.this.$ctor();
   ;;@ annotation/Main.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -111,7 +111,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@annotation.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main))
  (local.set $this (ref.cast_static $annotation.Main (local.get $this.untyped)))
@@ -222,7 +222,7 @@
   (local.set $$instance (struct.new $annotation.Main.Bar (ref.as_non_null (global.get $annotation.Main.Bar.vtable)) (ref.as_non_null (global.get $annotation.Main.Bar.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ annotation/Main.java:30:8
-  (call $$ctor__annotation_Main__void_$p_annotation_Main_Bar@annotation.Main.Bar (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__annotation_Main__void_$p_annotation_Main_Bar@annotation.Main.Bar (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ annotation/Main.java:30:8
   (return (local.get $$instance))
@@ -240,14 +240,14 @@
   (call $$clinit__void@annotation.Main.Bar )
   ;; Object.this.$ctor();
   ;;@ annotation/Main.java:30:8
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int Bar.baz()
 (func $m_baz__int_$pp_annotation@annotation.Main.Bar
  (type $function.m_baz__int_$pp_annotation)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ annotation/Main.java:32:8
  (local $foo (ref null $java.lang.Object))
@@ -259,7 +259,7 @@
   (local.set $foo (ref.null $java.lang.Object))
   ;; foo.bar();
   ;;@ annotation/Main.java:34:6
-  (drop (call_ref (local.get $foo)(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast_static $annotation.Main.Foo.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $foo)) (i32.const -1))) )))
+  (drop (call_ref (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast_static $annotation.Main.Foo.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $foo)) (i32.const -1))) )))
   ;; return 123;
   ;;@ annotation/Main.java:35:6
   (return (i32.const 123))
@@ -292,7 +292,7 @@
 ;;; Class<?> Bar.getClass()
 (func $m_getClass__java_lang_Class@annotation.Main.Bar
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main.Bar))
  (local.set $this (ref.cast_static $annotation.Main.Bar (local.get $this.untyped)))

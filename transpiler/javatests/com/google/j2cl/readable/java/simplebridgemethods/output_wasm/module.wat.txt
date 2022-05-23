@@ -143,7 +143,7 @@
   (local.set $$instance (struct.new $simplebridgemethods.Superclass (ref.as_non_null (global.get $simplebridgemethods.Superclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Superclass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-  (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (local.get $$instance))
+  (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (return (local.get $$instance))
@@ -160,14 +160,14 @@
   (call $$clinit__void@simplebridgemethods.Superclass )
   ;; Object.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Superclass.m1(T t)
 (func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass
  (type $function.m_m1__java_lang_Error__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Error))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:19:14
  (local $this (ref null $simplebridgemethods.Superclass))
@@ -202,7 +202,7 @@
 ;;; Class<?> Superclass.getClass()
 (func $m_getClass__java_lang_Class@simplebridgemethods.Superclass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Superclass))
  (local.set $this (ref.cast_static $simplebridgemethods.Superclass (local.get $this.untyped)))
@@ -241,7 +241,7 @@
   (local.set $$instance (struct.new $simplebridgemethods.Subclass (ref.as_non_null (global.get $simplebridgemethods.Subclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Subclass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (call $$ctor__void_$p_simplebridgemethods_Subclass@simplebridgemethods.Subclass (local.get $$instance))
+  (call $$ctor__void_$p_simplebridgemethods_Subclass@simplebridgemethods.Subclass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (return (local.get $$instance))
@@ -258,14 +258,14 @@
   (call $$clinit__void@simplebridgemethods.Subclass )
   ;; Superclass.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (local.get $this))
+  (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Subclass.m1(AssertionError a)
 (func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass
  (type $function.m_m1__java_lang_AssertionError__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a (ref null $java.lang.AssertionError))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:26:14
  (local $this (ref null $simplebridgemethods.Subclass))
@@ -278,7 +278,7 @@
 ;;; void Subclass.m1(Error arg0)
 (func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass
  (type $function.m_m1__java_lang_Error__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Error))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
  (local $this (ref null $simplebridgemethods.Subclass))
@@ -286,7 +286,7 @@
  (block
   ;; Subclass.this.m1(((AssertionError) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (call_ref (local.get $this)(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
@@ -316,7 +316,7 @@
 ;;; Class<?> Subclass.getClass()
 (func $m_getClass__java_lang_Class@simplebridgemethods.Subclass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast_static $simplebridgemethods.Subclass (local.get $this.untyped)))
@@ -354,7 +354,7 @@
   (local.set $$instance (struct.new $simplebridgemethods.AnotherSubclass (ref.as_non_null (global.get $simplebridgemethods.AnotherSubclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.AnotherSubclass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-  (call $$ctor__void_$p_simplebridgemethods_AnotherSubclass@simplebridgemethods.AnotherSubclass (local.get $$instance))
+  (call $$ctor__void_$p_simplebridgemethods_AnotherSubclass@simplebridgemethods.AnotherSubclass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (return (local.get $$instance))
@@ -371,7 +371,7 @@
   (call $$clinit__void@simplebridgemethods.AnotherSubclass )
   ;; Superclass.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-  (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (local.get $this))
+  (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -400,7 +400,7 @@
 ;;; Class<?> AnotherSubclass.getClass()
 (func $m_getClass__java_lang_Class@simplebridgemethods.AnotherSubclass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.AnotherSubclass))
  (local.set $this (ref.cast_static $simplebridgemethods.AnotherSubclass (local.get $this.untyped)))
@@ -474,7 +474,7 @@
   (local.set $$instance (struct.new $simplebridgemethods.Task (ref.as_non_null (global.get $simplebridgemethods.Task.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Task.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-  (call $$ctor__void_$p_simplebridgemethods_Task@simplebridgemethods.Task (local.get $$instance))
+  (call $$ctor__void_$p_simplebridgemethods_Task@simplebridgemethods.Task (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (return (local.get $$instance))
@@ -491,14 +491,14 @@
   (call $$clinit__void@simplebridgemethods.Task )
   ;; Object.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Task.call(T t)
 (func $m_call__java_lang_Object__void@simplebridgemethods.Task
  (type $function.m_call__java_lang_Object__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:42:14
  (local $this (ref null $simplebridgemethods.Task))
@@ -533,7 +533,7 @@
 ;;; Class<?> Task.getClass()
 (func $m_getClass__java_lang_Class@simplebridgemethods.Task
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Task))
  (local.set $this (ref.cast_static $simplebridgemethods.Task (local.get $this.untyped)))
@@ -572,7 +572,7 @@
   (local.set $$instance (struct.new $simplebridgemethods.AnotherTask (ref.as_non_null (global.get $simplebridgemethods.AnotherTask.vtable)) (ref.as_non_null (global.get $simplebridgemethods.AnotherTask.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (call $$ctor__void_$p_simplebridgemethods_AnotherTask@simplebridgemethods.AnotherTask (local.get $$instance))
+  (call $$ctor__void_$p_simplebridgemethods_AnotherTask@simplebridgemethods.AnotherTask (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (return (local.get $$instance))
@@ -589,14 +589,14 @@
   (call $$clinit__void@simplebridgemethods.AnotherTask )
   ;; Object.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void AnotherTask.call(Superclass<T> t)
 (func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask
  (type $function.m_call__simplebridgemethods_Superclass__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $simplebridgemethods.Superclass))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:50:14
  (local $this (ref null $simplebridgemethods.AnotherTask))
@@ -609,7 +609,7 @@
 ;;; void AnotherTask.call(Object arg0)
 (func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask
  (type $function.m_call__java_lang_Object__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
  (local $this (ref null $simplebridgemethods.AnotherTask))
@@ -617,7 +617,7 @@
  (block
   ;; AnotherTask.this.call(((Superclass<T>) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (call_ref (local.get $this)(ref.cast_static $simplebridgemethods.Superclass (local.get $arg0))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $simplebridgemethods.Superclass (local.get $arg0))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
@@ -647,7 +647,7 @@
 ;;; Class<?> AnotherTask.getClass()
 (func $m_getClass__java_lang_Class@simplebridgemethods.AnotherTask
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast_static $simplebridgemethods.AnotherTask (local.get $this.untyped)))
@@ -684,7 +684,7 @@
   (local.set $$instance (struct.new $simplebridgemethods.SimpleBridgeMethods (ref.as_non_null (global.get $simplebridgemethods.SimpleBridgeMethods.vtable)) (ref.as_non_null (global.get $simplebridgemethods.SimpleBridgeMethods.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-  (call $$ctor__void_$p_simplebridgemethods_SimpleBridgeMethods@simplebridgemethods.SimpleBridgeMethods (local.get $$instance))
+  (call $$ctor__void_$p_simplebridgemethods_SimpleBridgeMethods@simplebridgemethods.SimpleBridgeMethods (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (return (local.get $$instance))
@@ -701,7 +701,7 @@
   (call $$clinit__void@simplebridgemethods.SimpleBridgeMethods )
   ;; Object.this.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -730,7 +730,7 @@
 ;;; Class<?> SimpleBridgeMethods.getClass()
 (func $m_getClass__java_lang_Class@simplebridgemethods.SimpleBridgeMethods
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.SimpleBridgeMethods))
  (local.set $this (ref.cast_static $simplebridgemethods.SimpleBridgeMethods (local.get $this.untyped)))

@@ -206,7 +206,7 @@
   (local.set $$instance (struct.new $mixednestings.MixedNestings (ref.as_non_null (global.get $mixednestings.MixedNestings.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ mixednestings/MixedNestings.java:26:13
-  (call $$ctor__void_$p_mixednestings_MixedNestings@mixednestings.MixedNestings (local.get $$instance))
+  (call $$ctor__void_$p_mixednestings_MixedNestings@mixednestings.MixedNestings (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ mixednestings/MixedNestings.java:26:13
   (return (local.get $$instance))
@@ -223,14 +223,14 @@
   (call $$clinit__void@mixednestings.MixedNestings )
   ;; Object.this.$ctor();
   ;;@ mixednestings/MixedNestings.java:26:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void MixedNestings.mm()
 (func $m_mm__void@mixednestings.MixedNestings
  (type $function.m_mm__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ mixednestings/MixedNestings.java:27:14
  (local $this (ref null $mixednestings.MixedNestings))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings (local.get $this.untyped)))
@@ -242,7 +242,7 @@
 ;;; void MixedNestings.test()
 (func $m_test__void@mixednestings.MixedNestings
  (type $function.m_test__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ mixednestings/MixedNestings.java:71:14
  (local $$qualifier (ref null $mixednestings.MixedNestings.A))
  (local $this (ref null $mixednestings.MixedNestings))
@@ -254,7 +254,7 @@
    (local.set $$qualifier (call $$create__mixednestings_MixedNestings__mixednestings_MixedNestings_A@mixednestings.MixedNestings.A (local.get $this)))
    ;; $qualifier.a();
    ;;@ mixednestings/MixedNestings.java:72:4
-   (call_ref (local.get $$qualifier)(struct.get $mixednestings.MixedNestings.A.vtable $m_a__void (struct.get $mixednestings.MixedNestings.A $vtable(local.get $$qualifier))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $mixednestings.MixedNestings.A.vtable $m_a__void (struct.get $mixednestings.MixedNestings.A $vtable(local.get $$qualifier))))
   )
  )
 )
@@ -285,7 +285,7 @@
 ;;; Class<?> MixedNestings.getClass()
 (func $m_getClass__java_lang_Class@mixednestings.MixedNestings
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $mixednestings.MixedNestings))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings (local.get $this.untyped)))
@@ -325,7 +325,7 @@
   (local.set $$instance (struct.new $mixednestings.MixedNestings.A.1B.1.1 (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.1.1.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.1.1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ mixednestings/MixedNestings.java:52:55
-  (call $$ctor__mixednestings_MixedNestings_A_1B_1__void_$p_mixednestings_MixedNestings_A_1B_1_1@mixednestings.MixedNestings.A.1B.1.1 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__mixednestings_MixedNestings_A_1B_1__void_$p_mixednestings_MixedNestings_A_1B_1_1@mixednestings.MixedNestings.A.1B.1.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ mixednestings/MixedNestings.java:52:55
   (return (local.get $$instance))
@@ -343,14 +343,14 @@
   (call $$clinit__void@mixednestings.MixedNestings.A.1B.1.1 )
   ;; Object.this.$ctor();
   ;;@ mixednestings/MixedNestings.java:52:55
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int <anonymous> implements MyInterface.fun(int b)
 (func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1
  (type $function.m_fun__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $b i32)
  (result i32)
  ;;@ mixednestings/MixedNestings.java:54:43
@@ -389,7 +389,7 @@
 ;;; Class<?> <anonymous> implements MyInterface.getClass()
 (func $m_getClass__java_lang_Class@mixednestings.MixedNestings.A.1B.1.1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $mixednestings.MixedNestings.A.1B.1.1))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings.A.1B.1.1 (local.get $this.untyped)))
@@ -429,7 +429,7 @@
   (local.set $$instance (struct.new $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ mixednestings/MixedNestings.java:48:28
-  (call $$ctor__mixednestings_MixedNestings_A_1B_1__void_$p_mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__mixednestings_MixedNestings_A_1B_1__void_$p_mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ mixednestings/MixedNestings.java:48:28
   (return (local.get $$instance))
@@ -447,14 +447,14 @@
   (call $$clinit__void@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 )
   ;; Object.this.$ctor();
   ;;@ mixednestings/MixedNestings.java:48:28
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int $LambdaImplementor$1.fun(int m)
 (func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1
  (type $function.m_fun__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $m i32)
  (result i32)
  ;;@ mixednestings/MixedNestings.java:48:28
@@ -464,18 +464,18 @@
  (block
   ;; $LambdaImplementor$1.this.this.this.this.this.mm();
   ;;@ mixednestings/MixedNestings.java:49:30
-  (call_ref (struct.get $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this)))))(struct.get $mixednestings.MixedNestings.vtable $m_mm__void (struct.get $mixednestings.MixedNestings $vtable(struct.get $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this))))))))
+  (call_ref (ref.as_non_null (struct.get $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this))))))(struct.get $mixednestings.MixedNestings.vtable $m_mm__void (struct.get $mixednestings.MixedNestings $vtable(struct.get $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this))))))))
   ;; $LambdaImplementor$1.this.this.this.this.aa();
   ;;@ mixednestings/MixedNestings.java:50:30
-  (call_ref (struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this))))(struct.get $mixednestings.MixedNestings.A.vtable $m_aa__void (struct.get $mixednestings.MixedNestings.A $vtable(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this)))))))
+  (call_ref (ref.as_non_null (struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this)))))(struct.get $mixednestings.MixedNestings.A.vtable $m_aa__void (struct.get $mixednestings.MixedNestings.A $vtable(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this)))))))
   ;; $LambdaImplementor$1.this.this.this.bb();
   ;;@ mixednestings/MixedNestings.java:51:30
-  (call_ref (struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this)))(struct.get $mixednestings.MixedNestings.A.1B.vtable $m_bb__void (struct.get $mixednestings.MixedNestings.A.1B $vtable(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this))))))
+  (call_ref (ref.as_non_null (struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this))))(struct.get $mixednestings.MixedNestings.A.1B.vtable $m_bb__void (struct.get $mixednestings.MixedNestings.A.1B $vtable(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this))))))
   ;; return (<anonymous> implements MyInterface $qualifier = mixednestings.MixedNestings.A.1B.1.1.$create($LambdaImplementor$1.this.this),$qualifier.fun(100));
   ;;@ mixednestings/MixedNestings.java:52:30
   (return (block (result i32)
    (local.set $$qualifier (call $$create__mixednestings_MixedNestings_A_1B_1__mixednestings_MixedNestings_A_1B_1_1@mixednestings.MixedNestings.A.1B.1.1 (struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1(local.get $this))))
-   (call_ref (local.get $$qualifier)(i32.const 100)(struct.get $mixednestings.MixedNestings.A.1B.1.1.vtable $m_fun__int__int (struct.get $mixednestings.MixedNestings.A.1B.1.1 $vtable(local.get $$qualifier))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(i32.const 100)(struct.get $mixednestings.MixedNestings.A.1B.1.1.vtable $m_fun__int__int (struct.get $mixednestings.MixedNestings.A.1B.1.1 $vtable(local.get $$qualifier))))
   ))
  )
 )
@@ -506,7 +506,7 @@
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (local.get $this.untyped)))
@@ -546,7 +546,7 @@
   (local.set $$instance (struct.new $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ mixednestings/MixedNestings.java:43:22
-  (call $$ctor__mixednestings_MixedNestings_A_1B_1__void_$p_mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__mixednestings_MixedNestings_A_1B_1__void_$p_mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ mixednestings/MixedNestings.java:43:22
   (return (local.get $$instance))
@@ -564,14 +564,14 @@
   (call $$clinit__void@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 )
   ;; Object.this.$ctor();
   ;;@ mixednestings/MixedNestings.java:43:22
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int $LambdaImplementor$2.fun(int n)
 (func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2
  (type $function.m_fun__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $n i32)
  (result i32)
  ;;@ mixednestings/MixedNestings.java:43:22
@@ -581,19 +581,19 @@
  (block
   ;; $LambdaImplementor$2.this.this.this.this.this.mm();
   ;;@ mixednestings/MixedNestings.java:44:24
-  (call_ref (struct.get $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this)))))(struct.get $mixednestings.MixedNestings.vtable $m_mm__void (struct.get $mixednestings.MixedNestings $vtable(struct.get $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this))))))))
+  (call_ref (ref.as_non_null (struct.get $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this))))))(struct.get $mixednestings.MixedNestings.vtable $m_mm__void (struct.get $mixednestings.MixedNestings $vtable(struct.get $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this))))))))
   ;; $LambdaImplementor$2.this.this.this.this.aa();
   ;;@ mixednestings/MixedNestings.java:45:24
-  (call_ref (struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this))))(struct.get $mixednestings.MixedNestings.A.vtable $m_aa__void (struct.get $mixednestings.MixedNestings.A $vtable(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this)))))))
+  (call_ref (ref.as_non_null (struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this)))))(struct.get $mixednestings.MixedNestings.A.vtable $m_aa__void (struct.get $mixednestings.MixedNestings.A $vtable(struct.get $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this)))))))
   ;; $LambdaImplementor$2.this.this.this.bb();
   ;;@ mixednestings/MixedNestings.java:46:24
-  (call_ref (struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this)))(struct.get $mixednestings.MixedNestings.A.1B.vtable $m_bb__void (struct.get $mixednestings.MixedNestings.A.1B $vtable(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this))))))
+  (call_ref (ref.as_non_null (struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this))))(struct.get $mixednestings.MixedNestings.A.1B.vtable $m_bb__void (struct.get $mixednestings.MixedNestings.A.1B $vtable(struct.get $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this))))))
   ;; MyInterface iii = mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1.$create($LambdaImplementor$2.this.this);
   ;;@ mixednestings/MixedNestings.java:47:24
   (local.set $iii (call $$create__mixednestings_MixedNestings_A_1B_1__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$1@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$1 (struct.get $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 $$outer_this__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2(local.get $this))))
   ;; return iii.fun(200);
   ;;@ mixednestings/MixedNestings.java:59:24
-  (return (call_ref (local.get $iii)(i32.const 200)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast_static $mixednestings.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $iii)) (i32.const 0))) )))
+  (return (call_ref (ref.as_non_null (local.get $iii))(i32.const 200)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast_static $mixednestings.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $iii)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2)
@@ -623,7 +623,7 @@
 ;;; Class<?> $LambdaImplementor$2.getClass()
 (func $m_getClass__java_lang_Class@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (local.get $this.untyped)))
@@ -663,7 +663,7 @@
   (local.set $$instance (struct.new $mixednestings.MixedNestings.A.1B.1 (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.1.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ mixednestings/MixedNestings.java:38:32
-  (call $$ctor__mixednestings_MixedNestings_A_1B__void_$p_mixednestings_MixedNestings_A_1B_1@mixednestings.MixedNestings.A.1B.1 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__mixednestings_MixedNestings_A_1B__void_$p_mixednestings_MixedNestings_A_1B_1@mixednestings.MixedNestings.A.1B.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ mixednestings/MixedNestings.java:38:32
   (return (local.get $$instance))
@@ -681,14 +681,14 @@
   (call $$clinit__void@mixednestings.MixedNestings.A.1B.1 )
   ;; Object.this.$ctor();
   ;;@ mixednestings/MixedNestings.java:38:32
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int <anonymous> implements MyInterface.fun(int a)
 (func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1
  (type $function.m_fun__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
  ;;@ mixednestings/MixedNestings.java:41:27
@@ -701,7 +701,7 @@
   (local.set $ii (call $$create__mixednestings_MixedNestings_A_1B_1__mixednestings_MixedNestings_A_1B_1_$LambdaImplementor$2@mixednestings.MixedNestings.A.1B.1.$LambdaImplementor$2 (local.get $this)))
   ;; return ii.fun(300);
   ;;@ mixednestings/MixedNestings.java:61:18
-  (return (call_ref (local.get $ii)(i32.const 300)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast_static $mixednestings.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $ii)) (i32.const 0))) )))
+  (return (call_ref (ref.as_non_null (local.get $ii))(i32.const 300)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast_static $mixednestings.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $ii)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1)
@@ -731,7 +731,7 @@
 ;;; Class<?> <anonymous> implements MyInterface.getClass()
 (func $m_getClass__java_lang_Class@mixednestings.MixedNestings.A.1B.1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $mixednestings.MixedNestings.A.1B.1))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings.A.1B.1 (local.get $this.untyped)))
@@ -772,7 +772,7 @@
   (local.set $$instance (struct.new $mixednestings.MixedNestings.A.1B (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.A.1B.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ mixednestings/MixedNestings.java:33:12
-  (call $$ctor__mixednestings_MixedNestings_A__void_$p_mixednestings_MixedNestings_A_1B@mixednestings.MixedNestings.A.1B (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__mixednestings_MixedNestings_A__void_$p_mixednestings_MixedNestings_A_1B@mixednestings.MixedNestings.A.1B (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ mixednestings/MixedNestings.java:33:12
   (return (local.get $$instance))
@@ -790,14 +790,14 @@
   (call $$clinit__void@mixednestings.MixedNestings.A.1B )
   ;; Object.this.$ctor();
   ;;@ mixednestings/MixedNestings.java:33:12
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void B.bb()
 (func $m_bb__void@mixednestings.MixedNestings.A.1B
  (type $function.m_bb__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ mixednestings/MixedNestings.java:34:20
  (local $this (ref null $mixednestings.MixedNestings.A.1B))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings.A.1B (local.get $this.untyped)))
@@ -809,7 +809,7 @@
 ;;; int B.b()
 (func $m_b__int@mixednestings.MixedNestings.A.1B
  (type $function.m_b__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ mixednestings/MixedNestings.java:36:19
  (local $i (ref null $java.lang.Object))
@@ -821,7 +821,7 @@
   (local.set $i (call $$create__mixednestings_MixedNestings_A_1B__mixednestings_MixedNestings_A_1B_1@mixednestings.MixedNestings.A.1B.1 (local.get $this)))
   ;; return i.fun(400);
   ;;@ mixednestings/MixedNestings.java:64:10
-  (return (call_ref (local.get $i)(i32.const 400)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast_static $mixednestings.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 0))) )))
+  (return (call_ref (ref.as_non_null (local.get $i))(i32.const 400)(struct.get $mixednestings.MyInterface.vtable $m_fun__int__int (ref.cast_static $mixednestings.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_b__int@mixednestings.MixedNestings.A.1B)
@@ -851,7 +851,7 @@
 ;;; Class<?> B.getClass()
 (func $m_getClass__java_lang_Class@mixednestings.MixedNestings.A.1B
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $mixednestings.MixedNestings.A.1B))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings.A.1B (local.get $this.untyped)))
@@ -892,7 +892,7 @@
   (local.set $$instance (struct.new $mixednestings.MixedNestings.A (ref.as_non_null (global.get $mixednestings.MixedNestings.A.vtable)) (ref.as_non_null (global.get $mixednestings.MixedNestings.A.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ mixednestings/MixedNestings.java:29:8
-  (call $$ctor__mixednestings_MixedNestings__void_$p_mixednestings_MixedNestings_A@mixednestings.MixedNestings.A (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__mixednestings_MixedNestings__void_$p_mixednestings_MixedNestings_A@mixednestings.MixedNestings.A (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ mixednestings/MixedNestings.java:29:8
   (return (local.get $$instance))
@@ -910,14 +910,14 @@
   (call $$clinit__void@mixednestings.MixedNestings.A )
   ;; Object.this.$ctor();
   ;;@ mixednestings/MixedNestings.java:29:8
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void A.aa()
 (func $m_aa__void@mixednestings.MixedNestings.A
  (type $function.m_aa__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ mixednestings/MixedNestings.java:30:16
  (local $this (ref null $mixednestings.MixedNestings.A))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings.A (local.get $this.untyped)))
@@ -929,7 +929,7 @@
 ;;; void A.a()
 (func $m_a__void@mixednestings.MixedNestings.A
  (type $function.m_a__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ mixednestings/MixedNestings.java:32:16
  (local $$qualifier (ref null $mixednestings.MixedNestings.A.1B))
  (local $this (ref null $mixednestings.MixedNestings.A))
@@ -941,7 +941,7 @@
    (local.set $$qualifier (call $$create__mixednestings_MixedNestings_A__mixednestings_MixedNestings_A_1B@mixednestings.MixedNestings.A.1B (local.get $this)))
    ;; $qualifier.b();
    ;;@ mixednestings/MixedNestings.java:67:6
-   (drop (call_ref (local.get $$qualifier)(struct.get $mixednestings.MixedNestings.A.1B.vtable $m_b__int (struct.get $mixednestings.MixedNestings.A.1B $vtable(local.get $$qualifier)))))
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $mixednestings.MixedNestings.A.1B.vtable $m_b__int (struct.get $mixednestings.MixedNestings.A.1B $vtable(local.get $$qualifier)))))
   )
  )
 )
@@ -972,7 +972,7 @@
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@mixednestings.MixedNestings.A
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $mixednestings.MixedNestings.A))
  (local.set $this (ref.cast_static $mixednestings.MixedNestings.A (local.get $this.untyped)))

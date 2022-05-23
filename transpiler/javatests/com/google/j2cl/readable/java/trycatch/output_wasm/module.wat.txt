@@ -83,7 +83,7 @@
   (local.set $$instance (struct.new $trycatch.TryCatch (ref.as_non_null (global.get $trycatch.TryCatch.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ trycatch/TryCatch.java:18:13
-  (call $$ctor__void_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $$instance))
+  (call $$ctor__void_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ trycatch/TryCatch.java:18:13
   (return (local.get $$instance))
@@ -100,14 +100,14 @@
   (call $$clinit__void@trycatch.TryCatch )
   ;; Object.this.$ctor();
   ;;@ trycatch/TryCatch.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void TryCatch.testMultiCatch()
 (func $m_testMultiCatch__void@trycatch.TryCatch
  (type $function.m_testMultiCatch__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:20:14
  (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.RuntimeException))
@@ -171,7 +171,7 @@
 ;;; void TryCatch.testEmptyThrowableCatch()
 (func $m_testEmptyThrowableCatch__void@trycatch.TryCatch
  (type $function.m_testEmptyThrowableCatch__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:30:14
  (local $__$exc (ref null $java.lang.Throwable))
  (local $__$exc_1 (ref null $java.lang.Throwable))
@@ -224,7 +224,7 @@
 ;;; void TryCatch.testEmptyThrowableRethrow()
 (func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch
  (type $function.m_testEmptyThrowableRethrow__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:46:14
  (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.Throwable))
@@ -260,7 +260,7 @@
 ;;; void TryCatch.testFinally()
 (func $m_testFinally__void@trycatch.TryCatch
  (type $function.m_testFinally__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:54:14
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
@@ -279,7 +279,7 @@
 ;;; void TryCatch.testTryWithResource()
 (func $m_testTryWithResource__void@trycatch.TryCatch
  (type $function.m_testTryWithResource__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:66:14
  (local $$primaryExc (ref null $java.lang.Throwable))
  (local $thing (ref null $trycatch.TryCatch.ClosableThing))
@@ -379,7 +379,7 @@
 ;;; void TryCatch.testTryWithResourceJava9()
 (func $m_testTryWithResourceJava9__void@trycatch.TryCatch
  (type $function.m_testTryWithResourceJava9__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:75:14
  (local $thing (ref null $trycatch.TryCatch.ClosableThing))
  (local $thing2 (ref null $trycatch.TryCatch.ClosableThing))
@@ -487,7 +487,7 @@
 ;;; void TryCatch.testTryWithResouceOnStaticField()
 (func $m_testTryWithResouceOnStaticField__void@trycatch.TryCatch
  (type $function.m_testTryWithResouceOnStaticField__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:87:14
  (local $$primaryExc (ref null $java.lang.Throwable))
  (local $$resource (ref null $trycatch.TryCatch.ClosableThing))
@@ -577,7 +577,7 @@
 ;;; void TryCatch.testNestedTryCatch()
 (func $m_testNestedTryCatch__void@trycatch.TryCatch
  (type $function.m_testNestedTryCatch__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:95:14
  (local $__$exc (ref null $java.lang.Throwable))
  (local $ae (ref null $java.lang.Exception))
@@ -651,14 +651,14 @@
 ;;; void TryCatch.testThrowGenerics()
 (func $m_testThrowGenerics__void@trycatch.TryCatch
  (type $function.m_testThrowGenerics__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:107:14
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
   ;; throw ((Exception) TryCatch.this.getT(java.lang.Exception.$create()));
   ;;@ trycatch/TryCatch.java:108:4
-  (throw $exception.event (ref.cast_static $java.lang.Exception (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $$create__java_lang_Exception@java.lang.Exception ))))
+  (throw $exception.event (ref.cast_static $java.lang.Exception (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))(call $$create__java_lang_Exception@java.lang.Exception ))))
  )
 )
 (elem declare func $m_testThrowGenerics__void@trycatch.TryCatch)
@@ -679,14 +679,14 @@
 ;;; void TryCatch.testThrowBoundGenerics()
 (func $m_testThrowBoundGenerics__void@trycatch.TryCatch
  (type $function.m_testThrowBoundGenerics__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:115:14
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
  (block
   ;; throw TryCatch.this.getThrowable();
   ;;@ trycatch/TryCatch.java:116:4
-  (throw $exception.event (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)))
+  (throw $exception.event (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))))
  )
 )
 (elem declare func $m_testThrowBoundGenerics__void@trycatch.TryCatch)
@@ -731,7 +731,7 @@
 ;;; Class<?> TryCatch.getClass()
 (func $m_getClass__java_lang_Class@trycatch.TryCatch
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast_static $trycatch.TryCatch (local.get $this.untyped)))
@@ -769,7 +769,7 @@
   (local.set $$instance (struct.new $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ trycatch/TryCatch.java:61:15
-  (call $$ctor__void_$p_trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing (local.get $$instance))
+  (call $$ctor__void_$p_trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ trycatch/TryCatch.java:61:15
   (return (local.get $$instance))
@@ -786,14 +786,14 @@
   (call $$clinit__void@trycatch.TryCatch.ClosableThing )
   ;; Object.this.$ctor();
   ;;@ trycatch/TryCatch.java:61:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void ClosableThing.close()
 (func $m_close__void@trycatch.TryCatch.ClosableThing
  (type $function.m_close__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ trycatch/TryCatch.java:63:16
  (local $this (ref null $trycatch.TryCatch.ClosableThing))
  (local.set $this (ref.cast_static $trycatch.TryCatch.ClosableThing (local.get $this.untyped)))
@@ -827,7 +827,7 @@
 ;;; Class<?> ClosableThing.getClass()
 (func $m_getClass__java_lang_Class@trycatch.TryCatch.ClosableThing
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $trycatch.TryCatch.ClosableThing))
  (local.set $this (ref.cast_static $trycatch.TryCatch.ClosableThing (local.get $this.untyped)))

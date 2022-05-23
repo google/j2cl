@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $assertsimple.AssertSimple (ref.as_non_null (global.get $assertsimple.AssertSimple.vtable)) (ref.as_non_null (global.get $assertsimple.AssertSimple.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ assertsimple/AssertSimple.java:18:13
-  (call $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple (local.get $$instance))
+  (call $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ assertsimple/AssertSimple.java:18:13
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@assertsimple.AssertSimple )
   ;; Object.this.$ctor();
   ;;@ assertsimple/AssertSimple.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -98,7 +98,7 @@
 ;;; Class<?> AssertSimple.getClass()
 (func $m_getClass__java_lang_Class@assertsimple.AssertSimple
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $assertsimple.AssertSimple))
  (local.set $this (ref.cast_static $assertsimple.AssertSimple (local.get $this.untyped)))

@@ -58,7 +58,7 @@
   (local.set $$instance (struct.new $multipletopclasses.AnotherClass (ref.as_non_null (global.get $multipletopclasses.AnotherClass.vtable)) (ref.as_non_null (global.get $multipletopclasses.AnotherClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
-  (call $$ctor__void_$p_multipletopclasses_AnotherClass@multipletopclasses.AnotherClass (local.get $$instance))
+  (call $$ctor__void_$p_multipletopclasses_AnotherClass@multipletopclasses.AnotherClass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
   (return (local.get $$instance))
@@ -75,7 +75,7 @@
   (call $$clinit__void@multipletopclasses.AnotherClass )
   ;; Object.this.$ctor();
   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -104,7 +104,7 @@
 ;;; Class<?> AnotherClass.getClass()
 (func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipletopclasses.AnotherClass))
  (local.set $this (ref.cast_static $multipletopclasses.AnotherClass (local.get $this.untyped)))
@@ -141,7 +141,7 @@
   (local.set $$instance (struct.new $multipletopclasses.MultipleTopClasses (ref.as_non_null (global.get $multipletopclasses.MultipleTopClasses.vtable)) (ref.as_non_null (global.get $multipletopclasses.MultipleTopClasses.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
-  (call $$ctor__void_$p_multipletopclasses_MultipleTopClasses@multipletopclasses.MultipleTopClasses (local.get $$instance))
+  (call $$ctor__void_$p_multipletopclasses_MultipleTopClasses@multipletopclasses.MultipleTopClasses (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
   (return (local.get $$instance))
@@ -158,7 +158,7 @@
   (call $$clinit__void@multipletopclasses.MultipleTopClasses )
   ;; AnotherClass.this.$ctor();
   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
-  (call $$ctor__void_$p_multipletopclasses_AnotherClass@multipletopclasses.AnotherClass (local.get $this))
+  (call $$ctor__void_$p_multipletopclasses_AnotherClass@multipletopclasses.AnotherClass (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -187,7 +187,7 @@
 ;;; Class<?> MultipleTopClasses.getClass()
 (func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipletopclasses.MultipleTopClasses))
  (local.set $this (ref.cast_static $multipletopclasses.MultipleTopClasses (local.get $this.untyped)))

@@ -533,7 +533,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences (ref.as_non_null (global.get $methodreferences.MethodReferences.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:20:13
-  (call $$ctor__void_$p_methodreferences_MethodReferences@methodreferences.MethodReferences (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences@methodreferences.MethodReferences (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:20:13
   (return (local.get $$instance))
@@ -550,7 +550,7 @@
   (call $$clinit__void@methodreferences.MethodReferences )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:20:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -571,7 +571,7 @@
 ;;; Boolean MethodReferences.isA()
 (func $m_isA__java_lang_Boolean@methodreferences.MethodReferences
  (type $function.m_isA__java_lang_Boolean)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Boolean))
  ;;@ methodreferences/MethodReferences.java:68:17
  (local $this (ref null $methodreferences.MethodReferences))
@@ -587,7 +587,7 @@
 ;;; Object MethodReferences.self()
 (func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences
  (type $function.m_self__java_lang_Object_$pp_methodreferences)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:72:9
  (local $this (ref null $methodreferences.MethodReferences))
@@ -603,7 +603,7 @@
 ;;; Boolean MethodReferences.sameAs(Number n)
 (func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences
  (type $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Number))
  (result (ref null $java.lang.Boolean))
  ;;@ methodreferences/MethodReferences.java:78:10
@@ -620,7 +620,7 @@
 ;;; void MethodReferences.main()
 (func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences
  (type $function.m_main__void_$pp_methodreferences)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:82:7
  (local $objectFactory (ref null $java.lang.Object))
  (local $$$q (ref null $methodreferences.MethodReferences))
@@ -748,7 +748,7 @@
 ;;; Class<?> MethodReferences.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences (local.get $this.untyped)))
@@ -788,7 +788,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$1 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.itable)) (i32.const 0) (local.get $$captured_$$q)))
   ;; $instance.$ctor($captured_$$q);
   ;;@ methodreferences/MethodReferences.java:76:49
-  (call $$ctor__java_lang_Object__void_$p_methodreferences_MethodReferences_$LambdaImplementor$1@methodreferences.MethodReferences.$LambdaImplementor$1 (local.get $$instance)(local.get $$captured_$$q))
+  (call $$ctor__java_lang_Object__void_$p_methodreferences_MethodReferences_$LambdaImplementor$1@methodreferences.MethodReferences.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance))(local.get $$captured_$$q))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:76:49
   (return (local.get $$instance))
@@ -806,14 +806,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$1 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:76:49
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$1.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:76:49
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
@@ -821,7 +821,7 @@
  (block
   ;; return $LambdaImplementor$1.this.$$q.toString();
   ;;@ methodreferences/MethodReferences.java:76:49
-  (return (call_ref (struct.get $methodreferences.MethodReferences.$LambdaImplementor$1 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1(local.get $this))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$1 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1(local.get $this))))))
+  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$1 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1(local.get $this)))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$1 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1(local.get $this))))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1)
@@ -851,7 +851,7 @@
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$1 (local.get $this.untyped)))
@@ -889,7 +889,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$2 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$2.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:83:37
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$2@methodreferences.MethodReferences.$LambdaImplementor$2 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$2@methodreferences.MethodReferences.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:83:37
   (return (local.get $$instance))
@@ -906,14 +906,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$2 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:83:37
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$2.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$2
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:83:37
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$2))
@@ -951,7 +951,7 @@
 ;;; Class<?> $LambdaImplementor$2.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$2
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$2 (local.get $this.untyped)))
@@ -989,7 +989,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$3 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$3.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:85:20
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$3@methodreferences.MethodReferences.$LambdaImplementor$3 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$3@methodreferences.MethodReferences.$LambdaImplementor$3 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:85:20
   (return (local.get $$instance))
@@ -1006,14 +1006,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$3 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:85:20
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$3.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$3
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:85:20
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$3))
@@ -1051,7 +1051,7 @@
 ;;; Class<?> $LambdaImplementor$3.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$3
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$3))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$3 (local.get $this.untyped)))
@@ -1091,7 +1091,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$4 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$4.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$4.itable)) (i32.const 0) (local.get $$captured_$$q)))
   ;; $instance.$ctor($captured_$$q);
   ;;@ methodreferences/MethodReferences.java:88:20
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$4@methodreferences.MethodReferences.$LambdaImplementor$4 (local.get $$instance)(local.get $$captured_$$q))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$4@methodreferences.MethodReferences.$LambdaImplementor$4 (ref.as_non_null (local.get $$instance))(local.get $$captured_$$q))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:88:20
   (return (local.get $$instance))
@@ -1109,14 +1109,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$4 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:88:20
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$4.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$4
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:88:20
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$4))
@@ -1124,7 +1124,7 @@
  (block
   ;; return $LambdaImplementor$4.this.$$q.isA();
   ;;@ methodreferences/MethodReferences.java:88:20
-  (return (call_ref (struct.get $methodreferences.MethodReferences.$LambdaImplementor$4 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4(local.get $this))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$4 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4(local.get $this))))))
+  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$4 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$4 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4(local.get $this))))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$4)
@@ -1154,7 +1154,7 @@
 ;;; Class<?> $LambdaImplementor$4.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$4
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$4))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$4 (local.get $this.untyped)))
@@ -1192,7 +1192,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$5 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$5.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$5.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:90:66
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$5@methodreferences.MethodReferences.$LambdaImplementor$5 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$5@methodreferences.MethodReferences.$LambdaImplementor$5 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:90:66
   (return (local.get $$instance))
@@ -1209,14 +1209,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$5 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:90:66
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; V $LambdaImplementor$5.apply(T arg0, U arg1)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$5
  (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1234,7 +1234,7 @@
   (local.set $arg1_1 (ref.cast_static $java.lang.Number (ref.cast_static $java.lang.Object (local.get $arg1))))
   ;; return arg0.sameAs(arg1);
   ;;@ methodreferences/MethodReferences.java:90:66
-  (return (call_ref (local.get $arg0_1)(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref (ref.as_non_null (local.get $arg0_1))(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$5)
@@ -1264,7 +1264,7 @@
 ;;; Class<?> $LambdaImplementor$5.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$5
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$5))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$5 (local.get $this.untyped)))
@@ -1304,7 +1304,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$6 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$6.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$6.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ methodreferences/MethodReferences.java:92:55
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$6@methodreferences.MethodReferences.$LambdaImplementor$6 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$6@methodreferences.MethodReferences.$LambdaImplementor$6 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:92:55
   (return (local.get $$instance))
@@ -1322,14 +1322,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$6 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:92:55
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; U $LambdaImplementor$6.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$6
  (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:92:55
@@ -1342,7 +1342,7 @@
   (local.set $arg0_1 (ref.cast_static $java.lang.Number (ref.cast_static $java.lang.Object (local.get $arg0))))
   ;; return $LambdaImplementor$6.this.this.sameAs(arg0);
   ;;@ methodreferences/MethodReferences.java:92:55
-  (return (call_ref (struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this))))))
+  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this)))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$6)
@@ -1372,7 +1372,7 @@
 ;;; Class<?> $LambdaImplementor$6.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$6
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$6))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$6 (local.get $this.untyped)))
@@ -1410,7 +1410,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$7 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$7.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$7.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:95:53
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$7@methodreferences.MethodReferences.$LambdaImplementor$7 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$7@methodreferences.MethodReferences.$LambdaImplementor$7 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:95:53
   (return (local.get $$instance))
@@ -1427,14 +1427,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$7 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:95:53
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; boolean $LambdaImplementor$7.apply(T arg0)
 (func $m_apply__java_lang_Object__boolean@methodreferences.MethodReferences.$LambdaImplementor$7
  (type $function.m_apply__java_lang_Object__boolean)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result i32)
  ;;@ methodreferences/MethodReferences.java:95:53
@@ -1449,8 +1449,8 @@
   ;; return (Boolean $qualifier = arg0.isA(),$qualifier.booleanValue());
   ;;@ methodreferences/MethodReferences.java:95:53
   (return (block (result i32)
-   (local.set $$qualifier (call_ref (local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
-   (call_ref (local.get $$qualifier)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
+   (local.set $$qualifier (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
   ))
  )
 )
@@ -1481,7 +1481,7 @@
 ;;; Class<?> $LambdaImplementor$7.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$7
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$7))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$7 (local.get $this.untyped)))
@@ -1521,7 +1521,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$8 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$8.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$8.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ methodreferences/MethodReferences.java:97:66
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$8@methodreferences.MethodReferences.$LambdaImplementor$8 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$8@methodreferences.MethodReferences.$LambdaImplementor$8 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:97:66
   (return (local.get $$instance))
@@ -1539,14 +1539,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$8 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:97:66
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$8.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$8
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:97:66
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$8))
@@ -1584,7 +1584,7 @@
 ;;; Class<?> $LambdaImplementor$8.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$8
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$8))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$8 (local.get $this.untyped)))
@@ -1622,7 +1622,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$9 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$9.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$9.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:99:42
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$9@methodreferences.MethodReferences.$LambdaImplementor$9 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$9@methodreferences.MethodReferences.$LambdaImplementor$9 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:99:42
   (return (local.get $$instance))
@@ -1639,14 +1639,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$9 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:99:42
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T[] $LambdaImplementor$9.produce(int arg0)
 (func $m_produce__int__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$9
  (type $function.m_produce__int__arrayOf_java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ methodreferences/MethodReferences.java:99:42
@@ -1685,7 +1685,7 @@
 ;;; Class<?> $LambdaImplementor$9.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$9
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$9))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$9 (local.get $this.untyped)))
@@ -1725,7 +1725,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$10 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$10.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$10.itable)) (i32.const 0) (local.get $$captured_$$q)))
   ;; $instance.$ctor($captured_$$q);
   ;;@ methodreferences/MethodReferences.java:101:20
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$10@methodreferences.MethodReferences.$LambdaImplementor$10 (local.get $$instance)(local.get $$captured_$$q))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$10@methodreferences.MethodReferences.$LambdaImplementor$10 (ref.as_non_null (local.get $$instance))(local.get $$captured_$$q))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:101:20
   (return (local.get $$instance))
@@ -1743,14 +1743,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$10 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:101:20
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$10.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$10
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:101:20
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
@@ -1758,7 +1758,7 @@
  (block
   ;; return $LambdaImplementor$10.this.$$q.self();
   ;;@ methodreferences/MethodReferences.java:101:20
-  (return (call_ref (struct.get $methodreferences.MethodReferences.$LambdaImplementor$10 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10(local.get $this))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$10 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10(local.get $this))))))
+  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$10 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$10 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10(local.get $this))))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$10)
@@ -1788,7 +1788,7 @@
 ;;; Class<?> $LambdaImplementor$10.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$10
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$10 (local.get $this.untyped)))
@@ -1826,7 +1826,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$11 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$11.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$11.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:103:53
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$11@methodreferences.MethodReferences.$LambdaImplementor$11 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$11@methodreferences.MethodReferences.$LambdaImplementor$11 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:103:53
   (return (local.get $$instance))
@@ -1843,14 +1843,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$11 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:103:53
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; U $LambdaImplementor$11.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$11
  (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:103:53
@@ -1863,7 +1863,7 @@
   (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (ref.cast_static $java.lang.Object (local.get $arg0))))
   ;; return arg0.self();
   ;;@ methodreferences/MethodReferences.java:103:53
-  (return (call_ref (local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$11)
@@ -1893,7 +1893,7 @@
 ;;; Class<?> $LambdaImplementor$11.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$11
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$11))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$11 (local.get $this.untyped)))
@@ -1931,7 +1931,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$12 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$12.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$12.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:105:47
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$12@methodreferences.MethodReferences.$LambdaImplementor$12 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$12@methodreferences.MethodReferences.$LambdaImplementor$12 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:105:47
   (return (local.get $$instance))
@@ -1948,14 +1948,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$12 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:105:47
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; U $LambdaImplementor$12.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12
  (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:105:47
@@ -1968,7 +1968,7 @@
   (local.set $arg0_1 (ref.cast_static $java.lang.Integer (ref.cast_static $java.lang.Object (local.get $arg0))))
   ;; return javaemul.internal.WasmArray.OfObject.$create(arg0.intValue());
   ;;@ methodreferences/MethodReferences.java:105:47
-  (return (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call_ref (local.get $arg0_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
+  (return (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12)
@@ -1998,7 +1998,7 @@
 ;;; Class<?> $LambdaImplementor$12.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$12
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$12))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$12 (local.get $this.untyped)))
@@ -2038,7 +2038,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$13 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$13.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$13.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ methodreferences/MethodReferences.java:107:45
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$13@methodreferences.MethodReferences.$LambdaImplementor$13 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$13@methodreferences.MethodReferences.$LambdaImplementor$13 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:107:45
   (return (local.get $$instance))
@@ -2056,14 +2056,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$13 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:107:45
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$13.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$13
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:107:45
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$13))
@@ -2071,7 +2071,7 @@
  (block
   ;; return $LambdaImplementor$13.this.this.toString();
   ;;@ methodreferences/MethodReferences.java:107:45
-  (return (call $m_toString__java_lang_String@java.lang.Object (struct.get $methodreferences.MethodReferences.$LambdaImplementor$13 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$13(local.get $this))))
+  (return (call $m_toString__java_lang_String@java.lang.Object (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$13 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$13(local.get $this)))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$13)
@@ -2101,7 +2101,7 @@
 ;;; Class<?> $LambdaImplementor$13.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$13
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$13))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$13 (local.get $this.untyped)))
@@ -2139,7 +2139,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$14 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$14.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$14.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:109:41
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$14@methodreferences.MethodReferences.$LambdaImplementor$14 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$14@methodreferences.MethodReferences.$LambdaImplementor$14 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:109:41
   (return (local.get $$instance))
@@ -2156,14 +2156,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$14 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:109:41
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$14.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$14
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:109:41
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$14))
@@ -2201,7 +2201,7 @@
 ;;; Class<?> $LambdaImplementor$14.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$14
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$14))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$14 (local.get $this.untyped)))
@@ -2239,7 +2239,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$15 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$15.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$15.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:110:22
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$15@methodreferences.MethodReferences.$LambdaImplementor$15 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$15@methodreferences.MethodReferences.$LambdaImplementor$15 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:110:22
   (return (local.get $$instance))
@@ -2256,14 +2256,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$15 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:110:22
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$15.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$15
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:110:22
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$15))
@@ -2301,7 +2301,7 @@
 ;;; Class<?> $LambdaImplementor$15.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$15
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$15))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$15 (local.get $this.untyped)))
@@ -2341,7 +2341,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$16 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$16.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$16.itable)) (i32.const 0) (local.get $$captured_$$q)))
   ;; $instance.$ctor($captured_$$q);
   ;;@ methodreferences/MethodReferences.java:112:22
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$16@methodreferences.MethodReferences.$LambdaImplementor$16 (local.get $$instance)(local.get $$captured_$$q))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$16@methodreferences.MethodReferences.$LambdaImplementor$16 (ref.as_non_null (local.get $$instance))(local.get $$captured_$$q))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:112:22
   (return (local.get $$instance))
@@ -2359,14 +2359,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$16 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:112:22
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$16.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$16
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:112:22
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
@@ -2374,7 +2374,7 @@
  (block
   ;; return $LambdaImplementor$16.this.$$q.self();
   ;;@ methodreferences/MethodReferences.java:112:22
-  (return (call_ref (struct.get $methodreferences.MethodReferences.$LambdaImplementor$16 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16(local.get $this))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$16 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16(local.get $this))))))
+  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$16 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$16 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16(local.get $this))))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$16)
@@ -2404,7 +2404,7 @@
 ;;; Class<?> $LambdaImplementor$16.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$16
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$16 (local.get $this.untyped)))
@@ -2442,7 +2442,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$17 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$17.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$17.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:114:66
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$17@methodreferences.MethodReferences.$LambdaImplementor$17 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$17@methodreferences.MethodReferences.$LambdaImplementor$17 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:114:66
   (return (local.get $$instance))
@@ -2459,14 +2459,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$17 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:114:66
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; U $LambdaImplementor$17.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$17
  (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:114:66
@@ -2479,7 +2479,7 @@
   (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (ref.cast_static $java.lang.Object (local.get $arg0))))
   ;; return arg0.self();
   ;;@ methodreferences/MethodReferences.java:114:66
-  (return (call_ref (local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$17)
@@ -2509,7 +2509,7 @@
 ;;; Class<?> $LambdaImplementor$17.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$17
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$17))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$17 (local.get $this.untyped)))
@@ -2547,7 +2547,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$18 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$18.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$18.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:116:60
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$18@methodreferences.MethodReferences.$LambdaImplementor$18 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$18@methodreferences.MethodReferences.$LambdaImplementor$18 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:116:60
   (return (local.get $$instance))
@@ -2564,14 +2564,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$18 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:116:60
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; U $LambdaImplementor$18.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18
  (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:116:60
@@ -2584,7 +2584,7 @@
   (local.set $arg0_1 (ref.cast_static $java.lang.Integer (ref.cast_static $java.lang.Object (local.get $arg0))))
   ;; return javaemul.internal.WasmArray.OfObject.$create(arg0.intValue());
   ;;@ methodreferences/MethodReferences.java:116:60
-  (return (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call_ref (local.get $arg0_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
+  (return (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18)
@@ -2614,7 +2614,7 @@
 ;;; Class<?> $LambdaImplementor$18.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$18
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$18))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$18 (local.get $this.untyped)))
@@ -2654,7 +2654,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$19 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$19.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$19.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ methodreferences/MethodReferences.java:118:49
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$19@methodreferences.MethodReferences.$LambdaImplementor$19 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$19@methodreferences.MethodReferences.$LambdaImplementor$19 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:118:49
   (return (local.get $$instance))
@@ -2672,14 +2672,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$19 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:118:49
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; T $LambdaImplementor$19.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$19
  (type $function.m_produce__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:118:49
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$19))
@@ -2687,7 +2687,7 @@
  (block
   ;; return $LambdaImplementor$19.this.this.toString();
   ;;@ methodreferences/MethodReferences.java:118:49
-  (return (call $m_toString__java_lang_String@java.lang.Object (struct.get $methodreferences.MethodReferences.$LambdaImplementor$19 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$19(local.get $this))))
+  (return (call $m_toString__java_lang_String@java.lang.Object (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$19 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$19(local.get $this)))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$19)
@@ -2717,7 +2717,7 @@
 ;;; Class<?> $LambdaImplementor$19.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$19
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$19))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$19 (local.get $this.untyped)))
@@ -2755,7 +2755,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$20 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$20.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$20.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ methodreferences/MethodReferences.java:120:70
-  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$20@methodreferences.MethodReferences.$LambdaImplementor$20 (local.get $$instance))
+  (call $$ctor__void_$p_methodreferences_MethodReferences_$LambdaImplementor$20@methodreferences.MethodReferences.$LambdaImplementor$20 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:120:70
   (return (local.get $$instance))
@@ -2772,14 +2772,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$20 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:120:70
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; V $LambdaImplementor$20.apply(T arg0, U arg1)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$20
  (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2797,7 +2797,7 @@
   (local.set $arg1_1 (ref.cast_static $java.lang.Number (ref.cast_static $java.lang.Object (local.get $arg1))))
   ;; return arg0.sameAs(arg1);
   ;;@ methodreferences/MethodReferences.java:120:70
-  (return (call_ref (local.get $arg0_1)(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref (ref.as_non_null (local.get $arg0_1))(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$20)
@@ -2827,7 +2827,7 @@
 ;;; Class<?> $LambdaImplementor$20.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$20
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$20))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$20 (local.get $this.untyped)))
@@ -2867,7 +2867,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.$LambdaImplementor$21 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$21.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$21.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ methodreferences/MethodReferences.java:122:68
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$21@methodreferences.MethodReferences.$LambdaImplementor$21 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_$LambdaImplementor$21@methodreferences.MethodReferences.$LambdaImplementor$21 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:122:68
   (return (local.get $$instance))
@@ -2885,14 +2885,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.$LambdaImplementor$21 )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:122:68
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; U $LambdaImplementor$21.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21
  (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:122:68
@@ -2905,7 +2905,7 @@
   (local.set $arg0_1 (ref.cast_static $java.lang.Number (ref.cast_static $java.lang.Object (local.get $arg0))))
   ;; return $LambdaImplementor$21.this.this.sameAs(arg0);
   ;;@ methodreferences/MethodReferences.java:122:68
-  (return (call_ref (struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this))))))
+  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this)))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21)
@@ -2935,7 +2935,7 @@
 ;;; Class<?> $LambdaImplementor$21.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$21
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$21))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$21 (local.get $this.untyped)))
@@ -3083,7 +3083,7 @@
   (local.set $$instance (struct.new $methodreferences.MethodReferences.ObjectCapturingOuter (ref.as_non_null (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ methodreferences/MethodReferences.java:34:8
-  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_ObjectCapturingOuter@methodreferences.MethodReferences.ObjectCapturingOuter (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__methodreferences_MethodReferences__void_$p_methodreferences_MethodReferences_ObjectCapturingOuter@methodreferences.MethodReferences.ObjectCapturingOuter (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ methodreferences/MethodReferences.java:34:8
   (return (local.get $$instance))
@@ -3101,14 +3101,14 @@
   (call $$clinit__void@methodreferences.MethodReferences.ObjectCapturingOuter )
   ;; Object.this.$ctor();
   ;;@ methodreferences/MethodReferences.java:34:8
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; MethodReferences<T> ObjectCapturingOuter.getMain()
 (func $m_getMain__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
  (type $function.m_getMain__methodreferences_MethodReferences_$pp_methodreferences)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $methodreferences.MethodReferences))
  ;;@ methodreferences/MethodReferences.java:36:24
  (local $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
@@ -3146,7 +3146,7 @@
 ;;; Class<?> ObjectCapturingOuter.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.ObjectCapturingOuter
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.ObjectCapturingOuter (local.get $this.untyped)))

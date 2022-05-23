@@ -84,7 +84,7 @@
   (local.set $$instance (struct.new $importglobaljstypes.Date (ref.as_non_null (global.get $importglobaljstypes.Date.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importglobaljstypes/Date.java:27:13
-  (call $$ctor__void_$p_importglobaljstypes_Date@importglobaljstypes.Date (local.get $$instance))
+  (call $$ctor__void_$p_importglobaljstypes_Date@importglobaljstypes.Date (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ importglobaljstypes/Date.java:27:13
   (return (local.get $$instance))
@@ -101,7 +101,7 @@
   (call $$clinit__void@importglobaljstypes.Date )
   ;; Object.this.$ctor();
   ;;@ importglobaljstypes/Date.java:27:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -123,7 +123,7 @@
 ;;; NativeDate Date.copy(NativeDate d)
 (func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date
  (type $function.m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $d (ref null $importglobaljstypes.Date.NativeDate))
  (result (ref null $importglobaljstypes.Date.NativeDate))
  ;;@ importglobaljstypes/Date.java:33:20
@@ -162,7 +162,7 @@
 ;;; Class<?> Date.getClass()
 (func $m_getClass__java_lang_Class@importglobaljstypes.Date
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Date))
  (local.set $this (ref.cast_static $importglobaljstypes.Date (local.get $this.untyped)))
@@ -199,7 +199,7 @@
   (local.set $$instance (struct.new $importglobaljstypes.Date.NativeDate (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importglobaljstypes/Date.java:38:22
-  (call $$ctor__void_$p_importglobaljstypes_Date_NativeDate@importglobaljstypes.Date.NativeDate (local.get $$instance))
+  (call $$ctor__void_$p_importglobaljstypes_Date_NativeDate@importglobaljstypes.Date.NativeDate (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ importglobaljstypes/Date.java:38:22
   (return (local.get $$instance))
@@ -216,7 +216,7 @@
   (call $$clinit__void@importglobaljstypes.Date.NativeDate )
   ;; Object.this.$ctor();
   ;;@ importglobaljstypes/Date.java:38:22
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -250,7 +250,7 @@
 ;;; Class<?> NativeDate.getClass()
 (func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Date.NativeDate))
  (local.set $this (ref.cast_static $importglobaljstypes.Date.NativeDate (local.get $this.untyped)))
@@ -288,7 +288,7 @@
   (local.set $$instance (struct.new $importglobaljstypes.Number (ref.as_non_null (global.get $importglobaljstypes.Number.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Number.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importglobaljstypes/Number.java:27:13
-  (call $$ctor__void_$p_importglobaljstypes_Number@importglobaljstypes.Number (local.get $$instance))
+  (call $$ctor__void_$p_importglobaljstypes_Number@importglobaljstypes.Number (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ importglobaljstypes/Number.java:27:13
   (return (local.get $$instance))
@@ -305,7 +305,7 @@
   (call $$clinit__void@importglobaljstypes.Number )
   ;; Object.this.$ctor();
   ;;@ importglobaljstypes/Number.java:27:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -349,7 +349,7 @@
   ;;@ importglobaljstypes/Number.java:48:4
   (return (ref.cast_static $java.lang.String (block (result (ref null $java.lang.Object))
    (local.set $$qualifier (call $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number ))
-   (call_ref (local.get $$qualifier)(ref.null $java.lang.Object)(local.get $array)(struct.get $importglobaljstypes.Number.NativeFunction.vtable $m_apply__java_lang_Object__arrayOf_int__java_lang_Object (ref.cast_static $importglobaljstypes.Number.NativeFunction.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1))) ))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(ref.null $java.lang.Object)(local.get $array)(struct.get $importglobaljstypes.Number.NativeFunction.vtable $m_apply__java_lang_Object__arrayOf_int__java_lang_Object (ref.cast_static $importglobaljstypes.Number.NativeFunction.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1))) ))
   )))
  )
 )
@@ -357,7 +357,7 @@
 ;;; MyLiteralType Number.testJsDocForLiteralType(MyLiteralType a)
 (func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number
  (type $function.m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ importglobaljstypes/Number.java:54:23
@@ -396,7 +396,7 @@
 ;;; Class<?> Number.getClass()
 (func $m_getClass__java_lang_Class@importglobaljstypes.Number
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Number))
  (local.set $this (ref.cast_static $importglobaljstypes.Number (local.get $this.untyped)))

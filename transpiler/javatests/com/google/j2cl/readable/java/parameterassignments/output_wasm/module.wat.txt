@@ -89,7 +89,7 @@
   (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:19:2
-  (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (local.get $$instance)(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
+  (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
   ;; return $instance;
   ;;@ parameterassignments/Main.java:19:2
   (return (local.get $$instance))
@@ -109,7 +109,7 @@
   (call $$clinit__void@parameterassignments.Main )
   ;; Main.this.$ctor(nonFinal,explicitFinal,implicitFinal,true);
   ;;@ parameterassignments/Main.java:20:4
-  (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (local.get $this)(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(i32.const 1))
+  (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(i32.const 1))
   ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
   ;;@ parameterassignments/Main.java:21:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
@@ -131,7 +131,7 @@
   (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal,flag);
   ;;@ parameterassignments/Main.java:24:2
-  (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (local.get $$instance)(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(local.get $flag))
+  (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(local.get $flag))
   ;; return $instance;
   ;;@ parameterassignments/Main.java:24:2
   (return (local.get $$instance))
@@ -152,10 +152,10 @@
   (call $$clinit__void@parameterassignments.Main )
   ;; Object.this.$ctor();
   ;;@ parameterassignments/Main.java:24:79
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; Main.this.$init();
   ;;@ parameterassignments/Main.java:24:79
-  (call $$init__void_$p_parameterassignments_Main@parameterassignments.Main (local.get $this))
+  (call $$init__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this)))
   ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
   ;;@ parameterassignments/Main.java:25:4
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
@@ -165,7 +165,7 @@
 ;;; int Main.test(int nonFinal, int explicitFinal, int implicitFinal)
 (func $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main
  (type $function.m_test__int__int__int__int_$pp_parameterassignments)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $nonFinal i32)
  (param $explicitFinal i32)
  (param $implicitFinal i32)
@@ -220,7 +220,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@parameterassignments.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $parameterassignments.Main))
  (local.set $this (ref.cast_static $parameterassignments.Main (local.get $this.untyped)))
@@ -258,7 +258,7 @@
   (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ parameterassignments/Main.java:38:6
-  (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$1@parameterassignments.Main.$LambdaImplementor$1 (local.get $$instance))
+  (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$1@parameterassignments.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ parameterassignments/Main.java:38:6
   (return (local.get $$instance))
@@ -275,14 +275,14 @@
   (call $$clinit__void@parameterassignments.Main.$LambdaImplementor$1 )
   ;; Object.this.$ctor();
   ;;@ parameterassignments/Main.java:38:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int $LambdaImplementor$1.test(int nonFinal, int implicitFinal)
 (func $m_test__int__int__int@parameterassignments.Main.$LambdaImplementor$1
  (type $function.m_test__int__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $nonFinal i32)
  (param $implicitFinal i32)
  (result i32)
@@ -325,7 +325,7 @@
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$1 (local.get $this.untyped)))
@@ -403,7 +403,7 @@
   (local.set $$instance (struct.new $parameterassignments.Main.SubMain (ref.as_non_null (global.get $parameterassignments.Main.SubMain.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.SubMain.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:44:11
-  (call $$ctor__int__int__int__void_$p_parameterassignments_Main_SubMain@parameterassignments.Main.SubMain (local.get $$instance)(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
+  (call $$ctor__int__int__int__void_$p_parameterassignments_Main_SubMain@parameterassignments.Main.SubMain (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
   ;; return $instance;
   ;;@ parameterassignments/Main.java:44:11
   (return (local.get $$instance))
@@ -423,7 +423,7 @@
   (call $$clinit__void@parameterassignments.Main.SubMain )
   ;; Main.this.$ctor(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:45:6
-  (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (local.get $this)(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
+  (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
   ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
   ;;@ parameterassignments/Main.java:46:6
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
@@ -433,7 +433,7 @@
 ;;; int SubMain.test(int nonFinal, int explicitFinal, int implicitFinal)
 (func $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main.SubMain
  (type $function.m_test__int__int__int__int_$pp_parameterassignments)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $nonFinal i32)
  (param $explicitFinal i32)
  (param $implicitFinal i32)
@@ -447,7 +447,7 @@
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
   ;; return super.test(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:51:6
-  (return (call $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main (local.get $this)(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)))
+  (return (call $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)))
  )
 )
 (elem declare func $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main.SubMain)
@@ -477,7 +477,7 @@
 ;;; Class<?> SubMain.getClass()
 (func $m_getClass__java_lang_Class@parameterassignments.Main.SubMain
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $parameterassignments.Main.SubMain))
  (local.set $this (ref.cast_static $parameterassignments.Main.SubMain (local.get $this.untyped)))

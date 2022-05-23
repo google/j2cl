@@ -144,7 +144,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.WasmImmutableFields (ref.as_non_null (global.get $wasmimmutablefields.WasmImmutableFields.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.WasmImmutableFields.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:18:13
-  (call $$ctor__void_$p_wasmimmutablefields_WasmImmutableFields@wasmimmutablefields.WasmImmutableFields (local.get $$instance))
+  (call $$ctor__void_$p_wasmimmutablefields_WasmImmutableFields@wasmimmutablefields.WasmImmutableFields (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:18:13
   (return (local.get $$instance))
@@ -161,7 +161,7 @@
   (call $$clinit__void@wasmimmutablefields.WasmImmutableFields )
   ;; Object.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -190,7 +190,7 @@
 ;;; Class<?> WasmImmutableFields.getClass()
 (func $m_getClass__java_lang_Class@wasmimmutablefields.WasmImmutableFields
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.WasmImmutableFields))
  (local.set $this (ref.cast_static $wasmimmutablefields.WasmImmutableFields (local.get $this.untyped)))
@@ -235,7 +235,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInDeclaration (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInDeclaration.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInDeclaration.itable)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@javaemul.internal.StringPool) ) (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 4)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4)(i32.const -1)))(i32.const -1)) (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)(i32.const 3)(i32.const 4))) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4))))) (call $function.no.side.effects.$getWasmimmutablefields.WasmImmutableFields__java_lang_Class (ref.func $$getWasmimmutablefields.WasmImmutableFields__java_lang_Class@javaemul.internal.ClassLiteralPool) ) (ref.cast_static $javaemul.internal.WasmArray.OfObject (ref.cast_static $java.lang.Object (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0))))))
   ;; $instance.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
-  (call $$ctor__void_$p_wasmimmutablefields_AssignmentsInDeclaration@wasmimmutablefields.AssignmentsInDeclaration (local.get $$instance))
+  (call $$ctor__void_$p_wasmimmutablefields_AssignmentsInDeclaration@wasmimmutablefields.AssignmentsInDeclaration (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
   (return (local.get $$instance))
@@ -252,10 +252,10 @@
   (call $$clinit__void@wasmimmutablefields.AssignmentsInDeclaration )
   ;; Object.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; AssignmentsInDeclaration.this.$init();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:20:6
-  (call $$init__void_$p_wasmimmutablefields_AssignmentsInDeclaration@wasmimmutablefields.AssignmentsInDeclaration (local.get $this))
+  (call $$init__void_$p_wasmimmutablefields_AssignmentsInDeclaration@wasmimmutablefields.AssignmentsInDeclaration (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -292,7 +292,7 @@
 ;;; Class<?> AssignmentsInDeclaration.getClass()
 (func $m_getClass__java_lang_Class@wasmimmutablefields.AssignmentsInDeclaration
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.AssignmentsInDeclaration))
  (local.set $this (ref.cast_static $wasmimmutablefields.AssignmentsInDeclaration (local.get $this.untyped)))
@@ -337,7 +337,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInInitializer (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInInitializer.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInInitializer.itable)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@javaemul.internal.StringPool) ) (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 4)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4)(i32.const -1)))(i32.const -1)) (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)(i32.const 3)(i32.const 4))) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4))))) (call $function.no.side.effects.$getWasmimmutablefields.WasmImmutableFields__java_lang_Class (ref.func $$getWasmimmutablefields.WasmImmutableFields__java_lang_Class@javaemul.internal.ClassLiteralPool) ) (ref.cast_static $javaemul.internal.WasmArray.OfObject (ref.cast_static $java.lang.Object (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0))))))
   ;; $instance.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:31:6
-  (call $$ctor__void_$p_wasmimmutablefields_AssignmentsInInitializer@wasmimmutablefields.AssignmentsInInitializer (local.get $$instance))
+  (call $$ctor__void_$p_wasmimmutablefields_AssignmentsInInitializer@wasmimmutablefields.AssignmentsInInitializer (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:31:6
   (return (local.get $$instance))
@@ -354,10 +354,10 @@
   (call $$clinit__void@wasmimmutablefields.AssignmentsInInitializer )
   ;; Object.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:31:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; AssignmentsInInitializer.this.$init();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:31:6
-  (call $$init__void_$p_wasmimmutablefields_AssignmentsInInitializer@wasmimmutablefields.AssignmentsInInitializer (local.get $this))
+  (call $$init__void_$p_wasmimmutablefields_AssignmentsInInitializer@wasmimmutablefields.AssignmentsInInitializer (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -394,7 +394,7 @@
 ;;; Class<?> AssignmentsInInitializer.getClass()
 (func $m_getClass__java_lang_Class@wasmimmutablefields.AssignmentsInInitializer
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.AssignmentsInInitializer))
  (local.set $this (ref.cast_static $wasmimmutablefields.AssignmentsInInitializer (local.get $this.untyped)))
@@ -444,7 +444,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.AssignmentsInConstructor (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInConstructor.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.AssignmentsInConstructor.itable)) (i32.const 0) (i32.const 12) (call $function.no.side.effects.$getString_|Hello_World|__java_lang_String (ref.func $$getString_|Hello_World|__java_lang_String@javaemul.internal.StringPool) ) (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (local.get $intParameter)) (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $intParameter)(i32.const 4)(i32.const -1)))(i32.const -1)) (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)(local.get $intParameter)(i32.const 4))) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(local.get $intParameter)))(call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 3)(i32.const 4))))) (call $function.no.side.effects.$getWasmimmutablefields.WasmImmutableFields__java_lang_Class (ref.func $$getWasmimmutablefields.WasmImmutableFields__java_lang_Class@javaemul.internal.ClassLiteralPool) ) (ref.cast_static $javaemul.internal.WasmArray.OfObject (ref.cast_static $java.lang.Object (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))) (local.get $parameter) (struct.get $wasmimmutablefields.AssignmentsInConstructor $f_stringLiteral__wasmimmutablefields_AssignmentsInConstructor(local.get $par))))
   ;; $instance.$ctor(parameter,intParameter,par);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:65:2
-  (call $$ctor__java_lang_Object__int__wasmimmutablefields_AssignmentsInConstructor__void_$p_wasmimmutablefields_AssignmentsInConstructor@wasmimmutablefields.AssignmentsInConstructor (local.get $$instance)(local.get $parameter)(local.get $intParameter)(local.get $par))
+  (call $$ctor__java_lang_Object__int__wasmimmutablefields_AssignmentsInConstructor__void_$p_wasmimmutablefields_AssignmentsInConstructor@wasmimmutablefields.AssignmentsInConstructor (ref.as_non_null (local.get $$instance))(local.get $parameter)(local.get $intParameter)(local.get $par))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:65:2
   (return (local.get $$instance))
@@ -464,7 +464,7 @@
   (call $$clinit__void@wasmimmutablefields.AssignmentsInConstructor )
   ;; Object.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:65:93
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -493,7 +493,7 @@
 ;;; Class<?> AssignmentsInConstructor.getClass()
 (func $m_getClass__java_lang_Class@wasmimmutablefields.AssignmentsInConstructor
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.AssignmentsInConstructor))
  (local.set $this (ref.cast_static $wasmimmutablefields.AssignmentsInConstructor (local.get $this.untyped)))
@@ -531,7 +531,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable)) (i32.const 0) (i32.const 2)))
   ;; $instance.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:82:2
-  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (local.get $$instance))
+  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:82:2
   (return (local.get $$instance))
@@ -548,7 +548,7 @@
   (call $$clinit__void@wasmimmutablefields.OptimizesWithThisConstructorDelegation )
   ;; Object.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:82:43
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -564,7 +564,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable)) (i32.const 0) (local.get $parameter)))
   ;; $instance.$ctor(parameter);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:86:2
-  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (local.get $$instance)(local.get $parameter))
+  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $$instance))(local.get $parameter))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:86:2
   (return (local.get $$instance))
@@ -582,7 +582,7 @@
   (call $$clinit__void@wasmimmutablefields.OptimizesWithThisConstructorDelegation )
   ;; Object.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:86:56
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -598,7 +598,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable)) (i32.const 0) (local.get $parameter)))
   ;; $instance.$ctor(parameter);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:90:2
-  (call $$ctor__short__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (local.get $$instance)(local.get $parameter))
+  (call $$ctor__short__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $$instance))(local.get $parameter))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:90:2
   (return (local.get $$instance))
@@ -616,7 +616,7 @@
   (call $$clinit__void@wasmimmutablefields.OptimizesWithThisConstructorDelegation )
   ;; OptimizesWithThisConstructorDelegation.this.$ctor(parameter);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:92:4
-  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (local.get $this)(local.get $parameter))
+  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $this))(local.get $parameter))
  )
 )
 
@@ -645,7 +645,7 @@
 ;;; Class<?> OptimizesWithThisConstructorDelegation.getClass()
 (func $m_getClass__java_lang_Class@wasmimmutablefields.OptimizesWithThisConstructorDelegation
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.OptimizesWithThisConstructorDelegation))
  (local.set $this (ref.cast_static $wasmimmutablefields.OptimizesWithThisConstructorDelegation (local.get $this.untyped)))
@@ -683,7 +683,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (i32.const 2)))
   ;; $instance.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
-  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (local.get $$instance))
+  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
   (return (local.get $$instance))
@@ -700,7 +700,7 @@
   (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
   ;; OptimizesWithThisConstructorDelegation.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:97:44
-  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (local.get $this))
+  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -716,7 +716,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (local.get $parameter)))
   ;; $instance.$ctor(parameter);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
-  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (local.get $$instance)(local.get $parameter))
+  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance))(local.get $parameter))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
   (return (local.get $$instance))
@@ -734,7 +734,7 @@
   (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
   ;; OptimizesWithThisConstructorDelegation.this.$ctor(parameter);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:101:4
-  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (local.get $this)(local.get $parameter))
+  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $this))(local.get $parameter))
  )
 )
 
@@ -750,7 +750,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (local.get $parameter)))
   ;; $instance.$ctor(parameter);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
-  (call $$ctor__short__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (local.get $$instance)(local.get $parameter))
+  (call $$ctor__short__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance))(local.get $parameter))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
   (return (local.get $$instance))
@@ -768,7 +768,7 @@
   (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
   ;; OptimizesWithSuperConstructorDelegation.this.$ctor(parameter);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:105:4
-  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (local.get $this)(local.get $parameter))
+  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $this))(local.get $parameter))
  )
 )
 
@@ -797,7 +797,7 @@
 ;;; Class<?> OptimizesWithSuperConstructorDelegation.getClass()
 (func $m_getClass__java_lang_Class@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
  (local.set $this (ref.cast_static $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (local.get $this.untyped)))
@@ -846,7 +846,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.FinalizerTest (ref.as_non_null (global.get $wasmimmutablefields.FinalizerTest.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.FinalizerTest.itable)) (i32.const 0) (i32.const 1) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:123:2
-  (call $$ctor__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (local.get $$instance))
+  (call $$ctor__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:123:2
   (return (local.get $$instance))
@@ -864,10 +864,10 @@
   (call $$clinit__void@wasmimmutablefields.FinalizerTest )
   ;; Object.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:123:18
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; FinalizerTest.this.$init();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:123:18
-  (call $$init__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (local.get $this))
+  (call $$init__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (ref.as_non_null (local.get $this)))
   ;; (FinalizerTest.this.readBeforeWrite = (FinalizerTest.this.readBeforeWrite + 1));
   ;;@ wasmimmutablefields/WasmImmutableFields.java:124:4
   (struct.set $wasmimmutablefields.FinalizerTest $f_readBeforeWrite__wasmimmutablefields_FinalizerTest(local.get $this) (i32.add (struct.get $wasmimmutablefields.FinalizerTest $f_readBeforeWrite__wasmimmutablefields_FinalizerTest(local.get $this)) (i32.const 1)))
@@ -917,7 +917,7 @@
   (local.set $$instance (struct.new $wasmimmutablefields.FinalizerTest (ref.as_non_null (global.get $wasmimmutablefields.FinalizerTest.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.FinalizerTest.itable)) (i32.const 0) (i32.const 1) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(x);
   ;;@ wasmimmutablefields/WasmImmutableFields.java:141:2
-  (call $$ctor__int__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (local.get $$instance)(local.get $x))
+  (call $$ctor__int__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (ref.as_non_null (local.get $$instance))(local.get $x))
   ;; return $instance;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:141:2
   (return (local.get $$instance))
@@ -936,7 +936,7 @@
   (call $$clinit__void@wasmimmutablefields.FinalizerTest )
   ;; FinalizerTest.this.$ctor();
   ;;@ wasmimmutablefields/WasmImmutableFields.java:142:4
-  (call $$ctor__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (local.get $this))
+  (call $$ctor__void_$p_wasmimmutablefields_FinalizerTest@wasmimmutablefields.FinalizerTest (ref.as_non_null (local.get $this)))
   ;; int i = FinalizerTest.this.effectivelyFinalField;
   ;;@ wasmimmutablefields/WasmImmutableFields.java:145:4
   (local.set $i (struct.get $wasmimmutablefields.FinalizerTest $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest(local.get $this)))
@@ -955,7 +955,7 @@
 ;;; void FinalizerTest.foo()
 (func $m_foo__void_$pp_wasmimmutablefields@wasmimmutablefields.FinalizerTest
  (type $function.m_foo__void_$pp_wasmimmutablefields)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ wasmimmutablefields/WasmImmutableFields.java:152:7
  (local $o (ref null $wasmimmutablefields.FinalizerTest))
  (local $i i32)
@@ -1023,7 +1023,7 @@
 ;;; Class<?> FinalizerTest.getClass()
 (func $m_getClass__java_lang_Class@wasmimmutablefields.FinalizerTest
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $wasmimmutablefields.FinalizerTest))
  (local.set $this (ref.cast_static $wasmimmutablefields.FinalizerTest (local.get $this.untyped)))

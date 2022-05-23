@@ -101,7 +101,7 @@
   (local.set $$instance (struct.new $jsproperties.Foo (ref.as_non_null (global.get $jsproperties.Foo.vtable)) (ref.as_non_null (global.get $jsproperties.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsproperties/Main.java:22:6
-  (call $$ctor__void_$p_jsproperties_Foo@jsproperties.Foo (local.get $$instance))
+  (call $$ctor__void_$p_jsproperties_Foo@jsproperties.Foo (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsproperties/Main.java:22:6
   (return (local.get $$instance))
@@ -118,7 +118,7 @@
   (call $$clinit__void@jsproperties.Foo )
   ;; Object.this.$ctor();
   ;;@ jsproperties/Main.java:22:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -203,7 +203,7 @@
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@jsproperties.Foo
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Foo))
  (local.set $this (ref.cast_static $jsproperties.Foo (local.get $this.untyped)))
@@ -245,7 +245,7 @@
   (local.set $$instance (struct.new $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsproperties/Main.java:47:6
-  (call $$ctor__void_$p_jsproperties_Bar@jsproperties.Bar (local.get $$instance))
+  (call $$ctor__void_$p_jsproperties_Bar@jsproperties.Bar (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsproperties/Main.java:47:6
   (return (local.get $$instance))
@@ -262,14 +262,14 @@
   (call $$clinit__void@jsproperties.Bar )
   ;; Object.this.$ctor();
   ;;@ jsproperties/Main.java:47:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int Bar.getA()
 (func $m_getA__int@jsproperties.Bar
  (type $function.m_getA__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ jsproperties/Main.java:51:13
  (local $this (ref null $jsproperties.Bar))
@@ -285,7 +285,7 @@
 ;;; void Bar.setA(int x)
 (func $m_setA__int__void@jsproperties.Bar
  (type $function.m_setA__int__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $x i32)
  ;;@ jsproperties/Main.java:56:14
  (local $this (ref null $jsproperties.Bar))
@@ -301,7 +301,7 @@
 ;;; int Bar.getB()
 (func $m_getB__int@jsproperties.Bar
  (type $function.m_getB__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ jsproperties/Main.java:61:13
  (local $this (ref null $jsproperties.Bar))
@@ -317,7 +317,7 @@
 ;;; void Bar.setB(int x)
 (func $m_setB__int__void@jsproperties.Bar
  (type $function.m_setB__int__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $x i32)
  ;;@ jsproperties/Main.java:66:14
  (local $this (ref null $jsproperties.Bar))
@@ -355,7 +355,7 @@
 ;;; Class<?> Bar.getClass()
 (func $m_getClass__java_lang_Class@jsproperties.Bar
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Bar))
  (local.set $this (ref.cast_static $jsproperties.Bar (local.get $this.untyped)))
@@ -393,7 +393,7 @@
   (local.set $$instance (struct.new $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsproperties/Main.java:72:6
-  (call $$ctor__void_$p_jsproperties_NativeFoo@jsproperties.NativeFoo (local.get $$instance))
+  (call $$ctor__void_$p_jsproperties_NativeFoo@jsproperties.NativeFoo (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsproperties/Main.java:72:6
   (return (local.get $$instance))
@@ -410,14 +410,14 @@
   (call $$clinit__void@jsproperties.NativeFoo )
   ;; Object.this.$ctor();
   ;;@ jsproperties/Main.java:72:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; Object NativeFoo.getA()
 (func $m_getA__java_lang_Object@jsproperties.NativeFoo
  (type $function.m_getA__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsproperties/Main.java:74:23
  (local $this (ref null $jsproperties.NativeFoo))
@@ -458,7 +458,7 @@
 ;;; Class<?> NativeFoo.getClass()
 (func $m_getClass__java_lang_Class@jsproperties.NativeFoo
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.NativeFoo))
  (local.set $this (ref.cast_static $jsproperties.NativeFoo (local.get $this.untyped)))
@@ -498,7 +498,7 @@
   (local.set $$instance (struct.new $jsproperties.Main (ref.as_non_null (global.get $jsproperties.Main.vtable)) (ref.as_non_null (global.get $jsproperties.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsproperties/Main.java:80:13
-  (call $$ctor__void_$p_jsproperties_Main@jsproperties.Main (local.get $$instance))
+  (call $$ctor__void_$p_jsproperties_Main@jsproperties.Main (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsproperties/Main.java:80:13
   (return (local.get $$instance))
@@ -515,14 +515,14 @@
   (call $$clinit__void@jsproperties.Main )
   ;; Object.this.$ctor();
   ;;@ jsproperties/Main.java:80:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Main.testNativeJsProperty()
 (func $m_testNativeJsProperty__void@jsproperties.Main
  (type $function.m_testNativeJsProperty__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ jsproperties/Main.java:81:14
  (local $$qualifier (ref null $jsproperties.NativeFoo))
  (local $this (ref null $jsproperties.Main))
@@ -534,7 +534,7 @@
    (local.set $$qualifier (call $$create__jsproperties_NativeFoo@jsproperties.NativeFoo ))
    ;; $qualifier.getA();
    ;;@ jsproperties/Main.java:82:4
-   (drop (call_ref (local.get $$qualifier)(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
   )
   ;; jsproperties.NativeFoo.getB();
   ;;@ jsproperties/Main.java:83:4
@@ -546,7 +546,7 @@
 ;;; void Main.testStaticJsProperty()
 (func $m_testStaticJsProperty__void@jsproperties.Main
  (type $function.m_testStaticJsProperty__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ jsproperties/Main.java:86:14
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast_static $jsproperties.Main (local.get $this.untyped)))
@@ -570,7 +570,7 @@
 ;;; void Main.testInstanceJsProperty()
 (func $m_testInstanceJsProperty__void@jsproperties.Main
  (type $function.m_testInstanceJsProperty__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ jsproperties/Main.java:93:14
  (local $bar (ref null $jsproperties.Bar))
  (local $this (ref null $jsproperties.Main))
@@ -581,16 +581,16 @@
   (local.set $bar (call $$create__jsproperties_Bar@jsproperties.Bar ))
   ;; bar.getA();
   ;;@ jsproperties/Main.java:95:4
-  (drop (call_ref (local.get $bar)(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
+  (drop (call_ref (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
   ;; bar.setA(10);
   ;;@ jsproperties/Main.java:96:4
-  (call_ref (local.get $bar)(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setA__int__void (struct.get $jsproperties.Bar $vtable(local.get $bar))))
+  (call_ref (ref.as_non_null (local.get $bar))(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setA__int__void (struct.get $jsproperties.Bar $vtable(local.get $bar))))
   ;; bar.getB();
   ;;@ jsproperties/Main.java:97:4
-  (drop (call_ref (local.get $bar)(struct.get $jsproperties.Bar.vtable $m_getB__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
+  (drop (call_ref (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getB__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
   ;; bar.setB(10);
   ;;@ jsproperties/Main.java:98:4
-  (call_ref (local.get $bar)(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setB__int__void (struct.get $jsproperties.Bar $vtable(local.get $bar))))
+  (call_ref (ref.as_non_null (local.get $bar))(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setB__int__void (struct.get $jsproperties.Bar $vtable(local.get $bar))))
  )
 )
 (elem declare func $m_testInstanceJsProperty__void@jsproperties.Main)
@@ -620,7 +620,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@jsproperties.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast_static $jsproperties.Main (local.get $this.untyped)))

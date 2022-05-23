@@ -75,7 +75,7 @@
   (local.set $$instance (struct.new $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ packageinfo/Outer.java:21:13
-  (call $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer (local.get $$instance))
+  (call $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ packageinfo/Outer.java:21:13
   (return (local.get $$instance))
@@ -92,7 +92,7 @@
   (call $$clinit__void@packageinfo.Outer )
   ;; Object.this.$ctor();
   ;;@ packageinfo/Outer.java:21:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -121,7 +121,7 @@
 ;;; Class<?> Outer.getClass()
 (func $m_getClass__java_lang_Class@packageinfo.Outer
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer))
  (local.set $this (ref.cast_static $packageinfo.Outer (local.get $this.untyped)))
@@ -160,7 +160,7 @@
   (local.set $$instance (struct.new $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.Inner.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ packageinfo/Outer.java:24:15
-  (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ packageinfo/Outer.java:24:15
   (return (local.get $$instance))
@@ -178,7 +178,7 @@
   (call $$clinit__void@packageinfo.Outer.Inner )
   ;; Object.this.$ctor();
   ;;@ packageinfo/Outer.java:24:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -207,7 +207,7 @@
 ;;; Class<?> Inner.getClass()
 (func $m_getClass__java_lang_Class@packageinfo.Outer.Inner
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer.Inner))
  (local.set $this (ref.cast_static $packageinfo.Outer.Inner (local.get $this.untyped)))
@@ -245,7 +245,7 @@
   (local.set $$instance (struct.new $packageinfo.subpackage.Foo (ref.as_non_null (global.get $packageinfo.subpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfo.subpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfo.Outer)))
   ;; $instance.$ctor();
   ;;@ packageinfo/subpackage/Foo.java:20:13
-  (call $$ctor__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $$instance))
+  (call $$ctor__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (return (local.get $$instance))
@@ -262,10 +262,10 @@
   (call $$clinit__void@packageinfo.subpackage.Foo )
   ;; Object.this.$ctor();
   ;;@ packageinfo/subpackage/Foo.java:20:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; Foo.this.$init();
   ;;@ packageinfo/subpackage/Foo.java:20:13
-  (call $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $this))
+  (call $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -305,7 +305,7 @@
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.subpackage.Foo))
  (local.set $this (ref.cast_static $packageinfo.subpackage.Foo (local.get $this.untyped)))

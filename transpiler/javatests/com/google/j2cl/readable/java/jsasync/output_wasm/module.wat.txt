@@ -196,7 +196,7 @@
   (local.set $$instance (struct.new $jsasync.Main (ref.as_non_null (global.get $jsasync.Main.vtable)) (ref.as_non_null (global.get $jsasync.Main.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ jsasync/Main.java:24:13
-  (call $$ctor__void_$p_jsasync_Main@jsasync.Main (local.get $$instance))
+  (call $$ctor__void_$p_jsasync_Main@jsasync.Main (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsasync/Main.java:24:13
   (return (local.get $$instance))
@@ -213,17 +213,17 @@
   (call $$clinit__void@jsasync.Main )
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:24:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; Main.this.$init();
   ;;@ jsasync/Main.java:24:13
-  (call $$init__void_$p_jsasync_Main@jsasync.Main (local.get $this))
+  (call $$init__void_$p_jsasync_Main@jsasync.Main (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; IThenable<Void> Main.emptyAsyncMethod()
 (func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
  (type $function.m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:29:18
  (local $this (ref null $jsasync.Main))
@@ -239,7 +239,7 @@
 ;;; IThenable<Integer> Main.asyncMethod()
 (func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
  (type $function.m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:34:21
  (local $result i32)
@@ -251,11 +251,11 @@
   ;;@ jsasync/Main.java:35:4
   (local.set $result (block (result i32)
    (local.set $$qualifier (ref.cast_static $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 7))))))
-   (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
   ))
   ;; return Main.this.parametricAsyncMethod(java.lang.Integer.valueOf(result));
   ;;@ jsasync/Main.java:36:4
-  (return (call_ref (local.get $this)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $result))(struct.get $jsasync.Main.vtable $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (struct.get $jsasync.Main $vtable(local.get $this)))))
+  (return (call_ref (ref.as_non_null (local.get $this))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $result))(struct.get $jsasync.Main.vtable $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (struct.get $jsasync.Main $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
@@ -263,7 +263,7 @@
 ;;; IThenable<T> Main.parametricAsyncMethod(T value)
 (func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
  (type $function.m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:40:19
@@ -294,7 +294,7 @@
 ;;; void Main.testAsyncLambdas()
 (func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main
  (type $function.m_testAsyncLambdas__void_$pp_jsasync)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ jsasync/Main.java:50:7
  (local $i (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
@@ -365,7 +365,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@jsasync.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main))
  (local.set $this (ref.cast_static $jsasync.Main (local.get $this.untyped)))
@@ -403,7 +403,7 @@
   (local.set $$instance (struct.new $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsasync/Main.java:51:23
-  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1 (local.get $$instance))
+  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsasync/Main.java:51:23
   (return (local.get $$instance))
@@ -420,14 +420,14 @@
   (call $$clinit__void@jsasync.Main.$LambdaImplementor$1 )
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:51:23
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; IThenable<Integer> $LambdaImplementor$1.asyncCall()
 (func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1
  (type $function.m_asyncCall__jsasync_Main_IThenable)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:51:23
  (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
@@ -465,7 +465,7 @@
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$1 (local.get $this.untyped)))
@@ -505,7 +505,7 @@
   (local.set $$instance (struct.new $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:54:28
-  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_1@jsasync.Main.1 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_1@jsasync.Main.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ jsasync/Main.java:54:28
   (return (local.get $$instance))
@@ -523,14 +523,14 @@
   (call $$clinit__void@jsasync.Main.1 )
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:54:28
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; IThenable<Integer> <anonymous> implements BaseInterface.asyncCall()
 (func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1
  (type $function.m_asyncCall__jsasync_Main_IThenable)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:57:36
  (local $this (ref null $jsasync.Main.1))
@@ -568,7 +568,7 @@
 ;;; Class<?> <anonymous> implements BaseInterface.getClass()
 (func $m_getClass__java_lang_Class@jsasync.Main.1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.1))
  (local.set $this (ref.cast_static $jsasync.Main.1 (local.get $this.untyped)))
@@ -606,7 +606,7 @@
   (local.set $$instance (struct.new $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsasync/Main.java:62:33
-  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2 (local.get $$instance))
+  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsasync/Main.java:62:33
   (return (local.get $$instance))
@@ -623,14 +623,14 @@
   (call $$clinit__void@jsasync.Main.$LambdaImplementor$2 )
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:62:33
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; IThenable<Integer> $LambdaImplementor$2.doSomething()
 (func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2
  (type $function.m_doSomething__jsasync_Main_IThenable)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:62:33
  (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
@@ -668,7 +668,7 @@
 ;;; Class<?> $LambdaImplementor$2.getClass()
 (func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$2 (local.get $this.untyped)))
@@ -708,7 +708,7 @@
   (local.set $$instance (struct.new $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:65:34
-  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_2@jsasync.Main.2 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_2@jsasync.Main.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ jsasync/Main.java:65:34
   (return (local.get $$instance))
@@ -726,14 +726,14 @@
   (call $$clinit__void@jsasync.Main.2 )
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:65:34
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; IThenable<Integer> <anonymous> implements JsFunctionInterface.doSomething()
 (func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2
  (type $function.m_doSomething__jsasync_Main_IThenable)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:68:36
  (local $this (ref null $jsasync.Main.2))
@@ -771,7 +771,7 @@
 ;;; Class<?> <anonymous> implements JsFunctionInterface.getClass()
 (func $m_getClass__java_lang_Class@jsasync.Main.2
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.2))
  (local.set $this (ref.cast_static $jsasync.Main.2 (local.get $this.untyped)))
@@ -811,7 +811,7 @@
   (local.set $$instance (struct.new $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:76:34
-  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_3@jsasync.Main.3 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_3@jsasync.Main.3 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ jsasync/Main.java:76:34
   (return (local.get $$instance))
@@ -829,14 +829,14 @@
   (call $$clinit__void@jsasync.Main.3 )
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:76:34
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; IThenable<Integer> <anonymous> implements JsFunctionInterface.doSomething()
 (func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3
  (type $function.m_doSomething__jsasync_Main_IThenable)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:79:36
  (local $tmp (ref null $java.lang.Object))
@@ -878,7 +878,7 @@
 ;;; Class<?> <anonymous> implements JsFunctionInterface.getClass()
 (func $m_getClass__java_lang_Class@jsasync.Main.3
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.3))
  (local.set $this (ref.cast_static $jsasync.Main.3 (local.get $this.untyped)))
@@ -1143,7 +1143,7 @@
   (local.set $$instance (struct.new $jsasync.Main.Promise (ref.as_non_null (global.get $jsasync.Main.Promise.vtable)) (ref.as_non_null (global.get $jsasync.Main.Promise.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsasync/Main.java:119:23
-  (call $$ctor__void_$p_jsasync_Main_Promise@jsasync.Main.Promise (local.get $$instance))
+  (call $$ctor__void_$p_jsasync_Main_Promise@jsasync.Main.Promise (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsasync/Main.java:119:23
   (return (local.get $$instance))
@@ -1160,7 +1160,7 @@
   (call $$clinit__void@jsasync.Main.Promise )
   ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:119:23
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -1195,7 +1195,7 @@
 ;;; Class<?> Promise.getClass()
 (func $m_getClass__java_lang_Class@jsasync.Main.Promise
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.Promise))
  (local.set $this (ref.cast_static $jsasync.Main.Promise (local.get $this.untyped)))

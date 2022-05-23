@@ -63,7 +63,7 @@
    ))
    ;; $qualifier.println(javaemul.internal.StringPool.$getString_|in_Interface...|());
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
-   (call_ref (local.get $$qualifier)(call $function.no.side.effects.$getString_|in_Interface...|__java_lang_String (ref.func $$getString_|in_Interface...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_Interface...|__java_lang_String (ref.func $$getString_|in_Interface...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
  )
 )
@@ -126,7 +126,7 @@
   (local.set $$instance (struct.new $genericanddefaultmethods.GenericClass (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (local.get $$instance))
+  (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (return (local.get $$instance))
@@ -143,14 +143,14 @@
   (call $$clinit__void@genericanddefaultmethods.GenericClass )
   ;; Object.this.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void GenericClass.foo(T value)
 (func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass
  (type $function.m_foo__java_lang_Object__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  ;;@ genericanddefaultmethods/ConcreteClass.java:25:14
  (local $$qualifier (ref null $java.io.PrintStream))
@@ -166,7 +166,7 @@
    ))
    ;; $qualifier.println(javaemul.internal.StringPool.$getString_|in_GenericClass|());
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
-   (call_ref (local.get $$qualifier)(call $function.no.side.effects.$getString_|in_GenericClass|__java_lang_String (ref.func $$getString_|in_GenericClass|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_GenericClass|__java_lang_String (ref.func $$getString_|in_GenericClass|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
  )
 )
@@ -197,7 +197,7 @@
 ;;; Class<?> GenericClass.getClass()
 (func $m_getClass__java_lang_Class@genericanddefaultmethods.GenericClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.GenericClass))
  (local.set $this (ref.cast_static $genericanddefaultmethods.GenericClass (local.get $this.untyped)))
@@ -236,7 +236,7 @@
   (local.set $$instance (struct.new $genericanddefaultmethods.ConcreteClass (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass (local.get $$instance))
+  (call $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (return (local.get $$instance))
@@ -253,14 +253,14 @@
   (call $$clinit__void@genericanddefaultmethods.ConcreteClass )
   ;; GenericClass.this.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (local.get $this))
+  (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void ConcreteClass.foo(String arg0)
 (func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass
  (type $function.m_foo__java_lang_String__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
@@ -268,7 +268,7 @@
  (block
   ;; super.foo(arg0);
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass (local.get $this)(local.get $arg0))
+  (call $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
 (elem declare func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass)
@@ -276,7 +276,7 @@
 ;;; void ConcreteClass.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass
  (type $function.m_foo__java_lang_Object__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
@@ -284,7 +284,7 @@
  (block
   ;; ConcreteClass.this.foo(((String) arg0));
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call_ref (local.get $this)(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $genericanddefaultmethods.ConcreteClass.vtable $m_foo__java_lang_String__void (struct.get $genericanddefaultmethods.ConcreteClass $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $genericanddefaultmethods.ConcreteClass.vtable $m_foo__java_lang_String__void (struct.get $genericanddefaultmethods.ConcreteClass $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass)
@@ -317,7 +317,7 @@
 ;;; Class<?> ConcreteClass.getClass()
 (func $m_getClass__java_lang_Class@genericanddefaultmethods.ConcreteClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
  (local.set $this (ref.cast_static $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))

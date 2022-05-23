@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $privateconstructor.PrivateConstructor (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.vtable)) (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ privateconstructor/PrivateConstructor.java:19:10
-  (call $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor (local.get $$instance))
+  (call $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ privateconstructor/PrivateConstructor.java:19:10
   (return (local.get $$instance))
@@ -55,7 +55,7 @@
  (block
   ;; Object.this.$ctor();
   ;;@ privateconstructor/PrivateConstructor.java:19:31
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -84,7 +84,7 @@
 ;;; Class<?> PrivateConstructor.getClass()
 (func $m_getClass__java_lang_Class@privateconstructor.PrivateConstructor
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $privateconstructor.PrivateConstructor))
  (local.set $this (ref.cast_static $privateconstructor.PrivateConstructor (local.get $this.untyped)))

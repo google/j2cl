@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $staticconstant.StaticConstant (ref.as_non_null (global.get $staticconstant.StaticConstant.vtable)) (ref.as_non_null (global.get $staticconstant.StaticConstant.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ staticconstant/StaticConstant.java:18:13
-  (call $$ctor__void_$p_staticconstant_StaticConstant@staticconstant.StaticConstant (local.get $$instance))
+  (call $$ctor__void_$p_staticconstant_StaticConstant@staticconstant.StaticConstant (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ staticconstant/StaticConstant.java:18:13
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@staticconstant.StaticConstant )
   ;; Object.this.$ctor();
   ;;@ staticconstant/StaticConstant.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -87,7 +87,7 @@
 ;;; Class<?> StaticConstant.getClass()
 (func $m_getClass__java_lang_Class@staticconstant.StaticConstant
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticconstant.StaticConstant))
  (local.set $this (ref.cast_static $staticconstant.StaticConstant (local.get $this.untyped)))

@@ -43,7 +43,7 @@
   (local.set $$instance (struct.new $staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
-  (call $$ctor__void_$p_staticfieldinitializer_StaticFieldInitializer@staticfieldinitializer.StaticFieldInitializer (local.get $$instance))
+  (call $$ctor__void_$p_staticfieldinitializer_StaticFieldInitializer@staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (return (local.get $$instance))
@@ -60,7 +60,7 @@
   (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
   ;; Object.this.$ctor();
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -95,7 +95,7 @@
 ;;; Class<?> StaticFieldInitializer.getClass()
 (func $m_getClass__java_lang_Class@staticfieldinitializer.StaticFieldInitializer
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticfieldinitializer.StaticFieldInitializer))
  (local.set $this (ref.cast_static $staticfieldinitializer.StaticFieldInitializer (local.get $this.untyped)))

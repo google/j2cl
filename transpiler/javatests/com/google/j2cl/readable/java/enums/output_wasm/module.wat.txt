@@ -181,7 +181,7 @@
   (local.set $$instance (struct.new $enums.Enum1 (ref.as_non_null (global.get $enums.Enum1.vtable)) (ref.as_non_null (global.get $enums.Enum1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
   ;;@ enums/Enum1.java:20:12
-  (call $$ctor__java_lang_String__int__void_$p_enums_Enum1@enums.Enum1 (local.get $$instance)(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_enums_Enum1@enums.Enum1 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;; return $instance;
   ;;@ enums/Enum1.java:20:12
   (return (local.get $$instance))
@@ -203,7 +203,7 @@
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum.this.$ctor($name,$ordinal);
   ;;@ enums/Enum1.java:20:12
-  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
 
@@ -278,7 +278,7 @@
 ;;; Class<?> Enum1.getClass()
 (func $m_getClass__java_lang_Class@enums.Enum1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum1))
  (local.set $this (ref.cast_static $enums.Enum1 (local.get $this.untyped)))
@@ -326,7 +326,7 @@
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,foo);
   ;;@ enums/Enum1.java:33:2
-  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $$instance)(local.get $$name)(local.get $$ordinal)(local.get $foo))
+  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $foo))
   ;; return $instance;
   ;;@ enums/Enum1.java:33:2
   (return (local.get $$instance))
@@ -352,10 +352,10 @@
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum.this.$ctor($name,$ordinal);
   ;;@ enums/Enum1.java:33:17
-  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
   ;; Enum2.this.$init();
   ;;@ enums/Enum1.java:33:17
-  (call $$init__void_$p_enums_Enum2@enums.Enum2 (local.get $this))
+  (call $$init__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this)))
   ;; (Enum2.this.foo = foo);
   ;;@ enums/Enum1.java:34:4
   (struct.set $enums.Enum2 $f_foo__enums_Enum2(local.get $this) (local.get $foo))
@@ -376,7 +376,7 @@
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,foo);
   ;;@ enums/Enum1.java:37:2
-  (call $$ctor__java_lang_String__int__java_lang_Enum__void_$p_enums_Enum2@enums.Enum2 (local.get $$instance)(local.get $$name)(local.get $$ordinal)(local.get $foo))
+  (call $$ctor__java_lang_String__int__java_lang_Enum__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $foo))
   ;; return $instance;
   ;;@ enums/Enum1.java:37:2
   (return (local.get $$instance))
@@ -399,7 +399,7 @@
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum2.this.$ctor($name,$ordinal,foo.ordinal());
   ;;@ enums/Enum1.java:38:4
-  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$name)(local.get $$ordinal)(call_ref (local.get $foo)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $foo)))))
+  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal)(call_ref (ref.as_non_null (local.get $foo))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $foo)))))
  )
 )
 
@@ -417,7 +417,7 @@
   (local.set $$instance (struct.new $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,somePars);
   ;;@ enums/Enum1.java:41:2
-  (call $$ctor__java_lang_String__int__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2 (local.get $$instance)(local.get $$name)(local.get $$ordinal)(local.get $somePars))
+  (call $$ctor__java_lang_String__int__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $somePars))
   ;; return $instance;
   ;;@ enums/Enum1.java:41:2
   (return (local.get $$instance))
@@ -440,7 +440,7 @@
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum2.this.$ctor($name,$ordinal,somePars.length);
   ;;@ enums/Enum1.java:42:4
-  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$name)(local.get $$ordinal)(struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $somePars)))
+  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal)(struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $somePars)))
  )
 )
 
@@ -512,7 +512,7 @@
     (call $$clinit__void@enums.Enum1 )
     (global.get $f_V1__enums_Enum1)
    ))
-   (call_ref (local.get $$qualifier)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
   ))
  )
 )
@@ -560,7 +560,7 @@
 ;;; Class<?> Enum2.getClass()
 (func $m_getClass__java_lang_Class@enums.Enum2
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum2))
  (local.set $this (ref.cast_static $enums.Enum2 (local.get $this.untyped)))
@@ -607,7 +607,7 @@
   (local.set $$instance (struct.new $enums.Enum3 (ref.as_non_null (global.get $enums.Enum3.vtable)) (ref.as_non_null (global.get $enums.Enum3.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,function);
   ;;@ enums/Enum1.java:55:2
-  (call $$ctor__java_lang_String__int__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3 (local.get $$instance)(local.get $$name)(local.get $$ordinal)(local.get $function))
+  (call $$ctor__java_lang_String__int__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $function))
   ;; return $instance;
   ;;@ enums/Enum1.java:55:2
   (return (local.get $$instance))
@@ -630,7 +630,7 @@
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum.this.$ctor($name,$ordinal);
   ;;@ enums/Enum1.java:55:45
-  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
 
@@ -702,7 +702,7 @@
 ;;; Class<?> Enum3.getClass()
 (func $m_getClass__java_lang_Class@enums.Enum3
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum3))
  (local.set $this (ref.cast_static $enums.Enum3 (local.get $this.untyped)))
@@ -750,7 +750,7 @@
   (local.set $$instance (struct.new $enums.Enum2.1 (ref.as_non_null (global.get $enums.Enum2.1.vtable)) (ref.as_non_null (global.get $enums.Enum2.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal,$_0);
   ;;@ enums/Enum1.java:29:12
-  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2_1@enums.Enum2.1 (local.get $$instance)(local.get $$name)(local.get $$ordinal)(local.get $$_0))
+  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2_1@enums.Enum2.1 (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal)(local.get $$_0))
   ;; return $instance;
   ;;@ enums/Enum1.java:29:12
   (return (local.get $$instance))
@@ -770,7 +770,7 @@
   (call $$clinit__void@enums.Enum2.1 )
   ;; Enum2.this.$ctor($name,$ordinal,$_0);
   ;;@ enums/Enum1.java:29:12
-  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$name)(local.get $$ordinal)(local.get $$_0))
+  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal)(local.get $$_0))
  )
 )
 
@@ -799,7 +799,7 @@
 ;;; Class<?> <anonymous> extends Enum2.getClass()
 (func $m_getClass__java_lang_Class@enums.Enum2.1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum2.1))
  (local.set $this (ref.cast_static $enums.Enum2.1 (local.get $this.untyped)))
@@ -839,7 +839,7 @@
   (local.set $$instance (struct.new $enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $enums.Enum3.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ enums/Enum1.java:53:9
-  (call $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1 (local.get $$instance))
+  (call $$ctor__void_$p_enums_Enum3_$LambdaImplementor$1@enums.Enum3.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ enums/Enum1.java:53:9
   (return (local.get $$instance))
@@ -856,14 +856,14 @@
   (call $$clinit__void@enums.Enum3.$LambdaImplementor$1 )
   ;; Object.this.$ctor();
   ;;@ enums/Enum1.java:53:9
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; R $LambdaImplementor$1.apply(T v)
 (func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1
  (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $v (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ enums/Enum1.java:53:9
@@ -876,7 +876,7 @@
   (local.set $v_1 (ref.cast_static $java.lang.Integer (ref.cast_static $java.lang.Object (local.get $v))))
   ;; return java.lang.Integer.valueOf((1 + v.intValue()));
   ;;@ enums/Enum1.java:53:14
-  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref (local.get $v_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v_1)))))))
+  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref (ref.as_non_null (local.get $v_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v_1)))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
@@ -884,7 +884,7 @@
 ;;; Function<T, V> $LambdaImplementor$1.andThen(Function<? super R, ? extends V> arg0)
 (func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1
  (type $function.m_andThen__java_util_function_Function__java_util_function_Function)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ enums/Enum1.java:53:9
@@ -893,7 +893,7 @@
  (block
   ;; return Function.this.andThen(arg0);
   ;;@ enums/Enum1.java:53:9
-  (return (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
+  (return (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
 (elem declare func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
@@ -901,7 +901,7 @@
 ;;; Function<V, R> $LambdaImplementor$1.compose(Function<? super V, ? extends T> arg0)
 (func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1
  (type $function.m_compose__java_util_function_Function__java_util_function_Function)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ enums/Enum1.java:53:9
@@ -910,7 +910,7 @@
  (block
   ;; return Function.this.compose(arg0);
   ;;@ enums/Enum1.java:53:9
-  (return (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
+  (return (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
 )
 (elem declare func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
@@ -943,7 +943,7 @@
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@enums.Enum3.$LambdaImplementor$1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $enums.Enum3.$LambdaImplementor$1 (local.get $this.untyped)))

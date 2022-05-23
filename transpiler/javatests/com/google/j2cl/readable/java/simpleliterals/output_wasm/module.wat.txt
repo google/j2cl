@@ -43,7 +43,7 @@
   (local.set $$instance (struct.new $simpleliterals.SimpleLiterals (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.vtable)) (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simpleliterals/SimpleLiterals.java:18:13
-  (call $$ctor__void_$p_simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals (local.get $$instance))
+  (call $$ctor__void_$p_simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ simpleliterals/SimpleLiterals.java:18:13
   (return (local.get $$instance))
@@ -60,14 +60,14 @@
   (call $$clinit__void@simpleliterals.SimpleLiterals )
   ;; Object.this.$ctor();
   ;;@ simpleliterals/SimpleLiterals.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SimpleLiterals.main()
 (func $m_main__void@simpleliterals.SimpleLiterals
  (type $function.m_main__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ simpleliterals/SimpleLiterals.java:20:14
  (local $bool i32)
  (local $ch i32)
@@ -145,7 +145,7 @@
 ;;; Class<?> SimpleLiterals.getClass()
 (func $m_getClass__java_lang_Class@simpleliterals.SimpleLiterals
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simpleliterals.SimpleLiterals))
  (local.set $this (ref.cast_static $simpleliterals.SimpleLiterals (local.get $this.untyped)))

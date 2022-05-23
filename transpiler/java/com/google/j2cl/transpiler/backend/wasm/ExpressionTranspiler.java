@@ -316,8 +316,7 @@ final class ExpressionTranspiler {
           }
 
           // Pass the implicit parameter.
-          Expression implicitParameter = methodCall.getQualifier();
-          render(implicitParameter);
+          renderReceiver(methodCall);
 
           // Pass the rest of the parameters.
           methodCall.getArguments().forEach(this::render);
@@ -384,7 +383,7 @@ final class ExpressionTranspiler {
           if (!target.isStatic()) {
             // Constructors, non static private methods and super method calls receive the qualifier
             // as the first parameter, then the corresponding arguments.
-            render(methodCall.getQualifier());
+            renderReceiver(methodCall);
           }
           // Render the parameters.
           methodCall.getArguments().forEach(this::render);
@@ -399,6 +398,14 @@ final class ExpressionTranspiler {
           sourceBuilder.append(")");
         }
         return false;
+      }
+
+      private void renderReceiver(MethodCall methodCall) {
+        // The receiver parameters is always declared as non-nullable, so perform the not null
+        // check before passing it.
+        sourceBuilder.append("(ref.as_non_null ");
+        render(methodCall.getQualifier());
+        sourceBuilder.append(")");
       }
 
       @Override

@@ -50,7 +50,7 @@
   (local.set $$instance (struct.new $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:18:13
-  (call $$ctor__void_$p_abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses (local.get $$instance))
+  (call $$ctor__void_$p_abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ abstractinnerclass/InnerClasses.java:18:13
   (return (local.get $$instance))
@@ -67,7 +67,7 @@
   (call $$clinit__void@abstractinnerclass.InnerClasses )
   ;; Object.this.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -96,7 +96,7 @@
 ;;; Class<?> InnerClasses.getClass()
 (func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractinnerclass.InnerClasses))
  (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses (local.get $this.untyped)))
@@ -170,21 +170,21 @@
   (call $$clinit__void@abstractinnerclass.InnerClasses.B )
   ;; Object.this.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:23:24
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void B.bar()
 (func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B
  (type $function.m_bar__void_$pp_abstractinnerclass)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:24:9
  (local $this (ref null $abstractinnerclass.InnerClasses.B))
  (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses.B (local.get $this.untyped)))
  (block
   ;; B.this.foo();
   ;;@ abstractinnerclass/InnerClasses.java:25:6
-  (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.B.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.B $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(struct.get $abstractinnerclass.InnerClasses.B.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.B $vtable(local.get $this))))
  )
 )
 (elem declare func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B)
@@ -240,21 +240,21 @@
   (call $$clinit__void@abstractinnerclass.InnerClasses.C )
   ;; Object.this.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:29:17
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void C.bar()
 (func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C
  (type $function.m_bar__void_$pp_abstractinnerclass)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:30:9
  (local $this (ref null $abstractinnerclass.InnerClasses.C))
  (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses.C (local.get $this.untyped)))
  (block
   ;; C.this.foo();
   ;;@ abstractinnerclass/InnerClasses.java:31:6
-  (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.C.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.C $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(struct.get $abstractinnerclass.InnerClasses.C.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.C $vtable(local.get $this))))
  )
 )
 (elem declare func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C)

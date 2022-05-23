@@ -57,7 +57,7 @@
   (local.set $$instance (struct.new $interfacedevirtualize.InterfaceDevirtualize (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.vtable)) (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
-  (call $$ctor__void_$p_interfacedevirtualize_InterfaceDevirtualize@interfacedevirtualize.InterfaceDevirtualize (local.get $$instance))
+  (call $$ctor__void_$p_interfacedevirtualize_InterfaceDevirtualize@interfacedevirtualize.InterfaceDevirtualize (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
   (return (local.get $$instance))
@@ -74,14 +74,14 @@
   (call $$clinit__void@interfacedevirtualize.InterfaceDevirtualize )
   ;; Object.this.$ctor();
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int InterfaceDevirtualize.compare0(Comparable<T> c, T t)
 (func $m_compare0__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_compare0__java_lang_Comparable__java_lang_Object__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $c (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (result i32)
@@ -91,7 +91,7 @@
  (block
   ;; return c.compareTo(t);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:20:4
-  (return (call_ref (local.get $c)(local.get $t)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (return (call_ref (ref.as_non_null (local.get $c))(local.get $t)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare0__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -99,7 +99,7 @@
 ;;; int InterfaceDevirtualize.compare1(Comparable c, Object o)
 (func $m_compare1__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_compare1__java_lang_Comparable__java_lang_Object__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $c (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result i32)
@@ -109,7 +109,7 @@
  (block
   ;; return c.compareTo(o);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:25:4
-  (return (call_ref (local.get $c)(local.get $o)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (return (call_ref (ref.as_non_null (local.get $c))(local.get $o)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare1__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -117,7 +117,7 @@
 ;;; int InterfaceDevirtualize.compare2(Comparable<Double> c, Double d)
 (func $m_compare2__java_lang_Comparable__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_compare2__java_lang_Comparable__java_lang_Double__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $c (ref null $java.lang.Object))
  (param $d (ref null $java.lang.Double))
  (result i32)
@@ -127,7 +127,7 @@
  (block
   ;; return c.compareTo(d);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:29:4
-  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (return (call_ref (ref.as_non_null (local.get $c))(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare2__java_lang_Comparable__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -135,7 +135,7 @@
 ;;; int InterfaceDevirtualize.compare3(Double d1, Double d2)
 (func $m_compare3__java_lang_Double__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_compare3__java_lang_Double__java_lang_Double__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $d1 (ref null $java.lang.Double))
  (param $d2 (ref null $java.lang.Double))
  (result i32)
@@ -145,7 +145,7 @@
  (block
   ;; return d1.compareTo(d2);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:33:4
-  (return (call_ref (local.get $d1)(local.get $d2)(struct.get $java.lang.Double.vtable $m_compareTo__java_lang_Double__int (struct.get $java.lang.Double $vtable(local.get $d1)))))
+  (return (call_ref (ref.as_non_null (local.get $d1))(local.get $d2)(struct.get $java.lang.Double.vtable $m_compareTo__java_lang_Double__int (struct.get $java.lang.Double $vtable(local.get $d1)))))
  )
 )
 (elem declare func $m_compare3__java_lang_Double__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -153,7 +153,7 @@
 ;;; int InterfaceDevirtualize.compare2(Comparable<Boolean> c, Boolean d)
 (func $m_compare2__java_lang_Comparable__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_compare2__java_lang_Comparable__java_lang_Boolean__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $c (ref null $java.lang.Object))
  (param $d (ref null $java.lang.Boolean))
  (result i32)
@@ -163,7 +163,7 @@
  (block
   ;; return c.compareTo(d);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:37:4
-  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (return (call_ref (ref.as_non_null (local.get $c))(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare2__java_lang_Comparable__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -171,7 +171,7 @@
 ;;; int InterfaceDevirtualize.compare3(Boolean d1, Boolean d2)
 (func $m_compare3__java_lang_Boolean__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_compare3__java_lang_Boolean__java_lang_Boolean__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $d1 (ref null $java.lang.Boolean))
  (param $d2 (ref null $java.lang.Boolean))
  (result i32)
@@ -181,7 +181,7 @@
  (block
   ;; return d1.compareTo(d2);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:41:4
-  (return (call_ref (local.get $d1)(local.get $d2)(struct.get $java.lang.Boolean.vtable $m_compareTo__java_lang_Boolean__int (struct.get $java.lang.Boolean $vtable(local.get $d1)))))
+  (return (call_ref (ref.as_non_null (local.get $d1))(local.get $d2)(struct.get $java.lang.Boolean.vtable $m_compareTo__java_lang_Boolean__int (struct.get $java.lang.Boolean $vtable(local.get $d1)))))
  )
 )
 (elem declare func $m_compare3__java_lang_Boolean__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -189,7 +189,7 @@
 ;;; int InterfaceDevirtualize.compare2(Comparable<Integer> c, Integer d)
 (func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_compare2__java_lang_Comparable__java_lang_Integer__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $c (ref null $java.lang.Object))
  (param $d (ref null $java.lang.Integer))
  (result i32)
@@ -199,7 +199,7 @@
  (block
   ;; return c.compareTo(d);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:45:4
-  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (return (call_ref (ref.as_non_null (local.get $c))(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -207,7 +207,7 @@
 ;;; int InterfaceDevirtualize.compare3(Integer d1, Integer d2)
 (func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_compare3__java_lang_Integer__java_lang_Integer__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $d1 (ref null $java.lang.Integer))
  (param $d2 (ref null $java.lang.Integer))
  (result i32)
@@ -217,7 +217,7 @@
  (block
   ;; return d1.compareTo(d2);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:49:4
-  (return (call_ref (local.get $d1)(local.get $d2)(struct.get $java.lang.Integer.vtable $m_compareTo__java_lang_Integer__int (struct.get $java.lang.Integer $vtable(local.get $d1)))))
+  (return (call_ref (ref.as_non_null (local.get $d1))(local.get $d2)(struct.get $java.lang.Integer.vtable $m_compareTo__java_lang_Integer__int (struct.get $java.lang.Integer $vtable(local.get $d1)))))
  )
 )
 (elem declare func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -247,7 +247,7 @@
 ;;; Class<?> InterfaceDevirtualize.getClass()
 (func $m_getClass__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
  (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))

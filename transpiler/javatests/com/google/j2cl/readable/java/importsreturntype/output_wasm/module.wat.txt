@@ -77,7 +77,7 @@
   (local.set $$instance (struct.new $importsreturntype.ImportsReturnType (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:18:13
-  (call $$ctor__void_$p_importsreturntype_ImportsReturnType@importsreturntype.ImportsReturnType (local.get $$instance))
+  (call $$ctor__void_$p_importsreturntype_ImportsReturnType@importsreturntype.ImportsReturnType (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ importsreturntype/ImportsReturnType.java:18:13
   (return (local.get $$instance))
@@ -94,14 +94,14 @@
   (call $$clinit__void@importsreturntype.ImportsReturnType )
   ;; Object.this.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; Set<Entry> ImportsReturnType.get()
 (func $m_get__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType
  (type $function.m_get__importsreturntype_ImportsReturnType_Set)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $importsreturntype.ImportsReturnType.Set))
  ;;@ importsreturntype/ImportsReturnType.java:23:20
  (local $this (ref null $importsreturntype.ImportsReturnType))
@@ -139,7 +139,7 @@
 ;;; Class<?> ImportsReturnType.getClass()
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType))
  (local.set $this (ref.cast_static $importsreturntype.ImportsReturnType (local.get $this.untyped)))
@@ -176,7 +176,7 @@
   (local.set $$instance (struct.new $importsreturntype.ImportsReturnType.Entry (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Entry.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Entry.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:19:22
-  (call $$ctor__void_$p_importsreturntype_ImportsReturnType_Entry@importsreturntype.ImportsReturnType.Entry (local.get $$instance))
+  (call $$ctor__void_$p_importsreturntype_ImportsReturnType_Entry@importsreturntype.ImportsReturnType.Entry (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ importsreturntype/ImportsReturnType.java:19:22
   (return (local.get $$instance))
@@ -193,7 +193,7 @@
   (call $$clinit__void@importsreturntype.ImportsReturnType.Entry )
   ;; Object.this.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:19:22
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -222,7 +222,7 @@
 ;;; Class<?> Entry.getClass()
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Entry
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType.Entry))
  (local.set $this (ref.cast_static $importsreturntype.ImportsReturnType.Entry (local.get $this.untyped)))
@@ -259,7 +259,7 @@
   (local.set $$instance (struct.new $importsreturntype.ImportsReturnType.Set (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Set.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Set.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:21:22
-  (call $$ctor__void_$p_importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType.Set (local.get $$instance))
+  (call $$ctor__void_$p_importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType.Set (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ importsreturntype/ImportsReturnType.java:21:22
   (return (local.get $$instance))
@@ -276,7 +276,7 @@
   (call $$clinit__void@importsreturntype.ImportsReturnType.Set )
   ;; Object.this.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:21:22
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -305,7 +305,7 @@
 ;;; Class<?> Set.getClass()
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Set
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType.Set))
  (local.set $this (ref.cast_static $importsreturntype.ImportsReturnType.Set (local.get $this.untyped)))

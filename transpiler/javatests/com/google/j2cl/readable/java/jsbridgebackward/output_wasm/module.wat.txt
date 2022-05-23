@@ -103,7 +103,7 @@
   (local.set $$instance (struct.new $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $jsbridgebackward.A.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-  (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (local.get $$instance))
+  (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (return (local.get $$instance))
@@ -120,14 +120,14 @@
   (call $$clinit__void@jsbridgebackward.A )
   ;; Object.this.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int A.foo(int a)
 (func $m_foo__int__int@jsbridgebackward.A
  (type $function.m_foo__int__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
  ;;@ jsbridgebackward/InterfaceImpl.java:26:13
@@ -166,7 +166,7 @@
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@jsbridgebackward.A
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.A))
  (local.set $this (ref.cast_static $jsbridgebackward.A (local.get $this.untyped)))
@@ -204,7 +204,7 @@
   (local.set $$instance (struct.new $jsbridgebackward.InterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-  (call $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl (local.get $$instance))
+  (call $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (return (local.get $$instance))
@@ -221,7 +221,7 @@
   (call $$clinit__void@jsbridgebackward.InterfaceImpl )
   ;; A.this.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-  (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (local.get $this))
+  (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -250,7 +250,7 @@
 ;;; Class<?> InterfaceImpl.getClass()
 (func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.InterfaceImpl))
  (local.set $this (ref.cast_static $jsbridgebackward.InterfaceImpl (local.get $this.untyped)))

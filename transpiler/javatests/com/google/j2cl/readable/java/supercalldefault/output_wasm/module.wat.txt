@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $supercalldefault.SuperCallDefault (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.vtable)) (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ supercalldefault/SuperCallDefault.java:19:9
-  (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (local.get $$instance))
+  (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ supercalldefault/SuperCallDefault.java:19:9
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@supercalldefault.SuperCallDefault )
   ;; Object.this.$ctor();
   ;;@ supercalldefault/SuperCallDefault.java:20:4
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -87,7 +87,7 @@
 ;;; Class<?> SuperCallDefault.getClass()
 (func $m_getClass__java_lang_Class@supercalldefault.SuperCallDefault
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $supercalldefault.SuperCallDefault))
  (local.set $this (ref.cast_static $supercalldefault.SuperCallDefault (local.get $this.untyped)))

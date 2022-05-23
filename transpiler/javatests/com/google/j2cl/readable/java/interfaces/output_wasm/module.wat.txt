@@ -79,7 +79,7 @@
   (local.set $$instance (struct.new $interfaces.Main (ref.as_non_null (global.get $interfaces.Main.vtable)) (ref.as_non_null (global.get $interfaces.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ interfaces/Main.java:18:13
-  (call $$ctor__void_$p_interfaces_Main@interfaces.Main (local.get $$instance))
+  (call $$ctor__void_$p_interfaces_Main@interfaces.Main (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ interfaces/Main.java:18:13
   (return (local.get $$instance))
@@ -96,14 +96,14 @@
   (call $$clinit__void@interfaces.Main )
   ;; Object.this.$ctor();
   ;;@ interfaces/Main.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Main.testInterfaceMembers()
 (func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
  (type $function.m_testInterfaceMembers__void_$pp_interfaces)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ interfaces/Main.java:49:7
  (local $i (ref null $java.lang.Object))
  (local $x i32)
@@ -115,10 +115,10 @@
   (local.set $i (call $$create__interfaces_Main__interfaces_Main_Implementor@interfaces.Main.Implementor (local.get $this)))
   ;; i.interfaceMethod();
   ;;@ interfaces/Main.java:51:4
-  (call_ref (local.get $i)(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast_static $interfaces.Main.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1))) ))
+  (call_ref (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast_static $interfaces.Main.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1))) ))
   ;; i.defaultMethod(null);
   ;;@ interfaces/Main.java:52:4
-  (call_ref (local.get $i)(ref.null $java.lang.Object)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast_static $interfaces.Main.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1))) ))
+  (call_ref (ref.as_non_null (local.get $i))(ref.null $java.lang.Object)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast_static $interfaces.Main.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1))) ))
   ;; interfaces.Main.Interface.staticInterfaceMethod();
   ;;@ interfaces/Main.java:53:4
   (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
@@ -157,7 +157,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@interfaces.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast_static $interfaces.Main (local.get $this.untyped)))
@@ -183,7 +183,7 @@
  (block
   ;; Interface.this.privateMethod(t);
   ;;@ interfaces/Main.java:27:6
-  (call $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface (local.get $this)(local.get $t))
+  (call $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $t))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface)
@@ -251,7 +251,7 @@
  (block
   ;; super.defaultMethod(s);
   ;;@ interfaces/Main.java:37:6
-  (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (local.get $this)(local.get $s))
+  (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.as_non_null (local.get $this))(local.get $s))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface)
@@ -320,7 +320,7 @@
   (local.set $$instance (struct.new $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ interfaces/Main.java:41:8
-  (call $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__interfaces_Main__void_$p_interfaces_Main_Implementor@interfaces.Main.Implementor (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ interfaces/Main.java:41:8
   (return (local.get $$instance))
@@ -338,14 +338,14 @@
   (call $$clinit__void@interfaces.Main.Implementor )
   ;; Object.this.$ctor();
   ;;@ interfaces/Main.java:41:8
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Implementor.interfaceMethod()
 (func $m_interfaceMethod__void@interfaces.Main.Implementor
  (type $function.m_interfaceMethod__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ interfaces/Main.java:43:16
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast_static $interfaces.Main.Implementor (local.get $this.untyped)))
@@ -357,7 +357,7 @@
 ;;; void Implementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor
  (type $function.m_defaultMethod__java_lang_Object__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ interfaces/Main.java:41:8
  (local $this (ref null $interfaces.Main.Implementor))
@@ -365,7 +365,7 @@
  (block
   ;; Implementor.this.defaultMethod(((String) arg0));
   ;;@ interfaces/Main.java:41:8
-  (call_ref (local.get $this)(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $interfaces.Main.Implementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.Implementor $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $interfaces.Main.Implementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.Implementor $vtable(local.get $this))))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
@@ -373,7 +373,7 @@
 ;;; void Implementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor
  (type $function.m_defaultMethod__java_lang_String__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  ;;@ interfaces/Main.java:41:8
  (local $this (ref null $interfaces.Main.Implementor))
@@ -381,7 +381,7 @@
  (block
   ;; SubInterface.this.defaultMethod(arg0);
   ;;@ interfaces/Main.java:41:8
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (local.get $this)(local.get $arg0))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
@@ -417,7 +417,7 @@
 ;;; Class<?> Implementor.getClass()
 (func $m_getClass__java_lang_Class@interfaces.Main.Implementor
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast_static $interfaces.Main.Implementor (local.get $this.untyped)))
@@ -457,14 +457,14 @@
   (call $$clinit__void@interfaces.Main.AbstractImplementor )
   ;; Object.this.$ctor();
   ;;@ interfaces/Main.java:47:17
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void AbstractImplementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor
  (type $function.m_defaultMethod__java_lang_Object__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ interfaces/Main.java:47:17
  (local $this (ref null $interfaces.Main.AbstractImplementor))
@@ -472,7 +472,7 @@
  (block
   ;; AbstractImplementor.this.defaultMethod(((String) arg0));
   ;;@ interfaces/Main.java:47:17
-  (call_ref (local.get $this)(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $interfaces.Main.AbstractImplementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.AbstractImplementor $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $interfaces.Main.AbstractImplementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.AbstractImplementor $vtable(local.get $this))))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor)
@@ -480,7 +480,7 @@
 ;;; void AbstractImplementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor
  (type $function.m_defaultMethod__java_lang_String__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  ;;@ interfaces/Main.java:47:17
  (local $this (ref null $interfaces.Main.AbstractImplementor))
@@ -488,7 +488,7 @@
  (block
   ;; SubInterface.this.defaultMethod(arg0);
   ;;@ interfaces/Main.java:47:17
-  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (local.get $this)(local.get $arg0))
+  (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
 )
 (elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor)

@@ -58,7 +58,7 @@
   (local.set $$instance (struct.new $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ srcjar/Foo.java:21:13
-  (call $$ctor__void_$p_srcjar_Foo@srcjar.Foo (local.get $$instance))
+  (call $$ctor__void_$p_srcjar_Foo@srcjar.Foo (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ srcjar/Foo.java:21:13
   (return (local.get $$instance))
@@ -75,7 +75,7 @@
   (call $$clinit__void@srcjar.Foo )
   ;; Object.this.$ctor();
   ;;@ srcjar/Foo.java:21:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -104,7 +104,7 @@
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@srcjar.Foo
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $srcjar.Foo))
  (local.set $this (ref.cast_static $srcjar.Foo (local.get $this.untyped)))
@@ -141,7 +141,7 @@
   (local.set $$instance (struct.new $srcjar.Srcjar (ref.as_non_null (global.get $srcjar.Srcjar.vtable)) (ref.as_non_null (global.get $srcjar.Srcjar.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ srcjar/Srcjar.java:18:13
-  (call $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar (local.get $$instance))
+  (call $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ srcjar/Srcjar.java:18:13
   (return (local.get $$instance))
@@ -158,7 +158,7 @@
   (call $$clinit__void@srcjar.Srcjar )
   ;; Object.this.$ctor();
   ;;@ srcjar/Srcjar.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -201,7 +201,7 @@
 ;;; Class<?> Srcjar.getClass()
 (func $m_getClass__java_lang_Class@srcjar.Srcjar
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $srcjar.Srcjar))
  (local.set $this (ref.cast_static $srcjar.Srcjar (local.get $this.untyped)))

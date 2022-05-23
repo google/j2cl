@@ -126,7 +126,7 @@
   (local.set $$instance (struct.new $transitivejsoverlayimport.Immediate (ref.as_non_null (global.get $transitivejsoverlayimport.Immediate.vtable)) (ref.as_non_null (global.get $transitivejsoverlayimport.Immediate.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:25:6
-  (call $$ctor__void_$p_transitivejsoverlayimport_Immediate@transitivejsoverlayimport.Immediate (local.get $$instance))
+  (call $$ctor__void_$p_transitivejsoverlayimport_Immediate@transitivejsoverlayimport.Immediate (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ transitivejsoverlayimport/Main.java:25:6
   (return (local.get $$instance))
@@ -143,14 +143,14 @@
   (call $$clinit__void@transitivejsoverlayimport.Immediate )
   ;; Transitive.this.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:25:6
-  (call $$ctor__void_$p_transitivejsoverlayimport_Transitive@transitivejsoverlayimport.Transitive (local.get $this))
+  (call $$ctor__void_$p_transitivejsoverlayimport_Transitive@transitivejsoverlayimport.Transitive (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Immediate.doImmediateInstanceMethod()
 (func $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Immediate
  (type $function.m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ transitivejsoverlayimport/Main.java:28:13
  (local $this (ref null $transitivejsoverlayimport.Immediate))
  (local.set $this (ref.cast_static $transitivejsoverlayimport.Immediate (local.get $this.untyped)))
@@ -181,7 +181,7 @@
 ;;; Class<?> Immediate.getClass()
 (func $m_getClass__java_lang_Class@transitivejsoverlayimport.Immediate
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $transitivejsoverlayimport.Immediate))
  (local.set $this (ref.cast_static $transitivejsoverlayimport.Immediate (local.get $this.untyped)))
@@ -222,7 +222,7 @@
   (local.set $$instance (struct.new $transitivejsoverlayimport.NonNativeUpper (ref.as_non_null (global.get $transitivejsoverlayimport.NonNativeUpper.vtable)) (ref.as_non_null (global.get $transitivejsoverlayimport.NonNativeUpper.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:33:9
-  (call $$ctor__void_$p_transitivejsoverlayimport_NonNativeUpper@transitivejsoverlayimport.NonNativeUpper (local.get $$instance))
+  (call $$ctor__void_$p_transitivejsoverlayimport_NonNativeUpper@transitivejsoverlayimport.NonNativeUpper (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ transitivejsoverlayimport/Main.java:33:9
   (return (local.get $$instance))
@@ -239,14 +239,14 @@
   (call $$clinit__void@transitivejsoverlayimport.NonNativeUpper )
   ;; Immediate.this.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:33:26
-  (call $$ctor__void_$p_transitivejsoverlayimport_Immediate@transitivejsoverlayimport.Immediate (local.get $this))
+  (call $$ctor__void_$p_transitivejsoverlayimport_Immediate@transitivejsoverlayimport.Immediate (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void NonNativeUpper.doNonNativeUpperInstanceMethod()
 (func $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.NonNativeUpper
  (type $function.m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ transitivejsoverlayimport/Main.java:35:7
  (local $this (ref null $transitivejsoverlayimport.NonNativeUpper))
  (local.set $this (ref.cast_static $transitivejsoverlayimport.NonNativeUpper (local.get $this.untyped)))
@@ -277,7 +277,7 @@
 ;;; Class<?> NonNativeUpper.getClass()
 (func $m_getClass__java_lang_Class@transitivejsoverlayimport.NonNativeUpper
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $transitivejsoverlayimport.NonNativeUpper))
  (local.set $this (ref.cast_static $transitivejsoverlayimport.NonNativeUpper (local.get $this.untyped)))
@@ -319,7 +319,7 @@
   (local.set $$instance (struct.new $transitivejsoverlayimport.NonNativeLower (ref.as_non_null (global.get $transitivejsoverlayimport.NonNativeLower.vtable)) (ref.as_non_null (global.get $transitivejsoverlayimport.NonNativeLower.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:40:9
-  (call $$ctor__void_$p_transitivejsoverlayimport_NonNativeLower@transitivejsoverlayimport.NonNativeLower (local.get $$instance))
+  (call $$ctor__void_$p_transitivejsoverlayimport_NonNativeLower@transitivejsoverlayimport.NonNativeLower (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ transitivejsoverlayimport/Main.java:40:9
   (return (local.get $$instance))
@@ -336,14 +336,14 @@
   (call $$clinit__void@transitivejsoverlayimport.NonNativeLower )
   ;; NonNativeUpper.this.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:40:26
-  (call $$ctor__void_$p_transitivejsoverlayimport_NonNativeUpper@transitivejsoverlayimport.NonNativeUpper (local.get $this))
+  (call $$ctor__void_$p_transitivejsoverlayimport_NonNativeUpper@transitivejsoverlayimport.NonNativeUpper (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void NonNativeLower.doNonNativeLowerInstanceMethod()
 (func $m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.NonNativeLower
  (type $function.m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ transitivejsoverlayimport/Main.java:42:7
  (local $this (ref null $transitivejsoverlayimport.NonNativeLower))
  (local.set $this (ref.cast_static $transitivejsoverlayimport.NonNativeLower (local.get $this.untyped)))
@@ -377,7 +377,7 @@
 ;;; Class<?> NonNativeLower.getClass()
 (func $m_getClass__java_lang_Class@transitivejsoverlayimport.NonNativeLower
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $transitivejsoverlayimport.NonNativeLower))
  (local.set $this (ref.cast_static $transitivejsoverlayimport.NonNativeLower (local.get $this.untyped)))
@@ -416,7 +416,7 @@
   (local.set $$instance (struct.new $transitivejsoverlayimport.Transitive (ref.as_non_null (global.get $transitivejsoverlayimport.Transitive.vtable)) (ref.as_non_null (global.get $transitivejsoverlayimport.Transitive.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:46:6
-  (call $$ctor__void_$p_transitivejsoverlayimport_Transitive@transitivejsoverlayimport.Transitive (local.get $$instance))
+  (call $$ctor__void_$p_transitivejsoverlayimport_Transitive@transitivejsoverlayimport.Transitive (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ transitivejsoverlayimport/Main.java:46:6
   (return (local.get $$instance))
@@ -433,14 +433,14 @@
   (call $$clinit__void@transitivejsoverlayimport.Transitive )
   ;; Object.this.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:46:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int Transitive.getJsProperty()
 (func $m_getJsProperty__int_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Transitive
  (type $function.m_getJsProperty__int_$pp_transitivejsoverlayimport)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ transitivejsoverlayimport/Main.java:49:19
  (local $this (ref null $transitivejsoverlayimport.Transitive))
@@ -454,7 +454,7 @@
 ;;; void Transitive.doTransitiveInstanceMethod(String arg1)
 (func $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Transitive
  (type $function.m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg1 (ref null $java.lang.String))
  ;;@ transitivejsoverlayimport/Main.java:52:13
  (local $this (ref null $transitivejsoverlayimport.Transitive))
@@ -489,7 +489,7 @@
 ;;; Class<?> Transitive.getClass()
 (func $m_getClass__java_lang_Class@transitivejsoverlayimport.Transitive
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $transitivejsoverlayimport.Transitive))
  (local.set $this (ref.cast_static $transitivejsoverlayimport.Transitive (local.get $this.untyped)))
@@ -526,7 +526,7 @@
   (local.set $$instance (struct.new $transitivejsoverlayimport.Main (ref.as_non_null (global.get $transitivejsoverlayimport.Main.vtable)) (ref.as_non_null (global.get $transitivejsoverlayimport.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:55:13
-  (call $$ctor__void_$p_transitivejsoverlayimport_Main@transitivejsoverlayimport.Main (local.get $$instance))
+  (call $$ctor__void_$p_transitivejsoverlayimport_Main@transitivejsoverlayimport.Main (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ transitivejsoverlayimport/Main.java:55:13
   (return (local.get $$instance))
@@ -543,7 +543,7 @@
   (call $$clinit__void@transitivejsoverlayimport.Main )
   ;; Object.this.$ctor();
   ;;@ transitivejsoverlayimport/Main.java:55:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -565,10 +565,10 @@
    (local.set $transitive (ref.null $transitivejsoverlayimport.Transitive))
    ;; transitive.doTransitiveInstanceMethod(javaemul.internal.StringPool.$getString_|arg1|());
    ;;@ transitivejsoverlayimport/Main.java:60:6
-   (call_ref (local.get $transitive)(call $function.no.side.effects.$getString_|arg1|__java_lang_String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive))))
+   (call_ref (ref.as_non_null (local.get $transitive))(call $function.no.side.effects.$getString_|arg1|__java_lang_String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive))))
    ;; transitive.getJsProperty();
    ;;@ transitivejsoverlayimport/Main.java:61:6
-   (drop (call_ref (local.get $transitive)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive)))))
+   (drop (call_ref (ref.as_non_null (local.get $transitive))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive)))))
   )
   (block
    ;; Immediate immediate = null;
@@ -576,13 +576,13 @@
    (local.set $immediate (ref.null $transitivejsoverlayimport.Immediate))
    ;; immediate.doTransitiveInstanceMethod(javaemul.internal.StringPool.$getString_|arg1|());
    ;;@ transitivejsoverlayimport/Main.java:66:6
-   (call_ref (local.get $immediate)(call $function.no.side.effects.$getString_|arg1|__java_lang_String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate))))
+   (call_ref (ref.as_non_null (local.get $immediate))(call $function.no.side.effects.$getString_|arg1|__java_lang_String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate))))
    ;; immediate.getJsProperty();
    ;;@ transitivejsoverlayimport/Main.java:67:6
-   (drop (call_ref (local.get $immediate)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate)))))
+   (drop (call_ref (ref.as_non_null (local.get $immediate))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate)))))
    ;; immediate.doImmediateInstanceMethod();
    ;;@ transitivejsoverlayimport/Main.java:68:6
-   (call_ref (local.get $immediate)(struct.get $transitivejsoverlayimport.Immediate.vtable $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Immediate $vtable(local.get $immediate))))
+   (call_ref (ref.as_non_null (local.get $immediate))(struct.get $transitivejsoverlayimport.Immediate.vtable $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Immediate $vtable(local.get $immediate))))
   )
   (block
    ;; NonNativeUpper nonNativeUpper = null;
@@ -590,16 +590,16 @@
    (local.set $nonNativeUpper (ref.null $transitivejsoverlayimport.NonNativeUpper))
    ;; nonNativeUpper.doTransitiveInstanceMethod(javaemul.internal.StringPool.$getString_|arg1|());
    ;;@ transitivejsoverlayimport/Main.java:73:6
-   (call_ref (local.get $nonNativeUpper)(call $function.no.side.effects.$getString_|arg1|__java_lang_String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper))))
+   (call_ref (ref.as_non_null (local.get $nonNativeUpper))(call $function.no.side.effects.$getString_|arg1|__java_lang_String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper))))
    ;; nonNativeUpper.getJsProperty();
    ;;@ transitivejsoverlayimport/Main.java:74:6
-   (drop (call_ref (local.get $nonNativeUpper)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper)))))
+   (drop (call_ref (ref.as_non_null (local.get $nonNativeUpper))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper)))))
    ;; nonNativeUpper.doImmediateInstanceMethod();
    ;;@ transitivejsoverlayimport/Main.java:75:6
-   (call_ref (local.get $nonNativeUpper)(struct.get $transitivejsoverlayimport.Immediate.vtable $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Immediate $vtable(local.get $nonNativeUpper))))
+   (call_ref (ref.as_non_null (local.get $nonNativeUpper))(struct.get $transitivejsoverlayimport.Immediate.vtable $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Immediate $vtable(local.get $nonNativeUpper))))
    ;; nonNativeUpper.doNonNativeUpperInstanceMethod();
    ;;@ transitivejsoverlayimport/Main.java:76:6
-   (call_ref (local.get $nonNativeUpper)(struct.get $transitivejsoverlayimport.NonNativeUpper.vtable $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.NonNativeUpper $vtable(local.get $nonNativeUpper))))
+   (call_ref (ref.as_non_null (local.get $nonNativeUpper))(struct.get $transitivejsoverlayimport.NonNativeUpper.vtable $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.NonNativeUpper $vtable(local.get $nonNativeUpper))))
   )
   (block
    ;; NonNativeLower nonNativeLower = null;
@@ -607,19 +607,19 @@
    (local.set $nonNativeLower (ref.null $transitivejsoverlayimport.NonNativeLower))
    ;; nonNativeLower.doTransitiveInstanceMethod(javaemul.internal.StringPool.$getString_|arg1|());
    ;;@ transitivejsoverlayimport/Main.java:81:6
-   (call_ref (local.get $nonNativeLower)(call $function.no.side.effects.$getString_|arg1|__java_lang_String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower))))
+   (call_ref (ref.as_non_null (local.get $nonNativeLower))(call $function.no.side.effects.$getString_|arg1|__java_lang_String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower))))
    ;; nonNativeLower.getJsProperty();
    ;;@ transitivejsoverlayimport/Main.java:82:6
-   (drop (call_ref (local.get $nonNativeLower)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower)))))
+   (drop (call_ref (ref.as_non_null (local.get $nonNativeLower))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower)))))
    ;; nonNativeLower.doImmediateInstanceMethod();
    ;;@ transitivejsoverlayimport/Main.java:83:6
-   (call_ref (local.get $nonNativeLower)(struct.get $transitivejsoverlayimport.Immediate.vtable $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Immediate $vtable(local.get $nonNativeLower))))
+   (call_ref (ref.as_non_null (local.get $nonNativeLower))(struct.get $transitivejsoverlayimport.Immediate.vtable $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Immediate $vtable(local.get $nonNativeLower))))
    ;; nonNativeLower.doNonNativeUpperInstanceMethod();
    ;;@ transitivejsoverlayimport/Main.java:84:6
-   (call_ref (local.get $nonNativeLower)(struct.get $transitivejsoverlayimport.NonNativeUpper.vtable $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.NonNativeUpper $vtable(local.get $nonNativeLower))))
+   (call_ref (ref.as_non_null (local.get $nonNativeLower))(struct.get $transitivejsoverlayimport.NonNativeUpper.vtable $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.NonNativeUpper $vtable(local.get $nonNativeLower))))
    ;; nonNativeLower.doNonNativeLowerInstanceMethod();
    ;;@ transitivejsoverlayimport/Main.java:85:6
-   (call_ref (local.get $nonNativeLower)(struct.get $transitivejsoverlayimport.NonNativeLower.vtable $m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.NonNativeLower $vtable(local.get $nonNativeLower))))
+   (call_ref (ref.as_non_null (local.get $nonNativeLower))(struct.get $transitivejsoverlayimport.NonNativeLower.vtable $m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.NonNativeLower $vtable(local.get $nonNativeLower))))
   )
  )
 )
@@ -649,7 +649,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@transitivejsoverlayimport.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $transitivejsoverlayimport.Main))
  (local.set $this (ref.cast_static $transitivejsoverlayimport.Main (local.get $this.untyped)))

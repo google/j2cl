@@ -51,7 +51,7 @@
   (local.set $$instance (struct.new $labelstatement.LabeledStatement (ref.as_non_null (global.get $labelstatement.LabeledStatement.vtable)) (ref.as_non_null (global.get $labelstatement.LabeledStatement.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ labelstatement/LabeledStatement.java:18:13
-  (call $$ctor__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (local.get $$instance))
+  (call $$ctor__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ labelstatement/LabeledStatement.java:18:13
   (return (local.get $$instance))
@@ -68,14 +68,14 @@
   (call $$clinit__void@labelstatement.LabeledStatement )
   ;; Object.this.$ctor();
   ;;@ labelstatement/LabeledStatement.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void LabeledStatement.loopStatements()
 (func $m_loopStatements__void@labelstatement.LabeledStatement
  (type $function.m_loopStatements__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:19:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
@@ -102,7 +102,7 @@
 ;;; void LabeledStatement.simpleStatement()
 (func $m_simpleStatement__void@labelstatement.LabeledStatement
  (type $function.m_simpleStatement__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:26:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
@@ -112,7 +112,7 @@
   (block $LABEL.BREAK
    ;; LabeledStatement.this.foo();
    ;;@ labelstatement/LabeledStatement.java:28:4
-   (call $m_foo__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (local.get $this))
+   (call $m_foo__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (ref.as_non_null (local.get $this)))
   )
   ;; LOOP: do {
   ;;@ labelstatement/LabeledStatement.java:33:4
@@ -146,7 +146,7 @@
 ;;; void LabeledStatement.block()
 (func $m_block__void@labelstatement.LabeledStatement
  (type $function.m_block__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:42:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
@@ -167,7 +167,7 @@
 ;;; void LabeledStatement.ifStatement()
 (func $m_ifStatement__void@labelstatement.LabeledStatement
  (type $function.m_ifStatement__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:49:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
@@ -194,7 +194,7 @@
 ;;; void LabeledStatement.switchStatement()
 (func $m_switchStatement__void@labelstatement.LabeledStatement
  (type $function.m_switchStatement__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:56:14
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))
@@ -259,7 +259,7 @@
 ;;; Class<?> LabeledStatement.getClass()
 (func $m_getClass__java_lang_Class@labelstatement.LabeledStatement
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast_static $labelstatement.LabeledStatement (local.get $this.untyped)))

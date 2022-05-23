@@ -64,7 +64,7 @@
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
-  (call $$ctor__void_$p_instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass (local.get $$instance))
+  (call $$ctor__void_$p_instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
   (return (local.get $$instance))
@@ -81,14 +81,14 @@
   (call $$clinit__void@instanceinnerclass.InstanceInnerClass )
   ;; Object.this.$ctor();
   ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void InstanceInnerClass.funOuter()
 (func $m_funOuter__void@instanceinnerclass.InstanceInnerClass
  (type $function.m_funOuter__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ instanceinnerclass/InstanceInnerClass.java:21:14
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass (local.get $this.untyped)))
@@ -100,7 +100,7 @@
 ;;; void InstanceInnerClass.test()
 (func $m_test__void@instanceinnerclass.InstanceInnerClass
  (type $function.m_test__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ instanceinnerclass/InstanceInnerClass.java:33:14
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass (local.get $this.untyped)))
@@ -137,7 +137,7 @@
 ;;; Class<?> InstanceInnerClass.getClass()
 (func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass (local.get $this.untyped)))
@@ -179,7 +179,7 @@
   (local.set $$instance (struct.new $instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass)))
   ;; $instance.$ctor($outer_this);
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
-  (call $$ctor__instanceinnerclass_InstanceInnerClass__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__instanceinnerclass_InstanceInnerClass__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
   (return (local.get $$instance))
@@ -197,27 +197,27 @@
   (call $$clinit__void@instanceinnerclass.InstanceInnerClass.InnerClass )
   ;; Object.this.$ctor();
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; InnerClass.this.$init();
   ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
-  (call $$init__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this))
+  (call $$init__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void InnerClass.funInner()
 (func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass
  (type $function.m_funInner__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ instanceinnerclass/InstanceInnerClass.java:27:16
  (local $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this.untyped)))
  (block
   ;; InnerClass.this.this.funOuter();
   ;;@ instanceinnerclass/InstanceInnerClass.java:28:6
-  (call_ref (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
+  (call_ref (ref.as_non_null (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
   ;; InnerClass.this.this.funOuter();
   ;;@ instanceinnerclass/InstanceInnerClass.java:29:6
-  (call_ref (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
+  (call_ref (ref.as_non_null (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
  )
 )
 (elem declare func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass)
@@ -261,7 +261,7 @@
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (local.set $this (ref.cast_static $instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this.untyped)))

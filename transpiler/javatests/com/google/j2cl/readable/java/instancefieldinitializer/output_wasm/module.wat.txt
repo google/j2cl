@@ -43,7 +43,7 @@
   (local.set $$instance (struct.new $instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.vtable)) (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.itable)) (i32.const 0) (i32.const 1) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (call $$ctor__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (local.get $$instance))
+  (call $$ctor__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
   (return (local.get $$instance))
@@ -60,10 +60,10 @@
   (call $$clinit__void@instancefieldinitializer.InstanceFieldInitializer )
   ;; Object.this.$ctor();
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; InstanceFieldInitializer.this.$init();
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (call $$init__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (local.get $this))
+  (call $$init__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -103,7 +103,7 @@
 ;;; Class<?> InstanceFieldInitializer.getClass()
 (func $m_getClass__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancefieldinitializer.InstanceFieldInitializer))
  (local.set $this (ref.cast_static $instancefieldinitializer.InstanceFieldInitializer (local.get $this.untyped)))

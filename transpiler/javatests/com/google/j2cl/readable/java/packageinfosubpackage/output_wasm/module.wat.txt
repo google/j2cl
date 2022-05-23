@@ -76,7 +76,7 @@
   (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfosubpackage.Foo.NativeBar)))
   ;; $instance.$ctor();
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (local.get $$instance))
+  (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ packageinfosubpackage/Foo.java:20:13
   (return (local.get $$instance))
@@ -93,10 +93,10 @@
   (call $$clinit__void@packageinfosubpackage.Foo )
   ;; Object.this.$ctor();
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; Foo.this.$init();
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (call $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (local.get $this))
+  (call $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -136,7 +136,7 @@
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@packageinfosubpackage.Foo
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.Foo))
  (local.set $this (ref.cast_static $packageinfosubpackage.Foo (local.get $this.untyped)))
@@ -173,7 +173,7 @@
   (local.set $$instance (struct.new $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ packageinfosubpackage/Foo.java:23:23
-  (call $$ctor__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (local.get $$instance))
+  (call $$ctor__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ packageinfosubpackage/Foo.java:23:23
   (return (local.get $$instance))
@@ -190,7 +190,7 @@
   (call $$clinit__void@packageinfosubpackage.Foo.NativeBar )
   ;; Object.this.$ctor();
   ;;@ packageinfosubpackage/Foo.java:23:23
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -219,7 +219,7 @@
 ;;; Class<?> NativeBar.getClass()
 (func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.Foo.NativeBar))
  (local.set $this (ref.cast_static $packageinfosubpackage.Foo.NativeBar (local.get $this.untyped)))
@@ -256,7 +256,7 @@
   (local.set $$instance (struct.new $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (call $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar (local.get $$instance))
+  (call $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (return (local.get $$instance))
@@ -273,7 +273,7 @@
   (call $$clinit__void@packageinfosubpackage.subpackage.Bar )
   ;; Object.this.$ctor();
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -302,7 +302,7 @@
 ;;; Class<?> Bar.getClass()
 (func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.subpackage.Bar))
  (local.set $this (ref.cast_static $packageinfosubpackage.subpackage.Bar (local.get $this.untyped)))

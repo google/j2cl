@@ -84,7 +84,7 @@
   (local.set $$instance (struct.new $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ functiontype/FunctionImpl.java:20:13
-  (call $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl (local.get $$instance))
+  (call $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ functiontype/FunctionImpl.java:20:13
   (return (local.get $$instance))
@@ -101,14 +101,14 @@
   (call $$clinit__void@functiontype.FunctionImpl )
   ;; Object.this.$ctor();
   ;;@ functiontype/FunctionImpl.java:20:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void FunctionImpl.test(Function f)
 (func $m_test__functiontype_Function__void@functiontype.FunctionImpl
  (type $function.m_test__functiontype_Function__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  ;;@ functiontype/FunctionImpl.java:21:14
  (local $this (ref null $functiontype.FunctionImpl))
@@ -143,7 +143,7 @@
 ;;; Class<?> FunctionImpl.getClass()
 (func $m_getClass__java_lang_Class@functiontype.FunctionImpl
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $functiontype.FunctionImpl))
  (local.set $this (ref.cast_static $functiontype.FunctionImpl (local.get $this.untyped)))

@@ -43,7 +43,7 @@
   (local.set $$instance (struct.new $implicitparenthesis.ImplicitParenthesis (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
-  (call $$ctor__void_$p_implicitparenthesis_ImplicitParenthesis@implicitparenthesis.ImplicitParenthesis (local.get $$instance))
+  (call $$ctor__void_$p_implicitparenthesis_ImplicitParenthesis@implicitparenthesis.ImplicitParenthesis (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
   (return (local.get $$instance))
@@ -60,14 +60,14 @@
   (call $$clinit__void@implicitparenthesis.ImplicitParenthesis )
   ;; Object.this.$ctor();
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void ImplicitParenthesis.test()
 (func $m_test__void@implicitparenthesis.ImplicitParenthesis
  (type $function.m_test__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ implicitparenthesis/ImplicitParenthesis.java:23:14
  (local $this (ref null $implicitparenthesis.ImplicitParenthesis))
  (local.set $this (ref.cast_static $implicitparenthesis.ImplicitParenthesis (local.get $this.untyped)))
@@ -111,7 +111,7 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:36:6
    (local.set $primitiveInt (block (result i32)
     (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (i32.eq (local.get $primitiveInt) (i32.const 5)) (then (call $$create__int__java_lang_Integer@java.lang.Integer (i32.const 15))) (else (call $$create__int__java_lang_Integer@java.lang.Integer (i32.const 30)))))
-    (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+    (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    ))
   )
   (block
@@ -125,10 +125,10 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:44:6
    (local.set $primitiveInt (block (result i32)
     (local.set $$qualifier_1 (block (result (ref null $java.lang.Integer))
-     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
+     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
      (local.get $boxedInt)
     ))
-    (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
+    (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
    ))
   )
   (block
@@ -145,7 +145,7 @@
      (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $primitiveInt)))
      (local.get $boxedInt)
     ))
-    (call_ref (local.get $$qualifier_2)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_2))))
+    (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_2))))
    ))
   )
   (block
@@ -160,10 +160,10 @@
    (local.set $primitiveInt (block (result i32)
     (local.set $$qualifier_3 (block (result (ref null $java.lang.Integer))
      (local.set $$value (local.get $boxedInt))
-     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (i32.const 1))))
+     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (i32.const 1))))
      (local.get $$value)
     ))
-    (call_ref (local.get $$qualifier_3)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_3))))
+    (call_ref (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_3))))
    ))
   )
   (block
@@ -177,10 +177,10 @@
    ;;@ implicitparenthesis/ImplicitParenthesis.java:68:6
    (local.set $primitiveInt (block (result i32)
     (local.set $$qualifier_4 (block (result (ref null $java.lang.Integer))
-     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (i32.const 1))))
+     (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (i32.const 1))))
      (local.get $boxedInt)
     ))
-    (call_ref (local.get $$qualifier_4)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
+    (call_ref (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
    ))
   )
  )
@@ -211,7 +211,7 @@
    (local.set $boxedInt (call $$create__int__java_lang_Integer@java.lang.Integer (i32.const 10)))
    ;; (primitiveInt = (boxedInt.intValue() - primitiveInt));
    ;;@ implicitparenthesis/ImplicitParenthesis.java:84:6
-   (local.set $primitiveInt (i32.sub (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt)))
+   (local.set $primitiveInt (i32.sub (call_ref (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt)))
   )
   (block
    ;; (primitiveInt = 5);
@@ -225,7 +225,7 @@
    (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
    ;; (boxedBoolean = java.lang.Boolean.valueOf((boxedInt.intValue() == primitiveInt)));
    ;;@ implicitparenthesis/ImplicitParenthesis.java:94:6
-   (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eq (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
+   (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eq (call_ref (ref.as_non_null (local.get $boxedInt))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
   )
  )
 )
@@ -265,7 +265,7 @@
 ;;; Class<?> ImplicitParenthesis.getClass()
 (func $m_getClass__java_lang_Class@implicitparenthesis.ImplicitParenthesis
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implicitparenthesis.ImplicitParenthesis))
  (local.set $this (ref.cast_static $implicitparenthesis.ImplicitParenthesis (local.get $this.untyped)))

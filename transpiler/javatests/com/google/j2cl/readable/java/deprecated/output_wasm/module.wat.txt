@@ -113,7 +113,7 @@
 ;;; void DeprecatedExample.deprecatedInstanceMethod(String someArg)
 (func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample
  (type $function.m_deprecatedInstanceMethod__java_lang_String__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $someArg (ref null $java.lang.String))
  ;;@ deprecated/DeprecatedExample.java:34:14
  (local $this (ref null $deprecated.DeprecatedExample))
@@ -134,7 +134,7 @@
   (local.set $$instance (struct.new $deprecated.DeprecatedExample (ref.as_non_null (global.get $deprecated.DeprecatedExample.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|deprecated_f...|__java_lang_String (ref.func $$getString_|deprecated_f...|__java_lang_String@javaemul.internal.StringPool) )))
   ;; $instance.$ctor();
   ;;@ deprecated/DeprecatedExample.java:37:9
-  (call $$ctor__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (local.get $$instance))
+  (call $$ctor__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ deprecated/DeprecatedExample.java:37:9
   (return (local.get $$instance))
@@ -151,10 +151,10 @@
   (call $$clinit__void@deprecated.DeprecatedExample )
   ;; Object.this.$ctor();
   ;;@ deprecated/DeprecatedExample.java:37:29
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; DeprecatedExample.this.$init();
   ;;@ deprecated/DeprecatedExample.java:37:29
-  (call $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (local.get $this))
+  (call $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -191,7 +191,7 @@
 ;;; Class<?> DeprecatedExample.getClass()
 (func $m_getClass__java_lang_Class@deprecated.DeprecatedExample
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample))
  (local.set $this (ref.cast_static $deprecated.DeprecatedExample (local.get $this.untyped)))
@@ -309,7 +309,7 @@
   (local.set $$instance (struct.new $deprecated.DeprecatedExample.DeprecatedEnum (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
   ;;@ deprecated/DeprecatedExample.java:55:7
-  (call $$ctor__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (local.get $$instance)(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;; return $instance;
   ;;@ deprecated/DeprecatedExample.java:55:7
   (return (local.get $$instance))
@@ -331,7 +331,7 @@
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum.this.$ctor($name,$ordinal);
   ;;@ deprecated/DeprecatedExample.java:55:7
-  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
 
@@ -403,7 +403,7 @@
 ;;; Class<?> DeprecatedEnum.getClass()
 (func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
  (local.set $this (ref.cast_static $deprecated.DeprecatedExample.DeprecatedEnum (local.get $this.untyped)))
@@ -449,7 +449,7 @@
   (local.set $$instance (struct.new $deprecated.DeprecatedExample.DeprecatedJsEnum (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
   ;;@ deprecated/DeprecatedExample.java:62:7
-  (call $$ctor__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum (local.get $$instance)(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum (ref.as_non_null (local.get $$instance))(local.get $$name)(local.get $$ordinal))
   ;; return $instance;
   ;;@ deprecated/DeprecatedExample.java:62:7
   (return (local.get $$instance))
@@ -471,7 +471,7 @@
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum.this.$ctor($name,$ordinal);
   ;;@ deprecated/DeprecatedExample.java:62:7
-  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal))
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal))
  )
 )
 
@@ -543,7 +543,7 @@
 ;;; Class<?> DeprecatedJsEnum.getClass()
 (func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
  (local.set $this (ref.cast_static $deprecated.DeprecatedExample.DeprecatedJsEnum (local.get $this.untyped)))

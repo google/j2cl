@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $emptymethod.EmptyMethod (ref.as_non_null (global.get $emptymethod.EmptyMethod.vtable)) (ref.as_non_null (global.get $emptymethod.EmptyMethod.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ emptymethod/EmptyMethod.java:18:13
-  (call $$ctor__void_$p_emptymethod_EmptyMethod@emptymethod.EmptyMethod (local.get $$instance))
+  (call $$ctor__void_$p_emptymethod_EmptyMethod@emptymethod.EmptyMethod (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ emptymethod/EmptyMethod.java:18:13
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@emptymethod.EmptyMethod )
   ;; Object.this.$ctor();
   ;;@ emptymethod/EmptyMethod.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -98,7 +98,7 @@
 ;;; Class<?> EmptyMethod.getClass()
 (func $m_getClass__java_lang_Class@emptymethod.EmptyMethod
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $emptymethod.EmptyMethod))
  (local.set $this (ref.cast_static $emptymethod.EmptyMethod (local.get $this.untyped)))

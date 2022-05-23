@@ -45,7 +45,7 @@
   (local.set $$instance (struct.new $synchronizedstatement.SynchronizedStatement (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.vtable)) (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.itable)) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (local.get $$instance))
+  (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
   (return (local.get $$instance))
@@ -62,14 +62,14 @@
   (call $$clinit__void@synchronizedstatement.SynchronizedStatement )
   ;; Object.this.$ctor();
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SynchronizedStatement.main()
 (func $m_main__void@synchronizedstatement.SynchronizedStatement
  (type $function.m_main__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ synchronizedstatement/SynchronizedStatement.java:22:14
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast_static $synchronizedstatement.SynchronizedStatement (local.get $this.untyped)))
@@ -116,7 +116,7 @@
 ;;; Class<?> SynchronizedStatement.getClass()
 (func $m_getClass__java_lang_Class@synchronizedstatement.SynchronizedStatement
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast_static $synchronizedstatement.SynchronizedStatement (local.get $this.untyped)))

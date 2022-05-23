@@ -58,7 +58,7 @@
   (local.set $$instance (struct.new $aptgeneratorplugin.Dummy (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ aptgeneratorplugin/Dummy.java:3:13
-  (call $$ctor__void_$p_aptgeneratorplugin_Dummy@aptgeneratorplugin.Dummy (local.get $$instance))
+  (call $$ctor__void_$p_aptgeneratorplugin_Dummy@aptgeneratorplugin.Dummy (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ aptgeneratorplugin/Dummy.java:3:13
   (return (local.get $$instance))
@@ -75,7 +75,7 @@
   (call $$clinit__void@aptgeneratorplugin.Dummy )
   ;; Object.this.$ctor();
   ;;@ aptgeneratorplugin/Dummy.java:3:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -104,7 +104,7 @@
 ;;; Class<?> Dummy.getClass()
 (func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Dummy))
  (local.set $this (ref.cast_static $aptgeneratorplugin.Dummy (local.get $this.untyped)))
@@ -141,7 +141,7 @@
   (local.set $$instance (struct.new $aptgeneratorplugin.Foo (ref.as_non_null (global.get $aptgeneratorplugin.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ aptgeneratorplugin/Foo.java:18:13
-  (call $$ctor__void_$p_aptgeneratorplugin_Foo@aptgeneratorplugin.Foo (local.get $$instance))
+  (call $$ctor__void_$p_aptgeneratorplugin_Foo@aptgeneratorplugin.Foo (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ aptgeneratorplugin/Foo.java:18:13
   (return (local.get $$instance))
@@ -158,14 +158,14 @@
   (call $$clinit__void@aptgeneratorplugin.Foo )
   ;; Object.this.$ctor();
   ;;@ aptgeneratorplugin/Foo.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int Foo.hashCode()
 (func $m_hashCode__int@aptgeneratorplugin.Foo
  (type $function.m_hashCode__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ aptgeneratorplugin/Foo.java:21:13
  (local $$qualifier (ref null $java.lang.Class))
@@ -176,7 +176,7 @@
   ;;@ aptgeneratorplugin/Foo.java:23:4
   (return (block (result i32)
    (local.set $$qualifier (call $function.no.side.effects.$getAptgeneratorplugin.Dummy__java_lang_Class (ref.func $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
-   (call_ref (local.get $$qualifier)(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier))))
   ))
  )
 )
@@ -207,7 +207,7 @@
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Foo))
  (local.set $this (ref.cast_static $aptgeneratorplugin.Foo (local.get $this.untyped)))

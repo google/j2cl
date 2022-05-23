@@ -43,7 +43,7 @@
   (local.set $$instance (struct.new $equality.Equality (ref.as_non_null (global.get $equality.Equality.vtable)) (ref.as_non_null (global.get $equality.Equality.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ equality/Equality.java:18:13
-  (call $$ctor__void_$p_equality_Equality@equality.Equality (local.get $$instance))
+  (call $$ctor__void_$p_equality_Equality@equality.Equality (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ equality/Equality.java:18:13
   (return (local.get $$instance))
@@ -60,14 +60,14 @@
   (call $$clinit__void@equality.Equality )
   ;; Object.this.$ctor();
   ;;@ equality/Equality.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Equality.test()
 (func $m_test__void@equality.Equality
  (type $function.m_test__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ equality/Equality.java:19:14
  (local $this (ref null $equality.Equality))
  (local.set $this (ref.cast_static $equality.Equality (local.get $this.untyped)))
@@ -101,7 +101,7 @@
 ;;; Class<?> Equality.getClass()
 (func $m_getClass__java_lang_Class@equality.Equality
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $equality.Equality))
  (local.set $this (ref.cast_static $equality.Equality (local.get $this.untyped)))

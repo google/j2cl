@@ -140,7 +140,7 @@
   (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:18:13
-  (call $$ctor__void_$p_nestedlocalclasses_NestedLocalClasses@nestedlocalclasses.NestedLocalClasses (local.get $$instance))
+  (call $$ctor__void_$p_nestedlocalclasses_NestedLocalClasses@nestedlocalclasses.NestedLocalClasses (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ nestedlocalclasses/NestedLocalClasses.java:18:13
   (return (local.get $$instance))
@@ -157,14 +157,14 @@
   (call $$clinit__void@nestedlocalclasses.NestedLocalClasses )
   ;; Object.this.$ctor();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void NestedLocalClasses.test(int p)
 (func $m_test__int__void@nestedlocalclasses.NestedLocalClasses
  (type $function.m_test__int__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $p i32)
  ;;@ nestedlocalclasses/NestedLocalClasses.java:19:14
  (local $localVar i32)
@@ -203,7 +203,7 @@
 ;;; Class<?> NestedLocalClasses.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses (local.get $this.untyped)))
@@ -244,7 +244,7 @@
   (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor($outer_this);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:42:18
-  (call $$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$p_nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$p_nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ nestedlocalclasses/NestedLocalClasses.java:42:18
   (return (local.get $$instance))
@@ -265,7 +265,7 @@
   (struct.set $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1(local.get $this) (local.get $$outer_this))
   ;; $1Super.this.$ctor($1.this);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:42:18
-  (call $$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$p_nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this)(local.get $this))
+  (call $$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$p_nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (ref.as_non_null (local.get $this))(local.get $this))
  )
 )
 
@@ -294,7 +294,7 @@
 ;;; Class<?> <anonymous> extends Super.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (local.get $this.untyped)))
@@ -334,7 +334,7 @@
   (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.itable)) (i32.const 0) (ref.null $java.lang.Object)))
   ;; $instance.$ctor($outer_this);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:41:12
-  (call $$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$p_nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$p_nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ nestedlocalclasses/NestedLocalClasses.java:41:12
   (return (local.get $$instance))
@@ -355,21 +355,21 @@
   (struct.set $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:41:12
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Super.foo()
 (func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
  (type $function.m_foo__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ nestedlocalclasses/NestedLocalClasses.java:41:12
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this.untyped)))
  (block
   ;; InterfaceWithThisReference.this.foo();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:41:12
-  (call $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference (local.get $this))
+  (call $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference (ref.as_non_null (local.get $this)))
  )
 )
 (elem declare func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
@@ -402,7 +402,7 @@
 ;;; Class<?> Super.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this.untyped)))
@@ -494,7 +494,7 @@
   (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (local.get $$captured_localVar) (local.get $$captured_localVarInInnerClass)))
   ;; $instance.$ctor($outer_this,$captured_localVar,$captured_localVarInInnerClass);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:25:14
-  (call $$ctor__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_localVarInInnerClass))
+  (call $$ctor__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_localVarInInnerClass))
   ;; return $instance;
   ;;@ nestedlocalclasses/NestedLocalClasses.java:25:14
   (return (local.get $$instance))
@@ -514,10 +514,10 @@
   (call $$clinit__void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass )
   ;; Object.this.$ctor();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:25:14
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; $1InnerInnerClass.this.$init();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:25:14
-  (call $$init__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (local.get $this))
+  (call $$init__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -557,7 +557,7 @@
 ;;; Class<?> InnerInnerClass.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (local.get $this.untyped)))
@@ -600,7 +600,7 @@
   (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$captured_localVar) (local.get $$captured_localVarInInnerClass)))
   ;; $instance.$ctor($outer_this,$captured_localVar,$captured_localVarInInnerClass);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:30:14
-  (call $$ctor__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_localVarInInnerClass))
+  (call $$ctor__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_localVarInInnerClass))
   ;; return $instance;
   ;;@ nestedlocalclasses/NestedLocalClasses.java:30:14
   (return (local.get $$instance))
@@ -620,10 +620,10 @@
   (call $$clinit__void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal )
   ;; Object.this.$ctor();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:30:14
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; $1ClassIndirectlyCapturingLocal.this.$init();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:30:14
-  (call $$init__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (local.get $this))
+  (call $$init__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -663,7 +663,7 @@
 ;;; Class<?> ClassIndirectlyCapturingLocal.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (local.get $this.untyped)))
@@ -705,7 +705,7 @@
   (local.set $$instance (struct.new $nestedlocalclasses.NestedLocalClasses.1InnerClass (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$captured_localVar)))
   ;; $instance.$ctor($outer_this,$captured_localVar);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:21:10
-  (call $$ctor__nestedlocalclasses_NestedLocalClasses__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar))
+  (call $$ctor__nestedlocalclasses_NestedLocalClasses__int__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar))
   ;; return $instance;
   ;;@ nestedlocalclasses/NestedLocalClasses.java:21:10
   (return (local.get $$instance))
@@ -724,14 +724,14 @@
   (call $$clinit__void@nestedlocalclasses.NestedLocalClasses.1InnerClass )
   ;; Object.this.$ctor();
   ;;@ nestedlocalclasses/NestedLocalClasses.java:21:10
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void InnerClass.fun()
 (func $m_fun__void@nestedlocalclasses.NestedLocalClasses.1InnerClass
  (type $function.m_fun__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ nestedlocalclasses/NestedLocalClasses.java:22:18
  (local $localVarInInnerClass i32)
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
@@ -772,7 +772,7 @@
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.1InnerClass (local.get $this.untyped)))

@@ -93,7 +93,7 @@
   (local.set $$instance (struct.new $unreachableclass.Main (ref.as_non_null (global.get $unreachableclass.Main.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ unreachableclass/Main.java:18:13
-  (call $$ctor__void_$p_unreachableclass_Main@unreachableclass.Main (local.get $$instance))
+  (call $$ctor__void_$p_unreachableclass_Main@unreachableclass.Main (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ unreachableclass/Main.java:18:13
   (return (local.get $$instance))
@@ -110,10 +110,10 @@
   (call $$clinit__void@unreachableclass.Main )
   ;; Object.this.$ctor();
   ;;@ unreachableclass/Main.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; Main.this.$init();
   ;;@ unreachableclass/Main.java:18:13
-  (call $$init__void_$p_unreachableclass_Main@unreachableclass.Main (local.get $this))
+  (call $$init__void_$p_unreachableclass_Main@unreachableclass.Main (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -148,7 +148,7 @@
         (local.set $$qualifier (call $$create__unreachableclass_Main__unreachableclass_Main_1A@unreachableclass.Main.1A (local.get $this)))
         ;; $qualifier.m();
         ;;@ unreachableclass/Main.java:29:6
-        (call_ref (local.get $$qualifier)(struct.get $unreachableclass.Main.1A.vtable $m_m__void_$pp_unreachableclass (struct.get $unreachableclass.Main.1A $vtable(local.get $$qualifier))))
+        (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $unreachableclass.Main.1A.vtable $m_m__void_$pp_unreachableclass (struct.get $unreachableclass.Main.1A $vtable(local.get $$qualifier))))
        )
        ;; unreachableclass.Main.1.$create(Main.this);
        ;;@ unreachableclass/Main.java:30:6
@@ -192,7 +192,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@unreachableclass.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main))
  (local.set $this (ref.cast_static $unreachableclass.Main (local.get $this.untyped)))
@@ -231,7 +231,7 @@
   (local.set $$instance (struct.new $unreachableclass.Main.1 (ref.as_non_null (global.get $unreachableclass.Main.1.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:30:19
-  (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1@unreachableclass.Main.1 (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1@unreachableclass.Main.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ unreachableclass/Main.java:30:19
   (return (local.get $$instance))
@@ -249,7 +249,7 @@
   (call $$clinit__void@unreachableclass.Main.1 )
   ;; Object.this.$ctor();
   ;;@ unreachableclass/Main.java:30:19
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -278,7 +278,7 @@
 ;;; Class<?> <anonymous> extends Object.getClass()
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1))
  (local.set $this (ref.cast_static $unreachableclass.Main.1 (local.get $this.untyped)))
@@ -317,7 +317,7 @@
   (local.set $$instance (struct.new $unreachableclass.Main.1A.1B (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:24:16
-  (call $$ctor__unreachableclass_Main_1A__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__unreachableclass_Main_1A__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ unreachableclass/Main.java:24:16
   (return (local.get $$instance))
@@ -335,7 +335,7 @@
   (call $$clinit__void@unreachableclass.Main.1A.1B )
   ;; Object.this.$ctor();
   ;;@ unreachableclass/Main.java:24:16
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -372,7 +372,7 @@
 ;;; Class<?> B.getClass()
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A.1B))
  (local.set $this (ref.cast_static $unreachableclass.Main.1A.1B (local.get $this.untyped)))
@@ -412,7 +412,7 @@
   (local.set $$instance (struct.new $unreachableclass.Main.1A (ref.as_non_null (global.get $unreachableclass.Main.1A.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:22:12
-  (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1A@unreachableclass.Main.1A (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1A@unreachableclass.Main.1A (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ unreachableclass/Main.java:22:12
   (return (local.get $$instance))
@@ -430,14 +430,14 @@
   (call $$clinit__void@unreachableclass.Main.1A )
   ;; Object.this.$ctor();
   ;;@ unreachableclass/Main.java:22:12
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void A.m()
 (func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A
  (type $function.m_m__void_$pp_unreachableclass)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ unreachableclass/Main.java:23:13
  (local $this (ref null $unreachableclass.Main.1A))
  (local.set $this (ref.cast_static $unreachableclass.Main.1A (local.get $this.untyped)))
@@ -471,7 +471,7 @@
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1A
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A))
  (local.set $this (ref.cast_static $unreachableclass.Main.1A (local.get $this.untyped)))

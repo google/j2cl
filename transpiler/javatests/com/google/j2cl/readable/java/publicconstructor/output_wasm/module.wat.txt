@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ publicconstructor/PublicConstructor.java:19:9
-  (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (local.get $$instance))
+  (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@publicconstructor.PublicConstructor )
   ;; Object.this.$ctor();
   ;;@ publicconstructor/PublicConstructor.java:19:29
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -87,7 +87,7 @@
 ;;; Class<?> PublicConstructor.getClass()
 (func $m_getClass__java_lang_Class@publicconstructor.PublicConstructor
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $publicconstructor.PublicConstructor))
  (local.set $this (ref.cast_static $publicconstructor.PublicConstructor (local.get $this.untyped)))

@@ -76,7 +76,7 @@
   (local.set $$instance (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault (local.get $$instance))
+  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
   (return (local.get $$instance))
@@ -93,7 +93,7 @@
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault )
   ;; Object.this.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -122,7 +122,7 @@
 ;;; Class<?> AbstractMethodOverrideDefault.getClass()
 (func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  (local.set $this (ref.cast_static $abstractmethodoverridedefault.AbstractMethodOverrideDefault (local.get $this.untyped)))
@@ -252,21 +252,21 @@
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
   ;; Object.this.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void A.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
  (type $function.m_bar__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
  (local.set $this (ref.cast_static $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this.untyped)))
  (block
   ;; I.this.bar();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-  (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (local.get $this))
+  (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (ref.as_non_null (local.get $this)))
  )
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
@@ -323,14 +323,14 @@
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B )
   ;; A.this.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this))
+  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void B.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
  (type $function.m_bar__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:39:16
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
  (local.set $this (ref.cast_static $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (local.get $this.untyped)))
@@ -342,7 +342,7 @@
     (block
      ;; B.this.bar();
      ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:41:8
-     (call_ref (local.get $this)(struct.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable $m_bar__void (struct.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B $vtable(local.get $this))))
+     (call_ref (ref.as_non_null (local.get $this))(struct.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable $m_bar__void (struct.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B $vtable(local.get $this))))
     )
    )
   )
@@ -403,7 +403,7 @@
   (local.set $$instance (struct.new $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (local.get $$instance))
+  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
   (return (local.get $$instance))
@@ -420,14 +420,14 @@
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C )
   ;; A.this.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this))
+  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void C.foo()
 (func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (type $function.m_foo__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:47:16
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast_static $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (local.get $this.untyped)))
@@ -439,14 +439,14 @@
 ;;; void C.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (type $function.m_bar__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:49:16
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast_static $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (local.get $this.untyped)))
  (block
   ;; super.bar();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:50:6
-  (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (local.get $this))
+  (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (ref.as_non_null (local.get $this)))
  )
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
@@ -476,7 +476,7 @@
 ;;; Class<?> C.getClass()
 (func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast_static $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (local.get $this.untyped)))

@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $inferreturn.InferReturn.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ inferreturn/InferReturn.java:21:13
-  (call $$ctor__void_$p_inferreturn_InferReturn@inferreturn.InferReturn (local.get $$instance))
+  (call $$ctor__void_$p_inferreturn_InferReturn@inferreturn.InferReturn (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ inferreturn/InferReturn.java:21:13
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@inferreturn.InferReturn )
   ;; Object.this.$ctor();
   ;;@ inferreturn/InferReturn.java:21:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -204,7 +204,7 @@
 ;;; Class<?> InferReturn.getClass()
 (func $m_getClass__java_lang_Class@inferreturn.InferReturn
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $inferreturn.InferReturn))
  (local.set $this (ref.cast_static $inferreturn.InferReturn (local.get $this.untyped)))

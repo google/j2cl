@@ -49,7 +49,7 @@
   (local.set $$instance (struct.new $jstypewithdefault.SomeJsType (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.vtable)) (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (call $$ctor__void_$p_jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType (local.get $$instance))
+  (call $$ctor__void_$p_jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (return (local.get $$instance))
@@ -66,21 +66,21 @@
   (call $$clinit__void@jstypewithdefault.SomeJsType )
   ;; Object.this.$ctor();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SomeJsType.defaultMethod()
 (func $m_defaultMethod__void@jstypewithdefault.SomeJsType
  (type $function.m_defaultMethod__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ jstypewithdefault/SomeJsType.java:20:13
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast_static $jstypewithdefault.SomeJsType (local.get $this.untyped)))
  (block
   ;; Interface.this.defaultMethod();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (call $m_defaultMethod__void@jstypewithdefault.Interface (local.get $this))
+  (call $m_defaultMethod__void@jstypewithdefault.Interface (ref.as_non_null (local.get $this)))
  )
 )
 (elem declare func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
@@ -113,7 +113,7 @@
 ;;; Class<?> SomeJsType.getClass()
 (func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast_static $jstypewithdefault.SomeJsType (local.get $this.untyped)))

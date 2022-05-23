@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $newinstance.NewInstanceExpr.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ newinstance/NewInstanceExpr.java:18:13
-  (call $$ctor__void_$p_newinstance_NewInstanceExpr@newinstance.NewInstanceExpr (local.get $$instance))
+  (call $$ctor__void_$p_newinstance_NewInstanceExpr@newinstance.NewInstanceExpr (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@newinstance.NewInstanceExpr )
   ;; Object.this.$ctor();
   ;;@ newinstance/NewInstanceExpr.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -102,7 +102,7 @@
 ;;; Class<?> NewInstanceExpr.getClass()
 (func $m_getClass__java_lang_Class@newinstance.NewInstanceExpr
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $newinstance.NewInstanceExpr))
  (local.set $this (ref.cast_static $newinstance.NewInstanceExpr (local.get $this.untyped)))

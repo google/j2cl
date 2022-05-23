@@ -59,7 +59,7 @@
   (local.set $$instance (struct.new $genericnativetype.BoundedJsArray (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.itable)) (i32.const 0)))
   ;; $instance.$ctor(size);
   ;;@ genericnativetype/BoundedJsArray.java:24:10
-  (call $$ctor__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (local.get $$instance)(local.get $size))
+  (call $$ctor__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (ref.as_non_null (local.get $$instance))(local.get $size))
   ;; return $instance;
   ;;@ genericnativetype/BoundedJsArray.java:24:10
   (return (local.get $$instance))
@@ -77,7 +77,7 @@
   (call $$clinit__void@genericnativetype.BoundedJsArray )
   ;; Object.this.$ctor();
   ;;@ genericnativetype/BoundedJsArray.java:24:35
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -143,7 +143,7 @@
 ;;; Class<?> BoundedJsArray.getClass()
 (func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericnativetype.BoundedJsArray))
  (local.set $this (ref.cast_static $genericnativetype.BoundedJsArray (local.get $this.untyped)))
@@ -180,7 +180,7 @@
   (local.set $$instance (struct.new $genericnativetype.BoundedJsArrays (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ genericnativetype/BoundedJsArrays.java:19:10
-  (call $$ctor__void_$p_genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays (local.get $$instance))
+  (call $$ctor__void_$p_genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ genericnativetype/BoundedJsArrays.java:19:10
   (return (local.get $$instance))
@@ -194,7 +194,7 @@
  (block
   ;; Object.this.$ctor();
   ;;@ genericnativetype/BoundedJsArrays.java:19:28
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -252,7 +252,7 @@
 ;;; Class<?> BoundedJsArrays.getClass()
 (func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArrays
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericnativetype.BoundedJsArrays))
  (local.set $this (ref.cast_static $genericnativetype.BoundedJsArrays (local.get $this.untyped)))

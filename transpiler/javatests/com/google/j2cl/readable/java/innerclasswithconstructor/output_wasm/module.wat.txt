@@ -59,7 +59,7 @@
   (local.set $$instance (struct.new $innerclasswithconstructor.InnerClassWithConstructor (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-  (call $$ctor__void_$p_innerclasswithconstructor_InnerClassWithConstructor@innerclasswithconstructor.InnerClassWithConstructor (local.get $$instance))
+  (call $$ctor__void_$p_innerclasswithconstructor_InnerClassWithConstructor@innerclasswithconstructor.InnerClassWithConstructor (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
   (return (local.get $$instance))
@@ -76,7 +76,7 @@
   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor )
   ;; Object.this.$ctor();
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -105,7 +105,7 @@
 ;;; Class<?> InnerClassWithConstructor.getClass()
 (func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (local.set $this (ref.cast_static $innerclasswithconstructor.InnerClassWithConstructor (local.get $this.untyped)))
@@ -146,7 +146,7 @@
   (local.set $$instance (struct.new $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0)))
   ;; $instance.$ctor($outer_this,b);
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
-  (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__int__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClass@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $$instance)(local.get $$outer_this)(local.get $b))
+  (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__int__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClass@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $b))
   ;; return $instance;
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
   (return (local.get $$instance))
@@ -165,7 +165,7 @@
   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
   ;; Object.this.$ctor();
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:29
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; (InnerClass.this.b = ($outer_this.a + b));
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:25:6
   (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass(local.get $this) (i32.add (struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this)) (local.get $b)))
@@ -184,7 +184,7 @@
   (local.set $$instance (struct.new $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0)))
   ;; $instance.$ctor($outer_this);
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:28:11
-  (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClass@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClass@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:28:11
   (return (local.get $$instance))
@@ -202,7 +202,7 @@
   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
   ;; InnerClass.this.$ctor($outer_this,$outer_this.a);
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:29:6
-  (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__int__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClass@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this)(local.get $$outer_this)(struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this)))
+  (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__int__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClass@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (local.get $this))(local.get $$outer_this)(struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this)))
  )
 )
 
@@ -231,7 +231,7 @@
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (local.set $this (ref.cast_static $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this.untyped)))

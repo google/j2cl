@@ -133,7 +133,7 @@
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
-  (call $$ctor__void_$p_simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass (local.get $$instance))
+  (call $$ctor__void_$p_simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
   (return (local.get $$instance))
@@ -150,14 +150,14 @@
   (call $$clinit__void@simplelocalclass.SimpleLocalClass )
   ;; Object.this.$ctor();
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SimpleLocalClass.test(int p)
 (func $m_test__int__void@simplelocalclass.SimpleLocalClass
  (type $function.m_test__int__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $p i32)
  ;;@ simplelocalclass/SimpleLocalClass.java:19:14
  (local $localVar i32)
@@ -174,7 +174,7 @@
    (local.set $$qualifier (call $$create__simplelocalclass_SimpleLocalClass__int__int__simplelocalclass_SimpleLocalClass_1InnerClass@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this)(local.get $localVar)(local.get $p)))
    ;; $qualifier.fun();
    ;;@ simplelocalclass/SimpleLocalClass.java:26:4
-   (drop (call_ref (local.get $$qualifier)(struct.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable $m_fun__int (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $vtable(local.get $$qualifier)))))
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable $m_fun__int (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $vtable(local.get $$qualifier)))))
   )
   ;; simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$create(SimpleLocalClass.this);
   ;;@ simplelocalclass/SimpleLocalClass.java:30:4
@@ -186,7 +186,7 @@
 ;;; void SimpleLocalClass.fun()
 (func $m_fun__void@simplelocalclass.SimpleLocalClass
  (type $function.m_fun__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ simplelocalclass/SimpleLocalClass.java:34:14
  (local $localVar i32)
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
@@ -202,7 +202,7 @@
 ;;; void SimpleLocalClass.foo()
 (func $m_foo__void@simplelocalclass.SimpleLocalClass
  (type $function.m_foo__void)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  ;;@ simplelocalclass/SimpleLocalClass.java:42:14
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass (local.get $this.untyped)))
@@ -236,7 +236,7 @@
 ;;; Class<?> SimpleLocalClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass (local.get $this.untyped)))
@@ -280,7 +280,7 @@
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$captured_localVar) (local.get $$captured_p)))
   ;; $instance.$ctor($outer_this,$captured_localVar,$captured_p);
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
-  (call $$ctor__simplelocalclass_SimpleLocalClass__int__int__void_$p_simplelocalclass_SimpleLocalClass_1InnerClass@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p))
+  (call $$ctor__simplelocalclass_SimpleLocalClass__int__int__void_$p_simplelocalclass_SimpleLocalClass_1InnerClass@simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p))
   ;; return $instance;
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
   (return (local.get $$instance))
@@ -300,14 +300,14 @@
   (call $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClass )
   ;; Object.this.$ctor();
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int InnerClass.fun()
 (func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass
  (type $function.m_fun__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ simplelocalclass/SimpleLocalClass.java:22:17
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
@@ -345,7 +345,7 @@
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this.untyped)))
@@ -384,7 +384,7 @@
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
-  (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
   (return (local.get $$instance))
@@ -402,7 +402,7 @@
   (call $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures )
   ;; Object.this.$ctor();
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -431,7 +431,7 @@
 ;;; Class<?> InnerClassWithoutCaptures.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (local.get $this.untyped)))
@@ -473,7 +473,7 @@
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.itable)) (i32.const 0) (local.get $$outer_this) (i32.const 0) (local.get $$captured_localVar)))
   ;; $instance.$ctor($outer_this,$captured_localVar);
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
-  (call $$ctor__simplelocalclass_SimpleLocalClass__int__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar))
+  (call $$ctor__simplelocalclass_SimpleLocalClass__int__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this)(local.get $$captured_localVar))
   ;; return $instance;
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
   (return (local.get $$instance))
@@ -492,10 +492,10 @@
   (call $$clinit__void@simplelocalclass.SimpleLocalClass.2InnerClass )
   ;; Object.this.$ctor();
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; $2InnerClass.this.$init();
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
-  (call $$init__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this))
+  (call $$init__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -535,7 +535,7 @@
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.2InnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this.untyped)))
@@ -574,7 +574,7 @@
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
-  (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Abc$InnerClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Abc$InnerClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
   (return (local.get $$instance))
@@ -592,7 +592,7 @@
   (call $$clinit__void@simplelocalclass.SimpleLocalClass.1Abc$InnerClass )
   ;; Object.this.$ctor();
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -621,7 +621,7 @@
 ;;; Class<?> Abc$InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (local.get $this.untyped)))
@@ -660,7 +660,7 @@
   (local.set $$instance (struct.new $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
-  (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Klm$InnerClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (local.get $$instance)(local.get $$outer_this))
+  (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Klm$InnerClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
   (return (local.get $$instance))
@@ -678,7 +678,7 @@
   (call $$clinit__void@simplelocalclass.SimpleLocalClass.1Klm$InnerClass )
   ;; Object.this.$ctor();
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -707,7 +707,7 @@
 ;;; Class<?> Klm$InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (local.set $this (ref.cast_static $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (local.get $this.untyped)))

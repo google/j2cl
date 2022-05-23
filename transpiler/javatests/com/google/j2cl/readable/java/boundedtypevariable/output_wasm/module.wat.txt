@@ -41,7 +41,7 @@
   (local.set $$instance (struct.new $boundedtypevariable.BoundedTypeVariable (ref.as_non_null (global.get $boundedtypevariable.BoundedTypeVariable.vtable)) (ref.as_non_null (global.get $boundedtypevariable.BoundedTypeVariable.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (call $$ctor__void_$p_boundedtypevariable_BoundedTypeVariable@boundedtypevariable.BoundedTypeVariable (local.get $$instance))
+  (call $$ctor__void_$p_boundedtypevariable_BoundedTypeVariable@boundedtypevariable.BoundedTypeVariable (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
   (return (local.get $$instance))
@@ -58,7 +58,7 @@
   (call $$clinit__void@boundedtypevariable.BoundedTypeVariable )
   ;; Object.this.$ctor();
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -87,7 +87,7 @@
 ;;; Class<?> BoundedTypeVariable.getClass()
 (func $m_getClass__java_lang_Class@boundedtypevariable.BoundedTypeVariable
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypevariable.BoundedTypeVariable))
  (local.set $this (ref.cast_static $boundedtypevariable.BoundedTypeVariable (local.get $this.untyped)))

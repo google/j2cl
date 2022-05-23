@@ -140,7 +140,7 @@
   (call $$clinit__void@nobridgemethods.Map )
   ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:20:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -194,7 +194,7 @@
   (local.set $$instance (struct.new $nobridgemethods.TreeMap (ref.as_non_null (global.get $nobridgemethods.TreeMap.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:24:6
-  (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (local.get $$instance))
+  (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ nobridgemethods/CharSet.java:24:6
   (return (local.get $$instance))
@@ -211,14 +211,14 @@
   (call $$clinit__void@nobridgemethods.TreeMap )
   ;; Map.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:24:6
-  (call $$ctor__void_$p_nobridgemethods_Map@nobridgemethods.Map (local.get $this))
+  (call $$ctor__void_$p_nobridgemethods_Map@nobridgemethods.Map (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; InnerEntry<K> TreeMap.getCeilingEntry(K key)
 (func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap
  (type $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $key (ref null $java.lang.Object))
  (result (ref null $nobridgemethods.TreeMap.InnerEntry))
  ;;@ nobridgemethods/CharSet.java:28:23
@@ -235,7 +235,7 @@
 ;;; InnerEntry<K> TreeMap.getCeilingEntry(Object arg0)
 (func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap
  (type $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ nobridgemethods/CharSet.java:24:6
@@ -244,7 +244,7 @@
  (block
   ;; return TreeMap.this.getCeilingEntry(arg0);
   ;;@ nobridgemethods/CharSet.java:24:6
-  (return (call_ref (local.get $this)(local.get $arg0)(struct.get $nobridgemethods.TreeMap.vtable $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (struct.get $nobridgemethods.TreeMap $vtable(local.get $this)))))
+  (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $nobridgemethods.TreeMap.vtable $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (struct.get $nobridgemethods.TreeMap $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
@@ -274,7 +274,7 @@
 ;;; Class<?> TreeMap.getClass()
 (func $m_getClass__java_lang_Class@nobridgemethods.TreeMap
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.TreeMap))
  (local.set $this (ref.cast_static $nobridgemethods.TreeMap (local.get $this.untyped)))
@@ -311,7 +311,7 @@
   (local.set $$instance (struct.new $nobridgemethods.CharSet (ref.as_non_null (global.get $nobridgemethods.CharSet.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:33:13
-  (call $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet (local.get $$instance))
+  (call $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ nobridgemethods/CharSet.java:33:13
   (return (local.get $$instance))
@@ -328,7 +328,7 @@
   (call $$clinit__void@nobridgemethods.CharSet )
   ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:33:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -372,7 +372,7 @@
 ;;; Class<?> CharSet.getClass()
 (func $m_getClass__java_lang_Class@nobridgemethods.CharSet
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.CharSet))
  (local.set $this (ref.cast_static $nobridgemethods.CharSet (local.get $this.untyped)))
@@ -409,7 +409,7 @@
   (local.set $$instance (struct.new $nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:25:15
-  (call $$ctor__void_$p_nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry (local.get $$instance))
+  (call $$ctor__void_$p_nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ nobridgemethods/CharSet.java:25:15
   (return (local.get $$instance))
@@ -426,7 +426,7 @@
   (call $$clinit__void@nobridgemethods.TreeMap.InnerEntry )
   ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:25:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -455,7 +455,7 @@
 ;;; Class<?> InnerEntry.getClass()
 (func $m_getClass__java_lang_Class@nobridgemethods.TreeMap.InnerEntry
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.TreeMap.InnerEntry))
  (local.set $this (ref.cast_static $nobridgemethods.TreeMap.InnerEntry (local.get $this.untyped)))
@@ -494,7 +494,7 @@
   (local.set $$instance (struct.new $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:36:52
-  (call $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1 (local.get $$instance))
+  (call $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ nobridgemethods/CharSet.java:36:52
   (return (local.get $$instance))
@@ -511,7 +511,7 @@
   (call $$clinit__void@nobridgemethods.CharSet.1 )
   ;; TreeMap.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:36:52
-  (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (local.get $this))
+  (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -540,7 +540,7 @@
 ;;; Class<?> <anonymous> extends TreeMap<String>.getClass()
 (func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.CharSet.1))
  (local.set $this (ref.cast_static $nobridgemethods.CharSet.1 (local.get $this.untyped)))

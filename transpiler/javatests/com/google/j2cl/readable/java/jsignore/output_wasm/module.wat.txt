@@ -44,7 +44,7 @@
   (local.set $$instance (struct.new $jsignore.JsIgnoreExample (ref.as_non_null (global.get $jsignore.JsIgnoreExample.vtable)) (ref.as_non_null (global.get $jsignore.JsIgnoreExample.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsignore/JsIgnoreExample.java:22:13
-  (call $$ctor__void_$p_jsignore_JsIgnoreExample@jsignore.JsIgnoreExample (local.get $$instance))
+  (call $$ctor__void_$p_jsignore_JsIgnoreExample@jsignore.JsIgnoreExample (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ jsignore/JsIgnoreExample.java:22:13
   (return (local.get $$instance))
@@ -61,7 +61,7 @@
   (call $$clinit__void@jsignore.JsIgnoreExample )
   ;; Object.this.$ctor();
   ;;@ jsignore/JsIgnoreExample.java:22:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -119,7 +119,7 @@
 ;;; Class<?> JsIgnoreExample.getClass()
 (func $m_getClass__java_lang_Class@jsignore.JsIgnoreExample
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsignore.JsIgnoreExample))
  (local.set $this (ref.cast_static $jsignore.JsIgnoreExample (local.get $this.untyped)))

@@ -47,7 +47,7 @@
   (local.set $$instance (struct.new $staticfieldaccesslevels.StaticFieldAccessLevels (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
-  (call $$ctor__void_$p_staticfieldaccesslevels_StaticFieldAccessLevels@staticfieldaccesslevels.StaticFieldAccessLevels (local.get $$instance))
+  (call $$ctor__void_$p_staticfieldaccesslevels_StaticFieldAccessLevels@staticfieldaccesslevels.StaticFieldAccessLevels (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
   (return (local.get $$instance))
@@ -64,14 +64,14 @@
   (call $$clinit__void@staticfieldaccesslevels.StaticFieldAccessLevels )
   ;; Object.this.$ctor();
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; int StaticFieldAccessLevels.test()
 (func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels
  (type $function.m_test__int)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:24:13
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
@@ -109,7 +109,7 @@
 ;;; Class<?> StaticFieldAccessLevels.getClass()
 (func $m_getClass__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (local.set $this (ref.cast_static $staticfieldaccesslevels.StaticFieldAccessLevels (local.get $this.untyped)))

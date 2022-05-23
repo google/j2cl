@@ -78,7 +78,7 @@
   (local.set $$instance (struct.new $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ circularimportuse/Left.java:18:13
-  (call $$ctor__void_$p_circularimportuse_Left@circularimportuse.Left (local.get $$instance))
+  (call $$ctor__void_$p_circularimportuse_Left@circularimportuse.Left (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ circularimportuse/Left.java:18:13
   (return (local.get $$instance))
@@ -95,14 +95,14 @@
   (call $$clinit__void@circularimportuse.Left )
   ;; Object.this.$ctor();
   ;;@ circularimportuse/Left.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; Right Left.createRight()
 (func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left
  (type $function.m_createRight__circularimportuse_Right_$pp_circularimportuse)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $circularimportuse.Right))
  ;;@ circularimportuse/Left.java:19:8
  (local $this (ref null $circularimportuse.Left))
@@ -140,7 +140,7 @@
 ;;; Class<?> Left.getClass()
 (func $m_getClass__java_lang_Class@circularimportuse.Left
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Left))
  (local.set $this (ref.cast_static $circularimportuse.Left (local.get $this.untyped)))
@@ -177,7 +177,7 @@
   (local.set $$instance (struct.new $circularimportuse.Main (ref.as_non_null (global.get $circularimportuse.Main.vtable)) (ref.as_non_null (global.get $circularimportuse.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ circularimportuse/Main.java:18:13
-  (call $$ctor__void_$p_circularimportuse_Main@circularimportuse.Main (local.get $$instance))
+  (call $$ctor__void_$p_circularimportuse_Main@circularimportuse.Main (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ circularimportuse/Main.java:18:13
   (return (local.get $$instance))
@@ -194,7 +194,7 @@
   (call $$clinit__void@circularimportuse.Main )
   ;; Object.this.$ctor();
   ;;@ circularimportuse/Main.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
@@ -242,7 +242,7 @@
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@circularimportuse.Main
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Main))
  (local.set $this (ref.cast_static $circularimportuse.Main (local.get $this.untyped)))
@@ -280,7 +280,7 @@
   (local.set $$instance (struct.new $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ circularimportuse/Right.java:18:13
-  (call $$ctor__void_$p_circularimportuse_Right@circularimportuse.Right (local.get $$instance))
+  (call $$ctor__void_$p_circularimportuse_Right@circularimportuse.Right (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
   ;;@ circularimportuse/Right.java:18:13
   (return (local.get $$instance))
@@ -297,14 +297,14 @@
   (call $$clinit__void@circularimportuse.Right )
   ;; Object.this.$ctor();
   ;;@ circularimportuse/Right.java:18:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; Left Right.createLeft()
 (func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right
  (type $function.m_createLeft__circularimportuse_Left_$pp_circularimportuse)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $circularimportuse.Left))
  ;;@ circularimportuse/Right.java:19:7
  (local $this (ref null $circularimportuse.Right))
@@ -342,7 +342,7 @@
 ;;; Class<?> Right.getClass()
 (func $m_getClass__java_lang_Class@circularimportuse.Right
  (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
+ (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Right))
  (local.set $this (ref.cast_static $circularimportuse.Right (local.get $this.untyped)))
