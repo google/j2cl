@@ -131,4 +131,9 @@ public class Asserts extends AssertsBase {
   private static String getNotEqualsDefaultFailureMessage(Object expected, Object actual) {
     return getFailureMessage(expected, actual, "should not be equal to");
   }
+
+  // TODO(b/232178299): remove this method once no IllegalArgumentException is thrown by k2cl tests
+  public static void assertThrowsIllegalArgumentException(JsRunnable runnable) {
+    assertThrows(IllegalArgumentException.class, runnable);
+  }
 }
