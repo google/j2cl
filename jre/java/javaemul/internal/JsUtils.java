@@ -18,25 +18,26 @@ package javaemul.internal;
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /** Provides an interface for simple JavaScript idioms that can not be expressed in Java. */
 @SuppressWarnings("unusable-by-js")
 public final class JsUtils {
 
-  @JsMethod(namespace = "<window>", name = "Date.now")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Date.now")
   public static native double getTime();
 
-  @JsMethod(namespace = "<window>", name = "performance.now")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "performance.now")
   public static native double performanceNow();
 
-  @JsMethod(namespace = "<window>")
+  @JsMethod(namespace = JsPackage.GLOBAL)
   public static native int parseInt(String s, int radix);
 
-  @JsMethod(namespace = "<window>")
+  @JsMethod(namespace = JsPackage.GLOBAL)
   public static native double parseFloat(String str);
 
-  @JsMethod(namespace = "<window>", name = "typeof")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "typeof")
   public static native String typeOf(Object obj);
 
   public static String toPrecision(double value, int precision) {
@@ -60,7 +61,7 @@ public final class JsUtils {
     return number.toString(radix);
   }
 
-  @JsType(isNative = true, name = "Number", namespace = "<window>")
+  @JsType(isNative = true, name = "Number", namespace = JsPackage.GLOBAL)
   private interface NativeNumber {
     String toString(int radix);
 
@@ -79,22 +80,22 @@ public final class JsUtils {
   @UncheckedCast
   public static native <T> T getProperty(Object map, String key);
 
-  @JsType(isNative = true, namespace = "<window>")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   static class ArrayBuffer {
     ArrayBuffer(int size) {}
   }
 
-  @JsType(isNative = true, namespace = "<window>")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   static class Float64Array {
     Float64Array(ArrayBuffer buf) {}
   }
 
-  @JsType(isNative = true, namespace = "<window>")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   static class Float32Array {
     Float32Array(ArrayBuffer buf) {}
   }
 
-  @JsType(isNative = true, namespace = "<window>")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   static class Uint32Array {
     Uint32Array(ArrayBuffer buf) {}
   }

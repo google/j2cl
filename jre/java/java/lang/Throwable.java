@@ -246,7 +246,7 @@ public class Throwable implements Serializable {
     return e instanceof NativeTypeError ? new NullPointerException(e) : new JsException(e);
   }
 
-  @JsType(isNative = true, name = "Error", namespace = "<window>")
+  @JsType(isNative = true, name = "Error", namespace = JsPackage.GLOBAL)
   private static class NativeError {
     @JsProperty(name = "captureStackTrace")
     static boolean hasCaptureStackTraceProperty;
@@ -256,7 +256,7 @@ public class Throwable implements Serializable {
     String stack;
   }
 
-  @JsType(isNative = true, name = "TypeError", namespace = "<window>")
+  @JsType(isNative = true, name = "TypeError", namespace = JsPackage.GLOBAL)
   private static class NativeTypeError {}
 
   @SuppressWarnings("unusable-by-js")

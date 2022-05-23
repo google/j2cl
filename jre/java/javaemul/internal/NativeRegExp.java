@@ -16,13 +16,12 @@
 package javaemul.internal;
 
 import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-/**
- * Simple class to work with native js regular expressions.
- */
-@JsType(isNative = true, name = "RegExp", namespace = "<window>")
+/** Simple class to work with native js regular expressions. */
+@JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
 public class NativeRegExp {
   public int lastIndex;
   public NativeRegExp(String regex) { }
@@ -30,10 +29,8 @@ public class NativeRegExp {
   public native Match exec(String value);
   public native boolean test(String value);
 
-  /**
-   * Contract of the instance returned by {@code RegExp.prototype.exec}.
-   */
-  @JsType(isNative = true, name = "Array", namespace = "<window>")
+  /** Contract of the instance returned by {@code RegExp.prototype.exec}. */
+  @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
   public interface Match {
     @JsProperty
     int getIndex();

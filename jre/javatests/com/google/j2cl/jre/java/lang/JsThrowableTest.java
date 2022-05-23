@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.lang;
 
 import java.io.IOException;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /** Unit tests for the JS specific behavior of Throwable classes. */
@@ -124,9 +125,9 @@ public class JsThrowableTest extends JsThrowableTestBase {
         getBackingJsObject(e.getSuppressed()[0]), getBackingJsObject(e).getSuppressed()[0]);
   }
 
-  @JsType(isNative = true, name = "Error", namespace = "<window>")
-  private static class JsError { }
+  @JsType(isNative = true, name = "Error", namespace = JsPackage.GLOBAL)
+  private static class JsError {}
 
-  @JsType(isNative = true, namespace = "<window>")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
   private static class TypeError {}
 }

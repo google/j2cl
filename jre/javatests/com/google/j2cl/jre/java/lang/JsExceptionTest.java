@@ -113,8 +113,8 @@ public class JsExceptionTest extends JsThrowableTestBase {
     Object unused = nullObject.getClass();
   }
 
-  @JsType(isNative = true, namespace = "<window>")
-  private static class TypeError { }
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
+  private static class TypeError {}
 
   private static void assertTypeError(RuntimeException e) {
     assertTrue(getBackingJsObject(e) instanceof TypeError);

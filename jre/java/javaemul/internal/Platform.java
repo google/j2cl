@@ -18,6 +18,7 @@ package javaemul.internal;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /**
  * Platform specific utilities. This class will eventually replace most of the functionalities in
@@ -25,10 +26,10 @@ import jsinterop.annotations.JsMethod;
  */
 public final class Platform {
 
-  @JsMethod(namespace = "<window>")
+  @JsMethod(namespace = JsPackage.GLOBAL)
   public static native boolean isNaN(double x);
 
-  @JsMethod(namespace = "<window>")
+  @JsMethod(namespace = JsPackage.GLOBAL)
   public static native boolean isFinite(double x);
 
   public static int floatToRawIntBits(float value) {

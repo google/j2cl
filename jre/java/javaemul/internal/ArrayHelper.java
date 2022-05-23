@@ -19,6 +19,7 @@ import java.util.Iterator;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -51,7 +52,7 @@ public final class ArrayHelper {
     return ArrayStamper.stampJavaTypeInfo(new NativeArray(length), array);
   }
 
-  @JsMethod(name = "Array.isArray", namespace = "<window>")
+  @JsMethod(name = "Array.isArray", namespace = JsPackage.GLOBAL)
   public static native boolean isArray(Object o);
 
   public static int getLength(Object array) {
@@ -128,12 +129,12 @@ public final class ArrayHelper {
     }
   }
 
-  @JsType(isNative = true, name = "Function", namespace = "<window>")
+  @JsType(isNative = true, name = "Function", namespace = JsPackage.GLOBAL)
   private static class NativeFunction {
     public native String apply(Object thisContext, Object[] argsArray);
   }
 
-  @JsProperty(name = "Array.prototype.splice", namespace = "<window>")
+  @JsProperty(name = "Array.prototype.splice", namespace = JsPackage.GLOBAL)
   private static native NativeFunction getSpliceFunction();
 
   /** Compare function for sort. */
@@ -173,7 +174,7 @@ public final class ArrayHelper {
     return JsUtils.uncheckedCast(array);
   }
 
-  @JsType(isNative = true, name = "Array", namespace = "<window>")
+  @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
   private static class NativeArray {
     int length;
 

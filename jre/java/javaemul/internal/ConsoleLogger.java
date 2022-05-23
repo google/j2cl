@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -76,12 +77,12 @@ public class ConsoleLogger {
   @SuppressWarnings("unusable-by-js")
   private static native String getBackingErrorStack(Throwable t);
 
-  @JsType(isNative = true, namespace = "<window>", name = "Function")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Function")
   private interface LogFn {
     void call(Object objThis, Object... args);
   }
 
-  @JsType(isNative = true, namespace = "<window>", name = "console")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "console")
   private static class Console {
     public static LogFn log;
     public static LogFn group;
@@ -91,6 +92,6 @@ public class ConsoleLogger {
 
   // Using <window> due to https://code.google.com/archive/p/fbug/issues/2914 but probably not
   // necessary anymore.
-  @JsProperty(namespace = "<window>", name = "console")
+  @JsProperty(namespace = JsPackage.GLOBAL, name = "console")
   private static native Object getConsole();
 }
