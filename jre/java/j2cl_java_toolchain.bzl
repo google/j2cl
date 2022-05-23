@@ -25,26 +25,8 @@ def j2cl_java_toolchain(name, bootclasspath, visibility = None, **kwargs):
     )
 
     default_java_toolchain(
-        name = name + "_8",
-        bootclasspath = [jdk_system_name],
-        source_version = "8",
-        target_version = "8",
-        **kwargs
-    )
-
-    default_java_toolchain(
-        name = name + "_11",
-        bootclasspath = [jdk_system_name],
-        source_version = "11",
-        target_version = "11",
-        **kwargs
-    )
-
-    native.alias(
         name = name,
-        actual = select({
-            "//jre/java:experimental_java11_support": ":" + name + "_11",
-            "//conditions:default": ":" + name + "_8",
-        }),
+        bootclasspath = [jdk_system_name],
         visibility = visibility,
+        **kwargs
     )
