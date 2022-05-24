@@ -191,6 +191,15 @@ public class RuntimeMethods {
         .build();
   }
 
+  public static MethodCall createThrowableInitMethodCall(
+      Expression instance, Expression... arguments) {
+    return MethodCall.Builder.from(
+            TypeDescriptors.get().javaLangThrowable.getMethodDescriptorByName("privateInitError"))
+        .setQualifier(instance)
+        .setArguments(Arrays.asList(arguments))
+        .build();
+  }
+
   /** Create a call to InternalPreconditions.checkNotNull method. */
   public static MethodCall createCheckNotNullCall(Expression argument) {
     return createCheckNotNullCall(argument, false);

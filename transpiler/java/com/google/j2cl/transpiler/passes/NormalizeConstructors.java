@@ -510,18 +510,8 @@ public class NormalizeConstructors extends NormalizationPass {
 
   private static Expression createThrowableInit(
       Expression newInstanceRef, DeclaredTypeDescriptor errorType) {
-    MethodDescriptor initMethod =
-        MethodDescriptor.newBuilder()
-            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
-            .setVisibility(Visibility.PACKAGE_PRIVATE)
-            .setName("privateInitError")
-            .build();
-    checkNotNull(initMethod);
-    return MethodCall.Builder.from(initMethod)
-        .setQualifier(newInstanceRef)
-        .setArguments(newInstanceOfError(errorType, newInstanceRef.clone()))
-        .build();
+    return RuntimeMethods.createThrowableInitMethodCall(
+        newInstanceRef, newInstanceOfError(errorType, newInstanceRef.clone()));
   }
 
   private static Expression newInstanceOfError(DeclaredTypeDescriptor type, Expression thisRef) {
