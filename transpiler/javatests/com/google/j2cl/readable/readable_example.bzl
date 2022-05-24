@@ -152,7 +152,7 @@ def readable_example(
                 name = "readable_j2kt_test_framework",
                 srcs = ["J2ktModule.kt"],
                 deps = [":readable-j2kt-native"],
-                tags = ["j2kt", "ios"],
+                tags = ["j2kt", "ios", "manual"],
             )
 
             ios_build_test(
