@@ -312,7 +312,7 @@ public class RuntimeMethods {
   }
 
   /** Create a call to the corresponding widening Primitives method. */
-  public static Expression createWideningPrimitivesMethodCall(
+  public static Expression createPrimitivesWideningMethodCall(
       Expression expression, PrimitiveTypeDescriptor toTypeDescriptor) {
     PrimitiveTypeDescriptor fromTypeDescriptor =
         (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
@@ -323,6 +323,24 @@ public class RuntimeMethods {
             toProperCase(toTypeDescriptor.getSimpleSourceName()));
 
     return createPrimitivesMethodCall(methodName, expression);
+  }
+
+  /** Creates a method call to BoxedType.xxxValue(). */
+  public static MethodCall createUnboxingMethodCall(
+      Expression expression, DeclaredTypeDescriptor boxedType) {
+
+    // TODO(b/233795767): Remove the fixup for Kotlin.
+    MethodDescriptor valueMethodDescriptor =
+        MethodDescriptor.Builder.from(
+                boxedType.getMethodDescriptor(
+                    boxedType.toUnboxedType().getSimpleSourceName() + "Value"))
+            // Fixup the enclosing type descriptor for the boxed method call. Kotlin does
+            // not provide the xxxValue() method calls on the boxed types in the type model, but it
+            // finds the ones defined at Number instead.
+            .setEnclosingTypeDescriptor(boxedType)
+            .build();
+
+    return MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
   }
 
   /** Return the String with first letter capitalized. */

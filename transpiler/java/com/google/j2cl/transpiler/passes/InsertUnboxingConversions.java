@@ -24,8 +24,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.Optional;
@@ -130,13 +129,8 @@ public class InsertUnboxingConversions extends NormalizationPass {
     DeclaredTypeDescriptor boxType =
         (DeclaredTypeDescriptor) expression.getTypeDescriptor().toRawTypeDescriptor();
     checkArgument(TypeDescriptors.isBoxedType(boxType));
-    PrimitiveTypeDescriptor primitiveType = boxType.toUnboxedType();
 
-    MethodDescriptor valueMethodDescriptor =
-        boxType.getMethodDescriptor(primitiveType.getSimpleSourceName() + "Value");
-
-    MethodCall methodCall =
-        MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
+    MethodCall methodCall = RuntimeMethods.createUnboxingMethodCall(expression, boxType);
 
     if (!areBooleanAndDoubleBoxed && TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
       methodCall = AstUtils.devirtualizeMethodCall(methodCall, boxType);

@@ -118,7 +118,7 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
       return new NumberLiteral(literalTypeDescriptor, ((NumberLiteral) expression).getValue());
     }
 
-    return RuntimeMethods.createWideningPrimitivesMethodCall(
+    return RuntimeMethods.createPrimitivesWideningMethodCall(
         expression, (PrimitiveTypeDescriptor) toTypeDescriptor);
   }
 
