@@ -58,7 +58,7 @@ public class ImplementSystemGetProperty extends NormalizationPass {
                 propertyKey);
 
             MultiExpression.Builder expressionBuilder = MultiExpression.newBuilder();
-            if (defaultValue != null) {
+            if (value == null || (defaultValue != null && defaultValue.hasSideEffects())) {
               // Default value expression can have side effect and needs to be evaluated if present.
               expressionBuilder.addExpressions(defaultValue);
             }
