@@ -91,7 +91,7 @@ public abstract class MemberReference extends Expression {
       return target;
     }
 
-    @SuppressWarnings("unchekded")
+    @SuppressWarnings("unchecked")
     Builder(MemberReference memberReference) {
       this.qualifier = memberReference.getQualifier();
       this.target = (D) memberReference.getTarget();
