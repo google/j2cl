@@ -38,7 +38,6 @@ import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
-
 import javaemul.internal.NativeRegExp;
 
 /**
@@ -142,16 +141,16 @@ public final class MathContext implements Serializable {
   public MathContext(String val) {
     checkNotNull(val, "null string");
 
-    String[] extractedValues =
-        new NativeRegExp("^precision=(\\d+)\\ roundingMode=(\\w+)$").exec(val).asArray();
-    if (extractedValues == null || extractedValues.length != 3) {
+    NativeRegExp.Match match =
+        new NativeRegExp("^precision=(\\d+)\\ roundingMode=(\\w+)$").exec(val);
+    if (match == null || match.getLength() != 3) {
       throw new IllegalArgumentException("bad string format");
     }
 
     try {
-      this.precision = Integer.parseInt(extractedValues[1]);
+      this.precision = Integer.parseInt(match.getAt(1));
       // Can use RoundingMode.valueOf here because it is blacklisted in enum obfuscation.
-      this.roundingMode = RoundingMode.valueOf(extractedValues[2]);
+      this.roundingMode = RoundingMode.valueOf(match.getAt(2));
     } catch (RuntimeException re) {
       // Ensure that we only throw IllegalArgumentException for any illegal value.
       throw new IllegalArgumentException("bad string format");

@@ -23,10 +23,15 @@ import jsinterop.annotations.JsType;
 /** Simple class to work with native js regular expressions. */
 @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
 public class NativeRegExp {
-  public int lastIndex;
-  public NativeRegExp(String regex) { }
-  public NativeRegExp(String regex, String mode) { }
+  public NativeRegExp(String regex) {}
+
+  public NativeRegExp(String regex, String mode) {}
+
+  @JsProperty
+  public native void setLastIndex(int index);
+
   public native Match exec(String value);
+
   public native boolean test(String value);
 
   /** Contract of the instance returned by {@code RegExp.prototype.exec}. */
@@ -35,9 +40,12 @@ public class NativeRegExp {
     @JsProperty
     int getIndex();
 
+    @JsProperty
+    int getLength();
+
     @JsOverlay
-    default String[] asArray() {
-      return JsUtils.uncheckedCast(this);
+    default String getAt(int index) {
+      return JsUtils.<String[]>uncheckedCast(this)[index];
     }
   }
 }

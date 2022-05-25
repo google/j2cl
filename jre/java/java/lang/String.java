@@ -535,7 +535,7 @@ public final class String implements Comparable<String>, CharSequence,
     return nativeReplaceAll(regex, replace);
   }
 
-  String nativeReplaceAll(String regex, String replace) {
+  private String nativeReplaceAll(String regex, String replace) {
     return asNativeString().replace(new NativeRegExp(regex, "g"), replace);
   }
 
@@ -595,9 +595,9 @@ public final class String implements Comparable<String>, CharSequence,
       } else {
         int matchIndex = matchObj.getIndex();
         out[count] = trail.substring(0, matchIndex);
-        trail = trail.substring(matchIndex + matchObj.asArray()[0].length(), trail.length());
+        trail = trail.substring(matchIndex + matchObj.getAt(0).length(), trail.length());
         // Force the compiled pattern to reset internal state
-        compiled.lastIndex = 0;
+        compiled.setLastIndex(0);
         // Only one zero length match per character to ensure termination
         if (lastTrail == trail) {
           out[count] = trail.substring(0, 1);
