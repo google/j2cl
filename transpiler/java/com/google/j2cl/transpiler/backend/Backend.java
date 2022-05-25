@@ -133,6 +133,7 @@ import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
+import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringComparison;
 import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringConcatenation;
 import com.google.j2cl.transpiler.passes.UpgradeInterfaceDispatch;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
@@ -336,6 +337,7 @@ public enum Backend {
           // field references to constant fields.
           PropagateConstants::new,
           StaticallyEvaluateStringConcatenation::new,
+          StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),

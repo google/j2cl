@@ -69,9 +69,6 @@
  (local $x i32)
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
- (local $$qualifier_2 (ref null $java.lang.String))
- (local $$qualifier_3 (ref null $java.lang.String))
- (local $$qualifier_4 (ref null $java.lang.String))
  (block
   ;; systemgetproperty.Main.$clinit();
   ;;@ systemgetproperty/Main.java:24:41
@@ -79,44 +76,35 @@
   ;; boolean x;
   ;;@ systemgetproperty/Main.java:25:4
   
-  ;; (x = (javaemul.internal.StringPool.$getString_|SIMPLE|() == javaemul.internal.StringPool.$getString_|SIMPLE|()));
+  ;; (x = true);
   ;;@ systemgetproperty/Main.java:26:4
-  (local.set $x (ref.eq (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ) (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )))
-  ;; (x = (String $qualifier = javaemul.internal.StringPool.$getString_|SIMPLE|(),$qualifier.equals(javaemul.internal.StringPool.$getString_|SIMPLE|())));
+  (local.set $x (i32.const 1))
+  ;; (x = true);
   ;;@ systemgetproperty/Main.java:27:4
-  (local.set $x (block (result i32)
-   (local.set $$qualifier (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
-  ))
+  (local.set $x (i32.const 1))
   ;; (x = (String $qualifier = javaemul.internal.StringPool.$getString_|SIMPLE|(),$qualifier.equalsIgnoreCase(javaemul.internal.StringPool.$getString_|SIMPLE|())));
   ;;@ systemgetproperty/Main.java:28:4
   (local.set $x (block (result i32)
-   (local.set $$qualifier_1 (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
-   (call_ref (ref.as_non_null (local.get $$qualifier_1))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
+   (local.set $$qualifier (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
   ))
-  ;; (x = (javaemul.internal.StringPool.$getString_|SIMPLE|() == javaemul.internal.StringPool.$getString_|NOTSIMPLE|()));
+  ;; (x = false);
   ;;@ systemgetproperty/Main.java:29:4
-  (local.set $x (ref.eq (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ) (call $function.no.side.effects.$getString_|NOTSIMPLE|__java_lang_String (ref.func $$getString_|NOTSIMPLE|__java_lang_String@javaemul.internal.StringPool) )))
-  ;; (x = (String $qualifier = javaemul.internal.StringPool.$getString_|SIMPLE|(),$qualifier.equals(javaemul.internal.StringPool.$getString_|SIMPLE|())));
+  (local.set $x (i32.const 0))
+  ;; (x = true);
   ;;@ systemgetproperty/Main.java:31:4
-  (local.set $x (block (result i32)
-   (local.set $$qualifier_2 (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
-   (call_ref (ref.as_non_null (local.get $$qualifier_2))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_2))))
-  ))
-  ;; (x = (String $qualifier = javaemul.internal.StringPool.$getString_|bar|(),$qualifier.equals(javaemul.internal.StringPool.$getString_|bar|())));
+  (local.set $x (i32.const 1))
+  ;; (x = true);
   ;;@ systemgetproperty/Main.java:32:4
-  (local.set $x (block (result i32)
-   (local.set $$qualifier_3 (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@javaemul.internal.StringPool) ))
-   (call_ref (ref.as_non_null (local.get $$qualifier_3))(call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_3))))
-  ))
+  (local.set $x (i32.const 1))
   ;; (x = (String $qualifier = (systemgetproperty.Main.mightHaveSideEffects(),javaemul.internal.StringPool.$getString_|SIMPLE|()),$qualifier.equals(javaemul.internal.StringPool.$getString_|SIMPLE|())));
   ;;@ systemgetproperty/Main.java:33:4
   (local.set $x (block (result i32)
-   (local.set $$qualifier_4 (block (result (ref null $java.lang.String))
+   (local.set $$qualifier_1 (block (result (ref null $java.lang.String))
     (drop (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
     (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )
    ))
-   (call_ref (ref.as_non_null (local.get $$qualifier_4))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_4))))
+   (call_ref (ref.as_non_null (local.get $$qualifier_1))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
   ))
  )
 )
