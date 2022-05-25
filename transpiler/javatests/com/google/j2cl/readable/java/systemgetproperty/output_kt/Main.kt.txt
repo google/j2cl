@@ -1,0 +1,27 @@
+package systemgetproperty
+
+import javaemul.lang.*
+import kotlin.jvm.*
+
+open class Main {
+ companion object {
+  @kotlin.jvm.JvmField val property: kotlin.String? = java.lang.System.getProperty("jre.classMetadata")
+
+  @kotlin.jvm.JvmStatic
+  fun main(args: kotlin.Array<kotlin.String?>?) {
+   var x: kotlin.Boolean
+   x = systemgetproperty.Main.property === "SIMPLE"
+   x = systemgetproperty.Main.property!!.equals("SIMPLE")
+   x = systemgetproperty.Main.property!!.equalsIgnoreCase("SIMPLE")
+   x = systemgetproperty.Main.property === "NOTSIMPLE"
+   x = java.lang.System.getProperty("jre.classMetadata", "default")!!.equals("SIMPLE")
+   x = java.lang.System.getProperty("jre.bar", "bar")!!.equals("bar")
+   x = java.lang.System.getProperty("jre.classMetadata", systemgetproperty.Main.mightHaveSideEffects())!!.equals("SIMPLE")
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun mightHaveSideEffects(): kotlin.String? {
+   return "Foo"
+  }
+ }
+}

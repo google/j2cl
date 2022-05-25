@@ -1,0 +1,67 @@
+goog.module('systemgetproperty.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+class Main extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__systemgetproperty_Main__();
+  return $instance;
+ }
+ 
+ $ctor__systemgetproperty_Main__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
+  Main.$clinit();
+  let /** boolean */ x;
+  x = $Equality.$same(Main.f_property__systemgetproperty_Main_, 'SIMPLE');
+  x = j_l_String.m_equals__java_lang_String__java_lang_Object(Main.f_property__systemgetproperty_Main_, 'SIMPLE');
+  x = j_l_String.m_equalsIgnoreCase__java_lang_String__java_lang_String(Main.f_property__systemgetproperty_Main_, 'SIMPLE');
+  x = $Equality.$same(Main.f_property__systemgetproperty_Main_, 'NOTSIMPLE');
+  x = j_l_String.m_equals__java_lang_String__java_lang_Object(Main.f_propertyWithDefault__systemgetproperty_Main_, 'SIMPLE');
+  x = j_l_String.m_equals__java_lang_String__java_lang_Object($Util.$getDefine('jre.bar', 'bar'), 'bar');
+  x = j_l_String.m_equals__java_lang_String__java_lang_Object($Util.$getDefine('jre.classMetadata', Main.m_mightHaveSideEffects__()), 'SIMPLE');
+ }
+ /** @return {?string} */
+ static m_mightHaveSideEffects__() {
+  return 'Foo';
+ }
+ 
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+  Main.f_property__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata');
+  Main.f_propertyWithDefault__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata', 'default');
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+/**@type {?string}*/
+Main.f_property__systemgetproperty_Main_;
+/**@type {?string}*/
+Main.f_propertyWithDefault__systemgetproperty_Main_;
+$Util.$setClassMetadata(Main, 'systemgetproperty.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map

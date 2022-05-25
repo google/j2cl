@@ -1,0 +1,168 @@
+;;; Code for systemgetproperty.Main [static fields]
+(global $f_property__systemgetproperty_Main_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_propertyWithDefault__systemgetproperty_Main_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__systemgetproperty_Main (mut i32) (i32.const 0))
+
+;;; Code for systemgetproperty.Main [vtable.init]
+(global $systemgetproperty.Main.vtable (ref $systemgetproperty.Main.vtable) 
+ (struct.new $systemgetproperty.Main.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@systemgetproperty.Main)
+ )
+)
+
+;;; Code for systemgetproperty.Main [itable.init]
+(global $systemgetproperty.Main.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for systemgetproperty.Main [CLASS]
+(type $systemgetproperty.Main (struct_subtype 
+ (field $vtable (ref $systemgetproperty.Main.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $systemgetproperty.Main.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; Main Main.$create()
+(func $$create__systemgetproperty_Main@systemgetproperty.Main
+ (result (ref null $systemgetproperty.Main))
+ ;;@ systemgetproperty/Main.java:18:13
+ (local $$instance (ref null $systemgetproperty.Main))
+ (block
+  ;; Main $instance = new Main.<init>(0);
+  ;;@ systemgetproperty/Main.java:18:13
+  (local.set $$instance (struct.new $systemgetproperty.Main (ref.as_non_null (global.get $systemgetproperty.Main.vtable)) (ref.as_non_null (global.get $systemgetproperty.Main.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ systemgetproperty/Main.java:18:13
+  (call $$ctor__void_$p_systemgetproperty_Main@systemgetproperty.Main (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ systemgetproperty/Main.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_systemgetproperty_Main@systemgetproperty.Main
+ (param $this (ref null $systemgetproperty.Main))
+ ;;@ systemgetproperty/Main.java:18:13
+ (block
+  ;; systemgetproperty.Main.$clinit();
+  ;;@ systemgetproperty/Main.java:18:13
+  (call $$clinit__void@systemgetproperty.Main )
+  ;; Object.this.$ctor();
+  ;;@ systemgetproperty/Main.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.main(String[] args)
+(func $m_main__arrayOf_java_lang_String__void@systemgetproperty.Main
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ systemgetproperty/Main.java:24:21
+ (local $x i32)
+ (local $$qualifier (ref null $java.lang.String))
+ (local $$qualifier_1 (ref null $java.lang.String))
+ (block
+  ;; systemgetproperty.Main.$clinit();
+  ;;@ systemgetproperty/Main.java:24:41
+  (call $$clinit__void@systemgetproperty.Main )
+  ;; boolean x;
+  ;;@ systemgetproperty/Main.java:25:4
+  
+  ;; (x = (systemgetproperty.Main.property == javaemul.internal.StringPool.$getString_|SIMPLE|()));
+  ;;@ systemgetproperty/Main.java:26:4
+  (local.set $x (ref.eq (global.get $f_property__systemgetproperty_Main_) (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )))
+  ;; (x = systemgetproperty.Main.property.equals(javaemul.internal.StringPool.$getString_|SIMPLE|()));
+  ;;@ systemgetproperty/Main.java:27:4
+  (local.set $x (call_ref (ref.as_non_null (global.get $f_property__systemgetproperty_Main_))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(global.get $f_property__systemgetproperty_Main_)))))
+  ;; (x = systemgetproperty.Main.property.equalsIgnoreCase(javaemul.internal.StringPool.$getString_|SIMPLE|()));
+  ;;@ systemgetproperty/Main.java:28:4
+  (local.set $x (call_ref (ref.as_non_null (global.get $f_property__systemgetproperty_Main_))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(global.get $f_property__systemgetproperty_Main_)))))
+  ;; (x = (systemgetproperty.Main.property == javaemul.internal.StringPool.$getString_|NOTSIMPLE|()));
+  ;;@ systemgetproperty/Main.java:29:4
+  (local.set $x (ref.eq (global.get $f_property__systemgetproperty_Main_) (call $function.no.side.effects.$getString_|NOTSIMPLE|__java_lang_String (ref.func $$getString_|NOTSIMPLE|__java_lang_String@javaemul.internal.StringPool) )))
+  ;; (x = systemgetproperty.Main.propertyWithDefault.equals(javaemul.internal.StringPool.$getString_|SIMPLE|()));
+  ;;@ systemgetproperty/Main.java:31:4
+  (local.set $x (call_ref (ref.as_non_null (global.get $f_propertyWithDefault__systemgetproperty_Main_))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(global.get $f_propertyWithDefault__systemgetproperty_Main_)))))
+  ;; (x = (String $qualifier = javaemul.internal.StringPool.$getString_|bar|(),$qualifier.equals(javaemul.internal.StringPool.$getString_|bar|())));
+  ;;@ systemgetproperty/Main.java:32:4
+  (local.set $x (block (result i32)
+   (local.set $$qualifier (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@javaemul.internal.StringPool) ))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
+  ))
+  ;; (x = (String $qualifier = (systemgetproperty.Main.mightHaveSideEffects(),javaemul.internal.StringPool.$getString_|SIMPLE|()),$qualifier.equals(javaemul.internal.StringPool.$getString_|SIMPLE|())));
+  ;;@ systemgetproperty/Main.java:33:4
+  (local.set $x (block (result i32)
+   (local.set $$qualifier_1 (block (result (ref null $java.lang.String))
+    (drop (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
+    (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )
+   ))
+   (call_ref (ref.as_non_null (local.get $$qualifier_1))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
+  ))
+ )
+)
+
+;;; String Main.mightHaveSideEffects()
+(func $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main
+ (result (ref null $java.lang.String))
+ ;;@ systemgetproperty/Main.java:36:24
+ (block
+  ;; return javaemul.internal.StringPool.$getString_|Foo|();
+  ;;@ systemgetproperty/Main.java:37:4
+  (return (call $function.no.side.effects.$getString_|Foo|__java_lang_String (ref.func $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool) ))
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void@systemgetproperty.Main
+ ;;@ systemgetproperty/Main.java:18:13
+ (block
+  ;; if (systemgetproperty.Main.$initialized) return;
+  ;;@ systemgetproperty/Main.java:18:13
+  (if (global.get $f_$initialized__systemgetproperty_Main)
+   (then
+    ;; return;
+    ;;@ systemgetproperty/Main.java:18:13
+    (return )
+   )
+  )
+  ;; (systemgetproperty.Main.$initialized = true);
+  ;;@ systemgetproperty/Main.java:18:13
+  (global.set $f_$initialized__systemgetproperty_Main (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ systemgetproperty/Main.java:18:13
+  (call $$clinit__void@java.lang.Object )
+  ;; (systemgetproperty.Main.property = javaemul.internal.StringPool.$getString_|SIMPLE|());
+  ;;@ systemgetproperty/Main.java:20:2
+  (global.set $f_property__systemgetproperty_Main_ (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
+  ;; (systemgetproperty.Main.propertyWithDefault = (javaemul.internal.StringPool.$getString_|default|(),javaemul.internal.StringPool.$getString_|SIMPLE|()));
+  ;;@ systemgetproperty/Main.java:21:2
+  (global.set $f_propertyWithDefault__systemgetproperty_Main_ (block (result (ref null $java.lang.String))
+   (drop (call $function.no.side.effects.$getString_|default|__java_lang_String (ref.func $$getString_|default|__java_lang_String@javaemul.internal.StringPool) ))
+   (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )
+  ))
+ )
+)
+
+;;; Class<?> Main.getClass()
+(func $m_getClass__java_lang_Class@systemgetproperty.Main
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $systemgetproperty.Main))
+ (local.set $this (ref.cast_static $systemgetproperty.Main (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSystemgetproperty.Main();
+  (return (call $function.no.side.effects.$getSystemgetproperty.Main__java_lang_Class (ref.func $$getSystemgetproperty.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@systemgetproperty.Main)

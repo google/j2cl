@@ -1,0 +1,41 @@
+[Main] => [Main]
+[Main] => [constructor]
+[Main] => [super();] "systemgetproperty.Main.<synthetic: ctor_js>"
+[Main] => [$create__]
+[Main] => [Main.$clinit();] "systemgetproperty.Main.<synthetic: ctor_create>"
+[Main] => [let $instance = new Main();] "systemgetproperty.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__systemgetproperty_Main__();] "systemgetproperty.Main.<synthetic: ctor_create>"
+[Main] => [return $instance;] "systemgetproperty.Main.<synthetic: ctor_create>"
+[Main] => [$ctor__systemgetproperty_Main__]
+[Main] => [this.$ctor__java_lang_Object__();] "systemgetproperty.Main.<init>"
+[main] => [m_main__arrayOf_java_lang_String]
+[args] => [args] "args"
+[{
+    boolean x;
+...    x = System.getProperty("jre.classMetadata", mightHaveSideEffects()).equals("SIMPLE");
+  }] => [Main.$clinit();] "systemgetproperty.Main.main"
+[boolean x;] => [let /** boolean */ x;] "systemgetproperty.Main.main"
+[x] => [x] "x"
+[x = property == "SIMPLE";] => [x = $Equality.$same(Main.f_property__systemgetproperty_Main_, 'SIMPLE');] "systemgetproperty.Main.main"
+[x = property.equals("SIMPLE");] => [x = j_l_String.m_equals__java_lang_String__java_lang_Object(Main.f_property__systemgetproperty_Main_, 'SIMPLE');] "systemgetproperty.Main.main"
+[x = property.equalsIgnoreCase("SIMPLE");] => [x = j_l_String.m_equalsIgnoreCase__java_lang_String__java_lang_String(Main.f_property__systemgetproperty_Main_, 'SIMPLE');] "systemgetproperty.Main.main"
+[x = property == "NOTSIMPLE";] => [x = $Equality.$same(Main.f_property__systemgetproperty_Main_, 'NOTSIMPLE');] "systemgetproperty.Main.main"
+[x = propertyWithDefault.equals("SIMPLE");] => [x = j_l_String.m_equals__java_lang_String__java_lang_Object(Main.f_propertyWithDefault__systemgetproperty_Main_, 'SIMPLE');] "systemgetproperty.Main.main"
+[x = System.getProperty("jre.bar", "bar").equals("bar");] => [x = j_l_String.m_equals__java_lang_String__java_lang_Object($Util.$getDefine('jre.bar', 'bar'), 'bar');] "systemgetproperty.Main.main"
+[x = System.getProperty("jre.classMetadata", mightHaveSideEffects()).equals("SIMPLE");] => [x = j_l_String.m_equals__java_lang_String__java_lang_Object($Util.$getDefine('jre.classMetadata', Main.m_mightHaveSideEffects__()), 'SIMPLE');] "systemgetproperty.Main.main"
+[mightHaveSideEffects] => [m_mightHaveSideEffects__]
+[return "Foo";] => [return 'Foo';] "systemgetproperty.Main.mightHaveSideEffects"
+[Main] => [$clinit]
+[Main] => [Main.$clinit = () =>{};] "systemgetproperty.Main.<clinit>"
+[Main] => [Main.$loadModules();] "systemgetproperty.Main.<clinit>"
+[Main] => [j_l_Object.$clinit();] "systemgetproperty.Main.<clinit>"
+[private static final String property = System.getProperty("jre.classMetadata");] => [Main.f_property__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata');] "systemgetproperty.Main.<clinit>"
+[private static final String propertyWithDefault =
+      System.getProperty("jre.classMetadata", "default");] => [Main.f_propertyWithDefault__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata', 'default');] "systemgetproperty.Main.<clinit>"
+[Main] => [/**@type {?string}*/
+Main.f_property__systemgetproperty_Main_;]
+[property] => [f_property__systemgetproperty_Main_]
+[Main] => [/**@type {?string}*/
+Main.f_propertyWithDefault__systemgetproperty_Main_;]
+[propertyWithDefault] => [f_propertyWithDefault__systemgetproperty_Main_]
+

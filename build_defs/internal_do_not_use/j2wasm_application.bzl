@@ -189,6 +189,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         "jre.checks.type": "AUTO",
         "jre.logging.logLevel": "ALL",
         "jre.logging.simpleConsoleHandler": "ENABLED",
+        "jre.classMetadata": "SIMPLE",
     }
 
     dev_defines = dict(default_defines)

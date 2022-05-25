@@ -9,7 +9,4 @@ integration_test(
     name = "systemgetproperty",
     srcs = glob(["*.java"]),
     enable_kt = False,
-    wasm_defines = {
-        "jre.classMetadata": "SIMPLE",
-    },
 )
