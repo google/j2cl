@@ -1,4 +1,4 @@
-[comment]: # TOC
+[//]: # TOC
 
 # Limitations of J2CL - Java compatibility
 

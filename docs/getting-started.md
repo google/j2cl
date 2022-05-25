@@ -1,5 +1,5 @@
 
-[comment]: # TOC
+[//]: # TOC
 
 # Getting Started
 
