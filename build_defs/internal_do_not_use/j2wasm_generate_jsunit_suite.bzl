@@ -73,6 +73,7 @@ def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimizeWasm
         name = name + "_j2wasm_application",
         deps = [":" + name + "_lib"],
         defines = {
+            "jre.checkedMode": "ENABLED",
             "jre.logging.logLevel": "ALL",
             "jre.logging.simpleConsoleHandler": "ENABLED",
         },
