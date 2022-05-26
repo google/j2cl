@@ -206,7 +206,7 @@ abstract class AbstractStringBuilder {
   }
 
   final void insert0(int index, char[] chars) {
-    checkStringElementIndex(index, count);
+    checkStringElementIndex(index, count + 1);
     if (chars.length != 0) {
       move(chars.length, index);
       System.arraycopy(chars, 0, value, index, chars.length);
@@ -215,8 +215,8 @@ abstract class AbstractStringBuilder {
   }
 
   final void insert0(int index, char[] chars, int start, int length) {
-    checkStringElementIndex(index, count);
-    checkStringBounds(start, length, chars.length);
+    checkStringElementIndex(index, count + 1);
+    checkStringBounds(start, start + length, chars.length);
 
     if (length != 0) {
       move(length, index);
@@ -226,7 +226,7 @@ abstract class AbstractStringBuilder {
   }
 
   final void insert0(int index, char ch) {
-    checkStringElementIndex(index, count);
+    checkStringElementIndex(index, count + 1);
 
     move(1, index);
     value[index] = ch;
@@ -234,7 +234,7 @@ abstract class AbstractStringBuilder {
   }
 
   final void insert0(int index, String string) {
-    checkStringElementIndex(index, count);
+    checkStringElementIndex(index, count + 1);
 
     if (string == null) {
       string = "null";
@@ -433,7 +433,7 @@ abstract class AbstractStringBuilder {
   }
 
   public String substring(int start) {
-    checkStringElementIndex(start, count);
+    checkStringElementIndex(start, count + 1);
     if (start == count) {
       return "";
     }
