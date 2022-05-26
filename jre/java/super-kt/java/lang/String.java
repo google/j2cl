@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.Locale;
 import javaemul.internal.annotations.KtNative;
 import javaemul.internal.annotations.KtProperty;
+import jsinterop.annotations.JsNonNull;
 
 // TODO(b/223774683): Java String should implement Serializable. Kotlin String doesn't.
 @KtNative("kotlin.String")
@@ -69,7 +70,7 @@ public final class String implements Comparable<String>, CharSequence {
 
   public native int compareTo(String string);
 
-  public native int compareToIgnoreCase(String string);
+  public native int compareToIgnoreCase(@JsNonNull String string);
 
   public native String concat(String string);
 
@@ -93,7 +94,7 @@ public final class String implements Comparable<String>, CharSequence {
 
   public native byte[] getBytes(Charset charset);
 
-  public native void getChars(int start, int end, char[] buffer, int index);
+  public native void getChars(int start, int end, char @JsNonNull [] buffer, int index);
 
   @Override
   public native int hashCode();

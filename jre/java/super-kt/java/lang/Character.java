@@ -158,6 +158,7 @@ public final class Character implements Comparable<Character> {
 
   public Character(char value) {}
 
+  @KtName("toChar")
   public native char charValue();
 
   public native int compareTo(Character c);

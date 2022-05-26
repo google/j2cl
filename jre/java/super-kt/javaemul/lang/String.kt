@@ -15,11 +15,39 @@
  */
 package javaemul.lang
 
+import java.util.Locale
+
 /**
  * Pseudo-constructor for emulated java.lang.String.
  *
  * See regular JRE API documentation for other methods in this file.
  */
-operator fun String.Companion.invoke(a: CharArray) = a.concatToString()
+operator fun String.Companion.invoke(a: CharArray?): String {
+  requireNotNull(a)
+  return a.concatToString()
+}
 
-fun String.Companion.valueOf(c: Char) = c.toString()
+operator fun String.Companion.invoke(a: CharArray?, offset: Int, len: Int): String {
+  requireNotNull(a)
+  return a.concatToString(offset, offset + len)
+}
+
+fun String.Companion.valueOf(c: Char): String = c.toString()
+
+fun String.Companion.valueOf(a: Any?): String = a.toString()
+
+fun String.compareToIgnoreCase(str: String): Int = this.compareTo(str, ignoreCase = true)
+
+// TODO(b/230671584): Add support for Locale on Kotlin Native
+fun String.toUpperCase(locale: Locale?): String = this.uppercase()
+
+fun String.toLowerCase(locale: Locale?): String = this.lowercase()
+
+fun String.getChars(start: Int, end: Int, buffer: CharArray, index: Int) {
+  requireNotNull(buffer)
+
+  var bufferIndex = index
+  for (srcIndex in start until end) {
+    buffer[bufferIndex++] = this[srcIndex]
+  }
+}

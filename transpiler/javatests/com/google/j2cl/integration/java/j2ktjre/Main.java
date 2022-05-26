@@ -19,6 +19,8 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import java.util.Locale;
+
 public class Main {
   public static void main(String... args) {
     testPrimitives();
@@ -32,6 +34,8 @@ public class Main {
     testShort();
     testByte();
     testFloat();
+    testCharacter();
+    testString();
   }
 
   private static void testBoolean() {
@@ -189,5 +193,49 @@ public class Main {
 
     assertTrue(Float.isInfinite(fInf));
     assertFalse(Float.isInfinite(0));
+  }
+
+  private static void testCharacter() {
+    assertEquals((Object) 'a', Character.valueOf('a'));
+
+    assertEquals(0, Character.compare('a', 'a'));
+    assertEquals(-1, Character.compare('a', 'b'));
+    assertEquals(1, Character.compare('c', 'b'));
+
+    assertEquals('a', Character.forDigit(10, 16));
+
+    assertEquals(98, Character.hashCode('b'));
+
+    assertEquals(1, Character.charCount(0x9999));
+    assertEquals(2, Character.charCount(0x10001));
+
+    char cArray1[] = {'a', 'b'};
+    assertEquals(1, Character.toChars(97, cArray1, 1));
+    assertEquals('a', cArray1[1]);
+
+    char cArray2[] = {'a', 'b'};
+    assertEquals(2, Character.toChars(80000, cArray2, 0));
+
+    char cArray3[] = {'a', 'b'};
+    assertEquals(97, Character.codePointAt(cArray3, 0, 1));
+  }
+
+  private static void testString() {
+    char cArray[] = {'h', 'e', 'l', 'l', 'o'};
+    assertEquals("ello", new String(cArray, 1, 4));
+
+    assertEquals("a", String.valueOf('a'));
+    assertEquals("5", String.valueOf(5));
+    assertEquals("null", String.valueOf((Object) null));
+
+    assertEquals(0, "A".compareToIgnoreCase("a"));
+    assertEquals(-1, "A".compareToIgnoreCase("b"));
+    assertEquals(1, "b".compareToIgnoreCase("A"));
+
+    assertEquals("HELLO", "hello".toUpperCase(Locale.US));
+
+    char dstCharArray[] = new char[3];
+    "abcde".getChars(1, 4, dstCharArray, 0);
+    assertEquals("bcd", new String(dstCharArray));
   }
 }
