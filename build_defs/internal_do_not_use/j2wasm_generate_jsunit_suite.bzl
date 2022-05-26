@@ -30,11 +30,11 @@ load(":j2wasm_application.bzl", "j2wasm_application")
 load(":generate_test_input.bzl", "generate_test_input")
 
 # buildifier: disable=function-docstring-args
-def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimizeWasm = False):
+def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimize = False, defines = {}):
     """Macro for cross compiling a JUnit Suite to .wasm file.
 
     Args:
-        optimizeWasm: A flag indicating if wasm compilation is optimized or not.
+        optimize: A flag indicating if wasm compilation is optimized or not.
     """
 
     test_input = generate_test_input(name, test_class)
@@ -69,14 +69,17 @@ def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimizeWasm
     # (.testsuite files), but the same jar file also contains unrelated things
     out_jar = ":lib" + name + "_lib.jar"
 
+    test_defines = dict({
+        "jre.checkedMode": "ENABLED",
+        "jre.logging.logLevel": "ALL",
+        "jre.logging.simpleConsoleHandler": "ENABLED",
+    })
+    test_defines.update(defines)
+
     j2wasm_application(
         name = name + "_j2wasm_application",
         deps = [":" + name + "_lib"],
-        defines = {
-            "jre.checkedMode": "ENABLED",
-            "jre.logging.logLevel": "ALL",
-            "jre.logging.simpleConsoleHandler": "ENABLED",
-        },
+        defines = test_defines,
         entry_points = [
             ".*_Adapter.test.*",
             ".*_Adapter.setUp.*",
@@ -92,7 +95,7 @@ def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimizeWasm
     # extracting files from jar (output js zip can include all the required
     # files.)
 
-    wasm_optimized_suffix = "" if optimizeWasm else "_dev"
+    wasm_optimized_suffix = "" if optimize else "_dev"
     j2wasm_application_suffix = "_j2wasm_application"
     wasm_path = "/google3/" + native.package_name() + "/" + name + j2wasm_application_suffix + wasm_optimized_suffix + ".wasm"
     processed_wasm_path = wasm_path.replace("/", "\\/")

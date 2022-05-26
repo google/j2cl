@@ -38,10 +38,12 @@ def j2cl_multi_test(name, test_class, deps, enable_wasm = True, **kwargs):
 
     if enable_wasm:
         j2wasm_deps = [dep + "-j2wasm" for dep in deps]
+        j2wasm_defines = {"jre.checks.checkLevel": "NORMAL"}
         j2wasm_test(
             name = name + "-j2wasm",
             test_class = test_class,
             runtime_deps = j2wasm_deps,
+            wasm_defs = j2wasm_defines,
             **kwargs
         )
         j2wasm_test(
@@ -49,5 +51,6 @@ def j2cl_multi_test(name, test_class, deps, enable_wasm = True, **kwargs):
             test_class = test_class,
             runtime_deps = j2wasm_deps,
             optimize = 1,
+            wasm_defs = j2wasm_defines,
             **kwargs
         )
