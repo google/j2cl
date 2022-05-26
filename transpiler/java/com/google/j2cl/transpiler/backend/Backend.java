@@ -110,7 +110,6 @@ import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNonFinalVariablesKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
-import com.google.j2cl.transpiler.passes.NormalizePrimaryConstructors;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
@@ -162,8 +161,7 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           ResolveImplicitInstanceQualifiers::new,
-          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
-          NormalizePrimaryConstructors::new);
+          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true));
     }
 
     @Override
@@ -294,8 +292,7 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           ResolveImplicitInstanceQualifiers::new,
-          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
-          NormalizePrimaryConstructors::new);
+          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false));
     }
 
     @Override
