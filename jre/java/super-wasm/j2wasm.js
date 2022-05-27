@@ -84,6 +84,13 @@ function createImportObject(userImports) {
     'parseFloat': parseFloat,
     'performance.now': () => performance.now(),
 
+    // Regex
+    'RegExp.create': (/** string */ p, /** string */ f) => new RegExp(p, f),
+    'RegExp.setLastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex = i,
+    'RegExp.exec': (/** !RegExp */ r, /** string */ s) => r.exec(s),
+    'RegExp.test': (/** !RegExp */ r, /** string */ s) => r.test(s),
+    'RegExpResult.index': (/** !RegExpResult */ r) => r.index,
+
     // Utilites to interop strings and arrays. From String.java.
     'getLength': s => s.length,
     'getCharAt': (s, i) => s.charCodeAt(i),
