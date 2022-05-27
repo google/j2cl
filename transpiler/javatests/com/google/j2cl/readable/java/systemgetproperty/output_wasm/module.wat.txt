@@ -1,4 +1,6 @@
 ;;; Code for systemgetproperty.Main [static fields]
+(global $f_property__systemgetproperty_Main_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_propertyWithDefault__systemgetproperty_Main_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (global $f_$initialized__systemgetproperty_Main (mut i32) (i32.const 0))
 
 ;;; Code for systemgetproperty.Main [vtable.init]
@@ -68,7 +70,6 @@
  ;;@ systemgetproperty/Main.java:24:21
  (local $x i32)
  (local $$qualifier (ref null $java.lang.String))
- (local $$qualifier_1 (ref null $java.lang.String))
  (block
   ;; systemgetproperty.Main.$clinit();
   ;;@ systemgetproperty/Main.java:24:41
@@ -76,35 +77,32 @@
   ;; boolean x;
   ;;@ systemgetproperty/Main.java:25:4
   
-  ;; (x = true);
+  ;; (x = (systemgetproperty.Main.property == javaemul.internal.StringPool.$getString_|SIMPLE|()));
   ;;@ systemgetproperty/Main.java:26:4
-  (local.set $x (i32.const 1))
-  ;; (x = true);
+  (local.set $x (ref.eq (global.get $f_property__systemgetproperty_Main_) (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )))
+  ;; (x = systemgetproperty.Main.property.equals(javaemul.internal.StringPool.$getString_|SIMPLE|()));
   ;;@ systemgetproperty/Main.java:27:4
-  (local.set $x (i32.const 1))
-  ;; (x = (String $qualifier = javaemul.internal.StringPool.$getString_|SIMPLE|(),$qualifier.equalsIgnoreCase(javaemul.internal.StringPool.$getString_|SIMPLE|())));
+  (local.set $x (call_ref (ref.as_non_null (global.get $f_property__systemgetproperty_Main_))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(global.get $f_property__systemgetproperty_Main_)))))
+  ;; (x = systemgetproperty.Main.property.equalsIgnoreCase(javaemul.internal.StringPool.$getString_|SIMPLE|()));
   ;;@ systemgetproperty/Main.java:28:4
-  (local.set $x (block (result i32)
-   (local.set $$qualifier (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
-  ))
-  ;; (x = false);
+  (local.set $x (call_ref (ref.as_non_null (global.get $f_property__systemgetproperty_Main_))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equalsIgnoreCase__java_lang_String__boolean (struct.get $java.lang.String $vtable(global.get $f_property__systemgetproperty_Main_)))))
+  ;; (x = (systemgetproperty.Main.property == javaemul.internal.StringPool.$getString_|NOTSIMPLE|()));
   ;;@ systemgetproperty/Main.java:29:4
-  (local.set $x (i32.const 0))
-  ;; (x = true);
+  (local.set $x (ref.eq (global.get $f_property__systemgetproperty_Main_) (call $function.no.side.effects.$getString_|NOTSIMPLE|__java_lang_String (ref.func $$getString_|NOTSIMPLE|__java_lang_String@javaemul.internal.StringPool) )))
+  ;; (x = systemgetproperty.Main.propertyWithDefault.equals(javaemul.internal.StringPool.$getString_|SIMPLE|()));
   ;;@ systemgetproperty/Main.java:31:4
-  (local.set $x (i32.const 1))
+  (local.set $x (call_ref (ref.as_non_null (global.get $f_propertyWithDefault__systemgetproperty_Main_))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(global.get $f_propertyWithDefault__systemgetproperty_Main_)))))
   ;; (x = true);
   ;;@ systemgetproperty/Main.java:32:4
   (local.set $x (i32.const 1))
   ;; (x = (String $qualifier = (systemgetproperty.Main.mightHaveSideEffects(),javaemul.internal.StringPool.$getString_|SIMPLE|()),$qualifier.equals(javaemul.internal.StringPool.$getString_|SIMPLE|())));
   ;;@ systemgetproperty/Main.java:33:4
   (local.set $x (block (result i32)
-   (local.set $$qualifier_1 (block (result (ref null $java.lang.String))
+   (local.set $$qualifier (block (result (ref null $java.lang.String))
     (drop (call $m_mightHaveSideEffects__java_lang_String@systemgetproperty.Main ))
     (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )
    ))
-   (call_ref (ref.as_non_null (local.get $$qualifier_1))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier_1))))
+   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(local.get $$qualifier))))
   ))
  )
 )
@@ -139,6 +137,15 @@
   ;; java.lang.Object.$clinit();
   ;;@ systemgetproperty/Main.java:18:13
   (call $$clinit__void@java.lang.Object )
+  ;; (systemgetproperty.Main.property = javaemul.internal.StringPool.$getString_|SIMPLE|());
+  ;;@ systemgetproperty/Main.java:20:2
+  (global.set $f_property__systemgetproperty_Main_ (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) ))
+  ;; (systemgetproperty.Main.propertyWithDefault = (javaemul.internal.StringPool.$getString_|default|(),javaemul.internal.StringPool.$getString_|SIMPLE|()));
+  ;;@ systemgetproperty/Main.java:21:2
+  (global.set $f_propertyWithDefault__systemgetproperty_Main_ (block (result (ref null $java.lang.String))
+   (drop (call $function.no.side.effects.$getString_|default|__java_lang_String (ref.func $$getString_|default|__java_lang_String@javaemul.internal.StringPool) ))
+   (call $function.no.side.effects.$getString_|SIMPLE|__java_lang_String (ref.func $$getString_|SIMPLE|__java_lang_String@javaemul.internal.StringPool) )
+  ))
  )
 )
 
