@@ -371,6 +371,10 @@ public class StringTest extends GWTTestCase {
     assertTrue(hideFromCompiler("").equalsIgnoreCase(""));
     assertFalse(hideFromCompiler("").equalsIgnoreCase(null));
 
+    assertTrue(hideFromCompiler("ß").equalsIgnoreCase("ß"));
+    assertFalse(hideFromCompiler("ß").equalsIgnoreCase("ss"));
+    assertFalse(hideFromCompiler("ß").equalsIgnoreCase("SS"));
+
     try {
       returnNull().equalsIgnoreCase("other");
       fail();
@@ -384,6 +388,12 @@ public class StringTest extends GWTTestCase {
     } catch (NullPointerException e) {
       // expected
     }
+  }
+
+  public void testEqualsIgnoreCaseNonAscii() {
+    assertTrue(
+        hideFromCompiler("ö=>Ö, ç=>Ç, ş=>Ş, ğ=>Ğ, ü=>Ü, ı")
+            .equalsIgnoreCase("Ö=>ö, Ç=>ç, Ş=>ş, Ğ=>ğ, Ü=>ü, ı")); // a.k.a "Turkey Test"
   }
 
   public void testGetBytesAscii() {
@@ -549,6 +559,10 @@ public class StringTest extends GWTTestCase {
     assertEquals("abc", hideFromCompiler("AbC").toLowerCase(Locale.getDefault()));
     assertEquals("abc", hideFromCompiler("abc").toLowerCase(Locale.getDefault()));
     assertEquals("", hideFromCompiler("").toLowerCase(Locale.getDefault()));
+  }
+
+  public void testLowerCaseNonAscii() {
+    assertEquals("öçşğü", hideFromCompiler("ÖÇŞĞÜ").toLowerCase()); // a.k.a "Turkey Test"
   }
 
   public void testMatch() {
@@ -852,6 +866,10 @@ public class StringTest extends GWTTestCase {
     assertEquals("ABC", hideFromCompiler("AbC").toUpperCase(Locale.getDefault()));
     assertEquals("ABC", hideFromCompiler("abc").toUpperCase(Locale.getDefault()));
     assertEquals("", hideFromCompiler("").toUpperCase(Locale.getDefault()));
+  }
+
+  public void testUpperCaseNonAscii() {
+    assertEquals("ÖÇŞĞÜ", hideFromCompiler("öçşğü").toUpperCase()); // a.k.a "Turkey Test"
   }
 
   /*
