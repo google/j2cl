@@ -44,6 +44,11 @@ review. We use GitHub pull requests for this purpose.
 - Running `j2` in the shell will show the available commands for J2CL
 development.
 
+**Note:** `j2` script is not ported for open-source development yet. However
+you can still test your contributions by running particular integration tests
+using `bazel test <target>`. You can also run `./build_test.sh CI` script to
+test againt full test suite available in the open-source repo.
+
 
 ### Working with the codebase
 
