@@ -27,16 +27,9 @@ open class InstanceQualifiers {
    instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
    instancequalifieronstaticfield.InstanceQualifiers.staticField = 300
+   i = instancequalifieronstaticfield.InstanceQualifiers.staticField
+   i = instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
    i = kotlin.run {
-    main
-    instancequalifieronstaticfield.InstanceQualifiers.staticField
-   }
-   i = kotlin.run {
-    main
-    instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
-   }
-   i = kotlin.run {
-    main
     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
     instancequalifieronstaticfield.InstanceQualifiers.staticField
    }
@@ -46,7 +39,6 @@ open class InstanceQualifiers {
    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
    instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + kotlin.run {
-    main
     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
     instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()

@@ -291,22 +291,18 @@
   ;; String fooInstanceMethod = ((String) topLevel.instanceMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:32:4
   (local.set $fooInstanceMethod (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $topLevel))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.NativeTopLevel.vtable $m_instanceMethod__java_lang_Object__java_lang_Object (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel))))))
-  ;; String fooStaticMethod = ((String) (topLevel,nativekttypes.NativeTopLevel.staticMethod(javaemul.internal.StringPool.$getString_|foo|())));
+  ;; String fooStaticMethod = ((String) nativekttypes.NativeTopLevel.staticMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:33:4
-  (local.set $fooStaticMethod (ref.cast_static $java.lang.String (block (result (ref null $java.lang.Object))
-   (drop (local.get $topLevel))
-   (call $m_staticMethod__java_lang_Object__java_lang_Object@nativekttypes.NativeTopLevel (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
-  )))
+  (local.set $fooStaticMethod (ref.cast_static $java.lang.String (call $m_staticMethod__java_lang_Object__java_lang_Object@nativekttypes.NativeTopLevel (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))))
   ;; String fooInstanceField = ((String) topLevel.instanceField);
   ;;@ nativekttypes/Main.java:34:4
   (local.set $fooInstanceField (ref.cast_static $java.lang.String (struct.get $nativekttypes.NativeTopLevel $f_instanceField__nativekttypes_NativeTopLevel(local.get $topLevel))))
   ;; (topLevel.instanceField = javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:35:4
   (struct.set $nativekttypes.NativeTopLevel $f_instanceField__nativekttypes_NativeTopLevel(local.get $topLevel) (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; Object fooStaticField = (topLevel,nativekttypes.NativeTopLevel.$clinit(),nativekttypes.NativeTopLevel.staticField);
+  ;; Object fooStaticField = (nativekttypes.NativeTopLevel.$clinit(),nativekttypes.NativeTopLevel.staticField);
   ;;@ nativekttypes/Main.java:36:4
   (local.set $fooStaticField (block (result (ref null $java.lang.Object))
-   (drop (local.get $topLevel))
    (call $$clinit__void@nativekttypes.NativeTopLevel )
    (global.get $f_staticField__nativekttypes_NativeTopLevel)
   ))
@@ -348,22 +344,18 @@
   ;; String nestedInstanceMethod = ((String) nested.instanceMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:48:4
   (local.set $nestedInstanceMethod (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nested))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.NativeTopLevel.Nested.vtable $m_instanceMethod__java_lang_Object__java_lang_Object (struct.get $nativekttypes.NativeTopLevel.Nested $vtable(local.get $nested))))))
-  ;; String nestedStaticMethod = ((String) (nested,nativekttypes.NativeTopLevel.Nested.staticMethod(javaemul.internal.StringPool.$getString_|foo|())));
+  ;; String nestedStaticMethod = ((String) nativekttypes.NativeTopLevel.Nested.staticMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:49:4
-  (local.set $nestedStaticMethod (ref.cast_static $java.lang.String (block (result (ref null $java.lang.Object))
-   (drop (local.get $nested))
-   (call $m_staticMethod__java_lang_Object__java_lang_Object@nativekttypes.NativeTopLevel.Nested (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
-  )))
+  (local.set $nestedStaticMethod (ref.cast_static $java.lang.String (call $m_staticMethod__java_lang_Object__java_lang_Object@nativekttypes.NativeTopLevel.Nested (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))))
   ;; String nestedInstanceField = ((String) nested.instanceField);
   ;;@ nativekttypes/Main.java:50:4
   (local.set $nestedInstanceField (ref.cast_static $java.lang.String (struct.get $nativekttypes.NativeTopLevel.Nested $f_instanceField__nativekttypes_NativeTopLevel_Nested(local.get $nested))))
   ;; (nested.instanceField = javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:51:4
   (struct.set $nativekttypes.NativeTopLevel.Nested $f_instanceField__nativekttypes_NativeTopLevel_Nested(local.get $nested) (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; Object nestedStaticField = (nested,nativekttypes.NativeTopLevel.Nested.$clinit(),nativekttypes.NativeTopLevel.Nested.staticField);
+  ;; Object nestedStaticField = (nativekttypes.NativeTopLevel.Nested.$clinit(),nativekttypes.NativeTopLevel.Nested.staticField);
   ;;@ nativekttypes/Main.java:52:4
   (local.set $nestedStaticField (block (result (ref null $java.lang.Object))
-   (drop (local.get $nested))
    (call $$clinit__void@nativekttypes.NativeTopLevel.Nested )
    (global.get $f_staticField__nativekttypes_NativeTopLevel_Nested)
   ))

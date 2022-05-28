@@ -78,12 +78,9 @@
  (local $n (ref null $java.lang.String))
  (local $c (ref null $java.lang.Class))
  (block
-  ;; boolean b = (CompileTimeConstant.this,true);
+  ;; boolean b = true;
   ;;@ compiletimeconstant/CompileTimeConstant.java:54:4
-  (local.set $b (block (result i32)
-   (drop (local.get $this))
-   (i32.const 1)
-  ))
+  (local.set $b (i32.const 1))
   ;; String s = javaemul.internal.StringPool.$getString_|10000Tur_tle...|();
   ;;@ compiletimeconstant/CompileTimeConstant.java:55:4
   (local.set $s (call $function.no.side.effects.$getString_|10000Tur_tle...|__java_lang_String (ref.func $$getString_|10000Tur_tle...|__java_lang_String@javaemul.internal.StringPool) ))

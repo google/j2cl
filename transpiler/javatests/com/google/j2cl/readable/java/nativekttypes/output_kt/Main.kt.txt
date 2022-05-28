@@ -15,16 +15,10 @@ open class Main {
  open fun memberAccess() {
   val topLevel: nativekttypes.nativekt.KTopLevel<kotlin.String?>? = nativekttypes.nativekt.KTopLevel<kotlin.String?>("foo")
   val fooInstanceMethod: kotlin.String? = topLevel!!.instanceMethod("foo")
-  val fooStaticMethod: kotlin.String? = kotlin.run {
-   topLevel
-   nativekttypes.nativekt.KTopLevel.staticMethod("foo")
-  }
+  val fooStaticMethod: kotlin.String? = nativekttypes.nativekt.KTopLevel.staticMethod("foo")
   val fooInstanceField: kotlin.String? = topLevel!!.instanceField
   topLevel!!.instanceField = "foo"
-  val fooStaticField: kotlin.Any? = kotlin.run {
-   topLevel
-   nativekttypes.nativekt.KTopLevel.staticField
-  }
+  val fooStaticField: kotlin.Any? = nativekttypes.nativekt.KTopLevel.staticField
   nativekttypes.nativekt.KTopLevel.staticField = "foo"
   val i1: kotlin.Int = topLevel!!.renamedField
   val i2: kotlin.Int = topLevel!!.renamedMethod()
@@ -36,16 +30,10 @@ open class Main {
   val i8: kotlin.Int = topLevel!!.getstartingmethodAsProperty
   val nested: nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>? = nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>("foo")
   val nestedInstanceMethod: kotlin.String? = nested!!.instanceMethod("foo")
-  val nestedStaticMethod: kotlin.String? = kotlin.run {
-   nested
-   nativekttypes.nativekt.KTopLevel.KNested.staticMethod("foo")
-  }
+  val nestedStaticMethod: kotlin.String? = nativekttypes.nativekt.KTopLevel.KNested.staticMethod("foo")
   val nestedInstanceField: kotlin.String? = nested!!.instanceField
   nested!!.instanceField = "foo"
-  val nestedStaticField: kotlin.Any? = kotlin.run {
-   nested
-   nativekttypes.nativekt.KTopLevel.KNested.staticField
-  }
+  val nestedStaticField: kotlin.Any? = nativekttypes.nativekt.KTopLevel.KNested.staticField
   nativekttypes.nativekt.KTopLevel.KNested.staticField = "foo"
   val inner: nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>? = topLevel!!.KInner<kotlin.String?>("foo")
   val subclass: nativekttypes.Subclass<kotlin.String?>? = nativekttypes.Subclass<kotlin.String?>("foo")

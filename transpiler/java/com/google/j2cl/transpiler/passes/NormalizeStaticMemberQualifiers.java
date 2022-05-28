@@ -18,18 +18,13 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.MemberReference;
-import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 
 /**
- * Rewrites strange field or method accesses of the form "instance.staticField" to the more normal
- * and legal-in-JS form "SomeClass.staticField".
- *
- * <p>Sometimes the instance qualifier is more complicated and may contain a side effect that needs
- * to be preserved. So we'll sometimes rewrite "getInstance().staticField" to "(getInstance(),
- * SomeClass.staticField)".
+ * Rewrites field or method accesses of the form "instance.staticField" or "instance.staticMethod()"
+ * to a multiexpression "(instance, SomeClass.staticField)" or (instance, SomeClass.staticMethod())"
+ * since J2CL keeps the invariant that static member accesses are never qualified by an expression.
  */
 public class NormalizeStaticMemberQualifiers extends NormalizationPass {
   @Override
@@ -37,48 +32,25 @@ public class NormalizeStaticMemberQualifiers extends NormalizationPass {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
-            // If the access is of the very strange form "instance.staticField" then remove
-            // the qualifier so that it is logically a "SomeClass.staticField".
-            if (isStaticMemberReferenceWithInstanceQualifier(fieldAccess)) {
-              return MultiExpression.newBuilder()
-                  .setExpressions(
-                      fieldAccess.getQualifier(), // Preserve side effects.
-                      FieldAccess.Builder.from(fieldAccess.getTarget())
-                          .setQualifier(null) // Static dispatch.
-                          .build())
-                  .build();
+          public Expression rewriteMemberReference(MemberReference memberReference) {
+            // If this is a static member referece, split the evaluation of the qualifier to
+            // preserve
+            // potential side effects.
+            if (isStaticMemberReferenceWithInstanceQualifier(memberReference)) {
+              MultiExpression.Builder multiExpressionBuilder = new MultiExpression.Builder();
+              if (memberReference.getQualifier().hasSideEffects()) {
+                multiExpressionBuilder.addExpressions(memberReference.getQualifier());
+              }
+              multiExpressionBuilder.addExpressions(
+                  MemberReference.Builder.from(memberReference).setQualifier(null).build());
+              return multiExpressionBuilder.build();
             }
-            return fieldAccess;
-          }
-
-          @Override
-          public Expression rewriteMethodCall(MethodCall methodCall) {
-            // If the access is of the very strange form "instance.staticMethod()" then remove the
-            // qualifier so that it is logically a "SomeClass.staticMethod()".
-            if (isStaticMemberReferenceWithInstanceQualifier(methodCall)) {
-              return MultiExpression.newBuilder()
-                  .setExpressions(
-                      methodCall.getQualifier(), // Preserve side effects.
-                      MethodCall.Builder.from(methodCall)
-                          .setQualifier(null) // Static dispatch.
-                          .build())
-                  .build();
-            }
-            return methodCall;
+            return memberReference;
           }
         });
   }
 
-  /**
-   * Returns whether the member reference is statically accessed on a instance for example:
-   *
-   * <p>new Instance().staticField;
-   *
-   * <p>or
-   *
-   * <p>new Instance().staticMethod();
-   */
+  /*** Returns true if a member reference to a static member is qualified by an expression.  */
   private static boolean isStaticMemberReferenceWithInstanceQualifier(Expression expression) {
     if (!(expression instanceof MemberReference)) {
       return false;
