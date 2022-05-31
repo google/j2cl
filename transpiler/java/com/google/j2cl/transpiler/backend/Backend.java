@@ -70,7 +70,7 @@ import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnType
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
-import com.google.j2cl.transpiler.passes.J2KtRestrictionsChecker;
+import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.MakeFieldsFinal;
 import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
@@ -395,7 +395,7 @@ public enum Backend {
 
     @Override
     public void checkRestrictions(BackendOptions options, Library library, Problems problems) {
-      J2KtRestrictionsChecker.check(library, problems);
+      J2ktRestrictionsChecker.check(library, problems);
     }
 
     @Override

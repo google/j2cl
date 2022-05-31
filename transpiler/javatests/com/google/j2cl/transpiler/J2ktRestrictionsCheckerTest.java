@@ -15,15 +15,20 @@
  */
 package com.google.j2cl.transpiler;
 
-import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 
 import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 import junit.framework.TestCase;
 
-/** Tests for J2KtRestrictionsChecker. */
-public class J2KtRestrictionsCheckerTest extends TestCase {
+/** Tests for J2ktRestrictionsChecker. */
+public class J2ktRestrictionsCheckerTest extends TestCase {
   public void testEmptyClass() {
     assertTranspileSucceeds("test.Empty", "class Empty {}");
+  }
+
+  public void testGenericConstructorFails() {
+    assertTranspileFails("test.Main", "class Main {", "  <T> Main(T t) {}", "}")
+        .assertErrorsWithSourcePosition(
+            "Error:Main.java:3: Constructor 'Main(T t)' cannot declare type variables.");
   }
 
   private TranspileResult assertTranspileSucceeds(String compilationUnitName, String... code) {
@@ -35,7 +40,7 @@ public class J2KtRestrictionsCheckerTest extends TestCase {
   }
 
   private TranspilerTester newTranspilerTester(String compilationUnitName, String... code) {
-    return newTesterWithDefaults()
+    return TranspilerTester.newTesterWithDefaults()
         .addArgs("-backend", "KOTLIN")
         .addCompilationUnit(compilationUnitName, code);
   }

@@ -63,8 +63,8 @@ java_test(
 )
 
 java_test(
-    name = "J2KtRestrictionsCheckerTest",
-    srcs = ["J2KtRestrictionsCheckerTest.java"],
+    name = "J2ktRestrictionsCheckerTest",
+    srcs = ["J2ktRestrictionsCheckerTest.java"],
     data = [":jre_bundle_deploy.jar"],
     deps = [
         ":TranspilerTester",

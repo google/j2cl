@@ -18,19 +18,30 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Library;
+import com.google.j2cl.transpiler.ast.Method;
 
 /** Checks and throws errors for constructs which can not be transpiled to Kotlin. */
-public final class J2KtRestrictionsChecker {
-  private J2KtRestrictionsChecker() {}
+public final class J2ktRestrictionsChecker {
+  private J2ktRestrictionsChecker() {}
 
   public static void check(Library library, Problems problems) {
-    library
-        .getCompilationUnits()
-        .forEach(
-            compilationUnit ->
-                compilationUnit.accept(
-                    new AbstractVisitor() {
-                      // TODO(b/230443726): Implement node restrictions.
-                    }));
+    library.accept(
+        new AbstractVisitor() {
+          @Override
+          public boolean enterMethod(Method method) {
+            checkMethod(method, problems);
+            return true;
+          }
+        });
+  }
+
+  private static void checkMethod(Method method, Problems problems) {
+    if (method.isConstructor()
+        && !method.getDescriptor().getTypeParameterTypeDescriptors().isEmpty()) {
+      problems.error(
+          method.getSourcePosition(),
+          "Constructor '%s' cannot declare type variables.",
+          method.getReadableDescription());
+    }
   }
 }

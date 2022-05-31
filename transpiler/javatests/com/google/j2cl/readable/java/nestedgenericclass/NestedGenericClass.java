@@ -20,9 +20,6 @@ public class NestedGenericClass<T> {
   public class A<T> {
     public class B<T> {
       B() {}
-
-      // constructor with a type variable
-      <U> B(U u) {}
     }
   }
 
