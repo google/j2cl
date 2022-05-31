@@ -84,7 +84,7 @@ def is_spam(line):
 def gather_closure_warnings(build_log):
   """Gather Closure compiler warnings."""
 
-  compiling_javascript_prefix = "From Compiling JavaScript for "
+  compiling_javascript_prefix = "From Compiling JavaScript for checks "
   build_logs = build_log.split("INFO: ")
   build_logs = [
       build_log[len(compiling_javascript_prefix):]
