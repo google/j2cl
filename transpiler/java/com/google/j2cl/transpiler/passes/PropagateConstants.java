@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -83,10 +84,12 @@ public class PropagateConstants extends LibraryNormalizationPass {
 
   private static boolean isCompileTimeConstant(Field field) {
     return field.isCompileTimeConstant()
-        // Consider final static fields that are initialized to a TypeLiteral to be compile time
-        // constants to ensure removal of clinits in some of the JRE classes.
+        // Consider final static fields that are initialized to literals to be compile time
+        // constants. These might be driven from TypeLiterals or System.getProperty calls and it
+        // ensures removal of clinits in some of the JRE classes.
         || (field.getDescriptor().isFinal()
             && field.isStatic()
-            && field.getInitializer() instanceof TypeLiteral);
+            && (field.getInitializer() instanceof TypeLiteral
+                || field.getInitializer() instanceof StringLiteral));
   }
 }
