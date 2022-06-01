@@ -78,6 +78,11 @@ public class BooleanTest extends GWTTestCase {
     assertFalse(Boolean.valueOf(false4));
   }
 
+  public void testConstants() {
+    assertSame(Boolean.FALSE, Boolean.FALSE);
+    assertSame(Boolean.TRUE, Boolean.TRUE);
+  }
+
   public void testNPE() {
    Boolean b = Math.random() < 0 ? Boolean.TRUE : null;
     try {
