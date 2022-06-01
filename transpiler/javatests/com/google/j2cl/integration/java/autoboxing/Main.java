@@ -52,6 +52,7 @@ public class Main {
     testUnbox_conditionals();
     testUnbox_switchExpression();
     testAutoboxing_arithmetic();
+    testAutoboxing_equals();
     testAutoboxing_ternary();
     testAutoboxing_casts();
     testAutoboxing_arrayExpressions();
@@ -501,6 +502,28 @@ public class Main {
       b++;
     }
     assertTrue(b == -55);
+  }
+
+  private static void testAutoboxing_equals() {
+    double zero = 0.0;
+    double minusZero = -0.0;
+    Double boxedZero = zero;
+    Double boxedMinusZero = minusZero;
+    Object asObjectZero = boxedZero;
+    Object asObjectMinusZero = boxedMinusZero;
+
+    // Unboxing semantics.
+    assertTrue(zero == minusZero);
+    assertTrue(minusZero == zero);
+    assertTrue(boxedZero == minusZero);
+    assertTrue(zero == boxedMinusZero);
+
+    // Object semantics.
+    assertTrue(boxedZero != boxedMinusZero);
+    assertTrue(asObjectZero != asObjectMinusZero);
+
+    // Explicit unboxing.
+    assertTrue(((double) asObjectZero) == (double) asObjectMinusZero);
   }
 
   private static void testAutoboxing_ternary() {
