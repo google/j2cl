@@ -34,7 +34,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -210,8 +209,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   @Override
   public abstract boolean isConstructor();
-
-  public abstract boolean isPrimaryConstructor();
 
   public boolean isVarargs() {
     return getParameterDescriptors().stream().anyMatch(ParameterDescriptor::isVarargs);
@@ -672,7 +669,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setKtInfo(KtInfo.NONE)
         .setAbstract(false)
         .setConstructor(false)
-        .setPrimaryConstructor(false)
         .setDefaultMethod(false)
         .setNative(false)
         .setStatic(false)
@@ -686,6 +682,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setSideEffectFree(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(ImmutableList.of())
+        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setTypeParameterTypeDescriptors(ImmutableList.of())
         .setTypeArgumentTypeDescriptors(ImmutableList.of());
   }
@@ -896,8 +893,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setConstructor(boolean isConstructor);
 
-    public abstract Builder setPrimaryConstructor(boolean isPrimaryConstructor);
-
     public abstract Builder setAbstract(boolean isAbstract);
 
     public abstract Builder setFinal(boolean isFinal);
@@ -1049,35 +1044,19 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     abstract boolean isConstructor();
 
-    abstract Optional<String> getName();
+    abstract String getName();
 
     abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
-    abstract Optional<TypeDescriptor> getReturnTypeDescriptor();
+    abstract TypeDescriptor getReturnTypeDescriptor();
 
     abstract MethodDescriptor autoBuild();
 
     public MethodDescriptor build() {
       if (isConstructor()) {
-        // Constructors have a constant name <init>.
-        checkState(!getName().isPresent() || getName().get().equals(CONSTRUCTOR_METHOD_NAME));
-        checkState(
-            !getReturnTypeDescriptor().isPresent()
-                || getReturnTypeDescriptor().get().isSameBaseType(getEnclosingTypeDescriptor()));
-
+        setReturnTypeDescriptor(getEnclosingTypeDescriptor().toNonNullable());
         setName(CONSTRUCTOR_METHOD_NAME);
-      } else {
-        setPrimaryConstructor(false);
       }
-
-      if (!getReturnTypeDescriptor().isPresent()) {
-        // The default return type for constructors is their enclosing type and void for everything
-        // else.
-        setReturnTypeDescriptor(
-            isConstructor() ? getEnclosingTypeDescriptor().toNonNullable() : PrimitiveTypes.VOID);
-      }
-
-      checkState(getName().isPresent());
 
       MethodDescriptor methodDescriptor = autoBuild();
 

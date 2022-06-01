@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.MoreCollectors.toOptional;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Predicates;
@@ -310,13 +309,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return getMethods().stream()
         .filter(m -> m.isConstructor() && m.getParameters().isEmpty())
         .findFirst()
-        .orElse(null);
-  }
-
-  public Method getPrimaryConstructor() {
-    return getConstructors().stream()
-        .filter(Method::isPrimaryConstructor)
-        .collect(toOptional())
         .orElse(null);
   }
 
