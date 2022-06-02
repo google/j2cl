@@ -482,9 +482,9 @@
  (local $$qualifier_1 (ref null $java.lang.Integer))
  (local $$value_2 (ref null $java.lang.Integer))
  (local $ref (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
- (local $$qualifier_2 (ref null $java.lang.Integer))
+ (local $$qualifier_2 (ref null $java.lang.Byte))
  (local $n i32)
- (local $$qualifier_3 (ref null $java.lang.Integer))
+ (local $$qualifier_3 (ref null $java.lang.Byte))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast_static $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped)))
  (block
@@ -576,20 +576,20 @@
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:154:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1)))))
   )
-  ;; Ref<Integer> ref = null;
+  ;; Ref<Byte> ref = null;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:160:4
   (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
-  ;; (ref.field = java.lang.Integer.valueOf(((Integer $qualifier = ((Integer) ref.field),$qualifier.intValue()) + 1)));
+  ;; (ref.field = java.lang.Byte.valueOf(javaemul.internal.Primitives.narrowIntToByte(((Byte $qualifier = ((Byte) ref.field),$qualifier.byteValue()) + 1))));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:161:4
-  (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (block (result i32)
-   (local.set $$qualifier_2 (ref.cast_static $java.lang.Integer (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref))))
-   (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_2))))
-  ) (i32.const 1))))
-  ;; int n = (1 + (Integer $qualifier = ((Integer) ref.field),$qualifier.intValue()));
+  (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref) (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.extend8_s (i32.add (block (result i32)
+   (local.set $$qualifier_2 (ref.cast_static $java.lang.Byte (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref))))
+   (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $$qualifier_2))))
+  ) (i32.const 1)))))
+  ;; int n = (1 + (Byte $qualifier = ((Byte) ref.field),$qualifier.byteValue()));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:162:4
   (local.set $n (i32.add (i32.const 1) (block (result i32)
-   (local.set $$qualifier_3 (ref.cast_static $java.lang.Integer (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref))))
-   (call_ref (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_3))))
+   (local.set $$qualifier_3 (ref.cast_static $java.lang.Byte (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref))))
+   (call_ref (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $$qualifier_3))))
   )))
  )
 )

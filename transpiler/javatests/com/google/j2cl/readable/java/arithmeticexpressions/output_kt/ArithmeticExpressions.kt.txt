@@ -214,9 +214,9 @@ open class ArithmeticExpressions {
   open class `$1Ref`<T> {
    @kotlin.jvm.JvmField var field: T? = null
   }
-  val ref: `$1Ref`<kotlin.Int?>? = null
-  ref!!.field = kotlin.Int.valueOf(ref!!.field!!.toInt() + 1)
-  val n: kotlin.Int = 1 + ref!!.field!!.toInt()
+  val ref: `$1Ref`<kotlin.Byte?>? = null
+  ref!!.field = kotlin.Byte.valueOf((ref!!.field!!.toByte().toInt() + 1).toByte())
+  val n: kotlin.Int = 1 + ref!!.field!!.toByte().toInt()
  }
 
  @kotlin.jvm.JvmField var intField: kotlin.Long = 0L

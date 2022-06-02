@@ -157,7 +157,7 @@ public class ArithmeticExpressions {
       T field;
     }
 
-    Ref<Integer> ref = null;
+    Ref<Byte> ref = null;
     ref.field++;
     int n = 1 + ref.field;
   }
