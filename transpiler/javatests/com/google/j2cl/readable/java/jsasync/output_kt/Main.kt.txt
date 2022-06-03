@@ -20,17 +20,19 @@ open class Main {
  }
 
  open fun testAsyncLambdas() {
-  val i: jsasync.Main.AsyncInterface? = jsasync.Main.AsyncInterface (fun(): jsasync.Main.IThenable<kotlin.Int?>? {
-   return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(kotlin.Int.valueOf(5))))
-  })
+  val i: jsasync.Main.AsyncInterface? = jsasync.Main.AsyncInterface {
+
+   return@AsyncInterface jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(kotlin.Int.valueOf(5))))
+  }
   val o: jsasync.Main.BaseInterface? = object : BaseInterface {
    open override fun asyncCall(): jsasync.Main.IThenable<kotlin.Int?>? {
     return jsasync.Main.Promise.resolve(jsasync.Main.await(this@Main.x))
    }
   }
-  val j: jsasync.Main.AsyncJsFunctionInterface? = jsasync.Main.AsyncJsFunctionInterface (fun(): jsasync.Main.IThenable<kotlin.Int?>? {
-   return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(kotlin.Int.valueOf(5))))
-  })
+  val j: jsasync.Main.AsyncJsFunctionInterface? = jsasync.Main.AsyncJsFunctionInterface {
+
+   return@AsyncJsFunctionInterface jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(kotlin.Int.valueOf(5))))
+  }
   val optimizableJsFunction: jsasync.Main.JsFunctionInterface? = object : JsFunctionInterface {
    open override fun doSomething(): jsasync.Main.IThenable<kotlin.Int?>? {
     return jsasync.Main.Promise.resolve(kotlin.Int.valueOf(5))

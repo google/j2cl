@@ -24,22 +24,24 @@ open class MixedNestings {
     open fun b(): kotlin.Int {
      val i: mixednestings.MyInterface? = object : MyInterface {
       open override fun `fun`(a: kotlin.Int): kotlin.Int {
-       val ii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(n: kotlin.Int): kotlin.Int {
+       val ii: mixednestings.MyInterface? = mixednestings.MyInterface { n: kotlin.Int ->
+
         this@MixedNestings.mm()
         this@A.aa()
         this@`$1B`.bb()
-        val iii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(m: kotlin.Int): kotlin.Int {
+        val iii: mixednestings.MyInterface? = mixednestings.MyInterface { m: kotlin.Int ->
+
          this@MixedNestings.mm()
          this@A.aa()
          this@`$1B`.bb()
-         return object : MyInterface {
+         return@MyInterface object : MyInterface {
           open override fun `fun`(b: kotlin.Int): kotlin.Int {
            return b
           }
          }.`fun`(100)
-        })
-        return iii!!.`fun`(200)
-       })
+        }
+        return@MyInterface iii!!.`fun`(200)
+       }
        return ii!!.`fun`(300)
       }
      }

@@ -19,11 +19,12 @@ open class Main {
   return nonFinal_1
  }
 
- @kotlin.jvm.JvmField val fn: parameterassignments.Main.Fn? = parameterassignments.Main.Fn (fun(nonFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int {
+ @kotlin.jvm.JvmField val fn: parameterassignments.Main.Fn? = parameterassignments.Main.Fn { nonFinal: kotlin.Int, implicitFinal: kotlin.Int ->
+
   var nonFinal_1: kotlin.Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
-  return nonFinal_1
- })
+  return@Fn nonFinal_1
+ }
 
  fun interface Fn {
   fun test(nonFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int

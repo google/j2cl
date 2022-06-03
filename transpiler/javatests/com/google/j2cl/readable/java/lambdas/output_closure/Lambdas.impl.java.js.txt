@@ -106,6 +106,22 @@ class Lambdas extends j_l_Object {
    return i;
   });
  }
+ 
+ m_testNestedLambdas__() {
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
+   return this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ j) =>{
+    return j;
+   }), 20);
+  }), 10);
+ }
+ 
+ m_testReturnLabelNameConflictKotlin__() {
+  this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
+   FunctionalInterface: {
+    return i;
+   }
+  }), 10);
+ }
  /** @template T */
  m_testInstanceMethodTypeVariableThroughLambda__() {
   let wrapped = Functional.$adapt((/** Functional<T> */ f) =>{

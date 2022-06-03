@@ -148,6 +148,10 @@ private fun Renderer.renderLocalClassDeclarationStatement(
 
 private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
   render("return")
+  currentReturnLabelIdentifier?.let {
+    render("@")
+    renderIdentifier(it)
+  }
   returnStatement.expression?.let {
     render(" ")
     renderExpression(it)

@@ -29,7 +29,10 @@ class Renderer(
   val sourceBuilder: SourceBuilder,
 
   /** Rendering problems. */
-  val problems: Problems
+  val problems: Problems,
+
+  /** Label to render with the return statement. */
+  var currentReturnLabelIdentifier: String? = null
 ) {
   fun renderNewLine() {
     sourceBuilder.newLine()
@@ -119,5 +122,12 @@ class Renderer(
   fun renderTodo(string: String) {
     render("TODO")
     renderInParentheses { renderExpression(StringLiteral(string)) }
+  }
+
+  fun renderWithReturnLabelIdentifier(labelIdentifier: String?, renderFn: () -> Unit) {
+    val previousReturnLabelIdentifier = currentReturnLabelIdentifier
+    currentReturnLabelIdentifier = labelIdentifier
+    renderFn()
+    currentReturnLabelIdentifier = previousReturnLabelIdentifier
   }
 }

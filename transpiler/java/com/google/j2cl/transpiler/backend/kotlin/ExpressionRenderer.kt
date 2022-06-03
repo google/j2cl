@@ -177,19 +177,18 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
-  renderTypeDescriptor(
-    functionExpression.typeDescriptor.functionalInterface!!.toNonNullable(),
-    TypeDescriptorUsage.SUPER_TYPE
-  )
+  val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!.toNonNullable()
+  renderTypeDescriptor(functionalInterface, TypeDescriptorUsage.SUPER_TYPE)
   render(" ")
-  renderInParentheses {
-    render("fun")
-    renderInParentheses {
-      renderCommaSeparated(functionExpression.parameters) { renderVariable(it) }
+  renderInCurlyBrackets {
+    val parameters = functionExpression.parameters
+    if (parameters.isNotEmpty()) {
+      render(" ")
+      renderCommaSeparated(parameters) { renderVariable(it) }
+      render(" ->")
     }
-    renderMethodReturnType(functionExpression.descriptor)
-    render(" ")
-    renderInCurlyBrackets {
+    renderNewLine()
+    renderWithReturnLabelIdentifier(functionalInterface.simpleSourceName) {
       renderStartingWithNewLines(functionExpression.body.statements) { renderStatement(it) }
     }
   }

@@ -17,7 +17,9 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.OutputUtils
 import com.google.j2cl.common.Problems
+import com.google.j2cl.transpiler.ast.AbstractVisitor
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
@@ -29,7 +31,7 @@ import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniq
  */
 class KotlinGeneratorStage(private val output: OutputUtils.Output, private val problems: Problems) {
   fun generateOutputs(library: Library) {
-    val environment = Environment(library.nameToIdentifierMap)
+    val environment = Environment(library.buildNameToIdentifierMap())
     library.compilationUnits.forEach { generateOutputs(environment, it) }
   }
 
@@ -45,11 +47,24 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 
 private fun String.trimTrailingWhitespaces() = lines().joinToString("\n") { it.trimEnd() }
 
-private val Library.nameToIdentifierMap
-  get() =
-    buildMap<HasName, String> {
-      compilationUnits
-        .stream()
-        .flatMap { it.streamTypes() }
-        .forEach { type -> putAll(computeUniqueNames(emptySet(), type)) }
+private fun Library.buildNameToIdentifierMap(): Map<HasName, String> = buildMap {
+  compilationUnits.forEach { compilationUnit ->
+    val forbiddenNames = compilationUnit.buildForbiddenNamesSet()
+    compilationUnit.streamTypes().forEach { type ->
+      putAll(computeUniqueNames(forbiddenNames, type))
     }
+  }
+}
+
+private fun CompilationUnit.buildForbiddenNamesSet(): Set<String> = buildSet {
+  accept(
+    object : AbstractVisitor() {
+      override fun enterFunctionExpression(functionExpression: FunctionExpression): Boolean {
+        // Functional interface names are forbidden because they are rendered in return statement
+        // labels.
+        add(functionExpression.typeDescriptor.functionalInterface!!.simpleSourceName)
+        return true
+      }
+    }
+  )
+}

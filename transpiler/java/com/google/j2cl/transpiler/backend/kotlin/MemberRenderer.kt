@@ -47,7 +47,11 @@ private fun Renderer.renderMethod(method: Method, kind: Kind) {
     if (!method.isConstructor || statements.isNotEmpty()) {
       render(" ")
       if (method.descriptor.isKtProperty) render("get() ")
-      renderInCurlyBrackets { renderStartingWithNewLines(statements) { renderStatement(it) } }
+      renderInCurlyBrackets {
+        renderWithReturnLabelIdentifier(null) {
+          renderStartingWithNewLines(statements) { renderStatement(it) }
+        }
+      }
     }
   }
 }

@@ -8,9 +8,10 @@ open class Main {
 
  open fun method2(s1: kotlin.String?, d: kotlin.Double?, vararg i: kotlin.Boolean?) {}
 
- @kotlin.jvm.JvmField var f: jsoptional.Main.Function? = jsoptional.Main.Function (fun(s: kotlin.String?, varargs: kotlin.Array<kotlin.Any?>?): kotlin.Any? {
-  return s
- })
+ @kotlin.jvm.JvmField var f: jsoptional.Main.Function? = jsoptional.Main.Function { s: kotlin.String?, varargs: kotlin.Array<kotlin.Any?>? ->
+
+  return@Function s
+ }
 
  constructor(a: kotlin.String?)
 

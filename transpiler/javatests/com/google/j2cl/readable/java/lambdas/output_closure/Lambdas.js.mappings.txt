@@ -83,6 +83,33 @@
 [f] => [f] "f"
 [i] => [i] "i"
 [i] => [return i;] "lambdas.Lambdas.<lambda in testLambdaInStaticContext>"
+[testNestedLambdas] => [m_testNestedLambdas__]
+[call(i -> call(j -> j, 20), 10);] => [this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
+   return this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ j) =>{
+...   }), 20);
+  }), 10);] "lambdas.Lambdas.testNestedLambdas"
+[i] => [i] "i"
+[call(j -> j, 20)] => [return this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ j) =>{
+    return j;
+   }), 20);] "lambdas.Lambdas.<lambda in testNestedLambdas>"
+[j] => [j] "j"
+[j] => [return j;] "lambdas.Lambdas.<lambda in testNestedLambdas>"
+[testReturnLabelNameConflictKotlin] => [m_testReturnLabelNameConflictKotlin__]
+[call(
+        i -> {
+...        },
+        10);] => [this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
+   FunctionalInterface: {
+...   }
+  }), 10);] "lambdas.Lambdas.testReturnLabelNameConflictKotlin"
+[i] => [i] "i"
+[FunctionalInterface:
+          {
+            return i;
+          }] => [FunctionalInterface: {
+    return i;
+   }] "lambdas.Lambdas.<lambda in testReturnLabelNameConflictKotlin>"
+[return i;] => [return i;] "lambdas.Lambdas.<lambda in testReturnLabelNameConflictKotlin>"
 [testInstanceMethodTypeVariableThroughLambda] => [m_testInstanceMethodTypeVariableThroughLambda__]
 [Functional<T> wrapped =
         (f) ->

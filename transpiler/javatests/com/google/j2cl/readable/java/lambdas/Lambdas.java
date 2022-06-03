@@ -80,6 +80,21 @@ public class Lambdas {
     FunctionalInterface f = (i) -> i;
   }
 
+  public void testNestedLambdas() {
+    call(i -> call(j -> j, 20), 10);
+  }
+
+  public void testReturnLabelNameConflictKotlin() {
+    call(
+        i -> {
+          FunctionalInterface:
+          {
+            return i;
+          }
+        },
+        10);
+  }
+
   interface Functional<T> {
     Functional<T> wrap(Functional<T> f);
   }

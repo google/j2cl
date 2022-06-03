@@ -60,16 +60,18 @@ open class IntersectionTypeTest<U> {
 
   @kotlin.jvm.JvmStatic
   fun method(): intersectiontype.Cmp? {
-   return intersectiontype.Cmp (fun(): kotlin.Int {
-    return 1
-   }) as intersectiontype.Cmp? /* & intersectiontype.Serial? */
+   return intersectiontype.Cmp {
+
+    return@Cmp 1
+   } as intersectiontype.Cmp? /* & intersectiontype.Serial? */
   }
 
   @kotlin.jvm.JvmStatic
   fun method2(): intersectiontype.Cmp2<*>? {
-   return intersectiontype.Cmp2<kotlin.Any?> (fun(a: kotlin.Int): kotlin.Int {
-    return 1
-   }) as intersectiontype.Cmp2<*>? /* & intersectiontype.Serial? */
+   return intersectiontype.Cmp2<kotlin.Any?> { a: kotlin.Int ->
+
+    return@Cmp2 1
+   } as intersectiontype.Cmp2<*>? /* & intersectiontype.Serial? */
   }
 
   @kotlin.jvm.JvmStatic
