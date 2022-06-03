@@ -8,5 +8,4 @@ package(licenses = ["notice"])
 integration_test(
     name = "stringescapecodes",
     srcs = glob(["*.java"]),
-    enable_kt = False,
 )

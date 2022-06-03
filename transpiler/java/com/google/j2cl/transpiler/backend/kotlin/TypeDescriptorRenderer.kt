@@ -133,8 +133,10 @@ internal fun Renderer.renderArguments(
       projectBounds = usage == TypeDescriptorUsage.SUPER_TYPE
     )
   if (arguments.isNotEmpty()) {
-    renderInAngleBrackets {
-      renderCommaSeparated(arguments) { renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT) }
+    if (usage != TypeDescriptorUsage.SUPER_TYPE || !arguments.any { it.isInferred }) {
+      renderInAngleBrackets {
+        renderCommaSeparated(arguments) { renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT) }
+      }
     }
   } else if (parameters.isNotEmpty()) {
     renderInAngleBrackets { renderCommaSeparated(parameters) { render("*") } }
@@ -235,3 +237,8 @@ private fun DeclaredTypeDescriptor.renderedTypeArgumentDescriptors(
 // TODO(b/216796920): Remove when the bug is fixed.
 private val DeclaredTypeDescriptor.renderedTypeArgumentDescriptors: List<TypeDescriptor>
   get() = typeArgumentDescriptors.take(typeDeclaration.renderedTypeParameterCount)
+
+internal val TypeDescriptor.isInferred
+  get() =
+    (this is DeclaredTypeDescriptor && this.typeDeclaration.isAnonymous) ||
+      (this is TypeVariable && this.isWildcardOrCapture)

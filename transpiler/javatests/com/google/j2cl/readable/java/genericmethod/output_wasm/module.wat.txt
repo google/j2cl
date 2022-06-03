@@ -575,6 +575,29 @@
  )
 )
 
+;;; void GenericMethod.methodWithBoundTypeVariable()
+(func $m_methodWithBoundTypeVariable__void@genericmethod.GenericMethod
+ ;;@ genericmethod/GenericMethod.java:149:33
+ (block
+  ;; genericmethod.GenericMethod.$clinit();
+  ;;@ genericmethod/GenericMethod.java:149:63
+  (call $$clinit__void@genericmethod.GenericMethod )
+ )
+)
+
+;;; void GenericMethod.testMethodCallsWithCaptureTypeArguments()
+(func $m_testMethodCallsWithCaptureTypeArguments__void@genericmethod.GenericMethod
+ ;;@ genericmethod/GenericMethod.java:151:14
+ (block
+  ;; genericmethod.GenericMethod.$clinit();
+  ;;@ genericmethod/GenericMethod.java:151:56
+  (call $$clinit__void@genericmethod.GenericMethod )
+  ;; genericmethod.GenericMethod.methodWithBoundTypeVariable();
+  ;;@ genericmethod/GenericMethod.java:152:4
+  (call $m_methodWithBoundTypeVariable__void@genericmethod.GenericMethod )
+ )
+)
+
 ;;; void GenericMethod.$clinit()
 (func $$clinit__void@genericmethod.GenericMethod
  ;;@ genericmethod/GenericMethod.java:21:13

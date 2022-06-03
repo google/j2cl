@@ -110,6 +110,13 @@
     return supplier.get();
   }] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testUpperWildcardBound"
 [return supplier.get();] => [return supplier.m_get__();] "genericmethod.GenericMethod.testUpperWildcardBound"
+[methodWithBoundTypeVariable] => [m_methodWithBoundTypeVariable__]
+[{}] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.methodWithBoundTypeVariable"
+[testMethodCallsWithCaptureTypeArguments] => [m_testMethodCallsWithCaptureTypeArguments__]
+[{
+    methodWithBoundTypeVariable();
+  }] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testMethodCallsWithCaptureTypeArguments"
+[methodWithBoundTypeVariable();] => [GenericMethod.m_methodWithBoundTypeVariable__();] "genericmethod.GenericMethod.testMethodCallsWithCaptureTypeArguments"
 [GenericMethod] => [$clinit]
 [GenericMethod] => [GenericMethod.$clinit = () =>{};] "genericmethod.GenericMethod.<clinit>"
 [GenericMethod] => [GenericMethod.$loadModules();] "genericmethod.GenericMethod.<clinit>"

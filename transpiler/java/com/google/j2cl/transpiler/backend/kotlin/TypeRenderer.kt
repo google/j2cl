@@ -59,7 +59,7 @@ fun Renderer.renderType(type: Type) {
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
   renderIdentifier(declaration.simpleSourceName)
   declaration.renderedTypeParameterDescriptors
-    .takeIf { it.isNotEmpty() }
+    .takeIf { it.isNotEmpty() && !it.any { it.isInferred } }
     ?.let { parameters -> renderTypeParameters(parameters) }
 }
 

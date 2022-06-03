@@ -145,4 +145,10 @@ public class GenericMethod<T> {
   static <V> V testUpperWildcardBound(Supplier<? extends V> supplier) {
     return supplier.get();
   }
+
+  static <T extends Number> void methodWithBoundTypeVariable() {}
+
+  static void testMethodCallsWithCaptureTypeArguments() {
+    methodWithBoundTypeVariable();
+  }
 }

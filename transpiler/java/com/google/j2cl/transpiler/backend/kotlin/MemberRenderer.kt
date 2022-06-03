@@ -87,7 +87,8 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
     render("constructor")
   } else {
     render(if (method.descriptor.isKtProperty) "val " else "fun ")
-    if (methodDescriptor.typeParameterTypeDescriptors.isNotEmpty()) {
+    val typeParameters = methodDescriptor.typeParameterTypeDescriptors
+    if (typeParameters.isNotEmpty() && !typeParameters.any { it.isInferred }) {
       renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors)
       render(" ")
     }

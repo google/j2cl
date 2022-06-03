@@ -127,6 +127,15 @@ class GenericMethod extends j_l_Object {
   GenericMethod.$clinit();
   return supplier.m_get__();
  }
+ /** @template T_1 */
+ static m_methodWithBoundTypeVariable__() {
+  GenericMethod.$clinit();
+ }
+ 
+ static m_testMethodCallsWithCaptureTypeArguments__() {
+  GenericMethod.$clinit();
+  GenericMethod.m_methodWithBoundTypeVariable__();
+ }
  
  static $clinit() {
   GenericMethod.$clinit = () =>{};

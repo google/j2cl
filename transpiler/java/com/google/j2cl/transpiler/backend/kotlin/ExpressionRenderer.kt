@@ -278,7 +278,7 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 }
 
 private fun Renderer.renderTypeArguments(typeArguments: List<TypeDescriptor>) {
-  if (typeArguments.isNotEmpty()) {
+  if (typeArguments.isNotEmpty() && !typeArguments.any(TypeDescriptor::isInferred)) {
     renderInAngleBrackets {
       renderCommaSeparated(typeArguments) { renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT) }
     }
@@ -478,14 +478,11 @@ private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclara
 fun Renderer.renderVariable(variable: Variable) {
   renderName(variable)
 
-  // Don't render anonymous types, since they are not denotable. They can be created from "var".
   val typeDescriptor = variable.typeDescriptor
-  if (typeDescriptor is DeclaredTypeDescriptor && typeDescriptor.typeDeclaration.isAnonymous) {
-    return
+  if (!typeDescriptor.isInferred) {
+    render(": ")
+    renderTypeDescriptor(typeDescriptor, TypeDescriptorUsage.REFERENCE)
   }
-
-  render(": ")
-  renderTypeDescriptor(typeDescriptor, TypeDescriptorUsage.REFERENCE)
 }
 
 private fun Renderer.renderQualifier(memberReference: MemberReference) {

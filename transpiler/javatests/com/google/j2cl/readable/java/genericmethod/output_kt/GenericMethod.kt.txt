@@ -102,6 +102,14 @@ open class GenericMethod<T> {
   fun <V> testUpperWildcardBound(supplier: genericmethod.GenericMethod.Supplier<out V?>?): V? {
    return supplier!!.get()
   }
+
+  @kotlin.jvm.JvmStatic
+  fun <T_1: kotlin.Number?> methodWithBoundTypeVariable() {}
+
+  @kotlin.jvm.JvmStatic
+  fun testMethodCallsWithCaptureTypeArguments() {
+   genericmethod.GenericMethod.methodWithBoundTypeVariable()
+  }
  }
 
  open class SuperContainer<C: genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?> {
