@@ -31,6 +31,8 @@ JRE_JAVAC_VERSION_OPTS = [
     "java.base=ALL-UNNAMED",
     # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
     "-XDstringConcat=inline",
+    # Remove warnings that are not relevant to JRE since it is actually a JRE implementaiton.
+    "-Xep:ShouldNotSubclass:OFF",
     # Enable Java 11 for the JRE sources
     "-source",
     "11",
