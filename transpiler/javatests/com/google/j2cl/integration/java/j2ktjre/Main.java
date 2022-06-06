@@ -24,6 +24,7 @@ import java.util.Locale;
 public class Main {
   public static void main(String... args) {
     testPrimitives();
+    testStringBuilder();
   }
 
   private static void testPrimitives() {
@@ -36,6 +37,10 @@ public class Main {
     testFloat();
     testCharacter();
     testString();
+  }
+
+  private static void testStringBuilder() {
+    testInsert();
   }
 
   private static void testBoolean() {
@@ -237,5 +242,23 @@ public class Main {
     char dstCharArray[] = new char[3];
     "abcde".getChars(1, 4, dstCharArray, 0);
     assertEquals("bcd", new String(dstCharArray));
+  }
+
+  private static void testInsert() {
+    StringBuilder strBuilder1 = new StringBuilder("0123");
+    char cArray[] = {'h', 'e', 'l', 'l', 'o'};
+
+    strBuilder1.insert(1, cArray, 1, 3);
+    assertEquals("0ell123", strBuilder1.toString());
+    strBuilder1.insert(6, cArray, 0, 5);
+    assertEquals("0ell12hello3", strBuilder1.toString());
+
+    StringBuilder strBuilder2 = new StringBuilder("0123");
+    CharSequence charSeq = "hello";
+
+    strBuilder2.insert(1, charSeq, 1, 3);
+    assertEquals("0el123", strBuilder2.toString());
+    strBuilder2.insert(6, charSeq, 0, 5);
+    assertEquals("0el123hello", strBuilder2.toString());
   }
 }
