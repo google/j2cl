@@ -80,53 +80,6 @@ public final class JsUtils {
   @UncheckedCast
   public static native <T> T getProperty(Object map, String key);
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-  static class ArrayBuffer {
-    ArrayBuffer(int size) {}
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-  static class Float64Array {
-    Float64Array(ArrayBuffer buf) {}
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-  static class Float32Array {
-    Float32Array(ArrayBuffer buf) {}
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-  static class Uint32Array {
-    Uint32Array(ArrayBuffer buf) {}
-  }
-
-  public static int floatToRawIntBits(float value) {
-    ArrayBuffer buf = new ArrayBuffer(4);
-    JsUtils.<float[]>uncheckedCast(new Float32Array(buf))[0] = value;
-    return JsUtils.<int[]>uncheckedCast(new Uint32Array(buf))[0] | 0;
-  }
-
-  public static float intBitsToFloat(int value) {
-    ArrayBuffer buf = new ArrayBuffer(4);
-    JsUtils.<int[]>uncheckedCast(new Uint32Array(buf))[0] = value;
-    return JsUtils.<float[]>uncheckedCast(new Float32Array(buf))[0];
-  }
-
-  public static long doubleToRawLongBits(double value) {
-    ArrayBuffer buf = new ArrayBuffer(8);
-    JsUtils.<double[]>uncheckedCast(new Float64Array(buf))[0] = value;
-    int[] intBits = JsUtils.<int[]>uncheckedCast(new Uint32Array(buf));
-    return LongUtils.fromBits(intBits[0] | 0, intBits[1] | 0);
-  }
-
-  public static double longBitsToDouble(long value) {
-    ArrayBuffer buf = new ArrayBuffer(8);
-    int[] intBits = JsUtils.<int[]>uncheckedCast(new Uint32Array(buf));
-    intBits[0] = (int) value;
-    intBits[1] = LongUtils.getHighBits(value);
-    return JsUtils.<double[]>uncheckedCast(new Float64Array(buf))[0];
-  }
-
   private JsUtils() {}
 }
 
