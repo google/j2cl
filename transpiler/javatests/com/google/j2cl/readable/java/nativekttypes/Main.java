@@ -15,6 +15,7 @@
  */
 package nativekttypes;
 
+import javaemul.internal.annotations.KtDisabled;
 import jsinterop.annotations.JsConstructor;
 
 public class Main {
@@ -70,6 +71,16 @@ public class Main {
     NativeTopLevel<String> o1 = (NativeTopLevel<String>) null;
     NativeTopLevel.Nested<String> o2 = (NativeTopLevel.Nested<String>) null;
     NativeTopLevel<String>.Inner<String> o3 = (NativeTopLevel<String>.Inner<String>) null;
+  }
+
+  @KtDisabled
+  public void disabledVoidMethod() {
+    int i = 0;
+  }
+
+  @KtDisabled
+  public boolean disabledNonVoidMethod() {
+    return true;
   }
 }
 

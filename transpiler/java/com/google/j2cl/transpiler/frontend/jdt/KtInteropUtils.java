@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtDisabledAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNativeAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropertyAnnotation;
@@ -57,6 +58,7 @@ public class KtInteropUtils {
     return KtInfo.newBuilder()
         .setProperty(isKtProperty(annotationBindings))
         .setName(getKtName(annotationBindings))
+        .setDisabled(isKtDisabled(annotationBindings))
         .build();
   }
 
@@ -67,5 +69,9 @@ public class KtInteropUtils {
 
   private static boolean isKtProperty(IAnnotationBinding[] annotationBindings) {
     return getKtPropertyAnnotation(annotationBindings) != null;
+  }
+
+  public static boolean isKtDisabled(IAnnotationBinding[] annotationBindings) {
+    return getKtDisabledAnnotation(annotationBindings) != null;
   }
 }

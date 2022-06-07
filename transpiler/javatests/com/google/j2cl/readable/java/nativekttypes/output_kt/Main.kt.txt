@@ -53,6 +53,12 @@ open class Main {
   val o2: nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>? = null as nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>?
   val o3: nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>? = null as nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>?
  }
+
+ open fun disabledVoidMethod() {}
+
+ open fun disabledNonVoidMethod(): kotlin.Boolean {
+  return false
+ }
 }
 
 open class Subclass<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nativekt.KTopLevel<V> {

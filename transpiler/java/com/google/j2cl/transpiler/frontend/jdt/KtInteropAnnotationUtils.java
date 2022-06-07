@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_DISABLED_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPERTY_ANNOTATION_NAME;
@@ -37,5 +38,10 @@ public class KtInteropAnnotationUtils {
   public static IAnnotationBinding getKtPropertyAnnotation(
       IAnnotationBinding[] annotationBindings) {
     return findAnnotationBindingByName(annotationBindings, KT_PROPERTY_ANNOTATION_NAME);
+  }
+
+  public static IAnnotationBinding getKtDisabledAnnotation(
+      IAnnotationBinding[] annotationBindings) {
+    return findAnnotationBindingByName(annotationBindings, KT_DISABLED_ANNOTATION_NAME);
   }
 }

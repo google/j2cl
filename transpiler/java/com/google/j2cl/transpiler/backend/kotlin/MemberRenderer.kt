@@ -26,6 +26,9 @@ import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
+import com.google.j2cl.transpiler.ast.ReturnStatement
+import com.google.j2cl.transpiler.ast.Statement
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 
 internal fun Renderer.renderMember(member: Member, kind: Kind) {
@@ -40,8 +43,7 @@ internal fun Renderer.renderMember(member: Member, kind: Kind) {
 private fun Renderer.renderMethod(method: Method, kind: Kind) {
   renderMethodHeader(method, kind)
   if (!method.isAbstract && !method.isNative) {
-    // Render all statements except constructor invocation statements.
-    val statements = method.body.statements.filter { !isConstructorInvocationStatement(it) }
+    val statements = getStatements(method)
 
     // Constructors with no statements can be rendered without curly braces.
     if (!method.isConstructor || statements.isNotEmpty()) {
@@ -54,6 +56,23 @@ private fun Renderer.renderMethod(method: Method, kind: Kind) {
       }
     }
   }
+}
+
+private fun Renderer.getStatements(method: Method): List<Statement> {
+  if (!method.descriptor.isKtDisabled) {
+    return method.body.statements.filter { !isConstructorInvocationStatement(it) }
+  }
+
+  if (TypeDescriptors.isPrimitiveVoid(method.descriptor.returnTypeDescriptor)) {
+    return listOf()
+  }
+
+  return listOf(
+    ReturnStatement.newBuilder()
+      .setSourcePosition(method.sourcePosition)
+      .setExpression(method.descriptor.returnTypeDescriptor.defaultValue)
+      .build()
+  )
 }
 
 private fun Renderer.renderField(field: Field) {

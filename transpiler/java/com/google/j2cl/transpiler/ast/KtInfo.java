@@ -26,19 +26,23 @@ public abstract class KtInfo {
 
   public abstract boolean isProperty();
 
+  public abstract boolean isDisabled();
+
   @Nullable
   public abstract String getName();
 
   public abstract Builder toBuilder();
 
   public static Builder newBuilder() {
-    return new AutoValue_KtInfo.Builder().setProperty(false);
+    return new AutoValue_KtInfo.Builder().setProperty(false).setDisabled(false);
   }
 
   /** The builder. */
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder setProperty(boolean isProperty);
+
+    public abstract Builder setDisabled(boolean isDisabled);
 
     public abstract Builder setName(String name);
 
