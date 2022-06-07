@@ -390,7 +390,7 @@ public class ExpressionTranspiler {
       @Override
       public boolean enterNumberLiteral(NumberLiteral numberLiteral) {
         Number value = numberLiteral.getValue();
-        if (value.intValue() == value.doubleValue()) {
+        if (Double.compare(value.intValue(), value.doubleValue()) == 0) {
           // Print as an integer to avoid JavaScript literals of the form of 0.0.
           sourceBuilder.append(Integer.toString(value.intValue()));
         } else {

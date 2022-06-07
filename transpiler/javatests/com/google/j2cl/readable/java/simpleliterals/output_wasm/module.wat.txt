@@ -80,6 +80,11 @@
  (local $o (ref null $java.lang.Object))
  (local $str (ref null $java.lang.String))
  (local $c (ref null $java.lang.Class))
+ (local $zeroF f32)
+ (local $minusZeroF f32)
+ (local $zeroD f64)
+ (local $minusZeroD f64)
+ (local $minusMinusZeroD f64)
  (local $this (ref null $simpleliterals.SimpleLiterals))
  (local.set $this (ref.cast_static $simpleliterals.SimpleLiterals (local.get $this.untyped)))
  (block
@@ -116,6 +121,21 @@
   ;; Class<?> c = javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
   ;;@ simpleliterals/SimpleLiterals.java:31:4
   (local.set $c (call $function.no.side.effects.$getSimpleliterals.SimpleLiterals__java_lang_Class (ref.func $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; float zeroF = -0.0;
+  ;;@ simpleliterals/SimpleLiterals.java:32:4
+  (local.set $zeroF (f32.neg (f32.const 0.0)))
+  ;; float minusZeroF = -0.0;
+  ;;@ simpleliterals/SimpleLiterals.java:33:4
+  (local.set $minusZeroF (f32.neg (f32.const 0.0)))
+  ;; double zeroD = 0.0;
+  ;;@ simpleliterals/SimpleLiterals.java:34:4
+  (local.set $zeroD (f64.const 0.0))
+  ;; double minusZeroD = -0.0;
+  ;;@ simpleliterals/SimpleLiterals.java:35:4
+  (local.set $minusZeroD (f64.neg (f64.const 0.0)))
+  ;; double minusMinusZeroD = --0.0;
+  ;;@ simpleliterals/SimpleLiterals.java:36:4
+  (local.set $minusMinusZeroD (f64.neg (f64.neg (f64.const 0.0))))
  )
 )
 (elem declare func $m_main__void@simpleliterals.SimpleLiterals)

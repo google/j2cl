@@ -29,5 +29,10 @@ public class SimpleLiterals {
     Object o = null;
     String str = "foo";
     Class<?> c = SimpleLiterals.class;
+    float zeroF = -0.0f;
+    float minusZeroF = -0.0f;
+    double zeroD = 0.0;
+    double minusZeroD = -0.0;
+    double minusMinusZeroD = - -0.0;
   }
 }
