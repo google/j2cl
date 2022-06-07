@@ -30,11 +30,7 @@ import com.google.j2cl.jre.java.math.RoundingModeTest;
 import com.google.j2cl.jre.java.nio.charset.CharsetTest;
 import com.google.j2cl.jre.java.nio.charset.StandardCharsetsTest;
 import com.google.j2cl.jre.java.security.MessageDigestTest;
-import com.google.j2cl.jre.java.sql.SqlDateTest;
-import com.google.j2cl.jre.java.sql.SqlTimeTest;
-import com.google.j2cl.jre.java.sql.SqlTimestampTest;
 import com.google.j2cl.jre.java.util.ComparatorTest;
-import com.google.j2cl.jre.java.util.DateTest;
 import com.google.j2cl.jre.java.util.ObjectsTest;
 import com.google.j2cl.jre.java.util.RandomTest;
 import org.junit.runner.RunWith;
@@ -69,14 +65,8 @@ import org.junit.runners.Suite.SuiteClasses;
   // -- java.security
   MessageDigestTest.class,
 
-  // -- java.sql
-  SqlDateTest.class,
-  SqlTimeTest.class,
-  SqlTimestampTest.class,
-
   // -- java.util
   ComparatorTest.class,
-  DateTest.class,
   ObjectsTest.class,
   RandomTest.class,
 })

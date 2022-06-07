@@ -120,6 +120,13 @@ j2cl_multi_test(
     deps = [":emul_tests_lib"],
 )
 
+j2cl_multi_test(
+    name = "DateTimeSuite",
+    enable_wasm = False,  # b/235154292
+    test_class = "com.google.j2cl.jre.DateTimeSuite",
+    deps = [":emul_tests_lib"],
+)
+
 j2cl_library(
     name = "js_tests_lib",
     testonly = 1,
