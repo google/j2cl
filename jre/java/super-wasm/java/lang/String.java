@@ -28,7 +28,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.StringJoiner;
+import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
+import javaemul.internal.NativeRegExp;
 import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.HasNoSideEffects;
 import jsinterop.annotations.JsMethod;
@@ -836,24 +838,95 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     return regionMatches(0, cs.toString(), 0, len);
   }
 
-  public boolean matches(String regularExpression) {
-    throw new RuntimeException("No regex support yet");
+  public boolean matches(String regex) {
+    // We surround the regex with '^' and '$' because it must match the entire string.
+    return new NativeRegExp("^(" + regex + ")$").test(this);
   }
 
-  public String replaceAll(String regularExpression, String replacement) {
-    throw new RuntimeException("No regex support yet");
+  public String replaceAll(String regex, String replace) {
+    replace = translateReplaceString(replace);
+    return nativeReplaceAll(regex, replace);
   }
 
-  public String replaceFirst(String regularExpression, String replacement) {
-    throw new RuntimeException("No regex support yet");
+  private String nativeReplaceAll(String regex, String replace) {
+    return fromJsString(
+        replace(toJsString(), new NativeRegExp(regex, "g").toJs(), replace.toJsString()));
   }
 
-  public String[] split(String regularExpression) {
-    throw new RuntimeException("No regex support yet");
+  public String replaceFirst(String regex, String replace) {
+    replace = translateReplaceString(replace);
+    NativeRegExp jsRegEx = new NativeRegExp(regex);
+    return fromJsString(replace(toJsString(), jsRegEx.toJs(), replace.toJsString()));
   }
 
-  public String[] split(String regularExpression, int limit) {
-    throw new RuntimeException("No regex support yet");
+  private static String translateReplaceString(String replaceStr) {
+    int pos = 0;
+    while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
+      if (replaceStr.charAt(pos + 1) == '$') {
+        replaceStr = replaceStr.substring(0, pos) + "$" + replaceStr.substring(++pos);
+      } else {
+        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
+      }
+    }
+    return replaceStr;
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native WasmExtern replace(WasmExtern str, WasmExtern regex, WasmExtern replace);
+
+  public String[] split(String regex) {
+    return split(regex, 0);
+  }
+
+  public String[] split(String regex, int maxMatch) {
+    // The compiled regular expression created from the string
+    NativeRegExp compiled = new NativeRegExp(regex, "g");
+    // the Javascipt array to hold the matches prior to conversion
+    String[] out = new String[0];
+    // how many matches performed so far
+    int count = 0;
+    // The current string that is being matched; trimmed as each piece matches
+    String trail = this;
+    // used to detect repeated zero length matches
+    // Must be null to start with because the first match of "" makes no
+    // progress by intention
+    String lastTrail = null;
+    // We do the split manually to avoid Javascript incompatibility
+    while (true) {
+      // None of the information in the match returned are useful as we have no
+      // subgroup handling
+      NativeRegExp.Match matchObj = compiled.exec(trail);
+      if (matchObj == null || trail.isEmpty() || (count == (maxMatch - 1) && maxMatch > 0)) {
+        ArrayHelper.push(out, trail);
+        break;
+      } else {
+        int matchIndex = matchObj.getIndex();
+        ArrayHelper.push(out, trail.substring(0, matchIndex));
+        trail = trail.substring(matchIndex + matchObj.getAt(0).length(), trail.length());
+        // Force the compiled pattern to reset internal state
+        compiled.setLastIndex(0);
+        // Only one zero length match per character to ensure termination
+        if (lastTrail == trail) {
+          out[count] = trail.substring(0, 1);
+          trail = trail.substring(1);
+        }
+        lastTrail = trail;
+        count++;
+      }
+    }
+    // all blank delimiters at the end are supposed to disappear if maxMatch == 0;
+    // however, if the input string is empty, the output should consist of a
+    // single empty string
+    if (maxMatch == 0 && this.length() > 0) {
+      int lastNonEmpty = out.length;
+      while (lastNonEmpty > 0 && out[lastNonEmpty - 1].isEmpty()) {
+        --lastNonEmpty;
+      }
+      if (lastNonEmpty < out.length) {
+        ArrayHelper.setLength(out, lastNonEmpty);
+      }
+    }
+    return out;
   }
 
   public CharSequence subSequence(int start, int end) {
