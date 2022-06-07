@@ -80,6 +80,9 @@ public final class Platform {
     return JsUtils.<double[]>uncheckedCast(new Float64Array(buf))[0];
   }
 
+  @JsMethod(name = "Number.prototype.toPrecision.call", namespace = JsPackage.GLOBAL)
+  public static native String toPrecision(double value, int precision);
+
   public static boolean isEqual(Object x, Object y) {
     return checkNotNull(x) == y;
   }

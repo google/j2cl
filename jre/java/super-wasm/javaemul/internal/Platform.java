@@ -16,6 +16,8 @@
 package javaemul.internal;
 
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /** Platform specific utilities with Wasm specific implementation. */
 public final class Platform {
@@ -41,6 +43,13 @@ public final class Platform {
 
   @Wasm("f32.reinterpret_i32")
   public static native float intBitsToFloat(int value);
+
+  public static String toPrecision(double value, int precision) {
+    return String.fromJsString(nativeToPrecision(value, precision));
+  }
+
+  @JsMethod(name = "Number.toPrecision", namespace = JsPackage.GLOBAL)
+  private static native WasmExtern nativeToPrecision(double value, int precision);
 
   public static boolean isEqual(Boolean x, Object y) {
     return y instanceof Boolean && x.booleanValue() == ((Boolean) y).booleanValue();

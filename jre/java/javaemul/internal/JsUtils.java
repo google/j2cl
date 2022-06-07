@@ -40,11 +40,6 @@ public final class JsUtils {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "typeof")
   public static native String typeOf(Object obj);
 
-  public static String toPrecision(double value, int precision) {
-    NativeNumber number = JsUtils.uncheckedCast(value);
-    return number.toPrecision(precision);
-  }
-
   public static String intToString(int value, int radix) {
     return numberToString(value, radix);
   }
@@ -64,8 +59,6 @@ public final class JsUtils {
   @JsType(isNative = true, name = "Number", namespace = JsPackage.GLOBAL)
   private interface NativeNumber {
     String toString(int radix);
-
-    String toPrecision(int precision);
   }
 
   public static native boolean isUndefined(Object value);

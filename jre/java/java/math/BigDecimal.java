@@ -37,8 +37,8 @@ package java.math;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
-import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
+import javaemul.internal.Platform;
 
 /**
  * This class represents immutable arbitrary precision decimal numbers. Each
@@ -409,7 +409,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
   }
 
   private static double parseUnscaled(String str) {
-    return isValidBigUnscaledDecimal(str) ? JsUtils.parseInt(str, 10) : Double.NaN;
+    return isValidBigUnscaledDecimal(str) ? Double.parseDouble(str) : Double.NaN;
   }
 
   /**
@@ -707,7 +707,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       // math.03=Infinity or NaN
       throw new NumberFormatException("Infinite or NaN"); //$NON-NLS-1$
     }
-    initFrom(JsUtils.toPrecision(val, 20));
+    initFrom(Platform.toPrecision(val, 20));
   }
 
   /**

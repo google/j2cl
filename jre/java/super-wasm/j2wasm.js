@@ -76,6 +76,7 @@ function createImportObject(userImports) {
     'Math.sinh': Math.sinh,
     'Math.tan': Math.tan,
     'Math.tanh': Math.tanh,
+    'Number.toPrecision': (/** number */ n, /** number */ p) => n.toPrecision(p),
     'Date.now': Date.now,
     'Character.toLowerCase': charToLowerCase,
     'Character.toUpperCase': charToUpperCase,
@@ -86,7 +87,8 @@ function createImportObject(userImports) {
 
     // Regex
     'RegExp.create': (/** string */ p, /** string */ f) => new RegExp(p, f),
-    'RegExp.setLastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex = i,
+    'RegExp.setLastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex =
+        i,
     'RegExp.exec': (/** !RegExp */ r, /** string */ s) => r.exec(s),
     'RegExp.test': (/** !RegExp */ r, /** string */ s) => r.test(s),
     'RegExpResult.index': (/** !RegExpResult */ r) => r.index,

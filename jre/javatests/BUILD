@@ -68,7 +68,6 @@ java_test(
 
 j2cl_multi_test(
     name = "BigDecimal",
-    enable_wasm = False,  # b/229006894
     shard_count = 5,
     test_class = "com.google.j2cl.jre.BigDecimalSuite",
     deps = [":emul_tests_lib"],
