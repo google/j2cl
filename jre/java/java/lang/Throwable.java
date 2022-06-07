@@ -21,6 +21,7 @@ import static javaemul.internal.InternalPreconditions.checkState;
 
 import java.io.PrintStream;
 import java.io.Serializable;
+import javaemul.internal.ArrayHelper;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
@@ -112,9 +113,7 @@ public class Throwable implements Serializable {
       return;
     }
 
-    // TRICK: This is not correct Java (would give an OOBE, but it works in JS and
-    // this code will only be executed in JS.
-    suppressedExceptions[suppressedExceptions.length] = exception;
+    ArrayHelper.push(suppressedExceptions, exception);
   }
 
   /**
