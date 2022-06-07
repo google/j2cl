@@ -50,9 +50,7 @@ abstract class WasmArray implements Serializable, Cloneable {
     throw new UnsupportedOperationException();
   }
 
-  void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
-    throw new UnsupportedOperationException();
-  }
+  abstract void copyFrom(int offset, WasmArray values, int valueOffset, int len);
 
   public static Object[] createMultiDimensional(int[] dimensionLengths, int leafType) {
     return (Object[]) createRecursively(dimensionLengths, 0, leafType);
@@ -204,6 +202,11 @@ abstract class WasmArray implements Serializable, Cloneable {
         copy(elements, 0, original, 0, original.length);
       }
     }
+
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(elements, offset, ((WasmArray.OfByte) values).elements, valueOffset, len);
+    }
   }
 
   static class OfShort extends WasmArray {
@@ -218,6 +221,11 @@ abstract class WasmArray implements Serializable, Cloneable {
     OfShort(short[] initialValues) {
       super(initialValues.length);
       this.elements = initialValues;
+    }
+
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(elements, offset, ((WasmArray.OfShort) values).elements, valueOffset, len);
     }
   }
 
@@ -294,6 +302,11 @@ abstract class WasmArray implements Serializable, Cloneable {
       super(initialValues.length);
       this.elements = initialValues;
     }
+
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(elements, offset, ((WasmArray.OfFloat) values).elements, valueOffset, len);
+    }
   }
 
   static class OfDouble extends WasmArray {
@@ -309,6 +322,11 @@ abstract class WasmArray implements Serializable, Cloneable {
       super(initialValues.length);
       this.elements = initialValues;
     }
+
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(elements, offset, ((WasmArray.OfDouble) values).elements, valueOffset, len);
+    }
   }
 
   static class OfBoolean extends WasmArray {
@@ -323,6 +341,11 @@ abstract class WasmArray implements Serializable, Cloneable {
     OfBoolean(boolean[] initialValues) {
       super(initialValues.length);
       this.elements = initialValues;
+    }
+
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(elements, offset, ((WasmArray.OfBoolean) values).elements, valueOffset, len);
     }
   }
 
