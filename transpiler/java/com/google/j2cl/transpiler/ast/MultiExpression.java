@@ -23,6 +23,7 @@ import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -106,7 +107,7 @@ public class MultiExpression extends Expression {
     }
 
     public Builder addExpressions(Expression... expressions) {
-      this.expressions.addAll(Arrays.asList(expressions));
+      Collections.addAll(this.expressions, expressions);
       return this;
     }
 

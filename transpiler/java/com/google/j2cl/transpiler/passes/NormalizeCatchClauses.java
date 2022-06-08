@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
@@ -36,7 +37,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -132,7 +132,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
     List<TypeDescriptor> typesToCheck =
         exceptionTypeDescriptor.isUnion()
             ? ((UnionTypeDescriptor) exceptionTypeDescriptor).getUnionTypeDescriptors()
-            : Collections.singletonList(exceptionTypeDescriptor);
+            : ImmutableList.of(exceptionTypeDescriptor);
     Expression condition = checkTypeExpression(exceptionVariable, typesToCheck);
     Statement transformedCatchBody =
         transformCatchBody(clause.getBody(), catchVariable, exceptionVariable);
@@ -159,7 +159,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
    */
   private static Expression checkTypeExpression(
       Variable exceptionVariable, List<TypeDescriptor> typeDescriptors) {
-    List<InstanceOfExpression> instanceofs =
+    ImmutableList<InstanceOfExpression> instanceofs =
         typeDescriptors.stream()
             .map(
                 t ->

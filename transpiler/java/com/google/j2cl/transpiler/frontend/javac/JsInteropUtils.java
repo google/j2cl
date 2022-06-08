@@ -30,7 +30,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 
 /** Utility functions for JsInterop properties. */
-public class JsInteropUtils {
+public final class JsInteropUtils {
   /**
    * Simply resolve the JsInfo from annotations. Do not do any extra computations. For example, if
    * there is no "name" is specified in the annotation, just returns null for JsName.
@@ -173,4 +173,6 @@ public class JsInteropUtils {
   public static boolean isJsFunction(AnnotatedConstruct type) {
     return JsInteropAnnotationUtils.getJsFunctionAnnotation(type) != null;
   }
+
+  private JsInteropUtils() {}
 }

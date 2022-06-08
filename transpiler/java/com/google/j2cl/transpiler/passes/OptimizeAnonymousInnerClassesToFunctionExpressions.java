@@ -105,18 +105,15 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         type.getSuperInterfaceTypeDescriptors().get(0);
     checkState(jsFunctionTypeDescriptor.isJsFunctionInterface());
-    FunctionExpression lambdaMethodImplementation =
-        FunctionExpression.newBuilder()
-            .setTypeDescriptor(jsFunctionTypeDescriptor)
-            .setParameters(jsFunctionMethodImplementation.getParameters())
-            .setStatements(jsFunctionMethodImplementation.getBody().getStatements())
-            .setSourcePosition(
-                SourcePosition.Builder.from(jsFunctionMethodImplementation.getSourcePosition())
-                    .setName(jsFunctionMethodImplementation.getQualifiedBinaryName())
-                    .build())
-            .build();
-
-    return lambdaMethodImplementation;
+    return FunctionExpression.newBuilder()
+        .setTypeDescriptor(jsFunctionTypeDescriptor)
+        .setParameters(jsFunctionMethodImplementation.getParameters())
+        .setStatements(jsFunctionMethodImplementation.getBody().getStatements())
+        .setSourcePosition(
+            SourcePosition.Builder.from(jsFunctionMethodImplementation.getSourcePosition())
+                .setName(jsFunctionMethodImplementation.getQualifiedBinaryName())
+                .build())
+        .build();
   }
 
   /**

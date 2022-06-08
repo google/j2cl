@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.BiMap;
@@ -448,7 +449,7 @@ public class TypeDescriptors {
     return typeDescriptors.stream()
         .map(TypeDescriptor::toUnparameterizedTypeDescriptor)
         .map(typeDescriptor -> (T) typeDescriptor)
-        .collect(ImmutableList.toImmutableList());
+        .collect(toImmutableList());
   }
 
   /** Return java implementation class for an array */

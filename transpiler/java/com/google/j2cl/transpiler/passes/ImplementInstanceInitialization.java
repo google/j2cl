@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -26,7 +27,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /** Synthesizes instance initialization method $init and adds calls to them in each constructor. */
 public class ImplementInstanceInitialization extends NormalizationPass {
@@ -45,7 +45,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
     List<Statement> statements =
         type.getInstanceInitializerBlocks().stream()
             .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
-            .collect(Collectors.toList());
+            .collect(toImmutableList());
 
     type.addMember(
         Method.newBuilder()

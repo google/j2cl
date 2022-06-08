@@ -65,10 +65,8 @@ import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Transforms Expression to JavaScript source strings.
- */
-public class ExpressionTranspiler {
+/** Transforms Expression to JavaScript source strings. */
+public final class ExpressionTranspiler {
   public static void render(
       Expression expression,
       final GenerationEnvironment environment,
@@ -524,4 +522,6 @@ public class ExpressionTranspiler {
       }
     }.renderNoParens(expression);
   }
+
+  private ExpressionTranspiler() {}
 }

@@ -143,7 +143,7 @@ public class SourceUtils {
   public static void checkSourceFiles(
       Problems problems, List<String> sourceFiles, String... validExtensions) {
     for (String sourceFile : sourceFiles) {
-      if (Arrays.stream(validExtensions).noneMatch(x -> sourceFile.endsWith(x))) {
+      if (Arrays.stream(validExtensions).noneMatch(sourceFile::endsWith)) {
         problems.fatal(FatalError.UNKNOWN_INPUT_TYPE, sourceFile);
       }
       if (!Files.isRegularFile(Paths.get(sourceFile))) {

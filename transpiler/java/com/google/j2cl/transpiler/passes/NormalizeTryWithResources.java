@@ -160,7 +160,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
             .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
 
-    List<Statement> catchBlockStatements =
+    ImmutableList<Statement> catchBlockStatements =
         ImmutableList.of(
             BinaryExpression.Builder.asAssignmentTo(primaryException)
                 .setRightOperand(exceptionFromTry)

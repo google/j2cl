@@ -21,7 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -58,7 +57,7 @@ public final class LambdaAdaptorTypeDescriptors {
             ? ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors()
             : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
 
-    List<TypeDescriptor> typeArgumentDescriptors =
+    ImmutableList<TypeDescriptor> typeArgumentDescriptors =
         interfaceTypeDescriptors.stream()
             .flatMap(i -> i.getTypeArgumentDescriptors().stream())
             .collect(toImmutableList());
@@ -107,7 +106,7 @@ public final class LambdaAdaptorTypeDescriptors {
       Optional<Integer> uniqueId) {
 
     TypeDeclaration enclosingTypeDeclaration = enclosingTypeDescriptor.getTypeDeclaration();
-    List<String> classComponents =
+    ImmutableList<String> classComponents =
         enclosingTypeDeclaration.synthesizeInnerClassComponents(
             FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME, uniqueId.orElse(null));
 
@@ -168,7 +167,7 @@ public final class LambdaAdaptorTypeDescriptors {
                 LambdaAdaptorTypeDescriptors::getAdaptorForwardingMethod, adaptorTypeDescriptor))
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         // Remove the method type parameters as they when moved to the adaptor type.
-        .setTypeParameterTypeDescriptors(Collections.emptyList())
+        .setTypeParameterTypeDescriptors(ImmutableList.of())
         .setSynthetic(false)
         .setAbstract(false)
         .build();
@@ -235,7 +234,7 @@ public final class LambdaAdaptorTypeDescriptors {
       DeclaredTypeDescriptor functionalTypeDescriptor) {
 
     TypeDeclaration typeDeclaration = functionalTypeDescriptor.getTypeDeclaration();
-    List<String> classComponents =
+    ImmutableList<String> classComponents =
         typeDeclaration.synthesizeInnerClassComponents(FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME);
 
     return TypeDeclaration.newBuilder()

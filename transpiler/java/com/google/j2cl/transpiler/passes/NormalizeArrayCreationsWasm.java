@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
@@ -29,7 +30,6 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Normalizes array creations for wasm.
@@ -104,7 +104,7 @@ public class NormalizeArrayCreationsWasm extends NormalizationPass {
             List<Expression> nonNullDimensions =
                 newArray.getDimensionExpressions().stream()
                     .map(NormalizeArrayCreationsWasm::nullToMinusOne)
-                    .collect(Collectors.toList());
+                    .collect(toImmutableList());
 
             return RuntimeMethods.createCreateMultiDimensionalArrayCall(
                 new ArrayLiteral(

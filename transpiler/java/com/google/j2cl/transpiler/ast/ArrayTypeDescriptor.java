@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import com.google.common.base.Strings;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Set;
 import java.util.function.Function;
@@ -140,16 +139,13 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   public String getUniqueId() {
     String prefix = isNullable() ? "?" : "!";
     String suffix = isNativeWasmArray() ? "(native)" : "";
-    return prefix
-        + Strings.repeat("[]", getDimensions())
-        + getLeafTypeDescriptor().getUniqueId()
-        + suffix;
+    return prefix + "[]".repeat(getDimensions()) + getLeafTypeDescriptor().getUniqueId() + suffix;
   }
 
   @Override
   @Memoized
   public String getMangledName() {
-    return Strings.repeat("arrayOf_", getDimensions()) + getLeafTypeDescriptor().getMangledName();
+    return "arrayOf_".repeat(getDimensions()) + getLeafTypeDescriptor().getMangledName();
   }
 
   @Override
@@ -159,7 +155,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   private String synthesizeArrayName(String leafName) {
-    return leafName + Strings.repeat("[]", getDimensions());
+    return leafName + "[]".repeat(getDimensions());
   }
 
   @Override

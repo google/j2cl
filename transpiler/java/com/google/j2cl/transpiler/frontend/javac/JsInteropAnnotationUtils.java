@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ASYNC_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME;
@@ -29,7 +30,6 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PR
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.InternalCompilerError;
@@ -144,7 +144,8 @@ public class JsInteropAnnotationUtils {
         // represented as different instances) just group them by qualified name and return the
         // first one of each.
         .collect(
-            groupingBy(c -> c.type.asElement().getQualifiedName(), LinkedHashMap::new, toList()))
+            groupingBy(
+                c -> c.type.asElement().getQualifiedName(), LinkedHashMap::new, toImmutableList()))
         .values()
         .stream()
         .map(c -> c.get(0));

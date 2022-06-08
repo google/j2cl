@@ -39,11 +39,14 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   public abstract FilePosition getEndFilePosition();
 
-  public abstract @Nullable String getFilePath();
+  @Nullable
+  public abstract String getFilePath();
 
-  public abstract @Nullable String getName();
+  @Nullable
+  public abstract String getName();
 
-  public abstract @Nullable String getPackageRelativePath();
+  @Nullable
+  public abstract String getPackageRelativePath();
 
   @Override
   public int compareTo(SourcePosition o) {

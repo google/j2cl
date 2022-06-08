@@ -59,6 +59,7 @@ public abstract class Member extends Node
     return false;
   }
 
+  @Override
   public final boolean isNative() {
     return getDescriptor().isNative();
   }

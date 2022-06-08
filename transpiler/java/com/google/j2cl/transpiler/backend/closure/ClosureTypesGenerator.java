@@ -70,7 +70,7 @@ class ClosureTypesGenerator {
   }
 
   /**
-   * Returns the @param JsDoc annotation for parameter at {@code index} in {@code
+   * Returns the {@code JsDoc} annotation for parameter at {@code index} in {@code
    * methodOrFunctionExpression}.
    */
   public String getJsDocForParameter(MethodLike methodLike, int index) {
@@ -299,7 +299,7 @@ class ClosureTypesGenerator {
    *
    * <p>{@see https://github.com/google/closure-compiler/wiki/Types-in-the-Closure-Type-System}
    *
-   * <pre>
+   * <pre>{@code
    * // All types
    *  < type >  := '?'
    *            | < type-expression >
@@ -313,7 +313,7 @@ class ClosureTypesGenerator {
    *                  | '(' < type > ('|' < type > ) + ')'                      // union type
    *                  | 'function(' (< type > (',' < type > )*)* '):' < type >  // function type
    *                  | '(' < type-minus-? >  ')'
-   * </pre>
+   * }</pre>
    */
   private abstract static class ClosureType {
 
@@ -570,7 +570,7 @@ class ClosureTypesGenerator {
    * their corresponding ClosureType to handle JsType(isNative=true) when their names have been
    * explicitly set to one of these.
    */
-  private static final Map<String, ClosureType> specialClosureTypesByName =
+  private static final ImmutableMap<String, ClosureType> specialClosureTypesByName =
       ImmutableMap.<String, ClosureType>builder()
           .put(UNDEFINED.render(), UNDEFINED)
           .put(NULL.render(), NULL)

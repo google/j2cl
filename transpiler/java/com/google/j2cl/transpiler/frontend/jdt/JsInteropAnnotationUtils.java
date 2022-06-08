@@ -28,8 +28,8 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PA
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
+import static java.util.Arrays.stream;
 
-import java.util.Arrays;
 import java.util.Optional;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
@@ -117,7 +117,7 @@ public class JsInteropAnnotationUtils {
       return false;
     }
     Object[] suppressions = JdtAnnotationUtils.getArrayAttribute(suppressWarningsBinding, "value");
-    return Arrays.stream(suppressions).anyMatch("unusable-by-js"::equals);
+    return stream(suppressions).anyMatch("unusable-by-js"::equals);
   }
 
   /** The namespace specified on a package, type, method or field. */

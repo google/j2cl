@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.MoreCollectors.toOptional;
 import static java.util.stream.Collectors.toCollection;
 
 import com.google.common.base.Predicates;
@@ -26,7 +27,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
-import com.google.common.collect.MoreCollectors;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
@@ -1036,7 +1036,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
   private static Method getInitMethod(Type type) {
     return type.getMethods().stream()
         .filter(m -> m.getDescriptor().isInitMethod())
-        .collect(MoreCollectors.toOptional())
+        .collect(toOptional())
         .orElse(null);
   }
 }

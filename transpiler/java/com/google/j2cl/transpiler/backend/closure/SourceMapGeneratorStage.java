@@ -25,10 +25,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- * Generates the source maps.
- */
-public class SourceMapGeneratorStage {
+/** Generates the source maps. */
+public final class SourceMapGeneratorStage {
 
   public static String generateSourceMaps(
       Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition)
@@ -62,10 +60,11 @@ public class SourceMapGeneratorStage {
   /**
    * Converts a j2cl File Position to a JsCompiler sourcemap File Position.
    *
-   * @param j2clFilePosition
    * @return JsCompiler sourcemap File Position
    */
   private static FilePosition toFilePosition(com.google.j2cl.common.FilePosition j2clFilePosition) {
     return new FilePosition(j2clFilePosition.getLine(), j2clFilePosition.getColumn());
   }
+
+  private SourceMapGeneratorStage() {}
 }

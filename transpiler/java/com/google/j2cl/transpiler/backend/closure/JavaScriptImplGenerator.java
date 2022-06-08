@@ -16,11 +16,12 @@
 package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.Problems;
@@ -40,7 +41,6 @@ import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /** Generates JavaScript source impl files. */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
@@ -190,7 +190,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.emitBlock(
         imports.stream()
             .filter(i -> i.getImportCategory().needsGoogRequireInImpl())
-            .collect(ImmutableList.toImmutableList()),
+            .collect(toImmutableList()),
         eagerImport -> {
           String alias = eagerImport.getAlias();
           String path = eagerImport.getImplModulePath();
@@ -208,7 +208,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.emitBlock(
         imports.stream()
             .filter(i -> i.getImportCategory().needsGoogForwardDeclare())
-            .collect(ImmutableList.toImmutableList()),
+            .collect(toImmutableList()),
         lazyImport -> {
           String alias = lazyImport.getAlias();
           String path = lazyImport.getImplModulePath();
@@ -272,8 +272,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String typeArgumentsString =
           typeDescriptor.hasTypeArguments()
               ? typeDescriptor.getTypeArgumentDescriptors().stream()
-                  .map(td -> closureTypesGenerator.getClosureTypeString(td))
-                  .collect(Collectors.joining(", ", "<", ">"))
+                  .map(closureTypesGenerator::getClosureTypeString)
+                  .collect(joining(", ", "<", ">"))
               : "";
 
       appendln(
@@ -355,7 +355,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     StringBuilder jsDocBuilder = new StringBuilder();
     if (methodDescriptor.getJsVisibility() != Visibility.PUBLIC) {
-      jsDocBuilder.append(" @" + methodDescriptor.getJsVisibility().jsText);
+      jsDocBuilder.append(" @").append(methodDescriptor.getJsVisibility().jsText);
     }
     if (methodDescriptor.isAbstract()) {
       jsDocBuilder.append(" @abstract");
@@ -367,7 +367,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String templateParamNames =
           closureTypesGenerator.getCommaSeparatedClosureTypesString(
               methodDescriptor.getTypeParameterTypeDescriptors());
-      jsDocBuilder.append(" @template " + templateParamNames);
+      jsDocBuilder.append(" @template ").append(templateParamNames);
     }
 
     if (type.getDeclaration().isJsFunctionImplementation()
@@ -384,19 +384,20 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         // Using @this redefines enclosing class of a method, hence any template variables defined
         // in the class need to be declared in the method.
         for (TypeVariable typeVariable : type.getDeclaration().getTypeParameterDescriptors()) {
-          jsDocBuilder.append(
-              " @template " + closureTypesGenerator.getClosureTypeString(typeVariable));
+          jsDocBuilder
+              .append(" @template ")
+              .append(closureTypesGenerator.getClosureTypeString(typeVariable));
         }
-        jsDocBuilder.append(
-            " @this {"
-                + closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor())
-                + "}");
+        jsDocBuilder
+            .append(" @this {")
+            .append(closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor()))
+            .append("}");
       }
     }
     String returnTypeName =
         closureTypesGenerator.getClosureTypeString(methodDescriptor.getReturnTypeDescriptor());
     if (needsReturnJsDoc(methodDescriptor)) {
-      jsDocBuilder.append(" @return {" + returnTypeName + "}");
+      jsDocBuilder.append(" @return {").append(returnTypeName).append("}");
     }
 
     if (methodDescriptor.isDeprecated()) {
@@ -462,7 +463,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
       if (!trimmedLine.isEmpty()) {
         int firstNonWhitespaceColumn = CharMatcher.whitespace().negate().indexIn(trimmedLine);
-        sourceBuilder.append(Strings.repeat(" ", firstNonWhitespaceColumn));
+        sourceBuilder.append(" ".repeat(firstNonWhitespaceColumn));
         // Only map the trimmed section of the line.
         sourceBuilder.emitWithMapping(
             SourcePosition.newBuilder()

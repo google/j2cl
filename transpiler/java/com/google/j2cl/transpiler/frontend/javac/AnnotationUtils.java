@@ -24,7 +24,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 
 /** Utility functions to process annotations. */
-public class AnnotationUtils {
+public final class AnnotationUtils {
 
   static AnnotationMirror findAnnotationBindingByName(
       List<? extends AnnotationMirror> annotations, String name) {
@@ -88,4 +88,6 @@ public class AnnotationUtils {
     return findAnnotationBindingByName(construct.getAnnotationMirrors(), annotationSourceName)
         != null;
   }
+
+  private AnnotationUtils() {}
 }

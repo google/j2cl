@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.lang.String.format;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -532,7 +533,7 @@ public class WasmModuleGenerator {
   private void emitItableInitialization(TypeDeclaration typeDeclaration) {
     emitBeginCodeComment(typeDeclaration, "itable.init");
 
-    List<TypeDeclaration> superInterfaces =
+    ImmutableList<TypeDeclaration> superInterfaces =
         typeDeclaration.getAllSuperTypesIncludingSelf().stream()
             .filter(TypeDeclaration::isInterface)
             .collect(toImmutableList());
@@ -566,7 +567,7 @@ public class WasmModuleGenerator {
       builder.append(" (ref.null data)");
       return;
     }
-    List<MethodDescriptor> interfaceMethodImplementations =
+    ImmutableList<MethodDescriptor> interfaceMethodImplementations =
         interfaceDeclaration.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isPolymorphic)
             .map(wasmTypeLayout::getImplementationMethod)

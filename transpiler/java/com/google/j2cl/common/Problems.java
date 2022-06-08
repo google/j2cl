@@ -18,8 +18,8 @@ package com.google.j2cl.common;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
 import com.google.errorprone.annotations.FormatMethod;
 import com.google.errorprone.annotations.FormatString;
 import java.io.PrintStream;
@@ -91,7 +91,7 @@ public class Problems {
     }
   }
 
-  private final Multimap<Severity, String> problemsBySeverity =
+  private final SetMultimap<Severity, String> problemsBySeverity =
       Multimaps.synchronizedSetMultimap(LinkedHashMultimap.create());
 
   public void fatal(FatalError fatalError, Object... args) {
@@ -240,5 +240,5 @@ public class Problems {
    *
    * <p>Note: It should never be caught except on the top level.
    */
-  public static class Exit extends java.lang.Error {}
+  public static class Exit extends Error {}
 }

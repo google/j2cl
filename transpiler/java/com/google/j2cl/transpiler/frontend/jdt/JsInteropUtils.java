@@ -27,7 +27,7 @@ import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
 /** Utility functions for JsInterop properties. */
-public class JsInteropUtils {
+public final class JsInteropUtils {
   /**
    * Simply resolve the JsInfo from annotations. Do not do any extra computations. For example, if
    * there is no "name" is specified in the annotation, just returns null for JsName.
@@ -177,4 +177,6 @@ public class JsInteropUtils {
   public static boolean isJsFunction(ITypeBinding typeBinding) {
     return JsInteropAnnotationUtils.getJsFunctionAnnotation(typeBinding) != null;
   }
+
+  private JsInteropUtils() {}
 }

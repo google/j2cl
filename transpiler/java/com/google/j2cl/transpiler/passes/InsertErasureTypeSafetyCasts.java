@@ -33,16 +33,17 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
  * <p>As part of type erasure casts need to be introduced to preserve Java type safety, as in the
  * following example:
  *
- * <pre>
- *     interface L<T> {
- *       T get();
- *     }
+ * <pre>{@code
+ * interface L<T> {
+ *   T get();
+ * }
  *
- *     ...
+ * ...
  *
- *     L<String> l = (L<String>) someL;
- *     String s = l.get();
- *  </pre>
+ * L<String> l = (L<String>) someL;
+ * String s = l.get();
+ *
+ * }</pre>
  *
  * <p>The previous code after type erasure looks like
  *

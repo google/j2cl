@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -32,7 +34,6 @@ import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Implements static initialization to comply with Java semantics by keeping track of whether a
@@ -110,10 +111,9 @@ public class ImplementStaticInitializationViaConditionChecks
 
     // Code from static initializer blocks.
     List<Statement> clinitStatements =
-        type.getStaticInitializerBlocks()
-            .stream()
+        type.getStaticInitializerBlocks().stream()
             .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
-            .collect(Collectors.toList());
+            .collect(toImmutableList());
 
     type.addMember(
         Method.newBuilder()

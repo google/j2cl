@@ -278,7 +278,7 @@ public abstract class MemberDescriptor
 
   // TODO(b/178738483): This is a temporary hack to be able to reuse bridging logic in Closure
   // and WASM.
-  private static ThreadLocal<Boolean> useWasmManglingPatterns =
+  private static final ThreadLocal<Boolean> useWasmManglingPatterns =
       ThreadLocal.withInitial(() -> false);
 
   public static void setWasmManglingPatterns() {

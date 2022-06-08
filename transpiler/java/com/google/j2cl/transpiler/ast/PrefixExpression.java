@@ -26,7 +26,7 @@ import com.google.j2cl.common.visitor.Visitable;
  */
 @Visitable
 public class PrefixExpression extends UnaryExpression {
-  private PrefixOperator operator;
+  private final PrefixOperator operator;
 
   private PrefixExpression(Expression operand, PrefixOperator operator) {
     super(operand);

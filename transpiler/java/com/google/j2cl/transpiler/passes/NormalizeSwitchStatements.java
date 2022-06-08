@@ -16,8 +16,8 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -78,7 +78,7 @@ public class NormalizeSwitchStatements extends NormalizationPass {
         .setCases(
             switchStatement.getCases().stream()
                 .map(NormalizeSwitchStatements::convertToOrdinalCase)
-                .collect(ImmutableList.toImmutableList()))
+                .collect(toImmutableList()))
         .build();
   }
 

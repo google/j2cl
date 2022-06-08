@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -50,7 +49,7 @@ public final class LambdaImplementorTypeDescriptors {
             ? ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors()
             : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
 
-    List<TypeDescriptor> typeArgumentDescriptors =
+    ImmutableList<TypeDescriptor> typeArgumentDescriptors =
         interfaceTypeDescriptors.stream()
             .flatMap(i -> i.getTypeArgumentDescriptors().stream())
             .collect(toImmutableList());
@@ -85,7 +84,7 @@ public final class LambdaImplementorTypeDescriptors {
       boolean capturesEnclosingInstance) {
 
     TypeDeclaration enclosingTypeDeclaration = enclosingTypeDescriptor.getTypeDeclaration();
-    List<String> classComponents =
+    ImmutableList<String> classComponents =
         enclosingTypeDeclaration.synthesizeInnerClassComponents(
             FUNCTIONAL_INTERFACE_IMPLEMENTOR_CLASS_NAME, uniqueId);
 
@@ -133,7 +132,7 @@ public final class LambdaImplementorTypeDescriptors {
                 LambdaImplementorTypeDescriptors::getLambdaMethod, implementorTypeDescriptor))
         .setEnclosingTypeDescriptor(implementorTypeDescriptor)
         // Remove the method type parameters as they when moved to the adaptor type.
-        .setTypeParameterTypeDescriptors(Collections.emptyList())
+        .setTypeParameterTypeDescriptors(ImmutableList.of())
         .setSynthetic(false)
         .setAbstract(false)
         .build();

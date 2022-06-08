@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import com.google.common.collect.ImmutableList;
 
 /** Exhaustive enumeration of primitive types. */
-public class PrimitiveTypes {
+public final class PrimitiveTypes {
   public static final PrimitiveTypeDescriptor VOID =
       new PrimitiveTypeDescriptor("void", "V", "java.lang.Void", -1);
   public static final PrimitiveTypeDescriptor BOOLEAN =
@@ -50,4 +50,6 @@ public class PrimitiveTypes {
         .findFirst()
         .get();
   }
+
+  private PrimitiveTypes() {}
 }

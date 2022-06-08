@@ -365,18 +365,16 @@ public abstract class TypeDeclaration
    *
    * <p>For example in the following code:
    *
-   * <pre>
-   * <code>
-   *   class Top {
-   *     @JsType(isNative = true, namespace = "foo", name = "Top.Inner")
-   *     class TopInner {
-   *       @JsType(isNative = true)
-   *       class InnerInner {}
-   *     }
+   * <pre>{@code
+   * class Top {
+   *   @JsType(isNative = true, namespace = "foo", name = "Top.Inner")
+   *   class TopInner {
+   *     @JsType(isNative = true)
+   *     class InnerInner {}
    *   }
+   * }
    *
-   * </code>
-   * </pre>
+   * }</pre>
    *
    * <p>The module relative JS names are in order is Top, Top.Inner, Top.Inner.InnerInner.
    */
@@ -513,7 +511,7 @@ public abstract class TypeDeclaration
             () ->
                 getInterfaceTypeDescriptors().stream()
                     .map(DeclaredTypeDescriptor::toRawTypeDescriptor)
-                    .collect(ImmutableList.toImmutableList()))
+                    .collect(toImmutableList()))
         .setTypeArgumentDescriptors(ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(
             () ->
@@ -653,7 +651,7 @@ public abstract class TypeDeclaration
   public List<MethodDescriptor> getJsConstructorMethodDescriptors() {
     return getDeclaredMethodDescriptors().stream()
         .filter(MethodDescriptor::isJsConstructor)
-        .collect(ImmutableList.toImmutableList());
+        .collect(toImmutableList());
   }
   /**
    * The list of fields declared in the type. Note: this does not include methods synthetic fields
@@ -719,8 +717,8 @@ public abstract class TypeDeclaration
                     applyOrNull(
                         self.getEnclosingTypeDeclaration(),
                         t -> t.toUnparameterizedTypeDescriptor()))
-                .setSuperTypeDescriptorFactory(() -> self.getSuperTypeDescriptor())
-                .setInterfaceTypeDescriptorsFactory(() -> self.getInterfaceTypeDescriptors())
+                .setSuperTypeDescriptorFactory(self::getSuperTypeDescriptor)
+                .setInterfaceTypeDescriptorsFactory(self::getInterfaceTypeDescriptors)
                 .setTypeArgumentDescriptors(self.getTypeParameterDescriptors())
                 .build();
 

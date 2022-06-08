@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.Collections;
@@ -52,7 +53,7 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
     Variable clonedExceptionVariable = exceptionVariable.clone();
     Block clonedBody =
         AstUtils.replaceDeclarations(
-            Collections.singletonList(exceptionVariable),
+            ImmutableList.of(exceptionVariable),
             Collections.singletonList(clonedExceptionVariable),
             body.clone());
 

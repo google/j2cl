@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
+import com.google.common.base.VerifyException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -26,7 +27,7 @@ import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ElementValuePair;
 
 /** Utility functions to process JDT annotations. */
-public class JdtAnnotationUtils {
+public final class JdtAnnotationUtils {
   static IAnnotationBinding findAnnotationBindingByName(
       IAnnotationBinding[] annotations, String name) {
     if (annotations == null) {
@@ -119,8 +120,10 @@ public class JdtAnnotationUtils {
       bindingField.setAccessible(true);
       return (AnnotationBinding) bindingField.get(annotationBinding);
     } catch (ReflectiveOperationException e) {
-      throw new RuntimeException(
+      throw new VerifyException(
           "Unexpectedly unable to access AnnotationBinding.binding via reflection", e);
     }
   }
+
+  private JdtAnnotationUtils() {}
 }

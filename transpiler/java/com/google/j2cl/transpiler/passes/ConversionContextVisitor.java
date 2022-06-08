@@ -215,7 +215,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public ArrayLiteral rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
     // assignment context
     ArrayTypeDescriptor typeDescriptor = arrayLiteral.getTypeDescriptor();
-    List<Expression> valueExpressions =
+    ImmutableList<Expression> valueExpressions =
         arrayLiteral.getValueExpressions().stream()
             .map(
                 valueExpression ->
@@ -473,10 +473,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public NewArray rewriteNewArray(NewArray newArray) {
     // unary numeric promotion context
-    List<Expression> dimensionExpressions =
-        newArray
-            .getDimensionExpressions()
-            .stream()
+    ImmutableList<Expression> dimensionExpressions =
+        newArray.getDimensionExpressions().stream()
             .map(contextRewriter::rewriteUnaryNumericPromotionContext)
             .collect(toImmutableList());
     return NewArray.newBuilder()

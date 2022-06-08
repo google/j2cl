@@ -49,7 +49,7 @@ public class JdtParser {
 
   private final Problems problems;
   private final Map<String, String> compilerOptions = new HashMap<>();
-  private final List<String> classpathEntries;
+  private final ImmutableList<String> classpathEntries;
 
   /** Create and initialize a JdtParser based on passed parameters. */
   public JdtParser(List<String> classpathEntries, Problems problems) {

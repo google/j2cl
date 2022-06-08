@@ -339,6 +339,21 @@ class ImportGatherer extends AbstractVisitor {
     addTypeDeclaration(typeDeclaration, getImplicitImportCategory());
   }
 
+  private void addTypeDeclaration(TypeDeclaration typeDeclaration, ImportCategory importCategory) {
+    checkArgument(!typeDeclaration.isJsFunctionInterface());
+    checkArgument(!typeDeclaration.getQualifiedJsName().isEmpty());
+
+    categoryForTypeDeclaration.merge(
+        typeDeclaration.getEnclosingModule(),
+        typeDeclaration.isExtern() ? ImportCategory.EXTERN : importCategory,
+        (existing, other) -> existing == null || other.strongerThan(existing) ? other : existing);
+
+    // Reserve the name earlier on so that these are never aliased.
+    if (typeDeclaration.isExtern()) {
+      localNameUses.add(typeDeclaration.getEnclosingModule().getQualifiedJsName());
+    }
+  }
+
   /**
    * Determines the import category of a type descriptor appearing in the code depending on the
    * context.
@@ -368,21 +383,6 @@ class ImportGatherer extends AbstractVisitor {
     return ImportCategory.RUNTIME;
   }
 
-  private void addTypeDeclaration(TypeDeclaration typeDeclaration, ImportCategory importCategory) {
-    checkArgument(!typeDeclaration.isJsFunctionInterface());
-    checkArgument(!typeDeclaration.getQualifiedJsName().isEmpty());
-
-    categoryForTypeDeclaration.merge(
-        typeDeclaration.getEnclosingModule(),
-        typeDeclaration.isExtern() ? ImportCategory.EXTERN : importCategory,
-        (existing, other) -> existing == null || other.strongerThan(existing) ? other : existing);
-
-    // Reserve the name earlier on so that these are never aliased.
-    if (typeDeclaration.isExtern()) {
-      localNameUses.add(typeDeclaration.getEnclosingModule().getQualifiedJsName());
-    }
-  }
-
   private void addExternTypeDeclaration(String qualifiedJsName) {
     // Externs are references on the JsPackage.GLOBAL namespace and only the top scope qualifier is
     // relevant for avoiding collisions.
@@ -392,7 +392,7 @@ class ImportGatherer extends AbstractVisitor {
         TypeDescriptors.createGlobalNativeTypeDescriptor(topScopeQualifier).getTypeDeclaration());
   }
 
-  private List<Import> doGatherImports(Type type) {
+  private ImmutableList<Import> doGatherImports(Type type) {
     // Collect type references.
     type.accept(this);
 
@@ -486,6 +486,6 @@ class ImportGatherer extends AbstractVisitor {
         break;
       }
     }
-    return packageName.replace(".", "_");
+    return packageName.replace('.', '_');
   }
 }

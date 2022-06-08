@@ -49,7 +49,7 @@ import javax.tools.ToolProvider;
  */
 public class JavacParser {
   private final Problems problems;
-  private final List<String> classpathEntries;
+  private final ImmutableList<String> classpathEntries;
 
   /** Create and initialize a JavacParser based on passed parameters. */
   public JavacParser(List<String> classpathEntries, Problems problems) {
@@ -104,10 +104,8 @@ public class JavacParser {
 
       JavaEnvironment javaEnvironment =
           new JavaEnvironment(task.getContext(), FrontendConstants.REQUIRED_QUALIFIED_BINARY_NAMES);
-      List<CompilationUnit> compilationUnits =
-          CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
+      return CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
 
-      return compilationUnits;
     } catch (IOException e) {
       problems.fatal(FatalError.valueOf(e.getMessage()));
       return null;

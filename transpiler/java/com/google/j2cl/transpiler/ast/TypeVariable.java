@@ -38,6 +38,7 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
+  @Override
   public abstract String getName();
 
   @Memoized

@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.libraryinfo;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
@@ -46,7 +47,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /** Traverse types and gather execution flow information for building call graph. */
 public final class LibraryInfoBuilder {
@@ -173,7 +173,7 @@ public final class LibraryInfoBuilder {
         typeInfoBuilder.addAllMember(
             memberInfoBuilders.values().stream()
                 .map(MemberInfo.Builder::build)
-                .collect(Collectors.toList())));
+                .collect(toImmutableList())));
   }
 
   private static MemberInfo.Builder createMemberInfo(

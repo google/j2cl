@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.auto.value.AutoValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -29,7 +31,6 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Normalizes switch statement for Kotlin, into cascading labeled blocks.
@@ -111,7 +112,7 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
             switchCase ->
                 new AutoValue_NormalizeSwitchStatementsKotlin_SwitchCaseWithLabel(
                     switchCase, Label.newBuilder().setName("CASE").build()))
-        .collect(Collectors.toList());
+        .collect(toImmutableList());
   }
 
   /**
@@ -145,7 +146,7 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
                                 switchCaseWithLabel.getSwitchCase(),
                                 switchCaseWithLabel.getLabel(),
                                 sourcePosition))
-                    .collect(Collectors.toList()))
+                    .collect(toImmutableList()))
             .build();
 
     return Block.newBuilder()

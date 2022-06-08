@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /** Utility functions to manipulate J2CL AST. */
-public class AstUtils {
+public final class AstUtils {
 
   /** Returns the loadModules method descriptor for a particular type */
   public static MethodDescriptor getLoadModulesDescriptor(DeclaredTypeDescriptor typeDescriptor) {
@@ -201,7 +201,7 @@ public class AstUtils {
             qualifier,
             toMethodDescriptor,
             isStaticDispatch,
-            parameters.stream().map(Variable::createReference).collect(Collectors.toList()),
+            parameters.stream().map(Variable::createReference).collect(toImmutableList()),
             fromMethodDescriptor.getReturnTypeDescriptor());
     return Method.newBuilder()
         .setMethodDescriptor(fromMethodDescriptor)
@@ -512,7 +512,7 @@ public class AstUtils {
 
   /** Clones a list of expressions */
   @SuppressWarnings("unchecked")
-  public static <T extends Cloneable<?>> List<T> clone(List<T> nodes) {
+  public static <T extends Cloneable<?>> ImmutableList<T> clone(List<T> nodes) {
     return nodes.stream().map(node -> (T) node.clone()).collect(toImmutableList());
   }
 
@@ -586,7 +586,7 @@ public class AstUtils {
   }
 
   /** Get a list of references for {@code variables}. */
-  public static List<Expression> getReferences(List<Variable> variables) {
+  public static ImmutableList<Expression> getReferences(List<Variable> variables) {
     return variables.stream().map(Variable::createReference).collect(toImmutableList());
   }
 
@@ -610,7 +610,7 @@ public class AstUtils {
       index++;
     }
 
-    List<Expression> superConstructorArguments =
+    ImmutableList<Expression> superConstructorArguments =
         constructorParameters.stream().map(Variable::createReference).collect(toImmutableList());
 
     return Method.newBuilder()
@@ -815,7 +815,7 @@ public class AstUtils {
       qualifier = new ThisReference(superReference.getTypeDescriptor());
     }
     // Call the method like Objects.foo(instance, ...)
-    List<Expression> arguments =
+    ImmutableList<Expression> arguments =
         ImmutableList.<Expression>builder()
             // Turn the instance into the first parameter to the devirtualized method.
             .add(qualifier)
@@ -1073,4 +1073,6 @@ public class AstUtils {
             || contextTypeDeclaration.isAnnotatedWithAutoValueBuilder());
     return new ThisReference(contextTypeDescriptor);
   }
+
+  private AstUtils() {}
 }

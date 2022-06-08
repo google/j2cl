@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.frontend.common;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static java.util.Arrays.stream;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
@@ -29,7 +30,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -208,7 +208,7 @@ public class PackageInfoCache {
 
   /** Returns the first classpath entry that provides class file for the given type. */
   private String findOriginClassPathEntry(String typeName) {
-    String classFilePath = typeName.replace(".", "/") + ".class";
+    String classFilePath = typeName.replace('.', '/') + ".class";
 
     URL typeResource = resourcesClassLoader.getResource(classFilePath);
     if (typeResource == null) {
@@ -283,7 +283,7 @@ public class PackageInfoCache {
       return null;
     }
 
-    return Arrays.stream(packageAnnotations)
+    return stream(packageAnnotations)
         .filter(JsPackage.class::isInstance)
         .findFirst()
         .map(JsPackage.class::cast)
@@ -296,7 +296,7 @@ public class PackageInfoCache {
       return false;
     }
 
-    return Arrays.stream(packageAnnotations).anyMatch(NullMarked.class::isInstance);
+    return stream(packageAnnotations).anyMatch(NullMarked.class::isInstance);
   }
 
   /**
@@ -306,11 +306,9 @@ public class PackageInfoCache {
    */
   private void propagateSpecificInfo(String classPathEntry, String topLevelTypeSourceName) {
     PackageReport packageReport =
-        packageReportBySpecificPackagePath.get(
-            toSpecificPackagePath(classPathEntry, getPackage(topLevelTypeSourceName)));
-    if (packageReport == null) {
-      packageReport = DEFAULT_PACKAGE_REPORT;
-    }
+        packageReportBySpecificPackagePath.getOrDefault(
+            toSpecificPackagePath(classPathEntry, getPackage(topLevelTypeSourceName)),
+            DEFAULT_PACKAGE_REPORT);
 
     packageReportByTypeName.put(topLevelTypeSourceName, packageReport);
   }

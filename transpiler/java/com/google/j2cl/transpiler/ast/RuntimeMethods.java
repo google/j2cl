@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.OptionalInt;
 
 /** Utilities to create method calls to the runtime. */
-public class RuntimeMethods {
+public final class RuntimeMethods {
 
   /** Create a call to an Arrays method. */
   public static MethodCall createArraysMethodCall(String methodName, Expression... arguments) {
@@ -85,7 +85,7 @@ public class RuntimeMethods {
   public static MethodCall createClassGetMethodCall(Expression... arguments) {
     checkArgument(arguments.length == 1 || arguments.length == 2);
 
-    List<TypeDescriptor> parameterTypeDescriptors =
+    ImmutableList<TypeDescriptor> parameterTypeDescriptors =
         ImmutableList.of(TypeDescriptors.get().nativeFunction, PrimitiveTypes.INT);
     return MethodCall.Builder.from(
             MethodDescriptor.newBuilder()
@@ -546,7 +546,7 @@ public class RuntimeMethods {
     MethodInfo methodInfo =
         runtimeMethodInfoByMethodNameByType.get().get(vmTypeDescriptor).get(methodName);
     checkNotNull(methodInfo, "%s#%s(%s)", vmTypeDescriptor, methodName, arguments);
-    List<TypeDescriptor> parameterTypeDescriptors = methodInfo.getParameters();
+    ImmutableList<TypeDescriptor> parameterTypeDescriptors = methodInfo.getParameters();
     int requiredParameters = methodInfo.getRequiredParameters();
     TypeDescriptor returnTypeDescriptor = methodInfo.getReturnType();
 
@@ -604,4 +604,6 @@ public class RuntimeMethods {
       }
     }
   }
+
+  private RuntimeMethods() {}
 }

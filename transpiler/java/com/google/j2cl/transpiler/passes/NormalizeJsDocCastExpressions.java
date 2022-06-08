@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -41,7 +41,7 @@ import java.util.Set;
  * wildcards.
  */
 public class NormalizeJsDocCastExpressions extends NormalizationPass {
-  private final Multimap<Member, TypeVariable> typeVariablesByMember = HashMultimap.create();
+  private final SetMultimap<Member, TypeVariable> typeVariablesByMember = HashMultimap.create();
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {

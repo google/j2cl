@@ -30,7 +30,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import com.google.j2cl.common.visitor.Context;
 import com.google.j2cl.common.visitor.Visitable;
 import java.io.BufferedWriter;
@@ -40,8 +40,6 @@ import java.io.StringWriter;
 import java.lang.annotation.Annotation;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
@@ -83,7 +81,7 @@ public class J2clAstProcessor extends AbstractProcessor {
 
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-    List<TypeElement> deferredTypes =
+    ImmutableList<TypeElement> deferredTypes =
         deferredTypeNames.stream()
             .map(deferred -> processingEnv.getElementUtils().getTypeElement(deferred))
             .collect(toImmutableList());
@@ -94,7 +92,7 @@ public class J2clAstProcessor extends AbstractProcessor {
 
         PackageElement packageElement =
             processingEnv.getElementUtils().getPackageElement(packageName);
-        List<VisitableClass> classes =
+        ImmutableList<VisitableClass> classes =
             ElementFilter.typesIn(packageElement.getEnclosedElements()).stream()
                 .filter(input -> isAnnotationPresent(input, Visitable.class))
                 .map(this::extractVisitableClass)
@@ -119,9 +117,8 @@ public class J2clAstProcessor extends AbstractProcessor {
       }
       return false;
     }
-    Collection<? extends Element> annotatedElements =
-        roundEnv.getElementsAnnotatedWith(Visitable.class);
-    List<TypeElement> types =
+    Set<? extends Element> annotatedElements = roundEnv.getElementsAnnotatedWith(Visitable.class);
+    ImmutableList<TypeElement> types =
         new ImmutableList.Builder<TypeElement>()
             .addAll(deferredTypes)
             .addAll(ElementFilter.typesIn(annotatedElements))
@@ -270,7 +267,7 @@ public class J2clAstProcessor extends AbstractProcessor {
    */
   private final List<String> deferredTypeNames = new ArrayList<>();
 
-  private Multimap<String, VisitableClass> processedVisitableClassesByPackageName =
+  private final SetMultimap<String, VisitableClass> processedVisitableClassesByPackageName =
       LinkedHashMultimap.create();
 
   private static final String ABSTRACT_VISITOR_TEMPLATE_FILE =
@@ -291,7 +288,7 @@ public class J2clAstProcessor extends AbstractProcessor {
 
   @Override
   public Set<String> getSupportedOptions() {
-    return Collections.emptySet();
+    return ImmutableSet.of();
   }
 
   private VelocityContext createVelocityContextForVisitor(
@@ -454,7 +451,7 @@ public class J2clAstProcessor extends AbstractProcessor {
     } catch (Throwable e) {
       StringWriter stringWriter = new StringWriter();
       e.printStackTrace(new PrintWriter(stringWriter));
-      reportError("Could not generate visitor class" + e + stringWriter.toString());
+      reportError("Could not generate visitor class" + e + stringWriter);
       success = false;
     } finally {
       if (!success) {

@@ -15,12 +15,13 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,8 +32,8 @@ import java.util.Map;
  * native code during the javascript generation stage.
  */
 public class NativeJavaScriptFile {
-  private String relativePath;
-  private String content;
+  private final String relativePath;
+  private final String content;
   private boolean used = false;
 
   public static final String NATIVE_EXTENSION = ".native.js";
@@ -83,8 +84,7 @@ public class NativeJavaScriptFile {
     Map<String, NativeJavaScriptFile> loadedFilesByPath = new LinkedHashMap<>();
     for (FileInfo file : files) {
       try {
-        String content =
-            MoreFiles.asCharSource(Paths.get(file.sourcePath()), StandardCharsets.UTF_8).read();
+        String content = MoreFiles.asCharSource(Paths.get(file.sourcePath()), UTF_8).read();
         NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file.targetPath(), content);
         loadedFilesByPath.put(nativeFile.getRelativePathWithoutExtension(), nativeFile);
       } catch (IOException e) {

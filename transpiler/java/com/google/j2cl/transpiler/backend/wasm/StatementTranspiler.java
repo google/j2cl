@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
+import static java.util.Arrays.stream;
 
 import com.google.common.collect.Iterables;
 import com.google.common.math.Stats;
@@ -49,7 +50,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /** Transforms Statements into WASM code. */
-class StatementTranspiler {
+final class StatementTranspiler {
 
   public static void render(
       Statement statement, final SourceBuilder builder, final GenerationEnvironment environment) {
@@ -310,7 +311,7 @@ class StatementTranspiler {
 
         builder.newLine();
         builder.append("(br_table ");
-        Arrays.stream(slots).forEach(slot -> builder.append(slot + " "));
+        stream(slots).forEach(slot -> builder.append(slot + " "));
         emitBranchIndexExpression(switchStatement.getSwitchExpression(), offset);
         builder.append(")");
         builder.closeParens();
@@ -591,4 +592,6 @@ class StatementTranspiler {
     NumberLiteral caseExpression = (NumberLiteral) switchCase.getCaseExpression();
     return caseExpression.getValue().intValue();
   }
+
+  private StatementTranspiler() {}
 }

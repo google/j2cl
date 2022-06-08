@@ -126,6 +126,7 @@ public class FieldAccess extends MemberReference {
       return this;
     }
 
+    @Override
     public FieldAccess build() {
       return new FieldAccess(getQualifier(), getTarget(), sourcePosition);
     }

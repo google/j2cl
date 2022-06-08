@@ -31,10 +31,13 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract TypeDescriptor getTypeDescriptor();
 
+  @Override
   public abstract boolean isCompileTimeConstant();
 
+  @Override
   public abstract boolean isEnumConstant();
 
+  @Override
   public abstract boolean isDeprecated();
 
   @Override
@@ -73,7 +76,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
    *
    * <p>
    *
-   * <pre>
+   * <pre>{@code
    *   class A<T> {
    *     T f;  // Field declaration described as a field "A.f" with type "T".
    *   }
@@ -83,7 +86,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
    *   // to the same field "A.f".
    *   new A<String>().f;
    * <p>
-   * </pre>
+   * }</pre>
    */
   @Override
   public FieldDescriptor getDeclarationDescriptor() {

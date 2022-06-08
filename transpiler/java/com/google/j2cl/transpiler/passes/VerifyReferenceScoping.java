@@ -50,7 +50,7 @@ public class VerifyReferenceScoping extends NormalizationPass {
 
     // Variables and labels that are accessible in a given scope. It is meant to include all the
     // variables and labels defined in parent scopes to make checking simpler.
-    Set<NameDeclaration> accessibleDeclarations = new HashSet<>();
+    final Set<NameDeclaration> accessibleDeclarations = new HashSet<>();
   }
 
   @Override

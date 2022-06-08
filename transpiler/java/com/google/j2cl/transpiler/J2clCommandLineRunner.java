@@ -13,6 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
 import com.google.common.base.Splitter;
@@ -122,14 +123,14 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setSources(
             SourceUtils.getAllSources(this.files, problems)
                 .filter(p -> p.sourcePath().endsWith(".java"))
-                .collect(ImmutableList.toImmutableList()))
+                .collect(toImmutableList()))
         .setKotlinCommonSources(
             SourceUtils.getAllSources(this.kotlinCommonSources, problems)
-                .collect(ImmutableList.toImmutableList()))
+                .collect(toImmutableList()))
         .setNativeSources(
             SourceUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
                 .filter(p -> p.sourcePath().endsWith(".native.js"))
-                .collect(ImmutableList.toImmutableList()))
+                .collect(toImmutableList()))
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(output)
         .setEmitReadableSourceMap(this.readableSourceMaps)

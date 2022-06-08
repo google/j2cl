@@ -26,9 +26,9 @@ import com.google.j2cl.common.visitor.Visitable;
  */
 @Visitable
 public class BinaryExpression extends Expression {
-  private TypeDescriptor typeDescriptor;
+  private final TypeDescriptor typeDescriptor;
   @Visitable Expression leftOperand;
-  private BinaryOperator operator;
+  private final BinaryOperator operator;
   @Visitable Expression rightOperand;
 
   private BinaryExpression(

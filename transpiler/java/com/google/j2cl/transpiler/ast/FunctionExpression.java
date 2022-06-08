@@ -33,7 +33,7 @@ public class FunctionExpression extends Expression implements MethodLike {
   @Visitable final List<Variable> parameters;
   @Visitable Block body;
   private final TypeDescriptor typeDescriptor;
-  private SourcePosition sourcePosition;
+  private final SourcePosition sourcePosition;
 
   private FunctionExpression(
       SourcePosition sourcePosition,

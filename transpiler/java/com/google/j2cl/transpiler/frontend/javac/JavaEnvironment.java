@@ -77,7 +77,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
@@ -384,7 +383,7 @@ class JavaEnvironment {
         .setUpperBoundTypeDescriptorSupplier(boundTypeDescriptorFactory)
         .setWildcardOrCapture(false)
         .setUniqueKey(
-            classComponents.stream().collect(Collectors.joining("::"))
+            String.join("::", classComponents)
                 + (typeVariable.getUpperBound() != null
                     ? typeVariable.getUpperBound().toString()
                     : ""))
@@ -416,7 +415,8 @@ class JavaEnvironment {
     return toTopLevelTypeBinding(element.getEnclosingElement());
   }
 
-  private List<String> getClassComponents(javax.lang.model.type.TypeVariable typeVariable) {
+  private ImmutableList<String> getClassComponents(
+      javax.lang.model.type.TypeVariable typeVariable) {
     Element enclosingElement = typeVariable.asElement().getEnclosingElement();
     if (enclosingElement.getKind() == ElementKind.CLASS
         || enclosingElement.getKind() == ElementKind.INTERFACE
@@ -440,7 +440,7 @@ class JavaEnvironment {
     }
   }
 
-  private List<String> getClassComponents(Element element) {
+  private ImmutableList<String> getClassComponents(Element element) {
     if (!(element instanceof TypeElement)) {
       return ImmutableList.of();
     }
@@ -618,7 +618,7 @@ class JavaEnvironment {
 
     MethodDescriptor declarationMethodDescriptor = null;
 
-    List<TypeMirror> parameters =
+    ImmutableList<TypeMirror> parameters =
         methodElement.getParameters().stream()
             .map(VariableElement::asType)
             .collect(toImmutableList());
@@ -827,7 +827,7 @@ class JavaEnvironment {
       MethodDescriptor declarationMethodDescriptor,
       List<TypeDescriptor> parameters,
       TypeDescriptor returnTypeDescriptor) {
-    List<TypeVariable> typeParameterTypeDescriptors =
+    ImmutableList<TypeVariable> typeParameterTypeDescriptors =
         declarationMethodElement.getTypeParameters().stream()
             .map(Element::asType)
             .map(this::createTypeDescriptor)
@@ -966,7 +966,7 @@ class JavaEnvironment {
                         (ExecutableType) method.asType(), (ExecutableType) om.asType()));
   }
 
-  private Set<MethodSymbol> getJavaLangObjectMethods() {
+  private ImmutableSet<MethodSymbol> getJavaLangObjectMethods() {
     ClassType javaLangObjectTypeBinding =
         (ClassType) elements.getTypeElement("java.lang.Object").asType();
     return getDeclaredMethods(javaLangObjectTypeBinding).stream()
@@ -1048,7 +1048,7 @@ class JavaEnvironment {
   }
 
   private TypeDescriptor createIntersectionType(IntersectionClassType intersectionType) {
-    List<DeclaredTypeDescriptor> intersectedTypeDescriptors =
+    ImmutableList<DeclaredTypeDescriptor> intersectedTypeDescriptors =
         createTypeDescriptors(
             intersectionType.getBounds(),
             /* inNullMarkedScope= */ false,
@@ -1059,7 +1059,7 @@ class JavaEnvironment {
   }
 
   private TypeDescriptor createUnionType(UnionClassType unionType) {
-    List<TypeDescriptor> unionTypeDescriptors =
+    ImmutableList<TypeDescriptor> unionTypeDescriptors =
         createTypeDescriptors(unionType.getAlternatives(), /* inNullMarkedScope= */ false);
     return UnionTypeDescriptor.newBuilder().setUnionTypeDescriptors(unionTypeDescriptors).build();
   }
@@ -1356,7 +1356,7 @@ class JavaEnvironment {
                 .map(TypeParameterElement::asType)
                 .map(javax.lang.model.type.TypeVariable.class::cast)
                 .map(this::createTypeVariable)
-                .collect(Collectors.toList()))
+                .collect(toImmutableList()))
         .setVisibility(getVisibility(typeElement))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)

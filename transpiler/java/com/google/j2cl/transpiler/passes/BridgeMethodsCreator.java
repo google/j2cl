@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -31,7 +32,6 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Checks circumstances where a bridge method should be generated and creates the bridge methods.
@@ -64,7 +64,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                 parameters.stream(),
                 targetMethod.getParameterTypeDescriptors().stream(),
                 BridgeMethodsCreator::performRuntimeChecksOnParameter)
-            .collect(Collectors.toList());
+            .collect(toImmutableList());
 
     DeclaredTypeDescriptor targetEnclosingTypeDescriptor =
         targetMethod.getEnclosingTypeDescriptor();

@@ -146,7 +146,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
@@ -425,7 +424,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return statements.stream().map(this::convertInitializer).collect(toImmutableList());
   }
 
-  private List<Expression> convertVariableDeclarations(List<JCStatement> statements) {
+  private ImmutableList<Expression> convertVariableDeclarations(List<JCStatement> statements) {
     return ImmutableList.of(
         VariableDeclarationExpression.newBuilder()
             .addVariableDeclarationFragments(
@@ -622,7 +621,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return statement != null ? convertStatement(statement) : null;
   }
 
-  private List<Statement> convertStatements(List<JCStatement> statements) {
+  private ImmutableList<Statement> convertStatements(List<JCStatement> statements) {
     return statements.stream().map(this::convertStatement).collect(toImmutableList());
   }
 
@@ -1054,7 +1053,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private List<Expression> convertArguments(
       MethodDescriptor methodDescriptor, List<JCExpression> argumentExpressions) {
     List<Expression> arguments =
-        argumentExpressions.stream().map(this::convertExpression).collect(Collectors.toList());
+        argumentExpressions.stream().map(this::convertExpression).collect(toImmutableList());
 
     return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
   }
@@ -1271,7 +1270,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private List<Expression> convertExpressions(List<JCExpression> expressions) {
-    return expressions.stream().map(this::convertExpression).collect(Collectors.toList());
+    return expressions.stream().map(this::convertExpression).collect(toImmutableList());
   }
 
   private CompilationUnit build(JCCompilationUnit javacUnit) {
@@ -1300,7 +1299,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return getCurrentCompilationUnit();
   }
 
-  public static List<CompilationUnit> build(
+  public static ImmutableList<CompilationUnit> build(
       List<CompilationUnitTree> compilationUnits, JavaEnvironment javaEnvironment) {
 
     CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder(javaEnvironment);

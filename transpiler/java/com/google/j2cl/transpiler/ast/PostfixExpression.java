@@ -26,7 +26,7 @@ import com.google.j2cl.common.visitor.Visitable;
  */
 @Visitable
 public class PostfixExpression extends UnaryExpression {
-  private PostfixOperator operator;
+  private final PostfixOperator operator;
 
   private PostfixExpression(Expression operand, PostfixOperator operator) {
     super(operand);

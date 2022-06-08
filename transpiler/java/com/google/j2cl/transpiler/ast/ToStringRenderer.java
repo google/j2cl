@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import com.google.common.base.Strings;
 import java.util.List;
 
 /**
@@ -600,7 +599,7 @@ class ToStringRenderer {
       }
 
       private void print(String string) {
-        result.append(string.replace("\n", "\n" + Strings.repeat("  ", currentIndent)));
+        result.append(string.replace("\n", "\n" + "  ".repeat(currentIndent)));
       }
 
       private void print(TypeDescriptor typeDescriptor) {

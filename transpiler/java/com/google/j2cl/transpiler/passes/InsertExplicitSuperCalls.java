@@ -16,10 +16,10 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.MoreCollectors.toOptional;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -117,7 +117,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
                     m.getParameterDescriptors().isEmpty()
                         // The implicit enum constructor targed is defined with two parameters.
                         || (type.isEnum() && m.getParameterDescriptors().size() == 2))
-            .collect(MoreCollectors.toOptional());
+            .collect(toOptional());
 
     if (!superContructor.isPresent()) {
       // If no 0-argument constructor find a 1-argument varargs constructor. There might be more

@@ -60,7 +60,6 @@ import com.google.j2cl.transpiler.ast.Variable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -97,7 +96,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   private static void inlineImplementationTypes(
       Library library, Set<TypeDeclaration> optimizableTypes) {
 
-    Map<TypeDeclaration, Type> superTypeToInlinedType =
+    ImmutableMap<TypeDeclaration, Type> superTypeToInlinedType =
         library
             .streamTypes()
             .filter(t -> optimizableTypes.contains(t.getDeclaration().getSuperTypeDeclaration()))

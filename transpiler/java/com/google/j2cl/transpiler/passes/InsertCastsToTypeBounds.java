@@ -37,13 +37,13 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
  * For example code like:
  *
  * <pre>
- * <code>
+ * <code>{@code
  *   class A< T extends List<?>> {
  *     void clear(T list) {
  *       list.clear();
  *     }
  *   }
- * </code>
+ * }</code>
  * </pre>
  *
  * <p>would get emitted as:
@@ -72,7 +72,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
  * accessing a property of a variable typed at {@code T extends ... }. E.g:
  *
  * <pre>
- * <code>
+ * <code>{@code
  *   /**
  *    * @template {T}
  *    * /
@@ -84,7 +84,7 @@ import com.google.j2cl.transpiler.ast.TypeVariable;
  *       return /** @type {List<?>} * / (list).clear();
  *     }
  *   }
- * </code>
+ * }</code>
  * </pre>
  */
 public class InsertCastsToTypeBounds extends NormalizationPass {

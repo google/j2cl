@@ -20,7 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -63,7 +63,7 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    Multimap<Block, VariableDeclarationExpression> variableDeclarationsToRelocateByBlock =
+    SetMultimap<Block, VariableDeclarationExpression> variableDeclarationsToRelocateByBlock =
         LinkedHashMultimap.create();
 
     // Variable declarations in JavaScript can only appear in a few constructs, namely as the top

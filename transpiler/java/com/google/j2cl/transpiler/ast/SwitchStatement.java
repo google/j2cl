@@ -52,6 +52,7 @@ public class SwitchStatement extends Statement {
     return Iterables.indexOf(getCases(), SwitchCase::isDefault);
   }
 
+  @Override
   public SwitchStatement clone() {
     return SwitchStatement.newBuilder()
         .setSourcePosition(getSourcePosition())

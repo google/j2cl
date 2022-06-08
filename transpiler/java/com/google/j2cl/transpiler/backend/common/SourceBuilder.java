@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
-import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
@@ -42,7 +41,7 @@ public class SourceBuilder {
   private static final String LINE_SEPARATOR = String.valueOf(LINE_SEPARATOR_CHAR);
   private static final String INDENT = " ";
 
-  private StringBuilder sb = new StringBuilder();
+  private final StringBuilder sb = new StringBuilder();
   private int currentLine = 0;
   private int currentColumn = 0;
   private int currentIndentation = 0;
@@ -131,7 +130,7 @@ public class SourceBuilder {
   public void append(String source) {
     checkState(!finished);
     String indentedSource =
-        source.replace(LINE_SEPARATOR, LINE_SEPARATOR + Strings.repeat(INDENT, currentIndentation));
+        source.replace(LINE_SEPARATOR, LINE_SEPARATOR + INDENT.repeat(currentIndentation));
 
     sb.append(indentedSource);
     currentLine += CharMatcher.is(LINE_SEPARATOR_CHAR).countIn(indentedSource);

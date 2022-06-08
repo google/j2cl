@@ -79,8 +79,8 @@ public abstract class BazelWorker {
     }
   }
 
-  private static void runStandaloneWorker(Supplier<BazelWorker> workerSupplier, List<String> args)
-      throws IOException {
+  @SuppressWarnings("SystemExitOutsideMain")
+  private static void runStandaloneWorker(Supplier<BazelWorker> workerSupplier, List<String> args) {
     // This is a single invocation of builder that exits after it processed the request.
     int exitCode = workerSupplier.get().processRequest(args);
     System.exit(exitCode);

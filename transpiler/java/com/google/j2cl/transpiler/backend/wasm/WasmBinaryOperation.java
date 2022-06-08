@@ -25,7 +25,6 @@ import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import java.util.Map;
 
 /** Abstract the wasm binary instructions set used by j2wasm. */
 public enum WasmBinaryOperation {
@@ -75,33 +74,34 @@ public enum WasmBinaryOperation {
     return expression.getLeftOperand().getTypeDescriptor();
   }
 
-  private static final Map<BinaryOperator, WasmBinaryOperation> wasmOperationByBinaryOperator =
-      ImmutableMap.<BinaryOperator, WasmBinaryOperation>builder()
-          .put(BinaryOperator.DIVIDE, WasmBinaryOperation.DIV)
-          .put(BinaryOperator.MINUS, WasmBinaryOperation.SUB)
-          .put(BinaryOperator.PLUS, WasmBinaryOperation.ADD)
-          .put(BinaryOperator.TIMES, WasmBinaryOperation.MUL)
-          .put(BinaryOperator.REMAINDER, WasmBinaryOperation.REM_S)
-          .put(BinaryOperator.LEFT_SHIFT, WasmBinaryOperation.SHL)
-          .put(BinaryOperator.RIGHT_SHIFT_SIGNED, WasmBinaryOperation.SHR_S)
-          .put(BinaryOperator.RIGHT_SHIFT_UNSIGNED, WasmBinaryOperation.SHR_U)
-          .put(BinaryOperator.LESS, WasmBinaryOperation.LT)
-          .put(BinaryOperator.GREATER, WasmBinaryOperation.GT)
-          .put(BinaryOperator.LESS_EQUALS, WasmBinaryOperation.LE)
-          .put(BinaryOperator.GREATER_EQUALS, WasmBinaryOperation.GE)
-          .put(BinaryOperator.EQUALS, WasmBinaryOperation.EQ)
-          .put(BinaryOperator.NOT_EQUALS, WasmBinaryOperation.NE)
-          .put(BinaryOperator.BIT_XOR, WasmBinaryOperation.XOR)
-          .put(BinaryOperator.BIT_AND, WasmBinaryOperation.AND)
-          .put(BinaryOperator.BIT_OR, WasmBinaryOperation.OR)
-          .build();
+  private static final ImmutableMap<BinaryOperator, WasmBinaryOperation>
+      WASM_OPERATION_BY_BINARY_OPERATOR =
+          ImmutableMap.<BinaryOperator, WasmBinaryOperation>builder()
+              .put(BinaryOperator.DIVIDE, WasmBinaryOperation.DIV)
+              .put(BinaryOperator.MINUS, WasmBinaryOperation.SUB)
+              .put(BinaryOperator.PLUS, WasmBinaryOperation.ADD)
+              .put(BinaryOperator.TIMES, WasmBinaryOperation.MUL)
+              .put(BinaryOperator.REMAINDER, WasmBinaryOperation.REM_S)
+              .put(BinaryOperator.LEFT_SHIFT, WasmBinaryOperation.SHL)
+              .put(BinaryOperator.RIGHT_SHIFT_SIGNED, WasmBinaryOperation.SHR_S)
+              .put(BinaryOperator.RIGHT_SHIFT_UNSIGNED, WasmBinaryOperation.SHR_U)
+              .put(BinaryOperator.LESS, WasmBinaryOperation.LT)
+              .put(BinaryOperator.GREATER, WasmBinaryOperation.GT)
+              .put(BinaryOperator.LESS_EQUALS, WasmBinaryOperation.LE)
+              .put(BinaryOperator.GREATER_EQUALS, WasmBinaryOperation.GE)
+              .put(BinaryOperator.EQUALS, WasmBinaryOperation.EQ)
+              .put(BinaryOperator.NOT_EQUALS, WasmBinaryOperation.NE)
+              .put(BinaryOperator.BIT_XOR, WasmBinaryOperation.XOR)
+              .put(BinaryOperator.BIT_AND, WasmBinaryOperation.AND)
+              .put(BinaryOperator.BIT_OR, WasmBinaryOperation.OR)
+              .build();
 
   public static WasmBinaryOperation getOperation(BinaryExpression expression) {
     BinaryOperator operator = expression.getOperator();
 
-    checkState(wasmOperationByBinaryOperator.containsKey(operator));
+    checkState(WASM_OPERATION_BY_BINARY_OPERATOR.containsKey(operator));
     checkState(expression.getTypeDescriptor().isPrimitive());
 
-    return wasmOperationByBinaryOperator.get(operator);
+    return WASM_OPERATION_BY_BINARY_OPERATOR.get(operator);
   }
 }

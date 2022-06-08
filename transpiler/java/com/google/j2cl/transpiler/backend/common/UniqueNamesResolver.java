@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.backend.common;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
@@ -45,7 +45,7 @@ public final class UniqueNamesResolver {
 
     // Gather variables by MemberDescriptor because clinit() and init() are synthesized at
     // generation from multiple members.
-    final Multimap<MemberDescriptor, String> variableUniqueNamesByMember = HashMultimap.create();
+    final SetMultimap<MemberDescriptor, String> variableUniqueNamesByMember = HashMultimap.create();
     final Map<HasName, String> uniqueNameByVariable = new HashMap<>();
 
     // Collect type variables defined at the type level, and exclude their unique names from the

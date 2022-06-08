@@ -38,7 +38,7 @@ import java.util.stream.Stream;
 public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasReadableDescription {
   private final Visibility visibility;
   private boolean isStatic;
-  private TypeDeclaration typeDeclaration;
+  private final TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
   @Visitable List<Type> types = new ArrayList<>();
   @Visitable List<Statement> loadTimeStatements = new ArrayList<>();

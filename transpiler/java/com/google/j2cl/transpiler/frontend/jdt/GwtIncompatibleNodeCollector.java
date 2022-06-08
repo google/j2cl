@@ -33,7 +33,7 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
  * annotation.
  */
 public class GwtIncompatibleNodeCollector extends ASTVisitor {
-  private List<ASTNode> nodes = new ArrayList<>();
+  private final List<ASTNode> nodes = new ArrayList<>();
 
   @Override
   public boolean visit(TypeDeclaration typeDeclaration) {

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -39,7 +40,6 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
-import java.util.List;
 
 /**
  * This class generates the AST structure for the synthesized static methods values and valueOf on
@@ -188,7 +188,7 @@ public class EnumMethodsCreator extends NormalizationPass {
     SourcePosition sourcePosition = enumType.getSourcePosition();
 
     // Create method body.
-    List<Expression> values =
+    ImmutableList<Expression> values =
         enumType.getEnumFields().stream()
             .map(enumField -> FieldAccess.Builder.from(enumField.getDescriptor()).build())
             .collect(toImmutableList());

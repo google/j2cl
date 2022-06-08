@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -29,7 +31,6 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Simplifies multiexpressions to ensure that multiexpressions are never on the lhs of a side
@@ -70,7 +71,7 @@ public class NormalizeMultiExpressions extends NormalizationPass {
             ((MultiExpression) statement.getExpression())
                 .getExpressions().stream()
                     .filter(Expression::hasSideEffects)
-                    .collect(Collectors.toList());
+                    .collect(toImmutableList());
 
         if (expressions.isEmpty()) {
           // No expressions with side effects in this top level multexpression, remove completely.
@@ -86,12 +87,11 @@ public class NormalizeMultiExpressions extends NormalizationPass {
           return Block.newBuilder()
               .setSourcePosition(statement.getSourcePosition())
               .setStatements(
-                  expressions
-                      .stream()
+                  expressions.stream()
                       .map(
                           innerExpression ->
                               innerExpression.makeStatement(statement.getSourcePosition()))
-                      .collect(Collectors.toList()))
+                      .collect(toImmutableList()))
               .build();
         }
       }

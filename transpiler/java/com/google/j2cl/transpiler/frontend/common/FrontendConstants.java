@@ -18,7 +18,7 @@ package com.google.j2cl.transpiler.frontend.common;
 import com.google.common.collect.ImmutableList;
 
 /** Constants common to all frontends. */
-public class FrontendConstants {
+public final class FrontendConstants {
 
   /** Annotations names. */
   public static final String JS_CONSTRUCTOR_ANNOTATION_NAME = "jsinterop.annotations.JsConstructor";
@@ -82,4 +82,6 @@ public class FrontendConstants {
           "javaemul.internal.WasmArray$OfFloat",
           "javaemul.internal.WasmArray$OfDouble",
           "javaemul.internal.WasmArray$OfBoolean");
+
+  private FrontendConstants() {}
 }

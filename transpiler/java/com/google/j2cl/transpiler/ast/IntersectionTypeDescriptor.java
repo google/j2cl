@@ -22,7 +22,6 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.ThreadLocalInterner;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -104,10 +103,9 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   @Override
   @Memoized
   public Set<TypeVariable> getAllTypeVariables() {
-    return getIntersectionTypeDescriptors()
-        .stream()
+    return getIntersectionTypeDescriptors().stream()
         .map(TypeDescriptor::getAllTypeVariables)
-        .flatMap(set -> set.stream())
+        .flatMap(Set::stream)
         .collect(Collectors.toSet());
   }
 
@@ -148,8 +146,9 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
-    List<DeclaredTypeDescriptor> intersections = getIntersectionTypeDescriptors();
-    List<DeclaredTypeDescriptor> newIntersections = replaceTypeDescriptors(intersections, fn, seen);
+    ImmutableList<DeclaredTypeDescriptor> intersections = getIntersectionTypeDescriptors();
+    ImmutableList<DeclaredTypeDescriptor> newIntersections =
+        replaceTypeDescriptors(intersections, fn, seen);
     if (!intersections.equals(newIntersections)) {
       return newBuilder().setIntersectionTypeDescriptors(newIntersections).build();
     }
@@ -165,13 +164,11 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
     return newBuilder()
         .setIntersectionTypeDescriptors(
-            getIntersectionTypeDescriptors()
-                .stream()
+            getIntersectionTypeDescriptors().stream()
                 .map(
                     typeDescriptor ->
-                        (DeclaredTypeDescriptor)
-                            typeDescriptor.specializeTypeVariables(
-                                replacementTypeArgumentByTypeVariable))
+                        typeDescriptor.specializeTypeVariables(
+                            replacementTypeArgumentByTypeVariable))
                 .collect(ImmutableList.toImmutableList()))
         .build();
   }

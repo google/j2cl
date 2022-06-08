@@ -28,7 +28,6 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.MoreCollectors;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
@@ -41,7 +40,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
@@ -196,10 +194,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   /** Returns the single declared constructor fo this class. */
   @Memoized
   public MethodDescriptor getSingleConstructor() {
-    return getDeclaredMethodDescriptors()
-        .stream()
+    return getDeclaredMethodDescriptors().stream()
         .filter(MethodDescriptor::isConstructor)
-        .collect(MoreCollectors.onlyElement());
+        .collect(onlyElement());
   }
 
   @Memoized
@@ -947,8 +944,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   private Map<TypeVariable, TypeDescriptor> getLocalParameterization() {
-    List<TypeVariable> typeVariables = getTypeDeclaration().getTypeParameterDescriptors();
-    List<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
+    ImmutableList<TypeVariable> typeVariables = getTypeDeclaration().getTypeParameterDescriptors();
+    ImmutableList<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
 
     Map<TypeVariable, TypeDescriptor> typeArgumentsByTypeVariable = new LinkedHashMap<>();
 
@@ -964,8 +961,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
-    List<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
-    List<TypeDescriptor> newtypeArguments = replaceTypeDescriptors(typeArguments, fn, seen);
+    ImmutableList<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
+    ImmutableList<TypeDescriptor> newtypeArguments =
+        replaceTypeDescriptors(typeArguments, fn, seen);
     if (!typeArguments.equals(newtypeArguments)) {
       return Builder.from(this).setTypeArgumentDescriptors(newtypeArguments).build();
     }
@@ -1032,7 +1030,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         + (hasTypeArguments()
             ? getTypeArgumentDescriptors().stream()
                 .map(TypeDescriptor::getReadableDescription)
-                .collect(Collectors.joining(", ", "<", ">"))
+                .collect(joining(", ", "<", ">"))
             : "");
   }
 

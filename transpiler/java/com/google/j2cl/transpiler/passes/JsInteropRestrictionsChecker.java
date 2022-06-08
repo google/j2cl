@@ -17,12 +17,13 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.MoreCollectors.onlyElement;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.MoreCollectors;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
@@ -1802,18 +1803,15 @@ public class JsInteropRestrictionsChecker {
 
   private static MethodDescriptor getPrimaryConstructorDescriptor(final Type type) {
     if (type.getConstructors().isEmpty()) {
-      return type.getDeclaration()
-          .getDeclaredMethodDescriptors()
-          .stream()
+      return type.getDeclaration().getDeclaredMethodDescriptors().stream()
           .filter(MethodDescriptor::isConstructor)
-          .collect(MoreCollectors.onlyElement());
+          .collect(onlyElement());
     }
 
     ImmutableList<Method> superDelegatingConstructors =
-        type.getConstructors()
-            .stream()
+        type.getConstructors().stream()
             .filter(Predicates.not(AstUtils::hasThisCall))
-            .collect(ImmutableList.toImmutableList());
+            .collect(toImmutableList());
     return superDelegatingConstructors.size() != 1
         ? null
         : superDelegatingConstructors.get(0).getDescriptor();

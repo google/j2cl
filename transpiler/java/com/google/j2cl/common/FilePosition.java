@@ -25,13 +25,13 @@ public abstract class FilePosition implements Comparable<FilePosition> {
 
   static final FilePosition NONE = newBuilder().setLine(-1).setColumn(-1).setByteOffset(-1).build();
 
-  /** @return the line number of this position. */
+  /** Returns the line number of this position. */
   public abstract int getLine();
 
-  /** @return the character index on the line of this position, with the first column being 0. */
+  /** Returns the character index on the line of this position, with the first column being 0. */
   public abstract int getColumn();
 
-  /** @return the byte offset of this position. */
+  /** Returns the byte offset of this position. */
   public abstract int getByteOffset();
 
   @Override

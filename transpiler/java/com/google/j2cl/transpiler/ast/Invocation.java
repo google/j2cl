@@ -49,6 +49,7 @@ public abstract class Invocation extends MemberReference {
     return !getTarget().isSideEffectFree();
   }
 
+  @Override
   abstract Builder<?, ?> createBuilder();
 
   /**

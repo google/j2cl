@@ -20,7 +20,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 /** Utility methods for using Apache Velocity. */
-class VelocityUtil {
+final class VelocityUtil {
   private static final String CLASSPATH_RESOURCE_LOADER_CLASS = "classpath.resource.loader.class";
 
   /** Creates and returns a VelocityEngine that will find templates on the classpath. */
@@ -32,4 +32,6 @@ class VelocityUtil {
     velocityEngine.init();
     return velocityEngine;
   }
+
+  private VelocityUtil() {}
 }

@@ -32,10 +32,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- * Generates a readable version of the sourcemap.
- */
-public class ReadableSourceMapGenerator {
+/** Generates a readable version of the sourcemap. */
+public final class ReadableSourceMapGenerator {
   /** The source location of the ast node to print, input or output. */
   public static String generate(
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
@@ -78,7 +76,7 @@ public class ReadableSourceMapGenerator {
     return sb.toString();
   }
 
-  private static Map<String, List<String>> buildSourceLinesByFileName(
+  private static ImmutableMap<String, List<String>> buildSourceLinesByFileName(
       NativeJavaScriptFile nativeJavaScriptFile, String j2clUnitFilePath, Problems problems) {
     ImmutableMap.Builder<String, List<String>> contentsByFileNameBuilder = ImmutableMap.builder();
 
@@ -122,7 +120,7 @@ public class ReadableSourceMapGenerator {
       content
           .append("\n")
           .append(trimTrailingWhitespace(lines.get(endLine).substring(0, endColumn)));
-      return "[" + content.toString() + "]";
+      return "[" + content + "]";
     }
 
     return "[" + fragment.substring(startColumn, endColumn) + "]";
@@ -131,4 +129,6 @@ public class ReadableSourceMapGenerator {
   private static String trimTrailingWhitespace(String string) {
     return CharMatcher.whitespace().trimTrailingFrom(string);
   }
+
+  private ReadableSourceMapGenerator() {}
 }

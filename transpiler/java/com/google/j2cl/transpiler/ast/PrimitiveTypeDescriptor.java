@@ -72,8 +72,7 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   /**
-   * Returns true if {@code thisType} is wider than {@code thatType} from the arithmetic precision
-   * perspective.
+   * Returns true if this is wider than {@code thatType} from the arithmetic precision perspective.
    *
    * <p>Arithmetic operations with types of different widths require conversions.
    */

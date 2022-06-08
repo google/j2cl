@@ -50,48 +50,48 @@ final class BazelJ2clBuilder extends BazelWorker {
       metaVar = "<source files>",
       required = true,
       usage = "Specifies individual files and jars/zips of sources (.java, .js, .native.js).")
-  protected List<String> sources = new ArrayList<>();
+  List<String> sources = new ArrayList<>();
 
   @Option(
       name = "-ktcommonsources",
       metaVar = "<common source files>",
       usage = "Specifies individual files and jars/zips of Kotlin common sources.")
-  protected List<String> kotlinCommonSources = new ArrayList<>();
+  List<String> kotlinCommonSources = new ArrayList<>();
 
   @Option(
       name = "-classpath",
       required = true,
       metaVar = "<path>",
       usage = "Specifies where to find user class files and annotation processors.")
-  protected String classPath;
+  String classPath;
 
   @Option(
       name = "-output",
       required = true,
       metaVar = "<path>",
       usage = "Directory or zip into which to place compiled output.")
-  protected Path output;
+  Path output;
 
   @Option(
       name = "-libraryinfooutput",
       metaVar = "<path>",
       usage = "Specifies the file into which to place the call graph.")
-  protected Path libraryInfoOutput;
+  Path libraryInfoOutput;
 
   @Option(name = "-readablelibraryinfo", hidden = true)
-  protected boolean readableLibraryInfo = false;
+  boolean readableLibraryInfo = false;
 
   @Option(name = "-readablesourcemaps", hidden = true)
-  protected boolean readableSourceMaps = false;
+  boolean readableSourceMaps = false;
 
   @Option(name = "-generatekytheindexingmetadata", hidden = true)
-  protected boolean generateKytheIndexingMetadata = false;
+  boolean generateKytheIndexingMetadata = false;
 
   @Option(
       name = "-optimizeautovalue",
       usage = "Enables optimizations of AutoValue types.",
       hidden = true)
-  protected boolean optimizeAutoValue = false;
+  boolean optimizeAutoValue = false;
 
   @Option(
       name =
@@ -103,13 +103,13 @@ final class BazelJ2clBuilder extends BazelWorker {
               + " compile time validation. Such misleading code has caused outages in the past for"
               + " products.",
       hidden = true)
-  protected boolean enableJSpecifySupport = false;
+  boolean enableJSpecifySupport = false;
 
   @Option(
       name = "-experimentalJavaFrontend",
       usage = "Select the java frontend to use: JDT (default), JAVAC (experimental).",
       hidden = true)
-  protected Frontend javaFrontend = Frontend.JDT;
+  Frontend javaFrontend = Frontend.JDT;
 
   @Option(
       name = "-experimentalBackend",
@@ -117,19 +117,19 @@ final class BazelJ2clBuilder extends BazelWorker {
           "Select the backend to use: CLOSURE (default), WASM (experimental), KOTLIN"
               + " (experimental).",
       hidden = true)
-  protected Backend backend = Backend.CLOSURE;
+  Backend backend = Backend.CLOSURE;
 
   @Option(name = "-kotlincOptions", hidden = true)
-  protected List<String> kotlincOptions = new ArrayList<>();
+  List<String> kotlincOptions = new ArrayList<>();
 
   @Option(name = "-experimentalGenerateWasmExport", hidden = true)
-  protected List<String> wasmEntryPoints = new ArrayList<>();
+  List<String> wasmEntryPoints = new ArrayList<>();
 
   @Option(name = "-experimentalDefineForWasm", handler = MapOptionHandler.class, hidden = true)
   Map<String, String> definesForWasm = new HashMap<>();
 
   @Option(name = "-experimentalWasmRemoveAssertStatement", hidden = true)
-  protected boolean wasmRemoveAssertStatement = false;
+  boolean wasmRemoveAssertStatement = false;
 
   @Override
   protected void run(Problems problems) {

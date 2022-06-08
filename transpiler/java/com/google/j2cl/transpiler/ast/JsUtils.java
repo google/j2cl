@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 /** Some JavaScript related utility functions. */
-public class JsUtils {
+public final class JsUtils {
   private static final String VALID_JS_NAME_REGEX = "[a-zA-Z_$][\\w_$]*";
   private static final String JAVASCRIPT_VALID_QUALIFIED_NAME_REGEX =
       VALID_JS_NAME_REGEX + "(\\." + VALID_JS_NAME_REGEX + ")*";
@@ -40,4 +40,6 @@ public class JsUtils {
   public static boolean isGlobal(String jsNamespace) {
     return JS_PACKAGE_GLOBAL.equals(jsNamespace) || "<window>".equals(jsNamespace);
   }
+
+  private JsUtils() {}
 }

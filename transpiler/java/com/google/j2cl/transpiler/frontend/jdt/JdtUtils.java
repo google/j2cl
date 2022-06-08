@@ -458,7 +458,7 @@ class JdtUtils {
     return getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope, TypeDescriptor.class);
   }
 
-  private static <T extends TypeDescriptor> List<T> getTypeArgumentTypeDescriptors(
+  private static <T extends TypeDescriptor> ImmutableList<T> getTypeArgumentTypeDescriptors(
       ITypeBinding typeBinding, boolean inNullMarkedScope, Class<T> clazz) {
     ImmutableList.Builder<T> typeArgumentDescriptorsBuilder = ImmutableList.builder();
     if (typeBinding.isParameterizedType()) {
@@ -931,7 +931,7 @@ class JdtUtils {
     return createTypeDescriptors(Arrays.asList(typeBindings), inNullMarkedScope, clazz);
   }
 
-  private static ThreadLocal<ITypeBinding> javaLangObjectTypeBinding = new ThreadLocal<>();
+  private static final ThreadLocal<ITypeBinding> javaLangObjectTypeBinding = new ThreadLocal<>();
 
   public static void initWellKnownTypes(AST ast, Iterable<ITypeBinding> typeBindings) {
     javaLangObjectTypeBinding.set(ast.resolveWellKnownType("java.lang.Object"));
@@ -960,7 +960,7 @@ class JdtUtils {
   private static final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
     // Intersection types created with this method only occur in method bodies, default nullability
     // can be ignored.
-    List<DeclaredTypeDescriptor> intersectedTypeDescriptors =
+    ImmutableList<DeclaredTypeDescriptor> intersectedTypeDescriptors =
         createTypeDescriptors(typeBinding.getTypeBounds(), DeclaredTypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)

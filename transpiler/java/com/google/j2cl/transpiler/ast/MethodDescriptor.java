@@ -336,7 +336,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    *
    * <p>
    *
-   * <pre>
+   * <pre>{@code
    *   class A<T> {
    *     void m(T t);  // Method declaration described as m(T).
    *   }
@@ -345,7 +345,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    *   // for m(T) as its declaration.
    *   new A<String>().m("Hi");
    * <p>
-   * </pre>
+   * }</pre>
    */
   @Override
   public MethodDescriptor getDeclarationDescriptor() {

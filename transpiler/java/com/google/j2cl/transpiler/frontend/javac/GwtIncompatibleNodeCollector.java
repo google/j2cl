@@ -33,7 +33,7 @@ import java.util.Set;
  * A visitor that finds all the classes, methods and fields marked with a {@code GwtIncompatible}
  * annotation.
  */
-public class GwtIncompatibleNodeCollector {
+public final class GwtIncompatibleNodeCollector {
 
   /**
    * Returns all the class, method or field nodes that are marked with a {@code GwtIncompatible}
@@ -99,4 +99,6 @@ public class GwtIncompatibleNodeCollector {
         return "";
     }
   }
+
+  private GwtIncompatibleNodeCollector() {}
 }
