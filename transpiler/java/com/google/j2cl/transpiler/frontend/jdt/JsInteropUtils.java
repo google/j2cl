@@ -135,7 +135,7 @@ public final class JsInteropUtils {
     int modifiers = methodBinding.getModifiers();
     return methodBinding.getName().equals("debugger")
         && Modifier.isNative(modifiers)
-        && JdtUtils.isStatic(methodBinding);
+        && JdtEnvironment.isStatic(methodBinding);
   }
 
   /**

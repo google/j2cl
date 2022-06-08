@@ -134,12 +134,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private final Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
     private final Map<String, Label> labelsInScope = new HashMap<>();
+    private final JdtEnvironment environment = new JdtEnvironment();
 
     private CompilationUnit convert(
         String sourceFilePath,
         org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit,
         Iterable<ITypeBinding> wellKnownTypeBindings) {
-      JdtUtils.initWellKnownTypes(jdtCompilationUnit.getAST(), wellKnownTypeBindings);
+      environment.initWellKnownTypes(jdtCompilationUnit.getAST(), wellKnownTypeBindings);
       this.jdtCompilationUnit = jdtCompilationUnit;
 
       setCurrentSourceFile(sourceFilePath);
@@ -167,7 +168,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private String getPackageJsNamespace(
         org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       List<Annotation> packageAnnotations =
-          JdtUtils.asTypedList(jdtCompilationUnit.getPackage().annotations());
+          JdtEnvironment.asTypedList(jdtCompilationUnit.getPackage().annotations());
       if (packageAnnotations == null) {
         return null;
       }
@@ -182,7 +183,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private boolean isNullMarked(org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       List<Annotation> packageAnnotations =
-          JdtUtils.asTypedList(jdtCompilationUnit.getPackage().annotations());
+          JdtEnvironment.asTypedList(jdtCompilationUnit.getPackage().annotations());
 
       if (packageAnnotations == null) {
         return false;
@@ -217,7 +218,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       int ordinal = 0;
       for (EnumConstantDeclaration enumConstantDeclaration :
-          JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
+          JdtEnvironment.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
         enumType.addMember(ordinal, convert(enumConstantDeclaration));
         ordinal++;
       }
@@ -227,7 +228,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Type convertType(AbstractTypeDeclaration typeDeclaration) {
       return convertType(
           typeDeclaration.resolveBinding(),
-          JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()),
+          JdtEnvironment.asTypedList(typeDeclaration.bodyDeclarations()),
           typeDeclaration.getName());
     }
 
@@ -266,7 +267,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         } else if (bodyDeclaration instanceof Initializer) {
           Initializer initializer = (Initializer) bodyDeclaration;
           Block block = convert(initializer.getBody());
-          if (JdtUtils.isStatic(initializer)) {
+          if (JdtEnvironment.isStatic(initializer)) {
             type.addStaticInitializerBlock(block);
           } else {
             type.addInstanceInitializerBlock(block);
@@ -294,20 +295,21 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               : null;
 
       FieldDescriptor fieldDescriptor =
-          JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
+          environment.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
 
       // Since initializing custom values for JsEnum requires literals, we fold constant expressions
       // to give more options to the user. E.g. -1 is a unary expression but the expression is a
       // constant that can be evaluated at compile time, hence it makes sense to allow it.
       boolean foldConstantArguments = fieldDescriptor.getEnclosingTypeDescriptor().isJsEnum();
 
-      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(enumConstructorBinding);
+      MethodDescriptor methodDescriptor =
+          environment.createMethodDescriptor(enumConstructorBinding);
       Expression initializer =
           NewInstance.Builder.from(methodDescriptor)
               .setArguments(
                   convertArguments(
                       enumConstructorBinding,
-                      JdtUtils.asTypedList(enumConstantDeclaration.arguments()),
+                      JdtEnvironment.asTypedList(enumConstantDeclaration.arguments()),
                       foldConstantArguments))
               .setAnonymousInnerClass(annonymousInnerClass)
               .build();
@@ -333,10 +335,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           initializer =
               convertConstantToLiteral(
                   variableBinding.getConstantValue(),
-                  JdtUtils.createTypeDescriptor(variableBinding.getType()));
+                  environment.createTypeDescriptor(variableBinding.getType()));
         }
         Field field =
-            Field.Builder.from(JdtUtils.createFieldDescriptor(variableBinding))
+            Field.Builder.from(environment.createFieldDescriptor(variableBinding))
                 .setInitializer(initializer)
                 .setSourcePosition(getSourcePosition(fieldDeclaration))
                 .setNameSourcePosition(getSourcePosition(fragment.getName()))
@@ -349,12 +351,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Method convert(MethodDeclaration methodDeclaration) {
       List<Variable> parameters = new ArrayList<>();
       for (SingleVariableDeclaration parameter :
-          JdtUtils.<SingleVariableDeclaration>asTypedList(methodDeclaration.parameters())) {
+          JdtEnvironment.<SingleVariableDeclaration>asTypedList(methodDeclaration.parameters())) {
         parameters.add(createVariable(parameter));
       }
 
       MethodDescriptor methodDescriptor =
-          JdtUtils.createMethodDescriptor(methodDeclaration.resolveBinding());
+          environment.createMethodDescriptor(methodDeclaration.resolveBinding());
 
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
@@ -372,7 +374,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private Method convert(AnnotationTypeMemberDeclaration memberDeclaration) {
       MethodDescriptor methodDescriptor =
-          JdtUtils.createMethodDescriptor(memberDeclaration.resolveBinding());
+          environment.createMethodDescriptor(memberDeclaration.resolveBinding());
 
       return newMethodBuilder(methodDescriptor)
           .setSourcePosition(getSourcePosition(memberDeclaration))
@@ -394,7 +396,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       ArrayType arrayType = expression.getType();
 
       List<Expression> dimensionExpressions =
-          convertExpressions(JdtUtils.asTypedList(expression.dimensions()));
+          convertExpressions(JdtEnvironment.asTypedList(expression.dimensions()));
       // Pad the dimension expressions with null values to denote omitted dimensions.
       AstUtils.addNullPadding(dimensionExpressions, arrayType.getDimensions());
 
@@ -402,7 +404,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           expression.getInitializer() == null ? null : convert(expression.getInitializer());
 
       ArrayTypeDescriptor typeDescriptor =
-          (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
+          (ArrayTypeDescriptor) environment.createTypeDescriptor(expression.resolveTypeBinding());
       return NewArray.newBuilder()
           .setTypeDescriptor(typeDescriptor)
           .setDimensionExpressions(dimensionExpressions)
@@ -412,8 +414,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
-          (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
-          convertExpressions(JdtUtils.asTypedList(expression.expressions())));
+          (ArrayTypeDescriptor) environment.createTypeDescriptor(expression.resolveTypeBinding()),
+          convertExpressions(JdtEnvironment.asTypedList(expression.expressions())));
     }
 
     private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral literal) {
@@ -422,7 +424,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
       TypeDescriptor castTypeDescriptor =
-          JdtUtils.createTypeDescriptor(expression.getType().resolveBinding());
+          environment.createTypeDescriptor(expression.getType().resolveBinding());
       return CastExpression.newBuilder()
           .setExpression(convert(expression.getExpression()))
           .setCastTypeDescriptor(castTypeDescriptor)
@@ -438,9 +440,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       Expression qualifier = convertOrNull(expression.getExpression());
       List<Expression> arguments =
-          convertArguments(constructorBinding, JdtUtils.asTypedList(expression.arguments()));
+          convertArguments(constructorBinding, JdtEnvironment.asTypedList(expression.arguments()));
 
-      MethodDescriptor constructorDescriptor = JdtUtils.createMethodDescriptor(constructorBinding);
+      MethodDescriptor constructorDescriptor =
+          environment.createMethodDescriptor(constructorBinding);
       Type anonymousInnerClass = null;
       if (expression.getAnonymousClassDeclaration() != null) {
         anonymousInnerClass =
@@ -467,10 +470,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Type type =
           convertType(
               typeDeclaration.resolveBinding(),
-              JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()),
+              JdtEnvironment.asTypedList(typeDeclaration.bodyDeclarations()),
               typeDeclaration);
       // The initial constructor descriptor does not include the super call qualifier.
-      MethodDescriptor constructorDescriptor = JdtUtils.createMethodDescriptor(constructorBinding);
+      MethodDescriptor constructorDescriptor =
+          environment.createMethodDescriptor(constructorBinding);
 
       // Find the corresponding superconstructor, the ClassInstanceCreation construct does not
       // have a reference the super constructor that needs to be called. But the synthetic
@@ -482,7 +486,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .findFirst()
               .get();
       MethodDescriptor superConstructorDescriptor =
-          JdtUtils.createMethodDescriptor(superConstructorBinding);
+          environment.createMethodDescriptor(superConstructorBinding);
 
       type.addMember(
           0,
@@ -537,7 +541,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         case ASTNode.METHOD_INVOCATION:
           return convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
         case ASTNode.NULL_LITERAL:
-          return JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()).getNullValue();
+          return environment.createTypeDescriptor(expression.resolveTypeBinding()).getNullValue();
         case ASTNode.NUMBER_LITERAL:
           return convert((org.eclipse.jdt.core.dom.NumberLiteral) expression);
         case ASTNode.PARENTHESIZED_EXPRESSION:
@@ -571,7 +575,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private VariableDeclarationExpression convert(
         org.eclipse.jdt.core.dom.VariableDeclarationExpression expression) {
       List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments =
-          JdtUtils.asTypedList(expression.fragments());
+          JdtEnvironment.asTypedList(expression.fragments());
 
       return VariableDeclarationExpression.newBuilder()
           .setVariableDeclarationFragments(
@@ -588,7 +592,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         org.eclipse.jdt.core.dom.ConditionalExpression conditionalExpression) {
       return ConditionalExpression.newBuilder()
           .setTypeDescriptor(
-              JdtUtils.createTypeDescriptor(conditionalExpression.resolveTypeBinding()))
+              environment.createTypeDescriptor(conditionalExpression.resolveTypeBinding()))
           .setConditionExpression(convert(conditionalExpression.getExpression()))
           .setTrueExpression(convert(conditionalExpression.getThenExpression()))
           .setFalseExpression(convert(conditionalExpression.getElseExpression()))
@@ -721,13 +725,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           // The order here is important since initializers can define new variables
           // These can be used in the expression, updaters or the body
           // This is why we need to process initializers first
-          .setInitializers(convertExpressions(JdtUtils.asTypedList(statement.initializers())))
+          .setInitializers(convertExpressions(JdtEnvironment.asTypedList(statement.initializers())))
           .setConditionExpression(
               statement.getExpression() == null
                   ? BooleanLiteral.get(true)
                   : convert(statement.getExpression()))
           .setBody(convert(statement.getBody()))
-          .setUpdates(convertExpressions(JdtUtils.asTypedList(statement.updaters())))
+          .setUpdates(convertExpressions(JdtEnvironment.asTypedList(statement.updaters())))
           .setSourcePosition(getSourcePosition(statement))
           .build();
     }
@@ -779,18 +783,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .setSourcePosition(getSourcePosition(expression))
           .setExpression(convert(expression.getLeftOperand()))
           .setTestTypeDescriptor(
-              JdtUtils.createTypeDescriptor(expression.getRightOperand().resolveBinding()))
+              environment.createTypeDescriptor(expression.getRightOperand().resolveBinding()))
           .build();
     }
 
     private Expression convert(LambdaExpression expression) {
       MethodDescriptor functionalMethodDescriptor =
-          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
+          environment.createMethodDescriptor(expression.resolveMethodBinding());
 
       return FunctionExpression.newBuilder()
-          .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+          .setTypeDescriptor(environment.createTypeDescriptor(expression.resolveTypeBinding()))
           .setParameters(
-              JdtUtils.<VariableDeclaration>asTypedList(expression.parameters()).stream()
+              JdtEnvironment.<VariableDeclaration>asTypedList(expression.parameters()).stream()
                   .map(this::convert)
                   .collect(toImmutableList()))
           .setStatements(
@@ -838,14 +842,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       SourcePosition sourcePosition = getSourcePosition(expression);
       TypeDescriptor expressionTypeDescriptor =
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
+          environment.createTypeDescriptor(expression.resolveTypeBinding());
 
       // MethodDescriptor target of the method reference.
       MethodDescriptor referencedMethodDescriptor = resolveMethodReferenceTarget(expression);
 
       // Functional interface method that the expression implements.
       MethodDescriptor functionalMethodDescriptor =
-          JdtUtils.createMethodDescriptor(
+          environment.createMethodDescriptor(
               expression.resolveTypeBinding().getFunctionalInterfaceMethod());
 
       Expression qualifier = convert(expression.getExpression());
@@ -875,7 +879,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             .filter(m -> m.getName().equals(targetMethodName))
             .collect(onlyElement());
       }
-      return JdtUtils.createMethodDescriptor(methodBinding);
+      return environment.createMethodDescriptor(methodBinding);
     }
 
     /**
@@ -891,7 +895,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Expression convert(CreationReference expression) {
       ITypeBinding expressionTypeBinding = expression.getType().resolveBinding();
       MethodDescriptor functionalMethodDescriptor =
-          JdtUtils.createMethodDescriptor(
+          environment.createMethodDescriptor(
               expression.resolveTypeBinding().getFunctionalInterfaceMethod());
 
       // There are 3 flavors for CreationReferences: 1) array creations, 2) unqualified
@@ -903,12 +907,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
         return createArrayCreationLambda(
             functionalMethodDescriptor,
-            (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expressionTypeBinding),
+            (ArrayTypeDescriptor) environment.createTypeDescriptor(expressionTypeBinding),
             sourcePosition);
       }
 
       MethodDescriptor targetConstructorMethodDescriptor =
-          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
+          environment.createMethodDescriptor(expression.resolveMethodBinding());
 
       return createInstantiationLambda(
           functionalMethodDescriptor, targetConstructorMethodDescriptor, null, sourcePosition);
@@ -928,9 +932,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return createMethodReferenceLambda(
           getSourcePosition(expression),
           null,
-          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
-          JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding),
-          JdtUtils.createMethodDescriptor(expressionTypeBinding.getFunctionalInterfaceMethod()));
+          environment.createMethodDescriptor(expression.resolveMethodBinding()),
+          environment.createDeclaredTypeDescriptor(expressionTypeBinding),
+          environment.createMethodDescriptor(expressionTypeBinding.getFunctionalInterfaceMethod()));
     }
 
     /**
@@ -944,13 +948,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
      */
     private Expression convert(SuperMethodReference expression) {
       MethodDescriptor methodDescriptor =
-          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
+          environment.createMethodDescriptor(expression.resolveMethodBinding());
 
       Expression qualifier = createQualifiedThisReference(expression.getQualifier());
       return AbstractCompilationUnitBuilder.createForwardingFunctionExpression(
           getSourcePosition(expression),
-          JdtUtils.createDeclaredTypeDescriptor(expression.resolveTypeBinding()),
-          JdtUtils.createMethodDescriptor(
+          environment.createDeclaredTypeDescriptor(expression.resolveTypeBinding()),
+          environment.createMethodDescriptor(
               expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
           qualifier,
           methodDescriptor,
@@ -968,14 +972,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private BinaryExpression convert(org.eclipse.jdt.core.dom.Assignment expression) {
       return BinaryExpression.newBuilder()
           .setLeftOperand(convert(expression.getLeftHandSide()))
-          .setOperator(JdtUtils.getBinaryOperator(expression.getOperator()))
+          .setOperator(JdtEnvironment.getBinaryOperator(expression.getOperator()))
           .setRightOperand(convert(expression.getRightHandSide()))
           .build();
     }
 
     private Block convert(org.eclipse.jdt.core.dom.Block block) {
       List<org.eclipse.jdt.core.dom.Statement> statements =
-          JdtUtils.asTypedList(block.statements());
+          JdtEnvironment.asTypedList(block.statements());
 
       return Block.newBuilder()
           .setSourcePosition(getSourcePosition(block))
@@ -997,10 +1001,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private ExpressionStatement convert(org.eclipse.jdt.core.dom.ConstructorInvocation statement) {
       IMethodBinding constructorBinding = statement.resolveConstructorBinding();
-      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(constructorBinding);
+      MethodDescriptor methodDescriptor = environment.createMethodDescriptor(constructorBinding);
       return MethodCall.Builder.from(methodDescriptor)
           .setArguments(
-              convertArguments(constructorBinding, JdtUtils.asTypedList(statement.arguments())))
+              convertArguments(
+                  constructorBinding, JdtEnvironment.asTypedList(statement.arguments())))
           .setSourcePosition(getSourcePosition(statement))
           .build()
           .makeStatement(getSourcePosition(statement));
@@ -1012,7 +1017,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private FieldAccess convert(org.eclipse.jdt.core.dom.SuperFieldAccess expression) {
       IVariableBinding variableBinding = expression.resolveFieldBinding();
-      FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
+      FieldDescriptor fieldDescriptor = environment.createFieldDescriptor(variableBinding);
       Expression qualifier = createQualifiedThisReference(expression.getQualifier());
 
       return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
@@ -1020,13 +1025,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private Expression convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
       Expression qualifier = convert(expression.getExpression());
-      return JdtUtils.createFieldAccess(qualifier, expression.resolveFieldBinding());
+      return environment.createFieldAccess(qualifier, expression.resolveFieldBinding());
     }
 
     private BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression expression) {
       Expression leftOperand = convert(expression.getLeftOperand());
       Expression rightOperand = convert(expression.getRightOperand());
-      BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
+      BinaryOperator operator = JdtEnvironment.getBinaryOperator(expression.getOperator());
 
       checkArgument(
           !expression.hasExtendedOperands()
@@ -1060,9 +1065,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               : null;
 
       IMethodBinding methodBinding = methodInvocation.resolveMethodBinding();
-      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+      MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
-          convertArguments(methodBinding, JdtUtils.asTypedList(methodInvocation.arguments()));
+          convertArguments(methodBinding, JdtEnvironment.asTypedList(methodInvocation.arguments()));
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(qualifier)
           .setArguments(arguments)
@@ -1073,9 +1078,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private MethodCall convert(org.eclipse.jdt.core.dom.SuperMethodInvocation expression) {
       IMethodBinding methodBinding = expression.resolveMethodBinding();
 
-      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+      MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
-          convertArguments(methodBinding, JdtUtils.asTypedList(expression.arguments()));
+          convertArguments(methodBinding, JdtEnvironment.asTypedList(expression.arguments()));
       if (methodDescriptor.isDefaultMethod()) {
         // This super method call targets the default method in the interface.
         return MethodCall.Builder.from(methodDescriptor)
@@ -1106,7 +1111,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(
               new ThisReference(
-                  JdtUtils.createDeclaredTypeDescriptor(targetTypeBinding),
+                  environment.createDeclaredTypeDescriptor(targetTypeBinding),
                   /* isQualified= */ true))
           .setArguments(arguments)
           .setSourcePosition(getSourcePosition(expression))
@@ -1124,7 +1129,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         IMethodBinding methodBinding,
         List<org.eclipse.jdt.core.dom.Expression> argumentExpressions,
         boolean foldConstants) {
-      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+      MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
           argumentExpressions.stream()
               .map(
@@ -1137,7 +1142,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {
       Number constantValue = (Number) literal.resolveConstantExpressionValue();
       PrimitiveTypeDescriptor typeDescriptor =
-          (PrimitiveTypeDescriptor) JdtUtils.createTypeDescriptor(literal.resolveTypeBinding());
+          (PrimitiveTypeDescriptor) environment.createTypeDescriptor(literal.resolveTypeBinding());
       return new NumberLiteral(typeDescriptor, constantValue);
     }
 
@@ -1148,14 +1153,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private UnaryExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {
       return PostfixExpression.newBuilder()
           .setOperand(convert(expression.getOperand()))
-          .setOperator(JdtUtils.getPostfixOperator(expression.getOperator()))
+          .setOperator(JdtEnvironment.getPostfixOperator(expression.getOperator()))
           .build();
     }
 
     private UnaryExpression convert(org.eclipse.jdt.core.dom.PrefixExpression expression) {
       return PrefixExpression.newBuilder()
           .setOperand(convert(expression.getOperand()))
-          .setOperator(JdtUtils.getPrefixOperator(expression.getOperator()))
+          .setOperator(JdtEnvironment.getPrefixOperator(expression.getOperator()))
           .build();
     }
 
@@ -1168,7 +1173,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             internalCompilerErrorMessage("Unexpected QualifiedName that is not a field"));
 
         Expression qualifier = convert(expression.getQualifier());
-        return JdtUtils.createFieldAccess(qualifier, variableBinding);
+        return environment.createFieldAccess(qualifier, variableBinding);
       }
 
       if (binding instanceof ITypeBinding) {
@@ -1194,7 +1199,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         if (variableBinding.isField()) {
           // It refers to a field.
-          FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
+          FieldDescriptor fieldDescriptor = environment.createFieldDescriptor(variableBinding);
           return FieldAccess.Builder.from(fieldDescriptor).build();
         } else {
           // It refers to a local variable or parameter in a method or block.
@@ -1225,7 +1230,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Variable createVariable(VariableDeclaration variableDeclaration) {
       IVariableBinding variableBinding = variableDeclaration.resolveBinding();
       Variable variable =
-          JdtUtils.createVariable(
+          environment.createVariable(
               getSourcePosition(variableBinding.getName(), variableDeclaration.getName()),
               variableBinding);
       variableByJdtBinding.put(variableBinding, variable);
@@ -1241,7 +1246,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       List<SwitchCase.Builder> caseBuilders = new ArrayList<>();
       for (org.eclipse.jdt.core.dom.Statement statement :
-          JdtUtils.<org.eclipse.jdt.core.dom.Statement>asTypedList(switchStatement.statements())) {
+          JdtEnvironment.<org.eclipse.jdt.core.dom.Statement>asTypedList(
+              switchStatement.statements())) {
         if (statement instanceof org.eclipse.jdt.core.dom.SwitchCase) {
           caseBuilders.add(convert((org.eclipse.jdt.core.dom.SwitchCase) statement));
         } else {
@@ -1278,13 +1284,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private ExpressionStatement convert(
         org.eclipse.jdt.core.dom.SuperConstructorInvocation expression) {
       IMethodBinding superConstructorBinding = expression.resolveConstructorBinding();
-      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(superConstructorBinding);
+      MethodDescriptor methodDescriptor =
+          environment.createMethodDescriptor(superConstructorBinding);
 
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(convertOrNull(expression.getExpression()))
           .setArguments(
               convertArguments(
-                  superConstructorBinding, JdtUtils.asTypedList(expression.arguments())))
+                  superConstructorBinding, JdtEnvironment.asTypedList(expression.arguments())))
           .setSourcePosition(getSourcePosition(expression))
           .build()
           .makeStatement(getSourcePosition(expression));
@@ -1297,7 +1304,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral literal) {
       ITypeBinding typeBinding = literal.getType().resolveBinding();
 
-      TypeDescriptor literalTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
+      TypeDescriptor literalTypeDescriptor = environment.createTypeDescriptor(typeBinding);
       return new TypeLiteral(getSourcePosition(literal), literalTypeDescriptor);
     }
 
@@ -1307,9 +1314,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement statement) {
       List<org.eclipse.jdt.core.dom.Expression> resources =
-          JdtUtils.asTypedList(statement.resources());
+          JdtEnvironment.asTypedList(statement.resources());
       List<org.eclipse.jdt.core.dom.CatchClause> catchClauses =
-          JdtUtils.asTypedList(statement.catchClauses());
+          JdtEnvironment.asTypedList(statement.catchClauses());
 
       return TryStatement.newBuilder()
           .setSourcePosition(getSourcePosition(statement))
@@ -1327,9 +1334,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private TypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {
       return UnionTypeDescriptor.newBuilder()
           .setUnionTypeDescriptors(
-              JdtUtils.<org.eclipse.jdt.core.dom.Type>asTypedList(unionType.types()).stream()
+              JdtEnvironment.<org.eclipse.jdt.core.dom.Type>asTypedList(unionType.types()).stream()
                   .map(org.eclipse.jdt.core.dom.Type::resolveBinding)
-                  .map(JdtUtils::createTypeDescriptor)
+                  .map(environment::createTypeDescriptor)
                   .collect(toImmutableList()))
           .build();
     }
@@ -1355,7 +1362,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private ExpressionStatement convert(
         org.eclipse.jdt.core.dom.VariableDeclarationStatement statement) {
       List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments =
-          JdtUtils.asTypedList(statement.fragments());
+          JdtEnvironment.asTypedList(statement.fragments());
       return VariableDeclarationExpression.newBuilder()
           .setVariableDeclarationFragments(
               fragments.stream().map(this::convert).collect(toImmutableList()))
@@ -1367,7 +1374,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Object constantValue = expression.resolveConstantExpressionValue();
       return constantValue != null
           ? convertConstantToLiteral(
-              constantValue, JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+              constantValue, environment.createTypeDescriptor(expression.resolveTypeBinding()))
           : convert(expression);
     }
 
@@ -1375,11 +1382,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       if (typeBinding == null) {
         return null;
       }
-      Visibility visibility = JdtUtils.getVisibility(typeBinding);
-      TypeDeclaration typeDeclaration = JdtUtils.createDeclarationForType(typeBinding);
+      Visibility visibility = JdtEnvironment.getVisibility(typeBinding);
+      TypeDeclaration typeDeclaration = environment.createDeclarationForType(typeBinding);
 
       Type type = new Type(getSourcePosition(sourcePositionNode), visibility, typeDeclaration);
-      type.setStatic(JdtUtils.isStatic(typeBinding));
+      type.setStatic(JdtEnvironment.isStatic(typeBinding));
       return type;
     }
 
@@ -1388,7 +1395,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       boolean isQualified = qualifier != null;
       DeclaredTypeDescriptor typeDescriptor =
           isQualified
-              ? JdtUtils.createDeclaredTypeDescriptor(qualifier.resolveTypeBinding())
+              ? environment.createDeclaredTypeDescriptor(qualifier.resolveTypeBinding())
               : getCurrentType().getTypeDescriptor();
       return new ThisReference(typeDescriptor, isQualified);
     }
