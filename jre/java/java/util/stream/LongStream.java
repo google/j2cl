@@ -37,6 +37,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Supplier;
+import javaemul.internal.ArrayHelper;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/LongStream.html">
@@ -68,7 +69,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
       @Override
       public void accept(long t) {
         checkState(items != null, "Builder already built");
-        items[items.length] = t;
+        ArrayHelper.push(items, t);
       }
 
       @Override

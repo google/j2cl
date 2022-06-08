@@ -36,6 +36,7 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 import java.util.function.UnaryOperator;
+import javaemul.internal.ArrayHelper;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">
@@ -68,7 +69,7 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
       @Override
       public void accept(T t) {
         checkState(items != null, "Builder already built");
-        items[items.length] = t;
+        ArrayHelper.push(items, t);
       }
 
       @Override

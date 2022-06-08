@@ -63,11 +63,7 @@ public final class ArrayHelper {
     asNativeArray(array).length = length;
   }
 
-  public static void push(Object[] array, Object o) {
-    asNativeArray(array).push(o);
-  }
-
-  public static void push(byte[] array, byte o) {
+  public static void push(Object array, @DoNotAutobox Object o) {
     asNativeArray(array).push(o);
   }
 

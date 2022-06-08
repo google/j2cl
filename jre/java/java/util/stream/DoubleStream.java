@@ -34,6 +34,7 @@ import java.util.function.DoubleToLongFunction;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.Supplier;
+import javaemul.internal.ArrayHelper;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/DoubleStream.html">
@@ -65,7 +66,7 @@ public interface DoubleStream extends BaseStream<Double, DoubleStream> {
       @Override
       public void accept(double t) {
         checkState(items != null, "Builder already built");
-        items[items.length] = t;
+        ArrayHelper.push(items, t);
       }
 
       @Override

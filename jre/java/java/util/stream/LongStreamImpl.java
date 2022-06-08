@@ -41,6 +41,7 @@ import java.util.function.LongToIntFunction;
 import java.util.function.LongUnaryOperator;
 import java.util.function.ObjLongConsumer;
 import java.util.function.Supplier;
+import javaemul.internal.ArrayHelper;
 
 /**
  * Main implementation of LongStream, wrapping a single spliterator, and an optional parent stream.
@@ -507,9 +508,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
   public long[] toArray() {
     terminate();
     long[] entries = new long[0];
-    // this is legal in js, since the array will be backed by a JS array
-    spliterator.forEachRemaining((long value) -> entries[entries.length] = value);
-
+    spliterator.forEachRemaining((long value) -> ArrayHelper.push(entries, value));
     return entries;
   }
 
@@ -740,7 +739,7 @@ final class LongStreamImpl extends TerminatableStream<LongStreamImpl> implements
           public boolean tryAdvance(LongConsumer action) {
             if (ordered == null) {
               long[] list = new long[0];
-              spliterator.forEachRemaining((long item) -> list[list.length] = item);
+              spliterator.forEachRemaining((long value) -> ArrayHelper.push(list, value));
               Arrays.sort(list);
               ordered = Spliterators.spliterator(list, characteristics());
             }

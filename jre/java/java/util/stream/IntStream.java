@@ -37,6 +37,7 @@ import java.util.function.IntToLongFunction;
 import java.util.function.IntUnaryOperator;
 import java.util.function.ObjIntConsumer;
 import java.util.function.Supplier;
+import javaemul.internal.ArrayHelper;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/IntStream.html">
@@ -68,7 +69,7 @@ public interface IntStream extends BaseStream<Integer, IntStream> {
       @Override
       public void accept(int t) {
         checkState(items != null, "Builder already built");
-        items[items.length] = t;
+        ArrayHelper.push(items, t);
       }
 
       @Override

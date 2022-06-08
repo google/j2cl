@@ -41,6 +41,7 @@ import java.util.function.IntUnaryOperator;
 import java.util.function.LongConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.Supplier;
+import javaemul.internal.ArrayHelper;
 
 /**
  * Main implementation of IntStream, wrapping a single spliterator, and an optional parent stream.
@@ -626,9 +627,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
   public int[] toArray() {
     terminate();
     int[] entries = new int[0];
-    // this is legal in js, since the array will be backed by a JS array
-    spliterator.forEachRemaining((int value) -> entries[entries.length] = value);
-
+    spliterator.forEachRemaining((int value) -> ArrayHelper.push(entries, value));
     return entries;
   }
 
@@ -748,7 +747,7 @@ final class IntStreamImpl extends TerminatableStream<IntStreamImpl> implements I
           public boolean tryAdvance(IntConsumer action) {
             if (ordered == null) {
               int[] list = new int[0];
-              spliterator.forEachRemaining((int item) -> list[list.length] = item);
+              spliterator.forEachRemaining((int value) -> ArrayHelper.push(list, value));
               Arrays.sort(list);
               ordered = Spliterators.spliterator(list, characteristics());
             }

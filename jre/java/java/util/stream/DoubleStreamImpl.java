@@ -39,6 +39,7 @@ import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.Supplier;
+import javaemul.internal.ArrayHelper;
 
 /**
  * Main implementation of DoubleStream, wrapping a single spliterator, and an optional parent
@@ -503,9 +504,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
   public double[] toArray() {
     terminate();
     double[] entries = new double[0];
-    // this is legal in js, since the array will be backed by a JS array
-    spliterator.forEachRemaining((double value) -> entries[entries.length] = value);
-
+    spliterator.forEachRemaining((double value) -> ArrayHelper.push(entries, value));
     return entries;
   }
 
@@ -738,7 +737,7 @@ final class DoubleStreamImpl extends TerminatableStream<DoubleStreamImpl> implem
           public boolean tryAdvance(DoubleConsumer action) {
             if (ordered == null) {
               double[] list = new double[0];
-              spliterator.forEachRemaining((double item) -> list[list.length] = item);
+              spliterator.forEachRemaining((double value) -> ArrayHelper.push(list, value));
               Arrays.sort(list);
               ordered = Spliterators.spliterator(list, characteristics());
             }

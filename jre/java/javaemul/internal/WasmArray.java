@@ -263,6 +263,22 @@ abstract class WasmArray implements Serializable, Cloneable {
       this.elements = initialValues;
     }
 
+    public void push(int o) {
+      int newLength = length + 1;
+      ensureCapacity(newLength);
+      elements[length] = o;
+      length = newLength;
+    }
+
+    private void ensureCapacity(int newLength) {
+      if (newLength > elements.length) {
+        // Not enough capacity, increase it.
+        int[] original = elements;
+        elements = new int[getNewCapacity(length, newLength)];
+        copy(elements, 0, original, 0, original.length);
+      }
+    }
+
     @Override
     void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
       copy(elements, offset, ((WasmArray.OfInt) values).elements, valueOffset, len);
@@ -281,6 +297,22 @@ abstract class WasmArray implements Serializable, Cloneable {
     OfLong(long[] initialValues) {
       super(initialValues.length);
       this.elements = initialValues;
+    }
+
+    public void push(long o) {
+      int newLength = length + 1;
+      ensureCapacity(newLength);
+      elements[length] = o;
+      length = newLength;
+    }
+
+    private void ensureCapacity(int newLength) {
+      if (newLength > elements.length) {
+        // Not enough capacity, increase it.
+        long[] original = elements;
+        elements = new long[getNewCapacity(length, newLength)];
+        copy(elements, 0, original, 0, original.length);
+      }
     }
 
     @Override
@@ -321,6 +353,22 @@ abstract class WasmArray implements Serializable, Cloneable {
     OfDouble(double[] initialValues) {
       super(initialValues.length);
       this.elements = initialValues;
+    }
+
+    public void push(double o) {
+      int newLength = length + 1;
+      ensureCapacity(newLength);
+      elements[length] = o;
+      length = newLength;
+    }
+
+    private void ensureCapacity(int newLength) {
+      if (newLength > elements.length) {
+        // Not enough capacity, increase it.
+        double[] original = elements;
+        elements = new double[getNewCapacity(length, newLength)];
+        copy(elements, 0, original, 0, original.length);
+      }
     }
 
     @Override
