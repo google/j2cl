@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Comparator;
 import java.util.Locale;
+import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 import javaemul.internal.annotations.KtProperty;
 import jsinterop.annotations.JsNonNull;
@@ -130,8 +131,8 @@ public final class String implements Comparable<String>, CharSequence {
 
   public native String replace(char oldChar, char newChar);
 
-  // TODO(b/222269323): Different regexp/literal interpretation of `target`
-  // public native String replace(CharSequence target, CharSequence replacement);
+  @KtName("javaReplace")
+  public native String replace(CharSequence target, CharSequence replacement);
 
   public native boolean startsWith(String prefix);
 
@@ -185,8 +186,10 @@ public final class String implements Comparable<String>, CharSequence {
 
   public native String replaceFirst(String regularExpression, String replacement);
 
+  @KtName("javaSplit")
   public native String[] split(String regularExpression);
 
+  @KtName("javaSplit")
   public native String[] split(String regularExpression, int limit);
 
   @Override

@@ -51,3 +51,17 @@ fun String.getChars(start: Int, end: Int, buffer: CharArray, index: Int) {
     buffer[bufferIndex++] = this[srcIndex]
   }
 }
+
+fun String.javaSplit(regularExpression: String): Array<String?>? {
+  val strList: List<String> = this.split(regularExpression.toRegex())
+  return strList.toTypedArray()
+}
+
+fun String.javaSplit(regularExpression: String, limit: Int): Array<String?>? {
+  val strList: List<String> = this.split(regularExpression.toRegex(), limit)
+  return strList.toTypedArray()
+}
+
+fun String.javaReplace(target: CharSequence?, replacement: CharSequence?): String {
+  return this.replace(target.toString(), replacement.toString())
+}

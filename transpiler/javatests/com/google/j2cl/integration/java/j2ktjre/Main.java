@@ -214,19 +214,19 @@ public class Main {
     assertEquals(1, Character.charCount(0x9999));
     assertEquals(2, Character.charCount(0x10001));
 
-    char cArray1[] = {'a', 'b'};
+    char[] cArray1 = {'a', 'b'};
     assertEquals(1, Character.toChars(97, cArray1, 1));
     assertEquals('a', cArray1[1]);
 
-    char cArray2[] = {'a', 'b'};
+    char[] cArray2 = {'a', 'b'};
     assertEquals(2, Character.toChars(80000, cArray2, 0));
 
-    char cArray3[] = {'a', 'b'};
+    char[] cArray3 = {'a', 'b'};
     assertEquals(97, Character.codePointAt(cArray3, 0, 1));
   }
 
   private static void testString() {
-    char cArray[] = {'h', 'e', 'l', 'l', 'o'};
+    char[] cArray = {'h', 'e', 'l', 'l', 'o'};
     assertEquals("ello", new String(cArray, 1, 4));
 
     assertEquals("a", String.valueOf('a'));
@@ -242,11 +242,28 @@ public class Main {
     char dstCharArray[] = new char[3];
     "abcde".getChars(1, 4, dstCharArray, 0);
     assertEquals("bcd", new String(dstCharArray));
+
+    CharSequence target = "aa", replacement = "c";
+    String targetStr = "aaabaa";
+    assertEquals("cabc", targetStr.replace(target, replacement));
+
+    String str1 = "hello1hello2hello";
+    String[] strArray1 = str1.split("[12]");
+    assertEquals(3, strArray1.length);
+    assertEquals("hello", strArray1[0]);
+    assertEquals("hello", strArray1[1]);
+    assertEquals("hello", strArray1[2]);
+
+    String str2 = "hello1hello2hello";
+    String[] strArray2 = str2.split("[12]", 2);
+    assertEquals(2, strArray2.length);
+    assertEquals("hello", strArray2[0]);
+    assertEquals("hello2hello", strArray2[1]);
   }
 
   private static void testInsert() {
     StringBuilder strBuilder1 = new StringBuilder("0123");
-    char cArray[] = {'h', 'e', 'l', 'l', 'o'};
+    char[] cArray = {'h', 'e', 'l', 'l', 'o'};
 
     strBuilder1.insert(1, cArray, 1, 3);
     assertEquals("0ell123", strBuilder1.toString());
