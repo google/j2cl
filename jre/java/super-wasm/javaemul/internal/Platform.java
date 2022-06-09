@@ -56,9 +56,19 @@ public final class Platform {
   }
 
   public static boolean isEqual(Double x, Object y) {
-    // Note that this follows the documented Double.equals behavior.
-    return y instanceof Double
-        && Double.doubleToLongBits(x) == Double.doubleToLongBits(((Double) y));
+    return y instanceof Double && Double.doubleToLongBits(x) == Double.doubleToLongBits((Double) y);
+  }
+
+  public static boolean isEqual(Float x, Object y) {
+    return y instanceof Float && Float.floatToIntBits(x) == Float.floatToIntBits((Float) y);
+  }
+
+  public static int hashCode(double x) {
+    return Long.hashCode(Double.doubleToLongBits(x));
+  }
+
+  public static int hashCode(float x) {
+    return Float.floatToIntBits(x);
   }
 
   @Wasm("ref.is_null")

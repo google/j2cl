@@ -87,5 +87,19 @@ public final class Platform {
     return checkNotNull(x) == y;
   }
 
+  public static boolean isEqual(Float x, Object y) {
+    // Make sure Float follow the same semantic as Double for consistency.
+    return (y instanceof Float)
+        && Double.valueOf(x.doubleValue()).equals(((Float) y).doubleValue());
+  }
+
+  public static int hashCode(double x) {
+    return (int) x;
+  }
+
+  public static int hashCode(float x) {
+    return (int) x;
+  }
+
   private Platform() {}
 }

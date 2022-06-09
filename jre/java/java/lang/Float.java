@@ -56,7 +56,7 @@ public final class Float extends Number implements Comparable<Float> {
    * @return hash value of float (currently just truncated to int)
    */
   public static int hashCode(float f) {
-    return (int) f;
+    return Platform.hashCode(f);
   }
 
   public static float intBitsToFloat(int bits) {
@@ -140,8 +140,7 @@ public final class Float extends Number implements Comparable<Float> {
 
   @Override
   public boolean equals(Object o) {
-    // Make sure Float follow the same semantic as Double for consistency.
-    return (o instanceof Float) && Double.valueOf(value).equals(Double.valueOf(((Float) o).value));
+    return Platform.isEqual(this, o);
   }
 
   @Override

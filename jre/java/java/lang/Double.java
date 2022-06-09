@@ -75,7 +75,7 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   public static int hashCode(double d) {
-    return (int) d;
+    return Platform.hashCode(d);
   }
 
   public static boolean isFinite(double x) {
