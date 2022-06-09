@@ -80,6 +80,7 @@ function createImportObject(userImports) {
     'Date.now': Date.now,
     'Character.toLowerCase': charToLowerCase,
     'Character.toUpperCase': charToUpperCase,
+    'Character.foldCase': charFoldCase,
     'ConsoleLogger.log': (level, message) => console[level](message),
     'isValidDouble': isValidDouble,
     'parseFloat': parseFloat,
@@ -137,6 +138,14 @@ function charToLowerCase(value) {
  */
 function charToUpperCase(value) {
   return String.fromCharCode(value).toUpperCase().charCodeAt(0);
+}
+
+/**
+ * @param {number} value
+ * @return {number}
+ */
+function charFoldCase(value) {
+  return String.fromCharCode(value).toUpperCase().toLowerCase().charCodeAt(0);
 }
 
 /**

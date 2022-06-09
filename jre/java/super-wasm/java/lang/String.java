@@ -180,16 +180,6 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     return value[offset + index];
   }
 
-  private char foldCase(char ch) {
-    if (ch < 128) {
-      if ('A' <= ch && ch <= 'Z') {
-        return (char) (ch + ('a' - 'A'));
-      }
-      return ch;
-    }
-    return Character.toLowerCase(Character.toUpperCase(ch));
-  }
-
   public int compareTo(String string) {
     int o1 = offset, o2 = string.offset, result;
     int end = offset + (count < string.count ? count : string.count);
@@ -207,18 +197,17 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public int compareToIgnoreCase(String string) {
-    int o1 = offset, o2 = string.offset, result;
+    int o1 = offset, o2 = string.offset;
     int end = offset + (count < string.count ? count : string.count);
-    char c1, c2;
     char[] target = string.value;
     while (o1 < end) {
-      if ((c1 = value[o1++]) == (c2 = target[o2++])) {
-        continue;
-      }
-      c1 = foldCase(c1);
-      c2 = foldCase(c2);
-      if ((result = c1 - c2) != 0) {
-        return result;
+      char c1 = value[o1++];
+      char c2 = target[o2++];
+      if (c1 != c2) {
+        int result = CaseMapper.foldCase(c1) - CaseMapper.foldCase(c2);
+        if (result != 0) {
+          return result;
+        }
       }
     }
     return count - string.count;
@@ -296,7 +285,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     while (o1 < end) {
       char c1 = value[o1++];
       char c2 = target[o2++];
-      if (c1 != c2 && foldCase(c1) != foldCase(c2)) {
+      if (c1 != c2 && CaseMapper.foldCase(c1) != CaseMapper.foldCase(c2)) {
         return false;
       }
     }
@@ -587,7 +576,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     while (thisStart < end) {
       char c1 = value[thisStart++];
       char c2 = target[start++];
-      if (c1 != c2 && foldCase(c1) != foldCase(c2)) {
+      if (c1 != c2 && CaseMapper.foldCase(c1) != CaseMapper.foldCase(c2)) {
         return false;
       }
     }
