@@ -16,6 +16,7 @@
 package com.google.j2cl.jre.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
+import javaemul.internal.annotations.Wasm;
 
 /** Unit tests for the GWT emulation of java.lang.Throwable class. */
 public class ThrowableTest extends GWTTestCase {
@@ -25,7 +26,8 @@ public class ThrowableTest extends GWTTestCase {
     return "com.google.gwt.emultest.EmulSuite";
   }
 
-  public void testStackTrace() {
+  @Wasm("nop") // TODO(b/233263693): Add Throwable.getStackTrace support.
+  public static void testStackTrace() {
     Throwable e = new Throwable("<my msg>");
     assertTrue(e.getStackTrace().length > 0);
 

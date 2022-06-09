@@ -17,7 +17,7 @@ package com.google.j2cl.jre.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Arrays;
-import java.util.Date;
+import javaemul.internal.annotations.Wasm;
 
 /**
  * Tests java.lang.System.
@@ -166,7 +166,8 @@ public class SystemTest extends GWTTestCase {
         new InterfazImpl("bar"), null), Arrays.asList(dest));
   }
 
-  public void testArraycopyMultidim() {
+  @Wasm("nop") // TODO(b/184675805): Re-enable when Array store checks added.
+  public static void testArraycopyMultidim() {
     Object[][] objArray = new Object[1][1];
     String[][] strArray = new String[1][1];
     strArray[0][0] = "Test";
@@ -205,7 +206,8 @@ public class SystemTest extends GWTTestCase {
     }
   }
 
-  public void testArraycopyObjects() {
+  @Wasm("nop") // TODO(b/184675805): Re-enable when Array store checks added.
+  public static void testArraycopyObjects() {
     Foo[] fooArray = new Foo[4];
     Bar[] barArray = new Bar[4];
     Object[] src = new Object[] {new Bar(), new Bar(), new Foo(), new Bar()};
@@ -314,7 +316,7 @@ public class SystemTest extends GWTTestCase {
   }
 
   public void testCurrentTimeMillis() {
-    assertTrue(System.currentTimeMillis() > Date.parse("1/1/2021"));
+    assertTrue(System.currentTimeMillis() > /* 1/1/2021 */ 1609488000000L);
   }
 }
 

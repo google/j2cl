@@ -38,6 +38,7 @@ j2cl_library(
         "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
     ],
     deps = [
+        "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
     ],
@@ -61,6 +62,7 @@ java_test(
     ],
     test_class = "com.google.j2cl.jre.AllTests",
     deps = [
+        "//jre/java:javaemul_internal_annotations",
         "//third_party:gwt-jsinterop-annotations",
         "//third_party:junit",
     ],
@@ -97,7 +99,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Emul",
-    enable_wasm = False,  # b/229006894
     shard_count = 8,
     test_class = "com.google.j2cl.jre.EmulSuite",
     deps = [":emul_tests_lib"],
@@ -113,7 +114,6 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Lang",
-    enable_wasm = False,  # b/229006894
     shard_count = 8,
     test_class = "com.google.j2cl.jre.LangSuite",
     deps = [":emul_tests_lib"],

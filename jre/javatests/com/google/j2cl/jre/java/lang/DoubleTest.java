@@ -17,6 +17,7 @@
 package com.google.j2cl.jre.java.lang;
 
 import com.google.gwt.junit.client.GWTTestCase;
+import javaemul.internal.annotations.Wasm;
 
 /**
  * Unit tests for the emulated-in-Javascript Double/double autoboxed types.
@@ -94,7 +95,8 @@ public class DoubleTest extends GWTTestCase {
     assertTrue(Double.compare(-0.0, -0.0) == 0);
   }
 
-  public void testNPE() {
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testNPE() {
     Double d = Math.random() < 0 ? 42.0 : null;
     try {
       assertEquals(null, d.doubleValue());

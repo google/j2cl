@@ -49,6 +49,7 @@ java_library(
     name = "javaemul_internal_annotations",
     srcs = glob(["javaemul/internal/annotations/*.java"]),
     visibility = [
+        "//jre/javatests:__subpackages__",
         "@com_google_jsinterop_base//:__subpackages__",
     ],
 )
@@ -57,6 +58,7 @@ j2cl_import(
     name = "javaemul_internal_annotations-j2cl",
     jar = ":javaemul_internal_annotations",
     visibility = [
+        "//jre/javatests:__subpackages__",
         "@com_google_jsinterop_base//:__subpackages__",
         "//transpiler/javatests:__subpackages__",
     ],

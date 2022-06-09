@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Locale;
+import javaemul.internal.annotations.Wasm;
 
 /** Tests java.lang.String. */
 public class StringTest extends GWTTestCase {
@@ -106,7 +107,10 @@ public class StringTest extends GWTTestCase {
     assertEquals(0, hideFromCompiler("a").compareTo("a"));
     assertEquals(-1, hideFromCompiler("a").compareTo("b"));
     assertEquals(1, hideFromCompiler("b").compareTo("a"));
+  }
 
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testCompareToNull() {
     try {
       returnNull().compareTo("");
       fail();
@@ -122,7 +126,6 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  @SuppressWarnings("ReturnValueIgnored")
   public void testConcat() {
     String abc = String.valueOf(new char[] {'a', 'b', 'c'});
     String def = String.valueOf(new char[] {'d', 'e', 'f'});
@@ -138,7 +141,10 @@ public class StringTest extends GWTTestCase {
     assertEquals("abcd", s + c);
     s += c;
     assertEquals("abcd", s);
+  }
 
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testConcatNull() {
     try {
       returnNull().concat("");
       fail();
@@ -181,7 +187,10 @@ public class StringTest extends GWTTestCase {
     sb = new StringBuilder();
     sb.appendCodePoint(0x10400);
     assertEquals("\uD801\uDC00", new String(sb));
+  }
 
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testConstructorNull() {
     try {
       new String(returnNull());
     } catch (NullPointerException e) {
@@ -195,10 +204,9 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  public void testConstructorBytes() {
-    byte bytes[] = new byte[] {
-        'a', 'b', 'c', 'd', 'e', 'f'
-    };
+  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+  public static void testConstructorBytes() {
+    byte[] bytes = new byte[] {'a', 'b', 'c', 'd', 'e', 'f'};
     String str = new String(bytes);
     assertEquals("abcdef", str);
     str = new String(bytes, 1, 3);
@@ -220,15 +228,16 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  public void testConstructorLatin1() throws UnsupportedEncodingException {
+  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+  public static void testConstructorLatin1() throws UnsupportedEncodingException {
     internalTestConstructorLatin1("ISO-8859-1");
     internalTestConstructorLatin1("iso-8859-1");
   }
 
-  private void internalTestConstructorLatin1(String encoding) throws UnsupportedEncodingException {
-    byte bytes[] = new byte[] {
-        (byte) 0xE0, (byte) 0xDF, (byte) 0xE7, (byte) 0xD0, (byte) 0xE9, 'f'
-    };
+  private static void internalTestConstructorLatin1(String encoding)
+      throws UnsupportedEncodingException {
+    byte[] bytes =
+        new byte[] {(byte) 0xE0, (byte) 0xDF, (byte) 0xE7, (byte) 0xD0, (byte) 0xE9, 'f'};
     String str = new String(bytes, encoding);
     assertEquals("àßçÐéf", str);
     str = new String(bytes, 1, 3, encoding);
@@ -265,16 +274,28 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  public void testConstructorUtf8() throws UnsupportedEncodingException {
+  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+  public static void testConstructorUtf8() throws UnsupportedEncodingException {
     internalTestConstructorUtf8("UTF-8");
     internalTestConstructorUtf8("utf-8");
   }
 
-  private void internalTestConstructorUtf8(String encoding) throws UnsupportedEncodingException {
-    byte bytes[] = new byte[] {
-        (byte) 0xC3, (byte) 0xA0, (byte) 0xC3, (byte) 0x9F, (byte) 0xC3,
-        (byte) 0xA7, (byte) 0xC3, (byte) 0x90, (byte) 0xC3, (byte) 0xA9, 'f'
-    };
+  private static void internalTestConstructorUtf8(String encoding)
+      throws UnsupportedEncodingException {
+    byte[] bytes =
+        new byte[] {
+          (byte) 0xC3,
+          (byte) 0xA0,
+          (byte) 0xC3,
+          (byte) 0x9F,
+          (byte) 0xC3,
+          (byte) 0xA7,
+          (byte) 0xC3,
+          (byte) 0x90,
+          (byte) 0xC3,
+          (byte) 0xA9,
+          'f'
+        };
     String str = new String(bytes, encoding);
     assertEquals("àßçÐéf", str);
     str = new String(bytes, 2, 6, encoding);
@@ -345,7 +366,10 @@ public class StringTest extends GWTTestCase {
     assertFalse(hideFromCompiler("AbC").equals("aBC"));
     assertTrue(hideFromCompiler("").equals(""));
     assertFalse(hideFromCompiler("").equals(null));
+  }
 
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testEqualsNull() {
     try {
       returnNull().equals("other");
       fail();
@@ -374,7 +398,10 @@ public class StringTest extends GWTTestCase {
     assertTrue(hideFromCompiler("ß").equalsIgnoreCase("ß"));
     assertFalse(hideFromCompiler("ß").equalsIgnoreCase("ss"));
     assertFalse(hideFromCompiler("ß").equalsIgnoreCase("SS"));
+  }
 
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testEqualsIgnoreCaseNull() {
     try {
       returnNull().equalsIgnoreCase("other");
       fail();
@@ -408,12 +435,14 @@ public class StringTest extends GWTTestCase {
     assertTrue(Arrays.equals(bytes, str.getBytes()));
   }
 
-  public void testGetBytesLatin1() throws UnsupportedEncodingException {
+  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+  public static void testGetBytesLatin1() throws UnsupportedEncodingException {
     internalTestGetBytesLatin1("ISO-8859-1");
     internalTestGetBytesLatin1("iso-8859-1");
   }
 
-  private void internalTestGetBytesLatin1(String encoding) throws UnsupportedEncodingException {
+  private static void internalTestGetBytesLatin1(String encoding)
+      throws UnsupportedEncodingException {
     // Contains only ISO-Latin-1 characters.
     String str = "Îñtérñåtîöñålîzåtîöñ";
     byte[] bytes = str.getBytes(encoding);
@@ -424,12 +453,14 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  public void testGetBytesUtf8() throws UnsupportedEncodingException {
+  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+  public static void testGetBytesUtf8() throws UnsupportedEncodingException {
     internalTestGetBytesUtf8("UTF-8");
     internalTestGetBytesUtf8("utf-8");
   }
 
-  private void internalTestGetBytesUtf8(String encoding) throws UnsupportedEncodingException {
+  private static void internalTestGetBytesUtf8(String encoding)
+      throws UnsupportedEncodingException {
     // Test a range of characters getting encoded to UTF8 in 1-2 bytes.
     char[] chars = new char[384];
     for (int i = 0; i < chars.length; ++i) {
@@ -501,7 +532,10 @@ public class StringTest extends GWTTestCase {
       // get hashes again to verify the values are constant for a given string
       assertEquals(expectedHash, testStrings[i].hashCode());
     }
+  }
 
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testHashCodeNull() {
     try {
       returnNull().hashCode();
       fail();
@@ -519,7 +553,10 @@ public class StringTest extends GWTTestCase {
     assertEquals(-1, haystack.indexOf('a', 1));
     assertEquals(1, haystack.indexOf("bc"));
     assertEquals(0, haystack.indexOf(""));
+  }
 
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testIndexOfNull() {
     try {
       returnNull().indexOf("");
       fail();
@@ -806,6 +843,9 @@ public class StringTest extends GWTTestCase {
     for (int i = 0; i < a1.length; i++) {
       assertEquals(a1[i], a2[i]);
     }
+
+    String original = "\\*\\[";
+    assertEquals(original, String.valueOf(original.toCharArray()));
   }
 
   public void testToString() {
@@ -908,14 +948,14 @@ public class StringTest extends GWTTestCase {
     assertSame(left, right.trim());
   }
 
-  private void compareList(String category, String[] desired, String[] got) {
+  private static void compareList(String category, String[] desired, String[] got) {
     assertEquals(category + " length", desired.length, got.length);
     for (int i = 0; i < desired.length; i++) {
       assertEquals(category + " " + i, desired[i], got[i]);
     }
   }
 
-  private <T> T hideFromCompiler(T value) {
+  private static <T> T hideFromCompiler(T value) {
     if (Math.random() < -1) {
       // Can never happen, but fools the compiler enough not to optimize this call.
       fail();
@@ -923,11 +963,11 @@ public class StringTest extends GWTTestCase {
     return value;
   }
 
-  private String returnNull() {
+  private static String returnNull() {
     return hideFromCompiler(null);
   }
 
-  private String toS(char from) {
+  private static String toS(char from) {
     return Character.toString(from);
   }
 
