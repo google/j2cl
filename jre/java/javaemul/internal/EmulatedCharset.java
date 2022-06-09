@@ -37,6 +37,8 @@ public abstract class EmulatedCharset extends Charset {
     public byte[] getBytes(char[] buffer, int offset, int count) {
       int n = offset + count;
       byte[] bytes = new byte[0];
+      // Pre-allocate to avoid re-sizing. Not using "new byte[n]" to avoid unnecessary init w/ `0`.
+      ArrayHelper.setLength(bytes, count);
       for (int i = offset; i < n; ++i) {
         bytes[i] = (byte) (buffer[i] & 255);
       }
@@ -47,6 +49,8 @@ public abstract class EmulatedCharset extends Charset {
     public byte[] getBytes(String str) {
       int n = str.length();
       byte[] bytes = new byte[0];
+      // Pre-allocate to avoid re-sizing. Not using "new byte[n]" to avoid unnecessary init w/ `0`.
+      ArrayHelper.setLength(bytes, n);
       for (int i = 0; i < n; ++i) {
         bytes[i] = (byte) (str.charAt(i) & 255);
       }
@@ -56,6 +60,8 @@ public abstract class EmulatedCharset extends Charset {
     @Override
     public char[] decodeString(byte[] bytes, int ofs, int len) {
       char[] chars = new char[0];
+      // Pre-allocate to avoid re-sizing. Not using "new char[n]" to avoid unnecessary init w/ `0`.
+      ArrayHelper.setLength(chars, len);
       for (int i = 0; i < len; ++i) {
         chars[i] = (char) (bytes[ofs + i] & 255);
       }
@@ -73,6 +79,10 @@ public abstract class EmulatedCharset extends Charset {
       // TODO(b/229151472): Consider using TextEncoder/TextDecoder instead.
 
       char[] chars = new char[0];
+      // Pre-allocate to avoid re-sizing. Not using "new char[n]" to avoid unnecessary init w/ `0`.
+      // Note that we allocate double the length of the string to account for a worst-case string
+      // containing only surrogate pairs. We'll resize the array down after decoding.
+      ArrayHelper.setLength(chars, len * 2);
       int outIdx = 0;
       int count = 0;
       for (int i = 0; i < len; ) {
@@ -106,6 +116,8 @@ public abstract class EmulatedCharset extends Charset {
         }
         outIdx += Character.toChars(ch, chars, outIdx);
       }
+      // We might have over allocated initially; resize back.
+      ArrayHelper.setLength(chars, outIdx);
       return chars;
     }
 

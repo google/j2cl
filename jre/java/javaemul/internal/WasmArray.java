@@ -187,6 +187,18 @@ abstract class WasmArray implements Serializable, Cloneable {
       this.elements = initialValues;
     }
 
+    @Override
+    public void setLength(int newLength) {
+      ensureCapacity(newLength);
+      if (newLength < length) {
+        // Clear to outside contents
+        for (int i = newLength; i < length; i++) {
+          elements[i] = 0;
+        }
+      }
+      length = newLength;
+    }
+
     public void push(byte o) {
       int newLength = length + 1;
       ensureCapacity(newLength);
@@ -241,6 +253,27 @@ abstract class WasmArray implements Serializable, Cloneable {
     OfChar(char[] initialValues) {
       super(initialValues.length);
       this.elements = initialValues;
+    }
+
+    @Override
+    public void setLength(int newLength) {
+      ensureCapacity(newLength);
+      if (newLength < length) {
+        // Clear to outside contents
+        for (int i = newLength; i < length; i++) {
+          elements[i] = 0;
+        }
+      }
+      length = newLength;
+    }
+
+    private void ensureCapacity(int newLength) {
+      if (newLength > elements.length) {
+        // Not enough capacity, increase it.
+        char[] original = elements;
+        elements = new char[getNewCapacity(length, newLength)];
+        copy(elements, 0, original, 0, original.length);
+      }
     }
 
     @Override
