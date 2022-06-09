@@ -511,6 +511,7 @@ public class Main {
     Double boxedMinusZero = minusZero;
     Object asObjectZero = boxedZero;
     Object asObjectMinusZero = boxedMinusZero;
+    Double nullDouble = null;
 
     // Unboxing semantics.
     assertTrue(zero == minusZero);
@@ -524,6 +525,15 @@ public class Main {
 
     // Explicit unboxing.
     assertTrue(((double) asObjectZero) == (double) asObjectMinusZero);
+
+    assertThrowsNullPointerException(
+        () -> {
+          boolean unused = zero == nullDouble;
+        });
+    assertThrowsNullPointerException(
+        () -> {
+          boolean unused = nullDouble == zero;
+        });
   }
 
   private static void testAutoboxing_ternary() {

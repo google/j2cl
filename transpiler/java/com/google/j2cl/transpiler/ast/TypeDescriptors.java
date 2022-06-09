@@ -47,6 +47,7 @@ public class TypeDescriptors {
 
   public DeclaredTypeDescriptor javaLangClass;
   public DeclaredTypeDescriptor javaLangObject;
+  public DeclaredTypeDescriptor javaUtilObjects;
   public DeclaredTypeDescriptor javaLangThrowable;
   public DeclaredTypeDescriptor javaLangNulPointerException;
   public DeclaredTypeDescriptor javaLangEnum;
@@ -550,6 +551,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.Object":
           typeDescriptors.javaLangObject = referenceType;
+          break;
+        case "java.util.Objects":
+          typeDescriptors.javaUtilObjects = referenceType;
           break;
         case "java.lang.Throwable":
           typeDescriptors.javaLangThrowable = referenceType;
