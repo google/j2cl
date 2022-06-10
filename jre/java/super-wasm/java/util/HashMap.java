@@ -226,7 +226,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     // value is non-null
     for (int i = 0; i < len; i++) {
       for (HashMapEntry e = tab[i]; e != null; e = e.next) {
-        if (value.equals(e.value)) {
+        if (value == e.value || value.equals(e.value)) {
           return true;
         }
       }
@@ -268,7 +268,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index]; e != null; e = e.next) {
-      if (e.hash == hash && key.equals(e.key)) {
+      if (e.hash == hash && (key == e.key || key.equals(e.key))) {
         preModify(e);
         V oldValue = e.value;
         e.value = value;
@@ -338,7 +338,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     int index = hash & (tab.length - 1);
     HashMapEntry<K, V> first = tab[index];
     for (HashMapEntry<K, V> e = first; e != null; e = e.next) {
-      if (e.hash == hash && key.equals(e.key)) {
+      if (e.hash == hash && (key == e.key || key.equals(e.key))) {
         e.value = value;
         return;
       }
@@ -485,7 +485,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index], prev = null; e != null; prev = e, e = e.next) {
-      if (e.hash == hash && key.equals(e.key)) {
+      if (e.hash == hash && (key == e.key || key.equals(e.key))) {
         if (prev == null) {
           tab[index] = e.next;
         } else {
@@ -672,7 +672,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index]; e != null; e = e.next) {
-      if (e.hash == hash && key.equals(e.key)) {
+      if (e.hash == hash && (key == e.key || key.equals(e.key))) {
         return value.equals(e.value);
       }
     }
@@ -699,8 +699,8 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index], prev = null; e != null; prev = e, e = e.next) {
-      if (e.hash == hash && key.equals(e.key)) {
-        if (!value.equals(e.value)) {
+      if (e.hash == hash && (key == e.key || key.equals(e.key))) {
+        if (value != e.value && !value.equals(e.value)) {
           return false; // Map has wrong value for key
         }
         if (prev == null) {
