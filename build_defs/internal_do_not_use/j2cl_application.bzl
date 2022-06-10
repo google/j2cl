@@ -6,6 +6,8 @@ def j2cl_application(
         name,
         entry_points,
         deps,
+        host = "0.0.0.0",
+        port = "6006",
         rewrite_polyfills = False,
         jre_logging_log_level = "OFF",
         jre_checks_check_level = "NORMAL",
@@ -141,6 +143,8 @@ loadScript(`$${appName}_dev.js`);
         name = "%s_dev" % name,
         entry_point_defs = entry_point_defs,
         deps = deps,
+        host = host,
+        port = port,
         dev_resources = dev_resources,
         **kwargs
     )

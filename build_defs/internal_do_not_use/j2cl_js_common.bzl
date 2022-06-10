@@ -45,6 +45,8 @@ def js_devserver(
         entry_point_defs,
         deps,
         dev_resources,
+        host ="0.0.0.0",
+        port = "6006",
         **kwargs):
     """Creates a development server target."""
 
@@ -63,6 +65,8 @@ def js_devserver(
         name = "%s_server" % name,
         srcs = dev_resources,
         path = "/",
+        host = host,
+        port = port,
         tags = [
             "ibazel_live_reload",  # Enable ibazel reload server.
             "ibazel_notify_changes",  # Do not to restart the server on changes.
