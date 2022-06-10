@@ -106,7 +106,7 @@ public class EnumMethodsCreator extends NormalizationPass {
                             .setRightOperand(
                                 RuntimeMethods.createEnumsCreateMapFromValuesMethodCall(
                                     MethodCall.Builder.from(
-                                            getValuesMethodDescriptor(typeDescriptor))
+                                            typeDescriptor.getMethodDescriptor(VALUES_METHOD_NAME))
                                         .build()))
                             .build()
                             .makeStatement(sourcePosition))
@@ -126,41 +126,15 @@ public class EnumMethodsCreator extends NormalizationPass {
 
     enumType.addMember(
         Method.newBuilder()
-            .setMethodDescriptor(getValueOfMethodDescriptor(typeDescriptor))
+            .setMethodDescriptor(
+                typeDescriptor.getMethodDescriptor(
+                    MethodDescriptor.VALUE_OF_METHOD_NAME, TypeDescriptors.get().javaLangString))
             .setParameters(nameParameter)
             .addStatements(ifStatement, returnStatement)
             .setSourcePosition(sourcePosition)
             .build());
   }
-
-  private static MethodDescriptor getValueOfMethodDescriptor(
-      DeclaredTypeDescriptor enumTypeDescriptor) {
-    MethodDescriptor valueOfMethodDescriptor =
-        enumTypeDescriptor.getMethodDescriptor(
-            MethodDescriptor.VALUE_OF_METHOD_NAME, TypeDescriptors.get().javaLangString);
-
-    // Adjust the nullability of the return since the method is guaranteed not to return null.
-    return MethodDescriptor.Builder.from(valueOfMethodDescriptor)
-        .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString.toNonNullable())
-        .setReturnTypeDescriptor(enumTypeDescriptor.toNonNullable())
-        .build();
-  }
-
-  private static MethodDescriptor getValuesMethodDescriptor(
-      DeclaredTypeDescriptor enumTypeDescriptor) {
-    MethodDescriptor valuesMethodDescriptor =
-        enumTypeDescriptor.getMethodDescriptor(VALUES_METHOD_NAME);
-    // Adjust the nullability of the return since the method is guaranteed not to return a null
-    // array nor an array containing nulls.
-    return MethodDescriptor.Builder.from(valuesMethodDescriptor)
-        .setReturnTypeDescriptor(
-            ArrayTypeDescriptor.newBuilder()
-                .setComponentTypeDescriptor(enumTypeDescriptor.toNonNullable())
-                .build()
-                .toNonNullable())
-        .build();
-  }
-
+  
   private static FieldDescriptor getNamesToValuesMapFieldDescriptor(
       DeclaredTypeDescriptor enumTypeDescriptor) {
     return FieldDescriptor.newBuilder()
@@ -200,7 +174,8 @@ public class EnumMethodsCreator extends NormalizationPass {
 
     enumType.addMember(
         Method.newBuilder()
-            .setMethodDescriptor(getValuesMethodDescriptor(enumType.getTypeDescriptor()))
+            .setMethodDescriptor(
+                enumType.getTypeDescriptor().getMethodDescriptor(VALUES_METHOD_NAME))
             .addStatements(
                 ReturnStatement.newBuilder()
                     .setExpression(new ArrayLiteral(arrayTypeDescriptor, values))

@@ -690,8 +690,12 @@ class JdtEnvironment {
     TypeDescriptor returnTypeDescriptor =
         isConstructor
             ? enclosingTypeDescriptor.toNonNullable()
-            : createTypeDescriptorWithNullability(
-                methodBinding.getReturnType(), methodBinding.getAnnotations(), inNullMarkedScope);
+            : adjustForSyntheticEnumMethod(
+                methodBinding,
+                createTypeDescriptorWithNullability(
+                    methodBinding.getReturnType(),
+                    methodBinding.getAnnotations(),
+                    inNullMarkedScope));
 
     MethodDescriptor declarationMethodDescriptor = null;
     if (methodBinding.getMethodDeclaration() != methodBinding) {
@@ -721,13 +725,17 @@ class JdtEnvironment {
             - methodBinding.getMethodDeclaration().getParameterTypes().length;
 
     for (int i = firstNonSyntheticParameter; i < methodBinding.getParameterTypes().length; i++) {
+      TypeDescriptor parameterTypeDescriptor =
+          adjustForSyntheticEnumMethod(
+              methodBinding,
+              createTypeDescriptorWithNullability(
+                  methodBinding.getParameterTypes()[i],
+                  methodBinding.getParameterAnnotations(i),
+                  inNullMarkedScope));
+
       parameterDescriptorBuilder.add(
           ParameterDescriptor.newBuilder()
-              .setTypeDescriptor(
-                  createTypeDescriptorWithNullability(
-                      methodBinding.getParameterTypes()[i],
-                      methodBinding.getParameterAnnotations(i),
-                      inNullMarkedScope))
+              .setTypeDescriptor(parameterTypeDescriptor)
               .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
               .setVarargs(
                   i == methodBinding.getParameterTypes().length - 1 && methodBinding.isVarargs())
@@ -768,6 +776,30 @@ class JdtEnvironment {
         .setDeprecated(isDeprecated(methodBinding))
         .setUncheckedCast(hasUncheckedCast)
         .build();
+  }
+
+  /**
+   * Makes parameters and returns of the synthetic enum methods ({@code Enum.valueOf} and {@code
+   * Enum.values}) non-nullable.
+   *
+   * <p>Note that non-nullability is also applied to the component of array types to cover the
+   * return of {@code Enum.values}.
+   */
+  private TypeDescriptor adjustForSyntheticEnumMethod(
+      IMethodBinding methodBinding, TypeDescriptor typeDescriptor) {
+    if (!isEnumSyntheticMethod(methodBinding)) {
+      return typeDescriptor;
+    }
+
+    if (typeDescriptor.isArray()) {
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      return ArrayTypeDescriptor.newBuilder()
+          .setComponentTypeDescriptor(
+              arrayTypeDescriptor.getComponentTypeDescriptor().toNonNullable())
+          .setNullable(false)
+          .build();
+    }
+    return typeDescriptor.toNonNullable();
   }
 
   private ImmutableList<TypeDescriptor> convertTypeArguments(
