@@ -32,6 +32,17 @@ class Equality {
   static $same(left, right) {
     return Object.is(left, right) || (left == null && right == null);
   }
+
+  /**
+   * Equality for (number|null) that follows floating point semantics.
+   *
+   * @param {?number} left
+   * @param {?number} right
+   * @return {boolean}
+   */
+  static $sameNumber(left, right) {
+    return left == right;
+  }
 }
 
 

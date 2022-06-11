@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 import java.util.Arrays;
 import java.util.List;
@@ -503,6 +504,22 @@ public final class RuntimeMethods {
                                           TypeDescriptors.get().javaLangObject,
                                           TypeDescriptors.get().javaLangObject)
                                       .build())
+                              .put(
+                                  "$sameNumber",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.BOOLEAN)
+                                      .setParameterDescriptors(
+                                          ParameterDescriptor.newBuilder()
+                                              .setTypeDescriptor(
+                                                  TypeDescriptors.get().javaLangDouble)
+                                              .setDoNotAutobox(true)
+                                              .build(),
+                                          ParameterDescriptor.newBuilder()
+                                              .setTypeDescriptor(
+                                                  TypeDescriptors.get().javaLangDouble)
+                                              .setDoNotAutobox(true)
+                                              .build())
+                                      .build())
                               .build())
                       .put(
                           BootstrapType.LONG_UTILS.getDescriptor(),
@@ -546,7 +563,7 @@ public final class RuntimeMethods {
     MethodInfo methodInfo =
         runtimeMethodInfoByMethodNameByType.get().get(vmTypeDescriptor).get(methodName);
     checkNotNull(methodInfo, "%s#%s(%s)", vmTypeDescriptor, methodName, arguments);
-    ImmutableList<TypeDescriptor> parameterTypeDescriptors = methodInfo.getParameters();
+    ImmutableList<ParameterDescriptor> parameterDescriptors = methodInfo.getParameterDescriptors();
     int requiredParameters = methodInfo.getRequiredParameters();
     TypeDescriptor returnTypeDescriptor = methodInfo.getReturnType();
 
@@ -558,7 +575,7 @@ public final class RuntimeMethods {
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setName(methodName)
-            .setParameterTypeDescriptors(parameterTypeDescriptors.subList(0, arguments.size()))
+            .setParameterDescriptors(parameterDescriptors.subList(0, arguments.size()))
             .setReturnTypeDescriptor(returnTypeDescriptor)
             .build();
     // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
@@ -572,7 +589,7 @@ public final class RuntimeMethods {
 
     public abstract int getRequiredParameters();
 
-    public abstract ImmutableList<TypeDescriptor> getParameters();
+    public abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
     public static Builder newBuilder() {
       return new AutoValue_RuntimeMethods_MethodInfo.Builder();
@@ -584,22 +601,30 @@ public final class RuntimeMethods {
 
       public abstract Builder setRequiredParameters(int requiredParameters);
 
-      public abstract Builder setParameters(TypeDescriptor... parameters);
+      public Builder setParameters(TypeDescriptor... parameterTypes) {
+        return setParameterDescriptors(
+            Arrays.stream(parameterTypes)
+                .map(p -> ParameterDescriptor.newBuilder().setTypeDescriptor(p).build())
+                .toArray(ParameterDescriptor[]::new));
+      }
+
+      public abstract Builder setParameterDescriptors(ParameterDescriptor... parameters);
 
       public abstract MethodInfo autoBuild();
 
       abstract OptionalInt getRequiredParameters();
 
-      abstract ImmutableList<TypeDescriptor> getParameters();
+      abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
       public MethodInfo build() {
         if (!getRequiredParameters().isPresent()) {
-          setRequiredParameters(getParameters().size());
+          setRequiredParameters(getParameterDescriptors().size());
         }
         MethodInfo methodInfo = autoBuild();
         checkArgument(
             methodInfo.getRequiredParameters() >= 0
-                && methodInfo.getRequiredParameters() <= methodInfo.getParameters().size());
+                && methodInfo.getRequiredParameters()
+                    <= methodInfo.getParameterDescriptors().size());
         return methodInfo;
       }
     }

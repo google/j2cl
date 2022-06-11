@@ -188,4 +188,9 @@ public final class Float extends Number implements Comparable<Float> {
   public String toString() {
     return toString(value);
   }
+
+  /** Runtime method to convert a Float to a Double. */
+  static Double toDouble(Float f) {
+    return f == null ? null : f.doubleValue();
+  }
 }
