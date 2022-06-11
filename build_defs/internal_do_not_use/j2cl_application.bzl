@@ -13,6 +13,8 @@ def j2cl_application(
         closure_defines = dict(),
         extra_dev_resources = [],
         extra_production_args = [],
+        dev_server_host = None,
+        dev_server_port = None,
         **kwargs):
     """Create a J2CL application target.
 
@@ -59,6 +61,8 @@ def j2cl_application(
         closure_defines: override the value of a variable defined by goog.define.
         extra_dev_resources: extra resource to serve for development server.
         extra_production_args: extra 'args' to pass to production binary.
+        dev_server_host: override the dev server host
+        dev_server_port: override the dev server port
         **kwargs: passed to underlying compilation and dev server.
     """
 
@@ -142,6 +146,8 @@ loadScript(`$${appName}_dev.js`);
         entry_point_defs = entry_point_defs,
         deps = deps,
         dev_resources = dev_resources,
+        dev_server_host = dev_server_host,
+        dev_server_port = dev_server_port,
         **kwargs
     )
 
