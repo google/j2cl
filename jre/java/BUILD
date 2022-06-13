@@ -109,7 +109,6 @@ package_sources(
     ) + [
         "super-kt/javaemul/internal/Exceptions.java",
         "super-kt/javaemul/internal/Primitives.java",
-        "super-kt/javaemul/internal/WasmArray.java",
     ],
 )
 
