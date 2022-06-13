@@ -47,6 +47,12 @@ enum Enum2 {
   }
 
   static Enum2 C = f(new Object());
+
+  void specialMethods() {
+    int o1 = Enum2.valueOf(null).ordinal();
+    int o2 = Enum2.valueOf("VALUE1").ordinal();
+    int l = Enum2.values().length;
+  }
 }
 
 enum Enum3 {

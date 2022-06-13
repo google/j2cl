@@ -26,6 +26,8 @@ class Class<T>(val kClass: KClass<*>) {
   fun getCanonicalName() = kClass.qualifiedName
   fun getSimpleName() = kClass.simpleName
   fun isArray() = arrayKClassSet.contains(kClass)
+  // TODO(b/235808937): Implement
+  fun getEnumConstants(): Array<T>? = throw UnsupportedOperationException()
 }
 
 private val arrayKClassSet =

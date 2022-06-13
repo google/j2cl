@@ -100,6 +100,15 @@ public class Main {
     } catch (UnsupportedOperationException expected) {
     }
 
+    // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
+    // implemented.
+    try {
+      Enum.valueOf(Planet.class, "NOTHING");
+      // fail( "Should have thrown IllegalArgumentException");
+      // } catch (IllegalArgumentException expected) {
+    } catch (UnsupportedOperationException expected) {
+    }
+
     // TODO(b/30745420): Transform these into meaningful assertions once Class.getEnumConstants is
     // implemented.
     try {
