@@ -966,6 +966,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   /** Returns a String using the char values provided as a JavaScript array. */
   public static String fromJsString(WasmExtern jsString) {
+    if (jsString == null) {
+      return null;
+    }
     char[] array = new char[getLength(jsString)];
     for (int i = 0; i < array.length; i++) {
       array[i] = getCharAt(jsString, i);

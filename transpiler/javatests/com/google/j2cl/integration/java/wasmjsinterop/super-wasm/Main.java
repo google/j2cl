@@ -20,6 +20,8 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 /** Tests J2WASM jsinterop features. */
 public final class Main {
   public static void main(String... args) throws Exception {
+    assertEquals(null, String.fromJsString(null));
+
     String empty = "";
     assertEquals(empty, String.fromJsString(empty.toJsString()));
 
