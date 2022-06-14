@@ -45,6 +45,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /** Base class for implementing that AST conversion from different front ends. */
 public abstract class AbstractCompilationUnitBuilder {
@@ -168,18 +169,49 @@ public abstract class AbstractCompilationUnitBuilder {
     List<Variable> parameters =
         AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterTypeDescriptors());
 
-    List<Variable> forwardingParameters = parameters;
-    if (!targetMethodDescriptor.isStatic()
-        && (qualifier == null || qualifier instanceof JavaScriptConstructorReference)) {
-      // The qualifier for the instance method becomes the first parameter. Method references to
-      // instance methods without an explicit qualifier use the first parameter in the functional
-      // interface as the qualifier for the method call.
+    // Does the method reference have a qualifier? I.e., the qualifier is not null and is not a
+    // class name (modeled as a JavaScriptConstructorReference). Used in unqualified instance
+    // method/Kotlin extension transformations below.
+    boolean hasQualifier =
+        qualifier != null && !(qualifier instanceof JavaScriptConstructorReference);
+
+    ImmutableList<Expression> forwardedArguments;
+    if (!targetMethodDescriptor.isStatic() && !hasQualifier) {
+      // This is a reference to an instance method without an explicit qualifier, e.g.:
+      //
+      // Class::instanceMethod
+      //
+      // The first parameter of the functional interface becomes the qualifier for the method call:
+      //
+      // (a, b) -> { a.instanceMethod(b) }
       checkArgument(
           parameters.size() == targetMethodDescriptor.getParameterTypeDescriptors().size() + 1
               || (parameters.size() >= targetMethodDescriptor.getParameterTypeDescriptors().size()
                   && targetMethodDescriptor.isVarargs()));
       qualifier = parameters.get(0).createReference();
-      forwardingParameters = parameters.subList(1, parameters.size());
+      forwardedArguments =
+          parameters.stream().skip(1).map(Variable::createReference).collect(toImmutableList());
+    } else if (targetMethodDescriptor.isStatic() && hasQualifier) {
+      // This is a reference to a static method but has an explicit qualifier. This path cannot
+      // be invoked by Java method references, because references to static methods in Java cannot
+      // have qualifiers. It can only be a Kotlin extension method, e.g.:
+      //
+      // q::extensionMethod
+      //
+      // We pass the qualifier as the first argument of the referenced method:
+      //
+      // (a, b) -> { extensionMethod(q, a, b) }
+      // TODO(b/233775253): Handle references to methods with varargs/default args (Kotlin)
+      checkArgument(
+          parameters.size() + 1 == targetMethodDescriptor.getParameterTypeDescriptors().size());
+      forwardedArguments =
+          Stream.concat(Stream.of(qualifier), parameters.stream().map(Variable::createReference))
+              .collect(toImmutableList());
+      qualifier = null;
+    } else {
+      // General case: forward all parameters normally.
+      forwardedArguments =
+          parameters.stream().map(Variable::createReference).collect(toImmutableList());
     }
 
     Statement forwardingStatement =
@@ -188,7 +220,7 @@ public abstract class AbstractCompilationUnitBuilder {
             qualifier,
             targetMethodDescriptor,
             isStaticDispatch,
-            forwardingParameters.stream().map(Variable::createReference).collect(toImmutableList()),
+            forwardedArguments,
             functionalMethodDescriptor.getReturnTypeDescriptor());
     return FunctionExpression.newBuilder()
         .setTypeDescriptor(expressionTypeDescriptor)
