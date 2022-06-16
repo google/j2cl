@@ -909,7 +909,7 @@
  (block
   ;; Integer v = ((Integer) ((T) v));
   ;;@ enums/Enum1.java:59:9
-  (local.set $v_1 (ref.cast_static $java.lang.Integer (ref.cast_static $java.lang.Object (local.get $v))))
+  (local.set $v_1 (ref.cast_static $java.lang.Integer (local.get $v)))
   ;; return java.lang.Integer.valueOf((1 + v.intValue()));
   ;;@ enums/Enum1.java:59:14
   (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref (ref.as_non_null (local.get $v_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v_1)))))))

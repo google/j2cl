@@ -492,7 +492,7 @@
  (block
   ;; return ((Object) args.elements[0]);
   ;;@ jsoptional/Main.java:44:6
-  (return (ref.cast_static $java.lang.Object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (i32.const 0))))
+  (return (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (i32.const 0)))
  )
 )
 (elem declare func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction)

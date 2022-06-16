@@ -537,7 +537,7 @@
  (block
   ;; (Object&HasKey&IntegerSupplier) a = ((T) a);
   ;;@ typewildcards/TypeWildCards.java:92:12
-  (local.set $a_1 (ref.cast_static $java.lang.Object (local.get $a)))
+  (local.set $a_1 (local.get $a))
   (block
    ;; HasKey $qualifier = ((HasKey) a);
    ;;@ typewildcards/TypeWildCards.java:93:14

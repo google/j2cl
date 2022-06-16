@@ -513,7 +513,7 @@
   (local.set $e (ref.cast_static $java.lang.Number (local.get $o)))
   ;; T t = ((T) o);
   ;;@ cast/CastGenerics.java:93:4
-  (local.set $t (ref.cast_static $java.lang.Object (local.get $o)))
+  (local.set $t (local.get $o))
   ;; E[] es = ((E[]) o);
   ;;@ cast/CastGenerics.java:94:4
   (local.set $es (ref.cast_static $javaemul.internal.WasmArray.OfObject (local.get $o)))
@@ -540,7 +540,7 @@
   (local.set $o (call $$create__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
   ;; S s = ((S) o);
   ;;@ cast/CastGenerics.java:100:4
-  (local.set $s (ref.cast_static $java.lang.Object (local.get $o)))
+  (local.set $s (local.get $o))
   ;; Object c = ((CastGenerics<S, Number>) o);
   ;;@ cast/CastGenerics.java:101:4
   (local.set $c (ref.cast_static $cast.CastGenerics (local.get $o)))

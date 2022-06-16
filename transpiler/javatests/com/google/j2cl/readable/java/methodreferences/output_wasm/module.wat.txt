@@ -1228,10 +1228,10 @@
  (block
   ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:90:66
-  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (local.get $arg0)))
   ;; Number arg1 = ((Number) ((U) arg1));
   ;;@ methodreferences/MethodReferences.java:90:66
-  (local.set $arg1_1 (ref.cast_static $java.lang.Number (ref.cast_static $java.lang.Object (local.get $arg1))))
+  (local.set $arg1_1 (ref.cast_static $java.lang.Number (local.get $arg1)))
   ;; return arg0.sameAs(arg1);
   ;;@ methodreferences/MethodReferences.java:90:66
   (return (call_ref (ref.as_non_null (local.get $arg0_1))(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
@@ -1339,7 +1339,7 @@
  (block
   ;; Number arg0 = ((Number) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:92:55
-  (local.set $arg0_1 (ref.cast_static $java.lang.Number (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $java.lang.Number (local.get $arg0)))
   ;; return $LambdaImplementor$6.this.this.sameAs(arg0);
   ;;@ methodreferences/MethodReferences.java:92:55
   (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this)))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this))))))
@@ -1445,7 +1445,7 @@
  (block
   ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:95:53
-  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (local.get $arg0)))
   ;; return (Boolean $qualifier = arg0.isA(),$qualifier.booleanValue());
   ;;@ methodreferences/MethodReferences.java:95:53
   (return (block (result i32)
@@ -1860,7 +1860,7 @@
  (block
   ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:103:53
-  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (local.get $arg0)))
   ;; return arg0.self();
   ;;@ methodreferences/MethodReferences.java:103:53
   (return (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
@@ -1965,7 +1965,7 @@
  (block
   ;; Integer arg0 = ((Integer) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:105:47
-  (local.set $arg0_1 (ref.cast_static $java.lang.Integer (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $java.lang.Integer (local.get $arg0)))
   ;; return javaemul.internal.WasmArray.OfObject.$create(arg0.intValue());
   ;;@ methodreferences/MethodReferences.java:105:47
   (return (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
@@ -2476,7 +2476,7 @@
  (block
   ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:114:66
-  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (local.get $arg0)))
   ;; return arg0.self();
   ;;@ methodreferences/MethodReferences.java:114:66
   (return (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
@@ -2581,7 +2581,7 @@
  (block
   ;; Integer arg0 = ((Integer) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:116:60
-  (local.set $arg0_1 (ref.cast_static $java.lang.Integer (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $java.lang.Integer (local.get $arg0)))
   ;; return javaemul.internal.WasmArray.OfObject.$create(arg0.intValue());
   ;;@ methodreferences/MethodReferences.java:116:60
   (return (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
@@ -2791,10 +2791,10 @@
  (block
   ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:120:70
-  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (local.get $arg0)))
   ;; Number arg1 = ((Number) ((U) arg1));
   ;;@ methodreferences/MethodReferences.java:120:70
-  (local.set $arg1_1 (ref.cast_static $java.lang.Number (ref.cast_static $java.lang.Object (local.get $arg1))))
+  (local.set $arg1_1 (ref.cast_static $java.lang.Number (local.get $arg1)))
   ;; return arg0.sameAs(arg1);
   ;;@ methodreferences/MethodReferences.java:120:70
   (return (call_ref (ref.as_non_null (local.get $arg0_1))(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
@@ -2902,7 +2902,7 @@
  (block
   ;; Number arg0 = ((Number) ((T) arg0));
   ;;@ methodreferences/MethodReferences.java:122:68
-  (local.set $arg0_1 (ref.cast_static $java.lang.Number (ref.cast_static $java.lang.Object (local.get $arg0))))
+  (local.set $arg0_1 (ref.cast_static $java.lang.Number (local.get $arg0)))
   ;; return $LambdaImplementor$21.this.this.sameAs(arg0);
   ;;@ methodreferences/MethodReferences.java:122:68
   (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this)))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this))))))

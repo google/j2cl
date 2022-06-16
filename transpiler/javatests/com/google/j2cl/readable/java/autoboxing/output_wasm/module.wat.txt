@@ -541,7 +541,7 @@
      (block
       ;; Object number = ((Object) $array.elements[$index]);
       ;;@ autoboxing/AutoBoxing.java:108:4
-      (local.set $number (ref.cast_static $java.lang.Object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index))))
+      (local.set $number (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)))
       (block
        ;; (sum = (sum + (Double $qualifier = ((Double) number),$qualifier.doubleValue())));
        ;;@ autoboxing/AutoBoxing.java:109:6
@@ -593,7 +593,7 @@
      (block
       ;; Object number = ((Object) $array.elements[$index]);
       ;;@ autoboxing/AutoBoxing.java:117:4
-      (local.set $number (ref.cast_static $java.lang.Object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index))))
+      (local.set $number (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)))
       (block
        ;; (sum = (sum + (Double $qualifier = ((Double) number),$qualifier.doubleValue())));
        ;;@ autoboxing/AutoBoxing.java:118:6

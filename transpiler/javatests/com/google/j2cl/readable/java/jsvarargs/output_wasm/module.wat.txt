@@ -322,7 +322,7 @@
   (call $$clinit__void@jsvarargs.Main )
   ;; return ((T) elements.elements[0]);
   ;;@ jsvarargs/Main.java:116:4
-  (return (ref.cast_static $java.lang.Object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0))))
+  (return (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)))
  )
 )
 
@@ -762,7 +762,7 @@
  (block
   ;; U n = ((T) n);
   ;;@ jsvarargs/Main.java:241:34
-  (local.set $n_1 (ref.cast_static $java.lang.Object (local.get $n)))
+  (local.set $n_1 (local.get $n))
   ;; U[] param = ((T[]) param);
   ;;@ jsvarargs/Main.java:241:34
   (local.set $param_1 (ref.cast_static $javaemul.internal.WasmArray.OfObject (local.get $param)))
@@ -1173,7 +1173,7 @@
  (block
   ;; return ((Object) args.elements[i]);
   ;;@ jsvarargs/Main.java:58:6
-  (return (ref.cast_static $java.lang.Object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (local.get $i))))
+  (return (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (local.get $i)))
  )
 )
 (elem declare func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction)

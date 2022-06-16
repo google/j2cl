@@ -172,10 +172,10 @@
   (local.set $arrayLiteral2d (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
   ;; Object object = ((Object) objects.elements[0]);
   ;;@ array/Arrays.java:34:4
-  (local.set $object (ref.cast_static $java.lang.Object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0))))
+  (local.set $object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0)))
   ;; (object = ((Object) ((Object[]) objects2d.elements[0]).elements[1]));
   ;;@ array/Arrays.java:35:4
-  (local.set $object (ref.cast_static $java.lang.Object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))) (i32.const 1))))
+  (local.set $object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))) (i32.const 1)))
   ;; (objects.elements[0] = null);
   ;;@ array/Arrays.java:38:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))

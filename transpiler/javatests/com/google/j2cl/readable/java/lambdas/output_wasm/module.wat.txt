@@ -2939,7 +2939,7 @@
  (block
   ;; Error i = ((Error) ((T) i));
   ;;@ lambdas/Lambdas.java:165:25
-  (local.set $i_1 (ref.cast_static $java.lang.Error (ref.cast_static $java.lang.Object (local.get $i))))
+  (local.set $i_1 (ref.cast_static $java.lang.Error (local.get $i)))
   ;; return i;
   ;;@ lambdas/Lambdas.java:165:30
   (return (local.get $i_1))
@@ -3044,7 +3044,7 @@
  (block
   ;; Error i = ((Error) ((T) i));
   ;;@ lambdas/Lambdas.java:166:22
-  (local.set $i_1 (ref.cast_static $java.lang.Error (ref.cast_static $java.lang.Object (local.get $i))))
+  (local.set $i_1 (ref.cast_static $java.lang.Error (local.get $i)))
   ;; return i;
   ;;@ lambdas/Lambdas.java:166:27
   (return (local.get $i_1))
@@ -3149,7 +3149,7 @@
  (block
   ;; Enum<T> i = ((Enum<T>) ((T) i));
   ;;@ lambdas/Lambdas.java:167:31
-  (local.set $i_1 (ref.cast_static $java.lang.Enum (ref.cast_static $java.lang.Object (local.get $i))))
+  (local.set $i_1 (ref.cast_static $java.lang.Enum (local.get $i)))
   ;; return i;
   ;;@ lambdas/Lambdas.java:167:36
   (return (local.get $i_1))
@@ -3257,10 +3257,10 @@
  (block
   ;; Object x = ((T) x);
   ;;@ lambdas/Lambdas.java:169:8
-  (local.set $x_1 (ref.cast_static $java.lang.Object (local.get $x)))
+  (local.set $x_1 (local.get $x))
   ;; String y = ((String) ((U) y));
   ;;@ lambdas/Lambdas.java:169:8
-  (local.set $y_1 (ref.cast_static $java.lang.String (ref.cast_static $java.lang.Object (local.get $y))))
+  (local.set $y_1 (ref.cast_static $java.lang.String (local.get $y)))
   ;; throw java.lang.RuntimeException.$create();
   ;;@ lambdas/Lambdas.java:170:10
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
@@ -3385,7 +3385,7 @@
  (block
   ;; T item = ((T) ((T) item));
   ;;@ lambdas/Lambdas.java:172:31
-  (local.set $item_1 (ref.cast_static $java.lang.Enum (ref.cast_static $java.lang.Object (local.get $item))))
+  (local.set $item_1 (ref.cast_static $java.lang.Enum (local.get $item)))
   ;; return java.lang.Long.valueOf(1);
   ;;@ lambdas/Lambdas.java:172:39
   (return (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 1)))
@@ -3490,7 +3490,7 @@
  (block
   ;; Object l = ((T) l);
   ;;@ lambdas/Lambdas.java:180:28
-  (local.set $l_1 (ref.cast_static $java.lang.Object (local.get $l)))
+  (local.set $l_1 (local.get $l))
   ;; return lambdas.Lambdas.m();
   ;;@ lambdas/Lambdas.java:180:33
   (return (call $m_m__java_lang_Object@lambdas.Lambdas ))
@@ -4205,7 +4205,7 @@
  (block
   ;; String x = ((String) ((T) x));
   ;;@ lambdas/Lambdas.java:290:76
-  (local.set $x_1 (ref.cast_static $java.lang.String (ref.cast_static $java.lang.Object (local.get $x))))
+  (local.set $x_1 (ref.cast_static $java.lang.String (local.get $x)))
   ;; return x;
   ;;@ lambdas/Lambdas.java:290:81
   (return (local.get $x_1))
@@ -4330,7 +4330,7 @@
  (block
   ;; String x = ((String) ((T) x));
   ;;@ lambdas/Lambdas.java:293:69
-  (local.set $x_1 (ref.cast_static $java.lang.String (ref.cast_static $java.lang.Object (local.get $x))))
+  (local.set $x_1 (ref.cast_static $java.lang.String (local.get $x)))
   ;; return x;
   ;;@ lambdas/Lambdas.java:293:74
   (return (local.get $x_1))
@@ -4455,7 +4455,7 @@
  (block
   ;; U x = ((T) x);
   ;;@ lambdas/Lambdas.java:297:59
-  (local.set $x_1 (ref.cast_static $java.lang.Object (local.get $x)))
+  (local.set $x_1 (local.get $x))
   ;; return x;
   ;;@ lambdas/Lambdas.java:297:64
   (return (local.get $x_1))
@@ -4583,10 +4583,10 @@
  (block
   ;; String t = ((String) ((T) t));
   ;;@ lambdas/Lambdas.java:306:78
-  (local.set $t_1 (ref.cast_static $java.lang.String (ref.cast_static $java.lang.Object (local.get $t))))
+  (local.set $t_1 (ref.cast_static $java.lang.String (local.get $t)))
   ;; String u = ((String) ((U) u));
   ;;@ lambdas/Lambdas.java:306:78
-  (local.set $u_1 (ref.cast_static $java.lang.String (ref.cast_static $java.lang.Object (local.get $u))))
+  (local.set $u_1 (ref.cast_static $java.lang.String (local.get $u)))
   ;; return null;
   ;;@ lambdas/Lambdas.java:306:88
   (return (ref.null $java.lang.Object))
@@ -5017,7 +5017,7 @@
  (block
   ;; T t = ((T) t);
   ;;@ lambdas/Lambdas.java:158:13
-  (local.set $t_1 (ref.cast_static $java.lang.Object (local.get $t)))
+  (local.set $t_1 (local.get $t))
   ;; return t;
   ;;@ lambdas/Lambdas.java:158:18
   (return (local.get $t_1))

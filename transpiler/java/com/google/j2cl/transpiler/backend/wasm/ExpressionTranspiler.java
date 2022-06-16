@@ -48,6 +48,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -180,6 +181,14 @@ final class ExpressionTranspiler {
       public boolean enterCastExpression(CastExpression castExpression) {
         TypeDescriptor castTypeDescriptor =
             castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
+
+        if (TypeDescriptors.isJavaLangObject(castTypeDescriptor)) {
+          // Avoid unncessary casts to j.l.Object. This also helps avoiding a WASM cast whem going
+          // from native arrays to WasmOpaque objects (and vice versa) which would otherwise fail.
+          render(castExpression.getExpression());
+          return false;
+        }
+
         if (castTypeDescriptor.isInterface()) {
           // TODO(b/183769034): At the moment the actual cast check is performed at interface
           // method call. Depending on whether WASM NPEs become catchable there might need to be
