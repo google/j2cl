@@ -129,6 +129,7 @@ import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.ResolveCaptures;
 import com.google.j2cl.transpiler.passes.ResolveImplicitInstanceQualifiers;
 import com.google.j2cl.transpiler.passes.ResolveImplicitStaticQualifiers;
+import com.google.j2cl.transpiler.passes.RestoreVariableScoping;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
@@ -162,7 +163,8 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           ResolveImplicitInstanceQualifiers::new,
-          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true));
+          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
+          RestoreVariableScoping::new);
     }
 
     @Override
