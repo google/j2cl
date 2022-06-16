@@ -379,7 +379,7 @@
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast_static $interfaces.Main.Implementor (local.get $this.untyped)))
  (block
-  ;; SubInterface.this.defaultMethod(arg0);
+  ;; Implementor.this.defaultMethod(arg0);
   ;;@ interfaces/Main.java:41:8
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -486,7 +486,7 @@
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast_static $interfaces.Main.AbstractImplementor (local.get $this.untyped)))
  (block
-  ;; SubInterface.this.defaultMethod(arg0);
+  ;; AbstractImplementor.this.defaultMethod(arg0);
   ;;@ interfaces/Main.java:47:17
   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.as_non_null (local.get $this))(local.get $arg0))
  )

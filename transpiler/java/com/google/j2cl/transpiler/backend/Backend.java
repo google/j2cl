@@ -172,11 +172,16 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
-          // Passes that change the class hierarchy or nesting structure.
-          () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
+          // Passes that change the class hierarchy or nesting structure (and passes needed for
+          // those).
           ImplementLambdaExpressionsViaJsFunctionAdaptor::new,
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           NormalizeFunctionExpressions::new,
+          // Compute bridge methods before optimizing autovalue, since inlining the autovalue
+          // classes requires inlining the bridges as well.
+          BridgeMethodsCreator::new,
+          () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
+
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
@@ -184,7 +189,6 @@ public enum Backend {
           ResolveCaptures::new,
           // ... and flatten the class hierarchy.
           MoveNestedClassesToTop::new,
-          BridgeMethodsCreator::new,
           OptimizeEnums::new,
           EnumMethodsCreator::new,
           DevirtualizeBoxedTypesAndJsFunctionImplementations::new,

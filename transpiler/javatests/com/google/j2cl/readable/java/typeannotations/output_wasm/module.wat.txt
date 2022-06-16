@@ -189,7 +189,7 @@
  (local $this (ref null $typeannotations.AbstractType))
  (local.set $this (ref.cast_static $typeannotations.AbstractType (local.get $this.untyped)))
  (block
-  ;; return ParametricType.this.m(arg0);
+  ;; return AbstractType.this.m(arg0);
   ;;@ typeannotations/TypeAnnotations.java:22:15
   (return (call $m_m__java_util_List__java_util_List@typeannotations.ParametricType (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
@@ -261,7 +261,7 @@
  (local $this (ref null $typeannotations.AbstractTypeNonNull))
  (local.set $this (ref.cast_static $typeannotations.AbstractTypeNonNull (local.get $this.untyped)))
  (block
-  ;; return ParametricType.this.m(arg0);
+  ;; return AbstractTypeNonNull.this.m(arg0);
   ;;@ typeannotations/TypeAnnotations.java:26:15
   (return (call $m_m__java_util_List__java_util_List@typeannotations.ParametricType (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
@@ -477,7 +477,7 @@
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast_static $typeannotations.ChildWithNullableParent (local.get $this.untyped)))
  (block
-  ;; return Parent.this.m(arg0,((Parent) arg1));
+  ;; return ChildWithNullableParent.this.m(arg0,((Parent) arg1));
   ;;@ typeannotations/TypeAnnotations.java:40:6
   (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(ref.cast_static $typeannotations.Parent (local.get $arg1))(struct.get $typeannotations.Parent.vtable $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (struct.get $typeannotations.Parent $vtable(local.get $this)))))
  )
@@ -495,7 +495,7 @@
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast_static $typeannotations.ChildWithNullableParent (local.get $this.untyped)))
  (block
-  ;; return Parent.this.m(arg0,((Parent) arg1));
+  ;; return ChildWithNullableParent.this.m(arg0,((Parent) arg1));
   ;;@ typeannotations/TypeAnnotations.java:40:6
   (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(ref.cast_static $typeannotations.Parent (local.get $arg1))(struct.get $typeannotations.Parent.vtable $m_m__java_util_List__typeannotations_Parent__java_util_List (struct.get $typeannotations.Parent $vtable(local.get $this)))))
  )
@@ -512,7 +512,7 @@
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast_static $typeannotations.ChildWithNullableParent (local.get $this.untyped)))
  (block
-  ;; return ParametricType.this.m(arg0);
+  ;; return ChildWithNullableParent.this.m(arg0);
   ;;@ typeannotations/TypeAnnotations.java:40:6
   (return (call $m_m__java_util_List__java_util_List@typeannotations.ParametricType (ref.as_non_null (local.get $this))(local.get $arg0)))
  )
@@ -621,7 +621,7 @@
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast_static $typeannotations.ChildWithNonNullableParent (local.get $this.untyped)))
  (block
-  ;; return Parent.this.m(arg0,((Parent) arg1));
+  ;; return ChildWithNonNullableParent.this.m(arg0,((Parent) arg1));
   ;;@ typeannotations/TypeAnnotations.java:45:6
   (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(ref.cast_static $typeannotations.Parent (local.get $arg1))(struct.get $typeannotations.Parent.vtable $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (struct.get $typeannotations.Parent $vtable(local.get $this)))))
  )
@@ -639,7 +639,7 @@
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast_static $typeannotations.ChildWithNonNullableParent (local.get $this.untyped)))
  (block
-  ;; return Parent.this.m(arg0,((Parent) arg1));
+  ;; return ChildWithNonNullableParent.this.m(arg0,((Parent) arg1));
   ;;@ typeannotations/TypeAnnotations.java:45:6
   (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(ref.cast_static $typeannotations.Parent (local.get $arg1))(struct.get $typeannotations.Parent.vtable $m_m__java_util_List__typeannotations_Parent__java_util_List (struct.get $typeannotations.Parent $vtable(local.get $this)))))
  )
@@ -656,7 +656,7 @@
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast_static $typeannotations.ChildWithNonNullableParent (local.get $this.untyped)))
  (block
-  ;; return ParametricType.this.m(arg0);
+  ;; return ChildWithNonNullableParent.this.m(arg0);
   ;;@ typeannotations/TypeAnnotations.java:45:6
   (return (call $m_m__java_util_List__java_util_List@typeannotations.ParametricType (ref.as_non_null (local.get $this))(local.get $arg0)))
  )

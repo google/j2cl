@@ -955,7 +955,7 @@
  (local $this (ref null $bridgemethods.AccidentalOverride))
  (local.set $this (ref.cast_static $bridgemethods.AccidentalOverride (local.get $this.untyped)))
  (block
-  ;; return ((String) A.this.get());
+  ;; return ((String) AccidentalOverride.this.get());
   ;;@ bridgemethods/AccidentalOverride.java:48:6
   (return (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $this))(struct.get $bridgemethods.A.vtable $m_get__java_lang_Object (struct.get $bridgemethods.A $vtable(local.get $this))))))
  )
@@ -1836,7 +1836,7 @@
  (local $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
  (local.set $this (ref.cast_static $bridgemethods.DualUnrelatedAccidentalBridges (local.get $this.untyped)))
  (block
-  ;; SuperDualUnrelatedAccidentalBridges.this.foo(((String) arg0),((Double) arg1));
+  ;; DualUnrelatedAccidentalBridges.this.foo(((String) arg0),((Double) arg1));
   ;;@ bridgemethods/BridgeMethod.java:78:6
   (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(ref.cast_static $java.lang.Double (local.get $arg1))(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
  )
@@ -1853,7 +1853,7 @@
  (local $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
  (local.set $this (ref.cast_static $bridgemethods.DualUnrelatedAccidentalBridges (local.get $this.untyped)))
  (block
-  ;; SuperDualUnrelatedAccidentalBridges.this.foo(((String) arg0),arg1);
+  ;; DualUnrelatedAccidentalBridges.this.foo(((String) arg0),arg1);
   ;;@ bridgemethods/BridgeMethod.java:78:6
   (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Number__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
  )
@@ -1870,7 +1870,7 @@
  (local $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
  (local.set $this (ref.cast_static $bridgemethods.DualUnrelatedAccidentalBridges (local.get $this.untyped)))
  (block
-  ;; SuperDualUnrelatedAccidentalBridges.this.foo(((String) arg0),arg1);
+  ;; DualUnrelatedAccidentalBridges.this.foo(((String) arg0),arg1);
   ;;@ bridgemethods/BridgeMethod.java:78:6
   (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
  )
@@ -3317,7 +3317,7 @@
  (local $this (ref null $bridgemethods.BridgeMethodDefault.A))
  (local.set $this (ref.cast_static $bridgemethods.BridgeMethodDefault.A (local.get $this.untyped)))
  (block
-  ;; II.this.m(arg0);
+  ;; A.this.m(arg0);
   ;;@ bridgemethods/BridgeMethodDefault.java:30:15
   (call $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.II (ref.as_non_null (local.get $this))(local.get $arg0))
  )
@@ -3466,7 +3466,7 @@
  (local $this (ref null $bridgemethods.BridgeMethodDefault.B))
  (local.set $this (ref.cast_static $bridgemethods.BridgeMethodDefault.B (local.get $this.untyped)))
  (block
-  ;; JJ.this.m(arg0);
+  ;; B.this.m(arg0);
   ;;@ bridgemethods/BridgeMethodDefault.java:38:15
   (call $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.JJ (ref.as_non_null (local.get $this))(local.get $arg0))
  )

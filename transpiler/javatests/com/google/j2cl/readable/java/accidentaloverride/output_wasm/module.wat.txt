@@ -389,7 +389,7 @@
  (local $this (ref null $accidentaloverride.AccidentalOverride))
  (local.set $this (ref.cast_static $accidentaloverride.AccidentalOverride (local.get $this.untyped)))
  (block
-  ;; Parent.this.foo(((Error) arg0));
+  ;; AccidentalOverride.this.foo(((Error) arg0));
   ;;@ accidentaloverride/AccidentalOverride.java:41:13
   (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Error (local.get $arg0))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
  )

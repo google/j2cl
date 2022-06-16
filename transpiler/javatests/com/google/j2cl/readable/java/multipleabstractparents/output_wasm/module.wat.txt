@@ -725,6 +725,7 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
  (field $m_getFoo__java_lang_String__java_lang_String (ref $function.m_getFoo__java_lang_String__java_lang_String))
+ (field $m_getFoo__java_lang_Object__java_lang_String (ref $function.m_getFoo__java_lang_Object__java_lang_String))
   $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable)
 )
 
@@ -752,9 +753,9 @@
  (local $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2))
  (local.set $this (ref.cast_static $multipleabstractparents.MultipleAbstractParents.AbstractStringList2 (local.get $this.untyped)))
  (block
-  ;; return List.this.getFoo(arg0);
+  ;; return AbstractStringList2.this.getFoo(arg0);
   ;;@ multipleabstractparents/MultipleAbstractParents.java:50:31
-  (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $multipleabstractparents.MultipleAbstractParents.List.vtable $m_getFoo__java_lang_Object__java_lang_String (ref.cast_static $multipleabstractparents.MultipleAbstractParents.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const 0))) )))
+  (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.vtable $m_getFoo__java_lang_Object__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList2 $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList2)

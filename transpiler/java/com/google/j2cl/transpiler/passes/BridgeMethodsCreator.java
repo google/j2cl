@@ -71,7 +71,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     Expression qualifier =
         bridgeMethodDescriptor.isSpecializingBridge()
             ? new SuperReference(targetEnclosingTypeDescriptor)
-            : new ThisReference(targetEnclosingTypeDescriptor);
+            : new ThisReference(type.getTypeDescriptor());
 
     checkArgument(bridgeMethodDescriptor.isSynthetic());
     checkArgument(bridgeMethodDescriptor.isBridge());
