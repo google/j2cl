@@ -31,14 +31,14 @@ open class ForEachStatement {
  }
 
  open class Exception1: kotlin.collections.MutableIterable<kotlin.String?>, kotlin.Exception() {
-  open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String?>? {
-   return null
+  open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String?> {
+   return null!!
   }
  }
 
  open class Exception2: kotlin.collections.MutableIterable<kotlin.Any?>, kotlin.Exception() {
-  open override fun iterator(): kotlin.collections.MutableIterator<kotlin.Any?>? {
-   return null
+  open override fun iterator(): kotlin.collections.MutableIterator<kotlin.Any?> {
+   return null!!
   }
  }
 

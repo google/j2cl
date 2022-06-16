@@ -127,7 +127,6 @@ public class JsTypeObjectMethodsTest {
     }
 
     @Override
-    @JsNonNull
     public String toString() {
       return "(Sub)myValue: " + myValue;
     }

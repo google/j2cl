@@ -15,7 +15,6 @@
  */
 package assertsimple;
 
-import jsinterop.annotations.JsNonNull;
 
 /** Test method body, assert statement, and binary expression with number literals work fine. */
 @SuppressWarnings("ComplexBooleanConstant") // literal boolean expressions
@@ -91,7 +90,6 @@ public class Main {
   private static Object getDescription() {
     return new Object() {
       @Override
-      @JsNonNull
       public String toString() {
         return "custom message";
       }

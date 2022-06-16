@@ -20,7 +20,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import java.io.Serializable;
 import java.util.Iterator;
-import jsinterop.annotations.JsNonNull;
 
 /**
  * Test for for loops.
@@ -51,7 +50,6 @@ public class Main {
       public void remove() {}
     }
 
-    @JsNonNull
     public MyIterator iterator() {
       return new MyIterator();
     }

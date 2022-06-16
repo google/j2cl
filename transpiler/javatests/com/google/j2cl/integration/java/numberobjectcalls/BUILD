@@ -9,7 +9,4 @@ integration_test(
     name = "numberobjectcalls",
     srcs = glob(["*.java"]),
     enable_kt = False,
-    deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
-    ],
 )

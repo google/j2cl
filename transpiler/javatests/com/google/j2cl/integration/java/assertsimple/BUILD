@@ -17,7 +17,4 @@ integration_test(
     # TODO(b/203692803): Enable once the bug is fixed.
     enable_wasm = False,
     tags = ["manual"],
-    deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
-    ],
 )

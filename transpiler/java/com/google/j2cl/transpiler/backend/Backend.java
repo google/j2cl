@@ -120,6 +120,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunction
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
+import com.google.j2cl.transpiler.passes.PropagateNullabilityKotlin;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
@@ -411,6 +412,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          PropagateNullabilityKotlin::new,
           NormalizeInterfaces::new,
           NormalizeTryWithResources::new,
           NormalizeArrayCreationsKotlin::new,

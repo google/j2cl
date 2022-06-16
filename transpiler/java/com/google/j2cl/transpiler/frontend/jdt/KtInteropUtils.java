@@ -19,6 +19,7 @@ import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStri
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtDisabledAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNativeAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropagateNullabilityAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropertyAnnotation;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
@@ -59,6 +60,7 @@ public class KtInteropUtils {
         .setProperty(isKtProperty(annotationBindings))
         .setName(getKtName(annotationBindings))
         .setDisabled(isKtDisabled(annotationBindings))
+        .setNullabilityPropagationEnabled(isKtPropagateNullabilityEnabled(annotationBindings))
         .build();
   }
 
@@ -73,5 +75,9 @@ public class KtInteropUtils {
 
   public static boolean isKtDisabled(IAnnotationBinding[] annotationBindings) {
     return getKtDisabledAnnotation(annotationBindings) != null;
+  }
+
+  public static boolean isKtPropagateNullabilityEnabled(IAnnotationBinding[] annotationBindings) {
+    return getKtPropagateNullabilityAnnotation(annotationBindings) != null;
   }
 }

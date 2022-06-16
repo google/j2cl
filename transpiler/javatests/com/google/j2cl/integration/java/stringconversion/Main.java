@@ -19,7 +19,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import javaemul.internal.annotations.Wasm;
-import jsinterop.annotations.JsNonNull;
 
 public class Main {
   private static class Person {
@@ -32,7 +31,6 @@ public class Main {
     }
 
     @Override
-    @JsNonNull
     public String toString() {
       return firstName + " " + lastName;
     }
@@ -90,7 +88,6 @@ public class Main {
   }
 
   private static class SimpleCharSequence implements CharSequence {
-    @JsNonNull
     public String toString() {
       return "some string";
     }

@@ -18,8 +18,6 @@ package numberobjectcalls;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import jsinterop.annotations.JsNonNull;
-
 public class Main {
   @SuppressWarnings("cast")
   public static void main(String... args) {
@@ -149,7 +147,6 @@ public class Main {
     }
 
     @Override
-    @JsNonNull
     public String toString() {
       return "SubNumber";
     }

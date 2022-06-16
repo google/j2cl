@@ -26,7 +26,6 @@ import java.util.Iterator;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -80,7 +79,6 @@ public class JsTypeTest {
     public MyNativeJsTypeSubclassWithIterator() {}
 
     @Override
-    @JsNonNull
     public Iterator iterator() {
       return null;
     }

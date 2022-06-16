@@ -74,7 +74,6 @@ public class Nullability {
     }
 
     @Override
-    @Nonnull
     public String toString() {
       return "Foo";
     }

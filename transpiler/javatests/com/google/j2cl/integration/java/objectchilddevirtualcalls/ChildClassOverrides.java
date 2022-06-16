@@ -17,8 +17,6 @@ package objectchilddevirtualcalls;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import jsinterop.annotations.JsNonNull;
-
 public class ChildClassOverrides {
   public boolean equals(Object o) {
     return o instanceof ChildClassOverrides;
@@ -28,7 +26,6 @@ public class ChildClassOverrides {
     return 100;
   }
 
-  @JsNonNull
   public String toString() {
     return "ChildClassOverrides";
   }

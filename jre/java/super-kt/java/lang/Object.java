@@ -33,6 +33,8 @@
 package java.lang;
 
 import javaemul.internal.annotations.KtNative;
+import javaemul.internal.annotations.KtPropagateNullability;
+import jsinterop.annotations.JsNonNull;
 
 @KtNative("kotlin.Any")
 public class Object {
@@ -51,7 +53,8 @@ public class Object {
   // public final native void notify();
   // public final native void notifyAll();
 
-  public native String toString();
+  @KtPropagateNullability
+  public native @JsNonNull String toString();
 
   // J2KT: No built-in support for monitors.
   // public native final void wait() throws InterruptedException;

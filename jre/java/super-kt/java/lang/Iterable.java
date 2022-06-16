@@ -20,10 +20,14 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import javaemul.internal.annotations.KtNative;
+import javaemul.internal.annotations.KtPropagateNullability;
+import jsinterop.annotations.JsNonNull;
 
 @KtNative("kotlin.collections.MutableIterable")
 public interface Iterable<T> {
 
+  @KtPropagateNullability
+  @JsNonNull
   Iterator<T> iterator();
 
   // TODO(b/222269323): Java 8 methods below do not exist in Kotlin iterables.
