@@ -18,9 +18,15 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.CompilationUnit
 
 internal fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
+  renderFileComment(compilationUnit)
   renderPackage(compilationUnit)
   renderImports(compilationUnit)
   renderTypes(compilationUnit)
+}
+
+private fun Renderer.renderFileComment(compilationUnit: CompilationUnit) {
+  render("// Generated from \"${compilationUnit.packageRelativePath}\"")
+  renderNewLine()
 }
 
 private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {
