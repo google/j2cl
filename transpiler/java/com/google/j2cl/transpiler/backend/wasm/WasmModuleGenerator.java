@@ -204,7 +204,7 @@ public class WasmModuleGenerator {
   private void emitTypes(Library library) {
     library
         .streamTypes()
-        .filter(t -> !t.getTypeDescriptor().isWasmExtern())
+        .filter(t -> !t.getTypeDescriptor().isWasmExtern() && !t.getTypeDescriptor().isWasmOpaque())
         .forEach(
             type -> {
               emitBeginCodeComment(type, type.getKind().name());

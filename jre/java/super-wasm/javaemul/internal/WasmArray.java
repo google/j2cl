@@ -18,6 +18,7 @@ package javaemul.internal;
 import java.io.Serializable;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /**
  * A common base abstraction for the arrays in Wasm.
@@ -280,6 +281,25 @@ abstract class WasmArray implements Serializable, Cloneable {
     void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
       copy(elements, offset, ((WasmArray.OfChar) values).elements, valueOffset, len);
     }
+
+    // JS / WASM String interop utilities.
+    // Since they work based native arrays, we need to provide them within this class.
+
+    public WasmExtern toJsString(int offset, int count) {
+      return charArrayToString((WasmOpaque) (Object) elements, offset, count);
+    }
+
+    @JsMethod(namespace = JsPackage.GLOBAL)
+    private static native WasmExtern charArrayToString(WasmOpaque chars, int offset, int count);
+
+    private static final WasmOpaque charArrayPrototype = (WasmOpaque) (Object) new char[0];
+
+    public static Object fromJsString(WasmExtern o) {
+      return new OfChar((char[]) (Object) (stringToCharArray(o, charArrayPrototype)));
+    }
+
+    @JsMethod(namespace = JsPackage.GLOBAL)
+    private static native WasmOpaque stringToCharArray(WasmExtern o, WasmOpaque protoype);
   }
 
   static class OfInt extends WasmArray {

@@ -76,7 +76,8 @@ function createImportObject(userImports) {
     'Math.sinh': Math.sinh,
     'Math.tan': Math.tan,
     'Math.tanh': Math.tanh,
-    'Number.toPrecision': (/** number */ n, /** number */ p) => n.toPrecision(p),
+    'Number.toPrecision': (/** number */ n, /** number */ p) =>
+        n.toPrecision(p),
     'Date.now': Date.now,
     'Character.toLowerCase': charToLowerCase,
     'Character.toUpperCase': charToUpperCase,
@@ -95,15 +96,16 @@ function createImportObject(userImports) {
     'RegExpResult.index': (/** !RegExpResult */ r) => r.index,
 
     // Utilites to interop strings and arrays. From String.java.
+    'charArrayToString': WebAssembly['experimentalConvertArrayToString'],
+    'stringToCharArray': WebAssembly['experimentalConvertStringToArray'],
     'getLength': s => s.length,
-    'getCharAt': (s, i) => s.charCodeAt(i),
     'replace': (s, regex, replacement) => s.replace(regex, replacement),
     // TODO(b/193532287): These will be removed after Array interop support in
     // WASM is implemented.
     'createBuffer': size => new Array(size),
     'setBufferAt': (buffer, index, value) => buffer[index] = value,
     'getBufferAt': (buffer, index) => buffer[index],
-    'bufferToString': buffer => String.fromCharCode.apply(null, buffer),
+
 
     // The following are declared in the JRE but unimplemented for now.
     'Date.UTC': unimplemented,

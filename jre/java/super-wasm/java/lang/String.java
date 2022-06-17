@@ -948,20 +948,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   // Helper methods to pass and receive strings to and from JavaScript.
-  // TODO(b/193532287): These will be removed after Array interop support in WASM is implemented.
-
-  /** Returns a JavaScript array containing the char values in the string. */
-  public WasmExtern toJsArray() {
-    WasmExtern buffer = createBuffer(length());
-    for (int i = 0; i < length(); i++) {
-      setBufferAt(buffer, i, charAt(i));
-    }
-    return buffer;
-  }
 
   /** Returns a JavaScript string that can be used to pass to JavaScript imported methods. */
   public WasmExtern toJsString() {
-    return bufferToString(toJsArray());
+    return ArrayHelper.toJsString(value, offset, count);
   }
 
   /** Returns a String using the char values provided as a JavaScript array. */
@@ -969,11 +959,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     if (jsString == null) {
       return null;
     }
-    char[] array = new char[getLength(jsString)];
-    for (int i = 0; i < array.length; i++) {
-      array[i] = getCharAt(jsString, i);
-    }
-    return String.fromInternalArray(array);
+    return String.fromInternalArray(ArrayHelper.toCharArray(jsString));
   }
 
   /** Returns a String using the char values provided as a JavaScript array. */
@@ -985,22 +971,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     return String.fromInternalArray(array);
   }
 
-  // Imported helper methods to interop J2WASM strings and arrays and JavaScript strings and arrays.
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native WasmExtern createBuffer(int size);
-
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native void setBufferAt(WasmExtern o, int i, char value);
-
   @JsMethod(namespace = JsPackage.GLOBAL)
   private static native char getBufferAt(WasmExtern o, int i);
 
   @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native WasmExtern bufferToString(WasmExtern o);
-
-  @JsMethod(namespace = JsPackage.GLOBAL)
   private static native int getLength(WasmExtern o);
-
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native char getCharAt(WasmExtern o, int i);
 }

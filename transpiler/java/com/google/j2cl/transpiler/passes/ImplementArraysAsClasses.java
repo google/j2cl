@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
@@ -33,6 +34,7 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableReference;
@@ -120,6 +122,14 @@ public class ImplementArraysAsClasses extends NormalizationPass {
             return new ArrayLiteral(
                 markArrayTypeDescriptorAsNative(arrayLiteral.getTypeDescriptor()),
                 arrayLiteral.getValueExpressions());
+          }
+
+          @Override
+          public Expression rewriteCastExpression(CastExpression castExpression) {
+            return CastExpression.Builder.from(castExpression)
+                .setCastTypeDescriptor(
+                    maybeMarkTypeDescriptorAsNative(castExpression.getCastTypeDescriptor()))
+                .build();
           }
         });
   }
@@ -230,6 +240,13 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
   private static ArrayTypeDescriptor markArrayTypeDescriptorAsNative(ArrayTypeDescriptor original) {
     return ArrayTypeDescriptor.Builder.from(original).setNativeWasmArray(true).build();
+  }
+
+  private static TypeDescriptor maybeMarkTypeDescriptorAsNative(TypeDescriptor original) {
+    if (original.isArray()) {
+      return markArrayTypeDescriptorAsNative((ArrayTypeDescriptor) original);
+    }
+    return original;
   }
 
   private static Expression getInnerNativeArrayExpression(Expression arrayExpression) {

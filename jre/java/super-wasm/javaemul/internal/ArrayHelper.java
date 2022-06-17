@@ -109,6 +109,14 @@ public final class ArrayHelper {
     asWasmArray(dest).copyFrom(destOfs, asWasmArray(array), srcOfs, len);
   }
 
+  public static WasmExtern toJsString(char[] array, int offset, int count) {
+    return ((WasmArray.OfChar) asWasmArray(array)).toJsString(offset, count);
+  }
+
+  public static char[] toCharArray(WasmExtern jsString) {
+    return (char[]) WasmArray.OfChar.fromJsString(jsString);
+  }
+
   private static WasmArray asWasmArray(Object obj) {
     return (WasmArray) obj;
   }

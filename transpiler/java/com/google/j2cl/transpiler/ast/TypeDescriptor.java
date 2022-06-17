@@ -120,6 +120,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /** Returns whether the described type is a WASM opaque object or not. */
+  public boolean isWasmOpaque() {
+    return false;
+  }
+
   /**
    * Returns the mangled name of a type.
    *

@@ -135,6 +135,10 @@ class GenerationEnvironment {
       return "extern";
     }
 
+    if (typeDescriptor.isWasmOpaque()) {
+      return "data";
+    }
+
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
       if (arrayTypeDescriptor.isNativeWasmArray()) {
