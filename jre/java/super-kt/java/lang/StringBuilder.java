@@ -19,6 +19,7 @@ package java.lang;
 
 import java.io.Serializable;
 import javaemul.internal.annotations.KtNative;
+import jsinterop.annotations.JsNonNull;
 
 @KtNative("kotlin.text.StringBuilder")
 public final class StringBuilder implements Appendable, CharSequence, Serializable {
@@ -26,9 +27,9 @@ public final class StringBuilder implements Appendable, CharSequence, Serializab
 
   public StringBuilder(int capacity) {}
 
-  public StringBuilder(CharSequence seq) {}
+  public StringBuilder(@JsNonNull CharSequence seq) {}
 
-  public StringBuilder(String str) {}
+  public StringBuilder(@JsNonNull String str) {}
 
   public native StringBuilder append(boolean b);
 

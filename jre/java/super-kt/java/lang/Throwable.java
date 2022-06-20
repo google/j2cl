@@ -19,6 +19,7 @@ package java.lang;
 
 import javaemul.internal.annotations.KtNative;
 import javaemul.internal.annotations.KtProperty;
+import jsinterop.annotations.JsNonNull;
 
 @KtNative("kotlin.Throwable")
 public class Throwable {
@@ -71,7 +72,7 @@ public class Throwable {
   @KtProperty
   public native Throwable getCause();
 
-  public final native void addSuppressed(Throwable throwable);
+  public final native void addSuppressed(@JsNonNull Throwable throwable);
 
   public final native Throwable[] getSuppressed();
 }

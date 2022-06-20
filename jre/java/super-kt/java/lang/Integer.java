@@ -19,6 +19,7 @@ package java.lang;
 
 import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
+import jsinterop.annotations.JsNonNull;
 
 @KtNative("kotlin.Int")
 public final class Integer extends Number implements Comparable<Integer> {
@@ -34,12 +35,12 @@ public final class Integer extends Number implements Comparable<Integer> {
 
   public Integer(int value) {}
 
-  public Integer(String string) throws NumberFormatException {}
+  public Integer(@JsNonNull String string) throws NumberFormatException {}
 
   @Override
   public native byte byteValue();
 
-  public native int compareTo(Integer object);
+  public native int compareTo(@JsNonNull Integer object);
 
   public static native int compare(int lhs, int rhs);
 
@@ -69,9 +70,10 @@ public final class Integer extends Number implements Comparable<Integer> {
   @Override
   public native long longValue();
 
-  public static native int parseInt(String string) throws NumberFormatException;
+  public static native int parseInt(@JsNonNull String string) throws NumberFormatException;
 
-  public static native int parseInt(String string, int radix) throws NumberFormatException;
+  public static native int parseInt(@JsNonNull String string, int radix)
+      throws NumberFormatException;
 
   @Override
   public native short shortValue();
