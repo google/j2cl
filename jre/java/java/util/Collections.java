@@ -22,7 +22,6 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import java.io.Serializable;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
-
 import jsinterop.annotations.JsNonNull;
 
 /**
@@ -198,7 +197,7 @@ public class Collections {
     }
 
     @Override
-    public Collection values() {
+    public @JsNonNull Collection values() {
       return EMPTY_LIST;
     }
   }
@@ -719,7 +718,7 @@ public class Collections {
     }
 
     @Override
-    public Collection<V> values() {
+    public @JsNonNull Collection<V> values() {
       if (values == null) {
         values = new UnmodifiableCollection<V>(map.values());
       }

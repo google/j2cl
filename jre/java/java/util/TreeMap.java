@@ -23,6 +23,7 @@ import static javaemul.internal.InternalPreconditions.isApiChecked;
 
 import java.io.Serializable;
 import jsinterop.annotations.JsEnum;
+import jsinterop.annotations.JsNonNull;
 
 /**
  * A map whose entries are sorted by their keys. All optional operations such as {@link #put} and
@@ -543,7 +544,7 @@ public class TreeMap<K, V> extends AbstractMap<K, V>
   }
 
   @Override
-  public Set<K> keySet() {
+  public @JsNonNull Set<K> keySet() {
     return navigableKeySet();
   }
 
@@ -1198,7 +1199,7 @@ public class TreeMap<K, V> extends AbstractMap<K, V>
     }
 
     @Override
-    public Set<K> keySet() {
+    public @JsNonNull Set<K> keySet() {
       return navigableKeySet();
     }
 
