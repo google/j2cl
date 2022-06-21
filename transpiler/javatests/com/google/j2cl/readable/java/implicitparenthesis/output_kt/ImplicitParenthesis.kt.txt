@@ -36,9 +36,9 @@ open class ImplicitParenthesis {
    primitiveInt = 5
    boxedInt = kotlin.Int(10)
    primitiveInt = kotlin.run {
-    val `$value`: kotlin.Int? = boxedInt
+    val ___value: kotlin.Int? = boxedInt
     boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + 1)
-    `$value`
+    ___value
    }!!.toInt()
    assert(primitiveInt === 10)
    primitiveInt = 5

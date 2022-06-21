@@ -19,7 +19,7 @@ open class MixedNestings {
   open fun aa() {}
 
   open fun a() {
-   open class `$1B` {
+   open class ___1B {
     open fun bb() {}
 
     open fun b(): kotlin.Int {
@@ -29,12 +29,12 @@ open class MixedNestings {
 
         this@MixedNestings.mm()
         this@A.aa()
-        this@`$1B`.bb()
+        this@___1B.bb()
         val iii: mixednestings.MyInterface? = mixednestings.MyInterface { m: kotlin.Int ->
 
          this@MixedNestings.mm()
          this@A.aa()
-         this@`$1B`.bb()
+         this@___1B.bb()
          return@MyInterface object : MyInterface {
           open override fun `fun`(b: kotlin.Int): kotlin.Int {
            return b
@@ -49,7 +49,7 @@ open class MixedNestings {
      return i!!.`fun`(400)
     }
    }
-   `$1B`().b()
+   ___1B().b()
   }
  }
 }

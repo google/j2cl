@@ -10,18 +10,18 @@ open class LocalClassInStaticContext {
 
   @kotlin.jvm.JvmStatic
   fun test() {
-   open class `$1A` {}
-   `$1A`()
+   open class ___1A {}
+   ___1A()
    val a: kotlin.Any? = object : kotlin.Any() {
     open fun m() {
-     `$1A`()
+     ___1A()
     }
    }
   }
 
   init {
-   open class `$1B` {}
-   `$1B`()
+   open class ___1B {}
+   ___1B()
    val b: kotlin.Any? = object : kotlin.Any() {}
   }
  }
@@ -30,12 +30,12 @@ open class LocalClassInStaticContext {
   @kotlin.jvm.JvmField var f: kotlin.Int = 1
 
   open fun test() {
-   open class `$1D` {
+   open class ___1D {
     open fun `fun`(): kotlin.Int {
      return this@C.f
     }
    }
-   `$1D`().`fun`()
+   ___1D().`fun`()
   }
  }
 }

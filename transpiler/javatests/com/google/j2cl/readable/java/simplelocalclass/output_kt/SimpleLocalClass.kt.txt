@@ -7,25 +7,25 @@ import kotlin.jvm.*
 open class SimpleLocalClass {
  open fun test(p: kotlin.Int) {
   val localVar: kotlin.Int = 1
-  open class `$1InnerClass` {
+  open class ___1InnerClass {
    open fun `fun`(): kotlin.Int {
     return localVar + p
    }
   }
-  `$1InnerClass`().`fun`()
-  open class `$1InnerClassWithoutCaptures` {}
-  `$1InnerClassWithoutCaptures`()
+  ___1InnerClass().`fun`()
+  open class ___1InnerClassWithoutCaptures {}
+  ___1InnerClassWithoutCaptures()
  }
 
  open fun `fun`() {
   val localVar: kotlin.Int = 1
-  open class `$2InnerClass` {
+  open class ___2InnerClass {
    @kotlin.jvm.JvmField var field: kotlin.Int = localVar
   }
  }
 
  open fun foo() {
-  open class `$1Abc$InnerClass` {}
-  open class `$1Klm$InnerClass` {}
+  open class ___1Abc___InnerClass {}
+  open class ___1Klm___InnerClass {}
  }
 }

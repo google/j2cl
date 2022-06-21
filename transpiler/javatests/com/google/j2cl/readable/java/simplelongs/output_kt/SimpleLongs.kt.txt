@@ -33,35 +33,35 @@ open class SimpleLongs {
    a
   }
   e = kotlin.run {
-   val `$qualifier`: simplelongs.SimpleLongs = this
-   val `$value`: kotlin.Long = this.foo + 1L
-   `$qualifier`.foo = `$value`
-   `$value`
+   val ___qualifier: simplelongs.SimpleLongs = this
+   val ___value: kotlin.Long = this.foo + 1L
+   ___qualifier.foo = ___value
+   ___value
   }
   e = kotlin.run {
-   val `$qualifier_1`: simplelongs.SimpleLongs? = this.getWithSideEffect()
+   val ___qualifier_1: simplelongs.SimpleLongs? = this.getWithSideEffect()
    kotlin.run {
-    val `$qualifier_2`: simplelongs.SimpleLongs? = `$qualifier_1`
-    val `$value_1`: kotlin.Long = `$qualifier_1`!!.foo + 1L
-    `$qualifier_2`!!.foo = `$value_1`
-    `$value_1`
+    val ___qualifier_2: simplelongs.SimpleLongs? = ___qualifier_1
+    val ___value_1: kotlin.Long = ___qualifier_1!!.foo + 1L
+    ___qualifier_2!!.foo = ___value_1
+    ___value_1
    }
   }
   var f: kotlin.Long = kotlin.run {
-   val `$value_2`: kotlin.Long = a
+   val ___value_2: kotlin.Long = a
    a = a + 1L
-   `$value_2`
+   ___value_2
   }
   f = kotlin.run {
-   val `$value_3`: kotlin.Long = this.foo
+   val ___value_3: kotlin.Long = this.foo
    this.foo = this.foo + 1L
-   `$value_3`
+   ___value_3
   }
   f = kotlin.run {
-   val `$qualifier_3`: simplelongs.SimpleLongs? = this.getWithSideEffect()
-   val `$value_4`: kotlin.Long = `$qualifier_3`!!.foo
-   `$qualifier_3`!!.foo = `$qualifier_3`!!.foo + 1L
-   `$value_4`
+   val ___qualifier_3: simplelongs.SimpleLongs? = this.getWithSideEffect()
+   val ___value_4: kotlin.Long = ___qualifier_3!!.foo
+   ___qualifier_3!!.foo = ___qualifier_3!!.foo + 1L
+   ___value_4
   }
   var g: kotlin.Long = this.foo
   g = this.getBar()
