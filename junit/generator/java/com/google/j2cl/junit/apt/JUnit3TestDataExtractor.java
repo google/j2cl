@@ -20,6 +20,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.auto.common.MoreElements;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
+import java.util.Optional;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
@@ -38,17 +39,19 @@ class JUnit3TestDataExtractor {
         .packageName(MoreElements.getPackage(typeElement).getQualifiedName().toString())
         .simpleName(typeElement.getSimpleName().toString())
         .qualifiedName(typeElement.getQualifiedName().toString())
+        .testConstructor(TestConstructor.builder().numberOfParameters(0).build())
         .testMethods(getJUnit3TestMethods(MoreApt.getClassHierarchy(typeElement)))
         .beforeMethods(ImmutableList.of(setupMethod))
         .afterMethods(ImmutableList.of(tearDownMethod))
         .beforeClassMethods(ImmutableList.<TestMethod>of())
         .afterClassMethods(ImmutableList.<TestMethod>of())
+        .parameterizedDataMethod(Optional.empty())
+        .parameterizedFields(ImmutableList.<ParameterizedTestField>of())
         .build();
   }
 
   private ImmutableList<TestMethod> getJUnit3TestMethods(List<TypeElement> typeHierarchy) {
-    return typeHierarchy
-        .stream()
+    return typeHierarchy.stream()
         .flatMap(t -> getJUnit3TestMethods(t).stream())
         .distinct()
         .collect(toImmutableList());

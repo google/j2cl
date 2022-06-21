@@ -17,7 +17,7 @@ package com.google.j2cl.junit.apt;
 
 import com.google.auto.common.MoreElements;
 import javax.annotation.processing.Messager;
-import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 
@@ -28,7 +28,7 @@ class ErrorReporter {
   public ErrorReporter(Messager messager) {
     this.messager = messager;
   }
-  
+
   public void report(ErrorMessage errorMessage, Object... args) {
     messager.printMessage(errorMessage.kind(), errorMessage.format(args));
   }
@@ -37,11 +37,11 @@ class ErrorReporter {
     report(errorMessage, type.getQualifiedName());
   }
 
-  public void report(ErrorMessage errorMessage, ExecutableElement method) {
+  public void report(ErrorMessage errorMessage, Element method) {
     report(errorMessage, getQualifiedName(method));
   }
 
-  private String getQualifiedName(ExecutableElement element) {
+  private String getQualifiedName(Element element) {
     Name clazzName = MoreElements.asType(element.getEnclosingElement()).getQualifiedName();
     return clazzName + "." + element.getSimpleName();
   }

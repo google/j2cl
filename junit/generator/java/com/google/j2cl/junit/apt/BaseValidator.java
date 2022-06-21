@@ -16,6 +16,7 @@
 package com.google.j2cl.junit.apt;
 
 import com.google.auto.common.MoreElements;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
@@ -36,9 +37,17 @@ class BaseValidator {
     return true;
   }
 
-  protected final boolean validateMethodIsPublic(ExecutableElement executableElement) {
-    if (!MoreElements.hasModifiers(Modifier.PUBLIC).apply(executableElement)) {
-      errorReporter.report(ErrorMessage.NON_PUBLIC, executableElement);
+  protected final boolean validateMemberIsPublic(Element element) {
+    if (!MoreElements.hasModifiers(Modifier.PUBLIC).apply(element)) {
+      errorReporter.report(ErrorMessage.NON_PUBLIC, element);
+      return false;
+    }
+    return true;
+  }
+
+  protected final boolean validateMemberIsNonFinal(Element element) {
+    if (MoreElements.hasModifiers(Modifier.FINAL).apply(element)) {
+      errorReporter.report(ErrorMessage.IS_FINAL, element);
       return false;
     }
     return true;

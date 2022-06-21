@@ -25,10 +25,13 @@ enum ErrorMessage {
           + "and has a 'then' method. 'then' method should have a 'success' callback parameter "
           + "and an optional 'failure' callback parameter where both are "
           + "@JsFunction or @FunctionalInterface."),
+  NON_ITERABLE_OR_ARRAY_RETURN(
+      "Method %s annotated with @Parameters must return an Iterable or arrays."),
   HAS_ARGS("Method %s cannot have arguments."),
   IS_STATIC("Method %s cannot be static."),
+  IS_FINAL("Member %s cannot be final"),
   NON_STATIC("Class level method %s cannot be non-static."),
-  NON_PUBLIC("Method %s cannot be non-public."),
+  NON_PUBLIC("Member %s cannot be non-public."),
   NON_ASYNC_HAS_TIMEOUT("Method %s has timeout but doesn't return a promise-like type."),
   ASYNC_HAS_EXPECTED_EXCEPTION(
       "Method %s has expectedException attribute but returns a promise-like type."),

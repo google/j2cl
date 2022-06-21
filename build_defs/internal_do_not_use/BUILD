@@ -78,6 +78,11 @@ alias(
     actual = "//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations-j2wasm",
 )
 
+alias(
+    name = "internal_parametrized_test_suite",
+    actual = "//junit/generator/java/com/google/j2cl/junit/runtime:internal_parametrized_test_suite",
+)
+
 # ***************************************************
 # Tools related
 # **************************************************

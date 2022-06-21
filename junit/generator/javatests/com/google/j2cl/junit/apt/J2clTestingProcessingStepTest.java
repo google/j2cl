@@ -88,7 +88,6 @@ public class J2clTestingProcessingStepTest {
         .inOrder();
   }
 
-
   @Test
   public void testJUnit4NonPublicMethod() {
     assertError(ErrorMessage.NON_PUBLIC, JUnit4TestCaseWithNonPublicTestMethod.class, "test");
@@ -111,6 +110,28 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
+  public void testJUnit4NonStaticParameterizedMethod() {
+    assertError(
+        ErrorMessage.NON_STATIC, JUnit4TestCaseWithNonStaticParameterizedMethod.class, "data");
+  }
+
+  @Test
+  public void testJUnit4NonPublicParameterizedField() {
+    assertError(
+        ErrorMessage.NON_PUBLIC, JUnit4TestCaseWithNonPublicParameterizedField.class, "field1");
+  }
+
+  @Test
+  public void testJUnit4StaticParameterizedField() {
+    assertError(ErrorMessage.IS_STATIC, JUnit4TestCaseWithStaticParameterizedField.class, "field1");
+  }
+
+  @Test
+  public void testJUnit4FinalParameterizedField() {
+    assertError(ErrorMessage.IS_FINAL, JUnit4TestCaseWithFinalParameterizedField.class, "field1");
+  }
+
+  @Test
   public void testJUnit4NonPublicClassMethod() {
     assertError(
         ErrorMessage.NON_PUBLIC, JUnit4TestCaseWithNonPublicClassMethod.class, "beforeClass");
@@ -128,6 +149,14 @@ public class J2clTestingProcessingStepTest {
         ErrorMessage.NON_PROMISE_RETURN,
         JUnit4TestCaseNonVoidReturnTypeClassMethod.class,
         "beforeClass");
+  }
+
+  @Test
+  public void testJUnit4VoidReturnTypeParameterizedMethod() {
+    assertError(
+        ErrorMessage.NON_ITERABLE_OR_ARRAY_RETURN,
+        JUnit4TestCaseVoidReturnTypeParameterizedMethod.class,
+        "data");
   }
 
   @Test
@@ -154,7 +183,6 @@ public class J2clTestingProcessingStepTest {
   public void testJUnit3NonPublicMethod() {
     assertError(ErrorMessage.NON_PUBLIC, JUnit3TestCaseWithNonPublicTestMethod.class, "test");
   }
-
 
   @Test
   public void testJUnit3StaticMethod() {

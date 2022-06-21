@@ -49,7 +49,9 @@ public class J2clTestingProcessingStep implements ProcessingStep {
     this.processingEnv = processingEnv;
     this.errorReporter = new ErrorReporter(processingEnv.getMessager());
     this.junit3Validator = new JUnit3Validator(errorReporter);
-    this.junit4Validator = new JUnit4Validator(errorReporter);
+    this.junit4Validator =
+        new JUnit4Validator(
+            errorReporter, processingEnv.getTypeUtils(), processingEnv.getElementUtils());
     boolean isJ2wasmTest =
         processingEnv.getOptions().containsKey(J2clTestingProcessor.JAVAC_OPTS_FLAG_IS_J2WASM_TEST);
     this.writer = new TemplateWriter(errorReporter, processingEnv.getFiler(), isJ2wasmTest);

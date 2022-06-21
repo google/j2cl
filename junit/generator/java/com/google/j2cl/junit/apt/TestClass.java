@@ -17,10 +17,9 @@ package com.google.j2cl.junit.apt;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import java.util.Optional;
 
-/**
- * Represents a JUnit test case.
- */
+/** Represents a JUnit test case. */
 @AutoValue
 public abstract class TestClass {
 
@@ -29,14 +28,26 @@ public abstract class TestClass {
   }
 
   public abstract String packageName();
+
   public abstract String simpleName();
+
   public abstract String qualifiedName();
 
+  public abstract TestConstructor testConstructor();
+
   public abstract ImmutableList<TestMethod> testMethods();
+
   public abstract ImmutableList<TestMethod> beforeMethods();
+
   public abstract ImmutableList<TestMethod> afterMethods();
+
   public abstract ImmutableList<TestMethod> beforeClassMethods();
+
   public abstract ImmutableList<TestMethod> afterClassMethods();
+
+  public abstract Optional<TestMethod> parameterizedDataMethod();
+
+  public abstract ImmutableList<ParameterizedTestField> parameterizedFields();
 
   public boolean needsAsyncSetup() {
     return beforeMethods().stream().anyMatch(TestMethod::isAsync);
@@ -62,21 +73,35 @@ public abstract class TestClass {
     return jsUnitAdapterQualifiedClassName() + "Suite";
   }
 
-  /**
-   * Builder for TestClass.
-   */
+  public boolean isParameterized() {
+    return parameterizedDataMethod().isPresent();
+  }
+
+  /** Builder for TestClass. */
   @AutoValue.Builder
   public abstract static class Builder {
     abstract Builder packageName(String s);
+
     abstract Builder simpleName(String s);
+
     abstract Builder qualifiedName(String s);
+
+    abstract Builder testConstructor(TestConstructor t);
+
     abstract Builder testMethods(ImmutableList<TestMethod> t);
+
     abstract Builder beforeMethods(ImmutableList<TestMethod> t);
+
     abstract Builder afterMethods(ImmutableList<TestMethod> t);
+
     abstract Builder beforeClassMethods(ImmutableList<TestMethod> t);
+
     abstract Builder afterClassMethods(ImmutableList<TestMethod> t);
+
+    abstract Builder parameterizedDataMethod(Optional<TestMethod> t);
+
+    abstract Builder parameterizedFields(ImmutableList<ParameterizedTestField> t);
 
     abstract TestClass build();
   }
 }
-

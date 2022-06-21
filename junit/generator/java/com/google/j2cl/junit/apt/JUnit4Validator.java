@@ -21,21 +21,33 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.junit.async.Timeout;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.TypeKind;
 import javax.lang.model.util.ElementFilter;
+import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
 class JUnit4Validator extends BaseValidator {
 
-  public JUnit4Validator(ErrorReporter errorReporter) {
+  private final Types typeUtils;
+  private final Elements elementUtils;
+
+  public JUnit4Validator(ErrorReporter errorReporter, Types typeUtils, Elements elementUtils) {
     super(errorReporter);
+    this.typeUtils = typeUtils;
+    this.elementUtils = elementUtils;
   }
 
   public boolean validateJUnit4MethodAndClass(TypeElement typeElement) {
@@ -52,8 +64,7 @@ class JUnit4Validator extends BaseValidator {
   }
 
   public boolean hasAnyMethodsAnnotatedWithTest(TypeElement typeElement) {
-    return MoreApt.getClassHierarchy(typeElement)
-        .stream()
+    return MoreApt.getClassHierarchy(typeElement).stream()
         .flatMap(input -> ElementFilter.methodsIn(input.getEnclosedElements()).stream())
         .anyMatch(TestingPredicates.hasAnnotation(Test.class));
   }
@@ -65,33 +76,50 @@ class JUnit4Validator extends BaseValidator {
       isValid = false;
     }
     for (ExecutableElement executableElement : getAllTestMethods(type)) {
-      isValid &= validateMethodIsPublic(executableElement);
-      isValid &= validateMethodInstanceOrStatic(executableElement);
+      isValid &= validateMemberIsPublic(executableElement);
+      isValid &= validateMemberInstanceOrStatic(executableElement);
       isValid &= validateMethodNoArguments(executableElement);
       isValid &= validateMethodReturnType(executableElement);
+    }
+    for (VariableElement variableElement : getAllTestParameters(type)) {
+      isValid &= validateMemberIsPublic(variableElement);
+      isValid &= validateMemberIsInstance(variableElement);
+      isValid &= validateMemberIsNonFinal(variableElement);
     }
     return isValid;
   }
 
-  private boolean validateMethodInstanceOrStatic(ExecutableElement executableElement) {
-    boolean isStatic = executableElement.getModifiers().contains(Modifier.STATIC);
-    if (hasClassSetupAnnotation(executableElement) != isStatic) {
-      errorReporter.report(
-          isStatic ? ErrorMessage.IS_STATIC : ErrorMessage.NON_STATIC, executableElement);
+  private boolean validateMemberInstanceOrStatic(Element element) {
+    boolean isStatic = element.getModifiers().contains(Modifier.STATIC);
+
+    if (needsToBeStaticMethod(element) != isStatic) {
+      errorReporter.report(isStatic ? ErrorMessage.IS_STATIC : ErrorMessage.NON_STATIC, element);
       return false;
     }
     return true;
   }
 
+  private boolean needsToBeStaticMethod(Element element) {
+    return hasClassSetupAnnotation(element) || isAnnotationPresent(element, Parameters.class);
+  }
+
+  // TODO(b/235234450): clean up validation for different types of methods
   private boolean validateMethodReturnType(ExecutableElement executableElement) {
+    if (isAnnotationPresent(executableElement, Parameters.class)) {
+      if (!isReturnTypeIterableOfArrays(executableElement)) {
+        errorReporter.report(ErrorMessage.NON_ITERABLE_OR_ARRAY_RETURN, executableElement);
+        return false;
+      }
+      return true;
+    }
+
+    boolean isValid = true;
     Test testAnnotation = executableElement.getAnnotation(Test.class);
     Timeout timeoutAnnotation = executableElement.getAnnotation(Timeout.class);
     long timeout =
         testAnnotation != null
             ? testAnnotation.timeout()
             : timeoutAnnotation != null ? timeoutAnnotation.value() : 0;
-
-    boolean isValid = true;
 
     if (testAnnotation != null && timeoutAnnotation != null) {
       errorReporter.report(ErrorMessage.TEST_HAS_TIMEOUT_ANNOTATION, executableElement);
@@ -116,6 +144,7 @@ class JUnit4Validator extends BaseValidator {
         errorReporter.report(ErrorMessage.NON_ASYNC_HAS_TIMEOUT, executableElement);
         isValid = false;
       }
+
       if (!TestingPredicates.RETURN_TYPE_VOID_PREDICATE.test(executableElement)) {
         errorReporter.report(ErrorMessage.NON_PROMISE_RETURN, executableElement);
         isValid = false;
@@ -124,20 +153,51 @@ class JUnit4Validator extends BaseValidator {
     return isValid;
   }
 
+  private boolean isReturnTypeIterableOfArrays(ExecutableElement executableElement) {
+    TypeKind typeKind = executableElement.getReturnType().getKind();
+    return typeKind == TypeKind.ARRAY
+        || isIterable(MoreApt.asTypeElement(executableElement.getReturnType()));
+  }
+
+  private final boolean isIterable(TypeElement type) {
+    if (type == null) {
+      return false;
+    }
+
+    return typeUtils.isSubtype(
+        typeUtils.erasure(type.asType()),
+        typeUtils.erasure(elementUtils.getTypeElement(Iterable.class.getName()).asType()));
+  }
+
+  private boolean validateMemberIsInstance(Element element) {
+    if (element.getModifiers().contains(Modifier.STATIC)) {
+      errorReporter.report(ErrorMessage.IS_STATIC, element);
+      return false;
+    }
+    return true;
+  }
+
   private static ImmutableList<ExecutableElement> getAllTestMethods(TypeElement typeElement) {
     return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .filter(
             Predicates.or(
                 TestingPredicates.hasAnnotation(BeforeClass.class),
                 TestingPredicates.hasAnnotation(AfterClass.class),
+                TestingPredicates.hasAnnotation(Parameters.class),
                 TestingPredicates.hasAnnotation(Test.class),
                 TestingPredicates.hasAnnotation(Before.class),
                 TestingPredicates.hasAnnotation(After.class)))
         .collect(toImmutableList());
   }
 
-  private static boolean hasClassSetupAnnotation(ExecutableElement executableElement) {
-    return isAnnotationPresent(executableElement, BeforeClass.class)
-        || isAnnotationPresent(executableElement, AfterClass.class);
+  private static boolean hasClassSetupAnnotation(Element element) {
+    return isAnnotationPresent(element, BeforeClass.class)
+        || isAnnotationPresent(element, AfterClass.class);
+  }
+
+  private static ImmutableList<VariableElement> getAllTestParameters(TypeElement typeElement) {
+    return ElementFilter.fieldsIn(typeElement.getEnclosedElements()).stream()
+        .filter(TestingPredicates.hasAnnotation(Parameter.class))
+        .collect(toImmutableList());
   }
 }

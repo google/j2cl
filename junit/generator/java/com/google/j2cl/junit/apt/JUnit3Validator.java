@@ -34,8 +34,7 @@ class JUnit3Validator extends BaseValidator {
   }
 
   public boolean isJUnit3Suite(TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements())
-        .stream()
+    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .filter(MoreElements.hasModifiers(Sets.newHashSet(Modifier.STATIC, Modifier.PUBLIC)))
         .anyMatch(
             method -> {
@@ -75,7 +74,7 @@ class JUnit3Validator extends BaseValidator {
   private final boolean validateMethods(List<ExecutableElement> methods) {
     boolean isValid = true;
     for (ExecutableElement executableElement : methods) {
-      isValid &= validateMethodIsPublic(executableElement);
+      isValid &= validateMemberIsPublic(executableElement);
       isValid &= validateMethodNoArguments(executableElement);
       isValid &= validateMethodVoidReturn(executableElement);
     }
@@ -91,15 +90,13 @@ class JUnit3Validator extends BaseValidator {
   }
 
   private boolean hasTestCaseAsParentClass(TypeElement typeElement) {
-    return MoreApt.getClassHierarchy(typeElement)
-        .stream()
+    return MoreApt.getClassHierarchy(typeElement).stream()
         .map(input -> input.getQualifiedName().toString())
         .anyMatch(Predicates.equalTo(TestCase.class.getName()));
   }
 
   private List<ExecutableElement> getAllJUnit3TestMethods(TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements())
-        .stream()
+    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .filter(TestingPredicates.METHOD_NAME_STARTS_WITH_TEST_PREDICATE)
         .filter(TestingPredicates.ZERO_PARAMETER_PREDICATE)
         .collect(toImmutableList());

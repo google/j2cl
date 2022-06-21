@@ -10,6 +10,7 @@ actualTest.${testMethod.javaMethodName()}();
 #methodExecution( $testMethod )
   #end
 #end
+
 /**
  * Generated test suite from j2cl_test target
  */
@@ -46,6 +47,36 @@ public class ${testClass.jsUnitAdapterClassName()} {
 
   private ${testClass.qualifiedName()} actualTest;
 
+#if(${testClass.isParameterized()})
+  private int currentParameterValueIndex;
+
+  public static Object[] data = new Object[0];
+
+  static {
+    int counter = 0;
+    for (Object testCaseData : ${testClass.qualifiedName()}.${testClass.parameterizedDataMethod().get().javaMethodName()}()) {
+      data[counter++] = testCaseData;
+    }
+  }
+
+  public Object[] getData() {
+    return data;
+  }
+
+  public void setCurrentParameterValueIndex(int currentParameterValueIndex) {
+    this.currentParameterValueIndex = currentParameterValueIndex;
+  }
+
+  @SuppressWarnings("unchecked")
+  private <T> T getParam(int index) {
+    Object testCaseParam = data[currentParameterValueIndex];
+    ## TODO(b/232024505): Add runtime check for the number of parameters should be equal to data value dimension
+    Object[] normalizedParamValues =
+      (testCaseParam instanceof Object[]) ? (Object[]) testCaseParam : new Object[] { testCaseParam };
+    return (T) normalizedParamValues[index];
+  }
+#end
+
   public void setUpPage() throws Throwable {
 #methodExecutions( $testClass.beforeClassMethods() )
 
@@ -60,8 +91,19 @@ public class ${testClass.jsUnitAdapterClassName()} {
   @JsAsync
 #end
   public IThenable<?> setUp() throws Throwable {
-    actualTest = new ${testClass.qualifiedName()}();
 
+  actualTest = new ${testClass.qualifiedName()}(
+  #set($maxIndex = ${testClass.testConstructor().numberOfParameters()} - 1)
+  #if($maxIndex >= 0) ## Range [0..-1] still goes into the loop
+  #foreach($number in [0..$maxIndex])
+    getParam($number)#if ($foreach.hasNext),#else#end
+  #end
+  #end);
+
+
+  #foreach($testField in ${testClass.parameterizedFields()})
+  actualTest.${testField.fieldName()} = getParam(${testField.index()});
+  #end
   #methodExecutions( $testClass.beforeMethods() )
 
     return null;
