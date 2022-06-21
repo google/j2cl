@@ -75,4 +75,12 @@ public class DefaultNotNullable {
       return "Hey";
     }
   }
+
+  interface NullableBound<T extends @NullableType NullableBound<T>> {}
+
+  interface NonNullableBound<T extends NonNullableBound<T>> {}
+
+  <T extends @NullableType NullableBound<T>> void methodWithNullableBound() {}
+
+  <T extends NonNullableBound<T>> void methodWithNonNullableBound() {}
 }

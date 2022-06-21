@@ -20,6 +20,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import jsinterop.annotations.JsMethod;
+import org.checkerframework.checker.nullness.compatqual.NonNullType;
 import org.checkerframework.checker.nullness.compatqual.NullableType;
 
 public class DefaultNullable {
@@ -56,4 +57,12 @@ public class DefaultNullable {
   @JsMethod
   public void m3(String... args) {
   }
+
+  interface NullableBound<T extends NullableBound<T>> {}
+
+  interface NonNullableBound<T extends @NonNullType NonNullableBound<T>> {}
+
+  <T extends NullableBound<T>> void methodWithNullableBound() {}
+
+  <T extends @NonNullType NonNullableBound<T>> void methodWithNonNullableBound() {}
 }

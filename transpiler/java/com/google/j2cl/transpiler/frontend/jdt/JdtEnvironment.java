@@ -289,7 +289,7 @@ class JdtEnvironment {
     }
 
     if (isIntersectionType(typeBinding)) {
-      return createIntersectionType(typeBinding);
+      return createIntersectionType(typeBinding, inNullMarkedScope);
     }
 
     if (typeBinding.isNullType()) {
@@ -297,7 +297,7 @@ class JdtEnvironment {
     }
 
     if (typeBinding.isTypeVariable() || typeBinding.isCapture() || typeBinding.isWildcardType()) {
-      return createTypeVariable(typeBinding);
+      return createTypeVariable(typeBinding, inNullMarkedScope);
     }
 
     boolean isNullable = isNullable(typeBinding, elementAnnotations, inNullMarkedScope);
@@ -315,38 +315,42 @@ class JdtEnvironment {
     return withNullability(createDeclaredType(typeBinding, inNullMarkedScope), isNullable);
   }
 
-  private TypeDescriptor createTypeVariable(ITypeBinding typeBinding) {
+  private TypeDescriptor createTypeVariable(ITypeBinding typeBinding, boolean inNullMarkedScope) {
     Supplier<TypeDescriptor> upperBoundTypeDescriptorFactory =
-        () -> getUpperBoundTypeDescriptor(typeBinding);
+        () -> getUpperBoundTypeDescriptor(typeBinding, inNullMarkedScope);
 
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorSupplier(upperBoundTypeDescriptorFactory)
-        .setLowerBoundTypeDescriptor(getLowerBoundTypeDescriptor(typeBinding))
+        .setLowerBoundTypeDescriptor(getLowerBoundTypeDescriptor(typeBinding, inNullMarkedScope))
         .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
         .setUniqueKey(typeBinding.getKey())
         .setName(typeBinding.getName())
         .build();
   }
 
-  private TypeDescriptor getLowerBoundTypeDescriptor(ITypeBinding typeBinding) {
-    // TODO(b/190520117): Handle nullability annotations in bounds.
+  private TypeDescriptor getLowerBoundTypeDescriptor(
+      ITypeBinding typeBinding, boolean inNullMarkedScope) {
     ITypeBinding bound = typeBinding.getBound();
-    return bound != null && !typeBinding.isUpperbound() ? createTypeDescriptor(bound) : null;
+    return bound != null && !typeBinding.isUpperbound()
+        ? createTypeDescriptorWithNullability(bound, bound.getTypeAnnotations(), inNullMarkedScope)
+        : null;
   }
 
-  private TypeDescriptor getUpperBoundTypeDescriptor(ITypeBinding typeBinding) {
-    // TODO(b/190520117): Handle nullability annotations in bounds.
+  private TypeDescriptor getUpperBoundTypeDescriptor(
+      ITypeBinding typeBinding, boolean inNullMarkedScope) {
     ITypeBinding[] bounds = typeBinding.getTypeBounds();
     if (bounds == null || bounds.length == 0) {
       ITypeBinding bound = typeBinding.getBound();
       return bound != null && typeBinding.isUpperbound()
-          ? createTypeDescriptor(bound)
+          ? createTypeDescriptorWithNullability(
+              bound, bound.getTypeAnnotations(), inNullMarkedScope)
           : TypeDescriptors.get().javaLangObject;
     }
     if (bounds.length == 1) {
-      return createTypeDescriptor(bounds[0]);
+      return createTypeDescriptorWithNullability(
+          bounds[0], bounds[0].getTypeAnnotations(), inNullMarkedScope);
     }
-    return createIntersectionType(typeBinding);
+    return createIntersectionType(typeBinding, inNullMarkedScope);
   }
 
   private static DeclaredTypeDescriptor withNullability(
@@ -709,7 +713,10 @@ class JdtEnvironment {
     // generate type parameters declared in the method.
     Iterable<TypeVariable> typeParameterTypeDescriptors =
         FluentIterable.from(methodBinding.getTypeParameters())
-            .transform(this::createTypeDescriptor)
+            .transform(
+                t ->
+                    createTypeDescriptorWithNullability(
+                        t, t.getTypeAnnotations(), inNullMarkedScope))
             .transform(TypeVariable.class::cast);
 
     ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors =
@@ -961,11 +968,6 @@ class JdtEnvironment {
   }
 
   private <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
-      ITypeBinding[] typeBindings, Class<T> clazz) {
-    return createTypeDescriptors(typeBindings, /* inNullMarkedScope= */ false, clazz);
-  }
-
-  private <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
       ITypeBinding[] typeBindings, boolean inNullMarkedScope, Class<T> clazz) {
     return createTypeDescriptors(Arrays.asList(typeBindings), inNullMarkedScope, clazz);
   }
@@ -994,11 +996,13 @@ class JdtEnvironment {
     builder.addPrimitiveBoxedTypeDescriptorPair(typeDescriptor, boxedType);
   }
 
-  private final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
+  private final TypeDescriptor createIntersectionType(
+      ITypeBinding typeBinding, boolean inNullMarkedScope) {
     // Intersection types created with this method only occur in method bodies, default nullability
     // can be ignored.
     ImmutableList<DeclaredTypeDescriptor> intersectedTypeDescriptors =
-        createTypeDescriptors(typeBinding.getTypeBounds(), DeclaredTypeDescriptor.class);
+        createTypeDescriptors(
+            typeBinding.getTypeBounds(), inNullMarkedScope, DeclaredTypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
         .build();
@@ -1207,7 +1211,7 @@ class JdtEnvironment {
             () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), isNullMarked))
         .setTypeParameterDescriptors(
             getTypeArgumentTypeDescriptors(
-                typeBinding, /* inNullMarkedScope= */ false, TypeVariable.class))
+                typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)

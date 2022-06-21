@@ -46,4 +46,12 @@ open class ExplicitNotNullable {
  }
 
  open fun m3(vararg args: kotlin.String?) {}
+
+ open fun <T: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<T>?> methodWithNullableBound() {}
+
+ open fun <T: nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
+
+ interface NullableBound<T: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<T>?> {}
+
+ interface NonNullableBound<T: nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound<T>> {}
 }

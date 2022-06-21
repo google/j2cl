@@ -46,4 +46,12 @@ open class DefaultNullable {
  }
 
  open fun m3(vararg args: kotlin.String?) {}
+
+ open fun <T: nullability.defaultnullable.DefaultNullable.NullableBound<T>?> methodWithNullableBound() {}
+
+ open fun <T: nullability.defaultnullable.DefaultNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
+
+ interface NullableBound<T: nullability.defaultnullable.DefaultNullable.NullableBound<T>?> {}
+
+ interface NonNullableBound<T: nullability.defaultnullable.DefaultNullable.NonNullableBound<T>> {}
 }

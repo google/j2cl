@@ -58,4 +58,12 @@ public class ExplicitNotNullable {
   @JsMethod
   public void m3(String... args) {
   }
+
+  interface NullableBound<T extends @NullableType NullableBound<T>> {}
+
+  interface NonNullableBound<T extends NonNullableBound<T>> {}
+
+  <T extends @NullableType NullableBound<T>> void methodWithNullableBound() {}
+
+  <T extends NonNullableBound<T>> void methodWithNonNullableBound() {}
 }

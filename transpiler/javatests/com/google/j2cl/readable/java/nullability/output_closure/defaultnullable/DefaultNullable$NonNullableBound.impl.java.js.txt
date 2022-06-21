@@ -1,0 +1,31 @@
+goog.module('nullability.defaultnullable.DefaultNullable.NonNullableBound$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class NonNullableBound {
+ 
+ static $clinit() {
+  NonNullableBound.$clinit = () =>{};
+  NonNullableBound.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nullability_defaultnullable_DefaultNullable_NonNullableBound = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nullability_defaultnullable_DefaultNullable_NonNullableBound;
+ }
+ 
+ static $loadModules() {}
+}
+NonNullableBound.$markImplementor(/**@type {Function}*/ (NonNullableBound));
+$Util.$setClassMetadataForInterface(NonNullableBound, 'nullability.defaultnullable.DefaultNullable$NonNullableBound');
+
+exports = NonNullableBound;
+
+//# sourceMappingURL=DefaultNullable$NonNullableBound.js.map
