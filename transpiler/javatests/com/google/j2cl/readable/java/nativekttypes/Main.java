@@ -57,8 +57,8 @@ public class Main {
 
     Subclass<String> subclass = new Subclass<>("foo");
     int i9 = subclass.methodToRename();
-    int i10 = subclass.interfaceMethod();
-    int i11 = subclass.interfaceMethodToRename();
+    int i10 = subclass.interfaceMethod("foo");
+    int i11 = subclass.interfaceMethodToRename("foo");
   }
 
   public void typeLiterals() {
@@ -126,12 +126,12 @@ class Subclass<V> extends NativeTopLevel<V> implements NativeInterface<V> {
   }
 
   @Override
-  public int interfaceMethod() {
+  public int interfaceMethod(V v) {
     return 0;
   }
 
   @Override
-  public int interfaceMethodToRename() {
+  public int interfaceMethodToRename(V v) {
     return 0;
   }
 

@@ -39,8 +39,8 @@ open class Main {
   val inner: nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>? = topLevel!!.KInner<kotlin.String?>("foo")
   val subclass: nativekttypes.Subclass<kotlin.String?>? = nativekttypes.Subclass<kotlin.String?>("foo")
   val i9: kotlin.Int = subclass!!.renamedMethod()
-  val i10: kotlin.Int = subclass!!.interfaceMethod()
-  val i11: kotlin.Int = subclass!!.renamedInterfaceMethod()
+  val i10: kotlin.Int = subclass!!.interfaceMethod("foo")
+  val i11: kotlin.Int = subclass!!.renamedInterfaceMethod("foo")
  }
 
  open fun typeLiterals() {
@@ -93,11 +93,11 @@ open class Subclass<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nati
   return super.getstartingmethodAsProperty
  }
 
- open override fun interfaceMethod(): kotlin.Int {
+ open override fun interfaceMethod(v: V?): kotlin.Int {
   return 0
  }
 
- open override fun renamedInterfaceMethod(): kotlin.Int {
+ open override fun renamedInterfaceMethod(v: V?): kotlin.Int {
   return 0
  }
 

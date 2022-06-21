@@ -67,8 +67,8 @@
   (ref.func $m_isMethodAsProperty__boolean@nativekttypes.Subclass)
   (ref.func $m_getstartingmethodAsProperty__int@nativekttypes.Subclass)
   (ref.func $m_instanceMethod__java_lang_Object__java_lang_Object@nativekttypes.NativeTopLevel)
-  (ref.func $m_interfaceMethod__int@nativekttypes.Subclass)
-  (ref.func $m_interfaceMethodToRename__int@nativekttypes.Subclass)
+  (ref.func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subclass)
+  (ref.func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subclass)
   (ref.func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subclass)
   (ref.func $m_interfaceMethodToRenameAsProperty__int@nativekttypes.Subclass)
  )
@@ -78,8 +78,8 @@
 (global $nativekttypes.Subclass.itable (ref $itable) (array.init_static $itable 
  (struct.new $nativekttypes.NativeInterface.vtable
   (ref.func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subclass)
-  (ref.func $m_interfaceMethod__int@nativekttypes.Subclass)
-  (ref.func $m_interfaceMethodToRename__int@nativekttypes.Subclass)
+  (ref.func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subclass)
+  (ref.func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subclass)
   (ref.func $m_interfaceMethodToRenameAsProperty__int@nativekttypes.Subclass)
  )
  ))
@@ -380,12 +380,12 @@
   ;; int i9 = subclass.methodToRename();
   ;;@ nativekttypes/Main.java:59:4
   (local.set $i9 (call_ref (ref.as_non_null (local.get $subclass))(struct.get $nativekttypes.Subclass.vtable $m_methodToRename__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
-  ;; int i10 = subclass.interfaceMethod();
+  ;; int i10 = subclass.interfaceMethod(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:60:4
-  (local.set $i10 (call_ref (ref.as_non_null (local.get $subclass))(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethod__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
-  ;; int i11 = subclass.interfaceMethodToRename();
+  (local.set $i10 (call_ref (ref.as_non_null (local.get $subclass))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethod__java_lang_Object__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
+  ;; int i11 = subclass.interfaceMethodToRename(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:61:4
-  (local.set $i11 (call_ref (ref.as_non_null (local.get $subclass))(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethodToRename__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
+  (local.set $i11 (call_ref (ref.as_non_null (local.get $subclass))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethodToRename__java_lang_Object__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
  )
 )
 (elem declare func $m_memberAccess__void@nativekttypes.Main)
@@ -529,8 +529,8 @@
  (field $m_isMethodAsProperty__boolean (ref $function.m_isMethodAsProperty__boolean))
  (field $m_getstartingmethodAsProperty__int (ref $function.m_getstartingmethodAsProperty__int))
  (field $m_instanceMethod__java_lang_Object__java_lang_Object (ref $function.m_instanceMethod__java_lang_Object__java_lang_Object))
- (field $m_interfaceMethod__int (ref $function.m_interfaceMethod__int))
- (field $m_interfaceMethodToRename__int (ref $function.m_interfaceMethodToRename__int))
+ (field $m_interfaceMethod__java_lang_Object__int (ref $function.m_interfaceMethod__java_lang_Object__int))
+ (field $m_interfaceMethodToRename__java_lang_Object__int (ref $function.m_interfaceMethodToRename__java_lang_Object__int))
  (field $m_getInterfaceMethodAsProperty__int (ref $function.m_getInterfaceMethodAsProperty__int))
  (field $m_interfaceMethodToRenameAsProperty__int (ref $function.m_interfaceMethodToRenameAsProperty__int))
   $nativekttypes.NativeTopLevel.vtable)
@@ -682,10 +682,11 @@
 )
 (elem declare func $m_getstartingmethodAsProperty__int@nativekttypes.Subclass)
 
-;;; int Subclass.interfaceMethod()
-(func $m_interfaceMethod__int@nativekttypes.Subclass
- (type $function.m_interfaceMethod__int)
+;;; int Subclass.interfaceMethod(V v)
+(func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subclass
+ (type $function.m_interfaceMethod__java_lang_Object__int)
  (param $this.untyped (ref $java.lang.Object))
+ (param $v (ref null $java.lang.Object))
  (result i32)
  ;;@ nativekttypes/Main.java:129:13
  (local $this (ref null $nativekttypes.Subclass))
@@ -696,12 +697,13 @@
   (return (i32.const 0))
  )
 )
-(elem declare func $m_interfaceMethod__int@nativekttypes.Subclass)
+(elem declare func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subclass)
 
-;;; int Subclass.interfaceMethodToRename()
-(func $m_interfaceMethodToRename__int@nativekttypes.Subclass
- (type $function.m_interfaceMethodToRename__int)
+;;; int Subclass.interfaceMethodToRename(V v)
+(func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subclass
+ (type $function.m_interfaceMethodToRename__java_lang_Object__int)
  (param $this.untyped (ref $java.lang.Object))
+ (param $v (ref null $java.lang.Object))
  (result i32)
  ;;@ nativekttypes/Main.java:134:13
  (local $this (ref null $nativekttypes.Subclass))
@@ -712,7 +714,7 @@
   (return (i32.const 0))
  )
 )
-(elem declare func $m_interfaceMethodToRename__int@nativekttypes.Subclass)
+(elem declare func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subclass)
 
 ;;; int Subclass.getInterfaceMethodAsProperty()
 (func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subclass
@@ -785,8 +787,8 @@
 ;;; Code for nativekttypes.NativeInterface [INTERFACE]
 (type $nativekttypes.NativeInterface.vtable (struct_subtype 
  (field $m_getInterfaceMethodAsProperty__int (ref $function.m_getInterfaceMethodAsProperty__int))
- (field $m_interfaceMethod__int (ref $function.m_interfaceMethod__int))
- (field $m_interfaceMethodToRename__int (ref $function.m_interfaceMethodToRename__int))
+ (field $m_interfaceMethod__java_lang_Object__int (ref $function.m_interfaceMethod__java_lang_Object__int))
+ (field $m_interfaceMethodToRename__java_lang_Object__int (ref $function.m_interfaceMethodToRename__java_lang_Object__int))
  (field $m_interfaceMethodToRenameAsProperty__int (ref $function.m_interfaceMethodToRenameAsProperty__int))
   data)
 )
@@ -1242,9 +1244,9 @@
 
 ;;; Code for nativekttypes.nativekt.KInterface [INTERFACE]
 (type $nativekttypes.nativekt.KInterface.vtable (struct_subtype 
- (field $m_interfaceMethod__int (ref $function.m_interfaceMethod__int))
+ (field $m_interfaceMethod__java_lang_Object__int (ref $function.m_interfaceMethod__java_lang_Object__int))
  (field $m_interfaceMethodAsProperty__int (ref $function.m_interfaceMethodAsProperty__int))
- (field $m_renamedInterfaceMethod__int (ref $function.m_renamedInterfaceMethod__int))
+ (field $m_renamedInterfaceMethod__java_lang_Object__int (ref $function.m_renamedInterfaceMethod__java_lang_Object__int))
  (field $m_renamedInterfaceMethodAsProperty__int (ref $function.m_renamedInterfaceMethodAsProperty__int))
   data)
 )

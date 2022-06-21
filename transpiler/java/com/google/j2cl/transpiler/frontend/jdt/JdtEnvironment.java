@@ -882,7 +882,8 @@ class JdtEnvironment {
   private KtInfo computeKtInfo(IMethodBinding methodBinding) {
     KtInfo ktInfo = KtInteropUtils.getKtInfo(methodBinding);
 
-    for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
+    for (IMethodBinding overriddenMethod :
+        getOverriddenMethods(methodBinding.getMethodDeclaration())) {
       KtInfo overriddenKtInfo = KtInteropUtils.getKtInfo(overriddenMethod);
       ktInfo =
           KtInfo.newBuilder()

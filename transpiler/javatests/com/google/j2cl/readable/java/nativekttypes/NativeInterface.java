@@ -21,10 +21,10 @@ import javaemul.internal.annotations.KtProperty;
 
 @KtNative("nativekttypes.nativekt.KInterface")
 public interface NativeInterface<S> {
-  int interfaceMethod();
+  int interfaceMethod(S s);
 
   @KtName("renamedInterfaceMethod")
-  int interfaceMethodToRename();
+  int interfaceMethodToRename(S s);
 
   @KtProperty
   int getInterfaceMethodAsProperty();
