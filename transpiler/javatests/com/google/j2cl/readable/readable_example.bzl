@@ -95,10 +95,6 @@ def readable_example(
             "--summary_detail_level=3",
         ] + defs,
         compiler = "//javascript/tools/jscompiler:head",
-        # TODO(b/188072445): Remove this when it becomes the default behavior.
-        # Pin to the new behavior now to avoid having to update the size tests as part of rolling
-        # forward or back go/js-fast-locales-rollout
-        experimental_fast_locales = True,
         extra_inputs = ["//transpiler/javatests/com/google/j2cl/readable:conformance_proto"],
         deps = [":readable"],
     )
