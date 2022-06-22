@@ -88,6 +88,7 @@ public class GoldenFileTester {
     return !line.startsWith("java.")
         && !line.startsWith("javax.")
         && !line.startsWith("javaemul.")
+        && !line.startsWith("kotlin.")
         && !line.startsWith("vmbootstrap.");
   }
 
