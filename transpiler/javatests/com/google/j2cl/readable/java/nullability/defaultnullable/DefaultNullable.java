@@ -65,4 +65,16 @@ public class DefaultNullable {
   <T extends NullableBound<T>> void methodWithNullableBound() {}
 
   <T extends @NonNullType NonNullableBound<T>> void methodWithNonNullableBound() {}
+
+  interface NullableBoundWithNonNullArgument
+      extends NullableBound<@NonNullType NullableBoundWithNonNullArgument> {}
+
+  interface NullableBoundWithNullableArgument
+      extends NullableBound<NullableBoundWithNullableArgument> {}
+
+  interface NonNullBoundWithNonNullArgument
+      extends NonNullableBound<NonNullBoundWithNonNullArgument> {}
+
+  interface NonNullBoundWithNullableArgument
+      extends NonNullableBound<NonNullBoundWithNullableArgument> {}
 }

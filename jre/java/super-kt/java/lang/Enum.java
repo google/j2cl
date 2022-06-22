@@ -21,7 +21,7 @@ import javaemul.internal.annotations.KtProperty;
 import jsinterop.annotations.JsNonNull;
 
 @KtNative("kotlin.Enum")
-public abstract class Enum<E extends Enum<E>> implements Comparable<E> {
+public abstract class Enum<E extends @JsNonNull Enum<E>> implements Comparable<E> {
 
   protected Enum(String name, int ordinal) {}
 

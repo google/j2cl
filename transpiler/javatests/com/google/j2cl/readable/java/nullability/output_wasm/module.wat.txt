@@ -37,6 +37,18 @@
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound [static fields]
 (global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NonNullableBound (mut i32) (i32.const 0))
 
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NullableBoundWithNonNullArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NullableBoundWithNullableArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NonNullBoundWithNonNullArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NonNullBoundWithNullableArgument (mut i32) (i32.const 0))
+
 ;;; Code for nullability.defaultnullable.DefaultNullable [static fields]
 (global $f_$initialized__nullability_defaultnullable_DefaultNullable (mut i32) (i32.const 0))
 
@@ -46,6 +58,18 @@
 ;;; Code for nullability.defaultnullable.DefaultNullable.NonNullableBound [static fields]
 (global $f_$initialized__nullability_defaultnullable_DefaultNullable_NonNullableBound (mut i32) (i32.const 0))
 
+;;; Code for nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument [static fields]
+(global $f_$initialized__nullability_defaultnullable_DefaultNullable_NullableBoundWithNonNullArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument [static fields]
+(global $f_$initialized__nullability_defaultnullable_DefaultNullable_NullableBoundWithNullableArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument [static fields]
+(global $f_$initialized__nullability_defaultnullable_DefaultNullable_NonNullBoundWithNonNullArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument [static fields]
+(global $f_$initialized__nullability_defaultnullable_DefaultNullable_NonNullBoundWithNullableArgument (mut i32) (i32.const 0))
+
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [static fields]
 (global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable (mut i32) (i32.const 0))
 
@@ -54,6 +78,18 @@
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound [static fields]
 (global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NonNullableBound (mut i32) (i32.const 0))
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument [static fields]
+(global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NullableBoundWithNonNullArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument [static fields]
+(global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NullableBoundWithNullableArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument [static fields]
+(global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NonNullBoundWithNonNullArgument (mut i32) (i32.const 0))
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument [static fields]
+(global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NonNullBoundWithNullableArgument (mut i32) (i32.const 0))
 
 ;;; Code for nullability.Nullability [vtable.init]
 (global $nullability.Nullability.vtable (ref $nullability.Nullability.vtable) 
@@ -1957,6 +1993,146 @@
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound)
 
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument [INTERFACE]
+(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NullableBoundWithNonNullArgument.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:87:12
+ (block
+  ;; if (nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument.$initialized) return;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:87:12
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NullableBoundWithNonNullArgument)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:87:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument.$initialized = true);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:87:12
+  (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NullableBoundWithNonNullArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NullableBoundWithNonNullArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument();
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument__java_lang_Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument)
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument [INTERFACE]
+(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NullableBoundWithNullableArgument.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:90:12
+ (block
+  ;; if (nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument.$initialized) return;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:90:12
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NullableBoundWithNullableArgument)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:90:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument.$initialized = true);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:90:12
+  (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NullableBoundWithNullableArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NullableBoundWithNullableArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument();
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument__java_lang_Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument)
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument [INTERFACE]
+(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NonNullBoundWithNonNullArgument.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:93:12
+ (block
+  ;; if (nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument.$initialized) return;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:93:12
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NonNullBoundWithNonNullArgument)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:93:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument.$initialized = true);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:93:12
+  (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NonNullBoundWithNonNullArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NonNullBoundWithNonNullArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument();
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument__java_lang_Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument)
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument [INTERFACE]
+(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NonNullBoundWithNullableArgument.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:96:12
+ (block
+  ;; if (nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument.$initialized) return;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:96:12
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NonNullBoundWithNullableArgument)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:96:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument.$initialized = true);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:96:12
+  (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_NonNullBoundWithNullableArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NonNullBoundWithNullableArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument();
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument__java_lang_Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument)
+
 ;;; Code for nullability.defaultnullable.DefaultNullable [CLASS]
 (type $nullability.defaultnullable.DefaultNullable (struct_subtype 
  (field $vtable (ref $nullability.defaultnullable.DefaultNullable.vtable)) 
@@ -2228,6 +2404,146 @@
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullableBound)
 
+;;; Code for nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument [INTERFACE]
+(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NullableBoundWithNonNullArgument.$clinit()
+(func $$clinit__void@nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument
+ ;;@ nullability/defaultnullable/DefaultNullable.java:69:12
+ (block
+  ;; if (nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument.$initialized) return;
+  ;;@ nullability/defaultnullable/DefaultNullable.java:69:12
+  (if (global.get $f_$initialized__nullability_defaultnullable_DefaultNullable_NullableBoundWithNonNullArgument)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnullable/DefaultNullable.java:69:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument.$initialized = true);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:69:12
+  (global.set $f_$initialized__nullability_defaultnullable_DefaultNullable_NullableBoundWithNonNullArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NullableBoundWithNonNullArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument();
+  (return (call $function.no.side.effects.$getNullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument__java_lang_Class (ref.func $$getNullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument)
+
+;;; Code for nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument [INTERFACE]
+(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NullableBoundWithNullableArgument.$clinit()
+(func $$clinit__void@nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument
+ ;;@ nullability/defaultnullable/DefaultNullable.java:72:12
+ (block
+  ;; if (nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument.$initialized) return;
+  ;;@ nullability/defaultnullable/DefaultNullable.java:72:12
+  (if (global.get $f_$initialized__nullability_defaultnullable_DefaultNullable_NullableBoundWithNullableArgument)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnullable/DefaultNullable.java:72:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument.$initialized = true);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:72:12
+  (global.set $f_$initialized__nullability_defaultnullable_DefaultNullable_NullableBoundWithNullableArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NullableBoundWithNullableArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument();
+  (return (call $function.no.side.effects.$getNullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument__java_lang_Class (ref.func $$getNullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument)
+
+;;; Code for nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument [INTERFACE]
+(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NonNullBoundWithNonNullArgument.$clinit()
+(func $$clinit__void@nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument
+ ;;@ nullability/defaultnullable/DefaultNullable.java:75:12
+ (block
+  ;; if (nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument.$initialized) return;
+  ;;@ nullability/defaultnullable/DefaultNullable.java:75:12
+  (if (global.get $f_$initialized__nullability_defaultnullable_DefaultNullable_NonNullBoundWithNonNullArgument)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnullable/DefaultNullable.java:75:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument.$initialized = true);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:75:12
+  (global.set $f_$initialized__nullability_defaultnullable_DefaultNullable_NonNullBoundWithNonNullArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NonNullBoundWithNonNullArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument();
+  (return (call $function.no.side.effects.$getNullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument__java_lang_Class (ref.func $$getNullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument)
+
+;;; Code for nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument [INTERFACE]
+(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NonNullBoundWithNullableArgument.$clinit()
+(func $$clinit__void@nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument
+ ;;@ nullability/defaultnullable/DefaultNullable.java:78:12
+ (block
+  ;; if (nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument.$initialized) return;
+  ;;@ nullability/defaultnullable/DefaultNullable.java:78:12
+  (if (global.get $f_$initialized__nullability_defaultnullable_DefaultNullable_NonNullBoundWithNullableArgument)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnullable/DefaultNullable.java:78:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument.$initialized = true);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:78:12
+  (global.set $f_$initialized__nullability_defaultnullable_DefaultNullable_NonNullBoundWithNullableArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NonNullBoundWithNullableArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument();
+  (return (call $function.no.side.effects.$getNullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument__java_lang_Class (ref.func $$getNullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument)
+
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [CLASS]
 (type $nullability.explicitnotnullable.ExplicitNotNullable (struct_subtype 
  (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) 
@@ -2498,3 +2814,143 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound)
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument [INTERFACE]
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NullableBoundWithNonNullArgument.$clinit()
+(func $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:70:12
+ (block
+  ;; if (nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument.$initialized) return;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:70:12
+  (if (global.get $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NullableBoundWithNonNullArgument)
+   (then
+    ;; return;
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:70:12
+    (return )
+   )
+  )
+  ;; (nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument.$initialized = true);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:70:12
+  (global.set $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NullableBoundWithNonNullArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NullableBoundWithNonNullArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument();
+  (return (call $function.no.side.effects.$getNullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument__java_lang_Class (ref.func $$getNullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument)
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument [INTERFACE]
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NullableBoundWithNullableArgument.$clinit()
+(func $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:73:12
+ (block
+  ;; if (nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument.$initialized) return;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:73:12
+  (if (global.get $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NullableBoundWithNullableArgument)
+   (then
+    ;; return;
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:73:12
+    (return )
+   )
+  )
+  ;; (nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument.$initialized = true);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:73:12
+  (global.set $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NullableBoundWithNullableArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NullableBoundWithNullableArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument();
+  (return (call $function.no.side.effects.$getNullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument__java_lang_Class (ref.func $$getNullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument)
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument [INTERFACE]
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NonNullBoundWithNonNullArgument.$clinit()
+(func $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:76:12
+ (block
+  ;; if (nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument.$initialized) return;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:76:12
+  (if (global.get $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NonNullBoundWithNonNullArgument)
+   (then
+    ;; return;
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:76:12
+    (return )
+   )
+  )
+  ;; (nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument.$initialized = true);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:76:12
+  (global.set $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NonNullBoundWithNonNullArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NonNullBoundWithNonNullArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument();
+  (return (call $function.no.side.effects.$getNullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument__java_lang_Class (ref.func $$getNullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument)
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument [INTERFACE]
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void NonNullBoundWithNullableArgument.$clinit()
+(func $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:79:12
+ (block
+  ;; if (nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument.$initialized) return;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:79:12
+  (if (global.get $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NonNullBoundWithNullableArgument)
+   (then
+    ;; return;
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:79:12
+    (return )
+   )
+  )
+  ;; (nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument.$initialized = true);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:79:12
+  (global.set $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_NonNullBoundWithNullableArgument (i32.const 1))
+ )
+)
+
+;;; Class<?> NonNullBoundWithNullableArgument.getClass()
+(func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument();
+  (return (call $function.no.side.effects.$getNullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument__java_lang_Class (ref.func $$getNullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument)

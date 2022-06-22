@@ -134,14 +134,35 @@ internal fun Renderer.renderArguments(
     )
   if (arguments.isNotEmpty()) {
     if (usage != TypeDescriptorUsage.SUPER_TYPE || !arguments.any { it.isInferred }) {
-      renderInAngleBrackets {
-        renderCommaSeparated(arguments) { renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT) }
-      }
+      renderTypeArguments(parameters, arguments)
     }
   } else if (parameters.isNotEmpty()) {
     renderInAngleBrackets { renderCommaSeparated(parameters) { render("*") } }
   }
 }
+
+internal fun Renderer.renderTypeArguments(
+  typeParameters: List<TypeVariable>,
+  typeArguments: List<TypeDescriptor>
+) {
+  renderInAngleBrackets {
+    renderCommaSeparated(inferNonNullableBounds(typeParameters, typeArguments)) {
+      renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT)
+    }
+  }
+}
+
+private fun inferNonNullableBounds(
+  typeParameters: List<TypeVariable>,
+  typeArguments: List<TypeDescriptor>
+): List<TypeDescriptor> = typeParameters.zip(typeArguments, ::inferNonNullableBounds)
+
+private fun inferNonNullableBounds(
+  typeParameter: TypeVariable,
+  typeArgument: TypeDescriptor
+): TypeDescriptor =
+  if (!typeParameter.upperBoundTypeDescriptor.isNullable) typeArgument.toNonNullable()
+  else typeArgument
 
 private fun Renderer.renderPrimitiveTypeDescriptor(
   primitiveTypeDescriptor: PrimitiveTypeDescriptor

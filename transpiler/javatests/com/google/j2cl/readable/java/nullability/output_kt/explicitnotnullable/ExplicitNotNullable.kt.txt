@@ -54,4 +54,12 @@ open class ExplicitNotNullable {
  interface NullableBound<T: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<T>?> {}
 
  interface NonNullableBound<T: nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound<T>> {}
+
+ interface NullableBoundWithNonNullArgument: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument> {}
+
+ interface NullableBoundWithNullableArgument: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument?> {}
+
+ interface NonNullBoundWithNonNullArgument: nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound<nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument> {}
+
+ interface NonNullBoundWithNullableArgument: nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound<nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument> {}
 }

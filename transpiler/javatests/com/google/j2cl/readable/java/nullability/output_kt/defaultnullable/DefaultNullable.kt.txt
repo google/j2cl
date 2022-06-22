@@ -54,4 +54,12 @@ open class DefaultNullable {
  interface NullableBound<T: nullability.defaultnullable.DefaultNullable.NullableBound<T>?> {}
 
  interface NonNullableBound<T: nullability.defaultnullable.DefaultNullable.NonNullableBound<T>> {}
+
+ interface NullableBoundWithNonNullArgument: nullability.defaultnullable.DefaultNullable.NullableBound<nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument> {}
+
+ interface NullableBoundWithNullableArgument: nullability.defaultnullable.DefaultNullable.NullableBound<nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument?> {}
+
+ interface NonNullBoundWithNonNullArgument: nullability.defaultnullable.DefaultNullable.NonNullableBound<nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument> {}
+
+ interface NonNullBoundWithNullableArgument: nullability.defaultnullable.DefaultNullable.NonNullableBound<nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument> {}
 }

@@ -111,7 +111,7 @@ open class TryCatch {
  }
 
  open fun testThrowGenerics() {
-  throw this.getT(kotlin.Exception())!!
+  throw this.getT<kotlin.Exception?>(kotlin.Exception())!!
  }
 
  fun <T> getT(t: T?): T? {
@@ -119,7 +119,7 @@ open class TryCatch {
  }
 
  open fun testThrowBoundGenerics() {
-  throw this.getThrowable()!!
+  throw this.getThrowable<kotlin.Throwable?>()!!
  }
 
  fun <T: kotlin.Throwable?> getThrowable(): T? {

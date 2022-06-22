@@ -119,7 +119,8 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
   // Java and Kotlin does not allow initializing static final fields with type qualifier, so it
   // needs to be rendered without the qualifier.
   val leftOperand = expression.leftOperand
-  if (leftOperand is FieldAccess &&
+  if (
+    leftOperand is FieldAccess &&
       expression.isSimpleAssignment &&
       leftOperand.target.isStatic &&
       leftOperand.target.isFinal
@@ -198,7 +199,8 @@ private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOf
   renderExpression(instanceOfExpression.expression)
   render(" is ")
   val testTypeDescriptor = instanceOfExpression.testTypeDescriptor
-  if (testTypeDescriptor is ArrayTypeDescriptor &&
+  if (
+    testTypeDescriptor is ArrayTypeDescriptor &&
       !testTypeDescriptor.componentTypeDescriptor!!.isPrimitive
   ) {
     render("kotlin.Array<*>")
@@ -262,7 +264,8 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
   val methodDescriptor = expression.target
-  if (isJavaLangObject(methodDescriptor.enclosingTypeDescriptor) &&
+  if (
+    isJavaLangObject(methodDescriptor.enclosingTypeDescriptor) &&
       methodDescriptor.signature == "getClass()"
   ) {
     renderInParentheses { renderExpression(expression.qualifier) }
@@ -273,15 +276,12 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   renderQualifier(expression)
   renderIdentifier(expression.target.ktName)
   if (!expression.target.isKtProperty) {
-    renderInvocationArguments(expression)
-  }
-}
-
-private fun Renderer.renderTypeArguments(typeArguments: List<TypeDescriptor>) {
-  if (typeArguments.isNotEmpty() && !typeArguments.any(TypeDescriptor::isInferred)) {
-    renderInAngleBrackets {
-      renderCommaSeparated(typeArguments) { renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT) }
+    val typeArguments = methodDescriptor.typeArgumentTypeDescriptors
+    if (typeArguments.isNotEmpty() && !typeArguments.any { it.isInferred }) {
+      val typeParameters = methodDescriptor.declarationDescriptor.typeParameterTypeDescriptors
+      renderTypeArguments(typeParameters, typeArguments)
     }
+    renderInvocationArguments(expression)
   }
 }
 
