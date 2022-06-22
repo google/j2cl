@@ -7,7 +7,5 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/202428351): Missing type arguments for generic method calls.
-    build_kt_readables = False,
     deps = ["//jre/java:javaemul_internal_annotations-j2cl"],
 )
