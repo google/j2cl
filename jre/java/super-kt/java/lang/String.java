@@ -49,9 +49,10 @@ public final class String implements Comparable<String>, CharSequence {
 
   public String(byte[] data, String charsetName) throws UnsupportedEncodingException {}
 
-  public String(byte[] data, int offset, int byteCount, Charset charset) {}
+  public String(byte[] data, int offset, int byteCount, Charset charset)
+      throws UnsupportedEncodingException {}
 
-  public String(byte[] data, Charset charset) {}
+  public String(byte[] data, Charset charset) throws UnsupportedEncodingException {}
 
   public String(char[] data) {}
 

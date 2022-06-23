@@ -18,16 +18,25 @@ package j2ktjre;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.Asserts.fail;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 public class Main {
+  static byte[] AEBC = {(byte) 0xC3, (byte) 0x84, (byte) 66, (byte) 67};
+
   public static void main(String... args) {
-    testPrimitives();
-    testStringBuilder();
+    try {
+      testPrimitives();
+      testStringBuilder();
+    } catch (Throwable e) {
+      throw new RuntimeException(e);
+    }
   }
 
-  private static void testPrimitives() {
+  private static void testPrimitives() throws Throwable {
     testBoolean();
     testInt();
     testLong();
@@ -225,7 +234,7 @@ public class Main {
     assertEquals(97, Character.codePointAt(cArray3, 0, 1));
   }
 
-  private static void testString() {
+  private static void testString() throws UnsupportedEncodingException {
     char[] cArray = {'h', 'e', 'l', 'l', 'o'};
     assertEquals("ello", new String(cArray, 1, 4));
 
@@ -259,6 +268,30 @@ public class Main {
     assertEquals(2, strArray2.length);
     assertEquals("hello", strArray2[0]);
     assertEquals("hello2hello", strArray2[1]);
+
+    assertEquals("ÄBC", new String(AEBC));
+    assertEquals("ÄBC", new String(AEBC, "UTF-8"));
+    assertEquals("ÄBC", new String(AEBC, StandardCharsets.UTF_8));
+
+    assertEquals("Ä", new String(AEBC, 0, 2));
+    assertEquals("Ä", new String(AEBC, 0, 2, "UTF-8"));
+    assertEquals("Ä", new String(AEBC, 0, 2, StandardCharsets.UTF_8));
+
+    assertEquals("BC", new String(AEBC, 2, 2));
+    assertEquals("BC", new String(AEBC, 2, 2, "UTF-8"));
+    assertEquals("BC", new String(AEBC, 2, 2, StandardCharsets.UTF_8));
+
+    try {
+      new String(AEBC, "FooBar");
+      fail("UnsupportedEncodingException expected");
+    } catch (UnsupportedEncodingException e) {
+      // This is expected.
+    }
+
+    // TODO(b/233058849): Enable when the Arrays class is available
+    // assertTrue(Arrays.equals(AEBC, "ÄBC".getBytes()));
+    // assertTrue(Arrays.equals(AEBC, "ÄBC".getBytes("UTF-8")));
+    // assertTrue(Arrays.equals(AEBC, "ÄBC".getBytes(StandardCharsets.UTF_8)));
   }
 
   private static void testInsert() {
