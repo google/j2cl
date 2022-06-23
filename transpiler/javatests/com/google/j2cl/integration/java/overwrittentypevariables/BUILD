@@ -8,4 +8,5 @@ package(licenses = ["notice"])
 integration_test(
     name = "overwrittentypevariables",
     srcs = glob(["*.java"]),
+    enable_kt = False,
 )
