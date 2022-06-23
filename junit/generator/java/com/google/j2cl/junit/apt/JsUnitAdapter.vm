@@ -68,12 +68,16 @@ public class ${testClass.jsUnitAdapterClassName()} {
   }
 
   @SuppressWarnings("unchecked")
-  private <T> T getParam(int index) {
-    Object testCaseParam = data[currentParameterValueIndex];
+  public <T> T getParam(int index, int currentTestCaseIndex) {
+    Object testCaseParam = data[currentTestCaseIndex];
     ## TODO(b/232024505): Add runtime check for the number of parameters should be equal to data value dimension
     Object[] normalizedParamValues =
       (testCaseParam instanceof Object[]) ? (Object[]) testCaseParam : new Object[] { testCaseParam };
     return (T) normalizedParamValues[index];
+  }
+
+  public String getParameterizedNameTemplate() {
+    return "${testClass.parameterizedDataMethod().get().parameterizedNameTemplate()}";
   }
 #end
 
@@ -96,13 +100,13 @@ public class ${testClass.jsUnitAdapterClassName()} {
   #set($maxIndex = ${testClass.testConstructor().numberOfParameters()} - 1)
   #if($maxIndex >= 0) ## Range [0..-1] still goes into the loop
   #foreach($number in [0..$maxIndex])
-    getParam($number)#if ($foreach.hasNext),#else#end
+    getParam($number, currentParameterValueIndex)#if ($foreach.hasNext),#else#end
   #end
   #end);
 
 
   #foreach($testField in ${testClass.parameterizedFields()})
-  actualTest.${testField.fieldName()} = getParam(${testField.index()});
+  actualTest.${testField.fieldName()} = getParam(${testField.index()}, currentParameterValueIndex);
   #end
   #methodExecutions( $testClass.beforeMethods() )
 

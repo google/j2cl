@@ -29,9 +29,9 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class SingleArrayParameterTest {
 
-  @Parameters
+  @Parameters(name = "Case{index}: param1 = {0}, param {8} does not exist")
   public static Object[] data() {
-    return new Object[] {"0", "1"};
+    return new Object[] {"0", "1", null};
   }
 
   @Parameter public String input;

@@ -99,12 +99,18 @@ public class J2clParameterizedIntegrationTest extends IntegrationTestBase {
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testClassName)
-            .addTestSuccess("testGroup0_test1[0]")
-            .addTestSuccess("testGroup0_test2[0]")
-            .addTestSuccess("testGroup0_test3[0]")
-            .addTestSuccess("testGroup1_test1[1]")
-            .addTestSuccess("testGroup1_test2[1]")
-            .addTestSuccess("testGroup1_test3[1]")
+            .addTestSuccess(
+                "testGroup0_test1[Case0: values at 0 are param1 = 3, param2 = 2, param3 = 5]")
+            .addTestSuccess(
+                "testGroup0_test2[Case0: values at 0 are param1 = 3, param2 = 2, param3 = 5]")
+            .addTestSuccess(
+                "testGroup0_test3[Case0: values at 0 are param1 = 3, param2 = 2, param3 = 5]")
+            .addTestSuccess(
+                "testGroup1_test1[Case1: values at 1 are param1 = 4, param2 = 3, param3 = 6]")
+            .addTestSuccess(
+                "testGroup1_test2[Case1: values at 1 are param1 = 4, param2 = 3, param3 = 6]")
+            .addTestSuccess(
+                "testGroup1_test3[Case1: values at 1 are param1 = 4, param2 = 3, param3 = 6]")
             .addJavaLogLineSequence(data[0])
             .addJavaLogLineSequence(data[1])
             .build();
@@ -116,14 +122,16 @@ public class J2clParameterizedIntegrationTest extends IntegrationTestBase {
   @Test
   public void testSingleArrayParameterTest() throws Exception {
     String testClassName = "SingleArrayParameterTest";
-    String[] data = {"0", "1"};
+    String[] data = {"0", "1", null};
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testClassName)
-            .addTestSuccess("testGroup0_test[0]")
-            .addTestSuccess("testGroup1_test[1]")
+            .addTestSuccess("testGroup0_test[Case0: param1 = 0, param {8} does not exist]")
+            .addTestSuccess("testGroup1_test[Case1: param1 = 1, param {8} does not exist]")
+            .addTestSuccess("testGroup2_test[Case2: param1 = null, param {8} does not exist]")
             .addJavaLogLineSequence(data[0])
             .addJavaLogLineSequence(data[1])
+            .addJavaLogLineSequence("null")
             .build();
 
     List<String> logLines = runTest(testClassName);

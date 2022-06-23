@@ -41,7 +41,17 @@ class TestCaseWrapper {
   setCurrentParameterValueIndex(index) {}
 
   /** @return {?string} */
+  getParameterizedNameTemplate() {}
+
+  /** @return {?string} */
   toString() {}
+
+  /**
+   * @param {number} index
+   * @param {number} testCaseIndex
+   * @return {?Object}
+   */
+  getParam(index, testCaseIndex) {}
 }
 
 /**
@@ -76,8 +86,10 @@ function parameterizedTestHelper(javaWrapper) {
   const methods =
       Object.getOwnPropertyNames(assert(Object.getPrototypeOf(jsUnitAdapter)))
           .filter(eachProperty => eachProperty.startsWith('test'));
-  for (let i = 0; i < javaWrapper.getData().length; i++) {
-    generatedSuite[`testGroup${i}`] = createTestCases(i, javaWrapper, methods);
+  const data = assert(javaWrapper.getData());
+  for (let i = 0; i < data.length; i++) {
+    generatedSuite[`testGroup${i}`] =
+        createTestCases(i, javaWrapper, methods, data);
   }
 
   return generatedSuite;
@@ -85,7 +97,9 @@ function parameterizedTestHelper(javaWrapper) {
 
 function /** !Object */ createTestCases(
     /** number */ currentIndex,
-    /** !TestCaseWrapper */ javaWrapper, /** !Array<string>*/ methods) {
+    /** !TestCaseWrapper */ javaWrapper,
+    /** !Array<string>*/ methods,
+    /** !Array<*> */ data) {
   const parameterizedTests = {
     setUp() {
       // configure the actual test instance
@@ -96,17 +110,31 @@ function /** !Object */ createTestCases(
       return javaWrapper.tearDown();
     },
   };
+
   methods.forEach(method => {
-    parameterizedTests[getName(method, currentIndex)] = () =>
+    const testName = getName(method, currentIndex, javaWrapper);
+    parameterizedTests[testName] = () =>
         /** @type {!Object<!Function>} */ (javaWrapper)[method]();
   });
 
   return parameterizedTests;
 }
 
-function /** string */ getName(/** string */ method, /** number */ index) {
-  // TODO(b/232465613): add support for customized name
-  return `test${method}[${index}]`;
+function /** string */ getName(
+    /** string */ method, /** number */ index,
+    /** !TestCaseWrapper */ javaWrapper) {
+  const nameTemplate = javaWrapper.getParameterizedNameTemplate();
+  if (nameTemplate === '') {
+    return `test${method}[${index}]`;
+  }
+  let convertedName = nameTemplate.replace(/{index}/g, `${index}`);
+  convertedName = convertedName.replace(
+      /{([0-9]+)}/g,
+      (match, paramIndex) =>
+          javaWrapper.getParam(paramIndex, index) === undefined ?
+          match :
+          javaWrapper.getParam(paramIndex, index));
+  return `test${method}[${convertedName}]`;
 }
 
 exports = {parameterizedTestSuite};

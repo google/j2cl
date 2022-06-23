@@ -31,7 +31,7 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class MultipleIterableParametersTest {
 
-  @Parameters
+  @Parameters(name = "Case{index}: values at {index} are param1 = {0}, param2 = {1}, param3 = {2}")
   public static List<Object[]> data() {
     return Arrays.asList(new Object[][] {{"3", "2", "5"}, {"4", "3", "6"}});
   }
