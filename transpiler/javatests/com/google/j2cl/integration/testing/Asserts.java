@@ -136,8 +136,12 @@ public class Asserts extends AssertsBase {
   public static void assertThrowsIllegalArgumentException(JsRunnable runnable) {
     assertThrows(IllegalArgumentException.class, runnable);
   }
-
+  
   public static void assertThrowsArithmeticException(JsRunnable runnable) {
     assertThrows(ArithmeticException.class, runnable);
+  }
+
+  public static void assertThrowsArrayStoreException(JsRunnable runnable) {
+    assertThrows(ArrayStoreException.class, runnable);
   }
 }
