@@ -20,15 +20,11 @@ import javax.annotation.Nullable;
 
 /** Represents a test method in a JUnit test case. */
 @AutoValue
-public abstract class TestMethod {
+public abstract class TestMethod implements Method {
 
   public static Builder builder() {
     return new AutoValue_TestMethod.Builder().isAsync(false).timeout(0).isIgnored(false);
   }
-
-  public abstract String javaMethodName();
-
-  public abstract boolean isStatic();
 
   @Nullable
   public abstract String expectedExceptionQualifiedName();
@@ -47,7 +43,7 @@ public abstract class TestMethod {
     return "test_" + javaMethodName;
   }
 
-  /** Builder for TestMethod. */
+  /** Builder for {@link TestMethod}. */
   @AutoValue.Builder
   public abstract static class Builder {
     abstract Builder javaMethodName(String s);

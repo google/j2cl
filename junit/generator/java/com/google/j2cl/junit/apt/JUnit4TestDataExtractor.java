@@ -58,7 +58,12 @@ class JUnit4TestDataExtractor {
         .simpleName(typeElement.getSimpleName().toString())
         .qualifiedName(typeElement.getQualifiedName().toString())
         .testConstructor(getConstructor(typeElement))
-        .testMethods(getAnnotatedMethods(typeHierarchy, Test.class, not(TestMethod::isIgnored)))
+        .testMethods(
+            getAnnotatedMethods(
+                typeHierarchy,
+                Test.class,
+                not(TestMethod::isIgnored),
+                JUnit4TestDataExtractor::toTestMethod))
         .beforeMethods(getAnnotatedMethods(typeHierarchy, Before.class).reverse())
         .afterMethods(getAnnotatedMethods(typeHierarchy, After.class))
         .beforeClassMethods(getAnnotatedMethods(typeHierarchy, BeforeClass.class).reverse())
@@ -68,35 +73,45 @@ class JUnit4TestDataExtractor {
         .build();
   }
 
-  public Optional<TestMethod> getAnnotatedDataMethod(List<TypeElement> typeHierarchy) {
-    return getAnnotatedMethods(typeHierarchy, Parameters.class).stream().findFirst();
+  public Optional<ParameterizedDataMethod> getAnnotatedDataMethod(List<TypeElement> typeHierarchy) {
+    return getAnnotatedMethods(
+            typeHierarchy,
+            Parameters.class,
+            Predicates.alwaysTrue(),
+            JUnit4TestDataExtractor::toParameterizedDataMethod)
+        .stream()
+        .findFirst();
   }
 
   private ImmutableList<TestMethod> getAnnotatedMethods(
       List<TypeElement> typeHierarchy, Class<? extends Annotation> annotation) {
-    return getAnnotatedMethods(typeHierarchy, annotation, Predicates.alwaysTrue());
+    return getAnnotatedMethods(
+        typeHierarchy, annotation, Predicates.alwaysTrue(), JUnit4TestDataExtractor::toTestMethod);
   }
 
-  private ImmutableList<TestMethod> getAnnotatedMethods(
+  private <T extends Method> ImmutableList<T> getAnnotatedMethods(
       List<TypeElement> typeHierarchy,
       Class<? extends Annotation> annotation,
-      Predicate<TestMethod> filter) {
+      Predicate<T> filter,
+      Function<ExecutableElement, T> transformer) {
     return typeHierarchy.stream()
-        .flatMap(t -> getAnnotatedMethodStream(t, annotation))
+        .flatMap(t -> getAnnotatedMethodStream(t, annotation, transformer))
         .filter(distinctByName())
         .filter(filter)
         .collect(toImmutableList());
   }
 
-  private static Predicate<TestMethod> distinctByName() {
+  private static <T extends Method> Predicate<T> distinctByName() {
     Set<String> seen = new HashSet<>();
     return t -> seen.add(t.javaMethodName());
   }
 
-  private static Stream<TestMethod> getAnnotatedMethodStream(
-      TypeElement type, Class<? extends Annotation> annotation) {
+  private static <T extends Method> Stream<T> getAnnotatedMethodStream(
+      TypeElement type,
+      Class<? extends Annotation> annotation,
+      Function<ExecutableElement, T> transformer) {
     return getAnnotatedElementsStream(type, annotation, ElementFilter::methodsIn)
-        .map(JUnit4TestDataExtractor::toTestMethod)
+        .map(transformer)
         .sorted(MethodSorter.getTestSorter(type));
   }
 
@@ -118,6 +133,16 @@ class JUnit4TestDataExtractor {
         .timeout(getTimeout(element))
         .isAsync(TestingPredicates.IS_RETURNTYPE_A_THENABLE.test(element))
         .isIgnored(isAnnotationPresent(element, Ignore.class))
+        .build();
+  }
+
+  public static ParameterizedDataMethod toParameterizedDataMethod(ExecutableElement element) {
+    // No parameters allowed in JUnit4 methods.
+    checkState(element.getParameters().isEmpty());
+    return ParameterizedDataMethod.builder()
+        .javaMethodName(element.getSimpleName().toString())
+        .isStatic(element.getModifiers().contains(Modifier.STATIC))
+        .parameterizedNameTemplate(getNameTemplate(element))
         .build();
   }
 
@@ -169,5 +194,11 @@ class JUnit4TestDataExtractor {
 
   private static TestConstructor implicitTestConstructor() {
     return TestConstructor.builder().numberOfParameters(0).build();
+  }
+
+  private static String getNameTemplate(Element method) {
+    return Optional.ofNullable(method.getAnnotation(Parameters.class))
+        .map(Parameters::name)
+        .orElse("");
   }
 }

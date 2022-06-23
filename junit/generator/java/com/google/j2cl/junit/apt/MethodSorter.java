@@ -26,11 +26,10 @@ import org.junit.runners.MethodSorters;
 class MethodSorter {
 
   /** Method name ascending lexicographic sort order. */
-  static final Comparator<TestMethod> NAME_ASCENDING =
-      Comparator.comparing(TestMethod::javaMethodName);
+  static final Comparator<Method> NAME_ASCENDING = Comparator.comparing(Method::javaMethodName);
 
   /** DEFAULT sort order */
-  static final Comparator<TestMethod> DEFAULT =
+  static final Comparator<Method> DEFAULT =
       (m1, m2) -> {
         int i1 = m1.javaMethodName().hashCode();
         int i2 = m2.javaMethodName().hashCode();
@@ -40,7 +39,7 @@ class MethodSorter {
         return i1 < i2 ? -1 : 1;
       };
 
-  public static Comparator<TestMethod> getTestSorter(TypeElement typeElement) {
+  public static Comparator<Method> getTestSorter(TypeElement typeElement) {
     FixMethodOrder fixMethodOrder = typeElement.getAnnotation(FixMethodOrder.class);
     return fixMethodOrder != null && fixMethodOrder.value() == MethodSorters.NAME_ASCENDING
         ? NAME_ASCENDING
