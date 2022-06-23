@@ -88,4 +88,46 @@ open class Nullability {
    return "foo"
   }
  }
+
+ open class ParameterizedDefaultNullability<N> {
+  open fun getNullable(): N? {
+   return null
+  }
+
+  open fun getNonNullable(): N? {
+   throw kotlin.RuntimeException()
+  }
+
+  open fun getDefaultNullability(): N? {
+   return null
+  }
+ }
+
+ open class ParameterizedNullable<N> {
+  open fun getNullable(): N? {
+   return null
+  }
+
+  open fun getNonNullable(): N? {
+   throw kotlin.RuntimeException()
+  }
+
+  open fun getDefaultNullability(): N? {
+   return null
+  }
+ }
+
+ open class ParameterizedNonNullable<N> {
+  open fun getNullable(): N? {
+   return null
+  }
+
+  open fun getNonNullable(): N? {
+   throw kotlin.RuntimeException()
+  }
+
+  open fun getDefaultNullability(): N? {
+   return null
+  }
+ }
 }

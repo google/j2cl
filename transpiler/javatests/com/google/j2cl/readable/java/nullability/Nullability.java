@@ -19,26 +19,25 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
-import org.checkerframework.checker.nullness.compatqual.NullableType;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import jsinterop.annotations.JsNonNull;
+import org.jspecify.nullness.Nullable;
 
 public class Nullability {
   @Nonnull private String f1 = "Hello";
   private String f2 = null;
   @Nullable private String f3 = null;
-  private @Nonnull List<@NonNull String> f4 = new ArrayList<>();
-  private List<@NonNull String> f5 = new ArrayList<>();
+  private @Nonnull List<@JsNonNull String> f4 = new ArrayList<>();
+  private List<@JsNonNull String> f5 = new ArrayList<>();
   private @Nonnull List<String> f6 = new ArrayList<>();
   private List<String> f7 = null;
-  private @NonNull String @NonNull [] f8 = {};
+  private @JsNonNull String @JsNonNull [] f8 = {};
   // Nonnullable array of nullable strings.
-  private String @NonNull [] f9 = {};
+  private String @JsNonNull [] f9 = {};
   // Nullable array of non-nullable strings.
-  private @NonNull String[] f10 = {};
+  private @JsNonNull String[] f10 = {};
   // Conversion from generic type parameter.
   private List<String> f12 = new ArrayList<>();
   @Nonnull private Object f13;
@@ -50,16 +49,16 @@ public class Nullability {
   }
 
   @Nonnull
-  public String m1(@Nonnull String a, @Nonnull List<@NonNull Double> b, String c) {
+  public String m1(@Nonnull String a, @Nonnull List<@JsNonNull Double> b, String c) {
     return "";
   }
 
-  public String m2(String a, @Nonnull List<@NullableType Double> b) {
+  public String m2(String a, @Nonnull List<@Nullable Double> b) {
     return "";
   }
 
   @JsMethod
-  public String m3(@Nonnull String a, @NonNull String... args) {
+  public String m3(@Nonnull String a, @JsNonNull String... args) {
     return null;
   }
 
@@ -88,7 +87,7 @@ public class Nullability {
   public static class StringList extends ArrayList<String> {}
 
   // Should implement Comparator<string>
-  public static class StringComparator implements Comparator<@NonNull String> {
+  public static class StringComparator implements Comparator<@JsNonNull String> {
     @Override
     public int compare(@Nonnull String a, @Nonnull String b) {
       return 0;
@@ -96,7 +95,7 @@ public class Nullability {
   }
 
   // Should implement Comparator<?string>
-  public static class NullableStringComparator implements Comparator<@NullableType String> {
+  public static class NullableStringComparator implements Comparator<@Nullable String> {
     @Override
     public int compare(@Nullable String a, @Nullable String b) {
       return 0;
@@ -113,6 +112,51 @@ public class Nullability {
     @Override
     public String foo() {
       return "foo";
+    }
+  }
+
+  static class ParameterizedDefaultNullability<N> {
+    @Nullable N getNullable() {
+      return null;
+    }
+
+    @JsNonNull
+    N getNonNullable() {
+      throw new RuntimeException();
+    }
+
+    N getDefaultNullability() {
+      return null;
+    }
+  }
+
+  static class ParameterizedNullable<N extends @Nullable Object> {
+    @Nullable N getNullable() {
+      return null;
+    }
+
+    @JsNonNull
+    N getNonNullable() {
+      throw new RuntimeException();
+    }
+
+    N getDefaultNullability() {
+      return null;
+    }
+  }
+
+  static class ParameterizedNonNullable<N extends @JsNonNull Object> {
+    @Nullable N getNullable() {
+      return null;
+    }
+
+    @JsNonNull
+    N getNonNullable() {
+      throw new RuntimeException();
+    }
+
+    N getDefaultNullability() {
+      return null;
     }
   }
 }

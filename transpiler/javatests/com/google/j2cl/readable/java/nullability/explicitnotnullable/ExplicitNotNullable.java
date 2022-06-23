@@ -18,25 +18,25 @@ package nullability.explicitnotnullable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import jsinterop.annotations.JsMethod;
-import org.checkerframework.checker.nullness.compatqual.NullableType;
+import jsinterop.annotations.JsNonNull;
 import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 @NullMarked
 public class ExplicitNotNullable {
   private String f1 = "Hello";
   @Nullable private String f2 = null;
-  @org.checkerframework.checker.nullness.qual.Nullable private String f3 = null;
+  @javax.annotation.Nullable private String f3 = null;
   private List<String> f4 = new ArrayList<>();
   @Nullable private List<String> f5 = new ArrayList<>();
-  private List<@NullableType String> f6 = new ArrayList<>();
-  @Nullable private List<@NullableType String> f7 = null;
+  private List<@Nullable String> f6 = new ArrayList<>();
+  @Nullable private List<@Nullable String> f7 = null;
   private String[] f8 = {};
   // Nonnullable array of nullable strings.
-  @org.checkerframework.checker.nullness.qual.Nullable private String[] f9 = {};
+  @Nullable private String[] f9 = {};
   // Nullable array of non-nullable strings.
-  private String @NullableType [] f10 = {};
+  private String @Nullable [] f10 = {};
   private Void f11 = null;
   @Nonnull private Object f12 = new Object();
   private Object f13;
@@ -51,7 +51,7 @@ public class ExplicitNotNullable {
   }
 
   @Nullable
-  public String m2(@Nullable String a, List<@NullableType Double> b) {
+  public String m2(@Nullable String a, List<@Nullable Double> b) {
     return null;
   }
 
@@ -59,11 +59,11 @@ public class ExplicitNotNullable {
   public void m3(String... args) {
   }
 
-  interface NullableBound<T extends @NullableType NullableBound<T>> {}
+  interface NullableBound<T extends @Nullable NullableBound<T>> {}
 
   interface NonNullableBound<T extends NonNullableBound<T>> {}
 
-  <T extends @NullableType NullableBound<T>> void methodWithNullableBound() {}
+  <T extends @Nullable NullableBound<T>> void methodWithNullableBound() {}
 
   <T extends NonNullableBound<T>> void methodWithNonNullableBound() {}
 
@@ -71,11 +71,56 @@ public class ExplicitNotNullable {
       extends NullableBound<NullableBoundWithNonNullArgument> {}
 
   interface NullableBoundWithNullableArgument
-      extends NullableBound<@NullableType NullableBoundWithNullableArgument> {}
+      extends NullableBound<@Nullable NullableBoundWithNullableArgument> {}
 
   interface NonNullBoundWithNonNullArgument
       extends NonNullableBound<NonNullBoundWithNonNullArgument> {}
 
   interface NonNullBoundWithNullableArgument
-      extends NonNullableBound<@NullableType NonNullBoundWithNullableArgument> {}
+      extends NonNullableBound<@Nullable NonNullBoundWithNullableArgument> {}
+
+  static class ParameterizedDefaultNullability<N> {
+    @Nullable N getNullable() {
+      return null;
+    }
+
+    @JsNonNull
+    N getNonNullable() {
+      throw new RuntimeException();
+    }
+
+    N getDefaultNullability() {
+      return null;
+    }
+  }
+
+  static class ParameterizedNullable<N extends @Nullable Object> {
+    @Nullable N getNullable() {
+      return null;
+    }
+
+    @JsNonNull
+    N getNonNullable() {
+      throw new RuntimeException();
+    }
+
+    N getDefaultNullability() {
+      return null;
+    }
+  }
+
+  static class ParameterizedNonNullable<N extends @JsNonNull Object> {
+    @Nullable N getNullable() {
+      return null;
+    }
+
+    @JsNonNull
+    N getNonNullable() {
+      throw new RuntimeException();
+    }
+
+    N getDefaultNullability() {
+      return null;
+    }
+  }
 }

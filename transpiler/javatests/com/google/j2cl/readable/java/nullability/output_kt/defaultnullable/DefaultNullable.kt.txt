@@ -62,4 +62,46 @@ open class DefaultNullable {
  interface NonNullBoundWithNonNullArgument: nullability.defaultnullable.DefaultNullable.NonNullableBound<nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument> {}
 
  interface NonNullBoundWithNullableArgument: nullability.defaultnullable.DefaultNullable.NonNullableBound<nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument> {}
+
+ open class ParameterizedDefaultNullability<N> {
+  open fun getNullable(): N? {
+   return null
+  }
+
+  open fun getNonNullable(): N? {
+   throw kotlin.RuntimeException()
+  }
+
+  open fun getDefaultNullability(): N? {
+   return null
+  }
+ }
+
+ open class ParameterizedNullable<N> {
+  open fun getNullable(): N? {
+   return null
+  }
+
+  open fun getNonNullable(): N? {
+   throw kotlin.RuntimeException()
+  }
+
+  open fun getDefaultNullability(): N? {
+   return null
+  }
+ }
+
+ open class ParameterizedNonNullable<N> {
+  open fun getNullable(): N? {
+   return null
+  }
+
+  open fun getNonNullable(): N? {
+   throw kotlin.RuntimeException()
+  }
+
+  open fun getDefaultNullability(): N? {
+   return null
+  }
+ }
 }

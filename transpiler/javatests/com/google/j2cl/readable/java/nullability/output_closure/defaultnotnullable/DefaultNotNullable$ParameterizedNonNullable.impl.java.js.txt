@@ -1,0 +1,60 @@
+goog.module('nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @template N
+ */
+class ParameterizedNonNullable extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template N @return {!ParameterizedNonNullable<N>} */
+ static $create__() {
+  ParameterizedNonNullable.$clinit();
+  let $instance = new ParameterizedNonNullable();
+  $instance.$ctor__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable__();
+  return $instance;
+ }
+ 
+ $ctor__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {N} */
+ m_getNullable___$pp_nullability_defaultnotnullable() {
+  return null;
+ }
+ /** @return {N} */
+ m_getNonNullable___$pp_nullability_defaultnotnullable() {
+  throw $Exceptions.toJs(RuntimeException.$create__());
+ }
+ /** @return {N} */
+ m_getDefaultNullability___$pp_nullability_defaultnotnullable() {
+  return null;
+ }
+ 
+ static $clinit() {
+  ParameterizedNonNullable.$clinit = () =>{};
+  ParameterizedNonNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParameterizedNonNullable;
+ }
+ 
+ static $loadModules() {
+  RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(ParameterizedNonNullable, 'nullability.defaultnotnullable.DefaultNotNullable$ParameterizedNonNullable');
+
+exports = ParameterizedNonNullable;
+
+//# sourceMappingURL=DefaultNotNullable$ParameterizedNonNullable.js.map
