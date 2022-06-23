@@ -23,6 +23,7 @@ import static com.google.j2cl.integration.testing.Asserts.fail;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import javaemul.internal.EmulatedCharset;
 
 public class Main {
   static byte[] AEBC = {(byte) 0xC3, (byte) 0x84, (byte) 66, (byte) 67};
@@ -31,6 +32,7 @@ public class Main {
     try {
       testPrimitives();
       testStringBuilder();
+      testJavaEmul();
     } catch (Throwable e) {
       throw new RuntimeException(e);
     }
@@ -46,6 +48,10 @@ public class Main {
     testFloat();
     testCharacter();
     testString();
+  }
+
+  private static void testJavaEmul() {
+    assertEquals(AEBC, EmulatedCharset.UTF_8.getBytes(new char[] {'Ä', 'B', 'C'}, 0, 3));
   }
 
   private static void testStringBuilder() {
@@ -288,10 +294,9 @@ public class Main {
       // This is expected.
     }
 
-    // TODO(b/233058849): Enable when the Arrays class is available
-    // assertTrue(Arrays.equals(AEBC, "ÄBC".getBytes()));
-    // assertTrue(Arrays.equals(AEBC, "ÄBC".getBytes("UTF-8")));
-    // assertTrue(Arrays.equals(AEBC, "ÄBC".getBytes(StandardCharsets.UTF_8)));
+    assertEquals(AEBC, "ÄBC".getBytes());
+    assertEquals(AEBC, "ÄBC".getBytes("UTF-8"));
+    assertEquals(AEBC, "ÄBC".getBytes(StandardCharsets.UTF_8));
   }
 
   private static void testInsert() {

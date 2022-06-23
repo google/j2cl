@@ -13,14 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package java.nio.charset;
+package javaemul.internal;
 
-import javaemul.internal.EmulatedCharset;
+import java.nio.charset.Charset;
 
-/** Partial emulation of the corresponding JRE-Class */
-public final class StandardCharsets {
+/** Provides Charset implementations (currently UTF-8 only) */
+public class EmulatedCharset extends Charset {
 
-  public static final Charset UTF_8 = EmulatedCharset.UTF_8;
+  public static final EmulatedCharset UTF_8 = new EmulatedCharset();
 
-  private StandardCharsets() {}
+  private EmulatedCharset() {
+    super("UTF-8", new String[0]);
+  }
+
+  public byte[] getBytes(char[] buffer, int offset, int count) {
+    return new String(buffer, offset, count).getBytes(this);
+  }
 }
