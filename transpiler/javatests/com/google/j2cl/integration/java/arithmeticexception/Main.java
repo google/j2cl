@@ -15,9 +15,7 @@
  */
 package arithmeticexception;
 
-import static com.google.j2cl.integration.testing.Asserts.assertThrows;
-
-import com.google.j2cl.integration.testing.Asserts.JsRunnable;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsArithmeticException;
 
 public class Main {
   public static void main(String... args) {
@@ -147,9 +145,5 @@ public class Main {
           short b = 0;
           double unused = 10d + (a % b);
         });
-  }
-
-  private static void assertThrowsArithmeticException(JsRunnable runnable) {
-    assertThrows(ArithmeticException.class, runnable);
   }
 }
