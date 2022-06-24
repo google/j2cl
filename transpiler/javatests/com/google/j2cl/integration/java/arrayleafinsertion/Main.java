@@ -15,7 +15,7 @@
  */
 package arrayleafinsertion;
 
-import static com.google.j2cl.integration.testing.Asserts.assertThrows;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 
 public class Main {
@@ -31,7 +31,7 @@ public class Main {
     array[0] = new Person();
 
     // When inserting a leaf value the type must conform.
-    assertThrows(ArrayStoreException.class, () -> array[0] = new Object());
+    assertThrowsArrayStoreException(() -> array[0] = new Object());
 
     // You can always insert null.
     array[0] = null;

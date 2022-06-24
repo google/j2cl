@@ -19,7 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
 import static com.google.j2cl.integration.testing.Asserts.assertSame;
-import static com.google.j2cl.integration.testing.Asserts.assertThrows;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
@@ -555,8 +555,7 @@ public class JsFunctionTest {
     MyJsFunctionInterface[] functionArray = new MyJsFunctionInterface[1];
     functionArray[0] = a -> a + 2;
 
-    assertThrows(
-        ArrayStoreException.class,
+    assertThrowsArrayStoreException(
         () -> {
           Object[] temp = functionArray;
           // Storing anything other than a function throws.
@@ -566,8 +565,7 @@ public class JsFunctionTest {
     MyJsFunctionInterface[][] function2dArray = new MyJsFunctionInterface[1][];
     function2dArray[0] = functionArray;
 
-    assertThrows(
-        ArrayStoreException.class,
+    assertThrowsArrayStoreException(
         () -> {
           Object[][] temp = function2dArray;
           // Trying to store an integer array as a JsFunction array throws.

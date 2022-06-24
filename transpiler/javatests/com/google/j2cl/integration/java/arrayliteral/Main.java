@@ -15,7 +15,7 @@
  */
 package arrayliteral;
 
-import static com.google.j2cl.integration.testing.Asserts.assertThrows;
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsArrayStoreException;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
@@ -77,11 +77,11 @@ public class Main {
     twoD[1][1] = main;
 
     // When inserting a leaf value the type must conform.
-    assertThrows(ArrayStoreException.class, () -> twoD[0][0] = new Object());
+    assertThrowsArrayStoreException(() -> twoD[0][0] = new Object());
 
     // The object-literal partial arrays still know their depth and so for example will reject an
     // attempt to stick an object into a 1-dimensional array slot.
-    assertThrows(ArrayStoreException.class, () -> ((Object[]) twoD)[1] = new Object());
+    assertThrowsArrayStoreException(() -> ((Object[]) twoD)[1] = new Object());
   }
 
   private static void testTwoDimensionalLiteral_partial() {

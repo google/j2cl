@@ -15,8 +15,9 @@
  */
 package arrayofboxedtype;
 
-import static com.google.j2cl.integration.testing.Asserts.assertThrows;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
+
+import com.google.j2cl.integration.testing.Asserts;
 
 public class Main {
   public static void main(String[] args) {
@@ -25,8 +26,7 @@ public class Main {
   }
 
   private static void assertThrowsArrayStoreException(Object[] array, Object o) {
-    assertThrows(
-        ArrayStoreException.class,
+    Asserts.assertThrowsArrayStoreException(
         () -> {
           array[0] = o;
         });
