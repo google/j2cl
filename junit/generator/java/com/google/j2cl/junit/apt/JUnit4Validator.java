@@ -36,6 +36,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runners.Parameterized.AfterParam;
+import org.junit.runners.Parameterized.BeforeParam;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
@@ -100,7 +102,10 @@ class JUnit4Validator extends BaseValidator {
   }
 
   private boolean needsToBeStaticMethod(Element element) {
-    return hasClassSetupAnnotation(element) || isAnnotationPresent(element, Parameters.class);
+    return hasClassSetupAnnotation(element)
+        || isAnnotationPresent(element, Parameters.class)
+        || isAnnotationPresent(element, BeforeParam.class)
+        || isAnnotationPresent(element, AfterParam.class);
   }
 
   // TODO(b/235234450): clean up validation for different types of methods

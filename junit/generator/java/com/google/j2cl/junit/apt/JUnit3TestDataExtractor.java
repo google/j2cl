@@ -45,6 +45,8 @@ class JUnit3TestDataExtractor {
         .afterMethods(ImmutableList.of(tearDownMethod))
         .beforeClassMethods(ImmutableList.<TestMethod>of())
         .afterClassMethods(ImmutableList.<TestMethod>of())
+        .beforeParamMethods(ImmutableList.<TestMethod>of())
+        .afterParamMethods(ImmutableList.<TestMethod>of())
         .parameterizedDataMethod(Optional.empty())
         .parameterizedFields(ImmutableList.<ParameterizedTestField>of())
         .build();

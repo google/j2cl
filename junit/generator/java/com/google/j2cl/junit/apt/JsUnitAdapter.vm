@@ -102,12 +102,18 @@ public class ${testClass.jsUnitAdapterClassName()} {
 
   public void setUpPage() throws Throwable {
 #methodExecutions( $testClass.beforeClassMethods() )
-
   }
 
   public void tearDownPage() throws Throwable {
 #methodExecutions( $testClass.afterClassMethods() )
+  }
 
+  public void beforeParam() throws Throwable {
+#methodExecutions( $testClass.beforeParamMethods() )
+  }
+
+  public void afterParam() throws Throwable {
+#methodExecutions( $testClass.afterParamMethods() )
   }
 
 #if($testClass.needsAsyncSetup())

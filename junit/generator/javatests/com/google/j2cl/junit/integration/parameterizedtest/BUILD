@@ -22,6 +22,8 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleParameterOfArrayTypeTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ParentTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ChildTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:BeforeAndAfterParamTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:BeforeAndAfterParamWithFailingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ConstructorWithIncorrectParameterCount",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:IncorrectInjectedFieldCount",
     ],

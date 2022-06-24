@@ -46,6 +46,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runners.Parameterized.AfterParam;
+import org.junit.runners.Parameterized.BeforeParam;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
@@ -68,6 +70,8 @@ class JUnit4TestDataExtractor {
         .afterMethods(getAnnotatedMethods(typeHierarchy, After.class))
         .beforeClassMethods(getAnnotatedMethods(typeHierarchy, BeforeClass.class).reverse())
         .afterClassMethods(getAnnotatedMethods(typeHierarchy, AfterClass.class))
+        .beforeParamMethods(getAnnotatedMethods(typeHierarchy, BeforeParam.class))
+        .afterParamMethods(getAnnotatedMethods(typeHierarchy, AfterParam.class))
         .parameterizedDataMethod(getAnnotatedDataMethod(typeHierarchy))
         .parameterizedFields(getAnnotatedFields(typeHierarchy, Parameter.class))
         .build();

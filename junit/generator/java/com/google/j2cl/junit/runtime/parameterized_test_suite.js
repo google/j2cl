@@ -23,11 +23,15 @@ const {assert} = goog.require('goog.asserts');
 class TestCaseWrapper {
   setUpPage() {}
 
+  beforeParam() {}
+
   /** @return {?Thenable|void} */
   setUp() {}
 
   /** @return {?Thenable|void} */
   tearDown() {}
+
+  afterParam() {}
 
   tearDownPage() {}
 
@@ -70,6 +74,7 @@ function parameterizedTestSuite(javaWrapper, options) {
  * @return {!Object} the nested testing object
  */
 function parameterizedTestHelper(javaWrapper) {
+  let currTestNumber = 0;
   // Using quotes on method names here since export_test_functions doesn't
   // handle function declaration in object literals.
   const generatedSuite = {
@@ -79,6 +84,21 @@ function parameterizedTestHelper(javaWrapper) {
 
     'tearDownPage': function() {
       javaWrapper.tearDownPage();
+    },
+
+    'setUp': function() {
+      if (currTestNumber++ == 0) {
+        javaWrapper.beforeParam();
+      }
+    },
+
+    'tearDown': function() {
+      // AfterParam will be executed after all tests are evaluted with
+      // particular parameters
+      if (currTestNumber == methods.length) {
+        javaWrapper.afterParam();
+        currTestNumber = 0;
+      }
     },
   };
 

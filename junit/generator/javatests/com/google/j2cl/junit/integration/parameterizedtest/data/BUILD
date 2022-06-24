@@ -54,6 +54,14 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "BeforeAndAfterParamTest",
+)
+
+j2cl_test_integration_test_data(
+    name = "BeforeAndAfterParamWithFailingTest",
+)
+
+j2cl_test_integration_test_data(
     name = "IncorrectInjectedFieldCount",
 )
 

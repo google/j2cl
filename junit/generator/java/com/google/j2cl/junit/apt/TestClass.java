@@ -45,6 +45,10 @@ public abstract class TestClass {
 
   public abstract ImmutableList<TestMethod> afterClassMethods();
 
+  public abstract ImmutableList<TestMethod> beforeParamMethods();
+
+  public abstract ImmutableList<TestMethod> afterParamMethods();
+
   public abstract Optional<ParameterizedDataMethod> parameterizedDataMethod();
 
   public abstract ImmutableList<ParameterizedTestField> parameterizedFields();
@@ -97,6 +101,10 @@ public abstract class TestClass {
     abstract Builder beforeClassMethods(ImmutableList<TestMethod> t);
 
     abstract Builder afterClassMethods(ImmutableList<TestMethod> t);
+
+    abstract Builder beforeParamMethods(ImmutableList<TestMethod> t);
+
+    abstract Builder afterParamMethods(ImmutableList<TestMethod> t);
 
     abstract Builder parameterizedDataMethod(Optional<ParameterizedDataMethod> t);
 
