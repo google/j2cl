@@ -73,6 +73,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfObject;
 
   public DeclaredTypeDescriptor javaemulInternalArrayHelper;
+  public DeclaredTypeDescriptor javaemulInternalRangeHelper;
   public DeclaredTypeDescriptor javaemulInternalAsserts;
   public DeclaredTypeDescriptor javaemulInternalValueType;
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
@@ -644,6 +645,9 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.ArrayHelper":
           typeDescriptors.javaemulInternalArrayHelper = referenceType;
+          break;
+        case "javaemul.internal.RangeHelper":
+          typeDescriptors.javaemulInternalRangeHelper = referenceType;
           break;
         case "javaemul.internal.Asserts":
           typeDescriptors.javaemulInternalAsserts = referenceType;
