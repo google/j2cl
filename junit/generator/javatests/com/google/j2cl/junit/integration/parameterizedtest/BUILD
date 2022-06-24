@@ -17,9 +17,12 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:MultipleIterableParametersTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleArrayParameterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleIterableParameterTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleParameterInitializedByConstructor",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleIterableParameterProvidedByArrayTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleParameterOfArrayTypeTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ParentTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ChildTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ConstructorWithIncorrectParameterCount",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:IncorrectInjectedFieldCount",
     ],
 )

@@ -25,6 +25,10 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "SingleParameterInitializedByConstructor",
+)
+
+j2cl_test_integration_test_data(
     name = "SingleIterableParameterProvidedByArrayTest",
 )
 
@@ -47,4 +51,12 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "ChildTest",
     deps = [":ParentTest-lib"],
+)
+
+j2cl_test_integration_test_data(
+    name = "IncorrectInjectedFieldCount",
+)
+
+j2cl_test_integration_test_data(
+    name = "ConstructorWithIncorrectParameterCount",
 )

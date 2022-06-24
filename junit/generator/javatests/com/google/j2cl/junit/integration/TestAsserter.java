@@ -109,8 +109,7 @@ public class TestAsserter {
 
   private List<String> extractJavaMessages() {
     final String msgMarker = " [java_message_from_test] ";
-    return consoleLogs
-        .stream()
+    return consoleLogs.stream()
         .filter(input -> input.contains(msgMarker))
         .map(input -> input.substring(input.indexOf(msgMarker) + msgMarker.length()))
         .collect(toImmutableList());
@@ -172,8 +171,11 @@ public class TestAsserter {
 
   private String getJunitTestFailureMsg(String method) {
     // This is approximate but good enough for our testing purposes
+    // Failure will check the method name so we will trim the prefix testGroup$[i]_ for
+    // parameterized test
     return String.format(
-        ") %s(%s.%s)", method, testResult.packageName(), testResult.testClassName());
+            ") %s(%s.%s)", method, testResult.packageName(), testResult.testClassName())
+        .replaceFirst("testGroup[0-9]+_", "");
   }
 
   private String getTestMethodName(String methodName) {

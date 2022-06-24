@@ -226,4 +226,32 @@ public class J2clParameterizedIntegrationTest extends IntegrationTestBase {
     List<String> logLines = runTest(testClassName);
     assertThat(logLines).matches(testResult);
   }
+
+  @Test
+  public void testConstructorWithIncorrectParameterCount() throws Exception {
+    String testClassName = "ConstructorWithIncorrectParameterCount";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testClassName)
+            .addTestFailure("testGroup0_test[0]")
+            .addTestFailure("testGroup1_test[1]")
+            .build();
+
+    List<String> logLines = runTest(testClassName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testIncorrectInjectedFieldCount() throws Exception {
+    String testClassName = "IncorrectInjectedFieldCount";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testClassName)
+            .addTestFailure("testGroup0_test[0]")
+            .addTestFailure("testGroup1_test[1]")
+            .build();
+
+    List<String> logLines = runTest(testClassName);
+    assertThat(logLines).matches(testResult);
+  }
 }

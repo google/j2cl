@@ -70,10 +70,29 @@ public class ${testClass.jsUnitAdapterClassName()} {
   @SuppressWarnings("unchecked")
   public <T> T getParam(int index, int currentTestCaseIndex) {
     Object testCaseParam = data[currentTestCaseIndex];
-    ## TODO(b/232024505): Add runtime check for the number of parameters should be equal to data value dimension
     Object[] normalizedParamValues =
       (testCaseParam instanceof Object[]) ? (Object[]) testCaseParam : new Object[] { testCaseParam };
+    validateDataMatchParameterDimension(normalizedParamValues);
     return (T) normalizedParamValues[index];
+  }
+
+  private static void validateDataMatchParameterDimension(Object[] testCaseParam) {
+    int dataDimension = testCaseParam.length;
+
+    int numberOfParametersFromConstructor =
+      ${testClass.testConstructor().numberOfParameters()};
+    if (numberOfParametersFromConstructor > 0 && numberOfParametersFromConstructor != dataDimension) {
+      throw new AssertionError("Wrong number of parameters."
+          + " Constructor parameters counted: " + numberOfParametersFromConstructor
+          + ", available parameters: " + dataDimension + ".");
+    }
+
+    int numberOfParametersFromInjection = ${testClass.parameterizedFields().size()};
+    if (numberOfParametersFromInjection > 0 && numberOfParametersFromInjection != dataDimension) {
+      throw new AssertionError("Wrong number of parameters and @Parameter fields."
+          + " @Parameter fields counted: " + numberOfParametersFromInjection
+          + ", available parameters: " + dataDimension + ".");
+    }
   }
 
   public String getParameterizedNameTemplate() {
