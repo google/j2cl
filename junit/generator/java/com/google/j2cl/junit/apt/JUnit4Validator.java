@@ -83,10 +83,39 @@ class JUnit4Validator extends BaseValidator {
       isValid &= validateMethodNoArguments(executableElement);
       isValid &= validateMethodReturnType(executableElement);
     }
-    for (VariableElement variableElement : getAllTestParameters(type)) {
-      isValid &= validateMemberIsPublic(variableElement);
-      isValid &= validateMemberIsInstance(variableElement);
-      isValid &= validateMemberIsNonFinal(variableElement);
+    ImmutableList<VariableElement> variableElements = getAllTestParameters(type);
+    isValid &= validateParameters(variableElements);
+    return isValid;
+  }
+
+  private boolean validateParameters(ImmutableList<VariableElement> variableElements) {
+    boolean isValid = true;
+    int[] usedAnnotatedIndices = new int[variableElements.size()];
+    for (VariableElement each : variableElements) {
+      int index = each.getAnnotation(Parameter.class).value();
+      if (index < 0 || index > variableElements.size() - 1) {
+        errorReporter.report(
+            ErrorMessage.INVALID_PARAMETER_VALUE,
+            index,
+            variableElements.size(),
+            variableElements.size() - 1);
+        isValid = false;
+      } else {
+        usedAnnotatedIndices[index]++;
+        isValid &= validateMemberIsPublic(each);
+        isValid &= validateMemberIsInstance(each);
+        isValid &= validateMemberIsNonFinal(each);
+      }
+    }
+    for (int index = 0; index < usedAnnotatedIndices.length; index++) {
+      int numberOfUse = usedAnnotatedIndices[index];
+      if (numberOfUse == 0) {
+        errorReporter.report(ErrorMessage.MISSING_PARAMETER, index);
+        isValid = false;
+      } else if (numberOfUse > 1) {
+        errorReporter.report(ErrorMessage.DUPLICATE_PARAMETER, index, numberOfUse);
+        isValid = false;
+      }
     }
     return isValid;
   }

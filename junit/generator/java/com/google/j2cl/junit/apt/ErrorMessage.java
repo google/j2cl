@@ -39,6 +39,11 @@ enum ErrorMessage {
   TEST_HAS_TIMEOUT_ANNOTATION(
       "Method %s has @Timeout annotation. @Timeout can only be used with @Before/@After. "
           + "Test methods should use @Test(timeout=x) instead."),
+  INVALID_PARAMETER_VALUE(
+      "Invalid @Parameter value: %d. @Parameter fields counted: %d. "
+          + "Please use an index between 0 and %d."),
+  MISSING_PARAMETER("@Parameter(%d) is never used."),
+  DUPLICATE_PARAMETER("@Parameter(%d) is used more than once (%d)."),
   NON_TOP_LEVEL_TYPE("Type %s is not a top level class."),
   IGNORE_ON_TYPE("Type %s has @Ignore. @Ignore on types are currently not supported."),
   SKIPPED_TYPE("Type %s is not a JUnit test or a JUnit4 style suite. Skipped.", Kind.WARNING),

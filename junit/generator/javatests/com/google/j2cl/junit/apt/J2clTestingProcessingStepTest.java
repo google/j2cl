@@ -132,6 +132,27 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
+  public void testJUnit4InvalidParameterizedFieldValue() {
+    assertParameterError(
+        ErrorMessage.INVALID_PARAMETER_VALUE,
+        JUnit4TestCaseInvalidParameterizedFieldValue.class,
+        1,
+        1,
+        0);
+    verifyParameterPrintMessage(ErrorMessage.MISSING_PARAMETER, 0);
+  }
+
+  @Test
+  public void testJUnit4DuplicateParameterizedField() {
+    assertParameterError(
+        ErrorMessage.DUPLICATE_PARAMETER,
+        JUnit4TestCaseDuplicateAndMissingParameterizedField.class,
+        1,
+        2);
+    verifyParameterPrintMessage(ErrorMessage.MISSING_PARAMETER, 2);
+  }
+
+  @Test
   public void testJUnit4NonPublicClassMethod() {
     assertError(
         ErrorMessage.NON_PUBLIC, JUnit4TestCaseWithNonPublicClassMethod.class, "beforeClass");
@@ -288,8 +309,18 @@ public class J2clTestingProcessingStepTest {
     verifyNoMoreInteractions(messager);
   }
 
+  private void assertParameterError(
+      ErrorMessage expectedError, Class<?> testClass, Object... args) {
+    assertThat(executeProcessorOnTest(testClass)).isNull();
+    verifyParameterPrintMessage(expectedError, args);
+  }
+
   private void verifyPrintMessage(ErrorMessage expectedError, String errorArg) {
     verify(messager).printMessage(expectedError.kind(), expectedError.format(errorArg));
+  }
+
+  private void verifyParameterPrintMessage(ErrorMessage expectedError, Object... errorArgs) {
+    verify(messager).printMessage(expectedError.kind(), expectedError.format(errorArgs));
   }
 
   private TestClass executeProcessorOnTest(Class<?> test) {
