@@ -178,7 +178,7 @@ filegroup(
     name = "jre_native_files-j2kt-native",
     srcs = glob([
         "super-kt/java/**/*.kt",
-        "super-kt/kotlin/jvm/**/*.kt",
+        "super-kt/kotlin/**/*.kt",
     ]),
 )
 
