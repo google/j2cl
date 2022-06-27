@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.common;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
@@ -51,9 +53,14 @@ public final class UniqueNamesResolver {
     // Collect type variables defined at the type level, and exclude their unique names from the
     // name pool to be used by local variables, parameters and type variables defined in methods.
     for (TypeVariable typeVariable : type.getDeclaration().getTypeParameterDescriptors()) {
+      checkState(typeVariable.isNullable());
       String uniqueName = computeUniqueName(typeVariable, Predicates.not(forbiddenNames::contains));
       forbiddenNames.add(uniqueName);
+      // TODO(b/236987392): Redesign type variables to be able to reflect better nullability
+      // information, and remove the hack of registering the two versions that currently exist.
+      // Register both versions of the type variable since they will share the same name.
       uniqueNameByVariable.put(typeVariable, uniqueName);
+      uniqueNameByVariable.put(typeVariable.toNonNullable(), uniqueName);
     }
 
     // Create aliases for local variables, parameters and type variables defined in methods;
@@ -68,7 +75,11 @@ public final class UniqueNamesResolver {
               if (typeVariable.isWildcardOrCapture()) {
                 continue;
               }
-              registerUniqueName(method.getDescriptor(), typeVariable);
+              String name = registerUniqueName(method.getDescriptor(), typeVariable.toNullable());
+              // TODO(b/236987392): Redesign type variables to be able to reflect better nullability
+              // information, and remove the hack of registering the two vesions that currently
+              // exist.
+              uniqueNameByVariable.put(typeVariable.toNonNullable(), name);
             }
           }
 
@@ -77,9 +88,9 @@ public final class UniqueNamesResolver {
             registerUniqueName(getCurrentMember().getDescriptor(), nameDeclaration);
           }
 
-          private void registerUniqueName(
+          private String registerUniqueName(
               MemberDescriptor currentMemberDescriptor, HasName variable) {
-            uniqueNameByVariable.computeIfAbsent(
+            return uniqueNameByVariable.computeIfAbsent(
                 variable,
                 v -> {
                   String uniqueName =

@@ -52,7 +52,7 @@ open class DefaultNotNullable {
  open fun <T: nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
 
  interface ParameterizedInterface<T> {
-  fun add(t: T?): T?
+  fun add(t: T?): T
 
   fun nullableAdd(t: T?): T?
  }
@@ -84,12 +84,12 @@ open class DefaultNotNullable {
    return null
   }
 
-  open fun getNonNullable(): N? {
+  open fun getNonNullable(): N {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 
@@ -98,12 +98,12 @@ open class DefaultNotNullable {
    return null
   }
 
-  open fun getNonNullable(): N? {
+  open fun getNonNullable(): N {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 
@@ -112,12 +112,12 @@ open class DefaultNotNullable {
    return null
   }
 
-  open fun getNonNullable(): N? {
+  open fun getNonNullable(): N {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 }

@@ -917,6 +917,11 @@ public abstract class TypeDeclaration
       checkState(
           typeDeclaration.getTypeParameterDescriptors().stream()
               .noneMatch(TypeVariable::isWildcardOrCapture));
+
+      checkState(
+          typeDeclaration.getTypeParameterDescriptors().stream()
+              .allMatch(TypeVariable::isNullable));
+
       return interner.intern(typeDeclaration);
     }
 

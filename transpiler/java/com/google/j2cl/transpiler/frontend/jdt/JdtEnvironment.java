@@ -288,19 +288,19 @@ class JdtEnvironment {
       return PrimitiveTypes.get(typeBinding.getName());
     }
 
-    if (isIntersectionType(typeBinding)) {
-      return createIntersectionType(typeBinding, inNullMarkedScope);
-    }
-
     if (typeBinding.isNullType()) {
       return TypeDescriptors.get().javaLangObject;
     }
 
-    if (typeBinding.isTypeVariable() || typeBinding.isCapture() || typeBinding.isWildcardType()) {
-      return createTypeVariable(typeBinding, inNullMarkedScope);
+    if (isIntersectionType(typeBinding)) {
+      return createIntersectionType(typeBinding, inNullMarkedScope);
     }
 
     boolean isNullable = isNullable(typeBinding, elementAnnotations, inNullMarkedScope);
+    if (typeBinding.isTypeVariable() || typeBinding.isCapture() || typeBinding.isWildcardType()) {
+      return withNullability(createTypeVariable(typeBinding, inNullMarkedScope), isNullable);
+    }
+
     if (typeBinding.isArray()) {
       TypeDescriptor componentTypeDescriptor =
           createTypeDescriptor(typeBinding.getComponentType(), inNullMarkedScope);
@@ -353,8 +353,7 @@ class JdtEnvironment {
     return createIntersectionType(typeBinding, inNullMarkedScope);
   }
 
-  private static DeclaredTypeDescriptor withNullability(
-      DeclaredTypeDescriptor typeDescriptor, boolean nullable) {
+  private static TypeDescriptor withNullability(TypeDescriptor typeDescriptor, boolean nullable) {
     return nullable ? typeDescriptor.toNullable() : typeDescriptor.toNonNullable();
   }
 
@@ -717,7 +716,8 @@ class JdtEnvironment {
                 t ->
                     createTypeDescriptorWithNullability(
                         t, t.getTypeAnnotations(), inNullMarkedScope))
-            .transform(TypeVariable.class::cast);
+            .transform(TypeVariable.class::cast)
+            .transform(TypeVariable::toNullable);
 
     ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors =
         convertTypeArguments(methodBinding.getTypeArguments(), inNullMarkedScope);
@@ -1211,7 +1211,10 @@ class JdtEnvironment {
             () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), isNullMarked))
         .setTypeParameterDescriptors(
             getTypeArgumentTypeDescriptors(
-                typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class))
+                    typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class)
+                .stream()
+                .map(TypeVariable::toNullable)
+                .collect(ImmutableList.toImmutableList()))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)

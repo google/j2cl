@@ -68,12 +68,12 @@ open class ExplicitNotNullable {
    return null
   }
 
-  open fun getNonNullable(): N? {
+  open fun getNonNullable(): N {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 
@@ -82,12 +82,12 @@ open class ExplicitNotNullable {
    return null
   }
 
-  open fun getNonNullable(): N? {
+  open fun getNonNullable(): N {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 
@@ -96,12 +96,12 @@ open class ExplicitNotNullable {
    return null
   }
 
-  open fun getNonNullable(): N? {
+  open fun getNonNullable(): N {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 }

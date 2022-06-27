@@ -1116,6 +1116,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             !methodDescriptor.isVarargs()
                 || Iterables.getLast(methodDescriptor.getParameterDescriptors()).isVarargs());
 
+        checkState(
+            methodDescriptor.getTypeParameterTypeDescriptors().stream()
+                .allMatch(TypeVariable::isNullable));
+
         // Check that the properties of the declaration descriptor are consistent with those
         // of the method descriptor itself.
         checkDeclarationDescriptor(methodDescriptor);

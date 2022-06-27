@@ -200,7 +200,7 @@ private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, usage: TypeD
       }
     }
   } else {
-    renderName(typeVariable)
+    renderName(typeVariable.toNullable())
     if (usage != TypeDescriptorUsage.ARGUMENT) renderNullableSuffix(typeVariable)
   }
 }

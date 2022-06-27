@@ -61,21 +61,22 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   public abstract TypeDescriptor getLowerBoundTypeDescriptor();
 
   @Override
-  public boolean isNullable() {
-    // TODO(b/68726480): Implement nullability of type variables.
-    return true;
+  public abstract boolean isNullable();
+
+  @Override
+  public TypeVariable toNullable() {
+    if (isNullable()) {
+      return this;
+    }
+    return TypeVariable.Builder.from(this).setNullable(true).build();
   }
 
   @Override
-  public TypeDescriptor toNullable() {
-    // TODO(b/68726480): Implement nullability of type variables.
-    return this;
-  }
-
-  @Override
-  public TypeDescriptor toNonNullable() {
-    // TODO(b/68726480): Implement nullability of type variables.
-    return this;
+  public TypeVariable toNonNullable() {
+    if (!isNullable()) {
+      return this;
+    }
+    return TypeVariable.Builder.from(this).setNullable(false).build();
   }
 
   @Override
@@ -150,7 +151,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Override
   public TypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
-    return replacementTypeArgumentByTypeVariable.apply(this);
+    TypeDescriptor specializedTypeVariable =
+        replacementTypeArgumentByTypeVariable.apply(this.toNullable());
+    return isNullable() ? specializedTypeVariable : specializedTypeVariable.toNonNullable();
   }
 
   @Override
@@ -167,13 +170,14 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
-    return new AutoValue_TypeVariable.Builder().setWildcardOrCapture(false);
+    return new AutoValue_TypeVariable.Builder().setWildcardOrCapture(false).setNullable(true);
   }
 
   /** Creates a wildcard type variable with a specific upper bound. */
   public static TypeVariable createWildcardWithUpperBound(TypeDescriptor bound) {
     return TypeVariable.newBuilder()
         .setWildcardOrCapture(true)
+        .setNullable(true)
         .setUpperBoundTypeDescriptorSupplier(() -> bound)
         // Create an unique key that does not conflict with the keys used for other types nor for
         // type variables coming from JDT, which follow "<declaring_type>:<name>...".
@@ -202,6 +206,8 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     public abstract Builder setWildcardOrCapture(boolean isWildcardOrCapture);
 
     public abstract Builder setLowerBoundTypeDescriptor(@Nullable TypeDescriptor typeDescriptor);
+
+    public abstract Builder setNullable(boolean isNullable);
 
     private static final ThreadLocalInterner<TypeVariable> interner = new ThreadLocalInterner<>();
 
