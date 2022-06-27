@@ -18,6 +18,7 @@
 package java.lang;
 
 import java.io.Serializable;
+import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 import jsinterop.annotations.JsNonNull;
 
@@ -82,9 +83,9 @@ public final class StringBuilder implements Appendable, CharSequence, Serializab
 
   public native StringBuilder insert(int offset, String str);
 
-  public native StringBuilder insert(int offset, char[] ch);
+  public native StringBuilder insert(int offset, char @JsNonNull [] ch);
 
-  public native StringBuilder insert(int offset, char[] str, int strOffset, int strLen);
+  public native StringBuilder insert(int offset, char @JsNonNull [] str, int strOffset, int strLen);
 
   public native StringBuilder insert(int offset, CharSequence s);
 
@@ -92,7 +93,8 @@ public final class StringBuilder implements Appendable, CharSequence, Serializab
 
   public native int length();
 
-  public native StringBuilder replace(int start, int end, String string);
+  @KtName("setRange")
+  public native StringBuilder replace(int start, int end, @JsNonNull String string);
 
   public native StringBuilder reverse();
 
