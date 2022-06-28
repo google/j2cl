@@ -23,6 +23,7 @@ import static com.google.j2cl.integration.testing.Asserts.fail;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 
 public class Main {
@@ -50,8 +51,14 @@ public class Main {
     testString();
   }
 
+  // TODO(b/236003566): Test the corresponding JRE method instead after cl/438505991 is submitted.
   private static void testJavaEmul() {
     assertEquals(AEBC, EmulatedCharset.UTF_8.getBytes(new char[] {'Ä', 'B', 'C'}, 0, 3));
+
+    assertEquals(0, ArrayHelper.getLength(new byte[0]));
+    assertEquals(1, ArrayHelper.getLength(new boolean[1]));
+    assertEquals(2, ArrayHelper.getLength(new String[2]));
+    assertEquals(3, ArrayHelper.getLength(new int[3]));
   }
 
   private static void testStringBuilder() {
