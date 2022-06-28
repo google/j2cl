@@ -34,6 +34,9 @@ public class Main {
       testPrimitives();
       testStringBuilder();
       testJavaEmul();
+      testSystemTime();
+      testArrayCopy();
+      testHashCode();
     } catch (Throwable e) {
       throw new RuntimeException(e);
     }
@@ -322,5 +325,51 @@ public class Main {
     assertEquals("0el123", strBuilder2.toString());
     strBuilder2.insert(6, charSeq, 0, 5);
     assertEquals("0el123hello", strBuilder2.toString());
+  }
+
+  private static void testSystemTime() {
+    long millisTimeStart = System.currentTimeMillis();
+    long millisTimeEnd = 0;
+    for (int i = 0; i < 100000; i++) {
+      millisTimeEnd = System.currentTimeMillis();
+    }
+    assertTrue(millisTimeStart > 0 && millisTimeEnd > millisTimeStart);
+
+    long nanoTimeStart = System.nanoTime();
+    long nanoTimeEnd = 0;
+    for (int i = 0; i < 100000; i++) {
+      nanoTimeEnd = System.nanoTime();
+    }
+    assertTrue(nanoTimeStart > 0 && nanoTimeEnd > nanoTimeStart);
+  }
+
+  private static void testArrayCopy() {
+    int[] intArraySrc = {1, 2, 3, 4, 5};
+    int[] intArrayDst = {0, 0, 0, 0, 0};
+    System.arraycopy(intArraySrc, 0, intArrayDst, 1, 2);
+    assertEquals(intArrayDst[1], 1);
+
+    String[] strArraySrc = {"1", "2", "3", "4", "5"};
+    String[] strArrayDst = {"0", "0", "0", "0", "0"};
+    System.arraycopy(strArraySrc, 0, strArrayDst, 1, 2);
+    assertEquals(strArrayDst[1], "1");
+
+    ExampleObject[] objArraySrc = {new ExampleObject(1), new ExampleObject(2)};
+    ExampleObject[] objArrayDst = new ExampleObject[2];
+    System.arraycopy(objArraySrc, 0, objArrayDst, 0, 2);
+    assertEquals(1, objArrayDst[0].val);
+  }
+
+  static class ExampleObject {
+    public int val;
+
+    ExampleObject(int val) {
+      this.val = val;
+    }
+  }
+
+  private static void testHashCode() {
+    ExampleObject obj = new ExampleObject(1);
+    assertEquals(System.identityHashCode(obj), System.identityHashCode(obj));
   }
 }
