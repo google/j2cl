@@ -119,6 +119,7 @@ package_sources(
         [
             "java/lang/*.java",
             "java/lang/annotations/*.java",
+            "java/lang/reflect/*.java",
         ],
         exclude = [
             # Package-private helper that's not necessary for J2KT
@@ -166,7 +167,7 @@ closure_js_library(
 
 filegroup(
     name = "j2kt_support_files-j2kt",
-    srcs = glob(
+    srcs = ["javaemul/internal/InternalPreconditions.java"] + glob(
         [
             "super-kt/javaemul/**/*.kt",
             "super-kt/javaemul/**/*.java",

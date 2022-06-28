@@ -19,8 +19,17 @@ import kotlin.native.identityHashCode
 import kotlin.system.getTimeMillis
 import kotlin.system.getTimeNanos
 
+// TODO(b/224765929): Avoid this hack for InternalPreconditions.java.
 object System {
-  fun getProperty(name: String?): String? = null
+  fun getProperty(name: String?): String? =
+    when (name) {
+      "jre.checks.api",
+      "jre.checks.bounds",
+      "jre.checks.numeric",
+      "jre.checks.type" -> "AUTO"
+      "jre.checks.checkLevel" -> "NORMAL"
+      else -> null
+    }
 
   fun arraycopy(src: Any?, srcOfs: Int, dest: Any?, destOfs: Int, len: Int) {
     when (src) {
