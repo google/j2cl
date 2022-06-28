@@ -19,12 +19,16 @@ package java.util;
 
 import java.util.function.Consumer;
 import javaemul.internal.annotations.KtNative;
+import javaemul.internal.annotations.KtPropagateNullability;
+import jsinterop.annotations.JsNonNull;
 
 @KtNative("kotlin.collections.MutableIterator")
 public interface Iterator<E> {
 
   boolean hasNext();
 
+  @KtPropagateNullability
+  @JsNonNull
   E next();
 
   // TODO(b/222269323): Java 8 methods below do not exist in Kotlin iterators.

@@ -284,6 +284,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
     return o == this ? "(this Map)" : String.valueOf(o);
   }
 
+  @JsNonNull
   @Override
   public Collection<V> values() {
     return new AbstractCollection<V>() {
