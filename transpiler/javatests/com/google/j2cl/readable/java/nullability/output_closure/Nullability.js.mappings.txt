@@ -70,6 +70,87 @@
 [return null;] => [return null;] "nullability.Nullability.m3"
 [m4] => [m_m4__nullability_Nullability_MyFunction]
 [f] => [f] "f"
+[testDefaultNullabilityBounds] => [m_testDefaultNullabilityBounds__nullability_Nullability_ParameterizedDefaultNullability]
+[defaultNullability] => [defaultNullability] "defaultNullability"
+[{
+    defaultNullability.getNonNullable().length();
+...    defaultNullability.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testDefaultNullabilityBounds"
+[defaultNullability.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[defaultNullability.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[defaultNullability.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[testDefaultNullabilityBounds] => [m_testDefaultNullabilityBounds__nullability_Nullability_ParameterizedNullable]
+[nullable] => [nullable] "nullable"
+[{
+    nullable.getNonNullable().length();
+...    nullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testDefaultNullabilityBounds"
+[nullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[nullable.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[nullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[testDefaultNullabilityBounds] => [m_testDefaultNullabilityBounds__nullability_Nullability_ParameterizedNonNullable]
+[nonNullable] => [nonNullable] "nonNullable"
+[{
+    nonNullable.getNonNullable().length();
+...    nonNullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testDefaultNullabilityBounds"
+[nonNullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[nonNullable.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[nonNullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityBounds"
+[testNullableBounds] => [m_testNullableBounds__nullability_Nullability_ParameterizedDefaultNullability]
+[defaultNullability] => [defaultNullability] "defaultNullability"
+[{
+    defaultNullability.getNonNullable().length();
+...    defaultNullability.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testNullableBounds"
+[defaultNullability.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[defaultNullability.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[defaultNullability.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[testNullableBounds] => [m_testNullableBounds__nullability_Nullability_ParameterizedNullable]
+[nullable] => [nullable] "nullable"
+[{
+    nullable.getNonNullable().length();
+...    nullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testNullableBounds"
+[nullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[nullable.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[nullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[testNullableBounds] => [m_testNullableBounds__nullability_Nullability_ParameterizedNonNullable]
+[nonNullable] => [nonNullable] "nonNullable"
+[{
+    nonNullable.getNonNullable().length();
+...    nonNullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testNullableBounds"
+[nonNullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[nonNullable.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[nonNullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNullableBounds"
+[testNonNullableBounds] => [m_testNonNullableBounds__nullability_Nullability_ParameterizedDefaultNullability]
+[defaultNullability] => [defaultNullability] "defaultNullability"
+[{
+    defaultNullability.getNonNullable().length();
+...    defaultNullability.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testNonNullableBounds"
+[defaultNullability.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[defaultNullability.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[defaultNullability.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(defaultNullability.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[testNonNullableBounds] => [m_testNonNullableBounds__nullability_Nullability_ParameterizedNullable]
+[nullable] => [nullable] "nullable"
+[{
+    nullable.getNonNullable().length();
+...    nullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testNonNullableBounds"
+[nullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[nullable.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[nullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nullable.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[testNonNullableBounds] => [m_testNonNullableBounds__nullability_Nullability_ParameterizedNonNullable]
+[nonNullable] => [nonNullable] "nonNullable"
+[{
+    nonNullable.getNonNullable().length();
+...    nonNullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testNonNullableBounds"
+[nonNullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[nonNullable.getNullable().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[nonNullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability___$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
 [Nullability] => [$init___$p_nullability_Nullability]
 [@Nonnull private String f1 = "Hello";] => [this.f_f1__nullability_Nullability_ = 'Hello';] "nullability.Nullability.<init>"
 [private String f2 = null;] => [this.f_f2__nullability_Nullability_ = null;] "nullability.Nullability.<init>"

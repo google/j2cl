@@ -159,4 +159,65 @@ public class Nullability {
       return null;
     }
   }
+
+  static <T extends String> void testDefaultNullabilityBounds(
+      ParameterizedDefaultNullability<T> defaultNullability) {
+    defaultNullability.getNonNullable().length();
+    defaultNullability.getNullable().length();
+    defaultNullability.getDefaultNullability().length();
+  }
+
+  static <T extends String> void testDefaultNullabilityBounds(ParameterizedNullable<T> nullable) {
+    nullable.getNonNullable().length();
+    nullable.getNullable().length();
+    nullable.getDefaultNullability().length();
+  }
+
+  static <T extends String> void testDefaultNullabilityBounds(
+      ParameterizedNonNullable<T> nonNullable) {
+    nonNullable.getNonNullable().length();
+    nonNullable.getNullable().length();
+    nonNullable.getDefaultNullability().length();
+  }
+
+  static <T extends @Nullable String> void testNullableBounds(
+      ParameterizedDefaultNullability<T> defaultNullability) {
+    defaultNullability.getNonNullable().length();
+    defaultNullability.getNullable().length();
+    defaultNullability.getDefaultNullability().length();
+  }
+
+  static <T extends @Nullable String> void testNullableBounds(ParameterizedNullable<T> nullable) {
+    nullable.getNonNullable().length();
+    nullable.getNullable().length();
+    nullable.getDefaultNullability().length();
+  }
+
+  static <T extends @Nullable String> void testNullableBounds(
+      ParameterizedNonNullable<T> nonNullable) {
+    nonNullable.getNonNullable().length();
+    nonNullable.getNullable().length();
+    nonNullable.getDefaultNullability().length();
+  }
+
+  static <T extends @JsNonNull String> void testNonNullableBounds(
+      ParameterizedDefaultNullability<T> defaultNullability) {
+    defaultNullability.getNonNullable().length();
+    defaultNullability.getNullable().length();
+    defaultNullability.getDefaultNullability().length();
+  }
+
+  static <T extends @JsNonNull String> void testNonNullableBounds(
+      ParameterizedNullable<T> nullable) {
+    nullable.getNonNullable().length();
+    nullable.getNullable().length();
+    nullable.getDefaultNullability().length();
+  }
+
+  static <T extends @JsNonNull String> void testNonNullableBounds(
+      ParameterizedNonNullable<T> nonNullable) {
+    nonNullable.getNonNullable().length();
+    nonNullable.getNullable().length();
+    nonNullable.getDefaultNullability().length();
+  }
 }

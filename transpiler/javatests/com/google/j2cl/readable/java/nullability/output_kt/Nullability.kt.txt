@@ -49,6 +49,71 @@ open class Nullability {
 
  open fun m4(f: nullability.Nullability.MyFunction) {}
 
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String?> testDefaultNullabilityBounds(defaultNullability: nullability.Nullability.ParameterizedDefaultNullability<T>?) {
+   defaultNullability!!.getNonNullable()!!.length
+   defaultNullability!!.getNullable()!!.length
+   defaultNullability!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String?> testDefaultNullabilityBounds(nullable: nullability.Nullability.ParameterizedNullable<T>?) {
+   nullable!!.getNonNullable()!!.length
+   nullable!!.getNullable()!!.length
+   nullable!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String?> testDefaultNullabilityBounds(nonNullable: nullability.Nullability.ParameterizedNonNullable<T>?) {
+   nonNullable!!.getNonNullable()!!.length
+   nonNullable!!.getNullable()!!.length
+   nonNullable!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String?> testNullableBounds(defaultNullability: nullability.Nullability.ParameterizedDefaultNullability<T>?) {
+   defaultNullability!!.getNonNullable()!!.length
+   defaultNullability!!.getNullable()!!.length
+   defaultNullability!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String?> testNullableBounds(nullable: nullability.Nullability.ParameterizedNullable<T>?) {
+   nullable!!.getNonNullable()!!.length
+   nullable!!.getNullable()!!.length
+   nullable!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String?> testNullableBounds(nonNullable: nullability.Nullability.ParameterizedNonNullable<T>?) {
+   nonNullable!!.getNonNullable()!!.length
+   nonNullable!!.getNullable()!!.length
+   nonNullable!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String> testNonNullableBounds(defaultNullability: nullability.Nullability.ParameterizedDefaultNullability<T>?) {
+   defaultNullability!!.getNonNullable().length
+   defaultNullability!!.getNullable()!!.length
+   defaultNullability!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String> testNonNullableBounds(nullable: nullability.Nullability.ParameterizedNullable<T>?) {
+   nullable!!.getNonNullable().length
+   nullable!!.getNullable()!!.length
+   nullable!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.String> testNonNullableBounds(nonNullable: nullability.Nullability.ParameterizedNonNullable<T>?) {
+   nonNullable!!.getNonNullable().length
+   nonNullable!!.getNullable()!!.length
+   nonNullable!!.getDefaultNullability()!!.length
+  }
+ }
+
  open class Foo<T> {
   open fun bar(t: T?) {}
 
