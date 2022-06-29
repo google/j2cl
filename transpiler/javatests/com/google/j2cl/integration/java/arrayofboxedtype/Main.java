@@ -35,7 +35,7 @@ public class Main {
   private static void testArrayInsertion() {
     Boolean booleanValue = new Boolean(true);
     Character characterValue = new Character('a');
-    Byte byleValue = new Byte((byte) 1);
+    Byte byteValue = new Byte((byte) 1);
     Short shortValue = new Short((short) 1);
     Integer integerValue = new Integer(1);
     Long longValue = new Long(1L);
@@ -43,7 +43,7 @@ public class Main {
     Float floatValue = new Float(1.0f);
     Object[] byteArray = new Byte[2];
 
-    byteArray[0] = byleValue;
+    byteArray[0] = byteValue;
     assertThrowsArrayStoreException(byteArray, booleanValue);
     assertThrowsArrayStoreException(byteArray, characterValue);
     assertThrowsArrayStoreException(byteArray, doubleValue);
@@ -56,7 +56,7 @@ public class Main {
     doubleArray[0] = doubleValue;
     assertThrowsArrayStoreException(doubleArray, booleanValue);
     assertThrowsArrayStoreException(doubleArray, characterValue);
-    assertThrowsArrayStoreException(doubleArray, byleValue);
+    assertThrowsArrayStoreException(doubleArray, byteValue);
     assertThrowsArrayStoreException(doubleArray, floatValue);
     assertThrowsArrayStoreException(doubleArray, integerValue);
     assertThrowsArrayStoreException(doubleArray, longValue);
@@ -66,7 +66,7 @@ public class Main {
     floatArray[0] = floatValue;
     assertThrowsArrayStoreException(floatArray, booleanValue);
     assertThrowsArrayStoreException(floatArray, characterValue);
-    assertThrowsArrayStoreException(floatArray, byleValue);
+    assertThrowsArrayStoreException(floatArray, byteValue);
     assertThrowsArrayStoreException(floatArray, doubleValue);
     assertThrowsArrayStoreException(floatArray, integerValue);
     assertThrowsArrayStoreException(floatArray, longValue);
@@ -76,7 +76,7 @@ public class Main {
     integerArray[0] = integerValue;
     assertThrowsArrayStoreException(integerArray, booleanValue);
     assertThrowsArrayStoreException(integerArray, characterValue);
-    assertThrowsArrayStoreException(integerArray, byleValue);
+    assertThrowsArrayStoreException(integerArray, byteValue);
     assertThrowsArrayStoreException(integerArray, doubleValue);
     assertThrowsArrayStoreException(integerArray, floatValue);
     assertThrowsArrayStoreException(integerArray, longValue);
@@ -86,7 +86,7 @@ public class Main {
     longArray[0] = longValue;
     assertThrowsArrayStoreException(longArray, booleanValue);
     assertThrowsArrayStoreException(longArray, characterValue);
-    assertThrowsArrayStoreException(longArray, byleValue);
+    assertThrowsArrayStoreException(longArray, byteValue);
     assertThrowsArrayStoreException(longArray, doubleValue);
     assertThrowsArrayStoreException(longArray, floatValue);
     assertThrowsArrayStoreException(longArray, integerValue);
@@ -96,7 +96,7 @@ public class Main {
     shortArray[0] = shortValue;
     assertThrowsArrayStoreException(shortArray, booleanValue);
     assertThrowsArrayStoreException(shortArray, characterValue);
-    assertThrowsArrayStoreException(shortArray, byleValue);
+    assertThrowsArrayStoreException(shortArray, byteValue);
     assertThrowsArrayStoreException(shortArray, doubleValue);
     assertThrowsArrayStoreException(shortArray, floatValue);
     assertThrowsArrayStoreException(shortArray, integerValue);
@@ -105,7 +105,7 @@ public class Main {
     Object[] characterArray = new Character[2];
     characterArray[0] = characterValue;
     assertThrowsArrayStoreException(characterArray, booleanValue);
-    assertThrowsArrayStoreException(characterArray, byleValue);
+    assertThrowsArrayStoreException(characterArray, byteValue);
     assertThrowsArrayStoreException(characterArray, doubleValue);
     assertThrowsArrayStoreException(characterArray, floatValue);
     assertThrowsArrayStoreException(characterArray, integerValue);
@@ -115,7 +115,7 @@ public class Main {
     Object[] booleanArray = new Boolean[2];
     booleanArray[0] = booleanValue;
     assertThrowsArrayStoreException(booleanArray, characterValue);
-    assertThrowsArrayStoreException(booleanArray, byleValue);
+    assertThrowsArrayStoreException(booleanArray, byteValue);
     assertThrowsArrayStoreException(booleanArray, doubleValue);
     assertThrowsArrayStoreException(booleanArray, floatValue);
     assertThrowsArrayStoreException(booleanArray, integerValue);
@@ -123,7 +123,7 @@ public class Main {
     assertThrowsArrayStoreException(booleanArray, shortValue);
 
     Object[] numberArray = new Number[2];
-    numberArray[0] = byleValue;
+    numberArray[0] = byteValue;
     numberArray[0] = doubleValue;
     numberArray[0] = floatValue;
     numberArray[0] = integerValue;
@@ -137,7 +137,7 @@ public class Main {
     subnumberArray[0] = new SubNumber();
     assertThrowsArrayStoreException(subnumberArray, booleanValue);
     assertThrowsArrayStoreException(subnumberArray, characterValue);
-    assertThrowsArrayStoreException(subnumberArray, byleValue);
+    assertThrowsArrayStoreException(subnumberArray, byteValue);
     assertThrowsArrayStoreException(subnumberArray, doubleValue);
     assertThrowsArrayStoreException(subnumberArray, floatValue);
     assertThrowsArrayStoreException(subnumberArray, integerValue);
