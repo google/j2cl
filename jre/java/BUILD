@@ -105,32 +105,126 @@ package_sources(
     ),
 )
 
+# Files that cannot be included in the JRE runtime yet because they rely on
+# features that are missing (other JRE runtime APIs or J2KT transpiler
+# features). Exclusions should either have a bug number attached, or point to
+# another excluded file that is a dependency.
+# When removing a file from this list, remove other files that were only
+# excluded because of it. If that's not possible add a new bug link.
+J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
+    "java/io/BufferedWriter.java",  # java.io.Writer
+    "java/io/OutputStreamWriter.java",  # java.io.Writer
+    "java/io/Writer.java",  # java.util.Objects
+] + [
+    "java/lang/StackTraceElement.java",  # java.util.Objects
+] + [
+    "java/math/BigDecimal.java",  # TODO(b/237503140): Make BigDecimal/BigInteger work
+    "java/math/BigInteger.java",  # TODO(b/237503140): Make BigDecimal/BigInteger work
+    "java/math/BitLevel.java",  # BigInteger
+    "java/math/Conversion.java",  # Division, BigInteger
+    "java/math/Division.java",  # BitLevel
+    "java/math/Elementary.java",  # BigInteger
+    "java/math/Logical.java",  # BigInteger
+    "java/math/MathContext.java",  # Fix under review: cl/457728709
+    "java/math/Multiplication.java",  # BigInteger
+    "java/math/Primality.java",  # BigInteger, Random
+] + [
+    # TODO(b/237266658): Map Java collection types to Kotlin collection types to match Kotlin/JVM
+    "java/util/AbstractCollection.java",
+    "java/util/AbstractList.java",
+    "java/util/AbstractMap.java",
+    "java/util/AbstractMapEntry.java",
+    "java/util/AbstractQueue.java",
+    "java/util/AbstractSequentialList.java",
+    "java/util/AbstractSet.java",
+    "java/util/ArrayList.java",
+    "java/util/ArrayDeque.java",
+    "java/util/Collection.java",
+    "java/util/Collections.java",
+    "java/util/Deque.java",
+    "java/util/EnumMap.java",
+    "java/util/EnumSet.java",
+    "java/util/IdentityHashMap.java",
+    "java/util/HashMap.java",
+    "java/util/HashSet.java",
+    "java/util/LinkedHashMap.java",
+    "java/util/LinkedHashSet.java",
+    "java/util/LinkedList.java",
+    "java/util/List.java",
+    "java/util/Map.java",
+    "java/util/NavigableMap.java",
+    "java/util/NavigableSet.java",
+    "java/util/PrimitiveIterator.java",
+    "java/util/PriorityQueue.java",
+    "java/util/Queue.java",
+    "java/util/Set.java",
+    "java/util/SortedMap.java",
+    "java/util/SortedSet.java",
+    "java/util/Stack.java",
+    "java/util/TreeMap.java",
+    "java/util/TreeSet.java",
+    "java/util/Vector.java",
+] + [
+    "java/util/Arrays.java",  # TODO(b/233058849): Add java.util.Arrays
+    "java/util/BitSet.java",  # java.util.Arrays; but also resizable arrays
+    "java/util/Comparator.java",  # TODO(b/237414940): Add java.util.Comparator
+    "java/util/Comparators.java",  # Comparator
+    "java/util/Objects.java",  # java.util.Arrays
+    "java/util/Optional.java",  # java.util.function.Predicate, java.util.Objects
+    "java/util/function/BinaryOperator.java",  # Comparator
+    "java/util/function/Predicate.java",  # java.util.Objects
+    "java/util/logging/Logger.java",  # LogManager
+    "java/util/logging/LogManager.java",  # HashMap, List
+] + [
+    "java/util/concurrent/atomic/AtomicInteger.java",  # TODO(b/###): add'l abstract method
+    "java/util/concurrent/atomic/AtomicLong.java",  #  TODO(b/###): add'l abstract method
+    "java/util/concurrent/atomic/AtomicReferenceArray.java",  # java.util.Arrays
+    "java/util/concurrent/ConcurrentMap.java",  # java.util.Map
+    "java/util/concurrent/ConcurrentHashMap.java",  # java.util.HashMap
+    "java/util/concurrent/ExecutorService.java",  # java.util.Collection
+    "java/util/concurrent/ScheduledExecutorService.java",  # ExecutorService
+] + [
+    # TODO(b/237650063): Support Streams/Spliterator
+    "java/util/Spliterator.java",
+    "java/util/Spliterators.java",
+    "java/util/stream/BaseStream.java",
+    "java/util/stream/Collector.java",
+    "java/util/stream/Collectors.java",
+    "java/util/stream/CollectorImpl.java",
+    "java/util/stream/DoubleStream.java",
+    "java/util/stream/DoubleStreamImpl.java",
+    "java/util/stream/IntStream.java",
+    "java/util/stream/IntStreamImpl.java",
+    "java/util/stream/LongStream.java",
+    "java/util/stream/LongStreamImpl.java",
+    "java/util/stream/Stream.java",
+    "java/util/stream/StreamImpl.java",
+    "java/util/stream/StreamSupport.java",
+    "java/util/stream/TerminatableStream.java",
+] + [
+    "java/security/MessageDigest.java",  # java.security.SHA256Digest
+    "java/security/SHA256Digest.java",  # java.util.Arrays
+]
+
 package_sources(
     name = "jre_java_files-j2kt-native",
     # TODO(b/222484176): Eventually, J2KT JRE should stop using J2CL JRE-for-JS sources.
     srcs = glob(
         [
-            "java/lang/*.java",
-            "java/lang/annotations/*.java",
-            "java/lang/reflect/*.java",
+            "java/**/*.java",
         ],
         exclude = [
-            # Package-private helper that's not necessary for J2KT
-            "java/lang/IntegralToString.java",
-            # Does not apply to J2KT
-            "java/lang/JsException.java",
-            # TODO(b/228304843): Blocked by lack of InternalPreconditions
-            # Also relies on String concat optimizations only implemented in JS VMs.
-            "java/lang/AbstractStringBuilder.java",
-            # Needs AbstractStringBuilder. Excessive String concat. Also http://b/224969395.
+            "java/lang/IntegralToString.java",  # J2KT String/Integer/Long don't need it.
+            "java/lang/JsException.java",  # J2KT doesn't need it
+            "java/lang/AbstractStringBuilder.java",  # J2KT StringBuilder doesn't need it
+            "java/util/AbstractHashMap.java",  # J2KT doesn't need it
+            "java/util/InternalHashCodeMap.java",  # J2KT HashMap doesn't need it.
+            "java/util/InternalJsMap.java",  # J2KT HashMap doesn't need it.
+            "java/util/InternalStringMap.java",  # J2KT HashMap doesn't need it.
+            "java/util/logging/SimpleConsoleLogHandler.java",  # J2KT doesn't need it.
+            # Excessive String concat that only JS should use. Also http://b/224969395.
             "java/lang/StringBuffer.java",
-            # TODO(b/223774683): Blocked by lack of java.io.Serializable plan
-            "java/lang/StackTraceElement.java",
-            # TODO(b/224765929): System needs emulation different from J2CL
-            "java/lang/System.java",
-            # TODO(b/227554489): java.util.function.* not available yet
-            "java/lang/ThreadLocal.java",
-        ],
+        ] + J2KT_JRE_TEMPORARILY_EXCLUDED_FILES,
     ),
     super_srcs = glob(
         ["super-kt/java/**/*.java"],
