@@ -15,5 +15,9 @@
  */
 package javaemul.internal;
 
-/** Exists solely to make j2cl happy. */
-class Platform {}
+/** Abstraction of JS/WASM/KT platforms */
+public class Platform {
+  // TODO(b/237503140): Implement the native function to make BigDecimal not just transpile but also
+  // compile.
+  public static native String toPrecision(double value, int precision);
+}
