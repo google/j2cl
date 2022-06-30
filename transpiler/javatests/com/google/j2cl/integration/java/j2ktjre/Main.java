@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.Random;
 import javaemul.internal.EmulatedCharset;
 
 public class Main {
@@ -38,6 +39,7 @@ public class Main {
       testSystemTime();
       testArrayCopy();
       testHashCode();
+      testUtil();
     } catch (Throwable e) {
       throw new RuntimeException(e);
     }
@@ -53,6 +55,17 @@ public class Main {
     testFloat();
     testCharacter();
     testString();
+  }
+
+  private static void testUtil() {
+    testRandom();
+  }
+
+  private static void testRandom() {
+    Random random = new Random(123);
+    int randomInt = random.nextInt();
+    random.setSeed(123);
+    assertEquals(randomInt, random.nextInt());
   }
 
   private static void testReflect() {
