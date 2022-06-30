@@ -34,6 +34,7 @@
  */
 package java.util
 
+import kotlin.jvm.synchronized
 import kotlin.math.ln
 import kotlin.math.sqrt
 
@@ -58,30 +59,31 @@ class Random {
 
   fun nextFloat() = ktRandom.nextFloat()
 
-  // TODO(b/236003566): Synchronized
   fun nextGaussian(): Double {
-    if (haveNextNextGaussian) {
-      // if X1 has been returned, return the second Gaussian
-      haveNextNextGaussian = false
-      return nextNextGaussian
+    return synchronized(this) {
+      if (haveNextNextGaussian) {
+        // if X1 has been returned, return the second Gaussian
+        haveNextNextGaussian = false
+        nextNextGaussian
+      } else {
+        var s: Double
+        var v1: Double
+        var v2: Double
+        do {
+          // Generates two independent random variables U1, U2
+          v1 = 2 * nextDouble() - 1
+          v2 = 2 * nextDouble() - 1
+          s = v1 * v1 + v2 * v2
+        } while (s >= 1)
+
+        // See errata for TAOCP vol. 2, 3rd ed. for proper handling of s == 0 case
+        // (page 5 of http://www-cs-faculty.stanford.edu/~uno/err2.ps.gz)
+        val norm = if (s == 0.0) 0.0 else sqrt(-2.0 * ln(s) / s)
+        nextNextGaussian = v2 * norm
+        haveNextNextGaussian = true
+        v1 * norm
+      }
     }
-
-    var s: Double
-    var v1: Double
-    var v2: Double
-    do {
-      // Generates two independent random variables U1, U2
-      v1 = 2 * nextDouble() - 1
-      v2 = 2 * nextDouble() - 1
-      s = v1 * v1 + v2 * v2
-    } while (s >= 1)
-
-    // See errata for TAOCP vol. 2, 3rd ed. for proper handling of s == 0 case
-    // (page 5 of http://www-cs-faculty.stanford.edu/~uno/err2.ps.gz)
-    val norm = if (s == 0.0) 0.0 else sqrt(-2.0 * ln(s) / s)
-    nextNextGaussian = v2 * norm
-    haveNextNextGaussian = true
-    return v1 * norm
   }
 
   fun nextInt() = ktRandom.nextInt()
@@ -90,9 +92,10 @@ class Random {
 
   fun nextLong() = ktRandom.nextLong()
 
-  // TODO(b/236003566): Synchronized
   fun setSeed(seed: Long) {
-    haveNextNextGaussian = false
-    ktRandom = kotlin.random.Random(seed)
+    synchronized(this) {
+      haveNextNextGaussian = false
+      ktRandom = kotlin.random.Random(seed)
+    }
   }
 }
