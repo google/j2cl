@@ -8,7 +8,4 @@ package(licenses = ["notice"])
 integration_test(
     name = "nestedtrycatch",
     srcs = glob(["*.java"]),
-    # TODO(b/227349235): Getting InvalidMutabilityException (= unexpected
-    # RuntimeException) with old memory model
-    enable_kt_native = False,
 )
