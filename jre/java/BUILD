@@ -125,7 +125,6 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     "java/math/Division.java",  # BitLevel
     "java/math/Elementary.java",  # BigInteger
     "java/math/Logical.java",  # BigInteger
-    "java/math/MathContext.java",  # Fix under review: cl/457728709
     "java/math/Multiplication.java",  # BigInteger
     "java/math/Primality.java",  # BigInteger, Random
 ] + [

@@ -22,6 +22,8 @@ import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Random;
@@ -32,6 +34,7 @@ public class Main {
 
   public static void main(String... args) {
     try {
+      testMath();
       testPrimitives();
       testStringBuilder();
       testReflect();
@@ -43,6 +46,12 @@ public class Main {
     } catch (Throwable e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private static void testMath() {
+    String s = "precision=5 roundingMode=HALF_UP";
+    assertEquals(new MathContext(5, RoundingMode.HALF_UP), new MathContext(s));
+    assertEquals(s, new MathContext(5, RoundingMode.HALF_UP).toString());
   }
 
   private static void testPrimitives() throws Throwable {
