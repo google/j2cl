@@ -35,7 +35,8 @@ fun Renderer.renderType(type: Type) {
   if (type.isClass && !type.declaration.isFinal) {
     if (type.declaration.isAbstract) render("abstract ") else render("open ")
   }
-  if (type.enclosingTypeDeclaration != null &&
+  if (
+    type.enclosingTypeDeclaration != null &&
       type.kind == Kind.CLASS &&
       !type.isStatic &&
       !type.declaration.isLocal
@@ -98,7 +99,7 @@ internal fun Renderer.renderTypeBody(type: Type) {
     val renderInstanceMembers = instanceMembers.isNotEmpty()
     if (renderInstanceMembers) {
       renderNewLine()
-      renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it, type.kind) }
+      renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it) }
     }
 
     staticMembers = staticMembers.filter { !it.isEnumField }
@@ -109,7 +110,7 @@ internal fun Renderer.renderTypeBody(type: Type) {
       render("companion object ")
       renderInCurlyBrackets {
         renderNewLine()
-        renderSeparatedWithEmptyLine(staticMembers) { renderMember(it, type.kind) }
+        renderSeparatedWithEmptyLine(staticMembers) { renderMember(it) }
       }
     }
 

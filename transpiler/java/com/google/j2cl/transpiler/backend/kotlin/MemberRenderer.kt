@@ -21,7 +21,6 @@ import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.AstUtils.isConstructorInvocationStatement
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.InitializerBlock
-import com.google.j2cl.transpiler.ast.Kind
 import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
@@ -31,17 +30,17 @@ import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 
-internal fun Renderer.renderMember(member: Member, kind: Kind) {
+internal fun Renderer.renderMember(member: Member) {
   when (member) {
-    is Method -> renderMethod(member, kind)
+    is Method -> renderMethod(member)
     is Field -> renderField(member)
     is InitializerBlock -> renderInitializerBlock(member)
     else -> throw InternalCompilerError("Unhandled ${member::class}")
   }
 }
 
-private fun Renderer.renderMethod(method: Method, kind: Kind) {
-  renderMethodHeader(method, kind)
+private fun Renderer.renderMethod(method: Method) {
+  renderMethodHeader(method)
   if (!method.isAbstract && !method.isNative) {
     val statements = getStatements(method)
 
@@ -95,13 +94,13 @@ private fun Renderer.renderInitializerBlock(initializerBlock: InitializerBlock) 
   renderStatement(initializerBlock.block)
 }
 
-private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
+private fun Renderer.renderMethodHeader(method: Method) {
   if (method.isStatic) {
     render("@kotlin.jvm.JvmStatic")
     renderNewLine()
   }
   val methodDescriptor = method.descriptor
-  renderMethodModifiers(methodDescriptor, kind)
+  renderMethodModifiers(methodDescriptor)
   if (methodDescriptor.isConstructor) {
     render("constructor")
   } else {
@@ -124,14 +123,15 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
   renderWhereClause(methodDescriptor.typeParameterTypeDescriptors)
 }
 
-private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, kind: Kind) {
-  if (kind != Kind.INTERFACE) {
+private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor) {
+  if (!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
     if (methodDescriptor.isNative) {
       render("external ")
     }
     if (methodDescriptor.isAbstract) {
       render("abstract ")
-    } else if (!methodDescriptor.isFinal &&
+    } else if (
+      !methodDescriptor.isFinal &&
         !methodDescriptor.isConstructor &&
         !methodDescriptor.isStatic &&
         !methodDescriptor.visibility.isPrivate
