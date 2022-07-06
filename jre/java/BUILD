@@ -175,8 +175,8 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     "java/util/logging/Logger.java",  # LogManager
     "java/util/logging/LogManager.java",  # HashMap, List
 ] + [
-    "java/util/concurrent/atomic/AtomicInteger.java",  # TODO(b/###): add'l abstract method
-    "java/util/concurrent/atomic/AtomicLong.java",  #  TODO(b/###): add'l abstract method
+    "java/util/concurrent/atomic/AtomicInteger.java",  # TODO(b/237983521): add'l abstract method
+    "java/util/concurrent/atomic/AtomicLong.java",  #  TODO(b/237983521): add'l abstract method
     "java/util/concurrent/atomic/AtomicReferenceArray.java",  # java.util.Arrays
     "java/util/concurrent/ConcurrentMap.java",  # java.util.Map
     "java/util/concurrent/ConcurrentHashMap.java",  # java.util.HashMap
