@@ -108,8 +108,7 @@ function parameterizedTestHelper(javaWrapper) {
           .filter(eachProperty => eachProperty.startsWith('test'));
   const data = assert(javaWrapper.getData());
   for (let i = 0; i < data.length; i++) {
-    generatedSuite[`testGroup${i}`] =
-        createTestCases(i, javaWrapper, methods, data);
+    generatedSuite[`testGroup${i}`] = createTestCases(i, javaWrapper, methods);
   }
 
   return generatedSuite;
@@ -118,8 +117,7 @@ function parameterizedTestHelper(javaWrapper) {
 function /** !Object */ createTestCases(
     /** number */ currentIndex,
     /** !TestCaseWrapper */ javaWrapper,
-    /** !Array<string>*/ methods,
-    /** !Array<*> */ data) {
+    /** !Array<string>*/ methods) {
   const parameterizedTests = {
     setUp() {
       // configure the actual test instance
