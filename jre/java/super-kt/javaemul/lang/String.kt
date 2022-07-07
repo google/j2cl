@@ -79,6 +79,16 @@ fun String.Companion.valueOf(c: Char): String = c.toString()
 
 fun String.Companion.valueOf(a: Any?): String = a.toString()
 
+internal fun String.Companion.fromCodePoint(codePoint: Int): String {
+  if (codePoint >= Char.MIN_SUPPLEMENTARY_CODE_POINT) {
+    val chars = CharArray(2)
+    Char.toChars(codePoint, chars, 0)
+    return chars.concatToString()
+  } else {
+    return codePoint.toChar().toString()
+  }
+}
+
 fun String.compareToIgnoreCase(str: String): Int = this.compareTo(str, ignoreCase = true)
 
 fun String.getBytes() = encodeToByteArray()
@@ -109,6 +119,24 @@ fun String.getChars(start: Int, end: Int, buffer: CharArray, index: Int) {
   var bufferIndex = index
   for (srcIndex in start until end) {
     buffer[bufferIndex++] = this[srcIndex]
+  }
+}
+
+// TODO(b/233944334): This duplicates JRE code on the JVM
+fun String.indexOf(codePoint: Int, fromIndex: Int = 0): Int {
+  if (codePoint < Char.MIN_SUPPLEMENTARY_CODE_POINT) {
+    return indexOf(codePoint.toChar(), fromIndex)
+  } else {
+    return indexOf(String.fromCodePoint(codePoint), fromIndex)
+  }
+}
+
+// TODO(b/233944334): This duplicates JRE code on the JVM
+fun String.lastIndexOf(codePoint: Int, fromIndex: Int = Int.MAX_VALUE): Int {
+  if (codePoint < Char.MIN_SUPPLEMENTARY_CODE_POINT) {
+    return lastIndexOf(codePoint.toChar(), fromIndex)
+  } else {
+    return lastIndexOf(String.fromCodePoint(codePoint), fromIndex)
   }
 }
 

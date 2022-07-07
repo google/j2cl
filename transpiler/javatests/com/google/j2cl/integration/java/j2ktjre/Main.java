@@ -332,6 +332,21 @@ public class Main {
     assertEquals(AEBC, "ÄBC".getBytes());
     assertEquals(AEBC, "ÄBC".getBytes("UTF-8"));
     assertEquals(AEBC, "ÄBC".getBytes(StandardCharsets.UTF_8));
+
+    assertEquals(-1, "ABCDEABCDE".indexOf('F'));
+    assertEquals(-1, "ABCDEABCDE".indexOf(0x1f602));
+    assertEquals(-1, "ABCDEABCDE".lastIndexOf('F'));
+    assertEquals(-1, "ABCDEABCDE".lastIndexOf(0x1f602));
+    assertEquals(1, "ABCDEABCDE".indexOf('B'));
+    assertEquals(6, "ABCDEABCDE".indexOf('B', 4));
+    assertEquals(-1, "ABCDEABCDE".indexOf('B', 9));
+    assertEquals(6, "ABCDEABCDE".lastIndexOf('B'));
+    assertEquals(1, "ABCDEABCDE".lastIndexOf('B', 5));
+    assertEquals(-1, "ABCDEABCDE".lastIndexOf('B', 0));
+    assertEquals(2, "😴😂☕😴😂☕".indexOf(0x1f602));
+    assertEquals(7, "😴😂☕😴😂☕".indexOf(0x1f602, 4));
+    assertEquals(7, "😴😂☕😴😂☕".lastIndexOf(0x1f602));
+    assertEquals(2, "😴😂☕😴😂☕".lastIndexOf(0x1f602, 6));
   }
 
   private static void testInsert() {
