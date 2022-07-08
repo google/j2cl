@@ -134,6 +134,22 @@ public class CastPrimitives {
     new LongValueHolder(i);
   }
 
+  public void testImplicitArrayIndexCasts(byte[] array) {
+    final byte b = 127;
+    final char c = 65535;
+    final short s = 32767;
+    final int i = 2147483647;
+
+    byte result;
+    result = array[b];
+    result = array[c];
+    result = array[s];
+    result = array[i];
+
+    result = array[1];
+    result = array['a'];
+  }
+
   private static short getShort(short value) {
     return value;
   }

@@ -109,6 +109,20 @@ open class CastPrimitives {
   cast.CastPrimitives.LongValueHolder(i.toLong())
  }
 
+ open fun testImplicitArrayIndexCasts(array: kotlin.ByteArray?) {
+  val b: kotlin.Byte = 127
+  val c: kotlin.Char = '\uFFFF'
+  val s: kotlin.Short = 32767
+  val i: kotlin.Int = 2147483647
+  var result: kotlin.Byte
+  result = array!![b.toInt()]
+  result = array!![c.code]
+  result = array!![s.toInt()]
+  result = array!![i]
+  result = array!![1]
+  result = array!![97]
+ }
+
  open fun testImplicitLongAssignmentCasts() {
   val fbyte: kotlin.Byte = 11
   val fchar: kotlin.Char = '\u000C'

@@ -155,6 +155,7 @@
   (ref.func $m_testReferenceToPrimitive__void@cast.CastPrimitives)
   (ref.func $m_testUnboxAndWiden__void@cast.CastPrimitives)
   (ref.func $m_testImplicitArgumentCasts__void@cast.CastPrimitives)
+  (ref.func $m_testImplicitArrayIndexCasts__arrayOf_byte__void@cast.CastPrimitives)
   (ref.func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives)
  )
 )
@@ -1323,6 +1324,7 @@
  (field $m_testReferenceToPrimitive__void (ref $function.m_testReferenceToPrimitive__void))
  (field $m_testUnboxAndWiden__void (ref $function.m_testUnboxAndWiden__void))
  (field $m_testImplicitArgumentCasts__void (ref $function.m_testImplicitArgumentCasts__void))
+ (field $m_testImplicitArrayIndexCasts__arrayOf_byte__void (ref $function.m_testImplicitArrayIndexCasts__arrayOf_byte__void))
  (field $m_testImplicitLongAssignmentCasts__void (ref $function.m_testImplicitLongAssignmentCasts__void))
   $java.lang.Object.vtable)
 )
@@ -1744,14 +1746,65 @@
 )
 (elem declare func $m_testImplicitArgumentCasts__void@cast.CastPrimitives)
 
+;;; void CastPrimitives.testImplicitArrayIndexCasts(byte[] array)
+(func $m_testImplicitArrayIndexCasts__arrayOf_byte__void@cast.CastPrimitives
+ (type $function.m_testImplicitArrayIndexCasts__arrayOf_byte__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $array (ref null $javaemul.internal.WasmArray.OfByte))
+ ;;@ cast/CastPrimitives.java:137:14
+ (local $b i32)
+ (local $c i32)
+ (local $s i32)
+ (local $i i32)
+ (local $result i32)
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast_static $cast.CastPrimitives (local.get $this.untyped)))
+ (block
+  ;; byte b = 127;
+  ;;@ cast/CastPrimitives.java:138:4
+  (local.set $b (i32.const 127))
+  ;; char c = 65535;
+  ;;@ cast/CastPrimitives.java:139:4
+  (local.set $c (i32.const 65535))
+  ;; short s = 32767;
+  ;;@ cast/CastPrimitives.java:140:4
+  (local.set $s (i32.const 32767))
+  ;; int i = 2147483647;
+  ;;@ cast/CastPrimitives.java:141:4
+  (local.set $i (i32.const 2147483647))
+  ;; byte result;
+  ;;@ cast/CastPrimitives.java:143:4
+  
+  ;; (result = array.elements[b]);
+  ;;@ cast/CastPrimitives.java:144:4
+  (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $f_elements__javaemul_internal_WasmArray_OfByte_(local.get $array)) (local.get $b)))
+  ;; (result = array.elements[c]);
+  ;;@ cast/CastPrimitives.java:145:4
+  (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $f_elements__javaemul_internal_WasmArray_OfByte_(local.get $array)) (local.get $c)))
+  ;; (result = array.elements[s]);
+  ;;@ cast/CastPrimitives.java:146:4
+  (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $f_elements__javaemul_internal_WasmArray_OfByte_(local.get $array)) (local.get $s)))
+  ;; (result = array.elements[i]);
+  ;;@ cast/CastPrimitives.java:147:4
+  (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $f_elements__javaemul_internal_WasmArray_OfByte_(local.get $array)) (local.get $i)))
+  ;; (result = array.elements[1]);
+  ;;@ cast/CastPrimitives.java:149:4
+  (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $f_elements__javaemul_internal_WasmArray_OfByte_(local.get $array)) (i32.const 1)))
+  ;; (result = array.elements[97]);
+  ;;@ cast/CastPrimitives.java:150:4
+  (local.set $result (array.get_s $byte.array (struct.get $javaemul.internal.WasmArray.OfByte $f_elements__javaemul_internal_WasmArray_OfByte_(local.get $array)) (i32.const 97)))
+ )
+)
+(elem declare func $m_testImplicitArrayIndexCasts__arrayOf_byte__void@cast.CastPrimitives)
+
 ;;; short CastPrimitives.getShort(short value)
 (func $m_getShort__short__short@cast.CastPrimitives
  (param $value i32)
  (result i32)
- ;;@ cast/CastPrimitives.java:137:23
+ ;;@ cast/CastPrimitives.java:153:23
  (block
   ;; return value;
-  ;;@ cast/CastPrimitives.java:138:4
+  ;;@ cast/CastPrimitives.java:154:4
   (return (local.get $value))
  )
 )
@@ -1760,10 +1813,10 @@
 (func $m_getInt__int__int@cast.CastPrimitives
  (param $value i32)
  (result i32)
- ;;@ cast/CastPrimitives.java:141:21
+ ;;@ cast/CastPrimitives.java:157:21
  (block
   ;; return value;
-  ;;@ cast/CastPrimitives.java:142:4
+  ;;@ cast/CastPrimitives.java:158:4
   (return (local.get $value))
  )
 )
@@ -1772,10 +1825,10 @@
 (func $m_getLong__long__long@cast.CastPrimitives
  (param $value i64)
  (result i64)
- ;;@ cast/CastPrimitives.java:145:22
+ ;;@ cast/CastPrimitives.java:161:22
  (block
   ;; return value;
-  ;;@ cast/CastPrimitives.java:146:4
+  ;;@ cast/CastPrimitives.java:162:4
   (return (local.get $value))
  )
 )
@@ -1784,10 +1837,10 @@
 (func $m_getFloat__float__float@cast.CastPrimitives
  (param $value f32)
  (result f32)
- ;;@ cast/CastPrimitives.java:149:23
+ ;;@ cast/CastPrimitives.java:165:23
  (block
   ;; return value;
-  ;;@ cast/CastPrimitives.java:150:4
+  ;;@ cast/CastPrimitives.java:166:4
   (return (local.get $value))
  )
 )
@@ -1796,10 +1849,10 @@
 (func $m_getDouble__double__double@cast.CastPrimitives
  (param $value f64)
  (result f64)
- ;;@ cast/CastPrimitives.java:153:24
+ ;;@ cast/CastPrimitives.java:169:24
  (block
   ;; return value;
-  ;;@ cast/CastPrimitives.java:154:4
+  ;;@ cast/CastPrimitives.java:170:4
   (return (local.get $value))
  )
 )
@@ -1808,7 +1861,7 @@
 (func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives
  (type $function.m_testImplicitLongAssignmentCasts__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ cast/CastPrimitives.java:165:14
+ ;;@ cast/CastPrimitives.java:181:14
  (local $fbyte i32)
  (local $fchar i32)
  (local $fshort i32)
@@ -1821,86 +1874,86 @@
  (local.set $this (ref.cast_static $cast.CastPrimitives (local.get $this.untyped)))
  (block
   ;; byte fbyte = 11;
-  ;;@ cast/CastPrimitives.java:166:4
+  ;;@ cast/CastPrimitives.java:182:4
   (local.set $fbyte (i32.const 11))
   ;; char fchar = 12;
-  ;;@ cast/CastPrimitives.java:167:4
+  ;;@ cast/CastPrimitives.java:183:4
   (local.set $fchar (i32.const 12))
   ;; short fshort = 13;
-  ;;@ cast/CastPrimitives.java:168:4
+  ;;@ cast/CastPrimitives.java:184:4
   (local.set $fshort (i32.const 13))
   ;; int fint = 14;
-  ;;@ cast/CastPrimitives.java:169:4
+  ;;@ cast/CastPrimitives.java:185:4
   (local.set $fint (i32.const 14))
   ;; long flong = 15;
-  ;;@ cast/CastPrimitives.java:170:4
+  ;;@ cast/CastPrimitives.java:186:4
   (local.set $flong (i64.const 15))
   ;; float ffloat = 16.0;
-  ;;@ cast/CastPrimitives.java:171:4
+  ;;@ cast/CastPrimitives.java:187:4
   (local.set $ffloat (f32.const 16.0))
   ;; double fdouble = 17.0;
-  ;;@ cast/CastPrimitives.java:172:4
+  ;;@ cast/CastPrimitives.java:188:4
   (local.set $fdouble (f64.const 17.0))
   ;; long tlong = 0;
-  ;;@ cast/CastPrimitives.java:175:4
+  ;;@ cast/CastPrimitives.java:191:4
   (local.set $tlong (i64.const 0))
   (block
    ;; (tlong = javaemul.internal.Primitives.widenByteToLong(fbyte));
-   ;;@ cast/CastPrimitives.java:179:6
+   ;;@ cast/CastPrimitives.java:195:6
    (local.set $tlong (i64.extend_i32_s (local.get $fbyte)))
    ;; (tlong = flong);
-   ;;@ cast/CastPrimitives.java:180:6
+   ;;@ cast/CastPrimitives.java:196:6
    (local.set $tlong (local.get $flong))
   )
   (block
    ;; (tlong = javaemul.internal.Primitives.widenIntToLong(fint));
-   ;;@ cast/CastPrimitives.java:186:6
+   ;;@ cast/CastPrimitives.java:202:6
    (local.set $tlong (i64.extend_i32_s (local.get $fint)))
    ;; (tlong = (tlong + javaemul.internal.Primitives.widenIntToLong(fint)));
-   ;;@ cast/CastPrimitives.java:187:6
+   ;;@ cast/CastPrimitives.java:203:6
    (local.set $tlong (i64.add (local.get $tlong) (i64.extend_i32_s (local.get $fint))))
    ;; (tlong = (tlong << javaemul.internal.Primitives.widenIntToLong(fint)));
-   ;;@ cast/CastPrimitives.java:188:6
+   ;;@ cast/CastPrimitives.java:204:6
    (local.set $tlong (i64.shl (local.get $tlong) (i64.extend_i32_s (local.get $fint))))
   )
   (block
    ;; (tlong = (tlong + javaemul.internal.Primitives.widenCharToLong(fchar)));
-   ;;@ cast/CastPrimitives.java:194:6
+   ;;@ cast/CastPrimitives.java:210:6
    (local.set $tlong (i64.add (local.get $tlong) (i64.extend_i32_u (local.get $fchar))))
    ;; (tlong = (tlong + flong));
-   ;;@ cast/CastPrimitives.java:195:6
+   ;;@ cast/CastPrimitives.java:211:6
    (local.set $tlong (i64.add (local.get $tlong) (local.get $flong)))
    ;; (tlong = javaemul.internal.Primitives.narrowFloatToLong((javaemul.internal.Primitives.widenLongToFloat(tlong) + ffloat)));
-   ;;@ cast/CastPrimitives.java:196:6
+   ;;@ cast/CastPrimitives.java:212:6
    (local.set $tlong (i64.trunc_sat_f32_s (f32.add (f32.convert_i64_s (local.get $tlong)) (local.get $ffloat))))
   )
   (block
    ;; (tlong = (flong * javaemul.internal.Primitives.widenIntToLong(fint)));
-   ;;@ cast/CastPrimitives.java:202:6
+   ;;@ cast/CastPrimitives.java:218:6
    (local.set $tlong (i64.mul (local.get $flong) (i64.extend_i32_s (local.get $fint))))
    ;; (tlong = (flong >> javaemul.internal.Primitives.widenIntToLong(fint)));
-   ;;@ cast/CastPrimitives.java:203:6
+   ;;@ cast/CastPrimitives.java:219:6
    (local.set $tlong (i64.shr_s (local.get $flong) (i64.extend_i32_s (local.get $fint))))
   )
   (block
    ;; (tlong = (flong + javaemul.internal.Primitives.widenShortToLong(fshort)));
-   ;;@ cast/CastPrimitives.java:209:6
+   ;;@ cast/CastPrimitives.java:225:6
    (local.set $tlong (i64.add (local.get $flong) (i64.extend_i32_s (local.get $fshort))))
    ;; (tlong = (flong + flong));
-   ;;@ cast/CastPrimitives.java:210:6
+   ;;@ cast/CastPrimitives.java:226:6
    (local.set $tlong (i64.add (local.get $flong) (local.get $flong)))
   )
   (block
    ;; (tlong = (flong << tlong));
-   ;;@ cast/CastPrimitives.java:215:6
+   ;;@ cast/CastPrimitives.java:231:6
    (local.set $tlong (i64.shl (local.get $flong) (local.get $tlong)))
    ;; (tlong = (tlong << flong));
-   ;;@ cast/CastPrimitives.java:216:6
+   ;;@ cast/CastPrimitives.java:232:6
    (local.set $tlong (i64.shl (local.get $tlong) (local.get $flong)))
   )
   (block
    ;; (tlong = (javaemul.internal.Primitives.widenIntToLong((0 + 1)) + 2));
-   ;;@ cast/CastPrimitives.java:220:6
+   ;;@ cast/CastPrimitives.java:236:6
    (local.set $tlong (i64.add (i64.extend_i32_s (i32.add (i32.const 0) (i32.const 1))) (i64.const 2)))
   )
  )
@@ -1962,17 +2015,17 @@
 (func $$create__int__cast_CastPrimitives_IntValueHolder@cast.CastPrimitives.IntValueHolder
  (param $value i32)
  (result (ref null $cast.CastPrimitives.IntValueHolder))
- ;;@ cast/CastPrimitives.java:158:4
+ ;;@ cast/CastPrimitives.java:174:4
  (local $$instance (ref null $cast.CastPrimitives.IntValueHolder))
  (block
   ;; IntValueHolder $instance = new IntValueHolder.<init>(0);
-  ;;@ cast/CastPrimitives.java:158:4
+  ;;@ cast/CastPrimitives.java:174:4
   (local.set $$instance (struct.new $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.itable)) (i32.const 0)))
   ;; $instance.$ctor(value);
-  ;;@ cast/CastPrimitives.java:158:4
+  ;;@ cast/CastPrimitives.java:174:4
   (call $$ctor__int__void_$p_cast_CastPrimitives_IntValueHolder@cast.CastPrimitives.IntValueHolder (ref.as_non_null (local.get $$instance))(local.get $value))
   ;; return $instance;
-  ;;@ cast/CastPrimitives.java:158:4
+  ;;@ cast/CastPrimitives.java:174:4
   (return (local.get $$instance))
  )
 )
@@ -1981,35 +2034,35 @@
 (func $$ctor__int__void_$p_cast_CastPrimitives_IntValueHolder@cast.CastPrimitives.IntValueHolder
  (param $this (ref null $cast.CastPrimitives.IntValueHolder))
  (param $value i32)
- ;;@ cast/CastPrimitives.java:158:4
+ ;;@ cast/CastPrimitives.java:174:4
  (block
   ;; cast.CastPrimitives.IntValueHolder.$clinit();
-  ;;@ cast/CastPrimitives.java:158:30
+  ;;@ cast/CastPrimitives.java:174:30
   (call $$clinit__void@cast.CastPrimitives.IntValueHolder )
   ;; Object.this.$ctor();
-  ;;@ cast/CastPrimitives.java:158:30
+  ;;@ cast/CastPrimitives.java:174:30
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void IntValueHolder.$clinit()
 (func $$clinit__void@cast.CastPrimitives.IntValueHolder
- ;;@ cast/CastPrimitives.java:157:23
+ ;;@ cast/CastPrimitives.java:173:23
  (block
   ;; if (cast.CastPrimitives.IntValueHolder.$initialized) return;
-  ;;@ cast/CastPrimitives.java:157:23
+  ;;@ cast/CastPrimitives.java:173:23
   (if (global.get $f_$initialized__cast_CastPrimitives_IntValueHolder)
    (then
     ;; return;
-    ;;@ cast/CastPrimitives.java:157:23
+    ;;@ cast/CastPrimitives.java:173:23
     (return )
    )
   )
   ;; (cast.CastPrimitives.IntValueHolder.$initialized = true);
-  ;;@ cast/CastPrimitives.java:157:23
+  ;;@ cast/CastPrimitives.java:173:23
   (global.set $f_$initialized__cast_CastPrimitives_IntValueHolder (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ cast/CastPrimitives.java:157:23
+  ;;@ cast/CastPrimitives.java:173:23
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -2047,17 +2100,17 @@
 (func $$create__long__cast_CastPrimitives_LongValueHolder@cast.CastPrimitives.LongValueHolder
  (param $value i64)
  (result (ref null $cast.CastPrimitives.LongValueHolder))
- ;;@ cast/CastPrimitives.java:162:4
+ ;;@ cast/CastPrimitives.java:178:4
  (local $$instance (ref null $cast.CastPrimitives.LongValueHolder))
  (block
   ;; LongValueHolder $instance = new LongValueHolder.<init>(0);
-  ;;@ cast/CastPrimitives.java:162:4
+  ;;@ cast/CastPrimitives.java:178:4
   (local.set $$instance (struct.new $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.itable)) (i32.const 0)))
   ;; $instance.$ctor(value);
-  ;;@ cast/CastPrimitives.java:162:4
+  ;;@ cast/CastPrimitives.java:178:4
   (call $$ctor__long__void_$p_cast_CastPrimitives_LongValueHolder@cast.CastPrimitives.LongValueHolder (ref.as_non_null (local.get $$instance))(local.get $value))
   ;; return $instance;
-  ;;@ cast/CastPrimitives.java:162:4
+  ;;@ cast/CastPrimitives.java:178:4
   (return (local.get $$instance))
  )
 )
@@ -2066,35 +2119,35 @@
 (func $$ctor__long__void_$p_cast_CastPrimitives_LongValueHolder@cast.CastPrimitives.LongValueHolder
  (param $this (ref null $cast.CastPrimitives.LongValueHolder))
  (param $value i64)
- ;;@ cast/CastPrimitives.java:162:4
+ ;;@ cast/CastPrimitives.java:178:4
  (block
   ;; cast.CastPrimitives.LongValueHolder.$clinit();
-  ;;@ cast/CastPrimitives.java:162:32
+  ;;@ cast/CastPrimitives.java:178:32
   (call $$clinit__void@cast.CastPrimitives.LongValueHolder )
   ;; Object.this.$ctor();
-  ;;@ cast/CastPrimitives.java:162:32
+  ;;@ cast/CastPrimitives.java:178:32
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void LongValueHolder.$clinit()
 (func $$clinit__void@cast.CastPrimitives.LongValueHolder
- ;;@ cast/CastPrimitives.java:161:23
+ ;;@ cast/CastPrimitives.java:177:23
  (block
   ;; if (cast.CastPrimitives.LongValueHolder.$initialized) return;
-  ;;@ cast/CastPrimitives.java:161:23
+  ;;@ cast/CastPrimitives.java:177:23
   (if (global.get $f_$initialized__cast_CastPrimitives_LongValueHolder)
    (then
     ;; return;
-    ;;@ cast/CastPrimitives.java:161:23
+    ;;@ cast/CastPrimitives.java:177:23
     (return )
    )
   )
   ;; (cast.CastPrimitives.LongValueHolder.$initialized = true);
-  ;;@ cast/CastPrimitives.java:161:23
+  ;;@ cast/CastPrimitives.java:177:23
   (global.set $f_$initialized__cast_CastPrimitives_LongValueHolder (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ cast/CastPrimitives.java:161:23
+  ;;@ cast/CastPrimitives.java:177:23
   (call $$clinit__void@java.lang.Object )
  )
 )

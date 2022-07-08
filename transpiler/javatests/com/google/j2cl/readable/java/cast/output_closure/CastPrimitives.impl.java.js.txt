@@ -138,6 +138,20 @@ class CastPrimitives extends j_l_Object {
   LongValueHolder.$create__long($Primitives.widenCharToLong(c));
   LongValueHolder.$create__long($Primitives.widenIntToLong(i));
  }
+ 
+ m_testImplicitArrayIndexCasts__arrayOf_byte(/** Array<number> */ array) {
+  let b = 127;
+  let c = 65535 /* '\uFFFF' */;
+  let s = 32767;
+  let i = 2147483647;
+  let /** number */ result;
+  result = array[b];
+  result = array[c];
+  result = array[s];
+  result = array[i];
+  result = array[1];
+  result = array[97 /* 'a' */];
+ }
  /** @return {number} */
  static m_getShort__short(/** number */ value) {
   return value;

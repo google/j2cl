@@ -15,12 +15,16 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
@@ -34,6 +38,20 @@ public class InsertWideningPrimitiveConversionsKotlin extends NormalizationPass 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
+
+    // TODO(b/238147260): Move to rewriteUnaryNumericPromotionContext() when the bug is fixed.
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteArrayAccess(ArrayAccess arrayAccess) {
+            Expression indexExpression = arrayAccess.getIndexExpression();
+            return shouldWiden(PrimitiveTypes.INT, indexExpression)
+                ? ArrayAccess.Builder.from(arrayAccess)
+                    .setIndexExpression(widenTo(PrimitiveTypes.INT, indexExpression))
+                    .build()
+                : arrayAccess;
+          }
+        });
   }
 
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {

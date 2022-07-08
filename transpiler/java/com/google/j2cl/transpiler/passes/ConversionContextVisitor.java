@@ -564,6 +564,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return SwitchStatement.newBuilder()
         .setSourcePosition(switchStatement.getSourcePosition())
         .setSwitchExpression(
+            // TODO(b/238147260): Unary numeric promotion should not be applied here.
             contextRewriter.rewriteUnaryNumericPromotionContext(
                 switchStatement.getSwitchExpression()))
         .setCases(switchStatement.getCases())
