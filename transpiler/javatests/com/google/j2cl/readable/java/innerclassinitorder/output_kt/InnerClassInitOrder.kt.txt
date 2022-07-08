@@ -98,7 +98,7 @@ open class InnerClassInitOrder {
  }
 
  open fun testQualifiedSuperCallAnon() {
-  val x: innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall? = object : TestQualifiedSuperCall() {}
+  val x: innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall? = object : innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall() {}
   assert(2 === x!!.getValue())
  }
 
@@ -151,7 +151,7 @@ open class InnerClassInitOrder {
  }
 
  open inner class OuterRefFromSuperCtorCall: innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase {
-  constructor(): super(object : Any() {
+  constructor(): super(object : kotlin.Any() {
    open override fun hashCode(): kotlin.Int {
     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
     return 0
@@ -162,7 +162,7 @@ open class InnerClassInitOrder {
  open inner class OuterRefFromThisCtorCall: innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase {
   constructor(`object`: kotlin.Any?): super(`object`)
 
-  constructor(): this(object : Any() {
+  constructor(): this(object : kotlin.Any() {
    open override fun hashCode(): kotlin.Int {
     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1000
     return 0
@@ -289,7 +289,7 @@ open class InnerClassInitOrder {
    }
 
    open fun checkDispatchFromSub2(): kotlin.Int {
-    return object : Outer(1) {
+    return object : innerclassinitorder.InnerClassInitOrder.Outer(1) {
      open fun go(): kotlin.Int {
       return this@OuterIsSuper.checkDispatch()
      }

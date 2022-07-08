@@ -403,7 +403,7 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
 
   // Render fully-qualified type name if there's no qualifier, otherwise render qualifier and
   // simple type name.
-  val typeDeclaration = expression.typeDescriptor.typeDeclaration
+  val typeDeclaration = typeDescriptor.typeDeclaration
   renderTypeDescriptor(
     typeDescriptor,
     TypeDescriptorUsage.SUPER_TYPE,

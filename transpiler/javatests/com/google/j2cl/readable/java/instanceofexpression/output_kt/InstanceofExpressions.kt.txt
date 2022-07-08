@@ -17,7 +17,7 @@ open class InstanceofExpressions {
   val o: kotlin.Any? = kotlin.Any()
   var b: kotlin.Boolean
   b = o is java.io.Serializable
-  b = object : Serializable {} is java.io.Serializable
+  b = object : java.io.Serializable {} is java.io.Serializable
  }
 
  open fun testInstanceofBoxedType() {

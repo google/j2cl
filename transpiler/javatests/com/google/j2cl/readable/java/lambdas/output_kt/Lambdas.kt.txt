@@ -83,7 +83,7 @@ open class Lambdas {
  open fun <T> testInstanceMethodTypeVariableThroughLambda() {
   val wrapped: lambdas.Lambdas.Functional<T>? = lambdas.Lambdas.Functional<T> { f: lambdas.Lambdas.Functional<T>? ->
 
-   return@Functional object : Functional<T> {
+   return@Functional object : lambdas.Lambdas.Functional<T> {
     open override fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
      return null
     }
@@ -136,7 +136,7 @@ open class Lambdas {
  open fun testAnonymousInsideLambda() {
   val runner: lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid? = lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid {
 
-   object : Any() {}
+   object : kotlin.Any() {}
   }
  }
 
