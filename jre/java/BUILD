@@ -94,12 +94,39 @@ package_sources(
     name = "bootclasspath_java_files-j2kt",
     srcs = BASE_JRE_SRCS,  # TODO(b/222484176): Stop including J2CL JRE for JS.
     excludes = [
-        # J2KT doesn't need these/they don't work with the super-kt supersourced types.
+        # J2KT doesn't need these
         "java/lang/JsException.java",
         "java/lang/IntegralToString.java",
         "java/lang/RealToString.java",
         "javaemul/internal/Casts.java",
-    ],
+        "java/util/AbstractHashMap.java",
+        "java/util/InternalHashCodeMap.java",
+        "java/util/InternalStringMap.java",
+    ] + [
+        # TODO(b/238299508): Include sources for transpiled collections
+        "java/util/AbstractQueue.java",
+        "java/util/AbstractSequentialList.java",
+        "java/util/EnumMap.java",
+        "java/util/EnumSet.java",
+        "java/util/IdentityHashMap.java",
+        "java/util/LinkedList.java",
+        "java/util/NavigableMap.java",
+        "java/util/NavigableSet.java",
+        "java/util/PriorityQueue.java",
+        "java/util/SortedSet.java",
+        "java/util/Spliterators.java",
+        "java/util/Stack.java",
+        "java/util/TreeMap.java",
+        "java/util/TreeSet.java",
+        "java/util/Vector.java",
+        "java/util/concurrent/ConcurrentHashMap.java",
+    ] + glob(
+        # TODO(b/237650063): Add Streams
+        # The Streams implementation uses missing collection APIs (Map.merge)
+        ["java/util/stream/*.java"],
+        # The package can't be entirely empty (it's declared in module-info.java).
+        exclude = ["java/util/stream/Stream.java"],
+    ),
     super_srcs = glob(
         ["super-kt/java*/**/*.java"],
     ),
@@ -128,37 +155,21 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     "java/math/Multiplication.java",  # BigInteger
     "java/math/Primality.java",  # BigInteger, Random
 ] + [
-    # TODO(b/237266658): Map Java collection types to Kotlin collection types to match Kotlin/JVM
-    "java/util/AbstractCollection.java",
-    "java/util/AbstractList.java",
-    "java/util/AbstractMap.java",
-    "java/util/AbstractMapEntry.java",
+    # TODO(b/238299508): Include sources for transpiled collections
     "java/util/AbstractQueue.java",
     "java/util/AbstractSequentialList.java",
-    "java/util/AbstractSet.java",
-    "java/util/ArrayList.java",
-    "java/util/ArrayDeque.java",
-    "java/util/Collection.java",
-    "java/util/Collections.java",
     "java/util/Deque.java",
     "java/util/EnumMap.java",
     "java/util/EnumSet.java",
     "java/util/IdentityHashMap.java",
-    "java/util/HashMap.java",
-    "java/util/HashSet.java",
-    "java/util/LinkedHashMap.java",
-    "java/util/LinkedHashSet.java",
     "java/util/LinkedList.java",
-    "java/util/List.java",
-    "java/util/Map.java",
-    "java/util/NavigableMap.java",
-    "java/util/NavigableSet.java",
+    "java/util/NavigableMap.java",  # TODO(b/237414940): Can be supersourced after Comparator
+    "java/util/NavigableSet.java",  # TODO(b/237414940): Can be supersourced after Comparator
     "java/util/PrimitiveIterator.java",
     "java/util/PriorityQueue.java",
     "java/util/Queue.java",
-    "java/util/Set.java",
-    "java/util/SortedMap.java",
-    "java/util/SortedSet.java",
+    "java/util/SortedMap.java",  # TODO(b/237414940): Can be supersourced after Comparator
+    "java/util/SortedSet.java",  # TODO(b/237414940): Can be supersourced after Comparator
     "java/util/Stack.java",
     "java/util/TreeMap.java",
     "java/util/TreeSet.java",
@@ -218,6 +229,7 @@ package_sources(
             "java/lang/AbstractStringBuilder.java",  # J2KT StringBuilder doesn't need it
             "java/util/AbstractHashMap.java",  # J2KT doesn't need it
             "java/util/InternalHashCodeMap.java",  # J2KT HashMap doesn't need it.
+            "java/util/AbstractMapEntry.java",  # J2KT doesn't need it.
             "java/util/InternalJsMap.java",  # J2KT HashMap doesn't need it.
             "java/util/InternalStringMap.java",  # J2KT HashMap doesn't need it.
             "java/util/logging/SimpleConsoleLogHandler.java",  # J2KT doesn't need it.
