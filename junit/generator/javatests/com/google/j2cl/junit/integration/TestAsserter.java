@@ -163,7 +163,7 @@ public class TestAsserter {
 
     // TODO(b/149936597): Improve wasm exception and then change this testError to be more specific
     if (testMode.isJ2wasm()) {
-      assertLogsContains("wasm exception");
+      assertLogsContains("Unknown Error of type \"Exception\"");
     } else {
       assertLogsContains(testEntry.getValue());
     }
