@@ -16,9 +16,7 @@
 package com.google.j2cl.junit.integration.parameterizedtest.data;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
-import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -27,30 +25,19 @@ import org.junit.runners.Parameterized.Parameters;
 
 /** TestCase used for integration testing for j2cl JUnit support. */
 @RunWith(Parameterized.class)
-public final class PrimitiveAndObjectCastTest {
-  private static final int OFFSET = 5;
+public final class IntegerToIntTest {
 
   @Parameters
-  public static Object[][] data() {
-    return new Object[][] {
-      {1, 1, new Integer(1)}, {2, 2, new Integer(2)}, {999, 999, new Integer(999)}
-    };
+  public static Object[] data() {
+    return new Object[] {new Integer(1)};
   }
 
-  // input does not need any cast and serves as a comparison to input2 and input3
   @Parameter public int input;
-
-  @Parameter(1)
-  public Integer input2;
-
-  @Parameter(2)
-  public int input3;
 
   @Test
   public void test() {
-    assertEquals(input + OFFSET, input3 + OFFSET);
-    assertEquals(input, input2.intValue());
-    assertTrue(input == input3);
-    TestCaseLogger.log(input + ", " + input2 + ", " + input3);
+    // Using + validates that the input is actually primitive. Otherwise it would result in string
+    // concat.
+    assertEquals(6, input + 5);
   }
 }

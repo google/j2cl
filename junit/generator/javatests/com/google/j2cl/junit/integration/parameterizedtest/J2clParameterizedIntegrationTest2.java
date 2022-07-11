@@ -153,8 +153,8 @@ public class J2clParameterizedIntegrationTest2 extends IntegrationTestBase {
   }
 
   @Test
-  public void testFloatToIntegerTest() throws Exception {
-    String testClassName = "FloatToIntegerTest";
+  public void testThrowsInFloatToIntegerTest() throws Exception {
+    String testClassName = "ThrowsInFloatToIntegerTest";
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testClassName)
@@ -167,15 +167,12 @@ public class J2clParameterizedIntegrationTest2 extends IntegrationTestBase {
   }
 
   @Test
-  public void testPrimitiveAndObjectCastTest() throws Exception {
-    String testClassName = "PrimitiveAndObjectCastTest";
+  public void testIntegerToIntTest() throws Exception {
+    String testClassName = "IntegerToIntTest";
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testClassName)
             .addTestSuccess("testGroup0_test[0]")
-            .addTestSuccess("testGroup1_test[1]")
-            .addTestSuccess("testGroup2_test[2]")
-            .addJavaLogLineSequence("1, 1, 1", "2, 2, 2", "999, 999, 999")
             .build();
 
     List<String> logLines = runTest(testClassName);

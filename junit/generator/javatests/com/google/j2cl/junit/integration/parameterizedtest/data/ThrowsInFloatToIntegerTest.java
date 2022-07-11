@@ -24,11 +24,11 @@ import org.junit.runners.Parameterized.Parameters;
 
 /** TestCase used for integration testing for j2cl JUnit support. */
 @RunWith(Parameterized.class)
-public final class FloatToIntegerTest {
+public final class ThrowsInFloatToIntegerTest {
 
   @Parameters
-  public static Object[][] data() {
-    return new Object[][] {{1.2f}, {1.3f}};
+  public static Object[] data() {
+    return new Object[] {1.2f, 1.3f};
   }
 
   @Parameter public Integer input;

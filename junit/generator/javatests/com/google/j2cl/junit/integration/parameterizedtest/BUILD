@@ -32,7 +32,7 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:BeforeAndAfterParamWithFailingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ConstructorWithIncorrectParameterCount",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:IncorrectInjectedFieldCount",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:FloatToIntegerTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:PrimitiveAndObjectCastTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ThrowsInFloatToIntegerTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:IntegerToIntTest",
     ],
 )

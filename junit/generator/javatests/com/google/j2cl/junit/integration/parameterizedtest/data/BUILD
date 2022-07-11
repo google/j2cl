@@ -70,9 +70,9 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
-    name = "FloatToIntegerTest",
+    name = "ThrowsInFloatToIntegerTest",
 )
 
 j2cl_test_integration_test_data(
-    name = "PrimitiveAndObjectCastTest",
+    name = "IntegerToIntTest",
 )
