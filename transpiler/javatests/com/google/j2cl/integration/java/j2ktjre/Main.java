@@ -32,20 +32,16 @@ import javaemul.internal.EmulatedCharset;
 public class Main {
   static byte[] AEBC = {(byte) 0xC3, (byte) 0x84, (byte) 66, (byte) 67};
 
-  public static void main(String... args) {
-    try {
-      testMath();
-      testPrimitives();
-      testStringBuilder();
-      testReflect();
-      testJavaEmul();
-      testSystemTime();
-      testArrayCopy();
-      testHashCode();
-      testUtil();
-    } catch (Throwable e) {
-      throw new RuntimeException(e);
-    }
+  public static void main(String... args) throws Exception {
+    testMath();
+    testPrimitives();
+    testStringBuilder();
+    testReflect();
+    testJavaEmul();
+    testSystemTime();
+    testArrayCopy();
+    testHashCode();
+    testUtil();
   }
 
   private static void testMath() {
@@ -54,7 +50,7 @@ public class Main {
     assertEquals(s, new MathContext(5, RoundingMode.HALF_UP).toString());
   }
 
-  private static void testPrimitives() throws Throwable {
+  private static void testPrimitives() throws Exception {
     testBoolean();
     testInt();
     testLong();
