@@ -18,6 +18,7 @@ package com.google.j2cl.junit.apt;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.auto.common.MoreTypes;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.junit.async.Timeout;
@@ -27,6 +28,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
@@ -140,7 +142,7 @@ class JUnit4Validator extends BaseValidator {
   // TODO(b/235234450): clean up validation for different types of methods
   private boolean validateMethodReturnType(ExecutableElement executableElement) {
     if (isAnnotationPresent(executableElement, Parameters.class)) {
-      if (!isReturnTypeIterableOfArrays(executableElement)) {
+      if (!isReturnTypeIterableOrArray(executableElement)) {
         errorReporter.report(ErrorMessage.NON_ITERABLE_OR_ARRAY_RETURN, executableElement);
         return false;
       }
@@ -187,10 +189,16 @@ class JUnit4Validator extends BaseValidator {
     return isValid;
   }
 
-  private boolean isReturnTypeIterableOfArrays(ExecutableElement executableElement) {
-    TypeKind typeKind = executableElement.getReturnType().getKind();
-    return typeKind == TypeKind.ARRAY
+  private boolean isReturnTypeIterableOrArray(ExecutableElement executableElement) {
+
+    return isArrayOfObject(executableElement)
         || isIterable(MoreApt.asTypeElement(executableElement.getReturnType()));
+  }
+
+  private final boolean isArrayOfObject(ExecutableElement executableElement) {
+    TypeMirror typeMirror = executableElement.getReturnType();
+    return typeMirror.getKind() == TypeKind.ARRAY
+        && !MoreTypes.asArray(typeMirror).getComponentType().getKind().isPrimitive();
   }
 
   private final boolean isIterable(TypeElement type) {

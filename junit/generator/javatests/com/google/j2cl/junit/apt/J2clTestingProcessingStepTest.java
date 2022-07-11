@@ -181,6 +181,14 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
+  public void testJUnit4TestCasePrimitiveArrayReturnTypeParameterizedMethod() {
+    assertError(
+        ErrorMessage.NON_ITERABLE_OR_ARRAY_RETURN,
+        JUnit4TestCasePrimitiveArrayReturnTypeParameterizedMethod.class,
+        "data");
+  }
+
+  @Test
   public void testJUnit4InnerClass() {
     assertError(ErrorMessage.NON_TOP_LEVEL_TYPE, JUnit4TestCaseOnInnerClass.Inner.class);
   }
