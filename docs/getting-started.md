@@ -21,7 +21,7 @@ https://github.com/google/j2cl/tree/master/samples/helloworld
 
 Tip: If you are not familiar with using Java with Bazel, it might be helpful to
 start with the
-[Bazel Java Tutorial](https://docs.bazel.build/versions/master/tutorial/java.html)
+[Bazel Java Tutorial](https://bazel.build/tutorials/java)
 since J2CL closely follows Bazel Java idioms.
 
 Let's get started with cloning the repository and build a sample app from
