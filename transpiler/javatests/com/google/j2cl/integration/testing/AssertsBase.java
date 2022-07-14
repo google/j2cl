@@ -51,6 +51,13 @@ public class AssertsBase {
 
   public static void assertThrowsClassCastException(
       JsRunnable runnable, String qualifiedBinaryName) {
+    // If compiler inlines this method and if the cast checking is disabled for size testing (which
+    // is the default), then it will remove everything afterwards and result inaccurate size
+    // tracking.
+    // This statement will never be true, but the compiler is unable to determine that statically.
+    if (Math.random() > 1) {
+      return;
+    }
     try {
       runnable.run();
       fail("Should have thrown ClassCastException");
