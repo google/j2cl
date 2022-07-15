@@ -895,7 +895,7 @@ class JdtEnvironment {
       ktInfo =
           KtInfo.newBuilder()
               .setProperty(ktInfo.isProperty() || overriddenKtInfo.isProperty())
-              .setName(ktInfo.getName() == null ? overriddenKtInfo.getName() : null)
+              .setName(ktInfo.getName() == null ? overriddenKtInfo.getName() : ktInfo.getName())
               .build();
     }
 

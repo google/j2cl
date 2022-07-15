@@ -109,3 +109,51 @@ open class Subclass<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nati
   return 0
  }
 }
+
+open class Subsubclass<V>: nativekttypes.Subclass<V> {
+ constructor(v: V?): super(v)
+
+ open override fun renamedMethod(): kotlin.Int {
+  return super.renamedMethod()
+ }
+
+ open override val methodAsProperty: kotlin.Int get() {
+  return super.methodAsProperty
+ }
+
+ open override val nonGetMethodAsProperty: kotlin.Int get() {
+  return super.nonGetMethodAsProperty
+ }
+
+ open override val renamedMethodAsProperty: kotlin.Int get() {
+  return super.renamedMethodAsProperty
+ }
+
+ open override val getRenamedMethodAsProperty: kotlin.Int get() {
+  return super.getRenamedMethodAsProperty
+ }
+
+ open override val isMethodAsProperty: kotlin.Boolean get() {
+  return super.isMethodAsProperty
+ }
+
+ open override val getstartingmethodAsProperty: kotlin.Int get() {
+  return super.getstartingmethodAsProperty
+ }
+
+ open override fun interfaceMethod(v: V?): kotlin.Int {
+  return 0
+ }
+
+ open override fun renamedInterfaceMethod(v: V?): kotlin.Int {
+  return 0
+ }
+
+ open override val interfaceMethodAsProperty: kotlin.Int get() {
+  return 0
+ }
+
+ open override val renamedInterfaceMethodAsProperty: kotlin.Int get() {
+  return 0
+ }
+}
