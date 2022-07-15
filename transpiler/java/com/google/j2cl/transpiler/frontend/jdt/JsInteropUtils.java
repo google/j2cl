@@ -138,14 +138,6 @@ public final class JsInteropUtils {
         && JdtEnvironment.isStatic(methodBinding);
   }
 
-  /**
-   * Returns true if the method is a a JsMember because of immediate conditions (either it is
-   * directly annotated or it's enclosing class is annotated).
-   */
-  public static boolean isJsMember(IMethodBinding methodBinding) {
-    return getJsInfo(methodBinding).getJsMemberType() != JsMemberType.NONE;
-  }
-
   public static boolean isJsAsync(IBinding methodBinding) {
     return JsInteropAnnotationUtils.getJsAsyncAnnotation(methodBinding) != null;
   }
