@@ -1,0 +1,43 @@
+goog.module('nativekttypes.nativekt.KFunctionalInterfaceBridge$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const KFunctionalInterfaceRequiringBridge = goog.require('nativekttypes.nativekt.KFunctionalInterfaceRequiringBridge$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('nativekttypes.nativekt.KFunctionalInterfaceBridge.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template V
+ * @extends {KFunctionalInterfaceRequiringBridge<V>}
+ */
+class KFunctionalInterfaceBridge {
+ /** @template V @return {KFunctionalInterfaceBridge<V>} */
+ static $adapt(/** ?function(V):V */ fn) {
+  KFunctionalInterfaceBridge.$clinit();
+  return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
+ }
+ 
+ static $clinit() {
+  KFunctionalInterfaceBridge.$clinit = () =>{};
+  KFunctionalInterfaceBridge.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  KFunctionalInterfaceRequiringBridge.$markImplementor(ctor);
+  ctor.prototype.$implements__nativekttypes_nativekt_KFunctionalInterfaceBridge = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nativekttypes_nativekt_KFunctionalInterfaceBridge;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('nativekttypes.nativekt.KFunctionalInterfaceBridge.$LambdaAdaptor$impl');
+ }
+}
+KFunctionalInterfaceBridge.$markImplementor(/**@type {Function}*/ (KFunctionalInterfaceBridge));
+$Util.$setClassMetadataForInterface(KFunctionalInterfaceBridge, 'nativekttypes.nativekt.KFunctionalInterfaceBridge');
+
+exports = KFunctionalInterfaceBridge;
+
+//# sourceMappingURL=KFunctionalInterfaceBridge.js.map

@@ -1,0 +1,63 @@
+goog.module('nativekttypes.Main.$2$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeFunctionalInterfaceRequiringBridge = goog.require('nativekttypes.NativeFunctionalInterfaceRequiringBridge$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Main = goog.forwardDeclare('nativekttypes.Main$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {NativeFunctionalInterfaceRequiringBridge<?string>}
+ */
+class $2 extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {Main}*/
+  this.$outer_this__nativekttypes_Main_2;
+ }
+ /** @return {!$2} */
+ static $create__nativekttypes_Main(/** Main */ $outer_this) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__nativekttypes_Main_2__nativekttypes_Main($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__nativekttypes_Main_2__nativekttypes_Main(/** Main */ $outer_this) {
+  this.$outer_this__nativekttypes_Main_2 = $outer_this;
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {?string} */
+ m_foo__java_lang_String(/** ?string */ s) {
+  return s;
+ }
+ //Bridge method.
+ /** @override @return {?string} */
+ m_foo__java_lang_Object(/** ?string */ arg0) {
+  return this.m_foo__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ 
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+NativeFunctionalInterfaceRequiringBridge.$markImplementor($2);
+$Util.$setClassMetadata($2, 'nativekttypes.Main$2');
+
+exports = $2;
+
+//# sourceMappingURL=Main$2.js.map

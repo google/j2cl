@@ -43,6 +43,24 @@ open class Main {
   val i11: kotlin.Int = subclass!!.renamedInterfaceMethod("foo")
  }
 
+ open fun bridges() {
+  var o: nativekttypes.nativekt.KRequiringBridge? = nativekttypes.nativekt.KBridge()
+  o = object : nativekttypes.nativekt.KBridge() {}
+  o = nativekttypes.BridgeSubclass()
+  var fi: nativekttypes.nativekt.KFunctionalInterfaceRequiringBridge<kotlin.String?>?
+  fi = nativekttypes.nativekt.KFunctionalInterfaceBridge<kotlin.String?> { s: kotlin.String? ->
+
+   return@KFunctionalInterfaceBridge s
+  }
+  fi = object : nativekttypes.nativekt.KFunctionalInterfaceBridge<kotlin.String?> {
+   open override fun foo(s: kotlin.String?): kotlin.String? {
+    return s
+   }
+  }
+  val cast: nativekttypes.nativekt.KRequiringBridge? = o as nativekttypes.nativekt.KRequiringBridge?
+  val instanceofCheck: kotlin.Boolean = o is nativekttypes.nativekt.KRequiringBridge
+ }
+
  open fun typeLiterals() {
   val c1: java.lang.Class<*>? = nativekttypes.nativekt.KTopLevel::class.java
   val c2: java.lang.Class<*>? = nativekttypes.nativekt.KTopLevel.KNested::class.java
@@ -157,3 +175,5 @@ open class Subsubclass<V>: nativekttypes.Subclass<V> {
   return 0
  }
 }
+
+open class BridgeSubclass: nativekttypes.nativekt.KBridge() {}

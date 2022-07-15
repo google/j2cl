@@ -61,6 +61,25 @@ public class Main {
     int i11 = subclass.interfaceMethodToRename("foo");
   }
 
+  public void bridges() {
+    NativeRequiringBridge o = new NativeRequiringBridge();
+    o = new NativeRequiringBridge() {};
+    o = new BridgeSubclass();
+
+    NativeFunctionalInterfaceRequiringBridge<String> fi;
+    fi = s -> s;
+    fi =
+        new NativeFunctionalInterfaceRequiringBridge<String>() {
+          @Override
+          public String foo(String s) {
+            return s;
+          }
+        };
+
+    NativeRequiringBridge cast = (NativeRequiringBridge) o;
+    boolean instanceofCheck = o instanceof NativeRequiringBridge;
+  }
+
   public void typeLiterals() {
     Class<?> c1 = NativeTopLevel.class;
     Class<?> c2 = NativeTopLevel.Nested.class;
@@ -207,3 +226,5 @@ class Subsubclass<V> extends Subclass<V> {
     return 0;
   }
 }
+
+class BridgeSubclass extends NativeRequiringBridge {}

@@ -72,6 +72,29 @@
 [i10] => [i10] "i10"
 [int i11 = subclass.interfaceMethodToRename("foo");] => [let i11 = subclass.m_interfaceMethodToRename__java_lang_Object('foo');] "nativekttypes.Main.memberAccess"
 [i11] => [i11] "i11"
+[bridges] => [m_bridges__]
+[NativeRequiringBridge o = new NativeRequiringBridge();] => [let o = NativeRequiringBridge.$create__();] "nativekttypes.Main.bridges"
+[o] => [o] "o"
+[o = new NativeRequiringBridge() {};] => [o = $1.$create__nativekttypes_Main(this);] "nativekttypes.Main.bridges"
+[o = new BridgeSubclass();] => [o = BridgeSubclass.$create__();] "nativekttypes.Main.bridges"
+[NativeFunctionalInterfaceRequiringBridge<String> fi;] => [let /** NativeFunctionalInterfaceRequiringBridge<?string> */ fi;] "nativekttypes.Main.bridges"
+[fi] => [fi] "fi"
+[fi = s -> s;] => [fi = NativeFunctionalInterfaceRequiringBridge.$adapt((s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+   return s_1;
+  });] "nativekttypes.Main.bridges"
+[s] => [s] "s"
+[s -> s] => [let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));] "nativekttypes.Main.<lambda in bridges>"
+[s] => [s_1] "s"
+[s] => [return s_1;] "nativekttypes.Main.<lambda in bridges>"
+[fi =
+        new NativeFunctionalInterfaceRequiringBridge<String>() {
+...          }
+        };] => [fi = $2.$create__nativekttypes_Main(this);] "nativekttypes.Main.bridges"
+[NativeRequiringBridge cast = (NativeRequiringBridge) o;] => [let cast = /**@type {NativeRequiringBridge}*/ (o);] "nativekttypes.Main.bridges"
+[cast] => [cast] "cast"
+[boolean instanceofCheck = o instanceof NativeRequiringBridge;] => [let instanceofCheck = !$Equality.$same(o, null);] "nativekttypes.Main.bridges"
+[instanceofCheck] => [instanceofCheck] "instanceofCheck"
 [typeLiterals] => [m_typeLiterals__]
 [Class<?> c1 = NativeTopLevel.class;] => [let c1 = Class.$get(NativeTopLevel);] "nativekttypes.Main.typeLiterals"
 [c1] => [c1] "c1"

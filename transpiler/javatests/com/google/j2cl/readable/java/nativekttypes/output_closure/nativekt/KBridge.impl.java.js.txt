@@ -1,0 +1,39 @@
+goog.module('nativekttypes.nativekt.KBridge$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const KRequiringBridge = goog.require('nativekttypes.nativekt.KRequiringBridge$impl');
+
+class KBridge extends KRequiringBridge {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!KBridge} */
+ static $create__() {
+  KBridge.$clinit();
+  let $instance = new KBridge();
+  $instance.$ctor__nativekttypes_nativekt_KBridge__();
+  return $instance;
+ }
+ 
+ $ctor__nativekttypes_nativekt_KBridge__() {
+  this.$ctor__nativekttypes_nativekt_KRequiringBridge__();
+ }
+ 
+ static $clinit() {
+  KBridge.$clinit = () =>{};
+  KBridge.$loadModules();
+  KRequiringBridge.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KBridge;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(KBridge, 'nativekttypes.nativekt.KBridge');
+
+exports = KBridge;
+
+//# sourceMappingURL=KBridge.js.map

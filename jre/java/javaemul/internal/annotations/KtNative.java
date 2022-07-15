@@ -46,4 +46,10 @@ public @interface KtNative {
    * <p>The name must be fully-qualified, for top-level types but also for nested types.
    */
   String value();
+
+  /**
+   * The qualified name of the bridge type, which will be inserted between the native Kotlin type
+   * and its sub-types.
+   */
+  String bridgeWith() default "<none>";
 }

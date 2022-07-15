@@ -107,14 +107,24 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     render(".")
   } else {
     // Render the package name for this top-level type.
-    val packageName = typeDeclaration.ktPackageName
+    val packageName =
+      if (usage == TypeDescriptorUsage.SUPER_TYPE) {
+        typeDeclaration.ktBridgePackageName ?: typeDeclaration.ktPackageName
+      } else {
+        typeDeclaration.ktPackageName
+      }
     if (packageName != null) {
       renderPackageName(packageName)
       render(".")
     }
   }
 
-  val name = typeDeclaration.ktSimpleName
+  val name =
+    if (usage == TypeDescriptorUsage.SUPER_TYPE) {
+      typeDeclaration.ktBridgeSimpleName ?: typeDeclaration.ktSimpleName
+    } else {
+      typeDeclaration.ktSimpleName
+    }
   renderIdentifier(name)
 
   if (usage != TypeDescriptorUsage.QUALIFIED_NAME) {

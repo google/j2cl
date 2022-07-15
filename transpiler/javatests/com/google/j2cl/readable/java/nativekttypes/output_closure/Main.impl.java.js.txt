@@ -5,6 +5,12 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let BridgeSubclass = goog.forwardDeclare('nativekttypes.BridgeSubclass$impl');
+let $1 = goog.forwardDeclare('nativekttypes.Main.$1$impl');
+let $2 = goog.forwardDeclare('nativekttypes.Main.$2$impl');
+let NativeFunctionalInterfaceRequiringBridge = goog.forwardDeclare('nativekttypes.NativeFunctionalInterfaceRequiringBridge$impl');
+let NativeRequiringBridge = goog.forwardDeclare('nativekttypes.NativeRequiringBridge$impl');
 let NativeTopLevel = goog.forwardDeclare('nativekttypes.NativeTopLevel$impl');
 let Inner = goog.forwardDeclare('nativekttypes.NativeTopLevel.Inner$impl');
 let Nested = goog.forwardDeclare('nativekttypes.NativeTopLevel.Nested$impl');
@@ -66,6 +72,20 @@ class Main extends j_l_Object {
   let i11 = subclass.m_interfaceMethodToRename__java_lang_Object('foo');
  }
  
+ m_bridges__() {
+  let o = NativeRequiringBridge.$create__();
+  o = $1.$create__nativekttypes_Main(this);
+  o = BridgeSubclass.$create__();
+  let /** NativeFunctionalInterfaceRequiringBridge<?string> */ fi;
+  fi = NativeFunctionalInterfaceRequiringBridge.$adapt((s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+   return s_1;
+  });
+  fi = $2.$create__nativekttypes_Main(this);
+  let cast = /**@type {NativeRequiringBridge}*/ (o);
+  let instanceofCheck = !$Equality.$same(o, null);
+ }
+ 
  m_typeLiterals__() {
   let c1 = Class.$get(NativeTopLevel);
   let c2 = Class.$get(Nested);
@@ -99,6 +119,12 @@ class Main extends j_l_Object {
  static $loadModules() {
   Class = goog.module.get('java.lang.Class$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  BridgeSubclass = goog.module.get('nativekttypes.BridgeSubclass$impl');
+  $1 = goog.module.get('nativekttypes.Main.$1$impl');
+  $2 = goog.module.get('nativekttypes.Main.$2$impl');
+  NativeFunctionalInterfaceRequiringBridge = goog.module.get('nativekttypes.NativeFunctionalInterfaceRequiringBridge$impl');
+  NativeRequiringBridge = goog.module.get('nativekttypes.NativeRequiringBridge$impl');
   NativeTopLevel = goog.module.get('nativekttypes.NativeTopLevel$impl');
   Inner = goog.module.get('nativekttypes.NativeTopLevel.Inner$impl');
   Nested = goog.module.get('nativekttypes.NativeTopLevel.Nested$impl');

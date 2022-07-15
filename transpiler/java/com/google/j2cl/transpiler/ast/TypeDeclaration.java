@@ -568,6 +568,35 @@ public abstract class TypeDeclaration
     return qualifiedName.substring(0, qualifiedName.lastIndexOf('.'));
   }
 
+  @Nullable
+  @Memoized
+  public String getKtBridgeSimpleName() {
+    KtTypeInfo ktTypeInfo = getKtTypeInfo();
+    String qualifiedName = ktTypeInfo != null ? ktTypeInfo.getBridgeQualifiedName() : null;
+    return qualifiedName != null
+        ? qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1)
+        : null;
+  }
+
+  @Nullable
+  @Memoized
+  public String getKtBridgePackageName() {
+    KtTypeInfo ktTypeInfo = getKtTypeInfo();
+    if (ktTypeInfo == null) {
+      return null;
+    }
+
+    TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDeclaration();
+    if (enclosingTypeDeclaration != null) {
+      return enclosingTypeDeclaration.getKtBridgePackageName();
+    }
+
+    String qualifiedName = ktTypeInfo.getBridgeQualifiedName();
+    return qualifiedName != null
+        ? qualifiedName.substring(0, qualifiedName.lastIndexOf('.'))
+        : null;
+  }
+
   @Memoized
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {

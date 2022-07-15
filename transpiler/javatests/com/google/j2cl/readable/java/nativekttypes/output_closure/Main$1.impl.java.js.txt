@@ -1,0 +1,44 @@
+goog.module('nativekttypes.Main.$1$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeRequiringBridge = goog.require('nativekttypes.NativeRequiringBridge$impl');
+
+let Main = goog.forwardDeclare('nativekttypes.Main$impl');
+
+class $1 extends NativeRequiringBridge {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {Main}*/
+  this.$outer_this__nativekttypes_Main_1;
+ }
+ /** @return {!$1} */
+ static $create__nativekttypes_Main(/** Main */ $outer_this) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__nativekttypes_Main_1__nativekttypes_Main($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__nativekttypes_Main_1__nativekttypes_Main(/** Main */ $outer_this) {
+  this.$outer_this__nativekttypes_Main_1 = $outer_this;
+  this.$ctor__nativekttypes_NativeRequiringBridge__();
+ }
+ 
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  NativeRequiringBridge.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($1, 'nativekttypes.Main$1');
+
+exports = $1;
+
+//# sourceMappingURL=Main$1.js.map
