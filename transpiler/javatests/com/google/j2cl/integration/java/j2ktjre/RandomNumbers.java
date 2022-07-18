@@ -15,18 +15,16 @@
  */
 package j2ktjre;
 
-public class Main {
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
-  public static void main(String... args) throws Exception {
-    Math.testMath();
-    Primitives.testPrimitives();
-    Strings.testString();
-    Strings.testStringBuilder();
-    Strings.testJavaEmul();
-    ReflectArray.testReflect();
-    LangSystem.testSystemTime();
-    LangSystem.testArrayCopy();
-    LangSystem.testHashCode();
-    RandomNumbers.testRandom();
+import java.util.Random;
+
+public class RandomNumbers {
+
+  static void testRandom() {
+    Random random = new Random(123);
+    int randomInt = random.nextInt();
+    random.setSeed(123);
+    assertEquals(randomInt, random.nextInt());
   }
 }

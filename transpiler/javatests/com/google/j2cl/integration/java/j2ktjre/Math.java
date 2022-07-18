@@ -15,18 +15,16 @@
  */
 package j2ktjre;
 
-public class Main {
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
-  public static void main(String... args) throws Exception {
-    Math.testMath();
-    Primitives.testPrimitives();
-    Strings.testString();
-    Strings.testStringBuilder();
-    Strings.testJavaEmul();
-    ReflectArray.testReflect();
-    LangSystem.testSystemTime();
-    LangSystem.testArrayCopy();
-    LangSystem.testHashCode();
-    RandomNumbers.testRandom();
+import java.math.MathContext;
+import java.math.RoundingMode;
+
+public class Math {
+
+  static void testMath() {
+    String s = "precision=5 roundingMode=HALF_UP";
+    assertEquals(new MathContext(5, RoundingMode.HALF_UP), new MathContext(s));
+    assertEquals(s, new MathContext(5, RoundingMode.HALF_UP).toString());
   }
 }
