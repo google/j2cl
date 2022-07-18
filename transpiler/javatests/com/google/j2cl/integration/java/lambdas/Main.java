@@ -205,6 +205,7 @@ public class Main {
         assertTrue(x[0] == 1042);
       }
     }
+    new A().a();
   }
 
   private static void testNestedLambdas() {
