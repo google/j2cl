@@ -21,12 +21,15 @@ import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 
 // TODO(b/223774683): Java Number should implement Serializable. Kotlin Number doesn't.
-@KtNative("kotlin.Number")
+/**
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Number.html">the official Java
+ * API doc</a> for details.
+ */
+@KtNative(value = "kotlin.Number", bridgeWith = "javaemul.lang.JavaNumber")
 public abstract class Number {
 
   public Number() {}
 
-  // TODO(b/222269323): Make this abstract to match Kotlin.
   @KtName("toByte")
   public native byte byteValue();
 
@@ -42,7 +45,6 @@ public abstract class Number {
   @KtName("toLong")
   public abstract long longValue();
 
-  // TODO(b/222269323): Make this abstract to match Kotlin.
   @KtName("toShort")
   public native short shortValue();
 }
