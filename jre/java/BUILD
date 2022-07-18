@@ -181,7 +181,6 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     "java/util/Comparators.java",  # Comparator
     "java/util/Objects.java",  # java.util.Arrays
     "java/util/Optional.java",  # java.util.function.Predicate, java.util.Objects
-    "java/util/function/BinaryOperator.java",  # Comparator
     "java/util/function/Predicate.java",  # java.util.Objects
     "java/util/logging/Logger.java",  # LogManager
     "java/util/logging/LogManager.java",  # HashMap, List

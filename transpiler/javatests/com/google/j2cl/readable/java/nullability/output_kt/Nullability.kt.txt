@@ -132,13 +132,13 @@ open class Nullability {
 
  open class StringList: kotlin.collections.ArrayList<kotlin.String?>() {}
 
- open class StringComparator: java.util.Comparator<kotlin.String> {
+ open class StringComparator: kotlin.Comparator<kotlin.String> {
   open override fun compare(a: kotlin.String, b: kotlin.String): kotlin.Int {
    return 0
   }
  }
 
- open class NullableStringComparator: java.util.Comparator<kotlin.String?> {
+ open class NullableStringComparator: kotlin.Comparator<kotlin.String?> {
   open override fun compare(a: kotlin.String?, b: kotlin.String?): kotlin.Int {
    return 0
   }

@@ -28,5 +28,6 @@ public class Main {
     LangSystem.testArrayCopy();
     LangSystem.testHashCode();
     RandomNumbers.testRandom();
+    Array.testArrays();
   }
 }
