@@ -36,6 +36,10 @@ import com.google.j2cl.transpiler.ast.TryStatement
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.WhileStatement
 
+internal fun Renderer.renderStatements(statements: List<Statement>) {
+  renderStartingWithNewLines(statements) { renderStatement(it) }
+}
+
 fun Renderer.renderStatement(statement: Statement) {
   when (statement) {
     is AssertStatement -> renderAssertStatement(statement)
@@ -71,7 +75,7 @@ private fun Renderer.renderAssertStatement(assertStatement: AssertStatement) {
 }
 
 private fun Renderer.renderBlock(block: Block) {
-  renderInCurlyBrackets { renderStartingWithNewLines(block.statements) { renderStatement(it) } }
+  renderInCurlyBrackets { renderStatements(block.statements) }
 }
 
 private fun Renderer.renderBreakStatement(breakStatement: BreakStatement) {
@@ -161,9 +165,7 @@ private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
 private fun Renderer.renderSwitchCase(switchCase: SwitchCase) {
   if (switchCase.isDefault) render("else") else renderExpression(switchCase.caseExpression)
   render(" -> ")
-  renderInCurlyBrackets {
-    renderStartingWithNewLines(switchCase.statements) { renderStatement(it) }
-  }
+  renderInCurlyBrackets { renderStatements(switchCase.statements) }
 }
 
 private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {

@@ -188,11 +188,10 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
       renderCommaSeparated(parameters) { renderVariable(it) }
       render(" ->")
     }
-    renderNewLine()
     val returnLabelIdentifier =
       functionalInterface.typeDeclaration.ktBridgeSimpleName ?: functionalInterface.simpleSourceName
     renderWithReturnLabelIdentifier(returnLabelIdentifier) {
-      renderStartingWithNewLines(functionExpression.body.statements) { renderStatement(it) }
+      renderStatements(functionExpression.body.statements)
     }
   }
 }

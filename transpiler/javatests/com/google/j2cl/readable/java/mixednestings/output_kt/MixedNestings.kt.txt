@@ -26,12 +26,10 @@ open class MixedNestings {
      val i: mixednestings.MyInterface? = object : mixednestings.MyInterface {
       open override fun `fun`(a: kotlin.Int): kotlin.Int {
        val ii: mixednestings.MyInterface? = mixednestings.MyInterface { n: kotlin.Int ->
-
         this@MixedNestings.mm()
         this@A.aa()
         this@___1B.bb()
         val iii: mixednestings.MyInterface? = mixednestings.MyInterface { m: kotlin.Int ->
-
          this@MixedNestings.mm()
          this@A.aa()
          this@___1B.bb()

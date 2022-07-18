@@ -22,7 +22,6 @@ open class Main {
 
  open fun testAsyncLambdas() {
   val i: jsasync.Main.AsyncInterface? = jsasync.Main.AsyncInterface {
-
    return@AsyncInterface jsasync.Main.Promise.resolve<kotlin.Int?>(jsasync.Main.await<kotlin.Int?>(jsasync.Main.Promise.resolve<kotlin.Int?>(kotlin.Int.valueOf(5))))
   }
   val o: jsasync.Main.BaseInterface? = object : jsasync.Main.BaseInterface {
@@ -31,7 +30,6 @@ open class Main {
    }
   }
   val j: jsasync.Main.AsyncJsFunctionInterface? = jsasync.Main.AsyncJsFunctionInterface {
-
    return@AsyncJsFunctionInterface jsasync.Main.Promise.resolve<kotlin.Int?>(jsasync.Main.await<kotlin.Int?>(jsasync.Main.Promise.resolve<kotlin.Int?>(kotlin.Int.valueOf(5))))
   }
   val optimizableJsFunction: jsasync.Main.JsFunctionInterface? = object : jsasync.Main.JsFunctionInterface {

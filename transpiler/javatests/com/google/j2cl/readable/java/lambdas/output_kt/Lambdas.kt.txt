@@ -13,21 +13,18 @@ open class Lambdas {
 
  open fun testLambdaExpressionStyle() {
   this.call(lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
    return@FunctionalInterface i + 1
   }, 10)
  }
 
  open fun testLambdaBlockStyle() {
   this.call(lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
    return@FunctionalInterface i + 2
   }, 10)
  }
 
  open fun testLambdaCaptureField() {
   this.call(lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
    return@FunctionalInterface this.field + i + 1
   }, 10)
  }
@@ -35,7 +32,6 @@ open class Lambdas {
  open fun testLambdaCaptureLocal() {
   val x: kotlin.Int = 1
   this.call(lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
    return@FunctionalInterface x + i + 1
   }, 10)
  }
@@ -43,7 +39,6 @@ open class Lambdas {
  open fun testLambdaCaptureFieldAndLocal() {
   val x: kotlin.Int = 1
   this.call(lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
    val y: kotlin.Int = 1
    return@FunctionalInterface x + y + this.field + i + 1
   }, 10)
@@ -53,7 +48,6 @@ open class Lambdas {
 
  open fun testLambdaCallOuterFunction() {
   this.call(lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
    this.funOuter()
    this.funOuter()
    this@Lambdas.funOuter()
@@ -63,9 +57,7 @@ open class Lambdas {
 
  open fun testNestedLambdas() {
   this.call(lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
    return@FunctionalInterface this.call(lambdas.Lambdas.FunctionalInterface { j: kotlin.Int ->
-
     return@FunctionalInterface j
    }, 20)
   }, 10)
@@ -73,7 +65,6 @@ open class Lambdas {
 
  open fun testReturnLabelNameConflictKotlin() {
   this.call(lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
    FunctionalInterface_1@ do {
     return@FunctionalInterface i
    } while (false)
@@ -82,7 +73,6 @@ open class Lambdas {
 
  open fun <T> testInstanceMethodTypeVariableThroughLambda() {
   val wrapped: lambdas.Lambdas.Functional<T>? = lambdas.Lambdas.Functional<T> { f: lambdas.Lambdas.Functional<T>? ->
-
    return@Functional object : lambdas.Lambdas.Functional<T> {
     open override fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
      return null
@@ -105,44 +95,36 @@ open class Lambdas {
 
  open fun <T: kotlin.Enum<T>?> testLambdaWithGenerics() {
   this.callWithTypeVariable<kotlin.Error?>(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Error?> { i: kotlin.Error? ->
-
    return@GenericFunctionalInterface i
   }, kotlin.Error())
   this.callParameterized(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Error?> { i_1: kotlin.Error? ->
-
    return@GenericFunctionalInterface i_1
   }, kotlin.Error())
   lambdas.Lambdas.callTypeVariableWithBounds<T>(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Enum<T>?> { i_2: kotlin.Enum<T>? ->
-
    return@GenericFunctionalInterface i_2
   }, null as kotlin.Enum<T>?)
   this.callWithBiFunction<kotlin.Any?>(lambdas.Lambdas.BiFunction<kotlin.Any?, kotlin.String?, kotlin.Double?> { x: kotlin.Any?, y: kotlin.String? ->
-
    throw kotlin.RuntimeException()
   })
   val f: lambdas.Lambdas.Function<in T?, *>? = lambdas.Lambdas.Function { item: T? ->
-
    return@Function kotlin.Long.valueOf(1L)
   }
  }
 
  open fun testLambdaReturningVoidAsExpression() {
   val runner: lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid? = lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid {
-
    kotlin.Any()
   }
  }
 
  open fun testAnonymousInsideLambda() {
   val runner: lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid? = lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid {
-
    object : kotlin.Any() {}
   }
  }
 
  open fun testDefaultMethodsInIntersectionAdaptor() {
   val o: kotlin.Any? = lambdas.Lambdas.BiFunction<kotlin.String?, kotlin.String?, kotlin.String?> { t: kotlin.String?, u: kotlin.String? ->
-
    return@BiFunction null
   } as lambdas.Lambdas.BiFunction<kotlin.String?, kotlin.String?, kotlin.String?>? /* & lambdas.Lambdas.MarkerWithDefaultMethod? */
  }
@@ -151,7 +133,6 @@ open class Lambdas {
   @kotlin.jvm.JvmStatic
   fun testLambdaInStaticContext() {
    val f: lambdas.Lambdas.FunctionalInterface? = lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
     return@FunctionalInterface i
    }
   }
@@ -159,7 +140,6 @@ open class Lambdas {
   @kotlin.jvm.JvmStatic
   fun <T> testStaticMethodTypeVariableThroughLambda() {
    val wrapped: lambdas.Lambdas.Functional<T>? = lambdas.Lambdas.Functional<T> { f: lambdas.Lambdas.Functional<T>? ->
-
     return@Functional object : lambdas.Lambdas.Functional<T> {
      open override fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
       return null
@@ -181,7 +161,6 @@ open class Lambdas {
   @kotlin.jvm.JvmStatic
   fun testLambdaCallingStaticMethod() {
    val f: lambdas.Lambdas.Function<kotlin.Any?, *>? = lambdas.Lambdas.Function { l: kotlin.Any? ->
-
     return@Function lambdas.Lambdas.m()
    }
   }
@@ -199,15 +178,12 @@ open class Lambdas {
   @kotlin.jvm.JvmStatic
   fun testJsInteropLambdas() {
    val thenable: lambdas.Lambdas.Thenable<kotlin.String?>? = lambdas.Lambdas.Thenable<kotlin.String?> { f1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.String?>?, f2: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>? ->
-
     f1!!.apply(null)
    }
    val otherThenable: lambdas.Lambdas.AnotherThenable<kotlin.String?>? = lambdas.Lambdas.AnotherThenable<kotlin.String?> { f1_1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.String?>?, f2_1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>? ->
-
     f1_1!!.apply(null)
    }
    val stringJsSupplier: lambdas.Lambdas.JsSupplier<kotlin.Int?>? = lambdas.Lambdas.JsSupplier<kotlin.Int?> {
-
     return@JsSupplier kotlin.Int.valueOf(1)
    }
    stringJsSupplier!!.get()
@@ -219,15 +195,12 @@ open class Lambdas {
   @kotlin.jvm.JvmStatic
   fun <U, V> testIntersectionTyping() {
    var o: kotlin.Any? = lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?> { x: kotlin.String? ->
-
     return@GenericFunctionalInterface x
    } as lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?>? /* & lambdas.Lambdas.JustADefaultT<kotlin.Number?>? */
    o = lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?> { x_1: kotlin.String? ->
-
     return@GenericFunctionalInterface x_1
    } as lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?>? /* & lambdas.Lambdas.JustADefaultS<kotlin.Number?>? */
    o = lambdas.Lambdas.GenericFunctionalInterface<U> { x_2: U? ->
-
     return@GenericFunctionalInterface x_2
    } as lambdas.Lambdas.GenericFunctionalInterface<U>? /* & lambdas.Lambdas.JustADefaultS<V>? */
   }
@@ -250,7 +223,6 @@ open class Lambdas {
 
   fun <V> andThen(after: lambdas.Lambdas.Function<in R?, out V?>?): lambdas.Lambdas.BiFunction<T, U, V>? {
    return lambdas.Lambdas.BiFunction<T, U, V> { t: T?, u: U? ->
-
     return@BiFunction after!!.apply(this.apply(t, u))
    }
   }
@@ -263,7 +235,6 @@ open class Lambdas {
    @kotlin.jvm.JvmStatic
    fun <T> identity(): lambdas.Lambdas.Function<T, T>? {
     return lambdas.Lambdas.Function<T, T> { t: T? ->
-
      return@Function t
     }
    }
@@ -283,7 +254,6 @@ open class Lambdas {
  open class LambdaInSubClass: lambdas.Lambdas.Parent() {
   open fun testLambdaInSubclass() {
    val l: lambdas.Lambdas.FunctionalInterface? = lambdas.Lambdas.FunctionalInterface { i: kotlin.Int ->
-
     this.funInParent()
     this.funInParent()
     this@LambdaInSubClass.funInParent()

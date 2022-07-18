@@ -48,10 +48,8 @@ private fun Renderer.renderMethod(method: Method) {
     if (!method.isConstructor || statements.isNotEmpty()) {
       render(" ")
       if (method.descriptor.isKtProperty) render("get() ")
-      renderInCurlyBrackets {
-        renderWithReturnLabelIdentifier(null) {
-          renderStartingWithNewLines(statements) { renderStatement(it) }
-        }
+      renderWithReturnLabelIdentifier(null) {
+        renderInCurlyBrackets { renderStatements(statements) }
       }
     }
   }
