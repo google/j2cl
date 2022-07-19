@@ -551,50 +551,27 @@ public abstract class TypeDeclaration
         : getSimpleSourceName();
   }
 
-  @Nullable
   @Memoized
-  public String getKtPackageName() {
+  public String getKtQualifiedName() {
     KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    if (ktTypeInfo == null) {
-      return getPackageName();
-    }
-
-    TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDeclaration();
-    if (enclosingTypeDeclaration != null) {
-      return enclosingTypeDeclaration.getKtPackageName();
-    }
-
-    String qualifiedName = ktTypeInfo.getQualifiedName();
-    return qualifiedName.substring(0, qualifiedName.lastIndexOf('.'));
+    return ktTypeInfo == null ? getQualifiedSourceName() : ktTypeInfo.getQualifiedName();
   }
 
   @Nullable
   @Memoized
   public String getKtBridgeSimpleName() {
-    KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    String qualifiedName = ktTypeInfo != null ? ktTypeInfo.getBridgeQualifiedName() : null;
-    return qualifiedName != null
-        ? qualifiedName.substring(qualifiedName.lastIndexOf('.') + 1)
-        : null;
+    String ktBridgeQualifiedName = getKtBridgeQualifiedName();
+    if (ktBridgeQualifiedName == null) {
+      return null;
+    }
+    return ktBridgeQualifiedName.substring(ktBridgeQualifiedName.lastIndexOf('.') + 1);
   }
 
   @Nullable
   @Memoized
-  public String getKtBridgePackageName() {
+  public String getKtBridgeQualifiedName() {
     KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    if (ktTypeInfo == null) {
-      return null;
-    }
-
-    TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDeclaration();
-    if (enclosingTypeDeclaration != null) {
-      return enclosingTypeDeclaration.getKtBridgePackageName();
-    }
-
-    String qualifiedName = ktTypeInfo.getBridgeQualifiedName();
-    return qualifiedName != null
-        ? qualifiedName.substring(0, qualifiedName.lastIndexOf('.'))
-        : null;
+    return ktTypeInfo != null ? ktTypeInfo.getBridgeQualifiedName() : null;
   }
 
   @Memoized
