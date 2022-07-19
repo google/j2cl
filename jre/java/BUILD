@@ -139,12 +139,6 @@ package_sources(
 # When removing a file from this list, remove other files that were only
 # excluded because of it. If that's not possible add a new bug link.
 J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
-    "java/io/BufferedWriter.java",  # java.io.Writer
-    "java/io/OutputStreamWriter.java",  # java.io.Writer
-    "java/io/Writer.java",  # java.util.Objects
-] + [
-    "java/lang/StackTraceElement.java",  # java.util.Objects
-] + [
     "java/math/BigDecimal.java",  # TODO(b/237503140): Make BigDecimal/BigInteger work
     "java/math/BigInteger.java",  # TODO(b/237503140): Make BigDecimal/BigInteger work
     "java/math/BitLevel.java",  # BigInteger
@@ -175,13 +169,6 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     "java/util/TreeSet.java",
     "java/util/Vector.java",
 ] + [
-    "java/util/Arrays.java",  # TODO(b/233058849): Add java.util.Arrays
-    "java/util/BitSet.java",  # java.util.Arrays; but also resizable arrays
-    "java/util/Comparator.java",  # TODO(b/237414940): Add java.util.Comparator
-    "java/util/Comparators.java",  # Comparator
-    "java/util/Objects.java",  # java.util.Arrays
-    "java/util/Optional.java",  # java.util.function.Predicate, java.util.Objects
-    "java/util/function/Predicate.java",  # java.util.Objects
     "java/util/logging/Logger.java",  # LogManager
     "java/util/logging/LogManager.java",  # HashMap, List
 ] + [
@@ -208,9 +195,6 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     "java/util/stream/StreamImpl.java",
     "java/util/stream/StreamSupport.java",
     "java/util/stream/TerminatableStream.java",
-] + [
-    "java/security/MessageDigest.java",  # java.security.SHA256Digest
-    "java/security/SHA256Digest.java",  # java.util.Arrays
 ]
 
 package_sources(
@@ -232,6 +216,7 @@ package_sources(
             "java/util/logging/SimpleConsoleLogHandler.java",  # J2KT doesn't need it.
             # Excessive String concat that only JS should use. Also http://b/224969395.
             "java/lang/StringBuffer.java",
+            "java/util/Comparators.java",  # J2KT Comparator doesn't need it
         ] + J2KT_JRE_TEMPORARILY_EXCLUDED_FILES,
     ),
     super_srcs = glob(
