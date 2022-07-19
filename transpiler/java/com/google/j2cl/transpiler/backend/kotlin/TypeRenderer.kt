@@ -28,7 +28,7 @@ fun Renderer.renderType(type: Type) {
   // Don't render KtNative types. We should never see them except readables.
   if (type.declaration.isKtNative) {
     render("// native class ")
-    renderIdentifier(type.declaration.simpleSourceName)
+    renderIdentifier(type.declaration.ktSimpleName)
     return
   }
 
@@ -58,7 +58,7 @@ fun Renderer.renderType(type: Type) {
 }
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
-  renderIdentifier(declaration.simpleSourceName)
+  renderIdentifier(declaration.ktSimpleName)
   declaration.renderedTypeParameterDescriptors
     .takeIf { it.isNotEmpty() && !it.any { it.isInferred } }
     ?.let { parameters -> renderTypeParameters(parameters) }

@@ -53,12 +53,27 @@ public class Main {
     Object nestedStaticField = nested.staticField;
     nested.staticField = "foo";
 
+    NativeTopLevel.Nested<String> nestedAnonynous = new NativeTopLevel.Nested<>("foo") {};
+
     NativeTopLevel<String>.Inner<String> inner = topLevel.new Inner<String>("foo");
 
     Subclass<String> subclass = new Subclass<>("foo");
     int i9 = subclass.methodToRename();
     int i10 = subclass.interfaceMethod("foo");
     int i11 = subclass.interfaceMethodToRename("foo");
+
+    NativeInterface.NativeFunctionalInterface interfaceAnonymousSubclass =
+        new NativeInterface.NativeFunctionalInterface() {
+          public void run() {}
+        };
+
+    NativeInterface.NativeFunctionalInterface interfaceExpression =
+        () -> {
+          KFunctionalInterface: // Test name collision of the label.
+          {
+            return; // Test pointing to right type in return.
+          }
+        };
   }
 
   public void bridges() {

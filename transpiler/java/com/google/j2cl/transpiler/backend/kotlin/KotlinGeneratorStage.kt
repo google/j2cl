@@ -62,7 +62,7 @@ private fun CompilationUnit.buildForbiddenNamesSet(): Set<String> = buildSet {
       override fun enterFunctionExpression(functionExpression: FunctionExpression): Boolean {
         // Functional interface names are forbidden because they are rendered in return statement
         // labels.
-        add(functionExpression.typeDescriptor.functionalInterface!!.simpleSourceName)
+        add(functionExpression.typeDescriptor.functionalInterface!!.typeDeclaration.ktSimpleName)
         return true
       }
     }

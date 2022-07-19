@@ -189,7 +189,7 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
       render(" ->")
     }
     val returnLabelIdentifier =
-      functionalInterface.typeDeclaration.ktBridgeSimpleName ?: functionalInterface.simpleSourceName
+      with(functionalInterface.typeDeclaration) { ktBridgeSimpleName ?: ktSimpleName }
     renderWithReturnLabelIdentifier(returnLabelIdentifier) {
       renderStatements(functionExpression.body.statements)
     }
@@ -452,7 +452,7 @@ private fun Renderer.renderThisReference(thisReference: ThisReference) {
 
 private fun Renderer.renderLabelReference(typeDescriptor: DeclaredTypeDescriptor) {
   render("@")
-  renderIdentifier(typeDescriptor.typeDeclaration.simpleSourceName)
+  renderIdentifier(typeDescriptor.typeDeclaration.ktSimpleName)
 }
 
 private fun Renderer.renderVariableDeclarationExpression(

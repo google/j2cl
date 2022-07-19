@@ -1,0 +1,49 @@
+goog.module('nativekttypes.NativeInterface.NativeFunctionalInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeFunctionalInterface = goog.require('nativekttypes.NativeInterface.NativeFunctionalInterface$impl');
+
+/**
+ * @implements {NativeFunctionalInterface}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ 
+ constructor(/** ?function():void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():void}*/
+  this.f_fn__nativekttypes_NativeInterface_NativeFunctionalInterface_$LambdaAdaptor;
+  this.$ctor__nativekttypes_NativeInterface_NativeFunctionalInterface_$LambdaAdaptor__nativekttypes_NativeInterface_NativeFunctionalInterface_$JsFunction(fn);
+ }
+ 
+ $ctor__nativekttypes_NativeInterface_NativeFunctionalInterface_$LambdaAdaptor__nativekttypes_NativeInterface_NativeFunctionalInterface_$JsFunction(/** ?function():void */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__nativekttypes_NativeInterface_NativeFunctionalInterface_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ m_run__() {
+  {
+   let $function = this.f_fn__nativekttypes_NativeInterface_NativeFunctionalInterface_$LambdaAdaptor;
+   $function();
+  }
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
+}
+NativeFunctionalInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'nativekttypes.NativeInterface$NativeFunctionalInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=NativeInterface$NativeFunctionalInterface$$LambdaAdaptor.js.map

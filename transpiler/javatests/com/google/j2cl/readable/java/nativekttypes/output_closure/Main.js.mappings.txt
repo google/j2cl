@@ -62,6 +62,8 @@
 [Object nestedStaticField = nested.staticField;] => [let nestedStaticField = Nested.f_staticField__nativekttypes_NativeTopLevel_Nested;] "nativekttypes.Main.memberAccess"
 [nestedStaticField] => [nestedStaticField] "nestedStaticField"
 [nested.staticField = "foo";] => [Nested.f_staticField__nativekttypes_NativeTopLevel_Nested = 'foo';] "nativekttypes.Main.memberAccess"
+[NativeTopLevel.Nested<String> nestedAnonynous = new NativeTopLevel.Nested<>("foo") {};] => [let nestedAnonynous = $1.$create__nativekttypes_Main__java_lang_String(this, 'foo');] "nativekttypes.Main.memberAccess"
+[nestedAnonynous] => [nestedAnonynous] "nestedAnonynous"
 [NativeTopLevel<String>.Inner<String> inner = topLevel.new Inner<String>("foo");] => [let inner = /**@type {!Inner<?string, ?string>}*/ (Inner.$create__nativekttypes_NativeTopLevel__java_lang_Object(topLevel, 'foo'));] "nativekttypes.Main.memberAccess"
 [inner] => [inner] "inner"
 [Subclass<String> subclass = new Subclass<>("foo");] => [let subclass = /**@type {!Subclass<?string>}*/ (new Subclass('foo'));] "nativekttypes.Main.memberAccess"
@@ -72,10 +74,30 @@
 [i10] => [i10] "i10"
 [int i11 = subclass.interfaceMethodToRename("foo");] => [let i11 = subclass.m_interfaceMethodToRename__java_lang_Object('foo');] "nativekttypes.Main.memberAccess"
 [i11] => [i11] "i11"
+[NativeInterface.NativeFunctionalInterface interfaceAnonymousSubclass =
+        new NativeInterface.NativeFunctionalInterface() {
+          public void run() {}
+        };] => [let interfaceAnonymousSubclass = $2.$create__nativekttypes_Main(this);] "nativekttypes.Main.memberAccess"
+[interfaceAnonymousSubclass] => [interfaceAnonymousSubclass] "interfaceAnonymousSubclass"
+[NativeInterface.NativeFunctionalInterface interfaceExpression =
+        () -> {
+...          }
+        };] => [let interfaceExpression = NativeFunctionalInterface.$adapt(() =>{
+   KFunctionalInterface: {
+...   }
+  });] "nativekttypes.Main.memberAccess"
+[interfaceExpression] => [interfaceExpression] "interfaceExpression"
+[KFunctionalInterface: // Test name collision of the label.
+          {
+            return; // Test pointing to right type in return.
+          }] => [KFunctionalInterface: {
+    return;
+   }] "nativekttypes.Main.<lambda in memberAccess>"
+[return;] => [return;] "nativekttypes.Main.<lambda in memberAccess>"
 [bridges] => [m_bridges__]
 [NativeRequiringBridge o = new NativeRequiringBridge();] => [let o = NativeRequiringBridge.$create__();] "nativekttypes.Main.bridges"
 [o] => [o] "o"
-[o = new NativeRequiringBridge() {};] => [o = $1.$create__nativekttypes_Main(this);] "nativekttypes.Main.bridges"
+[o = new NativeRequiringBridge() {};] => [o = $3.$create__nativekttypes_Main(this);] "nativekttypes.Main.bridges"
 [o = new BridgeSubclass();] => [o = BridgeSubclass.$create__();] "nativekttypes.Main.bridges"
 [NativeFunctionalInterfaceRequiringBridge<String> fi;] => [let /** NativeFunctionalInterfaceRequiringBridge<?string> */ fi;] "nativekttypes.Main.bridges"
 [fi] => [fi] "fi"
@@ -90,7 +112,7 @@
 [fi =
         new NativeFunctionalInterfaceRequiringBridge<String>() {
 ...          }
-        };] => [fi = $2.$create__nativekttypes_Main(this);] "nativekttypes.Main.bridges"
+        };] => [fi = $4.$create__nativekttypes_Main(this);] "nativekttypes.Main.bridges"
 [NativeRequiringBridge cast = (NativeRequiringBridge) o;] => [let cast = /**@type {NativeRequiringBridge}*/ (o);] "nativekttypes.Main.bridges"
 [cast] => [cast] "cast"
 [boolean instanceofCheck = o instanceof NativeRequiringBridge;] => [let instanceofCheck = !$Equality.$same(o, null);] "nativekttypes.Main.bridges"

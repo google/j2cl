@@ -9,7 +9,10 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let BridgeSubclass = goog.forwardDeclare('nativekttypes.BridgeSubclass$impl');
 let $1 = goog.forwardDeclare('nativekttypes.Main.$1$impl');
 let $2 = goog.forwardDeclare('nativekttypes.Main.$2$impl');
+let $3 = goog.forwardDeclare('nativekttypes.Main.$3$impl');
+let $4 = goog.forwardDeclare('nativekttypes.Main.$4$impl');
 let NativeFunctionalInterfaceRequiringBridge = goog.forwardDeclare('nativekttypes.NativeFunctionalInterfaceRequiringBridge$impl');
+let NativeFunctionalInterface = goog.forwardDeclare('nativekttypes.NativeInterface.NativeFunctionalInterface$impl');
 let NativeRequiringBridge = goog.forwardDeclare('nativekttypes.NativeRequiringBridge$impl');
 let NativeTopLevel = goog.forwardDeclare('nativekttypes.NativeTopLevel$impl');
 let Inner = goog.forwardDeclare('nativekttypes.NativeTopLevel.Inner$impl');
@@ -65,23 +68,30 @@ class Main extends j_l_Object {
   nested.f_instanceField__nativekttypes_NativeTopLevel_Nested = 'foo';
   let nestedStaticField = Nested.f_staticField__nativekttypes_NativeTopLevel_Nested;
   Nested.f_staticField__nativekttypes_NativeTopLevel_Nested = 'foo';
+  let nestedAnonynous = $1.$create__nativekttypes_Main__java_lang_String(this, 'foo');
   let inner = /**@type {!Inner<?string, ?string>}*/ (Inner.$create__nativekttypes_NativeTopLevel__java_lang_Object(topLevel, 'foo'));
   let subclass = /**@type {!Subclass<?string>}*/ (new Subclass('foo'));
   let i9 = subclass.methodToRename();
   let i10 = subclass.m_interfaceMethod__java_lang_Object('foo');
   let i11 = subclass.m_interfaceMethodToRename__java_lang_Object('foo');
+  let interfaceAnonymousSubclass = $2.$create__nativekttypes_Main(this);
+  let interfaceExpression = NativeFunctionalInterface.$adapt(() =>{
+   KFunctionalInterface: {
+    return;
+   }
+  });
  }
  
  m_bridges__() {
   let o = NativeRequiringBridge.$create__();
-  o = $1.$create__nativekttypes_Main(this);
+  o = $3.$create__nativekttypes_Main(this);
   o = BridgeSubclass.$create__();
   let /** NativeFunctionalInterfaceRequiringBridge<?string> */ fi;
   fi = NativeFunctionalInterfaceRequiringBridge.$adapt((s) =>{
    let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
    return s_1;
   });
-  fi = $2.$create__nativekttypes_Main(this);
+  fi = $4.$create__nativekttypes_Main(this);
   let cast = /**@type {NativeRequiringBridge}*/ (o);
   let instanceofCheck = !$Equality.$same(o, null);
  }
@@ -123,7 +133,10 @@ class Main extends j_l_Object {
   BridgeSubclass = goog.module.get('nativekttypes.BridgeSubclass$impl');
   $1 = goog.module.get('nativekttypes.Main.$1$impl');
   $2 = goog.module.get('nativekttypes.Main.$2$impl');
+  $3 = goog.module.get('nativekttypes.Main.$3$impl');
+  $4 = goog.module.get('nativekttypes.Main.$4$impl');
   NativeFunctionalInterfaceRequiringBridge = goog.module.get('nativekttypes.NativeFunctionalInterfaceRequiringBridge$impl');
+  NativeFunctionalInterface = goog.module.get('nativekttypes.NativeInterface.NativeFunctionalInterface$impl');
   NativeRequiringBridge = goog.module.get('nativekttypes.NativeRequiringBridge$impl');
   NativeTopLevel = goog.module.get('nativekttypes.NativeTopLevel$impl');
   Inner = goog.module.get('nativekttypes.NativeTopLevel.Inner$impl');

@@ -18,6 +18,11 @@ package nativekttypes.nativekt;
 import javaemul.internal.annotations.KtProperty;
 
 public interface KInterface<V> {
+
+  interface KFunctionalInterface {
+    void run();
+  }
+
   int interfaceMethod(V v);
 
   int renamedInterfaceMethod(V v);

@@ -1,0 +1,41 @@
+goog.module('nativekttypes.nativekt.KInterface.KFunctionalInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('nativekttypes.nativekt.KInterface.KFunctionalInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class KFunctionalInterface {
+ /** @abstract */
+ m_run__() {}
+ /** @return {KFunctionalInterface} */
+ static $adapt(/** ?function():void */ fn) {
+  KFunctionalInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  KFunctionalInterface.$clinit = () =>{};
+  KFunctionalInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nativekttypes_nativekt_KInterface_KFunctionalInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nativekttypes_nativekt_KInterface_KFunctionalInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('nativekttypes.nativekt.KInterface.KFunctionalInterface.$LambdaAdaptor$impl');
+ }
+}
+KFunctionalInterface.$markImplementor(/**@type {Function}*/ (KFunctionalInterface));
+$Util.$setClassMetadataForInterface(KFunctionalInterface, 'nativekttypes.nativekt.KInterface$KFunctionalInterface');
+
+exports = KFunctionalInterface;
+
+//# sourceMappingURL=KInterface$KFunctionalInterface.js.map

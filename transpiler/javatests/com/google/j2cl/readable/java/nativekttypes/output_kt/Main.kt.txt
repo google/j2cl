@@ -36,11 +36,20 @@ open class Main {
   nested!!.instanceField = "foo"
   val nestedStaticField: kotlin.Any? = nativekttypes.nativekt.KTopLevel.KNested.staticField
   nativekttypes.nativekt.KTopLevel.KNested.staticField = "foo"
+  val nestedAnonynous: nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>? = object : nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>("foo") {}
   val inner: nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>? = topLevel!!.KInner<kotlin.String?>("foo")
   val subclass: nativekttypes.Subclass<kotlin.String?>? = nativekttypes.Subclass<kotlin.String?>("foo")
   val i9: kotlin.Int = subclass!!.renamedMethod()
   val i10: kotlin.Int = subclass!!.interfaceMethod("foo")
   val i11: kotlin.Int = subclass!!.renamedInterfaceMethod("foo")
+  val interfaceAnonymousSubclass: nativekttypes.nativekt.KInterface.KFunctionalInterface? = object : nativekttypes.nativekt.KInterface.KFunctionalInterface {
+   open override fun run() {}
+  }
+  val interfaceExpression: nativekttypes.nativekt.KInterface.KFunctionalInterface? = nativekttypes.nativekt.KInterface.KFunctionalInterface {
+   KFunctionalInterface_1@ do {
+    return@KFunctionalInterface
+   } while (false)
+  }
  }
 
  open fun bridges() {
