@@ -140,16 +140,16 @@ fun String.lastIndexOf(codePoint: Int, fromIndex: Int = Int.MAX_VALUE): Int {
   }
 }
 
-fun String.javaSplit(regularExpression: String): Array<String?>? {
+fun String.java_split(regularExpression: String): Array<String?>? {
   val strList: List<String> = this.split(regularExpression.toRegex())
   return strList.toTypedArray()
 }
 
-fun String.javaSplit(regularExpression: String, limit: Int): Array<String?>? {
+fun String.java_split(regularExpression: String, limit: Int): Array<String?>? {
   val strList: List<String> = this.split(regularExpression.toRegex(), limit)
   return strList.toTypedArray()
 }
 
-fun String.javaReplace(target: CharSequence?, replacement: CharSequence?): String {
+fun String.java_replace(target: CharSequence?, replacement: CharSequence?): String {
   return this.replace(target.toString(), replacement.toString())
 }

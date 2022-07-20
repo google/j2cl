@@ -105,9 +105,9 @@ public final class String implements Comparable<String>, CharSequence {
 
   public native int indexOf(int c, int start);
 
-  public native int indexOf(String string);
+  public native int indexOf(@JsNonNull String string);
 
-  public native int indexOf(String subString, int start);
+  public native int indexOf(@JsNonNull String subString, int start);
 
   // TODO(b/222269323): Revisit.
   public native String intern();
@@ -118,9 +118,9 @@ public final class String implements Comparable<String>, CharSequence {
 
   public native int lastIndexOf(int c, int start);
 
-  public native int lastIndexOf(String string);
+  public native int lastIndexOf(@JsNonNull String string);
 
-  public native int lastIndexOf(String subString, int start);
+  public native int lastIndexOf(@JsNonNull String subString, int start);
 
   @KtProperty
   public native int length();
@@ -132,7 +132,7 @@ public final class String implements Comparable<String>, CharSequence {
 
   public native String replace(char oldChar, char newChar);
 
-  @KtName("javaReplace")
+  @KtName("java_replace")
   public native String replace(CharSequence target, CharSequence replacement);
 
   public native boolean startsWith(String prefix);
@@ -187,10 +187,10 @@ public final class String implements Comparable<String>, CharSequence {
 
   public native String replaceFirst(String regularExpression, String replacement);
 
-  @KtName("javaSplit")
+  @KtName("java_split")
   public native String[] split(String regularExpression);
 
-  @KtName("javaSplit")
+  @KtName("java_split")
   public native String[] split(String regularExpression, int limit);
 
   @Override
