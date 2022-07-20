@@ -152,6 +152,7 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     # TODO(b/238299508): Include sources for transpiled collections
     "java/util/AbstractQueue.java",
     "java/util/AbstractSequentialList.java",
+    "java/util/BitSet.java",  # TODO(b/239684874): Implement BitSet when necessary
     "java/util/Deque.java",
     "java/util/EnumMap.java",
     "java/util/EnumSet.java",
