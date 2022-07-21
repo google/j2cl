@@ -22,6 +22,7 @@ import static com.google.j2cl.transpiler.backend.wasm.GenerationEnvironment.getG
 import static java.lang.String.format;
 
 import com.google.common.collect.Iterables;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
@@ -108,6 +109,7 @@ final class ExpressionTranspiler {
         sourceBuilder.append(")");
       }
 
+      @CanIgnoreReturnValue
       private boolean renderAssignment(Expression left, Expression right) {
         sourceBuilder.append("(");
         renderAccessExpression(left, /*setter=*/ true);

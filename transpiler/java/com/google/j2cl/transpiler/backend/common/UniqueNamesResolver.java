@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
@@ -88,6 +89,7 @@ public final class UniqueNamesResolver {
             registerUniqueName(getCurrentMember().getDescriptor(), nameDeclaration);
           }
 
+          @CanIgnoreReturnValue
           private String registerUniqueName(
               MemberDescriptor currentMemberDescriptor, HasName variable) {
             return uniqueNameByVariable.computeIfAbsent(

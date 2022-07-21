@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -54,6 +55,7 @@ public class VerifySingleAstReference extends NormalizationPass {
     compilationUnit.accept(
         new AbstractVisitor() {
 
+          @CanIgnoreReturnValue
           @Override
           public boolean enterNode(final Node node) {
             final Node context =
