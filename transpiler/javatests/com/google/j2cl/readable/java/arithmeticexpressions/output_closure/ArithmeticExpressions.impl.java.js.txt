@@ -16,27 +16,27 @@ let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class ArithmeticExpressions extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {!$Long}*/
+  /**@type {!$Long} @nodts*/
   this.f_bar__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);
-  /**@type {!$Long}*/
+  /**@type {!$Long} @nodts*/
   this.f_intField__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);
  }
- /** @return {!ArithmeticExpressions} */
+ /** @nodts @return {!ArithmeticExpressions} */
  static $create__() {
   ArithmeticExpressions.$clinit();
   let $instance = new ArithmeticExpressions();
   $instance.$ctor__arithmeticexpressions_ArithmeticExpressions__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__arithmeticexpressions_ArithmeticExpressions__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_arithmeticexpressions_ArithmeticExpressions();
  }
- 
+ /** @nodts */
  m_testCoercions__() {
   let b = 1;
   let c = 1 /* '\u0001' */;
@@ -53,7 +53,7 @@ class ArithmeticExpressions extends j_l_Object {
   let o = Character.m_valueOf__char(c);
   s = $Primitives.narrowCharToShort(/**@type {!Character}*/ ($Casts.$to(o, Character)).m_charValue__());
  }
- 
+ /** @nodts */
  m_testPrimitives__() {
   let /** number */ $value, /** number */ $value_1;
   let a = 10, b = ($value = a, a = a + 1 | 0, $value), c = ($value_1 = a, a = a - 1 | 0, $value_1), d = a = a + 1 | 0, e = a = a - 1 | 0, f = - a | 0, g = + a, h = ~a, i = 1 + 1 + 2 - 5 | 0, j = Math.imul(1 + 2, 3 + 4), p = $Primitives.coerceDivision(Math.imul($Primitives.coerceDivision(1 / 2), 3) % 4), r = - -2147483648 | 0, t = - (- (- 1 | 0) | 0) | 0, u = + + + 1, v = - + (- 1 | 0) | 0, w = 5 - - 4 | 0;
@@ -74,7 +74,7 @@ class ArithmeticExpressions extends j_l_Object {
   let z = Long.m_valueOf__long($Long.fromInt(121));
   k = $LongUtils.equals($Primitives.widenCharToLong(y), z.m_longValue__());
  }
- 
+ /** @nodts */
  m_testCompoundArray__() {
   let ints = null;
   $Arrays.$set(ints, 0, ints[0] + 1 | 0);
@@ -120,11 +120,11 @@ class ArithmeticExpressions extends j_l_Object {
   let shorts = null;
   let b = $Arrays.$set(shorts, 0, $Primitives.narrowIntToShort(shorts[0] + 1 | 0)) == 10;
  }
- /** @return {Array<!$Long>} */
+ /** @nodts @return {Array<!$Long>} */
  static m_getLongArray__() {
   return null;
  }
- 
+ /** @nodts */
  m_testCompoundBoxedTypes__() {
   let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;
   let c = Integer.m_valueOf__int(1000);
@@ -150,22 +150,22 @@ class ArithmeticExpressions extends j_l_Object {
   ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref = Byte.m_valueOf__byte($Primitives.narrowIntToByte(/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__() + 1 | 0));
   let n = 1 + /**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__() | 0;
  }
- /** @return {Integer} */
+ /** @nodts @return {Integer} */
  static m_getInteger__() {
   return null;
  }
- 
+ /** @nodts */
  static m_testSideEffect__() {
   {
    let $qualifier = ArithmeticExpressions.m_getWithSideEffect__();
    $qualifier.f_intField__arithmeticexpressions_ArithmeticExpressions = $LongUtils.plus($qualifier.f_intField__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(5));
   }
  }
- /** @return {ArithmeticExpressions} */
+ /** @nodts @return {ArithmeticExpressions} */
  static m_getWithSideEffect__() {
   return null;
  }
- 
+ /** @nodts */
  m_testExtendedOperands__() {
   let boxedInteger = Integer.m_valueOf__int(3);
   let /** number */ i;
@@ -180,32 +180,32 @@ class ArithmeticExpressions extends j_l_Object {
   l = $LongUtils.plus($LongUtils.plus($Primitives.widenIntToLong(i + boxedInteger.m_intValue__() | 0), l), $Long.fromInt(20));
   d = $Primitives.widenLongToDouble($LongUtils.plus($Long.fromInt(20), l)) + d;
  }
- /** @return {!$Long} */
+ /** @nodts @return {!$Long} */
  static m_incrementCounter__() {
   return ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $LongUtils.plus(ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_, $Long.fromInt(1));
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_arithmeticexpressions_ArithmeticExpressions() {
   let /** !$Long */ $value;
   this.f_bar__arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = $LongUtils.plus(ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);
  }
- /** @return {!$Long} */
+ /** @nodts @return {!$Long} */
  static get f_one__arithmeticexpressions_ArithmeticExpressions() {
   return (ArithmeticExpressions.$clinit(), ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions);
  }
- 
+ /** @nodts */
  static set f_one__arithmeticexpressions_ArithmeticExpressions(/** !$Long */ value) {
   (ArithmeticExpressions.$clinit(), ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions = value);
  }
- /** @return {!$Long} */
+ /** @nodts @return {!$Long} */
  static get f_foo__arithmeticexpressions_ArithmeticExpressions() {
   return (ArithmeticExpressions.$clinit(), ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions);
  }
- 
+ /** @nodts */
  static set f_foo__arithmeticexpressions_ArithmeticExpressions(/** !$Long */ value) {
   (ArithmeticExpressions.$clinit(), ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = value);
  }
- 
+ /** @nodts */
  static $clinit() {
   let /** !$Long */ $value;
   ArithmeticExpressions.$clinit = () =>{};
@@ -215,11 +215,12 @@ class ArithmeticExpressions extends j_l_Object {
   ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions = $LongUtils.plus(ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);
   ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $Long.fromInt(0);
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ArithmeticExpressions;
  }
  
+ /** @nodts */
  static $loadModules() {
   Byte = goog.module.get('java.lang.Byte$impl');
   Character = goog.module.get('java.lang.Character$impl');
@@ -233,17 +234,17 @@ class ArithmeticExpressions extends j_l_Object {
   $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
-/**@const {number}*/
+/**@const {number} @nodts*/
 ArithmeticExpressions.f_FLOAT_CONSTANT__arithmeticexpressions_ArithmeticExpressions_ = 1.100000023841858;
-/**@const {number}*/
+/**@const {number} @nodts*/
 ArithmeticExpressions.f_DOUBLE_CONSTANT__arithmeticexpressions_ArithmeticExpressions_ = 1.100000023841858;
-/**@const {number}*/
+/**@const {number} @nodts*/
 ArithmeticExpressions.f_DOUBLE_CONSTANT_WITH_ARITHMETIC__arithmeticexpressions_ArithmeticExpressions_ = 2.200000047683716;
-/**@private {!$Long}*/
+/**@private {!$Long} @nodts*/
 ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);
-/**@private {!$Long}*/
+/**@private {!$Long} @nodts*/
 ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);
-/**@type {!$Long}*/
+/**@type {!$Long} @nodts*/
 ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $Long.fromInt(0);
 $Util.$setClassMetadata(ArithmeticExpressions, 'arithmeticexpressions.ArithmeticExpressions');
 

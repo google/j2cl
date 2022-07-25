@@ -4,30 +4,30 @@ const ChildClass = goog.require('innerclassinheritance.ChildClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $1LocalClass extends ChildClass {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {ChildClass}*/
+  /**@type {ChildClass} @nodts*/
   this.$outer_this__innerclassinheritance_ChildClass_1LocalClass;
-  /**@type {*}*/
+  /**@type {*} @nodts*/
   this.f_object__innerclassinheritance_ChildClass_1LocalClass;
  }
- /** @return {!$1LocalClass} */
+ /** @nodts @return {!$1LocalClass} */
  static $create__innerclassinheritance_ChildClass(/** ChildClass */ $outer_this) {
   $1LocalClass.$clinit();
   let $instance = new $1LocalClass();
   $instance.$ctor__innerclassinheritance_ChildClass_1LocalClass__innerclassinheritance_ChildClass($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinheritance_ChildClass_1LocalClass__innerclassinheritance_ChildClass(/** ChildClass */ $outer_this) {
   this.$outer_this__innerclassinheritance_ChildClass_1LocalClass = $outer_this;
   this.$ctor__innerclassinheritance_ChildClass__();
   this.$init___$p_innerclassinheritance_ChildClass_1LocalClass();
  }
- /** @override */
+ /** @override @nodts */
  m_funInParentOuter__() {}
- 
+ /** @nodts */
  m_test__() {
   this.m_funInOuter__();
   this.$outer_this__innerclassinheritance_ChildClass_1LocalClass.m_funInOuter__();
@@ -35,21 +35,22 @@ class $1LocalClass extends ChildClass {
   this.m_funInParentOuter__();
   this.$outer_this__innerclassinheritance_ChildClass_1LocalClass.m_funInParentOuter__();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_innerclassinheritance_ChildClass_1LocalClass() {
   this.f_object__innerclassinheritance_ChildClass_1LocalClass = this;
  }
- 
+ /** @nodts */
  static $clinit() {
   $1LocalClass.$clinit = () =>{};
   $1LocalClass.$loadModules();
   ChildClass.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1LocalClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($1LocalClass, 'innerclassinheritance.ChildClass$1LocalClass');

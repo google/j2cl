@@ -11,28 +11,29 @@ let TypeWildCards = goog.forwardDeclare('typewildcards.TypeWildCards$impl');
  * @implements {HasKey}
  */
 class SubOtherElement extends OtherElement {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {TypeWildCards}*/
+  /**@type {TypeWildCards} @nodts*/
   this.$outer_this__typewildcards_TypeWildCards_SubOtherElement;
  }
- 
+ /** @nodts */
  $ctor__typewildcards_TypeWildCards_SubOtherElement__typewildcards_TypeWildCards(/** TypeWildCards */ $outer_this) {
   this.$outer_this__typewildcards_TypeWildCards_SubOtherElement = $outer_this;
   this.$ctor__typewildcards_TypeWildCards_OtherElement__typewildcards_TypeWildCards($outer_this);
  }
- 
+ /** @nodts */
  static $clinit() {
   SubOtherElement.$clinit = () =>{};
   SubOtherElement.$loadModules();
   OtherElement.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SubOtherElement;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 HasKey.$markImplementor(SubOtherElement);

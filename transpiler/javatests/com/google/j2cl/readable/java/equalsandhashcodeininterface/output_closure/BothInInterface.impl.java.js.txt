@@ -10,7 +10,7 @@ class BothInInterface {
  equals(/** * */ obj) {}
  /** @abstract @return {number} */
  hashCode() {}
- 
+ /** @nodts */
  static $clinit() {
   BothInInterface.$clinit = () =>{};
   BothInInterface.$loadModules();
@@ -19,11 +19,12 @@ class BothInInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__equalsandhashcodeininterface_BothInInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__equalsandhashcodeininterface_BothInInterface;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 BothInInterface.$markImplementor(/**@type {Function}*/ (BothInInterface));

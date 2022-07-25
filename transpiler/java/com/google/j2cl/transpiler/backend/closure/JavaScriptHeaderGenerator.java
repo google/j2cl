@@ -65,6 +65,9 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
         "const " + className + " = goog.require('" + implementationPath + "');");
     sourceBuilder.newLine();
 
+    if (type.isOverlayImplementation()) {
+      sourceBuilder.appendln("/** @nodts */");
+    }
     // Emit a source-mapping for the exports statement back to the original Java file. Kythe models
     // imports using goog.require as an alias to the exports symbol of the goog.module file being
     // imported. This mapping will help kythe understand that the exports symbol is really just

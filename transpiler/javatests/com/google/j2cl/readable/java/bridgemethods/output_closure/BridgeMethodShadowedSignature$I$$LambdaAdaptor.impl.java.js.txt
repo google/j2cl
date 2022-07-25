@@ -11,35 +11,36 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
  * @implements {I<I1>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(Consumer<?>):?string */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(Consumer<?>):?string}*/
+  /**@type {?function(Consumer<?>):?string} @nodts*/
   this.f_fn__bridgemethods_BridgeMethodShadowedSignature_I_$LambdaAdaptor;
   this.$ctor__bridgemethods_BridgeMethodShadowedSignature_I_$LambdaAdaptor__bridgemethods_BridgeMethodShadowedSignature_I_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_BridgeMethodShadowedSignature_I_$LambdaAdaptor__bridgemethods_BridgeMethodShadowedSignature_I_$JsFunction(/** ?function(Consumer<?>):?string */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__bridgemethods_BridgeMethodShadowedSignature_I_$LambdaAdaptor = fn;
  }
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_get__java_util_function_Consumer(/** Consumer<?> */ arg0) {
   let /** ?function(Consumer<?>):?string */ $function;
   return ($function = this.f_fn__bridgemethods_BridgeMethodShadowedSignature_I_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor($LambdaAdaptor);

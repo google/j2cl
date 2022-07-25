@@ -9,35 +9,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {G<V>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(V):V */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(V):V}*/
+  /**@type {?function(V):V} @nodts*/
   this.f_fn__bridgejsmethod_Main_G_$LambdaAdaptor;
   this.$ctor__bridgejsmethod_Main_G_$LambdaAdaptor__bridgejsmethod_Main_G_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_G_$LambdaAdaptor__bridgejsmethod_Main_G_$JsFunction(/** ?function(V):V */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__bridgejsmethod_Main_G_$LambdaAdaptor = fn;
  }
- /** @override @return {V} */
+ /** @override @nodts @return {V} */
  m_enclose__java_lang_Object(/** V */ arg0) {
   let /** ?function(V):V */ $function;
   return ($function = this.f_fn__bridgejsmethod_Main_G_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 G.$markImplementor($LambdaAdaptor);

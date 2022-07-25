@@ -9,34 +9,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {I}
  */
 class Sub extends Base {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Sub} */
+ /** @nodts @return {!Sub} */
  static $create__() {
   Sub.$clinit();
   let $instance = new Sub();
   $instance.$ctor__jsmethod_JsMethodExample_Sub__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsmethod_JsMethodExample_Sub__() {
   this.$ctor__jsmethod_JsMethodExample_Base__();
  }
  /** @override */
  m(/** ?string */ s) {}
- 
+ /** @nodts */
  static $clinit() {
   Sub.$clinit = () =>{};
   Sub.$loadModules();
   Base.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Sub;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor(Sub);

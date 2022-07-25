@@ -15,25 +15,25 @@ class SomeJsType extends j_l_Object {
   super();
   /**@type {number}*/
   this.publicField = 0;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_privateField__jstype_SomeJsType_ = 0;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_packageField__jstype_SomeJsType = 0;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_protectedField__jstype_SomeJsType = 0;
   this.$ctor__jstype_SomeJsType__();
  }
- 
+ /** @nodts */
  $ctor__jstype_SomeJsType__() {
   this.$ctor__java_lang_Object__();
  }
  
  publicMethod() {}
- 
+ /** @nodts */
  m_privateMethod___$p_jstype_SomeJsType() {}
- 
+ /** @nodts */
  m_packageMethod___$pp_jstype() {}
- 
+ /** @nodts */
  m_protectedMethod__() {}
  
  useFieldsAndMethods() {
@@ -49,17 +49,18 @@ class SomeJsType extends j_l_Object {
   let star = /**@type {*}*/ ($Casts.$to(3, j_l_Object));
   return /**@type {?}*/ (star);
  }
- 
+ /** @nodts */
  static $clinit() {
   SomeJsType.$clinit = () =>{};
   SomeJsType.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SomeJsType;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

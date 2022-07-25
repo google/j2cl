@@ -8,18 +8,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {SubInterface}
  */
 class InterfaceImpl extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!InterfaceImpl} */
+ /** @nodts @return {!InterfaceImpl} */
  static $create__() {
   InterfaceImpl.$clinit();
   let $instance = new InterfaceImpl();
   $instance.$ctor__interfacejsbridge_InterfaceImpl__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__interfacejsbridge_InterfaceImpl__() {
   this.$ctor__java_lang_Object__();
  }
@@ -28,21 +28,22 @@ class InterfaceImpl extends j_l_Object {
   return 0;
  }
  //Bridge method.
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_foo__int(/** number */ arg0) {
   return this.foo(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   InterfaceImpl.$clinit = () =>{};
   InterfaceImpl.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InterfaceImpl;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 SubInterface.$markImplementor(InterfaceImpl);

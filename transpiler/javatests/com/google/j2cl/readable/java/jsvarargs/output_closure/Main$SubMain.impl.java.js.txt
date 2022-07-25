@@ -8,18 +8,18 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class SubMain extends Main {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!SubMain} */
+ /** @nodts @return {!SubMain} */
  static $create__() {
   SubMain.$clinit();
   let $instance = new SubMain();
   $instance.$ctor__jsvarargs_Main_SubMain__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsvarargs_Main_SubMain__() {
   this.$ctor__jsvarargs_Main__int(10);
  }
@@ -34,17 +34,18 @@ class SubMain extends Main {
   a = a + super.f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints)) | 0;
   return a;
  }
- 
+ /** @nodts */
  static $clinit() {
   SubMain.$clinit = () =>{};
   SubMain.$loadModules();
   Main.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SubMain;
  }
  
+ /** @nodts */
  static $loadModules() {
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

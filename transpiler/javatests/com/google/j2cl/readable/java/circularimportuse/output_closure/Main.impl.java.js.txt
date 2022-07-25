@@ -7,38 +7,39 @@ let Left = goog.forwardDeclare('circularimportuse.Left$impl');
 let Right = goog.forwardDeclare('circularimportuse.Right$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__circularimportuse_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__circularimportuse_Main__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
   Main.$clinit();
   let left = Left.$create__();
   let right = Right.$create__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   Left = goog.module.get('circularimportuse.Left$impl');
   Right = goog.module.get('circularimportuse.Right$impl');

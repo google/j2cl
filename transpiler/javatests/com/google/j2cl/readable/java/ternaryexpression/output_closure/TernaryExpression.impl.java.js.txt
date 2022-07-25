@@ -6,39 +6,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 
 class TernaryExpression extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!TernaryExpression} */
+ /** @nodts @return {!TernaryExpression} */
  static $create__() {
   TernaryExpression.$clinit();
   let $instance = new TernaryExpression();
   $instance.$ctor__ternaryexpression_TernaryExpression__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__ternaryexpression_TernaryExpression__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   let a = true;
   let number_1 = a ? 1 : 2;
   let b = number_1 == 1 ? number_1 == 2 : number_1 == 1;
   let value = (b ? Integer.$create__int(15) : Integer.$create__int(30)).m_intValue__();
  }
- 
+ /** @nodts */
  static $clinit() {
   TernaryExpression.$clinit = () =>{};
   TernaryExpression.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof TernaryExpression;
  }
  
+ /** @nodts */
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
  }

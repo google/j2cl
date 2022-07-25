@@ -4,40 +4,41 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InstanceFieldAccessLevels extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_a__instancefieldaccesslevels_InstanceFieldAccessLevels = 0;
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_b__instancefieldaccesslevels_InstanceFieldAccessLevels_ = false;
-  /**@type {*}*/
+  /**@type {*} @nodts*/
   this.f_c__instancefieldaccesslevels_InstanceFieldAccessLevels;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_d__instancefieldaccesslevels_InstanceFieldAccessLevels = 0;
  }
- /** @return {!InstanceFieldAccessLevels} */
+ /** @nodts @return {!InstanceFieldAccessLevels} */
  static $create__() {
   InstanceFieldAccessLevels.$clinit();
   let $instance = new InstanceFieldAccessLevels();
   $instance.$ctor__instancefieldaccesslevels_InstanceFieldAccessLevels__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__instancefieldaccesslevels_InstanceFieldAccessLevels__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   InstanceFieldAccessLevels.$clinit = () =>{};
   InstanceFieldAccessLevels.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InstanceFieldAccessLevels;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(InstanceFieldAccessLevels, 'instancefieldaccesslevels.InstanceFieldAccessLevels');

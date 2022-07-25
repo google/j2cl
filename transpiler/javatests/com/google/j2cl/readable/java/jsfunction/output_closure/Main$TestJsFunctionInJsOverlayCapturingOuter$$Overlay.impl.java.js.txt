@@ -2,20 +2,22 @@ goog.module('jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay$im
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
+/** @nodts */
 class $Overlay {
- 
+ /** @nodts */
  static m_test__$devirt__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter(/** !Array */ $thisArg) {
   $Overlay.$clinit();
   $thisArg.sort((/** number */ a) =>{
    return $Equality.$same($thisArg, null) ? 0 : 1;
   });
  }
- 
+ /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
  }
  
+ /** @nodts */
  static $loadModules() {
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
  }

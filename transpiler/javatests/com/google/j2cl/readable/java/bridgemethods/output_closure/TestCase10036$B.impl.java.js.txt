@@ -15,33 +15,34 @@ let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
  * @implements {BI2}
  */
 class B extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_TestCase10036_B__() {
   this.$ctor__java_lang_Object__();
  }
- /** @abstract @return {?string} */
+ /** @abstract @nodts @return {?string} */
  m_get__java_lang_Comparable(/** B1 */ value) {}
  //Bridge method.
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_get__java_lang_String(/** ?string */ arg0) {
   return this.get(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   B.$clinit = () =>{};
   B.$loadModules();
   j_l_Object.$clinit();
   BI3.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof B;
  }
  
+ /** @nodts */
  static $loadModules() {
   BI3 = goog.module.get('bridgemethods.TestCase10036.BI3$impl');
  }

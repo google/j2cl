@@ -4,34 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class NativeFoo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!NativeFoo} */
+ /** @nodts @return {!NativeFoo} */
  static $create__() {
   NativeFoo.$clinit();
   let $instance = new NativeFoo();
   $instance.$ctor__jsproperties_NativeFoo__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsproperties_NativeFoo__() {
   this.$ctor__java_lang_Object__();
  }
  // /** @return {*} */
  // native get hasOwnProperty() 
- 
+ /** @nodts */
  static $clinit() {
   NativeFoo.$clinit = () =>{};
   NativeFoo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NativeFoo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(NativeFoo, 'jsproperties.NativeFoo');

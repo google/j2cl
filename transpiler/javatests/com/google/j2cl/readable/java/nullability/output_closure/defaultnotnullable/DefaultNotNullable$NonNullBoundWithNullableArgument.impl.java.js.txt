@@ -8,7 +8,7 @@ const NonNullableBound = goog.require('nullability.defaultnotnullable.DefaultNot
  * @extends {NonNullableBound<NonNullBoundWithNullableArgument>}
  */
 class NonNullBoundWithNullableArgument {
- 
+ /** @nodts */
  static $clinit() {
   NonNullBoundWithNullableArgument.$clinit = () =>{};
   NonNullBoundWithNullableArgument.$loadModules();
@@ -18,11 +18,12 @@ class NonNullBoundWithNullableArgument {
   NonNullableBound.$markImplementor(ctor);
   ctor.prototype.$implements__nullability_defaultnotnullable_DefaultNotNullable_NonNullBoundWithNullableArgument = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__nullability_defaultnotnullable_DefaultNotNullable_NonNullBoundWithNullableArgument;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 NonNullBoundWithNullableArgument.$markImplementor(/**@type {Function}*/ (NonNullBoundWithNullableArgument));

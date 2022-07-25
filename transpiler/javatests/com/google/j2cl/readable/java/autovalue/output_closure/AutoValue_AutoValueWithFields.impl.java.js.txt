@@ -4,26 +4,26 @@ const AutoValueWithFields = goog.require('autovalue.AutoValueWithFields$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class AutoValue__AutoValueWithFields extends AutoValueWithFields {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_ = 0;
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_ = false;
  }
- /** @return {!AutoValue__AutoValueWithFields} */
+ /** @nodts @return {!AutoValue__AutoValueWithFields} */
  static $create__int(/** number */ intField$) {
   AutoValue__AutoValueWithFields.$clinit();
   let $instance = new AutoValue__AutoValueWithFields();
   $instance.$ctor__autovalue_AutoValue_AutoValueWithFields__int(intField$);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_AutoValue_AutoValueWithFields__int(/** number */ intField$) {
   this.$ctor__autovalue_AutoValueWithFields__int(intField$);
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_getMemoizedNative___$pp_autovalue() {
   if (!this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_) {
    {
@@ -36,17 +36,18 @@ class AutoValue__AutoValueWithFields extends AutoValueWithFields {
   }
   return this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_;
  }
- 
+ /** @nodts */
  static $clinit() {
   AutoValue__AutoValueWithFields.$clinit = () =>{};
   AutoValue__AutoValueWithFields.$loadModules();
   AutoValueWithFields.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AutoValue__AutoValueWithFields;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(AutoValue__AutoValueWithFields, 'autovalue.AutoValue_AutoValueWithFields');

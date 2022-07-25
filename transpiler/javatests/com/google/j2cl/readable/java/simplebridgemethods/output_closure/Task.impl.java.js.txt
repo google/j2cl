@@ -9,34 +9,35 @@ const Callable = goog.require('simplebridgemethods.Callable$impl');
  * @implements {Callable<T>}
  */
 class Task extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!Task<T>} */
+ /** @nodts @template T @return {!Task<T>} */
  static $create__() {
   Task.$clinit();
   let $instance = new Task();
   $instance.$ctor__simplebridgemethods_Task__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__simplebridgemethods_Task__() {
   this.$ctor__java_lang_Object__();
  }
- /** @override */
+ /** @override @nodts */
  m_call__java_lang_Object(/** T */ t) {}
- 
+ /** @nodts */
  static $clinit() {
   Task.$clinit = () =>{};
   Task.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Task;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Callable.$markImplementor(Task);

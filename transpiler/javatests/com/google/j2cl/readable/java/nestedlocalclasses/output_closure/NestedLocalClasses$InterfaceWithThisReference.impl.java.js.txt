@@ -8,14 +8,14 @@ let $1 = goog.forwardDeclare('nestedlocalclasses.NestedLocalClasses.InterfaceWit
  * @interface
  */
 class InterfaceWithThisReference {
- /** @abstract */
+ /** @abstract @nodts */
  m_foo__() {}
- 
+ /** @nodts */
  static m_foo__$default__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(/** !InterfaceWithThisReference */ $thisArg) {
   InterfaceWithThisReference.$clinit();
   $1.$create__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference($thisArg);
  }
- 
+ /** @nodts */
  static $clinit() {
   InterfaceWithThisReference.$clinit = () =>{};
   InterfaceWithThisReference.$loadModules();
@@ -24,11 +24,12 @@ class InterfaceWithThisReference {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.$1$impl');
  }

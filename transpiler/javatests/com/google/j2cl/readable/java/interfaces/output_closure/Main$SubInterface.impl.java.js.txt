@@ -10,19 +10,19 @@ let $LambdaAdaptor = goog.forwardDeclare('interfaces.Main.SubInterface.$LambdaAd
  * @extends {Interface<?string>}
  */
 class SubInterface {
- /** @abstract */
+ /** @abstract @nodts */
  m_defaultMethod__java_lang_String(/** ?string */ s) {}
- /** @return {SubInterface} */
+ /** @nodts @return {SubInterface} */
  static $adapt(/** ?function():void */ fn) {
   SubInterface.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static m_defaultMethod__$default__interfaces_Main_SubInterface__java_lang_String(/** !SubInterface */ $thisArg, /** ?string */ s) {
   SubInterface.$clinit();
   Interface.m_defaultMethod__$default__interfaces_Main_Interface__java_lang_Object($thisArg, s);
  }
- 
+ /** @nodts */
  static $clinit() {
   SubInterface.$clinit = () =>{};
   SubInterface.$loadModules();
@@ -33,11 +33,12 @@ class SubInterface {
   Interface.$markImplementor(ctor);
   ctor.prototype.$implements__interfaces_Main_SubInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__interfaces_Main_SubInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('interfaces.Main.SubInterface.$LambdaAdaptor$impl');
  }

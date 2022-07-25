@@ -6,35 +6,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let NewInnerClassWithSameOuter = goog.forwardDeclare('newinnerclasswithsameouter.NewInnerClassWithSameOuter$impl');
 
 class C extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {NewInnerClassWithSameOuter}*/
+  /**@type {NewInnerClassWithSameOuter} @nodts*/
   this.$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C;
  }
- /** @return {!C} */
+ /** @nodts @return {!C} */
  static $create__newinnerclasswithsameouter_NewInnerClassWithSameOuter(/** NewInnerClassWithSameOuter */ $outer_this) {
   C.$clinit();
   let $instance = new C();
   $instance.$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C__newinnerclasswithsameouter_NewInnerClassWithSameOuter($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C__newinnerclasswithsameouter_NewInnerClassWithSameOuter(/** NewInnerClassWithSameOuter */ $outer_this) {
   this.$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   C.$clinit = () =>{};
   C.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof C;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(C, 'newinnerclasswithsameouter.NewInnerClassWithSameOuter$C');

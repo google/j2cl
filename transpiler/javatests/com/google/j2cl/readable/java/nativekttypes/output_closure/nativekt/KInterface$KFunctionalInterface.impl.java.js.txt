@@ -8,14 +8,14 @@ let $LambdaAdaptor = goog.forwardDeclare('nativekttypes.nativekt.KInterface.KFun
  * @interface
  */
 class KFunctionalInterface {
- /** @abstract */
+ /** @abstract @nodts */
  m_run__() {}
- /** @return {KFunctionalInterface} */
+ /** @nodts @return {KFunctionalInterface} */
  static $adapt(/** ?function():void */ fn) {
   KFunctionalInterface.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   KFunctionalInterface.$clinit = () =>{};
   KFunctionalInterface.$loadModules();
@@ -24,11 +24,12 @@ class KFunctionalInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__nativekttypes_nativekt_KInterface_KFunctionalInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__nativekttypes_nativekt_KInterface_KFunctionalInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('nativekttypes.nativekt.KInterface.KFunctionalInterface.$LambdaAdaptor$impl');
  }

@@ -10,26 +10,27 @@ class Inner extends j_l_Object {
  constructor(/** Outer */ $outer_this) {
   Inner.$clinit();
   super();
-  /**@type {Outer}*/
+  /**@type {Outer} @nodts*/
   this.$outer_this__packageinfo_Outer_Inner;
   this.$ctor__packageinfo_Outer_Inner__packageinfo_Outer($outer_this);
  }
- 
+ /** @nodts */
  $ctor__packageinfo_Outer_Inner__packageinfo_Outer(/** Outer */ $outer_this) {
   this.$outer_this__packageinfo_Outer_Inner = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Inner.$clinit = () =>{};
   Inner.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Inner;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Inner, 'packageinfo.Outer$Inner');

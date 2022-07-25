@@ -8,29 +8,29 @@ let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let StringHolder = goog.forwardDeclare('strings.Strings.StringHolder$impl');
 
 class Strings extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_someString__strings_Strings_;
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_nonBmpChar__strings_Strings_;
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_wideColon__strings_Strings_;
  }
- /** @return {!Strings} */
+ /** @nodts @return {!Strings} */
  static $create__() {
   Strings.$clinit();
   let $instance = new Strings();
   $instance.$ctor__strings_Strings__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__strings_Strings__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_strings_Strings();
  }
- 
+ /** @nodts */
  m_test__() {
   let s1 = null;
   let s2 = null;
@@ -65,32 +65,33 @@ class Strings extends j_l_Object {
   s1 = (1 + 2 | 0) + 's';
   s1 = 's' + 1 + 2;
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_strings_Strings() {
   this.f_someString__strings_Strings_ = 'This is a string literal';
   this.f_nonBmpChar__strings_Strings_ = '\uD800\uDF46';
   this.f_wideColon__strings_Strings_ = '\uFF1A';
  }
- 
+ /** @nodts */
  static $clinit() {
   Strings.$clinit = () =>{};
   Strings.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Strings;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Long = goog.module.get('nativebootstrap.Long$impl');
   StringHolder = goog.module.get('strings.Strings.StringHolder$impl');
  }
 }
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 Strings.f_ESCAPE_CODES__strings_Strings_ = '\b\f\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 Strings.f_ESCAPE_CODES_COPY__strings_Strings_ = '\b\f\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
 $Util.$setClassMetadata(Strings, 'strings.Strings');
 

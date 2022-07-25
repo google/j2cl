@@ -6,45 +6,46 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let SimpleLocalClass = goog.forwardDeclare('simplelocalclass.SimpleLocalClass$impl');
 
 class $1InnerClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {SimpleLocalClass}*/
+  /**@type {SimpleLocalClass} @nodts*/
   this.$outer_this__simplelocalclass_SimpleLocalClass_1InnerClass;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass = 0;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass = 0;
  }
- /** @return {!$1InnerClass} */
+ /** @nodts @return {!$1InnerClass} */
  static $create__simplelocalclass_SimpleLocalClass__int__int(/** SimpleLocalClass */ $outer_this, /** number */ $captured_localVar, /** number */ $captured_p) {
   $1InnerClass.$clinit();
   let $instance = new $1InnerClass();
   $instance.$ctor__simplelocalclass_SimpleLocalClass_1InnerClass__simplelocalclass_SimpleLocalClass__int__int($outer_this, $captured_localVar, $captured_p);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__simplelocalclass_SimpleLocalClass_1InnerClass__simplelocalclass_SimpleLocalClass__int__int(/** SimpleLocalClass */ $outer_this, /** number */ $captured_localVar, /** number */ $captured_p) {
   this.$outer_this__simplelocalclass_SimpleLocalClass_1InnerClass = $outer_this;
   this.$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass = $captured_localVar;
   this.$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass = $captured_p;
   this.$ctor__java_lang_Object__();
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_fun__() {
   return this.$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass + this.$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass | 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   $1InnerClass.$clinit = () =>{};
   $1InnerClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1InnerClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($1InnerClass, 'simplelocalclass.SimpleLocalClass$1InnerClass');

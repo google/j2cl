@@ -9,33 +9,34 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {I}
  */
 class A extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__() {
   this.$ctor__java_lang_Object__();
  }
- /** @abstract @override */
+ /** @abstract @override @nodts */
  m_foo__() {}
  //Default method forwarding stub.
- /** @override */
+ /** @override @nodts */
  m_bar__() {
   I.m_bar__$default__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(this);
  }
- 
+ /** @nodts */
  static $clinit() {
   A.$clinit = () =>{};
   A.$loadModules();
   j_l_Object.$clinit();
   I.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof A;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor(A);

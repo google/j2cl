@@ -4,30 +4,32 @@ const NativeJsTypeInterfaceWithOverlay = goog.require('test.foo.NativeJsTypeInte
 
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 
+/** @nodts */
 class $Overlay {
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(/** !NativeJsTypeInterfaceWithOverlay */ $thisArg) {
   $Overlay.$clinit();
   return $thisArg.m();
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  static get f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay() {
   return ($Overlay.$clinit(), $Overlay.$static_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);
  }
- 
+ /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
   $Overlay.$static_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay = j_l_Object.$create__();
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_Object = goog.module.get('java.lang.Object$impl');
  }
 }
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 $Overlay.f_COMPILE_TIME_CONSTANT__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay = '10';
-/**@private {*}*/
+/**@private {*} @nodts*/
 $Overlay.$static_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay;
 
 exports = $Overlay;

@@ -10,27 +10,27 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
  * @template T
  */
 class InferReturn extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!InferReturn<T>} */
+ /** @nodts @template T @return {!InferReturn<T>} */
  static $create__() {
   InferReturn.$clinit();
   let $instance = new InferReturn();
   $instance.$ctor__inferreturn_InferReturn__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__inferreturn_InferReturn__() {
   this.$ctor__java_lang_Object__();
  }
- /** @template T_1 @return {InferReturn<T_1>} */
+ /** @nodts @template T_1 @return {InferReturn<T_1>} */
  static m_inferGeneric__java_lang_Object(/** T_1 */ foo) {
   InferReturn.$clinit();
   return /**@type {!InferReturn<T_1>}*/ (InferReturn.$create__());
  }
- /** @return {InferReturn<InferReturn<?string>>} */
+ /** @nodts @return {InferReturn<InferReturn<?string>>} */
  static m_tightenType__inferreturn_InferReturn(/** InferReturn<?string> */ foo) {
   InferReturn.$clinit();
   if (!$Equality.$same(foo, null)) {
@@ -38,7 +38,7 @@ class InferReturn extends j_l_Object {
   }
   return null;
  }
- 
+ /** @nodts */
  static m_main__() {
   InferReturn.$clinit();
   let list = /**@type {ArrayList<*>}*/ (InferReturn.m_newArrayList__java_lang_Object('foo'));
@@ -46,35 +46,36 @@ class InferReturn extends j_l_Object {
   let array = InferReturn.m_newArray__java_lang_Object('foo');
   InferReturn.m_acceptsArrayOfObject__arrayOf_java_lang_Object(array);
  }
- /** @template V @return {ArrayList<V>} */
+ /** @nodts @template V @return {ArrayList<V>} */
  static m_newArrayList__java_lang_Object(/** V */ foo) {
   InferReturn.$clinit();
   return /**@type {!ArrayList<V>}*/ (ArrayList.$create__());
  }
- /** @template V @return {Array<V>} */
+ /** @nodts @template V @return {Array<V>} */
  static m_newArray__java_lang_Object(/** V */ foo) {
   InferReturn.$clinit();
   return /**@type {Array<V>}*/ (new Array(0));
  }
- 
+ /** @nodts */
  static m_acceptsArrayListOfObject__java_util_ArrayList(/** ArrayList<*> */ foo) {
   InferReturn.$clinit();
  }
- 
+ /** @nodts */
  static m_acceptsArrayOfObject__arrayOf_java_lang_Object(/** Array<*> */ foo) {
   InferReturn.$clinit();
  }
- 
+ /** @nodts */
  static $clinit() {
   InferReturn.$clinit = () =>{};
   InferReturn.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InferReturn;
  }
  
+ /** @nodts */
  static $loadModules() {
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');

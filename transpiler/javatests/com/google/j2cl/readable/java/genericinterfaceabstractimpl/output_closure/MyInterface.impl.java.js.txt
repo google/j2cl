@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('genericinterfaceabstractimpl.MyInterfa
  * @template T
  */
 class MyInterface {
- /** @abstract @return {T} */
+ /** @abstract @nodts @return {T} */
  m_fun__java_lang_Object(/** T */ t) {}
- /** @template T @return {MyInterface<T>} */
+ /** @nodts @template T @return {MyInterface<T>} */
  static $adapt(/** ?function(T):T */ fn) {
   MyInterface.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   MyInterface.$clinit = () =>{};
   MyInterface.$loadModules();
@@ -25,11 +25,12 @@ class MyInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__genericinterfaceabstractimpl_MyInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__genericinterfaceabstractimpl_MyInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('genericinterfaceabstractimpl.MyInterface.$LambdaAdaptor$impl');
  }

@@ -12,22 +12,22 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__jsoverlay_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsoverlay_Main__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   let n = new NativeJsTypeWithOverlay();
   $Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay(n);
@@ -44,17 +44,18 @@ class Main extends j_l_Object {
   NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(foo);
   let b = j_l_String.m_valueOf__java_lang_Object(NativeJsTypeInterfaceWithOverlay_$Overlay.f_COMPILE_TIME_CONSTANT__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay) + j_l_String.m_valueOf__java_lang_Object(NativeJsTypeInterfaceWithOverlay_$Overlay.f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   NativeJsTypeInterfaceWithOverlay_$Overlay = goog.module.get('jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');

@@ -7,24 +7,24 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Objects = goog.forwardDeclare('java.util.Objects$impl');
 
 class ExtendingAutoValue extends BaseClass {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_baseField__autovalue_AutoValue_ExtendingAutoValue_ = 0;
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_booleanField__autovalue_AutoValue_ExtendingAutoValue_ = false;
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_stringField__autovalue_AutoValue_ExtendingAutoValue_;
  }
- /** @return {!ExtendingAutoValue} */
+ /** @nodts @return {!ExtendingAutoValue} */
  static $create__int__boolean__java_lang_String(/** number */ baseField, /** boolean */ booleanField, /** ?string */ stringField) {
   ExtendingAutoValue.$clinit();
   let $instance = new ExtendingAutoValue();
   $instance.$ctor__autovalue_ExtendingAutoValue__int__boolean__java_lang_String(baseField, booleanField, stringField);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_ExtendingAutoValue__int__boolean__java_lang_String(/** number */ baseField, /** boolean */ booleanField, /** ?string */ stringField) {
   this.$ctor__autovalue_BaseClass__();
   this.f_baseField__autovalue_AutoValue_ExtendingAutoValue_ = baseField;
@@ -33,29 +33,30 @@ class ExtendingAutoValue extends BaseClass {
   this.f_stringField__autovalue_AutoValue_ExtendingAutoValue_ = stringField;
   $J2CL_PRESERVE$(this.f_baseField__autovalue_AutoValue_ExtendingAutoValue_, this.f_booleanField__autovalue_AutoValue_ExtendingAutoValue_, this.f_stringField__autovalue_AutoValue_ExtendingAutoValue_);
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_getBaseField__() {
   return this.f_baseField__autovalue_AutoValue_ExtendingAutoValue_;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  m_getBooleanField__() {
   return this.f_booleanField__autovalue_AutoValue_ExtendingAutoValue_;
  }
- /** @return {?string} */
+ /** @nodts @return {?string} */
  m_getStringField__() {
   return this.f_stringField__autovalue_AutoValue_ExtendingAutoValue_;
  }
- 
+ /** @nodts */
  static $clinit() {
   ExtendingAutoValue.$clinit = () =>{};
   ExtendingAutoValue.$loadModules();
   BaseClass.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ExtendingAutoValue;
  }
  
+ /** @nodts */
  static $loadModules() {
   Objects = goog.module.get('java.util.Objects$impl');
  }

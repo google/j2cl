@@ -11,32 +11,33 @@ let $Enums_BoxedLightEnum = goog.forwardDeclare('vmbootstrap.Enums.BoxedLightEnu
  * @template T
  */
 class Foo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!Foo<T>} */
+ /** @nodts @template T @return {!Foo<T>} */
  static $create__java_util_Optional(/** Optional<$Enums_BoxedLightEnum<?IntJsEnum>> */ c) {
   Foo.$clinit();
   let $instance = new Foo();
   $instance.$ctor__jsenum_Main_Foo__java_util_Optional(c);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsenum_Main_Foo__java_util_Optional(/** Optional<$Enums_BoxedLightEnum<?IntJsEnum>> */ c) {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
   Foo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Foo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Foo, 'jsenum.Main$Foo');

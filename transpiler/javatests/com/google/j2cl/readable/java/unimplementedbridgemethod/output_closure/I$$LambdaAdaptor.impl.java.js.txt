@@ -9,35 +9,36 @@ const I = goog.require('unimplementedbridgemethod.I$impl');
  * @implements {I<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(T):number */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(T):number}*/
+  /**@type {?function(T):number} @nodts*/
   this.f_fn__unimplementedbridgemethod_I_$LambdaAdaptor;
   this.$ctor__unimplementedbridgemethod_I_$LambdaAdaptor__unimplementedbridgemethod_I_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__unimplementedbridgemethod_I_$LambdaAdaptor__unimplementedbridgemethod_I_$JsFunction(/** ?function(T):number */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__unimplementedbridgemethod_I_$LambdaAdaptor = fn;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_foo__java_lang_Object(/** T */ arg0) {
   let /** ?function(T):number */ $function;
   return ($function = this.f_fn__unimplementedbridgemethod_I_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor($LambdaAdaptor);

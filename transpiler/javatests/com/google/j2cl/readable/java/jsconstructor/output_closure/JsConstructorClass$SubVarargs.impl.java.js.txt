@@ -18,10 +18,10 @@ class SubVarargs extends Varargs {
   this.$ctor__jsconstructor_JsConstructorClass_SubVarargs__java_lang_Object__arrayOf_int(i, args);
  }
  //Initialization from constructor 'SubVarargs(Object, int...)'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_SubVarargs__java_lang_Object__arrayOf_int(/** * */ i, /** Array<number> */ args) {}
  //Factory method corresponding to constructor 'SubVarargs(int)'.
- /** @return {!SubVarargs} */
+ /** @nodts @return {!SubVarargs} */
  static $create__int(/** number */ j) {
   SubVarargs.$clinit();
   let $instance = new SubVarargs(j_l_Object.$create__(), j);
@@ -29,25 +29,26 @@ class SubVarargs extends Varargs {
   return $instance;
  }
  //Initialization from constructor 'SubVarargs(int)'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_SubVarargs__int(/** number */ j) {}
- 
+ /** @nodts */
  static m_subNativeInvocation__() {
   SubVarargs.$clinit();
   let unusedS1 = SubVarargs.$create__int(2);
   let unusedS2 = new SubVarargs(j_l_Object.$create__(), 1, 2, 3);
  }
- 
+ /** @nodts */
  static $clinit() {
   SubVarargs.$clinit = () =>{};
   SubVarargs.$loadModules();
   Varargs.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SubVarargs;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_Object = goog.module.get('java.lang.Object$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');

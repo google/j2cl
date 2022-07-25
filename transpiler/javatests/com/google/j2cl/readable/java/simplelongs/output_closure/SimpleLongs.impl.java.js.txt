@@ -7,36 +7,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 
 class SimpleLongs extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {!$Long}*/
+  /**@type {!$Long} @nodts*/
   this.f_foo__simplelongs_SimpleLongs = $Long.fromInt(0);
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_sideEffect__simplelongs_SimpleLongs_ = 0;
  }
- /** @return {!SimpleLongs} */
+ /** @nodts @return {!SimpleLongs} */
  static $create__() {
   SimpleLongs.$clinit();
   let $instance = new SimpleLongs();
   $instance.$ctor__simplelongs_SimpleLongs__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__simplelongs_SimpleLongs__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_simplelongs_SimpleLongs();
  }
- /** @return {!$Long} */
+ /** @nodts @return {!$Long} */
  m_getBar__() {
   return $Long.fromInt(0);
  }
- /** @return {SimpleLongs} */
+ /** @nodts @return {SimpleLongs} */
  m_getWithSideEffect__() {
   this.f_sideEffect__simplelongs_SimpleLongs_ = this.f_sideEffect__simplelongs_SimpleLongs_ + 1 | 0;
   return this;
  }
- 
+ /** @nodts */
  m_main__() {
   let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value_1, /** SimpleLongs */ $qualifier_1, /** !$Long */ $value_2;
   let a = $Long.fromInt(0);
@@ -57,21 +57,22 @@ class SimpleLongs extends j_l_Object {
   let g = this.f_foo__simplelongs_SimpleLongs;
   g = this.m_getBar__();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_simplelongs_SimpleLongs() {
   this.f_foo__simplelongs_SimpleLongs = $Long.fromInt(0);
  }
- 
+ /** @nodts */
  static $clinit() {
   SimpleLongs.$clinit = () =>{};
   SimpleLongs.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SimpleLongs;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
  }

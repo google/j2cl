@@ -8,36 +8,37 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @abstract
  */
 class LongInitialValue extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__longinitialvalue_LongInitialValue__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {!$Long} */
+ /** @nodts @return {!$Long} */
  static get f_LONG_VALUE__longinitialvalue_LongInitialValue() {
   return (LongInitialValue.$clinit(), LongInitialValue.$static_LONG_VALUE__longinitialvalue_LongInitialValue);
  }
- 
+ /** @nodts */
  static set f_LONG_VALUE__longinitialvalue_LongInitialValue(/** !$Long */ value) {
   (LongInitialValue.$clinit(), LongInitialValue.$static_LONG_VALUE__longinitialvalue_LongInitialValue = value);
  }
- 
+ /** @nodts */
  static $clinit() {
   LongInitialValue.$clinit = () =>{};
   LongInitialValue.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof LongInitialValue;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
-/**@private {!$Long}*/
+/**@private {!$Long} @nodts*/
 LongInitialValue.$static_LONG_VALUE__longinitialvalue_LongInitialValue = $Long.fromInt(0);
 $Util.$setClassMetadata(LongInitialValue, 'longinitialvalue.LongInitialValue');
 

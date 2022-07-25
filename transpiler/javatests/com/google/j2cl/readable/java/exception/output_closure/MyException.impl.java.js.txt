@@ -6,12 +6,12 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 
 class MyException extends Exception {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
  //Factory method corresponding to constructor 'MyException()'.
- /** @return {!MyException} */
+ /** @nodts @return {!MyException} */
  static $create__() {
   MyException.$clinit();
   let $instance = new MyException();
@@ -20,12 +20,12 @@ class MyException extends Exception {
   return $instance;
  }
  //Initialization from constructor 'MyException()'.
- 
+ /** @nodts */
  $ctor__exception_MyException__() {
   this.$ctor__java_lang_Exception__();
  }
  //Factory method corresponding to constructor 'MyException(Throwable)'.
- /** @return {!MyException} */
+ /** @nodts @return {!MyException} */
  static $create__java_lang_Throwable(/** Throwable */ cause) {
   MyException.$clinit();
   let $instance = new MyException();
@@ -34,21 +34,22 @@ class MyException extends Exception {
   return $instance;
  }
  //Initialization from constructor 'MyException(Throwable)'.
- 
+ /** @nodts */
  $ctor__exception_MyException__java_lang_Throwable(/** Throwable */ cause) {
   this.$ctor__java_lang_Exception__java_lang_Throwable(cause);
  }
- 
+ /** @nodts */
  static $clinit() {
   MyException.$clinit = () =>{};
   MyException.$loadModules();
   Exception.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MyException;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(MyException, 'exception.MyException');

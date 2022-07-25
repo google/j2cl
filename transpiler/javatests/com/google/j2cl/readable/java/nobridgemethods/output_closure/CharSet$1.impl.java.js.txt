@@ -7,32 +7,33 @@ const TreeMap = goog.require('nobridgemethods.TreeMap$impl');
  * @extends {TreeMap<?string>}
  */
 class $1 extends TreeMap {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!$1} */
+ /** @nodts @return {!$1} */
  static $create__() {
   $1.$clinit();
   let $instance = new $1();
   $instance.$ctor__nobridgemethods_CharSet_1__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nobridgemethods_CharSet_1__() {
   this.$ctor__nobridgemethods_TreeMap__();
  }
- 
+ /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
   $1.$loadModules();
   TreeMap.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($1, 'nobridgemethods.CharSet$1');

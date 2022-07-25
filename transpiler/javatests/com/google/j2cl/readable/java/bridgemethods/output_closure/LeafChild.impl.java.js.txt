@@ -7,32 +7,33 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {ReparametrerizedChild<LeafChild>}
  */
 class LeafChild extends ReparametrerizedChild {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!LeafChild} */
+ /** @nodts @return {!LeafChild} */
  static $create__() {
   LeafChild.$clinit();
   let $instance = new LeafChild();
   $instance.$ctor__bridgemethods_LeafChild__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_LeafChild__() {
   this.$ctor__bridgemethods_ReparametrerizedChild__();
  }
- 
+ /** @nodts */
  static $clinit() {
   LeafChild.$clinit = () =>{};
   LeafChild.$loadModules();
   ReparametrerizedChild.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof LeafChild;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(LeafChild, 'bridgemethods.LeafChild');

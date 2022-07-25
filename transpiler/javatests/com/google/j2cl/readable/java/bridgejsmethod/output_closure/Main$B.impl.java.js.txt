@@ -10,18 +10,18 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @extends {A<?string>}
  */
 class B extends A {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!B} */
+ /** @nodts @return {!B} */
  static $create__() {
   B.$clinit();
   let $instance = new B();
   $instance.$ctor__bridgejsmethod_Main_B__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_B__() {
   this.$ctor__bridgejsmethod_Main_A__();
  }
@@ -32,21 +32,22 @@ class B extends A {
  
  bar(/** ?string */ s) {}
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_bar__java_lang_Object(/** ?string */ arg0) {
   this.bar(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
- 
+ /** @nodts */
  static $clinit() {
   B.$clinit = () =>{};
   B.$loadModules();
   A.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof B;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

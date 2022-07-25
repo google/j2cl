@@ -8,34 +8,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {AutoCloseable}
  */
 class ClosableThing extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!ClosableThing} */
+ /** @nodts @return {!ClosableThing} */
  static $create__() {
   ClosableThing.$clinit();
   let $instance = new ClosableThing();
   $instance.$ctor__trycatch_TryCatch_ClosableThing__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__trycatch_TryCatch_ClosableThing__() {
   this.$ctor__java_lang_Object__();
  }
- /** @override */
+ /** @override @nodts */
  m_close__() {}
- 
+ /** @nodts */
  static $clinit() {
   ClosableThing.$clinit = () =>{};
   ClosableThing.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ClosableThing;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 AutoCloseable.$markImplementor(ClosableThing);

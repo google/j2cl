@@ -7,7 +7,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template TT
  */
 class Empty2 {
- 
+ /** @nodts */
  static $clinit() {
   Empty2.$clinit = () =>{};
   Empty2.$loadModules();
@@ -16,11 +16,12 @@ class Empty2 {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__cast_CastGenerics_Empty2 = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__cast_CastGenerics_Empty2;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Empty2.$markImplementor(/**@type {Function}*/ (Empty2));

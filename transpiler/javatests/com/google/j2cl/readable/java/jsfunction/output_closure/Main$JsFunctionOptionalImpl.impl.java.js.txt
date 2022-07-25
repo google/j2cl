@@ -8,18 +8,18 @@ let Double = goog.forwardDeclare('java.lang.Double$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class JsFunctionOptionalImpl extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {function(number, ?number=):number} */
+ /** @nodts @return {function(number, ?number=):number} */
  static $create__() {
   JsFunctionOptionalImpl.$clinit();
   let $instance = new JsFunctionOptionalImpl();
   $instance.$ctor__jsfunction_Main_JsFunctionOptionalImpl__();
   return $Util.$makeLambdaFunction(JsFunctionOptionalImpl.prototype.m_m__int__java_lang_Double, $instance, JsFunctionOptionalImpl.$copy);
  }
- /** @suppress {invalidCasts} */
+ /** @nodts @suppress {invalidCasts} */
  $ctor__jsfunction_Main_JsFunctionOptionalImpl__() {
   this.$ctor__java_lang_Object__();
  }
@@ -27,21 +27,22 @@ class JsFunctionOptionalImpl extends j_l_Object {
  m_m__int__java_lang_Double(/** number */ i, /** ?number= */ number_1) {
   return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(number_1));
  }
- 
+ /** @nodts */
  static $clinit() {
   JsFunctionOptionalImpl.$clinit = () =>{};
   JsFunctionOptionalImpl.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$is__jsfunction_Main_JsFunctionOptionalImpl;
  }
- 
+ /** @nodts */
  static $copy(/** ? */ from, /** ? */ to) {
   to.$is__jsfunction_Main_JsFunctionOptionalImpl = true;
  }
  
+ /** @nodts */
  static $loadModules() {
   Double = goog.module.get('java.lang.Double$impl');
   $Primitives = goog.module.get('vmbootstrap.Primitives$impl');

@@ -4,37 +4,38 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class NewInstanceExpr extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!NewInstanceExpr} */
+ /** @nodts @return {!NewInstanceExpr} */
  static $create__() {
   NewInstanceExpr.$clinit();
   let $instance = new NewInstanceExpr();
   $instance.$ctor__newinstance_NewInstanceExpr__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__newinstance_NewInstanceExpr__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
   NewInstanceExpr.$clinit();
   let a = NewInstanceExpr.$create__();
  }
- 
+ /** @nodts */
  static $clinit() {
   NewInstanceExpr.$clinit = () =>{};
   NewInstanceExpr.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NewInstanceExpr;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(NewInstanceExpr, 'newinstance.NewInstanceExpr');

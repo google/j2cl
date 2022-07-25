@@ -6,39 +6,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder$impl');
 
 class $1 extends $1AddNumber {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {InnerClassInitOrder}*/
+  /**@type {InnerClassInitOrder} @nodts*/
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_1;
  }
- /** @return {!$1} */
+ /** @nodts @return {!$1} */
  static $create__innerclassinitorder_InnerClassInitOrder__int(/** InnerClassInitOrder */ $outer_this, /** number */ $_0) {
   $1.$clinit();
   let $instance = new $1();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder_1__innerclassinitorder_InnerClassInitOrder__int($outer_this, $_0);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_1__innerclassinitorder_InnerClassInitOrder__int(/** InnerClassInitOrder */ $outer_this, /** number */ $_0) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_1 = $outer_this;
   this.$ctor__innerclassinitorder_InnerClassInitOrder_1AddNumber__innerclassinitorder_InnerClassInitOrder__int($outer_this, $_0);
  }
- /** @override */
+ /** @override @nodts */
  m_act__() {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_1.f_number__innerclassinitorder_InnerClassInitOrder = this.$outer_this__innerclassinitorder_InnerClassInitOrder_1.f_number__innerclassinitorder_InnerClassInitOrder + this.f_num__innerclassinitorder_InnerClassInitOrder_1AddNumber | 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
   $1.$loadModules();
   $1AddNumber.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($1, 'innerclassinitorder.InnerClassInitOrder$1');

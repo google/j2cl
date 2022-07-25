@@ -6,50 +6,51 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let InstanceInnerClass = goog.forwardDeclare('instanceinnerclass.InstanceInnerClass$impl');
 
 class InnerClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {InstanceInnerClass}*/
+  /**@type {InstanceInnerClass} @nodts*/
   this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_field__instanceinnerclass_InstanceInnerClass_InnerClass = 0;
-  /**@type {InstanceInnerClass}*/
+  /**@type {InstanceInnerClass} @nodts*/
   this.f_enclosingInstance__instanceinnerclass_InstanceInnerClass_InnerClass;
  }
- /** @return {!InnerClass} */
+ /** @nodts @return {!InnerClass} */
  static $create__instanceinnerclass_InstanceInnerClass(/** InstanceInnerClass */ $outer_this) {
   InnerClass.$clinit();
   let $instance = new InnerClass();
   $instance.$ctor__instanceinnerclass_InstanceInnerClass_InnerClass__instanceinnerclass_InstanceInnerClass($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__instanceinnerclass_InstanceInnerClass_InnerClass__instanceinnerclass_InstanceInnerClass(/** InstanceInnerClass */ $outer_this) {
   this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass = $outer_this;
   this.$ctor__java_lang_Object__();
   this.$init___$p_instanceinnerclass_InstanceInnerClass_InnerClass();
  }
- 
+ /** @nodts */
  m_funInner__() {
   this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass.m_funOuter__();
   this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass.m_funOuter__();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_instanceinnerclass_InstanceInnerClass_InnerClass() {
   this.f_field__instanceinnerclass_InstanceInnerClass_InnerClass = this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass.f_instanceField__instanceinnerclass_InstanceInnerClass + this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass.f_instanceField__instanceinnerclass_InstanceInnerClass | 0;
   this.f_enclosingInstance__instanceinnerclass_InstanceInnerClass_InnerClass = this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass;
  }
- 
+ /** @nodts */
  static $clinit() {
   InnerClass.$clinit = () =>{};
   InnerClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InnerClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(InnerClass, 'instanceinnerclass.InstanceInnerClass$InnerClass');

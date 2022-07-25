@@ -7,39 +7,40 @@ let Parent = goog.forwardDeclare('qualifiedsupercall.Parent$impl');
 let QualifiedSuperCall = goog.forwardDeclare('qualifiedsupercall.QualifiedSuperCall$impl');
 
 class InnerClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {QualifiedSuperCall}*/
+  /**@type {QualifiedSuperCall} @nodts*/
   this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass;
  }
- /** @return {!InnerClass} */
+ /** @nodts @return {!InnerClass} */
  static $create__qualifiedsupercall_QualifiedSuperCall(/** QualifiedSuperCall */ $outer_this) {
   InnerClass.$clinit();
   let $instance = new InnerClass();
   $instance.$ctor__qualifiedsupercall_QualifiedSuperCall_InnerClass__qualifiedsupercall_QualifiedSuperCall($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__qualifiedsupercall_QualifiedSuperCall_InnerClass__qualifiedsupercall_QualifiedSuperCall(/** QualifiedSuperCall */ $outer_this) {
   this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   Parent.prototype.m_fun__.call(this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass);
  }
- 
+ /** @nodts */
  static $clinit() {
   InnerClass.$clinit = () =>{};
   InnerClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InnerClass;
  }
  
+ /** @nodts */
  static $loadModules() {
   Parent = goog.module.get('qualifiedsupercall.Parent$impl');
  }

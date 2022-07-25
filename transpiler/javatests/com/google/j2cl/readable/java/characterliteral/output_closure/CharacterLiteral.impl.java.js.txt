@@ -4,22 +4,22 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class CharacterLiteral extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!CharacterLiteral} */
+ /** @nodts @return {!CharacterLiteral} */
  static $create__() {
   CharacterLiteral.$clinit();
   let $instance = new CharacterLiteral();
   $instance.$ctor__characterliteral_CharacterLiteral__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__characterliteral_CharacterLiteral__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_main__() {
   let a = 32 /* ' ' */;
   a = 0 /* '\u0000' */;
@@ -144,17 +144,18 @@ class CharacterLiteral extends j_l_Object {
   a = 125 /* '}' */;
   a = 126 /* '~' */;
  }
- 
+ /** @nodts */
  static $clinit() {
   CharacterLiteral.$clinit = () =>{};
   CharacterLiteral.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof CharacterLiteral;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(CharacterLiteral, 'characterliteral.CharacterLiteral');

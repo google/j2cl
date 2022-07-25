@@ -8,20 +8,20 @@ let $LambdaAdaptor = goog.forwardDeclare('abstractmethodoverridedefault.Abstract
  * @interface
  */
 class J {
- /** @abstract */
+ /** @abstract @nodts */
  m_foo__() {}
- /** @abstract */
+ /** @abstract @nodts */
  m_bar__() {}
- /** @return {J} */
+ /** @nodts @return {J} */
  static $adapt(/** ?function():void */ fn) {
   J.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static m_foo__$default__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J(/** !J */ $thisArg) {
   J.$clinit();
  }
- 
+ /** @nodts */
  static $clinit() {
   J.$clinit = () =>{};
   J.$loadModules();
@@ -30,11 +30,12 @@ class J {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$LambdaAdaptor$impl');
  }

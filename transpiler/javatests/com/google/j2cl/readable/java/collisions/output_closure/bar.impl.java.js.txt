@@ -7,23 +7,23 @@ let foo = goog.forwardDeclare('collisions.foo$impl');
 let collisions_goog = goog.forwardDeclare('collisions.goog$impl');
 
 class bar extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!bar} */
+ /** @nodts @return {!bar} */
  static $create__() {
   bar.$clinit();
   let $instance = new bar();
   $instance.$ctor__collisions_bar__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__collisions_bar__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_collisions_bar();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_collisions_bar() {
   let /** number */ foo_1, /** number */ bar_1, /** number */ goog_1, /** number */ flip, /** number */ window_1;
   Math.random();
@@ -34,17 +34,18 @@ class bar extends j_l_Object {
   let delete_1 = 1;
   let undefined_1 = 3;
  }
- 
+ /** @nodts */
  static $clinit() {
   bar.$clinit = () =>{};
   bar.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof bar;
  }
  
+ /** @nodts */
  static $loadModules() {
   foo = goog.module.get('collisions.foo$impl');
   collisions_goog = goog.module.get('collisions.goog$impl');

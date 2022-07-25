@@ -7,24 +7,24 @@ let $1Outer = goog.forwardDeclare('booleanoperations.BooleanOperations.$1Outer$i
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 class BooleanOperations extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!BooleanOperations} */
+ /** @nodts @return {!BooleanOperations} */
  static $create__() {
   BooleanOperations.$clinit();
   let $instance = new BooleanOperations();
   $instance.$ctor__booleanoperations_BooleanOperations__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__booleanoperations_BooleanOperations__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_acceptBoolean__boolean(/** boolean */ b) {}
- 
+ /** @nodts */
  m_test__() {
   let ls = true;
   let rs = true;
@@ -84,17 +84,18 @@ class BooleanOperations extends j_l_Object {
   let outer = $1Outer.$create__booleanoperations_BooleanOperations(this);
   outer.f_b__booleanoperations_BooleanOperations_1Outer = !!(+ outer.f_b__booleanoperations_BooleanOperations_1Outer | + $Equality.$same(outer = null, null));
  }
- 
+ /** @nodts */
  static $clinit() {
   BooleanOperations.$clinit = () =>{};
   BooleanOperations.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof BooleanOperations;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1Outer = goog.module.get('booleanoperations.BooleanOperations.$1Outer$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');

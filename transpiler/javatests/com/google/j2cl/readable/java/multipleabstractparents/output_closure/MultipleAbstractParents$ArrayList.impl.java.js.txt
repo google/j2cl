@@ -8,32 +8,33 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {AbstractList<T>}
  */
 class ArrayList extends AbstractList {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!ArrayList<T>} */
+ /** @nodts @template T @return {!ArrayList<T>} */
  static $create__() {
   ArrayList.$clinit();
   let $instance = new ArrayList();
   $instance.$ctor__multipleabstractparents_MultipleAbstractParents_ArrayList__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__multipleabstractparents_MultipleAbstractParents_ArrayList__() {
   this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractList__();
  }
- 
+ /** @nodts */
  static $clinit() {
   ArrayList.$clinit = () =>{};
   ArrayList.$loadModules();
   AbstractList.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ArrayList;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ArrayList, 'multipleabstractparents.MultipleAbstractParents$ArrayList');

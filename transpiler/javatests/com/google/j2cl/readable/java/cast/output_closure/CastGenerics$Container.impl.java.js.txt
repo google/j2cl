@@ -7,35 +7,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class Container extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!Container<T>} */
+ /** @nodts @template T @return {!Container<T>} */
  static $create__() {
   let $instance = new Container();
   $instance.$ctor__cast_CastGenerics_Container__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__cast_CastGenerics_Container__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {T} */
+ /** @nodts @return {T} */
  m_get___$pp_cast() {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   Container.$clinit = () =>{};
   Container.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Container;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Container, 'cast.CastGenerics$Container');

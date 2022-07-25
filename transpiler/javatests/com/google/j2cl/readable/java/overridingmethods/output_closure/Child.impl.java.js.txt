@@ -8,36 +8,37 @@ const SomeInterface = goog.require('overridingmethods.SomeInterface$impl');
  * @implements {SomeInterface}
  */
 class Child extends Parent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Child} */
+ /** @nodts @return {!Child} */
  static $create__() {
   Child.$clinit();
   let $instance = new Child();
   $instance.$ctor__overridingmethods_Child__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__overridingmethods_Child__() {
   this.$ctor__overridingmethods_Parent__();
  }
- /** @override */
+ /** @override @nodts */
  m_fun__() {}
- /** @override */
+ /** @override @nodts */
  m_bar__() {}
- 
+ /** @nodts */
  static $clinit() {
   Child.$clinit = () =>{};
   Child.$loadModules();
   Parent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Child;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 SomeInterface.$markImplementor(Child);

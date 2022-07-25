@@ -4,20 +4,20 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class ClassWithJsFunctionProperty extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {?function(?string):void}*/
+  /**@type {?function(?string):void} @nodts*/
   this.f_function__jsfunction_Main_ClassWithJsFunctionProperty;
  }
- /** @return {!ClassWithJsFunctionProperty} */
+ /** @nodts @return {!ClassWithJsFunctionProperty} */
  static $create__() {
   ClassWithJsFunctionProperty.$clinit();
   let $instance = new ClassWithJsFunctionProperty();
   $instance.$ctor__jsfunction_Main_ClassWithJsFunctionProperty__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsfunction_Main_ClassWithJsFunctionProperty__() {
   this.$ctor__java_lang_Object__();
  }
@@ -25,17 +25,18 @@ class ClassWithJsFunctionProperty extends j_l_Object {
  get function() {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   ClassWithJsFunctionProperty.$clinit = () =>{};
   ClassWithJsFunctionProperty.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ClassWithJsFunctionProperty;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ClassWithJsFunctionProperty, 'jsfunction.Main$ClassWithJsFunctionProperty');

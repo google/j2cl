@@ -9,36 +9,37 @@ let System = goog.forwardDeclare('java.lang.System$impl');
  * @template T
  */
 class GenericClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!GenericClass<T>} */
+ /** @nodts @template T @return {!GenericClass<T>} */
  static $create__() {
   GenericClass.$clinit();
   let $instance = new GenericClass();
   $instance.$ctor__genericanddefaultmethods_GenericClass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__genericanddefaultmethods_GenericClass__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_foo__java_lang_Object(/** T */ value) {
   System.f_out__java_lang_System.m_println__java_lang_String('in GenericClass');
  }
- 
+ /** @nodts */
  static $clinit() {
   GenericClass.$clinit = () =>{};
   GenericClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof GenericClass;
  }
  
+ /** @nodts */
  static $loadModules() {
   System = goog.module.get('java.lang.System$impl');
  }

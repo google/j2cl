@@ -10,30 +10,31 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {IStringList}
  */
 class AbstractStringList2 extends AbstractList2 {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__multipleabstractparents_MultipleAbstractParents_AbstractStringList2__() {
   this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractList2__();
  }
  //Bridge method.
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_getFoo__java_lang_String(/** ?string */ arg0) {
   return this.m_getFoo__java_lang_Object(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   AbstractStringList2.$clinit = () =>{};
   AbstractStringList2.$loadModules();
   AbstractList2.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AbstractStringList2;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 IStringList.$markImplementor(AbstractStringList2);

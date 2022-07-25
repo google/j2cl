@@ -6,56 +6,57 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Builder = goog.forwardDeclare('autovalue.DefaultConstructorAutoValue.Builder$impl');
 
 class DefaultConstructorAutoValue extends ValueType {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ = false;
  }
- /** @return {!DefaultConstructorAutoValue} */
+ /** @nodts @return {!DefaultConstructorAutoValue} */
  static $create__() {
   DefaultConstructorAutoValue.$clinit();
   let $instance = new DefaultConstructorAutoValue();
   $instance.$ctor__autovalue_DefaultConstructorAutoValue__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_DefaultConstructorAutoValue__() {
   this.$ctor__javaemul_internal_ValueType__();
  }
- /** @return {DefaultConstructorAutoValue} */
+ /** @nodts @return {DefaultConstructorAutoValue} */
  static m_create__() {
   DefaultConstructorAutoValue.$clinit();
   return Builder.$create__().m_setBooleanField__boolean_$pp_autovalue(true).m_build__();
  }
- /** @return {!DefaultConstructorAutoValue} */
+ /** @nodts @return {!DefaultConstructorAutoValue} */
  static $create__boolean(/** boolean */ booleanField) {
   DefaultConstructorAutoValue.$clinit();
   let $instance = new DefaultConstructorAutoValue();
   $instance.$ctor__autovalue_DefaultConstructorAutoValue__boolean(booleanField);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_DefaultConstructorAutoValue__boolean(/** boolean */ booleanField) {
   this.$ctor__autovalue_DefaultConstructorAutoValue__();
   this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ = booleanField;
   $J2CL_PRESERVE$(this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_);
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  m_getBooleanField__() {
   return this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_;
  }
- 
+ /** @nodts */
  static $clinit() {
   DefaultConstructorAutoValue.$clinit = () =>{};
   DefaultConstructorAutoValue.$loadModules();
   ValueType.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof DefaultConstructorAutoValue;
  }
  
+ /** @nodts */
  static $loadModules() {
   Builder = goog.module.get('autovalue.DefaultConstructorAutoValue.Builder$impl');
  }

@@ -9,32 +9,33 @@ let RawType = goog.forwardDeclare('rawtype.RawType$impl');
  * @template T
  */
 class Bound extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!Bound<T>} */
+ /** @nodts @template T @return {!Bound<T>} */
  static $create__() {
   Bound.$clinit();
   let $instance = new Bound();
   $instance.$ctor__rawtype_RawType_Bound__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__rawtype_RawType_Bound__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Bound.$clinit = () =>{};
   Bound.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Bound;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Bound, 'rawtype.RawType$Bound');

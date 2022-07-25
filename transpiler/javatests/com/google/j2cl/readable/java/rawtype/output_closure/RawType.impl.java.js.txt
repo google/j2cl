@@ -9,40 +9,41 @@ let BoundRecursively = goog.forwardDeclare('rawtype.RawType.BoundRecursively$imp
 let Unbound = goog.forwardDeclare('rawtype.RawType.Unbound$impl');
 
 class RawType extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {(Comparable|boolean|number|string)}*/
+  /**@type {(Comparable|boolean|number|string)} @nodts*/
   this.f_c__rawtype_RawType;
  }
- /** @return {!RawType} */
+ /** @nodts @return {!RawType} */
  static $create__() {
   RawType.$clinit();
   let $instance = new RawType();
   $instance.$ctor__rawtype_RawType__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__rawtype_RawType__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test___$pp_rawtype() {
   let unbound = /**@type {!Unbound}*/ (Unbound.$create__());
   let bound = /**@type {!Bound}*/ (Bound.$create__());
   let boundRecursively = /**@type {!BoundRecursively}*/ (BoundRecursively.$create__rawtype_RawType(this));
  }
- 
+ /** @nodts */
  static $clinit() {
   RawType.$clinit = () =>{};
   RawType.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof RawType;
  }
  
+ /** @nodts */
  static $loadModules() {
   Bound = goog.module.get('rawtype.RawType.Bound$impl');
   BoundRecursively = goog.module.get('rawtype.RawType.BoundRecursively$impl');

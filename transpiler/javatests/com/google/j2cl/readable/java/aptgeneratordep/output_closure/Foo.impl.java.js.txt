@@ -8,18 +8,18 @@ let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 class Foo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Foo} */
+ /** @nodts @return {!Foo} */
  static $create__() {
   Foo.$clinit();
   let $instance = new Foo();
   $instance.$ctor__aptgeneratordep_Foo__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__aptgeneratordep_Foo__() {
   this.$ctor__java_lang_Object__();
  }
@@ -27,17 +27,18 @@ class Foo extends j_l_Object {
  hashCode() {
   return $Objects.m_hashCode__java_lang_Object(Class.$get(Dummy));
  }
- 
+ /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
   Foo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Foo;
  }
  
+ /** @nodts */
  static $loadModules() {
   Dummy = goog.module.get('aptgeneratordep.Dummy$impl');
   Class = goog.module.get('java.lang.Class$impl');

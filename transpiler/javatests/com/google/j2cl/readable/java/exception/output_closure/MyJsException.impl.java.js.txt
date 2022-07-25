@@ -15,12 +15,12 @@ class MyJsException extends Exception {
   this.m_privateInitError__java_lang_Object_$pp_java_lang(new Error(this));
  }
  //Initialization from constructor 'MyJsException()'.
- 
+ /** @nodts */
  $ctor__exception_MyJsException__() {
   this.$ctor__java_lang_Exception__();
  }
  //Factory method corresponding to constructor 'MyJsException(Throwable)'.
- /** @return {!MyJsException} */
+ /** @nodts @return {!MyJsException} */
  static $create__java_lang_Throwable(/** Throwable */ cause) {
   MyJsException.$clinit();
   let $instance = new MyJsException();
@@ -29,19 +29,20 @@ class MyJsException extends Exception {
   return $instance;
  }
  //Initialization from constructor 'MyJsException(Throwable)'.
- 
+ /** @nodts */
  $ctor__exception_MyJsException__java_lang_Throwable(/** Throwable */ cause) {}
- 
+ /** @nodts */
  static $clinit() {
   MyJsException.$clinit = () =>{};
   MyJsException.$loadModules();
   Exception.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MyJsException;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(MyJsException, 'exception.MyJsException');

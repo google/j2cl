@@ -9,18 +9,18 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @extends {A<Integer>}
  */
 class C extends A {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!C} */
+ /** @nodts @return {!C} */
  static $create__() {
   C.$clinit();
   let $instance = new C();
   $instance.$ctor__bridgejsmethod_Main_C__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_C__() {
   this.$ctor__bridgejsmethod_Main_A__();
  }
@@ -28,17 +28,18 @@ class C extends A {
  fun(/** Integer */ i) {
   return i;
  }
- 
+ /** @nodts */
  static $clinit() {
   C.$clinit = () =>{};
   C.$loadModules();
   A.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof C;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(C, 'bridgejsmethod.Main$C');

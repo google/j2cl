@@ -7,36 +7,37 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class ClassWithParameterizedGet extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!ClassWithParameterizedGet<T>} */
+ /** @nodts @template T @return {!ClassWithParameterizedGet<T>} */
  static $create__() {
   ClassWithParameterizedGet.$clinit();
   let $instance = new ClassWithParameterizedGet();
   $instance.$ctor__bridgemethods_ClassWithParameterizedGet__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_ClassWithParameterizedGet__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {T} */
+ /** @nodts @return {T} */
  m_get__java_lang_Object(/** T */ t) {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   ClassWithParameterizedGet.$clinit = () =>{};
   ClassWithParameterizedGet.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ClassWithParameterizedGet;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ClassWithParameterizedGet, 'bridgemethods.ClassWithParameterizedGet');

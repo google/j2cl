@@ -9,35 +9,36 @@ let RawType = goog.forwardDeclare('rawtype.RawType$impl');
  * @template T
  */
 class BoundRecursively extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {RawType}*/
+  /**@type {RawType} @nodts*/
   this.$outer_this__rawtype_RawType_BoundRecursively;
  }
- /** @template T @return {!BoundRecursively<T>} */
+ /** @nodts @template T @return {!BoundRecursively<T>} */
  static $create__rawtype_RawType(/** RawType */ $outer_this) {
   BoundRecursively.$clinit();
   let $instance = new BoundRecursively();
   $instance.$ctor__rawtype_RawType_BoundRecursively__rawtype_RawType($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__rawtype_RawType_BoundRecursively__rawtype_RawType(/** RawType */ $outer_this) {
   this.$outer_this__rawtype_RawType_BoundRecursively = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   BoundRecursively.$clinit = () =>{};
   BoundRecursively.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof BoundRecursively;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(BoundRecursively, 'rawtype.RawType$BoundRecursively');

@@ -4,44 +4,45 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class WasmEntryPoints extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!WasmEntryPoints} */
+ /** @nodts @return {!WasmEntryPoints} */
  static $create__() {
   WasmEntryPoints.$clinit();
   let $instance = new WasmEntryPoints();
   $instance.$ctor__wasmentrypoints_WasmEntryPoints__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__wasmentrypoints_WasmEntryPoints__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_singleMatchedEntryPoint__arrayOf_java_lang_String(/** Array<?string> */ args) {
   WasmEntryPoints.$clinit();
  }
- 
+ /** @nodts */
  static m_matchedEntryPointPattern1__arrayOf_java_lang_String(/** Array<?string> */ args) {
   WasmEntryPoints.$clinit();
  }
- 
+ /** @nodts */
  static m_matchedEntryPointPattern2__arrayOf_java_lang_String(/** Array<?string> */ args) {
   WasmEntryPoints.$clinit();
  }
- 
+ /** @nodts */
  static $clinit() {
   WasmEntryPoints.$clinit = () =>{};
   WasmEntryPoints.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof WasmEntryPoints;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(WasmEntryPoints, 'wasmentrypoints.WasmEntryPoints');

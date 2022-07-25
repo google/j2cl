@@ -12,39 +12,40 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template SS, TT, T, E
  */
 class $1Nested extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {CastGenerics<T, E>}*/
+  /**@type {CastGenerics<T, E>} @nodts*/
   this.$outer_this__cast_CastGenerics_1Nested;
  }
- /** @template SS, TT, T, E @return {!$1Nested<SS, TT, T, E>} */
+ /** @nodts @template SS, TT, T, E @return {!$1Nested<SS, TT, T, E>} */
  static $create__cast_CastGenerics(/** CastGenerics<T, E> */ $outer_this) {
   $1Nested.$clinit();
   let $instance = new $1Nested();
   $instance.$ctor__cast_CastGenerics_1Nested__cast_CastGenerics($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__cast_CastGenerics_1Nested__cast_CastGenerics(/** CastGenerics<T, E> */ $outer_this) {
   this.$outer_this__cast_CastGenerics_1Nested = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_nestedGenericMethod__java_lang_Object_$p_cast_CastGenerics_1Nested(/** * */ o) {
   let t = /**@type {TT}*/ ($Casts.$to(o, Enum));
  }
- 
+ /** @nodts */
  static $clinit() {
   $1Nested.$clinit = () =>{};
   $1Nested.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1Nested;
  }
  
+ /** @nodts */
  static $loadModules() {
   Enum = goog.module.get('java.lang.Enum$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

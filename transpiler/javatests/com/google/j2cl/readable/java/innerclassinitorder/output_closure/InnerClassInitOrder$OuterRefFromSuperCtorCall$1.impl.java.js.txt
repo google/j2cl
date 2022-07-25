@@ -6,20 +6,20 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let OuterRefFromSuperCtorCall = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall$impl');
 
 class $1 extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {OuterRefFromSuperCtorCall}*/
+  /**@type {OuterRefFromSuperCtorCall} @nodts*/
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1;
  }
- /** @return {!$1} */
+ /** @nodts @return {!$1} */
  static $create__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall(/** OuterRefFromSuperCtorCall */ $outer_this) {
   $1.$clinit();
   let $instance = new $1();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall(/** OuterRefFromSuperCtorCall */ $outer_this) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1 = $outer_this;
   this.$ctor__java_lang_Object__();
@@ -29,17 +29,18 @@ class $1 extends j_l_Object {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall.f_number__innerclassinitorder_InnerClassInitOrder = this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall.f_number__innerclassinitorder_InnerClassInitOrder + 100 | 0;
   return 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
   $1.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($1, 'innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall$1');

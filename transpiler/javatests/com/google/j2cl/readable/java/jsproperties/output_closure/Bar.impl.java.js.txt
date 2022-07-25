@@ -4,20 +4,20 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Bar extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_f__jsproperties_Bar_ = 0;
  }
- /** @return {!Bar} */
+ /** @nodts @return {!Bar} */
  static $create__() {
   Bar.$clinit();
   let $instance = new Bar();
   $instance.$ctor__jsproperties_Bar__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsproperties_Bar__() {
   this.$ctor__java_lang_Object__();
  }
@@ -37,17 +37,18 @@ class Bar extends j_l_Object {
  set abc(/** number */ x) {
   this.f_f__jsproperties_Bar_ = x + 4 | 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   Bar.$clinit = () =>{};
   Bar.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Bar;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Bar, 'jsproperties.Bar');

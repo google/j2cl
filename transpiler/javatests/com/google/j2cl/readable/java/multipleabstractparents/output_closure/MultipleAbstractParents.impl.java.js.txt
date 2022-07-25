@@ -10,39 +10,40 @@ let StringList = goog.forwardDeclare('multipleabstractparents.MultipleAbstractPa
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class MultipleAbstractParents extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!MultipleAbstractParents} */
+ /** @nodts @return {!MultipleAbstractParents} */
  static $create__() {
   MultipleAbstractParents.$clinit();
   let $instance = new MultipleAbstractParents();
   $instance.$ctor__multipleabstractparents_MultipleAbstractParents__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__multipleabstractparents_MultipleAbstractParents__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
   MultipleAbstractParents.$clinit();
   $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(/**@type {!ArrayList<?string>}*/ (ArrayList.$create__()).m_getFoo__java_lang_Object(null), 'AbstractCollection'));
   $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(StringList.$create__().m_getFoo__java_lang_Object(null), 'AbstractCollection'));
   $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(/**@type {IStringList}*/ (StringList.$create__()).m_getFoo__java_lang_String(null), 'AbstractCollection'));
  }
- 
+ /** @nodts */
  static $clinit() {
   MultipleAbstractParents.$clinit = () =>{};
   MultipleAbstractParents.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MultipleAbstractParents;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('multipleabstractparents.MultipleAbstractParents.ArrayList$impl');

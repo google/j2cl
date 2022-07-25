@@ -6,7 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class EmptyInterface {
- 
+ /** @nodts */
  static $clinit() {
   EmptyInterface.$clinit = () =>{};
   EmptyInterface.$loadModules();
@@ -15,11 +15,12 @@ class EmptyInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__emptyinterface_EmptyInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__emptyinterface_EmptyInterface;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 EmptyInterface.$markImplementor(/**@type {Function}*/ (EmptyInterface));

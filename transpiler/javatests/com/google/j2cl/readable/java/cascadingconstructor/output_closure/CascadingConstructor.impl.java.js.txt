@@ -4,30 +4,30 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class CascadingConstructor extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_a__cascadingconstructor_CascadingConstructor_ = 0;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_b__cascadingconstructor_CascadingConstructor_ = 0;
  }
  //Factory method corresponding to constructor 'CascadingConstructor(int, int)'.
- /** @return {!CascadingConstructor} */
+ /** @nodts @return {!CascadingConstructor} */
  static $create__int__int(/** number */ a, /** number */ b) {
   let $instance = new CascadingConstructor();
   $instance.$ctor__cascadingconstructor_CascadingConstructor__int__int(a, b);
   return $instance;
  }
  //Initialization from constructor 'CascadingConstructor(int, int)'.
- 
+ /** @nodts */
  $ctor__cascadingconstructor_CascadingConstructor__int__int(/** number */ a, /** number */ b) {
   this.$ctor__java_lang_Object__();
   this.f_a__cascadingconstructor_CascadingConstructor_ = a;
   this.f_b__cascadingconstructor_CascadingConstructor_ = b;
  }
  //Factory method corresponding to constructor 'CascadingConstructor(int)'.
- /** @return {!CascadingConstructor} */
+ /** @nodts @return {!CascadingConstructor} */
  static $create__int(/** number */ a) {
   CascadingConstructor.$clinit();
   let $instance = new CascadingConstructor();
@@ -35,21 +35,22 @@ class CascadingConstructor extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'CascadingConstructor(int)'.
- 
+ /** @nodts */
  $ctor__cascadingconstructor_CascadingConstructor__int(/** number */ a) {
   this.$ctor__cascadingconstructor_CascadingConstructor__int__int(a, Math.imul(a, 2));
  }
- 
+ /** @nodts */
  static $clinit() {
   CascadingConstructor.$clinit = () =>{};
   CascadingConstructor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof CascadingConstructor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(CascadingConstructor, 'cascadingconstructor.CascadingConstructor');

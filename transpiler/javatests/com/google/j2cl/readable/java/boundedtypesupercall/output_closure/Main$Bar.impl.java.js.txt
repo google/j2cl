@@ -11,40 +11,41 @@ let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
  * @template T
  */
 class Bar extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!Bar<T>} */
+ /** @nodts @template T @return {!Bar<T>} */
  static $create__() {
   Bar.$clinit();
   let $instance = new Bar();
   $instance.$ctor__boundedtypesupercall_Main_Bar__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__boundedtypesupercall_Main_Bar__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {T} */
+ /** @nodts @return {T} */
  m_getSomething__() {
   return null;
  }
- /** @return {Foo<T>} */
+ /** @nodts @return {Foo<T>} */
  m_doSomething__() {
   return /**@type {!$1<T>}*/ ($1.$create__boundedtypesupercall_Main_Bar__java_lang_Comparable(this, this.m_getSomething__()));
  }
- 
+ /** @nodts */
  static $clinit() {
   Bar.$clinit = () =>{};
   Bar.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Bar;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('boundedtypesupercall.Main.Bar.$1$impl');
  }

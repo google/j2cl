@@ -4,39 +4,40 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StringHolder extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_s__strings_Strings_StringHolder;
  }
- /** @return {!StringHolder} */
+ /** @nodts @return {!StringHolder} */
  static $create__() {
   StringHolder.$clinit();
   let $instance = new StringHolder();
   $instance.$ctor__strings_Strings_StringHolder__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__strings_Strings_StringHolder__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_strings_Strings_StringHolder();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_strings_Strings_StringHolder() {
   this.f_s__strings_Strings_StringHolder = 'A';
  }
- 
+ /** @nodts */
  static $clinit() {
   StringHolder.$clinit = () =>{};
   StringHolder.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof StringHolder;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(StringHolder, 'strings.Strings$StringHolder');

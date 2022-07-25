@@ -9,12 +9,12 @@ let ESWGOuter = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESW
  * @extends {ESWGInner<?string>}
  */
 class ESWGInnerSubclass extends ESWGInner {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
  //Factory method corresponding to constructor 'ESWGInnerSubclass(ESWGOuter)'.
- /** @return {!ESWGInnerSubclass} */
+ /** @nodts @return {!ESWGInnerSubclass} */
  static $create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(/** ESWGOuter<?string> */ outer) {
   ESWGInnerSubclass.$clinit();
   let $instance = new ESWGInnerSubclass();
@@ -22,12 +22,12 @@ class ESWGInnerSubclass extends ESWGInner {
   return $instance;
  }
  //Initialization from constructor 'ESWGInnerSubclass(ESWGOuter)'.
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass__innerclassinitorder_InnerClassInitOrder_ESWGOuter(/** ESWGOuter<?string> */ outer) {
   this.$ctor__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter(outer);
  }
  //Factory method corresponding to constructor 'ESWGInnerSubclass(int, ESWGOuter)'.
- /** @return {!ESWGInnerSubclass} */
+ /** @nodts @return {!ESWGInnerSubclass} */
  static $create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter(/** number */ value, /** ESWGOuter<?string> */ outer) {
   ESWGInnerSubclass.$clinit();
   let $instance = new ESWGInnerSubclass();
@@ -35,21 +35,22 @@ class ESWGInnerSubclass extends ESWGInner {
   return $instance;
  }
  //Initialization from constructor 'ESWGInnerSubclass(int, ESWGOuter)'.
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter(/** number */ value, /** ESWGOuter<?string> */ outer) {
   this.$ctor__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(outer, value);
  }
- 
+ /** @nodts */
  static $clinit() {
   ESWGInnerSubclass.$clinit = () =>{};
   ESWGInnerSubclass.$loadModules();
   ESWGInner.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ESWGInnerSubclass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ESWGInnerSubclass, 'innerclassinitorder.InnerClassInitOrder$ESWGInnerSubclass');

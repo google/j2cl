@@ -11,13 +11,13 @@ let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
  * @implements {P}
  */
 class Q extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_Q;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_Q__bridgejsmethod_Main(/** Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_Q = $outer_this;
   this.$ctor__java_lang_Object__();
@@ -25,21 +25,22 @@ class Q extends j_l_Object {
  /** @abstract @return {?string} */
  getKey() {}
  //Bridge method.
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_getKey__() {
   return this.getKey();
  }
- 
+ /** @nodts */
  static $clinit() {
   Q.$clinit = () =>{};
   Q.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Q;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 P.$markImplementor(Q);

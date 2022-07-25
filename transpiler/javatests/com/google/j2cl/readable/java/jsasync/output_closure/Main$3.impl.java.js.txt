@@ -9,20 +9,20 @@ let Main = goog.forwardDeclare('jsasync.Main$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class $3 extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__jsasync_Main_3;
  }
- /** @return {function():IThenable<Integer>} */
+ /** @nodts @return {function():IThenable<Integer>} */
  static $create__jsasync_Main(/** Main */ $outer_this) {
   $3.$clinit();
   let $instance = new $3();
   $instance.$ctor__jsasync_Main_3__jsasync_Main($outer_this);
   return $Util.$makeLambdaFunction($3.prototype.m_doSomething__, $instance, $3.$copy);
  }
- /** @suppress {invalidCasts} */
+ /** @nodts @suppress {invalidCasts} */
  $ctor__jsasync_Main_3__jsasync_Main(/** Main */ $outer_this) {
   this.$outer_this__jsasync_Main_3 = $outer_this;
   this.$ctor__java_lang_Object__();
@@ -32,22 +32,23 @@ class $3 extends j_l_Object {
   let tmp = this;
   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await this.$outer_this__jsasync_Main_3.f_x__jsasync_Main_, Integer))));
  }
- 
+ /** @nodts */
  static $clinit() {
   $3.$clinit = () =>{};
   $3.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$is__jsasync_Main_3;
  }
- 
+ /** @nodts */
  static $copy(/** ? */ from, /** ? */ to) {
   to.$outer_this__jsasync_Main_3 = from.$outer_this__jsasync_Main_3;
   to.$is__jsasync_Main_3 = true;
  }
  
+ /** @nodts */
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

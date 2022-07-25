@@ -9,39 +9,40 @@ let MethodReferences = goog.forwardDeclare('methodreferences.MethodReferences$im
  * @template T
  */
 class ObjectCapturingOuter extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {MethodReferences<T>}*/
+  /**@type {MethodReferences<T>} @nodts*/
   this.$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter;
  }
- /** @template T @return {!ObjectCapturingOuter<T>} */
+ /** @nodts @template T @return {!ObjectCapturingOuter<T>} */
  static $create__methodreferences_MethodReferences(/** MethodReferences<T> */ $outer_this) {
   ObjectCapturingOuter.$clinit();
   let $instance = new ObjectCapturingOuter();
   $instance.$ctor__methodreferences_MethodReferences_ObjectCapturingOuter__methodreferences_MethodReferences($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__methodreferences_MethodReferences_ObjectCapturingOuter__methodreferences_MethodReferences(/** MethodReferences<T> */ $outer_this) {
   this.$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- /** @return {MethodReferences<T>} */
+ /** @nodts @return {MethodReferences<T>} */
  m_getMain___$pp_methodreferences() {
   return this.$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter;
  }
- 
+ /** @nodts */
  static $clinit() {
   ObjectCapturingOuter.$clinit = () =>{};
   ObjectCapturingOuter.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ObjectCapturingOuter;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ObjectCapturingOuter, 'methodreferences.MethodReferences$ObjectCapturingOuter');

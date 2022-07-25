@@ -9,36 +9,37 @@ let ESWGInner = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESW
  * @template T
  */
 class ESWGOuter extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!ESWGOuter<T>} */
+ /** @nodts @template T @return {!ESWGOuter<T>} */
  static $create__() {
   ESWGOuter.$clinit();
   let $instance = new ESWGOuter();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder_ESWGOuter__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_ESWGOuter__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {ESWGInner<T>} */
+ /** @nodts @return {ESWGInner<T>} */
  m_newESWGInner__() {
   return /**@type {!ESWGInner<T>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(this));
  }
- 
+ /** @nodts */
  static $clinit() {
   ESWGOuter.$clinit = () =>{};
   ESWGOuter.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ESWGOuter;
  }
  
+ /** @nodts */
  static $loadModules() {
   ESWGInner = goog.module.get('innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
  }

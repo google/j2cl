@@ -9,35 +9,36 @@ let NativeTopLevel = goog.forwardDeclare('nativekttypes.NativeTopLevel$impl');
  * @template I, O
  */
 class Inner extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {NativeTopLevel<O>}*/
+  /**@type {NativeTopLevel<O>} @nodts*/
   this.$outer_this__nativekttypes_NativeTopLevel_Inner;
  }
- /** @template I, O @return {!Inner<I, O>} */
+ /** @nodts @template I, O @return {!Inner<I, O>} */
  static $create__nativekttypes_NativeTopLevel__java_lang_Object(/** NativeTopLevel<O> */ $outer_this, /** I */ i) {
   Inner.$clinit();
   let $instance = new Inner();
   $instance.$ctor__nativekttypes_NativeTopLevel_Inner__nativekttypes_NativeTopLevel__java_lang_Object($outer_this, i);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_NativeTopLevel_Inner__nativekttypes_NativeTopLevel__java_lang_Object(/** NativeTopLevel<O> */ $outer_this, /** I */ i) {
   this.$outer_this__nativekttypes_NativeTopLevel_Inner = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Inner.$clinit = () =>{};
   Inner.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Inner;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Inner, 'nativekttypes.NativeTopLevel$Inner');

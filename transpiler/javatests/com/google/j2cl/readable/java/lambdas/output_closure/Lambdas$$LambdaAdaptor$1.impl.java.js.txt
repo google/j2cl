@@ -9,15 +9,15 @@ let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
  * @template T
  */
 class $LambdaAdaptor$1 extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(?function(T):?void, ?function(Throwable):?void):void */ fn) {
   $LambdaAdaptor$1.$clinit();
   super();
-  /**@type {?function(?function(T):?void, ?function(Throwable):?void):void}*/
+  /**@type {?function(?function(T):?void, ?function(Throwable):?void):void} @nodts*/
   this.f_fn__lambdas_Lambdas_$LambdaAdaptor$1;
   this.$ctor__lambdas_Lambdas_$LambdaAdaptor$1__lambdas_Lambdas_Thenable_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__lambdas_Lambdas_$LambdaAdaptor$1__lambdas_Lambdas_Thenable_$JsFunction(/** ?function(?function(T):?void, ?function(Throwable):?void):void */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__lambdas_Lambdas_$LambdaAdaptor$1 = fn;
@@ -29,17 +29,18 @@ class $LambdaAdaptor$1 extends j_l_Object {
    $function(arg0, arg1);
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor$1.$clinit = () =>{};
   $LambdaAdaptor$1.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor$1;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($LambdaAdaptor$1, 'lambdas.Lambdas$$LambdaAdaptor$1');

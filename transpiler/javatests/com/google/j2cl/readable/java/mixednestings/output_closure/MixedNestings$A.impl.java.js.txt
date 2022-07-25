@@ -7,41 +7,42 @@ let MixedNestings = goog.forwardDeclare('mixednestings.MixedNestings$impl');
 let $1B = goog.forwardDeclare('mixednestings.MixedNestings.A.$1B$impl');
 
 class A extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {MixedNestings}*/
+  /**@type {MixedNestings} @nodts*/
   this.$outer_this__mixednestings_MixedNestings_A;
  }
- /** @return {!A} */
+ /** @nodts @return {!A} */
  static $create__mixednestings_MixedNestings(/** MixedNestings */ $outer_this) {
   A.$clinit();
   let $instance = new A();
   $instance.$ctor__mixednestings_MixedNestings_A__mixednestings_MixedNestings($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__mixednestings_MixedNestings_A__mixednestings_MixedNestings(/** MixedNestings */ $outer_this) {
   this.$outer_this__mixednestings_MixedNestings_A = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_aa__() {}
- 
+ /** @nodts */
  m_a__() {
   $1B.$create__mixednestings_MixedNestings_A(this).m_b__();
  }
- 
+ /** @nodts */
  static $clinit() {
   A.$clinit = () =>{};
   A.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof A;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1B = goog.module.get('mixednestings.MixedNestings.A.$1B$impl');
  }

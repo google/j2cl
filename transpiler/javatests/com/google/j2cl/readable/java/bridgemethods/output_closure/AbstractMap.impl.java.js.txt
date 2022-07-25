@@ -9,36 +9,37 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Map<K, V>}
  */
 class AbstractMap extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template K, V @return {!AbstractMap<K, V>} */
+ /** @nodts @template K, V @return {!AbstractMap<K, V>} */
  static $create__() {
   AbstractMap.$clinit();
   let $instance = new AbstractMap();
   $instance.$ctor__bridgemethods_AbstractMap__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_AbstractMap__() {
   this.$ctor__java_lang_Object__();
  }
- /** @override @return {V} */
+ /** @override @nodts @return {V} */
  m_put__java_lang_Object__java_lang_Object(/** K */ key, /** V */ value) {
   return value;
  }
- 
+ /** @nodts */
  static $clinit() {
   AbstractMap.$clinit = () =>{};
   AbstractMap.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AbstractMap;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Map.$markImplementor(AbstractMap);

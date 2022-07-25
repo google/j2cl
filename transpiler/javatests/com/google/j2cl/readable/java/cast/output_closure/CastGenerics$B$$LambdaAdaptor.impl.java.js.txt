@@ -8,37 +8,38 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {B}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function():void */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function():void}*/
+  /**@type {?function():void} @nodts*/
   this.f_fn__cast_CastGenerics_B_$LambdaAdaptor;
   this.$ctor__cast_CastGenerics_B_$LambdaAdaptor__cast_CastGenerics_B_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__cast_CastGenerics_B_$LambdaAdaptor__cast_CastGenerics_B_$JsFunction(/** ?function():void */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__cast_CastGenerics_B_$LambdaAdaptor = fn;
  }
- /** @override */
+ /** @override @nodts */
  m_mB__() {
   {
    let $function = this.f_fn__cast_CastGenerics_B_$LambdaAdaptor;
    $function();
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 B.$markImplementor($LambdaAdaptor);

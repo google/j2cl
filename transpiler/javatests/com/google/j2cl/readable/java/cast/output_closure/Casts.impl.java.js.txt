@@ -17,32 +17,32 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Casts extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Casts} */
+ /** @nodts @return {!Casts} */
  static $create__() {
   Casts.$clinit();
   let $instance = new Casts();
   $instance.$ctor__cast_Casts__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__cast_Casts__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_testCastToClass__() {
   let o = j_l_Object.$create__();
   let c = /**@type {Casts}*/ ($Casts.$to(o, Casts));
  }
- 
+ /** @nodts */
  m_testCasToInterface__() {
   let o = j_l_Object.$create__();
   let s = /**@type {(Serializable|Array)}*/ ($Casts.$to(o, Serializable));
  }
- 
+ /** @nodts */
  m_testCastToBoxedType__() {
   let o = Integer.$create__int(1);
   let b = /**@type {Byte}*/ ($Casts.$to(o, Byte));
@@ -55,14 +55,14 @@ class Casts extends j_l_Object {
   let c = /**@type {Character}*/ ($Casts.$to(o, Character));
   let bool = /**@type {?boolean}*/ ($Casts.$to(o, Boolean));
  }
- 
+ /** @nodts */
  m_testCastToArray__() {
   let foo = /**@type {Array<*>}*/ (null);
   let bar = /**@type {Array<Array<*>>}*/ (null);
  }
- 
+ /** @nodts */
  m_functionForInstanceofTest___$p_cast_Casts() {}
- 
+ /** @nodts */
  m_testCastObjectAfterInstanceOf__() {
   let o = j_l_Object.$create__();
   if (Casts.$isInstance(o)) {
@@ -89,7 +89,7 @@ class Casts extends j_l_Object {
    let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
   }
  }
- 
+ /** @nodts */
  m_testCastFieldAfterInstanceOf__() {
   let foo = Foo.$create__cast_Casts(this);
   if (Casts.$isInstance(foo.f_field__cast_Casts_Foo)) {
@@ -111,24 +111,25 @@ class Casts extends j_l_Object {
    let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
   }
  }
- 
+ /** @nodts */
  m_testCaseMethodAfterInstanceOf__() {
   let foo = Foo.$create__cast_Casts(this);
   if (Casts.$isInstance(foo.m_method__())) {
    let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.m_method__(), Casts));
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   Casts.$clinit = () =>{};
   Casts.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Casts;
  }
  
+ /** @nodts */
  static $loadModules() {
   Foo = goog.module.get('cast.Casts.Foo$impl');
   Serializable = goog.module.get('java.io.Serializable$impl');

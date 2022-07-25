@@ -10,36 +10,37 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {NestedInterface}
  */
 class Implementor extends ClassWithAbstractMethod {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Implementor} */
+ /** @nodts @return {!Implementor} */
  static $create__() {
   Implementor.$clinit();
   let $instance = new Implementor();
   $instance.$ctor__gwtincompatible_Implementor__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__gwtincompatible_Implementor__() {
   this.$ctor__gwtincompatible_Interface_ClassWithAbstractMethod__();
  }
- 
+ /** @nodts */
  m_compatibleMethod__() {
   let a = 4;
  }
- 
+ /** @nodts */
  static $clinit() {
   Implementor.$clinit = () =>{};
   Implementor.$loadModules();
   ClassWithAbstractMethod.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Implementor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Interface.$markImplementor(Implementor);

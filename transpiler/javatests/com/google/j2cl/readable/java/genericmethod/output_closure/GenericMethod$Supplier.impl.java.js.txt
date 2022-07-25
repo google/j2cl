@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('genericmethod.GenericMethod.Supplier.$
  * @template V
  */
 class Supplier {
- /** @abstract @return {V} */
+ /** @abstract @nodts @return {V} */
  m_get__() {}
- /** @template V @return {Supplier<V>} */
+ /** @nodts @template V @return {Supplier<V>} */
  static $adapt(/** ?function():V */ fn) {
   Supplier.$clinit();
   return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   Supplier.$clinit = () =>{};
   Supplier.$loadModules();
@@ -25,11 +25,12 @@ class Supplier {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__genericmethod_GenericMethod_Supplier = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__genericmethod_GenericMethod_Supplier;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('genericmethod.GenericMethod.Supplier.$LambdaAdaptor$impl');
  }

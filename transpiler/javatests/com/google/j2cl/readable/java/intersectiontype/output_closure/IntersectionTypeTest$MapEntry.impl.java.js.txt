@@ -12,39 +12,40 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template U
  */
 class MapEntry extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {IntersectionTypeTest<U>}*/
+  /**@type {IntersectionTypeTest<U>} @nodts*/
   this.$outer_this__intersectiontype_IntersectionTypeTest_MapEntry;
  }
- /** @template U @return {!MapEntry<U>} */
+ /** @nodts @template U @return {!MapEntry<U>} */
  static $create__intersectiontype_IntersectionTypeTest(/** IntersectionTypeTest<U> */ $outer_this) {
   MapEntry.$clinit();
   let $instance = new MapEntry();
   $instance.$ctor__intersectiontype_IntersectionTypeTest_MapEntry__intersectiontype_IntersectionTypeTest($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__intersectiontype_IntersectionTypeTest_MapEntry__intersectiontype_IntersectionTypeTest(/** IntersectionTypeTest<U> */ $outer_this) {
   this.$outer_this__intersectiontype_IntersectionTypeTest_MapEntry = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- /** @template T @return {Getable<T>} */
+ /** @nodts @template T @return {Getable<T>} */
  m_method__java_lang_Object(/** * */ o) {
   return /**@type {Getable<T>}*/ ($Casts.$to($Casts.$to(o, Getable), Setable));
  }
- 
+ /** @nodts */
  static $clinit() {
   MapEntry.$clinit = () =>{};
   MapEntry.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MapEntry;
  }
  
+ /** @nodts */
  static $loadModules() {
   Getable = goog.module.get('intersectiontype.Getable$impl');
   Setable = goog.module.get('intersectiontype.Setable$impl');

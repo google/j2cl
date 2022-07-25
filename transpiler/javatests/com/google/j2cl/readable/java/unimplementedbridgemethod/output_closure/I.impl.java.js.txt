@@ -9,19 +9,19 @@ let $LambdaAdaptor = goog.forwardDeclare('unimplementedbridgemethod.I.$LambdaAda
  * @template T
  */
 class I {
- /** @abstract @return {number} */
+ /** @abstract @nodts @return {number} */
  m_foo__java_lang_Object(/** T */ t) {}
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_staticFoo__() {
   I.$clinit();
   return 0;
  }
- /** @template T @return {I<T>} */
+ /** @nodts @template T @return {I<T>} */
  static $adapt(/** ?function(T):number */ fn) {
   I.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   I.$clinit = () =>{};
   I.$loadModules();
@@ -30,11 +30,12 @@ class I {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__unimplementedbridgemethod_I = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__unimplementedbridgemethod_I;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('unimplementedbridgemethod.I.$LambdaAdaptor$impl');
  }

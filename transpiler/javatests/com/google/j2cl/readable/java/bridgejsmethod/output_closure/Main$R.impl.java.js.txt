@@ -9,13 +9,13 @@ let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
  * @abstract
  */
 class R extends Q {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_R;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_R__bridgejsmethod_Main(/** Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_R = $outer_this;
   this.$ctor__bridgejsmethod_Main_Q__bridgejsmethod_Main($outer_this);
@@ -24,17 +24,18 @@ class R extends Q {
  getKey() {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   R.$clinit = () =>{};
   R.$loadModules();
   Q.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof R;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(R, 'bridgejsmethod.Main$R');

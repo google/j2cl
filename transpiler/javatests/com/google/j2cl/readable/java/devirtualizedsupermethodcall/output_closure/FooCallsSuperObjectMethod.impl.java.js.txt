@@ -4,18 +4,18 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class FooCallsSuperObjectMethod extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!FooCallsSuperObjectMethod} */
+ /** @nodts @return {!FooCallsSuperObjectMethod} */
  static $create__() {
   FooCallsSuperObjectMethod.$clinit();
   let $instance = new FooCallsSuperObjectMethod();
   $instance.$ctor__devirtualizedsupermethodcall_FooCallsSuperObjectMethod__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__devirtualizedsupermethodcall_FooCallsSuperObjectMethod__() {
   this.$ctor__java_lang_Object__();
  }
@@ -23,17 +23,18 @@ class FooCallsSuperObjectMethod extends j_l_Object {
  hashCode() {
   return super.hashCode();
  }
- 
+ /** @nodts */
  static $clinit() {
   FooCallsSuperObjectMethod.$clinit = () =>{};
   FooCallsSuperObjectMethod.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof FooCallsSuperObjectMethod;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(FooCallsSuperObjectMethod, 'devirtualizedsupermethodcall.FooCallsSuperObjectMethod');

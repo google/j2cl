@@ -21,39 +21,39 @@ let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
  * @template T
  */
 class MethodReferences extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!MethodReferences<T>} */
+ /** @nodts @template T @return {!MethodReferences<T>} */
  static $create__() {
   MethodReferences.$clinit();
   let $instance = new MethodReferences();
   $instance.$ctor__methodreferences_MethodReferences__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__methodreferences_MethodReferences__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  static m_m__() {
   MethodReferences.$clinit();
   return j_l_Object.$create__();
  }
- /** @return {?boolean} */
+ /** @nodts @return {?boolean} */
  m_isA__() {
   return true;
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  m_self___$pp_methodreferences() {
   return this;
  }
- /** @return {?boolean} */
+ /** @nodts @return {?boolean} */
  m_sameAs__java_lang_Number_$pp_methodreferences(/** (Number|number) */ n) {
   return false;
  }
- 
+ /** @nodts */
  m_main___$pp_methodreferences() {
   let /** !MethodReferences<T> */ $$q, /** !MethodReferences<*> */ $$q_1, /** !MethodReferences<*> */ $$q_2;
   let objectFactory = Producer.$adapt(() =>{
@@ -128,15 +128,15 @@ class MethodReferences extends j_l_Object {
    return this.m_sameAs__java_lang_Number_$pp_methodreferences(arg0_18);
   };
  }
- /** @return {Producer<?string>} */
+ /** @nodts @return {Producer<?string>} */
  static get f_staticStringProducer__methodreferences_MethodReferences() {
   return (MethodReferences.$clinit(), MethodReferences.$static_staticStringProducer__methodreferences_MethodReferences);
  }
- 
+ /** @nodts */
  static set f_staticStringProducer__methodreferences_MethodReferences(/** Producer<?string> */ value) {
   (MethodReferences.$clinit(), MethodReferences.$static_staticStringProducer__methodreferences_MethodReferences = value);
  }
- 
+ /** @nodts */
  static $clinit() {
   let /** * */ $$q;
   MethodReferences.$clinit = () =>{};
@@ -146,11 +146,12 @@ class MethodReferences extends j_l_Object {
    return $Objects.m_toString__java_lang_Object($$q);
   }));
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MethodReferences;
  }
  
+ /** @nodts */
  static $loadModules() {
   Boolean = goog.module.get('java.lang.Boolean$impl');
   Double = goog.module.get('java.lang.Double$impl');
@@ -167,7 +168,7 @@ class MethodReferences extends j_l_Object {
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
 }
-/**@private {Producer<?string>}*/
+/**@private {Producer<?string>} @nodts*/
 MethodReferences.$static_staticStringProducer__methodreferences_MethodReferences;
 $Util.$setClassMetadata(MethodReferences, 'methodreferences.MethodReferences');
 

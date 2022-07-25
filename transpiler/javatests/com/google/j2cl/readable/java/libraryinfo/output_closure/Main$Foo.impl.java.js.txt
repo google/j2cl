@@ -6,37 +6,38 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Main = goog.forwardDeclare('libraryinfo.Main$impl');
 
 class Foo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__libraryinfo_Main_Foo;
  }
- /** @return {!Foo} */
+ /** @nodts @return {!Foo} */
  static $create__libraryinfo_Main(/** Main */ $outer_this) {
   Foo.$clinit();
   let $instance = new Foo();
   $instance.$ctor__libraryinfo_Main_Foo__libraryinfo_Main($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__libraryinfo_Main_Foo__libraryinfo_Main(/** Main */ $outer_this) {
   this.$outer_this__libraryinfo_Main_Foo = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_instanceMethod___$pp_libraryinfo() {}
- 
+ /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
   Foo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Foo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Foo, 'libraryinfo.Main$Foo');

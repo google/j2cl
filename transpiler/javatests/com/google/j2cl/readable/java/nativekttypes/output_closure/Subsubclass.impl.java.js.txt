@@ -14,7 +14,7 @@ class Subsubclass extends Subclass {
   super(v);
   this.$ctor__nativekttypes_Subsubclass__java_lang_Object(v);
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_Subsubclass__java_lang_Object(/** V */ v) {}
  /** @override @return {number} */
  methodToRename() {
@@ -44,33 +44,34 @@ class Subsubclass extends Subclass {
  getstartingmethodAsProperty() {
   return super.getstartingmethodAsProperty();
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_interfaceMethod__java_lang_Object(/** V */ v) {
   return 0;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_interfaceMethodToRename__java_lang_Object(/** V */ v) {
   return 0;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_getInterfaceMethodAsProperty__() {
   return 0;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_interfaceMethodToRenameAsProperty__() {
   return 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   Subsubclass.$clinit = () =>{};
   Subsubclass.$loadModules();
   Subclass.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Subsubclass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Subsubclass, 'nativekttypes.Subsubclass');

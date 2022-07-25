@@ -4,32 +4,33 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const NativeRequiringBridge = goog.require('nativekttypes.NativeRequiringBridge$impl');
 
 class BridgeSubclass extends NativeRequiringBridge {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!BridgeSubclass} */
+ /** @nodts @return {!BridgeSubclass} */
  static $create__() {
   BridgeSubclass.$clinit();
   let $instance = new BridgeSubclass();
   $instance.$ctor__nativekttypes_BridgeSubclass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_BridgeSubclass__() {
   this.$ctor__nativekttypes_NativeRequiringBridge__();
  }
- 
+ /** @nodts */
  static $clinit() {
   BridgeSubclass.$clinit = () =>{};
   BridgeSubclass.$loadModules();
   NativeRequiringBridge.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof BridgeSubclass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(BridgeSubclass, 'nativekttypes.BridgeSubclass');

@@ -6,37 +6,38 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Foo = goog.forwardDeclare('srcjar.Foo$impl');
 
 class Srcjar extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Srcjar} */
+ /** @nodts @return {!Srcjar} */
  static $create__() {
   Srcjar.$clinit();
   let $instance = new Srcjar();
   $instance.$ctor__srcjar_Srcjar__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__srcjar_Srcjar__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_test__() {
   Srcjar.$clinit();
   let foo = Foo.$create__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Srcjar.$clinit = () =>{};
   Srcjar.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Srcjar;
  }
  
+ /** @nodts */
  static $loadModules() {
   Foo = goog.module.get('srcjar.Foo$impl');
  }

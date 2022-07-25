@@ -193,6 +193,9 @@ public class StatementTranspiler {
         if (declaration.isDeprecated()) {
           jsDocs.add("@deprecated");
         }
+        if (!declaration.getFieldDescriptor().canBeReferencedExternally()) {
+          jsDocs.add("@nodts");
+        }
         Runnable renderer =
             () ->
                 builder.emitWithMapping(

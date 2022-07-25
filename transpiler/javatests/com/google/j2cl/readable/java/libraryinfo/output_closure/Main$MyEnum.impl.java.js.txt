@@ -11,23 +11,23 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<MyEnum>}
  */
 class MyEnum extends Enum {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!MyEnum} */
+ /** @nodts @return {!MyEnum} */
  static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
   let $instance = new MyEnum();
   $instance.$ctor__libraryinfo_Main_MyEnum__java_lang_String__int($name, $ordinal);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__libraryinfo_Main_MyEnum__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
   this.f_name__java_lang_Enum_ = $name;
   this.f_ordinal__java_lang_Enum_ = $ordinal;
   this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
  }
- /** @return {!MyEnum} */
+ /** @nodts @return {!MyEnum} */
  static m_valueOf__java_lang_String(/** string */ name) {
   MyEnum.$clinit();
   if ($Equality.$same(MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_, null)) {
@@ -35,37 +35,38 @@ class MyEnum extends Enum {
   }
   return /**@type {MyEnum}*/ ($Enums.getValueFromNameAndMap(name, MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_));
  }
- /** @return {!Array<!MyEnum>} */
+ /** @nodts @return {!Array<!MyEnum>} */
  static m_values__() {
   MyEnum.$clinit();
   return /**@type {!Array<MyEnum>}*/ ($Arrays.$init([MyEnum.f_FOO__libraryinfo_Main_MyEnum, MyEnum.f_BAR__libraryinfo_Main_MyEnum], MyEnum));
  }
- 
+ /** @nodts */
  static $clinit() {
   MyEnum.$clinit = () =>{};
   MyEnum.$loadModules();
   Enum.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MyEnum;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
-/**@const {number}*/
+/**@const {number} @nodts*/
 MyEnum.$ordinal_FOO__libraryinfo_Main_MyEnum = 0;
-/**@const {number}*/
+/**@const {number} @nodts*/
 MyEnum.$ordinal_BAR__libraryinfo_Main_MyEnum = 1;
-/**@const {!MyEnum}*/
+/**@const {!MyEnum} @nodts*/
 MyEnum.f_FOO__libraryinfo_Main_MyEnum = /**@pureOrBreakMyCode*/ MyEnum.$create__java_lang_String__int($Util.$makeEnumName('FOO'), MyEnum.$ordinal_FOO__libraryinfo_Main_MyEnum);
-/**@const {!MyEnum}*/
+/**@const {!MyEnum} @nodts*/
 MyEnum.f_BAR__libraryinfo_Main_MyEnum = /**@pureOrBreakMyCode*/ MyEnum.$create__java_lang_String__int($Util.$makeEnumName('BAR'), MyEnum.$ordinal_BAR__libraryinfo_Main_MyEnum);
-/**@type {Map<?string, !MyEnum>}*/
+/**@type {Map<?string, !MyEnum>} @nodts*/
 MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_;
 $Util.$setClassMetadataForEnum(MyEnum, 'libraryinfo.Main$MyEnum');
 

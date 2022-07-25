@@ -9,32 +9,33 @@ let DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.Default
  * @abstract
  */
 class Builder extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_field__autovalue_DefaultNonEmptyConstructorAutoValue_Builder_ = 0;
  }
- 
+ /** @nodts */
  $ctor__autovalue_DefaultNonEmptyConstructorAutoValue_Builder__() {
   this.$ctor__java_lang_Object__();
   this.f_field__autovalue_DefaultNonEmptyConstructorAutoValue_Builder_ = 1;
  }
- /** @abstract @return {Builder} */
+ /** @abstract @nodts @return {Builder} */
  m_setBooleanField__boolean(/** boolean */ x) {}
- /** @abstract @return {DefaultNonEmptyConstructorAutoValue} */
+ /** @abstract @nodts @return {DefaultNonEmptyConstructorAutoValue} */
  m_build__() {}
- 
+ /** @nodts */
  static $clinit() {
   Builder.$clinit = () =>{};
   Builder.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Builder;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Builder, 'autovalue.DefaultNonEmptyConstructorAutoValue$Builder');

@@ -4,36 +4,37 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class ParentInner extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fieldInParentInner__innerclassinheritance_ParentInner = 0;
  }
- /** @return {!ParentInner} */
+ /** @nodts @return {!ParentInner} */
  static $create__() {
   ParentInner.$clinit();
   let $instance = new ParentInner();
   $instance.$ctor__innerclassinheritance_ParentInner__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinheritance_ParentInner__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_funInParentInner__() {}
- 
+ /** @nodts */
  static $clinit() {
   ParentInner.$clinit = () =>{};
   ParentInner.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ParentInner;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ParentInner, 'innerclassinheritance.ParentInner');

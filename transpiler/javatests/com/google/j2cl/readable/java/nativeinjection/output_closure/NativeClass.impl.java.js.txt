@@ -4,36 +4,37 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class NativeClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!NativeClass} */
+ /** @nodts @return {!NativeClass} */
  static $create__() {
   NativeClass.$clinit();
   let $instance = new NativeClass();
   $instance.$ctor__nativeinjection_NativeClass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativeinjection_NativeClass__() {
   this.$ctor__java_lang_Object__();
  }
- // /** @return {?string} */
+ // /** @nodts @return {?string} */
  // native m_nativeInstanceMethod__() 
- // /** @return {NativeClass} */
+ // /** @nodts @return {NativeClass} */
  // native static m_nativeStaticMethod__() 
- 
+ /** @nodts */
  static $clinit() {
   NativeClass.$clinit = () =>{};
   NativeClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NativeClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(NativeClass, 'nativeinjection.NativeClass');

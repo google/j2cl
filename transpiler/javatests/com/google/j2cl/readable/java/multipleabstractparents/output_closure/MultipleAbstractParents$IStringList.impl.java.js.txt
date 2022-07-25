@@ -10,14 +10,14 @@ let $LambdaAdaptor = goog.forwardDeclare('multipleabstractparents.MultipleAbstra
  * @extends {List<?string>}
  */
 class IStringList {
- /** @abstract @return {?string} */
+ /** @abstract @nodts @return {?string} */
  m_getFoo__java_lang_String(/** ?string */ string_1) {}
- /** @return {IStringList} */
+ /** @nodts @return {IStringList} */
  static $adapt(/** ?function(?string):?string */ fn) {
   IStringList.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   IStringList.$clinit = () =>{};
   IStringList.$loadModules();
@@ -27,11 +27,12 @@ class IStringList {
   List.$markImplementor(ctor);
   ctor.prototype.$implements__multipleabstractparents_MultipleAbstractParents_IStringList = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__multipleabstractparents_MultipleAbstractParents_IStringList;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
  }

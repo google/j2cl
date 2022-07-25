@@ -9,16 +9,16 @@ let ESWGOuter = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESW
  * @template T
  */
 class ESWGInner extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {ESWGOuter<T>}*/
+  /**@type {ESWGOuter<T>} @nodts*/
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = 0;
  }
  //Factory method corresponding to constructor 'ESWGInner(ESWGOuter)'.
- /** @template T @return {!ESWGInner<T>} */
+ /** @nodts @template T @return {!ESWGInner<T>} */
  static $create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(/** ESWGOuter<T> */ $outer_this) {
   ESWGInner.$clinit();
   let $instance = new ESWGInner();
@@ -26,14 +26,14 @@ class ESWGInner extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'ESWGInner(ESWGOuter)'.
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter(/** ESWGOuter<T> */ $outer_this) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = $outer_this;
   this.$ctor__java_lang_Object__();
   this.f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = 1;
  }
  //Factory method corresponding to constructor 'ESWGInner(ESWGOuter, int)'.
- /** @template T @return {!ESWGInner<T>} */
+ /** @nodts @template T @return {!ESWGInner<T>} */
  static $create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(/** ESWGOuter<T> */ $outer_this, /** number */ value) {
   ESWGInner.$clinit();
   let $instance = new ESWGInner();
@@ -41,23 +41,24 @@ class ESWGInner extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'ESWGInner(ESWGOuter, int)'.
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(/** ESWGOuter<T> */ $outer_this, /** number */ value) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = $outer_this;
   this.$ctor__java_lang_Object__();
   this.f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner = value;
  }
- 
+ /** @nodts */
  static $clinit() {
   ESWGInner.$clinit = () =>{};
   ESWGInner.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ESWGInner;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ESWGInner, 'innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner');

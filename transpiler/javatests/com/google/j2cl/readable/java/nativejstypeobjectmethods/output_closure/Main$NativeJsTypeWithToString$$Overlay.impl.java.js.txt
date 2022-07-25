@@ -3,17 +3,19 @@ goog.module('nativejstypeobjectmethods.Main.NativeJsTypeWithToString.$Overlay$im
 const $Util = goog.require('nativebootstrap.Util$impl');
 const NativeJsTypeWithToString = goog.require('test.foo.NativeJsTypeWithToString');
 
+/** @nodts */
 class $Overlay {
- 
+ /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NativeJsTypeWithToString;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($Overlay, 'test.foo.NativeJsTypeWithToString');

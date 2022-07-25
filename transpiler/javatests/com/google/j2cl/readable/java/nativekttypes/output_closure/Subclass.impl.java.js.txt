@@ -16,7 +16,7 @@ class Subclass extends NativeTopLevel {
   super();
   this.$ctor__nativekttypes_Subclass__java_lang_Object(v);
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_Subclass__java_lang_Object(/** V */ v) {
   this.$ctor__nativekttypes_NativeTopLevel__java_lang_Object(v);
  }
@@ -48,33 +48,34 @@ class Subclass extends NativeTopLevel {
  getstartingmethodAsProperty() {
   return super.getstartingmethodAsProperty();
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_interfaceMethod__java_lang_Object(/** V */ v) {
   return 0;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_interfaceMethodToRename__java_lang_Object(/** V */ v) {
   return 0;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_getInterfaceMethodAsProperty__() {
   return 0;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_interfaceMethodToRenameAsProperty__() {
   return 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   Subclass.$clinit = () =>{};
   Subclass.$loadModules();
   NativeTopLevel.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Subclass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 NativeInterface.$markImplementor(Subclass);

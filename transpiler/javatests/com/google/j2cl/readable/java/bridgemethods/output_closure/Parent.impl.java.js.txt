@@ -12,43 +12,44 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @extends {SuperParent<T, (Number|number)>}
  */
 class Parent extends SuperParent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!Parent<T>} */
+ /** @nodts @template T @return {!Parent<T>} */
  static $create__() {
   Parent.$clinit();
   let $instance = new Parent();
   $instance.$ctor__bridgemethods_Parent__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_Parent__() {
   this.$ctor__bridgemethods_SuperParent__();
  }
- 
+ /** @nodts */
  m_foo__java_lang_Error__java_lang_Number(/** T */ t, /** (Number|number) */ s) {}
- /** @template T_1 */
+ /** @nodts @template T_1 */
  m_bar__java_lang_Number(/** T_1 */ t) {}
- /** @template T_1 */
+ /** @nodts @template T_1 */
  m_fun__java_lang_Object(/** T_1 */ t) {}
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_foo__java_lang_Object__java_lang_Object(/** T */ arg0, /** (Number|number) */ arg1) {
   this.m_foo__java_lang_Error__java_lang_Number(/**@type {T}*/ ($Casts.$to(arg0, Error)), /**@type {(Number|number)}*/ ($Casts.$to(arg1, Number)));
  }
- 
+ /** @nodts */
  static $clinit() {
   Parent.$clinit = () =>{};
   Parent.$loadModules();
   SuperParent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Parent;
  }
  
+ /** @nodts */
  static $loadModules() {
   Error = goog.module.get('java.lang.Error$impl');
   Number = goog.module.get('java.lang.Number$impl');

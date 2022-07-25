@@ -3,18 +3,20 @@ goog.module('lambdas.Lambdas.AnotherThenable.$Overlay$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.AnotherThenable.$LambdaAdaptor$impl');
 
+/** @nodts */
 class $Overlay {
- /** @template T @return {?} */
+ /** @nodts @template T @return {?} */
  static $adapt__lambdas_Lambdas_AnotherThenable_$JsFunction(/** ?function(?function(T):?void, ?function(Throwable):?void):void */ fn) {
   $Overlay.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('lambdas.Lambdas.AnotherThenable.$LambdaAdaptor$impl');
  }

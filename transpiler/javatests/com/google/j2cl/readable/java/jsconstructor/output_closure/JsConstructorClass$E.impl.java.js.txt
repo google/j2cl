@@ -8,30 +8,31 @@ class E extends C {
  constructor() {
   E.$clinit();
   super(10);
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fE__jsconstructor_JsConstructorClass_E = 0;
   this.$ctor__jsconstructor_JsConstructorClass_E__();
  }
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_E__() {
   this.$init___$p_jsconstructor_JsConstructorClass_E();
   this.f_fE__jsconstructor_JsConstructorClass_E = 12;
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_jsconstructor_JsConstructorClass_E() {
   this.f_fE__jsconstructor_JsConstructorClass_E = 11;
  }
- 
+ /** @nodts */
  static $clinit() {
   E.$clinit = () =>{};
   E.$loadModules();
   C.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof E;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(E, 'jsconstructor.JsConstructorClass$E');

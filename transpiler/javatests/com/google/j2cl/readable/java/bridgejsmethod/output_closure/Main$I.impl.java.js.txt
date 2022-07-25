@@ -12,12 +12,12 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 class I {
  /** @abstract @return {T} */
  fun(/** T */ t) {}
- /** @template T @return {I<T>} */
+ /** @nodts @template T @return {I<T>} */
  static $adapt(/** ?function(T):T */ fn) {
   I.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   I.$clinit = () =>{};
   I.$loadModules();
@@ -26,11 +26,12 @@ class I {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__bridgejsmethod_Main_I = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__bridgejsmethod_Main_I;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('bridgejsmethod.Main.I.$LambdaAdaptor$impl');
  }

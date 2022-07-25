@@ -10,26 +10,27 @@ class MyJsType extends j_l_Object {
  constructor() {
   MyJsType.$clinit();
   super();
-  /**@type {*}*/
+  /**@type {*} @nodts*/
   this.f_someField__libraryinfo_Main_MyJsType;
   this.$ctor__libraryinfo_Main_MyJsType__();
  }
- 
+ /** @nodts */
  $ctor__libraryinfo_Main_MyJsType__() {
   this.$ctor__java_lang_Object__();
   this.f_someField__libraryinfo_Main_MyJsType = Main.$create__();
  }
- 
+ /** @nodts */
  static $clinit() {
   MyJsType.$clinit = () =>{};
   MyJsType.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MyJsType;
  }
  
+ /** @nodts */
  static $loadModules() {
   Main = goog.module.get('libraryinfo.Main$impl');
  }

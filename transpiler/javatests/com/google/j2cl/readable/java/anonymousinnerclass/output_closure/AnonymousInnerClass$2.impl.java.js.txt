@@ -7,38 +7,39 @@ let A = goog.forwardDeclare('anonymousinnerclass.A$impl');
 let AnonymousInnerClass = goog.forwardDeclare('anonymousinnerclass.AnonymousInnerClass$impl');
 
 class $2 extends B {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {AnonymousInnerClass}*/
+  /**@type {AnonymousInnerClass} @nodts*/
   this.$outer_this__anonymousinnerclass_AnonymousInnerClass_2;
-  /**@type {A}*/
+  /**@type {A} @nodts*/
   this.$captured_a__anonymousinnerclass_AnonymousInnerClass_2;
  }
- /** @return {!$2} */
+ /** @nodts @return {!$2} */
  static $create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A(/** AnonymousInnerClass */ $outer_this, /** A */ $captured_a) {
   $2.$clinit();
   let $instance = new $2();
   $instance.$ctor__anonymousinnerclass_AnonymousInnerClass_2__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A($outer_this, $captured_a);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__anonymousinnerclass_AnonymousInnerClass_2__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A(/** AnonymousInnerClass */ $outer_this, /** A */ $captured_a) {
   this.$outer_this__anonymousinnerclass_AnonymousInnerClass_2 = $outer_this;
   this.$captured_a__anonymousinnerclass_AnonymousInnerClass_2 = $captured_a;
   this.$ctor__anonymousinnerclass_A_B__anonymousinnerclass_A($captured_a);
  }
- 
+ /** @nodts */
  static $clinit() {
   $2.$clinit = () =>{};
   $2.$loadModules();
   B.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $2;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($2, 'anonymousinnerclass.AnonymousInnerClass$2');

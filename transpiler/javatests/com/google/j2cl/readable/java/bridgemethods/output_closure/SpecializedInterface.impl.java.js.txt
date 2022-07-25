@@ -6,11 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class SpecializedInterface {
- /** @abstract @return {?string} */
+ /** @abstract @nodts @return {?string} */
  m_fun__java_lang_String(/** ?string */ s) {}
- /** @abstract @return {?string} */
+ /** @abstract @nodts @return {?string} */
  m_get__() {}
- 
+ /** @nodts */
  static $clinit() {
   SpecializedInterface.$clinit = () =>{};
   SpecializedInterface.$loadModules();
@@ -19,11 +19,12 @@ class SpecializedInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__bridgemethods_SpecializedInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__bridgemethods_SpecializedInterface;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 SpecializedInterface.$markImplementor(/**@type {Function}*/ (SpecializedInterface));

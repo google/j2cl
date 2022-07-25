@@ -7,7 +7,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template K
  */
 class Entry {
- 
+ /** @nodts */
  static $clinit() {
   Entry.$clinit = () =>{};
   Entry.$loadModules();
@@ -16,11 +16,12 @@ class Entry {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__nobridgemethods_Entry = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__nobridgemethods_Entry;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Entry.$markImplementor(/**@type {Function}*/ (Entry));

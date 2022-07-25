@@ -218,7 +218,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderTypeAnnotation() {
     if (type.isOverlayImplementation()) {
-      // Overlays do not need any JsDoc.
+      // Overlays do not need any other JsDoc.
+      sourceBuilder.appendln("/** @nodts */");
       return;
     }
     StringBuilder sb = new StringBuilder();
@@ -363,6 +364,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (method.getDescriptor().isJsOverride()) {
       jsDocBuilder.append(" @override");
     }
+    if (!methodDescriptor.canBeReferencedExternally()
+        // TODO(b/193252533): Remove special casing of markImplementor.
+        && !methodDescriptor.getName().equals(MethodDescriptor.MARK_IMPLEMENTOR_METHOD_NAME)) {
+      jsDocBuilder.append(" @nodts");
+    }
     if (!methodDescriptor.getTypeParameterTypeDescriptors().isEmpty()) {
       String templateParamNames =
           closureTypesGenerator.getCommaSeparatedClosureTypesString(
@@ -415,7 +421,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void renderLoadModules() {
     MethodDescriptor methodDescriptor = AstUtils.getLoadModulesDescriptor(type.getTypeDescriptor());
     sourceBuilder.newLine();
-    sourceBuilder.appendLines("static " + methodDescriptor.getMangledName() + "() ");
+    sourceBuilder.appendln("/** @nodts */");
+    sourceBuilder.append("static " + methodDescriptor.getMangledName() + "() ");
     sourceBuilder.openBrace();
 
     // goog.module.get(...) for lazy imports.

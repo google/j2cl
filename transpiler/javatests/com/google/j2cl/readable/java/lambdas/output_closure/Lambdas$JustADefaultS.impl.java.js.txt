@@ -7,13 +7,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template S
  */
 class JustADefaultS {
- /** @abstract */
+ /** @abstract @nodts */
  m_method__java_lang_Object(/** S */ t) {}
- /** @template S */
+ /** @nodts @template S */
  static m_method__$default__lambdas_Lambdas_JustADefaultS__java_lang_Object(/** !JustADefaultS<S> */ $thisArg, /** S */ t) {
   JustADefaultS.$clinit();
  }
- 
+ /** @nodts */
  static $clinit() {
   JustADefaultS.$clinit = () =>{};
   JustADefaultS.$loadModules();
@@ -22,11 +22,12 @@ class JustADefaultS {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__lambdas_Lambdas_JustADefaultS = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__lambdas_Lambdas_JustADefaultS;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 JustADefaultS.$markImplementor(/**@type {Function}*/ (JustADefaultS));

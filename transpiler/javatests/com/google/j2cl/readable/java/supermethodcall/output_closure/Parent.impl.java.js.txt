@@ -4,40 +4,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const GrandParent = goog.require('supermethodcall.GrandParent$impl');
 
 class Parent extends GrandParent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Parent} */
+ /** @nodts @return {!Parent} */
  static $create__() {
   Parent.$clinit();
   let $instance = new Parent();
   $instance.$ctor__supermethodcall_Parent__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__supermethodcall_Parent__() {
   this.$ctor__supermethodcall_GrandParent__();
  }
- 
+ /** @nodts */
  m_parentSimplest__() {}
- 
+ /** @nodts */
  m_parentWithParams__int(/** number */ foo) {}
- /** @return {*} */
+ /** @nodts @return {*} */
  m_parentWithChangingReturn__() {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   Parent.$clinit = () =>{};
   Parent.$loadModules();
   GrandParent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Parent;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Parent, 'supermethodcall.Parent');

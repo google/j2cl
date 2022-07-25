@@ -4,35 +4,36 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Parent extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_field__supercallnondefault_Parent = 0;
  }
- /** @return {!Parent} */
+ /** @nodts @return {!Parent} */
  static $create__int(/** number */ f) {
   Parent.$clinit();
   let $instance = new Parent();
   $instance.$ctor__supercallnondefault_Parent__int(f);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__supercallnondefault_Parent__int(/** number */ f) {
   this.$ctor__java_lang_Object__();
   this.f_field__supercallnondefault_Parent = f;
  }
- 
+ /** @nodts */
  static $clinit() {
   Parent.$clinit = () =>{};
   Parent.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Parent;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Parent, 'supercallnondefault.Parent');

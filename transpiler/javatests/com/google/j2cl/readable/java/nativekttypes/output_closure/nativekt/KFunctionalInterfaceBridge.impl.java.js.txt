@@ -11,12 +11,12 @@ let $LambdaAdaptor = goog.forwardDeclare('nativekttypes.nativekt.KFunctionalInte
  * @extends {KFunctionalInterfaceRequiringBridge<V>}
  */
 class KFunctionalInterfaceBridge {
- /** @template V @return {KFunctionalInterfaceBridge<V>} */
+ /** @nodts @template V @return {KFunctionalInterfaceBridge<V>} */
  static $adapt(/** ?function(V):V */ fn) {
   KFunctionalInterfaceBridge.$clinit();
   return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   KFunctionalInterfaceBridge.$clinit = () =>{};
   KFunctionalInterfaceBridge.$loadModules();
@@ -26,11 +26,12 @@ class KFunctionalInterfaceBridge {
   KFunctionalInterfaceRequiringBridge.$markImplementor(ctor);
   ctor.prototype.$implements__nativekttypes_nativekt_KFunctionalInterfaceBridge = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__nativekttypes_nativekt_KFunctionalInterfaceBridge;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('nativekttypes.nativekt.KFunctionalInterfaceBridge.$LambdaAdaptor$impl');
  }

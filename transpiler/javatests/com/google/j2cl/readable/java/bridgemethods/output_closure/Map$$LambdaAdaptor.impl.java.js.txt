@@ -9,35 +9,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Map<K, V>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(K, V):V */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(K, V):V}*/
+  /**@type {?function(K, V):V} @nodts*/
   this.f_fn__bridgemethods_Map_$LambdaAdaptor;
   this.$ctor__bridgemethods_Map_$LambdaAdaptor__bridgemethods_Map_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_Map_$LambdaAdaptor__bridgemethods_Map_$JsFunction(/** ?function(K, V):V */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__bridgemethods_Map_$LambdaAdaptor = fn;
  }
- /** @override @return {V} */
+ /** @override @nodts @return {V} */
  m_put__java_lang_Object__java_lang_Object(/** K */ arg0, /** V */ arg1) {
   let /** ?function(K, V):V */ $function;
   return ($function = this.f_fn__bridgemethods_Map_$LambdaAdaptor, $function(arg0, arg1));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Map.$markImplementor($LambdaAdaptor);

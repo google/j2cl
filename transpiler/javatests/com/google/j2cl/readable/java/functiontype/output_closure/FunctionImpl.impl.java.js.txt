@@ -8,34 +8,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {functiontype_Function}
  */
 class FunctionImpl extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!FunctionImpl} */
+ /** @nodts @return {!FunctionImpl} */
  static $create__() {
   FunctionImpl.$clinit();
   let $instance = new FunctionImpl();
   $instance.$ctor__functiontype_FunctionImpl__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__functiontype_FunctionImpl__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__functiontype_Function(/** functiontype_Function */ f) {}
- 
+ /** @nodts */
  static $clinit() {
   FunctionImpl.$clinit = () =>{};
   FunctionImpl.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof FunctionImpl;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 functiontype_Function.$markImplementor(FunctionImpl);

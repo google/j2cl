@@ -8,34 +8,34 @@ let Foo = goog.forwardDeclare('jsproperties.Foo$impl');
 let NativeFoo = goog.forwardDeclare('jsproperties.NativeFoo$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__jsproperties_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsproperties_Main__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_testNativeJsProperty__() {
   NativeFoo.$create__().hasOwnProperty;
   Math.PI;
  }
- 
+ /** @nodts */
  m_testStaticJsProperty__() {
   Foo.a;
   Foo.a = 10;
   Foo.abc;
   Foo.abc = 10;
  }
- 
+ /** @nodts */
  m_testInstanceJsProperty__() {
   let bar = Bar.$create__();
   bar.a;
@@ -43,17 +43,18 @@ class Main extends j_l_Object {
   bar.abc;
   bar.abc = 10;
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   Bar = goog.module.get('jsproperties.Bar$impl');
   Foo = goog.module.get('jsproperties.Foo$impl');

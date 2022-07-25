@@ -8,35 +8,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Cmp}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function():number */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function():number}*/
+  /**@type {?function():number} @nodts*/
   this.f_fn__intersectiontype_Cmp_$LambdaAdaptor;
   this.$ctor__intersectiontype_Cmp_$LambdaAdaptor__intersectiontype_Cmp_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__intersectiontype_Cmp_$LambdaAdaptor__intersectiontype_Cmp_$JsFunction(/** ?function():number */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__intersectiontype_Cmp_$LambdaAdaptor = fn;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_cmp__() {
   let /** ?function():number */ $function;
   return ($function = this.f_fn__intersectiontype_Cmp_$LambdaAdaptor, $function());
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Cmp.$markImplementor($LambdaAdaptor);

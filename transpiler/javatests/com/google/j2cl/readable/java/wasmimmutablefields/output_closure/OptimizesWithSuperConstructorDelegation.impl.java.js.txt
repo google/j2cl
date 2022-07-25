@@ -4,12 +4,12 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const OptimizesWithThisConstructorDelegation = goog.require('wasmimmutablefields.OptimizesWithThisConstructorDelegation$impl');
 
 class OptimizesWithSuperConstructorDelegation extends OptimizesWithThisConstructorDelegation {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
  //Factory method corresponding to constructor 'OptimizesWithSuperConstructorDelegation()'.
- /** @return {!OptimizesWithSuperConstructorDelegation} */
+ /** @nodts @return {!OptimizesWithSuperConstructorDelegation} */
  static $create__() {
   OptimizesWithSuperConstructorDelegation.$clinit();
   let $instance = new OptimizesWithSuperConstructorDelegation();
@@ -17,12 +17,12 @@ class OptimizesWithSuperConstructorDelegation extends OptimizesWithThisConstruct
   return $instance;
  }
  //Initialization from constructor 'OptimizesWithSuperConstructorDelegation()'.
- 
+ /** @nodts */
  $ctor__wasmimmutablefields_OptimizesWithSuperConstructorDelegation__() {
   this.$ctor__wasmimmutablefields_OptimizesWithThisConstructorDelegation__();
  }
  //Factory method corresponding to constructor 'OptimizesWithSuperConstructorDelegation(int)'.
- /** @return {!OptimizesWithSuperConstructorDelegation} */
+ /** @nodts @return {!OptimizesWithSuperConstructorDelegation} */
  static $create__int(/** number */ parameter) {
   OptimizesWithSuperConstructorDelegation.$clinit();
   let $instance = new OptimizesWithSuperConstructorDelegation();
@@ -30,12 +30,12 @@ class OptimizesWithSuperConstructorDelegation extends OptimizesWithThisConstruct
   return $instance;
  }
  //Initialization from constructor 'OptimizesWithSuperConstructorDelegation(int)'.
- 
+ /** @nodts */
  $ctor__wasmimmutablefields_OptimizesWithSuperConstructorDelegation__int(/** number */ parameter) {
   this.$ctor__wasmimmutablefields_OptimizesWithThisConstructorDelegation__int(parameter);
  }
  //Factory method corresponding to constructor 'OptimizesWithSuperConstructorDelegation(short)'.
- /** @return {!OptimizesWithSuperConstructorDelegation} */
+ /** @nodts @return {!OptimizesWithSuperConstructorDelegation} */
  static $create__short(/** number */ parameter) {
   OptimizesWithSuperConstructorDelegation.$clinit();
   let $instance = new OptimizesWithSuperConstructorDelegation();
@@ -43,21 +43,22 @@ class OptimizesWithSuperConstructorDelegation extends OptimizesWithThisConstruct
   return $instance;
  }
  //Initialization from constructor 'OptimizesWithSuperConstructorDelegation(short)'.
- 
+ /** @nodts */
  $ctor__wasmimmutablefields_OptimizesWithSuperConstructorDelegation__short(/** number */ parameter) {
   this.$ctor__wasmimmutablefields_OptimizesWithSuperConstructorDelegation__int(parameter);
  }
- 
+ /** @nodts */
  static $clinit() {
   OptimizesWithSuperConstructorDelegation.$clinit = () =>{};
   OptimizesWithSuperConstructorDelegation.$loadModules();
   OptimizesWithThisConstructorDelegation.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof OptimizesWithSuperConstructorDelegation;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(OptimizesWithSuperConstructorDelegation, 'wasmimmutablefields.OptimizesWithSuperConstructorDelegation');

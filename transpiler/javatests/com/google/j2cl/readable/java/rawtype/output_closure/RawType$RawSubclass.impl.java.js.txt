@@ -10,35 +10,36 @@ let RawType = goog.forwardDeclare('rawtype.RawType$impl');
  * @implements {I}
  */
 class RawSubclass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!RawSubclass} */
+ /** @nodts @return {!RawSubclass} */
  static $create__() {
   RawSubclass.$clinit();
   let $instance = new RawSubclass();
   $instance.$ctor__rawtype_RawType_RawSubclass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__rawtype_RawType_RawSubclass__() {
   this.$ctor__java_lang_Object__();
  }
- /** @override */
+ /** @override @nodts */
  m_f__rawtype_RawType(/** RawType */ t) {}
- 
+ /** @nodts */
  static $clinit() {
   RawSubclass.$clinit = () =>{};
   RawSubclass.$loadModules();
   j_l_Object.$clinit();
   I.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof RawSubclass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor(RawSubclass);

@@ -11,18 +11,18 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @implements {I<Integer>}
  */
 class D extends A {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!D} */
+ /** @nodts @return {!D} */
  static $create__() {
   D.$clinit();
   let $instance = new D();
   $instance.$ctor__bridgejsmethod_Main_D__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_D__() {
   this.$ctor__bridgejsmethod_Main_A__();
  }
@@ -30,17 +30,18 @@ class D extends A {
  fun(/** Integer */ i) {
   return i;
  }
- 
+ /** @nodts */
  static $clinit() {
   D.$clinit = () =>{};
   D.$loadModules();
   A.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof D;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor(D);

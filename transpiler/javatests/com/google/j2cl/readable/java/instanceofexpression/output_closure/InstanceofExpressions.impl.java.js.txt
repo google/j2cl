@@ -27,22 +27,22 @@ let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 let $$short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
 
 class InstanceofExpressions extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!InstanceofExpressions} */
+ /** @nodts @return {!InstanceofExpressions} */
  static $create__() {
   InstanceofExpressions.$clinit();
   let $instance = new InstanceofExpressions();
   $instance.$ctor__instanceofexpression_InstanceofExpressions__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__instanceofexpression_InstanceofExpressions__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_testInstanceofClass__() {
   let object = InstanceofExpressions.$create__();
   let /** boolean */ b;
@@ -50,14 +50,14 @@ class InstanceofExpressions extends j_l_Object {
   b = InstanceofExpressions.$isInstance(object);
   b = j_l_String.$isInstance(object);
  }
- 
+ /** @nodts */
  m_testInstanceofInterface__() {
   let o = j_l_Object.$create__();
   let /** boolean */ b;
   b = Serializable.$isInstance(o);
   b = !$Equality.$same($1.$create__instanceofexpression_InstanceofExpressions(this), null);
  }
- 
+ /** @nodts */
  m_testInstanceofBoxedType__() {
   let b = Integer.$create__int(1);
   let a = Byte.$isInstance(b);
@@ -74,7 +74,7 @@ class InstanceofExpressions extends j_l_Object {
   a = !$Equality.$same(d, null);
   a = !$Equality.$same(d, null);
  }
- 
+ /** @nodts */
  m_testInstanceOfArray__() {
   let object = j_l_Object.$create__();
   let objectArray = new Array(0);
@@ -103,17 +103,18 @@ class InstanceofExpressions extends j_l_Object {
   a = $Arrays.$instanceIsOfType(object, $$char, 1);
   a = $Arrays.$instanceIsOfType(object, $$boolean, 1);
  }
- 
+ /** @nodts */
  static $clinit() {
   InstanceofExpressions.$clinit = () =>{};
   InstanceofExpressions.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InstanceofExpressions;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('instanceofexpression.InstanceofExpressions.$1$impl');
   Serializable = goog.module.get('java.io.Serializable$impl');

@@ -9,35 +9,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MethodReferences_Function<T, U>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(T):U */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(T):U}*/
+  /**@type {?function(T):U} @nodts*/
   this.f_fn__methodreferences_MethodReferences_Function_$LambdaAdaptor;
   this.$ctor__methodreferences_MethodReferences_Function_$LambdaAdaptor__methodreferences_MethodReferences_Function_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__methodreferences_MethodReferences_Function_$LambdaAdaptor__methodreferences_MethodReferences_Function_$JsFunction(/** ?function(T):U */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__methodreferences_MethodReferences_Function_$LambdaAdaptor = fn;
  }
- /** @override @return {U} */
+ /** @override @nodts @return {U} */
  m_apply__java_lang_Object(/** T */ arg0) {
   let /** ?function(T):U */ $function;
   return ($function = this.f_fn__methodreferences_MethodReferences_Function_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 MethodReferences_Function.$markImplementor($LambdaAdaptor);

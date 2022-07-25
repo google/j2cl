@@ -11,17 +11,17 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<Color>}
  */
 class Color extends Enum {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Color} */
+ /** @nodts @return {!Color} */
  static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
   let $instance = new Color();
   $instance.$ctor__jstypeenum_Color__java_lang_String__int($name, $ordinal);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jstypeenum_Color__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
   this.f_name__java_lang_Enum_ = $name;
   this.f_ordinal__java_lang_Enum_ = $ordinal;
@@ -40,28 +40,29 @@ class Color extends Enum {
   Color.$clinit();
   return /**@type {!Array<Color>}*/ ($Arrays.$init([Color.RED, Color.GREEN, Color.BLUE], Color));
  }
- 
+ /** @nodts */
  static $clinit() {
   Color.$clinit = () =>{};
   Color.$loadModules();
   Enum.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Color;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
-/**@const {number}*/
+/**@const {number} @nodts*/
 Color.$ordinal_RED__jstypeenum_Color = 0;
-/**@const {number}*/
+/**@const {number} @nodts*/
 Color.$ordinal_GREEN__jstypeenum_Color = 1;
-/**@const {number}*/
+/**@const {number} @nodts*/
 Color.$ordinal_BLUE__jstypeenum_Color = 2;
 /**@const {!Color}*/
 Color.RED = /**@pureOrBreakMyCode*/ Color.$create__java_lang_String__int($Util.$makeEnumName('RED'), Color.$ordinal_RED__jstypeenum_Color);
@@ -69,7 +70,7 @@ Color.RED = /**@pureOrBreakMyCode*/ Color.$create__java_lang_String__int($Util.$
 Color.GREEN = /**@pureOrBreakMyCode*/ Color.$create__java_lang_String__int($Util.$makeEnumName('GREEN'), Color.$ordinal_GREEN__jstypeenum_Color);
 /**@const {!Color}*/
 Color.BLUE = /**@pureOrBreakMyCode*/ Color.$create__java_lang_String__int($Util.$makeEnumName('BLUE'), Color.$ordinal_BLUE__jstypeenum_Color);
-/**@type {Map<?string, !Color>}*/
+/**@type {Map<?string, !Color>} @nodts*/
 Color.f_namesToValuesMap__jstypeenum_Color_;
 $Util.$setClassMetadataForEnum(Color, 'jstypeenum.Color');
 

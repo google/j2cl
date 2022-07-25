@@ -7,7 +7,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class NonNullableBound {
- 
+ /** @nodts */
  static $clinit() {
   NonNullableBound.$clinit = () =>{};
   NonNullableBound.$loadModules();
@@ -16,11 +16,12 @@ class NonNullableBound {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__nullability_explicitnotnullable_ExplicitNotNullable_NonNullableBound = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__nullability_explicitnotnullable_ExplicitNotNullable_NonNullableBound;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 NonNullableBound.$markImplementor(/**@type {Function}*/ (NonNullableBound));

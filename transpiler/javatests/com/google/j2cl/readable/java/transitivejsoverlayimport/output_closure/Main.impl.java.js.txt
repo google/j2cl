@@ -7,22 +7,22 @@ let Immediate_$Overlay = goog.forwardDeclare('transitivejsoverlayimport.Immediat
 let $Overlay = goog.forwardDeclare('transitivejsoverlayimport.Transitive.$Overlay$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__transitivejsoverlayimport_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__transitivejsoverlayimport_Main__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
   Main.$clinit();
   {
@@ -52,17 +52,18 @@ class Main extends j_l_Object {
    nonNativeLower.m_doNonNativeLowerInstanceMethod___$pp_transitivejsoverlayimport();
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   Immediate_$Overlay = goog.module.get('transitivejsoverlayimport.Immediate.$Overlay$impl');
   $Overlay = goog.module.get('transitivejsoverlayimport.Transitive.$Overlay$impl');

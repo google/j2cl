@@ -8,14 +8,14 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterfaceWit
  * @interface
  */
 class FunctionalInterfaceWithMethodReturningVoid {
- /** @abstract */
+ /** @abstract @nodts */
  m_run__() {}
- /** @return {FunctionalInterfaceWithMethodReturningVoid} */
+ /** @nodts @return {FunctionalInterfaceWithMethodReturningVoid} */
  static $adapt(/** ?function():void */ fn) {
   FunctionalInterfaceWithMethodReturningVoid.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   FunctionalInterfaceWithMethodReturningVoid.$clinit = () =>{};
   FunctionalInterfaceWithMethodReturningVoid.$loadModules();
@@ -24,11 +24,12 @@ class FunctionalInterfaceWithMethodReturningVoid {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor$impl');
  }

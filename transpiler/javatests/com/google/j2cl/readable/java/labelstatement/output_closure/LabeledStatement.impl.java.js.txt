@@ -4,28 +4,28 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class LabeledStatement extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!LabeledStatement} */
+ /** @nodts @return {!LabeledStatement} */
  static $create__() {
   LabeledStatement.$clinit();
   let $instance = new LabeledStatement();
   $instance.$ctor__labelstatement_LabeledStatement__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__labelstatement_LabeledStatement__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_loopStatements__() {
   LABEL: for (; true; ) {
    break LABEL;
   }
  }
- 
+ /** @nodts */
  m_simpleStatement__() {
   LABEL: this.m_foo___$p_labelstatement_LabeledStatement();
   do {
@@ -33,19 +33,19 @@ class LabeledStatement extends j_l_Object {
   } while (false);
   LABEL: return;
  }
- 
+ /** @nodts */
  m_block__() {
   LABEL: {
    break LABEL;
   }
  }
- 
+ /** @nodts */
  m_ifStatement__() {
   LABEL: if (true) {
    break LABEL;
   }
  }
- 
+ /** @nodts */
  m_switchStatement__() {
   LABEL: switch (0) {
    case 0: 
@@ -54,19 +54,20 @@ class LabeledStatement extends j_l_Object {
     }
   }
  }
- 
+ /** @nodts */
  m_foo___$p_labelstatement_LabeledStatement() {}
- 
+ /** @nodts */
  static $clinit() {
   LabeledStatement.$clinit = () =>{};
   LabeledStatement.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof LabeledStatement;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(LabeledStatement, 'labelstatement.LabeledStatement');

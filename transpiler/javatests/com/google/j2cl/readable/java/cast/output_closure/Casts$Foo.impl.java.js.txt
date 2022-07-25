@@ -6,46 +6,47 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Casts = goog.forwardDeclare('cast.Casts$impl');
 
 class Foo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Casts}*/
+  /**@type {Casts} @nodts*/
   this.$outer_this__cast_Casts_Foo;
-  /**@type {*}*/
+  /**@type {*} @nodts*/
   this.f_field__cast_Casts_Foo;
  }
- /** @return {!Foo} */
+ /** @nodts @return {!Foo} */
  static $create__cast_Casts(/** Casts */ $outer_this) {
   Foo.$clinit();
   let $instance = new Foo();
   $instance.$ctor__cast_Casts_Foo__cast_Casts($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__cast_Casts_Foo__cast_Casts(/** Casts */ $outer_this) {
   this.$outer_this__cast_Casts_Foo = $outer_this;
   this.$ctor__java_lang_Object__();
   this.$init___$p_cast_Casts_Foo();
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  m_method__() {
   return j_l_Object.$create__();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_cast_Casts_Foo() {
   this.f_field__cast_Casts_Foo = j_l_Object.$create__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
   Foo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Foo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Foo, 'cast.Casts$Foo');

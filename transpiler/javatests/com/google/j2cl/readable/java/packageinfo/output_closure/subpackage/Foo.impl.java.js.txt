@@ -6,39 +6,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Outer = goog.forwardDeclare('readable.packageinfo.Outer$impl');
 
 class Foo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Outer}*/
+  /**@type {Outer} @nodts*/
   this.f_outer__packageinfo_subpackage_Foo;
  }
- /** @return {!Foo} */
+ /** @nodts @return {!Foo} */
  static $create__() {
   Foo.$clinit();
   let $instance = new Foo();
   $instance.$ctor__packageinfo_subpackage_Foo__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__packageinfo_subpackage_Foo__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_packageinfo_subpackage_Foo();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_packageinfo_subpackage_Foo() {
   this.f_outer__packageinfo_subpackage_Foo = new Outer();
  }
- 
+ /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
   Foo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Foo;
  }
  
+ /** @nodts */
  static $loadModules() {
   Outer = goog.module.get('readable.packageinfo.Outer$impl');
  }

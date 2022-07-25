@@ -7,29 +7,30 @@ const Parent = goog.require('packageprivatemethods.package1.Parent$impl');
  * @abstract
  */
 class SubParent extends Parent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__packageprivatemethods_package2_SubParent__() {
   this.$ctor__packageprivatemethods_package1_Parent__();
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_foo__int_$pp_packageprivatemethods_package2(/** number */ a) {
   return a;
  }
- 
+ /** @nodts */
  static $clinit() {
   SubParent.$clinit = () =>{};
   SubParent.$loadModules();
   Parent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SubParent;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(SubParent, 'packageprivatemethods.package2.SubParent');

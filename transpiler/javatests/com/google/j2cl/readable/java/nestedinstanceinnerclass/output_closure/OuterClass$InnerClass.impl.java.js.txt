@@ -6,35 +6,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let OuterClass = goog.forwardDeclare('nestedinstanceinnerclass.OuterClass$impl');
 
 class InnerClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {OuterClass}*/
+  /**@type {OuterClass} @nodts*/
   this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass;
  }
- /** @return {!InnerClass} */
+ /** @nodts @return {!InnerClass} */
  static $create__nestedinstanceinnerclass_OuterClass(/** OuterClass */ $outer_this) {
   InnerClass.$clinit();
   let $instance = new InnerClass();
   $instance.$ctor__nestedinstanceinnerclass_OuterClass_InnerClass__nestedinstanceinnerclass_OuterClass($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nestedinstanceinnerclass_OuterClass_InnerClass__nestedinstanceinnerclass_OuterClass(/** OuterClass */ $outer_this) {
   this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   InnerClass.$clinit = () =>{};
   InnerClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InnerClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(InnerClass, 'nestedinstanceinnerclass.OuterClass$InnerClass');

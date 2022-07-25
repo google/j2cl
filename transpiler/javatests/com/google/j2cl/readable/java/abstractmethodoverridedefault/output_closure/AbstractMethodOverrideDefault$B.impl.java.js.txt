@@ -9,32 +9,33 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {J}
  */
 class B extends A {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B__() {
   this.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();
  }
- /** @override */
+ /** @override @nodts */
  m_bar__() {
   if (false) {
    this.m_bar__();
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   B.$clinit = () =>{};
   B.$loadModules();
   A.$clinit();
   J.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof B;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 J.$markImplementor(B);

@@ -8,35 +8,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {FunctionalInterface}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(number):number */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(number):number}*/
+  /**@type {?function(number):number} @nodts*/
   this.f_fn__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor;
   this.$ctor__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor__lambdas_Lambdas_FunctionalInterface_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor__lambdas_Lambdas_FunctionalInterface_$JsFunction(/** ?function(number):number */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor = fn;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_m__int(/** number */ arg0) {
   let /** ?function(number):number */ $function;
   return ($function = this.f_fn__lambdas_Lambdas_FunctionalInterface_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 FunctionalInterface.$markImplementor($LambdaAdaptor);

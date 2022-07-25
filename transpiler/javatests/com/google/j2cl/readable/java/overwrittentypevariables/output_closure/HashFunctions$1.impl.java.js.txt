@@ -9,36 +9,37 @@ const HashFunction = goog.require('overwrittentypevariables.HashFunction$impl');
  * @implements {HashFunction<T>}
  */
 class $1 extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!$1<T>} */
+ /** @nodts @template T @return {!$1<T>} */
  static $create__() {
   $1.$clinit();
   let $instance = new $1();
   $instance.$ctor__overwrittentypevariables_HashFunctions_1__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__overwrittentypevariables_HashFunctions_1__() {
   this.$ctor__java_lang_Object__();
  }
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_apply__java_lang_Object(/** T */ input) {
   return '';
  }
- 
+ /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
   $1.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 HashFunction.$markImplementor($1);

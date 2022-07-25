@@ -10,36 +10,37 @@ let Content = goog.forwardDeclare('genericmethod.GenericMethod.Content$impl');
  * @template C
  */
 class SuperContainer extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template C @return {!SuperContainer<C>} */
+ /** @nodts @template C @return {!SuperContainer<C>} */
  static $create__() {
   SuperContainer.$clinit();
   let $instance = new SuperContainer();
   $instance.$ctor__genericmethod_GenericMethod_SuperContainer__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__genericmethod_GenericMethod_SuperContainer__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {C} */
+ /** @nodts @return {C} */
  m_get___$pp_genericmethod() {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   SuperContainer.$clinit = () =>{};
   SuperContainer.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SuperContainer;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(SuperContainer, 'genericmethod.GenericMethod$SuperContainer');

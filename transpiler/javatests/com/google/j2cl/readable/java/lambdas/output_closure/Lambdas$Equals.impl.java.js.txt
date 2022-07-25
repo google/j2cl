@@ -9,14 +9,14 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 class Equals {
  /** @abstract @return {boolean} */
  equals(/** * */ o) {}
- /** @abstract @return {T} */
+ /** @abstract @nodts @return {T} */
  m_get__() {}
- /** @template T @return {T} */
+ /** @nodts @template T @return {T} */
  static m_get__$default__lambdas_Lambdas_Equals(/** !Equals<T> */ $thisArg) {
   Equals.$clinit();
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   Equals.$clinit = () =>{};
   Equals.$loadModules();
@@ -25,11 +25,12 @@ class Equals {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__lambdas_Lambdas_Equals = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__lambdas_Lambdas_Equals;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Equals.$markImplementor(/**@type {Function}*/ (Equals));

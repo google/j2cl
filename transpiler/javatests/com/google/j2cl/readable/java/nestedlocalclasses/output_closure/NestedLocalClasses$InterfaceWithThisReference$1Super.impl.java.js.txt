@@ -8,41 +8,42 @@ const InterfaceWithThisReference = goog.require('nestedlocalclasses.NestedLocalC
  * @implements {InterfaceWithThisReference}
  */
 class $1Super extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {InterfaceWithThisReference}*/
+  /**@type {InterfaceWithThisReference} @nodts*/
   this.$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super;
  }
- /** @return {!$1Super} */
+ /** @nodts @return {!$1Super} */
  static $create__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(/** InterfaceWithThisReference */ $outer_this) {
   $1Super.$clinit();
   let $instance = new $1Super();
   $instance.$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(/** InterfaceWithThisReference */ $outer_this) {
   this.$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super = $outer_this;
   this.$ctor__java_lang_Object__();
  }
  //Default method forwarding stub.
- /** @override */
+ /** @override @nodts */
  m_foo__() {
   InterfaceWithThisReference.m_foo__$default__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(this);
  }
- 
+ /** @nodts */
  static $clinit() {
   $1Super.$clinit = () =>{};
   $1Super.$loadModules();
   j_l_Object.$clinit();
   InterfaceWithThisReference.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1Super;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 InterfaceWithThisReference.$markImplementor($1Super);

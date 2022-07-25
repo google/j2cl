@@ -9,18 +9,18 @@ class C extends B {
  constructor(/** number */ x) {
   C.$clinit();
   super(Math.imul(x, 2));
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fC__jsconstructor_JsConstructorClass_C = 0;
   this.$ctor__jsconstructor_JsConstructorClass_C__int(x);
  }
  //Initialization from constructor 'C(int)'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_C__int(/** number */ x) {
   this.$init___$p_jsconstructor_JsConstructorClass_C();
   this.f_fC__jsconstructor_JsConstructorClass_C = 6;
  }
  //Factory method corresponding to constructor 'C(int, int)'.
- /** @return {!C} */
+ /** @nodts @return {!C} */
  static $create__int__int(/** number */ x, /** number */ y) {
   C.$clinit();
   let $instance = new C(x + y | 0);
@@ -28,25 +28,26 @@ class C extends B {
   return $instance;
  }
  //Initialization from constructor 'C(int, int)'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_C__int__int(/** number */ x, /** number */ y) {
   this.f_fC__jsconstructor_JsConstructorClass_C = 7;
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_jsconstructor_JsConstructorClass_C() {
   this.f_fC__jsconstructor_JsConstructorClass_C = 1;
  }
- 
+ /** @nodts */
  static $clinit() {
   C.$clinit = () =>{};
   C.$loadModules();
   B.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof C;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(C, 'jsconstructor.JsConstructorClass$C');

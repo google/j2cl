@@ -8,18 +8,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyInterface}
  */
 class SubJsType extends MyJsType {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!SubJsType} */
+ /** @nodts @return {!SubJsType} */
  static $create__() {
   SubJsType.$clinit();
   let $instance = new SubJsType();
   $instance.$ctor__jsbridgeaccidentaloverride_SubJsType__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsbridgeaccidentaloverride_SubJsType__() {
   this.$ctor__jsbridgeaccidentaloverride_MyJsType__();
  }
@@ -28,26 +28,27 @@ class SubJsType extends MyJsType {
   return a + 2 | 0;
  }
  //Bridge method.
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_bar__int(/** number */ arg0) {
   return this.bar(arg0);
  }
  //Bridge method.
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_foo__int(/** number */ arg0) {
   return this.foo(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   SubJsType.$clinit = () =>{};
   SubJsType.$loadModules();
   MyJsType.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SubJsType;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 MyInterface.$markImplementor(SubJsType);

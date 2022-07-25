@@ -10,36 +10,36 @@ let $2 = goog.forwardDeclare('localclassinstaticcontext.LocalClassInStaticContex
 let $3 = goog.forwardDeclare('localclassinstaticcontext.LocalClassInStaticContext.$3$impl');
 
 class LocalClassInStaticContext extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!LocalClassInStaticContext} */
+ /** @nodts @return {!LocalClassInStaticContext} */
  static $create__() {
   LocalClassInStaticContext.$clinit();
   let $instance = new LocalClassInStaticContext();
   $instance.$ctor__localclassinstaticcontext_LocalClassInStaticContext__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__localclassinstaticcontext_LocalClassInStaticContext__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_test__() {
   LocalClassInStaticContext.$clinit();
   $1A.$create__();
   let a = $3.$create__();
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  static get f_f__localclassinstaticcontext_LocalClassInStaticContext() {
   return (LocalClassInStaticContext.$clinit(), LocalClassInStaticContext.$static_f__localclassinstaticcontext_LocalClassInStaticContext);
  }
- 
+ /** @nodts */
  static set f_f__localclassinstaticcontext_LocalClassInStaticContext(/** * */ value) {
   (LocalClassInStaticContext.$clinit(), LocalClassInStaticContext.$static_f__localclassinstaticcontext_LocalClassInStaticContext = value);
  }
- 
+ /** @nodts */
  static $clinit() {
   LocalClassInStaticContext.$clinit = () =>{};
   LocalClassInStaticContext.$loadModules();
@@ -48,11 +48,12 @@ class LocalClassInStaticContext extends j_l_Object {
   $1B.$create__();
   let b = $2.$create__();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof LocalClassInStaticContext;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('localclassinstaticcontext.LocalClassInStaticContext.$1$impl');
   $1A = goog.module.get('localclassinstaticcontext.LocalClassInStaticContext.$1A$impl');
@@ -61,7 +62,7 @@ class LocalClassInStaticContext extends j_l_Object {
   $3 = goog.module.get('localclassinstaticcontext.LocalClassInStaticContext.$3$impl');
  }
 }
-/**@private {*}*/
+/**@private {*} @nodts*/
 LocalClassInStaticContext.$static_f__localclassinstaticcontext_LocalClassInStaticContext;
 $Util.$setClassMetadata(LocalClassInStaticContext, 'localclassinstaticcontext.LocalClassInStaticContext');
 

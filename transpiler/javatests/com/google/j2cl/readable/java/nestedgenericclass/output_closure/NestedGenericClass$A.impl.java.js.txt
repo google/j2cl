@@ -9,35 +9,36 @@ let NestedGenericClass = goog.forwardDeclare('nestedgenericclass.NestedGenericCl
  * @template T, T_1
  */
 class A extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {NestedGenericClass<T_1>}*/
+  /**@type {NestedGenericClass<T_1>} @nodts*/
   this.$outer_this__nestedgenericclass_NestedGenericClass_A;
  }
- /** @template T, T_1 @return {!A<T, T_1>} */
+ /** @nodts @template T, T_1 @return {!A<T, T_1>} */
  static $create__nestedgenericclass_NestedGenericClass(/** NestedGenericClass<T_1> */ $outer_this) {
   A.$clinit();
   let $instance = new A();
   $instance.$ctor__nestedgenericclass_NestedGenericClass_A__nestedgenericclass_NestedGenericClass($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nestedgenericclass_NestedGenericClass_A__nestedgenericclass_NestedGenericClass(/** NestedGenericClass<T_1> */ $outer_this) {
   this.$outer_this__nestedgenericclass_NestedGenericClass_A = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   A.$clinit = () =>{};
   A.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof A;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(A, 'nestedgenericclass.NestedGenericClass$A');

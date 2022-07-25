@@ -10,22 +10,22 @@ let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Equality extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Equality} */
+ /** @nodts @return {!Equality} */
  static $create__() {
   Equality.$clinit();
   let $instance = new Equality();
   $instance.$ctor__equality_Equality__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__equality_Equality__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   {
    $Asserts.$assert(false == false);
@@ -45,17 +45,18 @@ class Equality extends j_l_Object {
    $Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), null));
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   Equality.$clinit = () =>{};
   Equality.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Equality;
  }
  
+ /** @nodts */
  static $loadModules() {
   Double = goog.module.get('java.lang.Double$impl');
   Float = goog.module.get('java.lang.Float$impl');

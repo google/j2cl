@@ -4,34 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InnerClassWithConstructor extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_a__innerclasswithconstructor_InnerClassWithConstructor = 0;
  }
- /** @return {!InnerClassWithConstructor} */
+ /** @nodts @return {!InnerClassWithConstructor} */
  static $create__() {
   InnerClassWithConstructor.$clinit();
   let $instance = new InnerClassWithConstructor();
   $instance.$ctor__innerclasswithconstructor_InnerClassWithConstructor__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclasswithconstructor_InnerClassWithConstructor__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   InnerClassWithConstructor.$clinit = () =>{};
   InnerClassWithConstructor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InnerClassWithConstructor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(InnerClassWithConstructor, 'innerclasswithconstructor.InnerClassWithConstructor');

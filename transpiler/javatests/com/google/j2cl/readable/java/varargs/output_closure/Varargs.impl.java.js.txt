@@ -9,14 +9,14 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Varargs extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Array<*>}*/
+  /**@type {Array<*>} @nodts*/
   this.f_args__varargs_Varargs_;
  }
  //Factory method corresponding to constructor 'Varargs(int...)'.
- /** @return {!Varargs} */
+ /** @nodts @return {!Varargs} */
  static $create__arrayOf_int(/** Array<number> */ args) {
   Varargs.$clinit();
   let $instance = new Varargs();
@@ -24,12 +24,12 @@ class Varargs extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'Varargs(int...)'.
- 
+ /** @nodts */
  $ctor__varargs_Varargs__arrayOf_int(/** Array<number> */ args) {
   this.$ctor__java_lang_Object__();
  }
  //Factory method corresponding to constructor 'Varargs()'.
- /** @return {!Varargs} */
+ /** @nodts @return {!Varargs} */
  static $create__() {
   Varargs.$clinit();
   let $instance = new Varargs();
@@ -37,30 +37,30 @@ class Varargs extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'Varargs()'.
- 
+ /** @nodts */
  $ctor__varargs_Varargs__() {
   this.$ctor__varargs_Varargs__arrayOf_int(/**@type {!Array<number>}*/ ($Arrays.$init([1], $$int)));
  }
- 
+ /** @nodts */
  m_test__int__arrayOf_java_lang_Object(/** number */ a, /** Array<*> */ args) {}
- 
+ /** @nodts */
  m_testCloneable__arrayOf_java_lang_Cloneable(/** Array<(Cloneable|Array)> */ args) {}
- 
+ /** @nodts */
  m_testSerializable__arrayOf_java_io_Serializable(/** Array<(Serializable|Array)> */ args) {}
- 
+ /** @nodts */
  m_testAssignment__arrayOf_java_lang_Object(/** Array<*> */ args) {
   this.f_args__varargs_Varargs_ = args;
  }
- /** @template T */
+ /** @nodts @template T */
  static m_fun__arrayOf_java_lang_Object(/** Array<T> */ elements) {
   Varargs.$clinit();
  }
- /** @template E */
+ /** @nodts @template E */
  static m_bar__java_lang_Object__java_lang_Object(/** E */ a, /** E */ b) {
   Varargs.$clinit();
   Varargs.m_fun__arrayOf_java_lang_Object([a, b]);
  }
- 
+ /** @nodts */
  m_main__() {
   let v = Varargs.$create__();
   v.m_test__int__arrayOf_java_lang_Object(1, []);
@@ -71,17 +71,18 @@ class Varargs extends j_l_Object {
   v.m_testCloneable__arrayOf_java_lang_Cloneable(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
   v.m_testSerializable__arrayOf_java_io_Serializable(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
  }
- 
+ /** @nodts */
  static $clinit() {
   Varargs.$clinit = () =>{};
   Varargs.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Varargs;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');

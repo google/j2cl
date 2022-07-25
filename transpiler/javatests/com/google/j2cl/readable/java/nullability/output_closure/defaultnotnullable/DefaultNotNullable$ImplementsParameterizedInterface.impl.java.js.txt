@@ -12,53 +12,54 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {ParameterizedInterface<string>}
  */
 class ImplementsParameterizedInterface extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {DefaultNotNullable}*/
+  /**@type {DefaultNotNullable} @nodts*/
   this.$outer_this__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface;
  }
- /** @return {!ImplementsParameterizedInterface} */
+ /** @nodts @return {!ImplementsParameterizedInterface} */
  static $create__nullability_defaultnotnullable_DefaultNotNullable(/** DefaultNotNullable */ $outer_this) {
   ImplementsParameterizedInterface.$clinit();
   let $instance = new ImplementsParameterizedInterface();
   $instance.$ctor__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface__nullability_defaultnotnullable_DefaultNotNullable($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface__nullability_defaultnotnullable_DefaultNotNullable(/** DefaultNotNullable */ $outer_this) {
   this.$outer_this__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- /** @return {string} */
+ /** @nodts @return {string} */
  m_add__java_lang_String(/** string */ s) {
   return 'Hey';
  }
- /** @return {?string} */
+ /** @nodts @return {?string} */
  m_nullableAdd__java_lang_String(/** ?string */ s) {
   return 'Hey';
  }
  //Bridge method.
- /** @override @return {string} */
+ /** @override @nodts @return {string} */
  m_add__java_lang_Object(/** string */ arg0) {
   return this.m_add__java_lang_String(/**@type {string}*/ ($Casts.$to(arg0, j_l_String)));
  }
  //Bridge method.
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_nullableAdd__java_lang_Object(/** ?string */ arg0) {
   return this.m_nullableAdd__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
- 
+ /** @nodts */
  static $clinit() {
   ImplementsParameterizedInterface.$clinit = () =>{};
   ImplementsParameterizedInterface.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ImplementsParameterizedInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

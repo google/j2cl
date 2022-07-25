@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgejsmethod.Main.G.$LambdaAdaptor$i
  * @template V
  */
 class G {
- /** @abstract @return {V} */
+ /** @abstract @nodts @return {V} */
  m_enclose__java_lang_Object(/** V */ value) {}
- /** @template V @return {G<V>} */
+ /** @nodts @template V @return {G<V>} */
  static $adapt(/** ?function(V):V */ fn) {
   G.$clinit();
   return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   G.$clinit = () =>{};
   G.$loadModules();
@@ -25,11 +25,12 @@ class G {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__bridgejsmethod_Main_G = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__bridgejsmethod_Main_G;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('bridgejsmethod.Main.G.$LambdaAdaptor$impl');
  }

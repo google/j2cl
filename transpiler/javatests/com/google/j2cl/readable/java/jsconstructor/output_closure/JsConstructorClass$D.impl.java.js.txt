@@ -9,18 +9,18 @@ class D extends B {
  constructor() {
   D.$clinit();
   super(9);
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fD__jsconstructor_JsConstructorClass_D = 0;
   this.$ctor__jsconstructor_JsConstructorClass_D__();
  }
  //Initialization from constructor 'D()'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_D__() {
   this.$init___$p_jsconstructor_JsConstructorClass_D();
   this.f_fD__jsconstructor_JsConstructorClass_D = 10;
  }
  //Factory method corresponding to constructor 'D(int)'.
- /** @return {!D} */
+ /** @nodts @return {!D} */
  static $create__int(/** number */ x) {
   D.$clinit();
   let $instance = new D();
@@ -28,25 +28,26 @@ class D extends B {
   return $instance;
  }
  //Initialization from constructor 'D(int)'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_D__int(/** number */ x) {
   this.f_fD__jsconstructor_JsConstructorClass_D = x;
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_jsconstructor_JsConstructorClass_D() {
   this.f_fD__jsconstructor_JsConstructorClass_D = 8;
  }
- 
+ /** @nodts */
  static $clinit() {
   D.$clinit = () =>{};
   D.$loadModules();
   B.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof D;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(D, 'jsconstructor.JsConstructorClass$D');

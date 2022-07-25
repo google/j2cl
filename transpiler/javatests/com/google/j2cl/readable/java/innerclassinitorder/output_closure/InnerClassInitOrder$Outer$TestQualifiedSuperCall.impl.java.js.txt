@@ -7,32 +7,33 @@ let Outer = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.Outer$i
 let OuterIsSuper = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
 
 class TestQualifiedSuperCall extends OuterIsNotSuper {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!TestQualifiedSuperCall} */
+ /** @nodts @return {!TestQualifiedSuperCall} */
  static $create__() {
   TestQualifiedSuperCall.$clinit();
   let $instance = new TestQualifiedSuperCall();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__() {
   this.$ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__innerclassinitorder_InnerClassInitOrder_Outer(OuterIsSuper.$create__innerclassinitorder_InnerClassInitOrder_Outer__int(Outer.$create__int(1), 2));
  }
- 
+ /** @nodts */
  static $clinit() {
   TestQualifiedSuperCall.$clinit = () =>{};
   TestQualifiedSuperCall.$loadModules();
   OuterIsNotSuper.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof TestQualifiedSuperCall;
  }
  
+ /** @nodts */
  static $loadModules() {
   Outer = goog.module.get('innerclassinitorder.InnerClassInitOrder.Outer$impl');
   OuterIsSuper = goog.module.get('innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');

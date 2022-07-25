@@ -4,34 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class MultipleNestings extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!MultipleNestings} */
+ /** @nodts @return {!MultipleNestings} */
  static $create__() {
   MultipleNestings.$clinit();
   let $instance = new MultipleNestings();
   $instance.$ctor__innerclassinheritance_MultipleNestings__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinheritance_MultipleNestings__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_funInM__() {}
- 
+ /** @nodts */
  static $clinit() {
   MultipleNestings.$clinit = () =>{};
   MultipleNestings.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MultipleNestings;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(MultipleNestings, 'innerclassinheritance.MultipleNestings');

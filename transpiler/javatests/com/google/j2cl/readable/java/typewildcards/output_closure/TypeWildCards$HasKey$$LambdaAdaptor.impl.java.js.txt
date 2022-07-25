@@ -8,35 +8,36 @@ const HasKey = goog.require('typewildcards.TypeWildCards.HasKey$impl');
  * @implements {HasKey}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function():?string */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function():?string}*/
+  /**@type {?function():?string} @nodts*/
   this.f_fn__typewildcards_TypeWildCards_HasKey_$LambdaAdaptor;
   this.$ctor__typewildcards_TypeWildCards_HasKey_$LambdaAdaptor__typewildcards_TypeWildCards_HasKey_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__typewildcards_TypeWildCards_HasKey_$LambdaAdaptor__typewildcards_TypeWildCards_HasKey_$JsFunction(/** ?function():?string */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__typewildcards_TypeWildCards_HasKey_$LambdaAdaptor = fn;
  }
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_getKey__() {
   let /** ?function():?string */ $function;
   return ($function = this.f_fn__typewildcards_TypeWildCards_HasKey_$LambdaAdaptor, $function());
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 HasKey.$markImplementor($LambdaAdaptor);

@@ -21,28 +21,28 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template U
  */
 class IntersectionTypeTest extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template U @return {!IntersectionTypeTest<U>} */
+ /** @nodts @template U @return {!IntersectionTypeTest<U>} */
  static $create__() {
   IntersectionTypeTest.$clinit();
   let $instance = new IntersectionTypeTest();
   $instance.$ctor__intersectiontype_IntersectionTypeTest__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__intersectiontype_IntersectionTypeTest__() {
   this.$ctor__java_lang_Object__();
  }
- /** @template T */
+ /** @nodts @template T */
  static m_getAndSet__intersectiontype_Getable(/** T */ object) {
   IntersectionTypeTest.$clinit();
   /**@type {!Setable}*/ ($Casts.$to(object, Setable)).m_set__int(1);
   /**@type {Getable}*/ (object).m_get__();
  }
- /** @template T @return {Getable<T>} */
+ /** @nodts @template T @return {Getable<T>} */
  static m_cast__java_lang_Object(/** * */ o) {
   IntersectionTypeTest.$clinit();
   if ($Equality.$same(o, null)) {
@@ -50,78 +50,79 @@ class IntersectionTypeTest extends j_l_Object {
   }
   return /**@type {Getable<T>}*/ ($Casts.$to($Casts.$to(o, Getable), Setable));
  }
- /** @template T @return {Getable<(Comparable<?string>|boolean|number|string)>} */
+ /** @nodts @template T @return {Getable<(Comparable<?string>|boolean|number|string)>} */
  static m_cast1__java_lang_Object(/** * */ s) {
   IntersectionTypeTest.$clinit();
   return /**@type {Getable<(Comparable<?string>|boolean|number|string)>}*/ ($Casts.$to($Casts.$to(s, Getable), Setable));
  }
- /** @template T @return {Getable<(Comparable<T>|boolean|number|string)>} */
+ /** @nodts @template T @return {Getable<(Comparable<T>|boolean|number|string)>} */
  static m_cast2__java_lang_Object(/** * */ s) {
   IntersectionTypeTest.$clinit();
   return /**@type {Getable<(Comparable<T>|boolean|number|string)>}*/ ($Casts.$to($Casts.$to(s, Getable), Setable));
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  m_cast3__java_lang_Object(/** * */ s) {
   return s;
  }
- /** @return {Cmp} */
+ /** @nodts @return {Cmp} */
  static m_method__() {
   IntersectionTypeTest.$clinit();
   return /**@type {Cmp}*/ (new $LambdaAdaptor$1(() =>{
    return 1;
   }));
  }
- /** @return {Cmp2} */
+ /** @nodts @return {Cmp2} */
  static m_method2__() {
   IntersectionTypeTest.$clinit();
   return /**@type {Cmp2}*/ (new $LambdaAdaptor$2((/** number */ a) =>{
    return 1;
   }));
  }
- 
+ /** @nodts */
  static m_testClosureAssignment__java_lang_Object(/** * */ o) {
   IntersectionTypeTest.$clinit();
   let e = /**@type {A}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
   let g = /**@type {EmptyA}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
   let s = /**@type {EmptyB}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
  }
- /** @template T @return {T} */
+ /** @nodts @template T @return {T} */
  static m_get__java_lang_Object(/** T */ t) {
   return t;
  }
- /** @template T @return {T} */
+ /** @nodts @template T @return {T} */
  static m_m__() {
   return /**@type {T}*/ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object(j_l_Object.$create__()), A));
  }
- /** @template T @return {Getable<T>} */
+ /** @nodts @template T @return {Getable<T>} */
  static m_n__() {
   return null;
  }
- /** @template T */
+ /** @nodts @template T */
  static m_set__intersectiontype_IntersectionTypeTest_A(/** T */ t) {}
- 
+ /** @nodts */
  m_testMethodCall__() {
   let o = IntersectionTypeTest.m_m__();
   IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(/**@type {A}*/ ($Casts.$to($Casts.$to(o, A), EmptyA)));
   IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(IntersectionTypeTest.m_m__());
   let g = /**@type {Getable<A>}*/ (IntersectionTypeTest.m_n__());
  }
- /** @template T */
+ /** @nodts @template T */
  static m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType(/** T */ t) {
   /**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__();
   /**@type {!Cmp}*/ ($Casts.$to(null, Cmp)).m_cmp__();
  }
- 
+ /** @nodts */
  static $clinit() {
   IntersectionTypeTest.$clinit = () =>{};
   IntersectionTypeTest.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof IntersectionTypeTest;
  }
  
+ /** @nodts */
  static $loadModules() {
   Cmp = goog.module.get('intersectiontype.Cmp$impl');
   Getable = goog.module.get('intersectiontype.Getable$impl');

@@ -14,41 +14,42 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {I<Integer, ?string>}
  */
 class B extends A {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!B} */
+ /** @nodts @return {!B} */
  static $create__() {
   B.$clinit();
   let $instance = new B();
   $instance.$ctor__bridgemethods_B__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_B__() {
   this.$ctor__bridgemethods_A__();
  }
- /** @return {Integer} */
+ /** @nodts @return {Integer} */
  m_fun__java_lang_String(/** ?string */ s) {
   return Integer.$create__int(1);
  }
  //Bridge method.
- /** @override @return {Integer} */
+ /** @override @nodts @return {Integer} */
  m_fun__java_lang_Object(/** ?string */ arg0) {
   return this.m_fun__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
- 
+ /** @nodts */
  static $clinit() {
   B.$clinit = () =>{};
   B.$loadModules();
   A.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof B;
  }
  
+ /** @nodts */
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   j_l_String = goog.module.get('java.lang.String$impl');

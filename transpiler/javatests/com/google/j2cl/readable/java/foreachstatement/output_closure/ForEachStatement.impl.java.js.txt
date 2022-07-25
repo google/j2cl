@@ -16,22 +16,22 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class ForEachStatement extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!ForEachStatement} */
+ /** @nodts @return {!ForEachStatement} */
  static $create__() {
   ForEachStatement.$clinit();
   let $instance = new ForEachStatement();
   $instance.$ctor__foreachstatement_ForEachStatement__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__foreachstatement_ForEachStatement__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__java_lang_Iterable(/** Iterable<Throwable> */ iterable) {
   for (let $iterator = iterable.m_iterator__(); $iterator.m_hasNext__(); ) {
    let t = /**@type {Throwable}*/ ($Casts.$to($iterator.m_next__(), Throwable));
@@ -46,7 +46,7 @@ class ForEachStatement extends j_l_Object {
    }
   }
  }
- 
+ /** @nodts */
  m_testMulticatch___$p_foreachstatement_ForEachStatement() {
   try {
    throw $Exceptions.toJs(Exception.$create__());
@@ -62,7 +62,7 @@ class ForEachStatement extends j_l_Object {
    }
   }
  }
- /** @template T, U */
+ /** @nodts @template T, U */
  m_testTypeVariable___$p_foreachstatement_ForEachStatement() {
   let iterable = null;
   for (let $iterator = /**@type {Iterable<?string>}*/ ($Casts.$to(iterable, Iterable)).m_iterator__(); $iterator.m_hasNext__(); ) {
@@ -73,17 +73,18 @@ class ForEachStatement extends j_l_Object {
    let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__(), Integer)).m_intValue__();
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   ForEachStatement.$clinit = () =>{};
   ForEachStatement.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ForEachStatement;
  }
  
+ /** @nodts */
  static $loadModules() {
   Exception1 = goog.module.get('foreachstatement.ForEachStatement.Exception1$impl');
   Exception2 = goog.module.get('foreachstatement.ForEachStatement.Exception2$impl');

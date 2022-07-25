@@ -7,22 +7,22 @@ let Implementor = goog.forwardDeclare('interfaces.Main.Implementor$impl');
 let Interface = goog.forwardDeclare('interfaces.Main.Interface$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__interfaces_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__interfaces_Main__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_testInterfaceMembers___$pp_interfaces() {
   let i = Implementor.$create__interfaces_Main(this);
   i.m_interfaceMethod__();
@@ -30,17 +30,18 @@ class Main extends j_l_Object {
   Interface.m_staticInterfaceMethod__();
   let x = (Implementor.$create__interfaces_Main(this), Interface.f_a__interfaces_Main_Interface) + Interface.f_b__interfaces_Main_Interface | 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   Implementor = goog.module.get('interfaces.Main.Implementor$impl');
   Interface = goog.module.get('interfaces.Main.Interface$impl');

@@ -10,23 +10,23 @@ let Lambdas_Function = goog.forwardDeclare('lambdas.Lambdas.Function$impl');
  * @template T, U, R
  */
 class BiFunction {
- /** @abstract @return {R} */
+ /** @abstract @nodts @return {R} */
  m_apply__java_lang_Object__java_lang_Object(/** T */ t, /** U */ u) {}
- /** @abstract @template V @return {BiFunction<T, U, V>} */
+ /** @abstract @nodts @template V @return {BiFunction<T, U, V>} */
  m_andThen__lambdas_Lambdas_Function(/** Lambdas_Function<?, ?> */ after) {}
- /** @template T, U, R @return {BiFunction<T, U, R>} */
+ /** @nodts @template T, U, R @return {BiFunction<T, U, R>} */
  static $adapt(/** ?function(T, U):R */ fn) {
   BiFunction.$clinit();
   return /**@type {!$LambdaAdaptor<T, U, R>}*/ (new $LambdaAdaptor(fn));
  }
- /** @template V, T, U, R @return {BiFunction<T, U, V>} */
+ /** @nodts @template V, T, U, R @return {BiFunction<T, U, V>} */
  static m_andThen__$default__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function(/** !BiFunction<T, U, R> */ $thisArg, /** Lambdas_Function<?, ?> */ after) {
   BiFunction.$clinit();
   return BiFunction.$adapt((/** T */ t, /** U */ u) =>{
    return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
   });
  }
- 
+ /** @nodts */
  static $clinit() {
   BiFunction.$clinit = () =>{};
   BiFunction.$loadModules();
@@ -35,11 +35,12 @@ class BiFunction {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__lambdas_Lambdas_BiFunction = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__lambdas_Lambdas_BiFunction;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('lambdas.Lambdas.BiFunction.$LambdaAdaptor$impl');
  }

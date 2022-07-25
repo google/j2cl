@@ -6,7 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class EmptyA {
- 
+ /** @nodts */
  static $clinit() {
   EmptyA.$clinit = () =>{};
   EmptyA.$loadModules();
@@ -15,11 +15,12 @@ class EmptyA {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__intersectiontype_IntersectionTypeTest_EmptyA = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__intersectiontype_IntersectionTypeTest_EmptyA;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 EmptyA.$markImplementor(/**@type {Function}*/ (EmptyA));

@@ -14,12 +14,12 @@ let $LambdaAdaptor = goog.forwardDeclare('interfacejsbridge.SubInterface.$Lambda
 class SubInterface {
  /** @abstract @override @return {number} */
  foo(/** number */ a) {}
- /** @return {SubInterface} */
+ /** @nodts @return {SubInterface} */
  static $adapt(/** ?function(number):number */ fn) {
   SubInterface.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   SubInterface.$clinit = () =>{};
   SubInterface.$loadModules();
@@ -30,11 +30,12 @@ class SubInterface {
   MyInterface.$markImplementor(ctor);
   ctor.prototype.$implements__interfacejsbridge_SubInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__interfacejsbridge_SubInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('interfacejsbridge.SubInterface.$LambdaAdaptor$impl');
  }

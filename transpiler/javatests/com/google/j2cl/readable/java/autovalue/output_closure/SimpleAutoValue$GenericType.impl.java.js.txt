@@ -12,31 +12,32 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @extends {AbstractCollection<SimpleAutoValue>}
  */
 class GenericType extends AbstractCollection {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__autovalue_SimpleAutoValue_GenericType__() {
   this.$ctor__java_util_AbstractCollection__();
  }
- /** @template T @return {T} */
+ /** @nodts @template T @return {T} */
  m_foo__java_util_List__java_util_List_$pp_autovalue(/** List<?> */ o1, /** List<SimpleAutoValue> */ o2) {
   this.m_foo__java_util_List__java_util_List_$pp_autovalue(null, null).m_getArrayField__();
   let o = /**@type {SimpleAutoValue}*/ ($Casts.$to(o1.getAtIndex(0), SimpleAutoValue));
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   GenericType.$clinit = () =>{};
   GenericType.$loadModules();
   AbstractCollection.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof GenericType;
  }
  
+ /** @nodts */
  static $loadModules() {
   SimpleAutoValue = goog.module.get('autovalue.SimpleAutoValue$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

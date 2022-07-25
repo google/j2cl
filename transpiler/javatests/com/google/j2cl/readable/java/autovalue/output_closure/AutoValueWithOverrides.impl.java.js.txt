@@ -4,12 +4,12 @@ const BaseClass = goog.require('autovalue.BaseClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class AutoValueWithOverrides extends BaseClass {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ = 0;
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ = false;
  }
  /** @override @return {boolean} */
@@ -24,38 +24,39 @@ class AutoValueWithOverrides extends BaseClass {
  toString() {
   return 'x';
  }
- /** @return {!AutoValueWithOverrides} */
+ /** @nodts @return {!AutoValueWithOverrides} */
  static $create__int__boolean(/** number */ baseField, /** boolean */ booleanField) {
   AutoValueWithOverrides.$clinit();
   let $instance = new AutoValueWithOverrides();
   $instance.$ctor__autovalue_AutoValueWithOverrides__int__boolean(baseField, booleanField);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_AutoValueWithOverrides__int__boolean(/** number */ baseField, /** boolean */ booleanField) {
   this.$ctor__autovalue_BaseClass__();
   this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ = baseField;
   this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ = booleanField;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_getBaseField__() {
   return this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  m_getBooleanField__() {
   return this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_;
  }
- 
+ /** @nodts */
  static $clinit() {
   AutoValueWithOverrides.$clinit = () =>{};
   AutoValueWithOverrides.$loadModules();
   BaseClass.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AutoValueWithOverrides;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(AutoValueWithOverrides, 'autovalue.AutoValueWithOverrides');

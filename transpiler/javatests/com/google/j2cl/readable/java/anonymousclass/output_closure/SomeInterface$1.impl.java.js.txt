@@ -4,36 +4,37 @@ const SomeClass = goog.require('anonymousclass.SomeClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $1 extends SomeClass {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!$1} */
+ /** @nodts @return {!$1} */
  static $create__int(/** number */ $_0) {
   $1.$clinit();
   let $instance = new $1();
   $instance.$ctor__anonymousclass_SomeInterface_1__int($_0);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__anonymousclass_SomeInterface_1__int(/** number */ $_0) {
   this.$ctor__anonymousclass_SomeClass__int($_0);
  }
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_foo__() {
   return 'a';
  }
- 
+ /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
   $1.$loadModules();
   SomeClass.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($1, 'anonymousclass.SomeInterface$1');

@@ -10,7 +10,7 @@ class JsTypeInterface {
  foo() {}
  /** @abstract */
  bar() {}
- 
+ /** @nodts */
  static $clinit() {
   JsTypeInterface.$clinit = () =>{};
   JsTypeInterface.$loadModules();
@@ -19,11 +19,12 @@ class JsTypeInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__libraryinfo_Main_JsTypeInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__libraryinfo_Main_JsTypeInterface;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 JsTypeInterface.$markImplementor(/**@type {Function}*/ (JsTypeInterface));

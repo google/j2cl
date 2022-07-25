@@ -11,25 +11,25 @@ let $1_$1 = goog.forwardDeclare('mixednestings.MixedNestings.A.$1B.$1.$1$impl');
  * @implements {MyInterface}
  */
 class $1 extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {$1B}*/
+  /**@type {$1B} @nodts*/
   this.$outer_this__mixednestings_MixedNestings_A_1B_1;
  }
- /** @return {!$1} */
+ /** @nodts @return {!$1} */
  static $create__mixednestings_MixedNestings_A_1B(/** $1B */ $outer_this) {
   $1.$clinit();
   let $instance = new $1();
   $instance.$ctor__mixednestings_MixedNestings_A_1B_1__mixednestings_MixedNestings_A_1B($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__mixednestings_MixedNestings_A_1B_1__mixednestings_MixedNestings_A_1B(/** $1B */ $outer_this) {
   this.$outer_this__mixednestings_MixedNestings_A_1B_1 = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_fun__int(/** number */ a) {
   let ii = MyInterface.$adapt((/** number */ n) =>{
    this.$outer_this__mixednestings_MixedNestings_A_1B_1.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__();
@@ -45,17 +45,18 @@ class $1 extends j_l_Object {
   });
   return ii.m_fun__int(300);
  }
- 
+ /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
   $1.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1_$1 = goog.module.get('mixednestings.MixedNestings.A.$1B.$1.$1$impl');
  }

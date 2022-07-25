@@ -9,11 +9,11 @@ let $1 = goog.forwardDeclare('anonymousclass.SomeInterface.$1$impl');
  * @interface
  */
 class SomeInterface {
- /** @return {SomeClass} */
+ /** @nodts @return {SomeClass} */
  static get f_implicitlyStatic__anonymousclass_SomeInterface() {
   return (SomeInterface.$clinit(), SomeInterface.$static_implicitlyStatic__anonymousclass_SomeInterface);
  }
- 
+ /** @nodts */
  static $clinit() {
   SomeInterface.$clinit = () =>{};
   SomeInterface.$loadModules();
@@ -23,16 +23,17 @@ class SomeInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__anonymousclass_SomeInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__anonymousclass_SomeInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('anonymousclass.SomeInterface.$1$impl');
  }
 }
-/**@private {SomeClass}*/
+/**@private {SomeClass} @nodts*/
 SomeInterface.$static_implicitlyStatic__anonymousclass_SomeInterface;
 SomeInterface.$markImplementor(/**@type {Function}*/ (SomeInterface));
 $Util.$setClassMetadataForInterface(SomeInterface, 'anonymousclass.SomeInterface');

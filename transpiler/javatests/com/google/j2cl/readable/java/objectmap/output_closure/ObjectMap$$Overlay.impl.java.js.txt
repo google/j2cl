@@ -2,27 +2,29 @@ goog.module('objectmap.ObjectMap.$Overlay$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+/** @nodts */
 class $Overlay {
- /** @template T @return {Object<string, T>} */
+ /** @nodts @template T @return {Object<string, T>} */
  static m_create__() {
   $Overlay.$clinit();
   return null;
  }
- /** @return {Object<string, ?string>} */
+ /** @nodts @return {Object<string, ?string>} */
  static m_createForString__() {
   $Overlay.$clinit();
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Object;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($Overlay, 'Object');

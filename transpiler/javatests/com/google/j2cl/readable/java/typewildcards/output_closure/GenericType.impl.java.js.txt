@@ -7,32 +7,33 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class GenericType extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!GenericType<T>} */
+ /** @nodts @template T @return {!GenericType<T>} */
  static $create__() {
   GenericType.$clinit();
   let $instance = new GenericType();
   $instance.$ctor__typewildcards_GenericType__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__typewildcards_GenericType__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   GenericType.$clinit = () =>{};
   GenericType.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof GenericType;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(GenericType, 'typewildcards.GenericType');

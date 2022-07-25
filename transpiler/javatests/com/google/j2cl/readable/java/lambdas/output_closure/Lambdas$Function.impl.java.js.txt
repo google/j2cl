@@ -9,21 +9,21 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.Function.$LambdaAdapto
  * @template T, R
  */
 class Lambdas_Function {
- /** @template T_1 @return {Lambdas_Function<T_1, T_1>} */
+ /** @nodts @template T_1 @return {Lambdas_Function<T_1, T_1>} */
  static m_identity__() {
   Lambdas_Function.$clinit();
   return Lambdas_Function.$adapt((/** T_1 */ t) =>{
    return t;
   });
  }
- /** @abstract @return {R} */
+ /** @abstract @nodts @return {R} */
  m_apply__java_lang_Object(/** T */ t) {}
- /** @template T, R @return {Lambdas_Function<T, R>} */
+ /** @nodts @template T, R @return {Lambdas_Function<T, R>} */
  static $adapt(/** ?function(T):R */ fn) {
   Lambdas_Function.$clinit();
   return /**@type {!$LambdaAdaptor<T, R>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   Lambdas_Function.$clinit = () =>{};
   Lambdas_Function.$loadModules();
@@ -32,11 +32,12 @@ class Lambdas_Function {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__lambdas_Lambdas_Function = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__lambdas_Lambdas_Function;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('lambdas.Lambdas.Function.$LambdaAdaptor$impl');
  }

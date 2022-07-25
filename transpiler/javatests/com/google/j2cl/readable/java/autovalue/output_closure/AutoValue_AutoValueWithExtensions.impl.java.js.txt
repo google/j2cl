@@ -4,26 +4,26 @@ const $AutoValue__AutoValueWithExtensions = goog.require('autovalue.$AutoValue_A
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class AutoValue__AutoValueWithExtensions extends $AutoValue__AutoValueWithExtensions {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_ = 0;
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_ = false;
  }
- /** @return {!AutoValue__AutoValueWithExtensions} */
+ /** @nodts @return {!AutoValue__AutoValueWithExtensions} */
  static $create__int__java_lang_String(/** number */ intField$, /** ?string */ stringField$) {
   AutoValue__AutoValueWithExtensions.$clinit();
   let $instance = new AutoValue__AutoValueWithExtensions();
   $instance.$ctor__autovalue_AutoValue_AutoValueWithExtensions__int__java_lang_String(intField$, stringField$);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_AutoValue_AutoValueWithExtensions__int__java_lang_String(/** number */ intField$, /** ?string */ stringField$) {
   this.$ctor__autovalue_$AutoValue_AutoValueWithExtensions__int__java_lang_String(intField$, stringField$);
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_getMemoizedNative___$pp_autovalue() {
   if (!this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_) {
    {
@@ -36,17 +36,18 @@ class AutoValue__AutoValueWithExtensions extends $AutoValue__AutoValueWithExtens
   }
   return this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_;
  }
- 
+ /** @nodts */
  static $clinit() {
   AutoValue__AutoValueWithExtensions.$clinit = () =>{};
   AutoValue__AutoValueWithExtensions.$loadModules();
   $AutoValue__AutoValueWithExtensions.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AutoValue__AutoValueWithExtensions;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(AutoValue__AutoValueWithExtensions, 'autovalue.AutoValue_AutoValueWithExtensions');

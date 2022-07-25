@@ -8,14 +8,14 @@ let $LambdaAdaptor = goog.forwardDeclare('overridingmethods.SomeInterface.$Lambd
  * @interface
  */
 class SomeInterface {
- /** @abstract */
+ /** @abstract @nodts */
  m_bar__() {}
- /** @return {SomeInterface} */
+ /** @nodts @return {SomeInterface} */
  static $adapt(/** ?function():void */ fn) {
   SomeInterface.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   SomeInterface.$clinit = () =>{};
   SomeInterface.$loadModules();
@@ -24,11 +24,12 @@ class SomeInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__overridingmethods_SomeInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__overridingmethods_SomeInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('overridingmethods.SomeInterface.$LambdaAdaptor$impl');
  }

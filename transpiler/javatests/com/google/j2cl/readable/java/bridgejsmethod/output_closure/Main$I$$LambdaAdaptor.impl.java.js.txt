@@ -11,15 +11,15 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
  * @implements {I<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(T):T */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(T):T}*/
+  /**@type {?function(T):T} @nodts*/
   this.f_fn__bridgejsmethod_Main_I_$LambdaAdaptor;
   this.$ctor__bridgejsmethod_Main_I_$LambdaAdaptor__bridgejsmethod_Main_I_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_I_$LambdaAdaptor__bridgejsmethod_Main_I_$JsFunction(/** ?function(T):T */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__bridgejsmethod_Main_I_$LambdaAdaptor = fn;
@@ -29,17 +29,18 @@ class $LambdaAdaptor extends j_l_Object {
   let /** ?function(T):T */ $function;
   return ($function = this.f_fn__bridgejsmethod_Main_I_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor($LambdaAdaptor);

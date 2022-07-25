@@ -12,11 +12,11 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
  * @implements {Iterable<*>}
  */
 class Exception2 extends Exception {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Exception2} */
+ /** @nodts @return {!Exception2} */
  static $create__() {
   Exception2.$clinit();
   let $instance = new Exception2();
@@ -24,36 +24,37 @@ class Exception2 extends Exception {
   $instance.m_privateInitError__java_lang_Object_$pp_java_lang(new Error($instance));
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__foreachstatement_ForEachStatement_Exception2__() {
   this.$ctor__java_lang_Exception__();
  }
- /** @override @return {Iterator<*>} */
+ /** @override @nodts @return {Iterator<*>} */
  m_iterator__() {
   return null;
  }
  //Default method forwarding stub.
- /** @override */
+ /** @override @nodts */
  m_forEach__java_util_function_Consumer(/** Consumer<?> */ arg0) {
   Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer(this, arg0);
  }
  //Default method forwarding stub.
- /** @override @return {Spliterator<*>} */
+ /** @override @nodts @return {Spliterator<*>} */
  m_spliterator__() {
   return /**@type {Spliterator<*>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable(this));
  }
- 
+ /** @nodts */
  static $clinit() {
   Exception2.$clinit = () =>{};
   Exception2.$loadModules();
   Exception.$clinit();
   Iterable.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Exception2;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Iterable.$markImplementor(Exception2);

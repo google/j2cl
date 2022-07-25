@@ -8,18 +8,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {OtherInterface}
  */
 class MyJsType extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!MyJsType} */
+ /** @nodts @return {!MyJsType} */
  static $create__() {
   MyJsType.$clinit();
   let $instance = new MyJsType();
   $instance.$ctor__jsbridgeaccidentaloverride_MyJsType__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsbridgeaccidentaloverride_MyJsType__() {
   this.$ctor__java_lang_Object__();
  }
@@ -36,21 +36,22 @@ class MyJsType extends j_l_Object {
   return a - 1 | 0;
  }
  //Bridge method.
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_fun__int(/** number */ arg0) {
   return this.fun(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   MyJsType.$clinit = () =>{};
   MyJsType.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MyJsType;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 OtherInterface.$markImplementor(MyJsType);

@@ -4,42 +4,43 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InstanceFieldInitializer extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_a__instancefieldinitializer_InstanceFieldInitializer = 0;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_b__instancefieldinitializer_InstanceFieldInitializer = 0;
  }
- /** @return {!InstanceFieldInitializer} */
+ /** @nodts @return {!InstanceFieldInitializer} */
  static $create__() {
   InstanceFieldInitializer.$clinit();
   let $instance = new InstanceFieldInitializer();
   $instance.$ctor__instancefieldinitializer_InstanceFieldInitializer__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__instancefieldinitializer_InstanceFieldInitializer__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_instancefieldinitializer_InstanceFieldInitializer();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_instancefieldinitializer_InstanceFieldInitializer() {
   this.f_a__instancefieldinitializer_InstanceFieldInitializer = 1;
   this.f_b__instancefieldinitializer_InstanceFieldInitializer = Math.imul(this.f_a__instancefieldinitializer_InstanceFieldInitializer, 2);
  }
- 
+ /** @nodts */
  static $clinit() {
   InstanceFieldInitializer.$clinit = () =>{};
   InstanceFieldInitializer.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InstanceFieldInitializer;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(InstanceFieldInitializer, 'instancefieldinitializer.InstanceFieldInitializer');

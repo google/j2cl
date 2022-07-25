@@ -12,37 +12,38 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {SuperInterface<Error>}
  */
 class AccidentalOverride extends Parent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!AccidentalOverride} */
+ /** @nodts @return {!AccidentalOverride} */
  static $create__() {
   AccidentalOverride.$clinit();
   let $instance = new AccidentalOverride();
   $instance.$ctor__accidentaloverride_AccidentalOverride__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__accidentaloverride_AccidentalOverride__() {
   this.$ctor__accidentaloverride_Parent__();
  }
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_foo__java_lang_Object(/** Error */ arg0) {
   this.m_foo__java_lang_Error(/**@type {Error}*/ ($Casts.$to(arg0, Error)));
  }
- 
+ /** @nodts */
  static $clinit() {
   AccidentalOverride.$clinit = () =>{};
   AccidentalOverride.$loadModules();
   Parent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AccidentalOverride;
  }
  
+ /** @nodts */
  static $loadModules() {
   Error = goog.module.get('java.lang.Error$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

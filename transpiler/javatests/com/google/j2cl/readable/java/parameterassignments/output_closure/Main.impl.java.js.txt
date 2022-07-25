@@ -6,14 +6,14 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Fn = goog.forwardDeclare('parameterassignments.Main.Fn$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Fn}*/
+  /**@type {Fn} @nodts*/
   this.f_fn__parameterassignments_Main;
  }
  //Factory method corresponding to constructor 'Main(int, int, int)'.
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__int__int__int(/** number */ nonFinal, /** number */ explicitFinal, /** number */ implicitFinal) {
   Main.$clinit();
   let $instance = new Main();
@@ -21,13 +21,13 @@ class Main extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'Main(int, int, int)'.
- 
+ /** @nodts */
  $ctor__parameterassignments_Main__int__int__int(/** number */ nonFinal, /** number */ explicitFinal, /** number */ implicitFinal) {
   this.$ctor__parameterassignments_Main__int__int__int__boolean(nonFinal, explicitFinal, implicitFinal, true);
   nonFinal = nonFinal + explicitFinal + implicitFinal | 0;
  }
  //Factory method corresponding to constructor 'Main(int, int, int, boolean)'.
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__int__int__int__boolean(/** number */ nonFinal, /** number */ explicitFinal, /** number */ implicitFinal, /** boolean */ flag) {
   Main.$clinit();
   let $instance = new Main();
@@ -35,35 +35,36 @@ class Main extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'Main(int, int, int, boolean)'.
- 
+ /** @nodts */
  $ctor__parameterassignments_Main__int__int__int__boolean(/** number */ nonFinal, /** number */ explicitFinal, /** number */ implicitFinal, /** boolean */ flag) {
   this.$ctor__java_lang_Object__();
   this.$init___$p_parameterassignments_Main();
   nonFinal = nonFinal + explicitFinal + implicitFinal | 0;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_test__int__int__int_$pp_parameterassignments(/** number */ nonFinal, /** number */ explicitFinal, /** number */ implicitFinal) {
   nonFinal = nonFinal + explicitFinal + implicitFinal | 0;
   return nonFinal;
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_parameterassignments_Main() {
   this.f_fn__parameterassignments_Main = Fn.$adapt((/** number */ nonFinal, /** number */ implicitFinal) =>{
    nonFinal = nonFinal + implicitFinal | 0;
    return nonFinal;
   });
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   Fn = goog.module.get('parameterassignments.Main.Fn$impl');
  }

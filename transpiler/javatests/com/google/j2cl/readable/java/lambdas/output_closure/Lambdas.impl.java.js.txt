@@ -33,54 +33,54 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class Lambdas extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_field__lambdas_Lambdas = 0;
  }
- /** @return {!Lambdas} */
+ /** @nodts @return {!Lambdas} */
  static $create__() {
   Lambdas.$clinit();
   let $instance = new Lambdas();
   $instance.$ctor__lambdas_Lambdas__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__lambdas_Lambdas__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_lambdas_Lambdas();
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_call__lambdas_Lambdas_FunctionalInterface__int(/** FunctionalInterface */ intf, /** number */ n) {
   return this.f_field__lambdas_Lambdas + intf.m_m__int(n) | 0;
  }
- 
+ /** @nodts */
  m_testLambdaExpressionStyle__() {
   this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    return i + 1 | 0;
   }), 10);
  }
- 
+ /** @nodts */
  m_testLambdaBlockStyle__() {
   this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    return i + 2 | 0;
   }), 10);
  }
- 
+ /** @nodts */
  m_testLambdaCaptureField__() {
   this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    return this.f_field__lambdas_Lambdas + i + 1 | 0;
   }), 10);
  }
- 
+ /** @nodts */
  m_testLambdaCaptureLocal__() {
   let x = 1;
   this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    return x + i + 1 | 0;
   }), 10);
  }
- 
+ /** @nodts */
  m_testLambdaCaptureFieldAndLocal__() {
   let x = 1;
   this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
@@ -88,9 +88,9 @@ class Lambdas extends j_l_Object {
    return x + y + this.f_field__lambdas_Lambdas + i + 1 | 0;
   }), 10);
  }
- 
+ /** @nodts */
  m_funOuter__() {}
- 
+ /** @nodts */
  m_testLambdaCallOuterFunction__() {
   this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    this.m_funOuter__();
@@ -99,14 +99,14 @@ class Lambdas extends j_l_Object {
    return i + 2 | 0;
   }), 10);
  }
- 
+ /** @nodts */
  static m_testLambdaInStaticContext__() {
   Lambdas.$clinit();
   let f = FunctionalInterface.$adapt((/** number */ i) =>{
    return i;
   });
  }
- 
+ /** @nodts */
  m_testNestedLambdas__() {
   this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    return this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ j) =>{
@@ -114,7 +114,7 @@ class Lambdas extends j_l_Object {
    }), 20);
   }), 10);
  }
- 
+ /** @nodts */
  m_testReturnLabelNameConflictKotlin__() {
   this.m_call__lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    FunctionalInterface: {
@@ -122,37 +122,37 @@ class Lambdas extends j_l_Object {
    }
   }), 10);
  }
- /** @template T */
+ /** @nodts @template T */
  m_testInstanceMethodTypeVariableThroughLambda__() {
   let wrapped = Functional.$adapt((/** Functional<T> */ f) =>{
    return /**@type {!$1<T>}*/ ($1.$create__lambdas_Lambdas(this));
   });
  }
- /** @template T */
+ /** @nodts @template T */
  static m_testStaticMethodTypeVariableThroughLambda__() {
   Lambdas.$clinit();
   let wrapped = Functional.$adapt((/** Functional<T> */ f) =>{
    return /**@type {!$2<T>}*/ ($2.$create__());
   });
  }
- /** @template T @return {T} */
+ /** @nodts @template T @return {T} */
  m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(/** GenericFunctionalInterface<T> */ intf, /** T */ e) {
   return intf.m_m__java_lang_Object(e);
  }
- /** @return {Error} */
+ /** @nodts @return {Error} */
  m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error(/** GenericFunctionalInterface<Error> */ intf, /** Error */ e) {
   return /**@type {Error}*/ ($Casts.$to(intf.m_m__java_lang_Object(e), Error));
  }
- /** @template T @return {Enum<T>} */
+ /** @nodts @template T @return {Enum<T>} */
  static m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(/** GenericFunctionalInterface<Enum<T>> */ intf, /** Enum<T> */ e) {
   Lambdas.$clinit();
   return /**@type {Enum<T>}*/ ($Casts.$to(intf.m_m__java_lang_Object(e), Enum));
  }
- /** @template T @return {GenericFunctionalInterface<T>} */
+ /** @nodts @template T @return {GenericFunctionalInterface<T>} */
  m_callWithBiFunction__lambdas_Lambdas_BiFunction_$pp_lambdas(/** BiFunction<T, ?string, ?number> */ fn) {
   return null;
  }
- /** @template T */
+ /** @nodts @template T */
  m_testLambdaWithGenerics__() {
   this.m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(GenericFunctionalInterface.$adapt((i) =>{
    let i_1 = /**@type {Error}*/ ($Casts.$to(i, Error));
@@ -175,31 +175,31 @@ class Lambdas extends j_l_Object {
    return Long.m_valueOf__long($Long.fromInt(1));
   });
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  static m_m__() {
   Lambdas.$clinit();
   return null;
  }
- 
+ /** @nodts */
  static m_testLambdaCallingStaticMethod__() {
   Lambdas.$clinit();
   let f = Lambdas_Function.$adapt((/** * */ l) =>{
    return Lambdas.m_m__();
   });
  }
- 
+ /** @nodts */
  m_testLambdaReturningVoidAsExpression__() {
   let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() =>{
    j_l_Object.$create__();
   });
  }
- 
+ /** @nodts */
  m_testAnonymousInsideLambda__() {
   let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() =>{
    $3.$create__lambdas_Lambdas(this);
   });
  }
- /** @template E @return {?function(E):E} */
+ /** @nodts @template E @return {?function(E):E} */
  static m_identity__() {
   Lambdas.$clinit();
   if ($Equality.$same(Lambdas.f_identityFunction__lambdas_Lambdas_, null)) {
@@ -207,7 +207,7 @@ class Lambdas extends j_l_Object {
   }
   return /**@type {?function(E):E}*/ (Lambdas.f_identityFunction__lambdas_Lambdas_);
  }
- 
+ /** @nodts */
  static m_testJsInteropLambdas__() {
   Lambdas.$clinit();
   let thenable = /**@type {!$LambdaAdaptor$1<?string>}*/ (new $LambdaAdaptor$1((/** ?function(?string):?void */ f1, /** ?function(Throwable):?void */ f2) =>{
@@ -224,7 +224,7 @@ class Lambdas extends j_l_Object {
   equals.equals(null);
   equals.m_get__();
  }
- /** @template U, V */
+ /** @nodts @template U, V */
  static m_testIntersectionTyping__() {
   Lambdas.$clinit();
   let o = /**@type {GenericFunctionalInterface<?string>}*/ (new $LambdaAdaptor$2((x) =>{
@@ -239,7 +239,7 @@ class Lambdas extends j_l_Object {
    return x_4;
   }));
  }
- 
+ /** @nodts */
  m_testDefaultMethodsInIntersectionAdaptor__() {
   let o = /**@type {BiFunction<?string, ?string, ?string>}*/ (new $LambdaAdaptor$5((t, u) =>{
    let t_1 = /**@type {?string}*/ ($Casts.$to(t, j_l_String));
@@ -247,22 +247,23 @@ class Lambdas extends j_l_Object {
    return null;
   }));
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_lambdas_Lambdas() {
   this.f_field__lambdas_Lambdas = 100;
  }
- 
+ /** @nodts */
  static $clinit() {
   Lambdas.$clinit = () =>{};
   Lambdas.$loadModules();
   j_l_Object.$clinit();
   Lambdas.f_identityFunction__lambdas_Lambdas_ = null;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Lambdas;
  }
  
+ /** @nodts */
  static $loadModules() {
   Enum = goog.module.get('java.lang.Enum$impl');
   Error = goog.module.get('java.lang.Error$impl');
@@ -293,7 +294,7 @@ class Lambdas extends j_l_Object {
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
-/**@type {?function(*):*}*/
+/**@type {?function(*):*} @nodts*/
 Lambdas.f_identityFunction__lambdas_Lambdas_;
 $Util.$setClassMetadata(Lambdas, 'lambdas.Lambdas');
 

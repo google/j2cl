@@ -4,38 +4,39 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class BreakStatement extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!BreakStatement} */
+ /** @nodts @return {!BreakStatement} */
  static $create__() {
   BreakStatement.$clinit();
   let $instance = new BreakStatement();
   $instance.$ctor__breakstatement_BreakStatement__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__breakstatement_BreakStatement__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   for (; true; ) {
    break;
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   BreakStatement.$clinit = () =>{};
   BreakStatement.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof BreakStatement;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(BreakStatement, 'breakstatement.BreakStatement');

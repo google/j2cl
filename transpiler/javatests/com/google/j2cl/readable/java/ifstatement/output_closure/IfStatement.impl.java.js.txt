@@ -4,22 +4,22 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class IfStatement extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!IfStatement} */
+ /** @nodts @return {!IfStatement} */
  static $create__() {
   IfStatement.$clinit();
   let $instance = new IfStatement();
   $instance.$ctor__ifstatement_IfStatement__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__ifstatement_IfStatement__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   let a = true, b = true;
   let number_1 = 1;
@@ -36,17 +36,18 @@ class IfStatement extends j_l_Object {
    number_1 = 6;
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   IfStatement.$clinit = () =>{};
   IfStatement.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof IfStatement;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(IfStatement, 'ifstatement.IfStatement');

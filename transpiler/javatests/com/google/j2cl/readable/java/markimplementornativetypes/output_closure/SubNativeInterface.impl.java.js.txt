@@ -11,7 +11,7 @@ let MyNativeInterface = goog.forwardDeclare('test.foo.MyNativeInterface');
  * @extends {RegularInterface}
  */
 class SubNativeInterface {
- 
+ /** @nodts */
  static $clinit() {
   SubNativeInterface.$clinit = () =>{};
   SubNativeInterface.$loadModules();
@@ -21,11 +21,12 @@ class SubNativeInterface {
   RegularInterface.$markImplementor(ctor);
   ctor.prototype.$implements__markimplementornativetypes_SubNativeInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__markimplementornativetypes_SubNativeInterface;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 SubNativeInterface.$markImplementor(/**@type {Function}*/ (SubNativeInterface));

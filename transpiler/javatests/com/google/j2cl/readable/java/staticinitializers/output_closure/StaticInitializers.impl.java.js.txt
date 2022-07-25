@@ -4,42 +4,42 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StaticInitializers extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!StaticInitializers} */
+ /** @nodts @return {!StaticInitializers} */
  static $create__() {
   StaticInitializers.$clinit();
   let $instance = new StaticInitializers();
   $instance.$ctor__staticinitializers_StaticInitializers__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__staticinitializers_StaticInitializers__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static get f_a__staticinitializers_StaticInitializers() {
   return (StaticInitializers.$clinit(), StaticInitializers.$static_a__staticinitializers_StaticInitializers);
  }
- 
+ /** @nodts */
  static set f_a__staticinitializers_StaticInitializers(/** number */ value) {
   (StaticInitializers.$clinit(), StaticInitializers.$static_a__staticinitializers_StaticInitializers = value);
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static get f_b__staticinitializers_StaticInitializers() {
   return (StaticInitializers.$clinit(), StaticInitializers.$static_b__staticinitializers_StaticInitializers);
  }
- 
+ /** @nodts */
  static set f_b__staticinitializers_StaticInitializers(/** number */ value) {
   (StaticInitializers.$clinit(), StaticInitializers.$static_b__staticinitializers_StaticInitializers = value);
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static get f_c__staticinitializers_StaticInitializers() {
   return (StaticInitializers.$clinit(), StaticInitializers.$static_c__staticinitializers_StaticInitializers);
  }
- 
+ /** @nodts */
  static $clinit() {
   StaticInitializers.$clinit = () =>{};
   StaticInitializers.$loadModules();
@@ -51,18 +51,19 @@ class StaticInitializers extends j_l_Object {
   let duplicated = StaticInitializers.$static_c__staticinitializers_StaticInitializers;
   let duplicated_1 = 1;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof StaticInitializers;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
-/**@private {number}*/
+/**@private {number} @nodts*/
 StaticInitializers.$static_a__staticinitializers_StaticInitializers = 0;
-/**@private {number}*/
+/**@private {number} @nodts*/
 StaticInitializers.$static_b__staticinitializers_StaticInitializers = 0;
-/**@private {number}*/
+/**@private {number} @nodts*/
 StaticInitializers.$static_c__staticinitializers_StaticInitializers = 0;
 $Util.$setClassMetadata(StaticInitializers, 'staticinitializers.StaticInitializers');
 

@@ -4,18 +4,18 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Foo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Foo} */
+ /** @nodts @return {!Foo} */
  static $create__() {
   Foo.$clinit();
   let $instance = new Foo();
   $instance.$ctor__jsproperties_Foo__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsproperties_Foo__() {
   this.$ctor__java_lang_Object__();
  }
@@ -39,20 +39,21 @@ class Foo extends j_l_Object {
   Foo.$clinit();
   Foo.f_f__jsproperties_Foo_ = x + 4 | 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
   Foo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Foo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
-/**@type {number}*/
+/**@type {number} @nodts*/
 Foo.f_f__jsproperties_Foo_ = 0;
 $Util.$setClassMetadata(Foo, 'jsproperties.Foo');
 

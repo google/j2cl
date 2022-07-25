@@ -4,36 +4,37 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class ParentOuter extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fieldInParentOuter__innerclassinheritance_ParentOuter = 0;
  }
- /** @return {!ParentOuter} */
+ /** @nodts @return {!ParentOuter} */
  static $create__() {
   ParentOuter.$clinit();
   let $instance = new ParentOuter();
   $instance.$ctor__innerclassinheritance_ParentOuter__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinheritance_ParentOuter__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_funInParentOuter__() {}
- 
+ /** @nodts */
  static $clinit() {
   ParentOuter.$clinit = () =>{};
   ParentOuter.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ParentOuter;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ParentOuter, 'innerclassinheritance.ParentOuter');

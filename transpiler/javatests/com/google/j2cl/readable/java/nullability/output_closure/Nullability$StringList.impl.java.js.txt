@@ -7,32 +7,33 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {ArrayList<?string>}
  */
 class StringList extends ArrayList {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!StringList} */
+ /** @nodts @return {!StringList} */
  static $create__() {
   StringList.$clinit();
   let $instance = new StringList();
   $instance.$ctor__nullability_Nullability_StringList__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nullability_Nullability_StringList__() {
   this.$ctor__java_util_ArrayList__();
  }
- 
+ /** @nodts */
  static $clinit() {
   StringList.$clinit = () =>{};
   StringList.$loadModules();
   ArrayList.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof StringList;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(StringList, 'nullability.Nullability$StringList');

@@ -10,39 +10,39 @@ let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let WasmImmutableFields = goog.forwardDeclare('wasmimmutablefields.WasmImmutableFields$impl');
 
 class AssignmentsInInitializer extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_compileTimeConstant__wasmimmutablefields_AssignmentsInInitializer = 0;
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_stringLiteral__wasmimmutablefields_AssignmentsInInitializer;
-  /**@type {Array<*>}*/
+  /**@type {Array<*>} @nodts*/
   this.f_newArray__wasmimmutablefields_AssignmentsInInitializer;
-  /**@type {Array<Array<Array<*>>>}*/
+  /**@type {Array<Array<Array<*>>>} @nodts*/
   this.f_newArrayMultidimensional__wasmimmutablefields_AssignmentsInInitializer;
-  /**@type {Array<number>}*/
+  /**@type {Array<number>} @nodts*/
   this.f_arrayLiteral__wasmimmutablefields_AssignmentsInInitializer;
-  /**@type {Array<Array<number>>}*/
+  /**@type {Array<Array<number>>} @nodts*/
   this.f_arrayLiteralMultidimensional__wasmimmutablefields_AssignmentsInInitializer;
-  /**@type {Class<?>}*/
+  /**@type {Class<?>} @nodts*/
   this.f_classLiteral__wasmimmutablefields_AssignmentsInInitializer;
-  /**@type {Array<?string>}*/
+  /**@type {Array<?string>} @nodts*/
   this.f_withCast__wasmimmutablefields_AssignmentsInInitializer;
  }
- /** @return {!AssignmentsInInitializer} */
+ /** @nodts @return {!AssignmentsInInitializer} */
  static $create__() {
   AssignmentsInInitializer.$clinit();
   let $instance = new AssignmentsInInitializer();
   $instance.$ctor__wasmimmutablefields_AssignmentsInInitializer__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__wasmimmutablefields_AssignmentsInInitializer__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_wasmimmutablefields_AssignmentsInInitializer();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_wasmimmutablefields_AssignmentsInInitializer() {
   this.f_compileTimeConstant__wasmimmutablefields_AssignmentsInInitializer = 12;
   this.f_stringLiteral__wasmimmutablefields_AssignmentsInInitializer = 'Hello World';
@@ -53,17 +53,18 @@ class AssignmentsInInitializer extends j_l_Object {
   this.f_classLiteral__wasmimmutablefields_AssignmentsInInitializer = Class.$get(WasmImmutableFields);
   this.f_withCast__wasmimmutablefields_AssignmentsInInitializer = /**@type {Array<?string>}*/ ($Arrays.$castTo(new Array(0), j_l_String, 1));
  }
- 
+ /** @nodts */
  static $clinit() {
   AssignmentsInInitializer.$clinit = () =>{};
   AssignmentsInInitializer.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AssignmentsInInitializer;
  }
  
+ /** @nodts */
  static $loadModules() {
   Class = goog.module.get('java.lang.Class$impl');
   j_l_String = goog.module.get('java.lang.String$impl');

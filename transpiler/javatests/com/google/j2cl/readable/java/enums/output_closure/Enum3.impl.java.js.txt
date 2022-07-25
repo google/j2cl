@@ -14,23 +14,23 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<Enum3>}
  */
 class Enum3 extends Enum {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Enum3} */
+ /** @nodts @return {!Enum3} */
  static $create__java_lang_String__int__java_util_function_Function(/** ?string */ $name, /** number */ $ordinal, /** j_u_function_Function<Integer, Integer> */ function_1) {
   let $instance = new Enum3();
   $instance.$ctor__enums_Enum3__java_lang_String__int__java_util_function_Function($name, $ordinal, function_1);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__enums_Enum3__java_lang_String__int__java_util_function_Function(/** ?string */ $name, /** number */ $ordinal, /** j_u_function_Function<Integer, Integer> */ function_1) {
   this.f_name__java_lang_Enum_ = $name;
   this.f_ordinal__java_lang_Enum_ = $ordinal;
   this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
  }
- /** @return {!Enum3} */
+ /** @nodts @return {!Enum3} */
  static m_valueOf__java_lang_String(/** string */ name) {
   Enum3.$clinit();
   if ($Equality.$same(Enum3.f_namesToValuesMap__enums_Enum3_, null)) {
@@ -38,16 +38,16 @@ class Enum3 extends Enum {
   }
   return /**@type {Enum3}*/ ($Enums.getValueFromNameAndMap(name, Enum3.f_namesToValuesMap__enums_Enum3_));
  }
- /** @return {!Array<!Enum3>} */
+ /** @nodts @return {!Array<!Enum3>} */
  static m_values__() {
   Enum3.$clinit();
   return /**@type {!Array<Enum3>}*/ ($Arrays.$init([Enum3.$static_VALUE1__enums_Enum3], Enum3));
  }
- /** @return {!Enum3} */
+ /** @nodts @return {!Enum3} */
  static get f_VALUE1__enums_Enum3() {
   return (Enum3.$clinit(), Enum3.$static_VALUE1__enums_Enum3);
  }
- 
+ /** @nodts */
  static $clinit() {
   Enum3.$clinit = () =>{};
   Enum3.$loadModules();
@@ -57,11 +57,12 @@ class Enum3 extends Enum {
    return Integer.m_valueOf__int(1 + v_1.m_intValue__() | 0);
   }));
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Enum3;
  }
  
+ /** @nodts */
  static $loadModules() {
   Integer = goog.module.get('java.lang.Integer$impl');
   j_u_function_Function = goog.module.get('java.util.function.Function$impl');
@@ -71,11 +72,11 @@ class Enum3 extends Enum {
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
-/**@const {number}*/
+/**@const {number} @nodts*/
 Enum3.$ordinal_VALUE1__enums_Enum3 = 0;
-/**@private {!Enum3}*/
+/**@private {!Enum3} @nodts*/
 Enum3.$static_VALUE1__enums_Enum3;
-/**@type {Map<?string, !Enum3>}*/
+/**@type {Map<?string, !Enum3>} @nodts*/
 Enum3.f_namesToValuesMap__enums_Enum3_;
 $Util.$setClassMetadataForEnum(Enum3, 'enums.Enum3');
 

@@ -7,14 +7,14 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template O
  */
 class NativeTopLevel extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {O}*/
+  /**@type {O} @nodts*/
   this.f_instanceField__nativekttypes_NativeTopLevel;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fieldToRename__nativekttypes_NativeTopLevel = 0;
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_isFieldToRename__nativekttypes_NativeTopLevel = false;
  }
  // /** @return {number} */
@@ -31,14 +31,14 @@ class NativeTopLevel extends j_l_Object {
  // native isMethodAsProperty() 
  // /** @return {number} */
  // native getstartingmethodAsProperty() 
- /** @template O @return {!NativeTopLevel<O>} */
+ /** @nodts @template O @return {!NativeTopLevel<O>} */
  static $create__java_lang_Object(/** O */ o) {
   NativeTopLevel.$clinit();
   let $instance = new NativeTopLevel();
   $instance.$ctor__nativekttypes_NativeTopLevel__java_lang_Object(o);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_NativeTopLevel__java_lang_Object(/** O */ o) {
   this.$ctor__java_lang_Object__();
  }
@@ -46,28 +46,29 @@ class NativeTopLevel extends j_l_Object {
  // native instanceMethod(/** O */ o) 
  // /** @template S @return {S} */
  // native static staticMethod(/** S */ s) 
- /** @return {*} */
+ /** @nodts @return {*} */
  static get f_staticField__nativekttypes_NativeTopLevel() {
   return (NativeTopLevel.$clinit(), NativeTopLevel.$static_staticField__nativekttypes_NativeTopLevel);
  }
- 
+ /** @nodts */
  static set f_staticField__nativekttypes_NativeTopLevel(/** * */ value) {
   (NativeTopLevel.$clinit(), NativeTopLevel.$static_staticField__nativekttypes_NativeTopLevel = value);
  }
- 
+ /** @nodts */
  static $clinit() {
   NativeTopLevel.$clinit = () =>{};
   NativeTopLevel.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NativeTopLevel;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
-/**@private {*}*/
+/**@private {*} @nodts*/
 NativeTopLevel.$static_staticField__nativekttypes_NativeTopLevel;
 $Util.$setClassMetadata(NativeTopLevel, 'nativekttypes.NativeTopLevel');
 

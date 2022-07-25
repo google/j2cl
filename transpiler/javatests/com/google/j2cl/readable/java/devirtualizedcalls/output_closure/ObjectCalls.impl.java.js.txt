@@ -7,22 +7,22 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 class ObjectCalls extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!ObjectCalls} */
+ /** @nodts @return {!ObjectCalls} */
  static $create__() {
   ObjectCalls.$clinit();
   let $instance = new ObjectCalls();
   $instance.$ctor__devirtualizedcalls_ObjectCalls__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__devirtualizedcalls_ObjectCalls__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_main__() {
   let object = j_l_Object.$create__();
   $Objects.m_equals__java_lang_Object__java_lang_Object(object, object);
@@ -35,7 +35,7 @@ class ObjectCalls extends j_l_Object {
   $Objects.m_toString__java_lang_Object(objectCalls);
   $Objects.m_getClass__java_lang_Object(objectCalls);
  }
- 
+ /** @nodts */
  m_test__() {
   this.equals(j_l_Object.$create__());
   this.hashCode();
@@ -46,21 +46,22 @@ class ObjectCalls extends j_l_Object {
   this.toString();
   this.m_getClass__();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  m_testNotEquals__() {
   return !this.equals(j_l_Object.$create__());
  }
- 
+ /** @nodts */
  static $clinit() {
   ObjectCalls.$clinit = () =>{};
   ObjectCalls.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ObjectCalls;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');

@@ -10,18 +10,18 @@ let NativeJsTypeInterfaceWithOverlay = goog.forwardDeclare('test.foo.NativeJsTyp
  * @implements {NativeJsTypeInterfaceWithOverlay}
  */
 class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!NativeJsTypeInterfaceWithOverlayImpl} */
+ /** @nodts @return {!NativeJsTypeInterfaceWithOverlayImpl} */
  static $create__() {
   NativeJsTypeInterfaceWithOverlayImpl.$clinit();
   let $instance = new NativeJsTypeInterfaceWithOverlayImpl();
   $instance.$ctor__jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__() {
   this.$ctor__java_lang_Object__();
  }
@@ -30,21 +30,22 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
   return 0;
  }
  //Default method forwarding stub.
- /** @return {number} */
+ /** @nodts @return {number} */
  m_callM__() {
   return $Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(this);
  }
- 
+ /** @nodts */
  static $clinit() {
   NativeJsTypeInterfaceWithOverlayImpl.$clinit = () =>{};
   NativeJsTypeInterfaceWithOverlayImpl.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NativeJsTypeInterfaceWithOverlayImpl;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Overlay = goog.module.get('jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
  }

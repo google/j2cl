@@ -12,7 +12,7 @@ class Main extends j_l_Object {
  constructor(/** ?string= */ a) {
   Main.$clinit();
   super();
-  /**@type {?function(?string=, ...*):*}*/
+  /**@type {?function(?string=, ...*):*} @nodts*/
   this.f_f__jsoptional_Main;
   this.$ctor__jsoptional_Main__java_lang_String(a);
  }
@@ -22,32 +22,33 @@ class Main extends j_l_Object {
  method2(/** ?string */ s1, /** ?number= */ d, .../** ...?boolean */ i) {
   $Arrays.$stampType(i, Boolean, 1);
  }
- 
+ /** @nodts */
  $ctor__jsoptional_Main__java_lang_String(/** ?string */ a) {
   this.$ctor__java_lang_Object__();
   this.$init___$p_jsoptional_Main();
  }
- 
+ /** @nodts */
  m_testFunction__jsoptional_Main_Function(/** ?function(?string=, ...*):* */ f) {}
  
  testOptionalFunction(/** ?function(?string=, ...*):*= */ f) {}
- /** @private */
+ /** @private @nodts */
  $init___$p_jsoptional_Main() {
   this.f_f__jsoptional_Main = (/** ?string= */ s, .../** ...* */ varargs) =>{
    return s;
   };
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   Boolean = goog.module.get('java.lang.Boolean$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

@@ -7,46 +7,47 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class importglobaljstypes_Number extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!importglobaljstypes_Number} */
+ /** @nodts @return {!importglobaljstypes_Number} */
  static $create__() {
   importglobaljstypes_Number.$clinit();
   let $instance = new importglobaljstypes_Number();
   $instance.$ctor__importglobaljstypes_Number__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__importglobaljstypes_Number__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static m_test__double(/** number */ x) {
   importglobaljstypes_Number.$clinit();
   return Number.isInteger(x);
  }
- /** @return {?string} */
+ /** @nodts @return {?string} */
  static m_fromCharCode__arrayOf_int(/** Array<number> */ array) {
   importglobaljstypes_Number.$clinit();
   return /**@type {?string}*/ ($Casts.$to(String.fromCharCode.apply(null, array), j_l_String));
  }
- /** @return {Object} */
+ /** @nodts @return {Object} */
  m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType(/** Object */ a) {
   return a;
  }
- 
+ /** @nodts */
  static $clinit() {
   importglobaljstypes_Number.$clinit = () =>{};
   importglobaljstypes_Number.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof importglobaljstypes_Number;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

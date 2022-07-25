@@ -11,25 +11,26 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @implements {MyInterface<Integer>}
  */
 class AbstractImpl extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__genericinterfaceabstractimpl_AbstractImpl__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   AbstractImpl.$clinit = () =>{};
   AbstractImpl.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AbstractImpl;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 MyInterface.$markImplementor(AbstractImpl);

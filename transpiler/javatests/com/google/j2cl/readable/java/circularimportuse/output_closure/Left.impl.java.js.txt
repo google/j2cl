@@ -6,36 +6,37 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Right = goog.forwardDeclare('circularimportuse.Right$impl');
 
 class Left extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Left} */
+ /** @nodts @return {!Left} */
  static $create__() {
   Left.$clinit();
   let $instance = new Left();
   $instance.$ctor__circularimportuse_Left__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__circularimportuse_Left__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {Right} */
+ /** @nodts @return {Right} */
  m_createRight___$pp_circularimportuse() {
   return Right.$create__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Left.$clinit = () =>{};
   Left.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Left;
  }
  
+ /** @nodts */
  static $loadModules() {
   Right = goog.module.get('circularimportuse.Right$impl');
  }

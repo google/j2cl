@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('intersectiontype.Getable.$LambdaAdapto
  * @template T
  */
 class Getable {
- /** @abstract @return {T} */
+ /** @abstract @nodts @return {T} */
  m_get__() {}
- /** @template T @return {Getable<T>} */
+ /** @nodts @template T @return {Getable<T>} */
  static $adapt(/** ?function():T */ fn) {
   Getable.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   Getable.$clinit = () =>{};
   Getable.$loadModules();
@@ -25,11 +25,12 @@ class Getable {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__intersectiontype_Getable = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__intersectiontype_Getable;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('intersectiontype.Getable.$LambdaAdaptor$impl');
  }

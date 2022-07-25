@@ -6,16 +6,16 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ESOuter = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
 
 class ESInner extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {ESOuter}*/
+  /**@type {ESOuter} @nodts*/
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = 0;
  }
  //Factory method corresponding to constructor 'ESInner(ESOuter)'.
- /** @return {!ESInner} */
+ /** @nodts @return {!ESInner} */
  static $create__innerclassinitorder_InnerClassInitOrder_ESOuter(/** ESOuter */ $outer_this) {
   ESInner.$clinit();
   let $instance = new ESInner();
@@ -23,14 +23,14 @@ class ESInner extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'ESInner(ESOuter)'.
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__innerclassinitorder_InnerClassInitOrder_ESOuter(/** ESOuter */ $outer_this) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = $outer_this;
   this.$ctor__java_lang_Object__();
   this.f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = 1;
  }
  //Factory method corresponding to constructor 'ESInner(ESOuter, int)'.
- /** @return {!ESInner} */
+ /** @nodts @return {!ESInner} */
  static $create__innerclassinitorder_InnerClassInitOrder_ESOuter__int(/** ESOuter */ $outer_this, /** number */ value) {
   ESInner.$clinit();
   let $instance = new ESInner();
@@ -38,23 +38,24 @@ class ESInner extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'ESInner(ESOuter, int)'.
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__innerclassinitorder_InnerClassInitOrder_ESOuter__int(/** ESOuter */ $outer_this, /** number */ value) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = $outer_this;
   this.$ctor__java_lang_Object__();
   this.f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner = value;
  }
- 
+ /** @nodts */
  static $clinit() {
   ESInner.$clinit = () =>{};
   ESInner.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ESInner;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ESInner, 'innerclassinitorder.InnerClassInitOrder$ESOuter$ESInner');

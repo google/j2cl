@@ -7,7 +7,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class GenericInterface {
- 
+ /** @nodts */
  static $clinit() {
   GenericInterface.$clinit = () =>{};
   GenericInterface.$loadModules();
@@ -16,11 +16,12 @@ class GenericInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__implementsgenericinterface_GenericInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__implementsgenericinterface_GenericInterface;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 GenericInterface.$markImplementor(/**@type {Function}*/ (GenericInterface));

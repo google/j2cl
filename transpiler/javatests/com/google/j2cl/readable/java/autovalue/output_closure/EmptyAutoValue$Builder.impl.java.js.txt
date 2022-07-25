@@ -9,27 +9,28 @@ let EmptyAutoValue = goog.forwardDeclare('autovalue.EmptyAutoValue$impl');
  * @abstract
  */
 class Builder extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__autovalue_EmptyAutoValue_Builder__() {
   this.$ctor__java_lang_Object__();
  }
- /** @abstract @return {EmptyAutoValue} */
+ /** @abstract @nodts @return {EmptyAutoValue} */
  m_build__() {}
- 
+ /** @nodts */
  static $clinit() {
   Builder.$clinit = () =>{};
   Builder.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Builder;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Builder, 'autovalue.EmptyAutoValue$Builder');

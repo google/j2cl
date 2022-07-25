@@ -15,47 +15,48 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {SomeOtherFooInterface<?string>}
  */
 class DualUnrelatedAccidentalBridges extends SuperDualUnrelatedAccidentalBridges {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!DualUnrelatedAccidentalBridges} */
+ /** @nodts @return {!DualUnrelatedAccidentalBridges} */
  static $create__() {
   DualUnrelatedAccidentalBridges.$clinit();
   let $instance = new DualUnrelatedAccidentalBridges();
   $instance.$ctor__bridgemethods_DualUnrelatedAccidentalBridges__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_DualUnrelatedAccidentalBridges__() {
   this.$ctor__bridgemethods_SuperDualUnrelatedAccidentalBridges__();
  }
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_foo__java_lang_Object__java_lang_Object(/** ?string */ arg0, /** ?number */ arg1) {
   this.m_foo__java_lang_String__java_lang_Double(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), /**@type {?number}*/ ($Casts.$to(arg1, Double)));
  }
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_foo__java_lang_Object__java_lang_Number(/** ?string */ arg0, /** (Number|number) */ arg1) {
   this.m_foo__java_lang_String__java_lang_Number(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
  }
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_foo__java_lang_Object__java_lang_Double(/** ?string */ arg0, /** ?number */ arg1) {
   this.m_foo__java_lang_String__java_lang_Double(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
  }
- 
+ /** @nodts */
  static $clinit() {
   DualUnrelatedAccidentalBridges.$clinit = () =>{};
   DualUnrelatedAccidentalBridges.$loadModules();
   SuperDualUnrelatedAccidentalBridges.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof DualUnrelatedAccidentalBridges;
  }
  
+ /** @nodts */
  static $loadModules() {
   Double = goog.module.get('java.lang.Double$impl');
   j_l_String = goog.module.get('java.lang.String$impl');

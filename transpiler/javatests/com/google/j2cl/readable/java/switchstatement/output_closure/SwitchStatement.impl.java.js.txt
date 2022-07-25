@@ -8,22 +8,22 @@ let Numbers = goog.forwardDeclare('switchstatement.Numbers$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class SwitchStatement extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!SwitchStatement} */
+ /** @nodts @return {!SwitchStatement} */
  static $create__() {
   SwitchStatement.$clinit();
   let $instance = new SwitchStatement();
   $instance.$ctor__switchstatement_SwitchStatement__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__switchstatement_SwitchStatement__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_main__() {
   switch (InternalPreconditions.m_checkNotNull__java_lang_Object('one')) {
    case 'one': 
@@ -55,7 +55,7 @@ class SwitchStatement extends j_l_Object {
     return;
   }
  }
- 
+ /** @nodts */
  static m_testSwitchVariableDeclarations__() {
   let /** number */ unassigned, /** number */ unassigned2, /** number */ i, /** number */ j, /** number */ b, /** number */ i_1;
   switch (3) {
@@ -75,17 +75,18 @@ class SwitchStatement extends j_l_Object {
   }
   $Asserts.$assert(false);
  }
- 
+ /** @nodts */
  static $clinit() {
   SwitchStatement.$clinit = () =>{};
   SwitchStatement.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SwitchStatement;
  }
  
+ /** @nodts */
  static $loadModules() {
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   Numbers = goog.module.get('switchstatement.Numbers$impl');

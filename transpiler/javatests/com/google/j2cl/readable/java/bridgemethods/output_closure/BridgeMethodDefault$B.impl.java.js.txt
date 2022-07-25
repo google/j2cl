@@ -8,23 +8,23 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {JJ}
  */
 class B extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!B} */
+ /** @nodts @return {!B} */
  static $create__() {
   B.$clinit();
   let $instance = new B();
   $instance.$ctor__bridgemethods_BridgeMethodDefault_B__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_BridgeMethodDefault_B__() {
   this.$ctor__java_lang_Object__();
  }
  //Default method forwarding stub.
- /** @override */
+ /** @override @nodts */
  m_m__java_lang_Object(/** * */ arg0) {
   JJ.m_m__$default__bridgemethods_BridgeMethodDefault_JJ__java_lang_Object(this, arg0);
  }
@@ -33,18 +33,19 @@ class B extends j_l_Object {
  m(/** * */ arg0) {
   this.m_m__java_lang_Object(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   B.$clinit = () =>{};
   B.$loadModules();
   j_l_Object.$clinit();
   JJ.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof B;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 JJ.$markImplementor(B);

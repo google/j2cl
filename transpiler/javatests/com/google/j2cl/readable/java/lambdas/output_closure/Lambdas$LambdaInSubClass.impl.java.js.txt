@@ -6,21 +6,21 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let FunctionalInterface = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterface$impl');
 
 class LambdaInSubClass extends Parent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!LambdaInSubClass} */
+ /** @nodts @return {!LambdaInSubClass} */
  static $create__() {
   let $instance = new LambdaInSubClass();
   $instance.$ctor__lambdas_Lambdas_LambdaInSubClass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__lambdas_Lambdas_LambdaInSubClass__() {
   this.$ctor__lambdas_Lambdas_Parent__();
  }
- 
+ /** @nodts */
  m_testLambdaInSubclass__() {
   let l = FunctionalInterface.$adapt((/** number */ i) =>{
    this.m_funInParent__();
@@ -32,17 +32,18 @@ class LambdaInSubClass extends Parent {
    return a;
   });
  }
- 
+ /** @nodts */
  static $clinit() {
   LambdaInSubClass.$clinit = () =>{};
   LambdaInSubClass.$loadModules();
   Parent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof LambdaInSubClass;
  }
  
+ /** @nodts */
  static $loadModules() {
   FunctionalInterface = goog.module.get('lambdas.Lambdas.FunctionalInterface$impl');
  }

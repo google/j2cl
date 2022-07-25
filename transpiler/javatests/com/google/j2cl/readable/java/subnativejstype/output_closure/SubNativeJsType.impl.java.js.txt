@@ -12,10 +12,10 @@ class SubNativeJsType extends MyNativeJsType {
   this.$ctor__subnativejstype_SubNativeJsType__int(x);
  }
  //Initialization from constructor 'SubNativeJsType(int)'.
- 
+ /** @nodts */
  $ctor__subnativejstype_SubNativeJsType__int(/** number */ x) {}
  //Factory method corresponding to constructor 'SubNativeJsType()'.
- /** @return {!SubNativeJsType} */
+ /** @nodts @return {!SubNativeJsType} */
  static $create__() {
   SubNativeJsType.$clinit();
   let $instance = new SubNativeJsType(10);
@@ -23,18 +23,19 @@ class SubNativeJsType extends MyNativeJsType {
   return $instance;
  }
  //Initialization from constructor 'SubNativeJsType()'.
- 
+ /** @nodts */
  $ctor__subnativejstype_SubNativeJsType__() {}
- 
+ /** @nodts */
  static $clinit() {
   SubNativeJsType.$clinit = () =>{};
   SubNativeJsType.$loadModules();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SubNativeJsType;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(SubNativeJsType, 'subnativejstype.SubNativeJsType');

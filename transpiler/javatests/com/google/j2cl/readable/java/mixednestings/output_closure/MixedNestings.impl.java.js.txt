@@ -6,38 +6,39 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let A = goog.forwardDeclare('mixednestings.MixedNestings.A$impl');
 
 class MixedNestings extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!MixedNestings} */
+ /** @nodts @return {!MixedNestings} */
  static $create__() {
   MixedNestings.$clinit();
   let $instance = new MixedNestings();
   $instance.$ctor__mixednestings_MixedNestings__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__mixednestings_MixedNestings__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_mm__() {}
- 
+ /** @nodts */
  m_test__() {
   A.$create__mixednestings_MixedNestings(this).m_a__();
  }
- 
+ /** @nodts */
  static $clinit() {
   MixedNestings.$clinit = () =>{};
   MixedNestings.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof MixedNestings;
  }
  
+ /** @nodts */
  static $loadModules() {
   A = goog.module.get('mixednestings.MixedNestings.A$impl');
  }

@@ -11,26 +11,26 @@ let Objects = goog.forwardDeclare('java.util.Objects$impl');
  * @abstract
  */
 class AutoValueWithExtensions extends ValueType {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ = 0;
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_getMemoizedNative___$pp_autovalue() {
   return Math.imul(this.m_getIntField__(), 2);
  }
- /** @abstract @return {?string} */
+ /** @abstract @nodts @return {?string} */
  m_toPrettyString___$pp_autovalue() {}
- /** @return {AutoValueWithExtensions} */
+ /** @nodts @return {AutoValueWithExtensions} */
  static m_create__() {
   AutoValueWithExtensions.$clinit();
   return AutoValue__AutoValueWithExtensions.$create__int__java_lang_String(42, 'text');
  }
- 
+ /** @nodts */
  $ctor__autovalue_AutoValueWithExtensions__int__java_lang_String(/** number */ intField, /** ?string */ stringField) {
   this.$ctor__javaemul_internal_ValueType__();
   this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ = intField;
@@ -38,25 +38,26 @@ class AutoValueWithExtensions extends ValueType {
   this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ = stringField;
   $J2CL_PRESERVE$(this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_, this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_);
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_getIntField__() {
   return this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_;
  }
- /** @return {?string} */
+ /** @nodts @return {?string} */
  m_getStringField__() {
   return this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_;
  }
- 
+ /** @nodts */
  static $clinit() {
   AutoValueWithExtensions.$clinit = () =>{};
   AutoValueWithExtensions.$loadModules();
   ValueType.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AutoValueWithExtensions;
  }
  
+ /** @nodts */
  static $loadModules() {
   AutoValue__AutoValueWithExtensions = goog.module.get('autovalue.AutoValue_AutoValueWithExtensions$impl');
   Objects = goog.module.get('java.util.Objects$impl');

@@ -19,22 +19,22 @@ let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class CastPrimitives extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!CastPrimitives} */
+ /** @nodts @return {!CastPrimitives} */
  static $create__() {
   CastPrimitives.$clinit();
   let $instance = new CastPrimitives();
   $instance.$ctor__cast_CastPrimitives__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__cast_CastPrimitives__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_testPrimitiveCasts__() {
   let b = 1;
   let c = 1 /* '\u0001' */;
@@ -93,7 +93,7 @@ class CastPrimitives extends j_l_Object {
   f = d;
   d = d;
  }
- 
+ /** @nodts */
  m_testReferenceToPrimitive__() {
   let o = j_l_Object.$create__();
   let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {boolean}*/ ($Casts.$to(o, Boolean)));
@@ -105,7 +105,7 @@ class CastPrimitives extends j_l_Object {
   let f = /**@type {!Float}*/ ($Casts.$to(o, Float)).m_floatValue__();
   let d = Double.m_doubleValue__java_lang_Double(/**@type {number}*/ ($Casts.$to(o, Double)));
  }
- 
+ /** @nodts */
  m_testUnboxAndWiden__() {
   let boxedByte = Byte.m_valueOf__byte(0);
   let s = boxedByte.m_byteValue__();
@@ -114,7 +114,7 @@ class CastPrimitives extends j_l_Object {
   let f = boxedByte.m_byteValue__();
   let d = boxedByte.m_byteValue__();
  }
- 
+ /** @nodts */
  m_testImplicitArgumentCasts__() {
   let b = 127;
   let c = 65535 /* '\uFFFF' */;
@@ -138,7 +138,7 @@ class CastPrimitives extends j_l_Object {
   LongValueHolder.$create__long($Primitives.widenCharToLong(c));
   LongValueHolder.$create__long($Primitives.widenIntToLong(i));
  }
- 
+ /** @nodts */
  m_testImplicitArrayIndexCasts__arrayOf_byte(/** Array<number> */ array) {
   let b = 127;
   let c = 65535 /* '\uFFFF' */;
@@ -152,27 +152,27 @@ class CastPrimitives extends j_l_Object {
   result = array[1];
   result = array[97 /* 'a' */];
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_getShort__short(/** number */ value) {
   return value;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_getInt__int(/** number */ value) {
   return value;
  }
- /** @return {!$Long} */
+ /** @nodts @return {!$Long} */
  static m_getLong__long(/** !$Long */ value) {
   return value;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_getFloat__float(/** number */ value) {
   return value;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_getDouble__double(/** number */ value) {
   return value;
  }
- 
+ /** @nodts */
  m_testImplicitLongAssignmentCasts__() {
   let fbyte = 11;
   let fchar = 12 /* '\f' */;
@@ -212,17 +212,18 @@ class CastPrimitives extends j_l_Object {
    tlong = $LongUtils.plus($Primitives.widenIntToLong(0 + 1 | 0), $Long.fromInt(2));
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   CastPrimitives.$clinit = () =>{};
   CastPrimitives.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof CastPrimitives;
  }
  
+ /** @nodts */
  static $loadModules() {
   IntValueHolder = goog.module.get('cast.CastPrimitives.IntValueHolder$impl');
   LongValueHolder = goog.module.get('cast.CastPrimitives.LongValueHolder$impl');

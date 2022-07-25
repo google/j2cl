@@ -13,39 +13,40 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {Callable<Superclass<T>>}
  */
 class AnotherTask extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!AnotherTask<T>} */
+ /** @nodts @template T @return {!AnotherTask<T>} */
  static $create__() {
   AnotherTask.$clinit();
   let $instance = new AnotherTask();
   $instance.$ctor__simplebridgemethods_AnotherTask__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__simplebridgemethods_AnotherTask__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_call__simplebridgemethods_Superclass(/** Superclass<T> */ t) {}
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_call__java_lang_Object(/** Superclass<T> */ arg0) {
   this.m_call__simplebridgemethods_Superclass(/**@type {Superclass<T>}*/ ($Casts.$to(arg0, Superclass)));
  }
- 
+ /** @nodts */
  static $clinit() {
   AnotherTask.$clinit = () =>{};
   AnotherTask.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AnotherTask;
  }
  
+ /** @nodts */
  static $loadModules() {
   Superclass = goog.module.get('simplebridgemethods.Superclass$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

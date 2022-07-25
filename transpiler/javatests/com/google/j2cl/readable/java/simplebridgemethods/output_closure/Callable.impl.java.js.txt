@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('simplebridgemethods.Callable.$LambdaAd
  * @template V
  */
 class Callable {
- /** @abstract */
+ /** @abstract @nodts */
  m_call__java_lang_Object(/** V */ v) {}
- /** @template V @return {Callable<V>} */
+ /** @nodts @template V @return {Callable<V>} */
  static $adapt(/** ?function(V):void */ fn) {
   Callable.$clinit();
   return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   Callable.$clinit = () =>{};
   Callable.$loadModules();
@@ -25,11 +25,12 @@ class Callable {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__simplebridgemethods_Callable = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__simplebridgemethods_Callable;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('simplebridgemethods.Callable.$LambdaAdaptor$impl');
  }

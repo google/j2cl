@@ -9,23 +9,23 @@ let $1A = goog.forwardDeclare('unreachableclass.Main.$1A$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__unreachableclass_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__unreachableclass_Main__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_unreachableclass_Main();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_unreachableclass_Main() {
   try {} catch (__$exc) {
    __$exc = $Exceptions.toJava(__$exc);
@@ -38,17 +38,18 @@ class Main extends j_l_Object {
    }
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   $1 = goog.module.get('unreachableclass.Main.$1$impl');

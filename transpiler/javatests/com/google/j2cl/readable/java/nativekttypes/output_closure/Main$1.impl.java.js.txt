@@ -9,35 +9,36 @@ let Main = goog.forwardDeclare('nativekttypes.Main$impl');
  * @extends {Nested<?string>}
  */
 class $1 extends Nested {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__nativekttypes_Main_1;
  }
- /** @return {!$1} */
+ /** @nodts @return {!$1} */
  static $create__nativekttypes_Main__java_lang_String(/** Main */ $outer_this, /** ?string */ $_0) {
   $1.$clinit();
   let $instance = new $1();
   $instance.$ctor__nativekttypes_Main_1__nativekttypes_Main__java_lang_String($outer_this, $_0);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_Main_1__nativekttypes_Main__java_lang_String(/** Main */ $outer_this, /** ?string */ $_0) {
   this.$outer_this__nativekttypes_Main_1 = $outer_this;
   this.$ctor__nativekttypes_NativeTopLevel_Nested__java_lang_Object($_0);
  }
- 
+ /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
   $1.$loadModules();
   Nested.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($1, 'nativekttypes.Main$1');

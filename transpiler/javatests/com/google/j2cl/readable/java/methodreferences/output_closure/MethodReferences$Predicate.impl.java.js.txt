@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.Pred
  * @template T
  */
 class Predicate {
- /** @abstract @return {boolean} */
+ /** @abstract @nodts @return {boolean} */
  m_apply__java_lang_Object(/** T */ parameter) {}
- /** @template T @return {Predicate<T>} */
+ /** @nodts @template T @return {Predicate<T>} */
  static $adapt(/** ?function(T):boolean */ fn) {
   Predicate.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   Predicate.$clinit = () =>{};
   Predicate.$loadModules();
@@ -25,11 +25,12 @@ class Predicate {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__methodreferences_MethodReferences_Predicate = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__methodreferences_MethodReferences_Predicate;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('methodreferences.MethodReferences.Predicate.$LambdaAdaptor$impl');
  }

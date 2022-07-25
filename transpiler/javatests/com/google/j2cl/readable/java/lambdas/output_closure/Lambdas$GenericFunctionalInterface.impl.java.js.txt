@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.GenericFunctionalInter
  * @template T
  */
 class GenericFunctionalInterface {
- /** @abstract @return {T} */
+ /** @abstract @nodts @return {T} */
  m_m__java_lang_Object(/** T */ i) {}
- /** @template T @return {GenericFunctionalInterface<T>} */
+ /** @nodts @template T @return {GenericFunctionalInterface<T>} */
  static $adapt(/** ?function(T):T */ fn) {
   GenericFunctionalInterface.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   GenericFunctionalInterface.$clinit = () =>{};
   GenericFunctionalInterface.$loadModules();
@@ -25,11 +25,12 @@ class GenericFunctionalInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__lambdas_Lambdas_GenericFunctionalInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__lambdas_Lambdas_GenericFunctionalInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('lambdas.Lambdas.GenericFunctionalInterface.$LambdaAdaptor$impl');
  }

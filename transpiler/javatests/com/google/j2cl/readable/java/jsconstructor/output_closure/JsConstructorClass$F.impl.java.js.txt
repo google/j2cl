@@ -8,30 +8,31 @@ class F extends C {
  constructor(/** number */ x) {
   F.$clinit();
   super(x + 2 | 0);
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fF__jsconstructor_JsConstructorClass_F = 0;
   this.$ctor__jsconstructor_JsConstructorClass_F__int(x);
  }
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_F__int(/** number */ x) {
   this.$init___$p_jsconstructor_JsConstructorClass_F();
   this.f_fF__jsconstructor_JsConstructorClass_F = x + 3 | 0;
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_jsconstructor_JsConstructorClass_F() {
   this.f_fF__jsconstructor_JsConstructorClass_F = 13;
  }
- 
+ /** @nodts */
  static $clinit() {
   F.$clinit = () =>{};
   F.$loadModules();
   C.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof F;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(F, 'jsconstructor.JsConstructorClass$F');

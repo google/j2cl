@@ -7,22 +7,22 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__systemgetproperty_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__systemgetproperty_Main__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
   Main.$clinit();
   let /** boolean */ x;
@@ -34,11 +34,11 @@ class Main extends j_l_Object {
   x = j_l_String.m_equals__java_lang_String__java_lang_Object($Util.$getDefine('jre.bar', 'bar'), 'bar');
   x = j_l_String.m_equals__java_lang_String__java_lang_Object($Util.$getDefine('jre.classMetadata', Main.m_mightHaveSideEffects__()), 'SIMPLE');
  }
- /** @return {?string} */
+ /** @nodts @return {?string} */
  static m_mightHaveSideEffects__() {
   return 'Foo';
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
@@ -46,19 +46,20 @@ class Main extends j_l_Object {
   Main.f_property__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata');
   Main.f_propertyWithDefault__systemgetproperty_Main_ = $Util.$getDefine('jre.classMetadata', 'default');
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
  }
 }
-/**@type {?string}*/
+/**@type {?string} @nodts*/
 Main.f_property__systemgetproperty_Main_;
-/**@type {?string}*/
+/**@type {?string} @nodts*/
 Main.f_propertyWithDefault__systemgetproperty_Main_;
 $Util.$setClassMetadata(Main, 'systemgetproperty.Main');
 

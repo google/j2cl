@@ -11,32 +11,33 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @implements {I<Integer>}
  */
 class F extends A {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!F} */
+ /** @nodts @return {!F} */
  static $create__() {
   F.$clinit();
   let $instance = new F();
   $instance.$ctor__bridgejsmethod_Main_F__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_F__() {
   this.$ctor__bridgejsmethod_Main_A__();
  }
- 
+ /** @nodts */
  static $clinit() {
   F.$clinit = () =>{};
   F.$loadModules();
   A.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof F;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor(F);

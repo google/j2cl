@@ -11,39 +11,40 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
  * @extends {GenericMethod<T>}
  */
 class $1LocalClass extends GenericMethod {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {GenericMethod<T_2>}*/
+  /**@type {GenericMethod<T_2>} @nodts*/
   this.$outer_this__genericmethod_GenericMethod_1LocalClass;
  }
- /** @template T, T_1, T_2 @return {!$1LocalClass<T, T_1, T_2>} */
+ /** @nodts @template T, T_1, T_2 @return {!$1LocalClass<T, T_1, T_2>} */
  static $create__genericmethod_GenericMethod(/** GenericMethod<T_2> */ $outer_this) {
   $1LocalClass.$clinit();
   let $instance = new $1LocalClass();
   $instance.$ctor__genericmethod_GenericMethod_1LocalClass__genericmethod_GenericMethod($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__genericmethod_GenericMethod_1LocalClass__genericmethod_GenericMethod(/** GenericMethod<T_2> */ $outer_this) {
   this.$outer_this__genericmethod_GenericMethod_1LocalClass = $outer_this;
   this.$ctor__genericmethod_GenericMethod__();
  }
- 
+ /** @nodts */
  m_fun2__java_lang_Object(/** T */ t) {}
- /** @template T_3 */
+ /** @nodts @template T_3 */
  m_fun2__java_lang_Number(/** T_3 */ t) {}
- 
+ /** @nodts */
  static $clinit() {
   $1LocalClass.$clinit = () =>{};
   $1LocalClass.$loadModules();
   GenericMethod.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1LocalClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($1LocalClass, 'genericmethod.GenericMethod$1LocalClass');

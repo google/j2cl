@@ -4,14 +4,14 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class OptimizesWithThisConstructorDelegation extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation = 0;
  }
  //Factory method corresponding to constructor 'OptimizesWithThisConstructorDelegation()'.
- /** @return {!OptimizesWithThisConstructorDelegation} */
+ /** @nodts @return {!OptimizesWithThisConstructorDelegation} */
  static $create__() {
   OptimizesWithThisConstructorDelegation.$clinit();
   let $instance = new OptimizesWithThisConstructorDelegation();
@@ -19,13 +19,13 @@ class OptimizesWithThisConstructorDelegation extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'OptimizesWithThisConstructorDelegation()'.
- 
+ /** @nodts */
  $ctor__wasmimmutablefields_OptimizesWithThisConstructorDelegation__() {
   this.$ctor__java_lang_Object__();
   this.f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation = 2;
  }
  //Factory method corresponding to constructor 'OptimizesWithThisConstructorDelegation(int)'.
- /** @return {!OptimizesWithThisConstructorDelegation} */
+ /** @nodts @return {!OptimizesWithThisConstructorDelegation} */
  static $create__int(/** number */ parameter) {
   OptimizesWithThisConstructorDelegation.$clinit();
   let $instance = new OptimizesWithThisConstructorDelegation();
@@ -33,13 +33,13 @@ class OptimizesWithThisConstructorDelegation extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'OptimizesWithThisConstructorDelegation(int)'.
- 
+ /** @nodts */
  $ctor__wasmimmutablefields_OptimizesWithThisConstructorDelegation__int(/** number */ parameter) {
   this.$ctor__java_lang_Object__();
   this.f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation = parameter;
  }
  //Factory method corresponding to constructor 'OptimizesWithThisConstructorDelegation(short)'.
- /** @return {!OptimizesWithThisConstructorDelegation} */
+ /** @nodts @return {!OptimizesWithThisConstructorDelegation} */
  static $create__short(/** number */ parameter) {
   OptimizesWithThisConstructorDelegation.$clinit();
   let $instance = new OptimizesWithThisConstructorDelegation();
@@ -47,21 +47,22 @@ class OptimizesWithThisConstructorDelegation extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'OptimizesWithThisConstructorDelegation(short)'.
- 
+ /** @nodts */
  $ctor__wasmimmutablefields_OptimizesWithThisConstructorDelegation__short(/** number */ parameter) {
   this.$ctor__wasmimmutablefields_OptimizesWithThisConstructorDelegation__int(parameter);
  }
- 
+ /** @nodts */
  static $clinit() {
   OptimizesWithThisConstructorDelegation.$clinit = () =>{};
   OptimizesWithThisConstructorDelegation.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof OptimizesWithThisConstructorDelegation;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(OptimizesWithThisConstructorDelegation, 'wasmimmutablefields.OptimizesWithThisConstructorDelegation');

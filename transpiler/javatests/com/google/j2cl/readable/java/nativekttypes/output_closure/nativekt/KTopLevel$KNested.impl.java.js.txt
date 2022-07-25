@@ -7,58 +7,59 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template N
  */
 class KNested extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {N}*/
+  /**@type {N} @nodts*/
   this.f_instanceField__nativekttypes_nativekt_KTopLevel_KNested;
  }
- /** @template N @return {!KNested<N>} */
+ /** @nodts @template N @return {!KNested<N>} */
  static $create__java_lang_Object(/** N */ n) {
   KNested.$clinit();
   let $instance = new KNested();
   $instance.$ctor__nativekttypes_nativekt_KTopLevel_KNested__java_lang_Object(n);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_nativekt_KTopLevel_KNested__java_lang_Object(/** N */ n) {
   this.$ctor__java_lang_Object__();
  }
- /** @return {N} */
+ /** @nodts @return {N} */
  m_instanceMethod__java_lang_Object(/** N */ n) {
   return n;
  }
- /** @template S @return {S} */
+ /** @nodts @template S @return {S} */
  static m_staticMethod__java_lang_Object(/** S */ s) {
   KNested.$clinit();
   return s;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_renamedMethod__() {
   return 0;
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  static get f_staticField__nativekttypes_nativekt_KTopLevel_KNested() {
   return (KNested.$clinit(), KNested.$static_staticField__nativekttypes_nativekt_KTopLevel_KNested);
  }
- 
+ /** @nodts */
  static set f_staticField__nativekttypes_nativekt_KTopLevel_KNested(/** * */ value) {
   (KNested.$clinit(), KNested.$static_staticField__nativekttypes_nativekt_KTopLevel_KNested = value);
  }
- 
+ /** @nodts */
  static $clinit() {
   KNested.$clinit = () =>{};
   KNested.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof KNested;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
-/**@private {*}*/
+/**@private {*} @nodts*/
 KNested.$static_staticField__nativekttypes_nativekt_KTopLevel_KNested;
 $Util.$setClassMetadata(KNested, 'nativekttypes.nativekt.KTopLevel$KNested');
 

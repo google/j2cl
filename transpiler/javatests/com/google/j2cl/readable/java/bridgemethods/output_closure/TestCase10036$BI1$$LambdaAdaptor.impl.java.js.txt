@@ -10,15 +10,15 @@ let BI3 = goog.forwardDeclare('bridgemethods.TestCase10036.BI3$impl');
  * @implements {BI1}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(?string):?string */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(?string):?string}*/
+  /**@type {?function(?string):?string} @nodts*/
   this.f_fn__bridgemethods_TestCase10036_BI1_$LambdaAdaptor;
   this.$ctor__bridgemethods_TestCase10036_BI1_$LambdaAdaptor__bridgemethods_TestCase10036_BI1_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_TestCase10036_BI1_$LambdaAdaptor__bridgemethods_TestCase10036_BI1_$JsFunction(/** ?function(?string):?string */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__bridgemethods_TestCase10036_BI1_$LambdaAdaptor = fn;
@@ -28,18 +28,19 @@ class $LambdaAdaptor extends j_l_Object {
   let /** ?function(?string):?string */ $function;
   return ($function = this.f_fn__bridgemethods_TestCase10036_BI1_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
   BI3.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {
   BI3 = goog.module.get('bridgemethods.TestCase10036.BI3$impl');
  }

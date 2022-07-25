@@ -6,40 +6,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let InnerClass = goog.forwardDeclare('instanceinnerclass.InstanceInnerClass.InnerClass$impl');
 
 class InstanceInnerClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_instanceField__instanceinnerclass_InstanceInnerClass = 0;
  }
- /** @return {!InstanceInnerClass} */
+ /** @nodts @return {!InstanceInnerClass} */
  static $create__() {
   InstanceInnerClass.$clinit();
   let $instance = new InstanceInnerClass();
   $instance.$ctor__instanceinnerclass_InstanceInnerClass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__instanceinnerclass_InstanceInnerClass__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_funOuter__() {}
- 
+ /** @nodts */
  m_test__() {
   InnerClass.$create__instanceinnerclass_InstanceInnerClass(InstanceInnerClass.$create__());
  }
- 
+ /** @nodts */
  static $clinit() {
   InstanceInnerClass.$clinit = () =>{};
   InstanceInnerClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InstanceInnerClass;
  }
  
+ /** @nodts */
  static $loadModules() {
   InnerClass = goog.module.get('instanceinnerclass.InstanceInnerClass.InnerClass$impl');
  }

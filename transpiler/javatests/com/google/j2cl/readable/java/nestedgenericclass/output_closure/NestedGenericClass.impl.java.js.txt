@@ -18,31 +18,31 @@ let D = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.C.D$impl');
  * @template T
  */
 class NestedGenericClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!NestedGenericClass<T>} */
+ /** @nodts @template T @return {!NestedGenericClass<T>} */
  static $create__() {
   NestedGenericClass.$clinit();
   let $instance = new NestedGenericClass();
   $instance.$ctor__nestedgenericclass_NestedGenericClass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nestedgenericclass_NestedGenericClass__() {
   this.$ctor__java_lang_Object__();
  }
- /** @template S */
+ /** @nodts @template S */
  m_fun__java_lang_Object(/** S */ t) {
   $1E.$create__nestedgenericclass_NestedGenericClass(this);
   $1F.$create__nestedgenericclass_NestedGenericClass(this);
  }
- /** @template T_1 */
+ /** @nodts @template T_1 */
  m_bar__() {
   /**@type {!$1G<Error, T_1, T>}*/ ($1G.$create__nestedgenericclass_NestedGenericClass(this)).m_bar__();
  }
- 
+ /** @nodts */
  m_test__() {
   let n = /**@type {!NestedGenericClass<(Number|number)>}*/ (NestedGenericClass.$create__());
   let a = /**@type {!A<Error, (Number|number)>}*/ (A.$create__nestedgenericclass_NestedGenericClass(n));
@@ -50,17 +50,18 @@ class NestedGenericClass extends j_l_Object {
   C.$create__nestedgenericclass_NestedGenericClass(n);
   D.$create__nestedgenericclass_NestedGenericClass_C(/**@type {!C<(Number|number)>}*/ (C.$create__nestedgenericclass_NestedGenericClass(n)));
  }
- 
+ /** @nodts */
  static $clinit() {
   NestedGenericClass.$clinit = () =>{};
   NestedGenericClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NestedGenericClass;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1E = goog.module.get('nestedgenericclass.NestedGenericClass.$1E$impl');
   $1F = goog.module.get('nestedgenericclass.NestedGenericClass.$1F$impl');

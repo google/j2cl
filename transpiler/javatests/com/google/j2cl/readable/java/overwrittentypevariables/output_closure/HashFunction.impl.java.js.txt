@@ -11,12 +11,12 @@ let $LambdaAdaptor = goog.forwardDeclare('overwrittentypevariables.HashFunction.
  * @extends {MyFunction<T, ?string>}
  */
 class HashFunction {
- /** @template T @return {HashFunction<T>} */
+ /** @nodts @template T @return {HashFunction<T>} */
  static $adapt(/** ?function(T):?string */ fn) {
   HashFunction.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   HashFunction.$clinit = () =>{};
   HashFunction.$loadModules();
@@ -26,11 +26,12 @@ class HashFunction {
   MyFunction.$markImplementor(ctor);
   ctor.prototype.$implements__overwrittentypevariables_HashFunction = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__overwrittentypevariables_HashFunction;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');
  }

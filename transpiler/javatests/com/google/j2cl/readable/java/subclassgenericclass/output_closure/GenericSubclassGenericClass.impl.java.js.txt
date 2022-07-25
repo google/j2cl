@@ -8,32 +8,33 @@ const GenericClass = goog.require('subclassgenericclass.GenericClass$impl');
  * @extends {GenericClass<T>}
  */
 class GenericSubclassGenericClass extends GenericClass {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!GenericSubclassGenericClass<T>} */
+ /** @nodts @template T @return {!GenericSubclassGenericClass<T>} */
  static $create__() {
   GenericSubclassGenericClass.$clinit();
   let $instance = new GenericSubclassGenericClass();
   $instance.$ctor__subclassgenericclass_GenericSubclassGenericClass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__subclassgenericclass_GenericSubclassGenericClass__() {
   this.$ctor__subclassgenericclass_GenericClass__();
  }
- 
+ /** @nodts */
  static $clinit() {
   GenericSubclassGenericClass.$clinit = () =>{};
   GenericSubclassGenericClass.$loadModules();
   GenericClass.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof GenericSubclassGenericClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(GenericSubclassGenericClass, 'subclassgenericclass.GenericSubclassGenericClass');

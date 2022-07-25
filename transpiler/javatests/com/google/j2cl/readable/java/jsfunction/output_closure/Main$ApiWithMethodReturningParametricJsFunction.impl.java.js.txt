@@ -8,14 +8,14 @@ let $LambdaAdaptor = goog.forwardDeclare('jsfunction.Main.ApiWithMethodReturning
  * @interface
  */
 class ApiWithMethodReturningParametricJsFunction {
- /** @abstract @template T @return {?function(T):void} */
+ /** @abstract @nodts @template T @return {?function(T):void} */
  m_anApi__() {}
- /** @return {ApiWithMethodReturningParametricJsFunction} */
+ /** @nodts @return {ApiWithMethodReturningParametricJsFunction} */
  static $adapt(/** ?function():?function(?):void */ fn) {
   ApiWithMethodReturningParametricJsFunction.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   ApiWithMethodReturningParametricJsFunction.$clinit = () =>{};
   ApiWithMethodReturningParametricJsFunction.$loadModules();
@@ -24,11 +24,12 @@ class ApiWithMethodReturningParametricJsFunction {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__jsfunction_Main_ApiWithMethodReturningParametricJsFunction = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__jsfunction_Main_ApiWithMethodReturningParametricJsFunction;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor$impl');
  }

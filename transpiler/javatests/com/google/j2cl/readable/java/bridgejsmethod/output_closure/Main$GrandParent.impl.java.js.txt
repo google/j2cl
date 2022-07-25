@@ -9,39 +9,40 @@ let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
  * @template T
  */
 class GrandParent extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_GrandParent;
  }
- /** @template T @return {!GrandParent<T>} */
+ /** @nodts @template T @return {!GrandParent<T>} */
  static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
   GrandParent.$clinit();
   let $instance = new GrandParent();
   $instance.$ctor__bridgejsmethod_Main_GrandParent__bridgejsmethod_Main($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_GrandParent__bridgejsmethod_Main(/** Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_GrandParent = $outer_this;
   this.$ctor__java_lang_Object__();
  }
  
  jsMethod(/** T */ t) {}
- 
+ /** @nodts */
  m_method__java_lang_Object(/** T */ t) {}
- 
+ /** @nodts */
  static $clinit() {
   GrandParent.$clinit = () =>{};
   GrandParent.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof GrandParent;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(GrandParent, 'bridgejsmethod.Main$GrandParent');

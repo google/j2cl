@@ -8,18 +8,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyInterface}
  */
 class Child extends Parent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Child} */
+ /** @nodts @return {!Child} */
  static $create__() {
   Child.$clinit();
   let $instance = new Child();
   $instance.$ctor__instancejsmethods_Child__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__instancejsmethods_Child__() {
   this.$ctor__instancejsmethods_Parent__();
  }
@@ -40,21 +40,22 @@ class Child extends Parent {
   return 1;
  }
  //Bridge method.
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_intfFoo__() {
   return this.intfFoo();
  }
- 
+ /** @nodts */
  static $clinit() {
   Child.$clinit = () =>{};
   Child.$loadModules();
   Parent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Child;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 MyInterface.$markImplementor(Child);

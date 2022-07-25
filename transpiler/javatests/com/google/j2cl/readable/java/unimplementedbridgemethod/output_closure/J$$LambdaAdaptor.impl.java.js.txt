@@ -11,40 +11,41 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {J}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(?string):number */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(?string):number}*/
+  /**@type {?function(?string):number} @nodts*/
   this.f_fn__unimplementedbridgemethod_J_$LambdaAdaptor;
   this.$ctor__unimplementedbridgemethod_J_$LambdaAdaptor__unimplementedbridgemethod_J_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__unimplementedbridgemethod_J_$LambdaAdaptor__unimplementedbridgemethod_J_$JsFunction(/** ?function(?string):number */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__unimplementedbridgemethod_J_$LambdaAdaptor = fn;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_foo__java_lang_String(/** ?string */ arg0) {
   let /** ?function(?string):number */ $function;
   return ($function = this.f_fn__unimplementedbridgemethod_J_$LambdaAdaptor, $function(arg0));
  }
  //Bridge method.
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_foo__java_lang_Object(/** ?string */ arg0) {
   return this.m_foo__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

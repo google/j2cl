@@ -21,30 +21,30 @@ let Subclass = goog.forwardDeclare('nativekttypes.Subclass$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {NativeTopLevel<?string>}*/
+  /**@type {NativeTopLevel<?string>} @nodts*/
   this.f_topLevelField__nativekttypes_Main;
-  /**@type {Nested<?string>}*/
+  /**@type {Nested<?string>} @nodts*/
   this.f_nestedField__nativekttypes_Main;
-  /**@type {Inner<?string, ?string>}*/
+  /**@type {Inner<?string, ?string>} @nodts*/
   this.f_innerField__nativekttypes_Main;
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__nativekttypes_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_Main__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_methodArguments__nativekttypes_NativeTopLevel__nativekttypes_NativeTopLevel_Nested__nativekttypes_NativeTopLevel_Inner(/** NativeTopLevel<?string> */ foo, /** Nested<?string> */ nested, /** Inner<?string, ?string> */ inner) {}
- 
+ /** @nodts */
  m_memberAccess__() {
   let topLevel = /**@type {!NativeTopLevel<?string>}*/ (NativeTopLevel.$create__java_lang_Object('foo'));
   let fooInstanceMethod = /**@type {?string}*/ ($Casts.$to(topLevel.instanceMethod('foo'), j_l_String));
@@ -81,7 +81,7 @@ class Main extends j_l_Object {
    }
   });
  }
- 
+ /** @nodts */
  m_bridges__() {
   let o = NativeRequiringBridge.$create__();
   o = $3.$create__nativekttypes_Main(this);
@@ -95,37 +95,38 @@ class Main extends j_l_Object {
   let cast = /**@type {NativeRequiringBridge}*/ (o);
   let instanceofCheck = !$Equality.$same(o, null);
  }
- 
+ /** @nodts */
  m_typeLiterals__() {
   let c1 = Class.$get(NativeTopLevel);
   let c2 = Class.$get(Nested);
   let c3 = Class.$get(Inner);
  }
- 
+ /** @nodts */
  m_casts__() {
   let o1 = /**@type {NativeTopLevel<?string>}*/ (null);
   let o2 = /**@type {Nested<?string>}*/ (null);
   let o3 = /**@type {Inner<?string, ?string>}*/ (null);
  }
- 
+ /** @nodts */
  m_disabledVoidMethod__() {
   let i = 0;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  m_disabledNonVoidMethod__() {
   return true;
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   Class = goog.module.get('java.lang.Class$impl');
   j_l_String = goog.module.get('java.lang.String$impl');

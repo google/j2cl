@@ -8,27 +8,27 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class ImplicitParenthesis extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!ImplicitParenthesis} */
+ /** @nodts @return {!ImplicitParenthesis} */
  static $create__() {
   ImplicitParenthesis.$clinit();
   let $instance = new ImplicitParenthesis();
   $instance.$ctor__implicitparenthesis_ImplicitParenthesis__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__implicitparenthesis_ImplicitParenthesis__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   ImplicitParenthesis.m_examples__();
   ImplicitParenthesis.m_nonExamples__();
  }
- 
+ /** @nodts */
  static m_examples__() {
   let /** number */ primitiveInt;
   let /** Integer */ boxedInt;
@@ -64,7 +64,7 @@ class ImplicitParenthesis extends j_l_Object {
    $Asserts.$assert(primitiveInt == 11);
   }
  }
- 
+ /** @nodts */
  static m_nonExamples__() {
   let /** number */ primitiveInt;
   let /** Integer */ boxedInt;
@@ -83,21 +83,22 @@ class ImplicitParenthesis extends j_l_Object {
    $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxedBoolean) == false);
   }
  }
- 
+ /** @nodts */
  static m_parenthesisRemoval__() {
   Integer.$create__int(1 + 2 | 0);
  }
- 
+ /** @nodts */
  static $clinit() {
   ImplicitParenthesis.$clinit = () =>{};
   ImplicitParenthesis.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ImplicitParenthesis;
  }
  
+ /** @nodts */
  static $loadModules() {
   Boolean = goog.module.get('java.lang.Boolean$impl');
   Integer = goog.module.get('java.lang.Integer$impl');

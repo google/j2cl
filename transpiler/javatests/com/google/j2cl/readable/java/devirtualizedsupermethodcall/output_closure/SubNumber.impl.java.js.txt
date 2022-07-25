@@ -6,48 +6,49 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 class SubNumber extends Number {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!SubNumber} */
+ /** @nodts @return {!SubNumber} */
  static $create__() {
   SubNumber.$clinit();
   let $instance = new SubNumber();
   $instance.$ctor__devirtualizedsupermethodcall_SubNumber__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__devirtualizedsupermethodcall_SubNumber__() {
   this.$ctor__java_lang_Number__();
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_intValue__() {
   return 0;
  }
- /** @override @return {!$Long} */
+ /** @override @nodts @return {!$Long} */
  m_longValue__() {
   return $Long.fromInt(0);
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_floatValue__() {
   return 0;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_doubleValue__() {
   return 0;
  }
- 
+ /** @nodts */
  static $clinit() {
   SubNumber.$clinit = () =>{};
   SubNumber.$loadModules();
   Number.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SubNumber;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Long = goog.module.get('nativebootstrap.Long$impl');
  }

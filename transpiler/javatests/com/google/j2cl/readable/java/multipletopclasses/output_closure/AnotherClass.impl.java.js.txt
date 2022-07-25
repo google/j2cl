@@ -4,32 +4,33 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class AnotherClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!AnotherClass} */
+ /** @nodts @return {!AnotherClass} */
  static $create__() {
   AnotherClass.$clinit();
   let $instance = new AnotherClass();
   $instance.$ctor__multipletopclasses_AnotherClass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__multipletopclasses_AnotherClass__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   AnotherClass.$clinit = () =>{};
   AnotherClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AnotherClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(AnotherClass, 'multipletopclasses.AnotherClass');

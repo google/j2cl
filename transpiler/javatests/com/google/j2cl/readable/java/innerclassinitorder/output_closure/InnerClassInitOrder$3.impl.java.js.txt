@@ -6,35 +6,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder$impl');
 
 class $3 extends TestQualifiedSuperCall {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {InnerClassInitOrder}*/
+  /**@type {InnerClassInitOrder} @nodts*/
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_3;
  }
- /** @return {!$3} */
+ /** @nodts @return {!$3} */
  static $create__innerclassinitorder_InnerClassInitOrder(/** InnerClassInitOrder */ $outer_this) {
   $3.$clinit();
   let $instance = new $3();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder_3__innerclassinitorder_InnerClassInitOrder($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_3__innerclassinitorder_InnerClassInitOrder(/** InnerClassInitOrder */ $outer_this) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_3 = $outer_this;
   this.$ctor__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__();
  }
- 
+ /** @nodts */
  static $clinit() {
   $3.$clinit = () =>{};
   $3.$loadModules();
   TestQualifiedSuperCall.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $3;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($3, 'innerclassinitorder.InnerClassInitOrder$3');

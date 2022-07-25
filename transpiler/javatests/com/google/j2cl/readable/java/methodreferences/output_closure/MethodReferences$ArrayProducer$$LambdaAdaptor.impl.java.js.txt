@@ -9,35 +9,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {ArrayProducer<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(number):Array<T> */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(number):Array<T>}*/
+  /**@type {?function(number):Array<T>} @nodts*/
   this.f_fn__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor;
   this.$ctor__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor__methodreferences_MethodReferences_ArrayProducer_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor__methodreferences_MethodReferences_ArrayProducer_$JsFunction(/** ?function(number):Array<T> */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor = fn;
  }
- /** @override @return {Array<T>} */
+ /** @override @nodts @return {Array<T>} */
  m_produce__int(/** number */ arg0) {
   let /** ?function(number):Array<T> */ $function;
   return ($function = this.f_fn__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 ArrayProducer.$markImplementor($LambdaAdaptor);

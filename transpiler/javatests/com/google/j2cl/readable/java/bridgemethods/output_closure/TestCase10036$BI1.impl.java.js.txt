@@ -12,12 +12,12 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.TestCase10036.BI1.$Lambd
 class BI1 {
  /** @abstract @override @return {?string} */
  get(/** ?string */ value) {}
- /** @return {BI1} */
+ /** @nodts @return {BI1} */
  static $adapt(/** ?function(?string):?string */ fn) {
   BI1.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   BI1.$clinit = () =>{};
   BI1.$loadModules();
@@ -28,11 +28,12 @@ class BI1 {
   BI3.$markImplementor(ctor);
   ctor.prototype.$implements__bridgemethods_TestCase10036_BI1 = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__bridgemethods_TestCase10036_BI1;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('bridgemethods.TestCase10036.BI1.$LambdaAdaptor$impl');
  }

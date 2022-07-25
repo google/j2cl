@@ -7,33 +7,34 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class ArrayContainer extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Array<T>}*/
+  /**@type {Array<T>} @nodts*/
   this.f_data__array_Arrays_ArrayContainer;
  }
- /** @template T @return {!ArrayContainer<T>} */
+ /** @nodts @template T @return {!ArrayContainer<T>} */
  static $create__() {
   let $instance = new ArrayContainer();
   $instance.$ctor__array_Arrays_ArrayContainer__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__array_Arrays_ArrayContainer__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   ArrayContainer.$clinit = () =>{};
   ArrayContainer.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ArrayContainer;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ArrayContainer, 'array.Arrays$ArrayContainer');

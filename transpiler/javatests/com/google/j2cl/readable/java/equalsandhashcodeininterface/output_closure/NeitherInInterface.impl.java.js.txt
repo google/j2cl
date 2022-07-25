@@ -6,7 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class NeitherInInterface {
- 
+ /** @nodts */
  static $clinit() {
   NeitherInInterface.$clinit = () =>{};
   NeitherInInterface.$loadModules();
@@ -15,11 +15,12 @@ class NeitherInInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__equalsandhashcodeininterface_NeitherInInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__equalsandhashcodeininterface_NeitherInInterface;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 NeitherInInterface.$markImplementor(/**@type {Function}*/ (NeitherInInterface));

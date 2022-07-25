@@ -9,49 +9,50 @@ let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = false;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = 0;
  }
- /** @return {!Builder} */
+ /** @nodts @return {!Builder} */
  static $create__() {
   Builder.$clinit();
   let $instance = new Builder();
   $instance.$ctor__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder__() {
   this.$ctor__autovalue_DefaultNonEmptyConstructorAutoValue_Builder__();
  }
- /** @override @return {DefaultNonEmptyConstructorAutoValue_Builder} */
+ /** @override @nodts @return {DefaultNonEmptyConstructorAutoValue_Builder} */
  m_setBooleanField__boolean(/** boolean */ booleanField) {
   this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = booleanField;
   this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = $Primitives.narrowIntToByte(this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ | 1);
   return this;
  }
- /** @override @return {DefaultNonEmptyConstructorAutoValue} */
+ /** @override @nodts @return {DefaultNonEmptyConstructorAutoValue} */
  m_build__() {
   if (this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ != 1) {
    throw $Exceptions.toJs(IllegalStateException.$create__());
   }
   return DefaultNonEmptyConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_);
  }
- 
+ /** @nodts */
  static $clinit() {
   Builder.$clinit = () =>{};
   Builder.$loadModules();
   DefaultNonEmptyConstructorAutoValue_Builder.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Builder;
  }
  
+ /** @nodts */
  static $loadModules() {
   DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');

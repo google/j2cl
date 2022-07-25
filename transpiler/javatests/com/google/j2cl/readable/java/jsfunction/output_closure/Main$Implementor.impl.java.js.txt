@@ -8,18 +8,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {ApiWithMethodReturningParametricJsFunction}
  */
 class Implementor extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Implementor} */
+ /** @nodts @return {!Implementor} */
  static $create__() {
   Implementor.$clinit();
   let $instance = new Implementor();
   $instance.$ctor__jsfunction_Main_Implementor__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsfunction_Main_Implementor__() {
   this.$ctor__java_lang_Object__();
  }
@@ -28,21 +28,22 @@ class Implementor extends j_l_Object {
   return /**@type {?function(T):void}*/ (null);
  }
  //Bridge method.
- /** @override @template T @return {?function(T):void} */
+ /** @override @nodts @template T @return {?function(T):void} */
  m_anApi__() {
   return this.anApi();
  }
- 
+ /** @nodts */
  static $clinit() {
   Implementor.$clinit = () =>{};
   Implementor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Implementor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 ApiWithMethodReturningParametricJsFunction.$markImplementor(Implementor);

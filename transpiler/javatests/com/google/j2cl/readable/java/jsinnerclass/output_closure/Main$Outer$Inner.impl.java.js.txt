@@ -10,13 +10,13 @@ class Inner extends j_l_Object {
  constructor(/** Outer */ $outer_this) {
   Inner.$clinit();
   super();
-  /**@type {Outer}*/
+  /**@type {Outer} @nodts*/
   this.$outer_this__jsinnerclass_Main_Outer_Inner;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_b__jsinnerclass_Main_Outer_Inner_ = 0;
   this.$ctor__jsinnerclass_Main_Outer_Inner__jsinnerclass_Main_Outer($outer_this);
  }
- 
+ /** @nodts */
  $ctor__jsinnerclass_Main_Outer_Inner__jsinnerclass_Main_Outer(/** Outer */ $outer_this) {
   this.$outer_this__jsinnerclass_Main_Outer_Inner = $outer_this;
   this.$ctor__java_lang_Object__();
@@ -26,17 +26,18 @@ class Inner extends j_l_Object {
  getB() {
   return this.f_b__jsinnerclass_Main_Outer_Inner_;
  }
- 
+ /** @nodts */
  static $clinit() {
   Inner.$clinit = () =>{};
   Inner.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Inner;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Inner, 'jsinnerclass.Main$Outer$Inner');

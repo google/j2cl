@@ -21,26 +21,27 @@ class DeprecatedExample extends j_l_Object {
  }
  /** @deprecated */
  deprecatedInstanceMethod(/** ?string */ someArg) {}
- /** @deprecated */
+ /** @nodts @deprecated */
  $ctor__deprecated_DeprecatedExample__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_deprecated_DeprecatedExample();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_deprecated_DeprecatedExample() {
   this.deprecatedInstanceField = 'deprecated field';
  }
- 
+ /** @nodts */
  static $clinit() {
   DeprecatedExample.$clinit = () =>{};
   DeprecatedExample.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof DeprecatedExample;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 /**@const {?string} @deprecated*/

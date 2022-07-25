@@ -10,18 +10,18 @@ let FunctionImpl = goog.forwardDeclare('libraryinfo.Main.FunctionImpl$impl');
 let MyJsType = goog.forwardDeclare('libraryinfo.Main.MyJsType$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__libraryinfo_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__libraryinfo_Main__() {
   this.$ctor__java_lang_Object__();
  }
@@ -37,7 +37,7 @@ class Main extends j_l_Object {
   new MyJsType();
   $1.$create__();
  }
- 
+ /** @nodts */
  m_execute___$p_libraryinfo_Main() {
   console.log('Foo');
  }
@@ -52,26 +52,27 @@ class Main extends j_l_Object {
   foo.m_instanceMethod___$pp_libraryinfo();
   let clazz = Class.$get(Foo);
  }
- /** @return {?string} */
+ /** @nodts @return {?string} */
  static get f_STATIC_FIELD__libraryinfo_Main() {
   return (Main.$clinit(), Main.$static_STATIC_FIELD__libraryinfo_Main);
  }
- 
+ /** @nodts */
  static set f_STATIC_FIELD__libraryinfo_Main(/** ?string */ value) {
   (Main.$clinit(), Main.$static_STATIC_FIELD__libraryinfo_Main = value);
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
   Main.$static_STATIC_FIELD__libraryinfo_Main = 'STATIC_FIELD';
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   Class = goog.module.get('java.lang.Class$impl');
   $1 = goog.module.get('libraryinfo.Main.$1$impl');
@@ -80,9 +81,9 @@ class Main extends j_l_Object {
   MyJsType = goog.module.get('libraryinfo.Main.MyJsType$impl');
  }
 }
-/**@private {?string}*/
+/**@private {?string} @nodts*/
 Main.$static_STATIC_FIELD__libraryinfo_Main;
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 Main.f_CONSTANT__libraryinfo_Main = 'STATIC_FIELD';
 /**@const {?string}*/
 Main.JS_CONSTANT = 'STATIC_FIELD';

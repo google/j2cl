@@ -7,41 +7,42 @@ let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
 let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
 
 class CharSequenceCalls extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!CharSequenceCalls} */
+ /** @nodts @return {!CharSequenceCalls} */
  static $create__() {
   CharSequenceCalls.$clinit();
   let $instance = new CharSequenceCalls();
   $instance.$ctor__devirtualizedcalls_CharSequenceCalls__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__devirtualizedcalls_CharSequenceCalls__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__java_lang_CharSequence(/** (CharSequence|string) */ cs) {
   $CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);
  }
- 
+ /** @nodts */
  m_main__() {
   let s = 's';
   this.m_test__java_lang_CharSequence(s);
  }
- 
+ /** @nodts */
  static $clinit() {
   CharSequenceCalls.$clinit = () =>{};
   CharSequenceCalls.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof CharSequenceCalls;
  }
  
+ /** @nodts */
  static $loadModules() {
   $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
  }

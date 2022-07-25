@@ -9,35 +9,36 @@ let KTopLevel = goog.forwardDeclare('nativekttypes.nativekt.KTopLevel$impl');
  * @template I, O
  */
 class KInner extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {KTopLevel<O>}*/
+  /**@type {KTopLevel<O>} @nodts*/
   this.$outer_this__nativekttypes_nativekt_KTopLevel_KInner;
  }
- /** @template I, O @return {!KInner<I, O>} */
+ /** @nodts @template I, O @return {!KInner<I, O>} */
  static $create__nativekttypes_nativekt_KTopLevel__java_lang_Object(/** KTopLevel<O> */ $outer_this, /** I */ i) {
   KInner.$clinit();
   let $instance = new KInner();
   $instance.$ctor__nativekttypes_nativekt_KTopLevel_KInner__nativekttypes_nativekt_KTopLevel__java_lang_Object($outer_this, i);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_nativekt_KTopLevel_KInner__nativekttypes_nativekt_KTopLevel__java_lang_Object(/** KTopLevel<O> */ $outer_this, /** I */ i) {
   this.$outer_this__nativekttypes_nativekt_KTopLevel_KInner = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   KInner.$clinit = () =>{};
   KInner.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof KInner;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(KInner, 'nativekttypes.nativekt.KTopLevel$KInner');

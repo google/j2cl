@@ -7,11 +7,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class NonNullableTemplate {
- /** @abstract @return {T} */
+ /** @abstract @nodts @return {T} */
  m_get__() {}
- /** @abstract @return {Array<T>} */
+ /** @abstract @nodts @return {Array<T>} */
  m_getArray__() {}
- 
+ /** @nodts */
  static $clinit() {
   NonNullableTemplate.$clinit = () =>{};
   NonNullableTemplate.$loadModules();
@@ -20,11 +20,12 @@ class NonNullableTemplate {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__jsnonnull_Main_NonNullableTemplate = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__jsnonnull_Main_NonNullableTemplate;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 NonNullableTemplate.$markImplementor(/**@type {Function}*/ (NonNullableTemplate));

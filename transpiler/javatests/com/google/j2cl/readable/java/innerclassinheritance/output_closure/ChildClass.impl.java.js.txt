@@ -6,40 +6,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $1LocalClass = goog.forwardDeclare('innerclassinheritance.ChildClass.$1LocalClass$impl');
 
 class ChildClass extends ParentOuter {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fieldInOuter__innerclassinheritance_ChildClass = 0;
  }
- /** @return {!ChildClass} */
+ /** @nodts @return {!ChildClass} */
  static $create__() {
   ChildClass.$clinit();
   let $instance = new ChildClass();
   $instance.$ctor__innerclassinheritance_ChildClass__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinheritance_ChildClass__() {
   this.$ctor__innerclassinheritance_ParentOuter__();
  }
- 
+ /** @nodts */
  m_funInOuter__() {}
- 
+ /** @nodts */
  m_testLocalClass__() {
   $1LocalClass.$create__innerclassinheritance_ChildClass(this).m_test__();
  }
- 
+ /** @nodts */
  static $clinit() {
   ChildClass.$clinit = () =>{};
   ChildClass.$loadModules();
   ParentOuter.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ChildClass;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1LocalClass = goog.module.get('innerclassinheritance.ChildClass.$1LocalClass$impl');
  }

@@ -15,22 +15,22 @@ let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 class NumberCalls extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!NumberCalls} */
+ /** @nodts @return {!NumberCalls} */
  static $create__() {
   NumberCalls.$clinit();
   let $instance = new NumberCalls();
   $instance.$ctor__devirtualizedcalls_NumberCalls__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__devirtualizedcalls_NumberCalls__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_main__() {
   let i = Integer.$create__int(1);
   $Numbers.m_byteValue__java_lang_Number(i);
@@ -121,17 +121,18 @@ class NumberCalls extends j_l_Object {
   let bool = Boolean.$create__boolean(true);
   Boolean.m_booleanValue__java_lang_Boolean(bool);
  }
- 
+ /** @nodts */
  static $clinit() {
   NumberCalls.$clinit = () =>{};
   NumberCalls.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NumberCalls;
  }
  
+ /** @nodts */
  static $loadModules() {
   Boolean = goog.module.get('java.lang.Boolean$impl');
   Byte = goog.module.get('java.lang.Byte$impl');

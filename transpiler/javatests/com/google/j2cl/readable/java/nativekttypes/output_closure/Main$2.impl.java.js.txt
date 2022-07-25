@@ -10,37 +10,38 @@ let Main = goog.forwardDeclare('nativekttypes.Main$impl');
  * @implements {NativeFunctionalInterface}
  */
 class $2 extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__nativekttypes_Main_2;
  }
- /** @return {!$2} */
+ /** @nodts @return {!$2} */
  static $create__nativekttypes_Main(/** Main */ $outer_this) {
   $2.$clinit();
   let $instance = new $2();
   $instance.$ctor__nativekttypes_Main_2__nativekttypes_Main($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nativekttypes_Main_2__nativekttypes_Main(/** Main */ $outer_this) {
   this.$outer_this__nativekttypes_Main_2 = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- /** @override */
+ /** @override @nodts */
  m_run__() {}
- 
+ /** @nodts */
  static $clinit() {
   $2.$clinit = () =>{};
   $2.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $2;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 NativeFunctionalInterface.$markImplementor($2);

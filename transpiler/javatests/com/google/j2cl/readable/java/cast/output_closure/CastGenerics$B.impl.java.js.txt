@@ -8,14 +8,14 @@ let $LambdaAdaptor = goog.forwardDeclare('cast.CastGenerics.B.$LambdaAdaptor$imp
  * @interface
  */
 class B {
- /** @abstract */
+ /** @abstract @nodts */
  m_mB__() {}
- /** @return {B} */
+ /** @nodts @return {B} */
  static $adapt(/** ?function():void */ fn) {
   B.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   B.$clinit = () =>{};
   B.$loadModules();
@@ -24,11 +24,12 @@ class B {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__cast_CastGenerics_B = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__cast_CastGenerics_B;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('cast.CastGenerics.B.$LambdaAdaptor$impl');
  }

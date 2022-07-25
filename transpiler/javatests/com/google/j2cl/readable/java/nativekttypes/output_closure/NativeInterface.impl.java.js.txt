@@ -7,15 +7,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template S
  */
 class NativeInterface {
- /** @abstract @return {number} */
+ /** @abstract @nodts @return {number} */
  m_interfaceMethod__java_lang_Object(/** S */ s) {}
- /** @abstract @return {number} */
+ /** @abstract @nodts @return {number} */
  m_interfaceMethodToRename__java_lang_Object(/** S */ s) {}
- /** @abstract @return {number} */
+ /** @abstract @nodts @return {number} */
  m_getInterfaceMethodAsProperty__() {}
- /** @abstract @return {number} */
+ /** @abstract @nodts @return {number} */
  m_interfaceMethodToRenameAsProperty__() {}
- 
+ /** @nodts */
  static $clinit() {
   NativeInterface.$clinit = () =>{};
   NativeInterface.$loadModules();
@@ -24,11 +24,12 @@ class NativeInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__nativekttypes_NativeInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__nativekttypes_NativeInterface;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 NativeInterface.$markImplementor(/**@type {Function}*/ (NativeInterface));

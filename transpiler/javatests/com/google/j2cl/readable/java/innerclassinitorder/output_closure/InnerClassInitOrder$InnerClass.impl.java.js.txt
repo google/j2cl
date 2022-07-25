@@ -7,45 +7,46 @@ let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassIni
 let $1ReallyInnerClass = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.InnerClass.$1ReallyInnerClass$impl');
 
 class InnerClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {InnerClassInitOrder}*/
+  /**@type {InnerClassInitOrder} @nodts*/
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass;
  }
- /** @return {!InnerClass} */
+ /** @nodts @return {!InnerClass} */
  static $create__innerclassinitorder_InnerClassInitOrder(/** InnerClassInitOrder */ $outer_this) {
   InnerClass.$clinit();
   let $instance = new InnerClass();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder_InnerClass__innerclassinitorder_InnerClassInitOrder($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_InnerClass__innerclassinitorder_InnerClassInitOrder(/** InnerClassInitOrder */ $outer_this) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass = $outer_this;
   this.$ctor__java_lang_Object__();
   this.$init___$p_innerclassinitorder_InnerClassInitOrder_InnerClass();
  }
- 
+ /** @nodts */
  m_callInner___$pp_innerclassinitorder() {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass.f_number__innerclassinitorder_InnerClassInitOrder = this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass.f_number__innerclassinitorder_InnerClassInitOrder + 1 | 0;
   $1ReallyInnerClass.$create__innerclassinitorder_InnerClassInitOrder_InnerClass(this);
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_innerclassinitorder_InnerClassInitOrder_InnerClass() {
   this.m_callInner___$pp_innerclassinitorder();
  }
- 
+ /** @nodts */
  static $clinit() {
   InnerClass.$clinit = () =>{};
   InnerClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InnerClass;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1ReallyInnerClass = goog.module.get('innerclassinitorder.InnerClassInitOrder.InnerClass.$1ReallyInnerClass$impl');
  }

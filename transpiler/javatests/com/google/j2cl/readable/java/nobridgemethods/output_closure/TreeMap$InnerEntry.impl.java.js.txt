@@ -9,32 +9,33 @@ const Entry = goog.require('nobridgemethods.Entry$impl');
  * @implements {Entry<K>}
  */
 class InnerEntry extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template K @return {!InnerEntry<K>} */
+ /** @nodts @template K @return {!InnerEntry<K>} */
  static $create__() {
   InnerEntry.$clinit();
   let $instance = new InnerEntry();
   $instance.$ctor__nobridgemethods_TreeMap_InnerEntry__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nobridgemethods_TreeMap_InnerEntry__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   InnerEntry.$clinit = () =>{};
   InnerEntry.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InnerEntry;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Entry.$markImplementor(InnerEntry);

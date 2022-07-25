@@ -9,34 +9,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {I<T>}
  */
 class TemplatedSubtype extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!TemplatedSubtype<T>} */
+ /** @nodts @template T @return {!TemplatedSubtype<T>} */
  static $create__() {
   TemplatedSubtype.$clinit();
   let $instance = new TemplatedSubtype();
   $instance.$ctor__jsoptional_Main_TemplatedSubtype__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsoptional_Main_TemplatedSubtype__() {
   this.$ctor__java_lang_Object__();
  }
  /** @override */
  m(/** T */ t, /** *= */ o) {}
- 
+ /** @nodts */
  static $clinit() {
   TemplatedSubtype.$clinit = () =>{};
   TemplatedSubtype.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof TemplatedSubtype;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor(TemplatedSubtype);

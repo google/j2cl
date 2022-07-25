@@ -6,36 +6,37 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ESInner = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
 
 class ESOuter extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!ESOuter} */
+ /** @nodts @return {!ESOuter} */
  static $create__() {
   ESOuter.$clinit();
   let $instance = new ESOuter();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder_ESOuter__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_ESOuter__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {ESInner} */
+ /** @nodts @return {ESInner} */
  m_newESInner__() {
   return ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(this);
  }
- 
+ /** @nodts */
  static $clinit() {
   ESOuter.$clinit = () =>{};
   ESOuter.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ESOuter;
  }
  
+ /** @nodts */
  static $loadModules() {
   ESInner = goog.module.get('innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
  }

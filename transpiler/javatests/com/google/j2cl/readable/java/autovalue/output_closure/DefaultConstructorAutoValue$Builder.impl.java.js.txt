@@ -9,49 +9,50 @@ let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class Builder extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = false;
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_set$0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = 0;
  }
- /** @return {!Builder} */
+ /** @nodts @return {!Builder} */
  static $create__() {
   Builder.$clinit();
   let $instance = new Builder();
   $instance.$ctor__autovalue_DefaultConstructorAutoValue_Builder__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_DefaultConstructorAutoValue_Builder__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {Builder} */
+ /** @nodts @return {Builder} */
  m_setBooleanField__boolean_$pp_autovalue(/** boolean */ booleanField) {
   this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = booleanField;
   this.f_set$0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = $Primitives.narrowIntToByte(this.f_set$0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ | 1);
   return this;
  }
- /** @return {DefaultConstructorAutoValue} */
+ /** @nodts @return {DefaultConstructorAutoValue} */
  m_build__() {
   if (this.f_set$0__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ != 1) {
    throw $Exceptions.toJs(IllegalStateException.$create__());
   }
   return DefaultConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_);
  }
- 
+ /** @nodts */
  static $clinit() {
   Builder.$clinit = () =>{};
   Builder.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Builder;
  }
  
+ /** @nodts */
  static $loadModules() {
   DefaultConstructorAutoValue = goog.module.get('autovalue.DefaultConstructorAutoValue$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');

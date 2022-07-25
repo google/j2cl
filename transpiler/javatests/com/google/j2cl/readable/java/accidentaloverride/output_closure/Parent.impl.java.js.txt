@@ -9,34 +9,35 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
  * @template T
  */
 class Parent extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!Parent<T>} */
+ /** @nodts @template T @return {!Parent<T>} */
  static $create__() {
   Parent.$clinit();
   let $instance = new Parent();
   $instance.$ctor__accidentaloverride_Parent__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__accidentaloverride_Parent__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_foo__java_lang_Error(/** T */ e) {}
- 
+ /** @nodts */
  static $clinit() {
   Parent.$clinit = () =>{};
   Parent.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Parent;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Parent, 'accidentaloverride.Parent');

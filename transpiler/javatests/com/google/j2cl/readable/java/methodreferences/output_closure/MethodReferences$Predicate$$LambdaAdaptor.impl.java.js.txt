@@ -9,35 +9,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Predicate<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(T):boolean */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(T):boolean}*/
+  /**@type {?function(T):boolean} @nodts*/
   this.f_fn__methodreferences_MethodReferences_Predicate_$LambdaAdaptor;
   this.$ctor__methodreferences_MethodReferences_Predicate_$LambdaAdaptor__methodreferences_MethodReferences_Predicate_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__methodreferences_MethodReferences_Predicate_$LambdaAdaptor__methodreferences_MethodReferences_Predicate_$JsFunction(/** ?function(T):boolean */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__methodreferences_MethodReferences_Predicate_$LambdaAdaptor = fn;
  }
- /** @override @return {boolean} */
+ /** @override @nodts @return {boolean} */
  m_apply__java_lang_Object(/** T */ arg0) {
   let /** ?function(T):boolean */ $function;
   return ($function = this.f_fn__methodreferences_MethodReferences_Predicate_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Predicate.$markImplementor($LambdaAdaptor);

@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('jsasync.Main.BaseInterface.$LambdaAdap
  * @interface
  */
 class BaseInterface {
- /** @abstract @return {IThenable<Integer>} */
+ /** @abstract @nodts @return {IThenable<Integer>} */
  m_asyncCall__() {}
- /** @return {BaseInterface} */
+ /** @nodts @return {BaseInterface} */
  static $adapt(/** ?function():IThenable<Integer> */ fn) {
   BaseInterface.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   BaseInterface.$clinit = () =>{};
   BaseInterface.$loadModules();
@@ -25,11 +25,12 @@ class BaseInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__jsasync_Main_BaseInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__jsasync_Main_BaseInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('jsasync.Main.BaseInterface.$LambdaAdaptor$impl');
  }

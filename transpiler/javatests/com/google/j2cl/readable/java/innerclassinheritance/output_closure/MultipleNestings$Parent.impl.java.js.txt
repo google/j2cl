@@ -6,37 +6,38 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let MultipleNestings = goog.forwardDeclare('innerclassinheritance.MultipleNestings$impl');
 
 class Parent extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {MultipleNestings}*/
+  /**@type {MultipleNestings} @nodts*/
   this.$outer_this__innerclassinheritance_MultipleNestings_Parent;
  }
- /** @return {!Parent} */
+ /** @nodts @return {!Parent} */
  static $create__innerclassinheritance_MultipleNestings(/** MultipleNestings */ $outer_this) {
   Parent.$clinit();
   let $instance = new Parent();
   $instance.$ctor__innerclassinheritance_MultipleNestings_Parent__innerclassinheritance_MultipleNestings($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinheritance_MultipleNestings_Parent__innerclassinheritance_MultipleNestings(/** MultipleNestings */ $outer_this) {
   this.$outer_this__innerclassinheritance_MultipleNestings_Parent = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_fun__() {}
- 
+ /** @nodts */
  static $clinit() {
   Parent.$clinit = () =>{};
   Parent.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Parent;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Parent, 'innerclassinheritance.MultipleNestings$Parent');

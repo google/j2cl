@@ -8,9 +8,9 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {Annotation}
  */
 class Foo {
- /** @abstract @return {number} */
+ /** @abstract @nodts @return {number} */
  m_bar__() {}
- 
+ /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
   Foo.$loadModules();
@@ -20,14 +20,15 @@ class Foo {
   Annotation.$markImplementor(ctor);
   ctor.prototype.$implements__annotation_Main_Foo = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__annotation_Main_Foo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
-/**@const {number}*/
+/**@const {number} @nodts*/
 Foo.f_CONSTANT__annotation_Main_Foo = 123;
 Foo.$markImplementor(/**@type {Function}*/ (Foo));
 $Util.$setClassMetadataForInterface(Foo, 'annotation.Main$Foo');

@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.Functional.$LambdaAdap
  * @template T
  */
 class Functional {
- /** @abstract @return {Functional<T>} */
+ /** @abstract @nodts @return {Functional<T>} */
  m_wrap__lambdas_Lambdas_Functional(/** Functional<T> */ f) {}
- /** @template T @return {Functional<T>} */
+ /** @nodts @template T @return {Functional<T>} */
  static $adapt(/** ?function(Functional<T>):Functional<T> */ fn) {
   Functional.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   Functional.$clinit = () =>{};
   Functional.$loadModules();
@@ -25,11 +25,12 @@ class Functional {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__lambdas_Lambdas_Functional = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__lambdas_Lambdas_Functional;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('lambdas.Lambdas.Functional.$LambdaAdaptor$impl');
  }

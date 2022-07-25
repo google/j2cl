@@ -4,39 +4,40 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Outer extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_value__innerclassinitorder_InnerClassInitOrder_Outer = 0;
  }
- /** @return {!Outer} */
+ /** @nodts @return {!Outer} */
  static $create__int(/** number */ i) {
   Outer.$clinit();
   let $instance = new Outer();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder_Outer__int(i);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_Outer__int(/** number */ i) {
   this.$ctor__java_lang_Object__();
   this.f_value__innerclassinitorder_InnerClassInitOrder_Outer = i;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_checkDispatch__() {
   return 1;
  }
- 
+ /** @nodts */
  static $clinit() {
   Outer.$clinit = () =>{};
   Outer.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Outer;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Outer, 'innerclassinitorder.InnerClassInitOrder$Outer');

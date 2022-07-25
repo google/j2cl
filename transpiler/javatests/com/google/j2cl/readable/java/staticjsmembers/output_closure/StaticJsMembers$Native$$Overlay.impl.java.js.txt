@@ -4,17 +4,19 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare('foo.Bar');
 
+/** @nodts */
 class $Overlay {
- 
+ /** @nodts */
  static $clinit() {
   $Overlay.$clinit = () =>{};
   $Overlay.$loadModules();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Object;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata($Overlay, 'Object');

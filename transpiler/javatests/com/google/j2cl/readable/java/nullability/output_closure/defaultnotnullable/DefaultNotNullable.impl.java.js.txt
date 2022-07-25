@@ -9,56 +9,56 @@ let List = goog.forwardDeclare('java.util.List$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class DefaultNotNullable extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {string}*/
+  /**@type {string} @nodts*/
   this.f_f1__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_f2__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {?string}*/
+  /**@type {?string} @nodts*/
   this.f_f3__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {!List<string>}*/
+  /**@type {!List<string>} @nodts*/
   this.f_f4__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {List<string>}*/
+  /**@type {List<string>} @nodts*/
   this.f_f5__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {!List<?string>}*/
+  /**@type {!List<?string>} @nodts*/
   this.f_f6__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {List<?string>}*/
+  /**@type {List<?string>} @nodts*/
   this.f_f7__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {!Array<string>}*/
+  /**@type {!Array<string>} @nodts*/
   this.f_f8__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {!Array<?string>}*/
+  /**@type {!Array<?string>} @nodts*/
   this.f_f9__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {Array<string>}*/
+  /**@type {Array<string>} @nodts*/
   this.f_f10__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {?void}*/
+  /**@type {?void} @nodts*/
   this.f_f11__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {!*}*/
+  /**@type {!*} @nodts*/
   this.f_f12__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {!*}*/
+  /**@type {!*} @nodts*/
   this.f_f13__nullability_defaultnotnullable_DefaultNotNullable_;
-  /**@type {*}*/
+  /**@type {*} @nodts*/
   this.f_f14__nullability_defaultnotnullable_DefaultNotNullable_;
  }
- /** @return {!DefaultNotNullable} */
+ /** @nodts @return {!DefaultNotNullable} */
  static $create__() {
   DefaultNotNullable.$clinit();
   let $instance = new DefaultNotNullable();
   $instance.$ctor__nullability_defaultnotnullable_DefaultNotNullable__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nullability_defaultnotnullable_DefaultNotNullable__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_nullability_defaultnotnullable_DefaultNotNullable();
   this.f_f13__nullability_defaultnotnullable_DefaultNotNullable_ = j_l_Object.$create__();
  }
- /** @return {string} */
+ /** @nodts @return {string} */
  m_m1__java_lang_String__java_util_List(/** string */ a, /** !List<number> */ b) {
   return '';
  }
- /** @return {?string} */
+ /** @nodts @return {?string} */
  m_m2__java_lang_String__java_util_List(/** ?string */ a, /** !List<?number> */ b) {
   return null;
  }
@@ -66,11 +66,11 @@ class DefaultNotNullable extends j_l_Object {
  m3(.../** ...string */ args) {
   $Arrays.$stampType(args, j_l_String, 1);
  }
- /** @template T */
+ /** @nodts @template T */
  m_methodWithNullableBound___$pp_nullability_defaultnotnullable() {}
- /** @template T */
+ /** @nodts @template T */
  m_methodWithNonNullableBound___$pp_nullability_defaultnotnullable() {}
- /** @private */
+ /** @private @nodts */
  $init___$p_nullability_defaultnotnullable_DefaultNotNullable() {
   this.f_f1__nullability_defaultnotnullable_DefaultNotNullable_ = 'Hello';
   this.f_f2__nullability_defaultnotnullable_DefaultNotNullable_ = null;
@@ -85,17 +85,18 @@ class DefaultNotNullable extends j_l_Object {
   this.f_f11__nullability_defaultnotnullable_DefaultNotNullable_ = null;
   this.f_f12__nullability_defaultnotnullable_DefaultNotNullable_ = j_l_Object.$create__();
  }
- 
+ /** @nodts */
  static $clinit() {
   DefaultNotNullable.$clinit = () =>{};
   DefaultNotNullable.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof DefaultNotNullable;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');

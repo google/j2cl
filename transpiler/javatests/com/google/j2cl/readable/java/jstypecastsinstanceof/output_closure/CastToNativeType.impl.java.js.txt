@@ -10,22 +10,22 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class CastToNativeType extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!CastToNativeType} */
+ /** @nodts @return {!CastToNativeType} */
  static $create__() {
   CastToNativeType.$clinit();
   let $instance = new CastToNativeType();
   $instance.$ctor__jstypecastsinstanceof_CastToNativeType__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jstypecastsinstanceof_CastToNativeType__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   let a = new NativeJsType();
   let b = /**@type {NativeJsType}*/ ($Casts.$to(a, $Overlay));
@@ -39,17 +39,18 @@ class CastToNativeType extends j_l_Object {
   let h = /**@type {Array<Object<?string, *>>}*/ ($Arrays.$castToNative(a));
   c = $Arrays.$instanceIsOfNative(a);
  }
- 
+ /** @nodts */
  static $clinit() {
   CastToNativeType.$clinit = () =>{};
   CastToNativeType.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof CastToNativeType;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Overlay = goog.module.get('jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
   NativeObject_$Overlay = goog.module.get('jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');

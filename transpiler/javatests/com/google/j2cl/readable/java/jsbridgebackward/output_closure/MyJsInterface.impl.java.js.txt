@@ -10,12 +10,12 @@ let $LambdaAdaptor = goog.forwardDeclare('jsbridgebackward.MyJsInterface.$Lambda
 class MyJsInterface {
  /** @abstract @return {number} */
  foo(/** number */ a) {}
- /** @return {MyJsInterface} */
+ /** @nodts @return {MyJsInterface} */
  static $adapt(/** ?function(number):number */ fn) {
   MyJsInterface.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   MyJsInterface.$clinit = () =>{};
   MyJsInterface.$loadModules();
@@ -24,11 +24,12 @@ class MyJsInterface {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__jsbridgebackward_MyJsInterface = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__jsbridgebackward_MyJsInterface;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('jsbridgebackward.MyJsInterface.$LambdaAdaptor$impl');
  }

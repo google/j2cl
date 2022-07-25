@@ -9,42 +9,43 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
  * @template T, S
  */
 class SimpleGenericType extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {T}*/
+  /**@type {T} @nodts*/
   this.f_first__simplegenerictype_SimpleGenericType;
-  /**@type {S}*/
+  /**@type {S} @nodts*/
   this.f_second__simplegenerictype_SimpleGenericType;
  }
- /** @template T, S @return {!SimpleGenericType<T, S>} */
+ /** @nodts @template T, S @return {!SimpleGenericType<T, S>} */
  static $create__java_lang_Object__java_lang_Object(/** T */ t, /** S */ s) {
   SimpleGenericType.$clinit();
   let $instance = new SimpleGenericType();
   $instance.$ctor__simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object(t, s);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object(/** T */ t, /** S */ s) {
   this.$ctor__java_lang_Object__();
   this.f_first__simplegenerictype_SimpleGenericType = t;
   this.f_second__simplegenerictype_SimpleGenericType = s;
  }
- 
+ /** @nodts */
  m_test__() {
   let g = /**@type {!SimpleGenericType<*, Error>}*/ (SimpleGenericType.$create__java_lang_Object__java_lang_Object(j_l_Object.$create__(), Error.$create__()));
  }
- 
+ /** @nodts */
  static $clinit() {
   SimpleGenericType.$clinit = () =>{};
   SimpleGenericType.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SimpleGenericType;
  }
  
+ /** @nodts */
  static $loadModules() {
   Error = goog.module.get('java.lang.Error$impl');
  }

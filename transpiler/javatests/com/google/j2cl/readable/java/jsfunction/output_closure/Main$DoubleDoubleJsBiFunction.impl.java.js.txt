@@ -8,18 +8,18 @@ let Double = goog.forwardDeclare('java.lang.Double$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class DoubleDoubleJsBiFunction extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {function(?number, ?number):?number} */
+ /** @nodts @return {function(?number, ?number):?number} */
  static $create__() {
   DoubleDoubleJsBiFunction.$clinit();
   let $instance = new DoubleDoubleJsBiFunction();
   $instance.$ctor__jsfunction_Main_DoubleDoubleJsBiFunction__();
   return $Util.$makeLambdaFunction(DoubleDoubleJsBiFunction.prototype.m_apply__java_lang_Object__java_lang_Number, $instance, DoubleDoubleJsBiFunction.$copy);
  }
- /** @suppress {invalidCasts} */
+ /** @nodts @suppress {invalidCasts} */
  $ctor__jsfunction_Main_DoubleDoubleJsBiFunction__() {
   this.$ctor__java_lang_Object__();
  }
@@ -33,21 +33,22 @@ class DoubleDoubleJsBiFunction extends j_l_Object {
  m_apply__java_lang_Object__java_lang_Number(/** ?number */ arg0, /** ?number */ arg1) {
   return DoubleDoubleJsBiFunction.m_apply__jsfunction_Main_DoubleDoubleJsBiFunction__java_lang_Double__java_lang_Double(this, /**@type {?number}*/ ($Casts.$to(arg0, Double)), /**@type {?number}*/ ($Casts.$to(arg1, Double)));
  }
- 
+ /** @nodts */
  static $clinit() {
   DoubleDoubleJsBiFunction.$clinit = () =>{};
   DoubleDoubleJsBiFunction.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$is__jsfunction_Main_DoubleDoubleJsBiFunction;
  }
- 
+ /** @nodts */
  static $copy(/** ? */ from, /** ? */ to) {
   to.$is__jsfunction_Main_DoubleDoubleJsBiFunction = true;
  }
  
+ /** @nodts */
  static $loadModules() {
   Double = goog.module.get('java.lang.Double$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

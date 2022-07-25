@@ -9,18 +9,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {G<V>}
  */
 class H extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template V @return {!H<V>} */
+ /** @nodts @template V @return {!H<V>} */
  static $create__() {
   H.$clinit();
   let $instance = new H();
   $instance.$ctor__bridgejsmethod_Main_H__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_H__() {
   this.$ctor__java_lang_Object__();
  }
@@ -29,21 +29,22 @@ class H extends j_l_Object {
   return null;
  }
  //Bridge method.
- /** @override @return {V} */
+ /** @override @nodts @return {V} */
  m_enclose__java_lang_Object(/** V */ arg0) {
   return this.enclose(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   H.$clinit = () =>{};
   H.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof H;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 G.$markImplementor(H);

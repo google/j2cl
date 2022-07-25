@@ -14,7 +14,7 @@ class StaticInterfaceMethodWithVarargs {
   StaticInterfaceMethodWithVarargs.$clinit();
   $Arrays.$stampType(args, $$int, 1);
  }
- 
+ /** @nodts */
  static $clinit() {
   StaticInterfaceMethodWithVarargs.$clinit = () =>{};
   StaticInterfaceMethodWithVarargs.$loadModules();
@@ -23,11 +23,12 @@ class StaticInterfaceMethodWithVarargs {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__jsvarargs_Main_StaticInterfaceMethodWithVarargs = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__jsvarargs_Main_StaticInterfaceMethodWithVarargs;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');

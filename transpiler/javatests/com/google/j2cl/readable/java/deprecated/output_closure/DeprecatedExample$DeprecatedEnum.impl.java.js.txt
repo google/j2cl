@@ -12,17 +12,17 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @deprecated
  */
 class DeprecatedEnum extends Enum {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!DeprecatedEnum} */
+ /** @nodts @return {!DeprecatedEnum} */
  static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
   let $instance = new DeprecatedEnum();
   $instance.$ctor__deprecated_DeprecatedExample_DeprecatedEnum__java_lang_String__int($name, $ordinal);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__deprecated_DeprecatedExample_DeprecatedEnum__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
   this.f_name__java_lang_Enum_ = $name;
   this.f_ordinal__java_lang_Enum_ = $ordinal;
@@ -41,28 +41,29 @@ class DeprecatedEnum extends Enum {
   DeprecatedEnum.$clinit();
   return /**@type {!Array<DeprecatedEnum>}*/ ($Arrays.$init([DeprecatedEnum.A_VALUE], DeprecatedEnum));
  }
- 
+ /** @nodts */
  static $clinit() {
   DeprecatedEnum.$clinit = () =>{};
   DeprecatedEnum.$loadModules();
   Enum.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof DeprecatedEnum;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
-/**@const {number} @deprecated*/
+/**@const {number} @deprecated @nodts*/
 DeprecatedEnum.$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum = 0;
 /**@const {!DeprecatedEnum} @deprecated*/
 DeprecatedEnum.A_VALUE = /**@pureOrBreakMyCode*/ DeprecatedEnum.$create__java_lang_String__int($Util.$makeEnumName('A_VALUE'), DeprecatedEnum.$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum);
-/**@type {Map<?string, !DeprecatedEnum>}*/
+/**@type {Map<?string, !DeprecatedEnum>} @nodts*/
 DeprecatedEnum.f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_;
 $Util.$setClassMetadataForEnum(DeprecatedEnum, 'deprecated.DeprecatedExample$DeprecatedEnum');
 

@@ -4,32 +4,33 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class IntValueHolder extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!IntValueHolder} */
+ /** @nodts @return {!IntValueHolder} */
  static $create__int(/** number */ value) {
   IntValueHolder.$clinit();
   let $instance = new IntValueHolder();
   $instance.$ctor__cast_CastPrimitives_IntValueHolder__int(value);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__cast_CastPrimitives_IntValueHolder__int(/** number */ value) {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   IntValueHolder.$clinit = () =>{};
   IntValueHolder.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof IntValueHolder;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(IntValueHolder, 'cast.CastPrimitives$IntValueHolder');

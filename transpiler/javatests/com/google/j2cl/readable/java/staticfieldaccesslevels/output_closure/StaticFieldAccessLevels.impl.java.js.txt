@@ -4,69 +4,70 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StaticFieldAccessLevels extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!StaticFieldAccessLevels} */
+ /** @nodts @return {!StaticFieldAccessLevels} */
  static $create__() {
   StaticFieldAccessLevels.$clinit();
   let $instance = new StaticFieldAccessLevels();
   $instance.$ctor__staticfieldaccesslevels_StaticFieldAccessLevels__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__staticfieldaccesslevels_StaticFieldAccessLevels__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  m_test__() {
   return StaticFieldAccessLevels.f_b__staticfieldaccesslevels_StaticFieldAccessLevels_ ? StaticFieldAccessLevels.$static_a__staticfieldaccesslevels_StaticFieldAccessLevels : StaticFieldAccessLevels.$static_d__staticfieldaccesslevels_StaticFieldAccessLevels;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static get f_a__staticfieldaccesslevels_StaticFieldAccessLevels() {
   return (StaticFieldAccessLevels.$clinit(), StaticFieldAccessLevels.$static_a__staticfieldaccesslevels_StaticFieldAccessLevels);
  }
- 
+ /** @nodts */
  static set f_a__staticfieldaccesslevels_StaticFieldAccessLevels(/** number */ value) {
   (StaticFieldAccessLevels.$clinit(), StaticFieldAccessLevels.$static_a__staticfieldaccesslevels_StaticFieldAccessLevels = value);
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  static get f_c__staticfieldaccesslevels_StaticFieldAccessLevels() {
   return (StaticFieldAccessLevels.$clinit(), StaticFieldAccessLevels.$static_c__staticfieldaccesslevels_StaticFieldAccessLevels);
  }
- 
+ /** @nodts */
  static set f_c__staticfieldaccesslevels_StaticFieldAccessLevels(/** * */ value) {
   (StaticFieldAccessLevels.$clinit(), StaticFieldAccessLevels.$static_c__staticfieldaccesslevels_StaticFieldAccessLevels = value);
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static get f_d__staticfieldaccesslevels_StaticFieldAccessLevels() {
   return (StaticFieldAccessLevels.$clinit(), StaticFieldAccessLevels.$static_d__staticfieldaccesslevels_StaticFieldAccessLevels);
  }
- 
+ /** @nodts */
  static set f_d__staticfieldaccesslevels_StaticFieldAccessLevels(/** number */ value) {
   (StaticFieldAccessLevels.$clinit(), StaticFieldAccessLevels.$static_d__staticfieldaccesslevels_StaticFieldAccessLevels = value);
  }
- 
+ /** @nodts */
  static $clinit() {
   StaticFieldAccessLevels.$clinit = () =>{};
   StaticFieldAccessLevels.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof StaticFieldAccessLevels;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
-/**@private {number}*/
+/**@private {number} @nodts*/
 StaticFieldAccessLevels.$static_a__staticfieldaccesslevels_StaticFieldAccessLevels = 0;
-/**@type {boolean}*/
+/**@type {boolean} @nodts*/
 StaticFieldAccessLevels.f_b__staticfieldaccesslevels_StaticFieldAccessLevels_ = false;
-/**@private {*}*/
+/**@private {*} @nodts*/
 StaticFieldAccessLevels.$static_c__staticfieldaccesslevels_StaticFieldAccessLevels;
-/**@private {number}*/
+/**@private {number} @nodts*/
 StaticFieldAccessLevels.$static_d__staticfieldaccesslevels_StaticFieldAccessLevels = 0;
 $Util.$setClassMetadata(StaticFieldAccessLevels, 'staticfieldaccesslevels.StaticFieldAccessLevels');
 

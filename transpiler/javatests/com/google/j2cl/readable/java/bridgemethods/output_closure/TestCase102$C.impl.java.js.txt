@@ -10,44 +10,45 @@ let TestCase102 = goog.forwardDeclare('bridgemethods.TestCase102$impl');
  * @extends {B<B1>}
  */
 class C extends B {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {TestCase102}*/
+  /**@type {TestCase102} @nodts*/
   this.$outer_this__bridgemethods_TestCase102_C;
  }
- /** @template B1 @return {!C<B1>} */
+ /** @nodts @template B1 @return {!C<B1>} */
  static $create__bridgemethods_TestCase102(/** TestCase102 */ $outer_this) {
   C.$clinit();
   let $instance = new C();
   $instance.$ctor__bridgemethods_TestCase102_C__bridgemethods_TestCase102($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_TestCase102_C__bridgemethods_TestCase102(/** TestCase102 */ $outer_this) {
   this.$outer_this__bridgemethods_TestCase102_C = $outer_this;
   this.$ctor__bridgemethods_TestCase102_B__();
  }
  /** @override */
  set(/** ?string */ value) {}
- /** @override */
+ /** @override @nodts */
  m_set__java_lang_Object(/** B1 */ value) {}
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_set__java_lang_String(/** ?string */ arg0) {
   this.set(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   C.$clinit = () =>{};
   C.$loadModules();
   B.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof C;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(C, 'bridgemethods.TestCase102$C');

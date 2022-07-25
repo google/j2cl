@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('genericmethod.GenericMethod.Consumer.$
  * @template V
  */
 class Consumer {
- /** @abstract */
+ /** @abstract @nodts */
  m_accept__java_lang_Object(/** V */ v) {}
- /** @template V @return {Consumer<V>} */
+ /** @nodts @template V @return {Consumer<V>} */
  static $adapt(/** ?function(V):void */ fn) {
   Consumer.$clinit();
   return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   Consumer.$clinit = () =>{};
   Consumer.$loadModules();
@@ -25,11 +25,12 @@ class Consumer {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__genericmethod_GenericMethod_Consumer = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__genericmethod_GenericMethod_Consumer;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('genericmethod.GenericMethod.Consumer.$LambdaAdaptor$impl');
  }

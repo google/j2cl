@@ -6,35 +6,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
 
 class S extends R {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_S;
  }
- /** @return {!S} */
+ /** @nodts @return {!S} */
  static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
   S.$clinit();
   let $instance = new S();
   $instance.$ctor__bridgejsmethod_Main_S__bridgejsmethod_Main($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_S__bridgejsmethod_Main(/** Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_S = $outer_this;
   this.$ctor__bridgejsmethod_Main_R__bridgejsmethod_Main($outer_this);
  }
- 
+ /** @nodts */
  static $clinit() {
   S.$clinit = () =>{};
   S.$loadModules();
   R.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof S;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(S, 'bridgejsmethod.Main$S');

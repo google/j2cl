@@ -13,22 +13,22 @@ let L = goog.forwardDeclare('bridgejsmethod.Main.L$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 
 class Main extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Main} */
+ /** @nodts @return {!Main} */
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
   $instance.$ctor__bridgejsmethod_Main__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static m_test__() {
   Main.$clinit();
   let a = /**@type {!A<Integer>}*/ (A.$create__());
@@ -51,17 +51,18 @@ class Main extends j_l_Object {
   let l = /**@type {!L<Integer>}*/ (L.$create__());
   l.fun('foo', Integer.m_valueOf__int(1));
  }
- 
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Main;
  }
  
+ /** @nodts */
  static $loadModules() {
   A = goog.module.get('bridgejsmethod.Main.A$impl');
   B = goog.module.get('bridgejsmethod.Main.B$impl');

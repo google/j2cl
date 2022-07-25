@@ -8,14 +8,14 @@ let $LambdaAdaptor = goog.forwardDeclare('intersectiontype.Setable.$LambdaAdapto
  * @interface
  */
 class Setable {
- /** @abstract */
+ /** @abstract @nodts */
  m_set__int(/** number */ i) {}
- /** @return {Setable} */
+ /** @nodts @return {Setable} */
  static $adapt(/** ?function(number):void */ fn) {
   Setable.$clinit();
   return new $LambdaAdaptor(fn);
  }
- 
+ /** @nodts */
  static $clinit() {
   Setable.$clinit = () =>{};
   Setable.$loadModules();
@@ -24,11 +24,12 @@ class Setable {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__intersectiontype_Setable = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__intersectiontype_Setable;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('intersectiontype.Setable.$LambdaAdaptor$impl');
  }

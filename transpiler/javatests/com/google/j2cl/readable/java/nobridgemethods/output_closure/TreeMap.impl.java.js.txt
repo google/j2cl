@@ -10,36 +10,37 @@ let InnerEntry = goog.forwardDeclare('nobridgemethods.TreeMap.InnerEntry$impl');
  * @extends {Map<K>}
  */
 class TreeMap extends Map {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template K @return {!TreeMap<K>} */
+ /** @nodts @template K @return {!TreeMap<K>} */
  static $create__() {
   TreeMap.$clinit();
   let $instance = new TreeMap();
   $instance.$ctor__nobridgemethods_TreeMap__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nobridgemethods_TreeMap__() {
   this.$ctor__nobridgemethods_Map__();
  }
- /** @override @return {InnerEntry<K>} */
+ /** @override @nodts @return {InnerEntry<K>} */
  m_getCeilingEntry__java_lang_Object(/** K */ key) {
   return /**@type {!InnerEntry<K>}*/ (InnerEntry.$create__());
  }
- 
+ /** @nodts */
  static $clinit() {
   TreeMap.$clinit = () =>{};
   TreeMap.$loadModules();
   Map.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof TreeMap;
  }
  
+ /** @nodts */
  static $loadModules() {
   InnerEntry = goog.module.get('nobridgemethods.TreeMap.InnerEntry$impl');
  }

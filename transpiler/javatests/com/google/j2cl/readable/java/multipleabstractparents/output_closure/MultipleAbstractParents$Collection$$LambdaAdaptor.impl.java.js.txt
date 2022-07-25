@@ -9,35 +9,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Collection<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(T):?string */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(T):?string}*/
+  /**@type {?function(T):?string} @nodts*/
   this.f_fn__multipleabstractparents_MultipleAbstractParents_Collection_$LambdaAdaptor;
   this.$ctor__multipleabstractparents_MultipleAbstractParents_Collection_$LambdaAdaptor__multipleabstractparents_MultipleAbstractParents_Collection_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__multipleabstractparents_MultipleAbstractParents_Collection_$LambdaAdaptor__multipleabstractparents_MultipleAbstractParents_Collection_$JsFunction(/** ?function(T):?string */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__multipleabstractparents_MultipleAbstractParents_Collection_$LambdaAdaptor = fn;
  }
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_getFoo__java_lang_Object(/** T */ arg0) {
   let /** ?function(T):?string */ $function;
   return ($function = this.f_fn__multipleabstractparents_MultipleAbstractParents_Collection_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Collection.$markImplementor($LambdaAdaptor);

@@ -8,7 +8,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {Annotation}
  */
 class Zoo {
- 
+ /** @nodts */
  static $clinit() {
   Zoo.$clinit = () =>{};
   Zoo.$loadModules();
@@ -18,11 +18,12 @@ class Zoo {
   Annotation.$markImplementor(ctor);
   ctor.prototype.$implements__annotation_Main_Zoo = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__annotation_Main_Zoo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Zoo.$markImplementor(/**@type {Function}*/ (Zoo));

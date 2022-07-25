@@ -6,56 +6,57 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Builder = goog.forwardDeclare('autovalue.AutoValueWithBuilder.Builder$impl');
 
 class AutoValueWithBuilder extends ValueType {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {boolean}*/
+  /**@type {boolean} @nodts*/
   this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_ = false;
-  /**@type {?number}*/
+  /**@type {?number} @nodts*/
   this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_;
  }
- /** @return {AutoValueWithBuilder} */
+ /** @nodts @return {AutoValueWithBuilder} */
  static m_create__() {
   AutoValueWithBuilder.$clinit();
   return Builder.$create__().m_setBooleanField__boolean(true).m_build__();
  }
- /** @return {!AutoValueWithBuilder} */
+ /** @nodts @return {!AutoValueWithBuilder} */
  static $create__boolean__java_lang_Double(/** boolean */ booleanField, /** ?number */ nullableField) {
   AutoValueWithBuilder.$clinit();
   let $instance = new AutoValueWithBuilder();
   $instance.$ctor__autovalue_AutoValueWithBuilder__boolean__java_lang_Double(booleanField, nullableField);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_AutoValueWithBuilder__boolean__java_lang_Double(/** boolean */ booleanField, /** ?number */ nullableField) {
   this.$ctor__javaemul_internal_ValueType__();
   this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_ = booleanField;
   this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_ = nullableField;
   $J2CL_PRESERVE$(this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_, this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_);
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  m_getBooleanField__() {
   return this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_;
  }
- /** @return {?number} */
+ /** @nodts @return {?number} */
  m_getNullableField__() {
   return this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_;
  }
- /** @return {Builder} */
+ /** @nodts @return {Builder} */
  m_toBuilder__() {
   return Builder.$create__autovalue_AutoValueWithBuilder(this);
  }
- 
+ /** @nodts */
  static $clinit() {
   AutoValueWithBuilder.$clinit = () =>{};
   AutoValueWithBuilder.$loadModules();
   ValueType.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AutoValueWithBuilder;
  }
  
+ /** @nodts */
  static $loadModules() {
   Builder = goog.module.get('autovalue.AutoValueWithBuilder.Builder$impl');
  }

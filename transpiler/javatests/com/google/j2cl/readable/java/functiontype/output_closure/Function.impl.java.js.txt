@@ -6,7 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class functiontype_Function {
- 
+ /** @nodts */
  static $clinit() {
   functiontype_Function.$clinit = () =>{};
   functiontype_Function.$loadModules();
@@ -15,11 +15,12 @@ class functiontype_Function {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__functiontype_Function = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__functiontype_Function;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 functiontype_Function.$markImplementor(/**@type {Function}*/ (functiontype_Function));

@@ -7,27 +7,28 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @abstract
  */
 class SomeClass extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @abstract @return {?string} */
+ /** @abstract @nodts @return {?string} */
  m_foo__() {}
- 
+ /** @nodts */
  $ctor__anonymousclass_SomeClass__int(/** number */ i) {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   SomeClass.$clinit = () =>{};
   SomeClass.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof SomeClass;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(SomeClass, 'anonymousclass.SomeClass');

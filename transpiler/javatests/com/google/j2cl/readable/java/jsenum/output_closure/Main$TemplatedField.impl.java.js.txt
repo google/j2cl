@@ -7,39 +7,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class TemplatedField extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {T}*/
+  /**@type {T} @nodts*/
   this.f_value__jsenum_Main_TemplatedField;
  }
- /** @template T @return {!TemplatedField<T>} */
+ /** @nodts @template T @return {!TemplatedField<T>} */
  static $create__java_lang_Object(/** T */ value) {
   TemplatedField.$clinit();
   let $instance = new TemplatedField();
   $instance.$ctor__jsenum_Main_TemplatedField__java_lang_Object(value);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsenum_Main_TemplatedField__java_lang_Object(/** T */ value) {
   this.$ctor__java_lang_Object__();
   this.f_value__jsenum_Main_TemplatedField = value;
  }
- /** @return {T} */
+ /** @nodts @return {T} */
  m_getValue___$pp_jsenum() {
   return this.f_value__jsenum_Main_TemplatedField;
  }
- 
+ /** @nodts */
  static $clinit() {
   TemplatedField.$clinit = () =>{};
   TemplatedField.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof TemplatedField;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(TemplatedField, 'jsenum.Main$TemplatedField');

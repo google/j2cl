@@ -11,41 +11,41 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
  * @template T
  */
 class CompileTimeConstant extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@const {number}*/
+  /**@const {number} @nodts*/
   this.f_A2__compiletimeconstant_CompileTimeConstant = 10;
-  /**@const {number}*/
+  /**@const {number} @nodts*/
   this.f_B2__compiletimeconstant_CompileTimeConstant = 20;
-  /**@const {number}*/
+  /**@const {number} @nodts*/
   this.f_C2__compiletimeconstant_CompileTimeConstant = 200;
-  /**@const {?string}*/
+  /**@const {?string} @nodts*/
   this.f_D2__compiletimeconstant_CompileTimeConstant = 'Tur\"tle';
-  /**@const {?string}*/
+  /**@const {?string} @nodts*/
   this.f_E2__compiletimeconstant_CompileTimeConstant = 'Do\"ve';
-  /**@const {?string}*/
+  /**@const {?string} @nodts*/
   this.f_F2__compiletimeconstant_CompileTimeConstant = 'Tur\"tleDo\"ve';
-  /**@const {!$Long}*/
+  /**@const {!$Long} @nodts*/
   this.f_G2__compiletimeconstant_CompileTimeConstant = $Long.fromInt(10000);
-  /**@const {number}*/
+  /**@const {number} @nodts*/
   this.f_H2__compiletimeconstant_CompileTimeConstant = 65 /* 'A' */;
-  /**@const {boolean}*/
+  /**@const {boolean} @nodts*/
   this.f_I2__compiletimeconstant_CompileTimeConstant = true;
  }
- /** @template T @return {!CompileTimeConstant<T>} */
+ /** @nodts @template T @return {!CompileTimeConstant<T>} */
  static $create__() {
   CompileTimeConstant.$clinit();
   let $instance = new CompileTimeConstant();
   $instance.$ctor__compiletimeconstant_CompileTimeConstant__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__compiletimeconstant_CompileTimeConstant__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_compiletimeconstant_CompileTimeConstant();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_compiletimeconstant_CompileTimeConstant() {
   let b = this.f_I2__compiletimeconstant_CompileTimeConstant;
   let s = CompileTimeConstant.f_G__compiletimeconstant_CompileTimeConstant + j_l_String.m_valueOf__java_lang_Object(CompileTimeConstant.f_F__compiletimeconstant_CompileTimeConstant);
@@ -54,19 +54,19 @@ class CompileTimeConstant extends j_l_Object {
   let n = CompileTimeConstant.f_N__compiletimeconstant_CompileTimeConstant;
   let c = CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant;
  }
- /** @return {*} */
+ /** @nodts @return {*} */
  static get f_OBJ__compiletimeconstant_CompileTimeConstant() {
   return (CompileTimeConstant.$clinit(), CompileTimeConstant.$static_OBJ__compiletimeconstant_CompileTimeConstant);
  }
- /** @return {?string} */
+ /** @nodts @return {?string} */
  static get f_K__compiletimeconstant_CompileTimeConstant() {
   return (CompileTimeConstant.$clinit(), CompileTimeConstant.$static_K__compiletimeconstant_CompileTimeConstant);
  }
- /** @return {Class<?>} */
+ /** @nodts @return {Class<?>} */
  static get f_classLiteral__compiletimeconstant_CompileTimeConstant() {
   return (CompileTimeConstant.$clinit(), CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant);
  }
- 
+ /** @nodts */
  static $clinit() {
   CompileTimeConstant.$clinit = () =>{};
   CompileTimeConstant.$loadModules();
@@ -75,47 +75,48 @@ class CompileTimeConstant extends j_l_Object {
   CompileTimeConstant.$static_K__compiletimeconstant_CompileTimeConstant = null;
   CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant = Class.$get(CompileTimeConstant);
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof CompileTimeConstant;
  }
  
+ /** @nodts */
  static $loadModules() {
   Class = goog.module.get('java.lang.Class$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
  }
 }
-/**@private {*}*/
+/**@private {*} @nodts*/
 CompileTimeConstant.$static_OBJ__compiletimeconstant_CompileTimeConstant;
-/**@const {number}*/
+/**@const {number} @nodts*/
 CompileTimeConstant.f_A__compiletimeconstant_CompileTimeConstant = 10;
-/**@const {number}*/
+/**@const {number} @nodts*/
 CompileTimeConstant.f_B__compiletimeconstant_CompileTimeConstant = 20;
-/**@const {number}*/
+/**@const {number} @nodts*/
 CompileTimeConstant.f_C__compiletimeconstant_CompileTimeConstant = 200;
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 CompileTimeConstant.f_D__compiletimeconstant_CompileTimeConstant = 'Tur\"tle';
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 CompileTimeConstant.f_E__compiletimeconstant_CompileTimeConstant = 'Do\'ve';
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 CompileTimeConstant.f_F__compiletimeconstant_CompileTimeConstant = 'Tur\"tleDo\'ve';
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 CompileTimeConstant.f_J__compiletimeconstant_CompileTimeConstant = 'Tur\"tleDo\'veTur\"tleDo\'ve';
-/**@private {?string}*/
+/**@private {?string} @nodts*/
 CompileTimeConstant.$static_K__compiletimeconstant_CompileTimeConstant;
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 CompileTimeConstant.f_L__compiletimeconstant_CompileTimeConstant = 'ThisIsALongString';
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 CompileTimeConstant.f_M__compiletimeconstant_CompileTimeConstant = 'ThisIsALongStringAlso';
-/**@const {?string}*/
+/**@const {?string} @nodts*/
 CompileTimeConstant.f_N__compiletimeconstant_CompileTimeConstant = 'ThisIsALongStringAlsoButLonger';
-/**@const {!$Long}*/
+/**@const {!$Long} @nodts*/
 CompileTimeConstant.f_G__compiletimeconstant_CompileTimeConstant = $Long.fromInt(10000);
-/**@const {number}*/
+/**@const {number} @nodts*/
 CompileTimeConstant.f_H__compiletimeconstant_CompileTimeConstant = 65 /* 'A' */;
-/**@const {boolean}*/
+/**@const {boolean} @nodts*/
 CompileTimeConstant.f_I__compiletimeconstant_CompileTimeConstant = true;
-/**@private {Class<?>}*/
+/**@private {Class<?>} @nodts*/
 CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant;
 $Util.$setClassMetadata(CompileTimeConstant, 'compiletimeconstant.CompileTimeConstant');
 

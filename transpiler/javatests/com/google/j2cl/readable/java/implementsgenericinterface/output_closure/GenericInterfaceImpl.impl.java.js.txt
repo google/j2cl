@@ -10,32 +10,33 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
  * @implements {GenericInterface<(Number|number)>}
  */
 class GenericInterfaceImpl extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!GenericInterfaceImpl} */
+ /** @nodts @return {!GenericInterfaceImpl} */
  static $create__() {
   GenericInterfaceImpl.$clinit();
   let $instance = new GenericInterfaceImpl();
   $instance.$ctor__implementsgenericinterface_GenericInterfaceImpl__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__implementsgenericinterface_GenericInterfaceImpl__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   GenericInterfaceImpl.$clinit = () =>{};
   GenericInterfaceImpl.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof GenericInterfaceImpl;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 GenericInterface.$markImplementor(GenericInterfaceImpl);

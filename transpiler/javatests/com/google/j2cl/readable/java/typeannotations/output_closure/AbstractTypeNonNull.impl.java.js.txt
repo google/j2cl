@@ -13,31 +13,32 @@ let AbstractType = goog.forwardDeclare('typeannotations.AbstractType$impl');
  * @implements {ParametricType<!AbstractType>}
  */
 class AbstractTypeNonNull extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__typeannotations_AbstractTypeNonNull__() {
   this.$ctor__java_lang_Object__();
  }
  //Default method forwarding stub.
- /** @override @return {!List<!AbstractType>} */
+ /** @override @nodts @return {!List<!AbstractType>} */
  m_m__java_util_List(/** !List<!Map<!Array<string>, Map<Array<!List<string>>, !Array<?string>>>> */ arg0) {
   return /**@type {!List<!AbstractType>}*/ (ParametricType.m_m__$default__typeannotations_ParametricType__java_util_List(this, arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   AbstractTypeNonNull.$clinit = () =>{};
   AbstractTypeNonNull.$loadModules();
   j_l_Object.$clinit();
   ParametricType.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AbstractTypeNonNull;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 ParametricType.$markImplementor(AbstractTypeNonNull);

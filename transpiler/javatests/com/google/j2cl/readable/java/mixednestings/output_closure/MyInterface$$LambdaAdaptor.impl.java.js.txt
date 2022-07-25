@@ -8,35 +8,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyInterface}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function(number):number */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function(number):number}*/
+  /**@type {?function(number):number} @nodts*/
   this.f_fn__mixednestings_MyInterface_$LambdaAdaptor;
   this.$ctor__mixednestings_MyInterface_$LambdaAdaptor__mixednestings_MyInterface_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__mixednestings_MyInterface_$LambdaAdaptor__mixednestings_MyInterface_$JsFunction(/** ?function(number):number */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__mixednestings_MyInterface_$LambdaAdaptor = fn;
  }
- /** @override @return {number} */
+ /** @override @nodts @return {number} */
  m_fun__int(/** number */ arg0) {
   let /** ?function(number):number */ $function;
   return ($function = this.f_fn__mixednestings_MyInterface_$LambdaAdaptor, $function(arg0));
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 MyInterface.$markImplementor($LambdaAdaptor);

@@ -10,44 +10,45 @@ let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
  * @template N
  */
 class ParameterizedNullable extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template N @return {!ParameterizedNullable<N>} */
+ /** @nodts @template N @return {!ParameterizedNullable<N>} */
  static $create__() {
   ParameterizedNullable.$clinit();
   let $instance = new ParameterizedNullable();
   $instance.$ctor__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable__() {
   this.$ctor__java_lang_Object__();
  }
- /** @return {N} */
+ /** @nodts @return {N} */
  m_getNullable___$pp_nullability_defaultnotnullable() {
   return null;
  }
- /** @return {N} */
+ /** @nodts @return {N} */
  m_getNonNullable___$pp_nullability_defaultnotnullable() {
   throw $Exceptions.toJs(RuntimeException.$create__());
  }
- /** @return {N} */
+ /** @nodts @return {N} */
  m_getDefaultNullability___$pp_nullability_defaultnotnullable() {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   ParameterizedNullable.$clinit = () =>{};
   ParameterizedNullable.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ParameterizedNullable;
  }
  
+ /** @nodts */
  static $loadModules() {
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');

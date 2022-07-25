@@ -15,22 +15,22 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class TryCatch extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!TryCatch} */
+ /** @nodts @return {!TryCatch} */
  static $create__() {
   TryCatch.$clinit();
   let $instance = new TryCatch();
   $instance.$ctor__trycatch_TryCatch__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__trycatch_TryCatch__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_testMultiCatch__() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
@@ -47,7 +47,7 @@ class TryCatch extends j_l_Object {
    }
   }
  }
- 
+ /** @nodts */
  m_testEmptyThrowableCatch__() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
@@ -59,7 +59,7 @@ class TryCatch extends j_l_Object {
    if (Exception.$isInstance(__$exc_1)) {} else {}
   }
  }
- 
+ /** @nodts */
  m_testEmptyThrowableRethrow__() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
@@ -71,13 +71,13 @@ class TryCatch extends j_l_Object {
    }
   }
  }
- 
+ /** @nodts */
  m_testFinally__() {
   try {
    $Asserts.$assert(true);
   } finally {}
  }
- 
+ /** @nodts */
  m_testTryWithResource__() {
   try {
    let $primaryExc = null;
@@ -108,7 +108,7 @@ class TryCatch extends j_l_Object {
    }
   }
  }
- 
+ /** @nodts */
  m_testTryWithResourceJava9__() {
   let thing = ClosableThing.$create__();
   let thing2 = ClosableThing.$create__();
@@ -141,7 +141,7 @@ class TryCatch extends j_l_Object {
    }
   }
  }
- 
+ /** @nodts */
  m_testTryWithResouceOnStaticField__() {
   try {
    let $primaryExc = null;
@@ -169,7 +169,7 @@ class TryCatch extends j_l_Object {
    }
   }
  }
- 
+ /** @nodts */
  m_testNestedTryCatch__() {
   try {
    throw $Exceptions.toJs(Exception.$create__());
@@ -190,34 +190,35 @@ class TryCatch extends j_l_Object {
    }
   }
  }
- 
+ /** @nodts */
  m_testThrowGenerics__() {
   throw $Exceptions.toJs(/**@type {Exception}*/ ($Casts.$to(this.m_getT__java_lang_Object_$p_trycatch_TryCatch(Exception.$create__()), Exception)));
  }
- /** @template T @return {T} */
+ /** @nodts @template T @return {T} */
  m_getT__java_lang_Object_$p_trycatch_TryCatch(/** T */ t) {
   return t;
  }
- 
+ /** @nodts */
  m_testThrowBoundGenerics__() {
   throw $Exceptions.toJs(this.m_getThrowable___$p_trycatch_TryCatch());
  }
- /** @template T @return {T} */
+ /** @nodts @template T @return {T} */
  m_getThrowable___$p_trycatch_TryCatch() {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   TryCatch.$clinit = () =>{};
   TryCatch.$loadModules();
   j_l_Object.$clinit();
   TryCatch.f_closableThing__trycatch_TryCatch_ = ClosableThing.$create__();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof TryCatch;
  }
  
+ /** @nodts */
  static $loadModules() {
   ClassCastException = goog.module.get('java.lang.ClassCastException$impl');
   Exception = goog.module.get('java.lang.Exception$impl');
@@ -230,7 +231,7 @@ class TryCatch extends j_l_Object {
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
-/**@type {ClosableThing}*/
+/**@type {ClosableThing} @nodts*/
 TryCatch.f_closableThing__trycatch_TryCatch_;
 $Util.$setClassMetadata(TryCatch, 'trycatch.TryCatch');
 

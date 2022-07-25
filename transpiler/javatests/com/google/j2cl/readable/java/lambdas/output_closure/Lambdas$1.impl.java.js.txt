@@ -11,39 +11,40 @@ let Lambdas = goog.forwardDeclare('lambdas.Lambdas$impl');
  * @implements {Functional<T>}
  */
 class $1 extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Lambdas}*/
+  /**@type {Lambdas} @nodts*/
   this.$outer_this__lambdas_Lambdas_1;
  }
- /** @template T @return {!$1<T>} */
+ /** @nodts @template T @return {!$1<T>} */
  static $create__lambdas_Lambdas(/** Lambdas */ $outer_this) {
   $1.$clinit();
   let $instance = new $1();
   $instance.$ctor__lambdas_Lambdas_1__lambdas_Lambdas($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__lambdas_Lambdas_1__lambdas_Lambdas(/** Lambdas */ $outer_this) {
   this.$outer_this__lambdas_Lambdas_1 = $outer_this;
   this.$ctor__java_lang_Object__();
  }
- /** @override @return {Functional<T>} */
+ /** @override @nodts @return {Functional<T>} */
  m_wrap__lambdas_Lambdas_Functional(/** Functional<T> */ f) {
   return null;
  }
- 
+ /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
   $1.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $1;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Functional.$markImplementor($1);

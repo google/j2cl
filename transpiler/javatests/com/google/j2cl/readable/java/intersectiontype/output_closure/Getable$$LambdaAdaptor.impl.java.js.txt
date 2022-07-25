@@ -9,35 +9,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Getable<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function():T */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function():T}*/
+  /**@type {?function():T} @nodts*/
   this.f_fn__intersectiontype_Getable_$LambdaAdaptor;
   this.$ctor__intersectiontype_Getable_$LambdaAdaptor__intersectiontype_Getable_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__intersectiontype_Getable_$LambdaAdaptor__intersectiontype_Getable_$JsFunction(/** ?function():T */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__intersectiontype_Getable_$LambdaAdaptor = fn;
  }
- /** @override @return {T} */
+ /** @override @nodts @return {T} */
  m_get__() {
   let /** ?function():T */ $function;
   return ($function = this.f_fn__intersectiontype_Getable_$LambdaAdaptor, $function());
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 Getable.$markImplementor($LambdaAdaptor);

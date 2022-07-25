@@ -7,35 +7,35 @@ const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 let $Overlay = goog.forwardDeclare('jsfunction.Main.JsFunctionInterface.$Overlay$impl');
 
 class JsFunctionImplementation extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_field__jsfunction_Main_JsFunctionImplementation = 0;
-  /**@type {?function(number):number}*/
+  /**@type {?function(number):number} @nodts*/
   this.f_storedThis__jsfunction_Main_JsFunctionImplementation;
-  /**@type {?function(number):number}*/
+  /**@type {?function(number):number} @nodts*/
   this.f_anotherStoredThis__jsfunction_Main_JsFunctionImplementation;
  }
- /** @return {function(number):number} */
+ /** @nodts @return {function(number):number} */
  static $create__() {
   JsFunctionImplementation.$clinit();
   let $instance = new JsFunctionImplementation();
   $instance.$ctor__jsfunction_Main_JsFunctionImplementation__();
   return $Util.$makeLambdaFunction(JsFunctionImplementation.prototype.m_foo__int, $instance, JsFunctionImplementation.$copy);
  }
- /** @suppress {invalidCasts} */
+ /** @nodts @suppress {invalidCasts} */
  $ctor__jsfunction_Main_JsFunctionImplementation__() {
   this.$ctor__java_lang_Object__();
   this.f_storedThis__jsfunction_Main_JsFunctionImplementation = this;
   this.f_anotherStoredThis__jsfunction_Main_JsFunctionImplementation = /**@type {?function(number):number}*/ (this);
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_bar__jsfunction_Main_JsFunctionImplementation(/** function(number):number */ $thisArg) {
   JsFunctionImplementation.$clinit();
   return 0;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_fun__jsfunction_Main_JsFunctionImplementation(/** function(number):number */ $thisArg) {
   JsFunctionImplementation.$clinit();
   $thisArg.f_field__jsfunction_Main_JsFunctionImplementation = 1;
@@ -45,22 +45,22 @@ class JsFunctionImplementation extends j_l_Object {
  m_foo__int(/** number */ a) {
   return a + JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation(this) + this.f_field__jsfunction_Main_JsFunctionImplementation | 0;
  }
- /** @return {number} */
+ /** @nodts @return {number} */
  static m_overlayMethod__jsfunction_Main_JsFunctionImplementation(/** function(number):number */ $thisArg) {
   JsFunctionImplementation.$clinit();
   return $Overlay.m_overlayMethod__$devirt__jsfunction_Main_JsFunctionInterface($thisArg);
  }
- 
+ /** @nodts */
  static $clinit() {
   JsFunctionImplementation.$clinit = () =>{};
   JsFunctionImplementation.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$is__jsfunction_Main_JsFunctionImplementation;
  }
- 
+ /** @nodts */
  static $copy(/** ? */ from, /** ? */ to) {
   to.f_field__jsfunction_Main_JsFunctionImplementation = from.f_field__jsfunction_Main_JsFunctionImplementation;
   to.f_storedThis__jsfunction_Main_JsFunctionImplementation = from.f_storedThis__jsfunction_Main_JsFunctionImplementation;
@@ -68,6 +68,7 @@ class JsFunctionImplementation extends j_l_Object {
   to.$is__jsfunction_Main_JsFunctionImplementation = true;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Overlay = goog.module.get('jsfunction.Main.JsFunctionInterface.$Overlay$impl');
  }

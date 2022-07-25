@@ -9,14 +9,14 @@ let $LambdaAdaptor = goog.forwardDeclare('nullability.Nullability.NullableTempla
  * @template T
  */
 class NullableTemplatedReturn {
- /** @abstract @return {T} */
+ /** @abstract @nodts @return {T} */
  m_foo__() {}
- /** @template T @return {NullableTemplatedReturn<T>} */
+ /** @nodts @template T @return {NullableTemplatedReturn<T>} */
  static $adapt(/** ?function():T */ fn) {
   NullableTemplatedReturn.$clinit();
   return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   NullableTemplatedReturn.$clinit = () =>{};
   NullableTemplatedReturn.$loadModules();
@@ -25,11 +25,12 @@ class NullableTemplatedReturn {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__nullability_Nullability_NullableTemplatedReturn = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__nullability_Nullability_NullableTemplatedReturn;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('nullability.Nullability.NullableTemplatedReturn.$LambdaAdaptor$impl');
  }

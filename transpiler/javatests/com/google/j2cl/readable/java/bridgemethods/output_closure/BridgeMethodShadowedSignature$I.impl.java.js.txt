@@ -10,14 +10,14 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
  * @template I1
  */
 class I {
- /** @abstract @return {?string} */
+ /** @abstract @nodts @return {?string} */
  m_get__java_util_function_Consumer(/** Consumer<?> */ consumer) {}
- /** @template I1 @return {I<I1>} */
+ /** @nodts @template I1 @return {I<I1>} */
  static $adapt(/** ?function(Consumer<?>):?string */ fn) {
   I.$clinit();
   return /**@type {!$LambdaAdaptor<I1>}*/ (new $LambdaAdaptor(fn));
  }
- 
+ /** @nodts */
  static $clinit() {
   I.$clinit = () =>{};
   I.$loadModules();
@@ -26,11 +26,12 @@ class I {
  static $markImplementor(/** Function */ ctor) {
   ctor.prototype.$implements__bridgemethods_BridgeMethodShadowedSignature_I = true;
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$implements__bridgemethods_BridgeMethodShadowedSignature_I;
  }
  
+ /** @nodts */
  static $loadModules() {
   $LambdaAdaptor = goog.module.get('bridgemethods.BridgeMethodShadowedSignature.I.$LambdaAdaptor$impl');
  }

@@ -11,44 +11,45 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @extends {GrandParent<T>}
  */
 class Parent extends GrandParent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_Parent;
  }
- /** @template T @return {!Parent<T>} */
+ /** @nodts @template T @return {!Parent<T>} */
  static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
   Parent.$clinit();
   let $instance = new Parent();
   $instance.$ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main(/** Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_Parent = $outer_this;
   this.$ctor__bridgejsmethod_Main_GrandParent__bridgejsmethod_Main($outer_this);
  }
  /** @override */
  jsMethod(/** T */ t) {}
- 
+ /** @nodts */
  m_method__bridgejsmethod_Main_Parent(/** T */ t) {}
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_method__java_lang_Object(/** T */ arg0) {
   this.m_method__bridgejsmethod_Main_Parent(/**@type {T}*/ ($Casts.$to(arg0, Parent)));
  }
- 
+ /** @nodts */
  static $clinit() {
   Parent.$clinit = () =>{};
   Parent.$loadModules();
   GrandParent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Parent;
  }
  
+ /** @nodts */
  static $loadModules() {
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

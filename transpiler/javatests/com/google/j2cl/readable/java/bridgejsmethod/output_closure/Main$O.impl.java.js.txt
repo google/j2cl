@@ -7,22 +7,22 @@ let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
 let B = goog.forwardDeclare('bridgejsmethod.Main.B$impl');
 
 class O extends N {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {Main}*/
+  /**@type {Main} @nodts*/
   this.$outer_this__bridgejsmethod_Main_O;
-  /**@type {B}*/
+  /**@type {B} @nodts*/
   this.f_b__bridgejsmethod_Main_O_;
  }
- /** @return {!O} */
+ /** @nodts @return {!O} */
  static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
   O.$clinit();
   let $instance = new O();
   $instance.$ctor__bridgejsmethod_Main_O__bridgejsmethod_Main($outer_this);
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgejsmethod_Main_O__bridgejsmethod_Main(/** Main */ $outer_this) {
   this.$outer_this__bridgejsmethod_Main_O = $outer_this;
   this.$ctor__bridgejsmethod_Main_N__bridgejsmethod_Main($outer_this);
@@ -31,17 +31,18 @@ class O extends N {
  getB() {
   return this.f_b__bridgejsmethod_Main_O_;
  }
- 
+ /** @nodts */
  static $clinit() {
   O.$clinit = () =>{};
   O.$loadModules();
   N.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof O;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(O, 'bridgejsmethod.Main$O');

@@ -8,27 +8,28 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class Foo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- 
+ /** @nodts */
  $ctor__boundedtypesupercall_Main_Foo__java_lang_Object(/** T */ foo) {
   this.$ctor__java_lang_Object__();
  }
- /** @abstract */
+ /** @abstract @nodts */
  m_foo__() {}
- 
+ /** @nodts */
  static $clinit() {
   Foo.$clinit = () =>{};
   Foo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Foo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Foo, 'boundedtypesupercall.Main$Foo');

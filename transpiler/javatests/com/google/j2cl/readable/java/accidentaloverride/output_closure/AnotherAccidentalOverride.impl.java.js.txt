@@ -12,47 +12,48 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {SuperInterface<AssertionError>}
  */
 class AnotherAccidentalOverride extends Parent {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!AnotherAccidentalOverride} */
+ /** @nodts @return {!AnotherAccidentalOverride} */
  static $create__() {
   AnotherAccidentalOverride.$clinit();
   let $instance = new AnotherAccidentalOverride();
   $instance.$ctor__accidentaloverride_AnotherAccidentalOverride__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__accidentaloverride_AnotherAccidentalOverride__() {
   this.$ctor__accidentaloverride_Parent__();
  }
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_foo__java_lang_Object(/** AssertionError */ arg0) {
   this.m_foo__java_lang_AssertionError(/**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)));
  }
  //Bridge method.
- /** @override */
+ /** @override @nodts */
  m_foo__java_lang_Error(/** AssertionError */ arg0) {
   this.m_foo__java_lang_AssertionError(/**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)));
  }
  //Specialized bridge method.
- 
+ /** @nodts */
  m_foo__java_lang_AssertionError(/** AssertionError */ arg0) {
   super.m_foo__java_lang_Error(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   AnotherAccidentalOverride.$clinit = () =>{};
   AnotherAccidentalOverride.$loadModules();
   Parent.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AnotherAccidentalOverride;
  }
  
+ /** @nodts */
  static $loadModules() {
   AssertionError = goog.module.get('java.lang.AssertionError$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

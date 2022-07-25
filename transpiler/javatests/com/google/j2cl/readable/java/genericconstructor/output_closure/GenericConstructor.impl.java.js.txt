@@ -10,12 +10,12 @@ let Exception = goog.forwardDeclare('java.lang.Exception$impl');
  * @template T
  */
 class GenericConstructor extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
  //Factory method corresponding to constructor 'GenericConstructor(Object, Object)'.
- /** @template T, S @return {!GenericConstructor<T>} */
+ /** @nodts @template T, S @return {!GenericConstructor<T>} */
  static $create__java_lang_Object__java_lang_Object(/** S */ s, /** T */ t) {
   GenericConstructor.$clinit();
   let $instance = new GenericConstructor();
@@ -23,12 +23,12 @@ class GenericConstructor extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'GenericConstructor(Object, Object)'.
- /** @template S */
+ /** @nodts @template S */
  $ctor__genericconstructor_GenericConstructor__java_lang_Object__java_lang_Object(/** S */ s, /** T */ t) {
   this.$ctor__java_lang_Object__();
  }
  //Factory method corresponding to constructor 'GenericConstructor(Object)'.
- /** @template T, T_1 @return {!GenericConstructor<T>} */
+ /** @nodts @template T, T_1 @return {!GenericConstructor<T>} */
  static $create__java_lang_Object(/** T_1 */ t) {
   GenericConstructor.$clinit();
   let $instance = new GenericConstructor();
@@ -36,26 +36,27 @@ class GenericConstructor extends j_l_Object {
   return $instance;
  }
  //Initialization from constructor 'GenericConstructor(Object)'.
- /** @template T_1 */
+ /** @nodts @template T_1 */
  $ctor__genericconstructor_GenericConstructor__java_lang_Object(/** T_1 */ t) {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   GenericConstructor.$create__java_lang_Object__java_lang_Object(Exception.$create__(), Error.$create__());
   GenericConstructor.$create__java_lang_Object(Exception.$create__());
  }
- 
+ /** @nodts */
  static $clinit() {
   GenericConstructor.$clinit = () =>{};
   GenericConstructor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof GenericConstructor;
  }
  
+ /** @nodts */
  static $loadModules() {
   Error = goog.module.get('java.lang.Error$impl');
   Exception = goog.module.get('java.lang.Exception$impl');

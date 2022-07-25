@@ -5,18 +5,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 class AFunction extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {function(?string=, ...*):*} */
+ /** @nodts @return {function(?string=, ...*):*} */
  static $create__() {
   AFunction.$clinit();
   let $instance = new AFunction();
   $instance.$ctor__jsoptional_Main_AFunction__();
   return $Util.$makeLambdaFunction(AFunction.prototype.m_f1__java_lang_String__arrayOf_java_lang_Object, $instance, AFunction.$copy);
  }
- /** @suppress {invalidCasts} */
+ /** @nodts @suppress {invalidCasts} */
  $ctor__jsoptional_Main_AFunction__() {
   this.$ctor__java_lang_Object__();
  }
@@ -24,21 +24,22 @@ class AFunction extends j_l_Object {
  m_f1__java_lang_String__arrayOf_java_lang_Object(/** ?string= */ i, .../** ...* */ args) {
   return args[0];
  }
- 
+ /** @nodts */
  static $clinit() {
   AFunction.$clinit = () =>{};
   AFunction.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance != null && !!instance.$is__jsoptional_Main_AFunction;
  }
- 
+ /** @nodts */
  static $copy(/** ? */ from, /** ? */ to) {
   to.$is__jsoptional_Main_AFunction = true;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $JavaScriptFunction.$markImplementor(AFunction);

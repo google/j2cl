@@ -9,19 +9,19 @@ class B extends A {
  constructor(/** number */ x) {
   B.$clinit();
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_fB__jsconstructor_JsConstructorClass_B = 0;
   this.$ctor__jsconstructor_JsConstructorClass_B__int(x);
  }
  //Initialization from constructor 'B(int)'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_B__int(/** number */ x) {
   this.$ctor__jsconstructor_JsConstructorClass_A__int(x + 1 | 0);
   this.$init___$p_jsconstructor_JsConstructorClass_B();
   this.f_fB__jsconstructor_JsConstructorClass_B = 3;
  }
  //Factory method corresponding to constructor 'B()'.
- /** @return {!B} */
+ /** @nodts @return {!B} */
  static $create__() {
   B.$clinit();
   let $instance = new B(10);
@@ -29,12 +29,12 @@ class B extends A {
   return $instance;
  }
  //Initialization from constructor 'B()'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_B__() {
   this.f_fB__jsconstructor_JsConstructorClass_B = 4;
  }
  //Factory method corresponding to constructor 'B(int, int)'.
- /** @return {!B} */
+ /** @nodts @return {!B} */
  static $create__int__int(/** number */ x, /** number */ y) {
   B.$clinit();
   let $instance = new B(x + y | 0);
@@ -42,25 +42,26 @@ class B extends A {
   return $instance;
  }
  //Initialization from constructor 'B(int, int)'.
- 
+ /** @nodts */
  $ctor__jsconstructor_JsConstructorClass_B__int__int(/** number */ x, /** number */ y) {
   this.f_fB__jsconstructor_JsConstructorClass_B = Math.imul(x, y);
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_jsconstructor_JsConstructorClass_B() {
   this.f_fB__jsconstructor_JsConstructorClass_B = 2;
  }
- 
+ /** @nodts */
  static $clinit() {
   B.$clinit = () =>{};
   B.$loadModules();
   A.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof B;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(B, 'jsconstructor.JsConstructorClass$B');

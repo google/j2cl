@@ -12,15 +12,15 @@ let Equals = goog.forwardDeclare('lambdas.Lambdas.Equals$impl');
  * @implements {JsSupplier<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function():T */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function():T}*/
+  /**@type {?function():T} @nodts*/
   this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor;
   this.$ctor__lambdas_Lambdas_JsSupplier_$LambdaAdaptor__lambdas_Lambdas_JsSupplier_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__lambdas_Lambdas_JsSupplier_$LambdaAdaptor__lambdas_Lambdas_JsSupplier_$JsFunction(/** ?function():T */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor = fn;
@@ -31,22 +31,23 @@ class $LambdaAdaptor extends j_l_Object {
   return ($function = this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor, $function());
  }
  //Bridge method.
- /** @override @return {T} */
+ /** @override @nodts @return {T} */
  m_get__() {
   return this.get();
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
   Equals.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {
   Equals = goog.module.get('lambdas.Lambdas.Equals$impl');
  }

@@ -12,42 +12,43 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {SpecializedInterface}
  */
 class AccidentalOverride extends A {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!AccidentalOverride} */
+ /** @nodts @return {!AccidentalOverride} */
  static $create__() {
   AccidentalOverride.$clinit();
   let $instance = new AccidentalOverride();
   $instance.$ctor__bridgemethods_AccidentalOverride__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__bridgemethods_AccidentalOverride__() {
   this.$ctor__bridgemethods_A__();
  }
  //Specialized bridge method.
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_fun__java_lang_String(/** ?string */ arg0) {
   return /**@type {?string}*/ ($Casts.$to(super.m_fun__java_lang_Object(arg0), j_l_String));
  }
  //Bridge method.
- /** @override @return {?string} */
+ /** @override @nodts @return {?string} */
  m_fun__java_lang_Object(/** ?string */ arg0) {
   return this.m_fun__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
- 
+ /** @nodts */
  static $clinit() {
   AccidentalOverride.$clinit = () =>{};
   AccidentalOverride.$loadModules();
   A.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof AccidentalOverride;
  }
  
+ /** @nodts */
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');

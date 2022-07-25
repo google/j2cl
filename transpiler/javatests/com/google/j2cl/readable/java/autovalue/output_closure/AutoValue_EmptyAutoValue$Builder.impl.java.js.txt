@@ -7,36 +7,37 @@ let AutoValue__EmptyAutoValue = goog.forwardDeclare('autovalue.AutoValue_EmptyAu
 let EmptyAutoValue = goog.forwardDeclare('autovalue.EmptyAutoValue$impl');
 
 class Builder extends EmptyAutoValue_Builder {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Builder} */
+ /** @nodts @return {!Builder} */
  static $create__() {
   Builder.$clinit();
   let $instance = new Builder();
   $instance.$ctor__autovalue_AutoValue_EmptyAutoValue_Builder__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__autovalue_AutoValue_EmptyAutoValue_Builder__() {
   this.$ctor__autovalue_EmptyAutoValue_Builder__();
  }
- /** @override @return {EmptyAutoValue} */
+ /** @override @nodts @return {EmptyAutoValue} */
  m_build__() {
   return AutoValue__EmptyAutoValue.$create__();
  }
- 
+ /** @nodts */
  static $clinit() {
   Builder.$clinit = () =>{};
   Builder.$loadModules();
   EmptyAutoValue_Builder.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Builder;
  }
  
+ /** @nodts */
  static $loadModules() {
   AutoValue__EmptyAutoValue = goog.module.get('autovalue.AutoValue_EmptyAutoValue$impl');
  }

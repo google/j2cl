@@ -14,22 +14,22 @@ let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 class Arrays extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Arrays} */
+ /** @nodts @return {!Arrays} */
  static $create__() {
   Arrays.$clinit();
   let $instance = new Arrays();
   $instance.$ctor__array_Arrays__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__array_Arrays__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_testObjectArray__() {
   let objects = new Array(100);
   objects = new Array(0);
@@ -43,7 +43,7 @@ class Arrays extends j_l_Object {
   $Arrays.$set(objects, 0, null);
   $Arrays.$set(objects2d[0], 1, null);
  }
- 
+ /** @nodts */
  m_testJavaTypeArray__() {
   let objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$create([100], SomeObject));
   objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$create([0], SomeObject));
@@ -56,7 +56,7 @@ class Arrays extends j_l_Object {
   $Arrays.$set(objects, 0, null);
   $Arrays.$set(objects2d[0], 1, null);
  }
- 
+ /** @nodts */
  m_testIntArrays___$pp_array() {
   let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $$int));
   ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int));
@@ -69,7 +69,7 @@ class Arrays extends j_l_Object {
   $Arrays.$set(ints, 0, 1);
   $Arrays.$set(ints2d[0], 1, 1);
  }
- 
+ /** @nodts */
  m_testLongArrays___$pp_array() {
   let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $$long));
   longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
@@ -82,7 +82,7 @@ class Arrays extends j_l_Object {
   $Arrays.$set(longs, 0, $Long.fromInt(1));
   $Arrays.$set(longs2d[0], 1, $Long.fromInt(1));
  }
- 
+ /** @nodts */
  m_testDevirtualizedTypeArrays___$pp_array() {
   let booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([100], Boolean));
   booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([0], Boolean));
@@ -95,7 +95,7 @@ class Arrays extends j_l_Object {
   $Arrays.$set(booleans, 0, true);
   $Arrays.$set(booleans2d[0], 1, false);
  }
- 
+ /** @nodts */
  m_testStringArrays___$pp_array() {
   let strings = /**@type {!Array<?string>}*/ ($Arrays.$create([100], j_l_String));
   strings = /**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String));
@@ -108,7 +108,7 @@ class Arrays extends j_l_Object {
   $Arrays.$set(strings, 0, null);
   $Arrays.$set(strings2d[0], 1, null);
  }
- 
+ /** @nodts */
  m_testNativeArray__() {
   let nativeObjects = new Array(100);
   nativeObjects = new Array(0);
@@ -121,37 +121,38 @@ class Arrays extends j_l_Object {
   $Arrays.$set(nativeObjects, 0, null);
   $Arrays.$set(nativeObjects2d[0], 1, null);
  }
- 
+ /** @nodts */
  m_testErasureCastsOnArrayAccess__() {
   let container = null;
   let s = /**@type {!Array<?string>}*/ ($Arrays.$castTo(container.f_data__array_Arrays_ArrayContainer, j_l_String, 1))[0];
  }
- 
+ /** @nodts */
  m_testCovariance__() {
   let objectArray = null;
   let stringArray = null;
   objectArray = stringArray;
  }
- 
+ /** @nodts */
  m_testArraysSupertypeClosureTypes__() {
   this.m_consumesCloneable__java_lang_Cloneable(new Array(10));
   this.m_consumesSerializable__java_io_Serializable(new Array(10));
  }
- 
+ /** @nodts */
  m_consumesCloneable__java_lang_Cloneable(/** (Cloneable|Array) */ cloneable) {}
- 
+ /** @nodts */
  m_consumesSerializable__java_io_Serializable(/** (Serializable|Array) */ serializable) {}
- 
+ /** @nodts */
  static $clinit() {
   Arrays.$clinit = () =>{};
   Arrays.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Arrays;
  }
  
+ /** @nodts */
  static $loadModules() {
   SomeObject = goog.module.get('array.Arrays.SomeObject$impl');
   Boolean = goog.module.get('java.lang.Boolean$impl');

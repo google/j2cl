@@ -8,34 +8,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {I<?string>}
  */
 class NonJsTypeSubtype extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!NonJsTypeSubtype} */
+ /** @nodts @return {!NonJsTypeSubtype} */
  static $create__() {
   NonJsTypeSubtype.$clinit();
   let $instance = new NonJsTypeSubtype();
   $instance.$ctor__jsoptional_Main_NonJsTypeSubtype__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsoptional_Main_NonJsTypeSubtype__() {
   this.$ctor__java_lang_Object__();
  }
  /** @override */
  m(/** ?string */ t, /** *= */ o) {}
- 
+ /** @nodts */
  static $clinit() {
   NonJsTypeSubtype.$clinit = () =>{};
   NonJsTypeSubtype.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof NonJsTypeSubtype;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 I.$markImplementor(NonJsTypeSubtype);

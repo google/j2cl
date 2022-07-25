@@ -8,18 +8,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyJsInterface}
  */
 class InterfaceImpl extends A {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!InterfaceImpl} */
+ /** @nodts @return {!InterfaceImpl} */
  static $create__() {
   InterfaceImpl.$clinit();
   let $instance = new InterfaceImpl();
   $instance.$ctor__jsbridgebackward_InterfaceImpl__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__jsbridgebackward_InterfaceImpl__() {
   this.$ctor__jsbridgebackward_A__();
  }
@@ -28,17 +28,18 @@ class InterfaceImpl extends A {
  foo(/** number */ arg0) {
   return this.m_foo__int(arg0);
  }
- 
+ /** @nodts */
  static $clinit() {
   InterfaceImpl.$clinit = () =>{};
   InterfaceImpl.$loadModules();
   A.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InterfaceImpl;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 MyJsInterface.$markImplementor(InterfaceImpl);

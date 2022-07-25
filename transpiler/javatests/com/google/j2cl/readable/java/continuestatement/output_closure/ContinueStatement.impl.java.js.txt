@@ -4,38 +4,39 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class ContinueStatement extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!ContinueStatement} */
+ /** @nodts @return {!ContinueStatement} */
  static $create__() {
   ContinueStatement.$clinit();
   let $instance = new ContinueStatement();
   $instance.$ctor__continuestatement_ContinueStatement__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__continuestatement_ContinueStatement__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  m_test__() {
   for (; true; ) {
    continue;
   }
  }
- 
+ /** @nodts */
  static $clinit() {
   ContinueStatement.$clinit = () =>{};
   ContinueStatement.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof ContinueStatement;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(ContinueStatement, 'continuestatement.ContinueStatement');

@@ -8,14 +8,14 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {P1<T1>}
  */
 class P2 extends P1 {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {P1<T1>}*/
+  /**@type {P1<T1>} @nodts*/
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2;
  }
  //Factory method corresponding to constructor 'P2(P1)'.
- /** @template T2, T1 @return {!P2<T2, T1>} */
+ /** @nodts @template T2, T1 @return {!P2<T2, T1>} */
  static $create__innerclassinitorder_InnerClassInitOrder_P1(/** P1<T1> */ $outer_this) {
   P2.$clinit();
   let $instance = new P2();
@@ -23,12 +23,12 @@ class P2 extends P1 {
   return $instance;
  }
  //Initialization from constructor 'P2(P1)'.
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_P1_P2__innerclassinitorder_InnerClassInitOrder_P1(/** P1<T1> */ $outer_this) {
   this.$ctor__innerclassinitorder_InnerClassInitOrder_P1_P2__innerclassinitorder_InnerClassInitOrder_P1__int(this, 1);
  }
  //Factory method corresponding to constructor 'P2(P1, int)'.
- /** @template T2, T1 @return {!P2<T2, T1>} */
+ /** @nodts @template T2, T1 @return {!P2<T2, T1>} */
  static $create__innerclassinitorder_InnerClassInitOrder_P1__int(/** P1<T1> */ $outer_this, /** number */ i) {
   P2.$clinit();
   let $instance = new P2();
@@ -36,22 +36,23 @@ class P2 extends P1 {
   return $instance;
  }
  //Initialization from constructor 'P2(P1, int)'.
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder_P1_P2__innerclassinitorder_InnerClassInitOrder_P1__int(/** P1<T1> */ $outer_this, /** number */ i) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2 = $outer_this;
   this.$ctor__innerclassinitorder_InnerClassInitOrder_P1__int(i);
  }
- 
+ /** @nodts */
  static $clinit() {
   P2.$clinit = () =>{};
   P2.$loadModules();
   P1.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof P2;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(P2, 'innerclassinitorder.InnerClassInitOrder$P1$P2');

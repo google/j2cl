@@ -10,35 +10,36 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @implements {BaseInterface}
  */
 class $LambdaAdaptor extends j_l_Object {
- 
+ /** @nodts */
  constructor(/** ?function():IThenable<Integer> */ fn) {
   $LambdaAdaptor.$clinit();
   super();
-  /**@type {?function():IThenable<Integer>}*/
+  /**@type {?function():IThenable<Integer>} @nodts*/
   this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor;
   this.$ctor__jsasync_Main_BaseInterface_$LambdaAdaptor__jsasync_Main_BaseInterface_$JsFunction(fn);
  }
- 
+ /** @nodts */
  $ctor__jsasync_Main_BaseInterface_$LambdaAdaptor__jsasync_Main_BaseInterface_$JsFunction(/** ?function():IThenable<Integer> */ fn) {
   this.$ctor__java_lang_Object__();
   this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor = fn;
  }
- /** @override @return {IThenable<Integer>} */
+ /** @override @nodts @return {IThenable<Integer>} */
  m_asyncCall__() {
   let /** ?function():IThenable<Integer> */ $function;
   return ($function = this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor, $function());
  }
- 
+ /** @nodts */
  static $clinit() {
   $LambdaAdaptor.$clinit = () =>{};
   $LambdaAdaptor.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof $LambdaAdaptor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 BaseInterface.$markImplementor($LambdaAdaptor);

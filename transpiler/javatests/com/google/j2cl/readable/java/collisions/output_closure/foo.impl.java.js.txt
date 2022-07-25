@@ -4,32 +4,33 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class foo extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!foo} */
+ /** @nodts @return {!foo} */
  static $create__() {
   foo.$clinit();
   let $instance = new foo();
   $instance.$ctor__collisions_foo__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__collisions_foo__() {
   this.$ctor__java_lang_Object__();
  }
- 
+ /** @nodts */
  static $clinit() {
   foo.$clinit = () =>{};
   foo.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof foo;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(foo, 'collisions.foo');

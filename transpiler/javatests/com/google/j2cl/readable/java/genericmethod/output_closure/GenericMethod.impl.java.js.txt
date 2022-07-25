@@ -21,49 +21,49 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template T
  */
 class GenericMethod extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @template T @return {!GenericMethod<T>} */
+ /** @nodts @template T @return {!GenericMethod<T>} */
  static $create__() {
   GenericMethod.$clinit();
   let $instance = new GenericMethod();
   $instance.$ctor__genericmethod_GenericMethod__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__genericmethod_GenericMethod__() {
   this.$ctor__java_lang_Object__();
  }
- /** @template T_1, S */
+ /** @nodts @template T_1, S */
  m_foo__java_lang_Object__java_lang_Object(/** T_1 */ f, /** S */ s) {}
- 
+ /** @nodts */
  m_fun__java_lang_Object(/** * */ o) {}
- /** @template T_1 */
+ /** @nodts @template T_1 */
  m_fun__java_lang_Exception(/** T_1 */ t) {}
- /** @template T_1 */
+ /** @nodts @template T_1 */
  m_fun__java_lang_Error(/** T_1 */ t) {
   $1.$create__genericmethod_GenericMethod(this);
   $1LocalClass.$create__genericmethod_GenericMethod(this);
  }
- /** @template T_1 @return {GenericMethod<T_1>} */
+ /** @nodts @template T_1 @return {GenericMethod<T_1>} */
  m_bar__() {
   return null;
  }
- /** @template T_1 @return {Array<T_1>} */
+ /** @nodts @template T_1 @return {Array<T_1>} */
  m_fun__arrayOf_java_lang_Object(/** Array<T_1> */ array) {
   return array;
  }
- /** @template T_1 @return {T_1} */
+ /** @nodts @template T_1 @return {T_1} */
  m_checked__() {
   return null;
  }
- /** @template T_1 @return {T_1} */
+ /** @nodts @template T_1 @return {T_1} */
  m_unchecked__() {
   return null;
  }
- 
+ /** @nodts */
  m_test__() {
   let g = /**@type {!GenericMethod<(Number|number)>}*/ (GenericMethod.$create__());
   g.m_foo__java_lang_Object__java_lang_Object(g, g);
@@ -77,15 +77,15 @@ class GenericMethod extends j_l_Object {
   /**@type {Content}*/ ($Casts.$to(this.m_checked__(), Content)).m_getProp___$pp_genericmethod();
   /**@type {Content}*/ (this.m_unchecked__()).m_getProp___$pp_genericmethod();
  }
- 
+ /** @nodts */
  static m_acceptsContent__genericmethod_GenericMethod_Content(/** Content */ content) {
   GenericMethod.$clinit();
  }
- 
+ /** @nodts */
  static m_acceptsString__java_lang_String(/** ?string */ string_1) {
   GenericMethod.$clinit();
  }
- 
+ /** @nodts */
  static m_testErasureCast_wildcard__() {
   GenericMethod.$clinit();
   let list = null;
@@ -101,7 +101,7 @@ class GenericMethod extends j_l_Object {
   GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp___$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(deepContent);
  }
- /** @template CT, C */
+ /** @nodts @template CT, C */
  static m_testErasureCast_typeVariable__() {
   GenericMethod.$clinit();
   let list = null;
@@ -117,36 +117,37 @@ class GenericMethod extends j_l_Object {
   GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp___$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(deepContent);
  }
- /** @template V */
+ /** @nodts @template V */
  static m_testLowerWildcardBound__genericmethod_GenericMethod_Consumer__java_lang_Object(/** Consumer<?> */ consumer, /** V */ v) {
   GenericMethod.$clinit();
   consumer.m_accept__java_lang_Object(v);
  }
- /** @template V @return {V} */
+ /** @nodts @template V @return {V} */
  static m_testUpperWildcardBound__genericmethod_GenericMethod_Supplier(/** Supplier<?> */ supplier) {
   GenericMethod.$clinit();
   return supplier.m_get__();
  }
- /** @template T_1 */
+ /** @nodts @template T_1 */
  static m_methodWithBoundTypeVariable__() {
   GenericMethod.$clinit();
  }
- 
+ /** @nodts */
  static m_testMethodCallsWithCaptureTypeArguments__() {
   GenericMethod.$clinit();
   GenericMethod.m_methodWithBoundTypeVariable__();
  }
- 
+ /** @nodts */
  static $clinit() {
   GenericMethod.$clinit = () =>{};
   GenericMethod.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof GenericMethod;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('genericmethod.GenericMethod.$1$impl');
   $1LocalClass = goog.module.get('genericmethod.GenericMethod.$1LocalClass$impl');

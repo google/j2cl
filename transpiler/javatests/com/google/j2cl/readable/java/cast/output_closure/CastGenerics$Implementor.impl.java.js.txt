@@ -4,35 +4,36 @@ const BaseImplementor = goog.require('cast.CastGenerics.BaseImplementor$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Implementor extends BaseImplementor {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!Implementor} */
+ /** @nodts @return {!Implementor} */
  static $create__() {
   let $instance = new Implementor();
   $instance.$ctor__cast_CastGenerics_Implementor__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__cast_CastGenerics_Implementor__() {
   this.$ctor__cast_CastGenerics_BaseImplementor__();
  }
- /** @override */
+ /** @override @nodts */
  m_mA__() {}
- /** @override */
+ /** @override @nodts */
  m_mB__() {}
- 
+ /** @nodts */
  static $clinit() {
   Implementor.$clinit = () =>{};
   Implementor.$loadModules();
   BaseImplementor.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof Implementor;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(Implementor, 'cast.CastGenerics$Implementor');

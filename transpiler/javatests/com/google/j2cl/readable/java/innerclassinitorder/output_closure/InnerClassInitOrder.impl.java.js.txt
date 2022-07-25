@@ -29,39 +29,39 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class InnerClassInitOrder extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
-  /**@type {number}*/
+  /**@type {number} @nodts*/
   this.f_number__innerclassinitorder_InnerClassInitOrder = 0;
-  /**@type {Outer}*/
+  /**@type {Outer} @nodts*/
   this.f_outer__innerclassinitorder_InnerClassInitOrder_;
-  /**@type {OuterIsSuper}*/
+  /**@type {OuterIsSuper} @nodts*/
   this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_;
  }
- /** @return {!InnerClassInitOrder} */
+ /** @nodts @return {!InnerClassInitOrder} */
  static $create__() {
   InnerClassInitOrder.$clinit();
   let $instance = new InnerClassInitOrder();
   $instance.$ctor__innerclassinitorder_InnerClassInitOrder__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__innerclassinitorder_InnerClassInitOrder__() {
   this.$ctor__java_lang_Object__();
   this.$init___$p_innerclassinitorder_InnerClassInitOrder();
  }
- 
+ /** @nodts */
  m_testOuterThisFromSuperCall__() {
   OuterRefFromSuperCtorCall.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 100);
  }
- 
+ /** @nodts */
  m_testOuterThisFromThisCall__() {
   OuterRefFromThisCtorCall.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1100);
  }
- 
+ /** @nodts */
  m_testExtendsNested__() {
   let o = ESOuter.$create__();
   $Asserts.$assert(1 == ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
@@ -69,7 +69,7 @@ class InnerClassInitOrder extends j_l_Object {
   $Asserts.$assert(1 == ESInnerSubclass.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
   $Asserts.$assert(2 == ESInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
  }
- 
+ /** @nodts */
  m_testExtendsNestedWithGenerics__() {
   let o = /**@type {!ESWGOuter<?string>}*/ (ESWGOuter.$create__());
   $Asserts.$assert(1 == /**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o)).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
@@ -77,7 +77,7 @@ class InnerClassInitOrder extends j_l_Object {
   $Asserts.$assert(1 == ESWGInnerSubclass.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
   $Asserts.$assert(2 == ESWGInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
  }
- 
+ /** @nodts */
  m_testInnerClassCtors__() {
   let p1 = /**@type {!P1<*>}*/ (P1.$create__());
   $Asserts.$assert(1 == p1.f_value__innerclassinitorder_InnerClassInitOrder_P1);
@@ -88,12 +88,12 @@ class InnerClassInitOrder extends j_l_Object {
   $Asserts.$assert(1 == /**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2(p2)).f_value__innerclassinitorder_InnerClassInitOrder_P1);
   $Asserts.$assert(2 == /**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int(p2, 2)).f_value__innerclassinitorder_InnerClassInitOrder_P1);
  }
- 
+ /** @nodts */
  m_testInnerClassInitialization__() {
   InnerClass.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1111);
  }
- 
+ /** @nodts */
  m_testInnerClassLoop__() {
   let results = /**@type {!Array<$1AddNumber>}*/ ($Arrays.$create([10], $1AddNumber));
   for (let i = 0; i < 10; i = i + 1 | 0) {
@@ -108,47 +108,47 @@ class InnerClassInitOrder extends j_l_Object {
   }
   $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1156);
  }
- 
+ /** @nodts */
  m_testOuterIsNotSuper__() {
   let x = OuterIsNotSuper.$create__innerclassinitorder_InnerClassInitOrder_Outer(this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
   $Asserts.$assert(2 == x.m_getValue__());
  }
- 
+ /** @nodts */
  m_testOuterIsNotSuperAnon__() {
   let x = $2.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(2 == x.m_getValue__());
  }
- 
+ /** @nodts */
  m_testQualifiedSuperCall__() {
   let x = TestQualifiedSuperCall.$create__();
   $Asserts.$assert(2 == x.m_getValue__());
  }
- 
+ /** @nodts */
  m_testQualifiedSuperCallAnon__() {
   let x = $3.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(2 == x.m_getValue__());
  }
- 
+ /** @nodts */
  m_testSuperDispatch__() {
   $Asserts.$assert(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub1__());
   $Asserts.$assert(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub2__());
  }
- 
+ /** @nodts */
  m_testUnqualifiedAlloc__() {
   let x = this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_unqualifiedAlloc__();
   $Asserts.$assert(2 == x.m_getValue__());
  }
- 
+ /** @nodts */
  m_testUnqualifiedSuperCall__() {
   let x = TestUnqualifiedSuperCall.$create__innerclassinitorder_InnerClassInitOrder_Outer(this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
   $Asserts.$assert(2 == x.m_getValue__());
  }
- 
+ /** @nodts */
  m_testUnqualifiedSuperCallAnon__() {
   let x = $4.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(2 == x.m_getValue__());
  }
- 
+ /** @nodts */
  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
   InnerClassInitOrder.$clinit();
   let m = InnerClassInitOrder.$create__();
@@ -168,23 +168,24 @@ class InnerClassInitOrder extends j_l_Object {
   m.m_testUnqualifiedSuperCall__();
   m.m_testUnqualifiedSuperCallAnon__();
  }
- /** @private */
+ /** @private @nodts */
  $init___$p_innerclassinitorder_InnerClassInitOrder() {
   this.f_number__innerclassinitorder_InnerClassInitOrder = 0;
   this.f_outer__innerclassinitorder_InnerClassInitOrder_ = Outer.$create__int(1);
   this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_ = OuterIsSuper.$create__innerclassinitorder_InnerClassInitOrder_Outer__int(this.f_outer__innerclassinitorder_InnerClassInitOrder_, 2);
  }
- 
+ /** @nodts */
  static $clinit() {
   InnerClassInitOrder.$clinit = () =>{};
   InnerClassInitOrder.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InnerClassInitOrder;
  }
  
+ /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('innerclassinitorder.InnerClassInitOrder.$1$impl');
   $1AddNumber = goog.module.get('innerclassinitorder.InnerClassInitOrder.$1AddNumber$impl');

@@ -4,34 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InternalType extends j_l_Object {
- /** @protected */
+ /** @protected @nodts */
  constructor() {
   super();
  }
- /** @return {!InternalType} */
+ /** @nodts @return {!InternalType} */
  static $create__() {
   InternalType.$clinit();
   let $instance = new InternalType();
   $instance.$ctor__javaemul_InternalType__();
   return $instance;
  }
- 
+ /** @nodts */
  $ctor__javaemul_InternalType__() {
   this.$ctor__java_lang_Object__();
  }
  
  foo() {}
- 
+ /** @nodts */
  static $clinit() {
   InternalType.$clinit = () =>{};
   InternalType.$loadModules();
   j_l_Object.$clinit();
  }
- /** @return {boolean} */
+ /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
   return instance instanceof InternalType;
  }
  
+ /** @nodts */
  static $loadModules() {}
 }
 $Util.$setClassMetadata(InternalType, 'javaemul.InternalType');
