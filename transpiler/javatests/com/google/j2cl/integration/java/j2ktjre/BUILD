@@ -9,4 +9,5 @@ integration_test(
     name = "j2ktjre",
     srcs = glob(["*.java"]),
     enable_wasm = False,
+    deps = ["//third_party/java/jsinterop:jsinterop-annotations-j2cl"],
 )

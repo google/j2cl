@@ -25,7 +25,7 @@ import jsinterop.annotations.JsNonNull;
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">the official Java API
  * doc</a> for details.
  */
-@KtNative("kotlin.collections.MutableMap")
+@KtNative(value = "kotlin.collections.MutableMap", bridgeWith = "javaemul.lang.JavaMap")
 public interface Map<K, V> {
 
   /** Represents an individual map entry. */
@@ -68,11 +68,11 @@ public interface Map<K, V> {
 
   void clear();
 
-  @KtPropagateNullability
-  boolean containsKey(@JsNonNull K key);
+  @KtName("java_containsKey")
+  boolean containsKey(Object key);
 
-  @KtPropagateNullability
-  boolean containsValue(@JsNonNull V value);
+  @KtName("java_containsValue")
+  boolean containsValue(Object value);
 
   @JsNonNull
   @KtPropagateNullability
@@ -80,8 +80,8 @@ public interface Map<K, V> {
   @KtName("entries")
   Set<Entry<K, V>> entrySet();
 
-  @KtPropagateNullability
-  V get(@JsNonNull K key);
+  @KtName("java_get")
+  V get(Object key);
 
   boolean isEmpty();
 
@@ -97,8 +97,8 @@ public interface Map<K, V> {
   @KtPropagateNullability
   void putAll(@JsNonNull Map<? extends K, V> t);
 
-  @KtPropagateNullability
-  V remove(@JsNonNull K key);
+  @KtName("java_remove")
+  V remove(Object key);
 
   @KtProperty
   int size();

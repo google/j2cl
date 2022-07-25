@@ -22,7 +22,9 @@ import jsinterop.annotations.JsNonNull;
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/AbstractMap.html">the official
  * Java API doc</a> for details.
  */
-@KtNative("kotlin.collections.AbstractMutableMap")
+@KtNative(
+    value = "kotlin.collections.AbstractMutableMap",
+    bridgeWith = "javaemul.lang.JavaAbstractMap")
 public abstract class AbstractMap<K, V> implements Map<K, V> {
 
   protected AbstractMap() {}
@@ -31,13 +33,13 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   public native void clear();
 
   @Override
-  public native boolean containsKey(@JsNonNull K key);
+  public native boolean containsKey(Object key);
 
   @Override
-  public native boolean containsValue(@JsNonNull V value);
+  public native boolean containsValue(Object value);
 
   @Override
-  public native V get(@JsNonNull K key);
+  public native V get(Object key);
 
   @Override
   public abstract @JsNonNull Set<Entry<K, V>> entrySet();
@@ -49,13 +51,13 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
   public native @JsNonNull Set<K> keySet();
 
   @Override
-  public abstract V put(@JsNonNull K key, @JsNonNull V value);
+  public native V put(@JsNonNull K key, @JsNonNull V value);
 
   @Override
   public native void putAll(@JsNonNull Map<? extends K, V> map);
 
   @Override
-  public native V remove(@JsNonNull K key);
+  public native V remove(Object key);
 
   @JsNonNull
   @Override

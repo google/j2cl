@@ -29,5 +29,6 @@ public class Main {
     LangSystem.testHashCode();
     RandomNumbers.testRandom();
     Array.testArrays();
+    Collections.testCollections();
   }
 }
