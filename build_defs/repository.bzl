@@ -16,8 +16,8 @@ def load_j2cl_repo_deps():
     _github_repo(
         name = "io_bazel_rules_closure",
         repo = "bazelbuild/rules_closure",
-        tag = "c73467788b977172d5022f6a8125f616999f5a74",
-        sha256 = "06e07b812118a72aced71f49471eac8b9d9c09ad31da56d340164ee9d78d7284",
+        tag = "6bbbfc7d80474a6a1a4491da7b601c0cab440b07",
+        sha256 = "f014b04be5e90ec2b4e8ac598556895160a2ccd5c97624a60ca6df335bb4b97f",
     )
 
     _github_repo(
