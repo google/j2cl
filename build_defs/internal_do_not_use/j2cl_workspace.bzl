@@ -99,7 +99,7 @@ def setup_j2cl_workspace(**kwargs):
 
     jvm_maven_import_external(
         name = "org_junit",
-        artifact = "junit:junit:4.12",
+        artifact = "junit:junit:4.13.2",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
     )
