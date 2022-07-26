@@ -55,10 +55,11 @@ _J2WASM_PACKAGES = [
     "third_party/java/animal_sniffer",
     "third_party/java/auto",
     "third_party/java/jbox2d",
-    "third_party/java/junit",
     "third_party/java/jsr250_annotations",
     "third_party/java/jsr330_inject",
+    "third_party/java/junit",
     "third_party/java/re2j",
+    "third_party/java/truth",
     "third_party/java_src/animal_sniffer",
     "third_party/java_src/google_common/current",
     "third_party/java_src/j2cl",
@@ -66,6 +67,7 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/jbox2d/jbox2dlibrary/src/main/java",
     "third_party/java_src/jsr330_inject",
     "third_party/java_src/re2j",
+    "third_party/java_src/truth",
 ]
 
 _KOTLIN_OPT_IN_PACKAGES = [
