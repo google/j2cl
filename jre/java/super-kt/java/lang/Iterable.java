@@ -13,24 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package java.lang;
 
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 import javaemul.internal.annotations.KtPropagateNullability;
 import jsinterop.annotations.JsNonNull;
 
-@KtNative("kotlin.collections.MutableIterable")
+/**
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">the official Java
+ * API doc</a> for details.
+ */
+@KtNative(value = "kotlin.collections.MutableIterable", bridgeWith = "javaemul.lang.JavaIterable")
 public interface Iterable<T> {
 
   @KtPropagateNullability
   @JsNonNull
   Iterator<T> iterator();
 
-  // TODO(b/222269323): Java 8 methods below do not exist in Kotlin iterables.
+  @KtName("java_forEach")
   default void forEach(Consumer<? super T> action) {}
 
   default Spliterator<T> spliterator() {

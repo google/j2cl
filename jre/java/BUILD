@@ -179,8 +179,7 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     "java/util/concurrent/ExecutorService.java",  # java.util.Collection
     "java/util/concurrent/ScheduledExecutorService.java",  # ExecutorService
 ] + [
-    # TODO(b/237650063): Support Streams/Spliterator
-    "java/util/Spliterator.java",
+    # TODO(b/237650063): Support Streams/Spliterator,
     "java/util/Spliterators.java",
     "java/util/stream/BaseStream.java",
     "java/util/stream/Collector.java",

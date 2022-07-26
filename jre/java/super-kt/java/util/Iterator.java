@@ -14,15 +14,19 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
 package java.util;
 
 import java.util.function.Consumer;
+import javaemul.internal.annotations.KtName;
 import javaemul.internal.annotations.KtNative;
 import javaemul.internal.annotations.KtPropagateNullability;
 import jsinterop.annotations.JsNonNull;
 
-@KtNative("kotlin.collections.MutableIterator")
+/**
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html">the official Java
+ * API doc</a> for details.
+ */
+@KtNative(value = "kotlin.collections.MutableIterator", bridgeWith = "javaemul.lang.JavaIterator")
 public interface Iterator<E> {
 
   boolean hasNext();
@@ -31,8 +35,8 @@ public interface Iterator<E> {
   @JsNonNull
   E next();
 
-  // TODO(b/222269323): Java 8 methods below do not exist in Kotlin iterators.
   default void remove() {}
 
+  @KtName("java_forEachRemaining")
   default void forEachRemaining(Consumer<? super E> consumer) {}
 }
