@@ -140,6 +140,7 @@ public class Throwable implements Serializable {
     return this;
   }
 
+  @JsMethod
   public Throwable getCause() {
     return cause;
   }
@@ -176,6 +177,7 @@ public class Throwable implements Serializable {
   }
 
   /** Returns the array of Exception that this one suppressedExceptions. */
+  @JsMethod
   public final Throwable[] getSuppressed() {
     return suppressedExceptions;
   }

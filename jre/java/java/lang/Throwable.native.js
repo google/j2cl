@@ -25,10 +25,10 @@ Throwable.prototype.linkBack = function(error) {
       // TODO(b/142882366): Pass get fn as JsFunction from Java instead.
       Object.defineProperties(error, {
         cause: {
-          get: () => this.m_getCause__() && this.m_getCause__().backingJsObject
+          get: () => this.getCause() && this.getCause().backingJsObject
         },
         suppressed: {
-          get: () => this.m_getSuppressed__().map(t => t.backingJsObject)
+          get: () => this.getSuppressed().map(t => t.backingJsObject)
         }
       });
     } catch (ignored) {}

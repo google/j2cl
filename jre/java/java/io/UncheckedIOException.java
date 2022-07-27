@@ -31,6 +31,7 @@ public class UncheckedIOException extends RuntimeException {
     super(checkNotNull(cause));
   }
 
+  @SuppressWarnings("unusable-by-js")
   @Override
   public IOException getCause() {
     return (IOException) super.getCause();
