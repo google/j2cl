@@ -30,7 +30,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
-import java.util.Collections;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -122,7 +121,7 @@ public class OutputUtils {
   private static void writeToFile(Path outputPath, String content, Problems problems) {
     try {
       createDirectories(outputPath.getParent());
-      Files.write(outputPath, Collections.singleton(content), UTF_8);
+      Files.writeString(outputPath, content, UTF_8);
       // Wipe entries modification time so that input->output mapping is stable
       // regardless of the time of day.
       maybeResetAllTimeStamps(outputPath);

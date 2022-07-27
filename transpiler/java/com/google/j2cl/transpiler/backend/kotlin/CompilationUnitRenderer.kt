@@ -42,4 +42,5 @@ private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {
 
 private fun Renderer.renderTypes(compilationUnit: CompilationUnit) {
   renderSeparatedWithEmptyLine(compilationUnit.types) { renderType(it) }
+  renderNewLine()
 }

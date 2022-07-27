@@ -499,8 +499,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderExports() {
     sourceBuilder.newLine();
-    sourceBuilder.appendLines("exports = " + environment.aliasForType(type.getDeclaration()) + ";");
-    sourceBuilder.newLine();
+    sourceBuilder.appendln("exports = " + environment.aliasForType(type.getDeclaration()) + ";");
   }
 
 }

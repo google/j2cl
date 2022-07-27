@@ -127,7 +127,7 @@ public class OutputGeneratorStage {
           if (sourceMap != null) {
             javaScriptImplementationSource +=
                 String.format(
-                    "%n//# sourceMappingURL=%s",
+                    "%n//# sourceMappingURL=%s\n",
                     type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
             output.write(typeRelativePath + SOURCE_MAP_SUFFIX, sourceMap);
           }
@@ -209,9 +209,7 @@ public class OutputGeneratorStage {
           );
     }
 
-    return String.format(
-        // TODO(b/77961191): remove leading newline once the bug is fixed.
-        "%n// Kythe Indexing Metadata:%n// %s", metadata.toJson());
+    return String.format("%n// Kythe Indexing Metadata:%n// %s", metadata.toJson());
   }
 
   private String renderSourceMap(

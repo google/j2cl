@@ -73,7 +73,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     // imported. This mapping will help kythe understand that the exports symbol is really just
     // the Java class.
     sourceBuilder.emitWithMapping(type.getSourcePosition(), () -> sourceBuilder.append("exports"));
-    sourceBuilder.append(" = " + className + ";");
+    sourceBuilder.appendln(" = " + className + ";");
     return sourceBuilder.build();
   }
 
