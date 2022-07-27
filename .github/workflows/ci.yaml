@@ -47,6 +47,13 @@ jobs:
             bazelisk-os: darwin
 
     steps:
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          java-package: jdk
+          architecture: x64
+
       - name: Checkout current commit
         uses: actions/checkout@v2
 
