@@ -64,6 +64,7 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/google_common/current",
     "third_party/java_src/j2cl",
     "junit",
+    "third_party",
     "third_party/java_src/jbox2d/jbox2dlibrary/src/main/java",
     "third_party/java_src/jsr330_inject",
     "third_party/java_src/re2j",
