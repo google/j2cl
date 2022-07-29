@@ -221,6 +221,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "-O3",
             "-O3",
             "--intrinsic-lowering",
+            "--gufa",
             # Get several rounds of -O3 after intrinsic lowering.
             "-O3",
             "-O3",
