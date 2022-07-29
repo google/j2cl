@@ -15,8 +15,21 @@
  */
 package j2ktjre;
 
-public class Regex {
+public class Main {
 
-  // Super-sourced.
-  static void testRegex() {}
+  public static void main(String... args) throws Exception {
+    Math.testMath();
+    Primitives.testPrimitives();
+    Strings.testString();
+    Strings.testStringBuilder();
+    Strings.testJavaEmul();
+    ReflectArray.testReflect();
+    Regex.testRegex();
+    LangSystem.testSystemTime();
+    LangSystem.testArrayCopy();
+    LangSystem.testHashCode();
+    RandomNumbers.testRandom();
+    Array.testArrays();
+    Collections.testCollections();
+  }
 }

@@ -13,7 +13,7 @@ j2kt_native_library(
             "*.java",
             "super-j2kt/*.java",
         ],
-        exclude = ["Regex.java"],
+        exclude = ["Main.java"],
     ),
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2kt-native",
@@ -27,7 +27,7 @@ j2kt_jvm_library(
             "*.java",
             "super-j2kt/*.java",
         ],
-        exclude = ["Regex.java"],
+        exclude = ["Main.java"],
     ),
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2kt-jvm",
