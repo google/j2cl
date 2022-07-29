@@ -160,7 +160,6 @@ J2KT_JRE_TEMPORARILY_EXCLUDED_FILES = [
     "java/util/LinkedList.java",
     "java/util/NavigableMap.java",  # TODO(b/237414940): Can be supersourced after Comparator
     "java/util/NavigableSet.java",  # TODO(b/237414940): Can be supersourced after Comparator
-    "java/util/PrimitiveIterator.java",
     "java/util/PriorityQueue.java",
     "java/util/Queue.java",
     "java/util/SortedMap.java",  # TODO(b/237414940): Can be supersourced after Comparator
