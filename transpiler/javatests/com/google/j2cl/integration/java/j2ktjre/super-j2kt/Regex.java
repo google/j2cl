@@ -15,21 +15,18 @@
  */
 package j2ktjre;
 
-public class Main {
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-  public static void main(String... args) throws Exception {
-    Math.testMath();
-    Primitives.testPrimitives();
-    Strings.testString();
-    Strings.testStringBuilder();
-    Strings.testJavaEmul();
-    ReflectArray.testReflect();
-    Regex.testRegex();
-    LangSystem.testSystemTime();
-    LangSystem.testArrayCopy();
-    LangSystem.testHashCode();
-    RandomNumbers.testRandom();
-    Array.testArrays();
-    Collections.testCollections();
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+class Regex {
+
+  static void testRegex() {
+    Pattern pattern = Pattern.compile("Hello.World");
+    Matcher matcher = pattern.matcher("~~~Hello-World~~~");
+    assertTrue(matcher.find());
+    assertEquals(3, matcher.start());
   }
 }
