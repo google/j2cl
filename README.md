@@ -46,7 +46,7 @@ Get Support
 - Please report [bugs](https://github.com/google/j2cl/issues/new?template=bug_report.md&labels=bug)
 or file [feature requests](https://github.com/google/j2cl/issues/new?template=feature_request.md&labels=enhancement)
 via [issue tracker](https://github.com/google/j2cl/issues).
-- For other questions you can also use the [issue tracker](https://github.com/google/j2cl/issues/new?template=question.md&labels=question) for now.
+- For other questions please use the [discussions](https://github.com/google/j2cl/discussions/new?category=q-a).
 
 
 Caveat Emptor
