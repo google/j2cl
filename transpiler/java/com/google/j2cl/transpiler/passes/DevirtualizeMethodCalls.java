@@ -110,6 +110,16 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
               return methodCall;
             }
 
+            // If this is a trampoline call and the dispatch is done from trampoline itself, then we
+            // shouldn't devirtualize the calls.
+            // TODO(b/240721785): stop using getQualifiedJsName for comparison when BootStrapTypes
+            // are no longer synthetic.
+            boolean isTrampoline = !targetType.isSameBaseType(originType);
+            if (isTrampoline
+                && getCurrentType().getQualifiedJsName().equals(targetType.getQualifiedJsName())) {
+              return methodCall;
+            }
+
             return AstUtils.devirtualizeMethodCall(methodCall, targetType);
           }
         });
