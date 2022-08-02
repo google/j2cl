@@ -61,11 +61,15 @@ public final class StringBuilder implements Appendable, CharSequence, Serializab
 
   public native StringBuilder appendCodePoint(int codePoint);
 
+  public native int capacity();
+
   public native char charAt(int index);
 
   public native StringBuilder delete(int start, int end);
 
   public native StringBuilder deleteCharAt(int index);
+
+  public native void ensureCapacity(int minimumCapacity);
 
   public native StringBuilder insert(int offset, boolean b);
 
@@ -91,6 +95,14 @@ public final class StringBuilder implements Appendable, CharSequence, Serializab
 
   public native StringBuilder insert(int offset, CharSequence s, int start, int end);
 
+  public native int indexOf(String str);
+
+  public native int indexOf(String str, int fromIndex);
+
+  public native int lastIndexOf(String str);
+
+  public native int lastIndexOf(String str, int fromIndex);
+
   public native int length();
 
   @KtName("setRange")
@@ -98,8 +110,19 @@ public final class StringBuilder implements Appendable, CharSequence, Serializab
 
   public native StringBuilder reverse();
 
+  @KtName("set")
+  public native void setCharAt(int index, char ch);
+
+  public native void setLength(int newLength);
+
   public native CharSequence subSequence(int start, int end);
+
+  public native String substring(int start);
+
+  public native String substring(int start, int end);
 
   @Override
   public native String toString();
+
+  public native void trimToSize();
 }
