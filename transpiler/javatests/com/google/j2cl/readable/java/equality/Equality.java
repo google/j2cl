@@ -19,29 +19,29 @@ public class Equality {
   public void test() {
     // Primitives
     {
-      assert false == false;
-      assert 0 != 1;
+      boolean a = false == false;
+      boolean b = 0 != 1;
     }
 
     // Objects
     {
-      assert new Object() != new Object();
+      boolean c = new Object() != new Object();
     }
 
     // Double
     {
-      assert (Double) 0.0 == (Double) 0.0;
+      boolean d = (Double) 0.0 == (Double) 0.0;
     }
 
     // Float
     {
-      assert (Float) 0.0f == (Float) 0.0f;
+      boolean e = (Float) 0.0f == (Float) 0.0f;
     }
 
     // Null literals
     {
-      assert null != new Object();
-      assert new Object() != null;
+      boolean f = null != new Object();
+      boolean g = new Object() != null;
     }
   }
 }

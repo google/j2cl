@@ -69,9 +69,47 @@
  (type $function.m_test__void)
  (param $this.untyped (ref $java.lang.Object))
  ;;@ equality/Equality.java:19:14
+ (local $a i32)
+ (local $b i32)
+ (local $c i32)
+ (local $d i32)
+ (local $e i32)
+ (local $f i32)
+ (local $g i32)
  (local $this (ref null $equality.Equality))
  (local.set $this (ref.cast_static $equality.Equality (local.get $this.untyped)))
  (block
+  (block
+   ;; boolean a = (false == false);
+   ;;@ equality/Equality.java:22:6
+   (local.set $a (i32.eq (i32.const 0) (i32.const 0)))
+   ;; boolean b = (0 != 1);
+   ;;@ equality/Equality.java:23:6
+   (local.set $b (i32.ne (i32.const 0) (i32.const 1)))
+  )
+  (block
+   ;; boolean c = !(java.lang.Object.$create() == java.lang.Object.$create());
+   ;;@ equality/Equality.java:28:6
+   (local.set $c (i32.eqz (ref.eq (call $$create__java_lang_Object@java.lang.Object ) (call $$create__java_lang_Object@java.lang.Object ))))
+  )
+  (block
+   ;; boolean d = (java.lang.Double.valueOf(0.0) == java.lang.Double.valueOf(0.0));
+   ;;@ equality/Equality.java:33:6
+   (local.set $d (ref.eq (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 0.0)) (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 0.0))))
+  )
+  (block
+   ;; boolean e = (java.lang.Float.valueOf(0.0) == java.lang.Float.valueOf(0.0));
+   ;;@ equality/Equality.java:38:6
+   (local.set $e (ref.eq (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 0.0)) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 0.0))))
+  )
+  (block
+   ;; boolean f = !javaemul.internal.Platform.isNull(java.lang.Object.$create());
+   ;;@ equality/Equality.java:43:6
+   (local.set $f (i32.eqz (ref.is_null (call $$create__java_lang_Object@java.lang.Object ))))
+   ;; boolean g = !javaemul.internal.Platform.isNull(java.lang.Object.$create());
+   ;;@ equality/Equality.java:44:6
+   (local.set $g (i32.eqz (ref.is_null (call $$create__java_lang_Object@java.lang.Object ))))
+  )
  )
 )
 (elem declare func $m_test__void@equality.Equality)

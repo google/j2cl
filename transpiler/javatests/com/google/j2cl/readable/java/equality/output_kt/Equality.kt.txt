@@ -6,12 +6,12 @@ import kotlin.jvm.*
 
 open class Equality {
  open fun test() {
-  assert(false === false)
-  assert(0 !== 1)
-  assert(kotlin.Any() !== kotlin.Any())
-  assert(kotlin.Double.valueOf(0.0) === kotlin.Double.valueOf(0.0))
-  assert(kotlin.Float.valueOf(0.0f) === kotlin.Float.valueOf(0.0f))
-  assert(null !== kotlin.Any())
-  assert(kotlin.Any() !== null)
+  val a: kotlin.Boolean = false === false
+  val b: kotlin.Boolean = 0 !== 1
+  val c: kotlin.Boolean = kotlin.Any() !== kotlin.Any()
+  val d: kotlin.Boolean = kotlin.Double.valueOf(0.0) === kotlin.Double.valueOf(0.0)
+  val e: kotlin.Boolean = kotlin.Float.valueOf(0.0f) === kotlin.Float.valueOf(0.0f)
+  val f: kotlin.Boolean = null !== kotlin.Any()
+  val g: kotlin.Boolean = kotlin.Any() !== null
  }
 }
