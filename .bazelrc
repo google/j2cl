@@ -8,5 +8,7 @@ build --strategy=J2cl=worker
 build --strategy=Closure=worker
 build --experimental_persistent_javac
 
+test --test_output=errors
+
 # Enable Java 11
 build --java_language_version=11
