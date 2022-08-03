@@ -95,6 +95,7 @@ package_sources(
     srcs = BASE_JRE_SRCS,  # TODO(b/222484176): Stop including J2CL JRE for JS.
     excludes = [
         # J2KT doesn't need these
+        "java/io/HasSerializableTypeMarker.java",
         "java/lang/JsException.java",
         "java/lang/IntegralToString.java",
         "java/lang/RealToString.java",
@@ -204,6 +205,7 @@ package_sources(
             "java/**/*.java",
         ],
         exclude = [
+            "java/io/HasSerializableTypeMarker.java",
             "java/lang/IntegralToString.java",  # J2KT String/Integer/Long don't need it.
             "java/lang/JsException.java",  # J2KT doesn't need it
             "java/lang/AbstractStringBuilder.java",  # J2KT StringBuilder doesn't need it
