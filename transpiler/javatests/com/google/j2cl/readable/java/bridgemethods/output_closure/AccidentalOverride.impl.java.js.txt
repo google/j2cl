@@ -20,22 +20,27 @@ class AccidentalOverride extends A {
  static $create__() {
   AccidentalOverride.$clinit();
   let $instance = new AccidentalOverride();
-  $instance.$ctor__bridgemethods_AccidentalOverride__();
+  $instance.$ctor__bridgemethods_AccidentalOverride__void();
   return $instance;
  }
  /** @nodts */
- $ctor__bridgemethods_AccidentalOverride__() {
-  this.$ctor__bridgemethods_A__();
+ $ctor__bridgemethods_AccidentalOverride__void() {
+  this.$ctor__bridgemethods_A__void();
  }
  //Specialized bridge method.
  /** @override @nodts @return {?string} */
- m_fun__java_lang_String(/** ?string */ arg0) {
-  return /**@type {?string}*/ ($Casts.$to(super.m_fun__java_lang_Object(arg0), j_l_String));
+ m_fun__java_lang_String__java_lang_String(/** ?string */ arg0) {
+  return /**@type {?string}*/ ($Casts.$to(super.m_fun__java_lang_Object__java_lang_Object(arg0), j_l_String));
  }
  //Bridge method.
  /** @override @nodts @return {?string} */
- m_fun__java_lang_Object(/** ?string */ arg0) {
-  return this.m_fun__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ m_get__java_lang_String() {
+  return /**@type {?string}*/ ($Casts.$to(this.m_get__java_lang_Object(), j_l_String));
+ }
+ //Bridge method.
+ /** @override @nodts @return {?string} */
+ m_fun__java_lang_Object__java_lang_Object(/** ?string */ arg0) {
+  return this.m_fun__java_lang_String__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
  /** @nodts */
  static $clinit() {

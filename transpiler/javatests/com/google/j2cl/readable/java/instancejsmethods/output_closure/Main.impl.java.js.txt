@@ -16,30 +16,30 @@ class Main extends j_l_Object {
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
-  $instance.$ctor__instancejsmethods_Main__();
+  $instance.$ctor__instancejsmethods_Main__void();
   return $instance;
  }
  /** @nodts */
- $ctor__instancejsmethods_Main__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__instancejsmethods_Main__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_testCallBySuperParent__() {
+ m_testCallBySuperParent__void() {
   let sp = SuperParent.$create__();
   let p = Parent.$create__();
   let c = Child.$create__();
   let pp = Parent.$create__();
   let cc = Child.$create__();
   let intf = Child.$create__();
-  sp.m_fun__int__int(12, 35);
-  sp.m_bar__int__int(6, 7);
-  p.m_fun__int__int(12, 35);
-  p.m_bar__int__int(6, 7);
-  c.m_fun__int__int(12, 35);
-  c.m_bar__int__int(6, 7);
+  sp.m_fun__int__int__int(12, 35);
+  sp.m_bar__int__int__int(6, 7);
+  p.m_fun__int__int__int(12, 35);
+  p.m_bar__int__int__int(6, 7);
+  c.m_fun__int__int__int(12, 35);
+  c.m_bar__int__int__int(6, 7);
   pp.myFoo(1);
   cc.myFoo(1);
-  intf.m_intfFoo__();
+  intf.m_intfFoo__int();
  }
  /** @nodts */
  static m_testCallByConcreteType__() {
@@ -47,8 +47,8 @@ class Main extends j_l_Object {
   let sp = SuperParent.$create__();
   let p = Parent.$create__();
   let c = Child.$create__();
-  sp.m_fun__int__int(12, 35);
-  sp.m_bar__int__int(6, 7);
+  sp.m_fun__int__int__int(12, 35);
+  sp.m_bar__int__int__int(6, 7);
   p.sum(12, 35);
   p.bar(6, 7);
   p.myFoo(1);

@@ -34,13 +34,13 @@ class Main extends j_l_Object {
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
-  $instance.$ctor__jsfunction_Main__();
+  $instance.$ctor__jsfunction_Main__void();
   return $instance;
  }
  /** @nodts */
- $ctor__jsfunction_Main__() {
-  this.$ctor__java_lang_Object__();
-  this.$init___$p_jsfunction_Main();
+ $ctor__jsfunction_Main__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_jsfunction_Main();
  }
  // /** @return {?function(number):number} */
  // native static createNativeFunction() 
@@ -50,7 +50,7 @@ class Main extends j_l_Object {
   return fn(a);
  }
  /** @nodts */
- m_testJsFunction__() {
+ m_testJsFunction__void() {
   let func = JsFunctionImplementation.$create__();
   func(10);
   Main.m_callFn__jsfunction_Main_JsFunctionInterface__int(Main.createNativeFunction(), 10);
@@ -58,7 +58,7 @@ class Main extends j_l_Object {
   JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation(func);
  }
  /** @nodts */
- m_testJsFunctionsCapturingLocal__() {
+ m_testJsFunctionsCapturingLocal__void() {
   let n = 4;
   Main.m_callFn__jsfunction_Main_JsFunctionInterface__int((/** number */ number_1) =>{
    return number_1 + n | 0;
@@ -67,21 +67,21 @@ class Main extends j_l_Object {
    return a + n | 0;
   }, n);
   ((/** number */ a_1) =>{
-   this.m_instanceMethod___$p_jsfunction_Main();
+   this.m_instanceMethod__void_$p_jsfunction_Main();
    return 0;
   })(3);
  }
  /** @nodts */
- m_testJsFunctionThis__() {
+ m_testJsFunctionThis__void() {
   ((/** number */ a) =>{
-   this.m_instanceMethod___$p_jsfunction_Main();
+   this.m_instanceMethod__void_$p_jsfunction_Main();
    return 0;
   })(3);
  }
  /** @nodts */
- m_instanceMethod___$p_jsfunction_Main() {}
+ m_instanceMethod__void_$p_jsfunction_Main() {}
  /** @nodts */
- m_testJsFunctionErasureCasts__() {
+ m_testJsFunctionErasureCasts__void() {
   let list = /**@type {!ArrayList<?function(?string):?string>}*/ (ArrayList.$create__());
   Main.m_acceptsJsFunction__jsfunction_Main_Function(/**@type {?function(?string):?string}*/ ($Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));
  }
@@ -90,7 +90,7 @@ class Main extends j_l_Object {
   Main.$clinit();
  }
  /** @nodts @return {?function(number, ...number):number} */
- m_testJsFunctionVarargs___$pp_jsfunction() {
+ m_testJsFunctionVarargs__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction() {
   let f = (/** number */ i, .../** ...number */ numbers) =>{
    $Arrays.$stampType(numbers, $$int, 1);
    let sum = i;
@@ -105,7 +105,7 @@ class Main extends j_l_Object {
   return f;
  }
  /** @nodts @return {?function(number, ...number):number} */
- m_testJsFunctionVarargsInnerClass___$pp_jsfunction() {
+ m_testJsFunctionVarargsInnerClass__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction() {
   return (/** number */ i, .../** ...number */ numbers) =>{
    $Arrays.$stampType(numbers, $$int, 1);
    let sum = i;
@@ -119,7 +119,7 @@ class Main extends j_l_Object {
   };
  }
  /** @nodts */
- m_testVarArgsMethodReferenceToJsFuncion__() {
+ m_testVarArgsMethodReferenceToJsFuncion__void() {
   let c = (arg0, /** number */ arg1, arg2) =>{
    let arg0_1 = /**@type {?function(...*):*}*/ ($Casts.$to(arg0, $JavaScriptFunction));
    let arg2_1 = /**@type {Array<?function(...*):*>}*/ ($Arrays.$castTo(arg2, $JavaScriptFunction, 1));
@@ -127,9 +127,9 @@ class Main extends j_l_Object {
   };
  }
  /** @nodts @template T */
- m_acceptsVarargsJsFunctionWithTypeVariable__jsfunction_Main_JsFunctionVarargsGenerics_$pp_jsfunction(/** ?function(number, ...T):number */ x) {}
+ m_acceptsVarargsJsFunctionWithTypeVariable__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction(/** ?function(number, ...T):number */ x) {}
  /** @nodts @template T */
- m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_Main_JsFunctionVarargsGenerics_$pp_jsfunction(/** ?function(number, ...List<T>):number */ x) {}
+ m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction(/** ?function(number, ...List<T>):number */ x) {}
  /** @template T */
  acceptsVarargsJsFunctionWithTypeVariableInVarargs(.../** ...?function(number, ...T):number */ x) {
   $Arrays.$stampType(x, $JavaScriptFunction, 1);
@@ -143,13 +143,13 @@ class Main extends j_l_Object {
   $Arrays.$stampType(x, $JavaScriptFunction, 1);
  }
  /** @nodts */
- m_testJsFunctionClassLiterals___$pp_jsfunction() {
+ m_testJsFunctionClassLiterals__void_$pp_jsfunction() {
   let array = /**@type {!Array<?function():void>}*/ ($Arrays.$init([], $JavaScriptFunction));
   let o = Class.$get($JavaScriptFunction);
   o = Class.$get($JavaScriptFunction, 1);
  }
  /** @nodts */
- m_testJsFunctionOptional___$pp_jsfunction() {
+ m_testJsFunctionOptional__void_$pp_jsfunction() {
   let f = (/** number */ i, /** ?number= */ n) =>{
    return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));
   };
@@ -164,7 +164,7 @@ class Main extends j_l_Object {
   return null;
  }
  /** @nodts */
- m_testFunctionExpressionTypeReplacement___$pp_jsfunction() {
+ m_testFunctionExpressionTypeReplacement__void_$pp_jsfunction() {
   let f = (unused) =>{
    let unused_1 = /**@type {?string}*/ ($Casts.$to(unused, j_l_String));
    let l = /**@type {!ArrayList<List<?>>}*/ (ArrayList.$create__());
@@ -172,7 +172,7 @@ class Main extends j_l_Object {
   };
  }
  /** @nodts */
- m_testJsFunctionPropertyCall___$pp_jsfunction() {
+ m_testJsFunctionPropertyCall__void_$pp_jsfunction() {
   let c = ClassWithJsFunctionProperty.$create__();
   {
    let $function = c.f_function__jsfunction_Main_ClassWithJsFunctionProperty;
@@ -254,7 +254,7 @@ class Main extends j_l_Object {
  /** @nodts */
  static m_acceptsParameterizedMethod__jsfunction_Main_ParameterizedMethod(/** ?function(?):? */ m) {}
  /** @private @nodts */
- $init___$p_jsfunction_Main() {
+ $init__void_$p_jsfunction_Main() {
   this.f_jsFunctionFieldWildcard__jsfunction_Main = (/** ? */ event) =>{};
   this.f_jsFunctionFieldParameterized__jsfunction_Main = (event_1) =>{
    let event_2 = /**@type {?string}*/ ($Casts.$to(event_1, j_l_String));

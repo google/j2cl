@@ -10,17 +10,17 @@
 [SimpleLongs] => [$create__]
 [SimpleLongs] => [SimpleLongs.$clinit();] "simplelongs.SimpleLongs.<synthetic: ctor_create>"
 [SimpleLongs] => [let $instance = new SimpleLongs();] "simplelongs.SimpleLongs.<synthetic: ctor_create>"
-[SimpleLongs] => [$instance.$ctor__simplelongs_SimpleLongs__();] "simplelongs.SimpleLongs.<synthetic: ctor_create>"
+[SimpleLongs] => [$instance.$ctor__simplelongs_SimpleLongs__void();] "simplelongs.SimpleLongs.<synthetic: ctor_create>"
 [SimpleLongs] => [return $instance;] "simplelongs.SimpleLongs.<synthetic: ctor_create>"
-[SimpleLongs] => [$ctor__simplelongs_SimpleLongs__]
-[SimpleLongs] => [this.$ctor__java_lang_Object__();] "simplelongs.SimpleLongs.<init>"
-[SimpleLongs] => [this.$init___$p_simplelongs_SimpleLongs();] "simplelongs.SimpleLongs.<init>"
-[getBar] => [m_getBar__]
+[SimpleLongs] => [$ctor__simplelongs_SimpleLongs__void]
+[SimpleLongs] => [this.$ctor__java_lang_Object__void();] "simplelongs.SimpleLongs.<init>"
+[SimpleLongs] => [this.$init__void_$p_simplelongs_SimpleLongs();] "simplelongs.SimpleLongs.<init>"
+[getBar] => [m_getBar__long]
 [return 0;] => [return $Long.fromInt(0);] "simplelongs.SimpleLongs.getBar"
-[getWithSideEffect] => [m_getWithSideEffect__]
+[getWithSideEffect] => [m_getWithSideEffect__simplelongs_SimpleLongs]
 [sideEffect++;] => [this.f_sideEffect__simplelongs_SimpleLongs_ = this.f_sideEffect__simplelongs_SimpleLongs_ + 1 | 0;] "simplelongs.SimpleLongs.getWithSideEffect"
 [return this;] => [return this;] "simplelongs.SimpleLongs.getWithSideEffect"
-[main] => [m_main__]
+[main] => [m_main__void]
 [{
     // Small literals.
 ...    g = getBar();
@@ -40,15 +40,15 @@
 [long e = ++a;] => [let e = a = $LongUtils.plus(a, $Long.fromInt(1));] "simplelongs.SimpleLongs.main"
 [e] => [e] "e"
 [e = ++foo;] => [e = this.f_foo__simplelongs_SimpleLongs = $LongUtils.plus(this.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1));] "simplelongs.SimpleLongs.main"
-[e = ++getWithSideEffect().foo;] => [e = ($qualifier = this.m_getWithSideEffect__(), $qualifier.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)));] "simplelongs.SimpleLongs.main"
+[e = ++getWithSideEffect().foo;] => [e = ($qualifier = this.m_getWithSideEffect__simplelongs_SimpleLongs(), $qualifier.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)));] "simplelongs.SimpleLongs.main"
 [long f = a++;] => [let f = ($value = a, a = $LongUtils.plus(a, $Long.fromInt(1)), $value);] "simplelongs.SimpleLongs.main"
 [f] => [f] "f"
 [f = foo++;] => [f = ($value_1 = this.f_foo__simplelongs_SimpleLongs, this.f_foo__simplelongs_SimpleLongs = $LongUtils.plus(this.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)), $value_1);] "simplelongs.SimpleLongs.main"
-[f = getWithSideEffect().foo++;] => [f = (($qualifier_1 = this.m_getWithSideEffect__(), $value_2 = $qualifier_1.f_foo__simplelongs_SimpleLongs), $qualifier_1.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier_1.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)), $value_2);] "simplelongs.SimpleLongs.main"
+[f = getWithSideEffect().foo++;] => [f = (($qualifier_1 = this.m_getWithSideEffect__simplelongs_SimpleLongs(), $value_2 = $qualifier_1.f_foo__simplelongs_SimpleLongs), $qualifier_1.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier_1.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)), $value_2);] "simplelongs.SimpleLongs.main"
 [long g = foo;] => [let g = this.f_foo__simplelongs_SimpleLongs;] "simplelongs.SimpleLongs.main"
 [g] => [g] "g"
-[g = getBar();] => [g = this.m_getBar__();] "simplelongs.SimpleLongs.main"
-[SimpleLongs] => [$init___$p_simplelongs_SimpleLongs]
+[g = getBar();] => [g = this.m_getBar__long();] "simplelongs.SimpleLongs.main"
+[SimpleLongs] => [$init__void_$p_simplelongs_SimpleLongs]
 [public long foo = 0;] => [this.f_foo__simplelongs_SimpleLongs = $Long.fromInt(0);] "simplelongs.SimpleLongs.<init>"
 [SimpleLongs] => [$clinit]
 [SimpleLongs] => [SimpleLongs.$clinit = () =>{};] "simplelongs.SimpleLongs.<clinit>"

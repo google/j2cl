@@ -21,12 +21,12 @@ class JsFunctionImplementation extends j_l_Object {
  static $create__() {
   JsFunctionImplementation.$clinit();
   let $instance = new JsFunctionImplementation();
-  $instance.$ctor__jsfunction_Main_JsFunctionImplementation__();
-  return $Util.$makeLambdaFunction(JsFunctionImplementation.prototype.m_foo__int, $instance, JsFunctionImplementation.$copy);
+  $instance.$ctor__jsfunction_Main_JsFunctionImplementation__void();
+  return $Util.$makeLambdaFunction(JsFunctionImplementation.prototype.m_foo__int__int, $instance, JsFunctionImplementation.$copy);
  }
  /** @nodts @suppress {invalidCasts} */
- $ctor__jsfunction_Main_JsFunctionImplementation__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__jsfunction_Main_JsFunctionImplementation__void() {
+  this.$ctor__java_lang_Object__void();
   this.f_storedThis__jsfunction_Main_JsFunctionImplementation = this;
   this.f_anotherStoredThis__jsfunction_Main_JsFunctionImplementation = /**@type {?function(number):number}*/ (this);
  }
@@ -42,7 +42,7 @@ class JsFunctionImplementation extends j_l_Object {
   return JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation($thisArg) + $thisArg(1) | 0;
  }
  /** @this {?function(number):number} @return {number} */
- m_foo__int(/** number */ a) {
+ m_foo__int__int(/** number */ a) {
   return a + JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation(this) + this.f_field__jsfunction_Main_JsFunctionImplementation | 0;
  }
  /** @nodts @return {number} */

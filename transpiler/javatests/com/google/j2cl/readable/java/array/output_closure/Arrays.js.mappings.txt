@@ -4,11 +4,11 @@
 [Arrays] => [$create__]
 [Arrays] => [Arrays.$clinit();] "array.Arrays.<synthetic: ctor_create>"
 [Arrays] => [let $instance = new Arrays();] "array.Arrays.<synthetic: ctor_create>"
-[Arrays] => [$instance.$ctor__array_Arrays__();] "array.Arrays.<synthetic: ctor_create>"
+[Arrays] => [$instance.$ctor__array_Arrays__void();] "array.Arrays.<synthetic: ctor_create>"
 [Arrays] => [return $instance;] "array.Arrays.<synthetic: ctor_create>"
-[Arrays] => [$ctor__array_Arrays__]
-[Arrays] => [this.$ctor__java_lang_Object__();] "array.Arrays.<init>"
-[testObjectArray] => [m_testObjectArray__]
+[Arrays] => [$ctor__array_Arrays__void]
+[Arrays] => [this.$ctor__java_lang_Object__void();] "array.Arrays.<init>"
+[testObjectArray] => [m_testObjectArray__void]
 [Object[] objects = new Object[100];] => [let objects = new Array(100);] "array.Arrays.testObjectArray"
 [objects] => [objects] "objects"
 [objects = new Object[0];] => [objects = new Array(0);] "array.Arrays.testObjectArray"
@@ -24,7 +24,7 @@
 [object = objects2d[0][1];] => [object = objects2d[0][1];] "array.Arrays.testObjectArray"
 [objects[0] = null;] => [$Arrays.$set(objects, 0, null);] "array.Arrays.testObjectArray"
 [objects2d[0][1] = null;] => [$Arrays.$set(objects2d[0], 1, null);] "array.Arrays.testObjectArray"
-[testJavaTypeArray] => [m_testJavaTypeArray__]
+[testJavaTypeArray] => [m_testJavaTypeArray__void]
 [SomeObject[] objects = new SomeObject[100];] => [let objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$create([100], SomeObject));] "array.Arrays.testJavaTypeArray"
 [objects] => [objects] "objects"
 [objects = new SomeObject[0];] => [objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$create([0], SomeObject));] "array.Arrays.testJavaTypeArray"
@@ -38,7 +38,7 @@
 [someObject = objects2d[0][1];] => [someObject = objects2d[0][1];] "array.Arrays.testJavaTypeArray"
 [objects[0] = null;] => [$Arrays.$set(objects, 0, null);] "array.Arrays.testJavaTypeArray"
 [objects2d[0][1] = null;] => [$Arrays.$set(objects2d[0], 1, null);] "array.Arrays.testJavaTypeArray"
-[testIntArrays] => [m_testIntArrays___$pp_array]
+[testIntArrays] => [m_testIntArrays__void_$pp_array]
 [int[] ints = new int[100];] => [let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $$int));] "array.Arrays.testIntArrays"
 [ints] => [ints] "ints"
 [ints = new int[0];] => [ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int));] "array.Arrays.testIntArrays"
@@ -52,7 +52,7 @@
 [n = ints2d[0][1];] => [n = ints2d[0][1];] "array.Arrays.testIntArrays"
 [ints[0] = 1;] => [$Arrays.$set(ints, 0, 1);] "array.Arrays.testIntArrays"
 [ints2d[0][1] = 1;] => [$Arrays.$set(ints2d[0], 1, 1);] "array.Arrays.testIntArrays"
-[testLongArrays] => [m_testLongArrays___$pp_array]
+[testLongArrays] => [m_testLongArrays__void_$pp_array]
 [long[] longs = new long[100];] => [let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $$long));] "array.Arrays.testLongArrays"
 [longs] => [longs] "longs"
 [longs = new long[0];] => [longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));] "array.Arrays.testLongArrays"
@@ -66,7 +66,7 @@
 [n = longs2d[0][1];] => [n = longs2d[0][1];] "array.Arrays.testLongArrays"
 [longs[0] = 1;] => [$Arrays.$set(longs, 0, $Long.fromInt(1));] "array.Arrays.testLongArrays"
 [longs2d[0][1] = 1;] => [$Arrays.$set(longs2d[0], 1, $Long.fromInt(1));] "array.Arrays.testLongArrays"
-[testDevirtualizedTypeArrays] => [m_testDevirtualizedTypeArrays___$pp_array]
+[testDevirtualizedTypeArrays] => [m_testDevirtualizedTypeArrays__void_$pp_array]
 [Boolean[] booleans = new Boolean[100];] => [let booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([100], Boolean));] "array.Arrays.testDevirtualizedTypeArrays"
 [booleans] => [booleans] "booleans"
 [booleans = new Boolean[0];] => [booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([0], Boolean));] "array.Arrays.testDevirtualizedTypeArrays"
@@ -80,7 +80,7 @@
 [b = booleans2d[0][1];] => [b = Boolean.m_booleanValue__java_lang_Boolean(booleans2d[0][1]);] "array.Arrays.testDevirtualizedTypeArrays"
 [booleans[0] = true;] => [$Arrays.$set(booleans, 0, true);] "array.Arrays.testDevirtualizedTypeArrays"
 [booleans2d[0][1] = false;] => [$Arrays.$set(booleans2d[0], 1, false);] "array.Arrays.testDevirtualizedTypeArrays"
-[testStringArrays] => [m_testStringArrays___$pp_array]
+[testStringArrays] => [m_testStringArrays__void_$pp_array]
 [String[] strings = new String[100];] => [let strings = /**@type {!Array<?string>}*/ ($Arrays.$create([100], j_l_String));] "array.Arrays.testStringArrays"
 [strings] => [strings] "strings"
 [strings = new String[0];] => [strings = /**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String));] "array.Arrays.testStringArrays"
@@ -94,7 +94,7 @@
 [b = strings2d[0][1];] => [b = strings2d[0][1];] "array.Arrays.testStringArrays"
 [strings[0] = null;] => [$Arrays.$set(strings, 0, null);] "array.Arrays.testStringArrays"
 [strings2d[0][1] = null;] => [$Arrays.$set(strings2d[0], 1, null);] "array.Arrays.testStringArrays"
-[testNativeArray] => [m_testNativeArray__]
+[testNativeArray] => [m_testNativeArray__void]
 [NativeType[] nativeObjects = new NativeType[100];] => [let nativeObjects = new Array(100);] "array.Arrays.testNativeArray"
 [nativeObjects] => [nativeObjects] "nativeObjects"
 [nativeObjects = new NativeType[0];] => [nativeObjects = new Array(0);] "array.Arrays.testNativeArray"
@@ -108,23 +108,23 @@
 [nativeObject = nativeObjects2d[0][1];] => [nativeObject = nativeObjects2d[0][1];] "array.Arrays.testNativeArray"
 [nativeObjects[0] = null;] => [$Arrays.$set(nativeObjects, 0, null);] "array.Arrays.testNativeArray"
 [nativeObjects2d[0][1] = null;] => [$Arrays.$set(nativeObjects2d[0], 1, null);] "array.Arrays.testNativeArray"
-[testErasureCastsOnArrayAccess] => [m_testErasureCastsOnArrayAccess__]
+[testErasureCastsOnArrayAccess] => [m_testErasureCastsOnArrayAccess__void]
 [ArrayContainer<String> container = null;] => [let container = null;] "array.Arrays.testErasureCastsOnArrayAccess"
 [container] => [container] "container"
 [String s = container.data[0];] => [let s = /**@type {!Array<?string>}*/ ($Arrays.$castTo(container.f_data__array_Arrays_ArrayContainer, j_l_String, 1))[0];] "array.Arrays.testErasureCastsOnArrayAccess"
 [s] => [s] "s"
-[testCovariance] => [m_testCovariance__]
+[testCovariance] => [m_testCovariance__void]
 [Object[] objectArray = null;] => [let objectArray = null;] "array.Arrays.testCovariance"
 [objectArray] => [objectArray] "objectArray"
 [String[] stringArray = null;] => [let stringArray = null;] "array.Arrays.testCovariance"
 [stringArray] => [stringArray] "stringArray"
 [objectArray = stringArray;] => [objectArray = stringArray;] "array.Arrays.testCovariance"
-[testArraysSupertypeClosureTypes] => [m_testArraysSupertypeClosureTypes__]
-[consumesCloneable(new Object[10]);] => [this.m_consumesCloneable__java_lang_Cloneable(new Array(10));] "array.Arrays.testArraysSupertypeClosureTypes"
-[consumesSerializable(new Object[10]);] => [this.m_consumesSerializable__java_io_Serializable(new Array(10));] "array.Arrays.testArraysSupertypeClosureTypes"
-[consumesCloneable] => [m_consumesCloneable__java_lang_Cloneable]
+[testArraysSupertypeClosureTypes] => [m_testArraysSupertypeClosureTypes__void]
+[consumesCloneable(new Object[10]);] => [this.m_consumesCloneable__java_lang_Cloneable__void(new Array(10));] "array.Arrays.testArraysSupertypeClosureTypes"
+[consumesSerializable(new Object[10]);] => [this.m_consumesSerializable__java_io_Serializable__void(new Array(10));] "array.Arrays.testArraysSupertypeClosureTypes"
+[consumesCloneable] => [m_consumesCloneable__java_lang_Cloneable__void]
 [cloneable] => [cloneable] "cloneable"
-[consumesSerializable] => [m_consumesSerializable__java_io_Serializable]
+[consumesSerializable] => [m_consumesSerializable__java_io_Serializable__void]
 [serializable] => [serializable] "serializable"
 [Arrays] => [$clinit]
 [Arrays] => [Arrays.$clinit = () =>{};] "array.Arrays.<clinit>"

@@ -23,40 +23,40 @@ class Builder extends j_l_Object {
  static $create__() {
   Builder.$clinit();
   let $instance = new Builder();
-  $instance.$ctor__autovalue_AutoValueWithBuilder_Builder__();
+  $instance.$ctor__autovalue_AutoValueWithBuilder_Builder__void();
   return $instance;
  }
  /** @nodts */
- $ctor__autovalue_AutoValueWithBuilder_Builder__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__autovalue_AutoValueWithBuilder_Builder__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts @return {!Builder} */
  static $create__autovalue_AutoValueWithBuilder(/** AutoValueWithBuilder */ source) {
   Builder.$clinit();
   let $instance = new Builder();
-  $instance.$ctor__autovalue_AutoValueWithBuilder_Builder__autovalue_AutoValueWithBuilder(source);
+  $instance.$ctor__autovalue_AutoValueWithBuilder_Builder__autovalue_AutoValueWithBuilder__void(source);
   return $instance;
  }
  /** @nodts */
- $ctor__autovalue_AutoValueWithBuilder_Builder__autovalue_AutoValueWithBuilder(/** AutoValueWithBuilder */ source) {
-  this.$ctor__java_lang_Object__();
-  this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = source.m_getBooleanField__();
-  this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = source.m_getNullableField__();
+ $ctor__autovalue_AutoValueWithBuilder_Builder__autovalue_AutoValueWithBuilder__void(/** AutoValueWithBuilder */ source) {
+  this.$ctor__java_lang_Object__void();
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = source.m_getBooleanField__boolean();
+  this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = source.m_getNullableField__java_lang_Double();
   this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = 1;
  }
  /** @nodts @return {Builder} */
- m_setBooleanField__boolean(/** boolean */ booleanField) {
+ m_setBooleanField__boolean__autovalue_AutoValueWithBuilder_Builder(/** boolean */ booleanField) {
   this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = booleanField;
   this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = $Primitives.narrowIntToByte(this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ | 1);
   return this;
  }
  /** @nodts @return {Builder} */
- m_setNullableField__java_lang_Double(/** ?number */ nullableField) {
+ m_setNullableField__java_lang_Double__autovalue_AutoValueWithBuilder_Builder(/** ?number */ nullableField) {
   this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = nullableField;
   return this;
  }
  /** @nodts @return {AutoValueWithBuilder} */
- m_build__() {
+ m_build__autovalue_AutoValueWithBuilder() {
   if (this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ != 1) {
    throw $Exceptions.toJs(IllegalStateException.$create__());
   }

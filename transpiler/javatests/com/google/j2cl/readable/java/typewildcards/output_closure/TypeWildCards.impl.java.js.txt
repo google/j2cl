@@ -23,37 +23,37 @@ class TypeWildCards extends j_l_Object {
  static $create__() {
   TypeWildCards.$clinit();
   let $instance = new TypeWildCards();
-  $instance.$ctor__typewildcards_TypeWildCards__();
+  $instance.$ctor__typewildcards_TypeWildCards__void();
   return $instance;
  }
  /** @nodts */
- $ctor__typewildcards_TypeWildCards__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__typewildcards_TypeWildCards__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_unbounded__typewildcards_GenericType(/** GenericType<?> */ g) {}
+ m_unbounded__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
  /** @nodts */
- m_upperBound__typewildcards_GenericType(/** GenericType<?> */ g) {}
+ m_upperBound__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
  /** @nodts */
- m_lowerBound__typewildcards_GenericType(/** GenericType<?> */ g) {}
+ m_lowerBound__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
  /** @nodts */
- m_test__() {
-  this.m_unbounded__typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
-  this.m_upperBound__typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
-  this.m_lowerBound__typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
+ m_test__void() {
+  this.m_unbounded__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
+  this.m_upperBound__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
+  this.m_lowerBound__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
  }
  /** @nodts @template T */
  static m_testBoundedTypeMemberAccess__typewildcards_TypeWildCards_A(/** T */ t) {
   TypeWildCards.$clinit();
   let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;
-  /**@type {A}*/ (t).m_m__();
+  /**@type {A}*/ (t).m_m__void();
  }
  /** @nodts @template T */
  static m_testIntersectionBoundedTypeMemberAccess__typewildcards_TypeWildCards_A(/** T */ t) {
   TypeWildCards.$clinit();
   let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;
-  /**@type {A}*/ (t).m_m__();
-  /**@type {!Y}*/ ($Casts.$to(t, Y)).m_n__();
+  /**@type {A}*/ (t).m_m__void();
+  /**@type {!Y}*/ ($Casts.$to(t, Y)).m_n__void();
  }
  /** @nodts @template F, V @return {List<V>} */
  static m_transform__java_util_List__java_util_function_Function(/** List<F> */ from, /** j_u_function_Function<?, ?> */ function_1) {
@@ -64,18 +64,18 @@ class TypeWildCards extends j_l_Object {
   return null;
  }
  /** @nodts */
- m_testInferredGenericIntersection__() {
+ m_testInferredGenericIntersection__void() {
   let elements = null;
   let otherElements = null;
   let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__java_util_List__java_util_function_Function(/**@type {List<*>}*/ (TypeWildCards.m_concat__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** ? */ a) =>{
-   /**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();
-   return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();
+   /**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__java_lang_String();
+   return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__java_lang_Integer();
   })));
  }
  /** @nodts */
  static m_takesRecursiveGeneric__typewildcards_GenericType(/** GenericType<Foo> */ foo) {}
  /** @nodts */
- m_testRecursiveGeneric__() {
+ m_testRecursiveGeneric__void() {
   TypeWildCards.m_takesRecursiveGeneric__typewildcards_GenericType(Foo.$create__typewildcards_TypeWildCards(this));
  }
  /** @nodts */

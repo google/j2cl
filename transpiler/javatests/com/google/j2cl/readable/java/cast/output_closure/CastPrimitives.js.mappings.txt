@@ -4,11 +4,11 @@
 [CastPrimitives] => [$create__]
 [CastPrimitives] => [CastPrimitives.$clinit();] "cast.CastPrimitives.<synthetic: ctor_create>"
 [CastPrimitives] => [let $instance = new CastPrimitives();] "cast.CastPrimitives.<synthetic: ctor_create>"
-[CastPrimitives] => [$instance.$ctor__cast_CastPrimitives__();] "cast.CastPrimitives.<synthetic: ctor_create>"
+[CastPrimitives] => [$instance.$ctor__cast_CastPrimitives__void();] "cast.CastPrimitives.<synthetic: ctor_create>"
 [CastPrimitives] => [return $instance;] "cast.CastPrimitives.<synthetic: ctor_create>"
-[CastPrimitives] => [$ctor__cast_CastPrimitives__]
-[CastPrimitives] => [this.$ctor__java_lang_Object__();] "cast.CastPrimitives.<init>"
-[testPrimitiveCasts] => [m_testPrimitiveCasts__]
+[CastPrimitives] => [$ctor__cast_CastPrimitives__void]
+[CastPrimitives] => [this.$ctor__java_lang_Object__void();] "cast.CastPrimitives.<init>"
+[testPrimitiveCasts] => [m_testPrimitiveCasts__void]
 [byte b = 1;] => [let b = 1;] "cast.CastPrimitives.testPrimitiveCasts"
 [b] => [b] "b"
 [char c = 1;] => [let c = 1 /* '\u0001' */;] "cast.CastPrimitives.testPrimitiveCasts"
@@ -72,39 +72,39 @@
 [l = (long) d;] => [l = $Primitives.narrowDoubleToLong(d);] "cast.CastPrimitives.testPrimitiveCasts"
 [f = (float) d;] => [f = d;] "cast.CastPrimitives.testPrimitiveCasts"
 [d = (double) d;] => [d = d;] "cast.CastPrimitives.testPrimitiveCasts"
-[testReferenceToPrimitive] => [m_testReferenceToPrimitive__]
+[testReferenceToPrimitive] => [m_testReferenceToPrimitive__void]
 [Object o = new Object();] => [let o = j_l_Object.$create__();] "cast.CastPrimitives.testReferenceToPrimitive"
 [o] => [o] "o"
 [boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {boolean}*/ ($Casts.$to(o, Boolean)));] "cast.CastPrimitives.testReferenceToPrimitive"
 [bool] => [bool] "bool"
-[byte b = (byte) o;] => [let b = /**@type {!Byte}*/ ($Casts.$to(o, Byte)).m_byteValue__();] "cast.CastPrimitives.testReferenceToPrimitive"
+[byte b = (byte) o;] => [let b = /**@type {!Byte}*/ ($Casts.$to(o, Byte)).m_byteValue__byte();] "cast.CastPrimitives.testReferenceToPrimitive"
 [b] => [b] "b"
-[char c = (char) o;] => [let c = /**@type {!Character}*/ ($Casts.$to(o, Character)).m_charValue__();] "cast.CastPrimitives.testReferenceToPrimitive"
+[char c = (char) o;] => [let c = /**@type {!Character}*/ ($Casts.$to(o, Character)).m_charValue__char();] "cast.CastPrimitives.testReferenceToPrimitive"
 [c] => [c] "c"
-[short s = (short) o;] => [let s = /**@type {!Short}*/ ($Casts.$to(o, Short)).m_shortValue__();] "cast.CastPrimitives.testReferenceToPrimitive"
+[short s = (short) o;] => [let s = /**@type {!Short}*/ ($Casts.$to(o, Short)).m_shortValue__short();] "cast.CastPrimitives.testReferenceToPrimitive"
 [s] => [s] "s"
-[int i = (int) o;] => [let i = /**@type {!Integer}*/ ($Casts.$to(o, Integer)).m_intValue__();] "cast.CastPrimitives.testReferenceToPrimitive"
+[int i = (int) o;] => [let i = /**@type {!Integer}*/ ($Casts.$to(o, Integer)).m_intValue__int();] "cast.CastPrimitives.testReferenceToPrimitive"
 [i] => [i] "i"
-[long l = (long) o;] => [let l = /**@type {!Long}*/ ($Casts.$to(o, Long)).m_longValue__();] "cast.CastPrimitives.testReferenceToPrimitive"
+[long l = (long) o;] => [let l = /**@type {!Long}*/ ($Casts.$to(o, Long)).m_longValue__long();] "cast.CastPrimitives.testReferenceToPrimitive"
 [l] => [l] "l"
-[float f = (float) o;] => [let f = /**@type {!Float}*/ ($Casts.$to(o, Float)).m_floatValue__();] "cast.CastPrimitives.testReferenceToPrimitive"
+[float f = (float) o;] => [let f = /**@type {!Float}*/ ($Casts.$to(o, Float)).m_floatValue__float();] "cast.CastPrimitives.testReferenceToPrimitive"
 [f] => [f] "f"
 [double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double(/**@type {number}*/ ($Casts.$to(o, Double)));] "cast.CastPrimitives.testReferenceToPrimitive"
 [d] => [d] "d"
-[testUnboxAndWiden] => [m_testUnboxAndWiden__]
+[testUnboxAndWiden] => [m_testUnboxAndWiden__void]
 [Byte boxedByte = Byte.valueOf((byte) 0);] => [let boxedByte = Byte.m_valueOf__byte(0);] "cast.CastPrimitives.testUnboxAndWiden"
 [boxedByte] => [boxedByte] "boxedByte"
-[short s = (short) boxedByte;] => [let s = boxedByte.m_byteValue__();] "cast.CastPrimitives.testUnboxAndWiden"
+[short s = (short) boxedByte;] => [let s = boxedByte.m_byteValue__byte();] "cast.CastPrimitives.testUnboxAndWiden"
 [s] => [s] "s"
-[int i = (int) boxedByte;] => [let i = boxedByte.m_byteValue__();] "cast.CastPrimitives.testUnboxAndWiden"
+[int i = (int) boxedByte;] => [let i = boxedByte.m_byteValue__byte();] "cast.CastPrimitives.testUnboxAndWiden"
 [i] => [i] "i"
-[long l = (long) boxedByte;] => [let l = $Primitives.widenByteToLong(boxedByte.m_byteValue__());] "cast.CastPrimitives.testUnboxAndWiden"
+[long l = (long) boxedByte;] => [let l = $Primitives.widenByteToLong(boxedByte.m_byteValue__byte());] "cast.CastPrimitives.testUnboxAndWiden"
 [l] => [l] "l"
-[float f = (float) boxedByte;] => [let f = boxedByte.m_byteValue__();] "cast.CastPrimitives.testUnboxAndWiden"
+[float f = (float) boxedByte;] => [let f = boxedByte.m_byteValue__byte();] "cast.CastPrimitives.testUnboxAndWiden"
 [f] => [f] "f"
-[double d = (double) boxedByte;] => [let d = boxedByte.m_byteValue__();] "cast.CastPrimitives.testUnboxAndWiden"
+[double d = (double) boxedByte;] => [let d = boxedByte.m_byteValue__byte();] "cast.CastPrimitives.testUnboxAndWiden"
 [d] => [d] "d"
-[testImplicitArgumentCasts] => [m_testImplicitArgumentCasts__]
+[testImplicitArgumentCasts] => [m_testImplicitArgumentCasts__void]
 [final byte b = 127;] => [let b = 127;] "cast.CastPrimitives.testImplicitArgumentCasts"
 [b] => [b] "b"
 [final char c = 65535;] => [let c = 65535 /* '\uFFFF' */;] "cast.CastPrimitives.testImplicitArgumentCasts"
@@ -133,7 +133,7 @@
 [new LongValueHolder(b);] => [LongValueHolder.$create__long($Primitives.widenByteToLong(b));] "cast.CastPrimitives.testImplicitArgumentCasts"
 [new LongValueHolder(c);] => [LongValueHolder.$create__long($Primitives.widenCharToLong(c));] "cast.CastPrimitives.testImplicitArgumentCasts"
 [new LongValueHolder(i);] => [LongValueHolder.$create__long($Primitives.widenIntToLong(i));] "cast.CastPrimitives.testImplicitArgumentCasts"
-[testImplicitArrayIndexCasts] => [m_testImplicitArrayIndexCasts__arrayOf_byte]
+[testImplicitArrayIndexCasts] => [m_testImplicitArrayIndexCasts__arrayOf_byte__void]
 [array] => [array] "array"
 [final byte b = 127;] => [let b = 127;] "cast.CastPrimitives.testImplicitArrayIndexCasts"
 [b] => [b] "b"
@@ -166,7 +166,7 @@
 [getDouble] => [m_getDouble__double]
 [value] => [value] "value"
 [return value;] => [return value;] "cast.CastPrimitives.getDouble"
-[testImplicitLongAssignmentCasts] => [m_testImplicitLongAssignmentCasts__]
+[testImplicitLongAssignmentCasts] => [m_testImplicitLongAssignmentCasts__void]
 [byte fbyte = 11;] => [let fbyte = 11;] "cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [fbyte] => [fbyte] "fbyte"
 [char fchar = 12;] => [let fchar = 12 /* '\f' */;] "cast.CastPrimitives.testImplicitLongAssignmentCasts"

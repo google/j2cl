@@ -20,27 +20,27 @@ class AccidentalOverrideBridge extends ClassWithParameterizedGet {
  static $create__() {
   AccidentalOverrideBridge.$clinit();
   let $instance = new AccidentalOverrideBridge();
-  $instance.$ctor__bridgemethods_AccidentalOverrideBridge__();
+  $instance.$ctor__bridgemethods_AccidentalOverrideBridge__void();
   return $instance;
  }
  /** @nodts */
- $ctor__bridgemethods_AccidentalOverrideBridge__() {
-  this.$ctor__bridgemethods_ClassWithParameterizedGet__();
+ $ctor__bridgemethods_AccidentalOverrideBridge__void() {
+  this.$ctor__bridgemethods_ClassWithParameterizedGet__void();
  }
  /** @nodts */
- m_test__() {
+ m_test__void() {
   let g = AccidentalOverrideBridge.$create__();
-  g.m_get__java_lang_String('');
+  g.m_get__java_lang_String__java_lang_String('');
  }
  //Specialized bridge method.
  /** @override @nodts @return {?string} */
- m_get__java_lang_String(/** ?string */ arg0) {
-  return /**@type {?string}*/ ($Casts.$to(super.m_get__java_lang_Object(arg0), j_l_String));
+ m_get__java_lang_String__java_lang_String(/** ?string */ arg0) {
+  return /**@type {?string}*/ ($Casts.$to(super.m_get__java_lang_Object__java_lang_Object(arg0), j_l_String));
  }
  //Bridge method.
  /** @override @nodts @return {?string} */
- m_get__java_lang_Object(/** ?string */ arg0) {
-  return this.m_get__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ m_get__java_lang_Object__java_lang_Object(/** ?string */ arg0) {
+  return this.m_get__java_lang_String__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
  /** @nodts */
  static $clinit() {

@@ -4,11 +4,11 @@
 [TryCatch] => [$create__]
 [TryCatch] => [TryCatch.$clinit();] "trycatch.TryCatch.<synthetic: ctor_create>"
 [TryCatch] => [let $instance = new TryCatch();] "trycatch.TryCatch.<synthetic: ctor_create>"
-[TryCatch] => [$instance.$ctor__trycatch_TryCatch__();] "trycatch.TryCatch.<synthetic: ctor_create>"
+[TryCatch] => [$instance.$ctor__trycatch_TryCatch__void();] "trycatch.TryCatch.<synthetic: ctor_create>"
 [TryCatch] => [return $instance;] "trycatch.TryCatch.<synthetic: ctor_create>"
-[TryCatch] => [$ctor__trycatch_TryCatch__]
-[TryCatch] => [this.$ctor__java_lang_Object__();] "trycatch.TryCatch.<init>"
-[testMultiCatch] => [m_testMultiCatch__]
+[TryCatch] => [$ctor__trycatch_TryCatch__void]
+[TryCatch] => [this.$ctor__java_lang_Object__void();] "trycatch.TryCatch.<init>"
+[testMultiCatch] => [m_testMultiCatch__void]
 [try {
       throw new ClassCastException();
 ...      r = null; // used to show exception variable is transpiled correctly.
@@ -45,7 +45,7 @@
 [{
       throw e;
     }] => [throw $Exceptions.toJs(__$exc);] "trycatch.TryCatch.testMultiCatch"
-[testEmptyThrowableCatch] => [m_testEmptyThrowableCatch__]
+[testEmptyThrowableCatch] => [m_testEmptyThrowableCatch__void]
 [try {
       throw new ClassCastException();
 ...      // expected empty body.
@@ -67,7 +67,7 @@
 [{
       // expected empty body.
     }] => [if (Exception.$isInstance(__$exc_1)) {} else {}] "trycatch.TryCatch.testEmptyThrowableCatch"
-[testEmptyThrowableRethrow] => [m_testEmptyThrowableRethrow__]
+[testEmptyThrowableRethrow] => [m_testEmptyThrowableRethrow__void]
 [try {
       throw new ClassCastException();
 ...      throw e;
@@ -84,7 +84,7 @@
     }] => [let e = /**@type {Throwable}*/ (__$exc);] "trycatch.TryCatch.testEmptyThrowableRethrow"
 [e] => [e] "e"
 [throw e;] => [throw $Exceptions.toJs(e);] "trycatch.TryCatch.testEmptyThrowableRethrow"
-[testFinally] => [m_testFinally__]
+[testFinally] => [m_testFinally__void]
 [try {
       assert true;
     } finally {
@@ -92,7 +92,7 @@
    $Asserts.$assert(true);
   } finally {}] "trycatch.TryCatch.testFinally"
 [assert true;] => [$Asserts.$assert(true);] "trycatch.TryCatch.testFinally"
-[testTryWithResource] => [m_testTryWithResource__]
+[testTryWithResource] => [m_testTryWithResource__void]
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
@@ -175,7 +175,7 @@
 [{
       // expected empty body.
     }] => [throw $Exceptions.toJs(__$exc_1);] "trycatch.TryCatch.testTryWithResource"
-[testTryWithResourceJava9] => [m_testTryWithResourceJava9__]
+[testTryWithResourceJava9] => [m_testTryWithResourceJava9__void]
 [ClosableThing thing = new ClosableThing();] => [let thing = ClosableThing.$create__();] "trycatch.TryCatch.testTryWithResourceJava9"
 [thing] => [thing] "thing"
 [ClosableThing thing2 = new ClosableThing();] => [let thing2 = ClosableThing.$create__();] "trycatch.TryCatch.testTryWithResourceJava9"
@@ -260,7 +260,7 @@
 [{
       // expected empty body.
     }] => [throw $Exceptions.toJs(__$exc_1);] "trycatch.TryCatch.testTryWithResourceJava9"
-[testTryWithResouceOnStaticField] => [m_testTryWithResouceOnStaticField__]
+[testTryWithResouceOnStaticField] => [m_testTryWithResouceOnStaticField__void]
 [try (closableThing) {
       throw new Exception();
 ...      // expected empty body
@@ -329,7 +329,7 @@
 [{
       // expected empty body
     }] => [throw $Exceptions.toJs(__$exc_1);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
-[testNestedTryCatch] => [m_testNestedTryCatch__]
+[testNestedTryCatch] => [m_testNestedTryCatch__void]
 [try {
       throw new Exception();
 ...      }
@@ -377,14 +377,14 @@
       try {
 ...      }
     }] => [throw $Exceptions.toJs(__$exc);] "trycatch.TryCatch.testNestedTryCatch"
-[testThrowGenerics] => [m_testThrowGenerics__]
-[throw getT(new Exception());] => [throw $Exceptions.toJs(/**@type {Exception}*/ ($Casts.$to(this.m_getT__java_lang_Object_$p_trycatch_TryCatch(Exception.$create__()), Exception)));] "trycatch.TryCatch.testThrowGenerics"
-[getT] => [m_getT__java_lang_Object_$p_trycatch_TryCatch]
+[testThrowGenerics] => [m_testThrowGenerics__void]
+[throw getT(new Exception());] => [throw $Exceptions.toJs(/**@type {Exception}*/ ($Casts.$to(this.m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch(Exception.$create__()), Exception)));] "trycatch.TryCatch.testThrowGenerics"
+[getT] => [m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch]
 [t] => [t] "t"
 [return t;] => [return t;] "trycatch.TryCatch.getT"
-[testThrowBoundGenerics] => [m_testThrowBoundGenerics__]
-[throw getThrowable();] => [throw $Exceptions.toJs(this.m_getThrowable___$p_trycatch_TryCatch());] "trycatch.TryCatch.testThrowBoundGenerics"
-[getThrowable] => [m_getThrowable___$p_trycatch_TryCatch]
+[testThrowBoundGenerics] => [m_testThrowBoundGenerics__void]
+[throw getThrowable();] => [throw $Exceptions.toJs(this.m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch());] "trycatch.TryCatch.testThrowBoundGenerics"
+[getThrowable] => [m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch]
 [return null;] => [return null;] "trycatch.TryCatch.getThrowable"
 [TryCatch] => [$clinit]
 [TryCatch] => [TryCatch.$clinit = () =>{};] "trycatch.TryCatch.<clinit>"

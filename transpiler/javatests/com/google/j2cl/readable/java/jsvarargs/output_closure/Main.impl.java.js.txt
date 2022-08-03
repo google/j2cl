@@ -22,12 +22,12 @@ class Main extends j_l_Object {
  static $create__int(/** number */ f) {
   Main.$clinit();
   let $instance = new Main();
-  $instance.$ctor__jsvarargs_Main__int(f);
+  $instance.$ctor__jsvarargs_Main__int__void(f);
   return $instance;
  }
  /** @nodts */
- $ctor__jsvarargs_Main__int(/** number */ f) {
-  this.$ctor__java_lang_Object__();
+ $ctor__jsvarargs_Main__int__void(/** number */ f) {
+  this.$ctor__java_lang_Object__void();
   this.f_field__jsvarargs_Main = f;
  }
  /** @return {number} */
@@ -70,7 +70,7 @@ class Main extends j_l_Object {
   return elements[0].getAtIndex(0);
  }
  /** @nodts */
- m_testStaticMethodNotFirst__() {
+ m_testStaticMethodNotFirst__void() {
   Main.f1(1, 1, 2);
   Main.f1(1, 1, 2);
   Main.f1(1);
@@ -85,7 +85,7 @@ class Main extends j_l_Object {
   Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(null));
  }
  /** @nodts */
- m_testStaticMethodFirst__() {
+ m_testStaticMethodFirst__void() {
   Main.f2(1, 2);
   Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));
   Main.f2(1, 2);
@@ -109,7 +109,7 @@ class Main extends j_l_Object {
   Main.generics(...InternalPreconditions.m_checkNotNull__java_lang_Object(integers));
  }
  /** @nodts */
- m_testInstanceMethodNotFirst__() {
+ m_testInstanceMethodNotFirst__void() {
   let m = Main.$create__int(1);
   m.f3(1, 1, 2);
   m.f3(1);
@@ -119,7 +119,7 @@ class Main extends j_l_Object {
   m.f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
  }
  /** @nodts */
- m_testInstanceMethodFirst__() {
+ m_testInstanceMethodFirst__void() {
   let m = Main.$create__int(1);
   m.f4(1, 2);
   m.f4();
@@ -129,7 +129,7 @@ class Main extends j_l_Object {
   m.f4(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
  }
  /** @nodts */
- m_testJsFunction__() {
+ m_testJsFunction__void() {
   let a = AFunction.$create__();
   let o1 = j_l_Object.$create__();
   let o2 = j_l_Object.$create__();
@@ -141,17 +141,17 @@ class Main extends j_l_Object {
   a(0, ...InternalPreconditions.m_checkNotNull__java_lang_Object(os));
  }
  /** @nodts */
- m_testSideEffect__() {
+ m_testSideEffect__void() {
   let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
   Main.$create__int(1).f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
  }
  /** @nodts */
- m_testNullJsVarargs__() {
+ m_testNullJsVarargs__void() {
   let ints = null;
   Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
  }
  /** @nodts @template U */
- m_testGenericJsFunctionWithVarags__() {
+ m_testGenericJsFunctionWithVarags__void() {
   let function_1 = (/** U */ n, .../** ...U */ param) =>{
    return param;
   };

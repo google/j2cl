@@ -13,15 +13,15 @@
 [Main] => [$create__]
 [Main] => [Main.$clinit();] "nativekttypes.Main.<synthetic: ctor_create>"
 [Main] => [let $instance = new Main();] "nativekttypes.Main.<synthetic: ctor_create>"
-[Main] => [$instance.$ctor__nativekttypes_Main__();] "nativekttypes.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__nativekttypes_Main__void();] "nativekttypes.Main.<synthetic: ctor_create>"
 [Main] => [return $instance;] "nativekttypes.Main.<synthetic: ctor_create>"
-[Main] => [$ctor__nativekttypes_Main__]
-[Main] => [this.$ctor__java_lang_Object__();] "nativekttypes.Main.<init>"
-[methodArguments] => [m_methodArguments__nativekttypes_NativeTopLevel__nativekttypes_NativeTopLevel_Nested__nativekttypes_NativeTopLevel_Inner]
+[Main] => [$ctor__nativekttypes_Main__void]
+[Main] => [this.$ctor__java_lang_Object__void();] "nativekttypes.Main.<init>"
+[methodArguments] => [m_methodArguments__nativekttypes_NativeTopLevel__nativekttypes_NativeTopLevel_Nested__nativekttypes_NativeTopLevel_Inner__void]
 [foo] => [foo] "foo"
 [nested] => [nested] "nested"
 [inner] => [inner] "inner"
-[memberAccess] => [m_memberAccess__]
+[memberAccess] => [m_memberAccess__void]
 [NativeTopLevel<String> topLevel = new NativeTopLevel<>("foo");] => [let topLevel = /**@type {!NativeTopLevel<?string>}*/ (NativeTopLevel.$create__java_lang_Object('foo'));] "nativekttypes.Main.memberAccess"
 [topLevel] => [topLevel] "topLevel"
 [String fooInstanceMethod = topLevel.instanceMethod("foo");] => [let fooInstanceMethod = /**@type {?string}*/ ($Casts.$to(topLevel.instanceMethod('foo'), j_l_String));] "nativekttypes.Main.memberAccess"
@@ -70,9 +70,9 @@
 [subclass] => [subclass] "subclass"
 [int i9 = subclass.methodToRename();] => [let i9 = subclass.methodToRename();] "nativekttypes.Main.memberAccess"
 [i9] => [i9] "i9"
-[int i10 = subclass.interfaceMethod("foo");] => [let i10 = subclass.m_interfaceMethod__java_lang_Object('foo');] "nativekttypes.Main.memberAccess"
+[int i10 = subclass.interfaceMethod("foo");] => [let i10 = subclass.m_interfaceMethod__java_lang_Object__int('foo');] "nativekttypes.Main.memberAccess"
 [i10] => [i10] "i10"
-[int i11 = subclass.interfaceMethodToRename("foo");] => [let i11 = subclass.m_interfaceMethodToRename__java_lang_Object('foo');] "nativekttypes.Main.memberAccess"
+[int i11 = subclass.interfaceMethodToRename("foo");] => [let i11 = subclass.m_interfaceMethodToRename__java_lang_Object__int('foo');] "nativekttypes.Main.memberAccess"
 [i11] => [i11] "i11"
 [NativeInterface.NativeFunctionalInterface interfaceAnonymousSubclass =
         new NativeInterface.NativeFunctionalInterface() {
@@ -94,7 +94,7 @@
     return;
    }] "nativekttypes.Main.<lambda in memberAccess>"
 [return;] => [return;] "nativekttypes.Main.<lambda in memberAccess>"
-[bridges] => [m_bridges__]
+[bridges] => [m_bridges__void]
 [NativeRequiringBridge o = new NativeRequiringBridge();] => [let o = NativeRequiringBridge.$create__();] "nativekttypes.Main.bridges"
 [o] => [o] "o"
 [o = new NativeRequiringBridge() {};] => [o = $3.$create__nativekttypes_Main(this);] "nativekttypes.Main.bridges"
@@ -117,34 +117,34 @@
 [cast] => [cast] "cast"
 [boolean instanceofCheck = o instanceof NativeRequiringBridge;] => [let instanceofCheck = !$Equality.$same(o, null);] "nativekttypes.Main.bridges"
 [instanceofCheck] => [instanceofCheck] "instanceofCheck"
-[casts] => [m_casts__]
+[casts] => [m_casts__void]
 [NativeTopLevel<String> o1 = (NativeTopLevel<String>) null;] => [let o1 = /**@type {NativeTopLevel<?string>}*/ (null);] "nativekttypes.Main.casts"
 [o1] => [o1] "o1"
 [NativeTopLevel.Nested<String> o2 = (NativeTopLevel.Nested<String>) null;] => [let o2 = /**@type {Nested<?string>}*/ (null);] "nativekttypes.Main.casts"
 [o2] => [o2] "o2"
 [NativeTopLevel<String>.Inner<String> o3 = (NativeTopLevel<String>.Inner<String>) null;] => [let o3 = /**@type {Inner<?string, ?string>}*/ (null);] "nativekttypes.Main.casts"
 [o3] => [o3] "o3"
-[companionObject] => [m_companionObject__]
+[companionObject] => [m_companionObject__void]
 [NativeWithCompanionObject o = new NativeWithCompanionObject();] => [let o = NativeWithCompanionObject.$create__();] "nativekttypes.Main.companionObject"
 [o] => [o] "o"
 [int i1 = o.instanceField;] => [let i1 = o.f_instanceField__nativekttypes_NativeWithCompanionObject;] "nativekttypes.Main.companionObject"
 [i1] => [i1] "i1"
-[o.instanceMethod();] => [o.m_instanceMethod__();] "nativekttypes.Main.companionObject"
+[o.instanceMethod();] => [o.m_instanceMethod__void();] "nativekttypes.Main.companionObject"
 [NativeWithCompanionObject.staticMethod();] => [NativeWithCompanionObject.m_staticMethod__();] "nativekttypes.Main.companionObject"
 [int i2 = NativeWithCompanionObject.staticField;] => [let i2 = NativeWithCompanionObject.f_staticField__nativekttypes_NativeWithCompanionObject;] "nativekttypes.Main.companionObject"
 [i2] => [i2] "i2"
 [NativeWithCompanionObject.staticField = i2;] => [NativeWithCompanionObject.f_staticField__nativekttypes_NativeWithCompanionObject = i2;] "nativekttypes.Main.companionObject"
-[typeLiterals] => [m_typeLiterals__]
+[typeLiterals] => [m_typeLiterals__void]
 [Class<?> c1 = NativeTopLevel.class;] => [let c1 = Class.$get(NativeTopLevel);] "nativekttypes.Main.typeLiterals"
 [c1] => [c1] "c1"
 [Class<?> c2 = NativeTopLevel.Nested.class;] => [let c2 = Class.$get(Nested);] "nativekttypes.Main.typeLiterals"
 [c2] => [c2] "c2"
 [Class<?> c3 = NativeTopLevel.Inner.class;] => [let c3 = Class.$get(Inner);] "nativekttypes.Main.typeLiterals"
 [c3] => [c3] "c3"
-[disabledVoidMethod] => [m_disabledVoidMethod__]
+[disabledVoidMethod] => [m_disabledVoidMethod__void]
 [int i = 0;] => [let i = 0;] "nativekttypes.Main.disabledVoidMethod"
 [i] => [i] "i"
-[disabledNonVoidMethod] => [m_disabledNonVoidMethod__]
+[disabledNonVoidMethod] => [m_disabledNonVoidMethod__boolean]
 [return true;] => [return true;] "nativekttypes.Main.disabledNonVoidMethod"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "nativekttypes.Main.<clinit>"

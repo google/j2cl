@@ -16,12 +16,12 @@ class Child extends Parent {
  static $create__() {
   Child.$clinit();
   let $instance = new Child();
-  $instance.$ctor__instancejsmethods_Child__();
+  $instance.$ctor__instancejsmethods_Child__void();
   return $instance;
  }
  /** @nodts */
- $ctor__instancejsmethods_Child__() {
-  this.$ctor__instancejsmethods_Parent__();
+ $ctor__instancejsmethods_Child__void() {
+  this.$ctor__instancejsmethods_Parent__void();
  }
  /** @override @return {number} */
  sum(/** number */ a, /** number */ b) {
@@ -41,7 +41,7 @@ class Child extends Parent {
  }
  //Bridge method.
  /** @override @nodts @return {number} */
- m_intfFoo__() {
+ m_intfFoo__int() {
   return this.intfFoo();
  }
  /** @nodts */

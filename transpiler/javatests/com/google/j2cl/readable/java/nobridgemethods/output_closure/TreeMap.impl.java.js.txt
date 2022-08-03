@@ -18,16 +18,21 @@ class TreeMap extends Map {
  static $create__() {
   TreeMap.$clinit();
   let $instance = new TreeMap();
-  $instance.$ctor__nobridgemethods_TreeMap__();
+  $instance.$ctor__nobridgemethods_TreeMap__void();
   return $instance;
  }
  /** @nodts */
- $ctor__nobridgemethods_TreeMap__() {
-  this.$ctor__nobridgemethods_Map__();
+ $ctor__nobridgemethods_TreeMap__void() {
+  this.$ctor__nobridgemethods_Map__void();
  }
- /** @override @nodts @return {InnerEntry<K>} */
- m_getCeilingEntry__java_lang_Object(/** K */ key) {
+ /** @nodts @return {InnerEntry<K>} */
+ m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry(/** K */ key) {
   return /**@type {!InnerEntry<K>}*/ (InnerEntry.$create__());
+ }
+ //Bridge method.
+ /** @override @nodts @return {InnerEntry<K>} */
+ m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry(/** K */ arg0) {
+  return this.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry(arg0);
  }
  /** @nodts */
  static $clinit() {

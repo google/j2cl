@@ -12,12 +12,12 @@ class Parent extends SuperParent {
  static $create__() {
   Parent.$clinit();
   let $instance = new Parent();
-  $instance.$ctor__instancejsmethods_Parent__();
+  $instance.$ctor__instancejsmethods_Parent__void();
   return $instance;
  }
  /** @nodts */
- $ctor__instancejsmethods_Parent__() {
-  this.$ctor__instancejsmethods_SuperParent__();
+ $ctor__instancejsmethods_Parent__void() {
+  this.$ctor__instancejsmethods_SuperParent__void();
  }
  /** @return {number} */
  sum(/** number */ a, /** number */ b) {
@@ -33,12 +33,12 @@ class Parent extends SuperParent {
  }
  //Bridge method.
  /** @override @nodts @return {number} */
- m_bar__int__int(/** number */ arg0, /** number */ arg1) {
+ m_bar__int__int__int(/** number */ arg0, /** number */ arg1) {
   return this.bar(arg0, arg1);
  }
  //Bridge method.
  /** @override @nodts @return {number} */
- m_fun__int__int(/** number */ arg0, /** number */ arg1) {
+ m_fun__int__int__int(/** number */ arg0, /** number */ arg1) {
   return this.sum(arg0, arg1);
  }
  /** @nodts */

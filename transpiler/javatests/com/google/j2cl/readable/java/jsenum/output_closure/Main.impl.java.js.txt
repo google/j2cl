@@ -35,12 +35,12 @@ class Main extends j_l_Object {
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
-  $instance.$ctor__jsenum_Main__();
+  $instance.$ctor__jsenum_Main__void();
   return $instance;
  }
  /** @nodts */
- $ctor__jsenum_Main__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__jsenum_Main__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
  static m_testJsEnumSwitch__() {
@@ -84,11 +84,11 @@ class Main extends j_l_Object {
  /** @nodts */
  static m_testBoxUnboxWithTypeInference__() {
   let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));
-  let unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue___$pp_jsenum(), $Overlay))));
+  let unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue__java_lang_Object_$pp_jsenum(), $Overlay))));
   unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.f_value__jsenum_Main_TemplatedField, $Overlay))));
   templatedField.f_value__jsenum_Main_TemplatedField = /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
   Arrays.m_asList__arrayOf_java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))]);
-  $Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue___$pp_jsenum(), $Overlay)));
+  $Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue__java_lang_Object_$pp_jsenum(), $Overlay)));
   let b = $Equality.$same(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), Main.m_boxingPassthrough__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));
  }
  /** @nodts @template T @return {T} */

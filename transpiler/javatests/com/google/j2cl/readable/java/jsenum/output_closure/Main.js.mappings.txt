@@ -4,10 +4,10 @@
 [Main] => [$create__]
 [Main] => [Main.$clinit();] "jsenum.Main.<synthetic: ctor_create>"
 [Main] => [let $instance = new Main();] "jsenum.Main.<synthetic: ctor_create>"
-[Main] => [$instance.$ctor__jsenum_Main__();] "jsenum.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__jsenum_Main__void();] "jsenum.Main.<synthetic: ctor_create>"
 [Main] => [return $instance;] "jsenum.Main.<synthetic: ctor_create>"
-[Main] => [$ctor__jsenum_Main__]
-[Main] => [this.$ctor__java_lang_Object__();] "jsenum.Main.<init>"
+[Main] => [$ctor__jsenum_Main__void]
+[Main] => [this.$ctor__java_lang_Object__void();] "jsenum.Main.<init>"
 [testJsEnumSwitch] => [m_testJsEnumSwitch__]
 [{
     ComparableJsEnum comparableJsEnum =
@@ -75,12 +75,12 @@
 [TemplatedField<ComparableJsEnum> templatedField =
         new TemplatedField<ComparableJsEnum>(ComparableJsEnum.ONE);] => [let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [templatedField] => [templatedField] "templatedField"
-[ComparableJsEnum unboxed = templatedField.getValue();] => [let unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue___$pp_jsenum(), $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
+[ComparableJsEnum unboxed = templatedField.getValue();] => [let unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue__java_lang_Object_$pp_jsenum(), $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [unboxed] => [unboxed] "unboxed"
 [unboxed = templatedField.value;] => [unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.f_value__jsenum_Main_TemplatedField, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [templatedField.value = ComparableJsEnum.ONE;] => [templatedField.f_value__jsenum_Main_TemplatedField = /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [Arrays.asList(ComparableJsEnum.ONE);] => [Arrays.m_asList__arrayOf_java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))]);] "jsenum.Main.testBoxUnboxWithTypeInference"
-[templatedField.getValue().ordinal();] => [$Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue___$pp_jsenum(), $Overlay)));] "jsenum.Main.testBoxUnboxWithTypeInference"
+[templatedField.getValue().ordinal();] => [$Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue__java_lang_Object_$pp_jsenum(), $Overlay)));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [boolean b = ComparableJsEnum.ONE == boxingPassthrough(ComparableJsEnum.ONE);] => [let b = $Equality.$same(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), Main.m_boxingPassthrough__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [b] => [b] "b"
 [boxingPassthrough] => [m_boxingPassthrough__java_lang_Object]

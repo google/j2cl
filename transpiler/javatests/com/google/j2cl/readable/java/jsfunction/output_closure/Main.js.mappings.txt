@@ -10,11 +10,11 @@
 [Main] => [$create__]
 [Main] => [Main.$clinit();] "jsfunction.Main.<synthetic: ctor_create>"
 [Main] => [let $instance = new Main();] "jsfunction.Main.<synthetic: ctor_create>"
-[Main] => [$instance.$ctor__jsfunction_Main__();] "jsfunction.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__jsfunction_Main__void();] "jsfunction.Main.<synthetic: ctor_create>"
 [Main] => [return $instance;] "jsfunction.Main.<synthetic: ctor_create>"
-[Main] => [$ctor__jsfunction_Main__]
-[Main] => [this.$ctor__java_lang_Object__();] "jsfunction.Main.<init>"
-[Main] => [this.$init___$p_jsfunction_Main();] "jsfunction.Main.<init>"
+[Main] => [$ctor__jsfunction_Main__void]
+[Main] => [this.$ctor__java_lang_Object__void();] "jsfunction.Main.<init>"
+[Main] => [this.$init__void_$p_jsfunction_Main();] "jsfunction.Main.<init>"
 [createNativeFunction] => [createNativeFunction]
 [callFn] => [m_callFn__jsfunction_Main_JsFunctionInterface__int]
 [fn] => [fn] "fn"
@@ -23,7 +23,7 @@
     return fn.foo(a);
   }] => [Main.$clinit();] "jsfunction.Main.callFn"
 [return fn.foo(a);] => [return fn(a);] "jsfunction.Main.callFn"
-[testJsFunction] => [m_testJsFunction__]
+[testJsFunction] => [m_testJsFunction__void]
 [JsFunctionImplementation func = new JsFunctionImplementation();] => [let func = JsFunctionImplementation.$create__();] "jsfunction.Main.testJsFunction"
 [func] => [func] "func"
 [func.foo(10);] => [func(10);] "jsfunction.Main.testJsFunction"
@@ -31,7 +31,7 @@
 [int a = func.field;] => [let a = func.f_field__jsfunction_Main_JsFunctionImplementation;] "jsfunction.Main.testJsFunction"
 [a] => [a] "a"
 [func.bar();] => [JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation(func);] "jsfunction.Main.testJsFunction"
-[testJsFunctionsCapturingLocal] => [m_testJsFunctionsCapturingLocal__]
+[testJsFunctionsCapturingLocal] => [m_testJsFunctionsCapturingLocal__void]
 [final int n = 4;] => [let n = 4;] "jsfunction.Main.testJsFunctionsCapturingLocal"
 [n] => [n] "n"
 [callFn((number) -> number + n, n);] => [Main.m_callFn__jsfunction_Main_JsFunctionInterface__int((/** number */ number_1) =>{
@@ -51,32 +51,32 @@
       @Override
 ...      }
     }.foo(3);] => [((/** number */ a_1) =>{
-   this.m_instanceMethod___$p_jsfunction_Main();
+   this.m_instanceMethod__void_$p_jsfunction_Main();
    return 0;
   })(3);] "jsfunction.Main.testJsFunctionsCapturingLocal"
 [a] => [a_1] "a"
-[instanceMethod();] => [this.m_instanceMethod___$p_jsfunction_Main();] "jsfunction.Main$2.foo"
+[instanceMethod();] => [this.m_instanceMethod__void_$p_jsfunction_Main();] "jsfunction.Main$2.foo"
 [return 0;] => [return 0;] "jsfunction.Main$2.foo"
-[testJsFunctionThis] => [m_testJsFunctionThis__]
+[testJsFunctionThis] => [m_testJsFunctionThis__void]
 [new JsFunctionInterface() {
       @Override
 ...      }
     }.foo(3);] => [((/** number */ a) =>{
-   this.m_instanceMethod___$p_jsfunction_Main();
+   this.m_instanceMethod__void_$p_jsfunction_Main();
    return 0;
   })(3);] "jsfunction.Main.testJsFunctionThis"
 [a] => [a] "a"
-[instanceMethod();] => [this.m_instanceMethod___$p_jsfunction_Main();] "jsfunction.Main$3.foo"
+[instanceMethod();] => [this.m_instanceMethod__void_$p_jsfunction_Main();] "jsfunction.Main$3.foo"
 [return 0;] => [return 0;] "jsfunction.Main$3.foo"
-[instanceMethod] => [m_instanceMethod___$p_jsfunction_Main]
-[testJsFunctionErasureCasts] => [m_testJsFunctionErasureCasts__]
+[instanceMethod] => [m_instanceMethod__void_$p_jsfunction_Main]
+[testJsFunctionErasureCasts] => [m_testJsFunctionErasureCasts__void]
 [List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>}*/ (ArrayList.$create__());] "jsfunction.Main.testJsFunctionErasureCasts"
 [list] => [list] "list"
 [acceptsJsFunction(list.get(0));] => [Main.m_acceptsJsFunction__jsfunction_Main_Function(/**@type {?function(?string):?string}*/ ($Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));] "jsfunction.Main.testJsFunctionErasureCasts"
 [acceptsJsFunction] => [m_acceptsJsFunction__jsfunction_Main_Function]
 [f] => [f] "f"
 [{}] => [Main.$clinit();] "jsfunction.Main.acceptsJsFunction"
-[testJsFunctionVarargs] => [m_testJsFunctionVarargs___$pp_jsfunction]
+[testJsFunctionVarargs] => [m_testJsFunctionVarargs__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction]
 [JsFunctionVarargs f =
         (int i, int... numbers) -> {
 ...          return sum;
@@ -106,7 +106,7 @@
 [sum += number;] => [sum = sum + number_1 | 0;] "jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [return sum;] => [return sum;] "jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [return f;] => [return f;] "jsfunction.Main.testJsFunctionVarargs"
-[testJsFunctionVarargsInnerClass] => [m_testJsFunctionVarargsInnerClass___$pp_jsfunction]
+[testJsFunctionVarargsInnerClass] => [m_testJsFunctionVarargsInnerClass__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction]
 [return new JsFunctionVarargs() {
       @Override
 ...      }
@@ -131,7 +131,7 @@
 [number] => [number_1] "number"
 [sum += number;] => [sum = sum + number_1 | 0;] "jsfunction.Main$4.m"
 [return sum;] => [return sum;] "jsfunction.Main$4.m"
-[testVarArgsMethodReferenceToJsFuncion] => [m_testVarArgsMethodReferenceToJsFuncion__]
+[testVarArgsMethodReferenceToJsFuncion] => [m_testVarArgsMethodReferenceToJsFuncion__void]
 [ForEachCallBack<ElementalJsFunction> c = ElementalJsFunction::call;] => [let c = (arg0, /** number */ arg1, arg2) =>{
    let arg0_1 = /**@type {?function(...*):*}*/ ($Casts.$to(arg0, $JavaScriptFunction));
 ...   return arg0_1(Integer.m_valueOf__int(arg1), arg2_1);
@@ -140,9 +140,9 @@
 [ElementalJsFunction::call] => [let arg0_1 = /**@type {?function(...*):*}*/ ($Casts.$to(arg0, $JavaScriptFunction));] "jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
 [ElementalJsFunction::call] => [let arg2_1 = /**@type {Array<?function(...*):*>}*/ ($Arrays.$castTo(arg2, $JavaScriptFunction, 1));] "jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
 [ElementalJsFunction::call] => [return arg0_1(Integer.m_valueOf__int(arg1), arg2_1);] "jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
-[acceptsVarargsJsFunctionWithTypeVariable] => [m_acceptsVarargsJsFunctionWithTypeVariable__jsfunction_Main_JsFunctionVarargsGenerics_$pp_jsfunction]
+[acceptsVarargsJsFunctionWithTypeVariable] => [m_acceptsVarargsJsFunctionWithTypeVariable__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction]
 [x] => [x] "x"
-[acceptsVarargsJsFunctionWithParemetrizedType] => [m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_Main_JsFunctionVarargsGenerics_$pp_jsfunction]
+[acceptsVarargsJsFunctionWithParemetrizedType] => [m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction]
 [x] => [x] "x"
 [acceptsVarargsJsFunctionWithTypeVariableInVarargs] => [acceptsVarargsJsFunctionWithTypeVariableInVarargs]
 [x] => [x] "x"
@@ -153,13 +153,13 @@
 [acceptsJsFunctionInVarargs] => [acceptsJsFunctionInVarargs]
 [x] => [x] "x"
 [{}] => [$Arrays.$stampType(x, $JavaScriptFunction, 1);] "jsfunction.Main.acceptsJsFunctionInVarargs"
-[testJsFunctionClassLiterals] => [m_testJsFunctionClassLiterals___$pp_jsfunction]
+[testJsFunctionClassLiterals] => [m_testJsFunctionClassLiterals__void_$pp_jsfunction]
 [SimpleJsFunction[] array = {};] => [let array = /**@type {!Array<?function():void>}*/ ($Arrays.$init([], $JavaScriptFunction));] "jsfunction.Main.testJsFunctionClassLiterals"
 [array] => [array] "array"
 [Object o = SimpleJsFunction.class;] => [let o = Class.$get($JavaScriptFunction);] "jsfunction.Main.testJsFunctionClassLiterals"
 [o] => [o] "o"
 [o = SimpleJsFunction[].class;] => [o = Class.$get($JavaScriptFunction, 1);] "jsfunction.Main.testJsFunctionClassLiterals"
-[testJsFunctionOptional] => [m_testJsFunctionOptional___$pp_jsfunction]
+[testJsFunctionOptional] => [m_testJsFunctionOptional__void_$pp_jsfunction]
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** number */ i, /** ?number= */ n) =>{
    return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));
   };] "jsfunction.Main.testJsFunctionOptional"
@@ -175,7 +175,7 @@
     return null;
   }] => [Main.$clinit();] "jsfunction.Main.getParametricJsFunction"
 [return null;] => [return null;] "jsfunction.Main.getParametricJsFunction"
-[testFunctionExpressionTypeReplacement] => [m_testFunctionExpressionTypeReplacement___$pp_jsfunction]
+[testFunctionExpressionTypeReplacement] => [m_testFunctionExpressionTypeReplacement__void_$pp_jsfunction]
 [ParametricJsFunction<String> f =
         unused -> {
 ...          l.add(new ArrayList<String>());
@@ -193,7 +193,7 @@
 [List<List<?>> l = new ArrayList<>();] => [let l = /**@type {!ArrayList<List<?>>}*/ (ArrayList.$create__());] "jsfunction.Main.<lambda in testFunctionExpressionTypeReplacement>"
 [l] => [l] "l"
 [l.add(new ArrayList<String>());] => [l.add(/**@type {!ArrayList<?string>}*/ (ArrayList.$create__()));] "jsfunction.Main.<lambda in testFunctionExpressionTypeReplacement>"
-[testJsFunctionPropertyCall] => [m_testJsFunctionPropertyCall___$pp_jsfunction]
+[testJsFunctionPropertyCall] => [m_testJsFunctionPropertyCall__void_$pp_jsfunction]
 [ClassWithJsFunctionProperty c = new ClassWithJsFunctionProperty();] => [let c = ClassWithJsFunctionProperty.$create__();] "jsfunction.Main.testJsFunctionPropertyCall"
 [c] => [c] "c"
 [c.function.call("");] => [let $function = c.f_function__jsfunction_Main_ClassWithJsFunctionProperty;] "jsfunction.Main.testJsFunctionPropertyCall"
@@ -296,7 +296,7 @@
 [rawJsBiFunction] => [rawJsBiFunction] "rawJsBiFunction"
 [acceptsParameterizedMethod] => [m_acceptsParameterizedMethod__jsfunction_Main_ParameterizedMethod]
 [m] => [m] "m"
-[Main] => [$init___$p_jsfunction_Main]
+[Main] => [$init__void_$p_jsfunction_Main]
 [ParametricJsFunction<?> jsFunctionFieldWildcard = event -> {};] => [this.f_jsFunctionFieldWildcard__jsfunction_Main = (/** ? */ event) =>{};] "jsfunction.Main.<init>"
 [event] => [event] "event"
 [ParametricJsFunction<String> jsFunctionFieldParameterized = event -> {};] => [this.f_jsFunctionFieldParameterized__jsfunction_Main = (event_1) =>{

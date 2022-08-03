@@ -19,25 +19,25 @@ class SimpleLongs extends j_l_Object {
  static $create__() {
   SimpleLongs.$clinit();
   let $instance = new SimpleLongs();
-  $instance.$ctor__simplelongs_SimpleLongs__();
+  $instance.$ctor__simplelongs_SimpleLongs__void();
   return $instance;
  }
  /** @nodts */
- $ctor__simplelongs_SimpleLongs__() {
-  this.$ctor__java_lang_Object__();
-  this.$init___$p_simplelongs_SimpleLongs();
+ $ctor__simplelongs_SimpleLongs__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_simplelongs_SimpleLongs();
  }
  /** @nodts @return {!$Long} */
- m_getBar__() {
+ m_getBar__long() {
   return $Long.fromInt(0);
  }
  /** @nodts @return {SimpleLongs} */
- m_getWithSideEffect__() {
+ m_getWithSideEffect__simplelongs_SimpleLongs() {
   this.f_sideEffect__simplelongs_SimpleLongs_ = this.f_sideEffect__simplelongs_SimpleLongs_ + 1 | 0;
   return this;
  }
  /** @nodts */
- m_main__() {
+ m_main__void() {
   let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value_1, /** SimpleLongs */ $qualifier_1, /** !$Long */ $value_2;
   let a = $Long.fromInt(0);
   a = $LongUtils.negate($Long.fromInt(100000));
@@ -50,15 +50,15 @@ class SimpleLongs extends j_l_Object {
   c = $LongUtils.divide(a, b);
   let e = a = $LongUtils.plus(a, $Long.fromInt(1));
   e = this.f_foo__simplelongs_SimpleLongs = $LongUtils.plus(this.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1));
-  e = ($qualifier = this.m_getWithSideEffect__(), $qualifier.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)));
+  e = ($qualifier = this.m_getWithSideEffect__simplelongs_SimpleLongs(), $qualifier.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)));
   let f = ($value = a, a = $LongUtils.plus(a, $Long.fromInt(1)), $value);
   f = ($value_1 = this.f_foo__simplelongs_SimpleLongs, this.f_foo__simplelongs_SimpleLongs = $LongUtils.plus(this.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)), $value_1);
-  f = (($qualifier_1 = this.m_getWithSideEffect__(), $value_2 = $qualifier_1.f_foo__simplelongs_SimpleLongs), $qualifier_1.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier_1.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)), $value_2);
+  f = (($qualifier_1 = this.m_getWithSideEffect__simplelongs_SimpleLongs(), $value_2 = $qualifier_1.f_foo__simplelongs_SimpleLongs), $qualifier_1.f_foo__simplelongs_SimpleLongs = $LongUtils.plus($qualifier_1.f_foo__simplelongs_SimpleLongs, $Long.fromInt(1)), $value_2);
   let g = this.f_foo__simplelongs_SimpleLongs;
-  g = this.m_getBar__();
+  g = this.m_getBar__long();
  }
  /** @private @nodts */
- $init___$p_simplelongs_SimpleLongs() {
+ $init__void_$p_simplelongs_SimpleLongs() {
   this.f_foo__simplelongs_SimpleLongs = $Long.fromInt(0);
  }
  /** @nodts */

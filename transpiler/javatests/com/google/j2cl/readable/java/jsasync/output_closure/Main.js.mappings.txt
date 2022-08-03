@@ -7,18 +7,18 @@
 [Main] => [$create__]
 [Main] => [Main.$clinit();] "jsasync.Main.<synthetic: ctor_create>"
 [Main] => [let $instance = new Main();] "jsasync.Main.<synthetic: ctor_create>"
-[Main] => [$instance.$ctor__jsasync_Main__();] "jsasync.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__jsasync_Main__void();] "jsasync.Main.<synthetic: ctor_create>"
 [Main] => [return $instance;] "jsasync.Main.<synthetic: ctor_create>"
-[Main] => [$ctor__jsasync_Main__]
-[Main] => [this.$ctor__java_lang_Object__();] "jsasync.Main.<init>"
-[Main] => [this.$init___$p_jsasync_Main();] "jsasync.Main.<init>"
-[emptyAsyncMethod] => [m_emptyAsyncMethod___$pp_jsasync]
+[Main] => [$ctor__jsasync_Main__void]
+[Main] => [this.$ctor__java_lang_Object__void();] "jsasync.Main.<init>"
+[Main] => [this.$init__void_$p_jsasync_Main();] "jsasync.Main.<init>"
+[emptyAsyncMethod] => [m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync]
 [return null;] => [return null;] "jsasync.Main.emptyAsyncMethod"
-[asyncMethod] => [m_asyncMethod___$pp_jsasync]
-[int result = await(Promise.resolve(7));] => [let result = /**@type {Integer}*/ ($Casts.$to(await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(7))), Integer)).m_intValue__();] "jsasync.Main.asyncMethod"
+[asyncMethod] => [m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync]
+[int result = await(Promise.resolve(7));] => [let result = /**@type {Integer}*/ ($Casts.$to(await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(7))), Integer)).m_intValue__int();] "jsasync.Main.asyncMethod"
 [result] => [result] "result"
-[return parametricAsyncMethod(result);] => [return /**@type {IThenable<Integer>}*/ (this.m_parametricAsyncMethod__java_lang_Object_$pp_jsasync(Integer.m_valueOf__int(result)));] "jsasync.Main.asyncMethod"
-[parametricAsyncMethod] => [m_parametricAsyncMethod__java_lang_Object_$pp_jsasync]
+[return parametricAsyncMethod(result);] => [return /**@type {IThenable<Integer>}*/ (this.m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync(Integer.m_valueOf__int(result)));] "jsasync.Main.asyncMethod"
+[parametricAsyncMethod] => [m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync]
 [value] => [value] "value"
 [return Promise.resolve(await(Promise.resolve(value)));] => [return /**@type {Promise<T>}*/ (Promise.resolve(await /**@type {Promise<T>}*/ (Promise.resolve(value))));] "jsasync.Main.parametricAsyncMethod"
 [staticAsyncMethod] => [m_staticAsyncMethod__]
@@ -26,7 +26,7 @@
     return Promise.resolve(await(Promise.resolve((Void) null)));
   }] => [Main.$clinit();] "jsasync.Main.staticAsyncMethod"
 [return Promise.resolve(await(Promise.resolve((Void) null)));] => [return /**@type {Promise<?void>}*/ (Promise.resolve(/**@type {?void}*/ ($Casts.$to(await /**@type {Promise<?void>}*/ (Promise.resolve(/**@type {?void}*/ (null))), Void))));] "jsasync.Main.staticAsyncMethod"
-[testAsyncLambdas] => [m_testAsyncLambdas___$pp_jsasync]
+[testAsyncLambdas] => [m_testAsyncLambdas__void_$pp_jsasync]
 [AsyncInterface i = () -> Promise.resolve(await(Promise.resolve(5)));] => [let i = AsyncInterface.$adapt(async () =>{
    return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(5))), Integer))));
   });] "jsasync.Main.testAsyncLambdas"
@@ -55,7 +55,7 @@
 ...          }
         };] => [let unoptimizableJsFunction = $3.$create__jsasync_Main(this);] "jsasync.Main.testAsyncLambdas"
 [unoptimizableJsFunction] => [unoptimizableJsFunction] "unoptimizableJsFunction"
-[Main] => [$init___$p_jsasync_Main]
+[Main] => [$init__void_$p_jsasync_Main]
 [private final IThenable<Integer> x = Promise.resolve(10);] => [this.f_x__jsasync_Main_ = /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(10)));] "jsasync.Main.<init>"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "jsasync.Main.<clinit>"

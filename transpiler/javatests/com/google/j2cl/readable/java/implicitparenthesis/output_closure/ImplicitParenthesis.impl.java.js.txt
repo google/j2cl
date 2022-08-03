@@ -16,15 +16,15 @@ class ImplicitParenthesis extends j_l_Object {
  static $create__() {
   ImplicitParenthesis.$clinit();
   let $instance = new ImplicitParenthesis();
-  $instance.$ctor__implicitparenthesis_ImplicitParenthesis__();
+  $instance.$ctor__implicitparenthesis_ImplicitParenthesis__void();
   return $instance;
  }
  /** @nodts */
- $ctor__implicitparenthesis_ImplicitParenthesis__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__implicitparenthesis_ImplicitParenthesis__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_test__() {
+ m_test__void() {
   ImplicitParenthesis.m_examples__();
   ImplicitParenthesis.m_nonExamples__();
  }
@@ -35,32 +35,32 @@ class ImplicitParenthesis extends j_l_Object {
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = (primitiveInt == 5 ? Integer.$create__int(15) : Integer.$create__int(30)).m_intValue__();
+   primitiveInt = (primitiveInt == 5 ? Integer.$create__int(15) : Integer.$create__int(30)).m_intValue__int();
    $Asserts.$assert(primitiveInt == 15);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + primitiveInt | 0)).m_intValue__();
+   primitiveInt = (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__int() + primitiveInt | 0)).m_intValue__int();
    $Asserts.$assert(primitiveInt == 15);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = (boxedInt = Integer.m_valueOf__int(primitiveInt)).m_intValue__();
+   primitiveInt = (boxedInt = Integer.m_valueOf__int(primitiveInt)).m_intValue__int();
    $Asserts.$assert(primitiveInt == 5);
   }
   {
    let /** Integer */ $value;
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = ($value = boxedInt, boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + 1 | 0), $value).m_intValue__();
+   primitiveInt = ($value = boxedInt, boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__int() + 1 | 0), $value).m_intValue__int();
    $Asserts.$assert(primitiveInt == 10);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + 1 | 0)).m_intValue__();
+   primitiveInt = (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__int() + 1 | 0)).m_intValue__int();
    $Asserts.$assert(primitiveInt == 11);
   }
  }
@@ -72,14 +72,14 @@ class ImplicitParenthesis extends j_l_Object {
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
-   primitiveInt = boxedInt.m_intValue__() - primitiveInt | 0;
+   primitiveInt = boxedInt.m_intValue__int() - primitiveInt | 0;
    $Asserts.$assert(primitiveInt == 5);
   }
   {
    primitiveInt = 5;
    boxedInt = Integer.$create__int(10);
    boxedBoolean = true;
-   boxedBoolean = boxedInt.m_intValue__() == primitiveInt;
+   boxedBoolean = boxedInt.m_intValue__int() == primitiveInt;
    $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxedBoolean) == false);
   }
  }

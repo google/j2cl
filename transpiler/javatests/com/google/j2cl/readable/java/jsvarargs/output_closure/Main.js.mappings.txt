@@ -8,13 +8,13 @@
 [f] => [f] "f"
 [Main] => [Main.$clinit();] "jsvarargs.Main.<synthetic: ctor_create>"
 [Main] => [let $instance = new Main();] "jsvarargs.Main.<synthetic: ctor_create>"
-[Main] => [$instance.$ctor__jsvarargs_Main__int(f);] "jsvarargs.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__jsvarargs_Main__int__void(f);] "jsvarargs.Main.<synthetic: ctor_create>"
 [Main] => [return $instance;] "jsvarargs.Main.<synthetic: ctor_create>"
-[Main] => [$ctor__jsvarargs_Main__int]
+[Main] => [$ctor__jsvarargs_Main__int__void]
 [f] => [f] "f"
 [{
     this.field = f;
-  }] => [this.$ctor__java_lang_Object__();] "jsvarargs.Main.<init>"
+  }] => [this.$ctor__java_lang_Object__void();] "jsvarargs.Main.<init>"
 [this.field = f;] => [this.f_field__jsvarargs_Main = f;] "jsvarargs.Main.<init>"
 [f1] => [f1]
 [multiplier] => [multiplier] "multiplier"
@@ -72,7 +72,7 @@
     return elements[0].get(0);
   }] => [$Arrays.$stampType(elements, List, 1);] "jsvarargs.Main.parameterizedByT"
 [return elements[0].get(0);] => [return elements[0].getAtIndex(0);] "jsvarargs.Main.parameterizedByT"
-[testStaticMethodNotFirst] => [m_testStaticMethodNotFirst__]
+[testStaticMethodNotFirst] => [m_testStaticMethodNotFirst__void]
 [f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "jsvarargs.Main.testStaticMethodNotFirst"
 [f1(1);] => [Main.f1(1);] "jsvarargs.Main.testStaticMethodNotFirst"
@@ -86,7 +86,7 @@
 [f1(1, ints);] => [Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, ints);] => [Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "jsvarargs.Main.testStaticMethodNotFirst"
 [Main.f1(1, null);] => [Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(null));] "jsvarargs.Main.testStaticMethodNotFirst"
-[testStaticMethodFirst] => [m_testStaticMethodFirst__]
+[testStaticMethodFirst] => [m_testStaticMethodFirst__void]
 [f2(1, 2);] => [Main.f2(1, 2);] "jsvarargs.Main.testStaticMethodFirst"
 [generics(1, 2);] => [Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));] "jsvarargs.Main.testStaticMethodFirst"
 [Main.f2(1, 2);] => [Main.f2(1, 2);] "jsvarargs.Main.testStaticMethodFirst"
@@ -110,7 +110,7 @@
 [f2(ints);] => [Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "jsvarargs.Main.testStaticMethodFirst"
 [Main.f2(ints);] => [Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "jsvarargs.Main.testStaticMethodFirst"
 [Main.<Integer>generics(integers);] => [Main.generics(...InternalPreconditions.m_checkNotNull__java_lang_Object(integers));] "jsvarargs.Main.testStaticMethodFirst"
-[testInstanceMethodNotFirst] => [m_testInstanceMethodNotFirst__]
+[testInstanceMethodNotFirst] => [m_testInstanceMethodNotFirst__void]
 [Main m = new Main(1);] => [let m = Main.$create__int(1);] "jsvarargs.Main.testInstanceMethodNotFirst"
 [m] => [m] "m"
 [m.f3(1, 1, 2);] => [m.f3(1, 1, 2);] "jsvarargs.Main.testInstanceMethodNotFirst"
@@ -120,7 +120,7 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));] "jsvarargs.Main.testInstanceMethodNotFirst"
 [ints] => [ints] "ints"
 [m.f3(1, ints);] => [m.f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "jsvarargs.Main.testInstanceMethodNotFirst"
-[testInstanceMethodFirst] => [m_testInstanceMethodFirst__]
+[testInstanceMethodFirst] => [m_testInstanceMethodFirst__void]
 [Main m = new Main(1);] => [let m = Main.$create__int(1);] "jsvarargs.Main.testInstanceMethodFirst"
 [m] => [m] "m"
 [m.f4(1, 2);] => [m.f4(1, 2);] "jsvarargs.Main.testInstanceMethodFirst"
@@ -130,7 +130,7 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));] "jsvarargs.Main.testInstanceMethodFirst"
 [ints] => [ints] "ints"
 [m.f4(ints);] => [m.f4(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "jsvarargs.Main.testInstanceMethodFirst"
-[testJsFunction] => [m_testJsFunction__]
+[testJsFunction] => [m_testJsFunction__void]
 [AFunction a = new AFunction();] => [let a = AFunction.$create__();] "jsvarargs.Main.testJsFunction"
 [a] => [a] "a"
 [Object o1 = new Object();] => [let o1 = j_l_Object.$create__();] "jsvarargs.Main.testJsFunction"
@@ -144,15 +144,15 @@
 [Object[] os = new Object[] {o1, o2};] => [let os = [o1, o2];] "jsvarargs.Main.testJsFunction"
 [os] => [os] "os"
 [a.f1(0, os);] => [a(0, ...InternalPreconditions.m_checkNotNull__java_lang_Object(os));] "jsvarargs.Main.testJsFunction"
-[testSideEffect] => [m_testSideEffect__]
+[testSideEffect] => [m_testSideEffect__void]
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));] "jsvarargs.Main.testSideEffect"
 [ints] => [ints] "ints"
 [new Main(1).f3(1, ints);] => [Main.$create__int(1).f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "jsvarargs.Main.testSideEffect"
-[testNullJsVarargs] => [m_testNullJsVarargs__]
+[testNullJsVarargs] => [m_testNullJsVarargs__void]
 [int[] ints = null;] => [let ints = null;] "jsvarargs.Main.testNullJsVarargs"
 [ints] => [ints] "ints"
 [Main.f2(ints);] => [Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "jsvarargs.Main.testNullJsVarargs"
-[testGenericJsFunctionWithVarags] => [m_testGenericJsFunctionWithVarags__]
+[testGenericJsFunctionWithVarags] => [m_testGenericJsFunctionWithVarags__void]
 [GenericFunction<U> function = (n, param) -> param;] => [let function_1 = (/** U */ n, .../** ...U */ param) =>{
    return param;
   };] "jsvarargs.Main.testGenericJsFunctionWithVarags"

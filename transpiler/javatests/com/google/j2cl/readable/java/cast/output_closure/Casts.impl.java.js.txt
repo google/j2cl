@@ -25,25 +25,25 @@ class Casts extends j_l_Object {
  static $create__() {
   Casts.$clinit();
   let $instance = new Casts();
-  $instance.$ctor__cast_Casts__();
+  $instance.$ctor__cast_Casts__void();
   return $instance;
  }
  /** @nodts */
- $ctor__cast_Casts__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__cast_Casts__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_testCastToClass__() {
+ m_testCastToClass__void() {
   let o = j_l_Object.$create__();
   let c = /**@type {Casts}*/ ($Casts.$to(o, Casts));
  }
  /** @nodts */
- m_testCasToInterface__() {
+ m_testCasToInterface__void() {
   let o = j_l_Object.$create__();
   let s = /**@type {(Serializable|Array)}*/ ($Casts.$to(o, Serializable));
  }
  /** @nodts */
- m_testCastToBoxedType__() {
+ m_testCastToBoxedType__void() {
   let o = Integer.$create__int(1);
   let b = /**@type {Byte}*/ ($Casts.$to(o, Byte));
   let d = /**@type {?number}*/ ($Casts.$to(o, Double));
@@ -56,14 +56,14 @@ class Casts extends j_l_Object {
   let bool = /**@type {?boolean}*/ ($Casts.$to(o, Boolean));
  }
  /** @nodts */
- m_testCastToArray__() {
+ m_testCastToArray__void() {
   let foo = /**@type {Array<*>}*/ (null);
   let bar = /**@type {Array<Array<*>>}*/ (null);
  }
  /** @nodts */
- m_functionForInstanceofTest___$p_cast_Casts() {}
+ m_functionForInstanceofTest__void_$p_cast_Casts() {}
  /** @nodts */
- m_testCastObjectAfterInstanceOf__() {
+ m_testCastObjectAfterInstanceOf__void() {
   let o = j_l_Object.$create__();
   if (Casts.$isInstance(o)) {
    let c = /**@type {Casts}*/ (o);
@@ -85,12 +85,12 @@ class Casts extends j_l_Object {
   }
   if (Casts.$isInstance(o)) {
    let cAvoidsCastsTo_3 = /**@type {Casts}*/ (o);
-   this.m_functionForInstanceofTest___$p_cast_Casts();
+   this.m_functionForInstanceofTest__void_$p_cast_Casts();
    let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
   }
  }
  /** @nodts */
- m_testCastFieldAfterInstanceOf__() {
+ m_testCastFieldAfterInstanceOf__void() {
   let foo = Foo.$create__cast_Casts(this);
   if (Casts.$isInstance(foo.f_field__cast_Casts_Foo)) {
    let c = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);
@@ -107,15 +107,15 @@ class Casts extends j_l_Object {
   }
   if (Casts.$isInstance(foo.f_field__cast_Casts_Foo)) {
    let cAvoidsCastsTo_2 = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);
-   this.m_functionForInstanceofTest___$p_cast_Casts();
+   this.m_functionForInstanceofTest__void_$p_cast_Casts();
    let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
   }
  }
  /** @nodts */
- m_testCaseMethodAfterInstanceOf__() {
+ m_testCaseMethodAfterInstanceOf__void() {
   let foo = Foo.$create__cast_Casts(this);
-  if (Casts.$isInstance(foo.m_method__())) {
-   let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.m_method__(), Casts));
+  if (Casts.$isInstance(foo.m_method__java_lang_Object())) {
+   let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.m_method__java_lang_Object(), Casts));
   }
  }
  /** @nodts */

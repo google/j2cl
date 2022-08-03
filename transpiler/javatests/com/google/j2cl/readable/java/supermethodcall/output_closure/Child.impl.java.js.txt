@@ -12,38 +12,48 @@ class Child extends Parent {
  static $create__() {
   Child.$clinit();
   let $instance = new Child();
-  $instance.$ctor__supermethodcall_Child__();
+  $instance.$ctor__supermethodcall_Child__void();
   return $instance;
  }
  /** @nodts */
- $ctor__supermethodcall_Child__() {
-  this.$ctor__supermethodcall_Parent__();
+ $ctor__supermethodcall_Child__void() {
+  this.$ctor__supermethodcall_Parent__void();
  }
  /** @override @nodts */
- m_parentSimplest__() {
-  super.m_parentSimplest__();
+ m_parentSimplest__void() {
+  super.m_parentSimplest__void();
  }
  /** @override @nodts */
- m_parentWithParams__int(/** number */ foo) {
-  super.m_parentWithParams__int(foo);
+ m_parentWithParams__int__void(/** number */ foo) {
+  super.m_parentWithParams__int__void(foo);
  }
- /** @override @nodts @return {Child} */
- m_parentWithChangingReturn__() {
-  super.m_parentWithChangingReturn__();
+ /** @nodts @return {Child} */
+ m_parentWithChangingReturn__supermethodcall_Child() {
+  super.m_parentWithChangingReturn__java_lang_Object();
   return this;
  }
  /** @override @nodts */
- m_grandParentSimplest__() {
-  super.m_grandParentSimplest__();
+ m_grandParentSimplest__void() {
+  super.m_grandParentSimplest__void();
  }
  /** @override @nodts */
- m_grandParentWithParams__int(/** number */ foo) {
-  super.m_grandParentWithParams__int(foo);
+ m_grandParentWithParams__int__void(/** number */ foo) {
+  super.m_grandParentWithParams__int__void(foo);
  }
- /** @override @nodts @return {Child} */
- m_grandParentWithChangingReturn__() {
-  super.m_grandParentWithChangingReturn__();
+ /** @nodts @return {Child} */
+ m_grandParentWithChangingReturn__supermethodcall_Child() {
+  super.m_grandParentWithChangingReturn__java_lang_Object();
   return this;
+ }
+ //Bridge method.
+ /** @override @nodts @return {Child} */
+ m_grandParentWithChangingReturn__java_lang_Object() {
+  return this.m_grandParentWithChangingReturn__supermethodcall_Child();
+ }
+ //Bridge method.
+ /** @override @nodts @return {Child} */
+ m_parentWithChangingReturn__java_lang_Object() {
+  return this.m_parentWithChangingReturn__supermethodcall_Child();
  }
  /** @nodts */
  static $clinit() {

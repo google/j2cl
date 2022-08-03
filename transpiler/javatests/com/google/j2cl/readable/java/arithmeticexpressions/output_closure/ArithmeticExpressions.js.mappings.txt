@@ -10,12 +10,12 @@
 [ArithmeticExpressions] => [$create__]
 [ArithmeticExpressions] => [ArithmeticExpressions.$clinit();] "arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
 [ArithmeticExpressions] => [let $instance = new ArithmeticExpressions();] "arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
-[ArithmeticExpressions] => [$instance.$ctor__arithmeticexpressions_ArithmeticExpressions__();] "arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
+[ArithmeticExpressions] => [$instance.$ctor__arithmeticexpressions_ArithmeticExpressions__void();] "arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
 [ArithmeticExpressions] => [return $instance;] "arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
-[ArithmeticExpressions] => [$ctor__arithmeticexpressions_ArithmeticExpressions__]
-[ArithmeticExpressions] => [this.$ctor__java_lang_Object__();] "arithmeticexpressions.ArithmeticExpressions.<init>"
-[ArithmeticExpressions] => [this.$init___$p_arithmeticexpressions_ArithmeticExpressions();] "arithmeticexpressions.ArithmeticExpressions.<init>"
-[testCoercions] => [m_testCoercions__]
+[ArithmeticExpressions] => [$ctor__arithmeticexpressions_ArithmeticExpressions__void]
+[ArithmeticExpressions] => [this.$ctor__java_lang_Object__void();] "arithmeticexpressions.ArithmeticExpressions.<init>"
+[ArithmeticExpressions] => [this.$init__void_$p_arithmeticexpressions_ArithmeticExpressions();] "arithmeticexpressions.ArithmeticExpressions.<init>"
+[testCoercions] => [m_testCoercions__void]
 [byte b = (byte) 1L;] => [let b = 1;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [b] => [b] "b"
 [char c = (char) 1L;] => [let c = 1 /* '\u0001' */;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
@@ -36,8 +36,8 @@
 [d = (double) 9223372036854775807L;] => [d = 9.223372036854776E18;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [Object o = c;] => [let o = Character.m_valueOf__char(c);] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [o] => [o] "o"
-[s = (short) (char) o;] => [s = $Primitives.narrowCharToShort(/**@type {!Character}*/ ($Casts.$to(o, Character)).m_charValue__());] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
-[testPrimitives] => [m_testPrimitives__]
+[s = (short) (char) o;] => [s = $Primitives.narrowCharToShort(/**@type {!Character}*/ ($Casts.$to(o, Character)).m_charValue__char());] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
+[testPrimitives] => [m_testPrimitives__void]
 [{
     int a = 10,
 ...    k = y == z;
@@ -86,8 +86,8 @@
 [y] => [y] "y"
 [Long z = 121L;] => [let z = Long.m_valueOf__long($Long.fromInt(121));] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [z] => [z] "z"
-[k = y == z;] => [k = $LongUtils.equals($Primitives.widenCharToLong(y), z.m_longValue__());] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
-[testCompoundArray] => [m_testCompoundArray__]
+[k = y == z;] => [k = $LongUtils.equals($Primitives.widenCharToLong(y), z.m_longValue__long());] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[testCompoundArray] => [m_testCompoundArray__void]
 [int[] ints = null;] => [let ints = null;] "arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [ints] => [ints] "ints"
 [ints[0] += 1;] => [$Arrays.$set(ints, 0, ints[0] + 1 | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
@@ -132,7 +132,7 @@
 [b] => [b] "b"
 [getLongArray] => [m_getLongArray__]
 [return null;] => [return null;] "arithmeticexpressions.ArithmeticExpressions.getLongArray"
-[testCompoundBoxedTypes] => [m_testCompoundBoxedTypes__]
+[testCompoundBoxedTypes] => [m_testCompoundBoxedTypes__void]
 [{
     Integer c = 1000;
 ...    int n = 1 + ref.field;
@@ -141,33 +141,33 @@
 [c] => [c] "c"
 [Integer d = 10000;] => [let d = Integer.m_valueOf__int(10000);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [d] => [d] "d"
-[d += c;] => [d = Integer.m_valueOf__int(d.m_intValue__() + c.m_intValue__() | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[d += c;] => [d = Integer.m_valueOf__int(d.m_intValue__int() + c.m_intValue__int() | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [int i = 43;] => [let i = 43;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [i] => [i] "i"
-[d += i;] => [d = Integer.m_valueOf__int(d.m_intValue__() + i | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[d <<= i;] => [d = Integer.m_valueOf__int(d.m_intValue__() << i);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[i += c;] => [i = i + c.m_intValue__() | 0;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[Integer e = ++c;] => [let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1 | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[d += i;] => [d = Integer.m_valueOf__int(d.m_intValue__int() + i | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[d <<= i;] => [d = Integer.m_valueOf__int(d.m_intValue__int() << i);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[i += c;] => [i = i + c.m_intValue__int() | 0;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[Integer e = ++c;] => [let e = c = Integer.m_valueOf__int(c.m_intValue__int() + 1 | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [e] => [e] "e"
-[e = ++c;] => [e = c = Integer.m_valueOf__int(c.m_intValue__() + 1 | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[e = ++c;] => [e = c = Integer.m_valueOf__int(c.m_intValue__int() + 1 | 0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Double e2 = 100d;] => [let e2 = 100;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [e2] => [e2] "e2"
 [++e2;] => [e2 = Double.m_doubleValue__java_lang_Double(e2) + 1;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[Integer f = c++;] => [let f = ($value = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1 | 0), $value);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[Integer f = c++;] => [let f = ($value = c, c = Integer.m_valueOf__int(c.m_intValue__int() + 1 | 0), $value);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [f] => [f] "f"
-[f = c++;] => [f = ($value_1 = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1 | 0), $value_1);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[f = c++;] => [f = ($value_1 = c, c = Integer.m_valueOf__int(c.m_intValue__int() + 1 | 0), $value_1);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Byte b = 0;] => [let b = Byte.m_valueOf__byte(0);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [b] => [b] "b"
-[b++;] => [b = Byte.m_valueOf__byte($Primitives.narrowIntToByte(b.m_byteValue__() + 1 | 0));] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[b++;] => [b = Byte.m_valueOf__byte($Primitives.narrowIntToByte(b.m_byteValue__byte() + 1 | 0));] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Character ch = 'c';] => [let ch = Character.m_valueOf__char(99 /* 'c' */);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [ch] => [ch] "ch"
-[ch++;] => [ch = Character.m_valueOf__char($Primitives.narrowIntToChar(ch.m_charValue__() + 1 /* '\u0001' */ | 0));] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[(++f).intValue();] => [(f = Integer.m_valueOf__int(f.m_intValue__() + 1 | 0)).m_intValue__();] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[(f--).intValue();] => [($value_2 = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1 | 0), $value_2).m_intValue__();] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[ch++;] => [ch = Character.m_valueOf__char($Primitives.narrowIntToChar(ch.m_charValue__char() + 1 /* '\u0001' */ | 0));] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[(++f).intValue();] => [(f = Integer.m_valueOf__int(f.m_intValue__int() + 1 | 0)).m_intValue__int();] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[(f--).intValue();] => [($value_2 = f, f = Integer.m_valueOf__int(f.m_intValue__int() - 1 | 0), $value_2).m_intValue__int();] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Ref<Byte> ref = null;] => [let ref = null;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [ref] => [ref] "ref"
-[ref.field++;] => [ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref = Byte.m_valueOf__byte($Primitives.narrowIntToByte(/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__() + 1 | 0));] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[int n = 1 + ref.field;] => [let n = 1 + /**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__() | 0;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[ref.field++;] => [ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref = Byte.m_valueOf__byte($Primitives.narrowIntToByte(/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__byte() + 1 | 0));] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[int n = 1 + ref.field;] => [let n = 1 + /**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__byte() | 0;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [n] => [n] "n"
 [getInteger] => [m_getInteger__]
 [return null;] => [return null;] "arithmeticexpressions.ArithmeticExpressions.getInteger"
@@ -176,7 +176,7 @@
 [getWithSideEffect().intField += 5;] => [$qualifier.f_intField__arithmeticexpressions_ArithmeticExpressions = $LongUtils.plus($qualifier.f_intField__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(5));] "arithmeticexpressions.ArithmeticExpressions.testSideEffect"
 [getWithSideEffect] => [m_getWithSideEffect__]
 [return null;] => [return null;] "arithmeticexpressions.ArithmeticExpressions.getWithSideEffect"
-[testExtendedOperands] => [m_testExtendedOperands__]
+[testExtendedOperands] => [m_testExtendedOperands__void]
 [Integer boxedInteger = 3;] => [let boxedInteger = Integer.m_valueOf__int(3);] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [boxedInteger] => [boxedInteger] "boxedInteger"
 [int i;] => [let /** number */ i;] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
@@ -185,17 +185,17 @@
 [l] => [l] "l"
 [double d;] => [let /** number */ d;] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [d] => [d] "d"
-[l = 2 - boxedInteger - 2L;] => [l = $LongUtils.minus($Primitives.widenIntToLong(2 - boxedInteger.m_intValue__() | 0), $Long.fromInt(2));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
-[l = 2 | boxedInteger | 2L;] => [l = $LongUtils.bitOr($Primitives.widenIntToLong(2 | boxedInteger.m_intValue__()), $Long.fromInt(2));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
+[l = 2 - boxedInteger - 2L;] => [l = $LongUtils.minus($Primitives.widenIntToLong(2 - boxedInteger.m_intValue__int() | 0), $Long.fromInt(2));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
+[l = 2 | boxedInteger | 2L;] => [l = $LongUtils.bitOr($Primitives.widenIntToLong(2 | boxedInteger.m_intValue__int()), $Long.fromInt(2));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [l = 1000000L * l * 60 * 60 * 24;] => [l = $LongUtils.times($LongUtils.times($LongUtils.times($LongUtils.times($Long.fromInt(1000000), l), $Long.fromInt(60)), $Long.fromInt(60)), $Long.fromInt(24));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [l = 24 * 60 * 60 * l * 1000000L;] => [l = $LongUtils.times($LongUtils.times($Primitives.widenIntToLong(Math.imul(Math.imul(24, 60), 60)), l), $Long.fromInt(1000000));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [d = l = i = 20;] => [d = $Primitives.widenLongToDouble(l = $Primitives.widenIntToLong(i = 20));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
-[l = boxedInteger = i = 20;] => [l = $Primitives.widenIntToLong((boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__());] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
-[l = i + boxedInteger + l + 20;] => [l = $LongUtils.plus($LongUtils.plus($Primitives.widenIntToLong(i + boxedInteger.m_intValue__() | 0), l), $Long.fromInt(20));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
+[l = boxedInteger = i = 20;] => [l = $Primitives.widenIntToLong((boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__int());] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
+[l = i + boxedInteger + l + 20;] => [l = $LongUtils.plus($LongUtils.plus($Primitives.widenIntToLong(i + boxedInteger.m_intValue__int() | 0), l), $Long.fromInt(20));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [d = 20 + l + d;] => [d = $Primitives.widenLongToDouble($LongUtils.plus($Long.fromInt(20), l)) + d;] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [incrementCounter] => [m_incrementCounter__]
 [return ++counter;] => [return ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $LongUtils.plus(ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_, $Long.fromInt(1));] "arithmeticexpressions.ArithmeticExpressions.incrementCounter"
-[ArithmeticExpressions] => [$init___$p_arithmeticexpressions_ArithmeticExpressions]
+[ArithmeticExpressions] => [$init__void_$p_arithmeticexpressions_ArithmeticExpressions]
 [ArithmeticExpressions] => [let /** !$Long */ $value;] "arithmeticexpressions.ArithmeticExpressions.<init>"
 [public long bar = foo++;] => [this.f_bar__arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = $LongUtils.plus(ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "arithmeticexpressions.ArithmeticExpressions.<init>"
 [public static long one = 1;] => [get f_one__arithmeticexpressions_ArithmeticExpressions]

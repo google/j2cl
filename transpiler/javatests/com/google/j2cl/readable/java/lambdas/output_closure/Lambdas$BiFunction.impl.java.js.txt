@@ -11,9 +11,9 @@ let Lambdas_Function = goog.forwardDeclare('lambdas.Lambdas.Function$impl');
  */
 class BiFunction {
  /** @abstract @nodts @return {R} */
- m_apply__java_lang_Object__java_lang_Object(/** T */ t, /** U */ u) {}
+ m_apply__java_lang_Object__java_lang_Object__java_lang_Object(/** T */ t, /** U */ u) {}
  /** @abstract @nodts @template V @return {BiFunction<T, U, V>} */
- m_andThen__lambdas_Lambdas_Function(/** Lambdas_Function<?, ?> */ after) {}
+ m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction(/** Lambdas_Function<?, ?> */ after) {}
  /** @nodts @template T, U, R @return {BiFunction<T, U, R>} */
  static $adapt(/** ?function(T, U):R */ fn) {
   BiFunction.$clinit();
@@ -23,7 +23,7 @@ class BiFunction {
  static m_andThen__$default__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function(/** !BiFunction<T, U, R> */ $thisArg, /** Lambdas_Function<?, ?> */ after) {
   BiFunction.$clinit();
   return BiFunction.$adapt((/** T */ t, /** U */ u) =>{
-   return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
+   return after.m_apply__java_lang_Object__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object__java_lang_Object(t, u));
   });
  }
  /** @nodts */

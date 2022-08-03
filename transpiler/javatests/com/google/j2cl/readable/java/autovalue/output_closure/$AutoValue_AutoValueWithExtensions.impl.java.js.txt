@@ -17,12 +17,12 @@ class $AutoValue__AutoValueWithExtensions extends AutoValueWithExtensions {
   super();
  }
  /** @nodts */
- $ctor__autovalue_$AutoValue_AutoValueWithExtensions__int__java_lang_String(/** number */ intField$, /** ?string */ stringField$) {
-  this.$ctor__autovalue_AutoValueWithExtensions__int__java_lang_String(intField$, stringField$);
+ $ctor__autovalue_$AutoValue_AutoValueWithExtensions__int__java_lang_String__void(/** number */ intField$, /** ?string */ stringField$) {
+  this.$ctor__autovalue_AutoValueWithExtensions__int__java_lang_String__void(intField$, stringField$);
  }
  /** @override @nodts @return {?string} */
- m_toPrettyString___$pp_autovalue() {
-  return 'AutoValueWithExtensions {' + '\n' + '  intField = ' + this.m_getIntField__() + ',' + '\n' + '  stringField = ' + j_l_String.m_valueOf__java_lang_Object($AutoValue__AutoValueWithExtensions.m_format__java_lang_Object__int(this.m_getStringField__(), 1)) + ',' + '\n' + '}';
+ m_toPrettyString__java_lang_String_$pp_autovalue() {
+  return 'AutoValueWithExtensions {' + '\n' + '  intField = ' + this.m_getIntField__int() + ',' + '\n' + '  stringField = ' + j_l_String.m_valueOf__java_lang_Object($AutoValue__AutoValueWithExtensions.m_format__java_lang_Object__int(this.m_getStringField__java_lang_String(), 1)) + ',' + '\n' + '}';
  }
  /** @nodts @return {?string} */
  static m_format__java_lang_Object__int(/** * */ value, /** number */ indentLevel) {
@@ -35,7 +35,7 @@ class $AutoValue__AutoValueWithExtensions extends AutoValueWithExtensions {
  static $indent__int(/** number */ level) {
   let builder = StringBuilder.$create__();
   for (let i = 0; i < level; i = i + 1 | 0) {
-   builder.m_append__java_lang_String('  ');
+   builder.m_append__java_lang_String__java_lang_StringBuilder('  ');
   }
   return builder.toString();
  }

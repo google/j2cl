@@ -4,11 +4,11 @@
 [InstanceofExpressions] => [$create__]
 [InstanceofExpressions] => [InstanceofExpressions.$clinit();] "instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
 [InstanceofExpressions] => [let $instance = new InstanceofExpressions();] "instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
-[InstanceofExpressions] => [$instance.$ctor__instanceofexpression_InstanceofExpressions__();] "instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
+[InstanceofExpressions] => [$instance.$ctor__instanceofexpression_InstanceofExpressions__void();] "instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
 [InstanceofExpressions] => [return $instance;] "instanceofexpression.InstanceofExpressions.<synthetic: ctor_create>"
-[InstanceofExpressions] => [$ctor__instanceofexpression_InstanceofExpressions__]
-[InstanceofExpressions] => [this.$ctor__java_lang_Object__();] "instanceofexpression.InstanceofExpressions.<init>"
-[testInstanceofClass] => [m_testInstanceofClass__]
+[InstanceofExpressions] => [$ctor__instanceofexpression_InstanceofExpressions__void]
+[InstanceofExpressions] => [this.$ctor__java_lang_Object__void();] "instanceofexpression.InstanceofExpressions.<init>"
+[testInstanceofClass] => [m_testInstanceofClass__void]
 [Object object = new InstanceofExpressions();] => [let object = InstanceofExpressions.$create__();] "instanceofexpression.InstanceofExpressions.testInstanceofClass"
 [object] => [object] "object"
 [boolean b;] => [let /** boolean */ b;] "instanceofexpression.InstanceofExpressions.testInstanceofClass"
@@ -16,14 +16,14 @@
 [b = object instanceof Object;] => [b = !$Equality.$same(object, null);] "instanceofexpression.InstanceofExpressions.testInstanceofClass"
 [b = object instanceof InstanceofExpressions;] => [b = InstanceofExpressions.$isInstance(object);] "instanceofexpression.InstanceofExpressions.testInstanceofClass"
 [b = object instanceof String;] => [b = j_l_String.$isInstance(object);] "instanceofexpression.InstanceofExpressions.testInstanceofClass"
-[testInstanceofInterface] => [m_testInstanceofInterface__]
+[testInstanceofInterface] => [m_testInstanceofInterface__void]
 [Object o = new Object();] => [let o = j_l_Object.$create__();] "instanceofexpression.InstanceofExpressions.testInstanceofInterface"
 [o] => [o] "o"
 [boolean b;] => [let /** boolean */ b;] "instanceofexpression.InstanceofExpressions.testInstanceofInterface"
 [b] => [b] "b"
 [b = o instanceof Serializable;] => [b = Serializable.$isInstance(o);] "instanceofexpression.InstanceofExpressions.testInstanceofInterface"
 [b = new Serializable() {} instanceof Serializable;] => [b = !$Equality.$same($1.$create__instanceofexpression_InstanceofExpressions(this), null);] "instanceofexpression.InstanceofExpressions.testInstanceofInterface"
-[testInstanceofBoxedType] => [m_testInstanceofBoxedType__]
+[testInstanceofBoxedType] => [m_testInstanceofBoxedType__void]
 [Object b = new Integer(1);] => [let b = Integer.$create__int(1);] "instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
 [b] => [b] "b"
 [boolean a = b instanceof Byte;] => [let a = Byte.$isInstance(b);] "instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
@@ -41,7 +41,7 @@
 [a = d instanceof Object;] => [a = !$Equality.$same(d, null);] "instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
 [a = d instanceof Number;] => [a = !$Equality.$same(d, null);] "instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
 [a = d instanceof Double;] => [a = !$Equality.$same(d, null);] "instanceofexpression.InstanceofExpressions.testInstanceofBoxedType"
-[testInstanceOfArray] => [m_testInstanceOfArray__]
+[testInstanceOfArray] => [m_testInstanceOfArray__void]
 [Object object = new Object();] => [let object = j_l_Object.$create__();] "instanceofexpression.InstanceofExpressions.testInstanceOfArray"
 [object] => [object] "object"
 [Object[] objectArray = new Object[0];] => [let objectArray = new Array(0);] "instanceofexpression.InstanceofExpressions.testInstanceOfArray"

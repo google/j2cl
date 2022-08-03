@@ -4,18 +4,18 @@
 [IntersectionTypeTest] => [$create__]
 [IntersectionTypeTest] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
 [IntersectionTypeTest] => [let $instance = new IntersectionTypeTest();] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
-[IntersectionTypeTest] => [$instance.$ctor__intersectiontype_IntersectionTypeTest__();] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
+[IntersectionTypeTest] => [$instance.$ctor__intersectiontype_IntersectionTypeTest__void();] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
 [IntersectionTypeTest] => [return $instance;] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
-[IntersectionTypeTest] => [$ctor__intersectiontype_IntersectionTypeTest__]
-[IntersectionTypeTest] => [this.$ctor__java_lang_Object__();] "intersectiontype.IntersectionTypeTest.<init>"
+[IntersectionTypeTest] => [$ctor__intersectiontype_IntersectionTypeTest__void]
+[IntersectionTypeTest] => [this.$ctor__java_lang_Object__void();] "intersectiontype.IntersectionTypeTest.<init>"
 [getAndSet] => [m_getAndSet__intersectiontype_Getable]
 [object] => [object] "object"
 [{
     object.set(1);
     object.get();
   }] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.getAndSet"
-[object.set(1);] => [/**@type {!Setable}*/ ($Casts.$to(object, Setable)).m_set__int(1);] "intersectiontype.IntersectionTypeTest.getAndSet"
-[object.get();] => [/**@type {Getable}*/ (object).m_get__();] "intersectiontype.IntersectionTypeTest.getAndSet"
+[object.set(1);] => [/**@type {!Setable}*/ ($Casts.$to(object, Setable)).m_set__int__void(1);] "intersectiontype.IntersectionTypeTest.getAndSet"
+[object.get();] => [/**@type {Getable}*/ (object).m_get__java_lang_Object();] "intersectiontype.IntersectionTypeTest.getAndSet"
 [cast] => [m_cast__java_lang_Object]
 [o] => [o] "o"
 [{
@@ -41,7 +41,7 @@
     return (Getable<Comparable<T>> & Setable) s;
   }] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.cast2"
 [return (Getable<Comparable<T>> & Setable) s;] => [return /**@type {Getable<(Comparable<T>|boolean|number|string)>}*/ ($Casts.$to($Casts.$to(s, Getable), Setable));] "intersectiontype.IntersectionTypeTest.cast2"
-[cast3] => [m_cast3__java_lang_Object]
+[cast3] => [m_cast3__java_lang_Object__java_lang_Object]
 [s] => [s] "s"
 [return s;] => [return s;] "intersectiontype.IntersectionTypeTest.cast3"
 [method] => [m_method__]
@@ -82,7 +82,7 @@
 [return null;] => [return null;] "intersectiontype.IntersectionTypeTest.n"
 [set] => [m_set__intersectiontype_IntersectionTypeTest_A]
 [t] => [t] "t"
-[testMethodCall] => [m_testMethodCall__]
+[testMethodCall] => [m_testMethodCall__void]
 [Object o = m();] => [let o = IntersectionTypeTest.m_m__();] "intersectiontype.IntersectionTypeTest.testMethodCall"
 [o] => [o] "o"
 [set((A & EmptyA) o);] => [IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(/**@type {A}*/ ($Casts.$to($Casts.$to(o, A), EmptyA)));] "intersectiontype.IntersectionTypeTest.testMethodCall"
@@ -91,8 +91,8 @@
 [g] => [g] "g"
 [callOnIntersetionTypes] => [m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType]
 [t] => [t] "t"
-[t.cmp();] => [/**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__();] "intersectiontype.IntersectionTypeTest.callOnIntersetionTypes"
-[((SomeConcreteType & Cmp) null).cmp();] => [/**@type {!Cmp}*/ ($Casts.$to(null, Cmp)).m_cmp__();] "intersectiontype.IntersectionTypeTest.callOnIntersetionTypes"
+[t.cmp();] => [/**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__int();] "intersectiontype.IntersectionTypeTest.callOnIntersetionTypes"
+[((SomeConcreteType & Cmp) null).cmp();] => [/**@type {!Cmp}*/ ($Casts.$to(null, Cmp)).m_cmp__int();] "intersectiontype.IntersectionTypeTest.callOnIntersetionTypes"
 [IntersectionTypeTest] => [$clinit]
 [IntersectionTypeTest] => [IntersectionTypeTest.$clinit = () =>{};] "intersectiontype.IntersectionTypeTest.<clinit>"
 [IntersectionTypeTest] => [IntersectionTypeTest.$loadModules();] "intersectiontype.IntersectionTypeTest.<clinit>"

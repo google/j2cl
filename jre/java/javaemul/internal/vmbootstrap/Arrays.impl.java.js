@@ -394,8 +394,8 @@ class Arrays {
             Class.$get(requiredLeafType, requiredDimensionCount);
         const instanceTypeClass =
             Objects.m_getClass__java_lang_Object(instance);
-        const message = instanceTypeClass.m_getName__() +
-            ' cannot be cast to ' + castTypeClass.m_getName__();
+        const message = instanceTypeClass.m_getName__java_lang_String() +
+            ' cannot be cast to ' + castTypeClass.m_getName__java_lang_String();
         InternalPreconditions.m_checkType__boolean__java_lang_String(
             false, message);
       }

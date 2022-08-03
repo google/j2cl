@@ -4,20 +4,20 @@
 [TypeWildCards] => [$create__]
 [TypeWildCards] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.<synthetic: ctor_create>"
 [TypeWildCards] => [let $instance = new TypeWildCards();] "typewildcards.TypeWildCards.<synthetic: ctor_create>"
-[TypeWildCards] => [$instance.$ctor__typewildcards_TypeWildCards__();] "typewildcards.TypeWildCards.<synthetic: ctor_create>"
+[TypeWildCards] => [$instance.$ctor__typewildcards_TypeWildCards__void();] "typewildcards.TypeWildCards.<synthetic: ctor_create>"
 [TypeWildCards] => [return $instance;] "typewildcards.TypeWildCards.<synthetic: ctor_create>"
-[TypeWildCards] => [$ctor__typewildcards_TypeWildCards__]
-[TypeWildCards] => [this.$ctor__java_lang_Object__();] "typewildcards.TypeWildCards.<init>"
-[unbounded] => [m_unbounded__typewildcards_GenericType]
+[TypeWildCards] => [$ctor__typewildcards_TypeWildCards__void]
+[TypeWildCards] => [this.$ctor__java_lang_Object__void();] "typewildcards.TypeWildCards.<init>"
+[unbounded] => [m_unbounded__typewildcards_GenericType__void]
 [g] => [g] "g"
-[upperBound] => [m_upperBound__typewildcards_GenericType]
+[upperBound] => [m_upperBound__typewildcards_GenericType__void]
 [g] => [g] "g"
-[lowerBound] => [m_lowerBound__typewildcards_GenericType]
+[lowerBound] => [m_lowerBound__typewildcards_GenericType__void]
 [g] => [g] "g"
-[test] => [m_test__]
-[unbounded(new GenericType<TypeWildCards>());] => [this.m_unbounded__typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
-[upperBound(new GenericType<TypeWildCards>());] => [this.m_upperBound__typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
-[lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
+[test] => [m_test__void]
+[unbounded(new GenericType<TypeWildCards>());] => [this.m_unbounded__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
+[upperBound(new GenericType<TypeWildCards>());] => [this.m_upperBound__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
+[lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
 [testBoundedTypeMemberAccess] => [m_testBoundedTypeMemberAccess__typewildcards_TypeWildCards_A]
 [t] => [t] "t"
 [{
@@ -26,7 +26,7 @@
   }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [int i = t.f;] => [let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [i] => [i] "i"
-[t.m();] => [/**@type {A}*/ (t).m_m__();] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
+[t.m();] => [/**@type {A}*/ (t).m_m__void();] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [testIntersectionBoundedTypeMemberAccess] => [m_testIntersectionBoundedTypeMemberAccess__typewildcards_TypeWildCards_A]
 [t] => [t] "t"
 [{
@@ -35,8 +35,8 @@
   }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [int i = t.f;] => [let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [i] => [i] "i"
-[t.m();] => [/**@type {A}*/ (t).m_m__();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
-[t.n();] => [/**@type {!Y}*/ ($Casts.$to(t, Y)).m_n__();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[t.m();] => [/**@type {A}*/ (t).m_m__void();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[t.n();] => [/**@type {!Y}*/ ($Casts.$to(t, Y)).m_n__void();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [transform] => [m_transform__java_util_List__java_util_function_Function]
 [from] => [from] "from"
 [function] => [function_1] "function"
@@ -45,7 +45,7 @@
 [a] => [a] "a"
 [b] => [b] "b"
 [return null;] => [return null;] "typewildcards.TypeWildCards.concat"
-[testInferredGenericIntersection] => [m_testInferredGenericIntersection__]
+[testInferredGenericIntersection] => [m_testInferredGenericIntersection__void]
 [List<Element> elements = null;] => [let elements = null;] "typewildcards.TypeWildCards.testInferredGenericIntersection"
 [elements] => [elements] "elements"
 [List<SubOtherElement> otherElements = null;] => [let otherElements = null;] "typewildcards.TypeWildCards.testInferredGenericIntersection"
@@ -54,16 +54,16 @@
         transform(
 ...              return a.get();
             });] => [let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__java_util_List__java_util_function_Function(/**@type {List<*>}*/ (TypeWildCards.m_concat__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** ? */ a) =>{
-   /**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();
-   return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();
+   /**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__java_lang_String();
+   return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__java_lang_Integer();
   })));] "typewildcards.TypeWildCards.testInferredGenericIntersection"
 [integers] => [integers] "integers"
 [a] => [a] "a"
-[a.getKey();] => [/**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
-[return a.get();] => [return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
+[a.getKey();] => [/**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__java_lang_String();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
+[return a.get();] => [return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__java_lang_Integer();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
 [takesRecursiveGeneric] => [m_takesRecursiveGeneric__typewildcards_GenericType]
 [foo] => [foo] "foo"
-[testRecursiveGeneric] => [m_testRecursiveGeneric__]
+[testRecursiveGeneric] => [m_testRecursiveGeneric__void]
 [takesRecursiveGeneric(new Foo());] => [TypeWildCards.m_takesRecursiveGeneric__typewildcards_GenericType(Foo.$create__typewildcards_TypeWildCards(this));] "typewildcards.TypeWildCards.testRecursiveGeneric"
 [TypeWildCards] => [$clinit]
 [TypeWildCards] => [TypeWildCards.$clinit = () =>{};] "typewildcards.TypeWildCards.<clinit>"

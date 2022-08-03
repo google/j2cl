@@ -22,21 +22,21 @@ class B extends A {
  static $create__() {
   B.$clinit();
   let $instance = new B();
-  $instance.$ctor__bridgemethods_B__();
+  $instance.$ctor__bridgemethods_B__void();
   return $instance;
  }
  /** @nodts */
- $ctor__bridgemethods_B__() {
-  this.$ctor__bridgemethods_A__();
+ $ctor__bridgemethods_B__void() {
+  this.$ctor__bridgemethods_A__void();
  }
  /** @nodts @return {Integer} */
- m_fun__java_lang_String(/** ?string */ s) {
+ m_fun__java_lang_String__java_lang_Integer(/** ?string */ s) {
   return Integer.$create__int(1);
  }
  //Bridge method.
  /** @override @nodts @return {Integer} */
- m_fun__java_lang_Object(/** ?string */ arg0) {
-  return this.m_fun__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ m_fun__java_lang_Object__java_lang_Object(/** ?string */ arg0) {
+  return this.m_fun__java_lang_String__java_lang_Integer(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
  }
  /** @nodts */
  static $clinit() {

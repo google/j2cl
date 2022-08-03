@@ -20,35 +20,35 @@ class Varargs extends j_l_Object {
  static $create__arrayOf_int(/** Array<number> */ args) {
   Varargs.$clinit();
   let $instance = new Varargs();
-  $instance.$ctor__varargs_Varargs__arrayOf_int(args);
+  $instance.$ctor__varargs_Varargs__arrayOf_int__void(args);
   return $instance;
  }
  //Initialization from constructor 'Varargs(int...)'.
  /** @nodts */
- $ctor__varargs_Varargs__arrayOf_int(/** Array<number> */ args) {
-  this.$ctor__java_lang_Object__();
+ $ctor__varargs_Varargs__arrayOf_int__void(/** Array<number> */ args) {
+  this.$ctor__java_lang_Object__void();
  }
  //Factory method corresponding to constructor 'Varargs()'.
  /** @nodts @return {!Varargs} */
  static $create__() {
   Varargs.$clinit();
   let $instance = new Varargs();
-  $instance.$ctor__varargs_Varargs__();
+  $instance.$ctor__varargs_Varargs__void();
   return $instance;
  }
  //Initialization from constructor 'Varargs()'.
  /** @nodts */
- $ctor__varargs_Varargs__() {
-  this.$ctor__varargs_Varargs__arrayOf_int(/**@type {!Array<number>}*/ ($Arrays.$init([1], $$int)));
+ $ctor__varargs_Varargs__void() {
+  this.$ctor__varargs_Varargs__arrayOf_int__void(/**@type {!Array<number>}*/ ($Arrays.$init([1], $$int)));
  }
  /** @nodts */
- m_test__int__arrayOf_java_lang_Object(/** number */ a, /** Array<*> */ args) {}
+ m_test__int__arrayOf_java_lang_Object__void(/** number */ a, /** Array<*> */ args) {}
  /** @nodts */
- m_testCloneable__arrayOf_java_lang_Cloneable(/** Array<(Cloneable|Array)> */ args) {}
+ m_testCloneable__arrayOf_java_lang_Cloneable__void(/** Array<(Cloneable|Array)> */ args) {}
  /** @nodts */
- m_testSerializable__arrayOf_java_io_Serializable(/** Array<(Serializable|Array)> */ args) {}
+ m_testSerializable__arrayOf_java_io_Serializable__void(/** Array<(Serializable|Array)> */ args) {}
  /** @nodts */
- m_testAssignment__arrayOf_java_lang_Object(/** Array<*> */ args) {
+ m_testAssignment__arrayOf_java_lang_Object__void(/** Array<*> */ args) {
   this.f_args__varargs_Varargs_ = args;
  }
  /** @nodts @template T */
@@ -61,15 +61,15 @@ class Varargs extends j_l_Object {
   Varargs.m_fun__arrayOf_java_lang_Object([a, b]);
  }
  /** @nodts */
- m_main__() {
+ m_main__void() {
   let v = Varargs.$create__();
-  v.m_test__int__arrayOf_java_lang_Object(1, []);
-  v.m_test__int__arrayOf_java_lang_Object(1, [j_l_Object.$create__()]);
-  v.m_test__int__arrayOf_java_lang_Object(1, [j_l_Object.$create__()]);
-  v.m_test__int__arrayOf_java_lang_Object(1, []);
-  v.m_test__int__arrayOf_java_lang_Object(1, /**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
-  v.m_testCloneable__arrayOf_java_lang_Cloneable(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
-  v.m_testSerializable__arrayOf_java_io_Serializable(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+  v.m_test__int__arrayOf_java_lang_Object__void(1, []);
+  v.m_test__int__arrayOf_java_lang_Object__void(1, [j_l_Object.$create__()]);
+  v.m_test__int__arrayOf_java_lang_Object__void(1, [j_l_Object.$create__()]);
+  v.m_test__int__arrayOf_java_lang_Object__void(1, []);
+  v.m_test__int__arrayOf_java_lang_Object__void(1, /**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+  v.m_testCloneable__arrayOf_java_lang_Cloneable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+  v.m_testSerializable__arrayOf_java_io_Serializable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
  }
  /** @nodts */
  static $clinit() {

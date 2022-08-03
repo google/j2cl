@@ -1,7 +1,7 @@
 [LocalNameCollision] => [LocalNameCollision]
 [LocalNameCollision] => [constructor]
 [LocalNameCollision] => [super();] "localnamecollision.LocalNameCollision.<synthetic: ctor_js>"
-[testClassLocalVarCollision] => [m_testClassLocalVarCollision__]
+[testClassLocalVarCollision] => [m_testClassLocalVarCollision__void]
 [boolean LocalNameCollision = false;] => [let LocalNameCollision_1 = false;] "localnamecollision.LocalNameCollision.testClassLocalVarCollision"
 [LocalNameCollision] => [LocalNameCollision_1] "LocalNameCollision"
 [Object RuntimeException = null;] => [let RuntimeException_1 = null;] "localnamecollision.LocalNameCollision.testClassLocalVarCollision"
@@ -24,8 +24,8 @@
         RuntimeException instanceof LocalNameCollision
 ...            || RuntimeException instanceof localnamecollision.package2.A
             || RuntimeException instanceof Class;] => [LocalNameCollision_1 = LocalNameCollision.$isInstance(RuntimeException_1) || RuntimeException.$isInstance(RuntimeException_1) || A.$isInstance(RuntimeException_1) || localnamecollision_package2_A.$isInstance(RuntimeException_1) || Class.$isInstance(RuntimeException_1);] "localnamecollision.LocalNameCollision.testClassLocalVarCollision"
-[assert new Asserts().n() == 5;] => [$Asserts.$assert(Asserts.$create__().m_n___$pp_localnamecollision() == 5);] "localnamecollision.LocalNameCollision.testClassLocalVarCollision"
-[testClassParameterCollision] => [m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int]
+[assert new Asserts().n() == 5;] => [$Asserts.$assert(Asserts.$create__().m_n__int_$pp_localnamecollision() == 5);] "localnamecollision.LocalNameCollision.testClassLocalVarCollision"
+[testClassParameterCollision] => [m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean]
 [LocalNameCollision] => [LocalNameCollision_1] "LocalNameCollision"
 [Asserts] => [Asserts_1] "Asserts"
 [$Asserts] => [$Asserts_1] "$Asserts"
@@ -43,9 +43,9 @@
 [A] => [A_1] "A"
 [LocalNameCollision] => [LocalNameCollision.$clinit();] "localnamecollision.LocalNameCollision.<synthetic: ctor_create>"
 [LocalNameCollision] => [let $instance = new LocalNameCollision();] "localnamecollision.LocalNameCollision.<synthetic: ctor_create>"
-[LocalNameCollision] => [$instance.$ctor__localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int(LocalNameCollision_1, Asserts_1, $Asserts_1, l_Asserts, A_1);] "localnamecollision.LocalNameCollision.<synthetic: ctor_create>"
+[LocalNameCollision] => [$instance.$ctor__localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int__void(LocalNameCollision_1, Asserts_1, $Asserts_1, l_Asserts, A_1);] "localnamecollision.LocalNameCollision.<synthetic: ctor_create>"
 [LocalNameCollision] => [return $instance;] "localnamecollision.LocalNameCollision.<synthetic: ctor_create>"
-[LocalNameCollision] => [$ctor__localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int]
+[LocalNameCollision] => [$ctor__localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int__void]
 [LocalNameCollision] => [LocalNameCollision_1] "LocalNameCollision"
 [Asserts] => [Asserts_1] "Asserts"
 [$Asserts] => [$Asserts_1] "$Asserts"
@@ -54,7 +54,7 @@
 [{
     boolean result =
 ...            && (l_Asserts == A);
-  }] => [this.$ctor__java_lang_Object__();] "localnamecollision.LocalNameCollision.<init>"
+  }] => [this.$ctor__java_lang_Object__void();] "localnamecollision.LocalNameCollision.<init>"
 [boolean result =
         LocalNameCollision
 ...            && $Asserts instanceof Asserts

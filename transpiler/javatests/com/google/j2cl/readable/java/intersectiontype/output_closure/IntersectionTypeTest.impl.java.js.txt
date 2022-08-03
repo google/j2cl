@@ -29,18 +29,18 @@ class IntersectionTypeTest extends j_l_Object {
  static $create__() {
   IntersectionTypeTest.$clinit();
   let $instance = new IntersectionTypeTest();
-  $instance.$ctor__intersectiontype_IntersectionTypeTest__();
+  $instance.$ctor__intersectiontype_IntersectionTypeTest__void();
   return $instance;
  }
  /** @nodts */
- $ctor__intersectiontype_IntersectionTypeTest__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__intersectiontype_IntersectionTypeTest__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts @template T */
  static m_getAndSet__intersectiontype_Getable(/** T */ object) {
   IntersectionTypeTest.$clinit();
-  /**@type {!Setable}*/ ($Casts.$to(object, Setable)).m_set__int(1);
-  /**@type {Getable}*/ (object).m_get__();
+  /**@type {!Setable}*/ ($Casts.$to(object, Setable)).m_set__int__void(1);
+  /**@type {Getable}*/ (object).m_get__java_lang_Object();
  }
  /** @nodts @template T @return {Getable<T>} */
  static m_cast__java_lang_Object(/** * */ o) {
@@ -61,7 +61,7 @@ class IntersectionTypeTest extends j_l_Object {
   return /**@type {Getable<(Comparable<T>|boolean|number|string)>}*/ ($Casts.$to($Casts.$to(s, Getable), Setable));
  }
  /** @nodts @return {*} */
- m_cast3__java_lang_Object(/** * */ s) {
+ m_cast3__java_lang_Object__java_lang_Object(/** * */ s) {
   return s;
  }
  /** @nodts @return {Cmp} */
@@ -100,7 +100,7 @@ class IntersectionTypeTest extends j_l_Object {
  /** @nodts @template T */
  static m_set__intersectiontype_IntersectionTypeTest_A(/** T */ t) {}
  /** @nodts */
- m_testMethodCall__() {
+ m_testMethodCall__void() {
   let o = IntersectionTypeTest.m_m__();
   IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(/**@type {A}*/ ($Casts.$to($Casts.$to(o, A), EmptyA)));
   IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(IntersectionTypeTest.m_m__());
@@ -108,8 +108,8 @@ class IntersectionTypeTest extends j_l_Object {
  }
  /** @nodts @template T */
  static m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType(/** T */ t) {
-  /**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__();
-  /**@type {!Cmp}*/ ($Casts.$to(null, Cmp)).m_cmp__();
+  /**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__int();
+  /**@type {!Cmp}*/ ($Casts.$to(null, Cmp)).m_cmp__int();
  }
  /** @nodts */
  static $clinit() {

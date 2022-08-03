@@ -43,26 +43,26 @@ class InnerClassInitOrder extends j_l_Object {
  static $create__() {
   InnerClassInitOrder.$clinit();
   let $instance = new InnerClassInitOrder();
-  $instance.$ctor__innerclassinitorder_InnerClassInitOrder__();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder__void();
   return $instance;
  }
  /** @nodts */
- $ctor__innerclassinitorder_InnerClassInitOrder__() {
-  this.$ctor__java_lang_Object__();
-  this.$init___$p_innerclassinitorder_InnerClassInitOrder();
+ $ctor__innerclassinitorder_InnerClassInitOrder__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_innerclassinitorder_InnerClassInitOrder();
  }
  /** @nodts */
- m_testOuterThisFromSuperCall__() {
+ m_testOuterThisFromSuperCall__void() {
   OuterRefFromSuperCtorCall.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 100);
  }
  /** @nodts */
- m_testOuterThisFromThisCall__() {
+ m_testOuterThisFromThisCall__void() {
   OuterRefFromThisCtorCall.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1100);
  }
  /** @nodts */
- m_testExtendsNested__() {
+ m_testExtendsNested__void() {
   let o = ESOuter.$create__();
   $Asserts.$assert(1 == ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
   $Asserts.$assert(2 == ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter__int(o, 2).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
@@ -70,7 +70,7 @@ class InnerClassInitOrder extends j_l_Object {
   $Asserts.$assert(2 == ESInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner);
  }
  /** @nodts */
- m_testExtendsNestedWithGenerics__() {
+ m_testExtendsNestedWithGenerics__void() {
   let o = /**@type {!ESWGOuter<?string>}*/ (ESWGOuter.$create__());
   $Asserts.$assert(1 == /**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(o)).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
   $Asserts.$assert(2 == /**@type {!ESWGInner<?string>}*/ (ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(o, 2)).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
@@ -78,7 +78,7 @@ class InnerClassInitOrder extends j_l_Object {
   $Asserts.$assert(2 == ESWGInnerSubclass.$create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter(2, o).f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner);
  }
  /** @nodts */
- m_testInnerClassCtors__() {
+ m_testInnerClassCtors__void() {
   let p1 = /**@type {!P1<*>}*/ (P1.$create__());
   $Asserts.$assert(1 == p1.f_value__innerclassinitorder_InnerClassInitOrder_P1);
   $Asserts.$assert(2 == /**@type {!P1<*>}*/ (P1.$create__int(2)).f_value__innerclassinitorder_InnerClassInitOrder_P1);
@@ -89,12 +89,12 @@ class InnerClassInitOrder extends j_l_Object {
   $Asserts.$assert(2 == /**@type {!P3<*, *, *>}*/ (P3.$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int(p2, 2)).f_value__innerclassinitorder_InnerClassInitOrder_P1);
  }
  /** @nodts */
- m_testInnerClassInitialization__() {
+ m_testInnerClassInitialization__void() {
   InnerClass.$create__innerclassinitorder_InnerClassInitOrder(this);
   $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1111);
  }
  /** @nodts */
- m_testInnerClassLoop__() {
+ m_testInnerClassLoop__void() {
   let results = /**@type {!Array<$1AddNumber>}*/ ($Arrays.$create([10], $1AddNumber));
   for (let i = 0; i < 10; i = i + 1 | 0) {
    let ap = $1.$create__innerclassinitorder_InnerClassInitOrder__int(this, i);
@@ -103,73 +103,73 @@ class InnerClassInitOrder extends j_l_Object {
   for (let $array = results, $index = 0; $index < $array.length; $index++) {
    let theAp = $array[$index];
    {
-    theAp.m_act__();
+    theAp.m_act__void();
    }
   }
   $Asserts.$assert(this.f_number__innerclassinitorder_InnerClassInitOrder == 1156);
  }
  /** @nodts */
- m_testOuterIsNotSuper__() {
+ m_testOuterIsNotSuper__void() {
   let x = OuterIsNotSuper.$create__innerclassinitorder_InnerClassInitOrder_Outer(this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
-  $Asserts.$assert(2 == x.m_getValue__());
+  $Asserts.$assert(2 == x.m_getValue__int());
  }
  /** @nodts */
- m_testOuterIsNotSuperAnon__() {
+ m_testOuterIsNotSuperAnon__void() {
   let x = $2.$create__innerclassinitorder_InnerClassInitOrder(this);
-  $Asserts.$assert(2 == x.m_getValue__());
+  $Asserts.$assert(2 == x.m_getValue__int());
  }
  /** @nodts */
- m_testQualifiedSuperCall__() {
+ m_testQualifiedSuperCall__void() {
   let x = TestQualifiedSuperCall.$create__();
-  $Asserts.$assert(2 == x.m_getValue__());
+  $Asserts.$assert(2 == x.m_getValue__int());
  }
  /** @nodts */
- m_testQualifiedSuperCallAnon__() {
+ m_testQualifiedSuperCallAnon__void() {
   let x = $3.$create__innerclassinitorder_InnerClassInitOrder(this);
-  $Asserts.$assert(2 == x.m_getValue__());
+  $Asserts.$assert(2 == x.m_getValue__int());
  }
  /** @nodts */
- m_testSuperDispatch__() {
-  $Asserts.$assert(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub1__());
-  $Asserts.$assert(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub2__());
+ m_testSuperDispatch__void() {
+  $Asserts.$assert(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub1__int());
+  $Asserts.$assert(1 == this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_checkDispatchFromSub2__int());
  }
  /** @nodts */
- m_testUnqualifiedAlloc__() {
-  let x = this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_unqualifiedAlloc__();
-  $Asserts.$assert(2 == x.m_getValue__());
+ m_testUnqualifiedAlloc__void() {
+  let x = this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_.m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper();
+  $Asserts.$assert(2 == x.m_getValue__int());
  }
  /** @nodts */
- m_testUnqualifiedSuperCall__() {
+ m_testUnqualifiedSuperCall__void() {
   let x = TestUnqualifiedSuperCall.$create__innerclassinitorder_InnerClassInitOrder_Outer(this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
-  $Asserts.$assert(2 == x.m_getValue__());
+  $Asserts.$assert(2 == x.m_getValue__int());
  }
  /** @nodts */
- m_testUnqualifiedSuperCallAnon__() {
+ m_testUnqualifiedSuperCallAnon__void() {
   let x = $4.$create__innerclassinitorder_InnerClassInitOrder(this);
-  $Asserts.$assert(2 == x.m_getValue__());
+  $Asserts.$assert(2 == x.m_getValue__int());
  }
  /** @nodts */
  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
   InnerClassInitOrder.$clinit();
   let m = InnerClassInitOrder.$create__();
-  m.m_testOuterThisFromSuperCall__();
-  m.m_testOuterThisFromThisCall__();
-  m.m_testExtendsNested__();
-  m.m_testExtendsNestedWithGenerics__();
-  m.m_testInnerClassCtors__();
-  m.m_testInnerClassInitialization__();
-  m.m_testInnerClassLoop__();
-  m.m_testOuterIsNotSuper__();
-  m.m_testOuterIsNotSuperAnon__();
-  m.m_testQualifiedSuperCall__();
-  m.m_testQualifiedSuperCallAnon__();
-  m.m_testSuperDispatch__();
-  m.m_testUnqualifiedAlloc__();
-  m.m_testUnqualifiedSuperCall__();
-  m.m_testUnqualifiedSuperCallAnon__();
+  m.m_testOuterThisFromSuperCall__void();
+  m.m_testOuterThisFromThisCall__void();
+  m.m_testExtendsNested__void();
+  m.m_testExtendsNestedWithGenerics__void();
+  m.m_testInnerClassCtors__void();
+  m.m_testInnerClassInitialization__void();
+  m.m_testInnerClassLoop__void();
+  m.m_testOuterIsNotSuper__void();
+  m.m_testOuterIsNotSuperAnon__void();
+  m.m_testQualifiedSuperCall__void();
+  m.m_testQualifiedSuperCallAnon__void();
+  m.m_testSuperDispatch__void();
+  m.m_testUnqualifiedAlloc__void();
+  m.m_testUnqualifiedSuperCall__void();
+  m.m_testUnqualifiedSuperCallAnon__void();
  }
  /** @private @nodts */
- $init___$p_innerclassinitorder_InnerClassInitOrder() {
+ $init__void_$p_innerclassinitorder_InnerClassInitOrder() {
   this.f_number__innerclassinitorder_InnerClassInitOrder = 0;
   this.f_outer__innerclassinitorder_InnerClassInitOrder_ = Outer.$create__int(1);
   this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_ = OuterIsSuper.$create__innerclassinitorder_InnerClassInitOrder_Outer__int(this.f_outer__innerclassinitorder_InnerClassInitOrder_, 2);

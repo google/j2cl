@@ -36,17 +36,17 @@ class Main extends j_l_Object {
  static $create__() {
   Main.$clinit();
   let $instance = new Main();
-  $instance.$ctor__nativekttypes_Main__();
+  $instance.$ctor__nativekttypes_Main__void();
   return $instance;
  }
  /** @nodts */
- $ctor__nativekttypes_Main__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__nativekttypes_Main__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_methodArguments__nativekttypes_NativeTopLevel__nativekttypes_NativeTopLevel_Nested__nativekttypes_NativeTopLevel_Inner(/** NativeTopLevel<?string> */ foo, /** Nested<?string> */ nested, /** Inner<?string, ?string> */ inner) {}
+ m_methodArguments__nativekttypes_NativeTopLevel__nativekttypes_NativeTopLevel_Nested__nativekttypes_NativeTopLevel_Inner__void(/** NativeTopLevel<?string> */ foo, /** Nested<?string> */ nested, /** Inner<?string, ?string> */ inner) {}
  /** @nodts */
- m_memberAccess__() {
+ m_memberAccess__void() {
   let topLevel = /**@type {!NativeTopLevel<?string>}*/ (NativeTopLevel.$create__java_lang_Object('foo'));
   let fooInstanceMethod = /**@type {?string}*/ ($Casts.$to(topLevel.instanceMethod('foo'), j_l_String));
   let fooStaticMethod = /**@type {?string}*/ ($Casts.$to(NativeTopLevel.staticMethod('foo'), j_l_String));
@@ -73,8 +73,8 @@ class Main extends j_l_Object {
   let inner = /**@type {!Inner<?string, ?string>}*/ (Inner.$create__nativekttypes_NativeTopLevel__java_lang_Object(topLevel, 'foo'));
   let subclass = /**@type {!Subclass<?string>}*/ (new Subclass('foo'));
   let i9 = subclass.methodToRename();
-  let i10 = subclass.m_interfaceMethod__java_lang_Object('foo');
-  let i11 = subclass.m_interfaceMethodToRename__java_lang_Object('foo');
+  let i10 = subclass.m_interfaceMethod__java_lang_Object__int('foo');
+  let i11 = subclass.m_interfaceMethodToRename__java_lang_Object__int('foo');
   let interfaceAnonymousSubclass = $2.$create__nativekttypes_Main(this);
   let interfaceExpression = NativeFunctionalInterface.$adapt(() =>{
    KFunctionalInterface: {
@@ -83,7 +83,7 @@ class Main extends j_l_Object {
   });
  }
  /** @nodts */
- m_bridges__() {
+ m_bridges__void() {
   let o = NativeRequiringBridge.$create__();
   o = $3.$create__nativekttypes_Main(this);
   o = BridgeSubclass.$create__();
@@ -97,32 +97,32 @@ class Main extends j_l_Object {
   let instanceofCheck = !$Equality.$same(o, null);
  }
  /** @nodts */
- m_casts__() {
+ m_casts__void() {
   let o1 = /**@type {NativeTopLevel<?string>}*/ (null);
   let o2 = /**@type {Nested<?string>}*/ (null);
   let o3 = /**@type {Inner<?string, ?string>}*/ (null);
  }
  /** @nodts */
- m_companionObject__() {
+ m_companionObject__void() {
   let o = NativeWithCompanionObject.$create__();
   let i1 = o.f_instanceField__nativekttypes_NativeWithCompanionObject;
-  o.m_instanceMethod__();
+  o.m_instanceMethod__void();
   NativeWithCompanionObject.m_staticMethod__();
   let i2 = NativeWithCompanionObject.f_staticField__nativekttypes_NativeWithCompanionObject;
   NativeWithCompanionObject.f_staticField__nativekttypes_NativeWithCompanionObject = i2;
  }
  /** @nodts */
- m_typeLiterals__() {
+ m_typeLiterals__void() {
   let c1 = Class.$get(NativeTopLevel);
   let c2 = Class.$get(Nested);
   let c3 = Class.$get(Inner);
  }
  /** @nodts */
- m_disabledVoidMethod__() {
+ m_disabledVoidMethod__void() {
   let i = 0;
  }
  /** @nodts @return {boolean} */
- m_disabledNonVoidMethod__() {
+ m_disabledNonVoidMethod__boolean() {
   return true;
  }
  /** @nodts */

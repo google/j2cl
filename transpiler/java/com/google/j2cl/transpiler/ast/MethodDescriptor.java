@@ -23,7 +23,6 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
@@ -37,6 +36,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** A reference to a method. */
@@ -520,16 +521,27 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       }
     }
 
-    Iterable<String> manglingDescriptors =
+    Stream<TypeDescriptor> signatureDescriptors = getParameterTypeDescriptors().stream();
+    boolean includeReturnTypeInMangledName =
         // Add the return type to the mangled name in WASM except for constructors. Constructors
         // always return the same type and there is no need to make the mangled name longer
         // unnecessarily.
-        useWasmManglingPatterns() && !isConstructor()
-            ? Iterables.concat(
-                getMangledParameterTypes(),
-                ImmutableList.of(getReturnTypeDescriptor().toRawTypeDescriptor().getMangledName()))
-            : getMangledParameterTypes();
-    return buildMangledName(String.join("__", manglingDescriptors) + suffix);
+        (useWasmManglingPatterns() && !isConstructor())
+            // TODO(b/236033213): add the return type for static methods in Closure.
+            || isInstanceMember();
+
+    if (includeReturnTypeInMangledName) {
+      signatureDescriptors =
+          Stream.concat(signatureDescriptors, Stream.of(getReturnTypeDescriptor()));
+    }
+
+    String signature =
+        signatureDescriptors
+            .map(TypeDescriptor::toRawTypeDescriptor)
+            .map(TypeDescriptor::getMangledName)
+            .collect(Collectors.joining("__"));
+
+    return buildMangledName(signature + suffix);
   }
 
   /**
@@ -550,13 +562,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return getBridgeOrigin().getManglingDescriptor().toRawMemberDescriptor();
     }
     return this;
-  }
-
-  /** Returns the list of mangled name of parameters' types. */
-  private List<String> getMangledParameterTypes() {
-    return Lists.transform(
-        getParameterTypeDescriptors(),
-        parameterTypeDescriptor -> parameterTypeDescriptor.toRawTypeDescriptor().getMangledName());
   }
 
   @Override

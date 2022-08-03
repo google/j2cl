@@ -23,15 +23,15 @@ class TryCatch extends j_l_Object {
  static $create__() {
   TryCatch.$clinit();
   let $instance = new TryCatch();
-  $instance.$ctor__trycatch_TryCatch__();
+  $instance.$ctor__trycatch_TryCatch__void();
   return $instance;
  }
  /** @nodts */
- $ctor__trycatch_TryCatch__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__trycatch_TryCatch__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_testMultiCatch__() {
+ m_testMultiCatch__void() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
   } catch (__$exc) {
@@ -48,7 +48,7 @@ class TryCatch extends j_l_Object {
   }
  }
  /** @nodts */
- m_testEmptyThrowableCatch__() {
+ m_testEmptyThrowableCatch__void() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
   } catch (__$exc) {}
@@ -60,7 +60,7 @@ class TryCatch extends j_l_Object {
   }
  }
  /** @nodts */
- m_testEmptyThrowableRethrow__() {
+ m_testEmptyThrowableRethrow__void() {
   try {
    throw $Exceptions.toJs(ClassCastException.$create__());
   } catch (__$exc) {
@@ -72,13 +72,13 @@ class TryCatch extends j_l_Object {
   }
  }
  /** @nodts */
- m_testFinally__() {
+ m_testFinally__void() {
   try {
    $Asserts.$assert(true);
   } finally {}
  }
  /** @nodts */
- m_testTryWithResource__() {
+ m_testTryWithResource__void() {
   try {
    let $primaryExc = null;
    let thing = null;
@@ -109,7 +109,7 @@ class TryCatch extends j_l_Object {
   }
  }
  /** @nodts */
- m_testTryWithResourceJava9__() {
+ m_testTryWithResourceJava9__void() {
   let thing = ClosableThing.$create__();
   let thing2 = ClosableThing.$create__();
   try {
@@ -142,7 +142,7 @@ class TryCatch extends j_l_Object {
   }
  }
  /** @nodts */
- m_testTryWithResouceOnStaticField__() {
+ m_testTryWithResouceOnStaticField__void() {
   try {
    let $primaryExc = null;
    let $resource = null;
@@ -170,7 +170,7 @@ class TryCatch extends j_l_Object {
   }
  }
  /** @nodts */
- m_testNestedTryCatch__() {
+ m_testNestedTryCatch__void() {
   try {
    throw $Exceptions.toJs(Exception.$create__());
   } catch (__$exc) {
@@ -191,19 +191,19 @@ class TryCatch extends j_l_Object {
   }
  }
  /** @nodts */
- m_testThrowGenerics__() {
-  throw $Exceptions.toJs(/**@type {Exception}*/ ($Casts.$to(this.m_getT__java_lang_Object_$p_trycatch_TryCatch(Exception.$create__()), Exception)));
+ m_testThrowGenerics__void() {
+  throw $Exceptions.toJs(/**@type {Exception}*/ ($Casts.$to(this.m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch(Exception.$create__()), Exception)));
  }
  /** @nodts @template T @return {T} */
- m_getT__java_lang_Object_$p_trycatch_TryCatch(/** T */ t) {
+ m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch(/** T */ t) {
   return t;
  }
  /** @nodts */
- m_testThrowBoundGenerics__() {
-  throw $Exceptions.toJs(this.m_getThrowable___$p_trycatch_TryCatch());
+ m_testThrowBoundGenerics__void() {
+  throw $Exceptions.toJs(this.m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch());
  }
  /** @nodts @template T @return {T} */
- m_getThrowable___$p_trycatch_TryCatch() {
+ m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch() {
   return null;
  }
  /** @nodts */

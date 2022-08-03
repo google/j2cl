@@ -35,15 +35,15 @@ class InstanceofExpressions extends j_l_Object {
  static $create__() {
   InstanceofExpressions.$clinit();
   let $instance = new InstanceofExpressions();
-  $instance.$ctor__instanceofexpression_InstanceofExpressions__();
+  $instance.$ctor__instanceofexpression_InstanceofExpressions__void();
   return $instance;
  }
  /** @nodts */
- $ctor__instanceofexpression_InstanceofExpressions__() {
-  this.$ctor__java_lang_Object__();
+ $ctor__instanceofexpression_InstanceofExpressions__void() {
+  this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
- m_testInstanceofClass__() {
+ m_testInstanceofClass__void() {
   let object = InstanceofExpressions.$create__();
   let /** boolean */ b;
   b = !$Equality.$same(object, null);
@@ -51,14 +51,14 @@ class InstanceofExpressions extends j_l_Object {
   b = j_l_String.$isInstance(object);
  }
  /** @nodts */
- m_testInstanceofInterface__() {
+ m_testInstanceofInterface__void() {
   let o = j_l_Object.$create__();
   let /** boolean */ b;
   b = Serializable.$isInstance(o);
   b = !$Equality.$same($1.$create__instanceofexpression_InstanceofExpressions(this), null);
  }
  /** @nodts */
- m_testInstanceofBoxedType__() {
+ m_testInstanceofBoxedType__void() {
   let b = Integer.$create__int(1);
   let a = Byte.$isInstance(b);
   a = Double.$isInstance(b);
@@ -75,7 +75,7 @@ class InstanceofExpressions extends j_l_Object {
   a = !$Equality.$same(d, null);
  }
  /** @nodts */
- m_testInstanceOfArray__() {
+ m_testInstanceOfArray__void() {
   let object = j_l_Object.$create__();
   let objectArray = new Array(0);
   let objectDoubleArray = /**@type {!Array<Array<*>>}*/ ($Arrays.$create([0, null], j_l_Object));

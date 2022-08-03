@@ -4,16 +4,16 @@
 [Main] => [$create__]
 [Main] => [Main.$clinit();] "libraryinfo.Main.<synthetic: ctor_create>"
 [Main] => [let $instance = new Main();] "libraryinfo.Main.<synthetic: ctor_create>"
-[Main] => [$instance.$ctor__libraryinfo_Main__();] "libraryinfo.Main.<synthetic: ctor_create>"
+[Main] => [$instance.$ctor__libraryinfo_Main__void();] "libraryinfo.Main.<synthetic: ctor_create>"
 [Main] => [return $instance;] "libraryinfo.Main.<synthetic: ctor_create>"
-[Main] => [$ctor__libraryinfo_Main__]
-[Main] => [this.$ctor__java_lang_Object__();] "libraryinfo.Main.<init>"
+[Main] => [$ctor__libraryinfo_Main__void]
+[Main] => [this.$ctor__java_lang_Object__void();] "libraryinfo.Main.<init>"
 [entryPoint] => [entryPoint]
 [{
     new Main().execute();
 ...    };
   }] => [Main.$clinit();] "libraryinfo.Main.entryPoint"
-[new Main().execute();] => [Main.$create__().m_execute___$p_libraryinfo_Main();] "libraryinfo.Main.entryPoint"
+[new Main().execute();] => [Main.$create__().m_execute__void_$p_libraryinfo_Main();] "libraryinfo.Main.entryPoint"
 [Function jsFunction = new FunctionImpl();] => [let jsFunction = FunctionImpl.$create__();] "libraryinfo.Main.entryPoint"
 [jsFunction] => [jsFunction] "jsFunction"
 [jsFunction = s -> log(s);] => [jsFunction = (/** ?string */ s) =>{
@@ -27,7 +27,7 @@
       @JsMethod
       void foo() {}
     };] => [$1.$create__();] "libraryinfo.Main.entryPoint"
-[execute] => [m_execute___$p_libraryinfo_Main]
+[execute] => [m_execute__void_$p_libraryinfo_Main]
 [log("Foo");] => [console.log('Foo');] "libraryinfo.Main.execute"
 [toString] => [toString]
 [return super.toString();] => [return super.toString();] "libraryinfo.Main.toString"
@@ -38,7 +38,7 @@
   }] => [Main.$clinit();] "libraryinfo.Main.main"
 [Foo foo = null;] => [let foo = null;] "libraryinfo.Main.main"
 [foo] => [foo] "foo"
-[foo.instanceMethod();] => [foo.m_instanceMethod___$pp_libraryinfo();] "libraryinfo.Main.main"
+[foo.instanceMethod();] => [foo.m_instanceMethod__void_$pp_libraryinfo();] "libraryinfo.Main.main"
 [Class<?> clazz = Foo.class;] => [let clazz = Class.$get(Foo);] "libraryinfo.Main.main"
 [clazz] => [clazz] "clazz"
 [public static String STATIC_FIELD = "STATIC_FIELD";] => [get f_STATIC_FIELD__libraryinfo_Main]

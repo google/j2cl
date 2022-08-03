@@ -15,17 +15,22 @@ class $LambdaAdaptor extends j_l_Object {
   super();
   /**@type {?function(T):?string} @nodts*/
   this.f_fn__overwrittentypevariables_HashFunction_$LambdaAdaptor;
-  this.$ctor__overwrittentypevariables_HashFunction_$LambdaAdaptor__overwrittentypevariables_HashFunction_$JsFunction(fn);
+  this.$ctor__overwrittentypevariables_HashFunction_$LambdaAdaptor__overwrittentypevariables_HashFunction_$JsFunction__void(fn);
  }
  /** @nodts */
- $ctor__overwrittentypevariables_HashFunction_$LambdaAdaptor__overwrittentypevariables_HashFunction_$JsFunction(/** ?function(T):?string */ fn) {
-  this.$ctor__java_lang_Object__();
+ $ctor__overwrittentypevariables_HashFunction_$LambdaAdaptor__overwrittentypevariables_HashFunction_$JsFunction__void(/** ?function(T):?string */ fn) {
+  this.$ctor__java_lang_Object__void();
   this.f_fn__overwrittentypevariables_HashFunction_$LambdaAdaptor = fn;
  }
- /** @override @nodts @return {?string} */
- m_apply__java_lang_Object(/** T */ arg0) {
+ /** @nodts @return {?string} */
+ m_apply__java_lang_Object__java_lang_String(/** T */ arg0) {
   let /** ?function(T):?string */ $function;
   return ($function = this.f_fn__overwrittentypevariables_HashFunction_$LambdaAdaptor, $function(arg0));
+ }
+ //Bridge method.
+ /** @override @nodts @return {?string} */
+ m_apply__java_lang_Object__java_lang_Object(/** T */ arg0) {
+  return this.m_apply__java_lang_Object__java_lang_String(arg0);
  }
  /** @nodts */
  static $clinit() {
