@@ -124,12 +124,10 @@ package_sources(
         # TODO(b/237650063): Add Streams
         # The Streams implementation uses missing collection APIs (Map.merge)
         ["java/util/stream/*.java"],
-        # The package can't be entirely empty (it's declared in module-info.java).
-        exclude = ["java/util/stream/Stream.java"],
     ),
     super_srcs = glob(
         ["super-kt/java*/**/*.java"],
-    ),
+    ) + ["super-kt/module-info.java"],
 )
 
 # Files that cannot be included in the JRE runtime yet because they rely on
