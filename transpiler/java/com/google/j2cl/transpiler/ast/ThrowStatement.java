@@ -28,7 +28,7 @@ import com.google.j2cl.common.visitor.Visitable;
 public class ThrowStatement extends Statement {
   @Visitable Expression expression;
 
-  public ThrowStatement(SourcePosition sourcePosition, Expression expression) {
+  private ThrowStatement(SourcePosition sourcePosition, Expression expression) {
     super(sourcePosition);
     this.expression = checkNotNull(expression);
   }
@@ -45,5 +45,35 @@ public class ThrowStatement extends Statement {
   @Override
   public Node accept(Processor processor) {
     return Visitor_ThrowStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for throw statement. */
+  public static class Builder {
+    private SourcePosition sourcePosition;
+    private Expression expression;
+
+    public static Builder from(ThrowStatement synchronizedStatement) {
+      return new Builder()
+          .setSourcePosition(synchronizedStatement.getSourcePosition())
+          .setExpression(synchronizedStatement.getExpression());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setExpression(Expression expression) {
+      this.expression = expression;
+      return this;
+    }
+
+    public ThrowStatement build() {
+      return new ThrowStatement(sourcePosition, expression);
+    }
   }
 }

@@ -1275,10 +1275,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private SynchronizedStatement convert(
         org.eclipse.jdt.core.dom.SynchronizedStatement statement) {
-      return new SynchronizedStatement(
-          getSourcePosition(statement),
-          convert(statement.getExpression()),
-          convert(statement.getBody()));
+      return SynchronizedStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setExpression(convert(statement.getExpression()))
+          .setBody(convert(statement.getBody()))
+          .build();
     }
 
     private ExpressionStatement convert(
@@ -1309,7 +1310,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {
-      return new ThrowStatement(getSourcePosition(statement), convert(statement.getExpression()));
+      return ThrowStatement.newBuilder()
+          .setSourcePosition(getSourcePosition(statement))
+          .setExpression(convert(statement.getExpression()))
+          .build();
     }
 
     private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement statement) {

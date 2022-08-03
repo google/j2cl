@@ -487,8 +487,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private ThrowStatement convertThrow(JCThrow statement) {
-    return new ThrowStatement(
-        getSourcePosition(statement), convertExpression(statement.getExpression()));
+    return ThrowStatement.newBuilder()
+        .setSourcePosition(getSourcePosition(statement))
+        .setExpression(convertExpression(statement.getExpression()))
+        .build();
   }
 
   private TryStatement convertTry(JCTry statement) {
@@ -544,10 +546,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private SynchronizedStatement convertSynchronized(JCSynchronized statement) {
-    return new SynchronizedStatement(
-        getSourcePosition(statement),
-        convertExpression(statement.getExpression()),
-        convertBlock(statement.getBlock()));
+    return SynchronizedStatement.newBuilder()
+        .setSourcePosition(getSourcePosition(statement))
+        .setExpression(convertExpression(statement.getExpression()))
+        .setBody(convertBlock(statement.getBlock()))
+        .build();
   }
 
   private Statement convertVariableDeclaration(JCVariableDecl variableDeclaration) {

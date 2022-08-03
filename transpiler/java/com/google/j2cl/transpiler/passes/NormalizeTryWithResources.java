@@ -166,7 +166,10 @@ public class NormalizeTryWithResources extends NormalizationPass {
                 .setRightOperand(exceptionFromTry)
                 .build()
                 .makeStatement(sourcePosition),
-            new ThrowStatement(sourcePosition, exceptionFromTry.createReference()));
+            ThrowStatement.newBuilder()
+                .setSourcePosition(sourcePosition)
+                .setExpression(exceptionFromTry.createReference())
+                .build());
 
     List<Statement> finallyBlockStatements = new ArrayList<>();
     for (VariableDeclarationExpression declaration : Lists.reverse(resourceDeclarations)) {
@@ -185,7 +188,10 @@ public class NormalizeTryWithResources extends NormalizationPass {
     }
 
     ThrowStatement throwPrimaryException =
-        new ThrowStatement(sourcePosition, primaryException.createReference());
+        ThrowStatement.newBuilder()
+            .setSourcePosition(sourcePosition)
+            .setExpression(primaryException.createReference())
+            .build();
     Expression primaryExceptionNotEqualsNull =
         primaryException.createReference().infixNotEqualsNull();
     IfStatement primaryExceptionNullStatement =

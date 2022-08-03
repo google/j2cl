@@ -118,7 +118,10 @@ public class NormalizeCatchClauses extends NormalizationPass {
     // Base case. If no more clauses left the last statement throws the exception.
     if (clauses.isEmpty()) {
       Statement noMatchThrowException =
-          new ThrowStatement(firstClauseSourcePosition, exceptionVariable.createReference());
+          ThrowStatement.newBuilder()
+              .setSourcePosition(firstClauseSourcePosition)
+              .setExpression(exceptionVariable.createReference())
+              .build();
       return Block.newBuilder()
           .setSourcePosition(firstClauseSourcePosition)
           .setStatements(noMatchThrowException)

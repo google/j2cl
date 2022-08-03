@@ -85,7 +85,7 @@ public class InsertExceptionConversions extends NormalizationPass {
             MethodCall toJsCall =
                 RuntimeMethods.createExceptionsMethodCall("toJs", throwStatement.getExpression());
 
-            return new ThrowStatement(throwStatement.getSourcePosition(), toJsCall);
+            return ThrowStatement.Builder.from(throwStatement).setExpression(toJsCall).build();
           }
         });
   }

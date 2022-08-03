@@ -29,7 +29,7 @@ public class SynchronizedStatement extends Statement {
   @Visitable Expression expression;
   @Visitable Block body;
 
-  public SynchronizedStatement(SourcePosition sourcePosition, Expression expression, Block body) {
+  private SynchronizedStatement(SourcePosition sourcePosition, Expression expression, Block body) {
     super(sourcePosition);
     this.expression = checkNotNull(expression);
     this.body = checkNotNull(body);
@@ -51,5 +51,42 @@ public class SynchronizedStatement extends Statement {
   @Override
   public Node accept(Processor processor) {
     return Visitor_SynchronizedStatement.visit(processor, this);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  /** A Builder for synchronized statement. */
+  public static class Builder {
+    private SourcePosition sourcePosition;
+    private Expression expression;
+    private Block body;
+
+    public static Builder from(SynchronizedStatement synchronizedStatement) {
+      return new Builder()
+          .setSourcePosition(synchronizedStatement.getSourcePosition())
+          .setExpression(synchronizedStatement.getExpression())
+          .setBody(synchronizedStatement.getBody());
+    }
+
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public Builder setExpression(Expression expression) {
+      this.expression = expression;
+      return this;
+    }
+
+    public Builder setBody(Block body) {
+      this.body = body;
+      return this;
+    }
+
+    public SynchronizedStatement build() {
+      return new SynchronizedStatement(sourcePosition, expression, body);
+    }
   }
 }
