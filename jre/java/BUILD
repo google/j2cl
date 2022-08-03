@@ -100,7 +100,9 @@ package_sources(
         "java/lang/RealToString.java",
         "javaemul/internal/Casts.java",
         "java/util/AbstractHashMap.java",
+        "java/util/AbstractMapEntry.java",
         "java/util/InternalHashCodeMap.java",
+        "java/util/InternalJsMap.java",
         "java/util/InternalStringMap.java",
     ] + [
         # TODO(b/238299508): Include sources for transpiled collections
