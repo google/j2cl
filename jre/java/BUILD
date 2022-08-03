@@ -105,7 +105,9 @@ package_sources(
         "java/util/InternalHashCodeMap.java",
         "java/util/InternalJsMap.java",
         "java/util/InternalStringMap.java",
-    ] + [
+    ] + glob(
+        ["javaemul/internal/ktstubs/*.java"],
+    ) + [
         # TODO(b/238299508): Include sources for transpiled collections
         "java/util/AbstractQueue.java",
         "java/util/AbstractSequentialList.java",
@@ -218,7 +220,7 @@ package_sources(
             # Excessive String concat that only JS should use. Also http://b/224969395.
             "java/lang/StringBuffer.java",
             "java/util/Comparators.java",  # J2KT Comparator doesn't need it
-        ] + J2KT_JRE_TEMPORARILY_EXCLUDED_FILES,
+        ] + glob(["javaemul/internal/ktstubs/*.java"]) + J2KT_JRE_TEMPORARILY_EXCLUDED_FILES,
     ),
     super_srcs = glob(
         ["super-kt/java/**/*.java"],
