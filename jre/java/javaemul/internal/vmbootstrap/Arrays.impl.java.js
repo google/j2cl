@@ -426,7 +426,7 @@ class Arrays {
    * @return {Class}
    * @public
    */
-  static m_getClass__java_lang_Object(obj) {
+  static $getClass(obj) {
     Arrays.$clinit();
     var metadata = Arrays.$getMetadata_(obj);
     if (metadata) {
