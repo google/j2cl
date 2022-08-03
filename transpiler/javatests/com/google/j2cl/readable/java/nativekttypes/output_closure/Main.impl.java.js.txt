@@ -17,6 +17,7 @@ let NativeRequiringBridge = goog.forwardDeclare('nativekttypes.NativeRequiringBr
 let NativeTopLevel = goog.forwardDeclare('nativekttypes.NativeTopLevel$impl');
 let Inner = goog.forwardDeclare('nativekttypes.NativeTopLevel.Inner$impl');
 let Nested = goog.forwardDeclare('nativekttypes.NativeTopLevel.Nested$impl');
+let NativeWithCompanionObject = goog.forwardDeclare('nativekttypes.NativeWithCompanionObject$impl');
 let Subclass = goog.forwardDeclare('nativekttypes.Subclass$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -96,16 +97,25 @@ class Main extends j_l_Object {
   let instanceofCheck = !$Equality.$same(o, null);
  }
  /** @nodts */
- m_typeLiterals__() {
-  let c1 = Class.$get(NativeTopLevel);
-  let c2 = Class.$get(Nested);
-  let c3 = Class.$get(Inner);
- }
- /** @nodts */
  m_casts__() {
   let o1 = /**@type {NativeTopLevel<?string>}*/ (null);
   let o2 = /**@type {Nested<?string>}*/ (null);
   let o3 = /**@type {Inner<?string, ?string>}*/ (null);
+ }
+ /** @nodts */
+ m_companionObject__() {
+  let o = NativeWithCompanionObject.$create__();
+  let i1 = o.f_instanceField__nativekttypes_NativeWithCompanionObject;
+  o.m_instanceMethod__();
+  NativeWithCompanionObject.m_staticMethod__();
+  let i2 = NativeWithCompanionObject.f_staticField__nativekttypes_NativeWithCompanionObject;
+  NativeWithCompanionObject.f_staticField__nativekttypes_NativeWithCompanionObject = i2;
+ }
+ /** @nodts */
+ m_typeLiterals__() {
+  let c1 = Class.$get(NativeTopLevel);
+  let c2 = Class.$get(Nested);
+  let c3 = Class.$get(Inner);
  }
  /** @nodts */
  m_disabledVoidMethod__() {
@@ -142,6 +152,7 @@ class Main extends j_l_Object {
   NativeTopLevel = goog.module.get('nativekttypes.NativeTopLevel$impl');
   Inner = goog.module.get('nativekttypes.NativeTopLevel.Inner$impl');
   Nested = goog.module.get('nativekttypes.NativeTopLevel.Nested$impl');
+  NativeWithCompanionObject = goog.module.get('nativekttypes.NativeWithCompanionObject$impl');
   Subclass = goog.module.get('nativekttypes.Subclass$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

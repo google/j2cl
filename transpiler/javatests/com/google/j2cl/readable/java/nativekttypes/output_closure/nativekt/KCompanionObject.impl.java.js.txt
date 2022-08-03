@@ -1,0 +1,54 @@
+goog.module('nativekttypes.nativekt.KCompanionObject$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class KCompanionObject extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!KCompanionObject} */
+ static $create__() {
+  KCompanionObject.$clinit();
+  let $instance = new KCompanionObject();
+  $instance.$ctor__nativekttypes_nativekt_KCompanionObject__();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativekttypes_nativekt_KCompanionObject__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @nodts */
+ static m_staticMethod__() {
+  KCompanionObject.$clinit();
+ }
+ /** @nodts @return {number} */
+ static get f_staticField__nativekttypes_nativekt_KCompanionObject() {
+  return (KCompanionObject.$clinit(), KCompanionObject.$static_staticField__nativekttypes_nativekt_KCompanionObject);
+ }
+ /** @nodts */
+ static set f_staticField__nativekttypes_nativekt_KCompanionObject(/** number */ value) {
+  (KCompanionObject.$clinit(), KCompanionObject.$static_staticField__nativekttypes_nativekt_KCompanionObject = value);
+ }
+ /** @nodts */
+ static $clinit() {
+  KCompanionObject.$clinit = () =>{};
+  KCompanionObject.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KCompanionObject;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@private {number} @nodts*/
+KCompanionObject.$static_staticField__nativekttypes_nativekt_KCompanionObject = 0;
+$Util.$setClassMetadata(KCompanionObject, 'nativekttypes.nativekt.KCompanionObject');
+
+exports = KCompanionObject;
+
+//# sourceMappingURL=KCompanionObject.js.map

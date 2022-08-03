@@ -52,4 +52,12 @@ public @interface KtNative {
    * and its sub-types.
    */
   String bridgeWith() default "<none>";
+
+  /**
+   * The qualified name of the type acting as a companion object for the native Kotlin type. * *
+   *
+   * <p>It can be used to emulate static methods in Java API when the Kotlin native type is lacking
+   * a companion object to add the extension functions to.
+   */
+  String companionObject() default "<none>";
 }

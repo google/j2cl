@@ -1,0 +1,44 @@
+goog.module('nativekttypes.nativekt.KWithCompanionObject$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class KWithCompanionObject extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_instanceField__nativekttypes_nativekt_KWithCompanionObject = 0;
+ }
+ /** @nodts @return {!KWithCompanionObject} */
+ static $create__() {
+  KWithCompanionObject.$clinit();
+  let $instance = new KWithCompanionObject();
+  $instance.$ctor__nativekttypes_nativekt_KWithCompanionObject__();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativekttypes_nativekt_KWithCompanionObject__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @nodts */
+ m_instanceMethod__() {}
+ /** @nodts */
+ static $clinit() {
+  KWithCompanionObject.$clinit = () =>{};
+  KWithCompanionObject.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KWithCompanionObject;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(KWithCompanionObject, 'nativekttypes.nativekt.KWithCompanionObject');
+
+exports = KWithCompanionObject;
+
+//# sourceMappingURL=KWithCompanionObject.js.map

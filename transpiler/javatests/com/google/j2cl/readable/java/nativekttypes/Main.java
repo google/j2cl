@@ -95,16 +95,27 @@ public class Main {
     boolean instanceofCheck = o instanceof NativeRequiringBridge;
   }
 
-  public void typeLiterals() {
-    Class<?> c1 = NativeTopLevel.class;
-    Class<?> c2 = NativeTopLevel.Nested.class;
-    Class<?> c3 = NativeTopLevel.Inner.class;
-  }
-
   public void casts() {
     NativeTopLevel<String> o1 = (NativeTopLevel<String>) null;
     NativeTopLevel.Nested<String> o2 = (NativeTopLevel.Nested<String>) null;
     NativeTopLevel<String>.Inner<String> o3 = (NativeTopLevel<String>.Inner<String>) null;
+  }
+
+  public void companionObject() {
+    NativeWithCompanionObject o = new NativeWithCompanionObject();
+
+    int i1 = o.instanceField;
+    o.instanceMethod();
+
+    NativeWithCompanionObject.staticMethod();
+    int i2 = NativeWithCompanionObject.staticField;
+    NativeWithCompanionObject.staticField = i2;
+  }
+
+  public void typeLiterals() {
+    Class<?> c1 = NativeTopLevel.class;
+    Class<?> c2 = NativeTopLevel.Nested.class;
+    Class<?> c3 = NativeTopLevel.Inner.class;
   }
 
   @KtDisabled

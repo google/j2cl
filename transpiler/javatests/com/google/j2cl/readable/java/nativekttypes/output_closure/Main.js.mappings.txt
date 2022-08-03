@@ -117,13 +117,6 @@
 [cast] => [cast] "cast"
 [boolean instanceofCheck = o instanceof NativeRequiringBridge;] => [let instanceofCheck = !$Equality.$same(o, null);] "nativekttypes.Main.bridges"
 [instanceofCheck] => [instanceofCheck] "instanceofCheck"
-[typeLiterals] => [m_typeLiterals__]
-[Class<?> c1 = NativeTopLevel.class;] => [let c1 = Class.$get(NativeTopLevel);] "nativekttypes.Main.typeLiterals"
-[c1] => [c1] "c1"
-[Class<?> c2 = NativeTopLevel.Nested.class;] => [let c2 = Class.$get(Nested);] "nativekttypes.Main.typeLiterals"
-[c2] => [c2] "c2"
-[Class<?> c3 = NativeTopLevel.Inner.class;] => [let c3 = Class.$get(Inner);] "nativekttypes.Main.typeLiterals"
-[c3] => [c3] "c3"
 [casts] => [m_casts__]
 [NativeTopLevel<String> o1 = (NativeTopLevel<String>) null;] => [let o1 = /**@type {NativeTopLevel<?string>}*/ (null);] "nativekttypes.Main.casts"
 [o1] => [o1] "o1"
@@ -131,6 +124,23 @@
 [o2] => [o2] "o2"
 [NativeTopLevel<String>.Inner<String> o3 = (NativeTopLevel<String>.Inner<String>) null;] => [let o3 = /**@type {Inner<?string, ?string>}*/ (null);] "nativekttypes.Main.casts"
 [o3] => [o3] "o3"
+[companionObject] => [m_companionObject__]
+[NativeWithCompanionObject o = new NativeWithCompanionObject();] => [let o = NativeWithCompanionObject.$create__();] "nativekttypes.Main.companionObject"
+[o] => [o] "o"
+[int i1 = o.instanceField;] => [let i1 = o.f_instanceField__nativekttypes_NativeWithCompanionObject;] "nativekttypes.Main.companionObject"
+[i1] => [i1] "i1"
+[o.instanceMethod();] => [o.m_instanceMethod__();] "nativekttypes.Main.companionObject"
+[NativeWithCompanionObject.staticMethod();] => [NativeWithCompanionObject.m_staticMethod__();] "nativekttypes.Main.companionObject"
+[int i2 = NativeWithCompanionObject.staticField;] => [let i2 = NativeWithCompanionObject.f_staticField__nativekttypes_NativeWithCompanionObject;] "nativekttypes.Main.companionObject"
+[i2] => [i2] "i2"
+[NativeWithCompanionObject.staticField = i2;] => [NativeWithCompanionObject.f_staticField__nativekttypes_NativeWithCompanionObject = i2;] "nativekttypes.Main.companionObject"
+[typeLiterals] => [m_typeLiterals__]
+[Class<?> c1 = NativeTopLevel.class;] => [let c1 = Class.$get(NativeTopLevel);] "nativekttypes.Main.typeLiterals"
+[c1] => [c1] "c1"
+[Class<?> c2 = NativeTopLevel.Nested.class;] => [let c2 = Class.$get(Nested);] "nativekttypes.Main.typeLiterals"
+[c2] => [c2] "c2"
+[Class<?> c3 = NativeTopLevel.Inner.class;] => [let c3 = Class.$get(Inner);] "nativekttypes.Main.typeLiterals"
+[c3] => [c3] "c3"
 [disabledVoidMethod] => [m_disabledVoidMethod__]
 [int i = 0;] => [let i = 0;] "nativekttypes.Main.disabledVoidMethod"
 [i] => [i] "i"

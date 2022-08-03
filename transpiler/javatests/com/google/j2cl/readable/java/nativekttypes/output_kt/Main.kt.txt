@@ -69,16 +69,25 @@ open class Main {
   val instanceofCheck: kotlin.Boolean = o is nativekttypes.nativekt.KRequiringBridge
  }
 
- open fun typeLiterals() {
-  val c1: java.lang.Class<*>? = nativekttypes.nativekt.KTopLevel::class.java
-  val c2: java.lang.Class<*>? = nativekttypes.nativekt.KTopLevel.KNested::class.java
-  val c3: java.lang.Class<*>? = nativekttypes.nativekt.KTopLevel.KInner::class.java
- }
-
  open fun casts() {
   val o1: nativekttypes.nativekt.KTopLevel<kotlin.String?>? = null as nativekttypes.nativekt.KTopLevel<kotlin.String?>?
   val o2: nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>? = null as nativekttypes.nativekt.KTopLevel.KNested<kotlin.String?>?
   val o3: nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>? = null as nativekttypes.nativekt.KTopLevel<kotlin.String?>.KInner<kotlin.String?>?
+ }
+
+ open fun companionObject() {
+  val o: nativekttypes.nativekt.KWithCompanionObject? = nativekttypes.nativekt.KWithCompanionObject()
+  val i1: kotlin.Int = o!!.instanceField
+  o!!.instanceMethod()
+  nativekttypes.nativekt.KCompanionObject.staticMethod()
+  val i2: kotlin.Int = nativekttypes.nativekt.KCompanionObject.staticField
+  nativekttypes.nativekt.KCompanionObject.staticField = i2
+ }
+
+ open fun typeLiterals() {
+  val c1: java.lang.Class<*>? = nativekttypes.nativekt.KTopLevel::class.java
+  val c2: java.lang.Class<*>? = nativekttypes.nativekt.KTopLevel.KNested::class.java
+  val c3: java.lang.Class<*>? = nativekttypes.nativekt.KTopLevel.KInner::class.java
  }
 
  open fun disabledVoidMethod() {}

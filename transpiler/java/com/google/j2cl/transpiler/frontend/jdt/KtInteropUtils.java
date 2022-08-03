@@ -45,9 +45,11 @@ public class KtInteropUtils {
 
     String qualifiedName = getStringAttribute(annotationBinding, "value");
     String bridgeQualifiedName = getStringAttribute(annotationBinding, "bridgeWith");
+    String companionObject = getStringAttribute(annotationBinding, "companionObject");
     return KtTypeInfo.newBuilder()
         .setQualifiedName(qualifiedName)
         .setBridgeQualifiedName(bridgeQualifiedName)
+        .setCompanionQualifiedName(companionObject)
         .build();
   }
 

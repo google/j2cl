@@ -574,12 +574,20 @@ public abstract class TypeDeclaration
     return ktTypeInfo != null ? ktTypeInfo.getBridgeQualifiedName() : null;
   }
 
+  @Nullable
+  @Memoized
+  public String getKtCompanionQualifiedName() {
+    KtTypeInfo ktTypeInfo = getKtTypeInfo();
+    return ktTypeInfo == null ? null : ktTypeInfo.getCompanionQualifiedName();
+  }
+
   @Memoized
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {
     return getSuperTypeDescriptorFactory().get(this);
   }
 
+  @Nullable
   public TypeDeclaration getSuperTypeDeclaration() {
     return getSuperTypeDescriptor() == null ? null : getSuperTypeDescriptor().getTypeDeclaration();
   }

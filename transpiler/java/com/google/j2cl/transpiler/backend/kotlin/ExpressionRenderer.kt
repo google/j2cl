@@ -491,10 +491,14 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
   if (qualifier == null) {
     if (memberReference.target.isStatic) {
       // TODO(b/206482966): Move the checks in the backend to a verifier pass.
-      renderTypeDescriptor(
-        memberReference.target.enclosingTypeDescriptor,
-        TypeDescriptorUsage.QUALIFIED_NAME
-      )
+      val enclosingTypeDescriptor = memberReference.target.enclosingTypeDescriptor!!
+      val ktCompanionQualifiedName =
+        enclosingTypeDescriptor.typeDeclaration.ktCompanionQualifiedName
+      if (ktCompanionQualifiedName != null) {
+        renderQualifiedName(ktCompanionQualifiedName)
+      } else {
+        renderTypeDescriptor(enclosingTypeDescriptor, TypeDescriptorUsage.QUALIFIED_NAME)
+      }
       render(".")
     }
   } else {
