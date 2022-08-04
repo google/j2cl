@@ -21,13 +21,13 @@ class Comparables {
   static int compareTo(Comparable a, Object b) {
     // Note that we do single manual typeOf call here instead of multiple instanceofs that would
     // result in multiple typeOf calls.
-    var type = JsUtils.typeOf(a);
-    if (type == "number") {
-      return JsUtils.<Double>uncheckedCast(a).compareTo((Double) b);
-    } else if (type == "boolean") {
-      return JsUtils.<Boolean>uncheckedCast(a).compareTo((Boolean) b);
-    } else if (type == "string") {
-      return JsUtils.<String>uncheckedCast(a).compareTo((String) b);
+    switch (JsUtils.typeOf(a)) {
+      case "number":
+        return JsUtils.<Double>uncheckedCast(a).compareTo((Double) b);
+      case "boolean":
+        return JsUtils.<Boolean>uncheckedCast(a).compareTo((Boolean) b);
+      case "string":
+        return JsUtils.<String>uncheckedCast(a).compareTo((String) b);
     }
     return a.compareTo(b);
   }

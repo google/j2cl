@@ -65,31 +65,34 @@ class Objects {
   static Class<?> getClass(Object obj) {
     // We special case 'getClass' for all types as they all corresspond to
     // different classes.
-    var type = JsUtils.typeOf(obj);
-    if (type == "number") {
-      return Double.class;
-    } else if (type == "boolean") {
-      return Boolean.class;
-    } else if (type == "string") {
-      return String.class;
-    } else if (obj instanceof JavaLangObject) {
+    switch (JsUtils.typeOf(obj)) {
+      case "number":
+        return Double.class;
+      case "boolean":
+        return Boolean.class;
+      case "string":
+        return String.class;
+      case "function":
+        return JavaScriptFunction.class;
+    }
+
+    if (obj instanceof JavaLangObject) {
       JavaLangObject jlObject = (JavaLangObject) obj;
       return jlObject.getClass();
     } else if (obj instanceof JavaScriptObject[]) {
-      // Note that JavaScriptObject[] is top level type for all arrays including primitives so we
-      // can handle them in one shot.
+      // Note that JavaScriptObject[] is top level type for all arrays including primitives so
+      // we can handle them in one shot.
       JavaScriptObject[] array = (JavaScriptObject[]) obj;
       return arrayGetClass(array);
     } else if (obj != null) {
       // Do not need to check existence of 'getClass' since j.l.Object#getClass
-      // is final and all native types map to a single special class and so do
-      // native functions.
-      return type == "function" ? JavaScriptFunction.class : JavaScriptObject.class;
+      // is final and all native types map to a single special class.
+      return JavaScriptObject.class;
     }
 
-    // Explicitly throw TypeError instead of relying on null-dereference since JsCompiler sometimes
-    // optimizes that away. Alternatively we can throw Java NPE that is backed by TypeError but it
-    // adds too much boilerplate which messes up size reports
+    // Explicitly throw TypeError instead of relying on null-dereference since JsCompiler
+    // sometimes optimizes that away. Alternatively we can throw Java NPE that is backed by
+    // TypeError but it adds too much boilerplate which messes up size reports
     return throwTypeError();
   }
 
