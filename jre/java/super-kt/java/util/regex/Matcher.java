@@ -25,17 +25,16 @@ public class Matcher {
   private Matcher() {}
 
   // Unsupported methods:
-  // public native Matcher appendReplacement(StringBuffer sb, String replacement);
-  // public native StringBuffer appendTail(StringBuffer sb);
   // public native MatchResult toMatchResult();
-  // public native String replaceAll(String replacement);
-  // public native String replaceFirst(String replacement);
   // public native boolean requiresEnd();
-  // public native int groupCount();
   // public native Matcher useAnchoringBounds(boolean b);
   // public native Matcher useTransparentBounds(boolean b);
   // public native boolean lookingAt();
   // public native boolean hitEnd();
+
+  public native Matcher appendReplacement(StringBuffer sb, String replacement);
+
+  public native StringBuffer appendTail(StringBuffer sb);
 
   public native int end();
 
@@ -50,6 +49,8 @@ public class Matcher {
   public native String group(int gorup);
 
   public native String group(String name);
+
+  public native int groupCount();
 
   public native boolean hasAnchoringBounds();
 
@@ -74,6 +75,10 @@ public class Matcher {
   public native int start();
 
   public native int start(int group);
+
+  public native String replaceAll(String replacement);
+
+  public native String replaceFirst(String replacement);
 
   public native String toString();
 

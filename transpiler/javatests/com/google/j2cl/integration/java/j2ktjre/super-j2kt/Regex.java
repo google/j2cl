@@ -24,9 +24,21 @@ import java.util.regex.Pattern;
 class Regex {
 
   static void testRegex() {
+    testFind();
+    testReplace();
+  }
+
+  static void testFind() {
     Pattern pattern = Pattern.compile("Hello.World");
     Matcher matcher = pattern.matcher("~~~Hello-World~~~");
     assertTrue(matcher.find());
     assertEquals(3, matcher.start());
+  }
+
+  static void testReplace() {
+    Pattern pattern = Pattern.compile("cat");
+    Matcher matcher = pattern.matcher("one cat two cats in the yard");
+    assertEquals("one dog two cats in the yard", matcher.replaceFirst("dog"));
+    assertEquals("one dog two dogs in the yard", matcher.replaceAll("dog"));
   }
 }

@@ -21,16 +21,21 @@ import kotlin.text.Regex
 class Pattern(pattern: String?, private val flags: Int) {
   internal val regex: Regex
   init {
-    regex = Regex(pattern!!, flagsToOptions(flags))
+    try {
+      regex = Regex(pattern!!, flagsToOptions(flags))
+    } catch (e: RuntimeException) {
+      throw PatternSyntaxException(e.message, pattern, -1)
+    }
   }
 
   fun flags() = flags
 
-  fun matcher(input: CharSequence): Matcher = Matcher(this, input)
+  fun matcher(input: CharSequence?): Matcher = Matcher(this, input!!)
 
-  fun split(input: CharSequence): Array<String> = regex.split(input).toTypedArray()
+  fun split(input: CharSequence?): Array<String?>? = regex.split(input!!).toTypedArray()
 
-  fun split(input: CharSequence, limit: Int) = regex.split(input, limit).toTypedArray()
+  fun split(input: CharSequence?, limit: Int): Array<String?>? =
+    regex.split(input!!, limit).toTypedArray()
 
   fun pattern() = regex.pattern
 

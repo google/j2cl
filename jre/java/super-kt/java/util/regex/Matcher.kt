@@ -33,6 +33,43 @@ class Matcher(var pattern: Pattern, var input: CharSequence) {
 
   private var matchResult: kotlin.text.MatchResult? = null
 
+  private var appendPosition = 0
+
+  /**
+   * Implements a non-terminal append-and-replace step.
+   *
+   * This method performs the following actions:
+   *
+   * It reads characters from the input sequence, starting at the append position, and appends them
+   * to the given string buffer. It stops after reading the last character preceding the previous
+   * match, that is, the character at index start() - 1.
+   *
+   * It appends the given replacement string to the string buffer.
+   *
+   * It sets the append position of this matcher to the index of the last character matched, plus
+   * one, that is, to end().
+   */
+  fun appendReplacement(sb: StringBuilder, replacement: String): Matcher {
+    sb.append(region.subSequence(appendPosition, start()))
+    sb.append(replacement)
+    appendPosition = end()
+    return this
+  }
+
+  /**
+   * Implements a terminal append-and-replace step.
+   *
+   * This method reads characters from the input sequence, starting at the append position, and
+   * appends them to the given string buffer. It is intended to be invoked after one or more
+   * invocations of the appendReplacement method in order to copy the remainder of the input
+   * sequence.
+   */
+  fun appendTail(sb: StringBuilder): StringBuilder {
+    sb.append(region.subSequence(appendPosition, region.length))
+    appendPosition = region.length
+    return sb
+  }
+
   /**
    * Resets the `Matcher`. This results in the region being set to the whole input. Results of a
    * previous find get lost. The next attempt to find an occurrence of the [Pattern] in the string
@@ -53,8 +90,8 @@ class Matcher(var pattern: Pattern, var input: CharSequence) {
    *
    * @return the `Matcher` itself.
    */
-  fun reset(input: CharSequence): Matcher {
-    return reset(input, 0, input.length)
+  fun reset(input: CharSequence?): Matcher {
+    return reset(input, 0, input!!.length)
   }
 
   /**
@@ -69,11 +106,11 @@ class Matcher(var pattern: Pattern, var input: CharSequence) {
    *
    * @return the matcher itself.
    */
-  private fun reset(input: CharSequence, start: Int, end: Int): Matcher {
-    if (start < 0 || end < 0 || start > input.length || end > input.length || start > end) {
+  private fun reset(input: CharSequence?, start: Int, end: Int): Matcher {
+    if (start < 0 || end < 0 || start > input!!.length || end > input!!.length || start > end) {
       throw IndexOutOfBoundsException()
     }
-    this.input = input.toString()
+    this.input = input!!.toString()
     regionStart = start
     region = input.substring(start, end)
     matchResult = null
@@ -216,6 +253,9 @@ class Matcher(var pattern: Pattern, var input: CharSequence) {
     return if (group == null) -1 else (group.range.start + regionStart)
   }
 
+  /** Returns the number of capturing groups in this matcher's pattern. */
+  fun groupCount() = ensureMatch().groups.size - 1
+
   /**
    * Returns the index of the first character following the text that matched a given group.
    *
@@ -297,6 +337,22 @@ class Matcher(var pattern: Pattern, var input: CharSequence) {
    * @return the end of the region.
    */
   fun regionEnd() = regionStart + region.length
+
+  /**
+   * Replaces the first subsequence of the input sequence that matches the pattern with the given
+   * replacement string.
+   *
+   * Note that we don't try to emulate undocumented side effects of the original methods here.
+   */
+  fun replaceFirst(replacement: String) = pattern.regex.replaceFirst(region, replacement)
+
+  /**
+   * Replaces all subsequence of the input sequence matching the pattern with the given replacement
+   * string.
+   *
+   * Note that we don't try to emulate undocumented side effects of the original methods here.
+   */
+  fun replaceAll(replacement: String) = pattern.regex.replace(region, replacement)
 
   companion object {
     /**
