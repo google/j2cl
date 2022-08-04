@@ -107,7 +107,7 @@ open class DefaultNotNullable {
   }
  }
 
- open class ParameterizedNonNullable<N> {
+ open class ParameterizedNonNullable<N: kotlin.Any> {
   open fun getNullable(): N? {
    return null
   }

@@ -39,7 +39,7 @@ private val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
       if (this is IntersectionTypeDescriptor) {
         intersectionTypeDescriptors
       } else {
-        listOf(this).filter { !TypeDescriptors.isJavaLangObject(it) }
+        listOf(this).filter { !TypeDescriptors.isJavaLangObject(it) || !it.isNullable }
       }
     }
 
