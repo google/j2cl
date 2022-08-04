@@ -16,6 +16,7 @@ def _impl_j2cl_library(ctx):
     j2cl_provider = j2cl_common.compile(
         ctx,
         srcs = ctx.files.srcs,
+        kt_common_srcs = ctx.files.kt_common_srcs,
         deps = _j2cl_or_js_providers_of(ctx.attr.deps),
         exports = _j2cl_or_js_providers_of(ctx.attr.exports),
         plugins = _javaplugin_providers_of(ctx.attr.plugins),
@@ -74,6 +75,7 @@ _J2CL_INTERNAL_LIB_ATTRS = {
 _J2CL_LIB_ATTRS = {
     # TODO(goktug): Try to limit this further.
     "srcs": attr.label_list(allow_files = [".java", ".kt", ".js", ".srcjar", ".jar", ".zip"]),
+    "kt_common_srcs": attr.label_list(allow_files = [".kt"]),
     "deps": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "exports": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),

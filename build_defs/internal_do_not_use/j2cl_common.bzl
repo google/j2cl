@@ -13,6 +13,7 @@ def _get_jsinfo_provider(j2cl_info):
 def _compile(
         ctx,
         srcs = [],
+        kt_common_srcs = [],
         deps = [],
         exports = [],
         plugins = [],
@@ -31,7 +32,7 @@ def _compile(
     for src in srcs:
         (js_srcs if src.extension in ["js", "zip"] else jvm_srcs).append(src)
 
-    has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"])
+    has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"]) or kt_common_srcs
 
     # Validate the attributes.
     if not jvm_srcs:
@@ -67,6 +68,7 @@ def _compile(
             ctx,
             name,
             jvm_srcs,
+            kt_common_srcs,
             jvm_deps,
             jvm_exports,
             plugins,
@@ -86,6 +88,7 @@ def _compile(
             output_js,
             output_library_info,
             internal_transpiler_flags,
+            kt_common_srcs,
             kotlincopts,
         )
         library_info = [output_library_info]
@@ -179,6 +182,7 @@ def _kt_compile(
         ctx,
         name,
         srcs = [],
+        common_srcs = [],
         deps = [],
         exports = [],
         plugins = [],
@@ -221,6 +225,7 @@ def _j2cl_transpile(
         output_dir,
         library_info_output,
         internal_transpiler_flags,
+        kt_common_srcs,
         kotlincopts):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
 
@@ -264,6 +269,7 @@ def _j2cl_transpile(
     ):
         args.add("-generatekytheindexingmetadata")
     args.add_all(kotlincopts, format_each = "-kotlincOptions=%s")
+    args.add_all(kt_common_srcs, format_each = "-ktcommonsources=%s")
     args.add_all(srcs)
 
     #  TODO(b/217287994): Remove the ability to do transpiler override.
@@ -273,7 +279,7 @@ def _j2cl_transpile(
 
     ctx.actions.run(
         progress_message = "Transpiling to JavaScript %s" % ctx.label,
-        inputs = depset(srcs, transitive = [classpath]),
+        inputs = depset(srcs + kt_common_srcs, transitive = [classpath]),
         outputs = [output_dir, library_info_output],
         executable = j2cl_transpiler_override or ctx.executable._j2cl_transpiler,
         arguments = [args],
