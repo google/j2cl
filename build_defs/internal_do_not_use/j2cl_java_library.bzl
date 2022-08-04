@@ -8,6 +8,11 @@ def _impl_j2cl_library(ctx):
     if ctx.attr.optimize_autovalue:
         extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
 
+    # Restrict the usage of kotlincopts to internal-only callers.
+    # TODO(b/240682589): Setup a way for users to safely pass in flags.
+    if (len(ctx.attr.kotlincopts) and not ctx.label.package.startswith("")):
+        fail("kotlincopts can only be internally set by J2CL")
+
     j2cl_provider = j2cl_common.compile(
         ctx,
         srcs = ctx.files.srcs,
@@ -17,6 +22,7 @@ def _impl_j2cl_library(ctx):
         exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
         output_jar = ctx.outputs.jar,
         javac_opts = extra_javacopts + ctx.attr.javacopts,
+        kotlincopts = ctx.attr.kotlincopts,
         internal_transpiler_flags = {
             k: getattr(ctx.attr, k)
             for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
@@ -73,6 +79,7 @@ _J2CL_LIB_ATTRS = {
     "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),
     "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),
     "javacopts": attr.string_list(),
+    "kotlincopts": attr.string_list(),
     "generate_kythe_action": attr.bool(default = False),
     #  TODO(b/217287994): Remove the ability to do transpiler override.
     "j2cl_transpiler_override": attr.label(default = None, cfg = "host", executable = True),

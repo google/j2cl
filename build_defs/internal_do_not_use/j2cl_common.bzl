@@ -19,6 +19,7 @@ def _compile(
         exported_plugins = [],
         output_jar = None,
         javac_opts = [],
+        kotlincopts = [],
         internal_transpiler_flags = {},
         generate_kythe_action = False,
         artifact_suffix = ""):
@@ -30,17 +31,23 @@ def _compile(
     for src in srcs:
         (js_srcs if src.extension in ["js", "zip"] else jvm_srcs).append(src)
 
+    has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"])
+
     # Validate the attributes.
     if not jvm_srcs:
         if deps:
             fail("deps not allowed without java or kotlin srcs")
         if js_srcs:
             fail("js sources not allowed without java or kotlin srcs")
+    if not has_kotlin_srcs:
+        if kotlincopts:
+            fail("kotlincopts not allowed without kotlin sources")
 
     jvm_deps, js_deps = _split_deps(deps)
     jvm_exports, js_exports = _split_deps(exports)
 
-    has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"])
+    kotlincopts = DEFAULT_J2CL_KOTLINCOPTS + kotlincopts
+
     if not has_kotlin_srcs:
         # Avoid Kotlin toolchain for regular targets.
         jvm_provider = _java_compile(
@@ -66,6 +73,7 @@ def _compile(
             exported_plugins,
             output_jar,
             javac_opts,
+            kotlincopts = kotlincopts,
         )
 
     if jvm_srcs:
@@ -78,6 +86,7 @@ def _compile(
             output_js,
             output_library_info,
             internal_transpiler_flags,
+            kotlincopts,
         )
         library_info = [output_library_info]
     else:
@@ -175,7 +184,8 @@ def _kt_compile(
         plugins = [],
         exported_plugins = [],
         output_jar = None,
-        javac_opts = []):
+        javac_opts = [],
+        kotlincopts = []):
     fail("Kotlin frontend is disabled")
 
 def _get_java_toolchain(ctx):
@@ -210,7 +220,8 @@ def _j2cl_transpile(
         js_srcs,
         output_dir,
         library_info_output,
-        internal_transpiler_flags):
+        internal_transpiler_flags,
+        kotlincopts):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
 
     # Using source_jars of the java_library since that includes APT generated src.
@@ -252,6 +263,7 @@ def _j2cl_transpile(
         hasattr(ctx.attr, "tags") and "generate_kythe_metadata" in ctx.attr.tags
     ):
         args.add("-generatekytheindexingmetadata")
+    args.add_all(kotlincopts, format_each = "-kotlincOptions=%s")
     args.add_all(srcs)
 
     #  TODO(b/217287994): Remove the ability to do transpiler override.
@@ -275,6 +287,12 @@ DEFAULT_J2CL_JAVAC_OPTS = [
     "-XDinjectLogSites=false",
     # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
     "-XDstringConcat=inline",
+]
+
+DEFAULT_J2CL_KOTLINCOPTS = [
+    # KMP should be enabled to allow for passing common sources and using
+    # expect/actual syntax.
+    "-Xmulti-platform",
 ]
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
