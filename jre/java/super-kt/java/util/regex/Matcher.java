@@ -31,10 +31,12 @@ public class Matcher {
   // public native Matcher useTransparentBounds(boolean b);
   // public native boolean lookingAt();
   // public native boolean hitEnd();
+  // public native Matcher appendReplacement(StringBuffer sb, String replacement);
+  // public native StringBuffer appendTail(StringBuffer sb);
 
-  public native Matcher appendReplacement(StringBuffer sb, String replacement);
+  public native Matcher appendReplacement(StringBuilder sb, String replacement);
 
-  public native StringBuffer appendTail(StringBuffer sb);
+  public native StringBuilder appendTail(StringBuilder sb);
 
   public native int end();
 
