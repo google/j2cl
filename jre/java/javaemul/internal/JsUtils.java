@@ -61,15 +61,14 @@ public final class JsUtils {
     String toString(int radix);
   }
 
+  @JsMethod
   public static native boolean isUndefined(Object value);
 
-  public static native double unsafeCastToDouble(Object number);
-
-  public static native boolean unsafeCastToBoolean(Object bool);
-
+  @JsMethod
   @UncheckedCast
   public static native <T> T uncheckedCast(@DoNotAutobox Object o);
 
+  @JsMethod
   @UncheckedCast
   public static native <T> T getProperty(Object map, String key);
 

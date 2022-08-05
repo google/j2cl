@@ -3,7 +3,6 @@
  * @return {number}
  */
 javaemul_internal_JsUtils.toDoubleFromUnsignedInt = function(value) {
-  javaemul_internal_JsUtils.$clinit();
   // Might return a number that is larger than int32
   return (value >>> 0);
 };
@@ -12,8 +11,7 @@ javaemul_internal_JsUtils.toDoubleFromUnsignedInt = function(value) {
  * @param {*} value
  * @return {boolean}
  */
-javaemul_internal_JsUtils.m_isUndefined__java_lang_Object = function(value) {
-  javaemul_internal_JsUtils.$clinit();
+javaemul_internal_JsUtils.isUndefined = function(value) {
   return value === undefined;
 };
 
@@ -21,8 +19,7 @@ javaemul_internal_JsUtils.m_isUndefined__java_lang_Object = function(value) {
  * @param {*} value
  * @return {*}
  */
-javaemul_internal_JsUtils.m_uncheckedCast__java_lang_Object = function(value) {
-  javaemul_internal_JsUtils.$clinit();
+javaemul_internal_JsUtils.uncheckedCast = function(value) {
   return value;
 };
 
@@ -31,8 +28,6 @@ javaemul_internal_JsUtils.m_uncheckedCast__java_lang_Object = function(value) {
  * @param {string} key
  * @return {*}
  */
-javaemul_internal_JsUtils.m_getProperty__java_lang_Object__java_lang_String =
-    function(map, key) {
-  javaemul_internal_JsUtils.$clinit();
+javaemul_internal_JsUtils.getProperty = function(map, key) {
   return map[key];
 };
