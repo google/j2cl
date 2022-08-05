@@ -62,6 +62,7 @@ public final class FrontendConstants {
           "java.lang.String",
           "java.lang.StringBuilder",
           "java.lang.Throwable",
+          "java.util.Arrays",
           "java.util.Iterator",
           "java.util.Objects",
           "javaemul.internal.ArrayHelper",

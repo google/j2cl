@@ -47,6 +47,7 @@ public class TypeDescriptors {
 
   public DeclaredTypeDescriptor javaLangClass;
   public DeclaredTypeDescriptor javaLangObject;
+  public DeclaredTypeDescriptor javaUtilArrays;
   public DeclaredTypeDescriptor javaUtilObjects;
   public DeclaredTypeDescriptor javaLangThrowable;
   public DeclaredTypeDescriptor javaLangNulPointerException;
@@ -552,6 +553,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.Object":
           typeDescriptors.javaLangObject = referenceType;
+          break;
+        case "java.util.Arrays":
+          typeDescriptors.javaUtilArrays = referenceType;
           break;
         case "java.util.Objects":
           typeDescriptors.javaUtilObjects = referenceType;
