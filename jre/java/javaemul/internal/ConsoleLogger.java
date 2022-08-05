@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -75,6 +76,7 @@ public class ConsoleLogger {
   }
 
   @SuppressWarnings("unusable-by-js")
+  @JsMethod
   private static native String getBackingErrorStack(Throwable t);
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Function")

@@ -18,8 +18,7 @@
  * @param {Throwable} t
  * @return {string}
  */
-ConsoleLogger.m_getBackingErrorStack__java_lang_Throwable = function(t) {
-  ConsoleLogger.$clinit();
+ConsoleLogger.getBackingErrorStack = function(t) {
   let backingError = /** @type {Error} */ (t.backingJsObject);
   return (backingError && backingError.stack) || "";
 };
