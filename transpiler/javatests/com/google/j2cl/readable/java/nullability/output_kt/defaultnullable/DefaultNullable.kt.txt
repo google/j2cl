@@ -70,6 +70,10 @@ open class DefaultNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N? = null
 
+  constructor(n: N) {
+   this.nonNullable = n!!
+  }
+
   open fun getNullable(): N? {
    return null
   }
@@ -96,6 +100,10 @@ open class DefaultNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N? = null
 
+  constructor(n: N) {
+   this.nonNullable = n!!
+  }
+
   open fun getNullable(): N? {
    return null
   }
@@ -121,6 +129,10 @@ open class DefaultNullable {
   @kotlin.jvm.JvmField var nonNullable: N
 
   @kotlin.jvm.JvmField var defaultNullability: N? = null
+
+  constructor(n: N) {
+   this.nonNullable = n
+  }
 
   open fun getNullable(): N? {
    return null

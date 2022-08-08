@@ -70,6 +70,11 @@ open class ExplicitNotNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N
 
+  constructor(n: N?) {
+   this.nonNullable = n!!
+   this.defaultNullability = n!!
+  }
+
   open fun getNullable(): N? {
    return null
   }
@@ -96,6 +101,11 @@ open class ExplicitNotNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N
 
+  constructor(n: N?) {
+   this.nonNullable = n!!
+   this.defaultNullability = n!!
+  }
+
   open fun getNullable(): N? {
    return null
   }
@@ -121,6 +131,11 @@ open class ExplicitNotNullable {
   @kotlin.jvm.JvmField var nonNullable: N
 
   @kotlin.jvm.JvmField var defaultNullability: N
+
+  constructor(n: N?) {
+   this.nonNullable = n!!
+   this.defaultNullability = n!!
+  }
 
   open fun getNullable(): N? {
    return null

@@ -84,6 +84,11 @@ public class ExplicitNotNullable {
     @JsNonNull N nonNullable;
     N defaultNullability;
 
+    ParameterizedDefaultNullability(N n) {
+      this.nonNullable = n;
+      this.defaultNullability = n;
+    }
+
     @Nullable N getNullable() {
       return null;
     }
@@ -109,6 +114,11 @@ public class ExplicitNotNullable {
     @JsNonNull N nonNullable;
     N defaultNullability;
 
+    ParameterizedNullable(N n) {
+      this.nonNullable = n;
+      this.defaultNullability = n;
+    }
+
     @Nullable N getNullable() {
       return null;
     }
@@ -133,6 +143,11 @@ public class ExplicitNotNullable {
     @Nullable N nullable;
     @JsNonNull N nonNullable;
     N defaultNullability;
+
+    ParameterizedNonNullable(N n) {
+      this.nonNullable = n;
+      this.defaultNullability = n;
+    }
 
     @Nullable N getNullable() {
       return null;

@@ -3150,8 +3150,8 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $f_defaultNullability__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability (ref null $java.lang.Object))
+ (field $f_defaultNullability__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability (ref null $java.lang.Object))
   $java.lang.Object)
 )
 (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable (struct_subtype 
@@ -3168,34 +3168,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedDefaultNullability<N> ParameterizedDefaultNullability.$create()
-(func $$create__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability
+;;; ParameterizedDefaultNullability<N> ParameterizedDefaultNullability.$create(N n)
+(func $$create__java_lang_Object__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:99:15
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:4
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
  (block
-  ;; ParameterizedDefaultNullability<N> $instance = new ParameterizedDefaultNullability.<init>(0,null,null,null);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:99:15
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:99:15
-  (call $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedDefaultNullability<N> $instance = new ParameterizedDefaultNullability.<init>(0,null,n,n);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:4
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (local.get $n)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:99:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedDefaultNullability.$ctor()
-(func $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability
+;;; void ParameterizedDefaultNullability.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability
  (param $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:99:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:4
  (block
   ;; nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability.$clinit();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:99:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:41
   (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability )
   ;; Object.this.$ctor();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:99:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:41
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -3205,12 +3207,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:104:16
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:109:16
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:105:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:110:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -3221,12 +3223,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:109:6
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:114:6
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:110:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:115:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -3237,12 +3239,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:113:6
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:118:6
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:114:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:119:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -3253,7 +3255,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:117:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:122:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -3266,7 +3268,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:119:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -3279,7 +3281,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:121:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:126:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -3329,8 +3331,8 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $f_defaultNullability__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable (ref null $java.lang.Object))
+ (field $f_defaultNullability__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable (ref null $java.lang.Object))
   $java.lang.Object)
 )
 (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable (struct_subtype 
@@ -3347,34 +3349,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedNullable<N> ParameterizedNullable.$create()
-(func $$create__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable
+;;; ParameterizedNullable<N> ParameterizedNullable.$create(N n)
+(func $$create__java_lang_Object__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:4
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
  (block
-  ;; ParameterizedNullable<N> $instance = new ParameterizedNullable.<init>(0,null,null,null);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
-  (call $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedNullable<N> $instance = new ParameterizedNullable.<init>(0,null,n,n);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:4
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (local.get $n)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedNullable.$ctor()
-(func $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable
+;;; void ParameterizedNullable.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable
  (param $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:4
  (block
   ;; nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.$clinit();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:31
   (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:31
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -3384,12 +3388,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:129:16
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:139:16
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:130:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:140:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -3400,12 +3404,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:134:6
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:144:6
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:135:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:145:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -3416,12 +3420,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:138:6
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:148:6
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:139:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -3432,7 +3436,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:142:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:152:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -3445,7 +3449,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:144:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:154:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -3458,7 +3462,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:146:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:156:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -3468,22 +3472,22 @@
 
 ;;; void ParameterizedNullable.$clinit()
 (func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:129:15
  (block
   ;; if (nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.$initialized) return;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:129:15
   (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable)
    (then
     ;; return;
-    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:129:15
     (return )
    )
   )
   ;; (nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable.$initialized = true);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:129:15
   (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:124:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:129:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -3508,8 +3512,8 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $f_defaultNullability__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (ref null $java.lang.Object))
+ (field $f_defaultNullability__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (ref null $java.lang.Object))
   $java.lang.Object)
 )
 (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable (struct_subtype 
@@ -3526,34 +3530,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedNonNullable<N> ParameterizedNonNullable.$create()
-(func $$create__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable
+;;; ParameterizedNonNullable<N> ParameterizedNonNullable.$create(N n)
+(func $$create__java_lang_Object__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:4
  (local $$instance (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
  (block
-  ;; ParameterizedNonNullable<N> $instance = new ParameterizedNonNullable.<init>(0,null,null,null);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
-  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
-  (call $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedNonNullable<N> $instance = new ParameterizedNonNullable.<init>(0,null,n,n);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:4
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (local.get $n)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedNonNullable.$ctor()
-(func $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable
+;;; void ParameterizedNonNullable.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable
  (param $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:4
  (block
   ;; nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.$clinit();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:34
   (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:34
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -3563,12 +3569,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:154:16
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:169:16
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:155:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:170:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -3579,12 +3585,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:159:6
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:174:6
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:160:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:175:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -3595,12 +3601,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:163:6
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:178:6
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:164:6
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:179:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -3611,7 +3617,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:167:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:182:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -3624,7 +3630,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:169:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:184:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -3637,7 +3643,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:171:9
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:186:9
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -3647,22 +3653,22 @@
 
 ;;; void ParameterizedNonNullable.$clinit()
 (func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:159:15
  (block
   ;; if (nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.$initialized) return;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:159:15
   (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable)
    (then
     ;; return;
-    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:159:15
     (return )
    )
   )
   ;; (nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.$initialized = true);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:159:15
   (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:149:15
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:159:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -4098,7 +4104,7 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability (ref null $java.lang.Object))
  (field $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
   $java.lang.Object)
 )
@@ -4116,34 +4122,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedDefaultNullability<N> ParameterizedDefaultNullability.$create()
-(func $$create__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability
+;;; ParameterizedDefaultNullability<N> ParameterizedDefaultNullability.$create(N n)
+(func $$create__java_lang_Object__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
- ;;@ nullability/defaultnullable/DefaultNullable.java:80:15
+ ;;@ nullability/defaultnullable/DefaultNullable.java:85:4
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (block
-  ;; ParameterizedDefaultNullability<N> $instance = new ParameterizedDefaultNullability.<init>(0,null,null,null);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:80:15
-  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:80:15
-  (call $$ctor__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedDefaultNullability<N> $instance = new ParameterizedDefaultNullability.<init>(0,null,n,null);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:85:4
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (ref.null $java.lang.Object)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:85:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:80:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:85:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedDefaultNullability.$ctor()
-(func $$ctor__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability
+;;; void ParameterizedDefaultNullability.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability
  (param $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
- ;;@ nullability/defaultnullable/DefaultNullable.java:80:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/defaultnullable/DefaultNullable.java:85:4
  (block
   ;; nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:80:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:85:52
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability )
   ;; Object.this.$ctor();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:80:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:85:52
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4153,12 +4161,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:85:16
+ ;;@ nullability/defaultnullable/DefaultNullable.java:89:16
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:86:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:90:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4169,12 +4177,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:90:6
+ ;;@ nullability/defaultnullable/DefaultNullable.java:94:6
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:91:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:95:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -4185,12 +4193,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:94:6
+ ;;@ nullability/defaultnullable/DefaultNullable.java:98:6
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:95:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:99:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4201,7 +4209,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:98:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:102:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -4214,7 +4222,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:100:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:104:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -4227,7 +4235,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:102:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:106:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -4277,7 +4285,7 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable (ref null $java.lang.Object))
  (field $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
   $java.lang.Object)
 )
@@ -4295,34 +4303,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedNullable<N> ParameterizedNullable.$create()
-(func $$create__nullability_defaultnullable_DefaultNullable_ParameterizedNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable
+;;; ParameterizedNullable<N> ParameterizedNullable.$create(N n)
+(func $$create__java_lang_Object__nullability_defaultnullable_DefaultNullable_ParameterizedNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
- ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+ ;;@ nullability/defaultnullable/DefaultNullable.java:114:4
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (block
-  ;; ParameterizedNullable<N> $instance = new ParameterizedNullable.<init>(0,null,null,null);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
-  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
-  (call $$ctor__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedNullable<N> $instance = new ParameterizedNullable.<init>(0,null,n,null);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:114:4
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (ref.null $java.lang.Object)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:114:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:114:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedNullable.$ctor()
-(func $$ctor__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable
+;;; void ParameterizedNullable.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNullable
  (param $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
- ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/defaultnullable/DefaultNullable.java:114:4
  (block
   ;; nullability.defaultnullable.DefaultNullable.ParameterizedNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:114:42
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable.ParameterizedNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:114:42
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4332,12 +4342,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:110:16
+ ;;@ nullability/defaultnullable/DefaultNullable.java:118:16
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:111:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:119:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4348,12 +4358,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:115:6
+ ;;@ nullability/defaultnullable/DefaultNullable.java:123:6
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:116:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:124:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -4364,12 +4374,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:119:6
+ ;;@ nullability/defaultnullable/DefaultNullable.java:127:6
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:120:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:128:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4380,7 +4390,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:123:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:131:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -4393,7 +4403,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:125:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:133:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -4406,7 +4416,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:127:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:135:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -4416,22 +4426,22 @@
 
 ;;; void ParameterizedNullable.$clinit()
 (func $$clinit__void@nullability.defaultnullable.DefaultNullable.ParameterizedNullable
- ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+ ;;@ nullability/defaultnullable/DefaultNullable.java:109:15
  (block
   ;; if (nullability.defaultnullable.DefaultNullable.ParameterizedNullable.$initialized) return;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:109:15
   (if (global.get $f_$initialized__nullability_defaultnullable_DefaultNullable_ParameterizedNullable)
    (then
     ;; return;
-    ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+    ;;@ nullability/defaultnullable/DefaultNullable.java:109:15
     (return )
    )
   )
   ;; (nullability.defaultnullable.DefaultNullable.ParameterizedNullable.$initialized = true);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:109:15
   (global.set $f_$initialized__nullability_defaultnullable_DefaultNullable_ParameterizedNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:105:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:109:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -4456,7 +4466,7 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable (ref null $java.lang.Object))
  (field $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
   $java.lang.Object)
 )
@@ -4474,34 +4484,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedNonNullable<N> ParameterizedNonNullable.$create()
-(func $$create__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable
+;;; ParameterizedNonNullable<N> ParameterizedNonNullable.$create(N n)
+(func $$create__java_lang_Object__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
- ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+ ;;@ nullability/defaultnullable/DefaultNullable.java:143:4
  (local $$instance (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (block
-  ;; ParameterizedNonNullable<N> $instance = new ParameterizedNonNullable.<init>(0,null,null,null);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
-  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
-  (call $$ctor__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedNonNullable<N> $instance = new ParameterizedNonNullable.<init>(0,null,n,null);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:143:4
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (ref.null $java.lang.Object)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:143:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:143:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedNonNullable.$ctor()
-(func $$ctor__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable
+;;; void ParameterizedNonNullable.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable
  (param $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
- ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/defaultnullable/DefaultNullable.java:143:4
  (block
   ;; nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:143:45
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:143:45
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -4511,12 +4523,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:135:16
+ ;;@ nullability/defaultnullable/DefaultNullable.java:147:16
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:136:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:148:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4527,12 +4539,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:140:6
+ ;;@ nullability/defaultnullable/DefaultNullable.java:152:6
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:141:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:153:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -4543,12 +4555,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:144:6
+ ;;@ nullability/defaultnullable/DefaultNullable.java:156:6
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:145:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:157:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -4559,7 +4571,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:148:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:160:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -4572,7 +4584,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:150:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:162:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -4585,7 +4597,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:152:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:164:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -4595,22 +4607,22 @@
 
 ;;; void ParameterizedNonNullable.$clinit()
 (func $$clinit__void@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable
- ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+ ;;@ nullability/defaultnullable/DefaultNullable.java:138:15
  (block
   ;; if (nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.$initialized) return;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:138:15
   (if (global.get $f_$initialized__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable)
    (then
     ;; return;
-    ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+    ;;@ nullability/defaultnullable/DefaultNullable.java:138:15
     (return )
    )
   )
   ;; (nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.$initialized = true);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:138:15
   (global.set $f_$initialized__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:130:15
+  ;;@ nullability/defaultnullable/DefaultNullable.java:138:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -5046,8 +5058,8 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
- (field $f_defaultNullability__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability (ref null $java.lang.Object))
+ (field $f_defaultNullability__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability (ref null $java.lang.Object))
   $java.lang.Object)
 )
 (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable (struct_subtype 
@@ -5064,34 +5076,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedDefaultNullability<N> ParameterizedDefaultNullability.$create()
-(func $$create__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability
+;;; ParameterizedDefaultNullability<N> ParameterizedDefaultNullability.$create(N n)
+(func $$create__java_lang_Object__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:82:15
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:87:4
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
  (block
-  ;; ParameterizedDefaultNullability<N> $instance = new ParameterizedDefaultNullability.<init>(0,null,null,null);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:82:15
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:82:15
-  (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedDefaultNullability<N> $instance = new ParameterizedDefaultNullability.<init>(0,null,n,n);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:87:4
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (local.get $n)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:87:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:82:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:87:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedDefaultNullability.$ctor()
-(func $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability
+;;; void ParameterizedDefaultNullability.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability
  (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:82:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:87:4
  (block
   ;; nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:82:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:87:41
   (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:82:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:87:41
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -5101,12 +5115,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:87:16
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:92:16
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:88:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:93:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -5117,12 +5131,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:92:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:97:6
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:93:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:98:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -5133,12 +5147,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:96:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:101:6
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:97:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:102:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -5149,7 +5163,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:100:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:105:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -5162,7 +5176,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:102:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -5175,7 +5189,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:104:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:109:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability (local.get $this.untyped)))
  (block
@@ -5225,8 +5239,8 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
- (field $f_defaultNullability__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable (ref null $java.lang.Object))
+ (field $f_defaultNullability__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable (ref null $java.lang.Object))
   $java.lang.Object)
 )
 (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable (struct_subtype 
@@ -5243,34 +5257,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedNullable<N> ParameterizedNullable.$create()
-(func $$create__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable
+;;; ParameterizedNullable<N> ParameterizedNullable.$create(N n)
+(func $$create__java_lang_Object__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:117:4
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
  (block
-  ;; ParameterizedNullable<N> $instance = new ParameterizedNullable.<init>(0,null,null,null);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
-  (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedNullable<N> $instance = new ParameterizedNullable.<init>(0,null,n,n);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:117:4
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (local.get $n)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:117:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:117:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedNullable.$ctor()
-(func $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable
+;;; void ParameterizedNullable.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable
  (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:117:4
  (block
   ;; nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:117:31
   (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:117:31
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -5280,12 +5296,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:112:16
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:122:16
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:113:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:123:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -5296,12 +5312,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:117:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:127:6
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:118:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:128:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -5312,12 +5328,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:121:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:131:6
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:122:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -5328,7 +5344,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:125:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:135:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -5341,7 +5357,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:127:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:137:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -5354,7 +5370,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:129:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:139:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable (local.get $this.untyped)))
  (block
@@ -5364,22 +5380,22 @@
 
 ;;; void ParameterizedNullable.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:112:15
  (block
   ;; if (nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:112:15
   (if (global.get $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:112:15
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:112:15
   (global.set $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:107:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:112:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -5404,8 +5420,8 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
- (field $f_defaultNullability__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable (mut (ref null $java.lang.Object)))
+ (field $f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable (ref null $java.lang.Object))
+ (field $f_defaultNullability__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable (ref null $java.lang.Object))
   $java.lang.Object)
 )
 (type $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable (struct_subtype 
@@ -5422,34 +5438,36 @@
   $java.lang.Object.vtable)
 )
 
-;;; ParameterizedNonNullable<N> ParameterizedNonNullable.$create()
-(func $$create__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable
+;;; ParameterizedNonNullable<N> ParameterizedNonNullable.$create(N n)
+(func $$create__java_lang_Object__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable
+ (param $n (ref null $java.lang.Object))
  (result (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:147:4
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
  (block
-  ;; ParameterizedNonNullable<N> $instance = new ParameterizedNonNullable.<init>(0,null,null,null);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
-  (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance)))
+  ;; ParameterizedNonNullable<N> $instance = new ParameterizedNonNullable.<init>(0,null,n,n);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:147:4
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable)) (i32.const 0) (ref.null $java.lang.Object) (local.get $n) (local.get $n)))
+  ;; $instance.$ctor(n);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:147:4
+  (call $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (ref.as_non_null (local.get $$instance))(local.get $n))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:147:4
   (return (local.get $$instance))
  )
 )
 
-;;; void ParameterizedNonNullable.$ctor()
-(func $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable
+;;; void ParameterizedNonNullable.$ctor(N n)
+(func $$ctor__java_lang_Object__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable
  (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+ (param $n (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:147:4
  (block
   ;; nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:147:34
   (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:147:34
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -5459,12 +5477,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:137:16
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:152:16
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:138:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:153:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -5475,12 +5493,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:142:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:157:6
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:143:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:158:6
   (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
@@ -5491,12 +5509,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:146:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:161:6
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:147:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:162:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -5507,7 +5525,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:150:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:165:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -5520,7 +5538,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:152:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:167:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -5533,7 +5551,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_explicitnotnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:154:9
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:169:9
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -5543,22 +5561,22 @@
 
 ;;; void ParameterizedNonNullable.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:142:15
  (block
   ;; if (nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:142:15
   (if (global.get $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:142:15
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:142:15
   (global.set $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedNonNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:132:15
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:142:15
   (call $$clinit__void@java.lang.Object )
  )
 )
