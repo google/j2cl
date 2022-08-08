@@ -37,15 +37,15 @@ open class ExplicitNotNullable {
   this.f13 = kotlin.Any()
  }
 
- open fun m1(a: kotlin.String?, b: kotlin.collections.MutableList<kotlin.Double?>?): kotlin.String {
+ open fun m1(a: kotlin.String, b: kotlin.collections.MutableList<kotlin.Double>): kotlin.String {
   return ""
  }
 
- open fun m2(a: kotlin.String?, b: kotlin.collections.MutableList<kotlin.Double?>?): kotlin.String? {
+ open fun m2(a: kotlin.String?, b: kotlin.collections.MutableList<kotlin.Double?>): kotlin.String? {
   return null
  }
 
- open fun m3(vararg args: kotlin.String?) {}
+ open fun m3(vararg args: kotlin.String) {}
 
  open fun <T: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<T>?> methodWithNullableBound() {}
 
@@ -70,7 +70,7 @@ open class ExplicitNotNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N
 
-  constructor(n: N?) {
+  constructor(n: N) {
    this.nonNullable = n!!
    this.defaultNullability = n!!
   }
@@ -91,7 +91,7 @@ open class ExplicitNotNullable {
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
  open class ParameterizedNullable<N> {
@@ -101,7 +101,7 @@ open class ExplicitNotNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N
 
-  constructor(n: N?) {
+  constructor(n: N) {
    this.nonNullable = n!!
    this.defaultNullability = n!!
   }
@@ -122,7 +122,7 @@ open class ExplicitNotNullable {
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
  open class ParameterizedNonNullable<N: kotlin.Any> {
@@ -132,9 +132,9 @@ open class ExplicitNotNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N
 
-  constructor(n: N?) {
-   this.nonNullable = n!!
-   this.defaultNullability = n!!
+  constructor(n: N) {
+   this.nonNullable = n
+   this.defaultNullability = n
   }
 
   open fun getNullable(): N? {
@@ -153,6 +153,6 @@ open class ExplicitNotNullable {
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 }

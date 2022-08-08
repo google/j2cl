@@ -349,10 +349,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Method convert(MethodDeclaration methodDeclaration) {
+      boolean inNullMarkedScope = getCurrentType().getDeclaration().isNullMarked();
       List<Variable> parameters = new ArrayList<>();
       for (SingleVariableDeclaration parameter :
           JdtEnvironment.<SingleVariableDeclaration>asTypedList(methodDeclaration.parameters())) {
-        parameters.add(createVariable(parameter));
+        parameters.add(createVariable(parameter, inNullMarkedScope));
       }
 
       MethodDescriptor methodDescriptor =
@@ -1217,7 +1218,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private Variable convert(
         org.eclipse.jdt.core.dom.SingleVariableDeclaration variableDeclaration) {
-      Variable variable = createVariable(variableDeclaration);
+      Variable variable = createVariable(variableDeclaration, /* inNullMarkedScope= */ false);
       if (variableDeclaration.getType() instanceof org.eclipse.jdt.core.dom.UnionType) {
         // Union types are only relevant in multi catch variable declarations, which appear in the
         // AST as a SingleVariableDeclaration.
@@ -1227,12 +1228,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return variable;
     }
 
-    private Variable createVariable(VariableDeclaration variableDeclaration) {
+    private Variable createVariable(
+        VariableDeclaration variableDeclaration, boolean inNullMarkedScope) {
       IVariableBinding variableBinding = variableDeclaration.resolveBinding();
       Variable variable =
           environment.createVariable(
               getSourcePosition(variableBinding.getName(), variableDeclaration.getName()),
-              variableBinding);
+              variableBinding,
+              inNullMarkedScope);
       variableByJdtBinding.put(variableBinding, variable);
       return variable;
     }
@@ -1347,7 +1350,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
-      Variable variable = createVariable(variableDeclarationFragment);
+      Variable variable =
+          createVariable(variableDeclarationFragment, /* inNullMarkedScope= */ false);
       return VariableDeclarationFragment.newBuilder()
           .setVariable(variable)
           .setInitializer(convertOrNull(variableDeclarationFragment.getInitializer()))

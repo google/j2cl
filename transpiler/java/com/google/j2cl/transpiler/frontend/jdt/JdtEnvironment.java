@@ -189,14 +189,13 @@ class JdtEnvironment {
     }
   }
 
-  public Variable createVariable(SourcePosition sourcePosition, IVariableBinding variableBinding) {
+  public Variable createVariable(
+      SourcePosition sourcePosition, IVariableBinding variableBinding, boolean inNullMarkedScope) {
     String name = variableBinding.getName();
     TypeDescriptor typeDescriptor =
         variableBinding.isParameter()
             ? createTypeDescriptorWithNullability(
-                variableBinding.getType(),
-                variableBinding.getAnnotations(),
-                /* inNullMarkedScope= */ false)
+                variableBinding.getType(), variableBinding.getAnnotations(), inNullMarkedScope)
             : createTypeDescriptor(variableBinding.getType());
     boolean isFinal = variableBinding.isEffectivelyFinal();
     boolean isParameter = variableBinding.isParameter();

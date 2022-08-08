@@ -37,28 +37,28 @@ open class DefaultNotNullable {
   this.f13 = kotlin.Any()
  }
 
- open fun m1(a: kotlin.String?, b: kotlin.collections.MutableList<kotlin.Double?>?): kotlin.String {
+ open fun m1(a: kotlin.String, b: kotlin.collections.MutableList<kotlin.Double>): kotlin.String {
   return ""
  }
 
- open fun m2(a: kotlin.String?, b: kotlin.collections.MutableList<kotlin.Double?>?): kotlin.String? {
+ open fun m2(a: kotlin.String?, b: kotlin.collections.MutableList<kotlin.Double?>): kotlin.String? {
   return null
  }
 
- open fun m3(vararg args: kotlin.String?) {}
+ open fun m3(vararg args: kotlin.String) {}
 
  open fun <T: nullability.defaultnotnullable.DefaultNotNullable.NullableBound<T>?> methodWithNullableBound() {}
 
  open fun <T: nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
 
  interface ParameterizedInterface<T> {
-  fun add(t: T?): T
+  fun add(t: T): T
 
   fun nullableAdd(t: T?): T?
  }
 
  open inner class ImplementsParameterizedInterface: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface<kotlin.String> {
-  open override fun add(s: kotlin.String?): kotlin.String {
+  open override fun add(s: kotlin.String): kotlin.String {
    return "Hey"
   }
 
@@ -86,7 +86,7 @@ open class DefaultNotNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N
 
-  constructor(n: N?) {
+  constructor(n: N) {
    this.nonNullable = n!!
    this.defaultNullability = n!!
   }
@@ -107,7 +107,7 @@ open class DefaultNotNullable {
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
  open class ParameterizedNullable<N> {
@@ -117,7 +117,7 @@ open class DefaultNotNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N
 
-  constructor(n: N?) {
+  constructor(n: N) {
    this.nonNullable = n!!
    this.defaultNullability = n!!
   }
@@ -138,7 +138,7 @@ open class DefaultNotNullable {
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
  open class ParameterizedNonNullable<N: kotlin.Any> {
@@ -148,9 +148,9 @@ open class DefaultNotNullable {
 
   @kotlin.jvm.JvmField var defaultNullability: N
 
-  constructor(n: N?) {
-   this.nonNullable = n!!
-   this.defaultNullability = n!!
+  constructor(n: N) {
+   this.nonNullable = n
+   this.defaultNullability = n
   }
 
   open fun getNullable(): N? {
@@ -169,6 +169,6 @@ open class DefaultNotNullable {
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 }
