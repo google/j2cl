@@ -97,6 +97,10 @@ public class DefaultNotNullable {
       extends NonNullableBound<@Nullable NonNullBoundWithNullableArgument> {}
 
   static class ParameterizedDefaultNullability<N> {
+    @Nullable N nullable;
+    @JsNonNull N nonNullable;
+    N defaultNullability;
+
     @Nullable N getNullable() {
       return null;
     }
@@ -109,9 +113,19 @@ public class DefaultNotNullable {
     N getDefaultNullability() {
       return null;
     }
+
+    void setNullable(@Nullable N n) {}
+
+    void setNonNull(@JsNonNull N n) {}
+
+    void setDefaultNullability(N n) {}
   }
 
   static class ParameterizedNullable<N extends @Nullable Object> {
+    @Nullable N nullable;
+    @JsNonNull N nonNullable;
+    N defaultNullability;
+
     @Nullable N getNullable() {
       return null;
     }
@@ -124,9 +138,19 @@ public class DefaultNotNullable {
     N getDefaultNullability() {
       return null;
     }
+
+    void setNullable(@Nullable N n) {}
+
+    void setNonNull(@JsNonNull N n) {}
+
+    void setDefaultNullability(N n) {}
   }
 
   static class ParameterizedNonNullable<N extends @JsNonNull Object> {
+    @Nullable N nullable;
+    @JsNonNull N nonNullable;
+    N defaultNullability;
+
     @Nullable N getNullable() {
       return null;
     }
@@ -139,5 +163,11 @@ public class DefaultNotNullable {
     N getDefaultNullability() {
       return null;
     }
+
+    void setNullable(@Nullable N n) {}
+
+    void setNonNull(@JsNonNull N n) {}
+
+    void setDefaultNullability(N n) {}
   }
 }

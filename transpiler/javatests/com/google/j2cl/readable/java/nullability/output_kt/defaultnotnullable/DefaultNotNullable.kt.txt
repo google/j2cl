@@ -80,6 +80,12 @@ open class DefaultNotNullable {
  interface NonNullBoundWithNullableArgument: nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound<nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument> {}
 
  open class ParameterizedDefaultNullability<N> {
+  @kotlin.jvm.JvmField var nullable: N? = null
+
+  @kotlin.jvm.JvmField var nonNullable: N
+
+  @kotlin.jvm.JvmField var defaultNullability: N
+
   open fun getNullable(): N? {
    return null
   }
@@ -91,9 +97,21 @@ open class DefaultNotNullable {
   open fun getDefaultNullability(): N {
    return null!!
   }
+
+  open fun setNullable(n: N?) {}
+
+  open fun setNonNull(n: N) {}
+
+  open fun setDefaultNullability(n: N?) {}
  }
 
  open class ParameterizedNullable<N> {
+  @kotlin.jvm.JvmField var nullable: N? = null
+
+  @kotlin.jvm.JvmField var nonNullable: N
+
+  @kotlin.jvm.JvmField var defaultNullability: N
+
   open fun getNullable(): N? {
    return null
   }
@@ -105,9 +123,21 @@ open class DefaultNotNullable {
   open fun getDefaultNullability(): N {
    return null!!
   }
+
+  open fun setNullable(n: N?) {}
+
+  open fun setNonNull(n: N) {}
+
+  open fun setDefaultNullability(n: N?) {}
  }
 
  open class ParameterizedNonNullable<N: kotlin.Any> {
+  @kotlin.jvm.JvmField var nullable: N? = null
+
+  @kotlin.jvm.JvmField var nonNullable: N
+
+  @kotlin.jvm.JvmField var defaultNullability: N
+
   open fun getNullable(): N? {
    return null
   }
@@ -119,5 +149,11 @@ open class DefaultNotNullable {
   open fun getDefaultNullability(): N {
    return null!!
   }
+
+  open fun setNullable(n: N?) {}
+
+  open fun setNonNull(n: N) {}
+
+  open fun setDefaultNullability(n: N?) {}
  }
 }
