@@ -18,9 +18,9 @@ open class ForEachStatement {
   try {
    throw kotlin.Exception()
   } catch (e: foreachstatement.ForEachStatement.Exception1) {
-   FOR_EACH@ for (o in e) {}
+   FOR_EACH@ for (o in e!!) {}
   } catch (e: foreachstatement.ForEachStatement.Exception2) {
-   FOR_EACH@ for (o in e) {}
+   FOR_EACH@ for (o in e!!) {}
   }
  }
 
@@ -33,19 +33,19 @@ open class ForEachStatement {
 
  open class Exception1: javaemul.lang.JavaIterable<kotlin.String?>, kotlin.Exception() {
   open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String?> {
-   return null!!
+   return null as kotlin.collections.MutableIterator<kotlin.String?>
   }
  }
 
  open class Exception2: javaemul.lang.JavaIterable<kotlin.Any?>, kotlin.Exception() {
   open override fun iterator(): kotlin.collections.MutableIterator<kotlin.Any?> {
-   return null!!
+   return null as kotlin.collections.MutableIterator<kotlin.Any?>
   }
  }
 
  open class IterableReturningTypeVariable<T: kotlin.collections.MutableIterator<kotlin.Int?>?>: javaemul.lang.JavaIterable<kotlin.Int?> {
   open override fun iterator(): T {
-   return null!!
+   return null as T
   }
  }
 }

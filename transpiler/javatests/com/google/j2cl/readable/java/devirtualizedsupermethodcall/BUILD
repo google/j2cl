@@ -7,6 +7,4 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/202429268): Support explicit type coercion.
-    build_kt_readables = False,
 )

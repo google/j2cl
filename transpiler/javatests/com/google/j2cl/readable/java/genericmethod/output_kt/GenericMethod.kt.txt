@@ -65,15 +65,15 @@ open class GenericMethod<T> {
   @kotlin.jvm.JvmStatic
   fun testErasureCast_wildcard() {
    val list: kotlin.collections.MutableList<genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>? = null
-   val content: genericmethod.GenericMethod.Content? = list!!.get(0).get()
+   val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
    val nestedWildcardList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<out genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>?>? = null
-   val nestedContent: genericmethod.GenericMethod.Content? = nestedWildcardList!!.get(0).get()!!.get()
+   val nestedContent: genericmethod.GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
    val deepWildcardList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>?>? = null
-   val deepContent: genericmethod.GenericMethod.Content? = deepWildcardList!!.get(0).get()!!.get()
+   val deepContent: genericmethod.GenericMethod.Content? = deepWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }
@@ -81,15 +81,15 @@ open class GenericMethod<T> {
   @kotlin.jvm.JvmStatic
   fun <CT: genericmethod.GenericMethod.Container<C>?, C: genericmethod.GenericMethod.Content?> testErasureCast_typeVariable() {
    val list: kotlin.collections.MutableList<genericmethod.GenericMethod.Container<C>?>? = null
-   val content: genericmethod.GenericMethod.Content? = list!!.get(0).get()
+   val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
    val nestedTypeVariableList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<CT>?>? = null
-   val nestedContent: genericmethod.GenericMethod.Content? = nestedTypeVariableList!!.get(0).get()!!.get()
+   val nestedContent: genericmethod.GenericMethod.Content? = nestedTypeVariableList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
    val deepTypeVariableList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<C>?>?>? = null
-   val deepContent: genericmethod.GenericMethod.Content? = deepTypeVariableList!!.get(0).get()!!.get()
+   val deepContent: genericmethod.GenericMethod.Content? = deepTypeVariableList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }

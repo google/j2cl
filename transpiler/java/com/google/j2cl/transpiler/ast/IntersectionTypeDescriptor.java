@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -129,12 +130,30 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public IntersectionTypeDescriptor toNullable() {
-    return this;
+    if (isNullable()) {
+      return this;
+    }
+
+    return IntersectionTypeDescriptor.newBuilder()
+        .setIntersectionTypeDescriptors(
+            getIntersectionTypeDescriptors().stream()
+                .map(DeclaredTypeDescriptor::toNullable)
+                .collect(toImmutableList()))
+        .build();
   }
 
   @Override
   public IntersectionTypeDescriptor toNonNullable() {
-    return this;
+    if (!isNullable()) {
+      return this;
+    }
+
+    return IntersectionTypeDescriptor.newBuilder()
+        .setIntersectionTypeDescriptors(
+            getIntersectionTypeDescriptors().stream()
+                .map(DeclaredTypeDescriptor::toNullable)
+                .collect(toImmutableList()))
+        .build();
   }
 
   @Override

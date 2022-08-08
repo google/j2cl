@@ -11,9 +11,9 @@ open class DefaultNotNullable {
 
  @kotlin.jvm.JvmField var f3: kotlin.String? = null
 
- @kotlin.jvm.JvmField var f4: kotlin.collections.MutableList<kotlin.String> = kotlin.collections.ArrayList<kotlin.String?>()
+ @kotlin.jvm.JvmField var f4: kotlin.collections.MutableList<kotlin.String> = kotlin.collections.ArrayList<kotlin.String?>() as kotlin.collections.MutableList<kotlin.String>
 
- @kotlin.jvm.JvmField var f5: kotlin.collections.MutableList<kotlin.String>? = kotlin.collections.ArrayList<kotlin.String?>()
+ @kotlin.jvm.JvmField var f5: kotlin.collections.MutableList<kotlin.String>? = kotlin.collections.ArrayList<kotlin.String?>() as kotlin.collections.MutableList<kotlin.String>?
 
  @kotlin.jvm.JvmField var f6: kotlin.collections.MutableList<kotlin.String?> = kotlin.collections.ArrayList<kotlin.String?>()
 
@@ -87,8 +87,8 @@ open class DefaultNotNullable {
   @kotlin.jvm.JvmField var defaultNullability: N
 
   constructor(n: N) {
-   this.nonNullable = n!!
-   this.defaultNullability = n!!
+   this.nonNullable = n
+   this.defaultNullability = n
   }
 
   open fun getNullable(): N? {
@@ -100,7 +100,7 @@ open class DefaultNotNullable {
   }
 
   open fun getDefaultNullability(): N {
-   return null!!
+   return null as N
   }
 
   open fun setNullable(n: N?) {}
@@ -118,8 +118,8 @@ open class DefaultNotNullable {
   @kotlin.jvm.JvmField var defaultNullability: N
 
   constructor(n: N) {
-   this.nonNullable = n!!
-   this.defaultNullability = n!!
+   this.nonNullable = n
+   this.defaultNullability = n
   }
 
   open fun getNullable(): N? {
@@ -131,7 +131,7 @@ open class DefaultNotNullable {
   }
 
   open fun getDefaultNullability(): N {
-   return null!!
+   return null as N
   }
 
   open fun setNullable(n: N?) {}
@@ -162,7 +162,7 @@ open class DefaultNotNullable {
   }
 
   open fun getDefaultNullability(): N {
-   return null!!
+   return null as N
   }
 
   open fun setNullable(n: N?) {}

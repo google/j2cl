@@ -7,6 +7,4 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/202427872): Support inner classes and interfaces in J2KT.
-    build_kt_readables = False,
 )

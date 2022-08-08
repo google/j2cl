@@ -872,77 +872,39 @@
  )
 )
 
-;;; void Nullability.testDefaultNullabilityBounds(ParameterizedNonNullable<T> nonNullable)
-(func $m_testDefaultNullabilityBounds__nullability_Nullability_ParameterizedNonNullable__void@nullability.Nullability
- (param $nonNullable (ref null $nullability.Nullability.ParameterizedNonNullable))
- ;;@ nullability/Nullability.java:176:33
- (local $$qualifier (ref null $java.lang.String))
- (local $$qualifier_1 (ref null $java.lang.String))
- (local $$qualifier_2 (ref null $java.lang.String))
- (block
-  ;; nullability.Nullability.$clinit();
-  ;;@ nullability/Nullability.java:177:47
-  (call $$clinit__void@nullability.Nullability )
-  (block
-   ;; String $qualifier = ((String) nonNullable.getNonNullable());
-   ;;@ nullability/Nullability.java:178:4
-   (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
-   ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:178:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
-  )
-  (block
-   ;; String $qualifier = ((String) nonNullable.getNullable());
-   ;;@ nullability/Nullability.java:179:4
-   (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
-   ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:179:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
-  )
-  (block
-   ;; String $qualifier = ((String) nonNullable.getDefaultNullability());
-   ;;@ nullability/Nullability.java:180:4
-   (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
-   ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:180:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
-  )
- )
-)
-
 ;;; void Nullability.testNullableBounds(ParameterizedDefaultNullability<T> defaultNullability)
 (func $m_testNullableBounds__nullability_Nullability_ParameterizedDefaultNullability__void@nullability.Nullability
  (param $defaultNullability (ref null $nullability.Nullability.ParameterizedDefaultNullability))
- ;;@ nullability/Nullability.java:183:43
+ ;;@ nullability/Nullability.java:176:43
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
  (block
   ;; nullability.Nullability.$clinit();
-  ;;@ nullability/Nullability.java:184:61
+  ;;@ nullability/Nullability.java:177:61
   (call $$clinit__void@nullability.Nullability )
   (block
    ;; String $qualifier = ((String) defaultNullability.getNonNullable());
-   ;;@ nullability/Nullability.java:185:4
+   ;;@ nullability/Nullability.java:178:4
    (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:185:4
+   ;;@ nullability/Nullability.java:178:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
   )
   (block
    ;; String $qualifier = ((String) defaultNullability.getNullable());
-   ;;@ nullability/Nullability.java:186:4
+   ;;@ nullability/Nullability.java:179:4
    (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:186:4
+   ;;@ nullability/Nullability.java:179:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; String $qualifier = ((String) defaultNullability.getDefaultNullability());
-   ;;@ nullability/Nullability.java:187:4
+   ;;@ nullability/Nullability.java:180:4
    (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:187:4
+   ;;@ nullability/Nullability.java:180:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
   )
  )
@@ -951,74 +913,36 @@
 ;;; void Nullability.testNullableBounds(ParameterizedNullable<T> nullable)
 (func $m_testNullableBounds__nullability_Nullability_ParameterizedNullable__void@nullability.Nullability
  (param $nullable (ref null $nullability.Nullability.ParameterizedNullable))
- ;;@ nullability/Nullability.java:190:43
+ ;;@ nullability/Nullability.java:183:43
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
  (block
   ;; nullability.Nullability.$clinit();
-  ;;@ nullability/Nullability.java:190:97
+  ;;@ nullability/Nullability.java:183:97
   (call $$clinit__void@nullability.Nullability )
   (block
    ;; String $qualifier = ((String) nullable.getNonNullable());
-   ;;@ nullability/Nullability.java:191:4
+   ;;@ nullability/Nullability.java:184:4
    (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:191:4
+   ;;@ nullability/Nullability.java:184:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
   )
   (block
    ;; String $qualifier = ((String) nullable.getNullable());
-   ;;@ nullability/Nullability.java:192:4
+   ;;@ nullability/Nullability.java:185:4
    (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:192:4
+   ;;@ nullability/Nullability.java:185:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; String $qualifier = ((String) nullable.getDefaultNullability());
-   ;;@ nullability/Nullability.java:193:4
+   ;;@ nullability/Nullability.java:186:4
    (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:193:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
-  )
- )
-)
-
-;;; void Nullability.testNullableBounds(ParameterizedNonNullable<T> nonNullable)
-(func $m_testNullableBounds__nullability_Nullability_ParameterizedNonNullable__void@nullability.Nullability
- (param $nonNullable (ref null $nullability.Nullability.ParameterizedNonNullable))
- ;;@ nullability/Nullability.java:196:43
- (local $$qualifier (ref null $java.lang.String))
- (local $$qualifier_1 (ref null $java.lang.String))
- (local $$qualifier_2 (ref null $java.lang.String))
- (block
-  ;; nullability.Nullability.$clinit();
-  ;;@ nullability/Nullability.java:197:47
-  (call $$clinit__void@nullability.Nullability )
-  (block
-   ;; String $qualifier = ((String) nonNullable.getNonNullable());
-   ;;@ nullability/Nullability.java:198:4
-   (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
-   ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:198:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
-  )
-  (block
-   ;; String $qualifier = ((String) nonNullable.getNullable());
-   ;;@ nullability/Nullability.java:199:4
-   (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
-   ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:199:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
-  )
-  (block
-   ;; String $qualifier = ((String) nonNullable.getDefaultNullability());
-   ;;@ nullability/Nullability.java:200:4
-   (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
-   ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:200:4
+   ;;@ nullability/Nullability.java:186:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
   )
  )
@@ -1027,36 +951,36 @@
 ;;; void Nullability.testNonNullableBounds(ParameterizedDefaultNullability<T> defaultNullability)
 (func $m_testNonNullableBounds__nullability_Nullability_ParameterizedDefaultNullability__void@nullability.Nullability
  (param $defaultNullability (ref null $nullability.Nullability.ParameterizedDefaultNullability))
- ;;@ nullability/Nullability.java:203:44
+ ;;@ nullability/Nullability.java:189:44
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
  (block
   ;; nullability.Nullability.$clinit();
-  ;;@ nullability/Nullability.java:204:61
+  ;;@ nullability/Nullability.java:190:61
   (call $$clinit__void@nullability.Nullability )
   (block
    ;; String $qualifier = ((String) defaultNullability.getNonNullable());
-   ;;@ nullability/Nullability.java:205:4
+   ;;@ nullability/Nullability.java:191:4
    (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:205:4
+   ;;@ nullability/Nullability.java:191:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
   )
   (block
    ;; String $qualifier = ((String) defaultNullability.getNullable());
-   ;;@ nullability/Nullability.java:206:4
+   ;;@ nullability/Nullability.java:192:4
    (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:206:4
+   ;;@ nullability/Nullability.java:192:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; String $qualifier = ((String) defaultNullability.getDefaultNullability());
-   ;;@ nullability/Nullability.java:207:4
+   ;;@ nullability/Nullability.java:193:4
    (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $defaultNullability))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $defaultNullability))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:207:4
+   ;;@ nullability/Nullability.java:193:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
   )
  )
@@ -1065,36 +989,36 @@
 ;;; void Nullability.testNonNullableBounds(ParameterizedNullable<T> nullable)
 (func $m_testNonNullableBounds__nullability_Nullability_ParameterizedNullable__void@nullability.Nullability
  (param $nullable (ref null $nullability.Nullability.ParameterizedNullable))
- ;;@ nullability/Nullability.java:210:44
+ ;;@ nullability/Nullability.java:196:44
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
  (block
   ;; nullability.Nullability.$clinit();
-  ;;@ nullability/Nullability.java:211:41
+  ;;@ nullability/Nullability.java:197:41
   (call $$clinit__void@nullability.Nullability )
   (block
    ;; String $qualifier = ((String) nullable.getNonNullable());
-   ;;@ nullability/Nullability.java:212:4
+   ;;@ nullability/Nullability.java:198:4
    (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:212:4
+   ;;@ nullability/Nullability.java:198:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
   )
   (block
    ;; String $qualifier = ((String) nullable.getNullable());
-   ;;@ nullability/Nullability.java:213:4
+   ;;@ nullability/Nullability.java:199:4
    (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:213:4
+   ;;@ nullability/Nullability.java:199:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; String $qualifier = ((String) nullable.getDefaultNullability());
-   ;;@ nullability/Nullability.java:214:4
+   ;;@ nullability/Nullability.java:200:4
    (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:214:4
+   ;;@ nullability/Nullability.java:200:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
   )
  )
@@ -1103,36 +1027,36 @@
 ;;; void Nullability.testNonNullableBounds(ParameterizedNonNullable<T> nonNullable)
 (func $m_testNonNullableBounds__nullability_Nullability_ParameterizedNonNullable__void@nullability.Nullability
  (param $nonNullable (ref null $nullability.Nullability.ParameterizedNonNullable))
- ;;@ nullability/Nullability.java:217:44
+ ;;@ nullability/Nullability.java:203:44
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
  (block
   ;; nullability.Nullability.$clinit();
-  ;;@ nullability/Nullability.java:218:47
+  ;;@ nullability/Nullability.java:204:47
   (call $$clinit__void@nullability.Nullability )
   (block
    ;; String $qualifier = ((String) nonNullable.getNonNullable());
-   ;;@ nullability/Nullability.java:219:4
+   ;;@ nullability/Nullability.java:205:4
    (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:219:4
+   ;;@ nullability/Nullability.java:205:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
   )
   (block
    ;; String $qualifier = ((String) nonNullable.getNullable());
-   ;;@ nullability/Nullability.java:220:4
+   ;;@ nullability/Nullability.java:206:4
    (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:220:4
+   ;;@ nullability/Nullability.java:206:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; String $qualifier = ((String) nonNullable.getDefaultNullability());
-   ;;@ nullability/Nullability.java:221:4
+   ;;@ nullability/Nullability.java:207:4
    (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
    ;; $qualifier.length();
-   ;;@ nullability/Nullability.java:221:4
+   ;;@ nullability/Nullability.java:207:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
   )
  )

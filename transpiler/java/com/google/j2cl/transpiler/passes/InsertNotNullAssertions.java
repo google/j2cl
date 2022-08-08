@@ -15,70 +15,152 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayAccess;
+import com.google.j2cl.transpiler.ast.ArrayLength;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.ForEachStatement;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.Literal;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.NewInstance;
+import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
+import com.google.j2cl.transpiler.ast.SuperReference;
+import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.SynchronizedStatement;
+import com.google.j2cl.transpiler.ast.ThisReference;
+import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeVariable;
-import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
-import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
+import java.util.function.Function;
 
 /**
- * Inserts NOT_NULL_ASSERTION (!!) in Kotlin for nullable expressions in places where Kotlin
- * requires a non-null value.
+ * Inserts NOT_NULL_ASSERTION (!!) in places where Java performs implicit null-check.
+ *
+ * <p>Currently, the nullability information in the AST is not consistent enough.
  */
 public final class InsertNotNullAssertions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
-        new ConversionContextVisitor(
-            new ContextRewriter() {
-              @Override
-              public Expression rewriteTypeConversionContext(
-                  TypeDescriptor inferredTypeDescriptor,
-                  TypeDescriptor actualTypeDescriptor,
-                  Expression expression) {
-                return !inferredTypeDescriptor.isNullable()
-                    ? insertNotNullAssertionIfNeeded(expression)
-                    : expression;
-              }
-            }));
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteArrayAccess(ArrayAccess arrayAccess) {
+            return ArrayAccess.Builder.from(arrayAccess)
+                .setArrayExpression(
+                    insertNotNullAssertionIfNeeded(arrayAccess.getArrayExpression()))
+                .build();
+          }
+
+          @Override
+          public Node rewriteArrayLength(ArrayLength arrayLength) {
+            return ArrayLength.Builder.from(arrayLength)
+                .setArrayExpression(
+                    insertNotNullAssertionIfNeeded(arrayLength.getArrayExpression()))
+                .build();
+          }
+
+          @Override
+          public Node rewriteFieldAccess(FieldAccess fieldAccess) {
+            return FieldAccess.Builder.from(fieldAccess)
+                .setQualifier(
+                    applyIfNotNull(
+                        fieldAccess.getQualifier(),
+                        InsertNotNullAssertions::insertNotNullAssertionIfNeeded))
+                .build();
+          }
+
+          @Override
+          public Node rewriteForEachStatement(ForEachStatement forEachStatement) {
+            return ForEachStatement.Builder.from(forEachStatement)
+                .setIterableExpression(
+                    insertNotNullAssertionIfNeeded(forEachStatement.getIterableExpression()))
+                .build();
+          }
+
+          @Override
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            return MethodCall.Builder.from(methodCall)
+                .setQualifier(
+                    applyIfNotNull(
+                        methodCall.getQualifier(),
+                        InsertNotNullAssertions::insertNotNullAssertionIfNeeded))
+                .build();
+          }
+
+          @Override
+          public Node rewriteNewInstance(NewInstance newInstance) {
+            return NewInstance.Builder.from(newInstance)
+                .setQualifier(
+                    applyIfNotNull(
+                        newInstance.getQualifier(),
+                        InsertNotNullAssertions::insertNotNullAssertionIfNeeded))
+                .build();
+          }
+
+          @Override
+          public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
+            return SwitchStatement.Builder.from(switchStatement)
+                .setSwitchExpression(
+                    insertNotNullAssertionIfNeeded(switchStatement.getSwitchExpression()))
+                .build();
+          }
+
+          @Override
+          public Node rewriteSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
+            return SynchronizedStatement.Builder.from(synchronizedStatement)
+                .setExpression(
+                    insertNotNullAssertionIfNeeded(synchronizedStatement.getExpression()))
+                .build();
+          }
+
+          @Override
+          public Node rewriteThrowStatement(ThrowStatement throwStatement) {
+            return ThrowStatement.Builder.from(throwStatement)
+                .setExpression(insertNotNullAssertionIfNeeded(throwStatement.getExpression()))
+                .build();
+          }
+        });
+  }
+
+  private static boolean doesNotNeedNullCheck(Expression expression) {
+    // Don't insert null-check for expressions which are known to be non-null, regardless of
+    // nullability annotations.
+    return doesNotNeedNullCheck(expression.getTypeDescriptor())
+        || expression instanceof ThisReference
+        || expression instanceof SuperReference
+        || expression instanceof NewInstance
+        || expression instanceof ArrayLiteral
+        || expression instanceof FunctionExpression
+        || expression instanceof NewArray
+        || expression instanceof Literal
+        || (expression instanceof FieldAccess
+            && ((FieldAccess) expression).getTarget().isEnumConstant());
+  }
+
+  private static boolean doesNotNeedNullCheck(TypeDescriptor typeDescriptor) {
+    // Don't insert null-check for types which are known to be non-null, regardless of
+    // nullability annotations.
+    return typeDescriptor.isPrimitive();
   }
 
   private static Expression insertNotNullAssertionIfNeeded(Expression expression) {
-    return isInstanceNullable(expression.getTypeDescriptor())
-        ? PostfixExpression.newBuilder()
-            .setOperand(expression)
-            .setOperator(PostfixOperator.NOT_NULL_ASSERTION)
-            .build()
-        : expression;
+    return !doesNotNeedNullCheck(expression) ? insertNotNullAssertion(expression) : expression;
   }
 
-  private static boolean isInstanceNullable(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isNullable()) {
-      return true;
-    }
+  private static Expression insertNotNullAssertion(Expression expression) {
+    return PostfixExpression.newBuilder()
+        .setOperand(expression)
+        .setOperator(PostfixOperator.NOT_NULL_ASSERTION)
+        .build();
+  }
 
-    if (typeDescriptor instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
-      return typeVariable.getUpperBoundTypeDescriptor().isNullable();
-    }
-
-    if (typeDescriptor instanceof UnionTypeDescriptor) {
-      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
-      return unionTypeDescriptor.getUnionTypeDescriptors().stream()
-          .anyMatch(InsertNotNullAssertions::isInstanceNullable);
-    }
-
-    if (typeDescriptor instanceof IntersectionTypeDescriptor) {
-      IntersectionTypeDescriptor intersectionTypeDescriptor =
-          (IntersectionTypeDescriptor) typeDescriptor;
-      return intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
-          .allMatch(InsertNotNullAssertions::isInstanceNullable);
-    }
-
-    return false;
+  private static <T> T applyIfNotNull(T t, Function<T, T> fn) {
+    return t == null ? null : fn.apply(t);
   }
 }

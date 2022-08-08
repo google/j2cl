@@ -17,7 +17,7 @@ open class ImplicitParenthesis {
    var boxedInt: kotlin.Int?
    primitiveInt = 5
    boxedInt = kotlin.Int(10)
-   primitiveInt = (if (primitiveInt === 5) kotlin.Int(15) else kotlin.Int(30)).toInt()
+   primitiveInt = (if (primitiveInt === 5) kotlin.Int(15) else kotlin.Int(30))!!.toInt()
    assert(primitiveInt === 15)
    primitiveInt = 5
    boxedInt = kotlin.Int(10)

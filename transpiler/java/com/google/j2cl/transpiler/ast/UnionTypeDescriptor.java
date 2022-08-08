@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -121,12 +122,30 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public UnionTypeDescriptor toNullable() {
-    return this;
+    if (isNullable()) {
+      return this;
+    }
+
+    return UnionTypeDescriptor.newBuilder()
+        .setUnionTypeDescriptors(
+            getUnionTypeDescriptors().stream()
+                .map(TypeDescriptor::toNullable)
+                .collect(toImmutableList()))
+        .build();
   }
 
   @Override
   public UnionTypeDescriptor toNonNullable() {
-    return this;
+    if (!isNullable()) {
+      return this;
+    }
+
+    return UnionTypeDescriptor.newBuilder()
+        .setUnionTypeDescriptors(
+            getUnionTypeDescriptors().stream()
+                .map(TypeDescriptor::toNonNullable)
+                .collect(toImmutableList()))
+        .build();
   }
 
   @Override
