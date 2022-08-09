@@ -53,6 +53,7 @@ import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
 import com.google.j2cl.transpiler.passes.InsertCastOnArrayAccess;
 import com.google.j2cl.transpiler.passes.InsertCastOnNewInstances;
+import com.google.j2cl.transpiler.passes.InsertCastsOnNullabilityMismatch;
 import com.google.j2cl.transpiler.passes.InsertCastsToTypeBounds;
 import com.google.j2cl.transpiler.passes.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.transpiler.passes.InsertExceptionConversions;
@@ -64,7 +65,6 @@ import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsKotlin;
 import com.google.j2cl.transpiler.passes.InsertNarrowingReferenceConversions;
 import com.google.j2cl.transpiler.passes.InsertNotNullAssertions;
-import com.google.j2cl.transpiler.passes.InsertNullabilityCasts;
 import com.google.j2cl.transpiler.passes.InsertStringConversions;
 import com.google.j2cl.transpiler.passes.InsertStringConversionsKotlin;
 import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnTypes;
@@ -438,7 +438,7 @@ public enum Backend {
           NormalizeBasicCasts::new,
           ImplementKotlinBitLevelOperators::new,
           InsertNotNullAssertions::new,
-          InsertNullabilityCasts::new,
+          InsertCastsOnNullabilityMismatch::new,
           InsertExplicitArrayCoercionCasts::new,
 
           // Needs to run after non-null assertions are inserted.

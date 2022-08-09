@@ -55,14 +55,14 @@ open class DefaultNotNullable {
   @kotlin.jvm.JvmStatic
   fun <N> genericNullableMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>, n: N?) {
    (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).setNullable(n)
-   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).setNonNull(n as N)
-   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).setDefaultNullability(n as N)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).setNonNull(n!!)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).setDefaultNullability(n!!)
    (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).getNullable()!!.hashCode()
    (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).getNonNullable()!!.hashCode()
    (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).getDefaultNullability()!!.hashCode()
    (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nullable = n
-   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nonNullable = n as N
-   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).defaultNullability = n as N
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nonNullable = n!!
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).defaultNullability = n!!
    (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nullable!!.hashCode()
    (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nonNullable!!.hashCode()
    (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).defaultNullability!!.hashCode()
@@ -103,13 +103,13 @@ open class DefaultNotNullable {
   @kotlin.jvm.JvmStatic
   fun parametrizedNullableMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<kotlin.String?>, s: kotlin.String?) {
    o!!.setNullable(s)
-   o!!.setNonNull(s as kotlin.String)
+   o!!.setNonNull(s!!)
    o!!.setDefaultNullability(s)
    o!!.getNullable()!!.length
    o!!.getNonNullable()!!.length
    o!!.getDefaultNullability()!!.length
    o!!.nullable = s
-   o!!.nonNullable = s as kotlin.String
+   o!!.nonNullable = s!!
    o!!.defaultNullability = s
    o!!.nullable!!.length
    o!!.nonNullable!!.length
@@ -198,7 +198,7 @@ open class DefaultNotNullable {
   }
 
   open fun getDefaultNullability(): N {
-   return null as N
+   return null!!
   }
 
   open fun setNullable(n: N?) {}
@@ -229,7 +229,7 @@ open class DefaultNotNullable {
   }
 
   open fun getDefaultNullability(): N {
-   return null as N
+   return null!!
   }
 
   open fun setNullable(n: N?) {}
@@ -260,7 +260,7 @@ open class DefaultNotNullable {
   }
 
   open fun getDefaultNullability(): N {
-   return null as N
+   return null!!
   }
 
   open fun setNullable(n: N?) {}

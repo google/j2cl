@@ -101,7 +101,7 @@ open class IntersectionTypeTest<U> {
   @kotlin.jvm.JvmStatic
   fun <T> callOnIntersetionTypes(t: T?) where T: intersectiontype.IntersectionTypeTest.SomeConcreteType?, T: intersectiontype.Cmp? {
    t!!.cmp()
-   ((null as intersectiontype.IntersectionTypeTest.SomeConcreteType? /* & intersectiontype.Cmp? */)!! as intersectiontype.Cmp).cmp()
+   (null as intersectiontype.IntersectionTypeTest.SomeConcreteType? /* & intersectiontype.Cmp? */)!!!!.cmp()
   }
  }
 

@@ -23,8 +23,8 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
-/** Inserts casts in places where necessary due to nullability differences. */
-public final class InsertNullabilityCasts extends NormalizationPass {
+/** Inserts casts in places where necessary due to nullability differences in type arguments. */
+public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -46,23 +46,16 @@ public final class InsertNullabilityCasts extends NormalizationPass {
   }
 
   private static boolean needsCast(TypeDescriptor from, TypeDescriptor to) {
-    // Cast is needed:
-    // - from nullable type to non-null type
-    // - if nullability differs for any of type arguments
-    return (from.isNullable() && !to.isNullable()) || needsCastForTypeArguments(from, to);
-  }
-
-  private static boolean needsCastForTypeArguments(TypeDescriptor from, TypeDescriptor to) {
     return (from instanceof DeclaredTypeDescriptor)
         && (to instanceof DeclaredTypeDescriptor)
         && Streams.zip(
                 ((DeclaredTypeDescriptor) from).getTypeArgumentDescriptors().stream(),
                 ((DeclaredTypeDescriptor) to).getTypeArgumentDescriptors().stream(),
-                InsertNullabilityCasts::typeArgumentNeedsCast)
-            .anyMatch(needsCast -> needsCast);
+                InsertCastsOnNullabilityMismatch::typeArgumentNeedsCast)
+            .anyMatch(Boolean::booleanValue);
   }
 
   private static boolean typeArgumentNeedsCast(TypeDescriptor from, TypeDescriptor to) {
-    return from.isNullable() != to.isNullable() || needsCastForTypeArguments(from, to);
+    return from.isNullable() != to.isNullable() || needsCast(from, to);
   }
 }

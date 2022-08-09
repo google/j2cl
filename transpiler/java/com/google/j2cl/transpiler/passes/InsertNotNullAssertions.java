@@ -37,12 +37,12 @@ import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 import java.util.function.Function;
 
 /**
- * Inserts NOT_NULL_ASSERTION (!!) in places where Java performs implicit null-check.
- *
- * <p>Currently, the nullability information in the AST is not consistent enough.
+ * Inserts NOT_NULL_ASSERTION (!!) in places where Java performs implicit null-check, and when
+ * conversion is needed from nullable to non-null type.
  */
 public final class InsertNotNullAssertions extends NormalizationPass {
   @Override
@@ -126,6 +126,22 @@ public final class InsertNotNullAssertions extends NormalizationPass {
                 .build();
           }
         });
+
+    // Insert non-null assertions when converting from nullable to non-null type.
+    compilationUnit.accept(
+        new ConversionContextVisitor(
+            new ContextRewriter() {
+              @Override
+              public Expression rewriteTypeConversionContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor actualTypeDescriptor,
+                  Expression expression) {
+                return expression.getTypeDescriptor().isNullable()
+                        && !inferredTypeDescriptor.isNullable()
+                    ? insertNotNullAssertion(expression)
+                    : expression;
+              }
+            }));
   }
 
   private static boolean doesNotNeedNullCheck(Expression expression) {
