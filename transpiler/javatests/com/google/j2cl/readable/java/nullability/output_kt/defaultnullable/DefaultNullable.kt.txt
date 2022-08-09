@@ -51,6 +51,104 @@ open class DefaultNullable {
 
  open fun <T: nullability.defaultnullable.DefaultNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
 
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun <N> genericNullableMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedNullable<N>?, n: N?) {
+   o!!.setNullable(n)
+   o!!.setNonNull(n as N)
+   o!!.setDefaultNullability(n)
+   o!!.getNullable()!!.hashCode()
+   o!!.getNonNullable()!!.hashCode()
+   o!!.getDefaultNullability()!!.hashCode()
+   o!!.nullable = n
+   o!!.nonNullable = n as N
+   o!!.defaultNullability = n
+   o!!.nullable!!.hashCode()
+   o!!.nonNullable!!.hashCode()
+   o!!.defaultNullability!!.hashCode()
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <N: kotlin.Any> genericNonNullMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable<N>?, n: N) {
+   o!!.setNullable(n)
+   o!!.setNonNull(n)
+   o!!.setDefaultNullability(n)
+   o!!.getNullable()!!.hashCode()
+   o!!.getNonNullable()!!.hashCode()
+   o!!.getDefaultNullability()!!.hashCode()
+   o!!.nullable = n
+   o!!.nonNullable = n
+   o!!.defaultNullability = n
+   o!!.nullable!!.hashCode()
+   o!!.nonNullable!!.hashCode()
+   o!!.defaultNullability!!.hashCode()
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <N> genericDefaultNullabilityMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability<N>?, n: N?) {
+   o!!.setNullable(n)
+   o!!.setNonNull(n as N)
+   o!!.setDefaultNullability(n)
+   o!!.getNullable()!!.hashCode()
+   o!!.getNonNullable()!!.hashCode()
+   o!!.getDefaultNullability()!!.hashCode()
+   o!!.nullable = n
+   o!!.nonNullable = n as N
+   o!!.defaultNullability = n
+   o!!.nullable!!.hashCode()
+   o!!.nonNullable!!.hashCode()
+   o!!.defaultNullability!!.hashCode()
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun parametrizedNullableMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedNullable<kotlin.String?>?, s: kotlin.String?) {
+   o!!.setNullable(s)
+   o!!.setNonNull(s as kotlin.String)
+   o!!.setDefaultNullability(s)
+   o!!.getNullable()!!.length
+   o!!.getNonNullable()!!.length
+   o!!.getDefaultNullability()!!.length
+   o!!.nullable = s
+   o!!.nonNullable = s as kotlin.String
+   o!!.defaultNullability = s
+   o!!.nullable!!.length
+   o!!.nonNullable!!.length
+   o!!.defaultNullability!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun parametrizedNonNullMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable<kotlin.String>?, s: kotlin.String) {
+   o!!.setNullable(s)
+   o!!.setNonNull(s)
+   o!!.setDefaultNullability(s)
+   o!!.getNullable()!!.length
+   o!!.getNonNullable()!!.length
+   o!!.getDefaultNullability()!!.length
+   o!!.nullable = s
+   o!!.nonNullable = s
+   o!!.defaultNullability = s
+   o!!.nullable!!.length
+   o!!.nonNullable!!.length
+   o!!.defaultNullability!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun parametrizedDefaultNullabilityMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability<kotlin.String?>?, s: kotlin.String?) {
+   o!!.setNullable(s)
+   o!!.setNonNull(s as kotlin.String)
+   o!!.setDefaultNullability(s)
+   o!!.getNullable()!!.length
+   o!!.getNonNullable()!!.length
+   o!!.getDefaultNullability()!!.length
+   o!!.nullable = s
+   o!!.nonNullable = s as kotlin.String
+   o!!.defaultNullability = s
+   o!!.nullable!!.length
+   o!!.nonNullable!!.length
+   o!!.defaultNullability!!.length
+  }
+ }
+
  interface NullableBound<T: nullability.defaultnullable.DefaultNullable.NullableBound<T>?> {}
 
  interface NonNullableBound<T: nullability.defaultnullable.DefaultNullable.NonNullableBound<T>> {}

@@ -51,6 +51,104 @@ open class DefaultNotNullable {
 
  open fun <T: nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
 
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun <N> genericNullableMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>, n: N?) {
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).setNullable(n)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).setNonNull(n as N)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).setDefaultNullability(n as N)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).getNullable()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).getNonNullable()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).getDefaultNullability()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nullable = n
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nonNullable = n as N
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).defaultNullability = n as N
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nullable!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).nonNullable!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>).defaultNullability!!.hashCode()
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <N: kotlin.Any> genericNonNullMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>, n: N) {
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).setNullable(n)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).setNonNull(n)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).setDefaultNullability(n)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).getNullable()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).getNonNullable()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).getDefaultNullability()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).nullable = n
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).nonNullable = n
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).defaultNullability = n
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).nullable!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).nonNullable!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>).defaultNullability!!.hashCode()
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <N> genericDefaultNullabilityMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>, n: N) {
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).setNullable(n)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).setNonNull(n)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).setDefaultNullability(n)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).getNullable()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).getNonNullable()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).getDefaultNullability()!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).nullable = n
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).nonNullable = n
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).defaultNullability = n
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).nullable!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).nonNullable!!.hashCode()
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>).defaultNullability!!.hashCode()
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun parametrizedNullableMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<kotlin.String?>, s: kotlin.String?) {
+   o!!.setNullable(s)
+   o!!.setNonNull(s as kotlin.String)
+   o!!.setDefaultNullability(s)
+   o!!.getNullable()!!.length
+   o!!.getNonNullable()!!.length
+   o!!.getDefaultNullability()!!.length
+   o!!.nullable = s
+   o!!.nonNullable = s as kotlin.String
+   o!!.defaultNullability = s
+   o!!.nullable!!.length
+   o!!.nonNullable!!.length
+   o!!.defaultNullability!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun parametrizedNonNullMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<kotlin.String>, s: kotlin.String) {
+   o!!.setNullable(s)
+   o!!.setNonNull(s)
+   o!!.setDefaultNullability(s)
+   o!!.getNullable()!!.length
+   o!!.getNonNullable()!!.length
+   o!!.getDefaultNullability()!!.length
+   o!!.nullable = s
+   o!!.nonNullable = s
+   o!!.defaultNullability = s
+   o!!.nullable!!.length
+   o!!.nonNullable!!.length
+   o!!.defaultNullability!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun parametrizedDefaultNullabilityMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String>, s: kotlin.String) {
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).setNullable(s)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).setNonNull(s)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).setDefaultNullability(s)
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).getNullable()!!.length
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).getNonNullable()!!.length
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).getDefaultNullability()!!.length
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).nullable = s
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).nonNullable = s
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).defaultNullability = s
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).nullable!!.length
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).nonNullable!!.length
+   (o!! as nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String?>).defaultNullability!!.length
+  }
+ }
+
  interface ParameterizedInterface<T> {
   fun add(t: T): T
 

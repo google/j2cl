@@ -163,4 +163,117 @@ public class DefaultNullable {
 
     void setDefaultNullability(N n) {}
   }
+
+  static <N extends @Nullable Object> void genericNullableMethod(
+      ParameterizedNullable<N> o, @Nullable N n) {
+    o.setNullable(n);
+    o.setNonNull(n);
+    o.setDefaultNullability(n);
+
+    o.getNullable().hashCode();
+    o.getNonNullable().hashCode();
+    o.getDefaultNullability().hashCode();
+
+    o.nullable = n;
+    o.nonNullable = n;
+    o.defaultNullability = n;
+
+    o.nullable.hashCode();
+    o.nonNullable.hashCode();
+    o.defaultNullability.hashCode();
+  }
+
+  static <N extends @JsNonNull Object> void genericNonNullMethod(
+      ParameterizedNonNullable<N> o, @JsNonNull N n) {
+    o.setNullable(n);
+    o.setNonNull(n);
+    o.setDefaultNullability(n);
+
+    o.getNullable().hashCode();
+    o.getNonNullable().hashCode();
+    o.getDefaultNullability().hashCode();
+
+    o.nullable = n;
+    o.nonNullable = n;
+    o.defaultNullability = n;
+
+    o.nullable.hashCode();
+    o.nonNullable.hashCode();
+    o.defaultNullability.hashCode();
+  }
+
+  static <N> void genericDefaultNullabilityMethod(ParameterizedDefaultNullability<N> o, N n) {
+    o.setNullable(n);
+    o.setNonNull(n);
+    o.setDefaultNullability(n);
+
+    o.getNullable().hashCode();
+    o.getNonNullable().hashCode();
+    o.getDefaultNullability().hashCode();
+
+    o.nullable = n;
+    o.nonNullable = n;
+    o.defaultNullability = n;
+
+    o.nullable.hashCode();
+    o.nonNullable.hashCode();
+    o.defaultNullability.hashCode();
+  }
+
+  static void parametrizedNullableMethod(
+      ParameterizedNullable<@Nullable String> o, @Nullable String s) {
+    o.setNullable(s);
+    o.setNonNull(s);
+    o.setDefaultNullability(s);
+
+    o.getNullable().length();
+    o.getNonNullable().length();
+    o.getDefaultNullability().length();
+
+    o.nullable = s;
+    o.nonNullable = s;
+    o.defaultNullability = s;
+
+    o.nullable.length();
+    o.nonNullable.length();
+    o.defaultNullability.length();
+  }
+
+  static void parametrizedNonNullMethod(
+      ParameterizedNonNullable<@JsNonNull String> o, @JsNonNull String s) {
+    o.setNullable(s);
+    o.setNonNull(s);
+    o.setDefaultNullability(s);
+
+    o.getNullable().length();
+    o.getNonNullable().length();
+    o.getDefaultNullability().length();
+
+    o.nullable = s;
+    o.nonNullable = s;
+    o.defaultNullability = s;
+
+    o.nullable.length();
+    o.nonNullable.length();
+    o.defaultNullability.length();
+  }
+
+  static void parametrizedDefaultNullabilityMethod(
+      ParameterizedDefaultNullability<String> o, String s) {
+    o.setNullable(s);
+    o.setNonNull(s);
+    o.setDefaultNullability(s);
+
+    o.getNullable().length();
+    o.getNonNullable().length();
+    o.getDefaultNullability().length();
+
+    o.nullable = s;
+    o.nonNullable = s;
+    o.defaultNullability = s;
+
+    o.nullable.length();
+    o.nonNullable.length();
+    o.defaultNullability.length();
+  }
 }
