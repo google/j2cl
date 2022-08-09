@@ -22,7 +22,6 @@ import static com.google.common.collect.MoreCollectors.onlyElement;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
@@ -535,20 +534,17 @@ public class NormalizeConstructors extends NormalizationPass {
   private static MethodDescriptor ctorMethodDescriptorFromJavaConstructor(
       MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
-    return MethodDescriptor.Builder.from(constructor)
-        .setDeclarationDescriptor(
-            constructor.isDeclaration()
-                ? null
-                : ctorMethodDescriptorFromJavaConstructor(constructor.getDeclarationDescriptor()))
-        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
-        .setName(getCtorName(constructor))
-        .setConstructor(false)
-        .setStatic(false)
-        .setJsInfo(JsInfo.NONE)
-        .removeParameterOptionality()
-        .setOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
-        .setVisibility(Visibility.PUBLIC)
-        .build();
+    return constructor.transform(
+        builder ->
+            builder
+                .setReturnTypeDescriptor(PrimitiveTypes.VOID)
+                .setName(getCtorName(constructor))
+                .setConstructor(false)
+                .setStatic(false)
+                .setJsInfo(JsInfo.NONE)
+                .removeParameterOptionality()
+                .setOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
+                .setVisibility(Visibility.PUBLIC));
   }
 
   /** Returns the name of $ctor method for a particular constructor. */
@@ -562,24 +558,20 @@ public class NormalizeConstructors extends NormalizationPass {
   /** Method descriptor for $create methods. */
   private static MethodDescriptor factoryDescriptorForConstructor(MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
-    return MethodDescriptor.Builder.from(constructor)
-        .setDeclarationDescriptor(
-            constructor.isDeclaration()
-                ? null
-                : factoryDescriptorForConstructor(constructor.getDeclarationDescriptor()))
-        .setStatic(true)
-        .setName(MethodDescriptor.CREATE_METHOD_NAME)
-        .setConstructor(false)
-        .setReturnTypeDescriptor(constructor.getEnclosingTypeDescriptor().toNonNullable())
-        .setTypeParameterTypeDescriptors(
-            Iterables.concat(
-                constructor
-                    .getEnclosingTypeDescriptor()
-                    .getTypeDeclaration()
-                    .getTypeParameterDescriptors(),
-                constructor.getTypeParameterTypeDescriptors()))
-        .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
-        .build();
+    return constructor.transform(
+        builder ->
+            builder
+                .setStatic(true)
+                .setName(MethodDescriptor.CREATE_METHOD_NAME)
+                .setConstructor(false)
+                .setReturnTypeDescriptor(builder.getEnclosingTypeDescriptor().toNonNullable())
+                .addTypeParameterTypeDescriptors(
+                    0,
+                    builder
+                        .getEnclosingTypeDescriptor()
+                        .getTypeDeclaration()
+                        .getTypeParameterDescriptors())
+                .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR));
   }
 
   /** Method descriptor for the implicit (parameterless) ES6 constructor */

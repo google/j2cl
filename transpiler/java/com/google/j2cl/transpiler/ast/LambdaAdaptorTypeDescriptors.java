@@ -159,6 +159,7 @@ public final class LambdaAdaptorTypeDescriptors {
 
     MethodDescriptor functionalInterfaceMethodDescriptor =
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
+    // TODO(rluble): Migrate to MethodDescriptor.tranform.
     return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
         .setNative(false)
         // This is the declaration.
@@ -213,20 +214,16 @@ public final class LambdaAdaptorTypeDescriptors {
    */
   private static MethodDescriptor removeJsMethodVarargs(
       MethodDescriptor functionalMethodDescriptor) {
-    return MethodDescriptor.Builder.from(functionalMethodDescriptor)
-        .setParameterDescriptors(
-            functionalMethodDescriptor.getParameterDescriptors().stream()
-                .map(
-                    parameterDescriptor ->
-                        ParameterDescriptor.newBuilder()
-                            .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
-                            .build())
-                .collect(toImmutableList()))
-        .setDeclarationDescriptor(
-            functionalMethodDescriptor.isDeclaration()
-                ? null
-                : removeJsMethodVarargs(functionalMethodDescriptor.getDeclarationDescriptor()))
-        .build();
+    return functionalMethodDescriptor.transform(
+        builder ->
+            builder.setParameterDescriptors(
+                builder.getParameterDescriptors().stream()
+                    .map(
+                        parameterDescriptor ->
+                            ParameterDescriptor.newBuilder()
+                                .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
+                                .build())
+                    .collect(toImmutableList())));
   }
 
   /** Returns the TypeDeclaration for the JsFunction class. */
@@ -261,6 +258,7 @@ public final class LambdaAdaptorTypeDescriptors {
   /** Returns the MethodDescriptor for the single method in the synthetic @JsFunction interface. */
   private static MethodDescriptor createJsFunctionMethodDescriptor(
       DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
+    // TODO(rluble): Migrate to MethodDescriptor.tranform.
     return MethodDescriptor.Builder.from(singleAbstractMethod)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
         .setDeclarationDescriptor(

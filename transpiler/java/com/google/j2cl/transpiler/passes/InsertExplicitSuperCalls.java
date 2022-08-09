@@ -138,9 +138,9 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
       if (type.isEnum()) {
         // If the super type is java.lang.Enum, remove the implicit parameters from the descriptor
         // which are present in the class, but should be implicit in the constructor invocations.
-        return MethodDescriptor.Builder.from(superContructor.get())
-            .removeParameterTypeDescriptors()
-            .build();
+        return superContructor
+            .get()
+            .transform(MethodDescriptor.Builder::removeParameterTypeDescriptors);
       }
       return superContructor.get();
     }

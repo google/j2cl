@@ -143,24 +143,10 @@ public class NormalizeOverlayMembers extends NormalizationPass {
   private static MethodCall redirectCall(MethodCall methodCall, DeclaredTypeDescriptor targetType) {
     MethodDescriptor methodDescriptor = methodCall.getTarget();
     if (methodDescriptor.isStatic()) {
-      MethodDescriptor declarationDescriptor =
-          methodDescriptor.isDeclaration()
-              ? null
-              : MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
-                  .setDeclarationDescriptor(null)
-                  .setEnclosingTypeDescriptor(targetType)
-                  .setJsInfo(JsInfo.NONE)
-                  .build();
-
-      methodDescriptor =
-          MethodDescriptor.Builder.from(methodCall.getTarget())
-              .setDeclarationDescriptor(declarationDescriptor)
-              .setEnclosingTypeDescriptor(targetType)
-              .setJsInfo(JsInfo.NONE)
-              .build();
-
       return MethodCall.Builder.from(methodCall)
-          .setTarget(methodDescriptor)
+          .setTarget(
+              methodDescriptor.transform(
+                  builder -> builder.setEnclosingTypeDescriptor(targetType).setJsInfo(JsInfo.NONE)))
           .setQualifier(null)
           .build();
     }

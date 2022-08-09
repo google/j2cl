@@ -955,49 +955,43 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
   private static MethodDescriptor getCtorMethodDescriptorForConstructor(
       MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
-    return MethodDescriptor.Builder.from(constructor)
-        .setDeclarationDescriptor(
-            constructor.isDeclaration()
-                ? null
-                : getCtorMethodDescriptorForConstructor(constructor.getDeclarationDescriptor()))
-        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
-        .setName(MethodDescriptor.CTOR_METHOD_PREFIX)
-        .setConstructor(false)
-        .setStatic(false)
-        .setOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
-        // Set to private to avoid putting the method in the vtable. (These methods might
-        // be called by a subclass though)
-        .setVisibility(Visibility.PRIVATE)
-        .setJsInfo(JsInfo.NONE)
-        // Clear side effect free flag since the ctor method does not return a value and would be
-        // pruned incorrectly.
-        // The factory method still preserves the side effect free flags if it was present.
-        .setSideEffectFree(false)
-        .build();
+    return constructor.transform(
+        builder ->
+            builder
+                .setReturnTypeDescriptor(PrimitiveTypes.VOID)
+                .setName(MethodDescriptor.CTOR_METHOD_PREFIX)
+                .setConstructor(false)
+                .setStatic(false)
+                .setOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
+                // Set to private to avoid putting the method in the vtable. (These methods might
+                // be called by a subclass though)
+                .setVisibility(Visibility.PRIVATE)
+                .setJsInfo(JsInfo.NONE)
+                // Clear side effect free flag since the ctor method does not return a value and
+                // would be
+                // pruned incorrectly.
+                // The factory method still preserves the side effect free flags if it was present.
+                .setSideEffectFree(false));
   }
 
   /** Method descriptor for $create methods. */
   private static MethodDescriptor getFactoryDescriptorForConstructor(MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
-    return MethodDescriptor.Builder.from(constructor)
-        .setDeclarationDescriptor(
-            constructor.isDeclaration()
-                ? null
-                : getFactoryDescriptorForConstructor(constructor.getDeclarationDescriptor()))
-        .setStatic(true)
-        .setName(MethodDescriptor.CREATE_METHOD_NAME)
-        .setConstructor(false)
-        .setTypeParameterTypeDescriptors(
-            Iterables.concat(
-                constructor
-                    .getEnclosingTypeDescriptor()
-                    .getTypeDeclaration()
-                    .getTypeParameterDescriptors(),
-                constructor.getTypeParameterTypeDescriptors()))
-        .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
-        .setJsInfo(JsInfo.NONE)
-        .setVisibility(Visibility.PUBLIC)
-        .build();
+    return constructor.transform(
+        builder ->
+            builder
+                .setStatic(true)
+                .setName(MethodDescriptor.CREATE_METHOD_NAME)
+                .setConstructor(false)
+                .addTypeParameterTypeDescriptors(
+                    0,
+                    builder
+                        .getEnclosingTypeDescriptor()
+                        .getTypeDeclaration()
+                        .getTypeParameterDescriptors())
+                .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
+                .setJsInfo(JsInfo.NONE)
+                .setVisibility(Visibility.PUBLIC));
   }
 
   private List<Field> getAllInstanceFields(TypeDeclaration typeDeclaration) {

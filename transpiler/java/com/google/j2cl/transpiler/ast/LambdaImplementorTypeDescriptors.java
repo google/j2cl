@@ -124,6 +124,7 @@ public final class LambdaImplementorTypeDescriptors {
 
     MethodDescriptor functionalInterfaceMethodDescriptor =
         functionalInterfaceTypeDescriptor.getSingleAbstractMethodDescriptor();
+    // TODO(rluble): Migrate to MethodDescriptor.tranform.
     return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
         .setNative(false)
         // This is the declaration.

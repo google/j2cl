@@ -74,24 +74,18 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
 
   private static FieldDescriptor rewriteFieldDescriptor(FieldDescriptor fieldDescriptor) {
     // A.abs -> Math.abs.
-    return FieldDescriptor.Builder.from(fieldDescriptor)
-        .setEnclosingTypeDescriptor(AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor))
-        .setDeclarationDescriptor(
-            fieldDescriptor.isDeclaration()
-                ? null
-                : rewriteFieldDescriptor(fieldDescriptor.getDeclarationDescriptor()))
-        .build();
+    return fieldDescriptor.transform(
+        builder ->
+            builder.setEnclosingTypeDescriptor(
+                AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor)));
   }
 
   private static MethodDescriptor rewriteMethodDescriptor(MethodDescriptor methodDescriptor) {
     // A.abs() -> Math.abs().
-    return MethodDescriptor.Builder.from(methodDescriptor)
-        .setEnclosingTypeDescriptor(AstUtils.getNamespaceAsTypeDescriptor(methodDescriptor))
-        .setDeclarationDescriptor(
-            methodDescriptor.isDeclaration()
-                ? null
-                : rewriteMethodDescriptor(methodDescriptor.getDeclarationDescriptor()))
-        .build();
+    return methodDescriptor.transform(
+        builder ->
+            builder.setEnclosingTypeDescriptor(
+                AstUtils.getNamespaceAsTypeDescriptor(methodDescriptor)));
   }
 }
 

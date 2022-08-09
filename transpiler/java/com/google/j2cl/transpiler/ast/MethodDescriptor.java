@@ -34,6 +34,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -664,6 +665,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         + getEnclosingTypeDescriptor().getTypeDeclaration().getPackageName();
   }
 
+  public MethodDescriptor transform(Consumer<? super Builder> transformer) {
+    Builder builder = toBuilder();
+    if (!isDeclaration()) {
+      builder.setDeclarationDescriptor(getDeclarationDescriptor().transform(transformer));
+    }
+    transformer.accept(builder);
+    return builder.build();
+  }
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
@@ -944,9 +954,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);
 
+    public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
+
     public abstract Builder setName(String name);
 
     public abstract Builder setReturnTypeDescriptor(TypeDescriptor returnTypeDescriptor);
+
+    public abstract TypeDescriptor getReturnTypeDescriptor();
 
     public abstract Builder setVisibility(Visibility visibility);
 
@@ -958,6 +972,21 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setTypeParameterTypeDescriptors(
         Iterable<TypeVariable> typeParameterTypeDescriptors);
+
+    public Builder addTypeParameterTypeDescriptors(
+        int index, TypeVariable... typeParameterTypeDescriptors) {
+      return addTypeParameterTypeDescriptors(index, Arrays.asList(typeParameterTypeDescriptors));
+    }
+
+    public Builder addTypeParameterTypeDescriptors(
+        int index, List<TypeVariable> typeParameterTypeDescriptors) {
+      List<TypeVariable> newTypeParameterTypeDescriptors =
+          new ArrayList<>(getTypeParameterTypeDescriptors());
+      newTypeParameterTypeDescriptors.addAll(index, typeParameterTypeDescriptors);
+      return setTypeParameterTypeDescriptors(newTypeParameterTypeDescriptors);
+    }
+
+    public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
 
     public Builder setParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
       return setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
@@ -986,22 +1015,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       List<ParameterDescriptor> newParameterDescriptors =
           new ArrayList<>(getParameterDescriptors());
       newParameterDescriptors.addAll(index, toParameterDescriptors(parameterTypeDescriptors));
-      if (getDeclarationDescriptorOrNullIfSelf() != null) {
-        setDeclarationDescriptorOrNullIfSelf(
-            MethodDescriptor.Builder.from(getDeclarationDescriptorOrNullIfSelf())
-                .addParameterTypeDescriptors(index, parameterTypeDescriptors)
-                .build());
-      }
       return setParameterDescriptors(newParameterDescriptors);
     }
 
     public Builder removeParameterTypeDescriptors() {
-      if (getDeclarationDescriptorOrNullIfSelf() != null) {
-        setDeclarationDescriptorOrNullIfSelf(
-            MethodDescriptor.Builder.from(getDeclarationDescriptorOrNullIfSelf())
-                .setParameterTypeDescriptors()
-                .build());
-      }
       return setParameterDescriptors();
     }
 
@@ -1010,6 +1027,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
 
     abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
+
+    public ImmutableList<TypeDescriptor> getParameterTypeDescriptors() {
+      return getParameterDescriptors().stream()
+          .map(ParameterDescriptor::getTypeDescriptor)
+          .collect(toImmutableList());
+    }
 
     static ImmutableList<ParameterDescriptor> toParameterDescriptors(
         Collection<TypeDescriptor> parameterTypeDescriptors) {
@@ -1050,10 +1073,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     abstract boolean isConstructor();
 
     abstract String getName();
-
-    abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
-
-    abstract TypeDescriptor getReturnTypeDescriptor();
 
     abstract MethodDescriptor autoBuild();
 

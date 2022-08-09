@@ -838,39 +838,22 @@ public final class AstUtils {
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
     String devirtualizedMethodName = methodDescriptor.getName() + postfix.orElse("");
-    MethodDescriptor.Builder methodBuilder =
-        MethodDescriptor.Builder.from(methodDescriptor)
-            .setName(devirtualizedMethodName)
-            .setEnclosingTypeDescriptor(targetTypeDescriptor)
-            .setParameterDescriptors(
-                ImmutableList.<ParameterDescriptor>builder()
-                    .add(
-                        ParameterDescriptor.newBuilder()
-                            // the instance ($thisArg) parameter is assumed non nullable for
-                            // the typing perspective.
-                            .setTypeDescriptor(enclosingTypeDescriptor.toNonNullable())
-                            .build())
-                    .addAll(methodDescriptor.getParameterDescriptors())
-                    .build())
-            .setTypeParameterTypeDescriptors(
-                ImmutableList.<TypeVariable>builder()
-                    .addAll(methodDescriptor.getTypeParameterTypeDescriptors())
-                    .addAll(
-                        enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
-                    .build())
-            .setStatic(true)
-            .setConstructor(false)
-            .setAbstract(false)
-            .setDefaultMethod(false)
-            .setJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
-            .removeParameterOptionality();
-
-    if (!methodDescriptor.isDeclaration()) {
-      methodBuilder.setDeclarationDescriptor(
-          devirtualizeMethodDescriptor(
-              methodDescriptor.getDeclarationDescriptor(), targetTypeDescriptor, postfix));
-    }
-    return methodBuilder.build();
+    return methodDescriptor.transform(
+        builder ->
+            builder
+                .setName(devirtualizedMethodName)
+                .setEnclosingTypeDescriptor(targetTypeDescriptor)
+                // The instance ($thisArg) parameter is assumed non nullable for
+                // the typing perspective.
+                .addParameterTypeDescriptors(0, enclosingTypeDescriptor.toNonNullable())
+                .addTypeParameterTypeDescriptors(
+                    0, enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
+                .setStatic(true)
+                .setConstructor(false)
+                .setAbstract(false)
+                .setDefaultMethod(false)
+                .setJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
+                .removeParameterOptionality());
   }
 
   /** Returns an Optional.empty() if optionalSourcePosition is empty or unnamed */

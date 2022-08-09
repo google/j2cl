@@ -350,12 +350,7 @@ public class MakeFieldsFinal extends LibraryNormalizationPass {
   }
 
   private static FieldDescriptor createFinalFieldDescriptor(FieldDescriptor fieldDescriptor) {
-    FieldDescriptor.Builder builder = FieldDescriptor.Builder.from(fieldDescriptor).setFinal(true);
-    if (!fieldDescriptor.isDeclaration()) {
-      builder.setDeclarationDescriptor(
-          createFinalFieldDescriptor(fieldDescriptor.getDeclarationDescriptor()));
-    }
-    return builder.build();
+    return fieldDescriptor.transform(builder -> builder.setFinal(true));
   }
 
   private static boolean isNonDelegatingConstructor(Member member) {

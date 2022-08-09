@@ -322,18 +322,15 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
           }
 
           private MethodDescriptor rewriteMethodDescriptor(MethodDescriptor descriptor) {
-            return MethodDescriptor.Builder.from(descriptor)
-                .setDeclarationDescriptor(
-                    descriptor.isDeclaration()
-                        ? null
-                        : rewriteMethodDescriptor(descriptor.getDeclarationDescriptor()))
-                .setEnclosingTypeDescriptor(
-                    replaceTypeDescriptors(descriptor.getEnclosingTypeDescriptor(), fn))
-                .setReturnTypeDescriptor(
-                    replaceTypeDescriptors(descriptor.getReturnTypeDescriptor(), fn))
-                .updateParameterTypeDescriptors(
-                    replaceTypeDescriptors(descriptor.getParameterTypeDescriptors(), fn))
-                .build();
+            return descriptor.transform(
+                builder ->
+                    builder
+                        .setEnclosingTypeDescriptor(
+                            replaceTypeDescriptors(builder.getEnclosingTypeDescriptor(), fn))
+                        .setReturnTypeDescriptor(
+                            replaceTypeDescriptors(builder.getReturnTypeDescriptor(), fn))
+                        .updateParameterTypeDescriptors(
+                            replaceTypeDescriptors(builder.getParameterTypeDescriptors(), fn)));
           }
 
           private FieldDescriptor rewriteFieldDescriptor(FieldDescriptor descriptor) {
@@ -342,13 +339,10 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             // TODO(b/193926520): Add getManglingDescriptor concept similar to MethodDescriptor so
             // that we can set an origin of FieldDescriptor to preserve its mangled name. This will
             // let us set correct enclosing type while preserving manged names.
-            return FieldDescriptor.Builder.from(descriptor)
-                .setDeclarationDescriptor(
-                    descriptor.isDeclaration()
-                        ? null
-                        : rewriteFieldDescriptor(descriptor.getDeclarationDescriptor()))
-                .setTypeDescriptor(replaceTypeDescriptors(descriptor.getTypeDescriptor(), fn))
-                .build();
+            return descriptor.transform(
+                builder ->
+                    builder.setTypeDescriptor(
+                        replaceTypeDescriptors(builder.getTypeDescriptor(), fn)));
           }
         });
   }

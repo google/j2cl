@@ -22,6 +22,7 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
@@ -172,6 +173,15 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .build();
   }
 
+  public FieldDescriptor transform(Consumer<? super Builder> transformer) {
+    Builder builder = toBuilder();
+    if (!isDeclaration()) {
+      builder.setDeclarationDescriptor(getDeclarationDescriptor().transform(transformer));
+    }
+    transformer.accept(builder);
+    return builder.build();
+  }
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
@@ -215,6 +225,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setSynthetic(boolean isSynthetic);
 
     public abstract Builder setTypeDescriptor(TypeDescriptor typeDescriptor);
+
+    public abstract TypeDescriptor getTypeDescriptor();
 
     public abstract Builder setVisibility(Visibility visibility);
 

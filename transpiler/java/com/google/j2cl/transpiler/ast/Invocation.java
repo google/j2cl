@@ -90,13 +90,14 @@ public abstract class Invocation extends MemberReference {
       arguments.addAll(index, argumentExpressions);
       // Add the provided parameters to the proper index position of the existing parameters list.
       return setTarget(
-          MethodDescriptor.Builder.from(getTarget())
-              .addParameterTypeDescriptors(
-                  index,
-                  argumentExpressions.stream()
-                      .map(Expression::getTypeDescriptor)
-                      .collect(toImmutableList()))
-              .build());
+          getTarget()
+              .transform(
+                  builder ->
+                      builder.addParameterTypeDescriptors(
+                          index,
+                          argumentExpressions.stream()
+                              .map(Expression::getTypeDescriptor)
+                              .collect(toImmutableList()))));
     }
 
     public final T addArgumentAndUpdateDescriptor(
@@ -105,9 +106,9 @@ public abstract class Invocation extends MemberReference {
       // Add the provided parameters to the proper index position of the existing parameters list.
 
       return setTarget(
-          MethodDescriptor.Builder.from(getTarget())
-              .addParameterTypeDescriptors(index, parameterTypeDescriptor)
-              .build());
+          getTarget()
+              .transform(
+                  builder -> builder.addParameterTypeDescriptors(index, parameterTypeDescriptor)));
     }
 
     public final T replaceVarargsArgument(Expression... replacementArguments) {
