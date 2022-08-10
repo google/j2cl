@@ -1050,11 +1050,14 @@ public final class AstUtils {
     // inconsistent with the super type in the type object. This is due to the fact that
     // optimizations that alter the class hierarchy are not reflected in the type model.
     TypeDeclaration contextTypeDeclaration = contextTypeDescriptor.getTypeDeclaration();
-    checkState(
-        contextTypeDeclaration.isJsEnum()
-            || contextTypeDeclaration.isAnnotatedWithAutoValue()
-            || contextTypeDeclaration.isAnnotatedWithAutoValueBuilder());
-    return new ThisReference(contextTypeDescriptor);
+    if (contextTypeDeclaration.isJsEnum()
+        || contextTypeDeclaration.isAnnotatedWithAutoValue()
+        || contextTypeDeclaration.isAnnotatedWithAutoValueBuilder()) {
+      return new ThisReference(contextTypeDescriptor);
+    }
+    // TODO(b/241300930): Remove when anonymous classes defined in inline functions are not marked
+    //  as inner classes.
+    return NullLiteral.get(targetTypeDescriptor);
   }
 
   private AstUtils() {}

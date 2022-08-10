@@ -299,6 +299,8 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     # KMP should be enabled to allow for passing common sources and using
     # expect/actual syntax.
     "-Xmulti-platform",
+    # Enable the serialization of the IR for the inline functions.
+    "-Xserialize-ir=inline",
 ]
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
