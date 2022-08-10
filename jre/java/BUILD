@@ -16,6 +16,7 @@ ALLOWED_J2KT_PACKAGES = [
     "//transpiler/javatests:__subpackages__",
     "//benchmarking:__subpackages__",
     "//third_party/java_src/xplat/kmpbench:__subpackages__",
+    "//apps/xplat/proto/kotlin:__subpackages__",
 ]
 
 JRE_JAVAC_VERSION_OPTS = [

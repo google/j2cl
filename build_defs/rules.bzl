@@ -13,6 +13,7 @@ load("//build_defs/internal_do_not_use:j2cl_rta.bzl", _j2cl_rta = "j2cl_rta")
 load("//build_defs/internal_do_not_use:j2cl_test.bzl", _j2cl_test = "j2cl_test")
 load("//build_defs/internal_do_not_use:j2wasm_test.bzl", _j2wasm_test = "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2kt_library.bzl", _j2kt_jvm_library = "j2kt_jvm_library", _j2kt_native_library = "j2kt_native_library")
+load("//build_defs/internal_do_not_use:j2kt_import.bzl", _j2kt_jvm_import = "j2kt_jvm_import", _j2kt_native_import = "j2kt_native_import")
 load("//build_defs/internal_do_not_use:gen_j2cl_tests.bzl", _gen_j2cl_tests = "gen_j2cl_tests")
 load("//build_defs/internal_do_not_use:j2wasm_application.bzl", _j2wasm_application = "j2wasm_application")
 load("//build_defs/internal_do_not_use:j2wasm_library.bzl", _j2wasm_library = "j2wasm_library")
@@ -45,6 +46,10 @@ gen_j2cl_tests = _gen_j2cl_tests
 j2kt_native_library = _j2kt_native_library
 
 j2kt_jvm_library = _j2kt_jvm_library
+
+j2kt_native_import = _j2kt_native_import
+
+j2kt_jvm_import = _j2kt_jvm_import
 
 j2wasm_application = _j2wasm_application
 
