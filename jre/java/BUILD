@@ -99,7 +99,10 @@ package_sources(
         "java/lang/JsException.java",
         "java/lang/IntegralToString.java",
         "java/lang/RealToString.java",
+        "javaemul/internal/ArrayStamper.java",
         "javaemul/internal/Casts.java",
+        "javaemul/internal/HashCodes.java",
+        "javaemul/internal/JsUtils.java",
         "java/util/AbstractHashMap.java",
         "java/util/AbstractMapEntry.java",
         "java/util/InternalHashCodeMap.java",
@@ -111,6 +114,7 @@ package_sources(
         # TODO(b/238299508): Include sources for transpiled collections
         "java/util/AbstractQueue.java",
         "java/util/AbstractSequentialList.java",
+        "java/util/BitSet.java",  # TODO(b/239684874): Implement BitSet when necessary
         "java/util/EnumMap.java",
         "java/util/EnumSet.java",
         "java/util/IdentityHashMap.java",

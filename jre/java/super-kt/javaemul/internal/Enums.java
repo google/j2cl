@@ -15,7 +15,7 @@
  */
 package javaemul.internal;
 
-/** Exists solely to make j2cl happy. */
+/** Class must exist as it is always loaded during tranpilation. */
 class Enums {
 
   private static class BoxedLightEnum<T> {}

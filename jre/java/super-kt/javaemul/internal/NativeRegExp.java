@@ -15,5 +15,10 @@
  */
 package javaemul.internal;
 
-/** Class must exist as it is always loaded during tranpilation. */
-public final class RangeHelper {}
+// TODO(b/237503140): Rewrite BigDecimal (without NativeRegexp)
+/** Temporary stub to avoid removing (non-working) java.math emulation entirely. */
+public final class NativeRegExp {
+  public NativeRegExp(String re, String options) {}
+
+  public native boolean test(String str);
+}

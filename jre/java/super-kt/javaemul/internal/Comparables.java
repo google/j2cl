@@ -16,4 +16,4 @@
 package javaemul.internal;
 
 /** Class must exist as it is always loaded during tranpilation. */
-public final class RangeHelper {}
+public final class Comparables {}
