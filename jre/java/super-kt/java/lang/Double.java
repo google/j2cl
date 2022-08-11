@@ -80,6 +80,7 @@ public final class Double extends Number implements Comparable<Double> {
 
   public static native boolean isNaN(double d);
 
+  @KtName("fromBits")
   public static native double longBitsToDouble(long bits);
 
   @Override

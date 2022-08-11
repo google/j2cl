@@ -37,3 +37,19 @@ fun Byte.Companion.parseByte(s: String): Byte = s.toByte()
 fun Byte.Companion.parseByte(s: String, radix: Int): Byte = s.toByte(radix)
 
 fun Byte.Companion.hashCode(b: Byte): Int = b.hashCode()
+
+fun Byte.shl(pos: Int): Byte {
+  val intVal = this.toInt()
+  return intVal.shl(pos).toByte()
+}
+
+fun Byte.shr(pos: Int): Byte {
+  val intVal = this.toInt()
+  return intVal.shr(pos).toByte()
+}
+
+fun Byte.and(other: Byte): Int {
+  val intVal = this.toInt()
+  val otherIntVal = other.toInt()
+  return intVal.and(otherIntVal)
+}

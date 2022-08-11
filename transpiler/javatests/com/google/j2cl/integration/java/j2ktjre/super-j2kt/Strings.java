@@ -40,6 +40,9 @@ public class Strings {
     char[] cArray = {'h', 'e', 'l', 'l', 'o'};
     assertEquals("ello", new String(cArray, 1, 4));
 
+    assertEquals("hello", String.copyValueOf(cArray));
+    assertEquals("ell", String.copyValueOf(cArray, 1, 3));
+
     assertEquals("a", String.valueOf('a'));
     assertEquals("5", String.valueOf(5));
     assertEquals("null", String.valueOf((Object) null));

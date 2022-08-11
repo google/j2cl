@@ -71,6 +71,7 @@ public final class Float extends Number implements Comparable<Float> {
   @Override
   public native int hashCode();
 
+  @KtName("fromBits")
   public static native float intBitsToFloat(int bits);
 
   @Override

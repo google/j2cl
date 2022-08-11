@@ -79,6 +79,22 @@ fun String.Companion.valueOf(c: Char): String = c.toString()
 
 fun String.Companion.valueOf(a: Any?): String = a.toString()
 
+fun String.Companion.valueOf(data: CharArray?): String {
+  return String(data)
+}
+
+fun String.Companion.valueOf(data: CharArray?, offset: Int, count: Int): String {
+  return String(data, offset, count)
+}
+
+fun String.Companion.copyValueOf(data: CharArray?): String {
+  return String(data)
+}
+
+fun String.Companion.copyValueOf(data: CharArray?, offset: Int, count: Int): String {
+  return String(data, offset, count)
+}
+
 internal fun String.Companion.fromCodePoint(codePoint: Int): String {
   if (codePoint >= Char.MIN_SUPPLEMENTARY_CODE_POINT) {
     val chars = CharArray(2)
@@ -91,7 +107,7 @@ internal fun String.Companion.fromCodePoint(codePoint: Int): String {
 
 fun String.compareToIgnoreCase(str: String): Int = this.compareTo(str, ignoreCase = true)
 
-fun String.getBytes() = encodeToByteArray()
+fun String.getBytes(): ByteArray = encodeToByteArray()
 
 fun String.getBytes(charsetName: String): ByteArray {
   try {

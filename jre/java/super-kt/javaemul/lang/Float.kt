@@ -37,3 +37,7 @@ fun Float.Companion.hashCode(f: Float): Int = f.hashCode()
 fun Float.Companion.isNaN(f: Float): Boolean = f.isNaN()
 
 fun Float.Companion.isInfinite(f: Float): Boolean = f.isInfinite()
+
+fun Float.Companion.floatToIntBits(f: Float): Int = f.toBits()
+
+fun Float.Companion.floatToRawIntBits(f: Float): Int = f.toRawBits()

@@ -124,6 +124,17 @@ public class Primitives {
 
     assertTrue(Double.isInfinite(dInf));
     assertFalse(Double.isInfinite(0.0));
+
+    assertEquals(3.1711515E-317, Double.longBitsToDouble(6418482L));
+    assertEquals(0x7ff8000000000000L, Double.doubleToLongBits(Double.NaN));
+    assertEquals(0x7ff8000000000000L, Double.doubleToRawLongBits(Double.NaN));
+
+    assertTrue(Double.isNaN(Double.longBitsToDouble(0x7ff8000000000001L)));
+    assertEquals(
+        0x7ff8000000000000L, Double.doubleToLongBits(Double.longBitsToDouble(0x7ff8000000000001L)));
+    assertEquals(
+        0x7ff8000000000001L,
+        Double.doubleToRawLongBits(Double.longBitsToDouble(0x7ff8000000000001L)));
   }
 
   private static void testShort() {
@@ -143,6 +154,12 @@ public class Primitives {
     assertEquals(c, Short.parseShort("16", 8));
 
     assertEquals(9, Short.hashCode(a));
+
+    short shlVal = 56, shrVal = 3;
+    assertEquals(shlVal, c << 2);
+    assertEquals(shrVal, c >> 2);
+
+    assertEquals(8, a & 0xA);
   }
 
   private static void testByte() {
@@ -162,6 +179,12 @@ public class Primitives {
     assertEquals(c, Byte.parseByte("16", 8));
 
     assertEquals(9, Byte.hashCode(a));
+
+    byte shlVal = 56, shrVal = 3;
+    assertEquals(shlVal, c << 2);
+    assertEquals(shrVal, c >> 2);
+
+    assertEquals(8, a & 0xA);
   }
 
   private static void testFloat() {
@@ -187,6 +210,17 @@ public class Primitives {
 
     assertTrue(Float.isInfinite(fInf));
     assertFalse(Float.isInfinite(0));
+
+    assertEquals(1.729997E-39F, Float.intBitsToFloat(1234567));
+
+    assertEquals(1234613304, Float.floatToIntBits(1234567F));
+
+    assertEquals(0x7fc00000, Float.floatToIntBits(Float.NaN));
+    assertEquals(0x7fc00000, Float.floatToIntBits(Float.NaN));
+
+    assertTrue(Float.isNaN(Float.intBitsToFloat(0x7fc00001)));
+    assertEquals(0x7fc00000, Float.floatToIntBits(Float.intBitsToFloat(0x7fc00001)));
+    assertEquals(0x7fc00001, Float.floatToRawIntBits(Float.intBitsToFloat(0x7fc00001)));
   }
 
   private static void testCharacter() {
@@ -212,6 +246,8 @@ public class Primitives {
 
     char[] cArray3 = {'a', 'b'};
     assertEquals(97, Character.codePointAt(cArray3, 0, 1));
-  }
 
+    assertEquals(10, Character.digit('a', 15));
+    assertEquals(-1, Character.digit('a', 5));
+  }
 }

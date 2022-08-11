@@ -37,3 +37,7 @@ fun Double.Companion.hashCode(d: Double): Int = d.hashCode()
 fun Double.Companion.isNaN(d: Double): Boolean = d.isNaN()
 
 fun Double.Companion.isInfinite(d: Double): Boolean = d.isInfinite()
+
+fun Double.Companion.doubleToLongBits(value: Double): Long = value.toBits()
+
+fun Double.Companion.doubleToRawLongBits(value: Double): Long = value.toRawBits()

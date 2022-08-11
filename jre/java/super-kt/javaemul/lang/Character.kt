@@ -70,3 +70,7 @@ fun Char.Companion.toChars(codePoint: Int, dst: CharArray?, dstIndex: Int): Int 
   dst[dstIndex] = codePoint.toChar()
   return 1
 }
+
+fun Char.Companion.digit(ch: Char, radix: Int): Int {
+  return ch.digitToIntOrNull(radix) ?: -1
+}
