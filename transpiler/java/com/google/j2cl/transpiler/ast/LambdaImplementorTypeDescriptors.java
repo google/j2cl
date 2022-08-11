@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import java.util.function.Function;
+import javax.annotation.Nullable;
 
 /** Utility TypeDescriptors methods used to synthesize lambda implementors. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
@@ -139,7 +140,7 @@ public final class LambdaImplementorTypeDescriptors {
         .build();
   }
 
-
+  @Nullable
   private static MethodDescriptor createRelatedMethodDeclaration(
       Function<DeclaredTypeDescriptor, MethodDescriptor> creator,
       DeclaredTypeDescriptor typeDescriptor) {

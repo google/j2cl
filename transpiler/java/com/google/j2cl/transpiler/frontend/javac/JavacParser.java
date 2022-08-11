@@ -35,6 +35,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.DiagnosticCollector;
@@ -59,6 +60,7 @@ public class JavacParser {
   }
 
   /** Returns a map from file paths to compilation units after Javac parsing. */
+  @Nullable
   public List<CompilationUnit> parseFiles(List<FileInfo> filePaths, boolean useTargetPath) {
 
     if (filePaths.isEmpty()) {

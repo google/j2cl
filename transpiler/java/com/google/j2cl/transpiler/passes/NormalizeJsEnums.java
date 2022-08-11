@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Normalizes JsEnum classes into a native JsEnum with overlays and a JsEnum that represents the
@@ -66,6 +67,7 @@ public class NormalizeJsEnums extends NormalizationPass {
     }
     type.accept(
         new AbstractRewriter() {
+          @Nullable
           @Override
           public Node rewriteField(Field field) {
             if (AstUtils.isJsEnumCustomValueField(field.getDescriptor())) {
@@ -86,6 +88,7 @@ public class NormalizeJsEnums extends NormalizationPass {
             return field;
           }
 
+          @Nullable
           @Override
           public Node rewriteMethod(Method method) {
             if (method.isConstructor()) {

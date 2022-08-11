@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -88,6 +89,7 @@ public final class JsInteropUtils {
         .build();
   }
 
+  @Nullable
   public static JsEnumInfo getJsEnumInfo(ITypeBinding typeBinding) {
     if (!isJsEnum(typeBinding)) {
       return null;

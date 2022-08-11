@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteral;
+import javax.annotation.Nullable;
 
 /** Performs static evaluation of string concatenation on constants. */
 public class StaticallyEvaluateStringConcatenation extends LibraryNormalizationPass {
@@ -46,6 +47,7 @@ public class StaticallyEvaluateStringConcatenation extends LibraryNormalizationP
         });
   }
 
+  @Nullable
   private static StringLiteral convertToStringLiteral(Expression expression) {
     if (expression instanceof StringLiteral) {
       return (StringLiteral) expression;

@@ -146,6 +146,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import javax.annotation.Nullable;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
@@ -163,6 +164,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     this.environment = environment;
   }
 
+  @Nullable
   private Type createType(ClassSymbol typeElement, JCTree sourcePositionNode) {
     if (typeElement == null) {
       return null;
@@ -378,6 +380,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .build();
   }
 
+  @Nullable
   private LabelReference getLabelReferenceOrNull(Name label) {
     return label == null ? null : labelsInScope.get(label.toString()).createReference();
   }
@@ -574,6 +577,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .build();
   }
 
+  @Nullable
   private Statement convertStatement(JCStatement jcStatement) {
     switch (jcStatement.getKind()) {
       case ASSERT:
@@ -620,6 +624,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
   }
 
+  @Nullable
   private Statement convertStatementOrNull(JCStatement statement) {
     return statement != null ? convertStatement(statement) : null;
   }
@@ -688,6 +693,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   // Return best guess for the position of a declaration node's name.
+  @Nullable
   private SourcePosition getNamePosition(String name, JCTree node) {
     int start = node.getPreferredPosition();
     if (start == -1) {
@@ -919,6 +925,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         (Number) literal.getValue());
   }
 
+  @Nullable
   private Expression convertFieldAccess(JCFieldAccess fieldAccess) {
     JCExpression expression = fieldAccess.getExpression();
     if (fieldAccess.name.contentEquals("class")) {
@@ -1066,6 +1073,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
    * instanceMethod() will return a resolved qualifier that may refer to "this" or to the enclosing
    * instances. A staticMethod() will return null.
    */
+  @Nullable
   private static JCExpression getExplicitQualifier(JCMethodInvocation methodInvocation) {
 
     if (methodInvocation.getMethodSelect().getKind() != Kind.IDENTIFIER) {
@@ -1146,6 +1154,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
   }
 
+  @Nullable
   private static JCExpression getQualifier(JCTree.JCExpression node) {
     switch (node.getKind()) {
       case IDENTIFIER:
@@ -1165,6 +1174,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     return convertExpression(expression.getExpression());
   }
 
+  @Nullable
   private Expression convertExpression(JCExpression jcExpression) {
     switch (jcExpression.getKind()) {
       case ARRAY_ACCESS:
@@ -1268,6 +1278,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
   }
 
+  @Nullable
   private Expression convertExpressionOrNull(JCExpression expression) {
     return expression != null ? convertExpression(expression) : null;
   }
@@ -1317,6 +1328,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         .collect(toImmutableList());
   }
 
+  @Nullable
   private static String getPackageJsNamespace(JCCompilationUnit javacUnit) {
     PackageSymbol packge = javacUnit.packge;
     if (packge == null) {

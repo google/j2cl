@@ -26,6 +26,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 
 /** Utilities for tools to process source files. */
 public class SourceUtils {
@@ -68,6 +69,7 @@ public class SourceUtils {
   private static final String TEMP_ROOT = "j2cl_sources";
 
   /** Returns all individual sources where source jars extracted and flattened. */
+  @Nullable
   public static Stream<FileInfo> getAllSources(List<String> sources, Problems problems) {
     // Make sure to extract all of the Jars into a single temp dir so that when later sorting
     // sourceFilePaths there is no instability introduced by differences in randomly generated
@@ -96,6 +98,7 @@ public class SourceUtils {
         .distinct();
   }
 
+  @Nullable
   private static ImmutableList<FileInfo> extractZip(
       String zipPath, Path sourcesDir, Problems problems) {
     try {

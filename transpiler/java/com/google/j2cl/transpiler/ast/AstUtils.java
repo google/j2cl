@@ -38,6 +38,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 
 /** Utility functions to manipulate J2CL AST. */
 public final class AstUtils {
@@ -84,6 +85,7 @@ public final class AstUtils {
    * Returns the constructor invocation (super call or this call) in a specified constructor, or
    * returns null if it does not have one.
    */
+  @Nullable
   public static ExpressionStatement getConstructorInvocationStatement(Method method) {
     for (Statement statement : method.getBody().getStatements()) {
       if (isConstructorInvocationStatement(statement)) {
@@ -111,6 +113,7 @@ public final class AstUtils {
    * Returns the constructor invocation (super call or this call) in a specified constructor, or
    * returns null if it does not have one.
    */
+  @Nullable
   public static MethodCall getConstructorInvocation(Method method) {
     ExpressionStatement statement = getConstructorInvocationStatement(method);
     if (statement == null) {
@@ -146,6 +149,7 @@ public final class AstUtils {
    * Returns the superclass constructor method descriptor this constructor delegates to if any or
    * {@code null} otherwise.
    */
+  @Nullable
   public static MethodDescriptor getDelegatedSuperConstructorDescriptor(Method method) {
     checkArgument(method.isConstructor());
     if (!hasConstructorInvocation(method)) {
@@ -960,6 +964,7 @@ public final class AstUtils {
   }
 
   /** Returns the value field descriptor for a JsEnum */
+  @Nullable
   private static FieldDescriptor getJsEnumValueFieldDescriptor(TypeDeclaration typeDeclaration) {
     checkState(typeDeclaration.isJsEnum());
     return typeDeclaration.getDeclaredFieldDescriptors().stream()

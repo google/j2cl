@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /** Propagates compile time constant fields. */
 public class PropagateConstants extends LibraryNormalizationPass {
@@ -44,6 +45,7 @@ public class PropagateConstants extends LibraryNormalizationPass {
     Map<FieldDescriptor, Literal> literalsByField = new LinkedHashMap<>();
     library.accept(
         new AbstractRewriter() {
+          @Nullable
           @Override
           public Field rewriteField(Field field) {
             if (isCompileTimeConstant(field)) {

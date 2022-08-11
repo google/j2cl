@@ -71,6 +71,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Driver for rewriting conversions in different contexts.
@@ -360,6 +361,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         .build();
   }
 
+  @Nullable
   private Expression rewriteInstanceQualifier(
       Expression qualifier, MemberDescriptor memberDescriptor) {
     if (qualifier == null) {

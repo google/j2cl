@@ -32,6 +32,7 @@ import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import javax.annotation.Nullable;
 
 /** Utilities for tools to process output. */
 public class OutputUtils {
@@ -101,6 +102,7 @@ public class OutputUtils {
     };
   }
 
+  @Nullable
   private static FileSystem initZipOutput(Path output, Problems problems) {
     if (Files.isDirectory(output)) {
       problems.fatal(FatalError.OUTPUT_LOCATION, output);

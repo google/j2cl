@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 
 /** A node that represents a Java Type declaration in the compilation unit. */
 @Visitable
@@ -304,6 +305,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return getMethods().stream().filter(Member::isConstructor).collect(toImmutableList());
   }
 
+  @Nullable
   public Method getDefaultConstructor() {
     // TODO(b/215777271): This doesn't consider varags constructors as a default constructor.
     return getMethods().stream()

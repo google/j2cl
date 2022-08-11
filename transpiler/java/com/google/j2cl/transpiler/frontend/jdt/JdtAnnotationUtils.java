@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.frontend.jdt;
 import com.google.common.base.VerifyException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.internal.compiler.impl.BooleanConstant;
@@ -28,6 +29,7 @@ import org.eclipse.jdt.internal.compiler.lookup.ElementValuePair;
 
 /** Utility functions to process JDT annotations. */
 public final class JdtAnnotationUtils {
+  @Nullable
   static IAnnotationBinding findAnnotationBindingByName(
       IAnnotationBinding[] annotations, String name) {
     if (annotations == null) {

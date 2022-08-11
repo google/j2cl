@@ -75,6 +75,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import javax.annotation.Nullable;
 
 /**
  * Creates factory methods for each constructor to encapsulate instantiations.
@@ -1027,6 +1028,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
   }
 
   /** Returns the init method for a type if it has one. */
+  @Nullable
   private static Method getInitMethod(Type type) {
     return type.getMethods().stream()
         .filter(m -> m.getDescriptor().isInitMethod())

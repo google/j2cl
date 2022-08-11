@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AssertStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Statement;
+import javax.annotation.Nullable;
 
 /** Removes assert statements. */
 public class RemoveAssertStatements extends NormalizationPass {
@@ -26,6 +27,7 @@ public class RemoveAssertStatements extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
+          @Nullable
           @Override
           public Statement rewriteAssertStatement(AssertStatement assertStatement) {
             return null;

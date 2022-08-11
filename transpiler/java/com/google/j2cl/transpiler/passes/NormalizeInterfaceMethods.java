@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import javax.annotation.Nullable;
 
 /**
  * Devirtualizes default and private instance interface methods and rewrites the corresponding
@@ -46,6 +47,7 @@ public class NormalizeInterfaceMethods extends NormalizationPass {
     }
     type.accept(
         new AbstractRewriter() {
+          @Nullable
           @Override
           public Method rewriteMethod(Method method) {
             MethodDescriptor methodDescriptor = method.getDescriptor();

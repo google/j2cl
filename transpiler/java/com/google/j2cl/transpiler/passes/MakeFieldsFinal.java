@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 
 /**
  * Marks instance fields as final if they are effectively final.
@@ -327,6 +328,7 @@ public class MakeFieldsFinal extends LibraryNormalizationPass {
   }
 
   /** Returns the field an expression writes to or null if it does not. */
+  @Nullable
   private static FieldAccess getModifiedFieldAccess(Object expression) {
     Expression modifiedExpression = getModifiedExpression(expression);
     if (modifiedExpression instanceof FieldAccess) {
@@ -336,6 +338,7 @@ public class MakeFieldsFinal extends LibraryNormalizationPass {
   }
 
   /** Returns the subexpressoin an expression writes to or null if it does not. */
+  @Nullable
   private static Expression getModifiedExpression(Object expression) {
     if (expression instanceof UnaryExpression) {
       UnaryExpression unaryExpression = (UnaryExpression) expression;

@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.Type;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Makes sure all fields are initialized correctly wrt Java semantics by making implicit default
@@ -41,6 +42,7 @@ public class NormalizeFieldInitialization extends NormalizationPass {
     List<Field> fieldDeclarations = new ArrayList<>();
     type.accept(
         new AbstractRewriter() {
+          @Nullable
           @Override
           public Member rewriteField(Field field) {
             fieldDeclarations.add(

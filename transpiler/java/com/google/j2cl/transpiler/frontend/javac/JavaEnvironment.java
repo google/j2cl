@@ -77,6 +77,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
@@ -128,6 +129,7 @@ class JavaEnvironment {
     builder.buildSingleton();
   }
 
+  @Nullable
   static PrefixOperator getPrefixOperator(com.sun.source.tree.Tree.Kind operator) {
     switch (operator) {
       case PREFIX_INCREMENT:
@@ -147,6 +149,7 @@ class JavaEnvironment {
     }
   }
 
+  @Nullable
   static PostfixOperator getPostfixOperator(com.sun.source.tree.Tree.Kind operator) {
     switch (operator) {
       case POSTFIX_INCREMENT:
@@ -158,6 +161,7 @@ class JavaEnvironment {
     }
   }
 
+  @Nullable
   static BinaryOperator getBinaryOperator(com.sun.source.tree.Tree.Kind operator) {
     switch (operator) {
       case ASSIGNMENT:
@@ -280,6 +284,7 @@ class JavaEnvironment {
   }
 
   /** Creates a type descriptor for the given TypeMirror, taking into account nullability. */
+  @Nullable
   private TypeDescriptor createTypeDescriptorWithNullability(
       TypeMirror typeMirror,
       List<? extends AnnotationMirror> elementAnnotations,
@@ -1247,6 +1252,7 @@ class JavaEnvironment {
     return JsInteropAnnotationUtils.getJsName(classSymbol);
   }
 
+  @Nullable
   private static String getJsNamespace(TypeElement classSymbol, PackageInfoCache packageInfoCache) {
     String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(classSymbol);
     if (jsNamespace != null) {
@@ -1261,6 +1267,7 @@ class JavaEnvironment {
     return null;
   }
 
+  @Nullable
   TypeDeclaration createDeclarationForType(final TypeElement typeElement) {
     if (typeElement == null) {
       return null;
@@ -1427,6 +1434,7 @@ class JavaEnvironment {
     return (TypeElement) enclosing;
   }
 
+  @Nullable
   private TypeMirror getFunctionalInterface(Type type) {
     if (type.isIntersection()) {
       return ((IntersectionType) type)
@@ -1445,18 +1453,21 @@ class JavaEnvironment {
         getFunctionalInterfaceMethod(type));
   }
 
+  @Nullable
   private MethodSymbol getFunctionalInterfaceMethodDecl(TypeMirror typeMirror) {
     return Optional.ofNullable(getFunctionalInterfaceMethodPair(typeMirror))
         .map(MethodDeclarationPair::getDeclarationMethodSymbol)
         .orElse(null);
   }
 
+  @Nullable
   private MethodSymbol getFunctionalInterfaceMethod(TypeMirror typeMirror) {
     return Optional.ofNullable(getFunctionalInterfaceMethodPair(typeMirror))
         .map(MethodDeclarationPair::getMethodSymbol)
         .orElse(null);
   }
 
+  @Nullable
   private MethodDeclarationPair getFunctionalInterfaceMethodPair(TypeMirror typeMirror) {
     Type type = (Type) typeMirror;
     if (!internalTypes.isFunctionalInterface(type)) {

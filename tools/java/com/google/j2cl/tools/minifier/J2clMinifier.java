@@ -36,6 +36,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 
 /**
  * A thread-safe, fast and pretty minifier/comment stripper for J2CL generated code.
@@ -379,6 +380,7 @@ public class J2clMinifier {
     buffer.recordStartOfNewIdentifier();
   }
 
+  @Nullable
   private static String extractFileKey(String fullPath) {
     if (fullPath == null) {
       return null;
@@ -629,6 +631,7 @@ public class J2clMinifier {
     writeNonIdentifierCharOrReplace(buffer, c);
   }
 
+  @Nullable
   private static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath) {
     if (codeRemovalInfoFilePath == null) {
       return null;

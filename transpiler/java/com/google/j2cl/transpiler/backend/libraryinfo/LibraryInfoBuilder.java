@@ -47,6 +47,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.Nullable;
 
 /** Traverse types and gather execution flow information for building call graph. */
 public final class LibraryInfoBuilder {
@@ -334,6 +335,7 @@ public final class LibraryInfoBuilder {
   }
 
   /** Serialize a LibraryInfo object into a JSON string. */
+  @Nullable
   public String toJson(Problems problems) {
     try {
       return JsonFormat.printer().print(build());

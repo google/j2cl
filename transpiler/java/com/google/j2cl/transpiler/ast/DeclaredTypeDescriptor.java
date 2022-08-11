@@ -217,6 +217,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .orElse(null);
   }
 
+  @Nullable
   @Override
   @Memoized
   public DeclaredTypeDescriptor getFunctionalInterface() {
@@ -485,6 +486,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   /** Retrieves the field descriptor named {@code name} if it exists, {@code null} otherwise. */
+  @Nullable
   public FieldDescriptor getFieldDescriptor(String name) {
     return getDeclaredFieldDescriptors().stream()
         .filter(f -> f.getName().equals(name))
@@ -496,6 +498,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    * Retrieves the method descriptor with name {@code name} and the corresponding parameter types if
    * there is a method with that signature.
    */
+  @Nullable
   public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
     String targetSignature = MethodDescriptor.buildMethodSignature(methodName, parameters);
     return getMethodDescriptors().stream()

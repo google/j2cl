@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the JavaScript output
@@ -212,6 +213,7 @@ public class OutputGeneratorStage {
     return String.format("%n// Kythe Indexing Metadata:%n// %s", metadata.toJson());
   }
 
+  @Nullable
   private String renderSourceMap(
       Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     try {

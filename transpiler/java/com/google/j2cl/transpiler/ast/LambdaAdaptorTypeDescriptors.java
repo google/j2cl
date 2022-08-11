@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import javax.annotation.Nullable;
 
 /** Utility TypeDescriptors methods related to lambda synthesis. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
@@ -278,6 +279,7 @@ public final class LambdaAdaptorTypeDescriptors {
         .withoutTypeParameters();
   }
 
+  @Nullable
   private static MethodDescriptor createRelatedMethodDeclaration(
       Function<DeclaredTypeDescriptor, MethodDescriptor> creator,
       DeclaredTypeDescriptor typeDescriptor) {

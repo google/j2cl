@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import javax.annotation.Nullable;
 
 /**
  * Statically evaluate String literal comparisons.
@@ -62,6 +63,7 @@ public class StaticallyEvaluateStringComparison extends NormalizationPass {
         });
   }
 
+  @Nullable
   private static Expression tryEvaluateEquality(Expression lhs, Expression rhs) {
     if (lhs instanceof StringLiteral && rhs instanceof StringLiteral) {
       return evaluateEquality((StringLiteral) lhs, (StringLiteral) rhs);

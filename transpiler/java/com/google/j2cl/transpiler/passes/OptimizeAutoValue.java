@@ -62,6 +62,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
+import javax.annotation.Nullable;
 
 /** Optimize AutoValue generated classes to reduce their code size. */
 public class OptimizeAutoValue extends LibraryNormalizationPass {
@@ -233,6 +234,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     library.accept(
         new AbstractRewriter() {
 
+          @Nullable
           @Override
           public Type rewriteType(Type type) {
             if (type.getTypeDescriptor() != fn.apply(type.getTypeDescriptor())) {
@@ -403,6 +405,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             });
   }
 
+  @Nullable
   private static TypeDeclaration getAutoValueParent(TypeDeclaration type) {
     return type == null
         ? null

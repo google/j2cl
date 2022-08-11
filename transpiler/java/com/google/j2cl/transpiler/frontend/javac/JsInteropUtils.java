@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import java.util.Set;
+import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
@@ -88,6 +89,7 @@ public final class JsInteropUtils {
         .build();
   }
 
+  @Nullable
   public static JsEnumInfo getJsEnumInfo(TypeElement type) {
     if (!isJsEnum(type)) {
       return null;

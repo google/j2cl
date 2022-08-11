@@ -20,6 +20,7 @@ java_library(
     # This is integrated by many core infra pieces and should be very lightweight.
     deps = [
         "//third_party:guava",
+        "//third_party:jsr305_annotations",
         "//tools/java/com/google/j2cl/tools/rta:code_removal_info_java_proto",
     ],
 )

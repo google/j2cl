@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
+import javax.annotation.Nullable;
 
 /**
  * Replace redundant casts in situations where we are sure that an object successfully casts to a
@@ -84,6 +85,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
         });
   }
 
+  @Nullable
   private static CastExpression getCast(Statement statement) {
     if (statement instanceof Block) {
       return getCast(Iterables.getFirst(((Block) statement).getStatements(), null));
@@ -94,6 +96,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
     return null;
   }
 
+  @Nullable
   private static CastExpression getCast(ExpressionStatement expressionStatement) {
     Expression expression = expressionStatement.getExpression();
     if (expression instanceof VariableDeclarationExpression) {
@@ -104,6 +107,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
     return null;
   }
 
+  @Nullable
   private static CastExpression getCast(
       VariableDeclarationExpression variableDeclarationExpression) {
     VariableDeclarationFragment variableDeclarationFragment =

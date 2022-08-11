@@ -69,6 +69,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return true;
   }
 
+  @Nullable
   @Override
   @Memoized
   public DeclaredTypeDescriptor getFunctionalInterface() {

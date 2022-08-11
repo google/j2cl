@@ -59,6 +59,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
+import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
@@ -83,6 +84,7 @@ class JdtEnvironment {
   private final Map<ITypeBinding, DeclaredTypeDescriptor>
       cachedDeclaredTypeDescriptorByTypeBindingOutOfNullMarkedScope = new HashMap<>();
 
+  @Nullable
   public static BinaryOperator getBinaryOperator(InfixExpression.Operator operator) {
     switch (operator.toString()) {
       case "*":
@@ -128,6 +130,7 @@ class JdtEnvironment {
     }
   }
 
+  @Nullable
   public static BinaryOperator getBinaryOperator(Assignment.Operator operator) {
     switch (operator.toString()) {
       case "=":
@@ -159,6 +162,7 @@ class JdtEnvironment {
     }
   }
 
+  @Nullable
   public static PrefixOperator getPrefixOperator(PrefixExpression.Operator operator) {
     switch (operator.toString()) {
       case "++":
@@ -178,6 +182,7 @@ class JdtEnvironment {
     }
   }
 
+  @Nullable
   public static PostfixOperator getPostfixOperator(PostfixExpression.Operator operator) {
     switch (operator.toString()) {
       case "++":
@@ -275,6 +280,7 @@ class JdtEnvironment {
   }
 
   /** Creates a type descriptor for the given type binding, taking into account nullability. */
+  @Nullable
   private TypeDescriptor createTypeDescriptorWithNullability(
       ITypeBinding typeBinding,
       IAnnotationBinding[] elementAnnotations,
@@ -327,6 +333,7 @@ class JdtEnvironment {
         .build();
   }
 
+  @Nullable
   private TypeDescriptor getLowerBoundTypeDescriptor(
       ITypeBinding typeBinding, boolean inNullMarkedScope) {
     ITypeBinding bound = typeBinding.getBound();
@@ -665,6 +672,7 @@ class JdtEnvironment {
   }
 
   /** Create a MethodDescriptor directly based on the given JDT method binding. */
+  @Nullable
   public MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
     if (methodBinding == null) {
       return null;
@@ -1054,6 +1062,7 @@ class JdtEnvironment {
     return typeDescriptor;
   }
 
+  @Nullable
   private MethodDescriptor getFunctionInterfaceMethod(ITypeBinding typeBinding) {
     IMethodBinding functionalInterfaceMethod = typeBinding.getFunctionalInterfaceMethod();
     if (!typeBinding.isInterface() || functionalInterfaceMethod == null) {
@@ -1109,6 +1118,7 @@ class JdtEnvironment {
     return JsInteropAnnotationUtils.getJsName(typeBinding);
   }
 
+  @Nullable
   private String getJsNamespace(ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
     checkArgument(!typeBinding.isPrimitive());
     String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(typeBinding);
@@ -1125,6 +1135,7 @@ class JdtEnvironment {
     return null;
   }
 
+  @Nullable
   public TypeDeclaration createDeclarationForType(final ITypeBinding typeBinding) {
     if (typeBinding == null) {
       return null;

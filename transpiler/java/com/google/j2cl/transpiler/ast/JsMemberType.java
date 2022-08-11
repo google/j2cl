@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import java.beans.Introspector;
+import javax.annotation.Nullable;
 
 /**
  * Indicates type of a JS member. A method is some flavor of JsMember if it is a JsProperty, or a
@@ -36,6 +37,7 @@ public enum JsMemberType {
   /** A JsProperty getter method. Usually in the form of getX()/isX(). */
   GETTER {
     /** Returns the property name from getter method that follows Java Bean naming conventions. */
+    @Nullable
     @Override
     public String computeJsName(MemberDescriptor memberDescriptor) {
       String methodName = memberDescriptor.getName();
@@ -51,6 +53,7 @@ public enum JsMemberType {
   /** A JsProperty setter method. Usually in the form of setX(x). */
   SETTER {
     /** Returns the property name from setter method that follows Java Bean naming conventions. */
+    @Nullable
     @Override
     public String computeJsName(MemberDescriptor memberDescriptor) {
       String methodName = memberDescriptor.getName();

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.frontend.javac;
 
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
@@ -26,6 +27,7 @@ import javax.lang.model.element.TypeElement;
 /** Utility functions to process annotations. */
 public final class AnnotationUtils {
 
+  @Nullable
   static AnnotationMirror findAnnotationBindingByName(
       List<? extends AnnotationMirror> annotations, String name) {
     if (annotations == null) {
@@ -41,6 +43,7 @@ public final class AnnotationUtils {
     return null;
   }
 
+  @Nullable
   static String getAnnotationParameterString(AnnotationMirror annotationMirror, String paramName) {
     if (annotationMirror == null) {
       return null;
@@ -54,6 +57,7 @@ public final class AnnotationUtils {
     return null;
   }
 
+  @Nullable
   static List<?> getAnnotationParameterArray(AnnotationMirror annotationMirror, String paramName) {
     if (annotationMirror == null) {
       return null;

@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import java.util.HashSet;
 import java.util.Set;
+import javax.annotation.Nullable;
 
 /**
  * Transforms certain anonymous inner classes that implement JsFunction interfaces into
@@ -142,6 +143,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     return true;
   }
 
+  @Nullable
   private static Method getSingleDeclaredMethod(Type type) {
     Method singleDeclaredMethod = null;
     for (Method method : type.getMethods()) {

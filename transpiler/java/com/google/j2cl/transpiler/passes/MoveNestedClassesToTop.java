@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
+import javax.annotation.Nullable;
 
 /** Promotes nested inner classes to top scope. */
 public class MoveNestedClassesToTop extends NormalizationPass {
@@ -37,6 +38,7 @@ public class MoveNestedClassesToTop extends NormalizationPass {
 
     compilationUnit.accept(
         new AbstractRewriter() {
+          @Nullable
           @Override
           public Node rewriteType(Type type) {
             if (getParent() instanceof CompilationUnit) {

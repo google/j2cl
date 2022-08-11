@@ -100,6 +100,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.Annotation;
@@ -165,6 +166,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return getCurrentCompilationUnit();
     }
 
+    @Nullable
     private String getPackageJsNamespace(
         org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       List<Annotation> packageAnnotations =
@@ -499,6 +501,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return type;
     }
 
+    @Nullable
     private Expression convertOrNull(org.eclipse.jdt.core.dom.Expression expression) {
       return expression != null ? convert(expression) : null;
     }
@@ -717,6 +720,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
+    @Nullable
     private LabelReference getLabelReferenceOrNull(SimpleName label) {
       return label == null ? null : labelsInScope.get(label.getIdentifier()).createReference();
     }
@@ -1165,6 +1169,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
+    @Nullable
     private Expression convert(org.eclipse.jdt.core.dom.QualifiedName expression) {
       IBinding binding = expression.resolveBinding();
       if (binding instanceof IVariableBinding) {
@@ -1194,6 +1199,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
+    @Nullable
     private Expression convert(org.eclipse.jdt.core.dom.SimpleName expression) {
       IBinding binding = expression.resolveBinding();
       if (binding instanceof IVariableBinding) {
@@ -1386,6 +1392,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           : convert(expression);
     }
 
+    @Nullable
     private Type createType(ITypeBinding typeBinding, ASTNode sourcePositionNode) {
       if (typeBinding == null) {
         return null;

@@ -24,6 +24,7 @@ import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.g
 
 import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
+import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -37,6 +38,7 @@ public class KtInteropUtils {
     return getKtTypeInfo(typeBinding.getAnnotations());
   }
 
+  @Nullable
   private static KtTypeInfo getKtTypeInfo(IAnnotationBinding[] annotationBindings) {
     IAnnotationBinding annotationBinding = getKtNativeAnnotation(annotationBindings);
     if (annotationBinding == null) {
@@ -70,6 +72,7 @@ public class KtInteropUtils {
         .build();
   }
 
+  @Nullable
   private static String getKtName(IAnnotationBinding[] annotationBindings) {
     IAnnotationBinding annotationBinding = getKtNameAnnotation(annotationBindings);
     return annotationBinding != null ? getStringAttribute(annotationBinding, "value") : null;

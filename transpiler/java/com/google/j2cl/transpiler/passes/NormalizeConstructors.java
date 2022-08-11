@@ -48,6 +48,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Transforms classes so that each has only (at most) one constructor to match the one constructor
@@ -206,6 +207,7 @@ public class NormalizeConstructors extends NormalizationPass {
    * <p>The description makes it easier to understand which of the Java constructors corresponds to
    * the JavaScript method.
    */
+  @Nullable
   private static String getConstructorRelatedJsDocDescription(
       String message, Method constructor, Type type) {
     // The constructors in Type might have rewritten before this method is invoked so we are getting

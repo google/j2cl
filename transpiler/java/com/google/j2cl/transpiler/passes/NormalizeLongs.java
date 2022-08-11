@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import javax.annotation.Nullable;
 
 /** Replaces long operations with corresponding long utils method calls. */
 public class NormalizeLongs extends NormalizationPass {
@@ -81,6 +82,7 @@ public class NormalizeLongs extends NormalizationPass {
   }
 
   // TODO(goktug): Remove this method after RewriteUnaryExpressions start running for all backends.
+  @Nullable
   private static String getLongOperationFunctionName(PrefixOperator prefixOperator) {
     switch (prefixOperator) {
       case MINUS:

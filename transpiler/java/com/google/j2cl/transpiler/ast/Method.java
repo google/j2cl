@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /** Method declaration. */
 @Visitable
@@ -62,6 +63,7 @@ public class Method extends Member implements MethodLike {
     return parameters;
   }
 
+  @Nullable
   @Override
   public Variable getJsVarargsParameter() {
     if (methodDescriptor.isJsMethodVarargs()) {
@@ -70,6 +72,7 @@ public class Method extends Member implements MethodLike {
     return null;
   }
 
+  @Nullable
   public Variable getVarargsParameter() {
     if (methodDescriptor.isVarargs()) {
       return Iterables.getLast(getParameters());

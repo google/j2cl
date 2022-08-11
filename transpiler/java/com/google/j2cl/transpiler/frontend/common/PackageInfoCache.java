@@ -207,6 +207,7 @@ public class PackageInfoCache {
   }
 
   /** Returns the first classpath entry that provides class file for the given type. */
+  @Nullable
   private String findOriginClassPathEntry(String typeName) {
     String classFilePath = typeName.replace('.', '/') + ".class";
 
@@ -278,6 +279,7 @@ public class PackageInfoCache {
     propagateSpecificInfo(classPathEntry, topLevelTypeSourceName);
   }
 
+  @Nullable
   private static String getPackageJsNamespace(Annotation[] packageAnnotations) {
     if (packageAnnotations == null) {
       return null;

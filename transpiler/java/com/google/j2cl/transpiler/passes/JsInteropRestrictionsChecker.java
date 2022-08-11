@@ -76,6 +76,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
+import javax.annotation.Nullable;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
@@ -363,6 +364,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
+  @Nullable
   private static Field getJsEnumValueField(Type type) {
     checkState(type.isJsEnum());
     return type.getFields().stream()
@@ -431,6 +433,7 @@ public class JsInteropRestrictionsChecker {
         field.getReadableDescription());
   }
 
+  @Nullable
   private static Expression getEnumConstantValue(Field field) {
     NewInstance initializer = (NewInstance) field.getInitializer();
     List<Expression> arguments = initializer.getArguments();
@@ -1801,6 +1804,7 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
+  @Nullable
   private static MethodDescriptor getPrimaryConstructorDescriptor(final Type type) {
     if (type.getConstructors().isEmpty()) {
       return type.getDeclaration().getDeclaredMethodDescriptors().stream()
@@ -1866,6 +1870,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
+  @Nullable
   private static Method getJsConstructor(Type type) {
     return type.getConstructors()
         .stream()
