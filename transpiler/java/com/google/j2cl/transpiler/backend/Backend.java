@@ -114,6 +114,7 @@ import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
+import com.google.j2cl.transpiler.passes.NormalizeSuperMethodCall;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
@@ -165,7 +166,8 @@ public enum Backend {
       return ImmutableList.of(
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
-          RestoreVariableScoping::new);
+          RestoreVariableScoping::new,
+          NormalizeSuperMethodCall::new);
     }
 
     @Override
@@ -300,7 +302,8 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
           ResolveImplicitInstanceQualifiers::new,
-          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false));
+          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
+          NormalizeSuperMethodCall::new);
     }
 
     @Override
@@ -398,7 +401,10 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
-      return ImmutableList.of(ResolveImplicitInstanceQualifiers::new);
+      return ImmutableList.of(
+          ResolveImplicitInstanceQualifiers::new,
+          // TODO(b/214453506): Remove when super references have isQualified.
+          NormalizeSuperMethodCall::new);
     }
 
     @Override

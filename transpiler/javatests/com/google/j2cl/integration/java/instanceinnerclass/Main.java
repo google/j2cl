@@ -15,6 +15,7 @@
  */
 package instanceinnerclass;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 /**
@@ -252,6 +253,73 @@ public class Main {
     }
   }
 
+  interface InterfaceWithDefault {
+    default String m() {
+      return "InterfaceWithDefault.m from " + origin();
+    }
+
+    String origin();
+  }
+
+  public static class SuperClass {
+    String s;
+
+    public SuperClass(String s) {
+      this.s = s;
+    }
+
+    public String m() {
+      return "SuperClass.m from " + s;
+    }
+  }
+
+  public static class EnclosingClass extends SuperClass {
+    String s;
+
+    public EnclosingClass(String s) {
+      super(s);
+      this.s = s;
+    }
+
+    public String m() {
+      return "EnclosingClass.m from " + s;
+    }
+
+    public class InnerClass extends EnclosingClass implements InterfaceWithDefault {
+      public InnerClass(String s) {
+        super(s);
+        this.s = s;
+      }
+
+      public String s;
+
+      @Override
+      public String origin() {
+        return s;
+      }
+
+      public String m() {
+        return "InnerClass.m";
+      }
+
+      public String superM() {
+        return super.m();
+      }
+
+      public String superMFromOuterClass() {
+        return EnclosingClass.super.m();
+      }
+
+      public String superDefaultMethodFromInnerClass() {
+        return InterfaceWithDefault.super.m();
+      }
+
+      public String mFromOuterClass() {
+        return EnclosingClass.this.m();
+      }
+    }
+  }
+
   public static void main(String[] args) {
     Main m = new Main(2);
     assertTrue(m.new A().fun() == 12);
@@ -286,5 +354,14 @@ public class Main {
     assertTrue(m.new W().new W1().test(8) == 262);
     assertTrue(m.new W().new W2().test(8) == 603);
     assertTrue(m.new W().new W3().test(8) == 944);
+
+    EnclosingClass outerClass = new EnclosingClass("Outer");
+    EnclosingClass.InnerClass innerClass = outerClass.new InnerClass("Super");
+    assertEquals(innerClass.m(), "InnerClass.m");
+    assertEquals(innerClass.superM(), "EnclosingClass.m from Super");
+    assertEquals(innerClass.superMFromOuterClass(), "SuperClass.m from Outer");
+    assertEquals(
+        innerClass.superDefaultMethodFromInnerClass(), "InterfaceWithDefault.m from Super");
+    assertEquals(innerClass.mFromOuterClass(), "EnclosingClass.m from Outer");
   }
 }

@@ -1084,43 +1084,24 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       IMethodBinding methodBinding = expression.resolveMethodBinding();
 
       MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodBinding);
-      List<Expression> arguments =
-          convertArguments(methodBinding, JdtEnvironment.asTypedList(expression.arguments()));
-      if (methodDescriptor.isDefaultMethod()) {
-        // This super method call targets the default method in the interface.
-        return MethodCall.Builder.from(methodDescriptor)
-            .setQualifier(new SuperReference(methodDescriptor.getEnclosingTypeDescriptor()))
-            .setArguments(arguments)
-            .setStaticDispatch(true)
-            .setSourcePosition(getSourcePosition(expression))
-            .build();
+
+      DeclaredTypeDescriptor qualifierTypeDescriptor;
+      if (expression.getQualifier() == null || methodDescriptor.isDefaultMethod()) {
+        // Call targeting a method in the super types.
+        qualifierTypeDescriptor = getCurrentType().getTypeDescriptor();
+      } else {
+        // This is a qualified super call, targeting an outer class method;
+        checkArgument(expression.getQualifier() instanceof SimpleName);
+        qualifierTypeDescriptor =
+            environment.createDeclaredTypeDescriptor(
+                (ITypeBinding) expression.getQualifier().resolveBinding());
       }
 
-      if (expression.getQualifier() == null) {
-        // This is a regular super call targeting a method in a superclass.
-        return MethodCall.Builder.from(methodDescriptor)
-            .setQualifier(new SuperReference(getCurrentType().getTypeDescriptor()))
-            .setArguments(arguments)
-            .setSourcePosition(getSourcePosition(expression))
-            .build();
-      }
-
-      // This is a qualified super call, targeting an outer class method; for that reason we use
-      // a ThisReference instead of a SuperReference and mark the class explicitly as static
-      // dispatch. SuperReferences are only used when targeting methods of an actual superclass of
-      // the class that enclosed the code in question.
-      // TODO(b/214453506 ): Preserve the original super qualifier and move the logic to mark
-      // as static dispatch to a pass.
-      checkArgument(expression.getQualifier() instanceof SimpleName);
-      ITypeBinding targetTypeBinding = (ITypeBinding) expression.getQualifier().resolveBinding();
       return MethodCall.Builder.from(methodDescriptor)
-          .setQualifier(
-              new ThisReference(
-                  environment.createDeclaredTypeDescriptor(targetTypeBinding),
-                  /* isQualified= */ true))
-          .setArguments(arguments)
+          .setQualifier(new SuperReference(qualifierTypeDescriptor))
+          .setArguments(
+              convertArguments(methodBinding, JdtEnvironment.asTypedList(expression.arguments())))
           .setSourcePosition(getSourcePosition(expression))
-          .setStaticDispatch(true)
           .build();
     }
 
