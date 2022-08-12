@@ -96,18 +96,18 @@ class CastPrimitives extends j_l_Object {
  /** @nodts */
  m_testReferenceToPrimitive__void() {
   let o = j_l_Object.$create__();
-  let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {boolean}*/ ($Casts.$to(o, Boolean)));
+  let bool = Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Casts.$to(o, Boolean)));
   let b = /**@type {!Byte}*/ ($Casts.$to(o, Byte)).m_byteValue__byte();
   let c = /**@type {!Character}*/ ($Casts.$to(o, Character)).m_charValue__char();
   let s = /**@type {!Short}*/ ($Casts.$to(o, Short)).m_shortValue__short();
   let i = /**@type {!Integer}*/ ($Casts.$to(o, Integer)).m_intValue__int();
   let l = /**@type {!Long}*/ ($Casts.$to(o, Long)).m_longValue__long();
   let f = /**@type {!Float}*/ ($Casts.$to(o, Float)).m_floatValue__float();
-  let d = Double.m_doubleValue__java_lang_Double(/**@type {number}*/ ($Casts.$to(o, Double)));
+  let d = Double.m_doubleValue__java_lang_Double__double(/**@type {number}*/ ($Casts.$to(o, Double)));
  }
  /** @nodts */
  m_testUnboxAndWiden__void() {
-  let boxedByte = Byte.m_valueOf__byte(0);
+  let boxedByte = Byte.m_valueOf__byte__java_lang_Byte(0);
   let s = boxedByte.m_byteValue__byte();
   let i = boxedByte.m_byteValue__byte();
   let l = $Primitives.widenByteToLong(boxedByte.m_byteValue__byte());
@@ -123,14 +123,14 @@ class CastPrimitives extends j_l_Object {
   let l = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
   let f = 3.4028234663852886E38;
   let d = 1.7976931348623157E308;
-  CastPrimitives.m_getShort__short(b);
-  CastPrimitives.m_getInt__int(b);
-  CastPrimitives.m_getLong__long($Primitives.widenByteToLong(b));
-  CastPrimitives.m_getFloat__float(b);
-  CastPrimitives.m_getDouble__double(b);
-  CastPrimitives.m_getFloat__float($Primitives.widenLongToFloat(l));
-  CastPrimitives.m_getDouble__double($Primitives.widenLongToDouble(l));
-  CastPrimitives.m_getDouble__double(f);
+  CastPrimitives.m_getShort__short__short(b);
+  CastPrimitives.m_getInt__int__int(b);
+  CastPrimitives.m_getLong__long__long($Primitives.widenByteToLong(b));
+  CastPrimitives.m_getFloat__float__float(b);
+  CastPrimitives.m_getDouble__double__double(b);
+  CastPrimitives.m_getFloat__float__float($Primitives.widenLongToFloat(l));
+  CastPrimitives.m_getDouble__double__double($Primitives.widenLongToDouble(l));
+  CastPrimitives.m_getDouble__double__double(f);
   IntValueHolder.$create__int(b);
   IntValueHolder.$create__int(c);
   IntValueHolder.$create__int(s);
@@ -153,23 +153,23 @@ class CastPrimitives extends j_l_Object {
   result = array[97 /* 'a' */];
  }
  /** @nodts @return {number} */
- static m_getShort__short(/** number */ value) {
+ static m_getShort__short__short(/** number */ value) {
   return value;
  }
  /** @nodts @return {number} */
- static m_getInt__int(/** number */ value) {
+ static m_getInt__int__int(/** number */ value) {
   return value;
  }
  /** @nodts @return {!$Long} */
- static m_getLong__long(/** !$Long */ value) {
+ static m_getLong__long__long(/** !$Long */ value) {
   return value;
  }
  /** @nodts @return {number} */
- static m_getFloat__float(/** number */ value) {
+ static m_getFloat__float__float(/** number */ value) {
   return value;
  }
  /** @nodts @return {number} */
- static m_getDouble__double(/** number */ value) {
+ static m_getDouble__double__double(/** number */ value) {
   return value;
  }
  /** @nodts */

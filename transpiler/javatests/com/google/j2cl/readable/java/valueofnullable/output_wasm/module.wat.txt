@@ -34,7 +34,7 @@
 )
 
 ;;; ValueOfNullable ValueOfNullable.$create()
-(func $$create__valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable
+(func $$create__@valueofnullable.ValueOfNullable
  (result (ref null $valueofnullable.ValueOfNullable))
  ;;@ valueofnullable/ValueOfNullable.java:18:13
  (local $$instance (ref null $valueofnullable.ValueOfNullable))
@@ -77,7 +77,7 @@
   ;; (ValueOfNullable.this.result = (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(ValueOfNullable.this.someChar),$stringBuilder.append(ValueOfNullable.this.nullableString),$stringBuilder.toString()));
   ;;@ valueofnullable/ValueOfNullable.java:21:2
   (struct.set $valueofnullable.ValueOfNullable $f_result__valueofnullable_ValueOfNullable(local.get $this) (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $$create__java_lang_StringBuilder@java.lang.StringBuilder ))
+   (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
    (drop (call_ref (ref.as_non_null (local.get $$stringBuilder))(struct.get_u $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__char__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (ref.as_non_null (local.get $$stringBuilder))(struct.get $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))

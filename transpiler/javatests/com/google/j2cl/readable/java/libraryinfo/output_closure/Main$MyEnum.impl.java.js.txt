@@ -28,15 +28,15 @@ class MyEnum extends Enum {
   this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
  }
  /** @nodts @return {!MyEnum} */
- static m_valueOf__java_lang_String(/** string */ name) {
+ static m_valueOf__java_lang_String__libraryinfo_Main_MyEnum(/** string */ name) {
   MyEnum.$clinit();
   if ($Equality.$same(MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_, null)) {
-   MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_ = /**@type {Map<?string, !MyEnum>}*/ ($Enums.createMapFromValues(MyEnum.m_values__()));
+   MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_ = /**@type {Map<?string, !MyEnum>}*/ ($Enums.createMapFromValues(MyEnum.m_values__arrayOf_libraryinfo_Main_MyEnum()));
   }
   return /**@type {MyEnum}*/ ($Enums.getValueFromNameAndMap(name, MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_));
  }
  /** @nodts @return {!Array<!MyEnum>} */
- static m_values__() {
+ static m_values__arrayOf_libraryinfo_Main_MyEnum() {
   MyEnum.$clinit();
   return /**@type {!Array<MyEnum>}*/ ($Arrays.$init([MyEnum.f_FOO__libraryinfo_Main_MyEnum, MyEnum.f_BAR__libraryinfo_Main_MyEnum], MyEnum));
  }

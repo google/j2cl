@@ -81,7 +81,7 @@
 )
 
 ;;; SubNumber SubNumber.$create()
-(func $$create__devirtualizedsupermethodcall_SubNumber@devirtualizedsupermethodcall.SubNumber
+(func $$create__@devirtualizedsupermethodcall.SubNumber
  (result (ref null $devirtualizedsupermethodcall.SubNumber))
  ;;@ devirtualizedsupermethodcall/Main.java:18:6
  (local $$instance (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -228,7 +228,7 @@
 )
 
 ;;; FooCallsSuperObjectMethod FooCallsSuperObjectMethod.$create()
-(func $$create__devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+(func $$create__@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
  (result (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  ;;@ devirtualizedsupermethodcall/Main.java:40:6
  (local $$instance (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
@@ -328,7 +328,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__devirtualizedsupermethodcall_Main@devirtualizedsupermethodcall.Main
+(func $$create__@devirtualizedsupermethodcall.Main
  (result (ref null $devirtualizedsupermethodcall.Main))
  ;;@ devirtualizedsupermethodcall/Main.java:47:13
  (local $$instance (ref null $devirtualizedsupermethodcall.Main))
@@ -371,13 +371,13 @@
  (block
   ;; FooCallsSuperObjectMethod fooCallsSuperObjectMethods = devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$create();
   ;;@ devirtualizedsupermethodcall/Main.java:49:4
-  (local.set $fooCallsSuperObjectMethods (call $$create__devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod ))
+  (local.set $fooCallsSuperObjectMethods (call $$create__@devirtualizedsupermethodcall.FooCallsSuperObjectMethod ))
   ;; fooCallsSuperObjectMethods.hashCode();
   ;;@ devirtualizedsupermethodcall/Main.java:50:4
   (drop (call_ref (ref.as_non_null (local.get $fooCallsSuperObjectMethods))(struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable $m_hashCode__int (struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod $vtable(local.get $fooCallsSuperObjectMethods)))))
   ;; SubNumber sn = devirtualizedsupermethodcall.SubNumber.$create();
   ;;@ devirtualizedsupermethodcall/Main.java:52:4
-  (local.set $sn (call $$create__devirtualizedsupermethodcall_SubNumber@devirtualizedsupermethodcall.SubNumber ))
+  (local.set $sn (call $$create__@devirtualizedsupermethodcall.SubNumber ))
   ;; sn.byteValue();
   ;;@ devirtualizedsupermethodcall/Main.java:53:4
   (drop (call_ref (ref.as_non_null (local.get $sn))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $sn)))))

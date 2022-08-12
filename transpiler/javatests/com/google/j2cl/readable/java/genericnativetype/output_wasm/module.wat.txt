@@ -48,7 +48,7 @@
 )
 
 ;;; BoundedJsArray<V> BoundedJsArray.$create(int size)
-(func $$create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray
+(func $$create__int@genericnativetype.BoundedJsArray
  (param $size i32)
  (result (ref null $genericnativetype.BoundedJsArray))
  ;;@ genericnativetype/BoundedJsArray.java:24:10
@@ -111,7 +111,7 @@
   (call $$clinit__void@genericnativetype.BoundedJsArray )
   ;; BoundedJsArray<V> array = genericnativetype.BoundedJsArray.$create(size);
   ;;@ genericnativetype/BoundedJsArray.java:40:4
-  (local.set $array (call $$create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (local.get $size)))
+  (local.set $array (call $$create__int@genericnativetype.BoundedJsArray (local.get $size)))
   ;; return array;
   ;;@ genericnativetype/BoundedJsArray.java:41:4
   (return (local.get $array))
@@ -170,7 +170,7 @@
 )
 
 ;;; BoundedJsArrays BoundedJsArrays.$create()
-(func $$create__genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays
+(func $$create__@genericnativetype.BoundedJsArrays
  (result (ref null $genericnativetype.BoundedJsArrays))
  ;;@ genericnativetype/BoundedJsArrays.java:19:10
  (local $$instance (ref null $genericnativetype.BoundedJsArrays))

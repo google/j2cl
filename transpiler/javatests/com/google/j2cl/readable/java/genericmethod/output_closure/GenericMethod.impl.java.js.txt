@@ -78,63 +78,63 @@ class GenericMethod extends j_l_Object {
   /**@type {Content}*/ (this.m_unchecked__java_lang_Object()).m_getProp__java_lang_String_$pp_genericmethod();
  }
  /** @nodts */
- static m_acceptsContent__genericmethod_GenericMethod_Content(/** Content */ content) {
+ static m_acceptsContent__genericmethod_GenericMethod_Content__void(/** Content */ content) {
   GenericMethod.$clinit();
  }
  /** @nodts */
- static m_acceptsString__java_lang_String(/** ?string */ string_1) {
+ static m_acceptsString__java_lang_String__void(/** ?string */ string_1) {
   GenericMethod.$clinit();
  }
  /** @nodts */
- static m_testErasureCast_wildcard__() {
+ static m_testErasureCast_wildcard__void() {
   GenericMethod.$clinit();
   let list = null;
   let content = /**@type {Container<Content>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
-  GenericMethod.m_acceptsString__java_lang_String(content.m_getProp__java_lang_String_$pp_genericmethod());
-  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(content);
+  GenericMethod.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String_$pp_genericmethod());
+  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(content);
   let nestedWildcardList = null;
   let nestedContent = /**@type {Container}*/ (/**@type {SuperContainer<Container>}*/ ($Casts.$to(nestedWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
-  GenericMethod.m_acceptsString__java_lang_String(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());
-  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(nestedContent);
+  GenericMethod.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());
+  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(nestedContent);
   let deepWildcardList = null;
   let deepContent = /**@type {SuperContainer<Container<?>>}*/ ($Casts.$to(deepWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
-  GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp__java_lang_String_$pp_genericmethod());
-  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(deepContent);
+  GenericMethod.m_acceptsString__java_lang_String__void(deepContent.m_getProp__java_lang_String_$pp_genericmethod());
+  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(deepContent);
  }
  /** @nodts @template CT, C */
- static m_testErasureCast_typeVariable__() {
+ static m_testErasureCast_typeVariable__void() {
   GenericMethod.$clinit();
   let list = null;
   let content = /**@type {Container<C>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
-  GenericMethod.m_acceptsString__java_lang_String(content.m_getProp__java_lang_String_$pp_genericmethod());
-  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(content);
+  GenericMethod.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String_$pp_genericmethod());
+  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(content);
   let nestedTypeVariableList = null;
   let nestedContent = /**@type {Container}*/ (/**@type {SuperContainer<CT>}*/ ($Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
-  GenericMethod.m_acceptsString__java_lang_String(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());
-  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(nestedContent);
+  GenericMethod.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());
+  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(nestedContent);
   let deepTypeVariableList = null;
   let deepContent = /**@type {SuperContainer<Container<C>>}*/ ($Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
-  GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp__java_lang_String_$pp_genericmethod());
-  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(deepContent);
+  GenericMethod.m_acceptsString__java_lang_String__void(deepContent.m_getProp__java_lang_String_$pp_genericmethod());
+  GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(deepContent);
  }
  /** @nodts @template V */
- static m_testLowerWildcardBound__genericmethod_GenericMethod_Consumer__java_lang_Object(/** Consumer<?> */ consumer, /** V */ v) {
+ static m_testLowerWildcardBound__genericmethod_GenericMethod_Consumer__java_lang_Object__void(/** Consumer<?> */ consumer, /** V */ v) {
   GenericMethod.$clinit();
   consumer.m_accept__java_lang_Object__void(v);
  }
  /** @nodts @template V @return {V} */
- static m_testUpperWildcardBound__genericmethod_GenericMethod_Supplier(/** Supplier<?> */ supplier) {
+ static m_testUpperWildcardBound__genericmethod_GenericMethod_Supplier__java_lang_Object(/** Supplier<?> */ supplier) {
   GenericMethod.$clinit();
   return supplier.m_get__java_lang_Object();
  }
  /** @nodts @template T_1 */
- static m_methodWithBoundTypeVariable__() {
+ static m_methodWithBoundTypeVariable__void() {
   GenericMethod.$clinit();
  }
  /** @nodts */
- static m_testMethodCallsWithCaptureTypeArguments__() {
+ static m_testMethodCallsWithCaptureTypeArguments__void() {
   GenericMethod.$clinit();
-  GenericMethod.m_methodWithBoundTypeVariable__();
+  GenericMethod.m_methodWithBoundTypeVariable__void();
  }
  /** @nodts */
  static $clinit() {

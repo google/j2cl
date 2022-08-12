@@ -136,7 +136,7 @@
 )
 
 ;;; SuperParent SuperParent.$create()
-(func $$create__instancejsmethods_SuperParent@instancejsmethods.SuperParent
+(func $$create__@instancejsmethods.SuperParent
  (result (ref null $instancejsmethods.SuperParent))
  ;;@ instancejsmethods/Main.java:24:6
  (local $$instance (ref null $instancejsmethods.SuperParent))
@@ -258,7 +258,7 @@
 )
 
 ;;; Parent Parent.$create()
-(func $$create__instancejsmethods_Parent@instancejsmethods.Parent
+(func $$create__@instancejsmethods.Parent
  (result (ref null $instancejsmethods.Parent))
  ;;@ instancejsmethods/Main.java:34:6
  (local $$instance (ref null $instancejsmethods.Parent))
@@ -398,7 +398,7 @@
 )
 
 ;;; Child Child.$create()
-(func $$create__instancejsmethods_Child@instancejsmethods.Child
+(func $$create__@instancejsmethods.Child
  (result (ref null $instancejsmethods.Child))
  ;;@ instancejsmethods/Main.java:68:6
  (local $$instance (ref null $instancejsmethods.Child))
@@ -551,7 +551,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__instancejsmethods_Main@instancejsmethods.Main
+(func $$create__@instancejsmethods.Main
  (result (ref null $instancejsmethods.Main))
  ;;@ instancejsmethods/Main.java:114:13
  (local $$instance (ref null $instancejsmethods.Main))
@@ -598,22 +598,22 @@
  (block
   ;; SuperParent sp = instancejsmethods.SuperParent.$create();
   ;;@ instancejsmethods/Main.java:116:4
-  (local.set $sp (call $$create__instancejsmethods_SuperParent@instancejsmethods.SuperParent ))
+  (local.set $sp (call $$create__@instancejsmethods.SuperParent ))
   ;; SuperParent p = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:117:4
-  (local.set $p (call $$create__instancejsmethods_Parent@instancejsmethods.Parent ))
+  (local.set $p (call $$create__@instancejsmethods.Parent ))
   ;; SuperParent c = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:118:4
-  (local.set $c (call $$create__instancejsmethods_Child@instancejsmethods.Child ))
+  (local.set $c (call $$create__@instancejsmethods.Child ))
   ;; Parent pp = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:119:4
-  (local.set $pp (call $$create__instancejsmethods_Parent@instancejsmethods.Parent ))
+  (local.set $pp (call $$create__@instancejsmethods.Parent ))
   ;; Parent cc = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:120:4
-  (local.set $cc (call $$create__instancejsmethods_Child@instancejsmethods.Child ))
+  (local.set $cc (call $$create__@instancejsmethods.Child ))
   ;; MyInterface intf = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:121:4
-  (local.set $intf (call $$create__instancejsmethods_Child@instancejsmethods.Child ))
+  (local.set $intf (call $$create__@instancejsmethods.Child ))
   ;; sp.fun(12,35);
   ;;@ instancejsmethods/Main.java:123:4
   (drop (call_ref (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
@@ -657,13 +657,13 @@
   (call $$clinit__void@instancejsmethods.Main )
   ;; SuperParent sp = instancejsmethods.SuperParent.$create();
   ;;@ instancejsmethods/Main.java:135:4
-  (local.set $sp (call $$create__instancejsmethods_SuperParent@instancejsmethods.SuperParent ))
+  (local.set $sp (call $$create__@instancejsmethods.SuperParent ))
   ;; Parent p = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:136:4
-  (local.set $p (call $$create__instancejsmethods_Parent@instancejsmethods.Parent ))
+  (local.set $p (call $$create__@instancejsmethods.Parent ))
   ;; Child c = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:137:4
-  (local.set $c (call $$create__instancejsmethods_Child@instancejsmethods.Child ))
+  (local.set $c (call $$create__@instancejsmethods.Child ))
   ;; sp.fun(12,35);
   ;;@ instancejsmethods/Main.java:139:4
   (drop (call_ref (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))

@@ -177,7 +177,7 @@
 )
 
 ;;; InterfaceImpl InterfaceImpl.$create()
-(func $$create__interfacejsbridge_InterfaceImpl@interfacejsbridge.InterfaceImpl
+(func $$create__@interfacejsbridge.InterfaceImpl
  (result (ref null $interfacejsbridge.InterfaceImpl))
  ;;@ interfacejsbridge/InterfaceImpl.java:34:13
  (local $$instance (ref null $interfacejsbridge.InterfaceImpl))
@@ -278,7 +278,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__interfacejsbridge_Main@interfacejsbridge.Main
+(func $$create__@interfacejsbridge.Main
  (result (ref null $interfacejsbridge.Main))
  ;;@ interfacejsbridge/Main.java:18:13
  (local $$instance (ref null $interfacejsbridge.Main))
@@ -323,16 +323,16 @@
  (block
   ;; MyJsInterface a = interfacejsbridge.InterfaceImpl.$create();
   ;;@ interfacejsbridge/Main.java:20:4
-  (local.set $a (call $$create__interfacejsbridge_InterfaceImpl@interfacejsbridge.InterfaceImpl ))
+  (local.set $a (call $$create__@interfacejsbridge.InterfaceImpl ))
   ;; MyInterface b = interfacejsbridge.InterfaceImpl.$create();
   ;;@ interfacejsbridge/Main.java:21:4
-  (local.set $b (call $$create__interfacejsbridge_InterfaceImpl@interfacejsbridge.InterfaceImpl ))
+  (local.set $b (call $$create__@interfacejsbridge.InterfaceImpl ))
   ;; SubInterface c = interfacejsbridge.InterfaceImpl.$create();
   ;;@ interfacejsbridge/Main.java:22:4
-  (local.set $c (call $$create__interfacejsbridge_InterfaceImpl@interfacejsbridge.InterfaceImpl ))
+  (local.set $c (call $$create__@interfacejsbridge.InterfaceImpl ))
   ;; InterfaceImpl d = interfacejsbridge.InterfaceImpl.$create();
   ;;@ interfacejsbridge/Main.java:23:4
-  (local.set $d (call $$create__interfacejsbridge_InterfaceImpl@interfacejsbridge.InterfaceImpl ))
+  (local.set $d (call $$create__@interfacejsbridge.InterfaceImpl ))
   ;; a.foo(1);
   ;;@ interfacejsbridge/Main.java:24:4
   (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.MyJsInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $a)) (i32.const 1))) )))

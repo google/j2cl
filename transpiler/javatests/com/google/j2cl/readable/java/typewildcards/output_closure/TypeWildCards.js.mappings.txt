@@ -18,7 +18,7 @@
 [unbounded(new GenericType<TypeWildCards>());] => [this.m_unbounded__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
 [upperBound(new GenericType<TypeWildCards>());] => [this.m_upperBound__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
 [lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
-[testBoundedTypeMemberAccess] => [m_testBoundedTypeMemberAccess__typewildcards_TypeWildCards_A]
+[testBoundedTypeMemberAccess] => [m_testBoundedTypeMemberAccess__typewildcards_TypeWildCards_A__void]
 [t] => [t] "t"
 [{
     int i = t.f;
@@ -27,7 +27,7 @@
 [int i = t.f;] => [let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [i] => [i] "i"
 [t.m();] => [/**@type {A}*/ (t).m_m__void();] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
-[testIntersectionBoundedTypeMemberAccess] => [m_testIntersectionBoundedTypeMemberAccess__typewildcards_TypeWildCards_A]
+[testIntersectionBoundedTypeMemberAccess] => [m_testIntersectionBoundedTypeMemberAccess__typewildcards_TypeWildCards_A__void]
 [t] => [t] "t"
 [{
     int i = t.f;
@@ -37,11 +37,11 @@
 [i] => [i] "i"
 [t.m();] => [/**@type {A}*/ (t).m_m__void();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [t.n();] => [/**@type {!Y}*/ ($Casts.$to(t, Y)).m_n__void();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
-[transform] => [m_transform__java_util_List__java_util_function_Function]
+[transform] => [m_transform__java_util_List__java_util_function_Function__java_util_List]
 [from] => [from] "from"
 [function] => [function_1] "function"
 [return null;] => [return null;] "typewildcards.TypeWildCards.transform"
-[concat] => [m_concat__java_util_List__java_util_List]
+[concat] => [m_concat__java_util_List__java_util_List__java_util_List]
 [a] => [a] "a"
 [b] => [b] "b"
 [return null;] => [return null;] "typewildcards.TypeWildCards.concat"
@@ -53,7 +53,7 @@
 [List<Integer> integers =
         transform(
 ...              return a.get();
-            });] => [let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__java_util_List__java_util_function_Function(/**@type {List<*>}*/ (TypeWildCards.m_concat__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** ? */ a) =>{
+            });] => [let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__java_util_List__java_util_function_Function__java_util_List(/**@type {List<*>}*/ (TypeWildCards.m_concat__java_util_List__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** ? */ a) =>{
    /**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__java_lang_String();
    return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__java_lang_Integer();
   })));] "typewildcards.TypeWildCards.testInferredGenericIntersection"
@@ -61,10 +61,10 @@
 [a] => [a] "a"
 [a.getKey();] => [/**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__java_lang_String();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
 [return a.get();] => [return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__java_lang_Integer();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
-[takesRecursiveGeneric] => [m_takesRecursiveGeneric__typewildcards_GenericType]
+[takesRecursiveGeneric] => [m_takesRecursiveGeneric__typewildcards_GenericType__void]
 [foo] => [foo] "foo"
 [testRecursiveGeneric] => [m_testRecursiveGeneric__void]
-[takesRecursiveGeneric(new Foo());] => [TypeWildCards.m_takesRecursiveGeneric__typewildcards_GenericType(Foo.$create__typewildcards_TypeWildCards(this));] "typewildcards.TypeWildCards.testRecursiveGeneric"
+[takesRecursiveGeneric(new Foo());] => [TypeWildCards.m_takesRecursiveGeneric__typewildcards_GenericType__void(Foo.$create__typewildcards_TypeWildCards(this));] "typewildcards.TypeWildCards.testRecursiveGeneric"
 [TypeWildCards] => [$clinit]
 [TypeWildCards] => [TypeWildCards.$clinit = () =>{};] "typewildcards.TypeWildCards.<clinit>"
 [TypeWildCards] => [TypeWildCards.$loadModules();] "typewildcards.TypeWildCards.<clinit>"

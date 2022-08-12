@@ -50,7 +50,7 @@
 )
 
 ;;; NativeArray NativeArray.$create()
-(func $$create__nestednativetype_NativeArray@nestednativetype.NativeArray
+(func $$create__@nestednativetype.NativeArray
  (result (ref null $nestednativetype.NativeArray))
  ;;@ nestednativetype/NativeArray.java:23:19
  (local $$instance (ref null $nestednativetype.NativeArray))
@@ -92,7 +92,7 @@
  (block
   ;; return nestednativetype.NativeArray.1.$create(NativeArray.this);
   ;;@ nestednativetype/NativeArray.java:26:4
-  (return (call $$create__nestednativetype_NativeArray__nestednativetype_NativeArray_1@nestednativetype.NativeArray.1 (local.get $this)))
+  (return (call $$create__nestednativetype_NativeArray@nestednativetype.NativeArray.1 (local.get $this)))
  )
 )
 (elem declare func $m_a__java_lang_Object@nestednativetype.NativeArray)
@@ -150,7 +150,7 @@
 )
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create(NativeArray $outer_this)
-(func $$create__nestednativetype_NativeArray__nestednativetype_NativeArray_1@nestednativetype.NativeArray.1
+(func $$create__nestednativetype_NativeArray@nestednativetype.NativeArray.1
  (param $$outer_this (ref null $nestednativetype.NativeArray))
  (result (ref null $nestednativetype.NativeArray.1))
  ;;@ nestednativetype/NativeArray.java:26:24

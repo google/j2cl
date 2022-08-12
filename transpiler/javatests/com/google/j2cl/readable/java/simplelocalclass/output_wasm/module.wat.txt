@@ -123,7 +123,7 @@
 )
 
 ;;; SimpleLocalClass SimpleLocalClass.$create()
-(func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass
+(func $$create__@simplelocalclass.SimpleLocalClass
  (result (ref null $simplelocalclass.SimpleLocalClass))
  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
  (local $$instance (ref null $simplelocalclass.SimpleLocalClass))
@@ -171,14 +171,14 @@
   (block
    ;; InnerClass $qualifier = simplelocalclass.SimpleLocalClass.1InnerClass.$create(SimpleLocalClass.this,localVar,p);
    ;;@ simplelocalclass/SimpleLocalClass.java:26:4
-   (local.set $$qualifier (call $$create__simplelocalclass_SimpleLocalClass__int__int__simplelocalclass_SimpleLocalClass_1InnerClass@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this)(local.get $localVar)(local.get $p)))
+   (local.set $$qualifier (call $$create__simplelocalclass_SimpleLocalClass__int__int@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this)(local.get $localVar)(local.get $p)))
    ;; $qualifier.fun();
    ;;@ simplelocalclass/SimpleLocalClass.java:26:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable $m_fun__int (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $vtable(local.get $$qualifier)))))
   )
   ;; simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$create(SimpleLocalClass.this);
   ;;@ simplelocalclass/SimpleLocalClass.java:30:4
-  (drop (call $$create__simplelocalclass_SimpleLocalClass__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (local.get $this)))
+  (drop (call $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (local.get $this)))
  )
 )
 (elem declare func $m_test__int__void@simplelocalclass.SimpleLocalClass)
@@ -267,7 +267,7 @@
 )
 
 ;;; InnerClass InnerClass.$create(SimpleLocalClass $outer_this, int $captured_localVar, int $captured_p)
-(func $$create__simplelocalclass_SimpleLocalClass__int__int__simplelocalclass_SimpleLocalClass_1InnerClass@simplelocalclass.SimpleLocalClass.1InnerClass
+(func $$create__simplelocalclass_SimpleLocalClass__int__int@simplelocalclass.SimpleLocalClass.1InnerClass
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (param $$captured_localVar i32)
  (param $$captured_p i32)
@@ -373,7 +373,7 @@
 )
 
 ;;; InnerClassWithoutCaptures InnerClassWithoutCaptures.$create(SimpleLocalClass $outer_this)
-(func $$create__simplelocalclass_SimpleLocalClass__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
+(func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
@@ -461,7 +461,7 @@
 )
 
 ;;; InnerClass InnerClass.$create(SimpleLocalClass $outer_this, int $captured_localVar)
-(func $$create__simplelocalclass_SimpleLocalClass__int__simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass
+(func $$create__simplelocalclass_SimpleLocalClass__int@simplelocalclass.SimpleLocalClass.2InnerClass
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (param $$captured_localVar i32)
  (result (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
@@ -563,7 +563,7 @@
 )
 
 ;;; Abc$InnerClass Abc$InnerClass.$create(SimpleLocalClass $outer_this)
-(func $$create__simplelocalclass_SimpleLocalClass__simplelocalclass_SimpleLocalClass_1Abc$InnerClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
+(func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
@@ -649,7 +649,7 @@
 )
 
 ;;; Klm$InnerClass Klm$InnerClass.$create(SimpleLocalClass $outer_this)
-(func $$create__simplelocalclass_SimpleLocalClass__simplelocalclass_SimpleLocalClass_1Klm$InnerClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
+(func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  ;;@ simplelocalclass/SimpleLocalClass.java:44:10

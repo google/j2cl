@@ -11,24 +11,24 @@
 [test] => [m_test__void]
 [NativeJsTypeWithOverlay n = new NativeJsTypeWithOverlay();] => [let n = new NativeJsTypeWithOverlay();] "jsoverlay.Main.test"
 [n] => [n] "n"
-[n.callM();] => [$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay(n);] "jsoverlay.Main.test"
-[NativeJsTypeWithOverlay.fun();] => [$Overlay.m_fun__();] "jsoverlay.Main.test"
+[n.callM();] => [$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int(n);] "jsoverlay.Main.test"
+[NativeJsTypeWithOverlay.fun();] => [$Overlay.m_fun__int();] "jsoverlay.Main.test"
 [NativeJsTypeWithOverlay.n();] => [NativeJsTypeWithOverlay.n();] "jsoverlay.Main.test"
-[NativeJsTypeWithOverlay.bar();] => [$Overlay.m_bar__();] "jsoverlay.Main.test"
-[n.foo();] => [$Overlay.m_foo__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay(n);] "jsoverlay.Main.test"
+[NativeJsTypeWithOverlay.bar();] => [$Overlay.m_bar__int();] "jsoverlay.Main.test"
+[n.foo();] => [$Overlay.m_foo__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int(n);] "jsoverlay.Main.test"
 [int a =
         NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT + NativeJsTypeWithOverlay.nonJsOverlayField;] => [let a = $Overlay.f_COMPILE_TIME_CONSTANT__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay + NativeJsTypeWithOverlay.nonJsOverlayField | 0;] "jsoverlay.Main.test"
 [a] => [a] "a"
 [NativeJsTypeWithOverlay.staticField = null;] => [$Overlay.f_staticField__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay = null;] "jsoverlay.Main.test"
-[NativeJsTypeWithOverlay.varargs(1, 2, 3);] => [$Overlay.m_varargs__arrayOf_int(/**@type {!Array<number>}*/ ($Arrays.$init([1, 2, 3], $$int)));] "jsoverlay.Main.test"
-[n.baz();] => [$Overlay.m_baz__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay(n);] "jsoverlay.Main.test"
+[NativeJsTypeWithOverlay.varargs(1, 2, 3);] => [$Overlay.m_varargs__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$init([1, 2, 3], $$int)));] "jsoverlay.Main.test"
+[n.baz();] => [$Overlay.m_baz__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int(n);] "jsoverlay.Main.test"
 [NativeJsTypeInterfaceWithOverlay foo = new NativeJsTypeInterfaceWithOverlayImpl();] => [let foo = NativeJsTypeInterfaceWithOverlayImpl.$create__();] "jsoverlay.Main.test"
 [foo] => [foo] "foo"
 [foo.m();] => [foo.m();] "jsoverlay.Main.test"
-[foo.callM();] => [NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(foo);] "jsoverlay.Main.test"
+[foo.callM();] => [NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__int(foo);] "jsoverlay.Main.test"
 [String b =
         NativeJsTypeInterfaceWithOverlay.COMPILE_TIME_CONSTANT
-            + NativeJsTypeInterfaceWithOverlay.staticField;] => [let b = j_l_String.m_valueOf__java_lang_Object(NativeJsTypeInterfaceWithOverlay_$Overlay.f_COMPILE_TIME_CONSTANT__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay) + j_l_String.m_valueOf__java_lang_Object(NativeJsTypeInterfaceWithOverlay_$Overlay.f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);] "jsoverlay.Main.test"
+            + NativeJsTypeInterfaceWithOverlay.staticField;] => [let b = j_l_String.m_valueOf__java_lang_Object__java_lang_String(NativeJsTypeInterfaceWithOverlay_$Overlay.f_COMPILE_TIME_CONSTANT__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(NativeJsTypeInterfaceWithOverlay_$Overlay.f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);] "jsoverlay.Main.test"
 [b] => [b] "b"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "jsoverlay.Main.<clinit>"

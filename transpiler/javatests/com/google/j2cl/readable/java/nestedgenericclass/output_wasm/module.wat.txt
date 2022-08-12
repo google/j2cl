@@ -174,7 +174,7 @@
 )
 
 ;;; NestedGenericClass<T> NestedGenericClass.$create()
-(func $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass
+(func $$create__@nestedgenericclass.NestedGenericClass
  (result (ref null $nestedgenericclass.NestedGenericClass))
  ;;@ nestedgenericclass/NestedGenericClass.java:18:13
  (local $$instance (ref null $nestedgenericclass.NestedGenericClass))
@@ -216,10 +216,10 @@
  (block
   ;; nestedgenericclass.NestedGenericClass.1E.$create(NestedGenericClass.this);
   ;;@ nestedgenericclass/NestedGenericClass.java:41:4
-  (drop (call $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_1E@nestedgenericclass.NestedGenericClass.1E (local.get $this)))
+  (drop (call $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.1E (local.get $this)))
   ;; nestedgenericclass.NestedGenericClass.1F.$create(NestedGenericClass.this);
   ;;@ nestedgenericclass/NestedGenericClass.java:42:4
-  (drop (call $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_1F@nestedgenericclass.NestedGenericClass.1F (local.get $this)))
+  (drop (call $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.1F (local.get $this)))
  )
 )
 (elem declare func $m_fun__java_lang_Object__void@nestedgenericclass.NestedGenericClass)
@@ -236,7 +236,7 @@
   (block
    ;; G<Error, T, T> $qualifier = nestedgenericclass.NestedGenericClass.1G.$create(NestedGenericClass.this);
    ;;@ nestedgenericclass/NestedGenericClass.java:53:4
-   (local.set $$qualifier (call $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_1G@nestedgenericclass.NestedGenericClass.1G (local.get $this)))
+   (local.set $$qualifier (call $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.1G (local.get $this)))
    ;; $qualifier.bar();
    ;;@ nestedgenericclass/NestedGenericClass.java:53:4
    (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $nestedgenericclass.NestedGenericClass.1G.vtable $m_bar__void (struct.get $nestedgenericclass.NestedGenericClass.1G $vtable(local.get $$qualifier))))
@@ -258,19 +258,19 @@
  (block
   ;; NestedGenericClass<Number> n = nestedgenericclass.NestedGenericClass.$create();
   ;;@ nestedgenericclass/NestedGenericClass.java:57:4
-  (local.set $n (call $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass ))
+  (local.set $n (call $$create__@nestedgenericclass.NestedGenericClass ))
   ;; A<Error, Number> a = nestedgenericclass.NestedGenericClass.A.$create(n);
   ;;@ nestedgenericclass/NestedGenericClass.java:58:4
-  (local.set $a (call $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_A@nestedgenericclass.NestedGenericClass.A (local.get $n)))
+  (local.set $a (call $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.A (local.get $n)))
   ;; B<Exception, Error, Number> b = nestedgenericclass.NestedGenericClass.A.B.$create(a);
   ;;@ nestedgenericclass/NestedGenericClass.java:59:4
-  (local.set $b (call $$create__nestedgenericclass_NestedGenericClass_A__nestedgenericclass_NestedGenericClass_A_B@nestedgenericclass.NestedGenericClass.A.B (local.get $a)))
+  (local.set $b (call $$create__nestedgenericclass_NestedGenericClass_A@nestedgenericclass.NestedGenericClass.A.B (local.get $a)))
   ;; nestedgenericclass.NestedGenericClass.C.$create(n);
   ;;@ nestedgenericclass/NestedGenericClass.java:61:4
-  (drop (call $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_C@nestedgenericclass.NestedGenericClass.C (local.get $n)))
+  (drop (call $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.C (local.get $n)))
   ;; nestedgenericclass.NestedGenericClass.C.D.$create(nestedgenericclass.NestedGenericClass.C.$create(n));
   ;;@ nestedgenericclass/NestedGenericClass.java:62:4
-  (drop (call $$create__nestedgenericclass_NestedGenericClass_C__nestedgenericclass_NestedGenericClass_C_D@nestedgenericclass.NestedGenericClass.C.D (call $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_C@nestedgenericclass.NestedGenericClass.C (local.get $n))))
+  (drop (call $$create__nestedgenericclass_NestedGenericClass_C@nestedgenericclass.NestedGenericClass.C.D (call $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.C (local.get $n))))
  )
 )
 (elem declare func $m_test__void@nestedgenericclass.NestedGenericClass)
@@ -328,7 +328,7 @@
 )
 
 ;;; B<T, T, T> B.$create(A<T, T> $outer_this)
-(func $$create__nestedgenericclass_NestedGenericClass_A__nestedgenericclass_NestedGenericClass_A_B@nestedgenericclass.NestedGenericClass.A.B
+(func $$create__nestedgenericclass_NestedGenericClass_A@nestedgenericclass.NestedGenericClass.A.B
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass.A))
  (result (ref null $nestedgenericclass.NestedGenericClass.A.B))
  ;;@ nestedgenericclass/NestedGenericClass.java:22:6
@@ -414,7 +414,7 @@
 )
 
 ;;; A<T, T> A.$create(NestedGenericClass<T> $outer_this)
-(func $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_A@nestedgenericclass.NestedGenericClass.A
+(func $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.A
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.A))
  ;;@ nestedgenericclass/NestedGenericClass.java:20:15
@@ -501,7 +501,7 @@
 )
 
 ;;; D<T> D.$create(C<T> $outer_this)
-(func $$create__nestedgenericclass_NestedGenericClass_C__nestedgenericclass_NestedGenericClass_C_D@nestedgenericclass.NestedGenericClass.C.D
+(func $$create__nestedgenericclass_NestedGenericClass_C@nestedgenericclass.NestedGenericClass.C.D
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass.C))
  (result (ref null $nestedgenericclass.NestedGenericClass.C.D))
  ;;@ nestedgenericclass/NestedGenericClass.java:30:17
@@ -588,7 +588,7 @@
 )
 
 ;;; C<T> C.$create(NestedGenericClass<T> $outer_this)
-(func $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_C@nestedgenericclass.NestedGenericClass.C
+(func $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.C
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.C))
  ;;@ nestedgenericclass/NestedGenericClass.java:27:15
@@ -674,7 +674,7 @@
 )
 
 ;;; E<S, S, T> E.$create(NestedGenericClass<T> $outer_this)
-(func $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_1E@nestedgenericclass.NestedGenericClass.1E
+(func $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.1E
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.1E))
  ;;@ nestedgenericclass/NestedGenericClass.java:37:10
@@ -761,7 +761,7 @@
 )
 
 ;;; F<S, T> F.$create(NestedGenericClass<T> $outer_this)
-(func $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_1F@nestedgenericclass.NestedGenericClass.1F
+(func $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.1F
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.1F))
  ;;@ nestedgenericclass/NestedGenericClass.java:38:10
@@ -847,7 +847,7 @@
 )
 
 ;;; H<T, T, T, T, T> H.$create(G<T, T, T> $outer_this)
-(func $$create__nestedgenericclass_NestedGenericClass_1G__nestedgenericclass_NestedGenericClass_1G_1H@nestedgenericclass.NestedGenericClass.1G.1H
+(func $$create__nestedgenericclass_NestedGenericClass_1G@nestedgenericclass.NestedGenericClass.1G.1H
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass.1G))
  (result (ref null $nestedgenericclass.NestedGenericClass.1G.1H))
  ;;@ nestedgenericclass/NestedGenericClass.java:49:14
@@ -934,7 +934,7 @@
 )
 
 ;;; G<T, T, T> G.$create(NestedGenericClass<T> $outer_this)
-(func $$create__nestedgenericclass_NestedGenericClass__nestedgenericclass_NestedGenericClass_1G@nestedgenericclass.NestedGenericClass.1G
+(func $$create__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.1G
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.1G))
  ;;@ nestedgenericclass/NestedGenericClass.java:47:10
@@ -977,7 +977,7 @@
  (block
   ;; nestedgenericclass.NestedGenericClass.1G.1H.$create($1G.this);
   ;;@ nestedgenericclass/NestedGenericClass.java:50:8
-  (drop (call $$create__nestedgenericclass_NestedGenericClass_1G__nestedgenericclass_NestedGenericClass_1G_1H@nestedgenericclass.NestedGenericClass.1G.1H (local.get $this)))
+  (drop (call $$create__nestedgenericclass_NestedGenericClass_1G@nestedgenericclass.NestedGenericClass.1G.1H (local.get $this)))
  )
 )
 (elem declare func $m_bar__void@nestedgenericclass.NestedGenericClass.1G)

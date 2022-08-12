@@ -69,7 +69,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__interfaces_Main@interfaces.Main
+(func $$create__@interfaces.Main
  (result (ref null $interfaces.Main))
  ;;@ interfaces/Main.java:18:13
  (local $$instance (ref null $interfaces.Main))
@@ -112,7 +112,7 @@
  (block
   ;; Interface i = interfaces.Main.Implementor.$create(Main.this);
   ;;@ interfaces/Main.java:50:4
-  (local.set $i (call $$create__interfaces_Main__interfaces_Main_Implementor@interfaces.Main.Implementor (local.get $this)))
+  (local.set $i (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
   ;; i.interfaceMethod();
   ;;@ interfaces/Main.java:51:4
   (call_ref (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast_static $interfaces.Main.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1))) ))
@@ -125,7 +125,7 @@
   ;; int x = ((interfaces.Main.Implementor.$create(Main.this),1) + 2);
   ;;@ interfaces/Main.java:54:4
   (local.set $x (i32.add (block (result i32)
-   (drop (call $$create__interfaces_Main__interfaces_Main_Implementor@interfaces.Main.Implementor (local.get $this)))
+   (drop (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
    (i32.const 1)
   ) (i32.const 2)))
  )
@@ -309,7 +309,7 @@
 )
 
 ;;; Implementor Implementor.$create(Main $outer_this)
-(func $$create__interfaces_Main__interfaces_Main_Implementor@interfaces.Main.Implementor
+(func $$create__interfaces_Main@interfaces.Main.Implementor
  (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.Implementor))
  ;;@ interfaces/Main.java:41:8

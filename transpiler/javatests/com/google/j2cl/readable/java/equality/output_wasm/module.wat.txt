@@ -33,7 +33,7 @@
 )
 
 ;;; Equality Equality.$create()
-(func $$create__equality_Equality@equality.Equality
+(func $$create__@equality.Equality
  (result (ref null $equality.Equality))
  ;;@ equality/Equality.java:18:13
  (local $$instance (ref null $equality.Equality))
@@ -90,7 +90,7 @@
   (block
    ;; boolean c = !(java.lang.Object.$create() == java.lang.Object.$create());
    ;;@ equality/Equality.java:28:6
-   (local.set $c (i32.eqz (ref.eq (call $$create__java_lang_Object@java.lang.Object ) (call $$create__java_lang_Object@java.lang.Object ))))
+   (local.set $c (i32.eqz (ref.eq (call $$create__@java.lang.Object ) (call $$create__@java.lang.Object ))))
   )
   (block
    ;; boolean d = (java.lang.Double.valueOf(0.0) == java.lang.Double.valueOf(0.0));
@@ -105,10 +105,10 @@
   (block
    ;; boolean f = !javaemul.internal.Platform.isNull(java.lang.Object.$create());
    ;;@ equality/Equality.java:43:6
-   (local.set $f (i32.eqz (ref.is_null (call $$create__java_lang_Object@java.lang.Object ))))
+   (local.set $f (i32.eqz (ref.is_null (call $$create__@java.lang.Object ))))
    ;; boolean g = !javaemul.internal.Platform.isNull(java.lang.Object.$create());
    ;;@ equality/Equality.java:44:6
-   (local.set $g (i32.eqz (ref.is_null (call $$create__java_lang_Object@java.lang.Object ))))
+   (local.set $g (i32.eqz (ref.is_null (call $$create__@java.lang.Object ))))
   )
  )
 )

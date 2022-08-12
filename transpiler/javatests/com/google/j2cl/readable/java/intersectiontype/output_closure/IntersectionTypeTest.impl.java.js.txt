@@ -37,13 +37,13 @@ class IntersectionTypeTest extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts @template T */
- static m_getAndSet__intersectiontype_Getable(/** T */ object) {
+ static m_getAndSet__intersectiontype_Getable__void(/** T */ object) {
   IntersectionTypeTest.$clinit();
   /**@type {!Setable}*/ ($Casts.$to(object, Setable)).m_set__int__void(1);
   /**@type {Getable}*/ (object).m_get__java_lang_Object();
  }
  /** @nodts @template T @return {Getable<T>} */
- static m_cast__java_lang_Object(/** * */ o) {
+ static m_cast__java_lang_Object__intersectiontype_Getable(/** * */ o) {
   IntersectionTypeTest.$clinit();
   if ($Equality.$same(o, null)) {
    return /**@type {Getable<T>}*/ ($Casts.$to($Casts.$to(o, Getable), Setable));
@@ -51,12 +51,12 @@ class IntersectionTypeTest extends j_l_Object {
   return /**@type {Getable<T>}*/ ($Casts.$to($Casts.$to(o, Getable), Setable));
  }
  /** @nodts @template T @return {Getable<(Comparable<?string>|boolean|number|string)>} */
- static m_cast1__java_lang_Object(/** * */ s) {
+ static m_cast1__java_lang_Object__intersectiontype_Getable(/** * */ s) {
   IntersectionTypeTest.$clinit();
   return /**@type {Getable<(Comparable<?string>|boolean|number|string)>}*/ ($Casts.$to($Casts.$to(s, Getable), Setable));
  }
  /** @nodts @template T @return {Getable<(Comparable<T>|boolean|number|string)>} */
- static m_cast2__java_lang_Object(/** * */ s) {
+ static m_cast2__java_lang_Object__intersectiontype_Getable(/** * */ s) {
   IntersectionTypeTest.$clinit();
   return /**@type {Getable<(Comparable<T>|boolean|number|string)>}*/ ($Casts.$to($Casts.$to(s, Getable), Setable));
  }
@@ -65,49 +65,49 @@ class IntersectionTypeTest extends j_l_Object {
   return s;
  }
  /** @nodts @return {Cmp} */
- static m_method__() {
+ static m_method__intersectiontype_Cmp() {
   IntersectionTypeTest.$clinit();
   return /**@type {Cmp}*/ (new $LambdaAdaptor$1(() =>{
    return 1;
   }));
  }
  /** @nodts @return {Cmp2} */
- static m_method2__() {
+ static m_method2__intersectiontype_Cmp2() {
   IntersectionTypeTest.$clinit();
   return /**@type {Cmp2}*/ (new $LambdaAdaptor$2((/** number */ a) =>{
    return 1;
   }));
  }
  /** @nodts */
- static m_testClosureAssignment__java_lang_Object(/** * */ o) {
+ static m_testClosureAssignment__java_lang_Object__void(/** * */ o) {
   IntersectionTypeTest.$clinit();
   let e = /**@type {A}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
   let g = /**@type {EmptyA}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
   let s = /**@type {EmptyB}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
  }
  /** @nodts @template T @return {T} */
- static m_get__java_lang_Object(/** T */ t) {
+ static m_get__java_lang_Object__java_lang_Object(/** T */ t) {
   return t;
  }
  /** @nodts @template T @return {T} */
- static m_m__() {
-  return /**@type {T}*/ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object(j_l_Object.$create__()), A));
+ static m_m__intersectiontype_IntersectionTypeTest_A() {
+  return /**@type {T}*/ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object__java_lang_Object(j_l_Object.$create__()), A));
  }
  /** @nodts @template T @return {Getable<T>} */
- static m_n__() {
+ static m_n__intersectiontype_Getable() {
   return null;
  }
  /** @nodts @template T */
- static m_set__intersectiontype_IntersectionTypeTest_A(/** T */ t) {}
+ static m_set__intersectiontype_IntersectionTypeTest_A__void(/** T */ t) {}
  /** @nodts */
  m_testMethodCall__void() {
-  let o = IntersectionTypeTest.m_m__();
-  IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(/**@type {A}*/ ($Casts.$to($Casts.$to(o, A), EmptyA)));
-  IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(IntersectionTypeTest.m_m__());
-  let g = /**@type {Getable<A>}*/ (IntersectionTypeTest.m_n__());
+  let o = IntersectionTypeTest.m_m__intersectiontype_IntersectionTypeTest_A();
+  IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A__void(/**@type {A}*/ ($Casts.$to($Casts.$to(o, A), EmptyA)));
+  IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A__void(IntersectionTypeTest.m_m__intersectiontype_IntersectionTypeTest_A());
+  let g = /**@type {Getable<A>}*/ (IntersectionTypeTest.m_n__intersectiontype_Getable());
  }
  /** @nodts @template T */
- static m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType(/** T */ t) {
+ static m_callOnIntersetionTypes__intersectiontype_IntersectionTypeTest_SomeConcreteType__void(/** T */ t) {
   /**@type {!Cmp}*/ ($Casts.$to(t, Cmp)).m_cmp__int();
   /**@type {!Cmp}*/ ($Casts.$to(null, Cmp)).m_cmp__int();
  }

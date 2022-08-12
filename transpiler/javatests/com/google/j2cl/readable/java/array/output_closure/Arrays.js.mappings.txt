@@ -75,9 +75,9 @@
 [booleans2d] => [booleans2d] "booleans2d"
 [booleans2d = new Boolean[][] {{true, false}, null};] => [booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$init([/**@type {!Array<?boolean>}*/ ($Arrays.$init([true, false], Boolean)), null], Boolean, 2));] "array.Arrays.testDevirtualizedTypeArrays"
 [booleans2d = new Boolean[20][];] => [booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$create([20, null], Boolean));] "array.Arrays.testDevirtualizedTypeArrays"
-[boolean b = booleans[0];] => [let b = Boolean.m_booleanValue__java_lang_Boolean(booleans[0]);] "array.Arrays.testDevirtualizedTypeArrays"
+[boolean b = booleans[0];] => [let b = Boolean.m_booleanValue__java_lang_Boolean__boolean(booleans[0]);] "array.Arrays.testDevirtualizedTypeArrays"
 [b] => [b] "b"
-[b = booleans2d[0][1];] => [b = Boolean.m_booleanValue__java_lang_Boolean(booleans2d[0][1]);] "array.Arrays.testDevirtualizedTypeArrays"
+[b = booleans2d[0][1];] => [b = Boolean.m_booleanValue__java_lang_Boolean__boolean(booleans2d[0][1]);] "array.Arrays.testDevirtualizedTypeArrays"
 [booleans[0] = true;] => [$Arrays.$set(booleans, 0, true);] "array.Arrays.testDevirtualizedTypeArrays"
 [booleans2d[0][1] = false;] => [$Arrays.$set(booleans2d[0], 1, false);] "array.Arrays.testDevirtualizedTypeArrays"
 [testStringArrays] => [m_testStringArrays__void_$pp_array]

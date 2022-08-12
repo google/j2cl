@@ -158,7 +158,7 @@
 )
 
 ;;; HashFunctions HashFunctions.$create()
-(func $$create__overwrittentypevariables_HashFunctions@overwrittentypevariables.HashFunctions
+(func $$create__@overwrittentypevariables.HashFunctions
  (result (ref null $overwrittentypevariables.HashFunctions))
  ;;@ overwrittentypevariables/HashFunctions.java:24:13
  (local $$instance (ref null $overwrittentypevariables.HashFunctions))
@@ -199,7 +199,7 @@
   (call $$clinit__void@overwrittentypevariables.HashFunctions )
   ;; return overwrittentypevariables.HashFunctions.1.$create();
   ;;@ overwrittentypevariables/HashFunctions.java:26:4
-  (return (call $$create__overwrittentypevariables_HashFunctions_1@overwrittentypevariables.HashFunctions.1 ))
+  (return (call $$create__@overwrittentypevariables.HashFunctions.1 ))
  )
 )
 
@@ -213,7 +213,7 @@
   (call $$clinit__void@overwrittentypevariables.HashFunctions )
   ;; return overwrittentypevariables.HashFunctions.2.$create();
   ;;@ overwrittentypevariables/HashFunctions.java:35:4
-  (return (call $$create__overwrittentypevariables_HashFunctions_2@overwrittentypevariables.HashFunctions.2 ))
+  (return (call $$create__@overwrittentypevariables.HashFunctions.2 ))
  )
 )
 
@@ -271,7 +271,7 @@
 )
 
 ;;; <anonymous> implements HashFunction<T><T> <anonymous> implements HashFunction<T>.$create()
-(func $$create__overwrittentypevariables_HashFunctions_1@overwrittentypevariables.HashFunctions.1
+(func $$create__@overwrittentypevariables.HashFunctions.1
  (result (ref null $overwrittentypevariables.HashFunctions.1))
  ;;@ overwrittentypevariables/HashFunctions.java:26:33
  (local $$instance (ref null $overwrittentypevariables.HashFunctions.1))
@@ -390,7 +390,7 @@
 )
 
 ;;; <anonymous> implements HashFunction<T><T> <anonymous> implements HashFunction<T>.$create()
-(func $$create__overwrittentypevariables_HashFunctions_2@overwrittentypevariables.HashFunctions.2
+(func $$create__@overwrittentypevariables.HashFunctions.2
  (result (ref null $overwrittentypevariables.HashFunctions.2))
  ;;@ overwrittentypevariables/HashFunctions.java:35:33
  (local $$instance (ref null $overwrittentypevariables.HashFunctions.2))
@@ -435,7 +435,7 @@
   ;; return (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_||()),$stringBuilder.append(input.ordinal()),$stringBuilder.toString());
   ;;@ overwrittentypevariables/HashFunctions.java:38:8
   (return (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $$create__java_lang_StringBuilder@java.lang.StringBuilder ))
+   (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
    (drop (call_ref (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (ref.as_non_null (local.get $$stringBuilder))(call_ref (ref.as_non_null (local.get $input))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))

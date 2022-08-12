@@ -527,7 +527,7 @@
 )
 
 ;;; InnerClassInitOrder InnerClassInitOrder.$create()
-(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder
+(func $$create__@innerclassinitorder.InnerClassInitOrder
  (result (ref null $innerclassinitorder.InnerClassInitOrder))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:21:13
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -571,7 +571,7 @@
  (block
   ;; innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.$create(InnerClassInitOrder.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:61:4
-  (drop (call $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (local.get $this)))
+  (drop (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (local.get $this)))
  )
 )
 (elem declare func $m_testOuterThisFromSuperCall__void@innerclassinitorder.InnerClassInitOrder)
@@ -586,7 +586,7 @@
  (block
   ;; innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.$create(InnerClassInitOrder.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:66:4
-  (drop (call $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (local.get $this)))
+  (drop (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (local.get $this)))
  )
 )
 (elem declare func $m_testOuterThisFromThisCall__void@innerclassinitorder.InnerClassInitOrder)
@@ -602,7 +602,7 @@
  (block
   ;; ESOuter o = innerclassinitorder.InnerClassInitOrder.ESOuter.$create();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:186:4
-  (local.set $o (call $$create__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter ))
+  (local.set $o (call $$create__@innerclassinitorder.InnerClassInitOrder.ESOuter ))
  )
 )
 (elem declare func $m_testExtendsNested__void@innerclassinitorder.InnerClassInitOrder)
@@ -618,7 +618,7 @@
  (block
   ;; ESWGOuter<String> o = innerclassinitorder.InnerClassInitOrder.ESWGOuter.$create();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:197:4
-  (local.set $o (call $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter ))
+  (local.set $o (call $$create__@innerclassinitorder.InnerClassInitOrder.ESWGOuter ))
  )
 )
 (elem declare func $m_testExtendsNestedWithGenerics__void@innerclassinitorder.InnerClassInitOrder)
@@ -635,10 +635,10 @@
  (block
   ;; P1<?> p1 = innerclassinitorder.InnerClassInitOrder.P1.$create();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:205:4
-  (local.set $p1 (call $$create__innerclassinitorder_InnerClassInitOrder_P1@innerclassinitorder.InnerClassInitOrder.P1 ))
+  (local.set $p1 (call $$create__@innerclassinitorder.InnerClassInitOrder.P1 ))
   ;; P2<?, ?> p2 = innerclassinitorder.InnerClassInitOrder.P1.P2.$create(p1);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:208:4
-  (local.set $p2 (call $$create__innerclassinitorder_InnerClassInitOrder_P1__innerclassinitorder_InnerClassInitOrder_P1_P2@innerclassinitorder.InnerClassInitOrder.P1.P2 (local.get $p1)))
+  (local.set $p2 (call $$create__innerclassinitorder_InnerClassInitOrder_P1@innerclassinitorder.InnerClassInitOrder.P1.P2 (local.get $p1)))
  )
 )
 (elem declare func $m_testInnerClassCtors__void@innerclassinitorder.InnerClassInitOrder)
@@ -653,7 +653,7 @@
  (block
   ;; innerclassinitorder.InnerClassInitOrder.InnerClass.$create(InnerClassInitOrder.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:216:4
-  (drop (call $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_InnerClass@innerclassinitorder.InnerClassInitOrder.InnerClass (local.get $this)))
+  (drop (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.InnerClass (local.get $this)))
  )
 )
 (elem declare func $m_testInnerClassInitialization__void@innerclassinitorder.InnerClassInitOrder)
@@ -674,7 +674,7 @@
  (block
   ;; AddNumber[] results = javaemul.internal.WasmArray.OfObject.$create(10);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:230:4
-  (local.set $results (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10)))
+  (local.set $results (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 10)))
   ;; LOOP: for (int i = 0;(i < 10);(i = (i + 1))) {
   ;;@ innerclassinitorder/InnerClassInitOrder.java:231:4
   (local.set $i (i32.const 0))
@@ -685,7 +685,7 @@
      (block
       ;; AddNumber ap = innerclassinitorder.InnerClassInitOrder.1.$create(InnerClassInitOrder.this,i);
       ;;@ innerclassinitorder/InnerClassInitOrder.java:232:6
-      (local.set $ap (call $$create__innerclassinitorder_InnerClassInitOrder__int__innerclassinitorder_InnerClassInitOrder_1@innerclassinitorder.InnerClassInitOrder.1 (local.get $this)(local.get $i)))
+      (local.set $ap (call $$create__innerclassinitorder_InnerClassInitOrder__int@innerclassinitorder.InnerClassInitOrder.1 (local.get $this)(local.get $i)))
       ;; (results.elements[i] = ap);
       ;;@ innerclassinitorder/InnerClassInitOrder.java:238:6
       (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $results)) (local.get $i) (local.get $ap))
@@ -735,7 +735,7 @@
  (block
   ;; OuterIsNotSuper x = innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.$create(InnerClassInitOrder.this.outerIsSuper);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:308:4
-  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder_Outer__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))
+  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))
  )
 )
 (elem declare func $m_testOuterIsNotSuper__void@innerclassinitorder.InnerClassInitOrder)
@@ -751,7 +751,7 @@
  (block
   ;; OuterIsNotSuper x = innerclassinitorder.InnerClassInitOrder.2.$create(InnerClassInitOrder.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:314:4
-  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_2@innerclassinitorder.InnerClassInitOrder.2 (local.get $this)))
+  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.2 (local.get $this)))
  )
 )
 (elem declare func $m_testOuterIsNotSuperAnon__void@innerclassinitorder.InnerClassInitOrder)
@@ -767,7 +767,7 @@
  (block
   ;; TestQualifiedSuperCall x = innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.$create();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:320:4
-  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall ))
+  (local.set $x (call $$create__@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall ))
  )
 )
 (elem declare func $m_testQualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder)
@@ -783,7 +783,7 @@
  (block
   ;; TestQualifiedSuperCall x = innerclassinitorder.InnerClassInitOrder.3.$create(InnerClassInitOrder.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:325:4
-  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_3@innerclassinitorder.InnerClassInitOrder.3 (local.get $this)))
+  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.3 (local.get $this)))
  )
 )
 (elem declare func $m_testQualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder)
@@ -827,7 +827,7 @@
  (block
   ;; TestUnqualifiedSuperCall x = innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.$create(InnerClassInitOrder.this.outerIsSuper);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:340:4
-  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder_Outer__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))
+  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))
  )
 )
 (elem declare func $m_testUnqualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder)
@@ -843,7 +843,7 @@
  (block
   ;; TestUnqualifiedSuperCall x = innerclassinitorder.InnerClassInitOrder.4.$create(InnerClassInitOrder.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:346:4
-  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_4@innerclassinitorder.InnerClassInitOrder.4 (local.get $this)))
+  (local.set $x (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.4 (local.get $this)))
  )
 )
 (elem declare func $m_testUnqualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder)
@@ -859,7 +859,7 @@
   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder )
   ;; InnerClassInitOrder m = innerclassinitorder.InnerClassInitOrder.$create();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:352:4
-  (local.set $m (call $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder ))
+  (local.set $m (call $$create__@innerclassinitorder.InnerClassInitOrder ))
   ;; m.testOuterThisFromSuperCall();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:353:4
   (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterThisFromSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
@@ -918,10 +918,10 @@
   (struct.set $innerclassinitorder.InnerClassInitOrder $f_number__innerclassinitorder_InnerClassInitOrder(local.get $this) (i32.const 0))
   ;; (InnerClassInitOrder.this.outer = innerclassinitorder.InnerClassInitOrder.Outer.$create(1));
   ;;@ innerclassinitorder/InnerClassInitOrder.java:303:2
-  (struct.set $innerclassinitorder.InnerClassInitOrder $f_outer__innerclassinitorder_InnerClassInitOrder_(local.get $this) (call $$create__int__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer (i32.const 1)))
+  (struct.set $innerclassinitorder.InnerClassInitOrder $f_outer__innerclassinitorder_InnerClassInitOrder_(local.get $this) (call $$create__int@innerclassinitorder.InnerClassInitOrder.Outer (i32.const 1)))
   ;; (InnerClassInitOrder.this.outerIsSuper = innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$create(InnerClassInitOrder.this.outer,2));
   ;;@ innerclassinitorder/InnerClassInitOrder.java:305:2
-  (struct.set $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this) (call $$create__innerclassinitorder_InnerClassInitOrder_Outer__int__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (struct.get $innerclassinitorder.InnerClassInitOrder $f_outer__innerclassinitorder_InnerClassInitOrder_(local.get $this))(i32.const 2)))
+  (struct.set $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this) (call $$create__innerclassinitorder_InnerClassInitOrder_Outer__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (struct.get $innerclassinitorder.InnerClassInitOrder $f_outer__innerclassinitorder_InnerClassInitOrder_(local.get $this))(i32.const 2)))
  )
 )
 
@@ -981,7 +981,7 @@
 )
 
 ;;; <anonymous> extends AddNumber <anonymous> extends AddNumber.$create(InnerClassInitOrder $outer_this, int $_0)
-(func $$create__innerclassinitorder_InnerClassInitOrder__int__innerclassinitorder_InnerClassInitOrder_1@innerclassinitorder.InnerClassInitOrder.1
+(func $$create__innerclassinitorder_InnerClassInitOrder__int@innerclassinitorder.InnerClassInitOrder.1
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  (param $$_0 i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.1))
@@ -1086,7 +1086,7 @@
 )
 
 ;;; <anonymous> extends OuterIsNotSuper <anonymous> extends OuterIsNotSuper.$create(InnerClassInitOrder $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_2@innerclassinitorder.InnerClassInitOrder.2
+(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.2
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.2))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:314:65
@@ -1174,7 +1174,7 @@
 )
 
 ;;; <anonymous> extends TestQualifiedSuperCall <anonymous> extends TestQualifiedSuperCall.$create(InnerClassInitOrder $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_3@innerclassinitorder.InnerClassInitOrder.3
+(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.3
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.3))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:325:72
@@ -1263,7 +1263,7 @@
 )
 
 ;;; <anonymous> extends TestUnqualifiedSuperCall <anonymous> extends TestUnqualifiedSuperCall.$create(InnerClassInitOrder $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_4@innerclassinitorder.InnerClassInitOrder.4
+(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.4
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.4))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:346:83
@@ -1348,7 +1348,7 @@
 )
 
 ;;; OuterRefFromSuperCtorBase OuterRefFromSuperCtorBase.$create(Object o)
-(func $$create__java_lang_Object__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase
+(func $$create__java_lang_Object@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase
  (param $o (ref null $java.lang.Object))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:25:4
@@ -1437,7 +1437,7 @@
 )
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create(OuterRefFromSuperCtorCall $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
+(func $$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:33:23
@@ -1542,7 +1542,7 @@
 )
 
 ;;; OuterRefFromSuperCtorCall OuterRefFromSuperCtorCall.$create(InnerClassInitOrder $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall
+(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:31:4
@@ -1574,7 +1574,7 @@
   (struct.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall(local.get $this) (local.get $$outer_this))
   ;; OuterRefFromSuperCtorBase.this.$ctor(innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.$create(OuterRefFromSuperCtorCall.this));
   ;;@ innerclassinitorder/InnerClassInitOrder.java:32:6
-  (call $$ctor__java_lang_Object__void_$p_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase (ref.as_non_null (local.get $this))(call $$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (local.get $this)))
+  (call $$ctor__java_lang_Object__void_$p_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase (ref.as_non_null (local.get $this))(call $$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (local.get $this)))
  )
 )
 
@@ -1631,7 +1631,7 @@
 )
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create(OuterRefFromThisCtorCall $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
+(func $$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:50:23
@@ -1736,7 +1736,7 @@
 )
 
 ;;; OuterRefFromThisCtorCall OuterRefFromThisCtorCall.$create(InnerClassInitOrder $outer_this, Object object)
-(func $$create__innerclassinitorder_InnerClassInitOrder__java_lang_Object__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
+(func $$create__innerclassinitorder_InnerClassInitOrder__java_lang_Object@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  (param $object (ref null $java.lang.Object))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
@@ -1775,7 +1775,7 @@
 )
 
 ;;; OuterRefFromThisCtorCall OuterRefFromThisCtorCall.$create(InnerClassInitOrder $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
+(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:48:11
@@ -1804,7 +1804,7 @@
   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall )
   ;; OuterRefFromThisCtorCall.this.$ctor($outer_this,innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.$create(OuterRefFromThisCtorCall.this));
   ;;@ innerclassinitorder/InnerClassInitOrder.java:49:6
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder__java_lang_Object__void_$p_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (ref.as_non_null (local.get $this))(local.get $$outer_this)(call $$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (local.get $this)))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder__java_lang_Object__void_$p_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (ref.as_non_null (local.get $this))(local.get $$outer_this)(call $$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (local.get $this)))
  )
 )
 
@@ -1862,7 +1862,7 @@
 )
 
 ;;; ReallyInnerClass ReallyInnerClass.$create(InnerClass $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_InnerClass__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
+(func $$create__innerclassinitorder_InnerClassInitOrder_InnerClass@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:77:12
@@ -1981,7 +1981,7 @@
 )
 
 ;;; InnerClass InnerClass.$create(InnerClassInitOrder $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_InnerClass@innerclassinitorder.InnerClassInitOrder.InnerClass
+(func $$create__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.InnerClass
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:70:8
@@ -2033,7 +2033,7 @@
   (struct.set $innerclassinitorder.InnerClassInitOrder $f_number__innerclassinitorder_InnerClassInitOrder(struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass(local.get $this)) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $f_number__innerclassinitorder_InnerClassInitOrder(struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass(local.get $this))) (i32.const 1)))
   ;; innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.$create(InnerClass.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:86:6
-  (drop (call $$create__innerclassinitorder_InnerClassInitOrder_InnerClass__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (local.get $this)))
+  (drop (call $$create__innerclassinitorder_InnerClassInitOrder_InnerClass@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (local.get $this)))
  )
 )
 (elem declare func $m_callInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass)
@@ -2104,7 +2104,7 @@
 )
 
 ;;; P3<T3, T2, T1> P3.$create(P2<T2, T1> $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_P1_P2__innerclassinitorder_InnerClassInitOrder_P1_P2_P3@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
+(func $$create__innerclassinitorder_InnerClassInitOrder_P1_P2@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:93:8
@@ -2138,7 +2138,7 @@
 )
 
 ;;; P3<T3, T2, T1> P3.$create(P2<T2, T1> $outer_this, int i)
-(func $$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int__innerclassinitorder_InnerClassInitOrder_P1_P2_P3@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
+(func $$create__innerclassinitorder_InnerClassInitOrder_P1_P2__int@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
  (param $i i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
@@ -2230,7 +2230,7 @@
 )
 
 ;;; P2<T2, T1> P2.$create(P1<T1> $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_P1__innerclassinitorder_InnerClassInitOrder_P1_P2@innerclassinitorder.InnerClassInitOrder.P1.P2
+(func $$create__innerclassinitorder_InnerClassInitOrder_P1@innerclassinitorder.InnerClassInitOrder.P1.P2
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:102:6
@@ -2264,7 +2264,7 @@
 )
 
 ;;; P2<T2, T1> P2.$create(P1<T1> $outer_this, int i)
-(func $$create__innerclassinitorder_InnerClassInitOrder_P1__int__innerclassinitorder_InnerClassInitOrder_P1_P2@innerclassinitorder.InnerClassInitOrder.P1.P2
+(func $$create__innerclassinitorder_InnerClassInitOrder_P1__int@innerclassinitorder.InnerClassInitOrder.P1.P2
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  (param $i i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
@@ -2355,7 +2355,7 @@
 )
 
 ;;; P1<T1> P1.$create()
-(func $$create__innerclassinitorder_InnerClassInitOrder_P1@innerclassinitorder.InnerClassInitOrder.P1
+(func $$create__@innerclassinitorder.InnerClassInitOrder.P1
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:113:4
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder.P1))
@@ -2387,7 +2387,7 @@
 )
 
 ;;; P1<T1> P1.$create(int i)
-(func $$create__int__innerclassinitorder_InnerClassInitOrder_P1@innerclassinitorder.InnerClassInitOrder.P1
+(func $$create__int@innerclassinitorder.InnerClassInitOrder.P1
  (param $i i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:117:4
@@ -2474,7 +2474,7 @@
 )
 
 ;;; ESInner ESInner.$create(ESOuter $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_ESOuter__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
+(func $$create__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:130:13
@@ -2508,7 +2508,7 @@
 )
 
 ;;; ESInner ESInner.$create(ESOuter $outer_this, int value)
-(func $$create__innerclassinitorder_InnerClassInitOrder_ESOuter__int__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
+(func $$create__innerclassinitorder_InnerClassInitOrder_ESOuter__int@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
  (param $value i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
@@ -2596,7 +2596,7 @@
 )
 
 ;;; ESOuter ESOuter.$create()
-(func $$create__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter
+(func $$create__@innerclassinitorder.InnerClassInitOrder.ESOuter
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:126:23
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
@@ -2638,7 +2638,7 @@
  (block
   ;; return innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.$create(ESOuter.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:140:6
-  (return (call $$create__innerclassinitorder_InnerClassInitOrder_ESOuter__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (local.get $this)))
+  (return (call $$create__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (local.get $this)))
  )
 )
 (elem declare func $m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter)
@@ -2697,7 +2697,7 @@
 )
 
 ;;; ESInnerSubclass ESInnerSubclass.$create(ESOuter outer)
-(func $$create__innerclassinitorder_InnerClassInitOrder_ESOuter__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
+(func $$create__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
  (param $outer (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:145:4
@@ -2731,7 +2731,7 @@
 )
 
 ;;; ESInnerSubclass ESInnerSubclass.$create(int value, ESOuter outer)
-(func $$create__int__innerclassinitorder_InnerClassInitOrder_ESOuter__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
+(func $$create__int__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
  (param $value i32)
  (param $outer (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
@@ -2820,7 +2820,7 @@
 )
 
 ;;; ESWGInner<T> ESWGInner.$create(ESWGOuter<T> $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
+(func $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:161:13
@@ -2854,7 +2854,7 @@
 )
 
 ;;; ESWGInner<T> ESWGInner.$create(ESWGOuter<T> $outer_this, int value)
-(func $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
+(func $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
  (param $value i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
@@ -2942,7 +2942,7 @@
 )
 
 ;;; ESWGOuter<T> ESWGOuter.$create()
-(func $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter
+(func $$create__@innerclassinitorder.InnerClassInitOrder.ESWGOuter
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:157:23
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
@@ -2984,7 +2984,7 @@
  (block
   ;; return innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.$create(ESWGOuter.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:171:6
-  (return (call $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (local.get $this)))
+  (return (call $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (local.get $this)))
  )
 )
 (elem declare func $m_newESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter)
@@ -3043,7 +3043,7 @@
 )
 
 ;;; ESWGInnerSubclass ESWGInnerSubclass.$create(ESWGOuter<String> outer)
-(func $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
+(func $$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
  (param $outer (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:176:4
@@ -3077,7 +3077,7 @@
 )
 
 ;;; ESWGInnerSubclass ESWGInnerSubclass.$create(int value, ESWGOuter<String> outer)
-(func $$create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter__innerclassinitorder_InnerClassInitOrder_ESWGInnerSubclass@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
+(func $$create__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
  (param $value i32)
  (param $outer (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
@@ -3166,7 +3166,7 @@
 )
 
 ;;; OuterIsNotSuper OuterIsNotSuper.$create(Outer $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_Outer__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
+(func $$create__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:247:17
@@ -3274,7 +3274,7 @@
 )
 
 ;;; <anonymous> extends Outer <anonymous> extends Outer.$create(OuterIsSuper $outer_this, int $_0)
-(func $$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
+(func $$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  (param $$_0 i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
@@ -3383,7 +3383,7 @@
 )
 
 ;;; OuterIsSuper OuterIsSuper.$create(Outer $outer_this, int i)
-(func $$create__innerclassinitorder_InnerClassInitOrder_Outer__int__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+(func $$create__innerclassinitorder_InnerClassInitOrder_Outer__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
  (param $i i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
@@ -3463,7 +3463,7 @@
   ;; return (<anonymous> extends Outer $qualifier = innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.$create(OuterIsSuper.this,1),$qualifier.go());
   ;;@ innerclassinitorder/InnerClassInitOrder.java:268:8
   (return (block (result i32)
-   (local.set $$qualifier (call $$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (local.get $this)(i32.const 1)))
+   (local.set $$qualifier (call $$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (local.get $this)(i32.const 1)))
    (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable $m_go__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 $vtable(local.get $$qualifier))))
   ))
  )
@@ -3481,7 +3481,7 @@
  (block
   ;; return innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.$create(OuterIsSuper.this);
   ;;@ innerclassinitorder/InnerClassInitOrder.java:276:8
-  (return (call $$create__innerclassinitorder_InnerClassInitOrder_Outer__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (local.get $this)))
+  (return (call $$create__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (local.get $this)))
  )
 )
 (elem declare func $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)
@@ -3540,7 +3540,7 @@
 )
 
 ;;; TestQualifiedSuperCall TestQualifiedSuperCall.$create()
-(func $$create__innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall
+(func $$create__@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:281:13
  (local $$instance (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
@@ -3567,7 +3567,7 @@
   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall )
   ;; OuterIsNotSuper.this.$ctor(innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$create(innerclassinitorder.InnerClassInitOrder.Outer.$create(1),2));
   ;;@ innerclassinitorder/InnerClassInitOrder.java:282:8
-  (call $$ctor__innerclassinitorder_InnerClassInitOrder_Outer__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref.as_non_null (local.get $this))(call $$create__innerclassinitorder_InnerClassInitOrder_Outer__int__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (call $$create__int__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer (i32.const 1))(i32.const 2)))
+  (call $$ctor__innerclassinitorder_InnerClassInitOrder_Outer__void_$p_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref.as_non_null (local.get $this))(call $$create__innerclassinitorder_InnerClassInitOrder_Outer__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (call $$create__int@innerclassinitorder.InnerClassInitOrder.Outer (i32.const 1))(i32.const 2)))
  )
 )
 
@@ -3626,7 +3626,7 @@
 )
 
 ;;; TestUnqualifiedSuperCall TestUnqualifiedSuperCall.$create(Outer $outer_this)
-(func $$create__innerclassinitorder_InnerClassInitOrder_Outer__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall
+(func $$create__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall
  (param $$outer_this (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:287:13
@@ -3713,7 +3713,7 @@
 )
 
 ;;; Outer Outer.$create(int i)
-(func $$create__int__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer
+(func $$create__int@innerclassinitorder.InnerClassInitOrder.Outer
  (param $i i32)
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
  ;;@ innerclassinitorder/InnerClassInitOrder.java:294:11

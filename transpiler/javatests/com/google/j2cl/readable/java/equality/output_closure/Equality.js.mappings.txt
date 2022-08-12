@@ -17,7 +17,7 @@
 [c] => [c] "c"
 [boolean d = (Double) 0.0 == (Double) 0.0;] => [let d = $Equality.$same(/**@type {?number}*/ ($Casts.$to(0, Double)), /**@type {?number}*/ ($Casts.$to(0, Double)));] "equality.Equality.test"
 [d] => [d] "d"
-[boolean e = (Float) 0.0f == (Float) 0.0f;] => [let e = $Equality.$same(Float.m_valueOf__float(0), Float.m_valueOf__float(0));] "equality.Equality.test"
+[boolean e = (Float) 0.0f == (Float) 0.0f;] => [let e = $Equality.$same(Float.m_valueOf__float__java_lang_Float(0), Float.m_valueOf__float__java_lang_Float(0));] "equality.Equality.test"
 [e] => [e] "e"
 [boolean f = null != new Object();] => [let f = !$Equality.$same(null, j_l_Object.$create__());] "equality.Equality.test"
 [f] => [f] "f"

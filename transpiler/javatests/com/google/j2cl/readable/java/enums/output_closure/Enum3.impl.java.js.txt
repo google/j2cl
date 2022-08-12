@@ -31,15 +31,15 @@ class Enum3 extends Enum {
   this.$ctor__java_lang_Enum__java_lang_String__int__void($name, $ordinal);
  }
  /** @nodts @return {!Enum3} */
- static m_valueOf__java_lang_String(/** string */ name) {
+ static m_valueOf__java_lang_String__enums_Enum3(/** string */ name) {
   Enum3.$clinit();
   if ($Equality.$same(Enum3.f_namesToValuesMap__enums_Enum3_, null)) {
-   Enum3.f_namesToValuesMap__enums_Enum3_ = /**@type {Map<?string, !Enum3>}*/ ($Enums.createMapFromValues(Enum3.m_values__()));
+   Enum3.f_namesToValuesMap__enums_Enum3_ = /**@type {Map<?string, !Enum3>}*/ ($Enums.createMapFromValues(Enum3.m_values__arrayOf_enums_Enum3()));
   }
   return /**@type {Enum3}*/ ($Enums.getValueFromNameAndMap(name, Enum3.f_namesToValuesMap__enums_Enum3_));
  }
  /** @nodts @return {!Array<!Enum3>} */
- static m_values__() {
+ static m_values__arrayOf_enums_Enum3() {
   Enum3.$clinit();
   return /**@type {!Array<Enum3>}*/ ($Arrays.$init([Enum3.$static_VALUE1__enums_Enum3], Enum3));
  }
@@ -54,7 +54,7 @@ class Enum3 extends Enum {
   Enum.$clinit();
   Enum3.$static_VALUE1__enums_Enum3 = Enum3.$create__java_lang_String__int__java_util_function_Function($Util.$makeEnumName('VALUE1'), Enum3.$ordinal_VALUE1__enums_Enum3, j_u_function_Function.$adapt((v) =>{
    let v_1 = /**@type {Integer}*/ ($Casts.$to(v, Integer));
-   return Integer.m_valueOf__int(1 + v_1.m_intValue__int() | 0);
+   return Integer.m_valueOf__int__java_lang_Integer(1 + v_1.m_intValue__int() | 0);
   }));
  }
  /** @nodts @return {boolean} */

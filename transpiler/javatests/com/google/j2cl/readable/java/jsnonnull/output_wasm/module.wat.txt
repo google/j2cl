@@ -169,7 +169,7 @@
 )
 
 ;;; Main Main.$create(String a)
-(func $$create__java_lang_String__jsnonnull_Main@jsnonnull.Main
+(func $$create__java_lang_String@jsnonnull.Main
  (param $a (ref null $java.lang.String))
  (result (ref null $jsnonnull.Main))
  ;;@ jsnonnull/Main.java:42:9
@@ -177,7 +177,7 @@
  (block
   ;; Main $instance = new Main.<init>(0,javaemul.internal.StringPool.$getString_|Hello|(),null,null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null);
   ;;@ jsnonnull/Main.java:42:9
-  (local.set $$instance (struct.new $jsnonnull.Main (ref.as_non_null (global.get $jsnonnull.Main.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $jsnonnull.Main (ref.as_non_null (global.get $jsnonnull.Main.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(a);
   ;;@ jsnonnull/Main.java:42:9
   (call $$ctor__java_lang_String__void_$p_jsnonnull_Main@jsnonnull.Main (ref.as_non_null (local.get $$instance))(local.get $a))
@@ -280,16 +280,16 @@
  (block
   ;; (Main.this.f4 = java.util.ArrayList.$create());
   ;;@ jsnonnull/Main.java:29:2
-  (struct.set $jsnonnull.Main $f_f4__jsnonnull_Main_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
+  (struct.set $jsnonnull.Main $f_f4__jsnonnull_Main_(local.get $this) (call $$create__@java.util.ArrayList ))
   ;; (Main.this.f5 = java.util.ArrayList.$create());
   ;;@ jsnonnull/Main.java:30:2
-  (struct.set $jsnonnull.Main $f_f5__jsnonnull_Main_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
+  (struct.set $jsnonnull.Main $f_f5__jsnonnull_Main_(local.get $this) (call $$create__@java.util.ArrayList ))
   ;; (Main.this.f6 = java.util.ArrayList.$create());
   ;;@ jsnonnull/Main.java:31:2
-  (struct.set $jsnonnull.Main $f_f6__jsnonnull_Main_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
+  (struct.set $jsnonnull.Main $f_f6__jsnonnull_Main_(local.get $this) (call $$create__@java.util.ArrayList ))
   ;; (Main.this.f12 = java.util.ArrayList.$create());
   ;;@ jsnonnull/Main.java:39:2
-  (struct.set $jsnonnull.Main $f_f12__jsnonnull_Main_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
+  (struct.set $jsnonnull.Main $f_f12__jsnonnull_Main_(local.get $this) (call $$create__@java.util.ArrayList ))
  )
 )
 
@@ -390,7 +390,7 @@
 )
 
 ;;; StringComparator StringComparator.$create()
-(func $$create__jsnonnull_Main_StringComparator@jsnonnull.Main.StringComparator
+(func $$create__@jsnonnull.Main.StringComparator
  (result (ref null $jsnonnull.Main.StringComparator))
  ;;@ jsnonnull/Main.java:66:22
  (local $$instance (ref null $jsnonnull.Main.StringComparator))
@@ -640,7 +640,7 @@
 )
 
 ;;; NullableStringComparator NullableStringComparator.$create()
-(func $$create__jsnonnull_Main_NullableStringComparator@jsnonnull.Main.NullableStringComparator
+(func $$create__@jsnonnull.Main.NullableStringComparator
  (result (ref null $jsnonnull.Main.NullableStringComparator))
  ;;@ jsnonnull/Main.java:74:22
  (local $$instance (ref null $jsnonnull.Main.NullableStringComparator))
@@ -890,7 +890,7 @@
 )
 
 ;;; NonNullableStringSubNullableComparator NonNullableStringSubNullableComparator.$create()
-(func $$create__jsnonnull_Main_NonNullableStringSubNullableComparator@jsnonnull.Main.NonNullableStringSubNullableComparator
+(func $$create__@jsnonnull.Main.NonNullableStringSubNullableComparator
  (result (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  ;;@ jsnonnull/Main.java:81:22
  (local $$instance (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))

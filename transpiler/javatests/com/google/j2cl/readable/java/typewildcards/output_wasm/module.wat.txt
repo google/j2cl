@@ -138,7 +138,7 @@
 )
 
 ;;; GenericType<T> GenericType.$create()
-(func $$create__typewildcards_GenericType@typewildcards.GenericType
+(func $$create__@typewildcards.GenericType
  (result (ref null $typewildcards.GenericType))
  ;;@ typewildcards/TypeWildCards.java:21:6
  (local $$instance (ref null $typewildcards.GenericType))
@@ -227,7 +227,7 @@
 )
 
 ;;; TypeWildCards TypeWildCards.$create()
-(func $$create__typewildcards_TypeWildCards@typewildcards.TypeWildCards
+(func $$create__@typewildcards.TypeWildCards
  (result (ref null $typewildcards.TypeWildCards))
  ;;@ typewildcards/TypeWildCards.java:23:13
  (local $$instance (ref null $typewildcards.TypeWildCards))
@@ -307,13 +307,13 @@
  (block
   ;; TypeWildCards.this.unbounded(typewildcards.GenericType.$create());
   ;;@ typewildcards/TypeWildCards.java:31:4
-  (call_ref (ref.as_non_null (local.get $this))(call $$create__typewildcards_GenericType@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   ;; TypeWildCards.this.upperBound(typewildcards.GenericType.$create());
   ;;@ typewildcards/TypeWildCards.java:32:4
-  (call_ref (ref.as_non_null (local.get $this))(call $$create__typewildcards_GenericType@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   ;; TypeWildCards.this.lowerBound(typewildcards.GenericType.$create());
   ;;@ typewildcards/TypeWildCards.java:33:4
-  (call_ref (ref.as_non_null (local.get $this))(call $$create__typewildcards_GenericType@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
  )
 )
 (elem declare func $m_test__void@typewildcards.TypeWildCards)
@@ -408,7 +408,7 @@
   (local.set $otherElements (ref.null $java.lang.Object))
   ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),typewildcards.TypeWildCards.$LambdaImplementor$1.$create());
   ;;@ typewildcards/TypeWildCards.java:89:4
-  (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(call $$create__typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1 )))
+  (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(call $$create__@typewildcards.TypeWildCards.$LambdaImplementor$1 )))
  )
 )
 (elem declare func $m_testInferredGenericIntersection__void@typewildcards.TypeWildCards)
@@ -431,7 +431,7 @@
  (block
   ;; typewildcards.TypeWildCards.takesRecursiveGeneric(typewildcards.TypeWildCards.Foo.$create(TypeWildCards.this));
   ;;@ typewildcards/TypeWildCards.java:103:4
-  (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $$create__typewildcards_TypeWildCards__typewildcards_TypeWildCards_Foo@typewildcards.TypeWildCards.Foo (local.get $this)))
+  (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $$create__typewildcards_TypeWildCards@typewildcards.TypeWildCards.Foo (local.get $this)))
  )
 )
 (elem declare func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards)
@@ -491,7 +491,7 @@
 )
 
 ;;; $LambdaImplementor$1<T, R> $LambdaImplementor$1.$create()
-(func $$create__typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1
+(func $$create__@typewildcards.TypeWildCards.$LambdaImplementor$1
  (result (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  ;;@ typewildcards/TypeWildCards.java:92:12
  (local $$instance (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
@@ -719,7 +719,7 @@
 )
 
 ;;; A A.$create()
-(func $$create__typewildcards_TypeWildCards_A@typewildcards.TypeWildCards.A
+(func $$create__@typewildcards.TypeWildCards.A
  (result (ref null $typewildcards.TypeWildCards.A))
  ;;@ typewildcards/TypeWildCards.java:44:23
  (local $$instance (ref null $typewildcards.TypeWildCards.A))
@@ -1044,7 +1044,7 @@
 )
 
 ;;; Foo Foo.$create(TypeWildCards $outer_this)
-(func $$create__typewildcards_TypeWildCards__typewildcards_TypeWildCards_Foo@typewildcards.TypeWildCards.Foo
+(func $$create__typewildcards_TypeWildCards@typewildcards.TypeWildCards.Foo
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.Foo))
  ;;@ typewildcards/TypeWildCards.java:98:8

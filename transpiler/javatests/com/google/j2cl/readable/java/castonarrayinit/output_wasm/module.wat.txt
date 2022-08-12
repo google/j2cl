@@ -48,7 +48,7 @@
 )
 
 ;;; CastOnArrayInit CastOnArrayInit.$create()
-(func $$create__castonarrayinit_CastOnArrayInit@castonarrayinit.CastOnArrayInit
+(func $$create__@castonarrayinit.CastOnArrayInit
  (result (ref null $castonarrayinit.CastOnArrayInit))
  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
  (local $$instance (ref null $castonarrayinit.CastOnArrayInit))
@@ -101,13 +101,13 @@
   (call $$clinit__void@castonarrayinit.CastOnArrayInit )
   ;; Foo<E> f1 = castonarrayinit.CastOnArrayInit.Foo.$create();
   ;;@ castonarrayinit/CastOnArrayInit.java:24:4
-  (local.set $f1 (call $$create__castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo ))
+  (local.set $f1 (call $$create__@castonarrayinit.CastOnArrayInit.Foo ))
   ;; Foo<E> f2 = castonarrayinit.CastOnArrayInit.Foo.$create();
   ;;@ castonarrayinit/CastOnArrayInit.java:25:4
-  (local.set $f2 (call $$create__castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo ))
+  (local.set $f2 (call $$create__@castonarrayinit.CastOnArrayInit.Foo ))
   ;; castonarrayinit.CastOnArrayInit.fun(javaemul.internal.WasmArray.OfObject.$create([f1,f2]));
   ;;@ castonarrayinit/CastOnArrayInit.java:26:4
-  (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $f1)(local.get $f2))))
+  (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $f1)(local.get $f2))))
  )
 )
 
@@ -163,7 +163,7 @@
 )
 
 ;;; Foo<T> Foo.$create()
-(func $$create__castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo
+(func $$create__@castonarrayinit.CastOnArrayInit.Foo
  (result (ref null $castonarrayinit.CastOnArrayInit.Foo))
  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
  (local $$instance (ref null $castonarrayinit.CastOnArrayInit.Foo))

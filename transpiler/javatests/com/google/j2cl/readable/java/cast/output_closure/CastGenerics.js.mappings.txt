@@ -13,7 +13,7 @@
 [CastGenerics] => [this.$ctor__java_lang_Object__void();] "cast.CastGenerics.<init>"
 [method] => [m_method__java_lang_Object_$pp_cast]
 [return null;] => [return null;] "cast.CastGenerics.method"
-[testErasureCast] => [m_testErasureCast__]
+[testErasureCast] => [m_testErasureCast__void]
 [{
     String str = new CastGenerics<String, Number>().field;
 ...    containerImplementor.get().mB();
@@ -55,7 +55,7 @@
 [containerImplementor] => [containerImplementor] "containerImplementor"
 [containerImplementor.get().mA();] => [/**@type {Implementor}*/ ($Casts.$to(containerImplementor.m_get__java_lang_Object_$pp_cast(), Implementor)).m_mA__void();] "cast.CastGenerics.testErasureCast"
 [containerImplementor.get().mB();] => [/**@type {Implementor}*/ ($Casts.$to(containerImplementor.m_get__java_lang_Object_$pp_cast(), Implementor)).m_mB__void();] "cast.CastGenerics.testErasureCast"
-[testCastToParamterizedType] => [m_testCastToParamterizedType__]
+[testCastToParamterizedType] => [m_testCastToParamterizedType__void]
 [{
     Object o = new Integer(1);
 ...    cc = (CastGenerics) o;
@@ -95,7 +95,7 @@
   }] "cast.CastGenerics.method"
 [return (EE) o;] => [return /**@type {EE}*/ ($Casts.$to(o, Empty1));] "cast.CastGenerics.method"
 [return null;] => [return null;] "cast.CastGenerics.method"
-[doSomething] => [m_doSomething__]
+[doSomething] => [m_doSomething__cast_CastGenerics_Foo]
 [{
     return new Foo<T>() { };
   }] => [CastGenerics.$clinit();] "cast.CastGenerics.doSomething"

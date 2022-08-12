@@ -78,7 +78,7 @@ def integration_test(
       var Main = goog.require('%s');
       testSuite({
         test_Main: function() {
-          return Main.m_main__arrayOf_java_lang_String([]);
+          return Main.m_main__arrayOf_java_lang_String__void([]);
         }
       });
   """ % (main_class)

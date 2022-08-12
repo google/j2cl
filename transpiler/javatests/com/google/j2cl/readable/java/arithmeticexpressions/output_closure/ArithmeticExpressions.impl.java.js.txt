@@ -50,7 +50,7 @@ class ArithmeticExpressions extends j_l_Object {
   i = -1;
   f = 9.223372036854776E18;
   d = 9.223372036854776E18;
-  let o = Character.m_valueOf__char(c);
+  let o = Character.m_valueOf__char__java_lang_Character(c);
   s = $Primitives.narrowCharToShort(/**@type {!Character}*/ ($Casts.$to(o, Character)).m_charValue__char());
  }
  /** @nodts */
@@ -71,7 +71,7 @@ class ArithmeticExpressions extends j_l_Object {
   q = 3 >>> 2 | 0;
   let x = $Primitives.narrowIntToByte(Math.imul($Primitives.narrowIntToShort(a) + $Primitives.narrowIntToByte($Primitives.narrowIntToShort(b)), $Primitives.narrowIntToShort($Primitives.narrowIntToByte(c))));
   let y = 121 /* 'y' */;
-  let z = Long.m_valueOf__long($Long.fromInt(121));
+  let z = Long.m_valueOf__long__java_lang_Long($Long.fromInt(121));
   k = $LongUtils.equals($Primitives.widenCharToLong(y), z.m_longValue__long());
  }
  /** @nodts */
@@ -110,64 +110,64 @@ class ArithmeticExpressions extends j_l_Object {
   $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], $Long.fromInt(1)));
   $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], $Long.fromInt(1)));
   {
-   let $array_3 = ArithmeticExpressions.m_getLongArray__(), $index_3 = 0;
+   let $array_3 = ArithmeticExpressions.m_getLongArray__arrayOf_long(), $index_3 = 0;
    $Arrays.$set($array_3, $index_3, $LongUtils.plus($array_3[$index_3], $Long.fromInt(1)));
   }
   let booleans = null;
   $Arrays.$set(booleans, 0, !!(+ booleans[0] | + true));
   let strings = null;
-  $Arrays.$set(strings, 0, j_l_String.m_valueOf__java_lang_Object(strings[0]) + j_l_String.m_valueOf__java_lang_Object(null));
+  $Arrays.$set(strings, 0, j_l_String.m_valueOf__java_lang_Object__java_lang_String(strings[0]) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(null));
   let shorts = null;
   let b = $Arrays.$set(shorts, 0, $Primitives.narrowIntToShort(shorts[0] + 1 | 0)) == 10;
  }
  /** @nodts @return {Array<!$Long>} */
- static m_getLongArray__() {
+ static m_getLongArray__arrayOf_long() {
   return null;
  }
  /** @nodts */
  m_testCompoundBoxedTypes__void() {
   let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;
-  let c = Integer.m_valueOf__int(1000);
-  let d = Integer.m_valueOf__int(10000);
-  d = Integer.m_valueOf__int(d.m_intValue__int() + c.m_intValue__int() | 0);
+  let c = Integer.m_valueOf__int__java_lang_Integer(1000);
+  let d = Integer.m_valueOf__int__java_lang_Integer(10000);
+  d = Integer.m_valueOf__int__java_lang_Integer(d.m_intValue__int() + c.m_intValue__int() | 0);
   let i = 43;
-  d = Integer.m_valueOf__int(d.m_intValue__int() + i | 0);
-  d = Integer.m_valueOf__int(d.m_intValue__int() << i);
+  d = Integer.m_valueOf__int__java_lang_Integer(d.m_intValue__int() + i | 0);
+  d = Integer.m_valueOf__int__java_lang_Integer(d.m_intValue__int() << i);
   i = i + c.m_intValue__int() | 0;
-  let e = c = Integer.m_valueOf__int(c.m_intValue__int() + 1 | 0);
-  e = c = Integer.m_valueOf__int(c.m_intValue__int() + 1 | 0);
+  let e = c = Integer.m_valueOf__int__java_lang_Integer(c.m_intValue__int() + 1 | 0);
+  e = c = Integer.m_valueOf__int__java_lang_Integer(c.m_intValue__int() + 1 | 0);
   let e2 = 100;
-  e2 = Double.m_doubleValue__java_lang_Double(e2) + 1;
-  let f = ($value = c, c = Integer.m_valueOf__int(c.m_intValue__int() + 1 | 0), $value);
-  f = ($value_1 = c, c = Integer.m_valueOf__int(c.m_intValue__int() + 1 | 0), $value_1);
-  let b = Byte.m_valueOf__byte(0);
-  b = Byte.m_valueOf__byte($Primitives.narrowIntToByte(b.m_byteValue__byte() + 1 | 0));
-  let ch = Character.m_valueOf__char(99 /* 'c' */);
-  ch = Character.m_valueOf__char($Primitives.narrowIntToChar(ch.m_charValue__char() + 1 /* '\u0001' */ | 0));
-  (f = Integer.m_valueOf__int(f.m_intValue__int() + 1 | 0)).m_intValue__int();
-  ($value_2 = f, f = Integer.m_valueOf__int(f.m_intValue__int() - 1 | 0), $value_2).m_intValue__int();
+  e2 = Double.m_doubleValue__java_lang_Double__double(e2) + 1;
+  let f = ($value = c, c = Integer.m_valueOf__int__java_lang_Integer(c.m_intValue__int() + 1 | 0), $value);
+  f = ($value_1 = c, c = Integer.m_valueOf__int__java_lang_Integer(c.m_intValue__int() + 1 | 0), $value_1);
+  let b = Byte.m_valueOf__byte__java_lang_Byte(0);
+  b = Byte.m_valueOf__byte__java_lang_Byte($Primitives.narrowIntToByte(b.m_byteValue__byte() + 1 | 0));
+  let ch = Character.m_valueOf__char__java_lang_Character(99 /* 'c' */);
+  ch = Character.m_valueOf__char__java_lang_Character($Primitives.narrowIntToChar(ch.m_charValue__char() + 1 /* '\u0001' */ | 0));
+  (f = Integer.m_valueOf__int__java_lang_Integer(f.m_intValue__int() + 1 | 0)).m_intValue__int();
+  ($value_2 = f, f = Integer.m_valueOf__int__java_lang_Integer(f.m_intValue__int() - 1 | 0), $value_2).m_intValue__int();
   let ref = null;
-  ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref = Byte.m_valueOf__byte($Primitives.narrowIntToByte(/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__byte() + 1 | 0));
+  ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref = Byte.m_valueOf__byte__java_lang_Byte($Primitives.narrowIntToByte(/**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__byte() + 1 | 0));
   let n = 1 + /**@type {Byte}*/ ($Casts.$to(ref.f_field__arithmeticexpressions_ArithmeticExpressions_1Ref, Byte)).m_byteValue__byte() | 0;
  }
  /** @nodts @return {Integer} */
- static m_getInteger__() {
+ static m_getInteger__java_lang_Integer() {
   return null;
  }
  /** @nodts */
- static m_testSideEffect__() {
+ static m_testSideEffect__void() {
   {
-   let $qualifier = ArithmeticExpressions.m_getWithSideEffect__();
+   let $qualifier = ArithmeticExpressions.m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions();
    $qualifier.f_intField__arithmeticexpressions_ArithmeticExpressions = $LongUtils.plus($qualifier.f_intField__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(5));
   }
  }
  /** @nodts @return {ArithmeticExpressions} */
- static m_getWithSideEffect__() {
+ static m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions() {
   return null;
  }
  /** @nodts */
  m_testExtendedOperands__void() {
-  let boxedInteger = Integer.m_valueOf__int(3);
+  let boxedInteger = Integer.m_valueOf__int__java_lang_Integer(3);
   let /** number */ i;
   let /** !$Long */ l;
   let /** number */ d;
@@ -176,12 +176,12 @@ class ArithmeticExpressions extends j_l_Object {
   l = $LongUtils.times($LongUtils.times($LongUtils.times($LongUtils.times($Long.fromInt(1000000), l), $Long.fromInt(60)), $Long.fromInt(60)), $Long.fromInt(24));
   l = $LongUtils.times($LongUtils.times($Primitives.widenIntToLong(Math.imul(Math.imul(24, 60), 60)), l), $Long.fromInt(1000000));
   d = $Primitives.widenLongToDouble(l = $Primitives.widenIntToLong(i = 20));
-  l = $Primitives.widenIntToLong((boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__int());
+  l = $Primitives.widenIntToLong((boxedInteger = Integer.m_valueOf__int__java_lang_Integer(i = 20)).m_intValue__int());
   l = $LongUtils.plus($LongUtils.plus($Primitives.widenIntToLong(i + boxedInteger.m_intValue__int() | 0), l), $Long.fromInt(20));
   d = $Primitives.widenLongToDouble($LongUtils.plus($Long.fromInt(20), l)) + d;
  }
  /** @nodts @return {!$Long} */
- static m_incrementCounter__() {
+ static m_incrementCounter__long() {
   return ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $LongUtils.plus(ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_, $Long.fromInt(1));
  }
  /** @private @nodts */

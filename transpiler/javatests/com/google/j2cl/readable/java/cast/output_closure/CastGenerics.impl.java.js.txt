@@ -45,7 +45,7 @@ class CastGenerics extends j_l_Object {
   return null;
  }
  /** @nodts @template T_1, U */
- static m_testErasureCast__() {
+ static m_testErasureCast__void() {
   CastGenerics.$clinit();
   let str = /**@type {?string}*/ ($Casts.$to(/**@type {!CastGenerics<?string, (Number|number)>}*/ (CastGenerics.$create__()).f_field__cast_CastGenerics, j_l_String));
   str = /**@type {?string}*/ ($Casts.$to(/**@type {!CastGenerics<?string, (Number|number)>}*/ (CastGenerics.$create__()).m_method__java_lang_Object_$pp_cast(), j_l_String));
@@ -75,7 +75,7 @@ class CastGenerics extends j_l_Object {
   /**@type {Implementor}*/ ($Casts.$to(containerImplementor.m_get__java_lang_Object_$pp_cast(), Implementor)).m_mB__void();
  }
  /** @nodts */
- static m_testCastToParamterizedType__() {
+ static m_testCastToParamterizedType__void() {
   CastGenerics.$clinit();
   let o = Integer.$create__int(1);
   let cc = /**@type {CastGenerics<Error, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));
@@ -107,7 +107,7 @@ class CastGenerics extends j_l_Object {
   return null;
  }
  /** @nodts @template T_1 @return {Foo<T_1>} */
- static m_doSomething__() {
+ static m_doSomething__cast_CastGenerics_Foo() {
   CastGenerics.$clinit();
   return /**@type {!$1<T_1>}*/ ($1.$create__());
  }

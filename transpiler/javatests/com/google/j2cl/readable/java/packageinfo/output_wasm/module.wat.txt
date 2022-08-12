@@ -65,7 +65,7 @@
 )
 
 ;;; Outer Outer.$create()
-(func $$create__packageinfo_Outer@packageinfo.Outer
+(func $$create__@packageinfo.Outer
  (result (ref null $packageinfo.Outer))
  ;;@ packageinfo/Outer.java:21:13
  (local $$instance (ref null $packageinfo.Outer))
@@ -149,7 +149,7 @@
 )
 
 ;;; Inner Inner.$create(Outer $outer_this)
-(func $$create__packageinfo_Outer__packageinfo_Outer_Inner@packageinfo.Outer.Inner
+(func $$create__packageinfo_Outer@packageinfo.Outer.Inner
  (param $$outer_this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer.Inner))
  ;;@ packageinfo/Outer.java:24:15
@@ -235,7 +235,7 @@
 )
 
 ;;; Foo Foo.$create()
-(func $$create__packageinfo_subpackage_Foo@packageinfo.subpackage.Foo
+(func $$create__@packageinfo.subpackage.Foo
  (result (ref null $packageinfo.subpackage.Foo))
  ;;@ packageinfo/subpackage/Foo.java:20:13
  (local $$instance (ref null $packageinfo.subpackage.Foo))
@@ -276,7 +276,7 @@
  (block
   ;; (Foo.this.outer = packageinfo.Outer.$create());
   ;;@ packageinfo/subpackage/Foo.java:22:2
-  (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $$create__packageinfo_Outer@packageinfo.Outer ))
+  (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $$create__@packageinfo.Outer ))
  )
 )
 

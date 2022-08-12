@@ -73,7 +73,7 @@
 )
 
 ;;; TryCatch TryCatch.$create()
-(func $$create__trycatch_TryCatch@trycatch.TryCatch
+(func $$create__@trycatch.TryCatch
  (result (ref null $trycatch.TryCatch))
  ;;@ trycatch/TryCatch.java:18:13
  (local $$instance (ref null $trycatch.TryCatch))
@@ -122,7 +122,7 @@
    (block
     ;; throw java.lang.ClassCastException.$create();
     ;;@ trycatch/TryCatch.java:22:6
-    (throw $exception.event (call $$create__java_lang_ClassCastException@java.lang.ClassCastException ))
+    (throw $exception.event (call $$create__@java.lang.ClassCastException ))
    )
   ) (catch $exception.event (block
    (local.set $__$exc (pop (ref null $java.lang.Throwable)))
@@ -185,7 +185,7 @@
    (block
     ;; throw java.lang.ClassCastException.$create();
     ;;@ trycatch/TryCatch.java:32:6
-    (throw $exception.event (call $$create__java_lang_ClassCastException@java.lang.ClassCastException ))
+    (throw $exception.event (call $$create__@java.lang.ClassCastException ))
    )
   ) (catch $exception.event (block
    (local.set $__$exc (pop (ref null $java.lang.Throwable)))
@@ -199,7 +199,7 @@
    (block
     ;; throw java.lang.ClassCastException.$create();
     ;;@ trycatch/TryCatch.java:38:6
-    (throw $exception.event (call $$create__java_lang_ClassCastException@java.lang.ClassCastException ))
+    (throw $exception.event (call $$create__@java.lang.ClassCastException ))
    )
   ) (catch $exception.event (block
    (local.set $__$exc_1 (pop (ref null $java.lang.Throwable)))
@@ -238,7 +238,7 @@
    (block
     ;; throw java.lang.ClassCastException.$create();
     ;;@ trycatch/TryCatch.java:48:6
-    (throw $exception.event (call $$create__java_lang_ClassCastException@java.lang.ClassCastException ))
+    (throw $exception.event (call $$create__@java.lang.ClassCastException ))
    )
   ) (catch $exception.event (block
    (local.set $__$exc (pop (ref null $java.lang.Throwable)))
@@ -311,13 +311,13 @@
      (block
       ;; (thing = trycatch.TryCatch.ClosableThing.$create());
       ;;@ trycatch/TryCatch.java:67:4
-      (local.set $thing (call $$create__trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing ))
+      (local.set $thing (call $$create__@trycatch.TryCatch.ClosableThing ))
       ;; (thing2 = trycatch.TryCatch.ClosableThing.$create());
       ;;@ trycatch/TryCatch.java:67:4
-      (local.set $thing2 (call $$create__trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing ))
+      (local.set $thing2 (call $$create__@trycatch.TryCatch.ClosableThing ))
       ;; throw java.lang.Exception.$create();
       ;;@ trycatch/TryCatch.java:69:6
-      (throw $exception.event (call $$create__java_lang_Exception@java.lang.Exception ))
+      (throw $exception.event (call $$create__@java.lang.Exception ))
      )
     ) (catch $exception.event (block
      (local.set $__$exc (pop (ref null $java.lang.Throwable)))
@@ -394,10 +394,10 @@
  (block
   ;; ClosableThing thing = trycatch.TryCatch.ClosableThing.$create();
   ;;@ trycatch/TryCatch.java:76:4
-  (local.set $thing (call $$create__trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing ))
+  (local.set $thing (call $$create__@trycatch.TryCatch.ClosableThing ))
   ;; ClosableThing thing2 = trycatch.TryCatch.ClosableThing.$create();
   ;;@ trycatch/TryCatch.java:77:4
-  (local.set $thing2 (call $$create__trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing ))
+  (local.set $thing2 (call $$create__@trycatch.TryCatch.ClosableThing ))
   ;; try {
   ;;@ trycatch/TryCatch.java:78:4
   (try (do 
@@ -425,7 +425,7 @@
       (local.set $$resource_1 (local.get $thing2))
       ;; throw java.lang.Exception.$create();
       ;;@ trycatch/TryCatch.java:79:6
-      (throw $exception.event (call $$create__java_lang_Exception@java.lang.Exception ))
+      (throw $exception.event (call $$create__@java.lang.Exception ))
      )
     ) (catch $exception.event (block
      (local.set $__$exc (pop (ref null $java.lang.Throwable)))
@@ -518,7 +518,7 @@
       (local.set $$resource (global.get $f_closableThing__trycatch_TryCatch_))
       ;; throw java.lang.Exception.$create();
       ;;@ trycatch/TryCatch.java:89:6
-      (throw $exception.event (call $$create__java_lang_Exception@java.lang.Exception ))
+      (throw $exception.event (call $$create__@java.lang.Exception ))
      )
     ) (catch $exception.event (block
      (local.set $__$exc (pop (ref null $java.lang.Throwable)))
@@ -592,7 +592,7 @@
    (block
     ;; throw java.lang.Exception.$create();
     ;;@ trycatch/TryCatch.java:97:6
-    (throw $exception.event (call $$create__java_lang_Exception@java.lang.Exception ))
+    (throw $exception.event (call $$create__@java.lang.Exception ))
    )
   ) (catch $exception.event (block
    (local.set $__$exc (pop (ref null $java.lang.Throwable)))
@@ -612,7 +612,7 @@
         (block
          ;; throw java.lang.Exception.$create();
          ;;@ trycatch/TryCatch.java:100:8
-         (throw $exception.event (call $$create__java_lang_Exception@java.lang.Exception ))
+         (throw $exception.event (call $$create__@java.lang.Exception ))
         )
        ) (catch $exception.event (block
         (local.set $__$exc_1 (pop (ref null $java.lang.Throwable)))
@@ -658,7 +658,7 @@
  (block
   ;; throw ((Exception) TryCatch.this.getT(java.lang.Exception.$create()));
   ;;@ trycatch/TryCatch.java:108:4
-  (throw $exception.event (ref.cast_static $java.lang.Exception (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))(call $$create__java_lang_Exception@java.lang.Exception ))))
+  (throw $exception.event (ref.cast_static $java.lang.Exception (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (ref.as_non_null (local.get $this))(call $$create__@java.lang.Exception ))))
  )
 )
 (elem declare func $m_testThrowGenerics__void@trycatch.TryCatch)
@@ -724,7 +724,7 @@
   (call $$clinit__void@java.lang.Object )
   ;; (trycatch.TryCatch.closableThing = trycatch.TryCatch.ClosableThing.$create());
   ;;@ trycatch/TryCatch.java:85:2
-  (global.set $f_closableThing__trycatch_TryCatch_ (call $$create__trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing ))
+  (global.set $f_closableThing__trycatch_TryCatch_ (call $$create__@trycatch.TryCatch.ClosableThing ))
  )
 )
 
@@ -759,7 +759,7 @@
 )
 
 ;;; ClosableThing ClosableThing.$create()
-(func $$create__trycatch_TryCatch_ClosableThing@trycatch.TryCatch.ClosableThing
+(func $$create__@trycatch.TryCatch.ClosableThing
  (result (ref null $trycatch.TryCatch.ClosableThing))
  ;;@ trycatch/TryCatch.java:61:15
  (local $$instance (ref null $trycatch.TryCatch.ClosableThing))

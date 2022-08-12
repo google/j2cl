@@ -129,7 +129,7 @@
 )
 
 ;;; AnonymousClass AnonymousClass.$create()
-(func $$create__anonymousclass_AnonymousClass@anonymousclass.AnonymousClass
+(func $$create__@anonymousclass.AnonymousClass
  (result (ref null $anonymousclass.AnonymousClass))
  ;;@ anonymousclass/AnonymousClass.java:24:13
  (local $$instance (ref null $anonymousclass.AnonymousClass))
@@ -171,7 +171,7 @@
  (block
   ;; SomeClass instance = anonymousclass.AnonymousClass.1.$create(AnonymousClass.this,1);
   ;;@ anonymousclass/AnonymousClass.java:26:4
-  (local.set $instance (call $$create__anonymousclass_AnonymousClass__int__anonymousclass_AnonymousClass_1@anonymousclass.AnonymousClass.1 (local.get $this)(i32.const 1)))
+  (local.set $instance (call $$create__anonymousclass_AnonymousClass__int@anonymousclass.AnonymousClass.1 (local.get $this)(i32.const 1)))
  )
 )
 (elem declare func $m_main__void@anonymousclass.AnonymousClass)
@@ -235,7 +235,7 @@
   (global.set $f_$initialized__anonymousclass_SomeInterface (i32.const 1))
   ;; (anonymousclass.SomeInterface.implicitlyStatic = anonymousclass.SomeInterface.1.$create(1));
   ;;@ anonymousclass/AnonymousClass.java:39:2
-  (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $$create__int__anonymousclass_SomeInterface_1@anonymousclass.SomeInterface.1 (i32.const 1)))
+  (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $$create__int@anonymousclass.SomeInterface.1 (i32.const 1)))
  )
 )
 
@@ -270,7 +270,7 @@
 )
 
 ;;; <anonymous> extends SomeClass <anonymous> extends SomeClass.$create(AnonymousClass $outer_this, int $_0)
-(func $$create__anonymousclass_AnonymousClass__int__anonymousclass_AnonymousClass_1@anonymousclass.AnonymousClass.1
+(func $$create__anonymousclass_AnonymousClass__int@anonymousclass.AnonymousClass.1
  (param $$outer_this (ref null $anonymousclass.AnonymousClass))
  (param $$_0 i32)
  (result (ref null $anonymousclass.AnonymousClass.1))
@@ -394,7 +394,7 @@
 )
 
 ;;; <anonymous> extends SomeClass <anonymous> extends SomeClass.$create(int $_0)
-(func $$create__int__anonymousclass_SomeInterface_1@anonymousclass.SomeInterface.1
+(func $$create__int@anonymousclass.SomeInterface.1
  (param $$_0 i32)
  (result (ref null $anonymousclass.SomeInterface.1))
  ;;@ anonymousclass/AnonymousClass.java:40:23

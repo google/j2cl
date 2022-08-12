@@ -48,7 +48,7 @@
 )
 
 ;;; Foo Foo.$create()
-(func $$create__srcjar_Foo@srcjar.Foo
+(func $$create__@srcjar.Foo
  (result (ref null $srcjar.Foo))
  ;;@ srcjar/Foo.java:21:13
  (local $$instance (ref null $srcjar.Foo))
@@ -131,7 +131,7 @@
 )
 
 ;;; Srcjar Srcjar.$create()
-(func $$create__srcjar_Srcjar@srcjar.Srcjar
+(func $$create__@srcjar.Srcjar
  (result (ref null $srcjar.Srcjar))
  ;;@ srcjar/Srcjar.java:18:13
  (local $$instance (ref null $srcjar.Srcjar))
@@ -172,7 +172,7 @@
   (call $$clinit__void@srcjar.Srcjar )
   ;; Foo foo = srcjar.Foo.$create();
   ;;@ srcjar/Srcjar.java:21:4
-  (local.set $foo (call $$create__srcjar_Foo@srcjar.Foo ))
+  (local.set $foo (call $$create__@srcjar.Foo ))
  )
 )
 

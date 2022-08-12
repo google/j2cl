@@ -16,7 +16,7 @@
 [Main] => [this.$ctor__java_lang_Object__void();] "jsfunction.Main.<init>"
 [Main] => [this.$init__void_$p_jsfunction_Main();] "jsfunction.Main.<init>"
 [createNativeFunction] => [createNativeFunction]
-[callFn] => [m_callFn__jsfunction_Main_JsFunctionInterface__int]
+[callFn] => [m_callFn__jsfunction_Main_JsFunctionInterface__int__int]
 [fn] => [fn] "fn"
 [a] => [a] "a"
 [{
@@ -27,14 +27,14 @@
 [JsFunctionImplementation func = new JsFunctionImplementation();] => [let func = JsFunctionImplementation.$create__();] "jsfunction.Main.testJsFunction"
 [func] => [func] "func"
 [func.foo(10);] => [func(10);] "jsfunction.Main.testJsFunction"
-[callFn(createNativeFunction(), 10);] => [Main.m_callFn__jsfunction_Main_JsFunctionInterface__int(Main.createNativeFunction(), 10);] "jsfunction.Main.testJsFunction"
+[callFn(createNativeFunction(), 10);] => [Main.m_callFn__jsfunction_Main_JsFunctionInterface__int__int(Main.createNativeFunction(), 10);] "jsfunction.Main.testJsFunction"
 [int a = func.field;] => [let a = func.f_field__jsfunction_Main_JsFunctionImplementation;] "jsfunction.Main.testJsFunction"
 [a] => [a] "a"
-[func.bar();] => [JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation(func);] "jsfunction.Main.testJsFunction"
+[func.bar();] => [JsFunctionImplementation.m_bar__jsfunction_Main_JsFunctionImplementation__int(func);] "jsfunction.Main.testJsFunction"
 [testJsFunctionsCapturingLocal] => [m_testJsFunctionsCapturingLocal__void]
 [final int n = 4;] => [let n = 4;] "jsfunction.Main.testJsFunctionsCapturingLocal"
 [n] => [n] "n"
-[callFn((number) -> number + n, n);] => [Main.m_callFn__jsfunction_Main_JsFunctionInterface__int((/** number */ number_1) =>{
+[callFn((number) -> number + n, n);] => [Main.m_callFn__jsfunction_Main_JsFunctionInterface__int__int((/** number */ number_1) =>{
    return number_1 + n | 0;
   }, n);] "jsfunction.Main.testJsFunctionsCapturingLocal"
 [number] => [number_1] "number"
@@ -42,7 +42,7 @@
 [callFn(
         new JsFunctionInterface() {
 ...        },
-        n);] => [Main.m_callFn__jsfunction_Main_JsFunctionInterface__int((/** number */ a) =>{
+        n);] => [Main.m_callFn__jsfunction_Main_JsFunctionInterface__int__int((/** number */ a) =>{
    return a + n | 0;
   }, n);] "jsfunction.Main.testJsFunctionsCapturingLocal"
 [a] => [a] "a"
@@ -72,8 +72,8 @@
 [testJsFunctionErasureCasts] => [m_testJsFunctionErasureCasts__void]
 [List<Function<String, String>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<?function(?string):?string>}*/ (ArrayList.$create__());] "jsfunction.Main.testJsFunctionErasureCasts"
 [list] => [list] "list"
-[acceptsJsFunction(list.get(0));] => [Main.m_acceptsJsFunction__jsfunction_Main_Function(/**@type {?function(?string):?string}*/ ($Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));] "jsfunction.Main.testJsFunctionErasureCasts"
-[acceptsJsFunction] => [m_acceptsJsFunction__jsfunction_Main_Function]
+[acceptsJsFunction(list.get(0));] => [Main.m_acceptsJsFunction__jsfunction_Main_Function__void(/**@type {?function(?string):?string}*/ ($Casts.$to(list.getAtIndex(0), $JavaScriptFunction)));] "jsfunction.Main.testJsFunctionErasureCasts"
+[acceptsJsFunction] => [m_acceptsJsFunction__jsfunction_Main_Function__void]
 [f] => [f] "f"
 [{}] => [Main.$clinit();] "jsfunction.Main.acceptsJsFunction"
 [testJsFunctionVarargs] => [m_testJsFunctionVarargs__jsfunction_Main_JsFunctionVarargs_$pp_jsfunction]
@@ -134,12 +134,12 @@
 [testVarArgsMethodReferenceToJsFuncion] => [m_testVarArgsMethodReferenceToJsFuncion__void]
 [ForEachCallBack<ElementalJsFunction> c = ElementalJsFunction::call;] => [let c = (arg0, /** number */ arg1, arg2) =>{
    let arg0_1 = /**@type {?function(...*):*}*/ ($Casts.$to(arg0, $JavaScriptFunction));
-...   return arg0_1(Integer.m_valueOf__int(arg1), arg2_1);
+...   return arg0_1(Integer.m_valueOf__int__java_lang_Integer(arg1), arg2_1);
   };] "jsfunction.Main.testVarArgsMethodReferenceToJsFuncion"
 [c] => [c] "c"
 [ElementalJsFunction::call] => [let arg0_1 = /**@type {?function(...*):*}*/ ($Casts.$to(arg0, $JavaScriptFunction));] "jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
 [ElementalJsFunction::call] => [let arg2_1 = /**@type {Array<?function(...*):*>}*/ ($Arrays.$castTo(arg2, $JavaScriptFunction, 1));] "jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
-[ElementalJsFunction::call] => [return arg0_1(Integer.m_valueOf__int(arg1), arg2_1);] "jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
+[ElementalJsFunction::call] => [return arg0_1(Integer.m_valueOf__int__java_lang_Integer(arg1), arg2_1);] "jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
 [acceptsVarargsJsFunctionWithTypeVariable] => [m_acceptsVarargsJsFunctionWithTypeVariable__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction]
 [x] => [x] "x"
 [acceptsVarargsJsFunctionWithParemetrizedType] => [m_acceptsVarargsJsFunctionWithParemetrizedType__jsfunction_Main_JsFunctionVarargsGenerics__void_$pp_jsfunction]
@@ -161,12 +161,12 @@
 [o = SimpleJsFunction[].class;] => [o = Class.$get($JavaScriptFunction, 1);] "jsfunction.Main.testJsFunctionClassLiterals"
 [testJsFunctionOptional] => [m_testJsFunctionOptional__void_$pp_jsfunction]
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** number */ i, /** ?number= */ n) =>{
-   return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));
+   return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double__double(n));
   };] "jsfunction.Main.testJsFunctionOptional"
 [f] => [f] "f"
 [i] => [i] "i"
 [n] => [n] "n"
-[(int) (i + n)] => [return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));] "jsfunction.Main.<lambda in testJsFunctionOptional>"
+[(int) (i + n)] => [return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double__double(n));] "jsfunction.Main.<lambda in testJsFunctionOptional>"
 [setParametricJsFunction] => [set parametricJsFunction]
 [fn] => [fn] "fn"
 [{}] => [Main.$clinit();] "jsfunction.Main.setParametricJsFunction"
@@ -204,7 +204,7 @@
 [(c.function).call("");] => [$function_2('');] "jsfunction.Main.testJsFunctionPropertyCall"
 [(c != null ? c.function : null).call("");] => [let $function_3 = !$Equality.$same(c, null) ? c.f_function__jsfunction_Main_ClassWithJsFunctionProperty : null;] "jsfunction.Main.testJsFunctionPropertyCall"
 [(c != null ? c.function : null).call("");] => [$function_3('');] "jsfunction.Main.testJsFunctionPropertyCall"
-[callInterfaceRaw] => [m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number]
+[callInterfaceRaw] => [m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object]
 [f] => [f] "f"
 [o] => [o] "o"
 [n] => [n] "n"
@@ -212,14 +212,14 @@
     return f.apply(o, n);
   }] => [Main.$clinit();] "jsfunction.Main.callInterfaceRaw"
 [return f.apply(o, n);] => [return f(o, n);] "jsfunction.Main.callInterfaceRaw"
-[callInterfaceParameterized] => [m_callInterfaceParameterized__jsfunction_Main_JsBiFunction__java_lang_String]
+[callInterfaceParameterized] => [m_callInterfaceParameterized__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String]
 [f] => [f] "f"
 [s] => [s] "s"
 [{
     return f.apply(s, 1);
   }] => [Main.$clinit();] "jsfunction.Main.callInterfaceParameterized"
-[return f.apply(s, 1);] => [return /**@type {?string}*/ ($Casts.$to(f(s, Integer.m_valueOf__int(1)), j_l_String));] "jsfunction.Main.callInterfaceParameterized"
-[callInterfaceUnparameterized] => [m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number]
+[return f.apply(s, 1);] => [return /**@type {?string}*/ ($Casts.$to(f(s, Integer.m_valueOf__int__java_lang_Integer(1)), j_l_String));] "jsfunction.Main.callInterfaceParameterized"
+[callInterfaceUnparameterized] => [m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object]
 [f] => [f] "f"
 [u] => [u] "u"
 [v] => [v] "v"
@@ -227,7 +227,7 @@
     return f.apply(u, v);
   }] => [Main.$clinit();] "jsfunction.Main.callInterfaceUnparameterized"
 [return f.apply(u, v);] => [return f(u, v);] "jsfunction.Main.callInterfaceUnparameterized"
-[callImplementorRaw] => [m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer]
+[callImplementorRaw] => [m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object]
 [f] => [f] "f"
 [o] => [o] "o"
 [n] => [n] "n"
@@ -235,14 +235,14 @@
     return f.apply(o, n);
   }] => [Main.$clinit();] "jsfunction.Main.callImplementorRaw"
 [return f.apply(o, n);] => [return f(o, n);] "jsfunction.Main.callImplementorRaw"
-[callImplementorParameterized] => [m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String]
+[callImplementorParameterized] => [m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String]
 [f] => [f] "f"
 [s] => [s] "s"
 [{
     return f.apply(s, 1);
   }] => [Main.$clinit();] "jsfunction.Main.callImplementorParameterized"
-[return f.apply(s, 1);] => [return /**@type {?string}*/ ($Casts.$to(f(s, Integer.m_valueOf__int(1)), j_l_String));] "jsfunction.Main.callImplementorParameterized"
-[testParameterTypes] => [m_testParameterTypes__]
+[return f.apply(s, 1);] => [return /**@type {?string}*/ ($Casts.$to(f(s, Integer.m_valueOf__int__java_lang_Integer(1)), j_l_String));] "jsfunction.Main.callImplementorParameterized"
+[testParameterTypes] => [m_testParameterTypes__void]
 [{
     JsBiFunction tIntegerJsBiFunction = new TIntegerJsBiFunction<String>();
 ...    callOnFunction(new DoubleDoubleJsBiFunction());
@@ -251,19 +251,19 @@
 [tIntegerJsBiFunction] => [tIntegerJsBiFunction] "tIntegerJsBiFunction"
 [JsBiFunction doubleDoubleJsBiFunction = new DoubleDoubleJsBiFunction();] => [let doubleDoubleJsBiFunction = DoubleDoubleJsBiFunction.$create__();] "jsfunction.Main.testParameterTypes"
 [doubleDoubleJsBiFunction] => [doubleDoubleJsBiFunction] "doubleDoubleJsBiFunction"
-[callInterfaceRaw(tIntegerJsBiFunction, "a", 1);] => [Main.m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int(1));] "jsfunction.Main.testParameterTypes"
-[callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(doubleDoubleJsBiFunction, 1.1, 1.1);] "jsfunction.Main.testParameterTypes"
-[callInterfaceParameterized(tIntegerJsBiFunction, "a");] => [Main.m_callInterfaceParameterized__jsfunction_Main_JsBiFunction__java_lang_String(tIntegerJsBiFunction, 'a');] "jsfunction.Main.testParameterTypes"
-[callInterfaceUnparameterized(tIntegerJsBiFunction, "a", 1);] => [Main.m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int(1));] "jsfunction.Main.testParameterTypes"
-[callInterfaceUnparameterized(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(doubleDoubleJsBiFunction, 1.1, 1.1);] "jsfunction.Main.testParameterTypes"
-[callImplementorRaw(new TIntegerJsBiFunction<Double>(), 1.1, 1);] => [Main.m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(/**@type {function(?number, Integer):?number}*/ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int(1));] "jsfunction.Main.testParameterTypes"
-[callImplementorParameterized(new TIntegerJsBiFunction<String>(), "");] => [Main.m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String(/**@type {function(?string, Integer):?string}*/ (TIntegerJsBiFunction.$create__()), '');] "jsfunction.Main.testParameterTypes"
-[tIntegerJsBiFunction.apply("a", 1);] => [tIntegerJsBiFunction('a', Integer.m_valueOf__int(1));] "jsfunction.Main.testParameterTypes"
+[callInterfaceRaw(tIntegerJsBiFunction, "a", 1);] => [Main.m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));] "jsfunction.Main.testParameterTypes"
+[callInterfaceRaw(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m_callInterfaceRaw__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);] "jsfunction.Main.testParameterTypes"
+[callInterfaceParameterized(tIntegerJsBiFunction, "a");] => [Main.m_callInterfaceParameterized__jsfunction_Main_JsBiFunction__java_lang_String__java_lang_String(tIntegerJsBiFunction, 'a');] "jsfunction.Main.testParameterTypes"
+[callInterfaceUnparameterized(tIntegerJsBiFunction, "a", 1);] => [Main.m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(tIntegerJsBiFunction, 'a', Integer.m_valueOf__int__java_lang_Integer(1));] "jsfunction.Main.testParameterTypes"
+[callInterfaceUnparameterized(doubleDoubleJsBiFunction, 1.1, 1.1);] => [Main.m_callInterfaceUnparameterized__jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number__java_lang_Object(doubleDoubleJsBiFunction, 1.1, 1.1);] "jsfunction.Main.testParameterTypes"
+[callImplementorRaw(new TIntegerJsBiFunction<Double>(), 1.1, 1);] => [Main.m_callImplementorRaw__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer__java_lang_Object(/**@type {function(?number, Integer):?number}*/ (TIntegerJsBiFunction.$create__()), 1.1, Integer.m_valueOf__int__java_lang_Integer(1));] "jsfunction.Main.testParameterTypes"
+[callImplementorParameterized(new TIntegerJsBiFunction<String>(), "");] => [Main.m_callImplementorParameterized__jsfunction_Main_TIntegerJsBiFunction__java_lang_String__java_lang_String(/**@type {function(?string, Integer):?string}*/ (TIntegerJsBiFunction.$create__()), '');] "jsfunction.Main.testParameterTypes"
+[tIntegerJsBiFunction.apply("a", 1);] => [tIntegerJsBiFunction('a', Integer.m_valueOf__int__java_lang_Integer(1));] "jsfunction.Main.testParameterTypes"
 [doubleDoubleJsBiFunction.apply(1.1, 1.1);] => [doubleDoubleJsBiFunction(1.1, 1.1);] "jsfunction.Main.testParameterTypes"
 [callOnFunction(new DoubleDoubleJsBiFunction());] => [Main.callOnFunction(DoubleDoubleJsBiFunction.$create__());] "jsfunction.Main.testParameterTypes"
 [callOnFunction] => [callOnFunction]
 [f] => [f] "f"
-[testCast] => [m_testCast__]
+[testCast] => [m_testCast__void]
 [{
     Object o = new TIntegerJsBiFunction<String>();
 ...    DoubleDoubleJsBiFunction doubleDoubleJsBiFunction = (DoubleDoubleJsBiFunction) o;
@@ -282,7 +282,7 @@
 [anotherParameterizedJsBiFunction] => [anotherParameterizedJsBiFunction] "anotherParameterizedJsBiFunction"
 [DoubleDoubleJsBiFunction doubleDoubleJsBiFunction = (DoubleDoubleJsBiFunction) o;] => [let doubleDoubleJsBiFunction = /**@type {?function(?number, ?number):?number}*/ ($Casts.$to(o, DoubleDoubleJsBiFunction));] "jsfunction.Main.testCast"
 [doubleDoubleJsBiFunction] => [doubleDoubleJsBiFunction] "doubleDoubleJsBiFunction"
-[testNewInstance] => [m_testNewInstance__]
+[testNewInstance] => [m_testNewInstance__void]
 [{
     TIntegerJsBiFunction rawTIntegerJsBiFunction = new TIntegerJsBiFunction();
 ...    JsBiFunction rawJsBiFunction = new DoubleDoubleJsBiFunction();
@@ -294,7 +294,7 @@
 [parameterizedTIntegerJsBiFunction] => [parameterizedTIntegerJsBiFunction] "parameterizedTIntegerJsBiFunction"
 [JsBiFunction rawJsBiFunction = new DoubleDoubleJsBiFunction();] => [let rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();] "jsfunction.Main.testNewInstance"
 [rawJsBiFunction] => [rawJsBiFunction] "rawJsBiFunction"
-[acceptsParameterizedMethod] => [m_acceptsParameterizedMethod__jsfunction_Main_ParameterizedMethod]
+[acceptsParameterizedMethod] => [m_acceptsParameterizedMethod__jsfunction_Main_ParameterizedMethod__void]
 [m] => [m] "m"
 [Main] => [$init__void_$p_jsfunction_Main]
 [ParametricJsFunction<?> jsFunctionFieldWildcard = event -> {};] => [this.f_jsFunctionFieldWildcard__jsfunction_Main = (/** ? */ event) =>{};] "jsfunction.Main.<init>"

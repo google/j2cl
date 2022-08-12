@@ -509,7 +509,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__nativekttypes_Main@nativekttypes.Main
+(func $$create__@nativekttypes.Main
  (result (ref null $nativekttypes.Main))
  ;;@ nativekttypes/Main.java:21:13
  (local $$instance (ref null $nativekttypes.Main))
@@ -591,7 +591,7 @@
  (block
   ;; NativeTopLevel<String> topLevel = nativekttypes.NativeTopLevel.$create(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:32:4
-  (local.set $topLevel (call $$create__java_lang_Object__nativekttypes_NativeTopLevel@nativekttypes.NativeTopLevel (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
+  (local.set $topLevel (call $$create__java_lang_Object@nativekttypes.NativeTopLevel (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; String fooInstanceMethod = ((String) topLevel.instanceMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:33:4
   (local.set $fooInstanceMethod (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $topLevel))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.NativeTopLevel.vtable $m_instanceMethod__java_lang_Object__java_lang_Object (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel))))))
@@ -644,7 +644,7 @@
   (local.set $i8 (call_ref (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_getstartingmethodAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
   ;; Nested<String> nested = nativekttypes.NativeTopLevel.Nested.$create(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:48:4
-  (local.set $nested (call $$create__java_lang_Object__nativekttypes_NativeTopLevel_Nested@nativekttypes.NativeTopLevel.Nested (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
+  (local.set $nested (call $$create__java_lang_Object@nativekttypes.NativeTopLevel.Nested (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; String nestedInstanceMethod = ((String) nested.instanceMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:49:4
   (local.set $nestedInstanceMethod (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nested))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.NativeTopLevel.Nested.vtable $m_instanceMethod__java_lang_Object__java_lang_Object (struct.get $nativekttypes.NativeTopLevel.Nested $vtable(local.get $nested))))))
@@ -673,13 +673,13 @@
   )
   ;; Nested<String> nestedAnonynous = nativekttypes.Main.1.$create(Main.this,javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:56:4
-  (local.set $nestedAnonynous (call $$create__nativekttypes_Main__java_lang_String__nativekttypes_Main_1@nativekttypes.Main.1 (local.get $this)(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
+  (local.set $nestedAnonynous (call $$create__nativekttypes_Main__java_lang_String@nativekttypes.Main.1 (local.get $this)(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; Inner<String, String> inner = nativekttypes.NativeTopLevel.Inner.$create(topLevel,javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:58:4
-  (local.set $inner (call $$create__nativekttypes_NativeTopLevel__java_lang_Object__nativekttypes_NativeTopLevel_Inner@nativekttypes.NativeTopLevel.Inner (local.get $topLevel)(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
+  (local.set $inner (call $$create__nativekttypes_NativeTopLevel__java_lang_Object@nativekttypes.NativeTopLevel.Inner (local.get $topLevel)(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; Subclass<String> subclass = nativekttypes.Subclass.$create(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:60:4
-  (local.set $subclass (call $$create__java_lang_Object__nativekttypes_Subclass@nativekttypes.Subclass (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
+  (local.set $subclass (call $$create__java_lang_Object@nativekttypes.Subclass (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; int i9 = subclass.methodToRename();
   ;;@ nativekttypes/Main.java:61:4
   (local.set $i9 (call_ref (ref.as_non_null (local.get $subclass))(struct.get $nativekttypes.Subclass.vtable $m_methodToRename__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
@@ -691,10 +691,10 @@
   (local.set $i11 (call_ref (ref.as_non_null (local.get $subclass))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethodToRename__java_lang_Object__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
   ;; NativeFunctionalInterface interfaceAnonymousSubclass = nativekttypes.Main.2.$create(Main.this);
   ;;@ nativekttypes/Main.java:65:4
-  (local.set $interfaceAnonymousSubclass (call $$create__nativekttypes_Main__nativekttypes_Main_2@nativekttypes.Main.2 (local.get $this)))
+  (local.set $interfaceAnonymousSubclass (call $$create__nativekttypes_Main@nativekttypes.Main.2 (local.get $this)))
   ;; NativeFunctionalInterface interfaceExpression = nativekttypes.Main.$LambdaImplementor$1.$create();
   ;;@ nativekttypes/Main.java:70:4
-  (local.set $interfaceExpression (call $$create__nativekttypes_Main_$LambdaImplementor$1@nativekttypes.Main.$LambdaImplementor$1 ))
+  (local.set $interfaceExpression (call $$create__@nativekttypes.Main.$LambdaImplementor$1 ))
  )
 )
 (elem declare func $m_memberAccess__void@nativekttypes.Main)
@@ -713,22 +713,22 @@
  (block
   ;; NativeRequiringBridge o = nativekttypes.NativeRequiringBridge.$create();
   ;;@ nativekttypes/Main.java:80:4
-  (local.set $o (call $$create__nativekttypes_NativeRequiringBridge@nativekttypes.NativeRequiringBridge ))
+  (local.set $o (call $$create__@nativekttypes.NativeRequiringBridge ))
   ;; (o = nativekttypes.Main.3.$create(Main.this));
   ;;@ nativekttypes/Main.java:81:4
-  (local.set $o (call $$create__nativekttypes_Main__nativekttypes_Main_3@nativekttypes.Main.3 (local.get $this)))
+  (local.set $o (call $$create__nativekttypes_Main@nativekttypes.Main.3 (local.get $this)))
   ;; (o = nativekttypes.BridgeSubclass.$create());
   ;;@ nativekttypes/Main.java:82:4
-  (local.set $o (call $$create__nativekttypes_BridgeSubclass@nativekttypes.BridgeSubclass ))
+  (local.set $o (call $$create__@nativekttypes.BridgeSubclass ))
   ;; NativeFunctionalInterfaceRequiringBridge<String> fi;
   ;;@ nativekttypes/Main.java:84:4
   
   ;; (fi = nativekttypes.Main.$LambdaImplementor$2.$create());
   ;;@ nativekttypes/Main.java:85:4
-  (local.set $fi (call $$create__nativekttypes_Main_$LambdaImplementor$2@nativekttypes.Main.$LambdaImplementor$2 ))
+  (local.set $fi (call $$create__@nativekttypes.Main.$LambdaImplementor$2 ))
   ;; (fi = nativekttypes.Main.4.$create(Main.this));
   ;;@ nativekttypes/Main.java:86:4
-  (local.set $fi (call $$create__nativekttypes_Main__nativekttypes_Main_4@nativekttypes.Main.4 (local.get $this)))
+  (local.set $fi (call $$create__nativekttypes_Main@nativekttypes.Main.4 (local.get $this)))
   ;; NativeRequiringBridge cast = ((NativeRequiringBridge) o);
   ;;@ nativekttypes/Main.java:94:4
   (local.set $cast (ref.cast_static $nativekttypes.NativeRequiringBridge (local.get $o)))
@@ -776,7 +776,7 @@
  (block
   ;; NativeWithCompanionObject o = nativekttypes.NativeWithCompanionObject.$create();
   ;;@ nativekttypes/Main.java:105:4
-  (local.set $o (call $$create__nativekttypes_NativeWithCompanionObject@nativekttypes.NativeWithCompanionObject ))
+  (local.set $o (call $$create__@nativekttypes.NativeWithCompanionObject ))
   ;; int i1 = o.instanceField;
   ;;@ nativekttypes/Main.java:107:4
   (local.set $i1 (struct.get $nativekttypes.NativeWithCompanionObject $f_instanceField__nativekttypes_NativeWithCompanionObject(local.get $o)))
@@ -927,7 +927,7 @@
 )
 
 ;;; Subclass<V> Subclass.$create(V v)
-(func $$create__java_lang_Object__nativekttypes_Subclass@nativekttypes.Subclass
+(func $$create__java_lang_Object@nativekttypes.Subclass
  (param $v (ref null $java.lang.Object))
  (result (ref null $nativekttypes.Subclass))
  ;;@ nativekttypes/Main.java:134:2
@@ -1205,7 +1205,7 @@
 )
 
 ;;; Subsubclass<V> Subsubclass.$create(V v)
-(func $$create__java_lang_Object__nativekttypes_Subsubclass@nativekttypes.Subsubclass
+(func $$create__java_lang_Object@nativekttypes.Subsubclass
  (param $v (ref null $java.lang.Object))
  (result (ref null $nativekttypes.Subsubclass))
  ;;@ nativekttypes/Main.java:196:2
@@ -1468,7 +1468,7 @@
 )
 
 ;;; BridgeSubclass BridgeSubclass.$create()
-(func $$create__nativekttypes_BridgeSubclass@nativekttypes.BridgeSubclass
+(func $$create__@nativekttypes.BridgeSubclass
  (result (ref null $nativekttypes.BridgeSubclass))
  ;;@ nativekttypes/Main.java:256:6
  (local $$instance (ref null $nativekttypes.BridgeSubclass))
@@ -1554,7 +1554,7 @@
 )
 
 ;;; <anonymous> extends Nested<String> <anonymous> extends Nested<String>.$create(Main $outer_this, String $_0)
-(func $$create__nativekttypes_Main__java_lang_String__nativekttypes_Main_1@nativekttypes.Main.1
+(func $$create__nativekttypes_Main__java_lang_String@nativekttypes.Main.1
  (param $$outer_this (ref null $nativekttypes.Main))
  (param $$_0 (ref null $java.lang.String))
  (result (ref null $nativekttypes.Main.1))
@@ -1643,7 +1643,7 @@
 )
 
 ;;; <anonymous> implements NativeFunctionalInterface <anonymous> implements NativeFunctionalInterface.$create(Main $outer_this)
-(func $$create__nativekttypes_Main__nativekttypes_Main_2@nativekttypes.Main.2
+(func $$create__nativekttypes_Main@nativekttypes.Main.2
  (param $$outer_this (ref null $nativekttypes.Main))
  (result (ref null $nativekttypes.Main.2))
  ;;@ nativekttypes/Main.java:66:56
@@ -1741,7 +1741,7 @@
 )
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
-(func $$create__nativekttypes_Main_$LambdaImplementor$1@nativekttypes.Main.$LambdaImplementor$1
+(func $$create__@nativekttypes.Main.$LambdaImplementor$1
  (result (ref null $nativekttypes.Main.$LambdaImplementor$1))
  ;;@ nativekttypes/Main.java:71:8
  (local $$instance (ref null $nativekttypes.Main.$LambdaImplementor$1))
@@ -1846,7 +1846,7 @@
 )
 
 ;;; <anonymous> extends NativeRequiringBridge <anonymous> extends NativeRequiringBridge.$create(Main $outer_this)
-(func $$create__nativekttypes_Main__nativekttypes_Main_3@nativekttypes.Main.3
+(func $$create__nativekttypes_Main@nativekttypes.Main.3
  (param $$outer_this (ref null $nativekttypes.Main))
  (result (ref null $nativekttypes.Main.3))
  ;;@ nativekttypes/Main.java:81:36
@@ -1932,7 +1932,7 @@
 )
 
 ;;; $LambdaImplementor$2<V> $LambdaImplementor$2.$create()
-(func $$create__nativekttypes_Main_$LambdaImplementor$2@nativekttypes.Main.$LambdaImplementor$2
+(func $$create__@nativekttypes.Main.$LambdaImplementor$2
  (result (ref null $nativekttypes.Main.$LambdaImplementor$2))
  ;;@ nativekttypes/Main.java:85:9
  (local $$instance (ref null $nativekttypes.Main.$LambdaImplementor$2))
@@ -2039,7 +2039,7 @@
 )
 
 ;;; <anonymous> implements NativeFunctionalInterfaceRequiringBridge<String> <anonymous> implements NativeFunctionalInterfaceRequiringBridge<String>.$create(Main $outer_this)
-(func $$create__nativekttypes_Main__nativekttypes_Main_4@nativekttypes.Main.4
+(func $$create__nativekttypes_Main@nativekttypes.Main.4
  (param $$outer_this (ref null $nativekttypes.Main))
  (result (ref null $nativekttypes.Main.4))
  ;;@ nativekttypes/Main.java:87:63
@@ -2269,7 +2269,7 @@
 )
 
 ;;; NativeRequiringBridge NativeRequiringBridge.$create()
-(func $$create__nativekttypes_NativeRequiringBridge@nativekttypes.NativeRequiringBridge
+(func $$create__@nativekttypes.NativeRequiringBridge
  (result (ref null $nativekttypes.NativeRequiringBridge))
  ;;@ nativekttypes/NativeRequiringBridge.java:23:13
  (local $$instance (ref null $nativekttypes.NativeRequiringBridge))
@@ -2461,7 +2461,7 @@
 (elem declare func $m_getstartingmethodAsProperty__int@nativekttypes.NativeTopLevel)
 
 ;;; NativeTopLevel<O> NativeTopLevel.$create(O o)
-(func $$create__java_lang_Object__nativekttypes_NativeTopLevel@nativekttypes.NativeTopLevel
+(func $$create__java_lang_Object@nativekttypes.NativeTopLevel
  (param $o (ref null $java.lang.Object))
  (result (ref null $nativekttypes.NativeTopLevel))
  ;;@ nativekttypes/NativeTopLevel.java:84:9
@@ -2573,7 +2573,7 @@
 )
 
 ;;; Nested<N> Nested.$create(N n)
-(func $$create__java_lang_Object__nativekttypes_NativeTopLevel_Nested@nativekttypes.NativeTopLevel.Nested
+(func $$create__java_lang_Object@nativekttypes.NativeTopLevel.Nested
  (param $n (ref null $java.lang.Object))
  (result (ref null $nativekttypes.NativeTopLevel.Nested))
  ;;@ nativekttypes/NativeTopLevel.java:31:11
@@ -2684,7 +2684,7 @@
 )
 
 ;;; Inner<I, O> Inner.$create(NativeTopLevel<O> $outer_this, I i)
-(func $$create__nativekttypes_NativeTopLevel__java_lang_Object__nativekttypes_NativeTopLevel_Inner@nativekttypes.NativeTopLevel.Inner
+(func $$create__nativekttypes_NativeTopLevel__java_lang_Object@nativekttypes.NativeTopLevel.Inner
  (param $$outer_this (ref null $nativekttypes.NativeTopLevel))
  (param $i (ref null $java.lang.Object))
  (result (ref null $nativekttypes.NativeTopLevel.Inner))
@@ -2773,7 +2773,7 @@
 )
 
 ;;; NativeWithCompanionObject NativeWithCompanionObject.$create()
-(func $$create__nativekttypes_NativeWithCompanionObject@nativekttypes.NativeWithCompanionObject
+(func $$create__@nativekttypes.NativeWithCompanionObject
  (result (ref null $nativekttypes.NativeWithCompanionObject))
  ;;@ nativekttypes/NativeWithCompanionObject.java:23:13
  (local $$instance (ref null $nativekttypes.NativeWithCompanionObject))
@@ -2878,7 +2878,7 @@
 )
 
 ;;; KBridge KBridge.$create()
-(func $$create__nativekttypes_nativekt_KBridge@nativekttypes.nativekt.KBridge
+(func $$create__@nativekttypes.nativekt.KBridge
  (result (ref null $nativekttypes.nativekt.KBridge))
  ;;@ nativekttypes/nativekt/KBridge.java:18:13
  (local $$instance (ref null $nativekttypes.nativekt.KBridge))
@@ -2961,7 +2961,7 @@
 )
 
 ;;; KCompanionObject KCompanionObject.$create()
-(func $$create__nativekttypes_nativekt_KCompanionObject@nativekttypes.nativekt.KCompanionObject
+(func $$create__@nativekttypes.nativekt.KCompanionObject
  (result (ref null $nativekttypes.nativekt.KCompanionObject))
  ;;@ nativekttypes/nativekt/KCompanionObject.java:18:13
  (local $$instance (ref null $nativekttypes.nativekt.KCompanionObject))
@@ -3200,7 +3200,7 @@
 )
 
 ;;; KRequiringBridge KRequiringBridge.$create()
-(func $$create__nativekttypes_nativekt_KRequiringBridge@nativekttypes.nativekt.KRequiringBridge
+(func $$create__@nativekttypes.nativekt.KRequiringBridge
  (result (ref null $nativekttypes.nativekt.KRequiringBridge))
  ;;@ nativekttypes/nativekt/KRequiringBridge.java:18:13
  (local $$instance (ref null $nativekttypes.nativekt.KRequiringBridge))
@@ -3406,7 +3406,7 @@
 (elem declare func $m_getstartingmethodAsProperty__int@nativekttypes.nativekt.KTopLevel)
 
 ;;; KTopLevel<O> KTopLevel.$create(O o)
-(func $$create__java_lang_Object__nativekttypes_nativekt_KTopLevel@nativekttypes.nativekt.KTopLevel
+(func $$create__java_lang_Object@nativekttypes.nativekt.KTopLevel
  (param $o (ref null $java.lang.Object))
  (result (ref null $nativekttypes.nativekt.KTopLevel))
  ;;@ nativekttypes/nativekt/KTopLevel.java:86:9
@@ -3526,7 +3526,7 @@
 )
 
 ;;; KNested<N> KNested.$create(N n)
-(func $$create__java_lang_Object__nativekttypes_nativekt_KTopLevel_KNested@nativekttypes.nativekt.KTopLevel.KNested
+(func $$create__java_lang_Object@nativekttypes.nativekt.KTopLevel.KNested
  (param $n (ref null $java.lang.Object))
  (result (ref null $nativekttypes.nativekt.KTopLevel.KNested))
  ;;@ nativekttypes/nativekt/KTopLevel.java:26:11
@@ -3660,7 +3660,7 @@
 )
 
 ;;; KInner<I, O> KInner.$create(KTopLevel<O> $outer_this, I i)
-(func $$create__nativekttypes_nativekt_KTopLevel__java_lang_Object__nativekttypes_nativekt_KTopLevel_KInner@nativekttypes.nativekt.KTopLevel.KInner
+(func $$create__nativekttypes_nativekt_KTopLevel__java_lang_Object@nativekttypes.nativekt.KTopLevel.KInner
  (param $$outer_this (ref null $nativekttypes.nativekt.KTopLevel))
  (param $i (ref null $java.lang.Object))
  (result (ref null $nativekttypes.nativekt.KTopLevel.KInner))
@@ -3749,7 +3749,7 @@
 )
 
 ;;; KWithCompanionObject KWithCompanionObject.$create()
-(func $$create__nativekttypes_nativekt_KWithCompanionObject@nativekttypes.nativekt.KWithCompanionObject
+(func $$create__@nativekttypes.nativekt.KWithCompanionObject
  (result (ref null $nativekttypes.nativekt.KWithCompanionObject))
  ;;@ nativekttypes/nativekt/KWithCompanionObject.java:18:13
  (local $$instance (ref null $nativekttypes.nativekt.KWithCompanionObject))

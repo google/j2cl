@@ -26,42 +26,42 @@ class InferReturn extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts @template T_1 @return {InferReturn<T_1>} */
- static m_inferGeneric__java_lang_Object(/** T_1 */ foo) {
+ static m_inferGeneric__java_lang_Object__inferreturn_InferReturn(/** T_1 */ foo) {
   InferReturn.$clinit();
   return /**@type {!InferReturn<T_1>}*/ (InferReturn.$create__());
  }
  /** @nodts @return {InferReturn<InferReturn<?string>>} */
- static m_tightenType__inferreturn_InferReturn(/** InferReturn<?string> */ foo) {
+ static m_tightenType__inferreturn_InferReturn__inferreturn_InferReturn(/** InferReturn<?string> */ foo) {
   InferReturn.$clinit();
   if (!$Equality.$same(foo, null)) {
-   return /**@type {InferReturn<InferReturn<?string>>}*/ (InferReturn.m_inferGeneric__java_lang_Object(foo));
+   return /**@type {InferReturn<InferReturn<?string>>}*/ (InferReturn.m_inferGeneric__java_lang_Object__inferreturn_InferReturn(foo));
   }
   return null;
  }
  /** @nodts */
- static m_main__() {
+ static m_main__void() {
   InferReturn.$clinit();
-  let list = /**@type {ArrayList<*>}*/ (InferReturn.m_newArrayList__java_lang_Object('foo'));
-  InferReturn.m_acceptsArrayListOfObject__java_util_ArrayList(list);
-  let array = InferReturn.m_newArray__java_lang_Object('foo');
-  InferReturn.m_acceptsArrayOfObject__arrayOf_java_lang_Object(array);
+  let list = /**@type {ArrayList<*>}*/ (InferReturn.m_newArrayList__java_lang_Object__java_util_ArrayList('foo'));
+  InferReturn.m_acceptsArrayListOfObject__java_util_ArrayList__void(list);
+  let array = InferReturn.m_newArray__java_lang_Object__arrayOf_java_lang_Object('foo');
+  InferReturn.m_acceptsArrayOfObject__arrayOf_java_lang_Object__void(array);
  }
  /** @nodts @template V @return {ArrayList<V>} */
- static m_newArrayList__java_lang_Object(/** V */ foo) {
+ static m_newArrayList__java_lang_Object__java_util_ArrayList(/** V */ foo) {
   InferReturn.$clinit();
   return /**@type {!ArrayList<V>}*/ (ArrayList.$create__());
  }
  /** @nodts @template V @return {Array<V>} */
- static m_newArray__java_lang_Object(/** V */ foo) {
+ static m_newArray__java_lang_Object__arrayOf_java_lang_Object(/** V */ foo) {
   InferReturn.$clinit();
   return /**@type {Array<V>}*/ (new Array(0));
  }
  /** @nodts */
- static m_acceptsArrayListOfObject__java_util_ArrayList(/** ArrayList<*> */ foo) {
+ static m_acceptsArrayListOfObject__java_util_ArrayList__void(/** ArrayList<*> */ foo) {
   InferReturn.$clinit();
  }
  /** @nodts */
- static m_acceptsArrayOfObject__arrayOf_java_lang_Object(/** Array<*> */ foo) {
+ static m_acceptsArrayOfObject__arrayOf_java_lang_Object__void(/** Array<*> */ foo) {
   InferReturn.$clinit();
  }
  /** @nodts */

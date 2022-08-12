@@ -106,7 +106,7 @@
 )
 
 ;;; Asserts Asserts.$create()
-(func $$create__localnamecollision_Asserts@localnamecollision.Asserts
+(func $$create__@localnamecollision.Asserts
  (result (ref null $localnamecollision.Asserts))
  ;;@ localnamecollision/Asserts.java:18:13
  (local $$instance (ref null $localnamecollision.Asserts))
@@ -206,7 +206,7 @@
 )
 
 ;;; Class Class.$create()
-(func $$create__localnamecollision_Class@localnamecollision.Class
+(func $$create__@localnamecollision.Class
  (result (ref null $localnamecollision.Class))
  ;;@ localnamecollision/Class.java:18:13
  (local $$instance (ref null $localnamecollision.Class))
@@ -249,7 +249,7 @@
   (block
    ;; Class $qualifier = localnamecollision.Class.$create();
    ;;@ localnamecollision/Class.java:20:4
-   (local.set $$qualifier (call $$create__localnamecollision_Class@localnamecollision.Class ))
+   (local.set $$qualifier (call $$create__@localnamecollision.Class ))
    ;; $qualifier.getClass();
    ;;@ localnamecollision/Class.java:20:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
@@ -384,7 +384,7 @@
 (elem declare func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision)
 
 ;;; LocalNameCollision LocalNameCollision.$create(boolean LocalNameCollision, Object Asserts, Object $Asserts, int l_Asserts, int A)
-(func $$create__boolean__java_lang_Object__java_lang_Object__int__int__localnamecollision_LocalNameCollision@localnamecollision.LocalNameCollision
+(func $$create__boolean__java_lang_Object__java_lang_Object__int__int@localnamecollision.LocalNameCollision
  (param $LocalNameCollision i32)
  (param $Asserts (ref null $java.lang.Object))
  (param $$Asserts (ref null $java.lang.Object))
@@ -482,7 +482,7 @@
 )
 
 ;;; A A.$create()
-(func $$create__localnamecollision_package1_A@localnamecollision.package1.A
+(func $$create__@localnamecollision.package1.A
  (result (ref null $localnamecollision.package1.A))
  ;;@ localnamecollision/package1/A.java:18:13
  (local $$instance (ref null $localnamecollision.package1.A))
@@ -582,7 +582,7 @@
 )
 
 ;;; A A.$create()
-(func $$create__localnamecollision_package2_A@localnamecollision.package2.A
+(func $$create__@localnamecollision.package2.A
  (result (ref null $localnamecollision.package2.A))
  ;;@ localnamecollision/package2/A.java:18:13
  (local $$instance (ref null $localnamecollision.package2.A))

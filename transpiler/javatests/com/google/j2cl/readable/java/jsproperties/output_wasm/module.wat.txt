@@ -91,7 +91,7 @@
 )
 
 ;;; Foo Foo.$create()
-(func $$create__jsproperties_Foo@jsproperties.Foo
+(func $$create__@jsproperties.Foo
  (result (ref null $jsproperties.Foo))
  ;;@ jsproperties/Main.java:22:6
  (local $$instance (ref null $jsproperties.Foo))
@@ -235,7 +235,7 @@
 )
 
 ;;; Bar Bar.$create()
-(func $$create__jsproperties_Bar@jsproperties.Bar
+(func $$create__@jsproperties.Bar
  (result (ref null $jsproperties.Bar))
  ;;@ jsproperties/Main.java:47:6
  (local $$instance (ref null $jsproperties.Bar))
@@ -383,7 +383,7 @@
 )
 
 ;;; NativeFoo NativeFoo.$create()
-(func $$create__jsproperties_NativeFoo@jsproperties.NativeFoo
+(func $$create__@jsproperties.NativeFoo
  (result (ref null $jsproperties.NativeFoo))
  ;;@ jsproperties/Main.java:72:6
  (local $$instance (ref null $jsproperties.NativeFoo))
@@ -488,7 +488,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__jsproperties_Main@jsproperties.Main
+(func $$create__@jsproperties.Main
  (result (ref null $jsproperties.Main))
  ;;@ jsproperties/Main.java:80:13
  (local $$instance (ref null $jsproperties.Main))
@@ -531,7 +531,7 @@
   (block
    ;; NativeFoo $qualifier = jsproperties.NativeFoo.$create();
    ;;@ jsproperties/Main.java:82:4
-   (local.set $$qualifier (call $$create__jsproperties_NativeFoo@jsproperties.NativeFoo ))
+   (local.set $$qualifier (call $$create__@jsproperties.NativeFoo ))
    ;; $qualifier.getA();
    ;;@ jsproperties/Main.java:82:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
@@ -578,7 +578,7 @@
  (block
   ;; Bar bar = jsproperties.Bar.$create();
   ;;@ jsproperties/Main.java:94:4
-  (local.set $bar (call $$create__jsproperties_Bar@jsproperties.Bar ))
+  (local.set $bar (call $$create__@jsproperties.Bar ))
   ;; bar.getA();
   ;;@ jsproperties/Main.java:95:4
   (drop (call_ref (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))

@@ -202,7 +202,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__libraryinfo_Main@libraryinfo.Main
+(func $$create__@libraryinfo.Main
  (result (ref null $libraryinfo.Main))
  ;;@ libraryinfo/Main.java:25:13
  (local $$instance (ref null $libraryinfo.Main))
@@ -243,22 +243,22 @@
   (call $$clinit__void@libraryinfo.Main )
   ;; libraryinfo.Main.$create().execute();
   ;;@ libraryinfo/Main.java:81:4
-  (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (ref.as_non_null (call $$create__libraryinfo_Main@libraryinfo.Main )))
+  (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (ref.as_non_null (call $$create__@libraryinfo.Main )))
   ;; Function jsFunction = libraryinfo.Main.FunctionImpl.$create();
   ;;@ libraryinfo/Main.java:83:4
-  (local.set $jsFunction (call $$create__libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl ))
+  (local.set $jsFunction (call $$create__@libraryinfo.Main.FunctionImpl ))
   ;; (jsFunction = libraryinfo.Main.$LambdaImplementor$1.$create());
   ;;@ libraryinfo/Main.java:84:4
-  (local.set $jsFunction (call $$create__libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1 ))
+  (local.set $jsFunction (call $$create__@libraryinfo.Main.$LambdaImplementor$1 ))
   ;; jsFunction.apply(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ libraryinfo/Main.java:85:4
   (call_ref (ref.as_non_null (local.get $jsFunction))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast_static $libraryinfo.Main.Function.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0))) ))
   ;; libraryinfo.Main.MyJsType.$create();
   ;;@ libraryinfo/Main.java:87:4
-  (drop (call $$create__libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType ))
+  (drop (call $$create__@libraryinfo.Main.MyJsType ))
   ;; libraryinfo.Main.1.$create();
   ;;@ libraryinfo/Main.java:89:4
-  (drop (call $$create__libraryinfo_Main_1@libraryinfo.Main.1 ))
+  (drop (call $$create__@libraryinfo.Main.1 ))
  )
 )
 
@@ -371,7 +371,7 @@
 )
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
-(func $$create__libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1
+(func $$create__@libraryinfo.Main.$LambdaImplementor$1
  (result (ref null $libraryinfo.Main.$LambdaImplementor$1))
  ;;@ libraryinfo/Main.java:84:17
  (local $$instance (ref null $libraryinfo.Main.$LambdaImplementor$1))
@@ -471,7 +471,7 @@
 )
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create()
-(func $$create__libraryinfo_Main_1@libraryinfo.Main.1
+(func $$create__@libraryinfo.Main.1
  (result (ref null $libraryinfo.Main.1))
  ;;@ libraryinfo/Main.java:89:17
  (local $$instance (ref null $libraryinfo.Main.1))
@@ -712,7 +712,7 @@
 )
 
 ;;; FunctionImpl FunctionImpl.$create()
-(func $$create__libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl
+(func $$create__@libraryinfo.Main.FunctionImpl
  (result (ref null $libraryinfo.Main.FunctionImpl))
  ;;@ libraryinfo/Main.java:54:29
  (local $$instance (ref null $libraryinfo.Main.FunctionImpl))
@@ -815,7 +815,7 @@
 )
 
 ;;; MyJsEnum MyJsEnum.$create(String $name, int $ordinal)
-(func $$create__java_lang_String__int__libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum
+(func $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $libraryinfo.Main.MyJsEnum))
@@ -889,7 +889,7 @@
   (call $$clinit__void@libraryinfo.Main.MyJsEnum )
   ;; return javaemul.internal.WasmArray.OfObject.$create([libraryinfo.Main.MyJsEnum.A,libraryinfo.Main.MyJsEnum.B,libraryinfo.Main.MyJsEnum.C]);
   ;;@ libraryinfo/Main.java:59:7
-  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_A__libraryinfo_Main_MyJsEnum)(global.get $f_B__libraryinfo_Main_MyJsEnum)(global.get $f_C__libraryinfo_Main_MyJsEnum))))
+  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_A__libraryinfo_Main_MyJsEnum)(global.get $f_B__libraryinfo_Main_MyJsEnum)(global.get $f_C__libraryinfo_Main_MyJsEnum))))
  )
 )
 
@@ -914,13 +914,13 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (libraryinfo.Main.MyJsEnum.A = libraryinfo.Main.MyJsEnum.$create(javaemul.internal.StringPool.$getString_|A|(),0));
   ;;@ libraryinfo/Main.java:60:4
-  (global.set $f_A__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int__libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|A|__java_lang_String (ref.func $$getString_|A|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_A__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|A|__java_lang_String (ref.func $$getString_|A|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
   ;; (libraryinfo.Main.MyJsEnum.B = libraryinfo.Main.MyJsEnum.$create(javaemul.internal.StringPool.$getString_|B|(),1));
   ;;@ libraryinfo/Main.java:61:4
-  (global.set $f_B__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int__libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|B|__java_lang_String (ref.func $$getString_|B|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_B__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|B|__java_lang_String (ref.func $$getString_|B|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
   ;; (libraryinfo.Main.MyJsEnum.C = libraryinfo.Main.MyJsEnum.$create(javaemul.internal.StringPool.$getString_|C|(),2));
   ;;@ libraryinfo/Main.java:62:4
-  (global.set $f_C__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int__libraryinfo_Main_MyJsEnum@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|C|__java_lang_String (ref.func $$getString_|C|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
+  (global.set $f_C__libraryinfo_Main_MyJsEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum (call $function.no.side.effects.$getString_|C|__java_lang_String (ref.func $$getString_|C|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
  )
 )
 
@@ -961,7 +961,7 @@
 )
 
 ;;; MyEnum MyEnum.$create(String $name, int $ordinal)
-(func $$create__java_lang_String__int__libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum
+(func $$create__java_lang_String__int@libraryinfo.Main.MyEnum
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $libraryinfo.Main.MyEnum))
@@ -1035,7 +1035,7 @@
   (call $$clinit__void@libraryinfo.Main.MyEnum )
   ;; return javaemul.internal.WasmArray.OfObject.$create([libraryinfo.Main.MyEnum.FOO,libraryinfo.Main.MyEnum.BAR]);
   ;;@ libraryinfo/Main.java:65:7
-  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_FOO__libraryinfo_Main_MyEnum)(global.get $f_BAR__libraryinfo_Main_MyEnum))))
+  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_FOO__libraryinfo_Main_MyEnum)(global.get $f_BAR__libraryinfo_Main_MyEnum))))
  )
 )
 
@@ -1060,10 +1060,10 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (libraryinfo.Main.MyEnum.FOO = libraryinfo.Main.MyEnum.$create(javaemul.internal.StringPool.$getString_|FOO|(),0));
   ;;@ libraryinfo/Main.java:66:4
-  (global.set $f_FOO__libraryinfo_Main_MyEnum (call $$create__java_lang_String__int__libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (call $function.no.side.effects.$getString_|FOO|__java_lang_String (ref.func $$getString_|FOO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_FOO__libraryinfo_Main_MyEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyEnum (call $function.no.side.effects.$getString_|FOO|__java_lang_String (ref.func $$getString_|FOO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
   ;; (libraryinfo.Main.MyEnum.BAR = libraryinfo.Main.MyEnum.$create(javaemul.internal.StringPool.$getString_|BAR|(),1));
   ;;@ libraryinfo/Main.java:67:4
-  (global.set $f_BAR__libraryinfo_Main_MyEnum (call $$create__java_lang_String__int__libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (call $function.no.side.effects.$getString_|BAR|__java_lang_String (ref.func $$getString_|BAR|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_BAR__libraryinfo_Main_MyEnum (call $$create__java_lang_String__int@libraryinfo.Main.MyEnum (call $function.no.side.effects.$getString_|BAR|__java_lang_String (ref.func $$getString_|BAR|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
  )
 )
 
@@ -1098,7 +1098,7 @@
 )
 
 ;;; MyJsType MyJsType.$create()
-(func $$create__libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType
+(func $$create__@libraryinfo.Main.MyJsType
  (result (ref null $libraryinfo.Main.MyJsType))
  ;;@ libraryinfo/Main.java:74:11
  (local $$instance (ref null $libraryinfo.Main.MyJsType))
@@ -1128,7 +1128,7 @@
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; (MyJsType.this.someField = libraryinfo.Main.$create());
   ;;@ libraryinfo/Main.java:75:6
-  (struct.set $libraryinfo.Main.MyJsType $f_someField__libraryinfo_Main_MyJsType(local.get $this) (call $$create__libraryinfo_Main@libraryinfo.Main ))
+  (struct.set $libraryinfo.Main.MyJsType $f_someField__libraryinfo_Main_MyJsType(local.get $this) (call $$create__@libraryinfo.Main ))
  )
 )
 
@@ -1186,7 +1186,7 @@
 )
 
 ;;; Foo Foo.$create(Main $outer_this)
-(func $$create__libraryinfo_Main__libraryinfo_Main_Foo@libraryinfo.Main.Foo
+(func $$create__libraryinfo_Main@libraryinfo.Main.Foo
  (param $$outer_this (ref null $libraryinfo.Main))
  (result (ref null $libraryinfo.Main.Foo))
  ;;@ libraryinfo/Main.java:107:15

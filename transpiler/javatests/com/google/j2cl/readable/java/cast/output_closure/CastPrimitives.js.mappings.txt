@@ -75,7 +75,7 @@
 [testReferenceToPrimitive] => [m_testReferenceToPrimitive__void]
 [Object o = new Object();] => [let o = j_l_Object.$create__();] "cast.CastPrimitives.testReferenceToPrimitive"
 [o] => [o] "o"
-[boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {boolean}*/ ($Casts.$to(o, Boolean)));] "cast.CastPrimitives.testReferenceToPrimitive"
+[boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean__boolean(/**@type {boolean}*/ ($Casts.$to(o, Boolean)));] "cast.CastPrimitives.testReferenceToPrimitive"
 [bool] => [bool] "bool"
 [byte b = (byte) o;] => [let b = /**@type {!Byte}*/ ($Casts.$to(o, Byte)).m_byteValue__byte();] "cast.CastPrimitives.testReferenceToPrimitive"
 [b] => [b] "b"
@@ -89,10 +89,10 @@
 [l] => [l] "l"
 [float f = (float) o;] => [let f = /**@type {!Float}*/ ($Casts.$to(o, Float)).m_floatValue__float();] "cast.CastPrimitives.testReferenceToPrimitive"
 [f] => [f] "f"
-[double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double(/**@type {number}*/ ($Casts.$to(o, Double)));] "cast.CastPrimitives.testReferenceToPrimitive"
+[double d = (double) o;] => [let d = Double.m_doubleValue__java_lang_Double__double(/**@type {number}*/ ($Casts.$to(o, Double)));] "cast.CastPrimitives.testReferenceToPrimitive"
 [d] => [d] "d"
 [testUnboxAndWiden] => [m_testUnboxAndWiden__void]
-[Byte boxedByte = Byte.valueOf((byte) 0);] => [let boxedByte = Byte.m_valueOf__byte(0);] "cast.CastPrimitives.testUnboxAndWiden"
+[Byte boxedByte = Byte.valueOf((byte) 0);] => [let boxedByte = Byte.m_valueOf__byte__java_lang_Byte(0);] "cast.CastPrimitives.testUnboxAndWiden"
 [boxedByte] => [boxedByte] "boxedByte"
 [short s = (short) boxedByte;] => [let s = boxedByte.m_byteValue__byte();] "cast.CastPrimitives.testUnboxAndWiden"
 [s] => [s] "s"
@@ -119,14 +119,14 @@
 [f] => [f] "f"
 [final double d = 1.7976931348623157E308d;] => [let d = 1.7976931348623157E308;] "cast.CastPrimitives.testImplicitArgumentCasts"
 [d] => [d] "d"
-[getShort(b);] => [CastPrimitives.m_getShort__short(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
-[getInt(b);] => [CastPrimitives.m_getInt__int(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
-[getLong(b);] => [CastPrimitives.m_getLong__long($Primitives.widenByteToLong(b));] "cast.CastPrimitives.testImplicitArgumentCasts"
-[getFloat(b);] => [CastPrimitives.m_getFloat__float(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
-[getDouble(b);] => [CastPrimitives.m_getDouble__double(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
-[getFloat(l);] => [CastPrimitives.m_getFloat__float($Primitives.widenLongToFloat(l));] "cast.CastPrimitives.testImplicitArgumentCasts"
-[getDouble(l);] => [CastPrimitives.m_getDouble__double($Primitives.widenLongToDouble(l));] "cast.CastPrimitives.testImplicitArgumentCasts"
-[getDouble(f);] => [CastPrimitives.m_getDouble__double(f);] "cast.CastPrimitives.testImplicitArgumentCasts"
+[getShort(b);] => [CastPrimitives.m_getShort__short__short(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
+[getInt(b);] => [CastPrimitives.m_getInt__int__int(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
+[getLong(b);] => [CastPrimitives.m_getLong__long__long($Primitives.widenByteToLong(b));] "cast.CastPrimitives.testImplicitArgumentCasts"
+[getFloat(b);] => [CastPrimitives.m_getFloat__float__float(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
+[getDouble(b);] => [CastPrimitives.m_getDouble__double__double(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
+[getFloat(l);] => [CastPrimitives.m_getFloat__float__float($Primitives.widenLongToFloat(l));] "cast.CastPrimitives.testImplicitArgumentCasts"
+[getDouble(l);] => [CastPrimitives.m_getDouble__double__double($Primitives.widenLongToDouble(l));] "cast.CastPrimitives.testImplicitArgumentCasts"
+[getDouble(f);] => [CastPrimitives.m_getDouble__double__double(f);] "cast.CastPrimitives.testImplicitArgumentCasts"
 [new IntValueHolder(b);] => [IntValueHolder.$create__int(b);] "cast.CastPrimitives.testImplicitArgumentCasts"
 [new IntValueHolder(c);] => [IntValueHolder.$create__int(c);] "cast.CastPrimitives.testImplicitArgumentCasts"
 [new IntValueHolder(s);] => [IntValueHolder.$create__int(s);] "cast.CastPrimitives.testImplicitArgumentCasts"
@@ -151,19 +151,19 @@
 [result = array[i];] => [result = array[i];] "cast.CastPrimitives.testImplicitArrayIndexCasts"
 [result = array[1];] => [result = array[1];] "cast.CastPrimitives.testImplicitArrayIndexCasts"
 [result = array['a'];] => [result = array[97 /* 'a' */];] "cast.CastPrimitives.testImplicitArrayIndexCasts"
-[getShort] => [m_getShort__short]
+[getShort] => [m_getShort__short__short]
 [value] => [value] "value"
 [return value;] => [return value;] "cast.CastPrimitives.getShort"
-[getInt] => [m_getInt__int]
+[getInt] => [m_getInt__int__int]
 [value] => [value] "value"
 [return value;] => [return value;] "cast.CastPrimitives.getInt"
-[getLong] => [m_getLong__long]
+[getLong] => [m_getLong__long__long]
 [value] => [value] "value"
 [return value;] => [return value;] "cast.CastPrimitives.getLong"
-[getFloat] => [m_getFloat__float]
+[getFloat] => [m_getFloat__float__float]
 [value] => [value] "value"
 [return value;] => [return value;] "cast.CastPrimitives.getFloat"
-[getDouble] => [m_getDouble__double]
+[getDouble] => [m_getDouble__double__double]
 [value] => [value] "value"
 [return value;] => [return value;] "cast.CastPrimitives.getDouble"
 [testImplicitLongAssignmentCasts] => [m_testImplicitLongAssignmentCasts__void]

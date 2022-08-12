@@ -51,7 +51,7 @@
 )
 
 ;;; SomeJsType<T> SomeJsType.$create()
-(func $$create__jstype_SomeJsType@jstype.SomeJsType
+(func $$create__@jstype.SomeJsType
  (result (ref null $jstype.SomeJsType))
  ;;@ jstype/SomeJsType.java:22:13
  (local $$instance (ref null $jstype.SomeJsType))
@@ -169,7 +169,7 @@
  (block
   ;; Object object = java.lang.Object.$create();
   ;;@ jstype/SomeJsType.java:52:4
-  (local.set $object (call $$create__java_lang_Object@java.lang.Object ))
+  (local.set $object (call $$create__@java.lang.Object ))
   ;; Star star = ((Star) java.lang.Double.valueOf(3.0));
   ;;@ jstype/SomeJsType.java:54:4
   (local.set $star (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))

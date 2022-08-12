@@ -83,7 +83,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__unreachableclass_Main@unreachableclass.Main
+(func $$create__@unreachableclass.Main
  (result (ref null $unreachableclass.Main))
  ;;@ unreachableclass/Main.java:18:13
  (local $$instance (ref null $unreachableclass.Main))
@@ -145,14 +145,14 @@
        (block
         ;; A $qualifier = unreachableclass.Main.1A.$create(Main.this);
         ;;@ unreachableclass/Main.java:29:6
-        (local.set $$qualifier (call $$create__unreachableclass_Main__unreachableclass_Main_1A@unreachableclass.Main.1A (local.get $this)))
+        (local.set $$qualifier (call $$create__unreachableclass_Main@unreachableclass.Main.1A (local.get $this)))
         ;; $qualifier.m();
         ;;@ unreachableclass/Main.java:29:6
         (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $unreachableclass.Main.1A.vtable $m_m__void_$pp_unreachableclass (struct.get $unreachableclass.Main.1A $vtable(local.get $$qualifier))))
        )
        ;; unreachableclass.Main.1.$create(Main.this);
        ;;@ unreachableclass/Main.java:30:6
-       (drop (call $$create__unreachableclass_Main__unreachableclass_Main_1@unreachableclass.Main.1 (local.get $this)))
+       (drop (call $$create__unreachableclass_Main@unreachableclass.Main.1 (local.get $this)))
       )
      )(else
       (block
@@ -220,7 +220,7 @@
 )
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create(Main $outer_this)
-(func $$create__unreachableclass_Main__unreachableclass_Main_1@unreachableclass.Main.1
+(func $$create__unreachableclass_Main@unreachableclass.Main.1
  (param $$outer_this (ref null $unreachableclass.Main))
  (result (ref null $unreachableclass.Main.1))
  ;;@ unreachableclass/Main.java:30:19
@@ -306,7 +306,7 @@
 )
 
 ;;; B B.$create(A $outer_this)
-(func $$create__unreachableclass_Main_1A__unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B
+(func $$create__unreachableclass_Main_1A@unreachableclass.Main.1A.1B
  (param $$outer_this (ref null $unreachableclass.Main.1A))
  (result (ref null $unreachableclass.Main.1A.1B))
  ;;@ unreachableclass/Main.java:24:16
@@ -401,7 +401,7 @@
 )
 
 ;;; A A.$create(Main $outer_this)
-(func $$create__unreachableclass_Main__unreachableclass_Main_1A@unreachableclass.Main.1A
+(func $$create__unreachableclass_Main@unreachableclass.Main.1A
  (param $$outer_this (ref null $unreachableclass.Main))
  (result (ref null $unreachableclass.Main.1A))
  ;;@ unreachableclass/Main.java:22:12

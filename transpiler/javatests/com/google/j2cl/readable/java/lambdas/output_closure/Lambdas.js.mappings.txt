@@ -73,7 +73,7 @@
 [this.funOuter();] => [this.m_funOuter__void();] "lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
 [Lambdas.this.funOuter();] => [this.m_funOuter__void();] "lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
 [return i + 2;] => [return i + 2 | 0;] "lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
-[testLambdaInStaticContext] => [m_testLambdaInStaticContext__]
+[testLambdaInStaticContext] => [m_testLambdaInStaticContext__void]
 [{
     FunctionalInterface f = (i) -> i;
   }] => [Lambdas.$clinit();] "lambdas.Lambdas.testLambdaInStaticContext"
@@ -123,7 +123,7 @@
               @Override
 ...              }
             }] => [return /**@type {!$1<T>}*/ ($1.$create__lambdas_Lambdas(this));] "lambdas.Lambdas.<lambda in testInstanceMethodTypeVariableThroughLambda>"
-[testStaticMethodTypeVariableThroughLambda] => [m_testStaticMethodTypeVariableThroughLambda__]
+[testStaticMethodTypeVariableThroughLambda] => [m_testStaticMethodTypeVariableThroughLambda__void]
 [{
     Functional<T> wrapped =
 ...            };
@@ -148,7 +148,7 @@
 [intf] => [intf] "intf"
 [e] => [e] "e"
 [return intf.m(e);] => [return /**@type {Error}*/ ($Casts.$to(intf.m_m__java_lang_Object__java_lang_Object(e), Error));] "lambdas.Lambdas.callParameterized"
-[callTypeVariableWithBounds] => [m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum]
+[callTypeVariableWithBounds] => [m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum]
 [intf] => [intf] "intf"
 [e] => [e] "e"
 [{
@@ -175,7 +175,7 @@
 [i -> i] => [let i_3 = /**@type {Error}*/ ($Casts.$to(i_2, Error));] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [i] => [i_3] "i"
 [i] => [return i_3;] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
-[callTypeVariableWithBounds(i -> i, (Enum<T>) null);] => [Lambdas.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(GenericFunctionalInterface.$adapt((i_4) =>{
+[callTypeVariableWithBounds(i -> i, (Enum<T>) null);] => [Lambdas.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum(GenericFunctionalInterface.$adapt((i_4) =>{
    let i_5 = /**@type {Enum}*/ ($Casts.$to(i_4, Enum));
    return i_5;
   }), /**@type {Enum<T>}*/ (null));] "lambdas.Lambdas.testLambdaWithGenerics"
@@ -199,28 +199,28 @@
 [throw new RuntimeException();] => [throw $Exceptions.toJs(RuntimeException.$create__());] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [Function<? super T, ?> f = item -> 1L;] => [let f = Lambdas_Function.$adapt((item) =>{
    let item_1 = /**@type {Enum}*/ ($Casts.$to(item, Enum));
-   return Long.m_valueOf__long($Long.fromInt(1));
+   return Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));
   });] "lambdas.Lambdas.testLambdaWithGenerics"
 [f] => [f] "f"
 [item] => [item] "item"
 [item -> 1L] => [let item_1 = /**@type {Enum}*/ ($Casts.$to(item, Enum));] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [item] => [item_1] "item"
-[1L] => [return Long.m_valueOf__long($Long.fromInt(1));] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
-[m] => [m_m__]
+[1L] => [return Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[m] => [m_m__java_lang_Object]
 [{
     return null;
   }] => [Lambdas.$clinit();] "lambdas.Lambdas.m"
 [return null;] => [return null;] "lambdas.Lambdas.m"
-[testLambdaCallingStaticMethod] => [m_testLambdaCallingStaticMethod__]
+[testLambdaCallingStaticMethod] => [m_testLambdaCallingStaticMethod__void]
 [{
     Function<Object, ?> f = l -> m();
   }] => [Lambdas.$clinit();] "lambdas.Lambdas.testLambdaCallingStaticMethod"
 [Function<Object, ?> f = l -> m();] => [let f = Lambdas_Function.$adapt((/** * */ l) =>{
-   return Lambdas.m_m__();
+   return Lambdas.m_m__java_lang_Object();
   });] "lambdas.Lambdas.testLambdaCallingStaticMethod"
 [f] => [f] "f"
 [l] => [l] "l"
-[m()] => [return Lambdas.m_m__();] "lambdas.Lambdas.<lambda in testLambdaCallingStaticMethod>"
+[m()] => [return Lambdas.m_m__java_lang_Object();] "lambdas.Lambdas.<lambda in testLambdaCallingStaticMethod>"
 [testLambdaReturningVoidAsExpression] => [m_testLambdaReturningVoidAsExpression__void]
 [FunctionalInterfaceWithMethodReturningVoid runner = () -> new Object();] => [let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() =>{
    j_l_Object.$create__();
@@ -233,7 +233,7 @@
   });] "lambdas.Lambdas.testAnonymousInsideLambda"
 [runner] => [runner] "runner"
 [new Object() {}] => [$3.$create__lambdas_Lambdas(this);] "lambdas.Lambdas.<lambda in testAnonymousInsideLambda>"
-[identity] => [m_identity__]
+[identity] => [m_identity__lambdas_Lambdas_GenericJsFunction]
 [{
     if (identityFunction == null) {
 ...    return (GenericJsFunction<E, E>) identityFunction;
@@ -246,7 +246,7 @@
   }] "lambdas.Lambdas.identity"
 [identityFunction = new IdentityFunction();] => [Lambdas.f_identityFunction__lambdas_Lambdas_ = IdentityFunction.$create__();] "lambdas.Lambdas.identity"
 [return (GenericJsFunction<E, E>) identityFunction;] => [return /**@type {?function(E):E}*/ (Lambdas.f_identityFunction__lambdas_Lambdas_);] "lambdas.Lambdas.identity"
-[testJsInteropLambdas] => [m_testJsInteropLambdas__]
+[testJsInteropLambdas] => [m_testJsInteropLambdas__void]
 [{
     Thenable<String> thenable = (f1, f2) -> f1.apply(null);
 ...    equals.get();
@@ -258,7 +258,7 @@
 [f1] => [f1] "f1"
 [f2] => [f2] "f2"
 [f1.apply(null)] => [f1(null);] "lambdas.Lambdas.<lambda in testJsInteropLambdas>"
-[AnotherThenable<String> otherThenable = (f1, f2) -> f1.apply(null);] => [let otherThenable = $Overlay.$adapt__lambdas_Lambdas_AnotherThenable_$JsFunction((/** ?function(?string):?void */ f1_1, /** ?function(Throwable):?void */ f2_1) =>{
+[AnotherThenable<String> otherThenable = (f1, f2) -> f1.apply(null);] => [let otherThenable = $Overlay.$adapt__lambdas_Lambdas_AnotherThenable_$JsFunction__lambdas_Lambdas_AnotherThenable((/** ?function(?string):?void */ f1_1, /** ?function(Throwable):?void */ f2_1) =>{
    f1_1(null);
   });] "lambdas.Lambdas.testJsInteropLambdas"
 [otherThenable] => [otherThenable] "otherThenable"
@@ -266,16 +266,16 @@
 [f2] => [f2_1] "f2"
 [f1.apply(null)] => [f1_1(null);] "lambdas.Lambdas.<lambda in testJsInteropLambdas>"
 [JsSupplier<Integer> stringJsSupplier = () -> 1;] => [let stringJsSupplier = JsSupplier.$adapt(() =>{
-   return Integer.m_valueOf__int(1);
+   return Integer.m_valueOf__int__java_lang_Integer(1);
   });] "lambdas.Lambdas.testJsInteropLambdas"
 [stringJsSupplier] => [stringJsSupplier] "stringJsSupplier"
-[1] => [return Integer.m_valueOf__int(1);] "lambdas.Lambdas.<lambda in testJsInteropLambdas>"
+[1] => [return Integer.m_valueOf__int__java_lang_Integer(1);] "lambdas.Lambdas.<lambda in testJsInteropLambdas>"
 [stringJsSupplier.get();] => [stringJsSupplier.get();] "lambdas.Lambdas.testJsInteropLambdas"
 [Equals equals = stringJsSupplier;] => [let equals = stringJsSupplier;] "lambdas.Lambdas.testJsInteropLambdas"
 [equals] => [equals] "equals"
 [equals.equals(null);] => [equals.equals(null);] "lambdas.Lambdas.testJsInteropLambdas"
 [equals.get();] => [equals.m_get__java_lang_Object();] "lambdas.Lambdas.testJsInteropLambdas"
-[testIntersectionTyping] => [m_testIntersectionTyping__]
+[testIntersectionTyping] => [m_testIntersectionTyping__void]
 [{
     // Shows the case where the types in the intersection declare type variables with the same name;
 ...    o = (GenericFunctionalInterface<U> & JustADefaultS<V>) x -> x;

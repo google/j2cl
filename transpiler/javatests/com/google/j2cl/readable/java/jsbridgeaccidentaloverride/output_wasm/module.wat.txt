@@ -89,7 +89,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__jsbridgeaccidentaloverride_Main@jsbridgeaccidentaloverride.Main
+(func $$create__@jsbridgeaccidentaloverride.Main
  (result (ref null $jsbridgeaccidentaloverride.Main))
  ;;@ jsbridgeaccidentaloverride/Main.java:18:13
  (local $$instance (ref null $jsbridgeaccidentaloverride.Main))
@@ -134,16 +134,16 @@
  (block
   ;; MyJsType a = jsbridgeaccidentaloverride.MyJsType.$create();
   ;;@ jsbridgeaccidentaloverride/Main.java:20:4
-  (local.set $a (call $$create__jsbridgeaccidentaloverride_MyJsType@jsbridgeaccidentaloverride.MyJsType ))
+  (local.set $a (call $$create__@jsbridgeaccidentaloverride.MyJsType ))
   ;; SubJsType b = jsbridgeaccidentaloverride.SubJsType.$create();
   ;;@ jsbridgeaccidentaloverride/Main.java:21:4
-  (local.set $b (call $$create__jsbridgeaccidentaloverride_SubJsType@jsbridgeaccidentaloverride.SubJsType ))
+  (local.set $b (call $$create__@jsbridgeaccidentaloverride.SubJsType ))
   ;; MyInterface c = jsbridgeaccidentaloverride.SubJsType.$create();
   ;;@ jsbridgeaccidentaloverride/Main.java:22:4
-  (local.set $c (call $$create__jsbridgeaccidentaloverride_SubJsType@jsbridgeaccidentaloverride.SubJsType ))
+  (local.set $c (call $$create__@jsbridgeaccidentaloverride.SubJsType ))
   ;; OtherInterface d = jsbridgeaccidentaloverride.SubJsType.$create();
   ;;@ jsbridgeaccidentaloverride/Main.java:23:4
-  (local.set $d (call $$create__jsbridgeaccidentaloverride_SubJsType@jsbridgeaccidentaloverride.SubJsType ))
+  (local.set $d (call $$create__@jsbridgeaccidentaloverride.SubJsType ))
   ;; a.foo(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:24:4
   (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
@@ -266,7 +266,7 @@
 )
 
 ;;; MyJsType MyJsType.$create()
-(func $$create__jsbridgeaccidentaloverride_MyJsType@jsbridgeaccidentaloverride.MyJsType
+(func $$create__@jsbridgeaccidentaloverride.MyJsType
  (result (ref null $jsbridgeaccidentaloverride.MyJsType))
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:26:2
  (local $$instance (ref null $jsbridgeaccidentaloverride.MyJsType))
@@ -440,7 +440,7 @@
 )
 
 ;;; SubJsType SubJsType.$create()
-(func $$create__jsbridgeaccidentaloverride_SubJsType@jsbridgeaccidentaloverride.SubJsType
+(func $$create__@jsbridgeaccidentaloverride.SubJsType
  (result (ref null $jsbridgeaccidentaloverride.SubJsType))
  ;;@ jsbridgeaccidentaloverride/MyJsType.java:59:6
  (local $$instance (ref null $jsbridgeaccidentaloverride.SubJsType))

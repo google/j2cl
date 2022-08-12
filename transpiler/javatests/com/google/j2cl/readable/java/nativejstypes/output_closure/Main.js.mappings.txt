@@ -8,7 +8,7 @@
 [Main] => [return $instance;] "nativejstypes.Main.<synthetic: ctor_create>"
 [Main] => [$ctor__nativejstypes_Main__void]
 [Main] => [this.$ctor__java_lang_Object__void();] "nativejstypes.Main.<init>"
-[testNativeJsTypeWithNamespace] => [m_testNativeJsTypeWithNamespace__]
+[testNativeJsTypeWithNamespace] => [m_testNativeJsTypeWithNamespace__int]
 [{
     Foo foo = new Foo();
 ...    return foo.sum();
@@ -18,7 +18,7 @@
 [foo.x = 50;] => [foo.x = 50;] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [foo.y = 5;] => [foo.y = 5;] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [return foo.sum();] => [return foo.sum();] "nativejstypes.Main.testNativeJsTypeWithNamespace"
-[testNativeJsTypeWithoutNamespace] => [m_testNativeJsTypeWithoutNamespace__]
+[testNativeJsTypeWithoutNamespace] => [m_testNativeJsTypeWithoutNamespace__int]
 [{
     Bar bar = new Bar(6, 7);
 ...    return bar.product();
@@ -29,7 +29,7 @@
 [bar.y = 5;] => [bar.y = 5;] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [Bar.f = 10;] => [Bar.f = 10;] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [return bar.product();] => [return bar.product();] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
-[testInnerNativeJsType] => [m_testInnerNativeJsType__]
+[testInnerNativeJsType] => [m_testInnerNativeJsType__void]
 [{
     Bar.Inner unusedBarInner = new Bar.Inner(1);
     BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);
@@ -38,7 +38,7 @@
 [unusedBarInner] => [unusedBarInner] "unusedBarInner"
 [BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);] => [let unusedBarInnerWithDotInName = new $synthetic_nativejstypes_Bar.Inner(2);] "nativejstypes.Main.testInnerNativeJsType"
 [unusedBarInnerWithDotInName] => [unusedBarInnerWithDotInName] "unusedBarInnerWithDotInName"
-[testGlobalNativeJsType] => [m_testGlobalNativeJsType__]
+[testGlobalNativeJsType] => [m_testGlobalNativeJsType__void]
 [{
     Headers header = new Headers();
     header.append("Content-Type", "text/xml");
@@ -46,7 +46,7 @@
 [Headers header = new Headers();] => [let header = new Headers();] "nativejstypes.Main.testGlobalNativeJsType"
 [header] => [header] "header"
 [header.append("Content-Type", "text/xml");] => [header.append('Content-Type', 'text\/xml');] "nativejstypes.Main.testGlobalNativeJsType"
-[testNativeTypeClassLiteral] => [m_testNativeTypeClassLiteral__]
+[testNativeTypeClassLiteral] => [m_testNativeTypeClassLiteral__void]
 [{
     Object o1 = Bar.class;
     o1 = Bar[][].class;
@@ -54,16 +54,16 @@
 [Object o1 = Bar.class;] => [let o1 = Class.$get($JavaScriptObject);] "nativejstypes.Main.testNativeTypeClassLiteral"
 [o1] => [o1] "o1"
 [o1 = Bar[][].class;] => [o1 = Class.$get(j_l_Object, 1);] "nativejstypes.Main.testNativeTypeClassLiteral"
-[testNativeTypeObjectMethods] => [m_testNativeTypeObjectMethods__]
+[testNativeTypeObjectMethods] => [m_testNativeTypeObjectMethods__void]
 [{
     Bar bar = new Bar(6, 7);
 ...    bar.equals(new Object());
   }] => [Main.$clinit();] "nativejstypes.Main.testNativeTypeObjectMethods"
 [Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "nativejstypes.Main.testNativeTypeObjectMethods"
 [bar] => [bar] "bar"
-[bar.toString();] => [$Objects.m_toString__java_lang_Object(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"
-[bar.hashCode();] => [$Objects.m_hashCode__java_lang_Object(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"
-[bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object(bar, j_l_Object.$create__());] "nativejstypes.Main.testNativeTypeObjectMethods"
+[bar.toString();] => [$Objects.m_toString__java_lang_Object__java_lang_String(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"
+[bar.hashCode();] => [$Objects.m_hashCode__java_lang_Object__int(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"
+[bar.equals(new Object());] => [$Objects.m_equals__java_lang_Object__java_lang_Object__boolean(bar, j_l_Object.$create__());] "nativejstypes.Main.testNativeTypeObjectMethods"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "nativejstypes.Main.<clinit>"
 [Main] => [Main.$loadModules();] "nativejstypes.Main.<clinit>"

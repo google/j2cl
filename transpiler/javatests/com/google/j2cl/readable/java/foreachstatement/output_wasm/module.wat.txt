@@ -140,7 +140,7 @@
 )
 
 ;;; ForEachStatement ForEachStatement.$create()
-(func $$create__foreachstatement_ForEachStatement@foreachstatement.ForEachStatement
+(func $$create__@foreachstatement.ForEachStatement
  (result (ref null $foreachstatement.ForEachStatement))
  ;;@ foreachstatement/ForEachStatement.java:20:13
  (local $$instance (ref null $foreachstatement.ForEachStatement))
@@ -209,7 +209,7 @@
   )
   ;; LOOP: for (Throwable[] $array = javaemul.internal.WasmArray.OfObject.$create(10),int $index = 0;($index < $array.length);($index = ($index + 1))) {
   ;;@ foreachstatement/ForEachStatement.java:26:4
-  (local.set $$array (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10)))
+  (local.set $$array (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 10)))
   (local.set $$index (i32.const 0))
   (block $LOOP_1.BREAK
    (loop
@@ -252,7 +252,7 @@
    (block
     ;; throw java.lang.Exception.$create();
     ;;@ foreachstatement/ForEachStatement.java:45:6
-    (throw $exception.event (call $$create__java_lang_Exception@java.lang.Exception ))
+    (throw $exception.event (call $$create__@java.lang.Exception ))
    )
   ) (catch $exception.event (block
    (local.set $__$exc (pop (ref null $java.lang.Throwable)))
@@ -436,7 +436,7 @@
 )
 
 ;;; Exception1 Exception1.$create()
-(func $$create__foreachstatement_ForEachStatement_Exception1@foreachstatement.ForEachStatement.Exception1
+(func $$create__@foreachstatement.ForEachStatement.Exception1
  (result (ref null $foreachstatement.ForEachStatement.Exception1))
  ;;@ foreachstatement/ForEachStatement.java:31:15
  (local $$instance (ref null $foreachstatement.ForEachStatement.Exception1))
@@ -593,7 +593,7 @@
 )
 
 ;;; Exception2 Exception2.$create()
-(func $$create__foreachstatement_ForEachStatement_Exception2@foreachstatement.ForEachStatement.Exception2
+(func $$create__@foreachstatement.ForEachStatement.Exception2
  (result (ref null $foreachstatement.ForEachStatement.Exception2))
  ;;@ foreachstatement/ForEachStatement.java:37:15
  (local $$instance (ref null $foreachstatement.ForEachStatement.Exception2))
@@ -730,7 +730,7 @@
 )
 
 ;;; IterableReturningTypeVariable<T> IterableReturningTypeVariable.$create()
-(func $$create__foreachstatement_ForEachStatement_IterableReturningTypeVariable@foreachstatement.ForEachStatement.IterableReturningTypeVariable
+(func $$create__@foreachstatement.ForEachStatement.IterableReturningTypeVariable
  (result (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  ;;@ foreachstatement/ForEachStatement.java:51:15
  (local $$instance (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))

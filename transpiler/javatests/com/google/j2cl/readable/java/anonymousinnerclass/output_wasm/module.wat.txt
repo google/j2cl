@@ -151,7 +151,7 @@
 )
 
 ;;; A A.$create()
-(func $$create__anonymousinnerclass_A@anonymousinnerclass.A
+(func $$create__@anonymousinnerclass.A
  (result (ref null $anonymousinnerclass.A))
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
  (local $$instance (ref null $anonymousinnerclass.A))
@@ -235,7 +235,7 @@
 )
 
 ;;; AnonymousInnerClass AnonymousInnerClass.$create()
-(func $$create__anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass
+(func $$create__@anonymousinnerclass.AnonymousInnerClass
  (result (ref null $anonymousinnerclass.AnonymousInnerClass))
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
  (local $$instance (ref null $anonymousinnerclass.AnonymousInnerClass))
@@ -281,16 +281,16 @@
  (block
   ;; InnerClass ic = anonymousinnerclass.AnonymousInnerClass.1.$create(AnonymousInnerClass.this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:4
-  (local.set $ic (call $$create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_AnonymousInnerClass_1@anonymousinnerclass.AnonymousInnerClass.1 (local.get $this)))
+  (local.set $ic (call $$create__anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass.1 (local.get $this)))
   ;; A a = anonymousinnerclass.A.$create();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:28:4
-  (local.set $a (call $$create__anonymousinnerclass_A@anonymousinnerclass.A ))
+  (local.set $a (call $$create__@anonymousinnerclass.A ))
   ;; B b = anonymousinnerclass.AnonymousInnerClass.2.$create(AnonymousInnerClass.this,a);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:4
-  (local.set $b (call $$create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__anonymousinnerclass_AnonymousInnerClass_2@anonymousinnerclass.AnonymousInnerClass.2 (local.get $this)(local.get $a)))
+  (local.set $b (call $$create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A@anonymousinnerclass.AnonymousInnerClass.2 (local.get $this)(local.get $a)))
   ;; C c = anonymousinnerclass.AnonymousInnerClass.3.$create(AnonymousInnerClass.this,arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:4
-  (local.set $c (call $$create__anonymousinnerclass_AnonymousInnerClass__int__anonymousinnerclass_AnonymousInnerClass_3@anonymousinnerclass.AnonymousInnerClass.3 (local.get $this)(local.get $arg)))
+  (local.set $c (call $$create__anonymousinnerclass_AnonymousInnerClass__int@anonymousinnerclass.AnonymousInnerClass.3 (local.get $this)(local.get $arg)))
  )
 )
 (elem declare func $m_test__int__void@anonymousinnerclass.AnonymousInnerClass)
@@ -348,7 +348,7 @@
 )
 
 ;;; B B.$create(A $outer_this)
-(func $$create__anonymousinnerclass_A__anonymousinnerclass_A_B@anonymousinnerclass.A.B
+(func $$create__anonymousinnerclass_A@anonymousinnerclass.A.B
  (param $$outer_this (ref null $anonymousinnerclass.A))
  (result (ref null $anonymousinnerclass.A.B))
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
@@ -435,7 +435,7 @@
 )
 
 ;;; <anonymous> extends InnerClass <anonymous> extends InnerClass.$create(AnonymousInnerClass $outer_this)
-(func $$create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_AnonymousInnerClass_1@anonymousinnerclass.AnonymousInnerClass.1
+(func $$create__anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass.1
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.1))
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
@@ -523,7 +523,7 @@
 )
 
 ;;; <anonymous> extends B <anonymous> extends B.$create(AnonymousInnerClass $outer_this, A $captured_a)
-(func $$create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__anonymousinnerclass_AnonymousInnerClass_2@anonymousinnerclass.AnonymousInnerClass.2
+(func $$create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A@anonymousinnerclass.AnonymousInnerClass.2
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (param $$captured_a (ref null $anonymousinnerclass.A))
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.2))
@@ -615,7 +615,7 @@
 )
 
 ;;; <anonymous> extends C <anonymous> extends C.$create(AnonymousInnerClass $outer_this, int $captured_arg)
-(func $$create__anonymousinnerclass_AnonymousInnerClass__int__anonymousinnerclass_AnonymousInnerClass_3@anonymousinnerclass.AnonymousInnerClass.3
+(func $$create__anonymousinnerclass_AnonymousInnerClass__int@anonymousinnerclass.AnonymousInnerClass.3
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (param $$captured_arg i32)
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.3))
@@ -703,7 +703,7 @@
 )
 
 ;;; InnerClass InnerClass.$create(AnonymousInnerClass $outer_this)
-(func $$create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_AnonymousInnerClass_InnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass
+(func $$create__anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
  ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
@@ -791,7 +791,7 @@
 )
 
 ;;; C C.$create(AnonymousInnerClass $outer_this, int $captured_arg)
-(func $$create__anonymousinnerclass_AnonymousInnerClass__int__anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C
+(func $$create__anonymousinnerclass_AnonymousInnerClass__int@anonymousinnerclass.AnonymousInnerClass.1C
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (param $$captured_arg i32)
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.1C))

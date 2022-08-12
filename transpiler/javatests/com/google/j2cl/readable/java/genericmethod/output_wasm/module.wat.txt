@@ -165,7 +165,7 @@
 )
 
 ;;; GenericMethod<T> GenericMethod.$create()
-(func $$create__genericmethod_GenericMethod@genericmethod.GenericMethod
+(func $$create__@genericmethod.GenericMethod
  (result (ref null $genericmethod.GenericMethod))
  ;;@ genericmethod/GenericMethod.java:21:13
  (local $$instance (ref null $genericmethod.GenericMethod))
@@ -247,10 +247,10 @@
  (block
   ;; genericmethod.GenericMethod.1.$create(GenericMethod.this);
   ;;@ genericmethod/GenericMethod.java:29:4
-  (drop (call $$create__genericmethod_GenericMethod__genericmethod_GenericMethod_1@genericmethod.GenericMethod.1 (local.get $this)))
+  (drop (call $$create__genericmethod_GenericMethod@genericmethod.GenericMethod.1 (local.get $this)))
   ;; genericmethod.GenericMethod.1LocalClass.$create(GenericMethod.this);
   ;;@ genericmethod/GenericMethod.java:40:4
-  (drop (call $$create__genericmethod_GenericMethod__genericmethod_GenericMethod_1LocalClass@genericmethod.GenericMethod.1LocalClass (local.get $this)))
+  (drop (call $$create__genericmethod_GenericMethod@genericmethod.GenericMethod.1LocalClass (local.get $this)))
  )
 )
 (elem declare func $m_fun__java_lang_Error__void@genericmethod.GenericMethod)
@@ -334,25 +334,25 @@
  (block
   ;; GenericMethod<Number> g = genericmethod.GenericMethod.$create();
   ;;@ genericmethod/GenericMethod.java:61:4
-  (local.set $g (call $$create__genericmethod_GenericMethod@genericmethod.GenericMethod ))
+  (local.set $g (call $$create__@genericmethod.GenericMethod ))
   ;; g.foo(g,g);
   ;;@ genericmethod/GenericMethod.java:62:4
   (call_ref (ref.as_non_null (local.get $g))(local.get $g)(local.get $g)(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
   ;; g.foo(java.lang.Error.$create(),java.lang.Exception.$create());
   ;;@ genericmethod/GenericMethod.java:63:4
-  (call_ref (ref.as_non_null (local.get $g))(call $$create__java_lang_Error@java.lang.Error )(call $$create__java_lang_Exception@java.lang.Exception )(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+  (call_ref (ref.as_non_null (local.get $g))(call $$create__@java.lang.Error )(call $$create__@java.lang.Exception )(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
   ;; g.fun(java.lang.Object.$create());
   ;;@ genericmethod/GenericMethod.java:65:4
-  (call_ref (ref.as_non_null (local.get $g))(call $$create__java_lang_Object@java.lang.Object )(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+  (call_ref (ref.as_non_null (local.get $g))(call $$create__@java.lang.Object )(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
   ;; g.fun(java.lang.Exception.$create());
   ;;@ genericmethod/GenericMethod.java:66:4
-  (call_ref (ref.as_non_null (local.get $g))(call $$create__java_lang_Exception@java.lang.Exception )(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+  (call_ref (ref.as_non_null (local.get $g))(call $$create__@java.lang.Exception )(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
   ;; g.fun(java.lang.Error.$create());
   ;;@ genericmethod/GenericMethod.java:67:4
-  (call_ref (ref.as_non_null (local.get $g))(call $$create__java_lang_Error@java.lang.Error )(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+  (call_ref (ref.as_non_null (local.get $g))(call $$create__@java.lang.Error )(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
   ;; g.fun(javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.StringPool.$getString_|asdf|()]));
   ;;@ genericmethod/GenericMethod.java:68:4
-  (drop (call_ref (ref.as_non_null (local.get $g))(call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $function.no.side.effects.$getString_|asdf|__java_lang_String (ref.func $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool) )))(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
+  (drop (call_ref (ref.as_non_null (local.get $g))(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $function.no.side.effects.$getString_|asdf|__java_lang_String (ref.func $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool) )))(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
   ;; String s = ((String) GenericMethod.this.checked());
   ;;@ genericmethod/GenericMethod.java:70:4
   (local.set $s (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $this))(struct.get $genericmethod.GenericMethod.vtable $m_checked__java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $this))))))
@@ -662,7 +662,7 @@
 )
 
 ;;; <anonymous> extends GenericMethod<T><T, T> <anonymous> extends GenericMethod<T>.$create(GenericMethod<T> $outer_this)
-(func $$create__genericmethod_GenericMethod__genericmethod_GenericMethod_1@genericmethod.GenericMethod.1
+(func $$create__genericmethod_GenericMethod@genericmethod.GenericMethod.1
  (param $$outer_this (ref null $genericmethod.GenericMethod))
  (result (ref null $genericmethod.GenericMethod.1))
  ;;@ genericmethod/GenericMethod.java:29:27
@@ -774,7 +774,7 @@
 )
 
 ;;; SuperContainer<C> SuperContainer.$create()
-(func $$create__genericmethod_GenericMethod_SuperContainer@genericmethod.GenericMethod.SuperContainer
+(func $$create__@genericmethod.GenericMethod.SuperContainer
  (result (ref null $genericmethod.GenericMethod.SuperContainer))
  ;;@ genericmethod/GenericMethod.java:77:15
  (local $$instance (ref null $genericmethod.GenericMethod.SuperContainer))
@@ -874,7 +874,7 @@
 )
 
 ;;; Container<CT> Container.$create()
-(func $$create__genericmethod_GenericMethod_Container@genericmethod.GenericMethod.Container
+(func $$create__@genericmethod.GenericMethod.Container
  (result (ref null $genericmethod.GenericMethod.Container))
  ;;@ genericmethod/GenericMethod.java:83:15
  (local $$instance (ref null $genericmethod.GenericMethod.Container))
@@ -974,7 +974,7 @@
 )
 
 ;;; Content Content.$create()
-(func $$create__genericmethod_GenericMethod_Content@genericmethod.GenericMethod.Content
+(func $$create__@genericmethod.GenericMethod.Content
  (result (ref null $genericmethod.GenericMethod.Content))
  ;;@ genericmethod/GenericMethod.java:89:15
  (local $$instance (ref null $genericmethod.GenericMethod.Content))
@@ -1157,7 +1157,7 @@
 )
 
 ;;; LocalClass<T, T, T> LocalClass.$create(GenericMethod<T> $outer_this)
-(func $$create__genericmethod_GenericMethod__genericmethod_GenericMethod_1LocalClass@genericmethod.GenericMethod.1LocalClass
+(func $$create__genericmethod_GenericMethod@genericmethod.GenericMethod.1LocalClass
  (param $$outer_this (ref null $genericmethod.GenericMethod))
  (result (ref null $genericmethod.GenericMethod.1LocalClass))
  ;;@ genericmethod/GenericMethod.java:35:10

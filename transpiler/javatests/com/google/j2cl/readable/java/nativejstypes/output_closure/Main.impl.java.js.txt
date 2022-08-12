@@ -27,7 +27,7 @@ class Main extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts @return {number} */
- static m_testNativeJsTypeWithNamespace__() {
+ static m_testNativeJsTypeWithNamespace__int() {
   Main.$clinit();
   let foo = new Foo();
   foo.x = 50;
@@ -35,7 +35,7 @@ class Main extends j_l_Object {
   return foo.sum();
  }
  /** @nodts @return {number} */
- static m_testNativeJsTypeWithoutNamespace__() {
+ static m_testNativeJsTypeWithoutNamespace__int() {
   Main.$clinit();
   let bar = new Bar(6, 7);
   bar.x = 50;
@@ -44,30 +44,30 @@ class Main extends j_l_Object {
   return bar.product();
  }
  /** @nodts */
- static m_testInnerNativeJsType__() {
+ static m_testInnerNativeJsType__void() {
   Main.$clinit();
   let unusedBarInner = new Bar.Inner(1);
   let unusedBarInnerWithDotInName = new $synthetic_nativejstypes_Bar.Inner(2);
  }
  /** @nodts */
- static m_testGlobalNativeJsType__() {
+ static m_testGlobalNativeJsType__void() {
   Main.$clinit();
   let header = new Headers();
   header.append('Content-Type', 'text\/xml');
  }
  /** @nodts */
- static m_testNativeTypeClassLiteral__() {
+ static m_testNativeTypeClassLiteral__void() {
   Main.$clinit();
   let o1 = Class.$get($JavaScriptObject);
   o1 = Class.$get(j_l_Object, 1);
  }
  /** @nodts */
- static m_testNativeTypeObjectMethods__() {
+ static m_testNativeTypeObjectMethods__void() {
   Main.$clinit();
   let bar = new Bar(6, 7);
-  $Objects.m_toString__java_lang_Object(bar);
-  $Objects.m_hashCode__java_lang_Object(bar);
-  $Objects.m_equals__java_lang_Object__java_lang_Object(bar, j_l_Object.$create__());
+  $Objects.m_toString__java_lang_Object__java_lang_String(bar);
+  $Objects.m_hashCode__java_lang_Object__int(bar);
+  $Objects.m_equals__java_lang_Object__java_lang_Object__boolean(bar, j_l_Object.$create__());
  }
  /** @nodts */
  static $clinit() {

@@ -109,7 +109,7 @@
 )
 
 ;;; RawType RawType.$create()
-(func $$create__rawtype_RawType@rawtype.RawType
+(func $$create__@rawtype.RawType
  (result (ref null $rawtype.RawType))
  ;;@ rawtype/RawType.java:19:6
  (local $$instance (ref null $rawtype.RawType))
@@ -153,13 +153,13 @@
  (block
   ;; Unbound unbound = rawtype.RawType.Unbound.$create();
   ;;@ rawtype/RawType.java:38:4
-  (local.set $unbound (call $$create__rawtype_RawType_Unbound@rawtype.RawType.Unbound ))
+  (local.set $unbound (call $$create__@rawtype.RawType.Unbound ))
   ;; Bound bound = rawtype.RawType.Bound.$create();
   ;;@ rawtype/RawType.java:39:4
-  (local.set $bound (call $$create__rawtype_RawType_Bound@rawtype.RawType.Bound ))
+  (local.set $bound (call $$create__@rawtype.RawType.Bound ))
   ;; BoundRecursively boundRecursively = rawtype.RawType.BoundRecursively.$create(RawType.this);
   ;;@ rawtype/RawType.java:40:4
-  (local.set $boundRecursively (call $$create__rawtype_RawType__rawtype_RawType_BoundRecursively@rawtype.RawType.BoundRecursively (local.get $this)))
+  (local.set $boundRecursively (call $$create__rawtype_RawType@rawtype.RawType.BoundRecursively (local.get $this)))
  )
 )
 (elem declare func $m_test__void_$pp_rawtype@rawtype.RawType)
@@ -262,7 +262,7 @@
 )
 
 ;;; Unbound<T> Unbound.$create()
-(func $$create__rawtype_RawType_Unbound@rawtype.RawType.Unbound
+(func $$create__@rawtype.RawType.Unbound
  (result (ref null $rawtype.RawType.Unbound))
  ;;@ rawtype/RawType.java:26:15
  (local $$instance (ref null $rawtype.RawType.Unbound))
@@ -345,7 +345,7 @@
 )
 
 ;;; Bound<T> Bound.$create()
-(func $$create__rawtype_RawType_Bound@rawtype.RawType.Bound
+(func $$create__@rawtype.RawType.Bound
  (result (ref null $rawtype.RawType.Bound))
  ;;@ rawtype/RawType.java:28:15
  (local $$instance (ref null $rawtype.RawType.Bound))
@@ -429,7 +429,7 @@
 )
 
 ;;; BoundRecursively<T> BoundRecursively.$create(RawType $outer_this)
-(func $$create__rawtype_RawType__rawtype_RawType_BoundRecursively@rawtype.RawType.BoundRecursively
+(func $$create__rawtype_RawType@rawtype.RawType.BoundRecursively
  (param $$outer_this (ref null $rawtype.RawType))
  (result (ref null $rawtype.RawType.BoundRecursively))
  ;;@ rawtype/RawType.java:30:8
@@ -515,7 +515,7 @@
 )
 
 ;;; RawSubclass RawSubclass.$create()
-(func $$create__rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass
+(func $$create__@rawtype.RawType.RawSubclass
  (result (ref null $rawtype.RawType.RawSubclass))
  ;;@ rawtype/RawType.java:32:15
  (local $$instance (ref null $rawtype.RawType.RawSubclass))

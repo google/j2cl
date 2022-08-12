@@ -124,7 +124,7 @@
 (elem declare func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample)
 
 ;;; DeprecatedExample DeprecatedExample.$create()
-(func $$create__deprecated_DeprecatedExample@deprecated.DeprecatedExample
+(func $$create__@deprecated.DeprecatedExample
  (result (ref null $deprecated.DeprecatedExample))
  ;;@ deprecated/DeprecatedExample.java:37:9
  (local $$instance (ref null $deprecated.DeprecatedExample))
@@ -297,7 +297,7 @@
 )
 
 ;;; DeprecatedEnum DeprecatedEnum.$create(String $name, int $ordinal)
-(func $$create__java_lang_String__int__deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
+(func $$create__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedEnum
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
@@ -371,7 +371,7 @@
   (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
   ;; return javaemul.internal.WasmArray.OfObject.$create([deprecated.DeprecatedExample.DeprecatedEnum.A_VALUE]);
   ;;@ deprecated/DeprecatedExample.java:55:7
-  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum))))
+  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum))))
  )
 )
 
@@ -396,7 +396,7 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (deprecated.DeprecatedExample.DeprecatedEnum.A_VALUE = deprecated.DeprecatedExample.DeprecatedEnum.$create(javaemul.internal.StringPool.$getString_|A_VALUE|(),0));
   ;;@ deprecated/DeprecatedExample.java:56:4
-  (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum (call $$create__java_lang_String__int__deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (call $function.no.side.effects.$getString_|A_VALUE|__java_lang_String (ref.func $$getString_|A_VALUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum (call $$create__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedEnum (call $function.no.side.effects.$getString_|A_VALUE|__java_lang_String (ref.func $$getString_|A_VALUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
  )
 )
 
@@ -437,7 +437,7 @@
 )
 
 ;;; DeprecatedJsEnum DeprecatedJsEnum.$create(String $name, int $ordinal)
-(func $$create__java_lang_String__int__deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
+(func $$create__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedJsEnum
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
@@ -511,7 +511,7 @@
   (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedJsEnum )
   ;; return javaemul.internal.WasmArray.OfObject.$create([deprecated.DeprecatedExample.DeprecatedJsEnum.A_VALUE]);
   ;;@ deprecated/DeprecatedExample.java:62:7
-  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum))))
+  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum))))
  )
 )
 
@@ -536,7 +536,7 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (deprecated.DeprecatedExample.DeprecatedJsEnum.A_VALUE = deprecated.DeprecatedExample.DeprecatedJsEnum.$create(javaemul.internal.StringPool.$getString_|A_VALUE|(),0));
   ;;@ deprecated/DeprecatedExample.java:63:4
-  (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum (call $$create__java_lang_String__int__deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum (call $function.no.side.effects.$getString_|A_VALUE|__java_lang_String (ref.func $$getString_|A_VALUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum (call $$create__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedJsEnum (call $function.no.side.effects.$getString_|A_VALUE|__java_lang_String (ref.func $$getString_|A_VALUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
  )
 )
 

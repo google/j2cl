@@ -8,18 +8,18 @@
 [Main] => [return $instance;] "jsenum.Main.<synthetic: ctor_create>"
 [Main] => [$ctor__jsenum_Main__void]
 [Main] => [this.$ctor__java_lang_Object__void();] "jsenum.Main.<init>"
-[testJsEnumSwitch] => [m_testJsEnumSwitch__]
+[testJsEnumSwitch] => [m_testJsEnumSwitch__void]
 [{
     ComparableJsEnum comparableJsEnum =
 ...    Consumer<ComparableJsEnum> consummer = e -> e.ordinal();
   }] => [Main.$clinit();] "jsenum.Main.testJsEnumSwitch"
 [ComparableJsEnum comparableJsEnum =
-        ComparableJsEnum.ONE.getValue() == 1 ? ComparableJsEnum.TWO : null;] => [let comparableJsEnum = $Overlay.m_getValue__$devirt__jsenum_Main_ComparableJsEnum(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : /**@type {?ComparableJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
+        ComparableJsEnum.ONE.getValue() == 1 ? ComparableJsEnum.TWO : null;] => [let comparableJsEnum = $Overlay.m_getValue__$devirt__jsenum_Main_ComparableJsEnum__int(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : /**@type {?ComparableJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
 [comparableJsEnum] => [comparableJsEnum] "comparableJsEnum"
 [switch (comparableJsEnum) {
       case TWO:
 ...      default:
-    }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object(comparableJsEnum)) {
+    }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(comparableJsEnum)) {
    case ComparableJsEnum.TWO:
 ...   default:
   }] "jsenum.Main.testJsEnumSwitch"
@@ -27,12 +27,12 @@
 [Comparable comparable = comparableJsEnum;] => [let comparable = /**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Enums.boxComparable(comparableJsEnum, $Overlay));] "jsenum.Main.testJsEnumSwitch"
 [comparable] => [comparable] "comparable"
 [comparableJsEnum = (ComparableJsEnum) comparable;] => [comparableJsEnum = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(comparable, $Overlay))));] "jsenum.Main.testJsEnumSwitch"
-[IntJsEnum intJsEnum = IntJsEnum.ELEVEN.getValue() == 10 ? IntJsEnum.ELEVEN : null;] => [let intJsEnum = IntJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_IntJsEnum(IntJsEnum.ELEVEN) == 10 ? IntJsEnum.ELEVEN : /**@type {?IntJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
+[IntJsEnum intJsEnum = IntJsEnum.ELEVEN.getValue() == 10 ? IntJsEnum.ELEVEN : null;] => [let intJsEnum = IntJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_IntJsEnum__int(IntJsEnum.ELEVEN) == 10 ? IntJsEnum.ELEVEN : /**@type {?IntJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
 [intJsEnum] => [intJsEnum] "intJsEnum"
 [switch (intJsEnum) {
       case TWENTY:
 ...      default:
-    }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object(intJsEnum)) {
+    }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(intJsEnum)) {
    case IntJsEnum.TWENTY:
 ...   default:
   }] "jsenum.Main.testJsEnumSwitch"
@@ -45,20 +45,20 @@
 [boolean isInstance = intJsEnum instanceof IntJsEnum;] => [let isInstance = !$Equality.$same(intJsEnum, null);] "jsenum.Main.testJsEnumSwitch"
 [isInstance] => [isInstance] "isInstance"
 [isInstance = intJsEnum instanceof Comparable;] => [isInstance = Comparable.$isInstance(/**@type {$Enums_BoxedLightEnum<?IntJsEnum>}*/ ($Enums.box(intJsEnum, IntJsEnum_$Overlay)));] "jsenum.Main.testJsEnumSwitch"
-[StringJsEnum stringJsEnum = StringJsEnum.ONE.getValue() == "10" ? StringJsEnum.THREE : null;] => [let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_StringJsEnum(StringJsEnum.ONE), '10') ? StringJsEnum.THREE : /**@type {?StringJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
+[StringJsEnum stringJsEnum = StringJsEnum.ONE.getValue() == "10" ? StringJsEnum.THREE : null;] => [let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_StringJsEnum__java_lang_String(StringJsEnum.ONE), '10') ? StringJsEnum.THREE : /**@type {?StringJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
 [stringJsEnum] => [stringJsEnum] "stringJsEnum"
 [switch (stringJsEnum) {
       case ONE:
 ...      default:
-    }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object(stringJsEnum)) {
+    }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(stringJsEnum)) {
    case StringJsEnum.ONE:
 ...   default:
   }] "jsenum.Main.testJsEnumSwitch"
 [break;] => [break;] "jsenum.Main.testJsEnumSwitch"
-[NativeStringEnum.ONE.compareTo(NativeStringEnum.THREE);] => [$Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(NativeStringEnum.ONE, NativeStringEnum.THREE);] "jsenum.Main.testJsEnumSwitch"
-[NativeStringEnum.ONE.equals(NativeStringEnum.THREE);] => [$Objects.m_equals__java_lang_Object__java_lang_Object(NativeStringEnum.ONE, NativeStringEnum.THREE);] "jsenum.Main.testJsEnumSwitch"
-[ComparableJsEnum.ONE.compareTo(ComparableJsEnum.ZERO);] => [$Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay)));] "jsenum.Main.testJsEnumSwitch"
-[ComparableJsEnum.ONE.equals(ComparableJsEnum.ZERO);] => [$Objects.m_equals__java_lang_Object__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay)));] "jsenum.Main.testJsEnumSwitch"
+[NativeStringEnum.ONE.compareTo(NativeStringEnum.THREE);] => [$Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(NativeStringEnum.ONE, NativeStringEnum.THREE);] "jsenum.Main.testJsEnumSwitch"
+[NativeStringEnum.ONE.equals(NativeStringEnum.THREE);] => [$Objects.m_equals__java_lang_Object__java_lang_Object__boolean(NativeStringEnum.ONE, NativeStringEnum.THREE);] "jsenum.Main.testJsEnumSwitch"
+[ComparableJsEnum.ONE.compareTo(ComparableJsEnum.ZERO);] => [$Comparables.m_compareTo__java_lang_Comparable__java_lang_Object__int(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay)));] "jsenum.Main.testJsEnumSwitch"
+[ComparableJsEnum.ONE.equals(ComparableJsEnum.ZERO);] => [$Objects.m_equals__java_lang_Object__java_lang_Object__boolean(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay)));] "jsenum.Main.testJsEnumSwitch"
 [Supplier<ComparableJsEnum> supplier = () -> ComparableJsEnum.ONE;] => [let supplier = Supplier.$adapt(() =>{
    return /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));
   });] "jsenum.Main.testJsEnumSwitch"
@@ -71,7 +71,7 @@
 [e] => [e] "e"
 [e -> e.ordinal()] => [let e_1 = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(e, $Overlay))));] "jsenum.Main.<lambda in testJsEnumSwitch>"
 [e] => [e_1] "e"
-[testBoxUnboxWithTypeInference] => [m_testBoxUnboxWithTypeInference__]
+[testBoxUnboxWithTypeInference] => [m_testBoxUnboxWithTypeInference__void]
 [TemplatedField<ComparableJsEnum> templatedField =
         new TemplatedField<ComparableJsEnum>(ComparableJsEnum.ONE);] => [let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [templatedField] => [templatedField] "templatedField"
@@ -79,18 +79,18 @@
 [unboxed] => [unboxed] "unboxed"
 [unboxed = templatedField.value;] => [unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.f_value__jsenum_Main_TemplatedField, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [templatedField.value = ComparableJsEnum.ONE;] => [templatedField.f_value__jsenum_Main_TemplatedField = /**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay));] "jsenum.Main.testBoxUnboxWithTypeInference"
-[Arrays.asList(ComparableJsEnum.ONE);] => [Arrays.m_asList__arrayOf_java_lang_Object([/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))]);] "jsenum.Main.testBoxUnboxWithTypeInference"
+[Arrays.asList(ComparableJsEnum.ONE);] => [Arrays.m_asList__arrayOf_java_lang_Object__java_util_List([/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))]);] "jsenum.Main.testBoxUnboxWithTypeInference"
 [templatedField.getValue().ordinal();] => [$Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue__java_lang_Object_$pp_jsenum(), $Overlay)));] "jsenum.Main.testBoxUnboxWithTypeInference"
-[boolean b = ComparableJsEnum.ONE == boxingPassthrough(ComparableJsEnum.ONE);] => [let b = $Equality.$same(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), Main.m_boxingPassthrough__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
+[boolean b = ComparableJsEnum.ONE == boxingPassthrough(ComparableJsEnum.ONE);] => [let b = $Equality.$same(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)), Main.m_boxingPassthrough__java_lang_Object__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [b] => [b] "b"
-[boxingPassthrough] => [m_boxingPassthrough__java_lang_Object]
+[boxingPassthrough] => [m_boxingPassthrough__java_lang_Object__java_lang_Object]
 [t] => [t] "t"
 [return t;] => [return t;] "jsenum.Main.boxingPassthrough"
-[boxingWithGenerics] => [m_boxingWithGenerics__]
+[boxingWithGenerics] => [m_boxingWithGenerics__void]
 [{
     new Foo<>(Optional.of(IntJsEnum.MINUSONE));
   }] => [Main.$clinit();] "jsenum.Main.boxingWithGenerics"
-[new Foo<>(Optional.of(IntJsEnum.MINUSONE));] => [Foo.$create__java_util_Optional(/**@type {Optional<$Enums_BoxedLightEnum<?IntJsEnum>>}*/ (Optional.m_of__java_lang_Object(/**@type {$Enums_BoxedLightEnum<!IntJsEnum>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay)))));] "jsenum.Main.boxingWithGenerics"
+[new Foo<>(Optional.of(IntJsEnum.MINUSONE));] => [Foo.$create__java_util_Optional(/**@type {Optional<$Enums_BoxedLightEnum<?IntJsEnum>>}*/ (Optional.m_of__java_lang_Object__java_util_Optional(/**@type {$Enums_BoxedLightEnum<!IntJsEnum>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay)))));] "jsenum.Main.boxingWithGenerics"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "jsenum.Main.<clinit>"
 [Main] => [Main.$loadModules();] "jsenum.Main.<clinit>"

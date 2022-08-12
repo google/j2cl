@@ -523,15 +523,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     Stream<TypeDescriptor> signatureDescriptors = getParameterTypeDescriptors().stream();
-    boolean includeReturnTypeInMangledName =
-        // Add the return type to the mangled name in WASM except for constructors. Constructors
-        // always return the same type and there is no need to make the mangled name longer
-        // unnecessarily.
-        (useWasmManglingPatterns() && !isConstructor())
-            // TODO(b/236033213): add the return type for static methods in Closure.
-            || isInstanceMember();
-
-    if (includeReturnTypeInMangledName) {
+    if (!isConstructor() && getOrigin() != MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR) {
+      // Constructors and constructor related factories always return the enclosing class type and
+      // there is no need to make the mangled name longer unnecessarily.
+      // TODO(b/241302441): Consider mangling all the methods the same way without exceptions.
       signatureDescriptors =
           Stream.concat(signatureDescriptors, Stream.of(getReturnTypeDescriptor()));
     }

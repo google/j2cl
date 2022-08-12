@@ -80,16 +80,16 @@ class Main extends j_l_Object {
   Main.f1(1);
   Main.f1(1);
   let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
-  Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
-  Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
-  Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(null));
+  Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints));
+  Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints));
+  Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(null));
  }
  /** @nodts */
  m_testStaticMethodFirst__void() {
   Main.f2(1, 2);
-  Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));
+  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
   Main.f2(1, 2);
-  Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));
+  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
   Main.f2();
   Main.generics();
   Main.f2();
@@ -98,15 +98,15 @@ class Main extends j_l_Object {
   Main.f2(1, 2);
   Main.f2(1, 2);
   Main.generics(/**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int)));
-  Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));
+  Main.generics(Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2));
   Main.f2();
   Main.f2();
   Main.generics(/**@type {!Array<number>}*/ ($Arrays.$init([], $$int)));
   let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
-  let integers = /**@type {!Array<Integer>}*/ ($Arrays.$init([Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));
-  Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
-  Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
-  Main.generics(...InternalPreconditions.m_checkNotNull__java_lang_Object(integers));
+  let integers = /**@type {!Array<Integer>}*/ ($Arrays.$init([Integer.m_valueOf__int__java_lang_Integer(1), Integer.m_valueOf__int__java_lang_Integer(2)], Integer));
+  Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints));
+  Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints));
+  Main.generics(...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(integers));
  }
  /** @nodts */
  m_testInstanceMethodNotFirst__void() {
@@ -116,7 +116,7 @@ class Main extends j_l_Object {
   m.f3(1, 1, 2);
   m.f3(1);
   let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
-  m.f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+  m.f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints));
  }
  /** @nodts */
  m_testInstanceMethodFirst__void() {
@@ -126,7 +126,7 @@ class Main extends j_l_Object {
   m.f4(1, 2);
   m.f4();
   let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
-  m.f4(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+  m.f4(...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints));
  }
  /** @nodts */
  m_testJsFunction__void() {
@@ -138,17 +138,17 @@ class Main extends j_l_Object {
   a(0, o1, o2);
   a(0);
   let os = [o1, o2];
-  a(0, ...InternalPreconditions.m_checkNotNull__java_lang_Object(os));
+  a(0, ...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(os));
  }
  /** @nodts */
  m_testSideEffect__void() {
   let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
-  Main.$create__int(1).f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+  Main.$create__int(1).f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints));
  }
  /** @nodts */
  m_testNullJsVarargs__void() {
   let ints = null;
-  Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+  Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object__java_lang_Object(ints));
  }
  /** @nodts @template U */
  m_testGenericJsFunctionWithVarags__void() {

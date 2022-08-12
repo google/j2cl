@@ -70,7 +70,7 @@
 )
 
 ;;; Numbers Numbers.$create(String $name, int $ordinal)
-(func $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers
+(func $$create__java_lang_String__int@switchstatement.Numbers
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $switchstatement.Numbers))
@@ -144,7 +144,7 @@
   (call $$clinit__void@switchstatement.Numbers )
   ;; return javaemul.internal.WasmArray.OfObject.$create([switchstatement.Numbers.ONE,switchstatement.Numbers.TWO]);
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_ONE__switchstatement_Numbers)(global.get $f_TWO__switchstatement_Numbers))))
+  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_ONE__switchstatement_Numbers)(global.get $f_TWO__switchstatement_Numbers))))
  )
 )
 
@@ -169,10 +169,10 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (switchstatement.Numbers.ONE = switchstatement.Numbers.$create(javaemul.internal.StringPool.$getString_|ONE|(),0));
   ;;@ switchstatement/SwitchStatement.java:19:2
-  (global.set $f_ONE__switchstatement_Numbers (call $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers (call $function.no.side.effects.$getString_|ONE|__java_lang_String (ref.func $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_ONE__switchstatement_Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|ONE|__java_lang_String (ref.func $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
   ;; (switchstatement.Numbers.TWO = switchstatement.Numbers.$create(javaemul.internal.StringPool.$getString_|TWO|(),1));
   ;;@ switchstatement/SwitchStatement.java:20:2
-  (global.set $f_TWO__switchstatement_Numbers (call $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers (call $function.no.side.effects.$getString_|TWO|__java_lang_String (ref.func $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_TWO__switchstatement_Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|TWO|__java_lang_String (ref.func $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
  )
 )
 
@@ -207,7 +207,7 @@
 )
 
 ;;; SwitchStatement SwitchStatement.$create()
-(func $$create__switchstatement_SwitchStatement@switchstatement.SwitchStatement
+(func $$create__@switchstatement.SwitchStatement
  (result (ref null $switchstatement.SwitchStatement))
  ;;@ switchstatement/SwitchStatement.java:23:13
  (local $$instance (ref null $switchstatement.SwitchStatement))

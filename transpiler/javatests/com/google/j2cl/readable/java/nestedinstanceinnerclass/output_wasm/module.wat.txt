@@ -67,7 +67,7 @@
 )
 
 ;;; OuterClass OuterClass.$create()
-(func $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass
+(func $$create__@nestedinstanceinnerclass.OuterClass
  (result (ref null $nestedinstanceinnerclass.OuterClass))
  ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
  (local $$instance (ref null $nestedinstanceinnerclass.OuterClass))
@@ -108,7 +108,7 @@
  (block
   ;; nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$create(nestedinstanceinnerclass.OuterClass.InnerClass.$create(nestedinstanceinnerclass.OuterClass.$create()));
   ;;@ nestedinstanceinnerclass/OuterClass.java:27:4
-  (drop (call $$create__nestedinstanceinnerclass_OuterClass_InnerClass__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $$create__nestedinstanceinnerclass_OuterClass__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass (call $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass ))))
+  (drop (call $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (call $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass (call $$create__@nestedinstanceinnerclass.OuterClass ))))
  )
 )
 (elem declare func $m_test__void@nestedinstanceinnerclass.OuterClass)
@@ -168,7 +168,7 @@
 )
 
 ;;; InnerInnerClass InnerInnerClass.$create(InnerClass $outer_this)
-(func $$create__nestedinstanceinnerclass_OuterClass_InnerClass__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+(func $$create__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
@@ -271,7 +271,7 @@
 )
 
 ;;; InnerClass InnerClass.$create(OuterClass $outer_this)
-(func $$create__nestedinstanceinnerclass_OuterClass__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass
+(func $$create__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass
  (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  ;;@ nestedinstanceinnerclass/OuterClass.java:19:15

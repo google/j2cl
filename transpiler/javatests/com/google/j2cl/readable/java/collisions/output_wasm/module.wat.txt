@@ -119,7 +119,7 @@
 )
 
 ;;; goog goog.$create()
-(func $$create__collisions_goog@collisions.goog
+(func $$create__@collisions.goog
  (result (ref null $collisions.goog))
  ;;@ collisions/goog.java:23:13
  (local $$instance (ref null $collisions.goog))
@@ -202,7 +202,7 @@
 )
 
 ;;; Blah Blah.$create()
-(func $$create__collisions_Blah@collisions.Blah
+(func $$create__@collisions.Blah
  (result (ref null $collisions.Blah))
  ;;@ collisions/goog.java:26:6
  (local $$instance (ref null $collisions.Blah))
@@ -294,7 +294,7 @@
 )
 
 ;;; foo foo.$create()
-(func $$create__collisions_foo@collisions.foo
+(func $$create__@collisions.foo
  (result (ref null $collisions.foo))
  ;;@ collisions/goog.java:34:6
  (local $$instance (ref null $collisions.foo))
@@ -377,7 +377,7 @@
 )
 
 ;;; bar bar.$create()
-(func $$create__collisions_bar@collisions.bar
+(func $$create__@collisions.bar
  (result (ref null $collisions.bar))
  ;;@ collisions/goog.java:36:6
  (local $$instance (ref null $collisions.bar))
@@ -434,13 +434,13 @@
   (drop (call $m_getN__double@collisions.Blah ))
   ;; collisions.Blah.$create();
   ;;@ collisions/goog.java:41:4
-  (drop (call $$create__collisions_Blah@collisions.Blah ))
+  (drop (call $$create__@collisions.Blah ))
   ;; collisions.goog.$create();
   ;;@ collisions/goog.java:42:4
-  (drop (call $$create__collisions_goog@collisions.goog ))
+  (drop (call $$create__@collisions.goog ))
   ;; collisions.foo.$create();
   ;;@ collisions/goog.java:43:4
-  (drop (call $$create__collisions_foo@collisions.foo ))
+  (drop (call $$create__@collisions.foo ))
   ;; int delete = 1;
   ;;@ collisions/goog.java:46:4
   (local.set $delete (i32.const 1))
@@ -503,7 +503,7 @@
 )
 
 ;;; Other<T> Other.$create()
-(func $$create__collisions_Other@collisions.Other
+(func $$create__@collisions.Other
  (result (ref null $collisions.Other))
  ;;@ collisions/goog.java:51:6
  (local $$instance (ref null $collisions.Other))
@@ -631,7 +631,7 @@
 )
 
 ;;; T<T> T.$create()
-(func $$create__collisions_T@collisions.T
+(func $$create__@collisions.T
  (result (ref null $collisions.T))
  ;;@ collisions/goog.java:64:6
  (local $$instance (ref null $collisions.T))
@@ -692,7 +692,7 @@
   ;; T t = (T<T> $qualifier = collisions.T.$create(),$qualifier.m());
   ;;@ collisions/goog.java:70:4
   (local.set $t (block (result (ref null $java.lang.Number))
-   (local.set $$qualifier (call $$create__collisions_T@collisions.T ))
+   (local.set $$qualifier (call $$create__@collisions.T ))
    (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
   ))
   ;; t.byteValue();

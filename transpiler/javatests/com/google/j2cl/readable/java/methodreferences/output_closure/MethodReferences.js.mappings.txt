@@ -8,7 +8,7 @@
 [MethodReferences] => [return $instance;] "methodreferences.MethodReferences.<synthetic: ctor_create>"
 [MethodReferences] => [$ctor__methodreferences_MethodReferences__void]
 [MethodReferences] => [this.$ctor__java_lang_Object__void();] "methodreferences.MethodReferences.<init>"
-[m] => [m_m__]
+[m] => [m_m__java_lang_Object]
 [{
     return new Object();
   }] => [MethodReferences.$clinit();] "methodreferences.MethodReferences.m"
@@ -31,9 +31,9 @@
 [objectFactory] => [objectFactory] "objectFactory"
 [Object::new] => [return j_l_Object.$create__();] "methodreferences.MethodReferences.<lambda in main>"
 [objectFactory = MethodReferences::m;] => [objectFactory = Producer.$adapt(() =>{
-   return MethodReferences.m_m__();
+   return MethodReferences.m_m__java_lang_Object();
   });] "methodreferences.MethodReferences.main"
-[MethodReferences::m] => [return MethodReferences.m_m__();] "methodreferences.MethodReferences.<lambda in main>"
+[MethodReferences::m] => [return MethodReferences.m_m__java_lang_Object();] "methodreferences.MethodReferences.<lambda in main>"
 [objectFactory = new MethodReferences<T>()::isA;] => [objectFactory = ($$q = /**@type {!MethodReferences<T>}*/ (MethodReferences.$create__()), Producer.$adapt(() =>{
    return $$q.m_isA__java_lang_Boolean();
   }));] "methodreferences.MethodReferences.main"
@@ -55,11 +55,11 @@
 [this::sameAs] => [return this.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences(arg0_3);] "methodreferences.MethodReferences.<lambda in main>"
 [Predicate<MethodReferences<T>> objectPredicate = MethodReferences::isA;] => [let objectPredicate = Predicate.$adapt((arg0_4) =>{
    let arg0_5 = /**@type {MethodReferences}*/ ($Casts.$to(arg0_4, MethodReferences));
-   return Boolean.m_booleanValue__java_lang_Boolean(arg0_5.m_isA__java_lang_Boolean());
+   return Boolean.m_booleanValue__java_lang_Boolean__boolean(arg0_5.m_isA__java_lang_Boolean());
   });] "methodreferences.MethodReferences.main"
 [objectPredicate] => [objectPredicate] "objectPredicate"
 [MethodReferences::isA] => [let arg0_5 = /**@type {MethodReferences}*/ ($Casts.$to(arg0_4, MethodReferences));] "methodreferences.MethodReferences.<lambda in main>"
-[MethodReferences::isA] => [return Boolean.m_booleanValue__java_lang_Boolean(arg0_5.m_isA__java_lang_Boolean());] "methodreferences.MethodReferences.<lambda in main>"
+[MethodReferences::isA] => [return Boolean.m_booleanValue__java_lang_Boolean__boolean(arg0_5.m_isA__java_lang_Boolean());] "methodreferences.MethodReferences.<lambda in main>"
 [Producer<ObjectCapturingOuter> objectCapturingOuterProducer = ObjectCapturingOuter::new;] => [let objectCapturingOuterProducer = Producer.$adapt(() =>{
    return /**@type {!ObjectCapturingOuter<T>}*/ (ObjectCapturingOuter.$create__methodreferences_MethodReferences(this));
   });] "methodreferences.MethodReferences.main"
@@ -99,9 +99,9 @@
 [jsobjectFactory] => [jsobjectFactory] "jsobjectFactory"
 [Object::new] => [return j_l_Object.$create__();] "methodreferences.MethodReferences.<lambda in main>"
 [jsobjectFactory = MethodReferences::m;] => [jsobjectFactory = () =>{
-   return MethodReferences.m_m__();
+   return MethodReferences.m_m__java_lang_Object();
   };] "methodreferences.MethodReferences.main"
-[MethodReferences::m] => [return MethodReferences.m_m__();] "methodreferences.MethodReferences.<lambda in main>"
+[MethodReferences::m] => [return MethodReferences.m_m__java_lang_Object();] "methodreferences.MethodReferences.<lambda in main>"
 [jsobjectFactory = new MethodReferences<>()::self;] => [jsobjectFactory = ($$q_2 = /**@type {!MethodReferences<*>}*/ (MethodReferences.$create__()), () =>{
    return $$q_2.m_self__java_lang_Object_$pp_methodreferences();
   });] "methodreferences.MethodReferences.main"
@@ -149,9 +149,9 @@
 [MethodReferences] => [MethodReferences.$clinit = () =>{};] "methodreferences.MethodReferences.<clinit>"
 [MethodReferences] => [MethodReferences.$loadModules();] "methodreferences.MethodReferences.<clinit>"
 [MethodReferences] => [j_l_Object.$clinit();] "methodreferences.MethodReferences.<clinit>"
-[static Producer<String> staticStringProducer = m()::toString;] => [MethodReferences.$static_staticStringProducer__methodreferences_MethodReferences = ($$q = MethodReferences.m_m__(), Producer.$adapt(() =>{
-   return $Objects.m_toString__java_lang_Object($$q);
+[static Producer<String> staticStringProducer = m()::toString;] => [MethodReferences.$static_staticStringProducer__methodreferences_MethodReferences = ($$q = MethodReferences.m_m__java_lang_Object(), Producer.$adapt(() =>{
+   return $Objects.m_toString__java_lang_Object__java_lang_String($$q);
   }));] "methodreferences.MethodReferences.<clinit>"
-[m()::toString] => [return $Objects.m_toString__java_lang_Object($$q);] "methodreferences.MethodReferences.<lambda in <clinit>>"
+[m()::toString] => [return $Objects.m_toString__java_lang_Object__java_lang_String($$q);] "methodreferences.MethodReferences.<lambda in <clinit>>"
 [MethodReferences] => [/**@private {Producer<?string>} @nodts*/
 MethodReferences.$static_staticStringProducer__methodreferences_MethodReferences;]

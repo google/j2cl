@@ -9,8 +9,8 @@
 [return "AutoValueWithExtensions {"
         + "\n"
 ...        + "\n"
-        + "  stringField = " + format(getStringField(), 1) + "," + "\n" + "}";] => [return 'AutoValueWithExtensions {' + '\n' + '  intField = ' + this.m_getIntField__int() + ',' + '\n' + '  stringField = ' + j_l_String.m_valueOf__java_lang_Object($AutoValue__AutoValueWithExtensions.m_format__java_lang_Object__int(this.m_getStringField__java_lang_String(), 1)) + ',' + '\n' + '}';] "autovalue.$AutoValue_AutoValueWithExtensions.toPrettyString"
-[format] => [m_format__java_lang_Object__int]
+        + "  stringField = " + format(getStringField(), 1) + "," + "\n" + "}";] => [return 'AutoValueWithExtensions {' + '\n' + '  intField = ' + this.m_getIntField__int() + ',' + '\n' + '  stringField = ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String($AutoValue__AutoValueWithExtensions.m_format__java_lang_Object__int__java_lang_String(this.m_getStringField__java_lang_String(), 1)) + ',' + '\n' + '}';] "autovalue.$AutoValue_AutoValueWithExtensions.toPrettyString"
+[format] => [m_format__java_lang_Object__int__java_lang_String]
 [value] => [value] "value"
 [indentLevel] => [indentLevel] "indentLevel"
 [if (value == null) {
@@ -19,8 +19,8 @@
    return 'null';
   }] "autovalue.$AutoValue_AutoValueWithExtensions.format"
 [return "null";] => [return 'null';] "autovalue.$AutoValue_AutoValueWithExtensions.format"
-[return value.toString().replace("\n", "\n" + $indent(indentLevel));] => [return j_l_String.m_replace__java_lang_String__java_lang_CharSequence__java_lang_CharSequence($Objects.m_toString__java_lang_Object(value), '\n', '\n' + j_l_String.m_valueOf__java_lang_Object($AutoValue__AutoValueWithExtensions.$indent__int(indentLevel)));] "autovalue.$AutoValue_AutoValueWithExtensions.format"
-[$indent] => [$indent__int]
+[return value.toString().replace("\n", "\n" + $indent(indentLevel));] => [return j_l_String.m_replace__java_lang_String__java_lang_CharSequence__java_lang_CharSequence__java_lang_String($Objects.m_toString__java_lang_Object__java_lang_String(value), '\n', '\n' + j_l_String.m_valueOf__java_lang_Object__java_lang_String($AutoValue__AutoValueWithExtensions.$indent__int__java_lang_String(indentLevel)));] "autovalue.$AutoValue_AutoValueWithExtensions.format"
+[$indent] => [$indent__int__java_lang_String]
 [level] => [level] "level"
 [StringBuilder builder = new StringBuilder();] => [let builder = StringBuilder.$create__();] "autovalue.$AutoValue_AutoValueWithExtensions.$indent"
 [builder] => [builder] "builder"

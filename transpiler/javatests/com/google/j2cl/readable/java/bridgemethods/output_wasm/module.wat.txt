@@ -621,7 +621,7 @@
 )
 
 ;;; A<T, S> A.$create()
-(func $$create__bridgemethods_A@bridgemethods.A
+(func $$create__@bridgemethods.A
  (result (ref null $bridgemethods.A))
  ;;@ bridgemethods/AccidentalOverride.java:22:6
  (local $$instance (ref null $bridgemethods.A))
@@ -740,7 +740,7 @@
 )
 
 ;;; B B.$create()
-(func $$create__bridgemethods_B@bridgemethods.B
+(func $$create__@bridgemethods.B
  (result (ref null $bridgemethods.B))
  ;;@ bridgemethods/AccidentalOverride.java:32:6
  (local $$instance (ref null $bridgemethods.B))
@@ -783,7 +783,7 @@
  (block
   ;; return java.lang.Integer.$create(1);
   ;;@ bridgemethods/AccidentalOverride.java:37:4
-  (return (call $$create__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+  (return (call $$create__int@java.lang.Integer (i32.const 1)))
  )
 )
 (elem declare func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B)
@@ -898,7 +898,7 @@
 )
 
 ;;; AccidentalOverride AccidentalOverride.$create()
-(func $$create__bridgemethods_AccidentalOverride@bridgemethods.AccidentalOverride
+(func $$create__@bridgemethods.AccidentalOverride
  (result (ref null $bridgemethods.AccidentalOverride))
  ;;@ bridgemethods/AccidentalOverride.java:48:6
  (local $$instance (ref null $bridgemethods.AccidentalOverride))
@@ -1069,7 +1069,7 @@
 )
 
 ;;; SuperParent<T, S> SuperParent.$create()
-(func $$create__bridgemethods_SuperParent@bridgemethods.SuperParent
+(func $$create__@bridgemethods.SuperParent
  (result (ref null $bridgemethods.SuperParent))
  ;;@ bridgemethods/BridgeMethod.java:26:6
  (local $$instance (ref null $bridgemethods.SuperParent))
@@ -1170,7 +1170,7 @@
 )
 
 ;;; Parent<T> Parent.$create()
-(func $$create__bridgemethods_Parent@bridgemethods.Parent
+(func $$create__@bridgemethods.Parent
  (result (ref null $bridgemethods.Parent))
  ;;@ bridgemethods/BridgeMethod.java:30:6
  (local $$instance (ref null $bridgemethods.Parent))
@@ -1317,7 +1317,7 @@
 )
 
 ;;; BridgeMethod BridgeMethod.$create()
-(func $$create__bridgemethods_BridgeMethod@bridgemethods.BridgeMethod
+(func $$create__@bridgemethods.BridgeMethod
  (result (ref null $bridgemethods.BridgeMethod))
  ;;@ bridgemethods/BridgeMethod.java:42:13
  (local $$instance (ref null $bridgemethods.BridgeMethod))
@@ -1515,7 +1515,7 @@
 )
 
 ;;; DualUnrelatedBridges DualUnrelatedBridges.$create()
-(func $$create__bridgemethods_DualUnrelatedBridges@bridgemethods.DualUnrelatedBridges
+(func $$create__@bridgemethods.DualUnrelatedBridges
  (result (ref null $bridgemethods.DualUnrelatedBridges))
  ;;@ bridgemethods/BridgeMethod.java:61:6
  (local $$instance (ref null $bridgemethods.DualUnrelatedBridges))
@@ -1679,7 +1679,7 @@
 )
 
 ;;; SuperDualUnrelatedAccidentalBridges SuperDualUnrelatedAccidentalBridges.$create()
-(func $$create__bridgemethods_SuperDualUnrelatedAccidentalBridges@bridgemethods.SuperDualUnrelatedAccidentalBridges
+(func $$create__@bridgemethods.SuperDualUnrelatedAccidentalBridges
  (result (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
  ;;@ bridgemethods/BridgeMethod.java:72:6
  (local $$instance (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
@@ -1795,7 +1795,7 @@
 )
 
 ;;; DualUnrelatedAccidentalBridges DualUnrelatedAccidentalBridges.$create()
-(func $$create__bridgemethods_DualUnrelatedAccidentalBridges@bridgemethods.DualUnrelatedAccidentalBridges
+(func $$create__@bridgemethods.DualUnrelatedAccidentalBridges
  (result (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
  ;;@ bridgemethods/BridgeMethod.java:78:6
  (local $$instance (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
@@ -1966,7 +1966,7 @@
 )
 
 ;;; ClassWithParameterizedGet<T> ClassWithParameterizedGet.$create()
-(func $$create__bridgemethods_ClassWithParameterizedGet@bridgemethods.ClassWithParameterizedGet
+(func $$create__@bridgemethods.ClassWithParameterizedGet
  (result (ref null $bridgemethods.ClassWithParameterizedGet))
  ;;@ bridgemethods/BridgeMethod.java:89:6
  (local $$instance (ref null $bridgemethods.ClassWithParameterizedGet))
@@ -2069,7 +2069,7 @@
 )
 
 ;;; AccidentalOverrideBridge AccidentalOverrideBridge.$create()
-(func $$create__bridgemethods_AccidentalOverrideBridge@bridgemethods.AccidentalOverrideBridge
+(func $$create__@bridgemethods.AccidentalOverrideBridge
  (result (ref null $bridgemethods.AccidentalOverrideBridge))
  ;;@ bridgemethods/BridgeMethod.java:95:6
  (local $$instance (ref null $bridgemethods.AccidentalOverrideBridge))
@@ -2111,7 +2111,7 @@
  (block
   ;; Getter g = bridgemethods.AccidentalOverrideBridge.$create();
   ;;@ bridgemethods/BridgeMethod.java:99:4
-  (local.set $g (call $$create__bridgemethods_AccidentalOverrideBridge@bridgemethods.AccidentalOverrideBridge ))
+  (local.set $g (call $$create__@bridgemethods.AccidentalOverrideBridge ))
   ;; g.get(javaemul.internal.StringPool.$getString_||());
   ;;@ bridgemethods/BridgeMethod.java:100:4
   (drop (call_ref (ref.as_non_null (local.get $g))(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast_static $bridgemethods.Getter.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $g)) (i32.const 0))) )))
@@ -2205,7 +2205,7 @@
 )
 
 ;;; TestCase10036 TestCase10036.$create()
-(func $$create__bridgemethods_TestCase10036@bridgemethods.TestCase10036
+(func $$create__@bridgemethods.TestCase10036
  (result (ref null $bridgemethods.TestCase10036))
  ;;@ bridgemethods/BridgeMethod.java:104:6
  (local $$instance (ref null $bridgemethods.TestCase10036))
@@ -2288,7 +2288,7 @@
 )
 
 ;;; TestCase102 TestCase102.$create()
-(func $$create__bridgemethods_TestCase102@bridgemethods.TestCase102
+(func $$create__@bridgemethods.TestCase102
  (result (ref null $bridgemethods.TestCase102))
  ;;@ bridgemethods/BridgeMethod.java:129:6
  (local $$instance (ref null $bridgemethods.TestCase102))
@@ -2372,7 +2372,7 @@
 )
 
 ;;; ParameterizedParent<T> ParameterizedParent.$create()
-(func $$create__bridgemethods_ParameterizedParent@bridgemethods.ParameterizedParent
+(func $$create__@bridgemethods.ParameterizedParent
  (result (ref null $bridgemethods.ParameterizedParent))
  ;;@ bridgemethods/BridgeMethod.java:153:6
  (local $$instance (ref null $bridgemethods.ParameterizedParent))
@@ -2474,7 +2474,7 @@
 )
 
 ;;; ReparametrerizedChild<E> ReparametrerizedChild.$create()
-(func $$create__bridgemethods_ReparametrerizedChild@bridgemethods.ReparametrerizedChild
+(func $$create__@bridgemethods.ReparametrerizedChild
  (result (ref null $bridgemethods.ReparametrerizedChild))
  ;;@ bridgemethods/BridgeMethod.java:159:6
  (local $$instance (ref null $bridgemethods.ReparametrerizedChild))
@@ -2593,7 +2593,7 @@
 )
 
 ;;; LeafChild LeafChild.$create()
-(func $$create__bridgemethods_LeafChild@bridgemethods.LeafChild
+(func $$create__@bridgemethods.LeafChild
  (result (ref null $bridgemethods.LeafChild))
  ;;@ bridgemethods/BridgeMethod.java:165:6
  (local $$instance (ref null $bridgemethods.LeafChild))
@@ -2983,7 +2983,7 @@
 )
 
 ;;; C<B1> C.$create(TestCase102 $outer_this)
-(func $$create__bridgemethods_TestCase102__bridgemethods_TestCase102_C@bridgemethods.TestCase102.C
+(func $$create__bridgemethods_TestCase102@bridgemethods.TestCase102.C
  (param $$outer_this (ref null $bridgemethods.TestCase102))
  (result (ref null $bridgemethods.TestCase102.C))
  ;;@ bridgemethods/BridgeMethod.java:144:8
@@ -3094,7 +3094,7 @@
 )
 
 ;;; BridgeMethodDefault BridgeMethodDefault.$create()
-(func $$create__bridgemethods_BridgeMethodDefault@bridgemethods.BridgeMethodDefault
+(func $$create__@bridgemethods.BridgeMethodDefault
  (result (ref null $bridgemethods.BridgeMethodDefault))
  ;;@ bridgemethods/BridgeMethodDefault.java:20:6
  (local $$instance (ref null $bridgemethods.BridgeMethodDefault))
@@ -3261,7 +3261,7 @@
 )
 
 ;;; A A.$create()
-(func $$create__bridgemethods_BridgeMethodDefault_A@bridgemethods.BridgeMethodDefault.A
+(func $$create__@bridgemethods.BridgeMethodDefault.A
  (result (ref null $bridgemethods.BridgeMethodDefault.A))
  ;;@ bridgemethods/BridgeMethodDefault.java:30:15
  (local $$instance (ref null $bridgemethods.BridgeMethodDefault.A))
@@ -3426,7 +3426,7 @@
 )
 
 ;;; B B.$create()
-(func $$create__bridgemethods_BridgeMethodDefault_B@bridgemethods.BridgeMethodDefault.B
+(func $$create__@bridgemethods.BridgeMethodDefault.B
  (result (ref null $bridgemethods.BridgeMethodDefault.B))
  ;;@ bridgemethods/BridgeMethodDefault.java:38:15
  (local $$instance (ref null $bridgemethods.BridgeMethodDefault.B))
@@ -3528,7 +3528,7 @@
 )
 
 ;;; BridgeMethodShadowedSignature BridgeMethodShadowedSignature.$create()
-(func $$create__bridgemethods_BridgeMethodShadowedSignature@bridgemethods.BridgeMethodShadowedSignature
+(func $$create__@bridgemethods.BridgeMethodShadowedSignature
  (result (ref null $bridgemethods.BridgeMethodShadowedSignature))
  ;;@ bridgemethods/BridgeMethodShadowedSignature.java:20:13
  (local $$instance (ref null $bridgemethods.BridgeMethodShadowedSignature))
@@ -3718,7 +3718,7 @@
 )
 
 ;;; C<C1> C.$create()
-(func $$create__bridgemethods_BridgeMethodShadowedSignature_C@bridgemethods.BridgeMethodShadowedSignature.C
+(func $$create__@bridgemethods.BridgeMethodShadowedSignature.C
  (result (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
  ;;@ bridgemethods/BridgeMethodShadowedSignature.java:32:15
  (local $$instance (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
@@ -3872,7 +3872,7 @@
 )
 
 ;;; AbstractMap<K, V> AbstractMap.$create()
-(func $$create__bridgemethods_AbstractMap@bridgemethods.AbstractMap
+(func $$create__@bridgemethods.AbstractMap
  (result (ref null $bridgemethods.AbstractMap))
  ;;@ bridgemethods/EnumMap.java:22:6
  (local $$instance (ref null $bridgemethods.AbstractMap))
@@ -3975,7 +3975,7 @@
 )
 
 ;;; EnumMap<K, V> EnumMap.$create()
-(func $$create__bridgemethods_EnumMap@bridgemethods.EnumMap
+(func $$create__@bridgemethods.EnumMap
  (result (ref null $bridgemethods.EnumMap))
  ;;@ bridgemethods/EnumMap.java:29:13
  (local $$instance (ref null $bridgemethods.EnumMap))

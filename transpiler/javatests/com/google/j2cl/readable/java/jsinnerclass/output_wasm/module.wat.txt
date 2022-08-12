@@ -67,7 +67,7 @@
 )
 
 ;;; Main Main.$create()
-(func $$create__jsinnerclass_Main@jsinnerclass.Main
+(func $$create__@jsinnerclass.Main
  (result (ref null $jsinnerclass.Main))
  ;;@ jsinnerclass/Main.java:20:13
  (local $$instance (ref null $jsinnerclass.Main))
@@ -164,7 +164,7 @@
 )
 
 ;;; Inner Inner.$create(Outer $outer_this)
-(func $$create__jsinnerclass_Main_Outer__jsinnerclass_Main_Outer_Inner@jsinnerclass.Main.Outer.Inner
+(func $$create__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner
  (param $$outer_this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer.Inner))
  ;;@ jsinnerclass/Main.java:28:13
@@ -270,7 +270,7 @@
 )
 
 ;;; Outer Outer.$create()
-(func $$create__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer
+(func $$create__@jsinnerclass.Main.Outer
  (result (ref null $jsinnerclass.Main.Outer))
  ;;@ jsinnerclass/Main.java:21:15
  (local $$instance (ref null $jsinnerclass.Main.Outer))
@@ -317,7 +317,7 @@
   ;; return ((Inner $qualifier = jsinnerclass.Main.Outer.Inner.$create(Outer.this),$qualifier.getB()) + Outer.this.a);
   ;;@ jsinnerclass/Main.java:38:6
   (return (i32.add (block (result i32)
-   (local.set $$qualifier (call $$create__jsinnerclass_Main_Outer__jsinnerclass_Main_Outer_Inner@jsinnerclass.Main.Outer.Inner (local.get $this)))
+   (local.set $$qualifier (call $$create__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner (local.get $this)))
    (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
   ) (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this))))
  )

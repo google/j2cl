@@ -226,8 +226,8 @@ class Arrays {
 
     // TODO(goktug) remove m_isTypeChecked when $canSet_ could be marked or
     // proved as side effect free.
-    if (InternalPreconditions.m_isTypeChecked__()) {
-      InternalPreconditions.m_checkArrayType__boolean(
+    if (InternalPreconditions.m_isTypeChecked__boolean()) {
+      InternalPreconditions.m_checkArrayType__boolean__void(
           value == null || Arrays.$canSet_(array, index, value));
     }
 
@@ -382,7 +382,7 @@ class Arrays {
       instance, requiredLeafType, requiredLeafTypeIsInstance,
       requiredDimensionCount) {
     Arrays.$clinit();
-    if (InternalPreconditions.m_isTypeChecked__()) {
+    if (InternalPreconditions.m_isTypeChecked__boolean()) {
       const castSucceeds = instance == null ||
           Arrays.$instanceIsOfTypeInternal_(
               instance, requiredLeafType, requiredLeafTypeIsInstance,
@@ -393,10 +393,10 @@ class Arrays {
         const castTypeClass =
             Class.$get(requiredLeafType, requiredDimensionCount);
         const instanceTypeClass =
-            Objects.m_getClass__java_lang_Object(instance);
+            Objects.m_getClass__java_lang_Object__java_lang_Class(instance);
         const message = instanceTypeClass.m_getName__java_lang_String() +
             ' cannot be cast to ' + castTypeClass.m_getName__java_lang_String();
-        InternalPreconditions.m_checkType__boolean__java_lang_String(
+        InternalPreconditions.m_checkType__boolean__java_lang_String__void(
             false, message);
       }
     }
@@ -416,7 +416,7 @@ class Arrays {
    */
   static $castToNative(instance) {
     Arrays.$clinit();
-    InternalPreconditions.m_checkType__boolean(
+    InternalPreconditions.m_checkType__boolean__void(
         instance == null || Array.isArray(instance));
     return instance;
   }

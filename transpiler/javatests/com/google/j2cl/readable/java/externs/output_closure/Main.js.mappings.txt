@@ -17,19 +17,19 @@
 [Main] => [return $instance;] "externs.Main.<synthetic: ctor_create>"
 [Main] => [$ctor__externs_Main__void]
 [Main] => [this.$ctor__java_lang_Object__void();] "externs.Main.<init>"
-[testFooOverlay] => [m_testFooOverlay__externs_Main_FooOverlay]
+[testFooOverlay] => [m_testFooOverlay__externs_Main_FooOverlay__boolean]
 [fooOverlay] => [fooOverlay] "fooOverlay"
-[return fooOverlay.getFoo().equals("Hello");] => [return j_l_String.m_equals__java_lang_String__java_lang_Object(fooOverlay.foo, 'Hello');] "externs.Main.testFooOverlay"
-[useDirectlyAsFoo] => [m_useDirectlyAsFoo__java_lang_Object]
+[return fooOverlay.getFoo().equals("Hello");] => [return j_l_String.m_equals__java_lang_String__java_lang_Object__boolean(fooOverlay.foo, 'Hello');] "externs.Main.testFooOverlay"
+[useDirectlyAsFoo] => [m_useDirectlyAsFoo__java_lang_Object__void]
 [fooOverlay] => [fooOverlay] "fooOverlay"
-[main] => [m_main__arrayOf_java_lang_String]
+[main] => [m_main__arrayOf_java_lang_String__void]
 [args] => [args] "args"
 [{
     testFooOverlay((FooOverlay) (Object) new FooImpl());
     useDirectlyAsFoo(new FooImpl());
   }] => [Main.$clinit();] "externs.Main.main"
-[testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__externs_Main_FooOverlay(/**@type {Foo}*/ (FooImpl.$create__()));] "externs.Main.main"
-[useDirectlyAsFoo(new FooImpl());] => [Main.m_useDirectlyAsFoo__java_lang_Object(FooImpl.$create__());] "externs.Main.main"
+[testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__externs_Main_FooOverlay__boolean(/**@type {Foo}*/ (FooImpl.$create__()));] "externs.Main.main"
+[useDirectlyAsFoo(new FooImpl());] => [Main.m_useDirectlyAsFoo__java_lang_Object__void(FooImpl.$create__());] "externs.Main.main"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "externs.Main.<clinit>"
 [Main] => [Main.$loadModules();] "externs.Main.<clinit>"
@@ -59,6 +59,6 @@
 [* @return {void}] => [* @return {void}] "externs.Main.<native>"
 [* @public] => [* @public] "externs.Main.<native>"
 [*/] => [*/] "externs.Main.<native>"
-[Main.m_useDirectlyAsFoo__java_lang_Object = function(foo) {] => [Main.m_useDirectlyAsFoo__java_lang_Object = function(foo) {] "externs.Main.<native>"
+[Main.m_useDirectlyAsFoo__java_lang_Object__void = function(foo) {] => [Main.m_useDirectlyAsFoo__java_lang_Object__void = function(foo) {] "externs.Main.<native>"
 [useFoo(/** @type {Foo} */ (foo));] => [useFoo(/** @type {Foo} */ (foo));] "externs.Main.<native>"
 [};] => [};] "externs.Main.<native>"

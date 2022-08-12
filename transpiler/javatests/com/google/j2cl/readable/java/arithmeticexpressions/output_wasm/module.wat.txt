@@ -63,7 +63,7 @@
 )
 
 ;;; ArithmeticExpressions ArithmeticExpressions.$create()
-(func $$create__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
+(func $$create__@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
  (local $$instance (ref null $arithmeticexpressions.ArithmeticExpressions))
@@ -431,7 +431,7 @@
   ;; (strings.elements[0] = (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(((String) strings.elements[0])),$stringBuilder.append(null),$stringBuilder.toString()));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:116:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0) (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $$create__java_lang_StringBuilder@java.lang.StringBuilder ))
+   (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
    (drop (call_ref (ref.as_non_null (local.get $$stringBuilder))(ref.cast_static $java.lang.String (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0)))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (ref.as_non_null (local.get $$stringBuilder))(ref.null $java.lang.Object)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
@@ -801,7 +801,7 @@
 )
 
 ;;; Ref<T> Ref.$create(ArithmeticExpressions $outer_this)
-(func $$create__arithmeticexpressions_ArithmeticExpressions__arithmeticexpressions_ArithmeticExpressions_1Ref@arithmeticexpressions.ArithmeticExpressions.1Ref
+(func $$create__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions.1Ref
  (param $$outer_this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:156:10

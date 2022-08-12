@@ -67,7 +67,7 @@
 )
 
 ;;; BooleanOperations BooleanOperations.$create()
-(func $$create__booleanoperations_BooleanOperations@booleanoperations.BooleanOperations
+(func $$create__@booleanoperations.BooleanOperations
  (result (ref null $booleanoperations.BooleanOperations))
  ;;@ booleanoperations/BooleanOperations.java:18:13
  (local $$instance (ref null $booleanoperations.BooleanOperations))
@@ -305,13 +305,13 @@
   )
   ;; Outer finalOuter = booleanoperations.BooleanOperations.1Outer.$create(BooleanOperations.this);
   ;;@ booleanoperations/BooleanOperations.java:100:4
-  (local.set $finalOuter (call $$create__booleanoperations_BooleanOperations__booleanoperations_BooleanOperations_1Outer@booleanoperations.BooleanOperations.1Outer (local.get $this)))
+  (local.set $finalOuter (call $$create__booleanoperations_BooleanOperations@booleanoperations.BooleanOperations.1Outer (local.get $this)))
   ;; (finalOuter.b = (finalOuter.b | true));
   ;;@ booleanoperations/BooleanOperations.java:101:4
   (struct.set $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $finalOuter) (i32.or (struct.get_s $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $finalOuter)) (i32.const 1)))
   ;; Outer outer = booleanoperations.BooleanOperations.1Outer.$create(BooleanOperations.this);
   ;;@ booleanoperations/BooleanOperations.java:103:4
-  (local.set $outer (call $$create__booleanoperations_BooleanOperations__booleanoperations_BooleanOperations_1Outer@booleanoperations.BooleanOperations.1Outer (local.get $this)))
+  (local.set $outer (call $$create__booleanoperations_BooleanOperations@booleanoperations.BooleanOperations.1Outer (local.get $this)))
   ;; (outer.b = (outer.b | javaemul.internal.Platform.isNull(((outer = null),outer))));
   ;;@ booleanoperations/BooleanOperations.java:104:4
   (struct.set $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $outer) (i32.or (struct.get_s $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $outer)) (ref.is_null (block (result (ref null $booleanoperations.BooleanOperations.1Outer))
@@ -375,7 +375,7 @@
 )
 
 ;;; Inner Inner.$create(Outer $outer_this)
-(func $$create__booleanoperations_BooleanOperations_1Outer__booleanoperations_BooleanOperations_1Outer_Inner@booleanoperations.BooleanOperations.1Outer.Inner
+(func $$create__booleanoperations_BooleanOperations_1Outer@booleanoperations.BooleanOperations.1Outer.Inner
  (param $$outer_this (ref null $booleanoperations.BooleanOperations.1Outer))
  (result (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
  ;;@ booleanoperations/BooleanOperations.java:94:12
@@ -476,7 +476,7 @@
 )
 
 ;;; Outer Outer.$create(BooleanOperations $outer_this)
-(func $$create__booleanoperations_BooleanOperations__booleanoperations_BooleanOperations_1Outer@booleanoperations.BooleanOperations.1Outer
+(func $$create__booleanoperations_BooleanOperations@booleanoperations.BooleanOperations.1Outer
  (param $$outer_this (ref null $booleanoperations.BooleanOperations))
  (result (ref null $booleanoperations.BooleanOperations.1Outer))
  ;;@ booleanoperations/BooleanOperations.java:91:10

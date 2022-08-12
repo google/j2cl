@@ -188,7 +188,7 @@
 )
 
 ;;; ParentOuter ParentOuter.$create()
-(func $$create__innerclassinheritance_ParentOuter@innerclassinheritance.ParentOuter
+(func $$create__@innerclassinheritance.ParentOuter
  (result (ref null $innerclassinheritance.ParentOuter))
  ;;@ innerclassinheritance/ChildClass.java:18:6
  (local $$instance (ref null $innerclassinheritance.ParentOuter))
@@ -285,7 +285,7 @@
 )
 
 ;;; ParentInner ParentInner.$create()
-(func $$create__innerclassinheritance_ParentInner@innerclassinheritance.ParentInner
+(func $$create__@innerclassinheritance.ParentInner
  (result (ref null $innerclassinheritance.ParentInner))
  ;;@ innerclassinheritance/ChildClass.java:24:6
  (local $$instance (ref null $innerclassinheritance.ParentInner))
@@ -385,7 +385,7 @@
 )
 
 ;;; ChildClass ChildClass.$create()
-(func $$create__innerclassinheritance_ChildClass@innerclassinheritance.ChildClass
+(func $$create__@innerclassinheritance.ChildClass
  (result (ref null $innerclassinheritance.ChildClass))
  ;;@ innerclassinheritance/ChildClass.java:30:13
  (local $$instance (ref null $innerclassinheritance.ChildClass))
@@ -440,7 +440,7 @@
   (block
    ;; LocalClass $qualifier = innerclassinheritance.ChildClass.1LocalClass.$create(ChildClass.this);
    ;;@ innerclassinheritance/ChildClass.java:87:4
-   (local.set $$qualifier (call $$create__innerclassinheritance_ChildClass__innerclassinheritance_ChildClass_1LocalClass@innerclassinheritance.ChildClass.1LocalClass (local.get $this)))
+   (local.set $$qualifier (call $$create__innerclassinheritance_ChildClass@innerclassinheritance.ChildClass.1LocalClass (local.get $this)))
    ;; $qualifier.test();
    ;;@ innerclassinheritance/ChildClass.java:87:4
    (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $innerclassinheritance.ChildClass.1LocalClass.vtable $m_test__void (struct.get $innerclassinheritance.ChildClass.1LocalClass $vtable(local.get $$qualifier))))
@@ -507,7 +507,7 @@
 )
 
 ;;; InnerClass InnerClass.$create(ChildClass $outer_this)
-(func $$create__innerclassinheritance_ChildClass__innerclassinheritance_ChildClass_InnerClass@innerclassinheritance.ChildClass.InnerClass
+(func $$create__innerclassinheritance_ChildClass@innerclassinheritance.ChildClass.InnerClass
  (param $$outer_this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass.InnerClass))
  ;;@ innerclassinheritance/ChildClass.java:35:8
@@ -677,7 +677,7 @@
 )
 
 ;;; LocalClass LocalClass.$create(ChildClass $outer_this)
-(func $$create__innerclassinheritance_ChildClass__innerclassinheritance_ChildClass_1LocalClass@innerclassinheritance.ChildClass.1LocalClass
+(func $$create__innerclassinheritance_ChildClass@innerclassinheritance.ChildClass.1LocalClass
  (param $$outer_this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass.1LocalClass))
  ;;@ innerclassinheritance/ChildClass.java:73:10
@@ -819,7 +819,7 @@
 )
 
 ;;; MultipleNestings MultipleNestings.$create()
-(func $$create__innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings
+(func $$create__@innerclassinheritance.MultipleNestings
  (result (ref null $innerclassinheritance.MultipleNestings))
  ;;@ innerclassinheritance/MultipleNestings.java:18:13
  (local $$instance (ref null $innerclassinheritance.MultipleNestings))
@@ -916,7 +916,7 @@
 )
 
 ;;; Parent Parent.$create(MultipleNestings $outer_this)
-(func $$create__innerclassinheritance_MultipleNestings__innerclassinheritance_MultipleNestings_Parent@innerclassinheritance.MultipleNestings.Parent
+(func $$create__innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings.Parent
  (param $$outer_this (ref null $innerclassinheritance.MultipleNestings))
  (result (ref null $innerclassinheritance.MultipleNestings.Parent))
  ;;@ innerclassinheritance/MultipleNestings.java:19:15
@@ -1021,7 +1021,7 @@
 )
 
 ;;; InnerClass2 InnerClass2.$create(InnerClass1 $outer_this)
-(func $$create__innerclassinheritance_MultipleNestings_InnerClass1__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+(func $$create__innerclassinheritance_MultipleNestings_InnerClass1@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
  (param $$outer_this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
  ;;@ innerclassinheritance/MultipleNestings.java:31:17
@@ -1158,7 +1158,7 @@
 )
 
 ;;; InnerClass1 InnerClass1.$create(MultipleNestings $outer_this)
-(func $$create__innerclassinheritance_MultipleNestings__innerclassinheritance_MultipleNestings_InnerClass1@innerclassinheritance.MultipleNestings.InnerClass1
+(func $$create__innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings.InnerClass1
  (param $$outer_this (ref null $innerclassinheritance.MultipleNestings))
  (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  ;;@ innerclassinheritance/MultipleNestings.java:25:15

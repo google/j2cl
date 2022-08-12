@@ -53,7 +53,7 @@
 )
 
 ;;; Color Color.$create(String $name, int $ordinal)
-(func $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color
+(func $$create__java_lang_String__int@jstypeenum.Color
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $jstypeenum.Color))
@@ -127,7 +127,7 @@
   (call $$clinit__void@jstypeenum.Color )
   ;; return javaemul.internal.WasmArray.OfObject.$create([jstypeenum.Color.RED,jstypeenum.Color.GREEN,jstypeenum.Color.BLUE]);
   ;;@ jstypeenum/Color.java:21:12
-  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_RED__jstypeenum_Color)(global.get $f_GREEN__jstypeenum_Color)(global.get $f_BLUE__jstypeenum_Color))))
+  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_RED__jstypeenum_Color)(global.get $f_GREEN__jstypeenum_Color)(global.get $f_BLUE__jstypeenum_Color))))
  )
 )
 
@@ -152,13 +152,13 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (jstypeenum.Color.RED = jstypeenum.Color.$create(javaemul.internal.StringPool.$getString_|RED|(),0));
   ;;@ jstypeenum/Color.java:22:2
-  (global.set $f_RED__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.$getString_|RED|__java_lang_String (ref.func $$getString_|RED|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_RED__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|RED|__java_lang_String (ref.func $$getString_|RED|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
   ;; (jstypeenum.Color.GREEN = jstypeenum.Color.$create(javaemul.internal.StringPool.$getString_|GREEN|(),1));
   ;;@ jstypeenum/Color.java:23:2
-  (global.set $f_GREEN__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.$getString_|GREEN|__java_lang_String (ref.func $$getString_|GREEN|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_GREEN__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|GREEN|__java_lang_String (ref.func $$getString_|GREEN|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
   ;; (jstypeenum.Color.BLUE = jstypeenum.Color.$create(javaemul.internal.StringPool.$getString_|BLUE|(),2));
   ;;@ jstypeenum/Color.java:24:2
-  (global.set $f_BLUE__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.$getString_|BLUE|__java_lang_String (ref.func $$getString_|BLUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
+  (global.set $f_BLUE__jstypeenum_Color (call $$create__java_lang_String__int@jstypeenum.Color (call $function.no.side.effects.$getString_|BLUE|__java_lang_String (ref.func $$getString_|BLUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
  )
 )
 

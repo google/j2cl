@@ -100,7 +100,7 @@ class Lambdas extends j_l_Object {
   }), 10);
  }
  /** @nodts */
- static m_testLambdaInStaticContext__() {
+ static m_testLambdaInStaticContext__void() {
   Lambdas.$clinit();
   let f = FunctionalInterface.$adapt((/** number */ i) =>{
    return i;
@@ -129,7 +129,7 @@ class Lambdas extends j_l_Object {
   });
  }
  /** @nodts @template T */
- static m_testStaticMethodTypeVariableThroughLambda__() {
+ static m_testStaticMethodTypeVariableThroughLambda__void() {
   Lambdas.$clinit();
   let wrapped = Functional.$adapt((/** Functional<T> */ f) =>{
    return /**@type {!$2<T>}*/ ($2.$create__());
@@ -144,7 +144,7 @@ class Lambdas extends j_l_Object {
   return /**@type {Error}*/ ($Casts.$to(intf.m_m__java_lang_Object__java_lang_Object(e), Error));
  }
  /** @nodts @template T @return {Enum<T>} */
- static m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(/** GenericFunctionalInterface<Enum<T>> */ intf, /** Enum<T> */ e) {
+ static m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum(/** GenericFunctionalInterface<Enum<T>> */ intf, /** Enum<T> */ e) {
   Lambdas.$clinit();
   return /**@type {Enum<T>}*/ ($Casts.$to(intf.m_m__java_lang_Object__java_lang_Object(e), Enum));
  }
@@ -162,7 +162,7 @@ class Lambdas extends j_l_Object {
    let i_3 = /**@type {Error}*/ ($Casts.$to(i_2, Error));
    return i_3;
   }), Error.$create__());
-  Lambdas.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(GenericFunctionalInterface.$adapt((i_4) =>{
+  Lambdas.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum(GenericFunctionalInterface.$adapt((i_4) =>{
    let i_5 = /**@type {Enum}*/ ($Casts.$to(i_4, Enum));
    return i_5;
   }), /**@type {Enum<T>}*/ (null));
@@ -172,19 +172,19 @@ class Lambdas extends j_l_Object {
   }));
   let f = Lambdas_Function.$adapt((item) =>{
    let item_1 = /**@type {Enum}*/ ($Casts.$to(item, Enum));
-   return Long.m_valueOf__long($Long.fromInt(1));
+   return Long.m_valueOf__long__java_lang_Long($Long.fromInt(1));
   });
  }
  /** @nodts @return {*} */
- static m_m__() {
+ static m_m__java_lang_Object() {
   Lambdas.$clinit();
   return null;
  }
  /** @nodts */
- static m_testLambdaCallingStaticMethod__() {
+ static m_testLambdaCallingStaticMethod__void() {
   Lambdas.$clinit();
   let f = Lambdas_Function.$adapt((/** * */ l) =>{
-   return Lambdas.m_m__();
+   return Lambdas.m_m__java_lang_Object();
   });
  }
  /** @nodts */
@@ -200,7 +200,7 @@ class Lambdas extends j_l_Object {
   });
  }
  /** @nodts @template E @return {?function(E):E} */
- static m_identity__() {
+ static m_identity__lambdas_Lambdas_GenericJsFunction() {
   Lambdas.$clinit();
   if ($Equality.$same(Lambdas.f_identityFunction__lambdas_Lambdas_, null)) {
    Lambdas.f_identityFunction__lambdas_Lambdas_ = IdentityFunction.$create__();
@@ -208,16 +208,16 @@ class Lambdas extends j_l_Object {
   return /**@type {?function(E):E}*/ (Lambdas.f_identityFunction__lambdas_Lambdas_);
  }
  /** @nodts */
- static m_testJsInteropLambdas__() {
+ static m_testJsInteropLambdas__void() {
   Lambdas.$clinit();
   let thenable = /**@type {!$LambdaAdaptor$1<?string>}*/ (new $LambdaAdaptor$1((/** ?function(?string):?void */ f1, /** ?function(Throwable):?void */ f2) =>{
    f1(null);
   }));
-  let otherThenable = $Overlay.$adapt__lambdas_Lambdas_AnotherThenable_$JsFunction((/** ?function(?string):?void */ f1_1, /** ?function(Throwable):?void */ f2_1) =>{
+  let otherThenable = $Overlay.$adapt__lambdas_Lambdas_AnotherThenable_$JsFunction__lambdas_Lambdas_AnotherThenable((/** ?function(?string):?void */ f1_1, /** ?function(Throwable):?void */ f2_1) =>{
    f1_1(null);
   });
   let stringJsSupplier = JsSupplier.$adapt(() =>{
-   return Integer.m_valueOf__int(1);
+   return Integer.m_valueOf__int__java_lang_Integer(1);
   });
   stringJsSupplier.get();
   let equals = stringJsSupplier;
@@ -225,7 +225,7 @@ class Lambdas extends j_l_Object {
   equals.m_get__java_lang_Object();
  }
  /** @nodts @template U, V */
- static m_testIntersectionTyping__() {
+ static m_testIntersectionTyping__void() {
   Lambdas.$clinit();
   let o = /**@type {GenericFunctionalInterface<?string>}*/ (new $LambdaAdaptor$2((x) =>{
    let x_1 = /**@type {?string}*/ ($Casts.$to(x, j_l_String));

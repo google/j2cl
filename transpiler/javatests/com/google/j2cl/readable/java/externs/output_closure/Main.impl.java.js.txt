@@ -30,16 +30,16 @@ class Main extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts @return {boolean} */
- static m_testFooOverlay__externs_Main_FooOverlay(/** Foo */ fooOverlay) {
-  return j_l_String.m_equals__java_lang_String__java_lang_Object(fooOverlay.foo, 'Hello');
+ static m_testFooOverlay__externs_Main_FooOverlay__boolean(/** Foo */ fooOverlay) {
+  return j_l_String.m_equals__java_lang_String__java_lang_Object__boolean(fooOverlay.foo, 'Hello');
  }
  // /** @nodts */
- // native static m_useDirectlyAsFoo__java_lang_Object(/** * */ fooOverlay) 
+ // native static m_useDirectlyAsFoo__java_lang_Object__void(/** * */ fooOverlay) 
  /** @nodts */
- static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
+ static m_main__arrayOf_java_lang_String__void(/** Array<?string> */ args) {
   Main.$clinit();
-  Main.m_testFooOverlay__externs_Main_FooOverlay(/**@type {Foo}*/ (FooImpl.$create__()));
-  Main.m_useDirectlyAsFoo__java_lang_Object(FooImpl.$create__());
+  Main.m_testFooOverlay__externs_Main_FooOverlay__boolean(/**@type {Foo}*/ (FooImpl.$create__()));
+  Main.m_useDirectlyAsFoo__java_lang_Object__void(FooImpl.$create__());
  }
  /** @nodts */
  static $clinit() {
@@ -91,7 +91,7 @@ function useFoo(foo) {
  * @return {void}
  * @public
  */
-Main.m_useDirectlyAsFoo__java_lang_Object = function(foo) {
+Main.m_useDirectlyAsFoo__java_lang_Object__void = function(foo) {
   useFoo(/** @type {Foo} */ (foo));
 };
 
