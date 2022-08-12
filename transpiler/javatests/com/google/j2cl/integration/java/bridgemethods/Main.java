@@ -126,8 +126,7 @@ public class Main {
     AbstractSupplier as = sImpl;
     as.t = new Object();
     assertThrowsClassCastException(() -> s.f(null));
-    // TODO(b/119956463): Uncomment when the bug is fixed.
-    // assertThrowsClassCastException(() -> s.get());
+    assertThrowsClassCastException(() -> s.get());
   }
 
   interface SupplierString {
