@@ -16,7 +16,7 @@
 package java.util
 
 object Comparators {
-  @Suppress("UNCHECKED_CAST", "UPPER_BOUND_VIOLATED_WARNING")
+  @Suppress("UNCHECKED_CAST", "UPPER_BOUND_VIOLATED")
   fun <T> nullToNaturalOrder(comparator: Comparator<T>?): Comparator<T> =
     comparator ?: naturalOrder<Comparable<T>>() as Comparator<T>
 }
