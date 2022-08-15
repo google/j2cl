@@ -435,6 +435,166 @@
  )
 )
 
+;;; void SwitchStatement.testCaseExpressionTypes(char ch, int i, byte b, short s)
+(func $m_testCaseExpressionTypes__char__int__byte__short__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
+ (param $this (ref null $switchstatement.SwitchStatement))
+ (param $ch i32)
+ (param $i i32)
+ (param $b i32)
+ (param $s i32)
+ ;;@ switchstatement/SwitchStatement.java:85:15
+ (block
+  ;; SWITCH: switch (ch) {
+  ;;@ switchstatement/SwitchStatement.java:86:4
+  (block $SWITCH.BREAK
+   ;; switch (ch) {
+   ;;@ switchstatement/SwitchStatement.java:86:4
+   (block
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_if 0 (i32.eq (local.get $ch) (i32.const 97)))
+        (br_if 1 (i32.eq (local.get $ch) (i32.const 1)))
+        (br_if 2 (i32.eq (local.get $ch) (i32.const 2)))
+        (br_if 3 (i32.eq (local.get $ch) (i32.const 3)))
+        (br 4)
+       )
+       ;; case 97:
+       ;; break SWITCH;
+       ;;@ switchstatement/SwitchStatement.java:88:8
+       (br $SWITCH.BREAK)
+      )
+      ;; case 1:
+      ;; break SWITCH;
+      ;;@ switchstatement/SwitchStatement.java:90:8
+      (br $SWITCH.BREAK)
+     )
+     ;; case 2:
+     ;; break SWITCH;
+     ;;@ switchstatement/SwitchStatement.java:92:8
+     (br $SWITCH.BREAK)
+    )
+    ;; case 3:
+    ;; break SWITCH;
+    ;;@ switchstatement/SwitchStatement.java:94:8
+    (br $SWITCH.BREAK)
+   )
+  )
+  ;; SWITCH: switch (i) {
+  ;;@ switchstatement/SwitchStatement.java:97:4
+  (block $SWITCH_1.BREAK
+   ;; switch (i) {
+   ;;@ switchstatement/SwitchStatement.java:97:4
+   (block
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_if 0 (i32.eq (local.get $i) (i32.const 97)))
+        (br_if 1 (i32.eq (local.get $i) (i32.const 1)))
+        (br_if 2 (i32.eq (local.get $i) (i32.const 2)))
+        (br_if 3 (i32.eq (local.get $i) (i32.const 3)))
+        (br 4)
+       )
+       ;; case 97:
+       ;; break SWITCH;
+       ;;@ switchstatement/SwitchStatement.java:99:8
+       (br $SWITCH_1.BREAK)
+      )
+      ;; case 1:
+      ;; break SWITCH;
+      ;;@ switchstatement/SwitchStatement.java:101:8
+      (br $SWITCH_1.BREAK)
+     )
+     ;; case 2:
+     ;; break SWITCH;
+     ;;@ switchstatement/SwitchStatement.java:103:8
+     (br $SWITCH_1.BREAK)
+    )
+    ;; case 3:
+    ;; break SWITCH;
+    ;;@ switchstatement/SwitchStatement.java:105:8
+    (br $SWITCH_1.BREAK)
+   )
+  )
+  ;; SWITCH: switch (b) {
+  ;;@ switchstatement/SwitchStatement.java:108:4
+  (block $SWITCH_2.BREAK
+   ;; switch (b) {
+   ;;@ switchstatement/SwitchStatement.java:108:4
+   (block
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_if 0 (i32.eq (local.get $b) (i32.const 97)))
+        (br_if 1 (i32.eq (local.get $b) (i32.const 1)))
+        (br_if 2 (i32.eq (local.get $b) (i32.const 2)))
+        (br_if 3 (i32.eq (local.get $b) (i32.const 3)))
+        (br 4)
+       )
+       ;; case 97:
+       ;; break SWITCH;
+       ;;@ switchstatement/SwitchStatement.java:110:8
+       (br $SWITCH_2.BREAK)
+      )
+      ;; case 1:
+      ;; break SWITCH;
+      ;;@ switchstatement/SwitchStatement.java:112:8
+      (br $SWITCH_2.BREAK)
+     )
+     ;; case 2:
+     ;; break SWITCH;
+     ;;@ switchstatement/SwitchStatement.java:114:8
+     (br $SWITCH_2.BREAK)
+    )
+    ;; case 3:
+    ;; break SWITCH;
+    ;;@ switchstatement/SwitchStatement.java:116:8
+    (br $SWITCH_2.BREAK)
+   )
+  )
+  ;; SWITCH: switch (s) {
+  ;;@ switchstatement/SwitchStatement.java:119:4
+  (block $SWITCH_3.BREAK
+   ;; switch (s) {
+   ;;@ switchstatement/SwitchStatement.java:119:4
+   (block
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_if 0 (i32.eq (local.get $s) (i32.const 97)))
+        (br_if 1 (i32.eq (local.get $s) (i32.const 1)))
+        (br_if 2 (i32.eq (local.get $s) (i32.const 2)))
+        (br_if 3 (i32.eq (local.get $s) (i32.const 3)))
+        (br 4)
+       )
+       ;; case 97:
+       ;; break SWITCH;
+       ;;@ switchstatement/SwitchStatement.java:121:8
+       (br $SWITCH_3.BREAK)
+      )
+      ;; case 1:
+      ;; break SWITCH;
+      ;;@ switchstatement/SwitchStatement.java:123:8
+      (br $SWITCH_3.BREAK)
+     )
+     ;; case 2:
+     ;; break SWITCH;
+     ;;@ switchstatement/SwitchStatement.java:125:8
+     (br $SWITCH_3.BREAK)
+    )
+    ;; case 3:
+    ;; break SWITCH;
+    ;;@ switchstatement/SwitchStatement.java:127:8
+    (br $SWITCH_3.BREAK)
+   )
+  )
+ )
+)
+
 ;;; void SwitchStatement.$clinit()
 (func $$clinit__void@switchstatement.SwitchStatement
  ;;@ switchstatement/SwitchStatement.java:23:13

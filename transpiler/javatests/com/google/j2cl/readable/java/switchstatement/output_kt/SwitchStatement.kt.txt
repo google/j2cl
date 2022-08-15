@@ -107,6 +107,125 @@ open class SwitchStatement {
   } while (false)
  }
 
+ fun testCaseExpressionTypes(ch: kotlin.Char, i: kotlin.Int, b: kotlin.Byte, s: kotlin.Short) {
+  SWITCH@ do {
+   CASE@ do {
+    CASE_1@ do {
+     CASE_2@ do {
+      CASE_3@ do {
+       when (ch) {
+        'a' -> {
+         break@CASE_3
+        }
+        1 -> {
+         break@CASE_2
+        }
+        2 -> {
+         break@CASE_1
+        }
+        3 -> {
+         break@CASE
+        }
+       }
+       break@SWITCH
+      } while (false)
+      break@SWITCH
+     } while (false)
+     break@SWITCH
+    } while (false)
+    break@SWITCH
+   } while (false)
+   break@SWITCH
+  } while (false)
+  SWITCH_1@ do {
+   CASE_4@ do {
+    CASE_5@ do {
+     CASE_6@ do {
+      CASE_7@ do {
+       when (i) {
+        'a' -> {
+         break@CASE_7
+        }
+        1 -> {
+         break@CASE_6
+        }
+        2 -> {
+         break@CASE_5
+        }
+        3 -> {
+         break@CASE_4
+        }
+       }
+       break@SWITCH_1
+      } while (false)
+      break@SWITCH_1
+     } while (false)
+     break@SWITCH_1
+    } while (false)
+    break@SWITCH_1
+   } while (false)
+   break@SWITCH_1
+  } while (false)
+  SWITCH_2@ do {
+   CASE_8@ do {
+    CASE_9@ do {
+     CASE_10@ do {
+      CASE_11@ do {
+       when (b) {
+        'a' -> {
+         break@CASE_11
+        }
+        1 -> {
+         break@CASE_10
+        }
+        2 -> {
+         break@CASE_9
+        }
+        3 -> {
+         break@CASE_8
+        }
+       }
+       break@SWITCH_2
+      } while (false)
+      break@SWITCH_2
+     } while (false)
+     break@SWITCH_2
+    } while (false)
+    break@SWITCH_2
+   } while (false)
+   break@SWITCH_2
+  } while (false)
+  SWITCH_3@ do {
+   CASE_12@ do {
+    CASE_13@ do {
+     CASE_14@ do {
+      CASE_15@ do {
+       when (s) {
+        'a' -> {
+         break@CASE_15
+        }
+        1 -> {
+         break@CASE_14
+        }
+        2 -> {
+         break@CASE_13
+        }
+        3 -> {
+         break@CASE_12
+        }
+       }
+       break@SWITCH_3
+      } while (false)
+      break@SWITCH_3
+     } while (false)
+     break@SWITCH_3
+    } while (false)
+    break@SWITCH_3
+   } while (false)
+   break@SWITCH_3
+  } while (false)
+ }
+
  companion object {
   @kotlin.jvm.JvmStatic
   fun testSwitchVariableDeclarations() {

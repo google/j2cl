@@ -81,4 +81,50 @@ public class SwitchStatement {
     }
     assert false;
   }
+
+  private void testCaseExpressionTypes(char ch, int i, byte b, short s) {
+    switch (ch) {
+      case 'a':
+        break;
+      case 1:
+        break;
+      case (byte) 2:
+        break;
+      case (short) 3:
+        break;
+    }
+
+    switch (i) {
+      case 'a':
+        break;
+      case 1:
+        break;
+      case (byte) 2:
+        break;
+      case (short) 3:
+        break;
+    }
+
+    switch (b) {
+      case 'a':
+        break;
+      case 1:
+        break;
+      case (byte) 2:
+        break;
+      case (short) 3:
+        break;
+    }
+
+    switch (s) {
+      case 'a':
+        break;
+      case 1:
+        break;
+      case (byte) 2:
+        break;
+      case (short) 3:
+        break;
+    }
+  }
 }
