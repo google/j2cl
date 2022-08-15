@@ -63,7 +63,7 @@ open class ArithmeticExpressions {
   a = (a.toLong() / 1L).toInt()
   a = (a.toDouble() + kotlin.Double.MAX_VALUE).toInt()
   k = k.or(true)
-  var s: kotlin.Short = 10
+  var s: kotlin.Short = (10).toShort()
   k = kotlin.run {
    s = (s.toInt() + 1).toShort()
    s
@@ -199,7 +199,7 @@ open class ArithmeticExpressions {
    c = kotlin.Int.valueOf(c!!.toInt() + 1)
    ___value_1
   }
-  var b: kotlin.Byte? = kotlin.Byte.valueOf(0)
+  var b: kotlin.Byte? = kotlin.Byte.valueOf((0).toByte())
   b = kotlin.Byte.valueOf((b!!.toByte().toInt() + 1).toByte())
   var ch: kotlin.Char? = kotlin.Char.valueOf('c')
   ch = kotlin.Char.valueOf((ch!!.toChar().code + 1).toChar())
