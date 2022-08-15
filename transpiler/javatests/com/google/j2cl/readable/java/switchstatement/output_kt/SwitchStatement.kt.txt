@@ -117,13 +117,13 @@ open class SwitchStatement {
         'a' -> {
          break@CASE_3
         }
-        1 -> {
+        '\u0001' -> {
          break@CASE_2
         }
-        (2).toByte() -> {
+        '\u0002' -> {
          break@CASE_1
         }
-        (3).toShort() -> {
+        '\u0003' -> {
          break@CASE
         }
        }
@@ -143,16 +143,16 @@ open class SwitchStatement {
      CASE_6@ do {
       CASE_7@ do {
        when (i) {
-        'a' -> {
+        97 -> {
          break@CASE_7
         }
         1 -> {
          break@CASE_6
         }
-        (2).toByte() -> {
+        2 -> {
          break@CASE_5
         }
-        (3).toShort() -> {
+        3 -> {
          break@CASE_4
         }
        }
@@ -172,16 +172,16 @@ open class SwitchStatement {
      CASE_10@ do {
       CASE_11@ do {
        when (b) {
-        'a' -> {
+        (97).toByte() -> {
          break@CASE_11
         }
-        1 -> {
+        (1).toByte() -> {
          break@CASE_10
         }
         (2).toByte() -> {
          break@CASE_9
         }
-        (3).toShort() -> {
+        (3).toByte() -> {
          break@CASE_8
         }
        }
@@ -201,13 +201,13 @@ open class SwitchStatement {
      CASE_14@ do {
       CASE_15@ do {
        when (s) {
-        'a' -> {
+        (97).toShort() -> {
          break@CASE_15
         }
-        1 -> {
+        (1).toShort() -> {
          break@CASE_14
         }
-        (2).toByte() -> {
+        (2).toShort() -> {
          break@CASE_13
         }
         (3).toShort() -> {

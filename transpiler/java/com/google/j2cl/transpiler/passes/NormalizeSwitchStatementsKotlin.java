@@ -27,9 +27,12 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import java.util.List;
 
 /**
@@ -83,6 +86,16 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    // Normalize switch case types.
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
+            return normalizeSwitchCaseTypes(switchStatement);
+          }
+        });
+
+    // Convert to cascading labeled blocks.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -210,5 +223,35 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
     }
 
     return dispatchStatement;
+  }
+
+  /** Convert switch case expressions to be of the same type as switch expression. */
+  private static SwitchStatement normalizeSwitchCaseTypes(SwitchStatement switchStatement) {
+    TypeDescriptor targetTypeDescriptor = switchStatement.getSwitchExpression().getTypeDescriptor();
+    return SwitchStatement.Builder.from(switchStatement)
+        .setCases(
+            switchStatement.getCases().stream()
+                .map(
+                    switchCase -> convertSwitchCaseExpressionType(switchCase, targetTypeDescriptor))
+                .collect(toImmutableList()))
+        .build();
+  }
+
+  private static SwitchCase convertSwitchCaseExpressionType(
+      SwitchCase switchCase, TypeDescriptor targetTypeDescriptor) {
+    Expression caseExpression = switchCase.getCaseExpression();
+    if (caseExpression == null) {
+      return switchCase;
+    }
+
+    if (!(caseExpression instanceof NumberLiteral)) {
+      return switchCase;
+    }
+
+    NumberLiteral literal = (NumberLiteral) caseExpression;
+    return SwitchCase.Builder.from(switchCase)
+        .setCaseExpression(
+            new NumberLiteral((PrimitiveTypeDescriptor) targetTypeDescriptor, literal.getValue()))
+        .build();
   }
 }
