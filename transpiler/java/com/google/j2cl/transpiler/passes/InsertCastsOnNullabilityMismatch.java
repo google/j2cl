@@ -30,6 +30,15 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
     compilationUnit.accept(
         new ConversionContextVisitor(
             new ContextRewriter() {
+              // Don't insert cast for member qualifiers, as their type is inferred.
+              @Override
+              public Expression rewriteMemberQualifierContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor actualTypeDescriptor,
+                  Expression expression) {
+                return expression;
+              }
+
               @Override
               public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
