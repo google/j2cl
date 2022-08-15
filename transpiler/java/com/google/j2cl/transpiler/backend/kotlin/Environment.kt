@@ -23,5 +23,6 @@ data class Environment(
   private val nameToIdentifierMap: Map<HasName, String> = emptyMap()
 ) {
   /** Returns identifier for the given name */
-  fun identifier(hasName: HasName): String = nameToIdentifierMap[hasName]!!
+  fun identifier(hasName: HasName): String =
+    nameToIdentifierMap[hasName] ?: error("No such identifier: $hasName")
 }
