@@ -155,9 +155,8 @@ public class Primitives {
 
     assertEquals(9, Short.hashCode(a));
 
-    short shlVal = 56, shrVal = 3;
-    assertEquals(shlVal, c << 2);
-    assertEquals(shrVal, c >> 2);
+    assertEquals(56, c << 2);
+    assertEquals(3, c >> 2);
 
     assertEquals(8, a & 0xA);
   }
@@ -180,9 +179,8 @@ public class Primitives {
 
     assertEquals(9, Byte.hashCode(a));
 
-    byte shlVal = 56, shrVal = 3;
-    assertEquals(shlVal, c << 2);
-    assertEquals(shrVal, c >> 2);
+    assertEquals(56, c << 2);
+    assertEquals(3, c >> 2);
 
     assertEquals(8, a & 0xA);
   }

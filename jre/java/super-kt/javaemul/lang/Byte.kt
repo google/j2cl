@@ -38,14 +38,14 @@ fun Byte.Companion.parseByte(s: String, radix: Int): Byte = s.toByte(radix)
 
 fun Byte.Companion.hashCode(b: Byte): Int = b.hashCode()
 
-fun Byte.shl(pos: Int): Byte {
+fun Byte.shl(pos: Int): Int {
   val intVal = this.toInt()
-  return intVal.shl(pos).toByte()
+  return intVal.shl(pos)
 }
 
-fun Byte.shr(pos: Int): Byte {
+fun Byte.shr(pos: Int): Int {
   val intVal = this.toInt()
-  return intVal.shr(pos).toByte()
+  return intVal.shr(pos)
 }
 
 fun Byte.and(other: Byte): Int {
