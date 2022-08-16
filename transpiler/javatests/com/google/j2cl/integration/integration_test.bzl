@@ -56,6 +56,28 @@ def integration_test(
 
     defs = defs + define_flags
 
+    java_test_runner = """
+      @jsinterop.annotations.JsType(namespace = jsinterop.annotations.JsPackage.GLOBAL)
+      public class TestRunner {
+        public static void testMain() throws Exception {
+          %s.main((String []) null);
+        }
+      }
+    """ % (main_class)
+    _genfile("TestRunner.java", java_test_runner, tags)
+
+    j2cl_library(
+        name = "%s-TestRunner" % name,
+        srcs = ["TestRunner.java"],
+        generate_build_test = False,
+        deps = [
+            ":%s" % name,
+            "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2cl",
+        ],
+        javacopts = JAVAC_FLAGS,
+        tags = tags + j2cl_library_tags,
+    )
+
     j2cl_library(
         name = name,
         srcs = srcs,
@@ -75,13 +97,14 @@ def integration_test(
       goog.setTestOnly();
 
       var testSuite = goog.require('goog.testing.testSuite');
-      var Main = goog.require('%s');
+      var TestRunner = goog.require('TestRunner');
+
       testSuite({
         test_Main: function() {
-          return Main.m_main__arrayOf_java_lang_String__void([]);
+          return TestRunner.testMain();
         }
       });
-  """ % (main_class)
+    """
     _genfile("TestHarness_test.js", test_harness, tags)
 
     closure_js_test(
@@ -89,6 +112,7 @@ def integration_test(
         srcs = ["TestHarness_test.js"],
         deps = [
             ":" + name,
+            ":%s-TestRunner" % name,
             "@com_google_javascript_closure_library//closure/goog/testing:testsuite",
         ],
         # closure_js_test test infra is flaky so avoid noise in builds.
