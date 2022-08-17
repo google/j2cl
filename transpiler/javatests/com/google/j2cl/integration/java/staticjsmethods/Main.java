@@ -64,8 +64,10 @@ public class Main {
     testDeepNamespaceNativeJsMethod();
   }
 
+  @JsMethod
   public static native int callF1(int a);
 
+  @JsMethod
   public static native int callF2(int a);
 
   @JsMethod(namespace = GLOBAL, name = "Math.floor")

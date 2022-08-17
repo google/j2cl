@@ -25,6 +25,6 @@ function useFoo(foo) {
  * @return {void}
  * @public
  */
-Main.m_useDirectlyAsFoo__java_lang_Object__void = function(foo) {
+Main.useDirectlyAsFoo = function(foo) {
   useFoo(/** @type {Foo} */ (foo));
 };

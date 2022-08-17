@@ -33,13 +33,13 @@ class Main extends j_l_Object {
  static m_testFooOverlay__externs_Main_FooOverlay__boolean(/** Foo */ fooOverlay) {
   return j_l_String.m_equals__java_lang_String__java_lang_Object__boolean(fooOverlay.foo, 'Hello');
  }
- // /** @nodts */
- // native static m_useDirectlyAsFoo__java_lang_Object__void(/** * */ fooOverlay) 
+ // 
+ // native static useDirectlyAsFoo(/** * */ fooOverlay) 
  /** @nodts */
  static m_main__arrayOf_java_lang_String__void(/** Array<?string> */ args) {
   Main.$clinit();
   Main.m_testFooOverlay__externs_Main_FooOverlay__boolean(/**@type {Foo}*/ (FooImpl.$create__()));
-  Main.m_useDirectlyAsFoo__java_lang_Object__void(FooImpl.$create__());
+  Main.useDirectlyAsFoo(FooImpl.$create__());
  }
  /** @nodts */
  static $clinit() {
@@ -91,7 +91,7 @@ function useFoo(foo) {
  * @return {void}
  * @public
  */
-Main.m_useDirectlyAsFoo__java_lang_Object__void = function(foo) {
+Main.useDirectlyAsFoo = function(foo) {
   useFoo(/** @type {Foo} */ (foo));
 };
 

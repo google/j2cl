@@ -15,9 +15,13 @@
  */
 package nativeinjection;
 
+import jsinterop.annotations.JsMethod;
+
 @SuppressWarnings("unusable-by-js")
 public class NativeClass {
+  @JsMethod
   public native String nativeInstanceMethod();
 
+  @JsMethod
   public static native String nativeStaticMethod();
 }

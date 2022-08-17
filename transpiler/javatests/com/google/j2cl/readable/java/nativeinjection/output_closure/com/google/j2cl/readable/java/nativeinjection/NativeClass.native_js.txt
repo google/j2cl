@@ -17,7 +17,7 @@
  * @return {string}
  * @public
  */
-NativeClass.prototype.m_nativeInstanceMethod__java_lang_String = function() {
+NativeClass.prototype.nativeInstanceMethod = function() {
   return 'nativeInstanceMethod';
 };
 
@@ -26,6 +26,6 @@ NativeClass.prototype.m_nativeInstanceMethod__java_lang_String = function() {
  * @return {NativeClass}
  * @public
  */
-NativeClass.m_nativeStaticMethod__nativeinjection_NativeClass = function() {
+NativeClass.nativeStaticMethod = function() {
   return null;
 };

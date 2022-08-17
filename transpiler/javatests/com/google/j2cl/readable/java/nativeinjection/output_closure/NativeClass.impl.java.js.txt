@@ -19,10 +19,10 @@ class NativeClass extends j_l_Object {
  $ctor__nativeinjection_NativeClass__void() {
   this.$ctor__java_lang_Object__void();
  }
- // /** @nodts @return {?string} */
- // native m_nativeInstanceMethod__java_lang_String() 
- // /** @nodts @return {NativeClass} */
- // native static m_nativeStaticMethod__nativeinjection_NativeClass() 
+ // /** @return {?string} */
+ // native nativeInstanceMethod() 
+ // /** @return {NativeClass} */
+ // native static nativeStaticMethod() 
  /** @nodts */
  static $clinit() {
   NativeClass.$clinit = () =>{};
@@ -62,7 +62,7 @@ const nativeinjection_NativeClass = NativeClass;
  * @return {string}
  * @public
  */
-NativeClass.prototype.m_nativeInstanceMethod__java_lang_String = function() {
+NativeClass.prototype.nativeInstanceMethod = function() {
   return 'nativeInstanceMethod';
 };
 
@@ -71,7 +71,7 @@ NativeClass.prototype.m_nativeInstanceMethod__java_lang_String = function() {
  * @return {NativeClass}
  * @public
  */
-NativeClass.m_nativeStaticMethod__nativeinjection_NativeClass = function() {
+NativeClass.nativeStaticMethod = function() {
   return null;
 };
 

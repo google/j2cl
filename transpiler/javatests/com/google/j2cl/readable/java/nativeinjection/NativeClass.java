@@ -15,12 +15,17 @@
  */
 package nativeinjection;
 
+import jsinterop.annotations.JsMethod;
+
 public class NativeClass {
+  @JsMethod
   public native String nativeInstanceMethod();
 
+  @JsMethod
   public static native NativeClass nativeStaticMethod();
 
   public static class InnerClass {
+    @JsMethod
     public native String nativeInstanceMethod();
   }
 }

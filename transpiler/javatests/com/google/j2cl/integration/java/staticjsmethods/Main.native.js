@@ -16,7 +16,7 @@
  * @param {number} a
  * @return {number}
  */
-Main.m_callF1__int__int = function(a) {
+Main.callF1 = function(a) {
   Main.$clinit();
   return Main.fun(a);
 };
@@ -25,7 +25,7 @@ Main.m_callF1__int__int = function(a) {
  * @param {number} a
  * @return {number}
  */
-Main.m_callF2__int__int = function(a) {
+Main.callF2 = function(a) {
   Main.$clinit();
   return Main.f2(a);
 };

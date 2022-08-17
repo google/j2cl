@@ -15,6 +15,7 @@
  */
 package externs;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -39,6 +40,7 @@ public class Main {
     return fooOverlay.getFoo().equals("Hello");
   }
 
+  @JsMethod
   private static native void useDirectlyAsFoo(Object fooOverlay);
 
   public static void main(String... args) {
