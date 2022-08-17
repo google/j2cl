@@ -828,13 +828,41 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       MethodDescriptor targetMethodDescriptor) {
 
     MethodDescriptor bridgeOrigin = bridgeMethodDescriptor.getDeclarationDescriptor();
-    return MethodDescriptor.Builder.from(targetMethodDescriptor)
+
+    return MethodDescriptor.Builder.from(adjustReturn(origin, targetMethodDescriptor, bridgeOrigin))
         .setJsInfo(bridgeMethodDescriptor.getJsInfo())
         .setEnclosingTypeDescriptor(this)
         .setDeclarationDescriptor(null)
         .makeBridge(origin, bridgeOrigin, targetMethodDescriptor)
         .setFinal(bridgeMethodDescriptor.isGeneralizingdBridge())
         .build();
+  }
+
+  /**
+   * Adjusts the return due to Kotlin semantics for non-nullable basic types.
+   *
+   * <p>Note that bridges are created to satisfy a method signature, and methods implementing the
+   * same signature need to agree in typing (e.g. an override needs to be a subtype of the methods
+   * it overrides)
+   *
+   * <p>Since bridge method creation computes bridge signatures by specializing a parameterized
+   * method there is some ambiguity in Kotlin whether a return type that is "Int" should be
+   * considered "!java.lang.Integer" or "int". To resolve this ambiguity we need to see what is the
+   * contract implemented by the bridge origin, which is the one that provides the mangled name.
+   */
+  // TODO(b/234498715): Extend to parameters when primitive bridges are fully implemented.
+  private MethodDescriptor adjustReturn(
+      MethodOrigin origin, MethodDescriptor targetMethodDescriptor, MethodDescriptor bridgeOrigin) {
+    if (origin != MethodOrigin.GENERALIZING_BRIDGE) {
+      // Only generalizing bridges use the origin as their mangling descriptor.
+      return targetMethodDescriptor;
+    }
+    if (bridgeOrigin.getReturnTypeDescriptor().isPrimitive()
+        && !targetMethodDescriptor.getReturnTypeDescriptor().isPrimitive()) {
+      return targetMethodDescriptor.transform(
+          builder -> builder.setReturnTypeDescriptor(bridgeOrigin.getReturnTypeDescriptor()));
+    }
+    return targetMethodDescriptor;
   }
 
   /** Returns the default (parameterless) constructor for the type. */

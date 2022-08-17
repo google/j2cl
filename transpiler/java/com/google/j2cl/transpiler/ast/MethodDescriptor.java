@@ -1171,6 +1171,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       checkState(
           declaration.getParameterTypeDescriptors().size()
               == methodDescriptor.getParameterTypeDescriptors().size());
+      checkState(
+          declaration.getReturnTypeDescriptor().isPrimitive()
+              == methodDescriptor.getReturnTypeDescriptor().isPrimitive());
     }
 
     public static Builder from(MethodDescriptor methodDescriptor) {
