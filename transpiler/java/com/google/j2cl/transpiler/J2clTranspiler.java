@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.Backend;
-import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.LibraryNormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import java.util.concurrent.ExecutionException;
@@ -89,15 +88,7 @@ class J2clTranspiler {
   }
 
   private void checkLibrary(Library library) {
-    // Always check JS-interop restrictions.
-    JsInteropRestrictionsChecker.check(
-        library,
-        problems,
-        /* enableWasm= */ options.getBackend() == Backend.WASM,
-        /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
-        /* optimizeAutoValue= */ options.getOptimizeAutoValue());
-
-    // Check additional backend-specific restrictions.
+    // Check backend-specific restrictions.
     options.getBackend().checkRestrictions(options, library, problems);
 
     problems.abortIfHasErrors();

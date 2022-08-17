@@ -72,6 +72,7 @@ import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
 import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
+import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.MakeFieldsFinal;
 import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
@@ -168,6 +169,16 @@ public enum Backend {
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
           RestoreVariableScoping::new,
           NormalizeSuperMethodCall::new);
+    }
+
+    @Override
+    public void checkRestrictions(BackendOptions options, Library library, Problems problems) {
+      JsInteropRestrictionsChecker.check(
+          library,
+          problems,
+          /* enableWasm= */ false,
+          /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
+          /* optimizeAutoValue= */ options.getOptimizeAutoValue());
     }
 
     @Override
@@ -304,6 +315,16 @@ public enum Backend {
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
           NormalizeSuperMethodCall::new);
+    }
+
+    @Override
+    public void checkRestrictions(BackendOptions options, Library library, Problems problems) {
+      JsInteropRestrictionsChecker.check(
+          library,
+          problems,
+          /* enableWasm= */ true,
+          /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
+          /* optimizeAutoValue= */ options.getOptimizeAutoValue());
     }
 
     @Override
