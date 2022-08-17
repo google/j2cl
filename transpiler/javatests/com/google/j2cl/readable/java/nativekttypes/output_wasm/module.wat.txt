@@ -55,6 +55,15 @@
 (global $f_staticField__nativekttypes_NativeWithCompanionObject (mut i32) (i32.const 0))
 (global $f_$initialized__nativekttypes_NativeWithCompanionObject (mut i32) (i32.const 0))
 
+;;; Code for nativekttypes.NullabilityPropagation [static fields]
+(global $f_$initialized__nativekttypes_NullabilityPropagation (mut i32) (i32.const 0))
+
+;;; Code for nativekttypes.NullabilityPropagation.NullabilityToPropagate [static fields]
+(global $f_$initialized__nativekttypes_NullabilityPropagation_NullabilityToPropagate (mut i32) (i32.const 0))
+
+;;; Code for nativekttypes.NullabilityPropagation.Subtype [static fields]
+(global $f_$initialized__nativekttypes_NullabilityPropagation_Subtype (mut i32) (i32.const 0))
+
 ;;; Code for nativekttypes.nativekt.KBridge [static fields]
 (global $f_$initialized__nativekttypes_nativekt_KBridge (mut i32) (i32.const 0))
 
@@ -371,6 +380,52 @@
 
 ;;; Code for nativekttypes.NativeWithCompanionObject [itable.init]
 (global $nativekttypes.NativeWithCompanionObject.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nativekttypes.NullabilityPropagation [vtable.init]
+(global $nativekttypes.NullabilityPropagation.vtable (ref $nativekttypes.NullabilityPropagation.vtable) 
+ (struct.new $nativekttypes.NullabilityPropagation.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nativekttypes.NullabilityPropagation)
+ )
+)
+
+;;; Code for nativekttypes.NullabilityPropagation [itable.init]
+(global $nativekttypes.NullabilityPropagation.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nativekttypes.NullabilityPropagation.Subtype [vtable.init]
+(global $nativekttypes.NullabilityPropagation.Subtype.vtable (ref $nativekttypes.NullabilityPropagation.Subtype.vtable) 
+ (struct.new $nativekttypes.NullabilityPropagation.Subtype.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nullableReturnType1__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nullableReturnType2__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nonNullReturnType1__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nonNullReturnType2__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nullableParameter1__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nullableParameter2__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nonNullParameter1__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nonNullParameter2__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+ )
+)
+
+;;; Code for nativekttypes.NullabilityPropagation.Subtype [itable.init]
+(global $nativekttypes.NullabilityPropagation.Subtype.itable (ref $itable) (array.init_static $itable 
+ (struct.new $nativekttypes.NullabilityPropagation.NullabilityToPropagate.vtable
+  (ref.func $m_nonNullParameter1__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nonNullParameter2__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nonNullReturnType1__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nonNullReturnType2__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nullableParameter1__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nullableParameter2__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nullableReturnType1__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+  (ref.func $m_nullableReturnType2__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+ )
  ))
 
 ;;; Code for nativekttypes.nativekt.KBridge [vtable.init]
@@ -2861,6 +2916,342 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nativekttypes.NativeWithCompanionObject)
+
+;;; Code for nativekttypes.NullabilityPropagation [CLASS]
+(type $nativekttypes.NullabilityPropagation (struct_subtype 
+ (field $vtable (ref $nativekttypes.NullabilityPropagation.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $nativekttypes.NullabilityPropagation.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; NullabilityPropagation NullabilityPropagation.$create()
+(func $$create__@nativekttypes.NullabilityPropagation
+ (result (ref null $nativekttypes.NullabilityPropagation))
+ ;;@ nativekttypes/NullabilityPropagation.java:21:19
+ (local $$instance (ref null $nativekttypes.NullabilityPropagation))
+ (block
+  ;; NullabilityPropagation $instance = new NullabilityPropagation.<init>(0);
+  ;;@ nativekttypes/NullabilityPropagation.java:21:19
+  (local.set $$instance (struct.new $nativekttypes.NullabilityPropagation (ref.as_non_null (global.get $nativekttypes.NullabilityPropagation.vtable)) (ref.as_non_null (global.get $nativekttypes.NullabilityPropagation.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nativekttypes/NullabilityPropagation.java:21:19
+  (call $$ctor__void_$p_nativekttypes_NullabilityPropagation@nativekttypes.NullabilityPropagation (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nativekttypes/NullabilityPropagation.java:21:19
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NullabilityPropagation.$ctor()
+(func $$ctor__void_$p_nativekttypes_NullabilityPropagation@nativekttypes.NullabilityPropagation
+ (param $this (ref null $nativekttypes.NullabilityPropagation))
+ ;;@ nativekttypes/NullabilityPropagation.java:21:19
+ (block
+  ;; nativekttypes.NullabilityPropagation.$clinit();
+  ;;@ nativekttypes/NullabilityPropagation.java:21:19
+  (call $$clinit__void@nativekttypes.NullabilityPropagation )
+  ;; Object.this.$ctor();
+  ;;@ nativekttypes/NullabilityPropagation.java:21:19
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void NullabilityPropagation.$clinit()
+(func $$clinit__void@nativekttypes.NullabilityPropagation
+ ;;@ nativekttypes/NullabilityPropagation.java:21:19
+ (block
+  ;; if (nativekttypes.NullabilityPropagation.$initialized) return;
+  ;;@ nativekttypes/NullabilityPropagation.java:21:19
+  (if (global.get $f_$initialized__nativekttypes_NullabilityPropagation)
+   (then
+    ;; return;
+    ;;@ nativekttypes/NullabilityPropagation.java:21:19
+    (return )
+   )
+  )
+  ;; (nativekttypes.NullabilityPropagation.$initialized = true);
+  ;;@ nativekttypes/NullabilityPropagation.java:21:19
+  (global.set $f_$initialized__nativekttypes_NullabilityPropagation (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nativekttypes/NullabilityPropagation.java:21:19
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> NullabilityPropagation.getClass()
+(func $m_getClass__java_lang_Class@nativekttypes.NullabilityPropagation
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativekttypes.NullabilityPropagation))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNativekttypes.NullabilityPropagation();
+  (return (call $function.no.side.effects.$getNativekttypes.NullabilityPropagation__java_lang_Class (ref.func $$getNativekttypes.NullabilityPropagation__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nativekttypes.NullabilityPropagation)
+
+;;; Code for nativekttypes.NullabilityPropagation.NullabilityToPropagate [INTERFACE]
+(type $nativekttypes.NullabilityPropagation.NullabilityToPropagate.vtable (struct_subtype 
+ (field $m_nonNullParameter1__java_lang_String__void (ref $function.m_nonNullParameter1__java_lang_String__void))
+ (field $m_nonNullParameter2__java_lang_String__void (ref $function.m_nonNullParameter2__java_lang_String__void))
+ (field $m_nonNullReturnType1__java_lang_String (ref $function.m_nonNullReturnType1__java_lang_String))
+ (field $m_nonNullReturnType2__java_lang_String (ref $function.m_nonNullReturnType2__java_lang_String))
+ (field $m_nullableParameter1__java_lang_String__void (ref $function.m_nullableParameter1__java_lang_String__void))
+ (field $m_nullableParameter2__java_lang_String__void (ref $function.m_nullableParameter2__java_lang_String__void))
+ (field $m_nullableReturnType1__java_lang_String (ref $function.m_nullableReturnType1__java_lang_String))
+ (field $m_nullableReturnType2__java_lang_String (ref $function.m_nullableReturnType2__java_lang_String))
+  data)
+)
+
+;;; void NullabilityToPropagate.$clinit()
+(func $$clinit__void@nativekttypes.NullabilityPropagation.NullabilityToPropagate
+ ;;@ nativekttypes/NullabilityPropagation.java:22:12
+ (block
+  ;; if (nativekttypes.NullabilityPropagation.NullabilityToPropagate.$initialized) return;
+  ;;@ nativekttypes/NullabilityPropagation.java:22:12
+  (if (global.get $f_$initialized__nativekttypes_NullabilityPropagation_NullabilityToPropagate)
+   (then
+    ;; return;
+    ;;@ nativekttypes/NullabilityPropagation.java:22:12
+    (return )
+   )
+  )
+  ;; (nativekttypes.NullabilityPropagation.NullabilityToPropagate.$initialized = true);
+  ;;@ nativekttypes/NullabilityPropagation.java:22:12
+  (global.set $f_$initialized__nativekttypes_NullabilityPropagation_NullabilityToPropagate (i32.const 1))
+ )
+)
+
+;;; Class<?> NullabilityToPropagate.getClass()
+(func $m_getClass__java_lang_Class@nativekttypes.NullabilityPropagation.NullabilityToPropagate
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNativekttypes.NullabilityPropagation.NullabilityToPropagate();
+  (return (call $function.no.side.effects.$getNativekttypes.NullabilityPropagation.NullabilityToPropagate__java_lang_Class (ref.func $$getNativekttypes.NullabilityPropagation.NullabilityToPropagate__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nativekttypes.NullabilityPropagation.NullabilityToPropagate)
+
+;;; Code for nativekttypes.NullabilityPropagation.Subtype [CLASS]
+(type $nativekttypes.NullabilityPropagation.Subtype (struct_subtype 
+ (field $vtable (ref $nativekttypes.NullabilityPropagation.Subtype.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__nativekttypes_NullabilityPropagation_Subtype (ref null $nativekttypes.NullabilityPropagation))
+  $java.lang.Object)
+)
+(type $nativekttypes.NullabilityPropagation.Subtype.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_nullableReturnType1__java_lang_String (ref $function.m_nullableReturnType1__java_lang_String))
+ (field $m_nullableReturnType2__java_lang_String (ref $function.m_nullableReturnType2__java_lang_String))
+ (field $m_nonNullReturnType1__java_lang_String (ref $function.m_nonNullReturnType1__java_lang_String))
+ (field $m_nonNullReturnType2__java_lang_String (ref $function.m_nonNullReturnType2__java_lang_String))
+ (field $m_nullableParameter1__java_lang_String__void (ref $function.m_nullableParameter1__java_lang_String__void))
+ (field $m_nullableParameter2__java_lang_String__void (ref $function.m_nullableParameter2__java_lang_String__void))
+ (field $m_nonNullParameter1__java_lang_String__void (ref $function.m_nonNullParameter1__java_lang_String__void))
+ (field $m_nonNullParameter2__java_lang_String__void (ref $function.m_nonNullParameter2__java_lang_String__void))
+  $java.lang.Object.vtable)
+)
+
+;;; Subtype Subtype.$create(NullabilityPropagation $outer_this)
+(func $$create__nativekttypes_NullabilityPropagation@nativekttypes.NullabilityPropagation.Subtype
+ (param $$outer_this (ref null $nativekttypes.NullabilityPropagation))
+ (result (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ ;;@ nativekttypes/NullabilityPropagation.java:50:8
+ (local $$instance (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (block
+  ;; Subtype $instance = new Subtype.<init>(0,$outer_this);
+  ;;@ nativekttypes/NullabilityPropagation.java:50:8
+  (local.set $$instance (struct.new $nativekttypes.NullabilityPropagation.Subtype (ref.as_non_null (global.get $nativekttypes.NullabilityPropagation.Subtype.vtable)) (ref.as_non_null (global.get $nativekttypes.NullabilityPropagation.Subtype.itable)) (i32.const 0) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ nativekttypes/NullabilityPropagation.java:50:8
+  (call $$ctor__nativekttypes_NullabilityPropagation__void_$p_nativekttypes_NullabilityPropagation_Subtype@nativekttypes.NullabilityPropagation.Subtype (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ nativekttypes/NullabilityPropagation.java:50:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Subtype.$ctor(NullabilityPropagation $outer_this)
+(func $$ctor__nativekttypes_NullabilityPropagation__void_$p_nativekttypes_NullabilityPropagation_Subtype@nativekttypes.NullabilityPropagation.Subtype
+ (param $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (param $$outer_this (ref null $nativekttypes.NullabilityPropagation))
+ ;;@ nativekttypes/NullabilityPropagation.java:50:8
+ (block
+  ;; nativekttypes.NullabilityPropagation.Subtype.$clinit();
+  ;;@ nativekttypes/NullabilityPropagation.java:50:8
+  (call $$clinit__void@nativekttypes.NullabilityPropagation.Subtype )
+  ;; Object.this.$ctor();
+  ;;@ nativekttypes/NullabilityPropagation.java:50:8
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; String Subtype.nullableReturnType1()
+(func $m_nullableReturnType1__java_lang_String@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_nullableReturnType1__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ nativekttypes/NullabilityPropagation.java:52:18
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.StringPool.$getString_||();
+  ;;@ nativekttypes/NullabilityPropagation.java:53:6
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+ )
+)
+(elem declare func $m_nullableReturnType1__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+
+;;; String Subtype.nullableReturnType2()
+(func $m_nullableReturnType2__java_lang_String@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_nullableReturnType2__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ nativekttypes/NullabilityPropagation.java:57:29
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.StringPool.$getString_||();
+  ;;@ nativekttypes/NullabilityPropagation.java:58:6
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+ )
+)
+(elem declare func $m_nullableReturnType2__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+
+;;; String Subtype.nonNullReturnType1()
+(func $m_nonNullReturnType1__java_lang_String@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_nonNullReturnType1__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ nativekttypes/NullabilityPropagation.java:62:18
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.StringPool.$getString_||();
+  ;;@ nativekttypes/NullabilityPropagation.java:63:6
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+ )
+)
+(elem declare func $m_nonNullReturnType1__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+
+;;; String Subtype.nonNullReturnType2()
+(func $m_nonNullReturnType2__java_lang_String@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_nonNullReturnType2__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ nativekttypes/NullabilityPropagation.java:67:29
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.StringPool.$getString_||();
+  ;;@ nativekttypes/NullabilityPropagation.java:68:6
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+ )
+)
+(elem declare func $m_nonNullReturnType2__java_lang_String@nativekttypes.NullabilityPropagation.Subtype)
+
+;;; void Subtype.nullableParameter1(String s)
+(func $m_nullableParameter1__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_nullableParameter1__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ nativekttypes/NullabilityPropagation.java:72:16
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nullableParameter1__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+
+;;; void Subtype.nullableParameter2(String s)
+(func $m_nullableParameter2__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_nullableParameter2__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ nativekttypes/NullabilityPropagation.java:75:16
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nullableParameter2__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+
+;;; void Subtype.nonNullParameter1(String s)
+(func $m_nonNullParameter1__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_nonNullParameter1__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ nativekttypes/NullabilityPropagation.java:78:16
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nonNullParameter1__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+
+;;; void Subtype.nonNullParameter2(String s)
+(func $m_nonNullParameter2__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_nonNullParameter2__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ nativekttypes/NullabilityPropagation.java:81:16
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_nonNullParameter2__java_lang_String__void@nativekttypes.NullabilityPropagation.Subtype)
+
+;;; void Subtype.$clinit()
+(func $$clinit__void@nativekttypes.NullabilityPropagation.Subtype
+ ;;@ nativekttypes/NullabilityPropagation.java:50:8
+ (block
+  ;; if (nativekttypes.NullabilityPropagation.Subtype.$initialized) return;
+  ;;@ nativekttypes/NullabilityPropagation.java:50:8
+  (if (global.get $f_$initialized__nativekttypes_NullabilityPropagation_Subtype)
+   (then
+    ;; return;
+    ;;@ nativekttypes/NullabilityPropagation.java:50:8
+    (return )
+   )
+  )
+  ;; (nativekttypes.NullabilityPropagation.Subtype.$initialized = true);
+  ;;@ nativekttypes/NullabilityPropagation.java:50:8
+  (global.set $f_$initialized__nativekttypes_NullabilityPropagation_Subtype (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nativekttypes/NullabilityPropagation.java:50:8
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Subtype.getClass()
+(func $m_getClass__java_lang_Class@nativekttypes.NullabilityPropagation.Subtype
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nativekttypes.NullabilityPropagation.Subtype))
+ (local.set $this (ref.cast_static $nativekttypes.NullabilityPropagation.Subtype (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNativekttypes.NullabilityPropagation.Subtype();
+  (return (call $function.no.side.effects.$getNativekttypes.NullabilityPropagation.Subtype__java_lang_Class (ref.func $$getNativekttypes.NullabilityPropagation.Subtype__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nativekttypes.NullabilityPropagation.Subtype)
 
 ;;; Code for nativekttypes.nativekt.KBridge [CLASS]
 (type $nativekttypes.nativekt.KBridge (struct_subtype 

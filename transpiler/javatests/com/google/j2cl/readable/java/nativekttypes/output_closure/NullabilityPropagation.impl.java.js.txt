@@ -1,0 +1,40 @@
+goog.module('nativekttypes.NullabilityPropagation$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class NullabilityPropagation extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!NullabilityPropagation} */
+ static $create__() {
+  NullabilityPropagation.$clinit();
+  let $instance = new NullabilityPropagation();
+  $instance.$ctor__nativekttypes_NullabilityPropagation__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nativekttypes_NullabilityPropagation__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  NullabilityPropagation.$clinit = () =>{};
+  NullabilityPropagation.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NullabilityPropagation;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NullabilityPropagation, 'nativekttypes.NullabilityPropagation');
+
+exports = NullabilityPropagation;
+
+//# sourceMappingURL=NullabilityPropagation.js.map

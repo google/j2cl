@@ -20,15 +20,16 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.AstUtils.isConstructorInvocationStatement
 import com.google.j2cl.transpiler.ast.Field
+import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.TypeDescriptors
-import com.google.j2cl.transpiler.ast.Variable
 
 internal fun Renderer.renderMember(member: Member) {
   when (member) {
@@ -143,22 +144,22 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor) {
 }
 
 private fun Renderer.renderMethodParameters(method: Method) {
+  val parameterDescriptors = method.descriptor.parameterDescriptors
   val parameters = method.parameters
-  val varargParameterIndex = if (method.descriptor.isVarargs) parameters.size.dec() else -1
   renderInParentheses {
-    renderCommaSeparated(parameters.mapIndexed(::IndexedValue)) {
-      renderParameter(it.value, isVararg = it.index == varargParameterIndex)
+    renderCommaSeparated(0 until parameters.size) { index ->
+      renderParameter(parameterDescriptors[index], parameters[index])
     }
   }
 }
 
-private fun Renderer.renderParameter(variable: Variable, isVararg: Boolean) {
-  val variableTypeDescriptor = variable.typeDescriptor
+private fun Renderer.renderParameter(parameterDescriptor: ParameterDescriptor, name: HasName) {
+  val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
   val renderedTypeDescriptor =
-    if (!isVararg) variableTypeDescriptor
-    else (variableTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
-  if (isVararg) render("vararg ")
-  renderName(variable)
+    if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
+    else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
+  if (parameterDescriptor.isVarargs) render("vararg ")
+  renderName(name)
   render(": ")
   renderTypeDescriptor(renderedTypeDescriptor, TypeDescriptorUsage.REFERENCE)
 }
