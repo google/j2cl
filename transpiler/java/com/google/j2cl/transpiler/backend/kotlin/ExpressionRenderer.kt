@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.ast.FieldAccess
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InstanceOfExpression
 import com.google.j2cl.transpiler.ast.Invocation
+import com.google.j2cl.transpiler.ast.KtInfo
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -275,6 +276,12 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   }
 
   renderQualifier(expression)
+
+  if (isProtobufGetter(methodDescriptor)) {
+    renderIdentifier(KtInfo.computePropertyName(expression.target.name))
+    return
+  }
+
   renderIdentifier(expression.target.ktName)
   if (!expression.target.isKtProperty) {
     val typeArguments = methodDescriptor.typeArgumentTypeDescriptors

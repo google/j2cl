@@ -15,7 +15,10 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.AbstractVisitor
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.ast.MemberReference
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 
 internal fun Renderer.renderImports(compilationUnit: CompilationUnit) {
   val imports = compilationUnit.imports
@@ -42,5 +45,21 @@ private val CompilationUnit.imports: Set<Import>
   get() = buildSet {
     add(starImport("javaemul", "lang"))
     add(starImport("kotlin", "jvm"))
+    addProtoImportsTo(this)
     // TODO(b/226922954): Add imports for types and members.
   }
+
+private fun CompilationUnit.addProtoImportsTo(mutableSet: MutableSet<Import>) =
+  accept(
+    object : AbstractVisitor() {
+      override fun enterMemberReference(memberReference: MemberReference?): Boolean {
+        val target = memberReference?.target
+        if (target is MethodDescriptor && isProtobufGetter(target)) {
+          val ownerName = target.enclosingTypeDescriptor.qualifiedSourceName
+          val import = starImport(ownerName.substring(0, ownerName.lastIndexOf('.')))
+          mutableSet.add(import)
+        }
+        return true
+      }
+    }
+  )

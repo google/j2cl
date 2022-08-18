@@ -56,7 +56,7 @@ public abstract class KtInfo {
     public abstract KtInfo build();
   }
 
-  static String computePropertyName(String methodName) {
+  public static String computePropertyName(String methodName) {
     return startsWithCamelCase(methodName, "get")
         ? Introspector.decapitalize(methodName.substring(3))
         : methodName;
