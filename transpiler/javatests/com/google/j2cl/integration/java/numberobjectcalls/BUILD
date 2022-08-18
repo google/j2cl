@@ -8,5 +8,7 @@ package(licenses = ["notice"])
 integration_test(
     name = "numberobjectcalls",
     srcs = glob(["*.java"]),
-    enable_kt = False,
+    # TODO(b/242816223): Class.getName() gives different results on JVM and
+    # Native for primitive and mapped types.
+    enable_kt_native = False,
 )

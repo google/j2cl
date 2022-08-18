@@ -8,6 +8,7 @@ package(licenses = ["notice"])
 integration_test(
     name = "arrayofboxedtype",
     srcs = glob(["*.java"]),
-    # TODO(b/219913874): java.lang.Number translation to kotlin.Number
-    enable_kt = False,
+    # TODO(b/227554485): Kotlin Native does not throw ArrayStoreException when
+    # storing wrong type of object.
+    enable_kt_native = False,
 )

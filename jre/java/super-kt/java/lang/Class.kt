@@ -28,6 +28,9 @@ class Class<T>(val kClass: KClass<*>) {
   fun isArray() = arrayKClassSet.contains(kClass)
   // TODO(b/235808937): Implement
   fun getEnumConstants(): Array<T>? = throw UnsupportedOperationException()
+  override fun equals(other: Any?) = other is Class<*> && kClass == other.kClass
+  override fun hashCode() = kClass.hashCode()
+  override fun toString() = kClass.toString()
 }
 
 private val arrayKClassSet =
