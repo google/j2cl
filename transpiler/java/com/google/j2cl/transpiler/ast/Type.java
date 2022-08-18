@@ -83,12 +83,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return getMethods().stream().anyMatch(method -> method.getMangledName().equals(mangledName));
   }
 
-  public boolean containsNonJsNativeMethods() {
-    return getMethods().stream()
-        .filter(Method::isNative)
-        .anyMatch(method -> !method.getDescriptor().isJsMember());
-  }
-
   public void setAbstract(boolean isAbstract) {
     this.isAbstract = isAbstract;
   }

@@ -1475,6 +1475,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public int getFoo() { return 0; }",
             "  @JsMethod",
             "  private void bleh() {}",
+            "  @JsMethod",
             "  private native void nativeMethod();",
             "  @JsProperty",
             "  public int prop = 0;",
@@ -1862,7 +1863,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsEnum member 'int JsEnumWithInvalidMembers.getP()' cannot be "
                 + "JsMethod nor JsProperty nor JsConstructor.",
             "JsEnum method 'void JsEnumWithInvalidMembers.n()' cannot be native.",
+            "[unusable-by-js] Native 'void JsEnumWithInvalidMembers.n()' is exposed to JavaScript "
+                + "without @JsMethod.",
             "JsEnum method 'void JsEnumWithInvalidMembers.o()' cannot be native.",
+            "[unusable-by-js] Native 'void JsEnumWithInvalidMembers.o()' is exposed to JavaScript "
+                + "without @JsMethod.",
             "JsEnum method 'String JsEnumWithInvalidMembers.toString()' cannot override a"
                 + " supertype method.",
             "JsEnum 'MyJsEnum' cannot have instance field 'MyJsEnum.instanceField'.",
@@ -2678,22 +2683,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
-  public void testJsOverlayOnNativeMethodFails() {
-    assertTranspileFails(
-            "test.Buggy",
-            "import jsinterop.annotations.*;",
-            "@JsType(isNative = true)",
-            "public class Buggy {",
-            "  @JsOverlay",
-            "  public static final native void m1();",
-            "  @JsOverlay",
-            "  public final native void m2();",
-            "}")
-        .assertErrorsWithoutSourcePosition(
-            "JsOverlay method 'void Buggy.m1()' cannot be native.",
-            "JsOverlay method 'void Buggy.m2()' cannot be native.");
-  }
-
   public void testJsOverlayOnJsMemberFails() {
     // JsOverlay in constructors is checked by JDT.
     assertTranspileFails(
@@ -2878,6 +2867,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Native JsType field 'Buggy.s' cannot be final.",
             "Native JsType member 'Buggy.x' cannot have @JsIgnore.",
             "Native JsType member 'void Buggy.n()' cannot have @JsIgnore.",
+            "[unusable-by-js] Native 'void Buggy.n()' is exposed to JavaScript without @JsMethod.",
             "Native JsType method 'void Buggy.o()' should be native, abstract or JsOverlay.",
             "Native JsType field 'Buggy.t' cannot have initializer.",
             "Native JsType field 'Buggy.g' cannot have initializer.",
@@ -2885,7 +2875,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "different from the JavaScript name of a method it "
                 + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode').",
             "Native JsType method 'String NativeTypeWithBridge.foo()' should be native"
-                + ", abstract or JsOverlay.");
+                + ", abstract or JsOverlay.",
+            "[unusable-by-js] Native 'void Interface.n()' is exposed to JavaScript without "
+                + "@JsMethod.");
   }
 
   public void testNativeJsTypeImplementingJavaLangObjectMethodsSucceeds() {
@@ -2957,7 +2949,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
-  public void testNativeMethodNotJsMethodWarns() {
+  public void testNativeMethodNotJsMethodFails() {
     newTesterWithDefaults()
         .addCompilationUnit(
             "test.Buggy",
@@ -2966,10 +2958,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public native void m();",
             "}")
         .addNativeJsForCompilationUnit("test.Buggy")
-        .assertTranspileSucceeds()
-        .assertWarningsWithoutSourcePosition(
-            "[unusable-by-js] Native 'void Buggy.m()' is exposed to JavaScript without "
-                + "@JsMethod.");
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "[unusable-by-js] Native 'void Buggy.m()' is exposed to JavaScript without @JsMethod.");
   }
 
   public void testNativeJsTypeSucceeds() {
@@ -3351,9 +3342,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "class C {", // non-jstype class
             "  @JsMethod",
             "  public static void fc1(A a) {}", // JsMethod
-            "  public native void fc2(A a);", // native method
             "  @JsMethod",
-            "  private native void fc3(A a);", // private native JsMethod
+            "  public native void fc2(A a);", // native method
             "}",
             "class D {", // non-jstype class with JsProperty
             "  @JsProperty",
@@ -3383,8 +3373,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertWarningsWithoutSourcePosition(
             "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A a)' is not usable by but "
                 + "exposed to JavaScript.",
-            "[unusable-by-js] Native 'void C.fc2(A a)' is exposed to JavaScript without @JsMethod.",
-            "[unusable-by-js] Type of parameter 'a' in 'void C.fc3(A a)' is not usable by but "
+            "[unusable-by-js] Type of parameter 'a' in 'void C.fc2(A a)' is not usable by but "
                 + "exposed to JavaScript.",
             "[unusable-by-js] Type 'A' of field 'D.a' is not usable by but exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'a' in 'void FI.f(A a)' is not usable by but"

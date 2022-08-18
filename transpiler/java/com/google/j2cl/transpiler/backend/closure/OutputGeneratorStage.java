@@ -102,11 +102,6 @@ public class OutputGeneratorStage {
             continue;
           }
 
-        } else if (type.containsNonJsNativeMethods()) {
-          problems.error(
-              "Cannot find matching native file '%s'.",
-              typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
-          continue;
         }
 
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();

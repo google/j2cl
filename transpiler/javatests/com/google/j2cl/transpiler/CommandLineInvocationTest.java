@@ -107,12 +107,13 @@ public class CommandLineInvocationTest extends TestCase {
         .addFile(
             sourcesPath.resolve("NativeClass.java"),
             "package random;",
+            "import jsinterop.annotations.*;",
             "public class NativeClass {",
-            "  public native void nativeInstanceMethod();",
+            "  @JsMethod public native void nativeInstanceMethod();",
             "}")
         .addFile(
             sourcesPath.resolve("NativeClass.native.js"),
-            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
         .assertTranspileSucceeds();
   }
 
@@ -122,13 +123,14 @@ public class CommandLineInvocationTest extends TestCase {
             "sources.srcjar",
             "src/random/NativeClass.java",
             "package random;",
+            "import jsinterop.annotations.*;",
             "public class NativeClass {",
-            "  public native void nativeInstanceMethod();",
+            "  @JsMethod public native void nativeInstanceMethod();",
             "}")
         .addFileToZipFile(
             "native.zip",
             "src/random/NativeClass.native.js",
-            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
         .assertTranspileSucceeds();
   }
 
@@ -139,12 +141,13 @@ public class CommandLineInvocationTest extends TestCase {
             "sources.srcjar",
             "src/random/NativeClass.java",
             "package random;",
+            "import jsinterop.annotations.*;",
             "public class NativeClass {",
-            "  public native void nativeInstanceMethod();",
+            "  @JsMethod public native void nativeInstanceMethod();",
             "}")
         .addFile(
             "src/random/NativeClass.native.js",
-            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
         .assertTranspileSucceeds();
   }
 
@@ -154,12 +157,13 @@ public class CommandLineInvocationTest extends TestCase {
         .addFile(
             sourcesPath.resolve("NativeClass.java"),
             "package random;",
+            "import jsinterop.annotations.*;",
             "public class NativeClass {",
-            "  public native void nativeInstanceMethod();",
+            "  @JsMethod public native void nativeInstanceMethod();",
             "}")
         .addFile(
             "java/random/NativeClass.native.js",
-            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
         .assertTranspileSucceeds();
   }
 
@@ -167,23 +171,17 @@ public class CommandLineInvocationTest extends TestCase {
     newTesterWithDefaults()
         .addCompilationUnit(
             "nativeclasstest.NativeClass",
+            "import jsinterop.annotations.*;",
             "public class NativeClass {",
-            "  public native void nativeInstanceMethod();",
-            "}")
-        .addCompilationUnit(
-            "nativeclasstest.NativeClass2",
-            "public class NativeClass2 {",
-            "  public native void nativeInstanceMethod();",
+            "  @JsMethod public native void nativeInstanceMethod();",
             "}")
         .addFileToZipFile(
             "native.zip",
             "nativeclasstest/BadNameNativeClass.native.js",
-            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
-            "Unused native file 'nativeclasstest/BadNameNativeClass.native.js'.",
-            "Cannot find matching native file 'nativeclasstest/NativeClass.native.js'.",
-            "Cannot find matching native file 'nativeclasstest/NativeClass2.native.js'.");
+            "Unused native file 'nativeclasstest/BadNameNativeClass.native.js'.");
   }
 
   public void testNativeJsFileForJsEnum() {
@@ -238,17 +236,18 @@ public class CommandLineInvocationTest extends TestCase {
     newTesterWithDefaults()
         .addCompilationUnit(
             "nativeclasstest.NativeClass",
+            "import jsinterop.annotations.*;",
             "public class NativeClass {",
-            "  public native void nativeInstanceMethod();",
+            "  @JsMethod public native void nativeInstanceMethod();",
             "}")
         .addFileToZipFile(
             "native.zip",
             "nativeclasstest/NativeClass.native.js",
-            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+            "NativeClass.prototype.nativeInstanceMethod = function () {}")
         .addFileToZipFile(
             "native.zip",
             "nativeclasstest/ExtraClass.native.js",
-            "ExtraClass.prototype.m_nativeInstanceMethod = function () {}")
+            "ExtraClass.prototype.nativeInstanceMethod = function () {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Unused native file 'nativeclasstest/ExtraClass.native.js'.");

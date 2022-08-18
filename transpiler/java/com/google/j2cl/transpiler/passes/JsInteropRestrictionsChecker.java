@@ -1098,7 +1098,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (!methodDescriptor.isJsMember()) {
-      problems.warning(
+      problems.error(
           method.getSourcePosition(),
           "[unusable-by-js] Native '%s' is exposed to JavaScript without @JsMethod.",
           method.getReadableDescription());
