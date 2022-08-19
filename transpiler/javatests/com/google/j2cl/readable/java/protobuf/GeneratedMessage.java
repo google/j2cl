@@ -15,4 +15,6 @@
  */
 package com.google.protobuf;
 
-public class GeneratedMessage {}
+public class GeneratedMessage {
+  public static class Builder {}
+}

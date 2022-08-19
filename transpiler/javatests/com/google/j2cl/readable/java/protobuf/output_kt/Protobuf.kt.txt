@@ -1,0 +1,18 @@
+// Generated from "protobuf/Protobuf.java"
+package protobuf
+
+import javaemul.lang.*
+import kotlin.jvm.*
+import protobuf.*
+
+open class Protobuf {
+ open fun test() {
+  val builder = protobuf.MyMessage.newBuilder()
+  builder!!.setTestField(42)
+  builder!!.testField
+  val message: protobuf.MyMessage? = builder!!.build()
+  message!!.testField
+  val defaultMessage: protobuf.MyMessage? = protobuf.MyMessage.getDefaultInstance()
+  defaultMessage!!.testField
+ }
+}

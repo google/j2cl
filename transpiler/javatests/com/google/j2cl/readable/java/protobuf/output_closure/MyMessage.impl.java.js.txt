@@ -1,0 +1,61 @@
+goog.module('protobuf.MyMessage$impl');
+
+const GeneratedMessage = goog.require('com.google.protobuf.GeneratedMessage$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Builder = goog.forwardDeclare('protobuf.MyMessage.Builder$impl');
+
+class MyMessage extends GeneratedMessage {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_testField__protobuf_MyMessage = 0;
+ }
+ /** @nodts @return {number} */
+ m_getTestField__int() {
+  return this.f_testField__protobuf_MyMessage;
+ }
+ /** @nodts @return {MyMessage} */
+ static m_getDefaultInstance__protobuf_MyMessage() {
+  MyMessage.$clinit();
+  return MyMessage.$create__int(0);
+ }
+ /** @nodts @return {Builder} */
+ static m_newBuilder__protobuf_MyMessage_Builder() {
+  MyMessage.$clinit();
+  return Builder.$create__();
+ }
+ /** @nodts @return {!MyMessage} */
+ static $create__int(/** number */ testField) {
+  MyMessage.$clinit();
+  let $instance = new MyMessage();
+  $instance.$ctor__protobuf_MyMessage__int__void(testField);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__protobuf_MyMessage__int__void(/** number */ testField) {
+  this.$ctor__com_google_protobuf_GeneratedMessage__void();
+  this.f_testField__protobuf_MyMessage = testField;
+ }
+ /** @nodts */
+ static $clinit() {
+  MyMessage.$clinit = () =>{};
+  MyMessage.$loadModules();
+  GeneratedMessage.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyMessage;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Builder = goog.module.get('protobuf.MyMessage.Builder$impl');
+ }
+}
+$Util.$setClassMetadata(MyMessage, 'protobuf.MyMessage');
+
+exports = MyMessage;
+
+//# sourceMappingURL=MyMessage.js.map

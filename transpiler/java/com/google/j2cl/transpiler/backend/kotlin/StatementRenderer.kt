@@ -130,8 +130,10 @@ private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarati
   var fieldDescriptor = declaration.fieldDescriptor
   render("var ")
   renderIdentifier(fieldDescriptor.name!!)
-  render(": ")
-  renderTypeDescriptor(fieldDescriptor.typeDescriptor, TypeDescriptorUsage.REFERENCE)
+  if (!fieldDescriptor.typeDescriptor.isProtobufBuilder()) {
+    render(": ")
+    renderTypeDescriptor(fieldDescriptor.typeDescriptor, TypeDescriptorUsage.REFERENCE)
+  }
   render(" = ")
   renderExpression(declaration.expression)
 }

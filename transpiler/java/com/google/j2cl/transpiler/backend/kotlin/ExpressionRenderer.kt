@@ -277,7 +277,7 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
   renderQualifier(expression)
 
-  if (isProtobufGetter(methodDescriptor)) {
+  if (methodDescriptor.isProtobufGetter()) {
     renderIdentifier(KtInfo.computePropertyName(expression.target.name))
     return
   }
@@ -487,7 +487,7 @@ fun Renderer.renderVariable(variable: Variable) {
   renderName(variable)
 
   val typeDescriptor = variable.typeDescriptor
-  if (!typeDescriptor.isInferred) {
+  if (!typeDescriptor.isInferred && !typeDescriptor.isProtobufBuilder()) {
     render(": ")
     renderTypeDescriptor(typeDescriptor, TypeDescriptorUsage.REFERENCE)
   }

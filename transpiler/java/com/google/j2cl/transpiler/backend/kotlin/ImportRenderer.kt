@@ -49,15 +49,21 @@ private val CompilationUnit.imports: Set<Import>
     // TODO(b/226922954): Add imports for types and members.
   }
 
+/**
+ * Because JVM protos and iOS native protos (currently) provide different access methods via
+ * extensions, we need to detect protobuf message access and use a "star" import to paper over these
+ * differences.
+ */
 private fun CompilationUnit.addProtoImportsTo(mutableSet: MutableSet<Import>) =
   accept(
     object : AbstractVisitor() {
       override fun enterMemberReference(memberReference: MemberReference?): Boolean {
         val target = memberReference?.target
-        if (target is MethodDescriptor && isProtobufGetter(target)) {
-          val ownerName = target.enclosingTypeDescriptor.qualifiedSourceName
-          val import = starImport(ownerName.substring(0, ownerName.lastIndexOf('.')))
-          mutableSet.add(import)
+        if (target is MethodDescriptor && target.isProtobufGetter(orSetter = true)) {
+          val packageName = target.enclosingTypeDescriptor.typeDeclaration.packageName
+          if (!packageName.isNullOrEmpty()) {
+            mutableSet.add(Import(packageName.split("."), isStar = true))
+          }
         }
         return true
       }

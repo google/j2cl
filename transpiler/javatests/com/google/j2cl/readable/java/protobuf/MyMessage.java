@@ -13,19 +13,46 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package protobufgetter;
+package protobuf;
 
 import com.google.protobuf.GeneratedMessage;
 
 public class MyMessage extends GeneratedMessage {
 
-  public int testField = 42;
+  public final int testField;
 
   public int getTestField() {
     return testField;
   }
 
   public static MyMessage getDefaultInstance() {
-    return new MyMessage();
+    return new MyMessage(0);
+  }
+
+  public static Builder newBuilder() {
+    return new Builder();
+  }
+
+  private MyMessage(int testField) {
+    this.testField = testField;
+  }
+
+  public static class Builder extends GeneratedMessage.Builder {
+    public int testField;
+
+    public int getTestField() {
+      return testField;
+    }
+
+    public Builder setTestField(int testField) {
+      this.testField = testField;
+      return this;
+    }
+
+    public MyMessage build() {
+      return new MyMessage(testField);
+    }
+
+    private Builder() {}
   }
 }

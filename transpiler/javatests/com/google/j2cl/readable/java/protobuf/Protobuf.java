@@ -13,10 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package protobufgetter;
+package protobuf;
 
-public class ProtobufGetter {
+public class Protobuf {
   public void test() {
-    MyMessage.getDefaultInstance().getTestField();
+    MyMessage.Builder builder = MyMessage.newBuilder();
+    builder.setTestField(42);
+
+    builder.getTestField();
+
+    MyMessage message = builder.build();
+    message.getTestField();
+
+    MyMessage defaultMessage = MyMessage.getDefaultInstance();
+    defaultMessage.getTestField();
   }
 }

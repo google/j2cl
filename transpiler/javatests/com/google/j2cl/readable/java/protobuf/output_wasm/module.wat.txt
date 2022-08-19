@@ -1,0 +1,445 @@
+;;; Code for protobuf.MyMessage [static fields]
+(global $f_$initialized__protobuf_MyMessage (mut i32) (i32.const 0))
+
+;;; Code for protobuf.MyMessage.Builder [static fields]
+(global $f_$initialized__protobuf_MyMessage_Builder (mut i32) (i32.const 0))
+
+;;; Code for protobuf.Protobuf [static fields]
+(global $f_$initialized__protobuf_Protobuf (mut i32) (i32.const 0))
+
+;;; Code for protobuf.MyMessage [vtable.init]
+(global $protobuf.MyMessage.vtable (ref $protobuf.MyMessage.vtable) 
+ (struct.new $protobuf.MyMessage.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@protobuf.MyMessage)
+  (ref.func $m_getTestField__int@protobuf.MyMessage)
+ )
+)
+
+;;; Code for protobuf.MyMessage [itable.init]
+(global $protobuf.MyMessage.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for protobuf.MyMessage.Builder [vtable.init]
+(global $protobuf.MyMessage.Builder.vtable (ref $protobuf.MyMessage.Builder.vtable) 
+ (struct.new $protobuf.MyMessage.Builder.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@protobuf.MyMessage.Builder)
+  (ref.func $m_getTestField__int@protobuf.MyMessage.Builder)
+  (ref.func $m_setTestField__int__protobuf_MyMessage_Builder@protobuf.MyMessage.Builder)
+  (ref.func $m_build__protobuf_MyMessage@protobuf.MyMessage.Builder)
+ )
+)
+
+;;; Code for protobuf.MyMessage.Builder [itable.init]
+(global $protobuf.MyMessage.Builder.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for protobuf.Protobuf [vtable.init]
+(global $protobuf.Protobuf.vtable (ref $protobuf.Protobuf.vtable) 
+ (struct.new $protobuf.Protobuf.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@protobuf.Protobuf)
+  (ref.func $m_test__void@protobuf.Protobuf)
+ )
+)
+
+;;; Code for protobuf.Protobuf [itable.init]
+(global $protobuf.Protobuf.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for protobuf.MyMessage [CLASS]
+(type $protobuf.MyMessage (struct_subtype 
+ (field $vtable (ref $protobuf.MyMessage.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_testField__protobuf_MyMessage i32)
+  $com.google.protobuf.GeneratedMessage)
+)
+(type $protobuf.MyMessage.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getTestField__int (ref $function.m_getTestField__int))
+  $com.google.protobuf.GeneratedMessage.vtable)
+)
+
+;;; int MyMessage.getTestField()
+(func $m_getTestField__int@protobuf.MyMessage
+ (type $function.m_getTestField__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ protobuf/MyMessage.java:24:13
+ (local $this (ref null $protobuf.MyMessage))
+ (local.set $this (ref.cast_static $protobuf.MyMessage (local.get $this.untyped)))
+ (block
+  ;; return MyMessage.this.testField;
+  ;;@ protobuf/MyMessage.java:25:4
+  (return (struct.get $protobuf.MyMessage $f_testField__protobuf_MyMessage(local.get $this)))
+ )
+)
+(elem declare func $m_getTestField__int@protobuf.MyMessage)
+
+;;; MyMessage MyMessage.getDefaultInstance()
+(func $m_getDefaultInstance__protobuf_MyMessage@protobuf.MyMessage
+ (result (ref null $protobuf.MyMessage))
+ ;;@ protobuf/MyMessage.java:28:26
+ (block
+  ;; protobuf.MyMessage.$clinit();
+  ;;@ protobuf/MyMessage.java:28:47
+  (call $$clinit__void@protobuf.MyMessage )
+  ;; return protobuf.MyMessage.$create(0);
+  ;;@ protobuf/MyMessage.java:29:4
+  (return (call $$create__int@protobuf.MyMessage (i32.const 0)))
+ )
+)
+
+;;; Builder MyMessage.newBuilder()
+(func $m_newBuilder__protobuf_MyMessage_Builder@protobuf.MyMessage
+ (result (ref null $protobuf.MyMessage.Builder))
+ ;;@ protobuf/MyMessage.java:32:24
+ (block
+  ;; protobuf.MyMessage.$clinit();
+  ;;@ protobuf/MyMessage.java:32:37
+  (call $$clinit__void@protobuf.MyMessage )
+  ;; return protobuf.MyMessage.Builder.$create();
+  ;;@ protobuf/MyMessage.java:33:4
+  (return (call $$create__@protobuf.MyMessage.Builder ))
+ )
+)
+
+;;; MyMessage MyMessage.$create(int testField)
+(func $$create__int@protobuf.MyMessage
+ (param $testField i32)
+ (result (ref null $protobuf.MyMessage))
+ ;;@ protobuf/MyMessage.java:36:10
+ (local $$instance (ref null $protobuf.MyMessage))
+ (block
+  ;; MyMessage $instance = new MyMessage.<init>(0,testField);
+  ;;@ protobuf/MyMessage.java:36:10
+  (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $protobuf.MyMessage.itable)) (i32.const 0) (local.get $testField)))
+  ;; $instance.$ctor(testField);
+  ;;@ protobuf/MyMessage.java:36:10
+  (call $$ctor__int__void_$p_protobuf_MyMessage@protobuf.MyMessage (ref.as_non_null (local.get $$instance))(local.get $testField))
+  ;; return $instance;
+  ;;@ protobuf/MyMessage.java:36:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void MyMessage.$ctor(int testField)
+(func $$ctor__int__void_$p_protobuf_MyMessage@protobuf.MyMessage
+ (param $this (ref null $protobuf.MyMessage))
+ (param $testField i32)
+ ;;@ protobuf/MyMessage.java:36:10
+ (block
+  ;; protobuf.MyMessage.$clinit();
+  ;;@ protobuf/MyMessage.java:36:35
+  (call $$clinit__void@protobuf.MyMessage )
+  ;; GeneratedMessage.this.$ctor();
+  ;;@ protobuf/MyMessage.java:36:35
+  (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage@com.google.protobuf.GeneratedMessage (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void MyMessage.$clinit()
+(func $$clinit__void@protobuf.MyMessage
+ ;;@ protobuf/MyMessage.java:20:13
+ (block
+  ;; if (protobuf.MyMessage.$initialized) return;
+  ;;@ protobuf/MyMessage.java:20:13
+  (if (global.get $f_$initialized__protobuf_MyMessage)
+   (then
+    ;; return;
+    ;;@ protobuf/MyMessage.java:20:13
+    (return )
+   )
+  )
+  ;; (protobuf.MyMessage.$initialized = true);
+  ;;@ protobuf/MyMessage.java:20:13
+  (global.set $f_$initialized__protobuf_MyMessage (i32.const 1))
+  ;; com.google.protobuf.GeneratedMessage.$clinit();
+  ;;@ protobuf/MyMessage.java:20:13
+  (call $$clinit__void@com.google.protobuf.GeneratedMessage )
+ )
+)
+
+;;; Class<?> MyMessage.getClass()
+(func $m_getClass__java_lang_Class@protobuf.MyMessage
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $protobuf.MyMessage))
+ (local.set $this (ref.cast_static $protobuf.MyMessage (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getProtobuf.MyMessage();
+  (return (call $function.no.side.effects.$getProtobuf.MyMessage__java_lang_Class (ref.func $$getProtobuf.MyMessage__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@protobuf.MyMessage)
+
+;;; Code for protobuf.MyMessage.Builder [CLASS]
+(type $protobuf.MyMessage.Builder (struct_subtype 
+ (field $vtable (ref $protobuf.MyMessage.Builder.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_testField__protobuf_MyMessage_Builder (mut i32))
+  $com.google.protobuf.GeneratedMessage.Builder)
+)
+(type $protobuf.MyMessage.Builder.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getTestField__int (ref $function.m_getTestField__int))
+ (field $m_setTestField__int__protobuf_MyMessage_Builder (ref $function.m_setTestField__int__protobuf_MyMessage_Builder))
+ (field $m_build__protobuf_MyMessage (ref $function.m_build__protobuf_MyMessage))
+  $com.google.protobuf.GeneratedMessage.Builder.vtable)
+)
+
+;;; int Builder.getTestField()
+(func $m_getTestField__int@protobuf.MyMessage.Builder
+ (type $function.m_getTestField__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ protobuf/MyMessage.java:43:15
+ (local $this (ref null $protobuf.MyMessage.Builder))
+ (local.set $this (ref.cast_static $protobuf.MyMessage.Builder (local.get $this.untyped)))
+ (block
+  ;; return Builder.this.testField;
+  ;;@ protobuf/MyMessage.java:44:6
+  (return (struct.get $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder(local.get $this)))
+ )
+)
+(elem declare func $m_getTestField__int@protobuf.MyMessage.Builder)
+
+;;; Builder Builder.setTestField(int testField)
+(func $m_setTestField__int__protobuf_MyMessage_Builder@protobuf.MyMessage.Builder
+ (type $function.m_setTestField__int__protobuf_MyMessage_Builder)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $testField i32)
+ (result (ref null $protobuf.MyMessage.Builder))
+ ;;@ protobuf/MyMessage.java:47:19
+ (local $this (ref null $protobuf.MyMessage.Builder))
+ (local.set $this (ref.cast_static $protobuf.MyMessage.Builder (local.get $this.untyped)))
+ (block
+  ;; (Builder.this.testField = testField);
+  ;;@ protobuf/MyMessage.java:48:6
+  (struct.set $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder(local.get $this) (local.get $testField))
+  ;; return Builder.this;
+  ;;@ protobuf/MyMessage.java:49:6
+  (return (local.get $this))
+ )
+)
+(elem declare func $m_setTestField__int__protobuf_MyMessage_Builder@protobuf.MyMessage.Builder)
+
+;;; MyMessage Builder.build()
+(func $m_build__protobuf_MyMessage@protobuf.MyMessage.Builder
+ (type $function.m_build__protobuf_MyMessage)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $protobuf.MyMessage))
+ ;;@ protobuf/MyMessage.java:52:21
+ (local $this (ref null $protobuf.MyMessage.Builder))
+ (local.set $this (ref.cast_static $protobuf.MyMessage.Builder (local.get $this.untyped)))
+ (block
+  ;; return protobuf.MyMessage.$create(Builder.this.testField);
+  ;;@ protobuf/MyMessage.java:53:6
+  (return (call $$create__int@protobuf.MyMessage (struct.get $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder(local.get $this))))
+ )
+)
+(elem declare func $m_build__protobuf_MyMessage@protobuf.MyMessage.Builder)
+
+;;; Builder Builder.$create()
+(func $$create__@protobuf.MyMessage.Builder
+ (result (ref null $protobuf.MyMessage.Builder))
+ ;;@ protobuf/MyMessage.java:56:12
+ (local $$instance (ref null $protobuf.MyMessage.Builder))
+ (block
+  ;; Builder $instance = new Builder.<init>(0,0);
+  ;;@ protobuf/MyMessage.java:56:12
+  (local.set $$instance (struct.new $protobuf.MyMessage.Builder (ref.as_non_null (global.get $protobuf.MyMessage.Builder.vtable)) (ref.as_non_null (global.get $protobuf.MyMessage.Builder.itable)) (i32.const 0) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ protobuf/MyMessage.java:56:12
+  (call $$ctor__void_$p_protobuf_MyMessage_Builder@protobuf.MyMessage.Builder (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ protobuf/MyMessage.java:56:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Builder.$ctor()
+(func $$ctor__void_$p_protobuf_MyMessage_Builder@protobuf.MyMessage.Builder
+ (param $this (ref null $protobuf.MyMessage.Builder))
+ ;;@ protobuf/MyMessage.java:56:12
+ (block
+  ;; protobuf.MyMessage.Builder.$clinit();
+  ;;@ protobuf/MyMessage.java:56:22
+  (call $$clinit__void@protobuf.MyMessage.Builder )
+  ;; Builder.this.$ctor();
+  ;;@ protobuf/MyMessage.java:56:22
+  (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage_Builder@com.google.protobuf.GeneratedMessage.Builder (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Builder.$clinit()
+(func $$clinit__void@protobuf.MyMessage.Builder
+ ;;@ protobuf/MyMessage.java:40:22
+ (block
+  ;; if (protobuf.MyMessage.Builder.$initialized) return;
+  ;;@ protobuf/MyMessage.java:40:22
+  (if (global.get $f_$initialized__protobuf_MyMessage_Builder)
+   (then
+    ;; return;
+    ;;@ protobuf/MyMessage.java:40:22
+    (return )
+   )
+  )
+  ;; (protobuf.MyMessage.Builder.$initialized = true);
+  ;;@ protobuf/MyMessage.java:40:22
+  (global.set $f_$initialized__protobuf_MyMessage_Builder (i32.const 1))
+  ;; com.google.protobuf.GeneratedMessage.Builder.$clinit();
+  ;;@ protobuf/MyMessage.java:40:22
+  (call $$clinit__void@com.google.protobuf.GeneratedMessage.Builder )
+ )
+)
+
+;;; Class<?> Builder.getClass()
+(func $m_getClass__java_lang_Class@protobuf.MyMessage.Builder
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $protobuf.MyMessage.Builder))
+ (local.set $this (ref.cast_static $protobuf.MyMessage.Builder (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getProtobuf.MyMessage.Builder();
+  (return (call $function.no.side.effects.$getProtobuf.MyMessage.Builder__java_lang_Class (ref.func $$getProtobuf.MyMessage.Builder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@protobuf.MyMessage.Builder)
+
+;;; Code for protobuf.Protobuf [CLASS]
+(type $protobuf.Protobuf (struct_subtype 
+ (field $vtable (ref $protobuf.Protobuf.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $protobuf.Protobuf.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__void (ref $function.m_test__void))
+  $java.lang.Object.vtable)
+)
+
+;;; Protobuf Protobuf.$create()
+(func $$create__@protobuf.Protobuf
+ (result (ref null $protobuf.Protobuf))
+ ;;@ protobuf/Protobuf.java:18:13
+ (local $$instance (ref null $protobuf.Protobuf))
+ (block
+  ;; Protobuf $instance = new Protobuf.<init>(0);
+  ;;@ protobuf/Protobuf.java:18:13
+  (local.set $$instance (struct.new $protobuf.Protobuf (ref.as_non_null (global.get $protobuf.Protobuf.vtable)) (ref.as_non_null (global.get $protobuf.Protobuf.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ protobuf/Protobuf.java:18:13
+  (call $$ctor__void_$p_protobuf_Protobuf@protobuf.Protobuf (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ protobuf/Protobuf.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Protobuf.$ctor()
+(func $$ctor__void_$p_protobuf_Protobuf@protobuf.Protobuf
+ (param $this (ref null $protobuf.Protobuf))
+ ;;@ protobuf/Protobuf.java:18:13
+ (block
+  ;; protobuf.Protobuf.$clinit();
+  ;;@ protobuf/Protobuf.java:18:13
+  (call $$clinit__void@protobuf.Protobuf )
+  ;; Object.this.$ctor();
+  ;;@ protobuf/Protobuf.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Protobuf.test()
+(func $m_test__void@protobuf.Protobuf
+ (type $function.m_test__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ protobuf/Protobuf.java:19:14
+ (local $builder (ref null $protobuf.MyMessage.Builder))
+ (local $message (ref null $protobuf.MyMessage))
+ (local $defaultMessage (ref null $protobuf.MyMessage))
+ (local $this (ref null $protobuf.Protobuf))
+ (local.set $this (ref.cast_static $protobuf.Protobuf (local.get $this.untyped)))
+ (block
+  ;; Builder builder = protobuf.MyMessage.newBuilder();
+  ;;@ protobuf/Protobuf.java:20:4
+  (local.set $builder (call $m_newBuilder__protobuf_MyMessage_Builder@protobuf.MyMessage ))
+  ;; builder.setTestField(42);
+  ;;@ protobuf/Protobuf.java:21:4
+  (drop (call_ref (ref.as_non_null (local.get $builder))(i32.const 42)(struct.get $protobuf.MyMessage.Builder.vtable $m_setTestField__int__protobuf_MyMessage_Builder (struct.get $protobuf.MyMessage.Builder $vtable(local.get $builder)))))
+  ;; builder.getTestField();
+  ;;@ protobuf/Protobuf.java:23:4
+  (drop (call_ref (ref.as_non_null (local.get $builder))(struct.get $protobuf.MyMessage.Builder.vtable $m_getTestField__int (struct.get $protobuf.MyMessage.Builder $vtable(local.get $builder)))))
+  ;; MyMessage message = builder.build();
+  ;;@ protobuf/Protobuf.java:25:4
+  (local.set $message (call_ref (ref.as_non_null (local.get $builder))(struct.get $protobuf.MyMessage.Builder.vtable $m_build__protobuf_MyMessage (struct.get $protobuf.MyMessage.Builder $vtable(local.get $builder)))))
+  ;; message.getTestField();
+  ;;@ protobuf/Protobuf.java:26:4
+  (drop (call_ref (ref.as_non_null (local.get $message))(struct.get $protobuf.MyMessage.vtable $m_getTestField__int (struct.get $protobuf.MyMessage $vtable(local.get $message)))))
+  ;; MyMessage defaultMessage = protobuf.MyMessage.getDefaultInstance();
+  ;;@ protobuf/Protobuf.java:28:4
+  (local.set $defaultMessage (call $m_getDefaultInstance__protobuf_MyMessage@protobuf.MyMessage ))
+  ;; defaultMessage.getTestField();
+  ;;@ protobuf/Protobuf.java:29:4
+  (drop (call_ref (ref.as_non_null (local.get $defaultMessage))(struct.get $protobuf.MyMessage.vtable $m_getTestField__int (struct.get $protobuf.MyMessage $vtable(local.get $defaultMessage)))))
+ )
+)
+(elem declare func $m_test__void@protobuf.Protobuf)
+
+;;; void Protobuf.$clinit()
+(func $$clinit__void@protobuf.Protobuf
+ ;;@ protobuf/Protobuf.java:18:13
+ (block
+  ;; if (protobuf.Protobuf.$initialized) return;
+  ;;@ protobuf/Protobuf.java:18:13
+  (if (global.get $f_$initialized__protobuf_Protobuf)
+   (then
+    ;; return;
+    ;;@ protobuf/Protobuf.java:18:13
+    (return )
+   )
+  )
+  ;; (protobuf.Protobuf.$initialized = true);
+  ;;@ protobuf/Protobuf.java:18:13
+  (global.set $f_$initialized__protobuf_Protobuf (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ protobuf/Protobuf.java:18:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Protobuf.getClass()
+(func $m_getClass__java_lang_Class@protobuf.Protobuf
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $protobuf.Protobuf))
+ (local.set $this (ref.cast_static $protobuf.Protobuf (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getProtobuf.Protobuf();
+  (return (call $function.no.side.effects.$getProtobuf.Protobuf__java_lang_Class (ref.func $$getProtobuf.Protobuf__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@protobuf.Protobuf)

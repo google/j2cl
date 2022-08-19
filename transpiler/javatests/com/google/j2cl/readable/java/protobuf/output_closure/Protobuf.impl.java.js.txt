@@ -1,0 +1,54 @@
+goog.module('protobuf.Protobuf$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyMessage = goog.forwardDeclare('protobuf.MyMessage$impl');
+
+class Protobuf extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Protobuf} */
+ static $create__() {
+  Protobuf.$clinit();
+  let $instance = new Protobuf();
+  $instance.$ctor__protobuf_Protobuf__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__protobuf_Protobuf__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_test__void() {
+  let builder = MyMessage.m_newBuilder__protobuf_MyMessage_Builder();
+  builder.m_setTestField__int__protobuf_MyMessage_Builder(42);
+  builder.m_getTestField__int();
+  let message = builder.m_build__protobuf_MyMessage();
+  message.m_getTestField__int();
+  let defaultMessage = MyMessage.m_getDefaultInstance__protobuf_MyMessage();
+  defaultMessage.m_getTestField__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  Protobuf.$clinit = () =>{};
+  Protobuf.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Protobuf;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  MyMessage = goog.module.get('protobuf.MyMessage$impl');
+ }
+}
+$Util.$setClassMetadata(Protobuf, 'protobuf.Protobuf');
+
+exports = Protobuf;
+
+//# sourceMappingURL=Protobuf.js.map

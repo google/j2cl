@@ -17,25 +17,37 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptor
 
-internal fun isProtobufGetter(methodDescriptor: MethodDescriptor): Boolean {
+internal fun MethodDescriptor.isProtobufGetter(orSetter: Boolean = false): Boolean {
   if (
-    methodDescriptor.isStatic() ||
-      !methodDescriptor.getParameterDescriptors().isEmpty() ||
-      !isProtobufMessageOrBuilder(methodDescriptor.getEnclosingTypeDescriptor())
+    isStatic() ||
+      !getParameterDescriptors().isEmpty() ||
+      !getEnclosingTypeDescriptor().isProtobufMessageOrBuilder()
   ) {
     return false
   }
-  val name = methodDescriptor.name ?: ""
-  return name.startsWith("get") && name != "getDefaultInstance"
+  val name = name ?: ""
+  return (name.startsWith("get") && name != "getDefaultInstance") ||
+    (orSetter && name.startsWith("set"))
 }
 
-private fun isProtobufMessageOrBuilder(typeDescriptor: DeclaredTypeDescriptor): Boolean {
-  val superTypeDescriptor: DeclaredTypeDescriptor =
-    typeDescriptor.getSuperTypeDescriptor() ?: return false
+internal fun TypeDescriptor.isProtobufBuilder(): Boolean {
+  if (this !is DeclaredTypeDescriptor) {
+    return false
+  }
+  val superTypeDescriptor: DeclaredTypeDescriptor = getSuperTypeDescriptor() ?: return false
   val name = superTypeDescriptor.qualifiedSourceName
-  return name == "com.google.protobuf.GeneratedMessage" ||
-    name == "com.google.protobuf.GeneratedMessageLite" ||
-    name == "com.google.protobuf.GeneratedMessage.Builder" ||
+  return name == "com.google.protobuf.GeneratedMessage.Builder" ||
     name == "com.google.protobuf.GeneratedMessageLite.Builder"
 }
+
+private fun DeclaredTypeDescriptor.isProtobufMessage(): Boolean {
+  val superTypeDescriptor: DeclaredTypeDescriptor = getSuperTypeDescriptor() ?: return false
+  val name = superTypeDescriptor.qualifiedSourceName
+  return name == "com.google.protobuf.GeneratedMessage" ||
+    name == "com.google.protobuf.GeneratedMessageLite"
+}
+
+private fun DeclaredTypeDescriptor.isProtobufMessageOrBuilder() =
+  isProtobufMessage() || isProtobufBuilder()
