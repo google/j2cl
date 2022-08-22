@@ -19,15 +19,23 @@ package com.google.j2cl.transpiler.ast;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
-/**
- * Class for super reference.
- */
+/*** Class for super reference. */
 @Visitable
 public class SuperReference extends Expression {
   private final DeclaredTypeDescriptor typeDescriptor;
+  /**
+   * Whether the "super" keyword appears with a qualifier in the source. E.g. referencing the
+   * enclosing class instance.
+   */
+  private final boolean isQualified;
 
   public SuperReference(DeclaredTypeDescriptor typeDescriptor) {
+    this(typeDescriptor, false);
+  }
+
+  public SuperReference(DeclaredTypeDescriptor typeDescriptor, boolean isQualified) {
     this.typeDescriptor = typeDescriptor.toNonNullable();
+    this.isQualified = isQualified;
   }
 
   @Override
@@ -45,6 +53,10 @@ public class SuperReference extends Expression {
     return true;
   }
 
+  public boolean isQualified() {
+    return isQualified;
+  }
+
   @Override
   public boolean hasSideEffects() {
     return false;
@@ -57,7 +69,7 @@ public class SuperReference extends Expression {
 
   @Override
   public SuperReference clone() {
-    return new SuperReference(typeDescriptor);
+    return new SuperReference(typeDescriptor, isQualified);
   }
 
   @Override

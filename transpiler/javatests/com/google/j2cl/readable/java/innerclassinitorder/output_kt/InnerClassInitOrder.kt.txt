@@ -291,7 +291,7 @@ open class InnerClassInitOrder {
    open fun checkDispatchFromSub2(): kotlin.Int {
     return object : innerclassinitorder.InnerClassInitOrder.Outer(1) {
      open fun go(): kotlin.Int {
-      return this@OuterIsSuper.checkDispatch()
+      return super@OuterIsSuper.checkDispatch()
      }
     }.go()
    }

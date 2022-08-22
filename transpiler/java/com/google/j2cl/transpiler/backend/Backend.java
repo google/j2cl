@@ -422,10 +422,7 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
-      return ImmutableList.of(
-          ResolveImplicitInstanceQualifiers::new,
-          // TODO(b/214453506): Remove when super references have isQualified.
-          NormalizeSuperMethodCall::new);
+      return ImmutableList.of(ResolveImplicitInstanceQualifiers::new);
     }
 
     @Override

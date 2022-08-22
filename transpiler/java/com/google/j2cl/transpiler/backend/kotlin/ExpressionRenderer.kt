@@ -447,7 +447,9 @@ private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
 
 private fun Renderer.renderSuperReference(superReference: SuperReference) {
   render("super")
-  // TODO(b/214453506): Render optional qualifier
+  if (superReference.isQualified) {
+    renderLabelReference(superReference.typeDescriptor)
+  }
 }
 
 private fun Renderer.renderThisReference(thisReference: ThisReference) {

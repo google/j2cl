@@ -1085,20 +1085,26 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodBinding);
 
+      // Don't consider calls to default methods as qualified (to have the same representation
+      // as in kotlin). Only consider calls to be qualified if they are (potentially) targeting a
+      // method in an enclosing class.
+      boolean isQualified =
+          expression.getQualifier() != null && !methodDescriptor.isDefaultMethod();
+
       DeclaredTypeDescriptor qualifierTypeDescriptor;
-      if (expression.getQualifier() == null || methodDescriptor.isDefaultMethod()) {
-        // Call targeting a method in the super types.
-        qualifierTypeDescriptor = getCurrentType().getTypeDescriptor();
-      } else {
+      if (isQualified) {
         // This is a qualified super call, targeting an outer class method;
         checkArgument(expression.getQualifier() instanceof SimpleName);
         qualifierTypeDescriptor =
             environment.createDeclaredTypeDescriptor(
                 (ITypeBinding) expression.getQualifier().resolveBinding());
+      } else {
+        // Call targeting a method in the super types.
+        qualifierTypeDescriptor = getCurrentType().getTypeDescriptor();
       }
 
       return MethodCall.Builder.from(methodDescriptor)
-          .setQualifier(new SuperReference(qualifierTypeDescriptor))
+          .setQualifier(new SuperReference(qualifierTypeDescriptor, isQualified))
           .setArguments(
               convertArguments(methodBinding, JdtEnvironment.asTypedList(expression.arguments())))
           .setSourcePosition(getSourcePosition(expression))
