@@ -50,7 +50,6 @@ import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
@@ -270,18 +269,9 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
-  val methodDescriptor = expression.target
-  if (
-    isJavaLangObject(methodDescriptor.enclosingTypeDescriptor) &&
-      methodDescriptor.signature == "getClass()"
-  ) {
-    renderInParentheses { renderExpression(expression.qualifier) }
-    render("::class.javaObjectType")
-    return
-  }
-
   renderQualifier(expression)
 
+  val methodDescriptor = expression.target
   if (methodDescriptor.isProtobufGetter()) {
     renderIdentifier(KtInfo.computePropertyName(expression.target.name))
     return
