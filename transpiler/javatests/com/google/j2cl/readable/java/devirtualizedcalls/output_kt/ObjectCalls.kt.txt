@@ -10,23 +10,23 @@ open class ObjectCalls {
   `object`!!.equals(`object`)
   `object`!!.hashCode()
   `object`!!.toString()
-  (`object`!!)::class.java
+  (`object`!!)::class.javaObjectType
   val objectCalls: kotlin.Array<devirtualizedcalls.ObjectCalls?>? = kotlin.arrayOfNulls<devirtualizedcalls.ObjectCalls>(1)
   objectCalls!!.equals(objectCalls)
   objectCalls!!.hashCode()
   objectCalls!!.toString()
-  (objectCalls!!)::class.java
+  (objectCalls!!)::class.javaObjectType
  }
 
  open fun test() {
   this.equals(kotlin.Any())
   this.hashCode()
   this.toString()
-  (this)::class.java
+  (this)::class.javaObjectType
   this.equals(kotlin.Any())
   this.hashCode()
   this.toString()
-  (this)::class.java
+  (this)::class.javaObjectType
  }
 
  open fun testNotEquals(): kotlin.Boolean {

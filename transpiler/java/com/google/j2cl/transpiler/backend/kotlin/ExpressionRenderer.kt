@@ -235,7 +235,12 @@ private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
   renderTypeDescriptor(typeLiteral.referencedTypeDescriptor, TypeDescriptorUsage.QUALIFIED_NAME)
-  render("::class.java")
+  render("::class")
+  if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
+    render(".javaPrimitiveType")
+  } else {
+    render(".javaObjectType")
+  }
 }
 
 private fun Renderer.renderNumberLiteral(numberLiteral: NumberLiteral) {
@@ -271,7 +276,7 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
       methodDescriptor.signature == "getClass()"
   ) {
     renderInParentheses { renderExpression(expression.qualifier) }
-    render("::class.java")
+    render("::class.javaObjectType")
     return
   }
 

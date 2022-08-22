@@ -3,7 +3,24 @@ goog.module('classliteral.ClassLiteral$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Byte = goog.forwardDeclare('java.lang.Byte$impl');
+let Character = goog.forwardDeclare('java.lang.Character$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Short = goog.forwardDeclare('java.lang.Short$impl');
+let $$boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $$byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
+let $$char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
+let $$double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
+let $$float = goog.forwardDeclare('vmbootstrap.primitives.$float$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+let $$short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
+let $$void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 class ClassLiteral extends j_l_Object {
  /** @protected @nodts */
@@ -23,7 +40,58 @@ class ClassLiteral extends j_l_Object {
  }
  /** @nodts */
  m_main__void() {
-  let o = Class.$get(ClassLiteral);
+  let /** * */ o;
+  o = Class.$get($$void);
+  o = Class.$get($$boolean);
+  o = Class.$get($$boolean, 1);
+  o = Class.$get($$boolean, 2);
+  o = Class.$get(Boolean);
+  o = Class.$get(Boolean, 1);
+  o = Class.$get(Boolean, 2);
+  o = Class.$get($$char);
+  o = Class.$get($$char, 1);
+  o = Class.$get($$char, 2);
+  o = Class.$get(Character);
+  o = Class.$get(Character, 1);
+  o = Class.$get(Character, 2);
+  o = Class.$get($$byte);
+  o = Class.$get($$byte, 1);
+  o = Class.$get($$byte, 2);
+  o = Class.$get(Byte);
+  o = Class.$get(Byte, 1);
+  o = Class.$get(Byte, 2);
+  o = Class.$get($$short);
+  o = Class.$get($$short, 1);
+  o = Class.$get($$short, 2);
+  o = Class.$get(Short);
+  o = Class.$get(Short, 1);
+  o = Class.$get(Short, 2);
+  o = Class.$get($$int);
+  o = Class.$get($$int, 1);
+  o = Class.$get($$int, 2);
+  o = Class.$get(Integer);
+  o = Class.$get(Integer, 1);
+  o = Class.$get(Integer, 2);
+  o = Class.$get($$long);
+  o = Class.$get($$long, 1);
+  o = Class.$get($$long, 2);
+  o = Class.$get(Long);
+  o = Class.$get(Long, 1);
+  o = Class.$get(Long, 2);
+  o = Class.$get($$float);
+  o = Class.$get($$float, 1);
+  o = Class.$get($$float, 2);
+  o = Class.$get(Float);
+  o = Class.$get(Float, 1);
+  o = Class.$get(Float, 2);
+  o = Class.$get($$double);
+  o = Class.$get($$double, 1);
+  o = Class.$get($$double, 2);
+  o = Class.$get(Double);
+  o = Class.$get(Double, 1);
+  o = Class.$get(Double, 2);
+  o = Class.$get(ClassLiteral);
+  o = Class.$get(ClassLiteral, 1);
   o = Class.$get(ClassLiteral, 2);
  }
  /** @nodts */
@@ -39,7 +107,24 @@ class ClassLiteral extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  Byte = goog.module.get('java.lang.Byte$impl');
+  Character = goog.module.get('java.lang.Character$impl');
   Class = goog.module.get('java.lang.Class$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Long = goog.module.get('java.lang.Long$impl');
+  Short = goog.module.get('java.lang.Short$impl');
+  $$boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+  $$byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
+  $$char = goog.module.get('vmbootstrap.primitives.$char$impl');
+  $$double = goog.module.get('vmbootstrap.primitives.$double$impl');
+  $$float = goog.module.get('vmbootstrap.primitives.$float$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
+  $$short = goog.module.get('vmbootstrap.primitives.$short$impl');
+  $$void = goog.module.get('vmbootstrap.primitives.$void$impl');
  }
 }
 $Util.$setClassMetadata(ClassLiteral, 'classliteral.ClassLiteral');

@@ -18,7 +18,68 @@ package classliteral;
 public class ClassLiteral {
   @SuppressWarnings("unused")
   public void main() {
-    Object o = ClassLiteral.class;
+    Object o;
+
+    o = void.class;
+
+    o = boolean.class;
+    o = boolean[].class;
+    o = boolean[][].class;
+    o = Boolean.class;
+    o = Boolean[].class;
+    o = Boolean[][].class;
+
+    o = char.class;
+    o = char[].class;
+    o = char[][].class;
+    o = Character.class;
+    o = Character[].class;
+    o = Character[][].class;
+
+    o = byte.class;
+    o = byte[].class;
+    o = byte[][].class;
+    o = Byte.class;
+    o = Byte[].class;
+    o = Byte[][].class;
+
+    o = short.class;
+    o = short[].class;
+    o = short[][].class;
+    o = Short.class;
+    o = Short[].class;
+    o = Short[][].class;
+
+    o = int.class;
+    o = int[].class;
+    o = int[][].class;
+    o = Integer.class;
+    o = Integer[].class;
+    o = Integer[][].class;
+
+    o = long.class;
+    o = long[].class;
+    o = long[][].class;
+    o = Long.class;
+    o = Long[].class;
+    o = Long[][].class;
+
+    o = float.class;
+    o = float[].class;
+    o = float[][].class;
+    o = Float.class;
+    o = Float[].class;
+    o = Float[][].class;
+
+    o = double.class;
+    o = double[].class;
+    o = double[][].class;
+    o = Double.class;
+    o = Double[].class;
+    o = Double[][].class;
+
+    o = ClassLiteral.class;
+    o = ClassLiteral[].class;
     o = ClassLiteral[][].class;
   }
 }
