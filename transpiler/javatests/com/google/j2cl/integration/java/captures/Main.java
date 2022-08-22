@@ -33,6 +33,7 @@ public class Main {
     testOuterCapture();
     testOuterCapture_nested();
     testOuterCapture_indirect();
+    testOuterCapture_defaultMethodSuper();
     testCaptures_constructor();
     testCaptures_parent();
     testCaptures_anonymous();
@@ -399,9 +400,46 @@ public class Main {
   }
 
   public static void testCaptures_fieldReferences() {
-
     assertEquals(
         "InnerSuper", new FieldReferencesOuter().new Inner().new InnerInner().getImplicitText());
     assertEquals("Outer", new FieldReferencesOuter().new Inner().new InnerInner().getOuterText());
+  }
+
+  interface InterfaceWithDefaultMethod {
+    String realName();
+
+    default String name() {
+      return realName();
+    }
+  }
+
+  public static void testOuterCapture_defaultMethodSuper() {
+    abstract class SuperOuter implements InterfaceWithDefaultMethod {}
+
+    class Outer extends SuperOuter {
+      @Override
+      public String realName() {
+        return "Outer";
+      }
+
+      @Override
+      public String name() {
+        throw new AssertionError("Outer.name() should never be called.");
+      }
+
+      class Inner extends Outer {
+        @Override
+        public String realName() {
+          return "Inner";
+        }
+
+        public String outerName() {
+          return Outer.super.name();
+        }
+      }
+    }
+
+    // TODO(b/243073039): Uncomment when fixed.
+    // assertEquals("Outer", new Outer().new Inner().outerName());
   }
 }
