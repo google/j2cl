@@ -276,4 +276,23 @@ public class DefaultNullable {
     o.nonNullable.length();
     o.defaultNullability.length();
   }
+
+  // Wildcards
+  static void testListOfWildcard(List<?> l) {}
+
+  static void testListOfWildcardWithDefaultNullabilityObject(List<? extends Object> l) {}
+
+  static void testListOfWildcardWithNullableObject(List<? extends @Nullable Object> l) {}
+
+  static void testListOfWildcardWithNonNullObject(List<? extends @JsNonNull Object> l) {}
+
+  static void testListOfWildcardWithDefaultNullabilityStringt(List<? extends String> l) {}
+
+  static void testListOfWildcardWithNullableString(List<? extends @Nullable String> l) {}
+
+  static void testListOfWildcardWithNonNullString(List<? extends @JsNonNull String> l) {}
+
+  static <T> void testListOfWildcardWithDefaultNullabilityVariable(List<? extends T> l) {}
+
+  static <T> void testListOfWildcardWithNullableVariable(List<? extends @Nullable T> l) {}
 }

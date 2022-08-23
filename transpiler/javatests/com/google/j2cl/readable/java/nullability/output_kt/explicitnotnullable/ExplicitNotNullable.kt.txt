@@ -147,6 +147,33 @@ open class ExplicitNotNullable {
    o!!.nonNullable!!.length
    o!!.defaultNullability!!.length
   }
+
+  @kotlin.jvm.JvmStatic
+  fun testListOfWildcard(l: kotlin.collections.MutableList<*>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun testListOfWildcardWithDefaultNullabilityObject(l: kotlin.collections.MutableList<*>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun testListOfWildcardWithNullableObject(l: kotlin.collections.MutableList<*>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun testListOfWildcardWithNonNullObject(l: kotlin.collections.MutableList<*>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun testListOfWildcardWithDefaultNullabilityStringt(l: kotlin.collections.MutableList<*>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun testListOfWildcardWithNullableString(l: kotlin.collections.MutableList<*>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun testListOfWildcardWithNonNullString(l: kotlin.collections.MutableList<*>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun <T> testListOfWildcardWithDefaultNullabilityVariable(l: kotlin.collections.MutableList<*>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun <T> testListOfWildcardWithNullableVariable(l: kotlin.collections.MutableList<*>) {}
  }
 
  interface NullableBound<T: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<T>?> {}
