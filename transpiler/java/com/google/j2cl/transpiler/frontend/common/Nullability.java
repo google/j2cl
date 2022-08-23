@@ -24,6 +24,8 @@ public class Nullability {
 
   private static final ImmutableSet<String> RECOGNIZED_NULLABLE_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
+          // JsInterop nullable annotation.
+          "jsinterop.annotations.JsNullable",
           // Annotations defined by JSpecify.
           "org.jspecify.nullness.Nullable",
           "org.jspecify.nullness.NullnessUnspecified",

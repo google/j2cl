@@ -1,0 +1,17 @@
+load(
+    "//transpiler/javatests/com/google/j2cl/readable:readable_example.bzl",
+    "readable_example",
+)
+
+package(licenses = ["notice"])
+
+readable_example(
+    srcs = glob(["*.java"]),
+    # TODO(b/202428351): Support Generics in J2KT
+    # build_kt_readables = False,
+    experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = True,
+    deps = [
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:jspecify_annotations-j2cl",
+    ],
+)

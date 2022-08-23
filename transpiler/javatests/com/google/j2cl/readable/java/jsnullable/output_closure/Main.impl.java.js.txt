@@ -1,0 +1,76 @@
+goog.module('jsnullable.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+class Main extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {string} @nodts*/
+  this.f_f1__jsnullable_Main_;
+  /**@type {?string} @nodts*/
+  this.f_f2__jsnullable_Main_;
+  /**@type {!List<string>} @nodts*/
+  this.f_f4__jsnullable_Main_;
+  /**@type {List<string>} @nodts*/
+  this.f_f5__jsnullable_Main_;
+  /**@type {!List<?string>} @nodts*/
+  this.f_f6__jsnullable_Main_;
+  /**@type {!Array<?string>} @nodts*/
+  this.f_f9__jsnullable_Main_;
+  /**@type {Array<string>} @nodts*/
+  this.f_f10__jsnullable_Main_;
+ }
+ /** @nodts @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__jsnullable_Main__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsnullable_Main__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_jsnullable_Main();
+ }
+ /** @nodts @template T */
+ m_m__java_lang_Object__java_lang_Object__void_$p_jsnullable_Main(/** T */ t, /** T */ nullableT) {}
+ /** @private @nodts */
+ $init__void_$p_jsnullable_Main() {
+  this.f_f1__jsnullable_Main_ = 'Hello';
+  this.f_f2__jsnullable_Main_ = null;
+  this.f_f4__jsnullable_Main_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f5__jsnullable_Main_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f6__jsnullable_Main_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f9__jsnullable_Main_ = /**@type {!Array<?string>}*/ ($Arrays.$init([], j_l_String));
+  this.f_f10__jsnullable_Main_ = /**@type {!Array<?string>}*/ ($Arrays.$init([], j_l_String));
+ }
+ /** @nodts */
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(Main, 'jsnullable.Main');
+
+exports = Main;
+
+//# sourceMappingURL=Main.js.map
