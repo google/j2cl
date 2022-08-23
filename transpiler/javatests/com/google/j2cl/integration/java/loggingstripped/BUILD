@@ -8,6 +8,4 @@ package(licenses = ["notice"])
 integration_test(
     name = "loggingstripped",
     srcs = glob(["*.java"]),
-    # TODO(b/227424033): Reenable once the JRE logging APIs are available.
-    enable_kt_native = False,
 )
