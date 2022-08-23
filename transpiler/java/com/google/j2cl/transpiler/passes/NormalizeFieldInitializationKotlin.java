@@ -16,11 +16,14 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 
 /** Initializes non-final, nullable fields with explicit default value. */
 public class NormalizeFieldInitializationKotlin extends NormalizationPass {
@@ -31,19 +34,52 @@ public class NormalizeFieldInitializationKotlin extends NormalizationPass {
           @Override
           public Member rewriteField(Field field) {
             FieldDescriptor fieldDescriptor = field.getDescriptor();
+
+            // Final fields without initializer should be initialized on all constructor paths.
+            if (fieldDescriptor.isFinal() || field.hasInitializer()) {
+              return field;
+            }
+
             TypeDescriptor typeDescriptor = fieldDescriptor.getTypeDescriptor();
-            return fieldDescriptor.isFinal()
-                    || field.hasInitializer()
-                    || (!typeDescriptor.isPrimitive() && !typeDescriptor.isNullable())
-                ? field
-                : fieldWithDefaultInitializer(field);
+
+            // In Java, non-final primitive fields or reference fields which can have null value
+            // do not need to be initialized on all constructor paths, as they are implicitly
+            // initialized with fallback value.
+            // This is not the case in Kotlin, so we make it explicit.
+            if (typeDescriptor.isPrimitive() || instanceCanBeNull(typeDescriptor)) {
+              return fieldWithDefaultInitializer(field);
+            }
+
+            // Other fields are assumed to be initialized on all constructor paths.
+            return field;
           }
         });
   }
 
   private static Field fieldWithDefaultInitializer(Field field) {
+    TypeDescriptor typeDescriptor = field.getDescriptor().getTypeDescriptor();
+    Expression initializer = typeDescriptor.getDefaultValue();
     return Field.Builder.from(field)
-        .setInitializer(field.getDescriptor().getTypeDescriptor().getDefaultValue())
+        .setInitializer(
+            // Cast is necessary for non-null type variables.
+            typeDescriptor.isNullable()
+                ? initializer
+                : CastExpression.newBuilder()
+                    .setExpression(initializer)
+                    .setCastTypeDescriptor(typeDescriptor)
+                    .build())
         .build();
+  }
+
+  private static boolean instanceCanBeNull(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isNullable()) {
+      return true;
+    }
+
+    if (typeDescriptor instanceof TypeVariable) {
+      return ((TypeVariable) typeDescriptor).getUpperBoundTypeDescriptor().isNullable();
+    }
+
+    return false;
   }
 }

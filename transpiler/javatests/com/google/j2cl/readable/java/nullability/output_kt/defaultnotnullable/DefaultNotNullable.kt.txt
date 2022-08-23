@@ -180,9 +180,9 @@ open class DefaultNotNullable {
  open class ParameterizedDefaultNullability<N> {
   @kotlin.jvm.JvmField var nullable: N? = null
 
-  @kotlin.jvm.JvmField var nonNullable: N
+  @kotlin.jvm.JvmField var nonNullable: N = null as N
 
-  @kotlin.jvm.JvmField var defaultNullability: N
+  @kotlin.jvm.JvmField var defaultNullability: N = null as N
 
   constructor(n: N) {
    this.nonNullable = n
@@ -211,9 +211,9 @@ open class DefaultNotNullable {
  open class ParameterizedNullable<N> {
   @kotlin.jvm.JvmField var nullable: N? = null
 
-  @kotlin.jvm.JvmField var nonNullable: N
+  @kotlin.jvm.JvmField var nonNullable: N = null as N
 
-  @kotlin.jvm.JvmField var defaultNullability: N
+  @kotlin.jvm.JvmField var defaultNullability: N = null as N
 
   constructor(n: N) {
    this.nonNullable = n
