@@ -35,13 +35,9 @@ internal fun Renderer.renderWhereClause(typeVariables: List<TypeVariable>) {
 
 private val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
   get() =
-    upperBoundTypeDescriptor.run {
-      if (this is IntersectionTypeDescriptor) {
-        intersectionTypeDescriptors
-      } else {
-        listOf(this).filter { !TypeDescriptors.isJavaLangObject(it) || !it.isNullable }
-      }
-    }
+    upperBoundTypeDescriptor
+      .let { if (it is IntersectionTypeDescriptor) it.intersectionTypeDescriptors else listOf(it) }
+      .filter { !TypeDescriptors.isJavaLangObject(it) || !it.isNullable }
 
 private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
   renderName(typeVariable)
