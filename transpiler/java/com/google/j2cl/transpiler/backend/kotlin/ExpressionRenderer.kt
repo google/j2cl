@@ -236,7 +236,7 @@ private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
   renderQualifiedName(typeLiteral.referencedTypeDescriptor)
   render("::class")
   if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-    render(".javaPrimitiveType")
+    render(".javaPrimitiveType!!")
   } else {
     render(".javaObjectType")
   }
