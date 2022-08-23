@@ -13,13 +13,13 @@
 # limitations under the License.
 """Util funcs for running Blaze on int. tests in live  and j2size repo."""
 
+import bz2
 import getpass
 import multiprocessing
 import os
 import re
 import signal
 import subprocess
-import zlib
 
 INTEGRATION_ROOT = "transpiler/javatests/com/google/j2cl/integration/"
 OBFUSCATED_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:optimized_js%s"
@@ -161,7 +161,8 @@ def get_gzip_size(file_name):
   with open(file_name, "r") as f:
     # Drop closure license to reduce noise in size tests.
     contents = f.read().replace(CLOSURE_LICENSE, "")
-    compressed_content = zlib.compress(contents.encode("utf-8"), gzip_level)
+    # TODO(b/243470999): Switch back to gzip.
+    compressed_content = bz2.compress(contents.encode("utf-8"), gzip_level)
   return len(compressed_content)
 
 
