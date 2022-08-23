@@ -20,7 +20,6 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
-import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
@@ -30,9 +29,6 @@ import com.google.j2cl.transpiler.ast.TypeVariable.createWildcard
 enum class TypeDescriptorUsage {
   /** Type reference (RAW types are star-projected). */
   REFERENCE,
-
-  /** Qualified name. */
-  QUALIFIED_NAME,
 
   // TODO(b/206611912): Remove when TypeVariable provides correct nullability.
   /** Generic argument (type variables are rendered without nullability). */
@@ -48,10 +44,10 @@ internal fun Renderer.renderTypeDescriptor(
   asSimple: Boolean = false
 ) {
   when (typeDescriptor) {
-    is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor, usage)
+    is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
     is DeclaredTypeDescriptor ->
       renderDeclaredTypeDescriptor(typeDescriptor, usage, asSimple = asSimple)
-    is PrimitiveTypeDescriptor -> renderPrimitiveTypeDescriptor(typeDescriptor)
+    is PrimitiveTypeDescriptor -> renderQualifiedName(typeDescriptor)
     is TypeVariable -> renderTypeVariable(typeDescriptor, usage)
     is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
     else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
@@ -62,31 +58,15 @@ private fun Renderer.renderNullableSuffix(typeDescriptor: TypeDescriptor) {
   if (typeDescriptor.isNullable) render("?")
 }
 
-private fun Renderer.renderArrayTypeDescriptor(
-  arrayTypeDescriptor: ArrayTypeDescriptor,
-  usage: TypeDescriptorUsage
-) {
-  when (val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!) {
-    PrimitiveTypes.BOOLEAN -> render("kotlin.BooleanArray")
-    PrimitiveTypes.CHAR -> render("kotlin.CharArray")
-    PrimitiveTypes.BYTE -> render("kotlin.ByteArray")
-    PrimitiveTypes.SHORT -> render("kotlin.ShortArray")
-    PrimitiveTypes.INT -> render("kotlin.IntArray")
-    PrimitiveTypes.LONG -> render("kotlin.LongArray")
-    PrimitiveTypes.FLOAT -> render("kotlin.FloatArray")
-    PrimitiveTypes.DOUBLE -> render("kotlin.DoubleArray")
-    else -> {
-      render("kotlin.Array")
-      if (usage != TypeDescriptorUsage.QUALIFIED_NAME) {
-        renderInAngleBrackets {
-          renderTypeDescriptor(componentTypeDescriptor, usage = TypeDescriptorUsage.REFERENCE)
-        }
-      }
+private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDescriptor) {
+  renderQualifiedName(arrayTypeDescriptor)
+  val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
+  if (!componentTypeDescriptor.isPrimitive) {
+    renderInAngleBrackets {
+      renderTypeDescriptor(componentTypeDescriptor, usage = TypeDescriptorUsage.REFERENCE)
     }
   }
-  if (usage != TypeDescriptorUsage.QUALIFIED_NAME) {
-    renderNullableSuffix(arrayTypeDescriptor)
-  }
+  renderNullableSuffix(arrayTypeDescriptor)
 }
 
 private fun Renderer.renderDeclaredTypeDescriptor(
@@ -101,10 +81,11 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     renderIdentifier(typeDeclaration.ktSimpleName)
   } else if (enclosingTypeDescriptor != null) {
     // Render the enclosing type if present.
-    val enclosingUsage =
-      if (!typeDeclaration.isCapturingEnclosingInstance) TypeDescriptorUsage.QUALIFIED_NAME
-      else usage
-    renderDeclaredTypeDescriptor(enclosingTypeDescriptor.toNonNullable(), enclosingUsage)
+    if (!typeDeclaration.isCapturingEnclosingInstance) {
+      renderQualifiedName(enclosingTypeDescriptor)
+    } else {
+      renderDeclaredTypeDescriptor(enclosingTypeDescriptor.toNonNullable(), usage)
+    }
     render(".")
     renderIdentifier(typeDeclaration.ktSimpleName)
   } else {
@@ -116,10 +97,8 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     renderQualifiedName(qualifiedName)
   }
 
-  if (usage != TypeDescriptorUsage.QUALIFIED_NAME) {
-    renderArguments(declaredTypeDescriptor, usage)
-    renderNullableSuffix(declaredTypeDescriptor)
-  }
+  renderArguments(declaredTypeDescriptor, usage)
+  renderNullableSuffix(declaredTypeDescriptor)
 }
 
 internal fun Renderer.renderArguments(
@@ -162,25 +141,6 @@ private fun inferNonNullableBounds(
 ): TypeDescriptor =
   if (!typeParameter.upperBoundTypeDescriptor.isNullable) typeArgument.toNonNullable()
   else typeArgument
-
-private fun Renderer.renderPrimitiveTypeDescriptor(
-  primitiveTypeDescriptor: PrimitiveTypeDescriptor
-) {
-  render(
-    when (primitiveTypeDescriptor) {
-      PrimitiveTypes.VOID -> "kotlin.Unit"
-      PrimitiveTypes.BOOLEAN -> "kotlin.Boolean"
-      PrimitiveTypes.CHAR -> "kotlin.Char"
-      PrimitiveTypes.BYTE -> "kotlin.Byte"
-      PrimitiveTypes.SHORT -> "kotlin.Short"
-      PrimitiveTypes.INT -> "kotlin.Int"
-      PrimitiveTypes.LONG -> "kotlin.Long"
-      PrimitiveTypes.FLOAT -> "kotlin.Float"
-      PrimitiveTypes.DOUBLE -> "kotlin.Double"
-      else -> throw InternalCompilerError("Unhandled $primitiveTypeDescriptor")
-    }
-  )
-}
 
 private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, usage: TypeDescriptorUsage) {
   if (typeVariable.isWildcardOrCapture) {

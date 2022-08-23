@@ -233,7 +233,7 @@ private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
-  renderTypeDescriptor(typeLiteral.referencedTypeDescriptor, TypeDescriptorUsage.QUALIFIED_NAME)
+  renderQualifiedName(typeLiteral.referencedTypeDescriptor)
   render("::class")
   if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
     render(".javaPrimitiveType")
@@ -501,7 +501,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       if (ktCompanionQualifiedName != null) {
         renderQualifiedName(ktCompanionQualifiedName)
       } else {
-        renderTypeDescriptor(enclosingTypeDescriptor, TypeDescriptorUsage.QUALIFIED_NAME)
+        renderQualifiedName(enclosingTypeDescriptor)
       }
       render(".")
     }
