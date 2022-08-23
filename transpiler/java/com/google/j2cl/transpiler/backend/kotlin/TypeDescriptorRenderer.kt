@@ -150,8 +150,7 @@ private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, usage: TypeD
       renderTypeDescriptor(lowerBoundTypeDescriptor, TypeDescriptorUsage.REFERENCE)
     } else {
       val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
-      if (isJavaLangObject(boundTypeDescriptor)) {
-        // TODO(b/202428351): Render upper type bounds if necessary.
+      if (isJavaLangObject(boundTypeDescriptor) && boundTypeDescriptor.isNullable) {
         render("*")
       } else {
         render("out ")

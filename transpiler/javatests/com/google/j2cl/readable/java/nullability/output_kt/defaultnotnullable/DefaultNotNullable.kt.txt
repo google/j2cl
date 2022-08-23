@@ -149,31 +149,31 @@ open class DefaultNotNullable {
   }
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcard(l: kotlin.collections.MutableList<*>) {}
+  fun testListOfWildcard(l: kotlin.collections.MutableList<out kotlin.Any>) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardWithDefaultNullabilityObject(l: kotlin.collections.MutableList<*>) {}
+  fun testListOfWildcardWithDefaultNullabilityObject(l: kotlin.collections.MutableList<out kotlin.Any>) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardWithNullableObject(l: kotlin.collections.MutableList<*>) {}
+  fun testListOfWildcardWithNullableObject(l: kotlin.collections.MutableList<out kotlin.Any>) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardWithNonNullObject(l: kotlin.collections.MutableList<*>) {}
+  fun testListOfWildcardWithNonNullObject(l: kotlin.collections.MutableList<out kotlin.Any>) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardWithDefaultNullabilityStringt(l: kotlin.collections.MutableList<*>) {}
+  fun testListOfWildcardWithDefaultNullabilityStringt(l: kotlin.collections.MutableList<out kotlin.Any>) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardWithNullableString(l: kotlin.collections.MutableList<*>) {}
+  fun testListOfWildcardWithNullableString(l: kotlin.collections.MutableList<out kotlin.Any>) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardWithNonNullString(l: kotlin.collections.MutableList<*>) {}
+  fun testListOfWildcardWithNonNullString(l: kotlin.collections.MutableList<out kotlin.Any>) {}
 
   @kotlin.jvm.JvmStatic
-  fun <T> testListOfWildcardWithDefaultNullabilityVariable(l: kotlin.collections.MutableList<*>) {}
+  fun <T> testListOfWildcardWithDefaultNullabilityVariable(l: kotlin.collections.MutableList<out kotlin.Any>) {}
 
   @kotlin.jvm.JvmStatic
-  fun <T> testListOfWildcardWithNullableVariable(l: kotlin.collections.MutableList<*>) {}
+  fun <T> testListOfWildcardWithNullableVariable(l: kotlin.collections.MutableList<out kotlin.Any>) {}
  }
 
  interface ParameterizedInterface<T> {
