@@ -154,15 +154,13 @@ CLOSURE_LICENSE = """/*
 """
 
 
-def get_gzip_size(file_name):
+def get_compressed_size(file_name):
   if not os.path.exists(file_name):
     return -1
-  gzip_level = 6  # matches command line gzip
   with open(file_name, "r") as f:
     # Drop closure license to reduce noise in size tests.
     contents = f.read().replace(CLOSURE_LICENSE, "")
-    # TODO(b/243470999): Switch back to gzip.
-    compressed_content = bz2.compress(contents.encode("utf-8"), gzip_level)
+    compressed_content = bz2.compress(contents.encode("utf-8"))
   return len(compressed_content)
 
 

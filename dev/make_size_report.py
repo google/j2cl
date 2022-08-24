@@ -62,8 +62,8 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   original_total_size = 0
   modified_total_size = 0
-  original_total_size_gzip = 0
-  modified_total_size_gzip = 0
+  original_total_size_compressed = 0
+  modified_total_size_compressed = 0
   all_reports = []
 
   incremental_reports = []
@@ -71,18 +71,19 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
   for test_name in sorted(optimized_by_test_name.keys()):
     test = optimized_by_test_name.get(test_name)
     original_js_file, modified_js_file = get_files(test)
-    original_size_gzip = repo_util.get_gzip_size(original_js_file)
-    modified_size_gzip = repo_util.get_gzip_size(modified_js_file)
+    original_size_compressed = repo_util.get_compressed_size(original_js_file)
+    modified_size_compressed = repo_util.get_compressed_size(modified_js_file)
 
     existing_target = os.path.exists(original_js_file)
     if existing_target:
       modified_total_size += get_size(modified_js_file)
       original_total_size += get_size(original_js_file)
-      modified_total_size_gzip += modified_size_gzip
-      original_total_size_gzip += original_size_gzip
+      modified_total_size_compressed += modified_size_compressed
+      original_total_size_compressed += original_size_compressed
 
     all_reports.append(
-        create_report(test_name, original_size_gzip, modified_size_gzip))
+        create_report(test_name, original_size_compressed,
+                      modified_size_compressed))
 
     incremental = optimized_by_test_name.get("%s_inc%s%s" %
                                              test_name.partition("."))
@@ -103,15 +104,15 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   if modified_total_size != original_total_size:
     total_percent = (modified_total_size / float(original_total_size)) * 100
-    total_percent_gzip = (modified_total_size_gzip /
-                          float(original_total_size_gzip)) * 100
+    total_percent_compressed = (modified_total_size_compressed /
+                                float(original_total_size_compressed)) * 100
     size_report_file.write(
         "Total optimized size (of already existing tests) "
         "changed from\n  %s to %s bytes (100%%->%2.1f%%) and from\n  "
-        "%s to %s bytes (100%%->%2.1f%%) gzipped.\n" %
+        "%s to %s bytes (100%%->%2.1f%%) compressed.\n" %
         (original_total_size, modified_total_size, total_percent,
-         original_total_size_gzip, modified_total_size_gzip,
-         total_percent_gzip))
+         original_total_size_compressed, modified_total_size_compressed,
+         total_percent_compressed))
   else:
     size_report_file.write(
         "Total size (of already existing tests) did not change.\n")
@@ -132,7 +133,7 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   size_report_file.write("\n")
   size_report_file.write("\n")
-  size_report_file.write("Incremental size reports (non-gzip):\n")
+  size_report_file.write("Incremental size reports (non-compressed):\n")
   size_report_file.write("**************************************\n")
   print_table(size_report_file, incremental_reports)
 
