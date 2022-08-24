@@ -19,6 +19,7 @@ package javaemul.internal.ktstubs;
 import javaemul.internal.ktstubs.ProgressionIteratorsKt.CharProgressionIterator;
 import javaemul.internal.ktstubs.ProgressionIteratorsKt.IntProgressionIterator;
 import javaemul.internal.ktstubs.ProgressionIteratorsKt.LongProgressionIterator;
+import jsinterop.annotations.JsMethod;
 
 /**
  * Implementations of Kotlin progressions.
@@ -52,6 +53,8 @@ public final class ProgressionsKt {
       return step;
     }
 
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod(name = "m_iterator__kotlin_collections_CharIterator")
     public CharProgressionIterator iterator() {
       return new CharProgressionIterator(first, last, step);
     }
@@ -102,6 +105,8 @@ public final class ProgressionsKt {
       return step;
     }
 
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod(name = "m_iterator__kotlin_collections_IntIterator")
     public IntProgressionIterator iterator() {
       return new IntProgressionIterator(first, last, step);
     }
@@ -152,6 +157,8 @@ public final class ProgressionsKt {
       return step;
     }
 
+    @SuppressWarnings("unusable-by-js")
+    @JsMethod(name = "m_iterator__kotlin_collections_LongIterator")
     public LongProgressionIterator iterator() {
       return new LongProgressionIterator(first, last, step);
     }
