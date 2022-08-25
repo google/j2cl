@@ -439,7 +439,6 @@ public class Main {
       }
     }
 
-    // TODO(b/243073039): Uncomment when fixed.
-    // assertEquals("Outer", new Outer().new Inner().outerName());
+    assertEquals("Outer", new Outer().new Inner().outerName());
   }
 }
