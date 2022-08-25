@@ -20,18 +20,18 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 import java.util.function.Consumer;
 
 /**
- * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html">
- * the official Java API doc</a> for details.
+ * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html">the official Java
+ * API doc</a> for details.
  *
- * @param <E> element type
+ * @param <T> element type
  */
-public interface Iterator<E> {
+public interface Iterator<T> {
 
   boolean hasNext();
 
-  E next();
+  T next();
 
-  default void forEachRemaining(Consumer<? super E> consumer) {
+  default void forEachRemaining(Consumer<? super T> consumer) {
     checkNotNull(consumer);
     while (hasNext()) {
       consumer.accept(next());
