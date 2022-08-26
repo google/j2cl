@@ -1,0 +1,56 @@
+goog.module('nestedgenericclass.NestedGenericClass.RecursiveTypeVariable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NestedGenericClass = goog.forwardDeclare('nestedgenericclass.NestedGenericClass$impl');
+let Inner = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.RecursiveTypeVariable.Inner$impl');
+
+/**
+ * @template T, T_1
+ */
+class RecursiveTypeVariable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {NestedGenericClass<T_1>} @nodts*/
+  this.$outer_this__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable;
+ }
+ /** @nodts @template T, T_1 @return {!RecursiveTypeVariable<T, T_1>} */
+ static $create__nestedgenericclass_NestedGenericClass(/** NestedGenericClass<T_1> */ $outer_this) {
+  RecursiveTypeVariable.$clinit();
+  let $instance = new RecursiveTypeVariable();
+  $instance.$ctor__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable__nestedgenericclass_NestedGenericClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable__nestedgenericclass_NestedGenericClass__void(/** NestedGenericClass<T_1> */ $outer_this) {
+  this.$outer_this__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_test__void_$pp_nestedgenericclass() {
+  let t = null;
+  Inner.$create__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable(t);
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveTypeVariable.$clinit = () =>{};
+  RecursiveTypeVariable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecursiveTypeVariable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Inner = goog.module.get('nestedgenericclass.NestedGenericClass.RecursiveTypeVariable.Inner$impl');
+ }
+}
+$Util.$setClassMetadata(RecursiveTypeVariable, 'nestedgenericclass.NestedGenericClass$RecursiveTypeVariable');
+
+exports = RecursiveTypeVariable;
+
+//# sourceMappingURL=NestedGenericClass$RecursiveTypeVariable.js.map

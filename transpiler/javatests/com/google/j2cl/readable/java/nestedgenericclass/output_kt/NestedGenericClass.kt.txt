@@ -45,4 +45,13 @@ open class NestedGenericClass<T> {
    @kotlin.jvm.JvmField var d: T? = null
   }
  }
+
+ open inner class RecursiveTypeVariable<T: nestedgenericclass.NestedGenericClass<T>.RecursiveTypeVariable<T>?> {
+  open fun test() {
+   val t: T? = null
+   t!!.Inner()
+  }
+
+  open inner class Inner {}
+ }
 }
