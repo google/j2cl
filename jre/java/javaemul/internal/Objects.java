@@ -21,6 +21,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /** Provides devirtualized Object methods */
+@SuppressWarnings("unusable-by-js")
 @JsType(namespace = "vmbootstrap")
 class Objects {
 
