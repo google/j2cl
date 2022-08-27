@@ -59,7 +59,7 @@ fun Renderer.renderType(type: Type) {
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
   renderIdentifier(declaration.ktSimpleName)
-  declaration.renderedTypeParameterDescriptors
+  declaration.directlyDeclaredTypeParameterDescriptors
     .takeIf { it.isNotEmpty() && !it.any { it.isInferred } }
     ?.let { parameters -> renderTypeParameters(parameters) }
 }
@@ -138,11 +138,13 @@ private fun Renderer.renderEnumValues(type: Type) {
 }
 
 // TODO(b/216796920): Remove when the bug is fixed.
-internal val TypeDeclaration.renderedTypeParameterDescriptors: List<TypeVariable>
-  get() = typeParameterDescriptors.take(renderedTypeParameterCount)
+/** Type parameters declared directly on this type. */
+internal val TypeDeclaration.directlyDeclaredTypeParameterDescriptors: List<TypeVariable>
+  get() = typeParameterDescriptors.take(directlyDeclaredTypeParameterCount)
 
 // TODO(b/216796920): Remove when the bug is fixed.
-internal val TypeDeclaration.renderedTypeParameterCount: Int
+/** The number of type parameters declared directly on this type. */
+internal val TypeDeclaration.directlyDeclaredTypeParameterCount: Int
   get() {
     val enclosingInstanceTypeParameterCount =
       enclosingTypeDeclaration

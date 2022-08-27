@@ -41,12 +41,13 @@ enum class TypeDescriptorUsage {
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
   usage: TypeDescriptorUsage,
+  seenTypeDescriptors: Set<DeclaredTypeDescriptor> = setOf(),
   asSimple: Boolean = false
 ) {
   when (typeDescriptor) {
     is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
     is DeclaredTypeDescriptor ->
-      renderDeclaredTypeDescriptor(typeDescriptor, usage, asSimple = asSimple)
+      renderDeclaredTypeDescriptor(typeDescriptor, usage, seenTypeDescriptors, asSimple = asSimple)
     is PrimitiveTypeDescriptor -> renderQualifiedName(typeDescriptor)
     is TypeVariable -> renderTypeVariable(typeDescriptor, usage)
     is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
@@ -72,7 +73,8 @@ private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDes
 private fun Renderer.renderDeclaredTypeDescriptor(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
   usage: TypeDescriptorUsage,
-  asSimple: Boolean = false
+  seenTypeDescriptors: Set<DeclaredTypeDescriptor>,
+  asSimple: Boolean
 ) {
   val typeDeclaration = declaredTypeDescriptor.typeDeclaration
   val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
@@ -84,7 +86,12 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     if (!typeDeclaration.isCapturingEnclosingInstance) {
       renderQualifiedName(enclosingTypeDescriptor)
     } else {
-      renderDeclaredTypeDescriptor(enclosingTypeDescriptor.toNonNullable(), usage)
+      renderDeclaredTypeDescriptor(
+        enclosingTypeDescriptor.toNonNullable(),
+        usage,
+        seenTypeDescriptors,
+        asSimple = false
+      )
     }
     render(".")
     renderIdentifier(typeDeclaration.ktSimpleName)
@@ -97,35 +104,35 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     renderQualifiedName(qualifiedName)
   }
 
-  renderArguments(declaredTypeDescriptor, usage)
+  renderTypeArguments(declaredTypeDescriptor, usage, seenTypeDescriptors)
   renderNullableSuffix(declaredTypeDescriptor)
 }
 
-internal fun Renderer.renderArguments(
+private fun Renderer.renderTypeArguments(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
-  usage: TypeDescriptorUsage
+  usage: TypeDescriptorUsage,
+  seenTypeDescriptors: Set<DeclaredTypeDescriptor>
 ) {
-  val parameters = declaredTypeDescriptor.typeDeclaration.renderedTypeParameterDescriptors
+  val seenTypeDescriptorsForArguments = seenTypeDescriptors + declaredTypeDescriptor
+  val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
+  val projectBounds = usage == TypeDescriptorUsage.SUPER_TYPE
   val arguments =
-    declaredTypeDescriptor.renderedTypeArgumentDescriptors(
-      projectBounds = usage == TypeDescriptorUsage.SUPER_TYPE
-    )
+    typeArgumentDescriptors(declaredTypeDescriptor, projectBounds, seenTypeDescriptorsForArguments)
   if (arguments.isNotEmpty()) {
     if (usage != TypeDescriptorUsage.SUPER_TYPE || !arguments.any { it.isInferred }) {
-      renderTypeArguments(parameters, arguments)
+      renderTypeArguments(parameters, arguments, seenTypeDescriptorsForArguments)
     }
-  } else if (parameters.isNotEmpty()) {
-    renderInAngleBrackets { renderCommaSeparated(parameters) { render("*") } }
   }
 }
 
 internal fun Renderer.renderTypeArguments(
   typeParameters: List<TypeVariable>,
-  typeArguments: List<TypeDescriptor>
+  typeArguments: List<TypeDescriptor>,
+  seenTypeDescriptors: Set<DeclaredTypeDescriptor> = setOf()
 ) {
   renderInAngleBrackets {
     renderCommaSeparated(inferNonNullableBounds(typeParameters, typeArguments)) {
-      renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT)
+      renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT, seenTypeDescriptors)
     }
   }
 }
@@ -184,38 +191,44 @@ private fun Renderer.renderIntersectionTypeDescriptor(
  * Returns type argument descriptors for rendering. RAW types will use projected arguments, using
  * wildcards or bounds if {@code projectBounds} flag is {@code true}.
  */
-private fun DeclaredTypeDescriptor.renderedTypeArgumentDescriptors(
-  projectBounds: Boolean
+private fun Renderer.typeArgumentDescriptors(
+  typeDescriptor: DeclaredTypeDescriptor,
+  projectBounds: Boolean,
+  seenTypeDescriptors: Set<DeclaredTypeDescriptor>
 ): List<TypeDescriptor> {
-  val parameters = typeDeclaration.renderedTypeParameterDescriptors
-  val arguments = renderedTypeArgumentDescriptors
+  val parameters = typeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
+  val arguments = typeDescriptor.directlyDeclaredTypeArgumentDescriptors
 
   // Return original arguments for non-raw types.
   val isRaw = arguments.isEmpty() && parameters.isNotEmpty()
   if (!isRaw) return arguments
 
   // Convert type arguments to variables.
-  val typeDescriptor = toUnparameterizedTypeDescriptor()
+  val unparametrizedTypeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor()
 
   // Find variables which will be projected to bounds, others will be projected to wildcards.
-  val variablesProjectedToBounds =
-    if (projectBounds) typeDescriptor.typeArgumentDescriptors.map { it as TypeVariable }.toSet()
+  val boundProjectedVariables =
+    if (projectBounds)
+      unparametrizedTypeDescriptor.typeArgumentDescriptors.map { it as TypeVariable }.toSet()
     else setOf()
 
   // Replace variables with bounds or wildcards.
   val projectedTypeDescriptor =
-    typeDescriptor.specializeTypeVariables { variable ->
-      if (variablesProjectedToBounds.contains(variable))
-        variable.upperBoundTypeDescriptor.toRawTypeDescriptor()
-      else createWildcard()
+    unparametrizedTypeDescriptor.specializeTypeVariables { variable ->
+      val upperBound = variable.upperBoundTypeDescriptor.toRawTypeDescriptor()
+      val isRecursive =
+        upperBound is DeclaredTypeDescriptor && seenTypeDescriptors.contains(upperBound)
+      val projectToBounds = boundProjectedVariables.contains(variable) && !isRecursive
+      if (projectToBounds) upperBound else createWildcard()
     }
 
   return projectedTypeDescriptor.typeArgumentDescriptors
 }
 
 // TODO(b/216796920): Remove when the bug is fixed.
-private val DeclaredTypeDescriptor.renderedTypeArgumentDescriptors: List<TypeDescriptor>
-  get() = typeArgumentDescriptors.take(typeDeclaration.renderedTypeParameterCount)
+/** Type arguments declared directly on this type. */
+private val DeclaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors: List<TypeDescriptor>
+  get() = typeArgumentDescriptors.take(typeDeclaration.directlyDeclaredTypeParameterCount)
 
 internal val TypeDescriptor.isInferred
   get() =

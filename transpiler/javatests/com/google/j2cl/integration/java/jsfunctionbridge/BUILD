@@ -8,6 +8,7 @@ package(licenses = ["notice"])
 integration_test(
     name = "jsfunctionbridge",
     srcs = glob(["*.java"]),
+    # TODO(b/243113496): Support RAW types.
     enable_kt = False,
     suppress = ["JSC_TYPE_MISMATCH"],
     deps = [

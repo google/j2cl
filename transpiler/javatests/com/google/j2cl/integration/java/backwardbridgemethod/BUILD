@@ -8,6 +8,6 @@ package(licenses = ["notice"])
 integration_test(
     name = "backwardbridgemethod",
     srcs = glob(["*.java"]),
-    # TODO(b/202428351): Generics support
+    # TODO(b/243113496): Support RAW types.
     enable_kt = False,
 )
