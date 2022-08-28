@@ -78,7 +78,6 @@ function createImportObject(userImports) {
     'Math.tanh': Math.tanh,
     'Number.toPrecision': (/** number */ n, /** number */ p) =>
         n.toPrecision(p),
-    'Date.now': Date.now,
     'Character.toLowerCase': charToLowerCase,
     'Character.toUpperCase': charToUpperCase,
     'Character.foldCase': charFoldCase,
@@ -106,10 +105,46 @@ function createImportObject(userImports) {
     'setBufferAt': (buffer, index, value) => buffer[index] = value,
     'getBufferAt': (buffer, index) => buffer[index],
 
+    // Date
+    'Date.now': Date.now,
+    'Date.UTC':
+        (/** number */ year, /** number */ month, /** number */ dayOfMonth,
+         /** number */ hours, /** number */ minutes, /** number */ seconds,
+         /** number */ millis) =>
+            Date.UTC(year, month, dayOfMonth, hours, minutes, seconds, millis),
+    'Date.parse': (/** string */ dateString) => Date.parse(dateString),
+    'Date.create': (...args) => new Date(...args),
+    'Date.getDate': (/** !Date */ date) => date.getDate(),
+    'Date.getDay': (/** !Date */ date) => date.getDay(),
+    'Date.getFullYear': (/** !Date */ date) => date.getFullYear(),
+    'Date.getHours': (/** !Date */ date) => date.getHours(),
+    'Date.getMilliseconds': (/** !Date */ date) => date.getMilliseconds(),
+    'Date.getMinutes': (/** !Date */ date) => date.getMinutes(),
+    'Date.getMonth': (/** !Date */ date) => date.getMonth(),
+    'Date.getSeconds': (/** !Date */ date) => date.getSeconds(),
+    'Date.getTime': (/** !Date */ date) => date.getTime(),
+    'Date.getTimezoneOffset': (/** !Date */ date) => date.getTimezoneOffset(),
+    'Date.getUTCDate': (/** !Date */ date) => date.getUTCDate(),
+    'Date.getUTCFullYear': (/** !Date */ date) => date.getUTCFullYear(),
+    'Date.getUTCHours': (/** !Date */ date) => date.getUTCHours(),
+    'Date.getUTCMinutes': (/** !Date */ date) => date.getUTCMinutes(),
+    'Date.getUTCMonth': (/** !Date */ date) => date.getUTCMonth(),
+    'Date.getUTCSeconds': (/** !Date */ date) => date.getUTCSeconds(),
+    'Date.toLocaleString': (/** !Date */ date) => date.toLocaleString(),
+    'Date.setDate': (/** !Date */ date, /** number */ dayOfMonth) =>
+        void date.setDate(dayOfMonth),
+    'Date.setFullYear': dateSetFullYear,
+    'Date.setHours': dateSetHours,
+    'Date.setMinutes': (/** !Date */ date, /** number */ minutes) =>
+        void date.setMinutes(minutes),
+    'Date.setMonth': (/** !Date */ date, /** number */ month) =>
+        void date.setMonth(month),
+    'Date.setSeconds': (/** !Date */ date, /** number */ seconds) =>
+        void date.setSeconds(seconds),
+    'Date.setTime': (/** !Date */ date, /** number */ milliseconds) =>
+        void date.setTime(milliseconds),
 
     // The following are declared in the JRE but unimplemented for now.
-    'Date.UTC': unimplemented,
-    'Date.parse': unimplemented,
     'Error.captureStackTrace': unimplemented,
     'Object.getPrototypeOf': unimplemented,
     'Object.keys': unimplemented,
@@ -148,6 +183,22 @@ function charToUpperCase(value) {
  */
 function charFoldCase(value) {
   return String.fromCharCode(value).toUpperCase().toLowerCase().charCodeAt(0);
+}
+
+/**
+ * @param {!Date} date
+ * @param {...number} dateParts
+ */
+function dateSetFullYear(date, ...dateParts) {
+  date.setFullYear(...dateParts);
+}
+
+/**
+ * @param {!Date} date
+ * @param {...number} timeParts
+ */
+function dateSetHours(date, ...timeParts) {
+  date.setHours(...timeParts);
 }
 
 /**
