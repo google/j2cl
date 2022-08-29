@@ -6,7 +6,7 @@ import kotlin.jvm.*
 
 open class Main {
  open fun testInterfaceMembers() {
-  val i: interfaces.Main.Interface<*>? = Implementor()
+  val i: interfaces.Main.Interface<kotlin.Any?>? = Implementor() as interfaces.Main.Interface<kotlin.Any?>?
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
   interfaces.Main.Interface.staticInterfaceMethod()

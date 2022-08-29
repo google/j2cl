@@ -8,7 +8,7 @@ open class Main {
  companion object {
   @kotlin.jvm.JvmStatic
   fun test() {
-   val a: bridgejsmethod.Main.A<*>? = bridgejsmethod.Main.A<kotlin.Int?>()
+   val a: bridgejsmethod.Main.A<kotlin.Any?>? = bridgejsmethod.Main.A<kotlin.Int?>() as bridgejsmethod.Main.A<kotlin.Any?>?
    a!!.`fun`(kotlin.Int.valueOf(1))
    a!!.bar(kotlin.Int.valueOf(1))
    val b: bridgejsmethod.Main.B? = bridgejsmethod.Main.B()

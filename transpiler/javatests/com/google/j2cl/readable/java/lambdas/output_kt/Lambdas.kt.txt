@@ -187,7 +187,7 @@ open class Lambdas {
     return@JsSupplier kotlin.Int.valueOf(1)
    }
    stringJsSupplier!!.get()
-   val equals: lambdas.Lambdas.Equals<*>? = stringJsSupplier
+   val equals: lambdas.Lambdas.Equals<kotlin.Any?>? = stringJsSupplier as lambdas.Lambdas.Equals<kotlin.Any?>?
    equals!!.equals(null)
    equals!!.get()
   }

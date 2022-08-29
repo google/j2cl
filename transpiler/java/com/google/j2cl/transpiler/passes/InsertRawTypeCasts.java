@@ -21,8 +21,8 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
-/** Inserts explicit cast from RAW to non-RAW types. */
-public final class RemoveCastsToRawTypes extends NormalizationPass {
+/** Inserts explicit cast between RAW and non-RAW types. */
+public final class InsertRawTypeCasts extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -33,7 +33,7 @@ public final class RemoveCastsToRawTypes extends NormalizationPass {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
-                return expression.getTypeDescriptor().isRaw() && !inferredTypeDescriptor.isRaw()
+                return expression.getTypeDescriptor().isRaw() != inferredTypeDescriptor.isRaw()
                     ? convertToCastExpression(expression, inferredTypeDescriptor)
                     : expression;
               }

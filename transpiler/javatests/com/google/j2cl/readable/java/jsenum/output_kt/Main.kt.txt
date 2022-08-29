@@ -25,7 +25,7 @@ open class Main {
      break@SWITCH
     } while (false)
    } while (false)
-   val comparable: kotlin.Comparable<*>? = comparableJsEnum
+   val comparable: kotlin.Comparable<kotlin.Any?>? = comparableJsEnum as kotlin.Comparable<kotlin.Any?>?
    comparableJsEnum = comparable as jsenum.Main.ComparableJsEnum?
    var intJsEnum: jsenum.Main.IntJsEnum? = if (jsenum.Main.IntJsEnum.ELEVEN.getValue() === 10) jsenum.Main.IntJsEnum.ELEVEN else null
    SWITCH_1@ do {

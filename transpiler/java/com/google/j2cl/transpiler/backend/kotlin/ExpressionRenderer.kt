@@ -208,7 +208,7 @@ private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOf
   } else {
     renderTypeDescriptor(
       instanceOfExpression.testTypeDescriptor.toNonNullable(),
-      TypeDescriptorUsage.REFERENCE
+      TypeDescriptorUsage.INSTANCE_OF
     )
   }
 }

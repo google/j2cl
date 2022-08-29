@@ -35,7 +35,10 @@ enum class TypeDescriptorUsage {
   ARGUMENT,
 
   /** Super-type declaration (RAW types are projected to bounds). */
-  SUPER_TYPE
+  SUPER_TYPE,
+
+  /** The type in instanceof expression. */
+  INSTANCE_OF
 }
 
 internal fun Renderer.renderTypeDescriptor(
@@ -115,7 +118,13 @@ private fun Renderer.renderTypeArguments(
 ) {
   val seenTypeDescriptorsForArguments = seenTypeDescriptors + declaredTypeDescriptor
   val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
-  val projectBounds = usage == TypeDescriptorUsage.SUPER_TYPE
+  val projectBounds =
+    when (usage) {
+      TypeDescriptorUsage.SUPER_TYPE,
+      TypeDescriptorUsage.REFERENCE -> true
+      TypeDescriptorUsage.INSTANCE_OF,
+      TypeDescriptorUsage.ARGUMENT -> false
+    }
   val arguments =
     typeArgumentDescriptors(declaredTypeDescriptor, projectBounds, seenTypeDescriptorsForArguments)
   if (arguments.isNotEmpty()) {

@@ -67,10 +67,10 @@ open class IntersectionTypeTest<U> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun method2(): intersectiontype.Cmp2<*>? {
+  fun method2(): intersectiontype.Cmp2<kotlin.Any?>? {
    return intersectiontype.Cmp2<kotlin.Any?> { a: kotlin.Int ->
     return@Cmp2 1
-   } as intersectiontype.Cmp2<*>? /* & intersectiontype.Serial? */
+   } as intersectiontype.Cmp2<kotlin.Any?>?
   }
 
   @kotlin.jvm.JvmStatic
