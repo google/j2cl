@@ -125,6 +125,7 @@ import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityKotlin;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
+import com.google.j2cl.transpiler.passes.RemoveCastsToRawTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
@@ -467,6 +468,7 @@ public enum Backend {
           InsertNotNullAssertions::new,
           InsertCastsOnNullabilityMismatch::new,
           InsertExplicitArrayCoercionCasts::new,
+          RemoveCastsToRawTypes::new,
 
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,

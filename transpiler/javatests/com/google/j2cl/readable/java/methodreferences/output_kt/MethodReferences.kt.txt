@@ -117,7 +117,7 @@ open class MethodReferences<T> {
 
  open inner class ObjectCapturingOuter {
   open fun getMain(): methodreferences.MethodReferences<T>? {
-   return this@MethodReferences
+   return this@MethodReferences as methodreferences.MethodReferences<T>?
   }
  }
 

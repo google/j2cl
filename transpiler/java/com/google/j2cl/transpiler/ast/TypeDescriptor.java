@@ -194,6 +194,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   @Nullable
   public abstract TypeDescriptor toRawTypeDescriptor();
 
+  /** Returns whether this is a raw type. */
+  public boolean isRaw() {
+    return false;
+  }
+
   /**
    * Returns a reference to the JavaScript constructor to be used for array marking, instanceof and
    * casts. In most cases it the underlying JavaScript constructor for the class but not in all

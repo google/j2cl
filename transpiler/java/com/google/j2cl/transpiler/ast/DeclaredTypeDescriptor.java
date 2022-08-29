@@ -251,6 +251,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
+  public boolean isRaw() {
+    return !getTypeDeclaration().getTypeParameterDescriptors().isEmpty()
+        && getTypeArgumentDescriptors().isEmpty();
+  }
+
+  @Override
   public DeclaredTypeDescriptor toUnparameterizedTypeDescriptor() {
     return getTypeDeclaration().toUnparameterizedTypeDescriptor();
   }
