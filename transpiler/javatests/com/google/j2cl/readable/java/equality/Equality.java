@@ -42,6 +42,7 @@ public class Equality {
     {
       boolean f = null != new Object();
       boolean g = new Object() != null;
+      boolean h = null != new int[0];
     }
   }
 }

@@ -76,6 +76,7 @@
  (local $e i32)
  (local $f i32)
  (local $g i32)
+ (local $h i32)
  (local $this (ref null $equality.Equality))
  (local.set $this (ref.cast_static $equality.Equality (local.get $this.untyped)))
  (block
@@ -109,6 +110,9 @@
    ;; boolean g = !javaemul.internal.Platform.isNull(java.lang.Object.$create());
    ;;@ equality/Equality.java:44:6
    (local.set $g (i32.eqz (ref.is_null (call $$create__@java.lang.Object ))))
+   ;; boolean h = !javaemul.internal.Platform.isNull(javaemul.internal.WasmArray.OfInt.$create(0));
+   ;;@ equality/Equality.java:45:6
+   (local.set $h (i32.eqz (ref.is_null (call $$create__int@javaemul.internal.WasmArray.OfInt (i32.const 0)))))
   )
  )
 )
