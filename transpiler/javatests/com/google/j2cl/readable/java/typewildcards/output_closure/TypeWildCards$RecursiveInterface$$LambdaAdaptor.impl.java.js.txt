@@ -1,0 +1,49 @@
+goog.module('typewildcards.TypeWildCards.RecursiveInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const RecursiveInterface = goog.require('typewildcards.TypeWildCards.RecursiveInterface$impl');
+
+/**
+ * @template T, C
+ * @implements {RecursiveInterface<T, C>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():T} @nodts*/
+  this.f_fn__typewildcards_TypeWildCards_RecursiveInterface_$LambdaAdaptor;
+  this.$ctor__typewildcards_TypeWildCards_RecursiveInterface_$LambdaAdaptor__typewildcards_TypeWildCards_RecursiveInterface_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__typewildcards_TypeWildCards_RecursiveInterface_$LambdaAdaptor__typewildcards_TypeWildCards_RecursiveInterface_$JsFunction__void(/** ?function():T */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__typewildcards_TypeWildCards_RecursiveInterface_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {T} */
+ m_m__typewildcards_TypeWildCards_RecursiveInterface() {
+  let /** ?function():T */ $function;
+  return ($function = this.f_fn__typewildcards_TypeWildCards_RecursiveInterface_$LambdaAdaptor, $function());
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+RecursiveInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'typewildcards.TypeWildCards$RecursiveInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=TypeWildCards$RecursiveInterface$$LambdaAdaptor.js.map

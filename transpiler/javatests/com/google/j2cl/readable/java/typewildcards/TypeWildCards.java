@@ -102,4 +102,17 @@ public class TypeWildCards {
   public void testRecursiveGeneric() {
     takesRecursiveGeneric(new Foo());
   }
+
+  interface RecursiveInterface<T extends RecursiveInterface<T, C>, C> {
+    T m();
+  }
+
+  public static <C> C testInferredIntersectionWithTypeVariable(
+      RecursiveInterface<? extends C, C> ri) {
+    // This creates an intersection type "C & RecursiveInterface" by using C in both parameters.
+    // That type surfaces as the bound of a capture due to unifying the return C with ri.m() which
+    // adds the type equation C = ? extends C and makes C = RecursiveInterface<C, C> through the
+    // type variable T = C & RecursiveInterface<C, C>.
+    return ri.m();
+  }
 }

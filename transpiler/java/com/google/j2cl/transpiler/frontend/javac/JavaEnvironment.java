@@ -1053,11 +1053,9 @@ class JavaEnvironment {
   }
 
   private TypeDescriptor createIntersectionType(IntersectionClassType intersectionType) {
-    ImmutableList<DeclaredTypeDescriptor> intersectedTypeDescriptors =
+    ImmutableList<TypeDescriptor> intersectedTypeDescriptors =
         createTypeDescriptors(
-            intersectionType.getBounds(),
-            /* inNullMarkedScope= */ false,
-            DeclaredTypeDescriptor.class);
+            intersectionType.getBounds(), /* inNullMarkedScope= */ false, TypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
         .build();

@@ -53,9 +53,14 @@ public final class LambdaAdaptorTypeDescriptors {
     DeclaredTypeDescriptor jsFunctionInterface =
         createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
 
+    // Lambdas that implement several types, e.g. from an intersection cast, require that all
+    // those types be declared type descriptors.
     List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
         typeDescriptor.isIntersection()
-            ? ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors()
+            ? ((IntersectionTypeDescriptor) typeDescriptor)
+                .getIntersectionTypeDescriptors().stream()
+                    .map(DeclaredTypeDescriptor.class::cast)
+                    .collect(toImmutableList())
             : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
 
     ImmutableList<TypeDescriptor> typeArgumentDescriptors =

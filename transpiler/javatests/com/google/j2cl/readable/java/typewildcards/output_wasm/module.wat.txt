@@ -34,6 +34,9 @@
 ;;; Code for typewildcards.TypeWildCards.Foo [static fields]
 (global $f_$initialized__typewildcards_TypeWildCards_Foo (mut i32) (i32.const 0))
 
+;;; Code for typewildcards.TypeWildCards.RecursiveInterface [static fields]
+(global $f_$initialized__typewildcards_TypeWildCards_RecursiveInterface (mut i32) (i32.const 0))
+
 ;;; Code for typewildcards.GenericType [vtable.init]
 (global $typewildcards.GenericType.vtable (ref $typewildcards.GenericType.vtable) 
  (struct.new $typewildcards.GenericType.vtable
@@ -435,6 +438,21 @@
  )
 )
 (elem declare func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards)
+
+;;; C TypeWildCards.testInferredIntersectionWithTypeVariable(RecursiveInterface<? extends C, C> ri)
+(func $m_testInferredIntersectionWithTypeVariable__typewildcards_TypeWildCards_RecursiveInterface__java_lang_Object@typewildcards.TypeWildCards
+ (param $ri (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ typewildcards/TypeWildCards.java:110:22
+ (block
+  ;; typewildcards.TypeWildCards.$clinit();
+  ;;@ typewildcards/TypeWildCards.java:111:45
+  (call $$clinit__void@typewildcards.TypeWildCards )
+  ;; return ri.m();
+  ;;@ typewildcards/TypeWildCards.java:116:4
+  (return (call_ref (ref.as_non_null (local.get $ri))(struct.get $typewildcards.TypeWildCards.RecursiveInterface.vtable $m_m__typewildcards_TypeWildCards_RecursiveInterface (ref.cast_static $typewildcards.TypeWildCards.RecursiveInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $ri)) (i32.const -1))) )))
+ )
+)
 
 ;;; void TypeWildCards.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards
@@ -1112,3 +1130,39 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Foo)
+
+;;; Code for typewildcards.TypeWildCards.RecursiveInterface [INTERFACE]
+(type $typewildcards.TypeWildCards.RecursiveInterface.vtable (struct_subtype 
+ (field $m_m__typewildcards_TypeWildCards_RecursiveInterface (ref $function.m_m__typewildcards_TypeWildCards_RecursiveInterface))
+  data)
+)
+
+;;; void RecursiveInterface.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.RecursiveInterface
+ ;;@ typewildcards/TypeWildCards.java:106:12
+ (block
+  ;; if (typewildcards.TypeWildCards.RecursiveInterface.$initialized) return;
+  ;;@ typewildcards/TypeWildCards.java:106:12
+  (if (global.get $f_$initialized__typewildcards_TypeWildCards_RecursiveInterface)
+   (then
+    ;; return;
+    ;;@ typewildcards/TypeWildCards.java:106:12
+    (return )
+   )
+  )
+  ;; (typewildcards.TypeWildCards.RecursiveInterface.$initialized = true);
+  ;;@ typewildcards/TypeWildCards.java:106:12
+  (global.set $f_$initialized__typewildcards_TypeWildCards_RecursiveInterface (i32.const 1))
+ )
+)
+
+;;; Class<?> RecursiveInterface.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.RecursiveInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.RecursiveInterface();
+  (return (call $function.no.side.effects.$getTypewildcards.TypeWildCards.RecursiveInterface__java_lang_Class (ref.func $$getTypewildcards.TypeWildCards.RecursiveInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.RecursiveInterface)

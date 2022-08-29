@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
-  public abstract ImmutableList<DeclaredTypeDescriptor> getIntersectionTypeDescriptors();
+  public abstract ImmutableList<TypeDescriptor> getIntersectionTypeDescriptors();
 
   @Override
   @Memoized
@@ -48,7 +48,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public DeclaredTypeDescriptor toRawTypeDescriptor() {
+  public TypeDescriptor toRawTypeDescriptor() {
     return getFirstType().toRawTypeDescriptor();
   }
 
@@ -60,7 +60,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
    * the necessary casts when accessing members the other types in the intersection type.
    */
   @Memoized
-  public DeclaredTypeDescriptor getFirstType() {
+  public TypeDescriptor getFirstType() {
     return getIntersectionTypeDescriptors().get(0);
   }
 
@@ -73,9 +73,9 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   @Override
   @Memoized
   public DeclaredTypeDescriptor getFunctionalInterface() {
-    return getIntersectionTypeDescriptors()
-        .stream()
-        .filter(DeclaredTypeDescriptor::isFunctionalInterface)
+    return getIntersectionTypeDescriptors().stream()
+        .filter(TypeDescriptor::isFunctionalInterface)
+        .map(DeclaredTypeDescriptor.class::cast)
         .findFirst()
         .orElse(null);
   }
@@ -123,7 +123,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return synthesizeIntersectionName(TypeDescriptor::getReadableDescription);
   }
 
-  private String synthesizeIntersectionName(Function<DeclaredTypeDescriptor, String> nameFunction) {
+  private String synthesizeIntersectionName(Function<TypeDescriptor, String> nameFunction) {
     return getIntersectionTypeDescriptors().stream()
         .map(nameFunction)
         .collect(joining("&", "(", ")"));
@@ -138,7 +138,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(
             getIntersectionTypeDescriptors().stream()
-                .map(DeclaredTypeDescriptor::toNullable)
+                .map(TypeDescriptor::toNullable)
                 .collect(toImmutableList()))
         .build();
   }
@@ -152,7 +152,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(
             getIntersectionTypeDescriptors().stream()
-                .map(DeclaredTypeDescriptor::toNullable)
+                .map(TypeDescriptor::toNullable)
                 .collect(toImmutableList()))
         .build();
   }
@@ -166,8 +166,8 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
-    ImmutableList<DeclaredTypeDescriptor> intersections = getIntersectionTypeDescriptors();
-    ImmutableList<DeclaredTypeDescriptor> newIntersections =
+    ImmutableList<TypeDescriptor> intersections = getIntersectionTypeDescriptors();
+    ImmutableList<TypeDescriptor> newIntersections =
         replaceTypeDescriptors(intersections, fn, seen);
     if (!intersections.equals(newIntersections)) {
       return newBuilder().setIntersectionTypeDescriptors(newIntersections).build();
@@ -201,8 +201,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   @AutoValue.Builder
   public abstract static class Builder {
 
-    public abstract Builder setIntersectionTypeDescriptors(
-        Iterable<DeclaredTypeDescriptor> components);
+    public abstract Builder setIntersectionTypeDescriptors(Iterable<TypeDescriptor> components);
 
     abstract IntersectionTypeDescriptor autoBuild();
 

@@ -1007,9 +1007,8 @@ class JdtEnvironment {
       ITypeBinding typeBinding, boolean inNullMarkedScope) {
     // Intersection types created with this method only occur in method bodies, default nullability
     // can be ignored.
-    ImmutableList<DeclaredTypeDescriptor> intersectedTypeDescriptors =
-        createTypeDescriptors(
-            typeBinding.getTypeBounds(), inNullMarkedScope, DeclaredTypeDescriptor.class);
+    ImmutableList<TypeDescriptor> intersectedTypeDescriptors =
+        createTypeDescriptors(typeBinding.getTypeBounds(), inNullMarkedScope, TypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
         .build();

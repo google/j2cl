@@ -65,6 +65,13 @@
 [foo] => [foo] "foo"
 [testRecursiveGeneric] => [m_testRecursiveGeneric__void]
 [takesRecursiveGeneric(new Foo());] => [TypeWildCards.m_takesRecursiveGeneric__typewildcards_GenericType__void(Foo.$create__typewildcards_TypeWildCards(this));] "typewildcards.TypeWildCards.testRecursiveGeneric"
+[testInferredIntersectionWithTypeVariable] => [m_testInferredIntersectionWithTypeVariable__typewildcards_TypeWildCards_RecursiveInterface__java_lang_Object]
+[ri] => [ri] "ri"
+[{
+    // This creates an intersection type "C & RecursiveInterface" by using C in both parameters.
+...    return ri.m();
+  }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testInferredIntersectionWithTypeVariable"
+[return ri.m();] => [return ri.m_m__typewildcards_TypeWildCards_RecursiveInterface();] "typewildcards.TypeWildCards.testInferredIntersectionWithTypeVariable"
 [TypeWildCards] => [$clinit]
 [TypeWildCards] => [TypeWildCards.$clinit = () =>{};] "typewildcards.TypeWildCards.<clinit>"
 [TypeWildCards] => [TypeWildCards.$loadModules();] "typewildcards.TypeWildCards.<clinit>"

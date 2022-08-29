@@ -11,6 +11,7 @@ let A = goog.forwardDeclare('typewildcards.TypeWildCards.A$impl');
 let Foo = goog.forwardDeclare('typewildcards.TypeWildCards.Foo$impl');
 let HasKey = goog.forwardDeclare('typewildcards.TypeWildCards.HasKey$impl');
 let IntegerSupplier = goog.forwardDeclare('typewildcards.TypeWildCards.IntegerSupplier$impl');
+let RecursiveInterface = goog.forwardDeclare('typewildcards.TypeWildCards.RecursiveInterface$impl');
 let Y = goog.forwardDeclare('typewildcards.TypeWildCards.Y$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -77,6 +78,11 @@ class TypeWildCards extends j_l_Object {
  /** @nodts */
  m_testRecursiveGeneric__void() {
   TypeWildCards.m_takesRecursiveGeneric__typewildcards_GenericType__void(Foo.$create__typewildcards_TypeWildCards(this));
+ }
+ /** @nodts @template C @return {C} */
+ static m_testInferredIntersectionWithTypeVariable__typewildcards_TypeWildCards_RecursiveInterface__java_lang_Object(/** RecursiveInterface<?, C> */ ri) {
+  TypeWildCards.$clinit();
+  return ri.m_m__typewildcards_TypeWildCards_RecursiveInterface();
  }
  /** @nodts */
  static $clinit() {

@@ -1,0 +1,43 @@
+goog.module('typewildcards.TypeWildCards.RecursiveInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('typewildcards.TypeWildCards.RecursiveInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T, C
+ */
+class RecursiveInterface {
+ /** @abstract @nodts @return {T} */
+ m_m__typewildcards_TypeWildCards_RecursiveInterface() {}
+ /** @nodts @template T, C @return {RecursiveInterface<T, C>} */
+ static $adapt(/** ?function():T */ fn) {
+  RecursiveInterface.$clinit();
+  return /**@type {!$LambdaAdaptor<T, C>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveInterface.$clinit = () =>{};
+  RecursiveInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__typewildcards_TypeWildCards_RecursiveInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__typewildcards_TypeWildCards_RecursiveInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('typewildcards.TypeWildCards.RecursiveInterface.$LambdaAdaptor$impl');
+ }
+}
+RecursiveInterface.$markImplementor(/**@type {Function}*/ (RecursiveInterface));
+$Util.$setClassMetadataForInterface(RecursiveInterface, 'typewildcards.TypeWildCards$RecursiveInterface');
+
+exports = RecursiveInterface;
+
+//# sourceMappingURL=TypeWildCards$RecursiveInterface.js.map
