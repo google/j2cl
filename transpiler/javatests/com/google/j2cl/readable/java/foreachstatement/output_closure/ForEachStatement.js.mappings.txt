@@ -72,10 +72,10 @@
 [s] => [s] "s"
 [IterableReturningTypeVariable<?> anotherIterable = null;] => [let anotherIterable = null;] "foreachstatement.ForEachStatement.testTypeVariable"
 [anotherIterable] => [anotherIterable] "anotherIterable"
-[for (int s : anotherIterable) {}] => [for (let $iterator_1 = /**@type {Iterator<!Integer>}*/ (anotherIterable.m_iterator__java_util_Iterator()); /**@type {Iterator}*/ ($iterator_1).m_hasNext__boolean(); ) {
-   let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();
+[for (int s : anotherIterable) {}] => [for (let $iterator_1 = /**@type {Iterator<!Integer>}*/ (anotherIterable.m_iterator__java_util_Iterator()); /**@type {!Iterator<!Integer>}*/ ($iterator_1).m_hasNext__boolean(); ) {
+   let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {!Iterator<!Integer>}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();
   }] "foreachstatement.ForEachStatement.testTypeVariable"
-[for (int s : anotherIterable) {}] => [let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();] "foreachstatement.ForEachStatement.testTypeVariable"
+[for (int s : anotherIterable) {}] => [let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {!Iterator<!Integer>}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();] "foreachstatement.ForEachStatement.testTypeVariable"
 [s] => [s_1] "s"
 [ForEachStatement] => [$clinit]
 [ForEachStatement] => [ForEachStatement.$clinit = () =>{};] "foreachstatement.ForEachStatement.<clinit>"

@@ -69,8 +69,8 @@ class ForEachStatement extends j_l_Object {
    let s = /**@type {?string}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), j_l_String));
   }
   let anotherIterable = null;
-  for (let $iterator_1 = /**@type {Iterator<!Integer>}*/ (anotherIterable.m_iterator__java_util_Iterator()); /**@type {Iterator}*/ ($iterator_1).m_hasNext__boolean(); ) {
-   let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();
+  for (let $iterator_1 = /**@type {Iterator<!Integer>}*/ (anotherIterable.m_iterator__java_util_Iterator()); /**@type {!Iterator<!Integer>}*/ ($iterator_1).m_hasNext__boolean(); ) {
+   let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {!Iterator<!Integer>}*/ ($iterator_1).m_next__java_lang_Object(), Integer)).m_intValue__int();
   }
  }
  /** @nodts */

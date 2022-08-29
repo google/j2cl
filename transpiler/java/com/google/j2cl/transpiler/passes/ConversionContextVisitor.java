@@ -31,10 +31,12 @@ import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldDeclarationStatement;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
@@ -364,13 +366,27 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Nullable
   private Expression rewriteInstanceQualifier(
       Expression qualifier, MemberDescriptor memberDescriptor) {
-    if (qualifier == null) {
+    if (memberDescriptor.isStatic() || qualifier == null) {
       return qualifier;
     }
 
+    DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
+    DeclaredTypeDescriptor declaredEnclosingTypeDescriptor =
+        memberDescriptor.getDeclarationDescriptor().getEnclosingTypeDescriptor();
+    if (memberDescriptor.isConstructor()) {
+      if (!enclosingTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
+        return qualifier;
+      }
+      // This is a constuctor call of an inner class; hence the qualifier type is the enclosing
+      // class of the class where the method is defined.
+      enclosingTypeDescriptor = enclosingTypeDescriptor.getEnclosingTypeDescriptor();
+      declaredEnclosingTypeDescriptor =
+          declaredEnclosingTypeDescriptor.getEnclosingTypeDescriptor();
+    }
+
     return contextRewriter.rewriteMemberQualifierContext(
-        memberDescriptor.getEnclosingTypeDescriptor().toNonNullable(),
-        memberDescriptor.getDeclarationDescriptor().getEnclosingTypeDescriptor().toNonNullable(),
+        enclosingTypeDescriptor.toNonNullable(),
+        declaredEnclosingTypeDescriptor.toNonNullable(),
         qualifier);
   }
 
@@ -551,6 +567,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || statement instanceof Block
         || statement instanceof BreakStatement
         || statement instanceof ContinueStatement
+        || statement instanceof FieldDeclarationStatement
         || statement instanceof TryStatement
         || statement instanceof LabeledStatement
         || statement instanceof LocalClassDeclarationStatement) {

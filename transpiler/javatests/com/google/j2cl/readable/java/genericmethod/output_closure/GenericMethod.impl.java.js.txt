@@ -89,15 +89,15 @@ class GenericMethod extends j_l_Object {
  static m_testErasureCast_wildcard__void() {
   GenericMethod.$clinit();
   let list = null;
-  let content = /**@type {Container<Content>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
+  let content = /**@type {Content}*/ (/**@type {Container<Content>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(content);
   let nestedWildcardList = null;
-  let nestedContent = /**@type {Container}*/ (/**@type {SuperContainer<Container>}*/ ($Casts.$to(nestedWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
+  let nestedContent = /**@type {Content}*/ (/**@type {!Container<Content>}*/ (/**@type {SuperContainer<Container>}*/ ($Casts.$to(nestedWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(nestedContent);
   let deepWildcardList = null;
-  let deepContent = /**@type {SuperContainer<Container<?>>}*/ ($Casts.$to(deepWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
+  let deepContent = /**@type {Content}*/ (/**@type {SuperContainer<Container<?>>}*/ ($Casts.$to(deepWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(deepContent.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(deepContent);
  }
@@ -105,15 +105,15 @@ class GenericMethod extends j_l_Object {
  static m_testErasureCast_typeVariable__void() {
   GenericMethod.$clinit();
   let list = null;
-  let content = /**@type {Container<C>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
+  let content = /**@type {Content}*/ (/**@type {Container<C>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(content);
   let nestedTypeVariableList = null;
-  let nestedContent = /**@type {Container}*/ (/**@type {SuperContainer<CT>}*/ ($Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
+  let nestedContent = /**@type {Content}*/ (/**@type {!Container<C>}*/ (/**@type {SuperContainer<CT>}*/ ($Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(nestedContent);
   let deepTypeVariableList = null;
-  let deepContent = /**@type {SuperContainer<Container<C>>}*/ ($Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod();
+  let deepContent = /**@type {Content}*/ (/**@type {SuperContainer<Container<C>>}*/ ($Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(deepContent.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(deepContent);
  }

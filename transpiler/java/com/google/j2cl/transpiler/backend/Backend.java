@@ -54,12 +54,12 @@ import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
 import com.google.j2cl.transpiler.passes.InsertCastOnArrayAccess;
 import com.google.j2cl.transpiler.passes.InsertCastOnNewInstances;
 import com.google.j2cl.transpiler.passes.InsertCastsOnNullabilityMismatch;
-import com.google.j2cl.transpiler.passes.InsertCastsToTypeBounds;
 import com.google.j2cl.transpiler.passes.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.transpiler.passes.InsertExceptionConversions;
 import com.google.j2cl.transpiler.passes.InsertExplicitArrayCoercionCasts;
 import com.google.j2cl.transpiler.passes.InsertExplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.InsertIntegerCoercions;
+import com.google.j2cl.transpiler.passes.InsertJsDocCastsToTypeBounds;
 import com.google.j2cl.transpiler.passes.InsertJsEnumBoxingAndUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsKotlin;
@@ -257,16 +257,19 @@ public enum Backend {
           NormalizeInstanceOfs::new,
           NormalizeEquality::new,
           NormalizeStaticNativeMemberReferences::new,
-          NormalizeJsVarargs::new,
-          NormalizeArrayCreations::new,
-          InsertExceptionConversions::new,
-          NormalizeLiterals::new,
 
           // Needs to run after passes that do code synthesis are run so that it handles the
           // synthesize code as well.
           // TODO(b/35241823): Revisit this pass if jscompiler adds a way to express constraints
           // to template variables.
-          InsertCastsToTypeBounds::new,
+          InsertJsDocCastsToTypeBounds::new,
+
+          // NormalizeJsVarargs breaks the invariants for running ConversionContextVisitor
+          // related passes.
+          NormalizeJsVarargs::new,
+          NormalizeArrayCreations::new,
+          InsertExceptionConversions::new,
+          NormalizeLiterals::new,
 
           // TODO(b/72652198): remove the temporary fix once switch to JSCompiler's type
           // checker.
