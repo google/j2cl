@@ -3,7 +3,6 @@ goog.module('rawtype.RawType$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Bound = goog.forwardDeclare('rawtype.RawType.Bound$impl');
 let BoundRecursively = goog.forwardDeclare('rawtype.RawType.BoundRecursively$impl');
 let Unbound = goog.forwardDeclare('rawtype.RawType.Unbound$impl');
@@ -12,8 +11,12 @@ class RawType extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {(Comparable|boolean|number|string)} @nodts*/
-  this.f_c__rawtype_RawType;
+  /**@type {Unbound} @nodts*/
+  this.f_rawUnbound__rawtype_RawType;
+  /**@type {Bound} @nodts*/
+  this.f_rawBound__rawtype_RawType;
+  /**@type {BoundRecursively} @nodts*/
+  this.f_rawBoundRecursively__rawtype_RawType;
  }
  /** @nodts @return {!RawType} */
  static $create__() {
@@ -25,12 +28,13 @@ class RawType extends j_l_Object {
  /** @nodts */
  $ctor__rawtype_RawType__void() {
   this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_rawtype_RawType();
  }
- /** @nodts */
- m_test__void_$pp_rawtype() {
-  let unbound = /**@type {!Unbound}*/ (Unbound.$create__());
-  let bound = /**@type {!Bound}*/ (Bound.$create__());
-  let boundRecursively = /**@type {!BoundRecursively}*/ (BoundRecursively.$create__rawtype_RawType(this));
+ /** @private @nodts */
+ $init__void_$p_rawtype_RawType() {
+  this.f_rawUnbound__rawtype_RawType = /**@type {!Unbound}*/ (Unbound.$create__());
+  this.f_rawBound__rawtype_RawType = /**@type {!Bound}*/ (Bound.$create__());
+  this.f_rawBoundRecursively__rawtype_RawType = /**@type {!BoundRecursively}*/ (BoundRecursively.$create__());
  }
  /** @nodts */
  static $clinit() {

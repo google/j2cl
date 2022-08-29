@@ -17,26 +17,22 @@ package rawtype;
 
 @SuppressWarnings("rawtypes")
 class RawType {
-  Comparable c;
-
-  interface I<T extends RawType> {
-    default void f(T t) {}
-  }
+  Unbound rawUnbound = new Unbound();
+  Bound rawBound = new Bound();
+  BoundRecursively rawBoundRecursively = new BoundRecursively();
 
   static class Unbound<T> {}
 
   static class Bound<T extends RawType> {}
 
-  class BoundRecursively<T extends BoundRecursively<T>> {}
+  static class BoundRecursively<T extends BoundRecursively<T>> {}
 
-  static class RawSubclass implements I {
-    @Override
-    public void f(RawType t) {}
+  interface GenericSuperclass<T extends RawType> {
+    default void f(T t) {}
   }
 
-  void test() {
-    Unbound unbound = new Unbound();
-    Bound bound = new Bound();
-    BoundRecursively boundRecursively = new BoundRecursively();
+  static class RawSubclass implements GenericSuperclass {
+    @Override
+    public void f(RawType t) {}
   }
 }

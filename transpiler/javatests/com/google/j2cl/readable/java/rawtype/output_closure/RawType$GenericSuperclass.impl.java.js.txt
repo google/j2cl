@@ -1,0 +1,40 @@
+goog.module('rawtype.RawType.GenericSuperclass$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RawType = goog.forwardDeclare('rawtype.RawType$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class GenericSuperclass {
+ /** @abstract @nodts */
+ m_f__rawtype_RawType__void(/** T */ t) {}
+ /** @nodts @template T */
+ static m_f__$default__rawtype_RawType_GenericSuperclass__rawtype_RawType__void(/** !GenericSuperclass<T> */ $thisArg, /** T */ t) {
+  GenericSuperclass.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  GenericSuperclass.$clinit = () =>{};
+  GenericSuperclass.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__rawtype_RawType_GenericSuperclass = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__rawtype_RawType_GenericSuperclass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+GenericSuperclass.$markImplementor(/**@type {Function}*/ (GenericSuperclass));
+$Util.$setClassMetadataForInterface(GenericSuperclass, 'rawtype.RawType$GenericSuperclass');
+
+exports = GenericSuperclass;
+
+//# sourceMappingURL=RawType$GenericSuperclass.js.map
