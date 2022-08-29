@@ -833,13 +833,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       MethodDescriptor bridgeMethodDescriptor,
       MethodDescriptor targetMethodDescriptor) {
 
-    MethodDescriptor bridgeOrigin = bridgeMethodDescriptor.getDeclarationDescriptor();
-
-    return MethodDescriptor.Builder.from(adjustReturn(origin, targetMethodDescriptor, bridgeOrigin))
+    return MethodDescriptor.Builder.from(
+            adjustReturn(origin, targetMethodDescriptor, bridgeMethodDescriptor))
         .setJsInfo(bridgeMethodDescriptor.getJsInfo())
         .setEnclosingTypeDescriptor(this)
         .setDeclarationDescriptor(null)
-        .makeBridge(origin, bridgeOrigin, targetMethodDescriptor)
+        .makeBridge(origin, bridgeMethodDescriptor, targetMethodDescriptor)
         .setFinal(bridgeMethodDescriptor.isGeneralizingdBridge())
         .build();
   }
@@ -856,7 +855,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    * considered "!java.lang.Integer" or "int". To resolve this ambiguity we need to see what is the
    * contract implemented by the bridge origin, which is the one that provides the mangled name.
    */
-  // TODO(b/234498715): Extend to parameters when primitive bridges are fully implemented.
+  // TODO(b/234498715): Extend to parameters when primitive bridges are fully implemented. Consider
+  // whether it is better to just forward getParameters/getReturnType to the bridge descriptor,
+  // like we forward getManglingDescriptor, or whether always override parameters/return on
+  // construction of bridges.
   private MethodDescriptor adjustReturn(
       MethodOrigin origin, MethodDescriptor targetMethodDescriptor, MethodDescriptor bridgeOrigin) {
     if (origin != MethodOrigin.GENERALIZING_BRIDGE) {
@@ -864,7 +866,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       return targetMethodDescriptor;
     }
     if (bridgeOrigin.getReturnTypeDescriptor().isPrimitive()
-        && !targetMethodDescriptor.getReturnTypeDescriptor().isPrimitive()) {
+        != targetMethodDescriptor.getReturnTypeDescriptor().isPrimitive()) {
       return targetMethodDescriptor.transform(
           builder -> builder.setReturnTypeDescriptor(bridgeOrigin.getReturnTypeDescriptor()));
     }
