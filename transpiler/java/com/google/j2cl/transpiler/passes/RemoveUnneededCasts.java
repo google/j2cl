@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SuperReference;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -163,9 +164,7 @@ public class RemoveUnneededCasts extends NormalizationPass {
       boolean fieldHasNoSideEffect = !fieldAccess.getTarget().isStatic();
       return fieldHasNoSideEffect || hasNoSideEffects(fieldAccess.getQualifier());
     }
-    return expression instanceof ThisReference
-        || expression instanceof SuperReference
-        || expression instanceof VariableReference;
+    return expression instanceof ThisOrSuperReference || expression instanceof VariableReference;
   }
 
   // Note: This is not optimal since it continues iterating through all subnodes without stopping

@@ -59,10 +59,9 @@ import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
-import com.google.j2cl.transpiler.ast.ThisReference;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -433,8 +432,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         // jsdoc casts
         || expression instanceof JsDocCastExpression
         // references
-        || expression instanceof ThisReference
-        || expression instanceof SuperReference
+        || expression instanceof ThisOrSuperReference
         || expression instanceof VariableReference) {
       // These expressions do not need rewriting.
       return expression;

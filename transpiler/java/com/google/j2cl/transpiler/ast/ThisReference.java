@@ -19,59 +19,20 @@ package com.google.j2cl.transpiler.ast;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
-/**
- * Class for this reference.
- */
+/** Class for this reference. */
 @Visitable
-public class ThisReference extends Expression {
-  private final DeclaredTypeDescriptor typeDescriptor;
-  /**
-   * Whether the "this" keyword appeard with a qualifier in the source. E.g. referencing the
-   * enclosing class instance.
-   */
-  private final boolean isQualified;
-
+public class ThisReference extends ThisOrSuperReference {
   public ThisReference(DeclaredTypeDescriptor typeDescriptor) {
     this(typeDescriptor, false);
   }
 
   public ThisReference(DeclaredTypeDescriptor typeDescriptor, boolean isQualified) {
-    this.typeDescriptor = typeDescriptor.toNonNullable();
-    this.isQualified = isQualified;
-  }
-
-  @Override
-  public DeclaredTypeDescriptor getTypeDescriptor() {
-    return typeDescriptor;
-  }
-
-  @Override
-  public boolean isIdempotent() {
-    return true;
-  }
-
-  @Override
-  public boolean isEffectivelyInvariant() {
-    return true;
-  }
-
-  public boolean isQualified() {
-    return isQualified;
-  }
-
-  @Override
-  public boolean hasSideEffects() {
-    return false;
-  }
-
-  @Override
-  public Precedence getPrecedence() {
-    return Precedence.HIGHEST;
+    super(typeDescriptor, isQualified);
   }
 
   @Override
   public ThisReference clone() {
-    return new ThisReference(typeDescriptor, isQualified);
+    return new ThisReference(getTypeDescriptor(), isQualified());
   }
 
   @Override

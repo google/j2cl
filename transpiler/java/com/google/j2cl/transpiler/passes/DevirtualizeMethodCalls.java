@@ -23,8 +23,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.SuperReference;
-import com.google.j2cl.transpiler.ast.ThisReference;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
@@ -98,8 +97,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
             // up calling back onto the version of the method on the prototype (aka the wrong one).
             // Also as an optimization we do not perform devirtualization on 'this' method calls as
             // the trampoline is not necessary.
-            if (methodCall.getQualifier() instanceof SuperReference
-                || methodCall.getQualifier() instanceof ThisReference) {
+            if (methodCall.getQualifier() instanceof ThisOrSuperReference) {
               return methodCall;
             }
 

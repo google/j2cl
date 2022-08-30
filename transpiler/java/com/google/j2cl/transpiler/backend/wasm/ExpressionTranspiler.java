@@ -46,8 +46,7 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.SuperReference;
-import com.google.j2cl.transpiler.ast.ThisReference;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
@@ -516,13 +515,7 @@ final class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterThisReference(ThisReference thisReference) {
-        sourceBuilder.append("(local.get $this)");
-        return false;
-      }
-
-      @Override
-      public boolean enterSuperReference(SuperReference superReference) {
+      public boolean enterThisOrSuperReference(ThisOrSuperReference receiverReference) {
         sourceBuilder.append("(local.get $this)");
         return false;
       }

@@ -426,6 +426,10 @@ class ToStringRenderer {
 
       @Override
       public boolean enterSuperReference(SuperReference superReference) {
+        if (superReference.isQualified()) {
+          print(superReference.getTypeDescriptor().getSimpleSourceName() + ".");
+        }
+
         print("super");
         return false;
       }

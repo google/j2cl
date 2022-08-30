@@ -21,55 +21,18 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /*** Class for super reference. */
 @Visitable
-public class SuperReference extends Expression {
-  private final DeclaredTypeDescriptor typeDescriptor;
-  /**
-   * Whether the "super" keyword appears with a qualifier in the source. E.g. referencing the
-   * enclosing class instance.
-   */
-  private final boolean isQualified;
-
+public class SuperReference extends ThisOrSuperReference {
   public SuperReference(DeclaredTypeDescriptor typeDescriptor) {
     this(typeDescriptor, false);
   }
 
   public SuperReference(DeclaredTypeDescriptor typeDescriptor, boolean isQualified) {
-    this.typeDescriptor = typeDescriptor.toNonNullable();
-    this.isQualified = isQualified;
-  }
-
-  @Override
-  public DeclaredTypeDescriptor getTypeDescriptor() {
-    return typeDescriptor;
-  }
-
-  @Override
-  public boolean isIdempotent() {
-    return true;
-  }
-
-  @Override
-  public boolean isEffectivelyInvariant() {
-    return true;
-  }
-
-  public boolean isQualified() {
-    return isQualified;
-  }
-
-  @Override
-  public boolean hasSideEffects() {
-    return false;
-  }
-
-  @Override
-  public Precedence getPrecedence() {
-    return Precedence.HIGHEST;
+    super(typeDescriptor, isQualified);
   }
 
   @Override
   public SuperReference clone() {
-    return new SuperReference(typeDescriptor, isQualified);
+    return new SuperReference(getTypeDescriptor(), isQualified());
   }
 
   @Override

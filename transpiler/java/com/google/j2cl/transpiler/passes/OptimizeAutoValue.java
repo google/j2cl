@@ -50,6 +50,8 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.SuperReference;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -314,13 +316,15 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
           }
 
           @Override
-          public ThisReference rewriteThisReference(ThisReference expr) {
-            DeclaredTypeDescriptor descriptor = expr.getTypeDescriptor();
+          public Expression rewriteThisOrSuperReference(ThisOrSuperReference receiverReference) {
+            DeclaredTypeDescriptor descriptor = receiverReference.getTypeDescriptor();
             DeclaredTypeDescriptor newDescriptor = replaceTypeDescriptors(descriptor, fn);
             if (descriptor != newDescriptor) {
-              return new ThisReference(newDescriptor);
+              return receiverReference instanceof ThisReference
+                  ? new ThisReference(newDescriptor)
+                  : new SuperReference(newDescriptor);
             }
-            return expr;
+            return receiverReference;
           }
 
           private MethodDescriptor rewriteMethodDescriptor(MethodDescriptor descriptor) {

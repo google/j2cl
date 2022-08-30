@@ -26,8 +26,7 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.SuperReference;
-import com.google.j2cl.transpiler.ast.ThisReference;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import java.util.HashSet;
@@ -166,18 +165,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
         .accept(
             new AbstractVisitor() {
               @Override
-              public boolean enterThisReference(ThisReference expression) {
-                if (expression
-                    .getTypeDescriptor()
-                    .getTypeDeclaration()
-                    .equals(type.getDeclaration())) {
-                  hasThisOrSuperReference[0] = true;
-                }
-                return false;
-              }
-
-              @Override
-              public boolean enterSuperReference(SuperReference expression) {
+              public boolean enterThisOrSuperReference(ThisOrSuperReference expression) {
                 if (expression
                     .getTypeDescriptor()
                     .getTypeDeclaration()

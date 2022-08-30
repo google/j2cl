@@ -94,12 +94,7 @@ public class FunctionExpression extends Expression implements MethodLike {
     accept(
         new AbstractVisitor() {
           @Override
-          public void exitThisReference(ThisReference thisReference) {
-            hasEnclosingInstanceReferences[0] = true;
-          }
-
-          @Override
-          public void exitSuperReference(SuperReference superReference) {
+          public void exitThisOrSuperReference(ThisOrSuperReference receiverReference) {
             hasEnclosingInstanceReferences[0] = true;
           }
         });

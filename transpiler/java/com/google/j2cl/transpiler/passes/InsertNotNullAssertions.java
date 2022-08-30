@@ -31,10 +31,9 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
-import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
-import com.google.j2cl.transpiler.ast.ThisReference;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
@@ -148,8 +147,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
     // Don't insert null-check for expressions which are known to be non-null, regardless of
     // nullability annotations.
     return doesNotNeedNullCheck(expression.getTypeDescriptor())
-        || expression instanceof ThisReference
-        || expression instanceof SuperReference
+        || expression instanceof ThisOrSuperReference
         || expression instanceof NewInstance
         || expression instanceof ArrayLiteral
         || expression instanceof FunctionExpression

@@ -57,7 +57,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.SuperReference;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -412,16 +412,9 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
           }
 
           @Override
-          public void exitThisReference(ThisReference thisReference) {
-            // Due to normalization, a "this" reference will be present as the qualifier
-            // of any instance member.
-            hasPotentiallyEscapingThis[0] = true;
-          }
-
-          @Override
-          public void exitSuperReference(SuperReference superReference) {
-            // Dispatch to a method of a super class might lead to a dynamic dispatch on the
-            // instance making the uninitialized values potentially observable.
+          public void exitThisOrSuperReference(ThisOrSuperReference receiverReference) {
+            // Dispatches through "this" or "super" make the receiver available to the called
+            // method, making the value potentially escape.
             hasPotentiallyEscapingThis[0] = true;
           }
         });

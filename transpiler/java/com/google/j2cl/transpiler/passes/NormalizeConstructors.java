@@ -40,6 +40,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -392,7 +393,7 @@ public class NormalizeConstructors extends NormalizationPass {
     factory.accept(
         new AbstractRewriter() {
           @Override
-          public Expression rewriteThisReference(ThisReference thisReference) {
+          public Expression rewriteThisOrSuperReference(ThisOrSuperReference receiverReference) {
             return thisArg.createReference();
           }
         });
