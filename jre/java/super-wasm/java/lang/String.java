@@ -33,6 +33,7 @@ import javaemul.internal.EmulatedCharset;
 import javaemul.internal.NativeRegExp;
 import javaemul.internal.WasmExtern;
 import javaemul.internal.annotations.HasNoSideEffects;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
@@ -861,7 +862,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native WasmExtern replace(WasmExtern str, WasmExtern regex, WasmExtern replace);
+  private static native NativeString replace(
+      NativeString str, WasmExtern regex, NativeString replace);
 
   public String[] split(String regex) {
     return split(regex, 0);
@@ -950,12 +952,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   // Helper methods to pass and receive strings to and from JavaScript.
 
   /** Returns a JavaScript string that can be used to pass to JavaScript imported methods. */
-  public WasmExtern toJsString() {
+  public NativeString toJsString() {
     return ArrayHelper.toJsString(value, offset, count);
   }
 
   /** Returns a String using the char values provided as a JavaScript array. */
-  public static String fromJsString(WasmExtern jsString) {
+  public static String fromJsString(NativeString jsString) {
     if (jsString == null) {
       return null;
     }
@@ -976,4 +978,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   @JsMethod(namespace = JsPackage.GLOBAL)
   private static native int getLength(WasmExtern o);
+
+  /** Native string representation to be used to pass back and forth with JS. */
+  @Wasm("extern")
+  public static interface NativeString {}
 }

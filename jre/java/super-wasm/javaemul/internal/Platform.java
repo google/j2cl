@@ -49,7 +49,7 @@ public final class Platform {
   }
 
   @JsMethod(name = "Number.toPrecision", namespace = JsPackage.GLOBAL)
-  private static native WasmExtern nativeToPrecision(double value, int precision);
+  private static native String.NativeString nativeToPrecision(double value, int precision);
 
   public static boolean isEqual(Boolean x, Object y) {
     return y instanceof Boolean && x.booleanValue() == ((Boolean) y).booleanValue();

@@ -37,5 +37,5 @@ public class ConsoleLogger {
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "ConsoleLogger.log")
-  private static native void log(WasmExtern level, WasmExtern message);
+  private static native void log(String.NativeString level, String.NativeString message);
 }

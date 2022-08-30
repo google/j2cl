@@ -285,21 +285,22 @@ abstract class WasmArray implements Serializable, Cloneable {
     // JS / WASM String interop utilities.
     // Since they work based native arrays, we need to provide them within this class.
 
-    public WasmExtern toJsString(int offset, int count) {
+    public String.NativeString toJsString(int offset, int count) {
       return charArrayToString((WasmOpaque) (Object) elements, offset, count);
     }
 
     @JsMethod(namespace = JsPackage.GLOBAL)
-    private static native WasmExtern charArrayToString(WasmOpaque chars, int offset, int count);
+    private static native String.NativeString charArrayToString(
+        WasmOpaque chars, int offset, int count);
 
     private static final WasmOpaque charArrayPrototype = (WasmOpaque) (Object) new char[0];
 
-    public static Object fromJsString(WasmExtern o) {
+    public static Object fromJsString(String.NativeString o) {
       return new OfChar((char[]) (Object) (stringToCharArray(o, charArrayPrototype)));
     }
 
     @JsMethod(namespace = JsPackage.GLOBAL)
-    private static native WasmOpaque stringToCharArray(WasmExtern o, WasmOpaque protoype);
+    private static native WasmOpaque stringToCharArray(String.NativeString o, WasmOpaque protoype);
   }
 
   static class OfInt extends WasmArray {

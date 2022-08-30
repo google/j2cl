@@ -15,11 +15,10 @@
  */
 package com.google.j2cl.samples.wasm;
 
-import javaemul.internal.WasmExtern;
 
 /** A simple hello world example. */
 public class HelloWorld {
-  public static WasmExtern getHelloWorld() {
+  public static String.NativeString getHelloWorld() {
     return "Hello from Java!".toJsString();
   }
 }

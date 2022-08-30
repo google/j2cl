@@ -73,24 +73,24 @@ public class NativeRegExp {
     private static native int index(WasmExtern match);
 
     @JsMethod(namespace = JsPackage.GLOBAL)
-    private static native WasmExtern getBufferAt(WasmExtern o, int i);
+    private static native String.NativeString getBufferAt(WasmExtern o, int i);
 
     @JsMethod(namespace = JsPackage.GLOBAL)
     private static native int getLength(WasmExtern o);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.create")
-  private static native WasmExtern create(WasmExtern pattern);
+  private static native WasmExtern create(String.NativeString pattern);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.create")
-  private static native WasmExtern create(WasmExtern pattern, WasmExtern flags);
+  private static native WasmExtern create(String.NativeString pattern, String.NativeString flags);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.setLastIndex")
   private static native void setLastIndex(WasmExtern regExp, int index);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.exec")
-  private static native WasmExtern exec(WasmExtern regExp, WasmExtern text);
+  private static native WasmExtern exec(WasmExtern regExp, String.NativeString text);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.test")
-  private static native boolean test(WasmExtern regExp, WasmExtern text);
+  private static native boolean test(WasmExtern regExp, String.NativeString text);
 }

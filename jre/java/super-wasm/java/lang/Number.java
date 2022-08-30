@@ -16,7 +16,6 @@
 package java.lang;
 
 import java.io.Serializable;
-import javaemul.internal.WasmExtern;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
@@ -83,11 +82,11 @@ public abstract class Number implements Serializable {
    *     validating the range.
    */
   protected static double __parseAndValidateDouble(String s) throws NumberFormatException {
-    WasmExtern extern = s.toJsString();
-    if (!isValidDouble(extern)) {
+    String.NativeString nativeString = s.toJsString();
+    if (!isValidDouble(nativeString)) {
       throw NumberFormatException.forInputString(s);
     }
-    return parseFloat(extern);
+    return parseFloat(nativeString);
   }
 
   /**
@@ -97,10 +96,10 @@ public abstract class Number implements Serializable {
    * parse the value.
    */
   @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native boolean isValidDouble(WasmExtern str);
+  private static native boolean isValidDouble(String.NativeString str);
 
   @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native double parseFloat(WasmExtern str);
+  private static native double parseFloat(String.NativeString str);
 
   /**
    * @skip This function contains common logic for parsing a String in a given radix and validating

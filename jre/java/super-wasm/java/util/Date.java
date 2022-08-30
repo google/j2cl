@@ -312,7 +312,7 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     // CHECKSTYLE_ON
 
     @JsMethod(name = "Date.parse", namespace = JsPackage.GLOBAL)
-    public static native double parse(WasmExtern dateString);
+    public static native double parse(String.NativeString dateString);
 
     private NativeDate() {
       instance = create();
@@ -517,6 +517,6 @@ public class Date implements Cloneable, Comparable<Date>, Serializable {
     }
 
     @JsMethod(name = "Date.toLocaleString", namespace = JsPackage.GLOBAL)
-    private static native WasmExtern toLocaleString(WasmExtern date);
+    private static native String.NativeString toLocaleString(WasmExtern date);
   }
 }

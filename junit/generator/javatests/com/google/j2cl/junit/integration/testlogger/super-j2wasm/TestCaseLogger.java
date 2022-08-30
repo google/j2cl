@@ -17,14 +17,13 @@ package com.google.j2cl.junit.integration.testlogger;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
-import javaemul.internal.WasmExtern;
 import jsinterop.annotations.JsMethod;
 
 /** Calling stub for window.console. */
 public class TestCaseLogger {
 
   @JsMethod(namespace = GLOBAL, name = "goog.testing.TestCase.saveMessage")
-  public static native void saveMessage(WasmExtern message);
+  public static native void saveMessage(String.NativeString message);
 
   public static void log(String message) {
     saveMessage(("[java_message_from_test] " + message).toJsString());
