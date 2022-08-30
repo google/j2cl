@@ -5,17 +5,17 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 fun interface Map<K, V> {
- fun put(key: K?, value: V?): V?
+ fun put(key: K, value: V): V
 }
 
 open class AbstractMap<K, V>: bridgemethods.Map<K, V> {
- open override fun put(key: K?, value: V?): V? {
+ open override fun put(key: K, value: V): V {
   return value
  }
 }
 
 open class EnumMap<K: kotlin.Enum<K>?, V>: bridgemethods.AbstractMap<K, V>() {
- open override fun put(key: K?, value: V?): V? {
+ open override fun put(key: K, value: V): V {
   return value
  }
 }

@@ -95,7 +95,7 @@ public class Main {
     T[] getArray();
   }
 
-  interface NonNullableTemplate<@JsNonNull T> {
+  interface NonNullableTemplate<T extends @JsNonNull Object> {
     T get();
 
     T[] getArray();

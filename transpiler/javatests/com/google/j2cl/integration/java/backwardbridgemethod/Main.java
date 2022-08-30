@@ -33,7 +33,7 @@ class C<T> {
 public class Main extends C<String> implements I {
   public static void main(String... args) {
     I i = new Main();
-    C c = new Main();
+    C<String> c = new Main();
     Main m = new Main();
     String s = "";
     assertTrue(i.get(s) == s);

@@ -5,7 +5,7 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class KTopLevel<O> {
- @kotlin.jvm.JvmField var instanceField: O? = null
+ @kotlin.jvm.JvmField var instanceField: O = null as O
 
  @kotlin.jvm.JvmField var renamedField: kotlin.Int = 0
 
@@ -39,9 +39,9 @@ open class KTopLevel<O> {
   return 0
  }
 
- constructor(o: O?)
+ constructor(o: O)
 
- open fun instanceMethod(o: O?): O? {
+ open fun instanceMethod(o: O): O {
   return o
  }
 
@@ -49,17 +49,17 @@ open class KTopLevel<O> {
   @kotlin.jvm.JvmField var staticField: kotlin.Any? = null
 
   @kotlin.jvm.JvmStatic
-  fun <S> staticMethod(s: S?): S? {
+  fun <S> staticMethod(s: S): S {
    return s
   }
  }
 
  open class KNested<N> {
-  @kotlin.jvm.JvmField var instanceField: N? = null
+  @kotlin.jvm.JvmField var instanceField: N = null as N
 
-  constructor(n: N?)
+  constructor(n: N)
 
-  open fun instanceMethod(n: N?): N? {
+  open fun instanceMethod(n: N): N {
    return n
   }
 
@@ -71,13 +71,13 @@ open class KTopLevel<O> {
    @kotlin.jvm.JvmField var staticField: kotlin.Any? = null
 
    @kotlin.jvm.JvmStatic
-   fun <S> staticMethod(s: S?): S? {
+   fun <S> staticMethod(s: S): S {
     return s
    }
   }
  }
 
  open inner class KInner<I> {
-  constructor(i: I?)
+  constructor(i: I)
  }
 }

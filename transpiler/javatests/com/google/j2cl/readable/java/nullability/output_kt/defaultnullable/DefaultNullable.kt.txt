@@ -56,13 +56,13 @@ open class DefaultNullable {
   fun <N> genericNullableMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedNullable<N>?, n: N?) {
    o!!.setNullable(n)
    o!!.setNonNull(n!!)
-   o!!.setDefaultNullability(n)
+   o!!.setDefaultNullability(n!!)
    o!!.getNullable()!!.hashCode()
    o!!.getNonNullable()!!.hashCode()
    o!!.getDefaultNullability()!!.hashCode()
    o!!.nullable = n
    o!!.nonNullable = n!!
-   o!!.defaultNullability = n
+   o!!.defaultNullability = n!!
    o!!.nullable!!.hashCode()
    o!!.nonNullable!!.hashCode()
    o!!.defaultNullability!!.hashCode()
@@ -85,15 +85,15 @@ open class DefaultNullable {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <N> genericDefaultNullabilityMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability<N>?, n: N?) {
+  fun <N> genericDefaultNullabilityMethod(o: nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability<N>?, n: N) {
    o!!.setNullable(n)
-   o!!.setNonNull(n!!)
+   o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
    o!!.getNullable()!!.hashCode()
    o!!.getNonNullable()!!.hashCode()
    o!!.getDefaultNullability()!!.hashCode()
    o!!.nullable = n
-   o!!.nonNullable = n!!
+   o!!.nonNullable = n
    o!!.defaultNullability = n
    o!!.nullable!!.hashCode()
    o!!.nonNullable!!.hashCode()
@@ -193,7 +193,7 @@ open class DefaultNullable {
 
   @kotlin.jvm.JvmField var nonNullable: N = null as N
 
-  @kotlin.jvm.JvmField var defaultNullability: N? = null
+  @kotlin.jvm.JvmField var defaultNullability: N = null as N
 
   constructor(n: N) {
    this.nonNullable = n
@@ -207,15 +207,15 @@ open class DefaultNullable {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
 
   open fun setNullable(n: N?) {}
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
  open class ParameterizedNullable<N> {
@@ -223,7 +223,7 @@ open class DefaultNullable {
 
   @kotlin.jvm.JvmField var nonNullable: N = null as N
 
-  @kotlin.jvm.JvmField var defaultNullability: N? = null
+  @kotlin.jvm.JvmField var defaultNullability: N = null as N
 
   constructor(n: N) {
    this.nonNullable = n
@@ -237,15 +237,15 @@ open class DefaultNullable {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
 
   open fun setNullable(n: N?) {}
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
  open class ParameterizedNonNullable<N: kotlin.Any> {
@@ -253,10 +253,11 @@ open class DefaultNullable {
 
   @kotlin.jvm.JvmField var nonNullable: N
 
-  @kotlin.jvm.JvmField var defaultNullability: N? = null
+  @kotlin.jvm.JvmField var defaultNullability: N
 
   constructor(n: N) {
    this.nonNullable = n
+   this.defaultNullability = n
   }
 
   open fun getNullable(): N? {
@@ -267,14 +268,14 @@ open class DefaultNullable {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
 
   open fun setNullable(n: N?) {}
 
   open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(n: N?) {}
+  open fun setDefaultNullability(n: N) {}
  }
 }

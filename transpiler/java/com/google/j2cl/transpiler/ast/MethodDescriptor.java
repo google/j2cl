@@ -1137,7 +1137,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         checkState(
             methodDescriptor.getTypeParameterTypeDescriptors().stream()
-                .allMatch(TypeVariable::isNullable));
+                .noneMatch(TypeVariable::isNullable));
 
         // Check that the properties of the declaration descriptor are consistent with those
         // of the method descriptor itself.

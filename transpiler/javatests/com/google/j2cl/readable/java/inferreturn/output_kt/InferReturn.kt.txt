@@ -7,7 +7,7 @@ import kotlin.jvm.*
 open class InferReturn<T> {
  companion object {
   @kotlin.jvm.JvmStatic
-  fun <T_1> inferGeneric(foo: T_1?): inferreturn.InferReturn<T_1>? {
+  fun <T_1> inferGeneric(foo: T_1): inferreturn.InferReturn<T_1>? {
    return inferreturn.InferReturn<T_1>()
   }
 
@@ -28,13 +28,13 @@ open class InferReturn<T> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <V> newArrayList(foo: V?): kotlin.collections.ArrayList<V>? {
+  fun <V> newArrayList(foo: V): kotlin.collections.ArrayList<V>? {
    return kotlin.collections.ArrayList<V>()
   }
 
   @kotlin.jvm.JvmStatic
-  fun <V> newArray(foo: V?): kotlin.Array<V?>? {
-   return kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Array<V?>?
+  fun <V> newArray(foo: V): kotlin.Array<V>? {
+   return kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Array<V>?
   }
 
   @kotlin.jvm.JvmStatic

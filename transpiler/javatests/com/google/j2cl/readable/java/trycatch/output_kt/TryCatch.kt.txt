@@ -114,7 +114,7 @@ open class TryCatch {
   throw this.getT<kotlin.Exception?>(kotlin.Exception())!!
  }
 
- fun <T> getT(t: T?): T? {
+ fun <T> getT(t: T): T {
   return t
  }
 
@@ -122,8 +122,8 @@ open class TryCatch {
   throw this.getThrowable<kotlin.Throwable?>()!!
  }
 
- fun <T: kotlin.Throwable?> getThrowable(): T? {
-  return null
+ fun <T: kotlin.Throwable?> getThrowable(): T {
+  return null!!
  }
 
  companion object {

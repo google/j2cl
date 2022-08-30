@@ -31,19 +31,19 @@ open class Main {
  }
 
  open class A<T> {
-  open fun `fun`(t: T?): T? {
+  open fun `fun`(t: T): T {
    return t
   }
 
-  open fun bar(t: T?) {}
+  open fun bar(t: T) {}
  }
 
  fun interface I<T: kotlin.Number?> {
-  fun `fun`(t: T?): T?
+  fun `fun`(t: T): T
  }
 
  fun interface J<T> {
-  fun bar(t: T?)
+  fun bar(t: T)
  }
 
  open class B: bridgejsmethod.Main.A<kotlin.String?>() {
@@ -71,21 +71,21 @@ open class Main {
  open class F: bridgejsmethod.Main.I<kotlin.Int?>, bridgejsmethod.Main.A<kotlin.Int?>() {}
 
  fun interface G<V> {
-  fun enclose(value: V?): V?
+  fun enclose(value: V): V
  }
 
  open class H<V>: bridgejsmethod.Main.G<V> {
-  open override fun enclose(value: V?): V? {
-   return null
+  open override fun enclose(value: V): V {
+   return null!!
   }
  }
 
  open class K<K1, K2> {
-  open fun `fun`(k1: K1?, k2: K2?) {}
+  open fun `fun`(k1: K1, k2: K2) {}
  }
 
  open class L<L1>: bridgejsmethod.Main.K<kotlin.String?, L1>() {
-  open override fun `fun`(string: kotlin.String?, l1: L1?) {}
+  open override fun `fun`(string: kotlin.String?, l1: L1) {}
  }
 
  fun interface M {
@@ -123,15 +123,15 @@ open class Main {
  open inner class S: bridgejsmethod.Main.R() {}
 
  open inner class GrandParent<T> {
-  open fun jsMethod(t: T?) {}
+  open fun jsMethod(t: T) {}
 
-  open fun method(t: T?) {}
+  open fun method(t: T) {}
  }
 
  open inner class Parent<T: bridgejsmethod.Main.Parent<T>?>: bridgejsmethod.Main.GrandParent<T>() {
-  open override fun jsMethod(t: T?) {}
+  open override fun jsMethod(t: T) {}
 
-  open override fun method(t: T?) {}
+  open override fun method(t: T) {}
  }
 
  open inner class Child: bridgejsmethod.Main.Parent<bridgejsmethod.Main.Child?>() {}

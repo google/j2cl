@@ -5,7 +5,7 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class JsMethodExample {
- external open fun <T: kotlin.collections.ArrayList<kotlin.String?>?> testMethod(): T?
+ external open fun <T: kotlin.collections.ArrayList<kotlin.String?>?> testMethod(): T
 
  companion object {
   @kotlin.jvm.JvmStatic
@@ -18,7 +18,7 @@ open class JsMethodExample {
  }
 
  abstract class Base<T> {
-  open fun m(t: T?) {}
+  open fun m(t: T) {}
  }
 
  fun interface I {

@@ -7,11 +7,11 @@ import kotlin.jvm.*
 interface Entry<K> {}
 
 abstract class Map<K> {
- abstract fun getCeilingEntry(key: K?): nobridgemethods.Entry<K>?
+ abstract fun getCeilingEntry(key: K): nobridgemethods.Entry<K>?
 }
 
 open class TreeMap<K>: nobridgemethods.Map<K>() {
- open override fun getCeilingEntry(key: K?): nobridgemethods.TreeMap.InnerEntry<K>? {
+ open override fun getCeilingEntry(key: K): nobridgemethods.TreeMap.InnerEntry<K>? {
   return nobridgemethods.TreeMap.InnerEntry<K>()
  }
 

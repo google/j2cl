@@ -98,7 +98,7 @@ open class Main {
 }
 
 open class Subclass<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nativekt.KTopLevel<V> {
- constructor(v: V?): super(v)
+ constructor(v: V): super(v)
 
  open override fun renamedMethod(): kotlin.Int {
   return super.renamedMethod()
@@ -128,11 +128,11 @@ open class Subclass<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nati
   return super.getstartingmethodAsProperty
  }
 
- open override fun interfaceMethod(v: V?): kotlin.Int {
+ open override fun interfaceMethod(v: V): kotlin.Int {
   return 0
  }
 
- open override fun renamedInterfaceMethod(v: V?): kotlin.Int {
+ open override fun renamedInterfaceMethod(v: V): kotlin.Int {
   return 0
  }
 
@@ -146,7 +146,7 @@ open class Subclass<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nati
 }
 
 open class Subsubclass<V>: nativekttypes.Subclass<V> {
- constructor(v: V?): super(v)
+ constructor(v: V): super(v)
 
  open override fun renamedMethod(): kotlin.Int {
   return super.renamedMethod()
@@ -176,11 +176,11 @@ open class Subsubclass<V>: nativekttypes.Subclass<V> {
   return super.getstartingmethodAsProperty
  }
 
- open override fun interfaceMethod(v: V?): kotlin.Int {
+ open override fun interfaceMethod(v: V): kotlin.Int {
   return 0
  }
 
- open override fun renamedInterfaceMethod(v: V?): kotlin.Int {
+ open override fun renamedInterfaceMethod(v: V): kotlin.Int {
   return 0
  }
 

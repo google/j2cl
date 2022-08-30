@@ -5,7 +5,7 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 fun interface MyFunction<F, T> {
- fun apply(input: F?): T?
+ fun apply(input: F): T
 }
 
 fun interface HashFunction<T>: overwrittentypevariables.MyFunction<T, kotlin.String?> {}
@@ -15,7 +15,7 @@ open class HashFunctions {
   @kotlin.jvm.JvmStatic
   fun <T> hashFunction(): overwrittentypevariables.HashFunction<T>? {
    return object : overwrittentypevariables.HashFunction<T> {
-    open override fun apply(input: T?): kotlin.String? {
+    open override fun apply(input: T): kotlin.String? {
      return ""
     }
    }
@@ -24,7 +24,7 @@ open class HashFunctions {
   @kotlin.jvm.JvmStatic
   fun <T: kotlin.Enum<T>?> enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
    return object : overwrittentypevariables.HashFunction<T> {
-    open override fun apply(input: T?): kotlin.String? {
+    open override fun apply(input: T): kotlin.String? {
      return "" + input!!.ordinal
     }
    }

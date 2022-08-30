@@ -6,14 +6,14 @@ import kotlin.jvm.*
 
 open class Main {
  abstract class Foo<T> {
-  constructor(foo: T?)
+  constructor(foo: T)
 
   abstract fun foo()
  }
 
  open class Bar<T: kotlin.Comparable<*>?> {
-  open fun getSomething(): T? {
-   return null
+  open fun getSomething(): T {
+   return null!!
   }
 
   open fun doSomething(): boundedtypesupercall.Main.Foo<T>? {

@@ -30,11 +30,11 @@ open class Main {
  }
 
  fun interface I<T> {
-  fun m(t: T?, o: kotlin.Any?)
+  fun m(t: T, o: kotlin.Any?)
  }
 
  open class TemplatedSubtype<T: kotlin.String?>: jsoptional.Main.I<T> {
-  open override fun m(t: T?, o: kotlin.Any?) {}
+  open override fun m(t: T, o: kotlin.Any?) {}
  }
 
  open inner class SpecializedSubtype: jsoptional.Main.I<kotlin.String?> {

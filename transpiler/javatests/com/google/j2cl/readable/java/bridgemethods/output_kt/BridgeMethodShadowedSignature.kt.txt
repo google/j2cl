@@ -6,14 +6,14 @@ import kotlin.jvm.*
 
 open class BridgeMethodShadowedSignature {
  fun interface I<I1> {
-  fun get(consumer: java.util.function.Consumer<in I1?>?): kotlin.String?
+  fun get(consumer: java.util.function.Consumer<in I1>?): kotlin.String?
  }
 
  abstract class B<B1, B2>: bridgemethods.BridgeMethodShadowedSignature.I<B1> {
-  open fun get(consumer: B2?): kotlin.String? {
+  open fun get(consumer: B2): kotlin.String? {
    return "B get B2"
   }
  }
 
- open class C<C1>: bridgemethods.BridgeMethodShadowedSignature.I<C1>, bridgemethods.BridgeMethodShadowedSignature.B<C1, java.util.function.Consumer<in C1?>?>() {}
+ open class C<C1>: bridgemethods.BridgeMethodShadowedSignature.I<C1>, bridgemethods.BridgeMethodShadowedSignature.B<C1, java.util.function.Consumer<in C1>?>() {}
 }

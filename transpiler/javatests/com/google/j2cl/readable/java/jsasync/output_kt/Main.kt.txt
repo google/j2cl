@@ -16,7 +16,7 @@ open class Main {
   return this.parametricAsyncMethod<kotlin.Int?>(kotlin.Int.valueOf(result))
  }
 
- open fun <T> parametricAsyncMethod(value: T?): jsasync.Main.IThenable<T>? {
+ open fun <T> parametricAsyncMethod(value: T): jsasync.Main.IThenable<T>? {
   return jsasync.Main.Promise.resolve<T>(jsasync.Main.await<T>(jsasync.Main.Promise.resolve<T>(value)))
  }
 
@@ -52,7 +52,7 @@ open class Main {
   }
 
   @kotlin.jvm.JvmStatic
-  external fun <T> await(thenable: jsasync.Main.IThenable<T>?): T?
+  external fun <T> await(thenable: jsasync.Main.IThenable<T>?): T
  }
 
  fun interface BaseInterface {
@@ -82,7 +82,7 @@ open class Main {
  open class Promise<T>: jsasync.Main.IThenable<T> {
   companion object {
    @kotlin.jvm.JvmStatic
-   external fun <T> resolve(value: T?): jsasync.Main.Promise<T>?
+   external fun <T> resolve(value: T): jsasync.Main.Promise<T>?
   }
  }
 }

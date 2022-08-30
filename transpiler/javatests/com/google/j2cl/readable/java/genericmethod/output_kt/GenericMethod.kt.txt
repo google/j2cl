@@ -5,22 +5,22 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class GenericMethod<T> {
- open fun <T_1, S> foo(f: T_1?, s: S?) {}
+ open fun <T_1, S> foo(f: T_1, s: S) {}
 
  open fun `fun`(o: kotlin.Any?) {}
 
- open fun <T_1: kotlin.Exception?> `fun`(t: T_1?) {}
+ open fun <T_1: kotlin.Exception?> `fun`(t: T_1) {}
 
- open fun <T_1: kotlin.Error?> `fun`(t: T_1?) {
+ open fun <T_1: kotlin.Error?> `fun`(t: T_1) {
   object : genericmethod.GenericMethod<T_1>() {
-   open fun fun2(t: T_1?) {}
+   open fun fun2(t: T_1) {}
 
-   open fun <T_1> fun2(t: T_1?) {}
+   open fun <T_1> fun2(t: T_1) {}
   }
   open class ___1LocalClass<T>: genericmethod.GenericMethod<T>() {
-   open fun fun2(t: T?) {}
+   open fun fun2(t: T) {}
 
-   open fun <T_1: kotlin.Number?> fun2(t: T_1?) {}
+   open fun <T_1: kotlin.Number?> fun2(t: T_1) {}
   }
   ___1LocalClass<T_1>()
  }
@@ -29,16 +29,16 @@ open class GenericMethod<T> {
   return null
  }
 
- open fun <T_1> `fun`(array: kotlin.Array<T_1?>?): kotlin.Array<T_1?>? {
+ open fun <T_1> `fun`(array: kotlin.Array<T_1>?): kotlin.Array<T_1>? {
   return array
  }
 
- open fun <T_1> checked(): T_1? {
-  return null
+ open fun <T_1> checked(): T_1 {
+  return null!!
  }
 
- open fun <T_1> unchecked(): T_1? {
-  return null
+ open fun <T_1> unchecked(): T_1 {
+  return null!!
  }
 
  open fun test() {
@@ -95,12 +95,12 @@ open class GenericMethod<T> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <V> testLowerWildcardBound(consumer: genericmethod.GenericMethod.Consumer<in V?>?, v: V?) {
+  fun <V> testLowerWildcardBound(consumer: genericmethod.GenericMethod.Consumer<in V>?, v: V) {
    consumer!!.accept(v)
   }
 
   @kotlin.jvm.JvmStatic
-  fun <V> testUpperWildcardBound(supplier: genericmethod.GenericMethod.Supplier<out V?>?): V? {
+  fun <V> testUpperWildcardBound(supplier: genericmethod.GenericMethod.Supplier<out V>?): V {
    return supplier!!.get()
   }
 
@@ -114,14 +114,14 @@ open class GenericMethod<T> {
  }
 
  open class SuperContainer<C: genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?> {
-  open fun get(): C? {
-   return null
+  open fun get(): C {
+   return null!!
   }
  }
 
  open class Container<CT: genericmethod.GenericMethod.Content?> {
-  open fun get(): CT? {
-   return null
+  open fun get(): CT {
+   return null!!
   }
  }
 
@@ -132,10 +132,10 @@ open class GenericMethod<T> {
  }
 
  fun interface Consumer<V> {
-  fun accept(v: V?)
+  fun accept(v: V)
  }
 
  fun interface Supplier<V> {
-  fun get(): V?
+  fun get(): V
  }
 }

@@ -5,11 +5,11 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class SimpleGenericType<T, S> {
- @kotlin.jvm.JvmField var first: T? = null
+ @kotlin.jvm.JvmField var first: T = null as T
 
- @kotlin.jvm.JvmField var second: S? = null
+ @kotlin.jvm.JvmField var second: S = null as S
 
- constructor(t: T?, s: S?) {
+ constructor(t: T, s: S) {
   this.first = t
   this.second = s
  }

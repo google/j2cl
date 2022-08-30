@@ -5,11 +5,11 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class Parent<T: kotlin.Error?> {
- open fun foo(e: T?) {}
+ open fun foo(e: T) {}
 }
 
 fun interface SuperInterface<T> {
- fun foo(t: T?)
+ fun foo(t: T)
 }
 
 open class AnotherAccidentalOverride: accidentaloverride.SuperInterface<kotlin.AssertionError?>, accidentaloverride.Parent<kotlin.AssertionError?>() {}

@@ -90,7 +90,7 @@ open class Main {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T> boxingPassthrough(t: T?): T? {
+  fun <T> boxingPassthrough(t: T): T {
    return t
   }
 
@@ -163,13 +163,13 @@ open class Main {
  }
 
  open class TemplatedField<T> {
-  @kotlin.jvm.JvmField var value: T? = null
+  @kotlin.jvm.JvmField var value: T = null as T
 
-  constructor(value: T?) {
+  constructor(value: T) {
    this.value = value
   }
 
-  open fun getValue(): T? {
+  open fun getValue(): T {
    return this.value
   }
  }

@@ -81,7 +81,7 @@ open class Lambdas {
   }
  }
 
- open fun <T> callWithTypeVariable(intf: lambdas.Lambdas.GenericFunctionalInterface<T>?, e: T?): T? {
+ open fun <T> callWithTypeVariable(intf: lambdas.Lambdas.GenericFunctionalInterface<T>?, e: T): T {
   return intf!!.m(e)
  }
 
@@ -106,8 +106,8 @@ open class Lambdas {
   this.callWithBiFunction<kotlin.Any?>(lambdas.Lambdas.BiFunction<kotlin.Any?, kotlin.String?, kotlin.Double?> { x: kotlin.Any?, y: kotlin.String? ->
    throw kotlin.RuntimeException()
   })
-  val f: lambdas.Lambdas.Function<in T?, *>? = lambdas.Lambdas.Function { item: T? ->
-   return@Function kotlin.Long.valueOf(1L)
+  val f: lambdas.Lambdas.Function<in T, *>? = lambdas.Lambdas.Function { item: T ->
+   return@Function kotlin.Long.valueOf(1L)!!
   }
  }
 
@@ -161,7 +161,7 @@ open class Lambdas {
   @kotlin.jvm.JvmStatic
   fun testLambdaCallingStaticMethod() {
    val f: lambdas.Lambdas.Function<kotlin.Any?, *>? = lambdas.Lambdas.Function { l: kotlin.Any? ->
-    return@Function lambdas.Lambdas.m()
+    return@Function lambdas.Lambdas.m()!!
    }
   }
 
@@ -200,7 +200,7 @@ open class Lambdas {
    o = lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?> { x_1: kotlin.String? ->
     return@GenericFunctionalInterface x_1
    } as lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?>? /* & lambdas.Lambdas.JustADefaultS<kotlin.Number?>? */
-   o = lambdas.Lambdas.GenericFunctionalInterface<U> { x_2: U? ->
+   o = lambdas.Lambdas.GenericFunctionalInterface<U> { x_2: U ->
     return@GenericFunctionalInterface x_2
    } as lambdas.Lambdas.GenericFunctionalInterface<U>? /* & lambdas.Lambdas.JustADefaultS<V>? */
   }
@@ -215,26 +215,26 @@ open class Lambdas {
  }
 
  fun interface GenericFunctionalInterface<T> {
-  fun m(i: T?): T?
+  fun m(i: T): T
  }
 
  fun interface BiFunction<T, U, R> {
-  fun apply(t: T?, u: U?): R?
+  fun apply(t: T, u: U): R
 
-  fun <V> andThen(after: lambdas.Lambdas.Function<in R?, out V?>?): lambdas.Lambdas.BiFunction<T, U, V>? {
-   return lambdas.Lambdas.BiFunction<T, U, V> { t: T?, u: U? ->
+  fun <V> andThen(after: lambdas.Lambdas.Function<in R, out V>?): lambdas.Lambdas.BiFunction<T, U, V>? {
+   return lambdas.Lambdas.BiFunction<T, U, V> { t: T, u: U ->
     return@BiFunction after!!.apply(this.apply(t, u))
    }
   }
  }
 
  fun interface Function<T, R> {
-  fun apply(t: T?): R?
+  fun apply(t: T): R
 
   companion object {
    @kotlin.jvm.JvmStatic
    fun <T> identity(): lambdas.Lambdas.Function<T, T>? {
-    return lambdas.Lambdas.Function<T, T> { t: T? ->
+    return lambdas.Lambdas.Function<T, T> { t: T ->
      return@Function t
     }
    }
@@ -266,7 +266,7 @@ open class Lambdas {
  }
 
  fun interface GenericJsFunction<R, T> {
-  fun apply(t: T?): R?
+  fun apply(t: T): R
  }
 
  fun interface Thenable<T> {
@@ -284,21 +284,21 @@ open class Lambdas {
  }
 
  interface Equals<T> {
-  fun get(): T? {
-   return null
+  fun get(): T {
+   return null!!
   }
  }
 
  fun interface JsSupplier<T: kotlin.Number?>: lambdas.Lambdas.Equals<T> {
-  override fun get(): T?
+  override fun get(): T
  }
 
  interface JustADefaultT<T> {
-  fun method(t: T?) {}
+  fun method(t: T) {}
  }
 
  interface JustADefaultS<S> {
-  fun method(t: S?) {}
+  fun method(t: S) {}
  }
 
  interface MarkerWithDefaultMethod {

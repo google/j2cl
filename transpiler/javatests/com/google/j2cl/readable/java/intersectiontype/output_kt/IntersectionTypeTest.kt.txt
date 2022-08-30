@@ -5,7 +5,7 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 fun interface Getable<T> {
- fun get(): T?
+ fun get(): T
 }
 
 fun interface Setable {
@@ -31,12 +31,12 @@ open class IntersectionTypeTest<U> {
   val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>()
   intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>(o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */)
   intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>(intersectiontype.IntersectionTypeTest.m<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>())
-  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>()
+  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>() as intersectiontype.Getable<*>?
  }
 
  companion object {
   @kotlin.jvm.JvmStatic
-  fun <T> getAndSet(`object`: T?) where T: intersectiontype.Getable<*>?, T: intersectiontype.Setable? {
+  fun <T> getAndSet(`object`: T) where T: intersectiontype.Getable<*>?, T: intersectiontype.Setable? {
    `object`!!.set(1)
    `object`!!.get()
   }
@@ -81,13 +81,13 @@ open class IntersectionTypeTest<U> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T> get(t: T?): T? {
+  fun <T> get(t: T): T {
    return t
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T> m(): T? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
-   return intersectiontype.IntersectionTypeTest.get<kotlin.Any?>(kotlin.Any()) as T?
+  fun <T> m(): T where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
+   return intersectiontype.IntersectionTypeTest.get<kotlin.Any?>(kotlin.Any()) as T
   }
 
   @kotlin.jvm.JvmStatic
@@ -96,10 +96,10 @@ open class IntersectionTypeTest<U> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T> set(t: T?) where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {}
+  fun <T> set(t: T) where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {}
 
   @kotlin.jvm.JvmStatic
-  fun <T> callOnIntersetionTypes(t: T?) where T: intersectiontype.IntersectionTypeTest.SomeConcreteType?, T: intersectiontype.Cmp? {
+  fun <T> callOnIntersetionTypes(t: T) where T: intersectiontype.IntersectionTypeTest.SomeConcreteType?, T: intersectiontype.Cmp? {
    t!!.cmp()
    (null as intersectiontype.IntersectionTypeTest.SomeConcreteType? /* & intersectiontype.Cmp? */)!!!!.cmp()
   }

@@ -5,10 +5,10 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class NestedGenericClass<T> {
- open fun <S> `fun`(t: S?) {
+ open fun <S> `fun`(t: S) {
   open class ___1E<S> {}
   open class ___1F {
-   @kotlin.jvm.JvmField var f: S? = null
+   @kotlin.jvm.JvmField var f: S = null as S
   }
   ___1E<kotlin.Number?>()
   ___1F()
@@ -39,16 +39,16 @@ open class NestedGenericClass<T> {
  }
 
  open inner class C {
-  @kotlin.jvm.JvmField var c: T? = null
+  @kotlin.jvm.JvmField var c: T = null as T
 
   open inner class D {
-   @kotlin.jvm.JvmField var d: T? = null
+   @kotlin.jvm.JvmField var d: T = null as T
   }
  }
 
  open inner class RecursiveTypeVariable<T: nestedgenericclass.NestedGenericClass<T>.RecursiveTypeVariable<T>?> {
   open fun test() {
-   val t: T? = null
+   val t: T = null!!
    t!!.Inner()
   }
 

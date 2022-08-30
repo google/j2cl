@@ -5,41 +5,41 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class CastGenerics<T, E: kotlin.Number?> {
- @kotlin.jvm.JvmField var field: T? = null
+ @kotlin.jvm.JvmField var field: T = null as T
 
- open fun method(): T? {
-  return null
+ open fun method(): T {
+  return null!!
  }
 
  open fun testCastToTypeVariable() {
   val o: kotlin.Any? = kotlin.Int(1)
-  val e: E? = o as E?
-  val t: T? = o as T?
-  val es: kotlin.Array<E?>? = o as kotlin.Array<E?>?
-  val ts: kotlin.Array<T?>? = o as kotlin.Array<T?>?
+  val e: E = o as E
+  val t: T = o as T
+  val es: kotlin.Array<E>? = o as kotlin.Array<E>?
+  val ts: kotlin.Array<T>? = o as kotlin.Array<T>?
  }
 
  open fun <S, V: kotlin.Enum<V>?> testCastToMethodTypeVariable() {
   val o: kotlin.Any? = kotlin.Int(1)
-  val s: S? = o as S?
+  val s: S = o as S
   var c: kotlin.Any? = o as cast.CastGenerics<S, kotlin.Number?>?
-  c = o as kotlin.Array<S?>?
-  c = o as V?
+  c = o as kotlin.Array<S>?
+  c = o as V
  }
 
  open fun <TT: kotlin.Enum<*>?> outerGenericMethod() {
   open class ___1Nested<SS> {
    fun nestedGenericMethod(o: kotlin.Any?) {
-    val t: TT? = o as TT?
+    val t: TT = o as TT
    }
   }
  }
 
- open fun <EE> method(o: kotlin.Any?): EE? where EE: cast.CastGenerics.Empty1?, EE: cast.CastGenerics.Empty2<EE>? {
+ open fun <EE> method(o: kotlin.Any?): EE where EE: cast.CastGenerics.Empty1?, EE: cast.CastGenerics.Empty2<EE>? {
   if (o is cast.CastGenerics.Empty1) {
-   return o as EE?
+   return o as EE
   }
-  return null
+  return null!!
  }
 
  companion object {
@@ -53,14 +53,14 @@ open class CastGenerics<T, E: kotlin.Number?> {
    val containerU: cast.CastGenerics.Container<U>? = null
    containerU!!.get()!!.mA()
    containerU!!.get()!!.mB()
-   val containerArrT: cast.CastGenerics.Container<kotlin.Array<T_1?>?>? = null
-   val arrT: kotlin.Array<T_1?>? = containerArrT!!.get()
+   val containerArrT: cast.CastGenerics.Container<kotlin.Array<T_1>?>? = null
+   val arrT: kotlin.Array<T_1>? = containerArrT!!.get()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
    var arrA: kotlin.Array<cast.CastGenerics.A?>? = containerArrT!!.get() as kotlin.Array<cast.CastGenerics.A?>?
    var arrB: kotlin.Array<cast.CastGenerics.B?>? = containerArrT!!.get() as kotlin.Array<cast.CastGenerics.B?>?
-   val containerArrU: cast.CastGenerics.Container<kotlin.Array<U?>?>? = null
-   val arrU: kotlin.Array<U?>? = containerArrU!!.get()
+   val containerArrU: cast.CastGenerics.Container<kotlin.Array<U>?>? = null
+   val arrU: kotlin.Array<U>? = containerArrU!!.get()
    arrU!![0]!!.mA()
    arrU!![0]!!.mB()
    arrA = containerArrU!!.get() as kotlin.Array<cast.CastGenerics.A?>?
@@ -103,8 +103,8 @@ open class CastGenerics<T, E: kotlin.Number?> {
  }
 
  open class Container<T> {
-  open fun get(): T? {
-   return null
+  open fun get(): T {
+   return null!!
   }
  }
 

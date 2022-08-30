@@ -6,7 +6,7 @@ import kotlin.jvm.*
 
 open class Main {
  open fun testInterfaceMembers() {
-  val i: interfaces.Main.Interface<kotlin.Any?>? = Implementor() as interfaces.Main.Interface<kotlin.Any?>?
+  val i: interfaces.Main.Interface<kotlin.String?>? = Implementor()
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
   interfaces.Main.Interface.staticInterfaceMethod()
@@ -19,11 +19,11 @@ open class Main {
  fun interface Interface<T> {
   fun interfaceMethod()
 
-  fun defaultMethod(t: T?) {
+  fun defaultMethod(t: T) {
    this.privateMethod(t)
   }
 
-  fun privateMethod(t: T?) {}
+  fun privateMethod(t: T) {}
 
   companion object {
    @kotlin.jvm.JvmField val a: kotlin.Int = 1

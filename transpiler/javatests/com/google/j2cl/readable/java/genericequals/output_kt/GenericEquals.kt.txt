@@ -5,11 +5,11 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class GenericEquals<T> {
- @kotlin.jvm.JvmField val value: T?
+ @kotlin.jvm.JvmField val value: T
 
  @kotlin.jvm.JvmField val value2: genericequals.GenericEquals<T>?
 
- constructor(value: T?) {
+ constructor(value: T) {
   this.value = value
   this.value2 = null
  }

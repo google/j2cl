@@ -5,21 +5,21 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 interface SomeInterface<T, S> {
- fun foo(t: T?, s: S?)
+ fun foo(t: T, s: S)
 
- fun foo(t: T?, n: kotlin.Number?)
+ fun foo(t: T, n: kotlin.Number?)
 }
 
 open class SuperParent<T, S> {
- open fun foo(t: T?, s: S?) {}
+ open fun foo(t: T, s: S) {}
 }
 
 open class Parent<T: kotlin.Error?>: bridgemethods.SuperParent<T, kotlin.Number?>() {
- open override fun foo(t: T?, s: kotlin.Number?) {}
+ open override fun foo(t: T, s: kotlin.Number?) {}
 
- open fun <T_1: kotlin.Number?> bar(t: T_1?) {}
+ open fun <T_1: kotlin.Number?> bar(t: T_1) {}
 
- open fun <T_1> `fun`(t: T_1?) {}
+ open fun <T_1> `fun`(t: T_1) {}
 }
 
 open class BridgeMethod: bridgemethods.SomeInterface<kotlin.AssertionError?, kotlin.Number?>, bridgemethods.Parent<kotlin.AssertionError?>() {
@@ -31,7 +31,7 @@ open class BridgeMethod: bridgemethods.SomeInterface<kotlin.AssertionError?, kot
 }
 
 fun interface SomeOtherFooInterface<T> {
- fun foo(t: T?, s: kotlin.Double?)
+ fun foo(t: T, s: kotlin.Double?)
 }
 
 open class DualUnrelatedBridges: bridgemethods.SomeInterface<kotlin.String?, kotlin.Double?>, bridgemethods.SomeOtherFooInterface<kotlin.String?> {
@@ -53,8 +53,8 @@ fun interface Getter {
 }
 
 open class ClassWithParameterizedGet<T> {
- open fun get(t: T?): T? {
-  return null
+ open fun get(t: T): T {
+  return null!!
  }
 }
 
@@ -81,7 +81,7 @@ open class TestCase10036 {
  }
 
  abstract class B<B1: kotlin.Comparable<*>?>: bridgemethods.TestCase10036.BI1, bridgemethods.TestCase10036.BI2 {
-  abstract fun get(value: B1?): kotlin.String?
+  abstract fun get(value: B1): kotlin.String?
  }
 }
 
@@ -95,25 +95,25 @@ open class TestCase102 {
  }
 
  abstract class B<B1>: bridgemethods.TestCase102.BI1, bridgemethods.TestCase102.BI2 {
-  abstract fun set(value: B1?)
+  abstract fun set(value: B1)
  }
 
  open inner class C<B1>: bridgemethods.TestCase102.B<B1>() {
   open override fun set(value: kotlin.String?) {}
 
-  open override fun set(value: B1?) {}
+  open override fun set(value: B1) {}
  }
 }
 
 open class ParameterizedParent<T: bridgemethods.ParameterizedParent<T>?> {
- open fun <Q: T> m(t: Q?): Q? {
-  return null
+ open fun <Q: T> m(t: Q): Q {
+  return null!!
  }
 }
 
 open class ReparametrerizedChild<E: bridgemethods.ReparametrerizedChild<E>?>: bridgemethods.ParameterizedParent<E>() {
- open fun <S: E> m(t: S?): S? {
-  return null
+ open fun <S: E> m(t: S): S {
+  return null!!
  }
 }
 

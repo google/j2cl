@@ -101,7 +101,7 @@ open class Nullability {
  }
 
  open class Foo<T> {
-  open fun bar(t: T?) {}
+  open fun bar(t: T) {}
 
   open fun baz(): T? {
    return null
@@ -149,8 +149,8 @@ open class Nullability {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 
@@ -163,8 +163,8 @@ open class Nullability {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 
@@ -177,8 +177,8 @@ open class Nullability {
    throw kotlin.RuntimeException()
   }
 
-  open fun getDefaultNullability(): N? {
-   return null
+  open fun getDefaultNullability(): N {
+   return null!!
   }
  }
 }

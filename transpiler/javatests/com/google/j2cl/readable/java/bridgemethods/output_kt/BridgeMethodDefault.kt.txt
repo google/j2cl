@@ -6,7 +6,7 @@ import kotlin.jvm.*
 
 open class BridgeMethodDefault {
  fun interface I<T> {
-  fun m(t: T?)
+  fun m(t: T)
  }
 
  interface II: bridgemethods.BridgeMethodDefault.I<kotlin.String?> {

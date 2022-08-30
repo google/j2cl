@@ -41,20 +41,20 @@ open class Other<T> {
   val o: collisions.Other<T>? = null as collisions.Other<T>?
  }
 
- open fun <T_2> m(): T_2? {
+ open fun <T_2> m(): T_2 {
   val T_1: kotlin.Int = 5
   val o: collisions.Other<T_2>? = null as collisions.Other<T_2>?
-  return null
+  return null!!
  }
 }
 
 open class T<T: kotlin.Number?> {
- open fun m(): T? {
-  return null
+ open fun m(): T {
+  return null!!
  }
 
- open fun n(): T? {
-  val t: T? = collisions.T<T>().m()
+ open fun n(): T {
+  val t: T = collisions.T<T>().m()
   t!!.toByte()
   return t
  }

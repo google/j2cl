@@ -69,7 +69,7 @@ open class Main {
   fun getArray(): kotlin.Array<T>?
  }
 
- interface NonNullableTemplate<T> {
+ interface NonNullableTemplate<T: kotlin.Any> {
   fun get(): T
 
   fun getArray(): kotlin.Array<T>?

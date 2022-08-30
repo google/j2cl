@@ -143,7 +143,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Override
   public Set<TypeVariable> getAllTypeVariables() {
     if (!isWildcardOrCapture()) {
-      return ImmutableSet.of(this);
+      return ImmutableSet.of(this.toNonNullable());
     }
     return ImmutableSet.of();
   }
@@ -152,8 +152,11 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   public TypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
     TypeDescriptor specializedTypeVariable =
-        replacementTypeArgumentByTypeVariable.apply(this.toNullable());
-    return isNullable() ? specializedTypeVariable : specializedTypeVariable.toNonNullable();
+        replacementTypeArgumentByTypeVariable.apply(toNonNullable());
+    // In our current model if the type variable that is specialized is not isNullable it means that
+    // it does not have a @Nullable annotation, so we leave the specialized result alone, since
+    // it might be nullable and needs to stay the same.
+    return isNullable() ? specializedTypeVariable.toNullable() : specializedTypeVariable;
   }
 
   @Override
@@ -170,14 +173,14 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
-    return new AutoValue_TypeVariable.Builder().setWildcardOrCapture(false).setNullable(true);
+    return new AutoValue_TypeVariable.Builder().setWildcardOrCapture(false).setNullable(false);
   }
 
   /** Creates a wildcard type variable with a specific upper bound. */
   public static TypeVariable createWildcardWithUpperBound(TypeDescriptor bound) {
     return TypeVariable.newBuilder()
         .setWildcardOrCapture(true)
-        .setNullable(true)
+        .setNullable(false)
         .setUpperBoundTypeDescriptorSupplier(() -> bound)
         // Create an unique key that does not conflict with the keys used for other types nor for
         // type variables coming from JDT, which follow "<declaring_type>:<name>...".

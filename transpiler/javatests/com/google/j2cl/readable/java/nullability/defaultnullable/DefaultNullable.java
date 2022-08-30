@@ -142,6 +142,7 @@ public class DefaultNullable {
 
     ParameterizedNonNullable(@JsNonNull N n) {
       this.nonNullable = n;
+      this.defaultNullability = n;
     }
 
     @Nullable N getNullable() {

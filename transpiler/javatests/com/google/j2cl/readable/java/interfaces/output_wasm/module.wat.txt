@@ -110,7 +110,7 @@
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast_static $interfaces.Main (local.get $this.untyped)))
  (block
-  ;; Interface i = interfaces.Main.Implementor.$create(Main.this);
+  ;; Interface<String> i = interfaces.Main.Implementor.$create(Main.this);
   ;;@ interfaces/Main.java:50:4
   (local.set $i (call $$create__interfaces_Main@interfaces.Main.Implementor (local.get $this)))
   ;; i.interfaceMethod();
@@ -118,7 +118,7 @@
   (call_ref (ref.as_non_null (local.get $i))(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast_static $interfaces.Main.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1))) ))
   ;; i.defaultMethod(null);
   ;;@ interfaces/Main.java:52:4
-  (call_ref (ref.as_non_null (local.get $i))(ref.null $java.lang.Object)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast_static $interfaces.Main.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1))) ))
+  (call_ref (ref.as_non_null (local.get $i))(ref.null $java.lang.String)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast_static $interfaces.Main.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1))) ))
   ;; interfaces.Main.Interface.staticInterfaceMethod();
   ;;@ interfaces/Main.java:53:4
   (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )

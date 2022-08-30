@@ -15,17 +15,17 @@ open class MultipleAbstractParents {
  }
 
  fun interface List<T> {
-  fun getFoo(t: T?): kotlin.String?
+  fun getFoo(t: T): kotlin.String?
  }
 
  fun interface Collection<T> {
-  fun getFoo(t: T?): kotlin.String?
+  fun getFoo(t: T): kotlin.String?
  }
 
  abstract class AbstractListCollection<T>: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.Collection<T> {}
 
  abstract class AbstractCollection<T> {
-  open fun getFoo(t: T?): kotlin.String? {
+  open fun getFoo(t: T): kotlin.String? {
    return "AbstractCollection"
   }
  }

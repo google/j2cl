@@ -300,11 +300,17 @@ class JdtEnvironment {
       return createIntersectionType(typeBinding, inNullMarkedScope);
     }
 
-    boolean isNullable = isNullable(typeBinding, elementAnnotations, inNullMarkedScope);
     if (typeBinding.isTypeVariable() || typeBinding.isCapture() || typeBinding.isWildcardType()) {
-      return withNullability(createTypeVariable(typeBinding, inNullMarkedScope), isNullable);
+      // Only mark a type variable as nullable if it has an explicit nullable annotation.
+      // TODO(b/236987392): Revisit when nullability tri-state is added to TypeVariable.
+      boolean hasNullableAnnotation =
+          getNullabilityAnnotation(typeBinding, elementAnnotations)
+              == NullabilityAnnotation.NULLABLE;
+      return withNullability(
+          createTypeVariable(typeBinding, inNullMarkedScope), hasNullableAnnotation);
     }
 
+    boolean isNullable = isNullable(typeBinding, elementAnnotations, inNullMarkedScope);
     if (typeBinding.isArray()) {
       TypeDescriptor componentTypeDescriptor =
           createTypeDescriptor(typeBinding.getComponentType(), inNullMarkedScope);
@@ -377,6 +383,27 @@ class JdtEnvironment {
       return true;
     }
 
+    switch (getNullabilityAnnotation(typeBinding, elementAnnotations)) {
+      case NULLABLE:
+        return true;
+      case NON_NULLABLE:
+        return false;
+      default:
+        return !inNullMarkedScope;
+    }
+  }
+
+  private enum NullabilityAnnotation {
+    NULLABLE,
+    NON_NULLABLE,
+    NO_ANNOTATION
+  }
+
+  /** Return whether a type is annotated for nullablility and which type of annotation it has. */
+  private static NullabilityAnnotation getNullabilityAnnotation(
+      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
+    checkArgument(!typeBinding.isPrimitive());
+
     Iterable<IAnnotationBinding> allAnnotations =
         Iterables.concat(
             Arrays.asList(elementAnnotations),
@@ -386,15 +413,15 @@ class JdtEnvironment {
       String annotationName = annotation.getAnnotationType().getQualifiedName();
 
       if (Nullability.isNonNullAnnotation(annotationName)) {
-        return false;
+        return NullabilityAnnotation.NON_NULLABLE;
       }
 
       if (Nullability.isNullableAnnotation(annotationName)) {
-        return true;
+        return NullabilityAnnotation.NULLABLE;
       }
     }
 
-    return !inNullMarkedScope;
+    return NullabilityAnnotation.NO_ANNOTATION;
   }
 
   /**
@@ -723,7 +750,7 @@ class JdtEnvironment {
                     createTypeDescriptorWithNullability(
                         t, t.getTypeAnnotations(), inNullMarkedScope))
             .transform(TypeVariable.class::cast)
-            .transform(TypeVariable::toNullable);
+            .transform(TypeVariable::toNonNullable);
 
     ImmutableList<TypeDescriptor> typeArgumentTypeDescriptors =
         convertTypeArguments(methodBinding.getTypeArguments(), inNullMarkedScope);
@@ -1227,7 +1254,7 @@ class JdtEnvironment {
             getTypeArgumentTypeDescriptors(
                     typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class)
                 .stream()
-                .map(TypeVariable::toNullable)
+                .map(TypeVariable::toNonNullable)
                 .collect(ImmutableList.toImmutableList()))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)

@@ -939,7 +939,7 @@ public abstract class TypeDeclaration
 
       checkState(
           typeDeclaration.getTypeParameterDescriptors().stream()
-              .allMatch(TypeVariable::isNullable));
+              .noneMatch(TypeVariable::isNullable));
 
       return interner.intern(typeDeclaration);
     }

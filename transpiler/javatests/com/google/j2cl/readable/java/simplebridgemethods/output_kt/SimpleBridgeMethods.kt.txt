@@ -5,7 +5,7 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class Superclass<T: kotlin.Error?> {
- open fun m1(t: T?) {}
+ open fun m1(t: T) {}
 }
 
 open class Subclass: simplebridgemethods.Superclass<kotlin.AssertionError?>() {
@@ -15,11 +15,11 @@ open class Subclass: simplebridgemethods.Superclass<kotlin.AssertionError?>() {
 open class AnotherSubclass: simplebridgemethods.Superclass<kotlin.AssertionError?>() {}
 
 fun interface Callable<V> {
- fun call(v: V?)
+ fun call(v: V)
 }
 
 open class Task<T>: simplebridgemethods.Callable<T> {
- open override fun call(t: T?) {}
+ open override fun call(t: T) {}
 }
 
 open class AnotherTask<T: kotlin.AssertionError?>: simplebridgemethods.Callable<simplebridgemethods.Superclass<T>?> {

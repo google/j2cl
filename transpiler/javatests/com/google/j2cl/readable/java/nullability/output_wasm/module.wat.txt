@@ -4327,64 +4327,64 @@
 (func $m_genericNullableMethod__nullability_defaultnullable_DefaultNullable_ParameterizedNullable__java_lang_Object__void@nullability.defaultnullable.DefaultNullable
  (param $o (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:167:43
+ ;;@ nullability/defaultnullable/DefaultNullable.java:168:43
  (local $$qualifier (ref null $java.lang.Object))
  (local $$qualifier_1 (ref null $java.lang.Object))
  (local $$qualifier_2 (ref null $java.lang.Object))
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:168:49
+  ;;@ nullability/defaultnullable/DefaultNullable.java:169:49
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
   ;; o.setNullable(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:169:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:170:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))
   ;; o.setNonNull(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:170:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:171:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))
   ;; o.setDefaultNullability(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:171:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:172:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))
   (block
    ;; N $qualifier = o.getNullable();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:173:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:174:4
    (local.set $$qualifier (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:173:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:174:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
   )
   (block
    ;; N $qualifier = o.getNonNullable();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:174:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:175:4
    (local.set $$qualifier_1 (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:174:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:175:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; N $qualifier = o.getDefaultNullability();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:175:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:176:4
    (local.set $$qualifier_2 (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:175:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:176:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier_2)))))
   )
   ;; (o.nullable = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:177:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:178:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o) (local.get $n))
   ;; (o.nonNullable = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:178:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:179:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o) (local.get $n))
   ;; (o.defaultNullability = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:179:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:180:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o) (local.get $n))
   ;; o.nullable.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:181:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:182:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o))))))
   ;; o.nonNullable.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:182:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:183:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o))))))
   ;; o.defaultNullability.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:183:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:184:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o))))))
  )
 )
@@ -4393,64 +4393,64 @@
 (func $m_genericNonNullMethod__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable__java_lang_Object__void@nullability.defaultnullable.DefaultNullable
  (param $o (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:186:44
+ ;;@ nullability/defaultnullable/DefaultNullable.java:187:44
  (local $$qualifier (ref null $java.lang.Object))
  (local $$qualifier_1 (ref null $java.lang.Object))
  (local $$qualifier_2 (ref null $java.lang.Object))
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:187:53
+  ;;@ nullability/defaultnullable/DefaultNullable.java:188:53
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
   ;; o.setNullable(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:188:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:189:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))
   ;; o.setNonNull(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:189:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:190:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))
   ;; o.setDefaultNullability(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:190:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:191:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))
   (block
    ;; N $qualifier = o.getNullable();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:192:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:193:4
    (local.set $$qualifier (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:192:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:193:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
   )
   (block
    ;; N $qualifier = o.getNonNullable();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:193:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:194:4
    (local.set $$qualifier_1 (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:193:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:194:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; N $qualifier = o.getDefaultNullability();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:194:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:195:4
    (local.set $$qualifier_2 (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:194:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:195:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier_2)))))
   )
   ;; (o.nullable = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:196:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:197:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o) (local.get $n))
   ;; (o.nonNullable = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:197:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:198:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o) (local.get $n))
   ;; (o.defaultNullability = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:198:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:199:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o) (local.get $n))
   ;; o.nullable.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:200:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:201:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o))))))
   ;; o.nonNullable.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:201:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:202:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o))))))
   ;; o.defaultNullability.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:202:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:203:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o))))))
  )
 )
@@ -4459,64 +4459,64 @@
 (func $m_genericDefaultNullabilityMethod__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability__java_lang_Object__void@nullability.defaultnullable.DefaultNullable
  (param $o (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:205:18
+ ;;@ nullability/defaultnullable/DefaultNullable.java:206:18
  (local $$qualifier (ref null $java.lang.Object))
  (local $$qualifier_1 (ref null $java.lang.Object))
  (local $$qualifier_2 (ref null $java.lang.Object))
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:205:93
+  ;;@ nullability/defaultnullable/DefaultNullable.java:206:93
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
   ;; o.setNullable(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:206:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:207:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))
   ;; o.setNonNull(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:207:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:208:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))
   ;; o.setDefaultNullability(n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:208:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:209:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $n)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))
   (block
    ;; N $qualifier = o.getNullable();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:210:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:211:4
    (local.set $$qualifier (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:210:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:211:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
   )
   (block
    ;; N $qualifier = o.getNonNullable();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:211:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:212:4
    (local.set $$qualifier_1 (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:211:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:212:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; N $qualifier = o.getDefaultNullability();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:212:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:213:4
    (local.set $$qualifier_2 (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o)))))
    ;; $qualifier.hashCode();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:212:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:213:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $$qualifier_2)))))
   )
   ;; (o.nullable = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:214:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:215:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o) (local.get $n))
   ;; (o.nonNullable = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:215:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:216:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o) (local.get $n))
   ;; (o.defaultNullability = n);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:216:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:217:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o) (local.get $n))
   ;; o.nullable.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:218:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:219:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o))))))
   ;; o.nonNullable.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:219:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:220:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o))))))
   ;; o.defaultNullability.hashCode();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:220:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:221:4
   (drop (call_ref (ref.as_non_null (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o)))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o))))))
  )
 )
@@ -4525,7 +4525,7 @@
 (func $m_parametrizedNullableMethod__nullability_defaultnullable_DefaultNullable_ParameterizedNullable__java_lang_String__void@nullability.defaultnullable.DefaultNullable
  (param $o (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNullable))
  (param $s (ref null $java.lang.String))
- ;;@ nullability/defaultnullable/DefaultNullable.java:223:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:224:14
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
@@ -4534,72 +4534,72 @@
  (local $$qualifier_5 (ref null $java.lang.String))
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:224:69
+  ;;@ nullability/defaultnullable/DefaultNullable.java:225:69
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
   ;; o.setNullable(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:225:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:226:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))
   ;; o.setNonNull(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:226:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:227:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))
   ;; o.setDefaultNullability(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:227:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:228:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))
   (block
    ;; String $qualifier = ((String) o.getNullable());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:229:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:230:4
    (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:229:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:230:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
   )
   (block
    ;; String $qualifier = ((String) o.getNonNullable());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:230:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:231:4
    (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:230:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:231:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; String $qualifier = ((String) o.getDefaultNullability());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:231:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:232:4
    (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:231:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:232:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
   )
   ;; (o.nullable = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:233:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:234:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o) (local.get $s))
   ;; (o.nonNullable = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:234:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:235:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o) (local.get $s))
   ;; (o.defaultNullability = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:235:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:236:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o) (local.get $s))
   (block
    ;; String $qualifier = ((String) o.nullable);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:237:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:238:4
    (local.set $$qualifier_3 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:237:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:238:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_3)))))
   )
   (block
    ;; String $qualifier = ((String) o.nonNullable);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:238:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:239:4
    (local.set $$qualifier_4 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:238:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:239:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_4)))))
   )
   (block
    ;; String $qualifier = ((String) o.defaultNullability);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:239:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:240:4
    (local.set $$qualifier_5 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNullable(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:239:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:240:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_5))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_5)))))
   )
  )
@@ -4609,7 +4609,7 @@
 (func $m_parametrizedNonNullMethod__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable__java_lang_String__void@nullability.defaultnullable.DefaultNullable
  (param $o (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (param $s (ref null $java.lang.String))
- ;;@ nullability/defaultnullable/DefaultNullable.java:242:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:243:14
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
@@ -4618,72 +4618,72 @@
  (local $$qualifier_5 (ref null $java.lang.String))
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:243:74
+  ;;@ nullability/defaultnullable/DefaultNullable.java:244:74
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
   ;; o.setNullable(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:244:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:245:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))
   ;; o.setNonNull(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:245:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:246:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))
   ;; o.setDefaultNullability(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:246:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:247:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))
   (block
    ;; String $qualifier = ((String) o.getNullable());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:248:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:249:4
    (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:248:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:249:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
   )
   (block
    ;; String $qualifier = ((String) o.getNonNullable());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:249:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:250:4
    (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:249:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:250:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; String $qualifier = ((String) o.getDefaultNullability());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:250:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:251:4
    (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:250:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:251:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
   )
   ;; (o.nullable = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:252:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:253:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o) (local.get $s))
   ;; (o.nonNullable = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:253:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:254:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o) (local.get $s))
   ;; (o.defaultNullability = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:254:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:255:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o) (local.get $s))
   (block
    ;; String $qualifier = ((String) o.nullable);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:256:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:257:4
    (local.set $$qualifier_3 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:256:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:257:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_3)))))
   )
   (block
    ;; String $qualifier = ((String) o.nonNullable);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:257:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:258:4
    (local.set $$qualifier_4 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:257:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:258:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_4)))))
   )
   (block
    ;; String $qualifier = ((String) o.defaultNullability);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:258:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:259:4
    (local.set $$qualifier_5 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:258:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:259:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_5))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_5)))))
   )
  )
@@ -4693,7 +4693,7 @@
 (func $m_parametrizedDefaultNullabilityMethod__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability__java_lang_String__void@nullability.defaultnullable.DefaultNullable
  (param $o (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability))
  (param $s (ref null $java.lang.String))
- ;;@ nullability/defaultnullable/DefaultNullable.java:261:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:262:14
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $java.lang.String))
  (local $$qualifier_2 (ref null $java.lang.String))
@@ -4702,72 +4702,72 @@
  (local $$qualifier_5 (ref null $java.lang.String))
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:262:59
+  ;;@ nullability/defaultnullable/DefaultNullable.java:263:59
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
   ;; o.setNullable(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:263:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:264:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))
   ;; o.setNonNull(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:264:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:265:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))
   ;; o.setDefaultNullability(s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:265:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:266:4
   (call_ref (ref.as_non_null (local.get $o))(local.get $s)(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))
   (block
    ;; String $qualifier = ((String) o.getNullable());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:267:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:268:4
    (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:267:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:268:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
   )
   (block
    ;; String $qualifier = ((String) o.getNonNullable());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:268:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:269:4
    (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:268:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:269:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
   )
   (block
    ;; String $qualifier = ((String) o.getDefaultNullability());
-   ;;@ nullability/defaultnullable/DefaultNullable.java:269:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:270:4
    (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $o))(struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $vtable(local.get $o))))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:269:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:270:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
   )
   ;; (o.nullable = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:271:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:272:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o) (local.get $s))
   ;; (o.nonNullable = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:272:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:273:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o) (local.get $s))
   ;; (o.defaultNullability = s);
-  ;;@ nullability/defaultnullable/DefaultNullable.java:273:4
+  ;;@ nullability/defaultnullable/DefaultNullable.java:274:4
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o) (local.get $s))
   (block
    ;; String $qualifier = ((String) o.nullable);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:275:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:276:4
    (local.set $$qualifier_3 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:275:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:276:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_3)))))
   )
   (block
    ;; String $qualifier = ((String) o.nonNullable);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:276:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:277:4
    (local.set $$qualifier_4 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:276:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:277:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_4)))))
   )
   (block
    ;; String $qualifier = ((String) o.defaultNullability);
-   ;;@ nullability/defaultnullable/DefaultNullable.java:277:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:278:4
    (local.set $$qualifier_5 (ref.cast_static $java.lang.String (struct.get $nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedDefaultNullability(local.get $o))))
    ;; $qualifier.length();
-   ;;@ nullability/defaultnullable/DefaultNullable.java:277:4
+   ;;@ nullability/defaultnullable/DefaultNullable.java:278:4
    (drop (call_ref (ref.as_non_null (local.get $$qualifier_5))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_5)))))
   )
  )
@@ -4776,10 +4776,10 @@
 ;;; void DefaultNullable.testListOfWildcard(List<?> l)
 (func $m_testListOfWildcard__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:281:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:282:14
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:281:44
+  ;;@ nullability/defaultnullable/DefaultNullable.java:282:44
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -4787,10 +4787,10 @@
 ;;; void DefaultNullable.testListOfWildcardWithDefaultNullabilityObject(List<? extends Object> l)
 (func $m_testListOfWildcardWithDefaultNullabilityObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:283:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:284:14
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:283:87
+  ;;@ nullability/defaultnullable/DefaultNullable.java:284:87
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -4798,10 +4798,10 @@
 ;;; void DefaultNullable.testListOfWildcardWithNullableObject(List<? extends Object> l)
 (func $m_testListOfWildcardWithNullableObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:285:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:286:14
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:285:87
+  ;;@ nullability/defaultnullable/DefaultNullable.java:286:87
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -4809,10 +4809,10 @@
 ;;; void DefaultNullable.testListOfWildcardWithNonNullObject(List<? extends Object> l)
 (func $m_testListOfWildcardWithNonNullObject__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:287:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:288:14
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:287:87
+  ;;@ nullability/defaultnullable/DefaultNullable.java:288:87
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -4820,10 +4820,10 @@
 ;;; void DefaultNullable.testListOfWildcardWithDefaultNullabilityStringt(List<? extends String> l)
 (func $m_testListOfWildcardWithDefaultNullabilityStringt__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:289:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:290:14
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:289:88
+  ;;@ nullability/defaultnullable/DefaultNullable.java:290:88
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -4831,10 +4831,10 @@
 ;;; void DefaultNullable.testListOfWildcardWithNullableString(List<? extends String> l)
 (func $m_testListOfWildcardWithNullableString__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:291:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:292:14
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:291:87
+  ;;@ nullability/defaultnullable/DefaultNullable.java:292:87
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -4842,10 +4842,10 @@
 ;;; void DefaultNullable.testListOfWildcardWithNonNullString(List<? extends String> l)
 (func $m_testListOfWildcardWithNonNullString__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:293:14
+ ;;@ nullability/defaultnullable/DefaultNullable.java:294:14
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:293:87
+  ;;@ nullability/defaultnullable/DefaultNullable.java:294:87
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -4853,10 +4853,10 @@
 ;;; void DefaultNullable.testListOfWildcardWithDefaultNullabilityVariable(List<? extends T> l)
 (func $m_testListOfWildcardWithDefaultNullabilityVariable__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:295:18
+ ;;@ nullability/defaultnullable/DefaultNullable.java:296:18
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:295:88
+  ;;@ nullability/defaultnullable/DefaultNullable.java:296:88
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -4864,10 +4864,10 @@
 ;;; void DefaultNullable.testListOfWildcardWithNullableVariable(List<? extends T> l)
 (func $m_testListOfWildcardWithNullableVariable__java_util_List__void@nullability.defaultnullable.DefaultNullable
  (param $l (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:297:18
+ ;;@ nullability/defaultnullable/DefaultNullable.java:298:18
  (block
   ;; nullability.defaultnullable.DefaultNullable.$clinit();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:297:88
+  ;;@ nullability/defaultnullable/DefaultNullable.java:298:88
   (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
  )
 )
@@ -5564,6 +5564,9 @@
   ;; (ParameterizedNonNullable.this.nonNullable = n);
   ;;@ nullability/defaultnullable/DefaultNullable.java:144:6
   (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_nonNullable__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $this) (local.get $n))
+  ;; (ParameterizedNonNullable.this.defaultNullability = n);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:145:6
+  (struct.set $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable $f_defaultNullability__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable(local.get $this) (local.get $n))
  )
 )
 
@@ -5572,12 +5575,12 @@
  (type $function.m_getNullable__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:147:16
+ ;;@ nullability/defaultnullable/DefaultNullable.java:148:16
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:148:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:149:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -5588,12 +5591,12 @@
  (type $function.m_getNonNullable__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:152:6
+ ;;@ nullability/defaultnullable/DefaultNullable.java:153:6
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; throw java.lang.RuntimeException.$create();
-  ;;@ nullability/defaultnullable/DefaultNullable.java:153:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:154:6
   (throw $exception.event (call $$create__@java.lang.RuntimeException ))
  )
 )
@@ -5604,12 +5607,12 @@
  (type $function.m_getDefaultNullability__java_lang_Object_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:156:6
+ ;;@ nullability/defaultnullable/DefaultNullable.java:157:6
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
   ;; return null;
-  ;;@ nullability/defaultnullable/DefaultNullable.java:157:6
+  ;;@ nullability/defaultnullable/DefaultNullable.java:158:6
   (return (ref.null $java.lang.Object))
  )
 )
@@ -5620,7 +5623,7 @@
  (type $function.m_setNullable__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:160:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:161:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -5633,7 +5636,7 @@
  (type $function.m_setNonNull__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:162:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:163:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block
@@ -5646,7 +5649,7 @@
  (type $function.m_setDefaultNullability__java_lang_Object__void_$pp_nullability_defaultnullable)
  (param $this.untyped (ref $java.lang.Object))
  (param $n (ref null $java.lang.Object))
- ;;@ nullability/defaultnullable/DefaultNullable.java:164:9
+ ;;@ nullability/defaultnullable/DefaultNullable.java:165:9
  (local $this (ref null $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable (local.get $this.untyped)))
  (block

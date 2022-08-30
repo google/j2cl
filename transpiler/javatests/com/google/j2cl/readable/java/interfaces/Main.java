@@ -47,7 +47,7 @@ public class Main {
   abstract class AbstractImplementor implements SubInterface {}
 
   void testInterfaceMembers() {
-    Interface i = new Implementor();
+    Interface<String> i = new Implementor();
     i.interfaceMethod();
     i.defaultMethod(null);
     Interface.staticInterfaceMethod();
