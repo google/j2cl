@@ -15,8 +15,8 @@
  */
 package javaemul.internal;
 
-import jsinterop.annotations.JsType;
+import javaemul.internal.annotations.Wasm;
 
 /** A special interface to expose WASM objects to JavaScript side. */
-@JsType
+@Wasm("data")
 public interface WasmOpaque {}

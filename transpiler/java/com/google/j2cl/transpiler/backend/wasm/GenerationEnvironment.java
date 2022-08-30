@@ -103,10 +103,6 @@ class GenerationEnvironment {
   }
 
   String getWasmType(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.toRawTypeDescriptor().isWasmExtern()) {
-      return "externref";
-    }
-
     if (typeDescriptor.isPrimitive()) {
       return getWasmTypeForPrimitive(typeDescriptor);
     }
@@ -131,12 +127,9 @@ class GenerationEnvironment {
   String getWasmTypeName(TypeDescriptor typeDescriptor) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
 
-    if (typeDescriptor.isWasmExtern()) {
-      return "extern";
-    }
-
-    if (typeDescriptor.isWasmOpaque()) {
-      return "data";
+    if (typeDescriptor instanceof DeclaredTypeDescriptor
+        && ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration().getWasmInfo() != null) {
+      return ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration().getWasmInfo();
     }
 
     if (typeDescriptor.isArray()) {

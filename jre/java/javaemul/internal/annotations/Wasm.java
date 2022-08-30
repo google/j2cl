@@ -18,9 +18,9 @@ package javaemul.internal.annotations;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
-/** An annotation to mark a method to point to native WASM functionality. */
+/** An annotation to mark a type/method to point to native WASM functionality. */
 @CompilerHint
-@Target(ElementType.METHOD)
+@Target({ElementType.TYPE, ElementType.METHOD})
 public @interface Wasm {
   String value();
 }

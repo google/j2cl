@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
-import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Kind;
@@ -823,6 +822,13 @@ class JdtEnvironment {
         .collect(toImmutableList());
   }
 
+  private static String getWasmInfo(ITypeBinding binding) {
+    return JdtAnnotationUtils.getStringAttribute(
+        JdtAnnotationUtils.findAnnotationBindingByName(
+            binding.getAnnotations(), "javaemul.internal.annotations.Wasm"),
+        "value");
+  }
+
   private static String getWasmInfo(IMethodBinding binding) {
     return JdtAnnotationUtils.getStringAttribute(
         JdtAnnotationUtils.findAnnotationBindingByName(
@@ -1177,8 +1183,6 @@ class JdtEnvironment {
                 .map(this::createFieldDescriptor)
                 .collect(toImmutableList());
 
-    JsEnumInfo jsEnumInfo = JsInteropUtils.getJsEnumInfo(typeBinding);
-
     boolean isNullMarked = isNullMarked(typeBinding, packageInfoCache);
     IBinding declaringMemberBinding = getDeclaringMethodOrFieldBinding(typeBinding);
 
@@ -1207,7 +1211,8 @@ class JdtEnvironment {
         .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
         .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
         .setJsType(JsInteropUtils.isJsType(typeBinding))
-        .setJsEnumInfo(jsEnumInfo)
+        .setJsEnumInfo(JsInteropUtils.getJsEnumInfo(typeBinding))
+        .setWasmInfo(getWasmInfo(typeBinding))
         .setNative(JsInteropUtils.isJsNativeType(typeBinding))
         .setAnonymous(typeBinding.isAnonymous())
         .setLocal(isLocal(typeBinding))

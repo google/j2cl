@@ -15,8 +15,8 @@
  */
 package javaemul.internal;
 
-import jsinterop.annotations.JsType;
+import javaemul.internal.annotations.Wasm;
 
 /** A special interface that to deal with JavaScript values as externs in WASM. */
-@JsType
+@Wasm("extern")
 public interface WasmExtern {}

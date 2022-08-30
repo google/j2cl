@@ -275,6 +275,9 @@ public abstract class TypeDeclaration
   @Nullable
   public abstract JsEnumInfo getJsEnumInfo();
 
+  @Nullable
+  public abstract String getWasmInfo();
+
   public boolean isKtNative() {
     return getKtTypeInfo() != null;
   }
@@ -811,6 +814,8 @@ public abstract class TypeDeclaration
     public abstract Builder setJsType(boolean isJsType);
 
     public abstract Builder setJsEnumInfo(JsEnumInfo jsEnumInfo);
+
+    public abstract Builder setWasmInfo(String wasmInfo);
 
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
