@@ -351,7 +351,7 @@ private fun Renderer.renderNewArray(
     } else {
       render("kotlin.Array")
       renderInAngleBrackets {
-        renderTypeDescriptor(componentTypeDescriptor, TypeDescriptorUsage.ARGUMENT)
+        renderTypeDescriptor(componentTypeDescriptor, TypeDescriptorUsage.REFERENCE)
       }
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
@@ -391,7 +391,7 @@ private fun Renderer.renderArrayOfNulls(
 ) {
   render("kotlin.arrayOfNulls")
   renderInAngleBrackets {
-    renderTypeDescriptor(componentTypeDescriptor.toNonNullable(), TypeDescriptorUsage.ARGUMENT)
+    renderTypeDescriptor(componentTypeDescriptor.toNonNullable(), TypeDescriptorUsage.REFERENCE)
   }
   renderInParentheses { renderExpression(dimension) }
 }

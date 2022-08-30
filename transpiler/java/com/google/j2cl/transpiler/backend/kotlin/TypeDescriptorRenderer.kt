@@ -30,10 +30,6 @@ enum class TypeDescriptorUsage {
   /** Type reference (RAW types are star-projected). */
   REFERENCE,
 
-  // TODO(b/206611912): Remove when TypeVariable provides correct nullability.
-  /** Generic argument (type variables are rendered without nullability). */
-  ARGUMENT,
-
   /** Super-type declaration (RAW types are projected to bounds). */
   SUPER_TYPE,
 
@@ -122,8 +118,7 @@ private fun Renderer.renderTypeArguments(
     when (usage) {
       TypeDescriptorUsage.SUPER_TYPE,
       TypeDescriptorUsage.REFERENCE -> true
-      TypeDescriptorUsage.INSTANCE_OF,
-      TypeDescriptorUsage.ARGUMENT -> false
+      TypeDescriptorUsage.INSTANCE_OF -> false
     }
   val arguments =
     typeArgumentDescriptors(declaredTypeDescriptor, projectBounds, seenTypeDescriptorsForArguments)
@@ -141,7 +136,7 @@ internal fun Renderer.renderTypeArguments(
 ) {
   renderInAngleBrackets {
     renderCommaSeparated(inferNonNullableBounds(typeParameters, typeArguments)) {
-      renderTypeDescriptor(it, TypeDescriptorUsage.ARGUMENT, seenTypeDescriptors)
+      renderTypeDescriptor(it, TypeDescriptorUsage.REFERENCE, seenTypeDescriptors)
     }
   }
 }
@@ -175,7 +170,7 @@ private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, usage: TypeD
     }
   } else {
     renderName(typeVariable.toNullable())
-    if (usage != TypeDescriptorUsage.ARGUMENT) renderNullableSuffix(typeVariable)
+    renderNullableSuffix(typeVariable)
   }
 }
 
