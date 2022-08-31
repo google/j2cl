@@ -21,7 +21,6 @@ import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
-import com.google.j2cl.transpiler.ast.TypeVariable
 import java.util.stream.Collectors
 
 fun Renderer.renderType(type: Type) {
@@ -74,7 +73,7 @@ private fun Renderer.renderSuperTypes(type: Type) {
     val hasConstructors = type.constructors.isNotEmpty()
     render(": ")
     renderCommaSeparated(superTypes) { superType ->
-      renderTypeDescriptor(superType.toNonNullable(), TypeDescriptorUsage.SUPER_TYPE)
+      renderTypeDescriptor(superType.toNonNullable().toNonRaw(), asSuperType = true)
       if (superType.isClass && !hasConstructors) render("()")
     }
   }
@@ -136,27 +135,3 @@ private fun Renderer.renderEnumValues(type: Type) {
   }
   render(";\n")
 }
-
-// TODO(b/216796920): Remove when the bug is fixed.
-/** Type parameters declared directly on this type. */
-internal val TypeDeclaration.directlyDeclaredTypeParameterDescriptors: List<TypeVariable>
-  get() = typeParameterDescriptors.take(directlyDeclaredTypeParameterCount)
-
-// TODO(b/216796920): Remove when the bug is fixed.
-/** The number of type parameters declared directly on this type. */
-internal val TypeDeclaration.directlyDeclaredTypeParameterCount: Int
-  get() {
-    val enclosingInstanceTypeParameterCount =
-      enclosingTypeDeclaration
-        ?.takeIf { isCapturingEnclosingInstance }
-        ?.typeParameterDescriptors
-        ?.size
-        ?: 0
-
-    val enclosingMethodTypeParameterCount =
-      enclosingMethodDescriptor?.typeParameterTypeDescriptors?.size ?: 0
-
-    return typeParameterDescriptors.size
-      .minus(enclosingInstanceTypeParameterCount)
-      .minus(enclosingMethodTypeParameterCount)
-  }

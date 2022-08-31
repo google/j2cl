@@ -105,9 +105,7 @@ private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
     PrimitiveTypes.DOUBLE -> render("kotlin.doubleArrayOf")
     else -> {
       render("kotlin.arrayOf")
-      renderInAngleBrackets {
-        renderTypeDescriptor(componentTypeDescriptor, TypeDescriptorUsage.REFERENCE)
-      }
+      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonRaw()) }
     }
   }
   renderInParentheses {
@@ -138,7 +136,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
 private fun Renderer.renderCastExpression(expression: CastExpression) {
   renderExpression(expression.expression)
   render(" as ")
-  renderTypeDescriptor(expression.castTypeDescriptor, TypeDescriptorUsage.REFERENCE)
+  renderTypeDescriptor(expression.castTypeDescriptor.toNonRaw())
 }
 
 private fun Renderer.renderBinaryOperator(operator: BinaryOperator) {
@@ -179,7 +177,7 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
   val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!.toNonNullable()
-  renderTypeDescriptor(functionalInterface, TypeDescriptorUsage.SUPER_TYPE)
+  renderTypeDescriptor(functionalInterface.toNonRaw(), asSuperType = true)
   render(" ")
   renderInCurlyBrackets {
     val parameters = functionExpression.parameters
@@ -207,8 +205,7 @@ private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOf
     render("kotlin.Array<*>")
   } else {
     renderTypeDescriptor(
-      instanceOfExpression.testTypeDescriptor.toNonNullable(),
-      TypeDescriptorUsage.INSTANCE_OF
+      instanceOfExpression.testTypeDescriptor.toNonNullable().toNonRaw(projectToWildcards = true)
     )
   }
 }
@@ -279,9 +276,9 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
   renderIdentifier(expression.target.ktName)
   if (!expression.target.isKtProperty) {
-    val typeArguments = methodDescriptor.typeArgumentTypeDescriptors
+    val typeParameters = methodDescriptor.declarationDescriptor.typeParameterTypeDescriptors
+    val typeArguments = methodDescriptor.typeArgumentTypeDescriptors.map { it.toNonRaw() }
     if (typeArguments.isNotEmpty() && !typeArguments.any { it.isInferred }) {
-      val typeParameters = methodDescriptor.declarationDescriptor.typeParameterTypeDescriptors
       renderTypeArguments(typeParameters, typeArguments)
     }
     renderInvocationArguments(expression)
@@ -350,9 +347,7 @@ private fun Renderer.renderNewArray(
       renderArrayOfNulls(componentTypeDescriptor, firstDimension)
     } else {
       render("kotlin.Array")
-      renderInAngleBrackets {
-        renderTypeDescriptor(componentTypeDescriptor, TypeDescriptorUsage.REFERENCE)
-      }
+      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonRaw()) }
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
       renderInCurlyBrackets {
@@ -390,9 +385,7 @@ private fun Renderer.renderArrayOfNulls(
   dimension: Expression
 ) {
   render("kotlin.arrayOfNulls")
-  renderInAngleBrackets {
-    renderTypeDescriptor(componentTypeDescriptor.toNonNullable(), TypeDescriptorUsage.REFERENCE)
-  }
+  renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonNullable().toNonRaw()) }
   renderInParentheses { renderExpression(dimension) }
 }
 
@@ -408,8 +401,8 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   // simple type name.
   val typeDeclaration = typeDescriptor.typeDeclaration
   renderTypeDescriptor(
-    typeDescriptor,
-    TypeDescriptorUsage.SUPER_TYPE,
+    typeDescriptor.toNonRaw(),
+    asSuperType = true,
     asSimple = typeDeclaration.isCapturingEnclosingInstance
   )
 
@@ -486,7 +479,7 @@ fun Renderer.renderVariable(variable: Variable) {
   val typeDescriptor = variable.typeDescriptor
   if (!typeDescriptor.isInferred && !typeDescriptor.isProtobufBuilder()) {
     render(": ")
-    renderTypeDescriptor(typeDescriptor, TypeDescriptorUsage.REFERENCE)
+    renderTypeDescriptor(typeDescriptor.toNonRaw())
   }
 }
 

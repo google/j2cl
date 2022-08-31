@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
 
 internal fun Renderer.renderTypeParameters(typeVariables: List<TypeVariable>) {
@@ -37,13 +36,13 @@ private val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
   get() =
     upperBoundTypeDescriptor
       .let { if (it is IntersectionTypeDescriptor) it.intersectionTypeDescriptors else listOf(it) }
-      .filter { !TypeDescriptors.isJavaLangObject(it) || !it.isNullable }
+      .filter { !it.isImplicitUpperBound }
 
 private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
   renderName(typeVariable)
   typeVariable.upperBoundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
     render(": ")
-    renderTypeDescriptor(boundTypeDescriptor, TypeDescriptorUsage.REFERENCE)
+    renderTypeDescriptor(boundTypeDescriptor.toNonRaw())
   }
 }
 
@@ -56,5 +55,5 @@ private val TypeVariable.whereClauseItems: List<WhereClauseItem>
 private fun Renderer.render(whereClauseItem: WhereClauseItem) {
   renderName(whereClauseItem.hasName)
   render(": ")
-  renderTypeDescriptor(whereClauseItem.boundTypeDescriptor, TypeDescriptorUsage.REFERENCE)
+  renderTypeDescriptor(whereClauseItem.boundTypeDescriptor.toNonRaw())
 }

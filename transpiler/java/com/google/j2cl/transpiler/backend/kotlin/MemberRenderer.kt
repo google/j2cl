@@ -81,7 +81,7 @@ private fun Renderer.renderField(field: Field) {
   render(if (isFinal) "val " else "var ")
   renderIdentifier(field.descriptor.ktName)
   render(": ")
-  renderTypeDescriptor(typeDescriptor, TypeDescriptorUsage.REFERENCE)
+  renderTypeDescriptor(typeDescriptor.toNonRaw())
   field.initializer?.let { initializer ->
     render(" = ")
     renderExpression(initializer)
@@ -161,14 +161,14 @@ private fun Renderer.renderParameter(parameterDescriptor: ParameterDescriptor, n
   if (parameterDescriptor.isVarargs) render("vararg ")
   renderName(name)
   render(": ")
-  renderTypeDescriptor(renderedTypeDescriptor, TypeDescriptorUsage.REFERENCE)
+  renderTypeDescriptor(renderedTypeDescriptor.toNonRaw())
 }
 
 internal fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {
   val returnTypeDescriptor = methodDescriptor.returnTypeDescriptor
   if (returnTypeDescriptor != PrimitiveTypes.VOID) {
     render(": ")
-    renderTypeDescriptor(returnTypeDescriptor, TypeDescriptorUsage.REFERENCE)
+    renderTypeDescriptor(returnTypeDescriptor.toNonRaw())
   }
 }
 

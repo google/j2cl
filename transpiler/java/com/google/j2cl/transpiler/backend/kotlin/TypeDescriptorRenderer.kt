@@ -21,34 +21,19 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
-import com.google.j2cl.transpiler.ast.TypeVariable.createWildcard
-
-/** Usage of type descriptor. */
-enum class TypeDescriptorUsage {
-  /** Type reference (RAW types are star-projected). */
-  REFERENCE,
-
-  /** Super-type declaration (RAW types are projected to bounds). */
-  SUPER_TYPE,
-
-  /** The type in instanceof expression. */
-  INSTANCE_OF
-}
 
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
-  usage: TypeDescriptorUsage,
-  seenTypeDescriptors: Set<DeclaredTypeDescriptor> = setOf(),
-  asSimple: Boolean = false
+  asSimple: Boolean = false,
+  asSuperType: Boolean = false
 ) {
   when (typeDescriptor) {
     is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
     is DeclaredTypeDescriptor ->
-      renderDeclaredTypeDescriptor(typeDescriptor, usage, seenTypeDescriptors, asSimple = asSimple)
+      renderDeclaredTypeDescriptor(typeDescriptor, asSimple = asSimple, asSuperType = asSuperType)
     is PrimitiveTypeDescriptor -> renderQualifiedName(typeDescriptor)
-    is TypeVariable -> renderTypeVariable(typeDescriptor, usage)
+    is TypeVariable -> renderTypeVariable(typeDescriptor)
     is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
     else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
   }
@@ -62,18 +47,15 @@ private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDes
   renderQualifiedName(arrayTypeDescriptor)
   val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
   if (!componentTypeDescriptor.isPrimitive) {
-    renderInAngleBrackets {
-      renderTypeDescriptor(componentTypeDescriptor, usage = TypeDescriptorUsage.REFERENCE)
-    }
+    renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
   }
   renderNullableSuffix(arrayTypeDescriptor)
 }
 
 private fun Renderer.renderDeclaredTypeDescriptor(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
-  usage: TypeDescriptorUsage,
-  seenTypeDescriptors: Set<DeclaredTypeDescriptor>,
-  asSimple: Boolean
+  asSimple: Boolean = false,
+  asSuperType: Boolean = false
 ) {
   val typeDeclaration = declaredTypeDescriptor.typeDeclaration
   val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
@@ -85,58 +67,43 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     if (!typeDeclaration.isCapturingEnclosingInstance) {
       renderQualifiedName(enclosingTypeDescriptor)
     } else {
-      renderDeclaredTypeDescriptor(
-        enclosingTypeDescriptor.toNonNullable(),
-        usage,
-        seenTypeDescriptors,
-        asSimple = false
-      )
+      renderDeclaredTypeDescriptor(enclosingTypeDescriptor.toNonNullable())
     }
     render(".")
     renderIdentifier(typeDeclaration.ktSimpleName)
   } else {
     // Render the qualified or bridge name for this top-level type.
     var qualifiedName = typeDeclaration.ktQualifiedName
-    if (usage == TypeDescriptorUsage.SUPER_TYPE && typeDeclaration.ktBridgeQualifiedName != null) {
+    if (asSuperType && typeDeclaration.ktBridgeQualifiedName != null) {
       qualifiedName = typeDeclaration.ktBridgeQualifiedName
     }
     renderQualifiedName(qualifiedName)
   }
 
-  renderTypeArguments(declaredTypeDescriptor, usage, seenTypeDescriptors)
+  renderTypeArguments(declaredTypeDescriptor, asSuperType = asSuperType)
   renderNullableSuffix(declaredTypeDescriptor)
 }
 
 private fun Renderer.renderTypeArguments(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
-  usage: TypeDescriptorUsage,
-  seenTypeDescriptors: Set<DeclaredTypeDescriptor>
+  asSuperType: Boolean = false
 ) {
-  val seenTypeDescriptorsForArguments = seenTypeDescriptors + declaredTypeDescriptor
   val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
-  val projectBounds =
-    when (usage) {
-      TypeDescriptorUsage.SUPER_TYPE,
-      TypeDescriptorUsage.REFERENCE -> true
-      TypeDescriptorUsage.INSTANCE_OF -> false
-    }
-  val arguments =
-    typeArgumentDescriptors(declaredTypeDescriptor, projectBounds, seenTypeDescriptorsForArguments)
+  val arguments = declaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors
   if (arguments.isNotEmpty()) {
-    if (usage != TypeDescriptorUsage.SUPER_TYPE || !arguments.any { it.isInferred }) {
-      renderTypeArguments(parameters, arguments, seenTypeDescriptorsForArguments)
+    if (!asSuperType || !arguments.any { it.isInferred }) {
+      renderTypeArguments(parameters, arguments)
     }
   }
 }
 
 internal fun Renderer.renderTypeArguments(
   typeParameters: List<TypeVariable>,
-  typeArguments: List<TypeDescriptor>,
-  seenTypeDescriptors: Set<DeclaredTypeDescriptor> = setOf()
+  typeArguments: List<TypeDescriptor>
 ) {
   renderInAngleBrackets {
     renderCommaSeparated(inferNonNullableBounds(typeParameters, typeArguments)) {
-      renderTypeDescriptor(it, TypeDescriptorUsage.REFERENCE, seenTypeDescriptors)
+      renderTypeDescriptor(it)
     }
   }
 }
@@ -153,19 +120,19 @@ private fun inferNonNullableBounds(
   if (!typeParameter.upperBoundTypeDescriptor.isNullable) typeArgument.toNonNullable()
   else typeArgument
 
-private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, usage: TypeDescriptorUsage) {
+private fun Renderer.renderTypeVariable(typeVariable: TypeVariable) {
   if (typeVariable.isWildcardOrCapture) {
     val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
     if (lowerBoundTypeDescriptor != null) {
       render("in ")
-      renderTypeDescriptor(lowerBoundTypeDescriptor, TypeDescriptorUsage.REFERENCE)
+      renderTypeDescriptor(lowerBoundTypeDescriptor)
     } else {
       val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
-      if (isJavaLangObject(boundTypeDescriptor) && boundTypeDescriptor.isNullable) {
+      if (boundTypeDescriptor.isImplicitUpperBound) {
         render("*")
       } else {
         render("out ")
-        renderTypeDescriptor(boundTypeDescriptor, TypeDescriptorUsage.REFERENCE)
+        renderTypeDescriptor(boundTypeDescriptor)
       }
     }
   } else {
@@ -181,58 +148,13 @@ private fun Renderer.renderIntersectionTypeDescriptor(
   // supported in Kotlin.
   // TODO(b/205367162): Support intersection types.
   val typeDescriptors = intersectionTypeDescriptor.intersectionTypeDescriptors
-  renderTypeDescriptor(typeDescriptors.first(), TypeDescriptorUsage.REFERENCE)
+  renderTypeDescriptor(typeDescriptors.first())
   render(" ")
   renderInCommentBrackets {
     render("& ")
-    renderSeparatedWith(typeDescriptors.drop(1), " & ") {
-      renderTypeDescriptor(it, TypeDescriptorUsage.REFERENCE)
-    }
+    renderSeparatedWith(typeDescriptors.drop(1), " & ") { renderTypeDescriptor(it) }
   }
 }
-
-/**
- * Returns type argument descriptors for rendering. RAW types will use projected arguments, using
- * wildcards or bounds if {@code projectBounds} flag is {@code true}.
- */
-private fun Renderer.typeArgumentDescriptors(
-  typeDescriptor: DeclaredTypeDescriptor,
-  projectBounds: Boolean,
-  seenTypeDescriptors: Set<DeclaredTypeDescriptor>
-): List<TypeDescriptor> {
-  val parameters = typeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
-  val arguments = typeDescriptor.directlyDeclaredTypeArgumentDescriptors
-
-  // Return original arguments for non-raw types.
-  val isRaw = arguments.isEmpty() && parameters.isNotEmpty()
-  if (!isRaw) return arguments
-
-  // Convert type arguments to variables.
-  val unparametrizedTypeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor()
-
-  // Find variables which will be projected to bounds, others will be projected to wildcards.
-  val boundProjectedVariables =
-    if (projectBounds)
-      unparametrizedTypeDescriptor.typeArgumentDescriptors.map { it as TypeVariable }.toSet()
-    else setOf()
-
-  // Replace variables with bounds or wildcards.
-  val projectedTypeDescriptor =
-    unparametrizedTypeDescriptor.specializeTypeVariables { variable ->
-      val upperBound = variable.upperBoundTypeDescriptor.toRawTypeDescriptor()
-      val isRecursive =
-        upperBound is DeclaredTypeDescriptor && seenTypeDescriptors.contains(upperBound)
-      val projectToBounds = boundProjectedVariables.contains(variable) && !isRecursive
-      if (projectToBounds) upperBound else createWildcard()
-    }
-
-  return projectedTypeDescriptor.typeArgumentDescriptors
-}
-
-// TODO(b/216796920): Remove when the bug is fixed.
-/** Type arguments declared directly on this type. */
-private val DeclaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors: List<TypeDescriptor>
-  get() = typeArgumentDescriptors.take(typeDeclaration.directlyDeclaredTypeParameterCount)
 
 internal val TypeDescriptor.isInferred
   get() =
