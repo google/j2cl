@@ -176,6 +176,10 @@ public final class ArrayHelper {
     throw new UnsupportedOperationException();
   }
 
+  public static Iterator arrayIterator(boolean[] array) {
+    throw new UnsupportedOperationException();
+  }
+
   private static final class IntArrayIterator {
     private int index = 0;
     private int[] array;
