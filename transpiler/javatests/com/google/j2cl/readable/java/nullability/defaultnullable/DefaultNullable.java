@@ -281,19 +281,35 @@ public class DefaultNullable {
   // Wildcards
   static void testListOfWildcard(List<?> l) {}
 
-  static void testListOfWildcardWithDefaultNullabilityObject(List<? extends Object> l) {}
+  static void testListOfWildcardExtendsDefaultNullabilityObject(List<? extends Object> l) {}
 
-  static void testListOfWildcardWithNullableObject(List<? extends @Nullable Object> l) {}
+  static void testListOfWildcardExtendsNullableObject(List<? extends @Nullable Object> l) {}
 
-  static void testListOfWildcardWithNonNullObject(List<? extends @JsNonNull Object> l) {}
+  static void testListOfWildcardExtendsNonNullObject(List<? extends @JsNonNull Object> l) {}
 
-  static void testListOfWildcardWithDefaultNullabilityStringt(List<? extends String> l) {}
+  static void testListOfWildcardExtendsDefaultNullabilityString(List<? extends String> l) {}
 
-  static void testListOfWildcardWithNullableString(List<? extends @Nullable String> l) {}
+  static void testListOfWildcardExtendsNullableString(List<? extends @Nullable String> l) {}
 
-  static void testListOfWildcardWithNonNullString(List<? extends @JsNonNull String> l) {}
+  static void testListOfWildcardExtendsNonNullString(List<? extends @JsNonNull String> l) {}
 
-  static <T> void testListOfWildcardWithDefaultNullabilityVariable(List<? extends T> l) {}
+  static <T> void testListOfWildcardExtendsDefaultNullabilityVariable(List<? extends T> l) {}
 
-  static <T> void testListOfWildcardWithNullableVariable(List<? extends @Nullable T> l) {}
+  static <T> void testListOfWildcardExtendsNullableVariable(List<? extends @Nullable T> l) {}
+
+  static void testListOfWildcardSuperDefaultNullabilityObject(List<? super Object> l) {}
+
+  static void testListOfWildcardSuperNullableObject(List<? super @Nullable Object> l) {}
+
+  static void testListOfWildcardSuperNonNullObject(List<? super @JsNonNull Object> l) {}
+
+  static void testListOfWildcardSuperDefaultNullabilityString(List<? super String> l) {}
+
+  static void testListOfWildcardSuperNullableString(List<? super @Nullable String> l) {}
+
+  static void testListOfWildcardSuperNonNullString(List<? super @JsNonNull String> l) {}
+
+  static <T> void testListOfWildcardSuperDefaultNullabilityVariable(List<? super T> l) {}
+
+  static <T> void testListOfWildcardSuperNullableVariable(List<? super @Nullable T> l) {}
 }

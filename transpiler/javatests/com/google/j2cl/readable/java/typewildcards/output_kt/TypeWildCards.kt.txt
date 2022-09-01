@@ -1,97 +1,101 @@
+// Generated from "typewildcards/TypeWildCards.java"
 package typewildcards
+
+import javaemul.lang.*
+import kotlin.jvm.*
 
 open class GenericType<T> {}
 
 open class TypeWildCards {
  open fun unbounded(g: typewildcards.GenericType<*>?) {}
 
- open fun upperBound(g: typewildcards.GenericType<*>?) {}
+ open fun upperBound(g: typewildcards.GenericType<out typewildcards.TypeWildCards?>?) {}
 
- open fun lowerBound(g: typewildcards.GenericType<*>?) {}
+ open fun lowerBound(g: typewildcards.GenericType<in typewildcards.TypeWildCards?>?) {}
 
  open fun test() {
-  this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>())
-  this.upperBound(typewildcards.GenericType<typewildcards.TypeWildCards?>())
-  this.lowerBound(typewildcards.GenericType<typewildcards.TypeWildCards?>())
+  this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<*>?)
+  this.upperBound(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<out typewildcards.TypeWildCards?>?)
+  this.lowerBound(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<in typewildcards.TypeWildCards?>?)
  }
 
  open fun testInferredGenericIntersection() {
-  val elements: java.util.List<typewildcards.TypeWildCards.Element?>? = null
-  val otherElements: java.util.List<typewildcards.TypeWildCards.SubOtherElement?>? = null
-  val integers: java.util.List<Int?>? = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements, otherElements), {a: Any? /* & typewildcards.TypeWildCards.HasKey?, & typewildcards.TypeWildCards.IntegerSupplier? */ -> {
-    a.getKey()
-    return a.get()
-   }
+  val elements: kotlin.collections.MutableList<typewildcards.TypeWildCards.Element?>? = null
+  val otherElements: kotlin.collections.MutableList<typewildcards.TypeWildCards.SubOtherElement?>? = null
+  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */, kotlin.Int?>(typewildcards.TypeWildCards.concat<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>(elements as kotlin.collections.MutableList<*>?, otherElements as kotlin.collections.MutableList<*>?), java.util.function.Function { a: kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */ ->
+   a!!!!.getKey()
+   return@Function a!!!!.get()!!
   })
  }
 
  open fun testRecursiveGeneric() {
-  typewildcards.TypeWildCards.takesRecursiveGeneric(TODO("expression.qualify needs rendering: TypeWildCards.this)"))
+  typewildcards.TypeWildCards.takesRecursiveGeneric(Foo())
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T: typewildcards.TypeWildCards.A?> testBoundedTypeMemberAccess(t: T) {
-   val i: Int = t.f
-   t.m()
+   val i: kotlin.Int = t!!.f
+   t!!.m()
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> testIntersectionBoundedTypeMemberAccess(t: T) where T: typewildcards.TypeWildCards.A?, T: typewildcards.TypeWildCards.Y? {
-   val i: Int = t.f
-   t.m()
-   t.n()
+   val i: kotlin.Int = t!!.f
+   t!!.m()
+   t!!.n()
   }
 
-  @JvmStatic
-  private fun <F, V> transform(from: java.util.List<F>?, function: java.util.function.Function<*, *>?): java.util.List<V>? {
+  @kotlin.jvm.JvmStatic
+  fun <F, V> transform(from: kotlin.collections.MutableList<F>?, function: java.util.function.Function<in F, *>?): kotlin.collections.MutableList<V>? {
    return null
   }
 
-  @JvmStatic
-  private fun <E> concat(a: java.util.List<*>?, b: java.util.List<*>?): java.util.List<E>? {
+  @kotlin.jvm.JvmStatic
+  fun <E> concat(a: kotlin.collections.MutableList<*>?, b: kotlin.collections.MutableList<*>?): kotlin.collections.MutableList<E>? {
    return null
   }
 
-  @JvmStatic
-  private fun takesRecursiveGeneric(foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>?) {}
+  @kotlin.jvm.JvmStatic
+  fun takesRecursiveGeneric(foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>?) {}
+
+  @kotlin.jvm.JvmStatic
+  fun <C> testInferredIntersectionWithTypeVariable(ri: typewildcards.TypeWildCards.RecursiveInterface<out typewildcards.TypeWildCards.RecursiveInterface<T, C>?, C>?): C {
+   return ri!!.m()
+  }
  }
-}
 
-interface X {
- fun m()
-}
+ fun interface X {
+  fun m()
+ }
 
-interface Y {
- fun n()
-}
+ fun interface Y {
+  fun n()
+ }
 
-open class A: typewildcards.TypeWildCards.X {
- @JvmField internal var f: Int
+ open class A: typewildcards.TypeWildCards.X {
+  @kotlin.jvm.JvmField var f: kotlin.Int = 0
 
- open fun m() {}
-}
+  open override fun m() {}
+ }
 
-interface IntegerSupplier {
- fun get(): Int?
-}
+ fun interface IntegerSupplier {
+  fun get(): kotlin.Int?
+ }
 
-interface HasKey {
- fun getKey(): String?
-}
+ fun interface HasKey {
+  fun getKey(): kotlin.String?
+ }
 
-abstract class Element: typewildcards.TypeWildCards.HasKey, typewildcards.TypeWildCards.IntegerSupplier {
- @JvmField val `this`: typewildcards.TypeWildCards?
-}
+ abstract inner class Element: typewildcards.TypeWildCards.HasKey, typewildcards.TypeWildCards.IntegerSupplier {}
 
-abstract class OtherElement: typewildcards.TypeWildCards.IntegerSupplier, typewildcards.TypeWildCards.HasKey {
- @JvmField val `this`: typewildcards.TypeWildCards?
-}
+ abstract inner class OtherElement: typewildcards.TypeWildCards.IntegerSupplier, typewildcards.TypeWildCards.HasKey {}
 
-abstract class SubOtherElement: typewildcards.TypeWildCards.HasKey, typewildcards.TypeWildCards.OtherElement() {
- @JvmField val `this`: typewildcards.TypeWildCards?
-}
+ abstract inner class SubOtherElement: typewildcards.TypeWildCards.HasKey, typewildcards.TypeWildCards.OtherElement() {}
 
-open class Foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>() {
- @JvmField val `this`: typewildcards.TypeWildCards?
+ open inner class Foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>() {}
+
+ fun interface RecursiveInterface<T: typewildcards.TypeWildCards.RecursiveInterface<T, C>?, C> {
+  fun m(): T
+ }
 }
