@@ -36,4 +36,9 @@ public final class Intrinsics {
   public static void checkNotNullExpressionValue(Object object, String message) {
     InternalPreconditions.checkNotNull(object, message);
   }
+
+  @JsIgnore
+  public static Void throwKotlinNothingValueException() {
+    throw new AssertionError("Unreachable code");
+  }
 }
