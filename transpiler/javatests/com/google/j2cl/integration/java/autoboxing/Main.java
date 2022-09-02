@@ -701,6 +701,7 @@ public class Main {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
+    assertIsBoxedLong(n);
     assertTrue(l == 10L);
 
     class Local<T extends Long> {
@@ -720,6 +721,7 @@ public class Main {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
+    assertIsBoxedLong(n);
     assertTrue(l == 10L);
 
     class Local<T extends Long & Comparable<Long>> {
@@ -857,5 +859,9 @@ public class Main {
 
   private static void assertIsBoxedInteger(@DoNotAutobox Object object) {
     assertTrue(object instanceof Integer);
+  }
+
+  private static void assertIsBoxedLong(@DoNotAutobox Object object) {
+    assertTrue(object instanceof Long);
   }
 }
