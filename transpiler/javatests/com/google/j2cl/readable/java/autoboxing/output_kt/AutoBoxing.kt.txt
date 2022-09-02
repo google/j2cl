@@ -1,345 +1,387 @@
+// Generated from "autoboxing/AutoBoxing.java"
 package autoboxing
 
+import javaemul.lang.*
+import kotlin.jvm.*
+
 open class AutoBoxing {
- open fun box(b: Boolean): Boolean? {
-  return b
+ open fun box(b: kotlin.Boolean): kotlin.Boolean? {
+  return kotlin.Boolean.valueOf(b)
  }
 
- open fun box(d: Double): Double? {
+ open fun box(d: kotlin.Double): kotlin.Double? {
+  return kotlin.Double.valueOf(d)
+ }
+
+ open fun box(b: kotlin.Byte): kotlin.Byte? {
+  return kotlin.Byte.valueOf(b)
+ }
+
+ open fun box(f: kotlin.Float): kotlin.Float? {
+  return kotlin.Float.valueOf(f)
+ }
+
+ open fun box(i: kotlin.Int): kotlin.Int? {
+  return kotlin.Int.valueOf(i)
+ }
+
+ open fun box(l: kotlin.Long): kotlin.Long? {
+  return kotlin.Long.valueOf(l)
+ }
+
+ open fun box(s: kotlin.Short): kotlin.Short? {
+  return kotlin.Short.valueOf(s)
+ }
+
+ open fun box(c: kotlin.Char): kotlin.Char? {
+  return kotlin.Char.valueOf(c)
+ }
+
+ open fun unbox(b: kotlin.Boolean?): kotlin.Boolean {
+  return b!!.booleanValue()
+ }
+
+ open fun unbox(d: kotlin.Double?): kotlin.Double {
+  return d!!.toDouble()
+ }
+
+ open fun unbox(b: kotlin.Byte?): kotlin.Byte {
+  return b!!.toByte()
+ }
+
+ open fun unbox(f: kotlin.Float?): kotlin.Float {
+  return f!!.toFloat()
+ }
+
+ open fun unbox(i: kotlin.Int?): kotlin.Int {
+  return i!!.toInt()
+ }
+
+ open fun unbox(l: kotlin.Long?): kotlin.Long {
+  return l!!.toLong()
+ }
+
+ open fun unbox(s: kotlin.Short?): kotlin.Short {
+  return s!!.toShort()
+ }
+
+ open fun unbox(c: kotlin.Char?): kotlin.Char {
+  return c!!.toChar()
+ }
+
+ open fun takesAndReturnsPrimitiveDouble(d: kotlin.Double): kotlin.Double {
   return d
  }
 
- open fun box(b: Byte): Byte? {
-  return b
- }
-
- open fun box(f: Float): Float? {
-  return f
- }
-
- open fun box(i: Int): Int? {
-  return i
- }
-
- open fun box(l: Long): Long? {
-  return l
- }
-
- open fun box(s: Short): Short? {
-  return s
- }
-
- open fun box(c: Char): java.lang.Character? {
-  return c
- }
-
- open fun unbox(b: Boolean?): Boolean {
-  return b
- }
-
- open fun unbox(d: Double?): Double {
-  return d
- }
-
- open fun unbox(b: Byte?): Byte {
-  return b
- }
-
- open fun unbox(f: Float?): Float {
-  return f
- }
-
- open fun unbox(i: Int?): Int {
-  return i
- }
-
- open fun unbox(l: Long?): Long {
-  return l
- }
-
- open fun unbox(s: Short?): Short {
-  return s
- }
-
- open fun unbox(c: java.lang.Character?): Char {
-  return c
- }
-
- open fun takesAndReturnsPrimitiveDouble(d: Double): Double {
-  return d
- }
-
- open fun takesAndReturnsVoid(v: java.lang.Void?): java.lang.Void? {
+ open fun takesAndReturnsVoid(v: kotlin.Unit?): kotlin.Unit? {
   return null
  }
 
- open fun takesFloatVarArgs(vararg elements: Float?) {}
+ open fun takesFloatVarArgs(vararg elements: kotlin.Float?) {}
 
- open fun takesObjectAndReturnsPrimitiveDouble(o: Any?): Double {
-  return o as Double
+ open fun takesObjectAndReturnsPrimitiveDouble(o: kotlin.Any?): kotlin.Double {
+  return o as kotlin.Double
  }
 
- open fun sumWithoutBoxing(vararg numbers: Any?): Double {
-  var sum: Double = 0.0
-  for (number in numbers) {
-   sum += number as Double?
+ open fun sumWithoutBoxing(vararg numbers: kotlin.Any?): kotlin.Double {
+  var sum: kotlin.Double = 0.0
+  FOR_EACH@ for (number in (numbers as kotlin.Array<kotlin.Any?>?)!!) {
+   sum = sum + (number as kotlin.Double?)!!.toDouble()
   }
   return sum
  }
 
- open fun sumWithoutBoxingJsVarargs(vararg numbers: Any?): Double {
-  var sum: Double = 0.0
-  for (number in numbers) {
-   sum += number as Double?
+ open fun sumWithoutBoxingJsVarargs(vararg numbers: kotlin.Any?): kotlin.Double {
+  var sum: kotlin.Double = 0.0
+  FOR_EACH@ for (number in (numbers as kotlin.Array<kotlin.Any?>?)!!) {
+   sum = sum + (number as kotlin.Double?)!!.toDouble()
   }
   return sum
  }
 
  open fun testBoxing() {
-  var bool: Boolean = true
-  var d: Double = 2.2
-  var b: Byte = 1 as Byte
-  var f: Float = 1.1f
-  var i: Int = 1
-  var l: Long = 2L
-  var s: Short = 1 as Short
-  var c: Char = 'a'
-  var boxBool: Boolean? = bool
-  var boxD: Double? = d
-  var boxB: Byte? = b
-  var boxF: Float? = f
-  var boxI: Int? = i
-  var boxL: Long? = l
-  var boxS: Short? = s
-  var boxC: java.lang.Character? = c
-  boxBool = true
-  boxD = 2.2
-  boxB = 1
-  boxF = 1.1f
-  boxI = 1
-  boxL = 2L
-  boxS = 1
-  boxC = 1
-  boxC = 'a'
-  bool = this.unbox(bool)
-  d = this.unbox(d)
-  b = this.unbox(b)
-  f = this.unbox(f)
-  i = this.unbox(i)
-  l = this.unbox(l)
-  s = this.unbox(s)
-  c = this.unbox(c)
-  var unusedDouble: Double = this.takesObjectAndReturnsPrimitiveDouble(4)
-  unusedDouble = this.sumWithoutBoxing(arrayOf<Any?>(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression")))
-  unusedDouble = this.sumWithoutBoxingJsVarargs(arrayOf<Any?>(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression")))
-  this.takesFloatVarArgs(arrayOf<Float?>(1.1f, 97.0f, 2.2 as Float))
-  var o: Any?
-  o = 2.2
-  o = 1.1f
-  o = 1
-  o = 'a'
-  boxBool = boxBool && boxBool
-  boxD = boxD + boxD
-  boxI = boxI / boxI
-  boxL = boxL / boxL
-  boxBool = !boxBool
-  boxI = + boxI
-  boxI = - boxI
-  boxI <<= boxI
-  boxI <<= boxL
-  boxL <<= boxI
-  boxL <<= boxL
-  o = 15 as Int?
+  var bool: kotlin.Boolean = true
+  var d: kotlin.Double = 2.2
+  var b: kotlin.Byte = 1.toByte()
+  var f: kotlin.Float = 1.1f
+  var i: kotlin.Int = 1
+  var l: kotlin.Long = 2L
+  var s: kotlin.Short = 1.toShort()
+  var c: kotlin.Char = 'a'
+  var boxBool: kotlin.Boolean? = kotlin.Boolean.valueOf(bool)
+  var boxD: kotlin.Double? = kotlin.Double.valueOf(d)
+  var boxB: kotlin.Byte? = kotlin.Byte.valueOf(b)
+  var boxF: kotlin.Float? = kotlin.Float.valueOf(f)
+  var boxI: kotlin.Int? = kotlin.Int.valueOf(i)
+  var boxL: kotlin.Long? = kotlin.Long.valueOf(l)
+  var boxS: kotlin.Short? = kotlin.Short.valueOf(s)
+  var boxC: kotlin.Char? = kotlin.Char.valueOf(c)
+  boxBool = kotlin.Boolean.valueOf(true)
+  boxD = kotlin.Double.valueOf(2.2)
+  boxB = kotlin.Byte.valueOf((1).toByte())
+  boxF = kotlin.Float.valueOf(1.1f)
+  boxI = kotlin.Int.valueOf(1)
+  boxL = kotlin.Long.valueOf(2L)
+  boxS = kotlin.Short.valueOf((1).toShort())
+  boxC = kotlin.Char.valueOf('\u0001')
+  boxC = kotlin.Char.valueOf('a')
+  bool = this.unbox(kotlin.Boolean.valueOf(bool))
+  d = this.unbox(kotlin.Double.valueOf(d))
+  b = this.unbox(kotlin.Byte.valueOf(b))
+  f = this.unbox(kotlin.Float.valueOf(f))
+  i = this.unbox(kotlin.Int.valueOf(i))
+  l = this.unbox(kotlin.Long.valueOf(l))
+  s = this.unbox(kotlin.Short.valueOf(s))
+  c = this.unbox(kotlin.Char.valueOf(c))
+  var unusedDouble: kotlin.Double = this.takesObjectAndReturnsPrimitiveDouble(4)
+  unusedDouble = this.sumWithoutBoxing(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"))
+  unusedDouble = this.sumWithoutBoxingJsVarargs(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"))
+  this.takesFloatVarArgs(kotlin.Float.valueOf(1.1f), kotlin.Float.valueOf(97.0f), kotlin.Float.valueOf(2.2.toFloat()))
+  var o: kotlin.Any?
+  o = kotlin.Double.valueOf(2.2)
+  o = kotlin.Float.valueOf(1.1f)
+  o = kotlin.Int.valueOf(1)
+  o = kotlin.Char.valueOf('a')
+  boxBool = kotlin.Boolean.valueOf(boxBool!!.booleanValue() && boxBool!!.booleanValue())
+  boxD = kotlin.Double.valueOf(boxD!!.toDouble() + boxD!!.toDouble())
+  boxI = kotlin.Int.valueOf(boxI!!.toInt() / boxI!!.toInt())
+  boxL = kotlin.Long.valueOf(boxL!!.toLong() / boxL!!.toLong())
+  boxBool = kotlin.Boolean.valueOf(!boxBool!!.booleanValue())
+  boxI = kotlin.Int.valueOf(+ boxI!!.toInt())
+  boxI = kotlin.Int.valueOf(- boxI!!.toInt())
+  boxI = kotlin.Int.valueOf(boxI!!.toInt().shl(boxI!!.toInt()))
+  boxI = kotlin.Int.valueOf(boxI!!.toInt().shl(boxL!!.toLong().toInt()))
+  boxL = kotlin.Long.valueOf(boxL!!.toLong().shl(boxI!!.toInt()))
+  boxL = kotlin.Long.valueOf(boxL!!.toLong().shl(boxL!!.toLong().toInt()))
+  o = kotlin.Int.valueOf(15)
  }
 
  open fun testUnboxing() {
-  var boxBool: Boolean? = Boolean(true)
-  var boxD: Double? = Double(2.2)
-  var boxB: Byte? = Byte(1 as Byte)
-  var boxF: Float? = Float(1.1f)
-  var boxI: Int? = Int(1)
-  var boxL: Long? = Long(1L)
-  var boxS: Short? = Short(1 as Short)
-  var boxC: java.lang.Character? = java.lang.Character('a')
-  var bool: Boolean = boxBool
-  var d: Double = boxD
-  val b: Byte = boxB
-  var f: Float = boxF
-  var i: Int = boxI
-  var l: Long = boxL
-  val s: Short = boxS
-  val c: Char = boxC
-  boxBool = this.box(boxBool)
-  boxD = this.box(boxD)
-  boxB = this.box(boxB)
-  boxF = this.box(boxF)
-  boxI = this.box(boxI)
-  boxL = this.box(boxL)
-  boxS = this.box(boxS)
-  boxC = this.box(boxC)
-  d = boxB
-  d = boxF
-  d = boxI
-  d = boxL
-  d = boxS
-  d = boxC
-  this.takesAndReturnsPrimitiveDouble(boxB)
-  this.takesAndReturnsPrimitiveDouble(boxF)
-  this.takesAndReturnsPrimitiveDouble(boxI)
-  this.takesAndReturnsPrimitiveDouble(boxL)
-  this.takesAndReturnsPrimitiveDouble(boxS)
-  this.takesAndReturnsPrimitiveDouble(boxC)
-  val v: java.lang.Void? = this.takesAndReturnsVoid(this.takesAndReturnsVoid(null))
-  bool = boxBool && boxBool
-  d = boxD + boxD
-  f = boxF - boxF
-  i = boxI * boxI
-  l = boxL / boxL
-  bool = !boxBool
-  i = + boxI
-  i = - boxI
-  i = ~boxI
-  boxD = - boxD
-  boxI = - boxI
-  SWITCH@ do when (boxI) {
-   else ->
+  var boxBool: kotlin.Boolean? = kotlin.Boolean(true)
+  var boxD: kotlin.Double? = kotlin.Double(2.2)
+  var boxB: kotlin.Byte? = kotlin.Byte(1.toByte())
+  var boxF: kotlin.Float? = kotlin.Float(1.1f)
+  var boxI: kotlin.Int? = kotlin.Int(1)
+  var boxL: kotlin.Long? = kotlin.Long(1L)
+  var boxS: kotlin.Short? = kotlin.Short(1.toShort())
+  var boxC: kotlin.Char? = kotlin.Char('a')
+  var bool: kotlin.Boolean = boxBool!!.booleanValue()
+  var d: kotlin.Double = boxD!!.toDouble()
+  val b: kotlin.Byte = boxB!!.toByte()
+  var f: kotlin.Float = boxF!!.toFloat()
+  var i: kotlin.Int = boxI!!.toInt()
+  var l: kotlin.Long = boxL!!.toLong()
+  val s: kotlin.Short = boxS!!.toShort()
+  val c: kotlin.Char = boxC!!.toChar()
+  boxBool = this.box(boxBool!!.booleanValue())
+  boxD = this.box(boxD!!.toDouble())
+  boxB = this.box(boxB!!.toByte())
+  boxF = this.box(boxF!!.toFloat())
+  boxI = this.box(boxI!!.toInt())
+  boxL = this.box(boxL!!.toLong())
+  boxS = this.box(boxS!!.toShort())
+  boxC = this.box(boxC!!.toChar())
+  d = boxB!!.toByte().toDouble()
+  d = boxF!!.toFloat().toDouble()
+  d = boxI!!.toInt().toDouble()
+  d = boxL!!.toLong().toDouble()
+  d = boxS!!.toShort().toDouble()
+  d = boxC!!.toChar().code.toDouble()
+  this.takesAndReturnsPrimitiveDouble(boxB!!.toByte().toDouble())
+  this.takesAndReturnsPrimitiveDouble(boxF!!.toFloat().toDouble())
+  this.takesAndReturnsPrimitiveDouble(boxI!!.toInt().toDouble())
+  this.takesAndReturnsPrimitiveDouble(boxL!!.toLong().toDouble())
+  this.takesAndReturnsPrimitiveDouble(boxS!!.toShort().toDouble())
+  this.takesAndReturnsPrimitiveDouble(boxC!!.toChar().code.toDouble())
+  val v: kotlin.Unit? = this.takesAndReturnsVoid(this.takesAndReturnsVoid(null))
+  bool = boxBool!!.booleanValue() && boxBool!!.booleanValue()
+  d = boxD!!.toDouble() + boxD!!.toDouble()
+  f = boxF!!.toFloat() - boxF!!.toFloat()
+  i = boxI!!.toInt() * boxI!!.toInt()
+  l = boxL!!.toLong() / boxL!!.toLong()
+  bool = !boxBool!!.booleanValue()
+  i = + boxI!!.toInt()
+  i = - boxI!!.toInt()
+  i = boxI!!.toInt().inv()
+  boxD = kotlin.Double.valueOf(- boxD!!.toDouble())
+  boxI = kotlin.Int.valueOf(- boxI!!.toInt())
+  SWITCH@ do {
+   CASE@ do {
+    when (boxI!!.toInt()) {
+     else -> {
+      break@CASE
+     }
+    }
+    break@SWITCH
+   } while (false)
   } while (false)
-  i += boxI += i += boxI
-  i <<= boxI
-  i <<= boxL
-  l <<= boxI
-  l <<= boxL
+  i = i + kotlin.run {
+   boxI = kotlin.Int.valueOf(boxI!!.toInt() + kotlin.run {
+    i = i + boxI!!.toInt()
+    i
+   })
+   boxI
+  }!!.toInt()
+  i = i.shl(boxI!!.toInt())
+  i = i.shl(boxL!!.toLong().toInt())
+  l = l.shl(boxI!!.toInt())
+  l = l.shl(boxL!!.toLong().toInt())
  }
 
  open fun testUnboxingBoolean() {
-  var boxB1: Boolean? = Boolean(true)
-  val boxB2: Boolean? = Boolean(false)
-  var br: Boolean
-  var boxr: Boolean
-  boxr = boxB1 == boxB2
-  br = boxB1 == boxB2
+  var boxB1: kotlin.Boolean? = kotlin.Boolean(true)
+  val boxB2: kotlin.Boolean? = kotlin.Boolean(false)
+  var br: kotlin.Boolean
+  var boxr: kotlin.Boolean
+  boxr = boxB1 === boxB2
+  br = boxB1 === boxB2
   assert(boxr)
   assert(br)
-  boxr = boxB1 != boxB2
-  br = boxB1 != boxB2
+  boxr = boxB1 !== boxB2
+  br = boxB1 !== boxB2
   assert(boxr)
   assert(br)
-  boxr = boxB1 ^ boxB2
-  br = boxB1 ^ boxB2
+  boxr = boxB1!!.booleanValue().xor(boxB2!!.booleanValue())
+  br = boxB1!!.booleanValue().xor(boxB2!!.booleanValue())
   assert(boxr)
   assert(br)
-  boxr = boxB1 & boxB2
-  br = boxB1 & boxB2
+  boxr = boxB1!!.booleanValue().and(boxB2!!.booleanValue())
+  br = boxB1!!.booleanValue().and(boxB2!!.booleanValue())
   assert(boxr)
   assert(br)
-  boxr = boxB1 | boxB2
-  br = boxB1 | boxB2
+  boxr = boxB1!!.booleanValue().or(boxB2!!.booleanValue())
+  br = boxB1!!.booleanValue().or(boxB2!!.booleanValue())
   assert(boxr)
   assert(br)
-  boxr = boxB1 && boxB2
-  br = boxB1 && boxB2
+  boxr = boxB1!!.booleanValue() && boxB2!!.booleanValue()
+  br = boxB1!!.booleanValue() && boxB2!!.booleanValue()
   assert(boxr)
   assert(br)
-  boxr = boxB1 || boxB2
-  br = boxB1 || boxB2
+  boxr = boxB1!!.booleanValue() || boxB2!!.booleanValue()
+  br = boxB1!!.booleanValue() || boxB2!!.booleanValue()
   assert(boxr)
   assert(br)
-  boxr = boxB1 = boxB2
-  br = boxB1 = boxB2
+  boxr = kotlin.run {
+   boxB1 = boxB2
+   boxB1
+  }!!.booleanValue()
+  br = kotlin.run {
+   boxB1 = boxB2
+   boxB1
+  }!!.booleanValue()
   assert(boxr)
   assert(br)
-  boxr = boxB1 &= boxB2
-  br = boxB1 &= boxB2
+  boxr = kotlin.run {
+   boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().and(boxB2!!.booleanValue()))
+   boxB1
+  }!!.booleanValue()
+  br = kotlin.run {
+   boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().and(boxB2!!.booleanValue()))
+   boxB1
+  }!!.booleanValue()
   assert(boxr)
   assert(br)
-  boxr = boxB1 |= boxB2
-  br = boxB1 |= boxB2
+  boxr = kotlin.run {
+   boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().or(boxB2!!.booleanValue()))
+   boxB1
+  }!!.booleanValue()
+  br = kotlin.run {
+   boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().or(boxB2!!.booleanValue()))
+   boxB1
+  }!!.booleanValue()
   assert(boxr)
   assert(br)
-  boxr = boxB1 ^= boxB2
-  br = boxB1 ^= boxB2
+  boxr = kotlin.run {
+   boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().xor(boxB2!!.booleanValue()))
+   boxB1
+  }!!.booleanValue()
+  br = kotlin.run {
+   boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().xor(boxB2!!.booleanValue()))
+   boxB1
+  }!!.booleanValue()
   assert(boxr)
   assert(br)
-  var boxB: Boolean? = null
-  boxB = !boxB
-  boxB = boxB && boxB
-  boxB = if (boxB) boxB else boxB
-  if (boxB) {}
-  var b: Boolean = false
-  b |= boxB |= b |= boxB
+  var boxB: kotlin.Boolean? = null
+  boxB = kotlin.Boolean.valueOf(!boxB!!.booleanValue())
+  boxB = kotlin.Boolean.valueOf(boxB!!.booleanValue() && boxB!!.booleanValue())
+  boxB = if (boxB!!.booleanValue()) boxB else boxB
+  if (boxB!!.booleanValue()) {}
+  var b: kotlin.Boolean = false
+  b = b.or(kotlin.run {
+   boxB = kotlin.Boolean.valueOf(boxB!!.booleanValue().or(kotlin.run {
+    b = b.or(boxB!!.booleanValue())
+    b
+   }))
+   boxB
+  }!!.booleanValue())
  }
 
  open fun testUnboxingEquality() {
-  val boxB: Boolean? = Boolean(true)
-  val b: Boolean = false
-  assert(boxB == boxB)
-  assert(boxB == b)
-  assert(b != b)
-  assert(b != boxB)
-  val boxI: Int? = Int(1)
-  val i: Int = 1
-  assert(boxI == boxI)
-  assert(boxI == i)
-  assert(i != i)
-  assert(i != boxI)
+  val boxB: kotlin.Boolean? = kotlin.Boolean(true)
+  val b: kotlin.Boolean = false
+  assert(boxB === boxB)
+  assert(boxB!!.booleanValue() === b)
+  assert(b !== b)
+  assert(b !== boxB!!.booleanValue())
+  val boxI: kotlin.Int? = kotlin.Int(1)
+  val i: kotlin.Int = 1
+  assert(boxI === boxI)
+  assert(boxI!!.toInt() === i)
+  assert(i !== i)
+  assert(i !== boxI!!.toInt())
  }
 
  open fun testAssertStatement() {
-  val boxB: Boolean? = Boolean(true)
-  val b: Boolean = true
-  assert(boxB)
+  val boxB: kotlin.Boolean? = kotlin.Boolean(true)
+  val b: kotlin.Boolean = true
+  assert(boxB!!.booleanValue())
   assert(b)
  }
 
  open fun testUnbox_withCast() {
-  val supplier: autoboxing.AutoBoxing.`1Supplier`<Int?>? = TODO("expression.qualify needs rendering: AutoBoxing.this)")
-  val i: Int = supplier.get() as Int
+  open class ___1Supplier<T> {
+   open fun get(): T {
+    return null!!
+   }
+  }
+  val supplier: ___1Supplier<kotlin.Int?>? = ___1Supplier<kotlin.Int?>()
+  val i: kotlin.Int = supplier!!.get()!!.toInt()
  }
 
  companion object {
-  @JvmStatic val COMPILE_TIME_CONSTANT: Float = 1.1f
+  @kotlin.jvm.JvmField val COMPILE_TIME_CONSTANT: kotlin.Float = 1.1f
 
-  @JvmStatic
-  fun <T: Long?> testUnboxingFromTypeVariable() {
-   var n: T = 10L as Long? as T
-   var l: Long = n
-   assert(l == 10L)
-   n++
-   l = autoboxing.AutoBoxing.`1Local`<Long?, T>().toLong(11L)
-   assert(l == 11L)
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.Long?> testUnboxingFromTypeVariable() {
+   var n: T = kotlin.Long.valueOf(10L)!!
+   var l: kotlin.Long = n!!.toLong()
+   assert(l === 10L)
+   n = kotlin.Long.valueOf(n!!.toLong() + 1L)!!
+   open class ___1Local<T: kotlin.Long?> {
+    open fun toLong(l: T): kotlin.Long {
+     assert(l!!.equals(kotlin.Long.valueOf(11L)))
+     return l!!.toLong()
+    }
+   }
+   l = ___1Local<kotlin.Long?>().toLong(kotlin.Long.valueOf(11L))
+   assert(l === 11L)
   }
 
-  @JvmStatic
-  fun <T: Long?> testUnboxingFromIntersectionType() {
-   var n: T = 10L as Long? as T
-   var l: Long = n
-   assert(l == 10L)
-   n++
-   l = autoboxing.AutoBoxing.`2Local`<Long?, T>().toLong(11L)
-   assert(l == 11L)
-   val i: Int = 10 as Int?
+  @kotlin.jvm.JvmStatic
+  fun <T> testUnboxingFromIntersectionType() where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long?>? {
+   var n: T = kotlin.Long.valueOf(10L)!!
+   var l: kotlin.Long = n!!.toLong()
+   assert(l === 10L)
+   n = kotlin.Long.valueOf(n!!.toLong() + 1L)!!
+   open class ___2Local<T> where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long?>?, T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long?>? {
+    open fun toLong(l: T): kotlin.Long {
+     assert(l!!.equals(kotlin.Long.valueOf(11L)))
+     return l!!.toLong()
+    }
+   }
+   l = ___2Local<kotlin.Long?>().toLong(kotlin.Long.valueOf(11L))
+   assert(l === 11L)
+   val i: kotlin.Int = kotlin.Int.valueOf(10)!!.toInt()
   }
- }
-}
-
-open class `1Local`<T: Long?, T: Long?> {
- internal open fun toLong(l: T): Long {
-  assert(l.equals(11L))
-  return l
- }
-}
-
-open class `2Local`<T: Long?, T: Long?> {
- internal open fun toLong(l: T): Long {
-  assert(l.equals(11L))
-  return l
- }
-}
-
-open class `1Supplier`<T> {
- val `this`: autoboxing.AutoBoxing?
-
- internal open fun get(): T {
-  return null
  }
 }

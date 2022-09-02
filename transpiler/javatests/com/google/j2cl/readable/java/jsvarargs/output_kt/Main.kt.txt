@@ -1,0 +1,182 @@
+// Generated from "jsvarargs/Main.java"
+package jsvarargs
+
+import javaemul.lang.*
+import kotlin.jvm.*
+
+open class Main {
+ @kotlin.jvm.JvmField var field: kotlin.Int = 0
+
+ constructor(f: kotlin.Int) {
+  this.field = f
+ }
+
+ open fun f3(m: kotlin.Int, vararg numbers: kotlin.Int): kotlin.Int {
+  return this.field + m + numbers!![1]
+ }
+
+ open fun f4(vararg numbers: kotlin.Int): kotlin.Int {
+  return this.field + numbers!![1]
+ }
+
+ open fun testStaticMethodNotFirst() {
+  jsvarargs.Main.f1(1, 1, 2)
+  jsvarargs.Main.f1(1, 1, 2)
+  jsvarargs.Main.f1(1)
+  jsvarargs.Main.f1(1)
+  jsvarargs.Main.f1(1, 1, 2)
+  jsvarargs.Main.f1(1, 1, 2)
+  jsvarargs.Main.f1(1)
+  jsvarargs.Main.f1(1)
+  val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
+  jsvarargs.Main.f1(1, *(ints)!!)
+  jsvarargs.Main.f1(1, *(ints)!!)
+  jsvarargs.Main.f1(1, *(null)!!)
+ }
+
+ open fun testStaticMethodFirst() {
+  jsvarargs.Main.f2(1, 2)
+  jsvarargs.Main.generics<kotlin.Int?>(kotlin.Int.valueOf(1), kotlin.Int.valueOf(2))
+  jsvarargs.Main.f2(1, 2)
+  jsvarargs.Main.generics<kotlin.Int?>(kotlin.Int.valueOf(1), kotlin.Int.valueOf(2))
+  jsvarargs.Main.f2()
+  jsvarargs.Main.generics<kotlin.Any?>()
+  jsvarargs.Main.f2()
+  jsvarargs.Main.generics<kotlin.Any?>()
+  jsvarargs.Main.generics<kotlin.Int?>()
+  jsvarargs.Main.f2(1, 2)
+  jsvarargs.Main.f2(1, 2)
+  jsvarargs.Main.generics<kotlin.IntArray?>(kotlin.intArrayOf(1, 2))
+  jsvarargs.Main.generics<kotlin.Int?>(kotlin.Int.valueOf(1), kotlin.Int.valueOf(2))
+  jsvarargs.Main.f2()
+  jsvarargs.Main.f2()
+  jsvarargs.Main.generics<kotlin.IntArray?>(kotlin.intArrayOf())
+  val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
+  val integers: kotlin.Array<kotlin.Int?>? = kotlin.arrayOf<kotlin.Int?>(kotlin.Int.valueOf(1), kotlin.Int.valueOf(2))
+  jsvarargs.Main.f2(*(ints)!!)
+  jsvarargs.Main.f2(*(ints)!!)
+  jsvarargs.Main.generics<kotlin.Int?>(*(integers)!!)
+ }
+
+ open fun testInstanceMethodNotFirst() {
+  val m: jsvarargs.Main? = jsvarargs.Main(1)
+  m!!.f3(1, 1, 2)
+  m!!.f3(1)
+  m!!.f3(1, 1, 2)
+  m!!.f3(1)
+  val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
+  m!!.f3(1, *(ints)!!)
+ }
+
+ open fun testInstanceMethodFirst() {
+  val m: jsvarargs.Main? = jsvarargs.Main(1)
+  m!!.f4(1, 2)
+  m!!.f4()
+  m!!.f4(1, 2)
+  m!!.f4()
+  val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
+  m!!.f4(*(ints)!!)
+ }
+
+ open fun testJsFunction() {
+  val a: jsvarargs.Main.AFunction? = jsvarargs.Main.AFunction()
+  val o1: kotlin.Any? = kotlin.Any()
+  val o2: kotlin.Any? = kotlin.Any()
+  a!!.f1(0, o1, o2)
+  a!!.f1(0)
+  a!!.f1(0, o1, o2)
+  a!!.f1(0)
+  val os: kotlin.Array<kotlin.Any?>? = kotlin.arrayOf<kotlin.Any?>(o1, o2)
+  a!!.f1(0, *(os)!!)
+ }
+
+ open fun testSideEffect() {
+  val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
+  jsvarargs.Main(1).f3(1, *(ints)!!)
+ }
+
+ open fun testNullJsVarargs() {
+  val ints: kotlin.IntArray? = null
+  jsvarargs.Main.f2(*(ints)!!)
+ }
+
+ open fun <U> testGenericJsFunctionWithVarags() {
+  val function: jsvarargs.Main.GenericFunction<U>? = jsvarargs.Main.GenericFunction<U> { n: U, param: kotlin.Array<U>? ->
+   return@GenericFunction param
+  }
+ }
+
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun f1(multiplier: kotlin.Int, vararg numbers: kotlin.Int): kotlin.Int {
+   return numbers!!.size + numbers!![0] + multiplier
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun f2(vararg numbers: kotlin.Int): kotlin.Int {
+   return numbers!!.size + numbers!![0]
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T> generics(vararg elements: T): T {
+   return (elements as kotlin.Array<T>?)!![0]
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun parameterizedType(vararg elements: kotlin.collections.MutableList<jsvarargs.Main?>?): jsvarargs.Main? {
+   return (elements as kotlin.Array<kotlin.collections.MutableList<jsvarargs.Main?>?>?)!![0]!!.get(0)
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T> parameterizedByT(vararg elements: kotlin.collections.MutableList<T>?): T {
+   return (elements as kotlin.Array<kotlin.collections.MutableList<T>?>?)!![0]!!.get(0)
+  }
+ }
+
+ open class NativeObject {
+  constructor(vararg pars: kotlin.Any?)
+ }
+
+ open class SubVarargsConstructorClass: jsvarargs.Main.NativeObject {
+  constructor(i: kotlin.Int, vararg args: kotlin.Any?): super(*(args as kotlin.Array<kotlin.Any?>?)!!)
+ }
+
+ fun interface Function {
+  fun f1(i: kotlin.Int, vararg args: kotlin.Any?): kotlin.Any?
+ }
+
+ abstract class AbstractMethodWithVarargs {
+  abstract fun abstractMethod(vararg args: kotlin.Int)
+ }
+
+ interface StaticInterfaceMethodWithVarargs {
+  companion object {
+   @kotlin.jvm.JvmStatic
+   fun staticMethod(vararg args: kotlin.Int) {}
+  }
+ }
+
+ class AFunction: jsvarargs.Main.Function {
+  open override fun f1(i: kotlin.Int, vararg args: kotlin.Any?): kotlin.Any? {
+   return (args as kotlin.Array<kotlin.Any?>?)!![i]
+  }
+ }
+
+ open class SubMain: jsvarargs.Main {
+  constructor(): super(10)
+
+  open override fun f3(m: kotlin.Int, vararg numbers: kotlin.Int): kotlin.Int {
+   var a: kotlin.Int = super.f3(1, 1, 2)
+   a = a + super.f3(1)
+   a = a + super.f3(1, 1, 2)
+   a = a + super.f3(1)
+   val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
+   a = a + super.f3(1, *(ints)!!)
+   return a
+  }
+ }
+
+ fun interface GenericFunction<T> {
+  fun m(i: T, vararg args: T): kotlin.Any?
+ }
+}

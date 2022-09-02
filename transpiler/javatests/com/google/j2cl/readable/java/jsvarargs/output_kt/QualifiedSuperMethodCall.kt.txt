@@ -1,0 +1,20 @@
+// Generated from "jsvarargs/QualifiedSuperMethodCall.java"
+package jsvarargs
+
+import javaemul.lang.*
+import kotlin.jvm.*
+
+open class QualifiedSuperMethodCall: jsvarargs.Main {
+ constructor(): super(0)
+
+ open inner class InnerClass {
+  open fun test() {
+   super@QualifiedSuperMethodCall.f3(1, 1, 2)
+   super@QualifiedSuperMethodCall.f3(1)
+   super@QualifiedSuperMethodCall.f3(1, 1, 2)
+   super@QualifiedSuperMethodCall.f3(1)
+   val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
+   super@QualifiedSuperMethodCall.f3(1, *(ints)!!)
+  }
+ }
+}

@@ -7,7 +7,6 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = True,
     wasm_entry_points = [
         r"emptymethod\.EmptyMethod\.main",
     ],

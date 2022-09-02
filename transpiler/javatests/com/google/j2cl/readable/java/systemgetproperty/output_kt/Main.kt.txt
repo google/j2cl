@@ -1,3 +1,4 @@
+// Generated from "systemgetproperty/Main.java"
 package systemgetproperty
 
 import javaemul.lang.*
@@ -7,6 +8,8 @@ open class Main {
  companion object {
   @kotlin.jvm.JvmField val property: kotlin.String? = java.lang.System.getProperty("jre.classMetadata")
 
+  @kotlin.jvm.JvmField val propertyWithDefault: kotlin.String? = java.lang.System.getProperty("jre.classMetadata", "default")
+
   @kotlin.jvm.JvmStatic
   fun main(args: kotlin.Array<kotlin.String?>?) {
    var x: kotlin.Boolean
@@ -14,7 +17,7 @@ open class Main {
    x = systemgetproperty.Main.property!!.equals("SIMPLE")
    x = systemgetproperty.Main.property!!.equalsIgnoreCase("SIMPLE")
    x = systemgetproperty.Main.property === "NOTSIMPLE"
-   x = java.lang.System.getProperty("jre.classMetadata", "default")!!.equals("SIMPLE")
+   x = systemgetproperty.Main.propertyWithDefault!!.equals("SIMPLE")
    x = java.lang.System.getProperty("jre.bar", "bar")!!.equals("bar")
    x = java.lang.System.getProperty("jre.classMetadata", systemgetproperty.Main.mightHaveSideEffects())!!.equals("SIMPLE")
   }

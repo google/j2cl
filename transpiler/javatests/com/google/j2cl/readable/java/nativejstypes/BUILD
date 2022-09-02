@@ -11,7 +11,7 @@ readable_example(
         "*.native.js",
         "native_sources/*.js",
     ]),
-    # TODO(b/202515129): All dependencies on native code (like js & iOS) in J2KT.
+    # TODO(b/202515129): Allow dependencies on native code (like js & iOS) in J2KT.
     generate_kt_readables = False,
     generate_wasm_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],

@@ -7,5 +7,4 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = True,
 )

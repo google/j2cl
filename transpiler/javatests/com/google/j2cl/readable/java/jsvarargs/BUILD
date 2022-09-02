@@ -8,6 +8,6 @@ package(licenses = ["notice"])
 readable_example(
     srcs = glob(["*.java"]),
     # TODO(b/202427872): Support inner classes and interfaces in J2KT
-    generate_kt_readables = False,
+    build_kt_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
