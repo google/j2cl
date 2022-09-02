@@ -310,7 +310,9 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             TypeDescriptor descriptor = variable.getTypeDescriptor();
             TypeDescriptor newDescriptor = replaceTypeDescriptors(descriptor, fn);
             if (descriptor != newDescriptor) {
-              return Variable.Builder.from(variable).setTypeDescriptor(newDescriptor).build();
+              // Don't replace the variable object since the references in the code point to it
+              // that would need to be changed; just set the variable to its new type.
+              variable.setTypeDescriptor(newDescriptor);
             }
             return variable;
           }
