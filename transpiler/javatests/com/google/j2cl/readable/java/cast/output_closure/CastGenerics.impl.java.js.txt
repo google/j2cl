@@ -102,7 +102,7 @@ class CastGenerics extends j_l_Object {
  /** @nodts @template EE @return {EE} */
  m_method__java_lang_Object__cast_CastGenerics_Empty1(/** * */ o) {
   if (Empty1.$isInstance(o)) {
-   return /**@type {EE}*/ ($Casts.$to(o, Empty1));
+   return /**@type {EE}*/ ($Casts.$to($Casts.$to(o, Empty1), Empty2));
   }
   return null;
  }
@@ -129,6 +129,7 @@ class CastGenerics extends j_l_Object {
   B = goog.module.get('cast.CastGenerics.B$impl');
   BaseImplementor = goog.module.get('cast.CastGenerics.BaseImplementor$impl');
   Empty1 = goog.module.get('cast.CastGenerics.Empty1$impl');
+  Empty2 = goog.module.get('cast.CastGenerics.Empty2$impl');
   Implementor = goog.module.get('cast.CastGenerics.Implementor$impl');
   Enum = goog.module.get('java.lang.Enum$impl');
   Integer = goog.module.get('java.lang.Integer$impl');

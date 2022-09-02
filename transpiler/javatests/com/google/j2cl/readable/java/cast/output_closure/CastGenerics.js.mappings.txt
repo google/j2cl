@@ -91,9 +91,9 @@
 [if (o instanceof Empty1) {
       return (EE) o;
     }] => [if (Empty1.$isInstance(o)) {
-   return /**@type {EE}*/ ($Casts.$to(o, Empty1));
+   return /**@type {EE}*/ ($Casts.$to($Casts.$to(o, Empty1), Empty2));
   }] "cast.CastGenerics.method"
-[return (EE) o;] => [return /**@type {EE}*/ ($Casts.$to(o, Empty1));] "cast.CastGenerics.method"
+[return (EE) o;] => [return /**@type {EE}*/ ($Casts.$to($Casts.$to(o, Empty1), Empty2));] "cast.CastGenerics.method"
 [return null;] => [return null;] "cast.CastGenerics.method"
 [doSomething] => [m_doSomething__cast_CastGenerics_Foo]
 [{

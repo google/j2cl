@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
@@ -37,6 +38,7 @@ import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 
 /** Replaces cast expression with corresponding cast method call. */
 public class NormalizeCasts extends NormalizationPass {
@@ -63,7 +65,7 @@ public class NormalizeCasts extends NormalizationPass {
             if (canRemoveCast(typeDescriptor, expression)) {
               // No need to perform a cast check but to communicate the right type to jscompiler a
               // JsDoc cast is emitted instead.
-              return createJsDocCast(typeDescriptor, expression);
+              return createClosureTypeCast(typeDescriptor, expression);
             }
             return castExpression;
           }
@@ -136,98 +138,18 @@ public class NormalizeCasts extends NormalizationPass {
             TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
             Expression expression = castExpression.getExpression();
 
-            checkArgument(
-                !castTypeDescriptor.isPrimitive(),
-                "Narrowing and Widening conversions should have removed all primitive casts.");
+            // Casts have two purposes:
+            //   1. perform the runtime check required by Java semantics.
+            //   2. communicate the resulting type to closure.
 
-            if (castTypeDescriptor.isArray()) {
-              return createArrayCastExpression(
-                  (ArrayTypeDescriptor) castTypeDescriptor, expression);
-            }
-
-            if (castTypeDescriptor.isIntersection()) {
-              return createIntersectionCastExpression(
-                  (IntersectionTypeDescriptor) castTypeDescriptor, expression);
-            }
-
-            return createCastExpression(castTypeDescriptor, expression);
+            // /** @type {X} */ (Casts.to(expression, JavaType))
+            return createClosureTypeCast(
+                castTypeDescriptor, implementRuntimeCheck(castTypeDescriptor, expression));
           }
         });
   }
 
-  private static Expression createCastExpression(
-      TypeDescriptor toTypeDescriptor, Expression expression) {
-    checkArgument(
-        !toTypeDescriptor.isArray()
-            && !toTypeDescriptor.isUnion()
-            && !toTypeDescriptor.isIntersection());
-
-    return createJsDocCast(toTypeDescriptor, createCastsToCall(toTypeDescriptor, expression));
-  }
-
-  private static Expression createCastsToCall(
-      TypeDescriptor castTypeDescriptor, Expression expression) {
-    // Avoid pointlessly nesting type annotations inside of runtime cast calls.
-    expression = AstUtils.removeJsDocCastIfPresent(expression);
-
-    MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.CASTS.getDescriptor())
-            .setName("$to")
-            .setParameterTypeDescriptors(
-                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject)
-            .setReturnTypeDescriptor(castTypeDescriptor)
-            .build();
-
-    // Casts.$to(expr, TypeName);
-    return MethodCall.Builder.from(castToMethodDescriptor)
-        .setArguments(expression, castTypeDescriptor.getMetadataConstructorReference())
-        .build();
-  }
-
-  private static Expression createIntersectionCastExpression(
-      IntersectionTypeDescriptor intersectionTypeDescriptor, Expression expression) {
-    // Emit the casts so that the first type in the intersection corresponds to the
-    // innermost cast.
-    for (TypeDescriptor intersectedTypeDescriptor :
-        intersectionTypeDescriptor.getIntersectionTypeDescriptors()) {
-      if (!canRemoveCast(intersectedTypeDescriptor, expression)) {
-        expression = createCastExpression(intersectedTypeDescriptor, expression);
-      }
-    }
-    // /**@type {}*/ (...)
-    return createJsDocCast(intersectionTypeDescriptor, expression);
-  }
-
-  private static Expression createArrayCastExpression(
-      ArrayTypeDescriptor arrayCastTypeDescriptor, Expression expression) {
-    // Avoid pointlessly nesting type annotations inside of runtime cast calls.
-    expression = AstUtils.removeJsDocCastIfPresent(expression);
-
-    // Arrays.$castTo(expr, leafType, dimension);
-    MethodCall castMethodCall = createArraysCastToCall(arrayCastTypeDescriptor, expression);
-    // /**@type {}*/ (...)
-    return createJsDocCast(arrayCastTypeDescriptor, castMethodCall);
-  }
-
-  private static MethodCall createArraysCastToCall(
-      ArrayTypeDescriptor arrayCastTypeDescriptor, Expression expression) {
-    TypeDescriptor leafTypeDescriptor = arrayCastTypeDescriptor.getLeafTypeDescriptor();
-
-    if (leafTypeDescriptor.toRawTypeDescriptor().isNative()) {
-      return RuntimeMethods.createArraysMethodCall("$castToNative", expression);
-    }
-
-    return RuntimeMethods.createArraysMethodCall(
-        "$castTo",
-        expression,
-        leafTypeDescriptor.getMetadataConstructorReference(),
-        NumberLiteral.fromInt(arrayCastTypeDescriptor.getDimensions()));
-  }
-
-  private static Expression createJsDocCast(
+  private static Expression createClosureTypeCast(
       TypeDescriptor castTypeDescriptor, Expression expression) {
     if (castTypeDescriptor.isIntersection()) {
       // Annotate the expression so that is typed (in closure) with the first type in the
@@ -245,6 +167,87 @@ public class NormalizeCasts extends NormalizationPass {
     return JsDocCastExpression.newBuilder()
         .setCastType(castTypeDescriptor)
         .setExpression(expression)
+        .build();
+  }
+
+  private static Expression implementRuntimeCheck(
+      TypeDescriptor toTypeDescriptor, Expression expression) {
+    checkArgument(
+        !toTypeDescriptor.isPrimitive(),
+        "Narrowing and Widening conversions should have removed all primitive casts.");
+
+    if (toTypeDescriptor.isTypeVariable()) {
+      TypeDescriptor bound = ((TypeVariable) toTypeDescriptor).getUpperBoundTypeDescriptor();
+      // Do a runtime check on the type of the bound, and not that there can not be an infinite
+      // recursion here since the recursive use of a type variable always occurs as a type
+      // argument of a declared type.
+      return implementRuntimeCheck(bound, expression);
+    }
+
+    if (toTypeDescriptor.isIntersection()) {
+      return implementRuntimeCheckForIntersection(
+          (IntersectionTypeDescriptor) toTypeDescriptor, expression);
+    }
+
+    if (toTypeDescriptor.isArray()) {
+      return createRuntimeCheckForArray((ArrayTypeDescriptor) toTypeDescriptor, expression);
+    }
+
+    return createRuntimeCheckForDeclaredType((DeclaredTypeDescriptor) toTypeDescriptor, expression);
+  }
+
+  private static Expression implementRuntimeCheckForIntersection(
+      IntersectionTypeDescriptor intersectionTypeDescriptor, Expression expression) {
+    // Emit the casts so that the first type in the intersection corresponds to the
+    // innermost cast.
+    for (TypeDescriptor intersectedTypeDescriptor :
+        intersectionTypeDescriptor.getIntersectionTypeDescriptors()) {
+      if (!canRemoveCast(intersectedTypeDescriptor, expression)) {
+        expression = implementRuntimeCheck(intersectedTypeDescriptor, expression);
+      }
+    }
+    return expression;
+  }
+
+  private static Expression createRuntimeCheckForArray(
+      ArrayTypeDescriptor arrayCastTypeDescriptor, Expression expression) {
+    // Avoid pointlessly nesting type annotations inside of runtime cast calls.
+    expression = AstUtils.removeJsDocCastIfPresent(expression);
+
+    // Arrays.$castTo(expr, leafType, dimension);
+    TypeDescriptor leafTypeDescriptor = arrayCastTypeDescriptor.getLeafTypeDescriptor();
+
+    if (leafTypeDescriptor.toRawTypeDescriptor().isNative()) {
+      return RuntimeMethods.createArraysMethodCall("$castToNative", expression);
+    }
+
+    return RuntimeMethods.createArraysMethodCall(
+        "$castTo",
+        expression,
+        leafTypeDescriptor.getMetadataConstructorReference(),
+        NumberLiteral.fromInt(arrayCastTypeDescriptor.getDimensions()));
+  }
+
+  private static Expression createRuntimeCheckForDeclaredType(
+      DeclaredTypeDescriptor toTypeDescriptor, Expression expression) {
+
+    // Avoid pointlessly nesting type annotations inside of runtime cast calls.
+    expression = AstUtils.removeJsDocCastIfPresent(expression);
+
+    MethodDescriptor castToMethodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setJsInfo(JsInfo.RAW)
+            .setStatic(true)
+            .setEnclosingTypeDescriptor(BootstrapType.CASTS.getDescriptor())
+            .setName("$to")
+            .setParameterTypeDescriptors(
+                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject)
+            .setReturnTypeDescriptor(toTypeDescriptor)
+            .build();
+
+    // Casts.$to(expr, TypeName);
+    return MethodCall.Builder.from(castToMethodDescriptor)
+        .setArguments(expression, toTypeDescriptor.getMetadataConstructorReference())
         .build();
   }
 }
