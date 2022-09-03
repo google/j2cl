@@ -915,6 +915,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       return true;
     }
 
+    if (getTypeDeclaration().getWasmInfo() != null) {
+      return true;
+    }
+
     // TODO(b/79210574): reconsider whether types with only static JsMembers are actually
     // referenceable externally.
     return getDeclaredMemberDescriptors()
