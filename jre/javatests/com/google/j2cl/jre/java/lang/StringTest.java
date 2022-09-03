@@ -124,6 +124,13 @@ public class StringTest extends GWTTestCase {
     } catch (NullPointerException e) {
       // expected
     }
+
+    try {
+      "".compareTo(returnNull());
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    }
   }
 
   public void testConcat() {
@@ -857,6 +864,16 @@ public class StringTest extends GWTTestCase {
     // issue 4301
     Object s = hideFromCompiler("abc");
     assertSame("s same as s.toString()", s, s.toString());
+  }
+
+  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
+  public static void testToStringNull() {
+    try {
+      returnNull().toString();
+      fail();
+    } catch (NullPointerException e) {
+      // expected
+    }
   }
 
   /*
