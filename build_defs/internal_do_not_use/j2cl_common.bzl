@@ -229,7 +229,8 @@ def _j2cl_transpile(
         kotlincopts):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
 
-    # Using source_jars of the java_library since that includes APT generated src.
+    # Using source_jars from the jvm compilation since that includes APT generated src.
+    # In the Kotlin case, source_jars also include the common sources.
     srcs = jvm_provider.source_jars + js_srcs
 
     if jvm_provider.compilation_info:
@@ -279,7 +280,7 @@ def _j2cl_transpile(
 
     ctx.actions.run(
         progress_message = "Transpiling to JavaScript %s" % ctx.label,
-        inputs = depset(srcs + kt_common_srcs, transitive = [classpath]),
+        inputs = depset(srcs, transitive = [classpath]),
         outputs = [output_dir, library_info_output],
         executable = j2cl_transpiler_override or ctx.executable._j2cl_transpiler,
         arguments = [args],

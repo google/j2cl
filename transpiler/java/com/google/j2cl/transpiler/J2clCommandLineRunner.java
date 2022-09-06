@@ -124,9 +124,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
             SourceUtils.getAllSources(this.files, problems)
                 .filter(p -> p.sourcePath().endsWith(".java"))
                 .collect(toImmutableList()))
-        .setKotlinCommonSources(
-            SourceUtils.getAllSources(this.kotlinCommonSources, problems)
-                .collect(toImmutableList()))
+        .setKotlinCommonSources(this.kotlinCommonSources)
         .setNativeSources(
             SourceUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
                 .filter(p -> p.sourcePath().endsWith(".native.js"))
