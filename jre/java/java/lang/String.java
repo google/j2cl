@@ -32,7 +32,6 @@ import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
-import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
@@ -357,8 +356,6 @@ public final class String implements Comparable<String>, CharSequence,
     return asNativeString().substr(length() - suffixlength, suffixlength).equals(suffix);
   }
 
-  // Marked with @DoNotInline because we don't have static eval for "==" yet.
-  @DoNotInline
   @Override
   public boolean equals(Object other) {
     // Java equality is translated into triple equality which is a quick way to compare strings for
