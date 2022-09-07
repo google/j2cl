@@ -352,10 +352,18 @@ class JdtEnvironment {
   @Nullable
   private TypeDescriptor getLowerBoundTypeDescriptor(
       ITypeBinding typeBinding, boolean inNullMarkedScope) {
+    // Lower bound of a capture binding must be accessed indirectly through wildcard.
+    if (typeBinding.isCapture()) {
+      return getLowerBoundTypeDescriptor(typeBinding.getWildcard(), inNullMarkedScope);
+    }
+
     ITypeBinding bound = typeBinding.getBound();
-    return bound != null && !typeBinding.isUpperbound()
-        ? createTypeDescriptorWithNullability(bound, bound.getTypeAnnotations(), inNullMarkedScope)
-        : null;
+    if (bound != null && !typeBinding.isUpperbound()) {
+      return createTypeDescriptorWithNullability(
+          bound, bound.getTypeAnnotations(), inNullMarkedScope);
+    }
+
+    return null;
   }
 
   private TypeDescriptor getUpperBoundTypeDescriptor(
