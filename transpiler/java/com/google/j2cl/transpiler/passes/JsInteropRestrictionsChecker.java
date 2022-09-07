@@ -687,11 +687,11 @@ public class JsInteropRestrictionsChecker {
               private void checkJsEnumAssignment(
                   TypeDescriptor toTypeDescriptor, Expression expression) {
                 TypeDescriptor expressionTypeDescriptor = expression.getTypeDescriptor();
-                if (!expressionTypeDescriptor.isJsEnum() || toTypeDescriptor.isJsEnum()) {
+                TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
+                if (!expressionTypeDescriptor.isJsEnum() || targetRawTypeDescriptor.isJsEnum()) {
                   return;
                 }
 
-                TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
                 if (TypeDescriptors.isJavaLangObject(targetRawTypeDescriptor)) {
                   return;
                 }

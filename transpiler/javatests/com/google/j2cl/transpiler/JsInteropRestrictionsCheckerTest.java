@@ -1898,6 +1898,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    Object o = MyJsEnum.class;",
             "    Consumer<MyJsEnum> consumer = c -> c.ordinal();",
             "    Consumer<? super MyJsEnum> consumer2 = c -> c.ordinal();",
+            "    Supplier<? extends MyJsEnum> supplier = () -> MyJsEnum.A;",
             "  }",
             "  static int field = 5;",
             "  static { }",

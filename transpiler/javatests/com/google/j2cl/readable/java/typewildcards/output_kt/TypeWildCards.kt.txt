@@ -22,7 +22,7 @@ open class TypeWildCards {
  open fun testInferredGenericIntersection() {
   val elements: kotlin.collections.MutableList<typewildcards.TypeWildCards.Element?>? = null
   val otherElements: kotlin.collections.MutableList<typewildcards.TypeWildCards.SubOtherElement?>? = null
-  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */, kotlin.Int?>(typewildcards.TypeWildCards.concat<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>(elements as kotlin.collections.MutableList<*>?, otherElements as kotlin.collections.MutableList<*>?), java.util.function.Function { a: kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */ ->
+  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */, kotlin.Int?>(typewildcards.TypeWildCards.concat<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>(elements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?, otherElements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?), java.util.function.Function { a: kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */ ->
    a!!!!.getKey()
    return@Function a!!!!.get()!!
   })
@@ -47,12 +47,12 @@ open class TypeWildCards {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <F, V> transform(from: kotlin.collections.MutableList<F>?, function: java.util.function.Function<in F, *>?): kotlin.collections.MutableList<V>? {
+  fun <F, V> transform(from: kotlin.collections.MutableList<F>?, function: java.util.function.Function<in F, out V>?): kotlin.collections.MutableList<V>? {
    return null
   }
 
   @kotlin.jvm.JvmStatic
-  fun <E> concat(a: kotlin.collections.MutableList<*>?, b: kotlin.collections.MutableList<*>?): kotlin.collections.MutableList<E>? {
+  fun <E> concat(a: kotlin.collections.MutableList<out E>?, b: kotlin.collections.MutableList<out E>?): kotlin.collections.MutableList<E>? {
    return null
   }
 
@@ -60,7 +60,7 @@ open class TypeWildCards {
   fun takesRecursiveGeneric(foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun <C> testInferredIntersectionWithTypeVariable(ri: typewildcards.TypeWildCards.RecursiveInterface<out typewildcards.TypeWildCards.RecursiveInterface<T, C>?, C>?): C {
+  fun <C> testInferredIntersectionWithTypeVariable(ri: typewildcards.TypeWildCards.RecursiveInterface<out C, C>?): C {
    return ri!!.m()
   }
  }

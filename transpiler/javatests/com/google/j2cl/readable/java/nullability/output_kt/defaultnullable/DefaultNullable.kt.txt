@@ -152,34 +152,34 @@ open class DefaultNullable {
   fun testListOfWildcard(l: kotlin.collections.MutableList<*>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityObject(l: kotlin.collections.MutableList<*>?) {}
+  fun testListOfWildcardExtendsDefaultNullabilityObject(l: kotlin.collections.MutableList<out kotlin.Any>?) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardExtendsNullableObject(l: kotlin.collections.MutableList<*>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsNonNullObject(l: kotlin.collections.MutableList<*>?) {}
+  fun testListOfWildcardExtendsNonNullObject(l: kotlin.collections.MutableList<out kotlin.Any>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityString(l: kotlin.collections.MutableList<*>?) {}
+  fun testListOfWildcardExtendsDefaultNullabilityString(l: kotlin.collections.MutableList<out kotlin.String>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsNullableString(l: kotlin.collections.MutableList<*>?) {}
+  fun testListOfWildcardExtendsNullableString(l: kotlin.collections.MutableList<out kotlin.String?>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsNonNullString(l: kotlin.collections.MutableList<*>?) {}
+  fun testListOfWildcardExtendsNonNullString(l: kotlin.collections.MutableList<out kotlin.String>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun <T> testListOfWildcardExtendsDefaultNullabilityVariable(l: kotlin.collections.MutableList<*>?) {}
+  fun <T> testListOfWildcardExtendsDefaultNullabilityVariable(l: kotlin.collections.MutableList<out T>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun <T> testListOfWildcardExtendsNullableVariable(l: kotlin.collections.MutableList<*>?) {}
+  fun <T> testListOfWildcardExtendsNullableVariable(l: kotlin.collections.MutableList<out T?>?) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardSuperDefaultNullabilityObject(l: kotlin.collections.MutableList<in kotlin.Any>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperNullableObject(l: kotlin.collections.MutableList<in kotlin.Any>?) {}
+  fun testListOfWildcardSuperNullableObject(l: kotlin.collections.MutableList<in kotlin.Any?>?) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardSuperNonNullObject(l: kotlin.collections.MutableList<in kotlin.Any>?) {}
@@ -188,7 +188,7 @@ open class DefaultNullable {
   fun testListOfWildcardSuperDefaultNullabilityString(l: kotlin.collections.MutableList<in kotlin.String>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperNullableString(l: kotlin.collections.MutableList<in kotlin.String>?) {}
+  fun testListOfWildcardSuperNullableString(l: kotlin.collections.MutableList<in kotlin.String?>?) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardSuperNonNullString(l: kotlin.collections.MutableList<in kotlin.String>?) {}

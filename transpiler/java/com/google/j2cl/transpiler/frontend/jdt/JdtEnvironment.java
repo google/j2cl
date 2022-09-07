@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -329,11 +330,21 @@ class JdtEnvironment {
     Supplier<TypeDescriptor> upperBoundTypeDescriptorFactory =
         () -> getUpperBoundTypeDescriptor(typeBinding, inNullMarkedScope);
 
+    String uniqueKey = typeBinding.getKey();
+    if (typeBinding.isWildcardType() && typeBinding.getBound() != null) {
+      // TODO(b/236987392): Remove the hack once the modeling of type variables is fixed.
+      // HACK: Use the toString representation of the type but trim it to the first new line. After
+      // the newline there is information that is unrelated to the identity of the wildcard that
+      // changes throughout the compile. This is a very hacky way to preserve the identity of the
+      // wildcards.
+      uniqueKey +=
+          Splitter.on('\n').splitToStream(typeBinding.getBound().toString()).findFirst().get();
+    }
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorSupplier(upperBoundTypeDescriptorFactory)
         .setLowerBoundTypeDescriptor(getLowerBoundTypeDescriptor(typeBinding, inNullMarkedScope))
         .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
-        .setUniqueKey(typeBinding.getKey())
+        .setUniqueKey(uniqueKey)
         .setName(typeBinding.getName())
         .build();
   }
@@ -349,13 +360,20 @@ class JdtEnvironment {
 
   private TypeDescriptor getUpperBoundTypeDescriptor(
       ITypeBinding typeBinding, boolean inNullMarkedScope) {
+    if (typeBinding.isWildcardType()) {
+      // For wildcards get the upper bound with getBound() since getTypeBounds() *below* does not
+      // return the right type in this case.
+      ITypeBinding bound = typeBinding.getBound();
+      if (bound != null) {
+        return typeBinding.isUpperbound()
+            ? createTypeDescriptorWithNullability(
+                bound, bound.getTypeAnnotations(), inNullMarkedScope)
+            : TypeDescriptors.get().javaLangObject.toNullable(!inNullMarkedScope);
+      }
+    }
     ITypeBinding[] bounds = typeBinding.getTypeBounds();
     if (bounds == null || bounds.length == 0) {
-      ITypeBinding bound = typeBinding.getBound();
-      return bound != null && typeBinding.isUpperbound()
-          ? createTypeDescriptorWithNullability(
-              bound, bound.getTypeAnnotations(), inNullMarkedScope)
-          : TypeDescriptors.get().javaLangObject;
+      return TypeDescriptors.get().javaLangObject.toNullable(!inNullMarkedScope);
     }
     if (bounds.length == 1) {
       return createTypeDescriptorWithNullability(
