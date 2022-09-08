@@ -302,6 +302,11 @@ DEFAULT_J2CL_KOTLINCOPTS = [
     "-Xmulti-platform",
     # Enable the serialization of the IR for the inline functions.
     "-Xserialize-ir=inline",
+    # The jvm compilation and the j2cl transpilation need to use the same jvm version target
+    # otherwise the Kotlin compiler fails during the transpilation because it think it won't be
+    # able inline the bytecode (even we don't use the bytecode inliner).
+    # 11 is the default java target in Google3.
+    "-jvm-target=11",
 ]
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
