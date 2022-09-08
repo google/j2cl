@@ -239,7 +239,7 @@
 [l] => [l] "l"
 [t] => [t] "t"
 [{
-    l.add(t);
+    l.add(t); // This would not pass nullability-checker, but should compile in Kotlin.
   }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testCaptureNullabilityCast"
 [l.add(t);] => [l.add(t);] "nullability.defaultnotnullable.DefaultNotNullable.testCaptureNullabilityCast"
 [DefaultNotNullable] => [$init__void_$p_nullability_defaultnotnullable_DefaultNotNullable]

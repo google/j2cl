@@ -201,7 +201,7 @@ open class DefaultNotNullable {
 
   @kotlin.jvm.JvmStatic
   fun <T: kotlin.Any> testCaptureNullabilityCast(l: kotlin.collections.MutableList<in T>, t: T?) {
-   l!!.add(t)
+   l!!.add(t as T)
   }
  }
 
