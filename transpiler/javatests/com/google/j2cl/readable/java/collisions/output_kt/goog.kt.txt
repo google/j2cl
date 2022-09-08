@@ -44,13 +44,13 @@ open class Other<T> {
  open fun <T_2> m(): T_2 {
   val T_1: kotlin.Int = 5
   val o: collisions.Other<T_2>? = null as collisions.Other<T_2>?
-  return null!!
+  return null as T_2
  }
 }
 
 open class T<T: kotlin.Number?> {
  open fun m(): T {
-  return null!!
+  return null as T
  }
 
  open fun n(): T {

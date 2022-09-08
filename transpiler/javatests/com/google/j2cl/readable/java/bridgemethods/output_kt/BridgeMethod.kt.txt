@@ -54,7 +54,7 @@ fun interface Getter {
 
 open class ClassWithParameterizedGet<T> {
  open fun get(t: T): T {
-  return null!!
+  return null as T
  }
 }
 
@@ -107,13 +107,13 @@ open class TestCase102 {
 
 open class ParameterizedParent<T: bridgemethods.ParameterizedParent<T>?> {
  open fun <Q: T> m(t: Q): Q {
-  return null!!
+  return null as Q
  }
 }
 
 open class ReparametrerizedChild<E: bridgemethods.ReparametrerizedChild<E>?>: bridgemethods.ParameterizedParent<E>() {
  open fun <S: E> m(t: S): S {
-  return null!!
+  return null as S
  }
 }
 

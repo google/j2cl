@@ -8,7 +8,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
  @kotlin.jvm.JvmField var field: T = null as T
 
  open fun method(): T {
-  return null!!
+  return null as T
  }
 
  open fun testCastToTypeVariable() {
@@ -39,7 +39,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
   if (o is cast.CastGenerics.Empty1) {
    return o as EE
   }
-  return null!!
+  return null as EE
  }
 
  companion object {
@@ -104,7 +104,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
 
  open class Container<T> {
   open fun get(): T {
-   return null!!
+   return null as T
   }
  }
 

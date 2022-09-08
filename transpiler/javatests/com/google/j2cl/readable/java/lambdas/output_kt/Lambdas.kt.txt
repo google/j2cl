@@ -107,7 +107,7 @@ open class Lambdas {
    throw kotlin.RuntimeException()
   })
   val f: lambdas.Lambdas.Function<in T, *>? = lambdas.Lambdas.Function { item: T ->
-   return@Function kotlin.Long.valueOf(1L)!!
+   return@Function kotlin.Long.valueOf(1L)
   }
  }
 
@@ -161,7 +161,7 @@ open class Lambdas {
   @kotlin.jvm.JvmStatic
   fun testLambdaCallingStaticMethod() {
    val f: lambdas.Lambdas.Function<kotlin.Any?, *>? = lambdas.Lambdas.Function { l: kotlin.Any? ->
-    return@Function lambdas.Lambdas.m()!!
+    return@Function lambdas.Lambdas.m()
    }
   }
 
@@ -285,7 +285,7 @@ open class Lambdas {
 
  interface Equals<T> {
   fun get(): T {
-   return null!!
+   return null as T
   }
  }
 

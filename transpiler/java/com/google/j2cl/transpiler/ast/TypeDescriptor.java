@@ -174,6 +174,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   /** Return a non nullable version of this type descriptor if possible. */
   public abstract TypeDescriptor toNonNullable();
 
+  /** Return whether the value of this type can be null. */
+  public boolean canBeNull() {
+    return isNullable();
+  }
+
   /** Returns type descriptor for the same type use the type parameters from the declaration. */
   public abstract TypeDescriptor toUnparameterizedTypeDescriptor();
 

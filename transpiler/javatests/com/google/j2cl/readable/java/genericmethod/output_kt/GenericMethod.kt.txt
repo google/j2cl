@@ -34,11 +34,11 @@ open class GenericMethod<T> {
  }
 
  open fun <T_1> checked(): T_1 {
-  return null!!
+  return null as T_1
  }
 
  open fun <T_1> unchecked(): T_1 {
-  return null!!
+  return null as T_1
  }
 
  open fun test() {
@@ -115,13 +115,13 @@ open class GenericMethod<T> {
 
  open class SuperContainer<C: genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?> {
   open fun get(): C {
-   return null!!
+   return null as C
   }
  }
 
  open class Container<CT: genericmethod.GenericMethod.Content?> {
   open fun get(): CT {
-   return null!!
+   return null as CT
   }
  }
 

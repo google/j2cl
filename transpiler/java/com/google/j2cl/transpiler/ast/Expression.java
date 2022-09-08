@@ -87,6 +87,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return false;
   }
 
+  /** Returns whether value of this expression can be null. */
+  public boolean canBeNull() {
+    return getTypeDescriptor().canBeNull();
+  }
+
   /** Creates an ExpressionStatement with this expression as its code */
   public ExpressionStatement makeStatement(SourcePosition sourcePosition) {
     return new ExpressionStatement(sourcePosition, this);

@@ -23,8 +23,8 @@ open class TypeWildCards {
   val elements: kotlin.collections.MutableList<typewildcards.TypeWildCards.Element?>? = null
   val otherElements: kotlin.collections.MutableList<typewildcards.TypeWildCards.SubOtherElement?>? = null
   val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */, kotlin.Int?>(typewildcards.TypeWildCards.concat<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>(elements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?, otherElements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?), java.util.function.Function { a: kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */ ->
-   a!!!!.getKey()
-   return@Function a!!!!.get()!!
+   a!!.getKey()
+   return@Function a!!.get()
   })
  }
 

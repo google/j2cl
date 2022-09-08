@@ -16,14 +16,12 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeVariable;
 
 /** Initializes non-final, nullable fields with explicit default value. */
 public class NormalizeFieldInitializationKotlin extends NormalizationPass {
@@ -46,7 +44,7 @@ public class NormalizeFieldInitializationKotlin extends NormalizationPass {
             // do not need to be initialized on all constructor paths, as they are implicitly
             // initialized with fallback value.
             // This is not the case in Kotlin, so we make it explicit.
-            if (typeDescriptor.isPrimitive() || instanceCanBeNull(typeDescriptor)) {
+            if (typeDescriptor.isPrimitive() || typeDescriptor.canBeNull()) {
               return fieldWithDefaultInitializer(field);
             }
 
@@ -59,27 +57,6 @@ public class NormalizeFieldInitializationKotlin extends NormalizationPass {
   private static Field fieldWithDefaultInitializer(Field field) {
     TypeDescriptor typeDescriptor = field.getDescriptor().getTypeDescriptor();
     Expression initializer = typeDescriptor.getDefaultValue();
-    return Field.Builder.from(field)
-        .setInitializer(
-            // Cast is necessary for non-null type variables.
-            typeDescriptor.isNullable()
-                ? initializer
-                : CastExpression.newBuilder()
-                    .setExpression(initializer)
-                    .setCastTypeDescriptor(typeDescriptor)
-                    .build())
-        .build();
-  }
-
-  private static boolean instanceCanBeNull(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isNullable()) {
-      return true;
-    }
-
-    if (typeDescriptor instanceof TypeVariable) {
-      return ((TypeVariable) typeDescriptor).getUpperBoundTypeDescriptor().isNullable();
-    }
-
-    return false;
+    return Field.Builder.from(field).setInitializer(initializer).build();
   }
 }

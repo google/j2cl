@@ -20,7 +20,10 @@ import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
 /** Inserts casts in places where necessary due to nullability differences in type arguments. */
@@ -44,10 +47,10 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
-                return needsCast(expression.getTypeDescriptor(), inferredTypeDescriptor)
+                return needsCast(expression.getTypeDescriptor(), project(inferredTypeDescriptor))
                     ? CastExpression.newBuilder()
                         .setExpression(expression)
-                        .setCastTypeDescriptor(inferredTypeDescriptor)
+                        .setCastTypeDescriptor(project(inferredTypeDescriptor))
                         .build()
                     : expression;
               }
@@ -55,16 +58,47 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
   }
 
   private static boolean needsCast(TypeDescriptor from, TypeDescriptor to) {
-    return (from instanceof DeclaredTypeDescriptor)
-        && (to instanceof DeclaredTypeDescriptor)
-        && Streams.zip(
-                ((DeclaredTypeDescriptor) from).getTypeArgumentDescriptors().stream(),
-                ((DeclaredTypeDescriptor) to).getTypeArgumentDescriptors().stream(),
-                InsertCastsOnNullabilityMismatch::typeArgumentNeedsCast)
-            .anyMatch(Boolean::booleanValue);
+    // Don't cast to wildcards, intersection and union types.
+    if (to instanceof IntersectionTypeDescriptor || to instanceof UnionTypeDescriptor) {
+      return false;
+    }
+
+    if (from.isNullable() && !to.isNullable()) {
+      return true;
+    }
+
+    return typeArgumentsNeedsCast(from, to);
+  }
+
+  private static boolean typeArgumentsNeedsCast(TypeDescriptor from, TypeDescriptor to) {
+    if (from instanceof DeclaredTypeDescriptor && to instanceof DeclaredTypeDescriptor) {
+      return Streams.zip(
+              ((DeclaredTypeDescriptor) from).getTypeArgumentDescriptors().stream(),
+              ((DeclaredTypeDescriptor) to).getTypeArgumentDescriptors().stream(),
+              InsertCastsOnNullabilityMismatch::typeArgumentNeedsCast)
+          .anyMatch(Boolean::booleanValue);
+    }
+
+    return false;
   }
 
   private static boolean typeArgumentNeedsCast(TypeDescriptor from, TypeDescriptor to) {
-    return from.isNullable() != to.isNullable() || needsCast(from, to);
+    return from.isNullable() != to.isNullable() || typeArgumentsNeedsCast(from, to);
+  }
+
+  private static TypeDescriptor project(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof TypeVariable) {
+      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+      if (typeVariable.isWildcardOrCapture()) {
+        TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
+        if (lowerBound != null) {
+          return project(lowerBound);
+        }
+        TypeDescriptor upperBound = typeVariable.getUpperBoundTypeDescriptor();
+        return project(upperBound);
+      }
+    }
+
+    return typeDescriptor;
   }
 }

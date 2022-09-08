@@ -3244,6 +3244,21 @@
  )
 )
 
+;;; void DefaultNotNullable.testCaptureNullabilityCast(List<? super T> l, T t)
+(func $m_testCaptureNullabilityCast__java_util_List__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
+ (param $l (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:337:18
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:337:79
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; l.add(t);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:338:4
+  (drop (call_ref (ref.as_non_null (local.get $l))(local.get $t)(struct.get $java.util.Collection.vtable $m_add__java_lang_Object__boolean (ref.cast_static $java.util.Collection.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $l)) (i32.const 1))) )))
+ )
+)
+
 ;;; void DefaultNotNullable.$init()
 (func $$init__void_$p_nullability_defaultnotnullable_DefaultNotNullable@nullability.defaultnotnullable.DefaultNotNullable
  (param $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))

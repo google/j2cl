@@ -333,4 +333,8 @@ public class DefaultNotNullable {
   static <T> void testListOfWildcardSuperDefaultNullabilityVariable(List<? super T> l) {}
 
   static <T> void testListOfWildcardSuperNullableVariable(List<? super @Nullable T> l) {}
+
+  static <T> void testCaptureNullabilityCast(List<? super T> l, @Nullable T t) {
+    l.add(t); // This would not pass nullability-checker, but should compile in Kotlin.
+  }
 }

@@ -80,6 +80,12 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   }
 
   @Override
+  public boolean canBeNull() {
+    // TODO(b/244319605): Review semantics of nullability for lower bounded type variables.
+    return isNullable() || getUpperBoundTypeDescriptor().canBeNull();
+  }
+
+  @Override
   public boolean isAssignableTo(TypeDescriptor that) {
     return this.getUpperBoundTypeDescriptor().isAssignableTo(that);
   }

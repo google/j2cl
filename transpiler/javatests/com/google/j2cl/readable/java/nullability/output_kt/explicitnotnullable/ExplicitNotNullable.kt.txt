@@ -55,14 +55,14 @@ open class ExplicitNotNullable {
   @kotlin.jvm.JvmStatic
   fun <N> genericNullableMethod(o: nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable<N>, n: N?) {
    o!!.setNullable(n)
-   o!!.setNonNull(n!!)
-   o!!.setDefaultNullability(n!!)
+   o!!.setNonNull(n as N)
+   o!!.setDefaultNullability(n as N)
    o!!.getNullable()!!.hashCode()
    o!!.getNonNullable()!!.hashCode()
    o!!.getDefaultNullability()!!.hashCode()
    o!!.nullable = n
-   o!!.nonNullable = n!!
-   o!!.defaultNullability = n!!
+   o!!.nonNullable = n as N
+   o!!.defaultNullability = n as N
    o!!.nullable!!.hashCode()
    o!!.nonNullable!!.hashCode()
    o!!.defaultNullability!!.hashCode()
@@ -264,7 +264,7 @@ open class ExplicitNotNullable {
   }
 
   open fun getDefaultNullability(): N {
-   return null!!
+   return null as N
   }
 
   open fun setNullable(n: N?) {}

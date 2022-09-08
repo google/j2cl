@@ -25,7 +25,7 @@ open class ForEachStatement {
  }
 
  fun <T: kotlin.collections.MutableIterable<kotlin.String?>?, U: T> testTypeVariable() {
-  val iterable: U = null!!
+  val iterable: U = null as U
   FOR_EACH@ for (s in iterable!!) {}
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<out kotlin.collections.MutableIterator<kotlin.Int?>?>? = null
   FOR_EACH_1@ for (s_1 in anotherIterable!!) {}
@@ -45,7 +45,7 @@ open class ForEachStatement {
 
  open class IterableReturningTypeVariable<T: kotlin.collections.MutableIterator<kotlin.Int?>?>: javaemul.lang.JavaIterable<kotlin.Int?> {
   open override fun iterator(): T {
-   return null!!
+   return null as T
   }
  }
 }
