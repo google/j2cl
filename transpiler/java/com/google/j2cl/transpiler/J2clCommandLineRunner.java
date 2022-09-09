@@ -41,8 +41,11 @@ public final class J2clCommandLineRunner extends CommandLineTool {
 
   @Option(
       name = "-ktcommonsources",
-      metaVar = "<common source files>",
-      usage = "Specifies individual files and jars/zips of Kotlin common sources.")
+      metaVar = "<common source filepaths>",
+      usage =
+          "Specifies which individual files are considered common sources. The filepaths might"
+              + " refer to source files passed directly as arguments or be relative paths for"
+              + " sources in the source jars passed as arguments.")
   List<String> kotlinCommonSources = new ArrayList<>();
 
   @Option(
