@@ -46,12 +46,6 @@ class Renderer(
     renderIdentifier(environment.identifier(hasName))
   }
 
-  fun renderIndented(renderFn: () -> Unit) {
-    sourceBuilder.indent()
-    renderFn()
-    sourceBuilder.unindent()
-  }
-
   fun renderInCurlyBrackets(renderFn: () -> Unit) {
     sourceBuilder.openBrace()
     renderFn()
