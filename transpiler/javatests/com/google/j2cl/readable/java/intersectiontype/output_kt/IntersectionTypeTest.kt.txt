@@ -29,7 +29,7 @@ open class IntersectionTypeTest<U> {
 
  open fun testMethodCall() {
   val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>()
-  intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>(o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */)
+  intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>((o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it })
   intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>(intersectiontype.IntersectionTypeTest.m<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>())
   val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>() as intersectiontype.Getable<*>?
  }
@@ -44,26 +44,26 @@ open class IntersectionTypeTest<U> {
   @kotlin.jvm.JvmStatic
   fun <T> cast(o: kotlin.Any?): intersectiontype.Getable<T>? {
    if (o === null) {
-    return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
+    return (o).let { it as intersectiontype.Getable<T>?; it as intersectiontype.Setable?; it }
    }
-   return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
+   return (o).let { it as intersectiontype.Getable<T>?; it as intersectiontype.Setable?; it }
   }
 
   @kotlin.jvm.JvmStatic
   fun <T> cast1(s: kotlin.Any?): intersectiontype.Getable<kotlin.Comparable<kotlin.String?>?>? {
-   return s as intersectiontype.Getable<kotlin.Comparable<kotlin.String?>?>? /* & intersectiontype.Setable? */
+   return (s).let { it as intersectiontype.Getable<kotlin.Comparable<kotlin.String?>?>?; it as intersectiontype.Setable?; it }
   }
 
   @kotlin.jvm.JvmStatic
   fun <T> cast2(s: kotlin.Any?): intersectiontype.Getable<kotlin.Comparable<T>?>? {
-   return s as intersectiontype.Getable<kotlin.Comparable<T>?>? /* & intersectiontype.Setable? */
+   return (s).let { it as intersectiontype.Getable<kotlin.Comparable<T>?>?; it as intersectiontype.Setable?; it }
   }
 
   @kotlin.jvm.JvmStatic
   fun method(): intersectiontype.Cmp? {
-   return intersectiontype.Cmp {
+   return (intersectiontype.Cmp {
     return@Cmp 1
-   } as intersectiontype.Cmp? /* & intersectiontype.Serial? */
+   }).let { it as intersectiontype.Cmp?; it as intersectiontype.Serial?; it }
   }
 
   @kotlin.jvm.JvmStatic
@@ -75,9 +75,9 @@ open class IntersectionTypeTest<U> {
 
   @kotlin.jvm.JvmStatic
   fun testClosureAssignment(o: kotlin.Any?) {
-   val e: intersectiontype.IntersectionTypeTest.A? = o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? & intersectiontype.IntersectionTypeTest.EmptyB? */
-   val g: intersectiontype.IntersectionTypeTest.EmptyA? = o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? & intersectiontype.IntersectionTypeTest.EmptyB? */
-   val s: intersectiontype.IntersectionTypeTest.EmptyB? = o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? & intersectiontype.IntersectionTypeTest.EmptyB? */
+   val e: intersectiontype.IntersectionTypeTest.A? = (o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it as intersectiontype.IntersectionTypeTest.EmptyB?; it }
+   val g: intersectiontype.IntersectionTypeTest.EmptyA? = (o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it as intersectiontype.IntersectionTypeTest.EmptyB?; it }
+   val s: intersectiontype.IntersectionTypeTest.EmptyB? = (o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it as intersectiontype.IntersectionTypeTest.EmptyB?; it }
   }
 
   @kotlin.jvm.JvmStatic
@@ -101,13 +101,13 @@ open class IntersectionTypeTest<U> {
   @kotlin.jvm.JvmStatic
   fun <T> callOnIntersetionTypes(t: T) where T: intersectiontype.IntersectionTypeTest.SomeConcreteType?, T: intersectiontype.Cmp? {
    t!!.cmp()
-   (null as intersectiontype.IntersectionTypeTest.SomeConcreteType? /* & intersectiontype.Cmp? */)!!.cmp()
+   ((null).let { it as intersectiontype.IntersectionTypeTest.SomeConcreteType?; it as intersectiontype.Cmp?; it })!!.cmp()
   }
  }
 
  open inner class MapEntry {
   open fun <T> method(o: kotlin.Any?): intersectiontype.Getable<T>? {
-   return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
+   return (o).let { it as intersectiontype.Getable<T>?; it as intersectiontype.Setable?; it }
   }
  }
 

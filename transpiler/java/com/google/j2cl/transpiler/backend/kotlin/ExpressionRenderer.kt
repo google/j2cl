@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment
 import com.google.j2cl.transpiler.ast.FieldAccess
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InstanceOfExpression
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Invocation
 import com.google.j2cl.transpiler.ast.KtInfo
 import com.google.j2cl.transpiler.ast.Literal
@@ -134,9 +135,23 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
 }
 
 private fun Renderer.renderCastExpression(expression: CastExpression) {
-  renderExpression(expression.expression)
-  render(" as ")
-  renderTypeDescriptor(expression.castTypeDescriptor.toNonRaw())
+  val castTypeDescriptor = expression.castTypeDescriptor
+  if (castTypeDescriptor is IntersectionTypeDescriptor) {
+    // Render cast to intersection type descriptor: (A & B & C) x
+    // using smart casts: (x).let { it as A; it as B; it as C; it }
+    renderInParentheses { renderExpression(expression.expression) }
+    render(".let { ")
+    castTypeDescriptor.intersectionTypeDescriptors.forEach {
+      render("it as ")
+      renderTypeDescriptor(it.toNonRaw())
+      render("; ")
+    }
+    render("it }")
+  } else {
+    renderExpression(expression.expression)
+    render(" as ")
+    renderTypeDescriptor(expression.castTypeDescriptor.toNonRaw())
+  }
 }
 
 private fun Renderer.renderBinaryOperator(operator: BinaryOperator) {
