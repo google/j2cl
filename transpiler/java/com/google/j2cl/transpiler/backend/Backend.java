@@ -116,7 +116,7 @@ import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
-import com.google.j2cl.transpiler.passes.NormalizeSuperMethodCall;
+import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
@@ -169,7 +169,7 @@ public enum Backend {
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
           RestoreVariableScoping::new,
-          NormalizeSuperMethodCall::new);
+          NormalizeSuperMemberReferences::new);
     }
 
     @Override
@@ -318,7 +318,7 @@ public enum Backend {
       return ImmutableList.of(
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
-          NormalizeSuperMethodCall::new);
+          NormalizeSuperMemberReferences::new);
     }
 
     @Override

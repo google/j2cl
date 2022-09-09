@@ -17,34 +17,37 @@ package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 
 /**
- * Normalize the calls to super methods to satisfy the invariants we hold for the passes that
- * follows.
+ * Normalize the references to members through super to satisfy the invariants we hold for the
+ * passes that follow.
  *
- * <p>Calls that resolve to method in a super class will preserve the super qualifier. Calls to a
- * super method of an outer class or to a default method implementation will be marked as static
- * dispatch and have ThisReference as their qualifier.
+ * <p>References that resolve to member in a super class will preserve the super qualifier.
+ * References to super member of an outer class or to a default method implementation will be marked
+ * as static dispatch and have ThisReference as their qualifier.
  */
-public class NormalizeSuperMethodCall extends NormalizationPass {
+public class NormalizeSuperMemberReferences extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public Node rewriteMethodCall(MethodCall methodCall) {
+          public MethodCall rewriteMethodCall(MethodCall methodCall) {
             if (!(methodCall.getQualifier() instanceof SuperReference)) {
               return methodCall;
             }
             SuperReference qualifier = (SuperReference) methodCall.getQualifier();
 
-            if (methodCall.getTarget().isDefaultMethod()) {
-              // Rewrite call to interface default method as a super method call targeting the
-              // default method in the interface.
+            if (methodCall.getTarget().isDefaultMethod() || methodCall.isStaticDispatch()) {
+              // Treat calls to interface default method as static dispatch (targeting the default
+              // method in the interface).
+              // Make all static dispatch calls to go through ThisReference instead of super, since
+              // in that case the qualifier becomes a parameter of the explicit call and super
+              // is only valid as a qualifier.
               return MethodCall.Builder.from(methodCall)
                   .setStaticDispatch(true)
                   .setQualifier(new ThisReference(qualifier.getTypeDescriptor(), false))
@@ -65,6 +68,21 @@ public class NormalizeSuperMethodCall extends NormalizationPass {
             return MethodCall.Builder.from(methodCall)
                 .setQualifier(new ThisReference(qualifier.getTypeDescriptor(), true))
                 .setStaticDispatch(true)
+                .build();
+          }
+
+          @Override
+          public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
+            if (!(fieldAccess.getQualifier() instanceof SuperReference)) {
+              return fieldAccess;
+            }
+            SuperReference qualifier = (SuperReference) fieldAccess.getQualifier();
+
+            // Always rewrite super field accesses to go through "this" instead of super, the
+            // FieldDescriptor uniquely determines which field to access.
+            return FieldAccess.Builder.from(fieldAccess)
+                .setQualifier(
+                    new ThisReference(qualifier.getTypeDescriptor(), qualifier.isQualified()))
                 .build();
           }
         });

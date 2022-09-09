@@ -124,6 +124,7 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
+import org.eclipse.jdt.core.dom.SuperMethodInvocation;
 import org.eclipse.jdt.core.dom.SuperMethodReference;
 import org.eclipse.jdt.core.dom.TypeMethodReference;
 import org.eclipse.jdt.core.dom.VariableDeclaration;
@@ -955,7 +956,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodDescriptor methodDescriptor =
           environment.createMethodDescriptor(expression.resolveMethodBinding());
 
-      Expression qualifier = createQualifiedThisReference(expression.getQualifier());
+      Expression qualifier = createSuperReference(expression.getQualifier());
       return AbstractCompilationUnitBuilder.createForwardingFunctionExpression(
           getSourcePosition(expression),
           environment.createDeclaredTypeDescriptor(expression.resolveTypeBinding()),
@@ -964,6 +965,27 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           qualifier,
           methodDescriptor,
           true);
+    }
+
+    private SuperReference createSuperReference(Name qualifier) {
+      ITypeBinding qualifierTypeBinding =
+          qualifier != null ? (ITypeBinding) qualifier.resolveBinding() : null;
+
+      // Don't consider calls that select a default method in the super hierarchy as qualified
+      // (to have the same representation as in kotlin). Only consider calls to be qualified if
+      // they are targeting a method in an enclosing class. Note that enclosing classes can never
+      // be interfaces.
+      boolean isQualified =
+          qualifierTypeBinding != null && !qualifierTypeBinding.getErasure().isInterface();
+
+      if (isQualified) {
+        // This is a qualified super call, targeting an outer class method;
+        return new SuperReference(
+            environment.createDeclaredTypeDescriptor(qualifierTypeBinding), true);
+      }
+
+      // Call targeting a method in the super types.
+      return new SuperReference(getCurrentType().getTypeDescriptor());
     }
 
     private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement statement) {
@@ -1023,8 +1045,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private FieldAccess convert(org.eclipse.jdt.core.dom.SuperFieldAccess expression) {
       IVariableBinding variableBinding = expression.resolveFieldBinding();
       FieldDescriptor fieldDescriptor = environment.createFieldDescriptor(variableBinding);
-      Expression qualifier = createQualifiedThisReference(expression.getQualifier());
 
+      SuperReference qualifier = createSuperReference(expression.getQualifier());
       return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
     }
 
@@ -1080,35 +1102,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    private MethodCall convert(org.eclipse.jdt.core.dom.SuperMethodInvocation expression) {
+    private MethodCall convert(SuperMethodInvocation expression) {
       IMethodBinding methodBinding = expression.resolveMethodBinding();
 
       MethodDescriptor methodDescriptor = environment.createMethodDescriptor(methodBinding);
 
-      ITypeBinding qualifierTypeBinding =
-          expression.getQualifier() != null
-              ? (ITypeBinding) expression.getQualifier().resolveBinding()
-              : null;
-
-      // Don't consider calls that select a default method in the super hierarchy as qualified
-      // (to have the same representation as in kotlin). Only consider calls to be qualified if
-      // they are targeting a method in an enclosing class. Note that enclosing classes can never
-      // be interfaces.
-      boolean isQualified =
-          qualifierTypeBinding != null && !qualifierTypeBinding.getErasure().isInterface();
-
-      DeclaredTypeDescriptor qualifierTypeDescriptor;
-      if (isQualified) {
-        // This is a qualified super call, targeting an outer class method;
-        checkArgument(expression.getQualifier() instanceof SimpleName);
-        qualifierTypeDescriptor = environment.createDeclaredTypeDescriptor(qualifierTypeBinding);
-      } else {
-        // Call targeting a method in the super types.
-        qualifierTypeDescriptor = getCurrentType().getTypeDescriptor();
-      }
-
       return MethodCall.Builder.from(methodDescriptor)
-          .setQualifier(new SuperReference(qualifierTypeDescriptor, isQualified))
+          .setQualifier(createSuperReference(expression.getQualifier()))
           .setArguments(
               convertArguments(methodBinding, JdtEnvironment.asTypedList(expression.arguments())))
           .setSourcePosition(getSourcePosition(expression))
@@ -1299,7 +1299,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ThisExpression expression) {
-      return createQualifiedThisReference(expression.getQualifier());
+      Name qualifier = expression.getQualifier();
+      boolean isQualified = qualifier != null;
+      DeclaredTypeDescriptor typeDescriptor =
+          isQualified
+              ? environment.createDeclaredTypeDescriptor(qualifier.resolveTypeBinding())
+              : getCurrentType().getTypeDescriptor();
+      return new ThisReference(typeDescriptor, isQualified);
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral literal) {
@@ -1396,15 +1402,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return type;
     }
 
-    /** Resolves a potentially qualified this/super reference. */
-    private ThisReference createQualifiedThisReference(Name qualifier) {
-      boolean isQualified = qualifier != null;
-      DeclaredTypeDescriptor typeDescriptor =
-          isQualified
-              ? environment.createDeclaredTypeDescriptor(qualifier.resolveTypeBinding())
-              : getCurrentType().getTypeDescriptor();
-      return new ThisReference(typeDescriptor, isQualified);
-    }
   }
 
   private CompilationUnit buildCompilationUnit(

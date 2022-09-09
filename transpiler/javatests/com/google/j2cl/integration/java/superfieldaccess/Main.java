@@ -29,7 +29,11 @@ public class Main {
     }
 
     class Parent extends GrandParent {
-      public String name = "Parent";
+      final String name;
+
+      Parent(String from) {
+        this.name = "Parent (from " + from + ")";
+      }
 
       public String getParentName() {
         return super.name;
@@ -37,7 +41,16 @@ public class Main {
     }
 
     class Child extends Parent {
-      public String name = "Child";
+      final String name;
+
+      Child() {
+        this("Child");
+      }
+
+      Child(String from) {
+        super(from);
+        this.name = "Child (from " + from + ")";
+      }
 
       public String getParentName() {
         return super.name;
@@ -47,15 +60,29 @@ public class Main {
         return super.getParentName();
       }
 
-      class Inner {
+      class Inner extends Parent {
+        Inner() {
+          super("Inner");
+        }
+
         public String getOuterParentName() {
           return Child.super.name;
         }
+
+        class InnerInner {
+          public String getOuterParentNameQualified() {
+            return Child.Inner.super.name;
+          }
+        }
       }
+
     }
 
-    assertEquals("Parent", new Child().getParentName());
+    assertEquals("Parent (from Child)", new Child().getParentName());
     assertEquals("GrandParent", new Child().getGrandParentName());
-    assertEquals("Parent", new Child().new Inner().getOuterParentName());
+    assertEquals("Parent (from Child)", new Child().new Inner().getOuterParentName());
+    assertEquals(
+        "Parent (from Inner)",
+        new Child().new Inner().new InnerInner().getOuterParentNameQualified());
   }
 }
