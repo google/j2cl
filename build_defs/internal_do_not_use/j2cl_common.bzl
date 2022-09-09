@@ -280,7 +280,10 @@ def _j2cl_transpile(
 
     ctx.actions.run(
         progress_message = "Transpiling to JavaScript %s" % ctx.label,
-        inputs = depset(srcs, transitive = [classpath]),
+        # kt_common_srcs are not read by the transpiler as they are already
+        # included in the srcjars of srcs. However, params.add_all requires them
+        # to be inputs in order to be properly expanded out into params.
+        inputs = depset(srcs + kt_common_srcs, transitive = [classpath]),
         outputs = [output_dir, library_info_output],
         executable = j2cl_transpiler_override or ctx.executable._j2cl_transpiler,
         arguments = [args],

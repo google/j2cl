@@ -14,11 +14,14 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -34,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.spi.MapOptionHandler;
@@ -173,6 +177,17 @@ final class BazelJ2clBuilder extends BazelWorker {
         && (!allKotlinSources.isEmpty() || !kotlinCommonSources.isEmpty())) {
       throw new AssertionError(
           "Transpilation of Java and Kotlin files together is not supported yet.");
+    }
+
+    // Common kotlin file paths should be a strict subset of the sources.
+    Set<String> unmatchedKotlinCommonSources =
+        Sets.difference(
+            ImmutableSet.copyOf(kotlinCommonSources),
+            allKotlinSources.stream().map(FileInfo::originalPath).collect(toImmutableSet()));
+    if (!unmatchedKotlinCommonSources.isEmpty()) {
+      problems.fatal(
+          FatalError.INVALID_KOTLIN_COMMON_SOURCES,
+          Joiner.on(", ").join(unmatchedKotlinCommonSources));
     }
 
     ImmutableList<FileInfo> allNativeSources =

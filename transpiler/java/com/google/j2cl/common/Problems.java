@@ -53,7 +53,10 @@ public class Problems {
             + "Please run this library through the @GwtIncompatible stripper tool.",
         1),
     LIBRARY_INFO_OUTPUT_ARG_MISSING("-libraryinfooutput option is mandatory", 0),
-    INVALID_JAVA_FRONTEND("%s is not a valid Java frontend.", 1);
+    INVALID_JAVA_FRONTEND("%s is not a valid Java frontend.", 1),
+    INVALID_KOTLIN_COMMON_SOURCES(
+        "Kotlin common sources should also be specified as input sources, but these weren't: %s",
+        1);
 
     // used for customized message.
     private final String message;
