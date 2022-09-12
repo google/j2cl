@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
@@ -88,6 +89,11 @@ public class ImplementStringConcatenation extends NormalizationPass {
 
             // Add  $stringBuilder.append() calls
             for (Expression operand : collectConcatOperands(binaryExpression)) {
+              if (operand instanceof StringLiteral
+                  && ((StringLiteral) operand).getValue().isEmpty()) {
+                // Skip empty string on concat; esp. happens with common patterns like ("" + x).
+                continue;
+              }
               multiExpressionBuilder.addExpressions(
                   MethodCall.Builder.from(
                           TypeDescriptors.get()
