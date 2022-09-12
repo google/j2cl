@@ -293,7 +293,7 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   if (!expression.target.isKtProperty) {
     val typeParameters = methodDescriptor.declarationDescriptor.typeParameterTypeDescriptors
     val typeArguments = methodDescriptor.typeArgumentTypeDescriptors.map { it.toNonRaw() }
-    if (typeArguments.isNotEmpty() && !typeArguments.any { it.isInferred }) {
+    if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
       renderTypeArguments(typeParameters, typeArguments)
     }
     renderInvocationArguments(expression)
@@ -492,7 +492,7 @@ fun Renderer.renderVariable(variable: Variable) {
   renderName(variable)
 
   val typeDescriptor = variable.typeDescriptor
-  if (!typeDescriptor.isInferred && !typeDescriptor.isProtobufBuilder()) {
+  if (typeDescriptor.isDenotable && !typeDescriptor.isProtobufBuilder()) {
     render(": ")
     renderTypeDescriptor(typeDescriptor.toNonRaw())
   }

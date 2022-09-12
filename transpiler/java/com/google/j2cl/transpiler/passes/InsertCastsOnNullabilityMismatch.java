@@ -58,8 +58,7 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
   }
 
   private static boolean needsCast(TypeDescriptor from, TypeDescriptor to) {
-    // Don't cast to wildcards, intersection and union types.
-    if (to instanceof IntersectionTypeDescriptor || to instanceof UnionTypeDescriptor) {
+    if (!isDenotable(to)) {
       return false;
     }
 
@@ -83,6 +82,10 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
   }
 
   private static boolean typeArgumentNeedsCast(TypeDescriptor from, TypeDescriptor to) {
+    if (!isDenotable(to)) {
+      return false;
+    }
+
     return from.isNullable() != to.isNullable() || typeArgumentsNeedsCast(from, to);
   }
 
@@ -100,5 +103,18 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
     }
 
     return typeDescriptor;
+  }
+
+  /** Returns whether this type is denotable as a top-level type or type argument. */
+  private static boolean isDenotable(TypeDescriptor to) {
+    if (to instanceof IntersectionTypeDescriptor || to instanceof UnionTypeDescriptor) {
+      return false;
+    }
+
+    if (to instanceof TypeVariable && ((TypeVariable) to).isWildcardOrCapture()) {
+      return false;
+    }
+
+    return true;
   }
 }

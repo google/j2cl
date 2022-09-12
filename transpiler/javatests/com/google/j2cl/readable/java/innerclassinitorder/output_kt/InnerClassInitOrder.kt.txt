@@ -34,10 +34,10 @@ open class InnerClassInitOrder {
  }
 
  open fun testInnerClassCtors() {
-  val p1: innerclassinitorder.InnerClassInitOrder.P1<*>? = innerclassinitorder.InnerClassInitOrder.P1<kotlin.Any?>() as innerclassinitorder.InnerClassInitOrder.P1<*>?
+  val p1: innerclassinitorder.InnerClassInitOrder.P1<*>? = innerclassinitorder.InnerClassInitOrder.P1<kotlin.Any?>()
   assert(1 === p1!!.value)
   assert(2 === innerclassinitorder.InnerClassInitOrder.P1<kotlin.Any?>(2).value)
-  val p2: innerclassinitorder.InnerClassInitOrder.P1<*>.P2<*>? = p1!!.P2<kotlin.Any?>() as innerclassinitorder.InnerClassInitOrder.P1<*>.P2<*>?
+  val p2: innerclassinitorder.InnerClassInitOrder.P1<*>.P2<*>? = p1!!.P2<kotlin.Any?>()
   assert(1 === p2!!.value)
   assert(2 === p1!!.P2<kotlin.Any?>(2).value)
   assert(1 === p2!!.P3<kotlin.Any?>().value)

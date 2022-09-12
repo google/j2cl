@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
@@ -91,7 +92,7 @@ private fun Renderer.renderTypeArguments(
   val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
   val arguments = declaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors
   if (arguments.isNotEmpty()) {
-    if (!asSuperType || !arguments.any { it.isInferred }) {
+    if (!asSuperType || arguments.all { it.isDenotable }) {
       renderTypeArguments(parameters, arguments)
     }
   }
@@ -156,7 +157,15 @@ private fun Renderer.renderIntersectionTypeDescriptor(
   }
 }
 
-internal val TypeDescriptor.isInferred
+/** Returns whether this type is denotable as a top-level type of type argument. */
+internal val TypeDescriptor.isDenotable
   get() =
-    (this is DeclaredTypeDescriptor && this.typeDeclaration.isAnonymous) ||
-      (this is TypeVariable && this.isWildcardOrCapture)
+    when (this) {
+      is DeclaredTypeDescriptor -> !typeDeclaration.isAnonymous
+      is TypeVariable -> !isWildcardOrCapture
+      is IntersectionTypeDescriptor -> false
+      is UnionTypeDescriptor -> false
+      is PrimitiveTypeDescriptor -> true
+      is ArrayTypeDescriptor -> true
+      else -> error("Unhandled $this")
+    }

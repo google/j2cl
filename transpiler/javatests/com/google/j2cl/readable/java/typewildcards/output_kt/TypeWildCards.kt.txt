@@ -14,15 +14,15 @@ open class TypeWildCards {
  open fun lowerBound(g: typewildcards.GenericType<in typewildcards.TypeWildCards?>?) {}
 
  open fun test() {
-  this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<*>?)
-  this.upperBound(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<out typewildcards.TypeWildCards?>?)
-  this.lowerBound(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<in typewildcards.TypeWildCards?>?)
+  this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>())
+  this.upperBound(typewildcards.GenericType<typewildcards.TypeWildCards?>())
+  this.lowerBound(typewildcards.GenericType<typewildcards.TypeWildCards?>())
  }
 
  open fun testInferredGenericIntersection() {
   val elements: kotlin.collections.MutableList<typewildcards.TypeWildCards.Element?>? = null
   val otherElements: kotlin.collections.MutableList<typewildcards.TypeWildCards.SubOtherElement?>? = null
-  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */, kotlin.Int?>(typewildcards.TypeWildCards.concat<kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>(elements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?, otherElements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?), java.util.function.Function { a: kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */ ->
+  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements, otherElements), java.util.function.Function { a ->
    a!!.getKey()
    return@Function a!!.get()
   })

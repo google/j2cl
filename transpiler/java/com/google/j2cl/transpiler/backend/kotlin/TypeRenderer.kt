@@ -59,7 +59,7 @@ fun Renderer.renderType(type: Type) {
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
   renderIdentifier(declaration.ktSimpleName)
   declaration.directlyDeclaredTypeParameterDescriptors
-    .takeIf { it.isNotEmpty() && !it.any { it.isInferred } }
+    .takeIf { it.isNotEmpty() && it.all { it.isDenotable } }
     ?.let { parameters -> renderTypeParameters(parameters) }
 }
 

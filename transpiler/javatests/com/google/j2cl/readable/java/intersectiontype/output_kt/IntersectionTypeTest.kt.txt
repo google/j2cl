@@ -28,10 +28,10 @@ open class IntersectionTypeTest<U> {
  }
 
  open fun testMethodCall() {
-  val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>()
-  intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>((o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it })
-  intersectiontype.IntersectionTypeTest.set<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>(intersectiontype.IntersectionTypeTest.m<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>())
-  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n<intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */>() as intersectiontype.Getable<*>?
+  val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m()
+  intersectiontype.IntersectionTypeTest.set((o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it })
+  intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m())
+  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n()
  }
 
  companion object {
