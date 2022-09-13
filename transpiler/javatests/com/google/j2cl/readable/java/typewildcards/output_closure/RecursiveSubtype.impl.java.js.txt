@@ -1,0 +1,43 @@
+goog.module('typewildcards.RecursiveSubtype$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const RecursiveType = goog.require('typewildcards.RecursiveType$impl');
+
+/**
+ * @extends {RecursiveType<RecursiveSubtype>}
+ */
+class RecursiveSubtype extends RecursiveType {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!RecursiveSubtype} */
+ static $create__typewildcards_RecursiveType(/** RecursiveType<?> */ wildcardParameter) {
+  RecursiveSubtype.$clinit();
+  let $instance = new RecursiveSubtype();
+  $instance.$ctor__typewildcards_RecursiveSubtype__typewildcards_RecursiveType__void(wildcardParameter);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typewildcards_RecursiveSubtype__typewildcards_RecursiveType__void(/** RecursiveType<?> */ wildcardParameter) {
+  this.$ctor__typewildcards_RecursiveType__typewildcards_RecursiveType__void(wildcardParameter);
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveSubtype.$clinit = () =>{};
+  RecursiveSubtype.$loadModules();
+  RecursiveType.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecursiveSubtype;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(RecursiveSubtype, 'typewildcards.RecursiveSubtype');
+
+exports = RecursiveSubtype;
+
+//# sourceMappingURL=RecursiveSubtype.js.map

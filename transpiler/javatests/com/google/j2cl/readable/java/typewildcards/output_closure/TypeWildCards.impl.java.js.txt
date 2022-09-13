@@ -7,6 +7,7 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
 let GenericType = goog.forwardDeclare('typewildcards.GenericType$impl');
+let RecursiveType = goog.forwardDeclare('typewildcards.RecursiveType$impl');
 let A = goog.forwardDeclare('typewildcards.TypeWildCards.A$impl');
 let Foo = goog.forwardDeclare('typewildcards.TypeWildCards.Foo$impl');
 let HasKey = goog.forwardDeclare('typewildcards.TypeWildCards.HasKey$impl');
@@ -37,6 +38,12 @@ class TypeWildCards extends j_l_Object {
  m_upperBound__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
  /** @nodts */
  m_lowerBound__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
+ /** @nodts */
+ m_unboundedRecursive__typewildcards_RecursiveType__void(/** RecursiveType<?> */ g) {}
+ /** @nodts */
+ m_upperBoundRecursive__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
+ /** @nodts */
+ m_lowerBoundRecursive__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
  /** @nodts */
  m_test__void() {
   this.m_unbounded__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));

@@ -1,0 +1,43 @@
+goog.module('typewildcards.RecursiveType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class RecursiveType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!RecursiveType<T>} */
+ static $create__typewildcards_RecursiveType(/** RecursiveType<?> */ wildcardParameter) {
+  RecursiveType.$clinit();
+  let $instance = new RecursiveType();
+  $instance.$ctor__typewildcards_RecursiveType__typewildcards_RecursiveType__void(wildcardParameter);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typewildcards_RecursiveType__typewildcards_RecursiveType__void(/** RecursiveType<?> */ wildcardParameter) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveType.$clinit = () =>{};
+  RecursiveType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecursiveType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(RecursiveType, 'typewildcards.RecursiveType');
+
+exports = RecursiveType;
+
+//# sourceMappingURL=RecursiveType.js.map

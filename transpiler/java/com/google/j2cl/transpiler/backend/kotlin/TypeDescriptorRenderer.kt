@@ -29,13 +29,33 @@ internal fun Renderer.renderTypeDescriptor(
   asSimple: Boolean = false,
   asSuperType: Boolean = false
 ) {
+  renderTypeDescriptor(
+    typeDescriptor,
+    seenTypeDescriptors = listOf(),
+    asSimple = asSimple,
+    asSuperType = asSuperType
+  )
+}
+
+private fun Renderer.renderTypeDescriptor(
+  typeDescriptor: TypeDescriptor,
+  seenTypeDescriptors: List<TypeDescriptor>,
+  asSimple: Boolean,
+  asSuperType: Boolean
+) {
   when (typeDescriptor) {
-    is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
+    is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor, seenTypeDescriptors)
     is DeclaredTypeDescriptor ->
-      renderDeclaredTypeDescriptor(typeDescriptor, asSimple = asSimple, asSuperType = asSuperType)
+      renderDeclaredTypeDescriptor(
+        typeDescriptor,
+        seenTypeDescriptors,
+        asSimple = asSimple,
+        asSuperType = asSuperType
+      )
     is PrimitiveTypeDescriptor -> renderQualifiedName(typeDescriptor)
-    is TypeVariable -> renderTypeVariable(typeDescriptor)
-    is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
+    is TypeVariable -> renderTypeVariable(typeDescriptor, seenTypeDescriptors)
+    is IntersectionTypeDescriptor ->
+      renderIntersectionTypeDescriptor(typeDescriptor, seenTypeDescriptors)
     else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
   }
 }
@@ -44,19 +64,30 @@ private fun Renderer.renderNullableSuffix(typeDescriptor: TypeDescriptor) {
   if (typeDescriptor.isNullable) render("?")
 }
 
-private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDescriptor) {
+private fun Renderer.renderArrayTypeDescriptor(
+  arrayTypeDescriptor: ArrayTypeDescriptor,
+  seenTypeDescriptors: List<TypeDescriptor>
+) {
   renderQualifiedName(arrayTypeDescriptor)
   val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
   if (!componentTypeDescriptor.isPrimitive) {
-    renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
+    renderInAngleBrackets {
+      renderTypeDescriptor(
+        componentTypeDescriptor,
+        seenTypeDescriptors,
+        asSimple = false,
+        asSuperType = false
+      )
+    }
   }
   renderNullableSuffix(arrayTypeDescriptor)
 }
 
 private fun Renderer.renderDeclaredTypeDescriptor(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
-  asSimple: Boolean = false,
-  asSuperType: Boolean = false
+  seenTypeDescriptors: List<TypeDescriptor>,
+  asSimple: Boolean,
+  asSuperType: Boolean
 ) {
   val typeDeclaration = declaredTypeDescriptor.typeDeclaration
   val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
@@ -68,7 +99,12 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     if (!typeDeclaration.isCapturingEnclosingInstance) {
       renderQualifiedName(enclosingTypeDescriptor)
     } else {
-      renderDeclaredTypeDescriptor(enclosingTypeDescriptor.toNonNullable())
+      renderDeclaredTypeDescriptor(
+        enclosingTypeDescriptor.toNonNullable(),
+        seenTypeDescriptors,
+        asSimple = false,
+        asSuperType = false
+      )
     }
     render(".")
     renderIdentifier(typeDeclaration.ktSimpleName)
@@ -80,31 +116,36 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     }
     renderQualifiedName(qualifiedName)
   }
-
-  renderTypeArguments(declaredTypeDescriptor, asSuperType = asSuperType)
+  renderTypeArguments(declaredTypeDescriptor, seenTypeDescriptors, asSuperType = asSuperType)
   renderNullableSuffix(declaredTypeDescriptor)
 }
 
 private fun Renderer.renderTypeArguments(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
-  asSuperType: Boolean = false
+  seenTypeDescriptors: List<TypeDescriptor>,
+  asSuperType: Boolean
 ) {
   val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
   val arguments = declaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors
   if (arguments.isNotEmpty()) {
     if (!asSuperType || arguments.all { it.isDenotable }) {
-      renderTypeArguments(parameters, arguments)
+      renderTypeArguments(
+        parameters,
+        arguments,
+        seenTypeDescriptors = seenTypeDescriptors + declaredTypeDescriptor.toNonNullable()
+      )
     }
   }
 }
 
 internal fun Renderer.renderTypeArguments(
   typeParameters: List<TypeVariable>,
-  typeArguments: List<TypeDescriptor>
+  typeArguments: List<TypeDescriptor>,
+  seenTypeDescriptors: List<TypeDescriptor> = listOf()
 ) {
   renderInAngleBrackets {
     renderCommaSeparated(inferNonNullableBounds(typeParameters, typeArguments)) {
-      renderTypeDescriptor(it)
+      renderTypeDescriptor(it, seenTypeDescriptors, asSimple = false, asSuperType = false)
     }
   }
 }
@@ -121,19 +162,33 @@ private fun inferNonNullableBounds(
   if (!typeParameter.upperBoundTypeDescriptor.isNullable) typeArgument.toNonNullable()
   else typeArgument
 
-private fun Renderer.renderTypeVariable(typeVariable: TypeVariable) {
+private fun Renderer.renderTypeVariable(
+  typeVariable: TypeVariable,
+  seenTypeDescriptors: List<TypeDescriptor>
+) {
   if (typeVariable.isWildcardOrCapture) {
     val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
     if (lowerBoundTypeDescriptor != null) {
       render("in ")
-      renderTypeDescriptor(lowerBoundTypeDescriptor)
+      renderTypeDescriptor(
+        lowerBoundTypeDescriptor,
+        seenTypeDescriptors,
+        asSimple = false,
+        asSuperType = false
+      )
     } else {
       val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
-      if (boundTypeDescriptor.isImplicitUpperBound) {
+      val isRecursive = seenTypeDescriptors.contains(boundTypeDescriptor)
+      if (isRecursive || boundTypeDescriptor.isImplicitUpperBound) {
         render("*")
       } else {
         render("out ")
-        renderTypeDescriptor(boundTypeDescriptor)
+        renderTypeDescriptor(
+          boundTypeDescriptor,
+          seenTypeDescriptors,
+          asSimple = false,
+          asSuperType = false
+        )
       }
     }
   } else {
@@ -143,17 +198,25 @@ private fun Renderer.renderTypeVariable(typeVariable: TypeVariable) {
 }
 
 private fun Renderer.renderIntersectionTypeDescriptor(
-  intersectionTypeDescriptor: IntersectionTypeDescriptor
+  intersectionTypeDescriptor: IntersectionTypeDescriptor,
+  seenTypeDescriptors: List<TypeDescriptor>
 ) {
   // Render only the first type from the intersection and comment out others, as they are not
   // supported in Kotlin.
   // TODO(b/205367162): Support intersection types.
   val typeDescriptors = intersectionTypeDescriptor.intersectionTypeDescriptors
-  renderTypeDescriptor(typeDescriptors.first())
+  renderTypeDescriptor(
+    typeDescriptors.first(),
+    seenTypeDescriptors,
+    asSimple = false,
+    asSuperType = false
+  )
   render(" ")
   renderInCommentBrackets {
     render("& ")
-    renderSeparatedWith(typeDescriptors.drop(1), " & ") { renderTypeDescriptor(it) }
+    renderSeparatedWith(typeDescriptors.drop(1), " & ") {
+      renderTypeDescriptor(it, seenTypeDescriptors, asSimple = false, asSuperType = false)
+    }
   }
 }
 

@@ -20,12 +20,28 @@ import java.util.function.Function;
 
 class GenericType<T> {}
 
+class RecursiveType<T extends RecursiveType<T>> {
+  public RecursiveType(RecursiveType<?> wildcardParameter) {}
+}
+
+class RecursiveSubtype extends RecursiveType<RecursiveSubtype> {
+  public RecursiveSubtype(RecursiveType<?> wildcardParameter) {
+    super(wildcardParameter);
+  }
+}
+
 public class TypeWildCards {
   public void unbounded(GenericType<?> g) {}
 
   public void upperBound(GenericType<? extends TypeWildCards> g) {}
 
   public void lowerBound(GenericType<? super TypeWildCards> g) {}
+
+  public void unboundedRecursive(RecursiveType<?> g) {}
+
+  public void upperBoundRecursive(GenericType<? extends RecursiveType<?>> g) {}
+
+  public void lowerBoundRecursive(GenericType<? super RecursiveType<?>> g) {}
 
   public void test() {
     unbounded(new GenericType<TypeWildCards>());
