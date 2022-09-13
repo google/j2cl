@@ -242,6 +242,61 @@
     l.add(t); // This would not pass nullability-checker, but should compile in Kotlin.
   }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testCaptureNullabilityCast"
 [l.add(t);] => [l.add(t);] "nullability.defaultnotnullable.DefaultNotNullable.testCaptureNullabilityCast"
+[testParametrizedTypeNullabilityCast] => [m_testParametrizedTypeNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_String__void]
+[c] => [c] "c"
+[string] => [string_1] "string"
+[{
+    // Nullability information in local variables is absent, so cast is necessary in Kotlin.
+...    c.accept(localString);
+  }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedTypeNullabilityCast"
+[String localString = string;] => [let localString = string_1;] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedTypeNullabilityCast"
+[localString] => [localString] "localString"
+[c.accept(localString);] => [c.m_accept__java_lang_Object__void(localString);] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedTypeNullabilityCast"
+[testGenericTypeNullabilityCast] => [m_testGenericTypeNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void]
+[c] => [c] "c"
+[element] => [element] "element"
+[{
+    T localElement = element;
+    c.accept(localElement);
+  }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testGenericTypeNullabilityCast"
+[T localElement = element;] => [let localElement = element;] "nullability.defaultnotnullable.DefaultNotNullable.testGenericTypeNullabilityCast"
+[localElement] => [localElement] "localElement"
+[c.accept(localElement);] => [c.m_accept__java_lang_Object__void(localElement);] "nullability.defaultnotnullable.DefaultNotNullable.testGenericTypeNullabilityCast"
+[testParametrizedWildcardNullabilityCast] => [m_testParametrizedWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_String__void]
+[c] => [c] "c"
+[string] => [string_1] "string"
+[{
+    // Nullability information in local variables is absent, so cast is necessary in Kotlin.
+...    c.accept(localString);
+  }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedWildcardNullabilityCast"
+[String localString = string;] => [let localString = string_1;] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedWildcardNullabilityCast"
+[localString] => [localString] "localString"
+[c.accept(localString);] => [c.m_accept__java_lang_Object__void(localString);] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedWildcardNullabilityCast"
+[testGenericWildcardNullabilityCast] => [m_testGenericWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void]
+[c] => [c] "c"
+[element] => [element] "element"
+[{
+    T localElement = element;
+    c.accept(localElement);
+  }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testGenericWildcardNullabilityCast"
+[T localElement = element;] => [let localElement = element;] "nullability.defaultnotnullable.DefaultNotNullable.testGenericWildcardNullabilityCast"
+[localElement] => [localElement] "localElement"
+[c.accept(localElement);] => [c.m_accept__java_lang_Object__void(localElement);] "nullability.defaultnotnullable.DefaultNotNullable.testGenericWildcardNullabilityCast"
+[testParametrizedArrayNullabilityCast] => [m_testParametrizedArrayNullabilityCast__arrayOf_java_lang_String__void]
+[array] => [array] "array"
+[{
+    // Nullability information in local variables is absent, so cast is necessary in Kotlin.
+    String[] localArray = array;
+  }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedArrayNullabilityCast"
+[String[] localArray = array;] => [let localArray = array;] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedArrayNullabilityCast"
+[localArray] => [localArray] "localArray"
+[testGenericArrayNullabilityCast] => [m_testGenericArrayNullabilityCast__arrayOf_java_lang_Object__void]
+[array] => [array] "array"
+[{
+    T[] localArray = array;
+  }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testGenericArrayNullabilityCast"
+[T[] localArray = array;] => [let localArray = array;] "nullability.defaultnotnullable.DefaultNotNullable.testGenericArrayNullabilityCast"
+[localArray] => [localArray] "localArray"
 [DefaultNotNullable] => [$init__void_$p_nullability_defaultnotnullable_DefaultNotNullable]
 [private String f1 = "Hello";] => [this.f_f1__nullability_defaultnotnullable_DefaultNotNullable_ = 'Hello';] "nullability.defaultnotnullable.DefaultNotNullable.<init>"
 [@Nullable private String f2 = null;] => [this.f_f2__nullability_defaultnotnullable_DefaultNotNullable_ = null;] "nullability.defaultnotnullable.DefaultNotNullable.<init>"

@@ -337,4 +337,39 @@ public class DefaultNotNullable {
   static <T> void testCaptureNullabilityCast(List<? super T> l, @Nullable T t) {
     l.add(t); // This would not pass nullability-checker, but should compile in Kotlin.
   }
+
+  interface Consumer<T> {
+    void accept(T t);
+  }
+
+  static void testParametrizedTypeNullabilityCast(Consumer<String> c, String string) {
+    // Nullability information in local variables is absent, so cast is necessary in Kotlin.
+    String localString = string;
+    c.accept(localString);
+  }
+
+  static <T> void testGenericTypeNullabilityCast(Consumer<T> c, T element) {
+    T localElement = element;
+    c.accept(localElement);
+  }
+
+  static void testParametrizedWildcardNullabilityCast(Consumer<? super String> c, String string) {
+    // Nullability information in local variables is absent, so cast is necessary in Kotlin.
+    String localString = string;
+    c.accept(localString);
+  }
+
+  static <T> void testGenericWildcardNullabilityCast(Consumer<? super T> c, T element) {
+    T localElement = element;
+    c.accept(localElement);
+  }
+
+  static void testParametrizedArrayNullabilityCast(String[] array) {
+    // Nullability information in local variables is absent, so cast is necessary in Kotlin.
+    String[] localArray = array;
+  }
+
+  static <T> void testGenericArrayNullabilityCast(T[] array) {
+    T[] localArray = array;
+  }
 }

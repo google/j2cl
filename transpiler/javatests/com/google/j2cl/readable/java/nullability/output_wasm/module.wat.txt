@@ -67,6 +67,9 @@
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable [static fields]
 (global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedNonNullable (mut i32) (i32.const 0))
 
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.Consumer [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_Consumer (mut i32) (i32.const 0))
+
 ;;; Code for nullability.defaultnullable.DefaultNullable [static fields]
 (global $f_$initialized__nullability_defaultnullable_DefaultNullable (mut i32) (i32.const 0))
 
@@ -3259,6 +3262,112 @@
  )
 )
 
+;;; void DefaultNotNullable.testParametrizedTypeNullabilityCast(Consumer<String> c, String string)
+(func $m_testParametrizedTypeNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable
+ (param $c (ref null $java.lang.Object))
+ (param $string (ref null $java.lang.String))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:345:14
+ (local $localString (ref null $java.lang.String))
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:345:85
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; String localString = string;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:347:4
+  (local.set $localString (local.get $string))
+  ;; c.accept(localString);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:348:4
+  (call_ref (ref.as_non_null (local.get $c))(local.get $localString)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const -1))) ))
+ )
+)
+
+;;; void DefaultNotNullable.testGenericTypeNullabilityCast(Consumer<T> c, T element)
+(func $m_testGenericTypeNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
+ (param $c (ref null $java.lang.Object))
+ (param $element (ref null $java.lang.Object))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:351:18
+ (local $localElement (ref null $java.lang.Object))
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:351:75
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; T localElement = element;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:352:4
+  (local.set $localElement (local.get $element))
+  ;; c.accept(localElement);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:353:4
+  (call_ref (ref.as_non_null (local.get $c))(local.get $localElement)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const -1))) ))
+ )
+)
+
+;;; void DefaultNotNullable.testParametrizedWildcardNullabilityCast(Consumer<? super String> c, String string)
+(func $m_testParametrizedWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable
+ (param $c (ref null $java.lang.Object))
+ (param $string (ref null $java.lang.String))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:356:14
+ (local $localString (ref null $java.lang.String))
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:356:97
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; String localString = string;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:358:4
+  (local.set $localString (local.get $string))
+  ;; c.accept(localString);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:359:4
+  (call_ref (ref.as_non_null (local.get $c))(local.get $localString)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const -1))) ))
+ )
+)
+
+;;; void DefaultNotNullable.testGenericWildcardNullabilityCast(Consumer<? super T> c, T element)
+(func $m_testGenericWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
+ (param $c (ref null $java.lang.Object))
+ (param $element (ref null $java.lang.Object))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:362:18
+ (local $localElement (ref null $java.lang.Object))
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:362:87
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; T localElement = element;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:363:4
+  (local.set $localElement (local.get $element))
+  ;; c.accept(localElement);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:364:4
+  (call_ref (ref.as_non_null (local.get $c))(local.get $localElement)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const -1))) ))
+ )
+)
+
+;;; void DefaultNotNullable.testParametrizedArrayNullabilityCast(String[] array)
+(func $m_testParametrizedArrayNullabilityCast__arrayOf_java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable
+ (param $array (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:367:14
+ (local $localArray (ref null $javaemul.internal.WasmArray.OfObject))
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:367:67
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; String[] localArray = array;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:369:4
+  (local.set $localArray (local.get $array))
+ )
+)
+
+;;; void DefaultNotNullable.testGenericArrayNullabilityCast(T[] array)
+(func $m_testGenericArrayNullabilityCast__arrayOf_java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
+ (param $array (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:372:18
+ (local $localArray (ref null $javaemul.internal.WasmArray.OfObject))
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:372:61
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; T[] localArray = array;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:373:4
+  (local.set $localArray (local.get $array))
+ )
+)
+
 ;;; void DefaultNotNullable.$init()
 (func $$init__void_$p_nullability_defaultnotnullable_DefaultNotNullable@nullability.defaultnotnullable.DefaultNotNullable
  (param $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))
@@ -4280,6 +4389,42 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable)
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.Consumer [INTERFACE]
+(type $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (struct_subtype 
+ (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
+  data)
+)
+
+;;; void Consumer.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.Consumer
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:341:12
+ (block
+  ;; if (nullability.defaultnotnullable.DefaultNotNullable.Consumer.$initialized) return;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:341:12
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_Consumer)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:341:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.DefaultNotNullable.Consumer.$initialized = true);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:341:12
+  (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_Consumer (i32.const 1))
+ )
+)
+
+;;; Class<?> Consumer.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.Consumer
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.Consumer();
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.DefaultNotNullable.Consumer__java_lang_Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.Consumer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.Consumer)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [CLASS]
 (type $nullability.defaultnullable.DefaultNullable (struct_subtype 

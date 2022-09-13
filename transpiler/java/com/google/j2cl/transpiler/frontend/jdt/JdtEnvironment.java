@@ -331,14 +331,26 @@ class JdtEnvironment {
         () -> getUpperBoundTypeDescriptor(typeBinding, inNullMarkedScope);
 
     String uniqueKey = typeBinding.getKey();
-    if (typeBinding.isWildcardType() && typeBinding.getBound() != null) {
+    if ((typeBinding.isWildcardType() || typeBinding.isCapture())
+        && typeBinding.getBound() != null) {
       // TODO(b/236987392): Remove the hack once the modeling of type variables is fixed.
       // HACK: Use the toString representation of the type but trim it to the first new line. After
       // the newline there is information that is unrelated to the identity of the wildcard that
       // changes throughout the compile. This is a very hacky way to preserve the identity of the
-      // wildcards.
+      // wildcards.Also add the nullability of the bound to the key because the same wildcard, e.g.
+      // '? extends String` needs to be interpreted different depending on the context in which it
+      // appears.
+      TypeDescriptor boundTypeDescriptor =
+          createTypeDescriptorWithNullability(
+              typeBinding.getBound().getErasure(),
+              typeBinding.getBound().getTypeAnnotations(),
+              inNullMarkedScope);
       uniqueKey +=
-          Splitter.on('\n').splitToStream(typeBinding.getBound().toString()).findFirst().get();
+          (boundTypeDescriptor.isNullable() ? "?" : "!")
+              + Splitter.on('\n')
+                  .splitToStream(typeBinding.getBound().toString())
+                  .findFirst()
+                  .get();
     }
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorSupplier(upperBoundTypeDescriptorFactory)
@@ -346,6 +358,8 @@ class JdtEnvironment {
         .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
         .setUniqueKey(uniqueKey)
         .setName(typeBinding.getName())
+        // Wildcards (and captures) are never explicitly nullable, they depend on their bounds.
+        .setNullable(false)
         .build();
   }
 
@@ -373,10 +387,16 @@ class JdtEnvironment {
       // return the right type in this case.
       ITypeBinding bound = typeBinding.getBound();
       if (bound != null) {
+        TypeDescriptor boundTypeDescriptor =
+            createTypeDescriptorWithNullability(
+                bound, bound.getTypeAnnotations(), inNullMarkedScope);
         return typeBinding.isUpperbound()
-            ? createTypeDescriptorWithNullability(
-                bound, bound.getTypeAnnotations(), inNullMarkedScope)
-            : TypeDescriptors.get().javaLangObject.toNullable(!inNullMarkedScope);
+            ? boundTypeDescriptor
+            : TypeDescriptors.get()
+                .javaLangObject
+                // Use the nullability of the lower bound for the upper bound of a lower bounded
+                // wildcard.
+                .toNullable(boundTypeDescriptor.isNullable());
       }
     }
     ITypeBinding[] bounds = typeBinding.getTypeBounds();

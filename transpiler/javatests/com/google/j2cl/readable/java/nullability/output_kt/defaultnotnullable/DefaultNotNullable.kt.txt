@@ -203,6 +203,40 @@ open class DefaultNotNullable {
   fun <T: kotlin.Any> testCaptureNullabilityCast(l: kotlin.collections.MutableList<in T>, t: T?) {
    l!!.add(t as T)
   }
+
+  @kotlin.jvm.JvmStatic
+  fun testParametrizedTypeNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<kotlin.String>, string: kotlin.String) {
+   val localString: kotlin.String? = string
+   c!!.accept(localString!!)
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.Any> testGenericTypeNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<T>, element: T) {
+   val localElement: T = element
+   c!!.accept(localElement)
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun testParametrizedWildcardNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<in kotlin.String>, string: kotlin.String) {
+   val localString: kotlin.String? = string
+   c!!.accept(localString!!)
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.Any> testGenericWildcardNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<in T>, element: T) {
+   val localElement: T = element
+   c!!.accept(localElement)
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun testParametrizedArrayNullabilityCast(array: kotlin.Array<kotlin.String>) {
+   val localArray: kotlin.Array<kotlin.String?>? = array as kotlin.Array<kotlin.String?>?
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.Any> testGenericArrayNullabilityCast(array: kotlin.Array<T>) {
+   val localArray: kotlin.Array<T>? = array
+  }
  }
 
  interface ParameterizedInterface<T: kotlin.Any> {
@@ -324,5 +358,9 @@ open class DefaultNotNullable {
   open fun setNonNull(n: N) {}
 
   open fun setDefaultNullability(n: N) {}
+ }
+
+ fun interface Consumer<T: kotlin.Any> {
+  fun accept(t: T)
  }
 }

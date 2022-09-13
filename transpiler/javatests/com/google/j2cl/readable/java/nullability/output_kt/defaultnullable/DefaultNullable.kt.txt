@@ -152,7 +152,7 @@ open class DefaultNullable {
   fun testListOfWildcard(l: kotlin.collections.MutableList<*>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityObject(l: kotlin.collections.MutableList<out kotlin.Any>?) {}
+  fun testListOfWildcardExtendsDefaultNullabilityObject(l: kotlin.collections.MutableList<*>?) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardExtendsNullableObject(l: kotlin.collections.MutableList<*>?) {}
@@ -161,7 +161,7 @@ open class DefaultNullable {
   fun testListOfWildcardExtendsNonNullObject(l: kotlin.collections.MutableList<out kotlin.Any>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityString(l: kotlin.collections.MutableList<out kotlin.String>?) {}
+  fun testListOfWildcardExtendsDefaultNullabilityString(l: kotlin.collections.MutableList<out kotlin.String?>?) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardExtendsNullableString(l: kotlin.collections.MutableList<out kotlin.String?>?) {}
@@ -176,7 +176,7 @@ open class DefaultNullable {
   fun <T> testListOfWildcardExtendsNullableVariable(l: kotlin.collections.MutableList<out T?>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperDefaultNullabilityObject(l: kotlin.collections.MutableList<in kotlin.Any>?) {}
+  fun testListOfWildcardSuperDefaultNullabilityObject(l: kotlin.collections.MutableList<in kotlin.Any?>?) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardSuperNullableObject(l: kotlin.collections.MutableList<in kotlin.Any?>?) {}
@@ -185,7 +185,7 @@ open class DefaultNullable {
   fun testListOfWildcardSuperNonNullObject(l: kotlin.collections.MutableList<in kotlin.Any>?) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperDefaultNullabilityString(l: kotlin.collections.MutableList<in kotlin.String>?) {}
+  fun testListOfWildcardSuperDefaultNullabilityString(l: kotlin.collections.MutableList<in kotlin.String?>?) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardSuperNullableString(l: kotlin.collections.MutableList<in kotlin.String?>?) {}
