@@ -131,4 +131,14 @@ public class TypeWildCards {
     // type variable T = C & RecursiveInterface<C, C>.
     return ri.m();
   }
+
+  class MultipleGenerics<A, B, C> {}
+
+  static <D> MultipleGenerics<D, String, List<D>> createMultipleGenerics(List<D> foo) {
+    return null;
+  }
+
+  static List<?> listWithWildcard = null;
+  static MultipleGenerics<?, String, ?> valMultipleGenerics =
+      createMultipleGenerics(listWithWildcard);
 }

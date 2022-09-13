@@ -8,6 +8,8 @@
 (global $f_$initialized__typewildcards_RecursiveSubtype (mut i32) (i32.const 0))
 
 ;;; Code for typewildcards.TypeWildCards [static fields]
+(global $f_listWithWildcard__typewildcards_TypeWildCards (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_valMultipleGenerics__typewildcards_TypeWildCards (mut (ref null $typewildcards.TypeWildCards.MultipleGenerics)) (ref.null $typewildcards.TypeWildCards.MultipleGenerics))
 (global $f_$initialized__typewildcards_TypeWildCards (mut i32) (i32.const 0))
 
 ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [static fields]
@@ -42,6 +44,9 @@
 
 ;;; Code for typewildcards.TypeWildCards.RecursiveInterface [static fields]
 (global $f_$initialized__typewildcards_TypeWildCards_RecursiveInterface (mut i32) (i32.const 0))
+
+;;; Code for typewildcards.TypeWildCards.MultipleGenerics [static fields]
+(global $f_$initialized__typewildcards_TypeWildCards_MultipleGenerics (mut i32) (i32.const 0))
 
 ;;; Code for typewildcards.GenericType [vtable.init]
 (global $typewildcards.GenericType.vtable (ref $typewildcards.GenericType.vtable) 
@@ -160,6 +165,20 @@
 
 ;;; Code for typewildcards.TypeWildCards.Foo [itable.init]
 (global $typewildcards.TypeWildCards.Foo.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for typewildcards.TypeWildCards.MultipleGenerics [vtable.init]
+(global $typewildcards.TypeWildCards.MultipleGenerics.vtable (ref $typewildcards.TypeWildCards.MultipleGenerics.vtable) 
+ (struct.new $typewildcards.TypeWildCards.MultipleGenerics.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics)
+ )
+)
+
+;;; Code for typewildcards.TypeWildCards.MultipleGenerics [itable.init]
+(global $typewildcards.TypeWildCards.MultipleGenerics.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for typewildcards.GenericType [CLASS]
@@ -703,6 +722,21 @@
  )
 )
 
+;;; MultipleGenerics<D, String, List<D>> TypeWildCards.createMultipleGenerics(List<D> foo)
+(func $m_createMultipleGenerics__java_util_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards
+ (param $foo (ref null $java.lang.Object))
+ (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
+ ;;@ typewildcards/TypeWildCards.java:137:50
+ (block
+  ;; typewildcards.TypeWildCards.$clinit();
+  ;;@ typewildcards/TypeWildCards.java:137:86
+  (call $$clinit__void@typewildcards.TypeWildCards )
+  ;; return null;
+  ;;@ typewildcards/TypeWildCards.java:138:4
+  (return (ref.null $typewildcards.TypeWildCards.MultipleGenerics))
+ )
+)
+
 ;;; void TypeWildCards.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards
  ;;@ typewildcards/TypeWildCards.java:33:13
@@ -722,6 +756,12 @@
   ;; java.lang.Object.$clinit();
   ;;@ typewildcards/TypeWildCards.java:33:13
   (call $$clinit__void@java.lang.Object )
+  ;; (typewildcards.TypeWildCards.listWithWildcard = null);
+  ;;@ typewildcards/TypeWildCards.java:141:2
+  (global.set $f_listWithWildcard__typewildcards_TypeWildCards (ref.null $java.lang.Object))
+  ;; (typewildcards.TypeWildCards.valMultipleGenerics = typewildcards.TypeWildCards.createMultipleGenerics(typewildcards.TypeWildCards.listWithWildcard));
+  ;;@ typewildcards/TypeWildCards.java:142:2
+  (global.set $f_valMultipleGenerics__typewildcards_TypeWildCards (call $m_createMultipleGenerics__java_util_List__typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards (global.get $f_listWithWildcard__typewildcards_TypeWildCards)))
  )
 )
 
@@ -1415,3 +1455,89 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.RecursiveInterface)
+
+;;; Code for typewildcards.TypeWildCards.MultipleGenerics [CLASS]
+(type $typewildcards.TypeWildCards.MultipleGenerics (struct_subtype 
+ (field $vtable (ref $typewildcards.TypeWildCards.MultipleGenerics.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__typewildcards_TypeWildCards_MultipleGenerics (ref null $typewildcards.TypeWildCards))
+  $java.lang.Object)
+)
+(type $typewildcards.TypeWildCards.MultipleGenerics.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; MultipleGenerics<A, B, C> MultipleGenerics.$create(TypeWildCards $outer_this)
+(func $$create__typewildcards_TypeWildCards@typewildcards.TypeWildCards.MultipleGenerics
+ (param $$outer_this (ref null $typewildcards.TypeWildCards))
+ (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
+ ;;@ typewildcards/TypeWildCards.java:135:8
+ (local $$instance (ref null $typewildcards.TypeWildCards.MultipleGenerics))
+ (block
+  ;; MultipleGenerics<A, B, C> $instance = new MultipleGenerics.<init>(0,$outer_this);
+  ;;@ typewildcards/TypeWildCards.java:135:8
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.itable)) (i32.const 0) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ typewildcards/TypeWildCards.java:135:8
+  (call $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ typewildcards/TypeWildCards.java:135:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void MultipleGenerics.$ctor(TypeWildCards $outer_this)
+(func $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics
+ (param $this (ref null $typewildcards.TypeWildCards.MultipleGenerics))
+ (param $$outer_this (ref null $typewildcards.TypeWildCards))
+ ;;@ typewildcards/TypeWildCards.java:135:8
+ (block
+  ;; typewildcards.TypeWildCards.MultipleGenerics.$clinit();
+  ;;@ typewildcards/TypeWildCards.java:135:8
+  (call $$clinit__void@typewildcards.TypeWildCards.MultipleGenerics )
+  ;; Object.this.$ctor();
+  ;;@ typewildcards/TypeWildCards.java:135:8
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void MultipleGenerics.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.MultipleGenerics
+ ;;@ typewildcards/TypeWildCards.java:135:8
+ (block
+  ;; if (typewildcards.TypeWildCards.MultipleGenerics.$initialized) return;
+  ;;@ typewildcards/TypeWildCards.java:135:8
+  (if (global.get $f_$initialized__typewildcards_TypeWildCards_MultipleGenerics)
+   (then
+    ;; return;
+    ;;@ typewildcards/TypeWildCards.java:135:8
+    (return )
+   )
+  )
+  ;; (typewildcards.TypeWildCards.MultipleGenerics.$initialized = true);
+  ;;@ typewildcards/TypeWildCards.java:135:8
+  (global.set $f_$initialized__typewildcards_TypeWildCards_MultipleGenerics (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ typewildcards/TypeWildCards.java:135:8
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> MultipleGenerics.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.TypeWildCards.MultipleGenerics))
+ (local.set $this (ref.cast_static $typewildcards.TypeWildCards.MultipleGenerics (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.MultipleGenerics();
+  (return (call $function.no.side.effects.$getTypewildcards.TypeWildCards.MultipleGenerics__java_lang_Class (ref.func $$getTypewildcards.TypeWildCards.MultipleGenerics__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.MultipleGenerics)

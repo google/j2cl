@@ -78,7 +78,32 @@
 ...    return ri.m();
   }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testInferredIntersectionWithTypeVariable"
 [return ri.m();] => [return ri.m_m__typewildcards_TypeWildCards_RecursiveInterface();] "typewildcards.TypeWildCards.testInferredIntersectionWithTypeVariable"
+[createMultipleGenerics] => [m_createMultipleGenerics__java_util_List__typewildcards_TypeWildCards_MultipleGenerics]
+[foo] => [foo] "foo"
+[{
+    return null;
+  }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.createMultipleGenerics"
+[return null;] => [return null;] "typewildcards.TypeWildCards.createMultipleGenerics"
+[static List<?> listWithWildcard = null;] => [get f_listWithWildcard__typewildcards_TypeWildCards]
+[static List<?> listWithWildcard = null;] => [return (TypeWildCards.$clinit(), TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards);] "typewildcards.TypeWildCards.<synthetic: getter>"
+[static List<?> listWithWildcard = null;] => [set f_listWithWildcard__typewildcards_TypeWildCards]
+[static List<?> listWithWildcard = null;] => [(TypeWildCards.$clinit(), TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards = value);] "typewildcards.TypeWildCards.<synthetic: setter>"
+[static MultipleGenerics<?, String, ?> valMultipleGenerics =
+      createMultipleGenerics(listWithWildcard);] => [get f_valMultipleGenerics__typewildcards_TypeWildCards]
+[static MultipleGenerics<?, String, ?> valMultipleGenerics =
+      createMultipleGenerics(listWithWildcard);] => [return (TypeWildCards.$clinit(), TypeWildCards.$static_valMultipleGenerics__typewildcards_TypeWildCards);] "typewildcards.TypeWildCards.<synthetic: getter>"
+[static MultipleGenerics<?, String, ?> valMultipleGenerics =
+      createMultipleGenerics(listWithWildcard);] => [set f_valMultipleGenerics__typewildcards_TypeWildCards]
+[static MultipleGenerics<?, String, ?> valMultipleGenerics =
+      createMultipleGenerics(listWithWildcard);] => [(TypeWildCards.$clinit(), TypeWildCards.$static_valMultipleGenerics__typewildcards_TypeWildCards = value);] "typewildcards.TypeWildCards.<synthetic: setter>"
 [TypeWildCards] => [$clinit]
 [TypeWildCards] => [TypeWildCards.$clinit = () =>{};] "typewildcards.TypeWildCards.<clinit>"
 [TypeWildCards] => [TypeWildCards.$loadModules();] "typewildcards.TypeWildCards.<clinit>"
 [TypeWildCards] => [j_l_Object.$clinit();] "typewildcards.TypeWildCards.<clinit>"
+[static List<?> listWithWildcard = null;] => [TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards = null;] "typewildcards.TypeWildCards.<clinit>"
+[static MultipleGenerics<?, String, ?> valMultipleGenerics =
+      createMultipleGenerics(listWithWildcard);] => [TypeWildCards.$static_valMultipleGenerics__typewildcards_TypeWildCards = /**@type {MultipleGenerics<*, ?string, List<?>>}*/ (TypeWildCards.m_createMultipleGenerics__java_util_List__typewildcards_TypeWildCards_MultipleGenerics(TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards));] "typewildcards.TypeWildCards.<clinit>"
+[TypeWildCards] => [/**@private {List<?>} @nodts*/
+TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards;]
+[TypeWildCards] => [/**@private {MultipleGenerics<?, ?string, ?>} @nodts*/
+TypeWildCards.$static_valMultipleGenerics__typewildcards_TypeWildCards;]

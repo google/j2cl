@@ -77,6 +77,15 @@ open class TypeWildCards {
   fun <C> testInferredIntersectionWithTypeVariable(ri: typewildcards.TypeWildCards.RecursiveInterface<out C, C>?): C {
    return ri!!.m()
   }
+
+  @kotlin.jvm.JvmStatic
+  fun <D> createMultipleGenerics(foo: kotlin.collections.MutableList<D>?): typewildcards.TypeWildCards.MultipleGenerics<D, kotlin.String?, kotlin.collections.MutableList<D>?>? {
+   return null
+  }
+
+  @kotlin.jvm.JvmField var listWithWildcard: kotlin.collections.MutableList<*>? = null
+
+  @kotlin.jvm.JvmField var valMultipleGenerics: typewildcards.TypeWildCards.MultipleGenerics<*, kotlin.String?, *>? = typewildcards.TypeWildCards.createMultipleGenerics(typewildcards.TypeWildCards.listWithWildcard)
  }
 
  fun interface X {
@@ -112,4 +121,6 @@ open class TypeWildCards {
  fun interface RecursiveInterface<T: typewildcards.TypeWildCards.RecursiveInterface<T, C>?, C> {
   fun m(): T
  }
+
+ open inner class MultipleGenerics<A, B, C> {}
 }
