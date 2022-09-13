@@ -203,7 +203,7 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
     }
     val returnLabelIdentifier =
       with(functionalInterface.typeDeclaration) { ktBridgeSimpleName ?: ktSimpleName }
-    renderWithReturnLabelIdentifier(returnLabelIdentifier) {
+    copy(currentReturnLabelIdentifier = returnLabelIdentifier).run {
       renderStatements(functionExpression.body.statements)
     }
   }

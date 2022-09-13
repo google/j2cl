@@ -21,7 +21,7 @@ import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 
 /** Renderer of the Kotlin source code. */
-class Renderer(
+data class Renderer(
   /** Rendering environment. */
   val environment: Environment,
 
@@ -32,7 +32,7 @@ class Renderer(
   val problems: Problems,
 
   /** Label to render with the return statement. */
-  var currentReturnLabelIdentifier: String? = null
+  val currentReturnLabelIdentifier: String? = null
 ) {
   fun renderNewLine() {
     sourceBuilder.newLine()
@@ -116,12 +116,5 @@ class Renderer(
   fun renderTodo(string: String) {
     render("TODO")
     renderInParentheses { renderExpression(StringLiteral(string)) }
-  }
-
-  fun renderWithReturnLabelIdentifier(labelIdentifier: String?, renderFn: () -> Unit) {
-    val previousReturnLabelIdentifier = currentReturnLabelIdentifier
-    currentReturnLabelIdentifier = labelIdentifier
-    renderFn()
-    currentReturnLabelIdentifier = previousReturnLabelIdentifier
   }
 }

@@ -49,7 +49,7 @@ private fun Renderer.renderMethod(method: Method) {
     if (!method.isConstructor || statements.isNotEmpty()) {
       render(" ")
       if (method.descriptor.isKtProperty) render("get() ")
-      renderWithReturnLabelIdentifier(null) {
+      copy(currentReturnLabelIdentifier = null).run {
         renderInCurlyBrackets { renderStatements(statements) }
       }
     }
