@@ -30,7 +30,7 @@ internal fun Renderer.renderTypeDescriptor(
   asSuperType: Boolean = false
 ) {
   renderTypeDescriptor(
-    typeDescriptor,
+    typeDescriptor.fixRecursiveUpperBounds(),
     seenTypeDescriptors = listOf(),
     asSimple = asSimple,
     asSuperType = asSuperType

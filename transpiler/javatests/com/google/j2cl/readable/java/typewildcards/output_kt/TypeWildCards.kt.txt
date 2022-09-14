@@ -7,11 +7,11 @@ import kotlin.jvm.*
 open class GenericType<T> {}
 
 open class RecursiveType<T: typewildcards.RecursiveType<T>?> {
- constructor(wildcardParameter: typewildcards.RecursiveType<out typewildcards.RecursiveType<T>?>?)
+ constructor(wildcardParameter: typewildcards.RecursiveType<*>?)
 }
 
 open class RecursiveSubtype: typewildcards.RecursiveType<typewildcards.RecursiveSubtype?> {
- constructor(wildcardParameter: typewildcards.RecursiveType<out typewildcards.RecursiveType<T>?>?): super(wildcardParameter)
+ constructor(wildcardParameter: typewildcards.RecursiveType<*>?): super(wildcardParameter)
 }
 
 open class TypeWildCards {
@@ -21,7 +21,7 @@ open class TypeWildCards {
 
  open fun lowerBound(g: typewildcards.GenericType<in typewildcards.TypeWildCards?>?) {}
 
- open fun unboundedRecursive(g: typewildcards.RecursiveType<out typewildcards.RecursiveType<T>?>?) {}
+ open fun unboundedRecursive(g: typewildcards.RecursiveType<*>?) {}
 
  open fun upperBoundRecursive(g: typewildcards.GenericType<out typewildcards.RecursiveType<out typewildcards.RecursiveType<T>?>?>?) {}
 

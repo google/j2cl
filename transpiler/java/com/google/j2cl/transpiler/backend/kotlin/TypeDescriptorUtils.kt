@@ -71,14 +71,12 @@ private fun TypeDescriptor.rewrite(fn: TypeDescriptor.() -> TypeDescriptor): Typ
   when (this) {
     is PrimitiveTypeDescriptor -> this
     is TypeVariable ->
-      if (isWildcardOrCapture)
+      if (!isWildcardOrCapture) this // Preserve type variables
+      else
         TypeVariable.Builder.from(this)
           .setLowerBoundTypeDescriptor(lowerBoundTypeDescriptor?.rewrite(fn))
-          .setUpperBoundTypeDescriptorSupplier {
-            upperBoundTypeDescriptorSupplier.get().rewrite(fn)
-          }
+          .setUpperBoundTypeDescriptorSupplier { upperBoundTypeDescriptor.rewrite(fn) }
           .build()
-      else this // Preserve type variables
     is ArrayTypeDescriptor ->
       ArrayTypeDescriptor.Builder.from(this)
         .setComponentTypeDescriptor(componentTypeDescriptor?.rewrite(fn))
@@ -117,3 +115,22 @@ internal val TypeDescriptor.isImplicitUpperBound
 // TODO(b/216796920): Remove when the bug is fixed.
 internal val DeclaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors: List<TypeDescriptor>
   get() = typeArgumentDescriptors.take(typeDeclaration.directlyDeclaredTypeParameterCount)
+
+// TODO(b/245807463): Remove when the bug is fixed in the AST.
+internal fun TypeDescriptor.fixRecursiveUpperBounds(): TypeDescriptor = rewriteDeclared {
+  DeclaredTypeDescriptor.Builder.from(this)
+    .setTypeArgumentDescriptors(
+      typeDeclaration.typeParameterDescriptors.zip(typeArgumentDescriptors).map {
+        (parameter, argument) ->
+        val hasRecursiveUpperBound =
+          argument is TypeVariable &&
+            argument.isWildcardOrCapture &&
+            argument.lowerBoundTypeDescriptor == null &&
+            argument.upperBoundTypeDescriptor == parameter.upperBoundTypeDescriptor
+        // Technically speaking, createWildcard() does not create recursive wildcard, but will be
+        // rendered as "*" which is enough to fix the bug.
+        if (hasRecursiveUpperBound) TypeVariable.createWildcard() else argument
+      }
+    )
+    .build()
+}
