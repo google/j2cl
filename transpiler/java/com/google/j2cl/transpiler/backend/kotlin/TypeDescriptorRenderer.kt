@@ -93,7 +93,7 @@ private fun Renderer.renderDeclaredTypeDescriptor(
   val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
   if (typeDeclaration.isLocal || asSimple) {
     // Skip rendering package name or enclosing type.
-    renderIdentifier(typeDeclaration.ktSimpleName)
+    renderQualifiedName(declaredTypeDescriptor, asSimple = true, asSuperType = asSuperType)
   } else if (enclosingTypeDescriptor != null) {
     // Render the enclosing type if present.
     if (!typeDeclaration.isCapturingEnclosingInstance) {
@@ -109,12 +109,7 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     render(".")
     renderIdentifier(typeDeclaration.ktSimpleName)
   } else {
-    // Render the qualified or bridge name for this top-level type.
-    var qualifiedName = typeDeclaration.ktQualifiedName
-    if (asSuperType && typeDeclaration.ktBridgeQualifiedName != null) {
-      qualifiedName = typeDeclaration.ktBridgeQualifiedName
-    }
-    renderQualifiedName(qualifiedName)
+    renderQualifiedName(declaredTypeDescriptor, asSuperType = asSuperType)
   }
   renderTypeArguments(declaredTypeDescriptor, seenTypeDescriptors, asSuperType = asSuperType)
   renderNullableSuffix(declaredTypeDescriptor)

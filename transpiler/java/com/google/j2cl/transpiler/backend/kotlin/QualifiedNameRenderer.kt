@@ -22,10 +22,15 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 
-internal fun Renderer.renderQualifiedName(typeDescriptor: TypeDescriptor) {
+internal fun Renderer.renderQualifiedName(
+  typeDescriptor: TypeDescriptor,
+  asSimple: Boolean = false,
+  asSuperType: Boolean = false
+) {
   when (typeDescriptor) {
     is ArrayTypeDescriptor -> renderArrayQualifiedName(typeDescriptor)
-    is DeclaredTypeDescriptor -> renderDeclaredQualifiedName(typeDescriptor)
+    is DeclaredTypeDescriptor ->
+      renderDeclaredQualifiedName(typeDescriptor, asSimple = asSimple, asSuperType = asSuperType)
     is PrimitiveTypeDescriptor -> renderPrimitiveQualifiedName(typeDescriptor)
     else -> throw InternalCompilerError("Unhandled $typeDescriptor")
   }
@@ -45,8 +50,17 @@ private fun Renderer.renderArrayQualifiedName(arrayTypeDescriptor: ArrayTypeDesc
   }
 }
 
-private fun Renderer.renderDeclaredQualifiedName(declaredTypeDescriptor: DeclaredTypeDescriptor) {
-  renderQualifiedName(declaredTypeDescriptor.typeDeclaration.ktQualifiedName)
+private fun Renderer.renderDeclaredQualifiedName(
+  declaredTypeDescriptor: DeclaredTypeDescriptor,
+  asSimple: Boolean,
+  asSuperType: Boolean
+) {
+  val typeDeclaration = declaredTypeDescriptor.typeDeclaration
+  if (asSimple || typeDeclaration.isLocal) {
+    renderIdentifier(typeDeclaration.ktSimpleName(asSuperType))
+  } else {
+    renderQualifiedName(typeDeclaration.ktQualifiedName(asSuperType))
+  }
 }
 
 private fun Renderer.renderPrimitiveQualifiedName(
