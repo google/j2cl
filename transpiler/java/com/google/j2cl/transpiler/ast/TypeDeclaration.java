@@ -53,6 +53,12 @@ import javax.annotation.Nullable;
 public abstract class TypeDeclaration
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
 
+  /** Source language a type was written in. */
+  public enum SourceLanguage {
+    JAVA,
+    KOTLIN
+  }
+
   private static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
 
   /**
@@ -210,6 +216,8 @@ public abstract class TypeDeclaration
   public abstract Visibility getVisibility();
 
   public abstract Kind getKind();
+
+  public abstract SourceLanguage getSourceLanguage();
 
   /** Returns whether the described type is a class. */
   public boolean isClass() {
@@ -742,6 +750,7 @@ public abstract class TypeDeclaration
     return new AutoValue_TypeDeclaration.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
+        .setSourceLanguage(SourceLanguage.JAVA)
         .setHasAbstractModifier(false)
         .setAnonymous(false)
         .setNative(false)
@@ -796,6 +805,8 @@ public abstract class TypeDeclaration
     public abstract Builder setHasAbstractModifier(boolean hasAbstractModifier);
 
     public abstract Builder setKind(Kind kind);
+
+    public abstract Builder setSourceLanguage(SourceLanguage sourceLanguage);
 
     public abstract Builder setCapturingEnclosingInstance(boolean capturingEnclosingInstance);
 

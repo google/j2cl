@@ -24,8 +24,10 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -588,8 +590,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
-   * Returns whether this method descriptor overrides the provided method descriptor from the Java
-   * source perspective.
+   * Returns whether this method descriptor overrides the provided method descriptor from the
+   * Java/Kotlin source perspective.
    *
    * <p>This includes both real and accidental overrides.
    */
@@ -632,8 +634,30 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /** Returns a signature suitable for override checking from the Java source perspective. */
+  @Memoized
   public String getSignature() {
-    return buildMethodSignature(getName(), getParameterTypeDescriptors());
+    boolean isKotlinType =
+        getEnclosingTypeDescriptor().getTypeDeclaration().getSourceLanguage()
+            == SourceLanguage.KOTLIN;
+    ImmutableList<TypeDescriptor> parameterTypeDescriptors =
+        isKotlinType
+            // In Kotlin types, non-nullable Int has the signature of primitive int (same
+            // for all non-nullable "primitive" types).
+            ? convertNonNullableBoxedTypesToPrimitives(getParameterTypeDescriptors())
+            : getParameterTypeDescriptors();
+    return buildMethodSignature(getName(), parameterTypeDescriptors);
+  }
+
+  private ImmutableList<TypeDescriptor> convertNonNullableBoxedTypesToPrimitives(
+      ImmutableList<TypeDescriptor> parameterTypeDescriptors) {
+    return parameterTypeDescriptors.stream()
+        .map(
+            typeDescriptor ->
+                TypeDescriptors.isBoxedType(typeDescriptor.toRawTypeDescriptor())
+                        && !typeDescriptor.isNullable()
+                    ? typeDescriptor.toRawTypeDescriptor().toUnboxedType()
+                    : typeDescriptor)
+        .collect(ImmutableList.toImmutableList());
   }
 
   /**
@@ -968,11 +992,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setTypeParameterTypeDescriptors(
         Iterable<TypeVariable> typeParameterTypeDescriptors);
 
+    @CanIgnoreReturnValue
     public Builder addTypeParameterTypeDescriptors(
         int index, TypeVariable... typeParameterTypeDescriptors) {
       return addTypeParameterTypeDescriptors(index, Arrays.asList(typeParameterTypeDescriptors));
     }
 
+    @CanIgnoreReturnValue
     public Builder addTypeParameterTypeDescriptors(
         int index, List<TypeVariable> typeParameterTypeDescriptors) {
       List<TypeVariable> newTypeParameterTypeDescriptors =
@@ -983,14 +1009,17 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
 
+    @CanIgnoreReturnValue
     public Builder setParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
       return setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
     }
 
+    @CanIgnoreReturnValue
     public Builder setParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
       return setParameterDescriptors(toParameterDescriptors(parameterTypeDescriptors));
     }
 
+    @CanIgnoreReturnValue
     public Builder updateParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
       return setParameterDescriptors(
           Streams.zip(
@@ -1000,11 +1029,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
               .collect(toImmutableList()));
     }
 
+    @CanIgnoreReturnValue
     public Builder addParameterTypeDescriptors(
         int index, TypeDescriptor... parameterTypeDescriptors) {
       return addParameterTypeDescriptors(index, Arrays.asList(parameterTypeDescriptors));
     }
 
+    @CanIgnoreReturnValue
     public Builder addParameterTypeDescriptors(
         int index, Collection<TypeDescriptor> parameterTypeDescriptors) {
       List<ParameterDescriptor> newParameterDescriptors =
@@ -1013,6 +1044,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return setParameterDescriptors(newParameterDescriptors);
     }
 
+    @CanIgnoreReturnValue
     public Builder removeParameterTypeDescriptors() {
       return setParameterDescriptors();
     }
@@ -1038,6 +1070,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .collect(toImmutableList());
     }
 
+    @CanIgnoreReturnValue
     public Builder setParameterDescriptors(ParameterDescriptor... parameterDescriptors) {
       return setParameterDescriptors(Arrays.asList(parameterDescriptors));
     }
@@ -1048,6 +1081,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setParameterDescriptors(
         ImmutableList<ParameterDescriptor> parameterDescriptors);
 
+    @CanIgnoreReturnValue
     public Builder removeParameterOptionality() {
       return setParameterDescriptors(
           getParameterDescriptors().stream()
@@ -1057,6 +1091,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
               .collect(toImmutableList()));
     }
 
+    @CanIgnoreReturnValue
     public Builder setDeclarationDescriptor(MethodDescriptor declarationMethodDescriptor) {
       return setDeclarationDescriptorOrNullIfSelf(declarationMethodDescriptor);
     }

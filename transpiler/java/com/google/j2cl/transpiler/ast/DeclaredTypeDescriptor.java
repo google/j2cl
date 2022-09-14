@@ -824,7 +824,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       MethodDescriptor targetMethodDescriptor) {
 
     return MethodDescriptor.Builder.from(
-            adjustReturn(origin, targetMethodDescriptor, bridgeMethodDescriptor))
+            adjustParametersAndReturn(origin, targetMethodDescriptor, bridgeMethodDescriptor))
         .setJsInfo(bridgeMethodDescriptor.getJsInfo())
         .setEnclosingTypeDescriptor(this)
         .setDeclarationDescriptor(null)
@@ -834,7 +834,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   /**
-   * Adjusts the return due to Kotlin semantics for non-nullable basic types.
+   * Adjusts the types of parameters and returns due to Kotlin semantics for non-nullable basic
+   * types.
    *
    * <p>Note that bridges are created to satisfy a method signature, and methods implementing the
    * same signature need to agree in typing (e.g. an override needs to be a subtype of the methods
@@ -845,22 +846,35 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    * considered "!java.lang.Integer" or "int". To resolve this ambiguity we need to see what is the
    * contract implemented by the bridge origin, which is the one that provides the mangled name.
    */
-  // TODO(b/234498715): Extend to parameters when primitive bridges are fully implemented. Consider
-  // whether it is better to just forward getParameters/getReturnType to the bridge descriptor,
-  // like we forward getManglingDescriptor, or whether always override parameters/return on
-  // construction of bridges.
-  private MethodDescriptor adjustReturn(
+  private MethodDescriptor adjustParametersAndReturn(
       MethodOrigin origin, MethodDescriptor targetMethodDescriptor, MethodDescriptor bridgeOrigin) {
     if (origin != MethodOrigin.GENERALIZING_BRIDGE) {
       // Only generalizing bridges use the origin as their mangling descriptor.
       return targetMethodDescriptor;
     }
-    if (bridgeOrigin.getReturnTypeDescriptor().isPrimitive()
-        != targetMethodDescriptor.getReturnTypeDescriptor().isPrimitive()) {
-      return targetMethodDescriptor.transform(
-          builder -> builder.setReturnTypeDescriptor(bridgeOrigin.getReturnTypeDescriptor()));
-    }
-    return targetMethodDescriptor;
+
+    return targetMethodDescriptor.transform(
+        builder ->
+            builder
+                .setParameterTypeDescriptors(
+                    Streams.zip(
+                            bridgeOrigin.getParameterTypeDescriptors().stream(),
+                            targetMethodDescriptor.getParameterTypeDescriptors().stream(),
+                            DeclaredTypeDescriptor::getTypeFromBridge)
+                        .collect(toImmutableList()))
+                .setReturnTypeDescriptor(
+                    getTypeFromBridge(
+                        bridgeOrigin.getReturnTypeDescriptor(),
+                        targetMethodDescriptor.getReturnTypeDescriptor())));
+  }
+
+  /**
+   * If the bridge and the target differ w.r.t being a primitive or not, use the type from the
+   * bridge, since the method we are implementing needs to follow the bridge override.
+   */
+  private static TypeDescriptor getTypeFromBridge(
+      TypeDescriptor fromBridge, TypeDescriptor fromTarget) {
+    return fromBridge.isPrimitive() != fromTarget.isPrimitive() ? fromBridge : fromTarget;
   }
 
   /** Returns the default (parameterless) constructor for the type. */
