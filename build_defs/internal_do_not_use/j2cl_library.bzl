@@ -33,6 +33,7 @@ load(":j2kt_common.bzl", "j2kt_common")
 load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_jvm_library", "j2kt_native_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
+load(":kotlin_allowlist.bzl", "KOTLIN_ALLOWED_PACKAGES")
 
 # Packages that j2cl rule will generage j2kt jvm packages by default. Used to simplify test
 # rules.
@@ -72,9 +73,6 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/truth",
 ]
 
-_KOTLIN_OPT_IN_PACKAGES = [
-]
-
 def _tree_artifact_proxy_impl(ctx):
     js_files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
     return DefaultInfo(files = depset([js_files]), runfiles = ctx.runfiles([js_files]))
@@ -109,7 +107,7 @@ def j2cl_library(
         args["deps"] = args.get("deps", []) + [jre]
 
     # TODO(b/217287994): Replace with more traditional allow-listing.
-    kotlin_allowed = any([p for p in _KOTLIN_OPT_IN_PACKAGES if native.package_name().startswith(p)])
+    kotlin_allowed = any([p for p in KOTLIN_ALLOWED_PACKAGES if native.package_name().startswith(p)])
     if kotlin_allowed:
         args["j2cl_transpiler_override"] = (
             "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKolinSupport"

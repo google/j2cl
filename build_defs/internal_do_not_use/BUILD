@@ -1,6 +1,8 @@
 # Description:
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
+load(":kotlin_allowlist.bzl", "KOTLIN_ALLOWED_PACKAGES")
+
 package(
     default_visibility = ["//visibility:public"],
     licenses = ["notice"],
@@ -36,10 +38,12 @@ alias(
 alias(
     name = "BazelJ2clBuilderWithKolinSupport",
     actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilderWithKolinSupport",
-    # WARNING: Don't increase the visibility without talking to Kotlin team.
-    visibility = [
-        "//transpiler/javatests:__subpackages__",
-    ],
+    visibility = ["//build_defs/internal_do_not_use:kotlin_allowlist"],
+)
+
+package_group(
+    name = "kotlin_allowlist",
+    packages = ["//%s/..." % p for p in KOTLIN_ALLOWED_PACKAGES],
 )
 
 # ***************************************************
