@@ -1,0 +1,503 @@
+;;; Code for j2ktnotpassing.AccidentalOverride [static fields]
+(global $f_$initialized__j2ktnotpassing_AccidentalOverride (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.AccidentalOverride.SuperClass [static fields]
+(global $f_$initialized__j2ktnotpassing_AccidentalOverride_SuperClass (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.AccidentalOverride.Interface [static fields]
+(global $f_$initialized__j2ktnotpassing_AccidentalOverride_Interface (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.AccidentalOverride.TestImplicitOverride [static fields]
+(global $f_$initialized__j2ktnotpassing_AccidentalOverride_TestImplicitOverride (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.AccidentalOverride.TestExplicitOverride [static fields]
+(global $f_$initialized__j2ktnotpassing_AccidentalOverride_TestExplicitOverride (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.AccidentalOverride [vtable.init]
+(global $j2ktnotpassing.AccidentalOverride.vtable (ref $j2ktnotpassing.AccidentalOverride.vtable) 
+ (struct.new $j2ktnotpassing.AccidentalOverride.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride)
+ )
+)
+
+;;; Code for j2ktnotpassing.AccidentalOverride [itable.init]
+(global $j2ktnotpassing.AccidentalOverride.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for j2ktnotpassing.AccidentalOverride.SuperClass [vtable.init]
+(global $j2ktnotpassing.AccidentalOverride.SuperClass.vtable (ref $j2ktnotpassing.AccidentalOverride.SuperClass.vtable) 
+ (struct.new $j2ktnotpassing.AccidentalOverride.SuperClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.SuperClass)
+  (ref.func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.SuperClass)
+ )
+)
+
+;;; Code for j2ktnotpassing.AccidentalOverride.SuperClass [itable.init]
+(global $j2ktnotpassing.AccidentalOverride.SuperClass.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for j2ktnotpassing.AccidentalOverride.TestImplicitOverride [vtable.init]
+(global $j2ktnotpassing.AccidentalOverride.TestImplicitOverride.vtable (ref $j2ktnotpassing.AccidentalOverride.TestImplicitOverride.vtable) 
+ (struct.new $j2ktnotpassing.AccidentalOverride.TestImplicitOverride.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.TestImplicitOverride)
+  (ref.func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.SuperClass)
+ )
+)
+
+;;; Code for j2ktnotpassing.AccidentalOverride.TestImplicitOverride [itable.init]
+(global $j2ktnotpassing.AccidentalOverride.TestImplicitOverride.itable (ref $itable) (array.init_static $itable 
+ (struct.new $j2ktnotpassing.AccidentalOverride.Interface.vtable
+  (ref.func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.SuperClass)
+ )
+ ))
+
+;;; Code for j2ktnotpassing.AccidentalOverride.TestExplicitOverride [vtable.init]
+(global $j2ktnotpassing.AccidentalOverride.TestExplicitOverride.vtable (ref $j2ktnotpassing.AccidentalOverride.TestExplicitOverride.vtable) 
+ (struct.new $j2ktnotpassing.AccidentalOverride.TestExplicitOverride.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.TestExplicitOverride)
+  (ref.func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.TestExplicitOverride)
+ )
+)
+
+;;; Code for j2ktnotpassing.AccidentalOverride.TestExplicitOverride [itable.init]
+(global $j2ktnotpassing.AccidentalOverride.TestExplicitOverride.itable (ref $itable) (array.init_static $itable 
+ (struct.new $j2ktnotpassing.AccidentalOverride.Interface.vtable
+  (ref.func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.TestExplicitOverride)
+ )
+ ))
+
+;;; Code for j2ktnotpassing.AccidentalOverride [CLASS]
+(type $j2ktnotpassing.AccidentalOverride (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.AccidentalOverride.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $j2ktnotpassing.AccidentalOverride.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; AccidentalOverride AccidentalOverride.$create()
+(func $$create__@j2ktnotpassing.AccidentalOverride
+ (result (ref null $j2ktnotpassing.AccidentalOverride))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+ (local $$instance (ref null $j2ktnotpassing.AccidentalOverride))
+ (block
+  ;; AccidentalOverride $instance = new AccidentalOverride.<init>(0);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+  (local.set $$instance (struct.new $j2ktnotpassing.AccidentalOverride (ref.as_non_null (global.get $j2ktnotpassing.AccidentalOverride.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.AccidentalOverride.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+  (call $$ctor__void_$p_j2ktnotpassing_AccidentalOverride@j2ktnotpassing.AccidentalOverride (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AccidentalOverride.$ctor()
+(func $$ctor__void_$p_j2ktnotpassing_AccidentalOverride@j2ktnotpassing.AccidentalOverride
+ (param $this (ref null $j2ktnotpassing.AccidentalOverride))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+ (block
+  ;; j2ktnotpassing.AccidentalOverride.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+  (call $$clinit__void@j2ktnotpassing.AccidentalOverride )
+  ;; Object.this.$ctor();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void AccidentalOverride.$clinit()
+(func $$clinit__void@j2ktnotpassing.AccidentalOverride
+ ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+ (block
+  ;; if (j2ktnotpassing.AccidentalOverride.$initialized) return;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+  (if (global.get $f_$initialized__j2ktnotpassing_AccidentalOverride)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.AccidentalOverride.$initialized = true);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+  (global.set $f_$initialized__j2ktnotpassing_AccidentalOverride (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:18:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> AccidentalOverride.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.AccidentalOverride))
+ (local.set $this (ref.cast_static $j2ktnotpassing.AccidentalOverride (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.AccidentalOverride();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.AccidentalOverride__java_lang_Class (ref.func $$getJ2ktnotpassing.AccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride)
+
+;;; Code for j2ktnotpassing.AccidentalOverride.SuperClass [CLASS]
+(type $j2ktnotpassing.AccidentalOverride.SuperClass (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.AccidentalOverride.SuperClass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__j2ktnotpassing_AccidentalOverride_SuperClass (ref null $j2ktnotpassing.AccidentalOverride))
+  $java.lang.Object)
+)
+(type $j2ktnotpassing.AccidentalOverride.SuperClass.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_accidentalOverride__void (ref $function.m_accidentalOverride__void))
+  $java.lang.Object.vtable)
+)
+
+;;; SuperClass SuperClass.$create(AccidentalOverride $outer_this)
+(func $$create__j2ktnotpassing_AccidentalOverride@j2ktnotpassing.AccidentalOverride.SuperClass
+ (param $$outer_this (ref null $j2ktnotpassing.AccidentalOverride))
+ (result (ref null $j2ktnotpassing.AccidentalOverride.SuperClass))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+ (local $$instance (ref null $j2ktnotpassing.AccidentalOverride.SuperClass))
+ (block
+  ;; SuperClass $instance = new SuperClass.<init>(0,$outer_this);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+  (local.set $$instance (struct.new $j2ktnotpassing.AccidentalOverride.SuperClass (ref.as_non_null (global.get $j2ktnotpassing.AccidentalOverride.SuperClass.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.AccidentalOverride.SuperClass.itable)) (i32.const 0) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+  (call $$ctor__j2ktnotpassing_AccidentalOverride__void_$p_j2ktnotpassing_AccidentalOverride_SuperClass@j2ktnotpassing.AccidentalOverride.SuperClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SuperClass.$ctor(AccidentalOverride $outer_this)
+(func $$ctor__j2ktnotpassing_AccidentalOverride__void_$p_j2ktnotpassing_AccidentalOverride_SuperClass@j2ktnotpassing.AccidentalOverride.SuperClass
+ (param $this (ref null $j2ktnotpassing.AccidentalOverride.SuperClass))
+ (param $$outer_this (ref null $j2ktnotpassing.AccidentalOverride))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+ (block
+  ;; j2ktnotpassing.AccidentalOverride.SuperClass.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+  (call $$clinit__void@j2ktnotpassing.AccidentalOverride.SuperClass )
+  ;; Object.this.$ctor();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void SuperClass.accidentalOverride()
+(func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.SuperClass
+ (type $function.m_accidentalOverride__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:20:16
+ (local $this (ref null $j2ktnotpassing.AccidentalOverride.SuperClass))
+ (local.set $this (ref.cast_static $j2ktnotpassing.AccidentalOverride.SuperClass (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.SuperClass)
+
+;;; void SuperClass.$clinit()
+(func $$clinit__void@j2ktnotpassing.AccidentalOverride.SuperClass
+ ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+ (block
+  ;; if (j2ktnotpassing.AccidentalOverride.SuperClass.$initialized) return;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+  (if (global.get $f_$initialized__j2ktnotpassing_AccidentalOverride_SuperClass)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.AccidentalOverride.SuperClass.$initialized = true);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+  (global.set $f_$initialized__j2ktnotpassing_AccidentalOverride_SuperClass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:19:8
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> SuperClass.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.SuperClass
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.AccidentalOverride.SuperClass))
+ (local.set $this (ref.cast_static $j2ktnotpassing.AccidentalOverride.SuperClass (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.AccidentalOverride.SuperClass();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.AccidentalOverride.SuperClass__java_lang_Class (ref.func $$getJ2ktnotpassing.AccidentalOverride.SuperClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.SuperClass)
+
+;;; Code for j2ktnotpassing.AccidentalOverride.Interface [INTERFACE]
+(type $j2ktnotpassing.AccidentalOverride.Interface.vtable (struct_subtype 
+ (field $m_accidentalOverride__void (ref $function.m_accidentalOverride__void))
+  data)
+)
+
+;;; void Interface.accidentalOverride()
+(func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.Interface
+ (param $this (ref null $java.lang.Object))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:24:17
+ (block
+ )
+)
+(elem declare func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.Interface)
+
+;;; void Interface.$clinit()
+(func $$clinit__void@j2ktnotpassing.AccidentalOverride.Interface
+ ;;@ j2ktnotpassing/AccidentalOverride.java:23:12
+ (block
+  ;; if (j2ktnotpassing.AccidentalOverride.Interface.$initialized) return;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:23:12
+  (if (global.get $f_$initialized__j2ktnotpassing_AccidentalOverride_Interface)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/AccidentalOverride.java:23:12
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.AccidentalOverride.Interface.$initialized = true);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:23:12
+  (global.set $f_$initialized__j2ktnotpassing_AccidentalOverride_Interface (i32.const 1))
+ )
+)
+
+;;; Class<?> Interface.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.Interface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.AccidentalOverride.Interface();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.AccidentalOverride.Interface__java_lang_Class (ref.func $$getJ2ktnotpassing.AccidentalOverride.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.Interface)
+
+;;; Code for j2ktnotpassing.AccidentalOverride.TestImplicitOverride [CLASS]
+(type $j2ktnotpassing.AccidentalOverride.TestImplicitOverride (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.AccidentalOverride.TestImplicitOverride.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__j2ktnotpassing_AccidentalOverride_SuperClass (ref null $j2ktnotpassing.AccidentalOverride))
+ (field $$outer_this__j2ktnotpassing_AccidentalOverride_TestImplicitOverride (ref null $j2ktnotpassing.AccidentalOverride))
+  $j2ktnotpassing.AccidentalOverride.SuperClass)
+)
+(type $j2ktnotpassing.AccidentalOverride.TestImplicitOverride.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_accidentalOverride__void (ref $function.m_accidentalOverride__void))
+  $j2ktnotpassing.AccidentalOverride.SuperClass.vtable)
+)
+
+;;; TestImplicitOverride TestImplicitOverride.$create(AccidentalOverride $outer_this)
+(func $$create__j2ktnotpassing_AccidentalOverride@j2ktnotpassing.AccidentalOverride.TestImplicitOverride
+ (param $$outer_this (ref null $j2ktnotpassing.AccidentalOverride))
+ (result (ref null $j2ktnotpassing.AccidentalOverride.TestImplicitOverride))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+ (local $$instance (ref null $j2ktnotpassing.AccidentalOverride.TestImplicitOverride))
+ (block
+  ;; TestImplicitOverride $instance = new TestImplicitOverride.<init>(0,$outer_this,$outer_this);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (local.set $$instance (struct.new $j2ktnotpassing.AccidentalOverride.TestImplicitOverride (ref.as_non_null (global.get $j2ktnotpassing.AccidentalOverride.TestImplicitOverride.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.AccidentalOverride.TestImplicitOverride.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (call $$ctor__j2ktnotpassing_AccidentalOverride__void_$p_j2ktnotpassing_AccidentalOverride_TestImplicitOverride@j2ktnotpassing.AccidentalOverride.TestImplicitOverride (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void TestImplicitOverride.$ctor(AccidentalOverride $outer_this)
+(func $$ctor__j2ktnotpassing_AccidentalOverride__void_$p_j2ktnotpassing_AccidentalOverride_TestImplicitOverride@j2ktnotpassing.AccidentalOverride.TestImplicitOverride
+ (param $this (ref null $j2ktnotpassing.AccidentalOverride.TestImplicitOverride))
+ (param $$outer_this (ref null $j2ktnotpassing.AccidentalOverride))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+ (block
+  ;; j2ktnotpassing.AccidentalOverride.TestImplicitOverride.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (call $$clinit__void@j2ktnotpassing.AccidentalOverride.TestImplicitOverride )
+  ;; SuperClass.this.$ctor($outer_this);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (call $$ctor__j2ktnotpassing_AccidentalOverride__void_$p_j2ktnotpassing_AccidentalOverride_SuperClass@j2ktnotpassing.AccidentalOverride.SuperClass (ref.as_non_null (local.get $this))(local.get $$outer_this))
+ )
+)
+
+;;; void TestImplicitOverride.$clinit()
+(func $$clinit__void@j2ktnotpassing.AccidentalOverride.TestImplicitOverride
+ ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+ (block
+  ;; if (j2ktnotpassing.AccidentalOverride.TestImplicitOverride.$initialized) return;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (if (global.get $f_$initialized__j2ktnotpassing_AccidentalOverride_TestImplicitOverride)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.AccidentalOverride.TestImplicitOverride.$initialized = true);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (global.set $f_$initialized__j2ktnotpassing_AccidentalOverride_TestImplicitOverride (i32.const 1))
+  ;; j2ktnotpassing.AccidentalOverride.SuperClass.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (call $$clinit__void@j2ktnotpassing.AccidentalOverride.SuperClass )
+  ;; j2ktnotpassing.AccidentalOverride.Interface.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:27:8
+  (call $$clinit__void@j2ktnotpassing.AccidentalOverride.Interface )
+ )
+)
+
+;;; Class<?> TestImplicitOverride.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.TestImplicitOverride
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.AccidentalOverride.TestImplicitOverride))
+ (local.set $this (ref.cast_static $j2ktnotpassing.AccidentalOverride.TestImplicitOverride (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.AccidentalOverride.TestImplicitOverride();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.AccidentalOverride.TestImplicitOverride__java_lang_Class (ref.func $$getJ2ktnotpassing.AccidentalOverride.TestImplicitOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.TestImplicitOverride)
+
+;;; Code for j2ktnotpassing.AccidentalOverride.TestExplicitOverride [CLASS]
+(type $j2ktnotpassing.AccidentalOverride.TestExplicitOverride (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.AccidentalOverride.TestExplicitOverride.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__j2ktnotpassing_AccidentalOverride_SuperClass (ref null $j2ktnotpassing.AccidentalOverride))
+ (field $$outer_this__j2ktnotpassing_AccidentalOverride_TestExplicitOverride (ref null $j2ktnotpassing.AccidentalOverride))
+  $j2ktnotpassing.AccidentalOverride.SuperClass)
+)
+(type $j2ktnotpassing.AccidentalOverride.TestExplicitOverride.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_accidentalOverride__void (ref $function.m_accidentalOverride__void))
+  $j2ktnotpassing.AccidentalOverride.SuperClass.vtable)
+)
+
+;;; TestExplicitOverride TestExplicitOverride.$create(AccidentalOverride $outer_this)
+(func $$create__j2ktnotpassing_AccidentalOverride@j2ktnotpassing.AccidentalOverride.TestExplicitOverride
+ (param $$outer_this (ref null $j2ktnotpassing.AccidentalOverride))
+ (result (ref null $j2ktnotpassing.AccidentalOverride.TestExplicitOverride))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+ (local $$instance (ref null $j2ktnotpassing.AccidentalOverride.TestExplicitOverride))
+ (block
+  ;; TestExplicitOverride $instance = new TestExplicitOverride.<init>(0,$outer_this,$outer_this);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (local.set $$instance (struct.new $j2ktnotpassing.AccidentalOverride.TestExplicitOverride (ref.as_non_null (global.get $j2ktnotpassing.AccidentalOverride.TestExplicitOverride.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.AccidentalOverride.TestExplicitOverride.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (call $$ctor__j2ktnotpassing_AccidentalOverride__void_$p_j2ktnotpassing_AccidentalOverride_TestExplicitOverride@j2ktnotpassing.AccidentalOverride.TestExplicitOverride (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void TestExplicitOverride.$ctor(AccidentalOverride $outer_this)
+(func $$ctor__j2ktnotpassing_AccidentalOverride__void_$p_j2ktnotpassing_AccidentalOverride_TestExplicitOverride@j2ktnotpassing.AccidentalOverride.TestExplicitOverride
+ (param $this (ref null $j2ktnotpassing.AccidentalOverride.TestExplicitOverride))
+ (param $$outer_this (ref null $j2ktnotpassing.AccidentalOverride))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+ (block
+  ;; j2ktnotpassing.AccidentalOverride.TestExplicitOverride.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (call $$clinit__void@j2ktnotpassing.AccidentalOverride.TestExplicitOverride )
+  ;; SuperClass.this.$ctor($outer_this);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (call $$ctor__j2ktnotpassing_AccidentalOverride__void_$p_j2ktnotpassing_AccidentalOverride_SuperClass@j2ktnotpassing.AccidentalOverride.SuperClass (ref.as_non_null (local.get $this))(local.get $$outer_this))
+ )
+)
+
+;;; void TestExplicitOverride.accidentalOverride()
+(func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.TestExplicitOverride
+ (type $function.m_accidentalOverride__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ j2ktnotpassing/AccidentalOverride.java:33:16
+ (local $this (ref null $j2ktnotpassing.AccidentalOverride.TestExplicitOverride))
+ (local.set $this (ref.cast_static $j2ktnotpassing.AccidentalOverride.TestExplicitOverride (local.get $this.untyped)))
+ (block
+  ;; super.accidentalOverride();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:34:6
+  (call $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.SuperClass (ref.as_non_null (local.get $this)))
+ )
+)
+(elem declare func $m_accidentalOverride__void@j2ktnotpassing.AccidentalOverride.TestExplicitOverride)
+
+;;; void TestExplicitOverride.$clinit()
+(func $$clinit__void@j2ktnotpassing.AccidentalOverride.TestExplicitOverride
+ ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+ (block
+  ;; if (j2ktnotpassing.AccidentalOverride.TestExplicitOverride.$initialized) return;
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (if (global.get $f_$initialized__j2ktnotpassing_AccidentalOverride_TestExplicitOverride)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.AccidentalOverride.TestExplicitOverride.$initialized = true);
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (global.set $f_$initialized__j2ktnotpassing_AccidentalOverride_TestExplicitOverride (i32.const 1))
+  ;; j2ktnotpassing.AccidentalOverride.SuperClass.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (call $$clinit__void@j2ktnotpassing.AccidentalOverride.SuperClass )
+  ;; j2ktnotpassing.AccidentalOverride.Interface.$clinit();
+  ;;@ j2ktnotpassing/AccidentalOverride.java:31:8
+  (call $$clinit__void@j2ktnotpassing.AccidentalOverride.Interface )
+ )
+)
+
+;;; Class<?> TestExplicitOverride.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.TestExplicitOverride
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.AccidentalOverride.TestExplicitOverride))
+ (local.set $this (ref.cast_static $j2ktnotpassing.AccidentalOverride.TestExplicitOverride (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.AccidentalOverride.TestExplicitOverride();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.AccidentalOverride.TestExplicitOverride__java_lang_Class (ref.func $$getJ2ktnotpassing.AccidentalOverride.TestExplicitOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.AccidentalOverride.TestExplicitOverride)

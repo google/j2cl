@@ -101,31 +101,31 @@ open class Subclass<V>: nativekttypes.nativekt.KInterface<V>, nativekttypes.nati
  constructor(v: V): super(v)
 
  open override fun renamedMethod(): kotlin.Int {
-  return super.renamedMethod()
+  return super<nativekttypes.nativekt.KTopLevel>.renamedMethod()
  }
 
  open override val methodAsProperty: kotlin.Int get() {
-  return super.methodAsProperty
+  return super<nativekttypes.nativekt.KTopLevel>.methodAsProperty
  }
 
  open override val nonGetMethodAsProperty: kotlin.Int get() {
-  return super.nonGetMethodAsProperty
+  return super<nativekttypes.nativekt.KTopLevel>.nonGetMethodAsProperty
  }
 
  open override val renamedMethodAsProperty: kotlin.Int get() {
-  return super.renamedMethodAsProperty
+  return super<nativekttypes.nativekt.KTopLevel>.renamedMethodAsProperty
  }
 
  open override val getRenamedMethodAsProperty: kotlin.Int get() {
-  return super.getRenamedMethodAsProperty
+  return super<nativekttypes.nativekt.KTopLevel>.getRenamedMethodAsProperty
  }
 
  open override val isMethodAsProperty: kotlin.Boolean get() {
-  return super.isMethodAsProperty
+  return super<nativekttypes.nativekt.KTopLevel>.isMethodAsProperty
  }
 
  open override val getstartingmethodAsProperty: kotlin.Int get() {
-  return super.getstartingmethodAsProperty
+  return super<nativekttypes.nativekt.KTopLevel>.getstartingmethodAsProperty
  }
 
  open override fun interfaceMethod(v: V): kotlin.Int {
@@ -149,31 +149,31 @@ open class Subsubclass<V>: nativekttypes.Subclass<V> {
  constructor(v: V): super(v)
 
  open override fun renamedMethod(): kotlin.Int {
-  return super.renamedMethod()
+  return super<nativekttypes.Subclass>.renamedMethod()
  }
 
  open override val methodAsProperty: kotlin.Int get() {
-  return super.methodAsProperty
+  return super<nativekttypes.Subclass>.methodAsProperty
  }
 
  open override val nonGetMethodAsProperty: kotlin.Int get() {
-  return super.nonGetMethodAsProperty
+  return super<nativekttypes.Subclass>.nonGetMethodAsProperty
  }
 
  open override val renamedMethodAsProperty: kotlin.Int get() {
-  return super.renamedMethodAsProperty
+  return super<nativekttypes.Subclass>.renamedMethodAsProperty
  }
 
  open override val getRenamedMethodAsProperty: kotlin.Int get() {
-  return super.getRenamedMethodAsProperty
+  return super<nativekttypes.Subclass>.getRenamedMethodAsProperty
  }
 
  open override val isMethodAsProperty: kotlin.Boolean get() {
-  return super.isMethodAsProperty
+  return super<nativekttypes.Subclass>.isMethodAsProperty
  }
 
  open override val getstartingmethodAsProperty: kotlin.Int get() {
-  return super.getstartingmethodAsProperty
+  return super<nativekttypes.Subclass>.getstartingmethodAsProperty
  }
 
  open override fun interfaceMethod(v: V): kotlin.Int {
@@ -193,4 +193,8 @@ open class Subsubclass<V>: nativekttypes.Subclass<V> {
  }
 }
 
-open class BridgeSubclass: nativekttypes.nativekt.KBridge() {}
+open class BridgeSubclass: nativekttypes.nativekt.KBridge() {
+ open override fun method() {
+  super<nativekttypes.nativekt.KBridge>.method()
+ }
+}

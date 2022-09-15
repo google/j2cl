@@ -1,0 +1,37 @@
+goog.module('supermethodcall.GrandParentInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class GrandParentInterface {
+ /** @abstract @nodts */
+ m_defaultGrandParent__void() {}
+ /** @nodts */
+ static m_defaultGrandParent__$default__supermethodcall_GrandParentInterface__void(/** !GrandParentInterface */ $thisArg) {
+  GrandParentInterface.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  GrandParentInterface.$clinit = () =>{};
+  GrandParentInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__supermethodcall_GrandParentInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__supermethodcall_GrandParentInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+GrandParentInterface.$markImplementor(/**@type {Function}*/ (GrandParentInterface));
+$Util.$setClassMetadataForInterface(GrandParentInterface, 'supermethodcall.GrandParentInterface');
+
+exports = GrandParentInterface;
+
+//# sourceMappingURL=GrandParentInterface.js.map

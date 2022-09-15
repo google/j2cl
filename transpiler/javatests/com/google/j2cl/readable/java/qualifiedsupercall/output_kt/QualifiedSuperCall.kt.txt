@@ -11,7 +11,7 @@ open class Parent {
 open class QualifiedSuperCall: qualifiedsupercall.Parent() {
  open inner class InnerClass {
   open fun test() {
-   super@QualifiedSuperCall.`fun`()
+   super<qualifiedsupercall.Parent>@QualifiedSuperCall.`fun`()
   }
  }
 }

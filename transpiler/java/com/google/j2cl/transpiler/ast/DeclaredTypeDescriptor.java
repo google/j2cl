@@ -988,7 +988,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return specializedTypeArgumentByTypeParameters;
   }
 
-  Stream<DeclaredTypeDescriptor> getSuperTypesStream() {
+  public Stream<DeclaredTypeDescriptor> getSuperTypesStream() {
     return getSuperTypeDescriptor() == null
         ? getInterfaceTypeDescriptors().stream()
         : Stream.concat(

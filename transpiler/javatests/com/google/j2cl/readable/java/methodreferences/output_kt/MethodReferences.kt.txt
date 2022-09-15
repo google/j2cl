@@ -58,7 +58,7 @@ open class MethodReferences<T> {
    return@Function kotlin.arrayOfNulls<kotlin.Any>(arg0_5!!.toInt())
   }
   val superToStringProducer: methodreferences.MethodReferences.Producer<kotlin.String?>? = methodreferences.MethodReferences.Producer<kotlin.String?> {
-   return@Producer super.toString()
+   return@Producer super<kotlin.Any>.toString()
   }
   var jsobjectFactory: methodreferences.MethodReferences.JsProducer<kotlin.Any?>? = methodreferences.MethodReferences.JsProducer<kotlin.Any?> {
    return@JsProducer kotlin.Any()
@@ -79,7 +79,7 @@ open class MethodReferences<T> {
    return@JsFunctionInterface kotlin.arrayOfNulls<kotlin.Any>(arg0_7!!.toInt())
   }
   val jsSuperToStringProducer: methodreferences.MethodReferences.JsProducer<kotlin.String?>? = methodreferences.MethodReferences.JsProducer<kotlin.String?> {
-   return@JsProducer super.toString()
+   return@JsProducer super<kotlin.Any>.toString()
   }
   val jsbiFunction: methodreferences.MethodReferences.JsBiFunction<methodreferences.MethodReferences<T>?, kotlin.Number?, kotlin.Boolean?>? = methodreferences.MethodReferences.JsBiFunction<methodreferences.MethodReferences<T>?, kotlin.Number?, kotlin.Boolean?> { arg0_8: methodreferences.MethodReferences<T>?, arg1_1: kotlin.Number? ->
    return@JsBiFunction arg0_8!!.sameAs(arg1_1)

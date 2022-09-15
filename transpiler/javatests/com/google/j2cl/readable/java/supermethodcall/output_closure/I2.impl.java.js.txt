@@ -1,0 +1,42 @@
+goog.module('supermethodcall.I2$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('supermethodcall.I2.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class I2 {
+ /** @abstract @nodts */
+ m_m__void() {}
+ /** @nodts @return {I2} */
+ static $adapt(/** ?function():void */ fn) {
+  I2.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  I2.$clinit = () =>{};
+  I2.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__supermethodcall_I2 = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__supermethodcall_I2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('supermethodcall.I2.$LambdaAdaptor$impl');
+ }
+}
+I2.$markImplementor(/**@type {Function}*/ (I2));
+$Util.$setClassMetadataForInterface(I2, 'supermethodcall.I2');
+
+exports = I2;
+
+//# sourceMappingURL=I2.js.map

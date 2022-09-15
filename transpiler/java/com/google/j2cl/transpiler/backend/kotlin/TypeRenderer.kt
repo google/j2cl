@@ -80,43 +80,45 @@ private fun Renderer.renderSuperTypes(type: Type) {
 }
 
 internal fun Renderer.renderTypeBody(type: Type) {
-  render(" ")
-  renderInCurlyBrackets {
-    if (type.isEnum) {
-      renderEnumValues(type)
-    }
-
-    // TODO(b/399455906): Remove short term hack to pull static methods into companion object.
-    var (staticMembers, instanceMembers) = type.members.partition { it.isStatic }
-
-    // Don't render constructors for anonymous classes.
-    // TODO(b/210670710): Remove when anonymous constructors are no longer synthesized.
-    if (type.declaration.isAnonymous) {
-      instanceMembers = instanceMembers.filter { !it.isConstructor }
-    }
-
-    val renderInstanceMembers = instanceMembers.isNotEmpty()
-    if (renderInstanceMembers) {
-      renderNewLine()
-      renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it) }
-    }
-
-    staticMembers = staticMembers.filter { !it.isEnumField }
-    val renderCompanionObject = staticMembers.isNotEmpty()
-    if (renderCompanionObject) {
-      renderNewLine()
-      if (renderInstanceMembers) renderNewLine() // Empty line after last instance member.
-      render("companion object ")
-      renderInCurlyBrackets {
-        renderNewLine()
-        renderSeparatedWithEmptyLine(staticMembers) { renderMember(it) }
+  copy(currentTypeDescriptor = type.typeDescriptor.toNonNullable()).run {
+    render(" ")
+    renderInCurlyBrackets {
+      if (type.isEnum) {
+        renderEnumValues(type)
       }
-    }
 
-    if (type.types.isNotEmpty()) {
-      renderNewLine()
-      if (renderInstanceMembers || renderCompanionObject) renderNewLine()
-      renderSeparatedWithEmptyLine(type.types) { renderType(it) }
+      // TODO(b/399455906): Remove short term hack to pull static methods into companion object.
+      var (staticMembers, instanceMembers) = type.members.partition { it.isStatic }
+
+      // Don't render constructors for anonymous classes.
+      // TODO(b/210670710): Remove when anonymous constructors are no longer synthesized.
+      if (type.declaration.isAnonymous) {
+        instanceMembers = instanceMembers.filter { !it.isConstructor }
+      }
+
+      val renderInstanceMembers = instanceMembers.isNotEmpty()
+      if (renderInstanceMembers) {
+        renderNewLine()
+        renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it) }
+      }
+
+      staticMembers = staticMembers.filter { !it.isEnumField }
+      val renderCompanionObject = staticMembers.isNotEmpty()
+      if (renderCompanionObject) {
+        renderNewLine()
+        if (renderInstanceMembers) renderNewLine() // Empty line after last instance member.
+        render("companion object ")
+        renderInCurlyBrackets {
+          renderNewLine()
+          renderSeparatedWithEmptyLine(staticMembers) { renderMember(it) }
+        }
+      }
+
+      if (type.types.isNotEmpty()) {
+        renderNewLine()
+        if (renderInstanceMembers || renderCompanionObject) renderNewLine()
+        renderSeparatedWithEmptyLine(type.types) { renderType(it) }
+      }
     }
   }
 }

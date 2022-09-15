@@ -193,6 +193,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nativekttypes.BridgeSubclass)
+  (ref.func $m_method__void_$pp_nativekttypes@nativekttypes.BridgeSubclass)
  )
 )
 
@@ -258,6 +259,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nativekttypes.Main.3)
+  (ref.func $m_method__void_$pp_nativekttypes@nativekttypes.NativeRequiringBridge)
  )
 )
 
@@ -309,6 +311,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nativekttypes.NativeRequiringBridge)
+  (ref.func $m_method__void_$pp_nativekttypes@nativekttypes.NativeRequiringBridge)
  )
 )
 
@@ -435,6 +438,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nativekttypes.nativekt.KBridge)
+  (ref.func $m_method__void_$pp_nativekttypes_nativekt@nativekttypes.nativekt.KBridge)
  )
 )
 
@@ -1519,6 +1523,7 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_method__void_$pp_nativekttypes (ref $function.m_method__void_$pp_nativekttypes))
   $nativekttypes.NativeRequiringBridge.vtable)
 )
 
@@ -1553,6 +1558,21 @@
   (call $$ctor__void_$p_nativekttypes_NativeRequiringBridge@nativekttypes.NativeRequiringBridge (ref.as_non_null (local.get $this)))
  )
 )
+
+;;; void BridgeSubclass.method()
+(func $m_method__void_$pp_nativekttypes@nativekttypes.BridgeSubclass
+ (type $function.m_method__void_$pp_nativekttypes)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ nativekttypes/Main.java:258:7
+ (local $this (ref null $nativekttypes.BridgeSubclass))
+ (local.set $this (ref.cast_static $nativekttypes.BridgeSubclass (local.get $this.untyped)))
+ (block
+  ;; super.method();
+  ;;@ nativekttypes/Main.java:259:4
+  (call $m_method__void_$pp_nativekttypes@nativekttypes.NativeRequiringBridge (ref.as_non_null (local.get $this)))
+ )
+)
+(elem declare func $m_method__void_$pp_nativekttypes@nativekttypes.BridgeSubclass)
 
 ;;; void BridgeSubclass.$clinit()
 (func $$clinit__void@nativekttypes.BridgeSubclass
@@ -1897,6 +1917,7 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_method__void_$pp_nativekttypes (ref $function.m_method__void_$pp_nativekttypes))
   $nativekttypes.NativeRequiringBridge.vtable)
 )
 
@@ -2320,6 +2341,7 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_method__void_$pp_nativekttypes (ref $function.m_method__void_$pp_nativekttypes))
   $java.lang.Object.vtable)
 )
 
@@ -2354,6 +2376,18 @@
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
+
+;;; void NativeRequiringBridge.method()
+(func $m_method__void_$pp_nativekttypes@nativekttypes.NativeRequiringBridge
+ (type $function.m_method__void_$pp_nativekttypes)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ nativekttypes/NativeRequiringBridge.java:24:7
+ (local $this (ref null $nativekttypes.NativeRequiringBridge))
+ (local.set $this (ref.cast_static $nativekttypes.NativeRequiringBridge (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_method__void_$pp_nativekttypes@nativekttypes.NativeRequiringBridge)
 
 ;;; void NativeRequiringBridge.$clinit()
 (func $$clinit__void@nativekttypes.NativeRequiringBridge
@@ -3265,6 +3299,7 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_method__void_$pp_nativekttypes_nativekt (ref $function.m_method__void_$pp_nativekttypes_nativekt))
   $nativekttypes.nativekt.KRequiringBridge.vtable)
 )
 
@@ -3299,6 +3334,18 @@
   (call $$ctor__void_$p_nativekttypes_nativekt_KRequiringBridge@nativekttypes.nativekt.KRequiringBridge (ref.as_non_null (local.get $this)))
  )
 )
+
+;;; void KBridge.method()
+(func $m_method__void_$pp_nativekttypes_nativekt@nativekttypes.nativekt.KBridge
+ (type $function.m_method__void_$pp_nativekttypes_nativekt)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ nativekttypes/nativekt/KBridge.java:19:7
+ (local $this (ref null $nativekttypes.nativekt.KBridge))
+ (local.set $this (ref.cast_static $nativekttypes.nativekt.KBridge (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_method__void_$pp_nativekttypes_nativekt@nativekttypes.nativekt.KBridge)
 
 ;;; void KBridge.$clinit()
 (func $$clinit__void@nativekttypes.nativekt.KBridge

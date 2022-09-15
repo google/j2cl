@@ -1,0 +1,37 @@
+goog.module('j2ktnotpassing.AccidentalOverride.Interface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class Interface {
+ /** @abstract @nodts */
+ m_accidentalOverride__void() {}
+ /** @nodts */
+ static m_accidentalOverride__$default__j2ktnotpassing_AccidentalOverride_Interface__void(/** !Interface */ $thisArg) {
+  Interface.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  Interface.$clinit = () =>{};
+  Interface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__j2ktnotpassing_AccidentalOverride_Interface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__j2ktnotpassing_AccidentalOverride_Interface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Interface.$markImplementor(/**@type {Function}*/ (Interface));
+$Util.$setClassMetadataForInterface(Interface, 'j2ktnotpassing.AccidentalOverride$Interface');
+
+exports = Interface;
+
+//# sourceMappingURL=AccidentalOverride$Interface.js.map

@@ -166,12 +166,12 @@ open class Main {
   constructor(): super(10)
 
   open override fun f3(m: kotlin.Int, vararg numbers: kotlin.Int): kotlin.Int {
-   var a: kotlin.Int = super.f3(1, 1, 2)
-   a = a + super.f3(1)
-   a = a + super.f3(1, 1, 2)
-   a = a + super.f3(1)
+   var a: kotlin.Int = super<jsvarargs.Main>.f3(1, 1, 2)
+   a = a + super<jsvarargs.Main>.f3(1)
+   a = a + super<jsvarargs.Main>.f3(1, 1, 2)
+   a = a + super<jsvarargs.Main>.f3(1)
    val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
-   a = a + super.f3(1, *(ints)!!)
+   a = a + super<jsvarargs.Main>.f3(1, *(ints)!!)
    return a
   }
  }

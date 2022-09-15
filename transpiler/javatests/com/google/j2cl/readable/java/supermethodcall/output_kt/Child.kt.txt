@@ -4,6 +4,14 @@ package supermethodcall
 import javaemul.lang.*
 import kotlin.jvm.*
 
+interface GrandParentInterface {
+ fun defaultGrandParent() {}
+}
+
+interface ParentInterface {
+ fun defaultParent() {}
+}
+
 open class GrandParent {
  open fun grandParentSimplest() {}
 
@@ -12,9 +20,13 @@ open class GrandParent {
  open fun grandParentWithChangingReturn(): kotlin.Any? {
   return null
  }
+
+ open fun defaultParent() {}
+
+ open fun defaultGrandParent() {}
 }
 
-open class Parent: supermethodcall.GrandParent() {
+open class Parent: supermethodcall.ParentInterface, supermethodcall.GrandParent() {
  open fun parentSimplest() {}
 
  open fun parentWithParams(foo: kotlin.Int) {}
@@ -22,32 +34,62 @@ open class Parent: supermethodcall.GrandParent() {
  open fun parentWithChangingReturn(): kotlin.Any? {
   return null
  }
+
+ open override fun defaultParent() {
+  super<supermethodcall.GrandParent>.defaultParent()
+  super<supermethodcall.ParentInterface>.defaultParent()
+ }
 }
 
-open class Child: supermethodcall.Parent() {
+open class Child: supermethodcall.GrandParentInterface, supermethodcall.Parent() {
  open override fun parentSimplest() {
-  super.parentSimplest()
+  super<supermethodcall.Parent>.parentSimplest()
  }
 
  open override fun parentWithParams(foo: kotlin.Int) {
-  super.parentWithParams(foo)
+  super<supermethodcall.Parent>.parentWithParams(foo)
  }
 
  open override fun parentWithChangingReturn(): supermethodcall.Child? {
-  super.parentWithChangingReturn()
+  super<supermethodcall.Parent>.parentWithChangingReturn()
   return this
  }
 
  open override fun grandParentSimplest() {
-  super.grandParentSimplest()
+  super<supermethodcall.Parent>.grandParentSimplest()
  }
 
  open override fun grandParentWithParams(foo: kotlin.Int) {
-  super.grandParentWithParams(foo)
+  super<supermethodcall.Parent>.grandParentWithParams(foo)
  }
 
  open override fun grandParentWithChangingReturn(): supermethodcall.Child? {
-  super.grandParentWithChangingReturn()
+  super<supermethodcall.Parent>.grandParentWithChangingReturn()
   return this
+ }
+
+ open override fun defaultGrandParent() {
+  super<supermethodcall.Parent>.defaultGrandParent()
+  super<supermethodcall.GrandParentInterface>.defaultGrandParent()
+ }
+}
+
+interface I1 {
+ fun m() {}
+}
+
+fun interface I2 {
+ fun m()
+}
+
+interface I3: supermethodcall.I1 {}
+
+open class Super {
+ open fun m() {}
+}
+
+open class Sub: supermethodcall.I2, supermethodcall.I3, supermethodcall.Super() {
+ open override fun m() {
+  super<supermethodcall.I3>.m()
  }
 }

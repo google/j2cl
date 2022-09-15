@@ -13,7 +13,11 @@
 [foo] => [foo] "foo"
 [parentWithChangingReturn] => [m_parentWithChangingReturn__java_lang_Object]
 [return null;] => [return null;] "supermethodcall.Parent.parentWithChangingReturn"
+[defaultParent] => [m_defaultParent__void]
+[super.defaultParent();] => [super.m_defaultParent__void();] "supermethodcall.Parent.defaultParent"
+[ParentInterface.super.defaultParent();] => [ParentInterface.m_defaultParent__$default__supermethodcall_ParentInterface__void(this);] "supermethodcall.Parent.defaultParent"
 [Parent] => [$clinit]
 [Parent] => [Parent.$clinit = () =>{};] "supermethodcall.Parent.<clinit>"
 [Parent] => [Parent.$loadModules();] "supermethodcall.Parent.<clinit>"
 [Parent] => [GrandParent.$clinit();] "supermethodcall.Parent.<clinit>"
+[Parent] => [ParentInterface.$clinit();] "supermethodcall.Parent.<clinit>"

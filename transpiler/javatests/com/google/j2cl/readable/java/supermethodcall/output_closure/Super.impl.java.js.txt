@@ -1,0 +1,42 @@
+goog.module('supermethodcall.Super$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Super extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Super} */
+ static $create__() {
+  Super.$clinit();
+  let $instance = new Super();
+  $instance.$ctor__supermethodcall_Super__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__supermethodcall_Super__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_m__void() {}
+ /** @nodts */
+ static $clinit() {
+  Super.$clinit = () =>{};
+  Super.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Super;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Super, 'supermethodcall.Super');
+
+exports = Super;
+
+//# sourceMappingURL=Super.js.map

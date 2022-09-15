@@ -1,0 +1,37 @@
+goog.module('supermethodcall.I1$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class I1 {
+ /** @abstract @nodts */
+ m_m__void() {}
+ /** @nodts */
+ static m_m__$default__supermethodcall_I1__void(/** !I1 */ $thisArg) {
+  I1.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  I1.$clinit = () =>{};
+  I1.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__supermethodcall_I1 = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__supermethodcall_I1;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I1.$markImplementor(/**@type {Function}*/ (I1));
+$Util.$setClassMetadataForInterface(I1, 'supermethodcall.I1');
+
+exports = I1;
+
+//# sourceMappingURL=I1.js.map

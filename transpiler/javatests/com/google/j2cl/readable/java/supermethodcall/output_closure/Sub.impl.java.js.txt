@@ -1,0 +1,57 @@
+goog.module('supermethodcall.Sub$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const I2 = goog.require('supermethodcall.I2$impl');
+const I3 = goog.require('supermethodcall.I3$impl');
+const Super = goog.require('supermethodcall.Super$impl');
+
+let I1 = goog.forwardDeclare('supermethodcall.I1$impl');
+
+/**
+ * @implements {I2}
+ * @implements {I3}
+ */
+class Sub extends Super {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Sub} */
+ static $create__() {
+  Sub.$clinit();
+  let $instance = new Sub();
+  $instance.$ctor__supermethodcall_Sub__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__supermethodcall_Sub__void() {
+  this.$ctor__supermethodcall_Super__void();
+ }
+ /** @override @nodts */
+ m_m__void() {
+  I1.m_m__$default__supermethodcall_I1__void(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  Sub.$clinit = () =>{};
+  Sub.$loadModules();
+  Super.$clinit();
+  I1.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Sub;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  I1 = goog.module.get('supermethodcall.I1$impl');
+ }
+}
+I2.$markImplementor(Sub);
+I3.$markImplementor(Sub);
+$Util.$setClassMetadata(Sub, 'supermethodcall.Sub');
+
+exports = Sub;
+
+//# sourceMappingURL=Sub.js.map

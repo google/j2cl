@@ -9,12 +9,12 @@ open class QualifiedSuperMethodCall: jsvarargs.Main {
 
  open inner class InnerClass {
   open fun test() {
-   super@QualifiedSuperMethodCall.f3(1, 1, 2)
-   super@QualifiedSuperMethodCall.f3(1)
-   super@QualifiedSuperMethodCall.f3(1, 1, 2)
-   super@QualifiedSuperMethodCall.f3(1)
+   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
+   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1)
+   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
+   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1)
    val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
-   super@QualifiedSuperMethodCall.f3(1, *(ints)!!)
+   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1, *(ints)!!)
   }
  }
 }

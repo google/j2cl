@@ -37,7 +37,7 @@ open class Main {
 
  fun interface SubInterface: interfaces.Main.Interface<kotlin.String?> {
   override fun defaultMethod(s: kotlin.String?) {
-   super.defaultMethod(s)
+   super<interfaces.Main.Interface>.defaultMethod(s)
   }
  }
 

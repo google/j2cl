@@ -38,7 +38,7 @@ open class Main {
   open override fun test(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int {
    var nonFinal_1: kotlin.Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
-   return super.test(nonFinal_1, explicitFinal, implicitFinal)
+   return super<parameterassignments.Main>.test(nonFinal_1, explicitFinal, implicitFinal)
   }
  }
 }

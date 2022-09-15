@@ -24,6 +24,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 
+// TODO(b/246842682): Remove "asSuperType" parameter when bridge types are materialized as
+// TypeDescriptors
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
   asSimple: Boolean = false,

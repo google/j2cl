@@ -15,4 +15,6 @@
  */
 package nativekttypes.nativekt;
 
-public class KBridge extends KRequiringBridge {}
+public class KBridge extends KRequiringBridge {
+  void method() {}
+}

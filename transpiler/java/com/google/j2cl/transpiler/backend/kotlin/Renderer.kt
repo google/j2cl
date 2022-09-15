@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.Problems
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
@@ -32,7 +33,10 @@ data class Renderer(
   val problems: Problems,
 
   /** Label to render with the return statement. */
-  val currentReturnLabelIdentifier: String? = null
+  val currentReturnLabelIdentifier: String? = null,
+
+  /** Currently rendered type descriptor. */
+  val currentTypeDescriptor: DeclaredTypeDescriptor? = null
 ) {
   fun renderNewLine() {
     sourceBuilder.newLine()

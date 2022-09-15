@@ -449,9 +449,19 @@ private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
 }
 
 private fun Renderer.renderSuperReference(superReference: SuperReference) {
+  renderSuperReference(superTypeDescriptor = null, qualifierTypeDescriptor = null)
+}
+
+private fun Renderer.renderSuperReference(
+  superTypeDescriptor: DeclaredTypeDescriptor?,
+  qualifierTypeDescriptor: DeclaredTypeDescriptor?
+) {
   render("super")
-  if (superReference.isQualified) {
-    renderLabelReference(superReference.typeDescriptor)
+  if (superTypeDescriptor != null) {
+    renderInAngleBrackets { renderQualifiedName(superTypeDescriptor, asSuperType = true) }
+  }
+  if (qualifierTypeDescriptor != null) {
+    renderLabelReference(qualifierTypeDescriptor)
   }
 }
 
@@ -514,7 +524,18 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       render(".")
     }
   } else {
-    if (memberReference is NewInstance && memberReference.typeDescriptor.typeDeclaration.isLocal) {
+    if (memberReference is MethodCall && qualifier is SuperReference) {
+      val qualifierTypeDescriptor = qualifier.typeDescriptor
+      renderSuperReference(
+        superTypeDescriptor =
+          qualifierTypeDescriptor.directSuperTypeForMethodCall(memberReference.target),
+        qualifierTypeDescriptor =
+          qualifierTypeDescriptor.takeIf { !it.isSameBaseType(currentTypeDescriptor) }
+      )
+      render(".")
+    } else if (
+      memberReference is NewInstance && memberReference.typeDescriptor.typeDeclaration.isLocal
+    ) {
       // Don't render qualifier for local classes.
       // TODO(b/219950593): Implement a pass which will remove unnecessary qualifiers, and then
       // remove this `if` branch.

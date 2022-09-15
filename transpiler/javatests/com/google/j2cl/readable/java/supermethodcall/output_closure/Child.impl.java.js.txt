@@ -1,8 +1,12 @@
 goog.module('supermethodcall.Child$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
+const GrandParentInterface = goog.require('supermethodcall.GrandParentInterface$impl');
 const Parent = goog.require('supermethodcall.Parent$impl');
 
+/**
+ * @implements {GrandParentInterface}
+ */
 class Child extends Parent {
  /** @protected @nodts */
  constructor() {
@@ -45,6 +49,11 @@ class Child extends Parent {
   super.m_grandParentWithChangingReturn__java_lang_Object();
   return this;
  }
+ /** @override @nodts */
+ m_defaultGrandParent__void() {
+  super.m_defaultGrandParent__void();
+  GrandParentInterface.m_defaultGrandParent__$default__supermethodcall_GrandParentInterface__void(this);
+ }
  //Bridge method.
  /** @override @nodts @return {Child} */
  m_grandParentWithChangingReturn__java_lang_Object() {
@@ -60,6 +69,7 @@ class Child extends Parent {
   Child.$clinit = () =>{};
   Child.$loadModules();
   Parent.$clinit();
+  GrandParentInterface.$clinit();
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -69,6 +79,7 @@ class Child extends Parent {
  /** @nodts */
  static $loadModules() {}
 }
+GrandParentInterface.$markImplementor(Child);
 $Util.$setClassMetadata(Child, 'supermethodcall.Child');
 
 exports = Child;
