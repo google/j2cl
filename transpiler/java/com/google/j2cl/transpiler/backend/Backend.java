@@ -51,6 +51,7 @@ import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
 import com.google.j2cl.transpiler.passes.ImplementSystemGetProperty;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
+import com.google.j2cl.transpiler.passes.InsertCastForLowerBounds;
 import com.google.j2cl.transpiler.passes.InsertCastOnArrayAccess;
 import com.google.j2cl.transpiler.passes.InsertCastOnNewInstances;
 import com.google.j2cl.transpiler.passes.InsertCastsOnNullabilityMismatch;
@@ -467,6 +468,7 @@ public enum Backend {
           ImplementKotlinBitLevelOperators::new,
           InsertNotNullAssertions::new,
           InsertCastsOnNullabilityMismatch::new,
+          InsertCastForLowerBounds::new,
           InsertExplicitArrayCoercionCasts::new,
           InsertRawTypeCasts::new,
 

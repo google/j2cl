@@ -1,0 +1,40 @@
+goog.module('j2kt.TypeWildCards.Parent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Parent extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Parent} */
+ static $create__() {
+  Parent.$clinit();
+  let $instance = new Parent();
+  $instance.$ctor__j2kt_TypeWildCards_Parent__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__j2kt_TypeWildCards_Parent__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Parent.$clinit = () =>{};
+  Parent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Parent;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Parent, 'j2kt.TypeWildCards$Parent');
+
+exports = Parent;
+
+//# sourceMappingURL=TypeWildCards$Parent.js.map

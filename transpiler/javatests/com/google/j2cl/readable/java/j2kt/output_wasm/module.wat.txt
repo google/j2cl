@@ -1,0 +1,353 @@
+;;; Code for j2kt.TypeWildCards [static fields]
+(global $f_$initialized__j2kt_TypeWildCards (mut i32) (i32.const 0))
+
+;;; Code for j2kt.TypeWildCards.Parent [static fields]
+(global $f_$initialized__j2kt_TypeWildCards_Parent (mut i32) (i32.const 0))
+
+;;; Code for j2kt.TypeWildCards.Child [static fields]
+(global $f_$initialized__j2kt_TypeWildCards_Child (mut i32) (i32.const 0))
+
+;;; Code for j2kt.TypeWildCards.SupplierWithUpperBound [static fields]
+(global $f_$initialized__j2kt_TypeWildCards_SupplierWithUpperBound (mut i32) (i32.const 0))
+
+;;; Code for j2kt.TypeWildCards [vtable.init]
+(global $j2kt.TypeWildCards.vtable (ref $j2kt.TypeWildCards.vtable) 
+ (struct.new $j2kt.TypeWildCards.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2kt.TypeWildCards)
+ )
+)
+
+;;; Code for j2kt.TypeWildCards [itable.init]
+(global $j2kt.TypeWildCards.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for j2kt.TypeWildCards.Parent [vtable.init]
+(global $j2kt.TypeWildCards.Parent.vtable (ref $j2kt.TypeWildCards.Parent.vtable) 
+ (struct.new $j2kt.TypeWildCards.Parent.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2kt.TypeWildCards.Parent)
+ )
+)
+
+;;; Code for j2kt.TypeWildCards.Parent [itable.init]
+(global $j2kt.TypeWildCards.Parent.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for j2kt.TypeWildCards.Child [vtable.init]
+(global $j2kt.TypeWildCards.Child.vtable (ref $j2kt.TypeWildCards.Child.vtable) 
+ (struct.new $j2kt.TypeWildCards.Child.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2kt.TypeWildCards.Child)
+ )
+)
+
+;;; Code for j2kt.TypeWildCards.Child [itable.init]
+(global $j2kt.TypeWildCards.Child.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for j2kt.TypeWildCards [CLASS]
+(type $j2kt.TypeWildCards (struct_subtype 
+ (field $vtable (ref $j2kt.TypeWildCards.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $j2kt.TypeWildCards.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; TypeWildCards TypeWildCards.$create()
+(func $$create__@j2kt.TypeWildCards
+ (result (ref null $j2kt.TypeWildCards))
+ ;;@ j2kt/TypeWildCards.java:19:6
+ (local $$instance (ref null $j2kt.TypeWildCards))
+ (block
+  ;; TypeWildCards $instance = new TypeWildCards.<init>(0);
+  ;;@ j2kt/TypeWildCards.java:19:6
+  (local.set $$instance (struct.new $j2kt.TypeWildCards (ref.as_non_null (global.get $j2kt.TypeWildCards.vtable)) (ref.as_non_null (global.get $j2kt.TypeWildCards.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ j2kt/TypeWildCards.java:19:6
+  (call $$ctor__void_$p_j2kt_TypeWildCards@j2kt.TypeWildCards (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ j2kt/TypeWildCards.java:19:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void TypeWildCards.$ctor()
+(func $$ctor__void_$p_j2kt_TypeWildCards@j2kt.TypeWildCards
+ (param $this (ref null $j2kt.TypeWildCards))
+ ;;@ j2kt/TypeWildCards.java:19:6
+ (block
+  ;; j2kt.TypeWildCards.$clinit();
+  ;;@ j2kt/TypeWildCards.java:19:6
+  (call $$clinit__void@j2kt.TypeWildCards )
+  ;; Object.this.$ctor();
+  ;;@ j2kt/TypeWildCards.java:19:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void TypeWildCards.testSupplierWithUpperAndLowerBounds(SupplierWithUpperBound<? super Child> supplier)
+(func $m_testSupplierWithUpperAndLowerBounds__j2kt_TypeWildCards_SupplierWithUpperBound__void@j2kt.TypeWildCards
+ (param $supplier (ref null $java.lang.Object))
+ ;;@ j2kt/TypeWildCards.java:28:14
+ (local $parent (ref null $j2kt.TypeWildCards.Parent))
+ (block
+  ;; j2kt.TypeWildCards.$clinit();
+  ;;@ j2kt/TypeWildCards.java:28:98
+  (call $$clinit__void@j2kt.TypeWildCards )
+  ;; Parent parent = supplier.get();
+  ;;@ j2kt/TypeWildCards.java:30:4
+  (local.set $parent (call_ref (ref.as_non_null (local.get $supplier))(struct.get $j2kt.TypeWildCards.SupplierWithUpperBound.vtable $m_get__j2kt_TypeWildCards_Parent (ref.cast_static $j2kt.TypeWildCards.SupplierWithUpperBound.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $supplier)) (i32.const -1))) )))
+ )
+)
+
+;;; void TypeWildCards.$clinit()
+(func $$clinit__void@j2kt.TypeWildCards
+ ;;@ j2kt/TypeWildCards.java:19:6
+ (block
+  ;; if (j2kt.TypeWildCards.$initialized) return;
+  ;;@ j2kt/TypeWildCards.java:19:6
+  (if (global.get $f_$initialized__j2kt_TypeWildCards)
+   (then
+    ;; return;
+    ;;@ j2kt/TypeWildCards.java:19:6
+    (return )
+   )
+  )
+  ;; (j2kt.TypeWildCards.$initialized = true);
+  ;;@ j2kt/TypeWildCards.java:19:6
+  (global.set $f_$initialized__j2kt_TypeWildCards (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2kt/TypeWildCards.java:19:6
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> TypeWildCards.getClass()
+(func $m_getClass__java_lang_Class@j2kt.TypeWildCards
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2kt.TypeWildCards))
+ (local.set $this (ref.cast_static $j2kt.TypeWildCards (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2kt.TypeWildCards();
+  (return (call $function.no.side.effects.$getJ2kt.TypeWildCards__java_lang_Class (ref.func $$getJ2kt.TypeWildCards__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2kt.TypeWildCards)
+
+;;; Code for j2kt.TypeWildCards.Parent [CLASS]
+(type $j2kt.TypeWildCards.Parent (struct_subtype 
+ (field $vtable (ref $j2kt.TypeWildCards.Parent.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $j2kt.TypeWildCards.Parent.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; Parent Parent.$create()
+(func $$create__@j2kt.TypeWildCards.Parent
+ (result (ref null $j2kt.TypeWildCards.Parent))
+ ;;@ j2kt/TypeWildCards.java:20:15
+ (local $$instance (ref null $j2kt.TypeWildCards.Parent))
+ (block
+  ;; Parent $instance = new Parent.<init>(0);
+  ;;@ j2kt/TypeWildCards.java:20:15
+  (local.set $$instance (struct.new $j2kt.TypeWildCards.Parent (ref.as_non_null (global.get $j2kt.TypeWildCards.Parent.vtable)) (ref.as_non_null (global.get $j2kt.TypeWildCards.Parent.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ j2kt/TypeWildCards.java:20:15
+  (call $$ctor__void_$p_j2kt_TypeWildCards_Parent@j2kt.TypeWildCards.Parent (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ j2kt/TypeWildCards.java:20:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_j2kt_TypeWildCards_Parent@j2kt.TypeWildCards.Parent
+ (param $this (ref null $j2kt.TypeWildCards.Parent))
+ ;;@ j2kt/TypeWildCards.java:20:15
+ (block
+  ;; j2kt.TypeWildCards.Parent.$clinit();
+  ;;@ j2kt/TypeWildCards.java:20:15
+  (call $$clinit__void@j2kt.TypeWildCards.Parent )
+  ;; Object.this.$ctor();
+  ;;@ j2kt/TypeWildCards.java:20:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Parent.$clinit()
+(func $$clinit__void@j2kt.TypeWildCards.Parent
+ ;;@ j2kt/TypeWildCards.java:20:15
+ (block
+  ;; if (j2kt.TypeWildCards.Parent.$initialized) return;
+  ;;@ j2kt/TypeWildCards.java:20:15
+  (if (global.get $f_$initialized__j2kt_TypeWildCards_Parent)
+   (then
+    ;; return;
+    ;;@ j2kt/TypeWildCards.java:20:15
+    (return )
+   )
+  )
+  ;; (j2kt.TypeWildCards.Parent.$initialized = true);
+  ;;@ j2kt/TypeWildCards.java:20:15
+  (global.set $f_$initialized__j2kt_TypeWildCards_Parent (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2kt/TypeWildCards.java:20:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Parent.getClass()
+(func $m_getClass__java_lang_Class@j2kt.TypeWildCards.Parent
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2kt.TypeWildCards.Parent))
+ (local.set $this (ref.cast_static $j2kt.TypeWildCards.Parent (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2kt.TypeWildCards.Parent();
+  (return (call $function.no.side.effects.$getJ2kt.TypeWildCards.Parent__java_lang_Class (ref.func $$getJ2kt.TypeWildCards.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2kt.TypeWildCards.Parent)
+
+;;; Code for j2kt.TypeWildCards.Child [CLASS]
+(type $j2kt.TypeWildCards.Child (struct_subtype 
+ (field $vtable (ref $j2kt.TypeWildCards.Child.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $j2kt.TypeWildCards.Parent)
+)
+(type $j2kt.TypeWildCards.Child.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $j2kt.TypeWildCards.Parent.vtable)
+)
+
+;;; Child Child.$create()
+(func $$create__@j2kt.TypeWildCards.Child
+ (result (ref null $j2kt.TypeWildCards.Child))
+ ;;@ j2kt/TypeWildCards.java:22:15
+ (local $$instance (ref null $j2kt.TypeWildCards.Child))
+ (block
+  ;; Child $instance = new Child.<init>(0);
+  ;;@ j2kt/TypeWildCards.java:22:15
+  (local.set $$instance (struct.new $j2kt.TypeWildCards.Child (ref.as_non_null (global.get $j2kt.TypeWildCards.Child.vtable)) (ref.as_non_null (global.get $j2kt.TypeWildCards.Child.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ j2kt/TypeWildCards.java:22:15
+  (call $$ctor__void_$p_j2kt_TypeWildCards_Child@j2kt.TypeWildCards.Child (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ j2kt/TypeWildCards.java:22:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor()
+(func $$ctor__void_$p_j2kt_TypeWildCards_Child@j2kt.TypeWildCards.Child
+ (param $this (ref null $j2kt.TypeWildCards.Child))
+ ;;@ j2kt/TypeWildCards.java:22:15
+ (block
+  ;; j2kt.TypeWildCards.Child.$clinit();
+  ;;@ j2kt/TypeWildCards.java:22:15
+  (call $$clinit__void@j2kt.TypeWildCards.Child )
+  ;; Parent.this.$ctor();
+  ;;@ j2kt/TypeWildCards.java:22:15
+  (call $$ctor__void_$p_j2kt_TypeWildCards_Parent@j2kt.TypeWildCards.Parent (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Child.$clinit()
+(func $$clinit__void@j2kt.TypeWildCards.Child
+ ;;@ j2kt/TypeWildCards.java:22:15
+ (block
+  ;; if (j2kt.TypeWildCards.Child.$initialized) return;
+  ;;@ j2kt/TypeWildCards.java:22:15
+  (if (global.get $f_$initialized__j2kt_TypeWildCards_Child)
+   (then
+    ;; return;
+    ;;@ j2kt/TypeWildCards.java:22:15
+    (return )
+   )
+  )
+  ;; (j2kt.TypeWildCards.Child.$initialized = true);
+  ;;@ j2kt/TypeWildCards.java:22:15
+  (global.set $f_$initialized__j2kt_TypeWildCards_Child (i32.const 1))
+  ;; j2kt.TypeWildCards.Parent.$clinit();
+  ;;@ j2kt/TypeWildCards.java:22:15
+  (call $$clinit__void@j2kt.TypeWildCards.Parent )
+ )
+)
+
+;;; Class<?> Child.getClass()
+(func $m_getClass__java_lang_Class@j2kt.TypeWildCards.Child
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2kt.TypeWildCards.Child))
+ (local.set $this (ref.cast_static $j2kt.TypeWildCards.Child (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2kt.TypeWildCards.Child();
+  (return (call $function.no.side.effects.$getJ2kt.TypeWildCards.Child__java_lang_Class (ref.func $$getJ2kt.TypeWildCards.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2kt.TypeWildCards.Child)
+
+;;; Code for j2kt.TypeWildCards.SupplierWithUpperBound [INTERFACE]
+(type $j2kt.TypeWildCards.SupplierWithUpperBound.vtable (struct_subtype 
+ (field $m_get__j2kt_TypeWildCards_Parent (ref $function.m_get__j2kt_TypeWildCards_Parent))
+  data)
+)
+
+;;; void SupplierWithUpperBound.$clinit()
+(func $$clinit__void@j2kt.TypeWildCards.SupplierWithUpperBound
+ ;;@ j2kt/TypeWildCards.java:24:12
+ (block
+  ;; if (j2kt.TypeWildCards.SupplierWithUpperBound.$initialized) return;
+  ;;@ j2kt/TypeWildCards.java:24:12
+  (if (global.get $f_$initialized__j2kt_TypeWildCards_SupplierWithUpperBound)
+   (then
+    ;; return;
+    ;;@ j2kt/TypeWildCards.java:24:12
+    (return )
+   )
+  )
+  ;; (j2kt.TypeWildCards.SupplierWithUpperBound.$initialized = true);
+  ;;@ j2kt/TypeWildCards.java:24:12
+  (global.set $f_$initialized__j2kt_TypeWildCards_SupplierWithUpperBound (i32.const 1))
+ )
+)
+
+;;; Class<?> SupplierWithUpperBound.getClass()
+(func $m_getClass__java_lang_Class@j2kt.TypeWildCards.SupplierWithUpperBound
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2kt.TypeWildCards.SupplierWithUpperBound();
+  (return (call $function.no.side.effects.$getJ2kt.TypeWildCards.SupplierWithUpperBound__java_lang_Class (ref.func $$getJ2kt.TypeWildCards.SupplierWithUpperBound__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2kt.TypeWildCards.SupplierWithUpperBound)

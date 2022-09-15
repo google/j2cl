@@ -1,0 +1,51 @@
+goog.module('j2kt.TypeWildCards.SupplierWithUpperBound.$LambdaAdaptor$impl');
+
+const SupplierWithUpperBound = goog.require('j2kt.TypeWildCards.SupplierWithUpperBound$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Parent = goog.forwardDeclare('j2kt.TypeWildCards.Parent$impl');
+
+/**
+ * @template T
+ * @implements {SupplierWithUpperBound<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function():T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():T} @nodts*/
+  this.f_fn__j2kt_TypeWildCards_SupplierWithUpperBound_$LambdaAdaptor;
+  this.$ctor__j2kt_TypeWildCards_SupplierWithUpperBound_$LambdaAdaptor__j2kt_TypeWildCards_SupplierWithUpperBound_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__j2kt_TypeWildCards_SupplierWithUpperBound_$LambdaAdaptor__j2kt_TypeWildCards_SupplierWithUpperBound_$JsFunction__void(/** ?function():T */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__j2kt_TypeWildCards_SupplierWithUpperBound_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {T} */
+ m_get__j2kt_TypeWildCards_Parent() {
+  let /** ?function():T */ $function;
+  return ($function = this.f_fn__j2kt_TypeWildCards_SupplierWithUpperBound_$LambdaAdaptor, $function());
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+SupplierWithUpperBound.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'j2kt.TypeWildCards$SupplierWithUpperBound$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=TypeWildCards$SupplierWithUpperBound$$LambdaAdaptor.js.map

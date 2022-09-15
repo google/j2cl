@@ -1,0 +1,44 @@
+goog.module('j2kt.TypeWildCards.SupplierWithUpperBound$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Parent = goog.forwardDeclare('j2kt.TypeWildCards.Parent$impl');
+let $LambdaAdaptor = goog.forwardDeclare('j2kt.TypeWildCards.SupplierWithUpperBound.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class SupplierWithUpperBound {
+ /** @abstract @nodts @return {T} */
+ m_get__j2kt_TypeWildCards_Parent() {}
+ /** @nodts @template T @return {SupplierWithUpperBound<T>} */
+ static $adapt(/** ?function():T */ fn) {
+  SupplierWithUpperBound.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  SupplierWithUpperBound.$clinit = () =>{};
+  SupplierWithUpperBound.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__j2kt_TypeWildCards_SupplierWithUpperBound = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__j2kt_TypeWildCards_SupplierWithUpperBound;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('j2kt.TypeWildCards.SupplierWithUpperBound.$LambdaAdaptor$impl');
+ }
+}
+SupplierWithUpperBound.$markImplementor(/**@type {Function}*/ (SupplierWithUpperBound));
+$Util.$setClassMetadataForInterface(SupplierWithUpperBound, 'j2kt.TypeWildCards$SupplierWithUpperBound');
+
+exports = SupplierWithUpperBound;
+
+//# sourceMappingURL=TypeWildCards$SupplierWithUpperBound.js.map
