@@ -111,10 +111,6 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
       return false;
     }
 
-    if (to instanceof TypeVariable && ((TypeVariable) to).isWildcardOrCapture()) {
-      return false;
-    }
-
     return true;
   }
 }

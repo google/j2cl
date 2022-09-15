@@ -31,7 +31,7 @@ open class IntersectionTypeTest<U> {
   val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m()
   intersectiontype.IntersectionTypeTest.set((o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it })
   intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m())
-  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n()
+  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n() as intersectiontype.Getable<*>?
  }
 
  companion object {

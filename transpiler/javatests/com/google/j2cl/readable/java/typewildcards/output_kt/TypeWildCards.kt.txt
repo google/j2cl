@@ -28,15 +28,15 @@ open class TypeWildCards {
  open fun lowerBoundRecursive(g: typewildcards.GenericType<in typewildcards.RecursiveType<out typewildcards.RecursiveType<T>?>?>?) {}
 
  open fun test() {
-  this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>())
-  this.upperBound(typewildcards.GenericType<typewildcards.TypeWildCards?>())
-  this.lowerBound(typewildcards.GenericType<typewildcards.TypeWildCards?>())
+  this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<*>?)
+  this.upperBound(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<out typewildcards.TypeWildCards?>?)
+  this.lowerBound(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<in typewildcards.TypeWildCards?>?)
  }
 
  open fun testInferredGenericIntersection() {
   val elements: kotlin.collections.MutableList<typewildcards.TypeWildCards.Element?>? = null
   val otherElements: kotlin.collections.MutableList<typewildcards.TypeWildCards.SubOtherElement?>? = null
-  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements, otherElements), java.util.function.Function { a ->
+  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?, otherElements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?), java.util.function.Function { a ->
    a!!.getKey()
    return@Function a!!.get()
   })
@@ -85,7 +85,7 @@ open class TypeWildCards {
 
   @kotlin.jvm.JvmField var listWithWildcard: kotlin.collections.MutableList<*>? = null
 
-  @kotlin.jvm.JvmField var valMultipleGenerics: typewildcards.TypeWildCards.MultipleGenerics<*, kotlin.String?, *>? = typewildcards.TypeWildCards.createMultipleGenerics(typewildcards.TypeWildCards.listWithWildcard)
+  @kotlin.jvm.JvmField var valMultipleGenerics: typewildcards.TypeWildCards.MultipleGenerics<*, kotlin.String?, *>? = typewildcards.TypeWildCards.createMultipleGenerics(typewildcards.TypeWildCards.listWithWildcard) as typewildcards.TypeWildCards.MultipleGenerics<*, kotlin.String?, *>?
  }
 
  fun interface X {
