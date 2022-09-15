@@ -22,6 +22,7 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -32,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -762,7 +762,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * the Java semantics persepective.
    */
   @Memoized
-  public Set<MethodDescriptor> getJavaOverriddenMethodDescriptors() {
+  public ImmutableSet<MethodDescriptor> getJavaOverriddenMethodDescriptors() {
     return getOverriddenMethodDescriptors(
         this::isOverride, MethodDescriptor::getJavaOverriddenMethodDescriptors);
   }
@@ -780,7 +780,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * the JavaScript perspective.
    */
   @Memoized
-  public Set<MethodDescriptor> getJsOverriddenMethodDescriptors() {
+  public ImmutableSet<MethodDescriptor> getJsOverriddenMethodDescriptors() {
     return getOverriddenMethodDescriptors(
         m -> m.getMangledName().equals(getMangledName()),
         MethodDescriptor::getJsOverriddenMethodDescriptors);
@@ -792,10 +792,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * <p>Note that the getOverriddenMethodsFn is passed as a parameter to take advantage of the
    * memoization and limit the computation cost.
    */
-  private Set<MethodDescriptor> getOverriddenMethodDescriptors(
+  private ImmutableSet<MethodDescriptor> getOverriddenMethodDescriptors(
       Predicate<MethodDescriptor> isOverrideFn,
       Function<MethodDescriptor, Set<MethodDescriptor>> getOverriddenMethodsFn) {
-    Set<MethodDescriptor> overriddenMethods = new LinkedHashSet<>();
+    if (!isPolymorphic()) {
+      return ImmutableSet.of();
+    }
+
+    ImmutableSet.Builder<MethodDescriptor> overriddenMethodsBuilder = new ImmutableSet.Builder<>();
 
     getEnclosingTypeDescriptor()
         .getSuperTypesStream()
@@ -803,11 +807,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .filter(isOverrideFn)
         .forEach(
             m -> {
-              overriddenMethods.add(m);
-              overriddenMethods.addAll(getOverriddenMethodsFn.apply(m));
+              overriddenMethodsBuilder.add(m);
+              overriddenMethodsBuilder.addAll(getOverriddenMethodsFn.apply(m));
             });
 
-    return overriddenMethods;
+    return overriddenMethodsBuilder.build();
   }
 
   public boolean isJsOverride() {
