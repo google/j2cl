@@ -68,7 +68,7 @@ open class GenericMethod<T> {
    val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
-   val nestedWildcardList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<out genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>?>? = null
+   val nestedWildcardList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<out genericmethod.GenericMethod.Container<*>?>?>? = null
    val nestedContent: genericmethod.GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)

@@ -31,11 +31,7 @@ internal fun Renderer.renderTypeDescriptor(
   asSimple: Boolean = false,
   asSuperType: Boolean = false
 ) {
-  renderTypeDescriptorRecursively(
-    typeDescriptor.fixRecursiveUpperBounds(),
-    asSimple = asSimple,
-    asSuperType = asSuperType
-  )
+  renderTypeDescriptorRecursively(typeDescriptor, asSimple = asSimple, asSuperType = asSuperType)
 }
 
 private fun Renderer.renderTypeDescriptorRecursively(
@@ -123,7 +119,20 @@ internal fun Renderer.renderTypeArguments(
   typeArguments: List<TypeDescriptor>
 ) {
   renderInAngleBrackets {
-    renderCommaSeparated(inferNonNullableBounds(typeParameters, typeArguments)) {
+    // TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
+    val nonRecursiveTypeArguments =
+      typeParameters.zip(typeArguments).map { (typeParameter, typeArgument) ->
+        val hasRecursiveUpperBound =
+          typeArgument is TypeVariable &&
+            typeArgument.isWildcardOrCapture &&
+            typeArgument.lowerBoundTypeDescriptor == null &&
+            typeArgument.upperBoundTypeDescriptor == typeParameter.upperBoundTypeDescriptor
+        // Technically speaking, createWildcard() does not create recursive wildcard, but will be
+        // rendered as "*" which is enough to fix the bug.
+        if (hasRecursiveUpperBound) TypeVariable.createWildcard() else typeArgument
+      }
+
+    renderCommaSeparated(inferNonNullableBounds(typeParameters, nonRecursiveTypeArguments)) {
       renderTypeDescriptorRecursively(it, asSimple = false, asSuperType = false)
     }
   }

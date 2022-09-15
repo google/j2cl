@@ -23,9 +23,9 @@ open class TypeWildCards {
 
  open fun unboundedRecursive(g: typewildcards.RecursiveType<*>?) {}
 
- open fun upperBoundRecursive(g: typewildcards.GenericType<out typewildcards.RecursiveType<out typewildcards.RecursiveType<T>?>?>?) {}
+ open fun upperBoundRecursive(g: typewildcards.GenericType<out typewildcards.RecursiveType<*>?>?) {}
 
- open fun lowerBoundRecursive(g: typewildcards.GenericType<in typewildcards.RecursiveType<out typewildcards.RecursiveType<T>?>?>?) {}
+ open fun lowerBoundRecursive(g: typewildcards.GenericType<in typewildcards.RecursiveType<*>?>?) {}
 
  open fun test() {
   this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<*>?)

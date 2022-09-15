@@ -117,25 +117,6 @@ internal val TypeDescriptor.isImplicitUpperBound
 internal val DeclaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors: List<TypeDescriptor>
   get() = typeArgumentDescriptors.take(typeDeclaration.directlyDeclaredTypeParameterCount)
 
-// TODO(b/245807463): Remove when the bug is fixed in the AST.
-internal fun TypeDescriptor.fixRecursiveUpperBounds(): TypeDescriptor = rewriteDeclared {
-  DeclaredTypeDescriptor.Builder.from(this)
-    .setTypeArgumentDescriptors(
-      typeDeclaration.typeParameterDescriptors.zip(typeArgumentDescriptors).map {
-        (parameter, argument) ->
-        val hasRecursiveUpperBound =
-          argument is TypeVariable &&
-            argument.isWildcardOrCapture &&
-            argument.lowerBoundTypeDescriptor == null &&
-            argument.upperBoundTypeDescriptor == parameter.upperBoundTypeDescriptor
-        // Technically speaking, createWildcard() does not create recursive wildcard, but will be
-        // rendered as "*" which is enough to fix the bug.
-        if (hasRecursiveUpperBound) TypeVariable.createWildcard() else argument
-      }
-    )
-    .build()
-}
-
 /** Returns direct super type to use for super method call. */
 internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
   methodDescriptor: MethodDescriptor
