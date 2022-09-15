@@ -80,7 +80,7 @@ private fun Renderer.renderSuperTypes(type: Type) {
 }
 
 internal fun Renderer.renderTypeBody(type: Type) {
-  copy(currentTypeDescriptor = type.typeDescriptor.toNonNullable()).run {
+  copy(currentType = type).run {
     render(" ")
     renderInCurlyBrackets {
       if (type.isEnum) {

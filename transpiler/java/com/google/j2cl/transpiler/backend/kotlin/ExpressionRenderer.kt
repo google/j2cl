@@ -530,7 +530,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
         superTypeDescriptor =
           qualifierTypeDescriptor.directSuperTypeForMethodCall(memberReference.target),
         qualifierTypeDescriptor =
-          qualifierTypeDescriptor.takeIf { !it.isSameBaseType(currentTypeDescriptor) }
+          qualifierTypeDescriptor.takeIf { it.typeDeclaration != currentType!!.declaration }
       )
       render(".")
     } else if (
