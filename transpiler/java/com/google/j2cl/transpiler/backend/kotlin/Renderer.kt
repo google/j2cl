@@ -19,6 +19,7 @@ import com.google.j2cl.common.Problems
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.Type
+import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 
 /** Renderer of the Kotlin source code. */
@@ -36,7 +37,10 @@ data class Renderer(
   val currentReturnLabelIdentifier: String? = null,
 
   /** Currently rendered type. */
-  val currentType: Type? = null
+  val currentType: Type? = null,
+
+  /** A set of seen type descriptors, used to detect recursion. */
+  val seenTypeDescriptors: Set<TypeDescriptor> = setOf()
 ) {
   fun renderNewLine() {
     sourceBuilder.newLine()
