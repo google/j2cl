@@ -53,6 +53,13 @@ import javax.annotation.Nullable;
 public abstract class TypeDeclaration
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
 
+  /** Kind of type declaration. */
+  public enum Kind {
+    CLASS,
+    ENUM,
+    INTERFACE
+  }
+
   /** Source language a type was written in. */
   public enum SourceLanguage {
     JAVA,

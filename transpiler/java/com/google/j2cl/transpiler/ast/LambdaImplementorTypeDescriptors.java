@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.List;
 import java.util.function.Function;
 import javax.annotation.Nullable;

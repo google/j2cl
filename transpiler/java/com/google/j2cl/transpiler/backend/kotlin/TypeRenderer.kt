@@ -15,10 +15,10 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.Kind
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import java.util.stream.Collectors

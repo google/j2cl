@@ -25,6 +25,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
