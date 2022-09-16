@@ -15,11 +15,15 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 
 internal val TypeDescriptor.isImplicitUpperBound
   get() = isJavaLangObject(this) && isNullable
@@ -72,3 +76,28 @@ internal fun TypeDescriptor.contains(typeVariable: TypeVariable): Boolean =
     is TypeVariable -> this == typeVariable
     else -> false
   }
+
+/** Returns whether this type is denotable as a top-level type of type argument. */
+internal val TypeDescriptor.isDenotable
+  get() =
+    when (this) {
+      is DeclaredTypeDescriptor -> !typeDeclaration.isAnonymous
+      is TypeVariable -> !isWildcardOrCapture
+      is IntersectionTypeDescriptor -> false
+      is UnionTypeDescriptor -> false
+      is PrimitiveTypeDescriptor -> true
+      is ArrayTypeDescriptor -> true
+      else -> error("Unhandled $this")
+    }
+
+internal fun inferNonNullableBounds(
+  typeParameters: List<TypeVariable>,
+  typeArguments: List<TypeDescriptor>
+): List<TypeDescriptor> = typeParameters.zip(typeArguments, ::inferNonNullableBounds)
+
+internal fun inferNonNullableBounds(
+  typeParameter: TypeVariable,
+  typeArgument: TypeDescriptor
+): TypeDescriptor =
+  if (!typeParameter.upperBoundTypeDescriptor.isNullable) typeArgument.toNonNullable()
+  else typeArgument

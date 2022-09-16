@@ -22,195 +22,167 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
-import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 
-// TODO(b/246842682): Remove "asSuperType" parameter when bridge types are materialized as
-// TypeDescriptors
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
   asSimple: Boolean = false,
   asSuperType: Boolean = false,
   projectRawToWildcards: Boolean = false
-) {
-  renderTypeDescriptorRecursively(
-    typeDescriptor,
-    asSimple = asSimple,
-    asSuperType = asSuperType,
-    projectRawToWildcards = projectRawToWildcards
-  )
-}
-
-private fun Renderer.renderTypeDescriptorRecursively(
-  typeDescriptor: TypeDescriptor,
-  asSimple: Boolean = false,
-  asSuperType: Boolean = false,
-  projectRawToWildcards: Boolean = false
-) {
-  copy(seenTypeDescriptors = seenTypeDescriptors + typeDescriptor.toNonNullable()).run {
-    when (typeDescriptor) {
-      is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
-      is DeclaredTypeDescriptor ->
-        renderDeclaredTypeDescriptor(
-          typeDescriptor,
-          asSimple = asSimple,
-          asSuperType = asSuperType,
-          projectRawToWildcards = projectRawToWildcards
-        )
-      is PrimitiveTypeDescriptor -> renderQualifiedName(typeDescriptor)
-      is TypeVariable -> renderTypeVariable(typeDescriptor)
-      is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
-      else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
-    }
-  }
-}
-
-private fun Renderer.renderNullableSuffix(typeDescriptor: TypeDescriptor) {
-  if (typeDescriptor.isNullable) render("?")
-}
-
-private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDescriptor) {
-  renderQualifiedName(arrayTypeDescriptor)
-  val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
-  if (!componentTypeDescriptor.isPrimitive) {
-    renderInAngleBrackets { renderTypeDescriptorRecursively(componentTypeDescriptor) }
-  }
-  renderNullableSuffix(arrayTypeDescriptor)
-}
-
-private fun Renderer.renderDeclaredTypeDescriptor(
-  declaredTypeDescriptor: DeclaredTypeDescriptor,
-  asSimple: Boolean = false,
-  asSuperType: Boolean = false,
-  projectRawToWildcards: Boolean = false
-) {
-  val typeDeclaration = declaredTypeDescriptor.typeDeclaration
-  val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
-  if (typeDeclaration.isLocal || asSimple) {
-    // Skip rendering package name or enclosing type.
-    renderQualifiedName(declaredTypeDescriptor, asSimple = true, asSuperType = asSuperType)
-  } else if (enclosingTypeDescriptor != null) {
-    // Render the enclosing type if present.
-    if (!typeDeclaration.isCapturingEnclosingInstance) {
-      renderQualifiedName(enclosingTypeDescriptor)
-    } else {
-      renderDeclaredTypeDescriptor(
-        enclosingTypeDescriptor.toNonNullable(),
-        projectRawToWildcards = projectRawToWildcards
-      )
-    }
-    render(".")
-    renderIdentifier(typeDeclaration.ktSimpleName)
-  } else {
-    renderQualifiedName(declaredTypeDescriptor, asSuperType = asSuperType)
-  }
-  renderTypeArguments(
-    declaredTypeDescriptor,
-    asSuperType = asSuperType,
-    projectRawToWildcards = projectRawToWildcards
-  )
-  renderNullableSuffix(declaredTypeDescriptor)
-}
-
-private fun Renderer.renderTypeArguments(
-  declaredTypeDescriptor: DeclaredTypeDescriptor,
-  asSuperType: Boolean,
-  projectRawToWildcards: Boolean
-) {
-  val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
-  val arguments =
-    declaredTypeDescriptor.directlyDeclaredNonRawTypeArgumentDescriptors(
-      projectToWildcards = projectRawToWildcards
+) =
+  TypeDescriptorRenderer(
+      this,
+      asSimple = asSimple,
+      asSuperType = asSuperType,
+      projectRawToWildcards = projectRawToWildcards
     )
-  if (arguments.isNotEmpty()) {
-    if (!asSuperType || arguments.all { it.isDenotable }) {
-      renderTypeArguments(parameters, arguments, projectRawToWildcards = projectRawToWildcards)
-    }
-  }
-}
+    .render(typeDescriptor)
 
 internal fun Renderer.renderTypeArguments(
   typeParameters: List<TypeVariable>,
-  typeArguments: List<TypeDescriptor>,
-  projectRawToWildcards: Boolean = false
-) {
-  renderInAngleBrackets {
-    // TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
-    val nonRecursiveTypeArguments =
-      typeParameters.zip(typeArguments).map { (typeParameter, typeArgument) ->
-        val hasRecursiveUpperBound =
-          typeArgument is TypeVariable &&
-            typeArgument.isWildcardOrCapture &&
-            typeArgument.lowerBoundTypeDescriptor == null &&
-            typeArgument.upperBoundTypeDescriptor == typeParameter.upperBoundTypeDescriptor
-        // Technically speaking, createWildcard() does not create recursive wildcard, but will be
-        // rendered as "*" which is enough to fix the bug.
-        if (hasRecursiveUpperBound) TypeVariable.createWildcard() else typeArgument
-      }
-
-    renderCommaSeparated(inferNonNullableBounds(typeParameters, nonRecursiveTypeArguments)) {
-      renderTypeDescriptorRecursively(it, projectRawToWildcards = projectRawToWildcards)
-    }
-  }
-}
-
-private fun inferNonNullableBounds(
-  typeParameters: List<TypeVariable>,
   typeArguments: List<TypeDescriptor>
-): List<TypeDescriptor> = typeParameters.zip(typeArguments, ::inferNonNullableBounds)
+) = TypeDescriptorRenderer(this).renderArguments(typeParameters, typeArguments)
 
-private fun inferNonNullableBounds(
-  typeParameter: TypeVariable,
-  typeArgument: TypeDescriptor
-): TypeDescriptor =
-  if (!typeParameter.upperBoundTypeDescriptor.isNullable) typeArgument.toNonNullable()
-  else typeArgument
+/** Type descriptor renderer. */
+private data class TypeDescriptorRenderer(
+  /** The underlying renderer. */
+  val renderer: Renderer,
 
-private fun Renderer.renderTypeVariable(typeVariable: TypeVariable) {
-  if (typeVariable.isWildcardOrCapture) {
-    val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
-    if (lowerBoundTypeDescriptor != null) {
-      render("in ")
-      renderTypeDescriptorRecursively(lowerBoundTypeDescriptor)
-    } else {
-      val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
-      val isRecursive = seenTypeDescriptors.contains(boundTypeDescriptor)
-      if (isRecursive || boundTypeDescriptor.isImplicitUpperBound) {
-        render("*")
-      } else {
-        render("out ")
-        renderTypeDescriptorRecursively(boundTypeDescriptor)
+  /** Set of seen type descriptors used to detect recursion. */
+  val seenTypeDescriptors: Set<TypeDescriptor> = setOf(),
+
+  /** Whether to render simple name. */
+  val asSimple: Boolean = false,
+
+  // TODO(b/246842682): Remove when bridge types are materialized as TypeDescriptors
+  /** Whether to render a super-type, using bridge name if present. */
+  val asSuperType: Boolean = false,
+
+  /** Whether to project RAW types to wildcards, or bounds. */
+  val projectRawToWildcards: Boolean = false
+) {
+  /** Renderer for child type descriptors, including: arguments, bounds, intersections, etc... */
+  val child
+    get() = copy(asSimple = false, asSuperType = false)
+
+  fun render(typeDescriptor: TypeDescriptor) {
+    copy(seenTypeDescriptors = seenTypeDescriptors + typeDescriptor.toNonNullable()).run {
+      when (typeDescriptor) {
+        is ArrayTypeDescriptor -> renderArray(typeDescriptor)
+        is DeclaredTypeDescriptor -> renderDeclared(typeDescriptor)
+        is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor)
+        is TypeVariable -> renderVariable(typeDescriptor)
+        is IntersectionTypeDescriptor -> renderIntersection(typeDescriptor)
+        else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
       }
     }
-  } else {
-    renderName(typeVariable.toNullable())
-    renderNullableSuffix(typeVariable)
   }
-}
 
-private fun Renderer.renderIntersectionTypeDescriptor(
-  intersectionTypeDescriptor: IntersectionTypeDescriptor
-) {
-  // Render only the first type from the intersection and comment out others, as they are not
-  // supported in Kotlin.
-  // TODO(b/205367162): Support intersection types.
-  val typeDescriptors = intersectionTypeDescriptor.intersectionTypeDescriptors
-  renderTypeDescriptorRecursively(typeDescriptors.first())
-  render(" ")
-  renderInCommentBrackets {
-    render("& ")
-    renderSeparatedWith(typeDescriptors.drop(1), " & ") { renderTypeDescriptorRecursively(it) }
-  }
-}
-
-/** Returns whether this type is denotable as a top-level type of type argument. */
-internal val TypeDescriptor.isDenotable
-  get() =
-    when (this) {
-      is DeclaredTypeDescriptor -> !typeDeclaration.isAnonymous
-      is TypeVariable -> !isWildcardOrCapture
-      is IntersectionTypeDescriptor -> false
-      is UnionTypeDescriptor -> false
-      is PrimitiveTypeDescriptor -> true
-      is ArrayTypeDescriptor -> true
-      else -> error("Unhandled $this")
+  fun renderArray(arrayTypeDescriptor: ArrayTypeDescriptor) {
+    renderer.renderQualifiedName(arrayTypeDescriptor)
+    val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
+    if (!componentTypeDescriptor.isPrimitive) {
+      renderer.renderInAngleBrackets { child.render(componentTypeDescriptor) }
     }
+    renderNullableSuffix(arrayTypeDescriptor)
+  }
+
+  fun renderDeclared(declaredTypeDescriptor: DeclaredTypeDescriptor) {
+    val typeDeclaration = declaredTypeDescriptor.typeDeclaration
+    val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
+    if (typeDeclaration.isLocal || asSimple) {
+      // Skip rendering package name or enclosing type.
+      renderer.renderQualifiedName(
+        declaredTypeDescriptor,
+        asSimple = true,
+        asSuperType = asSuperType
+      )
+    } else if (enclosingTypeDescriptor != null) {
+      // Render the enclosing type if present.
+      if (!typeDeclaration.isCapturingEnclosingInstance) {
+        renderer.renderQualifiedName(enclosingTypeDescriptor)
+      } else {
+        child.renderDeclared(enclosingTypeDescriptor.toNonNullable())
+      }
+      renderer.render(".")
+      renderer.renderIdentifier(typeDeclaration.ktSimpleName)
+    } else {
+      renderer.renderQualifiedName(declaredTypeDescriptor, asSuperType = asSuperType)
+    }
+    renderArguments(declaredTypeDescriptor)
+    renderNullableSuffix(declaredTypeDescriptor)
+  }
+
+  fun renderArguments(declaredTypeDescriptor: DeclaredTypeDescriptor) {
+    val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
+    val arguments =
+      declaredTypeDescriptor.directlyDeclaredNonRawTypeArgumentDescriptors(
+        projectToWildcards = projectRawToWildcards
+      )
+    if (arguments.isNotEmpty()) {
+      if (!asSuperType || arguments.all { it.isDenotable }) {
+        renderArguments(parameters, arguments)
+      }
+    }
+  }
+
+  fun renderArguments(parameters: List<TypeVariable>, arguments: List<TypeDescriptor>) {
+    renderer.renderInAngleBrackets {
+      // TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
+      val nonRecursiveArguments =
+        parameters.zip(arguments).map { (parameter, argument) ->
+          val hasRecursiveUpperBound =
+            argument is TypeVariable &&
+              argument.isWildcardOrCapture &&
+              argument.lowerBoundTypeDescriptor == null &&
+              argument.upperBoundTypeDescriptor == parameter.upperBoundTypeDescriptor
+          // Technically speaking, createWildcard() does not create recursive wildcard, but will
+          // be
+          // rendered as "*" which is enough to fix the bug.
+          if (hasRecursiveUpperBound) TypeVariable.createWildcard() else argument
+        }
+
+      renderer.renderCommaSeparated(inferNonNullableBounds(parameters, nonRecursiveArguments)) {
+        child.render(it)
+      }
+    }
+  }
+
+  fun renderVariable(typeVariable: TypeVariable) {
+    if (typeVariable.isWildcardOrCapture) {
+      val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
+      if (lowerBoundTypeDescriptor != null) {
+        renderer.render("in ")
+        child.render(lowerBoundTypeDescriptor)
+      } else {
+        val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
+        val isRecursive = seenTypeDescriptors.contains(boundTypeDescriptor)
+        if (isRecursive || boundTypeDescriptor.isImplicitUpperBound) {
+          renderer.render("*")
+        } else {
+          renderer.render("out ")
+          child.render(boundTypeDescriptor)
+        }
+      }
+    } else {
+      renderer.renderName(typeVariable.toNullable())
+      renderNullableSuffix(typeVariable)
+    }
+  }
+
+  fun renderIntersection(typeDescriptor: IntersectionTypeDescriptor) {
+    // Render only the first type from the intersection and comment out others, as they are not
+    // supported in Kotlin.
+    // TODO(b/205367162): Support intersection types.
+    val typeDescriptors = typeDescriptor.intersectionTypeDescriptors
+    child.render(typeDescriptors.first())
+    renderer.render(" ")
+    renderer.renderInCommentBrackets {
+      renderer.render("& ")
+      renderer.renderSeparatedWith(typeDescriptors.drop(1), " & ") { child.render(it) }
+    }
+  }
+
+  fun renderNullableSuffix(typeDescriptor: TypeDescriptor) {
+    if (typeDescriptor.isNullable) renderer.render("?")
+  }
+}
