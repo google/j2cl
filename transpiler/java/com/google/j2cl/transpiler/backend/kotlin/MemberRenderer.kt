@@ -105,7 +105,7 @@ private fun Renderer.renderMethodHeader(method: Method) {
   } else {
     render(if (method.descriptor.isKtProperty) "val " else "fun ")
     val typeParameters = methodDescriptor.typeParameterTypeDescriptors
-    if (typeParameters.isNotEmpty() && typeParameters.all { it.isDenotable }) {
+    if (typeParameters.isNotEmpty()) {
       renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors)
       render(" ")
     }
