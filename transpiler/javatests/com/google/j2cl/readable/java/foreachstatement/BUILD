@@ -7,6 +7,5 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/202428351): Support Generics in J2KT.
-    build_kt_readables = False,
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

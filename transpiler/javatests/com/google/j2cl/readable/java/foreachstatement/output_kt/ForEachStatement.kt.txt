@@ -43,9 +43,9 @@ open class ForEachStatement {
   }
  }
 
- open class IterableReturningTypeVariable<T: kotlin.collections.MutableIterator<kotlin.Int?>?>: javaemul.lang.JavaIterable<kotlin.Int?> {
+ open class IterableReturningTypeVariable<T: kotlin.collections.MutableIterator<kotlin.Int?>>: javaemul.lang.JavaIterable<kotlin.Int?> {
   open override fun iterator(): T {
-   return null as T
+   return null!!
   }
  }
 }

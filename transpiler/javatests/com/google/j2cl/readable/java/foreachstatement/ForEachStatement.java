@@ -16,6 +16,7 @@
 package foreachstatement;
 
 import java.util.Iterator;
+import jsinterop.annotations.JsNonNull;
 
 public class ForEachStatement {
   public void test(Iterable<Throwable> iterable) {
@@ -48,7 +49,7 @@ public class ForEachStatement {
     }
   }
 
-  static class IterableReturningTypeVariable<T extends Iterator<Integer>>
+  static class IterableReturningTypeVariable<T extends @JsNonNull Iterator<Integer>>
       implements Iterable<Integer> {
     public T iterator() {
       return null;
