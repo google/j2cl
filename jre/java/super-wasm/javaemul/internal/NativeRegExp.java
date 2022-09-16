@@ -17,10 +17,8 @@ package javaemul.internal;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
 
 /** Simple class to work with native js regular expressions. */
-@JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
 public class NativeRegExp {
   private final WasmExtern instance;
 
