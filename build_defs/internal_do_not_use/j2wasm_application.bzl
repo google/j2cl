@@ -209,6 +209,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # Specific list of passes: The order and count of these flags does
             # matter. First -O3 will be the slowest, so we isolate it in a
             # stage1 invocation (due to go/forge-limits for time).
+            "--gufa",
             "-O3",
         ],
         binaryen_stage2_args = [
