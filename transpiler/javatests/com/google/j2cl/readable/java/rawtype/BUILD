@@ -7,6 +7,4 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    # This tests breaks in Kotlin 1.7.
-    build_kt_readables = False,
 )
