@@ -28,7 +28,6 @@ public class Nullability {
           "jsinterop.annotations.JsNullable",
           // Annotations defined by JSpecify.
           "org.jspecify.nullness.Nullable",
-          "org.jspecify.nullness.NullnessUnspecified",
           // Annotations supported by Checker Framework. J2CL currently supports the full list of
           // Nullable and NonNull annotations supported by Checker Framework
           // (see https://checkerframework.org/manual/#nullness-related-work). This is important
@@ -64,6 +63,8 @@ public class Nullability {
       ImmutableSet.of(
           // JsInterop non-null annotation.
           "jsinterop.annotations.JsNonNull",
+          // Annotations defined by JSpecify.
+          "org.jspecify.nullness.NonNull",
           // Annotations supported by Checker Framework.
           "android.annotation.NonNull",
           "android.support.annotation.NonNull",
