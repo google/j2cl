@@ -1,0 +1,50 @@
+goog.module('varargs.Varargs.FunctionalInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const FunctionalInterface = goog.require('varargs.Varargs.FunctionalInterface$impl');
+
+/**
+ * @implements {FunctionalInterface}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(Array<?string>):void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(Array<?string>):void} @nodts*/
+  this.f_fn__varargs_Varargs_FunctionalInterface_$LambdaAdaptor;
+  this.$ctor__varargs_Varargs_FunctionalInterface_$LambdaAdaptor__varargs_Varargs_FunctionalInterface_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__varargs_Varargs_FunctionalInterface_$LambdaAdaptor__varargs_Varargs_FunctionalInterface_$JsFunction__void(/** ?function(Array<?string>):void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__varargs_Varargs_FunctionalInterface_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts */
+ m_apply__arrayOf_java_lang_String__void(/** Array<?string> */ arg0) {
+  {
+   let $function = this.f_fn__varargs_Varargs_FunctionalInterface_$LambdaAdaptor;
+   $function(arg0);
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+FunctionalInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'varargs.Varargs$FunctionalInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Varargs$FunctionalInterface$$LambdaAdaptor.js.map

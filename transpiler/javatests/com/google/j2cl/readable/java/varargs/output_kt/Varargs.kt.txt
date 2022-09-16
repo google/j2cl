@@ -18,8 +18,10 @@ open class Varargs {
  open fun testSerializable(vararg args: java.io.Serializable?) {}
 
  open fun testAssignment(vararg args: kotlin.Any?) {
-  this.args = args as kotlin.Array<kotlin.Any?>?
+  this.args = args as kotlin.Array<*>? as kotlin.Array<kotlin.Any?>?
  }
+
+ open fun testLambda(functionalInterface: varargs.Varargs.FunctionalInterface?) {}
 
  open fun main() {
   val v: varargs.Varargs? = varargs.Varargs()
@@ -30,6 +32,9 @@ open class Varargs {
   v!!.test(1)
   v!!.testCloneable()
   v!!.testSerializable()
+  v!!.testLambda(varargs.Varargs.FunctionalInterface { it: kotlin.Array<out kotlin.String?>? ->
+   this.args = it as kotlin.Array<kotlin.Any?>?
+  })
  }
 
  companion object {
@@ -40,6 +45,10 @@ open class Varargs {
   fun <E> bar(a: E, b: E) {
    varargs.Varargs.`fun`<E>(a, b)
   }
+ }
+
+ fun interface FunctionalInterface {
+  fun apply(vararg strings: kotlin.String?)
  }
 }
 

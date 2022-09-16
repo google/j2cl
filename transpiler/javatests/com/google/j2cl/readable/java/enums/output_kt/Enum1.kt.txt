@@ -24,7 +24,7 @@ enum class Enum2 {
 
  constructor(foo: kotlin.Enum<*>?): this(foo!!.ordinal)
 
- constructor(vararg somePars: kotlin.Any?): this((somePars as kotlin.Array<kotlin.Any?>?)!!.size)
+ constructor(vararg somePars: kotlin.Any?): this((somePars as kotlin.Array<*>?)!!.size)
 
  open fun specialMethods() {
   val o1: kotlin.Int = enums.Enum2.valueOf(null!!)!!.ordinal

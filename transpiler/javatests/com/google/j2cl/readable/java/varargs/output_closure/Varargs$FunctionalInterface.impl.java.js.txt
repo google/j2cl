@@ -1,0 +1,42 @@
+goog.module('varargs.Varargs.FunctionalInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('varargs.Varargs.FunctionalInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class FunctionalInterface {
+ /** @abstract @nodts */
+ m_apply__arrayOf_java_lang_String__void(/** Array<?string> */ strings) {}
+ /** @nodts @return {FunctionalInterface} */
+ static $adapt(/** ?function(Array<?string>):void */ fn) {
+  FunctionalInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  FunctionalInterface.$clinit = () =>{};
+  FunctionalInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__varargs_Varargs_FunctionalInterface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__varargs_Varargs_FunctionalInterface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('varargs.Varargs.FunctionalInterface.$LambdaAdaptor$impl');
+ }
+}
+FunctionalInterface.$markImplementor(/**@type {Function}*/ (FunctionalInterface));
+$Util.$setClassMetadataForInterface(FunctionalInterface, 'varargs.Varargs$FunctionalInterface');
+
+exports = FunctionalInterface;
+
+//# sourceMappingURL=Varargs$FunctionalInterface.js.map

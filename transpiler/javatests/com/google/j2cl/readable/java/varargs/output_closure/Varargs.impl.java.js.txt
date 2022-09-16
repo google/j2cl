@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
+let FunctionalInterface = goog.forwardDeclare('varargs.Varargs.FunctionalInterface$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -51,6 +52,8 @@ class Varargs extends j_l_Object {
  m_testAssignment__arrayOf_java_lang_Object__void(/** Array<*> */ args) {
   this.f_args__varargs_Varargs_ = args;
  }
+ /** @nodts */
+ m_testLambda__varargs_Varargs_FunctionalInterface__void(/** FunctionalInterface */ functionalInterface) {}
  /** @nodts @template T */
  static m_fun__arrayOf_java_lang_Object__void(/** Array<T> */ elements) {
   Varargs.$clinit();
@@ -70,6 +73,9 @@ class Varargs extends j_l_Object {
   v.m_test__int__arrayOf_java_lang_Object__void(1, /**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
   v.m_testCloneable__arrayOf_java_lang_Cloneable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
   v.m_testSerializable__arrayOf_java_io_Serializable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+  v.m_testLambda__varargs_Varargs_FunctionalInterface__void(FunctionalInterface.$adapt((/** Array<?string> */ it) =>{
+   this.f_args__varargs_Varargs_ = it;
+  }));
  }
  /** @nodts */
  static $clinit() {
@@ -84,6 +90,7 @@ class Varargs extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
+  FunctionalInterface = goog.module.get('varargs.Varargs.FunctionalInterface$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }

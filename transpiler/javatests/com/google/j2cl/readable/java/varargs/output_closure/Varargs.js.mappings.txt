@@ -30,6 +30,8 @@
 [testAssignment] => [m_testAssignment__arrayOf_java_lang_Object__void]
 [args] => [args] "args"
 [this.args = args;] => [this.f_args__varargs_Varargs_ = args;] "varargs.Varargs.testAssignment"
+[testLambda] => [m_testLambda__varargs_Varargs_FunctionalInterface__void]
+[functionalInterface] => [functionalInterface] "functionalInterface"
 [fun] => [m_fun__arrayOf_java_lang_Object__void]
 [elements] => [elements] "elements"
 [{}] => [Varargs.$clinit();] "varargs.Varargs.fun"
@@ -50,6 +52,11 @@
 [v.test(1, new Object[][] {});] => [v.m_test__int__arrayOf_java_lang_Object__void(1, /**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));] "varargs.Varargs.main"
 [v.testCloneable(new Object[][] {});] => [v.m_testCloneable__arrayOf_java_lang_Cloneable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));] "varargs.Varargs.main"
 [v.testSerializable(new Object[][] {});] => [v.m_testSerializable__arrayOf_java_io_Serializable__void(/**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));] "varargs.Varargs.main"
+[v.testLambda(it -> args = it);] => [v.m_testLambda__varargs_Varargs_FunctionalInterface__void(FunctionalInterface.$adapt((/** Array<?string> */ it) =>{
+   this.f_args__varargs_Varargs_ = it;
+  }));] "varargs.Varargs.main"
+[it] => [it] "it"
+[args = it] => [this.f_args__varargs_Varargs_ = it;] "varargs.Varargs.<lambda in main>"
 [Varargs] => [$clinit]
 [Varargs] => [Varargs.$clinit = () =>{};] "varargs.Varargs.<clinit>"
 [Varargs] => [Varargs.$loadModules();] "varargs.Varargs.<clinit>"

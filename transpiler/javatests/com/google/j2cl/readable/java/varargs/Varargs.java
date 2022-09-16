@@ -18,6 +18,10 @@ package varargs;
 import java.io.Serializable;
 
 public class Varargs {
+  interface FunctionalInterface {
+    void apply(String... strings);
+  }
+
   private Object[] args;
 
   public Varargs(int... args) {}
@@ -36,6 +40,8 @@ public class Varargs {
     this.args = args;
   }
 
+  public void testLambda(FunctionalInterface functionalInterface) {}
+
   public static <T> void fun(T... elements) {}
 
   public static <E> void bar(E a, E b) {
@@ -51,6 +57,7 @@ public class Varargs {
     v.test(1, new Object[][] {});
     v.testCloneable(new Object[][] {});
     v.testSerializable(new Object[][] {});
+    v.testLambda(it -> args = it);
   }
 }
 

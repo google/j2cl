@@ -85,7 +85,7 @@ open class AutoBoxing {
 
  open fun sumWithoutBoxing(vararg numbers: kotlin.Any?): kotlin.Double {
   var sum: kotlin.Double = 0.0
-  FOR_EACH@ for (number in (numbers as kotlin.Array<kotlin.Any?>?)!!) {
+  FOR_EACH@ for (number in (numbers as kotlin.Array<*>?)!!) {
    sum = sum + (number as kotlin.Double?)!!.toDouble()
   }
   return sum
@@ -93,7 +93,7 @@ open class AutoBoxing {
 
  open fun sumWithoutBoxingJsVarargs(vararg numbers: kotlin.Any?): kotlin.Double {
   var sum: kotlin.Double = 0.0
-  FOR_EACH@ for (number in (numbers as kotlin.Array<kotlin.Any?>?)!!) {
+  FOR_EACH@ for (number in (numbers as kotlin.Array<*>?)!!) {
    sum = sum + (number as kotlin.Double?)!!.toDouble()
   }
   return sum

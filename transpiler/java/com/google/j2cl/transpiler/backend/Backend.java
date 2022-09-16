@@ -121,6 +121,7 @@ import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
+import com.google.j2cl.transpiler.passes.NormalizeVarargParametersKotlin;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
@@ -455,6 +456,7 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
+          NormalizeVarargParametersKotlin::new,
           NormalizeLiteralsKotlin::new,
           NormalizeFieldInitializationKotlin::new,
           NormalizeLabels::new,
