@@ -132,7 +132,7 @@ private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarati
   renderIdentifier(fieldDescriptor.name!!)
   if (!fieldDescriptor.typeDescriptor.isProtobufBuilder()) {
     render(": ")
-    renderTypeDescriptor(fieldDescriptor.typeDescriptor.toNonRaw())
+    renderTypeDescriptor(fieldDescriptor.typeDescriptor)
   }
   render(" = ")
   renderExpression(declaration.expression)
@@ -209,7 +209,7 @@ private fun Renderer.renderTryStatement(tryStatement: TryStatement) {
       renderInParentheses {
         renderName(catchVariable)
         render(": ")
-        renderTypeDescriptor(catchType.toNonNullable().toNonRaw())
+        renderTypeDescriptor(catchType.toNonNullable())
       }
       render(" ")
       renderBlock(catchClause.body)

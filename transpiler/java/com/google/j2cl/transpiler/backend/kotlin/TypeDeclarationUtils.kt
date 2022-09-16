@@ -45,3 +45,6 @@ internal fun TypeDeclaration.ktSimpleName(asSuperType: Boolean = false) =
 
 internal fun TypeDeclaration.ktQualifiedName(asSuperType: Boolean = false) =
   if (asSuperType) ktBridgeQualifiedName ?: ktQualifiedName else ktQualifiedName
+
+internal val TypeDeclaration.isRecursive: Boolean
+  get() = typeParameterDescriptors.any { it.upperBoundTypeDescriptor.contains(it) }

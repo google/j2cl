@@ -29,21 +29,33 @@ import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
   asSimple: Boolean = false,
-  asSuperType: Boolean = false
+  asSuperType: Boolean = false,
+  projectRawToWildcards: Boolean = false
 ) {
-  renderTypeDescriptorRecursively(typeDescriptor, asSimple = asSimple, asSuperType = asSuperType)
+  renderTypeDescriptorRecursively(
+    typeDescriptor,
+    asSimple = asSimple,
+    asSuperType = asSuperType,
+    projectRawToWildcards = projectRawToWildcards
+  )
 }
 
 private fun Renderer.renderTypeDescriptorRecursively(
   typeDescriptor: TypeDescriptor,
-  asSimple: Boolean,
-  asSuperType: Boolean
+  asSimple: Boolean = false,
+  asSuperType: Boolean = false,
+  projectRawToWildcards: Boolean = false
 ) {
   copy(seenTypeDescriptors = seenTypeDescriptors + typeDescriptor.toNonNullable()).run {
     when (typeDescriptor) {
       is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
       is DeclaredTypeDescriptor ->
-        renderDeclaredTypeDescriptor(typeDescriptor, asSimple = asSimple, asSuperType = asSuperType)
+        renderDeclaredTypeDescriptor(
+          typeDescriptor,
+          asSimple = asSimple,
+          asSuperType = asSuperType,
+          projectRawToWildcards = projectRawToWildcards
+        )
       is PrimitiveTypeDescriptor -> renderQualifiedName(typeDescriptor)
       is TypeVariable -> renderTypeVariable(typeDescriptor)
       is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
@@ -60,21 +72,16 @@ private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDes
   renderQualifiedName(arrayTypeDescriptor)
   val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
   if (!componentTypeDescriptor.isPrimitive) {
-    renderInAngleBrackets {
-      renderTypeDescriptorRecursively(
-        componentTypeDescriptor,
-        asSimple = false,
-        asSuperType = false
-      )
-    }
+    renderInAngleBrackets { renderTypeDescriptorRecursively(componentTypeDescriptor) }
   }
   renderNullableSuffix(arrayTypeDescriptor)
 }
 
 private fun Renderer.renderDeclaredTypeDescriptor(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
-  asSimple: Boolean,
-  asSuperType: Boolean
+  asSimple: Boolean = false,
+  asSuperType: Boolean = false,
+  projectRawToWildcards: Boolean = false
 ) {
   val typeDeclaration = declaredTypeDescriptor.typeDeclaration
   val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
@@ -88,8 +95,7 @@ private fun Renderer.renderDeclaredTypeDescriptor(
     } else {
       renderDeclaredTypeDescriptor(
         enclosingTypeDescriptor.toNonNullable(),
-        asSimple = false,
-        asSuperType = false
+        projectRawToWildcards = projectRawToWildcards
       )
     }
     render(".")
@@ -97,26 +103,35 @@ private fun Renderer.renderDeclaredTypeDescriptor(
   } else {
     renderQualifiedName(declaredTypeDescriptor, asSuperType = asSuperType)
   }
-  renderTypeArguments(declaredTypeDescriptor, asSuperType = asSuperType)
+  renderTypeArguments(
+    declaredTypeDescriptor,
+    asSuperType = asSuperType,
+    projectRawToWildcards = projectRawToWildcards
+  )
   renderNullableSuffix(declaredTypeDescriptor)
 }
 
 private fun Renderer.renderTypeArguments(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
-  asSuperType: Boolean
+  asSuperType: Boolean,
+  projectRawToWildcards: Boolean
 ) {
   val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
-  val arguments = declaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors
+  val arguments =
+    declaredTypeDescriptor.directlyDeclaredNonRawTypeArgumentDescriptors(
+      projectToWildcards = projectRawToWildcards
+    )
   if (arguments.isNotEmpty()) {
     if (!asSuperType || arguments.all { it.isDenotable }) {
-      renderTypeArguments(parameters, arguments)
+      renderTypeArguments(parameters, arguments, projectRawToWildcards = projectRawToWildcards)
     }
   }
 }
 
 internal fun Renderer.renderTypeArguments(
   typeParameters: List<TypeVariable>,
-  typeArguments: List<TypeDescriptor>
+  typeArguments: List<TypeDescriptor>,
+  projectRawToWildcards: Boolean = false
 ) {
   renderInAngleBrackets {
     // TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
@@ -133,7 +148,7 @@ internal fun Renderer.renderTypeArguments(
       }
 
     renderCommaSeparated(inferNonNullableBounds(typeParameters, nonRecursiveTypeArguments)) {
-      renderTypeDescriptorRecursively(it, asSimple = false, asSuperType = false)
+      renderTypeDescriptorRecursively(it, projectRawToWildcards = projectRawToWildcards)
     }
   }
 }
@@ -155,11 +170,7 @@ private fun Renderer.renderTypeVariable(typeVariable: TypeVariable) {
     val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
     if (lowerBoundTypeDescriptor != null) {
       render("in ")
-      renderTypeDescriptorRecursively(
-        lowerBoundTypeDescriptor,
-        asSimple = false,
-        asSuperType = false
-      )
+      renderTypeDescriptorRecursively(lowerBoundTypeDescriptor)
     } else {
       val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
       val isRecursive = seenTypeDescriptors.contains(boundTypeDescriptor)
@@ -167,7 +178,7 @@ private fun Renderer.renderTypeVariable(typeVariable: TypeVariable) {
         render("*")
       } else {
         render("out ")
-        renderTypeDescriptorRecursively(boundTypeDescriptor, asSimple = false, asSuperType = false)
+        renderTypeDescriptorRecursively(boundTypeDescriptor)
       }
     }
   } else {
@@ -183,13 +194,11 @@ private fun Renderer.renderIntersectionTypeDescriptor(
   // supported in Kotlin.
   // TODO(b/205367162): Support intersection types.
   val typeDescriptors = intersectionTypeDescriptor.intersectionTypeDescriptors
-  renderTypeDescriptorRecursively(typeDescriptors.first(), asSimple = false, asSuperType = false)
+  renderTypeDescriptorRecursively(typeDescriptors.first())
   render(" ")
   renderInCommentBrackets {
     render("& ")
-    renderSeparatedWith(typeDescriptors.drop(1), " & ") {
-      renderTypeDescriptorRecursively(it, asSimple = false, asSuperType = false)
-    }
+    renderSeparatedWith(typeDescriptors.drop(1), " & ") { renderTypeDescriptorRecursively(it) }
   }
 }
 

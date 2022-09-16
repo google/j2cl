@@ -106,7 +106,7 @@ private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
     PrimitiveTypes.DOUBLE -> render("kotlin.doubleArrayOf")
     else -> {
       render("kotlin.arrayOf")
-      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonRaw()) }
+      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
     }
   }
   renderInParentheses {
@@ -143,14 +143,14 @@ private fun Renderer.renderCastExpression(expression: CastExpression) {
     render(".let { ")
     castTypeDescriptor.intersectionTypeDescriptors.forEach {
       render("it as ")
-      renderTypeDescriptor(it.toNonRaw())
+      renderTypeDescriptor(it)
       render("; ")
     }
     render("it }")
   } else {
     renderExpression(expression.expression)
     render(" as ")
-    renderTypeDescriptor(expression.castTypeDescriptor.toNonRaw())
+    renderTypeDescriptor(expression.castTypeDescriptor)
   }
 }
 
@@ -192,7 +192,7 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
   val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!.toNonNullable()
-  renderTypeDescriptor(functionalInterface.toNonRaw(), asSuperType = true)
+  renderTypeDescriptor(functionalInterface, asSuperType = true)
   render(" ")
   renderInCurlyBrackets {
     val parameters = functionExpression.parameters
@@ -220,7 +220,8 @@ private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOf
     render("kotlin.Array<*>")
   } else {
     renderTypeDescriptor(
-      instanceOfExpression.testTypeDescriptor.toNonNullable().toNonRaw(projectToWildcards = true)
+      instanceOfExpression.testTypeDescriptor.toNonNullable(),
+      projectRawToWildcards = true
     )
   }
 }
@@ -292,7 +293,7 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   renderIdentifier(expression.target.ktName)
   if (!expression.target.isKtProperty) {
     val typeParameters = methodDescriptor.declarationDescriptor.typeParameterTypeDescriptors
-    val typeArguments = methodDescriptor.typeArgumentTypeDescriptors.map { it.toNonRaw() }
+    val typeArguments = methodDescriptor.typeArgumentTypeDescriptors
     if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
       renderTypeArguments(typeParameters, typeArguments)
     }
@@ -362,7 +363,7 @@ private fun Renderer.renderNewArray(
       renderArrayOfNulls(componentTypeDescriptor, firstDimension)
     } else {
       render("kotlin.Array")
-      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonRaw()) }
+      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
       renderInCurlyBrackets {
@@ -400,7 +401,7 @@ private fun Renderer.renderArrayOfNulls(
   dimension: Expression
 ) {
   render("kotlin.arrayOfNulls")
-  renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonNullable().toNonRaw()) }
+  renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonNullable()) }
   renderInParentheses { renderExpression(dimension) }
 }
 
@@ -416,7 +417,7 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   // simple type name.
   val typeDeclaration = typeDescriptor.typeDeclaration
   renderTypeDescriptor(
-    typeDescriptor.toNonRaw(),
+    typeDescriptor,
     asSuperType = true,
     asSimple = typeDeclaration.isCapturingEnclosingInstance
   )
@@ -504,7 +505,7 @@ fun Renderer.renderVariable(variable: Variable) {
   val typeDescriptor = variable.typeDescriptor
   if (typeDescriptor.isDenotable && !typeDescriptor.isProtobufBuilder()) {
     render(": ")
-    renderTypeDescriptor(typeDescriptor.toNonRaw())
+    renderTypeDescriptor(typeDescriptor)
   }
 }
 
