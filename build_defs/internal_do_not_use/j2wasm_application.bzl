@@ -50,7 +50,6 @@ def _impl_j2wasm_application(ctx):
 
     args = ctx.actions.args()
     args.add("--enable-exception-handling")
-    args.add("--enable-typed-function-references")
     args.add("--enable-gc")
     args.add("--enable-reference-types")
     args.add("--enable-sign-ext")
