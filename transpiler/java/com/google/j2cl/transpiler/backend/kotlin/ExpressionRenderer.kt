@@ -292,10 +292,9 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
   renderIdentifier(expression.target.ktName)
   if (!expression.target.isKtProperty) {
-    val typeParameters = methodDescriptor.declarationDescriptor.typeParameterTypeDescriptors
-    val typeArguments = methodDescriptor.typeArgumentTypeDescriptors
+    val typeArguments = methodDescriptor.typeArguments
     if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
-      renderTypeArguments(typeParameters, typeArguments)
+      renderTypeArguments(typeArguments)
     }
     renderInvocationArguments(expression)
   }

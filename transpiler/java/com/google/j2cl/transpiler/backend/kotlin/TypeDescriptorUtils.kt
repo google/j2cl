@@ -89,15 +89,3 @@ internal val TypeDescriptor.isDenotable
       is ArrayTypeDescriptor -> true
       else -> error("Unhandled $this")
     }
-
-internal fun inferNonNullableBounds(
-  typeParameters: List<TypeVariable>,
-  typeArguments: List<TypeDescriptor>
-): List<TypeDescriptor> = typeParameters.zip(typeArguments, ::inferNonNullableBounds)
-
-internal fun inferNonNullableBounds(
-  typeParameter: TypeVariable,
-  typeArgument: TypeDescriptor
-): TypeDescriptor =
-  if (!typeParameter.upperBoundTypeDescriptor.isNullable) typeArgument.toNonNullable()
-  else typeArgument

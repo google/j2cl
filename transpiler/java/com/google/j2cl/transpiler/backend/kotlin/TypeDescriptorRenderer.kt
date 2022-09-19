@@ -37,10 +37,8 @@ internal fun Renderer.renderTypeDescriptor(
     )
     .render(typeDescriptor)
 
-internal fun Renderer.renderTypeArguments(
-  typeParameters: List<TypeVariable>,
-  typeArguments: List<TypeDescriptor>
-) = TypeDescriptorRenderer(this).renderArguments(typeParameters, typeArguments)
+internal fun Renderer.renderTypeArguments(typeArguments: List<TypeArgument>) =
+  TypeDescriptorRenderer(this).renderArguments(typeArguments)
 
 /** Type descriptor renderer. */
 private data class TypeDescriptorRenderer(
@@ -113,37 +111,18 @@ private data class TypeDescriptorRenderer(
   }
 
   fun renderArguments(declaredTypeDescriptor: DeclaredTypeDescriptor) {
-    val parameters = declaredTypeDescriptor.typeDeclaration.directlyDeclaredTypeParameterDescriptors
     val arguments =
-      declaredTypeDescriptor.directlyDeclaredNonRawTypeArgumentDescriptors(
-        projectToWildcards = projectRawToWildcards
-      )
+      declaredTypeDescriptor.typeArguments(projectRawToWildcards = projectRawToWildcards)
     if (arguments.isNotEmpty()) {
       if (!asSuperType || arguments.all { it.isDenotable }) {
-        renderArguments(parameters, arguments)
+        renderArguments(arguments)
       }
     }
   }
 
-  fun renderArguments(parameters: List<TypeVariable>, arguments: List<TypeDescriptor>) {
+  fun renderArguments(arguments: List<TypeArgument>) {
     renderer.renderInAngleBrackets {
-      // TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
-      val nonRecursiveArguments =
-        parameters.zip(arguments).map { (parameter, argument) ->
-          val hasRecursiveUpperBound =
-            argument is TypeVariable &&
-              argument.isWildcardOrCapture &&
-              argument.lowerBoundTypeDescriptor == null &&
-              argument.upperBoundTypeDescriptor == parameter.upperBoundTypeDescriptor
-          // Technically speaking, createWildcard() does not create recursive wildcard, but will
-          // be
-          // rendered as "*" which is enough to fix the bug.
-          if (hasRecursiveUpperBound) TypeVariable.createWildcard() else argument
-        }
-
-      renderer.renderCommaSeparated(inferNonNullableBounds(parameters, nonRecursiveArguments)) {
-        child.render(it)
-      }
+      renderer.renderCommaSeparated(arguments) { child.render(it.typeDescriptor) }
     }
   }
 
