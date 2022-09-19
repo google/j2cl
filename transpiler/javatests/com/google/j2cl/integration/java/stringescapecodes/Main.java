@@ -15,6 +15,7 @@
  */
 package stringescapecodes;
 
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 /**
@@ -29,6 +30,7 @@ public class Main {
     testSpecialEscapes();
     testUnicodeEscapes();
     testOctalEscapes();
+    testInvalidEscapes();
   }
 
   private static void testEmptyStringLiteral() {
@@ -75,5 +77,16 @@ public class Main {
     assertTrue("\0155".equals(String.valueOf((char) (1 * 8 + 5) + "5")));
 
     assertTrue("\u001b[31m".equals("\033[31m"));
+  }
+
+  private static void testInvalidEscapes() {
+    // Even though the escape sequence "\\uXXXX" has a meaning in Unicode, in Java each of those
+    // is interpreted as the numeric value of a char. It is possible to construct strings that
+    // are not valid unicode strings, such as the ones here where there is only the first character
+    // for a surrogate pair.
+    assertTrue("\uD801".equals("\uD801"));
+    assertFalse("\uD801".equals("\uD802"));
+    assertTrue("\uD800".equals("\uD800"));
+    assertFalse("\uD800".equals("\uDC00"));
   }
 }
