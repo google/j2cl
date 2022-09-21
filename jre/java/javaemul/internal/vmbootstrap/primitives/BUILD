@@ -7,7 +7,7 @@ load(":generate_primitive.bzl", "generate_primitive_type")
 
 package(
     default_visibility = ["//jre/java:__pkg__"],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 # You can see the generated file with following commands:
