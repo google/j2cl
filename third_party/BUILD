@@ -13,12 +13,6 @@ alias(
     actual = "@com_google_guava",
 )
 
-java_library(
-    name = "apache_commons_text",
-    exports = ["@org_apache_commons_text//jar"],
-    runtime_deps = ["@org_apache_commons_lang3//jar"],
-)
-
 alias(
     name = "jsr305_annotations",
     actual = "@com_google_code_findbugs_jsr305",

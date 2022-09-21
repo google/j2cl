@@ -19,9 +19,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.common.StringUtils;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import org.apache.commons.text.StringEscapeUtils;
 
 /** String literal node. */
 @Visitable
@@ -38,12 +38,7 @@ public class StringLiteral extends Literal {
 
   @Override
   public String getSourceText() {
-    return "\'" + escapeJavaString(value) + "\'";
-  }
-
-  private static String escapeJavaString(String string) {
-    // NOTE: StringEscapeUtils.escapeEcmaScript does not escape unprintable character 127 (delete).
-    return StringEscapeUtils.escapeEcmaScript(string).replace("\u007f", "\\u007F");
+    return "\'" + StringUtils.escape(value) + "\'";
   }
 
   public ImmutableList<NumberLiteral> toCharLiterals() {

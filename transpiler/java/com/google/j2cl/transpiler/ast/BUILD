@@ -7,7 +7,6 @@ java_library(
     name = "ast",
     srcs = glob(["*.java"]),
     deps = [
-        "//third_party:apache_commons_text",
         "//third_party:auto_value",
         "//third_party:guava",
         "//third_party:jsr305_annotations",

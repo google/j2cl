@@ -74,22 +74,6 @@ def setup_j2cl_workspace(**kwargs):
     )
 
     jvm_maven_import_external(
-        name = "org_apache_commons_lang3",
-        artifact = "org.apache.commons:commons-lang3:3.6",
-        server_urls = _MAVEN_CENTRAL_URLS,
-        licenses = ["notice"],
-        artifact_sha256 = "89c27f03fff18d0b06e7afd7ef25e209766df95b6c1269d6c3ebbdea48d5f284",
-    )
-
-    jvm_maven_import_external(
-        name = "org_apache_commons_text",
-        artifact = "org.apache.commons:commons-text:1.2",
-        server_urls = _MAVEN_CENTRAL_URLS,
-        licenses = ["notice"],
-        artifact_sha256 = "d4a57bbc1627da7c391308fd0fe910b83170fb66afd117236a5b111d2db1590b",
-    )
-
-    jvm_maven_import_external(
         name = "org_apache_velocity",
         artifact = "org.apache.velocity:velocity:1.7",
         server_urls = _MAVEN_CENTRAL_URLS,
