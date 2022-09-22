@@ -73,6 +73,8 @@ internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
 internal fun TypeDescriptor.contains(typeVariable: TypeVariable): Boolean =
   when (this) {
     is DeclaredTypeDescriptor -> typeArgumentDescriptors.any { it.contains(typeVariable) }
+    is IntersectionTypeDescriptor -> intersectionTypeDescriptors.any { it.contains(typeVariable) }
+    is ArrayTypeDescriptor -> componentTypeDescriptor?.contains(typeVariable) ?: false
     is TypeVariable -> this == typeVariable
     else -> false
   }
@@ -89,3 +91,43 @@ internal val TypeDescriptor.isDenotable
       is ArrayTypeDescriptor -> true
       else -> error("Unhandled $this")
     }
+
+internal val TypeVariable.hasNullableBounds: Boolean
+  get() = upperBoundTypeDescriptor.isNullable && hasNullableRecursiveBounds
+
+internal val TypeVariable.hasNullableRecursiveBounds: Boolean
+  get() = upperBoundTypeDescriptors.all { it.canBeNullableAsBound }
+
+/** Whether this type can be nullable when declared as an upper bound. */
+internal val TypeDescriptor.canBeNullableAsBound: Boolean
+  get() = this !is DeclaredTypeDescriptor || typeDeclaration.canBeNullableAsBound
+
+/** Returns a version of this type descriptor where {@code canBeNull()} returns false. */
+internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
+  when (this) {
+    is DeclaredTypeDescriptor -> toNonNullable()
+    is TypeVariable ->
+      if (!isWildcardOrCapture || upperBoundTypeDescriptor.isImplicitUpperBound) this
+      else
+        TypeVariable.Builder.from(this)
+          .setUpperBoundTypeDescriptorSupplier { upperBoundTypeDescriptor.makeNonNull() }
+          // Set some unique ID to avoid conflict with other type variables.
+          // TODO(b/246332093): Remove when the bug is fixed, and uniqueId reflects bounds properly.
+          .setUniqueKey(
+            "<??>" +
+              "+${upperBoundTypeDescriptor.makeNonNull().uniqueId}" +
+              "-${lowerBoundTypeDescriptor?.uniqueId}"
+          )
+          .build()
+    is IntersectionTypeDescriptor ->
+      IntersectionTypeDescriptor.newBuilder()
+        .setIntersectionTypeDescriptors(intersectionTypeDescriptors.map { it.makeNonNull() })
+        .build()
+    is UnionTypeDescriptor ->
+      UnionTypeDescriptor.newBuilder()
+        .setUnionTypeDescriptors(unionTypeDescriptors.map { it.makeNonNull() })
+        .build()
+    is PrimitiveTypeDescriptor -> toNonNullable()
+    is ArrayTypeDescriptor -> toNonNullable()
+    else -> error("Unhandled $this")
+  }

@@ -6,9 +6,16 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
+let Marker = goog.forwardDeclare('nullability.Marker$impl');
 let ParameterizedDefaultNullability = goog.forwardDeclare('nullability.Nullability.ParameterizedDefaultNullability$impl');
 let ParameterizedNonNullable = goog.forwardDeclare('nullability.Nullability.ParameterizedNonNullable$impl');
 let ParameterizedNullable = goog.forwardDeclare('nullability.Nullability.ParameterizedNullable$impl');
+let Recursive = goog.forwardDeclare('nullability.Nullability.Recursive$impl');
+let RecursiveChild = goog.forwardDeclare('nullability.Nullability.RecursiveChild$impl');
+let RecursiveNullable = goog.forwardDeclare('nullability.Nullability.RecursiveNullable$impl');
+let RecursiveNullableChild = goog.forwardDeclare('nullability.Nullability.RecursiveNullableChild$impl');
+let RecursiveNullableParam = goog.forwardDeclare('nullability.Nullability.RecursiveNullableParam$impl');
+let RecursiveParam = goog.forwardDeclare('nullability.Nullability.RecursiveParam$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -115,6 +122,39 @@ class Nullability extends j_l_Object {
   j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable__java_lang_Object_$pp_nullability(), j_l_String)));
   j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability__java_lang_Object_$pp_nullability(), j_l_String)));
  }
+ /** @nodts */
+ static m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedDefaultNullability__void(/** ParameterizedDefaultNullability<?> */ nonNullable) {
+  Nullability.$clinit();
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable__java_lang_Object_$pp_nullability(), j_l_String)));
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable__java_lang_Object_$pp_nullability(), j_l_String)));
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability__java_lang_Object_$pp_nullability(), j_l_String)));
+ }
+ /** @nodts */
+ static m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNullable__void(/** ParameterizedNullable<?> */ nonNullable) {
+  Nullability.$clinit();
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable__java_lang_Object_$pp_nullability(), j_l_String)));
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable__java_lang_Object_$pp_nullability(), j_l_String)));
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability__java_lang_Object_$pp_nullability(), j_l_String)));
+ }
+ /** @nodts */
+ static m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNonNullable__void(/** ParameterizedNonNullable<?> */ nonNullable) {
+  Nullability.$clinit();
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable__java_lang_Object_$pp_nullability(), j_l_String)));
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable__java_lang_Object_$pp_nullability(), j_l_String)));
+  j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability__java_lang_Object_$pp_nullability(), j_l_String)));
+ }
+ /** @nodts @template T */
+ static m_testRecursive__void() {
+  Nullability.$clinit();
+  let generic = /**@type {!RecursiveParam<T>}*/ (RecursiveParam.$create__());
+  let parametrized = /**@type {!RecursiveParam<RecursiveChild>}*/ (RecursiveParam.$create__());
+ }
+ /** @nodts @template T */
+ static m_testRecursiveNullable__void() {
+  Nullability.$clinit();
+  let generic = /**@type {!RecursiveNullableParam<T>}*/ (RecursiveNullableParam.$create__());
+  let parametrized = /**@type {!RecursiveNullableParam<RecursiveNullableChild>}*/ (RecursiveNullableParam.$create__());
+ }
  /** @private @nodts */
  $init__void_$p_nullability_Nullability() {
   this.f_f1__nullability_Nullability_ = 'Hello';
@@ -144,6 +184,8 @@ class Nullability extends j_l_Object {
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
+  RecursiveNullableParam = goog.module.get('nullability.Nullability.RecursiveNullableParam$impl');
+  RecursiveParam = goog.module.get('nullability.Nullability.RecursiveParam$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

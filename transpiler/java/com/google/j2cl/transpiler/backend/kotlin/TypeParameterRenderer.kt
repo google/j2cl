@@ -32,11 +32,12 @@ internal fun Renderer.renderWhereClause(typeVariables: List<TypeVariable>) {
   }
 }
 
-private val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
+internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
   get() =
     upperBoundTypeDescriptor
       .let { if (it is IntersectionTypeDescriptor) it.intersectionTypeDescriptors else listOf(it) }
       .filter { !it.isImplicitUpperBound }
+      .map { if (!it.canBeNullableAsBound) it.toNonNullable() else it }
 
 private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
   renderName(typeVariable)

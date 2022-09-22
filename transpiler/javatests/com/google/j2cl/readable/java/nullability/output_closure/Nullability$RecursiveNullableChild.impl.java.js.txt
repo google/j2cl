@@ -1,0 +1,46 @@
+goog.module('nullability.Nullability.RecursiveNullableChild$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Marker = goog.require('nullability.Marker$impl');
+const RecursiveNullable = goog.require('nullability.Nullability.RecursiveNullable$impl');
+
+/**
+ * @extends {RecursiveNullable<RecursiveNullableChild>}
+ * @implements {Marker}
+ */
+class RecursiveNullableChild extends RecursiveNullable {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!RecursiveNullableChild} */
+ static $create__() {
+  RecursiveNullableChild.$clinit();
+  let $instance = new RecursiveNullableChild();
+  $instance.$ctor__nullability_Nullability_RecursiveNullableChild__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_Nullability_RecursiveNullableChild__void() {
+  this.$ctor__nullability_Nullability_RecursiveNullable__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveNullableChild.$clinit = () =>{};
+  RecursiveNullableChild.$loadModules();
+  RecursiveNullable.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecursiveNullableChild;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Marker.$markImplementor(RecursiveNullableChild);
+$Util.$setClassMetadata(RecursiveNullableChild, 'nullability.Nullability$RecursiveNullableChild');
+
+exports = RecursiveNullableChild;
+
+//# sourceMappingURL=Nullability$RecursiveNullableChild.js.map

@@ -206,4 +206,49 @@ public class Nullability {
     nonNullable.getNullable().length();
     nonNullable.getDefaultNullability().length();
   }
+
+  static void testDefaultNullabilityWildcards(
+      ParameterizedDefaultNullability<? extends String> nonNullable) {
+    nonNullable.getNonNullable().length();
+    nonNullable.getNullable().length();
+    nonNullable.getDefaultNullability().length();
+  }
+
+  static void testDefaultNullabilityWildcards(ParameterizedNullable<? extends String> nonNullable) {
+    nonNullable.getNonNullable().length();
+    nonNullable.getNullable().length();
+    nonNullable.getDefaultNullability().length();
+  }
+
+  static void testDefaultNullabilityWildcards(
+      ParameterizedNonNullable<? extends String> nonNullable) {
+    nonNullable.getNonNullable().length();
+    nonNullable.getNullable().length();
+    nonNullable.getDefaultNullability().length();
+  }
+
+  static class Recursive<T extends @JsNonNull Recursive<T> & Marker> {}
+
+  static class RecursiveNullable<T extends RecursiveNullable<T> & Marker> {}
+
+  static class RecursiveChild extends Recursive<RecursiveChild> implements Marker {}
+
+  static class RecursiveNullableChild extends RecursiveNullable<RecursiveNullableChild>
+      implements Marker {}
+
+  static class RecursiveParam<T extends Recursive<T> & Marker> {}
+
+  static class RecursiveNullableParam<T extends RecursiveNullable<T> & Marker> {}
+
+  static <T extends Recursive<T> & Marker> void testRecursive() {
+    RecursiveParam<T> generic = new RecursiveParam<>();
+    RecursiveParam<RecursiveChild> parametrized = new RecursiveParam<>();
+  }
+
+  static <T extends RecursiveNullable<T> & Marker> void testRecursiveNullable() {
+    RecursiveNullableParam<T> generic = new RecursiveNullableParam<>();
+    RecursiveNullableParam<RecursiveNullableChild> parametrized = new RecursiveNullableParam<>();
+  }
 }
+
+interface Marker {}

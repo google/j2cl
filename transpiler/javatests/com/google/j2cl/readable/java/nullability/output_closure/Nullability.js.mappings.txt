@@ -133,6 +133,51 @@
 [nonNullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
 [nonNullable.getNullable().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
 [nonNullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testNonNullableBounds"
+[testDefaultNullabilityWildcards] => [m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedDefaultNullability__void]
+[nonNullable] => [nonNullable] "nonNullable"
+[{
+    nonNullable.getNonNullable().length();
+...    nonNullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getNullable().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[testDefaultNullabilityWildcards] => [m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNullable__void]
+[nonNullable] => [nonNullable] "nonNullable"
+[{
+    nonNullable.getNonNullable().length();
+...    nonNullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getNullable().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[testDefaultNullabilityWildcards] => [m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNonNullable__void]
+[nonNullable] => [nonNullable] "nonNullable"
+[{
+    nonNullable.getNonNullable().length();
+...    nonNullable.getDefaultNullability().length();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getNonNullable().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNonNullable__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getNullable().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getNullable__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[nonNullable.getDefaultNullability().length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(nonNullable.m_getDefaultNullability__java_lang_Object_$pp_nullability(), j_l_String)));] "nullability.Nullability.testDefaultNullabilityWildcards"
+[testRecursive] => [m_testRecursive__void]
+[{
+    RecursiveParam<T> generic = new RecursiveParam<>();
+    RecursiveParam<RecursiveChild> parametrized = new RecursiveParam<>();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testRecursive"
+[RecursiveParam<T> generic = new RecursiveParam<>();] => [let generic = /**@type {!RecursiveParam<T>}*/ (RecursiveParam.$create__());] "nullability.Nullability.testRecursive"
+[generic] => [generic] "generic"
+[RecursiveParam<RecursiveChild> parametrized = new RecursiveParam<>();] => [let parametrized = /**@type {!RecursiveParam<RecursiveChild>}*/ (RecursiveParam.$create__());] "nullability.Nullability.testRecursive"
+[parametrized] => [parametrized] "parametrized"
+[testRecursiveNullable] => [m_testRecursiveNullable__void]
+[{
+    RecursiveNullableParam<T> generic = new RecursiveNullableParam<>();
+    RecursiveNullableParam<RecursiveNullableChild> parametrized = new RecursiveNullableParam<>();
+  }] => [Nullability.$clinit();] "nullability.Nullability.testRecursiveNullable"
+[RecursiveNullableParam<T> generic = new RecursiveNullableParam<>();] => [let generic = /**@type {!RecursiveNullableParam<T>}*/ (RecursiveNullableParam.$create__());] "nullability.Nullability.testRecursiveNullable"
+[generic] => [generic] "generic"
+[RecursiveNullableParam<RecursiveNullableChild> parametrized = new RecursiveNullableParam<>();] => [let parametrized = /**@type {!RecursiveNullableParam<RecursiveNullableChild>}*/ (RecursiveNullableParam.$create__());] "nullability.Nullability.testRecursiveNullable"
+[parametrized] => [parametrized] "parametrized"
 [Nullability] => [$init__void_$p_nullability_Nullability]
 [@Nonnull private String f1 = "Hello";] => [this.f_f1__nullability_Nullability_ = 'Hello';] "nullability.Nullability.<init>"
 [private String f2 = null;] => [this.f_f2__nullability_Nullability_ = null;] "nullability.Nullability.<init>"

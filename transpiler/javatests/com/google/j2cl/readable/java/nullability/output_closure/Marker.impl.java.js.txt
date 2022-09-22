@@ -1,0 +1,31 @@
+goog.module('nullability.Marker$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class Marker {
+ /** @nodts */
+ static $clinit() {
+  Marker.$clinit = () =>{};
+  Marker.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nullability_Marker = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nullability_Marker;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Marker.$markImplementor(/**@type {Function}*/ (Marker));
+$Util.$setClassMetadataForInterface(Marker, 'nullability.Marker');
+
+exports = Marker;
+
+//# sourceMappingURL=Marker.js.map

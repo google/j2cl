@@ -1,0 +1,46 @@
+goog.module('nullability.Nullability.RecursiveChild$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Marker = goog.require('nullability.Marker$impl');
+const Recursive = goog.require('nullability.Nullability.Recursive$impl');
+
+/**
+ * @extends {Recursive<RecursiveChild>}
+ * @implements {Marker}
+ */
+class RecursiveChild extends Recursive {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!RecursiveChild} */
+ static $create__() {
+  RecursiveChild.$clinit();
+  let $instance = new RecursiveChild();
+  $instance.$ctor__nullability_Nullability_RecursiveChild__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_Nullability_RecursiveChild__void() {
+  this.$ctor__nullability_Nullability_Recursive__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveChild.$clinit = () =>{};
+  RecursiveChild.$loadModules();
+  Recursive.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecursiveChild;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Marker.$markImplementor(RecursiveChild);
+$Util.$setClassMetadata(RecursiveChild, 'nullability.Nullability$RecursiveChild');
+
+exports = RecursiveChild;
+
+//# sourceMappingURL=Nullability$RecursiveChild.js.map

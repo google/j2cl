@@ -1,0 +1,45 @@
+goog.module('nullability.Nullability.RecursiveNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Marker = goog.forwardDeclare('nullability.Marker$impl');
+
+/**
+ * @template T
+ */
+class RecursiveNullable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!RecursiveNullable<T>} */
+ static $create__() {
+  RecursiveNullable.$clinit();
+  let $instance = new RecursiveNullable();
+  $instance.$ctor__nullability_Nullability_RecursiveNullable__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_Nullability_RecursiveNullable__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveNullable.$clinit = () =>{};
+  RecursiveNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecursiveNullable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(RecursiveNullable, 'nullability.Nullability$RecursiveNullable');
+
+exports = RecursiveNullable;
+
+//# sourceMappingURL=Nullability$RecursiveNullable.js.map

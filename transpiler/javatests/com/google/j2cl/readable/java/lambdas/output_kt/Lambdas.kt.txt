@@ -93,7 +93,7 @@ open class Lambdas {
   return null
  }
 
- open fun <T: kotlin.Enum<T>?> testLambdaWithGenerics() {
+ open fun <T: kotlin.Enum<T>> testLambdaWithGenerics() {
   this.callWithTypeVariable<kotlin.Error?>(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Error?> { i: kotlin.Error? ->
    return@GenericFunctionalInterface i
   }, kotlin.Error())
@@ -149,7 +149,7 @@ open class Lambdas {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Enum<T>?> callTypeVariableWithBounds(intf: lambdas.Lambdas.GenericFunctionalInterface<kotlin.Enum<T>?>?, e: kotlin.Enum<T>?): kotlin.Enum<T>? {
+  fun <T: kotlin.Enum<T>> callTypeVariableWithBounds(intf: lambdas.Lambdas.GenericFunctionalInterface<kotlin.Enum<T>?>?, e: kotlin.Enum<T>?): kotlin.Enum<T>? {
    return intf!!.m(e)
   }
 

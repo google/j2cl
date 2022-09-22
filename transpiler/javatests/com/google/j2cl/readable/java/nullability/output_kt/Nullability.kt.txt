@@ -98,6 +98,39 @@ open class Nullability {
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
   }
+
+  @kotlin.jvm.JvmStatic
+  fun testDefaultNullabilityWildcards(nonNullable: nullability.Nullability.ParameterizedDefaultNullability<out kotlin.String?>?) {
+   nonNullable!!.getNonNullable()!!.length
+   nonNullable!!.getNullable()!!.length
+   nonNullable!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun testDefaultNullabilityWildcards(nonNullable: nullability.Nullability.ParameterizedNullable<out kotlin.String?>?) {
+   nonNullable!!.getNonNullable()!!.length
+   nonNullable!!.getNullable()!!.length
+   nonNullable!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun testDefaultNullabilityWildcards(nonNullable: nullability.Nullability.ParameterizedNonNullable<out kotlin.String>?) {
+   nonNullable!!.getNonNullable()!!.length
+   nonNullable!!.getNullable()!!.length
+   nonNullable!!.getDefaultNullability()!!.length
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T> testRecursive() where T: nullability.Nullability.Recursive<T>, T: nullability.Marker? {
+   val generic: nullability.Nullability.RecursiveParam<T>? = nullability.Nullability.RecursiveParam<T>()
+   val parametrized: nullability.Nullability.RecursiveParam<nullability.Nullability.RecursiveChild>? = nullability.Nullability.RecursiveParam<nullability.Nullability.RecursiveChild>()
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <T> testRecursiveNullable() where T: nullability.Nullability.RecursiveNullable<T>?, T: nullability.Marker? {
+   val generic: nullability.Nullability.RecursiveNullableParam<T>? = nullability.Nullability.RecursiveNullableParam<T>()
+   val parametrized: nullability.Nullability.RecursiveNullableParam<nullability.Nullability.RecursiveNullableChild?>? = nullability.Nullability.RecursiveNullableParam<nullability.Nullability.RecursiveNullableChild?>()
+  }
  }
 
  open class Foo<T> {
@@ -181,4 +214,18 @@ open class Nullability {
    return null!!
   }
  }
+
+ open class Recursive<T> where T: nullability.Nullability.Recursive<T>, T: nullability.Marker? {}
+
+ open class RecursiveNullable<T> where T: nullability.Nullability.RecursiveNullable<T>?, T: nullability.Marker? {}
+
+ open class RecursiveChild: nullability.Marker, nullability.Nullability.Recursive<nullability.Nullability.RecursiveChild>() {}
+
+ open class RecursiveNullableChild: nullability.Marker, nullability.Nullability.RecursiveNullable<nullability.Nullability.RecursiveNullableChild?>() {}
+
+ open class RecursiveParam<T> where T: nullability.Nullability.Recursive<T>, T: nullability.Marker? {}
+
+ open class RecursiveNullableParam<T> where T: nullability.Nullability.RecursiveNullable<T>?, T: nullability.Marker? {}
 }
+
+interface Marker {}

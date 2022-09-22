@@ -1,6 +1,9 @@
 ;;; Code for nullability.Nullability [static fields]
 (global $f_$initialized__nullability_Nullability (mut i32) (i32.const 0))
 
+;;; Code for nullability.Marker [static fields]
+(global $f_$initialized__nullability_Marker (mut i32) (i32.const 0))
+
 ;;; Code for nullability.Nullability.Foo [static fields]
 (global $f_$initialized__nullability_Nullability_Foo (mut i32) (i32.const 0))
 
@@ -30,6 +33,24 @@
 
 ;;; Code for nullability.Nullability.ParameterizedNonNullable [static fields]
 (global $f_$initialized__nullability_Nullability_ParameterizedNonNullable (mut i32) (i32.const 0))
+
+;;; Code for nullability.Nullability.Recursive [static fields]
+(global $f_$initialized__nullability_Nullability_Recursive (mut i32) (i32.const 0))
+
+;;; Code for nullability.Nullability.RecursiveNullable [static fields]
+(global $f_$initialized__nullability_Nullability_RecursiveNullable (mut i32) (i32.const 0))
+
+;;; Code for nullability.Nullability.RecursiveChild [static fields]
+(global $f_$initialized__nullability_Nullability_RecursiveChild (mut i32) (i32.const 0))
+
+;;; Code for nullability.Nullability.RecursiveNullableChild [static fields]
+(global $f_$initialized__nullability_Nullability_RecursiveNullableChild (mut i32) (i32.const 0))
+
+;;; Code for nullability.Nullability.RecursiveParam [static fields]
+(global $f_$initialized__nullability_Nullability_RecursiveParam (mut i32) (i32.const 0))
+
+;;; Code for nullability.Nullability.RecursiveNullableParam [static fields]
+(global $f_$initialized__nullability_Nullability_RecursiveNullableParam (mut i32) (i32.const 0))
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [static fields]
 (global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable (mut i32) (i32.const 0))
@@ -398,6 +419,96 @@
 
 ;;; Code for nullability.Nullability.ParameterizedNonNullable [itable.init]
 (global $nullability.Nullability.ParameterizedNonNullable.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nullability.Nullability.Recursive [vtable.init]
+(global $nullability.Nullability.Recursive.vtable (ref $nullability.Nullability.Recursive.vtable) 
+ (struct.new $nullability.Nullability.Recursive.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.Nullability.Recursive)
+ )
+)
+
+;;; Code for nullability.Nullability.Recursive [itable.init]
+(global $nullability.Nullability.Recursive.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nullability.Nullability.RecursiveNullable [vtable.init]
+(global $nullability.Nullability.RecursiveNullable.vtable (ref $nullability.Nullability.RecursiveNullable.vtable) 
+ (struct.new $nullability.Nullability.RecursiveNullable.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullable)
+ )
+)
+
+;;; Code for nullability.Nullability.RecursiveNullable [itable.init]
+(global $nullability.Nullability.RecursiveNullable.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nullability.Nullability.RecursiveChild [vtable.init]
+(global $nullability.Nullability.RecursiveChild.vtable (ref $nullability.Nullability.RecursiveChild.vtable) 
+ (struct.new $nullability.Nullability.RecursiveChild.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveChild)
+ )
+)
+
+;;; Code for nullability.Nullability.RecursiveChild [itable.init]
+(global $nullability.Nullability.RecursiveChild.itable (ref $itable) (array.init_static $itable 
+ (struct.new $nullability.Marker.vtable
+  (ref.null data)
+ )
+ ))
+
+;;; Code for nullability.Nullability.RecursiveNullableChild [vtable.init]
+(global $nullability.Nullability.RecursiveNullableChild.vtable (ref $nullability.Nullability.RecursiveNullableChild.vtable) 
+ (struct.new $nullability.Nullability.RecursiveNullableChild.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullableChild)
+ )
+)
+
+;;; Code for nullability.Nullability.RecursiveNullableChild [itable.init]
+(global $nullability.Nullability.RecursiveNullableChild.itable (ref $itable) (array.init_static $itable 
+ (struct.new $nullability.Marker.vtable
+  (ref.null data)
+ )
+ ))
+
+;;; Code for nullability.Nullability.RecursiveParam [vtable.init]
+(global $nullability.Nullability.RecursiveParam.vtable (ref $nullability.Nullability.RecursiveParam.vtable) 
+ (struct.new $nullability.Nullability.RecursiveParam.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveParam)
+ )
+)
+
+;;; Code for nullability.Nullability.RecursiveParam [itable.init]
+(global $nullability.Nullability.RecursiveParam.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nullability.Nullability.RecursiveNullableParam [vtable.init]
+(global $nullability.Nullability.RecursiveNullableParam.vtable (ref $nullability.Nullability.RecursiveNullableParam.vtable) 
+ (struct.new $nullability.Nullability.RecursiveNullableParam.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullableParam)
+ )
+)
+
+;;; Code for nullability.Nullability.RecursiveNullableParam [itable.init]
+(global $nullability.Nullability.RecursiveNullableParam.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [vtable.init]
@@ -1065,6 +1176,156 @@
  )
 )
 
+;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedDefaultNullability<? extends String> nonNullable)
+(func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedDefaultNullability__void@nullability.Nullability
+ (param $nonNullable (ref null $nullability.Nullability.ParameterizedDefaultNullability))
+ ;;@ nullability/Nullability.java:210:14
+ (local $$qualifier (ref null $java.lang.String))
+ (local $$qualifier_1 (ref null $java.lang.String))
+ (local $$qualifier_2 (ref null $java.lang.String))
+ (block
+  ;; nullability.Nullability.$clinit();
+  ;;@ nullability/Nullability.java:211:69
+  (call $$clinit__void@nullability.Nullability )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getNonNullable());
+   ;;@ nullability/Nullability.java:212:4
+   (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:212:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
+  )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getNullable());
+   ;;@ nullability/Nullability.java:213:4
+   (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:213:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
+  )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getDefaultNullability());
+   ;;@ nullability/Nullability.java:214:4
+   (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedDefaultNullability.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedDefaultNullability $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:214:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
+  )
+ )
+)
+
+;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedNullable<? extends String> nonNullable)
+(func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNullable__void@nullability.Nullability
+ (param $nonNullable (ref null $nullability.Nullability.ParameterizedNullable))
+ ;;@ nullability/Nullability.java:217:14
+ (local $$qualifier (ref null $java.lang.String))
+ (local $$qualifier_1 (ref null $java.lang.String))
+ (local $$qualifier_2 (ref null $java.lang.String))
+ (block
+  ;; nullability.Nullability.$clinit();
+  ;;@ nullability/Nullability.java:217:99
+  (call $$clinit__void@nullability.Nullability )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getNonNullable());
+   ;;@ nullability/Nullability.java:218:4
+   (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:218:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
+  )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getNullable());
+   ;;@ nullability/Nullability.java:219:4
+   (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:219:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
+  )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getDefaultNullability());
+   ;;@ nullability/Nullability.java:220:4
+   (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNullable $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:220:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
+  )
+ )
+)
+
+;;; void Nullability.testDefaultNullabilityWildcards(ParameterizedNonNullable<? extends String> nonNullable)
+(func $m_testDefaultNullabilityWildcards__nullability_Nullability_ParameterizedNonNullable__void@nullability.Nullability
+ (param $nonNullable (ref null $nullability.Nullability.ParameterizedNonNullable))
+ ;;@ nullability/Nullability.java:223:14
+ (local $$qualifier (ref null $java.lang.String))
+ (local $$qualifier_1 (ref null $java.lang.String))
+ (local $$qualifier_2 (ref null $java.lang.String))
+ (block
+  ;; nullability.Nullability.$clinit();
+  ;;@ nullability/Nullability.java:224:62
+  (call $$clinit__void@nullability.Nullability )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getNonNullable());
+   ;;@ nullability/Nullability.java:225:4
+   (local.set $$qualifier (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNonNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:225:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier)))))
+  )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getNullable());
+   ;;@ nullability/Nullability.java:226:4
+   (local.set $$qualifier_1 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getNullable__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:226:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_1)))))
+  )
+  (block
+   ;; String $qualifier = ((String) nonNullable.getDefaultNullability());
+   ;;@ nullability/Nullability.java:227:4
+   (local.set $$qualifier_2 (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nonNullable))(struct.get $nullability.Nullability.ParameterizedNonNullable.vtable $m_getDefaultNullability__java_lang_Object_$pp_nullability (struct.get $nullability.Nullability.ParameterizedNonNullable $vtable(local.get $nonNullable))))))
+   ;; $qualifier.length();
+   ;;@ nullability/Nullability.java:227:4
+   (drop (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.String.vtable $m_length__int (struct.get $java.lang.String $vtable(local.get $$qualifier_2)))))
+  )
+ )
+)
+
+;;; void Nullability.testRecursive()
+(func $m_testRecursive__void@nullability.Nullability
+ ;;@ nullability/Nullability.java:243:48
+ (local $generic (ref null $nullability.Nullability.RecursiveParam))
+ (local $parametrized (ref null $nullability.Nullability.RecursiveParam))
+ (block
+  ;; nullability.Nullability.$clinit();
+  ;;@ nullability/Nullability.java:243:64
+  (call $$clinit__void@nullability.Nullability )
+  ;; RecursiveParam<T> generic = nullability.Nullability.RecursiveParam.$create();
+  ;;@ nullability/Nullability.java:244:4
+  (local.set $generic (call $$create__@nullability.Nullability.RecursiveParam ))
+  ;; RecursiveParam<RecursiveChild> parametrized = nullability.Nullability.RecursiveParam.$create();
+  ;;@ nullability/Nullability.java:245:4
+  (local.set $parametrized (call $$create__@nullability.Nullability.RecursiveParam ))
+ )
+)
+
+;;; void Nullability.testRecursiveNullable()
+(func $m_testRecursiveNullable__void@nullability.Nullability
+ ;;@ nullability/Nullability.java:248:56
+ (local $generic (ref null $nullability.Nullability.RecursiveNullableParam))
+ (local $parametrized (ref null $nullability.Nullability.RecursiveNullableParam))
+ (block
+  ;; nullability.Nullability.$clinit();
+  ;;@ nullability/Nullability.java:248:80
+  (call $$clinit__void@nullability.Nullability )
+  ;; RecursiveNullableParam<T> generic = nullability.Nullability.RecursiveNullableParam.$create();
+  ;;@ nullability/Nullability.java:249:4
+  (local.set $generic (call $$create__@nullability.Nullability.RecursiveNullableParam ))
+  ;; RecursiveNullableParam<RecursiveNullableChild> parametrized = nullability.Nullability.RecursiveNullableParam.$create();
+  ;;@ nullability/Nullability.java:250:4
+  (local.set $parametrized (call $$create__@nullability.Nullability.RecursiveNullableParam ))
+ )
+)
+
 ;;; void Nullability.$init()
 (func $$init__void_$p_nullability_Nullability@nullability.Nullability
  (param $this (ref null $nullability.Nullability))
@@ -1120,6 +1381,41 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability)
+
+;;; Code for nullability.Marker [INTERFACE]
+(type $nullability.Marker.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void Marker.$clinit()
+(func $$clinit__void@nullability.Marker
+ ;;@ nullability/Nullability.java:254:10
+ (block
+  ;; if (nullability.Marker.$initialized) return;
+  ;;@ nullability/Nullability.java:254:10
+  (if (global.get $f_$initialized__nullability_Marker)
+   (then
+    ;; return;
+    ;;@ nullability/Nullability.java:254:10
+    (return )
+   )
+  )
+  ;; (nullability.Marker.$initialized = true);
+  ;;@ nullability/Nullability.java:254:10
+  (global.set $f_$initialized__nullability_Marker (i32.const 1))
+ )
+)
+
+;;; Class<?> Marker.getClass()
+(func $m_getClass__java_lang_Class@nullability.Marker
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.Marker();
+  (return (call $function.no.side.effects.$getNullability.Marker__java_lang_Class (ref.func $$getNullability.Marker__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.Marker)
 
 ;;; Code for nullability.Nullability.Foo [CLASS]
 (type $nullability.Nullability.Foo (struct_subtype 
@@ -2464,6 +2760,504 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.ParameterizedNonNullable)
+
+;;; Code for nullability.Nullability.Recursive [CLASS]
+(type $nullability.Nullability.Recursive (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.Recursive.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $nullability.Nullability.Recursive.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; Recursive<T> Recursive.$create()
+(func $$create__@nullability.Nullability.Recursive
+ (result (ref null $nullability.Nullability.Recursive))
+ ;;@ nullability/Nullability.java:230:15
+ (local $$instance (ref null $nullability.Nullability.Recursive))
+ (block
+  ;; Recursive<T> $instance = new Recursive.<init>(0);
+  ;;@ nullability/Nullability.java:230:15
+  (local.set $$instance (struct.new $nullability.Nullability.Recursive (ref.as_non_null (global.get $nullability.Nullability.Recursive.vtable)) (ref.as_non_null (global.get $nullability.Nullability.Recursive.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/Nullability.java:230:15
+  (call $$ctor__void_$p_nullability_Nullability_Recursive@nullability.Nullability.Recursive (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/Nullability.java:230:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Recursive.$ctor()
+(func $$ctor__void_$p_nullability_Nullability_Recursive@nullability.Nullability.Recursive
+ (param $this (ref null $nullability.Nullability.Recursive))
+ ;;@ nullability/Nullability.java:230:15
+ (block
+  ;; nullability.Nullability.Recursive.$clinit();
+  ;;@ nullability/Nullability.java:230:15
+  (call $$clinit__void@nullability.Nullability.Recursive )
+  ;; Object.this.$ctor();
+  ;;@ nullability/Nullability.java:230:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Recursive.$clinit()
+(func $$clinit__void@nullability.Nullability.Recursive
+ ;;@ nullability/Nullability.java:230:15
+ (block
+  ;; if (nullability.Nullability.Recursive.$initialized) return;
+  ;;@ nullability/Nullability.java:230:15
+  (if (global.get $f_$initialized__nullability_Nullability_Recursive)
+   (then
+    ;; return;
+    ;;@ nullability/Nullability.java:230:15
+    (return )
+   )
+  )
+  ;; (nullability.Nullability.Recursive.$initialized = true);
+  ;;@ nullability/Nullability.java:230:15
+  (global.set $f_$initialized__nullability_Nullability_Recursive (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nullability/Nullability.java:230:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Recursive.getClass()
+(func $m_getClass__java_lang_Class@nullability.Nullability.Recursive
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.Recursive))
+ (local.set $this (ref.cast_static $nullability.Nullability.Recursive (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.Recursive();
+  (return (call $function.no.side.effects.$getNullability.Nullability.Recursive__java_lang_Class (ref.func $$getNullability.Nullability.Recursive__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.Nullability.Recursive)
+
+;;; Code for nullability.Nullability.RecursiveNullable [CLASS]
+(type $nullability.Nullability.RecursiveNullable (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.RecursiveNullable.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $nullability.Nullability.RecursiveNullable.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; RecursiveNullable<T> RecursiveNullable.$create()
+(func $$create__@nullability.Nullability.RecursiveNullable
+ (result (ref null $nullability.Nullability.RecursiveNullable))
+ ;;@ nullability/Nullability.java:232:15
+ (local $$instance (ref null $nullability.Nullability.RecursiveNullable))
+ (block
+  ;; RecursiveNullable<T> $instance = new RecursiveNullable.<init>(0);
+  ;;@ nullability/Nullability.java:232:15
+  (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullable (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullable.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullable.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/Nullability.java:232:15
+  (call $$ctor__void_$p_nullability_Nullability_RecursiveNullable@nullability.Nullability.RecursiveNullable (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/Nullability.java:232:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RecursiveNullable.$ctor()
+(func $$ctor__void_$p_nullability_Nullability_RecursiveNullable@nullability.Nullability.RecursiveNullable
+ (param $this (ref null $nullability.Nullability.RecursiveNullable))
+ ;;@ nullability/Nullability.java:232:15
+ (block
+  ;; nullability.Nullability.RecursiveNullable.$clinit();
+  ;;@ nullability/Nullability.java:232:15
+  (call $$clinit__void@nullability.Nullability.RecursiveNullable )
+  ;; Object.this.$ctor();
+  ;;@ nullability/Nullability.java:232:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void RecursiveNullable.$clinit()
+(func $$clinit__void@nullability.Nullability.RecursiveNullable
+ ;;@ nullability/Nullability.java:232:15
+ (block
+  ;; if (nullability.Nullability.RecursiveNullable.$initialized) return;
+  ;;@ nullability/Nullability.java:232:15
+  (if (global.get $f_$initialized__nullability_Nullability_RecursiveNullable)
+   (then
+    ;; return;
+    ;;@ nullability/Nullability.java:232:15
+    (return )
+   )
+  )
+  ;; (nullability.Nullability.RecursiveNullable.$initialized = true);
+  ;;@ nullability/Nullability.java:232:15
+  (global.set $f_$initialized__nullability_Nullability_RecursiveNullable (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nullability/Nullability.java:232:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> RecursiveNullable.getClass()
+(func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullable
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.RecursiveNullable))
+ (local.set $this (ref.cast_static $nullability.Nullability.RecursiveNullable (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.RecursiveNullable();
+  (return (call $function.no.side.effects.$getNullability.Nullability.RecursiveNullable__java_lang_Class (ref.func $$getNullability.Nullability.RecursiveNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullable)
+
+;;; Code for nullability.Nullability.RecursiveChild [CLASS]
+(type $nullability.Nullability.RecursiveChild (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.RecursiveChild.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $nullability.Nullability.Recursive)
+)
+(type $nullability.Nullability.RecursiveChild.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $nullability.Nullability.Recursive.vtable)
+)
+
+;;; RecursiveChild RecursiveChild.$create()
+(func $$create__@nullability.Nullability.RecursiveChild
+ (result (ref null $nullability.Nullability.RecursiveChild))
+ ;;@ nullability/Nullability.java:234:15
+ (local $$instance (ref null $nullability.Nullability.RecursiveChild))
+ (block
+  ;; RecursiveChild $instance = new RecursiveChild.<init>(0);
+  ;;@ nullability/Nullability.java:234:15
+  (local.set $$instance (struct.new $nullability.Nullability.RecursiveChild (ref.as_non_null (global.get $nullability.Nullability.RecursiveChild.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveChild.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/Nullability.java:234:15
+  (call $$ctor__void_$p_nullability_Nullability_RecursiveChild@nullability.Nullability.RecursiveChild (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/Nullability.java:234:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RecursiveChild.$ctor()
+(func $$ctor__void_$p_nullability_Nullability_RecursiveChild@nullability.Nullability.RecursiveChild
+ (param $this (ref null $nullability.Nullability.RecursiveChild))
+ ;;@ nullability/Nullability.java:234:15
+ (block
+  ;; nullability.Nullability.RecursiveChild.$clinit();
+  ;;@ nullability/Nullability.java:234:15
+  (call $$clinit__void@nullability.Nullability.RecursiveChild )
+  ;; Recursive.this.$ctor();
+  ;;@ nullability/Nullability.java:234:15
+  (call $$ctor__void_$p_nullability_Nullability_Recursive@nullability.Nullability.Recursive (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void RecursiveChild.$clinit()
+(func $$clinit__void@nullability.Nullability.RecursiveChild
+ ;;@ nullability/Nullability.java:234:15
+ (block
+  ;; if (nullability.Nullability.RecursiveChild.$initialized) return;
+  ;;@ nullability/Nullability.java:234:15
+  (if (global.get $f_$initialized__nullability_Nullability_RecursiveChild)
+   (then
+    ;; return;
+    ;;@ nullability/Nullability.java:234:15
+    (return )
+   )
+  )
+  ;; (nullability.Nullability.RecursiveChild.$initialized = true);
+  ;;@ nullability/Nullability.java:234:15
+  (global.set $f_$initialized__nullability_Nullability_RecursiveChild (i32.const 1))
+  ;; nullability.Nullability.Recursive.$clinit();
+  ;;@ nullability/Nullability.java:234:15
+  (call $$clinit__void@nullability.Nullability.Recursive )
+ )
+)
+
+;;; Class<?> RecursiveChild.getClass()
+(func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveChild
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.RecursiveChild))
+ (local.set $this (ref.cast_static $nullability.Nullability.RecursiveChild (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.RecursiveChild();
+  (return (call $function.no.side.effects.$getNullability.Nullability.RecursiveChild__java_lang_Class (ref.func $$getNullability.Nullability.RecursiveChild__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveChild)
+
+;;; Code for nullability.Nullability.RecursiveNullableChild [CLASS]
+(type $nullability.Nullability.RecursiveNullableChild (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.RecursiveNullableChild.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $nullability.Nullability.RecursiveNullable)
+)
+(type $nullability.Nullability.RecursiveNullableChild.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $nullability.Nullability.RecursiveNullable.vtable)
+)
+
+;;; RecursiveNullableChild RecursiveNullableChild.$create()
+(func $$create__@nullability.Nullability.RecursiveNullableChild
+ (result (ref null $nullability.Nullability.RecursiveNullableChild))
+ ;;@ nullability/Nullability.java:236:15
+ (local $$instance (ref null $nullability.Nullability.RecursiveNullableChild))
+ (block
+  ;; RecursiveNullableChild $instance = new RecursiveNullableChild.<init>(0);
+  ;;@ nullability/Nullability.java:236:15
+  (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullableChild (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableChild.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableChild.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/Nullability.java:236:15
+  (call $$ctor__void_$p_nullability_Nullability_RecursiveNullableChild@nullability.Nullability.RecursiveNullableChild (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/Nullability.java:236:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RecursiveNullableChild.$ctor()
+(func $$ctor__void_$p_nullability_Nullability_RecursiveNullableChild@nullability.Nullability.RecursiveNullableChild
+ (param $this (ref null $nullability.Nullability.RecursiveNullableChild))
+ ;;@ nullability/Nullability.java:236:15
+ (block
+  ;; nullability.Nullability.RecursiveNullableChild.$clinit();
+  ;;@ nullability/Nullability.java:236:15
+  (call $$clinit__void@nullability.Nullability.RecursiveNullableChild )
+  ;; RecursiveNullable.this.$ctor();
+  ;;@ nullability/Nullability.java:236:15
+  (call $$ctor__void_$p_nullability_Nullability_RecursiveNullable@nullability.Nullability.RecursiveNullable (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void RecursiveNullableChild.$clinit()
+(func $$clinit__void@nullability.Nullability.RecursiveNullableChild
+ ;;@ nullability/Nullability.java:236:15
+ (block
+  ;; if (nullability.Nullability.RecursiveNullableChild.$initialized) return;
+  ;;@ nullability/Nullability.java:236:15
+  (if (global.get $f_$initialized__nullability_Nullability_RecursiveNullableChild)
+   (then
+    ;; return;
+    ;;@ nullability/Nullability.java:236:15
+    (return )
+   )
+  )
+  ;; (nullability.Nullability.RecursiveNullableChild.$initialized = true);
+  ;;@ nullability/Nullability.java:236:15
+  (global.set $f_$initialized__nullability_Nullability_RecursiveNullableChild (i32.const 1))
+  ;; nullability.Nullability.RecursiveNullable.$clinit();
+  ;;@ nullability/Nullability.java:236:15
+  (call $$clinit__void@nullability.Nullability.RecursiveNullable )
+ )
+)
+
+;;; Class<?> RecursiveNullableChild.getClass()
+(func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullableChild
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.RecursiveNullableChild))
+ (local.set $this (ref.cast_static $nullability.Nullability.RecursiveNullableChild (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.RecursiveNullableChild();
+  (return (call $function.no.side.effects.$getNullability.Nullability.RecursiveNullableChild__java_lang_Class (ref.func $$getNullability.Nullability.RecursiveNullableChild__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullableChild)
+
+;;; Code for nullability.Nullability.RecursiveParam [CLASS]
+(type $nullability.Nullability.RecursiveParam (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.RecursiveParam.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $nullability.Nullability.RecursiveParam.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; RecursiveParam<T> RecursiveParam.$create()
+(func $$create__@nullability.Nullability.RecursiveParam
+ (result (ref null $nullability.Nullability.RecursiveParam))
+ ;;@ nullability/Nullability.java:239:15
+ (local $$instance (ref null $nullability.Nullability.RecursiveParam))
+ (block
+  ;; RecursiveParam<T> $instance = new RecursiveParam.<init>(0);
+  ;;@ nullability/Nullability.java:239:15
+  (local.set $$instance (struct.new $nullability.Nullability.RecursiveParam (ref.as_non_null (global.get $nullability.Nullability.RecursiveParam.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveParam.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/Nullability.java:239:15
+  (call $$ctor__void_$p_nullability_Nullability_RecursiveParam@nullability.Nullability.RecursiveParam (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/Nullability.java:239:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RecursiveParam.$ctor()
+(func $$ctor__void_$p_nullability_Nullability_RecursiveParam@nullability.Nullability.RecursiveParam
+ (param $this (ref null $nullability.Nullability.RecursiveParam))
+ ;;@ nullability/Nullability.java:239:15
+ (block
+  ;; nullability.Nullability.RecursiveParam.$clinit();
+  ;;@ nullability/Nullability.java:239:15
+  (call $$clinit__void@nullability.Nullability.RecursiveParam )
+  ;; Object.this.$ctor();
+  ;;@ nullability/Nullability.java:239:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void RecursiveParam.$clinit()
+(func $$clinit__void@nullability.Nullability.RecursiveParam
+ ;;@ nullability/Nullability.java:239:15
+ (block
+  ;; if (nullability.Nullability.RecursiveParam.$initialized) return;
+  ;;@ nullability/Nullability.java:239:15
+  (if (global.get $f_$initialized__nullability_Nullability_RecursiveParam)
+   (then
+    ;; return;
+    ;;@ nullability/Nullability.java:239:15
+    (return )
+   )
+  )
+  ;; (nullability.Nullability.RecursiveParam.$initialized = true);
+  ;;@ nullability/Nullability.java:239:15
+  (global.set $f_$initialized__nullability_Nullability_RecursiveParam (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nullability/Nullability.java:239:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> RecursiveParam.getClass()
+(func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveParam
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.RecursiveParam))
+ (local.set $this (ref.cast_static $nullability.Nullability.RecursiveParam (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.RecursiveParam();
+  (return (call $function.no.side.effects.$getNullability.Nullability.RecursiveParam__java_lang_Class (ref.func $$getNullability.Nullability.RecursiveParam__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveParam)
+
+;;; Code for nullability.Nullability.RecursiveNullableParam [CLASS]
+(type $nullability.Nullability.RecursiveNullableParam (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.RecursiveNullableParam.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $nullability.Nullability.RecursiveNullableParam.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; RecursiveNullableParam<T> RecursiveNullableParam.$create()
+(func $$create__@nullability.Nullability.RecursiveNullableParam
+ (result (ref null $nullability.Nullability.RecursiveNullableParam))
+ ;;@ nullability/Nullability.java:241:15
+ (local $$instance (ref null $nullability.Nullability.RecursiveNullableParam))
+ (block
+  ;; RecursiveNullableParam<T> $instance = new RecursiveNullableParam.<init>(0);
+  ;;@ nullability/Nullability.java:241:15
+  (local.set $$instance (struct.new $nullability.Nullability.RecursiveNullableParam (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableParam.vtable)) (ref.as_non_null (global.get $nullability.Nullability.RecursiveNullableParam.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/Nullability.java:241:15
+  (call $$ctor__void_$p_nullability_Nullability_RecursiveNullableParam@nullability.Nullability.RecursiveNullableParam (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/Nullability.java:241:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RecursiveNullableParam.$ctor()
+(func $$ctor__void_$p_nullability_Nullability_RecursiveNullableParam@nullability.Nullability.RecursiveNullableParam
+ (param $this (ref null $nullability.Nullability.RecursiveNullableParam))
+ ;;@ nullability/Nullability.java:241:15
+ (block
+  ;; nullability.Nullability.RecursiveNullableParam.$clinit();
+  ;;@ nullability/Nullability.java:241:15
+  (call $$clinit__void@nullability.Nullability.RecursiveNullableParam )
+  ;; Object.this.$ctor();
+  ;;@ nullability/Nullability.java:241:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void RecursiveNullableParam.$clinit()
+(func $$clinit__void@nullability.Nullability.RecursiveNullableParam
+ ;;@ nullability/Nullability.java:241:15
+ (block
+  ;; if (nullability.Nullability.RecursiveNullableParam.$initialized) return;
+  ;;@ nullability/Nullability.java:241:15
+  (if (global.get $f_$initialized__nullability_Nullability_RecursiveNullableParam)
+   (then
+    ;; return;
+    ;;@ nullability/Nullability.java:241:15
+    (return )
+   )
+  )
+  ;; (nullability.Nullability.RecursiveNullableParam.$initialized = true);
+  ;;@ nullability/Nullability.java:241:15
+  (global.set $f_$initialized__nullability_Nullability_RecursiveNullableParam (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nullability/Nullability.java:241:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> RecursiveNullableParam.getClass()
+(func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullableParam
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.Nullability.RecursiveNullableParam))
+ (local.set $this (ref.cast_static $nullability.Nullability.RecursiveNullableParam (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.RecursiveNullableParam();
+  (return (call $function.no.side.effects.$getNullability.Nullability.RecursiveNullableParam__java_lang_Class (ref.func $$getNullability.Nullability.RecursiveNullableParam__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.Nullability.RecursiveNullableParam)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [CLASS]
 (type $nullability.defaultnotnullable.DefaultNotNullable (struct_subtype 

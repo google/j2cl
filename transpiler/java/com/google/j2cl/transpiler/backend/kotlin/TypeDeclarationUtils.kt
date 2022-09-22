@@ -48,3 +48,6 @@ internal fun TypeDeclaration.ktQualifiedName(asSuperType: Boolean = false) =
 
 internal val TypeDeclaration.isRecursive: Boolean
   get() = typeParameterDescriptors.any { it.upperBoundTypeDescriptor.contains(it) }
+
+internal val TypeDeclaration.canBeNullableAsBound: Boolean
+  get() = !isRecursive || typeParameterDescriptors.all { it.upperBoundTypeDescriptor.isNullable }

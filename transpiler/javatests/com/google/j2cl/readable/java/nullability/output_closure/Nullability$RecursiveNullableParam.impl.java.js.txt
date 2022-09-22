@@ -1,0 +1,46 @@
+goog.module('nullability.Nullability.RecursiveNullableParam$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Marker = goog.forwardDeclare('nullability.Marker$impl');
+let RecursiveNullable = goog.forwardDeclare('nullability.Nullability.RecursiveNullable$impl');
+
+/**
+ * @template T
+ */
+class RecursiveNullableParam extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!RecursiveNullableParam<T>} */
+ static $create__() {
+  RecursiveNullableParam.$clinit();
+  let $instance = new RecursiveNullableParam();
+  $instance.$ctor__nullability_Nullability_RecursiveNullableParam__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_Nullability_RecursiveNullableParam__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  RecursiveNullableParam.$clinit = () =>{};
+  RecursiveNullableParam.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RecursiveNullableParam;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(RecursiveNullableParam, 'nullability.Nullability$RecursiveNullableParam');
+
+exports = RecursiveNullableParam;
+
+//# sourceMappingURL=Nullability$RecursiveNullableParam.js.map

@@ -34,6 +34,8 @@ internal data class TypeArgument(
   val typeDescriptor: TypeDescriptor
 )
 
+private fun TypeArgument.makeNonNull() = copy(typeDescriptor = typeDescriptor.makeNonNull())
+
 internal val TypeArgument.isDenotable
   get() = typeDescriptor.isDenotable
 
@@ -58,15 +60,15 @@ private fun typeArgument(declarationTypeParameter: TypeVariable, typeDescriptor:
     .withInferredNullability
 
 private val TypeArgument.withInferredNullability: TypeArgument
-  get() =
-    if (declarationTypeVariable.upperBoundTypeDescriptor.isNullable) this
-    else copy(typeDescriptor = typeDescriptor.toNonNullable())
+  get() = if (!declarationTypeVariable.hasNullableBounds) makeNonNull() else this
 
 // TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
 private val TypeArgument.withFixedRecursiveBounds: TypeArgument
-  get() = if (isRecursive) copy(typeDescriptor = TypeVariable.createWildcard()) else this
+  get() =
+    if (needsFixForRecursiveBounds) copy(typeDescriptor = TypeVariable.createWildcard()) else this
 
-private val TypeArgument.isRecursive
+// TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
+private val TypeArgument.needsFixForRecursiveBounds
   get() =
     typeDescriptor is TypeVariable &&
       typeDescriptor.isWildcardOrCapture &&
