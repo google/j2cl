@@ -82,6 +82,25 @@ public final class RuntimeMethods {
         .build();
   }
 
+  /** Create a call to String.valueOf method. */
+  public static MethodCall createStringValueOfMethodCall(Expression expression) {
+    TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
+    // Find the right overload.
+    if (TypeDescriptors.isPrimitiveByte(typeDescriptor)
+        || TypeDescriptors.isPrimitiveShort(typeDescriptor)) {
+      typeDescriptor = PrimitiveTypes.INT;
+    } else if (!typeDescriptor.isPrimitive()) {
+      typeDescriptor = TypeDescriptors.get().javaLangObject;
+    }
+
+    MethodDescriptor methodDescriptor =
+        TypeDescriptors.get()
+            .javaLangString
+            .getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, typeDescriptor);
+
+    return MethodCall.Builder.from(methodDescriptor).setArguments(expression).build();
+  }
+
   /** Create a call to an Class method. */
   public static MethodCall createClassGetMethodCall(Expression... arguments) {
     checkArgument(arguments.length == 1 || arguments.length == 2);

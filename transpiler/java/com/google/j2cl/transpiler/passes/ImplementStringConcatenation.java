@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -66,6 +67,13 @@ public class ImplementStringConcatenation extends NormalizationPass {
               return binaryExpression;
             }
 
+            ImmutableList<Expression> operands = collectConcatOperands(binaryExpression);
+
+            // Create String.valueOf call for the simple case.
+            if (operands.size() == 1) {
+              return RuntimeMethods.createStringValueOfMethodCall(operands.get(0));
+            }
+
             MultiExpression.Builder multiExpressionBuilder = MultiExpression.newBuilder();
 
             // $stringBuilder = new StringBuilder()
@@ -88,12 +96,7 @@ public class ImplementStringConcatenation extends NormalizationPass {
                     .build());
 
             // Add  $stringBuilder.append() calls
-            for (Expression operand : collectConcatOperands(binaryExpression)) {
-              if (operand instanceof StringLiteral
-                  && ((StringLiteral) operand).getValue().isEmpty()) {
-                // Skip empty string on concat; esp. happens with common patterns like ("" + x).
-                continue;
-              }
+            for (Expression operand : operands) {
               multiExpressionBuilder.addExpressions(
                   MethodCall.Builder.from(
                           TypeDescriptors.get()
@@ -133,15 +136,20 @@ public class ImplementStringConcatenation extends NormalizationPass {
   }
 
   private static ImmutableList<Expression> collectConcatOperands(Expression expression) {
-    if (!(expression instanceof BinaryExpression)
-        || !((BinaryExpression) expression).isStringConcatenation()) {
-      return ImmutableList.of(expression);
+    if (expression instanceof BinaryExpression
+        && ((BinaryExpression) expression).isStringConcatenation()) {
+      BinaryExpression binaryExpression = (BinaryExpression) expression;
+      return ImmutableList.<Expression>builder()
+          .addAll(collectConcatOperands(binaryExpression.getLeftOperand()))
+          .addAll(collectConcatOperands(binaryExpression.getRightOperand()))
+          .build();
     }
-    BinaryExpression binaryExpression = (BinaryExpression) expression;
 
-    return ImmutableList.<Expression>builder()
-        .addAll(collectConcatOperands(binaryExpression.getLeftOperand()))
-        .addAll(collectConcatOperands(binaryExpression.getRightOperand()))
-        .build();
+    if (expression instanceof StringLiteral && ((StringLiteral) expression).getValue().isEmpty()) {
+      // Skip empty string on concat; esp. happens with common patterns like ("" + x).
+      return ImmutableList.of();
+    }
+
+    return ImmutableList.of(expression);
   }
 }

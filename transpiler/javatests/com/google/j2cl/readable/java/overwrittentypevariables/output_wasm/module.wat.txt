@@ -428,17 +428,12 @@
  (param $input (ref null $java.lang.Enum))
  (result (ref null $java.lang.String))
  ;;@ overwrittentypevariables/HashFunctions.java:37:20
- (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $overwrittentypevariables.HashFunctions.2))
  (local.set $this (ref.cast_static $overwrittentypevariables.HashFunctions.2 (local.get $this.untyped)))
  (block
-  ;; return (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(input.ordinal()),$stringBuilder.toString());
+  ;; return java.lang.String.valueOf(input.ordinal());
   ;;@ overwrittentypevariables/HashFunctions.java:38:8
-  (return (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
-   (drop (call_ref (ref.as_non_null (local.get $$stringBuilder))(call_ref (ref.as_non_null (local.get $input))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (call_ref (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
-  ))
+  (return (call $m_valueOf__int__java_lang_String@java.lang.String (call_ref (ref.as_non_null (local.get $input))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))))
  )
 )
 (elem declare func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.2)

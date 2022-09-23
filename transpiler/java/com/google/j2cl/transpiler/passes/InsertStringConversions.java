@@ -19,9 +19,7 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -57,25 +55,9 @@ public class InsertStringConversions extends NormalizationPass {
         }
 
         // For the normal case we call String.valueOf which performs the right conversion.
-        return MethodCall.Builder.from(getStringValueOfMethodDescriptor(typeDescriptor))
-            .setArguments(expression)
-            .build();
+        return RuntimeMethods.createStringValueOfMethodCall(expression);
       }
     };
-  }
-
-  private static MethodDescriptor getStringValueOfMethodDescriptor(TypeDescriptor typeDescriptor) {
-    // Find the right overload.
-    if (TypeDescriptors.isPrimitiveByte(typeDescriptor)
-        || TypeDescriptors.isPrimitiveShort(typeDescriptor)) {
-      typeDescriptor = PrimitiveTypes.INT;
-    } else if (!typeDescriptor.isPrimitive()) {
-      typeDescriptor = TypeDescriptors.get().javaLangObject;
-    }
-
-    return TypeDescriptors.get()
-        .javaLangString
-        .getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, typeDescriptor);
   }
 
   /**
