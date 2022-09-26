@@ -6,31 +6,31 @@ import kotlin.jvm.*
 
 open class InterfaceDevirtualize {
  open fun <T> compare0(c: kotlin.Comparable<T>?, t: T): kotlin.Int {
-  return c!!.compareTo(t)
+  return c!!.compareTo(t!!)
  }
 
- open fun compare1(c: kotlin.Comparable<kotlin.Any?>?, o: kotlin.Any?): kotlin.Int {
-  return c!!.compareTo(o)
+ open fun compare1(c: kotlin.Comparable<kotlin.Any>?, o: kotlin.Any?): kotlin.Int {
+  return c!!.compareTo(o!!)
  }
 
- open fun compare2(c: kotlin.Comparable<kotlin.Double?>?, d: kotlin.Double?): kotlin.Int {
-  return c!!.compareTo(d)
+ open fun compare2(c: kotlin.Comparable<kotlin.Double>?, d: kotlin.Double?): kotlin.Int {
+  return c!!.compareTo(d!!)
  }
 
  open fun compare3(d1: kotlin.Double?, d2: kotlin.Double?): kotlin.Int {
-  return d1!!.compareTo(d2)
+  return d1!!.compareTo(d2!!)
  }
 
- open fun compare2(c: kotlin.Comparable<kotlin.Boolean?>?, d: kotlin.Boolean?): kotlin.Int {
-  return c!!.compareTo(d)
+ open fun compare2(c: kotlin.Comparable<kotlin.Boolean>?, d: kotlin.Boolean?): kotlin.Int {
+  return c!!.compareTo(d!!)
  }
 
  open fun compare3(d1: kotlin.Boolean?, d2: kotlin.Boolean?): kotlin.Int {
-  return d1!!.compareTo(d2)
+  return d1!!.compareTo(d2!!)
  }
 
- open fun compare2(c: kotlin.Comparable<kotlin.Int?>?, d: kotlin.Int?): kotlin.Int {
-  return c!!.compareTo(d)
+ open fun compare2(c: kotlin.Comparable<kotlin.Int>?, d: kotlin.Int?): kotlin.Int {
+  return c!!.compareTo(d!!)
  }
 
  open fun compare3(d1: kotlin.Int?, d2: kotlin.Int?): kotlin.Int {

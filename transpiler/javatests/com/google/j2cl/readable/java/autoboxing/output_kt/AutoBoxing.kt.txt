@@ -353,10 +353,10 @@ open class AutoBoxing {
 
   @kotlin.jvm.JvmStatic
   fun <T: kotlin.Long?> testUnboxingFromTypeVariable() {
-   var n: T = kotlin.Long.valueOf(10L) as T
+   var n: T = kotlin.Long.valueOf(10L)
    var l: kotlin.Long = n!!.toLong()
    assert(l === 10L)
-   n = kotlin.Long.valueOf(n!!.toLong() + 1L) as T
+   n = kotlin.Long.valueOf(n!!.toLong() + 1L)
    open class ___1Local<T: kotlin.Long?> {
     open fun toLong(l: T): kotlin.Long {
      assert(l!!.equals(kotlin.Long.valueOf(11L)))
@@ -368,12 +368,12 @@ open class AutoBoxing {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T> testUnboxingFromIntersectionType() where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long?>? {
-   var n: T = kotlin.Long.valueOf(10L) as T
+  fun <T> testUnboxingFromIntersectionType() where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long>? {
+   var n: T = kotlin.Long.valueOf(10L)
    var l: kotlin.Long = n!!.toLong()
    assert(l === 10L)
-   n = kotlin.Long.valueOf(n!!.toLong() + 1L) as T
-   open class ___2Local<T> where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long?>?, T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long?>? {
+   n = kotlin.Long.valueOf(n!!.toLong() + 1L)
+   open class ___2Local<T> where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long>?, T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long>? {
     open fun toLong(l: T): kotlin.Long {
      assert(l!!.equals(kotlin.Long.valueOf(11L)))
      return l!!.toLong()

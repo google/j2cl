@@ -98,6 +98,9 @@ public class Main {
       // fail( "Should have thrown NullPointerException");
       // } catch (NullPointerException expected) {
     } catch (UnsupportedOperationException expected) {
+      // Thrown by J2CL
+    } catch (NullPointerException expected) {
+      // Thrown by J2KT
     }
 
     // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
