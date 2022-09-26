@@ -578,13 +578,13 @@
  (block
   ;; TypeWildCards.this.unbounded(typewildcards.GenericType.$create());
   ;;@ typewildcards/TypeWildCards.java:47:4
-  (call_ref (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref $function.m_unbounded__typewildcards_GenericType__void (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   ;; TypeWildCards.this.upperBound(typewildcards.GenericType.$create());
   ;;@ typewildcards/TypeWildCards.java:48:4
-  (call_ref (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref $function.m_upperBound__typewildcards_GenericType__void (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   ;; TypeWildCards.this.lowerBound(typewildcards.GenericType.$create());
   ;;@ typewildcards/TypeWildCards.java:49:4
-  (call_ref (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref $function.m_lowerBound__typewildcards_GenericType__void (ref.as_non_null (local.get $this))(call $$create__@typewildcards.GenericType )(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
  )
 )
 (elem declare func $m_test__void@typewildcards.TypeWildCards)
@@ -603,7 +603,7 @@
   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f_f__typewildcards_TypeWildCards_A(local.get $t)))
   ;; t.m();
   ;;@ typewildcards/TypeWildCards.java:69:4
-  (call_ref (ref.as_non_null (local.get $t))(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
+  (call_ref $function.m_m__void (ref.as_non_null (local.get $t))(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
  )
 )
 
@@ -622,14 +622,14 @@
   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f_f__typewildcards_TypeWildCards_A(local.get $t)))
   ;; t.m();
   ;;@ typewildcards/TypeWildCards.java:74:4
-  (call_ref (ref.as_non_null (local.get $t))(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
+  (call_ref $function.m_m__void (ref.as_non_null (local.get $t))(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
   (block
    ;; Y $qualifier = ((Y) t);
    ;;@ typewildcards/TypeWildCards.java:75:4
    (local.set $$qualifier (local.get $t))
    ;; $qualifier.n();
    ;;@ typewildcards/TypeWildCards.java:75:4
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $typewildcards.TypeWildCards.Y.vtable $m_n__void (ref.cast_static $typewildcards.TypeWildCards.Y.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1))) ))
+   (call_ref $function.m_n__void (ref.as_non_null (local.get $$qualifier))(struct.get $typewildcards.TypeWildCards.Y.vtable $m_n__void (ref.cast_static $typewildcards.TypeWildCards.Y.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1))) ))
   )
  )
 )
@@ -718,7 +718,7 @@
   (call $$clinit__void@typewildcards.TypeWildCards )
   ;; return ri.m();
   ;;@ typewildcards/TypeWildCards.java:132:4
-  (return (call_ref (ref.as_non_null (local.get $ri))(struct.get $typewildcards.TypeWildCards.RecursiveInterface.vtable $m_m__typewildcards_TypeWildCards_RecursiveInterface (ref.cast_static $typewildcards.TypeWildCards.RecursiveInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $ri)) (i32.const -1))) )))
+  (return (call_ref $function.m_m__typewildcards_TypeWildCards_RecursiveInterface (ref.as_non_null (local.get $ri))(struct.get $typewildcards.TypeWildCards.RecursiveInterface.vtable $m_m__typewildcards_TypeWildCards_RecursiveInterface (ref.cast_static $typewildcards.TypeWildCards.RecursiveInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $ri)) (i32.const -1))) )))
  )
 )
 
@@ -851,13 +851,13 @@
    (local.set $$qualifier (local.get $a_1))
    ;; $qualifier.getKey();
    ;;@ typewildcards/TypeWildCards.java:109:14
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $typewildcards.TypeWildCards.HasKey.vtable $m_getKey__java_lang_String (ref.cast_static $typewildcards.TypeWildCards.HasKey.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1))) )))
+   (drop (call_ref $function.m_getKey__java_lang_String (ref.as_non_null (local.get $$qualifier))(struct.get $typewildcards.TypeWildCards.HasKey.vtable $m_getKey__java_lang_String (ref.cast_static $typewildcards.TypeWildCards.HasKey.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1))) )))
   )
   ;; return (IntegerSupplier $qualifier = ((IntegerSupplier) a),$qualifier.get());
   ;;@ typewildcards/TypeWildCards.java:110:14
   (return (block (result (ref null $java.lang.Integer))
    (local.set $$qualifier_1 (local.get $a_1))
-   (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $typewildcards.TypeWildCards.IntegerSupplier.vtable $m_get__java_lang_Integer (ref.cast_static $typewildcards.TypeWildCards.IntegerSupplier.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_1)) (i32.const -1))) ))
+   (call_ref $function.m_get__java_lang_Integer (ref.as_non_null (local.get $$qualifier_1))(struct.get $typewildcards.TypeWildCards.IntegerSupplier.vtable $m_get__java_lang_Integer (ref.cast_static $typewildcards.TypeWildCards.IntegerSupplier.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_1)) (i32.const -1))) ))
   ))
  )
 )

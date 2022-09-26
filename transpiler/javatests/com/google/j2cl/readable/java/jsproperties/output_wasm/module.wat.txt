@@ -534,7 +534,7 @@
    (local.set $$qualifier (call $$create__@jsproperties.NativeFoo ))
    ;; $qualifier.getA();
    ;;@ jsproperties/Main.java:82:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
+   (drop (call_ref $function.m_getA__java_lang_Object (ref.as_non_null (local.get $$qualifier))(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
   )
   ;; jsproperties.NativeFoo.getB();
   ;;@ jsproperties/Main.java:83:4
@@ -581,16 +581,16 @@
   (local.set $bar (call $$create__@jsproperties.Bar ))
   ;; bar.getA();
   ;;@ jsproperties/Main.java:95:4
-  (drop (call_ref (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
+  (drop (call_ref $function.m_getA__int (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
   ;; bar.setA(10);
   ;;@ jsproperties/Main.java:96:4
-  (call_ref (ref.as_non_null (local.get $bar))(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setA__int__void (struct.get $jsproperties.Bar $vtable(local.get $bar))))
+  (call_ref $function.m_setA__int__void (ref.as_non_null (local.get $bar))(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setA__int__void (struct.get $jsproperties.Bar $vtable(local.get $bar))))
   ;; bar.getB();
   ;;@ jsproperties/Main.java:97:4
-  (drop (call_ref (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getB__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
+  (drop (call_ref $function.m_getB__int (ref.as_non_null (local.get $bar))(struct.get $jsproperties.Bar.vtable $m_getB__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
   ;; bar.setB(10);
   ;;@ jsproperties/Main.java:98:4
-  (call_ref (ref.as_non_null (local.get $bar))(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setB__int__void (struct.get $jsproperties.Bar $vtable(local.get $bar))))
+  (call_ref $function.m_setB__int__void (ref.as_non_null (local.get $bar))(i32.const 10)(struct.get $jsproperties.Bar.vtable $m_setB__int__void (struct.get $jsproperties.Bar $vtable(local.get $bar))))
  )
 )
 (elem declare func $m_testInstanceJsProperty__void@jsproperties.Main)

@@ -616,31 +616,31 @@
   (local.set $intf (call $$create__@instancejsmethods.Child ))
   ;; sp.fun(12,35);
   ;;@ instancejsmethods/Main.java:123:4
-  (drop (call_ref (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
   ;; sp.bar(6,7);
   ;;@ instancejsmethods/Main.java:124:4
-  (drop (call_ref (ref.as_non_null (local.get $sp))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $sp))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
   ;; p.fun(12,35);
   ;;@ instancejsmethods/Main.java:125:4
-  (drop (call_ref (ref.as_non_null (local.get $p))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $p)))))
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $p))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $p)))))
   ;; p.bar(6,7);
   ;;@ instancejsmethods/Main.java:126:4
-  (drop (call_ref (ref.as_non_null (local.get $p))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $p)))))
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $p))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $p)))))
   ;; c.fun(12,35);
   ;;@ instancejsmethods/Main.java:127:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $c)))))
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $c))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $c)))))
   ;; c.bar(6,7);
   ;;@ instancejsmethods/Main.java:128:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $c)))))
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $c))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $c)))))
   ;; pp.foo(1);
   ;;@ instancejsmethods/Main.java:129:4
-  (drop (call_ref (ref.as_non_null (local.get $pp))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $pp)))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $pp))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $pp)))))
   ;; cc.foo(1);
   ;;@ instancejsmethods/Main.java:130:4
-  (drop (call_ref (ref.as_non_null (local.get $cc))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $cc)))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $cc))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $cc)))))
   ;; intf.intfFoo();
   ;;@ instancejsmethods/Main.java:131:4
-  (drop (call_ref (ref.as_non_null (local.get $intf))(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast_static $instancejsmethods.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) )))
+  (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $intf))(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast_static $instancejsmethods.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_testCallBySuperParent__void@instancejsmethods.Main)
@@ -666,31 +666,31 @@
   (local.set $c (call $$create__@instancejsmethods.Child ))
   ;; sp.fun(12,35);
   ;;@ instancejsmethods/Main.java:139:4
-  (drop (call_ref (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $sp))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
   ;; sp.bar(6,7);
   ;;@ instancejsmethods/Main.java:140:4
-  (drop (call_ref (ref.as_non_null (local.get $sp))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $sp))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.SuperParent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
   ;; p.fun(12,35);
   ;;@ instancejsmethods/Main.java:141:4
-  (drop (call_ref (ref.as_non_null (local.get $p))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.Parent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $p))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.Parent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
   ;; p.bar(6,7);
   ;;@ instancejsmethods/Main.java:142:4
-  (drop (call_ref (ref.as_non_null (local.get $p))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.Parent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $p))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.Parent.vtable $m_bar__int__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
   ;; p.foo(1);
   ;;@ instancejsmethods/Main.java:143:4
-  (drop (call_ref (ref.as_non_null (local.get $p))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $p))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $p)))))
   ;; c.fun(12,35);
   ;;@ instancejsmethods/Main.java:144:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.Child.vtable $m_fun__int__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+  (drop (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $c))(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.Child.vtable $m_fun__int__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
   ;; c.bar(6,7);
   ;;@ instancejsmethods/Main.java:145:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.Child.vtable $m_bar__int__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+  (drop (call_ref $function.m_bar__int__int__int (ref.as_non_null (local.get $c))(i32.const 6)(i32.const 7)(struct.get $instancejsmethods.Child.vtable $m_bar__int__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
   ;; c.foo(1);
   ;;@ instancejsmethods/Main.java:146:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $instancejsmethods.Child.vtable $m_foo__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $instancejsmethods.Child.vtable $m_foo__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
   ;; c.intfFoo();
   ;;@ instancejsmethods/Main.java:147:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(struct.get $instancejsmethods.Child.vtable $m_intfFoo__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+  (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $c))(struct.get $instancejsmethods.Child.vtable $m_intfFoo__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
  )
 )
 

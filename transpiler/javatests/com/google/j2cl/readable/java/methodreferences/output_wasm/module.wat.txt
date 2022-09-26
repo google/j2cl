@@ -821,7 +821,7 @@
  (block
   ;; return $LambdaImplementor$1.this.$$q.toString();
   ;;@ methodreferences/MethodReferences.java:76:49
-  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$1 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1(local.get $this)))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$1 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1(local.get $this))))))
+  (return (call_ref $function.m_toString__java_lang_String (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$1 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1(local.get $this)))(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$1 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$1(local.get $this))))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1)
@@ -1124,7 +1124,7 @@
  (block
   ;; return $LambdaImplementor$4.this.$$q.isA();
   ;;@ methodreferences/MethodReferences.java:88:20
-  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$4 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$4 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4(local.get $this))))))
+  (return (call_ref $function.m_isA__java_lang_Boolean (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$4 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$4 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$4(local.get $this))))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$4)
@@ -1234,7 +1234,7 @@
   (local.set $arg1_1 (ref.cast_static $java.lang.Number (local.get $arg1)))
   ;; return arg0.sameAs(arg1);
   ;;@ methodreferences/MethodReferences.java:90:66
-  (return (call_ref (ref.as_non_null (local.get $arg0_1))(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (local.get $arg0_1))(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$5)
@@ -1342,7 +1342,7 @@
   (local.set $arg0_1 (ref.cast_static $java.lang.Number (local.get $arg0)))
   ;; return $LambdaImplementor$6.this.this.sameAs(arg0);
   ;;@ methodreferences/MethodReferences.java:92:55
-  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this)))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this))))))
+  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this)))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$6 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$6(local.get $this))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$6)
@@ -1449,8 +1449,8 @@
   ;; return (Boolean $qualifier = arg0.isA(),$qualifier.booleanValue());
   ;;@ methodreferences/MethodReferences.java:95:53
   (return (block (result i32)
-   (local.set $$qualifier (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
+   (local.set $$qualifier (call_ref $function.m_isA__java_lang_Boolean (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+   (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
   ))
  )
 )
@@ -1758,7 +1758,7 @@
  (block
   ;; return $LambdaImplementor$10.this.$$q.self();
   ;;@ methodreferences/MethodReferences.java:101:20
-  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$10 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$10 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10(local.get $this))))))
+  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$10 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$10 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$10(local.get $this))))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$10)
@@ -1863,7 +1863,7 @@
   (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (local.get $arg0)))
   ;; return arg0.self();
   ;;@ methodreferences/MethodReferences.java:103:53
-  (return (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$11)
@@ -1968,7 +1968,7 @@
   (local.set $arg0_1 (ref.cast_static $java.lang.Integer (local.get $arg0)))
   ;; return javaemul.internal.WasmArray.OfObject.$create(arg0.intValue());
   ;;@ methodreferences/MethodReferences.java:105:47
-  (return (call $$create__int@javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
+  (return (call $$create__int@javaemul.internal.WasmArray.OfObject (call_ref $function.m_intValue__int (ref.as_non_null (local.get $arg0_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12)
@@ -2374,7 +2374,7 @@
  (block
   ;; return $LambdaImplementor$16.this.$$q.self();
   ;;@ methodreferences/MethodReferences.java:112:22
-  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$16 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$16 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16(local.get $this))))))
+  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$16 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16(local.get $this)))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$16 $$captured_$$q__methodreferences_MethodReferences_$LambdaImplementor$16(local.get $this))))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$16)
@@ -2479,7 +2479,7 @@
   (local.set $arg0_1 (ref.cast_static $methodreferences.MethodReferences (local.get $arg0)))
   ;; return arg0.self();
   ;;@ methodreferences/MethodReferences.java:114:66
-  (return (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref $function.m_self__java_lang_Object_$pp_methodreferences (ref.as_non_null (local.get $arg0_1))(struct.get $methodreferences.MethodReferences.vtable $m_self__java_lang_Object_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$17)
@@ -2584,7 +2584,7 @@
   (local.set $arg0_1 (ref.cast_static $java.lang.Integer (local.get $arg0)))
   ;; return javaemul.internal.WasmArray.OfObject.$create(arg0.intValue());
   ;;@ methodreferences/MethodReferences.java:116:60
-  (return (call $$create__int@javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $arg0_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
+  (return (call $$create__int@javaemul.internal.WasmArray.OfObject (call_ref $function.m_intValue__int (ref.as_non_null (local.get $arg0_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18)
@@ -2797,7 +2797,7 @@
   (local.set $arg1_1 (ref.cast_static $java.lang.Number (local.get $arg1)))
   ;; return arg0.sameAs(arg1);
   ;;@ methodreferences/MethodReferences.java:120:70
-  (return (call_ref (ref.as_non_null (local.get $arg0_1))(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
+  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (local.get $arg0_1))(local.get $arg1_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$20)
@@ -2905,7 +2905,7 @@
   (local.set $arg0_1 (ref.cast_static $java.lang.Number (local.get $arg0)))
   ;; return $LambdaImplementor$21.this.this.sameAs(arg0);
   ;;@ methodreferences/MethodReferences.java:122:68
-  (return (call_ref (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this)))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this))))))
+  (return (call_ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref.as_non_null (struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this)))(local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (struct.get $methodreferences.MethodReferences $vtable(struct.get $methodreferences.MethodReferences.$LambdaImplementor$21 $$outer_this__methodreferences_MethodReferences_$LambdaImplementor$21(local.get $this))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21)

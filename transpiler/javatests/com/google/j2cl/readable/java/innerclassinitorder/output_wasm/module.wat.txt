@@ -711,7 +711,7 @@
       (block
        ;; theAp.act();
        ;;@ innerclassinitorder/InnerClassInitOrder.java:241:6
-       (call_ref (ref.as_non_null (local.get $theAp))(struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable $m_act__void (struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber $vtable(local.get $theAp))))
+       (call_ref $function.m_act__void (ref.as_non_null (local.get $theAp))(struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable $m_act__void (struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber $vtable(local.get $theAp))))
       )
      )
     )
@@ -811,7 +811,7 @@
  (block
   ;; OuterIsNotSuper x = InnerClassInitOrder.this.outerIsSuper.unqualifiedAlloc();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:335:4
-  (local.set $x (call_ref (ref.as_non_null (struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this)))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))))
+  (local.set $x (call_ref $function.m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (ref.as_non_null (struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this)))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))))
  )
 )
 (elem declare func $m_testUnqualifiedAlloc__void@innerclassinitorder.InnerClassInitOrder)
@@ -862,49 +862,49 @@
   (local.set $m (call $$create__@innerclassinitorder.InnerClassInitOrder ))
   ;; m.testOuterThisFromSuperCall();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:353:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterThisFromSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testOuterThisFromSuperCall__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterThisFromSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testOuterThisFromThisCall();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:354:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterThisFromThisCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testOuterThisFromThisCall__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterThisFromThisCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testExtendsNested();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:356:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testExtendsNested__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testExtendsNested__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testExtendsNested__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testExtendsNestedWithGenerics();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:357:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testExtendsNestedWithGenerics__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testExtendsNestedWithGenerics__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testExtendsNestedWithGenerics__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testInnerClassCtors();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:358:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassCtors__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testInnerClassCtors__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassCtors__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testInnerClassInitialization();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:359:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassInitialization__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testInnerClassInitialization__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassInitialization__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testInnerClassLoop();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:360:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassLoop__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testInnerClassLoop__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassLoop__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testOuterIsNotSuper();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:362:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterIsNotSuper__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testOuterIsNotSuper__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterIsNotSuper__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testOuterIsNotSuperAnon();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:363:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterIsNotSuperAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testOuterIsNotSuperAnon__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterIsNotSuperAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testQualifiedSuperCall();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:364:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testQualifiedSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testQualifiedSuperCall__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testQualifiedSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testQualifiedSuperCallAnon();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:365:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testQualifiedSuperCallAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testQualifiedSuperCallAnon__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testQualifiedSuperCallAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testSuperDispatch();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:366:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testSuperDispatch__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testSuperDispatch__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testSuperDispatch__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testUnqualifiedAlloc();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:367:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedAlloc__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testUnqualifiedAlloc__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedAlloc__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testUnqualifiedSuperCall();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:368:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testUnqualifiedSuperCall__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   ;; m.testUnqualifiedSuperCallAnon();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:369:4
-  (call_ref (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedSuperCallAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
+  (call_ref $function.m_testUnqualifiedSuperCallAnon__void (ref.as_non_null (local.get $m))(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedSuperCallAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
  )
 )
 
@@ -1380,7 +1380,7 @@
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; o.hashCode();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:26:6
-  (drop (call_ref (ref.as_non_null (local.get $o))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $o)))))
+  (drop (call_ref $function.m_hashCode__int (ref.as_non_null (local.get $o))(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $o)))))
  )
 )
 
@@ -1923,7 +1923,7 @@
  (block
   ;; $1ReallyInnerClass.this.callReallyInner();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:79:10
-  (call_ref (ref.as_non_null (local.get $this))(struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable $m_callReallyInner__void_$pp_innerclassinitorder (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $vtable(local.get $this))))
+  (call_ref $function.m_callReallyInner__void_$pp_innerclassinitorder (ref.as_non_null (local.get $this))(struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable $m_callReallyInner__void_$pp_innerclassinitorder (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $vtable(local.get $this))))
  )
 )
 
@@ -2045,7 +2045,7 @@
  (block
   ;; InnerClass.this.callInner();
   ;;@ innerclassinitorder/InnerClassInitOrder.java:72:6
-  (call_ref (ref.as_non_null (local.get $this))(struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable $m_callInner__void_$pp_innerclassinitorder (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $vtable(local.get $this))))
+  (call_ref $function.m_callInner__void_$pp_innerclassinitorder (ref.as_non_null (local.get $this))(struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable $m_callInner__void_$pp_innerclassinitorder (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $vtable(local.get $this))))
  )
 )
 
@@ -3464,7 +3464,7 @@
   ;;@ innerclassinitorder/InnerClassInitOrder.java:268:8
   (return (block (result i32)
    (local.set $$qualifier (call $$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (local.get $this)(i32.const 1)))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable $m_go__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 $vtable(local.get $$qualifier))))
+   (call_ref $function.m_go__int (ref.as_non_null (local.get $$qualifier))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable $m_go__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 $vtable(local.get $$qualifier))))
   ))
  )
 )

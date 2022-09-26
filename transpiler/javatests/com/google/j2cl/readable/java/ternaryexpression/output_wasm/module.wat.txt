@@ -90,7 +90,7 @@
   ;;@ ternaryexpression/TernaryExpression.java:26:4
   (local.set $value (block (result i32)
    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $$create__int@java.lang.Integer (i32.const 15))) (else (call $$create__int@java.lang.Integer (i32.const 30)))))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+   (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
   ))
  )
 )

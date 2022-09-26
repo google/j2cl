@@ -800,7 +800,7 @@
  (block
   ;; return B.this.fun(((String) arg0));
   ;;@ bridgemethods/AccidentalOverride.java:32:6
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.B.vtable $m_fun__java_lang_String__java_lang_Integer (struct.get $bridgemethods.B $vtable(local.get $this)))))
+  (return (call_ref $function.m_fun__java_lang_String__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.B.vtable $m_fun__java_lang_String__java_lang_Integer (struct.get $bridgemethods.B $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B)
@@ -957,7 +957,7 @@
  (block
   ;; return ((String) AccidentalOverride.this.get());
   ;;@ bridgemethods/AccidentalOverride.java:48:6
-  (return (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $this))(struct.get $bridgemethods.A.vtable $m_get__java_lang_Object (struct.get $bridgemethods.A $vtable(local.get $this))))))
+  (return (ref.cast_static $java.lang.String (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $this))(struct.get $bridgemethods.A.vtable $m_get__java_lang_Object (struct.get $bridgemethods.A $vtable(local.get $this))))))
  )
 )
 (elem declare func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
@@ -974,7 +974,7 @@
  (block
   ;; return AccidentalOverride.this.fun(((String) arg0));
   ;;@ bridgemethods/AccidentalOverride.java:48:6
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.AccidentalOverride.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgemethods.AccidentalOverride $vtable(local.get $this)))))
+  (return (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.AccidentalOverride.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgemethods.AccidentalOverride $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride)
@@ -1253,7 +1253,7 @@
  (block
   ;; Parent.this.foo(((T) arg0),((Number) arg1));
   ;;@ bridgemethods/BridgeMethod.java:30:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Error (local.get $arg0))(ref.cast_static $java.lang.Number (local.get $arg1))(struct.get $bridgemethods.Parent.vtable $m_foo__java_lang_Error__java_lang_Number__void (struct.get $bridgemethods.Parent $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_Error__java_lang_Number__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Error (local.get $arg0))(ref.cast_static $java.lang.Number (local.get $arg1))(struct.get $bridgemethods.Parent.vtable $m_foo__java_lang_Error__java_lang_Number__void (struct.get $bridgemethods.Parent $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
@@ -1400,7 +1400,7 @@
  (block
   ;; BridgeMethod.this.foo(((AssertionError) arg0),arg1);
   ;;@ bridgemethods/BridgeMethod.java:42:13
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.BridgeMethod.vtable $m_foo__java_lang_AssertionError__java_lang_Number__void (struct.get $bridgemethods.BridgeMethod $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_AssertionError__java_lang_Number__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.BridgeMethod.vtable $m_foo__java_lang_AssertionError__java_lang_Number__void (struct.get $bridgemethods.BridgeMethod $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod)
@@ -1417,7 +1417,7 @@
  (block
   ;; BridgeMethod.this.foo(((AssertionError) arg0),arg1);
   ;;@ bridgemethods/BridgeMethod.java:42:13
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.BridgeMethod.vtable $m_foo__java_lang_AssertionError__java_lang_Number__void (struct.get $bridgemethods.BridgeMethod $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_AssertionError__java_lang_Number__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.BridgeMethod.vtable $m_foo__java_lang_AssertionError__java_lang_Number__void (struct.get $bridgemethods.BridgeMethod $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod)
@@ -1586,7 +1586,7 @@
  (block
   ;; DualUnrelatedBridges.this.foo(((String) arg0),((Double) arg1));
   ;;@ bridgemethods/BridgeMethod.java:61:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(ref.cast_static $java.lang.Double (local.get $arg1))(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_String__java_lang_Double__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(ref.cast_static $java.lang.Double (local.get $arg1))(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges)
@@ -1603,7 +1603,7 @@
  (block
   ;; DualUnrelatedBridges.this.foo(((String) arg0),arg1);
   ;;@ bridgemethods/BridgeMethod.java:61:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Number__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_String__java_lang_Number__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Number__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
@@ -1620,7 +1620,7 @@
  (block
   ;; DualUnrelatedBridges.this.foo(((String) arg0),arg1);
   ;;@ bridgemethods/BridgeMethod.java:61:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_String__java_lang_Double__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
@@ -1838,7 +1838,7 @@
  (block
   ;; DualUnrelatedAccidentalBridges.this.foo(((String) arg0),((Double) arg1));
   ;;@ bridgemethods/BridgeMethod.java:78:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(ref.cast_static $java.lang.Double (local.get $arg1))(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_String__java_lang_Double__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(ref.cast_static $java.lang.Double (local.get $arg1))(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges)
@@ -1855,7 +1855,7 @@
  (block
   ;; DualUnrelatedAccidentalBridges.this.foo(((String) arg0),arg1);
   ;;@ bridgemethods/BridgeMethod.java:78:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Number__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_String__java_lang_Number__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Number__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges)
@@ -1872,7 +1872,7 @@
  (block
   ;; DualUnrelatedAccidentalBridges.this.foo(((String) arg0),arg1);
   ;;@ bridgemethods/BridgeMethod.java:78:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_String__java_lang_Double__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges)
@@ -2114,7 +2114,7 @@
   (local.set $g (call $$create__@bridgemethods.AccidentalOverrideBridge ))
   ;; g.get(javaemul.internal.StringPool.$getString_||());
   ;;@ bridgemethods/BridgeMethod.java:100:4
-  (drop (call_ref (ref.as_non_null (local.get $g))(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast_static $bridgemethods.Getter.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $g)) (i32.const 0))) )))
+  (drop (call_ref $function.m_get__java_lang_String__java_lang_String (ref.as_non_null (local.get $g))(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast_static $bridgemethods.Getter.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $g)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_test__void@bridgemethods.AccidentalOverrideBridge)
@@ -2148,7 +2148,7 @@
  (block
   ;; return AccidentalOverrideBridge.this.get(((String) arg0));
   ;;@ bridgemethods/BridgeMethod.java:95:6
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.AccidentalOverrideBridge.vtable $m_get__java_lang_String__java_lang_String (struct.get $bridgemethods.AccidentalOverrideBridge $vtable(local.get $this)))))
+  (return (call_ref $function.m_get__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.AccidentalOverrideBridge.vtable $m_get__java_lang_String__java_lang_String (struct.get $bridgemethods.AccidentalOverrideBridge $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge)
@@ -2534,7 +2534,7 @@
  (block
   ;; return ReparametrerizedChild.this.m(((S) arg0));
   ;;@ bridgemethods/BridgeMethod.java:159:6
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $bridgemethods.ReparametrerizedChild (local.get $arg0))(struct.get $bridgemethods.ReparametrerizedChild.vtable $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (struct.get $bridgemethods.ReparametrerizedChild $vtable(local.get $this)))))
+  (return (call_ref $function.m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (ref.as_non_null (local.get $this))(ref.cast_static $bridgemethods.ReparametrerizedChild (local.get $arg0))(struct.get $bridgemethods.ReparametrerizedChild.vtable $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (struct.get $bridgemethods.ReparametrerizedChild $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
@@ -3303,7 +3303,7 @@
  (block
   ;; A.this.m(((String) arg0));
   ;;@ bridgemethods/BridgeMethodDefault.java:30:15
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.BridgeMethodDefault.A.vtable $m_m__java_lang_String__void (struct.get $bridgemethods.BridgeMethodDefault.A $vtable(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgemethods.BridgeMethodDefault.A.vtable $m_m__java_lang_String__void (struct.get $bridgemethods.BridgeMethodDefault.A $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A)
@@ -3778,7 +3778,7 @@
  (block
   ;; return C.this.get(((Consumer<? super C1>) arg0));
   ;;@ bridgemethods/BridgeMethodShadowedSignature.java:32:15
-  (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $bridgemethods.BridgeMethodShadowedSignature.C.vtable $m_get__java_util_function_Consumer__java_lang_String (struct.get $bridgemethods.BridgeMethodShadowedSignature.C $vtable(local.get $this)))))
+  (return (call_ref $function.m_get__java_util_function_Consumer__java_lang_String (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $bridgemethods.BridgeMethodShadowedSignature.C.vtable $m_get__java_util_function_Consumer__java_lang_String (struct.get $bridgemethods.BridgeMethodShadowedSignature.C $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
@@ -4037,7 +4037,7 @@
  (block
   ;; return EnumMap.this.put(((K) arg0),arg1);
   ;;@ bridgemethods/EnumMap.java:29:13
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Enum (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.EnumMap.vtable $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (struct.get $bridgemethods.EnumMap $vtable(local.get $this)))))
+  (return (call_ref $function.m_put__java_lang_Enum__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Enum (local.get $arg0))(local.get $arg1)(struct.get $bridgemethods.EnumMap.vtable $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (struct.get $bridgemethods.EnumMap $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)

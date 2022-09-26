@@ -932,7 +932,7 @@
  (block
   ;; return (Lambdas.this.field + intf.m(n));
   ;;@ lambdas/Lambdas.java:32:4
-  (return (i32.add (struct.get $lambdas.Lambdas $f_field__lambdas_Lambdas(local.get $this)) (call_ref (ref.as_non_null (local.get $intf))(local.get $n)(struct.get $lambdas.Lambdas.FunctionalInterface.vtable $m_m__int__int (ref.cast_static $lambdas.Lambdas.FunctionalInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) ))))
+  (return (i32.add (struct.get $lambdas.Lambdas $f_field__lambdas_Lambdas(local.get $this)) (call_ref $function.m_m__int__int (ref.as_non_null (local.get $intf))(local.get $n)(struct.get $lambdas.Lambdas.FunctionalInterface.vtable $m_m__int__int (ref.cast_static $lambdas.Lambdas.FunctionalInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) ))))
  )
 )
 (elem declare func $m_call__lambdas_Lambdas_FunctionalInterface__int__int@lambdas.Lambdas)
@@ -947,7 +947,7 @@
  (block
   ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$1.$create(),10);
   ;;@ lambdas/Lambdas.java:36:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$1 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$1 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaExpressionStyle__void@lambdas.Lambdas)
@@ -962,7 +962,7 @@
  (block
   ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$2.$create(),10);
   ;;@ lambdas/Lambdas.java:40:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$2 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$2 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaBlockStyle__void@lambdas.Lambdas)
@@ -977,7 +977,7 @@
  (block
   ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$3.$create(Lambdas.this),10);
   ;;@ lambdas/Lambdas.java:48:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$3 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$3 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaCaptureField__void@lambdas.Lambdas)
@@ -996,7 +996,7 @@
   (local.set $x (i32.const 1))
   ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$4.$create(x),10);
   ;;@ lambdas/Lambdas.java:53:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__int@lambdas.Lambdas.$LambdaImplementor$4 (local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__int@lambdas.Lambdas.$LambdaImplementor$4 (local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaCaptureLocal__void@lambdas.Lambdas)
@@ -1015,7 +1015,7 @@
   (local.set $x (i32.const 1))
   ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$5.$create(Lambdas.this,x),10);
   ;;@ lambdas/Lambdas.java:58:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas__int@lambdas.Lambdas.$LambdaImplementor$5 (local.get $this)(local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas__int@lambdas.Lambdas.$LambdaImplementor$5 (local.get $this)(local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaCaptureFieldAndLocal__void@lambdas.Lambdas)
@@ -1042,7 +1042,7 @@
  (block
   ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$6.$create(Lambdas.this),10);
   ;;@ lambdas/Lambdas.java:69:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$6 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$6 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaCallOuterFunction__void@lambdas.Lambdas)
@@ -1071,7 +1071,7 @@
  (block
   ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$9.$create(Lambdas.this),10);
   ;;@ lambdas/Lambdas.java:84:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$9 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$9 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testNestedLambdas__void@lambdas.Lambdas)
@@ -1086,7 +1086,7 @@
  (block
   ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$10.$create(),10);
   ;;@ lambdas/Lambdas.java:88:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$10 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$10 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testReturnLabelNameConflictKotlin__void@lambdas.Lambdas)
@@ -1134,7 +1134,7 @@
  (block
   ;; return intf.m(e);
   ;;@ lambdas/Lambdas.java:131:4
-  (return (call_ref (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) )))
+  (return (call_ref $function.m_m__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object@lambdas.Lambdas)
@@ -1152,7 +1152,7 @@
  (block
   ;; return ((Error) intf.m(e));
   ;;@ lambdas/Lambdas.java:135:4
-  (return (ref.cast_static $java.lang.Error (call_ref (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) ))))
+  (return (ref.cast_static $java.lang.Error (call_ref $function.m_m__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) ))))
  )
 )
 (elem declare func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas)
@@ -1169,7 +1169,7 @@
   (call $$clinit__void@lambdas.Lambdas )
   ;; return ((Enum<T>) intf.m(e));
   ;;@ lambdas/Lambdas.java:140:4
-  (return (ref.cast_static $java.lang.Enum (call_ref (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) ))))
+  (return (ref.cast_static $java.lang.Enum (call_ref $function.m_m__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $intf))(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericFunctionalInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) ))))
  )
 )
 
@@ -1201,16 +1201,16 @@
  (block
   ;; Lambdas.this.callWithTypeVariable(lambdas.Lambdas.$LambdaImplementor$13.$create(),java.lang.Error.$create());
   ;;@ lambdas/Lambdas.java:165:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$13 )(call $$create__@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$13 )(call $$create__@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
   ;; Lambdas.this.callParameterized(lambdas.Lambdas.$LambdaImplementor$14.$create(),java.lang.Error.$create());
   ;;@ lambdas/Lambdas.java:166:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$14 )(call $$create__@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$14 )(call $$create__@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
   ;; lambdas.Lambdas.callTypeVariableWithBounds(lambdas.Lambdas.$LambdaImplementor$15.$create(),((Enum<T>) null));
   ;;@ lambdas/Lambdas.java:167:4
   (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (call $$create__@lambdas.Lambdas.$LambdaImplementor$15 )(ref.cast_static $java.lang.Enum (ref.null $java.lang.Object))))
   ;; Lambdas.this.callWithBiFunction(lambdas.Lambdas.$LambdaImplementor$16.$create());
   ;;@ lambdas/Lambdas.java:168:4
-  (drop (call_ref (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$16 )(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref $function.m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (ref.as_non_null (local.get $this))(call $$create__@lambdas.Lambdas.$LambdaImplementor$16 )(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
   ;; Function<? super T, ?> f = lambdas.Lambdas.$LambdaImplementor$17.$create();
   ;;@ lambdas/Lambdas.java:172:4
   (local.set $f (call $$create__@lambdas.Lambdas.$LambdaImplementor$17 ))
@@ -1325,16 +1325,16 @@
   (local.set $stringJsSupplier (call $$create__@lambdas.Lambdas.$LambdaImplementor$23 ))
   ;; stringJsSupplier.get();
   ;;@ lambdas/Lambdas.java:272:4
-  (drop (call_ref (ref.as_non_null (local.get $stringJsSupplier))(struct.get $lambdas.Lambdas.JsSupplier.vtable $m_get__java_lang_Number (ref.cast_static $lambdas.Lambdas.JsSupplier.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $stringJsSupplier)) (i32.const 0))) )))
+  (drop (call_ref $function.m_get__java_lang_Number (ref.as_non_null (local.get $stringJsSupplier))(struct.get $lambdas.Lambdas.JsSupplier.vtable $m_get__java_lang_Number (ref.cast_static $lambdas.Lambdas.JsSupplier.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $stringJsSupplier)) (i32.const 0))) )))
   ;; Equals equals = stringJsSupplier;
   ;;@ lambdas/Lambdas.java:273:4
   (local.set $equals (local.get $stringJsSupplier))
   ;; equals.equals(null);
   ;;@ lambdas/Lambdas.java:274:4
-  (drop (call_ref (ref.as_non_null (local.get $equals))(ref.null $java.lang.Object)(struct.get $lambdas.Lambdas.Equals.vtable $m_equals__java_lang_Object__boolean (ref.cast_static $lambdas.Lambdas.Equals.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $equals)) (i32.const 1))) )))
+  (drop (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (local.get $equals))(ref.null $java.lang.Object)(struct.get $lambdas.Lambdas.Equals.vtable $m_equals__java_lang_Object__boolean (ref.cast_static $lambdas.Lambdas.Equals.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $equals)) (i32.const 1))) )))
   ;; equals.get();
   ;;@ lambdas/Lambdas.java:275:4
-  (drop (call_ref (ref.as_non_null (local.get $equals))(struct.get $lambdas.Lambdas.Equals.vtable $m_get__java_lang_Object (ref.cast_static $lambdas.Lambdas.Equals.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $equals)) (i32.const 1))) )))
+  (drop (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $equals))(struct.get $lambdas.Lambdas.Equals.vtable $m_get__java_lang_Object (ref.cast_static $lambdas.Lambdas.Equals.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $equals)) (i32.const 1))) )))
  )
 )
 
@@ -2005,13 +2005,13 @@
  (block
   ;; $LambdaImplementor$6.this.this.funOuter();
   ;;@ lambdas/Lambdas.java:71:10
-  (call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
+  (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
   ;; $LambdaImplementor$6.this.this.funOuter();
   ;;@ lambdas/Lambdas.java:72:10
-  (call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
+  (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
   ;; $LambdaImplementor$6.this.this.funOuter();
   ;;@ lambdas/Lambdas.java:73:10
-  (call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
+  (call_ref $function.m_funOuter__void (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))(struct.get $lambdas.Lambdas.vtable $m_funOuter__void (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$6 $$outer_this__lambdas_Lambdas_$LambdaImplementor$6(local.get $this)))))
   ;; return (i + 2);
   ;;@ lambdas/Lambdas.java:74:10
   (return (i32.add (local.get $i) (i32.const 2)))
@@ -2320,7 +2320,7 @@
  (block
   ;; return $LambdaImplementor$9.this.this.call(lambdas.Lambdas.$LambdaImplementor$8.$create(),20);
   ;;@ lambdas/Lambdas.java:84:14
-  (return (call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$9 $$outer_this__lambdas_Lambdas_$LambdaImplementor$9(local.get $this)))(call $$create__@lambdas.Lambdas.$LambdaImplementor$8 )(i32.const 20)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$9 $$outer_this__lambdas_Lambdas_$LambdaImplementor$9(local.get $this))))))
+  (return (call_ref $function.m_call__lambdas_Lambdas_FunctionalInterface__int__int (ref.as_non_null (struct.get $lambdas.Lambdas.$LambdaImplementor$9 $$outer_this__lambdas_Lambdas_$LambdaImplementor$9(local.get $this)))(call $$create__@lambdas.Lambdas.$LambdaImplementor$8 )(i32.const 20)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(struct.get $lambdas.Lambdas.$LambdaImplementor$9 $$outer_this__lambdas_Lambdas_$LambdaImplementor$9(local.get $this))))))
  )
 )
 (elem declare func $m_m__int__int@lambdas.Lambdas.$LambdaImplementor$9)
@@ -3881,7 +3881,7 @@
  (block
   ;; f1.apply(null);
   ;;@ lambdas/Lambdas.java:269:44
-  (drop (call_ref (ref.as_non_null (local.get $f1))(ref.null $java.lang.String)(struct.get $lambdas.Lambdas.GenericJsFunction.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericJsFunction.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $f1)) (i32.const 0))) )))
+  (drop (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $f1))(ref.null $java.lang.String)(struct.get $lambdas.Lambdas.GenericJsFunction.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericJsFunction.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $f1)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_then__lambdas_Lambdas_GenericJsFunction__lambdas_Lambdas_GenericJsFunction__void@lambdas.Lambdas.$LambdaImplementor$21)
@@ -3982,7 +3982,7 @@
  (block
   ;; f1.apply(null);
   ;;@ lambdas/Lambdas.java:270:56
-  (drop (call_ref (ref.as_non_null (local.get $f1))(ref.null $java.lang.String)(struct.get $lambdas.Lambdas.GenericJsFunction.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericJsFunction.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $f1)) (i32.const 0))) )))
+  (drop (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $f1))(ref.null $java.lang.String)(struct.get $lambdas.Lambdas.GenericJsFunction.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.GenericJsFunction.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $f1)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_then__lambdas_Lambdas_GenericJsFunction__lambdas_Lambdas_GenericJsFunction__void@lambdas.Lambdas.$LambdaImplementor$22)
@@ -4099,7 +4099,7 @@
  (block
   ;; return $LambdaImplementor$23.this.get();
   ;;@ lambdas/Lambdas.java:271:43
-  (return (call_ref (ref.as_non_null (local.get $this))(struct.get $lambdas.Lambdas.$LambdaImplementor$23.vtable $m_get__java_lang_Number (struct.get $lambdas.Lambdas.$LambdaImplementor$23 $vtable(local.get $this)))))
+  (return (call_ref $function.m_get__java_lang_Number (ref.as_non_null (local.get $this))(struct.get $lambdas.Lambdas.$LambdaImplementor$23.vtable $m_get__java_lang_Number (struct.get $lambdas.Lambdas.$LambdaImplementor$23 $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_get__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$23)
@@ -4844,7 +4844,7 @@
  (block
   ;; return $LambdaImplementor$28.this.after.apply($LambdaImplementor$28.this.this.apply(t,u));
   ;;@ lambdas/Lambdas.java:152:23
-  (return (call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$28 $$captured_after__lambdas_Lambdas_BiFunction_$LambdaImplementor$28(local.get $this)))(call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$28 $$outer_this__lambdas_Lambdas_BiFunction_$LambdaImplementor$28(local.get $this)))(local.get $t)(local.get $u)(struct.get $lambdas.Lambdas.BiFunction.vtable $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.BiFunction.vtable (array.get $itable (struct.get $java.lang.Object $itable (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$28 $$outer_this__lambdas_Lambdas_BiFunction_$LambdaImplementor$28(local.get $this))) (i32.const 0))) ))(struct.get $lambdas.Lambdas.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.Function.vtable (array.get $itable (struct.get $java.lang.Object $itable (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$28 $$captured_after__lambdas_Lambdas_BiFunction_$LambdaImplementor$28(local.get $this))) (i32.const 0))) )))
+  (return (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$28 $$captured_after__lambdas_Lambdas_BiFunction_$LambdaImplementor$28(local.get $this)))(call_ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.as_non_null (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$28 $$outer_this__lambdas_Lambdas_BiFunction_$LambdaImplementor$28(local.get $this)))(local.get $t)(local.get $u)(struct.get $lambdas.Lambdas.BiFunction.vtable $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.BiFunction.vtable (array.get $itable (struct.get $java.lang.Object $itable (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$28 $$outer_this__lambdas_Lambdas_BiFunction_$LambdaImplementor$28(local.get $this))) (i32.const 0))) ))(struct.get $lambdas.Lambdas.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast_static $lambdas.Lambdas.Function.vtable (array.get $itable (struct.get $java.lang.Object $itable (struct.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$28 $$captured_after__lambdas_Lambdas_BiFunction_$LambdaImplementor$28(local.get $this))) (i32.const 0))) )))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.BiFunction.$LambdaImplementor$28)
@@ -5308,13 +5308,13 @@
  (block
   ;; $LambdaImplementor$30.this.this.funInParent();
   ;;@ lambdas/Lambdas.java:206:12
-  (call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))))
+  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))))
   ;; $LambdaImplementor$30.this.this.funInParent();
   ;;@ lambdas/Lambdas.java:207:12
-  (call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))))
+  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))))
   ;; $LambdaImplementor$30.this.this.funInParent();
   ;;@ lambdas/Lambdas.java:208:12
-  (call_ref (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))))
+  (call_ref $function.m_funInParent__void (ref.as_non_null (struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))(struct.get $lambdas.Lambdas.Parent.vtable $m_funInParent__void (struct.get $lambdas.Lambdas.Parent $vtable(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this)))))
   ;; int a = $LambdaImplementor$30.this.this.fieldInParent;
   ;;@ lambdas/Lambdas.java:211:12
   (local.set $a (struct.get $lambdas.Lambdas.Parent $f_fieldInParent__lambdas_Lambdas_Parent(struct.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$30 $$outer_this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$30(local.get $this))))

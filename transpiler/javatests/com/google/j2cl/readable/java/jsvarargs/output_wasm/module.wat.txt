@@ -340,7 +340,7 @@
   ;;@ jsvarargs/Main.java:121:4
   (return (ref.cast_static $jsvarargs.Main (block (result (ref null $java.lang.Object))
    (local.set $$qualifier (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 4))) ))
+   (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $$qualifier))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 4))) ))
   )))
  )
 )
@@ -359,7 +359,7 @@
   ;;@ jsvarargs/Main.java:126:4
   (return (block (result (ref null $java.lang.Object))
    (local.set $$qualifier (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 4))) ))
+   (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $$qualifier))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 4))) ))
   ))
  )
 )
@@ -505,22 +505,22 @@
   (local.set $m (call $$create__int@jsvarargs.Main (i32.const 1)))
   ;; m.f3(1,javaemul.internal.WasmArray.OfInt.$create([1,2]));
   ;;@ jsvarargs/Main.java:181:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(i32.const 1)(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f3__int__arrayOf_int__int (ref.as_non_null (local.get $m))(i32.const 1)(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
   ;; m.f3(1,javaemul.internal.WasmArray.OfInt.$create([]));
   ;;@ jsvarargs/Main.java:183:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(i32.const 1)(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array ))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f3__int__arrayOf_int__int (ref.as_non_null (local.get $m))(i32.const 1)(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array ))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
   ;; m.f3(1,javaemul.internal.WasmArray.OfInt.$create([1,2]));
   ;;@ jsvarargs/Main.java:185:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(i32.const 1)(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f3__int__arrayOf_int__int (ref.as_non_null (local.get $m))(i32.const 1)(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
   ;; m.f3(1,javaemul.internal.WasmArray.OfInt.$create([]));
   ;;@ jsvarargs/Main.java:187:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(i32.const 1)(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array ))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f3__int__arrayOf_int__int (ref.as_non_null (local.get $m))(i32.const 1)(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array ))(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
   ;; int[] ints = javaemul.internal.WasmArray.OfInt.$create([1,2]);
   ;;@ jsvarargs/Main.java:189:4
   (local.set $ints (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2))))
   ;; m.f3(1,ints);
   ;;@ jsvarargs/Main.java:190:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f3__int__arrayOf_int__int (ref.as_non_null (local.get $m))(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
  )
 )
 (elem declare func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
@@ -540,22 +540,22 @@
   (local.set $m (call $$create__int@jsvarargs.Main (i32.const 1)))
   ;; m.f4(javaemul.internal.WasmArray.OfInt.$create([1,2]));
   ;;@ jsvarargs/Main.java:196:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f4__arrayOf_int__int (ref.as_non_null (local.get $m))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
   ;; m.f4(javaemul.internal.WasmArray.OfInt.$create([]));
   ;;@ jsvarargs/Main.java:198:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array ))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f4__arrayOf_int__int (ref.as_non_null (local.get $m))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array ))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
   ;; m.f4(javaemul.internal.WasmArray.OfInt.$create([1,2]));
   ;;@ jsvarargs/Main.java:200:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f4__arrayOf_int__int (ref.as_non_null (local.get $m))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
   ;; m.f4(javaemul.internal.WasmArray.OfInt.$create([]));
   ;;@ jsvarargs/Main.java:202:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array ))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f4__arrayOf_int__int (ref.as_non_null (local.get $m))(call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array ))(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
   ;; int[] ints = javaemul.internal.WasmArray.OfInt.$create([1,2]);
   ;;@ jsvarargs/Main.java:204:4
   (local.set $ints (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2))))
   ;; m.f4(ints);
   ;;@ jsvarargs/Main.java:205:4
-  (drop (call_ref (ref.as_non_null (local.get $m))(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  (drop (call_ref $function.m_f4__arrayOf_int__int (ref.as_non_null (local.get $m))(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
  )
 )
 (elem declare func $m_testInstanceMethodFirst__void@jsvarargs.Main)
@@ -583,22 +583,22 @@
   (local.set $o2 (call $$create__@java.lang.Object ))
   ;; a.f1(0,javaemul.internal.WasmArray.OfObject.$create([o1,o2]));
   ;;@ jsvarargs/Main.java:213:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 0)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $o1)(local.get $o2)))(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  (drop (call_ref $function.m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $a))(i32.const 0)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $o1)(local.get $o2)))(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
   ;; a.f1(0,javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ jsvarargs/Main.java:215:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 0)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array ))(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  (drop (call_ref $function.m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $a))(i32.const 0)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array ))(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
   ;; a.f1(0,javaemul.internal.WasmArray.OfObject.$create([o1,o2]));
   ;;@ jsvarargs/Main.java:217:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 0)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $o1)(local.get $o2)))(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  (drop (call_ref $function.m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $a))(i32.const 0)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $o1)(local.get $o2)))(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
   ;; a.f1(0,javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ jsvarargs/Main.java:219:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 0)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array ))(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  (drop (call_ref $function.m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $a))(i32.const 0)(call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array ))(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
   ;; Object[] os = javaemul.internal.WasmArray.OfObject.$create([o1,o2]);
   ;;@ jsvarargs/Main.java:221:4
   (local.set $os (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $o1)(local.get $o2))))
   ;; a.f1(0,os);
   ;;@ jsvarargs/Main.java:222:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 0)(local.get $os)(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  (drop (call_ref $function.m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref.as_non_null (local.get $a))(i32.const 0)(local.get $os)(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
  )
 )
 (elem declare func $m_testJsFunction__void@jsvarargs.Main)
@@ -622,7 +622,7 @@
    (local.set $$qualifier (call $$create__int@jsvarargs.Main (i32.const 1)))
    ;; $qualifier.f3(1,ints);
    ;;@ jsvarargs/Main.java:227:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $$qualifier)))))
+   (drop (call_ref $function.m_f3__int__arrayOf_int__int (ref.as_non_null (local.get $$qualifier))(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $$qualifier)))))
   )
  )
 )

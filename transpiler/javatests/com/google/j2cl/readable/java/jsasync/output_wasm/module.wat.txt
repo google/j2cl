@@ -251,11 +251,11 @@
   ;;@ jsasync/Main.java:35:4
   (local.set $result (block (result i32)
    (local.set $$qualifier (ref.cast_static $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 7))))))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+   (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
   ))
   ;; return Main.this.parametricAsyncMethod(java.lang.Integer.valueOf(result));
   ;;@ jsasync/Main.java:36:4
-  (return (call_ref (ref.as_non_null (local.get $this))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $result))(struct.get $jsasync.Main.vtable $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (struct.get $jsasync.Main $vtable(local.get $this)))))
+  (return (call_ref $function.m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (ref.as_non_null (local.get $this))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $result))(struct.get $jsasync.Main.vtable $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (struct.get $jsasync.Main $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)

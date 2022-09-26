@@ -319,7 +319,7 @@ final class ExpressionTranspiler {
 
         if (methodCall.isPolymorphic()) {
           if (methodCall.hasSideEffects()) {
-            sourceBuilder.append("(call_ref ");
+            sourceBuilder.append(format("(call_ref %s ", environment.getFunctionTypeName(target)));
           } else {
             sourceBuilder.append(
                 format("(call %s ", environment.getNoSideEffectWrapperFunctionName(target)));

@@ -146,31 +146,31 @@
   (local.set $d (call $$create__@jsbridgeaccidentaloverride.SubJsType ))
   ;; a.foo(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:24:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
   ;; b.foo(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:25:4
-  (drop (call_ref (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $b)))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $b)))))
   ;; c.foo(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:26:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_foo__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_foo__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
   ;; a.bar(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:27:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_bar__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
+  (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_bar__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
   ;; b.bar(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:28:4
-  (drop (call_ref (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.SubJsType.vtable $m_bar__int__int (struct.get $jsbridgeaccidentaloverride.SubJsType $vtable(local.get $b)))))
+  (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.SubJsType.vtable $m_bar__int__int (struct.get $jsbridgeaccidentaloverride.SubJsType $vtable(local.get $b)))))
   ;; c.bar(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:29:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_bar__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_bar__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
   ;; a.fun(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:30:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_fun__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
+  (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_fun__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
   ;; b.fun(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:31:4
-  (drop (call_ref (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_fun__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $b)))))
+  (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_fun__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $b)))))
   ;; d.fun(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:32:4
-  (drop (call_ref (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.OtherInterface.vtable $m_fun__int__int (ref.cast_static $jsbridgeaccidentaloverride.OtherInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $d)) (i32.const 0))) )))
+  (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.OtherInterface.vtable $m_fun__int__int (ref.cast_static $jsbridgeaccidentaloverride.OtherInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $d)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_test__void@jsbridgeaccidentaloverride.Main)

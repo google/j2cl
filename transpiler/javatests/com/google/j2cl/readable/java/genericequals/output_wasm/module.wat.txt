@@ -123,7 +123,7 @@
   (local.set $other (ref.cast_static $genericequals.GenericEquals (local.get $obj)))
   ;; return GenericEquals.this.value.equals(other.value);
   ;;@ genericequals/GenericEquals.java:41:4
-  (return (call_ref (ref.as_non_null (struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this)))(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this))))))
+  (return (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this)))(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this))))))
  )
 )
 (elem declare func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)

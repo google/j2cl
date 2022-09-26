@@ -259,7 +259,7 @@
   (local.set $foo (ref.null $java.lang.Object))
   ;; foo.bar();
   ;;@ annotation/Main.java:34:6
-  (drop (call_ref (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast_static $annotation.Main.Foo.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $foo)) (i32.const -1))) )))
+  (drop (call_ref $function.m_bar__int (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast_static $annotation.Main.Foo.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $foo)) (i32.const -1))) )))
   ;; return 123;
   ;;@ annotation/Main.java:35:6
   (return (i32.const 123))

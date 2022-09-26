@@ -184,7 +184,7 @@
  (block
   ;; B.this.foo();
   ;;@ abstractinnerclass/InnerClasses.java:25:6
-  (call_ref (ref.as_non_null (local.get $this))(struct.get $abstractinnerclass.InnerClasses.B.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.B $vtable(local.get $this))))
+  (call_ref $function.m_foo__void (ref.as_non_null (local.get $this))(struct.get $abstractinnerclass.InnerClasses.B.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.B $vtable(local.get $this))))
  )
 )
 (elem declare func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B)
@@ -254,7 +254,7 @@
  (block
   ;; C.this.foo();
   ;;@ abstractinnerclass/InnerClasses.java:31:6
-  (call_ref (ref.as_non_null (local.get $this))(struct.get $abstractinnerclass.InnerClasses.C.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.C $vtable(local.get $this))))
+  (call_ref $function.m_foo__void (ref.as_non_null (local.get $this))(struct.get $abstractinnerclass.InnerClasses.C.vtable $m_foo__void (struct.get $abstractinnerclass.InnerClasses.C $vtable(local.get $this))))
  )
 )
 (elem declare func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C)

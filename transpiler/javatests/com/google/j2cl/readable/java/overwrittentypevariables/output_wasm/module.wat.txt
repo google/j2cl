@@ -331,7 +331,7 @@
  (block
   ;; return $1.this.apply(arg0);
   ;;@ overwrittentypevariables/HashFunctions.java:26:33
-  (return (call_ref (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $overwrittentypevariables.HashFunctions.1.vtable $m_apply__java_lang_Object__java_lang_String (struct.get $overwrittentypevariables.HashFunctions.1 $vtable(local.get $this)))))
+  (return (call_ref $function.m_apply__java_lang_Object__java_lang_String (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $overwrittentypevariables.HashFunctions.1.vtable $m_apply__java_lang_Object__java_lang_String (struct.get $overwrittentypevariables.HashFunctions.1 $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1)
@@ -433,7 +433,7 @@
  (block
   ;; return java.lang.String.valueOf(input.ordinal());
   ;;@ overwrittentypevariables/HashFunctions.java:38:8
-  (return (call $m_valueOf__int__java_lang_String@java.lang.String (call_ref (ref.as_non_null (local.get $input))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))))
+  (return (call $m_valueOf__int__java_lang_String@java.lang.String (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $input))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))))
  )
 )
 (elem declare func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.2)
@@ -450,7 +450,7 @@
  (block
   ;; return $2.this.apply(((T) arg0));
   ;;@ overwrittentypevariables/HashFunctions.java:35:33
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Enum (local.get $arg0))(struct.get $overwrittentypevariables.HashFunctions.2.vtable $m_apply__java_lang_Enum__java_lang_String (struct.get $overwrittentypevariables.HashFunctions.2 $vtable(local.get $this)))))
+  (return (call_ref $function.m_apply__java_lang_Enum__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Enum (local.get $arg0))(struct.get $overwrittentypevariables.HashFunctions.2.vtable $m_apply__java_lang_Enum__java_lang_String (struct.get $overwrittentypevariables.HashFunctions.2 $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2)

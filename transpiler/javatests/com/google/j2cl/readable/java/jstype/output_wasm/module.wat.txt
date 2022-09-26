@@ -140,16 +140,16 @@
   (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $f_publicField__jstype_SomeJsType(local.get $this)) (struct.get $jstype.SomeJsType $f_privateField__jstype_SomeJsType_(local.get $this))) (struct.get $jstype.SomeJsType $f_packageField__jstype_SomeJsType(local.get $this))) (struct.get $jstype.SomeJsType $f_protectedField__jstype_SomeJsType(local.get $this))))
   ;; SomeJsType.this.publicMethod();
   ;;@ jstype/SomeJsType.java:39:4
-  (call_ref (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
+  (call_ref $function.m_publicMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
   ;; SomeJsType.this.privateMethod();
   ;;@ jstype/SomeJsType.java:40:4
   (call $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType (ref.as_non_null (local.get $this)))
   ;; SomeJsType.this.packageMethod();
   ;;@ jstype/SomeJsType.java:41:4
-  (call_ref (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_packageMethod__void_$pp_jstype (struct.get $jstype.SomeJsType $vtable(local.get $this))))
+  (call_ref $function.m_packageMethod__void_$pp_jstype (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_packageMethod__void_$pp_jstype (struct.get $jstype.SomeJsType $vtable(local.get $this))))
   ;; SomeJsType.this.protectedMethod();
   ;;@ jstype/SomeJsType.java:42:4
-  (call_ref (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_protectedMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
+  (call_ref $function.m_protectedMethod__void (ref.as_non_null (local.get $this))(struct.get $jstype.SomeJsType.vtable $m_protectedMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
  )
 )
 (elem declare func $m_useFieldsAndMethods__void@jstype.SomeJsType)

@@ -335,7 +335,7 @@
   ;;@ cast/CastGenerics.java:49:4
   (local.set $str (ref.cast_static $java.lang.String (block (result (ref null $java.lang.Object))
    (local.set $$qualifier (call $$create__@cast.CastGenerics ))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $cast.CastGenerics.vtable $m_method__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics $vtable(local.get $$qualifier))))
+   (call_ref $function.m_method__java_lang_Object_$pp_cast (ref.as_non_null (local.get $$qualifier))(struct.get $cast.CastGenerics.vtable $m_method__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics $vtable(local.get $$qualifier))))
   )))
   ;; Container<T> containerT = null;
   ;;@ cast/CastGenerics.java:51:4
@@ -343,18 +343,18 @@
   (block
    ;; A $qualifier = ((A) containerT.get());
    ;;@ cast/CastGenerics.java:52:4
-   (local.set $$qualifier_1 (call_ref (ref.as_non_null (local.get $containerT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
+   (local.set $$qualifier_1 (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
    ;; $qualifier.mA();
    ;;@ cast/CastGenerics.java:52:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_1)) (i32.const 0))) ))
+   (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_1))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_1)) (i32.const 0))) ))
   )
   (block
    ;; B $qualifier = ((B) containerT.get());
    ;;@ cast/CastGenerics.java:53:4
-   (local.set $$qualifier_2 (call_ref (ref.as_non_null (local.get $containerT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
+   (local.set $$qualifier_2 (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
    ;; $qualifier.mB();
    ;;@ cast/CastGenerics.java:53:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_2)) (i32.const 1))) ))
+   (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_2))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_2)) (i32.const 1))) ))
   )
   ;; Container<U> containerU = null;
   ;;@ cast/CastGenerics.java:55:4
@@ -362,32 +362,32 @@
   (block
    ;; A $qualifier = ((A) containerU.get());
    ;;@ cast/CastGenerics.java:56:4
-   (local.set $$qualifier_3 (call_ref (ref.as_non_null (local.get $containerU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
+   (local.set $$qualifier_3 (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
    ;; $qualifier.mA();
    ;;@ cast/CastGenerics.java:56:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_3))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_3)) (i32.const 0))) ))
+   (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_3))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_3)) (i32.const 0))) ))
   )
   (block
    ;; B $qualifier = ((B) containerU.get());
    ;;@ cast/CastGenerics.java:57:4
-   (local.set $$qualifier_4 (call_ref (ref.as_non_null (local.get $containerU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
+   (local.set $$qualifier_4 (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
    ;; $qualifier.mB();
    ;;@ cast/CastGenerics.java:57:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_4))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_4)) (i32.const 1))) ))
+   (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_4))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_4)) (i32.const 1))) ))
   )
   ;; Container<T[]> containerArrT = null;
   ;;@ cast/CastGenerics.java:59:4
   (local.set $containerArrT (ref.null $cast.CastGenerics.Container))
   ;; T[] arrT = ((T[]) containerArrT.get());
   ;;@ cast/CastGenerics.java:60:4
-  (local.set $arrT (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
+  (local.set $arrT (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
   (block
    ;; T $qualifier = ((T) arrT.elements[0]);
    ;;@ cast/CastGenerics.java:61:4
    (local.set $$qualifier_5 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $arrT)) (i32.const 0)))
    ;; $qualifier.mA();
    ;;@ cast/CastGenerics.java:61:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_5))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_5)) (i32.const 0))) ))
+   (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_5))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_5)) (i32.const 0))) ))
   )
   (block
    ;; B $qualifier = ((B) ((T) arrT.elements[0]));
@@ -395,27 +395,27 @@
    (local.set $$qualifier_6 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $arrT)) (i32.const 0)))
    ;; $qualifier.mB();
    ;;@ cast/CastGenerics.java:62:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_6))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_6)) (i32.const 1))) ))
+   (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_6))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_6)) (i32.const 1))) ))
   )
   ;; A[] arrA = ((A[]) containerArrT.get());
   ;;@ cast/CastGenerics.java:64:4
-  (local.set $arrA (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
+  (local.set $arrA (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
   ;; B[] arrB = ((B[]) containerArrT.get());
   ;;@ cast/CastGenerics.java:65:4
-  (local.set $arrB (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
+  (local.set $arrB (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrT))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT))))))
   ;; Container<U[]> containerArrU = null;
   ;;@ cast/CastGenerics.java:67:4
   (local.set $containerArrU (ref.null $cast.CastGenerics.Container))
   ;; U[] arrU = ((U[]) containerArrU.get());
   ;;@ cast/CastGenerics.java:68:4
-  (local.set $arrU (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
+  (local.set $arrU (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
   (block
    ;; U $qualifier = ((U) arrU.elements[0]);
    ;;@ cast/CastGenerics.java:69:4
    (local.set $$qualifier_7 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $arrU)) (i32.const 0)))
    ;; $qualifier.mA();
    ;;@ cast/CastGenerics.java:69:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_7))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_7)) (i32.const 0))) ))
+   (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_7))(struct.get $cast.CastGenerics.A.vtable $m_mA__void (ref.cast_static $cast.CastGenerics.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_7)) (i32.const 0))) ))
   )
   (block
    ;; B $qualifier = ((B) ((U) arrU.elements[0]));
@@ -423,32 +423,32 @@
    (local.set $$qualifier_8 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $arrU)) (i32.const 0)))
    ;; $qualifier.mB();
    ;;@ cast/CastGenerics.java:70:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_8))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_8)) (i32.const 1))) ))
+   (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_8))(struct.get $cast.CastGenerics.B.vtable $m_mB__void (ref.cast_static $cast.CastGenerics.B.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_8)) (i32.const 1))) ))
   )
   ;; (arrA = ((A[]) containerArrU.get()));
   ;;@ cast/CastGenerics.java:72:4
-  (local.set $arrA (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
+  (local.set $arrA (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
   ;; (arrB = ((B[]) containerArrU.get()));
   ;;@ cast/CastGenerics.java:73:4
-  (local.set $arrB (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
+  (local.set $arrB (ref.cast_static $javaemul.internal.WasmArray.OfObject (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerArrU))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU))))))
   ;; Container<BaseImplementor> containerBase = null;
   ;;@ cast/CastGenerics.java:75:4
   (local.set $containerBase (ref.null $cast.CastGenerics.Container))
   (block
    ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
    ;;@ cast/CastGenerics.java:76:4
-   (local.set $$qualifier_9 (ref.cast_static $cast.CastGenerics.BaseImplementor (call_ref (ref.as_non_null (local.get $containerBase))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase))))))
+   (local.set $$qualifier_9 (ref.cast_static $cast.CastGenerics.BaseImplementor (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerBase))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase))))))
    ;; $qualifier.mA();
    ;;@ cast/CastGenerics.java:76:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_9))(struct.get $cast.CastGenerics.BaseImplementor.vtable $m_mA__void (struct.get $cast.CastGenerics.BaseImplementor $vtable(local.get $$qualifier_9))))
+   (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_9))(struct.get $cast.CastGenerics.BaseImplementor.vtable $m_mA__void (struct.get $cast.CastGenerics.BaseImplementor $vtable(local.get $$qualifier_9))))
   )
   (block
    ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
    ;;@ cast/CastGenerics.java:77:4
-   (local.set $$qualifier_10 (ref.cast_static $cast.CastGenerics.BaseImplementor (call_ref (ref.as_non_null (local.get $containerBase))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase))))))
+   (local.set $$qualifier_10 (ref.cast_static $cast.CastGenerics.BaseImplementor (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerBase))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase))))))
    ;; $qualifier.mB();
    ;;@ cast/CastGenerics.java:77:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_10))(struct.get $cast.CastGenerics.BaseImplementor.vtable $m_mB__void (struct.get $cast.CastGenerics.BaseImplementor $vtable(local.get $$qualifier_10))))
+   (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_10))(struct.get $cast.CastGenerics.BaseImplementor.vtable $m_mB__void (struct.get $cast.CastGenerics.BaseImplementor $vtable(local.get $$qualifier_10))))
   )
   ;; Container<Implementor> containerImplementor = null;
   ;;@ cast/CastGenerics.java:79:4
@@ -456,18 +456,18 @@
   (block
    ;; Implementor $qualifier = ((Implementor) containerImplementor.get());
    ;;@ cast/CastGenerics.java:80:4
-   (local.set $$qualifier_11 (ref.cast_static $cast.CastGenerics.Implementor (call_ref (ref.as_non_null (local.get $containerImplementor))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor))))))
+   (local.set $$qualifier_11 (ref.cast_static $cast.CastGenerics.Implementor (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerImplementor))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor))))))
    ;; $qualifier.mA();
    ;;@ cast/CastGenerics.java:80:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_11))(struct.get $cast.CastGenerics.Implementor.vtable $m_mA__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_11))))
+   (call_ref $function.m_mA__void (ref.as_non_null (local.get $$qualifier_11))(struct.get $cast.CastGenerics.Implementor.vtable $m_mA__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_11))))
   )
   (block
    ;; Implementor $qualifier = ((Implementor) containerImplementor.get());
    ;;@ cast/CastGenerics.java:81:4
-   (local.set $$qualifier_12 (ref.cast_static $cast.CastGenerics.Implementor (call_ref (ref.as_non_null (local.get $containerImplementor))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor))))))
+   (local.set $$qualifier_12 (ref.cast_static $cast.CastGenerics.Implementor (call_ref $function.m_get__java_lang_Object_$pp_cast (ref.as_non_null (local.get $containerImplementor))(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor))))))
    ;; $qualifier.mB();
    ;;@ cast/CastGenerics.java:81:4
-   (call_ref (ref.as_non_null (local.get $$qualifier_12))(struct.get $cast.CastGenerics.Implementor.vtable $m_mB__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_12))))
+   (call_ref $function.m_mB__void (ref.as_non_null (local.get $$qualifier_12))(struct.get $cast.CastGenerics.Implementor.vtable $m_mB__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_12))))
   )
  )
 )
@@ -1580,49 +1580,49 @@
   ;;@ cast/CastPrimitives.java:87:4
   (local.set $bool (block (result i32)
    (local.set $$qualifier (ref.cast_static $java.lang.Boolean (local.get $o)))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
+   (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
   ))
   ;; byte b = (Byte $qualifier = ((Byte) o),$qualifier.byteValue());
   ;;@ cast/CastPrimitives.java:88:4
   (local.set $b (block (result i32)
    (local.set $$qualifier_1 (ref.cast_static $java.lang.Byte (local.get $o)))
-   (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $$qualifier_1))))
+   (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $$qualifier_1))))
   ))
   ;; char c = (Character $qualifier = ((Character) o),$qualifier.charValue());
   ;;@ cast/CastPrimitives.java:89:4
   (local.set $c (block (result i32)
    (local.set $$qualifier_2 (ref.cast_static $java.lang.Character (local.get $o)))
-   (call_ref (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $$qualifier_2))))
+   (call_ref $function.m_charValue__char (ref.as_non_null (local.get $$qualifier_2))(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $$qualifier_2))))
   ))
   ;; short s = (Short $qualifier = ((Short) o),$qualifier.shortValue());
   ;;@ cast/CastPrimitives.java:90:4
   (local.set $s (block (result i32)
    (local.set $$qualifier_3 (ref.cast_static $java.lang.Short (local.get $o)))
-   (call_ref (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.Short.vtable $m_shortValue__short (struct.get $java.lang.Short $vtable(local.get $$qualifier_3))))
+   (call_ref $function.m_shortValue__short (ref.as_non_null (local.get $$qualifier_3))(struct.get $java.lang.Short.vtable $m_shortValue__short (struct.get $java.lang.Short $vtable(local.get $$qualifier_3))))
   ))
   ;; int i = (Integer $qualifier = ((Integer) o),$qualifier.intValue());
   ;;@ cast/CastPrimitives.java:91:4
   (local.set $i (block (result i32)
    (local.set $$qualifier_4 (ref.cast_static $java.lang.Integer (local.get $o)))
-   (call_ref (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
+   (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_4))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
   ))
   ;; long l = (Long $qualifier = ((Long) o),$qualifier.longValue());
   ;;@ cast/CastPrimitives.java:92:4
   (local.set $l (block (result i64)
    (local.set $$qualifier_5 (ref.cast_static $java.lang.Long (local.get $o)))
-   (call_ref (ref.as_non_null (local.get $$qualifier_5))(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $$qualifier_5))))
+   (call_ref $function.m_longValue__long (ref.as_non_null (local.get $$qualifier_5))(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $$qualifier_5))))
   ))
   ;; float f = (Float $qualifier = ((Float) o),$qualifier.floatValue());
   ;;@ cast/CastPrimitives.java:93:4
   (local.set $f (block (result f32)
    (local.set $$qualifier_6 (ref.cast_static $java.lang.Float (local.get $o)))
-   (call_ref (ref.as_non_null (local.get $$qualifier_6))(struct.get $java.lang.Float.vtable $m_floatValue__float (struct.get $java.lang.Float $vtable(local.get $$qualifier_6))))
+   (call_ref $function.m_floatValue__float (ref.as_non_null (local.get $$qualifier_6))(struct.get $java.lang.Float.vtable $m_floatValue__float (struct.get $java.lang.Float $vtable(local.get $$qualifier_6))))
   ))
   ;; double d = (Double $qualifier = ((Double) o),$qualifier.doubleValue());
   ;;@ cast/CastPrimitives.java:94:4
   (local.set $d (block (result f64)
    (local.set $$qualifier_7 (ref.cast_static $java.lang.Double (local.get $o)))
-   (call_ref (ref.as_non_null (local.get $$qualifier_7))(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier_7))))
+   (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $$qualifier_7))(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier_7))))
   ))
  )
 )
@@ -1647,19 +1647,19 @@
   (local.set $boxedByte (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 0)))
   ;; short s = boxedByte.byteValue();
   ;;@ cast/CastPrimitives.java:101:4
-  (local.set $s (call_ref (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte)))))
+  (local.set $s (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte)))))
   ;; int i = boxedByte.byteValue();
   ;;@ cast/CastPrimitives.java:102:4
-  (local.set $i (call_ref (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte)))))
+  (local.set $i (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte)))))
   ;; long l = javaemul.internal.Primitives.widenByteToLong(boxedByte.byteValue());
   ;;@ cast/CastPrimitives.java:103:4
-  (local.set $l (i64.extend_i32_s (call_ref (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
+  (local.set $l (i64.extend_i32_s (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
   ;; float f = javaemul.internal.Primitives.widenByteToFloat(boxedByte.byteValue());
   ;;@ cast/CastPrimitives.java:104:4
-  (local.set $f (f32.convert_i32_s (call_ref (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
+  (local.set $f (f32.convert_i32_s (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
   ;; double d = javaemul.internal.Primitives.widenByteToDouble(boxedByte.byteValue());
   ;;@ cast/CastPrimitives.java:105:4
-  (local.set $d (f64.convert_i32_s (call_ref (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
+  (local.set $d (f64.convert_i32_s (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $boxedByte))(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
  )
 )
 (elem declare func $m_testUnboxAndWiden__void@cast.CastPrimitives)
@@ -2544,12 +2544,12 @@
   (local.set $foo (call $$create__cast_Casts@cast.Casts.Foo (local.get $this)))
   ;; if (foo.method() instanceof Casts) {
   ;;@ cast/Casts.java:112:4
-  (if (ref.test_static $cast.Casts (call_ref (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))))
+  (if (ref.test_static $cast.Casts (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))))
    (then
     (block
      ;; Casts cNotAvoidCastsTo = ((Casts) foo.method());
      ;;@ cast/Casts.java:113:6
-     (local.set $cNotAvoidCastsTo (ref.cast_static $cast.Casts (call_ref (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo))))))
+     (local.set $cNotAvoidCastsTo (ref.cast_static $cast.Casts (call_ref $function.m_method__java_lang_Object (ref.as_non_null (local.get $foo))(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo))))))
     )
    )
   )

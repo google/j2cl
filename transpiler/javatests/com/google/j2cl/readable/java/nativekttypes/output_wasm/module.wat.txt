@@ -653,7 +653,7 @@
   (local.set $topLevel (call $$create__java_lang_Object@nativekttypes.NativeTopLevel (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; String fooInstanceMethod = ((String) topLevel.instanceMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:33:4
-  (local.set $fooInstanceMethod (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $topLevel))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.NativeTopLevel.vtable $m_instanceMethod__java_lang_Object__java_lang_Object (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel))))))
+  (local.set $fooInstanceMethod (ref.cast_static $java.lang.String (call_ref $function.m_instanceMethod__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $topLevel))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.NativeTopLevel.vtable $m_instanceMethod__java_lang_Object__java_lang_Object (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel))))))
   ;; String fooStaticMethod = ((String) nativekttypes.NativeTopLevel.staticMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:34:4
   (local.set $fooStaticMethod (ref.cast_static $java.lang.String (call $m_staticMethod__java_lang_Object__java_lang_Object@nativekttypes.NativeTopLevel (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))))
@@ -682,31 +682,31 @@
   (local.set $i1 (struct.get $nativekttypes.NativeTopLevel $f_fieldToRename__nativekttypes_NativeTopLevel(local.get $topLevel)))
   ;; int i2 = topLevel.methodToRename();
   ;;@ nativekttypes/Main.java:40:4
-  (local.set $i2 (call_ref (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_methodToRename__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
+  (local.set $i2 (call_ref $function.m_methodToRename__int (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_methodToRename__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
   ;; int i3 = topLevel.getMethodAsProperty();
   ;;@ nativekttypes/Main.java:41:4
-  (local.set $i3 (call_ref (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_getMethodAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
+  (local.set $i3 (call_ref $function.m_getMethodAsProperty__int (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_getMethodAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
   ;; int i4 = topLevel.nonGetMethodAsProperty();
   ;;@ nativekttypes/Main.java:42:4
-  (local.set $i4 (call_ref (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_nonGetMethodAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
+  (local.set $i4 (call_ref $function.m_nonGetMethodAsProperty__int (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_nonGetMethodAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
   ;; int i5 = topLevel.methodToRenameAsProperty();
   ;;@ nativekttypes/Main.java:43:4
-  (local.set $i5 (call_ref (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_methodToRenameAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
+  (local.set $i5 (call_ref $function.m_methodToRenameAsProperty__int (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_methodToRenameAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
   ;; boolean i6 = topLevel.isFieldToRename;
   ;;@ nativekttypes/Main.java:44:4
   (local.set $i6 (struct.get_s $nativekttypes.NativeTopLevel $f_isFieldToRename__nativekttypes_NativeTopLevel(local.get $topLevel)))
   ;; boolean i7 = topLevel.isMethodAsProperty();
   ;;@ nativekttypes/Main.java:45:4
-  (local.set $i7 (call_ref (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_isMethodAsProperty__boolean (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
+  (local.set $i7 (call_ref $function.m_isMethodAsProperty__boolean (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_isMethodAsProperty__boolean (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
   ;; int i8 = topLevel.getstartingmethodAsProperty();
   ;;@ nativekttypes/Main.java:46:4
-  (local.set $i8 (call_ref (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_getstartingmethodAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
+  (local.set $i8 (call_ref $function.m_getstartingmethodAsProperty__int (ref.as_non_null (local.get $topLevel))(struct.get $nativekttypes.NativeTopLevel.vtable $m_getstartingmethodAsProperty__int (struct.get $nativekttypes.NativeTopLevel $vtable(local.get $topLevel)))))
   ;; Nested<String> nested = nativekttypes.NativeTopLevel.Nested.$create(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:48:4
   (local.set $nested (call $$create__java_lang_Object@nativekttypes.NativeTopLevel.Nested (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; String nestedInstanceMethod = ((String) nested.instanceMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:49:4
-  (local.set $nestedInstanceMethod (ref.cast_static $java.lang.String (call_ref (ref.as_non_null (local.get $nested))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.NativeTopLevel.Nested.vtable $m_instanceMethod__java_lang_Object__java_lang_Object (struct.get $nativekttypes.NativeTopLevel.Nested $vtable(local.get $nested))))))
+  (local.set $nestedInstanceMethod (ref.cast_static $java.lang.String (call_ref $function.m_instanceMethod__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $nested))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.NativeTopLevel.Nested.vtable $m_instanceMethod__java_lang_Object__java_lang_Object (struct.get $nativekttypes.NativeTopLevel.Nested $vtable(local.get $nested))))))
   ;; String nestedStaticMethod = ((String) nativekttypes.NativeTopLevel.Nested.staticMethod(javaemul.internal.StringPool.$getString_|foo|()));
   ;;@ nativekttypes/Main.java:50:4
   (local.set $nestedStaticMethod (ref.cast_static $java.lang.String (call $m_staticMethod__java_lang_Object__java_lang_Object@nativekttypes.NativeTopLevel.Nested (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))))
@@ -741,13 +741,13 @@
   (local.set $subclass (call $$create__java_lang_Object@nativekttypes.Subclass (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; int i9 = subclass.methodToRename();
   ;;@ nativekttypes/Main.java:61:4
-  (local.set $i9 (call_ref (ref.as_non_null (local.get $subclass))(struct.get $nativekttypes.Subclass.vtable $m_methodToRename__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
+  (local.set $i9 (call_ref $function.m_methodToRename__int (ref.as_non_null (local.get $subclass))(struct.get $nativekttypes.Subclass.vtable $m_methodToRename__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
   ;; int i10 = subclass.interfaceMethod(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:62:4
-  (local.set $i10 (call_ref (ref.as_non_null (local.get $subclass))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethod__java_lang_Object__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
+  (local.set $i10 (call_ref $function.m_interfaceMethod__java_lang_Object__int (ref.as_non_null (local.get $subclass))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethod__java_lang_Object__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
   ;; int i11 = subclass.interfaceMethodToRename(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ nativekttypes/Main.java:63:4
-  (local.set $i11 (call_ref (ref.as_non_null (local.get $subclass))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethodToRename__java_lang_Object__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
+  (local.set $i11 (call_ref $function.m_interfaceMethodToRename__java_lang_Object__int (ref.as_non_null (local.get $subclass))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $nativekttypes.Subclass.vtable $m_interfaceMethodToRename__java_lang_Object__int (struct.get $nativekttypes.Subclass $vtable(local.get $subclass)))))
   ;; NativeFunctionalInterface interfaceAnonymousSubclass = nativekttypes.Main.2.$create(Main.this);
   ;;@ nativekttypes/Main.java:65:4
   (local.set $interfaceAnonymousSubclass (call $$create__nativekttypes_Main@nativekttypes.Main.2 (local.get $this)))
@@ -841,7 +841,7 @@
   (local.set $i1 (struct.get $nativekttypes.NativeWithCompanionObject $f_instanceField__nativekttypes_NativeWithCompanionObject(local.get $o)))
   ;; o.instanceMethod();
   ;;@ nativekttypes/Main.java:108:4
-  (call_ref (ref.as_non_null (local.get $o))(struct.get $nativekttypes.NativeWithCompanionObject.vtable $m_instanceMethod__void (struct.get $nativekttypes.NativeWithCompanionObject $vtable(local.get $o))))
+  (call_ref $function.m_instanceMethod__void (ref.as_non_null (local.get $o))(struct.get $nativekttypes.NativeWithCompanionObject.vtable $m_instanceMethod__void (struct.get $nativekttypes.NativeWithCompanionObject $vtable(local.get $o))))
   ;; nativekttypes.NativeWithCompanionObject.staticMethod();
   ;;@ nativekttypes/Main.java:110:4
   (call $m_staticMethod__void@nativekttypes.NativeWithCompanionObject )
@@ -2177,7 +2177,7 @@
  (block
   ;; return $4.this.foo(((String) arg0));
   ;;@ nativekttypes/Main.java:87:63
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $nativekttypes.Main.4.vtable $m_foo__java_lang_String__java_lang_String (struct.get $nativekttypes.Main.4 $vtable(local.get $this)))))
+  (return (call_ref $function.m_foo__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $nativekttypes.Main.4.vtable $m_foo__java_lang_String__java_lang_String (struct.get $nativekttypes.Main.4 $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__java_lang_Object@nativekttypes.Main.4)

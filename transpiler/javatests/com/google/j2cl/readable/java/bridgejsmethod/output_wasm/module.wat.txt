@@ -398,58 +398,58 @@
   (local.set $a (call $$create__@bridgejsmethod.Main.A ))
   ;; a.fun(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:164:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_fun__java_lang_Object__java_lang_Object (struct.get $bridgejsmethod.Main.A $vtable(local.get $a)))))
+  (drop (call_ref $function.m_fun__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $a))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_fun__java_lang_Object__java_lang_Object (struct.get $bridgejsmethod.Main.A $vtable(local.get $a)))))
   ;; a.bar(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:165:4
-  (call_ref (ref.as_non_null (local.get $a))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $a))))
+  (call_ref $function.m_bar__java_lang_Object__void (ref.as_non_null (local.get $a))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $a))))
   ;; B b = bridgejsmethod.Main.B.$create();
   ;;@ bridgejsmethod/Main.java:166:4
   (local.set $b (call $$create__@bridgejsmethod.Main.B ))
   ;; b.fun(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:167:4
-  (drop (call_ref (ref.as_non_null (local.get $b))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
+  (drop (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $b))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
   ;; b.bar(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:168:4
-  (call_ref (ref.as_non_null (local.get $b))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
+  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $b))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
   ;; C c = bridgejsmethod.Main.C.$create();
   ;;@ bridgejsmethod/Main.java:169:4
   (local.set $c (call $$create__@bridgejsmethod.Main.C ))
   ;; c.fun(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:170:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $c)))))
+  (drop (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $c))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $c)))))
   ;; c.bar(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:171:4
-  (call_ref (ref.as_non_null (local.get $c))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $c))))
+  (call_ref $function.m_bar__java_lang_Object__void (ref.as_non_null (local.get $c))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $c))))
   ;; D d = bridgejsmethod.Main.D.$create();
   ;;@ bridgejsmethod/Main.java:172:4
   (local.set $d (call $$create__@bridgejsmethod.Main.D ))
   ;; d.fun(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:173:4
-  (drop (call_ref (ref.as_non_null (local.get $d))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $d)))))
+  (drop (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $d))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $d)))))
   ;; d.bar(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:174:4
-  (call_ref (ref.as_non_null (local.get $d))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $d))))
+  (call_ref $function.m_bar__java_lang_Object__void (ref.as_non_null (local.get $d))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $d))))
   ;; E e = bridgejsmethod.Main.E.$create();
   ;;@ bridgejsmethod/Main.java:175:4
   (local.set $e (call $$create__@bridgejsmethod.Main.E ))
   ;; e.fun(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:176:4
-  (drop (call_ref (ref.as_non_null (local.get $e))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
+  (drop (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $e))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
   ;; e.bar(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:177:4
-  (call_ref (ref.as_non_null (local.get $e))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
+  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $e))(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
   ;; H<Integer> h = bridgejsmethod.Main.H.$create();
   ;;@ bridgejsmethod/Main.java:178:4
   (local.set $h (call $$create__@bridgejsmethod.Main.H ))
   ;; h.enclose(java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:179:4
-  (drop (call_ref (ref.as_non_null (local.get $h))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.H.vtable $m_enclose__java_lang_Object__java_lang_Object (struct.get $bridgejsmethod.Main.H $vtable(local.get $h)))))
+  (drop (call_ref $function.m_enclose__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $h))(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.H.vtable $m_enclose__java_lang_Object__java_lang_Object (struct.get $bridgejsmethod.Main.H $vtable(local.get $h)))))
   ;; L<Integer> l = bridgejsmethod.Main.L.$create();
   ;;@ bridgejsmethod/Main.java:180:4
   (local.set $l (call $$create__@bridgejsmethod.Main.L ))
   ;; l.fun(javaemul.internal.StringPool.$getString_|foo|(),java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:181:4
-  (call_ref (ref.as_non_null (local.get $l))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
+  (call_ref $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref.as_non_null (local.get $l))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
  )
 )
 
@@ -768,7 +768,7 @@
  (block
   ;; B.this.bar(((String) arg0));
   ;;@ bridgejsmethod/Main.java:43:22
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $this))))
+  (call_ref $function.m_bar__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $this))))
  )
 )
 (elem declare func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
@@ -785,7 +785,7 @@
  (block
   ;; return B.this.fun(((String) arg0));
   ;;@ bridgejsmethod/Main.java:43:22
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $this)))))
+  (return (call_ref $function.m_fun__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B)
@@ -905,7 +905,7 @@
  (block
   ;; return C.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:61:22
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $this)))))
+  (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.C)
@@ -1026,7 +1026,7 @@
  (block
   ;; return D.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:70:22
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
+  (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D)
@@ -1043,7 +1043,7 @@
  (block
   ;; return D.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:70:22
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
+  (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.D)
@@ -1234,7 +1234,7 @@
  (block
   ;; return F.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:85:22
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
+  (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F)
@@ -1251,7 +1251,7 @@
  (block
   ;; return F.this.fun(((Integer) arg0));
   ;;@ bridgejsmethod/Main.java:85:22
-  (return (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
+  (return (call_ref $function.m_fun__java_lang_Integer__java_lang_Integer (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.Integer (local.get $arg0))(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.F)
@@ -1619,7 +1619,7 @@
  (block
   ;; L.this.fun(((String) arg0),arg1);
   ;;@ bridgejsmethod/Main.java:109:22
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $this))))
+  (call_ref $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(local.get $arg1)(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $this))))
  )
 )
 (elem declare func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L)
@@ -2311,7 +2311,7 @@
  (block
   ;; Parent.this.jsMethod(((T) arg0));
   ;;@ bridgejsmethod/Main.java:194:8
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.Parent (local.get $arg0))(struct.get $bridgejsmethod.Main.Parent.vtable $m_jsMethod__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
+  (call_ref $function.m_jsMethod__bridgejsmethod_Main_Parent__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.Parent (local.get $arg0))(struct.get $bridgejsmethod.Main.Parent.vtable $m_jsMethod__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
  )
 )
 (elem declare func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent)
@@ -2327,7 +2327,7 @@
  (block
   ;; Parent.this.method(((T) arg0));
   ;;@ bridgejsmethod/Main.java:194:8
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.Parent (local.get $arg0))(struct.get $bridgejsmethod.Main.Parent.vtable $m_method__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
+  (call_ref $function.m_method__bridgejsmethod_Main_Parent__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.Parent (local.get $arg0))(struct.get $bridgejsmethod.Main.Parent.vtable $m_method__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
  )
 )
 (elem declare func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent)

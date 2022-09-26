@@ -402,7 +402,7 @@
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum2.this.$ctor($name,$ordinal,foo.ordinal());
   ;;@ enums/Enum1.java:38:4
-  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal)(call_ref (ref.as_non_null (local.get $foo))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $foo)))))
+  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (ref.as_non_null (local.get $this))(local.get $$name)(local.get $$ordinal)(call_ref $function.m_ordinal__int (ref.as_non_null (local.get $foo))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $foo)))))
  )
 )
 
@@ -479,13 +479,13 @@
   ;;@ enums/Enum1.java:52:4
   (local.set $o1 (block (result i32)
    (local.set $$qualifier (call $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2 (ref.null $java.lang.String)))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
+   (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
   ))
   ;; int o2 = (Enum2 $qualifier = enums.Enum2.valueOf(javaemul.internal.StringPool.$getString_|VALUE1|()),$qualifier.ordinal());
   ;;@ enums/Enum1.java:53:4
   (local.set $o2 (block (result i32)
    (local.set $$qualifier_1 (call $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2 (call $function.no.side.effects.$getString_|VALUE1|__java_lang_String (ref.func $$getString_|VALUE1|__java_lang_String@javaemul.internal.StringPool) )))
-   (call_ref (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier_1))))
+   (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier_1))))
   ))
   ;; int l = enums.Enum2.values().length;
   ;;@ enums/Enum1.java:54:4
@@ -547,7 +547,7 @@
     (call $$clinit__void@enums.Enum1 )
     (global.get $f_V1__enums_Enum1)
    ))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
+   (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
   ))
  )
 )
@@ -912,7 +912,7 @@
   (local.set $v_1 (ref.cast_static $java.lang.Integer (local.get $v)))
   ;; return java.lang.Integer.valueOf((1 + v.intValue()));
   ;;@ enums/Enum1.java:59:14
-  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref (ref.as_non_null (local.get $v_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v_1)))))))
+  (return (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref $function.m_intValue__int (ref.as_non_null (local.get $v_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v_1)))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)

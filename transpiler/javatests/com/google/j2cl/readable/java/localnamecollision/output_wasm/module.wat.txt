@@ -252,7 +252,7 @@
    (local.set $$qualifier (call $$create__@localnamecollision.Class ))
    ;; $qualifier.getClass();
    ;;@ localnamecollision/Class.java:20:4
-   (drop (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
+   (drop (call_ref $function.m_getClass__java_lang_Class (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
   )
  )
 )

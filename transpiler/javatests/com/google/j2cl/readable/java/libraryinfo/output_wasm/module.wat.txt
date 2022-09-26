@@ -252,7 +252,7 @@
   (local.set $jsFunction (call $$create__@libraryinfo.Main.$LambdaImplementor$1 ))
   ;; jsFunction.apply(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ libraryinfo/Main.java:85:4
-  (call_ref (ref.as_non_null (local.get $jsFunction))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast_static $libraryinfo.Main.Function.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0))) ))
+  (call_ref $function.m_apply__java_lang_String__void (ref.as_non_null (local.get $jsFunction))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast_static $libraryinfo.Main.Function.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0))) ))
   ;; libraryinfo.Main.MyJsType.$create();
   ;;@ libraryinfo/Main.java:87:4
   (drop (call $$create__@libraryinfo.Main.MyJsType ))
@@ -308,7 +308,7 @@
   (local.set $foo (ref.null $libraryinfo.Main.Foo))
   ;; foo.instanceMethod();
   ;;@ libraryinfo/Main.java:114:4
-  (call_ref (ref.as_non_null (local.get $foo))(struct.get $libraryinfo.Main.Foo.vtable $m_instanceMethod__void_$pp_libraryinfo (struct.get $libraryinfo.Main.Foo $vtable(local.get $foo))))
+  (call_ref $function.m_instanceMethod__void_$pp_libraryinfo (ref.as_non_null (local.get $foo))(struct.get $libraryinfo.Main.Foo.vtable $m_instanceMethod__void_$pp_libraryinfo (struct.get $libraryinfo.Main.Foo $vtable(local.get $foo))))
   ;; Class<?> clazz = javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
   ;;@ libraryinfo/Main.java:116:4
   (local.set $clazz (call $function.no.side.effects.$getLibraryinfo.Main.Foo__java_lang_Class (ref.func $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

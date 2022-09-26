@@ -286,7 +286,7 @@
  (block
   ;; Subclass.this.m1(((AssertionError) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
+  (call_ref $function.m_m1__java_lang_AssertionError__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
@@ -617,7 +617,7 @@
  (block
   ;; AnotherTask.this.call(((Superclass<T>) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $simplebridgemethods.Superclass (local.get $arg0))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
+  (call_ref $function.m_call__simplebridgemethods_Superclass__void (ref.as_non_null (local.get $this))(ref.cast_static $simplebridgemethods.Superclass (local.get $arg0))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)

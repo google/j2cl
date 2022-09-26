@@ -335,16 +335,16 @@
   (local.set $d (call $$create__@interfacejsbridge.InterfaceImpl ))
   ;; a.foo(1);
   ;;@ interfacejsbridge/Main.java:24:4
-  (drop (call_ref (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.MyJsInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $a)) (i32.const 1))) )))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.MyJsInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $a)) (i32.const 1))) )))
   ;; b.foo(1);
   ;;@ interfacejsbridge/Main.java:25:4
-  (drop (call_ref (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $interfacejsbridge.MyInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $b)) (i32.const 2))) )))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $interfacejsbridge.MyInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $b)) (i32.const 2))) )))
   ;; c.foo(1);
   ;;@ interfacejsbridge/Main.java:26:4
-  (drop (call_ref (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $interfacejsbridge.SubInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.SubInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 0))) )))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $interfacejsbridge.SubInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.SubInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 0))) )))
   ;; d.foo(1);
   ;;@ interfacejsbridge/Main.java:27:4
-  (drop (call_ref (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $interfacejsbridge.InterfaceImpl.vtable $m_foo__int__int (struct.get $interfacejsbridge.InterfaceImpl $vtable(local.get $d)))))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $interfacejsbridge.InterfaceImpl.vtable $m_foo__int__int (struct.get $interfacejsbridge.InterfaceImpl $vtable(local.get $d)))))
  )
 )
 (elem declare func $m_test__void@interfacejsbridge.Main)

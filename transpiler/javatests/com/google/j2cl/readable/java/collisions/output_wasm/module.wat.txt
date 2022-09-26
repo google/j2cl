@@ -693,11 +693,11 @@
   ;;@ collisions/goog.java:70:4
   (local.set $t (block (result (ref null $java.lang.Number))
    (local.set $$qualifier (call $$create__@collisions.T ))
-   (call_ref (ref.as_non_null (local.get $$qualifier))(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
+   (call_ref $function.m_m__java_lang_Number_$pp_collisions (ref.as_non_null (local.get $$qualifier))(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
   ))
   ;; t.byteValue();
   ;;@ collisions/goog.java:71:4
-  (drop (call_ref (ref.as_non_null (local.get $t))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $t)))))
+  (drop (call_ref $function.m_byteValue__byte (ref.as_non_null (local.get $t))(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $t)))))
   ;; return t;
   ;;@ collisions/goog.java:72:4
   (return (local.get $t))

@@ -335,7 +335,7 @@
  (block
   ;; Sub.this.m(((String) arg0));
   ;;@ jsmethod/JsMethodExample.java:54:15
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
+  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub)

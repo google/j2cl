@@ -63,7 +63,7 @@
    ))
    ;; $qualifier.println(javaemul.internal.StringPool.$getString_|in_Interface...|());
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
-   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_Interface...|__java_lang_String (ref.func $$getString_|in_Interface...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
+   (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_Interface...|__java_lang_String (ref.func $$getString_|in_Interface...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
  )
 )
@@ -166,7 +166,7 @@
    ))
    ;; $qualifier.println(javaemul.internal.StringPool.$getString_|in_GenericClass|());
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
-   (call_ref (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_GenericClass|__java_lang_String (ref.func $$getString_|in_GenericClass|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
+   (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(call $function.no.side.effects.$getString_|in_GenericClass|__java_lang_String (ref.func $$getString_|in_GenericClass|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
  )
 )
@@ -284,7 +284,7 @@
  (block
   ;; ConcreteClass.this.foo(((String) arg0));
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (call_ref (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $genericanddefaultmethods.ConcreteClass.vtable $m_foo__java_lang_String__void (struct.get $genericanddefaultmethods.ConcreteClass $vtable(local.get $this))))
+  (call_ref $function.m_foo__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $genericanddefaultmethods.ConcreteClass.vtable $m_foo__java_lang_String__void (struct.get $genericanddefaultmethods.ConcreteClass $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass)
