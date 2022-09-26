@@ -111,7 +111,7 @@ abstract class AbstractStringBuilder implements CharSequence, Appendable {
   }
 
   void appendCodePoint0(int x) {
-    string += String.valueOf(Character.toChars(x));
+    string += String.fromCodePoint(x);
   }
 
   void replace0(int start, int end, String toInsert) {

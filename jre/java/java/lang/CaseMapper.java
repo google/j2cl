@@ -18,6 +18,14 @@ package java.lang;
 /** Performs case operations. Abstracted so can be platform specific. */
 final class CaseMapper {
 
+  public static int codePointToLowerCase(int c) {
+    return String.fromCodePoint(c).toLowerCase().codePointAt(0);
+  }
+
+  public static int codePointToUpperCase(int c) {
+    return String.fromCodePoint(c).toUpperCase().codePointAt(0);
+  }
+
   public static char charToLowerCase(char c) {
     return String.valueOf(c).toLowerCase().charAt(0);
   }

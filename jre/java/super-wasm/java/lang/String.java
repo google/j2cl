@@ -801,7 +801,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   static String fromCodePoint(int codePoint) {
-    return valueOf(Character.toChars(codePoint));
+    return fromInternalArray(Character.toChars(codePoint));
   }
 
   public boolean contentEquals(StringBuffer strbuf) {

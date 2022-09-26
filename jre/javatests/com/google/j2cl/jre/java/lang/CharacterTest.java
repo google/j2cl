@@ -310,6 +310,14 @@ public class CharacterTest extends GWTTestCase {
         lowerCaseJudge.allPass().length());
     assertEquals("wrong number of lowercase letters after toLowerCase", 52,
         new LowerCaseJudge(lowerCaseChanger.changed()).allPass().length());
+
+    assertEquals('t', Character.toLowerCase((int) 'T'));
+
+    assertEquals(0x10428, Character.toLowerCase(0x10400));
+    assertEquals(0x10428, Character.toLowerCase(0x10428));
+
+    assertEquals(0x1D504, Character.toLowerCase(0x1D504));
+    assertEquals(0x10FFFD, Character.toLowerCase(0x10FFFD));
   }
 
   public void testSpace() {
@@ -472,8 +480,17 @@ public class CharacterTest extends GWTTestCase {
         upperCaseJudge.allPass().length());
     assertEquals("wrong number of uppercase letters after toUpperCase", 52,
         new UpperCaseJudge(upperCaseChanger.changed()).allPass().length());
+
+    assertEquals('A', Character.toUpperCase((int) 'a'));
+    assertEquals('A', Character.toUpperCase((int) 'A'));
+    assertEquals('1', Character.toUpperCase((int) '1'));
+
+    assertEquals(0x10400, Character.toUpperCase(0x10428));
+    assertEquals(0x10400, Character.toUpperCase(0x10400));
+
+    assertEquals(0x10FFFF, Character.toUpperCase(0x10FFFF));
   }
-  
+
   public void testValueOf() {
     assertEquals('A', Character.valueOf('A').charValue());
   }

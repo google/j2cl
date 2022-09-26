@@ -219,14 +219,7 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   static String fromCodePoint(int codePoint) {
-    if (codePoint >= Character.MIN_SUPPLEMENTARY_CODE_POINT) {
-      char hiSurrogate = Character.getHighSurrogate(codePoint);
-      char loSurrogate = Character.getLowSurrogate(codePoint);
-      return String.valueOf(hiSurrogate)
-          + String.valueOf(loSurrogate);
-    } else {
-      return String.valueOf((char) codePoint);
-    }
+    return NativeString.fromCodePoint(codePoint);
   }
 
   // Note that 'value' field is special and used for unboxing by the J2CL transpiler.
@@ -703,19 +696,34 @@ public final class String implements Comparable<String>, CharSequence,
 
   @JsType(isNative = true, name = "String", namespace = JsPackage.GLOBAL)
   private static class NativeString {
+    public static native String fromCodePoint(int x);
+
     public static native String fromCharCode(char x);
+
     public int length;
+
     public native char charCodeAt(int index);
+
     public native int indexOf(String str);
+
     public native int indexOf(String str, int startIndex);
+
     public native int lastIndexOf(String str);
+
     public native int lastIndexOf(String str, int start);
+
     public native String replace(NativeRegExp regex, String replace);
+
     public native String substr(int beginIndex);
+
     public native String substr(int beginIndex, int len);
+
     public native String toLocaleLowerCase();
+
     public native String toLocaleUpperCase();
+
     public native String toLowerCase();
+
     public native String toUpperCase();
   }
 

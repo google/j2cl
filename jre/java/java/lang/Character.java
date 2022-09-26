@@ -422,16 +422,24 @@ public final class Character implements Comparable<Character>, Serializable {
     return MIN_SUPPLEMENTARY_CODE_POINT + ((highSurrogate & 1023) << 10) + (lowSurrogate & 1023);
   }
 
+  public static int toLowerCase(int c) {
+    return CaseMapper.codePointToLowerCase(c);
+  }
+
+  public static int toUpperCase(int c) {
+    return CaseMapper.codePointToUpperCase(c);
+  }
+
   public static char toLowerCase(char c) {
     return CaseMapper.charToLowerCase(c);
   }
 
-  public static String toString(char x) {
-    return String.valueOf(x);
-  }
-
   public static char toUpperCase(char c) {
     return CaseMapper.charToUpperCase(c);
+  }
+
+  public static String toString(char x) {
+    return String.valueOf(x);
   }
 
   public static Character valueOf(char c) {

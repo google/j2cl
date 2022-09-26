@@ -78,9 +78,11 @@ function createImportObject(userImports) {
     'Math.tanh': Math.tanh,
     'Number.toPrecision': (/** number */ n, /** number */ p) =>
         n.toPrecision(p),
-    'Character.toLowerCase': charToLowerCase,
-    'Character.toUpperCase': charToUpperCase,
-    'Character.foldCase': charFoldCase,
+    'Character.codePointToLowerCase': codePointToLowerCase,
+    'Character.codePointToUpperCase': codePointToUpperCase,
+    'Character.charToLowerCase': charToLowerCase,
+    'Character.charToUpperCase': charToUpperCase,
+    'Character.charFoldCase': charFoldCase,
     'ConsoleLogger.log': (level, message) => console[level](message),
     'isValidDouble': isValidDouble,
     'parseFloat': parseFloat,
@@ -159,6 +161,22 @@ function createImportObject(userImports) {
     // the same key.
     'imports': Object.assign({}, jreImports, userImports)
   };
+}
+
+/**
+ * @param {number} value
+ * @return {number}
+ */
+function codePointToLowerCase(value) {
+  return String.fromCodePoint(value).toLowerCase().codePointAt(0);
+}
+
+/**
+ * @param {number} value
+ * @return {number}
+ */
+function codePointToUpperCase(value) {
+  return String.fromCodePoint(value).toUpperCase().codePointAt(0);
 }
 
 /**

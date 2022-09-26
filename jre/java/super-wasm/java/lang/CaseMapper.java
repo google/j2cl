@@ -155,6 +155,32 @@ class CaseMapper {
         : new String(output, 0, i);
   }
 
+  public static int codePointToLowerCase(int value) {
+    if (value < 128) {
+      if ('A' <= value && value <= 'Z') {
+        return value + ('a' - 'A');
+      }
+      return value;
+    }
+    return nativeCodePointToLowerCase(value);
+  }
+
+  @JsMethod(name = "Character.codePointToLowerCase", namespace = JsPackage.GLOBAL)
+  private static native int nativeCodePointToLowerCase(int value);
+
+  public static int codePointToUpperCase(int value) {
+    if (value < 128) {
+      if ('a' <= value && value <= 'z') {
+        return value - ('a' - 'A');
+      }
+      return value;
+    }
+    return nativeCodePointToUpperCase(value);
+  }
+
+  @JsMethod(name = "Character.codePointToUpperCase", namespace = JsPackage.GLOBAL)
+  private static native int nativeCodePointToUpperCase(int value);
+
   public static char charToLowerCase(char value) {
     if (value < 128) {
       if ('A' <= value && value <= 'Z') {
@@ -165,7 +191,7 @@ class CaseMapper {
     return nativeCharToLowerCase(value);
   }
 
-  @JsMethod(name = "Character.toLowerCase", namespace = JsPackage.GLOBAL)
+  @JsMethod(name = "Character.charToLowerCase", namespace = JsPackage.GLOBAL)
   private static native char nativeCharToLowerCase(char value);
 
   public static char charToUpperCase(char value) {
@@ -178,7 +204,7 @@ class CaseMapper {
     return nativeCharToUpperCase(value);
   }
 
-  @JsMethod(name = "Character.toUpperCase", namespace = JsPackage.GLOBAL)
+  @JsMethod(name = "Character.charToUpperCase", namespace = JsPackage.GLOBAL)
   private static native char nativeCharToUpperCase(char value);
 
   public static char foldCase(char value) {
@@ -191,6 +217,6 @@ class CaseMapper {
     return nativeFoldCase(value);
   }
 
-  @JsMethod(name = "Character.foldCase", namespace = JsPackage.GLOBAL)
+  @JsMethod(name = "Character.charFoldCase", namespace = JsPackage.GLOBAL)
   private static native char nativeFoldCase(char value);
 }
