@@ -77,7 +77,7 @@ private data class TypeDescriptorRenderer(
 
   fun renderArray(arrayTypeDescriptor: ArrayTypeDescriptor) {
     renderer.renderQualifiedName(arrayTypeDescriptor)
-    val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
+    val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor
     if (!componentTypeDescriptor.isPrimitive) {
       renderer.renderInAngleBrackets { child.render(componentTypeDescriptor) }
     }

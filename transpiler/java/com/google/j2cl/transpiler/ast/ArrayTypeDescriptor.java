@@ -26,7 +26,6 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
-  @Nullable
   public abstract TypeDescriptor getComponentTypeDescriptor();
 
   @Memoized
