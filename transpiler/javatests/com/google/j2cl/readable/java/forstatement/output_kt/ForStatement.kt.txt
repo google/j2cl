@@ -69,6 +69,21 @@ open class ForStatement {
   }
  }
 
+ open fun testInitializeInForCondition() {
+  var i: kotlin.Int = 0
+  var x: kotlin.Int = 0
+  LOOP@ while (i < 1 && kotlin.run {
+   x = 3
+   x
+  } !== 0) {
+   LOOP_CONTINUE@ do {
+    val y: kotlin.Int
+    y = i
+   } while (false)
+   i = i + 1
+  }
+ }
+
  companion object {
   @kotlin.jvm.JvmStatic
   fun returnsValue(): kotlin.Int {

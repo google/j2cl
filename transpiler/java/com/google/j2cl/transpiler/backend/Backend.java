@@ -122,6 +122,7 @@ import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.NormalizeVarargParametersKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeVariableInitialization;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.OptimizeEnums;
@@ -477,6 +478,7 @@ public enum Backend {
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,
           MakeVariablesFinal::new,
+          NormalizeVariableInitialization::new,
           NormalizeNonFinalVariablesKotlin::new,
           RemoveNestedBlocks::new,
 

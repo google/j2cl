@@ -13,8 +13,8 @@ open class ImplicitParenthesis {
  companion object {
   @kotlin.jvm.JvmStatic
   fun examples() {
-   var primitiveInt: kotlin.Int
-   var boxedInt: kotlin.Int?
+   var primitiveInt: kotlin.Int = 0
+   var boxedInt: kotlin.Int? = null
    primitiveInt = 5
    boxedInt = kotlin.Int(10)
    primitiveInt = (if (primitiveInt === 5) kotlin.Int(15) else kotlin.Int(30))!!.toInt()
@@ -52,9 +52,9 @@ open class ImplicitParenthesis {
 
   @kotlin.jvm.JvmStatic
   fun nonExamples() {
-   var primitiveInt: kotlin.Int
-   var boxedInt: kotlin.Int?
-   var boxedBoolean: kotlin.Boolean?
+   var primitiveInt: kotlin.Int = 0
+   var boxedInt: kotlin.Int? = null
+   var boxedBoolean: kotlin.Boolean? = null
    primitiveInt = 5
    boxedInt = kotlin.Int(10)
    primitiveInt = boxedInt!!.toInt() - primitiveInt

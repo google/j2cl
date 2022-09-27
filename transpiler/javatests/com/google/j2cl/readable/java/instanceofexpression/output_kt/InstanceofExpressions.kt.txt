@@ -7,7 +7,7 @@ import kotlin.jvm.*
 open class InstanceofExpressions {
  open fun testInstanceofClass() {
   val `object`: kotlin.Any? = instanceofexpression.InstanceofExpressions()
-  var b: kotlin.Boolean
+  var b: kotlin.Boolean = false
   b = `object` is kotlin.Any
   b = `object` is instanceofexpression.InstanceofExpressions
   b = `object` is kotlin.String
@@ -15,7 +15,7 @@ open class InstanceofExpressions {
 
  open fun testInstanceofInterface() {
   val o: kotlin.Any? = kotlin.Any()
-  var b: kotlin.Boolean
+  var b: kotlin.Boolean = false
   b = o is java.io.Serializable
   b = object : java.io.Serializable {} is java.io.Serializable
  }
@@ -42,7 +42,7 @@ open class InstanceofExpressions {
   val objectArray: kotlin.Array<kotlin.Any?>? = kotlin.arrayOfNulls<kotlin.Any>(0)
   val objectDoubleArray: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>>(0)
   val stringArray: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.String>(0)
-  var a: kotlin.Boolean
+  var a: kotlin.Boolean = false
   a = `object` is kotlin.Array<*>
   a = `object` is kotlin.Array<*>
   a = `object` is kotlin.Array<*>

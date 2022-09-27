@@ -56,7 +56,7 @@ open class Main {
   var o: nativekttypes.nativekt.KRequiringBridge? = nativekttypes.nativekt.KBridge()
   o = object : nativekttypes.nativekt.KBridge() {}
   o = nativekttypes.BridgeSubclass()
-  var fi: nativekttypes.nativekt.KFunctionalInterfaceRequiringBridge<kotlin.String?>?
+  var fi: nativekttypes.nativekt.KFunctionalInterfaceRequiringBridge<kotlin.String?>? = null
   fi = nativekttypes.nativekt.KFunctionalInterfaceBridge<kotlin.String?> { s: kotlin.String? ->
    return@KFunctionalInterfaceBridge s
   }

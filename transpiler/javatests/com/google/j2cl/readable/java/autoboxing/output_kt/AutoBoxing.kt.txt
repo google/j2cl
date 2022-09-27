@@ -137,7 +137,7 @@ open class AutoBoxing {
   unusedDouble = this.sumWithoutBoxing(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"))
   unusedDouble = this.sumWithoutBoxingJsVarargs(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"))
   this.takesFloatVarArgs(kotlin.Float.valueOf(1.1f), kotlin.Float.valueOf(97.0f), kotlin.Float.valueOf(2.2.toFloat()))
-  var o: kotlin.Any?
+  var o: kotlin.Any? = null
   o = kotlin.Double.valueOf(2.2)
   o = kotlin.Float.valueOf(1.1f)
   o = kotlin.Int.valueOf(1)
@@ -231,8 +231,8 @@ open class AutoBoxing {
  open fun testUnboxingBoolean() {
   var boxB1: kotlin.Boolean? = kotlin.Boolean(true)
   val boxB2: kotlin.Boolean? = kotlin.Boolean(false)
-  var br: kotlin.Boolean
-  var boxr: kotlin.Boolean
+  var br: kotlin.Boolean = false
+  var boxr: kotlin.Boolean = false
   boxr = boxB1 === boxB2
   br = boxB1 === boxB2
   assert(boxr)

@@ -224,9 +224,9 @@ open class ArithmeticExpressions {
 
  open fun testExtendedOperands() {
   var boxedInteger: kotlin.Int? = kotlin.Int.valueOf(3)
-  var i: kotlin.Int
-  var l: kotlin.Long
-  var d: kotlin.Double
+  var i: kotlin.Int = 0
+  var l: kotlin.Long = 0L
+  var d: kotlin.Double = 0.0
   l = (2 - boxedInteger!!.toInt()).toLong() - 2L
   l = 2.or(boxedInteger!!.toInt()).toLong().or(2L)
   l = 1000000L * l * 60L * 60L * 24L
