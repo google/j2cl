@@ -57,7 +57,28 @@ public class Nullability {
           "org.netbeans.api.annotations.common.NullAllowed",
           "org.netbeans.api.annotations.common.CheckForNull",
           "org.netbeans.api.annotations.common.NullUnknown",
-          "org.springframework.lang.Nullable");
+          "org.springframework.lang.Nullable",
+          // Other annotations recognized by the JSpecify reference checker:
+          "android.support.annotation.RecentlyNullable",
+          "com.android.annotations.Nullable",
+          "com.beust.jcommander.internal.Nullable",
+          "com.google.api.server.spi.config.Nullable",
+          "com.google.firebase.database.annotations.Nullable",
+          "com.google.firebase.internal.Nullable",
+          "com.google.gerrit.common.Nullable",
+          "com.google.protobuf.Internal.ProtoMethodAcceptsNullParameter",
+          "com.google.protobuf.Internal.ProtoMethodMayReturnNull",
+          "com.google.protobuf.Internal.ProtoPassThroughNullness",
+          "com.mongodb.lang.Nullable",
+          "com.sun.istack.Nullable",
+          "com.unboundid.util.Nullable",
+          "io.micrometer.core.lang.Nullable",
+          "junitparams.converters.Nullable",
+          "libcore.util.Nullable",
+          "org.apache.avro.reflect.Nullable",
+          "org.apache.cxf.jaxrs.ext.Nullable",
+          "org.apache.shindig.common.Nullable",
+          "reactor.util.annotation.Nullable");
 
   private static final ImmutableSet<String> RECOGNIZED_NON_NULL_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
@@ -86,7 +107,18 @@ public class Nullability {
           "org.jetbrains.annotations.NotNull",
           "org.jmlspecs.annotation.NonNull",
           "org.netbeans.api.annotations.common.NonNull",
-          "org.springframework.lang.NonNull");
+          "org.springframework.lang.NonNull",
+          // Other annotations recognized by the JSpecify reference checker:
+          "com.android.annotations.NonNull",
+          "com.google.firebase.database.annotations.NotNull",
+          "com.google.firebase.internal.NonNull",
+          "com.sun.istack.NotNull",
+          "com.unboundid.util.NotNull",
+          "io.micrometer.core.lang.NonNull",
+          "libcore.util.NonNull",
+          "org.antlr.v4.runtime.misc.NotNull",
+          "org.eclipse.lsp4j.jsonrpc.validation.NonNull",
+          "reactor.util.annotation.NonNull");
 
   public static boolean isNullableAnnotation(String qualifiedName) {
     return RECOGNIZED_NULLABLE_ANNOTATIONS_QUALIFIED_NAMES.contains(qualifiedName);
