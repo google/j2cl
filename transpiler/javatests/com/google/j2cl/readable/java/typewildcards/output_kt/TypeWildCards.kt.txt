@@ -36,7 +36,7 @@ open class TypeWildCards {
  open fun testInferredGenericIntersection() {
   val elements: kotlin.collections.MutableList<typewildcards.TypeWildCards.Element?>? = null
   val otherElements: kotlin.collections.MutableList<typewildcards.TypeWildCards.SubOtherElement?>? = null
-  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?, otherElements as kotlin.collections.MutableList<out kotlin.Any? /* & typewildcards.TypeWildCards.HasKey? & typewildcards.TypeWildCards.IntegerSupplier? */>?), java.util.function.Function { a ->
+  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements, otherElements), java.util.function.Function { a ->
    a!!.getKey()
    return@Function a!!.get()
   })
