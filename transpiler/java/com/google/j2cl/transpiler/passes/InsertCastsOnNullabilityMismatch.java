@@ -117,8 +117,9 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
 
     if (to instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) to;
-      return declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-          .allMatch(it -> isDenotable(it, seenTypeVariables));
+      return !declaredTypeDescriptor.getTypeDeclaration().isAnonymous()
+          && declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
+              .allMatch(it -> isDenotable(it, seenTypeVariables));
     }
 
     if (to instanceof ArrayTypeDescriptor) {
