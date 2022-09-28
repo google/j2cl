@@ -179,15 +179,22 @@ final class BazelJ2clBuilder extends BazelWorker {
           "Transpilation of Java and Kotlin files together is not supported yet.");
     }
 
-    // Common kotlin file paths should be a strict subset of the sources.
-    Set<String> unmatchedKotlinCommonSources =
-        Sets.difference(
-            ImmutableSet.copyOf(kotlinCommonSources),
-            allKotlinSources.stream().map(FileInfo::originalPath).collect(toImmutableSet()));
-    if (!unmatchedKotlinCommonSources.isEmpty()) {
-      problems.fatal(
-          FatalError.INVALID_KOTLIN_COMMON_SOURCES,
-          Joiner.on(", ").join(unmatchedKotlinCommonSources));
+    // TODO(b/144721781): Remove this guard when we now that common srcs will always end up in the
+    //  srcjar under a common-srcs/ root folder.
+    boolean isUsingNewKotlinSrcJarZipper =
+        allKotlinSources.stream()
+            .anyMatch(fileInfo -> fileInfo.originalPath().startsWith("common-srcs/"));
+    if (!isUsingNewKotlinSrcJarZipper) {
+      // Common kotlin file paths should be a strict subset of the sources.
+      Set<String> unmatchedKotlinCommonSources =
+          Sets.difference(
+              ImmutableSet.copyOf(kotlinCommonSources),
+              allKotlinSources.stream().map(FileInfo::originalPath).collect(toImmutableSet()));
+      if (!unmatchedKotlinCommonSources.isEmpty()) {
+        problems.fatal(
+            FatalError.INVALID_KOTLIN_COMMON_SOURCES,
+            Joiner.on(", ").join(unmatchedKotlinCommonSources));
+      }
     }
 
     ImmutableList<FileInfo> allNativeSources =
