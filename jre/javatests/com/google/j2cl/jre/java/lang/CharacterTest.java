@@ -473,6 +473,8 @@ public class CharacterTest extends GWTTestCase {
 
   public void testToString() {
     assertEquals(" ", new Character((char) 32).toString());
+    assertEquals("a", Character.toString('a'));
+    assertEquals("𐐀", Character.toString(0x10400));
   }
 
   public void testUpperCase() {

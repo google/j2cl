@@ -442,6 +442,10 @@ public final class Character implements Comparable<Character>, Serializable {
     return String.valueOf(x);
   }
 
+  public static String toString(int x) {
+    return String.fromCodePoint(x);
+  }
+
   public static Character valueOf(char c) {
     if (c < 128) {
       return BoxedValues.get(c);
