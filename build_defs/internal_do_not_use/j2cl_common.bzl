@@ -297,6 +297,9 @@ DEFAULT_J2CL_JAVAC_OPTS = [
     "-XDinjectLogSites=false",
     # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
     "-XDstringConcat=inline",
+    # Explicitly enable Java 11. Neeeded for open-source
+    "-source 11",
+    "-target 11",
 ]
 
 DEFAULT_J2CL_KOTLINCOPTS = [

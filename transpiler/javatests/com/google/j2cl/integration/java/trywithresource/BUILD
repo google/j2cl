@@ -11,5 +11,4 @@ integration_test(
     # TODO(b/170691676): Enable when full try/catch/finally semantics are
     # implemented.
     enable_wasm = False,
-    j2cl_library_tags = ["manual"],
 )

@@ -8,5 +8,4 @@ package(licenses = ["notice"])
 integration_test(
     name = "variables",
     srcs = glob(["*.java"]),
-    j2cl_library_tags = ["manual"],
 )
