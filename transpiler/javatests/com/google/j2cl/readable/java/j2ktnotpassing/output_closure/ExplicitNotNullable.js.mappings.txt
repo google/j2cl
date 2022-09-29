@@ -1,0 +1,53 @@
+[ExplicitNotNullable] => [ExplicitNotNullable]
+[ExplicitNotNullable] => [constructor]
+[ExplicitNotNullable] => [super();] "j2ktnotpassing.ExplicitNotNullable.<synthetic: ctor_js>"
+[ExplicitNotNullable] => [$create__]
+[ExplicitNotNullable] => [ExplicitNotNullable.$clinit();] "j2ktnotpassing.ExplicitNotNullable.<synthetic: ctor_create>"
+[ExplicitNotNullable] => [let $instance = new ExplicitNotNullable();] "j2ktnotpassing.ExplicitNotNullable.<synthetic: ctor_create>"
+[ExplicitNotNullable] => [$instance.$ctor__j2ktnotpassing_ExplicitNotNullable__void();] "j2ktnotpassing.ExplicitNotNullable.<synthetic: ctor_create>"
+[ExplicitNotNullable] => [return $instance;] "j2ktnotpassing.ExplicitNotNullable.<synthetic: ctor_create>"
+[ExplicitNotNullable] => [$ctor__j2ktnotpassing_ExplicitNotNullable__void]
+[ExplicitNotNullable] => [this.$ctor__java_lang_Object__void();] "j2ktnotpassing.ExplicitNotNullable.<init>"
+[testLambdaNullability] => [m_testLambdaNullability__void]
+[{
+    Consumer<String> lambda = s -> {};
+...    IntFunction<Object[]> newArray = Object[]::new;
+  }] => [ExplicitNotNullable.$clinit();] "j2ktnotpassing.ExplicitNotNullable.testLambdaNullability"
+[Consumer<String> lambda = s -> {};] => [let lambda = Consumer.$adapt((s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+  });] "j2ktnotpassing.ExplicitNotNullable.testLambdaNullability"
+[lambda] => [lambda] "lambda"
+[s] => [s] "s"
+[s -> {}] => [let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));] "j2ktnotpassing.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[s] => [s_1] "s"
+[Consumer<String> nullable = DefaultNullable::nullableAccept;] => [let nullable = Consumer.$adapt((arg0) =>{
+   let arg0_1 = /**@type {?string}*/ ($Casts.$to(arg0, j_l_String));
+   DefaultNullable.m_nullableAccept__java_lang_String__void(arg0_1);
+  });] "j2ktnotpassing.ExplicitNotNullable.testLambdaNullability"
+[nullable] => [nullable] "nullable"
+[DefaultNullable::nullableAccept] => [let arg0_1 = /**@type {?string}*/ ($Casts.$to(arg0, j_l_String));] "j2ktnotpassing.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[DefaultNullable::nullableAccept] => [DefaultNullable.m_nullableAccept__java_lang_String__void(arg0_1);] "j2ktnotpassing.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[Consumer<String> nonNullable = ExplicitNotNullable::nonNullableAccept;] => [let nonNullable = Consumer.$adapt((arg0_2) =>{
+   let arg0_3 = /**@type {?string}*/ ($Casts.$to(arg0_2, j_l_String));
+   ExplicitNotNullable.m_nonNullableAccept__java_lang_String__void(arg0_3);
+  });] "j2ktnotpassing.ExplicitNotNullable.testLambdaNullability"
+[nonNullable] => [nonNullable] "nonNullable"
+[ExplicitNotNullable::nonNullableAccept] => [let arg0_3 = /**@type {?string}*/ ($Casts.$to(arg0_2, j_l_String));] "j2ktnotpassing.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[ExplicitNotNullable::nonNullableAccept] => [ExplicitNotNullable.m_nonNullableAccept__java_lang_String__void(arg0_3);] "j2ktnotpassing.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[Supplier<Object> newObject = Object::new;] => [let newObject = Supplier.$adapt(() =>{
+   return j_l_Object.$create__();
+  });] "j2ktnotpassing.ExplicitNotNullable.testLambdaNullability"
+[newObject] => [newObject] "newObject"
+[Object::new] => [return j_l_Object.$create__();] "j2ktnotpassing.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[IntFunction<Object[]> newArray = Object[]::new;] => [let newArray = IntFunction.$adapt((/** number */ arg0_4) =>{
+   return new Array(arg0_4);
+  });] "j2ktnotpassing.ExplicitNotNullable.testLambdaNullability"
+[newArray] => [newArray] "newArray"
+[Object[]::new] => [return new Array(arg0_4);] "j2ktnotpassing.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[nonNullableAccept] => [m_nonNullableAccept__java_lang_String__void]
+[s] => [s] "s"
+[{}] => [ExplicitNotNullable.$clinit();] "j2ktnotpassing.ExplicitNotNullable.nonNullableAccept"
+[ExplicitNotNullable] => [$clinit]
+[ExplicitNotNullable] => [ExplicitNotNullable.$clinit = () =>{};] "j2ktnotpassing.ExplicitNotNullable.<clinit>"
+[ExplicitNotNullable] => [ExplicitNotNullable.$loadModules();] "j2ktnotpassing.ExplicitNotNullable.<clinit>"
+[ExplicitNotNullable] => [j_l_Object.$clinit();] "j2ktnotpassing.ExplicitNotNullable.<clinit>"

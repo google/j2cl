@@ -1,0 +1,79 @@
+goog.module('j2ktnotpassing.ExplicitNotNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let DefaultNullable = goog.forwardDeclare('j2ktnotpassing.DefaultNullable$impl');
+let Consumer = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.Consumer$impl');
+let IntFunction = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.IntFunction$impl');
+let Supplier = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.Supplier$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+class ExplicitNotNullable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ExplicitNotNullable} */
+ static $create__() {
+  ExplicitNotNullable.$clinit();
+  let $instance = new ExplicitNotNullable();
+  $instance.$ctor__j2ktnotpassing_ExplicitNotNullable__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__j2ktnotpassing_ExplicitNotNullable__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_testLambdaNullability__void() {
+  ExplicitNotNullable.$clinit();
+  let lambda = Consumer.$adapt((s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+  });
+  let nullable = Consumer.$adapt((arg0) =>{
+   let arg0_1 = /**@type {?string}*/ ($Casts.$to(arg0, j_l_String));
+   DefaultNullable.m_nullableAccept__java_lang_String__void(arg0_1);
+  });
+  let nonNullable = Consumer.$adapt((arg0_2) =>{
+   let arg0_3 = /**@type {?string}*/ ($Casts.$to(arg0_2, j_l_String));
+   ExplicitNotNullable.m_nonNullableAccept__java_lang_String__void(arg0_3);
+  });
+  let newObject = Supplier.$adapt(() =>{
+   return j_l_Object.$create__();
+  });
+  let newArray = IntFunction.$adapt((/** number */ arg0_4) =>{
+   return new Array(arg0_4);
+  });
+ }
+ /** @nodts */
+ static m_nonNullableAccept__java_lang_String__void(/** string */ s) {
+  ExplicitNotNullable.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  ExplicitNotNullable.$clinit = () =>{};
+  ExplicitNotNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExplicitNotNullable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  DefaultNullable = goog.module.get('j2ktnotpassing.DefaultNullable$impl');
+  Consumer = goog.module.get('j2ktnotpassing.ExplicitNotNullable.Consumer$impl');
+  IntFunction = goog.module.get('j2ktnotpassing.ExplicitNotNullable.IntFunction$impl');
+  Supplier = goog.module.get('j2ktnotpassing.ExplicitNotNullable.Supplier$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ExplicitNotNullable, 'j2ktnotpassing.ExplicitNotNullable');
+
+exports = ExplicitNotNullable;
+
+//# sourceMappingURL=ExplicitNotNullable.js.map

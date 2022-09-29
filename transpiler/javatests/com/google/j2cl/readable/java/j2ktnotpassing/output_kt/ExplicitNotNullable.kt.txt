@@ -1,0 +1,49 @@
+// Generated from "j2ktnotpassing/ExplicitNotNullable.java"
+package j2ktnotpassing
+
+import javaemul.lang.*
+import kotlin.jvm.*
+
+open class ExplicitNotNullable {
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun testLambdaNullability() {
+   val lambda: j2ktnotpassing.ExplicitNotNullable.Consumer<kotlin.String?>? = j2ktnotpassing.ExplicitNotNullable.Consumer { s: kotlin.String? ->
+   }
+   val nullable: j2ktnotpassing.ExplicitNotNullable.Consumer<kotlin.String?>? = j2ktnotpassing.ExplicitNotNullable.Consumer { arg0: kotlin.String ->
+    j2ktnotpassing.DefaultNullable.nullableAccept(arg0)
+   }
+   val nonNullable: j2ktnotpassing.ExplicitNotNullable.Consumer<kotlin.String?>? = j2ktnotpassing.ExplicitNotNullable.Consumer { arg0_1: kotlin.String ->
+    j2ktnotpassing.ExplicitNotNullable.nonNullableAccept(arg0_1)
+   }
+   val newObject: j2ktnotpassing.ExplicitNotNullable.Supplier<kotlin.Any?>? = j2ktnotpassing.ExplicitNotNullable.Supplier {
+    return@Supplier kotlin.Any()
+   }
+   val newArray: j2ktnotpassing.ExplicitNotNullable.IntFunction<kotlin.Array<kotlin.Any?>?>? = j2ktnotpassing.ExplicitNotNullable.IntFunction { arg0_2: kotlin.Int ->
+    return@IntFunction kotlin.arrayOfNulls<kotlin.Any>(arg0_2) as kotlin.Array<kotlin.Any>
+   }
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun nonNullableAccept(s: kotlin.String) {}
+ }
+
+ fun interface Consumer<T> {
+  fun accept(t: T)
+ }
+
+ fun interface Supplier<T> {
+  fun get(): T
+ }
+
+ fun interface IntFunction<T> {
+  fun accept(i: kotlin.Int): T
+ }
+}
+
+open class DefaultNullable {
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun nullableAccept(s: kotlin.String?) {}
+ }
+}
