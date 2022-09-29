@@ -160,6 +160,10 @@ public class Nullability {
     }
   }
 
+  static class NonNullableInsideNullable<T extends @Nullable Object> {
+    void nonNullableTest(ParameterizedNonNullable<T> nonNullable) {}
+  }
+
   static <T extends String> void testDefaultNullabilityBounds(
       ParameterizedDefaultNullability<T> defaultNullability) {
     defaultNullability.getNonNullable().length();

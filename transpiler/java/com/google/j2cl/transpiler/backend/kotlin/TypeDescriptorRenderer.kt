@@ -149,15 +149,8 @@ private data class TypeDescriptorRenderer(
   }
 
   fun renderIntersection(typeDescriptor: IntersectionTypeDescriptor) {
-    // Render only the first type from the intersection and comment out others, as they are not
-    // supported in Kotlin.
-    // TODO(b/205367162): Support intersection types.
-    val typeDescriptors = typeDescriptor.intersectionTypeDescriptors
-    child.render(typeDescriptors.first())
-    renderer.render(" ")
-    renderer.renderInCommentBrackets {
-      renderer.render("& ")
-      renderer.renderSeparatedWith(typeDescriptors.drop(1), " & ") { child.render(it) }
+    renderer.renderSeparatedWith(typeDescriptor.intersectionTypeDescriptors, " & ") {
+      renderer.renderTypeDescriptor(it)
     }
   }
 

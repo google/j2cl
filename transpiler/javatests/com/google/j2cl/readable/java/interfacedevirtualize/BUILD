@@ -7,6 +7,4 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/206611912): Support nullability for type variables.
-    build_kt_readables = False,
 )

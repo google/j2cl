@@ -1,0 +1,47 @@
+goog.module('nullability.Nullability.NonNullableInsideNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ParameterizedNonNullable = goog.forwardDeclare('nullability.Nullability.ParameterizedNonNullable$impl');
+
+/**
+ * @template T
+ */
+class NonNullableInsideNullable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!NonNullableInsideNullable<T>} */
+ static $create__() {
+  NonNullableInsideNullable.$clinit();
+  let $instance = new NonNullableInsideNullable();
+  $instance.$ctor__nullability_Nullability_NonNullableInsideNullable__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_Nullability_NonNullableInsideNullable__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_nonNullableTest__nullability_Nullability_ParameterizedNonNullable__void_$pp_nullability(/** ParameterizedNonNullable<T> */ nonNullable) {}
+ /** @nodts */
+ static $clinit() {
+  NonNullableInsideNullable.$clinit = () =>{};
+  NonNullableInsideNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonNullableInsideNullable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(NonNullableInsideNullable, 'nullability.Nullability$NonNullableInsideNullable');
+
+exports = NonNullableInsideNullable;
+
+//# sourceMappingURL=Nullability$NonNullableInsideNullable.js.map

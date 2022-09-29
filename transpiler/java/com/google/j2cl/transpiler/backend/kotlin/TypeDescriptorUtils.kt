@@ -21,12 +21,12 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 
 internal val TypeDescriptor.isImplicitUpperBound
-  get() = isJavaLangObject(this) && isNullable
+  get() = this == nullableAnyTypeDescriptor
 
 // TODO(b/216796920): Remove when the bug is fixed.
 private val DeclaredTypeDescriptor.directlyDeclaredTypeArgumentDescriptors: List<TypeDescriptor>
@@ -85,7 +85,13 @@ internal val TypeDescriptor.isDenotable
     when (this) {
       is DeclaredTypeDescriptor -> !typeDeclaration.isAnonymous
       is TypeVariable -> !isWildcardOrCapture
-      is IntersectionTypeDescriptor -> false
+      is IntersectionTypeDescriptor ->
+        // The only intersection type currently supported in kotlin syntax is "T & Any".
+        intersectionTypeDescriptors.let {
+          it.size == 2 &&
+            it[0].let { it is TypeVariable && !it.isWildcardOrCapture } &&
+            it[1] == anyTypeDescriptor
+        }
       is UnionTypeDescriptor -> false
       is PrimitiveTypeDescriptor -> true
       is ArrayTypeDescriptor -> true
@@ -104,30 +110,48 @@ internal val TypeDescriptor.canBeNullableAsBound: Boolean
 
 /** Returns a version of this type descriptor where {@code canBeNull()} returns false. */
 internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
-  when (this) {
-    is DeclaredTypeDescriptor -> toNonNullable()
-    is TypeVariable ->
-      if (!isWildcardOrCapture || upperBoundTypeDescriptor.isImplicitUpperBound) this
-      else
-        TypeVariable.Builder.from(this)
-          .setUpperBoundTypeDescriptorSupplier { upperBoundTypeDescriptor.makeNonNull() }
-          // Set some unique ID to avoid conflict with other type variables.
-          // TODO(b/246332093): Remove when the bug is fixed, and uniqueId reflects bounds properly.
-          .setUniqueKey(
-            "<??>" +
-              "+${upperBoundTypeDescriptor.makeNonNull().uniqueId}" +
-              "-${lowerBoundTypeDescriptor?.uniqueId}"
-          )
+  if (!canBeNull()) this
+  else
+    when (this) {
+      is DeclaredTypeDescriptor -> toNonNullable()
+      is TypeVariable ->
+        if (!isWildcardOrCapture)
+          if (hasNullableBounds)
+          // Convert to {@code T & Any}
+          IntersectionTypeDescriptor.newBuilder()
+              .setIntersectionTypeDescriptors(listOf(this, anyTypeDescriptor))
+              .build()
+          else this
+        else if (upperBoundTypeDescriptor.isImplicitUpperBound)
+        // Ignore type variables which will be rendered as star (unbounded wildcard).
+        this
+        else
+          TypeVariable.Builder.from(this)
+            .setUpperBoundTypeDescriptorSupplier { upperBoundTypeDescriptor.makeNonNull() }
+            // Set some unique ID to avoid conflict with other type variables.
+            // TODO(b/246332093): Remove when the bug is fixed, and uniqueId reflects bounds
+            // properly.
+            .setUniqueKey(
+              "<??>" +
+                "+${upperBoundTypeDescriptor.makeNonNull().uniqueId}" +
+                "-${lowerBoundTypeDescriptor?.uniqueId}"
+            )
+            .build()
+      is IntersectionTypeDescriptor ->
+        IntersectionTypeDescriptor.newBuilder()
+          .setIntersectionTypeDescriptors(intersectionTypeDescriptors + anyTypeDescriptor)
           .build()
-    is IntersectionTypeDescriptor ->
-      IntersectionTypeDescriptor.newBuilder()
-        .setIntersectionTypeDescriptors(intersectionTypeDescriptors.map { it.makeNonNull() })
-        .build()
-    is UnionTypeDescriptor ->
-      UnionTypeDescriptor.newBuilder()
-        .setUnionTypeDescriptors(unionTypeDescriptors.map { it.makeNonNull() })
-        .build()
-    is PrimitiveTypeDescriptor -> toNonNullable()
-    is ArrayTypeDescriptor -> toNonNullable()
-    else -> error("Unhandled $this")
-  }
+      is UnionTypeDescriptor ->
+        UnionTypeDescriptor.newBuilder()
+          .setUnionTypeDescriptors(unionTypeDescriptors.map { it.makeNonNull() })
+          .build()
+      is PrimitiveTypeDescriptor -> toNonNullable()
+      is ArrayTypeDescriptor -> toNonNullable()
+      else -> error("Unhandled $this")
+    }
+
+private val nullableAnyTypeDescriptor: TypeDescriptor
+  get() = TypeDescriptors.get().javaLangObject
+
+private val anyTypeDescriptor: TypeDescriptor
+  get() = nullableAnyTypeDescriptor.toNonNullable()

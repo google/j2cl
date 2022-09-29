@@ -215,6 +215,10 @@ open class Nullability {
   }
  }
 
+ open class NonNullableInsideNullable<T> {
+  open fun nonNullableTest(nonNullable: nullability.Nullability.ParameterizedNonNullable<T & kotlin.Any>?) {}
+ }
+
  open class Recursive<T> where T: nullability.Nullability.Recursive<T>, T: nullability.Marker? {}
 
  open class RecursiveNullable<T> where T: nullability.Nullability.RecursiveNullable<T>?, T: nullability.Marker? {}

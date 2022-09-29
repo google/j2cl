@@ -55,8 +55,8 @@ open class IntersectionTypeTest<U> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T> cast2(s: kotlin.Any?): intersectiontype.Getable<kotlin.Comparable<T>?>? {
-   return (s).let { it as intersectiontype.Getable<kotlin.Comparable<T>?>?; it as intersectiontype.Setable?; it }
+  fun <T> cast2(s: kotlin.Any?): intersectiontype.Getable<kotlin.Comparable<T & kotlin.Any>?>? {
+   return (s).let { it as intersectiontype.Getable<kotlin.Comparable<T & kotlin.Any>?>?; it as intersectiontype.Setable?; it }
   }
 
   @kotlin.jvm.JvmStatic
