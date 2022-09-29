@@ -101,7 +101,7 @@ open class Main {
  }
 
  open fun <U> testGenericJsFunctionWithVarags() {
-  val function: jsvarargs.Main.GenericFunction<U>? = jsvarargs.Main.GenericFunction<U> { n: U, param: kotlin.Array<out U>? ->
+  val function: jsvarargs.Main.GenericFunction<U>? = jsvarargs.Main.GenericFunction { n: U, param: kotlin.Array<out U>? ->
    return@GenericFunction param
   }
  }

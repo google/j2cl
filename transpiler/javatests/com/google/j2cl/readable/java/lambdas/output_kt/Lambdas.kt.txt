@@ -72,7 +72,7 @@ open class Lambdas {
  }
 
  open fun <T> testInstanceMethodTypeVariableThroughLambda() {
-  val wrapped: lambdas.Lambdas.Functional<T>? = lambdas.Lambdas.Functional<T> { f: lambdas.Lambdas.Functional<T>? ->
+  val wrapped: lambdas.Lambdas.Functional<T>? = lambdas.Lambdas.Functional { f: lambdas.Lambdas.Functional<T>? ->
    return@Functional object : lambdas.Lambdas.Functional<T> {
     open override fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
      return null
@@ -94,16 +94,16 @@ open class Lambdas {
  }
 
  open fun <T: kotlin.Enum<T>> testLambdaWithGenerics() {
-  this.callWithTypeVariable<kotlin.Error?>(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Error?> { i: kotlin.Error? ->
+  this.callWithTypeVariable<kotlin.Error?>(lambdas.Lambdas.GenericFunctionalInterface { i: kotlin.Error? ->
    return@GenericFunctionalInterface i
   }, kotlin.Error())
-  this.callParameterized(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Error?> { i_1: kotlin.Error? ->
+  this.callParameterized(lambdas.Lambdas.GenericFunctionalInterface { i_1: kotlin.Error? ->
    return@GenericFunctionalInterface i_1
   }, kotlin.Error())
-  lambdas.Lambdas.callTypeVariableWithBounds<T>(lambdas.Lambdas.GenericFunctionalInterface<kotlin.Enum<T>?> { i_2: kotlin.Enum<T>? ->
+  lambdas.Lambdas.callTypeVariableWithBounds<T>(lambdas.Lambdas.GenericFunctionalInterface { i_2: kotlin.Enum<T>? ->
    return@GenericFunctionalInterface i_2
   }, null as kotlin.Enum<T>?)
-  this.callWithBiFunction<kotlin.Any?>(lambdas.Lambdas.BiFunction<kotlin.Any?, kotlin.String?, kotlin.Double?> { x: kotlin.Any?, y: kotlin.String? ->
+  this.callWithBiFunction<kotlin.Any?>(lambdas.Lambdas.BiFunction { x: kotlin.Any?, y: kotlin.String? ->
    throw kotlin.RuntimeException()
   })
   val f: lambdas.Lambdas.Function<in T, *>? = lambdas.Lambdas.Function { item: T ->
@@ -124,7 +124,7 @@ open class Lambdas {
  }
 
  open fun testDefaultMethodsInIntersectionAdaptor() {
-  val o: kotlin.Any? = (lambdas.Lambdas.BiFunction<kotlin.String?, kotlin.String?, kotlin.String?> { t: kotlin.String?, u: kotlin.String? ->
+  val o: kotlin.Any? = (lambdas.Lambdas.BiFunction { t: kotlin.String?, u: kotlin.String? ->
    return@BiFunction null
   }).let { it as lambdas.Lambdas.BiFunction<kotlin.String?, kotlin.String?, kotlin.String?>?; it as lambdas.Lambdas.MarkerWithDefaultMethod?; it }
  }
@@ -139,7 +139,7 @@ open class Lambdas {
 
   @kotlin.jvm.JvmStatic
   fun <T> testStaticMethodTypeVariableThroughLambda() {
-   val wrapped: lambdas.Lambdas.Functional<T>? = lambdas.Lambdas.Functional<T> { f: lambdas.Lambdas.Functional<T>? ->
+   val wrapped: lambdas.Lambdas.Functional<T>? = lambdas.Lambdas.Functional { f: lambdas.Lambdas.Functional<T>? ->
     return@Functional object : lambdas.Lambdas.Functional<T> {
      open override fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
       return null
@@ -177,13 +177,13 @@ open class Lambdas {
 
   @kotlin.jvm.JvmStatic
   fun testJsInteropLambdas() {
-   val thenable: lambdas.Lambdas.Thenable<kotlin.String?>? = lambdas.Lambdas.Thenable<kotlin.String?> { f1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.String?>?, f2: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>? ->
+   val thenable: lambdas.Lambdas.Thenable<kotlin.String?>? = lambdas.Lambdas.Thenable { f1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.String?>?, f2: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>? ->
     f1!!.apply(null)
    }
-   val otherThenable: lambdas.Lambdas.AnotherThenable<kotlin.String?>? = lambdas.Lambdas.AnotherThenable<kotlin.String?> { f1_1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.String?>?, f2_1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>? ->
+   val otherThenable: lambdas.Lambdas.AnotherThenable<kotlin.String?>? = lambdas.Lambdas.AnotherThenable { f1_1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.String?>?, f2_1: lambdas.Lambdas.GenericJsFunction<kotlin.Unit?, kotlin.Throwable?>? ->
     f1_1!!.apply(null)
    }
-   val stringJsSupplier: lambdas.Lambdas.JsSupplier<kotlin.Int?>? = lambdas.Lambdas.JsSupplier<kotlin.Int?> {
+   val stringJsSupplier: lambdas.Lambdas.JsSupplier<kotlin.Int?>? = lambdas.Lambdas.JsSupplier {
     return@JsSupplier kotlin.Int.valueOf(1)
    }
    stringJsSupplier!!.get()
@@ -194,13 +194,13 @@ open class Lambdas {
 
   @kotlin.jvm.JvmStatic
   fun <U, V> testIntersectionTyping() {
-   var o: kotlin.Any? = (lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?> { x: kotlin.String? ->
+   var o: kotlin.Any? = (lambdas.Lambdas.GenericFunctionalInterface { x: kotlin.String? ->
     return@GenericFunctionalInterface x
    }).let { it as lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?>?; it as lambdas.Lambdas.JustADefaultT<kotlin.Number?>?; it }
-   o = (lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?> { x_1: kotlin.String? ->
+   o = (lambdas.Lambdas.GenericFunctionalInterface { x_1: kotlin.String? ->
     return@GenericFunctionalInterface x_1
    }).let { it as lambdas.Lambdas.GenericFunctionalInterface<kotlin.String?>?; it as lambdas.Lambdas.JustADefaultS<kotlin.Number?>?; it }
-   o = (lambdas.Lambdas.GenericFunctionalInterface<U> { x_2: U ->
+   o = (lambdas.Lambdas.GenericFunctionalInterface { x_2: U ->
     return@GenericFunctionalInterface x_2
    }).let { it as lambdas.Lambdas.GenericFunctionalInterface<U>?; it as lambdas.Lambdas.JustADefaultS<V>?; it }
   }
@@ -222,7 +222,7 @@ open class Lambdas {
   fun apply(t: T, u: U): R
 
   fun <V> andThen(after: lambdas.Lambdas.Function<in R, out V>?): lambdas.Lambdas.BiFunction<T, U, V>? {
-   return lambdas.Lambdas.BiFunction<T, U, V> { t: T, u: U ->
+   return lambdas.Lambdas.BiFunction { t: T, u: U ->
     return@BiFunction after!!.apply(this.apply(t, u))
    }
   }
@@ -234,7 +234,7 @@ open class Lambdas {
   companion object {
    @kotlin.jvm.JvmStatic
    fun <T> identity(): lambdas.Lambdas.Function<T, T>? {
-    return lambdas.Lambdas.Function<T, T> { t: T ->
+    return lambdas.Lambdas.Function { t: T ->
      return@Function t
     }
    }

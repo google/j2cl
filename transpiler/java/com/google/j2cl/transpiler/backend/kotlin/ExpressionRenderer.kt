@@ -192,7 +192,7 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
   val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!.toNonNullable()
-  renderTypeDescriptor(functionalInterface, asSuperType = true)
+  renderQualifiedName(functionalInterface, asSuperType = true)
   render(" ")
   renderInCurlyBrackets {
     val parameters = functionExpression.parameters
