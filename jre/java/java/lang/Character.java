@@ -15,7 +15,7 @@
  */
 package java.lang;
 
-import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
+import static javaemul.internal.InternalPreconditions.checkArgument;
 
 import java.io.Serializable;
 import javaemul.internal.NativeRegExp;
@@ -386,7 +386,7 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static char[] toChars(int codePoint) {
-    checkCriticalArgument(codePoint >= 0 && codePoint <= MAX_CODE_POINT);
+    checkArgument(isValidCodePoint(codePoint));
 
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
       return new char[] {
@@ -401,7 +401,7 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static int toChars(int codePoint, char[] dst, int dstIndex) {
-    checkCriticalArgument(codePoint >= 0 && codePoint <= MAX_CODE_POINT);
+    checkArgument(isValidCodePoint(codePoint));
 
     if (codePoint >= MIN_SUPPLEMENTARY_CODE_POINT) {
       dst[dstIndex++] = getHighSurrogate(codePoint);
