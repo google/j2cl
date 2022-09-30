@@ -71,6 +71,7 @@ package_sources(
     srcs = BASE_JRE_SRCS,
     excludes = [
         "java/util/InternalHashCodeMap.java",  # J2WASM HashMap doesn't need it.
+        "java/util/InternalJsMap.java",  # J2WASM HashMap doesn't need it.
         "java/util/InternalStringMap.java",  # J2WASM HashMap doesn't need it.
         "java/util/AbstractHashMap.java",  # J2WASM HashMap doesn't need it.
         "javaemul/internal/Casts.java",  # J2WASM doesn't need it.
