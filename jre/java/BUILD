@@ -42,6 +42,7 @@ java_library(
     visibility = [
         "//jre/javatests:__subpackages__",
         "@com_google_jsinterop_base//:__subpackages__",
+        "//transpiler/javatests:__subpackages__",
     ],
 )
 

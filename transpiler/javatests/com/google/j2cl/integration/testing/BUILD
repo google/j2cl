@@ -21,7 +21,7 @@ j2wasm_library(
 )
 
 j2cl_library(
-    name = "testing",
+    name = "testing-j2cl",
     srcs = [
         "Asserts.java",
         "AssertsBase.java",
@@ -29,5 +29,17 @@ j2cl_library(
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
+    ],
+)
+
+java_library(
+    name = "testing",
+    srcs = [
+        "Asserts.java",
+        "AssertsBase.java",
+    ],
+    deps = [
+        "//jre/java:javaemul_internal_annotations",
+        "//third_party:gwt-jsinterop-annotations",
     ],
 )
