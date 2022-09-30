@@ -124,7 +124,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
       leftOperand.target.isStatic &&
       leftOperand.target.isFinal
   ) {
-    renderIdentifier(leftOperand.target.ktName)
+    renderIdentifier(leftOperand.target.renderedName)
   } else {
     renderLeftSubExpression(expression, expression.leftOperand)
   }
@@ -187,7 +187,7 @@ private fun Renderer.renderExpressionWithComment(expressionWithComment: Expressi
 
 private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
   renderQualifier(fieldAccess)
-  renderIdentifier(fieldAccess.target.ktName)
+  renderIdentifier(fieldAccess.target.renderedName)
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
@@ -290,7 +290,7 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
     return
   }
 
-  renderIdentifier(expression.target.ktName)
+  renderIdentifier(expression.target.renderedName)
   if (!expression.target.isKtProperty) {
     val typeArguments = methodDescriptor.typeArguments
     if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {

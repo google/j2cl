@@ -79,18 +79,18 @@ open class Main {
   }
 
   @kotlin.jvm.JvmStatic
-  fun testBoxUnboxWithTypeInference() {
+  fun testBoxUnboxWithTypeInference_private_jsenum_Main() {
    val templatedField: jsenum.Main.TemplatedField<jsenum.Main.ComparableJsEnum?>? = jsenum.Main.TemplatedField<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
    var unboxed: jsenum.Main.ComparableJsEnum? = templatedField!!.getValue()
    unboxed = templatedField!!.value
    templatedField!!.value = jsenum.Main.ComparableJsEnum.ONE
    java.util.Arrays.asList<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
    templatedField!!.getValue()!!.ordinal
-   val b: kotlin.Boolean = jsenum.Main.ComparableJsEnum.ONE === jsenum.Main.boxingPassthrough<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
+   val b: kotlin.Boolean = jsenum.Main.ComparableJsEnum.ONE === jsenum.Main.boxingPassthrough_private_jsenum_Main<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T> boxingPassthrough(t: T): T {
+  fun <T> boxingPassthrough_private_jsenum_Main(t: T): T {
    return t
   }
 
@@ -115,14 +115,14 @@ open class Main {
   TWENTY(20),
   ELEVEN(11);
 
-  @kotlin.jvm.JvmField var value: kotlin.Int = 0
+  @kotlin.jvm.JvmField var value_private_jsenum_Main_IntJsEnum: kotlin.Int = 0
 
   open fun getValue(): kotlin.Int {
-   return this.value
+   return this.value_private_jsenum_Main_IntJsEnum
   }
 
   constructor(value: kotlin.Int) {
-   this.value = value
+   this.value_private_jsenum_Main_IntJsEnum = value
   }
  }
 
@@ -130,14 +130,14 @@ open class Main {
   ONE("ONE"),
   THREE("THREE");
 
-  @kotlin.jvm.JvmField var value: kotlin.String? = null
+  @kotlin.jvm.JvmField var value_private_jsenum_Main_StringJsEnum: kotlin.String? = null
 
   open fun getValue(): kotlin.String? {
-   return this.value
+   return this.value_private_jsenum_Main_StringJsEnum
   }
 
   constructor(value: kotlin.String?) {
-   this.value = value
+   this.value_private_jsenum_Main_StringJsEnum = value
   }
  }
 
@@ -145,14 +145,14 @@ open class Main {
   ONE("ONE"),
   THREE("THREE");
 
-  @kotlin.jvm.JvmField var value: kotlin.String
+  @kotlin.jvm.JvmField var value_private_jsenum_Main_NonNullableStringJsEnum: kotlin.String
 
   open fun getValue(): kotlin.String? {
-   return this.value
+   return this.value_private_jsenum_Main_NonNullableStringJsEnum
   }
 
   constructor(value: kotlin.String?) {
-   this.value = value!!
+   this.value_private_jsenum_Main_NonNullableStringJsEnum = value!!
   }
  }
 

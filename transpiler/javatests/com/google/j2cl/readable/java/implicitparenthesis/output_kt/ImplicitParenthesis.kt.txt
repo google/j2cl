@@ -6,13 +6,13 @@ import kotlin.jvm.*
 
 open class ImplicitParenthesis {
  open fun test() {
-  implicitparenthesis.ImplicitParenthesis.examples()
-  implicitparenthesis.ImplicitParenthesis.nonExamples()
+  implicitparenthesis.ImplicitParenthesis.examples_private_implicitparenthesis_ImplicitParenthesis()
+  implicitparenthesis.ImplicitParenthesis.nonExamples_private_implicitparenthesis_ImplicitParenthesis()
  }
 
  companion object {
   @kotlin.jvm.JvmStatic
-  fun examples() {
+  fun examples_private_implicitparenthesis_ImplicitParenthesis() {
    var primitiveInt: kotlin.Int = 0
    var boxedInt: kotlin.Int? = null
    primitiveInt = 5
@@ -51,7 +51,7 @@ open class ImplicitParenthesis {
   }
 
   @kotlin.jvm.JvmStatic
-  fun nonExamples() {
+  fun nonExamples_private_implicitparenthesis_ImplicitParenthesis() {
    var primitiveInt: kotlin.Int = 0
    var boxedInt: kotlin.Int? = null
    var boxedBoolean: kotlin.Boolean? = null
@@ -67,7 +67,7 @@ open class ImplicitParenthesis {
   }
 
   @kotlin.jvm.JvmStatic
-  fun parenthesisRemoval() {
+  fun parenthesisRemoval_private_implicitparenthesis_ImplicitParenthesis() {
    kotlin.Int(1 + 2)
   }
  }

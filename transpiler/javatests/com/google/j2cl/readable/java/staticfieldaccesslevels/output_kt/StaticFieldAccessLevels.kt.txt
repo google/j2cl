@@ -6,13 +6,13 @@ import kotlin.jvm.*
 
 open class StaticFieldAccessLevels {
  open fun test(): kotlin.Int {
-  return if (staticfieldaccesslevels.StaticFieldAccessLevels.b) staticfieldaccesslevels.StaticFieldAccessLevels.a else staticfieldaccesslevels.StaticFieldAccessLevels.d
+  return if (staticfieldaccesslevels.StaticFieldAccessLevels.b_private_staticfieldaccesslevels_StaticFieldAccessLevels) staticfieldaccesslevels.StaticFieldAccessLevels.a else staticfieldaccesslevels.StaticFieldAccessLevels.d
  }
 
  companion object {
   @kotlin.jvm.JvmField var a: kotlin.Int = 0
 
-  @kotlin.jvm.JvmField var b: kotlin.Boolean = false
+  @kotlin.jvm.JvmField var b_private_staticfieldaccesslevels_StaticFieldAccessLevels: kotlin.Boolean = false
 
   @kotlin.jvm.JvmField var c: kotlin.Any? = null
 

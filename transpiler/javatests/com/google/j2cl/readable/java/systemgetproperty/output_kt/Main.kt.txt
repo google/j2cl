@@ -6,24 +6,24 @@ import kotlin.jvm.*
 
 open class Main {
  companion object {
-  @kotlin.jvm.JvmField val property: kotlin.String? = java.lang.System.getProperty("jre.classMetadata")
+  @kotlin.jvm.JvmField val property_private_systemgetproperty_Main: kotlin.String? = java.lang.System.getProperty("jre.classMetadata")
 
-  @kotlin.jvm.JvmField val propertyWithDefault: kotlin.String? = java.lang.System.getProperty("jre.classMetadata", "default")
+  @kotlin.jvm.JvmField val propertyWithDefault_private_systemgetproperty_Main: kotlin.String? = java.lang.System.getProperty("jre.classMetadata", "default")
 
   @kotlin.jvm.JvmStatic
   fun main(args: kotlin.Array<kotlin.String?>?) {
    var x: kotlin.Boolean = false
-   x = systemgetproperty.Main.property === "SIMPLE"
-   x = systemgetproperty.Main.property!!.equals("SIMPLE")
-   x = systemgetproperty.Main.property!!.equalsIgnoreCase("SIMPLE")
-   x = systemgetproperty.Main.property === "NOTSIMPLE"
-   x = systemgetproperty.Main.propertyWithDefault!!.equals("SIMPLE")
+   x = systemgetproperty.Main.property_private_systemgetproperty_Main === "SIMPLE"
+   x = systemgetproperty.Main.property_private_systemgetproperty_Main!!.equals("SIMPLE")
+   x = systemgetproperty.Main.property_private_systemgetproperty_Main!!.equalsIgnoreCase("SIMPLE")
+   x = systemgetproperty.Main.property_private_systemgetproperty_Main === "NOTSIMPLE"
+   x = systemgetproperty.Main.propertyWithDefault_private_systemgetproperty_Main!!.equals("SIMPLE")
    x = java.lang.System.getProperty("jre.bar", "bar")!!.equals("bar")
-   x = java.lang.System.getProperty("jre.classMetadata", systemgetproperty.Main.mightHaveSideEffects())!!.equals("SIMPLE")
+   x = java.lang.System.getProperty("jre.classMetadata", systemgetproperty.Main.mightHaveSideEffects_private_systemgetproperty_Main())!!.equals("SIMPLE")
   }
 
   @kotlin.jvm.JvmStatic
-  fun mightHaveSideEffects(): kotlin.String? {
+  fun mightHaveSideEffects_private_systemgetproperty_Main(): kotlin.String? {
    return "Foo"
   }
  }

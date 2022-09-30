@@ -21,5 +21,5 @@ import javaemul.internal.annotations.KtNative;
     value = "nativekttypes.nativekt.KRequiringBridge",
     bridgeWith = "nativekttypes.nativekt.KBridge")
 public class NativeRequiringBridge {
-  void method() {}
+  public void method() {}
 }

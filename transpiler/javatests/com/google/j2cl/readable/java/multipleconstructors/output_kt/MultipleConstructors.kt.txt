@@ -5,22 +5,22 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class MultipleConstructors {
- @kotlin.jvm.JvmField var id: kotlin.Int = 0
+ @kotlin.jvm.JvmField var id_private_multipleconstructors_MultipleConstructors: kotlin.Int = 0
 
- @kotlin.jvm.JvmField var flag: kotlin.Boolean = false
+ @kotlin.jvm.JvmField var flag_private_multipleconstructors_MultipleConstructors: kotlin.Boolean = false
 
  constructor(id: kotlin.Int) {
-  this.id = id
-  this.flag = id === 0
+  this.id_private_multipleconstructors_MultipleConstructors = id
+  this.flag_private_multipleconstructors_MultipleConstructors = id === 0
  }
 
  constructor(flag: kotlin.Boolean) {
-  this.id = - 1
-  this.flag = flag
+  this.id_private_multipleconstructors_MultipleConstructors = - 1
+  this.flag_private_multipleconstructors_MultipleConstructors = flag
  }
 
  constructor(id: kotlin.Int, flag: kotlin.Boolean) {
-  this.id = id
-  this.flag = flag
+  this.id_private_multipleconstructors_MultipleConstructors = id
+  this.flag_private_multipleconstructors_MultipleConstructors = flag
  }
 }

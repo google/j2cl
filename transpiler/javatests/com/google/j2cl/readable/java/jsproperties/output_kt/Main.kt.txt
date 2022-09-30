@@ -6,47 +6,47 @@ import kotlin.jvm.*
 
 open class Foo {
  companion object {
-  @kotlin.jvm.JvmField var f: kotlin.Int = 0
+  @kotlin.jvm.JvmField var f_private_jsproperties_Foo: kotlin.Int = 0
 
   @kotlin.jvm.JvmStatic
   fun getA(): kotlin.Int {
-   return jsproperties.Foo.f + 1
+   return jsproperties.Foo.f_private_jsproperties_Foo + 1
   }
 
   @kotlin.jvm.JvmStatic
   fun setA(x: kotlin.Int) {
-   jsproperties.Foo.f = x + 2
+   jsproperties.Foo.f_private_jsproperties_Foo = x + 2
   }
 
   @kotlin.jvm.JvmStatic
   fun getB(): kotlin.Int {
-   return jsproperties.Foo.f + 3
+   return jsproperties.Foo.f_private_jsproperties_Foo + 3
   }
 
   @kotlin.jvm.JvmStatic
   fun setB(x: kotlin.Int) {
-   jsproperties.Foo.f = x + 4
+   jsproperties.Foo.f_private_jsproperties_Foo = x + 4
   }
  }
 }
 
 open class Bar {
- @kotlin.jvm.JvmField var f: kotlin.Int = 0
+ @kotlin.jvm.JvmField var f_private_jsproperties_Bar: kotlin.Int = 0
 
  open fun getA(): kotlin.Int {
-  return this.f + 1
+  return this.f_private_jsproperties_Bar + 1
  }
 
  open fun setA(x: kotlin.Int) {
-  this.f = x + 2
+  this.f_private_jsproperties_Bar = x + 2
  }
 
  open fun getB(): kotlin.Int {
-  return this.f + 3
+  return this.f_private_jsproperties_Bar + 3
  }
 
  open fun setB(x: kotlin.Int) {
-  this.f = x + 4
+  this.f_private_jsproperties_Bar = x + 4
  }
 }
 

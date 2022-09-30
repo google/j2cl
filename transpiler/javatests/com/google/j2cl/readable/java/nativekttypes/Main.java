@@ -255,7 +255,7 @@ class Subsubclass<V> extends Subclass<V> {
 
 class BridgeSubclass extends NativeRequiringBridge {
   @Override
-  void method() {
+  public void method() {
     super.method();
   }
 }

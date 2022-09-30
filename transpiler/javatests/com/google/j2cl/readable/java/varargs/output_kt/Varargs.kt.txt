@@ -5,7 +5,7 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class Varargs {
- @kotlin.jvm.JvmField var args: kotlin.Array<kotlin.Any?>? = null
+ @kotlin.jvm.JvmField var args_private_varargs_Varargs: kotlin.Array<kotlin.Any?>? = null
 
  constructor(vararg args: kotlin.Int)
 
@@ -18,7 +18,7 @@ open class Varargs {
  open fun testSerializable(vararg args: java.io.Serializable?) {}
 
  open fun testAssignment(vararg args: kotlin.Any?) {
-  this.args = args as kotlin.Array<*>? as kotlin.Array<kotlin.Any?>?
+  this.args_private_varargs_Varargs = args as kotlin.Array<*>? as kotlin.Array<kotlin.Any?>?
  }
 
  open fun testLambda(functionalInterface: varargs.Varargs.FunctionalInterface?) {}
@@ -33,7 +33,7 @@ open class Varargs {
   v!!.testCloneable()
   v!!.testSerializable()
   v!!.testLambda(varargs.Varargs.FunctionalInterface { it: kotlin.Array<out kotlin.String?>? ->
-   this.args = it as kotlin.Array<kotlin.Any?>?
+   this.args_private_varargs_Varargs = it as kotlin.Array<kotlin.Any?>?
   })
  }
 

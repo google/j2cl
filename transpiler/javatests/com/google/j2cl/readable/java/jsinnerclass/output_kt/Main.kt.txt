@@ -20,14 +20,14 @@ open class Main {
   }
 
   open inner class Inner {
-   @kotlin.jvm.JvmField var b: kotlin.Int = 0
+   @kotlin.jvm.JvmField var b_private_jsinnerclass_Main_Outer_Inner: kotlin.Int = 0
 
    constructor() {
-    this.b = this@Outer.a + 1
+    this.b_private_jsinnerclass_Main_Outer_Inner = this@Outer.a + 1
    }
 
    open fun getB(): kotlin.Int {
-    return this.b
+    return this.b_private_jsinnerclass_Main_Outer_Inner
    }
   }
  }

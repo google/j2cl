@@ -33,7 +33,7 @@ open class Casts {
   val bar: kotlin.Any? = null as kotlin.Array<kotlin.Array<kotlin.Any?>?>?
  }
 
- fun functionForInstanceofTest() {}
+ fun functionForInstanceofTest_private_cast_Casts() {}
 
  open fun testCastObjectAfterInstanceOf() {
   var o: kotlin.Any? = kotlin.Any()
@@ -57,7 +57,7 @@ open class Casts {
   }
   if (o is cast.Casts) {
    val cAvoidsCastsTo_3: cast.Casts? = o as cast.Casts?
-   this.functionForInstanceofTest()
+   this.functionForInstanceofTest_private_cast_Casts()
    val cNotAvoidCastsTo_2: cast.Casts? = o as cast.Casts?
   }
  }
@@ -79,7 +79,7 @@ open class Casts {
   }
   if (foo!!.field is cast.Casts) {
    val cAvoidsCastsTo_2: cast.Casts? = foo!!.field as cast.Casts?
-   this.functionForInstanceofTest()
+   this.functionForInstanceofTest_private_cast_Casts()
    val cNotAvoidCastsTo_2: cast.Casts? = foo!!.field as cast.Casts?
   }
  }

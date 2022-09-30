@@ -79,7 +79,7 @@ private fun Renderer.renderField(field: Field) {
 
   render("@kotlin.jvm.JvmField ")
   render(if (isFinal) "val " else "var ")
-  renderIdentifier(field.descriptor.ktName)
+  renderIdentifier(field.descriptor.renderedName)
   render(": ")
   renderTypeDescriptor(typeDescriptor)
   field.initializer?.let { initializer ->
@@ -109,7 +109,7 @@ private fun Renderer.renderMethodHeader(method: Method) {
       renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors)
       render(" ")
     }
-    renderIdentifier(methodDescriptor.ktName)
+    renderIdentifier(methodDescriptor.renderedName)
   }
   if (!method.descriptor.isKtProperty) {
     renderMethodParameters(method)
