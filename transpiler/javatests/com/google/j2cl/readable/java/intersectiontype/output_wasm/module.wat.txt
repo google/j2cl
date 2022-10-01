@@ -67,7 +67,6 @@
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [itable.init]
 (global $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
  (struct.new $intersectiontype.Serial.vtable
-  (ref.null data)
  )
  (struct.new $intersectiontype.Cmp.vtable
   (ref.func $m_cmp__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)
@@ -88,7 +87,6 @@
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [itable.init]
 (global $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable (ref $itable) (array.init_static $itable 
  (struct.new $intersectiontype.Serial.vtable
-  (ref.null data)
  )
  (struct.new $intersectiontype.Cmp2.vtable
   (ref.func $m_cmp__int__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)
@@ -211,7 +209,7 @@
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.Setable)
 
 ;;; Code for intersectiontype.Serial [INTERFACE]
-(type $intersectiontype.Serial.vtable (struct_subtype (field $unused (ref null data))
+(type $intersectiontype.Serial.vtable (struct_subtype 
   data)
 )
 
@@ -1029,7 +1027,7 @@
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.A)
 
 ;;; Code for intersectiontype.IntersectionTypeTest.EmptyA [INTERFACE]
-(type $intersectiontype.IntersectionTypeTest.EmptyA.vtable (struct_subtype (field $unused (ref null data))
+(type $intersectiontype.IntersectionTypeTest.EmptyA.vtable (struct_subtype 
   data)
 )
 
@@ -1064,7 +1062,7 @@
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyA)
 
 ;;; Code for intersectiontype.IntersectionTypeTest.EmptyB [INTERFACE]
-(type $intersectiontype.IntersectionTypeTest.EmptyB.vtable (struct_subtype (field $unused (ref null data))
+(type $intersectiontype.IntersectionTypeTest.EmptyB.vtable (struct_subtype 
   data)
 )
 

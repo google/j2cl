@@ -258,12 +258,6 @@ public class WasmModuleGenerator {
   }
 
   private void renderVtableEntries(Collection<MethodDescriptor> methodDescriptors) {
-    // TODO(b/200341175): Binaryen turns new_with_rtt into new_default_with_rtt for structs with
-    // no fields (since they are equivalent) and Chrome does not yet support new_default_with_rtt
-    // in globals.
-    if (methodDescriptors.isEmpty()) {
-      builder.append("(field $unused (ref null data))");
-    }
     methodDescriptors.forEach(
         m -> {
           builder.newLine();
@@ -591,14 +585,7 @@ public class WasmModuleGenerator {
     builder.append(
         String.format("(struct.new %s", environment.getWasmVtableTypeName(implementedType)));
 
-    // TODO(b/200341175): Binaryen turns new_with_rtt into new_default_with_rtt for structs with
-    // no fields (since they are equivalent) and Chrome does not yet support new_default_with_rtt
-    // in globals.
     builder.indent();
-    if (methodDescriptors.isEmpty()) {
-      builder.newLine();
-      builder.append("(ref.null data)");
-    }
     methodDescriptors.forEach(
         m -> {
           builder.newLine();

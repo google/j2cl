@@ -35,10 +35,8 @@
 ;;; Code for gwtincompatible.Implementor [itable.init]
 (global $gwtincompatible.Implementor.itable (ref $itable) (array.init_static $itable 
  (struct.new $gwtincompatible.Interface.vtable
-  (ref.null data)
  )
  (struct.new $gwtincompatible.Interface.NestedInterface.vtable
-  (ref.null data)
  )
  ))
 
@@ -61,7 +59,6 @@
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [itable.init]
 (global $gwtincompatible.Implementor.SomeEnum.1.itable (ref $itable) (array.init_static $itable 
  (struct.new $java.io.Serializable.vtable
-  (ref.null data)
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
@@ -69,7 +66,7 @@
  ))
 
 ;;; Code for gwtincompatible.GwtIncompatible [INTERFACE]
-(type $gwtincompatible.GwtIncompatible.vtable (struct_subtype (field $unused (ref null data))
+(type $gwtincompatible.GwtIncompatible.vtable (struct_subtype 
   data)
 )
 
@@ -421,7 +418,7 @@
 )
 
 ;;; Code for gwtincompatible.Interface [INTERFACE]
-(type $gwtincompatible.Interface.vtable (struct_subtype (field $unused (ref null data))
+(type $gwtincompatible.Interface.vtable (struct_subtype 
   data)
 )
 
@@ -456,7 +453,7 @@
 (elem declare func $m_getClass__java_lang_Class@gwtincompatible.Interface)
 
 ;;; Code for gwtincompatible.Interface.NestedInterface [INTERFACE]
-(type $gwtincompatible.Interface.NestedInterface.vtable (struct_subtype (field $unused (ref null data))
+(type $gwtincompatible.Interface.NestedInterface.vtable (struct_subtype 
   data)
 )
 

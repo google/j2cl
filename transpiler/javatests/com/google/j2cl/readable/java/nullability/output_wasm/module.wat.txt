@@ -238,7 +238,6 @@
 ;;; Code for nullability.Nullability.StringList [itable.init]
 (global $nullability.Nullability.StringList.itable (ref $itable) (array.init_static $itable 
  (struct.new $java.io.Serializable.vtable
-  (ref.null data)
  )
  (struct.new $java.util.Collection.vtable
   (ref.func $m_add__java_lang_Object__boolean@java.util.ArrayList)
@@ -264,7 +263,6 @@
   (ref.func $m_spliterator__java_util_Spliterator@java.util.AbstractList)
  )
  (struct.new $java.lang.Cloneable.vtable
-  (ref.null data)
  )
  (struct.new $java.util.List.vtable
   (ref.func $m_add__int__java_lang_Object__void@java.util.ArrayList)
@@ -282,7 +280,6 @@
   (ref.func $m_subList__int__int__java_util_List@java.util.AbstractList)
  )
  (struct.new $java.util.RandomAccess.vtable
-  (ref.null data)
  )
  ))
 
@@ -480,7 +477,6 @@
 ;;; Code for nullability.Nullability.RecursiveChild [itable.init]
 (global $nullability.Nullability.RecursiveChild.itable (ref $itable) (array.init_static $itable 
  (struct.new $nullability.Marker.vtable
-  (ref.null data)
  )
  ))
 
@@ -497,7 +493,6 @@
 ;;; Code for nullability.Nullability.RecursiveNullableChild [itable.init]
 (global $nullability.Nullability.RecursiveNullableChild.itable (ref $itable) (array.init_static $itable 
  (struct.new $nullability.Marker.vtable
-  (ref.null data)
  )
  ))
 
@@ -1401,7 +1396,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability)
 
 ;;; Code for nullability.Marker [INTERFACE]
-(type $nullability.Marker.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.Marker.vtable (struct_subtype 
   data)
 )
 
@@ -4529,7 +4524,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBound [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBound.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBound.vtable (struct_subtype 
   data)
 )
 
@@ -4564,7 +4559,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBound)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound.vtable (struct_subtype 
   data)
 )
 
@@ -4599,7 +4594,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype 
   data)
 )
 
@@ -4634,7 +4629,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument.vtable (struct_subtype 
   data)
 )
 
@@ -4669,7 +4664,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype 
   data)
 )
 
@@ -4704,7 +4699,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype 
   data)
 )
 
@@ -6174,7 +6169,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NullableBound [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NullableBound.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnullable.DefaultNullable.NullableBound.vtable (struct_subtype 
   data)
 )
 
@@ -6209,7 +6204,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBound)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NonNullableBound [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NonNullableBound.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnullable.DefaultNullable.NonNullableBound.vtable (struct_subtype 
   data)
 )
 
@@ -6244,7 +6239,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullableBound)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype 
   data)
 )
 
@@ -6279,7 +6274,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument.vtable (struct_subtype 
   data)
 )
 
@@ -6314,7 +6309,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype 
   data)
 )
 
@@ -6349,7 +6344,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype 
   data)
 )
 
@@ -7777,7 +7772,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBound [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBound.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBound.vtable (struct_subtype 
   data)
 )
 
@@ -7812,7 +7807,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBound)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound.vtable (struct_subtype 
   data)
 )
 
@@ -7847,7 +7842,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype 
   data)
 )
 
@@ -7882,7 +7877,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument.vtable (struct_subtype 
   data)
 )
 
@@ -7917,7 +7912,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype 
   data)
 )
 
@@ -7952,7 +7947,7 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype (field $unused (ref null data))
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype 
   data)
 )
 
