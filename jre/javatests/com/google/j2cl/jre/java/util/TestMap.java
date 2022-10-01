@@ -17,16 +17,12 @@
 // CHECKSTYLE_ON
 package com.google.j2cl.jre.java.util;
 
-import com.google.j2cl.jre.testing.TestUtils;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 
 /**
  * Tests base {@link java.util.Map} methods and contracts.
@@ -357,7 +353,6 @@ abstract class TestMap extends TestObject {
     assertMap(map, keys, values);
 
     Object[] undefineds = new Object[values.length];
-    Arrays.fill(undefineds, getUndefined());
     assertMap(map, keys, undefineds);
   }
 
@@ -391,16 +386,6 @@ abstract class TestMap extends TestObject {
       assertNull(keys[i], map.get(keys[i]));
     }
   }
-
-  private static Object getUndefined() {
-    if (TestUtils.isJvm()) {
-      return null;
-    }
-    return getUndefinedImpl();
-  }
-
-  @JsProperty(name = "undefined", namespace = JsPackage.GLOBAL)
-  private static native Object getUndefinedImpl();
 
   /**
    * Test to ensure the test setup is working properly. This method checks to ensure that the
