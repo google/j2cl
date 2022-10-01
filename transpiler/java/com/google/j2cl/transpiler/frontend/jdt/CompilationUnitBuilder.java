@@ -219,12 +219,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Type enumType = convertType(enumDeclaration);
       checkState(enumType.isEnum());
 
-      int ordinal = 0;
-      for (EnumConstantDeclaration enumConstantDeclaration :
-          JdtEnvironment.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
-        enumType.addMember(ordinal, convert(enumConstantDeclaration));
-        ordinal++;
-      }
+      processEnclosedBy(
+          enumType,
+          () -> {
+            int ordinal = 0;
+            for (EnumConstantDeclaration enumConstantDeclaration :
+                JdtEnvironment.<EnumConstantDeclaration>asTypedList(
+                    enumDeclaration.enumConstants())) {
+              enumType.addMember(ordinal, convert(enumConstantDeclaration));
+              ordinal++;
+            }
+            return null;
+          });
       return enumType;
     }
 
@@ -1215,7 +1221,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private Variable convert(
         org.eclipse.jdt.core.dom.SingleVariableDeclaration variableDeclaration) {
-      Variable variable = createVariable(variableDeclaration, /* inNullMarkedScope= */ false);
+      boolean inNullMarkedScope = getCurrentType().getDeclaration().isNullMarked();
+      Variable variable = createVariable(variableDeclaration, inNullMarkedScope);
       if (variableDeclaration.getType() instanceof org.eclipse.jdt.core.dom.UnionType) {
         // Union types are only relevant in multi catch variable declarations, which appear in the
         // AST as a SingleVariableDeclaration.
@@ -1353,8 +1360,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
-      Variable variable =
-          createVariable(variableDeclarationFragment, /* inNullMarkedScope= */ false);
+      boolean inNullMarkedScope = getCurrentType().getDeclaration().isNullMarked();
+      Variable variable = createVariable(variableDeclarationFragment, inNullMarkedScope);
       return VariableDeclarationFragment.newBuilder()
           .setVariable(variable)
           .setInitializer(convertOrNull(variableDeclarationFragment.getInitializer()))

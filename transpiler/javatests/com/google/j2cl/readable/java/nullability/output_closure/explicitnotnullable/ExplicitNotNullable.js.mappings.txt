@@ -235,6 +235,45 @@
 [testListOfWildcardSuperNullableVariable] => [m_testListOfWildcardSuperNullableVariable__java_util_List__void]
 [l] => [l] "l"
 [{}] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.testListOfWildcardSuperNullableVariable"
+[testLambdaNullability] => [m_testLambdaNullability__void]
+[{
+    Consumer<String> lambda = s -> {};
+...    IntFunction<Object[]> newArray = Object[]::new;
+  }] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.testLambdaNullability"
+[Consumer<String> lambda = s -> {};] => [let lambda = Consumer.$adapt((s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+  });] "nullability.explicitnotnullable.ExplicitNotNullable.testLambdaNullability"
+[lambda] => [lambda] "lambda"
+[s] => [s] "s"
+[s -> {}] => [let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));] "nullability.explicitnotnullable.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[s] => [s_1] "s"
+[Consumer<String> nullable = DefaultNullable::nullableAccept;] => [let nullable = Consumer.$adapt((arg0) =>{
+   let arg0_1 = /**@type {?string}*/ ($Casts.$to(arg0, j_l_String));
+   DefaultNullable.m_nullableAccept__java_lang_String__void(arg0_1);
+  });] "nullability.explicitnotnullable.ExplicitNotNullable.testLambdaNullability"
+[nullable] => [nullable] "nullable"
+[DefaultNullable::nullableAccept] => [let arg0_1 = /**@type {?string}*/ ($Casts.$to(arg0, j_l_String));] "nullability.explicitnotnullable.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[DefaultNullable::nullableAccept] => [DefaultNullable.m_nullableAccept__java_lang_String__void(arg0_1);] "nullability.explicitnotnullable.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[Consumer<String> nonNullable = ExplicitNotNullable::nonNullableAccept;] => [let nonNullable = Consumer.$adapt((arg0_2) =>{
+   let arg0_3 = /**@type {?string}*/ ($Casts.$to(arg0_2, j_l_String));
+   ExplicitNotNullable.m_nonNullableAccept__java_lang_String__void(arg0_3);
+  });] "nullability.explicitnotnullable.ExplicitNotNullable.testLambdaNullability"
+[nonNullable] => [nonNullable] "nonNullable"
+[ExplicitNotNullable::nonNullableAccept] => [let arg0_3 = /**@type {?string}*/ ($Casts.$to(arg0_2, j_l_String));] "nullability.explicitnotnullable.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[ExplicitNotNullable::nonNullableAccept] => [ExplicitNotNullable.m_nonNullableAccept__java_lang_String__void(arg0_3);] "nullability.explicitnotnullable.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[Supplier<Object> newObject = Object::new;] => [let newObject = Supplier.$adapt(() =>{
+   return j_l_Object.$create__();
+  });] "nullability.explicitnotnullable.ExplicitNotNullable.testLambdaNullability"
+[newObject] => [newObject] "newObject"
+[Object::new] => [return j_l_Object.$create__();] "nullability.explicitnotnullable.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[IntFunction<Object[]> newArray = Object[]::new;] => [let newArray = IntFunction.$adapt((/** number */ arg0_4) =>{
+   return new Array(arg0_4);
+  });] "nullability.explicitnotnullable.ExplicitNotNullable.testLambdaNullability"
+[newArray] => [newArray] "newArray"
+[Object[]::new] => [return new Array(arg0_4);] "nullability.explicitnotnullable.ExplicitNotNullable.<lambda in testLambdaNullability>"
+[nonNullableAccept] => [m_nonNullableAccept__java_lang_String__void]
+[s] => [s] "s"
+[{}] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.nonNullableAccept"
 [ExplicitNotNullable] => [$init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable]
 [private String f1 = "Hello";] => [this.f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ = 'Hello';] "nullability.explicitnotnullable.ExplicitNotNullable.<init>"
 [@Nullable private String f2 = null;] => [this.f_f2__nullability_explicitnotnullable_ExplicitNotNullable_ = null;] "nullability.explicitnotnullable.ExplicitNotNullable.<init>"

@@ -316,4 +316,30 @@ public class ExplicitNotNullable {
   static <T> void testListOfWildcardSuperDefaultNullabilityVariable(List<? super T> l) {}
 
   static <T> void testListOfWildcardSuperNullableVariable(List<? super @Nullable T> l) {}
+
+  interface Consumer<T extends @Nullable Object> {
+    void accept(T t);
+  }
+
+  interface Supplier<T extends @Nullable Object> {
+    T get();
+  }
+
+  interface IntFunction<T extends @Nullable Object> {
+    T accept(int i);
+  }
+
+  static void testLambdaNullability() {
+    Consumer<String> lambda = s -> {};
+    Consumer<String> nullable = DefaultNullable::nullableAccept;
+    Consumer<String> nonNullable = ExplicitNotNullable::nonNullableAccept;
+    Supplier<Object> newObject = Object::new;
+    IntFunction<Object[]> newArray = Object[]::new;
+  }
+
+  static void nonNullableAccept(String s) {}
+}
+
+class DefaultNullable {
+  static void nullableAccept(String s) {}
 }

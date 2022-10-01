@@ -1,0 +1,49 @@
+goog.module('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const IntFunction = goog.require('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction$impl');
+
+/**
+ * @template T
+ * @implements {IntFunction<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(number):T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(number):T} @nodts*/
+  this.f_fn__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction_$LambdaAdaptor;
+  this.$ctor__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction_$LambdaAdaptor__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction_$LambdaAdaptor__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction_$JsFunction__void(/** ?function(number):T */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {T} */
+ m_accept__int__java_lang_Object(/** number */ arg0) {
+  let /** ?function(number):T */ $function;
+  return ($function = this.f_fn__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+IntFunction.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'nullability.explicitnotnullable.ExplicitNotNullable$IntFunction$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=ExplicitNotNullable$IntFunction$$LambdaAdaptor.js.map

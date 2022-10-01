@@ -13,15 +13,15 @@ open class CastGenerics<T, E: kotlin.Number?> {
 
  open fun testCastToTypeVariable() {
   val o: kotlin.Any? = kotlin.Int(1)
-  val e: E = o as E
-  val t: T = o as T
+  val e: E? = o as E
+  val t: T? = o as T
   val es: kotlin.Array<E>? = o as kotlin.Array<E>?
   val ts: kotlin.Array<T>? = o as kotlin.Array<T>?
  }
 
  open fun <S, V: kotlin.Enum<V>> testCastToMethodTypeVariable() {
   val o: kotlin.Any? = kotlin.Int(1)
-  val s: S = o as S
+  val s: S? = o as S
   var c: kotlin.Any? = o as cast.CastGenerics<S, kotlin.Number?>?
   c = o as kotlin.Array<S>?
   c = o as V
@@ -30,7 +30,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
  open fun <TT: kotlin.Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
    fun nestedGenericMethod_private_cast_CastGenerics_1Nested(o: kotlin.Any?) {
-    val t: TT = o as TT
+    val t: TT? = o as TT
    }
   }
  }

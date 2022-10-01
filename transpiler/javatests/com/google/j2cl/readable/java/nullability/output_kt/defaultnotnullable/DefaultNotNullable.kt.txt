@@ -212,8 +212,8 @@ open class DefaultNotNullable {
 
   @kotlin.jvm.JvmStatic
   fun <T: kotlin.Any> testGenericTypeNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<T>, element: T) {
-   val localElement: T = element
-   c!!.accept(localElement)
+   val localElement: T? = element
+   c!!.accept(localElement!!)
   }
 
   @kotlin.jvm.JvmStatic
@@ -224,13 +224,13 @@ open class DefaultNotNullable {
 
   @kotlin.jvm.JvmStatic
   fun <T: kotlin.Any> testGenericWildcardNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<in T>, element: T) {
-   val localElement: T = element
-   c!!.accept(localElement)
+   val localElement: T? = element
+   c!!.accept(localElement!!)
   }
 
   @kotlin.jvm.JvmStatic
   fun testParametrizedArrayNullabilityCast(array: kotlin.Array<kotlin.String>) {
-   val localArray: kotlin.Array<kotlin.String?>? = array as kotlin.Array<kotlin.String?>?
+   val localArray: kotlin.Array<kotlin.String>? = array
   }
 
   @kotlin.jvm.JvmStatic

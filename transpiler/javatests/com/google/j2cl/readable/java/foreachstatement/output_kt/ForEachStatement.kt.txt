@@ -25,7 +25,7 @@ open class ForEachStatement {
  }
 
  fun <T: kotlin.collections.MutableIterable<kotlin.String?>?, U: T> testTypeVariable_private_foreachstatement_ForEachStatement() {
-  val iterable: U = null as U
+  val iterable: U? = null
   FOR_EACH@ for (s in iterable!!) {}
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
   FOR_EACH_1@ for (s_1 in anotherIterable!!) {}

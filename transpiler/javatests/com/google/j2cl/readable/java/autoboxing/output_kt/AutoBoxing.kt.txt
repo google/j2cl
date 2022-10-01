@@ -353,7 +353,7 @@ open class AutoBoxing {
 
   @kotlin.jvm.JvmStatic
   fun <T: kotlin.Long?> testUnboxingFromTypeVariable() {
-   var n: T = kotlin.Long.valueOf(10L)
+   var n: T? = kotlin.Long.valueOf(10L)
    var l: kotlin.Long = n!!.toLong()
    assert(l === 10L)
    n = kotlin.Long.valueOf(n!!.toLong() + 1L)
@@ -369,7 +369,7 @@ open class AutoBoxing {
 
   @kotlin.jvm.JvmStatic
   fun <T> testUnboxingFromIntersectionType() where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long>? {
-   var n: T = kotlin.Long.valueOf(10L)
+   var n: T? = kotlin.Long.valueOf(10L)
    var l: kotlin.Long = n!!.toLong()
    assert(l === 10L)
    n = kotlin.Long.valueOf(n!!.toLong() + 1L)

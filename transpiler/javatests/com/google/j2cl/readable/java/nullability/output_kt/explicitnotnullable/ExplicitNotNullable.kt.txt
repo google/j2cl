@@ -198,6 +198,27 @@ open class ExplicitNotNullable {
 
   @kotlin.jvm.JvmStatic
   fun <T: kotlin.Any> testListOfWildcardSuperNullableVariable(l: kotlin.collections.MutableList<in T?>) {}
+
+  @kotlin.jvm.JvmStatic
+  fun testLambdaNullability() {
+   val lambda: nullability.explicitnotnullable.ExplicitNotNullable.Consumer<kotlin.String>? = nullability.explicitnotnullable.ExplicitNotNullable.Consumer { s: kotlin.String ->
+   } as nullability.explicitnotnullable.ExplicitNotNullable.Consumer<kotlin.String>?
+   val nullable: nullability.explicitnotnullable.ExplicitNotNullable.Consumer<kotlin.String>? = nullability.explicitnotnullable.ExplicitNotNullable.Consumer { arg0: kotlin.String ->
+    nullability.explicitnotnullable.DefaultNullable.nullableAccept(arg0)
+   } as nullability.explicitnotnullable.ExplicitNotNullable.Consumer<kotlin.String>?
+   val nonNullable: nullability.explicitnotnullable.ExplicitNotNullable.Consumer<kotlin.String>? = nullability.explicitnotnullable.ExplicitNotNullable.Consumer { arg0_1: kotlin.String ->
+    nullability.explicitnotnullable.ExplicitNotNullable.nonNullableAccept(arg0_1)
+   } as nullability.explicitnotnullable.ExplicitNotNullable.Consumer<kotlin.String>?
+   val newObject: nullability.explicitnotnullable.ExplicitNotNullable.Supplier<kotlin.Any>? = nullability.explicitnotnullable.ExplicitNotNullable.Supplier {
+    return@Supplier kotlin.Any()
+   } as nullability.explicitnotnullable.ExplicitNotNullable.Supplier<kotlin.Any>?
+   val newArray: nullability.explicitnotnullable.ExplicitNotNullable.IntFunction<kotlin.Array<kotlin.Any>>? = nullability.explicitnotnullable.ExplicitNotNullable.IntFunction { arg0_2: kotlin.Int ->
+    return@IntFunction kotlin.arrayOfNulls<kotlin.Any>(arg0_2) as kotlin.Array<kotlin.Any>
+   } as nullability.explicitnotnullable.ExplicitNotNullable.IntFunction<kotlin.Array<kotlin.Any>>?
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun nonNullableAccept(s: kotlin.String) {}
  }
 
  interface NullableBound<T: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<T>?> {}
@@ -303,5 +324,24 @@ open class ExplicitNotNullable {
   open fun setNonNull(n: N) {}
 
   open fun setDefaultNullability(n: N) {}
+ }
+
+ fun interface Consumer<T> {
+  fun accept(t: T)
+ }
+
+ fun interface Supplier<T> {
+  fun get(): T
+ }
+
+ fun interface IntFunction<T> {
+  fun accept(i: kotlin.Int): T
+ }
+}
+
+open class DefaultNullable {
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun nullableAccept(s: kotlin.String?) {}
  }
 }

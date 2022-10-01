@@ -6,9 +6,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
+let DefaultNullable = goog.forwardDeclare('nullability.explicitnotnullable.DefaultNullable$impl');
+let Consumer = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
+let IntFunction = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction$impl');
 let ParameterizedDefaultNullability = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability$impl');
 let ParameterizedNonNullable = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable$impl');
 let ParameterizedNullable = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable$impl');
+let Supplier = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Supplier$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -239,6 +243,31 @@ class ExplicitNotNullable extends j_l_Object {
  static m_testListOfWildcardSuperNullableVariable__java_util_List__void(/** !List<?> */ l) {
   ExplicitNotNullable.$clinit();
  }
+ /** @nodts */
+ static m_testLambdaNullability__void() {
+  ExplicitNotNullable.$clinit();
+  let lambda = Consumer.$adapt((s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+  });
+  let nullable = Consumer.$adapt((arg0) =>{
+   let arg0_1 = /**@type {?string}*/ ($Casts.$to(arg0, j_l_String));
+   DefaultNullable.m_nullableAccept__java_lang_String__void(arg0_1);
+  });
+  let nonNullable = Consumer.$adapt((arg0_2) =>{
+   let arg0_3 = /**@type {?string}*/ ($Casts.$to(arg0_2, j_l_String));
+   ExplicitNotNullable.m_nonNullableAccept__java_lang_String__void(arg0_3);
+  });
+  let newObject = Supplier.$adapt(() =>{
+   return j_l_Object.$create__();
+  });
+  let newArray = IntFunction.$adapt((/** number */ arg0_4) =>{
+   return new Array(arg0_4);
+  });
+ }
+ /** @nodts */
+ static m_nonNullableAccept__java_lang_String__void(/** string */ s) {
+  ExplicitNotNullable.$clinit();
+ }
  /** @private @nodts */
  $init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable() {
   this.f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ = 'Hello';
@@ -269,6 +298,10 @@ class ExplicitNotNullable extends j_l_Object {
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
+  DefaultNullable = goog.module.get('nullability.explicitnotnullable.DefaultNullable$impl');
+  Consumer = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
+  IntFunction = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction$impl');
+  Supplier = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Supplier$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');

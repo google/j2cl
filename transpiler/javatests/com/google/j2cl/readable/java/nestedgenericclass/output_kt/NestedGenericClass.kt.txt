@@ -48,7 +48,7 @@ open class NestedGenericClass<T> {
 
  open inner class RecursiveTypeVariable<T: nestedgenericclass.NestedGenericClass<T>.RecursiveTypeVariable<T>?> {
   open fun test() {
-   val t: T = null as T
+   val t: T? = null
    t!!.Inner()
   }
 
