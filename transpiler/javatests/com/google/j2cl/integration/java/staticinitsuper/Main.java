@@ -60,7 +60,7 @@ public class Main {
 
   private static void testInterfaceInitialization() {
     loadOrder.clear();
-    new A(); // start clinit chain
+    Object unused = new A(); // start clinit chain
     assertExpectedOrder("D1", "D2");
   }
 
@@ -100,7 +100,7 @@ public class Main {
 
   public static void testInitializationViaClass() {
     loadOrder.clear();
-    new X();
+    Object unused = new X();
     assertExpectedOrder("X1", "X2", "Y1", "Y3");
   }
 

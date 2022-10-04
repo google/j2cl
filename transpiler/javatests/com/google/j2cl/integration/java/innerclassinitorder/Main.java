@@ -61,12 +61,12 @@ public class Main {
   }
 
   public void testOuterThisFromSuperCall() {
-    new OuterRefFromSuperCtorCall();
+    Object unused = new OuterRefFromSuperCtorCall();
     assertTrue((number == 100));
   }
 
   public void testOuterThisFromThisCall() {
-    new OuterRefFromThisCtorCall();
+    Object unused = new OuterRefFromThisCtorCall();
     assertTrue((number == 1100));
   }
 
@@ -86,7 +86,7 @@ public class Main {
           number += 10;
         }
       }
-      new ReallyInnerClass();
+      Object unused = new ReallyInnerClass();
     }
   }
 
@@ -211,7 +211,7 @@ public class Main {
   }
 
   public void testInnerClassInitialization() {
-    new InnerClass();
+    Object unused = new InnerClass();
     assertTrue((number == 1111));
   }
 

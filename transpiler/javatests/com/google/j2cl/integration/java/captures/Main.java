@@ -366,7 +366,7 @@ public class Main {
       }
     }
     Outer outer = new Outer();
-    outer.new Capturer(o, outer);
+    Object unused = outer.new Capturer(o, outer);
   }
 
   private static class FieldReferencesOuter {

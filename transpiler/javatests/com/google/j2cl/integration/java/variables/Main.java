@@ -61,7 +61,8 @@ public class Main {
   }
 
   private static void testClassParameterCollisionInConstructor() {
-    new CollisionInConstructor(true, new Asserts(), new CollisionInConstructor(), 1);
+    Object unused =
+        new CollisionInConstructor(true, new Asserts(), new CollisionInConstructor(), 1);
   }
 
   private static void testVariableInference() {

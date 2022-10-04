@@ -128,7 +128,10 @@ public class Main {
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void testSpecializedLambda() {
-    Consumer<String> stringConsumer = s -> s.substring(1);
+    Consumer<String> stringConsumer =
+        s -> {
+          Object unused = s.substring(1);
+        };
     Consumer rawConsumer = stringConsumer;
     assertThrowsClassCastException(() -> rawConsumer.accept(new Object()), String.class);
 

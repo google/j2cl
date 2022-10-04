@@ -64,28 +64,28 @@ public class Main {
 
   private static void testValueOf_exceptions() {
     try {
-      Planet.valueOf("NOTHING");
+      Object unused = Planet.valueOf("NOTHING");
       fail("Should have thrown IllegalArgumentException.");
     } catch (IllegalArgumentException e) {
       // do nothing.
     }
 
     try {
-      Planet.valueOf(null);
+      Object unused = Planet.valueOf(null);
       fail("Should have thrown NullPointerException.");
     } catch (NullPointerException e) {
       // do nothing.
     }
 
     try {
-      Planet.valueOf("toString");
+      Object unused = Planet.valueOf("toString");
       fail("Should have thrown IllegalArgumentException.");
     } catch (IllegalArgumentException e) {
       // do nothing.
     }
 
     try {
-      Planet.valueOf("__proto__");
+      Object unused = Planet.valueOf("__proto__");
       fail("Should have thrown IllegalArgumentException.");
     } catch (IllegalArgumentException e) {
       // do nothing.
@@ -94,7 +94,7 @@ public class Main {
     // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
     // implemented.
     try {
-      Enum.valueOf(Planet.class, null);
+      Object unused = Enum.valueOf(Planet.class, null);
       // fail( "Should have thrown NullPointerException");
       // } catch (NullPointerException expected) {
     } catch (UnsupportedOperationException expected) {
@@ -106,7 +106,7 @@ public class Main {
     // TODO(b/36863439): Transform these into meaningful assertions once Enum.valueOf is
     // implemented.
     try {
-      Enum.valueOf(Planet.class, "NOTHING");
+      Object unused = Enum.valueOf(Planet.class, "NOTHING");
       // fail( "Should have thrown IllegalArgumentException");
       // } catch (IllegalArgumentException expected) {
     } catch (UnsupportedOperationException expected) {
@@ -115,7 +115,7 @@ public class Main {
     // TODO(b/30745420): Transform these into meaningful assertions once Class.getEnumConstants is
     // implemented.
     try {
-      Planet.class.getEnumConstants();
+      Object unused = Planet.class.getEnumConstants();
     } catch (UnsupportedOperationException expected) {
     }
   }

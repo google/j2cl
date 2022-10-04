@@ -174,7 +174,7 @@ public class Main {
     assertTrue(copy.b);
 
     outer = new Outer();
-    outer.new Inner();
+    Object unused = outer.new Inner();
     assertTrue(outer.b);
   }
 

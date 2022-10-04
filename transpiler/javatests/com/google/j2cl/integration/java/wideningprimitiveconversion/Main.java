@@ -261,10 +261,10 @@ public class Main {
     takesFloat(l, 300f);
     takesDouble(l, 300d);
 
-    new ClassTakesInt(c, 100);
-    new ClassTakesLong(i, 200L);
-    new ClassTakesFloat(l, 300f);
-    new ClassTakesDouble(l, 300d);
+    Object unused1 = new ClassTakesInt(c, 100);
+    Object unused2 = new ClassTakesLong(i, 200L);
+    Object unused3 = new ClassTakesFloat(l, 300f);
+    Object unused4 = new ClassTakesDouble(l, 300d);
   }
 
   private static void testReturnAssignment() {
