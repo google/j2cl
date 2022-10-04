@@ -6,8 +6,15 @@ package(
 )
 
 j2cl_library(
-    name = "box2d_j2cl",
+    name = "box2d-j2cl",
     srcs = glob(["*.java"]),
     tags = ["manual"],
     deps = ["//third_party:jbox2d-j2cl"],
+)
+
+java_library(
+    name = "box2d",
+    srcs = glob(["*.java"]),
+    tags = ["manual"],
+    deps = ["//third_party:jbox2d"],
 )

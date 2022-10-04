@@ -21,6 +21,6 @@ integration_test(
     enable_kt = False,
     tags = ["manual"],
     deps = [
-        "//transpiler/javatests/com/google/j2cl/integration/java/box2d:box2d_j2cl",
+        "//transpiler/javatests/com/google/j2cl/integration/java/box2d:box2d-j2cl",
     ],
 )
