@@ -170,6 +170,8 @@ public class Main {
         () -> {
           Supplier<Numbers> integerSupplier = (Supplier) () -> new Integer(1);
           switch (integerSupplier.get()) {
+            default:
+              fail();
           }
         });
   }
