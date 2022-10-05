@@ -1,0 +1,41 @@
+// Generated from "j2ktnotpassing/DefaultNullable.java"
+package j2ktnotpassing
+
+import javaemul.lang.*
+import kotlin.jvm.*
+
+open class DefaultNullable {
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun testNonNullableLambdas() {
+   val lambda: j2ktnotpassing.NotNullable.Consumer<kotlin.String?>? = j2ktnotpassing.NotNullable.Consumer { s: kotlin.String? ->
+   }
+   val methodReference: j2ktnotpassing.NotNullable.Consumer<kotlin.String?>? = j2ktnotpassing.NotNullable.Consumer { arg0: kotlin.String ->
+    j2ktnotpassing.DefaultNullable.accept(arg0)
+   }
+   val constructorReference: j2ktnotpassing.NotNullable.Supplier<kotlin.String?>? = j2ktnotpassing.NotNullable.Supplier {
+    return@Supplier kotlin.String()
+   }
+   val newArrayReference: j2ktnotpassing.NotNullable.IntFunction<kotlin.Array<kotlin.String?>?>? = j2ktnotpassing.NotNullable.IntFunction { arg0_1: kotlin.Int ->
+    return@IntFunction kotlin.arrayOfNulls<kotlin.String>(arg0_1) as kotlin.Array<kotlin.String>
+   }
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun accept(s: kotlin.String?) {}
+ }
+}
+
+open class NotNullable {
+ fun interface Supplier<T> {
+  fun get(): T
+ }
+
+ fun interface Consumer<T> {
+  fun accept(t: T)
+ }
+
+ fun interface IntFunction<T> {
+  fun accept(i: kotlin.Int): T
+ }
+}
