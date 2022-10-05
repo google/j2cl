@@ -50,7 +50,7 @@ public class Main {
       public void remove() {}
     }
 
-    public MyIterator iterator() {
+    public Iterator<Integer> iterator() {
       return new MyIterator();
     }
   }
