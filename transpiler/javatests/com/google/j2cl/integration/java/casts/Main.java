@@ -68,6 +68,7 @@ public class Main {
         });
   }
 
+  @SuppressWarnings("SelfAssignment")
   private static void testArrayCasts_basics() {
     // Cast null to Object[]
     Object o = (Object[]) null;

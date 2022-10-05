@@ -169,6 +169,7 @@ public class Main {
     abstract String string();
 
     @Override
+    @SuppressWarnings("EqualsHashCode")
     public abstract boolean equals(Object o);
   }
 

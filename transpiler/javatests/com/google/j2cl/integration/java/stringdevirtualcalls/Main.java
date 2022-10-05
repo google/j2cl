@@ -68,6 +68,7 @@ public class Main {
     assertTrue(string1.getClass() == string2.getClass());
   }
 
+  @SuppressWarnings("SelfComparison")
   private static void testComparableMethods() {
     String string1 = "string1";
     String string2 = "string2";
@@ -96,6 +97,7 @@ public class Main {
     assertTrue(string1.subSequence(0, 2).equals("st"));
   }
 
+  @SuppressWarnings("SubstringOfZero")
   private static void testStringMethods() {
     String string1 = "string1";
 

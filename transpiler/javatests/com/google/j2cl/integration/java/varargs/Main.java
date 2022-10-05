@@ -215,6 +215,7 @@ public class Main {
     assertEquals("ArrayList", new Child().which);
   }
 
+  @SuppressWarnings("ImmutableEnumChecker")
   private enum MyEnum {
     A,
     B(new Object[0]),

@@ -80,6 +80,7 @@ public class Main {
     UNREFERENCED_SUBCLASS_VALUE {},
   }
 
+  @SuppressWarnings("ImmutableEnumChecker")
   enum Bar {
     FOO,
     BAR(1),
@@ -122,6 +123,7 @@ public class Main {
     assertTrue(1 == Functions.MINUS1.function.apply(2));
   }
 
+  @SuppressWarnings("ImmutableEnumChecker")
   enum Functions {
     PLUS1(n -> n + 1),
     MINUS1(n -> n - 1);

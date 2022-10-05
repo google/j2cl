@@ -229,6 +229,7 @@ public class Main {
     assertEquals(interfaceWithHashcode.hashCode(), integerProducer.produce().intValue());
   }
 
+  @SuppressWarnings({"ArrayToString", "ArrayHashCode"})
   private static void testQualifierEvaluation_array() {
     // Array methods.
     String[] array = {returnSequenceAsString()};

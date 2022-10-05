@@ -213,6 +213,7 @@ public class Main {
     assertEquals((byte) 0, (byte) (m / (m + m)));
   }
 
+  @SuppressWarnings("BadShiftAmount")
   private static void testNestedOperationsOverflow() {
     int intermediate;
     // Tests that the minimal coercions inserted by J2CL are sufficient.
