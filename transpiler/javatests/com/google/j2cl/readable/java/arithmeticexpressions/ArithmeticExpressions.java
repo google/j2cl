@@ -194,6 +194,14 @@ public class ArithmeticExpressions {
     d = 20 + l + d;
   }
 
+  public void testEffectivelyFinalVariableInAssignmentExpression(boolean condition) {
+    long effectivelyFinal;
+    // "condition &&" is necessary to trigger a problem from b/251115461
+    if (condition && ((effectivelyFinal = bar) != 0)) {
+      long unused = effectivelyFinal;
+    }
+  }
+
   private static long counter = 0;
 
   private static long incrementCounter() {

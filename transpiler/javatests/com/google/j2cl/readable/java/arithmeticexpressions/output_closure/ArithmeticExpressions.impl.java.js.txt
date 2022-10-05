@@ -180,6 +180,13 @@ class ArithmeticExpressions extends j_l_Object {
   l = $LongUtils.plus($LongUtils.plus($Primitives.widenIntToLong(i + boxedInteger.m_intValue__int() | 0), l), $Long.fromInt(20));
   d = $Primitives.widenLongToDouble($LongUtils.plus($Long.fromInt(20), l)) + d;
  }
+ /** @nodts */
+ m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void(/** boolean */ condition) {
+  let /** !$Long */ effectivelyFinal;
+  if (condition && $LongUtils.notEquals(effectivelyFinal = this.f_bar__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(0))) {
+   let unused = effectivelyFinal;
+  }
+ }
  /** @nodts @return {!$Long} */
  static m_incrementCounter__long() {
   return ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $LongUtils.plus(ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_, $Long.fromInt(1));

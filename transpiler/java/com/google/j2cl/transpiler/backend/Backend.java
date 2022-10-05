@@ -477,8 +477,8 @@ public enum Backend {
 
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,
-          MakeVariablesFinal::new,
           NormalizeVariableInitialization::new,
+          MakeVariablesFinal::new,
           NormalizeNonFinalVariablesKotlin::new,
           RemoveNestedBlocks::new,
 

@@ -274,9 +274,9 @@
       ;; int y;
       ;;@ forstatement/ForStatement.java:53:6
       
-      ;; (y = i);
+      ;; (y = (i + x));
       ;;@ forstatement/ForStatement.java:54:6
-      (local.set $y (local.get $i))
+      (local.set $y (i32.add (local.get $i) (local.get $x)))
      )
     )
     (local.set $i (i32.add (local.get $i) (i32.const 1)))

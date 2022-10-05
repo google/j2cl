@@ -51,7 +51,7 @@ public class ForStatement {
   public void testInitializeInForCondition() {
     for (int i = 0, x; i < 1 && (x = 3) != 0; i++) {
       int y;
-      y = i;
+      y = i + x;
     }
   }
 

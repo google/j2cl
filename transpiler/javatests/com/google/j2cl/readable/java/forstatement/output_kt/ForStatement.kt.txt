@@ -77,8 +77,8 @@ open class ForStatement {
    x
   } !== 0) {
    LOOP_CONTINUE@ do {
-    val y: kotlin.Int
-    y = i
+    var y: kotlin.Int = 0
+    y = i + x
    } while (false)
    i = i + 1
   }

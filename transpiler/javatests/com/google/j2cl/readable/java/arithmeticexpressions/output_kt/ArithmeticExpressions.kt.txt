@@ -249,6 +249,16 @@ open class ArithmeticExpressions {
   d = (20L + l).toDouble() + d
  }
 
+ open fun testEffectivelyFinalVariableInAssignmentExpression(condition: kotlin.Boolean) {
+  var effectivelyFinal: kotlin.Long = 0L
+  if (condition && kotlin.run {
+   effectivelyFinal = this.bar
+   effectivelyFinal
+  } !== 0L) {
+   val unused: kotlin.Long = effectivelyFinal
+  }
+ }
+
  companion object {
   @kotlin.jvm.JvmField val FLOAT_CONSTANT_private_arithmeticexpressions_ArithmeticExpressions: kotlin.Float = 1.1f
 

@@ -193,6 +193,17 @@
 [l = boxedInteger = i = 20;] => [l = $Primitives.widenIntToLong((boxedInteger = Integer.m_valueOf__int__java_lang_Integer(i = 20)).m_intValue__int());] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [l = i + boxedInteger + l + 20;] => [l = $LongUtils.plus($LongUtils.plus($Primitives.widenIntToLong(i + boxedInteger.m_intValue__int() | 0), l), $Long.fromInt(20));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [d = 20 + l + d;] => [d = $Primitives.widenLongToDouble($LongUtils.plus($Long.fromInt(20), l)) + d;] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
+[testEffectivelyFinalVariableInAssignmentExpression] => [m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void]
+[condition] => [condition] "condition"
+[long effectivelyFinal;] => [let /** !$Long */ effectivelyFinal;] "arithmeticexpressions.ArithmeticExpressions.testEffectivelyFinalVariableInAssignmentExpression"
+[effectivelyFinal] => [effectivelyFinal] "effectivelyFinal"
+[if (condition && ((effectivelyFinal = bar) != 0)) {
+      long unused = effectivelyFinal;
+    }] => [if (condition && $LongUtils.notEquals(effectivelyFinal = this.f_bar__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(0))) {
+   let unused = effectivelyFinal;
+  }] "arithmeticexpressions.ArithmeticExpressions.testEffectivelyFinalVariableInAssignmentExpression"
+[long unused = effectivelyFinal;] => [let unused = effectivelyFinal;] "arithmeticexpressions.ArithmeticExpressions.testEffectivelyFinalVariableInAssignmentExpression"
+[unused] => [unused] "unused"
 [incrementCounter] => [m_incrementCounter__long]
 [return ++counter;] => [return ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $LongUtils.plus(ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_, $Long.fromInt(1));] "arithmeticexpressions.ArithmeticExpressions.incrementCounter"
 [ArithmeticExpressions] => [$init__void_$p_arithmeticexpressions_ArithmeticExpressions]

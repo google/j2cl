@@ -20,7 +20,11 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 
-/** Initializes non-final variables with default value. */
+/**
+ * Normalize all local variables to have an explicit initializer.
+ *
+ * <p>It is necessary until this is fixed: https://youtrack.jetbrains.com/issue/KT-54319
+ */
 public class NormalizeVariableInitialization extends NormalizationPass {
   @Override
   public void applyTo(Type type) {
@@ -30,9 +34,12 @@ public class NormalizeVariableInitialization extends NormalizationPass {
           public VariableDeclarationFragment rewriteVariableDeclarationFragment(
               VariableDeclarationFragment variableDeclaration) {
             Variable variable = variableDeclaration.getVariable();
-            if (variableDeclaration.getInitializer() != null || variable.isFinal()) {
+            if (variableDeclaration.getInitializer() != null) {
               return variableDeclaration;
             }
+
+            // Make the variable non-final to allow for more than one assignment.
+            variable.setFinal(false);
 
             return VariableDeclarationFragment.Builder.from(variableDeclaration)
                 .setInitializer(variable.getTypeDescriptor().getDefaultValue())
