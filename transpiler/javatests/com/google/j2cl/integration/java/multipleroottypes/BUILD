@@ -6,8 +6,13 @@ load(
 
 package(licenses = ["notice"])
 
-j2cl_library(
+java_library(
     name = "MainRootType",
+    srcs = ["MainRootType.java"],
+)
+
+j2cl_library(
+    name = "MainRootType-j2cl",
     # Src's JUST the MainRootType class.
     srcs = ["MainRootType.java"],
 )
@@ -17,5 +22,5 @@ integration_test(
     # Src's JUST the Main class and gets MainRootType as a dependency. Do not
     # change this since this is part of what the test is verifying.
     srcs = ["Main.java"],
-    deps = [":MainRootType"],
+    deps = [":MainRootType-j2cl"],
 )
