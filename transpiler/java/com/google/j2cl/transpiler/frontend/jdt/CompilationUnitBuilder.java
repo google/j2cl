@@ -198,7 +198,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               a ->
                   a.getAnnotationType()
                       .getQualifiedName()
-                      .equals(Nullability.ORG_JSPECIFY_NULLNESS_NULL_MAKED));
+                      .equals(Nullability.ORG_JSPECIFY_NULLNESS_NULL_MARKED));
     }
 
     private Type convert(AbstractTypeDeclaration typeDeclaration) {

@@ -1345,7 +1345,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     return AnnotationUtils.findAnnotationBindingByName(
-            packge.getAnnotationMirrors(), Nullability.ORG_JSPECIFY_NULLNESS_NULL_MAKED)
+            packge.getAnnotationMirrors(), Nullability.ORG_JSPECIFY_NULLNESS_NULL_MARKED)
         != null;
   }
 

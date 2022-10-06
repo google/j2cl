@@ -1322,7 +1322,7 @@ class JdtEnvironment {
    */
   private static boolean hasNullMarkedAnnotation(ITypeBinding typeBinding) {
     if (JdtAnnotationUtils.hasAnnotation(
-        typeBinding, Nullability.ORG_JSPECIFY_NULLNESS_NULL_MAKED)) {
+        typeBinding, Nullability.ORG_JSPECIFY_NULLNESS_NULL_MARKED)) {
       return true;
     }
     return typeBinding.getDeclaringClass() != null

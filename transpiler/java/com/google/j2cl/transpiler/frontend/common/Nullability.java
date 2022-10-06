@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableSet;
 /** Utility that provides the handling of recognized nullability annotations. */
 public class Nullability {
 
-  public static final String ORG_JSPECIFY_NULLNESS_NULL_MAKED = "org.jspecify.nullness.NullMarked";
+  public static final String ORG_JSPECIFY_NULLNESS_NULL_MARKED = "org.jspecify.nullness.NullMarked";
 
   private static final ImmutableSet<String> RECOGNIZED_NULLABLE_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
