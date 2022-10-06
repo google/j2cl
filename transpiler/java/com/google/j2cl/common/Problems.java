@@ -99,8 +99,7 @@ public class Problems {
 
   public void fatal(FatalError fatalError, Object... args) {
     checkArgument(fatalError.getNumberOfArguments() == args.length);
-    problemsBySeverity.put(
-        Severity.ERROR, "Error: " + String.format(fatalError.getMessage(), args));
+    problem(Severity.ERROR, "Error: " + String.format(fatalError.getMessage(), args));
     abort();
   }
 
@@ -118,7 +117,7 @@ public class Problems {
 
   @FormatMethod
   public void error(String detailMessage, Object... args) {
-    problemsBySeverity.put(Severity.ERROR, "Error: " + String.format(detailMessage, args));
+    problem(Severity.ERROR, "Error: " + String.format(detailMessage, args));
   }
 
   @FormatMethod
@@ -128,20 +127,24 @@ public class Problems {
 
   @FormatMethod
   public void warning(String detailMessage, Object... args) {
-    problemsBySeverity.put(Severity.WARNING, String.format(detailMessage, args));
+    problem(Severity.WARNING, String.format(detailMessage, args));
   }
 
   @FormatMethod
   private void problem(
       Severity severity, SourcePosition sourcePosition, String detailMessage, Object... args) {
-    checkArgument(sourcePosition != null || sourcePosition != SourcePosition.NONE);
-    problem(
-        severity,
-        // SourcePosition lines are 0 based.
-        sourcePosition.getStartFilePosition().getLine() + 1,
-        sourcePosition.getFilePath(),
-        detailMessage,
-        args);
+    checkArgument(sourcePosition != null);
+    if (sourcePosition == SourcePosition.NONE) {
+      problem(severity, String.format(detailMessage, args));
+    } else {
+      problem(
+          severity,
+          // SourcePosition lines are 0 based.
+          sourcePosition.getStartFilePosition().getLine() + 1,
+          sourcePosition.getFilePath(),
+          detailMessage,
+          args);
+    }
   }
 
   @FormatMethod
@@ -152,7 +155,7 @@ public class Problems {
       @FormatString String detailMessage,
       Object... args) {
     String message = args.length == 0 ? detailMessage : String.format(detailMessage, args);
-    problemsBySeverity.put(
+    problem(
         severity,
         String.format(
             "%s:%s:%s: %s",
@@ -162,9 +165,13 @@ public class Problems {
             message));
   }
 
+  private void problem(Severity severity, String message) {
+    problemsBySeverity.put(severity, message);
+  }
+
   @FormatMethod
   public void info(String detailMessage, Object... args) {
-    problemsBySeverity.put(Severity.INFO, String.format(detailMessage, args));
+    problem(Severity.INFO, String.format(detailMessage, args));
   }
 
   /** Prints all problems to provided output and returns the exit code. */
