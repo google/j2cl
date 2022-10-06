@@ -22,7 +22,7 @@ def _compile(
         javac_opts = [],
         kotlincopts = [],
         internal_transpiler_flags = {},
-        generate_kythe_action = False,
+        generate_kythe_action = True,
         artifact_suffix = ""):
     name = ctx.label.name + artifact_suffix
 
@@ -143,7 +143,7 @@ def _java_compile(
         exported_plugins = [],
         output_jar = None,
         javac_opts = [],
-        generate_kythe_action = False,
+        generate_kythe_action = True,
         mnemonic = "J2cl"):
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []

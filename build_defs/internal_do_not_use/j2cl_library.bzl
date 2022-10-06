@@ -73,10 +73,6 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/truth",
 ]
 
-# Packages in this list will be forced to set generate_kythe_action = True.
-_ENABLE_KYTHE_INDEXING_PACKAGES = [
-]
-
 def _tree_artifact_proxy_impl(ctx):
     js_files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
     return DefaultInfo(files = depset([js_files]), runfiles = ctx.runfiles([js_files]))
@@ -116,10 +112,6 @@ def j2cl_library(
         args["j2cl_transpiler_override"] = (
             "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKolinSupport"
         )
-
-    enable_kythe_indexing = any([native.package_name().startswith(p) for p in _ENABLE_KYTHE_INDEXING_PACKAGES])
-    if enable_kythe_indexing:
-        args["generate_kythe_action"] = True
 
     j2cl_library_rule(
         name = name,
