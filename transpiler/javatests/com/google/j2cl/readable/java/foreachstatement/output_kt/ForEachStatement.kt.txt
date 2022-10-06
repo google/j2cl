@@ -7,10 +7,12 @@ import kotlin.jvm.*
 open class ForEachStatement {
  open fun test(iterable: kotlin.collections.MutableIterable<kotlin.Throwable?>?) {
   FOR_EACH@ for (t in iterable!!) {
-   t!!.toString()
-  }
-  FOR_EACH_1@ for (t_1 in kotlin.arrayOfNulls<kotlin.Throwable>(10)) {
+   val t_1: kotlin.Throwable? = t
    t_1!!.toString()
+  }
+  FOR_EACH_1@ for (t_2 in kotlin.arrayOfNulls<kotlin.Throwable>(10)) {
+   val t_3: kotlin.Throwable? = t_2
+   t_3!!.toString()
   }
  }
 
@@ -18,17 +20,25 @@ open class ForEachStatement {
   try {
    throw kotlin.Exception()
   } catch (e: foreachstatement.ForEachStatement.Exception1) {
-   FOR_EACH@ for (o in e!!) {}
+   FOR_EACH@ for (o in e!!) {
+    val o_1: kotlin.Any? = o
+   }
   } catch (e: foreachstatement.ForEachStatement.Exception2) {
-   FOR_EACH@ for (o in e!!) {}
+   FOR_EACH@ for (o in e!!) {
+    val o_1: kotlin.Any? = o
+   }
   }
  }
 
  fun <T: kotlin.collections.MutableIterable<kotlin.String?>?, U: T> testTypeVariable_private_foreachstatement_ForEachStatement() {
   val iterable: U? = null
-  FOR_EACH@ for (s in iterable!!) {}
+  FOR_EACH@ for (s in iterable!!) {
+   val s_1: kotlin.String? = s
+  }
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
-  FOR_EACH_1@ for (s_1 in anotherIterable!!) {}
+  FOR_EACH_1@ for (s_2 in anotherIterable!!) {
+   val s_3: kotlin.Int = s_2!!
+  }
  }
 
  open class Exception1: javaemul.lang.JavaIterable<kotlin.String?>, kotlin.Exception() {

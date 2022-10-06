@@ -86,7 +86,8 @@ open class AutoBoxing {
  open fun sumWithoutBoxing(vararg numbers: kotlin.Any?): kotlin.Double {
   var sum: kotlin.Double = 0.0
   FOR_EACH@ for (number in (numbers as kotlin.Array<*>?)!!) {
-   sum = sum + (number as kotlin.Double?)!!.toDouble()
+   val number_1: kotlin.Any? = number
+   sum = sum + (number_1 as kotlin.Double?)!!.toDouble()
   }
   return sum
  }
@@ -94,7 +95,17 @@ open class AutoBoxing {
  open fun sumWithoutBoxingJsVarargs(vararg numbers: kotlin.Any?): kotlin.Double {
   var sum: kotlin.Double = 0.0
   FOR_EACH@ for (number in (numbers as kotlin.Array<*>?)!!) {
-   sum = sum + (number as kotlin.Double?)!!.toDouble()
+   val number_1: kotlin.Any? = number
+   sum = sum + (number_1 as kotlin.Double?)!!.toDouble()
+  }
+  return sum
+ }
+
+ open fun sumWithUnboxing(boxedDoubles: kotlin.collections.MutableIterable<kotlin.Double?>?): kotlin.Double {
+  var sum: kotlin.Double = 0.0
+  FOR_EACH@ for (d in boxedDoubles!!) {
+   val d_1: kotlin.Double = d!!
+   sum = sum + d_1
   }
   return sum
  }

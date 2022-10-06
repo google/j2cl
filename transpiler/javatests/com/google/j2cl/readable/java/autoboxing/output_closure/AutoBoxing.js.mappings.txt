@@ -99,6 +99,22 @@
 [number] => [number_1] "number"
 [sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double__double(/**@type {?number}*/ ($Casts.$to(number_1, Double)));] "autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
 [return sum;] => [return sum;] "autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
+[sumWithUnboxing] => [m_sumWithUnboxing__java_lang_Iterable__double]
+[boxedDoubles] => [boxedDoubles] "boxedDoubles"
+[double sum = 0;] => [let sum = 0;] "autoboxing.AutoBoxing.sumWithUnboxing"
+[sum] => [sum] "sum"
+[for (double d : boxedDoubles) {
+      sum += d;
+    }] => [for (let $iterator = boxedDoubles.m_iterator__java_util_Iterator(); $iterator.m_hasNext__boolean(); ) {
+   let d = Double.m_doubleValue__java_lang_Double__double(/**@type {?number}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Double)));
+...   }
+  }] "autoboxing.AutoBoxing.sumWithUnboxing"
+[for (double d : boxedDoubles) {
+      sum += d;
+    }] => [let d = Double.m_doubleValue__java_lang_Double__double(/**@type {?number}*/ ($Casts.$to($iterator.m_next__java_lang_Object(), Double)));] "autoboxing.AutoBoxing.sumWithUnboxing"
+[d] => [d] "d"
+[sum += d;] => [sum += d;] "autoboxing.AutoBoxing.sumWithUnboxing"
+[return sum;] => [return sum;] "autoboxing.AutoBoxing.sumWithUnboxing"
 [testBoxing] => [m_testBoxing__void]
 [boolean bool = true;] => [let bool = true;] "autoboxing.AutoBoxing.testBoxing"
 [bool] => [bool] "bool"

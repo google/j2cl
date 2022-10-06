@@ -73,7 +73,8 @@ open class InnerClassInitOrder {
    i = i + 1
   }
   FOR_EACH@ for (theAp in results!!) {
-   theAp!!.act()
+   val theAp_1: ___1AddNumber? = theAp
+   theAp_1!!.act()
   }
   assert(this.number === 1156)
  }

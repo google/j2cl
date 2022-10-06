@@ -120,6 +120,14 @@ public class AutoBoxing {
     return sum;
   }
 
+  public double sumWithUnboxing(Iterable<Double> boxedDoubles) {
+    double sum = 0;
+    for (double d : boxedDoubles) {
+      sum += d;
+    }
+    return sum;
+  }
+
   public static final float COMPILE_TIME_CONSTANT = 1.1f;
 
   @SuppressWarnings("unused")

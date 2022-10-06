@@ -1065,5 +1065,10 @@ public final class AstUtils {
     return NullLiteral.get(targetTypeDescriptor);
   }
 
+  /** Returns a list of statements in {@code body} which may be a block or a single statement. */
+  public static List<Statement> getBodyStatements(Statement body) {
+    return body instanceof Block ? ((Block) body).getStatements() : ImmutableList.of(body);
+  }
+
   private AstUtils() {}
 }

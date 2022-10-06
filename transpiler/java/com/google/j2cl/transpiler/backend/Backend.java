@@ -93,6 +93,7 @@ import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitializationKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeForEachStatement;
+import com.google.j2cl.transpiler.passes.NormalizeForEachStatementKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeForStatements;
 import com.google.j2cl.transpiler.passes.NormalizeFunctionExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceCompileTimeConstants;
@@ -449,6 +450,7 @@ public enum Backend {
           PropagateNullabilityKotlin::new,
           NormalizeInterfaces::new,
           NormalizeTryWithResources::new,
+          NormalizeForEachStatementKotlin::new,
           NormalizeArrayCreationsKotlin::new,
           NormalizeStaticMemberQualifiers::new,
           () -> new MoveVariableDeclarationsToEnclosingBlock(/* fromSwitchStatementsOnly= */ true),
