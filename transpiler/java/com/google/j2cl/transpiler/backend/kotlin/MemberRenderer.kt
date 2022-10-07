@@ -22,7 +22,7 @@ import com.google.j2cl.transpiler.ast.AstUtils.isConstructorInvocationStatement
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.InitializerBlock
-import com.google.j2cl.transpiler.ast.Member
+import com.google.j2cl.transpiler.ast.Member as JavaMember
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
@@ -30,8 +30,26 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
+import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 
-internal fun Renderer.renderMember(member: Member) {
+internal fun Renderer.render(member: Member) {
+  when (member) {
+    is Member.WithCompanionObject -> render(member.companionObject)
+    is Member.WithJavaMember -> renderMember(member.javaMember)
+    is Member.WithType -> renderType(member.type)
+  }
+}
+
+private fun Renderer.render(companionObject: CompanionObject) {
+  render("companion object ")
+  renderInCurlyBrackets {
+    renderNewLine()
+    renderSeparatedWithEmptyLine(companionObject.members) { render(it) }
+  }
+}
+
+private fun Renderer.renderMember(member: JavaMember) {
   when (member) {
     is Method -> renderMethod(member)
     is Field -> renderField(member)

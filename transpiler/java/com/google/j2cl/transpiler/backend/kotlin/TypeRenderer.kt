@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
 import java.util.stream.Collectors
 
 fun Renderer.renderType(type: Type) {
@@ -87,37 +88,10 @@ internal fun Renderer.renderTypeBody(type: Type) {
         renderEnumValues(type)
       }
 
-      // TODO(b/399455906): Remove short term hack to pull static methods into companion object.
-      var (staticMembers, instanceMembers) = type.members.partition { it.isStatic }
-
-      // Don't render constructors for anonymous classes.
-      // TODO(b/210670710): Remove when anonymous constructors are no longer synthesized.
-      if (type.declaration.isAnonymous) {
-        instanceMembers = instanceMembers.filter { !it.isConstructor }
-      }
-
-      val renderInstanceMembers = instanceMembers.isNotEmpty()
-      if (renderInstanceMembers) {
+      val kotlinMembers = type.kotlinMembers
+      if (kotlinMembers.isNotEmpty()) {
         renderNewLine()
-        renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it) }
-      }
-
-      staticMembers = staticMembers.filter { !it.isEnumField }
-      val renderCompanionObject = staticMembers.isNotEmpty()
-      if (renderCompanionObject) {
-        renderNewLine()
-        if (renderInstanceMembers) renderNewLine() // Empty line after last instance member.
-        render("companion object ")
-        renderInCurlyBrackets {
-          renderNewLine()
-          renderSeparatedWithEmptyLine(staticMembers) { renderMember(it) }
-        }
-      }
-
-      if (type.types.isNotEmpty()) {
-        renderNewLine()
-        if (renderInstanceMembers || renderCompanionObject) renderNewLine()
-        renderSeparatedWithEmptyLine(type.types) { renderType(it) }
+        renderSeparatedWithEmptyLine(kotlinMembers) { render(it) }
       }
     }
   }
