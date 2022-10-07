@@ -13,23 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.backend.kotlin
+package com.google.j2cl.transpiler.backend.kotlin.ast
 
 import com.google.j2cl.transpiler.ast.CompilationUnit
-import com.google.j2cl.transpiler.backend.kotlin.ast.Import
-import com.google.j2cl.transpiler.backend.kotlin.ast.imports
+import com.google.j2cl.transpiler.backend.kotlin.common.buildSet
 
-internal fun Renderer.renderImports(compilationUnit: CompilationUnit) {
-  val imports = compilationUnit.imports
-  if (imports.isNotEmpty()) {
-    renderSeparatedWith(imports, "\n") { render(it) }
-    renderNewLine()
-    renderNewLine()
+data class Import(val components: List<String>, val isStar: Boolean = false)
+
+fun import(vararg components: String) = Import(components.toList())
+
+fun starImport(vararg components: String) = Import(components.toList(), isStar = true)
+
+val CompilationUnit.imports: Set<Import>
+  get() = buildSet {
+    add(starImport("javaemul", "lang"))
+    add(starImport("kotlin", "jvm"))
+    // TODO(b/226922954): Add imports for types and members.
   }
-}
-
-private fun Renderer.render(import: Import) {
-  render("import ")
-  renderSeparatedWith(import.components, ".") { renderIdentifier(it) }
-  if (import.isStar) render(".*")
-}

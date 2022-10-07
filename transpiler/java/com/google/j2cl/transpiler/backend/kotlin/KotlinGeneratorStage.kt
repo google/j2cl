@@ -24,6 +24,8 @@ import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
+import com.google.j2cl.transpiler.backend.kotlin.common.buildMap
+import com.google.j2cl.transpiler.backend.kotlin.common.buildSet
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the Kotlin output for

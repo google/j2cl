@@ -13,12 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.backend.kotlin
+package com.google.j2cl.transpiler.backend.kotlin.common
 
 // TODO(b/204366308): Remove when the corresponding function in Kotlin stdlib is standarized.
-internal fun <K, V> buildMap(fn: MutableMap<K, V>.() -> Unit): Map<K, V> =
+fun <K, V> buildMap(fn: MutableMap<K, V>.() -> Unit): Map<K, V> =
   mutableMapOf<K, V>().apply(fn).toMap()
-
-// TODO(b/204366308): Remove when the corresponding function in Kotlin stdlib is standarized.
-internal fun <V> buildSet(fn: MutableSet<V>.() -> Unit): Set<V> =
-  mutableSetOf<V>().apply(fn).toSet()

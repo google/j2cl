@@ -15,13 +15,15 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.backend.kotlin.ast.isHardKeyword
+
 internal fun Renderer.renderIdentifier(identifier: String) {
   // Dollar sign ($) is not a valid identifier character since Kotlin 1.7, as well as many other
   // characters. For now, it is replaced with triple underscores (___) to minimise a risk of
   // conflict.
   // TODO(b/236360941): Implement escaping which would work across all platforms.
   val kotlinIdentifier = identifier.replace("$", "___")
-  if (KotlinKeywords.isHardKeyword(kotlinIdentifier) || !kotlinIdentifier.isValidIdentifier) {
+  if (isHardKeyword(kotlinIdentifier) || !kotlinIdentifier.isValidIdentifier) {
     renderInBackticks { render(kotlinIdentifier) }
   } else {
     render(kotlinIdentifier)
