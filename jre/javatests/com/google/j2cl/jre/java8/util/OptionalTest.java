@@ -29,6 +29,7 @@ public class OptionalTest extends GWTTestCase {
   private boolean[] mutableFlag;
   private Optional<Object> empty;
   private Optional<Object> present;
+  private Optional<Object> otherPresent;
 
   @Override
   public String getModuleName() {
@@ -41,6 +42,7 @@ public class OptionalTest extends GWTTestCase {
     mutableFlag = new boolean[1];
     empty = Optional.empty();
     present = Optional.of(REFERENCE);
+    otherPresent = Optional.of(OTHER_REFERENCE);
   }
 
   public void testIsPresent() {
@@ -197,6 +199,44 @@ public class OptionalTest extends GWTTestCase {
 
     mapped = present.flatMap(wrapped -> Optional.of(wrapped.toString()));
     assertEquals(REFERENCE.toString(), mapped.get());
+  }
+
+  public void testOr() {
+    try {
+      empty.or(null);
+      fail("Empty Optional must throw NullPointerException if supplier is null");
+    } catch (NullPointerException e) {
+      // expected
+    }
+
+    try {
+      present.or(null);
+      fail("Present Optional must throw NullPointerException if supplier is null");
+    } catch (NullPointerException e) {
+      // expected
+    }
+
+    try {
+      empty.or(() -> null);
+      fail("Empty Optional must throw NullPointerException if supplier returns null");
+    } catch (NullPointerException e) {
+      // expected
+    }
+
+    assertEquals(
+        present,
+        present.or(
+            () -> {
+              fail("Present Optional.or must not execute supplier");
+              return empty;
+            }));
+
+    assertEquals(present, empty.or(() -> present));
+
+    assertEquals(empty, empty.or(() -> empty));
+
+    // Both Optionals present means returning the first Optional.
+    assertEquals(present, present.or(() -> otherPresent));
   }
 
   public void testOrElse() {

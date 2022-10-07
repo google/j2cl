@@ -15,14 +15,14 @@
  */
 package java.util;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalElement;
+import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import static javaemul.internal.InternalPreconditions.checkCriticalElement;
-import static javaemul.internal.InternalPreconditions.checkCriticalNotNull;
-import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 /**
  * See <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">
@@ -94,6 +94,17 @@ public final class Optional<T> {
       return checkNotNull(mapper.apply(ref));
     }
     return empty();
+  }
+
+  public Optional<T> or(Supplier<? extends Optional<? extends T>> supplier) {
+    checkNotNull(supplier);
+    if (isPresent()) {
+      return this;
+    } else {
+      @SuppressWarnings("unchecked")
+      Optional<T> r = (Optional<T>) supplier.get();
+      return checkNotNull(r);
+    }
   }
 
   public T orElse(T other) {
