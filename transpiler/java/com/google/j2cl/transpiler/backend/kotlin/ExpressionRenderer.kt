@@ -51,6 +51,7 @@ import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
@@ -528,7 +529,10 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       val qualifierTypeDescriptor = qualifier.typeDescriptor
       renderSuperReference(
         superTypeDescriptor =
-          qualifierTypeDescriptor.directSuperTypeForMethodCall(memberReference.target),
+          qualifierTypeDescriptor
+            .directSuperTypeForMethodCall(memberReference.target)
+            // Don't render <Any> (see: KT-54346)
+            ?.takeIf { !isJavaLangObject(it) },
         qualifierTypeDescriptor =
           qualifierTypeDescriptor.takeIf { it.typeDeclaration != currentType!!.declaration }
       )

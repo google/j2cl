@@ -93,3 +93,9 @@ open class Sub: supermethodcall.I2, supermethodcall.I3, supermethodcall.Super() 
   super<supermethodcall.I3>.m()
  }
 }
+
+abstract class SuperToStringTest: supermethodcall.I1 {
+ open override fun toString(): kotlin.String {
+  return super.toString()
+ }
+}

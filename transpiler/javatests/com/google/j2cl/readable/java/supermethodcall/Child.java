@@ -114,3 +114,10 @@ class Sub extends Super implements I2, I3 {
     I3.super.m(); // This should be rendered in Kotlin as super<I3>.m()
   }
 }
+
+abstract class SuperToStringTest implements I1 {
+  @Override
+  public String toString() {
+    return super.toString();
+  }
+}

@@ -28,6 +28,9 @@
 ;;; Code for supermethodcall.Sub [static fields]
 (global $f_$initialized__supermethodcall_Sub (mut i32) (i32.const 0))
 
+;;; Code for supermethodcall.SuperToStringTest [static fields]
+(global $f_$initialized__supermethodcall_SuperToStringTest (mut i32) (i32.const 0))
+
 ;;; Code for supermethodcall.GrandParent [vtable.init]
 (global $supermethodcall.GrandParent.vtable (ref $supermethodcall.GrandParent.vtable) 
  (struct.new $supermethodcall.GrandParent.vtable
@@ -1098,3 +1101,89 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@supermethodcall.Sub)
+
+;;; Code for supermethodcall.SuperToStringTest [CLASS]
+(type $supermethodcall.SuperToStringTest (struct_subtype 
+ (field $vtable (ref $supermethodcall.SuperToStringTest.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $supermethodcall.SuperToStringTest.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__void (ref $function.m_m__void))
+  $java.lang.Object.vtable)
+)
+
+;;; void SuperToStringTest.$ctor()
+(func $$ctor__void_$p_supermethodcall_SuperToStringTest@supermethodcall.SuperToStringTest
+ (param $this (ref null $supermethodcall.SuperToStringTest))
+ ;;@ supermethodcall/Child.java:118:15
+ (block
+  ;; supermethodcall.SuperToStringTest.$clinit();
+  ;;@ supermethodcall/Child.java:118:15
+  (call $$clinit__void@supermethodcall.SuperToStringTest )
+  ;; Object.this.$ctor();
+  ;;@ supermethodcall/Child.java:118:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; String SuperToStringTest.toString()
+(func $m_toString__java_lang_String@supermethodcall.SuperToStringTest
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ supermethodcall/Child.java:120:16
+ (local $this (ref null $supermethodcall.SuperToStringTest))
+ (local.set $this (ref.cast_static $supermethodcall.SuperToStringTest (local.get $this.untyped)))
+ (block
+  ;; return super.toString();
+  ;;@ supermethodcall/Child.java:121:4
+  (return (call $m_toString__java_lang_String@java.lang.Object (ref.as_non_null (local.get $this))))
+ )
+)
+(elem declare func $m_toString__java_lang_String@supermethodcall.SuperToStringTest)
+
+;;; void SuperToStringTest.m()
+(func $m_m__void@supermethodcall.SuperToStringTest
+ (type $function.m_m__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ supermethodcall/Child.java:118:15
+ (local $this (ref null $supermethodcall.SuperToStringTest))
+ (local.set $this (ref.cast_static $supermethodcall.SuperToStringTest (local.get $this.untyped)))
+ (block
+  ;; SuperToStringTest.this.m();
+  ;;@ supermethodcall/Child.java:118:15
+  (call $m_m__void@supermethodcall.I1 (ref.as_non_null (local.get $this)))
+ )
+)
+(elem declare func $m_m__void@supermethodcall.SuperToStringTest)
+
+;;; void SuperToStringTest.$clinit()
+(func $$clinit__void@supermethodcall.SuperToStringTest
+ ;;@ supermethodcall/Child.java:118:15
+ (block
+  ;; if (supermethodcall.SuperToStringTest.$initialized) return;
+  ;;@ supermethodcall/Child.java:118:15
+  (if (global.get $f_$initialized__supermethodcall_SuperToStringTest)
+   (then
+    ;; return;
+    ;;@ supermethodcall/Child.java:118:15
+    (return )
+   )
+  )
+  ;; (supermethodcall.SuperToStringTest.$initialized = true);
+  ;;@ supermethodcall/Child.java:118:15
+  (global.set $f_$initialized__supermethodcall_SuperToStringTest (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ supermethodcall/Child.java:118:15
+  (call $$clinit__void@java.lang.Object )
+  ;; supermethodcall.I1.$clinit();
+  ;;@ supermethodcall/Child.java:118:15
+  (call $$clinit__void@supermethodcall.I1 )
+ )
+)

@@ -1,0 +1,49 @@
+goog.module('supermethodcall.SuperToStringTest$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const I1 = goog.require('supermethodcall.I1$impl');
+
+/**
+ * @abstract
+ * @implements {I1}
+ */
+class SuperToStringTest extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts */
+ $ctor__supermethodcall_SuperToStringTest__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @override @return {?string} */
+ toString() {
+  return super.toString();
+ }
+ //Default method forwarding stub.
+ /** @override @nodts */
+ m_m__void() {
+  I1.m_m__$default__supermethodcall_I1__void(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  SuperToStringTest.$clinit = () =>{};
+  SuperToStringTest.$loadModules();
+  j_l_Object.$clinit();
+  I1.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SuperToStringTest;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+I1.$markImplementor(SuperToStringTest);
+$Util.$setClassMetadata(SuperToStringTest, 'supermethodcall.SuperToStringTest');
+
+exports = SuperToStringTest;
+
+//# sourceMappingURL=SuperToStringTest.js.map
