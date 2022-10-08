@@ -43,3 +43,19 @@ interface SomeInterface {
         }
       };
 }
+
+// Test for: https://youtrack.jetbrains.com/issue/KT-54349
+class ThisReferenceTest {
+  ThisReferenceTest(ThisReferenceTest test) {}
+
+  void test() {
+    new ThisReferenceTest(this) {};
+    new ThisReferenceTest(
+        new ThisReferenceTest(this) {
+          Object innerThis = this;
+        }) {};
+  }
+
+  // Static method is needed to trigger KT-54349.
+  static void staticMethod() {}
+}

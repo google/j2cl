@@ -1,0 +1,50 @@
+goog.module('anonymousclass.ThisReferenceTest.$2$impl');
+
+const ThisReferenceTest = goog.require('anonymousclass.ThisReferenceTest$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class $2 extends ThisReferenceTest {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {ThisReferenceTest} @nodts*/
+  this.$outer_this__anonymousclass_ThisReferenceTest_2;
+  /**@type {*} @nodts*/
+  this.f_innerThis__anonymousclass_ThisReferenceTest_2;
+ }
+ /** @nodts @return {!$2} */
+ static $create__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest(/** ThisReferenceTest */ $outer_this, /** ThisReferenceTest */ $_0) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__anonymousclass_ThisReferenceTest_2__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest__void($outer_this, $_0);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_ThisReferenceTest_2__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest__void(/** ThisReferenceTest */ $outer_this, /** ThisReferenceTest */ $_0) {
+  this.$outer_this__anonymousclass_ThisReferenceTest_2 = $outer_this;
+  this.$ctor__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest__void($_0);
+  this.$init__void_$p_anonymousclass_ThisReferenceTest_2();
+ }
+ /** @private @nodts */
+ $init__void_$p_anonymousclass_ThisReferenceTest_2() {
+  this.f_innerThis__anonymousclass_ThisReferenceTest_2 = this;
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  ThisReferenceTest.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2, 'anonymousclass.ThisReferenceTest$2');
+
+exports = $2;
+
+//# sourceMappingURL=ThisReferenceTest$2.js.map

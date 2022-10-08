@@ -81,7 +81,7 @@ private fun Renderer.renderSuperTypes(type: Type) {
 }
 
 internal fun Renderer.renderTypeBody(type: Type) {
-  copy(currentType = type).run {
+  copy(currentType = type, renderThisReferenceWithLabel = false).run {
     render(" ")
     renderInCurlyBrackets {
       if (type.isEnum) {

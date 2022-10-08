@@ -1,0 +1,57 @@
+goog.module('anonymousclass.ThisReferenceTest$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('anonymousclass.ThisReferenceTest.$1$impl');
+let $2 = goog.forwardDeclare('anonymousclass.ThisReferenceTest.$2$impl');
+let $3 = goog.forwardDeclare('anonymousclass.ThisReferenceTest.$3$impl');
+
+class ThisReferenceTest extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ThisReferenceTest} */
+ static $create__anonymousclass_ThisReferenceTest(/** ThisReferenceTest */ test) {
+  ThisReferenceTest.$clinit();
+  let $instance = new ThisReferenceTest();
+  $instance.$ctor__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest__void(test);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest__void(/** ThisReferenceTest */ test) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_test__void_$pp_anonymousclass() {
+  $1.$create__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest(this, this);
+  $3.$create__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest(this, $2.$create__anonymousclass_ThisReferenceTest__anonymousclass_ThisReferenceTest(this, this));
+ }
+ /** @nodts */
+ static m_staticMethod__void() {
+  ThisReferenceTest.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  ThisReferenceTest.$clinit = () =>{};
+  ThisReferenceTest.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ThisReferenceTest;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('anonymousclass.ThisReferenceTest.$1$impl');
+  $2 = goog.module.get('anonymousclass.ThisReferenceTest.$2$impl');
+  $3 = goog.module.get('anonymousclass.ThisReferenceTest.$3$impl');
+ }
+}
+$Util.$setClassMetadata(ThisReferenceTest, 'anonymousclass.ThisReferenceTest');
+
+exports = ThisReferenceTest;
+
+//# sourceMappingURL=ThisReferenceTest.js.map

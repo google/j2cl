@@ -33,3 +33,19 @@ interface SomeInterface {
   }
  }
 }
+
+open class ThisReferenceTest {
+ constructor(test: anonymousclass.ThisReferenceTest?)
+
+ open fun test() {
+  object : anonymousclass.ThisReferenceTest(this@ThisReferenceTest) {}
+  object : anonymousclass.ThisReferenceTest(object : anonymousclass.ThisReferenceTest(this@ThisReferenceTest) {
+   @kotlin.jvm.JvmField var innerThis: kotlin.Any? = this
+  }) {}
+ }
+
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun staticMethod() {}
+ }
+}

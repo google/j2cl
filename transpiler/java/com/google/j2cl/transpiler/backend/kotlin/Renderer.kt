@@ -36,7 +36,11 @@ data class Renderer(
   val currentReturnLabelIdentifier: String? = null,
 
   /** Currently rendered type. */
-  val currentType: Type? = null
+  val currentType: Type? = null,
+
+  /** Whether to render this reference with explicit qualifier. */
+  // TODO(b/252138814): Remove when KT-54349 is fixed
+  val renderThisReferenceWithLabel: Boolean = false
 ) {
   fun renderNewLine() {
     sourceBuilder.newLine()
