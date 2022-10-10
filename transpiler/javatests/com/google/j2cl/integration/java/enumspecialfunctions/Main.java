@@ -107,9 +107,12 @@ public class Main {
     // implemented.
     try {
       Object unused = Enum.valueOf(Planet.class, "NOTHING");
-      // fail( "Should have thrown IllegalArgumentException");
-      // } catch (IllegalArgumentException expected) {
+      fail("Should have thrown IllegalArgumentException");
+    } catch (IllegalArgumentException expected) {
+      // Thrown by Java
     } catch (UnsupportedOperationException expected) {
+      // TODO(b/36863439): Remove this catch statement once Enum.valueOf is implemented.
+      // Thrown by J2CL and J2KT
     }
 
     // TODO(b/30745420): Transform these into meaningful assertions once Class.getEnumConstants is
