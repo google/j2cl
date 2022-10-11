@@ -7,5 +7,7 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/253061694): remove when the test is fixed.
+    build_kt_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
