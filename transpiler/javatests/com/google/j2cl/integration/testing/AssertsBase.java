@@ -63,9 +63,12 @@ public class AssertsBase {
       fail("Should have thrown ClassCastException");
     } catch (ClassCastException expected) {
       if (qualifiedBinaryName != null) {
+        String expectedMessage =
+            TestUtils.isJvm() ? "cannot be cast to class " : "cannot be cast to ";
+        expectedMessage += qualifiedBinaryName;
         assertTrue(
             "Got unexpected message " + expected.getMessage(),
-            expected.getMessage().endsWith("cannot be cast to " + qualifiedBinaryName));
+            expected.getMessage().contains(expectedMessage));
       }
     }
   }

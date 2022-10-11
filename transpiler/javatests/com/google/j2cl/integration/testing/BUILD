@@ -12,6 +12,7 @@ j2wasm_library(
     name = "testing-j2wasm",
     srcs = [
         "Asserts.java",
+        "TestUtils.java",
         "super-wasm/AssertsBase.java",
     ],
     deps = [
@@ -25,6 +26,7 @@ j2cl_library(
     srcs = [
         "Asserts.java",
         "AssertsBase.java",
+        "TestUtils.java",
     ],
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
@@ -37,6 +39,7 @@ java_library(
     srcs = [
         "Asserts.java",
         "AssertsBase.java",
+        "TestUtils.java",
     ],
     deps = [
         "//jre/java:javaemul_internal_annotations",
