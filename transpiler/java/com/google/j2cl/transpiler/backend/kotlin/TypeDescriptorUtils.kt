@@ -155,3 +155,6 @@ private val nullableAnyTypeDescriptor: TypeDescriptor
 
 private val anyTypeDescriptor: TypeDescriptor
   get() = nullableAnyTypeDescriptor.toNonNullable()
+
+internal val TypeVariable.isRecursive: Boolean
+  get() = upperBoundTypeDescriptor.contains(this)

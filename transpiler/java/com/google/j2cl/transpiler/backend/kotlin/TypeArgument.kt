@@ -72,5 +72,7 @@ private val TypeArgument.needsFixForRecursiveBounds
   get() =
     typeDescriptor is TypeVariable &&
       typeDescriptor.isWildcardOrCapture &&
+      declarationTypeVariable.isRecursive &&
       typeDescriptor.lowerBoundTypeDescriptor == null &&
-      typeDescriptor.upperBoundTypeDescriptor == declarationTypeVariable.upperBoundTypeDescriptor
+      typeDescriptor.upperBoundTypeDescriptor.toNonNullable() ==
+        declarationTypeVariable.upperBoundTypeDescriptor.toNonNullable()
