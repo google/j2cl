@@ -127,4 +127,22 @@ public class SwitchStatement {
         break;
     }
   }
+
+  private void testBlocksInSwitchCase(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        {
+          foo(2);
+        }
+        foo(3);
+        {
+          foo(4);
+          foo(5);
+        }
+        break;
+    }
+  }
+
+  private void foo(int i) {}
 }

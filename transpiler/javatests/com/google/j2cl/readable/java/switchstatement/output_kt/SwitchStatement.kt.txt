@@ -226,6 +226,27 @@ open class SwitchStatement {
   } while (false)
  }
 
+ fun testBlocksInSwitchCase_private_switchstatement_SwitchStatement(i: kotlin.Int) {
+  SWITCH@ do {
+   CASE@ do {
+    when (i) {
+     1 -> {
+      break@CASE
+     }
+    }
+    break@SWITCH
+   } while (false)
+   this.foo_private_switchstatement_SwitchStatement(1)
+   this.foo_private_switchstatement_SwitchStatement(2)
+   this.foo_private_switchstatement_SwitchStatement(3)
+   this.foo_private_switchstatement_SwitchStatement(4)
+   this.foo_private_switchstatement_SwitchStatement(5)
+   break@SWITCH
+  } while (false)
+ }
+
+ fun foo_private_switchstatement_SwitchStatement(i: kotlin.Int) {}
+
  companion object {
   @kotlin.jvm.JvmStatic
   fun testSwitchVariableDeclarations_private_switchstatement_SwitchStatement() {

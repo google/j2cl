@@ -128,6 +128,23 @@
 [break;] => [break;] "switchstatement.SwitchStatement.testCaseExpressionTypes"
 [break;] => [break;] "switchstatement.SwitchStatement.testCaseExpressionTypes"
 [break;] => [break;] "switchstatement.SwitchStatement.testCaseExpressionTypes"
+[testBlocksInSwitchCase] => [m_testBlocksInSwitchCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
+[foo(3);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(3);] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
+[foo(4);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(4);] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
+[foo(5);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(5);] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
+[foo] => [m_foo__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
 [SwitchStatement] => [$clinit]
 [SwitchStatement] => [SwitchStatement.$clinit = () =>{};] "switchstatement.SwitchStatement.<clinit>"
 [SwitchStatement] => [SwitchStatement.$loadModules();] "switchstatement.SwitchStatement.<clinit>"

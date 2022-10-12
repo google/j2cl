@@ -594,6 +594,58 @@
  )
 )
 
+;;; void SwitchStatement.testBlocksInSwitchCase(int i)
+(func $m_testBlocksInSwitchCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
+ (param $this (ref null $switchstatement.SwitchStatement))
+ (param $i i32)
+ ;;@ switchstatement/SwitchStatement.java:131:15
+ (block
+  ;; SWITCH: switch (i) {
+  ;;@ switchstatement/SwitchStatement.java:132:4
+  (block $SWITCH.BREAK
+   ;; switch (i) {
+   ;;@ switchstatement/SwitchStatement.java:132:4
+   (block
+    (block ;; evaluate expression and jump
+     (br_table 0 1 (i32.sub (local.get $i) (i32.const 1)))
+    )
+    ;; case 1:
+    ;; SwitchStatement.this.foo(1);
+    ;;@ switchstatement/SwitchStatement.java:134:8
+    (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
+    (block
+     ;; SwitchStatement.this.foo(2);
+     ;;@ switchstatement/SwitchStatement.java:136:10
+     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
+    )
+    ;; SwitchStatement.this.foo(3);
+    ;;@ switchstatement/SwitchStatement.java:138:8
+    (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 3))
+    (block
+     ;; SwitchStatement.this.foo(4);
+     ;;@ switchstatement/SwitchStatement.java:140:10
+     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 4))
+     ;; SwitchStatement.this.foo(5);
+     ;;@ switchstatement/SwitchStatement.java:141:10
+     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 5))
+    )
+    ;; break SWITCH;
+    ;;@ switchstatement/SwitchStatement.java:143:8
+    (br $SWITCH.BREAK)
+   )
+  )
+ )
+)
+
+;;; void SwitchStatement.foo(int i)
+(func $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
+ (param $this (ref null $switchstatement.SwitchStatement))
+ (param $i i32)
+ ;;@ switchstatement/SwitchStatement.java:147:15
+ (block
+ )
+)
+
 ;;; void SwitchStatement.$clinit()
 (func $$clinit__void@switchstatement.SwitchStatement
  ;;@ switchstatement/SwitchStatement.java:23:13
