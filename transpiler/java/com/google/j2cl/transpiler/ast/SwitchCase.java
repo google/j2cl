@@ -70,8 +70,8 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
 
     public static Builder from(SwitchCase switchCase) {
       return newBuilder()
-          .setCaseExpression(AstUtils.clone(switchCase.getCaseExpression()))
-          .setStatements(AstUtils.clone(switchCase.getStatements()));
+          .setCaseExpression(switchCase.getCaseExpression())
+          .setStatements(switchCase.getStatements());
     }
 
     public Builder setCaseExpression(Expression caseExpression) {

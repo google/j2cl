@@ -637,11 +637,47 @@
  )
 )
 
+;;; void SwitchStatement.testLabelInSwitchCase(int i)
+(func $m_testLabelInSwitchCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
+ (param $this (ref null $switchstatement.SwitchStatement))
+ (param $i i32)
+ ;;@ switchstatement/SwitchStatement.java:147:15
+ (block
+  ;; SWITCH: switch (i) {
+  ;;@ switchstatement/SwitchStatement.java:148:4
+  (block $SWITCH.BREAK
+   ;; switch (i) {
+   ;;@ switchstatement/SwitchStatement.java:148:4
+   (block
+    (block ;; evaluate expression and jump
+     (br_table 0 1 (i32.sub (local.get $i) (i32.const 1)))
+    )
+    ;; case 1:
+    ;; LABEL: do {
+    ;;@ switchstatement/SwitchStatement.java:150:8
+    (block $LABEL.BREAK
+     (loop
+      (block $LABEL.CONTINUE
+       (block
+        ;; break LABEL;
+        ;;@ switchstatement/SwitchStatement.java:152:10
+        (br $LABEL.BREAK)
+       )
+      )
+      (br_if 0 (i32.const 1))
+      
+     )
+    )
+   )
+  )
+ )
+)
+
 ;;; void SwitchStatement.foo(int i)
 (func $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:147:15
+ ;;@ switchstatement/SwitchStatement.java:157:15
  (block
  )
 )

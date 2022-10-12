@@ -143,6 +143,27 @@
 [foo(4);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(4);] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
 [foo(5);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(5);] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
 [break;] => [break;] "switchstatement.SwitchStatement.testBlocksInSwitchCase"
+[testLabelInSwitchCase] => [m_testLabelInSwitchCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        } while (true);
+    }] => [switch (i) {
+   case 1:
+...    } while (true);
+  }] "switchstatement.SwitchStatement.testLabelInSwitchCase"
+[LABEL:
+        do {
+          break LABEL;
+        } while (true);] => [LABEL: do {
+     break LABEL;
+    } while (true);] "switchstatement.SwitchStatement.testLabelInSwitchCase"
+[do {
+          break LABEL;
+        } while (true);] => [do {
+     break LABEL;
+    } while (true);] "switchstatement.SwitchStatement.testLabelInSwitchCase"
+[break LABEL;] => [break LABEL;] "switchstatement.SwitchStatement.testLabelInSwitchCase"
 [foo] => [m_foo__int__void_$p_switchstatement_SwitchStatement]
 [i] => [i] "i"
 [SwitchStatement] => [$clinit]

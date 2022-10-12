@@ -245,6 +245,22 @@ open class SwitchStatement {
   } while (false)
  }
 
+ fun testLabelInSwitchCase_private_switchstatement_SwitchStatement(i: kotlin.Int) {
+  SWITCH@ do {
+   CASE@ do {
+    when (i) {
+     1 -> {
+      break@CASE
+     }
+    }
+    break@SWITCH
+   } while (false)
+   LABEL@ do {
+    break@LABEL
+   } while (true)
+  } while (false)
+ }
+
  fun foo_private_switchstatement_SwitchStatement(i: kotlin.Int) {}
 
  companion object {

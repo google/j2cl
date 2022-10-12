@@ -127,7 +127,7 @@ public class SwitchStatement {
         break;
     }
   }
-
+  
   private void testBlocksInSwitchCase(int i) {
     switch (i) {
       case 1:
@@ -141,6 +141,16 @@ public class SwitchStatement {
           foo(5);
         }
         break;
+    }
+  }
+
+  private void testLabelInSwitchCase(int i) {
+    switch (i) {
+      case 1:
+        LABEL:
+        do {
+          break LABEL;
+        } while (true);
     }
   }
 
