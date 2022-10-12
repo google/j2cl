@@ -1,3 +1,4 @@
+load("//build_defs:rules.bzl", "j2cl_library")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
 package(
@@ -14,4 +15,12 @@ closure_js_library(
         "//third_party:closure_testcase",
         "//third_party:closure_testsuite",
     ],
+)
+
+j2cl_library(
+    name = "testcase_violator",
+    testonly = 1,
+    srcs = ["TestCaseViolator.java"],
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    deps = ["//third_party:junit-j2cl"],
 )

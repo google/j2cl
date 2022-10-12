@@ -30,19 +30,15 @@ class JUnit3TestDataExtractor {
   public TestClass extractTestData(TypeElement typeElement) {
     // JUnit3 only has one setUp/tearDown method, but it is protected
     // so we added "hidden" setup and tearDown methods in our version of TestCase
-    TestMethod setupMethod =
-        TestMethod.builder().isStatic(false).javaMethodName("__hiddenSetUp").build();
-    TestMethod tearDownMethod =
-        TestMethod.builder().isStatic(false).javaMethodName("__hiddenTearDown").build();
-
     return TestClass.builder()
+        .isJUnit3(true)
         .packageName(MoreElements.getPackage(typeElement).getQualifiedName().toString())
         .simpleName(typeElement.getSimpleName().toString())
         .qualifiedName(typeElement.getQualifiedName().toString())
         .testConstructor(TestConstructor.builder().numberOfParameters(0).build())
         .testMethods(getJUnit3TestMethods(MoreApt.getClassHierarchy(typeElement)))
-        .beforeMethods(ImmutableList.of(setupMethod))
-        .afterMethods(ImmutableList.of(tearDownMethod))
+        .beforeMethods(ImmutableList.of())
+        .afterMethods(ImmutableList.of())
         .beforeClassMethods(ImmutableList.<TestMethod>of())
         .afterClassMethods(ImmutableList.<TestMethod>of())
         .beforeParamMethods(ImmutableList.<TestMethod>of())

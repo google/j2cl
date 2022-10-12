@@ -56,6 +56,7 @@ class JUnit4TestDataExtractor {
   public TestClass extractJUnit4Test(TypeElement typeElement) {
     ImmutableList<TypeElement> typeHierarchy = MoreApt.getClassHierarchy(typeElement);
     return TestClass.builder()
+        .isJUnit3(false)
         .packageName(MoreElements.getPackage(typeElement).getQualifiedName().toString())
         .simpleName(typeElement.getSimpleName().toString())
         .qualifiedName(typeElement.getQualifiedName().toString())

@@ -133,6 +133,11 @@ public class ${testClass.jsUnitAdapterClassName()} {
   #foreach($testField in ${testClass.parameterizedFields()})
   actualTest.${testField.fieldName()} = getParam(${testField.index()}, currentParameterValueIndex);
   #end
+
+  #if($testClass.isJUnit3())
+  junit.framework.TestCaseViolator.callSetUp(actualTest);
+  #end
+
   #methodExecutions( $testClass.beforeMethods() )
 
     return null;
@@ -149,6 +154,9 @@ public class ${testClass.jsUnitAdapterClassName()} {
 
     try {
 
+  #if($testClass.isJUnit3())
+      junit.framework.TestCaseViolator.callTearDown(actualTest);
+  #end
   #methodExecutions( $testClass.afterMethods() )
 
       return null;

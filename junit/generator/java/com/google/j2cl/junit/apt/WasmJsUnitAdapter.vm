@@ -24,7 +24,9 @@ public class ${testClass.jsUnitAdapterClassName()} {
 
   public static void setUpIn${testClass.simpleName()}() throws Throwable {
     actualTest = new ${testClass.qualifiedName()}();
-
+  #if($testClass.isJUnit3())
+    junit.framework.TestCaseViolator.callSetUp(actualTest);
+  #end
   #methodExecutions(${testClass.beforeMethods()})
 
   }
@@ -37,6 +39,9 @@ public class ${testClass.jsUnitAdapterClassName()} {
 
     try {
 
+  #if($testClass.isJUnit3())
+      junit.framework.TestCaseViolator.callTearDown(actualTest);
+  #end
   #methodExecutions(${testClass.afterMethods()} )
 
     } catch (Throwable e) {

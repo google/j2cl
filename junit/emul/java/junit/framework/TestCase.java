@@ -82,7 +82,7 @@ public abstract class TestCase extends Assert /* implements Test */ {
 //      * the name of the test case
 //      */
 //     private String fName;
-// 
+//
 //     /**
 //      * No-arg constructor to enable serialization. This method
 //      * is not intended to be used by mere mortals without calling setName().
@@ -97,14 +97,14 @@ public abstract class TestCase extends Assert /* implements Test */ {
 //    public TestCase(String name) {
 //        fName = name;
 //    }
-// 
+//
 //     /**
 //      * Counts the number of test cases executed by run(TestResult result).
 //      */
 //     public int countTestCases() {
-//         return 1;      
+//         return 1;
 //     }
-// 
+//
 //     /**
 //      * Creates a default TestResult object
 //      *
@@ -113,7 +113,7 @@ public abstract class TestCase extends Assert /* implements Test */ {
 //     protected TestResult createResult() {
 //         return new TestResult();
 //     }
-// 
+//
 //     /**
 //      * A convenience method to run this test, collecting the results with a
 //      * default TestResult object.
@@ -125,7 +125,7 @@ public abstract class TestCase extends Assert /* implements Test */ {
 //         run(result);
 //         return result;
 //     }
-// 
+//
 //     /**
 //      * Runs the bare test sequence.
 //      *
@@ -168,7 +168,7 @@ public abstract class TestCase extends Assert /* implements Test */ {
 //         if (!Modifier.isPublic(runMethod.getModifiers())) {
 //             fail("Method \"" + fName + "\" should be public");
 //         }
-// 
+//
 //         try {
 //             runMethod.invoke(this);
 //         } catch (InvocationTargetException e) {
@@ -486,7 +486,7 @@ public abstract class TestCase extends Assert /* implements Test */ {
 //    public String toString() {
 //        return getName() + "(" + getClass().getName() + ")";
 //   }
-// 
+//
 //     /**
 //      * Gets the name of a TestCase
 //      *
@@ -496,7 +496,7 @@ public abstract class TestCase extends Assert /* implements Test */ {
 //     public String getName() {
 //         return fName;
 //     }
-// 
+//
 //     /**
 //      * Sets the name of a TestCase
 //      *
@@ -506,20 +506,4 @@ public abstract class TestCase extends Assert /* implements Test */ {
 //     public void setName(String name) {
 //         fName = name;
 //     }
-
-    // ADDED FOR J2CL
-    // JUnit3 has a setUp/tearDown method, but it is protected
-    // We need to be able to call these methods from JavaScript, so we expose them this way.
-    // J2clTestingProcessingStep.java depends on these methods being present
-    public void __hiddenSetUp() throws Exception {
-      setUp();
-    }
-
-    // ADDED FOR J2CL
-    // JUnit3 has a setUp/tearDown method, but it is protected
-    // We need to be able to call these methods from JavaScript, so we expose them this way.
-    // J2clTestingProcessingStep.java depends on these methods being present
-    public void __hiddenTearDown() throws Exception {
-      tearDown();
-    }
 }

@@ -58,7 +58,7 @@ def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimize = F
         name = name + "_lib",
         srcs = [test_input],
         deps = deps + [
-            "//build_defs/internal_do_not_use:internal_junit_annotations-j2wasm",
+            "//build_defs/internal_do_not_use:internal_junit_runtime-j2wasm",
         ],
         javacopts = ["-AisJ2wasmTest"],
         testonly = 1,

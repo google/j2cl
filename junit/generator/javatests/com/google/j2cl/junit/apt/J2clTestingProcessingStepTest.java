@@ -55,12 +55,11 @@ public class J2clTestingProcessingStepTest {
   @Test
   public void testSimpleJUnit3TestCase() {
     TestClass testClass = executeProcessorOnTest(SimpleJUnit3TestCase.class);
+    assertThat(testClass.isJUnit3()).isTrue();
     assertThat(testClass.packageName()).isEqualTo("com.google.j2cl.junit.apt");
     assertThat(testClass.simpleName()).isEqualTo("SimpleJUnit3TestCase");
     assertThat(testClass.afterClassMethods()).isEmpty();
     assertThat(testClass.beforeClassMethods()).isEmpty();
-    assertThat(testClass.afterMethods()).containsExactly(method("__hiddenTearDown"));
-    assertThat(testClass.beforeMethods()).containsExactly(method("__hiddenSetUp"));
     assertThat(testClass.testMethods())
         .containsExactly(method("testMethod1"), method("testMethod2"))
         .inOrder();
@@ -69,12 +68,11 @@ public class J2clTestingProcessingStepTest {
   @Test
   public void testAdvancedJUnit3TestCase() {
     TestClass testClass = executeProcessorOnTest(AdvancedJUnit3TestCase.class);
+    assertThat(testClass.isJUnit3()).isTrue();
     assertThat(testClass.packageName()).isEqualTo("com.google.j2cl.junit.apt");
     assertThat(testClass.simpleName()).isEqualTo("AdvancedJUnit3TestCase");
     assertThat(testClass.afterClassMethods()).isEmpty();
     assertThat(testClass.beforeClassMethods()).isEmpty();
-    assertThat(testClass.afterMethods()).containsExactly(method("__hiddenTearDown"));
-    assertThat(testClass.beforeMethods()).containsExactly(method("__hiddenSetUp"));
     assertThat(testClass.testMethods())
         .containsExactly(
             method("test"),
@@ -216,12 +214,11 @@ public class J2clTestingProcessingStepTest {
   @Test
   public void testJUnit3StaticMethod() {
     TestClass testClass = executeProcessorOnTest(JUnit3TestCaseWithStaticTestMethod.class);
+    assertThat(testClass.isJUnit3()).isTrue();
     assertThat(testClass.packageName()).isEqualTo("com.google.j2cl.junit.apt");
     assertThat(testClass.simpleName()).isEqualTo("JUnit3TestCaseWithStaticTestMethod");
     assertThat(testClass.afterClassMethods()).isEmpty();
     assertThat(testClass.beforeClassMethods()).isEmpty();
-    assertThat(testClass.afterMethods()).containsExactly(method("__hiddenTearDown"));
-    assertThat(testClass.beforeMethods()).containsExactly(method("__hiddenSetUp"));
     assertThat(testClass.testMethods()).containsExactly(staticMethod("test"));
   }
 

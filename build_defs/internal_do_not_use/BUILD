@@ -2,6 +2,7 @@
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
 load(":kotlin_allowlist.bzl", "KOTLIN_ALLOWED_PACKAGES")
+load(":j2cl_library.bzl", "j2cl_library")
 
 package(
     default_visibility = ["//visibility:public"],
@@ -69,14 +70,13 @@ alias(
 # JUnit library related
 # ***************************************************
 
-alias(
-    name = "internal_junit_annotations",
-    actual = "//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations",
-)
-
-alias(
-    name = "internal_junit_annotations-j2wasm",
-    actual = "//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations-j2wasm",
+j2cl_library(
+    name = "internal_junit_runtime",
+    testonly = 1,
+    exports = [
+        "//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations",
+        "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator",
+    ],
 )
 
 alias(

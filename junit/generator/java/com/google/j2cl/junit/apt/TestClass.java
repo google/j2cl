@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.junit.apt;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import java.util.Optional;
@@ -48,6 +50,8 @@ public abstract class TestClass {
   public abstract ImmutableList<TestMethod> beforeParamMethods();
 
   public abstract ImmutableList<TestMethod> afterParamMethods();
+
+  public abstract boolean isJUnit3();
 
   public abstract Optional<ParameterizedDataMethod> parameterizedDataMethod();
 
@@ -84,6 +88,9 @@ public abstract class TestClass {
   /** Builder for TestClass. */
   @AutoValue.Builder
   public abstract static class Builder {
+
+    abstract Builder isJUnit3(boolean i);
+
     abstract Builder packageName(String s);
 
     abstract Builder simpleName(String s);
@@ -110,6 +117,15 @@ public abstract class TestClass {
 
     abstract Builder parameterizedFields(ImmutableList<ParameterizedTestField> t);
 
-    abstract TestClass build();
+    abstract TestClass autoBuild();
+
+    public TestClass build() {
+      TestClass testClass = autoBuild();
+      checkState(
+          !testClass.isJUnit3()
+              || (testClass.beforeMethods().isEmpty() && testClass.afterMethods().isEmpty()),
+          "When marked as JUnit3, beforeMethods and afterMethods should be empty");
+      return testClass;
+    }
   }
 }
