@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.SwitchCase
 import com.google.j2cl.transpiler.ast.SwitchStatement
+import com.google.j2cl.transpiler.ast.SynchronizedStatement
 import com.google.j2cl.transpiler.ast.ThrowStatement
 import com.google.j2cl.transpiler.ast.TryStatement
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
@@ -55,6 +56,7 @@ fun Renderer.renderStatement(statement: Statement) {
     is LocalClassDeclarationStatement -> renderLocalClassDeclarationStatement(statement)
     is ReturnStatement -> renderReturnStatement(statement)
     is SwitchStatement -> renderSwitchStatement(statement)
+    is SynchronizedStatement -> renderSynchronizedStatement(statement)
     is WhileStatement -> renderWhileStatement(statement)
     is ThrowStatement -> renderThrowStatement(statement)
     is TryStatement -> renderTryStatement(statement)
@@ -179,6 +181,13 @@ private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {
   renderInCurlyBrackets {
     renderStartingWithNewLines(switchStatement.cases) { renderSwitchCase(it) }
   }
+}
+
+private fun Renderer.renderSynchronizedStatement(synchronizedStatement: SynchronizedStatement) {
+  render("synchronized")
+  renderInParentheses { renderExpression(synchronizedStatement.expression) }
+  render(" ")
+  renderBlock(synchronizedStatement.body)
 }
 
 private fun Renderer.renderWhileStatement(whileStatement: WhileStatement) {
