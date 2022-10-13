@@ -211,6 +211,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract boolean isAbstract();
 
+  public abstract boolean isSynchronized();
+
   @Override
   public abstract boolean isConstructor();
 
@@ -702,6 +704,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setJsInfo(JsInfo.NONE)
         .setKtInfo(KtInfo.NONE)
         .setAbstract(false)
+        .setSynchronized(false)
         .setConstructor(false)
         .setDefaultMethod(false)
         .setNative(false)
@@ -932,6 +935,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setConstructor(boolean isConstructor);
 
     public abstract Builder setAbstract(boolean isAbstract);
+
+    public abstract Builder setSynchronized(boolean isSynchronized);
 
     public abstract Builder setFinal(boolean isFinal);
 

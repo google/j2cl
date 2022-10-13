@@ -121,6 +121,7 @@ import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSuperMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsKotlin;
+import com.google.j2cl.transpiler.passes.NormalizeSynchronizedMethods;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.NormalizeVarargParametersKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeVariableInitialization;
@@ -447,6 +448,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          NormalizeSynchronizedMethods::new,
           PropagateNullabilityKotlin::new,
           NormalizeInterfaces::new,
           NormalizeTryWithResources::new,

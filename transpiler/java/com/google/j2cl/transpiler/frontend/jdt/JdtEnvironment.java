@@ -856,6 +856,7 @@ class JdtEnvironment {
         .setFinal(isFinal(methodBinding))
         .setDefaultMethod(isDefault)
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
+        .setSynchronized(Modifier.isSynchronized(methodBinding.getModifiers()))
         .setSynthetic(methodBinding.isSynthetic())
         .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))

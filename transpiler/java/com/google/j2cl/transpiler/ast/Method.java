@@ -210,6 +210,11 @@ public class Method extends Member implements MethodLike {
       return this;
     }
 
+    public Builder setStatements(Statement... statements) {
+      this.statements = Arrays.asList(statements);
+      return this;
+    }
+
     public Builder addStatements(Statement... statements) {
       Collections.addAll(this.statements, statements);
       return this;

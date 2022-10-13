@@ -10,8 +10,10 @@ open class SynchronizedMethod {
  @kotlin.jvm.JvmField var b_private_synchronizedmethod_SynchronizedMethod: kotlin.Int = 0
 
  open fun method() {
-  this.a_private_synchronizedmethod_SynchronizedMethod = this.a_private_synchronizedmethod_SynchronizedMethod + 1
-  this.b_private_synchronizedmethod_SynchronizedMethod = this.b_private_synchronizedmethod_SynchronizedMethod - 1
+  synchronized(this) {
+   this.a_private_synchronizedmethod_SynchronizedMethod = this.a_private_synchronizedmethod_SynchronizedMethod + 1
+   this.b_private_synchronizedmethod_SynchronizedMethod = this.b_private_synchronizedmethod_SynchronizedMethod - 1
+  }
  }
 
  companion object {
@@ -21,8 +23,10 @@ open class SynchronizedMethod {
 
   @kotlin.jvm.JvmStatic
   fun staticMethod() {
-   synchronizedmethod.SynchronizedMethod.sa_private_synchronizedmethod_SynchronizedMethod = synchronizedmethod.SynchronizedMethod.sa_private_synchronizedmethod_SynchronizedMethod + 1
-   synchronizedmethod.SynchronizedMethod.sb_private_synchronizedmethod_SynchronizedMethod = synchronizedmethod.SynchronizedMethod.sb_private_synchronizedmethod_SynchronizedMethod - 1
+   synchronized(synchronizedmethod.SynchronizedMethod::class.javaObjectType) {
+    synchronizedmethod.SynchronizedMethod.sa_private_synchronizedmethod_SynchronizedMethod = synchronizedmethod.SynchronizedMethod.sa_private_synchronizedmethod_SynchronizedMethod + 1
+    synchronizedmethod.SynchronizedMethod.sb_private_synchronizedmethod_SynchronizedMethod = synchronizedmethod.SynchronizedMethod.sb_private_synchronizedmethod_SynchronizedMethod - 1
+   }
   }
  }
 }
