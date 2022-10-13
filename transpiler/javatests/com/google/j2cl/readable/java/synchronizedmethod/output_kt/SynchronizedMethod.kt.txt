@@ -1,0 +1,28 @@
+// Generated from "synchronizedmethod/SynchronizedMethod.java"
+package synchronizedmethod
+
+import javaemul.lang.*
+import kotlin.jvm.*
+
+open class SynchronizedMethod {
+ @kotlin.jvm.JvmField var a_private_synchronizedmethod_SynchronizedMethod: kotlin.Int = 0
+
+ @kotlin.jvm.JvmField var b_private_synchronizedmethod_SynchronizedMethod: kotlin.Int = 0
+
+ open fun method() {
+  this.a_private_synchronizedmethod_SynchronizedMethod = this.a_private_synchronizedmethod_SynchronizedMethod + 1
+  this.b_private_synchronizedmethod_SynchronizedMethod = this.b_private_synchronizedmethod_SynchronizedMethod - 1
+ }
+
+ companion object {
+  @kotlin.jvm.JvmField var sa_private_synchronizedmethod_SynchronizedMethod: kotlin.Int = 0
+
+  @kotlin.jvm.JvmField var sb_private_synchronizedmethod_SynchronizedMethod: kotlin.Int = 0
+
+  @kotlin.jvm.JvmStatic
+  fun staticMethod() {
+   synchronizedmethod.SynchronizedMethod.sa_private_synchronizedmethod_SynchronizedMethod = synchronizedmethod.SynchronizedMethod.sa_private_synchronizedmethod_SynchronizedMethod + 1
+   synchronizedmethod.SynchronizedMethod.sb_private_synchronizedmethod_SynchronizedMethod = synchronizedmethod.SynchronizedMethod.sb_private_synchronizedmethod_SynchronizedMethod - 1
+  }
+ }
+}

@@ -1,0 +1,59 @@
+goog.module('synchronizedmethod.SynchronizedMethod$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class SynchronizedMethod extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_a__synchronizedmethod_SynchronizedMethod_ = 0;
+  /**@type {number} @nodts*/
+  this.f_b__synchronizedmethod_SynchronizedMethod_ = 0;
+ }
+ /** @nodts @return {!SynchronizedMethod} */
+ static $create__() {
+  SynchronizedMethod.$clinit();
+  let $instance = new SynchronizedMethod();
+  $instance.$ctor__synchronizedmethod_SynchronizedMethod__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__synchronizedmethod_SynchronizedMethod__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ m_method__void() {
+  this.f_a__synchronizedmethod_SynchronizedMethod_ = this.f_a__synchronizedmethod_SynchronizedMethod_ + 1 | 0;
+  this.f_b__synchronizedmethod_SynchronizedMethod_ = this.f_b__synchronizedmethod_SynchronizedMethod_ - 1 | 0;
+ }
+ /** @nodts */
+ static m_staticMethod__void() {
+  SynchronizedMethod.$clinit();
+  SynchronizedMethod.f_sa__synchronizedmethod_SynchronizedMethod_ = SynchronizedMethod.f_sa__synchronizedmethod_SynchronizedMethod_ + 1 | 0;
+  SynchronizedMethod.f_sb__synchronizedmethod_SynchronizedMethod_ = SynchronizedMethod.f_sb__synchronizedmethod_SynchronizedMethod_ - 1 | 0;
+ }
+ /** @nodts */
+ static $clinit() {
+  SynchronizedMethod.$clinit = () =>{};
+  SynchronizedMethod.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SynchronizedMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+/**@type {number} @nodts*/
+SynchronizedMethod.f_sa__synchronizedmethod_SynchronizedMethod_ = 0;
+/**@type {number} @nodts*/
+SynchronizedMethod.f_sb__synchronizedmethod_SynchronizedMethod_ = 0;
+$Util.$setClassMetadata(SynchronizedMethod, 'synchronizedmethod.SynchronizedMethod');
+
+exports = SynchronizedMethod;
+
+//# sourceMappingURL=SynchronizedMethod.js.map
