@@ -33,7 +33,7 @@ public class IfStatement extends Statement {
       SourcePosition sourcePosition,
       Expression conditionExpression,
       Statement thenStatement,
-      Statement elseStatement) {
+      @Nullable Statement elseStatement) {
     super(sourcePosition);
     this.conditionExpression = checkNotNull(conditionExpression);
     this.thenStatement = checkNotNull(thenStatement);
@@ -48,6 +48,7 @@ public class IfStatement extends Statement {
     return thenStatement;
   }
 
+  @Nullable
   public Statement getElseStatement() {
     return elseStatement;
   }
