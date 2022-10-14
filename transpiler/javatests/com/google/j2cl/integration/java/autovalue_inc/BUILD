@@ -13,6 +13,6 @@ integration_test(
     optimize_autovalue = True,
     deps = [
         "//third_party:auto_value-j2cl",
-        "//transpiler/javatests/com/google/j2cl/integration/java/autovalue",
+        "//transpiler/javatests/com/google/j2cl/integration/java/autovalue:autovalue-j2cl",
     ],
 )

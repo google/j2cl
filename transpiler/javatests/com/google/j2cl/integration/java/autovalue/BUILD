@@ -8,8 +8,20 @@ package(
     licenses = ["notice"],
 )
 
-integration_test(
+java_library(
     name = "autovalue",
+    srcs = glob(["*.java"]),
+    tags = ["manual"],
+    deps = [
+        "//jre/java:javaemul_internal_annotations",
+        "//third_party:auto_value",
+        "//third_party:gwt-jsinterop-annotations",
+        "//transpiler/javatests/com/google/j2cl/integration/testing",
+    ],
+)
+
+integration_test(
+    name = "autovalue-j2cl",
     srcs = glob(["*.java"]),
     closure_defines = {"jre.classMetadata": "'STRIPPED'"},
     enable_kt = False,
