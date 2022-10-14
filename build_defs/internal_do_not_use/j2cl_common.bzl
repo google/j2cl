@@ -22,7 +22,6 @@ def _compile(
         javac_opts = [],
         kotlincopts = [],
         internal_transpiler_flags = {},
-        generate_kythe_action = True,
         artifact_suffix = ""):
     name = ctx.label.name + artifact_suffix
 
@@ -61,7 +60,6 @@ def _compile(
             exported_plugins,
             output_jar,
             javac_opts,
-            generate_kythe_action = generate_kythe_action,
         )
     else:
         jvm_provider = _kt_compile(
@@ -143,13 +141,12 @@ def _java_compile(
         exported_plugins = [],
         output_jar = None,
         javac_opts = [],
-        generate_kythe_action = True,
         mnemonic = "J2cl"):
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []
     javac_opts = DEFAULT_J2CL_JAVAC_OPTS + javac_opts
 
-    if generate_kythe_action and ctx.var.get("GROK_ELLIPSIS_BUILD", None):
+    if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
         # An unused JAR that is only generated so that we run javac with the non-stripped sources
         # that kythe can index. Nothing should depend upon this output as it is not guaranteed
         # to succeed; it is only best effort for indexing.

@@ -28,7 +28,6 @@ def _impl_j2cl_library(ctx):
             k: getattr(ctx.attr, k)
             for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
         },
-        generate_kythe_action = ctx.attr.generate_kythe_action,
     )
 
     output_js = j2cl_provider._private_.output_js
@@ -82,7 +81,6 @@ _J2CL_LIB_ATTRS = {
     "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),
     "javacopts": attr.string_list(),
     "kotlincopts": attr.string_list(),
-    "generate_kythe_action": attr.bool(default = True),
     #  TODO(b/217287994): Remove the ability to do transpiler override.
     "j2cl_transpiler_override": attr.label(default = None, cfg = "host", executable = True),
 }
