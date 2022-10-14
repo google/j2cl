@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
@@ -28,6 +29,8 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
@@ -54,7 +57,8 @@ public class ImplementArraysAsClasses extends NormalizationPass {
   /**
    * Goes over all the array types declared in the Java array abstraction classes and marks them as
    * native wasm arrays, since in those classes all arrays that appear in the code are meant to be
-   * the underlying native wasm array.
+   * the underlying native wasm array. Similarly we mark the parameters of all @Wasm methods to use
+   * the native arrays as well.
    *
    * <p>Note that arrays declared in the WasmArray class are not native arrays.
    *
@@ -62,6 +66,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
    * handling that makes it confusing when reasoning what gets rewritten and what does not.
    */
   private void markNativeWasmArrayTypes(CompilationUnit compilationUnit) {
+    // Mark native wasm arrays in wasm array subtypes
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -132,6 +137,23 @@ public class ImplementArraysAsClasses extends NormalizationPass {
                 .build();
           }
         });
+
+    // Mark native wasm arrays in @Wasm methods.
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteVariable(Variable variable) {
+            if (variable.getTypeDescriptor().isArray() && isNativeMethodParameter()) {
+              return markVariableTypeDescriptorAsNative(variable);
+            }
+            return variable;
+          }
+
+          private boolean isNativeMethodParameter() {
+            return getParent() instanceof Method
+                && ((Method) getParent()).getDescriptor().getWasmInfo() != null;
+          }
+        });
   }
 
   /**
@@ -146,9 +168,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteArrayLength(ArrayLength arrayLength) {
-            ArrayTypeDescriptor arrayTypeDescriptor =
-                (ArrayTypeDescriptor) arrayLength.getArrayExpression().getTypeDescriptor();
-            if (arrayTypeDescriptor.isNativeWasmArray()) {
+            if (!isNonNativeArray(arrayLength.getArrayExpression().getTypeDescriptor())) {
               return arrayLength;
             }
 
@@ -160,15 +180,48 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
           @Override
           public Node rewriteArrayAccess(ArrayAccess arrayAccess) {
-            ArrayTypeDescriptor arrayTypeDescriptor =
-                (ArrayTypeDescriptor) arrayAccess.getArrayExpression().getTypeDescriptor();
-            if (arrayTypeDescriptor.isNativeWasmArray()) {
+            if (!isNonNativeArray(arrayAccess.getArrayExpression().getTypeDescriptor())) {
               return arrayAccess;
             }
 
             return ArrayAccess.Builder.from(arrayAccess)
                 .setArrayExpression(getInnerNativeArrayExpression(arrayAccess.getArrayExpression()))
                 .build();
+          }
+
+          @Override
+          public MethodCall rewriteMethodCall(MethodCall methodCall) {
+            MethodDescriptor target = methodCall.getTarget();
+            if (target.getWasmInfo() == null) {
+              return methodCall;
+            }
+            if (target.getParameterTypeDescriptors().stream().noneMatch(this::isNonNativeArray)) {
+              return methodCall;
+            }
+
+            // TODO(goktug): Consider allowing native arrays on return types as well.
+            return MethodCall.Builder.from(methodCall)
+                .setArguments(
+                    methodCall.getArguments().stream()
+                        .map(
+                            arg ->
+                                isNativeArrayArgument(methodCall, arg)
+                                    ? getInnerNativeArrayExpression(arg)
+                                    : arg)
+                        .collect(toImmutableList()))
+                .build();
+          }
+
+          private boolean isNonNativeArray(TypeDescriptor descriptor) {
+            return descriptor instanceof ArrayTypeDescriptor
+                && !((ArrayTypeDescriptor) descriptor).isNativeWasmArray();
+          }
+
+          private boolean isNativeArrayArgument(MethodCall call, Expression expression) {
+            return call.getTarget()
+                .getParameterTypeDescriptors()
+                .get(call.getArguments().indexOf(expression))
+                .isPrimitiveArray();
           }
         });
   }

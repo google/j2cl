@@ -96,16 +96,15 @@ function createImportObject(userImports) {
     'RegExp.test': (/** !RegExp */ r, /** string */ s) => r.test(s),
     'RegExpResult.index': (/** !RegExpResult */ r) => r.index,
 
-    // Utilites to interop strings and arrays. From String.java.
-    'charArrayToString': WebAssembly['experimentalConvertArrayToString'],
-    'stringToCharArray': WebAssembly['experimentalConvertStringToArray'],
-    'getLength': s => s.length,
+    // Helpers for j.l.String
     'replace': (s, regex, replacement) => s.replace(regex, replacement),
+
     // TODO(b/193532287): These will be removed after Array interop support in
     // WASM is implemented.
     'createBuffer': size => new Array(size),
     'setBufferAt': (buffer, index, value) => buffer[index] = value,
     'getBufferAt': (buffer, index) => buffer[index],
+    'getLength': s => s.length,
 
     // Date
     'Date.now': Date.now,

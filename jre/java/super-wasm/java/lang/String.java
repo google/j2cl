@@ -953,7 +953,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   /** Returns a JavaScript string that can be used to pass to JavaScript imported methods. */
   public NativeString toJsString() {
-    return ArrayHelper.toJsString(value, offset, count);
+    return nativeFromCharCodeArray(value, offset, offset + count);
   }
 
   /** Returns a String using the char values provided as a JavaScript array. */
@@ -961,25 +961,28 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     if (jsString == null) {
       return null;
     }
-    return String.fromInternalArray(ArrayHelper.toCharArray(jsString));
+    int count = nativeGetLength(asStringView(jsString));
+    char[] array = new char[count];
+    int unused = nativeGetChars(jsString, array, 0);
+    return new String(0, count, array);
   }
 
-  /** Returns a String using the char values provided as a JavaScript array. */
-  public static String fromJsArray(WasmExtern buffer) {
-    char[] array = new char[getLength(buffer)];
-    for (int i = 0; i < array.length; i++) {
-      array[i] = getBufferAt(buffer, i);
-    }
-    return String.fromInternalArray(array);
-  }
+  @Wasm("string.new_wtf16_array")
+  private static native NativeString nativeFromCharCodeArray(char[] x, int start, int end);
 
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native char getBufferAt(WasmExtern o, int i);
+  @Wasm("stringview_wtf16.length")
+  private static native int nativeGetLength(NativeStringView stringView);
 
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native int getLength(WasmExtern o);
+  @Wasm("string.encode_wtf16_array")
+  private static native int nativeGetChars(NativeString s, char[] x, int start);
 
-  /** Native string representation to be used to pass back and forth with JS. */
-  @Wasm("extern")
-  public static interface NativeString {}
+  /** Native JS compatible representation of a string. */
+  @Wasm("string")
+  public interface NativeString {}
+
+  @Wasm("stringview_wtf16")
+  private interface NativeStringView {}
+
+  @Wasm("string.as_wtf16")
+  private static native NativeStringView asStringView(NativeString stringView);
 }

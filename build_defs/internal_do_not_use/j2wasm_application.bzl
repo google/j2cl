@@ -53,6 +53,7 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-gc")
     args.add("--enable-reference-types")
     args.add("--enable-sign-ext")
+    args.add("--enable-strings")
     args.add("--enable-nontrapping-float-to-int")
     args.add("--nominal")
     args.add("--traps-never-happen")
