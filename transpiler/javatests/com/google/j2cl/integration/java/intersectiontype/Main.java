@@ -17,6 +17,7 @@ package intersectiontype;
 
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 public class Main {
   public static void main(String[] args) {
@@ -56,7 +57,8 @@ public class Main {
         () -> {
           EmptyC b2CIJ = (EmptyC & EmptyI & EmptyJ) localB;
         },
-        EmptyC.class);
+        // J2CL performs casts checks from intersection casts in an order different from Java/JVM.
+        isJvm() ? EmptyJ.class : EmptyC.class);
     assertThrowsClassCastException(
         () -> {
           EmptyB c2BI = (EmptyB & EmptyI) localC;
