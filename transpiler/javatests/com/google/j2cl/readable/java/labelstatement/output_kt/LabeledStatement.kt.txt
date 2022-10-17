@@ -43,16 +43,12 @@ open class LabeledStatement {
 
  open fun switchStatement() {
   LABEL@ do {
-   CASE@ do {
-    when (0) {
-     0 -> {
-      break@CASE
+   when (0) {
+    0 -> {
+     if (true) {
+      break@LABEL
      }
     }
-    break@LABEL
-   } while (false)
-   if (true) {
-    break@LABEL
    }
   } while (false)
  }

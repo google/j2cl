@@ -154,5 +154,185 @@ public class SwitchStatement {
     }
   }
 
+  private void testNonFallThroughBreakCase(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        break;
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testNonFallThroughBreakOuterCase(int i) {
+    OUTER_LABEL:
+    do {
+      switch (i) {
+        case 1:
+          foo(1);
+          break OUTER_LABEL;
+        default:
+          foo(2);
+          break;
+      }
+    } while (false);
+  }
+
+  private void testNonFallThroughContinueCase(int i) {
+    do {
+      switch (i) {
+        case 3:
+          foo(1);
+          continue;
+        default:
+          foo(2);
+          break;
+      }
+    } while (false);
+  }
+
+  private void testNonFallThroughReturnCase(int i) {
+    switch (i) {
+      case 4:
+        foo(1);
+        return;
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testNonFallThroughThrowCase(int i) {
+    switch (i) {
+      case 5:
+        foo(1);
+        throw new RuntimeException();
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testNonFallThroughIfCase(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        if (false) {
+          break;
+        } else {
+          break;
+        }
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testNonFallThroughBlockCase(int i) {
+    switch (i) {
+      case 1:
+        {
+          foo(1);
+          break;
+        }
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testFallThroughCase(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testFallThroughBreakInnerCase(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        INNER_LABEL:
+        do {
+          break INNER_LABEL;
+        } while (false);
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testFallThroughContinueInnerCase(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        INNER_LABEL:
+        do {
+          continue INNER_LABEL;
+        } while (false);
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testFallThroughLabeledStatement(int i) {
+    switch (i) {
+      case 1:
+        INNER_LABEL:
+        {
+          if (false) {
+            break INNER_LABEL;
+          }
+          return;
+        }
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testFallThroughIfCase(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        if (false) {
+          break;
+        }
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testFallThroughIfElseCase(int i) {
+    switch (i) {
+      case 1:
+        if (true) {
+          foo(1);
+          break;
+        } else {
+          foo(2);
+        }
+      default:
+        foo(2);
+        break;
+    }
+  }
+
+  private void testFallThoughLastCase(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        break;
+      default:
+        foo(2);
+    }
+  }
+
   private void foo(int i) {}
 }

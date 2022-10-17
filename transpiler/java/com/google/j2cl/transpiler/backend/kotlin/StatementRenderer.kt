@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.Block
 import com.google.j2cl.transpiler.ast.BreakStatement
 import com.google.j2cl.transpiler.ast.ContinueStatement
 import com.google.j2cl.transpiler.ast.DoWhileStatement
+import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.ExpressionStatement
 import com.google.j2cl.transpiler.ast.FieldDeclarationStatement
 import com.google.j2cl.transpiler.ast.ForEachStatement
@@ -29,7 +30,6 @@ import com.google.j2cl.transpiler.ast.LabeledStatement
 import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
-import com.google.j2cl.transpiler.ast.SwitchCase
 import com.google.j2cl.transpiler.ast.SwitchStatement
 import com.google.j2cl.transpiler.ast.SynchronizedStatement
 import com.google.j2cl.transpiler.ast.ThrowStatement
@@ -166,20 +166,33 @@ private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
   }
 }
 
-private fun Renderer.renderSwitchCase(switchCase: SwitchCase) {
-  if (switchCase.isDefault) render("else") else renderExpression(switchCase.caseExpression)
-  render(" -> ")
-  renderInCurlyBrackets { renderStatements(switchCase.statements) }
-}
-
 private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {
-  // Note: assumes Java Switch-Case statements have been transformed into Kotlin
-  // When-statements.
   render("when ")
   renderInParentheses { renderExpression(switchStatement.switchExpression) }
   render(" ")
   renderInCurlyBrackets {
-    renderStartingWithNewLines(switchStatement.cases) { renderSwitchCase(it) }
+    val caseExpressions = mutableListOf<Expression>()
+    for (case in switchStatement.cases) {
+      val caseExpression = case.caseExpression
+      if (caseExpression == null) {
+        // It's OK to skip empty cases, since they will fall-through to the default case, and since
+        // these are case clauses from Java, their evaluation does never have side effects.
+        caseExpressions.clear()
+        renderNewLine()
+        render("else -> ")
+        renderInCurlyBrackets { renderStatements(case.statements) }
+      } else {
+        caseExpressions.add(caseExpression)
+        val caseStatements = case.statements
+        if (caseStatements.isNotEmpty()) {
+          renderNewLine()
+          renderCommaSeparated(caseExpressions) { renderExpression(it) }
+          caseExpressions.clear()
+          render(" -> ")
+          renderInCurlyBrackets { renderStatements(caseStatements) }
+        }
+      }
+    }
   }
 }
 

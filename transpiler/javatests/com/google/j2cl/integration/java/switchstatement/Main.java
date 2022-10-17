@@ -175,4 +175,75 @@ public class Main {
           }
         });
   }
+
+  private static void testFallsThrough() {
+    assertFalse(testCascade_emptyCase(1));
+    assertTrue(testCascade_emptyCase(2));
+    assertTrue(testCascade_emptyCase(3));
+
+    assertFalse(testCascade_ifStatement(1));
+    assertTrue(testCascade_ifStatement(2));
+    assertTrue(testCascade_ifStatement(3));
+
+    assertTrue(testCascade_breakInner(1));
+    assertTrue(testCascade_breakInner(2));
+
+    assertFalse(testCascade_breakOuter(1));
+    assertTrue(testCascade_breakOuter(2));
+  }
+
+  private static boolean testCascade_emptyCase(int i) {
+    boolean result = false;
+    switch (i) {
+      case 1:
+        break;
+      case 2:
+      default:
+        result = true;
+    }
+    return result;
+  }
+
+  private static boolean testCascade_ifStatement(int i) {
+    boolean result = false;
+    switch (i) {
+      case 1:
+      case 2:
+        if (i == 1) {
+          break;
+        }
+      default:
+        result = true;
+    }
+    return result;
+  }
+
+  private static boolean testCascade_breakInner(int i) {
+    boolean result = false;
+    switch (i) {
+      case 1:
+        INNER:
+        while (true) {
+          break INNER;
+        }
+      default:
+        result = true;
+    }
+    return result;
+  }
+
+  private static boolean testCascade_breakOuter(int i) {
+    boolean result = false;
+    OUTER:
+    switch (i) {
+      case 1:
+        INNER:
+        while (true) {
+          break OUTER;
+        }
+      default:
+        result = true;
+    }
+    return result;
+  }
 }

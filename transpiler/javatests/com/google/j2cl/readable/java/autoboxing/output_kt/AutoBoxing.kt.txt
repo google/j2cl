@@ -217,14 +217,9 @@ open class AutoBoxing {
   boxD = kotlin.Double.valueOf(- boxD!!.toDouble())
   boxI = kotlin.Int.valueOf(- boxI!!.toInt())
   SWITCH@ do {
-   CASE@ do {
-    when (boxI!!.toInt()) {
-     else -> {
-      break@CASE
-     }
-    }
-    break@SWITCH
-   } while (false)
+   when (boxI!!.toInt()) {
+    else -> {}
+   }
   } while (false)
   i = i + kotlin.run {
    boxI = kotlin.Int.valueOf(boxI!!.toInt() + kotlin.run {

@@ -23,15 +23,19 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import java.util.List;
 
@@ -100,6 +104,10 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
+            if (!needsConversionToCascadingBlocks(switchStatement)) {
+              return switchStatement;
+            }
+
             List<SwitchCaseWithLabel> switchCasesAndLabels =
                 createLabelsForSwitchCases(switchStatement.getCases());
 
@@ -253,5 +261,49 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
         .setCaseExpression(
             new NumberLiteral((PrimitiveTypeDescriptor) targetTypeDescriptor, literal.getValue()))
         .build();
+  }
+
+  private static boolean needsConversionToCascadingBlocks(SwitchStatement switchStatement) {
+    List<SwitchCase> cases = switchStatement.getCases();
+    List<SwitchCase> casesExceptLast = cases.isEmpty() ? cases : cases.subList(0, cases.size() - 1);
+    return casesExceptLast.stream()
+        .anyMatch(NormalizeSwitchStatementsKotlin::isNonEmptyFallThrough);
+  }
+
+  private static boolean isNonEmptyFallThrough(SwitchCase switchCase) {
+    return switchCase.getStatements().stream()
+        .anyMatch(NormalizeSwitchStatementsKotlin::doesNotFallThrough);
+  }
+
+  private static boolean doesNotFallThrough(Statement statement) {
+    if (statement instanceof ReturnStatement) {
+      return true;
+    }
+
+    if (statement instanceof ThrowStatement) {
+      return true;
+    }
+
+    if (statement instanceof BreakStatement || statement instanceof ContinueStatement) {
+      // Since we are not entering labeled statements, loop statements and other switch statements,
+      // these break and continue statement are guaranteed to target outside switch statement.
+      return true;
+    }
+
+    if (statement instanceof Block) {
+      Block block = (Block) statement;
+      return block.getStatements().stream()
+          .anyMatch(NormalizeSwitchStatementsKotlin::doesNotFallThrough);
+    }
+
+    if (statement instanceof IfStatement) {
+      IfStatement ifStatement = (IfStatement) statement;
+      Statement elseStatement = ifStatement.getElseStatement();
+      return doesNotFallThrough(ifStatement.getThenStatement())
+          && elseStatement != null
+          && doesNotFallThrough(elseStatement);
+    }
+
+    return false;
   }
 }

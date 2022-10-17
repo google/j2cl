@@ -164,6 +164,262 @@
      break LABEL;
     } while (true);] "switchstatement.SwitchStatement.testLabelInSwitchCase"
 [break LABEL;] => [break LABEL;] "switchstatement.SwitchStatement.testLabelInSwitchCase"
+[testNonFallThroughBreakCase] => [m_testNonFallThroughBreakCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testNonFallThroughBreakCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonFallThroughBreakCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughBreakCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThroughBreakCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughBreakCase"
+[testNonFallThroughBreakOuterCase] => [m_testNonFallThroughBreakOuterCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[OUTER_LABEL:
+    do {
+...      }
+    } while (false);] => [OUTER_LABEL: do {
+   switch (i) {
+...   }
+  } while (false);] "switchstatement.SwitchStatement.testNonFallThroughBreakOuterCase"
+[do {
+      switch (i) {
+...      }
+    } while (false);] => [do {
+   switch (i) {
+...   }
+  } while (false);] "switchstatement.SwitchStatement.testNonFallThroughBreakOuterCase"
+[switch (i) {
+        case 1:
+...          break;
+      }] => [switch (i) {
+    case 1:
+...     break;
+   }] "switchstatement.SwitchStatement.testNonFallThroughBreakOuterCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonFallThroughBreakOuterCase"
+[break OUTER_LABEL;] => [break OUTER_LABEL;] "switchstatement.SwitchStatement.testNonFallThroughBreakOuterCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThroughBreakOuterCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughBreakOuterCase"
+[testNonFallThroughContinueCase] => [m_testNonFallThroughContinueCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[do {
+      switch (i) {
+...      }
+    } while (false);] => [do {
+   switch (i) {
+...   }
+  } while (false);] "switchstatement.SwitchStatement.testNonFallThroughContinueCase"
+[switch (i) {
+        case 3:
+...          break;
+      }] => [switch (i) {
+    case 3:
+...     break;
+   }] "switchstatement.SwitchStatement.testNonFallThroughContinueCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonFallThroughContinueCase"
+[continue;] => [continue;] "switchstatement.SwitchStatement.testNonFallThroughContinueCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThroughContinueCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughContinueCase"
+[testNonFallThroughReturnCase] => [m_testNonFallThroughReturnCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 4:
+...        break;
+    }] => [switch (i) {
+   case 4:
+...    break;
+  }] "switchstatement.SwitchStatement.testNonFallThroughReturnCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonFallThroughReturnCase"
+[return;] => [return;] "switchstatement.SwitchStatement.testNonFallThroughReturnCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThroughReturnCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughReturnCase"
+[testNonFallThroughThrowCase] => [m_testNonFallThroughThrowCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 5:
+...        break;
+    }] => [switch (i) {
+   case 5:
+...    break;
+  }] "switchstatement.SwitchStatement.testNonFallThroughThrowCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonFallThroughThrowCase"
+[throw new RuntimeException();] => [throw $Exceptions.toJs(RuntimeException.$create__());] "switchstatement.SwitchStatement.testNonFallThroughThrowCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThroughThrowCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughThrowCase"
+[testNonFallThroughIfCase] => [m_testNonFallThroughIfCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testNonFallThroughIfCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonFallThroughIfCase"
+[if (false) {
+          break;
+...          break;
+        }] => [if (false) {
+     break;
+...     break;
+    }] "switchstatement.SwitchStatement.testNonFallThroughIfCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughIfCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughIfCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThroughIfCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughIfCase"
+[testNonFallThroughBlockCase] => [m_testNonFallThroughBlockCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testNonFallThroughBlockCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonFallThroughBlockCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughBlockCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThroughBlockCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughBlockCase"
+[testFallThroughCase] => [m_testFallThroughCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testFallThroughCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testFallThroughCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThroughCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThroughCase"
+[testFallThroughBreakInnerCase] => [m_testFallThroughBreakInnerCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testFallThroughBreakInnerCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testFallThroughBreakInnerCase"
+[INNER_LABEL:
+        do {
+          break INNER_LABEL;
+        } while (false);] => [INNER_LABEL: do {
+     break INNER_LABEL;
+    } while (false);] "switchstatement.SwitchStatement.testFallThroughBreakInnerCase"
+[do {
+          break INNER_LABEL;
+        } while (false);] => [do {
+     break INNER_LABEL;
+    } while (false);] "switchstatement.SwitchStatement.testFallThroughBreakInnerCase"
+[break INNER_LABEL;] => [break INNER_LABEL;] "switchstatement.SwitchStatement.testFallThroughBreakInnerCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThroughBreakInnerCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThroughBreakInnerCase"
+[testFallThroughContinueInnerCase] => [m_testFallThroughContinueInnerCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testFallThroughContinueInnerCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testFallThroughContinueInnerCase"
+[INNER_LABEL:
+        do {
+          continue INNER_LABEL;
+        } while (false);] => [INNER_LABEL: do {
+     continue INNER_LABEL;
+    } while (false);] "switchstatement.SwitchStatement.testFallThroughContinueInnerCase"
+[do {
+          continue INNER_LABEL;
+        } while (false);] => [do {
+     continue INNER_LABEL;
+    } while (false);] "switchstatement.SwitchStatement.testFallThroughContinueInnerCase"
+[continue INNER_LABEL;] => [continue INNER_LABEL;] "switchstatement.SwitchStatement.testFallThroughContinueInnerCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThroughContinueInnerCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThroughContinueInnerCase"
+[testFallThroughLabeledStatement] => [m_testFallThroughLabeledStatement__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testFallThroughLabeledStatement"
+[INNER_LABEL:
+        {
+...          return;
+        }] => [INNER_LABEL: {
+     if (false) {
+...     return;
+    }] "switchstatement.SwitchStatement.testFallThroughLabeledStatement"
+[if (false) {
+            break INNER_LABEL;
+          }] => [if (false) {
+      break INNER_LABEL;
+     }] "switchstatement.SwitchStatement.testFallThroughLabeledStatement"
+[break INNER_LABEL;] => [break INNER_LABEL;] "switchstatement.SwitchStatement.testFallThroughLabeledStatement"
+[return;] => [return;] "switchstatement.SwitchStatement.testFallThroughLabeledStatement"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThroughLabeledStatement"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThroughLabeledStatement"
+[testFallThroughIfCase] => [m_testFallThroughIfCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testFallThroughIfCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testFallThroughIfCase"
+[if (false) {
+          break;
+        }] => [if (false) {
+     break;
+    }] "switchstatement.SwitchStatement.testFallThroughIfCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThroughIfCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThroughIfCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThroughIfCase"
+[testFallThroughIfElseCase] => [m_testFallThroughIfElseCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testFallThroughIfElseCase"
+[if (true) {
+          foo(1);
+...          foo(2);
+        }] => [if (true) {
+     this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);
+...     this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
+    }] "switchstatement.SwitchStatement.testFallThroughIfElseCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testFallThroughIfElseCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThroughIfElseCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThroughIfElseCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThroughIfElseCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThroughIfElseCase"
+[testFallThoughLastCase] => [m_testFallThoughLastCase__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        foo(2);
+    }] => [switch (i) {
+   case 1:
+...    this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
+  }] "switchstatement.SwitchStatement.testFallThoughLastCase"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testFallThoughLastCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testFallThoughLastCase"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThoughLastCase"
 [foo] => [m_foo__int__void_$p_switchstatement_SwitchStatement]
 [i] => [i] "i"
 [SwitchStatement] => [$clinit]
