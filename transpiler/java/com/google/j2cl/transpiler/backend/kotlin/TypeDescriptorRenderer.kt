@@ -67,7 +67,7 @@ private data class TypeDescriptorRenderer(
       when (typeDescriptor) {
         is ArrayTypeDescriptor -> renderArray(typeDescriptor)
         is DeclaredTypeDescriptor -> renderDeclared(typeDescriptor)
-        is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor)
+        is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor.ktQualifiedName())
         is TypeVariable -> renderVariable(typeDescriptor)
         is IntersectionTypeDescriptor -> renderIntersection(typeDescriptor)
         else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
@@ -76,7 +76,7 @@ private data class TypeDescriptorRenderer(
   }
 
   fun renderArray(arrayTypeDescriptor: ArrayTypeDescriptor) {
-    renderer.renderQualifiedName(arrayTypeDescriptor)
+    renderer.renderQualifiedName(arrayTypeDescriptor.ktQualifiedName())
     val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor
     if (!componentTypeDescriptor.isPrimitive) {
       renderer.renderInAngleBrackets { child.render(componentTypeDescriptor) }
@@ -89,22 +89,20 @@ private data class TypeDescriptorRenderer(
     val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
     if (typeDeclaration.isLocal || asSimple) {
       // Skip rendering package name or enclosing type.
-      renderer.renderQualifiedName(
-        declaredTypeDescriptor,
-        asSimple = true,
-        asSuperType = asSuperType
-      )
+      renderer.renderIdentifier(declaredTypeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
     } else if (enclosingTypeDescriptor != null) {
       // Render the enclosing type if present.
       if (!typeDeclaration.isCapturingEnclosingInstance) {
-        renderer.renderQualifiedName(enclosingTypeDescriptor)
+        renderer.renderQualifiedName(enclosingTypeDescriptor.ktQualifiedName())
       } else {
         child.renderDeclared(enclosingTypeDescriptor.toNonNullable())
       }
       renderer.render(".")
       renderer.renderIdentifier(typeDeclaration.ktSimpleName)
     } else {
-      renderer.renderQualifiedName(declaredTypeDescriptor, asSuperType = asSuperType)
+      renderer.renderQualifiedName(
+        declaredTypeDescriptor.ktQualifiedName(asSuperType = asSuperType)
+      )
     }
     renderArguments(declaredTypeDescriptor)
     renderNullableSuffix(declaredTypeDescriptor)

@@ -126,7 +126,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
       leftOperand.target.isStatic &&
       leftOperand.target.isFinal
   ) {
-    renderIdentifier(leftOperand.target.renderedName)
+    renderIdentifier(leftOperand.target.ktMangledName)
   } else {
     renderLeftSubExpression(expression, expression.leftOperand)
   }
@@ -189,12 +189,12 @@ private fun Renderer.renderExpressionWithComment(expressionWithComment: Expressi
 
 private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
   renderQualifier(fieldAccess)
-  renderIdentifier(fieldAccess.target.renderedName)
+  renderIdentifier(fieldAccess.target.ktMangledName)
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
   val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!.toNonNullable()
-  renderQualifiedName(functionalInterface, asSuperType = true)
+  renderQualifiedName(functionalInterface.ktQualifiedName(asSuperType = true))
   render(" ")
   renderInCurlyBrackets {
     val parameters = functionExpression.parameters
@@ -248,7 +248,7 @@ private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
-  renderQualifiedName(typeLiteral.referencedTypeDescriptor)
+  renderQualifiedName(typeLiteral.referencedTypeDescriptor.ktQualifiedName())
   render("::class")
   if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
     render(".javaPrimitiveType!!")
@@ -292,7 +292,7 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
     return
   }
 
-  renderIdentifier(expression.target.renderedName)
+  renderIdentifier(expression.target.ktMangledName)
   if (!expression.target.isKtProperty) {
     val typeArguments = methodDescriptor.typeArguments
     if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
@@ -465,7 +465,9 @@ private fun Renderer.renderSuperReference(
 ) {
   render("super")
   if (superTypeDescriptor != null) {
-    renderInAngleBrackets { renderQualifiedName(superTypeDescriptor, asSuperType = true) }
+    renderInAngleBrackets {
+      renderQualifiedName(superTypeDescriptor.ktQualifiedName(asSuperType = true))
+    }
   }
   if (qualifierTypeDescriptor != null) {
     renderLabelReference(qualifierTypeDescriptor)
@@ -526,7 +528,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       if (ktCompanionQualifiedName != null) {
         renderQualifiedName(ktCompanionQualifiedName)
       } else {
-        renderQualifiedName(enclosingTypeDescriptor)
+        renderQualifiedName(enclosingTypeDescriptor.ktQualifiedName())
       }
       render(".")
     }

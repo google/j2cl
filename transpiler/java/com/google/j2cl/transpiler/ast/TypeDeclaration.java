@@ -572,7 +572,9 @@ public abstract class TypeDeclaration
   @Memoized
   public String getKtQualifiedName() {
     KtTypeInfo ktTypeInfo = getKtTypeInfo();
-    return ktTypeInfo == null ? getQualifiedSourceName() : ktTypeInfo.getQualifiedName();
+    return ktTypeInfo == null
+        ? isLocal() ? getKtSimpleName() : getQualifiedSourceName()
+        : ktTypeInfo.getQualifiedName();
   }
 
   @Nullable

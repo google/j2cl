@@ -40,12 +40,6 @@ internal val TypeDeclaration.directlyDeclaredTypeParameterCount: Int
       .minus(enclosingMethodTypeParameterCount)
   }
 
-internal fun TypeDeclaration.ktSimpleName(asSuperType: Boolean = false) =
-  if (asSuperType) ktBridgeSimpleName ?: ktSimpleName else ktSimpleName
-
-internal fun TypeDeclaration.ktQualifiedName(asSuperType: Boolean = false) =
-  if (asSuperType) ktBridgeQualifiedName ?: ktQualifiedName else ktQualifiedName
-
 internal val TypeDeclaration.isRecursive: Boolean
   get() = typeParameterDescriptors.any { it.isRecursive }
 
