@@ -33,12 +33,12 @@ import com.google.j2cl.transpiler.backend.kotlin.common.buildSet
  */
 class KotlinGeneratorStage(private val output: OutputUtils.Output, private val problems: Problems) {
   fun generateOutputs(library: Library) {
-    val environment = Environment(library.buildNameToIdentifierMap())
-    library.compilationUnits.forEach { generateOutputs(environment, it) }
+    library.compilationUnits.forEach { generateOutputs(it) }
   }
 
-  private fun generateOutputs(environment: Environment, compilationUnit: CompilationUnit) {
+  private fun generateOutputs(compilationUnit: CompilationUnit) {
     val sourceBuilder = SourceBuilder()
+    val environment = Environment(compilationUnit.buildNameToIdentifierMap())
     val renderer = Renderer(environment, sourceBuilder, problems)
     renderer.renderCompilationUnit(compilationUnit)
     val source = sourceBuilder.build().trimTrailingWhitespaces()
@@ -49,12 +49,9 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 
 private fun String.trimTrailingWhitespaces() = lines().joinToString("\n") { it.trimEnd() }
 
-private fun Library.buildNameToIdentifierMap(): Map<HasName, String> = buildMap {
-  compilationUnits.forEach { compilationUnit ->
-    val forbiddenNames = compilationUnit.buildForbiddenNamesSet()
-    compilationUnit.streamTypes().forEach { type ->
-      putAll(computeUniqueNames(forbiddenNames, type))
-    }
+private fun CompilationUnit.buildNameToIdentifierMap(): Map<HasName, String> = buildMap {
+  buildForbiddenNamesSet().let { forbiddenNames ->
+    streamTypes().forEach { type -> putAll(computeUniqueNames(forbiddenNames, type)) }
   }
 }
 
