@@ -12,7 +12,8 @@ integration_test(
         "jre.checks.type": "DISABLED",
         "jre.checkedMode": "DISABLED",
     },
+    # Cast checks cannot be disabled for JVM, WASM or J2KT.
+    enable_jvm_test = False,
     enable_kt = False,
-    # Disabling cast checks can not be done in WASM.
     enable_wasm = False,
 )

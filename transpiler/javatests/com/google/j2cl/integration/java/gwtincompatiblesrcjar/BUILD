@@ -28,4 +28,6 @@ integration_test(
         ":libgwtincompatibleMain-src.jar",
         ":libgwtincompatibleOther-src.jar",
     ],
+    # @GwtIncompatible is not supported on the JVM.
+    enable_jvm_test = False,
 )

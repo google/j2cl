@@ -12,8 +12,8 @@ integration_test(
         "jre.checks.numeric": "DISABLED",
         "jre.checkedMode": "DISABLED",
     },
+    # Arithmetic exceptions cannot be disabled for JVM, WASM or J2KT.
+    enable_jvm_test = False,
     enable_kt = False,
-    # This test makes sense only in JavaScript where integral divide by 0 can
-    # be made not to throw.
     enable_wasm = False,
 )

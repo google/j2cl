@@ -11,8 +11,9 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    # The test uses native types to test the enum properties, only applicable for JS output.
+    enable_jvm_test = False,
     enable_kt = False,
-    # Disabled because it uses native types to test the enum properties.
     enable_wasm = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

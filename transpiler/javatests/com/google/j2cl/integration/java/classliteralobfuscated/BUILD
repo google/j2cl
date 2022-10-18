@@ -17,8 +17,9 @@ integration_test(
     ],
     # String replacement does not occur in uncompiled_test
     disable_uncompiled_test = True,
+    # Class literal obfuscation only works for JS output.
+    enable_jvm_test = False,
     enable_kt = False,
-    # Class literal obfuscation is not implemented in WASM.
     enable_wasm = False,
     tags = ["manual"],
 )

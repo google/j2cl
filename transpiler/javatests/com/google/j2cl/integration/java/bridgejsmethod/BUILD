@@ -11,8 +11,9 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    # @JsMethod bridges only applicable for JS output.
+    enable_jvm_test = False,
     enable_kt = False,
-    # Disabled because it is testing bridging needed for @JsMethod.
     enable_wasm = False,
     suppress = ["JSC_TYPE_MISMATCH"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],

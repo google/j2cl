@@ -8,8 +8,8 @@ package(licenses = ["notice"])
 integration_test(
     name = "arrayoutofbounds",
     srcs = glob(["*.java"]),
+    # ArrayOutBounds will not throw only for JS output.
+    enable_jvm_test = False,
     enable_kt = False,
-    # This is testing that you can insert elements past the end of array;
-    # functionality that is supported in JavaScript but not in WASM.
     enable_wasm = False,
 )
