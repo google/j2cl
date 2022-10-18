@@ -36,6 +36,7 @@ public class Main {
     }
   }
 
+  @SuppressWarnings("ArrayToString")
   public static void main(String[] args) {
     String locationString = "California, USA";
     Person samPerson = new Person("Sam", "Smith");

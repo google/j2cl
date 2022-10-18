@@ -309,7 +309,7 @@ public class Main {
     assertThrowsNullPointerException(
         () -> {
           Object nullObject = null;
-          nullObject.getClass();
+          Object unused = nullObject.getClass();
         });
   }
 

@@ -67,7 +67,10 @@ public class Main {
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void testSpecializedJsFunction() {
-    Consumer<String> stringConsumer = s -> s.substring(2);
+    Consumer<String> stringConsumer =
+        s -> {
+          Object unused = s.substring(2);
+        };
     Consumer rawConsumer = stringConsumer;
 
     assertThrowsClassCastException(() -> rawConsumer.accept(new Object()), String.class);

@@ -27,6 +27,7 @@ public class Main {
   }
 
   @Wasm("nop") // These tests are JavaScript specific.
+  @SuppressWarnings({"EqualsIncompatibleType", "BoxedPrimitiveEquality"})
   private static void testBoxedAndDevirtualizedTypes() {
     assertTrue(new Character((char) 1) != new Character((char) 1));
     assertTrue(Character.valueOf((char) 1) == Character.valueOf((char) 1));
@@ -85,6 +86,7 @@ public class Main {
   }
 
   // Make sure String does not end up compared via '==' (b/33850935).
+  @SuppressWarnings({"EqualsIncompatibleType", "BoxedPrimitiveEquality"})
   private static void testEqualityIsStrict_regression() {
     // java.lang.Object.equals should not optimize to '=='
     assertTrue(!new StringBuilder("data").equals("data"));

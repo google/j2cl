@@ -27,7 +27,7 @@ public enum Planet {
 
   public static final Planet extraPlanet = Planet.MERCURY;
 
-  private int index;
+  private final int index;
 
   Planet(int index) {
     this.index = index;

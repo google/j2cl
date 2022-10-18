@@ -504,6 +504,7 @@ public class Main {
     assertTrue(b == -55);
   }
 
+  @SuppressWarnings("BoxedPrimitiveEquality")
   private static void testAutoboxing_equals() {
     double zero = 0.0;
     double minusZero = -0.0;
