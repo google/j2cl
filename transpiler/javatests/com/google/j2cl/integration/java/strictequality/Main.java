@@ -16,6 +16,7 @@
 package strictequality;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import javaemul.internal.annotations.Wasm;
 
@@ -44,9 +45,11 @@ public class Main {
     // assertTrue(new Boolean(true) != new Boolean(true)); // can't honor, it's native JS boolean
     assertTrue(Boolean.valueOf(true) == Boolean.valueOf(true));
 
-    // assertTrue(new Double(1) != new Double(1)); // can't honor, it's native JS double
-    assertTrue(
-        Double.valueOf(1) == Double.valueOf(1)); // different from Java, it's native JS double
+    if (!isJvm()) {
+      // assertTrue(new Double(1) != new Double(1)); // can't honor, it's native JS double
+      assertTrue(
+          Double.valueOf(1) == Double.valueOf(1)); // different from Java, it's native JS double
+    }
   }
 
   private static void testEqualityIsStrict() {

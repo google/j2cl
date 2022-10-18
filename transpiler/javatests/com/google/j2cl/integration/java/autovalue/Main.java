@@ -18,6 +18,7 @@ package autovalue;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
@@ -190,6 +191,10 @@ public class Main {
   // Uses JsInterop behavior.
   @Wasm("nop")
   private static void testJsCollection() {
+    // JsInterop is not supported on the JVM.
+    if (isJvm()) {
+      return;
+    }
     UsesJsCollection o1 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
     UsesJsCollection o2 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
     assertNotEquals(o1, o2);

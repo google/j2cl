@@ -17,6 +17,7 @@ package casts;
 
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import java.io.Serializable;
 import jsinterop.annotations.JsFunction;
@@ -471,6 +472,10 @@ public class Main {
 
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static <T extends NativeMap<?, ?>> void testCasts_typeVariableWithNativeBound() {
+    // Casting Object[] to NativeMap[] is invalid on the JVM.
+    if (isJvm()) {
+      return;
+    }
     {
       Object o = new Object[] {new Object()};
       T[] unusedArray = (T[]) o; // cast to T[].
@@ -538,16 +543,23 @@ public class Main {
           Void aVoid = (Void) object;
         },
         Void.class);
-    assertThrowsClassCastException(
-        () -> {
-          Baz baz = (Baz) object;
-        },
-        "String");
-    assertThrowsClassCastException(
-        () -> {
-          Qux qux = (Qux) object;
-        },
-        "<native function>");
+
+    if (!isJvm()) {
+      // Baz is a native JsType pointing to JavaScript string; the assertion does not make sense in
+      // Java/JVM.
+      assertThrowsClassCastException(
+          () -> {
+            Baz baz = (Baz) object;
+          },
+          "String");
+
+      // Qux is a native function; the assertion does not make sense in Java/JVM.
+      assertThrowsClassCastException(
+          () -> {
+            Qux qux = (Qux) object;
+          },
+          "<native function>");
+    }
   }
 
   private static void testCasts_erasureCastOnThrow() {
