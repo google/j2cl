@@ -65,7 +65,7 @@ fun Renderer.renderStatement(statement: Statement) {
 }
 
 private fun Renderer.renderAssertStatement(assertStatement: AssertStatement) {
-  render("assert")
+  renderQualifiedName("kotlin.assert")
   renderInParentheses { renderExpression(assertStatement.expression) }
   assertStatement.message?.let {
     render(" ")
@@ -197,7 +197,7 @@ private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {
 }
 
 private fun Renderer.renderSynchronizedStatement(synchronizedStatement: SynchronizedStatement) {
-  render("synchronized")
+  renderQualifiedName("kotlin.synchronized")
   renderInParentheses { renderExpression(synchronizedStatement.expression) }
   render(" ")
   renderBlock(synchronizedStatement.body)

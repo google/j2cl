@@ -95,7 +95,9 @@ private fun Renderer.renderField(field: Field) {
   val isFinal = field.descriptor.isFinal
   val typeDescriptor = field.descriptor.typeDescriptor
 
-  render("@kotlin.jvm.JvmField ")
+  render("@")
+  renderQualifiedName("kotlin.jvm.JvmField")
+  render(" ")
   render(if (isFinal) "val " else "var ")
   renderIdentifier(field.descriptor.ktMangledName)
   render(": ")
@@ -113,7 +115,8 @@ private fun Renderer.renderInitializerBlock(initializerBlock: InitializerBlock) 
 
 private fun Renderer.renderMethodHeader(method: Method) {
   if (method.isStatic) {
-    render("@kotlin.jvm.JvmStatic")
+    render("@")
+    renderQualifiedName("kotlin.jvm.JvmStatic")
     renderNewLine()
   }
   val methodDescriptor = method.descriptor

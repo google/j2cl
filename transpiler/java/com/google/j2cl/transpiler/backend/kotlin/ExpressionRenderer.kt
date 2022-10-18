@@ -98,16 +98,16 @@ private fun Renderer.renderArrayLength(arrayLength: ArrayLength) {
 
 private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
   when (val componentTypeDescriptor = arrayLiteral.typeDescriptor.componentTypeDescriptor!!) {
-    PrimitiveTypes.BOOLEAN -> render("kotlin.booleanArrayOf")
-    PrimitiveTypes.CHAR -> render("kotlin.charArrayOf")
-    PrimitiveTypes.BYTE -> render("kotlin.byteArrayOf")
-    PrimitiveTypes.SHORT -> render("kotlin.shortArrayOf")
-    PrimitiveTypes.INT -> render("kotlin.intArrayOf")
-    PrimitiveTypes.LONG -> render("kotlin.longArrayOf")
-    PrimitiveTypes.FLOAT -> render("kotlin.floatArrayOf")
-    PrimitiveTypes.DOUBLE -> render("kotlin.doubleArrayOf")
+    PrimitiveTypes.BOOLEAN -> renderQualifiedName("kotlin.booleanArrayOf")
+    PrimitiveTypes.CHAR -> renderQualifiedName("kotlin.charArrayOf")
+    PrimitiveTypes.BYTE -> renderQualifiedName("kotlin.byteArrayOf")
+    PrimitiveTypes.SHORT -> renderQualifiedName("kotlin.shortArrayOf")
+    PrimitiveTypes.INT -> renderQualifiedName("kotlin.intArrayOf")
+    PrimitiveTypes.LONG -> renderQualifiedName("kotlin.longArrayOf")
+    PrimitiveTypes.FLOAT -> renderQualifiedName("kotlin.floatArrayOf")
+    PrimitiveTypes.DOUBLE -> renderQualifiedName("kotlin.doubleArrayOf")
     else -> {
-      render("kotlin.arrayOf")
+      renderQualifiedName("kotlin.arrayOf")
       renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
     }
   }
@@ -219,7 +219,8 @@ private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOf
     testTypeDescriptor is ArrayTypeDescriptor &&
       !testTypeDescriptor.componentTypeDescriptor!!.isPrimitive
   ) {
-    render("kotlin.Array<*>")
+    renderQualifiedName("kotlin.Array")
+    render("<*>")
   } else {
     renderTypeDescriptor(
       instanceOfExpression.testTypeDescriptor.toNonNullable(),
@@ -331,7 +332,8 @@ internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
 }
 
 private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
-  render("kotlin.run ")
+  renderQualifiedName("kotlin.run")
+  render(" ")
   renderInCurlyBrackets {
     renderStartingWithNewLines(multiExpression.expressions) { expression ->
       renderExpression(expression)
@@ -363,7 +365,7 @@ private fun Renderer.renderNewArray(
     if (nextDimension is NullLiteral) {
       renderArrayOfNulls(componentTypeDescriptor, firstDimension)
     } else {
-      render("kotlin.Array")
+      renderQualifiedName("kotlin.Array")
       renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
@@ -383,17 +385,19 @@ private fun Renderer.renderPrimitiveArrayOf(
   componentTypeDescriptor: PrimitiveTypeDescriptor,
   dimension: Expression
 ) {
-  when (componentTypeDescriptor) {
-    PrimitiveTypes.BOOLEAN -> render("kotlin.BooleanArray")
-    PrimitiveTypes.CHAR -> render("kotlin.CharArray")
-    PrimitiveTypes.BYTE -> render("kotlin.ByteArray")
-    PrimitiveTypes.SHORT -> render("kotlin.ShortArray")
-    PrimitiveTypes.INT -> render("kotlin.IntArray")
-    PrimitiveTypes.LONG -> render("kotlin.LongArray")
-    PrimitiveTypes.FLOAT -> render("kotlin.FloatArray")
-    PrimitiveTypes.DOUBLE -> render("kotlin.DoubleArray")
-    else -> throw InternalCompilerError("renderPrimitiveArrayOf($componentTypeDescriptor)")
-  }
+  renderQualifiedName(
+    when (componentTypeDescriptor) {
+      PrimitiveTypes.BOOLEAN -> "kotlin.BooleanArray"
+      PrimitiveTypes.CHAR -> "kotlin.CharArray"
+      PrimitiveTypes.BYTE -> "kotlin.ByteArray"
+      PrimitiveTypes.SHORT -> "kotlin.ShortArray"
+      PrimitiveTypes.INT -> "kotlin.IntArray"
+      PrimitiveTypes.LONG -> "kotlin.LongArray"
+      PrimitiveTypes.FLOAT -> "kotlin.FloatArray"
+      PrimitiveTypes.DOUBLE -> "kotlin.DoubleArray"
+      else -> throw InternalCompilerError("renderPrimitiveArrayOf($componentTypeDescriptor)")
+    }
+  )
   renderInParentheses { renderExpression(dimension) }
 }
 
@@ -401,7 +405,7 @@ private fun Renderer.renderArrayOfNulls(
   componentTypeDescriptor: TypeDescriptor,
   dimension: Expression
 ) {
-  render("kotlin.arrayOfNulls")
+  renderQualifiedName("kotlin.arrayOfNulls")
   renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonNullable()) }
   renderInParentheses { renderExpression(dimension) }
 }

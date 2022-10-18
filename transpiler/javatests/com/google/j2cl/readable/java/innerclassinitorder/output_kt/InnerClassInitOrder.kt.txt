@@ -9,44 +9,44 @@ open class InnerClassInitOrder {
 
  open fun testOuterThisFromSuperCall() {
   OuterRefFromSuperCtorCall()
-  assert(this.number === 100)
+  kotlin.assert(this.number === 100)
  }
 
  open fun testOuterThisFromThisCall() {
   OuterRefFromThisCtorCall()
-  assert(this.number === 1100)
+  kotlin.assert(this.number === 1100)
  }
 
  open fun testExtendsNested() {
   val o: innerclassinitorder.InnerClassInitOrder.ESOuter? = innerclassinitorder.InnerClassInitOrder.ESOuter()
-  assert(1 === o!!.ESInner().value)
-  assert(2 === o!!.ESInner(2).value)
-  assert(1 === innerclassinitorder.InnerClassInitOrder.ESInnerSubclass(o).value)
-  assert(2 === innerclassinitorder.InnerClassInitOrder.ESInnerSubclass(2, o).value)
+  kotlin.assert(1 === o!!.ESInner().value)
+  kotlin.assert(2 === o!!.ESInner(2).value)
+  kotlin.assert(1 === innerclassinitorder.InnerClassInitOrder.ESInnerSubclass(o).value)
+  kotlin.assert(2 === innerclassinitorder.InnerClassInitOrder.ESInnerSubclass(2, o).value)
  }
 
  open fun testExtendsNestedWithGenerics() {
   val o: innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>? = innerclassinitorder.InnerClassInitOrder.ESWGOuter<kotlin.String?>()
-  assert(1 === o!!.ESWGInner().value)
-  assert(2 === o!!.ESWGInner(2).value)
-  assert(1 === innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass(o).value)
-  assert(2 === innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass(2, o).value)
+  kotlin.assert(1 === o!!.ESWGInner().value)
+  kotlin.assert(2 === o!!.ESWGInner(2).value)
+  kotlin.assert(1 === innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass(o).value)
+  kotlin.assert(2 === innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass(2, o).value)
  }
 
  open fun testInnerClassCtors() {
   val p1: innerclassinitorder.InnerClassInitOrder.P1<*>? = innerclassinitorder.InnerClassInitOrder.P1<kotlin.Any?>() as innerclassinitorder.InnerClassInitOrder.P1<*>?
-  assert(1 === p1!!.value)
-  assert(2 === innerclassinitorder.InnerClassInitOrder.P1<kotlin.Any?>(2).value)
+  kotlin.assert(1 === p1!!.value)
+  kotlin.assert(2 === innerclassinitorder.InnerClassInitOrder.P1<kotlin.Any?>(2).value)
   val p2: innerclassinitorder.InnerClassInitOrder.P1<*>.P2<*>? = p1!!.P2<kotlin.Any?>() as innerclassinitorder.InnerClassInitOrder.P1<*>.P2<*>?
-  assert(1 === p2!!.value)
-  assert(2 === p1!!.P2<kotlin.Any?>(2).value)
-  assert(1 === p2!!.P3<kotlin.Any?>().value)
-  assert(2 === p2!!.P3<kotlin.Any?>(2).value)
+  kotlin.assert(1 === p2!!.value)
+  kotlin.assert(2 === p1!!.P2<kotlin.Any?>(2).value)
+  kotlin.assert(1 === p2!!.P3<kotlin.Any?>().value)
+  kotlin.assert(2 === p2!!.P3<kotlin.Any?>(2).value)
  }
 
  open fun testInnerClassInitialization() {
   InnerClass()
-  assert(this.number === 1111)
+  kotlin.assert(this.number === 1111)
  }
 
  open fun testInnerClassLoop() {
@@ -76,7 +76,7 @@ open class InnerClassInitOrder {
    val theAp_1: ___1AddNumber? = theAp
    theAp_1!!.act()
   }
-  assert(this.number === 1156)
+  kotlin.assert(this.number === 1156)
  }
 
  @kotlin.jvm.JvmField val outer_private_innerclassinitorder_InnerClassInitOrder: innerclassinitorder.InnerClassInitOrder.Outer? = innerclassinitorder.InnerClassInitOrder.Outer(1)
@@ -85,42 +85,42 @@ open class InnerClassInitOrder {
 
  open fun testOuterIsNotSuper() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.OuterIsNotSuper()
-  assert(2 === x!!.getValue())
+  kotlin.assert(2 === x!!.getValue())
  }
 
  open fun testOuterIsNotSuperAnon() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = object : OuterIsNotSuper() {}
-  assert(2 === x!!.getValue())
+  kotlin.assert(2 === x!!.getValue())
  }
 
  open fun testQualifiedSuperCall() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall? = innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall()
-  assert(2 === x!!.getValue())
+  kotlin.assert(2 === x!!.getValue())
  }
 
  open fun testQualifiedSuperCallAnon() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall? = object : innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall() {}
-  assert(2 === x!!.getValue())
+  kotlin.assert(2 === x!!.getValue())
  }
 
  open fun testSuperDispatch() {
-  assert(1 === this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.checkDispatchFromSub1())
-  assert(1 === this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.checkDispatchFromSub2())
+  kotlin.assert(1 === this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.checkDispatchFromSub1())
+  kotlin.assert(1 === this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.checkDispatchFromSub2())
  }
 
  open fun testUnqualifiedAlloc() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.unqualifiedAlloc()
-  assert(2 === x!!.getValue())
+  kotlin.assert(2 === x!!.getValue())
  }
 
  open fun testUnqualifiedSuperCall() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.TestUnqualifiedSuperCall()
-  assert(2 === x!!.getValue())
+  kotlin.assert(2 === x!!.getValue())
  }
 
  open fun testUnqualifiedSuperCallAnon() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = object : TestUnqualifiedSuperCall() {}
-  assert(2 === x!!.getValue())
+  kotlin.assert(2 === x!!.getValue())
  }
 
  companion object {

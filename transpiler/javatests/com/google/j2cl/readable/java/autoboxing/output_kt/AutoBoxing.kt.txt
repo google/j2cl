@@ -241,32 +241,32 @@ open class AutoBoxing {
   var boxr: kotlin.Boolean = false
   boxr = boxB1 === boxB2
   br = boxB1 === boxB2
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = boxB1 !== boxB2
   br = boxB1 !== boxB2
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = boxB1!!.booleanValue().xor(boxB2!!.booleanValue())
   br = boxB1!!.booleanValue().xor(boxB2!!.booleanValue())
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = boxB1!!.booleanValue().and(boxB2!!.booleanValue())
   br = boxB1!!.booleanValue().and(boxB2!!.booleanValue())
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = boxB1!!.booleanValue().or(boxB2!!.booleanValue())
   br = boxB1!!.booleanValue().or(boxB2!!.booleanValue())
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = boxB1!!.booleanValue() && boxB2!!.booleanValue()
   br = boxB1!!.booleanValue() && boxB2!!.booleanValue()
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = boxB1!!.booleanValue() || boxB2!!.booleanValue()
   br = boxB1!!.booleanValue() || boxB2!!.booleanValue()
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = kotlin.run {
    boxB1 = boxB2
    boxB1
@@ -275,8 +275,8 @@ open class AutoBoxing {
    boxB1 = boxB2
    boxB1
   }!!.booleanValue()
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = kotlin.run {
    boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().and(boxB2!!.booleanValue()))
    boxB1
@@ -285,8 +285,8 @@ open class AutoBoxing {
    boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().and(boxB2!!.booleanValue()))
    boxB1
   }!!.booleanValue()
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = kotlin.run {
    boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().or(boxB2!!.booleanValue()))
    boxB1
@@ -295,8 +295,8 @@ open class AutoBoxing {
    boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().or(boxB2!!.booleanValue()))
    boxB1
   }!!.booleanValue()
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   boxr = kotlin.run {
    boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().xor(boxB2!!.booleanValue()))
    boxB1
@@ -305,8 +305,8 @@ open class AutoBoxing {
    boxB1 = kotlin.Boolean.valueOf(boxB1!!.booleanValue().xor(boxB2!!.booleanValue()))
    boxB1
   }!!.booleanValue()
-  assert(boxr)
-  assert(br)
+  kotlin.assert(boxr)
+  kotlin.assert(br)
   var boxB: kotlin.Boolean? = null
   boxB = kotlin.Boolean.valueOf(!boxB!!.booleanValue())
   boxB = kotlin.Boolean.valueOf(boxB!!.booleanValue() && boxB!!.booleanValue())
@@ -325,23 +325,23 @@ open class AutoBoxing {
  open fun testUnboxingEquality() {
   val boxB: kotlin.Boolean? = kotlin.Boolean(true)
   val b: kotlin.Boolean = false
-  assert(boxB === boxB)
-  assert(boxB!!.booleanValue() === b)
-  assert(b !== b)
-  assert(b !== boxB!!.booleanValue())
+  kotlin.assert(boxB === boxB)
+  kotlin.assert(boxB!!.booleanValue() === b)
+  kotlin.assert(b !== b)
+  kotlin.assert(b !== boxB!!.booleanValue())
   val boxI: kotlin.Int? = kotlin.Int(1)
   val i: kotlin.Int = 1
-  assert(boxI === boxI)
-  assert(boxI!!.toInt() === i)
-  assert(i !== i)
-  assert(i !== boxI!!.toInt())
+  kotlin.assert(boxI === boxI)
+  kotlin.assert(boxI!!.toInt() === i)
+  kotlin.assert(i !== i)
+  kotlin.assert(i !== boxI!!.toInt())
  }
 
  open fun testAssertStatement() {
   val boxB: kotlin.Boolean? = kotlin.Boolean(true)
   val b: kotlin.Boolean = true
-  assert(boxB!!.booleanValue())
-  assert(b)
+  kotlin.assert(boxB!!.booleanValue())
+  kotlin.assert(b)
  }
 
  open fun testUnbox_withCast() {
@@ -361,32 +361,32 @@ open class AutoBoxing {
   fun <T: kotlin.Long?> testUnboxingFromTypeVariable() {
    var n: T? = kotlin.Long.valueOf(10L)
    var l: kotlin.Long = n!!.toLong()
-   assert(l === 10L)
+   kotlin.assert(l === 10L)
    n = kotlin.Long.valueOf(n!!.toLong() + 1L)
    open class ___1Local<T: kotlin.Long?> {
     open fun toLong(l: T): kotlin.Long {
-     assert(l!!.equals(kotlin.Long.valueOf(11L)))
+     kotlin.assert(l!!.equals(kotlin.Long.valueOf(11L)))
      return l!!.toLong()
     }
    }
    l = ___1Local<kotlin.Long?>().toLong(kotlin.Long.valueOf(11L))
-   assert(l === 11L)
+   kotlin.assert(l === 11L)
   }
 
   @kotlin.jvm.JvmStatic
   fun <T> testUnboxingFromIntersectionType() where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long>? {
    var n: T? = kotlin.Long.valueOf(10L)
    var l: kotlin.Long = n!!.toLong()
-   assert(l === 10L)
+   kotlin.assert(l === 10L)
    n = kotlin.Long.valueOf(n!!.toLong() + 1L)
    open class ___2Local<T> where T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long>?, T: kotlin.Long?, T: kotlin.Comparable<kotlin.Long>? {
     open fun toLong(l: T): kotlin.Long {
-     assert(l!!.equals(kotlin.Long.valueOf(11L)))
+     kotlin.assert(l!!.equals(kotlin.Long.valueOf(11L)))
      return l!!.toLong()
     }
    }
    l = ___2Local<kotlin.Long?>().toLong(kotlin.Long.valueOf(11L))
-   assert(l === 11L)
+   kotlin.assert(l === 11L)
    val i: kotlin.Int = kotlin.Int.valueOf(10)!!.toInt()
   }
  }
