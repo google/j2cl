@@ -16,6 +16,7 @@
 package staticinitsuper;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -121,7 +122,14 @@ public class Main {
   public static void testInitializationViaInterfaceStaticFieldAccess() {
     loadOrder.clear();
     Object o = Z3.o;
-    assertExpectedOrder("Z1", "Z3");
+
+    // TODO(b/254306517): Initialization of interfaces should never trigger the initialization of
+    // super interfaces. Merge the test when this is fixed.
+    if (isJvm()) {
+      assertExpectedOrder("Z3");
+    } else {
+      assertExpectedOrder("Z1", "Z3");
+    }
 
     loadOrder.clear();
     o = Z2.o;
