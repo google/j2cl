@@ -20,5 +20,7 @@ j2wasm_library(
 integration_test(
     name = "wideningfloat",
     srcs = ["Main.java"],
+    # Code running on the JVM honors float-double precision differences
+    enable_jvm_test = False,
     enable_kt = False,
 )
