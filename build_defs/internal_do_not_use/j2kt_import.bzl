@@ -10,35 +10,36 @@ in hard to debug errors!
 load(":provider.bzl", "J2ktInfo")
 
 def _j2kt_jvm_import_impl(ctx):
-    java_info = ctx.attr.jar[JavaInfo]
+    kt_runtime_java_infos = []
+    if ctx.attr.runtime:
+        kt_runtime_java_infos.append(ctx.attr.runtime[JavaInfo])
+
     return [
         J2ktInfo(
             _private_ = struct(
-                java_info = java_info,
+                java_info = ctx.attr.jar[JavaInfo],
             ),
         ),
-        java_info,
-    ]
+    ] + kt_runtime_java_infos
 
 def _j2kt_native_import_impl(ctx):
-    java_info = ctx.attr.jar[JavaInfo]
-
-    kt_native_info = None
+    kt_native_infos = []
 
     return [
         J2ktInfo(
             _private_ = struct(
-                java_info = java_info,
-                import_only = not kt_native_info,
+                java_info = ctx.attr.jar[JavaInfo],
             ),
         ),
-        java_info,
-    ] + ([kt_native_info] if kt_native_info else [])
+    ] + kt_native_infos
 
 j2kt_jvm_import = rule(
     implementation = _j2kt_jvm_import_impl,
     fragments = ["java"],
-    attrs = {"jar": attr.label(providers = [JavaInfo])},
+    attrs = {
+        "jar": attr.label(providers = [JavaInfo]),
+        "runtime": attr.label(providers = [JavaInfo]),
+    },
     provides = [J2ktInfo],
 )
 
