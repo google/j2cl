@@ -90,6 +90,7 @@ public class ObjectsTest extends GWTTestCase {
     assertFalse(Objects.equals("not null", null));
     assertTrue(Objects.equals("a", "a"));
     assertFalse(Objects.equals("a", "b"));
+    assertTrue(Objects.equals(new String("abc"), new String("abc")));
 
     assertFalse(Objects.equals(new Object(), new Object()));
 
