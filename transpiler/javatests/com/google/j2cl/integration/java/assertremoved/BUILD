@@ -14,6 +14,8 @@ integration_test(
     ],
     disable_uncompiled_test = True,
     disable_wasm_dev_test = True,
+    # TODO(b/249154012): Turn this on when we can disable assertions on the JVM.
+    enable_jvm_test = False,
     enable_kt = False,
     tags = ["manual"],
 )
