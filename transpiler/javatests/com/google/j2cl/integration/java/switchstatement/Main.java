@@ -212,6 +212,7 @@ public class Main {
         if (i == 1) {
           break;
         }
+        // fall through
       default:
         result = true;
     }
@@ -226,6 +227,7 @@ public class Main {
         while (true) {
           break INNER;
         }
+        // fall through
       default:
         result = true;
     }
