@@ -261,6 +261,42 @@ open class SwitchStatement {
   } while (false)
  }
 
+ fun testNonFallThrough_defaultIsNotLast_private_switchstatement_SwitchStatement(i: kotlin.Int) {
+  SWITCH@ do {
+   CASE@ do {
+    CASE_1@ do {
+     CASE_2@ do {
+      CASE_3@ do {
+       when (i) {
+        1 -> {
+         break@CASE_3
+        }
+        2 -> {
+         break@CASE_2
+        }
+        3 -> {
+         break@CASE
+        }
+        else -> {
+         break@CASE_1
+        }
+       }
+       break@SWITCH
+      } while (false)
+      this.foo_private_switchstatement_SwitchStatement(1)
+      break@SWITCH
+     } while (false)
+     this.foo_private_switchstatement_SwitchStatement(2)
+     break@SWITCH
+    } while (false)
+    this.foo_private_switchstatement_SwitchStatement(3)
+    break@SWITCH
+   } while (false)
+   this.foo_private_switchstatement_SwitchStatement(4)
+   break@SWITCH
+  } while (false)
+ }
+
  fun testFallThroughCase_private_switchstatement_SwitchStatement(i: kotlin.Int) {
   SWITCH@ do {
    CASE@ do {
@@ -418,6 +454,96 @@ open class SwitchStatement {
     }
    }
   } while (false)
+ }
+
+ fun testDefaultIsNotLast_fallThrough_private_switchstatement_SwitchStatement(i: kotlin.Int) {
+  SWITCH@ do {
+   CASE@ do {
+    CASE_1@ do {
+     CASE_2@ do {
+      CASE_3@ do {
+       when (i) {
+        1 -> {
+         break@CASE_3
+        }
+        2 -> {
+         break@CASE_2
+        }
+        4 -> {
+         break@CASE
+        }
+        else -> {
+         break@CASE_1
+        }
+       }
+       break@SWITCH
+      } while (false)
+      this.foo_private_switchstatement_SwitchStatement(1)
+     } while (false)
+     this.foo_private_switchstatement_SwitchStatement(2)
+    } while (false)
+    this.foo_private_switchstatement_SwitchStatement(3)
+   } while (false)
+   this.foo_private_switchstatement_SwitchStatement(4)
+  } while (false)
+ }
+
+ fun testDefaultNotLast_fallThroughCase_private_switchstatement_SwitchStatement(i: kotlin.Int): kotlin.Int {
+  var result: kotlin.Int = 0
+  SWITCH@ do {
+   CASE@ do {
+    CASE_1@ do {
+     CASE_2@ do {
+      when (i) {
+       1 -> {
+        break@CASE_2
+       }
+       3 -> {
+        break@CASE
+       }
+       else -> {
+        break@CASE_1
+       }
+      }
+      break@SWITCH
+     } while (false)
+    } while (false)
+    result = result + 10
+    break@SWITCH
+   } while (false)
+   result = result + 100
+   break@SWITCH
+  } while (false)
+  return result
+ }
+
+ fun testDefaultNotLast_fallThroughDefault_private_switchstatement_SwitchStatement(i: kotlin.Int): kotlin.Int {
+  var result: kotlin.Int = 0
+  SWITCH@ do {
+   CASE@ do {
+    CASE_1@ do {
+     CASE_2@ do {
+      when (i) {
+       1 -> {
+        break@CASE_2
+       }
+       3 -> {
+        break@CASE
+       }
+       else -> {
+        break@CASE_1
+       }
+      }
+      break@SWITCH
+     } while (false)
+     result = result + 10
+     break@SWITCH
+    } while (false)
+   } while (false)
+   result = result + 100
+   break@SWITCH
+  } while (false)
+  return result
  }
 
  fun foo_private_switchstatement_SwitchStatement(i: kotlin.Int) {}

@@ -284,6 +284,23 @@
 [break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughBlockCase"
 [foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThroughBlockCase"
 [break;] => [break;] "switchstatement.SwitchStatement.testNonFallThroughBlockCase"
+[testNonFallThrough_defaultIsNotLast] => [m_testNonFallThrough_defaultIsNotLast__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
+[foo(3);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(3);] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
+[foo(4);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(4);] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonFallThrough_defaultIsNotLast"
 [testFallThroughCase] => [m_testFallThroughCase__int__void_$p_switchstatement_SwitchStatement]
 [i] => [i] "i"
 [switch (i) {
@@ -420,6 +437,51 @@
 [foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testFallThoughLastCase"
 [break;] => [break;] "switchstatement.SwitchStatement.testFallThoughLastCase"
 [foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testFallThoughLastCase"
+[testDefaultIsNotLast_fallThrough] => [m_testDefaultIsNotLast_fallThrough__int__void_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[switch (i) {
+      case 1:
+...        // fall through
+    }] => [switch (i) {
+   case 1:
+...    this.m_foo__int__void_$p_switchstatement_SwitchStatement(4);
+  }] "switchstatement.SwitchStatement.testDefaultIsNotLast_fallThrough"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testDefaultIsNotLast_fallThrough"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testDefaultIsNotLast_fallThrough"
+[foo(3);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(3);] "switchstatement.SwitchStatement.testDefaultIsNotLast_fallThrough"
+[foo(4);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(4);] "switchstatement.SwitchStatement.testDefaultIsNotLast_fallThrough"
+[testDefaultNotLast_fallThroughCase] => [m_testDefaultNotLast_fallThroughCase__int__int_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[int result = 0;] => [let result = 0;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughCase"
+[result] => [result] "result"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughCase"
+[result += 10;] => [result = result + 10 | 0;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughCase"
+[result += 100;] => [result = result + 100 | 0;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughCase"
+[break;] => [break;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughCase"
+[return result;] => [return result;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughCase"
+[testDefaultNotLast_fallThroughDefault] => [m_testDefaultNotLast_fallThroughDefault__int__int_$p_switchstatement_SwitchStatement]
+[i] => [i] "i"
+[int result = 0;] => [let result = 0;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
+[result] => [result] "result"
+[switch (i) {
+      case 1:
+...        break;
+    }] => [switch (i) {
+   case 1:
+...    break;
+  }] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
+[result += 10;] => [result = result + 10 | 0;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
+[break;] => [break;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
+[result += 100;] => [result = result + 100 | 0;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
+[break;] => [break;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
+[return result;] => [return result;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
 [foo] => [m_foo__int__void_$p_switchstatement_SwitchStatement]
 [i] => [i] "i"
 [SwitchStatement] => [$clinit]

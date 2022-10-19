@@ -242,6 +242,23 @@ public class SwitchStatement {
     }
   }
 
+  private void testNonFallThrough_defaultIsNotLast(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        break;
+      case 2:
+        foo(2);
+        break;
+      default:
+        foo(3);
+        break;
+      case 3:
+        foo(4);
+        break;
+    }
+  }
+
   private void testFallThroughCase(int i) {
     switch (i) {
       case 1:
@@ -339,6 +356,53 @@ public class SwitchStatement {
         foo(2);
         // fall through
     }
+  }
+
+  private void testDefaultIsNotLast_fallThrough(int i) {
+    switch (i) {
+      case 1:
+        foo(1);
+        // fall through
+      case 2:
+        foo(2);
+        // fall through
+      default:
+        foo(3);
+        // fall through
+      case 4:
+        foo(4);
+        // fall through
+    }
+  }
+
+  private int testDefaultNotLast_fallThroughCase(int i) {
+    int result = 0;
+    switch (i) {
+      case 1:
+        // fall through
+      default:
+        result += 10;
+        break;
+      case 3:
+        result += 100;
+        break;
+    }
+    return result;
+  }
+
+  private int testDefaultNotLast_fallThroughDefault(int i) {
+    int result = 0;
+    switch (i) {
+      case 1:
+        result += 10;
+        break;
+      default:
+        // fall through
+      case 3:
+        result += 100;
+        break;
+    }
+    return result;
   }
 
   private void foo(int i) {}

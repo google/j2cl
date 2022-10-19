@@ -233,6 +233,23 @@ class SwitchStatement extends j_l_Object {
   }
  }
  /** @nodts */
+ m_testNonFallThrough_defaultIsNotLast__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {
+  switch (i) {
+   case 1: 
+    this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);
+    break;
+   case 2: 
+    this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
+    break;
+   default: 
+    this.m_foo__int__void_$p_switchstatement_SwitchStatement(3);
+    break;
+   case 3: 
+    this.m_foo__int__void_$p_switchstatement_SwitchStatement(4);
+    break;
+  }
+ }
+ /** @nodts */
  m_testFallThroughCase__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {
   switch (i) {
    case 1: 
@@ -320,6 +337,47 @@ class SwitchStatement extends j_l_Object {
    default: 
     this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
   }
+ }
+ /** @nodts */
+ m_testDefaultIsNotLast_fallThrough__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {
+  switch (i) {
+   case 1: 
+    this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);
+   case 2: 
+    this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);
+   default: 
+    this.m_foo__int__void_$p_switchstatement_SwitchStatement(3);
+   case 4: 
+    this.m_foo__int__void_$p_switchstatement_SwitchStatement(4);
+  }
+ }
+ /** @nodts @return {number} */
+ m_testDefaultNotLast_fallThroughCase__int__int_$p_switchstatement_SwitchStatement(/** number */ i) {
+  let result = 0;
+  switch (i) {
+   case 1: 
+   default: 
+    result = result + 10 | 0;
+    break;
+   case 3: 
+    result = result + 100 | 0;
+    break;
+  }
+  return result;
+ }
+ /** @nodts @return {number} */
+ m_testDefaultNotLast_fallThroughDefault__int__int_$p_switchstatement_SwitchStatement(/** number */ i) {
+  let result = 0;
+  switch (i) {
+   case 1: 
+    result = result + 10 | 0;
+    break;
+   default: 
+   case 3: 
+    result = result + 100 | 0;
+    break;
+  }
+  return result;
  }
  /** @nodts */
  m_foo__int__void_$p_switchstatement_SwitchStatement(/** number */ i) {}

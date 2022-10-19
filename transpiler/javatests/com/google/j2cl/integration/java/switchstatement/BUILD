@@ -8,5 +8,5 @@ package(licenses = ["notice"])
 integration_test(
     name = "switchstatement",
     srcs = glob(["*.java"]),
-    enable_kt = False,
+    enable_kt_native = False,  # testSwitchWithErasureCast() is failing
 )

@@ -18,7 +18,9 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
@@ -156,19 +158,29 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
       Expression switchExpression,
       List<SwitchCaseWithLabel> switchCasesWithLabels,
       SourcePosition sourcePosition) {
+    ImmutableList<SwitchCase> cases =
+        switchCasesWithLabels.stream()
+            .map(
+                switchCaseWithLabel ->
+                    createCaseWithBreak(
+                        switchCaseWithLabel.getSwitchCase(),
+                        switchCaseWithLabel.getLabel(),
+                        sourcePosition))
+            .collect(toImmutableList());
+
+    // Move `default` case at the end. Note that since this is just the dispatching switch, it does
+    // not have fallthroughs and can be arbitrarily reordered.
+    cases =
+        Streams.concat(
+                cases.stream().filter(it -> it.getCaseExpression() != null),
+                cases.stream().filter(it -> it.getCaseExpression() == null))
+            .collect(toImmutableList());
+
     Statement rewrittenSwitchStatement =
         SwitchStatement.newBuilder()
             .setSourcePosition(sourcePosition)
             .setSwitchExpression(switchExpression)
-            .setCases(
-                switchCasesWithLabels.stream()
-                    .map(
-                        switchCaseWithLabel ->
-                            createCaseWithBreak(
-                                switchCaseWithLabel.getSwitchCase(),
-                                switchCaseWithLabel.getLabel(),
-                                sourcePosition))
-                    .collect(toImmutableList()))
+            .setCases(cases)
             .build();
 
     return Block.newBuilder()
@@ -264,14 +276,20 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
         .build();
   }
 
+  /**
+   * For a switch to be directly expressible as a when in Kotlin two conditions have to be met: the
+   * default case needs to be the last one, and there should not be any fallthroughs except for
+   * empty cases.
+   */
   private static boolean canConvertDirectlyToWhen(SwitchStatement switchStatement) {
     List<SwitchCase> cases = switchStatement.getCases();
     List<SwitchCase> casesExceptLast = cases.isEmpty() ? cases : cases.subList(0, cases.size() - 1);
     return casesExceptLast.stream()
         .allMatch(
             switchCase ->
-                switchCase.getStatements().isEmpty()
-                    || breaksOutOfSwitchStatement(switchCase.getStatements()));
+                switchCase.getCaseExpression() != null
+                    && (switchCase.getStatements().isEmpty()
+                        || breaksOutOfSwitchStatement(switchCase.getStatements())));
   }
 
   /**

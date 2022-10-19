@@ -196,6 +196,14 @@ public class Main {
 
     assertFalse(testCascade_breakOuter(1));
     assertTrue(testCascade_breakOuter(2));
+
+    assertEquals(10, testDefaultNotLast_fallThroughCase(1));
+    assertEquals(10, testDefaultNotLast_fallThroughCase(2));
+    assertEquals(100, testDefaultNotLast_fallThroughCase(3));
+
+    assertEquals(10, testDefaultNotLast_fallThroughDefault(1));
+    assertEquals(100, testDefaultNotLast_fallThroughDefault(2));
+    assertEquals(100, testDefaultNotLast_fallThroughDefault(3));
   }
 
   private static int testCascade_allFallThrough(int i) {
@@ -264,6 +272,36 @@ public class Main {
         }
       default:
         result = true;
+    }
+    return result;
+  }
+
+  private static int testDefaultNotLast_fallThroughCase(int i) {
+    int result = 0;
+    switch (i) {
+      case 1:
+        // fall through
+      default:
+        result += 10;
+        break;
+      case 3:
+        result += 100;
+        break;
+    }
+    return result;
+  }
+
+  private static int testDefaultNotLast_fallThroughDefault(int i) {
+    int result = 0;
+    switch (i) {
+      case 1:
+        result += 10;
+        break;
+      default:
+        // fall through
+      case 3:
+        result += 100;
+        break;
     }
     return result;
   }
