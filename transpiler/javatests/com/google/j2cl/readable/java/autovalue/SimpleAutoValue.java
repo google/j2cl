@@ -36,7 +36,7 @@ public abstract class SimpleAutoValue {
 
   public abstract int[] getArrayField();
 
-  // Potential collission with private field from AutoValue generated code.
+  // Potential collision with private field from AutoValue generated code.
   private int intField;
 
   static SimpleAutoValue create() {

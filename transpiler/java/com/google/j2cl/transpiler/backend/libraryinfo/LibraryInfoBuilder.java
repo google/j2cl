@@ -356,7 +356,7 @@ public final class LibraryInfoBuilder {
             ? memberDescriptor.computePropertyMangledName()
             : memberDescriptor.getMangledName();
 
-    // Avoid unintented collissions by using the seperate namespace for static and non-static.
+    // Avoid unintented collisions by using the seperate namespace for static and non-static.
     return memberDescriptor.isInstanceMember() ? mangledName + "_$i" : mangledName;
   }
 
