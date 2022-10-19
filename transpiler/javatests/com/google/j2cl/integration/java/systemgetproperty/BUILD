@@ -8,5 +8,7 @@ package(licenses = ["notice"])
 integration_test(
     name = "systemgetproperty",
     srcs = glob(["*.java"]),
+    # This test is specific to J2CL's implementation of System.getProperty().
+    enable_jvm_test = False,
     enable_kt = False,
 )
