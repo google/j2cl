@@ -18,6 +18,7 @@ package bridgemethods;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 /** Tests for bridge methods with accidental overriding. */
 public class Main {
@@ -186,7 +187,12 @@ public class Main {
     Child c = new Child();
 
     assertEquals("Parent", callByInterface(c, int1));
-    assertThrowsClassCastException(() -> callByInterface(c, short1), Integer.class);
+
+    // TODO(b/254148464): J2CL is more strict about erasure casts than JVM. Here JVM does not throw
+    // assertThrows while J2CL does.
+    if (!isJvm()) {
+      assertThrowsClassCastException(() -> callByInterface(c, short1), Integer.class);
+    }
 
     Parent pc = c;
     assertEquals("Parent", pc.foo(int1));

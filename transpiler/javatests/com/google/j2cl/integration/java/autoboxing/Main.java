@@ -435,8 +435,12 @@ public class Main {
         },
         String.class);
 
-    assertThrowsClassCastException(
-        () -> integerInStringRef.field = integerInStringRef.field, String.class);
+    // TODO(b/254148464): J2CL is more strict about erasure casts than JVM. Here JVM does not throw
+    // assertThrows while J2CL does.
+    if (!isJvm()) {
+      assertThrowsClassCastException(
+          () -> integerInStringRef.field = integerInStringRef.field, String.class);
+    }
 
     assertThrowsClassCastException(
         () -> {
