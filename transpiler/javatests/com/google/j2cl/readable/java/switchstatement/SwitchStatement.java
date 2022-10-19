@@ -246,6 +246,7 @@ public class SwitchStatement {
     switch (i) {
       case 1:
         foo(1);
+        // fall through
       default:
         foo(2);
         break;
@@ -260,6 +261,7 @@ public class SwitchStatement {
         do {
           break INNER_LABEL;
         } while (false);
+        // fall through
       default:
         foo(2);
         break;
@@ -274,6 +276,7 @@ public class SwitchStatement {
         do {
           continue INNER_LABEL;
         } while (false);
+        // fall through
       default:
         foo(2);
         break;
@@ -290,6 +293,7 @@ public class SwitchStatement {
           }
           return;
         }
+        // fall through
       default:
         foo(2);
         break;
@@ -303,6 +307,7 @@ public class SwitchStatement {
         if (false) {
           break;
         }
+        // fall through
       default:
         foo(2);
         break;
@@ -318,6 +323,7 @@ public class SwitchStatement {
         } else {
           foo(2);
         }
+        // fall through
       default:
         foo(2);
         break;
@@ -331,6 +337,7 @@ public class SwitchStatement {
         break;
       default:
         foo(2);
+        // fall through
     }
   }
 

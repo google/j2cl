@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
@@ -104,7 +105,7 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
-            if (!needsConversionToCascadingBlocks(switchStatement)) {
+            if (canConvertDirectlyToWhen(switchStatement)) {
               return switchStatement;
             }
 
@@ -263,19 +264,22 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
         .build();
   }
 
-  private static boolean needsConversionToCascadingBlocks(SwitchStatement switchStatement) {
+  private static boolean canConvertDirectlyToWhen(SwitchStatement switchStatement) {
     List<SwitchCase> cases = switchStatement.getCases();
     List<SwitchCase> casesExceptLast = cases.isEmpty() ? cases : cases.subList(0, cases.size() - 1);
     return casesExceptLast.stream()
-        .anyMatch(NormalizeSwitchStatementsKotlin::isNonEmptyFallThrough);
+        .allMatch(
+            switchCase ->
+                switchCase.getStatements().isEmpty()
+                    || breaksOutOfSwitchStatement(switchCase.getStatements()));
   }
 
-  private static boolean isNonEmptyFallThrough(SwitchCase switchCase) {
-    return switchCase.getStatements().stream()
-        .anyMatch(NormalizeSwitchStatementsKotlin::doesNotFallThrough);
-  }
-
-  private static boolean doesNotFallThrough(Statement statement) {
+  /**
+   * A conservative approximation of when a statement is guaranteed to exit the switch clause
+   * without falling through the next case clause. In particular labeled statements are completely
+   * skipped to avoid reasoning about local jumps in control flow.
+   */
+  private static boolean breaksOutOfSwitchStatement(Statement statement) {
     if (statement instanceof ReturnStatement) {
       return true;
     }
@@ -292,18 +296,22 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
 
     if (statement instanceof Block) {
       Block block = (Block) statement;
-      return block.getStatements().stream()
-          .anyMatch(NormalizeSwitchStatementsKotlin::doesNotFallThrough);
+      return breaksOutOfSwitchStatement(block.getStatements());
     }
 
     if (statement instanceof IfStatement) {
       IfStatement ifStatement = (IfStatement) statement;
       Statement elseStatement = ifStatement.getElseStatement();
-      return doesNotFallThrough(ifStatement.getThenStatement())
+      return breaksOutOfSwitchStatement(ifStatement.getThenStatement())
           && elseStatement != null
-          && doesNotFallThrough(elseStatement);
+          && breaksOutOfSwitchStatement(elseStatement);
     }
 
     return false;
+  }
+
+  private static boolean breaksOutOfSwitchStatement(List<Statement> statements) {
+    Statement lastStatement = Iterables.getLast(statements, null);
+    return lastStatement != null && breaksOutOfSwitchStatement(lastStatement);
   }
 }

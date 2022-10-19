@@ -15,6 +15,7 @@
  */
 package switchstatement;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
@@ -29,6 +30,7 @@ public class Main {
     testSwitchVariableDeclarations();
     testSwitchNull();
     testSwitchWithErasureCast();
+    testCascades();
   }
 
   private static void testSwitchValues() {
@@ -176,7 +178,11 @@ public class Main {
         });
   }
 
-  private static void testFallsThrough() {
+  private static void testCascades() {
+    assertEquals(3, testCascade_allFallThrough(1));
+    assertEquals(2, testCascade_allFallThrough(2));
+    assertEquals(1, testCascade_allFallThrough(3));
+
     assertFalse(testCascade_emptyCase(1));
     assertTrue(testCascade_emptyCase(2));
     assertTrue(testCascade_emptyCase(3));
@@ -190,6 +196,19 @@ public class Main {
 
     assertFalse(testCascade_breakOuter(1));
     assertTrue(testCascade_breakOuter(2));
+  }
+
+  private static int testCascade_allFallThrough(int i) {
+    int result = 0;
+    switch (i) {
+      case 1:
+        result++;
+      case 2:
+        result++;
+      default:
+        result++;
+    }
+    return result;
   }
 
   private static boolean testCascade_emptyCase(int i) {
