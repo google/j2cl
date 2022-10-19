@@ -20,6 +20,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastE
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.Wasm;
@@ -91,8 +92,12 @@ public class Main {
     assertTrue(boxToObject('a') instanceof Character);
   }
 
-  @Wasm("nop") // Works only in closure.
+  @Wasm("nop")
   private static void testBox_numberAsDouble() {
+    // Works only in closure.
+    if (isJvm()) {
+      return;
+    }
     assertTrue((takesObjectAndReturnsPrimitiveDouble(3) == 3));
     assertTrue((sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
     assertTrue((sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
