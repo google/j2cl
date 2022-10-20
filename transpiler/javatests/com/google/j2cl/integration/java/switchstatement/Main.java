@@ -211,8 +211,10 @@ public class Main {
     switch (i) {
       case 1:
         result++;
+        // fall through
       case 2:
         result++;
+        // fall through
       default:
         result++;
     }
