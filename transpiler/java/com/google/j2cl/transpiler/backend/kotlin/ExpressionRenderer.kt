@@ -37,6 +37,7 @@ import com.google.j2cl.transpiler.ast.KtInfo
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MultiExpression
 import com.google.j2cl.transpiler.ast.NewArray
 import com.google.j2cl.transpiler.ast.NewInstance
@@ -295,11 +296,15 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
   renderIdentifier(expression.target.ktMangledName)
   if (!expression.target.isKtProperty) {
-    val typeArguments = methodDescriptor.typeArguments
-    if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
-      renderTypeArguments(typeArguments)
-    }
+    renderTypeArguments(methodDescriptor)
     renderInvocationArguments(expression)
+  }
+}
+
+private fun Renderer.renderTypeArguments(methodDescriptor: MethodDescriptor) {
+  val typeArguments = methodDescriptor.typeArguments
+  if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
+    renderTypeArguments(typeArguments)
   }
 }
 
@@ -418,14 +423,18 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
     render("object : ")
   }
 
-  // Render fully-qualified type name if there's no qualifier, otherwise render qualifier and
-  // simple type name.
+  // Render qualified name if there's no qualifier, otherwise render simple name.
   val typeDeclaration = typeDescriptor.typeDeclaration
-  renderTypeDescriptor(
-    typeDescriptor,
-    asSuperType = true,
-    asSimple = typeDeclaration.isCapturingEnclosingInstance
-  )
+  if (typeDeclaration.isCapturingEnclosingInstance) {
+    renderIdentifier(typeDeclaration.ktSimpleName(asSuperType = true))
+  } else {
+    renderQualifiedName(typeDescriptor.ktQualifiedName(asSuperType = true))
+  }
+
+  val typeArguments = typeDescriptor.typeArguments()
+  if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
+    renderTypeArguments(typeArguments)
+  }
 
   // Render invocation for classes only - interfaces don't need it.
   if (typeDescriptor.isClass) {

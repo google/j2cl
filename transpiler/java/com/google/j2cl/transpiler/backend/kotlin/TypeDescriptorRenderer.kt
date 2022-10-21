@@ -25,13 +25,11 @@ import com.google.j2cl.transpiler.ast.TypeVariable
 
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
-  asSimple: Boolean = false,
   asSuperType: Boolean = false,
   projectRawToWildcards: Boolean = false
 ) =
   TypeDescriptorRenderer(
       this,
-      asSimple = asSimple,
       asSuperType = asSuperType,
       projectRawToWildcards = projectRawToWildcards
     )
@@ -48,9 +46,6 @@ private data class TypeDescriptorRenderer(
   /** Set of seen type descriptors used to detect recursion. */
   val seenTypeDescriptors: Set<TypeDescriptor> = setOf(),
 
-  /** Whether to render simple name. */
-  val asSimple: Boolean = false,
-
   // TODO(b/246842682): Remove when bridge types are materialized as TypeDescriptors
   /** Whether to render a super-type, using bridge name if present. */
   val asSuperType: Boolean = false,
@@ -60,7 +55,7 @@ private data class TypeDescriptorRenderer(
 ) {
   /** Renderer for child type descriptors, including: arguments, bounds, intersections, etc... */
   val child
-    get() = copy(asSimple = false, asSuperType = false)
+    get() = copy(asSuperType = false)
 
   fun render(typeDescriptor: TypeDescriptor) {
     copy(seenTypeDescriptors = seenTypeDescriptors + typeDescriptor.toNonNullable()).run {
@@ -87,11 +82,11 @@ private data class TypeDescriptorRenderer(
   fun renderDeclared(declaredTypeDescriptor: DeclaredTypeDescriptor) {
     val typeDeclaration = declaredTypeDescriptor.typeDeclaration
     val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
-    if (typeDeclaration.isLocal || asSimple) {
-      // Skip rendering package name or enclosing type.
-      renderer.renderIdentifier(declaredTypeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
-    } else if (enclosingTypeDescriptor != null) {
-      // Render the enclosing type if present.
+    if (typeDeclaration.isLocal || enclosingTypeDescriptor == null) {
+      renderer.renderQualifiedName(
+        declaredTypeDescriptor.ktQualifiedName(asSuperType = asSuperType)
+      )
+    } else {
       if (!typeDeclaration.isCapturingEnclosingInstance) {
         renderer.renderQualifiedName(enclosingTypeDescriptor.ktQualifiedName())
       } else {
@@ -99,10 +94,6 @@ private data class TypeDescriptorRenderer(
       }
       renderer.render(".")
       renderer.renderIdentifier(typeDeclaration.ktSimpleName)
-    } else {
-      renderer.renderQualifiedName(
-        declaredTypeDescriptor.ktQualifiedName(asSuperType = asSuperType)
-      )
     }
     renderArguments(declaredTypeDescriptor)
     renderNullableSuffix(declaredTypeDescriptor)
@@ -112,9 +103,7 @@ private data class TypeDescriptorRenderer(
     val arguments =
       declaredTypeDescriptor.typeArguments(projectRawToWildcards = projectRawToWildcards)
     if (arguments.isNotEmpty()) {
-      if (!asSuperType || arguments.all { it.isDenotable }) {
-        renderArguments(arguments)
-      }
+      renderArguments(arguments)
     }
   }
 
