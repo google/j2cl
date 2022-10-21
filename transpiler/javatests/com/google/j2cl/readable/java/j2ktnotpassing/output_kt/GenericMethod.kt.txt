@@ -1,0 +1,26 @@
+// Generated from "j2ktnotpassing/GenericMethod.java"
+package j2ktnotpassing
+
+import javaemul.lang.*
+import kotlin.jvm.*
+
+open class GenericMethod {
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun <K> wildcardPair(): j2ktnotpassing.GenericMethod.Pair<K, *> {
+   return j2ktnotpassing.GenericMethod.Pair<K, kotlin.Any?>() as j2ktnotpassing.GenericMethod.Pair<K, *>
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <K, V> pairIdentity(pair: j2ktnotpassing.GenericMethod.Pair<K, V>): j2ktnotpassing.GenericMethod.Pair<K, V> {
+   return pair
+  }
+
+  @kotlin.jvm.JvmStatic
+  fun <K> wildcardPairAndIdentity(): j2ktnotpassing.GenericMethod.Pair<K, *> {
+   return j2ktnotpassing.GenericMethod.pairIdentity<K, kotlin.Any>(j2ktnotpassing.GenericMethod.wildcardPair<K>())
+  }
+ }
+
+ class Pair<K, V> {}
+}

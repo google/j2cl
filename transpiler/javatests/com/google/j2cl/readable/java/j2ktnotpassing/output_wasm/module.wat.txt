@@ -40,6 +40,12 @@
 ;;; Code for j2ktnotpassing.NotNullable.IntFunction [static fields]
 (global $f_$initialized__j2ktnotpassing_NotNullable_IntFunction (mut i32) (i32.const 0))
 
+;;; Code for j2ktnotpassing.GenericMethod [static fields]
+(global $f_$initialized__j2ktnotpassing_GenericMethod (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.GenericMethod.Pair [static fields]
+(global $f_$initialized__j2ktnotpassing_GenericMethod_Pair (mut i32) (i32.const 0))
+
 ;;; Code for j2ktnotpassing.AccidentalOverride [vtable.init]
 (global $j2ktnotpassing.AccidentalOverride.vtable (ref $j2ktnotpassing.AccidentalOverride.vtable) 
  (struct.new $j2ktnotpassing.AccidentalOverride.vtable
@@ -203,6 +209,34 @@
  (struct.new $j2ktnotpassing.NotNullable.IntFunction.vtable
   (ref.func $m_accept__int__java_lang_Object@j2ktnotpassing.DefaultNullable.$LambdaImplementor$4)
  )
+ ))
+
+;;; Code for j2ktnotpassing.GenericMethod [vtable.init]
+(global $j2ktnotpassing.GenericMethod.vtable (ref $j2ktnotpassing.GenericMethod.vtable) 
+ (struct.new $j2ktnotpassing.GenericMethod.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.GenericMethod)
+ )
+)
+
+;;; Code for j2ktnotpassing.GenericMethod [itable.init]
+(global $j2ktnotpassing.GenericMethod.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for j2ktnotpassing.GenericMethod.Pair [vtable.init]
+(global $j2ktnotpassing.GenericMethod.Pair.vtable (ref $j2ktnotpassing.GenericMethod.Pair.vtable) 
+ (struct.new $j2ktnotpassing.GenericMethod.Pair.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.GenericMethod.Pair)
+ )
+)
+
+;;; Code for j2ktnotpassing.GenericMethod.Pair [itable.init]
+(global $j2ktnotpassing.GenericMethod.Pair.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for j2ktnotpassing.AccidentalOverride [CLASS]
@@ -1345,3 +1379,212 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.NotNullable.IntFunction)
+
+;;; Code for j2ktnotpassing.GenericMethod [CLASS]
+(type $j2ktnotpassing.GenericMethod (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.GenericMethod.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $j2ktnotpassing.GenericMethod.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; GenericMethod GenericMethod.$create()
+(func $$create__@j2ktnotpassing.GenericMethod
+ (result (ref null $j2ktnotpassing.GenericMethod))
+ ;;@ j2ktnotpassing/GenericMethod.java:22:13
+ (local $$instance (ref null $j2ktnotpassing.GenericMethod))
+ (block
+  ;; GenericMethod $instance = new GenericMethod.<init>(0);
+  ;;@ j2ktnotpassing/GenericMethod.java:22:13
+  (local.set $$instance (struct.new $j2ktnotpassing.GenericMethod (ref.as_non_null (global.get $j2ktnotpassing.GenericMethod.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.GenericMethod.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ j2ktnotpassing/GenericMethod.java:22:13
+  (call $$ctor__void_$p_j2ktnotpassing_GenericMethod@j2ktnotpassing.GenericMethod (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/GenericMethod.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericMethod.$ctor()
+(func $$ctor__void_$p_j2ktnotpassing_GenericMethod@j2ktnotpassing.GenericMethod
+ (param $this (ref null $j2ktnotpassing.GenericMethod))
+ ;;@ j2ktnotpassing/GenericMethod.java:22:13
+ (block
+  ;; j2ktnotpassing.GenericMethod.$clinit();
+  ;;@ j2ktnotpassing/GenericMethod.java:22:13
+  (call $$clinit__void@j2ktnotpassing.GenericMethod )
+  ;; Object.this.$ctor();
+  ;;@ j2ktnotpassing/GenericMethod.java:22:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Pair<K, ?> GenericMethod.wildcardPair()
+(func $m_wildcardPair__j2ktnotpassing_GenericMethod_Pair@j2ktnotpassing.GenericMethod
+ (result (ref null $j2ktnotpassing.GenericMethod.Pair))
+ ;;@ j2ktnotpassing/GenericMethod.java:25:56
+ (block
+  ;; j2ktnotpassing.GenericMethod.$clinit();
+  ;;@ j2ktnotpassing/GenericMethod.java:25:71
+  (call $$clinit__void@j2ktnotpassing.GenericMethod )
+  ;; return j2ktnotpassing.GenericMethod.Pair.$create();
+  ;;@ j2ktnotpassing/GenericMethod.java:26:4
+  (return (call $$create__@j2ktnotpassing.GenericMethod.Pair ))
+ )
+)
+
+;;; Pair<K, V> GenericMethod.pairIdentity(Pair<K, V> pair)
+(func $m_pairIdentity__j2ktnotpassing_GenericMethod_Pair__j2ktnotpassing_GenericMethod_Pair@j2ktnotpassing.GenericMethod
+ (param $pair (ref null $j2ktnotpassing.GenericMethod.Pair))
+ (result (ref null $j2ktnotpassing.GenericMethod.Pair))
+ ;;@ j2ktnotpassing/GenericMethod.java:29:84
+ (block
+  ;; j2ktnotpassing.GenericMethod.$clinit();
+  ;;@ j2ktnotpassing/GenericMethod.java:30:23
+  (call $$clinit__void@j2ktnotpassing.GenericMethod )
+  ;; return pair;
+  ;;@ j2ktnotpassing/GenericMethod.java:31:4
+  (return (local.get $pair))
+ )
+)
+
+;;; Pair<K, ?> GenericMethod.wildcardPairAndIdentity()
+(func $m_wildcardPairAndIdentity__j2ktnotpassing_GenericMethod_Pair@j2ktnotpassing.GenericMethod
+ (result (ref null $j2ktnotpassing.GenericMethod.Pair))
+ ;;@ j2ktnotpassing/GenericMethod.java:34:56
+ (block
+  ;; j2ktnotpassing.GenericMethod.$clinit();
+  ;;@ j2ktnotpassing/GenericMethod.java:34:82
+  (call $$clinit__void@j2ktnotpassing.GenericMethod )
+  ;; return j2ktnotpassing.GenericMethod.pairIdentity(j2ktnotpassing.GenericMethod.wildcardPair());
+  ;;@ j2ktnotpassing/GenericMethod.java:39:4
+  (return (call $m_pairIdentity__j2ktnotpassing_GenericMethod_Pair__j2ktnotpassing_GenericMethod_Pair@j2ktnotpassing.GenericMethod (call $m_wildcardPair__j2ktnotpassing_GenericMethod_Pair@j2ktnotpassing.GenericMethod )))
+ )
+)
+
+;;; void GenericMethod.$clinit()
+(func $$clinit__void@j2ktnotpassing.GenericMethod
+ ;;@ j2ktnotpassing/GenericMethod.java:22:13
+ (block
+  ;; if (j2ktnotpassing.GenericMethod.$initialized) return;
+  ;;@ j2ktnotpassing/GenericMethod.java:22:13
+  (if (global.get $f_$initialized__j2ktnotpassing_GenericMethod)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/GenericMethod.java:22:13
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.GenericMethod.$initialized = true);
+  ;;@ j2ktnotpassing/GenericMethod.java:22:13
+  (global.set $f_$initialized__j2ktnotpassing_GenericMethod (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2ktnotpassing/GenericMethod.java:22:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> GenericMethod.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.GenericMethod
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.GenericMethod))
+ (local.set $this (ref.cast_static $j2ktnotpassing.GenericMethod (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.GenericMethod();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.GenericMethod__java_lang_Class (ref.func $$getJ2ktnotpassing.GenericMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.GenericMethod)
+
+;;; Code for j2ktnotpassing.GenericMethod.Pair [CLASS]
+(type $j2ktnotpassing.GenericMethod.Pair (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.GenericMethod.Pair.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $j2ktnotpassing.GenericMethod.Pair.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; Pair<K, V> Pair.$create()
+(func $$create__@j2ktnotpassing.GenericMethod.Pair
+ (result (ref null $j2ktnotpassing.GenericMethod.Pair))
+ ;;@ j2ktnotpassing/GenericMethod.java:23:28
+ (local $$instance (ref null $j2ktnotpassing.GenericMethod.Pair))
+ (block
+  ;; Pair<K, V> $instance = new Pair.<init>(0);
+  ;;@ j2ktnotpassing/GenericMethod.java:23:28
+  (local.set $$instance (struct.new $j2ktnotpassing.GenericMethod.Pair (ref.as_non_null (global.get $j2ktnotpassing.GenericMethod.Pair.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.GenericMethod.Pair.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ j2ktnotpassing/GenericMethod.java:23:28
+  (call $$ctor__void_$p_j2ktnotpassing_GenericMethod_Pair@j2ktnotpassing.GenericMethod.Pair (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/GenericMethod.java:23:28
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Pair.$ctor()
+(func $$ctor__void_$p_j2ktnotpassing_GenericMethod_Pair@j2ktnotpassing.GenericMethod.Pair
+ (param $this (ref null $j2ktnotpassing.GenericMethod.Pair))
+ ;;@ j2ktnotpassing/GenericMethod.java:23:28
+ (block
+  ;; j2ktnotpassing.GenericMethod.Pair.$clinit();
+  ;;@ j2ktnotpassing/GenericMethod.java:23:28
+  (call $$clinit__void@j2ktnotpassing.GenericMethod.Pair )
+  ;; Object.this.$ctor();
+  ;;@ j2ktnotpassing/GenericMethod.java:23:28
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Pair.$clinit()
+(func $$clinit__void@j2ktnotpassing.GenericMethod.Pair
+ ;;@ j2ktnotpassing/GenericMethod.java:23:28
+ (block
+  ;; if (j2ktnotpassing.GenericMethod.Pair.$initialized) return;
+  ;;@ j2ktnotpassing/GenericMethod.java:23:28
+  (if (global.get $f_$initialized__j2ktnotpassing_GenericMethod_Pair)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/GenericMethod.java:23:28
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.GenericMethod.Pair.$initialized = true);
+  ;;@ j2ktnotpassing/GenericMethod.java:23:28
+  (global.set $f_$initialized__j2ktnotpassing_GenericMethod_Pair (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2ktnotpassing/GenericMethod.java:23:28
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Pair.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.GenericMethod.Pair
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.GenericMethod.Pair))
+ (local.set $this (ref.cast_static $j2ktnotpassing.GenericMethod.Pair (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.GenericMethod.Pair();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.GenericMethod.Pair__java_lang_Class (ref.func $$getJ2ktnotpassing.GenericMethod.Pair__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.GenericMethod.Pair)

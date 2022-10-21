@@ -1,0 +1,31 @@
+[GenericMethod] => [GenericMethod]
+[GenericMethod] => [constructor]
+[GenericMethod] => [super();] "j2ktnotpassing.GenericMethod.<synthetic: ctor_js>"
+[GenericMethod] => [$create__]
+[GenericMethod] => [GenericMethod.$clinit();] "j2ktnotpassing.GenericMethod.<synthetic: ctor_create>"
+[GenericMethod] => [let $instance = new GenericMethod();] "j2ktnotpassing.GenericMethod.<synthetic: ctor_create>"
+[GenericMethod] => [$instance.$ctor__j2ktnotpassing_GenericMethod__void();] "j2ktnotpassing.GenericMethod.<synthetic: ctor_create>"
+[GenericMethod] => [return $instance;] "j2ktnotpassing.GenericMethod.<synthetic: ctor_create>"
+[GenericMethod] => [$ctor__j2ktnotpassing_GenericMethod__void]
+[GenericMethod] => [this.$ctor__java_lang_Object__void();] "j2ktnotpassing.GenericMethod.<init>"
+[wildcardPair] => [m_wildcardPair__j2ktnotpassing_GenericMethod_Pair]
+[{
+    return new Pair<>();
+  }] => [GenericMethod.$clinit();] "j2ktnotpassing.GenericMethod.wildcardPair"
+[return new Pair<>();] => [return /**@type {!Pair<K, *>}*/ (Pair.$create__());] "j2ktnotpassing.GenericMethod.wildcardPair"
+[pairIdentity] => [m_pairIdentity__j2ktnotpassing_GenericMethod_Pair__j2ktnotpassing_GenericMethod_Pair]
+[pair] => [pair] "pair"
+[{
+    return pair;
+  }] => [GenericMethod.$clinit();] "j2ktnotpassing.GenericMethod.pairIdentity"
+[return pair;] => [return pair;] "j2ktnotpassing.GenericMethod.pairIdentity"
+[wildcardPairAndIdentity] => [m_wildcardPairAndIdentity__j2ktnotpassing_GenericMethod_Pair]
+[{
+    // Since it's not possible to specify explicit type arguments for "pairIdentity" method call,
+...    return pairIdentity(wildcardPair());
+  }] => [GenericMethod.$clinit();] "j2ktnotpassing.GenericMethod.wildcardPairAndIdentity"
+[return pairIdentity(wildcardPair());] => [return /**@type {!Pair<K, !*>}*/ (GenericMethod.m_pairIdentity__j2ktnotpassing_GenericMethod_Pair__j2ktnotpassing_GenericMethod_Pair(/**@type {!Pair<K, *>}*/ (GenericMethod.m_wildcardPair__j2ktnotpassing_GenericMethod_Pair())));] "j2ktnotpassing.GenericMethod.wildcardPairAndIdentity"
+[GenericMethod] => [$clinit]
+[GenericMethod] => [GenericMethod.$clinit = () =>{};] "j2ktnotpassing.GenericMethod.<clinit>"
+[GenericMethod] => [GenericMethod.$loadModules();] "j2ktnotpassing.GenericMethod.<clinit>"
+[GenericMethod] => [j_l_Object.$clinit();] "j2ktnotpassing.GenericMethod.<clinit>"
