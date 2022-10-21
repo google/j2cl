@@ -18,7 +18,7 @@ open class ForEachStatement {
 
  fun testMulticatch_private_foreachstatement_ForEachStatement() {
   try {
-   throw kotlin.Exception()
+   throw java.lang.Exception()
   } catch (e: foreachstatement.ForEachStatement.Exception1) {
    FOR_EACH@ for (o in e!!) {
     val o_1: kotlin.Any? = o
@@ -41,13 +41,13 @@ open class ForEachStatement {
   }
  }
 
- open class Exception1: javaemul.lang.JavaIterable<kotlin.String?>, kotlin.Exception() {
+ open class Exception1: javaemul.lang.JavaIterable<kotlin.String?>, java.lang.Exception() {
   open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String?> {
    return null!!
   }
  }
 
- open class Exception2: javaemul.lang.JavaIterable<kotlin.Any?>, kotlin.Exception() {
+ open class Exception2: javaemul.lang.JavaIterable<kotlin.Any?>, java.lang.Exception() {
   open override fun iterator(): kotlin.collections.MutableIterator<kotlin.Any?> {
    return null!!
   }

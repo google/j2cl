@@ -44,10 +44,10 @@ open class GenericMethod<T> {
  open fun test() {
   val g: genericmethod.GenericMethod<kotlin.Number?>? = genericmethod.GenericMethod<kotlin.Number?>()
   g!!.foo<genericmethod.GenericMethod<kotlin.Number?>?, genericmethod.GenericMethod<kotlin.Number?>?>(g, g)
-  g!!.foo<kotlin.Error?, kotlin.Exception?>(kotlin.Error(), kotlin.Exception())
+  g!!.foo<kotlin.Error?, kotlin.Exception?>(java.lang.Error(), java.lang.Exception())
   g!!.`fun`(kotlin.Any())
-  g!!.`fun`<kotlin.Exception?>(kotlin.Exception())
-  g!!.`fun`<kotlin.Error?>(kotlin.Error())
+  g!!.`fun`<kotlin.Exception?>(java.lang.Exception())
+  g!!.`fun`<kotlin.Error?>(java.lang.Error())
   g!!.`fun`<kotlin.String?>(kotlin.arrayOf<kotlin.String?>("asdf"))
   var s: kotlin.String? = this.checked<kotlin.String?>()
   s = this.unchecked<kotlin.String?>()

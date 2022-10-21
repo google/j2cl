@@ -96,15 +96,15 @@ open class Lambdas {
  open fun <T: kotlin.Enum<T>> testLambdaWithGenerics() {
   this.callWithTypeVariable<kotlin.Error?>(lambdas.Lambdas.GenericFunctionalInterface { i: kotlin.Error? ->
    return@GenericFunctionalInterface i
-  }, kotlin.Error())
+  }, java.lang.Error())
   this.callParameterized(lambdas.Lambdas.GenericFunctionalInterface { i_1: kotlin.Error? ->
    return@GenericFunctionalInterface i_1
-  }, kotlin.Error())
+  }, java.lang.Error())
   lambdas.Lambdas.callTypeVariableWithBounds<T>(lambdas.Lambdas.GenericFunctionalInterface { i_2: kotlin.Enum<T>? ->
    return@GenericFunctionalInterface i_2
   }, null as kotlin.Enum<T>?)
   this.callWithBiFunction<kotlin.Any?>(lambdas.Lambdas.BiFunction { x: kotlin.Any?, y: kotlin.String? ->
-   throw kotlin.RuntimeException()
+   throw java.lang.RuntimeException()
   })
   val f: lambdas.Lambdas.Function<in T, *>? = lambdas.Lambdas.Function { item: T ->
    return@Function kotlin.Long.valueOf(1L)

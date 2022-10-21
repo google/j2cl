@@ -7,7 +7,7 @@ import kotlin.jvm.*
 open class TryCatch {
  open fun testMultiCatch() {
   try {
-   throw kotlin.ClassCastException()
+   throw java.lang.ClassCastException()
   } catch (e: kotlin.NullPointerException) {
    throw e!!
   } catch (e: kotlin.ClassCastException) {
@@ -20,16 +20,16 @@ open class TryCatch {
 
  open fun testEmptyThrowableCatch() {
   try {
-   throw kotlin.ClassCastException()
+   throw java.lang.ClassCastException()
   } catch (e: kotlin.Throwable) {}
   try {
-   throw kotlin.ClassCastException()
+   throw java.lang.ClassCastException()
   } catch (e_1: kotlin.Exception) {} catch (e_2: kotlin.Throwable) {}
  }
 
  open fun testEmptyThrowableRethrow() {
   try {
-   throw kotlin.ClassCastException()
+   throw java.lang.ClassCastException()
   } catch (e: kotlin.Throwable) {
    throw e!!
   }
@@ -49,7 +49,7 @@ open class TryCatch {
    try {
     thing = trycatch.TryCatch.ClosableThing()
     thing2 = trycatch.TryCatch.ClosableThing()
-    throw kotlin.Exception()
+    throw java.lang.Exception()
    } catch (___exceptionFromTry: kotlin.Throwable) {
     ___primaryExc = ___exceptionFromTry
     throw ___exceptionFromTry!!
@@ -71,7 +71,7 @@ open class TryCatch {
    try {
     ___resource = thing
     ___resource_1 = thing2
-    throw kotlin.Exception()
+    throw java.lang.Exception()
    } catch (___exceptionFromTry: kotlin.Throwable) {
     ___primaryExc = ___exceptionFromTry
     throw ___exceptionFromTry!!
@@ -89,7 +89,7 @@ open class TryCatch {
    var ___resource: trycatch.TryCatch.ClosableThing? = null
    try {
     ___resource = trycatch.TryCatch.closableThing_private_trycatch_TryCatch
-    throw kotlin.Exception()
+    throw java.lang.Exception()
    } catch (___exceptionFromTry: kotlin.Throwable) {
     ___primaryExc = ___exceptionFromTry
     throw ___exceptionFromTry!!
@@ -102,16 +102,16 @@ open class TryCatch {
 
  open fun testNestedTryCatch() {
   try {
-   throw kotlin.Exception()
+   throw java.lang.Exception()
   } catch (ae: kotlin.Exception) {
    try {
-    throw kotlin.Exception()
+    throw java.lang.Exception()
    } catch (ie: kotlin.Exception) {}
   }
  }
 
  open fun testThrowGenerics() {
-  throw this.getT_private_trycatch_TryCatch<kotlin.Exception?>(kotlin.Exception())!!
+  throw this.getT_private_trycatch_TryCatch<kotlin.Exception?>(java.lang.Exception())!!
  }
 
  fun <T> getT_private_trycatch_TryCatch(t: T): T {
