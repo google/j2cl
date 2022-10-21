@@ -15,14 +15,17 @@
  */
 package com.google.j2cl.junit.apt;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.stream.Collectors.joining;
+
+import com.google.common.collect.ImmutableSet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
 import javax.tools.StandardLocation;
@@ -31,18 +34,25 @@ import org.apache.velocity.app.VelocityEngine;
 
 class TemplateWriter {
   private final List<String> testSummary = new ArrayList<>();
+  private final Set<String> validPlatforms = ImmutableSet.of("CLOSURE", "WASM", "J2KT");
   private final VelocityEngine velocityEngine = J2clTestingVelocityUtil.createEngine();
   private final ErrorReporter errorReporter;
   private final Filer filer;
-  private final boolean isJ2wasmTest;
+  private final String testPlatform;
 
-  public TemplateWriter(ErrorReporter errorReporter, Filer filer, boolean isJ2wasmTest) {
+  public TemplateWriter(ErrorReporter errorReporter, Filer filer, String testPlatform) {
     this.errorReporter = errorReporter;
     this.filer = filer;
-    this.isJ2wasmTest = isJ2wasmTest;
+    this.testPlatform = testPlatform;
+    if (!validPlatforms.contains(testPlatform)) {
+      errorReporter.report(ErrorMessage.UNSUPPORTED_PLATFORM, testPlatform);
+    }
   }
 
   public void writeSummary() {
+    if (testPlatform.equals("J2KT")) {
+      return;
+    }
     if (testSummary.isEmpty()) {
       errorReporter.report(ErrorMessage.NO_TEST);
       return;
@@ -51,7 +61,7 @@ class TemplateWriter {
     try {
       writeResource(
           "test_summary.json",
-          testSummary.stream().collect(Collectors.joining("\",\"", "{\"tests\": [\"", "\"]}")));
+          testSummary.stream().collect(joining("\",\"", "{\"tests\": [\"", "\"]}")));
     } catch (Exception e) {
       errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(e));
     }
@@ -59,10 +69,21 @@ class TemplateWriter {
 
   public void writeTestClass(TestClass testClass) {
     String testSuiteFileName = testClass.qualifiedName().replace('.', '/');
+    if (testPlatform.equals("J2KT")) {
+      try {
+        String mergedKotlinTemplate =
+            mergeTemplate(testClass, "com/google/j2cl/junit/apt/KotlinJUnitAdapter.vm");
+        writeResource(testSuiteFileName + ".kt", mergedKotlinTemplate);
+      } catch (Exception e) {
+        errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(e));
+      }
+      return;
+    }
+
     testSummary.add(testSuiteFileName + ".js");
     String jsSuite = "com/google/j2cl/junit/apt/JsSuite.vm";
     String jsUnitAdapter = "com/google/j2cl/junit/apt/JsUnitAdapter.vm";
-    if (isJ2wasmTest) {
+    if (testPlatform.equals("WASM")) {
       jsSuite = "com/google/j2cl/junit/apt/WasmJsSuite.vm";
       jsUnitAdapter = "com/google/j2cl/junit/apt/WasmJsUnitAdapter.vm";
     }
@@ -82,8 +103,7 @@ class TemplateWriter {
     StringWriter outputBuffer = new StringWriter();
 
     boolean success =
-        velocityEngine.mergeTemplate(
-            template, StandardCharsets.UTF_8.name(), velocityContext, outputBuffer);
+        velocityEngine.mergeTemplate(template, UTF_8.name(), velocityContext, outputBuffer);
 
     if (!success) {
       throw new Exception("Unable to merge velocity template");

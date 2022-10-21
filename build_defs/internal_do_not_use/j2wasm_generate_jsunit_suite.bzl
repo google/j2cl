@@ -60,7 +60,7 @@ def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimize = F
         deps = deps + [
             "//build_defs/internal_do_not_use:internal_junit_runtime-j2wasm",
         ],
-        javacopts = ["-AisJ2wasmTest"],
+        javacopts = ["-AtestPlatform=WASM"],
         testonly = 1,
         tags = tags,
     )

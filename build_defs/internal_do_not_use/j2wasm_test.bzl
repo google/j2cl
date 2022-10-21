@@ -24,7 +24,7 @@ def j2wasm_test(
         name = name,
         data = data + extra_data,
         compile = 0,
-        is_j2wasm = True,
+        platform = "WASM",
         optimize_wasm = optimize,
         browsers = None,
         default_browser = "//:chrome-wasmdev-linux",

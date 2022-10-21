@@ -25,10 +25,10 @@ import javax.lang.model.SourceVersion;
 
 /** The J2ClTestingProcessor emits a js_unit test JavaScript file for every JUnit4 test. */
 @AutoService(Processor.class)
-@SupportedOptions({J2clTestingProcessor.JAVAC_OPTS_FLAG_IS_J2WASM_TEST})
+@SupportedOptions({J2clTestingProcessor.JAVAC_OPTS_FLAG_TEST_PLATFORM})
 public class J2clTestingProcessor extends BasicAnnotationProcessor {
 
-  static final String JAVAC_OPTS_FLAG_IS_J2WASM_TEST = "isJ2wasmTest";
+  static final String JAVAC_OPTS_FLAG_TEST_PLATFORM = "testPlatform";
 
   private J2clTestingProcessingStep step;
 

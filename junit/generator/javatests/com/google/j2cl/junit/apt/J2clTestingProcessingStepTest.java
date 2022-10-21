@@ -340,7 +340,7 @@ public class J2clTestingProcessingStepTest {
     when(processingEnv.getElementUtils()).thenReturn(compilation.getElements());
     when(processingEnv.getMessager()).thenReturn(messager);
     when(processingEnv.getFiler()).thenReturn(mock(Filer.class));
-    when(processingEnv.getOptions()).thenReturn(ImmutableMap.of());
+    when(processingEnv.getOptions()).thenReturn(ImmutableMap.of("testPlatform", "CLOSURE"));
     return new J2clTestingProcessingStep(processingEnv);
   }
 

@@ -58,6 +58,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
             "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
         ],
         testonly = 1,
+        javacopts = ["-AtestPlatform=CLOSURE"],
         tags = tags,
         generate_build_test = False,
     )

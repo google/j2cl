@@ -16,25 +16,29 @@ load(":j2cl_util.bzl", "to_parallel_target")
 load(":j2kt_common.bzl", "j2kt_common")
 load(":j2wasm_common.bzl", "j2wasm_common")
 
-def j2cl_alias(name, actual):
+def j2cl_alias(name, actual, visibility = None):
     """Generate alias for all of the j2cl targets.
 
     Args:
       name: New name of rule
       actual: Target rule that will be used in this alias
+      visibility: Visibility of the rule
     """
 
     native.alias(
         name = name,
         actual = actual,
+        visibility = visibility,
     )
 
     native.alias(
         name = j2kt_common.to_j2kt_jvm_name(name),
         actual = to_parallel_target(actual, j2kt_common.to_j2kt_jvm_name),
+        visibility = visibility,
     )
 
     native.alias(
         name = j2wasm_common.to_j2wasm_name(name),
         actual = to_parallel_target(actual, j2wasm_common.to_j2wasm_name),
+        visibility = visibility,
     )

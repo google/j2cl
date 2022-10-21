@@ -18,7 +18,7 @@ closure_js_library(
 )
 
 j2cl_library(
-    name = "testcase_violator",
+    name = "testcase_violator-j2cl",
     testonly = 1,
     srcs = ["TestCaseViolator.java"],
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],

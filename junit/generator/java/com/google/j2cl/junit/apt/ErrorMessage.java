@@ -53,7 +53,8 @@ enum ErrorMessage {
   NO_TEST_INPUT(
       "Test class is not found. "
           + "Ensure that test_class is a fully qualified class name and exists in the classpath."),
-  CANNOT_WRITE_RESOURCE("Can not write jsunit test suite file: %s");
+  CANNOT_WRITE_RESOURCE("Can not write jsunit test suite file: %s"),
+  UNSUPPORTED_PLATFORM("Platform %s is unknown.");
 
   private final String formattedMsg;
   private final Kind kind;

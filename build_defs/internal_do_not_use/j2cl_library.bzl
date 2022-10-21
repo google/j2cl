@@ -39,9 +39,14 @@ load(":kotlin_allowlist.bzl", "KOTLIN_ALLOWED_PACKAGES")
 # rules.
 _J2KT_JVM_PACKAGES = [
     "benchmarking/java/com/google/j2cl/benchmarks/octane/raytrace",
+    "build_defs/internal_do_not_use",
     "transpiler/javatests/com/google/j2cl/integration/java",
     "transpiler/javatests/com/google/j2cl/integration/testing",
     "transpiler/javatests/com/google/j2cl/readable/java",
+    "junit/generator/java/com/google/j2cl/junit/apt",
+    "junit/generator/java/com/google/j2cl/junit/runtime",
+    "third_party/java/error_prone",
+    "third_party/java/junit",
 ]
 
 # Packages that j2cl rule will generage j2kt native packages by default. Used to simplify test

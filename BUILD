@@ -32,14 +32,9 @@ j2cl_alias(
 )
 
 # JUnit library emulation
-alias(
+j2cl_alias(
     name = "junit",
     actual = "//junit/emul/java:junit_emul",
-)
-
-alias(
-    name = "junit-j2wasm",
-    actual = "//junit/emul/java:junit_emul-j2wasm",
 )
 
 # JUnit async runner (EXPERIMENTAL)

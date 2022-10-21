@@ -24,6 +24,7 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import java.lang.annotation.Annotation;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
@@ -52,9 +53,10 @@ public class J2clTestingProcessingStep implements ProcessingStep {
     this.junit4Validator =
         new JUnit4Validator(
             errorReporter, processingEnv.getTypeUtils(), processingEnv.getElementUtils());
-    boolean isJ2wasmTest =
-        processingEnv.getOptions().containsKey(J2clTestingProcessor.JAVAC_OPTS_FLAG_IS_J2WASM_TEST);
-    this.writer = new TemplateWriter(errorReporter, processingEnv.getFiler(), isJ2wasmTest);
+    Map<String, String> options = processingEnv.getOptions();
+    String testPlatform =
+        options.getOrDefault(J2clTestingProcessor.JAVAC_OPTS_FLAG_TEST_PLATFORM, "UNKNOWN");
+    this.writer = new TemplateWriter(errorReporter, processingEnv.getFiler(), testPlatform);
   }
 
   @SuppressWarnings("unchecked")

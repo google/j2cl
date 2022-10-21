@@ -75,7 +75,7 @@ j2cl_library(
     testonly = 1,
     exports = [
         "//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations",
-        "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator",
+        "//junit/generator/java/com/google/j2cl/junit/runtime:testcase_violator-j2cl",
     ],
 )
 

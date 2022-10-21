@@ -1,0 +1,58 @@
+#macro( methodExecution $classOrInstance $testMethod)
+$classOrInstance.${testMethod.javaMethodName()}();
+#end
+#macro( methodExecutions $classOrInstance $testMethods)
+  #foreach($testMethod in $testMethods )
+#methodExecution( $classOrInstance $testMethod )
+  #end
+#end
+
+/**
+ * Generated test suite from j2kt_test target
+ */
+package ${testClass.jsUnitPackageName()}
+
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+
+class ${testClass.jsUnitAdapterClassName()} {
+
+  val actualTest = ${testClass.qualifiedName()}()
+
+  @BeforeTest
+  fun setUp() {
+  #if($testClass.isJUnit3())
+    junit.framework.TestCaseViolator.callSetUp(actualTest);
+  #end
+  #methodExecutions( "actualTest" $testClass.beforeMethods() )
+  }
+
+  @AfterTest
+  fun tearDown() {
+  #if($testClass.isJUnit3())
+    junit.framework.TestCaseViolator.callTearDown(actualTest)
+  #end
+  #methodExecutions( "actualTest" $testClass.afterMethods() )
+  }
+
+#foreach($testMethod in ${testClass.testMethods()})
+  @Test
+  fun ${testMethod.javaMethodName()}()  {
+#if ($testMethod.expectedExceptionQualifiedName())
+    try {
+#end
+    #if(${testMethod.isStatic()})
+    #methodExecution( ${testClass.qualifiedName()} $testMethod )
+    #else
+    #methodExecution( "actualTest" $testMethod )
+    #end
+#if ($testMethod.expectedExceptionQualifiedName())
+    } catch (e: ${testMethod.expectedExceptionQualifiedName()}) {
+      return
+    }
+    throw Exception("expected exception was not thrown")
+#end
+  }
+#end
+}
