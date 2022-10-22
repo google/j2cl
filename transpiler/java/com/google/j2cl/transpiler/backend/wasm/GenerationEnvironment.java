@@ -160,6 +160,12 @@ class GenerationEnvironment {
     throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
   }
 
+  public String getWasmEmptyArrayGlobalName(ArrayTypeDescriptor arrayTypeDescriptor) {
+    checkArgument(
+        arrayTypeDescriptor.isPrimitiveArray()
+            || TypeDescriptors.isJavaLangObject(arrayTypeDescriptor.getComponentTypeDescriptor()));
+    return "$__emptyArray_" + getWasmTypeName(arrayTypeDescriptor);
+  }
   /** Returns the name of the global that stores the itable for a Java type. */
   public String getWasmItableGlobalName(DeclaredTypeDescriptor typeDescriptor) {
     return "$" + getTypeSignature(typeDescriptor) + ".itable";

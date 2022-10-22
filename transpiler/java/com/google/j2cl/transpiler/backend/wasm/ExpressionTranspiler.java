@@ -455,6 +455,18 @@ final class ExpressionTranspiler {
         checkArgument(newArray.getTypeDescriptor().isNativeWasmArray());
 
         Expression dimensionExpression = newArray.getDimensionExpressions().get(0);
+
+        if (dimensionExpression instanceof NumberLiteral
+            && ((NumberLiteral) dimensionExpression).getValue().equals(0)) {
+          // Do not allocate zero-length arrays, instead reuse the array singletons that
+          // are allocated as globals.
+          sourceBuilder.append(
+              format(
+                  "(global.get %s)",
+                  environment.getWasmEmptyArrayGlobalName(newArray.getTypeDescriptor())));
+          return false;
+        }
+
         String arrayType = environment.getWasmTypeName(newArray.getTypeDescriptor());
 
         sourceBuilder.append(format("(array.new_default %s ", arrayType));

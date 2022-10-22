@@ -642,11 +642,20 @@ public class WasmModuleGenerator {
 
   private void emitNativeArrayType(ArrayTypeDescriptor arrayTypeDescriptor) {
     builder.newLine();
+    String wasmArrayTypeName = environment.getWasmTypeName(arrayTypeDescriptor);
     builder.append(
         format(
             "(type %s (array (mut %s)))",
-            environment.getWasmTypeName(arrayTypeDescriptor),
+            wasmArrayTypeName,
             environment.getWasmFieldType(arrayTypeDescriptor.getComponentTypeDescriptor())));
+    builder.newLine();
+    // Emit a global empty array singleton to avoid allocating empty arrays. */
+    builder.append(
+        format(
+            "(global %s (ref %s) (array.new_default %s (i32.const 0))) ",
+            environment.getWasmEmptyArrayGlobalName(arrayTypeDescriptor),
+            wasmArrayTypeName,
+            wasmArrayTypeName));
     builder.newLine();
   }
 

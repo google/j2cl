@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -127,6 +128,17 @@ public class ImplementArraysAsClasses extends NormalizationPass {
             return new ArrayLiteral(
                 markArrayTypeDescriptorAsNative(arrayLiteral.getTypeDescriptor()),
                 arrayLiteral.getValueExpressions());
+          }
+
+          @Override
+          public Node rewriteConditionalExpression(ConditionalExpression conditionalExpression) {
+            if (!conditionalExpression.getTypeDescriptor().isArray()) {
+              return conditionalExpression;
+            }
+            return ConditionalExpression.Builder.from(conditionalExpression)
+                .setTypeDescriptor(
+                    maybeMarkTypeDescriptorAsNative(conditionalExpression.getTypeDescriptor()))
+                .build();
           }
 
           @Override

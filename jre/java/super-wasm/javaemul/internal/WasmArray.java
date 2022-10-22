@@ -103,7 +103,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfObject(int length) {
       super(length);
-      this.elements = new Object[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new Object[0] : new Object[length];
     }
 
     OfObject(Object[] initialValues) {
@@ -179,7 +181,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfByte(int length) {
       super(length);
-      elements = new byte[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new byte[0] : new byte[length];
     }
 
     OfByte(byte[] initialValues) {
@@ -227,7 +231,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfShort(int length) {
       super(length);
-      elements = new short[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new short[0] : new short[length];
     }
 
     OfShort(short[] initialValues) {
@@ -247,7 +253,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfChar(int length) {
       super(length);
-      elements = new char[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new char[0] : new char[length];
     }
 
     OfChar(char[] initialValues) {
@@ -288,7 +296,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfInt(int length) {
       super(length);
-      elements = new int[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new int[0] : new int[length];
     }
 
     OfInt(int[] initialValues) {
@@ -324,7 +334,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfLong(int length) {
       super(length);
-      elements = new long[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new long[0] : new long[length];
     }
 
     OfLong(long[] initialValues) {
@@ -360,7 +372,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfFloat(int length) {
       super(length);
-      elements = new float[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new float[0] : new float[length];
     }
 
     OfFloat(float[] initialValues) {
@@ -380,7 +394,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfDouble(int length) {
       super(length);
-      elements = new double[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new double[0] : new double[length];
     }
 
     OfDouble(double[] initialValues) {
@@ -416,7 +432,9 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     OfBoolean(int length) {
       super(length);
-      elements = new boolean[length];
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new boolean[0] : new boolean[length];
     }
 
     OfBoolean(boolean[] initialValues) {
