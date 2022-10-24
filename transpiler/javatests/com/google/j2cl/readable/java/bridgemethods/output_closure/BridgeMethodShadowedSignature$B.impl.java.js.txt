@@ -4,6 +4,8 @@ const I = goog.require('bridgemethods.BridgeMethodShadowedSignature.I$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+
 /**
  * @abstract
  * @template B1, B2
@@ -32,6 +34,8 @@ class B extends j_l_Object {
  static $isInstance(/** ? */ instance) {
   return instance instanceof B;
  }
+ /** @abstract @override @nodts @return {?string} */
+ m_get__java_util_function_Consumer__java_lang_String(/** Consumer<?> */ arg0) {}
  
  /** @nodts */
  static $loadModules() {}

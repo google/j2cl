@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
+import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
 import com.google.j2cl.transpiler.passes.ControlStatementFormatter;
@@ -300,6 +301,7 @@ public enum Backend {
           // Add qualifiers to static members after all transformations to simplify the handling
           // in the backend.
           ResolveImplicitStaticQualifiers::new,
+          AddAbstractMethodStubs::new,
 
           // Enrich source mapping information for better stack deobfuscation.
           FilloutMissingSourceMapInformation::new,

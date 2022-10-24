@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const HasKey = goog.require('typewildcards.TypeWildCards.HasKey$impl');
 const IntegerSupplier = goog.require('typewildcards.TypeWildCards.IntegerSupplier$impl');
 
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let TypeWildCards = goog.forwardDeclare('typewildcards.TypeWildCards$impl');
 
 /**
@@ -34,6 +35,10 @@ class Element extends j_l_Object {
  static $isInstance(/** ? */ instance) {
   return instance instanceof Element;
  }
+ /** @abstract @override @nodts @return {?string} */
+ m_getKey__java_lang_String() {}
+ /** @abstract @override @nodts @return {Integer} */
+ m_get__java_lang_Integer() {}
  
  /** @nodts */
  static $loadModules() {}

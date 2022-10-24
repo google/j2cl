@@ -123,6 +123,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
     DEFAULT_METHOD_BRIDGE, // Bridges to a default method interface.
+    ABSTRACT_STUB, // Abstract override stub of an abstract super type method.
     ;
 
     private final String stackTraceFrameName;
@@ -153,6 +154,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         case GENERALIZING_BRIDGE:
         case SPECIALIZING_BRIDGE:
         case DEFAULT_METHOD_BRIDGE:
+        case ABSTRACT_STUB:
           return "m_";
           // Getters and setters need to be mangled as fields.
         case SYNTHETIC_PROPERTY_SETTER:
@@ -277,6 +279,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   public boolean isSpecializingBridge() {
     return getOrigin() == MethodOrigin.SPECIALIZING_BRIDGE;
+  }
+
+  /** Returns true if the method descriptor is an abstract stub. */
+  public boolean isAbstractStub() {
+    return getOrigin() == MethodOrigin.ABSTRACT_STUB;
   }
 
   public boolean isDefaultMethodBridge() {
@@ -554,11 +561,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     if (!isDeclaration()) {
       return getDeclarationDescriptor().getManglingDescriptor();
     }
-    if (isGeneralizingdBridge()) {
-      // Bridges are methods that fill the gap between the overridden parent method and
-      // a specialized override, The original method parameter and return types are then ones
-      // that determine the mangled name as well as the actual types of the objects that are
-      // expected by this method.
+    if (isGeneralizingdBridge() || isAbstractStub()) {
+      // Generalizing bridges are methods that fill the gap between the overridden parent method and
+      // a specialized override. Abstract stubs override a parent method that has a given mangled
+      // name. In both cases, the parameter/return types for these methods do not determine the
+      // actual method name, since the mangling needs to match the method that they are actually
+      // overriding.
       return getBridgeOrigin().getManglingDescriptor().toRawMemberDescriptor();
     }
     return this;
@@ -914,6 +922,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       case DEFAULT_METHOD_BRIDGE:
         sb.append(" d-bridge");
         break;
+      case ABSTRACT_STUB:
+        sb.append(" stub");
+        break;
       case SOURCE:
         break;
       default:
@@ -941,6 +952,20 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setFinal(boolean isFinal);
 
     public abstract Builder setSynthetic(boolean isSynthetic);
+
+    public Builder makeAbstractStub(MethodDescriptor methodDescriptor) {
+      return setBridgeOrigin(methodDescriptor)
+          .setOrigin(MethodOrigin.ABSTRACT_STUB)
+          .setBridgeTarget(null)
+          .setSynthetic(true)
+          // Clear properties that might have been carried over when creating this
+          // descriptor from an existing one.
+          .setDeclarationDescriptor(null)
+          .setDefaultMethod(false)
+          .setAbstract(true)
+          .setNative(false)
+          .setUncheckedCast(false);
+    }
 
     public Builder makeBridge(
         MethodOrigin methodOrigin,
