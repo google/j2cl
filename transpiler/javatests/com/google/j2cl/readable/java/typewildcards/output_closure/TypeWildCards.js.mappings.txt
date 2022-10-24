@@ -43,11 +43,11 @@
 [i] => [i] "i"
 [t.m();] => [/**@type {!A}*/ (t).m_m__void();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [t.n();] => [/**@type {!Y}*/ ($Casts.$to(t, Y)).m_n__void();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
-[transform] => [m_transform__java_util_List__java_util_function_Function__java_util_List]
+[transform] => [m_transform__typewildcards_List__typewildcards_Function__typewildcards_List]
 [from] => [from] "from"
 [function] => [function_1] "function"
 [return null;] => [return null;] "typewildcards.TypeWildCards.transform"
-[concat] => [m_concat__java_util_List__java_util_List__java_util_List]
+[concat] => [m_concat__typewildcards_List__typewildcards_List__typewildcards_List]
 [a] => [a] "a"
 [b] => [b] "b"
 [return null;] => [return null;] "typewildcards.TypeWildCards.concat"
@@ -59,7 +59,7 @@
 [List<Integer> integers =
         transform(
 ...              return a.get();
-            });] => [let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__java_util_List__java_util_function_Function__java_util_List(/**@type {List<*>}*/ (TypeWildCards.m_concat__java_util_List__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** ? */ a) =>{
+            });] => [let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__typewildcards_List__typewildcards_Function__typewildcards_List(/**@type {List<*>}*/ (TypeWildCards.m_concat__typewildcards_List__typewildcards_List__typewildcards_List(elements, otherElements)), typewildcards_Function.$adapt((/** ? */ a) =>{
    /**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__java_lang_String();
    return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__java_lang_Integer();
   })));] "typewildcards.TypeWildCards.testInferredGenericIntersection"
@@ -78,7 +78,7 @@
 ...    return ri.m();
   }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testInferredIntersectionWithTypeVariable"
 [return ri.m();] => [return ri.m_m__typewildcards_TypeWildCards_RecursiveInterface();] "typewildcards.TypeWildCards.testInferredIntersectionWithTypeVariable"
-[createMultipleGenerics] => [m_createMultipleGenerics__java_util_List__typewildcards_TypeWildCards_MultipleGenerics]
+[createMultipleGenerics] => [m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics]
 [foo] => [foo] "foo"
 [{
     return null;
@@ -102,7 +102,7 @@
 [TypeWildCards] => [j_l_Object.$clinit();] "typewildcards.TypeWildCards.<clinit>"
 [static List<?> listWithWildcard = null;] => [TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards = null;] "typewildcards.TypeWildCards.<clinit>"
 [static MultipleGenerics<?, String, ?> valMultipleGenerics =
-      createMultipleGenerics(listWithWildcard);] => [TypeWildCards.$static_valMultipleGenerics__typewildcards_TypeWildCards = /**@type {MultipleGenerics<*, ?string, List<?>>}*/ (TypeWildCards.m_createMultipleGenerics__java_util_List__typewildcards_TypeWildCards_MultipleGenerics(TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards));] "typewildcards.TypeWildCards.<clinit>"
+      createMultipleGenerics(listWithWildcard);] => [TypeWildCards.$static_valMultipleGenerics__typewildcards_TypeWildCards = /**@type {MultipleGenerics<*, ?string, List<?>>}*/ (TypeWildCards.m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics(TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards));] "typewildcards.TypeWildCards.<clinit>"
 [TypeWildCards] => [/**@private {List<?>} @nodts*/
 TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards;]
 [TypeWildCards] => [/**@private {MultipleGenerics<?, ?string, ?>} @nodts*/

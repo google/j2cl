@@ -4,6 +4,12 @@ package typewildcards
 import javaemul.lang.*
 import kotlin.jvm.*
 
+fun interface Function<I, O> {
+ fun apply(i: I): O
+}
+
+interface List<I> {}
+
 open class GenericType<T> {}
 
 open class RecursiveType<T: typewildcards.RecursiveType<T>?> {
@@ -34,9 +40,9 @@ open class TypeWildCards {
  }
 
  open fun testInferredGenericIntersection() {
-  val elements: kotlin.collections.MutableList<typewildcards.TypeWildCards.Element?>? = null
-  val otherElements: kotlin.collections.MutableList<typewildcards.TypeWildCards.SubOtherElement?>? = null
-  val integers: kotlin.collections.MutableList<kotlin.Int?>? = typewildcards.TypeWildCards.transform_private_typewildcards_TypeWildCards(typewildcards.TypeWildCards.concat_private_typewildcards_TypeWildCards(elements, otherElements), java.util.function.Function { a ->
+  val elements: typewildcards.List<typewildcards.TypeWildCards.Element?>? = null
+  val otherElements: typewildcards.List<typewildcards.TypeWildCards.SubOtherElement?>? = null
+  val integers: typewildcards.List<kotlin.Int?>? = typewildcards.TypeWildCards.transform_private_typewildcards_TypeWildCards(typewildcards.TypeWildCards.concat_private_typewildcards_TypeWildCards(elements, otherElements), typewildcards.Function { a ->
    a!!.getKey()
    return@Function a!!.get()
   })
@@ -61,12 +67,12 @@ open class TypeWildCards {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <F, V> transform_private_typewildcards_TypeWildCards(from: kotlin.collections.MutableList<F>?, function: java.util.function.Function<in F, out V>?): kotlin.collections.MutableList<V>? {
+  fun <F, V> transform_private_typewildcards_TypeWildCards(from: typewildcards.List<F>?, function: typewildcards.Function<in F, out V>?): typewildcards.List<V>? {
    return null
   }
 
   @kotlin.jvm.JvmStatic
-  fun <E> concat_private_typewildcards_TypeWildCards(a: kotlin.collections.MutableList<out E>?, b: kotlin.collections.MutableList<out E>?): kotlin.collections.MutableList<E>? {
+  fun <E> concat_private_typewildcards_TypeWildCards(a: typewildcards.List<out E>?, b: typewildcards.List<out E>?): typewildcards.List<E>? {
    return null
   }
 
@@ -79,11 +85,11 @@ open class TypeWildCards {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <D> createMultipleGenerics(foo: kotlin.collections.MutableList<D>?): typewildcards.TypeWildCards.MultipleGenerics<D, kotlin.String?, kotlin.collections.MutableList<D>?>? {
+  fun <D> createMultipleGenerics(foo: typewildcards.List<D>?): typewildcards.TypeWildCards.MultipleGenerics<D, kotlin.String?, typewildcards.List<D>?>? {
    return null
   }
 
-  @kotlin.jvm.JvmField var listWithWildcard: kotlin.collections.MutableList<*>? = null
+  @kotlin.jvm.JvmField var listWithWildcard: typewildcards.List<*>? = null
 
   @kotlin.jvm.JvmField var valMultipleGenerics: typewildcards.TypeWildCards.MultipleGenerics<*, kotlin.String?, *>? = typewildcards.TypeWildCards.createMultipleGenerics(typewildcards.TypeWildCards.listWithWildcard) as typewildcards.TypeWildCards.MultipleGenerics<*, kotlin.String?, *>?
  }

@@ -4,9 +4,9 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let List = goog.forwardDeclare('java.util.List$impl');
-let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let typewildcards_Function = goog.forwardDeclare('typewildcards.Function$impl');
 let GenericType = goog.forwardDeclare('typewildcards.GenericType$impl');
+let List = goog.forwardDeclare('typewildcards.List$impl');
 let RecursiveType = goog.forwardDeclare('typewildcards.RecursiveType$impl');
 let A = goog.forwardDeclare('typewildcards.TypeWildCards.A$impl');
 let Foo = goog.forwardDeclare('typewildcards.TypeWildCards.Foo$impl');
@@ -65,18 +65,18 @@ class TypeWildCards extends j_l_Object {
   /**@type {!Y}*/ ($Casts.$to(t, Y)).m_n__void();
  }
  /** @nodts @template F, V @return {List<V>} */
- static m_transform__java_util_List__java_util_function_Function__java_util_List(/** List<F> */ from, /** j_u_function_Function<?, ?> */ function_1) {
+ static m_transform__typewildcards_List__typewildcards_Function__typewildcards_List(/** List<F> */ from, /** typewildcards_Function<?, ?> */ function_1) {
   return null;
  }
  /** @nodts @template E @return {List<E>} */
- static m_concat__java_util_List__java_util_List__java_util_List(/** List<?> */ a, /** List<?> */ b) {
+ static m_concat__typewildcards_List__typewildcards_List__typewildcards_List(/** List<?> */ a, /** List<?> */ b) {
   return null;
  }
  /** @nodts */
  m_testInferredGenericIntersection__void() {
   let elements = null;
   let otherElements = null;
-  let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__java_util_List__java_util_function_Function__java_util_List(/**@type {List<*>}*/ (TypeWildCards.m_concat__java_util_List__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** ? */ a) =>{
+  let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__typewildcards_List__typewildcards_Function__typewildcards_List(/**@type {List<*>}*/ (TypeWildCards.m_concat__typewildcards_List__typewildcards_List__typewildcards_List(elements, otherElements)), typewildcards_Function.$adapt((/** ? */ a) =>{
    /**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__java_lang_String();
    return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__java_lang_Integer();
   })));
@@ -93,7 +93,7 @@ class TypeWildCards extends j_l_Object {
   return ri.m_m__typewildcards_TypeWildCards_RecursiveInterface();
  }
  /** @nodts @template D @return {MultipleGenerics<D, ?string, List<D>>} */
- static m_createMultipleGenerics__java_util_List__typewildcards_TypeWildCards_MultipleGenerics(/** List<D> */ foo) {
+ static m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics(/** List<D> */ foo) {
   TypeWildCards.$clinit();
   return null;
  }
@@ -119,7 +119,7 @@ class TypeWildCards extends j_l_Object {
   TypeWildCards.$loadModules();
   j_l_Object.$clinit();
   TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards = null;
-  TypeWildCards.$static_valMultipleGenerics__typewildcards_TypeWildCards = /**@type {MultipleGenerics<*, ?string, List<?>>}*/ (TypeWildCards.m_createMultipleGenerics__java_util_List__typewildcards_TypeWildCards_MultipleGenerics(TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards));
+  TypeWildCards.$static_valMultipleGenerics__typewildcards_TypeWildCards = /**@type {MultipleGenerics<*, ?string, List<?>>}*/ (TypeWildCards.m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics(TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards));
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -128,7 +128,7 @@ class TypeWildCards extends j_l_Object {
  
  /** @nodts */
  static $loadModules() {
-  j_u_function_Function = goog.module.get('java.util.function.Function$impl');
+  typewildcards_Function = goog.module.get('typewildcards.Function$impl');
   GenericType = goog.module.get('typewildcards.GenericType$impl');
   Foo = goog.module.get('typewildcards.TypeWildCards.Foo$impl');
   HasKey = goog.module.get('typewildcards.TypeWildCards.HasKey$impl');

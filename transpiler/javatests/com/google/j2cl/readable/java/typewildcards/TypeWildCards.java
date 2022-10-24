@@ -15,8 +15,11 @@
  */
 package typewildcards;
 
-import java.util.List;
-import java.util.function.Function;
+interface Function<I, O> {
+  O apply(I i);
+}
+
+interface List<I> {}
 
 class GenericType<T> {}
 

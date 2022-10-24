@@ -21,8 +21,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastE
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import java.util.function.Function;
-
 public class Main {
   public static void main(String[] args) {
     testSuperMethodReferences();
@@ -33,6 +31,10 @@ public class Main {
     testQualifierEvaluation_array();
     testQualifierEvaluation_observeUninitializedField();
     testQualifierEvaluation_implicitObjectMethods();
+  }
+
+  interface Function<I, O> {
+    O apply(I a);
   }
 
   interface Producer<T> {
