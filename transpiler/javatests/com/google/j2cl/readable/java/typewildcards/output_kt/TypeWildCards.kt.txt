@@ -42,14 +42,14 @@ open class TypeWildCards {
  open fun testInferredGenericIntersection() {
   val elements: typewildcards.List<typewildcards.TypeWildCards.Element?>? = null
   val otherElements: typewildcards.List<typewildcards.TypeWildCards.SubOtherElement?>? = null
-  val integers: typewildcards.List<kotlin.Int?>? = typewildcards.TypeWildCards.transform_private_typewildcards_TypeWildCards(typewildcards.TypeWildCards.concat_private_typewildcards_TypeWildCards(elements, otherElements), typewildcards.Function { a ->
+  val integers: typewildcards.List<kotlin.Int?>? = typewildcards.TypeWildCards.transform_private_2(typewildcards.TypeWildCards.concat_private_2(elements, otherElements), typewildcards.Function { a ->
    a!!.getKey()
    return@Function a!!.get()
   })
  }
 
  open fun testRecursiveGeneric() {
-  typewildcards.TypeWildCards.takesRecursiveGeneric_private_typewildcards_TypeWildCards(Foo())
+  typewildcards.TypeWildCards.takesRecursiveGeneric_private_2(Foo())
  }
 
  companion object {
@@ -67,17 +67,17 @@ open class TypeWildCards {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <F, V> transform_private_typewildcards_TypeWildCards(from: typewildcards.List<F>?, function: typewildcards.Function<in F, out V>?): typewildcards.List<V>? {
+  fun <F, V> transform_private_2(from: typewildcards.List<F>?, function: typewildcards.Function<in F, out V>?): typewildcards.List<V>? {
    return null
   }
 
   @kotlin.jvm.JvmStatic
-  fun <E> concat_private_typewildcards_TypeWildCards(a: typewildcards.List<out E>?, b: typewildcards.List<out E>?): typewildcards.List<E>? {
+  fun <E> concat_private_2(a: typewildcards.List<out E>?, b: typewildcards.List<out E>?): typewildcards.List<E>? {
    return null
   }
 
   @kotlin.jvm.JvmStatic
-  fun takesRecursiveGeneric_private_typewildcards_TypeWildCards(foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>?) {}
+  fun takesRecursiveGeneric_private_2(foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>?) {}
 
   @kotlin.jvm.JvmStatic
   fun <C> testInferredIntersectionWithTypeVariable(ri: typewildcards.TypeWildCards.RecursiveInterface<out C, C>?): C {

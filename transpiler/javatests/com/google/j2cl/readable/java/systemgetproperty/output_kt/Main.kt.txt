@@ -6,24 +6,24 @@ import kotlin.jvm.*
 
 open class Main {
  companion object {
-  @kotlin.jvm.JvmField val property_private_systemgetproperty_Main: kotlin.String? = java.lang.System.getProperty("jre.classMetadata")
+  @kotlin.jvm.JvmField val property_private_2: kotlin.String? = java.lang.System.getProperty("jre.classMetadata")
 
-  @kotlin.jvm.JvmField val propertyWithDefault_private_systemgetproperty_Main: kotlin.String? = java.lang.System.getProperty("jre.classMetadata", "default")
+  @kotlin.jvm.JvmField val propertyWithDefault_private_2: kotlin.String? = java.lang.System.getProperty("jre.classMetadata", "default")
 
   @kotlin.jvm.JvmStatic
   fun main(args: kotlin.Array<kotlin.String?>?) {
    var x: kotlin.Boolean = false
-   x = systemgetproperty.Main.property_private_systemgetproperty_Main === "SIMPLE"
-   x = systemgetproperty.Main.property_private_systemgetproperty_Main!!.equals("SIMPLE")
-   x = systemgetproperty.Main.property_private_systemgetproperty_Main!!.equalsIgnoreCase("SIMPLE")
-   x = systemgetproperty.Main.property_private_systemgetproperty_Main === "NOTSIMPLE"
-   x = systemgetproperty.Main.propertyWithDefault_private_systemgetproperty_Main!!.equals("SIMPLE")
+   x = systemgetproperty.Main.property_private_2 === "SIMPLE"
+   x = systemgetproperty.Main.property_private_2!!.equals("SIMPLE")
+   x = systemgetproperty.Main.property_private_2!!.equalsIgnoreCase("SIMPLE")
+   x = systemgetproperty.Main.property_private_2 === "NOTSIMPLE"
+   x = systemgetproperty.Main.propertyWithDefault_private_2!!.equals("SIMPLE")
    x = java.lang.System.getProperty("jre.bar", "bar")!!.equals("bar")
-   x = java.lang.System.getProperty("jre.classMetadata", systemgetproperty.Main.mightHaveSideEffects_private_systemgetproperty_Main())!!.equals("SIMPLE")
+   x = java.lang.System.getProperty("jre.classMetadata", systemgetproperty.Main.mightHaveSideEffects_private_2())!!.equals("SIMPLE")
   }
 
   @kotlin.jvm.JvmStatic
-  fun mightHaveSideEffects_private_systemgetproperty_Main(): kotlin.String? {
+  fun mightHaveSideEffects_private_2(): kotlin.String? {
    return "Foo"
   }
  }

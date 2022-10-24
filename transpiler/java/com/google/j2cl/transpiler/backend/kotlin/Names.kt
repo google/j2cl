@@ -31,8 +31,12 @@ internal val MemberDescriptor.ktMangledName: String
         Visibility.PUBLIC -> ""
         Visibility.PROTECTED -> ""
         Visibility.PACKAGE_PRIVATE -> ""
-        Visibility.PRIVATE -> "_private_${enclosingTypeDescriptor.typeDeclaration.mangledName}"
+        Visibility.PRIVATE ->
+          "_private_${enclosingTypeDescriptor.typeDeclaration.privateMemberSuffix}"
       }
+
+private val TypeDeclaration.privateMemberSuffix: String
+  get() = if (isInterface) mangledName else "$classHierarchyDepth"
 
 internal fun TypeDeclaration.ktSimpleName(asSuperType: Boolean = false) =
   if (asSuperType) ktBridgeSimpleName ?: ktSimpleName else ktSimpleName

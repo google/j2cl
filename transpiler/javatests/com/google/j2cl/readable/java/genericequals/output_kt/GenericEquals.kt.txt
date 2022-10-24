@@ -5,17 +5,17 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class GenericEquals<T> {
- @kotlin.jvm.JvmField val value_private_genericequals_GenericEquals: T
+ @kotlin.jvm.JvmField val value_private_2: T
 
- @kotlin.jvm.JvmField val value2_private_genericequals_GenericEquals: genericequals.GenericEquals<T>?
+ @kotlin.jvm.JvmField val value2_private_2: genericequals.GenericEquals<T>?
 
  constructor(value: T) {
-  this.value_private_genericequals_GenericEquals = value
-  this.value2_private_genericequals_GenericEquals = null
+  this.value_private_2 = value
+  this.value2_private_2 = null
  }
 
  open fun foo(other: genericequals.GenericEquals<*>?): kotlin.Any? {
-  return other!!.value2_private_genericequals_GenericEquals!!.value_private_genericequals_GenericEquals
+  return other!!.value2_private_2!!.value_private_2
  }
 
  open override fun equals(obj: kotlin.Any?): kotlin.Boolean {
@@ -26,6 +26,6 @@ open class GenericEquals<T> {
    return false
   }
   val other: genericequals.GenericEquals<*>? = obj as genericequals.GenericEquals<*>?
-  return this.value_private_genericequals_GenericEquals!!.equals(other!!.value_private_genericequals_GenericEquals)
+  return this.value_private_2!!.equals(other!!.value_private_2)
  }
 }

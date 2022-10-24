@@ -88,7 +88,7 @@ open class TryCatch {
    var ___primaryExc: kotlin.Throwable? = null
    var ___resource: trycatch.TryCatch.ClosableThing? = null
    try {
-    ___resource = trycatch.TryCatch.closableThing_private_trycatch_TryCatch
+    ___resource = trycatch.TryCatch.closableThing_private_2
     throw java.lang.Exception()
    } catch (___exceptionFromTry: kotlin.Throwable) {
     ___primaryExc = ___exceptionFromTry
@@ -111,23 +111,23 @@ open class TryCatch {
  }
 
  open fun testThrowGenerics() {
-  throw this.getT_private_trycatch_TryCatch<kotlin.Exception?>(java.lang.Exception())!!
+  throw this.getT_private_2<kotlin.Exception?>(java.lang.Exception())!!
  }
 
- fun <T> getT_private_trycatch_TryCatch(t: T): T {
+ fun <T> getT_private_2(t: T): T {
   return t
  }
 
  open fun testThrowBoundGenerics() {
-  throw this.getThrowable_private_trycatch_TryCatch<kotlin.Throwable?>()!!
+  throw this.getThrowable_private_2<kotlin.Throwable?>()!!
  }
 
- fun <T: kotlin.Throwable?> getThrowable_private_trycatch_TryCatch(): T {
+ fun <T: kotlin.Throwable?> getThrowable_private_2(): T {
   return null as T
  }
 
  companion object {
-  @kotlin.jvm.JvmField val closableThing_private_trycatch_TryCatch: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  @kotlin.jvm.JvmField val closableThing_private_2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
  }
 
  open class ClosableThing: java.lang.AutoCloseable {

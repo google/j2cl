@@ -7,7 +7,7 @@ import kotlin.jvm.*
 open class SomeJsType<T> {
  @kotlin.jvm.JvmField var publicField: kotlin.Int = 0
 
- @kotlin.jvm.JvmField var privateField_private_jstype_SomeJsType: kotlin.Int = 0
+ @kotlin.jvm.JvmField var privateField_private_2: kotlin.Int = 0
 
  @kotlin.jvm.JvmField var packageField: kotlin.Int = 0
 
@@ -15,16 +15,16 @@ open class SomeJsType<T> {
 
  open fun publicMethod() {}
 
- fun privateMethod_private_jstype_SomeJsType() {}
+ fun privateMethod_private_2() {}
 
  open fun packageMethod() {}
 
  open fun protectedMethod() {}
 
  open fun useFieldsAndMethods() {
-  val value: kotlin.Int = this.publicField + this.privateField_private_jstype_SomeJsType + this.packageField + this.protectedField
+  val value: kotlin.Int = this.publicField + this.privateField_private_2 + this.packageField + this.protectedField
   this.publicMethod()
-  this.privateMethod_private_jstype_SomeJsType()
+  this.privateMethod_private_2()
   this.packageMethod()
   this.protectedMethod()
  }

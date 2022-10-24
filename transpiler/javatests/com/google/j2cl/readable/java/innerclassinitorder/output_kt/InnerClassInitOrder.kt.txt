@@ -79,12 +79,12 @@ open class InnerClassInitOrder {
   kotlin.assert(this.number === 1156)
  }
 
- @kotlin.jvm.JvmField val outer_private_innerclassinitorder_InnerClassInitOrder: innerclassinitorder.InnerClassInitOrder.Outer? = innerclassinitorder.InnerClassInitOrder.Outer(1)
+ @kotlin.jvm.JvmField val outer_private_2: innerclassinitorder.InnerClassInitOrder.Outer? = innerclassinitorder.InnerClassInitOrder.Outer(1)
 
- @kotlin.jvm.JvmField val outerIsSuper_private_innerclassinitorder_InnerClassInitOrder: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_innerclassinitorder_InnerClassInitOrder!!.OuterIsSuper(2)
+ @kotlin.jvm.JvmField val outerIsSuper_private_2: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_2!!.OuterIsSuper(2)
 
  open fun testOuterIsNotSuper() {
-  val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.OuterIsNotSuper()
+  val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_2!!.OuterIsNotSuper()
   kotlin.assert(2 === x!!.getValue())
  }
 
@@ -104,17 +104,17 @@ open class InnerClassInitOrder {
  }
 
  open fun testSuperDispatch() {
-  kotlin.assert(1 === this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.checkDispatchFromSub1())
-  kotlin.assert(1 === this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.checkDispatchFromSub2())
+  kotlin.assert(1 === this.outerIsSuper_private_2!!.checkDispatchFromSub1())
+  kotlin.assert(1 === this.outerIsSuper_private_2!!.checkDispatchFromSub2())
  }
 
  open fun testUnqualifiedAlloc() {
-  val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.unqualifiedAlloc()
+  val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_2!!.unqualifiedAlloc()
   kotlin.assert(2 === x!!.getValue())
  }
 
  open fun testUnqualifiedSuperCall() {
-  val x: innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = this.outerIsSuper_private_innerclassinitorder_InnerClassInitOrder!!.TestUnqualifiedSuperCall()
+  val x: innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = this.outerIsSuper_private_2!!.TestUnqualifiedSuperCall()
   kotlin.assert(2 === x!!.getValue())
  }
 
