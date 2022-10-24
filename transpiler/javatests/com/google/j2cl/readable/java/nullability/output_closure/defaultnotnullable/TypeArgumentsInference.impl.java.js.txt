@@ -1,0 +1,59 @@
+goog.module('nullability.defaultnotnullable.TypeArgumentsInference$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Pair = goog.forwardDeclare('nullability.defaultnotnullable.TypeArgumentsInference.Pair$impl');
+
+class TypeArgumentsInference extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!TypeArgumentsInference} */
+ static $create__() {
+  TypeArgumentsInference.$clinit();
+  let $instance = new TypeArgumentsInference();
+  $instance.$ctor__nullability_defaultnotnullable_TypeArgumentsInference__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_defaultnotnullable_TypeArgumentsInference__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @template K @return {!Pair<K, ?>} */
+ static m_wildcardPair__nullability_defaultnotnullable_TypeArgumentsInference_Pair() {
+  TypeArgumentsInference.$clinit();
+  return /**@type {!Pair<K, *>}*/ (Pair.$create__());
+ }
+ /** @nodts @template K, V @return {!Pair<K, V>} */
+ static m_pairIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair(/** !Pair<K, V> */ pair) {
+  TypeArgumentsInference.$clinit();
+  return pair;
+ }
+ /** @nodts @template K @return {!Pair<K, ?>} */
+ static m_wildcardPairAndIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair() {
+  TypeArgumentsInference.$clinit();
+  return /**@type {!Pair<K, !*>}*/ (TypeArgumentsInference.m_pairIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair(/**@type {!Pair<K, *>}*/ (TypeArgumentsInference.m_wildcardPair__nullability_defaultnotnullable_TypeArgumentsInference_Pair())));
+ }
+ /** @nodts */
+ static $clinit() {
+  TypeArgumentsInference.$clinit = () =>{};
+  TypeArgumentsInference.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TypeArgumentsInference;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  Pair = goog.module.get('nullability.defaultnotnullable.TypeArgumentsInference.Pair$impl');
+ }
+}
+$Util.$setClassMetadata(TypeArgumentsInference, 'nullability.defaultnotnullable.TypeArgumentsInference');
+
+exports = TypeArgumentsInference;
+
+//# sourceMappingURL=TypeArgumentsInference.js.map

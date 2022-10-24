@@ -94,6 +94,12 @@
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.Consumer [static fields]
 (global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_Consumer (mut i32) (i32.const 0))
 
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_TypeArgumentsInference (mut i32) (i32.const 0))
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_TypeArgumentsInference_Pair (mut i32) (i32.const 0))
+
 ;;; Code for nullability.defaultnullable.DefaultNullable [static fields]
 (global $f_$initialized__nullability_defaultnullable_DefaultNullable (mut i32) (i32.const 0))
 
@@ -650,6 +656,34 @@
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable [itable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [vtable.init]
+(global $nullability.defaultnotnullable.TypeArgumentsInference.vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.vtable) 
+ (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.defaultnotnullable.TypeArgumentsInference)
+ )
+)
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [itable.init]
+(global $nullability.defaultnotnullable.TypeArgumentsInference.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [vtable.init]
+(global $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable) 
+ (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.defaultnotnullable.TypeArgumentsInference.Pair)
+ )
+)
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [itable.init]
+(global $nullability.defaultnotnullable.TypeArgumentsInference.Pair.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [vtable.init]
@@ -5460,6 +5494,215 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.Consumer)
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference [CLASS]
+(type $nullability.defaultnotnullable.TypeArgumentsInference (struct_subtype 
+ (field $vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $nullability.defaultnotnullable.TypeArgumentsInference.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; TypeArgumentsInference TypeArgumentsInference.$create()
+(func $$create__@nullability.defaultnotnullable.TypeArgumentsInference
+ (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+ (local $$instance (ref null $nullability.defaultnotnullable.TypeArgumentsInference))
+ (block
+  ;; TypeArgumentsInference $instance = new TypeArgumentsInference.<init>(0);
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.TypeArgumentsInference (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+  (call $$ctor__void_$p_nullability_defaultnotnullable_TypeArgumentsInference@nullability.defaultnotnullable.TypeArgumentsInference (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void TypeArgumentsInference.$ctor()
+(func $$ctor__void_$p_nullability_defaultnotnullable_TypeArgumentsInference@nullability.defaultnotnullable.TypeArgumentsInference
+ (param $this (ref null $nullability.defaultnotnullable.TypeArgumentsInference))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+ (block
+  ;; nullability.defaultnotnullable.TypeArgumentsInference.$clinit();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+  (call $$clinit__void@nullability.defaultnotnullable.TypeArgumentsInference )
+  ;; Object.this.$ctor();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; Pair<K, ?> TypeArgumentsInference.wildcardPair()
+(func $m_wildcardPair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference
+ (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:25:56
+ (block
+  ;; nullability.defaultnotnullable.TypeArgumentsInference.$clinit();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:25:71
+  (call $$clinit__void@nullability.defaultnotnullable.TypeArgumentsInference )
+  ;; return nullability.defaultnotnullable.TypeArgumentsInference.Pair.$create();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:26:4
+  (return (call $$create__@nullability.defaultnotnullable.TypeArgumentsInference.Pair ))
+ )
+)
+
+;;; Pair<K, V> TypeArgumentsInference.pairIdentity(Pair<K, V> pair)
+(func $m_pairIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference
+ (param $pair (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:29:84
+ (block
+  ;; nullability.defaultnotnullable.TypeArgumentsInference.$clinit();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:30:23
+  (call $$clinit__void@nullability.defaultnotnullable.TypeArgumentsInference )
+  ;; return pair;
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:31:4
+  (return (local.get $pair))
+ )
+)
+
+;;; Pair<K, ?> TypeArgumentsInference.wildcardPairAndIdentity()
+(func $m_wildcardPairAndIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference
+ (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:34:56
+ (block
+  ;; nullability.defaultnotnullable.TypeArgumentsInference.$clinit();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:34:82
+  (call $$clinit__void@nullability.defaultnotnullable.TypeArgumentsInference )
+  ;; return nullability.defaultnotnullable.TypeArgumentsInference.pairIdentity(nullability.defaultnotnullable.TypeArgumentsInference.wildcardPair());
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:39:4
+  (return (call $m_pairIdentity__nullability_defaultnotnullable_TypeArgumentsInference_Pair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference (call $m_wildcardPair__nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference )))
+ )
+)
+
+;;; void TypeArgumentsInference.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.TypeArgumentsInference
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+ (block
+  ;; if (nullability.defaultnotnullable.TypeArgumentsInference.$initialized) return;
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_TypeArgumentsInference)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.TypeArgumentsInference.$initialized = true);
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+  (global.set $f_$initialized__nullability_defaultnotnullable_TypeArgumentsInference (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:22:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> TypeArgumentsInference.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.TypeArgumentsInference
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.defaultnotnullable.TypeArgumentsInference))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.TypeArgumentsInference (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.TypeArgumentsInference();
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.TypeArgumentsInference__java_lang_Class (ref.func $$getNullability.defaultnotnullable.TypeArgumentsInference__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.TypeArgumentsInference)
+
+;;; Code for nullability.defaultnotnullable.TypeArgumentsInference.Pair [CLASS]
+(type $nullability.defaultnotnullable.TypeArgumentsInference.Pair (struct_subtype 
+ (field $vtable (ref $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; Pair<K, V> Pair.$create()
+(func $$create__@nullability.defaultnotnullable.TypeArgumentsInference.Pair
+ (result (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+ (local $$instance (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ (block
+  ;; Pair<K, V> $instance = new Pair.<init>(0);
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.TypeArgumentsInference.Pair (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.Pair.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.TypeArgumentsInference.Pair.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+  (call $$ctor__void_$p_nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference.Pair (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Pair.$ctor()
+(func $$ctor__void_$p_nullability_defaultnotnullable_TypeArgumentsInference_Pair@nullability.defaultnotnullable.TypeArgumentsInference.Pair
+ (param $this (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+ (block
+  ;; nullability.defaultnotnullable.TypeArgumentsInference.Pair.$clinit();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+  (call $$clinit__void@nullability.defaultnotnullable.TypeArgumentsInference.Pair )
+  ;; Object.this.$ctor();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Pair.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.TypeArgumentsInference.Pair
+ ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+ (block
+  ;; if (nullability.defaultnotnullable.TypeArgumentsInference.Pair.$initialized) return;
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_TypeArgumentsInference_Pair)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.TypeArgumentsInference.Pair.$initialized = true);
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+  (global.set $f_$initialized__nullability_defaultnotnullable_TypeArgumentsInference_Pair (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nullability/defaultnotnullable/TypeArgumentsInference.java:23:28
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Pair.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.TypeArgumentsInference.Pair
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.defaultnotnullable.TypeArgumentsInference.Pair))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.TypeArgumentsInference.Pair (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.TypeArgumentsInference.Pair();
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.TypeArgumentsInference.Pair__java_lang_Class (ref.func $$getNullability.defaultnotnullable.TypeArgumentsInference.Pair__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.TypeArgumentsInference.Pair)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [CLASS]
 (type $nullability.defaultnullable.DefaultNullable (struct_subtype 

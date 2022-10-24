@@ -85,6 +85,12 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
   }
 
   private static boolean typeArgumentNeedsCast(TypeDescriptor from, TypeDescriptor to) {
+    // Insert explicit cast from wildcard to non-wildcard, since in some cases wildcard type
+    // arguments are inferred as non-wildcard in the AST.
+    if (isWildcard(from) && !isWildcard(to)) {
+      return true;
+    }
+
     return from.isNullable() != to.isNullable() || typeArgumentsNeedsCast(from, to);
   }
 
@@ -149,5 +155,14 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
     }
 
     throw new IllegalArgumentException();
+  }
+
+  private static boolean isWildcard(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof TypeVariable) {
+      TypeVariable typeVariable = (TypeVariable) typeDescriptor;
+      return typeVariable.isWildcardOrCapture();
+    }
+
+    return false;
   }
 }

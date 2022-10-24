@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package nullability.defaultnotnullable;
 
 import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
 @NullMarked
-public class GenericMethod {
+public class TypeArgumentsInference {
   public static final class Pair<K extends @Nullable Object, V extends @Nullable Object> {}
 
   public static <K extends @Nullable Object> Pair<K, ?> wildcardPair() {
