@@ -1,13 +1,15 @@
 goog.module('j2ktnotpassing.ExplicitNotNullable.$1$impl');
 
-const NullableParameter = goog.require('j2ktnotpassing.ExplicitNotNullable.NullableParameter$impl');
+const ExplicitNotNullable_Function = goog.require('j2ktnotpassing.ExplicitNotNullable.Function$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ExplicitNotNullable = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
- * @implements {NullableParameter<string>}
+ * @implements {ExplicitNotNullable_Function<string, string>}
  */
 class $1 extends j_l_Object {
  /** @protected @nodts */
@@ -28,6 +30,15 @@ class $1 extends j_l_Object {
   this.$outer_this__j2ktnotpassing_ExplicitNotNullable_1 = $outer_this;
   this.$ctor__java_lang_Object__void();
  }
+ /** @nodts @return {string} */
+ m_apply__java_lang_String__java_lang_String(/** string */ s) {
+  return s;
+ }
+ //Bridge method.
+ /** @override @nodts @return {string} */
+ m_apply__java_lang_Object__java_lang_Object(/** string */ arg0) {
+  return this.m_apply__java_lang_String__java_lang_String(/**@type {string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
  /** @nodts */
  static $clinit() {
   $1.$clinit = () =>{};
@@ -40,9 +51,12 @@ class $1 extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
-NullableParameter.$markImplementor($1);
+ExplicitNotNullable_Function.$markImplementor($1);
 $Util.$setClassMetadata($1, 'j2ktnotpassing.ExplicitNotNullable$1');
 
 exports = $1;

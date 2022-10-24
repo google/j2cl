@@ -20,7 +20,15 @@ import org.jspecify.nullness.Nullable;
 
 @NullMarked
 public class ExplicitNotNullable {
-  interface NullableParameter<T extends @Nullable Object> {}
+  interface Function<I extends @Nullable Object, O extends @Nullable Object> {
+    O apply(I i);
+  }
 
-  NullableParameter<String> i = new NullableParameter<>() {};
+  Function<String, String> i =
+      new Function<String, String>() {
+        @Override
+        public String apply(String s) {
+          return s;
+        }
+      };
 }
