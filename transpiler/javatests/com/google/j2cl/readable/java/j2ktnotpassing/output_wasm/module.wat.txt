@@ -40,6 +40,15 @@
 ;;; Code for j2ktnotpassing.NotNullable.IntFunction [static fields]
 (global $f_$initialized__j2ktnotpassing_NotNullable_IntFunction (mut i32) (i32.const 0))
 
+;;; Code for j2ktnotpassing.ExplicitNotNullable [static fields]
+(global $f_$initialized__j2ktnotpassing_ExplicitNotNullable (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable.1 [static fields]
+(global $f_$initialized__j2ktnotpassing_ExplicitNotNullable_1 (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable.NullableParameter [static fields]
+(global $f_$initialized__j2ktnotpassing_ExplicitNotNullable_NullableParameter (mut i32) (i32.const 0))
+
 ;;; Code for j2ktnotpassing.AccidentalOverride [vtable.init]
 (global $j2ktnotpassing.AccidentalOverride.vtable (ref $j2ktnotpassing.AccidentalOverride.vtable) 
  (struct.new $j2ktnotpassing.AccidentalOverride.vtable
@@ -202,6 +211,36 @@
 (global $j2ktnotpassing.DefaultNullable.$LambdaImplementor$4.itable (ref $itable) (array.init_static $itable 
  (struct.new $j2ktnotpassing.NotNullable.IntFunction.vtable
   (ref.func $m_accept__int__java_lang_Object@j2ktnotpassing.DefaultNullable.$LambdaImplementor$4)
+ )
+ ))
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable [vtable.init]
+(global $j2ktnotpassing.ExplicitNotNullable.vtable (ref $j2ktnotpassing.ExplicitNotNullable.vtable) 
+ (struct.new $j2ktnotpassing.ExplicitNotNullable.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable)
+ )
+)
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable [itable.init]
+(global $j2ktnotpassing.ExplicitNotNullable.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable.1 [vtable.init]
+(global $j2ktnotpassing.ExplicitNotNullable.1.vtable (ref $j2ktnotpassing.ExplicitNotNullable.1.vtable) 
+ (struct.new $j2ktnotpassing.ExplicitNotNullable.1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable.1)
+ )
+)
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable.1 [itable.init]
+(global $j2ktnotpassing.ExplicitNotNullable.1.itable (ref $itable) (array.init_static $itable 
+ (struct.new $j2ktnotpassing.ExplicitNotNullable.NullableParameter.vtable
  )
  ))
 
@@ -1345,3 +1384,222 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.NotNullable.IntFunction)
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable [CLASS]
+(type $j2ktnotpassing.ExplicitNotNullable (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.ExplicitNotNullable.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_i__j2ktnotpassing_ExplicitNotNullable (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
+)
+(type $j2ktnotpassing.ExplicitNotNullable.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; ExplicitNotNullable ExplicitNotNullable.$create()
+(func $$create__@j2ktnotpassing.ExplicitNotNullable
+ (result (ref null $j2ktnotpassing.ExplicitNotNullable))
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+ (local $$instance (ref null $j2ktnotpassing.ExplicitNotNullable))
+ (block
+  ;; ExplicitNotNullable $instance = new ExplicitNotNullable.<init>(0,null);
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (local.set $$instance (struct.new $j2ktnotpassing.ExplicitNotNullable (ref.as_non_null (global.get $j2ktnotpassing.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.ExplicitNotNullable.itable)) (i32.const 0) (ref.null $java.lang.Object)))
+  ;; $instance.$ctor();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (call $$ctor__void_$p_j2ktnotpassing_ExplicitNotNullable@j2ktnotpassing.ExplicitNotNullable (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ExplicitNotNullable.$ctor()
+(func $$ctor__void_$p_j2ktnotpassing_ExplicitNotNullable@j2ktnotpassing.ExplicitNotNullable
+ (param $this (ref null $j2ktnotpassing.ExplicitNotNullable))
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+ (block
+  ;; j2ktnotpassing.ExplicitNotNullable.$clinit();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (call $$clinit__void@j2ktnotpassing.ExplicitNotNullable )
+  ;; Object.this.$ctor();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;; ExplicitNotNullable.this.$init();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (call $$init__void_$p_j2ktnotpassing_ExplicitNotNullable@j2ktnotpassing.ExplicitNotNullable (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ExplicitNotNullable.$init()
+(func $$init__void_$p_j2ktnotpassing_ExplicitNotNullable@j2ktnotpassing.ExplicitNotNullable
+ (param $this (ref null $j2ktnotpassing.ExplicitNotNullable))
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+ (block
+  ;; (ExplicitNotNullable.this.i = j2ktnotpassing.ExplicitNotNullable.1.$create(ExplicitNotNullable.this));
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:2
+  (struct.set $j2ktnotpassing.ExplicitNotNullable $f_i__j2ktnotpassing_ExplicitNotNullable(local.get $this) (call $$create__j2ktnotpassing_ExplicitNotNullable@j2ktnotpassing.ExplicitNotNullable.1 (local.get $this)))
+ )
+)
+
+;;; void ExplicitNotNullable.$clinit()
+(func $$clinit__void@j2ktnotpassing.ExplicitNotNullable
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+ (block
+  ;; if (j2ktnotpassing.ExplicitNotNullable.$initialized) return;
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (if (global.get $f_$initialized__j2ktnotpassing_ExplicitNotNullable)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.ExplicitNotNullable.$initialized = true);
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (global.set $f_$initialized__j2ktnotpassing_ExplicitNotNullable (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:22:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> ExplicitNotNullable.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.ExplicitNotNullable))
+ (local.set $this (ref.cast_static $j2ktnotpassing.ExplicitNotNullable (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.ExplicitNotNullable();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.ExplicitNotNullable__java_lang_Class (ref.func $$getJ2ktnotpassing.ExplicitNotNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable)
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable.1 [CLASS]
+(type $j2ktnotpassing.ExplicitNotNullable.1 (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.ExplicitNotNullable.1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__j2ktnotpassing_ExplicitNotNullable_1 (ref null $j2ktnotpassing.ExplicitNotNullable))
+  $java.lang.Object)
+)
+(type $j2ktnotpassing.ExplicitNotNullable.1.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; <anonymous> implements NullableParameter<String> <anonymous> implements NullableParameter<String>.$create(ExplicitNotNullable $outer_this)
+(func $$create__j2ktnotpassing_ExplicitNotNullable@j2ktnotpassing.ExplicitNotNullable.1
+ (param $$outer_this (ref null $j2ktnotpassing.ExplicitNotNullable))
+ (result (ref null $j2ktnotpassing.ExplicitNotNullable.1))
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+ (local $$instance (ref null $j2ktnotpassing.ExplicitNotNullable.1))
+ (block
+  ;; <anonymous> implements NullableParameter<String> $instance = new $1.<init>(0,$outer_this);
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+  (local.set $$instance (struct.new $j2ktnotpassing.ExplicitNotNullable.1 (ref.as_non_null (global.get $j2ktnotpassing.ExplicitNotNullable.1.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.ExplicitNotNullable.1.itable)) (i32.const 0) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+  (call $$ctor__j2ktnotpassing_ExplicitNotNullable__void_$p_j2ktnotpassing_ExplicitNotNullable_1@j2ktnotpassing.ExplicitNotNullable.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements NullableParameter<String>.$ctor(ExplicitNotNullable $outer_this)
+(func $$ctor__j2ktnotpassing_ExplicitNotNullable__void_$p_j2ktnotpassing_ExplicitNotNullable_1@j2ktnotpassing.ExplicitNotNullable.1
+ (param $this (ref null $j2ktnotpassing.ExplicitNotNullable.1))
+ (param $$outer_this (ref null $j2ktnotpassing.ExplicitNotNullable))
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+ (block
+  ;; j2ktnotpassing.ExplicitNotNullable.1.$clinit();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+  (call $$clinit__void@j2ktnotpassing.ExplicitNotNullable.1 )
+  ;; Object.this.$ctor();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> implements NullableParameter<String>.$clinit()
+(func $$clinit__void@j2ktnotpassing.ExplicitNotNullable.1
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+ (block
+  ;; if (j2ktnotpassing.ExplicitNotNullable.1.$initialized) return;
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+  (if (global.get $f_$initialized__j2ktnotpassing_ExplicitNotNullable_1)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.ExplicitNotNullable.1.$initialized = true);
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+  (global.set $f_$initialized__j2ktnotpassing_ExplicitNotNullable_1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:25:58
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> <anonymous> implements NullableParameter<String>.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable.1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.ExplicitNotNullable.1))
+ (local.set $this (ref.cast_static $j2ktnotpassing.ExplicitNotNullable.1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.ExplicitNotNullable.1();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.ExplicitNotNullable.1__java_lang_Class (ref.func $$getJ2ktnotpassing.ExplicitNotNullable.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable.1)
+
+;;; Code for j2ktnotpassing.ExplicitNotNullable.NullableParameter [INTERFACE]
+(type $j2ktnotpassing.ExplicitNotNullable.NullableParameter.vtable (struct_subtype 
+  data)
+)
+
+;;; void NullableParameter.$clinit()
+(func $$clinit__void@j2ktnotpassing.ExplicitNotNullable.NullableParameter
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:23:12
+ (block
+  ;; if (j2ktnotpassing.ExplicitNotNullable.NullableParameter.$initialized) return;
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:23:12
+  (if (global.get $f_$initialized__j2ktnotpassing_ExplicitNotNullable_NullableParameter)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/ExplicitNotNullable.java:23:12
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.ExplicitNotNullable.NullableParameter.$initialized = true);
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:23:12
+  (global.set $f_$initialized__j2ktnotpassing_ExplicitNotNullable_NullableParameter (i32.const 1))
+ )
+)
+
+;;; Class<?> NullableParameter.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable.NullableParameter
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.ExplicitNotNullable.NullableParameter();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.ExplicitNotNullable.NullableParameter__java_lang_Class (ref.func $$getJ2ktnotpassing.ExplicitNotNullable.NullableParameter__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable.NullableParameter)

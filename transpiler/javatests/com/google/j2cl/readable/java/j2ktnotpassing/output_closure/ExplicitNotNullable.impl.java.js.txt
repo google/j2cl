@@ -1,0 +1,52 @@
+goog.module('j2ktnotpassing.ExplicitNotNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.$1$impl');
+let NullableParameter = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.NullableParameter$impl');
+
+class ExplicitNotNullable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {!NullableParameter<string>} @nodts*/
+  this.f_i__j2ktnotpassing_ExplicitNotNullable;
+ }
+ /** @nodts @return {!ExplicitNotNullable} */
+ static $create__() {
+  ExplicitNotNullable.$clinit();
+  let $instance = new ExplicitNotNullable();
+  $instance.$ctor__j2ktnotpassing_ExplicitNotNullable__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__j2ktnotpassing_ExplicitNotNullable__void() {
+  this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_j2ktnotpassing_ExplicitNotNullable();
+ }
+ /** @private @nodts */
+ $init__void_$p_j2ktnotpassing_ExplicitNotNullable() {
+  this.f_i__j2ktnotpassing_ExplicitNotNullable = $1.$create__j2ktnotpassing_ExplicitNotNullable(this);
+ }
+ /** @nodts */
+ static $clinit() {
+  ExplicitNotNullable.$clinit = () =>{};
+  ExplicitNotNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExplicitNotNullable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $1 = goog.module.get('j2ktnotpassing.ExplicitNotNullable.$1$impl');
+ }
+}
+$Util.$setClassMetadata(ExplicitNotNullable, 'j2ktnotpassing.ExplicitNotNullable');
+
+exports = ExplicitNotNullable;
+
+//# sourceMappingURL=ExplicitNotNullable.js.map
