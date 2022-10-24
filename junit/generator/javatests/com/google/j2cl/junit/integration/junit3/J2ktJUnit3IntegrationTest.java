@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2022 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -25,41 +25,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-/** Integration test for j2cl JUnit3 support. */
+/** Integration test for j2kt JUnit3 support. */
 @RunWith(Parameterized.class)
-public class JUnit3IntegrationTest extends IntegrationTestBase {
+public class J2ktJUnit3IntegrationTest extends IntegrationTestBase {
 
   @Before
-  public void assumeNonJ2kt() {
-    assumeFalse(testMode.isJ2kt());
-  }
-
-  @Test
-  public void testMethodOrdering() throws Exception {
-    String testName = "MethodOrderingTest";
-    TestResult testResult =
-        newTestResultBuilder()
-            .testClassName(testName)
-            .addTestSuccess("test_a")
-            .addTestSuccess("test_b")
-            .addTestSuccess("test_b1")
-            .addTestSuccess("test_c")
-            .addTestSuccess("test_parent_a")
-            .addTestSuccess("test_parent_b")
-            .addTestSuccess("test_parent_b1")
-            .addTestSuccess("test_parent_c")
-            .addJavaLogLineSequence(
-                "a", "b", "b1", "c", "parent_a", "parent_b", "parent_b1", "parent_c")
-            .build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
+  public void assumeNonWeb() {
+    assumeFalse(testMode.isWeb());
   }
 
   @Test
   public void testParentClass() throws Exception {
     String testName = "ParentMethodTest";
-
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testName)
@@ -67,7 +44,10 @@ public class JUnit3IntegrationTest extends IntegrationTestBase {
             .addTestSuccess("testOther")
             .addTestSuccess("testParent")
             .addTestSuccess("testParentOther")
-            .addJavaLogLineSequence("test", "test", "parentTest", "parentTest")
+            .addJavaLogLineSequence("test")
+            .addJavaLogLineSequence("test")
+            .addJavaLogLineSequence("parentTest")
+            .addJavaLogLineSequence("parentTest")
             .build();
 
     List<String> logLines = runTest(testName);
@@ -149,7 +129,7 @@ public class JUnit3IntegrationTest extends IntegrationTestBase {
 
   @Test
   public void testThrowsInConstructor() throws Exception {
-    if (!testMode.isJ2cl()) {
+    if (!testMode.isJ2kt()) {
       // Junit3 generates a non-standard error in this case that is hard to assert. Like:
       // 1) warning(junit.framework.TestSuite$1)
       return;
@@ -188,14 +168,13 @@ public class JUnit3IntegrationTest extends IntegrationTestBase {
   @Test
   public void testThrowsInTearDown() throws Exception {
     String testName = "ThrowsInTearDownTest";
-
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testName)
             .addTestError("testOther", "java.lang.RuntimeException: throw in tearDown")
             .addTestError("test", "java.lang.RuntimeException: throw in tearDown")
-            .addJavaLogLineSequence("testOther", "tearDown")
             .addJavaLogLineSequence("test", "tearDown")
+            .addJavaLogLineSequence("testOther", "tearDown")
             .build();
 
     List<String> logLines = runTest(testName);

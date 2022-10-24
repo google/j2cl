@@ -44,6 +44,11 @@ public class J2clAsyncTest extends IntegrationTestBase {
     assumeFalse(testMode.isJ2wasm());
   }
 
+  @Before
+  public void assumeNonJ2kt() {
+    assumeFalse(testMode.isJ2kt());
+  }
+
   @Test
   public void testAfterWithFailingAsyncTest() throws Exception {
     String testName = "TestAfterWithFailingAsyncTest";

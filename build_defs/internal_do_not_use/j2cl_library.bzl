@@ -45,6 +45,7 @@ _J2KT_JVM_PACKAGES = [
     "transpiler/javatests/com/google/j2cl/readable/java",
     "junit/generator/java/com/google/j2cl/junit/apt",
     "junit/generator/java/com/google/j2cl/junit/runtime",
+    "junit/generator/javatests/com/google/j2cl/junit/integration",
     "third_party/java/error_prone",
     "third_party/java/junit",
 ]

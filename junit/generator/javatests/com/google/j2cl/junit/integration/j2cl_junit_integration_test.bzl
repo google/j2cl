@@ -1,9 +1,9 @@
 """Helper for j2cl junit integration tests."""
 
-load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2wasm_test")
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_jvm_test", "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
 
-def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps = [], extra_data = [], enable_wasm = False):
+def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps = [], extra_data = [], platforms = ["CLOSURE"]):
     """Run tests against integration test data
 
     Args:
@@ -12,17 +12,21 @@ def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps =
         test_data_java_only: Test data for java.
         deps: Dependencies for this target.
         extra_data: Files needed by this rule at runtime.
-        enable_wasm: Flag to indicate whether to run j2wasm
+        platforms: The platform on which tests run.
     """
     test_data_java = test_data + test_data_java_only
     test_data_j2cl = [d + "-j2cl" for d in test_data]
     test_data_j2cl_compiled = [d + "-j2cl_compiled" for d in test_data]
+    test_data_j2kt = [d + "-j2kt-jvm" for d in test_data]
     test_data_j2wasm = [d + "-j2wasm" for d in test_data]
     test_data_j2wasm_optimized = [d + "-j2wasm_optimized" for d in test_data]
 
     test_data_all = test_data_java + test_data_j2cl + test_data_j2cl_compiled
-    if enable_wasm:
+    if "WASM" in platforms:
         test_data_all = test_data_all + test_data_j2wasm + test_data_j2wasm_optimized
+
+    if "J2KT" in platforms:
+        test_data_all = test_data_all + test_data_j2kt
 
     shard_count = len(test_data_all)
     if shard_count > 50:
@@ -64,7 +68,7 @@ _DEFAULT_JAVA_DEPS = [
     "//junit/generator/javatests/com/google/j2cl/junit/integration/testlogger:testlogger",
 ]
 
-def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_srcs = [], native_deps = [], enable_wasm = False):
+def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_srcs = [], native_deps = [], platforms = ["CLOSURE"]):
     """Generate j2cl and j2wasm integration test data
 
     Args:
@@ -73,7 +77,7 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
         extra_defs: A list of additional jscompiler flags to use when compiling the test.
         native_srcs: The native srcs.
         native_deps: Native libraries that will be built only for the target.
-        enable_wasm: Flag to indicate whether to generate wasm test.
+        platforms: The platform on which tests will run
     """
     srcs = ["%s.java" % name]
     test_class = "%s.%s" % (get_java_package(native.package_name()), name)
@@ -92,7 +96,7 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
         native_deps = native_deps,
     )
 
-    if enable_wasm:
+    if "WASM" in platforms:
         j2wasm_test(
             name = "%s-j2wasm" % name,
             jvm_flags = JVM_FLAGS,
@@ -118,32 +122,43 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
                 "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
             ],
         )
+    if "CLOSURE" in platforms:
+        j2cl_test(
+            name = "%s-j2cl_compiled" % name,
+            compile = 1,
+            jvm_flags = JVM_FLAGS,
+            tags = tags,
+            test_class = test_class,
+            runtime_deps = [":%s-lib-j2cl" % name],
+            extra_defs = extra_defs,
+            javacopts = [
+                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+            ],
+        )
 
-    j2cl_test(
-        name = "%s-j2cl_compiled" % name,
-        compile = 1,
-        jvm_flags = JVM_FLAGS,
-        tags = tags,
-        test_class = test_class,
-        runtime_deps = [":%s-lib-j2cl" % name],
-        extra_defs = extra_defs,
-        javacopts = [
-            "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-        ],
-    )
-
-    j2cl_test(
-        name = "%s-j2cl" % name,
-        jvm_flags = JVM_FLAGS,
-        tags = tags,
-        test_class = test_class,
-        runtime_deps = [":%s-lib-j2cl" % name],
-        extra_defs = extra_defs,
-        javacopts = [
-            "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
-        ],
-    )
-
+        j2cl_test(
+            name = "%s-j2cl" % name,
+            jvm_flags = JVM_FLAGS,
+            tags = tags,
+            test_class = test_class,
+            runtime_deps = [":%s-lib-j2cl" % name],
+            extra_defs = extra_defs,
+            javacopts = [
+                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+            ],
+        )
+    if "J2KT" in platforms:
+        j2kt_jvm_test(
+            name = "%s-j2kt-jvm" % name,
+            jvm_flags = JVM_FLAGS,
+            tags = tags,
+            test_class = test_class,
+            runtime_deps = [":%s-lib-j2kt-jvm" % name],
+            extra_defs = extra_defs,
+            javacopts = [
+                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+            ],
+        )
     native.java_test(
         name = name,
         tags = tags,

@@ -35,6 +35,11 @@ public class J2clParameterizedIntegrationTest2 extends IntegrationTestBase {
     assumeFalse(testMode.isJ2wasm());
   }
 
+  @Before
+  public void assumeNonJ2kt() {
+    assumeFalse(testMode.isJ2kt());
+  }
+
   @Test
   public void testParentTest() throws Exception {
     String testClassName = "ParentTest";

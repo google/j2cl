@@ -17,29 +17,21 @@ package com.google.j2cl.junit.integration.junit3.data;
 
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
 import junit.framework.TestCase;
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 
 /** TestCase used for integration testing for j2cl JUnit support. */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ThrowsInSetupTest extends TestCase {
-
-  private static boolean first = true;
 
   @Override
   protected void setUp() throws Exception {
     TestCaseLogger.log("setup");
-    if (first) {
-      first = false;
-      throw new RuntimeException("first setup throws");
-    }
+    throw new RuntimeException("throw in setup");
   }
 
   public void test() {
-    TestCaseLogger.log("test");
+    TestCaseLogger.log("should_not_be_in_log");
   }
 
   public void testOther() {
-    TestCaseLogger.log("testOther");
+    TestCaseLogger.log("should_not_be_in_log");
   }
 }

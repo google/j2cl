@@ -68,13 +68,19 @@ public class TestAsserter {
     int succeeds = testResult.succeeds().size();
     int testCount = fails + errors + succeeds;
     if (testMode.isWeb()) {
-      // Like Junit4, J2CL always counts errors as failures
+      // Like JUnit4, J2CL always counts errors as failures, the log will show "Failures" instead
+      // of "Errors".
       fails += errors;
       errors = 0;
       // TODO(b/32608089): jsunit_test does not report number of tests correctly
       testCount = 1;
       // Since total number of tests cannot be asserted; ensure nummber of succeeds is correct.
       assertThat(consoleLogs.stream().filter(x -> x.contains(": PASSED"))).hasSize(succeeds);
+    } else if (testMode.isJ2kt()) {
+      // J2KT JVM tests run with JUnit 4 which counts errors as failures, the log will shows
+      // "Failures" instead of "Errors".
+      fails += errors;
+      errors = 0;
     }
 
     if (fails + errors > 0) {
@@ -96,9 +102,12 @@ public class TestAsserter {
     }
 
     List<String> javaLogLines = extractJavaMessages();
+    String javaLogLineSequenceString = String.join(", ", javaLogLines);
     for (ImmutableList<String> javaLogLineSequence : testResult.javaLogLinesSequences()) {
-      assertThat(javaLogLines).containsAtLeastElementsIn(javaLogLineSequence).inOrder();
+      String expectedSequence = String.join(", ", javaLogLineSequence);
+      assertThat(javaLogLineSequenceString).contains(expectedSequence);
     }
+
     Iterable<String> allExpectedJavaLog = Iterables.concat(testResult.javaLogLinesSequences());
     assertThat(javaLogLines).containsExactlyElementsIn(allExpectedJavaLog);
 
@@ -121,7 +130,7 @@ public class TestAsserter {
   }
 
   private void assertLogsNotContains(String shouldNotContain) {
-    assertFalse("Logs should contain: " + shouldNotContain, oneLineContains(shouldNotContain));
+    assertFalse("Logs should not contain: " + shouldNotContain, oneLineContains(shouldNotContain));
   }
 
   private void assertTestSummaryForFailure(int failures, int errors, int total) {
@@ -157,6 +166,8 @@ public class TestAsserter {
     String method = getTestMethodName(testEntry.getKey());
     if (testMode.isWeb()) {
       assertLogsContains("%s : FAILED", method);
+    } else if (testMode.isJ2kt()) {
+      assertLogsContains(getJ2ktJunitTestFailureMsg(method));
     } else {
       assertLogsContains(getJunitTestFailureMsg(method));
     }
@@ -169,12 +180,20 @@ public class TestAsserter {
     }
   }
 
+  private String getJ2ktJunitTestFailureMsg(String method) {
+    return formatTestFailureMsg(
+        method, "javatests." + testResult.packageName(), testResult.testClassName() + "_Adapter");
+  }
+
   private String getJunitTestFailureMsg(String method) {
     // This is approximate but good enough for our testing purposes
     // Failure will check the method name so we will trim the prefix testGroup$[i]_ for
     // parameterized test
-    return String.format(
-            ") %s(%s.%s)", method, testResult.packageName(), testResult.testClassName())
+    return formatTestFailureMsg(method, testResult.packageName(), testResult.testClassName());
+  }
+
+  private String formatTestFailureMsg(String method, String packageName, String testClassName) {
+    return String.format(") %s(%s.%s)", method, packageName, testClassName)
         .replaceFirst("testGroup[0-9]+_", "");
   }
 

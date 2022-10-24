@@ -10,7 +10,10 @@ package(licenses = ["notice"])
 # blaze test --test_arg=--output_command_line junit/generator/javatests/com/google/j2cl/junit/integration/junit4:JUnit4IntegrationTest
 j2cl_test_integration_test(
     name = "JUnit4IntegrationTest1",
-    enable_wasm = True,
+    platforms = [
+        "CLOSURE",
+        "WASM",
+    ],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:BeforeAndAfterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ChildTest",
@@ -24,7 +27,10 @@ j2cl_test_integration_test(
 
 j2cl_test_integration_test(
     name = "JUnit4IntegrationTest2",
-    enable_wasm = True,
+    platforms = [
+        "CLOSURE",
+        "WASM",
+    ],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleFailingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimplePassingTest",
@@ -33,5 +39,19 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInAfterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInBeforeTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsOnConstructionTest",
+    ],
+)
+
+j2cl_test_integration_test(
+    name = "J2ktJUnit4IntegrationTest",
+    platforms = ["J2KT"],
+    test_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimplePassingTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:IgnoreTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleFailingTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsOnConstructionTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInBeforeTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInAfterTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ExpectedExceptionTest",
     ],
 )

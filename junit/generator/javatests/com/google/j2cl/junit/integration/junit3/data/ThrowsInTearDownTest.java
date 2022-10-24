@@ -17,22 +17,14 @@ package com.google.j2cl.junit.integration.junit3.data;
 
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
 import junit.framework.TestCase;
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 
 /** TestCase used for integration testing for j2cl JUnit support. */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ThrowsInTearDownTest extends TestCase {
-
-  private static boolean first = true;
 
   @Override
   protected void tearDown() throws Exception {
     TestCaseLogger.log("tearDown");
-    if (first) {
-      first = false;
-      throw new RuntimeException("first tearDown throws");
-    }
+    throw new RuntimeException("throw in tearDown");
   }
 
   public void test() {

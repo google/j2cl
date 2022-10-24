@@ -41,6 +41,7 @@ public abstract class IntegrationTestBase {
     JAVA(""),
     J2CL_UNCOMPILED("-j2cl"),
     J2CL_COMPILED("-j2cl_compiled"),
+    J2KT("-j2kt-jvm"),
     J2WASM_UNOPTIMIZED("-j2wasm"),
     J2WASM_OPTIMIZED("-j2wasm_optimized");
 
@@ -62,6 +63,10 @@ public abstract class IntegrationTestBase {
       return this == JAVA;
     }
 
+    public boolean isJ2kt() {
+      return this == J2KT;
+    }
+
     public boolean isWeb() {
       return isJ2cl() || isJ2wasm();
     }
@@ -71,6 +76,7 @@ public abstract class IntegrationTestBase {
   public static Iterable<Object[]> data() {
     return Arrays.asList(
         new TestMode[] {TestMode.JAVA},
+        new TestMode[] {TestMode.J2KT},
         new TestMode[] {TestMode.J2CL_UNCOMPILED},
         new TestMode[] {TestMode.J2CL_COMPILED},
         new TestMode[] {TestMode.J2WASM_UNOPTIMIZED},
@@ -88,7 +94,7 @@ public abstract class IntegrationTestBase {
   }
 
   protected void runStacktraceTest(String testName) throws Exception {
-    if (testMode.isJ2wasm()) {
+    if (testMode.isJ2wasm() || testMode.isJ2kt()) {
       return;
     }
 

@@ -36,6 +36,11 @@ public class J2clParameterizedIntegrationTest1 extends IntegrationTestBase {
     assumeFalse(testMode.isJ2wasm());
   }
 
+  @Before
+  public void assumeNonJ2kt() {
+    assumeFalse(testMode.isJ2kt());
+  }
+
   @Test
   public void testSimpleParameterizedTest() throws Exception {
     String testClassName = "SimpleParameterizedTest";
@@ -57,8 +62,7 @@ public class J2clParameterizedIntegrationTest1 extends IntegrationTestBase {
             .addTestSuccess("testGroup0_test2[0]")
             .addTestSuccess("testGroup1_test[1]")
             .addTestSuccess("testGroup1_test2[1]")
-            .addJavaLogLineSequence("0abc", "1abc")
-            .addJavaLogLineSequence("0", "2")
+            .addJavaLogLineSequence("0abc", "0", "1abc", "2")
             .build();
 
     List<String> logLines = runTest(testClassName);

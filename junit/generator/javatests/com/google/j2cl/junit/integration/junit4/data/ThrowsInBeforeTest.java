@@ -18,11 +18,9 @@ package com.google.j2cl.junit.integration.junit4.data;
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.junit.runners.MethodSorters;
 
 /**
  * TestCase used for integration testing for j2cl JUnit support.
@@ -30,19 +28,13 @@ import org.junit.runners.MethodSorters;
  * <p>Note this test will not pass and this is intentional since we want to test test failures in
  * our integration tests as well.
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(JUnit4.class)
 public class ThrowsInBeforeTest {
-
-  private static boolean first = true;
 
   @Before
   public void before() {
     TestCaseLogger.log("before");
-    if (first) {
-      first = false;
-      throw new RuntimeException("failure in before()");
-    }
+    throw new RuntimeException("failure in before()");
   }
 
   @After
@@ -57,6 +49,6 @@ public class ThrowsInBeforeTest {
 
   @Test
   public void testOther() {
-    TestCaseLogger.log("testOther");
+    TestCaseLogger.log("should_not_be_in_log");
   }
 }

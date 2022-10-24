@@ -17,11 +17,9 @@ package com.google.j2cl.junit.integration.junit4.data;
 
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
 import org.junit.After;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.junit.runners.MethodSorters;
 
 /**
  * TestCase used for integration testing for j2cl JUnit support.
@@ -29,19 +27,13 @@ import org.junit.runners.MethodSorters;
  * <p>Note this test will not pass and this is intentional since we want to test test failures in
  * our integration tests as well.
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(JUnit4.class)
 public class ThrowsInAfterTest {
-
-  private static boolean first = true;
 
   @After
   public void after() {
     TestCaseLogger.log("after");
-    if (first) {
-      first = false;
-      throw new RuntimeException("failure in after()");
-    }
+    throw new RuntimeException("failure in after()");
   }
 
   @Test
