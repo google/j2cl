@@ -18,11 +18,10 @@ package autovalue;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
-import static com.google.j2cl.integration.testing.TestUtils.isJvm;
+import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -188,11 +187,9 @@ public class Main {
     abstract JsArray jsArray();
   }
 
-  // Uses JsInterop behavior.
-  @Wasm("nop")
   private static void testJsCollection() {
-    // JsInterop is not supported on the JVM.
-    if (isJvm()) {
+    // Treating object arrays as JavaScript native types is only supported in Closure.
+    if (!isJavaScript()) {
       return;
     }
     UsesJsCollection o1 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
@@ -213,7 +210,7 @@ public class Main {
 
   private static void testUnusedType() {
     // Unused code to track/validate code removal with size tracking.
-    boolean resultUnused = (new Object()) instanceof AutoValue_Main_Unused;
+    boolean unusedResult = (new Object()) instanceof AutoValue_Main_Unused;
   }
 
   @AutoValue
@@ -226,7 +223,7 @@ public class Main {
   private static void testUnusedTypeExtending() {
     // Unused code to track/validate code removal with size tracking.
     // In this particular case we make sure ValueType.mixin is utilized.
-    boolean resultUnused = (new Object()) instanceof AutoValue_Main_UnusedExtending;
+    boolean unusedResult = (new Object()) instanceof AutoValue_Main_UnusedExtending;
   }
 
   @AutoValue

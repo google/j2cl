@@ -17,9 +17,7 @@ package stringconversion;
 
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-import static com.google.j2cl.integration.testing.TestUtils.isJvm;
-
-import javaemul.internal.annotations.Wasm;
+import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
 
 public class Main {
   private static class Person {
@@ -138,14 +136,9 @@ public class Main {
     assertTrue((f + " is 1.5").equals("1.5 is 1.5"));
   }
 
-  /** These tests are JavaScript specific and are disabled on the JVM and WASM platform. */
-  @Wasm("nop")
   private static void testConcatenationWithUndefined() {
-    if (isJvm()) {
-      return;
-    }
     String s1 = null;
-    String s2 = (new String[0])[0]; // undefined
+    String s2 = getUndefined(); // undefined in JavaScript
     String s3 = s1 + s2; // two nullable string instances
     assertTrue((s3.equals("nullnull")));
   }

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.jre.testing;
 
+import javaemul.internal.annotations.Wasm;
+
 /**
  * Utility functions needed by various tests.
  */
@@ -30,6 +32,11 @@ public class TestUtils {
 
   public static boolean isJvm() {
     return getJdkVersion() != -1;
+  }
+
+  @Wasm("i32.const 1")
+  public static boolean isWasm() {
+    return false;
   }
 
   private static int getMajorVersion(String versionString) {

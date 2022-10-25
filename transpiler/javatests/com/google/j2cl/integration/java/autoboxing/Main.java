@@ -20,10 +20,11 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastE
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
+import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
+import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import javaemul.internal.annotations.DoNotAutobox;
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
 @SuppressWarnings({
@@ -92,10 +93,9 @@ public class Main {
     assertTrue(boxToObject('a') instanceof Character);
   }
 
-  @Wasm("nop")
   private static void testBox_numberAsDouble() {
     // Works only in closure.
-    if (isJvm()) {
+    if (!isJavaScript()) {
       return;
     }
     assertTrue((takesObjectAndReturnsPrimitiveDouble(3) == 3));
@@ -522,6 +522,9 @@ public class Main {
     Object asObjectZero = boxedZero;
     Object asObjectMinusZero = boxedMinusZero;
     Double nullDouble = null;
+    // Obtain a JavaScript undefined value by accessing an array out of bounds (which J2CL allows).
+    // For the JVM the tests satisfied by undefined should be the same as if it was null.
+    Double undefinedDouble = getUndefined();
 
     // Unboxing semantics.
     assertTrue(zero == minusZero);
@@ -533,6 +536,8 @@ public class Main {
     assertTrue(boxedZero != boxedMinusZero);
     assertTrue(asObjectZero != asObjectMinusZero);
 
+    assertTrue(undefinedDouble == nullDouble);
+
     // Explicit unboxing.
     assertTrue(((double) asObjectZero) == (double) asObjectMinusZero);
 
@@ -543,6 +548,14 @@ public class Main {
     assertThrowsNullPointerException(
         () -> {
           boolean unused = nullDouble == zero;
+        });
+    assertThrowsNullPointerException(
+        () -> {
+          boolean unused = zero == undefinedDouble;
+        });
+    assertThrowsNullPointerException(
+        () -> {
+          boolean unused = undefinedDouble == zero;
         });
   }
 

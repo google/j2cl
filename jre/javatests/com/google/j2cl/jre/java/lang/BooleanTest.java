@@ -15,8 +15,9 @@
  */
 package com.google.j2cl.jre.java.lang;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import com.google.gwt.junit.client.GWTTestCase;
-import javaemul.internal.annotations.Wasm;
 
 /**
  * Tests for the JRE Boolean type.
@@ -84,9 +85,12 @@ public class BooleanTest extends GWTTestCase {
     assertSame(Boolean.TRUE, Boolean.TRUE);
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testNPE() {
-   Boolean b = Math.random() < 0 ? Boolean.TRUE : null;
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+    Boolean b = Math.random() < 0 ? Boolean.TRUE : null;
     try {
       assertEquals(null, b.booleanValue());
       fail("Should have thrown exception");

@@ -35,8 +35,9 @@
 /** author Elena Semukhina */
 package com.google.j2cl.jre.java.math;
 
+import static com.google.j2cl.jre.testing.TestUtils.isJvm;
+
 import com.google.j2cl.jre.java.util.EmulTestBase;
-import com.google.j2cl.jre.testing.TestUtils;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -457,7 +458,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
    * negate(MathContext) for a negative BigDecimal.
    */
   public void testNegateMathContextNegative() {
-    if (TestUtils.isJvm()) {
+    if (isJvm()) {
       // OpenJDK fails this test, so for now we only run it in Production Mode
       return;
     }
@@ -478,7 +479,7 @@ public class BigDecimalCompareTest extends EmulTestBase {
    * negate(MathContext) for a positive BigDecimal.
    */
   public void testNegateMathContextPositive() {
-    if (TestUtils.isJvm()) {
+    if (isJvm()) {
       // OpenJDK fails this test, so for now we only run it in Production Mode
       return;
     }

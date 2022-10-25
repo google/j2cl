@@ -16,9 +16,9 @@
 package strictequality;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.getUndefined;
+import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
-
-import javaemul.internal.annotations.Wasm;
 
 public class Main {
   public static void main(String... args) {
@@ -27,9 +27,12 @@ public class Main {
     testBoxedAndDevirtualizedTypes();
   }
 
-  @Wasm("nop") // These tests are JavaScript specific.
   @SuppressWarnings({"EqualsIncompatibleType", "BoxedPrimitiveEquality"})
   private static void testBoxedAndDevirtualizedTypes() {
+    // These tests are JavaScript specific.
+    if (!isJavaScript()) {
+      return;
+    }
     assertTrue(new Character((char) 1) != new Character((char) 1));
     assertTrue(Character.valueOf((char) 1) == Character.valueOf((char) 1));
 
@@ -58,7 +61,7 @@ public class Main {
     Object boxedBooleanFalse = false;
     Object boxedDoubleZero = 0.0d;
     Object emptyArray = new Object[] {};
-    Object undefined = (new Object[1])[0];
+    Object undefined = getUndefined();
 
     assertTrue(undefined == null);
     assertTrue(undefined == nullObject);

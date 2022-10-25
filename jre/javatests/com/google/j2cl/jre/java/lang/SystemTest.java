@@ -15,9 +15,10 @@
  */
 package com.google.j2cl.jre.java.lang;
 
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import com.google.gwt.junit.client.GWTTestCase;
 import java.util.Arrays;
-import javaemul.internal.annotations.Wasm;
 
 /**
  * Tests java.lang.System.
@@ -166,7 +167,6 @@ public class SystemTest extends GWTTestCase {
         new InterfazImpl("bar"), null), Arrays.asList(dest));
   }
 
-  @Wasm("nop") // TODO(b/184675805): Re-enable when Array store checks added.
   public static void testArraycopyMultidim() {
     Object[][] objArray = new Object[1][1];
     String[][] strArray = new String[1][1];
@@ -175,6 +175,12 @@ public class SystemTest extends GWTTestCase {
     intArray[0][0] = new Integer(1);
     System.arraycopy(strArray, 0, objArray, 0, 1);
     assertEquals("Test", objArray[0][0]);
+
+    if (isWasm()) {
+      // TODO(b/184675805): Re-enable when Array store checks added.
+      return;
+    }
+
     try {
       System.arraycopy(strArray, 0, intArray, 0, 1);
       fail("Should have thrown ArrayStoreException: incompatible multidimensional arrays");
@@ -206,7 +212,6 @@ public class SystemTest extends GWTTestCase {
     }
   }
 
-  @Wasm("nop") // TODO(b/184675805): Re-enable when Array store checks added.
   public static void testArraycopyObjects() {
     Foo[] fooArray = new Foo[4];
     Bar[] barArray = new Bar[4];
@@ -215,6 +220,12 @@ public class SystemTest extends GWTTestCase {
     for (int i = 0; i < src.length; ++i) {
       assertEquals(src[i], fooArray[i]);
     }
+
+    if (isWasm()) {
+      // TODO(b/184675805): Re-enable when Array store checks added.
+      return;
+    }
+
     try {
       System.arraycopy(src, 0, barArray, 0, 4);
       fail("Should have thrown ArrayStoreException: foo into bar");

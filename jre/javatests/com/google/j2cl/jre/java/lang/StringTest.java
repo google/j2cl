@@ -15,13 +15,15 @@
  */
 package com.google.j2cl.jre.java.lang;
 
+import static com.google.j2cl.jre.testing.TestUtils.isJvm;
+import static com.google.j2cl.jre.testing.TestUtils.isWasm;
+
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.j2cl.jre.testing.TestUtils;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Locale;
-import javaemul.internal.annotations.Wasm;
 
 /** Tests java.lang.String. */
 public class StringTest extends GWTTestCase {
@@ -109,8 +111,12 @@ public class StringTest extends GWTTestCase {
     assertEquals(1, hideFromCompiler("b").compareTo("a"));
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testCompareToNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       returnNull().compareTo("");
       fail();
@@ -150,8 +156,12 @@ public class StringTest extends GWTTestCase {
     assertEquals("abcd", s);
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testConcatNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       returnNull().concat("");
       fail();
@@ -196,8 +206,12 @@ public class StringTest extends GWTTestCase {
     assertEquals("\uD801\uDC00", new String(sb));
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testConstructorNull() {
+
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
     try {
       new String(returnNull());
     } catch (NullPointerException e) {
@@ -211,8 +225,12 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
   public static void testConstructorBytes() {
+    if (isWasm()) {
+      // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+      return;
+    }
+
     byte[] bytes = new byte[] {'a', 'b', 'c', 'd', 'e', 'f'};
     String str = new String(bytes);
     assertEquals("abcdef", str);
@@ -220,23 +238,27 @@ public class StringTest extends GWTTestCase {
     assertEquals("bcd", str);
     try {
       new String(bytes, 1, 6);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
 
-  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
   public static void testConstructorLatin1() throws UnsupportedEncodingException {
+    if (isWasm()) {
+      // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+      return;
+    }
+
     internalTestConstructorLatin1("ISO-8859-1");
     internalTestConstructorLatin1("iso-8859-1");
   }
@@ -251,38 +273,42 @@ public class StringTest extends GWTTestCase {
     assertEquals("ßçÐ", str);
     try {
       new String(bytes, 1, 6, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 1, 6, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 6, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
 
-  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
   public static void testConstructorUtf8() throws UnsupportedEncodingException {
+    if (isWasm()) {
+      // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+      return;
+    }
+
     internalTestConstructorUtf8("UTF-8");
     internalTestConstructorUtf8("utf-8");
   }
@@ -309,32 +335,32 @@ public class StringTest extends GWTTestCase {
     assertEquals("ßçÐ", str);
     try {
       new String(bytes, 2, 12, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 12, 2, encoding);
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 2, 12, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, -1, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
     try {
       new String(bytes, 12, 2, Charset.forName(encoding));
-      assertTrue("Should have thrown IOOB in JVM", !TestUtils.isJvm());
+      assertTrue("Should have thrown IOOB in JVM", !isJvm());
     } catch (IndexOutOfBoundsException expected) {
     }
   }
@@ -375,8 +401,12 @@ public class StringTest extends GWTTestCase {
     assertFalse(hideFromCompiler("").equals(null));
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testEqualsNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       returnNull().equals("other");
       fail();
@@ -407,8 +437,12 @@ public class StringTest extends GWTTestCase {
     assertFalse(hideFromCompiler("ß").equalsIgnoreCase("SS"));
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testEqualsIgnoreCaseNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       returnNull().equalsIgnoreCase("other");
       fail();
@@ -442,8 +476,11 @@ public class StringTest extends GWTTestCase {
     assertTrue(Arrays.equals(bytes, str.getBytes()));
   }
 
-  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
   public static void testGetBytesLatin1() throws UnsupportedEncodingException {
+    if (isWasm()) {
+      // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+      return;
+    }
     internalTestGetBytesLatin1("ISO-8859-1");
     internalTestGetBytesLatin1("iso-8859-1");
   }
@@ -460,8 +497,12 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  @Wasm("nop") // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
   public static void testGetBytesUtf8() throws UnsupportedEncodingException {
+    if (isWasm()) {
+      // TODO(b/233695357): Re-enable when EmulatedCharsed is fixed.
+      return;
+    }
+
     internalTestGetBytesUtf8("UTF-8");
     internalTestGetBytesUtf8("utf-8");
   }
@@ -541,8 +582,12 @@ public class StringTest extends GWTTestCase {
     }
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testHashCodeNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       returnNull().hashCode();
       fail();
@@ -562,8 +607,12 @@ public class StringTest extends GWTTestCase {
     assertEquals(0, haystack.indexOf(""));
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testIndexOfNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       returnNull().indexOf("");
       fail();
@@ -866,8 +915,12 @@ public class StringTest extends GWTTestCase {
     assertSame("s same as s.toString()", s, s.toString());
   }
 
-  @Wasm("nop") // TODO(b/183769034): Re-enable when NPE on dereference is supported
   public static void testToStringNull() {
+    if (isWasm()) {
+      // TODO(b/183769034): Re-enable when NPE on dereference is supported
+      return;
+    }
+
     try {
       returnNull().toString();
       fail();

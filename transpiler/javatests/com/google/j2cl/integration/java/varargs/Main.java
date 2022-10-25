@@ -17,12 +17,12 @@ package varargs;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
-import varargs.innerpackage.SubclassWithImplicitConstructor;
-import varargs.innerpackage.SuperWithNoPublicConstructors;
 import java.util.ArrayList;
 import java.util.List;
-import javaemul.internal.annotations.Wasm;
+import varargs.innerpackage.SubclassWithImplicitConstructor;
+import varargs.innerpackage.SuperWithNoPublicConstructors;
 
 /** Tests varargs. */
 public class Main {
@@ -119,15 +119,21 @@ public class Main {
     }
   }
 
-  // TODO(b/184675805): Enable when arrays have metadata.
-  @Wasm("nop")
   private static void testVarargs_implicitSuperConstructorCall() {
+    if (isWasm()) {
+      // TODO(b/184675805): Enable when arrays have metadata.
+      return;
+    }
+
     assertEquals("String", new ChildWithImplicitSuperCall().which);
   }
 
-  // TODO(b/184675805): Enable when arrays have metadata.
-  @Wasm("nop")
   private static void testVarargs_implicitSuperConstructorCall_implicitParameters() {
+    if (isWasm()) {
+      // TODO(b/184675805): Enable when arrays have metadata.
+      return;
+    }
+
     int captured = 1;
     class Outer {
 
@@ -187,9 +193,12 @@ public class Main {
     assertEquals("Protected", new SubclassInDifferentPackage().which);
   }
 
-  // TODO(b/184675805): Enable when arrays have metadata.
-  @Wasm("nop")
   private static void testVarargs_implicitSuperConstructorCall_genericTypes() {
+    if (isWasm()) {
+      // TODO(b/184675805): Enable when arrays have metadata.
+      return;
+    }
+
     int captured = 1;
     class Parent<T extends List<?>, U extends ArrayList<?>> {
       String which;
@@ -234,9 +243,12 @@ public class Main {
     String which;
   }
 
-  // TODO(b/184675805): Enable when arrays have metadata.
-  @Wasm("nop")
   private static void testVarargs_implicitSuperConstructorCall_enum() {
+    if (isWasm()) {
+      // TODO(b/184675805): Enable when arrays have metadata.
+      return;
+    }
+
     assertEquals("String", MyEnum.A.which);
     assertEquals("Object", MyEnum.B.which);
     assertEquals("String", MyEnum.C.which);

@@ -20,8 +20,9 @@ import static com.google.j2cl.integration.testing.Asserts.assertNotSame;
 import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
@@ -136,12 +137,12 @@ public class Main {
     VALUE
   }
 
-  @Wasm("nop") // javascript only
   private static void testJsEnum() {
     Object o = MyJsEnum.VALUE;
     assertSame(MyJsEnum.class, o.getClass());
     assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
-    assertSame(null, o.getClass().getSuperclass());
+    // In platforms other than JavaScript JsEnum behaves like a regular enum.
+    assertSame(isJavaScript() ? null : Enum.class, o.getClass().getSuperclass());
 
     assertEquals("classliteral.Main$MyJsEnum", o.getClass().getName());
     // J2CL doesn't follow JLS here:
@@ -151,11 +152,18 @@ public class Main {
     assertEquals(
         "class classliteral.Main$MyJsEnum", o.getClass().toString());
 
-    assertLiteralType("MyJsEnum.VALUE.class", LiteralType.CLASS, o.getClass());
+    // In platforms other than JavaScript JsEnum behaves like a regular enum.
+    assertLiteralType(
+        "MyJsEnum.VALUE.class",
+        isJavaScript() ? LiteralType.CLASS : LiteralType.ENUM,
+        o.getClass());
   }
 
-  @Wasm("nop") // TODO(b/184675805): enable when class metadata is implemented for array
   private static void testArray() {
+    // TODO(b/184675805): enable for WASM when class metadata is implemented for array
+    if (isWasm()) {
+      return;
+    }
     Object o = new Foo[3];
     assertSame(Foo[].class, o.getClass());
     assertSame(Object.class, o.getClass().getSuperclass());
@@ -186,8 +194,11 @@ public class Main {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private static class NativeClass {}
 
-  @Wasm("nop") // javascript only
   private static void testNative() {
+    // getClass() and friends on Native JavaScript objects is not supported in WASM.
+    if (isWasm()) {
+      return;
+    }
     Class<?> clazz = NativeFunction.class;
     assertEquals("<native function>", clazz.getName());
     assertEquals(null, clazz.getSuperclass());

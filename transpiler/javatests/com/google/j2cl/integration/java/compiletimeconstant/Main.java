@@ -16,8 +16,8 @@
 package compiletimeconstant;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -85,9 +85,11 @@ public class Main {
     assertTrue(CompileTimeConstants.OBJ == null);
   }
 
-  // Tests JavaScript externs, not meaningful in WASM.
-  @Wasm("nop")
   private static void testExternConstant() {
+    // Tests JavaScript externs, only meaningful in JavaScript.
+    if (!isJavaScript()) {
+      return;
+    }
     assertTrue(Int32Array.BYTES_PER_ELEMENT == 4);
     assertTrue(ExternConstant.CONSTANT == 4);
   }

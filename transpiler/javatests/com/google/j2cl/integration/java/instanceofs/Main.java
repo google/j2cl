@@ -17,13 +17,12 @@ package instanceofs;
 
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import java.io.Serializable;
-import javaemul.internal.annotations.Wasm;
 
-/**
- * Test instanceof array.
- */
+/** Test instanceof array. */
+@SuppressWarnings("BadInstanceof")
 public class Main {
   public static void main(String... args) {
     testInstanceOf_class();
@@ -97,9 +96,11 @@ public class Main {
   private static class Implementor implements ChildInterface, GenericInterface<String> {}
 
   @SuppressWarnings("cast")
-  // TODO(b/184675805): Enable when array metadata is fully implemented.
-  @Wasm("nop")
   private static void testInstanceOf_array() {
+    // TODO(b/184675805): Enable for WASM when array metadata is fully implemented.
+    if (isWasm()) {
+      return;
+    }
     Object object = new Object();
     assertTrue(object instanceof Object);
     assertTrue(!(object instanceof Object[]));

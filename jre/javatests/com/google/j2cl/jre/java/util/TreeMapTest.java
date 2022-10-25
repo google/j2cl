@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.jre.java.util;
 
-import com.google.j2cl.jre.testing.TestUtils;
+import static com.google.j2cl.jre.testing.TestUtils.getJdkVersion;
+import static com.google.j2cl.jre.testing.TestUtils.isJvm;
+
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -662,7 +664,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
 
     // JDK < 7 does not handle null keys correctly.
-    if (useNullKey() && TestUtils.isJvm() && TestUtils.getJdkVersion() < 7) {
+    if (useNullKey() && isJvm() && getJdkVersion() < 7) {
       map.remove(null);
       keys.remove(null);
     }
@@ -1172,7 +1174,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     try {
       map.get(null);
       // JDK < 7 does not conform to the specification if the map is empty.
-      if (TestUtils.getJdkVersion() > 6) {
+      if (getJdkVersion() > 6) {
         assertTrue(useNullKey());
       }
     } catch (NullPointerException e) {
@@ -2183,7 +2185,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
       sortedMap.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey());
       sortedMap.headMap(getLessThanMinimumKey());
       sortedMap.tailMap(getLessThanMinimumKey());
-    } else if (TestUtils.getJdkVersion() > 6) {
+    } else if (getJdkVersion() > 6) {
       // nulls are rejected immediately and don't poison the map anymore
       try {
         assertNull(sortedMap.put(null, values[0]));
@@ -2293,7 +2295,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
   }
 
   public void testPut_ComparableKey() {
-    final boolean java6CompatibleSources = !TestUtils.isJvm() || TestUtils.getJdkVersion() < 7;
+    final boolean java6CompatibleSources = !isJvm() || getJdkVersion() < 7;
     TreeMap map = new TreeMap();
     ConflictingKey conflictingKey = new ConflictingKey("conflictingKey");
     try {
@@ -2373,7 +2375,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
       try {
         map.put(null, values[0]);
         // JDK < 7 does not conform to the specification if the map is empty.
-        if (TestUtils.getJdkVersion() > 6) {
+        if (getJdkVersion() > 6) {
           assertTrue(useNullKey());
         }
       } catch (NullPointerException e) {
@@ -2708,7 +2710,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
       try {
         map.remove(null);
         // JDK < 7 does not conform to the specification if the map is empty.
-        if (TestUtils.getJdkVersion() > 6) {
+        if (getJdkVersion() > 6) {
           assertTrue(useNullKey());
         }
       } catch (NullPointerException e) {
@@ -2984,7 +2986,7 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
     }
 
     // JDK < 7 does not handle null keys correctly.
-    if (TestUtils.isJvm() && TestUtils.getJdkVersion() < 7) {
+    if (isJvm() && getJdkVersion() < 7) {
       return;
     }
 

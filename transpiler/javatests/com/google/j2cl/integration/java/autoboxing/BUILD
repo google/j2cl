@@ -6,7 +6,7 @@ load(
 package(licenses = ["notice"])
 
 integration_test(
-    name = "simpleautoboxing",
+    name = "autoboxing",
     srcs = glob(["*.java"]),
     enable_kt = False,
     deps = [

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.integration.testing;
 
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
+
 import com.google.j2cl.integration.testing.Asserts.JsRunnable;
 
 /**
@@ -63,8 +65,7 @@ public class AssertsBase {
       fail("Should have thrown ClassCastException");
     } catch (ClassCastException expected) {
       if (qualifiedBinaryName != null) {
-        String expectedMessage =
-            TestUtils.isJvm() ? "cannot be cast to class " : "cannot be cast to ";
+        String expectedMessage = isJvm() ? "cannot be cast to class " : "cannot be cast to ";
         expectedMessage += qualifiedBinaryName;
         assertTrue(
             "Got unexpected message " + expected.getMessage(),

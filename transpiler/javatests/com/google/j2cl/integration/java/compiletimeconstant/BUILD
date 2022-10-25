@@ -8,8 +8,6 @@ package(licenses = ["notice"])
 integration_test(
     name = "compiletimeconstant",
     srcs = glob(["*.java"]),
-    # Test JavaScript externs, only applicable for JS output.
-    enable_jvm_test = False,
     enable_kt = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
