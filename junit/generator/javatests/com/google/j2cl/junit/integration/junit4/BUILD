@@ -42,16 +42,17 @@ j2cl_test_integration_test(
     ],
 )
 
-j2cl_test_integration_test(
-    name = "J2ktJUnit4IntegrationTest",
-    platforms = ["J2KT"],
-    test_data = [
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimplePassingTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:IgnoreTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleFailingTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsOnConstructionTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInBeforeTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInAfterTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ExpectedExceptionTest",
-    ],
-)
+# TODO(b/255606987): Fix build issue and renable this test.
+# j2cl_test_integration_test(
+#     name = "J2ktJUnit4IntegrationTest",
+#     platforms = ["J2KT"],
+#     test_data = [
+#         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimplePassingTest",
+#         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:IgnoreTest",
+#         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleFailingTest",
+#         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsOnConstructionTest",
+#         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInBeforeTest",
+#         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInAfterTest",
+#         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ExpectedExceptionTest",
+#     ],
+# )
