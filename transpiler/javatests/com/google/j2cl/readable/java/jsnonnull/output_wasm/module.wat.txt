@@ -57,7 +57,7 @@
 )
 
 ;;; Code for jsnonnull.Main.StringComparator [itable.init]
-(global $jsnonnull.Main.StringComparator.itable (ref $itable) (array.init_static $itable  (ref.null data)
+(global $jsnonnull.Main.StringComparator.itable (ref $itable) (array.init_static $itable  (ref.null struct)
  (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.StringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
@@ -91,7 +91,7 @@
 )
 
 ;;; Code for jsnonnull.Main.NullableStringComparator [itable.init]
-(global $jsnonnull.Main.NullableStringComparator.itable (ref $itable) (array.init_static $itable  (ref.null data)
+(global $jsnonnull.Main.NullableStringComparator.itable (ref $itable) (array.init_static $itable  (ref.null struct)
  (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.NullableStringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
@@ -125,7 +125,7 @@
 )
 
 ;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [itable.init]
-(global $jsnonnull.Main.NonNullableStringSubNullableComparator.itable (ref $itable) (array.init_static $itable  (ref.null data)
+(global $jsnonnull.Main.NonNullableStringSubNullableComparator.itable (ref $itable) (array.init_static $itable  (ref.null struct)
  (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.NullableStringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
@@ -330,9 +330,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main)
 
 ;;; Code for jsnonnull.Main.MyFunction [INTERFACE]
-(type $jsnonnull.Main.MyFunction.vtable (struct_subtype 
+(type $jsnonnull.Main.MyFunction.vtable (struct 
  (field $m_x__java_lang_String__java_lang_String (ref $function.m_x__java_lang_String__java_lang_String))
-  data)
+ )
 )
 
 ;;; void MyFunction.$clinit()
@@ -976,10 +976,10 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableStringSubNullableComparator)
 
 ;;; Code for jsnonnull.Main.NonNullableTemplatedReturn [INTERFACE]
-(type $jsnonnull.Main.NonNullableTemplatedReturn.vtable (struct_subtype 
+(type $jsnonnull.Main.NonNullableTemplatedReturn.vtable (struct 
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
  (field $m_getArray__arrayOf_java_lang_Object (ref $function.m_getArray__arrayOf_java_lang_Object))
-  data)
+ )
 )
 
 ;;; void NonNullableTemplatedReturn.$clinit()
@@ -1013,10 +1013,10 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableTemplatedReturn)
 
 ;;; Code for jsnonnull.Main.NonNullableTemplate [INTERFACE]
-(type $jsnonnull.Main.NonNullableTemplate.vtable (struct_subtype 
+(type $jsnonnull.Main.NonNullableTemplate.vtable (struct 
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
  (field $m_getArray__arrayOf_java_lang_Object (ref $function.m_getArray__arrayOf_java_lang_Object))
-  data)
+ )
 )
 
 ;;; void NonNullableTemplate.$clinit()

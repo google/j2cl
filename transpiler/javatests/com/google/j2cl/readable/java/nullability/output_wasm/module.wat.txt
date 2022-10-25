@@ -336,7 +336,7 @@
 )
 
 ;;; Code for nullability.Nullability.StringComparator [itable.init]
-(global $nullability.Nullability.StringComparator.itable (ref $itable) (array.init_static $itable  (ref.null data)
+(global $nullability.Nullability.StringComparator.itable (ref $itable) (array.init_static $itable  (ref.null struct)
  (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.StringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
@@ -370,7 +370,7 @@
 )
 
 ;;; Code for nullability.Nullability.NullableStringComparator [itable.init]
-(global $nullability.Nullability.NullableStringComparator.itable (ref $itable) (array.init_static $itable  (ref.null data)
+(global $nullability.Nullability.NullableStringComparator.itable (ref $itable) (array.init_static $itable  (ref.null struct)
  (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.NullableStringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
@@ -1561,8 +1561,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability)
 
 ;;; Code for nullability.Marker [INTERFACE]
-(type $nullability.Marker.vtable (struct_subtype 
-  data)
+(type $nullability.Marker.vtable (struct 
+ )
 )
 
 ;;; void Marker.$clinit()
@@ -1726,9 +1726,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.Foo)
 
 ;;; Code for nullability.Nullability.MyFunction [INTERFACE]
-(type $nullability.Nullability.MyFunction.vtable (struct_subtype 
+(type $nullability.Nullability.MyFunction.vtable (struct 
  (field $m_x__java_lang_String__java_lang_String (ref $function.m_x__java_lang_String__java_lang_String))
-  data)
+ )
 )
 
 ;;; void MyFunction.$clinit()
@@ -2385,9 +2385,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.NullableStringComparator)
 
 ;;; Code for nullability.Nullability.NullableTemplatedReturn [INTERFACE]
-(type $nullability.Nullability.NullableTemplatedReturn.vtable (struct_subtype 
+(type $nullability.Nullability.NullableTemplatedReturn.vtable (struct 
  (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
-  data)
+ )
 )
 
 ;;; void NullableTemplatedReturn.$clinit()
@@ -4494,10 +4494,10 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable (struct_subtype 
+(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable (struct 
  (field $m_add__java_lang_Object__java_lang_Object (ref $function.m_add__java_lang_Object__java_lang_Object))
  (field $m_nullableAdd__java_lang_Object__java_lang_Object (ref $function.m_nullableAdd__java_lang_Object__java_lang_Object))
-  data)
+ )
 )
 
 ;;; void ParameterizedInterface.$clinit()
@@ -4689,8 +4689,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBound [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBound.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBound.vtable (struct 
+ )
 )
 
 ;;; void NullableBound.$clinit()
@@ -4724,8 +4724,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBound)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound.vtable (struct 
+ )
 )
 
 ;;; void NonNullableBound.$clinit()
@@ -4759,8 +4759,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument.vtable (struct 
+ )
 )
 
 ;;; void NullableBoundWithNonNullArgument.$clinit()
@@ -4794,8 +4794,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument.vtable (struct 
+ )
 )
 
 ;;; void NullableBoundWithNullableArgument.$clinit()
@@ -4829,8 +4829,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument.vtable (struct 
+ )
 )
 
 ;;; void NonNullBoundWithNonNullArgument.$clinit()
@@ -4864,8 +4864,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument.vtable (struct 
+ )
 )
 
 ;;; void NonNullBoundWithNullableArgument.$clinit()
@@ -5460,9 +5460,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.Consumer [INTERFACE]
-(type $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (struct_subtype 
+(type $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (struct 
  (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
-  data)
+ )
 )
 
 ;;; void Consumer.$clinit()
@@ -6543,8 +6543,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NullableBound [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NullableBound.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnullable.DefaultNullable.NullableBound.vtable (struct 
+ )
 )
 
 ;;; void NullableBound.$clinit()
@@ -6578,8 +6578,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBound)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NonNullableBound [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NonNullableBound.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnullable.DefaultNullable.NonNullableBound.vtable (struct 
+ )
 )
 
 ;;; void NonNullableBound.$clinit()
@@ -6613,8 +6613,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullableBound)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument.vtable (struct 
+ )
 )
 
 ;;; void NullableBoundWithNonNullArgument.$clinit()
@@ -6648,8 +6648,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBoundWithNonNullArgument)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument.vtable (struct 
+ )
 )
 
 ;;; void NullableBoundWithNullableArgument.$clinit()
@@ -6683,8 +6683,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NullableBoundWithNullableArgument)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument.vtable (struct 
+ )
 )
 
 ;;; void NonNullBoundWithNonNullArgument.$clinit()
@@ -6718,8 +6718,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.NonNullBoundWithNonNullArgument)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument [INTERFACE]
-(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype 
-  data)
+(type $nullability.defaultnullable.DefaultNullable.NonNullBoundWithNullableArgument.vtable (struct 
+ )
 )
 
 ;;; void NonNullBoundWithNullableArgument.$clinit()
@@ -8791,8 +8791,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.$LambdaImplementor$5)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBound [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBound.vtable (struct_subtype 
-  data)
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBound.vtable (struct 
+ )
 )
 
 ;;; void NullableBound.$clinit()
@@ -8826,8 +8826,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBound)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound.vtable (struct_subtype 
-  data)
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound.vtable (struct 
+ )
 )
 
 ;;; void NonNullableBound.$clinit()
@@ -8861,8 +8861,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument.vtable (struct_subtype 
-  data)
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument.vtable (struct 
+ )
 )
 
 ;;; void NullableBoundWithNonNullArgument.$clinit()
@@ -8896,8 +8896,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNonNullArgument)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument.vtable (struct_subtype 
-  data)
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument.vtable (struct 
+ )
 )
 
 ;;; void NullableBoundWithNullableArgument.$clinit()
@@ -8931,8 +8931,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NullableBoundWithNullableArgument)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument.vtable (struct_subtype 
-  data)
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument.vtable (struct 
+ )
 )
 
 ;;; void NonNullBoundWithNonNullArgument.$clinit()
@@ -8966,8 +8966,8 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNonNullArgument)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument.vtable (struct_subtype 
-  data)
+(type $nullability.explicitnotnullable.ExplicitNotNullable.NonNullBoundWithNullableArgument.vtable (struct 
+ )
 )
 
 ;;; void NonNullBoundWithNullableArgument.$clinit()
@@ -9562,9 +9562,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.Consumer [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.Consumer.vtable (struct_subtype 
+(type $nullability.explicitnotnullable.ExplicitNotNullable.Consumer.vtable (struct 
  (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
-  data)
+ )
 )
 
 ;;; void Consumer.$clinit()
@@ -9598,9 +9598,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.Consumer)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.Supplier [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.Supplier.vtable (struct_subtype 
+(type $nullability.explicitnotnullable.ExplicitNotNullable.Supplier.vtable (struct 
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
-  data)
+ )
 )
 
 ;;; void Supplier.$clinit()
@@ -9634,9 +9634,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.Supplier)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.IntFunction [INTERFACE]
-(type $nullability.explicitnotnullable.ExplicitNotNullable.IntFunction.vtable (struct_subtype 
+(type $nullability.explicitnotnullable.ExplicitNotNullable.IntFunction.vtable (struct 
  (field $m_accept__int__java_lang_Object (ref $function.m_accept__int__java_lang_Object))
-  data)
+ )
 )
 
 ;;; void IntFunction.$clinit()

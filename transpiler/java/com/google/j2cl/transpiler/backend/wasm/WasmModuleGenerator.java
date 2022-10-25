@@ -111,8 +111,8 @@ public class WasmModuleGenerator {
   private void emitItableSupportTypes() {
     builder.newLine();
     // The itable is an array of interface vtables. However since there is no common super type
-    // for all vtables, the array is defined as array of 'data' which is the top type for structs.
-    builder.append("(type $itable (array (ref null data)))");
+    // for all vtables, the array is defined as array of 'struct' which is the top type for structs.
+    builder.append("(type $itable (array (ref null struct)))");
   }
 
   private void emitGlobals(Library library) {
@@ -558,7 +558,7 @@ public class WasmModuleGenerator {
   private void initializeInterfaceVtable(
       WasmTypeLayout wasmTypeLayout, TypeDeclaration interfaceDeclaration) {
     if (interfaceDeclaration == null) {
-      builder.append(" (ref.null data)");
+      builder.append(" (ref.null struct)");
       return;
     }
     ImmutableList<MethodDescriptor> interfaceMethodImplementations =
@@ -622,18 +622,19 @@ public class WasmModuleGenerator {
   /** Emits a WASM struct using nominal inheritance. */
   private void emitWasmStruct(
       Type type, Function<DeclaredTypeDescriptor, String> structNamer, Runnable fieldsRenderer) {
+    boolean hasSuperType = type.getSuperTypeDescriptor() != null;
     builder.newLine();
     builder.append(
-        String.format("(type %s (struct_subtype ", structNamer.apply(type.getTypeDescriptor())));
+        String.format(
+            "(type %s (struct%s ",
+            structNamer.apply(type.getTypeDescriptor()), hasSuperType ? "_subtype" : ""));
     builder.indent();
     fieldsRenderer.run();
 
-    String wasmStructSuperType =
-        type.getSuperTypeDescriptor() == null
-            ? "data"
-            : structNamer.apply(type.getSuperTypeDescriptor());
     builder.newLine();
-    builder.append(String.format(" %s", wasmStructSuperType));
+    if (hasSuperType) {
+      builder.append(String.format(" %s", structNamer.apply(type.getSuperTypeDescriptor())));
+    }
     builder.append(")");
     builder.unindent();
     builder.newLine();

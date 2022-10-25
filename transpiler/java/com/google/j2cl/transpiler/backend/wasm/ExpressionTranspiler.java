@@ -169,10 +169,7 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterArrayLength(ArrayLength arrayLength) {
-        sourceBuilder.append(
-            format(
-                "(array.len %s ",
-                environment.getWasmTypeName(arrayLength.getArrayExpression().getTypeDescriptor())));
+        sourceBuilder.append("(array.len ");
         render(arrayLength.getArrayExpression());
         sourceBuilder.append(")");
         return false;

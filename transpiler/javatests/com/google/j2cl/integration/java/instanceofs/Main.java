@@ -31,6 +31,7 @@ public class Main {
     testInstanceOf_boxedTypes();
     testInstanceOf_string();
     testInstanceOf_sideEffects();
+    testInstanceOf_markerInterfaces();
   }
 
   private static void testInstanceOf_class() {
@@ -355,4 +356,21 @@ public class Main {
     assertTrue(s instanceof Serializable);
     assertTrue(!(s instanceof Cloneable));
   }
+
+  private static void testInstanceOf_markerInterfaces() {
+    class A implements MarkerA {}
+    class B implements MarkerB {}
+
+    Object a = new A();
+    assertTrue(a instanceof MarkerA);
+    assertFalse(a instanceof MarkerB);
+
+    Object b = new B();
+    assertTrue(b instanceof MarkerB);
+    assertFalse(b instanceof MarkerA);
+  }
+
+  interface MarkerA {}
+
+  interface MarkerB {}
 }
