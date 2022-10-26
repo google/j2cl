@@ -14,8 +14,6 @@ java_library(
 j2cl_library(
     name = "Foo-j2cl",
     srcs = ["Foo.java"],
-    generate_j2kt_jvm_library = False,
-    generate_j2kt_native_library = False,
 )
 
 java_library(
@@ -26,8 +24,6 @@ java_library(
 j2cl_library(
     name = "Bar-j2cl",
     srcs = ["Bar.java"],
-    generate_j2kt_jvm_library = False,
-    generate_j2kt_native_library = False,
 )
 
 java_library(
@@ -40,8 +36,6 @@ java_library(
 
 j2cl_library(
     name = "ExportLayerOne-j2cl",
-    generate_j2kt_jvm_library = False,
-    generate_j2kt_native_library = False,
     exports = [
         ":Bar-j2cl",
         ":Foo-j2cl",
@@ -55,14 +49,11 @@ java_library(
 
 j2cl_library(
     name = "ExportLayerTwo-j2cl",
-    generate_j2kt_jvm_library = False,
-    generate_j2kt_native_library = False,
     exports = [":ExportLayerOne-j2cl"],
 )
 
 integration_test(
     name = "exports",
     srcs = ["Main.java"],
-    enable_kt = False,
     deps = [":ExportLayerTwo-j2cl"],
 )
