@@ -11,8 +11,10 @@ abstract class SomeClass {
 }
 
 open class AnonymousClass {
+ @kotlin.jvm.JvmField var i: kotlin.Int = 0
+
  open fun main() {
-  val instance: anonymousclass.SomeClass? = object : anonymousclass.SomeClass(1) {
+  val instance: anonymousclass.SomeClass? = object : anonymousclass.SomeClass(this.i) {
    @kotlin.jvm.JvmField var `object`: kotlin.Any? = this
 
    @kotlin.jvm.JvmField var outer: kotlin.Any? = this@AnonymousClass

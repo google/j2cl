@@ -1,0 +1,42 @@
+goog.module('j2ktnotpassing.SomeClassWithStaticMembers$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class SomeClassWithStaticMembers extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @abstract @nodts @return {?string} */
+ m_foo__java_lang_String() {}
+ /** @nodts */
+ $ctor__j2ktnotpassing_SomeClassWithStaticMembers__int__void(/** number */ i) {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static m_staticMethod__void() {
+  SomeClassWithStaticMembers.$clinit();
+ }
+ /** @nodts */
+ static $clinit() {
+  SomeClassWithStaticMembers.$clinit = () =>{};
+  SomeClassWithStaticMembers.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeClassWithStaticMembers;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SomeClassWithStaticMembers, 'j2ktnotpassing.SomeClassWithStaticMembers');
+
+exports = SomeClassWithStaticMembers;
+
+//# sourceMappingURL=SomeClassWithStaticMembers.js.map

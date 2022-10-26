@@ -13,20 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package anonymousclass;
+package j2ktnotpassing;
 
-abstract class SomeClass {
+abstract class SomeClassWithStaticMembers {
   public abstract String foo();
 
-  SomeClass(int i) {}
+  SomeClassWithStaticMembers(int i) {}
+
+  static void staticMethod() {}
 }
 
 public class AnonymousClass {
   int i;
 
   public void main() {
-    SomeClass instance =
-        new SomeClass(i) {
+    // Test for: https://youtrack.jetbrains.com/issue/KT-54349
+    SomeClassWithStaticMembers instanceWithStaticMembers =
+        new SomeClassWithStaticMembers(i) {
           Object object = this;
           Object outer = AnonymousClass.this;
 
@@ -35,29 +38,4 @@ public class AnonymousClass {
           }
         };
   }
-}
-
-interface SomeInterface {
-  SomeClass implicitlyStatic =
-      new SomeClass(1) {
-        public String foo() {
-          return "a";
-        }
-      };
-}
-
-// Test for: https://youtrack.jetbrains.com/issue/KT-54349
-class ThisReferenceTest {
-  ThisReferenceTest(ThisReferenceTest test) {}
-
-  void test() {
-    new ThisReferenceTest(this) {};
-    new ThisReferenceTest(
-        new ThisReferenceTest(this) {
-          Object innerThis = this;
-        }) {};
-  }
-
-  // Static method is needed to trigger KT-54349.
-  static void staticMethod() {}
 }
