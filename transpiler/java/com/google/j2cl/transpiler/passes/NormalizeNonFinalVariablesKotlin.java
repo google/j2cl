@@ -133,7 +133,7 @@ public class NormalizeNonFinalVariablesKotlin extends NormalizationPass {
 
             List<Statement> statementsAfterConstructorInvocation =
                 constructorInvocationIndex != -1
-                    ? statements.subList(constructorInvocationIndex + 1, statements.size() - 1)
+                    ? statements.subList(constructorInvocationIndex + 1, statements.size())
                     : statements;
 
             ImmutableList<Statement> rewrittenStatementsAfterConstructorInvocation =

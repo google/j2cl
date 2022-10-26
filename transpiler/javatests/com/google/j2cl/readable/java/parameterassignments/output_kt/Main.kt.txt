@@ -7,6 +7,7 @@ import kotlin.jvm.*
 open class Main {
  constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): this(nonFinal, explicitFinal, implicitFinal, true) {
   var nonFinal_1: kotlin.Int = nonFinal
+  nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
  constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int, flag: kotlin.Boolean) {
@@ -33,6 +34,7 @@ open class Main {
  open class SubMain: parameterassignments.Main {
   constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): super(nonFinal, explicitFinal, implicitFinal) {
    var nonFinal_1: kotlin.Int = nonFinal
+   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   }
 
   open override fun test(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int {
