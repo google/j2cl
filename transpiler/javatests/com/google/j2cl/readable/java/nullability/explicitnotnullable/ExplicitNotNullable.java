@@ -42,6 +42,20 @@ public class ExplicitNotNullable {
   private Object f13;
   @Nullable private Object f14;
 
+  private String[][] f15 = {};
+  private String[] @Nullable [] f16 = {};
+  private String @Nullable [][] f17 = {};
+  private String @Nullable [] @Nullable [] f18 = {};
+  private @Nullable String[][] f19 = {};
+  private @Nullable String[] @Nullable [] f20 = {};
+  private @Nullable String @Nullable [][] f21 = {};
+  private @Nullable String @Nullable [] @Nullable [] f22 = {};
+
+  private char[][] f23 = {};
+  private char[] @Nullable [] f24 = {};
+  private char @Nullable [][] f25 = {};
+  private char @Nullable [] @Nullable [] f26 = {};
+
   public ExplicitNotNullable() {
     f13 = new Object();
   }

@@ -138,7 +138,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   public String getUniqueId() {
     String prefix = isNullable() ? "?" : "!";
     String suffix = isNativeWasmArray() ? "(native)" : "";
-    return prefix + "[]".repeat(getDimensions()) + getLeafTypeDescriptor().getUniqueId() + suffix;
+    return prefix + "[]" + getComponentTypeDescriptor().getUniqueId() + suffix;
   }
 
   @Override
