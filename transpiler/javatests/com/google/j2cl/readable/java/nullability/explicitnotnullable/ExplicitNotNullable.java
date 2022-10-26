@@ -352,8 +352,18 @@ public class ExplicitNotNullable {
   }
 
   static void nonNullableAccept(String s) {}
+
+  @Nullable Consumer<?> collection;
+
+  @Nullable Consumer<? extends Object> nonNullableCollection;
+
+  void unboundedWildCard(Consumer<?> c, Consumer<? extends Object> nc) {
+    collection = c;
+    nonNullableCollection = nc;
+  }
 }
 
 class DefaultNullable {
   static void nullableAccept(String s) {}
 }
+

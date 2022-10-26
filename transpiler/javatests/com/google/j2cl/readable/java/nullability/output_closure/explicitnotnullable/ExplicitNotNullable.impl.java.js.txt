@@ -74,6 +74,10 @@ class ExplicitNotNullable extends j_l_Object {
   this.f_f25__nullability_explicitnotnullable_ExplicitNotNullable_;
   /**@type {Array<Array<number>>} @nodts*/
   this.f_f26__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {Consumer<?>} @nodts*/
+  this.f_collection__nullability_explicitnotnullable_ExplicitNotNullable;
+  /**@type {Consumer<?>} @nodts*/
+  this.f_nonNullableCollection__nullability_explicitnotnullable_ExplicitNotNullable;
  }
  /** @nodts @return {!ExplicitNotNullable} */
  static $create__() {
@@ -292,6 +296,11 @@ class ExplicitNotNullable extends j_l_Object {
  /** @nodts */
  static m_nonNullableAccept__java_lang_String__void(/** string */ s) {
   ExplicitNotNullable.$clinit();
+ }
+ /** @nodts */
+ m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable(/** !Consumer<?> */ c, /** !Consumer<?> */ nc) {
+  this.f_collection__nullability_explicitnotnullable_ExplicitNotNullable = c;
+  this.f_nonNullableCollection__nullability_explicitnotnullable_ExplicitNotNullable = nc;
  }
  /** @private @nodts */
  $init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable() {

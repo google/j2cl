@@ -777,6 +777,7 @@
   (ref.func $m_m3__arrayOf_java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable)
   (ref.func $m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
   (ref.func $m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
+  (ref.func $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
  )
 )
 
@@ -7338,6 +7339,8 @@
  (field $f_f24__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
  (field $f_f25__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
  (field $f_f26__nullability_explicitnotnullable_ExplicitNotNullable_ (ref null $javaemul.internal.WasmArray.OfObject))
+ (field $f_collection__nullability_explicitnotnullable_ExplicitNotNullable (mut (ref null $java.lang.Object)))
+ (field $f_nonNullableCollection__nullability_explicitnotnullable_ExplicitNotNullable (mut (ref null $java.lang.Object)))
   $java.lang.Object)
 )
 (type $nullability.explicitnotnullable.ExplicitNotNullable.vtable (struct_subtype 
@@ -7350,6 +7353,7 @@
  (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
  (field $m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable (ref $function.m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable))
  (field $m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable (ref $function.m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable))
+ (field $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable (ref $function.m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable))
   $java.lang.Object.vtable)
 )
 
@@ -7359,9 +7363,9 @@
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:59:9
  (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
  (block
-  ;; ExplicitNotNullable $instance = new ExplicitNotNullable.<init>(0,javaemul.internal.StringPool.$getString_|Hello|(),null,null,null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]));
+  ;; ExplicitNotNullable $instance = new ExplicitNotNullable.<init>(0,javaemul.internal.StringPool.$getString_|Hello|(),null,null,null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null,null,null,null,javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),javaemul.internal.WasmArray.OfObject.$create([]),null,null);
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:59:9
-  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array ))))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.itable)) (i32.const 0) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:59:9
   (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable@nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (local.get $$instance)))
@@ -8142,6 +8146,26 @@
  )
 )
 
+;;; void ExplicitNotNullable.unboundedWildCard(Consumer<?> c, Consumer<? extends Object> nc)
+(func $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable
+ (type $function.m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $c (ref null $java.lang.Object))
+ (param $nc (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:360:7
+ (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
+ (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable (local.get $this.untyped)))
+ (block
+  ;; (ExplicitNotNullable.this.collection = c);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:361:4
+  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_collection__nullability_explicitnotnullable_ExplicitNotNullable(local.get $this) (local.get $c))
+  ;; (ExplicitNotNullable.this.nonNullableCollection = nc);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:362:4
+  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_nonNullableCollection__nullability_explicitnotnullable_ExplicitNotNullable(local.get $this) (local.get $nc))
+ )
+)
+(elem declare func $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
+
 ;;; void ExplicitNotNullable.$init()
 (func $$init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable@nullability.explicitnotnullable.ExplicitNotNullable
  (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
@@ -8216,17 +8240,17 @@
 ;;; DefaultNullable DefaultNullable.$create()
 (func $$create__@nullability.explicitnotnullable.DefaultNullable
  (result (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
  (local $$instance (ref null $nullability.explicitnotnullable.DefaultNullable))
  (block
   ;; DefaultNullable $instance = new DefaultNullable.<init>(0);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
   (local.set $$instance (struct.new $nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
   (return (local.get $$instance))
  )
 )
@@ -8234,13 +8258,13 @@
 ;;; void DefaultNullable.$ctor()
 (func $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable
  (param $this (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
  (block
   ;; nullability.explicitnotnullable.DefaultNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
   (call $$clinit__void@nullability.explicitnotnullable.DefaultNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -8248,32 +8272,32 @@
 ;;; void DefaultNullable.nullableAccept(String s)
 (func $m_nullableAccept__java_lang_String__void@nullability.explicitnotnullable.DefaultNullable
  (param $s (ref null $java.lang.String))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:358:14
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:367:14
  (block
   ;; nullability.explicitnotnullable.DefaultNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:358:39
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:367:39
   (call $$clinit__void@nullability.explicitnotnullable.DefaultNullable )
  )
 )
 
 ;;; void DefaultNullable.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.DefaultNullable
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
  (block
   ;; if (nullability.explicitnotnullable.DefaultNullable.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
   (if (global.get $f_$initialized__nullability_explicitnotnullable_DefaultNullable)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.DefaultNullable.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
   (global.set $f_$initialized__nullability_explicitnotnullable_DefaultNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:357:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
   (call $$clinit__void@java.lang.Object )
  )
 )

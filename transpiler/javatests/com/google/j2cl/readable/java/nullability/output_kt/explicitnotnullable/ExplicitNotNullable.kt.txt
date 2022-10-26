@@ -75,6 +75,15 @@ open class ExplicitNotNullable {
 
  open fun <T: nullability.explicitnotnullable.ExplicitNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
 
+ @kotlin.jvm.JvmField var collection: nullability.explicitnotnullable.ExplicitNotNullable.Consumer<*>? = null
+
+ @kotlin.jvm.JvmField var nonNullableCollection: nullability.explicitnotnullable.ExplicitNotNullable.Consumer<out kotlin.Any>? = null
+
+ open fun unboundedWildCard(c: nullability.explicitnotnullable.ExplicitNotNullable.Consumer<*>, nc: nullability.explicitnotnullable.ExplicitNotNullable.Consumer<out kotlin.Any>) {
+  this.collection = c
+  this.nonNullableCollection = nc
+ }
+
  companion object {
   @kotlin.jvm.JvmStatic
   fun <N> genericNullableMethod(o: nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNullable<N>, n: N?) {

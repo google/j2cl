@@ -384,6 +384,19 @@ class JdtEnvironment {
   private TypeDescriptor getUpperBoundTypeDescriptor(
       ITypeBinding typeBinding, boolean inNullMarkedScope) {
     if (typeBinding.isWildcardType()) {
+      // Distinguish between "? extends Object" and "?" to apply the right nullability to the bound.
+      // This is fragile, but the observation is that in these cases .getBound() is null and
+      // there is only one type bound in .getTypeBounds() and that is j.l.Object.
+      // For a wildcard .getBound() might be null in scenarios where there is a bound, and in
+      // those cases .getTypeBounds() returns the actual bound.
+      boolean isUnbounded =
+          typeBinding.getBound() == null
+              && typeBinding.getTypeBounds().length == 1
+              && typeBinding.getTypeBounds()[0].getQualifiedName().equals("java.lang.Object");
+      if (isUnbounded) {
+        return TypeDescriptors.get().javaLangObject;
+      }
+
       // For wildcards get the upper bound with getBound() since getTypeBounds() *below* does not
       // return the right type in this case.
       ITypeBinding bound = typeBinding.getBound();
