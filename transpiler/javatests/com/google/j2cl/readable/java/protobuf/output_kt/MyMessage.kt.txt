@@ -40,7 +40,7 @@ open class MyMessage: com.google.protobuf.GeneratedMessage {
   }
 
   open fun build(): protobuf.MyMessage? {
-   return protobuf.MyMessage(this.testField)
+   return protobuf.MyMessage(this@Builder.testField)
   }
 
   constructor()

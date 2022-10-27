@@ -1,0 +1,59 @@
+goog.module('anonymousclass.AnonymousClass.$2$impl');
+
+const SomeClassWithStaticMembers = goog.require('anonymousclass.SomeClassWithStaticMembers$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AnonymousClass = goog.forwardDeclare('anonymousclass.AnonymousClass$impl');
+
+class $2 extends SomeClassWithStaticMembers {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {AnonymousClass} @nodts*/
+  this.$outer_this__anonymousclass_AnonymousClass_2;
+  /**@type {*} @nodts*/
+  this.f_object__anonymousclass_AnonymousClass_2;
+  /**@type {*} @nodts*/
+  this.f_outer__anonymousclass_AnonymousClass_2;
+ }
+ /** @nodts @return {!$2} */
+ static $create__anonymousclass_AnonymousClass__int(/** AnonymousClass */ $outer_this, /** number */ $_0) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__int__void($outer_this, $_0);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__anonymousclass_AnonymousClass_2__anonymousclass_AnonymousClass__int__void(/** AnonymousClass */ $outer_this, /** number */ $_0) {
+  this.$outer_this__anonymousclass_AnonymousClass_2 = $outer_this;
+  this.$ctor__anonymousclass_SomeClassWithStaticMembers__int__void($_0);
+  this.$init__void_$p_anonymousclass_AnonymousClass_2();
+ }
+ /** @override @nodts @return {?string} */
+ m_foo__java_lang_String() {
+  return 'a';
+ }
+ /** @private @nodts */
+ $init__void_$p_anonymousclass_AnonymousClass_2() {
+  this.f_object__anonymousclass_AnonymousClass_2 = this;
+  this.f_outer__anonymousclass_AnonymousClass_2 = this.$outer_this__anonymousclass_AnonymousClass_2;
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  SomeClassWithStaticMembers.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2, 'anonymousclass.AnonymousClass$2');
+
+exports = $2;
+
+//# sourceMappingURL=AnonymousClass$2.js.map

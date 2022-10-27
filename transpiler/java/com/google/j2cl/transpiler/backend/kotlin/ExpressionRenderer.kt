@@ -58,7 +58,6 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.VariableReference
-import com.google.j2cl.transpiler.backend.kotlin.ast.companionObjectOrNull
 
 fun Renderer.renderExpression(expression: Expression) {
   when (expression) {
@@ -439,11 +438,7 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   // Render invocation for classes only - interfaces don't need it.
   if (typeDescriptor.isClass) {
     // Explicit label is necessary to workaround https://youtrack.jetbrains.com/issue/KT-54349
-    copy(
-        renderThisReferenceWithLabel =
-          expression.anonymousInnerClass != null && currentType!!.companionObjectOrNull != null
-      )
-      .renderInvocationArguments(expression)
+    copy(renderThisReferenceWithLabel = true).renderInvocationArguments(expression)
   }
 
   expression.anonymousInnerClass?.let { renderTypeBody(it) }

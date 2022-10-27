@@ -21,12 +21,31 @@ abstract class SomeClass {
   SomeClass(int i) {}
 }
 
+abstract class SomeClassWithStaticMembers {
+  public abstract String foo();
+
+  SomeClassWithStaticMembers(int i) {}
+
+  static void staticMethod() {}
+}
+
 public class AnonymousClass {
   int i;
 
   public void main() {
     SomeClass instance =
         new SomeClass(i) {
+          Object object = this;
+          Object outer = AnonymousClass.this;
+
+          public String foo() {
+            return "a";
+          }
+        };
+
+    // Test for: https://youtrack.jetbrains.com/issue/KT-54349
+    SomeClassWithStaticMembers instanceWithStaticMembers =
+        new SomeClassWithStaticMembers(i) {
           Object object = this;
           Object outer = AnonymousClass.this;
 
@@ -44,20 +63,4 @@ interface SomeInterface {
           return "a";
         }
       };
-}
-
-// Test for: https://youtrack.jetbrains.com/issue/KT-54349
-class ThisReferenceTest {
-  ThisReferenceTest(ThisReferenceTest test) {}
-
-  void test() {
-    new ThisReferenceTest(this) {};
-    new ThisReferenceTest(
-        new ThisReferenceTest(this) {
-          Object innerThis = this;
-        }) {};
-  }
-
-  // Static method is needed to trigger KT-54349.
-  static void staticMethod() {}
 }

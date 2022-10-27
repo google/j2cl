@@ -17,7 +17,7 @@ open class Main {
   }
 
   open fun doSomething(): boundedtypesupercall.Main.Foo<T>? {
-   return object : boundedtypesupercall.Main.Foo<T>(this.getSomething()) {
+   return object : boundedtypesupercall.Main.Foo<T>(this@Bar.getSomething()) {
     open override fun foo() {}
    }
   }

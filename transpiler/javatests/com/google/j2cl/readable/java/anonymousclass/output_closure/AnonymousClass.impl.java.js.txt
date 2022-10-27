@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('anonymousclass.AnonymousClass.$1$impl');
+let $2 = goog.forwardDeclare('anonymousclass.AnonymousClass.$2$impl');
 
 class AnonymousClass extends j_l_Object {
  /** @protected @nodts */
@@ -26,6 +27,7 @@ class AnonymousClass extends j_l_Object {
  /** @nodts */
  m_main__void() {
   let instance = $1.$create__anonymousclass_AnonymousClass__int(this, this.f_i__anonymousclass_AnonymousClass);
+  let instanceWithStaticMembers = $2.$create__anonymousclass_AnonymousClass__int(this, this.f_i__anonymousclass_AnonymousClass);
  }
  /** @nodts */
  static $clinit() {
@@ -41,6 +43,7 @@ class AnonymousClass extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   $1 = goog.module.get('anonymousclass.AnonymousClass.$1$impl');
+  $2 = goog.module.get('anonymousclass.AnonymousClass.$2$impl');
  }
 }
 $Util.$setClassMetadata(AnonymousClass, 'anonymousclass.AnonymousClass');
