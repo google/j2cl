@@ -92,6 +92,24 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testBeforeAndAfter() throws Exception {
+    String testName = "BeforeAndAfterTest";
+    TestSequencer testSequence = t -> new String[] {"constructor", "setUp", t, "tearDown"};
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSuccess("test1")
+            .addTestSuccess("test2")
+            .addJavaLogLineSequence(testSequence.forTest("test"))
+            .addJavaLogLineSequence(testSequence.forTest("test"))
+            .addJavaLogLineSequence("afterClass")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
   public void testThrowsOnConstruction() throws Exception {
     String testName = "ThrowsOnConstructionTest";
     TestResult testResult =
@@ -103,8 +121,37 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
             .addJavaLogLineSequence("constructor", "a", "after")
             .addJavaLogLineSequence("constructor")
             .addJavaLogLineSequence("constructor", "c", "after")
+            .addJavaLogLineSequence("afterClass")
             .addBlackListedWord("should_not_be_in_log")
             .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testThrowsInBeforeClass() throws Exception {
+    String testName = "ThrowsInBeforeClassTest";
+    TestResult testResult = newTestResultBuilder().testClassName(testName).build();
+    if (testMode.isJvm()) {
+      // In JUnit 4, if there is exception in BeforeClass, the log will show 0 test run regardless
+      // of failures number.
+      testResult =
+          newTestResultBuilder()
+              .testClassName(testName)
+              .failedToInstantiateTest(true)
+              .addJavaLogLineSequence("afterClass")
+              .addBlackListedWord("should_not_be_in_log")
+              .build();
+    } else {
+      testResult =
+          newTestResultBuilder()
+              .testClassName(testName)
+              .addTestFailure("test")
+              .addJavaLogLineSequence("afterClass")
+              .addBlackListedWord("should_not_be_in_log")
+              .build();
+    }
 
     List<String> logLines = runTest(testName);
     assertThat(logLines).matches(testResult);
@@ -120,6 +167,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
             .addTestFailure("testOther")
             .addJavaLogLineSequence("before", "after", "before", "after")
             .addBlackListedWord("should_not_be_in_log")
+            .addJavaLogLineSequence("afterClass")
             .build();
 
     List<String> logLines = runTest(testName);
@@ -136,6 +184,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
             .addTestFailure("test")
             .addJavaLogLineSequence("test", "after")
             .addJavaLogLineSequence("testOther", "after")
+            .addJavaLogLineSequence("afterClass")
             .build();
 
     List<String> logLines = runTest(testName);

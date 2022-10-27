@@ -99,8 +99,37 @@ public class JUnit4IntegrationTest2 extends IntegrationTestBase {
             .addTestSuccess("c")
             .addJavaLogLineSequence(
                 "constructor", "a", "after", "constructor", "constructor", "c", "after")
+            .addJavaLogLineSequence("afterClass")
             .addBlackListedWord("should_not_be_in_log")
             .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testThrowsInBeforeClass() throws Exception {
+    String testName = "ThrowsInBeforeClassTest";
+    TestResult testResult = newTestResultBuilder().testClassName(testName).build();
+    if (testMode.isJvm()) {
+      // In JUnit 4, if there is exception in BeforeClass, the log will show 0 test run regardless
+      // of failures number.
+      testResult =
+          newTestResultBuilder()
+              .testClassName(testName)
+              .addJavaLogLineSequence("afterClass")
+              .failedToInstantiateTest(true)
+              .addBlackListedWord("should_not_be_in_log")
+              .build();
+    } else {
+      testResult =
+          newTestResultBuilder()
+              .testClassName(testName)
+              .addTestFailure("test")
+              .addJavaLogLineSequence("afterClass")
+              .addBlackListedWord("should_not_be_in_log")
+              .build();
+    }
 
     List<String> logLines = runTest(testName);
     assertThat(logLines).matches(testResult);
@@ -116,6 +145,7 @@ public class JUnit4IntegrationTest2 extends IntegrationTestBase {
             .addTestFailure("testOther")
             .addJavaLogLineSequence("before", "after", "before", "after")
             .addBlackListedWord("should_not_be_in_log")
+            .addJavaLogLineSequence("afterClass")
             .build();
 
     List<String> logLines = runTest(testName);
@@ -132,6 +162,7 @@ public class JUnit4IntegrationTest2 extends IntegrationTestBase {
             .addTestFailure("testOther")
             .addJavaLogLineSequence("test", "after")
             .addJavaLogLineSequence("testOther", "after")
+            .addJavaLogLineSequence("afterClass")
             .build();
 
     List<String> logLines = runTest(testName);

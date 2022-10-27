@@ -37,10 +37,12 @@ public abstract class TestResult {
 
   abstract String packageName();
 
+  abstract boolean failedToInstantiateTest();
+
   abstract ImmutableList<String> logLinesSequences();
 
   public static Builder builder() {
-    return new AutoValue_TestResult.Builder();
+    return new AutoValue_TestResult.Builder().failedToInstantiateTest(false);
   }
 
   @AutoValue.Builder
@@ -61,6 +63,8 @@ public abstract class TestResult {
     public abstract Builder testClassName(String testClassName);
 
     public abstract Builder packageName(String packageName);
+
+    public abstract Builder failedToInstantiateTest(boolean failedToInstantiateTest);
 
     public Builder addTestSuccess(String testName) {
       succeedsBuilder().add(testName);

@@ -57,6 +57,10 @@ public abstract class TestClass {
 
   public abstract ImmutableList<ParameterizedTestField> parameterizedFields();
 
+  public int numberOfTestMethods() {
+    return testMethods().size();
+  }
+
   public boolean needsAsyncSetup() {
     return beforeMethods().stream().anyMatch(TestMethod::isAsync);
   }

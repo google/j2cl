@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2022 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,13 +16,11 @@
 package com.google.j2cl.junit.integration.junit4.data;
 
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.FixMethodOrder;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.junit.runners.MethodSorters;
 
 /**
  * TestCase used for integration testing for j2cl JUnit support.
@@ -30,38 +28,17 @@ import org.junit.runners.MethodSorters;
  * <p>Note this test will not pass and this is intentional since we want to test test failures in
  * our integration tests as well.
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(JUnit4.class)
-public class ThrowsOnConstructionTest {
+public class ThrowsInBeforeClassTest {
 
-  private static int counter;
-
-  public ThrowsOnConstructionTest() {
-    TestCaseLogger.log("constructor");
-    counter++;
-    if (counter == 2) {
-      throw new RuntimeException("throwing in the constructor");
-    }
+  @BeforeClass
+  public static void beforeClass() {
+    throw new RuntimeException("failure in BeforeClass()");
   }
 
   @Test
-  public void a() {
-    TestCaseLogger.log("a");
-  }
-
-  @Test
-  public void c() {
-    TestCaseLogger.log("c");
-  }
-
-  @Test
-  public void b() {
+  public void test() {
     TestCaseLogger.log("should_not_be_in_log");
-  }
-
-  @After
-  public void after() {
-    TestCaseLogger.log("after");
   }
 
   @AfterClass

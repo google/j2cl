@@ -16,9 +16,34 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
+var times = 0
+fun beforeClass() {
+  #methodExecutions(${testClass.qualifiedName()} $testClass.beforeClassMethods())
+}
+
+fun afterClass() {
+  #methodExecutions(${testClass.qualifiedName()} ${testClass.afterClassMethods()})
+}
+
 class ${testClass.jsUnitAdapterClassName()} {
 
-  val actualTest = ${testClass.qualifiedName()}()
+  lateinit var actualTest : ${testClass.qualifiedName()}
+
+  init {
+    ## Add try catch here for afterClass is guaranteed to run even if the
+    ## BeforeClass method throws an exception, in this case, AfterTest does not
+    ## run so we throw an exception here
+    try {
+      if (times++ == 0) {
+        beforeClass()
+      }
+    } catch (e: Throwable) {
+      afterClass()
+      throw e
+    }
+
+    actualTest = ${testClass.qualifiedName()}()
+  }
 
   @BeforeTest
   fun setUp() {
@@ -30,10 +55,16 @@ class ${testClass.jsUnitAdapterClassName()} {
 
   @AfterTest
   fun tearDown() {
-  #if($testClass.isJUnit3())
-    junit.framework.TestCaseViolator.callTearDown(actualTest)
-  #end
-  #methodExecutions( "actualTest" $testClass.afterMethods() )
+    try {
+    #if($testClass.isJUnit3())
+      junit.framework.TestCaseViolator.callTearDown(actualTest)
+    #end
+    #methodExecutions( "actualTest" $testClass.afterMethods() )
+    } finally {
+      if (times == ${testClass.numberOfTestMethods()}) {
+        afterClass()
+      }
+    }
   }
 
 #foreach($testMethod in ${testClass.testMethods()})

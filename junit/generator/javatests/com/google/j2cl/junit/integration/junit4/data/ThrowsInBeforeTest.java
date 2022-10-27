@@ -17,6 +17,7 @@ package com.google.j2cl.junit.integration.junit4.data;
 
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,5 +51,10 @@ public class ThrowsInBeforeTest {
   @Test
   public void testOther() {
     TestCaseLogger.log("should_not_be_in_log");
+  }
+
+  @AfterClass
+  public static void afterClass() {
+    TestCaseLogger.log("afterClass");
   }
 }

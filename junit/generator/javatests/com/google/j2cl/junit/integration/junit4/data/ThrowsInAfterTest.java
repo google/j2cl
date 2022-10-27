@@ -17,6 +17,7 @@ package com.google.j2cl.junit.integration.junit4.data;
 
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -44,5 +45,10 @@ public class ThrowsInAfterTest {
   @Test
   public void testOther() {
     TestCaseLogger.log("testOther");
+  }
+
+  @AfterClass
+  public static void afterClass() {
+    TestCaseLogger.log("afterClass");
   }
 }
