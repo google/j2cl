@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -73,15 +74,11 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
   }
 
   private static boolean typeArgumentsNeedsCast(TypeDescriptor from, TypeDescriptor to) {
-    if (from instanceof DeclaredTypeDescriptor && to instanceof DeclaredTypeDescriptor) {
-      return Streams.zip(
-              ((DeclaredTypeDescriptor) from).getTypeArgumentDescriptors().stream(),
-              ((DeclaredTypeDescriptor) to).getTypeArgumentDescriptors().stream(),
-              InsertCastsOnNullabilityMismatch::typeArgumentNeedsCast)
-          .anyMatch(Boolean::booleanValue);
-    }
-
-    return false;
+    return Streams.zip(
+            getTypeArgumentDescriptors(from).stream(),
+            getTypeArgumentDescriptors(to).stream(),
+            InsertCastsOnNullabilityMismatch::typeArgumentNeedsCast)
+        .anyMatch(Boolean::booleanValue);
   }
 
   private static boolean typeArgumentNeedsCast(TypeDescriptor from, TypeDescriptor to) {
@@ -164,5 +161,20 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
     }
 
     return false;
+  }
+
+  private static ImmutableList<TypeDescriptor> getTypeArgumentDescriptors(
+      TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      return declaredTypeDescriptor.getTypeArgumentDescriptors();
+    }
+
+    if (typeDescriptor instanceof ArrayTypeDescriptor) {
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      return ImmutableList.of(arrayTypeDescriptor.getComponentTypeDescriptor());
+    }
+
+    return ImmutableList.of();
   }
 }
