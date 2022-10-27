@@ -17,11 +17,6 @@ j2cl_test_integration_test_data(
     ],
 )
 
-java_and_j2cl_library(
-    name = "BeforeAndAfterTestLib",
-    srcs = ["BeforeAndAfterTest.java"],
-)
-
 j2cl_test_integration_test_data(
     name = "ChildTest",
     platforms = [
