@@ -11,7 +11,27 @@ open class ExplicitNotNullable {
   }
  }
 
+ open fun testDependentWildcards(x: j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters<out kotlin.Any, out E?>): j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters<out kotlin.Any, out E?> {
+  return x!!.getThis()
+ }
+
+ companion object {
+  @kotlin.jvm.JvmStatic
+  fun <T: kotlin.Any> consume(t: T) {}
+
+  @kotlin.jvm.JvmStatic
+  fun testUnboundWildcardTypeArgumentInference(fn: j2ktnotpassing.ExplicitNotNullable.Function<*, *>) {
+   j2ktnotpassing.ExplicitNotNullable.consume<j2ktnotpassing.ExplicitNotNullable.Function<out kotlin.Any, out kotlin.Any>>(fn)
+  }
+ }
+
  fun interface Function<I, O> {
   fun apply(i: I): O
+ }
+
+ open class DependentTypeParameters<E: kotlin.Any, T: E?> {
+  open fun getThis(): j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters<E, T> {
+   return this
+  }
  }
 }

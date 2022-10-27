@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.$1$impl');
+let DependentTypeParameters = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters$impl');
 let ExplicitNotNullable_Function = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.Function$impl');
 
 class ExplicitNotNullable extends j_l_Object {
@@ -24,6 +25,19 @@ class ExplicitNotNullable extends j_l_Object {
  $ctor__j2ktnotpassing_ExplicitNotNullable__void() {
   this.$ctor__java_lang_Object__void();
   this.$init__void_$p_j2ktnotpassing_ExplicitNotNullable();
+ }
+ /** @nodts @template T */
+ static m_consume__java_lang_Object__void(/** T */ t) {
+  ExplicitNotNullable.$clinit();
+ }
+ /** @nodts */
+ static m_testUnboundWildcardTypeArgumentInference__j2ktnotpassing_ExplicitNotNullable_Function__void(/** !ExplicitNotNullable_Function<?, ?> */ fn) {
+  ExplicitNotNullable.$clinit();
+  ExplicitNotNullable.m_consume__java_lang_Object__void(fn);
+ }
+ /** @nodts @return {!DependentTypeParameters<?, ?>} */
+ m_testDependentWildcards__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing(/** !DependentTypeParameters<?, ?> */ x) {
+  return x.m_getThis__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing();
  }
  /** @private @nodts */
  $init__void_$p_j2ktnotpassing_ExplicitNotNullable() {
