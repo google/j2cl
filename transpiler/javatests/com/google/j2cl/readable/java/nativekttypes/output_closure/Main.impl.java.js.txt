@@ -5,6 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let System = goog.forwardDeclare('java.lang.System$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let BridgeSubclass = goog.forwardDeclare('nativekttypes.BridgeSubclass$impl');
 let $1 = goog.forwardDeclare('nativekttypes.Main.$1$impl');
@@ -126,6 +127,10 @@ class Main extends j_l_Object {
   return true;
  }
  /** @nodts */
+ m_todoMethod__java_lang_String__void(/** ?string */ string_1) {
+  System.f_out__java_lang_System.m_println__java_lang_String__void('Hello: ' + j_l_String.m_valueOf__java_lang_Object__java_lang_String(string_1));
+ }
+ /** @nodts */
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
@@ -140,6 +145,7 @@ class Main extends j_l_Object {
  static $loadModules() {
   Class = goog.module.get('java.lang.Class$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  System = goog.module.get('java.lang.System$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   BridgeSubclass = goog.module.get('nativekttypes.BridgeSubclass$impl');
   $1 = goog.module.get('nativekttypes.Main.$1$impl');

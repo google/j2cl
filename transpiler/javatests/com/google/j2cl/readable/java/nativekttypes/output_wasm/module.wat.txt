@@ -115,6 +115,7 @@
   (ref.func $m_typeLiterals__void@nativekttypes.Main)
   (ref.func $m_disabledVoidMethod__void@nativekttypes.Main)
   (ref.func $m_disabledNonVoidMethod__boolean@nativekttypes.Main)
+  (ref.func $m_todoMethod__java_lang_String__void@nativekttypes.Main)
  )
 )
 
@@ -564,6 +565,7 @@
  (field $m_typeLiterals__void (ref $function.m_typeLiterals__void))
  (field $m_disabledVoidMethod__void (ref $function.m_disabledVoidMethod__void))
  (field $m_disabledNonVoidMethod__boolean (ref $function.m_disabledNonVoidMethod__boolean))
+ (field $m_todoMethod__java_lang_String__void (ref $function.m_todoMethod__java_lang_String__void))
   $java.lang.Object.vtable)
 )
 
@@ -919,6 +921,37 @@
 )
 (elem declare func $m_disabledNonVoidMethod__boolean@nativekttypes.Main)
 
+;;; void Main.todoMethod(String string)
+(func $m_todoMethod__java_lang_String__void@nativekttypes.Main
+ (type $function.m_todoMethod__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $string (ref null $java.lang.String))
+ ;;@ nativekttypes/Main.java:132:14
+ (local $$qualifier (ref null $java.io.PrintStream))
+ (local $$stringBuilder (ref null $java.lang.StringBuilder))
+ (local $this (ref null $nativekttypes.Main))
+ (local.set $this (ref.cast_static $nativekttypes.Main (local.get $this.untyped)))
+ (block
+  (block
+   ;; PrintStream $qualifier = (java.lang.System.$clinit(),java.lang.System.out);
+   ;;@ nativekttypes/Main.java:133:4
+   (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
+    (call $$clinit__void@java.lang.System )
+    (global.get $f_out__java_lang_System)
+   ))
+   ;; $qualifier.println((StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Hello__|()),$stringBuilder.append(string),$stringBuilder.toString()));
+   ;;@ nativekttypes/Main.java:133:4
+   (call_ref $function.m_println__java_lang_String__void (ref.as_non_null (local.get $$qualifier))(block (result (ref null $java.lang.String))
+    (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|Hello__|__java_lang_String (ref.func $$getString_|Hello__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(local.get $string)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
+   )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
+  )
+ )
+)
+(elem declare func $m_todoMethod__java_lang_String__void@nativekttypes.Main)
+
 ;;; void Main.$clinit()
 (func $$clinit__void@nativekttypes.Main
  ;;@ nativekttypes/Main.java:21:13
@@ -989,17 +1022,17 @@
 (func $$create__java_lang_Object@nativekttypes.Subclass
  (param $v (ref null $java.lang.Object))
  (result (ref null $nativekttypes.Subclass))
- ;;@ nativekttypes/Main.java:134:2
+ ;;@ nativekttypes/Main.java:139:2
  (local $$instance (ref null $nativekttypes.Subclass))
  (block
   ;; Subclass<V> $instance = new Subclass.<init>(0,null,0,false);
-  ;;@ nativekttypes/Main.java:134:2
+  ;;@ nativekttypes/Main.java:139:2
   (local.set $$instance (struct.new $nativekttypes.Subclass (ref.as_non_null (global.get $nativekttypes.Subclass.vtable)) (ref.as_non_null (global.get $nativekttypes.Subclass.itable)) (i32.const 0) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(v);
-  ;;@ nativekttypes/Main.java:134:2
+  ;;@ nativekttypes/Main.java:139:2
   (call $$ctor__java_lang_Object__void_$p_nativekttypes_Subclass@nativekttypes.Subclass (ref.as_non_null (local.get $$instance))(local.get $v))
   ;; return $instance;
-  ;;@ nativekttypes/Main.java:134:2
+  ;;@ nativekttypes/Main.java:139:2
   (return (local.get $$instance))
  )
 )
@@ -1008,13 +1041,13 @@
 (func $$ctor__java_lang_Object__void_$p_nativekttypes_Subclass@nativekttypes.Subclass
  (param $this (ref null $nativekttypes.Subclass))
  (param $v (ref null $java.lang.Object))
- ;;@ nativekttypes/Main.java:134:2
+ ;;@ nativekttypes/Main.java:139:2
  (block
   ;; nativekttypes.Subclass.$clinit();
-  ;;@ nativekttypes/Main.java:134:16
+  ;;@ nativekttypes/Main.java:139:16
   (call $$clinit__void@nativekttypes.Subclass )
   ;; NativeTopLevel.this.$ctor(v);
-  ;;@ nativekttypes/Main.java:135:4
+  ;;@ nativekttypes/Main.java:140:4
   (call $$ctor__java_lang_Object__void_$p_nativekttypes_NativeTopLevel@nativekttypes.NativeTopLevel (ref.as_non_null (local.get $this))(local.get $v))
  )
 )
@@ -1024,12 +1057,12 @@
  (type $function.m_methodToRename__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:139:13
+ ;;@ nativekttypes/Main.java:144:13
  (local $this (ref null $nativekttypes.Subclass))
  (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
  (block
   ;; return super.methodToRename();
-  ;;@ nativekttypes/Main.java:140:4
+  ;;@ nativekttypes/Main.java:145:4
   (return (call $m_methodToRename__int@nativekttypes.NativeTopLevel (ref.as_non_null (local.get $this))))
  )
 )
@@ -1040,12 +1073,12 @@
  (type $function.m_getMethodAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:144:13
+ ;;@ nativekttypes/Main.java:149:13
  (local $this (ref null $nativekttypes.Subclass))
  (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
  (block
   ;; return super.getMethodAsProperty();
-  ;;@ nativekttypes/Main.java:145:4
+  ;;@ nativekttypes/Main.java:150:4
   (return (call $m_getMethodAsProperty__int@nativekttypes.NativeTopLevel (ref.as_non_null (local.get $this))))
  )
 )
@@ -1056,12 +1089,12 @@
  (type $function.m_nonGetMethodAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:149:13
+ ;;@ nativekttypes/Main.java:154:13
  (local $this (ref null $nativekttypes.Subclass))
  (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
  (block
   ;; return super.nonGetMethodAsProperty();
-  ;;@ nativekttypes/Main.java:150:4
+  ;;@ nativekttypes/Main.java:155:4
   (return (call $m_nonGetMethodAsProperty__int@nativekttypes.NativeTopLevel (ref.as_non_null (local.get $this))))
  )
 )
@@ -1072,12 +1105,12 @@
  (type $function.m_methodToRenameAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:154:13
+ ;;@ nativekttypes/Main.java:159:13
  (local $this (ref null $nativekttypes.Subclass))
  (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
  (block
   ;; return super.methodToRenameAsProperty();
-  ;;@ nativekttypes/Main.java:155:4
+  ;;@ nativekttypes/Main.java:160:4
   (return (call $m_methodToRenameAsProperty__int@nativekttypes.NativeTopLevel (ref.as_non_null (local.get $this))))
  )
 )
@@ -1088,12 +1121,12 @@
  (type $function.m_getMethodToRenameAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:159:13
+ ;;@ nativekttypes/Main.java:164:13
  (local $this (ref null $nativekttypes.Subclass))
  (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
  (block
   ;; return super.getMethodToRenameAsProperty();
-  ;;@ nativekttypes/Main.java:160:4
+  ;;@ nativekttypes/Main.java:165:4
   (return (call $m_getMethodToRenameAsProperty__int@nativekttypes.NativeTopLevel (ref.as_non_null (local.get $this))))
  )
 )
@@ -1104,12 +1137,12 @@
  (type $function.m_isMethodAsProperty__boolean)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:164:17
+ ;;@ nativekttypes/Main.java:169:17
  (local $this (ref null $nativekttypes.Subclass))
  (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
  (block
   ;; return super.isMethodAsProperty();
-  ;;@ nativekttypes/Main.java:165:4
+  ;;@ nativekttypes/Main.java:170:4
   (return (call $m_isMethodAsProperty__boolean@nativekttypes.NativeTopLevel (ref.as_non_null (local.get $this))))
  )
 )
@@ -1120,12 +1153,12 @@
  (type $function.m_getstartingmethodAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:169:13
+ ;;@ nativekttypes/Main.java:174:13
  (local $this (ref null $nativekttypes.Subclass))
  (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
  (block
   ;; return super.getstartingmethodAsProperty();
-  ;;@ nativekttypes/Main.java:170:4
+  ;;@ nativekttypes/Main.java:175:4
   (return (call $m_getstartingmethodAsProperty__int@nativekttypes.NativeTopLevel (ref.as_non_null (local.get $this))))
  )
 )
@@ -1134,23 +1167,6 @@
 ;;; int Subclass.interfaceMethod(V v)
 (func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subclass
  (type $function.m_interfaceMethod__java_lang_Object__int)
- (param $this.untyped (ref $java.lang.Object))
- (param $v (ref null $java.lang.Object))
- (result i32)
- ;;@ nativekttypes/Main.java:174:13
- (local $this (ref null $nativekttypes.Subclass))
- (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
- (block
-  ;; return 0;
-  ;;@ nativekttypes/Main.java:175:4
-  (return (i32.const 0))
- )
-)
-(elem declare func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subclass)
-
-;;; int Subclass.interfaceMethodToRename(V v)
-(func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subclass
- (type $function.m_interfaceMethodToRename__java_lang_Object__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $v (ref null $java.lang.Object))
  (result i32)
@@ -1163,12 +1179,13 @@
   (return (i32.const 0))
  )
 )
-(elem declare func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subclass)
+(elem declare func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subclass)
 
-;;; int Subclass.getInterfaceMethodAsProperty()
-(func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subclass
- (type $function.m_getInterfaceMethodAsProperty__int)
+;;; int Subclass.interfaceMethodToRename(V v)
+(func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subclass
+ (type $function.m_interfaceMethodToRename__java_lang_Object__int)
  (param $this.untyped (ref $java.lang.Object))
+ (param $v (ref null $java.lang.Object))
  (result i32)
  ;;@ nativekttypes/Main.java:184:13
  (local $this (ref null $nativekttypes.Subclass))
@@ -1179,11 +1196,11 @@
   (return (i32.const 0))
  )
 )
-(elem declare func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subclass)
+(elem declare func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subclass)
 
-;;; int Subclass.interfaceMethodToRenameAsProperty()
-(func $m_interfaceMethodToRenameAsProperty__int@nativekttypes.Subclass
- (type $function.m_interfaceMethodToRenameAsProperty__int)
+;;; int Subclass.getInterfaceMethodAsProperty()
+(func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subclass
+ (type $function.m_getInterfaceMethodAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ nativekttypes/Main.java:189:13
@@ -1195,26 +1212,42 @@
   (return (i32.const 0))
  )
 )
+(elem declare func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subclass)
+
+;;; int Subclass.interfaceMethodToRenameAsProperty()
+(func $m_interfaceMethodToRenameAsProperty__int@nativekttypes.Subclass
+ (type $function.m_interfaceMethodToRenameAsProperty__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ nativekttypes/Main.java:194:13
+ (local $this (ref null $nativekttypes.Subclass))
+ (local.set $this (ref.cast_static $nativekttypes.Subclass (local.get $this.untyped)))
+ (block
+  ;; return 0;
+  ;;@ nativekttypes/Main.java:195:4
+  (return (i32.const 0))
+ )
+)
 (elem declare func $m_interfaceMethodToRenameAsProperty__int@nativekttypes.Subclass)
 
 ;;; void Subclass.$clinit()
 (func $$clinit__void@nativekttypes.Subclass
- ;;@ nativekttypes/Main.java:132:6
+ ;;@ nativekttypes/Main.java:137:6
  (block
   ;; if (nativekttypes.Subclass.$initialized) return;
-  ;;@ nativekttypes/Main.java:132:6
+  ;;@ nativekttypes/Main.java:137:6
   (if (global.get $f_$initialized__nativekttypes_Subclass)
    (then
     ;; return;
-    ;;@ nativekttypes/Main.java:132:6
+    ;;@ nativekttypes/Main.java:137:6
     (return )
    )
   )
   ;; (nativekttypes.Subclass.$initialized = true);
-  ;;@ nativekttypes/Main.java:132:6
+  ;;@ nativekttypes/Main.java:137:6
   (global.set $f_$initialized__nativekttypes_Subclass (i32.const 1))
   ;; nativekttypes.NativeTopLevel.$clinit();
-  ;;@ nativekttypes/Main.java:132:6
+  ;;@ nativekttypes/Main.java:137:6
   (call $$clinit__void@nativekttypes.NativeTopLevel )
  )
 )
@@ -1267,17 +1300,17 @@
 (func $$create__java_lang_Object@nativekttypes.Subsubclass
  (param $v (ref null $java.lang.Object))
  (result (ref null $nativekttypes.Subsubclass))
- ;;@ nativekttypes/Main.java:196:2
+ ;;@ nativekttypes/Main.java:201:2
  (local $$instance (ref null $nativekttypes.Subsubclass))
  (block
   ;; Subsubclass<V> $instance = new Subsubclass.<init>(0,null,0,false);
-  ;;@ nativekttypes/Main.java:196:2
+  ;;@ nativekttypes/Main.java:201:2
   (local.set $$instance (struct.new $nativekttypes.Subsubclass (ref.as_non_null (global.get $nativekttypes.Subsubclass.vtable)) (ref.as_non_null (global.get $nativekttypes.Subsubclass.itable)) (i32.const 0) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor(v);
-  ;;@ nativekttypes/Main.java:196:2
+  ;;@ nativekttypes/Main.java:201:2
   (call $$ctor__java_lang_Object__void_$p_nativekttypes_Subsubclass@nativekttypes.Subsubclass (ref.as_non_null (local.get $$instance))(local.get $v))
   ;; return $instance;
-  ;;@ nativekttypes/Main.java:196:2
+  ;;@ nativekttypes/Main.java:201:2
   (return (local.get $$instance))
  )
 )
@@ -1286,13 +1319,13 @@
 (func $$ctor__java_lang_Object__void_$p_nativekttypes_Subsubclass@nativekttypes.Subsubclass
  (param $this (ref null $nativekttypes.Subsubclass))
  (param $v (ref null $java.lang.Object))
- ;;@ nativekttypes/Main.java:196:2
+ ;;@ nativekttypes/Main.java:201:2
  (block
   ;; nativekttypes.Subsubclass.$clinit();
-  ;;@ nativekttypes/Main.java:196:19
+  ;;@ nativekttypes/Main.java:201:19
   (call $$clinit__void@nativekttypes.Subsubclass )
   ;; Subclass.this.$ctor(v);
-  ;;@ nativekttypes/Main.java:197:4
+  ;;@ nativekttypes/Main.java:202:4
   (call $$ctor__java_lang_Object__void_$p_nativekttypes_Subclass@nativekttypes.Subclass (ref.as_non_null (local.get $this))(local.get $v))
  )
 )
@@ -1302,12 +1335,12 @@
  (type $function.m_methodToRename__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:201:13
+ ;;@ nativekttypes/Main.java:206:13
  (local $this (ref null $nativekttypes.Subsubclass))
  (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
  (block
   ;; return super.methodToRename();
-  ;;@ nativekttypes/Main.java:202:4
+  ;;@ nativekttypes/Main.java:207:4
   (return (call $m_methodToRename__int@nativekttypes.Subclass (ref.as_non_null (local.get $this))))
  )
 )
@@ -1318,12 +1351,12 @@
  (type $function.m_getMethodAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:206:13
+ ;;@ nativekttypes/Main.java:211:13
  (local $this (ref null $nativekttypes.Subsubclass))
  (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
  (block
   ;; return super.getMethodAsProperty();
-  ;;@ nativekttypes/Main.java:207:4
+  ;;@ nativekttypes/Main.java:212:4
   (return (call $m_getMethodAsProperty__int@nativekttypes.Subclass (ref.as_non_null (local.get $this))))
  )
 )
@@ -1334,12 +1367,12 @@
  (type $function.m_nonGetMethodAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:211:13
+ ;;@ nativekttypes/Main.java:216:13
  (local $this (ref null $nativekttypes.Subsubclass))
  (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
  (block
   ;; return super.nonGetMethodAsProperty();
-  ;;@ nativekttypes/Main.java:212:4
+  ;;@ nativekttypes/Main.java:217:4
   (return (call $m_nonGetMethodAsProperty__int@nativekttypes.Subclass (ref.as_non_null (local.get $this))))
  )
 )
@@ -1350,12 +1383,12 @@
  (type $function.m_methodToRenameAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:216:13
+ ;;@ nativekttypes/Main.java:221:13
  (local $this (ref null $nativekttypes.Subsubclass))
  (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
  (block
   ;; return super.methodToRenameAsProperty();
-  ;;@ nativekttypes/Main.java:217:4
+  ;;@ nativekttypes/Main.java:222:4
   (return (call $m_methodToRenameAsProperty__int@nativekttypes.Subclass (ref.as_non_null (local.get $this))))
  )
 )
@@ -1366,12 +1399,12 @@
  (type $function.m_getMethodToRenameAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:221:13
+ ;;@ nativekttypes/Main.java:226:13
  (local $this (ref null $nativekttypes.Subsubclass))
  (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
  (block
   ;; return super.getMethodToRenameAsProperty();
-  ;;@ nativekttypes/Main.java:222:4
+  ;;@ nativekttypes/Main.java:227:4
   (return (call $m_getMethodToRenameAsProperty__int@nativekttypes.Subclass (ref.as_non_null (local.get $this))))
  )
 )
@@ -1382,12 +1415,12 @@
  (type $function.m_isMethodAsProperty__boolean)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:226:17
+ ;;@ nativekttypes/Main.java:231:17
  (local $this (ref null $nativekttypes.Subsubclass))
  (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
  (block
   ;; return super.isMethodAsProperty();
-  ;;@ nativekttypes/Main.java:227:4
+  ;;@ nativekttypes/Main.java:232:4
   (return (call $m_isMethodAsProperty__boolean@nativekttypes.Subclass (ref.as_non_null (local.get $this))))
  )
 )
@@ -1398,12 +1431,12 @@
  (type $function.m_getstartingmethodAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ nativekttypes/Main.java:231:13
+ ;;@ nativekttypes/Main.java:236:13
  (local $this (ref null $nativekttypes.Subsubclass))
  (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
  (block
   ;; return super.getstartingmethodAsProperty();
-  ;;@ nativekttypes/Main.java:232:4
+  ;;@ nativekttypes/Main.java:237:4
   (return (call $m_getstartingmethodAsProperty__int@nativekttypes.Subclass (ref.as_non_null (local.get $this))))
  )
 )
@@ -1412,23 +1445,6 @@
 ;;; int Subsubclass.interfaceMethod(V v)
 (func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subsubclass
  (type $function.m_interfaceMethod__java_lang_Object__int)
- (param $this.untyped (ref $java.lang.Object))
- (param $v (ref null $java.lang.Object))
- (result i32)
- ;;@ nativekttypes/Main.java:236:13
- (local $this (ref null $nativekttypes.Subsubclass))
- (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
- (block
-  ;; return 0;
-  ;;@ nativekttypes/Main.java:237:4
-  (return (i32.const 0))
- )
-)
-(elem declare func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subsubclass)
-
-;;; int Subsubclass.interfaceMethodToRename(V v)
-(func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subsubclass
- (type $function.m_interfaceMethodToRename__java_lang_Object__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $v (ref null $java.lang.Object))
  (result i32)
@@ -1441,12 +1457,13 @@
   (return (i32.const 0))
  )
 )
-(elem declare func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subsubclass)
+(elem declare func $m_interfaceMethod__java_lang_Object__int@nativekttypes.Subsubclass)
 
-;;; int Subsubclass.getInterfaceMethodAsProperty()
-(func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subsubclass
- (type $function.m_getInterfaceMethodAsProperty__int)
+;;; int Subsubclass.interfaceMethodToRename(V v)
+(func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subsubclass
+ (type $function.m_interfaceMethodToRename__java_lang_Object__int)
  (param $this.untyped (ref $java.lang.Object))
+ (param $v (ref null $java.lang.Object))
  (result i32)
  ;;@ nativekttypes/Main.java:246:13
  (local $this (ref null $nativekttypes.Subsubclass))
@@ -1457,11 +1474,11 @@
   (return (i32.const 0))
  )
 )
-(elem declare func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subsubclass)
+(elem declare func $m_interfaceMethodToRename__java_lang_Object__int@nativekttypes.Subsubclass)
 
-;;; int Subsubclass.interfaceMethodToRenameAsProperty()
-(func $m_interfaceMethodToRenameAsProperty__int@nativekttypes.Subsubclass
- (type $function.m_interfaceMethodToRenameAsProperty__int)
+;;; int Subsubclass.getInterfaceMethodAsProperty()
+(func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subsubclass
+ (type $function.m_getInterfaceMethodAsProperty__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
  ;;@ nativekttypes/Main.java:251:13
@@ -1473,26 +1490,42 @@
   (return (i32.const 0))
  )
 )
+(elem declare func $m_getInterfaceMethodAsProperty__int@nativekttypes.Subsubclass)
+
+;;; int Subsubclass.interfaceMethodToRenameAsProperty()
+(func $m_interfaceMethodToRenameAsProperty__int@nativekttypes.Subsubclass
+ (type $function.m_interfaceMethodToRenameAsProperty__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ nativekttypes/Main.java:256:13
+ (local $this (ref null $nativekttypes.Subsubclass))
+ (local.set $this (ref.cast_static $nativekttypes.Subsubclass (local.get $this.untyped)))
+ (block
+  ;; return 0;
+  ;;@ nativekttypes/Main.java:257:4
+  (return (i32.const 0))
+ )
+)
 (elem declare func $m_interfaceMethodToRenameAsProperty__int@nativekttypes.Subsubclass)
 
 ;;; void Subsubclass.$clinit()
 (func $$clinit__void@nativekttypes.Subsubclass
- ;;@ nativekttypes/Main.java:194:6
+ ;;@ nativekttypes/Main.java:199:6
  (block
   ;; if (nativekttypes.Subsubclass.$initialized) return;
-  ;;@ nativekttypes/Main.java:194:6
+  ;;@ nativekttypes/Main.java:199:6
   (if (global.get $f_$initialized__nativekttypes_Subsubclass)
    (then
     ;; return;
-    ;;@ nativekttypes/Main.java:194:6
+    ;;@ nativekttypes/Main.java:199:6
     (return )
    )
   )
   ;; (nativekttypes.Subsubclass.$initialized = true);
-  ;;@ nativekttypes/Main.java:194:6
+  ;;@ nativekttypes/Main.java:199:6
   (global.set $f_$initialized__nativekttypes_Subsubclass (i32.const 1))
   ;; nativekttypes.Subclass.$clinit();
-  ;;@ nativekttypes/Main.java:194:6
+  ;;@ nativekttypes/Main.java:199:6
   (call $$clinit__void@nativekttypes.Subclass )
  )
 )
@@ -1530,17 +1563,17 @@
 ;;; BridgeSubclass BridgeSubclass.$create()
 (func $$create__@nativekttypes.BridgeSubclass
  (result (ref null $nativekttypes.BridgeSubclass))
- ;;@ nativekttypes/Main.java:256:6
+ ;;@ nativekttypes/Main.java:261:6
  (local $$instance (ref null $nativekttypes.BridgeSubclass))
  (block
   ;; BridgeSubclass $instance = new BridgeSubclass.<init>(0);
-  ;;@ nativekttypes/Main.java:256:6
+  ;;@ nativekttypes/Main.java:261:6
   (local.set $$instance (struct.new $nativekttypes.BridgeSubclass (ref.as_non_null (global.get $nativekttypes.BridgeSubclass.vtable)) (ref.as_non_null (global.get $nativekttypes.BridgeSubclass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ nativekttypes/Main.java:256:6
+  ;;@ nativekttypes/Main.java:261:6
   (call $$ctor__void_$p_nativekttypes_BridgeSubclass@nativekttypes.BridgeSubclass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ nativekttypes/Main.java:256:6
+  ;;@ nativekttypes/Main.java:261:6
   (return (local.get $$instance))
  )
 )
@@ -1548,13 +1581,13 @@
 ;;; void BridgeSubclass.$ctor()
 (func $$ctor__void_$p_nativekttypes_BridgeSubclass@nativekttypes.BridgeSubclass
  (param $this (ref null $nativekttypes.BridgeSubclass))
- ;;@ nativekttypes/Main.java:256:6
+ ;;@ nativekttypes/Main.java:261:6
  (block
   ;; nativekttypes.BridgeSubclass.$clinit();
-  ;;@ nativekttypes/Main.java:256:6
+  ;;@ nativekttypes/Main.java:261:6
   (call $$clinit__void@nativekttypes.BridgeSubclass )
   ;; NativeRequiringBridge.this.$ctor();
-  ;;@ nativekttypes/Main.java:256:6
+  ;;@ nativekttypes/Main.java:261:6
   (call $$ctor__void_$p_nativekttypes_NativeRequiringBridge@nativekttypes.NativeRequiringBridge (ref.as_non_null (local.get $this)))
  )
 )
@@ -1563,12 +1596,12 @@
 (func $m_method__void@nativekttypes.BridgeSubclass
  (type $function.m_method__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ nativekttypes/Main.java:258:14
+ ;;@ nativekttypes/Main.java:263:14
  (local $this (ref null $nativekttypes.BridgeSubclass))
  (local.set $this (ref.cast_static $nativekttypes.BridgeSubclass (local.get $this.untyped)))
  (block
   ;; super.method();
-  ;;@ nativekttypes/Main.java:259:4
+  ;;@ nativekttypes/Main.java:264:4
   (call $m_method__void@nativekttypes.NativeRequiringBridge (ref.as_non_null (local.get $this)))
  )
 )
@@ -1576,22 +1609,22 @@
 
 ;;; void BridgeSubclass.$clinit()
 (func $$clinit__void@nativekttypes.BridgeSubclass
- ;;@ nativekttypes/Main.java:256:6
+ ;;@ nativekttypes/Main.java:261:6
  (block
   ;; if (nativekttypes.BridgeSubclass.$initialized) return;
-  ;;@ nativekttypes/Main.java:256:6
+  ;;@ nativekttypes/Main.java:261:6
   (if (global.get $f_$initialized__nativekttypes_BridgeSubclass)
    (then
     ;; return;
-    ;;@ nativekttypes/Main.java:256:6
+    ;;@ nativekttypes/Main.java:261:6
     (return )
    )
   )
   ;; (nativekttypes.BridgeSubclass.$initialized = true);
-  ;;@ nativekttypes/Main.java:256:6
+  ;;@ nativekttypes/Main.java:261:6
   (global.set $f_$initialized__nativekttypes_BridgeSubclass (i32.const 1))
   ;; nativekttypes.NativeRequiringBridge.$clinit();
-  ;;@ nativekttypes/Main.java:256:6
+  ;;@ nativekttypes/Main.java:261:6
   (call $$clinit__void@nativekttypes.NativeRequiringBridge )
  )
 )

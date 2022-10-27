@@ -127,6 +127,11 @@ public class Main {
   public boolean disabledNonVoidMethod() {
     return true;
   }
+
+  // This method is included in "backend/kotlin/Todo.kt".
+  public void todoMethod(String string) {
+    System.out.println("Hello: " + string);
+  }
 }
 
 class Subclass<V> extends NativeTopLevel<V> implements NativeInterface<V> {

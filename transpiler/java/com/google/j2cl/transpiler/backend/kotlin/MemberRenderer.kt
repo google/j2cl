@@ -68,7 +68,14 @@ private fun Renderer.renderMethod(method: Method) {
       render(" ")
       if (method.descriptor.isKtProperty) render("get() ")
       copy(currentReturnLabelIdentifier = null).run {
-        renderInCurlyBrackets { renderStatements(statements) }
+        renderInCurlyBrackets {
+          if (method.descriptor.isTodo) {
+            renderNewLine()
+            renderTodo("J2KT: not yet supported")
+          } else {
+            renderStatements(statements)
+          }
+        }
       }
     }
   }
