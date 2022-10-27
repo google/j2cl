@@ -603,7 +603,8 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
       if (nextEntry == null) {
         HashMapEntry<K, V>[] tab = table;
         HashMapEntry<K, V> next = null;
-        while (next == null && nextIndex < tab.length) {
+        int len = tab.length;
+        while (next == null && nextIndex < len) {
           next = tab[nextIndex++];
         }
         nextEntry = next;
@@ -624,7 +625,8 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
       HashMapEntry<K, V> entryToReturn = nextEntry;
       HashMapEntry<K, V>[] tab = table;
       HashMapEntry<K, V> next = entryToReturn.next;
-      while (next == null && nextIndex < tab.length) {
+      int len = tab.length;
+      while (next == null && nextIndex < len) {
         next = tab[nextIndex++];
       }
       nextEntry = next;
