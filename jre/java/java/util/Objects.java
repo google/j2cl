@@ -16,6 +16,7 @@
 package java.util;
 
 import java.util.function.Supplier;
+import javaemul.internal.Platform;
 
 /**
  * See <a
@@ -87,9 +88,8 @@ public final class Objects {
     return (a == b) || (a != null && a.equals(b));
   }
 
-  @SuppressWarnings("StringEquality")
   public static boolean equals(String a, String b) {
-    return a == b;
+    return Platform.objectsStringEquals(a, b);
   }
 
   public static int hashCode(Object o) {

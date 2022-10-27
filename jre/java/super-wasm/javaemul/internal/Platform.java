@@ -51,6 +51,10 @@ public final class Platform {
   @JsMethod(name = "Number.toPrecision", namespace = JsPackage.GLOBAL)
   private static native String.NativeString nativeToPrecision(double value, int precision);
 
+  public static boolean objectsStringEquals(String x, String y) {
+    return (x == y) || (x != null && x.equals(y));
+  }
+
   public static boolean isEqual(Boolean x, Object y) {
     return y instanceof Boolean && x.booleanValue() == ((Boolean) y).booleanValue();
   }

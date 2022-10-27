@@ -88,14 +88,22 @@ public class ObjectsTest extends GWTTestCase {
     assertTrue(Objects.equals(null, null));
     assertFalse(Objects.equals(null, "not null"));
     assertFalse(Objects.equals("not null", null));
+
     assertTrue(Objects.equals("a", "a"));
     assertFalse(Objects.equals("a", "b"));
-    assertTrue(Objects.equals(new String("abc"), new String("abc")));
+    assertTrue(Objects.equals(new String("a"), new String("a")));
 
-    assertFalse(Objects.equals(new Object(), new Object()));
+    assertTrue(Objects.equals(true, true));
+    assertFalse(Objects.equals(true, false));
+    assertTrue(Objects.equals(new Boolean(true), new Boolean(true)));
+
+    assertTrue(Objects.equals(1d, 1d));
+    assertFalse(Objects.equals(1d, 2d));
+    assertFalse(Objects.equals(new Double(1d), new Double(2d)));
 
     Object obj = new Object();
     assertTrue(Objects.equals(obj, obj));
+    assertFalse(Objects.equals(new Object(), new Object()));
   }
 
   public void testHashCode() {
