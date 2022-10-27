@@ -70,12 +70,22 @@ internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
     .findFirst()
     .orElse(null)
 
-internal fun TypeDescriptor.contains(typeVariable: TypeVariable): Boolean =
+internal fun TypeDescriptor.contains(
+  typeVariable: TypeVariable,
+  seenTypeVariables: Set<TypeVariable> = setOf()
+): Boolean =
   when (this) {
     is DeclaredTypeDescriptor -> typeArgumentDescriptors.any { it.contains(typeVariable) }
     is IntersectionTypeDescriptor -> intersectionTypeDescriptors.any { it.contains(typeVariable) }
     is ArrayTypeDescriptor -> componentTypeDescriptor?.contains(typeVariable) ?: false
-    is TypeVariable -> this == typeVariable
+    is TypeVariable ->
+      if (seenTypeVariables.contains(this)) false
+      else
+        this == typeVariable ||
+          seenTypeVariables.plus(this).let { seenTypeVariablesPlusThis ->
+            upperBoundTypeDescriptor.contains(typeVariable, seenTypeVariablesPlusThis) ||
+              (lowerBoundTypeDescriptor?.contains(typeVariable, seenTypeVariablesPlusThis) ?: false)
+          }
     else -> false
   }
 

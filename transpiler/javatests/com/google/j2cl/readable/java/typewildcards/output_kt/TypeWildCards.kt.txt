@@ -16,6 +16,8 @@ open class RecursiveType<T: typewildcards.RecursiveType<T>?> {
  constructor(wildcardParameter: typewildcards.RecursiveType<*>?)
 }
 
+interface DeepRecursiveType<T: typewildcards.GenericType<in T>?> {}
+
 open class RecursiveSubtype: typewildcards.RecursiveType<typewildcards.RecursiveSubtype?> {
  constructor(wildcardParameter: typewildcards.RecursiveType<*>?): super(wildcardParameter)
 }
@@ -32,6 +34,8 @@ open class TypeWildCards {
  open fun upperBoundRecursive(g: typewildcards.GenericType<out typewildcards.RecursiveType<*>?>?) {}
 
  open fun lowerBoundRecursive(g: typewildcards.GenericType<in typewildcards.RecursiveType<*>?>?) {}
+
+ open fun deepRecursiveType(t: typewildcards.DeepRecursiveType<*>?) {}
 
  open fun test() {
   this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>() as typewildcards.GenericType<*>?)

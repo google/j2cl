@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let DeepRecursiveType = goog.forwardDeclare('typewildcards.DeepRecursiveType$impl');
 let typewildcards_Function = goog.forwardDeclare('typewildcards.Function$impl');
 let GenericType = goog.forwardDeclare('typewildcards.GenericType$impl');
 let List = goog.forwardDeclare('typewildcards.List$impl');
@@ -45,6 +46,8 @@ class TypeWildCards extends j_l_Object {
  m_upperBoundRecursive__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
  /** @nodts */
  m_lowerBoundRecursive__typewildcards_GenericType__void(/** GenericType<?> */ g) {}
+ /** @nodts */
+ m_deepRecursiveType__typewildcards_DeepRecursiveType__void(/** DeepRecursiveType<?> */ t) {}
  /** @nodts */
  m_test__void() {
   this.m_unbounded__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));

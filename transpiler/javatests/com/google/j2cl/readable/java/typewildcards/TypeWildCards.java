@@ -27,6 +27,8 @@ class RecursiveType<T extends RecursiveType<T>> {
   public RecursiveType(RecursiveType<?> wildcardParameter) {}
 }
 
+interface DeepRecursiveType<T extends GenericType<? super T>> {}
+
 class RecursiveSubtype extends RecursiveType<RecursiveSubtype> {
   public RecursiveSubtype(RecursiveType<?> wildcardParameter) {
     super(wildcardParameter);
@@ -45,6 +47,8 @@ public class TypeWildCards {
   public void upperBoundRecursive(GenericType<? extends RecursiveType<?>> g) {}
 
   public void lowerBoundRecursive(GenericType<? super RecursiveType<?>> g) {}
+
+  public void deepRecursiveType(DeepRecursiveType<?> t) {}
 
   public void test() {
     unbounded(new GenericType<TypeWildCards>());

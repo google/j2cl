@@ -1,0 +1,32 @@
+goog.module('typewildcards.DeepRecursiveType$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class DeepRecursiveType {
+ /** @nodts */
+ static $clinit() {
+  DeepRecursiveType.$clinit = () =>{};
+  DeepRecursiveType.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__typewildcards_DeepRecursiveType = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__typewildcards_DeepRecursiveType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+DeepRecursiveType.$markImplementor(/**@type {Function}*/ (DeepRecursiveType));
+$Util.$setClassMetadataForInterface(DeepRecursiveType, 'typewildcards.DeepRecursiveType');
+
+exports = DeepRecursiveType;
+
+//# sourceMappingURL=DeepRecursiveType.js.map
