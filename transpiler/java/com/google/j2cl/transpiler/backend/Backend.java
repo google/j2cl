@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
 import com.google.j2cl.transpiler.passes.ControlStatementFormatter;
+import com.google.j2cl.transpiler.passes.ConvertMethodReferencesToLambdas;
 import com.google.j2cl.transpiler.passes.CreateImplicitConstructors;
 import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
@@ -172,6 +173,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true),
           RestoreVariableScoping::new,
@@ -323,6 +325,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          ConvertMethodReferencesToLambdas::new,
           ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false),
           NormalizeSuperMemberReferences::new);
@@ -433,7 +436,8 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
-      return ImmutableList.of(ResolveImplicitInstanceQualifiers::new);
+      return ImmutableList.of(
+          ConvertMethodReferencesToLambdas::new, ResolveImplicitInstanceQualifiers::new);
     }
 
     @Override

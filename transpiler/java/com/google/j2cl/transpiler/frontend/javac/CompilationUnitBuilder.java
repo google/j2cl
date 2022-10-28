@@ -25,6 +25,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
+import com.google.j2cl.transpiler.ast.ArrayCreationReference;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -57,6 +58,7 @@ import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
@@ -154,6 +156,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ExecutableType;
 
 /** Creates a J2CL Java AST from the AST provided by JavaC. */
+@SuppressWarnings("ASTHelpersSuggestions")
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private final JavaEnvironment environment;
   private final Map<VariableElement, Variable> variableByVariableElement = new HashMap<>();
@@ -856,11 +859,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")) {
       // Arrays member references are seen as references to members on a class Array.
-      return createArrayCreationLambda(
-          functionalMethodDescriptor,
-          environment.createTypeDescriptor(
-              memberReference.getQualifierExpression().type, ArrayTypeDescriptor.class),
-          getSourcePosition(memberReference));
+      return ArrayCreationReference.newBuilder()
+          .setTargetTypeDescriptor(
+              environment.createTypeDescriptor(
+                  memberReference.getQualifierExpression().type, ArrayTypeDescriptor.class))
+          .setInterfaceMethodDescriptor(functionalMethodDescriptor)
+          .setSourcePosition(getSourcePosition(memberReference))
+          .build();
     }
 
     com.sun.tools.javac.code.Type returnType =
@@ -871,20 +876,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         environment.createMethodDescriptor(
             (ExecutableType) memberReference.referentType, returnType, methodSymbol);
     Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
-    if (methodSymbol.isConstructor()) {
-      return createInstantiationLambda(
-          functionalMethodDescriptor,
-          targetMethodDescriptor,
-          qualifier,
-          getSourcePosition(memberReference));
-    }
-    return createMethodReferenceLambda(
-        getSourcePosition(memberReference),
-        qualifier,
-        targetMethodDescriptor,
-        expressionTypeDescriptor,
-        // functional interface method that the expression implements.
-        functionalMethodDescriptor);
+
+    return MethodReference.newBuilder()
+        .setTypeDescriptor(expressionTypeDescriptor)
+        .setReferencedMethodDescriptor(targetMethodDescriptor)
+        .setInterfaceMethodDescriptor(functionalMethodDescriptor)
+        .setQualifier(qualifier)
+        .setSourcePosition(getSourcePosition(memberReference))
+        .build();
   }
 
   private NewArray convertNewArray(JCNewArray expression) {

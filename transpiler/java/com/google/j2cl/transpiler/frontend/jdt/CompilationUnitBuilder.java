@@ -30,6 +30,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
+import com.google.j2cl.transpiler.ast.ArrayCreationReference;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AssertStatement;
@@ -64,6 +65,7 @@ import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
@@ -866,12 +868,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       Expression qualifier = convert(expression.getExpression());
 
-      return createMethodReferenceLambda(
-          sourcePosition,
-          qualifier,
-          referencedMethodDescriptor,
-          expressionTypeDescriptor,
-          functionalMethodDescriptor);
+      return MethodReference.newBuilder()
+          .setTypeDescriptor(expressionTypeDescriptor)
+          .setReferencedMethodDescriptor(referencedMethodDescriptor)
+          .setInterfaceMethodDescriptor(functionalMethodDescriptor)
+          .setQualifier(qualifier)
+          .setSourcePosition(sourcePosition)
+          .build();
     }
 
     private MethodDescriptor resolveMethodReferenceTarget(ExpressionMethodReference expression) {
@@ -916,18 +919,23 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       // If the expression does not resolve, it is an array creation.
       SourcePosition sourcePosition = getSourcePosition(expression);
       if (expression.resolveMethodBinding() == null) {
-
-        return createArrayCreationLambda(
-            functionalMethodDescriptor,
-            (ArrayTypeDescriptor) environment.createTypeDescriptor(expressionTypeBinding),
-            sourcePosition);
+        return ArrayCreationReference.newBuilder()
+            .setTargetTypeDescriptor(
+                (ArrayTypeDescriptor) environment.createTypeDescriptor(expressionTypeBinding))
+            .setInterfaceMethodDescriptor(functionalMethodDescriptor)
+            .setSourcePosition(sourcePosition)
+            .build();
       }
 
       MethodDescriptor targetConstructorMethodDescriptor =
           environment.createMethodDescriptor(expression.resolveMethodBinding());
 
-      return createInstantiationLambda(
-          functionalMethodDescriptor, targetConstructorMethodDescriptor, null, sourcePosition);
+      return MethodReference.newBuilder()
+          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
+          .setReferencedMethodDescriptor(targetConstructorMethodDescriptor)
+          .setInterfaceMethodDescriptor(functionalMethodDescriptor)
+          .setSourcePosition(sourcePosition)
+          .build();
     }
 
     /**
@@ -941,12 +949,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
      */
     private Expression convert(TypeMethodReference expression) {
       ITypeBinding expressionTypeBinding = expression.resolveTypeBinding();
-      return createMethodReferenceLambda(
-          getSourcePosition(expression),
-          null,
-          environment.createMethodDescriptor(expression.resolveMethodBinding()),
-          environment.createDeclaredTypeDescriptor(expressionTypeBinding),
-          environment.createMethodDescriptor(expressionTypeBinding.getFunctionalInterfaceMethod()));
+      return MethodReference.newBuilder()
+          .setTypeDescriptor(environment.createDeclaredTypeDescriptor(expressionTypeBinding))
+          .setReferencedMethodDescriptor(
+              environment.createMethodDescriptor(expression.resolveMethodBinding()))
+          .setInterfaceMethodDescriptor(
+              environment.createMethodDescriptor(
+                  expressionTypeBinding.getFunctionalInterfaceMethod()))
+          .setSourcePosition(getSourcePosition(expression))
+          .build();
     }
 
     /**
@@ -963,14 +974,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           environment.createMethodDescriptor(expression.resolveMethodBinding());
 
       Expression qualifier = createSuperReference(expression.getQualifier());
-      return AbstractCompilationUnitBuilder.createForwardingFunctionExpression(
-          getSourcePosition(expression),
-          environment.createDeclaredTypeDescriptor(expression.resolveTypeBinding()),
-          environment.createMethodDescriptor(
-              expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-          qualifier,
-          methodDescriptor,
-          true);
+      return MethodReference.newBuilder()
+          .setTypeDescriptor(environment.createTypeDescriptor(expression.resolveTypeBinding()))
+          .setReferencedMethodDescriptor(methodDescriptor)
+          .setInterfaceMethodDescriptor(
+              environment.createMethodDescriptor(
+                  expression.resolveTypeBinding().getFunctionalInterfaceMethod()))
+          .setQualifier(qualifier)
+          .setSourcePosition(getSourcePosition(expression))
+          .build();
     }
 
     private SuperReference createSuperReference(Name qualifier) {
