@@ -8,6 +8,7 @@ let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let DefaultNullable = goog.forwardDeclare('nullability.explicitnotnullable.DefaultNullable$impl');
 let Consumer = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
+let DependentTypeParameters = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters$impl');
 let IntFunction = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction$impl');
 let ParameterizedDefaultNullability = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability$impl');
 let ParameterizedNonNullable = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable$impl');
@@ -301,6 +302,19 @@ class ExplicitNotNullable extends j_l_Object {
  m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable(/** !Consumer<?> */ c, /** !Consumer<?> */ nc) {
   this.f_collection__nullability_explicitnotnullable_ExplicitNotNullable = c;
   this.f_nonNullableCollection__nullability_explicitnotnullable_ExplicitNotNullable = nc;
+ }
+ /** @nodts @template T */
+ static m_consume__java_lang_Object__void(/** T */ t) {
+  ExplicitNotNullable.$clinit();
+ }
+ /** @nodts */
+ static m_testUnboundWildcardTypeArgumentInference__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void(/** !Consumer<?> */ c) {
+  ExplicitNotNullable.$clinit();
+  ExplicitNotNullable.m_consume__java_lang_Object__void(c);
+ }
+ /** @nodts @return {!DependentTypeParameters<?, ?>} */
+ m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable(/** !DependentTypeParameters<?, ?> */ x) {
+  return x;
  }
  /** @private @nodts */
  $init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable() {

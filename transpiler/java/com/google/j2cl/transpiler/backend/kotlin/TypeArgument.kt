@@ -56,23 +56,24 @@ internal val MethodDescriptor.typeArguments: List<TypeArgument>
 
 private fun typeArgument(declarationTypeParameter: TypeVariable, typeDescriptor: TypeDescriptor) =
   TypeArgument(declarationTypeParameter, typeDescriptor)
-    .withFixedRecursiveBounds
+    .withFixedUnboundWildcard
     .withInferredNullability
 
 private val TypeArgument.withInferredNullability: TypeArgument
   get() = if (!declarationTypeVariable.hasNullableBounds) makeNonNull() else this
 
-// TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
-private val TypeArgument.withFixedRecursiveBounds: TypeArgument
+// TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.
+// TODO(b/255722110): Remove this fix when these bugs are fixed in the AST.
+private val TypeArgument.withFixedUnboundWildcard: TypeArgument
   get() =
-    if (needsFixForRecursiveBounds) copy(typeDescriptor = TypeVariable.createWildcard()) else this
+    if (needsFixForUnboundWildcard) copy(typeDescriptor = TypeVariable.createWildcard()) else this
 
-// TODO(b/245807463): Remove this fix when the bug is fixed in the AST.
-private val TypeArgument.needsFixForRecursiveBounds
+// TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.
+// TODO(b/255722110): Remove this fix when these bugs are fixed in the AST.
+private val TypeArgument.needsFixForUnboundWildcard
   get() =
     typeDescriptor is TypeVariable &&
       typeDescriptor.isWildcardOrCapture &&
-      declarationTypeVariable.isRecursive &&
       typeDescriptor.lowerBoundTypeDescriptor == null &&
       typeDescriptor.upperBoundTypeDescriptor.toNonNullable() ==
         declarationTypeVariable.upperBoundTypeDescriptor.toNonNullable()

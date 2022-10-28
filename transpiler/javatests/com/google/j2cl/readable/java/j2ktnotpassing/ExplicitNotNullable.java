@@ -32,12 +32,6 @@ public class ExplicitNotNullable {
         }
       };
 
-  static <T> void consume(T t) {}
-
-  static void testUnboundWildcardTypeArgumentInference(Function<?, ?> fn) {
-    consume(fn);
-  }
-
   // Replicates wildcard problems in Guava's PairwiseEquivalence.
   static class DependentTypeParameters<E, T extends @Nullable E> {
     DependentTypeParameters<E, T> getThis() {

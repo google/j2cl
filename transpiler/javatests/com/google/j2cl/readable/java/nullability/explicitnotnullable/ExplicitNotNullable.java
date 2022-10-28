@@ -361,6 +361,25 @@ public class ExplicitNotNullable {
     collection = c;
     nonNullableCollection = nc;
   }
+
+  static <T> void consume(T t) {}
+
+  static void testUnboundWildcardTypeArgumentInference(Consumer<?> c) {
+    consume(c);
+  }
+
+  // Replicates wildcard problems in Guava's PairwiseEquivalence.
+  static class DependentTypeParameters<E, T extends @Nullable E> {
+    DependentTypeParameters<E, T> getThis() {
+      return this;
+    }
+  }
+
+  DependentTypeParameters<?, ?> testDependentWildcards(DependentTypeParameters<?, ?> x) {
+    return x;
+    // TODO(b/255955130): This is not yet working. Uncomment when fixed.
+    // return x.getThis();
+  }
 }
 
 class DefaultNullable {

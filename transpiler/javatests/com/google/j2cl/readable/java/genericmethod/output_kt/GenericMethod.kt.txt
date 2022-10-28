@@ -64,15 +64,15 @@ open class GenericMethod<T> {
 
   @kotlin.jvm.JvmStatic
   fun testErasureCast_wildcard() {
-   val list: kotlin.collections.MutableList<genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>? = null
+   val list: kotlin.collections.MutableList<genericmethod.GenericMethod.Container<*>?>? = null
    val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
-   val nestedWildcardList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<out genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>?>? = null
+   val nestedWildcardList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<out genericmethod.GenericMethod.Container<*>?>?>? = null
    val nestedContent: genericmethod.GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
-   val deepWildcardList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?>?>? = null
+   val deepWildcardList: kotlin.collections.MutableList<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<*>?>?>? = null
    val deepContent: genericmethod.GenericMethod.Content? = deepWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
@@ -113,7 +113,7 @@ open class GenericMethod<T> {
   }
  }
 
- open class SuperContainer<C: genericmethod.GenericMethod.Container<out genericmethod.GenericMethod.Content?>?> {
+ open class SuperContainer<C: genericmethod.GenericMethod.Container<*>?> {
   open fun get(): C {
    return null as C
   }

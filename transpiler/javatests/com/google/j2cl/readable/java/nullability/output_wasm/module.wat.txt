@@ -187,6 +187,9 @@
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.IntFunction [static fields]
 (global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction (mut i32) (i32.const 0))
 
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [static fields]
+(global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters (mut i32) (i32.const 0))
+
 ;;; Code for nullability.Nullability [vtable.init]
 (global $nullability.Nullability.vtable (ref $nullability.Nullability.vtable) 
  (struct.new $nullability.Nullability.vtable
@@ -778,6 +781,7 @@
   (ref.func $m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
   (ref.func $m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
   (ref.func $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
+  (ref.func $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
  )
 )
 
@@ -947,6 +951,21 @@
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable [itable.init]
 (global $nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [vtable.init]
+(global $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable) 
+ (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters)
+  (ref.func $m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters)
+ )
+)
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [itable.init]
+(global $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for nullability.Nullability [CLASS]
@@ -7354,6 +7373,7 @@
  (field $m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable (ref $function.m_methodWithNullableBound__void_$pp_nullability_explicitnotnullable))
  (field $m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable (ref $function.m_methodWithNonNullableBound__void_$pp_nullability_explicitnotnullable))
  (field $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable (ref $function.m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable))
+ (field $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (ref $function.m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable))
   $java.lang.Object.vtable)
 )
 
@@ -8166,6 +8186,48 @@
 )
 (elem declare func $m_unboundedWildCard__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
 
+;;; void ExplicitNotNullable.consume(T t)
+(func $m_consume__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable
+ (param $t (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:365:18
+ (block
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:365:31
+  (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable )
+ )
+)
+
+;;; void ExplicitNotNullable.testUnboundWildcardTypeArgumentInference(Consumer<?> c)
+(func $m_testUnboundWildcardTypeArgumentInference__nullability_explicitnotnullable_ExplicitNotNullable_Consumer__void@nullability.explicitnotnullable.ExplicitNotNullable
+ (param $c (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:367:14
+ (block
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:367:70
+  (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable )
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.consume(c);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:368:4
+  (call $m_consume__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable (local.get $c))
+ )
+)
+
+;;; DependentTypeParameters<?, ?> ExplicitNotNullable.testDependentWildcards(DependentTypeParameters<?, ?> x)
+(func $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable
+ (type $function.m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $x (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
+ (result (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:378:32
+ (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
+ (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable (local.get $this.untyped)))
+ (block
+  ;; return x;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:379:4
+  (return (local.get $x))
+ )
+)
+(elem declare func $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
+
 ;;; void ExplicitNotNullable.$init()
 (func $$init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable@nullability.explicitnotnullable.ExplicitNotNullable
  (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
@@ -8240,17 +8302,17 @@
 ;;; DefaultNullable DefaultNullable.$create()
 (func $$create__@nullability.explicitnotnullable.DefaultNullable
  (result (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
  (local $$instance (ref null $nullability.explicitnotnullable.DefaultNullable))
  (block
   ;; DefaultNullable $instance = new DefaultNullable.<init>(0);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
   (local.set $$instance (struct.new $nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
   (return (local.get $$instance))
  )
 )
@@ -8258,13 +8320,13 @@
 ;;; void DefaultNullable.$ctor()
 (func $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable
  (param $this (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
  (block
   ;; nullability.explicitnotnullable.DefaultNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
   (call $$clinit__void@nullability.explicitnotnullable.DefaultNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -8272,32 +8334,32 @@
 ;;; void DefaultNullable.nullableAccept(String s)
 (func $m_nullableAccept__java_lang_String__void@nullability.explicitnotnullable.DefaultNullable
  (param $s (ref null $java.lang.String))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:367:14
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:386:14
  (block
   ;; nullability.explicitnotnullable.DefaultNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:367:39
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:386:39
   (call $$clinit__void@nullability.explicitnotnullable.DefaultNullable )
  )
 )
 
 ;;; void DefaultNullable.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.DefaultNullable
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
  (block
   ;; if (nullability.explicitnotnullable.DefaultNullable.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
   (if (global.get $f_$initialized__nullability_explicitnotnullable_DefaultNullable)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.DefaultNullable.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
   (global.set $f_$initialized__nullability_explicitnotnullable_DefaultNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:366:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -9704,3 +9766,103 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.IntFunction)
+
+;;; Code for nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters [CLASS]
+(type $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (struct_subtype 
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable (ref $function.m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable))
+  $java.lang.Object.vtable)
+)
+
+;;; DependentTypeParameters<E, T> DependentTypeParameters.$create()
+(func $$create__@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters
+ (result (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+ (local $$instance (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
+ (block
+  ;; DependentTypeParameters<E, T> $instance = new DependentTypeParameters.<init>(0);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+  (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void DependentTypeParameters.$ctor()
+(func $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters
+ (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+ (block
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+  (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters )
+  ;; Object.this.$ctor();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; DependentTypeParameters<E, T> DependentTypeParameters.getThis()
+(func $m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters
+ (type $function.m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:373:34
+ (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
+ (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (local.get $this.untyped)))
+ (block
+  ;; return DependentTypeParameters.this;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:374:6
+  (return (local.get $this))
+ )
+)
+(elem declare func $m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters)
+
+;;; void DependentTypeParameters.$clinit()
+(func $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+ (block
+  ;; if (nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.$initialized) return;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+  (if (global.get $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters)
+   (then
+    ;; return;
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+    (return )
+   )
+  )
+  ;; (nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters.$initialized = true);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+  (global.set $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:372:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> DependentTypeParameters.getClass()
+(func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters))
+ (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters();
+  (return (call $function.no.side.effects.$getNullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters__java_lang_Class (ref.func $$getNullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters)

@@ -152,13 +152,13 @@ open class DefaultNotNullable {
   fun testListOfWildcard(l: kotlin.collections.MutableList<*>) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityObject(l: kotlin.collections.MutableList<out kotlin.Any>) {}
+  fun testListOfWildcardExtendsDefaultNullabilityObject(l: kotlin.collections.MutableList<*>) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardExtendsNullableObject(l: kotlin.collections.MutableList<*>) {}
 
   @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsNonNullObject(l: kotlin.collections.MutableList<out kotlin.Any>) {}
+  fun testListOfWildcardExtendsNonNullObject(l: kotlin.collections.MutableList<*>) {}
 
   @kotlin.jvm.JvmStatic
   fun testListOfWildcardExtendsDefaultNullabilityString(l: kotlin.collections.MutableList<out kotlin.String>) {}

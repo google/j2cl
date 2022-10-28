@@ -1459,43 +1459,18 @@
  )
 )
 
-;;; void ExplicitNotNullable.consume(T t)
-(func $m_consume__java_lang_Object__void@j2ktnotpassing.ExplicitNotNullable
- (param $t (ref null $java.lang.Object))
- ;;@ j2ktnotpassing/ExplicitNotNullable.java:35:18
- (block
-  ;; j2ktnotpassing.ExplicitNotNullable.$clinit();
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:35:31
-  (call $$clinit__void@j2ktnotpassing.ExplicitNotNullable )
- )
-)
-
-;;; void ExplicitNotNullable.testUnboundWildcardTypeArgumentInference(Function<?, ?> fn)
-(func $m_testUnboundWildcardTypeArgumentInference__j2ktnotpassing_ExplicitNotNullable_Function__void@j2ktnotpassing.ExplicitNotNullable
- (param $fn (ref null $java.lang.Object))
- ;;@ j2ktnotpassing/ExplicitNotNullable.java:37:14
- (block
-  ;; j2ktnotpassing.ExplicitNotNullable.$clinit();
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:37:74
-  (call $$clinit__void@j2ktnotpassing.ExplicitNotNullable )
-  ;; j2ktnotpassing.ExplicitNotNullable.consume(fn);
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:38:4
-  (call $m_consume__java_lang_Object__void@j2ktnotpassing.ExplicitNotNullable (local.get $fn))
- )
-)
-
 ;;; DependentTypeParameters<?, ?> ExplicitNotNullable.testDependentWildcards(DependentTypeParameters<?, ?> x)
 (func $m_testDependentWildcards__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing@j2ktnotpassing.ExplicitNotNullable
  (type $function.m_testDependentWildcards__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing)
  (param $this.untyped (ref $java.lang.Object))
  (param $x (ref null $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters))
  (result (ref null $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters))
- ;;@ j2ktnotpassing/ExplicitNotNullable.java:48:32
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:32
  (local $this (ref null $j2ktnotpassing.ExplicitNotNullable))
  (local.set $this (ref.cast_static $j2ktnotpassing.ExplicitNotNullable (local.get $this.untyped)))
  (block
   ;; return x.getThis();
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:49:4
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:43:4
   (return (call_ref $function.m_getThis__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing (ref.as_non_null (local.get $x))(struct.get $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.vtable $m_getThis__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing (struct.get $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters $vtable(local.get $x)))))
  )
 )
@@ -1725,17 +1700,17 @@
 ;;; DependentTypeParameters<E, T> DependentTypeParameters.$create()
 (func $$create__@j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters
  (result (ref null $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters))
- ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
  (local $$instance (ref null $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters))
  (block
   ;; DependentTypeParameters<E, T> $instance = new DependentTypeParameters.<init>(0);
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
   (local.set $$instance (struct.new $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters (ref.as_non_null (global.get $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
   (call $$ctor__void_$p_j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters@j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
   (return (local.get $$instance))
  )
 )
@@ -1743,13 +1718,13 @@
 ;;; void DependentTypeParameters.$ctor()
 (func $$ctor__void_$p_j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters@j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters
  (param $this (ref null $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters))
- ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
  (block
   ;; j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.$clinit();
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
   (call $$clinit__void@j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters )
   ;; Object.this.$ctor();
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -1759,12 +1734,12 @@
  (type $function.m_getThis__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters))
- ;;@ j2ktnotpassing/ExplicitNotNullable.java:43:34
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:37:34
  (local $this (ref null $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters))
  (local.set $this (ref.cast_static $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters (local.get $this.untyped)))
  (block
   ;; return DependentTypeParameters.this;
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:44:6
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:38:6
   (return (local.get $this))
  )
 )
@@ -1772,22 +1747,22 @@
 
 ;;; void DependentTypeParameters.$clinit()
 (func $$clinit__void@j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters
- ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
  (block
   ;; if (j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.$initialized) return;
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
   (if (global.get $f_$initialized__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters)
    (then
     ;; return;
-    ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+    ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
     (return )
    )
   )
   ;; (j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.$initialized = true);
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
   (global.set $f_$initialized__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ j2ktnotpassing/ExplicitNotNullable.java:42:15
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:36:15
   (call $$clinit__void@java.lang.Object )
  )
 )

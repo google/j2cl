@@ -1,0 +1,47 @@
+goog.module('nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template E, T
+ */
+class DependentTypeParameters extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template E, T @return {!DependentTypeParameters<E, T>} */
+ static $create__() {
+  DependentTypeParameters.$clinit();
+  let $instance = new DependentTypeParameters();
+  $instance.$ctor__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {!DependentTypeParameters<E, T>} */
+ m_getThis__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable() {
+  return this;
+ }
+ /** @nodts */
+ static $clinit() {
+  DependentTypeParameters.$clinit = () =>{};
+  DependentTypeParameters.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DependentTypeParameters;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(DependentTypeParameters, 'nullability.explicitnotnullable.ExplicitNotNullable$DependentTypeParameters');
+
+exports = DependentTypeParameters;
+
+//# sourceMappingURL=ExplicitNotNullable$DependentTypeParameters.js.map
