@@ -86,4 +86,8 @@ public class InstanceofExpressions {
     a = object instanceof char[];
     a = object instanceof boolean[];
   }
+
+  public void testPrecedence() {
+    boolean b = (false ? "foo" : "bar") instanceof String;
+  }
 }

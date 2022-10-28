@@ -159,6 +159,13 @@
   }] "cast.Casts.testCaseMethodAfterInstanceOf"
 [Casts cNotAvoidCastsTo = (Casts) foo.method();] => [let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.m_method__java_lang_Object(), Casts));] "cast.Casts.testCaseMethodAfterInstanceOf"
 [cNotAvoidCastsTo] => [cNotAvoidCastsTo] "cNotAvoidCastsTo"
+[testPrecedence] => [m_testPrecedence__void]
+[Object foo = "foo";] => [let foo = 'foo';] "cast.Casts.testPrecedence"
+[foo] => [foo] "foo"
+[Object bar = "bar";] => [let bar = 'bar';] "cast.Casts.testPrecedence"
+[bar] => [bar] "bar"
+[String s = (String) (false ? foo : bar);] => [let s = /**@type {?string}*/ ($Casts.$to(false ? foo : bar, j_l_String));] "cast.Casts.testPrecedence"
+[s] => [s] "s"
 [Casts] => [$clinit]
 [Casts] => [Casts.$clinit = () =>{};] "cast.Casts.<clinit>"
 [Casts] => [Casts.$loadModules();] "cast.Casts.<clinit>"

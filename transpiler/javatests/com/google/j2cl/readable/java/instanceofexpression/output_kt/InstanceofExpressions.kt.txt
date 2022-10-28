@@ -65,4 +65,8 @@ open class InstanceofExpressions {
   a = `object` is kotlin.CharArray
   a = `object` is kotlin.BooleanArray
  }
+
+ open fun testPrecedence() {
+  val b: kotlin.Boolean = (if (false) "foo" else "bar") is kotlin.String
+ }
 }

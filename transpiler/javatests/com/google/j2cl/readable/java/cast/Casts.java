@@ -113,4 +113,10 @@ public class Casts {
       Casts cNotAvoidCastsTo = (Casts) foo.method();
     }
   }
+
+  public void testPrecedence() {
+    Object foo = "foo";
+    Object bar = "bar";
+    String s = (String) (false ? foo : bar);
+  }
 }

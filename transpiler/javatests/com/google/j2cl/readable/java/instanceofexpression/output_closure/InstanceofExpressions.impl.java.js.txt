@@ -104,6 +104,10 @@ class InstanceofExpressions extends j_l_Object {
   a = $Arrays.$instanceIsOfType(object, $$boolean, 1);
  }
  /** @nodts */
+ m_testPrecedence__void() {
+  let b = !$Equality.$same(false ? 'foo' : 'bar', null);
+ }
+ /** @nodts */
  static $clinit() {
   InstanceofExpressions.$clinit = () =>{};
   InstanceofExpressions.$loadModules();

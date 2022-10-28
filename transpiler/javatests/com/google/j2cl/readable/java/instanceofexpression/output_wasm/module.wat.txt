@@ -15,6 +15,7 @@
   (ref.func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions)
   (ref.func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions)
   (ref.func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions)
+  (ref.func $m_testPrecedence__void@instanceofexpression.InstanceofExpressions)
  )
 )
 
@@ -54,6 +55,7 @@
  (field $m_testInstanceofInterface__void (ref $function.m_testInstanceofInterface__void))
  (field $m_testInstanceofBoxedType__void (ref $function.m_testInstanceofBoxedType__void))
  (field $m_testInstanceOfArray__void (ref $function.m_testInstanceOfArray__void))
+ (field $m_testPrecedence__void (ref $function.m_testPrecedence__void))
   $java.lang.Object.vtable)
 )
 
@@ -309,6 +311,22 @@
  )
 )
 (elem declare func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions)
+
+;;; void InstanceofExpressions.testPrecedence()
+(func $m_testPrecedence__void@instanceofexpression.InstanceofExpressions
+ (type $function.m_testPrecedence__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ instanceofexpression/InstanceofExpressions.java:90:14
+ (local $b i32)
+ (local $this (ref null $instanceofexpression.InstanceofExpressions))
+ (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
+ (block
+  ;; boolean b = (false) ? (javaemul.internal.StringPool.$getString_|foo|()) : (javaemul.internal.StringPool.$getString_|bar|()) instanceof String;
+  ;;@ instanceofexpression/InstanceofExpressions.java:91:4
+  (local.set $b (ref.test_static $java.lang.String (if (result (ref null $java.lang.String)) (i32.const 0) (then (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )) (else (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@javaemul.internal.StringPool) )))))
+ )
+)
+(elem declare func $m_testPrecedence__void@instanceofexpression.InstanceofExpressions)
 
 ;;; void InstanceofExpressions.$clinit()
 (func $$clinit__void@instanceofexpression.InstanceofExpressions

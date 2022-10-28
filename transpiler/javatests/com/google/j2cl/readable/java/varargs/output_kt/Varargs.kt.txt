@@ -18,7 +18,7 @@ open class Varargs {
  open fun testSerializable(vararg args: java.io.Serializable?) {}
 
  open fun testAssignment(vararg args: kotlin.Any?) {
-  this.args_private_2 = args as kotlin.Array<*>? as kotlin.Array<kotlin.Any?>?
+  this.args_private_2 = (args as kotlin.Array<*>?) as kotlin.Array<kotlin.Any?>?
  }
 
  open fun testLambda(functionalInterface: varargs.Varargs.FunctionalInterface?) {}

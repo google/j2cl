@@ -73,6 +73,9 @@
 [a = object instanceof double[];] => [a = $Arrays.$instanceIsOfType(object, $$double, 1);] "instanceofexpression.InstanceofExpressions.testInstanceOfArray"
 [a = object instanceof char[];] => [a = $Arrays.$instanceIsOfType(object, $$char, 1);] "instanceofexpression.InstanceofExpressions.testInstanceOfArray"
 [a = object instanceof boolean[];] => [a = $Arrays.$instanceIsOfType(object, $$boolean, 1);] "instanceofexpression.InstanceofExpressions.testInstanceOfArray"
+[testPrecedence] => [m_testPrecedence__void]
+[boolean b = (false ? "foo" : "bar") instanceof String;] => [let b = !$Equality.$same(false ? 'foo' : 'bar', null);] "instanceofexpression.InstanceofExpressions.testPrecedence"
+[b] => [b] "b"
 [InstanceofExpressions] => [$clinit]
 [InstanceofExpressions] => [InstanceofExpressions.$clinit = () =>{};] "instanceofexpression.InstanceofExpressions.<clinit>"
 [InstanceofExpressions] => [InstanceofExpressions.$loadModules();] "instanceofexpression.InstanceofExpressions.<clinit>"

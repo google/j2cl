@@ -206,6 +206,7 @@
   (ref.func $m_testCastObjectAfterInstanceOf__void@cast.Casts)
   (ref.func $m_testCastFieldAfterInstanceOf__void@cast.Casts)
   (ref.func $m_testCaseMethodAfterInstanceOf__void@cast.Casts)
+  (ref.func $m_testPrecedence__void@cast.Casts)
  )
 )
 
@@ -2185,6 +2186,7 @@
  (field $m_testCastObjectAfterInstanceOf__void (ref $function.m_testCastObjectAfterInstanceOf__void))
  (field $m_testCastFieldAfterInstanceOf__void (ref $function.m_testCastFieldAfterInstanceOf__void))
  (field $m_testCaseMethodAfterInstanceOf__void (ref $function.m_testCaseMethodAfterInstanceOf__void))
+ (field $m_testPrecedence__void (ref $function.m_testPrecedence__void))
   $java.lang.Object.vtable)
 )
 
@@ -2556,6 +2558,30 @@
  )
 )
 (elem declare func $m_testCaseMethodAfterInstanceOf__void@cast.Casts)
+
+;;; void Casts.testPrecedence()
+(func $m_testPrecedence__void@cast.Casts
+ (type $function.m_testPrecedence__void)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ cast/Casts.java:117:14
+ (local $foo (ref null $java.lang.Object))
+ (local $bar (ref null $java.lang.Object))
+ (local $s (ref null $java.lang.String))
+ (local $this (ref null $cast.Casts))
+ (local.set $this (ref.cast_static $cast.Casts (local.get $this.untyped)))
+ (block
+  ;; Object foo = javaemul.internal.StringPool.$getString_|foo|();
+  ;;@ cast/Casts.java:118:4
+  (local.set $foo (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
+  ;; Object bar = javaemul.internal.StringPool.$getString_|bar|();
+  ;;@ cast/Casts.java:119:4
+  (local.set $bar (call $function.no.side.effects.$getString_|bar|__java_lang_String (ref.func $$getString_|bar|__java_lang_String@javaemul.internal.StringPool) ))
+  ;; String s = ((String) (false) ? (foo) : (bar));
+  ;;@ cast/Casts.java:120:4
+  (local.set $s (ref.cast_static $java.lang.String (if (result (ref null $java.lang.Object)) (i32.const 0) (then (local.get $foo)) (else (local.get $bar)))))
+ )
+)
+(elem declare func $m_testPrecedence__void@cast.Casts)
 
 ;;; void Casts.$clinit()
 (func $$clinit__void@cast.Casts

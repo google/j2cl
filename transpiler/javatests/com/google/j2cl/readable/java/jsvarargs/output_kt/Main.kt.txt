@@ -138,7 +138,7 @@ open class Main {
  }
 
  open class SubVarargsConstructorClass: jsvarargs.Main.NativeObject {
-  constructor(i: kotlin.Int, vararg args: kotlin.Any?): super(*(args as kotlin.Array<*>? as kotlin.Array<kotlin.Any?>?)!!)
+  constructor(i: kotlin.Int, vararg args: kotlin.Any?): super(*((args as kotlin.Array<*>?) as kotlin.Array<kotlin.Any?>?)!!)
  }
 
  fun interface Function {

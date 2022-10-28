@@ -23,7 +23,7 @@ open class AssignmentsInDeclaration {
 
  @kotlin.jvm.JvmField var classLiteral: java.lang.Class<*>? = wasmimmutablefields.WasmImmutableFields::class.javaObjectType
 
- @kotlin.jvm.JvmField var withCast: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any? as kotlin.Array<kotlin.String?>?
+ @kotlin.jvm.JvmField var withCast: kotlin.Array<kotlin.String?>? = (kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any?) as kotlin.Array<kotlin.String?>?
 }
 
 open class AssignmentsInInitializer {
@@ -53,7 +53,7 @@ open class AssignmentsInInitializer {
   this.arrayLiteral = kotlin.intArrayOf(1, 2, 3, 4)
   this.arrayLiteralMultidimensional = kotlin.arrayOf<kotlin.IntArray?>(kotlin.intArrayOf(1, 2), kotlin.intArrayOf(3, 4))
   this.classLiteral = wasmimmutablefields.WasmImmutableFields::class.javaObjectType
-  this.withCast = kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any? as kotlin.Array<kotlin.String?>?
+  this.withCast = (kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any?) as kotlin.Array<kotlin.String?>?
  }
 }
 
@@ -88,7 +88,7 @@ open class AssignmentsInConstructor {
   this.arrayLiteral = kotlin.intArrayOf(1, 2, intParameter, 4)
   this.arrayLiteralMultidimensional = kotlin.arrayOf<kotlin.IntArray?>(kotlin.intArrayOf(1, intParameter), kotlin.intArrayOf(3, 4))
   this.classLiteral = wasmimmutablefields.WasmImmutableFields::class.javaObjectType
-  this.withCast = kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any? as kotlin.Array<kotlin.String?>?
+  this.withCast = (kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Any?) as kotlin.Array<kotlin.String?>?
   this.fromParameter = parameter
   this.finalFieldReference = par!!.stringLiteral
  }

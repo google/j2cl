@@ -91,6 +91,12 @@ open class Casts {
   }
  }
 
+ open fun testPrecedence() {
+  val foo: kotlin.Any? = "foo"
+  val bar: kotlin.Any? = "bar"
+  val s: kotlin.String? = (if (false) foo else bar) as kotlin.String?
+ }
+
  open inner class Foo {
   @kotlin.jvm.JvmField var field: kotlin.Any? = kotlin.Any()
 
