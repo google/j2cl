@@ -273,24 +273,49 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
   }
 
-  public boolean equalsIgnoreCase(String string) {
-    if (string == this) {
+  public boolean equalsIgnoreCase(String other) {
+    if (other == this) {
       return true;
     }
-    if (string == null || count != string.count) {
+    if (other == null) {
       return false;
     }
-    int o1 = offset, o2 = string.offset;
-    int end = offset + count;
-    char[] target = string.value;
+    int length = count;
+    if (length != other.count) {
+      return false;
+    }
+
+    int o1 = offset, o2 = other.offset;
+    int end = offset + length;
+    char[] target = other.value;
     while (o1 < end) {
       char c1 = value[o1++];
       char c2 = target[o2++];
-      if (c1 != c2 && CaseMapper.foldCase(c1) != CaseMapper.foldCase(c2)) {
+      if (c1 == c2) {
+        continue;
+      }
+      if (c1 > 127 && c2 > 127) {
+        // Branch into native implementation since we cannot handle folding for non-ascii space.
+        int remainingCount = end - o1;
+        return equalsIgnoreCase(
+            nativeFromCharCodeArray(value, o1, remainingCount),
+            nativeFromCharCodeArray(other.value, o2, remainingCount));
+      }
+      if (foldAscii(c1) != foldAscii(c2)) {
         return false;
       }
     }
     return true;
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native boolean equalsIgnoreCase(NativeString a, NativeString b);
+
+  private static char foldAscii(char value) {
+    if ('A' <= value && value <= 'Z') {
+      return (char) (value + ('a' - 'A'));
+    }
+    return value;
   }
 
   public byte[] getBytes() {

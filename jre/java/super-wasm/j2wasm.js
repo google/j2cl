@@ -97,6 +97,8 @@ function createImportObject(userImports) {
     'RegExpResult.index': (/** !RegExpResult */ r) => r.index,
 
     // Helpers for j.l.String
+    'equalsIgnoreCase': (/** string */ a, /** string */ b) =>
+        a.toLowerCase() == b.toLowerCase(),
     'replace': (s, regex, replacement) => s.replace(regex, replacement),
 
     // TODO(b/193532287): These will be removed after Array interop support in
