@@ -1,0 +1,99 @@
+;;; Code for exportimport.Main [static fields]
+(global $f_$initialized__exportimport_Main (mut i32) (i32.const 0))
+
+;;; Code for exportimport.Main [vtable.init]
+(global $exportimport.Main.vtable (ref $exportimport.Main.vtable) 
+ (struct.new $exportimport.Main.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@exportimport.Main)
+ )
+)
+
+;;; Code for exportimport.Main [itable.init]
+(global $exportimport.Main.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for exportimport.Main [CLASS]
+(type $exportimport.Main (struct_subtype 
+ (field $vtable (ref $exportimport.Main.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $exportimport.Main.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; Main Main.$create()
+(func $$create__@exportimport.Main
+ (result (ref null $exportimport.Main))
+ ;;@ exportimport/Main.java:19:13
+ (local $$instance (ref null $exportimport.Main))
+ (block
+  ;; Main $instance = new Main.<init>(0);
+  ;;@ exportimport/Main.java:19:13
+  (local.set $$instance (struct.new $exportimport.Main (ref.as_non_null (global.get $exportimport.Main.vtable)) (ref.as_non_null (global.get $exportimport.Main.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ exportimport/Main.java:19:13
+  (call $$ctor__void_$p_exportimport_Main@exportimport.Main (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ exportimport/Main.java:19:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_exportimport_Main@exportimport.Main
+ (param $this (ref null $exportimport.Main))
+ ;;@ exportimport/Main.java:19:13
+ (block
+  ;; exportimport.Main.$clinit();
+  ;;@ exportimport/Main.java:19:13
+  (call $$clinit__void@exportimport.Main )
+  ;; Object.this.$ctor();
+  ;;@ exportimport/Main.java:19:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void@exportimport.Main
+ ;;@ exportimport/Main.java:19:13
+ (block
+  ;; if (exportimport.Main.$initialized) return;
+  ;;@ exportimport/Main.java:19:13
+  (if (global.get $f_$initialized__exportimport_Main)
+   (then
+    ;; return;
+    ;;@ exportimport/Main.java:19:13
+    (return )
+   )
+  )
+  ;; (exportimport.Main.$initialized = true);
+  ;;@ exportimport/Main.java:19:13
+  (global.set $f_$initialized__exportimport_Main (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ exportimport/Main.java:19:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Main.getClass()
+(func $m_getClass__java_lang_Class@exportimport.Main
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $exportimport.Main))
+ (local.set $this (ref.cast_static $exportimport.Main (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getExportimport.Main();
+  (return (call $function.no.side.effects.$getExportimport.Main__java_lang_Class (ref.func $$getExportimport.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@exportimport.Main)
