@@ -11,6 +11,6 @@ def j2kt_jvm_test(
     j2cl_test_common(
         name,
         platform = "J2KT",
-        tags = tags + ["j2kt-jvm"],
+        tags = tags + ["j2kt"],
         **kwargs
     )
