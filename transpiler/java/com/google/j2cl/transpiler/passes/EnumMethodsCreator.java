@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -37,7 +38,9 @@ import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
 
@@ -49,6 +52,7 @@ import com.google.j2cl.transpiler.ast.Visibility;
 public class EnumMethodsCreator extends NormalizationPass {
   private static final String VALUES_METHOD_NAME = "values";
   private static final String NAMES_TO_VALUES_MAP_FIELD_NAME = "namesToValuesMap";
+  private static final String CREATE_MAP_METHOD_NAME = "createMapFromValues";
 
   @Override
   public void applyTo(Type enumType) {
@@ -72,7 +76,7 @@ public class EnumMethodsCreator extends NormalizationPass {
    * }
    * </code>
    */
-  private static void createValueOfMethod(Type enumType) {
+  private void createValueOfMethod(Type enumType) {
     SourcePosition sourcePosition = enumType.getSourcePosition();
     DeclaredTypeDescriptor typeDescriptor = enumType.getTypeDescriptor();
 
@@ -134,18 +138,30 @@ public class EnumMethodsCreator extends NormalizationPass {
             .setSourcePosition(sourcePosition)
             .build());
   }
-  
-  private static FieldDescriptor getNamesToValuesMapFieldDescriptor(
+
+  private FieldDescriptor getNamesToValuesMapFieldDescriptor(
       DeclaredTypeDescriptor enumTypeDescriptor) {
     return FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enumTypeDescriptor)
         .setName(NAMES_TO_VALUES_MAP_FIELD_NAME)
-        .setTypeDescriptor(
-            TypeDescriptors.createGlobalNativeTypeDescriptor(
-                "Map", TypeDescriptors.get().javaLangString, enumTypeDescriptor.toNonNullable()))
+        .setTypeDescriptor(getEnumMapTypeDescriptor(enumTypeDescriptor.toNonNullable()))
         .setStatic(true)
         .setVisibility(Visibility.PRIVATE)
         .build();
+  }
+
+  protected TypeDescriptor getEnumMapTypeDescriptor(DeclaredTypeDescriptor enumTypeDescriptor) {
+    MethodDescriptor createMapMethodDescriptor =
+        TypeDescriptors.get()
+            .javaemulInternalEnums
+            .getMethodDescriptorByName(CREATE_MAP_METHOD_NAME);
+    // There should be 1 type variable. It should be specialized to the enum type.
+    TypeVariable enumTypeVariable =
+        createMapMethodDescriptor.getTypeParameterTypeDescriptors().get(0);
+    return createMapMethodDescriptor
+        .getReturnTypeDescriptor()
+        .specializeTypeVariables(
+            ImmutableMap.of(enumTypeVariable, enumTypeDescriptor.toNonNullable()));
   }
 
   /**
