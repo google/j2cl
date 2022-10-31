@@ -8,6 +8,7 @@ package(licenses = ["notice"])
 integration_test(
     name = "bridgemethods",
     srcs = glob(["*.java"]),
-    enable_kt = False,
+    # TODO(b/256681746): Improve TestUtils to detect Kotlin and fix the test.
+    enable_kt_native = False,
     suppress = ["JSC_TYPE_MISMATCH"],
 )

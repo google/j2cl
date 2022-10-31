@@ -8,5 +8,4 @@ package(licenses = ["notice"])
 integration_test(
     name = "synchronizedblock",
     srcs = glob(["*.java"]),
-    enable_kt = False,
 )
