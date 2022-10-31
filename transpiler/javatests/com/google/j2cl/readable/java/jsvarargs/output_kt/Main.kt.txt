@@ -102,7 +102,8 @@ open class Main {
 
  open fun <U> testGenericJsFunctionWithVarags() {
   val function: jsvarargs.Main.GenericFunction<U>? = jsvarargs.Main.GenericFunction { n: U, param: kotlin.Array<out U>? ->
-   return@GenericFunction param
+   val param_1: kotlin.Array<U>? = param as kotlin.Array<U>?
+   return@GenericFunction param_1
   }
  }
 
@@ -119,26 +120,33 @@ open class Main {
 
   @kotlin.jvm.JvmStatic
   fun <T> generics(vararg elements: T): T {
-   return (elements as kotlin.Array<out T>?)!![0]
+   val elements_1: kotlin.Array<T>? = elements as kotlin.Array<T>?
+   return elements_1!![0]
   }
 
   @kotlin.jvm.JvmStatic
   fun parameterizedType(vararg elements: kotlin.collections.MutableList<jsvarargs.Main?>?): jsvarargs.Main? {
-   return (elements as kotlin.Array<out kotlin.collections.MutableList<jsvarargs.Main?>?>?)!![0]!!.get(0)
+   val elements_1: kotlin.Array<kotlin.collections.MutableList<jsvarargs.Main?>?>? = elements as kotlin.Array<kotlin.collections.MutableList<jsvarargs.Main?>?>?
+   return elements_1!![0]!!.get(0)
   }
 
   @kotlin.jvm.JvmStatic
   fun <T> parameterizedByT(vararg elements: kotlin.collections.MutableList<T>?): T {
-   return (elements as kotlin.Array<out kotlin.collections.MutableList<T>?>?)!![0]!!.get(0)
+   val elements_1: kotlin.Array<kotlin.collections.MutableList<T>?>? = elements as kotlin.Array<kotlin.collections.MutableList<T>?>?
+   return elements_1!![0]!!.get(0)
   }
  }
 
  open class NativeObject {
-  constructor(vararg pars: kotlin.Any?)
+  constructor(vararg pars: kotlin.Any?) {
+   val pars_1: kotlin.Array<kotlin.Any?>? = pars as kotlin.Array<kotlin.Any?>?
+  }
  }
 
  open class SubVarargsConstructorClass: jsvarargs.Main.NativeObject {
-  constructor(i: kotlin.Int, vararg args: kotlin.Any?): super(*((args as kotlin.Array<*>?) as kotlin.Array<kotlin.Any?>?)!!)
+  constructor(i: kotlin.Int, vararg args: kotlin.Any?): super(*(args as kotlin.Array<kotlin.Any?>?)!!) {
+   val args_1: kotlin.Array<kotlin.Any?>? = args as kotlin.Array<kotlin.Any?>?
+  }
  }
 
  fun interface Function {
@@ -158,7 +166,8 @@ open class Main {
 
  class AFunction: jsvarargs.Main.Function {
   open override fun f1(i: kotlin.Int, vararg args: kotlin.Any?): kotlin.Any? {
-   return (args as kotlin.Array<*>?)!![i]
+   val args_1: kotlin.Array<kotlin.Any?>? = args as kotlin.Array<kotlin.Any?>?
+   return args_1!![i]
   }
  }
 

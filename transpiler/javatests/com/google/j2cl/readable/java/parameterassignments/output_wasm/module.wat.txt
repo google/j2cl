@@ -4,8 +4,20 @@
 ;;; Code for parameterassignments.Main.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__parameterassignments_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
 
+;;; Code for parameterassignments.Main.$LambdaImplementor$2 [static fields]
+(global $f_$initialized__parameterassignments_Main_$LambdaImplementor$2 (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.$LambdaImplementor$3 [static fields]
+(global $f_$initialized__parameterassignments_Main_$LambdaImplementor$3 (mut i32) (i32.const 0))
+
 ;;; Code for parameterassignments.Main.Fn [static fields]
 (global $f_$initialized__parameterassignments_Main_Fn (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.FnPrimitiveVarargs [static fields]
+(global $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.FnObjectVarargs [static fields]
+(global $f_$initialized__parameterassignments_Main_FnObjectVarargs (mut i32) (i32.const 0))
 
 ;;; Code for parameterassignments.Main.SubMain [static fields]
 (global $f_$initialized__parameterassignments_Main_SubMain (mut i32) (i32.const 0))
@@ -18,6 +30,8 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@parameterassignments.Main)
   (ref.func $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main)
+  (ref.func $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments@parameterassignments.Main)
+  (ref.func $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments@parameterassignments.Main)
  )
 )
 
@@ -43,6 +57,42 @@
  )
  ))
 
+;;; Code for parameterassignments.Main.$LambdaImplementor$2 [vtable.init]
+(global $parameterassignments.Main.$LambdaImplementor$2.vtable (ref $parameterassignments.Main.$LambdaImplementor$2.vtable) 
+ (struct.new $parameterassignments.Main.$LambdaImplementor$2.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2)
+  (ref.func $m_test__int__arrayOf_int__void@parameterassignments.Main.$LambdaImplementor$2)
+ )
+)
+
+;;; Code for parameterassignments.Main.$LambdaImplementor$2 [itable.init]
+(global $parameterassignments.Main.$LambdaImplementor$2.itable (ref $itable) (array.init_static $itable 
+ (struct.new $parameterassignments.Main.FnPrimitiveVarargs.vtable
+  (ref.func $m_test__int__arrayOf_int__void@parameterassignments.Main.$LambdaImplementor$2)
+ )
+ ))
+
+;;; Code for parameterassignments.Main.$LambdaImplementor$3 [vtable.init]
+(global $parameterassignments.Main.$LambdaImplementor$3.vtable (ref $parameterassignments.Main.$LambdaImplementor$3.vtable) 
+ (struct.new $parameterassignments.Main.$LambdaImplementor$3.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3)
+  (ref.func $m_test__java_lang_Object__arrayOf_java_lang_Object__void@parameterassignments.Main.$LambdaImplementor$3)
+ )
+)
+
+;;; Code for parameterassignments.Main.$LambdaImplementor$3 [itable.init]
+(global $parameterassignments.Main.$LambdaImplementor$3.itable (ref $itable) (array.init_static $itable 
+ (struct.new $parameterassignments.Main.FnObjectVarargs.vtable
+  (ref.func $m_test__java_lang_Object__arrayOf_java_lang_Object__void@parameterassignments.Main.$LambdaImplementor$3)
+ )
+ ))
+
 ;;; Code for parameterassignments.Main.SubMain [vtable.init]
 (global $parameterassignments.Main.SubMain.vtable (ref $parameterassignments.Main.SubMain.vtable) 
  (struct.new $parameterassignments.Main.SubMain.vtable
@@ -51,6 +101,8 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@parameterassignments.Main.SubMain)
   (ref.func $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main.SubMain)
+  (ref.func $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments@parameterassignments.Main)
+  (ref.func $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments@parameterassignments.Main)
  )
 )
 
@@ -64,6 +116,8 @@
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
+ (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
+ (field $f_fnObjectVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
   $java.lang.Object)
 )
 (type $parameterassignments.Main.vtable (struct_subtype 
@@ -72,6 +126,8 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
  (field $m_test__int__int__int__int_$pp_parameterassignments (ref $function.m_test__int__int__int__int_$pp_parameterassignments))
+ (field $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments (ref $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments))
+ (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
   $java.lang.Object.vtable)
 )
 
@@ -84,9 +140,9 @@
  ;;@ parameterassignments/Main.java:19:2
  (local $$instance (ref null $parameterassignments.Main))
  (block
-  ;; Main $instance = new Main.<init>(0,null);
+  ;; Main $instance = new Main.<init>(0,null,null,null);
   ;;@ parameterassignments/Main.java:19:2
-  (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.itable)) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal);
   ;;@ parameterassignments/Main.java:19:2
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
@@ -126,9 +182,9 @@
  ;;@ parameterassignments/Main.java:24:2
  (local $$instance (ref null $parameterassignments.Main))
  (block
-  ;; Main $instance = new Main.<init>(0,null);
+  ;; Main $instance = new Main.<init>(0,null,null,null);
   ;;@ parameterassignments/Main.java:24:2
-  (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.itable)) (i32.const 0) (ref.null $java.lang.Object)))
+  (local.set $$instance (struct.new $parameterassignments.Main (ref.as_non_null (global.get $parameterassignments.Main.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal,flag);
   ;;@ parameterassignments/Main.java:24:2
   (call $$ctor__int__int__int__boolean__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)(local.get $flag))
@@ -184,14 +240,54 @@
 )
 (elem declare func $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main)
 
+;;; void Main.testObjectVarargs(Object o, Object... oa)
+(func $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments@parameterassignments.Main
+ (type $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (param $oa (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ parameterassignments/Main.java:33:7
+ (local $this (ref null $parameterassignments.Main))
+ (local.set $this (ref.cast_static $parameterassignments.Main (local.get $this.untyped)))
+ (block
+  ;; (oa = javaemul.internal.WasmArray.OfObject.$create([o,((Object) oa.elements[0])]));
+  ;;@ parameterassignments/Main.java:34:4
+  (local.set $oa (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (local.get $o)(array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $oa)) (i32.const 0)))))
+ )
+)
+(elem declare func $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments@parameterassignments.Main)
+
+;;; void Main.testPrimitiveVarargs(int i, int... ia)
+(func $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments@parameterassignments.Main
+ (type $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i i32)
+ (param $ia (ref null $javaemul.internal.WasmArray.OfInt))
+ ;;@ parameterassignments/Main.java:37:7
+ (local $this (ref null $parameterassignments.Main))
+ (local.set $this (ref.cast_static $parameterassignments.Main (local.get $this.untyped)))
+ (block
+  ;; (ia = javaemul.internal.WasmArray.OfInt.$create([i,ia.elements[0]]));
+  ;;@ parameterassignments/Main.java:38:4
+  (local.set $ia (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $i)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ia)) (i32.const 0)))))
+ )
+)
+(elem declare func $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments@parameterassignments.Main)
+
 ;;; void Main.$init()
 (func $$init__void_$p_parameterassignments_Main@parameterassignments.Main
  (param $this (ref null $parameterassignments.Main))
  ;;@ parameterassignments/Main.java:18:13
  (block
   ;; (Main.this.fn = parameterassignments.Main.$LambdaImplementor$1.$create());
-  ;;@ parameterassignments/Main.java:37:2
+  ;;@ parameterassignments/Main.java:45:2
   (struct.set $parameterassignments.Main $f_fn__parameterassignments_Main(local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$1 ))
+  ;; (Main.this.fnPrimitiveVarargs = parameterassignments.Main.$LambdaImplementor$2.$create());
+  ;;@ parameterassignments/Main.java:55:2
+  (struct.set $parameterassignments.Main $f_fnPrimitiveVarargs__parameterassignments_Main(local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$2 ))
+  ;; (Main.this.fnObjectVarargs = parameterassignments.Main.$LambdaImplementor$3.$create());
+  ;;@ parameterassignments/Main.java:64:2
+  (struct.set $parameterassignments.Main $f_fnObjectVarargs__parameterassignments_Main(local.get $this) (call $$create__@parameterassignments.Main.$LambdaImplementor$3 ))
  )
 )
 
@@ -250,17 +346,17 @@
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$1
  (result (ref null $parameterassignments.Main.$LambdaImplementor$1))
- ;;@ parameterassignments/Main.java:38:6
+ ;;@ parameterassignments/Main.java:46:6
  (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (block
   ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>(0);
-  ;;@ parameterassignments/Main.java:38:6
+  ;;@ parameterassignments/Main.java:46:6
   (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ parameterassignments/Main.java:38:6
+  ;;@ parameterassignments/Main.java:46:6
   (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$1@parameterassignments.Main.$LambdaImplementor$1 (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ parameterassignments/Main.java:38:6
+  ;;@ parameterassignments/Main.java:46:6
   (return (local.get $$instance))
  )
 )
@@ -268,13 +364,13 @@
 ;;; void $LambdaImplementor$1.$ctor()
 (func $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$1@parameterassignments.Main.$LambdaImplementor$1
  (param $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
- ;;@ parameterassignments/Main.java:38:6
+ ;;@ parameterassignments/Main.java:46:6
  (block
   ;; parameterassignments.Main.$LambdaImplementor$1.$clinit();
-  ;;@ parameterassignments/Main.java:38:6
+  ;;@ parameterassignments/Main.java:46:6
   (call $$clinit__void@parameterassignments.Main.$LambdaImplementor$1 )
   ;; Object.this.$ctor();
-  ;;@ parameterassignments/Main.java:38:6
+  ;;@ parameterassignments/Main.java:46:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -286,15 +382,15 @@
  (param $nonFinal i32)
  (param $implicitFinal i32)
  (result i32)
- ;;@ parameterassignments/Main.java:38:6
+ ;;@ parameterassignments/Main.java:46:6
  (local $this (ref null $parameterassignments.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
   ;; (nonFinal = (nonFinal + implicitFinal));
-  ;;@ parameterassignments/Main.java:39:8
+  ;;@ parameterassignments/Main.java:47:8
   (local.set $nonFinal (i32.add (local.get $nonFinal) (local.get $implicitFinal)))
   ;; return nonFinal;
-  ;;@ parameterassignments/Main.java:40:8
+  ;;@ parameterassignments/Main.java:48:8
   (return (local.get $nonFinal))
  )
 )
@@ -302,22 +398,22 @@
 
 ;;; void $LambdaImplementor$1.$clinit()
 (func $$clinit__void@parameterassignments.Main.$LambdaImplementor$1
- ;;@ parameterassignments/Main.java:38:6
+ ;;@ parameterassignments/Main.java:46:6
  (block
   ;; if (parameterassignments.Main.$LambdaImplementor$1.$initialized) return;
-  ;;@ parameterassignments/Main.java:38:6
+  ;;@ parameterassignments/Main.java:46:6
   (if (global.get $f_$initialized__parameterassignments_Main_$LambdaImplementor$1)
    (then
     ;; return;
-    ;;@ parameterassignments/Main.java:38:6
+    ;;@ parameterassignments/Main.java:46:6
     (return )
    )
   )
   ;; (parameterassignments.Main.$LambdaImplementor$1.$initialized = true);
-  ;;@ parameterassignments/Main.java:38:6
+  ;;@ parameterassignments/Main.java:46:6
   (global.set $f_$initialized__parameterassignments_Main_$LambdaImplementor$1 (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ parameterassignments/Main.java:38:6
+  ;;@ parameterassignments/Main.java:46:6
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -336,6 +432,208 @@
 )
 (elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1)
 
+;;; Code for parameterassignments.Main.$LambdaImplementor$2 [CLASS]
+(type $parameterassignments.Main.$LambdaImplementor$2 (struct_subtype 
+ (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$2.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $parameterassignments.Main.$LambdaImplementor$2.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$2 $LambdaImplementor$2.$create()
+(func $$create__@parameterassignments.Main.$LambdaImplementor$2
+ (result (ref null $parameterassignments.Main.$LambdaImplementor$2))
+ ;;@ parameterassignments/Main.java:56:6
+ (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$2))
+ (block
+  ;; $LambdaImplementor$2 $instance = new $LambdaImplementor$2.<init>(0);
+  ;;@ parameterassignments/Main.java:56:6
+  (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$2.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ parameterassignments/Main.java:56:6
+  (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$2@parameterassignments.Main.$LambdaImplementor$2 (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ parameterassignments/Main.java:56:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$2.$ctor()
+(func $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$2@parameterassignments.Main.$LambdaImplementor$2
+ (param $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
+ ;;@ parameterassignments/Main.java:56:6
+ (block
+  ;; parameterassignments.Main.$LambdaImplementor$2.$clinit();
+  ;;@ parameterassignments/Main.java:56:6
+  (call $$clinit__void@parameterassignments.Main.$LambdaImplementor$2 )
+  ;; Object.this.$ctor();
+  ;;@ parameterassignments/Main.java:56:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaImplementor$2.test(int i, int... is)
+(func $m_test__int__arrayOf_int__void@parameterassignments.Main.$LambdaImplementor$2
+ (type $function.m_test__int__arrayOf_int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i i32)
+ (param $is (ref null $javaemul.internal.WasmArray.OfInt))
+ ;;@ parameterassignments/Main.java:56:6
+ (local $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
+ (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$2 (local.get $this.untyped)))
+ (block
+  ;; (is.elements[0] = is.elements[1]);
+  ;;@ parameterassignments/Main.java:57:8
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $is)) (i32.const 0) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $is)) (i32.const 1)))
+ )
+)
+(elem declare func $m_test__int__arrayOf_int__void@parameterassignments.Main.$LambdaImplementor$2)
+
+;;; void $LambdaImplementor$2.$clinit()
+(func $$clinit__void@parameterassignments.Main.$LambdaImplementor$2
+ ;;@ parameterassignments/Main.java:56:6
+ (block
+  ;; if (parameterassignments.Main.$LambdaImplementor$2.$initialized) return;
+  ;;@ parameterassignments/Main.java:56:6
+  (if (global.get $f_$initialized__parameterassignments_Main_$LambdaImplementor$2)
+   (then
+    ;; return;
+    ;;@ parameterassignments/Main.java:56:6
+    (return )
+   )
+  )
+  ;; (parameterassignments.Main.$LambdaImplementor$2.$initialized = true);
+  ;;@ parameterassignments/Main.java:56:6
+  (global.set $f_$initialized__parameterassignments_Main_$LambdaImplementor$2 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ parameterassignments/Main.java:56:6
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$2.getClass()
+(func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $parameterassignments.Main.$LambdaImplementor$2))
+ (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$2 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getParameterassignments.Main.$LambdaImplementor$2();
+  (return (call $function.no.side.effects.$getParameterassignments.Main.$LambdaImplementor$2__java_lang_Class (ref.func $$getParameterassignments.Main.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2)
+
+;;; Code for parameterassignments.Main.$LambdaImplementor$3 [CLASS]
+(type $parameterassignments.Main.$LambdaImplementor$3 (struct_subtype 
+ (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$3.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $parameterassignments.Main.$LambdaImplementor$3.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$3 $LambdaImplementor$3.$create()
+(func $$create__@parameterassignments.Main.$LambdaImplementor$3
+ (result (ref null $parameterassignments.Main.$LambdaImplementor$3))
+ ;;@ parameterassignments/Main.java:65:6
+ (local $$instance (ref null $parameterassignments.Main.$LambdaImplementor$3))
+ (block
+  ;; $LambdaImplementor$3 $instance = new $LambdaImplementor$3.<init>(0);
+  ;;@ parameterassignments/Main.java:65:6
+  (local.set $$instance (struct.new $parameterassignments.Main.$LambdaImplementor$3 (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.$LambdaImplementor$3.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ parameterassignments/Main.java:65:6
+  (call $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$3@parameterassignments.Main.$LambdaImplementor$3 (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ parameterassignments/Main.java:65:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$3.$ctor()
+(func $$ctor__void_$p_parameterassignments_Main_$LambdaImplementor$3@parameterassignments.Main.$LambdaImplementor$3
+ (param $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
+ ;;@ parameterassignments/Main.java:65:6
+ (block
+  ;; parameterassignments.Main.$LambdaImplementor$3.$clinit();
+  ;;@ parameterassignments/Main.java:65:6
+  (call $$clinit__void@parameterassignments.Main.$LambdaImplementor$3 )
+  ;; Object.this.$ctor();
+  ;;@ parameterassignments/Main.java:65:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void $LambdaImplementor$3.test(Object o, Object... os)
+(func $m_test__java_lang_Object__arrayOf_java_lang_Object__void@parameterassignments.Main.$LambdaImplementor$3
+ (type $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (param $os (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ parameterassignments/Main.java:65:6
+ (local $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
+ (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$3 (local.get $this.untyped)))
+ (block
+  ;; (os.elements[0] = ((Object) os.elements[1]));
+  ;;@ parameterassignments/Main.java:66:8
+  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $os)) (i32.const 0) (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $os)) (i32.const 1)))
+ )
+)
+(elem declare func $m_test__java_lang_Object__arrayOf_java_lang_Object__void@parameterassignments.Main.$LambdaImplementor$3)
+
+;;; void $LambdaImplementor$3.$clinit()
+(func $$clinit__void@parameterassignments.Main.$LambdaImplementor$3
+ ;;@ parameterassignments/Main.java:65:6
+ (block
+  ;; if (parameterassignments.Main.$LambdaImplementor$3.$initialized) return;
+  ;;@ parameterassignments/Main.java:65:6
+  (if (global.get $f_$initialized__parameterassignments_Main_$LambdaImplementor$3)
+   (then
+    ;; return;
+    ;;@ parameterassignments/Main.java:65:6
+    (return )
+   )
+  )
+  ;; (parameterassignments.Main.$LambdaImplementor$3.$initialized = true);
+  ;;@ parameterassignments/Main.java:65:6
+  (global.set $f_$initialized__parameterassignments_Main_$LambdaImplementor$3 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ parameterassignments/Main.java:65:6
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$3.getClass()
+(func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $parameterassignments.Main.$LambdaImplementor$3))
+ (local.set $this (ref.cast_static $parameterassignments.Main.$LambdaImplementor$3 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getParameterassignments.Main.$LambdaImplementor$3();
+  (return (call $function.no.side.effects.$getParameterassignments.Main.$LambdaImplementor$3__java_lang_Class (ref.func $$getParameterassignments.Main.$LambdaImplementor$3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3)
+
 ;;; Code for parameterassignments.Main.Fn [INTERFACE]
 (type $parameterassignments.Main.Fn.vtable (struct 
  (field $m_test__int__int__int (ref $function.m_test__int__int__int))
@@ -344,19 +642,19 @@
 
 ;;; void Fn.$clinit()
 (func $$clinit__void@parameterassignments.Main.Fn
- ;;@ parameterassignments/Main.java:33:12
+ ;;@ parameterassignments/Main.java:41:12
  (block
   ;; if (parameterassignments.Main.Fn.$initialized) return;
-  ;;@ parameterassignments/Main.java:33:12
+  ;;@ parameterassignments/Main.java:41:12
   (if (global.get $f_$initialized__parameterassignments_Main_Fn)
    (then
     ;; return;
-    ;;@ parameterassignments/Main.java:33:12
+    ;;@ parameterassignments/Main.java:41:12
     (return )
    )
   )
   ;; (parameterassignments.Main.Fn.$initialized = true);
-  ;;@ parameterassignments/Main.java:33:12
+  ;;@ parameterassignments/Main.java:41:12
   (global.set $f_$initialized__parameterassignments_Main_Fn (i32.const 1))
  )
 )
@@ -372,12 +670,86 @@
 )
 (elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.Fn)
 
+;;; Code for parameterassignments.Main.FnPrimitiveVarargs [INTERFACE]
+(type $parameterassignments.Main.FnPrimitiveVarargs.vtable (struct 
+ (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
+ )
+)
+
+;;; void FnPrimitiveVarargs.$clinit()
+(func $$clinit__void@parameterassignments.Main.FnPrimitiveVarargs
+ ;;@ parameterassignments/Main.java:51:12
+ (block
+  ;; if (parameterassignments.Main.FnPrimitiveVarargs.$initialized) return;
+  ;;@ parameterassignments/Main.java:51:12
+  (if (global.get $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs)
+   (then
+    ;; return;
+    ;;@ parameterassignments/Main.java:51:12
+    (return )
+   )
+  )
+  ;; (parameterassignments.Main.FnPrimitiveVarargs.$initialized = true);
+  ;;@ parameterassignments/Main.java:51:12
+  (global.set $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs (i32.const 1))
+ )
+)
+
+;;; Class<?> FnPrimitiveVarargs.getClass()
+(func $m_getClass__java_lang_Class@parameterassignments.Main.FnPrimitiveVarargs
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getParameterassignments.Main.FnPrimitiveVarargs();
+  (return (call $function.no.side.effects.$getParameterassignments.Main.FnPrimitiveVarargs__java_lang_Class (ref.func $$getParameterassignments.Main.FnPrimitiveVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.FnPrimitiveVarargs)
+
+;;; Code for parameterassignments.Main.FnObjectVarargs [INTERFACE]
+(type $parameterassignments.Main.FnObjectVarargs.vtable (struct 
+ (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
+ )
+)
+
+;;; void FnObjectVarargs.$clinit()
+(func $$clinit__void@parameterassignments.Main.FnObjectVarargs
+ ;;@ parameterassignments/Main.java:60:12
+ (block
+  ;; if (parameterassignments.Main.FnObjectVarargs.$initialized) return;
+  ;;@ parameterassignments/Main.java:60:12
+  (if (global.get $f_$initialized__parameterassignments_Main_FnObjectVarargs)
+   (then
+    ;; return;
+    ;;@ parameterassignments/Main.java:60:12
+    (return )
+   )
+  )
+  ;; (parameterassignments.Main.FnObjectVarargs.$initialized = true);
+  ;;@ parameterassignments/Main.java:60:12
+  (global.set $f_$initialized__parameterassignments_Main_FnObjectVarargs (i32.const 1))
+ )
+)
+
+;;; Class<?> FnObjectVarargs.getClass()
+(func $m_getClass__java_lang_Class@parameterassignments.Main.FnObjectVarargs
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getParameterassignments.Main.FnObjectVarargs();
+  (return (call $function.no.side.effects.$getParameterassignments.Main.FnObjectVarargs__java_lang_Class (ref.func $$getParameterassignments.Main.FnObjectVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.FnObjectVarargs)
+
 ;;; Code for parameterassignments.Main.SubMain [CLASS]
 (type $parameterassignments.Main.SubMain (struct_subtype 
  (field $vtable (ref $parameterassignments.Main.SubMain.vtable)) 
  (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
+ (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
+ (field $f_fnObjectVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
   $parameterassignments.Main)
 )
 (type $parameterassignments.Main.SubMain.vtable (struct_subtype 
@@ -386,6 +758,8 @@
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
  (field $m_test__int__int__int__int_$pp_parameterassignments (ref $function.m_test__int__int__int__int_$pp_parameterassignments))
+ (field $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments (ref $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments))
+ (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
   $parameterassignments.Main.vtable)
 )
 
@@ -395,17 +769,17 @@
  (param $explicitFinal i32)
  (param $implicitFinal i32)
  (result (ref null $parameterassignments.Main.SubMain))
- ;;@ parameterassignments/Main.java:44:11
+ ;;@ parameterassignments/Main.java:70:11
  (local $$instance (ref null $parameterassignments.Main.SubMain))
  (block
-  ;; SubMain $instance = new SubMain.<init>(0,null);
-  ;;@ parameterassignments/Main.java:44:11
-  (local.set $$instance (struct.new $parameterassignments.Main.SubMain (ref.as_non_null (global.get $parameterassignments.Main.SubMain.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.SubMain.itable)) (i32.const 0) (ref.null $java.lang.Object)))
+  ;; SubMain $instance = new SubMain.<init>(0,null,null,null);
+  ;;@ parameterassignments/Main.java:70:11
+  (local.set $$instance (struct.new $parameterassignments.Main.SubMain (ref.as_non_null (global.get $parameterassignments.Main.SubMain.vtable)) (ref.as_non_null (global.get $parameterassignments.Main.SubMain.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(nonFinal,explicitFinal,implicitFinal);
-  ;;@ parameterassignments/Main.java:44:11
+  ;;@ parameterassignments/Main.java:70:11
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main_SubMain@parameterassignments.Main.SubMain (ref.as_non_null (local.get $$instance))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
   ;; return $instance;
-  ;;@ parameterassignments/Main.java:44:11
+  ;;@ parameterassignments/Main.java:70:11
   (return (local.get $$instance))
  )
 )
@@ -416,16 +790,16 @@
  (param $nonFinal i32)
  (param $explicitFinal i32)
  (param $implicitFinal i32)
- ;;@ parameterassignments/Main.java:44:11
+ ;;@ parameterassignments/Main.java:70:11
  (block
   ;; parameterassignments.Main.SubMain.$clinit();
-  ;;@ parameterassignments/Main.java:44:77
+  ;;@ parameterassignments/Main.java:70:77
   (call $$clinit__void@parameterassignments.Main.SubMain )
   ;; Main.this.$ctor(nonFinal,explicitFinal,implicitFinal);
-  ;;@ parameterassignments/Main.java:45:6
+  ;;@ parameterassignments/Main.java:71:6
   (call $$ctor__int__int__int__void_$p_parameterassignments_Main@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal))
   ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
-  ;;@ parameterassignments/Main.java:46:6
+  ;;@ parameterassignments/Main.java:72:6
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
  )
 )
@@ -438,15 +812,15 @@
  (param $explicitFinal i32)
  (param $implicitFinal i32)
  (result i32)
- ;;@ parameterassignments/Main.java:49:8
+ ;;@ parameterassignments/Main.java:75:8
  (local $this (ref null $parameterassignments.Main.SubMain))
  (local.set $this (ref.cast_static $parameterassignments.Main.SubMain (local.get $this.untyped)))
  (block
   ;; (nonFinal = ((nonFinal + explicitFinal) + implicitFinal));
-  ;;@ parameterassignments/Main.java:50:6
+  ;;@ parameterassignments/Main.java:76:6
   (local.set $nonFinal (i32.add (i32.add (local.get $nonFinal) (local.get $explicitFinal)) (local.get $implicitFinal)))
   ;; return super.test(nonFinal,explicitFinal,implicitFinal);
-  ;;@ parameterassignments/Main.java:51:6
+  ;;@ parameterassignments/Main.java:77:6
   (return (call $m_test__int__int__int__int_$pp_parameterassignments@parameterassignments.Main (ref.as_non_null (local.get $this))(local.get $nonFinal)(local.get $explicitFinal)(local.get $implicitFinal)))
  )
 )
@@ -454,22 +828,22 @@
 
 ;;; void SubMain.$clinit()
 (func $$clinit__void@parameterassignments.Main.SubMain
- ;;@ parameterassignments/Main.java:43:22
+ ;;@ parameterassignments/Main.java:69:22
  (block
   ;; if (parameterassignments.Main.SubMain.$initialized) return;
-  ;;@ parameterassignments/Main.java:43:22
+  ;;@ parameterassignments/Main.java:69:22
   (if (global.get $f_$initialized__parameterassignments_Main_SubMain)
    (then
     ;; return;
-    ;;@ parameterassignments/Main.java:43:22
+    ;;@ parameterassignments/Main.java:69:22
     (return )
    )
   )
   ;; (parameterassignments.Main.SubMain.$initialized = true);
-  ;;@ parameterassignments/Main.java:43:22
+  ;;@ parameterassignments/Main.java:69:22
   (global.set $f_$initialized__parameterassignments_Main_SubMain (i32.const 1))
   ;; parameterassignments.Main.$clinit();
-  ;;@ parameterassignments/Main.java:43:22
+  ;;@ parameterassignments/Main.java:69:22
   (call $$clinit__void@parameterassignments.Main )
  )
 )

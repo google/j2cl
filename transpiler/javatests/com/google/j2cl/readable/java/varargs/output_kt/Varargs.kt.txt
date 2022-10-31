@@ -11,14 +11,21 @@ open class Varargs {
 
  constructor(): this(1)
 
- open fun test(a: kotlin.Int, vararg args: kotlin.Any?) {}
+ open fun test(a: kotlin.Int, vararg args: kotlin.Any?) {
+  val args_1: kotlin.Array<kotlin.Any?>? = args as kotlin.Array<kotlin.Any?>?
+ }
 
- open fun testCloneable(vararg args: kotlin.Cloneable?) {}
+ open fun testCloneable(vararg args: kotlin.Cloneable?) {
+  val args_1: kotlin.Array<kotlin.Cloneable?>? = args as kotlin.Array<kotlin.Cloneable?>?
+ }
 
- open fun testSerializable(vararg args: java.io.Serializable?) {}
+ open fun testSerializable(vararg args: java.io.Serializable?) {
+  val args_1: kotlin.Array<java.io.Serializable?>? = args as kotlin.Array<java.io.Serializable?>?
+ }
 
  open fun testAssignment(vararg args: kotlin.Any?) {
-  this.args_private_2 = (args as kotlin.Array<*>?) as kotlin.Array<kotlin.Any?>?
+  val args_1: kotlin.Array<kotlin.Any?>? = args as kotlin.Array<kotlin.Any?>?
+  this.args_private_2 = args_1 as kotlin.Array<kotlin.Any?>?
  }
 
  open fun testLambda(functionalInterface: varargs.Varargs.FunctionalInterface?) {}
@@ -33,13 +40,16 @@ open class Varargs {
   v!!.testCloneable()
   v!!.testSerializable()
   v!!.testLambda(varargs.Varargs.FunctionalInterface { it: kotlin.Array<out kotlin.String?>? ->
-   this.args_private_2 = it as kotlin.Array<kotlin.Any?>?
+   val it_1: kotlin.Array<kotlin.String?>? = it as kotlin.Array<kotlin.String?>?
+   this.args_private_2 = it_1 as kotlin.Array<kotlin.Any?>?
   })
  }
 
  companion object {
   @kotlin.jvm.JvmStatic
-  fun <T> `fun`(vararg elements: T) {}
+  fun <T> `fun`(vararg elements: T) {
+   val elements_1: kotlin.Array<T>? = elements as kotlin.Array<T>?
+  }
 
   @kotlin.jvm.JvmStatic
   fun <E> bar(a: E, b: E) {

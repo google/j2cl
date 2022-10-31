@@ -7,7 +7,9 @@ import kotlin.jvm.*
 open class CastOnArrayInit {
  companion object {
   @kotlin.jvm.JvmStatic
-  fun <E> `fun`(vararg args: castonarrayinit.CastOnArrayInit.Foo<E>?) {}
+  fun <E> `fun`(vararg args: castonarrayinit.CastOnArrayInit.Foo<E>?) {
+   val args_1: kotlin.Array<castonarrayinit.CastOnArrayInit.Foo<E>?>? = args as kotlin.Array<castonarrayinit.CastOnArrayInit.Foo<E>?>?
+  }
 
   @kotlin.jvm.JvmStatic
   fun <E> test() {

@@ -15,19 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.common.collect.Iterables;
-import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
-import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
-import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
 /**
@@ -69,41 +62,6 @@ public class InsertExplicitArrayCoercionCasts extends NormalizationPass {
                         inferredParameterDescriptor, actualParameterDescriptor, argument);
               }
             }));
-
-    // Kotlin type of vararg argument is "Array<out T>", so it needs cast to "Array<T>" to make it
-    // writable.
-    // TODO(b/223232961): Revisit this once we can express variance.
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Node rewriteMethod(Method method) {
-            if (!method.getDescriptor().isVarargs()) {
-              return method;
-            }
-
-            Variable varargVariable = Iterables.getLast(method.getParameters());
-            ArrayTypeDescriptor arrayTypeDescriptor =
-                (ArrayTypeDescriptor) varargVariable.getTypeDescriptor();
-            if (arrayTypeDescriptor.getComponentTypeDescriptor().isPrimitive()) {
-              return method;
-            }
-
-            method.accept(
-                new AbstractRewriter() {
-                  @Override
-                  public Node rewriteVariableReference(VariableReference variableReference) {
-                    return variableReference.getTarget() == varargVariable
-                        ? CastExpression.newBuilder()
-                            .setExpression(variableReference)
-                            .setCastTypeDescriptor(variableReference.getTypeDescriptor())
-                            .build()
-                        : variableReference;
-                  }
-                });
-
-            return method;
-          }
-        });
   }
 
   private static boolean needsCast(TypeDescriptor expected, TypeDescriptor actual) {

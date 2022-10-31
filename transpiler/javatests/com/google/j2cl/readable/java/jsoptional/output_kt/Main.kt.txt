@@ -7,9 +7,12 @@ import kotlin.jvm.*
 open class Main {
  open fun method1(i1: kotlin.Int, d: kotlin.Double?, i: kotlin.Int?) {}
 
- open fun method2(s1: kotlin.String?, d: kotlin.Double?, vararg i: kotlin.Boolean?) {}
+ open fun method2(s1: kotlin.String?, d: kotlin.Double?, vararg i: kotlin.Boolean?) {
+  val i_1: kotlin.Array<kotlin.Boolean?>? = i as kotlin.Array<kotlin.Boolean?>?
+ }
 
  @kotlin.jvm.JvmField var f: jsoptional.Main.Function? = jsoptional.Main.Function { s: kotlin.String?, varargs: kotlin.Array<*>? ->
+  val varargs_1: kotlin.Array<kotlin.Any?>? = varargs as kotlin.Array<kotlin.Any?>?
   return@Function s
  }
 
@@ -25,7 +28,8 @@ open class Main {
 
  class AFunction: jsoptional.Main.Function {
   open override fun f1(i: kotlin.String?, vararg args: kotlin.Any?): kotlin.Any? {
-   return (args as kotlin.Array<*>?)!![0]
+   val args_1: kotlin.Array<kotlin.Any?>? = args as kotlin.Array<kotlin.Any?>?
+   return args_1!![0]
   }
  }
 

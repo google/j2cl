@@ -1,0 +1,42 @@
+goog.module('parameterassignments.Main.FnPrimitiveVarargs$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('parameterassignments.Main.FnPrimitiveVarargs.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class FnPrimitiveVarargs {
+ /** @abstract @nodts */
+ m_test__int__arrayOf_int__void(/** number */ i, /** Array<number> */ is) {}
+ /** @nodts @return {FnPrimitiveVarargs} */
+ static $adapt(/** ?function(number, Array<number>):void */ fn) {
+  FnPrimitiveVarargs.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  FnPrimitiveVarargs.$clinit = () =>{};
+  FnPrimitiveVarargs.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__parameterassignments_Main_FnPrimitiveVarargs = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__parameterassignments_Main_FnPrimitiveVarargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('parameterassignments.Main.FnPrimitiveVarargs.$LambdaAdaptor$impl');
+ }
+}
+FnPrimitiveVarargs.$markImplementor(/**@type {Function}*/ (FnPrimitiveVarargs));
+$Util.$setClassMetadataForInterface(FnPrimitiveVarargs, 'parameterassignments.Main$FnPrimitiveVarargs');
+
+exports = FnPrimitiveVarargs;
+
+//# sourceMappingURL=Main$FnPrimitiveVarargs.js.map

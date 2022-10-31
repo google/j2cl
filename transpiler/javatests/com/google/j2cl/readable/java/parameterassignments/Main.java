@@ -30,6 +30,14 @@ public class Main {
     return nonFinal;
   }
 
+  void testObjectVarargs(Object o, Object... oa) {
+    oa = new Object[] {o, oa[0]};
+  }
+
+  void testPrimitiveVarargs(int i, int... ia) {
+    ia = new int[] {i, ia[0]};
+  }
+
   interface Fn {
     int test(int nonFinal, int implicitFinal);
   }
@@ -38,6 +46,24 @@ public class Main {
       (nonFinal, implicitFinal) -> {
         nonFinal = nonFinal + implicitFinal;
         return nonFinal;
+      };
+
+  interface FnPrimitiveVarargs {
+    void test(int i, int... is);
+  }
+
+  final FnPrimitiveVarargs fnPrimitiveVarargs =
+      (i, is) -> {
+        is[0] = is[1];
+      };
+
+  interface FnObjectVarargs {
+    void test(Object o, Object... os);
+  }
+
+  final FnObjectVarargs fnObjectVarargs =
+      (o, os) -> {
+        os[0] = os[1];
       };
 
   public static class SubMain extends Main {

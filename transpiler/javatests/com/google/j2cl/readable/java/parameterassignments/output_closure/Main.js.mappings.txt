@@ -4,6 +4,12 @@
 [Main] => [/**@type {Fn} @nodts*/
   this.f_fn__parameterassignments_Main;] "parameterassignments.Main.<synthetic: ctor_js>"
 [fn] => [f_fn__parameterassignments_Main]
+[Main] => [/**@type {FnPrimitiveVarargs} @nodts*/
+  this.f_fnPrimitiveVarargs__parameterassignments_Main;] "parameterassignments.Main.<synthetic: ctor_js>"
+[fnPrimitiveVarargs] => [f_fnPrimitiveVarargs__parameterassignments_Main]
+[Main] => [/**@type {FnObjectVarargs} @nodts*/
+  this.f_fnObjectVarargs__parameterassignments_Main;] "parameterassignments.Main.<synthetic: ctor_js>"
+[fnObjectVarargs] => [f_fnObjectVarargs__parameterassignments_Main]
 [Main] => [$create__int__int__int]
 [nonFinal] => [nonFinal] "nonFinal"
 [explicitFinal] => [explicitFinal] "explicitFinal"
@@ -45,6 +51,14 @@
 [implicitFinal] => [implicitFinal] "implicitFinal"
 [nonFinal = nonFinal + explicitFinal + implicitFinal;] => [nonFinal = nonFinal + explicitFinal + implicitFinal | 0;] "parameterassignments.Main.test"
 [return nonFinal;] => [return nonFinal;] "parameterassignments.Main.test"
+[testObjectVarargs] => [m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments]
+[o] => [o] "o"
+[oa] => [oa] "oa"
+[oa = new Object[] {o, oa[0]};] => [oa = [o, oa[0]];] "parameterassignments.Main.testObjectVarargs"
+[testPrimitiveVarargs] => [m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments]
+[i] => [i] "i"
+[ia] => [ia] "ia"
+[ia = new int[] {i, ia[0]};] => [ia = /**@type {!Array<number>}*/ ($Arrays.$init([i, ia[0]], $$int));] "parameterassignments.Main.testPrimitiveVarargs"
 [Main] => [$init__void_$p_parameterassignments_Main]
 [final Fn fn =
       (nonFinal, implicitFinal) -> {
@@ -57,6 +71,24 @@
 [implicitFinal] => [implicitFinal] "implicitFinal"
 [nonFinal = nonFinal + implicitFinal;] => [nonFinal = nonFinal + implicitFinal | 0;] "parameterassignments.Main.<lambda in <init>>"
 [return nonFinal;] => [return nonFinal;] "parameterassignments.Main.<lambda in <init>>"
+[final FnPrimitiveVarargs fnPrimitiveVarargs =
+      (i, is) -> {
+        is[0] = is[1];
+      };] => [this.f_fnPrimitiveVarargs__parameterassignments_Main = FnPrimitiveVarargs.$adapt((/** number */ i, /** Array<number> */ is) =>{
+   $Arrays.$set(is, 0, is[1]);
+  });] "parameterassignments.Main.<init>"
+[i] => [i] "i"
+[is] => [is] "is"
+[is[0] = is[1];] => [$Arrays.$set(is, 0, is[1]);] "parameterassignments.Main.<lambda in <init>>"
+[final FnObjectVarargs fnObjectVarargs =
+      (o, os) -> {
+        os[0] = os[1];
+      };] => [this.f_fnObjectVarargs__parameterassignments_Main = FnObjectVarargs.$adapt((/** * */ o, /** Array<*> */ os) =>{
+   $Arrays.$set(os, 0, os[1]);
+  });] "parameterassignments.Main.<init>"
+[o] => [o] "o"
+[os] => [os] "os"
+[os[0] = os[1];] => [$Arrays.$set(os, 0, os[1]);] "parameterassignments.Main.<lambda in <init>>"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "parameterassignments.Main.<clinit>"
 [Main] => [Main.$loadModules();] "parameterassignments.Main.<clinit>"

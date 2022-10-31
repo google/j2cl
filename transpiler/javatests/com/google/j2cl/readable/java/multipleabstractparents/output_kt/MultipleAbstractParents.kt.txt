@@ -8,6 +8,7 @@ open class MultipleAbstractParents {
  companion object {
   @kotlin.jvm.JvmStatic
   fun main(vararg args: kotlin.String?) {
+   val args_1: kotlin.Array<kotlin.String?>? = args as kotlin.Array<kotlin.String?>?
    kotlin.assert(multipleabstractparents.MultipleAbstractParents.ArrayList<kotlin.String?>().getFoo(null)!!.equals("AbstractCollection"))
    kotlin.assert(multipleabstractparents.MultipleAbstractParents.StringList().getFoo(null)!!.equals("AbstractCollection"))
    kotlin.assert((multipleabstractparents.MultipleAbstractParents.StringList() as multipleabstractparents.MultipleAbstractParents.IStringList?)!!.getFoo(null)!!.equals("AbstractCollection"))

@@ -69,7 +69,9 @@ open class ExplicitNotNullable {
   return null
  }
 
- open fun m3(vararg args: kotlin.String) {}
+ open fun m3(vararg args: kotlin.String) {
+  val args_1: kotlin.Array<kotlin.String> = args as kotlin.Array<kotlin.String>
+ }
 
  open fun <T: nullability.explicitnotnullable.ExplicitNotNullable.NullableBound<T>?> methodWithNullableBound() {}
 

@@ -77,15 +77,18 @@ open class AutoBoxing {
   return null
  }
 
- open fun takesFloatVarArgs(vararg elements: kotlin.Float?) {}
+ open fun takesFloatVarArgs(vararg elements: kotlin.Float?) {
+  val elements_1: kotlin.Array<kotlin.Float?>? = elements as kotlin.Array<kotlin.Float?>?
+ }
 
  open fun takesObjectAndReturnsPrimitiveDouble(o: kotlin.Any?): kotlin.Double {
   return o as kotlin.Double
  }
 
  open fun sumWithoutBoxing(vararg numbers: kotlin.Any?): kotlin.Double {
+  val numbers_1: kotlin.Array<kotlin.Any?>? = numbers as kotlin.Array<kotlin.Any?>?
   var sum: kotlin.Double = 0.0
-  FOR_EACH@ for (number in (numbers as kotlin.Array<*>?)!!) {
+  FOR_EACH@ for (number in numbers_1!!) {
    val number_1: kotlin.Any? = number
    sum = sum + (number_1 as kotlin.Double?)!!.toDouble()
   }
@@ -93,8 +96,9 @@ open class AutoBoxing {
  }
 
  open fun sumWithoutBoxingJsVarargs(vararg numbers: kotlin.Any?): kotlin.Double {
+  val numbers_1: kotlin.Array<kotlin.Any?>? = numbers as kotlin.Array<kotlin.Any?>?
   var sum: kotlin.Double = 0.0
-  FOR_EACH@ for (number in (numbers as kotlin.Array<*>?)!!) {
+  FOR_EACH@ for (number in numbers_1!!) {
    val number_1: kotlin.Any? = number
    sum = sum + (number_1 as kotlin.Double?)!!.toDouble()
   }

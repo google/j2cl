@@ -1,0 +1,50 @@
+goog.module('parameterassignments.Main.FnPrimitiveVarargs.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const FnPrimitiveVarargs = goog.require('parameterassignments.Main.FnPrimitiveVarargs$impl');
+
+/**
+ * @implements {FnPrimitiveVarargs}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(number, Array<number>):void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(number, Array<number>):void} @nodts*/
+  this.f_fn__parameterassignments_Main_FnPrimitiveVarargs_$LambdaAdaptor;
+  this.$ctor__parameterassignments_Main_FnPrimitiveVarargs_$LambdaAdaptor__parameterassignments_Main_FnPrimitiveVarargs_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__parameterassignments_Main_FnPrimitiveVarargs_$LambdaAdaptor__parameterassignments_Main_FnPrimitiveVarargs_$JsFunction__void(/** ?function(number, Array<number>):void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__parameterassignments_Main_FnPrimitiveVarargs_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts */
+ m_test__int__arrayOf_int__void(/** number */ arg0, /** Array<number> */ arg1) {
+  {
+   let $function = this.f_fn__parameterassignments_Main_FnPrimitiveVarargs_$LambdaAdaptor;
+   $function(arg0, arg1);
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+FnPrimitiveVarargs.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'parameterassignments.Main$FnPrimitiveVarargs$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Main$FnPrimitiveVarargs$$LambdaAdaptor.js.map

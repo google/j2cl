@@ -113,8 +113,8 @@ import com.google.j2cl.transpiler.passes.NormalizeLabels;
 import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLiteralsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
+import com.google.j2cl.transpiler.passes.NormalizeMethodParametersKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
-import com.google.j2cl.transpiler.passes.NormalizeNonFinalVariablesKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
@@ -482,14 +482,18 @@ public enum Backend {
           InsertNotNullAssertions::new,
           InsertCastsOnNullabilityMismatch::new,
           InsertCastForLowerBounds::new,
-          InsertExplicitArrayCoercionCasts::new,
           InsertRawTypeCasts::new,
 
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,
           NormalizeVariableInitialization::new,
           MakeVariablesFinal::new,
-          NormalizeNonFinalVariablesKotlin::new,
+
+          // Needs to run after NormalizeVarargParametersKotlin.
+          NormalizeMethodParametersKotlin::new,
+
+          // Needs to run after NormalizeNonFinalVariablesKotlin.
+          InsertExplicitArrayCoercionCasts::new,
           RemoveNestedBlocks::new,
 
           // Verification

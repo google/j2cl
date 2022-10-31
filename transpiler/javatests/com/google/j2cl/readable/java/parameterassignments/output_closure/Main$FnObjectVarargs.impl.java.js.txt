@@ -1,0 +1,42 @@
+goog.module('parameterassignments.Main.FnObjectVarargs$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('parameterassignments.Main.FnObjectVarargs.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class FnObjectVarargs {
+ /** @abstract @nodts */
+ m_test__java_lang_Object__arrayOf_java_lang_Object__void(/** * */ o, /** Array<*> */ os) {}
+ /** @nodts @return {FnObjectVarargs} */
+ static $adapt(/** ?function(*, Array<*>):void */ fn) {
+  FnObjectVarargs.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  FnObjectVarargs.$clinit = () =>{};
+  FnObjectVarargs.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__parameterassignments_Main_FnObjectVarargs = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__parameterassignments_Main_FnObjectVarargs;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('parameterassignments.Main.FnObjectVarargs.$LambdaAdaptor$impl');
+ }
+}
+FnObjectVarargs.$markImplementor(/**@type {Function}*/ (FnObjectVarargs));
+$Util.$setClassMetadataForInterface(FnObjectVarargs, 'parameterassignments.Main$FnObjectVarargs');
+
+exports = FnObjectVarargs;
+
+//# sourceMappingURL=Main$FnObjectVarargs.js.map

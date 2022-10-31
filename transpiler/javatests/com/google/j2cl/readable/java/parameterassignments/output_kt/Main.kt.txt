@@ -21,14 +21,41 @@ open class Main {
   return nonFinal_1
  }
 
+ open fun testObjectVarargs(o: kotlin.Any?, vararg oa: kotlin.Any?) {
+  var oa_1: kotlin.Array<kotlin.Any?>? = oa as kotlin.Array<kotlin.Any?>?
+  oa_1 = (kotlin.arrayOf<kotlin.Any?>(o, oa_1!![0]) as kotlin.Array<*>?) as kotlin.Array<kotlin.Any?>?
+ }
+
+ open fun testPrimitiveVarargs(i: kotlin.Int, vararg ia: kotlin.Int) {
+  var ia_1: kotlin.IntArray? = ia
+  ia_1 = kotlin.intArrayOf(i, ia_1!![0])
+ }
+
  @kotlin.jvm.JvmField val fn: parameterassignments.Main.Fn? = parameterassignments.Main.Fn { nonFinal: kotlin.Int, implicitFinal: kotlin.Int ->
   var nonFinal_1: kotlin.Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
   return@Fn nonFinal_1
  }
 
+ @kotlin.jvm.JvmField val fnPrimitiveVarargs: parameterassignments.Main.FnPrimitiveVarargs? = parameterassignments.Main.FnPrimitiveVarargs { i: kotlin.Int, `is`: kotlin.IntArray? ->
+  `is`!![0] = `is`!![1]
+ }
+
+ @kotlin.jvm.JvmField val fnObjectVarargs: parameterassignments.Main.FnObjectVarargs? = parameterassignments.Main.FnObjectVarargs { o: kotlin.Any?, os: kotlin.Array<*>? ->
+  val os_1: kotlin.Array<kotlin.Any?>? = os as kotlin.Array<kotlin.Any?>?
+  os_1!![0] = os_1!![1]
+ }
+
  fun interface Fn {
   fun test(nonFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int
+ }
+
+ fun interface FnPrimitiveVarargs {
+  fun test(i: kotlin.Int, vararg `is`: kotlin.Int)
+ }
+
+ fun interface FnObjectVarargs {
+  fun test(o: kotlin.Any?, vararg os: kotlin.Any?)
  }
 
  open class SubMain: parameterassignments.Main {

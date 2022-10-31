@@ -4,6 +4,10 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Fn = goog.forwardDeclare('parameterassignments.Main.Fn$impl');
+let FnObjectVarargs = goog.forwardDeclare('parameterassignments.Main.FnObjectVarargs$impl');
+let FnPrimitiveVarargs = goog.forwardDeclare('parameterassignments.Main.FnPrimitiveVarargs$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Main extends j_l_Object {
  /** @protected @nodts */
@@ -11,6 +15,10 @@ class Main extends j_l_Object {
   super();
   /**@type {Fn} @nodts*/
   this.f_fn__parameterassignments_Main;
+  /**@type {FnPrimitiveVarargs} @nodts*/
+  this.f_fnPrimitiveVarargs__parameterassignments_Main;
+  /**@type {FnObjectVarargs} @nodts*/
+  this.f_fnObjectVarargs__parameterassignments_Main;
  }
  //Factory method corresponding to constructor 'Main(int, int, int)'.
  /** @nodts @return {!Main} */
@@ -46,11 +54,25 @@ class Main extends j_l_Object {
   nonFinal = nonFinal + explicitFinal + implicitFinal | 0;
   return nonFinal;
  }
+ /** @nodts */
+ m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments(/** * */ o, /** Array<*> */ oa) {
+  oa = [o, oa[0]];
+ }
+ /** @nodts */
+ m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments(/** number */ i, /** Array<number> */ ia) {
+  ia = /**@type {!Array<number>}*/ ($Arrays.$init([i, ia[0]], $$int));
+ }
  /** @private @nodts */
  $init__void_$p_parameterassignments_Main() {
   this.f_fn__parameterassignments_Main = Fn.$adapt((/** number */ nonFinal, /** number */ implicitFinal) =>{
    nonFinal = nonFinal + implicitFinal | 0;
    return nonFinal;
+  });
+  this.f_fnPrimitiveVarargs__parameterassignments_Main = FnPrimitiveVarargs.$adapt((/** number */ i, /** Array<number> */ is) =>{
+   $Arrays.$set(is, 0, is[1]);
+  });
+  this.f_fnObjectVarargs__parameterassignments_Main = FnObjectVarargs.$adapt((/** * */ o, /** Array<*> */ os) =>{
+   $Arrays.$set(os, 0, os[1]);
   });
  }
  /** @nodts */
@@ -67,6 +89,10 @@ class Main extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Fn = goog.module.get('parameterassignments.Main.Fn$impl');
+  FnObjectVarargs = goog.module.get('parameterassignments.Main.FnObjectVarargs$impl');
+  FnPrimitiveVarargs = goog.module.get('parameterassignments.Main.FnPrimitiveVarargs$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }
 $Util.$setClassMetadata(Main, 'parameterassignments.Main');

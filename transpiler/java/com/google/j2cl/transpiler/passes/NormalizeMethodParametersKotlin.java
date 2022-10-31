@@ -20,83 +20,133 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.transpiler.ast.AstUtils.replaceDeclarations;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.common.SourcePosition;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
- * Normalize non-final variables for Kotlin.
+ * Normalize non-final and vararg variables for Kotlin.
  *
  * <p>Non-final method parameters and catch clause exception variable are re-declared as final,
  * since they are final in Kotlin.
+ *
+ * <p>Vararg parameters with non-primitive component type are re-declared from {@code Array<out T>}
+ * to {@code Array<T>}.
  */
-public class NormalizeNonFinalVariablesKotlin extends NormalizationPass {
+public class NormalizeMethodParametersKotlin extends NormalizationPass {
+
+  private static class RewriteItem {
+    RewriteItem(Variable variable, TypeDescriptor rewrittenTypeDescriptor) {
+      this.variable = variable;
+      this.rewrittenTypeDescriptor = rewrittenTypeDescriptor;
+    }
+
+    RewriteItem(Variable variable) {
+      this(variable, variable.getTypeDescriptor());
+    }
+
+    final Variable variable;
+    final TypeDescriptor rewrittenTypeDescriptor;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteMethod(Method method) {
-            method.setBody(
-                redeclareNonFinalVariables(
-                    method.getBody(), method.getParameters(), method.getSourcePosition()));
+            // Redeclare vararg parameter if needed.
+            RewriteItem varargRewriteItem = getVarargRewriteItem(method);
+            if (varargRewriteItem != null) {
+              method.setBody(redeclareItems(method.getBody(), ImmutableList.of(varargRewriteItem)));
+            }
+
+            // Redeclare non-final parameters.
+            method.setBody(redeclareItems(method.getBody(), getNonFinalRewriteItems(method)));
+
             return method;
           }
 
           @Override
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
+            // Redeclare vararg parameter if needed.
+            RewriteItem varargRewriteItem = getVarargRewriteItem(functionExpression);
+            if (varargRewriteItem != null) {
+              functionExpression =
+                  FunctionExpression.Builder.from(functionExpression)
+                      .setStatements(
+                          redeclareItems(
+                                  functionExpression.getBody(), ImmutableList.of(varargRewriteItem))
+                              .getStatements())
+                      .build();
+            }
+
+            // Redeclare non-final parameters.
             return FunctionExpression.Builder.from(functionExpression)
                 .setStatements(
-                    redeclareNonFinalVariables(
+                    redeclareItems(
                             functionExpression.getBody(),
-                            functionExpression.getParameters(),
-                            functionExpression.getSourcePosition())
+                            getNonFinalRewriteItems(functionExpression))
                         .getStatements())
                 .build();
           }
 
           @Override
           public Node rewriteCatchClause(CatchClause catchClause) {
+            Variable exceptionVariable = catchClause.getExceptionVariable();
+            if (exceptionVariable.isFinal()) {
+              return catchClause;
+            }
+
             return CatchClause.Builder.from(catchClause)
                 .setBody(
-                    redeclareNonFinalVariables(
+                    redeclareItems(
                         catchClause.getBody(),
-                        ImmutableList.of(catchClause.getExceptionVariable()),
-                        catchClause.getBody().getSourcePosition()))
+                        ImmutableList.of(new RewriteItem(exceptionVariable))))
                 .build();
           }
 
-          private Block redeclareNonFinalVariables(
-              Block block, List<Variable> variables, SourcePosition sourcePosition) {
-            ImmutableList<Variable> variablesToReplace =
-                variables.stream().filter(not(Variable::isFinal)).collect(toImmutableList());
-
-            if (variablesToReplace.isEmpty()) {
+          private Block redeclareItems(Block block, List<RewriteItem> rewriteItems) {
+            if (rewriteItems.isEmpty()) {
               return block;
             }
 
+            ImmutableList<Variable> variablesToRewrite =
+                rewriteItems.stream()
+                    .map(rewriteItem -> rewriteItem.variable)
+                    .collect(toImmutableList());
+
             ImmutableList<VariableDeclarationFragment> variableDeclarationFragments =
-                variablesToReplace.stream()
+                rewriteItems.stream()
                     .map(
-                        variable ->
+                        rewriteItem ->
                             VariableDeclarationFragment.newBuilder()
-                                .setVariable(Variable.Builder.from(variable).build())
-                                .setInitializer(variable.createReference())
+                                .setVariable(
+                                    Variable.Builder.from(rewriteItem.variable)
+                                        .setTypeDescriptor(rewriteItem.rewrittenTypeDescriptor)
+                                        .build())
+                                .setInitializer(rewriteItem.variable.createReference())
                                 .build())
                     .collect(toImmutableList());
 
-            variablesToReplace.forEach(variable -> variable.setFinal(true));
+            variablesToRewrite.forEach(variable -> variable.setFinal(true));
 
             ImmutableList<Variable> replacementVariables =
                 variableDeclarationFragments.stream()
@@ -128,7 +178,7 @@ public class NormalizeNonFinalVariablesKotlin extends NormalizationPass {
                             VariableDeclarationExpression.newBuilder()
                                 .setVariableDeclarationFragments(ImmutableList.of(fragment))
                                 .build()
-                                .makeStatement(sourcePosition))
+                                .makeStatement(fragment.getVariable().getSourcePosition()))
                     .collect(toImmutableList());
 
             List<Statement> statementsAfterConstructorInvocation =
@@ -138,7 +188,7 @@ public class NormalizeNonFinalVariablesKotlin extends NormalizationPass {
 
             ImmutableList<Statement> rewrittenStatementsAfterConstructorInvocation =
                 statementsAfterConstructorInvocation.stream()
-                    .map(s -> replaceDeclarations(variablesToReplace, replacementVariables, s))
+                    .map(s -> replaceDeclarations(variablesToRewrite, replacementVariables, s))
                     .collect(toImmutableList());
 
             return Block.newBuilder()
@@ -149,5 +199,37 @@ public class NormalizeNonFinalVariablesKotlin extends NormalizationPass {
                 .build();
           }
         });
+  }
+
+  private ImmutableList<RewriteItem> getNonFinalRewriteItems(MethodLike methodLike) {
+    return methodLike.getParameters().stream()
+        .filter(not(Variable::isFinal))
+        .map(RewriteItem::new)
+        .collect(toImmutableList());
+  }
+
+  @Nullable
+  private static RewriteItem getVarargRewriteItem(MethodLike methodLike) {
+    MethodDescriptor methodDescriptor = methodLike.getDescriptor();
+    if (!methodDescriptor.isVarargs()) {
+      return null;
+    }
+
+    Variable varargVariable = Iterables.getLast(methodLike.getParameters());
+    ArrayTypeDescriptor arrayTypeDescriptor =
+        (ArrayTypeDescriptor) varargVariable.getTypeDescriptor();
+    TypeDescriptor componentTypeDescriptor = arrayTypeDescriptor.getComponentTypeDescriptor();
+    if (componentTypeDescriptor.isPrimitive()) {
+      return null;
+    }
+
+    // At this point, component type descriptor is assumed to be "out X".
+    TypeDescriptor rewrittenTypeDescriptor =
+        ArrayTypeDescriptor.Builder.from(arrayTypeDescriptor)
+            .setComponentTypeDescriptor(
+                ((TypeVariable) componentTypeDescriptor).getUpperBoundTypeDescriptor())
+            .build();
+
+    return new RewriteItem(varargVariable, rewrittenTypeDescriptor);
   }
 }
