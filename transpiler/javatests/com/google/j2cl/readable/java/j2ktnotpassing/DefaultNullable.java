@@ -20,7 +20,10 @@ import org.jspecify.nullness.Nullable;
 
 public class DefaultNullable {
   static void testNonNullableLambdas() {
+    NotNullable.Consumer<String> lambda = s -> {};
     NotNullable.Consumer<String> methodReference = DefaultNullable::accept;
+    NotNullable.Supplier<String> constructorReference = String::new;
+    NotNullable.IntFunction<String[]> newArrayReference = String[]::new;
   }
 
   static void accept(String s) {}
@@ -28,7 +31,15 @@ public class DefaultNullable {
 
 @NullMarked
 class NotNullable {
+  interface Supplier<T extends @Nullable Object> {
+    T get();
+  }
+
   interface Consumer<T extends @Nullable Object> {
     void accept(T t);
+  }
+
+  interface IntFunction<T extends @Nullable Object> {
+    T accept(int i);
   }
 }

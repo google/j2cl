@@ -1,8 +1,8 @@
-goog.module('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction$impl');
+goog.module('j2ktnotpassing.NotNullable.IntFunction$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction.$LambdaAdaptor$impl');
+let $LambdaAdaptor = goog.forwardDeclare('j2ktnotpassing.NotNullable.IntFunction.$LambdaAdaptor$impl');
 
 /**
  * @interface
@@ -23,21 +23,21 @@ class IntFunction {
  }
  
  static $markImplementor(/** Function */ ctor) {
-  ctor.prototype.$implements__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction = true;
+  ctor.prototype.$implements__j2ktnotpassing_NotNullable_IntFunction = true;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
-  return instance != null && !!instance.$implements__nullability_explicitnotnullable_ExplicitNotNullable_IntFunction;
+  return instance != null && !!instance.$implements__j2ktnotpassing_NotNullable_IntFunction;
  }
  
  /** @nodts */
  static $loadModules() {
-  $LambdaAdaptor = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction.$LambdaAdaptor$impl');
+  $LambdaAdaptor = goog.module.get('j2ktnotpassing.NotNullable.IntFunction.$LambdaAdaptor$impl');
  }
 }
 IntFunction.$markImplementor(/**@type {Function}*/ (IntFunction));
-$Util.$setClassMetadataForInterface(IntFunction, 'nullability.explicitnotnullable.ExplicitNotNullable$IntFunction');
+$Util.$setClassMetadataForInterface(IntFunction, 'j2ktnotpassing.NotNullable$IntFunction');
 
 exports = IntFunction;
 
-//# sourceMappingURL=ExplicitNotNullable$IntFunction.js.map
+//# sourceMappingURL=NotNullable$IntFunction.js.map

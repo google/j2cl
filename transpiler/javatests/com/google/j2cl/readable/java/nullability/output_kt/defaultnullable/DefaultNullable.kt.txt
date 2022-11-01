@@ -200,21 +200,6 @@ open class DefaultNullable {
 
   @kotlin.jvm.JvmStatic
   fun <T> testListOfWildcardSuperNullableVariable(l: kotlin.collections.MutableList<in T?>?) {}
-
-  @kotlin.jvm.JvmStatic
-  fun testNonNullableLambdas() {
-   val lambda: nullability.defaultnullable.DefaultNullable.Consumer<kotlin.String?>? = nullability.defaultnullable.DefaultNullable.Consumer { s: kotlin.String? ->
-   }
-   val constructorReference: nullability.defaultnullable.DefaultNullable.Supplier<kotlin.String?>? = nullability.defaultnullable.DefaultNullable.Supplier {
-    return@Supplier kotlin.String()
-   } as nullability.defaultnullable.DefaultNullable.Supplier<kotlin.String?>?
-   val newArrayReference: nullability.defaultnullable.DefaultNullable.IntFunction<kotlin.Array<kotlin.String?>?>? = nullability.defaultnullable.DefaultNullable.IntFunction { arg0: kotlin.Int ->
-    return@IntFunction kotlin.arrayOfNulls<kotlin.String>(arg0) as kotlin.Array<kotlin.String>
-   } as nullability.defaultnullable.DefaultNullable.IntFunction<kotlin.Array<kotlin.String?>?>?
-  }
-
-  @kotlin.jvm.JvmStatic
-  fun accept(s: kotlin.String?) {}
  }
 
  interface NullableBound<T: nullability.defaultnullable.DefaultNullable.NullableBound<T>?> {}
@@ -318,17 +303,5 @@ open class DefaultNullable {
   open fun setNonNull(n: N) {}
 
   open fun setDefaultNullability(n: N) {}
- }
-
- fun interface Supplier<T> {
-  fun get(): T
- }
-
- fun interface Consumer<T> {
-  fun accept(t: T)
- }
-
- fun interface IntFunction<T> {
-  fun accept(i: kotlin.Int): T
  }
 }

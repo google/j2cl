@@ -5,8 +5,18 @@ import javaemul.lang.*
 import kotlin.jvm.*
 
 open class ExplicitNotNullable {
+ @kotlin.jvm.JvmField var i: j2ktnotpassing.ExplicitNotNullable.Function<kotlin.String, kotlin.String> = object : j2ktnotpassing.ExplicitNotNullable.Function<kotlin.String?, kotlin.String?> {
+  open override fun apply(s: kotlin.String): kotlin.String {
+   return s
+  }
+ }
+
  open fun testDependentWildcards(x: j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters<*, *>): j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters<*, *> {
   return x!!.getThis()
+ }
+
+ fun interface Function<I, O> {
+  fun apply(i: I): O
  }
 
  open class DependentTypeParameters<E: kotlin.Any, T: E?> {

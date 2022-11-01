@@ -764,14 +764,9 @@ class JdtEnvironment {
       return null;
     }
 
-    // Always create the method descriptor consistently using the @NullMarked context of the
-    // type declaration.
-    TypeDeclaration enclosingTypeDeclaration =
-        createDeclarationForType(methodBinding.getDeclaringClass().getTypeDeclaration());
-    boolean inNullMarkedScope = enclosingTypeDeclaration.isNullMarked();
-
     DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(methodBinding.getDeclaringClass(), inNullMarkedScope);
+        createDeclaredTypeDescriptor(methodBinding.getDeclaringClass());
+    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
 
     boolean isStatic = isStatic(methodBinding);
     Visibility visibility = getVisibility(methodBinding);
@@ -1142,22 +1137,19 @@ class JdtEnvironment {
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
                 createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()))
-            // Create the super types in the @NullMarked context of the type
-            .setSuperTypeDescriptorFactory(
-                () ->
-                    createDeclaredTypeDescriptor(
-                        typeBinding.getSuperclass(), typeDeclaration.isNullMarked()))
             .setInterfaceTypeDescriptorsFactory(
                 () ->
                     createTypeDescriptors(
                         typeBinding.getInterfaces(),
-                        typeDeclaration.isNullMarked(),
+                        inNullMarkedScope,
                         DeclaredTypeDescriptor.class))
+            .setSingleAbstractMethodDescriptorFactory(() -> getFunctionInterfaceMethod(typeBinding))
+            .setSuperTypeDescriptorFactory(
+                () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), inNullMarkedScope))
             .setTypeArgumentDescriptors(
                 getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
-            .setSingleAbstractMethodDescriptorFactory(() -> getFunctionInterfaceMethod(typeBinding))
             .build();
     putTypeDescriptorInCache(inNullMarkedScope, typeBinding, typeDescriptor);
     return typeDescriptor;
@@ -1291,14 +1283,11 @@ class JdtEnvironment {
                     declaringMemberBinding instanceof IMethodBinding
                         ? (IMethodBinding) declaringMemberBinding
                         : null))
-        .setSuperTypeDescriptorFactory(
-            () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), isNullMarked))
         .setInterfaceTypeDescriptorsFactory(
             () ->
                 createTypeDescriptors(
                     typeBinding.getInterfaces(), isNullMarked, DeclaredTypeDescriptor.class))
-        .setUnparameterizedTypeDescriptorFactory(
-            () -> createDeclaredTypeDescriptor(typeBinding, isNullMarked))
+        .setUnparameterizedTypeDescriptorFactory(() -> createDeclaredTypeDescriptor(typeBinding))
         .setHasAbstractModifier(isAbstract)
         .setKind(getKindFromTypeBinding(typeBinding))
         .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
@@ -1320,6 +1309,8 @@ class JdtEnvironment {
         .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
         .setNullMarked(isNullMarked)
         .setPackageName(packageName)
+        .setSuperTypeDescriptorFactory(
+            () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), isNullMarked))
         .setTypeParameterDescriptors(
             getTypeArgumentTypeDescriptors(
                     typeBinding, /* inNullMarkedScope= */ isNullMarked, TypeVariable.class)

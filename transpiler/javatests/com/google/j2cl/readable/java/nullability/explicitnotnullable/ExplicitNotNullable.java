@@ -368,18 +368,6 @@ public class ExplicitNotNullable {
     consume(c);
   }
 
-  interface Function<I extends @Nullable Object, O extends @Nullable Object> {
-    O apply(I i);
-  }
-
-  Function<String, String> i =
-      new Function<String, String>() {
-        @Override
-        public String apply(String s) {
-          return s;
-        }
-      };
-
   // Replicates wildcard problems in Guava's PairwiseEquivalence.
   static class DependentTypeParameters<E, T extends @Nullable E> {
     DependentTypeParameters<E, T> getThis() {
