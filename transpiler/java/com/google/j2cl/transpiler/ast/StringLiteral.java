@@ -38,7 +38,7 @@ public class StringLiteral extends Literal {
 
   @Override
   public String getSourceText() {
-    return "\'" + StringUtils.escape(value) + "\'";
+    return "\'" + StringUtils.escapeAsWtf16(value) + "\'";
   }
 
   public ImmutableList<NumberLiteral> toCharLiterals() {

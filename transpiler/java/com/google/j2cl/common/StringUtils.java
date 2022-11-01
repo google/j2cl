@@ -21,24 +21,52 @@ import static java.util.stream.Collectors.joining;
 /** Utilities to produce Strings in code. */
 public final class StringUtils {
 
-  public static String escape(String string) {
-    // The chars in the CharSequence are already in UTF16. Hence iterate over the 16 bits chars
+  public static String escapeAsWtf16(String string) {
+    // The chars in the CharSequence are already in WTF16. Hence iterate over the 16 bits chars
     // and decide how to encode in the string.
-    return string.chars().mapToObj(StringUtils::escape).collect(joining());
+    return string.chars().mapToObj(StringUtils::escapeAsWtf16).collect(joining());
   }
 
-  /** Decides how to encode a char as in a String. */
-  public static String escape(int c) {
-    checkArgument(c <= 0xFFFF);
+  public static String escapeAsWtf16(int c) {
+    return escape(c, /* forUtf8= */ false);
+  }
+  /** Converts a potentially ill-formed UTF-16 string (WTF-16) into a UTF-8 string literal. */
+  public static String escapeAsUtf8(String string) {
+    StringBuilder escaped = new StringBuilder();
+    string
+        .codePoints()
+        .forEach(
+            codepoint -> {
+              if (codepoint < 0x80) {
+                escaped.append(escapeAsUtf8(codepoint));
+              } else if (codepoint < 0x800) {
+                escaped.append(escapeAsUtf8(0xC0 | (codepoint >> 6))); // upper bits
+                escaped.append(escapeAsUtf8(0x80 | (codepoint & 0x3F))); // bits 0-5
+              } else if (codepoint < 0x10000) {
+                escaped.append(escapeAsUtf8(0xE0 | (codepoint >> 12))); // upper bits
+                escaped.append(escapeAsUtf8(0x80 | ((codepoint >> 6) & 0x3F))); // bits 6-11
+                escaped.append(escapeAsUtf8(0x80 | (codepoint & 0x3F))); // bits 0-5
+              } else {
+                escaped.append(escapeAsUtf8(0xF0 | (codepoint >> 18))); // upper bits
+                escaped.append(escapeAsUtf8(0x80 | ((codepoint >> 12) & 0x3F))); // bits 12-17
+                escaped.append(escapeAsUtf8(0x80 | ((codepoint >> 6) & 0x3F))); // bits 6-11
+                escaped.append(escapeAsUtf8(0x80 | (codepoint & 0x3F))); // bits 0-5
+              }
+            });
+    return escaped.toString();
+  }
+
+  private static String escapeAsUtf8(int c) {
+    return escape(c, /* forUtf8= */ true);
+  }
+
+  /** Produce a readable encoding of a byte in a String. */
+  private static String escape(int c, boolean forUtf8) {
     switch (c) {
-      case 0x08: // backspace
-        return "\\b";
       case 0x09: // tab
         return "\\t";
       case 0x0A: // newline
         return "\\n";
-      case 0x0C: // formfeed
-        return "\\f";
       case 0x0D: // return
         return "\\r";
       case 0x22: // "
@@ -47,12 +75,18 @@ public final class StringUtils {
         return "\\'";
       case 0x5c: // \
         return "\\\\";
-      default:
-        if (c >= 0x20 && c < 0x7F) {
-          // These characters do not need escaping
-          return String.valueOf((char) c);
-        }
-        return String.format("\\u%04X", c);
+    }
+
+    // The rest of the ascii range characters do not need escaping in either representation.
+    if (c >= 0x20 && c < 0x7F) {
+      return String.valueOf((char) c);
+    }
+
+    if (forUtf8) {
+      checkArgument(c >= 0 && c <= 0xFF);
+      return String.format("\\%02X", (byte) c);
+    } else {
+      return String.format("\\u%04X", c);
     }
   }
 

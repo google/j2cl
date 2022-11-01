@@ -50,7 +50,7 @@ public class NormalizeLiterals extends NormalizationPass {
               }
             } else if (TypeDescriptors.isPrimitiveChar(numberLiteral.getTypeDescriptor())) {
               return numberLiteral.withComment(
-                  "'" + StringUtils.escape(numberLiteral.getValue().intValue()) + "'");
+                  "'" + StringUtils.escapeAsWtf16(numberLiteral.getValue().intValue()) + "'");
 
             } else {
               return numberLiteral;
