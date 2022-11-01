@@ -21,7 +21,7 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 
 /** Resolves implicit qualifiers for instance members and constructors. */
-public class ResolveImplicitInstanceQualifiers extends LibraryNormalizationPass {
+public class ResolveImplicitInstanceQualifiers extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
 

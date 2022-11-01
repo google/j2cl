@@ -19,18 +19,18 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.Type;
 import javax.annotation.Nullable;
 
 /** Performs static evaluation of string concatenation on constants. */
-public class StaticallyEvaluateStringConcatenation extends LibraryNormalizationPass {
+public class StaticallyEvaluateStringConcatenation extends NormalizationPass {
 
   @Override
-  public void applyTo(Library library) {
-    library.accept(
+  public void applyTo(Type type) {
+    type.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
