@@ -20,6 +20,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
 public class DefaultNullable {
@@ -312,4 +313,27 @@ public class DefaultNullable {
   static <T> void testListOfWildcardSuperDefaultNullabilityVariable(List<? super T> l) {}
 
   static <T> void testListOfWildcardSuperNullableVariable(List<? super @Nullable T> l) {}
+
+  @NullMarked
+  interface Supplier<T extends @Nullable Object> {
+    T get();
+  }
+
+  @NullMarked
+  interface Consumer<T extends @Nullable Object> {
+    void accept(T t);
+  }
+
+  @NullMarked
+  interface IntFunction<T extends @Nullable Object> {
+    T accept(int i);
+  }
+
+  static void testNonNullableLambdas() {
+    Consumer<String> lambda = s -> {};
+    Supplier<String> constructorReference = String::new;
+    IntFunction<String[]> newArrayReference = String[]::new;
+  }
+
+  static void accept(String s) {}
 }

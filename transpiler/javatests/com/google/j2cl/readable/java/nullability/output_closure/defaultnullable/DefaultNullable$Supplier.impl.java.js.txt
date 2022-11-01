@@ -1,8 +1,8 @@
-goog.module('nullability.explicitnotnullable.ExplicitNotNullable.Supplier$impl');
+goog.module('nullability.defaultnullable.DefaultNullable.Supplier$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Supplier.$LambdaAdaptor$impl');
+let $LambdaAdaptor = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.Supplier.$LambdaAdaptor$impl');
 
 /**
  * @interface
@@ -23,21 +23,21 @@ class Supplier {
  }
  
  static $markImplementor(/** Function */ ctor) {
-  ctor.prototype.$implements__nullability_explicitnotnullable_ExplicitNotNullable_Supplier = true;
+  ctor.prototype.$implements__nullability_defaultnullable_DefaultNullable_Supplier = true;
  }
  /** @nodts @return {boolean} */
  static $isInstance(/** ? */ instance) {
-  return instance != null && !!instance.$implements__nullability_explicitnotnullable_ExplicitNotNullable_Supplier;
+  return instance != null && !!instance.$implements__nullability_defaultnullable_DefaultNullable_Supplier;
  }
  
  /** @nodts */
  static $loadModules() {
-  $LambdaAdaptor = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Supplier.$LambdaAdaptor$impl');
+  $LambdaAdaptor = goog.module.get('nullability.defaultnullable.DefaultNullable.Supplier.$LambdaAdaptor$impl');
  }
 }
 Supplier.$markImplementor(/**@type {Function}*/ (Supplier));
-$Util.$setClassMetadataForInterface(Supplier, 'nullability.explicitnotnullable.ExplicitNotNullable$Supplier');
+$Util.$setClassMetadataForInterface(Supplier, 'nullability.defaultnullable.DefaultNullable$Supplier');
 
 exports = Supplier;
 
-//# sourceMappingURL=ExplicitNotNullable$Supplier.js.map
+//# sourceMappingURL=DefaultNullable$Supplier.js.map

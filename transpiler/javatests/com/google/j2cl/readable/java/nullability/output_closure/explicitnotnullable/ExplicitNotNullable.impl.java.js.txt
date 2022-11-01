@@ -7,8 +7,10 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let DefaultNullable = goog.forwardDeclare('nullability.explicitnotnullable.DefaultNullable$impl');
+let $1 = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.$1$impl');
 let Consumer = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
 let DependentTypeParameters = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters$impl');
+let ExplicitNotNullable_Function = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Function$impl');
 let IntFunction = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction$impl');
 let ParameterizedDefaultNullability = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedDefaultNullability$impl');
 let ParameterizedNonNullable = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.ParameterizedNonNullable$impl');
@@ -79,6 +81,8 @@ class ExplicitNotNullable extends j_l_Object {
   this.f_collection__nullability_explicitnotnullable_ExplicitNotNullable;
   /**@type {Consumer<?>} @nodts*/
   this.f_nonNullableCollection__nullability_explicitnotnullable_ExplicitNotNullable;
+  /**@type {!ExplicitNotNullable_Function<string, string>} @nodts*/
+  this.f_i__nullability_explicitnotnullable_ExplicitNotNullable;
  }
  /** @nodts @return {!ExplicitNotNullable} */
  static $create__() {
@@ -342,6 +346,7 @@ class ExplicitNotNullable extends j_l_Object {
   this.f_f24__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<Array<number>>}*/ ($Arrays.$init([], $$char, 2));
   this.f_f25__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<Array<number>>}*/ ($Arrays.$init([], $$char, 2));
   this.f_f26__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<Array<number>>}*/ ($Arrays.$init([], $$char, 2));
+  this.f_i__nullability_explicitnotnullable_ExplicitNotNullable = $1.$create__nullability_explicitnotnullable_ExplicitNotNullable(this);
  }
  /** @nodts */
  static $clinit() {
@@ -359,6 +364,7 @@ class ExplicitNotNullable extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   DefaultNullable = goog.module.get('nullability.explicitnotnullable.DefaultNullable$impl');
+  $1 = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.$1$impl');
   Consumer = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Consumer$impl');
   IntFunction = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.IntFunction$impl');
   Supplier = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Supplier$impl');

@@ -4,10 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Consumer = goog.forwardDeclare('j2ktnotpassing.NotNullable.Consumer$impl');
-let IntFunction = goog.forwardDeclare('j2ktnotpassing.NotNullable.IntFunction$impl');
-let Supplier = goog.forwardDeclare('j2ktnotpassing.NotNullable.Supplier$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class DefaultNullable extends j_l_Object {
@@ -29,18 +26,9 @@ class DefaultNullable extends j_l_Object {
  /** @nodts */
  static m_testNonNullableLambdas__void() {
   DefaultNullable.$clinit();
-  let lambda = Consumer.$adapt((s) =>{
-   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
-  });
   let methodReference = Consumer.$adapt((arg0) =>{
    let arg0_1 = /**@type {?string}*/ ($Casts.$to(arg0, j_l_String));
    DefaultNullable.m_accept__java_lang_String__void(arg0_1);
-  });
-  let constructorReference = Supplier.$adapt(() =>{
-   return j_l_String.$create__();
-  });
-  let newArrayReference = IntFunction.$adapt((/** number */ arg0_2) =>{
-   return /**@type {!Array<?string>}*/ ($Arrays.$create([arg0_2], j_l_String));
   });
  }
  /** @nodts */
@@ -61,10 +49,7 @@ class DefaultNullable extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Consumer = goog.module.get('j2ktnotpassing.NotNullable.Consumer$impl');
-  IntFunction = goog.module.get('j2ktnotpassing.NotNullable.IntFunction$impl');
-  Supplier = goog.module.get('j2ktnotpassing.NotNullable.Supplier$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
-  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }
 }

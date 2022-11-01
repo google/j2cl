@@ -86,6 +86,12 @@ open class ExplicitNotNullable {
   this.nonNullableCollection = nc
  }
 
+ @kotlin.jvm.JvmField var i: nullability.explicitnotnullable.ExplicitNotNullable.Function<kotlin.String, kotlin.String> = object : nullability.explicitnotnullable.ExplicitNotNullable.Function<kotlin.String, kotlin.String> {
+  open override fun apply(s: kotlin.String): kotlin.String {
+   return s
+  }
+ }
+
  open fun testDependentWildcards(x: nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters<*, *>): nullability.explicitnotnullable.ExplicitNotNullable.DependentTypeParameters<*, *> {
   return x
  }
@@ -250,10 +256,10 @@ open class ExplicitNotNullable {
    } as nullability.explicitnotnullable.ExplicitNotNullable.Consumer<kotlin.String>?
    val newObject: nullability.explicitnotnullable.ExplicitNotNullable.Supplier<kotlin.Any>? = nullability.explicitnotnullable.ExplicitNotNullable.Supplier {
     return@Supplier kotlin.Any()
-   } as nullability.explicitnotnullable.ExplicitNotNullable.Supplier<kotlin.Any>?
+   }
    val newArray: nullability.explicitnotnullable.ExplicitNotNullable.IntFunction<kotlin.Array<kotlin.Any>>? = nullability.explicitnotnullable.ExplicitNotNullable.IntFunction { arg0_2: kotlin.Int ->
     return@IntFunction kotlin.arrayOfNulls<kotlin.Any>(arg0_2) as kotlin.Array<kotlin.Any>
-   } as nullability.explicitnotnullable.ExplicitNotNullable.IntFunction<kotlin.Array<kotlin.Any>>?
+   }
   }
 
   @kotlin.jvm.JvmStatic
@@ -383,6 +389,10 @@ open class ExplicitNotNullable {
 
  fun interface IntFunction<T> {
   fun accept(i: kotlin.Int): T
+ }
+
+ fun interface Function<I, O> {
+  fun apply(i: I): O
  }
 
  open class DependentTypeParameters<E: kotlin.Any, T: E?> {
