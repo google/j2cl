@@ -2,15 +2,16 @@
 package innerclasswithconstructor
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class InnerClassWithConstructor {
- @kotlin.jvm.JvmField var a: kotlin.Int = 0
+ @JvmField var a: Int = 0
 
  open inner class InnerClass {
-  @kotlin.jvm.JvmField var b: kotlin.Int = 0
+  @JvmField var b: Int = 0
 
-  constructor(b: kotlin.Int) {
+  constructor(b: Int) {
    this.b = this@InnerClassWithConstructor.a + b
   }
 

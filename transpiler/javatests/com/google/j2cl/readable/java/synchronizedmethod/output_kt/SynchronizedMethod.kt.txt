@@ -2,30 +2,35 @@
 package synchronizedmethod
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.jvm.javaObjectType
+import kotlin.synchronized
+import synchronizedmethod.SynchronizedMethod
 
 open class SynchronizedMethod {
- @kotlin.jvm.JvmField var a_private_2: kotlin.Int = 0
+ @JvmField var a_private_2: Int = 0
 
- @kotlin.jvm.JvmField var b_private_2: kotlin.Int = 0
+ @JvmField var b_private_2: Int = 0
 
  open fun method() {
-  kotlin.synchronized(this) {
+  synchronized(this) {
    this.a_private_2 = this.a_private_2 + 1
    this.b_private_2 = this.b_private_2 - 1
   }
  }
 
  companion object {
-  @kotlin.jvm.JvmField var sa_private_2: kotlin.Int = 0
+  @JvmField var sa_private_2: Int = 0
 
-  @kotlin.jvm.JvmField var sb_private_2: kotlin.Int = 0
+  @JvmField var sb_private_2: Int = 0
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun staticMethod() {
-   kotlin.synchronized(synchronizedmethod.SynchronizedMethod::class.javaObjectType) {
-    synchronizedmethod.SynchronizedMethod.sa_private_2 = synchronizedmethod.SynchronizedMethod.sa_private_2 + 1
-    synchronizedmethod.SynchronizedMethod.sb_private_2 = synchronizedmethod.SynchronizedMethod.sb_private_2 - 1
+   synchronized(SynchronizedMethod::class.javaObjectType) {
+    SynchronizedMethod.sa_private_2 = SynchronizedMethod.sa_private_2 + 1
+    SynchronizedMethod.sb_private_2 = SynchronizedMethod.sb_private_2 - 1
    }
   }
  }

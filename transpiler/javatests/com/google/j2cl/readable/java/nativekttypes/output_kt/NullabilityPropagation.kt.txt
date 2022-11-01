@@ -2,50 +2,51 @@
 package nativekttypes
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.String
+import nativekttypes.NullabilityPropagation
 
 class NullabilityPropagation {
  interface NullabilityToPropagate {
-  fun nullableReturnType1(): kotlin.String?
+  fun nullableReturnType1(): String?
 
-  fun nullableReturnType2(): kotlin.String?
+  fun nullableReturnType2(): String?
 
-  fun nonNullReturnType1(): kotlin.String
+  fun nonNullReturnType1(): String
 
-  fun nonNullReturnType2(): kotlin.String
+  fun nonNullReturnType2(): String
 
-  fun nullableParameter1(s: kotlin.String?)
+  fun nullableParameter1(s: String?)
 
-  fun nullableParameter2(s: kotlin.String?)
+  fun nullableParameter2(s: String?)
 
-  fun nonNullParameter1(s: kotlin.String)
+  fun nonNullParameter1(s: String)
 
-  fun nonNullParameter2(s: kotlin.String)
+  fun nonNullParameter2(s: String)
  }
 
- open inner class Subtype: nativekttypes.NullabilityPropagation.NullabilityToPropagate {
-  open override fun nullableReturnType1(): kotlin.String? {
+ open inner class Subtype: NullabilityPropagation.NullabilityToPropagate {
+  open override fun nullableReturnType1(): String? {
    return ""
   }
 
-  open override fun nullableReturnType2(): kotlin.String {
+  open override fun nullableReturnType2(): String {
    return ""
   }
 
-  open override fun nonNullReturnType1(): kotlin.String {
+  open override fun nonNullReturnType1(): String {
    return ""
   }
 
-  open override fun nonNullReturnType2(): kotlin.String {
+  open override fun nonNullReturnType2(): String {
    return ""
   }
 
-  open override fun nullableParameter1(s: kotlin.String?) {}
+  open override fun nullableParameter1(s: String?) {}
 
-  open override fun nullableParameter2(s: kotlin.String?) {}
+  open override fun nullableParameter2(s: String?) {}
 
-  open override fun nonNullParameter1(s: kotlin.String) {}
+  open override fun nonNullParameter1(s: String) {}
 
-  open override fun nonNullParameter2(s: kotlin.String) {}
+  open override fun nonNullParameter2(s: String) {}
  }
 }

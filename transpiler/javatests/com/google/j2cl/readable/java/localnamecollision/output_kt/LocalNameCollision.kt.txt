@@ -2,28 +2,56 @@
 package localnamecollision
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.RuntimeException
+import kotlin.assert
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import localnamecollision.Asserts
+import localnamecollision.Class
+import localnamecollision.LocalNameCollision
+import localnamecollision.package1.A
 
 open class LocalNameCollision {
  open fun testClassLocalVarCollision() {
-  var LocalNameCollision: kotlin.Boolean = false
-  val RuntimeException: kotlin.Any? = null
-  val Asserts: kotlin.Int = 1
-  val ___Asserts: kotlin.Int = 1
-  val l_Asserts: kotlin.Int = 1
-  val com_google_j2cl_readable_localnamecollision_Class: kotlin.Int = 1
-  val com_google_j2cl_readable_localnamecollision_package1_A: kotlin.Int = 1
-  val com_google_j2cl_readable_localnamecollision_package2_A: kotlin.Int = 1
-  val A: kotlin.Int = 1
-  LocalNameCollision = RuntimeException is localnamecollision.LocalNameCollision || RuntimeException is kotlin.RuntimeException || RuntimeException is localnamecollision.package1.A || RuntimeException is localnamecollision.package2.A || RuntimeException is localnamecollision.Class
-  kotlin.assert(localnamecollision.Asserts().n() === 5)
+  var LocalNameCollision: Boolean = false
+  val RuntimeException: Any? = null
+  val Asserts: Int = 1
+  val ___Asserts: Int = 1
+  val l_Asserts: Int = 1
+  val com_google_j2cl_readable_localnamecollision_Class: Int = 1
+  val com_google_j2cl_readable_localnamecollision_package1_A: Int = 1
+  val com_google_j2cl_readable_localnamecollision_package2_A: Int = 1
+  val A: Int = 1
+  LocalNameCollision = RuntimeException is localnamecollision.LocalNameCollision || RuntimeException is kotlin.RuntimeException || RuntimeException is localnamecollision.package1.A || RuntimeException is localnamecollision.package2.A || RuntimeException is Class
+  assert(localnamecollision.Asserts().n() === 5)
  }
 
- open fun testClassParameterCollision(LocalNameCollision: kotlin.Boolean, Asserts: kotlin.Any?, ___Asserts: kotlin.Any?, l_Asserts: kotlin.Int, A: kotlin.Int): kotlin.Boolean {
+ open fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int): Boolean {
   return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts === A
  }
 
- constructor(LocalNameCollision: kotlin.Boolean, Asserts: kotlin.Any?, ___Asserts: kotlin.Any?, l_Asserts: kotlin.Int, A: kotlin.Int) {
-  val result: kotlin.Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts === A
+ constructor(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int) {
+  val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts === A
  }
+}
+
+open class A {
+ companion object {
+  @JvmField var A: localnamecollision.A? = null
+
+  @JvmField var B: localnamecollision.A.B? = null
+
+  @JvmStatic
+  fun test() {
+   localnamecollision.A.A = localnamecollision.A.A
+   localnamecollision.A.B = localnamecollision.A.B
+   localnamecollision.A.A = localnamecollision.A.A
+   localnamecollision.A.B = localnamecollision.A.B
+  }
+ }
+
+ open class B {}
 }

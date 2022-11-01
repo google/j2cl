@@ -2,12 +2,14 @@
 package staticfieldinitializer
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
+import staticfieldinitializer.StaticFieldInitializer
 
 open class StaticFieldInitializer {
  companion object {
-  @kotlin.jvm.JvmField var a: kotlin.Int = 2
+  @JvmField var a: Int = 2
 
-  @kotlin.jvm.JvmField var b: kotlin.Int = staticfieldinitializer.StaticFieldInitializer.a * 4
+  @JvmField var b: Int = StaticFieldInitializer.a * 4
  }
 }

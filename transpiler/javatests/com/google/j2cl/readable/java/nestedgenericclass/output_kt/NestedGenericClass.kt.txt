@@ -2,15 +2,20 @@
 package nestedgenericclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Error
+import kotlin.Exception
+import kotlin.Number
+import kotlin.jvm.JvmField
+import nestedgenericclass.NestedGenericClass
 
 open class NestedGenericClass<T> {
  open fun <S> `fun`(t: S) {
   open class ___1E<S> {}
   open class ___1F {
-   @kotlin.jvm.JvmField var f: S = null as S
+   @JvmField var f: S = null as S
   }
-  ___1E<kotlin.Number?>()
+  ___1E<Number?>()
   ___1F()
  }
 
@@ -18,16 +23,16 @@ open class NestedGenericClass<T> {
   open class ___1G<T> {
    open fun <T_1> bar() {
     open class ___1H<T> {}
-    ___1H<kotlin.Number?>()
+    ___1H<Number?>()
    }
   }
-  ___1G<kotlin.Error?>().bar<kotlin.Any?>()
+  ___1G<Error?>().bar<Any?>()
  }
 
  open fun test() {
-  val n: nestedgenericclass.NestedGenericClass<kotlin.Number?>? = nestedgenericclass.NestedGenericClass<kotlin.Number?>()
-  val a: nestedgenericclass.NestedGenericClass<kotlin.Number?>.A<kotlin.Error?>? = n!!.A<kotlin.Error?>()
-  val b: nestedgenericclass.NestedGenericClass<kotlin.Number?>.A<kotlin.Error?>.B<kotlin.Exception?>? = a!!.B<kotlin.Exception?>()
+  val n: NestedGenericClass<Number?>? = NestedGenericClass<Number?>()
+  val a: NestedGenericClass<Number?>.A<Error?>? = n!!.A<Error?>()
+  val b: NestedGenericClass<Number?>.A<Error?>.B<Exception?>? = a!!.B<Exception?>()
   n!!.C()
   n!!.C().D()
  }
@@ -39,14 +44,14 @@ open class NestedGenericClass<T> {
  }
 
  open inner class C {
-  @kotlin.jvm.JvmField var c: T = null as T
+  @JvmField var c: T = null as T
 
   open inner class D {
-   @kotlin.jvm.JvmField var d: T = null as T
+   @JvmField var d: T = null as T
   }
  }
 
- open inner class RecursiveTypeVariable<T: nestedgenericclass.NestedGenericClass<T>.RecursiveTypeVariable<T>?> {
+ open inner class RecursiveTypeVariable<T: NestedGenericClass<T>.RecursiveTypeVariable<T>?> {
   open fun test() {
    val t: T? = null
    t!!.Inner()

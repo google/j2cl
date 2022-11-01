@@ -2,7 +2,7 @@
 package innerclassinheritance
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import innerclassinheritance.MultipleNestings
 
 open class MultipleNestings {
  open fun funInM() {}
@@ -11,10 +11,10 @@ open class MultipleNestings {
   open fun `fun`() {}
  }
 
- open inner class InnerClass1: innerclassinheritance.MultipleNestings.Parent() {
+ open inner class InnerClass1: MultipleNestings.Parent() {
   open fun funInI1() {}
 
-  open inner class InnerClass2: innerclassinheritance.MultipleNestings.Parent() {
+  open inner class InnerClass2: MultipleNestings.Parent() {
    open fun funInI2() {}
 
    open fun test() {

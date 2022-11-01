@@ -2,13 +2,15 @@
 package nativekttypes.nativekt
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class KCompanionObject {
  companion object {
-  @kotlin.jvm.JvmField var staticField: kotlin.Int = 0
+  @JvmField var staticField: Int = 0
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun staticMethod() {}
  }
 }

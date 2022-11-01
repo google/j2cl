@@ -2,45 +2,49 @@
 package protobuf
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import com.google.protobuf.GeneratedMessage
+import kotlin.Int
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import protobuf.MyMessage
 
-open class MyMessage: com.google.protobuf.GeneratedMessage {
- @kotlin.jvm.JvmField val testField: kotlin.Int
+open class MyMessage: GeneratedMessage {
+ @JvmField val testField: Int
 
- open fun getTestField(): kotlin.Int {
+ open fun getTestField(): Int {
   return this.testField
  }
 
- constructor(testField: kotlin.Int) {
+ constructor(testField: Int) {
   this.testField = testField
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun getDefaultInstance(): protobuf.MyMessage? {
-   return protobuf.MyMessage(0)
+  @JvmStatic
+  fun getDefaultInstance(): MyMessage? {
+   return MyMessage(0)
   }
 
-  @kotlin.jvm.JvmStatic
-  fun newBuilder(): protobuf.MyMessage.Builder? {
-   return protobuf.MyMessage.Builder()
+  @JvmStatic
+  fun newBuilder(): MyMessage.Builder? {
+   return MyMessage.Builder()
   }
  }
 
- open class Builder: com.google.protobuf.GeneratedMessage.Builder {
-  @kotlin.jvm.JvmField var testField: kotlin.Int = 0
+ open class Builder: GeneratedMessage.Builder {
+  @JvmField var testField: Int = 0
 
-  open fun getTestField(): kotlin.Int {
+  open fun getTestField(): Int {
    return this.testField
   }
 
-  open fun setTestField(testField: kotlin.Int): protobuf.MyMessage.Builder? {
+  open fun setTestField(testField: Int): MyMessage.Builder? {
    this.testField = testField
    return this
   }
 
-  open fun build(): protobuf.MyMessage? {
-   return protobuf.MyMessage(this@Builder.testField)
+  open fun build(): MyMessage? {
+   return MyMessage(this@Builder.testField)
   }
 
   constructor()

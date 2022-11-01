@@ -2,44 +2,50 @@
 package anonymousclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import anonymousclass.SomeClass
+import anonymousclass.SomeClassWithStaticMembers
+import kotlin.Any
+import kotlin.Int
+import kotlin.String
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 abstract class SomeClass {
- abstract fun foo(): kotlin.String?
+ abstract fun foo(): String?
 
- constructor(i: kotlin.Int)
+ constructor(i: Int)
 }
 
 abstract class SomeClassWithStaticMembers {
- abstract fun foo(): kotlin.String?
+ abstract fun foo(): String?
 
- constructor(i: kotlin.Int)
+ constructor(i: Int)
 
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun staticMethod() {}
  }
 }
 
 open class AnonymousClass {
- @kotlin.jvm.JvmField var i: kotlin.Int = 0
+ @JvmField var i: Int = 0
 
  open fun main() {
-  val instance: anonymousclass.SomeClass? = object : anonymousclass.SomeClass(this@AnonymousClass.i) {
-   @kotlin.jvm.JvmField var `object`: kotlin.Any? = this
+  val instance: SomeClass? = object : SomeClass(this@AnonymousClass.i) {
+   @JvmField var `object`: Any? = this
 
-   @kotlin.jvm.JvmField var outer: kotlin.Any? = this@AnonymousClass
+   @JvmField var outer: Any? = this@AnonymousClass
 
-   open override fun foo(): kotlin.String? {
+   open override fun foo(): String? {
     return "a"
    }
   }
-  val instanceWithStaticMembers: anonymousclass.SomeClassWithStaticMembers? = object : anonymousclass.SomeClassWithStaticMembers(this@AnonymousClass.i) {
-   @kotlin.jvm.JvmField var `object`: kotlin.Any? = this
+  val instanceWithStaticMembers: SomeClassWithStaticMembers? = object : SomeClassWithStaticMembers(this@AnonymousClass.i) {
+   @JvmField var `object`: Any? = this
 
-   @kotlin.jvm.JvmField var outer: kotlin.Any? = this@AnonymousClass
+   @JvmField var outer: Any? = this@AnonymousClass
 
-   open override fun foo(): kotlin.String? {
+   open override fun foo(): String? {
     return "a"
    }
   }
@@ -48,8 +54,8 @@ open class AnonymousClass {
 
 interface SomeInterface {
  companion object {
-  @kotlin.jvm.JvmField val implicitlyStatic: anonymousclass.SomeClass? = object : anonymousclass.SomeClass(1) {
-   open override fun foo(): kotlin.String? {
+  @JvmField val implicitlyStatic: SomeClass? = object : SomeClass(1) {
+   open override fun foo(): String? {
     return "a"
    }
   }

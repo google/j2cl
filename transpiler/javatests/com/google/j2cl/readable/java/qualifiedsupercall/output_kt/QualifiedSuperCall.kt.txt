@@ -2,16 +2,16 @@
 package qualifiedsupercall
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import qualifiedsupercall.Parent
 
 open class Parent {
  open fun `fun`() {}
 }
 
-open class QualifiedSuperCall: qualifiedsupercall.Parent() {
+open class QualifiedSuperCall: Parent() {
  open inner class InnerClass {
   open fun test() {
-   super<qualifiedsupercall.Parent>@QualifiedSuperCall.`fun`()
+   super<Parent>@QualifiedSuperCall.`fun`()
   }
  }
 }

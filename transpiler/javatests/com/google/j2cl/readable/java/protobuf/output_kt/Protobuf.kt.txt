@@ -2,16 +2,16 @@
 package protobuf
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import protobuf.MyMessage
 
 open class Protobuf {
  open fun test() {
-  val builder = protobuf.MyMessage.newBuilder()
+  val builder = MyMessage.newBuilder()
   builder!!.setTestField(42)
   builder!!.testField
-  val message: protobuf.MyMessage? = builder!!.build()
+  val message: MyMessage? = builder!!.build()
   message!!.testField
-  val defaultMessage: protobuf.MyMessage? = protobuf.MyMessage.getDefaultInstance()
+  val defaultMessage: MyMessage? = MyMessage.getDefaultInstance()
   defaultMessage!!.testField
  }
 }

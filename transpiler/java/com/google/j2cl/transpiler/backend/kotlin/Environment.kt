@@ -20,9 +20,18 @@ import com.google.j2cl.transpiler.ast.HasName
 /** Code generation environment. */
 data class Environment(
   /** Name to identifier mapping. */
-  private val nameToIdentifierMap: Map<HasName, String> = emptyMap()
+  private val nameToIdentifierMap: Map<HasName, String> = emptyMap(),
+
+  /** A set of used identifiers, which potentially shadow imports. */
+  private val identifierSet: Set<String> = emptySet(),
+
+  /** Mutable map from simple name to qualified name of types to be imported. */
+  val importedSimpleNameToQualifiedNameMap: MutableMap<String, String> = mutableMapOf()
 ) {
   /** Returns identifier for the given name */
   fun identifier(hasName: HasName): String =
     nameToIdentifierMap[hasName] ?: error("No such identifier: $hasName")
+
+  /** Returns whether the given identifier is used. */
+  fun containsIdentifier(identifier: String): Boolean = identifierSet.contains(identifier)
 }

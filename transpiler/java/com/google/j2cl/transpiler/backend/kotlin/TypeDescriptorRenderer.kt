@@ -35,6 +35,28 @@ internal fun Renderer.renderTypeDescriptor(
     )
     .render(typeDescriptor)
 
+internal fun Renderer.renderQualifiedName(
+  typeDescriptor: TypeDescriptor,
+  asSuperType: Boolean = false
+) {
+  if (typeDescriptor is DeclaredTypeDescriptor) {
+    if (typeDescriptor.typeDeclaration.isLocal) {
+      renderIdentifier(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
+    } else {
+      val enclosingTypeDescriptor = typeDescriptor.enclosingTypeDescriptor
+      if (enclosingTypeDescriptor == null) {
+        renderQualifiedName(typeDescriptor.ktQualifiedName(asSuperType))
+      } else {
+        renderQualifiedName(enclosingTypeDescriptor)
+        render(".")
+        renderIdentifier(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
+      }
+    }
+  } else {
+    renderQualifiedName(typeDescriptor.ktQualifiedName(asSuperType))
+  }
+}
+
 internal fun Renderer.renderTypeArguments(typeArguments: List<TypeArgument>) =
   TypeDescriptorRenderer(this).renderArguments(typeArguments)
 
@@ -62,7 +84,7 @@ private data class TypeDescriptorRenderer(
       when (typeDescriptor) {
         is ArrayTypeDescriptor -> renderArray(typeDescriptor)
         is DeclaredTypeDescriptor -> renderDeclared(typeDescriptor)
-        is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor.ktQualifiedName())
+        is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor)
         is TypeVariable -> renderVariable(typeDescriptor)
         is IntersectionTypeDescriptor -> renderIntersection(typeDescriptor)
         else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
@@ -71,7 +93,7 @@ private data class TypeDescriptorRenderer(
   }
 
   fun renderArray(arrayTypeDescriptor: ArrayTypeDescriptor) {
-    renderer.renderQualifiedName(arrayTypeDescriptor.ktQualifiedName())
+    renderer.renderQualifiedName(arrayTypeDescriptor)
     val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor
     if (!componentTypeDescriptor.isPrimitive) {
       renderer.renderInAngleBrackets { child.render(componentTypeDescriptor) }
@@ -82,18 +104,13 @@ private data class TypeDescriptorRenderer(
   fun renderDeclared(declaredTypeDescriptor: DeclaredTypeDescriptor) {
     val typeDeclaration = declaredTypeDescriptor.typeDeclaration
     val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
-    if (typeDeclaration.isLocal || enclosingTypeDescriptor == null) {
-      renderer.renderQualifiedName(
-        declaredTypeDescriptor.ktQualifiedName(asSuperType = asSuperType)
-      )
+    val isStatic = !typeDeclaration.isCapturingEnclosingInstance
+    if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic) {
+      renderer.renderQualifiedName(declaredTypeDescriptor, asSuperType)
     } else {
-      if (!typeDeclaration.isCapturingEnclosingInstance) {
-        renderer.renderQualifiedName(enclosingTypeDescriptor.ktQualifiedName())
-      } else {
-        child.renderDeclared(enclosingTypeDescriptor.toNonNullable())
-      }
+      child.renderDeclared(enclosingTypeDescriptor.toNonNullable())
       renderer.render(".")
-      renderer.renderIdentifier(typeDeclaration.ktSimpleName)
+      renderer.renderIdentifier(typeDeclaration.ktSimpleName(asSuperType))
     }
     renderArguments(declaredTypeDescriptor)
     renderNullableSuffix(declaredTypeDescriptor)

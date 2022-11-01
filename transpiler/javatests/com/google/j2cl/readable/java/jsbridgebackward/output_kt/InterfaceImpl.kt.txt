@@ -2,16 +2,18 @@
 package jsbridgebackward
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsbridgebackward.A
+import jsbridgebackward.MyJsInterface
+import kotlin.Int
 
 fun interface MyJsInterface {
- fun foo(a: kotlin.Int): kotlin.Int
+ fun foo(a: Int): Int
 }
 
 open class A {
- open fun foo(a: kotlin.Int): kotlin.Int {
+ open fun foo(a: Int): Int {
   return a
  }
 }
 
-open class InterfaceImpl: jsbridgebackward.MyJsInterface, jsbridgebackward.A() {}
+open class InterfaceImpl: MyJsInterface, A() {}

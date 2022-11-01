@@ -2,8 +2,9 @@
 package packageinfo.subpackage
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.jvm.JvmField
+import packageinfo.Outer
 
 open class Foo {
- @kotlin.jvm.JvmField var outer: packageinfo.Outer? = packageinfo.Outer()
+ @JvmField var outer: Outer? = Outer()
 }

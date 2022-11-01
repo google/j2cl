@@ -2,13 +2,14 @@
 package srcjar
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.jvm.JvmStatic
+import srcjar.Foo
 
 open class Srcjar {
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun test() {
-   val foo: srcjar.Foo? = srcjar.Foo()
+   val foo: Foo? = Foo()
   }
  }
 }

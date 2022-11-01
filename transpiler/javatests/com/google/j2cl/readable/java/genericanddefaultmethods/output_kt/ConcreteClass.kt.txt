@@ -2,18 +2,21 @@
 package genericanddefaultmethods
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import genericanddefaultmethods.GenericClass
+import genericanddefaultmethods.InterfaceWithDefault
+import java.lang.System
+import kotlin.String
 
 interface InterfaceWithDefault {
- fun foo(value: kotlin.String?) {
-  java.lang.System.out!!.println("in InterfaceWithDefault")
+ fun foo(value: String?) {
+  System.out!!.println("in InterfaceWithDefault")
  }
 }
 
 open class GenericClass<T> {
  open fun foo(value: T) {
-  java.lang.System.out!!.println("in GenericClass")
+  System.out!!.println("in GenericClass")
  }
 }
 
-open class ConcreteClass: genericanddefaultmethods.InterfaceWithDefault, genericanddefaultmethods.GenericClass<kotlin.String?>() {}
+open class ConcreteClass: InterfaceWithDefault, GenericClass<String?>() {}

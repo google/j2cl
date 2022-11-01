@@ -75,3 +75,7 @@ internal fun TypeDescriptor.ktQualifiedName(asSuperType: Boolean = false): Strin
     else -> null
   }
     ?: error("$this.ktQualifiedName(asSuperType = $asSuperType)")
+
+internal fun String.qualifiedNameComponents(): List<String> = split(".")
+
+internal fun String.qualifiedNameToSimpleName(): String = qualifiedNameComponents().last()

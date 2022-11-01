@@ -2,26 +2,28 @@
 package rawtype
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.jvm.JvmField
+import rawtype.RawType
 
 open class RawType {
- @kotlin.jvm.JvmField var rawUnbound: rawtype.RawType.Unbound<kotlin.Any?>? = rawtype.RawType.Unbound<kotlin.Any?>()
+ @JvmField var rawUnbound: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
 
- @kotlin.jvm.JvmField var rawBound: rawtype.RawType.Bound<rawtype.RawType?>? = rawtype.RawType.Bound<rawtype.RawType?>()
+ @JvmField var rawBound: RawType.Bound<RawType?>? = RawType.Bound<RawType?>()
 
- @kotlin.jvm.JvmField var rawBoundRecursively: rawtype.RawType.BoundRecursively<*>? = rawtype.RawType.BoundRecursively()
+ @JvmField var rawBoundRecursively: RawType.BoundRecursively<*>? = RawType.BoundRecursively()
 
  open class Unbound<T> {}
 
- open class Bound<T: rawtype.RawType?> {}
+ open class Bound<T: RawType?> {}
 
- open class BoundRecursively<T: rawtype.RawType.BoundRecursively<T>?> {}
+ open class BoundRecursively<T: RawType.BoundRecursively<T>?> {}
 
- interface GenericSuperclass<T: rawtype.RawType?> {
+ interface GenericSuperclass<T: RawType?> {
   fun f(t: T) {}
  }
 
- open class RawSubclass: rawtype.RawType.GenericSuperclass<rawtype.RawType?> {
-  open override fun f(t: rawtype.RawType?) {}
+ open class RawSubclass: RawType.GenericSuperclass<RawType?> {
+  open override fun f(t: RawType?) {}
  }
 }

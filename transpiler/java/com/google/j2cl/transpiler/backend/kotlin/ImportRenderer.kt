@@ -15,14 +15,13 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
-import com.google.j2cl.transpiler.backend.kotlin.ast.imports
+import com.google.j2cl.transpiler.backend.kotlin.ast.defaultImports
 
-internal fun Renderer.renderImports(compilationUnit: CompilationUnit) {
-  val imports = compilationUnit.imports
+internal fun Renderer.renderImports(importedQualifiedNames: Set<String>) {
+  val imports = defaultImports + importedQualifiedNames.map { Import(it.qualifiedNameComponents()) }
   if (imports.isNotEmpty()) {
-    renderSeparatedWith(imports, "\n") { render(it) }
+    renderSeparatedWith(imports.sorted(), "\n") { render(it) }
     renderNewLine()
     renderNewLine()
   }

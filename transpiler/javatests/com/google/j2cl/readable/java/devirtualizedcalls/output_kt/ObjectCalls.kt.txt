@@ -2,16 +2,20 @@
 package devirtualizedcalls
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import devirtualizedcalls.ObjectCalls
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.arrayOfNulls
 
 open class ObjectCalls {
  open fun main() {
-  val `object`: kotlin.Any? = kotlin.Any()
+  val `object`: Any? = Any()
   `object`!!.equals(`object`)
   `object`!!.hashCode()
   `object`!!.toString()
   `object`!!.getClass()
-  val objectCalls: kotlin.Array<devirtualizedcalls.ObjectCalls?>? = kotlin.arrayOfNulls<devirtualizedcalls.ObjectCalls>(1)
+  val objectCalls: Array<ObjectCalls?>? = arrayOfNulls<ObjectCalls>(1)
   objectCalls!!.equals(objectCalls)
   objectCalls!!.hashCode()
   objectCalls!!.toString()
@@ -19,17 +23,17 @@ open class ObjectCalls {
  }
 
  open fun test() {
-  this.equals(kotlin.Any())
+  this.equals(Any())
   this.hashCode()
   this.toString()
   this.getClass()
-  this.equals(kotlin.Any())
+  this.equals(Any())
   this.hashCode()
   this.toString()
   this.getClass()
  }
 
- open fun testNotEquals(): kotlin.Boolean {
-  return !this.equals(kotlin.Any())
+ open fun testNotEquals(): Boolean {
+  return !this.equals(Any())
  }
 }

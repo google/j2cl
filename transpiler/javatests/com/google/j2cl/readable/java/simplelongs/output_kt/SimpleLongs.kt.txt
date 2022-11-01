@@ -2,68 +2,72 @@
 package simplelongs
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.Long
+import kotlin.jvm.JvmField
+import kotlin.run
+import simplelongs.SimpleLongs
 
 open class SimpleLongs {
- @kotlin.jvm.JvmField var foo: kotlin.Long = 0L
+ @JvmField var foo: Long = 0L
 
- open fun getBar(): kotlin.Long {
+ open fun getBar(): Long {
   return 0L
  }
 
- @kotlin.jvm.JvmField var sideEffect_private_2: kotlin.Int = 0
+ @JvmField var sideEffect_private_2: Int = 0
 
- open fun getWithSideEffect(): simplelongs.SimpleLongs? {
+ open fun getWithSideEffect(): SimpleLongs? {
   this.sideEffect_private_2 = this.sideEffect_private_2 + 1
   return this
  }
 
  open fun main() {
-  var a: kotlin.Long = 0L
+  var a: Long = 0L
   a = - 100000L
   a = 100000L
-  var b: kotlin.Long = - 2147483648L
+  var b: Long = - 2147483648L
   b = 2147483648L
-  b = kotlin.Long.MIN_VALUE
+  b = Long.MIN_VALUE
   b = 9223372036854775807L
-  var c: kotlin.Long = a + b
+  var c: Long = a + b
   c = a / b
-  var e: kotlin.Long = kotlin.run {
+  var e: Long = run {
    a = a + 1L
    a
   }
-  e = kotlin.run {
-   val ___qualifier: simplelongs.SimpleLongs = this
-   val ___value: kotlin.Long = this.foo + 1L
+  e = run {
+   val ___qualifier: SimpleLongs = this
+   val ___value: Long = this.foo + 1L
    ___qualifier!!.foo = ___value
    ___value
   }
-  e = kotlin.run {
-   val ___qualifier_1: simplelongs.SimpleLongs? = this.getWithSideEffect()
-   kotlin.run {
-    val ___qualifier_2: simplelongs.SimpleLongs? = ___qualifier_1
-    val ___value_1: kotlin.Long = ___qualifier_1!!.foo + 1L
+  e = run {
+   val ___qualifier_1: SimpleLongs? = this.getWithSideEffect()
+   run {
+    val ___qualifier_2: SimpleLongs? = ___qualifier_1
+    val ___value_1: Long = ___qualifier_1!!.foo + 1L
     ___qualifier_2!!.foo = ___value_1
     ___value_1
    }
   }
-  var f: kotlin.Long = kotlin.run {
-   val ___value_2: kotlin.Long = a
+  var f: Long = run {
+   val ___value_2: Long = a
    a = a + 1L
    ___value_2
   }
-  f = kotlin.run {
-   val ___value_3: kotlin.Long = this.foo
+  f = run {
+   val ___value_3: Long = this.foo
    this.foo = this.foo + 1L
    ___value_3
   }
-  f = kotlin.run {
-   val ___qualifier_3: simplelongs.SimpleLongs? = this.getWithSideEffect()
-   val ___value_4: kotlin.Long = ___qualifier_3!!.foo
+  f = run {
+   val ___qualifier_3: SimpleLongs? = this.getWithSideEffect()
+   val ___value_4: Long = ___qualifier_3!!.foo
    ___qualifier_3!!.foo = ___qualifier_3!!.foo + 1L
    ___value_4
   }
-  var g: kotlin.Long = this.foo
+  var g: Long = this.foo
   g = this.getBar()
  }
 }

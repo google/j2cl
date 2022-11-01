@@ -2,14 +2,14 @@
 package devirtualizedcalls
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.String
 
 open class StringCalls {
  open fun main() {
-  val literal: kotlin.String? = "String"
-  val sub: kotlin.String? = literal!!.substring(1)
-  val sub2: kotlin.String? = literal!!.substring(2, 3)
-  val trimmed: kotlin.String? = literal!!.trim()
-  val newString: kotlin.String? = literal!!.toString()
+  val literal: String? = "String"
+  val sub: String? = literal!!.substring(1)
+  val sub2: String? = literal!!.substring(2, 3)
+  val trimmed: String? = literal!!.trim()
+  val newString: String? = literal!!.toString()
  }
 }

@@ -2,18 +2,23 @@
 package interfaces
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import interfaces.Main
+import kotlin.Int
+import kotlin.String
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class Main {
  open fun testInterfaceMembers() {
-  val i: interfaces.Main.Interface<kotlin.String?>? = Implementor()
+  val i: Main.Interface<String?>? = Implementor()
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
-  interfaces.Main.Interface.staticInterfaceMethod()
-  val x: kotlin.Int = kotlin.run {
+  Main.Interface.staticInterfaceMethod()
+  val x: Int = run {
    Implementor()
-   interfaces.Main.Interface.a
-  } + interfaces.Main.Interface.b
+   Main.Interface.a
+  } + Main.Interface.b
  }
 
  fun interface Interface<T> {
@@ -26,24 +31,24 @@ open class Main {
   fun privateMethod_private_interfaces_Main_Interface(t: T) {}
 
   companion object {
-   @kotlin.jvm.JvmField val a: kotlin.Int = 1
+   @JvmField val a: Int = 1
 
-   @kotlin.jvm.JvmField val b: kotlin.Int = 2
+   @JvmField val b: Int = 2
 
-   @kotlin.jvm.JvmStatic
+   @JvmStatic
    fun staticInterfaceMethod() {}
   }
  }
 
- fun interface SubInterface: interfaces.Main.Interface<kotlin.String?> {
-  override fun defaultMethod(s: kotlin.String?) {
-   super<interfaces.Main.Interface>.defaultMethod(s)
+ fun interface SubInterface: Main.Interface<String?> {
+  override fun defaultMethod(s: String?) {
+   super<Main.Interface>.defaultMethod(s)
   }
  }
 
- open inner class Implementor: interfaces.Main.SubInterface, interfaces.Main.Interface<kotlin.String?> {
+ open inner class Implementor: Main.SubInterface, Main.Interface<String?> {
   open override fun interfaceMethod() {}
  }
 
- abstract inner class AbstractImplementor: interfaces.Main.SubInterface {}
+ abstract inner class AbstractImplementor: Main.SubInterface {}
 }

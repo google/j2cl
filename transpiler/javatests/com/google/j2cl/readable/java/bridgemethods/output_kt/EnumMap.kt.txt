@@ -2,19 +2,21 @@
 package bridgemethods
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import bridgemethods.AbstractMap
+import bridgemethods.Map
+import kotlin.Enum
 
 fun interface Map<K, V> {
  fun put(key: K, value: V): V
 }
 
-open class AbstractMap<K, V>: bridgemethods.Map<K, V> {
+open class AbstractMap<K, V>: Map<K, V> {
  open override fun put(key: K, value: V): V {
   return value
  }
 }
 
-open class EnumMap<K: kotlin.Enum<K>, V>: bridgemethods.AbstractMap<K, V>() {
+open class EnumMap<K: Enum<K>, V>: AbstractMap<K, V>() {
  open override fun put(key: K, value: V): V {
   return value
  }

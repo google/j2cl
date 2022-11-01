@@ -2,24 +2,26 @@
 package staticinitializers
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
+import staticinitializers.StaticInitializers
 
 open class StaticInitializers {
  companion object {
-  @kotlin.jvm.JvmField var a: kotlin.Int = 5
+  @JvmField var a: Int = 5
 
-  @kotlin.jvm.JvmField var b: kotlin.Int = staticinitializers.StaticInitializers.a * 2
+  @JvmField var b: Int = StaticInitializers.a * 2
 
-  @kotlin.jvm.JvmField val c: kotlin.Int
+  @JvmField val c: Int
 
   init {
-   staticinitializers.StaticInitializers.a = 10
-   c = staticinitializers.StaticInitializers.a + staticinitializers.StaticInitializers.b
-   val duplicated: kotlin.Int = staticinitializers.StaticInitializers.c
+   StaticInitializers.a = 10
+   c = StaticInitializers.a + StaticInitializers.b
+   val duplicated: Int = StaticInitializers.c
   }
 
   init {
-   val duplicated_1: kotlin.Int = 1
+   val duplicated_1: Int = 1
   }
  }
 }

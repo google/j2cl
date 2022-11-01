@@ -2,19 +2,20 @@
 package localclasswithconstructor
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class LocalClassWithConstructor {
- open fun test(p: kotlin.Int) {
-  val localVar: kotlin.Int = 1
+ open fun test(p: Int) {
+  val localVar: Int = 1
   open class ___1LocalClass {
-   @kotlin.jvm.JvmField var field: kotlin.Int = 0
+   @JvmField var field: Int = 0
 
-   constructor(a: kotlin.Int, b: kotlin.Int) {
+   constructor(a: Int, b: Int) {
     this.field = localVar + a + b
    }
 
-   constructor(a: kotlin.Int): this(a, p) {
+   constructor(a: Int): this(a, p) {
     this.field = localVar
    }
   }

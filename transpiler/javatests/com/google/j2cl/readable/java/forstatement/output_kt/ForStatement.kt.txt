@@ -2,20 +2,25 @@
 package forstatement
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import forstatement.ForStatement
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.Long
+import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class ForStatement {
  open fun test() {
-  var i: kotlin.Int = 0
-  var count: kotlin.Int = 0
+  var i: Int = 0
+  var count: Int = 0
   LOOP@ while (i < 100) {
    LOOP_CONTINUE@ do {
     count = count + 1
    } while (false)
    i = i + 1
   }
-  var l: kotlin.Long = 0L
-  var count_1: kotlin.Long = 0L
+  var l: Long = 0L
+  var count_1: Long = 0L
   LOOP_1@ while (l < 100L) {
    LOOP_CONTINUE_1@ do {
     count_1 = count_1 + 1L
@@ -23,37 +28,37 @@ open class ForStatement {
    l = l + 1L
    l = l + 1L
   }
-  var a: kotlin.Boolean = false
-  LOOP_2@ while (kotlin.run {
+  var a: Boolean = false
+  LOOP_2@ while (run {
    a = a.or(true)
    a
   }) {
    LOOP_CONTINUE_2@ do {} while (false)
   }
-  var b: kotlin.Boolean = false
-  LOOP_3@ while (kotlin.run {
+  var b: Boolean = false
+  LOOP_3@ while (run {
    b = a
    b
   }) {
    LOOP_CONTINUE_3@ do {} while (false)
   }
-  forstatement.ForStatement.returnsValue_private_2()
+  ForStatement.returnsValue_private_2()
   LOOP_4@ while (true) {
    LOOP_CONTINUE_4@ do {} while (false)
-   forstatement.ForStatement.returnsValue_private_2()
+   ForStatement.returnsValue_private_2()
   }
  }
 
  open fun testContinue() {
-  var i: kotlin.Int = 0
-  var j: kotlin.Int = 0
+  var i: Int = 0
+  var j: Int = 0
   LABEL@ while (i < 10) {
    LABEL_CONTINUE@ do {
     if (i === 5) {
      break@LABEL_CONTINUE
     }
-    var k: kotlin.Int = 0
-    var l: kotlin.Int = 0
+    var k: Int = 0
+    var l: Int = 0
     LOOP@ while (k < 10) {
      LOOP_CONTINUE@ do {
       if (j === 5) {
@@ -70,14 +75,14 @@ open class ForStatement {
  }
 
  open fun testInitializeInForCondition() {
-  var i: kotlin.Int = 0
-  var x: kotlin.Int = 0
-  LOOP@ while (i < 1 && kotlin.run {
+  var i: Int = 0
+  var x: Int = 0
+  LOOP@ while (i < 1 && run {
    x = 3
    x
   } !== 0) {
    LOOP_CONTINUE@ do {
-    var y: kotlin.Int = 0
+    var y: Int = 0
     y = i + x
    } while (false)
    i = i + 1
@@ -85,8 +90,8 @@ open class ForStatement {
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun returnsValue_private_2(): kotlin.Int {
+  @JvmStatic
+  fun returnsValue_private_2(): Int {
    return 1
   }
  }

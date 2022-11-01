@@ -2,26 +2,30 @@
 package strings
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Char
+import kotlin.String
+import kotlin.jvm.JvmField
+import kotlin.run
+import strings.Strings
 
 open class Strings {
- @kotlin.jvm.JvmField var someString_private_2: kotlin.String? = "This is a string literal"
+ @JvmField var someString_private_2: String? = "This is a string literal"
 
- @kotlin.jvm.JvmField var nonBmpChar_private_2: kotlin.String? = "\uD800\uDF46"
+ @JvmField var nonBmpChar_private_2: String? = "\uD800\uDF46"
 
- @kotlin.jvm.JvmField var wideColon_private_2: kotlin.String? = "\uFF1A"
+ @JvmField var wideColon_private_2: String? = "\uFF1A"
 
  open fun test() {
-  var s1: kotlin.String? = null
-  var s2: kotlin.String? = null
-  var s3: kotlin.String? = "" + s1 + s2
+  var s1: String? = null
+  var s2: String? = null
+  var s3: String? = "" + s1 + s2
   s2 = "" + s2 + s2
   s1 = "" + s1 + "a"
   s3 = "" + s1 + s1 + s2 + null + "a"
   s3 = "a" + s1 + s1 + s2 + null
-  var s4: kotlin.String? = null
-  val c1: kotlin.Char = 'F'
-  val c2: kotlin.Char = 'o'
+  var s4: String? = null
+  val c1: Char = 'F'
+  val c2: Char = 'o'
   s4 = "" + (c1.code + c2.code) + "o"
   s4 = "" + s4 + ("" + 1L + "")
   s4 = "" + s4 + 1L
@@ -30,29 +34,29 @@ open class Strings {
   s4 = "" + s4 + 1.0
   s4 = "" + s4 + 1.0f
   s4 = "" + s4 + 1.toShort()
-  kotlin.run {
-   val ___qualifier: strings.Strings.StringHolder = strings.Strings.StringHolder()
-   kotlin.run {
-    val ___qualifier_1: strings.Strings.StringHolder = ___qualifier
-    val ___value: kotlin.String? = "" + ___qualifier!!.s + s4
+  run {
+   val ___qualifier: Strings.StringHolder = Strings.StringHolder()
+   run {
+    val ___qualifier_1: Strings.StringHolder = ___qualifier
+    val ___value: String? = "" + ___qualifier!!.s + s4
     ___qualifier_1!!.s = ___value
     ___value
    }
   }
-  kotlin.run {
-   val ___qualifier_2: strings.Strings.StringHolder = strings.Strings.StringHolder()
-   kotlin.run {
-    val ___qualifier_3: strings.Strings.StringHolder = ___qualifier_2
-    val ___value_1: kotlin.String? = "" + ___qualifier_2!!.s + c1
+  run {
+   val ___qualifier_2: Strings.StringHolder = Strings.StringHolder()
+   run {
+    val ___qualifier_3: Strings.StringHolder = ___qualifier_2
+    val ___value_1: String? = "" + ___qualifier_2!!.s + c1
     ___qualifier_3!!.s = ___value_1
     ___value_1
    }
   }
-  kotlin.run {
-   val ___qualifier_4: strings.Strings.StringHolder = strings.Strings.StringHolder()
-   kotlin.run {
-    val ___qualifier_5: strings.Strings.StringHolder = ___qualifier_4
-    val ___value_2: kotlin.String? = "" + ___qualifier_4!!.s + "o"
+  run {
+   val ___qualifier_4: Strings.StringHolder = Strings.StringHolder()
+   run {
+    val ___qualifier_5: Strings.StringHolder = ___qualifier_4
+    val ___value_2: String? = "" + ___qualifier_4!!.s + "o"
     ___qualifier_5!!.s = ___value_2
     ___value_2
    }
@@ -62,12 +66,12 @@ open class Strings {
  }
 
  companion object {
-  @kotlin.jvm.JvmField val ESCAPE_CODES_private_2: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  @JvmField val ESCAPE_CODES_private_2: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
 
-  @kotlin.jvm.JvmField val ESCAPE_CODES_COPY_private_2: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  @JvmField val ESCAPE_CODES_COPY_private_2: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
 
  open class StringHolder {
-  @kotlin.jvm.JvmField var s: kotlin.String? = "A"
+  @JvmField var s: String? = "A"
  }
 }

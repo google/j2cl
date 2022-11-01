@@ -2,20 +2,22 @@
 package castonarrayinit
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import castonarrayinit.CastOnArrayInit
+import kotlin.Array
+import kotlin.jvm.JvmStatic
 
 open class CastOnArrayInit {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <E> `fun`(vararg args: castonarrayinit.CastOnArrayInit.Foo<E>?) {
-   val args_1: kotlin.Array<castonarrayinit.CastOnArrayInit.Foo<E>?>? = args as kotlin.Array<castonarrayinit.CastOnArrayInit.Foo<E>?>?
+  @JvmStatic
+  fun <E> `fun`(vararg args: CastOnArrayInit.Foo<E>?) {
+   val args_1: Array<CastOnArrayInit.Foo<E>?>? = args as Array<CastOnArrayInit.Foo<E>?>?
   }
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun <E> test() {
-   val f1: castonarrayinit.CastOnArrayInit.Foo<E>? = castonarrayinit.CastOnArrayInit.Foo<E>()
-   val f2: castonarrayinit.CastOnArrayInit.Foo<E>? = castonarrayinit.CastOnArrayInit.Foo<E>()
-   castonarrayinit.CastOnArrayInit.`fun`<E>(f1, f2)
+   val f1: CastOnArrayInit.Foo<E>? = CastOnArrayInit.Foo<E>()
+   val f2: CastOnArrayInit.Foo<E>? = CastOnArrayInit.Foo<E>()
+   CastOnArrayInit.`fun`<E>(f1, f2)
   }
  }
 

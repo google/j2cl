@@ -2,20 +2,24 @@
 package staticfieldaccesslevels
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.jvm.JvmField
+import staticfieldaccesslevels.StaticFieldAccessLevels
 
 open class StaticFieldAccessLevels {
- open fun test(): kotlin.Int {
-  return if (staticfieldaccesslevels.StaticFieldAccessLevels.b_private_2) staticfieldaccesslevels.StaticFieldAccessLevels.a else staticfieldaccesslevels.StaticFieldAccessLevels.d
+ open fun test(): Int {
+  return if (StaticFieldAccessLevels.b_private_2) StaticFieldAccessLevels.a else StaticFieldAccessLevels.d
  }
 
  companion object {
-  @kotlin.jvm.JvmField var a: kotlin.Int = 0
+  @JvmField var a: Int = 0
 
-  @kotlin.jvm.JvmField var b_private_2: kotlin.Boolean = false
+  @JvmField var b_private_2: Boolean = false
 
-  @kotlin.jvm.JvmField var c: kotlin.Any? = null
+  @JvmField var c: Any? = null
 
-  @kotlin.jvm.JvmField var d: kotlin.Int = 0
+  @JvmField var d: Int = 0
  }
 }

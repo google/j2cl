@@ -2,23 +2,25 @@
 package nullability.defaultnotnullable
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.jvm.JvmStatic
+import nullability.defaultnotnullable.TypeArgumentsInference
 
 open class TypeArgumentsInference {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <K> wildcardPair(): nullability.defaultnotnullable.TypeArgumentsInference.Pair<K, *> {
-   return nullability.defaultnotnullable.TypeArgumentsInference.Pair<K, kotlin.Any?>() as nullability.defaultnotnullable.TypeArgumentsInference.Pair<K, *>
+  @JvmStatic
+  fun <K> wildcardPair(): TypeArgumentsInference.Pair<K, *> {
+   return TypeArgumentsInference.Pair<K, Any?>() as TypeArgumentsInference.Pair<K, *>
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <K, V> pairIdentity(pair: nullability.defaultnotnullable.TypeArgumentsInference.Pair<K, V>): nullability.defaultnotnullable.TypeArgumentsInference.Pair<K, V> {
+  @JvmStatic
+  fun <K, V> pairIdentity(pair: TypeArgumentsInference.Pair<K, V>): TypeArgumentsInference.Pair<K, V> {
    return pair
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <K> wildcardPairAndIdentity(): nullability.defaultnotnullable.TypeArgumentsInference.Pair<K, *> {
-   return nullability.defaultnotnullable.TypeArgumentsInference.pairIdentity<K, kotlin.Any>(nullability.defaultnotnullable.TypeArgumentsInference.wildcardPair<K>() as nullability.defaultnotnullable.TypeArgumentsInference.Pair<K, kotlin.Any>)
+  @JvmStatic
+  fun <K> wildcardPairAndIdentity(): TypeArgumentsInference.Pair<K, *> {
+   return TypeArgumentsInference.pairIdentity<K, Any>(TypeArgumentsInference.wildcardPair<K>() as TypeArgumentsInference.Pair<K, Any>)
   }
  }
 

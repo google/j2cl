@@ -2,21 +2,22 @@
 package j2kt
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import j2kt.TypeWildCards
+import kotlin.jvm.JvmStatic
 
 open class TypeWildCards {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun testSupplierWithUpperAndLowerBounds(supplier: j2kt.TypeWildCards.SupplierWithUpperBound<in j2kt.TypeWildCards.Child?>?) {
-   val parent: j2kt.TypeWildCards.Parent? = supplier!!.get() as j2kt.TypeWildCards.Parent?
+  @JvmStatic
+  fun testSupplierWithUpperAndLowerBounds(supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?) {
+   val parent: TypeWildCards.Parent? = supplier!!.get() as TypeWildCards.Parent?
   }
  }
 
  open class Parent {}
 
- open class Child: j2kt.TypeWildCards.Parent() {}
+ open class Child: TypeWildCards.Parent() {}
 
- fun interface SupplierWithUpperBound<T: j2kt.TypeWildCards.Parent?> {
+ fun interface SupplierWithUpperBound<T: TypeWildCards.Parent?> {
   fun get(): T
  }
 }

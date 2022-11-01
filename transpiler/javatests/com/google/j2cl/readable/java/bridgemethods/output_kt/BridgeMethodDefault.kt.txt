@@ -2,22 +2,24 @@
 package bridgemethods
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import bridgemethods.BridgeMethodDefault
+import kotlin.Any
+import kotlin.String
 
 open class BridgeMethodDefault {
  fun interface I<T> {
   fun m(t: T)
  }
 
- interface II: bridgemethods.BridgeMethodDefault.I<kotlin.String?> {
-  override fun m(s: kotlin.String?) {}
+ interface II: BridgeMethodDefault.I<String?> {
+  override fun m(s: String?) {}
  }
 
- open class A: bridgemethods.BridgeMethodDefault.II {}
+ open class A: BridgeMethodDefault.II {}
 
- interface JJ: bridgemethods.BridgeMethodDefault.I<kotlin.Any?> {
-  override fun m(o: kotlin.Any?) {}
+ interface JJ: BridgeMethodDefault.I<Any?> {
+  override fun m(o: Any?) {}
  }
 
- open class B: bridgemethods.BridgeMethodDefault.JJ {}
+ open class B: BridgeMethodDefault.JJ {}
 }

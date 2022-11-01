@@ -2,10 +2,11 @@
 package exception
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import java.lang.Exception
+import kotlin.Throwable
 
-class MyException: java.lang.Exception {
+class MyException: Exception {
  constructor()
 
- constructor(cause: kotlin.Throwable?): super(cause)
+ constructor(cause: Throwable?): super(cause)
 }

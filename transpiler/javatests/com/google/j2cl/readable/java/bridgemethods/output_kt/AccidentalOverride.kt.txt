@@ -2,7 +2,12 @@
 package bridgemethods
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import bridgemethods.A
+import bridgemethods.I
+import bridgemethods.SpecializedInterface
+import kotlin.Int
+import kotlin.Number
+import kotlin.String
 
 fun interface I<T, S> {
  fun `fun`(s: S): T
@@ -18,16 +23,16 @@ open class A<T, S> {
  }
 }
 
-open class B: bridgemethods.I<kotlin.Int?, kotlin.String?>, bridgemethods.A<kotlin.Number?, kotlin.String?>() {
- open override fun `fun`(s: kotlin.String?): kotlin.Int? {
-  return kotlin.Int(1)
+open class B: I<Int?, String?>, A<Number?, String?>() {
+ open override fun `fun`(s: String?): Int? {
+  return Int(1)
  }
 }
 
 interface SpecializedInterface {
- fun `fun`(s: kotlin.String?): kotlin.String?
+ fun `fun`(s: String?): String?
 
- fun get(): kotlin.String?
+ fun get(): String?
 }
 
-open class AccidentalOverride: bridgemethods.SpecializedInterface, bridgemethods.A<kotlin.String?, kotlin.String?>() {}
+open class AccidentalOverride: SpecializedInterface, A<String?, String?>() {}

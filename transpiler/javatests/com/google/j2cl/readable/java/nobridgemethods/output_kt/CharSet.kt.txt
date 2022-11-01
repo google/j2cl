@@ -2,28 +2,33 @@
 package nobridgemethods
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Array
+import kotlin.String
+import kotlin.jvm.JvmStatic
+import nobridgemethods.Entry
+import nobridgemethods.Map
+import nobridgemethods.TreeMap
 
 interface Entry<K> {}
 
 abstract class Map<K> {
- abstract fun getCeilingEntry(key: K): nobridgemethods.Entry<K>?
+ abstract fun getCeilingEntry(key: K): Entry<K>?
 }
 
-open class TreeMap<K>: nobridgemethods.Map<K>() {
- open override fun getCeilingEntry(key: K): nobridgemethods.TreeMap.InnerEntry<K>? {
-  return nobridgemethods.TreeMap.InnerEntry<K>()
+open class TreeMap<K>: Map<K>() {
+ open override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
+  return TreeMap.InnerEntry<K>()
  }
 
- open class InnerEntry<K>: nobridgemethods.Entry<K> {}
+ open class InnerEntry<K>: Entry<K> {}
 }
 
 open class CharSet {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun main(vararg args: kotlin.String?) {
-   val args_1: kotlin.Array<kotlin.String?>? = args as kotlin.Array<kotlin.String?>?
-   val treeMap: nobridgemethods.TreeMap<kotlin.String?>? = object : nobridgemethods.TreeMap<kotlin.String?>() {}
+  @JvmStatic
+  fun main(vararg args: String?) {
+   val args_1: Array<String?>? = args as Array<String?>?
+   val treeMap: TreeMap<String?>? = object : TreeMap<String?>() {}
   }
  }
 }

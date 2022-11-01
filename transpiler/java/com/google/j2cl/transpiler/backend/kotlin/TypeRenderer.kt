@@ -81,20 +81,25 @@ private fun Renderer.renderSuperTypes(type: Type) {
 }
 
 internal fun Renderer.renderTypeBody(type: Type) {
-  copy(currentType = type, renderThisReferenceWithLabel = false).run {
-    render(" ")
-    renderInCurlyBrackets {
-      if (type.isEnum) {
-        renderEnumValues(type)
-      }
+  copy(
+      currentType = type,
+      renderThisReferenceWithLabel = false,
+      localNames = localNames + type.localNames
+    )
+    .run {
+      render(" ")
+      renderInCurlyBrackets {
+        if (type.isEnum) {
+          renderEnumValues(type)
+        }
 
-      val kotlinMembers = type.kotlinMembers
-      if (kotlinMembers.isNotEmpty()) {
-        renderNewLine()
-        renderSeparatedWithEmptyLine(kotlinMembers) { render(it) }
+        val kotlinMembers = type.kotlinMembers
+        if (kotlinMembers.isNotEmpty()) {
+          renderNewLine()
+          renderSeparatedWithEmptyLine(kotlinMembers) { render(it) }
+        }
       }
     }
-  }
 }
 
 private fun Renderer.renderEnumValues(type: Type) {

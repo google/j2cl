@@ -2,67 +2,76 @@
 package compiletimeconstant
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import compiletimeconstant.CompileTimeConstant
+import java.lang.Class
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Char
+import kotlin.Int
+import kotlin.Long
+import kotlin.String
+import kotlin.jvm.JvmField
+import kotlin.jvm.javaObjectType
 
 open class CompileTimeConstant<T> {
- @kotlin.jvm.JvmField val A2: kotlin.Int = 10
+ @JvmField val A2: Int = 10
 
- @kotlin.jvm.JvmField val B2: kotlin.Int = 20
+ @JvmField val B2: Int = 20
 
- @kotlin.jvm.JvmField val C2: kotlin.Int = 200
+ @JvmField val C2: Int = 200
 
- @kotlin.jvm.JvmField val D2: kotlin.String? = "Tur\"tle"
+ @JvmField val D2: String? = "Tur\"tle"
 
- @kotlin.jvm.JvmField val E2: kotlin.String? = "Do\"ve"
+ @JvmField val E2: String? = "Do\"ve"
 
- @kotlin.jvm.JvmField val F2: kotlin.String? = "Tur\"tleDo\"ve"
+ @JvmField val F2: String? = "Tur\"tleDo\"ve"
 
- @kotlin.jvm.JvmField val G2: kotlin.Long = 10000L
+ @JvmField val G2: Long = 10000L
 
- @kotlin.jvm.JvmField val H2: kotlin.Char = 'A'
+ @JvmField val H2: Char = 'A'
 
- @kotlin.jvm.JvmField val I2: kotlin.Boolean = true
+ @JvmField val I2: Boolean = true
 
  init {
-  val b: kotlin.Boolean = this.I2
-  val s: kotlin.String? = "" + compiletimeconstant.CompileTimeConstant.G + compiletimeconstant.CompileTimeConstant.F
-  val l: kotlin.String? = compiletimeconstant.CompileTimeConstant.L
-  val m: kotlin.String? = compiletimeconstant.CompileTimeConstant.M
-  val n: kotlin.String? = compiletimeconstant.CompileTimeConstant.N
-  val c: java.lang.Class<*>? = compiletimeconstant.CompileTimeConstant.classLiteral
+  val b: Boolean = this.I2
+  val s: String? = "" + CompileTimeConstant.G + CompileTimeConstant.F
+  val l: String? = CompileTimeConstant.L
+  val m: String? = CompileTimeConstant.M
+  val n: String? = CompileTimeConstant.N
+  val c: Class<*>? = CompileTimeConstant.classLiteral
  }
 
  companion object {
-  @kotlin.jvm.JvmField val OBJ: kotlin.Any? = null
+  @JvmField val OBJ: Any? = null
 
-  @kotlin.jvm.JvmField val A: kotlin.Int = 10
+  @JvmField val A: Int = 10
 
-  @kotlin.jvm.JvmField val B: kotlin.Int = 20
+  @JvmField val B: Int = 20
 
-  @kotlin.jvm.JvmField val C: kotlin.Int = 200
+  @JvmField val C: Int = 200
 
-  @kotlin.jvm.JvmField val D: kotlin.String? = "Tur\"tle"
+  @JvmField val D: String? = "Tur\"tle"
 
-  @kotlin.jvm.JvmField val E: kotlin.String? = "Do\'ve"
+  @JvmField val E: String? = "Do\'ve"
 
-  @kotlin.jvm.JvmField val F: kotlin.String? = "Tur\"tleDo\'ve"
+  @JvmField val F: String? = "Tur\"tleDo\'ve"
 
-  @kotlin.jvm.JvmField val J: kotlin.String? = "Tur\"tleDo\'veTur\"tleDo\'ve"
+  @JvmField val J: String? = "Tur\"tleDo\'veTur\"tleDo\'ve"
 
-  @kotlin.jvm.JvmField val K: kotlin.String? = null
+  @JvmField val K: String? = null
 
-  @kotlin.jvm.JvmField val L: kotlin.String? = "ThisIsALongString"
+  @JvmField val L: String? = "ThisIsALongString"
 
-  @kotlin.jvm.JvmField val M: kotlin.String? = "ThisIsALongStringAlso"
+  @JvmField val M: String? = "ThisIsALongStringAlso"
 
-  @kotlin.jvm.JvmField val N: kotlin.String? = "ThisIsALongStringAlsoButLonger"
+  @JvmField val N: String? = "ThisIsALongStringAlsoButLonger"
 
-  @kotlin.jvm.JvmField val G: kotlin.Long = 10000L
+  @JvmField val G: Long = 10000L
 
-  @kotlin.jvm.JvmField val H: kotlin.Char = 'A'
+  @JvmField val H: Char = 'A'
 
-  @kotlin.jvm.JvmField val I: kotlin.Boolean = true
+  @JvmField val I: Boolean = true
 
-  @kotlin.jvm.JvmField val classLiteral: java.lang.Class<*>? = compiletimeconstant.CompileTimeConstant::class.javaObjectType
+  @JvmField val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType
  }
 }

@@ -2,7 +2,7 @@
 package abstractmethodoverridedefault
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import abstractmethodoverridedefault.AbstractMethodOverrideDefault
 
 open class AbstractMethodOverrideDefault {
  fun interface I {
@@ -17,11 +17,11 @@ open class AbstractMethodOverrideDefault {
   fun bar()
  }
 
- abstract class A: abstractmethodoverridedefault.AbstractMethodOverrideDefault.I {
+ abstract class A: AbstractMethodOverrideDefault.I {
   abstract override fun foo()
  }
 
- abstract class B: abstractmethodoverridedefault.AbstractMethodOverrideDefault.J, abstractmethodoverridedefault.AbstractMethodOverrideDefault.A() {
+ abstract class B: AbstractMethodOverrideDefault.J, AbstractMethodOverrideDefault.A() {
   open override fun bar() {
    if (false) {
     this.bar()
@@ -29,11 +29,11 @@ open class AbstractMethodOverrideDefault {
   }
  }
 
- open class C: abstractmethodoverridedefault.AbstractMethodOverrideDefault.A() {
+ open class C: AbstractMethodOverrideDefault.A() {
   open override fun foo() {}
 
   open override fun bar() {
-   super<abstractmethodoverridedefault.AbstractMethodOverrideDefault.A>.bar()
+   super<AbstractMethodOverrideDefault.A>.bar()
   }
  }
 }

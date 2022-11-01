@@ -2,87 +2,96 @@
 package cast
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import cast.CastGenerics
+import kotlin.Any
+import kotlin.Array
+import kotlin.Enum
+import kotlin.Error
+import kotlin.Int
+import kotlin.Number
+import kotlin.String
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
-open class CastGenerics<T, E: kotlin.Number?> {
- @kotlin.jvm.JvmField var field: T = null as T
+open class CastGenerics<T, E: Number?> {
+ @JvmField var field: T = null as T
 
  open fun method(): T {
   return null as T
  }
 
  open fun testCastToTypeVariable() {
-  val o: kotlin.Any? = kotlin.Int(1)
+  val o: Any? = Int(1)
   val e: E? = o as E
   val t: T? = o as T
-  val es: kotlin.Array<E>? = o as kotlin.Array<E>?
-  val ts: kotlin.Array<T>? = o as kotlin.Array<T>?
+  val es: Array<E>? = o as Array<E>?
+  val ts: Array<T>? = o as Array<T>?
  }
 
- open fun <S, V: kotlin.Enum<V>> testCastToMethodTypeVariable() {
-  val o: kotlin.Any? = kotlin.Int(1)
+ open fun <S, V: Enum<V>> testCastToMethodTypeVariable() {
+  val o: Any? = Int(1)
   val s: S? = o as S
-  var c: kotlin.Any? = o as cast.CastGenerics<S, kotlin.Number?>?
-  c = o as kotlin.Array<S>?
+  var c: Any? = o as CastGenerics<S, Number?>?
+  c = o as Array<S>?
   c = o as V
  }
 
- open fun <TT: kotlin.Enum<*>> outerGenericMethod() {
+ open fun <TT: Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
-   fun nestedGenericMethod_private_2(o: kotlin.Any?) {
+   fun nestedGenericMethod_private_2(o: Any?) {
     val t: TT? = o as TT
    }
   }
  }
 
- open fun <EE> method(o: kotlin.Any?): EE where EE: cast.CastGenerics.Empty1?, EE: cast.CastGenerics.Empty2<EE>? {
-  if (o is cast.CastGenerics.Empty1) {
+ open fun <EE> method(o: Any?): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
+  if (o is CastGenerics.Empty1) {
    return o as EE
   }
   return null as EE
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <T_1, U: T_1> testErasureCast() where T_1: cast.CastGenerics.A?, T_1: cast.CastGenerics.B? {
-   var str: kotlin.String? = cast.CastGenerics<kotlin.String?, kotlin.Number?>().field
-   str = cast.CastGenerics<kotlin.String?, kotlin.Number?>().method()
-   val containerT: cast.CastGenerics.Container<T_1>? = null
+  @JvmStatic
+  fun <T_1, U: T_1> testErasureCast() where T_1: CastGenerics.A?, T_1: CastGenerics.B? {
+   var str: String? = CastGenerics<String?, Number?>().field
+   str = CastGenerics<String?, Number?>().method()
+   val containerT: CastGenerics.Container<T_1>? = null
    containerT!!.get()!!.mA()
    containerT!!.get()!!.mB()
-   val containerU: cast.CastGenerics.Container<U>? = null
+   val containerU: CastGenerics.Container<U>? = null
    containerU!!.get()!!.mA()
    containerU!!.get()!!.mB()
-   val containerArrT: cast.CastGenerics.Container<kotlin.Array<T_1>?>? = null
-   val arrT: kotlin.Array<T_1>? = containerArrT!!.get()
+   val containerArrT: CastGenerics.Container<Array<T_1>?>? = null
+   val arrT: Array<T_1>? = containerArrT!!.get()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
-   var arrA: kotlin.Array<cast.CastGenerics.A?>? = containerArrT!!.get() as kotlin.Array<cast.CastGenerics.A?>?
-   var arrB: kotlin.Array<cast.CastGenerics.B?>? = containerArrT!!.get() as kotlin.Array<cast.CastGenerics.B?>?
-   val containerArrU: cast.CastGenerics.Container<kotlin.Array<U>?>? = null
-   val arrU: kotlin.Array<U>? = containerArrU!!.get()
+   var arrA: Array<CastGenerics.A?>? = containerArrT!!.get() as Array<CastGenerics.A?>?
+   var arrB: Array<CastGenerics.B?>? = containerArrT!!.get() as Array<CastGenerics.B?>?
+   val containerArrU: CastGenerics.Container<Array<U>?>? = null
+   val arrU: Array<U>? = containerArrU!!.get()
    arrU!![0]!!.mA()
    arrU!![0]!!.mB()
-   arrA = containerArrU!!.get() as kotlin.Array<cast.CastGenerics.A?>?
-   arrB = containerArrU!!.get() as kotlin.Array<cast.CastGenerics.B?>?
-   val containerBase: cast.CastGenerics.Container<cast.CastGenerics.BaseImplementor?>? = null
+   arrA = containerArrU!!.get() as Array<CastGenerics.A?>?
+   arrB = containerArrU!!.get() as Array<CastGenerics.B?>?
+   val containerBase: CastGenerics.Container<CastGenerics.BaseImplementor?>? = null
    containerBase!!.get()!!.mA()
    containerBase!!.get()!!.mB()
-   val containerImplementor: cast.CastGenerics.Container<cast.CastGenerics.Implementor?>? = null
+   val containerImplementor: CastGenerics.Container<CastGenerics.Implementor?>? = null
    containerImplementor!!.get()!!.mA()
    containerImplementor!!.get()!!.mB()
   }
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun testCastToParamterizedType() {
-   val o: kotlin.Any? = kotlin.Int(1)
-   var cc: cast.CastGenerics<kotlin.Error?, kotlin.Number?>? = o as cast.CastGenerics<kotlin.Error?, kotlin.Number?>?
-   cc = o as cast.CastGenerics<kotlin.Error?, kotlin.Number?>?
+   val o: Any? = Int(1)
+   var cc: CastGenerics<Error?, Number?>? = o as CastGenerics<Error?, Number?>?
+   cc = o as CastGenerics<Error?, Number?>?
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T_1> doSomething(): cast.CastGenerics.Foo<T_1>? {
-   return object : cast.CastGenerics.Foo<T_1>() {}
+  @JvmStatic
+  fun <T_1> doSomething(): CastGenerics.Foo<T_1>? {
+   return object : CastGenerics.Foo<T_1>() {}
   }
  }
 
@@ -94,9 +103,9 @@ open class CastGenerics<T, E: kotlin.Number?> {
   fun mB()
  }
 
- abstract class BaseImplementor: cast.CastGenerics.A, cast.CastGenerics.B {}
+ abstract class BaseImplementor: CastGenerics.A, CastGenerics.B {}
 
- open class Implementor: cast.CastGenerics.BaseImplementor() {
+ open class Implementor: CastGenerics.BaseImplementor() {
   open override fun mA() {}
 
   open override fun mB() {}

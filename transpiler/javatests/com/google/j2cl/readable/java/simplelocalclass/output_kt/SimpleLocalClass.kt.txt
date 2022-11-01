@@ -2,13 +2,14 @@
 package simplelocalclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class SimpleLocalClass {
- open fun test(p: kotlin.Int) {
-  val localVar: kotlin.Int = 1
+ open fun test(p: Int) {
+  val localVar: Int = 1
   open class ___1InnerClass {
-   open fun `fun`(): kotlin.Int {
+   open fun `fun`(): Int {
     return localVar + p
    }
   }
@@ -18,9 +19,9 @@ open class SimpleLocalClass {
  }
 
  open fun `fun`() {
-  val localVar: kotlin.Int = 1
+  val localVar: Int = 1
   open class ___2InnerClass {
-   @kotlin.jvm.JvmField var field: kotlin.Int = localVar
+   @JvmField var field: Int = localVar
   }
  }
 

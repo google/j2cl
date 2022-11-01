@@ -2,7 +2,7 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import j2ktnotpassing.AccidentalOverride
 
 open class AccidentalOverride {
  open inner class SuperClass {
@@ -13,11 +13,11 @@ open class AccidentalOverride {
   fun accidentalOverride() {}
  }
 
- open inner class TestImplicitOverride: j2ktnotpassing.AccidentalOverride.Interface, j2ktnotpassing.AccidentalOverride.SuperClass() {}
+ open inner class TestImplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {}
 
- open inner class TestExplicitOverride: j2ktnotpassing.AccidentalOverride.Interface, j2ktnotpassing.AccidentalOverride.SuperClass() {
+ open inner class TestExplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {
   open override fun accidentalOverride() {
-   super<j2ktnotpassing.AccidentalOverride.SuperClass>.accidentalOverride()
+   super<AccidentalOverride.SuperClass>.accidentalOverride()
   }
  }
 }

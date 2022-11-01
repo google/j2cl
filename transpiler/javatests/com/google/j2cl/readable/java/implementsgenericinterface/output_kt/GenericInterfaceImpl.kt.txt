@@ -2,12 +2,13 @@
 package implementsgenericinterface
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import implementsgenericinterface.GenericInterface
+import kotlin.Number
 
 interface GenericInterface<T> {}
 
-interface GenericSubInterface<T>: implementsgenericinterface.GenericInterface<T> {}
+interface GenericSubInterface<T>: GenericInterface<T> {}
 
-open class GenericInterfaceGenericImpl<T>: implementsgenericinterface.GenericInterface<T> {}
+open class GenericInterfaceGenericImpl<T>: GenericInterface<T> {}
 
-open class GenericInterfaceImpl: implementsgenericinterface.GenericInterface<kotlin.Number?> {}
+open class GenericInterfaceImpl: GenericInterface<Number?> {}

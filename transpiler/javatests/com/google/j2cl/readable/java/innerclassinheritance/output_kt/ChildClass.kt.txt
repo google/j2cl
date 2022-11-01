@@ -2,28 +2,33 @@
 package innerclassinheritance
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import innerclassinheritance.ChildClass
+import innerclassinheritance.ParentInner
+import innerclassinheritance.ParentOuter
+import kotlin.Any
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class ParentOuter {
- @kotlin.jvm.JvmField var fieldInParentOuter: kotlin.Int = 0
+ @JvmField var fieldInParentOuter: Int = 0
 
  open fun funInParentOuter() {}
 }
 
 open class ParentInner {
- @kotlin.jvm.JvmField var fieldInParentInner: kotlin.Int = 0
+ @JvmField var fieldInParentInner: Int = 0
 
  open fun funInParentInner() {}
 }
 
-open class ChildClass: innerclassinheritance.ParentOuter() {
- @kotlin.jvm.JvmField var fieldInOuter: kotlin.Int = 0
+open class ChildClass: ParentOuter() {
+ @JvmField var fieldInOuter: Int = 0
 
  open fun funInOuter() {}
 
  open fun testLocalClass() {
-  open class ___1LocalClass: innerclassinheritance.ChildClass() {
-   @kotlin.jvm.JvmField var `object`: kotlin.Any? = this
+  open class ___1LocalClass: ChildClass() {
+   @JvmField var `object`: Any? = this
 
    open override fun funInParentOuter() {}
 
@@ -38,12 +43,12 @@ open class ChildClass: innerclassinheritance.ParentOuter() {
   ___1LocalClass().test()
  }
 
- open inner class InnerClass: innerclassinheritance.ParentInner() {
-  @kotlin.jvm.JvmField var fieldInInner: kotlin.Int = 0
+ open inner class InnerClass: ParentInner() {
+  @JvmField var fieldInInner: Int = 0
 
   open fun funInInner() {}
 
-  open fun testInnerClass(): kotlin.Int {
+  open fun testInnerClass(): Int {
    this@ChildClass.funInParentOuter()
    this@ChildClass.funInParentOuter()
    this@ChildClass.funInOuter()
@@ -52,7 +57,7 @@ open class ChildClass: innerclassinheritance.ParentOuter() {
    this.funInParentInner()
    this.funInInner()
    this.funInInner()
-   var a: kotlin.Int = this@ChildClass.fieldInParentOuter
+   var a: Int = this@ChildClass.fieldInParentOuter
    a = this@ChildClass.fieldInParentOuter
    a = this@ChildClass.fieldInOuter
    a = this@ChildClass.fieldInOuter

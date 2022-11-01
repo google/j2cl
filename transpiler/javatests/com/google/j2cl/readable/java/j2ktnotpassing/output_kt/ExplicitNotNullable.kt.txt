@@ -2,16 +2,19 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import j2ktnotpassing.ExplicitNotNullable
+import kotlin.Any
+import kotlin.String
+import kotlin.jvm.JvmField
 
 open class ExplicitNotNullable {
- @kotlin.jvm.JvmField var i: j2ktnotpassing.ExplicitNotNullable.Function<kotlin.String, kotlin.String> = object : j2ktnotpassing.ExplicitNotNullable.Function<kotlin.String?, kotlin.String?> {
-  open override fun apply(s: kotlin.String): kotlin.String {
+ @JvmField var i: ExplicitNotNullable.Function<String, String> = object : ExplicitNotNullable.Function<String?, String?> {
+  open override fun apply(s: String): String {
    return s
   }
  }
 
- open fun testDependentWildcards(x: j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters<*, *>): j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters<*, *> {
+ open fun testDependentWildcards(x: ExplicitNotNullable.DependentTypeParameters<*, *>): ExplicitNotNullable.DependentTypeParameters<*, *> {
   return x!!.getThis()
  }
 
@@ -19,8 +22,8 @@ open class ExplicitNotNullable {
   fun apply(i: I): O
  }
 
- open class DependentTypeParameters<E: kotlin.Any, T: E?> {
-  open fun getThis(): j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters<E, T> {
+ open class DependentTypeParameters<E: Any, T: E?> {
+  open fun getThis(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this
   }
  }

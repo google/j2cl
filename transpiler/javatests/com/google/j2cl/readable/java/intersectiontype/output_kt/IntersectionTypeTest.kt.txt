@@ -2,112 +2,123 @@
 package intersectiontype
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import intersectiontype.Cmp
+import intersectiontype.Cmp2
+import intersectiontype.Getable
+import intersectiontype.IntersectionTypeTest
+import intersectiontype.Serial
+import intersectiontype.Setable
+import kotlin.Any
+import kotlin.Comparable
+import kotlin.Int
+import kotlin.String
+import kotlin.jvm.JvmStatic
+import kotlin.let
 
 fun interface Getable<T> {
  fun get(): T
 }
 
 fun interface Setable {
- fun set(i: kotlin.Int)
+ fun set(i: Int)
 }
 
 interface Serial {}
 
 fun interface Cmp {
- fun cmp(): kotlin.Int
+ fun cmp(): Int
 }
 
 fun interface Cmp2<T> {
- fun cmp(a: kotlin.Int): kotlin.Int
+ fun cmp(a: Int): Int
 }
 
 open class IntersectionTypeTest<U> {
- open fun cast3(s: kotlin.Any?): kotlin.Any? {
+ open fun cast3(s: Any?): Any? {
   return s
  }
 
  open fun testMethodCall() {
-  val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m_private_2()
-  intersectiontype.IntersectionTypeTest.set_private_2((o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it })
-  intersectiontype.IntersectionTypeTest.set_private_2(intersectiontype.IntersectionTypeTest.m_private_2())
-  val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n_private_2() as intersectiontype.Getable<*>?
+  val o: Any? = IntersectionTypeTest.m_private_2()
+  IntersectionTypeTest.set_private_2((o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
+  IntersectionTypeTest.set_private_2(IntersectionTypeTest.m_private_2())
+  val g: Getable<*>? = IntersectionTypeTest.n_private_2() as Getable<*>?
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <T> getAndSet(`object`: T) where T: intersectiontype.Getable<*>?, T: intersectiontype.Setable? {
+  @JvmStatic
+  fun <T> getAndSet(`object`: T) where T: Getable<*>?, T: Setable? {
    `object`!!.set(1)
    `object`!!.get()
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T> cast(o: kotlin.Any?): intersectiontype.Getable<T>? {
+  @JvmStatic
+  fun <T> cast(o: Any?): Getable<T>? {
    if (o === null) {
-    return (o).let { it as intersectiontype.Getable<T>?; it as intersectiontype.Setable?; it }
+    return (o).let { it as Getable<T>?; it as Setable?; it }
    }
-   return (o).let { it as intersectiontype.Getable<T>?; it as intersectiontype.Setable?; it }
+   return (o).let { it as Getable<T>?; it as Setable?; it }
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T> cast1(s: kotlin.Any?): intersectiontype.Getable<kotlin.Comparable<kotlin.String>?>? {
-   return (s).let { it as intersectiontype.Getable<kotlin.Comparable<kotlin.String>?>?; it as intersectiontype.Setable?; it }
+  @JvmStatic
+  fun <T> cast1(s: Any?): Getable<Comparable<String>?>? {
+   return (s).let { it as Getable<Comparable<String>?>?; it as Setable?; it }
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T> cast2(s: kotlin.Any?): intersectiontype.Getable<kotlin.Comparable<T & kotlin.Any>?>? {
-   return (s).let { it as intersectiontype.Getable<kotlin.Comparable<T & kotlin.Any>?>?; it as intersectiontype.Setable?; it }
+  @JvmStatic
+  fun <T> cast2(s: Any?): Getable<Comparable<T & Any>?>? {
+   return (s).let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
   }
 
-  @kotlin.jvm.JvmStatic
-  fun method(): intersectiontype.Cmp? {
-   return (intersectiontype.Cmp {
+  @JvmStatic
+  fun method(): Cmp? {
+   return (Cmp {
     return@Cmp 1
-   }).let { it as intersectiontype.Cmp?; it as intersectiontype.Serial?; it }
+   }).let { it as Cmp?; it as Serial?; it }
   }
 
-  @kotlin.jvm.JvmStatic
-  fun method2(): intersectiontype.Cmp2<kotlin.Any?>? {
-   return intersectiontype.Cmp2 { a: kotlin.Int ->
+  @JvmStatic
+  fun method2(): Cmp2<Any?>? {
+   return Cmp2 { a: Int ->
     return@Cmp2 1
-   } as intersectiontype.Cmp2<kotlin.Any?>?
+   } as Cmp2<Any?>?
   }
 
-  @kotlin.jvm.JvmStatic
-  fun testClosureAssignment(o: kotlin.Any?) {
-   val e: intersectiontype.IntersectionTypeTest.A? = (o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it as intersectiontype.IntersectionTypeTest.EmptyB?; it }
-   val g: intersectiontype.IntersectionTypeTest.EmptyA? = (o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it as intersectiontype.IntersectionTypeTest.EmptyB?; it }
-   val s: intersectiontype.IntersectionTypeTest.EmptyB? = (o).let { it as intersectiontype.IntersectionTypeTest.A?; it as intersectiontype.IntersectionTypeTest.EmptyA?; it as intersectiontype.IntersectionTypeTest.EmptyB?; it }
+  @JvmStatic
+  fun testClosureAssignment(o: Any?) {
+   val e: IntersectionTypeTest.A? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
+   val g: IntersectionTypeTest.EmptyA? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
+   val s: IntersectionTypeTest.EmptyB? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
   }
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun <T> get_private_2(t: T): T {
    return t
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T> m_private_2(): T where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
-   return intersectiontype.IntersectionTypeTest.get_private_2<kotlin.Any?>(kotlin.Any()) as T
+  @JvmStatic
+  fun <T> m_private_2(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
+   return IntersectionTypeTest.get_private_2<Any?>(Any()) as T
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T> n_private_2(): intersectiontype.Getable<T>? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
+  @JvmStatic
+  fun <T> n_private_2(): Getable<T>? where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
    return null
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T> set_private_2(t: T) where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {}
+  @JvmStatic
+  fun <T> set_private_2(t: T) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
 
-  @kotlin.jvm.JvmStatic
-  fun <T> callOnIntersetionTypes_private_2(t: T) where T: intersectiontype.IntersectionTypeTest.SomeConcreteType?, T: intersectiontype.Cmp? {
+  @JvmStatic
+  fun <T> callOnIntersetionTypes_private_2(t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
    t!!.cmp()
-   ((null).let { it as intersectiontype.IntersectionTypeTest.SomeConcreteType?; it as intersectiontype.Cmp?; it })!!.cmp()
+   ((null).let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it })!!.cmp()
   }
  }
 
  open inner class MapEntry {
-  open fun <T> method(o: kotlin.Any?): intersectiontype.Getable<T>? {
-   return (o).let { it as intersectiontype.Getable<T>?; it as intersectiontype.Setable?; it }
+  open fun <T> method(o: Any?): Getable<T>? {
+   return (o).let { it as Getable<T>?; it as Setable?; it }
   }
  }
 

@@ -2,10 +2,11 @@
 package abstractinterfaceimpl
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import abstractinterfaceimpl.MyInterface
+import kotlin.Int
 
 fun interface MyInterface {
- fun foo(): kotlin.Int
+ fun foo(): Int
 }
 
-abstract class AbstractInterfaceImpl: abstractinterfaceimpl.MyInterface {}
+abstract class AbstractInterfaceImpl: MyInterface {}

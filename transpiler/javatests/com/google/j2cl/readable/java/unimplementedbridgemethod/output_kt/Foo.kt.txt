@@ -2,21 +2,25 @@
 package unimplementedbridgemethod
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.String
+import kotlin.jvm.JvmStatic
+import unimplementedbridgemethod.I
+import unimplementedbridgemethod.J
 
 fun interface I<T> {
- fun foo(t: T): kotlin.Int
+ fun foo(t: T): Int
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun staticFoo(): kotlin.Int {
+  @JvmStatic
+  fun staticFoo(): Int {
    return 0
   }
  }
 }
 
-fun interface J: unimplementedbridgemethod.I<kotlin.String?> {}
+fun interface J: I<String?> {}
 
-abstract class Bar: unimplementedbridgemethod.J {}
+abstract class Bar: J {}
 
-abstract class Foo: unimplementedbridgemethod.I<kotlin.String?> {}
+abstract class Foo: I<String?> {}

@@ -2,14 +2,18 @@
 package booleanoperations
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import booleanoperations.BooleanOperations
+import kotlin.Boolean
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class BooleanOperations {
  open fun test() {
-  var ls: kotlin.Boolean = true
-  val rs: kotlin.Boolean = true
-  var r: kotlin.Boolean = true
-  val t: kotlin.Boolean = !!!true
+  var ls: Boolean = true
+  val rs: Boolean = true
+  var r: Boolean = true
+  val t: Boolean = !!!true
   r = ls === rs
   r = ls !== rs
   r = ls.xor(rs)
@@ -17,33 +21,33 @@ open class BooleanOperations {
   r = ls.or(rs)
   r = ls && rs
   r = ls || rs
-  r = kotlin.run {
+  r = run {
    ls = rs
    ls
   }
   r = r.xor(rs)
   r = r.and(rs)
   r = r.or(rs)
-  booleanoperations.BooleanOperations.acceptBoolean_private_2(ls === rs)
-  booleanoperations.BooleanOperations.acceptBoolean_private_2(ls !== rs)
-  booleanoperations.BooleanOperations.acceptBoolean_private_2(ls.xor(rs))
-  booleanoperations.BooleanOperations.acceptBoolean_private_2(ls.and(rs))
-  booleanoperations.BooleanOperations.acceptBoolean_private_2(ls.or(rs))
-  booleanoperations.BooleanOperations.acceptBoolean_private_2(ls && rs)
-  booleanoperations.BooleanOperations.acceptBoolean_private_2(ls || rs)
-  booleanoperations.BooleanOperations.acceptBoolean_private_2(kotlin.run {
+  BooleanOperations.acceptBoolean_private_2(ls === rs)
+  BooleanOperations.acceptBoolean_private_2(ls !== rs)
+  BooleanOperations.acceptBoolean_private_2(ls.xor(rs))
+  BooleanOperations.acceptBoolean_private_2(ls.and(rs))
+  BooleanOperations.acceptBoolean_private_2(ls.or(rs))
+  BooleanOperations.acceptBoolean_private_2(ls && rs)
+  BooleanOperations.acceptBoolean_private_2(ls || rs)
+  BooleanOperations.acceptBoolean_private_2(run {
    ls = rs
    ls
   })
-  var br: kotlin.Boolean? = null
-  br = kotlin.Boolean.valueOf(ls === rs)
-  br = kotlin.Boolean.valueOf(ls !== rs)
-  br = kotlin.Boolean.valueOf(ls.xor(rs))
-  br = kotlin.Boolean.valueOf(ls.and(rs))
-  br = kotlin.Boolean.valueOf(ls.or(rs))
-  br = kotlin.Boolean.valueOf(ls && rs)
-  br = kotlin.Boolean.valueOf(ls || rs)
-  br = kotlin.Boolean.valueOf(kotlin.run {
+  var br: Boolean? = null
+  br = Boolean.valueOf(ls === rs)
+  br = Boolean.valueOf(ls !== rs)
+  br = Boolean.valueOf(ls.xor(rs))
+  br = Boolean.valueOf(ls.and(rs))
+  br = Boolean.valueOf(ls.or(rs))
+  br = Boolean.valueOf(ls && rs)
+  br = Boolean.valueOf(ls || rs)
+  br = Boolean.valueOf(run {
    ls = rs
    ls
   })
@@ -69,7 +73,7 @@ open class BooleanOperations {
    r = true
   }
   open class ___1Outer {
-   @kotlin.jvm.JvmField var b: kotlin.Boolean = false
+   @JvmField var b: Boolean = false
 
    open inner class Inner {
     init {
@@ -80,14 +84,14 @@ open class BooleanOperations {
   val finalOuter: ___1Outer? = ___1Outer()
   finalOuter!!.b = finalOuter!!.b.or(true)
   var outer: ___1Outer? = ___1Outer()
-  outer!!.b = outer!!.b.or(kotlin.run {
+  outer!!.b = outer!!.b.or(run {
    outer = null
    outer
   } === null)
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun acceptBoolean_private_2(b: kotlin.Boolean) {}
+  @JvmStatic
+  fun acceptBoolean_private_2(b: Boolean) {}
  }
 }

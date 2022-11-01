@@ -2,19 +2,21 @@
 package jsvarargs
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsvarargs.Main
+import kotlin.IntArray
+import kotlin.intArrayOf
 
-open class QualifiedSuperMethodCall: jsvarargs.Main {
+open class QualifiedSuperMethodCall: Main {
  constructor(): super(0)
 
  open inner class InnerClass {
   open fun test() {
-   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
-   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1)
-   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
-   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1)
-   val ints: kotlin.IntArray? = kotlin.intArrayOf(1, 2)
-   super<jsvarargs.Main>@QualifiedSuperMethodCall.f3(1, *(ints)!!)
+   super<Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
+   super<Main>@QualifiedSuperMethodCall.f3(1)
+   super<Main>@QualifiedSuperMethodCall.f3(1, 1, 2)
+   super<Main>@QualifiedSuperMethodCall.f3(1)
+   val ints: IntArray? = intArrayOf(1, 2)
+   super<Main>@QualifiedSuperMethodCall.f3(1, *(ints)!!)
   }
  }
 }

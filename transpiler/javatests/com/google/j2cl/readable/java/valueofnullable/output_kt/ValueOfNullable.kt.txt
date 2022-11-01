@@ -2,12 +2,14 @@
 package valueofnullable
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Char
+import kotlin.String
+import kotlin.jvm.JvmField
 
 open class ValueOfNullable {
- @kotlin.jvm.JvmField var nullableString: kotlin.String? = "b"
+ @JvmField var nullableString: String? = "b"
 
- @kotlin.jvm.JvmField var someChar: kotlin.Char = 'a'
+ @JvmField var someChar: Char = 'a'
 
- @kotlin.jvm.JvmField var result: kotlin.String? = "" + this.someChar + this.nullableString
+ @JvmField var result: String? = "" + this.someChar + this.nullableString
 }

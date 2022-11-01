@@ -2,16 +2,17 @@
 package nativetype
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class MyTypedArray<T> {
- @kotlin.jvm.JvmField var length_private_2: kotlin.Int = 0
+ @JvmField var length_private_2: Int = 0
 
- fun size(): kotlin.Int {
+ fun size(): Int {
   return this.length_private_2
  }
 
- fun get(index: kotlin.Int): T {
+ fun get(index: Int): T {
   return null as T
  }
 }

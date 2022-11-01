@@ -2,58 +2,67 @@
 package foreachstatement
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import foreachstatement.ForEachStatement
+import java.lang.Exception
+import javaemul.lang.JavaIterable
+import kotlin.Any
+import kotlin.Int
+import kotlin.String
+import kotlin.Throwable
+import kotlin.arrayOfNulls
+import kotlin.collections.MutableIterable
+import kotlin.collections.MutableIterator
 
 open class ForEachStatement {
- open fun test(iterable: kotlin.collections.MutableIterable<kotlin.Throwable?>?) {
+ open fun test(iterable: MutableIterable<Throwable?>?) {
   FOR_EACH@ for (t in iterable!!) {
-   val t_1: kotlin.Throwable? = t
+   val t_1: Throwable? = t
    t_1!!.toString()
   }
-  FOR_EACH_1@ for (t_2 in kotlin.arrayOfNulls<kotlin.Throwable>(10)) {
-   val t_3: kotlin.Throwable? = t_2
+  FOR_EACH_1@ for (t_2 in arrayOfNulls<Throwable>(10)) {
+   val t_3: Throwable? = t_2
    t_3!!.toString()
   }
  }
 
  fun testMulticatch_private_2() {
   try {
-   throw java.lang.Exception()
-  } catch (e: foreachstatement.ForEachStatement.Exception1) {
+   throw Exception()
+  } catch (e: ForEachStatement.Exception1) {
    FOR_EACH@ for (o in e!!) {
-    val o_1: kotlin.Any? = o
+    val o_1: Any? = o
    }
-  } catch (e: foreachstatement.ForEachStatement.Exception2) {
+  } catch (e: ForEachStatement.Exception2) {
    FOR_EACH@ for (o in e!!) {
-    val o_1: kotlin.Any? = o
+    val o_1: Any? = o
    }
   }
  }
 
- fun <T: kotlin.collections.MutableIterable<kotlin.String?>?, U: T> testTypeVariable_private_2() {
+ fun <T: MutableIterable<String?>?, U: T> testTypeVariable_private_2() {
   val iterable: U? = null
   FOR_EACH@ for (s in iterable!!) {
-   val s_1: kotlin.String? = s
+   val s_1: String? = s
   }
-  val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
+  val anotherIterable: ForEachStatement.IterableReturningTypeVariable<*>? = null
   FOR_EACH_1@ for (s_2 in anotherIterable!!) {
-   val s_3: kotlin.Int = s_2!!
+   val s_3: Int = s_2!!
   }
  }
 
- open class Exception1: javaemul.lang.JavaIterable<kotlin.String?>, java.lang.Exception() {
-  open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String?> {
+ open class Exception1: JavaIterable<String?>, Exception() {
+  open override fun iterator(): MutableIterator<String?> {
    return null!!
   }
  }
 
- open class Exception2: javaemul.lang.JavaIterable<kotlin.Any?>, java.lang.Exception() {
-  open override fun iterator(): kotlin.collections.MutableIterator<kotlin.Any?> {
+ open class Exception2: JavaIterable<Any?>, Exception() {
+  open override fun iterator(): MutableIterator<Any?> {
    return null!!
   }
  }
 
- open class IterableReturningTypeVariable<T: kotlin.collections.MutableIterator<kotlin.Int?>>: javaemul.lang.JavaIterable<kotlin.Int?> {
+ open class IterableReturningTypeVariable<T: MutableIterator<Int?>>: JavaIterable<Int?> {
   open override fun iterator(): T {
    return null!!
   }

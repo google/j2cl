@@ -2,10 +2,11 @@
 package packageprivatemethods.package2
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import packageprivatemethods.package1.Child
 
-open class SubChild: packageprivatemethods.package1.Child() {
- open override fun foo(a: kotlin.Int): kotlin.Int {
+open class SubChild: Child() {
+ open override fun foo(a: Int): Int {
   return a + 3
  }
 }

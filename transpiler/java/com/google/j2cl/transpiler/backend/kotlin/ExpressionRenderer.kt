@@ -142,7 +142,9 @@ private fun Renderer.renderCastExpression(castExpression: CastExpression) {
     // Render cast to intersection type descriptor: (A & B & C) x
     // using smart casts: (x).let { it as A; it as B; it as C; it }
     renderInParentheses { renderExpression(castExpression.expression) }
-    render(".let { ")
+    render(".")
+    renderExtensionFunctionName("kotlin.let")
+    render(" { ")
     castTypeDescriptor.intersectionTypeDescriptors.forEach {
       render("it as ")
       renderTypeDescriptor(it)
@@ -194,7 +196,7 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
   val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!.toNonNullable()
-  renderQualifiedName(functionalInterface.ktQualifiedName(asSuperType = true))
+  renderQualifiedName(functionalInterface, asSuperType = true)
   render(" ")
   renderInCurlyBrackets {
     val parameters = functionExpression.parameters
@@ -249,12 +251,14 @@ private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
-  renderQualifiedName(typeLiteral.referencedTypeDescriptor.ktQualifiedName())
+  renderQualifiedName(typeLiteral.referencedTypeDescriptor)
   render("::class")
+  render(".")
   if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-    render(".javaPrimitiveType!!")
+    renderExtensionFunctionName("kotlin.jvm.javaPrimitiveType")
+    renderNonNullAssertion()
   } else {
-    render(".javaObjectType")
+    renderExtensionFunctionName("kotlin.jvm.javaObjectType")
   }
 }
 
@@ -322,7 +326,7 @@ internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
           render("*")
           renderInParentheses { renderExpression(argument) }
           // Spread operator requires non-null array.
-          if (argument.typeDescriptor.isNullable) render("!!")
+          if (argument.typeDescriptor.isNullable) renderNonNullAssertion()
         } else {
           renderExpression(argument)
         }
@@ -423,7 +427,7 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   if (typeDeclaration.isCapturingEnclosingInstance) {
     renderIdentifier(typeDeclaration.ktSimpleName(asSuperType = true))
   } else {
-    renderQualifiedName(typeDescriptor.ktQualifiedName(asSuperType = true))
+    renderQualifiedName(typeDescriptor, asSuperType = true)
   }
 
   val typeArguments = typeDescriptor.typeArguments()
@@ -469,9 +473,7 @@ private fun Renderer.renderSuperReference(
 ) {
   render("super")
   if (superTypeDescriptor != null) {
-    renderInAngleBrackets {
-      renderQualifiedName(superTypeDescriptor.ktQualifiedName(asSuperType = true))
-    }
+    renderInAngleBrackets { renderQualifiedName(superTypeDescriptor, asSuperType = true) }
   }
   if (qualifierTypeDescriptor != null) {
     renderLabelReference(qualifierTypeDescriptor)
@@ -532,7 +534,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       if (ktCompanionQualifiedName != null) {
         renderQualifiedName(ktCompanionQualifiedName)
       } else {
-        renderQualifiedName(enclosingTypeDescriptor.ktQualifiedName())
+        renderQualifiedName(enclosingTypeDescriptor)
       }
       render(".")
     }
@@ -576,6 +578,10 @@ private fun Renderer.renderRightSubExpression(expression: Expression, operand: E
 private fun Renderer.renderExpressionInParens(expression: Expression, needsParentheses: Boolean) {
   if (needsParentheses) renderInParentheses { renderExpression(expression) }
   else renderExpression(expression)
+}
+
+private fun Renderer.renderNonNullAssertion() {
+  render("!!")
 }
 
 private val Expression.isNonQualifiedThisReference

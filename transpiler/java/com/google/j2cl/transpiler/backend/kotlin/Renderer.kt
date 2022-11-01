@@ -40,7 +40,10 @@ data class Renderer(
 
   /** Whether to render this reference with explicit qualifier. */
   // TODO(b/252138814): Remove when KT-54349 is fixed
-  val renderThisReferenceWithLabel: Boolean = false
+  val renderThisReferenceWithLabel: Boolean = false,
+
+  /** A set of local names which are potentially shadowing imports. */
+  val localNames: Set<String> = setOf()
 ) {
   fun renderNewLine() {
     sourceBuilder.newLine()

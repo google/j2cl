@@ -2,11 +2,12 @@
 package gwtincompatible
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import gwtincompatible.Interface
+import kotlin.Int
 
-open class Implementor: gwtincompatible.Interface, gwtincompatible.Interface.NestedInterface, gwtincompatible.Interface.ClassWithAbstractMethod() {
+open class Implementor: Interface, Interface.NestedInterface, Interface.ClassWithAbstractMethod() {
  open fun compatibleMethod() {
-  val a: kotlin.Int = 4
+  val a: Int = 4
  }
 
  enum class SomeEnum {

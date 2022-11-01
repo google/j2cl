@@ -2,10 +2,11 @@
 package packageprivatemethods.package2
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import packageprivatemethods.package1.Parent
 
-abstract class SubParent: packageprivatemethods.package1.Parent() {
- open fun foo(a: kotlin.Int): kotlin.Int {
+abstract class SubParent: Parent() {
+ open fun foo(a: Int): Int {
   return a
  }
 }

@@ -2,62 +2,67 @@
 package instancejsmethods
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import instancejsmethods.Child
+import instancejsmethods.MyInterface
+import instancejsmethods.Parent
+import instancejsmethods.SuperParent
+import kotlin.Int
+import kotlin.jvm.JvmStatic
 
 fun interface MyInterface {
- fun intfFoo(): kotlin.Int
+ fun intfFoo(): Int
 }
 
 open class SuperParent {
- open fun `fun`(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
+ open fun `fun`(a: Int, b: Int): Int {
   return a + b + 111
  }
 
- open fun bar(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
+ open fun bar(a: Int, b: Int): Int {
   return a * b + 222
  }
 }
 
-open class Parent: instancejsmethods.SuperParent() {
- open override fun `fun`(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
+open class Parent: SuperParent() {
+ open override fun `fun`(a: Int, b: Int): Int {
   return a + b
  }
 
- open override fun bar(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
+ open override fun bar(a: Int, b: Int): Int {
   return a * b
  }
 
- open fun foo(a: kotlin.Int): kotlin.Int {
+ open fun foo(a: Int): Int {
   return a
  }
 }
 
-open class Child: instancejsmethods.MyInterface, instancejsmethods.Parent() {
- open override fun `fun`(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
+open class Child: MyInterface, Parent() {
+ open override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }
 
- open override fun bar(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
+ open override fun bar(a: Int, b: Int): Int {
   return a * b + 1
  }
 
- open override fun foo(a: kotlin.Int): kotlin.Int {
+ open override fun foo(a: Int): Int {
   return a
  }
 
- open override fun intfFoo(): kotlin.Int {
+ open override fun intfFoo(): Int {
   return 1
  }
 }
 
 open class Main {
  open fun testCallBySuperParent() {
-  val sp: instancejsmethods.SuperParent? = instancejsmethods.SuperParent()
-  val p: instancejsmethods.SuperParent? = instancejsmethods.Parent()
-  val c: instancejsmethods.SuperParent? = instancejsmethods.Child()
-  val pp: instancejsmethods.Parent? = instancejsmethods.Parent()
-  val cc: instancejsmethods.Parent? = instancejsmethods.Child()
-  val intf: instancejsmethods.MyInterface? = instancejsmethods.Child()
+  val sp: SuperParent? = SuperParent()
+  val p: SuperParent? = Parent()
+  val c: SuperParent? = Child()
+  val pp: Parent? = Parent()
+  val cc: Parent? = Child()
+  val intf: MyInterface? = Child()
   sp!!.`fun`(12, 35)
   sp!!.bar(6, 7)
   p!!.`fun`(12, 35)
@@ -70,11 +75,11 @@ open class Main {
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun testCallByConcreteType() {
-   val sp: instancejsmethods.SuperParent? = instancejsmethods.SuperParent()
-   val p: instancejsmethods.Parent? = instancejsmethods.Parent()
-   val c: instancejsmethods.Child? = instancejsmethods.Child()
+   val sp: SuperParent? = SuperParent()
+   val p: Parent? = Parent()
+   val c: Child? = Child()
    sp!!.`fun`(12, 35)
    sp!!.bar(6, 7)
    p!!.`fun`(12, 35)

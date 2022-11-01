@@ -2,24 +2,27 @@
 package annotation
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import annotation.Main
+import kotlin.Annotation
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class Main {
- interface Foo: kotlin.Annotation {
-  fun bar(): kotlin.Int
+ interface Foo: Annotation {
+  fun bar(): Int
 
   companion object {
-   @kotlin.jvm.JvmField val CONSTANT: kotlin.Int = 123
+   @JvmField val CONSTANT: Int = 123
   }
  }
 
- interface Zoo: kotlin.Annotation {}
+ interface Zoo: Annotation {}
 
  open inner class Bar {
-  open fun baz(): kotlin.Int {
-   val foo: annotation.Main.Foo? = null
+  open fun baz(): Int {
+   val foo: Main.Foo? = null
    foo!!.bar()
-   return annotation.Main.Foo.CONSTANT
+   return Main.Foo.CONSTANT
   }
  }
 }

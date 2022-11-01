@@ -2,13 +2,16 @@
 package newinstance
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Array
+import kotlin.String
+import kotlin.jvm.JvmStatic
+import newinstance.NewInstanceExpr
 
 open class NewInstanceExpr {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun main(args: kotlin.Array<kotlin.String?>?) {
-   val a: newinstance.NewInstanceExpr? = newinstance.NewInstanceExpr()
+  @JvmStatic
+  fun main(args: Array<String?>?) {
+   val a: NewInstanceExpr? = NewInstanceExpr()
   }
  }
 }

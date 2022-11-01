@@ -2,116 +2,125 @@
 package trycatch
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import java.lang.AutoCloseable
+import java.lang.ClassCastException
+import javaemul.internal.Exceptions
+import kotlin.Exception
+import kotlin.NullPointerException
+import kotlin.RuntimeException
+import kotlin.Throwable
+import kotlin.assert
+import kotlin.jvm.JvmField
+import trycatch.TryCatch
 
 open class TryCatch {
  open fun testMultiCatch() {
   try {
-   throw java.lang.ClassCastException()
-  } catch (e: kotlin.NullPointerException) {
+   throw ClassCastException()
+  } catch (e: NullPointerException) {
    throw e!!
   } catch (e: kotlin.ClassCastException) {
    throw e!!
-  } catch (r: kotlin.RuntimeException) {
-   var r_1: kotlin.RuntimeException? = r
+  } catch (r: RuntimeException) {
+   var r_1: RuntimeException? = r
    r_1 = null
   }
  }
 
  open fun testEmptyThrowableCatch() {
   try {
-   throw java.lang.ClassCastException()
-  } catch (e: kotlin.Throwable) {}
+   throw ClassCastException()
+  } catch (e: Throwable) {}
   try {
-   throw java.lang.ClassCastException()
-  } catch (e_1: kotlin.Exception) {} catch (e_2: kotlin.Throwable) {}
+   throw ClassCastException()
+  } catch (e_1: Exception) {} catch (e_2: Throwable) {}
  }
 
  open fun testEmptyThrowableRethrow() {
   try {
-   throw java.lang.ClassCastException()
-  } catch (e: kotlin.Throwable) {
+   throw ClassCastException()
+  } catch (e: Throwable) {
    throw e!!
   }
  }
 
  open fun testFinally() {
   try {
-   kotlin.assert(true)
+   assert(true)
   } finally {}
  }
 
  open fun testTryWithResource() {
   try {
-   var ___primaryExc: kotlin.Throwable? = null
-   var thing: trycatch.TryCatch.ClosableThing? = null
-   var thing2: trycatch.TryCatch.ClosableThing? = null
+   var ___primaryExc: Throwable? = null
+   var thing: TryCatch.ClosableThing? = null
+   var thing2: TryCatch.ClosableThing? = null
    try {
-    thing = trycatch.TryCatch.ClosableThing()
-    thing2 = trycatch.TryCatch.ClosableThing()
+    thing = TryCatch.ClosableThing()
+    thing2 = TryCatch.ClosableThing()
     throw java.lang.Exception()
-   } catch (___exceptionFromTry: kotlin.Throwable) {
+   } catch (___exceptionFromTry: Throwable) {
     ___primaryExc = ___exceptionFromTry
     throw ___exceptionFromTry!!
    } finally {
-    ___primaryExc = javaemul.internal.Exceptions.safeClose(thing2, ___primaryExc)
-    ___primaryExc = javaemul.internal.Exceptions.safeClose(thing, ___primaryExc)
+    ___primaryExc = Exceptions.safeClose(thing2, ___primaryExc)
+    ___primaryExc = Exceptions.safeClose(thing, ___primaryExc)
     if (___primaryExc !== null) throw ___primaryExc!!
    }
-  } catch (e: kotlin.Exception) {}
+  } catch (e: Exception) {}
  }
 
  open fun testTryWithResourceJava9() {
-  val thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
-  val thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  val thing: TryCatch.ClosableThing? = TryCatch.ClosableThing()
+  val thing2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
   try {
-   var ___primaryExc: kotlin.Throwable? = null
-   var ___resource: trycatch.TryCatch.ClosableThing? = null
-   var ___resource_1: trycatch.TryCatch.ClosableThing? = null
+   var ___primaryExc: Throwable? = null
+   var ___resource: TryCatch.ClosableThing? = null
+   var ___resource_1: TryCatch.ClosableThing? = null
    try {
     ___resource = thing
     ___resource_1 = thing2
     throw java.lang.Exception()
-   } catch (___exceptionFromTry: kotlin.Throwable) {
+   } catch (___exceptionFromTry: Throwable) {
     ___primaryExc = ___exceptionFromTry
     throw ___exceptionFromTry!!
    } finally {
-    ___primaryExc = javaemul.internal.Exceptions.safeClose(___resource_1, ___primaryExc)
-    ___primaryExc = javaemul.internal.Exceptions.safeClose(___resource, ___primaryExc)
+    ___primaryExc = Exceptions.safeClose(___resource_1, ___primaryExc)
+    ___primaryExc = Exceptions.safeClose(___resource, ___primaryExc)
     if (___primaryExc !== null) throw ___primaryExc!!
    }
-  } catch (e: kotlin.Exception) {}
+  } catch (e: Exception) {}
  }
 
  open fun testTryWithResouceOnStaticField() {
   try {
-   var ___primaryExc: kotlin.Throwable? = null
-   var ___resource: trycatch.TryCatch.ClosableThing? = null
+   var ___primaryExc: Throwable? = null
+   var ___resource: TryCatch.ClosableThing? = null
    try {
-    ___resource = trycatch.TryCatch.closableThing_private_2
+    ___resource = TryCatch.closableThing_private_2
     throw java.lang.Exception()
-   } catch (___exceptionFromTry: kotlin.Throwable) {
+   } catch (___exceptionFromTry: Throwable) {
     ___primaryExc = ___exceptionFromTry
     throw ___exceptionFromTry!!
    } finally {
-    ___primaryExc = javaemul.internal.Exceptions.safeClose(___resource, ___primaryExc)
+    ___primaryExc = Exceptions.safeClose(___resource, ___primaryExc)
     if (___primaryExc !== null) throw ___primaryExc!!
    }
-  } catch (e: kotlin.Exception) {}
+  } catch (e: Exception) {}
  }
 
  open fun testNestedTryCatch() {
   try {
    throw java.lang.Exception()
-  } catch (ae: kotlin.Exception) {
+  } catch (ae: Exception) {
    try {
     throw java.lang.Exception()
-   } catch (ie: kotlin.Exception) {}
+   } catch (ie: Exception) {}
   }
  }
 
  open fun testThrowGenerics() {
-  throw this.getT_private_2<kotlin.Exception?>(java.lang.Exception())!!
+  throw this.getT_private_2<Exception?>(java.lang.Exception())!!
  }
 
  fun <T> getT_private_2(t: T): T {
@@ -119,18 +128,18 @@ open class TryCatch {
  }
 
  open fun testThrowBoundGenerics() {
-  throw this.getThrowable_private_2<kotlin.Throwable?>()!!
+  throw this.getThrowable_private_2<Throwable?>()!!
  }
 
- fun <T: kotlin.Throwable?> getThrowable_private_2(): T {
+ fun <T: Throwable?> getThrowable_private_2(): T {
   return null as T
  }
 
  companion object {
-  @kotlin.jvm.JvmField val closableThing_private_2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  @JvmField val closableThing_private_2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 
- open class ClosableThing: java.lang.AutoCloseable {
+ open class ClosableThing: AutoCloseable {
   open override fun close() {}
  }
 }

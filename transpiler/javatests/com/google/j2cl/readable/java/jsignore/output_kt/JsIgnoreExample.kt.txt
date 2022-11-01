@@ -2,20 +2,23 @@
 package jsignore
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Int
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class JsIgnoreExample {
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun exportedFunction() {}
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun notExportedFunction() {}
 
-  @kotlin.jvm.JvmField var exportedField: kotlin.Int = 10
+  @JvmField var exportedField: Int = 10
 
-  @kotlin.jvm.JvmField var notExportedField: kotlin.Int = 20
+  @JvmField var notExportedField: Int = 20
 
-  @kotlin.jvm.JvmField val CONSTNAME: kotlin.Any? = kotlin.Any()
+  @JvmField val CONSTNAME: Any? = Any()
  }
 }

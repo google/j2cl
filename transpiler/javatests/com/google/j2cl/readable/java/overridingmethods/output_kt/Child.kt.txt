@@ -2,7 +2,8 @@
 package overridingmethods
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import overridingmethods.Parent
+import overridingmethods.SomeInterface
 
 fun interface SomeInterface {
  fun bar()
@@ -12,7 +13,7 @@ open class Parent {
  open fun `fun`() {}
 }
 
-open class Child: overridingmethods.SomeInterface, overridingmethods.Parent() {
+open class Child: SomeInterface, Parent() {
  open override fun `fun`() {}
 
  open override fun bar() {}

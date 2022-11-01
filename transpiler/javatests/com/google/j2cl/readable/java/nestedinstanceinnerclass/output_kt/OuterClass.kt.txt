@@ -2,18 +2,19 @@
 package nestedinstanceinnerclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.jvm.JvmField
+import nestedinstanceinnerclass.OuterClass
 
 open class OuterClass {
  open fun test() {
-  nestedinstanceinnerclass.OuterClass().InnerClass().InnerInnerClass()
+  OuterClass().InnerClass().InnerInnerClass()
  }
 
  open inner class InnerClass {
   open inner class InnerInnerClass {
-   @kotlin.jvm.JvmField var x: nestedinstanceinnerclass.OuterClass.InnerClass? = this@InnerClass
+   @JvmField var x: OuterClass.InnerClass? = this@InnerClass
 
-   @kotlin.jvm.JvmField var y: nestedinstanceinnerclass.OuterClass? = this@OuterClass
+   @JvmField var y: OuterClass? = this@OuterClass
   }
  }
 }

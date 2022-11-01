@@ -2,31 +2,37 @@
 package typeannotations
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.String
+import kotlin.collections.ArrayList
+import kotlin.collections.MutableList
+import kotlin.jvm.JvmStatic
+import typeannotations.AbstractType
+import typeannotations.ParametricType
+import typeannotations.Parent
 
-abstract class AbstractType: typeannotations.ParametricType<typeannotations.AbstractType?> {}
+abstract class AbstractType: ParametricType<AbstractType?> {}
 
-abstract class AbstractTypeNonNull: typeannotations.ParametricType<typeannotations.AbstractType> {}
+abstract class AbstractTypeNonNull: ParametricType<AbstractType> {}
 
 open class Parent {
- open fun m(s: kotlin.String, c: typeannotations.Parent?): typeannotations.Parent? {
+ open fun m(s: String, c: Parent?): Parent? {
   return c
  }
 
- open fun m(l: kotlin.collections.MutableList<kotlin.String>?, c: typeannotations.Parent?): kotlin.collections.MutableList<typeannotations.Parent>? {
-  return kotlin.collections.ArrayList<typeannotations.Parent>()
+ open fun m(l: MutableList<String>?, c: Parent?): MutableList<Parent>? {
+  return ArrayList<Parent>()
  }
 }
 
-open class ChildWithNullableParent: typeannotations.ParametricType<typeannotations.Parent?>, typeannotations.Parent() {}
+open class ChildWithNullableParent: ParametricType<Parent?>, Parent() {}
 
-open class ChildWithNonNullableParent: typeannotations.ParametricType<typeannotations.Parent>, typeannotations.Parent() {}
+open class ChildWithNonNullableParent: ParametricType<Parent>, Parent() {}
 
 open class TypeAnnotations {
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun main() {
-   val list: kotlin.collections.MutableList<kotlin.String>? = kotlin.collections.ArrayList<kotlin.String>()
+   val list: MutableList<String>? = ArrayList<String>()
   }
  }
 }

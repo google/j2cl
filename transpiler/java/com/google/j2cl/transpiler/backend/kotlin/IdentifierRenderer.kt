@@ -35,7 +35,30 @@ internal fun Renderer.renderPackageName(packageName: String) {
 }
 
 internal fun Renderer.renderQualifiedName(qualifiedName: String) {
-  renderQualifiedIdentifier(qualifiedName)
+  renderQualifiedName(qualifiedName, forceSimple = false)
+}
+
+internal fun Renderer.renderExtensionFunctionName(qualifiedName: String) {
+  renderQualifiedName(qualifiedName, forceSimple = true)
+}
+
+private fun Renderer.renderQualifiedName(qualifiedName: String, forceSimple: Boolean) {
+  val simpleName = qualifiedName.qualifiedNameToSimpleName()
+
+  // Import only the first occurrence of simple name
+  // TODO(b/226922954): Implement import aliases.
+  environment.importedSimpleNameToQualifiedNameMap.putIfAbsent(simpleName, qualifiedName)
+
+  val canRenderSimpleName =
+    forceSimple ||
+      (environment.importedSimpleNameToQualifiedNameMap[simpleName] == qualifiedName &&
+        !localNames.contains(simpleName) &&
+        !environment.containsIdentifier(simpleName))
+  if (canRenderSimpleName) {
+    renderIdentifier(simpleName)
+  } else {
+    renderQualifiedIdentifier(qualifiedName)
+  }
 }
 
 private fun Renderer.renderQualifiedIdentifier(identifier: String) {

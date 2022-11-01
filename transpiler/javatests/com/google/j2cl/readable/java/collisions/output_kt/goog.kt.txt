@@ -2,17 +2,25 @@
 package collisions
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import collisions.Blah
+import collisions.Other
+import collisions.T
+import collisions.foo
+import collisions.goog
+import kotlin.Double
+import kotlin.Int
+import kotlin.Number
+import kotlin.jvm.JvmStatic
 
 open class goog {}
 
 open class Blah {
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   external fun m()
 
-  @kotlin.jvm.JvmStatic
-  external fun getN(): kotlin.Double
+  @JvmStatic
+  external fun getN(): Double
  }
 }
 
@@ -20,35 +28,35 @@ open class foo {}
 
 open class bar {
  init {
-  val foo: kotlin.Int = 0
-  val bar: kotlin.Int = 0
-  val goog: kotlin.Int = 0
-  val flip: kotlin.Int = 0
-  val window: kotlin.Int = 0
-  collisions.Blah.m()
-  collisions.Blah.getN()
-  collisions.Blah()
+  val foo: Int = 0
+  val bar: Int = 0
+  val goog: Int = 0
+  val flip: Int = 0
+  val window: Int = 0
+  Blah.m()
+  Blah.getN()
+  Blah()
   collisions.goog()
   collisions.foo()
-  val delete: kotlin.Int = 1
-  val undefined: kotlin.Int = 3
+  val delete: Int = 1
+  val undefined: Int = 3
  }
 }
 
 open class Other<T> {
  init {
-  val T_1: kotlin.Int = 3
-  val o: collisions.Other<T>? = null as collisions.Other<T>?
+  val T_1: Int = 3
+  val o: Other<T>? = null as Other<T>?
  }
 
  open fun <T_2> m(): T_2 {
-  val T_1: kotlin.Int = 5
-  val o: collisions.Other<T_2>? = null as collisions.Other<T_2>?
+  val T_1: Int = 5
+  val o: Other<T_2>? = null as Other<T_2>?
   return null as T_2
  }
 }
 
-open class T<T: kotlin.Number?> {
+open class T<T: Number?> {
  open fun m(): T {
   return null as T
  }

@@ -2,72 +2,80 @@
 package parameterassignments
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.IntArray
+import kotlin.arrayOf
+import kotlin.intArrayOf
+import kotlin.jvm.JvmField
+import parameterassignments.Main
 
 open class Main {
- constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): this(nonFinal, explicitFinal, implicitFinal, true) {
-  var nonFinal_1: kotlin.Int = nonFinal
+ constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): this(nonFinal, explicitFinal, implicitFinal, true) {
+  var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
- constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int, flag: kotlin.Boolean) {
-  var nonFinal_1: kotlin.Int = nonFinal
+ constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int, flag: Boolean) {
+  var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
- open fun test(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int {
-  var nonFinal_1: kotlin.Int = nonFinal
+ open fun test(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
+  var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   return nonFinal_1
  }
 
- open fun testObjectVarargs(o: kotlin.Any?, vararg oa: kotlin.Any?) {
-  var oa_1: kotlin.Array<kotlin.Any?>? = oa as kotlin.Array<kotlin.Any?>?
-  oa_1 = (kotlin.arrayOf<kotlin.Any?>(o, oa_1!![0]) as kotlin.Array<*>?) as kotlin.Array<kotlin.Any?>?
+ open fun testObjectVarargs(o: Any?, vararg oa: Any?) {
+  var oa_1: Array<Any?>? = oa as Array<Any?>?
+  oa_1 = (arrayOf<Any?>(o, oa_1!![0]) as Array<*>?) as Array<Any?>?
  }
 
- open fun testPrimitiveVarargs(i: kotlin.Int, vararg ia: kotlin.Int) {
-  var ia_1: kotlin.IntArray? = ia
-  ia_1 = kotlin.intArrayOf(i, ia_1!![0])
+ open fun testPrimitiveVarargs(i: Int, vararg ia: Int) {
+  var ia_1: IntArray? = ia
+  ia_1 = intArrayOf(i, ia_1!![0])
  }
 
- @kotlin.jvm.JvmField val fn: parameterassignments.Main.Fn? = parameterassignments.Main.Fn { nonFinal: kotlin.Int, implicitFinal: kotlin.Int ->
-  var nonFinal_1: kotlin.Int = nonFinal
+ @JvmField val fn: Main.Fn? = Main.Fn { nonFinal: Int, implicitFinal: Int ->
+  var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
   return@Fn nonFinal_1
  }
 
- @kotlin.jvm.JvmField val fnPrimitiveVarargs: parameterassignments.Main.FnPrimitiveVarargs? = parameterassignments.Main.FnPrimitiveVarargs { i: kotlin.Int, `is`: kotlin.IntArray? ->
+ @JvmField val fnPrimitiveVarargs: Main.FnPrimitiveVarargs? = Main.FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
   `is`!![0] = `is`!![1]
  }
 
- @kotlin.jvm.JvmField val fnObjectVarargs: parameterassignments.Main.FnObjectVarargs? = parameterassignments.Main.FnObjectVarargs { o: kotlin.Any?, os: kotlin.Array<*>? ->
-  val os_1: kotlin.Array<kotlin.Any?>? = os as kotlin.Array<kotlin.Any?>?
+ @JvmField val fnObjectVarargs: Main.FnObjectVarargs? = Main.FnObjectVarargs { o: Any?, os: Array<*>? ->
+  val os_1: Array<Any?>? = os as Array<Any?>?
   os_1!![0] = os_1!![1]
  }
 
  fun interface Fn {
-  fun test(nonFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int
+  fun test(nonFinal: Int, implicitFinal: Int): Int
  }
 
  fun interface FnPrimitiveVarargs {
-  fun test(i: kotlin.Int, vararg `is`: kotlin.Int)
+  fun test(i: Int, vararg `is`: Int)
  }
 
  fun interface FnObjectVarargs {
-  fun test(o: kotlin.Any?, vararg os: kotlin.Any?)
+  fun test(o: Any?, vararg os: Any?)
  }
 
- open class SubMain: parameterassignments.Main {
-  constructor(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): super(nonFinal, explicitFinal, implicitFinal) {
-   var nonFinal_1: kotlin.Int = nonFinal
+ open class SubMain: Main {
+  constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): super(nonFinal, explicitFinal, implicitFinal) {
+   var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   }
 
-  open override fun test(nonFinal: kotlin.Int, explicitFinal: kotlin.Int, implicitFinal: kotlin.Int): kotlin.Int {
-   var nonFinal_1: kotlin.Int = nonFinal
+  open override fun test(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
+   var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
-   return super<parameterassignments.Main>.test(nonFinal_1, explicitFinal, implicitFinal)
+   return super<Main>.test(nonFinal_1, explicitFinal, implicitFinal)
   }
  }
 }

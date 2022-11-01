@@ -2,135 +2,148 @@
 package nullability
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import java.lang.RuntimeException
+import java.util.Comparator
+import kotlin.Any
+import kotlin.Array
+import kotlin.Double
+import kotlin.Int
+import kotlin.String
+import kotlin.arrayOf
+import kotlin.collections.ArrayList
+import kotlin.collections.MutableList
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import nullability.Marker
+import nullability.Nullability
 
 open class Nullability {
- @kotlin.jvm.JvmField var f1_private_2: kotlin.String = "Hello"
+ @JvmField var f1_private_2: String = "Hello"
 
- @kotlin.jvm.JvmField var f2_private_2: kotlin.String? = null
+ @JvmField var f2_private_2: String? = null
 
- @kotlin.jvm.JvmField var f3_private_2: kotlin.String? = null
+ @JvmField var f3_private_2: String? = null
 
- @kotlin.jvm.JvmField var f4_private_2: kotlin.collections.MutableList<kotlin.String> = kotlin.collections.ArrayList<kotlin.String>()
+ @JvmField var f4_private_2: MutableList<String> = ArrayList<String>()
 
- @kotlin.jvm.JvmField var f5_private_2: kotlin.collections.MutableList<kotlin.String>? = kotlin.collections.ArrayList<kotlin.String>()
+ @JvmField var f5_private_2: MutableList<String>? = ArrayList<String>()
 
- @kotlin.jvm.JvmField var f6_private_2: kotlin.collections.MutableList<kotlin.String?> = kotlin.collections.ArrayList<kotlin.String?>()
+ @JvmField var f6_private_2: MutableList<String?> = ArrayList<String?>()
 
- @kotlin.jvm.JvmField var f7_private_2: kotlin.collections.MutableList<kotlin.String?>? = null
+ @JvmField var f7_private_2: MutableList<String?>? = null
 
- @kotlin.jvm.JvmField var f8_private_2: kotlin.Array<kotlin.String> = kotlin.arrayOf<kotlin.String>()
+ @JvmField var f8_private_2: Array<String> = arrayOf<String>()
 
- @kotlin.jvm.JvmField var f9_private_2: kotlin.Array<kotlin.String?> = kotlin.arrayOf<kotlin.String?>()
+ @JvmField var f9_private_2: Array<String?> = arrayOf<String?>()
 
- @kotlin.jvm.JvmField var f10_private_2: kotlin.Array<kotlin.String>? = kotlin.arrayOf<kotlin.String>()
+ @JvmField var f10_private_2: Array<String>? = arrayOf<String>()
 
- @kotlin.jvm.JvmField var f12_private_2: kotlin.collections.MutableList<kotlin.String?>? = kotlin.collections.ArrayList<kotlin.String?>()
+ @JvmField var f12_private_2: MutableList<String?>? = ArrayList<String?>()
 
- @kotlin.jvm.JvmField var f13_private_2: kotlin.Any
+ @JvmField var f13_private_2: Any
 
- @kotlin.jvm.JvmField var f14_private_2: kotlin.Any? = null
+ @JvmField var f14_private_2: Any? = null
 
- constructor(a: kotlin.String) {
-  this.f13_private_2 = kotlin.Any()
+ constructor(a: String) {
+  this.f13_private_2 = Any()
  }
 
- open fun m1(a: kotlin.String, b: kotlin.collections.MutableList<kotlin.Double>, c: kotlin.String?): kotlin.String {
+ open fun m1(a: String, b: MutableList<Double>, c: String?): String {
   return ""
  }
 
- open fun m2(a: kotlin.String?, b: kotlin.collections.MutableList<kotlin.Double?>): kotlin.String? {
+ open fun m2(a: String?, b: MutableList<Double?>): String? {
   return ""
  }
 
- open fun m3(a: kotlin.String, vararg args: kotlin.String): kotlin.String? {
-  val args_1: kotlin.Array<kotlin.String>? = args as kotlin.Array<kotlin.String>?
+ open fun m3(a: String, vararg args: String): String? {
+  val args_1: Array<String>? = args as Array<String>?
   return null
  }
 
- open fun m4(f: nullability.Nullability.MyFunction) {}
+ open fun m4(f: Nullability.MyFunction) {}
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.String?> testDefaultNullabilityBounds(defaultNullability: nullability.Nullability.ParameterizedDefaultNullability<T>?) {
+  @JvmStatic
+  fun <T: String?> testDefaultNullabilityBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable()!!.length
    defaultNullability!!.getNullable()!!.length
    defaultNullability!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.String?> testDefaultNullabilityBounds(nullable: nullability.Nullability.ParameterizedNullable<T>?) {
+  @JvmStatic
+  fun <T: String?> testDefaultNullabilityBounds(nullable: Nullability.ParameterizedNullable<T>?) {
    nullable!!.getNonNullable()!!.length
    nullable!!.getNullable()!!.length
    nullable!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.String?> testNullableBounds(defaultNullability: nullability.Nullability.ParameterizedDefaultNullability<T>?) {
+  @JvmStatic
+  fun <T: String?> testNullableBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable()!!.length
    defaultNullability!!.getNullable()!!.length
    defaultNullability!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.String?> testNullableBounds(nullable: nullability.Nullability.ParameterizedNullable<T>?) {
+  @JvmStatic
+  fun <T: String?> testNullableBounds(nullable: Nullability.ParameterizedNullable<T>?) {
    nullable!!.getNonNullable()!!.length
    nullable!!.getNullable()!!.length
    nullable!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.String> testNonNullableBounds(defaultNullability: nullability.Nullability.ParameterizedDefaultNullability<T>?) {
+  @JvmStatic
+  fun <T: String> testNonNullableBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable()!!.length
    defaultNullability!!.getNullable()!!.length
    defaultNullability!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.String> testNonNullableBounds(nullable: nullability.Nullability.ParameterizedNullable<T>?) {
+  @JvmStatic
+  fun <T: String> testNonNullableBounds(nullable: Nullability.ParameterizedNullable<T>?) {
    nullable!!.getNonNullable()!!.length
    nullable!!.getNullable()!!.length
    nullable!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.String> testNonNullableBounds(nonNullable: nullability.Nullability.ParameterizedNonNullable<T>?) {
+  @JvmStatic
+  fun <T: String> testNonNullableBounds(nonNullable: Nullability.ParameterizedNonNullable<T>?) {
    nonNullable!!.getNonNullable()!!.length
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: nullability.Nullability.ParameterizedDefaultNullability<out kotlin.String?>?) {
+  @JvmStatic
+  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedDefaultNullability<out String?>?) {
    nonNullable!!.getNonNullable()!!.length
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: nullability.Nullability.ParameterizedNullable<out kotlin.String?>?) {
+  @JvmStatic
+  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedNullable<out String?>?) {
    nonNullable!!.getNonNullable()!!.length
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: nullability.Nullability.ParameterizedNonNullable<out kotlin.String>?) {
+  @JvmStatic
+  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedNonNullable<out String>?) {
    nonNullable!!.getNonNullable()!!.length
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T> testRecursive() where T: nullability.Nullability.Recursive<T>, T: nullability.Marker? {
-   val generic: nullability.Nullability.RecursiveParam<T>? = nullability.Nullability.RecursiveParam<T>()
-   val parametrized: nullability.Nullability.RecursiveParam<nullability.Nullability.RecursiveChild>? = nullability.Nullability.RecursiveParam<nullability.Nullability.RecursiveChild>()
+  @JvmStatic
+  fun <T> testRecursive() where T: Nullability.Recursive<T>, T: Marker? {
+   val generic: Nullability.RecursiveParam<T>? = Nullability.RecursiveParam<T>()
+   val parametrized: Nullability.RecursiveParam<Nullability.RecursiveChild>? = Nullability.RecursiveParam<Nullability.RecursiveChild>()
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T> testRecursiveNullable() where T: nullability.Nullability.RecursiveNullable<T>?, T: nullability.Marker? {
-   val generic: nullability.Nullability.RecursiveNullableParam<T>? = nullability.Nullability.RecursiveNullableParam<T>()
-   val parametrized: nullability.Nullability.RecursiveNullableParam<nullability.Nullability.RecursiveNullableChild?>? = nullability.Nullability.RecursiveNullableParam<nullability.Nullability.RecursiveNullableChild?>()
+  @JvmStatic
+  fun <T> testRecursiveNullable() where T: Nullability.RecursiveNullable<T>?, T: Marker? {
+   val generic: Nullability.RecursiveNullableParam<T>? = Nullability.RecursiveNullableParam<T>()
+   val parametrized: Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>? = Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>()
   }
  }
 
@@ -141,25 +154,25 @@ open class Nullability {
    return null
   }
 
-  open override fun toString(): kotlin.String {
+  open override fun toString(): String {
    return "Foo"
   }
  }
 
  fun interface MyFunction {
-  fun x(a: kotlin.String): kotlin.String
+  fun x(a: String): String
  }
 
- open class StringList: kotlin.collections.ArrayList<kotlin.String?>() {}
+ open class StringList: ArrayList<String?>() {}
 
- open class StringComparator: java.util.Comparator<kotlin.String> {
-  open override fun compare(a: kotlin.String, b: kotlin.String): kotlin.Int {
+ open class StringComparator: Comparator<String> {
+  open override fun compare(a: String, b: String): Int {
    return 0
   }
  }
 
- open class NullableStringComparator: java.util.Comparator<kotlin.String?> {
-  open override fun compare(a: kotlin.String?, b: kotlin.String?): kotlin.Int {
+ open class NullableStringComparator: Comparator<String?> {
+  open override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
@@ -168,8 +181,8 @@ open class Nullability {
   fun foo(): T?
  }
 
- open class NullableTemplatedReturnOverride: nullability.Nullability.NullableTemplatedReturn<kotlin.String?> {
-  open override fun foo(): kotlin.String? {
+ open class NullableTemplatedReturnOverride: Nullability.NullableTemplatedReturn<String?> {
+  open override fun foo(): String? {
    return "foo"
   }
  }
@@ -180,7 +193,7 @@ open class Nullability {
   }
 
   open fun getNonNullable(): N {
-   throw java.lang.RuntimeException()
+   throw RuntimeException()
   }
 
   open fun getDefaultNullability(): N {
@@ -194,7 +207,7 @@ open class Nullability {
   }
 
   open fun getNonNullable(): N {
-   throw java.lang.RuntimeException()
+   throw RuntimeException()
   }
 
   open fun getDefaultNullability(): N {
@@ -202,13 +215,13 @@ open class Nullability {
   }
  }
 
- open class ParameterizedNonNullable<N: kotlin.Any> {
+ open class ParameterizedNonNullable<N: Any> {
   open fun getNullable(): N? {
    return null
   }
 
   open fun getNonNullable(): N {
-   throw java.lang.RuntimeException()
+   throw RuntimeException()
   }
 
   open fun getDefaultNullability(): N {
@@ -217,20 +230,20 @@ open class Nullability {
  }
 
  open class NonNullableInsideNullable<T> {
-  open fun nonNullableTest(nonNullable: nullability.Nullability.ParameterizedNonNullable<T & kotlin.Any>?) {}
+  open fun nonNullableTest(nonNullable: Nullability.ParameterizedNonNullable<T & Any>?) {}
  }
 
- open class Recursive<T> where T: nullability.Nullability.Recursive<T>, T: nullability.Marker? {}
+ open class Recursive<T> where T: Nullability.Recursive<T>, T: Marker? {}
 
- open class RecursiveNullable<T> where T: nullability.Nullability.RecursiveNullable<T>?, T: nullability.Marker? {}
+ open class RecursiveNullable<T> where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
 
- open class RecursiveChild: nullability.Marker, nullability.Nullability.Recursive<nullability.Nullability.RecursiveChild>() {}
+ open class RecursiveChild: Marker, Nullability.Recursive<Nullability.RecursiveChild>() {}
 
- open class RecursiveNullableChild: nullability.Marker, nullability.Nullability.RecursiveNullable<nullability.Nullability.RecursiveNullableChild?>() {}
+ open class RecursiveNullableChild: Marker, Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>() {}
 
- open class RecursiveParam<T> where T: nullability.Nullability.Recursive<T>, T: nullability.Marker? {}
+ open class RecursiveParam<T> where T: Nullability.Recursive<T>, T: Marker? {}
 
- open class RecursiveNullableParam<T> where T: nullability.Nullability.RecursiveNullable<T>?, T: nullability.Marker? {}
+ open class RecursiveNullableParam<T> where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
 }
 
 interface Marker {}

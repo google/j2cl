@@ -2,11 +2,12 @@
 package localnamecollision
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.assert
 
 open class Asserts {
- open fun n(): kotlin.Int {
-  kotlin.assert(5 !== 4)
+ open fun n(): Int {
+  assert(5 !== 4)
   return 5
  }
 }

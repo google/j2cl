@@ -2,28 +2,32 @@
 package deprecated
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Int
+import kotlin.String
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class DeprecatedExample {
- @kotlin.jvm.JvmField var deprecatedInstanceField: kotlin.String? = "deprecated field"
+ @JvmField var deprecatedInstanceField: String? = "deprecated field"
 
- open fun deprecatedInstanceMethod(someArg: kotlin.String?) {}
+ open fun deprecatedInstanceMethod(someArg: String?) {}
 
  constructor()
 
  companion object {
-  @kotlin.jvm.JvmField val DEPRECATED_STATIC_FIELD: kotlin.String? = "deprecated field"
+  @JvmField val DEPRECATED_STATIC_FIELD: String? = "deprecated field"
 
-  @kotlin.jvm.JvmStatic
-  fun deprecatedStaticMethod(someObject: kotlin.Any?) {}
+  @JvmStatic
+  fun deprecatedStaticMethod(someObject: Any?) {}
  }
 
  fun interface DeprecatedInterface {
-  fun doAThing(anInt: kotlin.Int)
+  fun doAThing(anInt: Int)
  }
 
  fun interface DeprecatedJsFunction {
-  fun doAThing(aThing: kotlin.Any?)
+  fun doAThing(aThing: Any?)
  }
 
  enum class DeprecatedEnum {

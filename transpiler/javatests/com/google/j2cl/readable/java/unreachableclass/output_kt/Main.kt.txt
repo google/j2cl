@@ -2,11 +2,12 @@
 package unreachableclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.RuntimeException
 
 open class Main {
  init {
-  try {} catch (e: kotlin.RuntimeException) {
+  try {} catch (e: RuntimeException) {
    open class ___1A {
     open fun m() {
      open class ___1B {
@@ -15,7 +16,7 @@ open class Main {
     }
    }
    ___1A().m()
-   object : kotlin.Any() {}
+   object : Any() {}
   }
  }
 }

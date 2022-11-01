@@ -2,23 +2,27 @@
 package jsconstructor
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsconstructor.JsConstructorClass
+import kotlin.Any
+import kotlin.Int
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class JsConstructorClass {
  open class A {
-  @kotlin.jvm.JvmField var fA: kotlin.Int = 1
+  @JvmField var fA: Int = 1
 
-  constructor(x: kotlin.Int) {
+  constructor(x: Int) {
    this.fA = x
   }
 
   constructor()
  }
 
- open class B: jsconstructor.JsConstructorClass.A {
-  @kotlin.jvm.JvmField var fB: kotlin.Int = 2
+ open class B: JsConstructorClass.A {
+  @JvmField var fB: Int = 2
 
-  constructor(x: kotlin.Int): super(x + 1) {
+  constructor(x: Int): super(x + 1) {
    this.fB = 3
   }
 
@@ -26,86 +30,86 @@ open class JsConstructorClass {
    this.fB = 4
   }
 
-  constructor(x: kotlin.Int, y: kotlin.Int): this(x + y) {
+  constructor(x: Int, y: Int): this(x + y) {
    this.fB = x * y
   }
  }
 
- open class C: jsconstructor.JsConstructorClass.B {
-  @kotlin.jvm.JvmField var fC: kotlin.Int = 1
+ open class C: JsConstructorClass.B {
+  @JvmField var fC: Int = 1
 
-  constructor(x: kotlin.Int): super(x * 2) {
+  constructor(x: Int): super(x * 2) {
    this.fC = 6
   }
 
-  constructor(x: kotlin.Int, y: kotlin.Int): this(x + y) {
+  constructor(x: Int, y: Int): this(x + y) {
    this.fC = 7
   }
  }
 
- open class D: jsconstructor.JsConstructorClass.B {
-  @kotlin.jvm.JvmField var fD: kotlin.Int = 8
+ open class D: JsConstructorClass.B {
+  @JvmField var fD: Int = 8
 
   constructor(): super(9) {
    this.fD = 10
   }
 
-  constructor(x: kotlin.Int): this() {
+  constructor(x: Int): this() {
    this.fD = x
   }
  }
 
- open class E: jsconstructor.JsConstructorClass.C {
-  @kotlin.jvm.JvmField var fE: kotlin.Int = 11
+ open class E: JsConstructorClass.C {
+  @JvmField var fE: Int = 11
 
   constructor(): super(10) {
    this.fE = 12
   }
  }
 
- open class F: jsconstructor.JsConstructorClass.C {
-  @kotlin.jvm.JvmField var fF: kotlin.Int = 13
+ open class F: JsConstructorClass.C {
+  @JvmField var fF: Int = 13
 
-  constructor(x: kotlin.Int): super(x + 2) {
+  constructor(x: Int): super(x + 2) {
    this.fF = x + 3
   }
  }
 
  open class G {}
 
- open class H: jsconstructor.JsConstructorClass.G {
+ open class H: JsConstructorClass.G {
   constructor()
  }
 
- open class Varargs: jsconstructor.JsConstructorClass.A {
-  constructor(vararg args: kotlin.Int): super(args!![1])
+ open class Varargs: JsConstructorClass.A {
+  constructor(vararg args: Int): super(args!![1])
  }
 
- open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
-  constructor(i: kotlin.Any?, vararg args: kotlin.Int): super(*(args)!!)
+ open class SubVarargs: JsConstructorClass.Varargs {
+  constructor(i: Any?, vararg args: Int): super(*(args)!!)
 
-  constructor(j: kotlin.Int): this(kotlin.Any(), j)
+  constructor(j: Int): this(Any(), j)
 
   companion object {
-   @kotlin.jvm.JvmStatic
+   @JvmStatic
    fun subNativeInvocation() {
-    val unusedS1: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(2)
-    val unusedS2: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(kotlin.Any(), 1, 2, 3)
+    val unusedS1: JsConstructorClass.SubVarargs? = JsConstructorClass.SubVarargs(2)
+    val unusedS2: JsConstructorClass.SubVarargs? = JsConstructorClass.SubVarargs(Any(), 1, 2, 3)
    }
   }
  }
 
- open inner class InstanceVarargs: jsconstructor.JsConstructorClass.A {
-  constructor(vararg args: kotlin.Int): super(args!![1])
+ open inner class InstanceVarargs: JsConstructorClass.A {
+  constructor(vararg args: Int): super(args!![1])
  }
 
  open class RegularType {
-  constructor(b: kotlin.Any?)
+  constructor(b: Any?)
  }
 
- open class JsConstructorSubtypeOfRegularType: jsconstructor.JsConstructorClass.RegularType {
-  constructor(`object`: kotlin.Any?): super(`object`)
+ open class JsConstructorSubtypeOfRegularType: JsConstructorClass.RegularType {
+  constructor(`object`: Any?): super(`object`)
 
-  constructor(): this(kotlin.Any())
+  constructor(): this(Any())
  }
 }

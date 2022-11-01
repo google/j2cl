@@ -2,22 +2,25 @@
 package interfacejsbridge
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import interfacejsbridge.MyInterface
+import interfacejsbridge.MyJsInterface
+import interfacejsbridge.SubInterface
+import kotlin.Int
 
 fun interface MyJsInterface {
- fun foo(a: kotlin.Int): kotlin.Int
+ fun foo(a: Int): Int
 }
 
 fun interface MyInterface {
- fun foo(a: kotlin.Int): kotlin.Int
+ fun foo(a: Int): Int
 }
 
-fun interface SubInterface: interfacejsbridge.MyJsInterface, interfacejsbridge.MyInterface {
- override fun foo(a: kotlin.Int): kotlin.Int
+fun interface SubInterface: MyJsInterface, MyInterface {
+ override fun foo(a: Int): Int
 }
 
-open class InterfaceImpl: interfacejsbridge.SubInterface {
- open override fun foo(a: kotlin.Int): kotlin.Int {
+open class InterfaceImpl: SubInterface {
+ open override fun foo(a: Int): Int {
   return 0
  }
 }

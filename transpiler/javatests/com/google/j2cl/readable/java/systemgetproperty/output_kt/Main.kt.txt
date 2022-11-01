@@ -2,28 +2,34 @@
 package systemgetproperty
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import java.lang.System
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.String
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import systemgetproperty.Main
 
 open class Main {
  companion object {
-  @kotlin.jvm.JvmField val property_private_2: kotlin.String? = java.lang.System.getProperty("jre.classMetadata")
+  @JvmField val property_private_2: String? = System.getProperty("jre.classMetadata")
 
-  @kotlin.jvm.JvmField val propertyWithDefault_private_2: kotlin.String? = java.lang.System.getProperty("jre.classMetadata", "default")
+  @JvmField val propertyWithDefault_private_2: String? = System.getProperty("jre.classMetadata", "default")
 
-  @kotlin.jvm.JvmStatic
-  fun main(args: kotlin.Array<kotlin.String?>?) {
-   var x: kotlin.Boolean = false
-   x = systemgetproperty.Main.property_private_2 === "SIMPLE"
-   x = systemgetproperty.Main.property_private_2!!.equals("SIMPLE")
-   x = systemgetproperty.Main.property_private_2!!.equalsIgnoreCase("SIMPLE")
-   x = systemgetproperty.Main.property_private_2 === "NOTSIMPLE"
-   x = systemgetproperty.Main.propertyWithDefault_private_2!!.equals("SIMPLE")
-   x = java.lang.System.getProperty("jre.bar", "bar")!!.equals("bar")
-   x = java.lang.System.getProperty("jre.classMetadata", systemgetproperty.Main.mightHaveSideEffects_private_2())!!.equals("SIMPLE")
+  @JvmStatic
+  fun main(args: Array<String?>?) {
+   var x: Boolean = false
+   x = Main.property_private_2 === "SIMPLE"
+   x = Main.property_private_2!!.equals("SIMPLE")
+   x = Main.property_private_2!!.equalsIgnoreCase("SIMPLE")
+   x = Main.property_private_2 === "NOTSIMPLE"
+   x = Main.propertyWithDefault_private_2!!.equals("SIMPLE")
+   x = System.getProperty("jre.bar", "bar")!!.equals("bar")
+   x = System.getProperty("jre.classMetadata", Main.mightHaveSideEffects_private_2())!!.equals("SIMPLE")
   }
 
-  @kotlin.jvm.JvmStatic
-  fun mightHaveSideEffects_private_2(): kotlin.String? {
+  @JvmStatic
+  fun mightHaveSideEffects_private_2(): String? {
    return "Foo"
   }
  }

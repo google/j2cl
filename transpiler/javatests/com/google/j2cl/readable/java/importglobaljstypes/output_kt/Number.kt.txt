@@ -2,33 +2,39 @@
 package importglobaljstypes
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import importglobaljstypes.Number
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.IntArray
+import kotlin.String
+import kotlin.jvm.JvmStatic
 
 open class Number {
- open fun testJsDocForLiteralType(a: importglobaljstypes.Number.MyLiteralType?): importglobaljstypes.Number.MyLiteralType? {
+ open fun testJsDocForLiteralType(a: Number.MyLiteralType?): Number.MyLiteralType? {
   return a
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  external fun `fun`(x: kotlin.Double): kotlin.Boolean
+  @JvmStatic
+  external fun `fun`(x: Double): Boolean
 
-  @kotlin.jvm.JvmStatic
-  fun test(x: kotlin.Double): kotlin.Boolean {
-   return importglobaljstypes.Number.`fun`(x)
+  @JvmStatic
+  fun test(x: Double): Boolean {
+   return Number.`fun`(x)
   }
 
-  @kotlin.jvm.JvmStatic
-  external fun getFromCharCodeFunction_private_2(): importglobaljstypes.Number.NativeFunction<kotlin.String?>?
+  @JvmStatic
+  external fun getFromCharCodeFunction_private_2(): Number.NativeFunction<String?>?
 
-  @kotlin.jvm.JvmStatic
-  fun fromCharCode(array: kotlin.IntArray?): kotlin.String? {
-   return importglobaljstypes.Number.getFromCharCodeFunction_private_2()!!.apply(null, array)
+  @JvmStatic
+  fun fromCharCode(array: IntArray?): String? {
+   return Number.getFromCharCodeFunction_private_2()!!.apply(null, array)
   }
  }
 
  fun interface NativeFunction<T> {
-  fun apply(thisContext: kotlin.Any?, argsArray: kotlin.IntArray?): T
+  fun apply(thisContext: Any?, argsArray: IntArray?): T
  }
 
  interface MyLiteralType {}

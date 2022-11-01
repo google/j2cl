@@ -2,24 +2,26 @@
 package importglobaljstypes
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import importglobaljstypes.Date
+import kotlin.Double
+import kotlin.jvm.JvmStatic
 
 open class Date {
- open fun copy(d: importglobaljstypes.Date.NativeDate?): importglobaljstypes.Date.NativeDate? {
+ open fun copy(d: Date.NativeDate?): Date.NativeDate? {
   return d
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun now(x: kotlin.Double): kotlin.Double {
-   return importglobaljstypes.Date.NativeDate.now()
+  @JvmStatic
+  fun now(x: Double): Double {
+   return Date.NativeDate.now()
   }
  }
 
  open class NativeDate {
   companion object {
-   @kotlin.jvm.JvmStatic
-   external fun now(): kotlin.Double
+   @JvmStatic
+   external fun now(): Double
   }
  }
 }

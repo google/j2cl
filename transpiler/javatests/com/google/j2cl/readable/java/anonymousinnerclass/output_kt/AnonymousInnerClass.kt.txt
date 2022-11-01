@@ -2,19 +2,22 @@
 package anonymousinnerclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import anonymousinnerclass.A
+import anonymousinnerclass.AnonymousInnerClass
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class A {
  open inner class B {}
 }
 
 open class AnonymousInnerClass {
- open fun test(arg: kotlin.Int) {
-  val ic: anonymousinnerclass.AnonymousInnerClass.InnerClass? = object : InnerClass() {}
-  val a: anonymousinnerclass.A? = anonymousinnerclass.A()
-  val b: anonymousinnerclass.A.B? = object : B() {}
+ open fun test(arg: Int) {
+  val ic: AnonymousInnerClass.InnerClass? = object : InnerClass() {}
+  val a: A? = A()
+  val b: A.B? = object : B() {}
   open class ___1C {
-   @kotlin.jvm.JvmField var fInC: kotlin.Int = arg
+   @JvmField var fInC: Int = arg
   }
   val c: ___1C? = object : ___1C() {}
  }

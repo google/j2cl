@@ -2,10 +2,12 @@
 package aptgeneratorplugin
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import aptgeneratorplugin.Dummy
+import kotlin.Int
+import kotlin.jvm.javaObjectType
 
 open class Foo {
- open override fun hashCode(): kotlin.Int {
-  return aptgeneratorplugin.Dummy::class.javaObjectType.hashCode()
+ open override fun hashCode(): Int {
+  return Dummy::class.javaObjectType.hashCode()
  }
 }

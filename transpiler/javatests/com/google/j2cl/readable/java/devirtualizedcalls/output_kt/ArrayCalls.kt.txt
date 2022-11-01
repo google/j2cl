@@ -2,14 +2,17 @@
 package devirtualizedcalls
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Array
+import kotlin.Int
+import kotlin.arrayOfNulls
 
 open class ArrayCalls {
  open fun main() {
-  val array2d: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.Array<kotlin.Array<kotlin.Any?>?>(1) {
-   kotlin.arrayOfNulls<kotlin.Any>(1)
+  val array2d: Array<Array<Any?>?>? = Array<Array<Any?>?>(1) {
+   arrayOfNulls<Any>(1)
   }
-  val length1: kotlin.Int = array2d!![0]!!.size
-  val length2: kotlin.Int = array2d!!.size
+  val length1: Int = array2d!![0]!!.size
+  val length2: Int = array2d!!.size
  }
 }

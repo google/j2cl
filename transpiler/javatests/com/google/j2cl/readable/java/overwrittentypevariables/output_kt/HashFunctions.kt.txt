@@ -2,29 +2,33 @@
 package overwrittentypevariables
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Enum
+import kotlin.String
+import kotlin.jvm.JvmStatic
+import overwrittentypevariables.HashFunction
+import overwrittentypevariables.MyFunction
 
 fun interface MyFunction<F, T> {
  fun apply(input: F): T
 }
 
-fun interface HashFunction<T>: overwrittentypevariables.MyFunction<T, kotlin.String?> {}
+fun interface HashFunction<T>: MyFunction<T, String?> {}
 
 open class HashFunctions {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <T> hashFunction(): overwrittentypevariables.HashFunction<T>? {
-   return object : overwrittentypevariables.HashFunction<T> {
-    open override fun apply(input: T): kotlin.String? {
+  @JvmStatic
+  fun <T> hashFunction(): HashFunction<T>? {
+   return object : HashFunction<T> {
+    open override fun apply(input: T): String? {
      return ""
     }
    }
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Enum<T>> enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
-   return object : overwrittentypevariables.HashFunction<T> {
-    open override fun apply(input: T): kotlin.String? {
+  @JvmStatic
+  fun <T: Enum<T>> enumHashFunction(): HashFunction<T>? {
+   return object : HashFunction<T> {
+    open override fun apply(input: T): String? {
      return "" + input!!.ordinal
     }
    }

@@ -2,45 +2,51 @@
 package inferreturn
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import inferreturn.InferReturn
+import kotlin.Any
+import kotlin.Array
+import kotlin.String
+import kotlin.arrayOfNulls
+import kotlin.collections.ArrayList
+import kotlin.jvm.JvmStatic
 
 open class InferReturn<T> {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <T_1> inferGeneric(foo: T_1): inferreturn.InferReturn<T_1>? {
-   return inferreturn.InferReturn<T_1>()
+  @JvmStatic
+  fun <T_1> inferGeneric(foo: T_1): InferReturn<T_1>? {
+   return InferReturn<T_1>()
   }
 
-  @kotlin.jvm.JvmStatic
-  fun tightenType(foo: inferreturn.InferReturn<kotlin.String?>?): inferreturn.InferReturn<inferreturn.InferReturn<kotlin.String?>?>? {
+  @JvmStatic
+  fun tightenType(foo: InferReturn<String?>?): InferReturn<InferReturn<String?>?>? {
    if (foo !== null) {
-    return inferreturn.InferReturn.inferGeneric<inferreturn.InferReturn<kotlin.String?>?>(foo)
+    return InferReturn.inferGeneric<InferReturn<String?>?>(foo)
    }
    return null
   }
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun main() {
-   val list: kotlin.collections.ArrayList<kotlin.Any?>? = inferreturn.InferReturn.newArrayList<kotlin.Any?>("foo")
-   inferreturn.InferReturn.acceptsArrayListOfObject(list)
-   val array: kotlin.Array<kotlin.Any?>? = inferreturn.InferReturn.newArray<kotlin.String?>("foo") as kotlin.Array<kotlin.Any?>?
-   inferreturn.InferReturn.acceptsArrayOfObject(array)
+   val list: ArrayList<Any?>? = InferReturn.newArrayList<Any?>("foo")
+   InferReturn.acceptsArrayListOfObject(list)
+   val array: Array<Any?>? = InferReturn.newArray<String?>("foo") as Array<Any?>?
+   InferReturn.acceptsArrayOfObject(array)
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <V> newArrayList(foo: V): kotlin.collections.ArrayList<V>? {
-   return kotlin.collections.ArrayList<V>()
+  @JvmStatic
+  fun <V> newArrayList(foo: V): ArrayList<V>? {
+   return ArrayList<V>()
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <V> newArray(foo: V): kotlin.Array<V>? {
-   return kotlin.arrayOfNulls<kotlin.Any>(0) as kotlin.Array<V>?
+  @JvmStatic
+  fun <V> newArray(foo: V): Array<V>? {
+   return arrayOfNulls<Any>(0) as Array<V>?
   }
 
-  @kotlin.jvm.JvmStatic
-  fun acceptsArrayListOfObject(foo: kotlin.collections.ArrayList<kotlin.Any?>?) {}
+  @JvmStatic
+  fun acceptsArrayListOfObject(foo: ArrayList<Any?>?) {}
 
-  @kotlin.jvm.JvmStatic
-  fun acceptsArrayOfObject(foo: kotlin.Array<kotlin.Any?>?) {}
+  @JvmStatic
+  fun acceptsArrayOfObject(foo: Array<Any?>?) {}
  }
 }

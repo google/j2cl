@@ -2,48 +2,54 @@
 package instancequalifieronstaticfield
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import instancequalifieronstaticfield.InstanceQualifiers
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class InstanceQualifiers {
  companion object {
-  @kotlin.jvm.JvmField var staticField: kotlin.Int = 100
+  @JvmField var staticField: Int = 100
 
-  @kotlin.jvm.JvmField var sideEffectCount: kotlin.Int = 0
+  @JvmField var sideEffectCount: Int = 0
 
-  @kotlin.jvm.JvmStatic
-  fun getStaticValue(): kotlin.Int {
-   return instancequalifieronstaticfield.InstanceQualifiers.staticField
+  @JvmStatic
+  fun getStaticValue(): Int {
+   return InstanceQualifiers.staticField
   }
 
-  @kotlin.jvm.JvmStatic
-  fun getStaticInstanceQualifiers(): instancequalifieronstaticfield.InstanceQualifiers? {
+  @JvmStatic
+  fun getStaticInstanceQualifiers(): InstanceQualifiers? {
    return null
   }
 
-  @kotlin.jvm.JvmStatic
-  fun main(vararg args: kotlin.String?) {
-   val args_1: kotlin.Array<kotlin.String?>? = args as kotlin.Array<kotlin.String?>?
-   val main: instancequalifieronstaticfield.InstanceQualifiers? = instancequalifieronstaticfield.InstanceQualifiers()
-   var i: kotlin.Int = 0
-   instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
-   instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
-   instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-   instancequalifieronstaticfield.InstanceQualifiers.staticField = 300
-   i = instancequalifieronstaticfield.InstanceQualifiers.staticField
-   i = instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
-   i = kotlin.run {
-    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-    instancequalifieronstaticfield.InstanceQualifiers.staticField
+  @JvmStatic
+  fun main(vararg args: String?) {
+   val args_1: Array<String?>? = args as Array<String?>?
+   val main: InstanceQualifiers? = InstanceQualifiers()
+   var i: Int = 0
+   InstanceQualifiers.staticField = 100
+   InstanceQualifiers.staticField = 100
+   InstanceQualifiers.getStaticInstanceQualifiers()
+   InstanceQualifiers.staticField = 300
+   i = InstanceQualifiers.staticField
+   i = InstanceQualifiers.getStaticValue()
+   i = run {
+    InstanceQualifiers.getStaticInstanceQualifiers()
+    InstanceQualifiers.staticField
    }
-   instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + 100
-   instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-   instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + 100
-   instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-   instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-   instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + kotlin.run {
-    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-    instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
-    instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
+   InstanceQualifiers.staticField = InstanceQualifiers.staticField + 100
+   InstanceQualifiers.getStaticInstanceQualifiers()
+   InstanceQualifiers.staticField = InstanceQualifiers.staticField + 100
+   InstanceQualifiers.getStaticInstanceQualifiers()
+   InstanceQualifiers.getStaticInstanceQualifiers()
+   InstanceQualifiers.staticField = InstanceQualifiers.staticField + run {
+    InstanceQualifiers.getStaticInstanceQualifiers()
+    InstanceQualifiers.getStaticInstanceQualifiers()
+    InstanceQualifiers.getStaticValue()
    }
   }
  }

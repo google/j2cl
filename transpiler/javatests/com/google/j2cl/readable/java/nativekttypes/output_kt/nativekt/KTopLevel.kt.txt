@@ -2,40 +2,44 @@
 package nativekttypes.nativekt
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class KTopLevel<O> {
- @kotlin.jvm.JvmField var instanceField: O = null as O
+ @JvmField var instanceField: O = null as O
 
- @kotlin.jvm.JvmField var renamedField: kotlin.Int = 0
+ @JvmField var renamedField: Int = 0
 
- open fun renamedMethod(): kotlin.Int {
+ open fun renamedMethod(): Int {
   return 0
  }
 
- open val methodAsProperty: kotlin.Int get() {
+ open val methodAsProperty: Int get() {
   return 0
  }
 
- open val nonGetMethodAsProperty: kotlin.Int get() {
+ open val nonGetMethodAsProperty: Int get() {
   return 0
  }
 
- open val renamedMethodAsProperty: kotlin.Int get() {
+ open val renamedMethodAsProperty: Int get() {
   return 0
  }
 
- open val getRenamedMethodAsProperty: kotlin.Int get() {
+ open val getRenamedMethodAsProperty: Int get() {
   return 0
  }
 
- @kotlin.jvm.JvmField var isRenamedField: kotlin.Boolean = false
+ @JvmField var isRenamedField: Boolean = false
 
- open val isMethodAsProperty: kotlin.Boolean get() {
+ open val isMethodAsProperty: Boolean get() {
   return false
  }
 
- open val getstartingmethodAsProperty: kotlin.Int get() {
+ open val getstartingmethodAsProperty: Int get() {
   return 0
  }
 
@@ -46,16 +50,16 @@ open class KTopLevel<O> {
  }
 
  companion object {
-  @kotlin.jvm.JvmField var staticField: kotlin.Any? = null
+  @JvmField var staticField: Any? = null
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun <S> staticMethod(s: S): S {
    return s
   }
  }
 
  open class KNested<N> {
-  @kotlin.jvm.JvmField var instanceField: N = null as N
+  @JvmField var instanceField: N = null as N
 
   constructor(n: N)
 
@@ -63,14 +67,14 @@ open class KTopLevel<O> {
    return n
   }
 
-  open fun renamedMethod(): kotlin.Int {
+  open fun renamedMethod(): Int {
    return 0
   }
 
   companion object {
-   @kotlin.jvm.JvmField var staticField: kotlin.Any? = null
+   @JvmField var staticField: Any? = null
 
-   @kotlin.jvm.JvmStatic
+   @JvmStatic
    fun <S> staticMethod(s: S): S {
     return s
    }

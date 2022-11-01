@@ -2,16 +2,16 @@
 package nativekttypes.nativekt
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
 
 interface KInterface<V> {
- fun interfaceMethod(v: V): kotlin.Int
+ fun interfaceMethod(v: V): Int
 
- fun renamedInterfaceMethod(v: V): kotlin.Int
+ fun renamedInterfaceMethod(v: V): Int
 
- val interfaceMethodAsProperty: kotlin.Int
+ val interfaceMethodAsProperty: Int
 
- val renamedInterfaceMethodAsProperty: kotlin.Int
+ val renamedInterfaceMethodAsProperty: Int
 
  fun interface KFunctionalInterface {
   fun run()

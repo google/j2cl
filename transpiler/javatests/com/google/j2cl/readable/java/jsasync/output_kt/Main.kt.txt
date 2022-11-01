@@ -2,87 +2,91 @@
 package jsasync
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsasync.Main
+import kotlin.Int
+import kotlin.Unit
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class Main {
- @kotlin.jvm.JvmField val x_private_2: jsasync.Main.IThenable<kotlin.Int?>? = jsasync.Main.Promise.resolve<kotlin.Int?>(kotlin.Int.valueOf(10))
+ @JvmField val x_private_2: Main.IThenable<Int?>? = Main.Promise.resolve<Int?>(Int.valueOf(10))
 
- open fun emptyAsyncMethod(): jsasync.Main.IThenable<kotlin.Unit?>? {
+ open fun emptyAsyncMethod(): Main.IThenable<Unit?>? {
   return null
  }
 
- open fun asyncMethod(): jsasync.Main.IThenable<kotlin.Int?>? {
-  val result: kotlin.Int = jsasync.Main.await_private_2<kotlin.Int?>(jsasync.Main.Promise.resolve<kotlin.Int?>(kotlin.Int.valueOf(7)))!!.toInt()
-  return this.parametricAsyncMethod<kotlin.Int?>(kotlin.Int.valueOf(result))
+ open fun asyncMethod(): Main.IThenable<Int?>? {
+  val result: Int = Main.await_private_2<Int?>(Main.Promise.resolve<Int?>(Int.valueOf(7)))!!.toInt()
+  return this.parametricAsyncMethod<Int?>(Int.valueOf(result))
  }
 
- open fun <T> parametricAsyncMethod(value: T): jsasync.Main.IThenable<T>? {
-  return jsasync.Main.Promise.resolve<T>(jsasync.Main.await_private_2<T>(jsasync.Main.Promise.resolve<T>(value)))
+ open fun <T> parametricAsyncMethod(value: T): Main.IThenable<T>? {
+  return Main.Promise.resolve<T>(Main.await_private_2<T>(Main.Promise.resolve<T>(value)))
  }
 
  open fun testAsyncLambdas() {
-  val i: jsasync.Main.AsyncInterface? = jsasync.Main.AsyncInterface {
-   return@AsyncInterface jsasync.Main.Promise.resolve<kotlin.Int?>(jsasync.Main.await_private_2<kotlin.Int?>(jsasync.Main.Promise.resolve<kotlin.Int?>(kotlin.Int.valueOf(5))))
+  val i: Main.AsyncInterface? = Main.AsyncInterface {
+   return@AsyncInterface Main.Promise.resolve<Int?>(Main.await_private_2<Int?>(Main.Promise.resolve<Int?>(Int.valueOf(5))))
   }
-  val o: jsasync.Main.BaseInterface? = object : jsasync.Main.BaseInterface {
-   open override fun asyncCall(): jsasync.Main.IThenable<kotlin.Int?>? {
-    return jsasync.Main.Promise.resolve<kotlin.Int?>(jsasync.Main.await_private_2<kotlin.Int?>(this@Main.x_private_2))
+  val o: Main.BaseInterface? = object : Main.BaseInterface {
+   open override fun asyncCall(): Main.IThenable<Int?>? {
+    return Main.Promise.resolve<Int?>(Main.await_private_2<Int?>(this@Main.x_private_2))
    }
   }
-  val j: jsasync.Main.AsyncJsFunctionInterface? = jsasync.Main.AsyncJsFunctionInterface {
-   return@AsyncJsFunctionInterface jsasync.Main.Promise.resolve<kotlin.Int?>(jsasync.Main.await_private_2<kotlin.Int?>(jsasync.Main.Promise.resolve<kotlin.Int?>(kotlin.Int.valueOf(5))))
+  val j: Main.AsyncJsFunctionInterface? = Main.AsyncJsFunctionInterface {
+   return@AsyncJsFunctionInterface Main.Promise.resolve<Int?>(Main.await_private_2<Int?>(Main.Promise.resolve<Int?>(Int.valueOf(5))))
   }
-  val optimizableJsFunction: jsasync.Main.JsFunctionInterface? = object : jsasync.Main.JsFunctionInterface {
-   open override fun doSomething(): jsasync.Main.IThenable<kotlin.Int?>? {
-    return jsasync.Main.Promise.resolve<kotlin.Int?>(kotlin.Int.valueOf(5))
+  val optimizableJsFunction: Main.JsFunctionInterface? = object : Main.JsFunctionInterface {
+   open override fun doSomething(): Main.IThenable<Int?>? {
+    return Main.Promise.resolve<Int?>(Int.valueOf(5))
    }
   }
-  val unoptimizableJsFunction: jsasync.Main.JsFunctionInterface? = object : jsasync.Main.JsFunctionInterface {
-   open override fun doSomething(): jsasync.Main.IThenable<kotlin.Int?>? {
-    val tmp: jsasync.Main.JsFunctionInterface? = this
-    return jsasync.Main.Promise.resolve<kotlin.Int?>(jsasync.Main.await_private_2<kotlin.Int?>(this@Main.x_private_2))
+  val unoptimizableJsFunction: Main.JsFunctionInterface? = object : Main.JsFunctionInterface {
+   open override fun doSomething(): Main.IThenable<Int?>? {
+    val tmp: Main.JsFunctionInterface? = this
+    return Main.Promise.resolve<Int?>(Main.await_private_2<Int?>(this@Main.x_private_2))
    }
   }
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun staticAsyncMethod(): jsasync.Main.IThenable<kotlin.Unit?>? {
-   return jsasync.Main.Promise.resolve<kotlin.Unit?>(jsasync.Main.await_private_2<kotlin.Unit?>(jsasync.Main.Promise.resolve<kotlin.Unit?>(null as kotlin.Unit?)))
+  @JvmStatic
+  fun staticAsyncMethod(): Main.IThenable<Unit?>? {
+   return Main.Promise.resolve<Unit?>(Main.await_private_2<Unit?>(Main.Promise.resolve<Unit?>(null as Unit?)))
   }
 
-  @kotlin.jvm.JvmStatic
-  external fun <T> await_private_2(thenable: jsasync.Main.IThenable<T>?): T
+  @JvmStatic
+  external fun <T> await_private_2(thenable: Main.IThenable<T>?): T
  }
 
  fun interface BaseInterface {
-  fun asyncCall(): jsasync.Main.IThenable<kotlin.Int?>?
+  fun asyncCall(): Main.IThenable<Int?>?
  }
 
- fun interface AsyncInterface: jsasync.Main.BaseInterface {
-  override fun asyncCall(): jsasync.Main.IThenable<kotlin.Int?>?
+ fun interface AsyncInterface: Main.BaseInterface {
+  override fun asyncCall(): Main.IThenable<Int?>?
  }
 
  interface InterfaceWithAsyncDefaultMethod {
-  fun asyncCall(): jsasync.Main.IThenable<kotlin.Int?>? {
-   return jsasync.Main.Promise.resolve<kotlin.Int?>(jsasync.Main.await_private_2<kotlin.Int?>(jsasync.Main.Promise.resolve<kotlin.Int?>(kotlin.Int.valueOf(5))))
+  fun asyncCall(): Main.IThenable<Int?>? {
+   return Main.Promise.resolve<Int?>(Main.await_private_2<Int?>(Main.Promise.resolve<Int?>(Int.valueOf(5))))
   }
  }
 
  fun interface JsFunctionInterface {
-  fun doSomething(): jsasync.Main.IThenable<kotlin.Int?>?
+  fun doSomething(): Main.IThenable<Int?>?
  }
 
  fun interface AsyncJsFunctionInterface {
-  fun doSomething(): jsasync.Main.IThenable<kotlin.Int?>?
+  fun doSomething(): Main.IThenable<Int?>?
  }
 
  interface IThenable<T> {}
 
- open class Promise<T>: jsasync.Main.IThenable<T> {
+ open class Promise<T>: Main.IThenable<T> {
   companion object {
-   @kotlin.jvm.JvmStatic
-   external fun <T> resolve(value: T): jsasync.Main.Promise<T>?
+   @JvmStatic
+   external fun <T> resolve(value: T): Main.Promise<T>?
   }
  }
 }

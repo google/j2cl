@@ -2,17 +2,20 @@
 package localclassinstaticcontext
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Int
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class LocalClassInStaticContext {
  companion object {
-  @kotlin.jvm.JvmField var f: kotlin.Any? = object : kotlin.Any() {}
+  @JvmField var f: Any? = object : Any() {}
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun test() {
    open class ___1A {}
    ___1A()
-   val a: kotlin.Any? = object : kotlin.Any() {
+   val a: Any? = object : Any() {
     open fun m() {
      ___1A()
     }
@@ -22,16 +25,16 @@ open class LocalClassInStaticContext {
   init {
    open class ___1B {}
    ___1B()
-   val b: kotlin.Any? = object : kotlin.Any() {}
+   val b: Any? = object : Any() {}
   }
  }
 
  open class C {
-  @kotlin.jvm.JvmField var f: kotlin.Int = 1
+  @JvmField var f: Int = 1
 
   open fun test() {
    open class ___1D {
-    open fun `fun`(): kotlin.Int {
+    open fun `fun`(): Int {
      return this@C.f
     }
    }

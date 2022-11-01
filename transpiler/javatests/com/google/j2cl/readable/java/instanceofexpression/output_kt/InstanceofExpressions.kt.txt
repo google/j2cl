@@ -2,71 +2,93 @@
 package instanceofexpression
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import instanceofexpression.InstanceofExpressions
+import java.io.Serializable
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.BooleanArray
+import kotlin.Byte
+import kotlin.ByteArray
+import kotlin.Char
+import kotlin.CharArray
+import kotlin.Double
+import kotlin.DoubleArray
+import kotlin.Float
+import kotlin.FloatArray
+import kotlin.Int
+import kotlin.IntArray
+import kotlin.Long
+import kotlin.LongArray
+import kotlin.Number
+import kotlin.Short
+import kotlin.ShortArray
+import kotlin.String
+import kotlin.arrayOfNulls
 
 open class InstanceofExpressions {
  open fun testInstanceofClass() {
-  val `object`: kotlin.Any? = instanceofexpression.InstanceofExpressions()
-  var b: kotlin.Boolean = false
-  b = `object` is kotlin.Any
-  b = `object` is instanceofexpression.InstanceofExpressions
-  b = `object` is kotlin.String
+  val `object`: Any? = InstanceofExpressions()
+  var b: Boolean = false
+  b = `object` is Any
+  b = `object` is InstanceofExpressions
+  b = `object` is String
  }
 
  open fun testInstanceofInterface() {
-  val o: kotlin.Any? = kotlin.Any()
-  var b: kotlin.Boolean = false
-  b = o is java.io.Serializable
-  b = object : java.io.Serializable {} is java.io.Serializable
+  val o: Any? = Any()
+  var b: Boolean = false
+  b = o is Serializable
+  b = object : Serializable {} is Serializable
  }
 
  open fun testInstanceofBoxedType() {
-  val b: kotlin.Any? = kotlin.Int(1)
-  var a: kotlin.Boolean = b is kotlin.Byte
-  a = b is kotlin.Double
-  a = b is kotlin.Float
-  a = b is kotlin.Int
-  a = b is kotlin.Long
-  a = b is kotlin.Short
-  a = b is kotlin.Number
-  a = b is kotlin.Char
-  a = b is kotlin.Boolean
-  val d: kotlin.Double? = null
-  a = d is kotlin.Any
-  a = d is kotlin.Number
-  a = d is kotlin.Double
+  val b: Any? = Int(1)
+  var a: Boolean = b is Byte
+  a = b is Double
+  a = b is Float
+  a = b is Int
+  a = b is Long
+  a = b is Short
+  a = b is Number
+  a = b is Char
+  a = b is Boolean
+  val d: Double? = null
+  a = d is Any
+  a = d is Number
+  a = d is Double
  }
 
  open fun testInstanceOfArray() {
-  val `object`: kotlin.Any? = kotlin.Any()
-  val objectArray: kotlin.Array<kotlin.Any?>? = kotlin.arrayOfNulls<kotlin.Any>(0)
-  val objectDoubleArray: kotlin.Array<kotlin.Array<kotlin.Any?>?>? = kotlin.arrayOfNulls<kotlin.Array<kotlin.Any?>>(0)
-  val stringArray: kotlin.Array<kotlin.String?>? = kotlin.arrayOfNulls<kotlin.String>(0)
-  var a: kotlin.Boolean = false
-  a = `object` is kotlin.Array<*>
-  a = `object` is kotlin.Array<*>
-  a = `object` is kotlin.Array<*>
-  a = `object` is kotlin.Array<*>
-  a = objectArray is kotlin.Array<*>
-  a = objectArray is kotlin.Array<*>
-  a = objectArray is kotlin.Array<*>
-  a = objectArray is kotlin.Array<*>
-  a = objectDoubleArray is kotlin.Array<*>
-  a = objectDoubleArray is kotlin.Array<*>
-  a = objectDoubleArray is kotlin.Array<*>
-  a = stringArray is kotlin.Array<*>
-  a = stringArray is kotlin.Array<*>
-  a = `object` is kotlin.ByteArray
-  a = `object` is kotlin.ShortArray
-  a = `object` is kotlin.IntArray
-  a = `object` is kotlin.LongArray
-  a = `object` is kotlin.FloatArray
-  a = `object` is kotlin.DoubleArray
-  a = `object` is kotlin.CharArray
-  a = `object` is kotlin.BooleanArray
+  val `object`: Any? = Any()
+  val objectArray: Array<Any?>? = arrayOfNulls<Any>(0)
+  val objectDoubleArray: Array<Array<Any?>?>? = arrayOfNulls<Array<Any?>>(0)
+  val stringArray: Array<String?>? = arrayOfNulls<String>(0)
+  var a: Boolean = false
+  a = `object` is Array<*>
+  a = `object` is Array<*>
+  a = `object` is Array<*>
+  a = `object` is Array<*>
+  a = objectArray is Array<*>
+  a = objectArray is Array<*>
+  a = objectArray is Array<*>
+  a = objectArray is Array<*>
+  a = objectDoubleArray is Array<*>
+  a = objectDoubleArray is Array<*>
+  a = objectDoubleArray is Array<*>
+  a = stringArray is Array<*>
+  a = stringArray is Array<*>
+  a = `object` is ByteArray
+  a = `object` is ShortArray
+  a = `object` is IntArray
+  a = `object` is LongArray
+  a = `object` is FloatArray
+  a = `object` is DoubleArray
+  a = `object` is CharArray
+  a = `object` is BooleanArray
  }
 
  open fun testPrecedence() {
-  val b: kotlin.Boolean = (if (false) "foo" else "bar") is kotlin.String
+  val b: Boolean = (if (false) "foo" else "bar") is String
  }
 }

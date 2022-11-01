@@ -2,10 +2,11 @@
 package mixednestings
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import mixednestings.MyInterface
 
 fun interface MyInterface {
- fun `fun`(a: kotlin.Int): kotlin.Int
+ fun `fun`(a: Int): Int
 }
 
 open class MixedNestings {
@@ -22,19 +23,19 @@ open class MixedNestings {
    open class ___1B {
     open fun bb() {}
 
-    open fun b(): kotlin.Int {
-     val i: mixednestings.MyInterface? = object : mixednestings.MyInterface {
-      open override fun `fun`(a: kotlin.Int): kotlin.Int {
-       val ii: mixednestings.MyInterface? = mixednestings.MyInterface { n: kotlin.Int ->
+    open fun b(): Int {
+     val i: MyInterface? = object : MyInterface {
+      open override fun `fun`(a: Int): Int {
+       val ii: MyInterface? = MyInterface { n: Int ->
         this@MixedNestings.mm()
         this@A.aa()
         this@___1B.bb()
-        val iii: mixednestings.MyInterface? = mixednestings.MyInterface { m: kotlin.Int ->
+        val iii: MyInterface? = MyInterface { m: Int ->
          this@MixedNestings.mm()
          this@A.aa()
          this@___1B.bb()
-         return@MyInterface object : mixednestings.MyInterface {
-          open override fun `fun`(b: kotlin.Int): kotlin.Int {
+         return@MyInterface object : MyInterface {
+          open override fun `fun`(b: Int): Int {
            return b
           }
          }.`fun`(100)

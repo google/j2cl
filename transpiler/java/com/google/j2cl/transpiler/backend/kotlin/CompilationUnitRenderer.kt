@@ -17,11 +17,10 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.CompilationUnit
 
-internal fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
+internal fun Renderer.renderHeader(compilationUnit: CompilationUnit) {
   renderFileComment(compilationUnit)
   renderPackage(compilationUnit)
-  renderImports(compilationUnit)
-  renderTypes(compilationUnit)
+  renderImports(environment.importedSimpleNameToQualifiedNameMap.values.toSet())
 }
 
 private fun Renderer.renderFileComment(compilationUnit: CompilationUnit) {
@@ -40,7 +39,7 @@ private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {
     }
 }
 
-private fun Renderer.renderTypes(compilationUnit: CompilationUnit) {
+internal fun Renderer.renderTypes(compilationUnit: CompilationUnit) {
   renderSeparatedWithEmptyLine(compilationUnit.types) { renderType(it) }
   renderNewLine()
 }

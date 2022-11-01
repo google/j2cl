@@ -2,18 +2,19 @@
 package packageprivatemethods.package1
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import packageprivatemethods.package1.Parent
 
-open class Child: packageprivatemethods.package1.Parent() {
- open override fun foo(a: kotlin.Int): kotlin.Int {
+open class Child: Parent() {
+ open override fun foo(a: Int): Int {
   return a + 1
  }
 
- open override fun `fun`(a: kotlin.Int, b: kotlin.Int): kotlin.Int {
+ open override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }
 
- open override fun bar(a: kotlin.Int, b: kotlin.Int, c: kotlin.Int): kotlin.Int {
+ open override fun bar(a: Int, b: Int, c: Int): Int {
   return a + b + c + 2
  }
 }

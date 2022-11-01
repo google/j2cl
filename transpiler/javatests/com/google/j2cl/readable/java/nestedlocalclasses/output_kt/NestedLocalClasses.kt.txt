@@ -2,16 +2,18 @@
 package nestedlocalclasses
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import kotlin.jvm.JvmField
+import nestedlocalclasses.NestedLocalClasses
 
 open class NestedLocalClasses {
- open fun test(p: kotlin.Int) {
-  val localVar: kotlin.Int = 1
+ open fun test(p: Int) {
+  val localVar: Int = 1
   open class ___1InnerClass {
    open fun `fun`() {
-    val localVarInInnerClass: kotlin.Int = 1
+    val localVarInInnerClass: Int = 1
     open class ___1InnerInnerClass {
-     @kotlin.jvm.JvmField var fieldInInnerInnerClass: kotlin.Int = localVar + localVarInInnerClass
+     @JvmField var fieldInInnerInnerClass: Int = localVar + localVarInInnerClass
     }
     ___1InnerInnerClass()
     open class ___1ClassIndirectlyCapturingLocal {
@@ -25,7 +27,7 @@ open class NestedLocalClasses {
 
  interface InterfaceWithThisReference {
   fun foo() {
-   open class ___1Super: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {}
+   open class ___1Super: NestedLocalClasses.InterfaceWithThisReference {}
    object : ___1Super() {}
   }
  }

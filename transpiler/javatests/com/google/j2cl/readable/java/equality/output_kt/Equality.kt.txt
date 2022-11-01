@@ -2,17 +2,21 @@
 package equality
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.Float
+import kotlin.IntArray
 
 open class Equality {
  open fun test() {
-  val a: kotlin.Boolean = false === false
-  val b: kotlin.Boolean = 0 !== 1
-  val c: kotlin.Boolean = kotlin.Any() !== kotlin.Any()
-  val d: kotlin.Boolean = kotlin.Double.valueOf(0.0) === kotlin.Double.valueOf(0.0)
-  val e: kotlin.Boolean = kotlin.Float.valueOf(0.0f) === kotlin.Float.valueOf(0.0f)
-  val f: kotlin.Boolean = null !== kotlin.Any()
-  val g: kotlin.Boolean = kotlin.Any() !== null
-  val h: kotlin.Boolean = null !== kotlin.IntArray(0)
+  val a: Boolean = false === false
+  val b: Boolean = 0 !== 1
+  val c: Boolean = Any() !== Any()
+  val d: Boolean = Double.valueOf(0.0) === Double.valueOf(0.0)
+  val e: Boolean = Float.valueOf(0.0f) === Float.valueOf(0.0f)
+  val f: Boolean = null !== Any()
+  val g: Boolean = Any() !== null
+  val h: Boolean = null !== IntArray(0)
  }
 }

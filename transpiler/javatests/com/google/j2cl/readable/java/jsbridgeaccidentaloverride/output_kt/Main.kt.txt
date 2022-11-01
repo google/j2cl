@@ -2,14 +2,17 @@
 package jsbridgeaccidentaloverride
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsbridgeaccidentaloverride.MyInterface
+import jsbridgeaccidentaloverride.MyJsType
+import jsbridgeaccidentaloverride.OtherInterface
+import jsbridgeaccidentaloverride.SubJsType
 
 open class Main {
  open fun test() {
-  val a: jsbridgeaccidentaloverride.MyJsType? = jsbridgeaccidentaloverride.MyJsType()
-  val b: jsbridgeaccidentaloverride.SubJsType? = jsbridgeaccidentaloverride.SubJsType()
-  val c: jsbridgeaccidentaloverride.MyInterface? = jsbridgeaccidentaloverride.SubJsType()
-  val d: jsbridgeaccidentaloverride.OtherInterface? = jsbridgeaccidentaloverride.SubJsType()
+  val a: MyJsType? = MyJsType()
+  val b: SubJsType? = SubJsType()
+  val c: MyInterface? = SubJsType()
+  val d: OtherInterface? = SubJsType()
   a!!.foo(1)
   b!!.foo(1)
   c!!.foo(1)

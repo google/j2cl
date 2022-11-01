@@ -55,3 +55,18 @@ public class LocalNameCollision {
             && (l_Asserts == A);
   }
 }
+
+class A {
+  static A A;
+  static B B;
+
+  static class B {}
+
+  static void test() {
+    A = A;
+    B = B;
+
+    localnamecollision.A.A = localnamecollision.A.A;
+    localnamecollision.A.B = localnamecollision.A.B;
+  }
+}

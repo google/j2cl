@@ -2,27 +2,33 @@
 package j2ktnotpassing
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import j2ktnotpassing.DefaultNullable
+import j2ktnotpassing.NotNullable
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.arrayOfNulls
+import kotlin.jvm.JvmStatic
 
 open class DefaultNullable {
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun testNonNullableLambdas() {
-   val lambda: j2ktnotpassing.NotNullable.Consumer<kotlin.String?>? = j2ktnotpassing.NotNullable.Consumer { s: kotlin.String? ->
+   val lambda: NotNullable.Consumer<String?>? = NotNullable.Consumer { s: String? ->
    }
-   val methodReference: j2ktnotpassing.NotNullable.Consumer<kotlin.String?>? = j2ktnotpassing.NotNullable.Consumer { arg0: kotlin.String ->
-    j2ktnotpassing.DefaultNullable.accept(arg0)
+   val methodReference: NotNullable.Consumer<String?>? = NotNullable.Consumer { arg0: String ->
+    DefaultNullable.accept(arg0)
    }
-   val constructorReference: j2ktnotpassing.NotNullable.Supplier<kotlin.String?>? = j2ktnotpassing.NotNullable.Supplier {
-    return@Supplier kotlin.String()
+   val constructorReference: NotNullable.Supplier<String?>? = NotNullable.Supplier {
+    return@Supplier String()
    }
-   val newArrayReference: j2ktnotpassing.NotNullable.IntFunction<kotlin.Array<kotlin.String?>?>? = j2ktnotpassing.NotNullable.IntFunction { arg0_1: kotlin.Int ->
-    return@IntFunction kotlin.arrayOfNulls<kotlin.String>(arg0_1) as kotlin.Array<kotlin.String>
+   val newArrayReference: NotNullable.IntFunction<Array<String?>?>? = NotNullable.IntFunction { arg0_1: Int ->
+    return@IntFunction arrayOfNulls<String>(arg0_1) as Array<String>
    }
   }
 
-  @kotlin.jvm.JvmStatic
-  fun accept(s: kotlin.String?) {}
+  @JvmStatic
+  fun accept(s: String?) {}
  }
 }
 
@@ -36,6 +42,6 @@ open class NotNullable {
  }
 
  fun interface IntFunction<T> {
-  fun accept(i: kotlin.Int): T
+  fun accept(i: Int): T
  }
 }

@@ -2,52 +2,56 @@
 package multipleabstractparents
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Array
+import kotlin.String
+import kotlin.assert
+import kotlin.jvm.JvmStatic
+import multipleabstractparents.MultipleAbstractParents
 
 open class MultipleAbstractParents {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun main(vararg args: kotlin.String?) {
-   val args_1: kotlin.Array<kotlin.String?>? = args as kotlin.Array<kotlin.String?>?
-   kotlin.assert(multipleabstractparents.MultipleAbstractParents.ArrayList<kotlin.String?>().getFoo(null)!!.equals("AbstractCollection"))
-   kotlin.assert(multipleabstractparents.MultipleAbstractParents.StringList().getFoo(null)!!.equals("AbstractCollection"))
-   kotlin.assert((multipleabstractparents.MultipleAbstractParents.StringList() as multipleabstractparents.MultipleAbstractParents.IStringList?)!!.getFoo(null)!!.equals("AbstractCollection"))
+  @JvmStatic
+  fun main(vararg args: String?) {
+   val args_1: Array<String?>? = args as Array<String?>?
+   assert(MultipleAbstractParents.ArrayList<String?>().getFoo(null)!!.equals("AbstractCollection"))
+   assert(MultipleAbstractParents.StringList().getFoo(null)!!.equals("AbstractCollection"))
+   assert((MultipleAbstractParents.StringList() as MultipleAbstractParents.IStringList?)!!.getFoo(null)!!.equals("AbstractCollection"))
   }
  }
 
  fun interface List<T> {
-  fun getFoo(t: T): kotlin.String?
+  fun getFoo(t: T): String?
  }
 
  fun interface Collection<T> {
-  fun getFoo(t: T): kotlin.String?
+  fun getFoo(t: T): String?
  }
 
- abstract class AbstractListCollection<T>: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.Collection<T> {}
+ abstract class AbstractListCollection<T>: MultipleAbstractParents.List<T>, MultipleAbstractParents.Collection<T> {}
 
  abstract class AbstractCollection<T> {
-  open fun getFoo(t: T): kotlin.String? {
+  open fun getFoo(t: T): String? {
    return "AbstractCollection"
   }
  }
 
- abstract class AbstractList<T>: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.AbstractCollection<T>() {}
+ abstract class AbstractList<T>: MultipleAbstractParents.List<T>, MultipleAbstractParents.AbstractCollection<T>() {}
 
- abstract class AbstractList2<T>: multipleabstractparents.MultipleAbstractParents.List<T> {}
+ abstract class AbstractList2<T>: MultipleAbstractParents.List<T> {}
 
- open class ArrayList<T>: multipleabstractparents.MultipleAbstractParents.AbstractList<T>() {}
+ open class ArrayList<T>: MultipleAbstractParents.AbstractList<T>() {}
 
- fun interface IStringList: multipleabstractparents.MultipleAbstractParents.List<kotlin.String?> {
-  override fun getFoo(string: kotlin.String?): kotlin.String?
+ fun interface IStringList: MultipleAbstractParents.List<String?> {
+  override fun getFoo(string: String?): String?
  }
 
- abstract class AbstractStringList: multipleabstractparents.MultipleAbstractParents.IStringList, multipleabstractparents.MultipleAbstractParents.AbstractList<kotlin.String?>() {}
+ abstract class AbstractStringList: MultipleAbstractParents.IStringList, MultipleAbstractParents.AbstractList<String?>() {}
 
- abstract class AbstractStringList2: multipleabstractparents.MultipleAbstractParents.IStringList, multipleabstractparents.MultipleAbstractParents.AbstractList2<kotlin.String?>() {}
+ abstract class AbstractStringList2: MultipleAbstractParents.IStringList, MultipleAbstractParents.AbstractList2<String?>() {}
 
- abstract class AbstractStringList3: multipleabstractparents.MultipleAbstractParents.AbstractList2<kotlin.String?>() {}
+ abstract class AbstractStringList3: MultipleAbstractParents.AbstractList2<String?>() {}
 
- open class StringList: multipleabstractparents.MultipleAbstractParents.AbstractStringList() {}
+ open class StringList: MultipleAbstractParents.AbstractStringList() {}
 
- open class StringListChild: multipleabstractparents.MultipleAbstractParents.StringList() {}
+ open class StringListChild: MultipleAbstractParents.StringList() {}
 }

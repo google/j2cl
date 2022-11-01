@@ -2,52 +2,59 @@
 package jsoptional
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsoptional.Main
+import kotlin.Any
+import kotlin.Array
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.Int
+import kotlin.String
+import kotlin.jvm.JvmField
 
 open class Main {
- open fun method1(i1: kotlin.Int, d: kotlin.Double?, i: kotlin.Int?) {}
+ open fun method1(i1: Int, d: Double?, i: Int?) {}
 
- open fun method2(s1: kotlin.String?, d: kotlin.Double?, vararg i: kotlin.Boolean?) {
-  val i_1: kotlin.Array<kotlin.Boolean?>? = i as kotlin.Array<kotlin.Boolean?>?
+ open fun method2(s1: String?, d: Double?, vararg i: Boolean?) {
+  val i_1: Array<Boolean?>? = i as Array<Boolean?>?
  }
 
- @kotlin.jvm.JvmField var f: jsoptional.Main.Function? = jsoptional.Main.Function { s: kotlin.String?, varargs: kotlin.Array<*>? ->
-  val varargs_1: kotlin.Array<kotlin.Any?>? = varargs as kotlin.Array<kotlin.Any?>?
+ @JvmField var f: Main.Function? = Main.Function { s: String?, varargs: Array<*>? ->
+  val varargs_1: Array<Any?>? = varargs as Array<Any?>?
   return@Function s
  }
 
- constructor(a: kotlin.String?)
+ constructor(a: String?)
 
- open fun testFunction(f: jsoptional.Main.Function?) {}
+ open fun testFunction(f: Main.Function?) {}
 
- open fun testOptionalFunction(f: jsoptional.Main.Function?) {}
+ open fun testOptionalFunction(f: Main.Function?) {}
 
  fun interface Function {
-  fun f1(s: kotlin.String?, vararg args: kotlin.Any?): kotlin.Any?
+  fun f1(s: String?, vararg args: Any?): Any?
  }
 
- class AFunction: jsoptional.Main.Function {
-  open override fun f1(i: kotlin.String?, vararg args: kotlin.Any?): kotlin.Any? {
-   val args_1: kotlin.Array<kotlin.Any?>? = args as kotlin.Array<kotlin.Any?>?
+ class AFunction: Main.Function {
+  open override fun f1(i: String?, vararg args: Any?): Any? {
+   val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![0]
   }
  }
 
  fun interface I<T> {
-  fun m(t: T, o: kotlin.Any?)
+  fun m(t: T, o: Any?)
  }
 
- open class TemplatedSubtype<T: kotlin.String?>: jsoptional.Main.I<T> {
-  open override fun m(t: T, o: kotlin.Any?) {}
+ open class TemplatedSubtype<T: String?>: Main.I<T> {
+  open override fun m(t: T, o: Any?) {}
  }
 
- open inner class SpecializedSubtype: jsoptional.Main.I<kotlin.String?> {
-  constructor(a: kotlin.Any?)
+ open inner class SpecializedSubtype: Main.I<String?> {
+  constructor(a: Any?)
 
-  open override fun m(t: kotlin.String?, o: kotlin.Any?) {}
+  open override fun m(t: String?, o: Any?) {}
  }
 
- open class NonJsTypeSubtype: jsoptional.Main.I<kotlin.String?> {
-  open override fun m(t: kotlin.String?, o: kotlin.Any?) {}
+ open class NonJsTypeSubtype: Main.I<String?> {
+  open override fun m(t: String?, o: Any?) {}
  }
 }

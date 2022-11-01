@@ -2,9 +2,12 @@
 package accidentaloverride
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import accidentaloverride.Parent
+import accidentaloverride.SuperInterface
+import kotlin.AssertionError
+import kotlin.Error
 
-open class Parent<T: kotlin.Error?> {
+open class Parent<T: Error?> {
  open fun foo(e: T) {}
 }
 
@@ -12,6 +15,6 @@ fun interface SuperInterface<T> {
  fun foo(t: T)
 }
 
-open class AnotherAccidentalOverride: accidentaloverride.SuperInterface<kotlin.AssertionError?>, accidentaloverride.Parent<kotlin.AssertionError?>() {}
+open class AnotherAccidentalOverride: SuperInterface<AssertionError?>, Parent<AssertionError?>() {}
 
-open class AccidentalOverride: accidentaloverride.SuperInterface<kotlin.Error?>, accidentaloverride.Parent<kotlin.Error?>() {}
+open class AccidentalOverride: SuperInterface<Error?>, Parent<Error?>() {}

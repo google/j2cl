@@ -2,73 +2,78 @@
 package implicitparenthesis
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import implicitparenthesis.ImplicitParenthesis
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.assert
+import kotlin.jvm.JvmStatic
+import kotlin.run
 
 open class ImplicitParenthesis {
  open fun test() {
-  implicitparenthesis.ImplicitParenthesis.examples_private_2()
-  implicitparenthesis.ImplicitParenthesis.nonExamples_private_2()
+  ImplicitParenthesis.examples_private_2()
+  ImplicitParenthesis.nonExamples_private_2()
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun examples_private_2() {
-   var primitiveInt: kotlin.Int = 0
-   var boxedInt: kotlin.Int? = null
+   var primitiveInt: Int = 0
+   var boxedInt: Int? = null
    primitiveInt = 5
-   boxedInt = kotlin.Int(10)
-   primitiveInt = (if (primitiveInt === 5) kotlin.Int(15) else kotlin.Int(30))!!.toInt()
-   kotlin.assert(primitiveInt === 15)
+   boxedInt = Int(10)
+   primitiveInt = (if (primitiveInt === 5) Int(15) else Int(30))!!.toInt()
+   assert(primitiveInt === 15)
    primitiveInt = 5
-   boxedInt = kotlin.Int(10)
-   primitiveInt = kotlin.run {
-    boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + primitiveInt)
+   boxedInt = Int(10)
+   primitiveInt = run {
+    boxedInt = Int.valueOf(boxedInt!!.toInt() + primitiveInt)
     boxedInt
    }!!.toInt()
-   kotlin.assert(primitiveInt === 15)
+   assert(primitiveInt === 15)
    primitiveInt = 5
-   boxedInt = kotlin.Int(10)
-   primitiveInt = kotlin.run {
-    boxedInt = kotlin.Int.valueOf(primitiveInt)
+   boxedInt = Int(10)
+   primitiveInt = run {
+    boxedInt = Int.valueOf(primitiveInt)
     boxedInt
    }!!.toInt()
-   kotlin.assert(primitiveInt === 5)
+   assert(primitiveInt === 5)
    primitiveInt = 5
-   boxedInt = kotlin.Int(10)
-   primitiveInt = kotlin.run {
-    val ___value: kotlin.Int? = boxedInt
-    boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + 1)
+   boxedInt = Int(10)
+   primitiveInt = run {
+    val ___value: Int? = boxedInt
+    boxedInt = Int.valueOf(boxedInt!!.toInt() + 1)
     ___value
    }!!.toInt()
-   kotlin.assert(primitiveInt === 10)
+   assert(primitiveInt === 10)
    primitiveInt = 5
-   boxedInt = kotlin.Int(10)
-   primitiveInt = kotlin.run {
-    boxedInt = kotlin.Int.valueOf(boxedInt!!.toInt() + 1)
+   boxedInt = Int(10)
+   primitiveInt = run {
+    boxedInt = Int.valueOf(boxedInt!!.toInt() + 1)
     boxedInt
    }!!.toInt()
-   kotlin.assert(primitiveInt === 11)
+   assert(primitiveInt === 11)
   }
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun nonExamples_private_2() {
-   var primitiveInt: kotlin.Int = 0
-   var boxedInt: kotlin.Int? = null
-   var boxedBoolean: kotlin.Boolean? = null
+   var primitiveInt: Int = 0
+   var boxedInt: Int? = null
+   var boxedBoolean: Boolean? = null
    primitiveInt = 5
-   boxedInt = kotlin.Int(10)
+   boxedInt = Int(10)
    primitiveInt = boxedInt!!.toInt() - primitiveInt
-   kotlin.assert(primitiveInt === 5)
+   assert(primitiveInt === 5)
    primitiveInt = 5
-   boxedInt = kotlin.Int(10)
-   boxedBoolean = kotlin.Boolean.valueOf(true)
-   boxedBoolean = kotlin.Boolean.valueOf(boxedInt!!.toInt() === primitiveInt)
-   kotlin.assert(boxedBoolean!!.booleanValue() === false)
+   boxedInt = Int(10)
+   boxedBoolean = Boolean.valueOf(true)
+   boxedBoolean = Boolean.valueOf(boxedInt!!.toInt() === primitiveInt)
+   assert(boxedBoolean!!.booleanValue() === false)
   }
 
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun parenthesisRemoval_private_2() {
-   kotlin.Int(1 + 2)
+   Int(1 + 2)
   }
  }
 }

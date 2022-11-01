@@ -2,20 +2,20 @@
 package abstractinnerclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import abstractinnerclass.InnerClasses
 
 open class InnerClasses {
  fun interface A {
   fun foo()
  }
 
- abstract class B: abstractinnerclass.InnerClasses.A {
+ abstract class B: InnerClasses.A {
   open fun bar() {
    this.foo()
   }
  }
 
- abstract inner class C: abstractinnerclass.InnerClasses.A {
+ abstract inner class C: InnerClasses.A {
   open fun bar() {
    this.foo()
   }

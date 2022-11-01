@@ -2,14 +2,17 @@
 package interfacejsbridge
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import interfacejsbridge.InterfaceImpl
+import interfacejsbridge.MyInterface
+import interfacejsbridge.MyJsInterface
+import interfacejsbridge.SubInterface
 
 open class Main {
  open fun test() {
-  val a: interfacejsbridge.MyJsInterface? = interfacejsbridge.InterfaceImpl()
-  val b: interfacejsbridge.MyInterface? = interfacejsbridge.InterfaceImpl()
-  val c: interfacejsbridge.SubInterface? = interfacejsbridge.InterfaceImpl()
-  val d: interfacejsbridge.InterfaceImpl? = interfacejsbridge.InterfaceImpl()
+  val a: MyJsInterface? = InterfaceImpl()
+  val b: MyInterface? = InterfaceImpl()
+  val c: SubInterface? = InterfaceImpl()
+  val d: InterfaceImpl? = InterfaceImpl()
   a!!.foo(1)
   b!!.foo(1)
   c!!.foo(1)

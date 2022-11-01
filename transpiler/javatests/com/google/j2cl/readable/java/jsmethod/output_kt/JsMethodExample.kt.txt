@@ -2,19 +2,23 @@
 package jsmethod
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsmethod.JsMethodExample
+import kotlin.Array
+import kotlin.String
+import kotlin.collections.ArrayList
+import kotlin.jvm.JvmStatic
 
 open class JsMethodExample {
- external open fun <T: kotlin.collections.ArrayList<kotlin.String?>?> testMethod(): T
+ external open fun <T: ArrayList<String?>?> testMethod(): T
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  external fun log(message: kotlin.String?)
+  @JvmStatic
+  external fun log(message: String?)
 
-  @kotlin.jvm.JvmStatic
-  fun main(vararg args: kotlin.String?) {
-   val args_1: kotlin.Array<kotlin.String?>? = args as kotlin.Array<kotlin.String?>?
-   jsmethod.JsMethodExample.log("test")
+  @JvmStatic
+  fun main(vararg args: String?) {
+   val args_1: Array<String?>? = args as Array<String?>?
+   JsMethodExample.log("test")
   }
  }
 
@@ -23,10 +27,10 @@ open class JsMethodExample {
  }
 
  fun interface I {
-  fun m(s: kotlin.String?)
+  fun m(s: String?)
  }
 
- open class Sub: jsmethod.JsMethodExample.I, jsmethod.JsMethodExample.Base<kotlin.String?>() {
-  open override fun m(s: kotlin.String?) {}
+ open class Sub: JsMethodExample.I, JsMethodExample.Base<String?>() {
+  open override fun m(s: String?) {}
  }
 }

@@ -2,12 +2,13 @@
 package packageprivatemethods.package1
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
+import packageprivatemethods.package1.SuperParent
 
-abstract class Parent: packageprivatemethods.package1.SuperParent() {
- open override fun foo(a: kotlin.Int): kotlin.Int {
+abstract class Parent: SuperParent() {
+ open override fun foo(a: Int): Int {
   return a
  }
 
- abstract override fun bar(a: kotlin.Int, b: kotlin.Int, c: kotlin.Int): kotlin.Int
+ abstract override fun bar(a: Int, b: Int, c: Int): Int
 }

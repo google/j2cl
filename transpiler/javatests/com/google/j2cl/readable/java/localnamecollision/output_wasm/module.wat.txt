@@ -7,6 +7,14 @@
 ;;; Code for localnamecollision.LocalNameCollision [static fields]
 (global $f_$initialized__localnamecollision_LocalNameCollision (mut i32) (i32.const 0))
 
+;;; Code for localnamecollision.A [static fields]
+(global $f_A__localnamecollision_A (mut (ref null $localnamecollision.A)) (ref.null $localnamecollision.A))
+(global $f_B__localnamecollision_A (mut (ref null $localnamecollision.A.B)) (ref.null $localnamecollision.A.B))
+(global $f_$initialized__localnamecollision_A (mut i32) (i32.const 0))
+
+;;; Code for localnamecollision.A.B [static fields]
+(global $f_$initialized__localnamecollision_A_B (mut i32) (i32.const 0))
+
 ;;; Code for localnamecollision.package1.A [static fields]
 (global $f_$initialized__localnamecollision_package1_A (mut i32) (i32.const 0))
 
@@ -57,6 +65,34 @@
 
 ;;; Code for localnamecollision.LocalNameCollision [itable.init]
 (global $localnamecollision.LocalNameCollision.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for localnamecollision.A [vtable.init]
+(global $localnamecollision.A.vtable (ref $localnamecollision.A.vtable) 
+ (struct.new $localnamecollision.A.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@localnamecollision.A)
+ )
+)
+
+;;; Code for localnamecollision.A [itable.init]
+(global $localnamecollision.A.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for localnamecollision.A.B [vtable.init]
+(global $localnamecollision.A.B.vtable (ref $localnamecollision.A.B.vtable) 
+ (struct.new $localnamecollision.A.B.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@localnamecollision.A.B)
+ )
+)
+
+;;; Code for localnamecollision.A.B [itable.init]
+(global $localnamecollision.A.B.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for localnamecollision.package1.A [vtable.init]
@@ -464,6 +500,194 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@localnamecollision.LocalNameCollision)
+
+;;; Code for localnamecollision.A [CLASS]
+(type $localnamecollision.A (struct_subtype 
+ (field $vtable (ref $localnamecollision.A.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $localnamecollision.A.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; A A.$create()
+(func $$create__@localnamecollision.A
+ (result (ref null $localnamecollision.A))
+ ;;@ localnamecollision/LocalNameCollision.java:59:6
+ (local $$instance (ref null $localnamecollision.A))
+ (block
+  ;; A $instance = new A.<init>(0);
+  ;;@ localnamecollision/LocalNameCollision.java:59:6
+  (local.set $$instance (struct.new $localnamecollision.A (ref.as_non_null (global.get $localnamecollision.A.vtable)) (ref.as_non_null (global.get $localnamecollision.A.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ localnamecollision/LocalNameCollision.java:59:6
+  (call $$ctor__void_$p_localnamecollision_A@localnamecollision.A (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ localnamecollision/LocalNameCollision.java:59:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void A.$ctor()
+(func $$ctor__void_$p_localnamecollision_A@localnamecollision.A
+ (param $this (ref null $localnamecollision.A))
+ ;;@ localnamecollision/LocalNameCollision.java:59:6
+ (block
+  ;; localnamecollision.A.$clinit();
+  ;;@ localnamecollision/LocalNameCollision.java:59:6
+  (call $$clinit__void@localnamecollision.A )
+  ;; Object.this.$ctor();
+  ;;@ localnamecollision/LocalNameCollision.java:59:6
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void A.test()
+(func $m_test__void@localnamecollision.A
+ ;;@ localnamecollision/LocalNameCollision.java:65:14
+ (block
+  ;; localnamecollision.A.$clinit();
+  ;;@ localnamecollision/LocalNameCollision.java:65:21
+  (call $$clinit__void@localnamecollision.A )
+  ;; (localnamecollision.A.A = localnamecollision.A.A);
+  ;;@ localnamecollision/LocalNameCollision.java:66:4
+  (global.set $f_A__localnamecollision_A (global.get $f_A__localnamecollision_A))
+  ;; (localnamecollision.A.B = localnamecollision.A.B);
+  ;;@ localnamecollision/LocalNameCollision.java:67:4
+  (global.set $f_B__localnamecollision_A (global.get $f_B__localnamecollision_A))
+  ;; (localnamecollision.A.A = localnamecollision.A.A);
+  ;;@ localnamecollision/LocalNameCollision.java:69:4
+  (global.set $f_A__localnamecollision_A (global.get $f_A__localnamecollision_A))
+  ;; (localnamecollision.A.B = localnamecollision.A.B);
+  ;;@ localnamecollision/LocalNameCollision.java:70:4
+  (global.set $f_B__localnamecollision_A (global.get $f_B__localnamecollision_A))
+ )
+)
+
+;;; void A.$clinit()
+(func $$clinit__void@localnamecollision.A
+ ;;@ localnamecollision/LocalNameCollision.java:59:6
+ (block
+  ;; if (localnamecollision.A.$initialized) return;
+  ;;@ localnamecollision/LocalNameCollision.java:59:6
+  (if (global.get $f_$initialized__localnamecollision_A)
+   (then
+    ;; return;
+    ;;@ localnamecollision/LocalNameCollision.java:59:6
+    (return )
+   )
+  )
+  ;; (localnamecollision.A.$initialized = true);
+  ;;@ localnamecollision/LocalNameCollision.java:59:6
+  (global.set $f_$initialized__localnamecollision_A (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ localnamecollision/LocalNameCollision.java:59:6
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> A.getClass()
+(func $m_getClass__java_lang_Class@localnamecollision.A
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $localnamecollision.A))
+ (local.set $this (ref.cast_static $localnamecollision.A (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.A();
+  (return (call $function.no.side.effects.$getLocalnamecollision.A__java_lang_Class (ref.func $$getLocalnamecollision.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@localnamecollision.A)
+
+;;; Code for localnamecollision.A.B [CLASS]
+(type $localnamecollision.A.B (struct_subtype 
+ (field $vtable (ref $localnamecollision.A.B.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $localnamecollision.A.B.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; B B.$create()
+(func $$create__@localnamecollision.A.B
+ (result (ref null $localnamecollision.A.B))
+ ;;@ localnamecollision/LocalNameCollision.java:63:15
+ (local $$instance (ref null $localnamecollision.A.B))
+ (block
+  ;; B $instance = new B.<init>(0);
+  ;;@ localnamecollision/LocalNameCollision.java:63:15
+  (local.set $$instance (struct.new $localnamecollision.A.B (ref.as_non_null (global.get $localnamecollision.A.B.vtable)) (ref.as_non_null (global.get $localnamecollision.A.B.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ localnamecollision/LocalNameCollision.java:63:15
+  (call $$ctor__void_$p_localnamecollision_A_B@localnamecollision.A.B (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ localnamecollision/LocalNameCollision.java:63:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void B.$ctor()
+(func $$ctor__void_$p_localnamecollision_A_B@localnamecollision.A.B
+ (param $this (ref null $localnamecollision.A.B))
+ ;;@ localnamecollision/LocalNameCollision.java:63:15
+ (block
+  ;; localnamecollision.A.B.$clinit();
+  ;;@ localnamecollision/LocalNameCollision.java:63:15
+  (call $$clinit__void@localnamecollision.A.B )
+  ;; Object.this.$ctor();
+  ;;@ localnamecollision/LocalNameCollision.java:63:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void B.$clinit()
+(func $$clinit__void@localnamecollision.A.B
+ ;;@ localnamecollision/LocalNameCollision.java:63:15
+ (block
+  ;; if (localnamecollision.A.B.$initialized) return;
+  ;;@ localnamecollision/LocalNameCollision.java:63:15
+  (if (global.get $f_$initialized__localnamecollision_A_B)
+   (then
+    ;; return;
+    ;;@ localnamecollision/LocalNameCollision.java:63:15
+    (return )
+   )
+  )
+  ;; (localnamecollision.A.B.$initialized = true);
+  ;;@ localnamecollision/LocalNameCollision.java:63:15
+  (global.set $f_$initialized__localnamecollision_A_B (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ localnamecollision/LocalNameCollision.java:63:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> B.getClass()
+(func $m_getClass__java_lang_Class@localnamecollision.A.B
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $localnamecollision.A.B))
+ (local.set $this (ref.cast_static $localnamecollision.A.B (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.A.B();
+  (return (call $function.no.side.effects.$getLocalnamecollision.A.B__java_lang_Class (ref.func $$getLocalnamecollision.A.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@localnamecollision.A.B)
 
 ;;; Code for localnamecollision.package1.A [CLASS]
 (type $localnamecollision.package1.A (struct_subtype 

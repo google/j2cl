@@ -2,78 +2,85 @@
 package jsproperties
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsproperties.Bar
+import jsproperties.Foo
+import jsproperties.NativeFoo
+import kotlin.Any
+import kotlin.Double
+import kotlin.Int
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class Foo {
  companion object {
-  @kotlin.jvm.JvmField var f_private_2: kotlin.Int = 0
+  @JvmField var f_private_2: Int = 0
 
-  @kotlin.jvm.JvmStatic
-  fun getA(): kotlin.Int {
-   return jsproperties.Foo.f_private_2 + 1
+  @JvmStatic
+  fun getA(): Int {
+   return Foo.f_private_2 + 1
   }
 
-  @kotlin.jvm.JvmStatic
-  fun setA(x: kotlin.Int) {
-   jsproperties.Foo.f_private_2 = x + 2
+  @JvmStatic
+  fun setA(x: Int) {
+   Foo.f_private_2 = x + 2
   }
 
-  @kotlin.jvm.JvmStatic
-  fun getB(): kotlin.Int {
-   return jsproperties.Foo.f_private_2 + 3
+  @JvmStatic
+  fun getB(): Int {
+   return Foo.f_private_2 + 3
   }
 
-  @kotlin.jvm.JvmStatic
-  fun setB(x: kotlin.Int) {
-   jsproperties.Foo.f_private_2 = x + 4
+  @JvmStatic
+  fun setB(x: Int) {
+   Foo.f_private_2 = x + 4
   }
  }
 }
 
 open class Bar {
- @kotlin.jvm.JvmField var f_private_2: kotlin.Int = 0
+ @JvmField var f_private_2: Int = 0
 
- open fun getA(): kotlin.Int {
+ open fun getA(): Int {
   return this.f_private_2 + 1
  }
 
- open fun setA(x: kotlin.Int) {
+ open fun setA(x: Int) {
   this.f_private_2 = x + 2
  }
 
- open fun getB(): kotlin.Int {
+ open fun getB(): Int {
   return this.f_private_2 + 3
  }
 
- open fun setB(x: kotlin.Int) {
+ open fun setB(x: Int) {
   this.f_private_2 = x + 4
  }
 }
 
 open class NativeFoo {
- external open fun getA(): kotlin.Any?
+ external open fun getA(): Any?
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  external fun getB(): kotlin.Double
+  @JvmStatic
+  external fun getB(): Double
  }
 }
 
 open class Main {
  open fun testNativeJsProperty() {
-  jsproperties.NativeFoo().getA()
-  jsproperties.NativeFoo.getB()
+  NativeFoo().getA()
+  NativeFoo.getB()
  }
 
  open fun testStaticJsProperty() {
-  jsproperties.Foo.getA()
-  jsproperties.Foo.setA(10)
-  jsproperties.Foo.getB()
-  jsproperties.Foo.setB(10)
+  Foo.getA()
+  Foo.setA(10)
+  Foo.getB()
+  Foo.setB(10)
  }
 
  open fun testInstanceJsProperty() {
-  val bar: jsproperties.Bar? = jsproperties.Bar()
+  val bar: Bar? = Bar()
   bar!!.getA()
   bar!!.setA(10)
   bar!!.getB()

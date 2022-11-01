@@ -2,10 +2,11 @@
 package packageinfosubpackage
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.jvm.JvmField
+import packageinfosubpackage.Foo
 
 open class Foo {
- @kotlin.jvm.JvmField var nativeBar_private_2: packageinfosubpackage.Foo.NativeBar? = packageinfosubpackage.Foo.NativeBar()
+ @JvmField var nativeBar_private_2: Foo.NativeBar? = Foo.NativeBar()
 
  open class NativeBar {}
 }

@@ -2,20 +2,22 @@
 package genericnativetype
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import genericnativetype.BoundedJsArray
+import kotlin.Int
+import kotlin.jvm.JvmStatic
 
 open class BoundedJsArrays {
  constructor()
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <V> create(): genericnativetype.BoundedJsArray<V>? {
-   return genericnativetype.BoundedJsArray.create<V>()
+  @JvmStatic
+  fun <V> create(): BoundedJsArray<V>? {
+   return BoundedJsArray.create<V>()
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <V> createWithSize(size: kotlin.Int): genericnativetype.BoundedJsArray<V>? {
-   return genericnativetype.BoundedJsArray.create<V>(size)
+  @JvmStatic
+  fun <V> createWithSize(size: Int): BoundedJsArray<V>? {
+   return BoundedJsArray.create<V>(size)
   }
  }
 }

@@ -2,37 +2,43 @@
 package devirtualizedsupermethodcall
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+import devirtualizedsupermethodcall.SubNumber
+import javaemul.lang.JavaNumber
+import kotlin.Double
+import kotlin.Float
+import kotlin.Int
+import kotlin.Long
 
-open class SubNumber: javaemul.lang.JavaNumber() {
- open override fun toInt(): kotlin.Int {
+open class SubNumber: JavaNumber() {
+ open override fun toInt(): Int {
   return 0
  }
 
- open override fun toLong(): kotlin.Long {
+ open override fun toLong(): Long {
   return 0L
  }
 
- open override fun toFloat(): kotlin.Float {
+ open override fun toFloat(): Float {
   return 0.0f
  }
 
- open override fun toDouble(): kotlin.Double {
+ open override fun toDouble(): Double {
   return 0.0
  }
 }
 
 open class FooCallsSuperObjectMethod {
- open override fun hashCode(): kotlin.Int {
+ open override fun hashCode(): Int {
   return super.hashCode()
  }
 }
 
 open class Main {
  open fun main() {
-  val fooCallsSuperObjectMethods: devirtualizedsupermethodcall.FooCallsSuperObjectMethod? = devirtualizedsupermethodcall.FooCallsSuperObjectMethod()
+  val fooCallsSuperObjectMethods: FooCallsSuperObjectMethod? = FooCallsSuperObjectMethod()
   fooCallsSuperObjectMethods!!.hashCode()
-  val sn: devirtualizedsupermethodcall.SubNumber? = devirtualizedsupermethodcall.SubNumber()
+  val sn: SubNumber? = SubNumber()
   sn!!.toByte()
   sn!!.toDouble()
   sn!!.toFloat()

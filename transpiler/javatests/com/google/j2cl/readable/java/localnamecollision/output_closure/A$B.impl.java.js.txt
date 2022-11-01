@@ -1,0 +1,40 @@
+goog.module('localnamecollision.A.B$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class B extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!B} */
+ static $create__() {
+  B.$clinit();
+  let $instance = new B();
+  $instance.$ctor__localnamecollision_A_B__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__localnamecollision_A_B__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(B, 'localnamecollision.A$B');
+
+exports = B;
+
+//# sourceMappingURL=A$B.js.map

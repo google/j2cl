@@ -2,22 +2,23 @@
 package staticjsmethodswithclassnamespace
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.jvm.JvmStatic
+import staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
 
 open class StaticJsMethodsWithClassNamespace {
  open fun test() {
-  staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
-  staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
+  StaticJsMethodsWithClassNamespace.originalName()
+  StaticJsMethodsWithClassNamespace.originalName()
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun originalName() {}
  }
 }
 
 open class ExternalCaller {
  open fun test() {
-  staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
+  StaticJsMethodsWithClassNamespace.originalName()
  }
 }

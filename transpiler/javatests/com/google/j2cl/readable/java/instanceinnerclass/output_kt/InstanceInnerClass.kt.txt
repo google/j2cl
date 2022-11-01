@@ -2,21 +2,23 @@
 package instanceinnerclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import instanceinnerclass.InstanceInnerClass
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class InstanceInnerClass {
- @kotlin.jvm.JvmField var instanceField: kotlin.Int = 0
+ @JvmField var instanceField: Int = 0
 
  open fun funOuter() {}
 
  open fun test() {
-  instanceinnerclass.InstanceInnerClass().InnerClass()
+  InstanceInnerClass().InnerClass()
  }
 
  open inner class InnerClass {
-  @kotlin.jvm.JvmField var field: kotlin.Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
+  @JvmField var field: Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
 
-  @kotlin.jvm.JvmField var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this@InstanceInnerClass
+  @JvmField var enclosingInstance: InstanceInnerClass? = this@InstanceInnerClass
 
   open fun funInner() {
    this@InstanceInnerClass.funOuter()

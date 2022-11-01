@@ -2,60 +2,71 @@
 package nullability.defaultnotnullable
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import java.lang.RuntimeException
+import kotlin.Any
+import kotlin.Array
+import kotlin.Double
+import kotlin.String
+import kotlin.Unit
+import kotlin.arrayOf
+import kotlin.collections.ArrayList
+import kotlin.collections.MutableList
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
+import nullability.defaultnotnullable.DefaultNotNullable
 
 open class DefaultNotNullable {
- @kotlin.jvm.JvmField var f1_private_2: kotlin.String = "Hello"
+ @JvmField var f1_private_2: String = "Hello"
 
- @kotlin.jvm.JvmField var f2_private_2: kotlin.String? = null
+ @JvmField var f2_private_2: String? = null
 
- @kotlin.jvm.JvmField var f3_private_2: kotlin.String? = null
+ @JvmField var f3_private_2: String? = null
 
- @kotlin.jvm.JvmField var f4_private_2: kotlin.collections.MutableList<kotlin.String> = kotlin.collections.ArrayList<kotlin.String?>() as kotlin.collections.MutableList<kotlin.String>
+ @JvmField var f4_private_2: MutableList<String> = ArrayList<String?>() as MutableList<String>
 
- @kotlin.jvm.JvmField var f5_private_2: kotlin.collections.MutableList<kotlin.String>? = kotlin.collections.ArrayList<kotlin.String?>() as kotlin.collections.MutableList<kotlin.String>?
+ @JvmField var f5_private_2: MutableList<String>? = ArrayList<String?>() as MutableList<String>?
 
- @kotlin.jvm.JvmField var f6_private_2: kotlin.collections.MutableList<kotlin.String?> = kotlin.collections.ArrayList<kotlin.String?>()
+ @JvmField var f6_private_2: MutableList<String?> = ArrayList<String?>()
 
- @kotlin.jvm.JvmField var f7_private_2: kotlin.collections.MutableList<kotlin.String?>? = null
+ @JvmField var f7_private_2: MutableList<String?>? = null
 
- @kotlin.jvm.JvmField var f8_private_2: kotlin.Array<kotlin.String> = kotlin.arrayOf<kotlin.String?>() as kotlin.Array<kotlin.String>
+ @JvmField var f8_private_2: Array<String> = arrayOf<String?>() as Array<String>
 
- @kotlin.jvm.JvmField var f9_private_2: kotlin.Array<kotlin.String?> = kotlin.arrayOf<kotlin.String?>()
+ @JvmField var f9_private_2: Array<String?> = arrayOf<String?>()
 
- @kotlin.jvm.JvmField var f10_private_2: kotlin.Array<kotlin.String>? = kotlin.arrayOf<kotlin.String?>() as kotlin.Array<kotlin.String>?
+ @JvmField var f10_private_2: Array<String>? = arrayOf<String?>() as Array<String>?
 
- @kotlin.jvm.JvmField var f11_private_2: kotlin.Unit? = null
+ @JvmField var f11_private_2: Unit? = null
 
- @kotlin.jvm.JvmField var f12_private_2: kotlin.Any = kotlin.Any()
+ @JvmField var f12_private_2: Any = Any()
 
- @kotlin.jvm.JvmField var f13_private_2: kotlin.Any
+ @JvmField var f13_private_2: Any
 
- @kotlin.jvm.JvmField var f14_private_2: kotlin.Any? = null
+ @JvmField var f14_private_2: Any? = null
 
  constructor() {
-  this.f13_private_2 = kotlin.Any()
+  this.f13_private_2 = Any()
  }
 
- open fun m1(a: kotlin.String, b: kotlin.collections.MutableList<kotlin.Double>): kotlin.String {
+ open fun m1(a: String, b: MutableList<Double>): String {
   return ""
  }
 
- open fun m2(a: kotlin.String?, b: kotlin.collections.MutableList<kotlin.Double?>): kotlin.String? {
+ open fun m2(a: String?, b: MutableList<Double?>): String? {
   return null
  }
 
- open fun m3(vararg args: kotlin.String) {
-  val args_1: kotlin.Array<kotlin.String> = args as kotlin.Array<kotlin.String>
+ open fun m3(vararg args: String) {
+  val args_1: Array<String> = args as Array<String>
  }
 
- open fun <T: nullability.defaultnotnullable.DefaultNotNullable.NullableBound<T>?> methodWithNullableBound() {}
+ open fun <T: DefaultNotNullable.NullableBound<T>?> methodWithNullableBound() {}
 
- open fun <T: nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
+ open fun <T: DefaultNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun <N> genericNullableMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<N>, n: N?) {
+  @JvmStatic
+  fun <N> genericNullableMethod(o: DefaultNotNullable.ParameterizedNullable<N>, n: N?) {
    o!!.setNullable(n)
    o!!.setNonNull(n as N)
    o!!.setDefaultNullability(n as N)
@@ -70,8 +81,8 @@ open class DefaultNotNullable {
    o!!.defaultNullability!!.hashCode()
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <N: kotlin.Any> genericNonNullMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<N>, n: N) {
+  @JvmStatic
+  fun <N: Any> genericNonNullMethod(o: DefaultNotNullable.ParameterizedNonNullable<N>, n: N) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
@@ -86,8 +97,8 @@ open class DefaultNotNullable {
    o!!.defaultNullability!!.hashCode()
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <N: kotlin.Any> genericDefaultNullabilityMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<N>, n: N) {
+  @JvmStatic
+  fun <N: Any> genericDefaultNullabilityMethod(o: DefaultNotNullable.ParameterizedDefaultNullability<N>, n: N) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
@@ -102,8 +113,8 @@ open class DefaultNotNullable {
    o!!.defaultNullability!!.hashCode()
   }
 
-  @kotlin.jvm.JvmStatic
-  fun parametrizedNullableMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNullable<kotlin.String?>, s: kotlin.String?) {
+  @JvmStatic
+  fun parametrizedNullableMethod(o: DefaultNotNullable.ParameterizedNullable<String?>, s: String?) {
    o!!.setNullable(s)
    o!!.setNonNull(s!!)
    o!!.setDefaultNullability(s)
@@ -118,8 +129,8 @@ open class DefaultNotNullable {
    o!!.defaultNullability!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun parametrizedNonNullMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedNonNullable<kotlin.String>, s: kotlin.String) {
+  @JvmStatic
+  fun parametrizedNonNullMethod(o: DefaultNotNullable.ParameterizedNonNullable<String>, s: String) {
    o!!.setNullable(s)
    o!!.setNonNull(s)
    o!!.setDefaultNullability(s)
@@ -134,8 +145,8 @@ open class DefaultNotNullable {
    o!!.defaultNullability!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun parametrizedDefaultNullabilityMethod(o: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedDefaultNullability<kotlin.String>, s: kotlin.String) {
+  @JvmStatic
+  fun parametrizedDefaultNullabilityMethod(o: DefaultNotNullable.ParameterizedDefaultNullability<String>, s: String) {
    o!!.setNullable(s)
    o!!.setNonNull(s)
    o!!.setDefaultNullability(s)
@@ -150,131 +161,131 @@ open class DefaultNotNullable {
    o!!.defaultNullability!!.length
   }
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcard(l: kotlin.collections.MutableList<*>) {}
+  @JvmStatic
+  fun testListOfWildcard(l: MutableList<*>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityObject(l: kotlin.collections.MutableList<*>) {}
+  @JvmStatic
+  fun testListOfWildcardExtendsDefaultNullabilityObject(l: MutableList<*>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsNullableObject(l: kotlin.collections.MutableList<*>) {}
+  @JvmStatic
+  fun testListOfWildcardExtendsNullableObject(l: MutableList<*>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsNonNullObject(l: kotlin.collections.MutableList<*>) {}
+  @JvmStatic
+  fun testListOfWildcardExtendsNonNullObject(l: MutableList<*>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityString(l: kotlin.collections.MutableList<out kotlin.String>) {}
+  @JvmStatic
+  fun testListOfWildcardExtendsDefaultNullabilityString(l: MutableList<out String>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsNullableString(l: kotlin.collections.MutableList<out kotlin.String?>) {}
+  @JvmStatic
+  fun testListOfWildcardExtendsNullableString(l: MutableList<out String?>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardExtendsNonNullString(l: kotlin.collections.MutableList<out kotlin.String>) {}
+  @JvmStatic
+  fun testListOfWildcardExtendsNonNullString(l: MutableList<out String>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Any> testListOfWildcardExtendsDefaultNullabilityVariable(l: kotlin.collections.MutableList<out T>) {}
+  @JvmStatic
+  fun <T: Any> testListOfWildcardExtendsDefaultNullabilityVariable(l: MutableList<out T>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Any> testListOfWildcardExtendsNullableVariable(l: kotlin.collections.MutableList<out T?>) {}
+  @JvmStatic
+  fun <T: Any> testListOfWildcardExtendsNullableVariable(l: MutableList<out T?>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperDefaultNullabilityObject(l: kotlin.collections.MutableList<in kotlin.Any>) {}
+  @JvmStatic
+  fun testListOfWildcardSuperDefaultNullabilityObject(l: MutableList<in Any>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperNullableObject(l: kotlin.collections.MutableList<in kotlin.Any?>) {}
+  @JvmStatic
+  fun testListOfWildcardSuperNullableObject(l: MutableList<in Any?>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperNonNullObject(l: kotlin.collections.MutableList<in kotlin.Any>) {}
+  @JvmStatic
+  fun testListOfWildcardSuperNonNullObject(l: MutableList<in Any>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperDefaultNullabilityString(l: kotlin.collections.MutableList<in kotlin.String>) {}
+  @JvmStatic
+  fun testListOfWildcardSuperDefaultNullabilityString(l: MutableList<in String>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperNullableString(l: kotlin.collections.MutableList<in kotlin.String?>) {}
+  @JvmStatic
+  fun testListOfWildcardSuperNullableString(l: MutableList<in String?>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun testListOfWildcardSuperNonNullString(l: kotlin.collections.MutableList<in kotlin.String>) {}
+  @JvmStatic
+  fun testListOfWildcardSuperNonNullString(l: MutableList<in String>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Any> testListOfWildcardSuperDefaultNullabilityVariable(l: kotlin.collections.MutableList<in T>) {}
+  @JvmStatic
+  fun <T: Any> testListOfWildcardSuperDefaultNullabilityVariable(l: MutableList<in T>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Any> testListOfWildcardSuperNullableVariable(l: kotlin.collections.MutableList<in T?>) {}
+  @JvmStatic
+  fun <T: Any> testListOfWildcardSuperNullableVariable(l: MutableList<in T?>) {}
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Any> testCaptureNullabilityCast(l: kotlin.collections.MutableList<in T>, t: T?) {
+  @JvmStatic
+  fun <T: Any> testCaptureNullabilityCast(l: MutableList<in T>, t: T?) {
    l!!.add(t as T)
   }
 
-  @kotlin.jvm.JvmStatic
-  fun testParametrizedTypeNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<kotlin.String>, string: kotlin.String) {
-   val localString: kotlin.String? = string
+  @JvmStatic
+  fun testParametrizedTypeNullabilityCast(c: DefaultNotNullable.Consumer<String>, string: String) {
+   val localString: String? = string
    c!!.accept(localString!!)
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Any> testGenericTypeNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<T>, element: T) {
+  @JvmStatic
+  fun <T: Any> testGenericTypeNullabilityCast(c: DefaultNotNullable.Consumer<T>, element: T) {
    val localElement: T? = element
    c!!.accept(localElement!!)
   }
 
-  @kotlin.jvm.JvmStatic
-  fun testParametrizedWildcardNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<in kotlin.String>, string: kotlin.String) {
-   val localString: kotlin.String? = string
+  @JvmStatic
+  fun testParametrizedWildcardNullabilityCast(c: DefaultNotNullable.Consumer<in String>, string: String) {
+   val localString: String? = string
    c!!.accept(localString!!)
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Any> testGenericWildcardNullabilityCast(c: nullability.defaultnotnullable.DefaultNotNullable.Consumer<in T>, element: T) {
+  @JvmStatic
+  fun <T: Any> testGenericWildcardNullabilityCast(c: DefaultNotNullable.Consumer<in T>, element: T) {
    val localElement: T? = element
    c!!.accept(localElement!!)
   }
 
-  @kotlin.jvm.JvmStatic
-  fun testParametrizedArrayNullabilityCast(array: kotlin.Array<kotlin.String>) {
-   val localArray: kotlin.Array<kotlin.String>? = array
+  @JvmStatic
+  fun testParametrizedArrayNullabilityCast(array: Array<String>) {
+   val localArray: Array<String>? = array
   }
 
-  @kotlin.jvm.JvmStatic
-  fun <T: kotlin.Any> testGenericArrayNullabilityCast(array: kotlin.Array<T>) {
-   val localArray: kotlin.Array<T>? = array
+  @JvmStatic
+  fun <T: Any> testGenericArrayNullabilityCast(array: Array<T>) {
+   val localArray: Array<T>? = array
   }
  }
 
- interface ParameterizedInterface<T: kotlin.Any> {
+ interface ParameterizedInterface<T: Any> {
   fun add(t: T): T
 
   fun nullableAdd(t: T?): T?
  }
 
- open inner class ImplementsParameterizedInterface: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface<kotlin.String> {
-  open override fun add(s: kotlin.String): kotlin.String {
+ open inner class ImplementsParameterizedInterface: DefaultNotNullable.ParameterizedInterface<String> {
+  open override fun add(s: String): String {
    return "Hey"
   }
 
-  open override fun nullableAdd(s: kotlin.String?): kotlin.String? {
+  open override fun nullableAdd(s: String?): String? {
    return "Hey"
   }
  }
 
- interface NullableBound<T: nullability.defaultnotnullable.DefaultNotNullable.NullableBound<T>?> {}
+ interface NullableBound<T: DefaultNotNullable.NullableBound<T>?> {}
 
- interface NonNullableBound<T: nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound<T>> {}
+ interface NonNullableBound<T: DefaultNotNullable.NonNullableBound<T>> {}
 
- interface NullableBoundWithNonNullArgument: nullability.defaultnotnullable.DefaultNotNullable.NullableBound<nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNonNullArgument> {}
+ interface NullableBoundWithNonNullArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNonNullArgument> {}
 
- interface NullableBoundWithNullableArgument: nullability.defaultnotnullable.DefaultNotNullable.NullableBound<nullability.defaultnotnullable.DefaultNotNullable.NullableBoundWithNullableArgument?> {}
+ interface NullableBoundWithNullableArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNullableArgument?> {}
 
- interface NonNullBoundWithNonNullArgument: nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound<nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNonNullArgument> {}
+ interface NonNullBoundWithNonNullArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNonNullArgument> {}
 
- interface NonNullBoundWithNullableArgument: nullability.defaultnotnullable.DefaultNotNullable.NonNullableBound<nullability.defaultnotnullable.DefaultNotNullable.NonNullBoundWithNullableArgument> {}
+ interface NonNullBoundWithNullableArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNullableArgument> {}
 
- open class ParameterizedDefaultNullability<N: kotlin.Any> {
-  @kotlin.jvm.JvmField var nullable: N? = null
+ open class ParameterizedDefaultNullability<N: Any> {
+  @JvmField var nullable: N? = null
 
-  @kotlin.jvm.JvmField var nonNullable: N
+  @JvmField var nonNullable: N
 
-  @kotlin.jvm.JvmField var defaultNullability: N
+  @JvmField var defaultNullability: N
 
   constructor(n: N) {
    this.nonNullable = n
@@ -286,7 +297,7 @@ open class DefaultNotNullable {
   }
 
   open fun getNonNullable(): N {
-   throw java.lang.RuntimeException()
+   throw RuntimeException()
   }
 
   open fun getDefaultNullability(): N {
@@ -301,11 +312,11 @@ open class DefaultNotNullable {
  }
 
  open class ParameterizedNullable<N> {
-  @kotlin.jvm.JvmField var nullable: N? = null
+  @JvmField var nullable: N? = null
 
-  @kotlin.jvm.JvmField var nonNullable: N = null as N
+  @JvmField var nonNullable: N = null as N
 
-  @kotlin.jvm.JvmField var defaultNullability: N = null as N
+  @JvmField var defaultNullability: N = null as N
 
   constructor(n: N) {
    this.nonNullable = n
@@ -317,7 +328,7 @@ open class DefaultNotNullable {
   }
 
   open fun getNonNullable(): N {
-   throw java.lang.RuntimeException()
+   throw RuntimeException()
   }
 
   open fun getDefaultNullability(): N {
@@ -331,12 +342,12 @@ open class DefaultNotNullable {
   open fun setDefaultNullability(n: N) {}
  }
 
- open class ParameterizedNonNullable<N: kotlin.Any> {
-  @kotlin.jvm.JvmField var nullable: N? = null
+ open class ParameterizedNonNullable<N: Any> {
+  @JvmField var nullable: N? = null
 
-  @kotlin.jvm.JvmField var nonNullable: N
+  @JvmField var nonNullable: N
 
-  @kotlin.jvm.JvmField var defaultNullability: N
+  @JvmField var defaultNullability: N
 
   constructor(n: N) {
    this.nonNullable = n
@@ -348,7 +359,7 @@ open class DefaultNotNullable {
   }
 
   open fun getNonNullable(): N {
-   throw java.lang.RuntimeException()
+   throw RuntimeException()
   }
 
   open fun getDefaultNullability(): N {
@@ -362,7 +373,7 @@ open class DefaultNotNullable {
   open fun setDefaultNullability(n: N) {}
  }
 
- fun interface Consumer<T: kotlin.Any> {
+ fun interface Consumer<T: Any> {
   fun accept(t: T)
  }
 }

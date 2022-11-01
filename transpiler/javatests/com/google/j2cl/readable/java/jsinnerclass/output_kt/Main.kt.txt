@@ -2,32 +2,38 @@
 package jsinnerclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsinnerclass.Main
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.assert
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 
 open class Main {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun main(vararg args: kotlin.String?) {
-   val args_1: kotlin.Array<kotlin.String?>? = args as kotlin.Array<kotlin.String?>?
-   kotlin.assert(jsinnerclass.Main.Outer().method() === 5)
+  @JvmStatic
+  fun main(vararg args: String?) {
+   val args_1: Array<String?>? = args as Array<String?>?
+   assert(Main.Outer().method() === 5)
   }
  }
 
  open class Outer {
-  @kotlin.jvm.JvmField var a: kotlin.Int = 2
+  @JvmField var a: Int = 2
 
-  open fun method(): kotlin.Int {
+  open fun method(): Int {
    return Inner().getB() + this.a
   }
 
   open inner class Inner {
-   @kotlin.jvm.JvmField var b_private_2: kotlin.Int = 0
+   @JvmField var b_private_2: Int = 0
 
    constructor() {
     this.b_private_2 = this@Outer.a + 1
    }
 
-   open fun getB(): kotlin.Int {
+   open fun getB(): Int {
     return this.b_private_2
    }
   }

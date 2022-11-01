@@ -2,24 +2,26 @@
 package multipleconstructors
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Boolean
+import kotlin.Int
+import kotlin.jvm.JvmField
 
 open class MultipleConstructors {
- @kotlin.jvm.JvmField var id_private_2: kotlin.Int = 0
+ @JvmField var id_private_2: Int = 0
 
- @kotlin.jvm.JvmField var flag_private_2: kotlin.Boolean = false
+ @JvmField var flag_private_2: Boolean = false
 
- constructor(id: kotlin.Int) {
+ constructor(id: Int) {
   this.id_private_2 = id
   this.flag_private_2 = id === 0
  }
 
- constructor(flag: kotlin.Boolean) {
+ constructor(flag: Boolean) {
   this.id_private_2 = - 1
   this.flag_private_2 = flag
  }
 
- constructor(id: kotlin.Int, flag: kotlin.Boolean) {
+ constructor(id: Int, flag: Boolean) {
   this.id_private_2 = id
   this.flag_private_2 = flag
  }

@@ -15,18 +15,22 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.ast
 
-import com.google.j2cl.transpiler.ast.CompilationUnit
-import com.google.j2cl.transpiler.backend.kotlin.common.buildSet
+import com.google.j2cl.transpiler.backend.kotlin.common.ofList
 
-data class Import(val components: List<String>, val isStar: Boolean = false)
+data class Import(val components: List<String>, val isStar: Boolean = false) : Comparable<Import> {
+  override fun compareTo(other: Import) = comparator.compare(this, other)
+
+  companion object {
+    private val comparator =
+      compareBy(Import::isStar)
+        .reversed()
+        .then(compareBy(naturalOrder<String>().ofList(), Import::components))
+  }
+}
 
 fun import(vararg components: String) = Import(components.toList())
 
 fun starImport(vararg components: String) = Import(components.toList(), isStar = true)
 
-val CompilationUnit.imports: Set<Import>
-  get() = buildSet {
-    add(starImport("javaemul", "lang"))
-    add(starImport("kotlin", "jvm"))
-    // TODO(b/226922954): Add imports for types and members.
-  }
+val defaultImports: Set<Import>
+  get() = setOf(starImport("javaemul", "lang"))

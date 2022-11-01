@@ -2,19 +2,19 @@
 package localclassinheritance
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Int
 
 open class LocalClassInheritance {
  open fun test() {
-  val f: kotlin.Int = 1
+  val f: Int = 1
   open class ___1Parent {
    open fun n() {
-    val i: kotlin.Int = f
+    val i: Int = f
    }
   }
   open class ___1Child: ___1Parent() {
    open override fun n() {
-    val i: kotlin.Int = f
+    val i: Int = f
    }
   }
  }

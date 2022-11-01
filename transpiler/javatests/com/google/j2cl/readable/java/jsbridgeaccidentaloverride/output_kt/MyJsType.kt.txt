@@ -2,36 +2,39 @@
 package jsbridgeaccidentaloverride
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import jsbridgeaccidentaloverride.MyInterface
+import jsbridgeaccidentaloverride.MyJsType
+import jsbridgeaccidentaloverride.OtherInterface
+import kotlin.Int
 
 fun interface OtherInterface {
- fun `fun`(a: kotlin.Int): kotlin.Int
+ fun `fun`(a: Int): Int
 }
 
-open class MyJsType: jsbridgeaccidentaloverride.OtherInterface {
+open class MyJsType: OtherInterface {
  constructor()
 
- open fun foo(a: kotlin.Int): kotlin.Int {
+ open fun foo(a: Int): Int {
   return a
  }
 
- open fun bar(a: kotlin.Int): kotlin.Int {
+ open fun bar(a: Int): Int {
   return a + 1
  }
 
- open override fun `fun`(a: kotlin.Int): kotlin.Int {
+ open override fun `fun`(a: Int): Int {
   return a - 1
  }
 }
 
 interface MyInterface {
- fun foo(a: kotlin.Int): kotlin.Int
+ fun foo(a: Int): Int
 
- fun bar(a: kotlin.Int): kotlin.Int
+ fun bar(a: Int): Int
 }
 
-open class SubJsType: jsbridgeaccidentaloverride.MyInterface, jsbridgeaccidentaloverride.MyJsType() {
- open override fun bar(a: kotlin.Int): kotlin.Int {
+open class SubJsType: MyInterface, MyJsType() {
+ open override fun bar(a: Int): Int {
   return a + 2
  }
 }

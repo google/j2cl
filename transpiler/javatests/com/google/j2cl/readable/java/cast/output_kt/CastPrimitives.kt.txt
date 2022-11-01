@@ -2,17 +2,28 @@
 package cast
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import cast.CastPrimitives
+import kotlin.Any
+import kotlin.Boolean
+import kotlin.Byte
+import kotlin.ByteArray
+import kotlin.Char
+import kotlin.Double
+import kotlin.Float
+import kotlin.Int
+import kotlin.Long
+import kotlin.Short
+import kotlin.jvm.JvmStatic
 
 open class CastPrimitives {
  open fun testPrimitiveCasts() {
-  var b: kotlin.Byte = (1).toByte()
-  var c: kotlin.Char = '\u0001'
-  var s: kotlin.Short = (1).toShort()
-  var i: kotlin.Int = 1
-  var l: kotlin.Long = 1L
-  var f: kotlin.Float = 1.1f
-  var d: kotlin.Double = 1.1
+  var b: Byte = (1).toByte()
+  var c: Char = '\u0001'
+  var s: Short = (1).toShort()
+  var i: Int = 1
+  var l: Long = 1L
+  var f: Float = 1.1f
+  var d: Double = 1.1
   b = b
   c = b.toInt().toChar()
   s = b.toShort()
@@ -65,56 +76,56 @@ open class CastPrimitives {
  }
 
  open fun testReferenceToPrimitive() {
-  val o: kotlin.Any? = kotlin.Any()
-  val bool: kotlin.Boolean = o as kotlin.Boolean
-  val b: kotlin.Byte = o as kotlin.Byte
-  val c: kotlin.Char = o as kotlin.Char
-  val s: kotlin.Short = o as kotlin.Short
-  val i: kotlin.Int = o as kotlin.Int
-  val l: kotlin.Long = o as kotlin.Long
-  val f: kotlin.Float = o as kotlin.Float
-  val d: kotlin.Double = o as kotlin.Double
+  val o: Any? = Any()
+  val bool: Boolean = o as Boolean
+  val b: Byte = o as Byte
+  val c: Char = o as Char
+  val s: Short = o as Short
+  val i: Int = o as Int
+  val l: Long = o as Long
+  val f: Float = o as Float
+  val d: Double = o as Double
  }
 
  open fun testUnboxAndWiden() {
-  val boxedByte: kotlin.Byte? = kotlin.Byte.valueOf(0.toByte())
-  val s: kotlin.Short = boxedByte!!.toByte().toShort()
-  val i: kotlin.Int = boxedByte!!.toByte().toInt()
-  val l: kotlin.Long = boxedByte!!.toByte().toLong()
-  val f: kotlin.Float = boxedByte!!.toByte().toFloat()
-  val d: kotlin.Double = boxedByte!!.toByte().toDouble()
+  val boxedByte: Byte? = Byte.valueOf(0.toByte())
+  val s: Short = boxedByte!!.toByte().toShort()
+  val i: Int = boxedByte!!.toByte().toInt()
+  val l: Long = boxedByte!!.toByte().toLong()
+  val f: Float = boxedByte!!.toByte().toFloat()
+  val d: Double = boxedByte!!.toByte().toDouble()
  }
 
  open fun testImplicitArgumentCasts() {
-  val b: kotlin.Byte = (127).toByte()
-  val c: kotlin.Char = '\uFFFF'
-  val s: kotlin.Short = (32767).toShort()
-  val i: kotlin.Int = 2147483647
-  val l: kotlin.Long = 9223372036854775807L
-  val f: kotlin.Float = 3.4028235E38f
-  val d: kotlin.Double = 1.7976931348623157E308
-  cast.CastPrimitives.getShort_private_2(b.toShort())
-  cast.CastPrimitives.getInt_private_2(b.toInt())
-  cast.CastPrimitives.getLong_private_2(b.toLong())
-  cast.CastPrimitives.getFloat_private_2(b.toFloat())
-  cast.CastPrimitives.getDouble_private_2(b.toDouble())
-  cast.CastPrimitives.getFloat_private_2(l.toFloat())
-  cast.CastPrimitives.getDouble_private_2(l.toDouble())
-  cast.CastPrimitives.getDouble_private_2(f.toDouble())
-  cast.CastPrimitives.IntValueHolder(b.toInt())
-  cast.CastPrimitives.IntValueHolder(c.code)
-  cast.CastPrimitives.IntValueHolder(s.toInt())
-  cast.CastPrimitives.LongValueHolder(b.toLong())
-  cast.CastPrimitives.LongValueHolder(c.code.toLong())
-  cast.CastPrimitives.LongValueHolder(i.toLong())
+  val b: Byte = (127).toByte()
+  val c: Char = '\uFFFF'
+  val s: Short = (32767).toShort()
+  val i: Int = 2147483647
+  val l: Long = 9223372036854775807L
+  val f: Float = 3.4028235E38f
+  val d: Double = 1.7976931348623157E308
+  CastPrimitives.getShort_private_2(b.toShort())
+  CastPrimitives.getInt_private_2(b.toInt())
+  CastPrimitives.getLong_private_2(b.toLong())
+  CastPrimitives.getFloat_private_2(b.toFloat())
+  CastPrimitives.getDouble_private_2(b.toDouble())
+  CastPrimitives.getFloat_private_2(l.toFloat())
+  CastPrimitives.getDouble_private_2(l.toDouble())
+  CastPrimitives.getDouble_private_2(f.toDouble())
+  CastPrimitives.IntValueHolder(b.toInt())
+  CastPrimitives.IntValueHolder(c.code)
+  CastPrimitives.IntValueHolder(s.toInt())
+  CastPrimitives.LongValueHolder(b.toLong())
+  CastPrimitives.LongValueHolder(c.code.toLong())
+  CastPrimitives.LongValueHolder(i.toLong())
  }
 
- open fun testImplicitArrayIndexCasts(array: kotlin.ByteArray?) {
-  val b: kotlin.Byte = (127).toByte()
-  val c: kotlin.Char = '\uFFFF'
-  val s: kotlin.Short = (32767).toShort()
-  val i: kotlin.Int = 2147483647
-  var result: kotlin.Byte = (0).toByte()
+ open fun testImplicitArrayIndexCasts(array: ByteArray?) {
+  val b: Byte = (127).toByte()
+  val c: Char = '\uFFFF'
+  val s: Short = (32767).toShort()
+  val i: Int = 2147483647
+  var result: Byte = (0).toByte()
   result = array!![b.toInt()]
   result = array!![c.code]
   result = array!![s.toInt()]
@@ -124,14 +135,14 @@ open class CastPrimitives {
  }
 
  open fun testImplicitLongAssignmentCasts() {
-  val fbyte: kotlin.Byte = (11).toByte()
-  val fchar: kotlin.Char = '\u000C'
-  val fshort: kotlin.Short = (13).toShort()
-  val fint: kotlin.Int = 14
-  val flong: kotlin.Long = 15L
-  val ffloat: kotlin.Float = 16.0f
-  val fdouble: kotlin.Double = 17.0
-  var tlong: kotlin.Long = 0L
+  val fbyte: Byte = (11).toByte()
+  val fchar: Char = '\u000C'
+  val fshort: Short = (13).toShort()
+  val fint: Int = 14
+  val flong: Long = 15L
+  val ffloat: Float = 16.0f
+  val fdouble: Double = 17.0
+  var tlong: Long = 0L
   tlong = fbyte.toLong()
   tlong = flong
   tlong = fint.toLong()
@@ -150,37 +161,37 @@ open class CastPrimitives {
  }
 
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun getShort_private_2(value: kotlin.Short): kotlin.Short {
+  @JvmStatic
+  fun getShort_private_2(value: Short): Short {
    return value
   }
 
-  @kotlin.jvm.JvmStatic
-  fun getInt_private_2(value: kotlin.Int): kotlin.Int {
+  @JvmStatic
+  fun getInt_private_2(value: Int): Int {
    return value
   }
 
-  @kotlin.jvm.JvmStatic
-  fun getLong_private_2(value: kotlin.Long): kotlin.Long {
+  @JvmStatic
+  fun getLong_private_2(value: Long): Long {
    return value
   }
 
-  @kotlin.jvm.JvmStatic
-  fun getFloat_private_2(value: kotlin.Float): kotlin.Float {
+  @JvmStatic
+  fun getFloat_private_2(value: Float): Float {
    return value
   }
 
-  @kotlin.jvm.JvmStatic
-  fun getDouble_private_2(value: kotlin.Double): kotlin.Double {
+  @JvmStatic
+  fun getDouble_private_2(value: Double): Double {
    return value
   }
  }
 
  open class IntValueHolder {
-  constructor(value: kotlin.Int)
+  constructor(value: Int)
  }
 
  open class LongValueHolder {
-  constructor(value: kotlin.Long)
+  constructor(value: Long)
  }
 }

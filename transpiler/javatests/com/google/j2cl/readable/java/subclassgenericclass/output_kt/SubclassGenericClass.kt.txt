@@ -2,10 +2,11 @@
 package subclassgenericclass
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import subclassgenericclass.GenericClass
+import subclassgenericclass.SubclassGenericClass
 
 open class GenericClass<T> {}
 
-open class GenericSubclassGenericClass<T>: subclassgenericclass.GenericClass<T>() {}
+open class GenericSubclassGenericClass<T>: GenericClass<T>() {}
 
-open class SubclassGenericClass: subclassgenericclass.GenericClass<subclassgenericclass.SubclassGenericClass?>() {}
+open class SubclassGenericClass: GenericClass<SubclassGenericClass?>() {}

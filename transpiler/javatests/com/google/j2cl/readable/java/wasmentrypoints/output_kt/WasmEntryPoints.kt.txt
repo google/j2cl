@@ -2,17 +2,19 @@
 package wasmentrypoints
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Array
+import kotlin.String
+import kotlin.jvm.JvmStatic
 
 open class WasmEntryPoints {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun singleMatchedEntryPoint(args: kotlin.Array<kotlin.String?>?) {}
+  @JvmStatic
+  fun singleMatchedEntryPoint(args: Array<String?>?) {}
 
-  @kotlin.jvm.JvmStatic
-  fun matchedEntryPointPattern1(args: kotlin.Array<kotlin.String?>?) {}
+  @JvmStatic
+  fun matchedEntryPointPattern1(args: Array<String?>?) {}
 
-  @kotlin.jvm.JvmStatic
-  fun matchedEntryPointPattern2(args: kotlin.Array<kotlin.String?>?) {}
+  @JvmStatic
+  fun matchedEntryPointPattern2(args: Array<String?>?) {}
  }
 }

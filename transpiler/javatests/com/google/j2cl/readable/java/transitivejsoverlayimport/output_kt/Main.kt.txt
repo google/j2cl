@@ -2,48 +2,55 @@
 package transitivejsoverlayimport
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Array
+import kotlin.Int
+import kotlin.String
+import kotlin.jvm.JvmStatic
+import transitivejsoverlayimport.Immediate
+import transitivejsoverlayimport.NonNativeLower
+import transitivejsoverlayimport.NonNativeUpper
+import transitivejsoverlayimport.Transitive
 
-open class Immediate: transitivejsoverlayimport.Transitive() {
+open class Immediate: Transitive() {
  fun doImmediateInstanceMethod() {}
 }
 
-open class NonNativeUpper: transitivejsoverlayimport.Immediate {
+open class NonNativeUpper: Immediate {
  constructor()
 
  open fun doNonNativeUpperInstanceMethod() {}
 }
 
-open class NonNativeLower: transitivejsoverlayimport.NonNativeUpper {
+open class NonNativeLower: NonNativeUpper {
  constructor()
 
  open fun doNonNativeLowerInstanceMethod() {}
 }
 
 open class Transitive {
- external fun getJsProperty(): kotlin.Int
+ external fun getJsProperty(): Int
 
- fun doTransitiveInstanceMethod(arg1: kotlin.String?) {}
+ fun doTransitiveInstanceMethod(arg1: String?) {}
 }
 
 open class Main {
  companion object {
-  @kotlin.jvm.JvmStatic
-  fun main(vararg args: kotlin.String?) {
-   val args_1: kotlin.Array<kotlin.String?>? = args as kotlin.Array<kotlin.String?>?
-   val transitive: transitivejsoverlayimport.Transitive? = null
+  @JvmStatic
+  fun main(vararg args: String?) {
+   val args_1: Array<String?>? = args as Array<String?>?
+   val transitive: Transitive? = null
    transitive!!.doTransitiveInstanceMethod("arg1")
    transitive!!.getJsProperty()
-   val immediate: transitivejsoverlayimport.Immediate? = null
+   val immediate: Immediate? = null
    immediate!!.doTransitiveInstanceMethod("arg1")
    immediate!!.getJsProperty()
    immediate!!.doImmediateInstanceMethod()
-   val nonNativeUpper: transitivejsoverlayimport.NonNativeUpper? = null
+   val nonNativeUpper: NonNativeUpper? = null
    nonNativeUpper!!.doTransitiveInstanceMethod("arg1")
    nonNativeUpper!!.getJsProperty()
    nonNativeUpper!!.doImmediateInstanceMethod()
    nonNativeUpper!!.doNonNativeUpperInstanceMethod()
-   val nonNativeLower: transitivejsoverlayimport.NonNativeLower? = null
+   val nonNativeLower: NonNativeLower? = null
    nonNativeLower!!.doTransitiveInstanceMethod("arg1")
    nonNativeLower!!.getJsProperty()
    nonNativeLower!!.doImmediateInstanceMethod()

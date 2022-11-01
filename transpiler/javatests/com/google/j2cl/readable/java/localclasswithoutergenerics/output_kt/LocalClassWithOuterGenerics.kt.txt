@@ -2,20 +2,22 @@
 package localclasswithoutergenerics
 
 import javaemul.lang.*
-import kotlin.jvm.*
+import kotlin.Any
+import kotlin.String
+import kotlin.jvm.JvmStatic
 
 open class LocalClassWithOuterGenerics<A> {
  companion object {
-  @kotlin.jvm.JvmStatic
+  @JvmStatic
   fun <T> foo() {
    open class ___1Bar {
     open fun baz(other: ___1Bar?) {}
    }
    val bar: ___1Bar? = ___1Bar()
    open class ___1Baz<S> {
-    open fun qux(foo: ___1Baz<S>?, bar: ___1Baz<T>?, baz: ___1Baz<kotlin.String?>?) {}
+    open fun qux(foo: ___1Baz<S>?, bar: ___1Baz<T>?, baz: ___1Baz<String?>?) {}
    }
-   val baz: ___1Baz<kotlin.Any?>? = ___1Baz<kotlin.Any?>()
+   val baz: ___1Baz<Any?>? = ___1Baz<Any?>()
   }
  }
 }
