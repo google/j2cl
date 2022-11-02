@@ -44,12 +44,10 @@ open class SimpleLongs {
   }
   e = run {
    val ___qualifier_1: SimpleLongs? = this.getWithSideEffect()
-   run {
-    val ___qualifier_2: SimpleLongs? = ___qualifier_1
-    val ___value_1: Long = ___qualifier_1!!.foo + 1L
-    ___qualifier_2!!.foo = ___value_1
-    ___value_1
-   }
+   val ___qualifier_2: SimpleLongs? = ___qualifier_1
+   val ___value_1: Long = ___qualifier_1!!.foo + 1L
+   ___qualifier_2!!.foo = ___value_1
+   ___value_1
   }
   var f: Long = run {
    val ___value_2: Long = a

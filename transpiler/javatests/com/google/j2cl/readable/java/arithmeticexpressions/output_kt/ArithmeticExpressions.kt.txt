@@ -116,65 +116,45 @@ open class ArithmeticExpressions {
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] + 1
   var i: Int = 0
-  run {
-   val ___array: IntArray? = ints
-   val ___index: Int = run {
-    val ___value: Int = i
-    i = i + 1
-    ___value
-   }
-   run {
-    val ___array_1: IntArray? = ___array
-    val ___index_1: Int = ___index
-    val ___value_1: Int = ___array!![___index] + 1
-    ___array_1!![___index_1] = ___value_1
-    ___value_1
-   }
+  val ___array: IntArray? = ints
+  val ___index: Int = run {
+   val ___value: Int = i
+   i = i + 1
+   ___value
   }
-  run {
-   val ___array_2: IntArray? = ints
-   val ___index_2: Int = run {
-    i = i + 1
-    i
-   }
-   run {
-    val ___array_3: IntArray? = ___array_2
-    val ___index_3: Int = ___index_2
-    val ___value_2: Int = ___array_2!![___index_2] + 1
-    ___array_3!![___index_3] = ___value_2
-    ___value_2
-   }
+  val ___array_1: IntArray? = ___array
+  val ___index_1: Int = ___index
+  val ___value_1: Int = ___array!![___index] + 1
+  ___array_1!![___index_1] = ___value_1
+  val ___array_2: IntArray? = ints
+  val ___index_2: Int = run {
+   i = i + 1
+   i
   }
-  run {
-   val ___array_4: IntArray? = ints
-   val ___index_4: Int = run {
-    val ___value_3: Int = i
-    i = i + 1
-    ___value_3
-   }
-   run {
-    val ___array_5: IntArray? = ___array_4
-    val ___index_5: Int = ___index_4
-    val ___value_4: Int = ___array_4!![___index_4] / 1
-    ___array_5!![___index_5] = ___value_4
-    ___value_4
-   }
+  val ___array_3: IntArray? = ___array_2
+  val ___index_3: Int = ___index_2
+  val ___value_2: Int = ___array_2!![___index_2] + 1
+  ___array_3!![___index_3] = ___value_2
+  val ___array_4: IntArray? = ints
+  val ___index_4: Int = run {
+   val ___value_3: Int = i
+   i = i + 1
+   ___value_3
   }
+  val ___array_5: IntArray? = ___array_4
+  val ___index_5: Int = ___index_4
+  val ___value_4: Int = ___array_4!![___index_4] / 1
+  ___array_5!![___index_5] = ___value_4
   val longs: LongArray? = null
   longs!![0] = longs!![0] + 1L
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
-  run {
-   val ___array_6: LongArray? = ArithmeticExpressions.getLongArray_private_2()
-   val ___index_6: Int = 0
-   run {
-    val ___array_7: LongArray? = ___array_6
-    val ___index_7: Int = ___index_6
-    val ___value_5: Long = ___array_6!![___index_6] + 1L
-    ___array_7!![___index_7] = ___value_5
-    ___value_5
-   }
-  }
+  val ___array_6: LongArray? = ArithmeticExpressions.getLongArray_private_2()
+  val ___index_6: Int = 0
+  val ___array_7: LongArray? = ___array_6
+  val ___index_7: Int = ___index_6
+  val ___value_5: Long = ___array_6!![___index_6] + 1L
+  ___array_7!![___index_7] = ___value_5
   val booleans: BooleanArray? = null
   booleans!![0] = booleans!![0].or(true)
   val strings: Array<String?>? = null
@@ -304,15 +284,10 @@ open class ArithmeticExpressions {
 
   @JvmStatic
   fun testSideEffect_private_2() {
-   run {
-    val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect_private_2()
-    run {
-     val ___qualifier_1: ArithmeticExpressions? = ___qualifier
-     val ___value: Long = ___qualifier!!.intField + 5L
-     ___qualifier_1!!.intField = ___value
-     ___value
-    }
-   }
+   val ___qualifier: ArithmeticExpressions? = ArithmeticExpressions.getWithSideEffect_private_2()
+   val ___qualifier_1: ArithmeticExpressions? = ___qualifier
+   val ___value: Long = ___qualifier!!.intField + 5L
+   ___qualifier_1!!.intField = ___value
   }
 
   @JvmStatic

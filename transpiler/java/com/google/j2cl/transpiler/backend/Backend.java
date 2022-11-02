@@ -496,6 +496,7 @@ public enum Backend {
           // Needs to run after NormalizeNonFinalVariablesKotlin.
           InsertExplicitArrayCoercionCasts::new,
           RemoveUnusedLabeledStatements::new,
+          NormalizeMultiExpressions::new,
           RemoveNestedBlocks::new,
           RemoveNoopStatements::new,
 

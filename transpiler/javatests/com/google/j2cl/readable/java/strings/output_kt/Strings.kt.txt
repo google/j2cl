@@ -5,7 +5,6 @@ import javaemul.lang.*
 import kotlin.Char
 import kotlin.String
 import kotlin.jvm.JvmField
-import kotlin.run
 import strings.Strings
 
 open class Strings {
@@ -34,33 +33,18 @@ open class Strings {
   s4 = "" + s4 + 1.0
   s4 = "" + s4 + 1.0f
   s4 = "" + s4 + 1.toShort()
-  run {
-   val ___qualifier: Strings.StringHolder = Strings.StringHolder()
-   run {
-    val ___qualifier_1: Strings.StringHolder = ___qualifier
-    val ___value: String? = "" + ___qualifier!!.s + s4
-    ___qualifier_1!!.s = ___value
-    ___value
-   }
-  }
-  run {
-   val ___qualifier_2: Strings.StringHolder = Strings.StringHolder()
-   run {
-    val ___qualifier_3: Strings.StringHolder = ___qualifier_2
-    val ___value_1: String? = "" + ___qualifier_2!!.s + c1
-    ___qualifier_3!!.s = ___value_1
-    ___value_1
-   }
-  }
-  run {
-   val ___qualifier_4: Strings.StringHolder = Strings.StringHolder()
-   run {
-    val ___qualifier_5: Strings.StringHolder = ___qualifier_4
-    val ___value_2: String? = "" + ___qualifier_4!!.s + "o"
-    ___qualifier_5!!.s = ___value_2
-    ___value_2
-   }
-  }
+  val ___qualifier: Strings.StringHolder = Strings.StringHolder()
+  val ___qualifier_1: Strings.StringHolder = ___qualifier
+  val ___value: String? = "" + ___qualifier!!.s + s4
+  ___qualifier_1!!.s = ___value
+  val ___qualifier_2: Strings.StringHolder = Strings.StringHolder()
+  val ___qualifier_3: Strings.StringHolder = ___qualifier_2
+  val ___value_1: String? = "" + ___qualifier_2!!.s + c1
+  ___qualifier_3!!.s = ___value_1
+  val ___qualifier_4: Strings.StringHolder = Strings.StringHolder()
+  val ___qualifier_5: Strings.StringHolder = ___qualifier_4
+  val ___value_2: String? = "" + ___qualifier_4!!.s + "o"
+  ___qualifier_5!!.s = ___value_2
   s1 = "" + (1 + 2) + "s"
   s1 = "s" + 1 + 2
  }
