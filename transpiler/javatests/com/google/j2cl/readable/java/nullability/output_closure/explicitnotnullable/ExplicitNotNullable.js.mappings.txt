@@ -333,6 +333,19 @@
 [testDependentWildcards] => [m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable]
 [x] => [x] "x"
 [return x;] => [return x;] "nullability.explicitnotnullable.ExplicitNotNullable.testDependentWildcards"
+[testLocalNullability] => [m_testLocalNullability__void]
+[{
+    Consumer<String> stringConsumer = (Consumer<String>) null;
+...    boolean b = null instanceof Consumer<?>;
+  }] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
+[Consumer<String> stringConsumer = (Consumer<String>) null;] => [let stringConsumer = /**@type {Consumer<?string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
+[stringConsumer] => [stringConsumer] "stringConsumer"
+[Consumer<@Nullable String> nullableStringConsumer = (Consumer<@Nullable String>) null;] => [let nullableStringConsumer = /**@type {Consumer<?string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
+[nullableStringConsumer] => [nullableStringConsumer] "nullableStringConsumer"
+[Consumer<@JsNonNull String> nonNullStringConsumer = (Consumer<@JsNonNull String>) null;] => [let nonNullStringConsumer = /**@type {Consumer<string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
+[nonNullStringConsumer] => [nonNullStringConsumer] "nonNullStringConsumer"
+[boolean b = null instanceof Consumer<?>;] => [let b = Consumer.$isInstance(null);] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
+[b] => [b] "b"
 [ExplicitNotNullable] => [$init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable]
 [private String f1 = "Hello";] => [this.f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ = 'Hello';] "nullability.explicitnotnullable.ExplicitNotNullable.<init>"
 [@Nullable private String f2 = null;] => [this.f_f2__nullability_explicitnotnullable_ExplicitNotNullable_ = null;] "nullability.explicitnotnullable.ExplicitNotNullable.<init>"

@@ -380,9 +380,17 @@ public class ExplicitNotNullable {
     // TODO(b/255955130): This is not yet working. Uncomment when fixed.
     // return x.getThis();
   }
+
+  static void testLocalNullability() {
+    Consumer<String> stringConsumer = (Consumer<String>) null;
+    Consumer<@Nullable String> nullableStringConsumer = (Consumer<@Nullable String>) null;
+    ;
+    Consumer<@JsNonNull String> nonNullStringConsumer = (Consumer<@JsNonNull String>) null;
+
+    boolean b = null instanceof Consumer<?>;
+  }
 }
 
 class DefaultNullable {
   static void nullableAccept(String s) {}
 }
-

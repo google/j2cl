@@ -312,4 +312,16 @@ public class DefaultNullable {
   static <T> void testListOfWildcardSuperDefaultNullabilityVariable(List<? super T> l) {}
 
   static <T> void testListOfWildcardSuperNullableVariable(List<? super @Nullable T> l) {}
+
+  interface Consumer<T> {
+    void accept(T t);
+  }
+
+  static void testLocalNullability() {
+    Consumer<String> stringConsumer = (Consumer<String>) null;
+    Consumer<@Nullable String> nullableStringConsumer = (Consumer<@Nullable String>) null;
+    Consumer<@JsNonNull String> nonNullStringConsumer = (Consumer<@JsNonNull String>) null;
+
+    boolean b = null instanceof Consumer<?>;
+  }
 }

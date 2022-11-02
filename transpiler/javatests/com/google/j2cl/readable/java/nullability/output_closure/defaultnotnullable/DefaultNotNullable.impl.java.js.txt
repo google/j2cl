@@ -261,7 +261,6 @@ class DefaultNotNullable extends j_l_Object {
  static m_testParametrizedWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_String__void(/** !Consumer<?> */ c, /** string */ string_1) {
   DefaultNotNullable.$clinit();
   let localString = string_1;
-  c.m_accept__java_lang_Object__void(localString);
  }
  /** @nodts @template T */
  static m_testGenericWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void(/** !Consumer<?> */ c, /** T */ element) {
@@ -278,6 +277,14 @@ class DefaultNotNullable extends j_l_Object {
  static m_testGenericArrayNullabilityCast__arrayOf_java_lang_Object__void(/** !Array<T> */ array) {
   DefaultNotNullable.$clinit();
   let localArray = array;
+ }
+ /** @nodts */
+ static m_testLocalNullability__void() {
+  DefaultNotNullable.$clinit();
+  let stringConsumer = /**@type {Consumer<?string>}*/ (null);
+  let nullableStringConsumer = /**@type {Consumer<?string>}*/ (null);
+  let nonNullStringConsumer = /**@type {Consumer<string>}*/ (null);
+  let b = Consumer.$isInstance(null);
  }
  /** @private @nodts */
  $init__void_$p_nullability_defaultnotnullable_DefaultNotNullable() {
@@ -309,6 +316,7 @@ class DefaultNotNullable extends j_l_Object {
  static $loadModules() {
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
+  Consumer = goog.module.get('nullability.defaultnotnullable.DefaultNotNullable.Consumer$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');

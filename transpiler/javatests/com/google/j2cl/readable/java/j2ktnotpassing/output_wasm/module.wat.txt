@@ -1476,6 +1476,26 @@
 )
 (elem declare func $m_testDependentWildcards__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing@j2ktnotpassing.ExplicitNotNullable)
 
+;;; String ExplicitNotNullable.testParametrizedMethod(Function<? super String, ? extends String> f, String string)
+(func $m_testParametrizedMethod__j2ktnotpassing_ExplicitNotNullable_Function__java_lang_String__java_lang_String@j2ktnotpassing.ExplicitNotNullable
+ (param $f (ref null $java.lang.Object))
+ (param $string (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ ;;@ j2ktnotpassing/ExplicitNotNullable.java:46:16
+ (local $localString (ref null $java.lang.String))
+ (block
+  ;; j2ktnotpassing.ExplicitNotNullable.$clinit();
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:47:67
+  (call $$clinit__void@j2ktnotpassing.ExplicitNotNullable )
+  ;; String localString = string;
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:49:4
+  (local.set $localString (local.get $string))
+  ;; return ((String) f.apply(localString));
+  ;;@ j2ktnotpassing/ExplicitNotNullable.java:54:4
+  (return (ref.cast_static $java.lang.String (call_ref $function.m_apply__java_lang_Object__java_lang_Object (ref.as_non_null (local.get $f))(local.get $localString)(struct.get $j2ktnotpassing.ExplicitNotNullable.Function.vtable $m_apply__java_lang_Object__java_lang_Object (ref.cast_static $j2ktnotpassing.ExplicitNotNullable.Function.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $f)) (i32.const 0))) ))))
+ )
+)
+
 ;;; void ExplicitNotNullable.$init()
 (func $$init__void_$p_j2ktnotpassing_ExplicitNotNullable@j2ktnotpassing.ExplicitNotNullable
  (param $this (ref null $j2ktnotpassing.ExplicitNotNullable))

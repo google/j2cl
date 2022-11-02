@@ -5,6 +5,7 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.Array
+import kotlin.Boolean
 import kotlin.Double
 import kotlin.String
 import kotlin.Unit
@@ -232,13 +233,12 @@ open class DefaultNotNullable {
   @JvmStatic
   fun testParametrizedWildcardNullabilityCast(c: DefaultNotNullable.Consumer<in String>, string: String) {
    val localString: String? = string
-   c!!.accept(localString!!)
   }
 
   @JvmStatic
   fun <T: Any> testGenericWildcardNullabilityCast(c: DefaultNotNullable.Consumer<in T>, element: T) {
    val localElement: T? = element
-   c!!.accept(localElement!!)
+   c!!.accept(localElement as T)
   }
 
   @JvmStatic
@@ -249,6 +249,14 @@ open class DefaultNotNullable {
   @JvmStatic
   fun <T: Any> testGenericArrayNullabilityCast(array: Array<T>) {
    val localArray: Array<T>? = array
+  }
+
+  @JvmStatic
+  fun testLocalNullability() {
+   val stringConsumer: DefaultNotNullable.Consumer<String>? = (null as DefaultNotNullable.Consumer<String?>?) as DefaultNotNullable.Consumer<String>?
+   val nullableStringConsumer: DefaultNotNullable.Consumer<String?>? = null as DefaultNotNullable.Consumer<String?>?
+   val nonNullStringConsumer: DefaultNotNullable.Consumer<String>? = null as DefaultNotNullable.Consumer<String>?
+   val b: Boolean = null is DefaultNotNullable.Consumer<*>
   }
  }
 
@@ -373,7 +381,7 @@ open class DefaultNotNullable {
   open fun setDefaultNullability(n: N) {}
  }
 
- fun interface Consumer<T: Any> {
+ fun interface Consumer<T> {
   fun accept(t: T)
  }
 }

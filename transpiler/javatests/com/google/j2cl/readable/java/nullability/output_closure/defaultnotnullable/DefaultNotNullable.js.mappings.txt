@@ -267,11 +267,10 @@
 [string] => [string_1] "string"
 [{
     // Nullability information in local variables is absent, so cast is necessary in Kotlin.
-...    c.accept(localString);
+...    // c.accept(localString);
   }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedWildcardNullabilityCast"
 [String localString = string;] => [let localString = string_1;] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedWildcardNullabilityCast"
 [localString] => [localString] "localString"
-[c.accept(localString);] => [c.m_accept__java_lang_Object__void(localString);] "nullability.defaultnotnullable.DefaultNotNullable.testParametrizedWildcardNullabilityCast"
 [testGenericWildcardNullabilityCast] => [m_testGenericWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void]
 [c] => [c] "c"
 [element] => [element] "element"
@@ -297,6 +296,19 @@
   }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testGenericArrayNullabilityCast"
 [T[] localArray = array;] => [let localArray = array;] "nullability.defaultnotnullable.DefaultNotNullable.testGenericArrayNullabilityCast"
 [localArray] => [localArray] "localArray"
+[testLocalNullability] => [m_testLocalNullability__void]
+[{
+    Consumer<String> stringConsumer = (Consumer<String>) null;
+...    boolean b = null instanceof Consumer<?>;
+  }] => [DefaultNotNullable.$clinit();] "nullability.defaultnotnullable.DefaultNotNullable.testLocalNullability"
+[Consumer<String> stringConsumer = (Consumer<String>) null;] => [let stringConsumer = /**@type {Consumer<?string>}*/ (null);] "nullability.defaultnotnullable.DefaultNotNullable.testLocalNullability"
+[stringConsumer] => [stringConsumer] "stringConsumer"
+[Consumer<@Nullable String> nullableStringConsumer = (Consumer<@Nullable String>) null;] => [let nullableStringConsumer = /**@type {Consumer<?string>}*/ (null);] "nullability.defaultnotnullable.DefaultNotNullable.testLocalNullability"
+[nullableStringConsumer] => [nullableStringConsumer] "nullableStringConsumer"
+[Consumer<@JsNonNull String> nonNullStringConsumer = (Consumer<@JsNonNull String>) null;] => [let nonNullStringConsumer = /**@type {Consumer<string>}*/ (null);] "nullability.defaultnotnullable.DefaultNotNullable.testLocalNullability"
+[nonNullStringConsumer] => [nonNullStringConsumer] "nonNullStringConsumer"
+[boolean b = null instanceof Consumer<?>;] => [let b = Consumer.$isInstance(null);] "nullability.defaultnotnullable.DefaultNotNullable.testLocalNullability"
+[b] => [b] "b"
 [DefaultNotNullable] => [$init__void_$p_nullability_defaultnotnullable_DefaultNotNullable]
 [private String f1 = "Hello";] => [this.f_f1__nullability_defaultnotnullable_DefaultNotNullable_ = 'Hello';] "nullability.defaultnotnullable.DefaultNotNullable.<init>"
 [@Nullable private String f2 = null;] => [this.f_f2__nullability_defaultnotnullable_DefaultNotNullable_ = null;] "nullability.defaultnotnullable.DefaultNotNullable.<init>"

@@ -15,6 +15,16 @@
 [testDependentWildcards] => [m_testDependentWildcards__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing]
 [x] => [x] "x"
 [return x.getThis();] => [return x.m_getThis__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing();] "j2ktnotpassing.ExplicitNotNullable.testDependentWildcards"
+[testParametrizedMethod] => [m_testParametrizedMethod__j2ktnotpassing_ExplicitNotNullable_Function__java_lang_String__java_lang_String]
+[f] => [f] "f"
+[string] => [string_1] "string"
+[{
+    // The type of "localString" is "@Nullable String".
+...    return f.apply(localString);
+  }] => [ExplicitNotNullable.$clinit();] "j2ktnotpassing.ExplicitNotNullable.testParametrizedMethod"
+[String localString = string;] => [let localString = string_1;] "j2ktnotpassing.ExplicitNotNullable.testParametrizedMethod"
+[localString] => [localString] "localString"
+[return f.apply(localString);] => [return /**@type {string}*/ ($Casts.$to(f.m_apply__java_lang_Object__java_lang_Object(localString), j_l_String));] "j2ktnotpassing.ExplicitNotNullable.testParametrizedMethod"
 [ExplicitNotNullable] => [$init__void_$p_j2ktnotpassing_ExplicitNotNullable]
 [Function<String, String> i =
       new Function<String, String>() {

@@ -42,4 +42,15 @@ public class ExplicitNotNullable {
   DependentTypeParameters<?, ?> testDependentWildcards(DependentTypeParameters<?, ?> x) {
     return x.getThis();
   }
+
+  static String testParametrizedMethod(
+      Function<? super String, ? extends String> f, String string) {
+    // The type of "localString" is "@Nullable String".
+    String localString = string;
+
+    // The type of "apply" is inferred as "@Nullable String apply(@Nullable String)", so "!!" is not
+    // inserted for "localString" parameter. But in Kotlin, the inferred type of "apply" is
+    // "fun apply(String): String", and "!!" is required.
+    return f.apply(localString);
+  }
 }

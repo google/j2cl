@@ -5,6 +5,7 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.Array
+import kotlin.Boolean
 import kotlin.CharArray
 import kotlin.Double
 import kotlin.Int
@@ -280,6 +281,14 @@ open class ExplicitNotNullable {
   @JvmStatic
   fun testUnboundWildcardTypeArgumentInference(c: ExplicitNotNullable.Consumer<*>) {
    ExplicitNotNullable.consume<ExplicitNotNullable.Consumer<*>>(c)
+  }
+
+  @JvmStatic
+  fun testLocalNullability() {
+   val stringConsumer: ExplicitNotNullable.Consumer<String>? = (null as ExplicitNotNullable.Consumer<String?>?) as ExplicitNotNullable.Consumer<String>?
+   val nullableStringConsumer: ExplicitNotNullable.Consumer<String?>? = null as ExplicitNotNullable.Consumer<String?>?
+   val nonNullStringConsumer: ExplicitNotNullable.Consumer<String>? = null as ExplicitNotNullable.Consumer<String>?
+   val b: Boolean = null is ExplicitNotNullable.Consumer<*>
   }
  }
 

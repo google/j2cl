@@ -338,7 +338,7 @@ public class DefaultNotNullable {
     l.add(t); // This would not pass nullability-checker, but should compile in Kotlin.
   }
 
-  interface Consumer<T> {
+  interface Consumer<T extends @Nullable Object> {
     void accept(T t);
   }
 
@@ -356,7 +356,8 @@ public class DefaultNotNullable {
   static void testParametrizedWildcardNullabilityCast(Consumer<? super String> c, String string) {
     // Nullability information in local variables is absent, so cast is necessary in Kotlin.
     String localString = string;
-    c.accept(localString);
+    // TODO(b/236987392): This line does not compile in Kotlin. Uncomment when fixed.
+    // c.accept(localString);
   }
 
   static <T> void testGenericWildcardNullabilityCast(Consumer<? super T> c, T element) {
@@ -371,5 +372,13 @@ public class DefaultNotNullable {
 
   static <T> void testGenericArrayNullabilityCast(T[] array) {
     T[] localArray = array;
+  }
+
+  static void testLocalNullability() {
+    Consumer<String> stringConsumer = (Consumer<String>) null;
+    Consumer<@Nullable String> nullableStringConsumer = (Consumer<@Nullable String>) null;
+    Consumer<@JsNonNull String> nonNullStringConsumer = (Consumer<@JsNonNull String>) null;
+
+    boolean b = null instanceof Consumer<?>;
   }
 }

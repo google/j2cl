@@ -5,6 +5,7 @@ import javaemul.lang.*
 import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.Array
+import kotlin.Boolean
 import kotlin.Double
 import kotlin.String
 import kotlin.Unit
@@ -211,6 +212,14 @@ open class DefaultNullable {
 
   @JvmStatic
   fun <T> testListOfWildcardSuperNullableVariable(l: MutableList<in T?>?) {}
+
+  @JvmStatic
+  fun testLocalNullability() {
+   val stringConsumer: DefaultNullable.Consumer<String?>? = null as DefaultNullable.Consumer<String?>?
+   val nullableStringConsumer: DefaultNullable.Consumer<String?>? = null as DefaultNullable.Consumer<String?>?
+   val nonNullStringConsumer: DefaultNullable.Consumer<String>? = null as DefaultNullable.Consumer<String>?
+   val b: Boolean = null is DefaultNullable.Consumer<*>
+  }
  }
 
  interface NullableBound<T: DefaultNullable.NullableBound<T>?> {}
@@ -314,5 +323,9 @@ open class DefaultNullable {
   open fun setNonNull(n: N) {}
 
   open fun setDefaultNullability(n: N) {}
+ }
+
+ fun interface Consumer<T> {
+  fun accept(t: T)
  }
 }

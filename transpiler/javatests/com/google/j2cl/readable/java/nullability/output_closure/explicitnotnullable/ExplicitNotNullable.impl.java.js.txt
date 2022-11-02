@@ -316,6 +316,14 @@ class ExplicitNotNullable extends j_l_Object {
  m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable(/** !DependentTypeParameters<?, ?> */ x) {
   return x;
  }
+ /** @nodts */
+ static m_testLocalNullability__void() {
+  ExplicitNotNullable.$clinit();
+  let stringConsumer = /**@type {Consumer<?string>}*/ (null);
+  let nullableStringConsumer = /**@type {Consumer<?string>}*/ (null);
+  let nonNullStringConsumer = /**@type {Consumer<string>}*/ (null);
+  let b = Consumer.$isInstance(null);
+ }
  /** @private @nodts */
  $init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable() {
   this.f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ = 'Hello';

@@ -130,6 +130,9 @@
 ;;; Code for nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable [static fields]
 (global $f_$initialized__nullability_defaultnullable_DefaultNullable_ParameterizedNonNullable (mut i32) (i32.const 0))
 
+;;; Code for nullability.defaultnullable.DefaultNullable.Consumer [static fields]
+(global $f_$initialized__nullability_defaultnullable_DefaultNullable_Consumer (mut i32) (i32.const 0))
+
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [static fields]
 (global $f_$initialized__nullability_explicitnotnullable_ExplicitNotNullable (mut i32) (i32.const 0))
 
@@ -4402,9 +4405,6 @@
   ;; String localString = string;
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:358:4
   (local.set $localString (local.get $string))
-  ;; c.accept(localString);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:359:4
-  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localString)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const -1))) ))
  )
 )
 
@@ -4412,17 +4412,17 @@
 (func $m_testGenericWildcardNullabilityCast__nullability_defaultnotnullable_DefaultNotNullable_Consumer__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $c (ref null $java.lang.Object))
  (param $element (ref null $java.lang.Object))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:362:18
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:363:18
  (local $localElement (ref null $java.lang.Object))
  (block
   ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:362:87
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:363:87
   (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
   ;; T localElement = element;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:363:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:364:4
   (local.set $localElement (local.get $element))
   ;; c.accept(localElement);
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:364:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:365:4
   (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $c))(local.get $localElement)(struct.get $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const -1))) ))
  )
 )
@@ -4430,14 +4430,14 @@
 ;;; void DefaultNotNullable.testParametrizedArrayNullabilityCast(String[] array)
 (func $m_testParametrizedArrayNullabilityCast__arrayOf_java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $array (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:367:14
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:368:14
  (local $localArray (ref null $javaemul.internal.WasmArray.OfObject))
  (block
   ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:367:67
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:368:67
   (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
   ;; String[] localArray = array;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:369:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:370:4
   (local.set $localArray (local.get $array))
  )
 )
@@ -4445,15 +4445,41 @@
 ;;; void DefaultNotNullable.testGenericArrayNullabilityCast(T[] array)
 (func $m_testGenericArrayNullabilityCast__arrayOf_java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable
  (param $array (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:372:18
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:373:18
  (local $localArray (ref null $javaemul.internal.WasmArray.OfObject))
  (block
   ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:372:61
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:373:61
   (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
   ;; T[] localArray = array;
-  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:373:4
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:374:4
   (local.set $localArray (local.get $array))
+ )
+)
+
+;;; void DefaultNotNullable.testLocalNullability()
+(func $m_testLocalNullability__void@nullability.defaultnotnullable.DefaultNotNullable
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:377:14
+ (local $stringConsumer (ref null $java.lang.Object))
+ (local $nullableStringConsumer (ref null $java.lang.Object))
+ (local $nonNullStringConsumer (ref null $java.lang.Object))
+ (local $b i32)
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:377:37
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; Consumer<String> stringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:378:4
+  (local.set $stringConsumer (ref.null $java.lang.Object))
+  ;; Consumer<String> nullableStringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:379:4
+  (local.set $nullableStringConsumer (ref.null $java.lang.Object))
+  ;; Consumer<String> nonNullStringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:380:4
+  (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
+  ;; boolean b = null instanceof Consumer<?>;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:382:4
+  (local.set $b (i32.const 0))
  )
 )
 
@@ -6506,6 +6532,32 @@
  )
 )
 
+;;; void DefaultNullable.testLocalNullability()
+(func $m_testLocalNullability__void@nullability.defaultnullable.DefaultNullable
+ ;;@ nullability/defaultnullable/DefaultNullable.java:320:14
+ (local $stringConsumer (ref null $java.lang.Object))
+ (local $nullableStringConsumer (ref null $java.lang.Object))
+ (local $nonNullStringConsumer (ref null $java.lang.Object))
+ (local $b i32)
+ (block
+  ;; nullability.defaultnullable.DefaultNullable.$clinit();
+  ;;@ nullability/defaultnullable/DefaultNullable.java:320:37
+  (call $$clinit__void@nullability.defaultnullable.DefaultNullable )
+  ;; Consumer<String> stringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:321:4
+  (local.set $stringConsumer (ref.null $java.lang.Object))
+  ;; Consumer<String> nullableStringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:322:4
+  (local.set $nullableStringConsumer (ref.null $java.lang.Object))
+  ;; Consumer<String> nonNullStringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:323:4
+  (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
+  ;; boolean b = null instanceof Consumer<?>;
+  ;;@ nullability/defaultnullable/DefaultNullable.java:325:4
+  (local.set $b (i32.const 0))
+ )
+)
+
 ;;; void DefaultNullable.$init()
 (func $$init__void_$p_nullability_defaultnullable_DefaultNullable@nullability.defaultnullable.DefaultNullable
  (param $this (ref null $nullability.defaultnullable.DefaultNullable))
@@ -7326,6 +7378,42 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable)
+
+;;; Code for nullability.defaultnullable.DefaultNullable.Consumer [INTERFACE]
+(type $nullability.defaultnullable.DefaultNullable.Consumer.vtable (struct 
+ (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
+ )
+)
+
+;;; void Consumer.$clinit()
+(func $$clinit__void@nullability.defaultnullable.DefaultNullable.Consumer
+ ;;@ nullability/defaultnullable/DefaultNullable.java:316:12
+ (block
+  ;; if (nullability.defaultnullable.DefaultNullable.Consumer.$initialized) return;
+  ;;@ nullability/defaultnullable/DefaultNullable.java:316:12
+  (if (global.get $f_$initialized__nullability_defaultnullable_DefaultNullable_Consumer)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnullable/DefaultNullable.java:316:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnullable.DefaultNullable.Consumer.$initialized = true);
+  ;;@ nullability/defaultnullable/DefaultNullable.java:316:12
+  (global.set $f_$initialized__nullability_defaultnullable_DefaultNullable_Consumer (i32.const 1))
+ )
+)
+
+;;; Class<?> Consumer.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.Consumer
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnullable.DefaultNullable.Consumer();
+  (return (call $function.no.side.effects.$getNullability.defaultnullable.DefaultNullable.Consumer__java_lang_Class (ref.func $$getNullability.defaultnullable.DefaultNullable.Consumer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable.Consumer)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [CLASS]
 (type $nullability.explicitnotnullable.ExplicitNotNullable (struct_subtype 
@@ -8228,6 +8316,39 @@
 )
 (elem declare func $m_testDependentWildcards__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters__nullability_explicitnotnullable_ExplicitNotNullable_DependentTypeParameters_$pp_nullability_explicitnotnullable@nullability.explicitnotnullable.ExplicitNotNullable)
 
+;;; void ExplicitNotNullable.testLocalNullability()
+(func $m_testLocalNullability__void@nullability.explicitnotnullable.ExplicitNotNullable
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:384:14
+ (local $stringConsumer (ref null $java.lang.Object))
+ (local $nullableStringConsumer (ref null $java.lang.Object))
+ (local $nonNullStringConsumer (ref null $java.lang.Object))
+ (local $b i32)
+ (block
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:384:37
+  (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable )
+  ;; Consumer<String> stringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:4
+  (local.set $stringConsumer (ref.null $java.lang.Object))
+  ;; Consumer<String> nullableStringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:386:4
+  (local.set $nullableStringConsumer (ref.null $java.lang.Object))
+  ;; Consumer<String> nonNullStringConsumer = ((Consumer<String>) null);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:388:4
+  (local.set $nonNullStringConsumer (ref.null $java.lang.Object))
+  ;; boolean b = null instanceof Consumer<?>;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:390:4
+  (local.set $b (if (result i32) (ref.is_null (ref.null $java.lang.Object))
+   (then (i32.const 0))
+   (else (if (result i32)
+    (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (ref.null $java.lang.Object)))) 
+    (then (i32.const 0))
+    (else (ref.test_static $nullability.explicitnotnullable.ExplicitNotNullable.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (ref.null $java.lang.Object) ) (i32.const 0))))
+   ))
+  ))
+ )
+)
+
 ;;; void ExplicitNotNullable.$init()
 (func $$init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable@nullability.explicitnotnullable.ExplicitNotNullable
  (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
@@ -8302,17 +8423,17 @@
 ;;; DefaultNullable DefaultNullable.$create()
 (func $$create__@nullability.explicitnotnullable.DefaultNullable
  (result (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
  (local $$instance (ref null $nullability.explicitnotnullable.DefaultNullable))
  (block
   ;; DefaultNullable $instance = new DefaultNullable.<init>(0);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
   (local.set $$instance (struct.new $nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
   (return (local.get $$instance))
  )
 )
@@ -8320,13 +8441,13 @@
 ;;; void DefaultNullable.$ctor()
 (func $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable
  (param $this (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
  (block
   ;; nullability.explicitnotnullable.DefaultNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
   (call $$clinit__void@nullability.explicitnotnullable.DefaultNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -8334,32 +8455,32 @@
 ;;; void DefaultNullable.nullableAccept(String s)
 (func $m_nullableAccept__java_lang_String__void@nullability.explicitnotnullable.DefaultNullable
  (param $s (ref null $java.lang.String))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:386:14
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:395:14
  (block
   ;; nullability.explicitnotnullable.DefaultNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:386:39
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:395:39
   (call $$clinit__void@nullability.explicitnotnullable.DefaultNullable )
  )
 )
 
 ;;; void DefaultNullable.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.DefaultNullable
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
  (block
   ;; if (nullability.explicitnotnullable.DefaultNullable.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
   (if (global.get $f_$initialized__nullability_explicitnotnullable_DefaultNullable)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.DefaultNullable.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
   (global.set $f_$initialized__nullability_explicitnotnullable_DefaultNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:385:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:394:6
   (call $$clinit__void@java.lang.Object )
  )
 )
