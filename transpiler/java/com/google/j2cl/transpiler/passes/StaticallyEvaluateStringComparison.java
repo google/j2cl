@@ -76,6 +76,8 @@ public class StaticallyEvaluateStringComparison extends NormalizationPass {
   }
 
   private static boolean isStringComparisonMethod(MethodDescriptor method) {
-    return method == TypeDescriptors.get().javaLangString.getMethodDescriptorByName("equals");
+    return TypeDescriptors.isJavaLangString(method.getEnclosingTypeDescriptor())
+        && method.getName().equals("equals")
+        && method.getParameterDescriptors().size() == 1;
   }
 }

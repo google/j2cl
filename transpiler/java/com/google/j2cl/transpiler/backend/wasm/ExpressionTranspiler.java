@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.j2cl.common.StringUtils.escapeAsUtf8;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 import static com.google.j2cl.transpiler.backend.wasm.GenerationEnvironment.getGetterInstruction;
 import static java.lang.String.format;
@@ -46,6 +47,7 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -469,6 +471,13 @@ final class ExpressionTranspiler {
         sourceBuilder.append(format("(array.new_default %s ", arrayType));
         render(dimensionExpression);
         sourceBuilder.append(")");
+        return false;
+      }
+
+      @Override
+      public boolean enterStringLiteral(StringLiteral stringLiteral) {
+        sourceBuilder.append(
+            format("(string.const \"%s\")", escapeAsUtf8(stringLiteral.getValue())));
         return false;
       }
 

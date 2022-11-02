@@ -82,11 +82,28 @@ function createImportObject(userImports) {
     'Character.codePointToUpperCase': codePointToUpperCase,
     'Character.charToLowerCase': charToLowerCase,
     'Character.charToUpperCase': charToUpperCase,
-    'Character.charFoldCase': charFoldCase,
     'ConsoleLogger.log': (level, message) => console[level](message),
     'isValidDouble': isValidDouble,
     'parseFloat': parseFloat,
     'performance.now': () => performance.now(),
+
+    // String
+    'String.fromCodePoint': String.fromCodePoint,
+    'String.fromCharCode': String.fromCharCode,
+    'String.indexOf': (/** string */ s, /** string */ r, /** number */ i) =>
+        s.indexOf(r, i),
+    'String.lastIndexOf': (/** string */ s, /** string */ r, /** number */ i) =>
+        s.lastIndexOf(r, i),
+    'String.replace': (/** string */ s, /** !RegExp */ re, /** string */ r) =>
+        s.replace(re, r),
+    'String.toLowerCase': (/** string */ s) => s.toLowerCase(),
+    'String.toUpperCase': (/** string */ s) => s.toUpperCase(),
+    'String.toLocaleLowerCase': (/** string */ s) => s.toLocaleLowerCase(),
+    'String.toLocaleUpperCase': (/** string */ s) => s.toLocaleUpperCase(),
+    'String.compareTo': (/** string */ a, /** string */ b) =>
+        a == b ? 0 : (a < b ? -1 : 1),
+    'String.equalsIgnoreCase': (/** string */ a, /** string */ b) =>
+        a.toLowerCase() == b.toLowerCase(),
 
     // Regex
     'RegExp.create': (/** string */ p, /** string */ f) => new RegExp(p, f),
@@ -95,11 +112,6 @@ function createImportObject(userImports) {
     'RegExp.exec': (/** !RegExp */ r, /** string */ s) => r.exec(s),
     'RegExp.test': (/** !RegExp */ r, /** string */ s) => r.test(s),
     'RegExpResult.index': (/** !RegExpResult */ r) => r.index,
-
-    // Helpers for j.l.String
-    'equalsIgnoreCase': (/** string */ a, /** string */ b) =>
-        a.toLowerCase() == b.toLowerCase(),
-    'replace': (s, regex, replacement) => s.replace(regex, replacement),
 
     // TODO(b/193532287): These will be removed after Array interop support in
     // WASM is implemented.
@@ -194,14 +206,6 @@ function charToLowerCase(value) {
  */
 function charToUpperCase(value) {
   return String.fromCharCode(value).toUpperCase().charCodeAt(0);
-}
-
-/**
- * @param {number} value
- * @return {number}
- */
-function charFoldCase(value) {
-  return String.fromCharCode(value).toUpperCase().toLowerCase().charCodeAt(0);
 }
 
 /**

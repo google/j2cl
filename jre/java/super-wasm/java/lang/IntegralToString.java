@@ -32,14 +32,10 @@ package java.lang;
  * that we can lose the duplication, but until then this class offers the full set.
  */
 final class IntegralToString {
-  /**
-   * When appending to an AbstractStringBuilder, this thread-local char[] lets us avoid allocation
-   * of a temporary array. (We can't write straight into the AbstractStringBuilder because it's
-   * almost as expensive to work out the exact length of the result as it is to do the formatting.
-   * We could try being conservative and "delete"-ing the unused space afterwards, but then we'd
-   * need to duplicate convertInt and convertLong rather than share the code.)
-   */
-  private static final char[] BUFFER = new char[20];
+
+  private static final int BUFFER_LENGTH = 65;
+  // Note that we can reuse the instance since the String construction will copy the array.
+  private static final char[] BUFFER = new char[BUFFER_LENGTH];
 
   /**
    * These tables are used to special-case toString computation for small values. This serves three
@@ -116,8 +112,8 @@ final class IntegralToString {
     } else {
       i = -i;
     }
-    int bufLen = radix < 8 ? 33 : 12; // Max chars in result (conservative)
-    char[] buf = new char[bufLen];
+    int bufLen = BUFFER_LENGTH;
+    char[] buf = BUFFER;
     int cursor = bufLen;
     do {
       int q = i / radix;
@@ -127,7 +123,7 @@ final class IntegralToString {
     if (negative) {
       buf[--cursor] = '-';
     }
-    return new String(cursor, bufLen - cursor, buf);
+    return new String(buf, cursor, bufLen - cursor);
   }
   /** Equivalent to Integer.toString(i). */
   public static String intToString(int i) {
@@ -175,8 +171,8 @@ final class IntegralToString {
       }
       return quickResult;
     }
-    int bufLen = 11; // Max number of chars in result
-    char[] buf = (sb != null) ? BUFFER : new char[bufLen];
+    int bufLen = BUFFER_LENGTH;
+    char[] buf = BUFFER;
     int cursor = bufLen;
     // Calculate digits two-at-a-time till remaining digits fit in 16 bits
     while (i >= (1 << 16)) {
@@ -202,7 +198,7 @@ final class IntegralToString {
       sb.append0(buf, cursor, bufLen - cursor);
       return null;
     } else {
-      return new String(cursor, bufLen - cursor, buf);
+      return new String(buf, cursor, bufLen - cursor);
     }
   }
 
@@ -232,8 +228,8 @@ final class IntegralToString {
       v = -v;
     }
 
-    int bufLen = radix < 8 ? 65 : 23; // Max chars in result (conservative)
-    char[] buf = new char[bufLen];
+    int bufLen = BUFFER_LENGTH;
+    char[] buf = BUFFER;
     int cursor = bufLen;
 
     do {
@@ -246,7 +242,7 @@ final class IntegralToString {
       buf[--cursor] = '-';
     }
 
-    return new String(cursor, bufLen - cursor, buf);
+    return new String(buf, cursor, bufLen - cursor);
   }
 
   /** Equivalent to Long.toString(l). */
@@ -280,7 +276,7 @@ final class IntegralToString {
       }
     }
     int bufLen = 20; // Maximum number of chars in result
-    char[] buf = (sb != null) ? BUFFER : new char[bufLen];
+    char[] buf = BUFFER;
     int low = (int) (n % 1000000000); // Extract low-order 9 digits
     int cursor = intIntoCharArray(buf, bufLen, low);
     // Zero-pad Low order part to 9 digits
@@ -326,7 +322,7 @@ final class IntegralToString {
       sb.append0(buf, cursor, bufLen - cursor);
       return null;
     } else {
-      return new String(cursor, bufLen - cursor, buf);
+      return new String(buf, cursor, bufLen - cursor);
     }
   }
   /**
@@ -377,8 +373,8 @@ final class IntegralToString {
   private static String intToPowerOfTwoUnsignedString(int value, int shift) {
     final int radix = 1 << shift;
     final int mask = radix - 1;
-    final int bufSize = 32 / shift + 1;
-    char[] buf = new char[bufSize];
+    final int bufSize = BUFFER_LENGTH;
+    char[] buf = BUFFER;
     int pos = bufSize;
     do {
       buf[--pos] = Character.forDigit(value & mask);
@@ -403,8 +399,8 @@ final class IntegralToString {
   private static String longToPowerOfTwoUnsignedString(long value, int shift) {
     final int radix = 1 << shift;
     final int mask = radix - 1;
-    final int bufSize = 64 / shift + 1;
-    char[] buf = new char[bufSize];
+    final int bufSize = BUFFER_LENGTH;
+    char[] buf = BUFFER;
     int pos = bufSize;
     do {
       buf[--pos] = Character.forDigit(((int) value) & mask);
@@ -414,12 +410,11 @@ final class IntegralToString {
     return String.valueOf(buf, pos, bufSize - pos);
   }
 
-  /**
-   * Returns a string composed of the specified characters. Note that the autoboxing does *not*
-   * result in an extra copy of the char array: we are using a package-private string constructor
-   * that incorporates the "autoboxing array" into the new string.
-   */
+  private static String stringOf(char arg) {
+    return String.valueOf(arg);
+  }
+
   private static String stringOf(char... args) {
-    return new String(0, args.length, args);
+    return String.valueOf(args);
   }
 }

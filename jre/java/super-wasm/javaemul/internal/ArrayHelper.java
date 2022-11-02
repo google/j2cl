@@ -15,7 +15,6 @@
  */
 package javaemul.internal;
 
-
 /** Provides utilities to perform operations on Arrays. */
 public final class ArrayHelper {
 
@@ -124,4 +123,3 @@ public final class ArrayHelper {
 
   private ArrayHelper() {}
 }
-

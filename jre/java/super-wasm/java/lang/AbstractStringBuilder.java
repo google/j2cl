@@ -21,6 +21,7 @@ import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
 
 import java.util.Arrays;
 
+// TODO(b/244382431): Replace with non-wasm version of the class.
 abstract class AbstractStringBuilder {
   static final int INITIAL_CAPACITY = 16;
   private char[] value;
@@ -55,7 +56,7 @@ abstract class AbstractStringBuilder {
     count = string.length();
     shared = false;
     value = new char[count + INITIAL_CAPACITY];
-    string._getChars(0, count, value, 0);
+    string.getChars0(0, count, value, 0);
   }
 
   private void enlargeBuffer(int min) {
@@ -114,7 +115,7 @@ abstract class AbstractStringBuilder {
     if (newCount > value.length) {
       enlargeBuffer(newCount);
     }
-    string._getChars(0, length, value, count);
+    string.getChars0(0, length, value, count);
     count = newCount;
   }
 
@@ -134,7 +135,7 @@ abstract class AbstractStringBuilder {
       shared = false;
     }
     if (s instanceof String) {
-      ((String) s)._getChars(start, end, value, count);
+      ((String) s).getChars0(start, end, value, count);
     } else if (s instanceof AbstractStringBuilder) {
       AbstractStringBuilder other = (AbstractStringBuilder) s;
       System.arraycopy(other.value, start, value, count, length);
@@ -242,7 +243,7 @@ abstract class AbstractStringBuilder {
     int min = string.length();
     if (min != 0) {
       move(min, index);
-      string._getChars(0, min, value, index);
+      string.getChars0(0, min, value, index);
       count += min;
     }
   }
@@ -315,7 +316,7 @@ abstract class AbstractStringBuilder {
       value = Arrays.copyOf(value, value.length);
       shared = false;
     }
-    string._getChars(0, stringLength, value, start);
+    string.getChars0(0, stringLength, value, start);
     count -= diff;
   }
 
@@ -456,13 +457,7 @@ abstract class AbstractStringBuilder {
     if (count == 0) {
       return "";
     }
-    // Optimize String sharing for more performance
-    int wasted = value.length - count;
-    if (wasted >= 256 || (wasted >= INITIAL_CAPACITY && wasted >= (count >> 1))) {
-      return new String(value, 0, count);
-    }
-    shared = true;
-    return new String(0, count, value);
+    return new String(value, 0, count);
   }
 
   public CharSequence subSequence(int start, int end) {

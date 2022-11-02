@@ -39,7 +39,6 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -230,13 +229,6 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void exitNumberLiteral(NumberLiteral numberLiteral) {
             if (!verifyForWasm) {
               checkState(!TypeDescriptors.isPrimitiveLong(numberLiteral.getTypeDescriptor()));
-            }
-          }
-
-          @Override
-          public void exitStringLiteral(StringLiteral stringLiteral) {
-            if (verifyForWasm) {
-              throw new IllegalStateException();
             }
           }
 
