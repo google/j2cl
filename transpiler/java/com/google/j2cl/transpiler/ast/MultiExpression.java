@@ -65,7 +65,7 @@ public class MultiExpression extends Expression {
 
   @Override
   public boolean hasSideEffects() {
-    return expressions.stream().allMatch(Expression::hasSideEffects);
+    return expressions.stream().anyMatch(Expression::hasSideEffects);
   }
 
   @Override

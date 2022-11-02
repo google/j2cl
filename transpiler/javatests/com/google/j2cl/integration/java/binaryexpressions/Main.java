@@ -30,6 +30,7 @@ public class Main {
     testExtendedOperands();
     testFloatConsistency();
     testParenthesizedLvalues();
+    testSideEffects();
   }
 
   private static void testArithmetic() {
@@ -218,5 +219,26 @@ public class Main {
 
     ((((l)))) += 2;
     assertTrue(l == 4);
+  }
+
+  private static final class SideEffectTester {
+    private int sideEffectCounter;
+    private double value;
+  }
+
+  private static final SideEffectTester sideEffectTester = new SideEffectTester();
+
+  private static SideEffectTester getSideEffectTester() {
+    sideEffectTester.sideEffectCounter++;
+    return sideEffectTester;
+  }
+
+  private static void testSideEffects() {
+    sideEffectTester.value = 10;
+    sideEffectTester.sideEffectCounter = 0;
+
+    getSideEffectTester().value += 20;
+    assertTrue(sideEffectTester.value == 30);
+    assertTrue(sideEffectTester.sideEffectCounter == 1);
   }
 }
