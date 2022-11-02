@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 @Visitable
 public class ContinueStatement extends Statement {
 
-  @Nullable private final LabelReference labelReference;
+  @Nullable @Visitable LabelReference labelReference;
 
   private ContinueStatement(SourcePosition sourcePosition, LabelReference labelReference) {
     super(sourcePosition);

@@ -13,38 +13,29 @@ open class ForStatement {
  open fun test() {
   var i: Int = 0
   var count: Int = 0
-  LOOP@ while (i < 100) {
-   LOOP_CONTINUE@ do {
-    count = count + 1
-   } while (false)
+  while (i < 100) {
+   count = count + 1
    i = i + 1
   }
   var l: Long = 0L
   var count_1: Long = 0L
-  LOOP_1@ while (l < 100L) {
-   LOOP_CONTINUE_1@ do {
-    count_1 = count_1 + 1L
-   } while (false)
+  while (l < 100L) {
+   count_1 = count_1 + 1L
    l = l + 1L
    l = l + 1L
   }
   var a: Boolean = false
-  LOOP_2@ while (run {
+  while (run {
    a = a.or(true)
    a
-  }) {
-   LOOP_CONTINUE_2@ do {} while (false)
-  }
+  }) {}
   var b: Boolean = false
-  LOOP_3@ while (run {
+  while (run {
    b = a
    b
-  }) {
-   LOOP_CONTINUE_3@ do {} while (false)
-  }
+  }) {}
   ForStatement.returnsValue_private_2()
-  LOOP_4@ while (true) {
-   LOOP_CONTINUE_4@ do {} while (false)
+  while (true) {
    ForStatement.returnsValue_private_2()
   }
  }
@@ -52,19 +43,17 @@ open class ForStatement {
  open fun testContinue() {
   var i: Int = 0
   var j: Int = 0
-  LABEL@ while (i < 10) {
+  while (i < 10) {
    LABEL_CONTINUE@ do {
     if (i === 5) {
      break@LABEL_CONTINUE
     }
     var k: Int = 0
     var l: Int = 0
-    LOOP@ while (k < 10) {
-     LOOP_CONTINUE@ do {
-      if (j === 5) {
-       break@LABEL_CONTINUE
-      }
-     } while (false)
+    while (k < 10) {
+     if (j === 5) {
+      break@LABEL_CONTINUE
+     }
      k = k + 1
      l = l + 1
     }
@@ -77,14 +66,12 @@ open class ForStatement {
  open fun testInitializeInForCondition() {
   var i: Int = 0
   var x: Int = 0
-  LOOP@ while (i < 1 && run {
+  while (i < 1 && run {
    x = 3
    x
   } !== 0) {
-   LOOP_CONTINUE@ do {
-    var y: Int = 0
-    y = i + x
-   } while (false)
+   var y: Int = 0
+   y = i + x
    i = i + 1
   }
  }

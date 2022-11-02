@@ -79,9 +79,7 @@ open class Lambdas {
 
  open fun testReturnLabelNameConflictKotlin() {
   this.call(Lambdas.FunctionalInterface { i: Int ->
-   FunctionalInterface_1@ do {
-    return@FunctionalInterface i
-   } while (false)
+   return@FunctionalInterface i
   }, 10)
  }
 

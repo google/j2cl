@@ -6,24 +6,16 @@ import javaemul.lang.*
 open class LabeledStatement {
  open fun loopStatements() {
   LABEL@ while (true) {
-   LABEL_CONTINUE@ do {
-    break@LABEL
-   } while (false)
+   break@LABEL
   }
  }
 
  open fun simpleStatement() {
-  LABEL@ do {
-   this.foo_private_2()
-  } while (false)
+  this.foo_private_2()
   LOOP@ do {
-   LABEL_1@ do {
-    continue@LOOP
-   } while (false)
+   continue@LOOP
   } while (false)
-  LABEL_2@ do {
-   return
-  } while (false)
+  return
  }
 
  open fun block() {

@@ -69,18 +69,16 @@ open class InnerClassInitOrder {
   }
   val results: Array<___1AddNumber?>? = arrayOfNulls<___1AddNumber>(10)
   var i: Int = 0
-  LOOP@ while (i < 10) {
-   LOOP_CONTINUE@ do {
-    val ap: ___1AddNumber? = object : ___1AddNumber(i) {
-     open override fun act() {
-      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + this.num
-     }
+  while (i < 10) {
+   val ap: ___1AddNumber? = object : ___1AddNumber(i) {
+    open override fun act() {
+     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + this.num
     }
-    results!![i] = ap
-   } while (false)
+   }
+   results!![i] = ap
    i = i + 1
   }
-  FOR_EACH@ for (theAp in results!!) {
+  for (theAp in results!!) {
    val theAp_1: ___1AddNumber? = theAp
    theAp_1!!.act()
   }

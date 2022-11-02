@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 @Visitable
 public class BreakStatement extends Statement {
 
-  @Nullable private final LabelReference labelReference;
+  @Nullable @Visitable LabelReference labelReference;
 
   private BreakStatement(SourcePosition sourcePosition, LabelReference labelReference) {
     super(sourcePosition);

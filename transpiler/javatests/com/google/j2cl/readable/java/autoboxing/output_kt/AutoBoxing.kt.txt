@@ -104,7 +104,7 @@ open class AutoBoxing {
  open fun sumWithoutBoxing(vararg numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
-  FOR_EACH@ for (number in numbers_1!!) {
+  for (number in numbers_1!!) {
    val number_1: Any? = number
    sum = sum + (number_1 as Double?)!!.toDouble()
   }
@@ -114,7 +114,7 @@ open class AutoBoxing {
  open fun sumWithoutBoxingJsVarargs(vararg numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
-  FOR_EACH@ for (number in numbers_1!!) {
+  for (number in numbers_1!!) {
    val number_1: Any? = number
    sum = sum + (number_1 as Double?)!!.toDouble()
   }
@@ -123,7 +123,7 @@ open class AutoBoxing {
 
  open fun sumWithUnboxing(boxedDoubles: MutableIterable<Double?>?): Double {
   var sum: Double = 0.0
-  FOR_EACH@ for (d in boxedDoubles!!) {
+  for (d in boxedDoubles!!) {
    val d_1: Double = d!!
    sum = sum + d_1
   }
@@ -236,11 +236,9 @@ open class AutoBoxing {
   i = boxI!!.toInt().inv()
   boxD = Double.valueOf(- boxD!!.toDouble())
   boxI = Int.valueOf(- boxI!!.toInt())
-  SWITCH@ do {
-   when (boxI!!.toInt()) {
-    else -> {}
-   }
-  } while (false)
+  when (boxI!!.toInt()) {
+   else -> {}
+  }
   i = i + run {
    boxI = Int.valueOf(boxI!!.toInt() + run {
     i = i + boxI!!.toInt()

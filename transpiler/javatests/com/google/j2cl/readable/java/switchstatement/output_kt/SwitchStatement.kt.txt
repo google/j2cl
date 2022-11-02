@@ -144,15 +144,13 @@ open class SwitchStatement {
  }
 
  fun testLabelInSwitchCase_private_2(i: Int) {
-  SWITCH@ do {
-   when (i) {
-    1 -> {
-     LABEL@ do {
-      break@LABEL
-     } while (true)
-    }
+  when (i) {
+   1 -> {
+    LABEL@ do {
+     break@LABEL
+    } while (true)
    }
-  } while (false)
+  }
  }
 
  fun testNonFallThroughBreakCase_private_2(i: Int) {

@@ -15,11 +15,11 @@ import kotlin.collections.MutableIterator
 
 open class ForEachStatement {
  open fun test(iterable: MutableIterable<Throwable?>?) {
-  FOR_EACH@ for (t in iterable!!) {
+  for (t in iterable!!) {
    val t_1: Throwable? = t
    t_1!!.toString()
   }
-  FOR_EACH_1@ for (t_2 in arrayOfNulls<Throwable>(10)) {
+  for (t_2 in arrayOfNulls<Throwable>(10)) {
    val t_3: Throwable? = t_2
    t_3!!.toString()
   }
@@ -29,11 +29,11 @@ open class ForEachStatement {
   try {
    throw Exception()
   } catch (e: ForEachStatement.Exception1) {
-   FOR_EACH@ for (o in e!!) {
+   for (o in e!!) {
     val o_1: Any? = o
    }
   } catch (e: ForEachStatement.Exception2) {
-   FOR_EACH@ for (o in e!!) {
+   for (o in e!!) {
     val o_1: Any? = o
    }
   }
@@ -41,11 +41,11 @@ open class ForEachStatement {
 
  fun <T: MutableIterable<String?>?, U: T> testTypeVariable_private_2() {
   val iterable: U? = null
-  FOR_EACH@ for (s in iterable!!) {
+  for (s in iterable!!) {
    val s_1: String? = s
   }
   val anotherIterable: ForEachStatement.IterableReturningTypeVariable<*>? = null
-  FOR_EACH_1@ for (s_2 in anotherIterable!!) {
+  for (s_2 in anotherIterable!!) {
    val s_3: Int = s_2!!
   }
  }

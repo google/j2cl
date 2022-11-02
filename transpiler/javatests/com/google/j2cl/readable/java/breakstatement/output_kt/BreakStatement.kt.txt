@@ -6,9 +6,7 @@ import javaemul.lang.*
 open class BreakStatement {
  open fun test() {
   LOOP@ while (true) {
-   LOOP_CONTINUE@ do {
-    break@LOOP
-   } while (false)
+   break@LOOP
   }
  }
 }
