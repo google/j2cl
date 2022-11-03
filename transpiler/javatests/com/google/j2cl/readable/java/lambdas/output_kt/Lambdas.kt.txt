@@ -181,7 +181,7 @@ open class Lambdas {
 
   @JvmStatic
   fun <E> identity(): Lambdas.GenericJsFunction<E, E>? {
-   if (Lambdas.identityFunction_private_2 === null) {
+   if (Lambdas.identityFunction_private_2 == null) {
     Lambdas.identityFunction_private_2 = Lambdas.IdentityFunction()
    }
    return Lambdas.identityFunction_private_2 as Lambdas.GenericJsFunction<E, E>?

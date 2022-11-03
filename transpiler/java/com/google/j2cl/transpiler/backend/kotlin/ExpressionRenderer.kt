@@ -131,7 +131,10 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
     renderLeftSubExpression(expression, expression.leftOperand)
   }
   render(" ")
-  renderBinaryOperator(expression.operator)
+  renderBinaryOperator(
+    expression.operator,
+    useEquality = expression.leftOperand is NullLiteral || expression.rightOperand is NullLiteral
+  )
   render(" ")
   renderRightSubExpression(expression, expression.rightOperand)
 }
@@ -158,29 +161,28 @@ private fun Renderer.renderCastExpression(castExpression: CastExpression) {
   }
 }
 
-private fun Renderer.renderBinaryOperator(operator: BinaryOperator) {
-  render(operator.ktSymbol)
+private fun Renderer.renderBinaryOperator(operator: BinaryOperator, useEquality: Boolean) {
+  render(operator.ktSymbol(useEquality))
 }
 
-private val BinaryOperator.ktSymbol
-  get() =
-    when (this) {
-      BinaryOperator.TIMES -> "*"
-      BinaryOperator.DIVIDE -> "/"
-      BinaryOperator.REMAINDER -> "%"
-      BinaryOperator.PLUS -> "+"
-      BinaryOperator.MINUS -> "-"
-      BinaryOperator.LESS -> "<"
-      BinaryOperator.GREATER -> ">"
-      BinaryOperator.LESS_EQUALS -> "<="
-      BinaryOperator.GREATER_EQUALS -> ">="
-      BinaryOperator.EQUALS -> "==="
-      BinaryOperator.NOT_EQUALS -> "!=="
-      BinaryOperator.CONDITIONAL_AND -> "&&"
-      BinaryOperator.CONDITIONAL_OR -> "||"
-      BinaryOperator.ASSIGN -> "="
-      else -> throw InternalCompilerError("$this.ktSymbol")
-    }
+private fun BinaryOperator.ktSymbol(useEquality: Boolean) =
+  when (this) {
+    BinaryOperator.TIMES -> "*"
+    BinaryOperator.DIVIDE -> "/"
+    BinaryOperator.REMAINDER -> "%"
+    BinaryOperator.PLUS -> "+"
+    BinaryOperator.MINUS -> "-"
+    BinaryOperator.LESS -> "<"
+    BinaryOperator.GREATER -> ">"
+    BinaryOperator.LESS_EQUALS -> "<="
+    BinaryOperator.GREATER_EQUALS -> ">="
+    BinaryOperator.EQUALS -> if (useEquality) "==" else "==="
+    BinaryOperator.NOT_EQUALS -> if (useEquality) "!=" else "!=="
+    BinaryOperator.CONDITIONAL_AND -> "&&"
+    BinaryOperator.CONDITIONAL_OR -> "||"
+    BinaryOperator.ASSIGN -> "="
+    else -> throw InternalCompilerError("$this.ktSymbol")
+  }
 
 private fun Renderer.renderExpressionWithComment(expressionWithComment: ExpressionWithComment) {
   // Comments do not count as operations, but parenthesis will be emitted by the

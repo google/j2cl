@@ -15,8 +15,8 @@ open class Equality {
   val c: Boolean = Any() !== Any()
   val d: Boolean = Double.valueOf(0.0) === Double.valueOf(0.0)
   val e: Boolean = Float.valueOf(0.0f) === Float.valueOf(0.0f)
-  val f: Boolean = null !== Any()
-  val g: Boolean = Any() !== null
-  val h: Boolean = null !== IntArray(0)
+  val f: Boolean = null != Any()
+  val g: Boolean = Any() != null
+  val h: Boolean = null != IntArray(0)
  }
 }

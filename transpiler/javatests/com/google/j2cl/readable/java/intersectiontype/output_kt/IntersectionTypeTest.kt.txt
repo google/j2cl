@@ -54,7 +54,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun <T> cast(o: Any?): Getable<T>? {
-   if (o === null) {
+   if (o == null) {
     return (o).let { it as Getable<T>?; it as Setable?; it }
    }
    return (o).let { it as Getable<T>?; it as Setable?; it }

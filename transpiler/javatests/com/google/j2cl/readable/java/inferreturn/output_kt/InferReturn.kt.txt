@@ -19,7 +19,7 @@ open class InferReturn<T> {
 
   @JvmStatic
   fun tightenType(foo: InferReturn<String?>?): InferReturn<InferReturn<String?>?>? {
-   if (foo !== null) {
+   if (foo != null) {
     return InferReturn.inferGeneric<InferReturn<String?>?>(foo)
    }
    return null
