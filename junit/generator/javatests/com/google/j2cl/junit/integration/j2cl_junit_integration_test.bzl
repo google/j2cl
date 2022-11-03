@@ -2,6 +2,7 @@
 
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_jvm_test", "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
+load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
 
 def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps = [], extra_data = [], platforms = ["CLOSURE"]):
     """Run tests against integration test data
@@ -79,22 +80,38 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
         native_deps: Native libraries that will be built only for the target.
         platforms: The platform on which tests will run
     """
-    srcs = ["%s.java" % name]
     test_class = "%s.%s" % (get_java_package(native.package_name()), name)
     tags = ["manual", "notap"]
-
-    # Note that, this setup also verifies that we can have our suite defined in
-    # runtime deps. The build rules have to forward the runtime deps as a
-    # dependency to code generation, otherwise we would be getting strict deps
-    # violations. If this setup is changed, we should add explicit examples.
-    java_and_j2cl_library(
-        name = "%s-lib" % name,
-        srcs = srcs,
-        tags = tags,
-        deps = deps,
-        native_srcs = native_srcs,
-        native_deps = native_deps,
-    )
+    java_srcs = native.glob(["%s.java" % name])
+    kotlin_srcs = native.glob(["%s.kt" % name])
+    if java_srcs and kotlin_srcs:
+        fail("cannot handle both Java and Kotlin source at once")
+    elif kotlin_srcs:
+        # Note that, this setup also verifies that we can have our suite defined in
+        # runtime deps. The build rules have to forward the runtime deps as a
+        # dependency to code generation, otherwise we would be getting strict deps
+        # violations. If this setup is changed, we should add explicit examples.
+        kotlin_and_j2cl_library(
+            name = "%s-lib" % name,
+            srcs = kotlin_srcs,
+            tags = tags,
+            deps = deps,
+            native_srcs = native_srcs,
+            native_deps = native_deps,
+        )
+    else:
+        # Note that, this setup also verifies that we can have our suite defined in
+        # runtime deps. The build rules have to forward the runtime deps as a
+        # dependency to code generation, otherwise we would be getting strict deps
+        # violations. If this setup is changed, we should add explicit examples.
+        java_and_j2cl_library(
+            name = "%s-lib" % name,
+            srcs = java_srcs,
+            tags = tags,
+            deps = deps,
+            native_srcs = native_srcs,
+            native_deps = native_deps,
+        )
 
     if "WASM" in platforms:
         j2wasm_test(
