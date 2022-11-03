@@ -14,8 +14,8 @@ open class BooleanOperations {
   val rs: Boolean = true
   var r: Boolean = true
   val t: Boolean = !!!true
-  r = ls === rs
-  r = ls !== rs
+  r = ls == rs
+  r = ls != rs
   r = ls.xor(rs)
   r = ls.and(rs)
   r = ls.or(rs)
@@ -28,8 +28,8 @@ open class BooleanOperations {
   r = r.xor(rs)
   r = r.and(rs)
   r = r.or(rs)
-  BooleanOperations.acceptBoolean_private_2(ls === rs)
-  BooleanOperations.acceptBoolean_private_2(ls !== rs)
+  BooleanOperations.acceptBoolean_private_2(ls == rs)
+  BooleanOperations.acceptBoolean_private_2(ls != rs)
   BooleanOperations.acceptBoolean_private_2(ls.xor(rs))
   BooleanOperations.acceptBoolean_private_2(ls.and(rs))
   BooleanOperations.acceptBoolean_private_2(ls.or(rs))
@@ -40,8 +40,8 @@ open class BooleanOperations {
    ls
   })
   var br: Boolean? = null
-  br = Boolean.valueOf(ls === rs)
-  br = Boolean.valueOf(ls !== rs)
+  br = Boolean.valueOf(ls == rs)
+  br = Boolean.valueOf(ls != rs)
   br = Boolean.valueOf(ls.xor(rs))
   br = Boolean.valueOf(ls.and(rs))
   br = Boolean.valueOf(ls.or(rs))
@@ -51,10 +51,10 @@ open class BooleanOperations {
    ls = rs
    ls
   })
-  if (ls === rs) {
+  if (ls == rs) {
    r = true
   }
-  if (ls !== rs) {
+  if (ls != rs) {
    r = true
   }
   if (ls.xor(rs)) {

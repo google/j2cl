@@ -45,13 +45,13 @@ open class ForStatement {
   var j: Int = 0
   while (i < 10) {
    LABEL_CONTINUE@ do {
-    if (i === 5) {
+    if (i == 5) {
      break@LABEL_CONTINUE
     }
     var k: Int = 0
     var l: Int = 0
     while (k < 10) {
-     if (j === 5) {
+     if (j == 5) {
       break@LABEL_CONTINUE
      }
      k = k + 1
@@ -69,7 +69,7 @@ open class ForStatement {
   while (i < 1 && run {
    x = 3
    x
-  } !== 0) {
+  } != 0) {
    var y: Int = 0
    y = i + x
    i = i + 1

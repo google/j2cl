@@ -120,6 +120,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
   // Java and Kotlin does not allow initializing static final fields with type qualifier, so it
   // needs to be rendered without the qualifier.
   val leftOperand = expression.leftOperand
+  val rightOperand = expression.rightOperand
   if (
     leftOperand is FieldAccess &&
       expression.isSimpleAssignment &&
@@ -128,15 +129,18 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
   ) {
     renderIdentifier(leftOperand.target.ktMangledName)
   } else {
-    renderLeftSubExpression(expression, expression.leftOperand)
+    renderLeftSubExpression(expression, leftOperand)
   }
   render(" ")
   renderBinaryOperator(
     expression.operator,
-    useEquality = expression.leftOperand is NullLiteral || expression.rightOperand is NullLiteral
+    useEquality =
+      leftOperand is NullLiteral ||
+        rightOperand is NullLiteral ||
+        (leftOperand.typeDescriptor.isPrimitive && rightOperand.typeDescriptor.isPrimitive)
   )
   render(" ")
-  renderRightSubExpression(expression, expression.rightOperand)
+  renderRightSubExpression(expression, rightOperand)
 }
 
 private fun Renderer.renderCastExpression(castExpression: CastExpression) {

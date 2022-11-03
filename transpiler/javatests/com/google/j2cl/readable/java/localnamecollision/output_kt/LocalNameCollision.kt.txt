@@ -26,15 +26,15 @@ open class LocalNameCollision {
   val com_google_j2cl_readable_localnamecollision_package2_A: Int = 1
   val A: Int = 1
   LocalNameCollision = RuntimeException is localnamecollision.LocalNameCollision || RuntimeException is kotlin.RuntimeException || RuntimeException is localnamecollision.package1.A || RuntimeException is localnamecollision.package2.A || RuntimeException is Class
-  assert(localnamecollision.Asserts().n() === 5)
+  assert(localnamecollision.Asserts().n() == 5)
  }
 
  open fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int): Boolean {
-  return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts === A
+  return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 
  constructor(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int) {
-  val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts === A
+  val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 }
 

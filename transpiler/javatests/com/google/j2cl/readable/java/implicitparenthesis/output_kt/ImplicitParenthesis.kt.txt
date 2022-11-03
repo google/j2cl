@@ -22,22 +22,22 @@ open class ImplicitParenthesis {
    var boxedInt: Int? = null
    primitiveInt = 5
    boxedInt = Int(10)
-   primitiveInt = (if (primitiveInt === 5) Int(15) else Int(30))!!.toInt()
-   assert(primitiveInt === 15)
+   primitiveInt = (if (primitiveInt == 5) Int(15) else Int(30))!!.toInt()
+   assert(primitiveInt == 15)
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
     boxedInt = Int.valueOf(boxedInt!!.toInt() + primitiveInt)
     boxedInt
    }!!.toInt()
-   assert(primitiveInt === 15)
+   assert(primitiveInt == 15)
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
     boxedInt = Int.valueOf(primitiveInt)
     boxedInt
    }!!.toInt()
-   assert(primitiveInt === 5)
+   assert(primitiveInt == 5)
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
@@ -45,14 +45,14 @@ open class ImplicitParenthesis {
     boxedInt = Int.valueOf(boxedInt!!.toInt() + 1)
     ___value
    }!!.toInt()
-   assert(primitiveInt === 10)
+   assert(primitiveInt == 10)
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = run {
     boxedInt = Int.valueOf(boxedInt!!.toInt() + 1)
     boxedInt
    }!!.toInt()
-   assert(primitiveInt === 11)
+   assert(primitiveInt == 11)
   }
 
   @JvmStatic
@@ -63,12 +63,12 @@ open class ImplicitParenthesis {
    primitiveInt = 5
    boxedInt = Int(10)
    primitiveInt = boxedInt!!.toInt() - primitiveInt
-   assert(primitiveInt === 5)
+   assert(primitiveInt == 5)
    primitiveInt = 5
    boxedInt = Int(10)
    boxedBoolean = Boolean.valueOf(true)
-   boxedBoolean = Boolean.valueOf(boxedInt!!.toInt() === primitiveInt)
-   assert(boxedBoolean!!.booleanValue() === false)
+   boxedBoolean = Boolean.valueOf(boxedInt!!.toInt() == primitiveInt)
+   assert(boxedBoolean!!.booleanValue() == false)
   }
 
   @JvmStatic

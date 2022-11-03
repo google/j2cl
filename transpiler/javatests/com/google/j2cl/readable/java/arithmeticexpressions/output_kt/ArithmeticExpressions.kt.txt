@@ -71,9 +71,9 @@ open class ArithmeticExpressions {
   val u: Int = + + + 1
   val v: Int = - + - 1
   val w: Int = 5 - - 4
-  var k: Boolean = !(1 + 2 + 3 === 4)
-  val l: Boolean = 1 + 2 !== 4
-  val m: Boolean = Long.MAX_VALUE.toDouble() !== 9.223372036854778E18
+  var k: Boolean = !(1 + 2 + 3 == 4)
+  val l: Boolean = 1 + 2 != 4
+  val m: Boolean = Long.MAX_VALUE.toDouble() != 9.223372036854778E18
   val o: Double = ((5 + 1) / 2).toDouble() - 0.0
   a = a.shl(31L.toInt())
   a = a.shl(1L.toInt())
@@ -85,13 +85,13 @@ open class ArithmeticExpressions {
   k = run {
    s = (s.toInt() + 1).toShort()
    s
-  }.toInt() === 10
+  }.toInt() == 10
   var q: Int = 3.shr(2)
   q = 3.ushr(2)
   val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
   val y: Char = 'y'
   val z: Long? = Long.valueOf(121L)
-  k = y.code.toLong() === z!!.toLong()
+  k = y.code.toLong() == z!!.toLong()
  }
 
  @JvmField var bar: Long = run {
@@ -166,7 +166,7 @@ open class ArithmeticExpressions {
    val ___value_6: Short = (shorts!![0].toInt() + 1).toShort()
    ___array_8!![___index_8] = ___value_6
    ___value_6
-  }.toInt() === 10
+  }.toInt() == 10
  }
 
  open fun testCompoundBoxedTypes() {
@@ -252,7 +252,7 @@ open class ArithmeticExpressions {
   if (condition && run {
    effectivelyFinal = this.bar
    effectivelyFinal
-  } !== 0L) {
+  } != 0L) {
    val unused: Long = effectivelyFinal
   }
  }

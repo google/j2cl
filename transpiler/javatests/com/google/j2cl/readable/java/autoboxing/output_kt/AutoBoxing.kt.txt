@@ -344,15 +344,15 @@ open class AutoBoxing {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = false
   assert(boxB === boxB)
-  assert(boxB!!.booleanValue() === b)
-  assert(b !== b)
-  assert(b !== boxB!!.booleanValue())
+  assert(boxB!!.booleanValue() == b)
+  assert(b != b)
+  assert(b != boxB!!.booleanValue())
   val boxI: Int? = Int(1)
   val i: Int = 1
   assert(boxI === boxI)
-  assert(boxI!!.toInt() === i)
-  assert(i !== i)
-  assert(i !== boxI!!.toInt())
+  assert(boxI!!.toInt() == i)
+  assert(i != i)
+  assert(i != boxI!!.toInt())
  }
 
  open fun testAssertStatement() {
@@ -379,7 +379,7 @@ open class AutoBoxing {
   fun <T: Long?> testUnboxingFromTypeVariable() {
    var n: T? = Long.valueOf(10L)
    var l: Long = n!!.toLong()
-   assert(l === 10L)
+   assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___1Local<T: Long?> {
     open fun toLong(l: T): Long {
@@ -388,14 +388,14 @@ open class AutoBoxing {
     }
    }
    l = ___1Local<Long?>().toLong(Long.valueOf(11L))
-   assert(l === 11L)
+   assert(l == 11L)
   }
 
   @JvmStatic
   fun <T> testUnboxingFromIntersectionType() where T: Long?, T: Comparable<Long>? {
    var n: T? = Long.valueOf(10L)
    var l: Long = n!!.toLong()
-   assert(l === 10L)
+   assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___2Local<T> where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
     open fun toLong(l: T): Long {
@@ -404,7 +404,7 @@ open class AutoBoxing {
     }
    }
    l = ___2Local<Long?>().toLong(Long.valueOf(11L))
-   assert(l === 11L)
+   assert(l == 11L)
    val i: Int = Int.valueOf(10)!!.toInt()
   }
  }

@@ -21,7 +21,7 @@ open class Main {
  companion object {
   @JvmStatic
   fun testJsEnumSwitch() {
-   var comparableJsEnum: Main.ComparableJsEnum? = if (Main.ComparableJsEnum.ONE.getValue() === 1) Main.ComparableJsEnum.TWO else null
+   var comparableJsEnum: Main.ComparableJsEnum? = if (Main.ComparableJsEnum.ONE.getValue() == 1) Main.ComparableJsEnum.TWO else null
    SWITCH@ do {
     when (comparableJsEnum!!) {
      Main.ComparableJsEnum.TWO -> {
@@ -32,7 +32,7 @@ open class Main {
    } while (false)
    val comparable: Comparable<Any>? = comparableJsEnum as Comparable<Any>?
    comparableJsEnum = comparable as Main.ComparableJsEnum?
-   var intJsEnum: Main.IntJsEnum? = if (Main.IntJsEnum.ELEVEN.getValue() === 10) Main.IntJsEnum.ELEVEN else null
+   var intJsEnum: Main.IntJsEnum? = if (Main.IntJsEnum.ELEVEN.getValue() == 10) Main.IntJsEnum.ELEVEN else null
    SWITCH_1@ do {
     when (intJsEnum!!) {
      Main.IntJsEnum.TWENTY -> {

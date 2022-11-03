@@ -158,7 +158,7 @@ open class FinalizerTest {
   this.readBeforeWrite = this.readBeforeWrite + 1
   val i: Int = this.effectivelyFinalField
   this.compoundAssignment = this.compoundAssignment + 1
-  if (i === 3) {
+  if (i == 3) {
    this.effectivelyFinalButNotOptimizedIfBranches = 1
   } else {
    this.effectivelyFinalButNotOptimizedIfBranches = 1
