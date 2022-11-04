@@ -253,7 +253,7 @@ private fun Renderer.renderBooleanLiteral(booleanLiteral: BooleanLiteral) {
 }
 
 private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
-  render("\"${stringLiteral.value.escapedString}\"")
+  renderString(stringLiteral.value)
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {

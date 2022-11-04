@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.Problems
 import com.google.j2cl.transpiler.ast.HasName
-import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 
@@ -126,6 +125,10 @@ data class Renderer(
 
   fun renderTodo(string: String) {
     render("TODO")
-    renderInParentheses { renderExpression(StringLiteral(string)) }
+    renderInParentheses { renderString(string) }
+  }
+
+  fun renderString(string: String) {
+    render("\"${string.escapedString}\"")
   }
 }

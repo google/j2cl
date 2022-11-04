@@ -44,25 +44,25 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 
   private fun renderSource(compilationUnit: CompilationUnit): String {
     val nameToIdentifierMap = compilationUnit.buildNameToIdentifierMap()
+
     val environment =
       Environment(
         nameToIdentifierMap = nameToIdentifierMap,
         identifierSet = nameToIdentifierMap.values.toSet()
       )
 
-    // Render types, collecting qualified names to import
-    val bodySource =
+    val renderedSource = { renderFn: Renderer.() -> Unit ->
       SourceBuilder()
-        .also { Renderer(environment, it, problems).renderTypes(compilationUnit) }
+        .also { Renderer(environment, it, problems).renderFn() }
         .build()
         .trimTrailingWhitespaces()
+    }
+
+    // Render types, collecting qualified names to import
+    val bodySource = renderedSource { renderTypes(compilationUnit) }
 
     // Render header, including package and collected imports
-    val headerSource =
-      SourceBuilder()
-        .also { Renderer(environment, it, problems).renderHeader(compilationUnit) }
-        .build()
-        .trimTrailingWhitespaces()
+    val headerSource = renderedSource { renderHeader(compilationUnit) }
 
     return headerSource + bodySource
   }
