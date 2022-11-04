@@ -18,9 +18,16 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.CompilationUnit
 
 internal fun Renderer.renderFileHeader(compilationUnit: CompilationUnit) {
+  renderFileComment(compilationUnit)
+  renderFileAnnotations()
+}
+
+private fun Renderer.renderFileComment(compilationUnit: CompilationUnit) {
   render("// Generated from \"${compilationUnit.packageRelativePath}\"")
   renderNewLine()
+}
 
+private fun Renderer.renderFileAnnotations() {
   // File annotations will be rendered here...
 }
 
