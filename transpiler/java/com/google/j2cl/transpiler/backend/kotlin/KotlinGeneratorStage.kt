@@ -58,13 +58,16 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
         .trimTrailingWhitespaces()
     }
 
+    // Render file header, collecting qualified names to import
+    val fileHeaderSource = renderedSource { renderFileHeader(compilationUnit) }
+
     // Render types, collecting qualified names to import
-    val bodySource = renderedSource { renderTypes(compilationUnit) }
+    val typesSource = renderedSource { renderTypes(compilationUnit) }
 
-    // Render header, including package and collected imports
-    val headerSource = renderedSource { renderHeader(compilationUnit) }
+    // Render package and collected imports
+    val packageAndImportsSource = renderedSource { renderPackageAndImports(compilationUnit) }
 
-    return headerSource + bodySource
+    return fileHeaderSource + packageAndImportsSource + typesSource
   }
 }
 

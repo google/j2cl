@@ -17,15 +17,16 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.CompilationUnit
 
-internal fun Renderer.renderHeader(compilationUnit: CompilationUnit) {
-  renderFileComment(compilationUnit)
-  renderPackage(compilationUnit)
-  renderImports(environment.importedSimpleNameToQualifiedNameMap.values.toSet())
-}
-
-private fun Renderer.renderFileComment(compilationUnit: CompilationUnit) {
+internal fun Renderer.renderFileHeader(compilationUnit: CompilationUnit) {
   render("// Generated from \"${compilationUnit.packageRelativePath}\"")
   renderNewLine()
+
+  // File annotations will be rendered here...
+}
+
+internal fun Renderer.renderPackageAndImports(compilationUnit: CompilationUnit) {
+  renderPackage(compilationUnit)
+  renderImports(environment.importedSimpleNameToQualifiedNameMap.values.toSet())
 }
 
 private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {
