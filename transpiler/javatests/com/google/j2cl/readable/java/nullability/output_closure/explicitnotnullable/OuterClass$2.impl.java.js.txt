@@ -1,0 +1,49 @@
+goog.module('nullability.explicitnotnullable.OuterClass.$2$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const InnerClass = goog.require('nullability.explicitnotnullable.OuterClass.InnerClass$impl');
+
+let OuterClass = goog.forwardDeclare('nullability.explicitnotnullable.OuterClass$impl');
+
+/**
+ * @template E
+ * @extends {InnerClass<string, E>}
+ */
+class $2 extends InnerClass {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {OuterClass<E>} @nodts*/
+  this.$outer_this__nullability_explicitnotnullable_OuterClass_2;
+ }
+ /** @nodts @template E @return {!$2<E>} */
+ static $create__nullability_explicitnotnullable_OuterClass(/** OuterClass<E> */ $outer_this) {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__nullability_explicitnotnullable_OuterClass_2__nullability_explicitnotnullable_OuterClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_explicitnotnullable_OuterClass_2__nullability_explicitnotnullable_OuterClass__void(/** OuterClass<E> */ $outer_this) {
+  this.$outer_this__nullability_explicitnotnullable_OuterClass_2 = $outer_this;
+  this.$ctor__nullability_explicitnotnullable_OuterClass_InnerClass__nullability_explicitnotnullable_OuterClass__void($outer_this);
+ }
+ /** @nodts */
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  InnerClass.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata($2, 'nullability.explicitnotnullable.OuterClass$2');
+
+exports = $2;
+
+//# sourceMappingURL=OuterClass$2.js.map

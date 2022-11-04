@@ -4,26 +4,15 @@ package j2ktnotpassing
 import javaemul.lang.*
 import j2ktnotpassing.DefaultNullable
 import j2ktnotpassing.NotNullable
-import kotlin.Array
-import kotlin.Int
 import kotlin.String
-import kotlin.arrayOfNulls
 import kotlin.jvm.JvmStatic
 
 open class DefaultNullable {
  companion object {
   @JvmStatic
   fun testNonNullableLambdas() {
-   val lambda: NotNullable.Consumer<String?>? = NotNullable.Consumer { s: String? ->
-   }
    val methodReference: NotNullable.Consumer<String?>? = NotNullable.Consumer { arg0: String ->
     DefaultNullable.accept(arg0)
-   }
-   val constructorReference: NotNullable.Supplier<String?>? = NotNullable.Supplier {
-    return@Supplier String()
-   }
-   val newArrayReference: NotNullable.IntFunction<Array<String?>?>? = NotNullable.IntFunction { arg0_1: Int ->
-    return@IntFunction arrayOfNulls<String>(arg0_1) as Array<String>
    }
   }
 
@@ -33,15 +22,7 @@ open class DefaultNullable {
 }
 
 open class NotNullable {
- fun interface Supplier<T> {
-  fun get(): T
- }
-
  fun interface Consumer<T> {
   fun accept(t: T)
- }
-
- fun interface IntFunction<T> {
-  fun accept(i: Int): T
  }
 }

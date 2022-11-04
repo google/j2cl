@@ -23,15 +23,7 @@ public class ExplicitNotNullable {
   interface Function<I extends @Nullable Object, O extends @Nullable Object> {
     O apply(I i);
   }
-
-  Function<String, String> i =
-      new Function<String, String>() {
-        @Override
-        public String apply(String s) {
-          return s;
-        }
-      };
-
+  
   // Replicates wildcard problems in Guava's PairwiseEquivalence.
   static class DependentTypeParameters<E, T extends @Nullable E> {
     DependentTypeParameters<E, T> getThis() {
@@ -41,16 +33,5 @@ public class ExplicitNotNullable {
 
   DependentTypeParameters<?, ?> testDependentWildcards(DependentTypeParameters<?, ?> x) {
     return x.getThis();
-  }
-
-  static String testParametrizedMethod(
-      Function<? super String, ? extends String> f, String string) {
-    // The type of "localString" is "@Nullable String".
-    String localString = string;
-
-    // The type of "apply" is inferred as "@Nullable String apply(@Nullable String)", so "!!" is not
-    // inserted for "localString" parameter. But in Kotlin, the inferred type of "apply" is
-    // "fun apply(String): String", and "!!" is required.
-    return f.apply(localString);
   }
 }

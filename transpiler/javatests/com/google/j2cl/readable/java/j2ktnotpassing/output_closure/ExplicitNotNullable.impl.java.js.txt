@@ -3,18 +3,12 @@ goog.module('j2ktnotpassing.ExplicitNotNullable$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $1 = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.$1$impl');
 let DependentTypeParameters = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters$impl');
-let ExplicitNotNullable_Function = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.Function$impl');
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class ExplicitNotNullable extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {!ExplicitNotNullable_Function<string, string>} @nodts*/
-  this.f_i__j2ktnotpassing_ExplicitNotNullable;
  }
  /** @nodts @return {!ExplicitNotNullable} */
  static $create__() {
@@ -26,21 +20,10 @@ class ExplicitNotNullable extends j_l_Object {
  /** @nodts */
  $ctor__j2ktnotpassing_ExplicitNotNullable__void() {
   this.$ctor__java_lang_Object__void();
-  this.$init__void_$p_j2ktnotpassing_ExplicitNotNullable();
  }
  /** @nodts @return {!DependentTypeParameters<?, ?>} */
  m_testDependentWildcards__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing(/** !DependentTypeParameters<?, ?> */ x) {
   return x.m_getThis__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing();
- }
- /** @nodts @return {string} */
- static m_testParametrizedMethod__j2ktnotpassing_ExplicitNotNullable_Function__java_lang_String__java_lang_String(/** !ExplicitNotNullable_Function<?, ?> */ f, /** string */ string_1) {
-  ExplicitNotNullable.$clinit();
-  let localString = string_1;
-  return /**@type {string}*/ ($Casts.$to(f.m_apply__java_lang_Object__java_lang_Object(localString), j_l_String));
- }
- /** @private @nodts */
- $init__void_$p_j2ktnotpassing_ExplicitNotNullable() {
-  this.f_i__j2ktnotpassing_ExplicitNotNullable = $1.$create__j2ktnotpassing_ExplicitNotNullable(this);
  }
  /** @nodts */
  static $clinit() {
@@ -54,11 +37,7 @@ class ExplicitNotNullable extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {
-  $1 = goog.module.get('j2ktnotpassing.ExplicitNotNullable.$1$impl');
-  j_l_String = goog.module.get('java.lang.String$impl');
-  $Casts = goog.module.get('vmbootstrap.Casts$impl');
- }
+ static $loadModules() {}
 }
 $Util.$setClassMetadata(ExplicitNotNullable, 'j2ktnotpassing.ExplicitNotNullable');
 

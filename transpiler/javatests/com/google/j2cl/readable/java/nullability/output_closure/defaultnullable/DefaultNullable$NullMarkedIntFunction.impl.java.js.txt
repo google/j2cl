@@ -1,0 +1,43 @@
+goog.module('nullability.defaultnullable.DefaultNullable.NullMarkedIntFunction$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.NullMarkedIntFunction.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class NullMarkedIntFunction {
+ /** @abstract @nodts @return {T} */
+ m_accept__int__java_lang_Object(/** number */ i) {}
+ /** @nodts @template T @return {!NullMarkedIntFunction<T>} */
+ static $adapt(/** ?function(number):T */ fn) {
+  NullMarkedIntFunction.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  NullMarkedIntFunction.$clinit = () =>{};
+  NullMarkedIntFunction.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('nullability.defaultnullable.DefaultNullable.NullMarkedIntFunction.$LambdaAdaptor$impl');
+ }
+}
+NullMarkedIntFunction.$markImplementor(/**@type {Function}*/ (NullMarkedIntFunction));
+$Util.$setClassMetadataForInterface(NullMarkedIntFunction, 'nullability.defaultnullable.DefaultNullable$NullMarkedIntFunction');
+
+exports = NullMarkedIntFunction;
+
+//# sourceMappingURL=DefaultNullable$NullMarkedIntFunction.js.map

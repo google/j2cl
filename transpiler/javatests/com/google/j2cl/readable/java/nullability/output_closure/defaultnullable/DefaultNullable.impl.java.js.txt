@@ -7,6 +7,9 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let Consumer = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.Consumer$impl');
+let NullMarkedConsumer = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.NullMarkedConsumer$impl');
+let NullMarkedIntFunction = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.NullMarkedIntFunction$impl');
+let NullMarkedSupplier = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.NullMarkedSupplier$impl');
 let ParameterizedDefaultNullability = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.ParameterizedDefaultNullability$impl');
 let ParameterizedNonNullable = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.ParameterizedNonNullable$impl');
 let ParameterizedNullable = goog.forwardDeclare('nullability.defaultnullable.DefaultNullable.ParameterizedNullable$impl');
@@ -248,6 +251,23 @@ class DefaultNullable extends j_l_Object {
   let nonNullStringConsumer = /**@type {Consumer<string>}*/ (null);
   let b = Consumer.$isInstance(null);
  }
+ /** @nodts */
+ static m_testNonNullableLambdas__void() {
+  DefaultNullable.$clinit();
+  let lambda = NullMarkedConsumer.$adapt((s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+  });
+  let constructorReference = NullMarkedSupplier.$adapt(() =>{
+   return j_l_String.$create__();
+  });
+  let newArrayReference = NullMarkedIntFunction.$adapt((/** number */ arg0) =>{
+   return /**@type {!Array<?string>}*/ ($Arrays.$create([arg0], j_l_String));
+  });
+ }
+ /** @nodts */
+ static m_accept__java_lang_String__void(/** ?string */ s) {
+  DefaultNullable.$clinit();
+ }
  /** @private @nodts */
  $init__void_$p_nullability_defaultnullable_DefaultNullable() {
   this.f_f1__nullability_defaultnullable_DefaultNullable_ = 'Hello';
@@ -279,6 +299,9 @@ class DefaultNullable extends j_l_Object {
   j_l_String = goog.module.get('java.lang.String$impl');
   ArrayList = goog.module.get('java.util.ArrayList$impl');
   Consumer = goog.module.get('nullability.defaultnullable.DefaultNullable.Consumer$impl');
+  NullMarkedConsumer = goog.module.get('nullability.defaultnullable.DefaultNullable.NullMarkedConsumer$impl');
+  NullMarkedIntFunction = goog.module.get('nullability.defaultnullable.DefaultNullable.NullMarkedIntFunction$impl');
+  NullMarkedSupplier = goog.module.get('nullability.defaultnullable.DefaultNullable.NullMarkedSupplier$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
   $Objects = goog.module.get('vmbootstrap.Objects$impl');

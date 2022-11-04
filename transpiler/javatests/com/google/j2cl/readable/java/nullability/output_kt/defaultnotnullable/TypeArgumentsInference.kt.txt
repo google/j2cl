@@ -10,7 +10,7 @@ open class TypeArgumentsInference {
  companion object {
   @JvmStatic
   fun <K> wildcardPair(): TypeArgumentsInference.Pair<K, *> {
-   return TypeArgumentsInference.Pair<K, Any?>() as TypeArgumentsInference.Pair<K, *>
+   return TypeArgumentsInference.Pair<K, Any>()
   }
 
   @JvmStatic

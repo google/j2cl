@@ -1,0 +1,51 @@
+goog.module('nullability.defaultnullable.DefaultNullable.NullMarkedConsumer.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NullMarkedConsumer = goog.require('nullability.defaultnullable.DefaultNullable.NullMarkedConsumer$impl');
+
+/**
+ * @template T
+ * @implements {NullMarkedConsumer<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(T):void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(T):void} @nodts*/
+  this.f_fn__nullability_defaultnullable_DefaultNullable_NullMarkedConsumer_$LambdaAdaptor;
+  this.$ctor__nullability_defaultnullable_DefaultNullable_NullMarkedConsumer_$LambdaAdaptor__nullability_defaultnullable_DefaultNullable_NullMarkedConsumer_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__nullability_defaultnullable_DefaultNullable_NullMarkedConsumer_$LambdaAdaptor__nullability_defaultnullable_DefaultNullable_NullMarkedConsumer_$JsFunction__void(/** ?function(T):void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__nullability_defaultnullable_DefaultNullable_NullMarkedConsumer_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts */
+ m_accept__java_lang_Object__void(/** T */ arg0) {
+  {
+   let $function = this.f_fn__nullability_defaultnullable_DefaultNullable_NullMarkedConsumer_$LambdaAdaptor;
+   $function(arg0);
+  }
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+NullMarkedConsumer.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'nullability.defaultnullable.DefaultNullable$NullMarkedConsumer$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=DefaultNullable$NullMarkedConsumer$$LambdaAdaptor.js.map

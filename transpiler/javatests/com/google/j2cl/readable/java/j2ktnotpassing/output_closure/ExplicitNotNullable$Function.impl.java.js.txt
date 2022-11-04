@@ -11,7 +11,7 @@ let $LambdaAdaptor = goog.forwardDeclare('j2ktnotpassing.ExplicitNotNullable.Fun
 class ExplicitNotNullable_Function {
  /** @abstract @nodts @return {O} */
  m_apply__java_lang_Object__java_lang_Object(/** I */ i) {}
- /** @nodts @template I, O @return {ExplicitNotNullable_Function<I, O>} */
+ /** @nodts @template I, O @return {!ExplicitNotNullable_Function<I, O>} */
  static $adapt(/** ?function(I):O */ fn) {
   ExplicitNotNullable_Function.$clinit();
   return /**@type {!$LambdaAdaptor<I, O>}*/ (new $LambdaAdaptor(fn));

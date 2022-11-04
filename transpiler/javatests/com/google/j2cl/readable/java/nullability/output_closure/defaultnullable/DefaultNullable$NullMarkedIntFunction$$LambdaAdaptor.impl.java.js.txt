@@ -1,0 +1,49 @@
+goog.module('nullability.defaultnullable.DefaultNullable.NullMarkedIntFunction.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NullMarkedIntFunction = goog.require('nullability.defaultnullable.DefaultNullable.NullMarkedIntFunction$impl');
+
+/**
+ * @template T
+ * @implements {NullMarkedIntFunction<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(number):T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(number):T} @nodts*/
+  this.f_fn__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction_$LambdaAdaptor;
+  this.$ctor__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction_$LambdaAdaptor__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction_$LambdaAdaptor__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction_$JsFunction__void(/** ?function(number):T */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {T} */
+ m_accept__int__java_lang_Object(/** number */ arg0) {
+  let /** ?function(number):T */ $function;
+  return ($function = this.f_fn__nullability_defaultnullable_DefaultNullable_NullMarkedIntFunction_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+NullMarkedIntFunction.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'nullability.defaultnullable.DefaultNullable$NullMarkedIntFunction$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=DefaultNullable$NullMarkedIntFunction$$LambdaAdaptor.js.map

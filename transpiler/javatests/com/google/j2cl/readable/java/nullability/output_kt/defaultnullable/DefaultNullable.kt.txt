@@ -7,9 +7,11 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
 import kotlin.Double
+import kotlin.Int
 import kotlin.String
 import kotlin.Unit
 import kotlin.arrayOf
+import kotlin.arrayOfNulls
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
 import kotlin.jvm.JvmField
@@ -220,6 +222,21 @@ open class DefaultNullable {
    val nonNullStringConsumer: DefaultNullable.Consumer<String>? = null as DefaultNullable.Consumer<String>?
    val b: Boolean = null is DefaultNullable.Consumer<*>
   }
+
+  @JvmStatic
+  fun testNonNullableLambdas() {
+   val lambda: DefaultNullable.NullMarkedConsumer<String?>? = DefaultNullable.NullMarkedConsumer { s: String? ->
+   }
+   val constructorReference: DefaultNullable.NullMarkedSupplier<String?>? = DefaultNullable.NullMarkedSupplier {
+    return@NullMarkedSupplier String()
+   } as DefaultNullable.NullMarkedSupplier<String?>?
+   val newArrayReference: DefaultNullable.NullMarkedIntFunction<Array<String?>?>? = DefaultNullable.NullMarkedIntFunction { arg0: Int ->
+    return@NullMarkedIntFunction arrayOfNulls<String>(arg0) as Array<String>
+   } as DefaultNullable.NullMarkedIntFunction<Array<String?>?>?
+  }
+
+  @JvmStatic
+  fun accept(s: String?) {}
  }
 
  interface NullableBound<T: DefaultNullable.NullableBound<T>?> {}
@@ -327,5 +344,17 @@ open class DefaultNullable {
 
  fun interface Consumer<T> {
   fun accept(t: T)
+ }
+
+ fun interface NullMarkedSupplier<T> {
+  fun get(): T
+ }
+
+ fun interface NullMarkedConsumer<T> {
+  fun accept(t: T)
+ }
+
+ fun interface NullMarkedIntFunction<T> {
+  fun accept(i: Int): T
  }
 }

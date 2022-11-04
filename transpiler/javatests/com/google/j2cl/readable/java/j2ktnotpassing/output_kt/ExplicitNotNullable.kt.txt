@@ -4,27 +4,10 @@ package j2ktnotpassing
 import javaemul.lang.*
 import j2ktnotpassing.ExplicitNotNullable
 import kotlin.Any
-import kotlin.String
-import kotlin.jvm.JvmField
-import kotlin.jvm.JvmStatic
 
 open class ExplicitNotNullable {
- @JvmField var i: ExplicitNotNullable.Function<String, String> = object : ExplicitNotNullable.Function<String?, String?> {
-  open override fun apply(s: String): String {
-   return s
-  }
- }
-
  open fun testDependentWildcards(x: ExplicitNotNullable.DependentTypeParameters<*, *>): ExplicitNotNullable.DependentTypeParameters<*, *> {
   return x!!.getThis()
- }
-
- companion object {
-  @JvmStatic
-  fun testParametrizedMethod(f: ExplicitNotNullable.Function<in String, out String>, string: String): String {
-   val localString: String? = string
-   return f!!.apply(localString)!!
-  }
  }
 
  fun interface Function<I, O> {

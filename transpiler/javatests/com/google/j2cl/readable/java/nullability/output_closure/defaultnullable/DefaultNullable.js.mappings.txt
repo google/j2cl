@@ -248,6 +248,31 @@
 [nonNullStringConsumer] => [nonNullStringConsumer] "nonNullStringConsumer"
 [boolean b = null instanceof Consumer<?>;] => [let b = Consumer.$isInstance(null);] "nullability.defaultnullable.DefaultNullable.testLocalNullability"
 [b] => [b] "b"
+[testNonNullableLambdas] => [m_testNonNullableLambdas__void]
+[{
+    NullMarkedConsumer<String> lambda = s -> {};
+...    NullMarkedIntFunction<String[]> newArrayReference = String[]::new;
+  }] => [DefaultNullable.$clinit();] "nullability.defaultnullable.DefaultNullable.testNonNullableLambdas"
+[NullMarkedConsumer<String> lambda = s -> {};] => [let lambda = NullMarkedConsumer.$adapt((s) =>{
+   let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+  });] "nullability.defaultnullable.DefaultNullable.testNonNullableLambdas"
+[lambda] => [lambda] "lambda"
+[s] => [s] "s"
+[s -> {}] => [let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));] "nullability.defaultnullable.DefaultNullable.<lambda in testNonNullableLambdas>"
+[s] => [s_1] "s"
+[NullMarkedSupplier<String> constructorReference = String::new;] => [let constructorReference = NullMarkedSupplier.$adapt(() =>{
+   return j_l_String.$create__();
+  });] "nullability.defaultnullable.DefaultNullable.testNonNullableLambdas"
+[constructorReference] => [constructorReference] "constructorReference"
+[String::new] => [return j_l_String.$create__();] "nullability.defaultnullable.DefaultNullable.<lambda in testNonNullableLambdas>"
+[NullMarkedIntFunction<String[]> newArrayReference = String[]::new;] => [let newArrayReference = NullMarkedIntFunction.$adapt((/** number */ arg0) =>{
+   return /**@type {!Array<?string>}*/ ($Arrays.$create([arg0], j_l_String));
+  });] "nullability.defaultnullable.DefaultNullable.testNonNullableLambdas"
+[newArrayReference] => [newArrayReference] "newArrayReference"
+[String[]::new] => [return /**@type {!Array<?string>}*/ ($Arrays.$create([arg0], j_l_String));] "nullability.defaultnullable.DefaultNullable.<lambda in testNonNullableLambdas>"
+[accept] => [m_accept__java_lang_String__void]
+[s] => [s] "s"
+[{}] => [DefaultNullable.$clinit();] "nullability.defaultnullable.DefaultNullable.accept"
 [DefaultNullable] => [$init__void_$p_nullability_defaultnullable_DefaultNullable]
 [private String f1 = "Hello";] => [this.f_f1__nullability_defaultnullable_DefaultNullable_ = 'Hello';] "nullability.defaultnullable.DefaultNullable.<init>"
 [@Nullable private String f2 = null;] => [this.f_f2__nullability_defaultnullable_DefaultNullable_ = null;] "nullability.defaultnullable.DefaultNullable.<init>"

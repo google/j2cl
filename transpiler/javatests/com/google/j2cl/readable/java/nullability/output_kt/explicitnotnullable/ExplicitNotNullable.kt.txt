@@ -102,6 +102,12 @@ open class ExplicitNotNullable {
   this.nonNullableCollection = nc
  }
 
+ @JvmField var i: ExplicitNotNullable.Function<String, String> = object : ExplicitNotNullable.Function<String, String> {
+  open override fun apply(s: String): String {
+   return s
+  }
+ }
+
  open fun testDependentWildcards(x: ExplicitNotNullable.DependentTypeParameters<*, *>): ExplicitNotNullable.DependentTypeParameters<*, *> {
   return x
  }
@@ -266,10 +272,10 @@ open class ExplicitNotNullable {
    } as ExplicitNotNullable.Consumer<String>?
    val newObject: ExplicitNotNullable.Supplier<Any>? = ExplicitNotNullable.Supplier {
     return@Supplier Any()
-   } as ExplicitNotNullable.Supplier<Any>?
+   }
    val newArray: ExplicitNotNullable.IntFunction<Array<Any>>? = ExplicitNotNullable.IntFunction { arg0_2: Int ->
     return@IntFunction arrayOfNulls<Any>(arg0_2) as Array<Any>
-   } as ExplicitNotNullable.IntFunction<Array<Any>>?
+   }
   }
 
   @JvmStatic
@@ -289,6 +295,12 @@ open class ExplicitNotNullable {
    val nullableStringConsumer: ExplicitNotNullable.Consumer<String?>? = null as ExplicitNotNullable.Consumer<String?>?
    val nonNullStringConsumer: ExplicitNotNullable.Consumer<String>? = null as ExplicitNotNullable.Consumer<String>?
    val b: Boolean = null is ExplicitNotNullable.Consumer<*>
+  }
+
+  @JvmStatic
+  fun testParametrizedMethod(f: ExplicitNotNullable.Function<in String, out String>, string: String): String {
+   val localString: String? = string
+   return f!!.apply(localString as String)
   }
  }
 
@@ -409,6 +421,10 @@ open class ExplicitNotNullable {
   fun accept(i: Int): T
  }
 
+ fun interface Function<I, O> {
+  fun apply(i: I): O
+ }
+
  open class DependentTypeParameters<E: Any, T: E?> {
   open fun getThis(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this
@@ -421,4 +437,13 @@ open class DefaultNullable {
   @JvmStatic
   fun nullableAccept(s: String?) {}
  }
+}
+
+open class OuterClass<E: Any> {
+ init {
+  object : InnerClass<E>() {}
+  object : InnerClass<String>() {}
+ }
+
+ open inner class InnerClass<E: Any> {}
 }

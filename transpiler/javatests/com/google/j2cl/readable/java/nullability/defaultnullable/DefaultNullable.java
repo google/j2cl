@@ -20,6 +20,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
 public class DefaultNullable {
@@ -324,4 +325,27 @@ public class DefaultNullable {
 
     boolean b = null instanceof Consumer<?>;
   }
+
+  @NullMarked
+  interface NullMarkedSupplier<T extends @Nullable Object> {
+    T get();
+  }
+
+  @NullMarked
+  interface NullMarkedConsumer<T extends @Nullable Object> {
+    void accept(T t);
+  }
+
+  @NullMarked
+  interface NullMarkedIntFunction<T extends @Nullable Object> {
+    T accept(int i);
+  }
+
+  static void testNonNullableLambdas() {
+    NullMarkedConsumer<String> lambda = s -> {};
+    NullMarkedSupplier<String> constructorReference = String::new;
+    NullMarkedIntFunction<String[]> newArrayReference = String[]::new;
+  }
+
+  static void accept(String s) {}
 }

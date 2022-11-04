@@ -1,0 +1,43 @@
+goog.module('nullability.explicitnotnullable.ExplicitNotNullable.Function$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('nullability.explicitnotnullable.ExplicitNotNullable.Function.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template I, O
+ */
+class ExplicitNotNullable_Function {
+ /** @abstract @nodts @return {O} */
+ m_apply__java_lang_Object__java_lang_Object(/** I */ i) {}
+ /** @nodts @template I, O @return {!ExplicitNotNullable_Function<I, O>} */
+ static $adapt(/** ?function(I):O */ fn) {
+  ExplicitNotNullable_Function.$clinit();
+  return /**@type {!$LambdaAdaptor<I, O>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @nodts */
+ static $clinit() {
+  ExplicitNotNullable_Function.$clinit = () =>{};
+  ExplicitNotNullable_Function.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nullability_explicitnotnullable_ExplicitNotNullable_Function = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nullability_explicitnotnullable_ExplicitNotNullable_Function;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('nullability.explicitnotnullable.ExplicitNotNullable.Function.$LambdaAdaptor$impl');
+ }
+}
+ExplicitNotNullable_Function.$markImplementor(/**@type {Function}*/ (ExplicitNotNullable_Function));
+$Util.$setClassMetadataForInterface(ExplicitNotNullable_Function, 'nullability.explicitnotnullable.ExplicitNotNullable$Function');
+
+exports = ExplicitNotNullable_Function;
+
+//# sourceMappingURL=ExplicitNotNullable$Function.js.map

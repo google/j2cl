@@ -1,0 +1,48 @@
+goog.module('nullability.explicitnotnullable.OuterClass.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let OuterClass = goog.forwardDeclare('nullability.explicitnotnullable.OuterClass$impl');
+
+/**
+ * @template E, E_1
+ */
+class InnerClass extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {OuterClass<E_1>} @nodts*/
+  this.$outer_this__nullability_explicitnotnullable_OuterClass_InnerClass;
+ }
+ /** @nodts @template E, E_1 @return {!InnerClass<E, E_1>} */
+ static $create__nullability_explicitnotnullable_OuterClass(/** OuterClass<E_1> */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__nullability_explicitnotnullable_OuterClass_InnerClass__nullability_explicitnotnullable_OuterClass__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__nullability_explicitnotnullable_OuterClass_InnerClass__nullability_explicitnotnullable_OuterClass__void(/** OuterClass<E_1> */ $outer_this) {
+  this.$outer_this__nullability_explicitnotnullable_OuterClass_InnerClass = $outer_this;
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClass, 'nullability.explicitnotnullable.OuterClass$InnerClass');
+
+exports = InnerClass;
+
+//# sourceMappingURL=OuterClass$InnerClass.js.map

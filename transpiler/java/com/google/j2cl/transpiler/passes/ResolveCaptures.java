@@ -227,7 +227,11 @@ public class ResolveCaptures extends NormalizationPass {
                   .addArgumentAndUpdateDescriptor(
                       0,
                       invocation.getQualifier(),
-                      targetTypeDescriptor.getEnclosingTypeDescriptor())
+                      // Consider the outer instance type to be nullable to be make the type
+                      // consistent
+                      // accross all places where it is used (backing field and constructor
+                      // parameters).
+                      targetTypeDescriptor.getEnclosingTypeDescriptor().toNullable())
                   .setQualifier(null);
             }
             return invocationBuilder.build();
@@ -434,7 +438,12 @@ public class ResolveCaptures extends NormalizationPass {
         .setEnclosingTypeDescriptor(innerTypeDescriptor.toUnparameterizedTypeDescriptor())
         .setName("this")
         .setTypeDescriptor(
-            innerTypeDescriptor.getEnclosingTypeDeclaration().toUnparameterizedTypeDescriptor())
+            innerTypeDescriptor
+                .getEnclosingTypeDeclaration()
+                .toUnparameterizedTypeDescriptor()
+                // Consider the outer instance type to be nullable to be make the type consistent
+                // accross all places where it is used (backing field and constructor parameters).
+                .toNullable())
         .setSynthetic(true)
         .setFinal(true)
         .setSynthetic(true)
