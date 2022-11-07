@@ -8,12 +8,15 @@
 [TypeWildCards] => [return $instance;] "typewildcards.TypeWildCards.<synthetic: ctor_create>"
 [TypeWildCards] => [$ctor__typewildcards_TypeWildCards__void]
 [TypeWildCards] => [this.$ctor__java_lang_Object__void();] "typewildcards.TypeWildCards.<init>"
-[unbounded] => [m_unbounded__typewildcards_GenericType__void]
+[unbounded] => [m_unbounded__typewildcards_GenericType__java_lang_Object]
 [g] => [g] "g"
-[upperBound] => [m_upperBound__typewildcards_GenericType__void]
+[return g.get();] => [return g.m_get__java_lang_Object_$pp_typewildcards();] "typewildcards.TypeWildCards.unbounded"
+[upperBound] => [m_upperBound__typewildcards_GenericType__typewildcards_Bar]
 [g] => [g] "g"
-[lowerBound] => [m_lowerBound__typewildcards_GenericType__void]
+[return g.get();] => [return /**@type {Bar}*/ ($Casts.$to(g.m_get__java_lang_Object_$pp_typewildcards(), Bar));] "typewildcards.TypeWildCards.upperBound"
+[lowerBound] => [m_lowerBound__typewildcards_GenericType__java_lang_Object]
 [g] => [g] "g"
+[return g.get();] => [return g.m_get__java_lang_Object_$pp_typewildcards();] "typewildcards.TypeWildCards.lowerBound"
 [unboundedRecursive] => [m_unboundedRecursive__typewildcards_RecursiveType__void]
 [g] => [g] "g"
 [upperBoundRecursive] => [m_upperBoundRecursive__typewildcards_GenericType__void]
@@ -23,9 +26,9 @@
 [deepRecursiveType] => [m_deepRecursiveType__typewildcards_DeepRecursiveType__void]
 [t] => [t] "t"
 [test] => [m_test__void]
-[unbounded(new GenericType<TypeWildCards>());] => [this.m_unbounded__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
-[upperBound(new GenericType<TypeWildCards>());] => [this.m_upperBound__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
-[lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__typewildcards_GenericType__void(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
+[unbounded(new GenericType<Bar>());] => [this.m_unbounded__typewildcards_GenericType__java_lang_Object(/**@type {!GenericType<Bar>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
+[upperBound(new GenericType<Bar>());] => [this.m_upperBound__typewildcards_GenericType__typewildcards_Bar(/**@type {!GenericType<Bar>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
+[lowerBound(new GenericType<Bar>());] => [this.m_lowerBound__typewildcards_GenericType__java_lang_Object(/**@type {!GenericType<Bar>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
 [testBoundedTypeMemberAccess] => [m_testBoundedTypeMemberAccess__typewildcards_TypeWildCards_A__void]
 [t] => [t] "t"
 [{

@@ -1,0 +1,40 @@
+goog.module('typewildcards.Bar$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Bar extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Bar} */
+ static $create__() {
+  Bar.$clinit();
+  let $instance = new Bar();
+  $instance.$ctor__typewildcards_Bar__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__typewildcards_Bar__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Bar.$clinit = () =>{};
+  Bar.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Bar;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Bar, 'typewildcards.Bar');
+
+exports = Bar;
+
+//# sourceMappingURL=Bar.js.map

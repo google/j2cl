@@ -191,7 +191,22 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
         // Create an unique key that does not conflict with the keys used for other types nor for
         // type variables coming from JDT, which follow "<declaring_type>:<name>...".
         // {@see org.eclipse.jdt.core.BindingKey}.
-        .setUniqueKey("<??>" + bound.getUniqueId())
+        .setUniqueKey("<??_^_>" + bound.getUniqueId())
+        .setName("?")
+        .build();
+  }
+
+  /** Creates a wildcard type variable with a specific lower bound. */
+  public static TypeVariable createWildcardWithLowerBound(TypeDescriptor bound) {
+    return TypeVariable.newBuilder()
+        .setWildcardOrCapture(true)
+        .setNullable(false)
+        .setUpperBoundTypeDescriptorSupplier(() -> TypeDescriptors.get().javaLangObject)
+        .setLowerBoundTypeDescriptor(bound)
+        // Create an unique key that does not conflict with the keys used for other types nor for
+        // type variables coming from JDT, which follow "<declaring_type>:<name>...".
+        // {@see org.eclipse.jdt.core.BindingKey}.
+        .setUniqueKey("<??_v_>" + bound.getUniqueId())
         .setName("?")
         .build();
   }

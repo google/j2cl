@@ -348,6 +348,7 @@ class JdtEnvironment {
               inNullMarkedScope);
       uniqueKey +=
           (boundTypeDescriptor.isNullable() ? "?" : "!")
+              + (typeBinding.getBound().isUpperbound() ? "_^_" : "_v_")
               + Splitter.on('\n')
                   .splitToStream(typeBinding.getBound().toString())
                   .findFirst()

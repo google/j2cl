@@ -2,10 +2,12 @@
 package typewildcards
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Int
 import kotlin.String
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import typewildcards.Bar
 import typewildcards.DeepRecursiveType
 import typewildcards.Function
 import typewildcards.GenericType
@@ -20,7 +22,13 @@ fun interface Function<I, O> {
 
 interface List<I> {}
 
-open class GenericType<T> {}
+open class GenericType<T> {
+ open fun get(): T {
+  return null as T
+ }
+}
+
+open class Bar {}
 
 open class RecursiveType<T: RecursiveType<T>?> {
  constructor(wildcardParameter: RecursiveType<*>?)
@@ -33,11 +41,17 @@ open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
 }
 
 open class TypeWildCards {
- open fun unbounded(g: GenericType<*>?) {}
+ open fun unbounded(g: GenericType<*>?): Any? {
+  return g!!.get()
+ }
 
- open fun upperBound(g: GenericType<out TypeWildCards?>?) {}
+ open fun upperBound(g: GenericType<out Bar?>?): Bar? {
+  return g!!.get()
+ }
 
- open fun lowerBound(g: GenericType<in TypeWildCards?>?) {}
+ open fun lowerBound(g: GenericType<in Bar?>?): Any? {
+  return g!!.get()
+ }
 
  open fun unboundedRecursive(g: RecursiveType<*>?) {}
 
@@ -48,9 +62,9 @@ open class TypeWildCards {
  open fun deepRecursiveType(t: DeepRecursiveType<*>?) {}
 
  open fun test() {
-  this.unbounded(GenericType<TypeWildCards?>() as GenericType<*>?)
-  this.upperBound(GenericType<TypeWildCards?>() as GenericType<out TypeWildCards?>?)
-  this.lowerBound(GenericType<TypeWildCards?>() as GenericType<in TypeWildCards?>?)
+  this.unbounded(GenericType<Bar?>() as GenericType<*>?)
+  this.upperBound(GenericType<Bar?>() as GenericType<out Bar?>?)
+  this.lowerBound(GenericType<Bar?>() as GenericType<in Bar?>?)
  }
 
  open fun testInferredGenericIntersection() {

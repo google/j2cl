@@ -21,7 +21,13 @@ interface Function<I, O> {
 
 interface List<I> {}
 
-class GenericType<T> {}
+class GenericType<T> {
+  T get() {
+    return null;
+  }
+}
+
+class Bar {}
 
 class RecursiveType<T extends RecursiveType<T>> {
   public RecursiveType(RecursiveType<?> wildcardParameter) {}
@@ -36,11 +42,17 @@ class RecursiveSubtype extends RecursiveType<RecursiveSubtype> {
 }
 
 public class TypeWildCards {
-  public void unbounded(GenericType<?> g) {}
+  public Object unbounded(GenericType<?> g) {
+    return g.get();
+  }
 
-  public void upperBound(GenericType<? extends TypeWildCards> g) {}
+  public Bar upperBound(GenericType<? extends Bar> g) {
+    return g.get();
+  }
 
-  public void lowerBound(GenericType<? super TypeWildCards> g) {}
+  public Object lowerBound(GenericType<? super Bar> g) {
+    return g.get();
+  }
 
   public void unboundedRecursive(RecursiveType<?> g) {}
 
@@ -51,9 +63,9 @@ public class TypeWildCards {
   public void deepRecursiveType(DeepRecursiveType<?> t) {}
 
   public void test() {
-    unbounded(new GenericType<TypeWildCards>());
-    upperBound(new GenericType<TypeWildCards>());
-    lowerBound(new GenericType<TypeWildCards>());
+    unbounded(new GenericType<Bar>());
+    upperBound(new GenericType<Bar>());
+    lowerBound(new GenericType<Bar>());
   }
 
   private interface X {
