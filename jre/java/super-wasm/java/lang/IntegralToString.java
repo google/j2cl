@@ -15,6 +15,9 @@
  */
 package java.lang;
 
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+
 /**
  * Converts integral types to strings. This class is public but hidden so that it can also be used
  * by java.util.Formatter to speed up %d. This class is in java.lang so that it can take advantage
@@ -92,84 +95,25 @@ final class IntegralToString {
 
   private IntegralToString() {}
 
-  /** Equivalent to Integer.toString(i, radix). */
-  public static String intToString(int i, int radix) {
-    if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
-      radix = 10;
-    }
-    if (radix == 10) {
-      return intToString(i);
-    }
-    /*
-     * If i is positive, negate it. This is the opposite of what one might
-     * expect. It is necessary because the range of the negative values is
-     * strictly larger than that of the positive values: there is no
-     * positive value corresponding to Integer.MIN_VALUE.
-     */
-    boolean negative = false;
-    if (i < 0) {
-      negative = true;
-    } else {
-      i = -i;
-    }
-    int bufLen = BUFFER_LENGTH;
-    char[] buf = BUFFER;
-    int cursor = bufLen;
-    do {
-      int q = i / radix;
-      buf[--cursor] = DIGITS[radix * q - i];
-      i = q;
-    } while (i != 0);
-    if (negative) {
-      buf[--cursor] = '-';
-    }
-    return new String(buf, cursor, bufLen - cursor);
-  }
-  /** Equivalent to Integer.toString(i). */
   public static String intToString(int i) {
-    return convertInt(null, i);
+    return intToString(i, 10);
   }
-  /** Equivalent to sb.append(Integer.toString(i)). */
+
+  public static String intToString(int i, int radix) {
+    return new String(fromNumber(i, radix));
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "String.fromNumber")
+  private static native String.NativeString fromNumber(int i, int radix);
+
+  private static final int SMI_MAX = Integer.MAX_VALUE >> 1;
+  private static final int SMI_MIN = Integer.MIN_VALUE >> 1;
+
   public static void appendInt(AbstractStringBuilder sb, int i) {
-    convertInt(sb, i);
-  }
-  /**
-   * Returns the string representation of i and leaves sb alone if sb is null. Returns null and
-   * appends the string representation of i to sb if sb is non-null.
-   */
-  private static String convertInt(AbstractStringBuilder sb, int i) {
-    boolean negative = false;
-    String quickResult = null;
-    if (i < 0) {
-      negative = true;
-      i = -i;
-      if (i < 100) {
-        if (i < 0) {
-          // If -n is still negative, n is Integer.MIN_VALUE
-          quickResult = "-2147483648";
-        } else {
-          quickResult = SMALL_NEGATIVE_VALUES[i];
-          if (quickResult == null) {
-            SMALL_NEGATIVE_VALUES[i] =
-                quickResult = i < 10 ? stringOf('-', ONES[i]) : stringOf('-', TENS[i], ONES[i]);
-          }
-        }
-      }
-    } else {
-      if (i < 100) {
-        quickResult = SMALL_NONNEGATIVE_VALUES[i];
-        if (quickResult == null) {
-          SMALL_NONNEGATIVE_VALUES[i] =
-              quickResult = i < 10 ? stringOf(ONES[i]) : stringOf(TENS[i], ONES[i]);
-        }
-      }
-    }
-    if (quickResult != null) {
-      if (sb != null) {
-        sb.append0(quickResult);
-        return null;
-      }
-      return quickResult;
+    // Only use fast path for SMI numbers, otherwise JS is very slow.
+    if (SMI_MIN <= i && i <= SMI_MAX) {
+      sb.append0(intToString(i));
+      return;
     }
     int bufLen = BUFFER_LENGTH;
     char[] buf = BUFFER;
@@ -191,15 +135,10 @@ final class IntegralToString {
       buf[--cursor] = DIGITS[r];
       i = q;
     }
-    if (negative) {
+    if (i < 0) {
       buf[--cursor] = '-';
     }
-    if (sb != null) {
-      sb.append0(buf, cursor, bufLen - cursor);
-      return null;
-    } else {
-      return new String(buf, cursor, bufLen - cursor);
-    }
+    sb.append0(buf, cursor, bufLen - cursor);
   }
 
   public static String longToString(long v, int radix) {
@@ -260,7 +199,11 @@ final class IntegralToString {
   private static String convertLong(AbstractStringBuilder sb, long n) {
     int i = (int) n;
     if (i == n) {
-      return convertInt(sb, i);
+      if (sb == null) {
+        return intToString(i);
+      }
+      appendInt(sb, i);
+      return null;
     }
     boolean negative = (n < 0);
     if (negative) {
@@ -408,13 +351,5 @@ final class IntegralToString {
     } while (value != 0);
 
     return String.valueOf(buf, pos, bufSize - pos);
-  }
-
-  private static String stringOf(char arg) {
-    return String.valueOf(arg);
-  }
-
-  private static String stringOf(char... args) {
-    return String.valueOf(args);
   }
 }

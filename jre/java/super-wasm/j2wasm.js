@@ -104,7 +104,7 @@ function createImportObject(userImports) {
         a == b ? 0 : (a < b ? -1 : 1),
     'String.equalsIgnoreCase': (/** string */ a, /** string */ b) =>
         a.toLowerCase() == b.toLowerCase(),
-
+    'String.fromNumber': (/** number */ n, /** number */ r) => n.toString(r),
     // Regex
     'RegExp.create': (/** string */ p, /** string */ f) => new RegExp(p, f),
     'RegExp.setLastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex =
