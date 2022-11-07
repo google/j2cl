@@ -806,7 +806,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           environment.createMethodDescriptor(expression.resolveMethodBinding());
 
       return FunctionExpression.newBuilder()
-          .setTypeDescriptor(environment.createTypeDescriptor(expression.resolveTypeBinding()))
+          .setTypeDescriptor(
+              environment.createTypeDescriptor(
+                  expression.resolveTypeBinding(),
+                  getCurrentType().getDeclaration().isNullMarked()))
           .setParameters(
               JdtEnvironment.<VariableDeclaration>asTypedList(expression.parameters()).stream()
                   .map(this::convert)
@@ -856,7 +859,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       SourcePosition sourcePosition = getSourcePosition(expression);
       TypeDescriptor expressionTypeDescriptor =
-          environment.createTypeDescriptor(expression.resolveTypeBinding());
+          environment.createTypeDescriptor(
+              expression.resolveTypeBinding(), getCurrentType().getDeclaration().isNullMarked());
 
       // MethodDescriptor target of the method reference.
       MethodDescriptor referencedMethodDescriptor = resolveMethodReferenceTarget(expression);
@@ -950,7 +954,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private Expression convert(TypeMethodReference expression) {
       ITypeBinding expressionTypeBinding = expression.resolveTypeBinding();
       return MethodReference.newBuilder()
-          .setTypeDescriptor(environment.createDeclaredTypeDescriptor(expressionTypeBinding))
+          .setTypeDescriptor(
+              environment.createDeclaredTypeDescriptor(
+                  expressionTypeBinding, getCurrentType().getDeclaration().isNullMarked()))
           .setReferencedMethodDescriptor(
               environment.createMethodDescriptor(expression.resolveMethodBinding()))
           .setInterfaceMethodDescriptor(

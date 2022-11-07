@@ -263,13 +263,13 @@ open class ExplicitNotNullable {
   @JvmStatic
   fun testLambdaNullability() {
    val lambda: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer { s: String ->
-   } as ExplicitNotNullable.Consumer<String>?
+   }
    val nullable: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer { arg0: String ->
     DefaultNullable.nullableAccept(arg0)
-   } as ExplicitNotNullable.Consumer<String>?
+   }
    val nonNullable: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer { arg0_1: String ->
     ExplicitNotNullable.nonNullableAccept(arg0_1)
-   } as ExplicitNotNullable.Consumer<String>?
+   }
    val newObject: ExplicitNotNullable.Supplier<Any>? = ExplicitNotNullable.Supplier {
     return@Supplier Any()
    }
