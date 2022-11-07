@@ -29,73 +29,73 @@ open class MethodReferences<T> {
  }
 
  open fun main() {
-  var objectFactory: MethodReferences.Producer<Any?>? = MethodReferences.Producer {
+  var objectFactory: MethodReferences.Producer<Any?>? = MethodReferences.Producer<Any?> {
    return@Producer Any()
   }
-  objectFactory = MethodReferences.Producer {
+  objectFactory = MethodReferences.Producer<Any?> {
    return@Producer MethodReferences.m()
   }
   objectFactory = run {
    val ______q: MethodReferences<T> = MethodReferences<T>()
-   MethodReferences.Producer {
+   MethodReferences.Producer<Any?> {
     return@Producer ______q!!.isA()
    }
   }
-  val biFunction: MethodReferences.BiFunction<MethodReferences<T>?, Number?, Boolean?>? = MethodReferences.BiFunction { arg0: MethodReferences<T>?, arg1: Number? ->
+  val biFunction: MethodReferences.BiFunction<MethodReferences<T>?, Number?, Boolean?>? = MethodReferences.BiFunction<MethodReferences<T>?, Number?, Boolean?> { arg0: MethodReferences<T>?, arg1: Number? ->
    return@BiFunction arg0!!.sameAs(arg1)
   }
-  val functionWithParameters: MethodReferences.Function<Number?, Boolean?>? = MethodReferences.Function { arg0_1: Number? ->
+  val functionWithParameters: MethodReferences.Function<Number?, Boolean?>? = MethodReferences.Function<Number?, Boolean?> { arg0_1: Number? ->
    return@Function this.sameAs(arg0_1)
   }
-  val objectPredicate: MethodReferences.Predicate<MethodReferences<T>?>? = MethodReferences.Predicate { arg0_2: MethodReferences<T>? ->
+  val objectPredicate: MethodReferences.Predicate<MethodReferences<T>?>? = MethodReferences.Predicate<MethodReferences<T>?> { arg0_2: MethodReferences<T>? ->
    return@Predicate arg0_2!!.isA()!!.booleanValue()
   }
-  val objectCapturingOuterProducer: MethodReferences.Producer<MethodReferences<T>.ObjectCapturingOuter?>? = MethodReferences.Producer {
+  val objectCapturingOuterProducer: MethodReferences.Producer<MethodReferences<T>.ObjectCapturingOuter?>? = MethodReferences.Producer<MethodReferences<T>.ObjectCapturingOuter?> {
    return@Producer ObjectCapturingOuter()
   }
-  val arrayProducer: MethodReferences.ArrayProducer<Any?>? = MethodReferences.ArrayProducer { arg0_3: Int ->
+  val arrayProducer: MethodReferences.ArrayProducer<Any?>? = MethodReferences.ArrayProducer<Any?> { arg0_3: Int ->
    return@ArrayProducer arrayOfNulls<Double>(arg0_3) as Array<Any?>?
   }
   objectFactory = run {
    val ______q_1: MethodReferences<Any?> = MethodReferences<Any?>()
-   MethodReferences.Producer {
+   MethodReferences.Producer<Any?> {
     return@Producer ______q_1!!.self()
    }
   }
-  val function: MethodReferences.Function<MethodReferences<T>?, Any?>? = MethodReferences.Function { arg0_4: MethodReferences<T>? ->
+  val function: MethodReferences.Function<MethodReferences<T>?, Any?>? = MethodReferences.Function<MethodReferences<T>?, Any?> { arg0_4: MethodReferences<T>? ->
    return@Function arg0_4!!.self()
   }
-  val arrayFactory: MethodReferences.Function<Int?, Array<Any?>?>? = MethodReferences.Function { arg0_5: Int? ->
+  val arrayFactory: MethodReferences.Function<Int?, Array<Any?>?>? = MethodReferences.Function<Int?, Array<Any?>?> { arg0_5: Int? ->
    return@Function arrayOfNulls<Any>(arg0_5!!.toInt())
   }
-  val superToStringProducer: MethodReferences.Producer<String?>? = MethodReferences.Producer {
+  val superToStringProducer: MethodReferences.Producer<String?>? = MethodReferences.Producer<String?> {
    return@Producer super.toString()
   }
-  var jsobjectFactory: MethodReferences.JsProducer<Any?>? = MethodReferences.JsProducer {
+  var jsobjectFactory: MethodReferences.JsProducer<Any?>? = MethodReferences.JsProducer<Any?> {
    return@JsProducer Any()
   }
-  jsobjectFactory = MethodReferences.JsProducer {
+  jsobjectFactory = MethodReferences.JsProducer<Any?> {
    return@JsProducer MethodReferences.m()
   }
   jsobjectFactory = run {
    val ______q_2: MethodReferences<Any?> = MethodReferences<Any?>()
-   MethodReferences.JsProducer {
+   MethodReferences.JsProducer<Any?> {
     return@JsProducer ______q_2!!.self()
    }
   }
-  val jsfunction: MethodReferences.JsFunctionInterface<MethodReferences<T>?, Any?>? = MethodReferences.JsFunctionInterface { arg0_6: MethodReferences<T>? ->
+  val jsfunction: MethodReferences.JsFunctionInterface<MethodReferences<T>?, Any?>? = MethodReferences.JsFunctionInterface<MethodReferences<T>?, Any?> { arg0_6: MethodReferences<T>? ->
    return@JsFunctionInterface arg0_6!!.self()
   }
-  val jsarrayFactory: MethodReferences.JsFunctionInterface<Int?, Array<Any?>?>? = MethodReferences.JsFunctionInterface { arg0_7: Int? ->
+  val jsarrayFactory: MethodReferences.JsFunctionInterface<Int?, Array<Any?>?>? = MethodReferences.JsFunctionInterface<Int?, Array<Any?>?> { arg0_7: Int? ->
    return@JsFunctionInterface arrayOfNulls<Any>(arg0_7!!.toInt())
   }
-  val jsSuperToStringProducer: MethodReferences.JsProducer<String?>? = MethodReferences.JsProducer {
+  val jsSuperToStringProducer: MethodReferences.JsProducer<String?>? = MethodReferences.JsProducer<String?> {
    return@JsProducer super.toString()
   }
-  val jsbiFunction: MethodReferences.JsBiFunction<MethodReferences<T>?, Number?, Boolean?>? = MethodReferences.JsBiFunction { arg0_8: MethodReferences<T>?, arg1_1: Number? ->
+  val jsbiFunction: MethodReferences.JsBiFunction<MethodReferences<T>?, Number?, Boolean?>? = MethodReferences.JsBiFunction<MethodReferences<T>?, Number?, Boolean?> { arg0_8: MethodReferences<T>?, arg1_1: Number? ->
    return@JsBiFunction arg0_8!!.sameAs(arg1_1)
   }
-  val jsFunctionWithParameters: MethodReferences.JsFunctionInterface<Number?, Boolean?>? = MethodReferences.JsFunctionInterface { arg0_9: Number? ->
+  val jsFunctionWithParameters: MethodReferences.JsFunctionInterface<Number?, Boolean?>? = MethodReferences.JsFunctionInterface<Number?, Boolean?> { arg0_9: Number? ->
    return@JsFunctionInterface this.sameAs(arg0_9)
   }
  }
@@ -108,7 +108,7 @@ open class MethodReferences<T> {
 
   @JvmField var staticStringProducer: MethodReferences.Producer<String?>? = run {
    val ______q: Any? = MethodReferences.m()
-   MethodReferences.Producer {
+   MethodReferences.Producer<String?> {
     return@Producer ______q!!.toString()
    }
   }

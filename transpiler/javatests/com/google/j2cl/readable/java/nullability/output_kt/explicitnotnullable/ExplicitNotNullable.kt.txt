@@ -262,18 +262,18 @@ open class ExplicitNotNullable {
 
   @JvmStatic
   fun testLambdaNullability() {
-   val lambda: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer { s: String ->
+   val lambda: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer<String> { s: String ->
    }
-   val nullable: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer { arg0: String ->
+   val nullable: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer<String> { arg0: String ->
     DefaultNullable.nullableAccept(arg0)
    }
-   val nonNullable: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer { arg0_1: String ->
+   val nonNullable: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer<String> { arg0_1: String ->
     ExplicitNotNullable.nonNullableAccept(arg0_1)
    }
-   val newObject: ExplicitNotNullable.Supplier<Any>? = ExplicitNotNullable.Supplier {
+   val newObject: ExplicitNotNullable.Supplier<Any>? = ExplicitNotNullable.Supplier<Any> {
     return@Supplier Any()
    }
-   val newArray: ExplicitNotNullable.IntFunction<Array<Any>>? = ExplicitNotNullable.IntFunction { arg0_2: Int ->
+   val newArray: ExplicitNotNullable.IntFunction<Array<Any>>? = ExplicitNotNullable.IntFunction<Array<Any>> { arg0_2: Int ->
     return@IntFunction arrayOfNulls<Any>(arg0_2) as Array<Any>
    }
   }

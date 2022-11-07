@@ -71,7 +71,7 @@ open class Main {
   o = object : KBridge() {}
   o = BridgeSubclass()
   var fi: KFunctionalInterfaceRequiringBridge<String?>? = null
-  fi = KFunctionalInterfaceBridge { s: String? ->
+  fi = KFunctionalInterfaceBridge<String?> { s: String? ->
    return@KFunctionalInterfaceBridge s
   }
   fi = object : KFunctionalInterfaceBridge<String?> {

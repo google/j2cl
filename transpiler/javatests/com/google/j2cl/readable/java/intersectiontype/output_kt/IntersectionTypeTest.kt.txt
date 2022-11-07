@@ -79,7 +79,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun method2(): Cmp2<Any?>? {
-   return Cmp2 { a: Int ->
+   return Cmp2<Any?> { a: Int ->
     return@Cmp2 1
    } as Cmp2<Any?>?
   }

@@ -11,7 +11,7 @@ open class DefaultNullable {
  companion object {
   @JvmStatic
   fun testNonNullableLambdas() {
-   val methodReference: NotNullable.Consumer<String?>? = NotNullable.Consumer { arg0: String ->
+   val methodReference: NotNullable.Consumer<String?>? = NotNullable.Consumer<String?> { arg0: String ->
     DefaultNullable.accept(arg0)
    }
   }

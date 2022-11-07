@@ -59,10 +59,10 @@ open class Main {
    Main.NativeStringEnum.ONE.equals(Main.NativeStringEnum.THREE)
    Main.ComparableJsEnum.ONE.compareTo(Main.ComparableJsEnum.ZERO)
    Main.ComparableJsEnum.ONE.equals(Main.ComparableJsEnum.ZERO)
-   val supplier: Supplier<Main.ComparableJsEnum?>? = Supplier {
+   val supplier: Supplier<Main.ComparableJsEnum?>? = Supplier<Main.ComparableJsEnum?> {
     return@Supplier Main.ComparableJsEnum.ONE
    }
-   val consummer: Consumer<Main.ComparableJsEnum?>? = Consumer { e: Main.ComparableJsEnum? ->
+   val consummer: Consumer<Main.ComparableJsEnum?>? = Consumer<Main.ComparableJsEnum?> { e: Main.ComparableJsEnum? ->
     e!!.ordinal
    }
   }

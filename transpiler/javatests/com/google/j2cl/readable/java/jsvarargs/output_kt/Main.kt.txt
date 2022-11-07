@@ -110,7 +110,7 @@ open class Main {
  }
 
  open fun <U> testGenericJsFunctionWithVarags() {
-  val function: Main.GenericFunction<U>? = Main.GenericFunction { n: U, param: Array<out U>? ->
+  val function: Main.GenericFunction<U>? = Main.GenericFunction<U> { n: U, param: Array<out U>? ->
    val param_1: Array<U>? = param as Array<U>?
    return@GenericFunction param_1
   }

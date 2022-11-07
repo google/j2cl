@@ -37,7 +37,6 @@ import com.google.j2cl.transpiler.ast.KtInfo
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
-import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MultiExpression
 import com.google.j2cl.transpiler.ast.NewArray
 import com.google.j2cl.transpiler.ast.NewInstance
@@ -201,8 +200,8 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
-  val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!.toNonNullable()
-  renderQualifiedName(functionalInterface, asSuperType = true)
+  val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!
+  renderNewInstanceTypeDescriptor(functionalInterface)
   render(" ")
   renderInCurlyBrackets {
     val parameters = functionExpression.parameters
@@ -301,13 +300,12 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
   renderIdentifier(expression.target.ktMangledName)
   if (!expression.target.isKtProperty) {
-    renderTypeArguments(methodDescriptor)
+    renderInvocationTypeArguments(methodDescriptor.typeArguments)
     renderInvocationArguments(expression)
   }
 }
 
-private fun Renderer.renderTypeArguments(methodDescriptor: MethodDescriptor) {
-  val typeArguments = methodDescriptor.typeArguments
+private fun Renderer.renderInvocationTypeArguments(typeArguments: List<TypeArgument>) {
   if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
     renderTypeArguments(typeArguments)
   }
@@ -428,6 +426,18 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
     render("object : ")
   }
 
+  renderNewInstanceTypeDescriptor(typeDescriptor)
+
+  // Render invocation arguments for classes only - interfaces don't need it.
+  if (typeDescriptor.isClass) {
+    // Explicit label is necessary to workaround https://youtrack.jetbrains.com/issue/KT-54349
+    copy(renderThisReferenceWithLabel = true).renderInvocationArguments(expression)
+  }
+
+  expression.anonymousInnerClass?.let { renderTypeBody(it) }
+}
+
+private fun Renderer.renderNewInstanceTypeDescriptor(typeDescriptor: DeclaredTypeDescriptor) {
   // Render qualified name if there's no qualifier, otherwise render simple name.
   val typeDeclaration = typeDescriptor.typeDeclaration
   if (typeDeclaration.isCapturingEnclosingInstance) {
@@ -436,18 +446,7 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
     renderQualifiedName(typeDescriptor, asSuperType = true)
   }
 
-  val typeArguments = typeDescriptor.typeArguments()
-  if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
-    renderTypeArguments(typeArguments)
-  }
-
-  // Render invocation for classes only - interfaces don't need it.
-  if (typeDescriptor.isClass) {
-    // Explicit label is necessary to workaround https://youtrack.jetbrains.com/issue/KT-54349
-    copy(renderThisReferenceWithLabel = true).renderInvocationArguments(expression)
-  }
-
-  expression.anonymousInnerClass?.let { renderTypeBody(it) }
+  renderInvocationTypeArguments(typeDescriptor.typeArguments())
 }
 
 private val DeclaredTypeDescriptor.nonAnonymousTypeDescriptor: DeclaredTypeDescriptor
