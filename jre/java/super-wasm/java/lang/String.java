@@ -336,13 +336,13 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     if (other == null) {
       return false;
     }
-    if (length() != other.length()) {
-      return false;
-    }
-    // Hashcodes can be cached and provide fast comparision path at least in microbenchmarks.
-    // TODO(b/245658344): Reconsider this.
-    if (hashCode() != other.hashCode()) {
-      return false;
+    // Check the cached hashCodes (if any) for quick answer.
+    int hash = hashCode;
+    if (hash != 0) {
+      int otherHash = other.hashCode;
+      if (otherHash != 0 && otherHash != hash) {
+        return false;
+      }
     }
     return nativeEq(value, other.value);
   }
