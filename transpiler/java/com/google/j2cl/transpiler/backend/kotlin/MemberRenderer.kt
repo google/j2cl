@@ -102,9 +102,11 @@ private fun Renderer.renderField(field: Field) {
   val isFinal = field.descriptor.isFinal
   val typeDescriptor = field.descriptor.typeDescriptor
 
-  render("@")
-  renderQualifiedName("kotlin.jvm.JvmField")
-  render(" ")
+  if (field.isCompileTimeConstant && field.isStatic) {
+    render("const ")
+  } else {
+    renderJvmFieldAnnotation()
+  }
   render(if (isFinal) "val " else "var ")
   renderIdentifier(field.descriptor.ktMangledName)
   render(": ")
@@ -115,6 +117,18 @@ private fun Renderer.renderField(field: Field) {
   }
 }
 
+private fun Renderer.renderJvmFieldAnnotation() {
+  render("@")
+  renderQualifiedName("kotlin.jvm.JvmField")
+  render(" ")
+}
+
+private fun Renderer.renderJvmStaticAnnotation() {
+  render("@")
+  renderQualifiedName("kotlin.jvm.JvmStatic")
+  renderNewLine()
+}
+
 private fun Renderer.renderInitializerBlock(initializerBlock: InitializerBlock) {
   render("init ")
   renderStatement(initializerBlock.block)
@@ -122,9 +136,7 @@ private fun Renderer.renderInitializerBlock(initializerBlock: InitializerBlock) 
 
 private fun Renderer.renderMethodHeader(method: Method) {
   if (method.isStatic) {
-    render("@")
-    renderQualifiedName("kotlin.jvm.JvmStatic")
-    renderNewLine()
+    renderJvmStaticAnnotation()
   }
   val methodDescriptor = method.descriptor
   renderMethodModifiers(methodDescriptor)

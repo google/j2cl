@@ -16,7 +16,6 @@ import kotlin.Short
 import kotlin.Unit
 import kotlin.assert
 import kotlin.collections.MutableIterable
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.run
 
@@ -373,7 +372,7 @@ open class AutoBoxing {
  }
 
  companion object {
-  @JvmField val COMPILE_TIME_CONSTANT: Float = 1.1f
+  const val COMPILE_TIME_CONSTANT: Float = 1.1f
 
   @JvmStatic
   fun <T: Long?> testUnboxingFromTypeVariable() {

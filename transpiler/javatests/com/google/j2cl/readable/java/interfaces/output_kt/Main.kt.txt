@@ -5,7 +5,6 @@ import javaemul.lang.*
 import interfaces.Main
 import kotlin.Int
 import kotlin.String
-import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.run
 
@@ -31,9 +30,9 @@ open class Main {
   fun privateMethod_private_interfaces_Main_Interface(t: T) {}
 
   companion object {
-   @JvmField val a: Int = 1
+   const val a: Int = 1
 
-   @JvmField val b: Int = 2
+   const val b: Int = 2
 
    @JvmStatic
    fun staticInterfaceMethod() {}

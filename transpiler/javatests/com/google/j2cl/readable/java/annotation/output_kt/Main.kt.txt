@@ -5,14 +5,13 @@ import javaemul.lang.*
 import annotation.Main
 import kotlin.Annotation
 import kotlin.Int
-import kotlin.jvm.JvmField
 
 open class Main {
  interface Foo: Annotation {
   fun bar(): Int
 
   companion object {
-   @JvmField val CONSTANT: Int = 123
+   const val CONSTANT: Int = 123
   }
  }
 
