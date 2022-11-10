@@ -296,18 +296,6 @@ public class ExplicitNotNullable {
     o.defaultNullability.length();
   }
 
-  public void casts() {
-    List<String> listOfString = (List<String>) null;
-    @Nullable List<String> nullableListOfString = (@Nullable List<String>) null;
-    List<@Nullable String> listOfNullableString = (List<@Nullable String>) null;
-    @Nullable List<@Nullable String> nullableListOfNullableString =
-        (@Nullable List<@Nullable String>) null;
-    @JsNonNull List<String> nonNullListOfString = (@JsNonNull List<String>) null;
-    List<@JsNonNull String> listOfNonNullString = (List<@JsNonNull String>) null;
-    @JsNonNull
-    List<@JsNonNull String> nonNullListOfNonNullString = (@JsNonNull List<@JsNonNull String>) null;
-  }
-
   // Wildcards
   static void testListOfWildcard(List<?> l) {}
 

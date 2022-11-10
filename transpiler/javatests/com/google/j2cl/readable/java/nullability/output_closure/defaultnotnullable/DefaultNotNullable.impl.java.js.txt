@@ -173,16 +173,6 @@ class DefaultNotNullable extends j_l_Object {
   j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(o.f_defaultNullability__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedDefaultNullability, j_l_String)));
  }
  /** @nodts */
- m_casts__void() {
-  let listOfString = /**@type {!List<string>}*/ (null);
-  let nullableListOfString = /**@type {List<string>}*/ (null);
-  let listOfNullableString = /**@type {!List<?string>}*/ (null);
-  let nullableListOfNullableString = /**@type {List<?string>}*/ (null);
-  let nonNullListOfString = /**@type {!List<string>}*/ (null);
-  let listOfNonNullString = /**@type {!List<string>}*/ (null);
-  let nonNullListOfNonNullString = /**@type {!List<string>}*/ (null);
- }
- /** @nodts */
  static m_testListOfWildcard__java_util_List__void(/** !List<?> */ l) {
   DefaultNotNullable.$clinit();
  }
@@ -291,9 +281,9 @@ class DefaultNotNullable extends j_l_Object {
  /** @nodts */
  static m_testLocalNullability__void() {
   DefaultNotNullable.$clinit();
-  let stringConsumer = /**@type {!Consumer<string>}*/ (null);
-  let nullableStringConsumer = /**@type {!Consumer<?string>}*/ (null);
-  let nonNullStringConsumer = /**@type {!Consumer<string>}*/ (null);
+  let stringConsumer = /**@type {Consumer<?string>}*/ (null);
+  let nullableStringConsumer = /**@type {Consumer<?string>}*/ (null);
+  let nonNullStringConsumer = /**@type {Consumer<string>}*/ (null);
   let b = Consumer.$isInstance(null);
  }
  /** @private @nodts */

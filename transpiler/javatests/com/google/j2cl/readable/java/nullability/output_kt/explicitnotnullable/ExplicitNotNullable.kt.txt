@@ -93,16 +93,6 @@ open class ExplicitNotNullable {
 
  open fun <T: ExplicitNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
 
- open fun casts() {
-  val listOfString: MutableList<String>? = null as MutableList<String>
-  val nullableListOfString: MutableList<String>? = null as MutableList<String>?
-  val listOfNullableString: MutableList<String?>? = null as MutableList<String?>
-  val nullableListOfNullableString: MutableList<String?>? = null as MutableList<String?>?
-  val nonNullListOfString: MutableList<String>? = null as MutableList<String>
-  val listOfNonNullString: MutableList<String>? = null as MutableList<String>
-  val nonNullListOfNonNullString: MutableList<String>? = null as MutableList<String>
- }
-
  @JvmField var collection: ExplicitNotNullable.Consumer<*>? = null
 
  @JvmField var nonNullableCollection: ExplicitNotNullable.Consumer<*>? = null
@@ -301,9 +291,9 @@ open class ExplicitNotNullable {
 
   @JvmStatic
   fun testLocalNullability() {
-   val stringConsumer: ExplicitNotNullable.Consumer<String>? = null as ExplicitNotNullable.Consumer<String>
-   val nullableStringConsumer: ExplicitNotNullable.Consumer<String?>? = null as ExplicitNotNullable.Consumer<String?>
-   val nonNullStringConsumer: ExplicitNotNullable.Consumer<String>? = null as ExplicitNotNullable.Consumer<String>
+   val stringConsumer: ExplicitNotNullable.Consumer<String>? = (null as ExplicitNotNullable.Consumer<String?>?) as ExplicitNotNullable.Consumer<String>?
+   val nullableStringConsumer: ExplicitNotNullable.Consumer<String?>? = null as ExplicitNotNullable.Consumer<String?>?
+   val nonNullStringConsumer: ExplicitNotNullable.Consumer<String>? = null as ExplicitNotNullable.Consumer<String>?
    val b: Boolean = null is ExplicitNotNullable.Consumer<*>
   }
 
