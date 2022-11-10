@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "j2cl_library", "j2kt_jvm_import")
+load("//build_defs:rules.bzl", "j2cl_library", "j2kt_jvm_import", "j2kt_native_library")
 
 package(
     licenses = ["reciprocal"],  # Eclipse Public License - v 1.0
@@ -6,7 +6,12 @@ package(
 
 j2cl_library(
     name = "junit_emul",
-    srcs = glob(["**/*.java"]),
+    srcs = glob(
+        ["**/*.java"],
+        exclude = [
+            "org/junit/super-j2kt/*.java",
+        ],
+    ),
     javacopts = [
         "-Xep:DoNotCall:OFF",
     ],
@@ -20,5 +25,19 @@ j2kt_jvm_import(
     testonly = 1,
     jar = "//third_party:junit",
     runtime = "//third_party:junit",
+    visibility = ["//:__pkg__"],
+)
+
+j2kt_native_library(
+    name = "junit_emul-j2kt-native",
+    srcs = glob(
+        ["**/*.java"],
+        exclude = [
+            "org/junit/Assert.java",
+        ],
+    ),
+    javacopts = [
+        "-Xep:DoNotCall:OFF",
+    ],
     visibility = ["//:__pkg__"],
 )

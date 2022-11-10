@@ -1,6 +1,6 @@
 """Helper for j2cl junit integration tests."""
 
-load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_jvm_test", "j2wasm_test")
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test", "j2kt_jvm_test", "j2kt_native_test", "j2wasm_test")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
 
@@ -171,6 +171,17 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
             tags = tags,
             test_class = test_class,
             runtime_deps = [":%s-lib-j2kt-jvm" % name],
+            extra_defs = extra_defs,
+            javacopts = [
+                "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
+            ],
+        )
+
+        j2kt_native_test(
+            name = "%s-j2kt-native" % name,
+            tags = tags,
+            test_class = test_class,
+            runtime_deps = [":%s-lib-j2kt-native" % name],
             extra_defs = extra_defs,
             javacopts = [
                 "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262

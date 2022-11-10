@@ -1,4 +1,4 @@
-load("//build_defs:rules.bzl", "j2cl_library", "j2kt_jvm_library", "j2wasm_library")
+load("//build_defs:rules.bzl", "j2cl_library", "j2kt_jvm_library", "j2kt_native_library", "j2wasm_library")
 
 package(
     default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration:__subpackages__"],
@@ -20,6 +20,11 @@ j2wasm_library(
 
 j2kt_jvm_library(
     name = "testlogger-j2kt-jvm",
+    srcs = glob(["*.java"]),
+)
+
+j2kt_native_library(
+    name = "testlogger-j2kt-native",
     srcs = glob(["*.java"]),
 )
 

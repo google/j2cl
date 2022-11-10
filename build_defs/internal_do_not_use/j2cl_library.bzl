@@ -53,9 +53,15 @@ _J2KT_JVM_PACKAGES = [
 # Packages that j2cl rule will generage j2kt native packages by default. Used to simplify test
 # rules.
 _J2KT_NATIVE_PACKAGES = [
+    "build_defs/internal_do_not_use",
     "transpiler/javatests/com/google/j2cl/integration/java",
     "transpiler/javatests/com/google/j2cl/integration/testing",
     "transpiler/javatests/com/google/j2cl/readable/java",
+    "junit/generator/java/com/google/j2cl/junit/apt",
+    "junit/generator/java/com/google/j2cl/junit/runtime",
+    "junit/generator/javatests/com/google/j2cl/junit/integration",
+    "third_party/java/error_prone",
+    "third_party/java/junit",
 ]
 
 _J2WASM_PACKAGES = [
