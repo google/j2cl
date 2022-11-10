@@ -22,7 +22,6 @@ load(
 load("@bazel_tools//tools/build_defs/apple:ios.bzl", "ios_build_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@bazel_tools//tools/build_defs/kotlin/release/rules/native:native_rules.bzl", "kt_apple_framework")
-load("@bazel_skylib//rules:write_file.bzl", "write_file")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -141,16 +140,8 @@ def readable_example(
             )
 
         if build_kt_native_readables:
-            write_file(
-                name = "readable_j2kt_module",
-                out = "J2ktModule.kt",
-                content = ["// EmptyFile"],
-                tags = ["j2kt", "ios"],
-            )
-
             kt_apple_framework(
                 name = "readable_j2kt_test_framework",
-                srcs = ["J2ktModule.kt"],
                 deps = [":readable-j2kt-native"],
                 tags = ["j2kt", "ios", "manual"],
             )
