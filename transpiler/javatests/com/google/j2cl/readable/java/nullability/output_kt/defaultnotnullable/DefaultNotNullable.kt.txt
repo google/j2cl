@@ -65,6 +65,16 @@ open class DefaultNotNullable {
 
  open fun <T: DefaultNotNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
 
+ open fun casts() {
+  val listOfString: MutableList<String>? = null as MutableList<String>
+  val nullableListOfString: MutableList<String>? = null as MutableList<String>?
+  val listOfNullableString: MutableList<String?>? = null as MutableList<String?>
+  val nullableListOfNullableString: MutableList<String?>? = null as MutableList<String?>?
+  val nonNullListOfString: MutableList<String>? = null as MutableList<String>
+  val listOfNonNullString: MutableList<String>? = null as MutableList<String>
+  val nonNullListOfNonNullString: MutableList<String>? = null as MutableList<String>
+ }
+
  companion object {
   @JvmStatic
   fun <N> genericNullableMethod(o: DefaultNotNullable.ParameterizedNullable<N>, n: N?) {
@@ -253,9 +263,9 @@ open class DefaultNotNullable {
 
   @JvmStatic
   fun testLocalNullability() {
-   val stringConsumer: DefaultNotNullable.Consumer<String>? = (null as DefaultNotNullable.Consumer<String?>?) as DefaultNotNullable.Consumer<String>?
-   val nullableStringConsumer: DefaultNotNullable.Consumer<String?>? = null as DefaultNotNullable.Consumer<String?>?
-   val nonNullStringConsumer: DefaultNotNullable.Consumer<String>? = null as DefaultNotNullable.Consumer<String>?
+   val stringConsumer: DefaultNotNullable.Consumer<String>? = null as DefaultNotNullable.Consumer<String>
+   val nullableStringConsumer: DefaultNotNullable.Consumer<String?>? = null as DefaultNotNullable.Consumer<String?>
+   val nonNullStringConsumer: DefaultNotNullable.Consumer<String>? = null as DefaultNotNullable.Consumer<String>
    val b: Boolean = null is DefaultNotNullable.Consumer<*>
   }
  }

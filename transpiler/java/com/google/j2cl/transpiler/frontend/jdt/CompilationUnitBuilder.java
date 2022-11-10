@@ -436,7 +436,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
       TypeDescriptor castTypeDescriptor =
-          environment.createTypeDescriptor(expression.getType().resolveBinding());
+          environment.createTypeDescriptor(
+              expression.getType().resolveBinding(),
+              getCurrentType().getDeclaration().isNullMarked());
       return CastExpression.newBuilder()
           .setExpression(convert(expression.getExpression()))
           .setCastTypeDescriptor(castTypeDescriptor)
