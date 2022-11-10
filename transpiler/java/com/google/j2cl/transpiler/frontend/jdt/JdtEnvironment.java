@@ -743,6 +743,9 @@ class JdtEnvironment {
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     KtInfo ktInfo = computeKtInfo(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
+    if (isCompileTimeConstant) {
+      thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
+    }
     boolean isFinal = isFinal(variableBinding);
     return FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)

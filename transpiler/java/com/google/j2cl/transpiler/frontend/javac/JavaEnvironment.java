@@ -548,6 +548,9 @@ class JavaEnvironment {
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableElement);
     boolean isCompileTimeConstant = variableElement.getConstantValue() != null;
+    if (isCompileTimeConstant) {
+      thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
+    }
     boolean isFinal = isFinal(variableElement);
     return FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
