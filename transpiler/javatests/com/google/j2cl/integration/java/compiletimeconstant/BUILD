@@ -8,7 +8,8 @@ package(licenses = ["notice"])
 integration_test(
     name = "compiletimeconstant",
     srcs = glob(["*.java"]),
-    enable_kt = False,
+    # TODO(b/256681746): Improve TestUtils to detect Kotlin and fix the test.
+    enable_kt_native = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",

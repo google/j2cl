@@ -8,5 +8,4 @@ package(licenses = ["notice"])
 integration_test(
     name = "staticcompiletimeconstant",
     srcs = glob(["*.java"]),
-    enable_kt = False,
 )
