@@ -85,7 +85,7 @@ open class Main {
 
   @JvmStatic
   fun boxingWithGenerics() {
-   Main.Foo<Any?>(Optional.of<Main.IntJsEnum?>(Main.IntJsEnum.MINUSONE))
+   Main.Foo<Any?>(Optional.of<Main.IntJsEnum>(Main.IntJsEnum.MINUSONE) as Optional<Main.IntJsEnum>?)
   }
  }
 
@@ -164,6 +164,6 @@ open class Main {
  }
 
  open class Foo<T> {
-  constructor(c: Optional<Main.IntJsEnum?>?)
+  constructor(c: Optional<Main.IntJsEnum>?)
  }
 }
