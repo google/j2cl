@@ -20,6 +20,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
+import com.google.j2cl.transpiler.ast.ArrayCreationReference;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -53,8 +54,10 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
+import com.google.j2cl.transpiler.ast.MethodReference;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
@@ -433,7 +436,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || expression instanceof JsDocCastExpression
         // references
         || expression instanceof ThisOrSuperReference
-        || expression instanceof VariableReference) {
+        || expression instanceof VariableReference
+        || expression instanceof ArrayCreationReference) {
       // These expressions do not need rewriting.
       return expression;
     }
@@ -464,6 +468,15 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return MemberReference.Builder.from(memberReference)
         .setQualifier(
             rewriteInstanceQualifier(memberReference.getQualifier(), memberReference.getTarget()))
+        .build();
+  }
+
+  @Override
+  public Node rewriteMethodReference(MethodReference methodReference) {
+    return MethodReference.Builder.from(methodReference)
+        .setQualifier(
+            rewriteInstanceQualifier(
+                methodReference.getQualifier(), methodReference.getReferencedMethodDescriptor()))
         .build();
   }
 
