@@ -98,7 +98,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun <T> m_private_2(): T where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {
-   return IntersectionTypeTest.get_private_2<Any?>(Any()) as T
+   return (IntersectionTypeTest.get_private_2<Any?>(Any()) as T?) as T
   }
 
   @JvmStatic

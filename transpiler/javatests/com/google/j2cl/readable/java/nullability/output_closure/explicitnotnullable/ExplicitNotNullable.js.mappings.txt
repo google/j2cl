@@ -229,6 +229,23 @@
 [o.nullable.length();] => [j_l_String.m_length__java_lang_String__int(/**@type {?string}*/ ($Casts.$to(o.f_nullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability, j_l_String)));] "nullability.explicitnotnullable.ExplicitNotNullable.parametrizedDefaultNullabilityMethod"
 [o.nonNullable.length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(o.f_nonNullable__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability, j_l_String)));] "nullability.explicitnotnullable.ExplicitNotNullable.parametrizedDefaultNullabilityMethod"
 [o.defaultNullability.length();] => [j_l_String.m_length__java_lang_String__int(/**@type {string}*/ ($Casts.$to(o.f_defaultNullability__nullability_explicitnotnullable_ExplicitNotNullable_ParameterizedDefaultNullability, j_l_String)));] "nullability.explicitnotnullable.ExplicitNotNullable.parametrizedDefaultNullabilityMethod"
+[casts] => [m_casts__void]
+[List<String> listOfString = (List<String>) null;] => [let listOfString = /**@type {List<string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.casts"
+[listOfString] => [listOfString] "listOfString"
+[@Nullable List<String> nullableListOfString = (@Nullable List<String>) null;] => [let nullableListOfString = /**@type {List<string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.casts"
+[nullableListOfString] => [nullableListOfString] "nullableListOfString"
+[List<@Nullable String> listOfNullableString = (List<@Nullable String>) null;] => [let listOfNullableString = /**@type {List<?string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.casts"
+[listOfNullableString] => [listOfNullableString] "listOfNullableString"
+[@Nullable List<@Nullable String> nullableListOfNullableString =
+        (@Nullable List<@Nullable String>) null;] => [let nullableListOfNullableString = /**@type {List<?string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.casts"
+[nullableListOfNullableString] => [nullableListOfNullableString] "nullableListOfNullableString"
+[@JsNonNull List<String> nonNullListOfString = (@JsNonNull List<String>) null;] => [let nonNullListOfString = /**@type {List<string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.casts"
+[nonNullListOfString] => [nonNullListOfString] "nonNullListOfString"
+[List<@JsNonNull String> listOfNonNullString = (List<@JsNonNull String>) null;] => [let listOfNonNullString = /**@type {List<string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.casts"
+[listOfNonNullString] => [listOfNonNullString] "listOfNonNullString"
+[@JsNonNull
+    List<@JsNonNull String> nonNullListOfNonNullString = (@JsNonNull List<@JsNonNull String>) null;] => [let nonNullListOfNonNullString = /**@type {List<string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.casts"
+[nonNullListOfNonNullString] => [nonNullListOfNonNullString] "nonNullListOfNonNullString"
 [testListOfWildcard] => [m_testListOfWildcard__java_util_List__void]
 [l] => [l] "l"
 [{}] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.testListOfWildcard"
@@ -341,7 +358,7 @@
     Consumer<String> stringConsumer = (Consumer<String>) null;
 ...    boolean b = null instanceof Consumer<?>;
   }] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
-[Consumer<String> stringConsumer = (Consumer<String>) null;] => [let stringConsumer = /**@type {Consumer<?string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
+[Consumer<String> stringConsumer = (Consumer<String>) null;] => [let stringConsumer = /**@type {Consumer<string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
 [stringConsumer] => [stringConsumer] "stringConsumer"
 [Consumer<@Nullable String> nullableStringConsumer = (Consumer<@Nullable String>) null;] => [let nullableStringConsumer = /**@type {Consumer<?string>}*/ (null);] "nullability.explicitnotnullable.ExplicitNotNullable.testLocalNullability"
 [nullableStringConsumer] => [nullableStringConsumer] "nullableStringConsumer"

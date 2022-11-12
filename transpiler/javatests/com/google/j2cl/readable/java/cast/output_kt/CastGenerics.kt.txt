@@ -22,31 +22,31 @@ open class CastGenerics<T, E: Number?> {
 
  open fun testCastToTypeVariable() {
   val o: Any? = Int(1)
-  val e: E? = o as E
-  val t: T? = o as T
+  val e: E? = o as E?
+  val t: T? = o as T?
   val es: Array<E>? = o as Array<E>?
   val ts: Array<T>? = o as Array<T>?
  }
 
  open fun <S, V: Enum<V>> testCastToMethodTypeVariable() {
   val o: Any? = Int(1)
-  val s: S? = o as S
+  val s: S? = o as S?
   var c: Any? = o as CastGenerics<S, Number?>?
   c = o as Array<S>?
-  c = o as V
+  c = o as V?
  }
 
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
    fun nestedGenericMethod_private_2(o: Any?) {
-    val t: TT? = o as TT
+    val t: TT? = o as TT?
    }
   }
  }
 
  open fun <EE> method(o: Any?): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
   if (o is CastGenerics.Empty1) {
-   return o as EE
+   return (o as EE?) as EE
   }
   return null as EE
  }

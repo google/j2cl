@@ -436,10 +436,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
       TypeDescriptor castTypeDescriptor =
-          environment.createTypeDescriptor(expression.getType().resolveBinding());
+          environment.createTypeDescriptor(
+              expression.getType().resolveBinding(),
+              getCurrentType().getDeclaration().isNullMarked());
       return CastExpression.newBuilder()
           .setExpression(convert(expression.getExpression()))
-          .setCastTypeDescriptor(castTypeDescriptor)
+          .setCastTypeDescriptor(castTypeDescriptor.toNullable())
           .build();
     }
 
@@ -1426,7 +1428,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       type.setStatic(JdtEnvironment.isStatic(typeBinding));
       return type;
     }
-
   }
 
   private CompilationUnit buildCompilationUnit(
