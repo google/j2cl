@@ -178,9 +178,17 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
   }
 
   public V get(Object key) {
+    return getOrDefaultImpl(key, null);
+  }
+
+  public V getOrDefault(Object key, V value) {
+    return getOrDefaultImpl(key, value);
+  }
+
+  private V getOrDefaultImpl(Object key, V defaultValue) {
     if (key == null) {
       HashMapEntry<K, V> e = entryForNullKey;
-      return e == null ? null : e.value;
+      return e == null ? defaultValue : e.value;
     }
     int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
@@ -190,7 +198,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
         return e.value;
       }
     }
-    return null;
+    return defaultValue;
   }
 
   @Override
