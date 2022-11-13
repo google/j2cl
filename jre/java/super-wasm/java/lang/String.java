@@ -716,11 +716,6 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return start > 0 || end < length ? substring(start, end) : this;
   }
 
-  // TODO(b/244203521): Remove when we switch to string.const for String literals.
-  static String fromInternalArray(char[] x) {
-    return String.valueOf(x);
-  }
-
   public static String fromJsString(NativeString o) {
     return o == null ? null : new String(o);
   }
