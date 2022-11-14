@@ -1,7 +1,6 @@
 load(
     "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",
     "j2cl_test_integration_test_data",
-    "java_and_j2cl_library",
 )
 
 package(
@@ -15,24 +14,10 @@ package(
 )
 
 ASYNC_TEST_DEPS = [
-    ":timer",
-    ":thenable",
+    "//junit/generator/javatests/com/google/j2cl/junit/integration/testing/async:timer",
+    "//junit/generator/javatests/com/google/j2cl/junit/integration/testing/async:thenable",
     "//junit/generator/java/com/google/j2cl/junit/async:async",
 ]
-
-# test is used as an executable to test j2cl's test runner
-java_and_j2cl_library(
-    name = "timer",
-    srcs = ["Timer.java"],
-    super_srcs = ["super/Timer.java"],
-    deps = ["//third_party:gwt-jsinterop-annotations"],
-)
-
-java_and_j2cl_library(
-    name = "thenable",
-    srcs = ["Thenable.java"],
-    deps = ["//third_party:gwt-jsinterop-annotations"],
-)
 
 j2cl_test_integration_test_data(
     name = "TestAfterWithFailingAsyncTest",

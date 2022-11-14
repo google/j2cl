@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.junit.integration.junit4.data;
 
-import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
+import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -17,7 +17,7 @@ package com.google.j2cl.junit.integration.junit4.data;
 
 import static org.junit.Assert.fail;
 
-import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
+import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;

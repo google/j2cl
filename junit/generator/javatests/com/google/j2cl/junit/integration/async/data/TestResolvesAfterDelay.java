@@ -16,6 +16,8 @@
 package com.google.j2cl.junit.integration.async.data;
 
 import com.google.j2cl.junit.async.AsyncTestRunner;
+import com.google.j2cl.junit.integration.testing.async.Thenable;
+import com.google.j2cl.junit.integration.testing.async.Timer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

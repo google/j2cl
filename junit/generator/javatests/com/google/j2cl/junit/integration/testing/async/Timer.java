@@ -13,21 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.junit.integration.async.data;
+package com.google.j2cl.junit.integration.testing.async;
 
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
+import java.util.TimerTask;
 
 /** A simple timer for tests */
 public class Timer {
 
   /** A simple callback interface */
-  @JsFunction
+  @FunctionalInterface
   public interface Callback {
     void execute();
   }
 
-  @JsMethod(name = "setTimeout", namespace = JsPackage.GLOBAL)
-  public static native void schedule(final Callback c, final int delay);
+  public static void schedule(final Callback c, final int delay) {
+    new java.util.Timer()
+        .schedule(
+            new TimerTask() {
+              @Override
+              public void run() {
+                c.execute();
+              }
+            },
+            delay);
+  }
 }

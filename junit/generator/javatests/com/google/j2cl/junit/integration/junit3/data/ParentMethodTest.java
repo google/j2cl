@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.junit.integration.junit3.data;
 
-import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
+import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger;
 
 /** TestCase used for integration testing for j2cl JUnit support. */
 public class ParentMethodTest extends ParentMethodParentClass {

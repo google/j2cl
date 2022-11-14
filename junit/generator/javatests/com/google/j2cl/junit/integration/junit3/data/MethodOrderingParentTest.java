@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.junit.integration.junit3.data;
 
-import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
+import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger;
 import junit.framework.TestCase;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;

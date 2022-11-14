@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.junit.integration.kotlintest.data
 
-import com.google.j2cl.junit.integration.testlogger.TestCaseLogger
+import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger
 import kotlin.test.Test
 import org.junit.FixMethodOrder
 import org.junit.runners.MethodSorters

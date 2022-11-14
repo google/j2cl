@@ -17,6 +17,7 @@ package com.google.j2cl.junit.integration.async.data;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.j2cl.junit.async.AsyncTestRunner;
+import com.google.j2cl.junit.integration.testing.async.Thenable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

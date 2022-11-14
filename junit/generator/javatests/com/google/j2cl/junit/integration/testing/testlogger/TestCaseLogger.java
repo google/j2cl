@@ -13,28 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.junit.integration.async.data;
+package com.google.j2cl.junit.integration.testing.testlogger;
 
-import java.util.TimerTask;
-
-/** A simple timer for tests */
-public class Timer {
-
-  /** A simple callback interface */
-  @FunctionalInterface
-  public interface Callback {
-    void execute();
-  }
-
-  public static void schedule(final Callback c, final int delay) {
-    new java.util.Timer()
-        .schedule(
-            new TimerTask() {
-              @Override
-              public void run() {
-                c.execute();
-              }
-            },
-            delay);
+/** Calling stub for writing into the log. */
+public class TestCaseLogger {
+  public static void log(String message) {
+    // We are using the prefix here so that we can clearly identify messages coming from our tests
+    // vs. messages that just happened to be in the output of a test (e.g. coming from the
+    // testing infrastructure itself).
+    System.out.println(" [java_message_from_test] " + message);
   }
 }

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.junit.integration.testlogger;
+package com.google.j2cl.junit.integration.testing.testlogger;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
 

@@ -66,7 +66,7 @@ JVM_FLAGS = [
 
 _DEFAULT_JAVA_DEPS = [
     "//third_party/java/junit:junit",
-    "//junit/generator/javatests/com/google/j2cl/junit/integration/testlogger:testlogger",
+    "//junit/generator/javatests/com/google/j2cl/junit/integration/testing/testlogger:testlogger",
 ]
 
 def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_srcs = [], native_deps = [], platforms = ["CLOSURE"]):

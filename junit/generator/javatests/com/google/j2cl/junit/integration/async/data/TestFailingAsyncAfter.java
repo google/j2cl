@@ -17,7 +17,9 @@ package com.google.j2cl.junit.integration.async.data;
 
 import com.google.j2cl.junit.async.AsyncTestRunner;
 import com.google.j2cl.junit.async.Timeout;
-import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
+import com.google.j2cl.junit.integration.testing.async.Thenable;
+import com.google.j2cl.junit.integration.testing.async.Timer;
+import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger;
 import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

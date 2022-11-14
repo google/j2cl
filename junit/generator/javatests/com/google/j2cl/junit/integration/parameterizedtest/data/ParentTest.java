@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.junit.integration.parameterizedtest.data;
 
-import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
+import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.FixMethodOrder;
