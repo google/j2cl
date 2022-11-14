@@ -901,6 +901,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
      */
     private Expression convert(CreationReference expression) {
       ITypeBinding expressionTypeBinding = expression.getType().resolveBinding();
+      TypeDescriptor expressionTypeDescriptor =
+          environment.createTypeDescriptor(
+              expressionTypeBinding, getCurrentType().getDeclaration().isNullMarked());
       MethodDescriptor functionalMethodDescriptor =
           environment.createMethodDescriptor(
               expression.resolveTypeBinding().getFunctionalInterfaceMethod());
@@ -923,7 +926,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           environment.createMethodDescriptor(expression.resolveMethodBinding());
 
       return MethodReference.newBuilder()
-          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
+          .setTypeDescriptor(expressionTypeDescriptor)
           .setReferencedMethodDescriptor(targetConstructorMethodDescriptor)
           .setInterfaceMethodDescriptor(functionalMethodDescriptor)
           .setSourcePosition(sourcePosition)
