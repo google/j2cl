@@ -76,12 +76,12 @@
  (type $function.m_getTestField__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ protobuf/MyMessage.java:24:13
+ ;;@ protobuf/MyMessage.java:26:13
  (local $this (ref null $protobuf.MyMessage))
  (local.set $this (ref.cast_static $protobuf.MyMessage (local.get $this.untyped)))
  (block
   ;; return MyMessage.this.testField;
-  ;;@ protobuf/MyMessage.java:25:4
+  ;;@ protobuf/MyMessage.java:27:4
   (return (struct.get $protobuf.MyMessage $f_testField__protobuf_MyMessage(local.get $this)))
  )
 )
@@ -90,13 +90,13 @@
 ;;; MyMessage MyMessage.getDefaultInstance()
 (func $m_getDefaultInstance__protobuf_MyMessage@protobuf.MyMessage
  (result (ref null $protobuf.MyMessage))
- ;;@ protobuf/MyMessage.java:28:26
+ ;;@ protobuf/MyMessage.java:30:26
  (block
   ;; protobuf.MyMessage.$clinit();
-  ;;@ protobuf/MyMessage.java:28:47
+  ;;@ protobuf/MyMessage.java:30:47
   (call $$clinit__void@protobuf.MyMessage )
   ;; return protobuf.MyMessage.$create(0);
-  ;;@ protobuf/MyMessage.java:29:4
+  ;;@ protobuf/MyMessage.java:31:4
   (return (call $$create__int@protobuf.MyMessage (i32.const 0)))
  )
 )
@@ -104,13 +104,13 @@
 ;;; Builder MyMessage.newBuilder()
 (func $m_newBuilder__protobuf_MyMessage_Builder@protobuf.MyMessage
  (result (ref null $protobuf.MyMessage.Builder))
- ;;@ protobuf/MyMessage.java:32:24
+ ;;@ protobuf/MyMessage.java:34:24
  (block
   ;; protobuf.MyMessage.$clinit();
-  ;;@ protobuf/MyMessage.java:32:37
+  ;;@ protobuf/MyMessage.java:34:37
   (call $$clinit__void@protobuf.MyMessage )
   ;; return protobuf.MyMessage.Builder.$create();
-  ;;@ protobuf/MyMessage.java:33:4
+  ;;@ protobuf/MyMessage.java:35:4
   (return (call $$create__@protobuf.MyMessage.Builder ))
  )
 )
@@ -119,17 +119,17 @@
 (func $$create__int@protobuf.MyMessage
  (param $testField i32)
  (result (ref null $protobuf.MyMessage))
- ;;@ protobuf/MyMessage.java:36:10
+ ;;@ protobuf/MyMessage.java:38:10
  (local $$instance (ref null $protobuf.MyMessage))
  (block
   ;; MyMessage $instance = new MyMessage.<init>(0,testField);
-  ;;@ protobuf/MyMessage.java:36:10
+  ;;@ protobuf/MyMessage.java:38:10
   (local.set $$instance (struct.new $protobuf.MyMessage (ref.as_non_null (global.get $protobuf.MyMessage.vtable)) (ref.as_non_null (global.get $protobuf.MyMessage.itable)) (i32.const 0) (local.get $testField)))
   ;; $instance.$ctor(testField);
-  ;;@ protobuf/MyMessage.java:36:10
+  ;;@ protobuf/MyMessage.java:38:10
   (call $$ctor__int__void_$p_protobuf_MyMessage@protobuf.MyMessage (ref.as_non_null (local.get $$instance))(local.get $testField))
   ;; return $instance;
-  ;;@ protobuf/MyMessage.java:36:10
+  ;;@ protobuf/MyMessage.java:38:10
   (return (local.get $$instance))
  )
 )
@@ -138,35 +138,35 @@
 (func $$ctor__int__void_$p_protobuf_MyMessage@protobuf.MyMessage
  (param $this (ref null $protobuf.MyMessage))
  (param $testField i32)
- ;;@ protobuf/MyMessage.java:36:10
+ ;;@ protobuf/MyMessage.java:38:10
  (block
   ;; protobuf.MyMessage.$clinit();
-  ;;@ protobuf/MyMessage.java:36:35
+  ;;@ protobuf/MyMessage.java:38:35
   (call $$clinit__void@protobuf.MyMessage )
   ;; GeneratedMessage.this.$ctor();
-  ;;@ protobuf/MyMessage.java:36:35
+  ;;@ protobuf/MyMessage.java:38:35
   (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage@com.google.protobuf.GeneratedMessage (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void MyMessage.$clinit()
 (func $$clinit__void@protobuf.MyMessage
- ;;@ protobuf/MyMessage.java:20:13
+ ;;@ protobuf/MyMessage.java:22:13
  (block
   ;; if (protobuf.MyMessage.$initialized) return;
-  ;;@ protobuf/MyMessage.java:20:13
+  ;;@ protobuf/MyMessage.java:22:13
   (if (global.get $f_$initialized__protobuf_MyMessage)
    (then
     ;; return;
-    ;;@ protobuf/MyMessage.java:20:13
+    ;;@ protobuf/MyMessage.java:22:13
     (return )
    )
   )
   ;; (protobuf.MyMessage.$initialized = true);
-  ;;@ protobuf/MyMessage.java:20:13
+  ;;@ protobuf/MyMessage.java:22:13
   (global.set $f_$initialized__protobuf_MyMessage (i32.const 1))
   ;; com.google.protobuf.GeneratedMessage.$clinit();
-  ;;@ protobuf/MyMessage.java:20:13
+  ;;@ protobuf/MyMessage.java:22:13
   (call $$clinit__void@com.google.protobuf.GeneratedMessage )
  )
 )
@@ -209,12 +209,12 @@
  (type $function.m_getTestField__int)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ protobuf/MyMessage.java:43:15
+ ;;@ protobuf/MyMessage.java:46:15
  (local $this (ref null $protobuf.MyMessage.Builder))
  (local.set $this (ref.cast_static $protobuf.MyMessage.Builder (local.get $this.untyped)))
  (block
   ;; return Builder.this.testField;
-  ;;@ protobuf/MyMessage.java:44:6
+  ;;@ protobuf/MyMessage.java:47:6
   (return (struct.get $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder(local.get $this)))
  )
 )
@@ -226,15 +226,15 @@
  (param $this.untyped (ref $java.lang.Object))
  (param $testField i32)
  (result (ref null $protobuf.MyMessage.Builder))
- ;;@ protobuf/MyMessage.java:47:19
+ ;;@ protobuf/MyMessage.java:50:19
  (local $this (ref null $protobuf.MyMessage.Builder))
  (local.set $this (ref.cast_static $protobuf.MyMessage.Builder (local.get $this.untyped)))
  (block
   ;; (Builder.this.testField = testField);
-  ;;@ protobuf/MyMessage.java:48:6
+  ;;@ protobuf/MyMessage.java:51:6
   (struct.set $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder(local.get $this) (local.get $testField))
   ;; return Builder.this;
-  ;;@ protobuf/MyMessage.java:49:6
+  ;;@ protobuf/MyMessage.java:52:6
   (return (local.get $this))
  )
 )
@@ -245,12 +245,12 @@
  (type $function.m_build__protobuf_MyMessage)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $protobuf.MyMessage))
- ;;@ protobuf/MyMessage.java:52:21
+ ;;@ protobuf/MyMessage.java:55:21
  (local $this (ref null $protobuf.MyMessage.Builder))
  (local.set $this (ref.cast_static $protobuf.MyMessage.Builder (local.get $this.untyped)))
  (block
   ;; return protobuf.MyMessage.$create(Builder.this.testField);
-  ;;@ protobuf/MyMessage.java:53:6
+  ;;@ protobuf/MyMessage.java:56:6
   (return (call $$create__int@protobuf.MyMessage (struct.get $protobuf.MyMessage.Builder $f_testField__protobuf_MyMessage_Builder(local.get $this))))
  )
 )
@@ -259,17 +259,17 @@
 ;;; Builder Builder.$create()
 (func $$create__@protobuf.MyMessage.Builder
  (result (ref null $protobuf.MyMessage.Builder))
- ;;@ protobuf/MyMessage.java:56:12
+ ;;@ protobuf/MyMessage.java:59:12
  (local $$instance (ref null $protobuf.MyMessage.Builder))
  (block
   ;; Builder $instance = new Builder.<init>(0,0);
-  ;;@ protobuf/MyMessage.java:56:12
+  ;;@ protobuf/MyMessage.java:59:12
   (local.set $$instance (struct.new $protobuf.MyMessage.Builder (ref.as_non_null (global.get $protobuf.MyMessage.Builder.vtable)) (ref.as_non_null (global.get $protobuf.MyMessage.Builder.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ protobuf/MyMessage.java:56:12
+  ;;@ protobuf/MyMessage.java:59:12
   (call $$ctor__void_$p_protobuf_MyMessage_Builder@protobuf.MyMessage.Builder (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ protobuf/MyMessage.java:56:12
+  ;;@ protobuf/MyMessage.java:59:12
   (return (local.get $$instance))
  )
 )
@@ -277,35 +277,35 @@
 ;;; void Builder.$ctor()
 (func $$ctor__void_$p_protobuf_MyMessage_Builder@protobuf.MyMessage.Builder
  (param $this (ref null $protobuf.MyMessage.Builder))
- ;;@ protobuf/MyMessage.java:56:12
+ ;;@ protobuf/MyMessage.java:59:12
  (block
   ;; protobuf.MyMessage.Builder.$clinit();
-  ;;@ protobuf/MyMessage.java:56:22
+  ;;@ protobuf/MyMessage.java:59:22
   (call $$clinit__void@protobuf.MyMessage.Builder )
   ;; Builder.this.$ctor();
-  ;;@ protobuf/MyMessage.java:56:22
+  ;;@ protobuf/MyMessage.java:59:22
   (call $$ctor__void_$p_com_google_protobuf_GeneratedMessage_Builder@com.google.protobuf.GeneratedMessage.Builder (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Builder.$clinit()
 (func $$clinit__void@protobuf.MyMessage.Builder
- ;;@ protobuf/MyMessage.java:40:22
+ ;;@ protobuf/MyMessage.java:43:22
  (block
   ;; if (protobuf.MyMessage.Builder.$initialized) return;
-  ;;@ protobuf/MyMessage.java:40:22
+  ;;@ protobuf/MyMessage.java:43:22
   (if (global.get $f_$initialized__protobuf_MyMessage_Builder)
    (then
     ;; return;
-    ;;@ protobuf/MyMessage.java:40:22
+    ;;@ protobuf/MyMessage.java:43:22
     (return )
    )
   )
   ;; (protobuf.MyMessage.Builder.$initialized = true);
-  ;;@ protobuf/MyMessage.java:40:22
+  ;;@ protobuf/MyMessage.java:43:22
   (global.set $f_$initialized__protobuf_MyMessage_Builder (i32.const 1))
   ;; com.google.protobuf.GeneratedMessage.Builder.$clinit();
-  ;;@ protobuf/MyMessage.java:40:22
+  ;;@ protobuf/MyMessage.java:43:22
   (call $$clinit__void@com.google.protobuf.GeneratedMessage.Builder )
  )
 )

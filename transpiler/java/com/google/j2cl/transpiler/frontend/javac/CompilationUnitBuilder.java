@@ -1343,9 +1343,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return false;
     }
 
-    return AnnotationUtils.findAnnotationBindingByName(
-            packge.getAnnotationMirrors(), Nullability.ORG_JSPECIFY_NULLNESS_NULL_MARKED)
-        != null;
+    return packge.getAnnotationMirrors().stream()
+        .anyMatch(a -> Nullability.isNullMarkedAnnotation(AnnotationUtils.getAnnotationName(a)));
   }
 
   private static void sortPackageInfoFirst(List<CompilationUnitTree> compilationUnits) {

@@ -16,7 +16,9 @@
 package protobuf;
 
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.Internal.ProtoNonnullApi;
 
+@ProtoNonnullApi
 public class MyMessage extends GeneratedMessage {
 
   public final int testField;
@@ -37,6 +39,7 @@ public class MyMessage extends GeneratedMessage {
     this.testField = testField;
   }
 
+  @ProtoNonnullApi
   public static class Builder extends GeneratedMessage.Builder {
     public int testField;
 

@@ -20,7 +20,9 @@ import com.google.common.collect.ImmutableSet;
 /** Utility that provides the handling of recognized nullability annotations. */
 public class Nullability {
 
-  public static final String ORG_JSPECIFY_NULLNESS_NULL_MARKED = "org.jspecify.nullness.NullMarked";
+  public static final ImmutableSet<String> RECOGNIZED_NULL_MARKED_ANNOTATIONS_QUALIFIED_NAMES =
+      ImmutableSet.of(
+          "org.jspecify.nullness.NullMarked", "com.google.protobuf.Internal.ProtoNonnullApi");
 
   private static final ImmutableSet<String> RECOGNIZED_NULLABLE_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
@@ -130,6 +132,10 @@ public class Nullability {
           "org.antlr.v4.runtime.misc.NotNull",
           "org.eclipse.lsp4j.jsonrpc.validation.NonNull",
           "reactor.util.annotation.NonNull");
+
+  public static boolean isNullMarkedAnnotation(String qualifiedName) {
+    return RECOGNIZED_NULL_MARKED_ANNOTATIONS_QUALIFIED_NAMES.contains(qualifiedName);
+  }
 
   public static boolean isNullableAnnotation(String qualifiedName) {
     return RECOGNIZED_NULLABLE_ANNOTATIONS_QUALIFIED_NAMES.contains(qualifiedName);

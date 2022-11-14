@@ -21,12 +21,12 @@ open class MyMessage: GeneratedMessage {
 
  companion object {
   @JvmStatic
-  fun getDefaultInstance(): MyMessage? {
+  fun getDefaultInstance(): MyMessage {
    return MyMessage(0)
   }
 
   @JvmStatic
-  fun newBuilder(): MyMessage.Builder? {
+  fun newBuilder(): MyMessage.Builder {
    return MyMessage.Builder()
   }
  }
@@ -38,12 +38,12 @@ open class MyMessage: GeneratedMessage {
    return this.testField
   }
 
-  open fun setTestField(testField: Int): MyMessage.Builder? {
+  open fun setTestField(testField: Int): MyMessage.Builder {
    this.testField = testField
    return this
   }
 
-  open fun build(): MyMessage? {
+  open fun build(): MyMessage {
    return MyMessage(this@Builder.testField)
   }
 

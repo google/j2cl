@@ -34,13 +34,17 @@ public final class AnnotationUtils {
       return null;
     }
     for (AnnotationMirror annotationBinding : annotations) {
-      if (((TypeElement) annotationBinding.getAnnotationType().asElement())
-          .getQualifiedName()
-          .contentEquals(name)) {
+      if (getAnnotationName(annotationBinding).equals(name)) {
         return annotationBinding;
       }
     }
     return null;
+  }
+
+  static String getAnnotationName(AnnotationMirror annotationMirror) {
+    return ((TypeElement) annotationMirror.getAnnotationType().asElement())
+        .getQualifiedName()
+        .toString();
   }
 
   @Nullable

@@ -1,0 +1,34 @@
+goog.module('com.google.protobuf.Internal.ProtoNonnullApi$impl');
+
+const Annotation = goog.require('java.lang.annotation.Annotation$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {Annotation}
+ */
+class ProtoNonnullApi {
+ /** @nodts */
+ static $clinit() {
+  ProtoNonnullApi.$clinit = () =>{};
+  ProtoNonnullApi.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Annotation.$markImplementor(ctor);
+  ctor.prototype.$implements__com_google_protobuf_Internal_ProtoNonnullApi = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__com_google_protobuf_Internal_ProtoNonnullApi;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+ProtoNonnullApi.$markImplementor(/**@type {Function}*/ (ProtoNonnullApi));
+$Util.$setClassMetadataForInterface(ProtoNonnullApi, 'com.google.protobuf.Internal$ProtoNonnullApi');
+
+exports = ProtoNonnullApi;
+
+//# sourceMappingURL=Internal$ProtoNonnullApi.js.map

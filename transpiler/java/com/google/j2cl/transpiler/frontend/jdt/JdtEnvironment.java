@@ -59,8 +59,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -70,6 +72,7 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.Modifier;
+import org.eclipse.jdt.core.dom.PackageDeclaration;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
 
@@ -1342,6 +1345,18 @@ class JdtEnvironment {
         .build();
   }
 
+  public static boolean isNullMarked(PackageDeclaration packageDeclaration) {
+    List<Annotation> packageAnnotations =
+        JdtEnvironment.asTypedList(packageDeclaration.annotations());
+
+    if (packageAnnotations == null) {
+      return false;
+    }
+
+    return hasNullMarkedAnnotation(
+        packageAnnotations.stream().map(Annotation::resolveAnnotationBinding));
+  }
+
   private boolean isNullMarked(ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
     return hasNullMarkedAnnotation(typeBinding)
         || packageInfoCache.isNullMarked(
@@ -1352,12 +1367,16 @@ class JdtEnvironment {
    * Returns true if {@code typeBinding} or one of its enclosing types has a @NullMarked annotation.
    */
   private static boolean hasNullMarkedAnnotation(ITypeBinding typeBinding) {
-    if (JdtAnnotationUtils.hasAnnotation(
-        typeBinding, Nullability.ORG_JSPECIFY_NULLNESS_NULL_MARKED)) {
+    if (hasNullMarkedAnnotation(Arrays.stream(typeBinding.getAnnotations()))) {
       return true;
     }
     return typeBinding.getDeclaringClass() != null
         && hasNullMarkedAnnotation(typeBinding.getDeclaringClass());
+  }
+
+  private static boolean hasNullMarkedAnnotation(Stream<IAnnotationBinding> annotations) {
+    return annotations.anyMatch(
+        a -> Nullability.isNullMarkedAnnotation(a.getAnnotationType().getQualifiedName()));
   }
 
   private static boolean isAnnotatedWithFunctionalInterface(ITypeBinding typeBinding) {

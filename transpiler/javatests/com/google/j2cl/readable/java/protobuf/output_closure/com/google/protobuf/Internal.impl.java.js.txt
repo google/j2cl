@@ -1,0 +1,40 @@
+goog.module('com.google.protobuf.Internal$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Internal extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Internal} */
+ static $create__() {
+  Internal.$clinit();
+  let $instance = new Internal();
+  $instance.$ctor__com_google_protobuf_Internal__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__com_google_protobuf_Internal__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Internal.$clinit = () =>{};
+  Internal.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Internal;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Internal, 'com.google.protobuf.Internal');
+
+exports = Internal;
+
+//# sourceMappingURL=Internal.js.map

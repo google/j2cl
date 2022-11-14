@@ -95,7 +95,6 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
-import com.google.j2cl.transpiler.frontend.common.Nullability;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -187,20 +186,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private boolean isNullMarked(org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-      List<Annotation> packageAnnotations =
-          JdtEnvironment.asTypedList(jdtCompilationUnit.getPackage().annotations());
-
-      if (packageAnnotations == null) {
-        return false;
-      }
-
-      return packageAnnotations.stream()
-          .map(Annotation::resolveAnnotationBinding)
-          .anyMatch(
-              a ->
-                  a.getAnnotationType()
-                      .getQualifiedName()
-                      .equals(Nullability.ORG_JSPECIFY_NULLNESS_NULL_MARKED));
+      return environment.isNullMarked(jdtCompilationUnit.getPackage());
     }
 
     private Type convert(AbstractTypeDeclaration typeDeclaration) {

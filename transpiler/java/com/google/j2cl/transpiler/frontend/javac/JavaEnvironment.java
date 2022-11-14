@@ -1384,9 +1384,8 @@ class JavaEnvironment {
   }
 
   private static boolean hasNullMarkedAnnotation(TypeElement classSymbol) {
-    if (AnnotationUtils.findAnnotationBindingByName(
-            classSymbol.getAnnotationMirrors(), Nullability.ORG_JSPECIFY_NULLNESS_NULL_MARKED)
-        != null) {
+    if (classSymbol.getAnnotationMirrors().stream()
+        .anyMatch(a -> Nullability.isNullMarkedAnnotation(AnnotationUtils.getAnnotationName(a)))) {
       // The type is NullMarked, no need to look further.
       return true;
     }
