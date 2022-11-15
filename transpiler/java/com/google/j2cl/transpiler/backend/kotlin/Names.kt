@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
@@ -25,15 +26,23 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.Visibility
 
 internal val MemberDescriptor.ktMangledName: String
+  get() = ktName + ktNameSuffix
+
+private val MemberDescriptor.ktNameSuffix: String
   get() =
-    ktName +
-      when (visibility) {
-        Visibility.PUBLIC -> ""
-        Visibility.PROTECTED -> ""
-        Visibility.PACKAGE_PRIVATE -> ""
-        Visibility.PRIVATE ->
-          "_private_${enclosingTypeDescriptor.typeDeclaration.privateMemberSuffix}"
-      }
+    when (visibility!!) {
+      Visibility.PUBLIC -> ktPropertyNameSuffix
+      Visibility.PROTECTED -> ktPropertyNameSuffix
+      Visibility.PACKAGE_PRIVATE -> ktPropertyNameSuffix
+      Visibility.PRIVATE ->
+        "_private_${enclosingTypeDescriptor.typeDeclaration.privateMemberSuffix}"
+    }
+
+private val MemberDescriptor.ktPropertyNameSuffix: String
+  get() = if (this is FieldDescriptor && hasConflictingKtProperty) "_ktPropertyConflict" else ""
+
+private val FieldDescriptor.hasConflictingKtProperty: Boolean
+  get() = enclosingTypeDescriptor.polymorphicMethods.any { it.isKtProperty && it.ktName == ktName }
 
 private val TypeDeclaration.privateMemberSuffix: String
   get() = if (isInterface) mangledName else "$classHierarchyDepth"
@@ -79,3 +88,5 @@ internal fun TypeDescriptor.ktQualifiedName(asSuperType: Boolean = false): Strin
 internal fun String.qualifiedNameComponents(): List<String> = split(".")
 
 internal fun String.qualifiedNameToSimpleName(): String = qualifiedNameComponents().last()
+
+private fun String.toTitleCase() = if (isEmpty()) "" else get(0).toUpperCase() + drop(1)

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.Type
+import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
 
@@ -32,3 +33,9 @@ internal val Type.localNames: Set<String>
       }
       .filterNotNull()
       .toSet()
+
+// Interface with a single @KtProperty method is not functional in Kotlin.
+internal val TypeDeclaration.isKtFunctionalInterface
+  get() =
+    isFunctionalInterface &&
+      !toUnparameterizedTypeDescriptor().singleAbstractMethodDescriptor!!.isKtProperty

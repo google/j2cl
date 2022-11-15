@@ -1,0 +1,87 @@
+goog.module('nativekttypes.KtPropertyNameConflict$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Interface = goog.forwardDeclare('nativekttypes.KtPropertyNameConflict.Interface$impl');
+let Subclass = goog.forwardDeclare('nativekttypes.KtPropertyNameConflict.Subclass$impl');
+
+/**
+ * @abstract
+ */
+class KtPropertyNameConflict extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict = 0;
+  /**@type {number} @nodts*/
+  this.f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict = 0;
+  /**@type {number} @nodts*/
+  this.f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict = 0;
+ }
+ /** @nodts */
+ $ctor__nativekttypes_KtPropertyNameConflict__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {number} */
+ m_getFieldWithConflictingGetter__int() {
+  return this.f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict;
+ }
+ /** @nodts @return {number} */
+ m_fieldWithConflictingNonGetter__int() {
+  return this.f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict;
+ }
+ /** @nodts @return {number} */
+ m_renamedMethod__int() {
+  return this.f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict;
+ }
+ /** @nodts @return {number} */
+ m_getFieldWithConflictingSuperMethod__int() {
+  return 0;
+ }
+ /** @nodts */
+ static m_test__nativekttypes_KtPropertyNameConflict__nativekttypes_KtPropertyNameConflict_Interface__void(/** KtPropertyNameConflict */ o, /** Interface */ i) {
+  KtPropertyNameConflict.$clinit();
+  let fieldWithConflictingGetter = o.f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict;
+  let conflictingGetter = o.m_getFieldWithConflictingGetter__int();
+  let fieldWithConflictingNonGetter = o.f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict;
+  let conflictingNonGetter = o.m_fieldWithConflictingNonGetter__int();
+  let fieldWithConflictingRenamedMethod = o.f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict;
+  let conflictingRenamedMethod = o.m_renamedMethod__int();
+  let conflictingSuperMethod = o.m_getFieldWithConflictingSuperMethod__int();
+  let conflictingInterfaceMethod = i.m_fieldWithConflictingInterfaceMethod__int();
+ }
+ /** @nodts */
+ static m_test__nativekttypes_KtPropertyNameConflict_Subclass__void(/** Subclass */ o) {
+  KtPropertyNameConflict.$clinit();
+  let fieldWithConflictingGetter = o.f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict;
+  let conflictingGetter = o.m_getFieldWithConflictingGetter__int();
+  let fieldWithConflictingNonGetter = o.f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict;
+  let conflictingNonGetter = o.m_fieldWithConflictingNonGetter__int();
+  let fieldWithConflictingRenamedMethod = o.f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict;
+  let conflictingRenamedMethod = o.m_renamedMethod__int();
+  let fieldWithConflictingSuperMethod = o.f_fieldWithConflictingSuperMethod__nativekttypes_KtPropertyNameConflict_Subclass;
+  let conflictingSuperMethod = o.m_getFieldWithConflictingSuperMethod__int();
+  let fieldWithConflictingInterfaceMethod = o.f_fieldWithConflictingInterfaceMethod__nativekttypes_KtPropertyNameConflict_Subclass;
+  let conflictingInterfaceMethod = o.m_fieldWithConflictingInterfaceMethod__int();
+ }
+ /** @nodts */
+ static $clinit() {
+  KtPropertyNameConflict.$clinit = () =>{};
+  KtPropertyNameConflict.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof KtPropertyNameConflict;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(KtPropertyNameConflict, 'nativekttypes.KtPropertyNameConflict');
+
+exports = KtPropertyNameConflict;
+
+//# sourceMappingURL=KtPropertyNameConflict.js.map

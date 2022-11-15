@@ -1,0 +1,42 @@
+goog.module('nativekttypes.KtPropertyNameConflict.Interface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('nativekttypes.KtPropertyNameConflict.Interface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class Interface {
+ /** @abstract @nodts @return {number} */
+ m_fieldWithConflictingInterfaceMethod__int() {}
+ /** @nodts @return {Interface} */
+ static $adapt(/** ?function():number */ fn) {
+  Interface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  Interface.$clinit = () =>{};
+  Interface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__nativekttypes_KtPropertyNameConflict_Interface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__nativekttypes_KtPropertyNameConflict_Interface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('nativekttypes.KtPropertyNameConflict.Interface.$LambdaAdaptor$impl');
+ }
+}
+Interface.$markImplementor(/**@type {Function}*/ (Interface));
+$Util.$setClassMetadataForInterface(Interface, 'nativekttypes.KtPropertyNameConflict$Interface');
+
+exports = Interface;
+
+//# sourceMappingURL=KtPropertyNameConflict$Interface.js.map

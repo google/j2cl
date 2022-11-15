@@ -1,3 +1,12 @@
+;;; Code for nativekttypes.KtPropertyNameConflict [static fields]
+(global $f_$initialized__nativekttypes_KtPropertyNameConflict (mut i32) (i32.const 0))
+
+;;; Code for nativekttypes.KtPropertyNameConflict.Interface [static fields]
+(global $f_$initialized__nativekttypes_KtPropertyNameConflict_Interface (mut i32) (i32.const 0))
+
+;;; Code for nativekttypes.KtPropertyNameConflict.Subclass [static fields]
+(global $f_$initialized__nativekttypes_KtPropertyNameConflict_Subclass (mut i32) (i32.const 0))
+
 ;;; Code for nativekttypes.Main [static fields]
 (global $f_$initialized__nativekttypes_Main (mut i32) (i32.const 0))
 
@@ -541,6 +550,338 @@
 ;;; Code for nativekttypes.nativekt.KWithCompanionObject [itable.init]
 (global $nativekttypes.nativekt.KWithCompanionObject.itable (ref $itable) (array.init_static $itable 
  ))
+
+;;; Code for nativekttypes.KtPropertyNameConflict [CLASS]
+(type $nativekttypes.KtPropertyNameConflict (struct_subtype 
+ (field $vtable (ref $nativekttypes.KtPropertyNameConflict.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict (mut i32))
+ (field $f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict (mut i32))
+ (field $f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict (mut i32))
+  $java.lang.Object)
+)
+(type $nativekttypes.KtPropertyNameConflict.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getFieldWithConflictingGetter__int (ref $function.m_getFieldWithConflictingGetter__int))
+ (field $m_fieldWithConflictingNonGetter__int (ref $function.m_fieldWithConflictingNonGetter__int))
+ (field $m_renamedMethod__int (ref $function.m_renamedMethod__int))
+ (field $m_getFieldWithConflictingSuperMethod__int (ref $function.m_getFieldWithConflictingSuperMethod__int))
+  $java.lang.Object.vtable)
+)
+
+;;; void KtPropertyNameConflict.$ctor()
+(func $$ctor__void_$p_nativekttypes_KtPropertyNameConflict@nativekttypes.KtPropertyNameConflict
+ (param $this (ref null $nativekttypes.KtPropertyNameConflict))
+ ;;@ nativekttypes/KtPropertyNameConflict.java:21:22
+ (block
+  ;; nativekttypes.KtPropertyNameConflict.$clinit();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:21:22
+  (call $$clinit__void@nativekttypes.KtPropertyNameConflict )
+  ;; Object.this.$ctor();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:21:22
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int KtPropertyNameConflict.getFieldWithConflictingGetter()
+(func $m_getFieldWithConflictingGetter__int@nativekttypes.KtPropertyNameConflict
+ (type $function.m_getFieldWithConflictingGetter__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ nativekttypes/KtPropertyNameConflict.java:27:13
+ (local $this (ref null $nativekttypes.KtPropertyNameConflict))
+ (local.set $this (ref.cast_static $nativekttypes.KtPropertyNameConflict (local.get $this.untyped)))
+ (block
+  ;; return KtPropertyNameConflict.this.fieldWithConflictingGetter;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:28:4
+  (return (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict(local.get $this)))
+ )
+)
+(elem declare func $m_getFieldWithConflictingGetter__int@nativekttypes.KtPropertyNameConflict)
+
+;;; int KtPropertyNameConflict.fieldWithConflictingNonGetter()
+(func $m_fieldWithConflictingNonGetter__int@nativekttypes.KtPropertyNameConflict
+ (type $function.m_fieldWithConflictingNonGetter__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ nativekttypes/KtPropertyNameConflict.java:32:13
+ (local $this (ref null $nativekttypes.KtPropertyNameConflict))
+ (local.set $this (ref.cast_static $nativekttypes.KtPropertyNameConflict (local.get $this.untyped)))
+ (block
+  ;; return KtPropertyNameConflict.this.fieldWithConflictingNonGetter;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:33:4
+  (return (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict(local.get $this)))
+ )
+)
+(elem declare func $m_fieldWithConflictingNonGetter__int@nativekttypes.KtPropertyNameConflict)
+
+;;; int KtPropertyNameConflict.renamedMethod()
+(func $m_renamedMethod__int@nativekttypes.KtPropertyNameConflict
+ (type $function.m_renamedMethod__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ nativekttypes/KtPropertyNameConflict.java:38:13
+ (local $this (ref null $nativekttypes.KtPropertyNameConflict))
+ (local.set $this (ref.cast_static $nativekttypes.KtPropertyNameConflict (local.get $this.untyped)))
+ (block
+  ;; return KtPropertyNameConflict.this.fieldWithConflictingRenamedMethod;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:39:4
+  (return (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict(local.get $this)))
+ )
+)
+(elem declare func $m_renamedMethod__int@nativekttypes.KtPropertyNameConflict)
+
+;;; int KtPropertyNameConflict.getFieldWithConflictingSuperMethod()
+(func $m_getFieldWithConflictingSuperMethod__int@nativekttypes.KtPropertyNameConflict
+ (type $function.m_getFieldWithConflictingSuperMethod__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ nativekttypes/KtPropertyNameConflict.java:43:13
+ (local $this (ref null $nativekttypes.KtPropertyNameConflict))
+ (local.set $this (ref.cast_static $nativekttypes.KtPropertyNameConflict (local.get $this.untyped)))
+ (block
+  ;; return 0;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:44:4
+  (return (i32.const 0))
+ )
+)
+(elem declare func $m_getFieldWithConflictingSuperMethod__int@nativekttypes.KtPropertyNameConflict)
+
+;;; void KtPropertyNameConflict.test(KtPropertyNameConflict o, Interface i)
+(func $m_test__nativekttypes_KtPropertyNameConflict__nativekttypes_KtPropertyNameConflict_Interface__void@nativekttypes.KtPropertyNameConflict
+ (param $o (ref null $nativekttypes.KtPropertyNameConflict))
+ (param $i (ref null $java.lang.Object))
+ ;;@ nativekttypes/KtPropertyNameConflict.java:62:21
+ (local $fieldWithConflictingGetter i32)
+ (local $conflictingGetter i32)
+ (local $fieldWithConflictingNonGetter i32)
+ (local $conflictingNonGetter i32)
+ (local $fieldWithConflictingRenamedMethod i32)
+ (local $conflictingRenamedMethod i32)
+ (local $conflictingSuperMethod i32)
+ (local $conflictingInterfaceMethod i32)
+ (block
+  ;; nativekttypes.KtPropertyNameConflict.$clinit();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:62:65
+  (call $$clinit__void@nativekttypes.KtPropertyNameConflict )
+  ;; int fieldWithConflictingGetter = o.fieldWithConflictingGetter;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:63:4
+  (local.set $fieldWithConflictingGetter (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict(local.get $o)))
+  ;; int conflictingGetter = o.getFieldWithConflictingGetter();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:64:4
+  (local.set $conflictingGetter (call_ref $function.m_getFieldWithConflictingGetter__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.vtable $m_getFieldWithConflictingGetter__int (struct.get $nativekttypes.KtPropertyNameConflict $vtable(local.get $o)))))
+  ;; int fieldWithConflictingNonGetter = o.fieldWithConflictingNonGetter;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:65:4
+  (local.set $fieldWithConflictingNonGetter (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict(local.get $o)))
+  ;; int conflictingNonGetter = o.fieldWithConflictingNonGetter();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:66:4
+  (local.set $conflictingNonGetter (call_ref $function.m_fieldWithConflictingNonGetter__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.vtable $m_fieldWithConflictingNonGetter__int (struct.get $nativekttypes.KtPropertyNameConflict $vtable(local.get $o)))))
+  ;; int fieldWithConflictingRenamedMethod = o.fieldWithConflictingRenamedMethod;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:67:4
+  (local.set $fieldWithConflictingRenamedMethod (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict(local.get $o)))
+  ;; int conflictingRenamedMethod = o.renamedMethod();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:68:4
+  (local.set $conflictingRenamedMethod (call_ref $function.m_renamedMethod__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.vtable $m_renamedMethod__int (struct.get $nativekttypes.KtPropertyNameConflict $vtable(local.get $o)))))
+  ;; int conflictingSuperMethod = o.getFieldWithConflictingSuperMethod();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:69:4
+  (local.set $conflictingSuperMethod (call_ref $function.m_getFieldWithConflictingSuperMethod__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.vtable $m_getFieldWithConflictingSuperMethod__int (struct.get $nativekttypes.KtPropertyNameConflict $vtable(local.get $o)))))
+  ;; int conflictingInterfaceMethod = i.fieldWithConflictingInterfaceMethod();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:70:4
+  (local.set $conflictingInterfaceMethod (call_ref $function.m_fieldWithConflictingInterfaceMethod__int (ref.as_non_null (local.get $i))(struct.get $nativekttypes.KtPropertyNameConflict.Interface.vtable $m_fieldWithConflictingInterfaceMethod__int (ref.cast_static $nativekttypes.KtPropertyNameConflict.Interface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const -1))) )))
+ )
+)
+
+;;; void KtPropertyNameConflict.test(Subclass o)
+(func $m_test__nativekttypes_KtPropertyNameConflict_Subclass__void@nativekttypes.KtPropertyNameConflict
+ (param $o (ref null $nativekttypes.KtPropertyNameConflict.Subclass))
+ ;;@ nativekttypes/KtPropertyNameConflict.java:73:21
+ (local $fieldWithConflictingGetter i32)
+ (local $conflictingGetter i32)
+ (local $fieldWithConflictingNonGetter i32)
+ (local $conflictingNonGetter i32)
+ (local $fieldWithConflictingRenamedMethod i32)
+ (local $conflictingRenamedMethod i32)
+ (local $fieldWithConflictingSuperMethod i32)
+ (local $conflictingSuperMethod i32)
+ (local $fieldWithConflictingInterfaceMethod i32)
+ (local $conflictingInterfaceMethod i32)
+ (block
+  ;; nativekttypes.KtPropertyNameConflict.$clinit();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:73:38
+  (call $$clinit__void@nativekttypes.KtPropertyNameConflict )
+  ;; int fieldWithConflictingGetter = o.fieldWithConflictingGetter;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:74:4
+  (local.set $fieldWithConflictingGetter (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict(local.get $o)))
+  ;; int conflictingGetter = o.getFieldWithConflictingGetter();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:75:4
+  (local.set $conflictingGetter (call_ref $function.m_getFieldWithConflictingGetter__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.vtable $m_getFieldWithConflictingGetter__int (struct.get $nativekttypes.KtPropertyNameConflict $vtable(local.get $o)))))
+  ;; int fieldWithConflictingNonGetter = o.fieldWithConflictingNonGetter;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:76:4
+  (local.set $fieldWithConflictingNonGetter (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict(local.get $o)))
+  ;; int conflictingNonGetter = o.fieldWithConflictingNonGetter();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:77:4
+  (local.set $conflictingNonGetter (call_ref $function.m_fieldWithConflictingNonGetter__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.vtable $m_fieldWithConflictingNonGetter__int (struct.get $nativekttypes.KtPropertyNameConflict $vtable(local.get $o)))))
+  ;; int fieldWithConflictingRenamedMethod = o.fieldWithConflictingRenamedMethod;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:78:4
+  (local.set $fieldWithConflictingRenamedMethod (struct.get $nativekttypes.KtPropertyNameConflict $f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict(local.get $o)))
+  ;; int conflictingRenamedMethod = o.renamedMethod();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:79:4
+  (local.set $conflictingRenamedMethod (call_ref $function.m_renamedMethod__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.vtable $m_renamedMethod__int (struct.get $nativekttypes.KtPropertyNameConflict $vtable(local.get $o)))))
+  ;; int fieldWithConflictingSuperMethod = o.fieldWithConflictingSuperMethod;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:80:4
+  (local.set $fieldWithConflictingSuperMethod (struct.get $nativekttypes.KtPropertyNameConflict.Subclass $f_fieldWithConflictingSuperMethod__nativekttypes_KtPropertyNameConflict_Subclass(local.get $o)))
+  ;; int conflictingSuperMethod = o.getFieldWithConflictingSuperMethod();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:81:4
+  (local.set $conflictingSuperMethod (call_ref $function.m_getFieldWithConflictingSuperMethod__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.vtable $m_getFieldWithConflictingSuperMethod__int (struct.get $nativekttypes.KtPropertyNameConflict $vtable(local.get $o)))))
+  ;; int fieldWithConflictingInterfaceMethod = o.fieldWithConflictingInterfaceMethod;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:82:4
+  (local.set $fieldWithConflictingInterfaceMethod (struct.get $nativekttypes.KtPropertyNameConflict.Subclass $f_fieldWithConflictingInterfaceMethod__nativekttypes_KtPropertyNameConflict_Subclass(local.get $o)))
+  ;; int conflictingInterfaceMethod = o.fieldWithConflictingInterfaceMethod();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:83:4
+  (local.set $conflictingInterfaceMethod (call_ref $function.m_fieldWithConflictingInterfaceMethod__int (ref.as_non_null (local.get $o))(struct.get $nativekttypes.KtPropertyNameConflict.Subclass.vtable $m_fieldWithConflictingInterfaceMethod__int (struct.get $nativekttypes.KtPropertyNameConflict.Subclass $vtable(local.get $o)))))
+ )
+)
+
+;;; void KtPropertyNameConflict.$clinit()
+(func $$clinit__void@nativekttypes.KtPropertyNameConflict
+ ;;@ nativekttypes/KtPropertyNameConflict.java:21:22
+ (block
+  ;; if (nativekttypes.KtPropertyNameConflict.$initialized) return;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:21:22
+  (if (global.get $f_$initialized__nativekttypes_KtPropertyNameConflict)
+   (then
+    ;; return;
+    ;;@ nativekttypes/KtPropertyNameConflict.java:21:22
+    (return )
+   )
+  )
+  ;; (nativekttypes.KtPropertyNameConflict.$initialized = true);
+  ;;@ nativekttypes/KtPropertyNameConflict.java:21:22
+  (global.set $f_$initialized__nativekttypes_KtPropertyNameConflict (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:21:22
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Code for nativekttypes.KtPropertyNameConflict.Interface [INTERFACE]
+(type $nativekttypes.KtPropertyNameConflict.Interface.vtable (struct 
+ (field $m_fieldWithConflictingInterfaceMethod__int (ref $function.m_fieldWithConflictingInterfaceMethod__int))
+ )
+)
+
+;;; void Interface.$clinit()
+(func $$clinit__void@nativekttypes.KtPropertyNameConflict.Interface
+ ;;@ nativekttypes/KtPropertyNameConflict.java:47:19
+ (block
+  ;; if (nativekttypes.KtPropertyNameConflict.Interface.$initialized) return;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:47:19
+  (if (global.get $f_$initialized__nativekttypes_KtPropertyNameConflict_Interface)
+   (then
+    ;; return;
+    ;;@ nativekttypes/KtPropertyNameConflict.java:47:19
+    (return )
+   )
+  )
+  ;; (nativekttypes.KtPropertyNameConflict.Interface.$initialized = true);
+  ;;@ nativekttypes/KtPropertyNameConflict.java:47:19
+  (global.set $f_$initialized__nativekttypes_KtPropertyNameConflict_Interface (i32.const 1))
+ )
+)
+
+;;; Class<?> Interface.getClass()
+(func $m_getClass__java_lang_Class@nativekttypes.KtPropertyNameConflict.Interface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNativekttypes.KtPropertyNameConflict.Interface();
+  (return (call $function.no.side.effects.$getNativekttypes.KtPropertyNameConflict.Interface__java_lang_Class (ref.func $$getNativekttypes.KtPropertyNameConflict.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nativekttypes.KtPropertyNameConflict.Interface)
+
+;;; Code for nativekttypes.KtPropertyNameConflict.Subclass [CLASS]
+(type $nativekttypes.KtPropertyNameConflict.Subclass (struct_subtype 
+ (field $vtable (ref $nativekttypes.KtPropertyNameConflict.Subclass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fieldWithConflictingGetter__nativekttypes_KtPropertyNameConflict (mut i32))
+ (field $f_fieldWithConflictingNonGetter__nativekttypes_KtPropertyNameConflict (mut i32))
+ (field $f_fieldWithConflictingRenamedMethod__nativekttypes_KtPropertyNameConflict (mut i32))
+ (field $$outer_this__nativekttypes_KtPropertyNameConflict_Subclass (ref null $nativekttypes.KtPropertyNameConflict))
+ (field $f_fieldWithConflictingSuperMethod__nativekttypes_KtPropertyNameConflict_Subclass (mut i32))
+ (field $f_fieldWithConflictingInterfaceMethod__nativekttypes_KtPropertyNameConflict_Subclass (mut i32))
+  $nativekttypes.KtPropertyNameConflict)
+)
+(type $nativekttypes.KtPropertyNameConflict.Subclass.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getFieldWithConflictingGetter__int (ref $function.m_getFieldWithConflictingGetter__int))
+ (field $m_fieldWithConflictingNonGetter__int (ref $function.m_fieldWithConflictingNonGetter__int))
+ (field $m_renamedMethod__int (ref $function.m_renamedMethod__int))
+ (field $m_getFieldWithConflictingSuperMethod__int (ref $function.m_getFieldWithConflictingSuperMethod__int))
+ (field $m_fieldWithConflictingInterfaceMethod__int (ref $function.m_fieldWithConflictingInterfaceMethod__int))
+  $nativekttypes.KtPropertyNameConflict.vtable)
+)
+
+;;; void Subclass.$ctor(KtPropertyNameConflict $outer_this)
+(func $$ctor__nativekttypes_KtPropertyNameConflict__void_$p_nativekttypes_KtPropertyNameConflict_Subclass@nativekttypes.KtPropertyNameConflict.Subclass
+ (param $this (ref null $nativekttypes.KtPropertyNameConflict.Subclass))
+ (param $$outer_this (ref null $nativekttypes.KtPropertyNameConflict))
+ ;;@ nativekttypes/KtPropertyNameConflict.java:52:24
+ (block
+  ;; nativekttypes.KtPropertyNameConflict.Subclass.$clinit();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:52:24
+  (call $$clinit__void@nativekttypes.KtPropertyNameConflict.Subclass )
+  ;; KtPropertyNameConflict.this.$ctor();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:52:24
+  (call $$ctor__void_$p_nativekttypes_KtPropertyNameConflict@nativekttypes.KtPropertyNameConflict (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int Subclass.fieldWithConflictingInterfaceMethod()
+(func $m_fieldWithConflictingInterfaceMethod__int@nativekttypes.KtPropertyNameConflict.Subclass
+ (type $function.m_fieldWithConflictingInterfaceMethod__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ nativekttypes/KtPropertyNameConflict.java:57:15
+ (local $this (ref null $nativekttypes.KtPropertyNameConflict.Subclass))
+ (local.set $this (ref.cast_static $nativekttypes.KtPropertyNameConflict.Subclass (local.get $this.untyped)))
+ (block
+  ;; return Subclass.this.fieldWithConflictingInterfaceMethod;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:58:6
+  (return (struct.get $nativekttypes.KtPropertyNameConflict.Subclass $f_fieldWithConflictingInterfaceMethod__nativekttypes_KtPropertyNameConflict_Subclass(local.get $this)))
+ )
+)
+(elem declare func $m_fieldWithConflictingInterfaceMethod__int@nativekttypes.KtPropertyNameConflict.Subclass)
+
+;;; void Subclass.$clinit()
+(func $$clinit__void@nativekttypes.KtPropertyNameConflict.Subclass
+ ;;@ nativekttypes/KtPropertyNameConflict.java:52:24
+ (block
+  ;; if (nativekttypes.KtPropertyNameConflict.Subclass.$initialized) return;
+  ;;@ nativekttypes/KtPropertyNameConflict.java:52:24
+  (if (global.get $f_$initialized__nativekttypes_KtPropertyNameConflict_Subclass)
+   (then
+    ;; return;
+    ;;@ nativekttypes/KtPropertyNameConflict.java:52:24
+    (return )
+   )
+  )
+  ;; (nativekttypes.KtPropertyNameConflict.Subclass.$initialized = true);
+  ;;@ nativekttypes/KtPropertyNameConflict.java:52:24
+  (global.set $f_$initialized__nativekttypes_KtPropertyNameConflict_Subclass (i32.const 1))
+  ;; nativekttypes.KtPropertyNameConflict.$clinit();
+  ;;@ nativekttypes/KtPropertyNameConflict.java:52:24
+  (call $$clinit__void@nativekttypes.KtPropertyNameConflict )
+ )
+)
 
 ;;; Code for nativekttypes.Main [CLASS]
 (type $nativekttypes.Main (struct_subtype 
