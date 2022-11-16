@@ -48,7 +48,7 @@ package_sources = rule(
         "excludes": attr.string_list(),
         "_zip": attr.label(
             executable = True,
-            cfg = "host",
+            cfg = "exec",
             default = Label("@bazel_tools//tools/zip:zipper"),
         ),
     },

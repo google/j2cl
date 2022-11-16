@@ -77,12 +77,12 @@ _J2CL_LIB_ATTRS = {
     "kt_common_srcs": attr.label_list(allow_files = [".kt"]),
     "deps": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "exports": attr.label_list(providers = [JS_PROVIDER_NAME]),
-    "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),
-    "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),
+    "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
+    "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "javacopts": attr.string_list(),
     "kotlincopts": attr.string_list(),
     #  TODO(b/217287994): Remove the ability to do transpiler override.
-    "j2cl_transpiler_override": attr.label(default = None, cfg = "host", executable = True),
+    "j2cl_transpiler_override": attr.label(default = None, cfg = "exec", executable = True),
 }
 _J2CL_LIB_ATTRS.update(_J2CL_INTERNAL_LIB_ATTRS)
 _J2CL_LIB_ATTRS.update(J2CL_TOOLCHAIN_ATTRS)

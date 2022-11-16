@@ -161,11 +161,11 @@ _j2wasm_application = rule(
             default = Label(
                 "//build_defs/internal_do_not_use:BazelJ2clBuilder",
             ),
-            cfg = "host",
+            cfg = "exec",
             executable = True,
         ),
         "_binaryen": attr.label(
-            cfg = "host",
+            cfg = "exec",
             executable = True,
             default = Label(
                 "//build_defs/internal_do_not_use:binaryen",

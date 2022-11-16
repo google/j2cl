@@ -89,7 +89,7 @@ j2cl_rta = rule(
         "legacy_keep_jstype_interfaces_do_not_use": attr.bool(default = False),
         "_rta_runner": attr.label(
             default = Label("//build_defs/internal_do_not_use:J2clRta"),
-            cfg = "host",
+            cfg = "exec",
             executable = True,
         ),
     },

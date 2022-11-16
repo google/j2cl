@@ -12,8 +12,8 @@ J2WASM_LIB_ATTRS = {
     "srcs": attr.label_list(allow_files = [".java", ".srcjar", ".jar"]),
     "deps": attr.label_list(providers = [J2wasmInfo]),
     "exports": attr.label_list(providers = [J2wasmInfo]),
-    "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),
-    "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),
+    "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
+    "exported_plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "exec"),
     "javacopts": attr.string_list(),
 }
 

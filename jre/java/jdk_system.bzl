@@ -52,12 +52,12 @@ jdk_system = rule(
         ),
         "_runtime": attr.label(
             default = Label("@bazel_tools//tools/jdk:current_host_java_runtime"),
-            cfg = "host",
+            cfg = "exec",
             providers = [java_common.JavaRuntimeInfo],
         ),
         "_zip": attr.label(
             executable = True,
-            cfg = "host",
+            cfg = "exec",
             default = Label("@bazel_tools//tools/zip:zipper"),
         ),
     },

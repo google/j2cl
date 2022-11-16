@@ -313,7 +313,7 @@ J2CL_JAVA_TOOLCHAIN_ATTRS = {
     ),
     "_j2cl_stripper": attr.label(
         default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
-        cfg = "host",
+        cfg = "exec",
         executable = True,
     ),
 }
@@ -321,11 +321,11 @@ J2CL_JAVA_TOOLCHAIN_ATTRS = {
 J2CL_TOOLCHAIN_ATTRS = {
     "_j2cl_transpiler": attr.label(
         default = Label("//build_defs/internal_do_not_use:BazelJ2clBuilder"),
-        cfg = "host",
+        cfg = "exec",
         executable = True,
     ),
     "_jar": attr.label(
-        cfg = "host",
+        cfg = "exec",
         executable = True,
         default = Label("@bazel_tools//tools/jdk:jar"),
     ),
