@@ -22,14 +22,17 @@ public class Nullability {
 
   public static final ImmutableSet<String> RECOGNIZED_NULL_MARKED_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
-          "org.jspecify.nullness.NullMarked", "com.google.protobuf.Internal.ProtoNonnullApi");
+          "org.jspecify.nullness.NullMarked", // removed in jspecify v0.3.0.
+          "org.jspecify.annotations.NullMarked",
+          "com.google.protobuf.Internal.ProtoNonnullApi");
 
   private static final ImmutableSet<String> RECOGNIZED_NULLABLE_ANNOTATIONS_QUALIFIED_NAMES =
       ImmutableSet.of(
           // JsInterop nullable annotation.
           "jsinterop.annotations.JsNullable",
           // Annotations defined by JSpecify.
-          "org.jspecify.nullness.Nullable",
+          "org.jspecify.nullness.Nullable", // removed in jspecify v0.3.0.
+          "org.jspecify.annotations.Nullable",
           // Annotations supported by Checker Framework. J2CL currently supports the full list of
           // Nullable and NonNull annotations supported by Checker Framework
           // (see https://checkerframework.org/manual/#nullness-related-work). This is important
@@ -94,7 +97,8 @@ public class Nullability {
           // JsInterop non-null annotation.
           "jsinterop.annotations.JsNonNull",
           // Annotations defined by JSpecify.
-          "org.jspecify.nullness.NonNull",
+          "org.jspecify.nullness.NonNull", // removed in jspecify v0.3.0.
+          "org.jspecify.annotations.NonNull",
           // Annotations supported by Checker Framework.
           "android.annotation.NonNull",
           "android.support.annotation.NonNull",
