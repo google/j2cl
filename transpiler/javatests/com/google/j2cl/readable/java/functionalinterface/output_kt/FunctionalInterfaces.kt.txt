@@ -1,0 +1,41 @@
+// Generated from "functionalinterface/FunctionalInterfaces.java"
+package functionalinterface
+
+import javaemul.lang.*
+import functionalinterface.FunctionalInterfaces
+import kotlin.Int
+import kotlin.String
+
+open class FunctionalInterfaces {
+ fun interface NonParametrized {
+  fun apply(string: String?): String?
+ }
+
+ fun interface Parametrized<T> {
+  fun apply(t: T): T
+ }
+
+ fun interface Specialized: FunctionalInterfaces.Parametrized<String?> {
+  override fun apply(string: String?): String?
+ }
+
+ fun interface WithDefaultMethod {
+  fun apply(string: String?): String?
+
+  fun defaultApply(string: String?): String? {
+   return this.apply(string)
+  }
+ }
+
+ fun interface WithObjectMethods {
+  fun apply(string: String?): String?
+ }
+
+ interface WithParametrizedMethod {
+  fun <T> apply(t: T): T
+ }
+
+ interface WithKtProperty {
+  val size: Int
+ }
+}

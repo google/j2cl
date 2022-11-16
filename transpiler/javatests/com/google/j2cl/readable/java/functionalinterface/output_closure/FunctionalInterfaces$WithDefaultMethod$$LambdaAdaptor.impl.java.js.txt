@@ -1,0 +1,54 @@
+goog.module('functionalinterface.FunctionalInterfaces.WithDefaultMethod.$LambdaAdaptor$impl');
+
+const WithDefaultMethod = goog.require('functionalinterface.FunctionalInterfaces.WithDefaultMethod$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {WithDefaultMethod}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(?string):?string */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(?string):?string} @nodts*/
+  this.f_fn__functionalinterface_FunctionalInterfaces_WithDefaultMethod_$LambdaAdaptor;
+  this.$ctor__functionalinterface_FunctionalInterfaces_WithDefaultMethod_$LambdaAdaptor__functionalinterface_FunctionalInterfaces_WithDefaultMethod_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__functionalinterface_FunctionalInterfaces_WithDefaultMethod_$LambdaAdaptor__functionalinterface_FunctionalInterfaces_WithDefaultMethod_$JsFunction__void(/** ?function(?string):?string */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__functionalinterface_FunctionalInterfaces_WithDefaultMethod_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {?string} */
+ m_apply__java_lang_String__java_lang_String(/** ?string */ arg0) {
+  let /** ?function(?string):?string */ $function;
+  return ($function = this.f_fn__functionalinterface_FunctionalInterfaces_WithDefaultMethod_$LambdaAdaptor, $function(arg0));
+ }
+ //Default method forwarding stub.
+ /** @override @nodts @return {?string} */
+ m_defaultApply__java_lang_String__java_lang_String(/** ?string */ arg0) {
+  return WithDefaultMethod.m_defaultApply__$default__functionalinterface_FunctionalInterfaces_WithDefaultMethod__java_lang_String__java_lang_String(this, arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+  WithDefaultMethod.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+WithDefaultMethod.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'functionalinterface.FunctionalInterfaces$WithDefaultMethod$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=FunctionalInterfaces$WithDefaultMethod$$LambdaAdaptor.js.map

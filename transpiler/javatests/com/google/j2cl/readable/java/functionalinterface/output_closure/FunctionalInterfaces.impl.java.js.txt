@@ -1,0 +1,40 @@
+goog.module('functionalinterface.FunctionalInterfaces$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class FunctionalInterfaces extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!FunctionalInterfaces} */
+ static $create__() {
+  FunctionalInterfaces.$clinit();
+  let $instance = new FunctionalInterfaces();
+  $instance.$ctor__functionalinterface_FunctionalInterfaces__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__functionalinterface_FunctionalInterfaces__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  FunctionalInterfaces.$clinit = () =>{};
+  FunctionalInterfaces.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FunctionalInterfaces;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(FunctionalInterfaces, 'functionalinterface.FunctionalInterfaces');
+
+exports = FunctionalInterfaces;
+
+//# sourceMappingURL=FunctionalInterfaces.js.map

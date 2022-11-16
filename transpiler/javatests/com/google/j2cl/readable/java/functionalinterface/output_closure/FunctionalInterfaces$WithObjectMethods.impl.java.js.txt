@@ -1,0 +1,48 @@
+goog.module('functionalinterface.FunctionalInterfaces.WithObjectMethods$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfaces.WithObjectMethods.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class WithObjectMethods {
+ /** @abstract @nodts @return {?string} */
+ m_apply__java_lang_String__java_lang_String(/** ?string */ string_1) {}
+ /** @abstract @return {?string} */
+ toString() {}
+ /** @abstract @return {number} */
+ hashCode() {}
+ /** @abstract @return {boolean} */
+ equals(/** * */ object) {}
+ /** @nodts @return {WithObjectMethods} */
+ static $adapt(/** ?function(?string):?string */ fn) {
+  WithObjectMethods.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  WithObjectMethods.$clinit = () =>{};
+  WithObjectMethods.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__functionalinterface_FunctionalInterfaces_WithObjectMethods = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__functionalinterface_FunctionalInterfaces_WithObjectMethods;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('functionalinterface.FunctionalInterfaces.WithObjectMethods.$LambdaAdaptor$impl');
+ }
+}
+WithObjectMethods.$markImplementor(/**@type {Function}*/ (WithObjectMethods));
+$Util.$setClassMetadataForInterface(WithObjectMethods, 'functionalinterface.FunctionalInterfaces$WithObjectMethods');
+
+exports = WithObjectMethods;
+
+//# sourceMappingURL=FunctionalInterfaces$WithObjectMethods.js.map

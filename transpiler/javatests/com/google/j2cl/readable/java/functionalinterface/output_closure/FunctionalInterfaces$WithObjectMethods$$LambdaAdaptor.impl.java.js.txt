@@ -1,0 +1,48 @@
+goog.module('functionalinterface.FunctionalInterfaces.WithObjectMethods.$LambdaAdaptor$impl');
+
+const WithObjectMethods = goog.require('functionalinterface.FunctionalInterfaces.WithObjectMethods$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {WithObjectMethods}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(?string):?string */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(?string):?string} @nodts*/
+  this.f_fn__functionalinterface_FunctionalInterfaces_WithObjectMethods_$LambdaAdaptor;
+  this.$ctor__functionalinterface_FunctionalInterfaces_WithObjectMethods_$LambdaAdaptor__functionalinterface_FunctionalInterfaces_WithObjectMethods_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__functionalinterface_FunctionalInterfaces_WithObjectMethods_$LambdaAdaptor__functionalinterface_FunctionalInterfaces_WithObjectMethods_$JsFunction__void(/** ?function(?string):?string */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__functionalinterface_FunctionalInterfaces_WithObjectMethods_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {?string} */
+ m_apply__java_lang_String__java_lang_String(/** ?string */ arg0) {
+  let /** ?function(?string):?string */ $function;
+  return ($function = this.f_fn__functionalinterface_FunctionalInterfaces_WithObjectMethods_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+WithObjectMethods.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'functionalinterface.FunctionalInterfaces$WithObjectMethods$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=FunctionalInterfaces$WithObjectMethods$$LambdaAdaptor.js.map

@@ -1,0 +1,42 @@
+goog.module('functionalinterface.FunctionalInterfaces.WithParametrizedMethod$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class WithParametrizedMethod {
+ /** @abstract @nodts @template T @return {T} */
+ m_apply__java_lang_Object__java_lang_Object(/** T */ t) {}
+ /** @nodts @return {WithParametrizedMethod} */
+ static $adapt(/** ?function(?):? */ fn) {
+  WithParametrizedMethod.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  WithParametrizedMethod.$clinit = () =>{};
+  WithParametrizedMethod.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__functionalinterface_FunctionalInterfaces_WithParametrizedMethod = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__functionalinterface_FunctionalInterfaces_WithParametrizedMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$LambdaAdaptor$impl');
+ }
+}
+WithParametrizedMethod.$markImplementor(/**@type {Function}*/ (WithParametrizedMethod));
+$Util.$setClassMetadataForInterface(WithParametrizedMethod, 'functionalinterface.FunctionalInterfaces$WithParametrizedMethod');
+
+exports = WithParametrizedMethod;
+
+//# sourceMappingURL=FunctionalInterfaces$WithParametrizedMethod.js.map

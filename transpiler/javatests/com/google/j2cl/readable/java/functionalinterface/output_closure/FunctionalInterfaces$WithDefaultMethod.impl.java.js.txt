@@ -1,0 +1,49 @@
+goog.module('functionalinterface.FunctionalInterfaces.WithDefaultMethod$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfaces.WithDefaultMethod.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class WithDefaultMethod {
+ /** @abstract @nodts @return {?string} */
+ m_apply__java_lang_String__java_lang_String(/** ?string */ string_1) {}
+ /** @abstract @nodts @return {?string} */
+ m_defaultApply__java_lang_String__java_lang_String(/** ?string */ string_1) {}
+ /** @nodts @return {WithDefaultMethod} */
+ static $adapt(/** ?function(?string):?string */ fn) {
+  WithDefaultMethod.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts @return {?string} */
+ static m_defaultApply__$default__functionalinterface_FunctionalInterfaces_WithDefaultMethod__java_lang_String__java_lang_String(/** !WithDefaultMethod */ $thisArg, /** ?string */ string_1) {
+  WithDefaultMethod.$clinit();
+  return $thisArg.m_apply__java_lang_String__java_lang_String(string_1);
+ }
+ /** @nodts */
+ static $clinit() {
+  WithDefaultMethod.$clinit = () =>{};
+  WithDefaultMethod.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__functionalinterface_FunctionalInterfaces_WithDefaultMethod = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__functionalinterface_FunctionalInterfaces_WithDefaultMethod;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('functionalinterface.FunctionalInterfaces.WithDefaultMethod.$LambdaAdaptor$impl');
+ }
+}
+WithDefaultMethod.$markImplementor(/**@type {Function}*/ (WithDefaultMethod));
+$Util.$setClassMetadataForInterface(WithDefaultMethod, 'functionalinterface.FunctionalInterfaces$WithDefaultMethod');
+
+exports = WithDefaultMethod;
+
+//# sourceMappingURL=FunctionalInterfaces$WithDefaultMethod.js.map

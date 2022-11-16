@@ -1,0 +1,48 @@
+goog.module('functionalinterface.FunctionalInterfaces.WithParametrizedMethod.$LambdaAdaptor$impl');
+
+const WithParametrizedMethod = goog.require('functionalinterface.FunctionalInterfaces.WithParametrizedMethod$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {WithParametrizedMethod}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(?):? */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(?):?} @nodts*/
+  this.f_fn__functionalinterface_FunctionalInterfaces_WithParametrizedMethod_$LambdaAdaptor;
+  this.$ctor__functionalinterface_FunctionalInterfaces_WithParametrizedMethod_$LambdaAdaptor__functionalinterface_FunctionalInterfaces_WithParametrizedMethod_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__functionalinterface_FunctionalInterfaces_WithParametrizedMethod_$LambdaAdaptor__functionalinterface_FunctionalInterfaces_WithParametrizedMethod_$JsFunction__void(/** ?function(?):? */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__functionalinterface_FunctionalInterfaces_WithParametrizedMethod_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {T} */
+ m_apply__java_lang_Object__java_lang_Object(/** T */ arg0) {
+  let /** ?function(?):? */ $function;
+  return ($function = this.f_fn__functionalinterface_FunctionalInterfaces_WithParametrizedMethod_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+WithParametrizedMethod.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'functionalinterface.FunctionalInterfaces$WithParametrizedMethod$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=FunctionalInterfaces$WithParametrizedMethod$$LambdaAdaptor.js.map

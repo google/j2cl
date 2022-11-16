@@ -1,0 +1,45 @@
+goog.module('functionalinterface.FunctionalInterfaces.Specialized$impl');
+
+const Parametrized = goog.require('functionalinterface.FunctionalInterfaces.Parametrized$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {Parametrized<?string>}
+ */
+class Specialized {
+ /** @abstract @nodts @return {?string} */
+ m_apply__java_lang_String__java_lang_String(/** ?string */ string_1) {}
+ /** @nodts @return {Specialized} */
+ static $adapt(/** ?function(?string):?string */ fn) {
+  Specialized.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  Specialized.$clinit = () =>{};
+  Specialized.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Parametrized.$markImplementor(ctor);
+  ctor.prototype.$implements__functionalinterface_FunctionalInterfaces_Specialized = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__functionalinterface_FunctionalInterfaces_Specialized;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('functionalinterface.FunctionalInterfaces.Specialized.$LambdaAdaptor$impl');
+ }
+}
+Specialized.$markImplementor(/**@type {Function}*/ (Specialized));
+$Util.$setClassMetadataForInterface(Specialized, 'functionalinterface.FunctionalInterfaces$Specialized');
+
+exports = Specialized;
+
+//# sourceMappingURL=FunctionalInterfaces$Specialized.js.map

@@ -1,0 +1,42 @@
+goog.module('functionalinterface.FunctionalInterfaces.NonParametrized$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('functionalinterface.FunctionalInterfaces.NonParametrized.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class NonParametrized {
+ /** @abstract @nodts @return {?string} */
+ m_apply__java_lang_String__java_lang_String(/** ?string */ string_1) {}
+ /** @nodts @return {NonParametrized} */
+ static $adapt(/** ?function(?string):?string */ fn) {
+  NonParametrized.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  NonParametrized.$clinit = () =>{};
+  NonParametrized.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__functionalinterface_FunctionalInterfaces_NonParametrized = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__functionalinterface_FunctionalInterfaces_NonParametrized;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('functionalinterface.FunctionalInterfaces.NonParametrized.$LambdaAdaptor$impl');
+ }
+}
+NonParametrized.$markImplementor(/**@type {Function}*/ (NonParametrized));
+$Util.$setClassMetadataForInterface(NonParametrized, 'functionalinterface.FunctionalInterfaces$NonParametrized');
+
+exports = NonParametrized;
+
+//# sourceMappingURL=FunctionalInterfaces$NonParametrized.js.map
