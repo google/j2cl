@@ -315,6 +315,16 @@
 [(t, u) -> null] => [let u_1 = /**@type {?string}*/ ($Casts.$to(u, j_l_String));] "lambdas.Lambdas.<lambda in testDefaultMethodsInIntersectionAdaptor>"
 [u] => [u_1] "u"
 [null] => [return null;] "lambdas.Lambdas.<lambda in testDefaultMethodsInIntersectionAdaptor>"
+[testIterable] => [m_testIterable__java_lang_Iterable__void]
+[iterable] => [iterable] "iterable"
+[{
+    Iterable<T> lambda = () -> iterable.iterator();
+  }] => [Lambdas.$clinit();] "lambdas.Lambdas.testIterable"
+[Iterable<T> lambda = () -> iterable.iterator();] => [let lambda = Iterable.$adapt(() =>{
+   return iterable.m_iterator__java_util_Iterator();
+  });] "lambdas.Lambdas.testIterable"
+[lambda] => [lambda] "lambda"
+[iterable.iterator()] => [return iterable.m_iterator__java_util_Iterator();] "lambdas.Lambdas.<lambda in testIterable>"
 [Lambdas] => [$init__void_$p_lambdas_Lambdas]
 [public int field = 100;] => [this.f_field__lambdas_Lambdas = 100;] "lambdas.Lambdas.<init>"
 [Lambdas] => [$clinit]

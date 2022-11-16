@@ -305,5 +305,11 @@ public class Lambdas {
   public void testDefaultMethodsInIntersectionAdaptor() {
     Object o = (BiFunction<String, String, String> & MarkerWithDefaultMethod) (t, u) -> null;
   }
+
+  // Iterable<T> interface is not functional in Kotlin, but in Java it is and should allow being
+  // used as a lambda.
+  public static <T> void testIterable(Iterable<T> iterable) {
+    Iterable<T> lambda = () -> iterable.iterator();
+  }
 }
 

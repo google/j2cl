@@ -3,6 +3,7 @@ package lambdas
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import javaemul.lang.JavaIterable
 import kotlin.Any
 import kotlin.Double
 import kotlin.Enum
@@ -13,6 +14,7 @@ import kotlin.Number
 import kotlin.String
 import kotlin.Throwable
 import kotlin.Unit
+import kotlin.collections.MutableIterable
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.let
@@ -215,6 +217,13 @@ open class Lambdas {
    o = (Lambdas.GenericFunctionalInterface<U> { x_2: U ->
     return@GenericFunctionalInterface x_2
    }).let { it as Lambdas.GenericFunctionalInterface<U>?; it as Lambdas.JustADefaultS<V>?; it }
+  }
+
+  @JvmStatic
+  fun <T> testIterable(iterable: MutableIterable<T>?) {
+   val lambda: MutableIterable<T>? = JavaIterable<T> {
+    return@JavaIterable iterable!!.iterator()
+   }
   }
  }
 

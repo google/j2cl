@@ -6,6 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
@@ -247,6 +248,13 @@ class Lambdas extends j_l_Object {
    return null;
   }));
  }
+ /** @nodts @template T */
+ static m_testIterable__java_lang_Iterable__void(/** Iterable<T> */ iterable) {
+  Lambdas.$clinit();
+  let lambda = Iterable.$adapt(() =>{
+   return iterable.m_iterator__java_util_Iterator();
+  });
+ }
  /** @private @nodts */
  $init__void_$p_lambdas_Lambdas() {
   this.f_field__lambdas_Lambdas = 100;
@@ -268,6 +276,7 @@ class Lambdas extends j_l_Object {
   Enum = goog.module.get('java.lang.Enum$impl');
   Error = goog.module.get('java.lang.Error$impl');
   Integer = goog.module.get('java.lang.Integer$impl');
+  Iterable = goog.module.get('java.lang.Iterable$impl');
   Long = goog.module.get('java.lang.Long$impl');
   RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
