@@ -32,7 +32,7 @@ public class ArrayLength extends Expression {
   @Visitable Expression arrayExpression;
 
   private ArrayLength(Expression arrayExpression) {
-    checkArgument(arrayExpression.getTypeDescriptor().isArray());
+    checkArgument(arrayExpression.getTypeDescriptor().toRawTypeDescriptor().isArray());
 
     this.arrayExpression = checkNotNull(arrayExpression);
   }

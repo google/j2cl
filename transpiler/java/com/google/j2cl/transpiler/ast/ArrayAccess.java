@@ -30,7 +30,7 @@ public class ArrayAccess extends Expression {
   @Visitable Expression indexExpression;
 
   private ArrayAccess(Expression arrayExpression, Expression indexExpression) {
-    checkArgument(arrayExpression.getTypeDescriptor().isArray());
+    checkArgument(arrayExpression.getTypeDescriptor().toRawTypeDescriptor().isArray());
 
     this.arrayExpression = checkNotNull(arrayExpression);
     this.indexExpression = checkNotNull(indexExpression);
@@ -46,7 +46,11 @@ public class ArrayAccess extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return ((ArrayTypeDescriptor) arrayExpression.getTypeDescriptor()).getComponentTypeDescriptor();
+    TypeDescriptor arrayExpressionTypeDescriptor = arrayExpression.getTypeDescriptor();
+    if (!arrayExpressionTypeDescriptor.isArray()) {
+      arrayExpressionTypeDescriptor = arrayExpressionTypeDescriptor.toRawTypeDescriptor();
+    }
+    return ((ArrayTypeDescriptor) arrayExpressionTypeDescriptor).getComponentTypeDescriptor();
   }
 
   @Override
