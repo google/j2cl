@@ -225,8 +225,8 @@ public class BinaryExpression extends Expression {
       return false;
     }
 
-    if (TypeDescriptors.isJavaLangString(leftOperandType)
-        || TypeDescriptors.isJavaLangString(rightOperandType)) {
+    if (TypeDescriptors.isJavaLangString(leftOperandType.toRawTypeDescriptor())
+        || TypeDescriptors.isJavaLangString(rightOperandType.toRawTypeDescriptor())) {
       return true;
     }
 
