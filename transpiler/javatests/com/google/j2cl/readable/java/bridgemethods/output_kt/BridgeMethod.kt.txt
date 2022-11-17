@@ -15,7 +15,6 @@ import bridgemethods.SuperDualUnrelatedAccidentalBridges
 import bridgemethods.SuperParent
 import bridgemethods.TestCase10036
 import bridgemethods.TestCase102
-import kotlin.Any
 import kotlin.AssertionError
 import kotlin.Comparable
 import kotlin.Double
@@ -99,7 +98,7 @@ open class TestCase10036 {
   override fun get(value: String?): String?
  }
 
- abstract class B<B1: Comparable<Any>?>: TestCase10036.BI1, TestCase10036.BI2 {
+ abstract class B<B1: Comparable<*>?>: TestCase10036.BI1, TestCase10036.BI2 {
   abstract fun get(value: B1): String?
  }
 }

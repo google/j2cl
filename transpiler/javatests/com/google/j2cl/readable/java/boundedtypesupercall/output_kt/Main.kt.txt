@@ -3,7 +3,6 @@ package boundedtypesupercall
 
 import javaemul.lang.*
 import boundedtypesupercall.Main
-import kotlin.Any
 import kotlin.Comparable
 
 open class Main {
@@ -13,7 +12,7 @@ open class Main {
   abstract fun foo()
  }
 
- open class Bar<T: Comparable<Any>?> {
+ open class Bar<T: Comparable<*>?> {
   open fun getSomething(): T {
    return null as T
   }

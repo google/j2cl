@@ -43,7 +43,7 @@ private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
   renderName(typeVariable)
   typeVariable.upperBoundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
     render(": ")
-    renderTypeDescriptor(boundTypeDescriptor)
+    renderTypeDescriptor(boundTypeDescriptor, projectRawToWildcards = true)
   }
 }
 
