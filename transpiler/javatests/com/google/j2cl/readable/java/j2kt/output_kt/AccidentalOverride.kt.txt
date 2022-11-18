@@ -1,8 +1,8 @@
-// Generated from "j2ktnotpassing/AccidentalOverride.java"
-package j2ktnotpassing
+// Generated from "j2kt/AccidentalOverride.java"
+package j2kt
 
 import javaemul.lang.*
-import j2ktnotpassing.AccidentalOverride
+import j2kt.AccidentalOverride
 
 open class AccidentalOverride {
  open inner class SuperClass {
@@ -13,7 +13,11 @@ open class AccidentalOverride {
   fun accidentalOverride() {}
  }
 
- open inner class TestImplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {}
+ open inner class TestImplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {
+  open override fun accidentalOverride() {
+   super<AccidentalOverride.SuperClass>.accidentalOverride()
+  }
+ }
 
  open inner class TestExplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {
   open override fun accidentalOverride() {
