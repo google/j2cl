@@ -69,7 +69,14 @@ _DEFAULT_JAVA_DEPS = [
     "//junit/generator/javatests/com/google/j2cl/junit/integration/testing/testlogger:testlogger",
 ]
 
-def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_srcs = [], native_deps = [], platforms = ["CLOSURE"]):
+def j2cl_test_integration_test_data(
+        name,
+        deps = [],
+        extra_defs = [],
+        native_srcs = [],
+        native_deps = [],
+        platforms = ["CLOSURE"],
+        enable_rta = True):
     """Generate j2cl and j2wasm integration test data
 
     Args:
@@ -79,6 +86,7 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
         native_srcs: The native srcs.
         native_deps: Native libraries that will be built only for the target.
         platforms: The platform on which tests will run
+        enable_rta: Whether to run tests with RTA pruning applied.
     """
     test_class = "%s.%s" % (get_java_package(native.package_name()), name)
     tags = ["manual", "notap"]
@@ -147,6 +155,7 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
             tags = tags,
             test_class = test_class,
             runtime_deps = [":%s-lib-j2cl" % name],
+            enable_rta = enable_rta,
             extra_defs = extra_defs,
             javacopts = [
                 "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262
@@ -159,6 +168,7 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_src
             tags = tags,
             test_class = test_class,
             runtime_deps = [":%s-lib-j2cl" % name],
+            enable_rta = enable_rta,
             extra_defs = extra_defs,
             javacopts = [
                 "-XepOpt:CheckReturnValue:CheckAllConstructors=false",  # b/226969262

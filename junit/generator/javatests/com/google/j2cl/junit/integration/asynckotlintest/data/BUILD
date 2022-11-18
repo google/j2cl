@@ -21,110 +21,154 @@ ASYNC_TEST_DEPS = [
 
 j2cl_test_integration_test_data(
     name = "TestAfterWithFailingAsyncTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestAsyncAfterWillTimeOut",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestAsyncBeforeWillTimeOut",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestChainingWithException",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestNonAsyncTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestResolvesAfterDelay",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestMethodOrder",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestStructuralThenable",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestListenableFuture",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS + ["//third_party:guava"],
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnsNullForAsyncAfter",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnsNullForAsyncBefore",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnsNullForPromise",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnsVoidTimeoutProvided",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnTypeNotStructuralPromise",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnTypeNotStructuralPromiseThenParameterCount",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS + ["//third_party:gwt-jsinterop-annotations"],
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnTypeNotStructuralPromiseThenParameterNotJsType",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS + ["//third_party:gwt-jsinterop-annotations"],
 )
 
 j2cl_test_integration_test_data(
     name = "TestReturnTypeNotStructuralPromiseThenNameRedefined",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS + ["//third_party:gwt-jsinterop-annotations"],
 )
 
 j2cl_test_integration_test_data(
     name = "TestTimeOutNotProvided",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS + ["//third_party:guava"],
 )
 
 j2cl_test_integration_test_data(
     name = "TestWillTimeOut",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestWithExpectedException",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestFailingAsyncAfter",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(
     name = "TestFailingAsyncBefore",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     deps = ASYNC_TEST_DEPS,
 )

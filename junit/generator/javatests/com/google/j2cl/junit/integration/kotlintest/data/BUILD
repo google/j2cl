@@ -11,6 +11,8 @@ package(
 
 j2cl_test_integration_test_data(
     name = "BeforeAndAfterTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -18,6 +20,8 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "ChildTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -26,6 +30,8 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "ChildWithNewMethodsTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -34,6 +40,8 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "GrandChildWithNewMethodsTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -42,6 +50,8 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "ExpectedExceptionTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -54,6 +64,8 @@ kotlin_and_j2cl_library(
 
 j2cl_test_integration_test_data(
     name = "IgnoreTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -67,12 +79,16 @@ kotlin_and_j2cl_library(
 
 j2cl_test_integration_test_data(
     name = "MethodOrderingTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = ["CLOSURE"],
     deps = [":MethodOrderingTestParent"],
 )
 
 j2cl_test_integration_test_data(
     name = "SimpleFailingTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -80,6 +96,8 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "SimplePassingTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -87,6 +105,8 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "ThrowsInAfterTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -94,6 +114,8 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "ThrowsInBeforeTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
@@ -101,6 +123,8 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "ThrowsOnConstructionTest",
+    # TODO(b/225411185): Enable when RTA works with Kotlin output.
+    enable_rta = False,
     platforms = [
         "CLOSURE",
     ],
