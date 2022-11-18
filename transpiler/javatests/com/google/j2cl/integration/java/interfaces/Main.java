@@ -18,7 +18,11 @@ package interfaces;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
+import interfaces.package1.ChildInPackage1;
+import interfaces.package1.ClassInPackage1WithPackagePrivateMethod;
+import interfaces.package1.InterfaceInPackage1;
 import java.util.Iterator;
 import jsinterop.annotations.JsNonNull;
 
@@ -30,10 +34,11 @@ public class Main {
     testInterfaceDispatch();
     testInterfaceWithFields();
     testDefaultMethods();
-    testSuperCallDefaultMethod();
+    testDefaultMethods_superCall();
+    testDefaultMethods_diamondProperty();
+    testDefaultMethods_packagePrivate();
     testStaticMethods();
     testPrivateMethods();
-    testDiamondProperty();
     testCallWithDifferentNullMarking();
   }
 
@@ -196,7 +201,7 @@ public class Main {
     }
   }
 
-  private static void testSuperCallDefaultMethod() {
+  private static void testDefaultMethods_superCall() {
     abstract class AbstractClass implements InterfaceWithDefaultMethod {}
 
     class SubClass extends AbstractClass {
@@ -247,7 +252,7 @@ public class Main {
     }
   }
 
-  private static void testDiamondProperty() {
+  private static void testDefaultMethods_diamondProperty() {
     A<? extends DiamondLeft<?>, ? extends DiamondRight<?>> a = new A<>();
     DiamondLeft<?> dl = a;
     assertEquals(DiamondLeft.NAME, dl.name(null));
@@ -285,5 +290,27 @@ public class Main {
 
     NullableIterator<@JsNonNull String> x2 = x;
     assertFalse(x2.hasNext());
+  }
+
+  private static class SubclassInDifferentPackage extends ClassInPackage1WithPackagePrivateMethod
+      implements InterfaceInPackage1 {
+    // Since this class is declared in a different package, the package private method
+    // ClassInPackage1WithPackagePrivateMethod.m() is not seen when declaring it and the default
+    // method from InterfaceInPackage1 is the implementation inherited; even though
+    // InterfaceInPackage1 is, as its name says, in the same package.
+  }
+
+  private static void testDefaultMethods_packagePrivate() {
+    InterfaceInPackage1 i = new ChildInPackage1();
+    assertEquals("explicit-override-in-child", i.m());
+
+    // TODO(b/259713749): Remove JVM exclusion when bug is fixed.
+    if (!isJvm()) {
+      // This tests ends up with an IllegalAccessError at runtime which means that the code
+      // is compiled incorrectly or that the way default methods are implemented in the VM does
+      // not allow for such scenario.
+      i = new SubclassInDifferentPackage();
+      assertEquals("default-method-in-package1-m", i.m());
+    }
   }
 }
