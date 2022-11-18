@@ -1,19 +1,25 @@
 // Generated from "packageprivatemethods/package1/SuperParent.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package packageprivatemethods.package1
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("PackageprivatemethodsPackage1SuperParent", exact = true)
 open class SuperParent {
- open fun foo(a: Int): Int {
+ open fun foo(@ObjCName("withInt", exact = false) a: Int): Int {
   return a - 1
  }
 
- open fun `fun`(a: Int, b: Int): Int {
+ open fun `fun`(@ObjCName("withInt", exact = false) a: Int, @ObjCName("withInt", exact = false) b: Int): Int {
   return a + b
  }
 
- open fun bar(a: Int, b: Int, c: Int): Int {
+ open fun bar(@ObjCName("withInt", exact = false) a: Int, @ObjCName("withInt", exact = false) b: Int, @ObjCName("withInt", exact = false) c: Int): Int {
   return a + b + c
  }
 }

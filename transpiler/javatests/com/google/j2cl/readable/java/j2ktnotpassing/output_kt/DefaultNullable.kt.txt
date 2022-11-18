@@ -1,12 +1,18 @@
 // Generated from "j2ktnotpassing/DefaultNullable.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package j2ktnotpassing
 
 import javaemul.lang.*
 import j2ktnotpassing.DefaultNullable
 import j2ktnotpassing.NotNullable
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("J2ktnotpassingDefaultNullable", exact = true)
 open class DefaultNullable {
  companion object {
   @JvmStatic
@@ -17,12 +23,13 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  fun accept(s: String?) {}
+  fun accept(@ObjCName("withJavaLangString", exact = false) s: String?) {}
  }
 }
 
+@ObjCName("J2ktnotpassingNotNullable", exact = true)
 open class NotNullable {
  fun interface Consumer<T> {
-  fun accept(t: T)
+  fun accept(@ObjCName("withId", exact = false) t: T)
  }
 }

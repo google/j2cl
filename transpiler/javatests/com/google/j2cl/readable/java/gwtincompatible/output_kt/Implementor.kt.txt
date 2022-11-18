@@ -1,10 +1,16 @@
 // Generated from "gwtincompatible/Implementor.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package gwtincompatible
 
 import javaemul.lang.*
 import gwtincompatible.Interface
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("GwtincompatibleImplementor", exact = true)
 open class Implementor: Interface, Interface.NestedInterface, Interface.ClassWithAbstractMethod() {
  open fun compatibleMethod() {
   val a: Int = 4

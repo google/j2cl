@@ -1,4 +1,6 @@
 // Generated from "autoboxing/AutoBoxing.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package autoboxing
 
 import javaemul.lang.*
@@ -12,95 +14,99 @@ import kotlin.Double
 import kotlin.Float
 import kotlin.Int
 import kotlin.Long
+import kotlin.OptIn
 import kotlin.Short
 import kotlin.Unit
 import kotlin.assert
 import kotlin.collections.MutableIterable
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import kotlin.run
 
+@ObjCName("AutoboxingAutoBoxing", exact = true)
 open class AutoBoxing {
- open fun box(b: Boolean): Boolean? {
+ open fun box(@ObjCName("withBoolean", exact = false) b: Boolean): Boolean? {
   return Boolean.valueOf(b)
  }
 
- open fun box(d: Double): Double? {
+ open fun box(@ObjCName("withDouble", exact = false) d: Double): Double? {
   return Double.valueOf(d)
  }
 
- open fun box(b: Byte): Byte? {
+ open fun box(@ObjCName("withByte", exact = false) b: Byte): Byte? {
   return Byte.valueOf(b)
  }
 
- open fun box(f: Float): Float? {
+ open fun box(@ObjCName("withFloat", exact = false) f: Float): Float? {
   return Float.valueOf(f)
  }
 
- open fun box(i: Int): Int? {
+ open fun box(@ObjCName("withInt", exact = false) i: Int): Int? {
   return Int.valueOf(i)
  }
 
- open fun box(l: Long): Long? {
+ open fun box(@ObjCName("withLong", exact = false) l: Long): Long? {
   return Long.valueOf(l)
  }
 
- open fun box(s: Short): Short? {
+ open fun box(@ObjCName("withShort", exact = false) s: Short): Short? {
   return Short.valueOf(s)
  }
 
- open fun box(c: Char): Char? {
+ open fun box(@ObjCName("withChar", exact = false) c: Char): Char? {
   return Char.valueOf(c)
  }
 
- open fun unbox(b: Boolean?): Boolean {
+ open fun unbox(@ObjCName("withJavaLangBoolean", exact = false) b: Boolean?): Boolean {
   return b!!.booleanValue()
  }
 
- open fun unbox(d: Double?): Double {
+ open fun unbox(@ObjCName("withJavaLangDouble", exact = false) d: Double?): Double {
   return d!!.toDouble()
  }
 
- open fun unbox(b: Byte?): Byte {
+ open fun unbox(@ObjCName("withJavaLangByte", exact = false) b: Byte?): Byte {
   return b!!.toByte()
  }
 
- open fun unbox(f: Float?): Float {
+ open fun unbox(@ObjCName("withJavaLangFloat", exact = false) f: Float?): Float {
   return f!!.toFloat()
  }
 
- open fun unbox(i: Int?): Int {
+ open fun unbox(@ObjCName("withJavaLangInt", exact = false) i: Int?): Int {
   return i!!.toInt()
  }
 
- open fun unbox(l: Long?): Long {
+ open fun unbox(@ObjCName("withJavaLangLong", exact = false) l: Long?): Long {
   return l!!.toLong()
  }
 
- open fun unbox(s: Short?): Short {
+ open fun unbox(@ObjCName("withJavaLangShort", exact = false) s: Short?): Short {
   return s!!.toShort()
  }
 
- open fun unbox(c: Char?): Char {
+ open fun unbox(@ObjCName("withJavaLangChar", exact = false) c: Char?): Char {
   return c!!.toChar()
  }
 
- open fun takesAndReturnsPrimitiveDouble(d: Double): Double {
+ open fun takesAndReturnsPrimitiveDouble(@ObjCName("withDouble", exact = false) d: Double): Double {
   return d
  }
 
- open fun takesAndReturnsVoid(v: Unit?): Unit? {
+ open fun takesAndReturnsVoid(@ObjCName("withJavaLangUnit", exact = false) v: Unit?): Unit? {
   return null
  }
 
- open fun takesFloatVarArgs(vararg elements: Float?) {
+ open fun takesFloatVarArgs(vararg @ObjCName("withJavaLangFloatArray", exact = false) elements: Float?) {
   val elements_1: Array<Float?>? = elements as Array<Float?>?
  }
 
- open fun takesObjectAndReturnsPrimitiveDouble(o: Any?): Double {
+ open fun takesObjectAndReturnsPrimitiveDouble(@ObjCName("withJavaLangAny", exact = false) o: Any?): Double {
   return o as Double
  }
 
- open fun sumWithoutBoxing(vararg numbers: Any?): Double {
+ open fun sumWithoutBoxing(vararg @ObjCName("withJavaLangAnyArray", exact = false) numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
   for (number in numbers_1!!) {
@@ -110,7 +116,7 @@ open class AutoBoxing {
   return sum
  }
 
- open fun sumWithoutBoxingJsVarargs(vararg numbers: Any?): Double {
+ open fun sumWithoutBoxingJsVarargs(vararg @ObjCName("withJavaLangAnyArray", exact = false) numbers: Any?): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
   for (number in numbers_1!!) {
@@ -120,7 +126,7 @@ open class AutoBoxing {
   return sum
  }
 
- open fun sumWithUnboxing(boxedDoubles: MutableIterable<Double?>?): Double {
+ open fun sumWithUnboxing(@ObjCName("withId", exact = false) boxedDoubles: MutableIterable<Double?>?): Double {
   var sum: Double = 0.0
   for (d in boxedDoubles!!) {
    val d_1: Double = d!!
@@ -381,7 +387,7 @@ open class AutoBoxing {
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___1Local<T: Long?> {
-    open fun toLong(l: T): Long {
+    open fun toLong(@ObjCName("withId", exact = false) l: T): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()
     }
@@ -397,7 +403,7 @@ open class AutoBoxing {
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___2Local<T> where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
-    open fun toLong(l: T): Long {
+    open fun toLong(@ObjCName("withId", exact = false) l: T): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()
     }

@@ -1,4 +1,6 @@
 // Generated from "jsnonnull/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jsnonnull
 
 import javaemul.lang.*
@@ -8,12 +10,16 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Double
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
 import kotlin.arrayOf
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("JsnonnullMain", exact = true)
 open class Main {
  @JvmField var f1_private_2: String = "Hello"
 
@@ -35,25 +41,25 @@ open class Main {
 
  @JvmField var f12_private_2: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
- constructor(a: String)
+ constructor(@ObjCName("withJavaLangString", exact = false) a: String)
 
- open fun m1(a: String, b: MutableList<Double>, c: String?): String {
+ open fun m1(@ObjCName("withJavaLangString", exact = false) a: String, @ObjCName("withId", exact = false) b: MutableList<Double>, @ObjCName("withJavaLangString", exact = false) c: String?): String {
   return ""
  }
 
- open fun m2(a: String?, b: MutableList<Double>): String? {
+ open fun m2(@ObjCName("withJavaLangString", exact = false) a: String?, @ObjCName("withId", exact = false) b: MutableList<Double>): String? {
   return ""
  }
 
- open fun m3(a: String, vararg args: String): String? {
+ open fun m3(@ObjCName("withJavaLangString", exact = false) a: String, vararg @ObjCName("withJavaLangStringArray", exact = false) args: String): String? {
   val args_1: Array<String>? = args as Array<String>?
   return null
  }
 
- open fun m4(f: Main.MyFunction) {}
+ open fun m4(@ObjCName("withJsnonnullMyFunction", exact = false) f: Main.MyFunction) {}
 
  fun interface MyFunction {
-  fun x(a: String): String
+  fun x(@ObjCName("withJavaLangString", exact = false) a: String): String
  }
 
  open class StringComparator: Comparator<String> {

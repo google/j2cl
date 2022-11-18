@@ -1,4 +1,6 @@
 // Generated from "bridgejsmethod/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package bridgejsmethod
 
 import javaemul.lang.*
@@ -6,10 +8,14 @@ import bridgejsmethod.Main
 import kotlin.Any
 import kotlin.Int
 import kotlin.Number
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("BridgejsmethodMain", exact = true)
 open class Main {
  companion object {
   @JvmStatic
@@ -37,19 +43,19 @@ open class Main {
  }
 
  open class A<T> {
-  open fun `fun`(t: T): T {
+  open fun `fun`(@ObjCName("withId", exact = false) t: T): T {
    return t
   }
 
-  open fun bar(t: T) {}
+  open fun bar(@ObjCName("withId", exact = false) t: T) {}
  }
 
  fun interface I<T: Number?> {
-  fun `fun`(t: T): T
+  fun `fun`(@ObjCName("withId", exact = false) t: T): T
  }
 
  fun interface J<T> {
-  fun bar(t: T)
+  fun bar(@ObjCName("withId", exact = false) t: T)
  }
 
  open class B: Main.A<String?>() {
@@ -77,7 +83,7 @@ open class Main {
  open class F: Main.I<Int?>, Main.A<Int?>() {}
 
  fun interface G<V> {
-  fun enclose(value: V): V
+  fun enclose(@ObjCName("withId", exact = false) value: V): V
  }
 
  open class H<V>: Main.G<V> {
@@ -87,7 +93,7 @@ open class Main {
  }
 
  open class K<K1, K2> {
-  open fun `fun`(k1: K1, k2: K2) {}
+  open fun `fun`(@ObjCName("withId", exact = false) k1: K1, @ObjCName("withId", exact = false) k2: K2) {}
  }
 
  open class L<L1>: Main.K<String?, L1>() {
@@ -129,9 +135,9 @@ open class Main {
  open inner class S: Main.R() {}
 
  open inner class GrandParent<T> {
-  open fun jsMethod(t: T) {}
+  open fun jsMethod(@ObjCName("withId", exact = false) t: T) {}
 
-  open fun method(t: T) {}
+  open fun method(@ObjCName("withId", exact = false) t: T) {}
  }
 
  open inner class Parent<T: Main.Parent<T>?>: Main.GrandParent<T>() {

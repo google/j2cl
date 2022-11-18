@@ -1,4 +1,6 @@
 // Generated from "arithmeticexpressions/ArithmeticExpressions.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package arithmeticexpressions
 
 import javaemul.lang.*
@@ -15,13 +17,17 @@ import kotlin.Int
 import kotlin.IntArray
 import kotlin.Long
 import kotlin.LongArray
+import kotlin.OptIn
 import kotlin.Short
 import kotlin.ShortArray
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import kotlin.run
 
+@ObjCName("ArithmeticexpressionsArithmeticExpressions", exact = true)
 open class ArithmeticExpressions {
  open fun testCoercions() {
   var b: Byte = 1L.toByte()
@@ -247,7 +253,7 @@ open class ArithmeticExpressions {
   d = (20L + l).toDouble() + d
  }
 
- open fun testEffectivelyFinalVariableInAssignmentExpression(condition: Boolean) {
+ open fun testEffectivelyFinalVariableInAssignmentExpression(@ObjCName("withBoolean", exact = false) condition: Boolean) {
   var effectivelyFinal: Long = 0L
   if (condition && run {
    effectivelyFinal = this.bar

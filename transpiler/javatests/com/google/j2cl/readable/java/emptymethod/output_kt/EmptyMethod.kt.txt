@@ -1,14 +1,20 @@
 // Generated from "emptymethod/EmptyMethod.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package emptymethod
 
 import javaemul.lang.*
 import kotlin.Array
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("EmptymethodEmptyMethod", exact = true)
 open class EmptyMethod {
  companion object {
   @JvmStatic
-  fun main(args: Array<String?>?) {}
+  fun main(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {}
  }
 }

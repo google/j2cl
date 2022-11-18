@@ -1,12 +1,18 @@
 // Generated from "simplelocalclass/SimpleLocalClass.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package simplelocalclass
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("SimplelocalclassSimpleLocalClass", exact = true)
 open class SimpleLocalClass {
- open fun test(p: Int) {
+ open fun test(@ObjCName("withInt", exact = false) p: Int) {
   val localVar: Int = 1
   open class ___1InnerClass {
    open fun `fun`(): Int {

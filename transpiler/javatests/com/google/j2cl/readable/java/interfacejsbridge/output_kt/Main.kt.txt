@@ -1,4 +1,6 @@
 // Generated from "interfacejsbridge/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package interfacejsbridge
 
 import javaemul.lang.*
@@ -6,7 +8,11 @@ import interfacejsbridge.InterfaceImpl
 import interfacejsbridge.MyInterface
 import interfacejsbridge.MyJsInterface
 import interfacejsbridge.SubInterface
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("InterfacejsbridgeMain", exact = true)
 open class Main {
  open fun test() {
   val a: MyJsInterface? = InterfaceImpl()

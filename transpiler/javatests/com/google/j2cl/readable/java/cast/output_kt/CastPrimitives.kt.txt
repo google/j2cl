@@ -1,4 +1,6 @@
 // Generated from "cast/CastPrimitives.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package cast
 
 import javaemul.lang.*
@@ -12,9 +14,13 @@ import kotlin.Double
 import kotlin.Float
 import kotlin.Int
 import kotlin.Long
+import kotlin.OptIn
 import kotlin.Short
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("CastCastPrimitives", exact = true)
 open class CastPrimitives {
  open fun testPrimitiveCasts() {
   var b: Byte = (1).toByte()
@@ -120,7 +126,7 @@ open class CastPrimitives {
   CastPrimitives.LongValueHolder(i.toLong())
  }
 
- open fun testImplicitArrayIndexCasts(array: ByteArray?) {
+ open fun testImplicitArrayIndexCasts(@ObjCName("withByteArray", exact = false) array: ByteArray?) {
   val b: Byte = (127).toByte()
   val c: Char = '\uFFFF'
   val s: Short = (32767).toShort()
@@ -162,36 +168,36 @@ open class CastPrimitives {
 
  companion object {
   @JvmStatic
-  fun getShort_private_2(value: Short): Short {
+  fun getShort_private_2(@ObjCName("withShort", exact = false) value: Short): Short {
    return value
   }
 
   @JvmStatic
-  fun getInt_private_2(value: Int): Int {
+  fun getInt_private_2(@ObjCName("withInt", exact = false) value: Int): Int {
    return value
   }
 
   @JvmStatic
-  fun getLong_private_2(value: Long): Long {
+  fun getLong_private_2(@ObjCName("withLong", exact = false) value: Long): Long {
    return value
   }
 
   @JvmStatic
-  fun getFloat_private_2(value: Float): Float {
+  fun getFloat_private_2(@ObjCName("withFloat", exact = false) value: Float): Float {
    return value
   }
 
   @JvmStatic
-  fun getDouble_private_2(value: Double): Double {
+  fun getDouble_private_2(@ObjCName("withDouble", exact = false) value: Double): Double {
    return value
   }
  }
 
  open class IntValueHolder {
-  constructor(value: Int)
+  constructor(@ObjCName("withInt", exact = false) value: Int)
  }
 
  open class LongValueHolder {
-  constructor(value: Long)
+  constructor(@ObjCName("withLong", exact = false) value: Long)
  }
 }

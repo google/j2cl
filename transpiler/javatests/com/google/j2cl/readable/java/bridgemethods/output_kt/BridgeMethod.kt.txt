@@ -1,4 +1,6 @@
 // Generated from "bridgemethods/BridgeMethod.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package bridgemethods
 
 import javaemul.lang.*
@@ -20,62 +22,76 @@ import kotlin.Comparable
 import kotlin.Double
 import kotlin.Error
 import kotlin.Number
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("BridgemethodsSomeInterface", exact = true)
 interface SomeInterface<T, S> {
- fun foo(t: T, s: S)
+ fun foo(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) s: S)
 
- fun foo(t: T, n: Number?)
+ fun foo(@ObjCName("withId", exact = false) t: T, @ObjCName("withJavaLangNumber", exact = false) n: Number?)
 }
 
+@ObjCName("BridgemethodsSuperParent", exact = true)
 open class SuperParent<T, S> {
- open fun foo(t: T, s: S) {}
+ open fun foo(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) s: S) {}
 }
 
+@ObjCName("BridgemethodsParent", exact = true)
 open class Parent<T: Error?>: SuperParent<T, Number?>() {
  open override fun foo(t: T, s: Number?) {}
 
- open fun <T_1: Number?> bar(t: T_1) {}
+ open fun <T_1: Number?> bar(@ObjCName("withId", exact = false) t: T_1) {}
 
- open fun <T_1> `fun`(t: T_1) {}
+ open fun <T_1> `fun`(@ObjCName("withId", exact = false) t: T_1) {}
 }
 
+@ObjCName("BridgemethodsBridgeMethod", exact = true)
 open class BridgeMethod: SomeInterface<AssertionError?, Number?>, Parent<AssertionError?>() {
  open override fun foo(a: AssertionError?, n: Number?) {}
 
  open override fun bar(t: Number?) {}
 
- open fun `fun`(t: Number?) {}
+ open fun `fun`(@ObjCName("withJavaLangNumber", exact = false) t: Number?) {}
 }
 
+@ObjCName("BridgemethodsSomeOtherFooInterface", exact = true)
 fun interface SomeOtherFooInterface<T> {
- fun foo(t: T, s: Double?)
+ fun foo(@ObjCName("withId", exact = false) t: T, @ObjCName("withJavaLangDouble", exact = false) s: Double?)
 }
 
+@ObjCName("BridgemethodsDualUnrelatedBridges", exact = true)
 open class DualUnrelatedBridges: SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {
  open override fun foo(s: String?, n: Double?) {}
 
  open override fun foo(s: String?, n: Number?) {}
 }
 
+@ObjCName("BridgemethodsSuperDualUnrelatedAccidentalBridges", exact = true)
 open class SuperDualUnrelatedAccidentalBridges {
- open fun foo(s: String?, n: Double?) {}
+ open fun foo(@ObjCName("withJavaLangString", exact = false) s: String?, @ObjCName("withJavaLangDouble", exact = false) n: Double?) {}
 
- open fun foo(s: String?, n: Number?) {}
+ open fun foo(@ObjCName("withJavaLangString", exact = false) s: String?, @ObjCName("withJavaLangNumber", exact = false) n: Number?) {}
 }
 
+@ObjCName("BridgemethodsDualUnrelatedAccidentalBridges", exact = true)
 open class DualUnrelatedAccidentalBridges: SomeInterface<String?, Double?>, SomeOtherFooInterface<String?>, SuperDualUnrelatedAccidentalBridges() {}
 
+@ObjCName("BridgemethodsGetter", exact = true)
 fun interface Getter {
- fun get(s: String?): String?
+ fun get(@ObjCName("withJavaLangString", exact = false) s: String?): String?
 }
 
+@ObjCName("BridgemethodsClassWithParameterizedGet", exact = true)
 open class ClassWithParameterizedGet<T> {
- open fun get(t: T): T {
+ open fun get(@ObjCName("withId", exact = false) t: T): T {
   return null as T
  }
 }
 
+@ObjCName("BridgemethodsAccidentalOverrideBridge", exact = true)
 open class AccidentalOverrideBridge: Getter, ClassWithParameterizedGet<String?>() {
  open fun test() {
   val g: Getter? = AccidentalOverrideBridge()
@@ -83,15 +99,16 @@ open class AccidentalOverrideBridge: Getter, ClassWithParameterizedGet<String?>(
  }
 }
 
+@ObjCName("BridgemethodsTestCase10036", exact = true)
 open class TestCase10036 {
  interface BI3 {
-  fun get(value: String?): String? {
+  fun get(@ObjCName("withJavaLangString", exact = false) value: String?): String? {
    return "BI3 get String"
   }
  }
 
  fun interface BI2 {
-  fun get(value: String?): String?
+  fun get(@ObjCName("withJavaLangString", exact = false) value: String?): String?
  }
 
  fun interface BI1: TestCase10036.BI3 {
@@ -99,21 +116,22 @@ open class TestCase10036 {
  }
 
  abstract class B<B1: Comparable<*>?>: TestCase10036.BI1, TestCase10036.BI2 {
-  abstract fun get(value: B1): String?
+  abstract fun get(@ObjCName("withId", exact = false) value: B1): String?
  }
 }
 
+@ObjCName("BridgemethodsTestCase102", exact = true)
 open class TestCase102 {
  fun interface BI2 {
-  fun set(value: String?)
+  fun set(@ObjCName("withJavaLangString", exact = false) value: String?)
  }
 
  fun interface BI1 {
-  fun set(value: String?)
+  fun set(@ObjCName("withJavaLangString", exact = false) value: String?)
  }
 
  abstract class B<B1>: TestCase102.BI1, TestCase102.BI2 {
-  abstract fun set(value: B1)
+  abstract fun set(@ObjCName("withId", exact = false) value: B1)
  }
 
  open inner class C<B1>: TestCase102.B<B1>() {
@@ -123,16 +141,19 @@ open class TestCase102 {
  }
 }
 
+@ObjCName("BridgemethodsParameterizedParent", exact = true)
 open class ParameterizedParent<T: ParameterizedParent<T>?> {
- open fun <Q: T> m(t: Q): Q {
+ open fun <Q: T> m(@ObjCName("withId", exact = false) t: Q): Q {
   return null as Q
  }
 }
 
+@ObjCName("BridgemethodsReparametrerizedChild", exact = true)
 open class ReparametrerizedChild<E: ReparametrerizedChild<E>?>: ParameterizedParent<E>() {
- open fun <S: E> m(t: S): S {
+ open fun <S: E> m(@ObjCName("withId", exact = false) t: S): S {
   return null as S
  }
 }
 
+@ObjCName("BridgemethodsLeafChild", exact = true)
 open class LeafChild: ReparametrerizedChild<LeafChild?>() {}

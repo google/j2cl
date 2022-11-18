@@ -1,13 +1,19 @@
 // Generated from "interfaces/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package interfaces
 
 import javaemul.lang.*
 import interfaces.Main
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import kotlin.run
 
+@ObjCName("InterfacesMain", exact = true)
 open class Main {
  open fun testInterfaceMembers() {
   val i: Main.Interface<String?>? = Implementor()
@@ -23,11 +29,11 @@ open class Main {
  fun interface Interface<T> {
   fun interfaceMethod()
 
-  fun defaultMethod(t: T) {
+  fun defaultMethod(@ObjCName("withId", exact = false) t: T) {
    this.privateMethod_private_interfaces_Main_Interface(t)
   }
 
-  fun privateMethod_private_interfaces_Main_Interface(t: T) {}
+  fun privateMethod_private_interfaces_Main_Interface(@ObjCName("withId", exact = false) t: T) {}
 
   companion object {
    const val a: Int = 1

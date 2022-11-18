@@ -1,0 +1,436 @@
+;;; Code for objcnamemethod.Foo [static fields]
+(global $f_$initialized__objcnamemethod_Foo (mut i32) (i32.const 0))
+
+;;; Code for objcnamemethod.ObjCNameMethod [static fields]
+(global $f_$initialized__objcnamemethod_ObjCNameMethod (mut i32) (i32.const 0))
+
+;;; Code for objcnamemethod.SubFoo [static fields]
+(global $f_$initialized__objcnamemethod_SubFoo (mut i32) (i32.const 0))
+
+;;; Code for objcnamemethod.Foo [vtable.init]
+(global $objcnamemethod.Foo.vtable (ref $objcnamemethod.Foo.vtable) 
+ (struct.new $objcnamemethod.Foo.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@objcnamemethod.Foo)
+  (ref.func $m_instanceMethod__int__void@objcnamemethod.Foo)
+ )
+)
+
+;;; Code for objcnamemethod.Foo [itable.init]
+(global $objcnamemethod.Foo.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for objcnamemethod.ObjCNameMethod [vtable.init]
+(global $objcnamemethod.ObjCNameMethod.vtable (ref $objcnamemethod.ObjCNameMethod.vtable) 
+ (struct.new $objcnamemethod.ObjCNameMethod.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@objcnamemethod.ObjCNameMethod)
+  (ref.func $m_instanceMethod__int__void@objcnamemethod.ObjCNameMethod)
+  (ref.func $m_instanceMethod__int__arrayOf_long__void@objcnamemethod.ObjCNameMethod)
+  (ref.func $m_instanceMethod__int__arrayOf_arrayOf_long__void@objcnamemethod.ObjCNameMethod)
+  (ref.func $m_instanceMethod__objcnamemethod_Foo__void@objcnamemethod.ObjCNameMethod)
+ )
+)
+
+;;; Code for objcnamemethod.ObjCNameMethod [itable.init]
+(global $objcnamemethod.ObjCNameMethod.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for objcnamemethod.SubFoo [vtable.init]
+(global $objcnamemethod.SubFoo.vtable (ref $objcnamemethod.SubFoo.vtable) 
+ (struct.new $objcnamemethod.SubFoo.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@objcnamemethod.SubFoo)
+  (ref.func $m_instanceMethod__int__void@objcnamemethod.SubFoo)
+ )
+)
+
+;;; Code for objcnamemethod.SubFoo [itable.init]
+(global $objcnamemethod.SubFoo.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for objcnamemethod.Foo [CLASS]
+(type $objcnamemethod.Foo (struct_subtype 
+ (field $vtable (ref $objcnamemethod.Foo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $objcnamemethod.Foo.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_instanceMethod__int__void (ref $function.m_instanceMethod__int__void))
+  $java.lang.Object.vtable)
+)
+
+;;; Foo Foo.$create()
+(func $$create__@objcnamemethod.Foo
+ (result (ref null $objcnamemethod.Foo))
+ ;;@ objcnamemethod/Foo.java:18:13
+ (local $$instance (ref null $objcnamemethod.Foo))
+ (block
+  ;; Foo $instance = new Foo.<init>(0);
+  ;;@ objcnamemethod/Foo.java:18:13
+  (local.set $$instance (struct.new $objcnamemethod.Foo (ref.as_non_null (global.get $objcnamemethod.Foo.vtable)) (ref.as_non_null (global.get $objcnamemethod.Foo.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ objcnamemethod/Foo.java:18:13
+  (call $$ctor__void_$p_objcnamemethod_Foo@objcnamemethod.Foo (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ objcnamemethod/Foo.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Foo.$ctor()
+(func $$ctor__void_$p_objcnamemethod_Foo@objcnamemethod.Foo
+ (param $this (ref null $objcnamemethod.Foo))
+ ;;@ objcnamemethod/Foo.java:18:13
+ (block
+  ;; objcnamemethod.Foo.$clinit();
+  ;;@ objcnamemethod/Foo.java:18:13
+  (call $$clinit__void@objcnamemethod.Foo )
+  ;; Object.this.$ctor();
+  ;;@ objcnamemethod/Foo.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Foo.instanceMethod(int i)
+(func $m_instanceMethod__int__void@objcnamemethod.Foo
+ (type $function.m_instanceMethod__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i i32)
+ ;;@ objcnamemethod/Foo.java:19:14
+ (local $this (ref null $objcnamemethod.Foo))
+ (local.set $this (ref.cast_static $objcnamemethod.Foo (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_instanceMethod__int__void@objcnamemethod.Foo)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@objcnamemethod.Foo
+ ;;@ objcnamemethod/Foo.java:18:13
+ (block
+  ;; if (objcnamemethod.Foo.$initialized) return;
+  ;;@ objcnamemethod/Foo.java:18:13
+  (if (global.get $f_$initialized__objcnamemethod_Foo)
+   (then
+    ;; return;
+    ;;@ objcnamemethod/Foo.java:18:13
+    (return )
+   )
+  )
+  ;; (objcnamemethod.Foo.$initialized = true);
+  ;;@ objcnamemethod/Foo.java:18:13
+  (global.set $f_$initialized__objcnamemethod_Foo (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ objcnamemethod/Foo.java:18:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@objcnamemethod.Foo
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $objcnamemethod.Foo))
+ (local.set $this (ref.cast_static $objcnamemethod.Foo (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getObjcnamemethod.Foo();
+  (return (call $function.no.side.effects.$getObjcnamemethod.Foo__java_lang_Class (ref.func $$getObjcnamemethod.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@objcnamemethod.Foo)
+
+;;; Code for objcnamemethod.ObjCNameMethod [CLASS]
+(type $objcnamemethod.ObjCNameMethod (struct_subtype 
+ (field $vtable (ref $objcnamemethod.ObjCNameMethod.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $objcnamemethod.ObjCNameMethod.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_instanceMethod__int__void (ref $function.m_instanceMethod__int__void))
+ (field $m_instanceMethod__int__arrayOf_long__void (ref $function.m_instanceMethod__int__arrayOf_long__void))
+ (field $m_instanceMethod__int__arrayOf_arrayOf_long__void (ref $function.m_instanceMethod__int__arrayOf_arrayOf_long__void))
+ (field $m_instanceMethod__objcnamemethod_Foo__void (ref $function.m_instanceMethod__objcnamemethod_Foo__void))
+  $java.lang.Object.vtable)
+)
+
+;;; ObjCNameMethod ObjCNameMethod.$create()
+(func $$create__@objcnamemethod.ObjCNameMethod
+ (result (ref null $objcnamemethod.ObjCNameMethod))
+ ;;@ objcnamemethod/ObjCNameMethod.java:20:9
+ (local $$instance (ref null $objcnamemethod.ObjCNameMethod))
+ (block
+  ;; ObjCNameMethod $instance = new ObjCNameMethod.<init>(0);
+  ;;@ objcnamemethod/ObjCNameMethod.java:20:9
+  (local.set $$instance (struct.new $objcnamemethod.ObjCNameMethod (ref.as_non_null (global.get $objcnamemethod.ObjCNameMethod.vtable)) (ref.as_non_null (global.get $objcnamemethod.ObjCNameMethod.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ objcnamemethod/ObjCNameMethod.java:20:9
+  (call $$ctor__void_$p_objcnamemethod_ObjCNameMethod@objcnamemethod.ObjCNameMethod (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ objcnamemethod/ObjCNameMethod.java:20:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ObjCNameMethod.$ctor()
+(func $$ctor__void_$p_objcnamemethod_ObjCNameMethod@objcnamemethod.ObjCNameMethod
+ (param $this (ref null $objcnamemethod.ObjCNameMethod))
+ ;;@ objcnamemethod/ObjCNameMethod.java:20:9
+ (block
+  ;; objcnamemethod.ObjCNameMethod.$clinit();
+  ;;@ objcnamemethod/ObjCNameMethod.java:20:26
+  (call $$clinit__void@objcnamemethod.ObjCNameMethod )
+  ;; Object.this.$ctor();
+  ;;@ objcnamemethod/ObjCNameMethod.java:20:26
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; ObjCNameMethod ObjCNameMethod.$create(int i)
+(func $$create__int@objcnamemethod.ObjCNameMethod
+ (param $i i32)
+ (result (ref null $objcnamemethod.ObjCNameMethod))
+ ;;@ objcnamemethod/ObjCNameMethod.java:22:9
+ (local $$instance (ref null $objcnamemethod.ObjCNameMethod))
+ (block
+  ;; ObjCNameMethod $instance = new ObjCNameMethod.<init>(0);
+  ;;@ objcnamemethod/ObjCNameMethod.java:22:9
+  (local.set $$instance (struct.new $objcnamemethod.ObjCNameMethod (ref.as_non_null (global.get $objcnamemethod.ObjCNameMethod.vtable)) (ref.as_non_null (global.get $objcnamemethod.ObjCNameMethod.itable)) (i32.const 0)))
+  ;; $instance.$ctor(i);
+  ;;@ objcnamemethod/ObjCNameMethod.java:22:9
+  (call $$ctor__int__void_$p_objcnamemethod_ObjCNameMethod@objcnamemethod.ObjCNameMethod (ref.as_non_null (local.get $$instance))(local.get $i))
+  ;; return $instance;
+  ;;@ objcnamemethod/ObjCNameMethod.java:22:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ObjCNameMethod.$ctor(int i)
+(func $$ctor__int__void_$p_objcnamemethod_ObjCNameMethod@objcnamemethod.ObjCNameMethod
+ (param $this (ref null $objcnamemethod.ObjCNameMethod))
+ (param $i i32)
+ ;;@ objcnamemethod/ObjCNameMethod.java:22:9
+ (block
+  ;; objcnamemethod.ObjCNameMethod.$clinit();
+  ;;@ objcnamemethod/ObjCNameMethod.java:22:31
+  (call $$clinit__void@objcnamemethod.ObjCNameMethod )
+  ;; Object.this.$ctor();
+  ;;@ objcnamemethod/ObjCNameMethod.java:22:31
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ObjCNameMethod.instanceMethod(int i)
+(func $m_instanceMethod__int__void@objcnamemethod.ObjCNameMethod
+ (type $function.m_instanceMethod__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i i32)
+ ;;@ objcnamemethod/ObjCNameMethod.java:24:14
+ (local $this (ref null $objcnamemethod.ObjCNameMethod))
+ (local.set $this (ref.cast_static $objcnamemethod.ObjCNameMethod (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_instanceMethod__int__void@objcnamemethod.ObjCNameMethod)
+
+;;; void ObjCNameMethod.instanceMethod(int i, long[] l)
+(func $m_instanceMethod__int__arrayOf_long__void@objcnamemethod.ObjCNameMethod
+ (type $function.m_instanceMethod__int__arrayOf_long__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i i32)
+ (param $l (ref null $javaemul.internal.WasmArray.OfLong))
+ ;;@ objcnamemethod/ObjCNameMethod.java:26:14
+ (local $this (ref null $objcnamemethod.ObjCNameMethod))
+ (local.set $this (ref.cast_static $objcnamemethod.ObjCNameMethod (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_instanceMethod__int__arrayOf_long__void@objcnamemethod.ObjCNameMethod)
+
+;;; void ObjCNameMethod.instanceMethod(int i, long[][] l)
+(func $m_instanceMethod__int__arrayOf_arrayOf_long__void@objcnamemethod.ObjCNameMethod
+ (type $function.m_instanceMethod__int__arrayOf_arrayOf_long__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i i32)
+ (param $l (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ objcnamemethod/ObjCNameMethod.java:28:14
+ (local $this (ref null $objcnamemethod.ObjCNameMethod))
+ (local.set $this (ref.cast_static $objcnamemethod.ObjCNameMethod (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_instanceMethod__int__arrayOf_arrayOf_long__void@objcnamemethod.ObjCNameMethod)
+
+;;; void ObjCNameMethod.instanceMethod(Foo foo)
+(func $m_instanceMethod__objcnamemethod_Foo__void@objcnamemethod.ObjCNameMethod
+ (type $function.m_instanceMethod__objcnamemethod_Foo__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $foo (ref null $objcnamemethod.Foo))
+ ;;@ objcnamemethod/ObjCNameMethod.java:30:14
+ (local $this (ref null $objcnamemethod.ObjCNameMethod))
+ (local.set $this (ref.cast_static $objcnamemethod.ObjCNameMethod (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_instanceMethod__objcnamemethod_Foo__void@objcnamemethod.ObjCNameMethod)
+
+;;; void ObjCNameMethod.main(String... args)
+(func $m_main__arrayOf_java_lang_String__void@objcnamemethod.ObjCNameMethod
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ objcnamemethod/ObjCNameMethod.java:32:21
+ (block
+  ;; objcnamemethod.ObjCNameMethod.$clinit();
+  ;;@ objcnamemethod/ObjCNameMethod.java:32:42
+  (call $$clinit__void@objcnamemethod.ObjCNameMethod )
+ )
+)
+
+;;; void ObjCNameMethod.$clinit()
+(func $$clinit__void@objcnamemethod.ObjCNameMethod
+ ;;@ objcnamemethod/ObjCNameMethod.java:18:13
+ (block
+  ;; if (objcnamemethod.ObjCNameMethod.$initialized) return;
+  ;;@ objcnamemethod/ObjCNameMethod.java:18:13
+  (if (global.get $f_$initialized__objcnamemethod_ObjCNameMethod)
+   (then
+    ;; return;
+    ;;@ objcnamemethod/ObjCNameMethod.java:18:13
+    (return )
+   )
+  )
+  ;; (objcnamemethod.ObjCNameMethod.$initialized = true);
+  ;;@ objcnamemethod/ObjCNameMethod.java:18:13
+  (global.set $f_$initialized__objcnamemethod_ObjCNameMethod (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ objcnamemethod/ObjCNameMethod.java:18:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> ObjCNameMethod.getClass()
+(func $m_getClass__java_lang_Class@objcnamemethod.ObjCNameMethod
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $objcnamemethod.ObjCNameMethod))
+ (local.set $this (ref.cast_static $objcnamemethod.ObjCNameMethod (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getObjcnamemethod.ObjCNameMethod();
+  (return (call $function.no.side.effects.$getObjcnamemethod.ObjCNameMethod__java_lang_Class (ref.func $$getObjcnamemethod.ObjCNameMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@objcnamemethod.ObjCNameMethod)
+
+;;; Code for objcnamemethod.SubFoo [CLASS]
+(type $objcnamemethod.SubFoo (struct_subtype 
+ (field $vtable (ref $objcnamemethod.SubFoo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $objcnamemethod.Foo)
+)
+(type $objcnamemethod.SubFoo.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_instanceMethod__int__void (ref $function.m_instanceMethod__int__void))
+  $objcnamemethod.Foo.vtable)
+)
+
+;;; SubFoo SubFoo.$create()
+(func $$create__@objcnamemethod.SubFoo
+ (result (ref null $objcnamemethod.SubFoo))
+ ;;@ objcnamemethod/SubFoo.java:18:13
+ (local $$instance (ref null $objcnamemethod.SubFoo))
+ (block
+  ;; SubFoo $instance = new SubFoo.<init>(0);
+  ;;@ objcnamemethod/SubFoo.java:18:13
+  (local.set $$instance (struct.new $objcnamemethod.SubFoo (ref.as_non_null (global.get $objcnamemethod.SubFoo.vtable)) (ref.as_non_null (global.get $objcnamemethod.SubFoo.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ objcnamemethod/SubFoo.java:18:13
+  (call $$ctor__void_$p_objcnamemethod_SubFoo@objcnamemethod.SubFoo (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ objcnamemethod/SubFoo.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SubFoo.$ctor()
+(func $$ctor__void_$p_objcnamemethod_SubFoo@objcnamemethod.SubFoo
+ (param $this (ref null $objcnamemethod.SubFoo))
+ ;;@ objcnamemethod/SubFoo.java:18:13
+ (block
+  ;; objcnamemethod.SubFoo.$clinit();
+  ;;@ objcnamemethod/SubFoo.java:18:13
+  (call $$clinit__void@objcnamemethod.SubFoo )
+  ;; Foo.this.$ctor();
+  ;;@ objcnamemethod/SubFoo.java:18:13
+  (call $$ctor__void_$p_objcnamemethod_Foo@objcnamemethod.Foo (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void SubFoo.instanceMethod(int i)
+(func $m_instanceMethod__int__void@objcnamemethod.SubFoo
+ (type $function.m_instanceMethod__int__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $i i32)
+ ;;@ objcnamemethod/SubFoo.java:20:14
+ (local $this (ref null $objcnamemethod.SubFoo))
+ (local.set $this (ref.cast_static $objcnamemethod.SubFoo (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_instanceMethod__int__void@objcnamemethod.SubFoo)
+
+;;; void SubFoo.$clinit()
+(func $$clinit__void@objcnamemethod.SubFoo
+ ;;@ objcnamemethod/SubFoo.java:18:13
+ (block
+  ;; if (objcnamemethod.SubFoo.$initialized) return;
+  ;;@ objcnamemethod/SubFoo.java:18:13
+  (if (global.get $f_$initialized__objcnamemethod_SubFoo)
+   (then
+    ;; return;
+    ;;@ objcnamemethod/SubFoo.java:18:13
+    (return )
+   )
+  )
+  ;; (objcnamemethod.SubFoo.$initialized = true);
+  ;;@ objcnamemethod/SubFoo.java:18:13
+  (global.set $f_$initialized__objcnamemethod_SubFoo (i32.const 1))
+  ;; objcnamemethod.Foo.$clinit();
+  ;;@ objcnamemethod/SubFoo.java:18:13
+  (call $$clinit__void@objcnamemethod.Foo )
+ )
+)
+
+;;; Class<?> SubFoo.getClass()
+(func $m_getClass__java_lang_Class@objcnamemethod.SubFoo
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $objcnamemethod.SubFoo))
+ (local.set $this (ref.cast_static $objcnamemethod.SubFoo (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getObjcnamemethod.SubFoo();
+  (return (call $function.no.side.effects.$getObjcnamemethod.SubFoo__java_lang_Class (ref.func $$getObjcnamemethod.SubFoo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@objcnamemethod.SubFoo)

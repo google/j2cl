@@ -1,4 +1,6 @@
 // Generated from "varargs/Varargs.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package varargs
 
 import javaemul.lang.*
@@ -7,36 +9,40 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Cloneable
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import varargs.Varargs
 
+@ObjCName("VarargsVarargs", exact = true)
 open class Varargs {
  @JvmField var args_private_2: Array<Any?>? = null
 
- constructor(vararg args: Int)
+ constructor(vararg @ObjCName("withIntArray", exact = false) args: Int)
 
  constructor(): this(1)
 
- open fun test(a: Int, vararg args: Any?) {
+ open fun test(@ObjCName("withInt", exact = false) a: Int, vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?) {
   val args_1: Array<Any?>? = args as Array<Any?>?
  }
 
- open fun testCloneable(vararg args: Cloneable?) {
+ open fun testCloneable(vararg @ObjCName("withJavaLangCloneableArray", exact = false) args: Cloneable?) {
   val args_1: Array<Cloneable?>? = args as Array<Cloneable?>?
  }
 
- open fun testSerializable(vararg args: Serializable?) {
+ open fun testSerializable(vararg @ObjCName("withJavaIoSerializableArray", exact = false) args: Serializable?) {
   val args_1: Array<Serializable?>? = args as Array<Serializable?>?
  }
 
- open fun testAssignment(vararg args: Any?) {
+ open fun testAssignment(vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?) {
   val args_1: Array<Any?>? = args as Array<Any?>?
   this.args_private_2 = args_1 as Array<Any?>?
  }
 
- open fun testLambda(functionalInterface: Varargs.FunctionalInterface?) {}
+ open fun testLambda(@ObjCName("withVarargsFunctionalInterface", exact = false) functionalInterface: Varargs.FunctionalInterface?) {}
 
  open fun main() {
   val v: Varargs? = Varargs()
@@ -55,21 +61,22 @@ open class Varargs {
 
  companion object {
   @JvmStatic
-  fun <T> `fun`(vararg elements: T) {
+  fun <T> `fun`(vararg @ObjCName("withIdArray", exact = false) elements: T) {
    val elements_1: Array<T>? = elements as Array<T>?
   }
 
   @JvmStatic
-  fun <E> bar(a: E, b: E) {
+  fun <E> bar(@ObjCName("withId", exact = false) a: E, @ObjCName("withId", exact = false) b: E) {
    Varargs.`fun`<E>(a, b)
   }
  }
 
  fun interface FunctionalInterface {
-  fun apply(vararg strings: String?)
+  fun apply(vararg @ObjCName("withJavaLangStringArray", exact = false) strings: String?)
  }
 }
 
+@ObjCName("VarargsChild", exact = true)
 open class Child: Varargs {
  constructor(): super(1)
 }

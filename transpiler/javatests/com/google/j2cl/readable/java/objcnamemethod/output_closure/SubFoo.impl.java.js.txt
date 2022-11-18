@@ -1,0 +1,42 @@
+goog.module('objcnamemethod.SubFoo$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Foo = goog.require('objcnamemethod.Foo$impl');
+
+class SubFoo extends Foo {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!SubFoo} */
+ static $create__() {
+  SubFoo.$clinit();
+  let $instance = new SubFoo();
+  $instance.$ctor__objcnamemethod_SubFoo__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objcnamemethod_SubFoo__void() {
+  this.$ctor__objcnamemethod_Foo__void();
+ }
+ /** @override @nodts */
+ m_instanceMethod__int__void(/** number */ i) {}
+ /** @nodts */
+ static $clinit() {
+  SubFoo.$clinit = () =>{};
+  SubFoo.$loadModules();
+  Foo.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubFoo;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(SubFoo, 'objcnamemethod.SubFoo');
+
+exports = SubFoo;
+
+//# sourceMappingURL=SubFoo.js.map

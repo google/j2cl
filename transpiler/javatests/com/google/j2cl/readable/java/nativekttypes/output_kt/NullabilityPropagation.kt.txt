@@ -1,10 +1,16 @@
 // Generated from "nativekttypes/NullabilityPropagation.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nativekttypes
 
 import javaemul.lang.*
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 import nativekttypes.NullabilityPropagation
 
+@ObjCName("NativekttypesNullabilityPropagation", exact = true)
 class NullabilityPropagation {
  interface NullabilityToPropagate {
   fun nullableReturnType1(): String?
@@ -15,13 +21,13 @@ class NullabilityPropagation {
 
   fun nonNullReturnType2(): String
 
-  fun nullableParameter1(s: String?)
+  fun nullableParameter1(@ObjCName("withJavaLangString", exact = false) s: String?)
 
-  fun nullableParameter2(s: String?)
+  fun nullableParameter2(@ObjCName("withJavaLangString", exact = false) s: String?)
 
-  fun nonNullParameter1(s: String)
+  fun nonNullParameter1(@ObjCName("withJavaLangString", exact = false) s: String)
 
-  fun nonNullParameter2(s: String)
+  fun nonNullParameter2(@ObjCName("withJavaLangString", exact = false) s: String)
  }
 
  open inner class Subtype: NullabilityPropagation.NullabilityToPropagate {

@@ -1,4 +1,6 @@
 // Generated from "jsbridgeaccidentaloverride/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jsbridgeaccidentaloverride
 
 import javaemul.lang.*
@@ -6,7 +8,11 @@ import jsbridgeaccidentaloverride.MyInterface
 import jsbridgeaccidentaloverride.MyJsType
 import jsbridgeaccidentaloverride.OtherInterface
 import jsbridgeaccidentaloverride.SubJsType
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("JsbridgeaccidentaloverrideMain", exact = true)
 open class Main {
  open fun test() {
   val a: MyJsType? = MyJsType()

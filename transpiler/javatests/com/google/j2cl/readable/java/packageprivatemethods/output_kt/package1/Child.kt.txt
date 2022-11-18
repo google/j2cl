@@ -1,10 +1,16 @@
 // Generated from "packageprivatemethods/package1/Child.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package packageprivatemethods.package1
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 import packageprivatemethods.package1.Parent
 
+@ObjCName("PackageprivatemethodsPackage1Child", exact = true)
 open class Child: Parent() {
  open override fun foo(a: Int): Int {
   return a + 1

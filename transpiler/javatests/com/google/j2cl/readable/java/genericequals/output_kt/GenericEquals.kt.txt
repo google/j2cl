@@ -1,23 +1,29 @@
 // Generated from "genericequals/GenericEquals.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package genericequals
 
 import javaemul.lang.*
 import genericequals.GenericEquals
 import kotlin.Any
 import kotlin.Boolean
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("GenericequalsGenericEquals", exact = true)
 open class GenericEquals<T> {
  @JvmField val value_private_2: T
 
  @JvmField val value2_private_2: GenericEquals<T>?
 
- constructor(value: T) {
+ constructor(@ObjCName("withId", exact = false) value: T) {
   this.value_private_2 = value
   this.value2_private_2 = null
  }
 
- open fun foo(other: GenericEquals<*>?): Any? {
+ open fun foo(@ObjCName("withId", exact = false) other: GenericEquals<*>?): Any? {
   return other!!.value2_private_2!!.value_private_2
  }
 

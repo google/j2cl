@@ -1,18 +1,24 @@
 // Generated from "bridgemethods/BridgeMethodShadowedSignature.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package bridgemethods
 
 import javaemul.lang.*
 import bridgemethods.BridgeMethodShadowedSignature
 import java.util.function.Consumer
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("BridgemethodsBridgeMethodShadowedSignature", exact = true)
 open class BridgeMethodShadowedSignature {
  fun interface I<I1> {
-  fun get(consumer: Consumer<in I1>?): String?
+  fun get(@ObjCName("withId", exact = false) consumer: Consumer<in I1>?): String?
  }
 
  abstract class B<B1, B2>: BridgeMethodShadowedSignature.I<B1> {
-  open fun get(consumer: B2): String? {
+  open fun get(@ObjCName("withId", exact = false) consumer: B2): String? {
    return "B get B2"
   }
  }

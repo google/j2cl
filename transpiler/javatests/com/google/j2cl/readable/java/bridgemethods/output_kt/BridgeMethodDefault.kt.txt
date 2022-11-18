@@ -1,14 +1,20 @@
 // Generated from "bridgemethods/BridgeMethodDefault.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package bridgemethods
 
 import javaemul.lang.*
 import bridgemethods.BridgeMethodDefault
 import kotlin.Any
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("BridgemethodsBridgeMethodDefault", exact = true)
 open class BridgeMethodDefault {
  fun interface I<T> {
-  fun m(t: T)
+  fun m(@ObjCName("withId", exact = false) t: T)
  }
 
  interface II: BridgeMethodDefault.I<String?> {

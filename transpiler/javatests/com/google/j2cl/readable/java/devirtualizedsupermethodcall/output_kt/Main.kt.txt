@@ -1,4 +1,6 @@
 // Generated from "devirtualizedsupermethodcall/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package devirtualizedsupermethodcall
 
 import javaemul.lang.*
@@ -9,7 +11,11 @@ import kotlin.Double
 import kotlin.Float
 import kotlin.Int
 import kotlin.Long
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("DevirtualizedsupermethodcallSubNumber", exact = true)
 open class SubNumber: JavaNumber() {
  open override fun toInt(): Int {
   return 0
@@ -28,12 +34,14 @@ open class SubNumber: JavaNumber() {
  }
 }
 
+@ObjCName("DevirtualizedsupermethodcallFooCallsSuperObjectMethod", exact = true)
 open class FooCallsSuperObjectMethod {
  open override fun hashCode(): Int {
   return super.hashCode()
  }
 }
 
+@ObjCName("DevirtualizedsupermethodcallMain", exact = true)
 open class Main {
  open fun main() {
   val fooCallsSuperObjectMethods: FooCallsSuperObjectMethod? = FooCallsSuperObjectMethod()

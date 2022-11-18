@@ -1,27 +1,33 @@
 // Generated from "multipleconstructors/MultipleConstructors.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package multipleconstructors
 
 import javaemul.lang.*
 import kotlin.Boolean
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("MultipleconstructorsMultipleConstructors", exact = true)
 open class MultipleConstructors {
  @JvmField var id_private_2: Int = 0
 
  @JvmField var flag_private_2: Boolean = false
 
- constructor(id: Int) {
+ constructor(@ObjCName("withInt", exact = false) id: Int) {
   this.id_private_2 = id
   this.flag_private_2 = id == 0
  }
 
- constructor(flag: Boolean) {
+ constructor(@ObjCName("withBoolean", exact = false) flag: Boolean) {
   this.id_private_2 = - 1
   this.flag_private_2 = flag
  }
 
- constructor(id: Int, flag: Boolean) {
+ constructor(@ObjCName("withInt", exact = false) id: Int, @ObjCName("withBoolean", exact = false) flag: Boolean) {
   this.id_private_2 = id
   this.flag_private_2 = flag
  }

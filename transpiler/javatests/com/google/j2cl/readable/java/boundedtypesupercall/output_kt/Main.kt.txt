@@ -1,13 +1,19 @@
 // Generated from "boundedtypesupercall/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package boundedtypesupercall
 
 import javaemul.lang.*
 import boundedtypesupercall.Main
 import kotlin.Comparable
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("BoundedtypesupercallMain", exact = true)
 open class Main {
  abstract class Foo<T> {
-  constructor(foo: T)
+  constructor(@ObjCName("withId", exact = false) foo: T)
 
   abstract fun foo()
  }

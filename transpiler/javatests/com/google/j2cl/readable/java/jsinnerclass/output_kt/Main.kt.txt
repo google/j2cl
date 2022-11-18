@@ -1,19 +1,25 @@
 // Generated from "jsinnerclass/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jsinnerclass
 
 import javaemul.lang.*
 import jsinnerclass.Main
 import kotlin.Array
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
 import kotlin.assert
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("JsinnerclassMain", exact = true)
 open class Main {
  companion object {
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
    assert(Main.Outer().method() == 5)
   }

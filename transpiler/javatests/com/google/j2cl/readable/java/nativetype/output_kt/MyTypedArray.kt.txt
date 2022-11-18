@@ -1,10 +1,16 @@
 // Generated from "nativetype/MyTypedArray.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nativetype
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("NativetypeMyTypedArray", exact = true)
 open class MyTypedArray<T> {
  @JvmField var length_private_2: Int = 0
 
@@ -12,7 +18,7 @@ open class MyTypedArray<T> {
   return this.length_private_2
  }
 
- fun get(index: Int): T {
+ fun get(@ObjCName("withInt", exact = false) index: Int): T {
   return null as T
  }
 }

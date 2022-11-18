@@ -1,42 +1,52 @@
 // Generated from "transitivejsoverlayimport/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package transitivejsoverlayimport
 
 import javaemul.lang.*
 import kotlin.Array
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import transitivejsoverlayimport.Immediate
 import transitivejsoverlayimport.NonNativeLower
 import transitivejsoverlayimport.NonNativeUpper
 import transitivejsoverlayimport.Transitive
 
+@ObjCName("TransitivejsoverlayimportImmediate", exact = true)
 open class Immediate: Transitive() {
  fun doImmediateInstanceMethod() {}
 }
 
+@ObjCName("TransitivejsoverlayimportNonNativeUpper", exact = true)
 open class NonNativeUpper: Immediate {
  constructor()
 
  open fun doNonNativeUpperInstanceMethod() {}
 }
 
+@ObjCName("TransitivejsoverlayimportNonNativeLower", exact = true)
 open class NonNativeLower: NonNativeUpper {
  constructor()
 
  open fun doNonNativeLowerInstanceMethod() {}
 }
 
+@ObjCName("TransitivejsoverlayimportTransitive", exact = true)
 open class Transitive {
  external fun getJsProperty(): Int
 
- fun doTransitiveInstanceMethod(arg1: String?) {}
+ fun doTransitiveInstanceMethod(@ObjCName("withJavaLangString", exact = false) arg1: String?) {}
 }
 
+@ObjCName("TransitivejsoverlayimportMain", exact = true)
 open class Main {
  companion object {
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
    val transitive: Transitive? = null
    transitive!!.doTransitiveInstanceMethod("arg1")

@@ -1,11 +1,17 @@
 // Generated from "genericnativetype/BoundedJsArrays.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package genericnativetype
 
 import javaemul.lang.*
 import genericnativetype.BoundedJsArray
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("GenericnativetypeBoundedJsArrays", exact = true)
 open class BoundedJsArrays {
  constructor()
 
@@ -16,7 +22,7 @@ open class BoundedJsArrays {
   }
 
   @JvmStatic
-  fun <V> createWithSize(size: Int): BoundedJsArray<V>? {
+  fun <V> createWithSize(@ObjCName("withInt", exact = false) size: Int): BoundedJsArray<V>? {
    return BoundedJsArray.create<V>(size)
   }
  }

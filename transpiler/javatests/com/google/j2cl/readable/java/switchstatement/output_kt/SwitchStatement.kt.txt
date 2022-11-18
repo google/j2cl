@@ -1,4 +1,6 @@
 // Generated from "switchstatement/SwitchStatement.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package switchstatement
 
 import javaemul.lang.*
@@ -6,17 +8,22 @@ import java.lang.RuntimeException
 import kotlin.Byte
 import kotlin.Char
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.Short
 import kotlin.assert
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import switchstatement.Numbers
 
+@ObjCName("SwitchstatementNumbers", exact = true)
 enum class Numbers {
  ONE,
  TWO;
 
 }
 
+@ObjCName("SwitchstatementSwitchStatement", exact = true)
 open class SwitchStatement {
  open fun main() {
   SWITCH@ do {
@@ -61,7 +68,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testCaseExpressionTypes_private_2(ch: Char, i: Int, b: Byte, s: Short) {
+ fun testCaseExpressionTypes_private_2(@ObjCName("withChar", exact = false) ch: Char, @ObjCName("withInt", exact = false) i: Int, @ObjCName("withByte", exact = false) b: Byte, @ObjCName("withShort", exact = false) s: Short) {
   SWITCH@ do {
    when (ch) {
     'a' -> {
@@ -128,7 +135,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testBlocksInSwitchCase_private_2(i: Int) {
+ fun testBlocksInSwitchCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    when (i) {
     1 -> {
@@ -143,7 +150,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testLabelInSwitchCase_private_2(i: Int) {
+ fun testLabelInSwitchCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   when (i) {
    1 -> {
     LABEL@ do {
@@ -153,7 +160,7 @@ open class SwitchStatement {
   }
  }
 
- fun testNonFallThroughBreakCase_private_2(i: Int) {
+ fun testNonFallThroughBreakCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    when (i) {
     1 -> {
@@ -168,7 +175,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testNonFallThroughBreakOuterCase_private_2(i: Int) {
+ fun testNonFallThroughBreakOuterCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   OUTER_LABEL@ do {
    SWITCH@ do {
     when (i) {
@@ -185,7 +192,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testNonFallThroughContinueCase_private_2(i: Int) {
+ fun testNonFallThroughContinueCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   LOOP@ do {
    SWITCH@ do {
     when (i) {
@@ -202,7 +209,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testNonFallThroughReturnCase_private_2(i: Int) {
+ fun testNonFallThroughReturnCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    when (i) {
     4 -> {
@@ -217,7 +224,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testNonFallThroughThrowCase_private_2(i: Int) {
+ fun testNonFallThroughThrowCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    when (i) {
     5 -> {
@@ -232,7 +239,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testNonFallThroughIfCase_private_2(i: Int) {
+ fun testNonFallThroughIfCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    when (i) {
     1 -> {
@@ -251,7 +258,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testNonFallThroughBlockCase_private_2(i: Int) {
+ fun testNonFallThroughBlockCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    when (i) {
     1 -> {
@@ -266,7 +273,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testNonFallThrough_defaultIsNotLast_private_2(i: Int) {
+ fun testNonFallThrough_defaultIsNotLast_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
@@ -302,7 +309,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testFallThroughCase_private_2(i: Int) {
+ fun testFallThroughCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
@@ -323,7 +330,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testFallThroughBreakInnerCase_private_2(i: Int) {
+ fun testFallThroughBreakInnerCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
@@ -347,7 +354,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testFallThroughContinueInnerCase_private_2(i: Int) {
+ fun testFallThroughContinueInnerCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
@@ -371,7 +378,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testFallThroughLabeledStatement_private_2(i: Int) {
+ fun testFallThroughLabeledStatement_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
@@ -397,7 +404,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testFallThroughIfCase_private_2(i: Int) {
+ fun testFallThroughIfCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
@@ -421,7 +428,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testFallThroughIfElseCase_private_2(i: Int) {
+ fun testFallThroughIfElseCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
@@ -447,7 +454,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testFallThoughLastCase_private_2(i: Int) {
+ fun testFallThoughLastCase_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    when (i) {
     1 -> {
@@ -461,7 +468,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testDefaultIsNotLast_fallThrough_private_2(i: Int) {
+ fun testDefaultIsNotLast_fallThrough_private_2(@ObjCName("withInt", exact = false) i: Int) {
   SWITCH@ do {
    CASE@ do {
     CASE_1@ do {
@@ -493,7 +500,7 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testDefaultNotLast_fallThroughCase_private_2(i: Int): Int {
+ fun testDefaultNotLast_fallThroughCase_private_2(@ObjCName("withInt", exact = false) i: Int): Int {
   var result: Int = 0
   SWITCH@ do {
    CASE@ do {
@@ -522,7 +529,7 @@ open class SwitchStatement {
   return result
  }
 
- fun testDefaultNotLast_fallThroughDefault_private_2(i: Int): Int {
+ fun testDefaultNotLast_fallThroughDefault_private_2(@ObjCName("withInt", exact = false) i: Int): Int {
   var result: Int = 0
   SWITCH@ do {
    CASE@ do {
@@ -551,7 +558,7 @@ open class SwitchStatement {
   return result
  }
 
- fun foo_private_2(i: Int) {}
+ fun foo_private_2(@ObjCName("withInt", exact = false) i: Int) {}
 
  companion object {
   @JvmStatic

@@ -1,4 +1,6 @@
 // Generated from "cast/CastGenerics.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package cast
 
 import javaemul.lang.*
@@ -9,10 +11,14 @@ import kotlin.Enum
 import kotlin.Error
 import kotlin.Int
 import kotlin.Number
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("CastCastGenerics", exact = true)
 open class CastGenerics<T, E: Number?> {
  @JvmField var field: T = null as T
 
@@ -38,13 +44,13 @@ open class CastGenerics<T, E: Number?> {
 
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
-   fun nestedGenericMethod_private_2(o: Any?) {
+   fun nestedGenericMethod_private_2(@ObjCName("withJavaLangAny", exact = false) o: Any?) {
     val t: TT? = o as TT?
    }
   }
  }
 
- open fun <EE> method(o: Any?): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
+ open fun <EE> method(@ObjCName("withJavaLangAny", exact = false) o: Any?): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
   if (o is CastGenerics.Empty1) {
    return (o as EE?) as EE
   }

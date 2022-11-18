@@ -1,0 +1,40 @@
+goog.module('objcnametype.ObjCNameType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class ObjCNameType extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!ObjCNameType} */
+ static $create__() {
+  ObjCNameType.$clinit();
+  let $instance = new ObjCNameType();
+  $instance.$ctor__objcnametype_ObjCNameType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objcnametype_ObjCNameType__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  ObjCNameType.$clinit = () =>{};
+  ObjCNameType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ObjCNameType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ObjCNameType, 'objcnametype.ObjCNameType');
+
+exports = ObjCNameType;
+
+//# sourceMappingURL=ObjCNameType.js.map

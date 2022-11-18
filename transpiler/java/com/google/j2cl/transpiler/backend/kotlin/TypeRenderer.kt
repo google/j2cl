@@ -34,6 +34,11 @@ fun Renderer.renderType(type: Type) {
     return
   }
 
+  // Render ObjCName annotation for top-level types only.
+  if (typeDeclaration.enclosingTypeDeclaration == null) {
+    renderObjCNameAnnotation(typeDeclaration)
+  }
+
   if (type.isClass && !typeDeclaration.isFinal) {
     if (typeDeclaration.isAbstract) render("abstract ") else render("open ")
   }

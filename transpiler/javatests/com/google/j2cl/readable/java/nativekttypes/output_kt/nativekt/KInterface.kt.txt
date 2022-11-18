@@ -1,13 +1,19 @@
 // Generated from "nativekttypes/nativekt/KInterface.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nativekttypes.nativekt
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("NativekttypesNativektKInterface", exact = true)
 interface KInterface<V> {
- fun interfaceMethod(v: V): Int
+ fun interfaceMethod(@ObjCName("withId", exact = false) v: V): Int
 
- fun renamedInterfaceMethod(v: V): Int
+ fun renamedInterfaceMethod(@ObjCName("withId", exact = false) v: V): Int
 
  val interfaceMethodAsProperty: Int
 

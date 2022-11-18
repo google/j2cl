@@ -1,24 +1,32 @@
 // Generated from "genericanddefaultmethods/ConcreteClass.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package genericanddefaultmethods
 
 import javaemul.lang.*
 import genericanddefaultmethods.GenericClass
 import genericanddefaultmethods.InterfaceWithDefault
 import java.lang.System
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("GenericanddefaultmethodsInterfaceWithDefault", exact = true)
 interface InterfaceWithDefault {
- fun foo(value: String?) {
+ fun foo(@ObjCName("withJavaLangString", exact = false) value: String?) {
   System.out!!.println("in InterfaceWithDefault")
  }
 }
 
+@ObjCName("GenericanddefaultmethodsGenericClass", exact = true)
 open class GenericClass<T> {
- open fun foo(value: T) {
+ open fun foo(@ObjCName("withId", exact = false) value: T) {
   System.out!!.println("in GenericClass")
  }
 }
 
+@ObjCName("GenericanddefaultmethodsConcreteClass", exact = true)
 open class ConcreteClass: InterfaceWithDefault, GenericClass<String?>() {
  open override fun foo(arg0: String?) {
   super<GenericClass>.foo(arg0)

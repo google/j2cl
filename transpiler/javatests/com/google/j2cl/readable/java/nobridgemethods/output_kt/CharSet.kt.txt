@@ -1,20 +1,28 @@
 // Generated from "nobridgemethods/CharSet.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nobridgemethods
 
 import javaemul.lang.*
 import kotlin.Array
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import nobridgemethods.Entry
 import nobridgemethods.Map
 import nobridgemethods.TreeMap
 
+@ObjCName("NobridgemethodsEntry", exact = true)
 interface Entry<K> {}
 
+@ObjCName("NobridgemethodsMap", exact = true)
 abstract class Map<K> {
- abstract fun getCeilingEntry(key: K): Entry<K>?
+ abstract fun getCeilingEntry(@ObjCName("withId", exact = false) key: K): Entry<K>?
 }
 
+@ObjCName("NobridgemethodsTreeMap", exact = true)
 open class TreeMap<K>: Map<K>() {
  open override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
   return TreeMap.InnerEntry<K>()
@@ -23,10 +31,11 @@ open class TreeMap<K>: Map<K>() {
  open class InnerEntry<K>: Entry<K> {}
 }
 
+@ObjCName("NobridgemethodsCharSet", exact = true)
 open class CharSet {
  companion object {
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
    val treeMap: TreeMap<String?>? = object : TreeMap<String?>() {}
   }

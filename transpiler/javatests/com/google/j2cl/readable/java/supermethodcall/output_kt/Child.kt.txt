@@ -1,10 +1,15 @@
 // Generated from "supermethodcall/Child.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package supermethodcall
 
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 import supermethodcall.Child
 import supermethodcall.GrandParent
 import supermethodcall.GrandParentInterface
@@ -15,18 +20,21 @@ import supermethodcall.Parent
 import supermethodcall.ParentInterface
 import supermethodcall.Super
 
+@ObjCName("SupermethodcallGrandParentInterface", exact = true)
 interface GrandParentInterface {
  fun defaultGrandParent() {}
 }
 
+@ObjCName("SupermethodcallParentInterface", exact = true)
 interface ParentInterface {
  fun defaultParent() {}
 }
 
+@ObjCName("SupermethodcallGrandParent", exact = true)
 open class GrandParent {
  open fun grandParentSimplest() {}
 
- open fun grandParentWithParams(foo: Int) {}
+ open fun grandParentWithParams(@ObjCName("withInt", exact = false) foo: Int) {}
 
  open fun grandParentWithChangingReturn(): Any? {
   return null
@@ -37,10 +45,11 @@ open class GrandParent {
  open fun defaultGrandParent() {}
 }
 
+@ObjCName("SupermethodcallParent", exact = true)
 open class Parent: ParentInterface, GrandParent() {
  open fun parentSimplest() {}
 
- open fun parentWithParams(foo: Int) {}
+ open fun parentWithParams(@ObjCName("withInt", exact = false) foo: Int) {}
 
  open fun parentWithChangingReturn(): Any? {
   return null
@@ -52,6 +61,7 @@ open class Parent: ParentInterface, GrandParent() {
  }
 }
 
+@ObjCName("SupermethodcallChild", exact = true)
 open class Child: GrandParentInterface, Parent() {
  open override fun parentSimplest() {
   super<Parent>.parentSimplest()
@@ -85,26 +95,32 @@ open class Child: GrandParentInterface, Parent() {
  }
 }
 
+@ObjCName("SupermethodcallI1", exact = true)
 interface I1 {
  fun m() {}
 }
 
+@ObjCName("SupermethodcallI2", exact = true)
 fun interface I2 {
  fun m()
 }
 
+@ObjCName("SupermethodcallI3", exact = true)
 interface I3: I1 {}
 
+@ObjCName("SupermethodcallSuper", exact = true)
 open class Super {
  open fun m() {}
 }
 
+@ObjCName("SupermethodcallSub", exact = true)
 open class Sub: I2, I3, Super() {
  open override fun m() {
   super<I3>.m()
  }
 }
 
+@ObjCName("SupermethodcallSuperToStringTest", exact = true)
 abstract class SuperToStringTest: I1 {
  open override fun toString(): String {
   return super.toString()

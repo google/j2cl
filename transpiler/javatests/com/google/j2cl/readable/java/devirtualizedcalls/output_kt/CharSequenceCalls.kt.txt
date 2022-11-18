@@ -1,12 +1,18 @@
 // Generated from "devirtualizedcalls/CharSequenceCalls.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package devirtualizedcalls
 
 import javaemul.lang.*
 import kotlin.CharSequence
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("DevirtualizedcallsCharSequenceCalls", exact = true)
 open class CharSequenceCalls {
- open fun test(cs: CharSequence?) {
+ open fun test(@ObjCName("withJavaLangCharSequence", exact = false) cs: CharSequence?) {
   cs!!.get(0)
  }
 

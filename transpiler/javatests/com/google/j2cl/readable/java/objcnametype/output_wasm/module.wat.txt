@@ -1,0 +1,99 @@
+;;; Code for objcnametype.ObjCNameType [static fields]
+(global $f_$initialized__objcnametype_ObjCNameType (mut i32) (i32.const 0))
+
+;;; Code for objcnametype.ObjCNameType [vtable.init]
+(global $objcnametype.ObjCNameType.vtable (ref $objcnametype.ObjCNameType.vtable) 
+ (struct.new $objcnametype.ObjCNameType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@objcnametype.ObjCNameType)
+ )
+)
+
+;;; Code for objcnametype.ObjCNameType [itable.init]
+(global $objcnametype.ObjCNameType.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for objcnametype.ObjCNameType [CLASS]
+(type $objcnametype.ObjCNameType (struct_subtype 
+ (field $vtable (ref $objcnametype.ObjCNameType.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $objcnametype.ObjCNameType.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; ObjCNameType ObjCNameType.$create()
+(func $$create__@objcnametype.ObjCNameType
+ (result (ref null $objcnametype.ObjCNameType))
+ ;;@ objcnametype/ObjCNameType.java:18:13
+ (local $$instance (ref null $objcnametype.ObjCNameType))
+ (block
+  ;; ObjCNameType $instance = new ObjCNameType.<init>(0);
+  ;;@ objcnametype/ObjCNameType.java:18:13
+  (local.set $$instance (struct.new $objcnametype.ObjCNameType (ref.as_non_null (global.get $objcnametype.ObjCNameType.vtable)) (ref.as_non_null (global.get $objcnametype.ObjCNameType.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ objcnametype/ObjCNameType.java:18:13
+  (call $$ctor__void_$p_objcnametype_ObjCNameType@objcnametype.ObjCNameType (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ objcnametype/ObjCNameType.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ObjCNameType.$ctor()
+(func $$ctor__void_$p_objcnametype_ObjCNameType@objcnametype.ObjCNameType
+ (param $this (ref null $objcnametype.ObjCNameType))
+ ;;@ objcnametype/ObjCNameType.java:18:13
+ (block
+  ;; objcnametype.ObjCNameType.$clinit();
+  ;;@ objcnametype/ObjCNameType.java:18:13
+  (call $$clinit__void@objcnametype.ObjCNameType )
+  ;; Object.this.$ctor();
+  ;;@ objcnametype/ObjCNameType.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void ObjCNameType.$clinit()
+(func $$clinit__void@objcnametype.ObjCNameType
+ ;;@ objcnametype/ObjCNameType.java:18:13
+ (block
+  ;; if (objcnametype.ObjCNameType.$initialized) return;
+  ;;@ objcnametype/ObjCNameType.java:18:13
+  (if (global.get $f_$initialized__objcnametype_ObjCNameType)
+   (then
+    ;; return;
+    ;;@ objcnametype/ObjCNameType.java:18:13
+    (return )
+   )
+  )
+  ;; (objcnametype.ObjCNameType.$initialized = true);
+  ;;@ objcnametype/ObjCNameType.java:18:13
+  (global.set $f_$initialized__objcnametype_ObjCNameType (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ objcnametype/ObjCNameType.java:18:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> ObjCNameType.getClass()
+(func $m_getClass__java_lang_Class@objcnametype.ObjCNameType
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $objcnametype.ObjCNameType))
+ (local.set $this (ref.cast_static $objcnametype.ObjCNameType (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getObjcnametype.ObjCNameType();
+  (return (call $function.no.side.effects.$getObjcnametype.ObjCNameType__java_lang_Class (ref.func $$getObjcnametype.ObjCNameType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@objcnametype.ObjCNameType)

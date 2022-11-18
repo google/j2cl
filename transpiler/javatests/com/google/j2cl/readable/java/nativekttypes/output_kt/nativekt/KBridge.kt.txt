@@ -1,9 +1,15 @@
 // Generated from "nativekttypes/nativekt/KBridge.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nativekttypes.nativekt
 
 import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 import nativekttypes.nativekt.KRequiringBridge
 
+@ObjCName("NativekttypesNativektKBridge", exact = true)
 open class KBridge: KRequiringBridge() {
  open fun method() {}
 }

@@ -8,4 +8,6 @@ package(licenses = ["notice"])
 integration_test(
     name = "backwardbridgemethod",
     srcs = glob(["*.java"]),
+    # TODO(b/259416922): Support bridging for J2KT name mangling on KMP iOS.
+    enable_kt_native = False,
 )

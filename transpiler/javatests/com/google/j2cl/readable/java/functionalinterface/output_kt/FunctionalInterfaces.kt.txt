@@ -1,18 +1,24 @@
 // Generated from "functionalinterface/FunctionalInterfaces.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package functionalinterface
 
 import javaemul.lang.*
 import functionalinterface.FunctionalInterfaces
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("FunctionalinterfaceFunctionalInterfaces", exact = true)
 open class FunctionalInterfaces {
  fun interface NonParametrized {
-  fun apply(string: String?): String?
+  fun apply(@ObjCName("withJavaLangString", exact = false) string: String?): String?
  }
 
  fun interface Parametrized<T> {
-  fun apply(t: T): T
+  fun apply(@ObjCName("withId", exact = false) t: T): T
  }
 
  fun interface Specialized: FunctionalInterfaces.Parametrized<String?> {
@@ -20,19 +26,19 @@ open class FunctionalInterfaces {
  }
 
  fun interface WithDefaultMethod {
-  fun apply(string: String?): String?
+  fun apply(@ObjCName("withJavaLangString", exact = false) string: String?): String?
 
-  fun defaultApply(string: String?): String? {
+  fun defaultApply(@ObjCName("withJavaLangString", exact = false) string: String?): String? {
    return this.apply(string)
   }
  }
 
  fun interface WithObjectMethods {
-  fun apply(string: String?): String?
+  fun apply(@ObjCName("withJavaLangString", exact = false) string: String?): String?
  }
 
  interface WithParametrizedMethod {
-  fun <T> apply(t: T): T
+  fun <T> apply(@ObjCName("withId", exact = false) t: T): T
  }
 
  interface WithKtProperty {

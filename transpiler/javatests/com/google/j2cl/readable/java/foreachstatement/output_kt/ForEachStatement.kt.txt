@@ -1,4 +1,6 @@
 // Generated from "foreachstatement/ForEachStatement.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package foreachstatement
 
 import javaemul.lang.*
@@ -7,14 +9,18 @@ import java.lang.Exception
 import javaemul.lang.JavaIterable
 import kotlin.Any
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
 import kotlin.Throwable
 import kotlin.arrayOfNulls
 import kotlin.collections.MutableIterable
 import kotlin.collections.MutableIterator
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("ForeachstatementForEachStatement", exact = true)
 open class ForEachStatement {
- open fun test(iterable: MutableIterable<Throwable?>?) {
+ open fun test(@ObjCName("withId", exact = false) iterable: MutableIterable<Throwable?>?) {
   for (t in iterable!!) {
    val t_1: Throwable? = t
    t_1!!.toString()

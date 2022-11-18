@@ -1,12 +1,19 @@
 // Generated from "genericinterfaceabstractimpl/AbstractImpl.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package genericinterfaceabstractimpl
 
 import javaemul.lang.*
 import genericinterfaceabstractimpl.MyInterface
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("GenericinterfaceabstractimplMyInterface", exact = true)
 fun interface MyInterface<T> {
- fun `fun`(t: T): T
+ fun `fun`(@ObjCName("withId", exact = false) t: T): T
 }
 
+@ObjCName("GenericinterfaceabstractimplAbstractImpl", exact = true)
 abstract class AbstractImpl: MyInterface<Int?> {}

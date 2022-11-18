@@ -1,11 +1,17 @@
 // Generated from "javascriptkeywords/JSKeyWords.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package javascriptkeywords
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("JavascriptkeywordsJSKeyWords", exact = true)
 open class JSKeyWords {
- open fun test(`in`: Int): Int {
+ open fun test(@ObjCName("withInt", exact = false) `in`: Int): Int {
   val let: Int = 0
   return let + `in`
  }

@@ -1,12 +1,18 @@
 // Generated from "packageprivatemethods/package2/SubParent.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package packageprivatemethods.package2
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 import packageprivatemethods.package1.Parent
 
+@ObjCName("PackageprivatemethodsPackage2SubParent", exact = true)
 abstract class SubParent: Parent() {
- open fun foo(a: Int): Int {
+ open fun foo(@ObjCName("withInt", exact = false) a: Int): Int {
   return a
  }
 }

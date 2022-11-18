@@ -1,33 +1,39 @@
 // Generated from "jsmethod/JsMethodExample.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jsmethod
 
 import javaemul.lang.*
 import jsmethod.JsMethodExample
 import kotlin.Array
+import kotlin.OptIn
 import kotlin.String
 import kotlin.collections.ArrayList
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("JsmethodJsMethodExample", exact = true)
 open class JsMethodExample {
  external open fun <T: ArrayList<String?>?> testMethod(): T
 
  companion object {
   @JvmStatic
-  external fun log(message: String?)
+  external fun log(@ObjCName("withJavaLangString", exact = false) message: String?)
 
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
    JsMethodExample.log("test")
   }
  }
 
  abstract class Base<T> {
-  open fun m(t: T) {}
+  open fun m(@ObjCName("withId", exact = false) t: T) {}
  }
 
  fun interface I {
-  fun m(s: String?)
+  fun m(@ObjCName("withJavaLangString", exact = false) s: String?)
  }
 
  open class Sub: JsMethodExample.I, JsMethodExample.Base<String?>() {

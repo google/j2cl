@@ -1,13 +1,20 @@
 // Generated from "qualifiedsupercall/QualifiedSuperCall.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package qualifiedsupercall
 
 import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 import qualifiedsupercall.Parent
 
+@ObjCName("QualifiedsupercallParent", exact = true)
 open class Parent {
  open fun `fun`() {}
 }
 
+@ObjCName("QualifiedsupercallQualifiedSuperCall", exact = true)
 open class QualifiedSuperCall: Parent() {
  open inner class InnerClass {
   open fun test() {

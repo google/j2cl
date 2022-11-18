@@ -1,19 +1,25 @@
 // Generated from "cascadingconstructor/CascadingConstructor.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package cascadingconstructor
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("CascadingconstructorCascadingConstructor", exact = true)
 open class CascadingConstructor {
  @JvmField var a_private_2: Int = 0
 
  @JvmField var b_private_2: Int = 0
 
- constructor(a: Int, b: Int) {
+ constructor(@ObjCName("withInt", exact = false) a: Int, @ObjCName("withInt", exact = false) b: Int) {
   this.a_private_2 = a
   this.b_private_2 = b
  }
 
- constructor(a: Int): this(a, a * 2)
+ constructor(@ObjCName("withInt", exact = false) a: Int): this(a, a * 2)
 }

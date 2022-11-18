@@ -1,13 +1,19 @@
 // Generated from "booleanoperations/BooleanOperations.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package booleanoperations
 
 import javaemul.lang.*
 import booleanoperations.BooleanOperations
 import kotlin.Boolean
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import kotlin.run
 
+@ObjCName("BooleanoperationsBooleanOperations", exact = true)
 open class BooleanOperations {
  open fun test() {
   var ls: Boolean = true
@@ -92,6 +98,6 @@ open class BooleanOperations {
 
  companion object {
   @JvmStatic
-  fun acceptBoolean_private_2(b: Boolean) {}
+  fun acceptBoolean_private_2(@ObjCName("withBoolean", exact = false) b: Boolean) {}
  }
 }

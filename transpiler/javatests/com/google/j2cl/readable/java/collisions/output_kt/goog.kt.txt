@@ -1,4 +1,6 @@
 // Generated from "collisions/goog.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package collisions
 
 import javaemul.lang.*
@@ -10,10 +12,15 @@ import collisions.goog
 import kotlin.Double
 import kotlin.Int
 import kotlin.Number
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("Collisionsgoog", exact = true)
 open class goog {}
 
+@ObjCName("CollisionsBlah", exact = true)
 open class Blah {
  companion object {
   @JvmStatic
@@ -24,8 +31,10 @@ open class Blah {
  }
 }
 
+@ObjCName("Collisionsfoo", exact = true)
 open class foo {}
 
+@ObjCName("Collisionsbar", exact = true)
 open class bar {
  init {
   val foo: Int = 0
@@ -43,6 +52,7 @@ open class bar {
  }
 }
 
+@ObjCName("CollisionsOther", exact = true)
 open class Other<T> {
  init {
   val T_1: Int = 3
@@ -56,6 +66,7 @@ open class Other<T> {
  }
 }
 
+@ObjCName("CollisionsT", exact = true)
 open class T<T: Number?> {
  open fun m(): T {
   return null as T

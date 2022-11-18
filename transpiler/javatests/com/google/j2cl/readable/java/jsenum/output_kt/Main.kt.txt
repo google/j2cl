@@ -1,4 +1,6 @@
 // Generated from "jsenum/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jsenum
 
 import javaemul.lang.*
@@ -12,11 +14,15 @@ import kotlin.Array
 import kotlin.Boolean
 import kotlin.Comparable
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
 import kotlin.arrayOf
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("JsenumMain", exact = true)
 open class Main {
  companion object {
   @JvmStatic
@@ -79,7 +85,7 @@ open class Main {
   }
 
   @JvmStatic
-  fun <T> boxingPassthrough_private_2(t: T): T {
+  fun <T> boxingPassthrough_private_2(@ObjCName("withId", exact = false) t: T): T {
    return t
   }
 
@@ -110,7 +116,7 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(value: Int) {
+  constructor(@ObjCName("withInt", exact = false) value: Int) {
    this.value_private_2 = value
   }
  }
@@ -125,7 +131,7 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(value: String?) {
+  constructor(@ObjCName("withJavaLangString", exact = false) value: String?) {
    this.value_private_2 = value
   }
  }
@@ -140,7 +146,7 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(value: String?) {
+  constructor(@ObjCName("withJavaLangString", exact = false) value: String?) {
    this.value_private_2 = value!!
   }
  }
@@ -154,7 +160,7 @@ open class Main {
  open class TemplatedField<T> {
   @JvmField var value: T = null as T
 
-  constructor(value: T) {
+  constructor(@ObjCName("withId", exact = false) value: T) {
    this.value = value
   }
 
@@ -164,6 +170,6 @@ open class Main {
  }
 
  open class Foo<T> {
-  constructor(c: Optional<Main.IntJsEnum>?)
+  constructor(@ObjCName("withId", exact = false) c: Optional<Main.IntJsEnum>?)
  }
 }

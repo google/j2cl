@@ -1,4 +1,6 @@
 // Generated from "interfacedevirtualize/InterfaceDevirtualize.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package interfacedevirtualize
 
 import javaemul.lang.*
@@ -7,37 +9,41 @@ import kotlin.Boolean
 import kotlin.Comparable
 import kotlin.Double
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("InterfacedevirtualizeInterfaceDevirtualize", exact = true)
 open class InterfaceDevirtualize {
- open fun <T> compare0(c: Comparable<T & Any>?, t: T): Int {
+ open fun <T> compare0(@ObjCName("withId", exact = false) c: Comparable<T & Any>?, @ObjCName("withId", exact = false) t: T): Int {
   return c!!.compareTo(t!!)
  }
 
- open fun compare1(c: Comparable<Any>?, o: Any?): Int {
+ open fun compare1(@ObjCName("withJavaLangComparable", exact = false) c: Comparable<Any>?, @ObjCName("withJavaLangAny", exact = false) o: Any?): Int {
   return c!!.compareTo(o!!)
  }
 
- open fun compare2(c: Comparable<Double>?, d: Double?): Int {
+ open fun compare2(@ObjCName("withId", exact = false) c: Comparable<Double>?, @ObjCName("withJavaLangDouble", exact = false) d: Double?): Int {
   return c!!.compareTo(d!!)
  }
 
- open fun compare3(d1: Double?, d2: Double?): Int {
+ open fun compare3(@ObjCName("withJavaLangDouble", exact = false) d1: Double?, @ObjCName("withJavaLangDouble", exact = false) d2: Double?): Int {
   return d1!!.compareTo(d2!!)
  }
 
- open fun compare2(c: Comparable<Boolean>?, d: Boolean?): Int {
+ open fun compare2(@ObjCName("withId", exact = false) c: Comparable<Boolean>?, @ObjCName("withJavaLangBoolean", exact = false) d: Boolean?): Int {
   return c!!.compareTo(d!!)
  }
 
- open fun compare3(d1: Boolean?, d2: Boolean?): Int {
+ open fun compare3(@ObjCName("withJavaLangBoolean", exact = false) d1: Boolean?, @ObjCName("withJavaLangBoolean", exact = false) d2: Boolean?): Int {
   return d1!!.compareTo(d2!!)
  }
 
- open fun compare2(c: Comparable<Int>?, d: Int?): Int {
+ open fun compare2(@ObjCName("withId", exact = false) c: Comparable<Int>?, @ObjCName("withJavaLangInt", exact = false) d: Int?): Int {
   return c!!.compareTo(d!!)
  }
 
- open fun compare3(d1: Int?, d2: Int?): Int {
+ open fun compare3(@ObjCName("withJavaLangInt", exact = false) d1: Int?, @ObjCName("withJavaLangInt", exact = false) d2: Int?): Int {
   return d1!!.compareTo(d2!!)
  }
 }

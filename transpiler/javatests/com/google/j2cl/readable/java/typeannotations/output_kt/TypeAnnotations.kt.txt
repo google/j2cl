@@ -1,33 +1,44 @@
 // Generated from "typeannotations/TypeAnnotations.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package typeannotations
 
 import javaemul.lang.*
+import kotlin.OptIn
 import kotlin.String
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import typeannotations.AbstractType
 import typeannotations.ParametricType
 import typeannotations.Parent
 
+@ObjCName("TypeannotationsAbstractType", exact = true)
 abstract class AbstractType: ParametricType<AbstractType?> {}
 
+@ObjCName("TypeannotationsAbstractTypeNonNull", exact = true)
 abstract class AbstractTypeNonNull: ParametricType<AbstractType> {}
 
+@ObjCName("TypeannotationsParent", exact = true)
 open class Parent {
- open fun m(s: String, c: Parent?): Parent? {
+ open fun m(@ObjCName("withJavaLangString", exact = false) s: String, @ObjCName("withTypeannotationsParent", exact = false) c: Parent?): Parent? {
   return c
  }
 
- open fun m(l: MutableList<String>?, c: Parent?): MutableList<Parent>? {
+ open fun m(@ObjCName("withId", exact = false) l: MutableList<String>?, @ObjCName("withTypeannotationsParent", exact = false) c: Parent?): MutableList<Parent>? {
   return ArrayList<Parent>()
  }
 }
 
+@ObjCName("TypeannotationsChildWithNullableParent", exact = true)
 open class ChildWithNullableParent: ParametricType<Parent?>, Parent() {}
 
+@ObjCName("TypeannotationsChildWithNonNullableParent", exact = true)
 open class ChildWithNonNullableParent: ParametricType<Parent>, Parent() {}
 
+@ObjCName("TypeannotationsTypeAnnotations", exact = true)
 open class TypeAnnotations {
  companion object {
   @JvmStatic

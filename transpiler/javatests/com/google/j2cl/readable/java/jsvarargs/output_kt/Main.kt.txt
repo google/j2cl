@@ -1,4 +1,6 @@
 // Generated from "jsvarargs/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jsvarargs
 
 import javaemul.lang.*
@@ -7,24 +9,28 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Int
 import kotlin.IntArray
+import kotlin.OptIn
 import kotlin.arrayOf
 import kotlin.collections.MutableList
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.intArrayOf
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("JsvarargsMain", exact = true)
 open class Main {
  @JvmField var field: Int = 0
 
- constructor(f: Int) {
+ constructor(@ObjCName("withInt", exact = false) f: Int) {
   this.field = f
  }
 
- open fun f3(m: Int, vararg numbers: Int): Int {
+ open fun f3(@ObjCName("withInt", exact = false) m: Int, vararg @ObjCName("withIntArray", exact = false) numbers: Int): Int {
   return this.field + m + numbers!![1]
  }
 
- open fun f4(vararg numbers: Int): Int {
+ open fun f4(vararg @ObjCName("withIntArray", exact = false) numbers: Int): Int {
   return this.field + numbers!![1]
  }
 
@@ -118,58 +124,58 @@ open class Main {
 
  companion object {
   @JvmStatic
-  fun f1(multiplier: Int, vararg numbers: Int): Int {
+  fun f1(@ObjCName("withInt", exact = false) multiplier: Int, vararg @ObjCName("withIntArray", exact = false) numbers: Int): Int {
    return numbers!!.size + numbers!![0] + multiplier
   }
 
   @JvmStatic
-  fun f2(vararg numbers: Int): Int {
+  fun f2(vararg @ObjCName("withIntArray", exact = false) numbers: Int): Int {
    return numbers!!.size + numbers!![0]
   }
 
   @JvmStatic
-  fun <T> generics(vararg elements: T): T {
+  fun <T> generics(vararg @ObjCName("withIdArray", exact = false) elements: T): T {
    val elements_1: Array<T>? = elements as Array<T>?
    return elements_1!![0]
   }
 
   @JvmStatic
-  fun parameterizedType(vararg elements: MutableList<Main?>?): Main? {
+  fun parameterizedType(vararg @ObjCName("withIdArray", exact = false) elements: MutableList<Main?>?): Main? {
    val elements_1: Array<MutableList<Main?>?>? = elements as Array<MutableList<Main?>?>?
    return elements_1!![0]!!.get(0)
   }
 
   @JvmStatic
-  fun <T> parameterizedByT(vararg elements: MutableList<T>?): T {
+  fun <T> parameterizedByT(vararg @ObjCName("withIdArray", exact = false) elements: MutableList<T>?): T {
    val elements_1: Array<MutableList<T>?>? = elements as Array<MutableList<T>?>?
    return elements_1!![0]!!.get(0)
   }
  }
 
  open class NativeObject {
-  constructor(vararg pars: Any?) {
+  constructor(vararg @ObjCName("withJavaLangAnyArray", exact = false) pars: Any?) {
    val pars_1: Array<Any?>? = pars as Array<Any?>?
   }
  }
 
  open class SubVarargsConstructorClass: Main.NativeObject {
-  constructor(i: Int, vararg args: Any?): super(*(args as Array<Any?>?)!!) {
+  constructor(@ObjCName("withInt", exact = false) i: Int, vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?): super(*(args as Array<Any?>?)!!) {
    val args_1: Array<Any?>? = args as Array<Any?>?
   }
  }
 
  fun interface Function {
-  fun f1(i: Int, vararg args: Any?): Any?
+  fun f1(@ObjCName("withInt", exact = false) i: Int, vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?): Any?
  }
 
  abstract class AbstractMethodWithVarargs {
-  abstract fun abstractMethod(vararg args: Int)
+  abstract fun abstractMethod(vararg @ObjCName("withIntArray", exact = false) args: Int)
  }
 
  interface StaticInterfaceMethodWithVarargs {
   companion object {
    @JvmStatic
-   fun staticMethod(vararg args: Int) {}
+   fun staticMethod(vararg @ObjCName("withIntArray", exact = false) args: Int) {}
   }
  }
 
@@ -195,6 +201,6 @@ open class Main {
  }
 
  fun interface GenericFunction<T> {
-  fun m(i: T, vararg args: T): Any?
+  fun m(@ObjCName("withId", exact = false) i: T, vararg @ObjCName("withIdArray", exact = false) args: T): Any?
  }
 }

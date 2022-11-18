@@ -1,0 +1,37 @@
+// Generated from "objcnamemethod/ObjCNameMethod.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package objcnamemethod
+
+import javaemul.lang.*
+import kotlin.Array
+import kotlin.Int
+import kotlin.LongArray
+import kotlin.OptIn
+import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+import objcnamemethod.Foo
+
+@ObjCName("ObjcnamemethodObjCNameMethod", exact = true)
+open class ObjCNameMethod {
+ constructor()
+
+ constructor(@ObjCName("withInt", exact = false) i: Int)
+
+ open fun instanceMethod(@ObjCName("withInt", exact = false) i: Int) {}
+
+ open fun instanceMethod(@ObjCName("withInt", exact = false) i: Int, @ObjCName("withLongArray", exact = false) l: LongArray?) {}
+
+ open fun instanceMethod(@ObjCName("withInt", exact = false) i: Int, @ObjCName("withLongArray2", exact = false) l: Array<LongArray?>?) {}
+
+ open fun instanceMethod(@ObjCName("withObjcnamemethodFoo", exact = false) foo: Foo?) {}
+
+ companion object {
+  @JvmStatic
+  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
+   val args_1: Array<String?>? = args as Array<String?>?
+  }
+ }
+}

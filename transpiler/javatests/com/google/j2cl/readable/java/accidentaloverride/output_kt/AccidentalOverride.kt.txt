@@ -1,4 +1,6 @@
 // Generated from "accidentaloverride/AccidentalOverride.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package accidentaloverride
 
 import javaemul.lang.*
@@ -6,15 +8,22 @@ import accidentaloverride.Parent
 import accidentaloverride.SuperInterface
 import kotlin.AssertionError
 import kotlin.Error
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("AccidentaloverrideParent", exact = true)
 open class Parent<T: Error?> {
- open fun foo(e: T) {}
+ open fun foo(@ObjCName("withId", exact = false) e: T) {}
 }
 
+@ObjCName("AccidentaloverrideSuperInterface", exact = true)
 fun interface SuperInterface<T> {
- fun foo(t: T)
+ fun foo(@ObjCName("withId", exact = false) t: T)
 }
 
+@ObjCName("AccidentaloverrideAnotherAccidentalOverride", exact = true)
 open class AnotherAccidentalOverride: SuperInterface<AssertionError?>, Parent<AssertionError?>() {}
 
+@ObjCName("AccidentaloverrideAccidentalOverride", exact = true)
 open class AccidentalOverride: SuperInterface<Error?>, Parent<Error?>() {}

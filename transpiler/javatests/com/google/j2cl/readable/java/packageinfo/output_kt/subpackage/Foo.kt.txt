@@ -1,10 +1,16 @@
 // Generated from "packageinfo/subpackage/Foo.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package packageinfo.subpackage
 
 import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import packageinfo.Outer
 
+@ObjCName("PackageinfoSubpackageFoo", exact = true)
 open class Foo {
  @JvmField var outer: Outer? = Outer()
 }

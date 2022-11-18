@@ -1,12 +1,18 @@
 // Generated from "exception/MyException.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package exception
 
 import javaemul.lang.*
 import java.lang.Exception
+import kotlin.OptIn
 import kotlin.Throwable
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("ExceptionMyException", exact = true)
 class MyException: Exception {
  constructor()
 
- constructor(cause: Throwable?): super(cause)
+ constructor(@ObjCName("withJavaLangThrowable", exact = false) cause: Throwable?): super(cause)
 }

@@ -1,4 +1,6 @@
 // Generated from "nativekttypes/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nativekttypes
 
 import javaemul.lang.*
@@ -6,9 +8,12 @@ import java.lang.Class
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.javaObjectType
+import kotlin.native.ObjCName
 import nativekttypes.BridgeSubclass
 import nativekttypes.Subclass
 import nativekttypes.nativekt.KBridge
@@ -20,6 +25,7 @@ import nativekttypes.nativekt.KRequiringBridge
 import nativekttypes.nativekt.KTopLevel
 import nativekttypes.nativekt.KWithCompanionObject
 
+@ObjCName("NativekttypesMain", exact = true)
 open class Main {
  @JvmField var topLevelField: KTopLevel<String?>? = null
 
@@ -27,7 +33,7 @@ open class Main {
 
  @JvmField var innerField: KTopLevel<String?>.KInner<String?>? = null
 
- open fun methodArguments(foo: KTopLevel<String?>?, nested: KTopLevel.KNested<String?>?, inner: KTopLevel<String?>.KInner<String?>?) {}
+ open fun methodArguments(@ObjCName("withId", exact = false) foo: KTopLevel<String?>?, @ObjCName("withId", exact = false) nested: KTopLevel.KNested<String?>?, @ObjCName("withId", exact = false) inner: KTopLevel<String?>.KInner<String?>?) {}
 
  open fun memberAccess() {
   val topLevel: KTopLevel<String?>? = KTopLevel<String?>("foo")
@@ -110,13 +116,14 @@ open class Main {
   return false
  }
 
- open fun todoMethod(string: String?) {
+ open fun todoMethod(@ObjCName("withJavaLangString", exact = false) string: String?) {
   TODO("J2KT: not yet supported")
  }
 }
 
+@ObjCName("NativekttypesSubclass", exact = true)
 open class Subclass<V>: KInterface<V>, KTopLevel<V> {
- constructor(v: V): super(v)
+ constructor(@ObjCName("withId", exact = false) v: V): super(v)
 
  open override fun renamedMethod(): Int {
   return super<KTopLevel>.renamedMethod()
@@ -163,8 +170,9 @@ open class Subclass<V>: KInterface<V>, KTopLevel<V> {
  }
 }
 
+@ObjCName("NativekttypesSubsubclass", exact = true)
 open class Subsubclass<V>: Subclass<V> {
- constructor(v: V): super(v)
+ constructor(@ObjCName("withId", exact = false) v: V): super(v)
 
  open override fun renamedMethod(): Int {
   return super<Subclass>.renamedMethod()
@@ -211,6 +219,7 @@ open class Subsubclass<V>: Subclass<V> {
  }
 }
 
+@ObjCName("NativekttypesBridgeSubclass", exact = true)
 open class BridgeSubclass: KBridge() {
  open override fun method() {
   super<KBridge>.method()

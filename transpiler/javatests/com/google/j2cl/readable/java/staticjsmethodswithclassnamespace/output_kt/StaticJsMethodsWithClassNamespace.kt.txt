@@ -1,10 +1,16 @@
 // Generated from "staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package staticjsmethodswithclassnamespace
 
 import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
 
+@ObjCName("StaticjsmethodswithclassnamespaceStaticJsMethodsWithClassNamespace", exact = true)
 open class StaticJsMethodsWithClassNamespace {
  open fun test() {
   StaticJsMethodsWithClassNamespace.originalName()
@@ -17,6 +23,7 @@ open class StaticJsMethodsWithClassNamespace {
  }
 }
 
+@ObjCName("StaticjsmethodswithclassnamespaceExternalCaller", exact = true)
 open class ExternalCaller {
  open fun test() {
   StaticJsMethodsWithClassNamespace.originalName()

@@ -1,4 +1,6 @@
 // Generated from "trycatch/TryCatch.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package trycatch
 
 import javaemul.lang.*
@@ -7,12 +9,16 @@ import java.lang.ClassCastException
 import javaemul.internal.Exceptions
 import kotlin.Exception
 import kotlin.NullPointerException
+import kotlin.OptIn
 import kotlin.RuntimeException
 import kotlin.Throwable
 import kotlin.assert
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import trycatch.TryCatch
 
+@ObjCName("TrycatchTryCatch", exact = true)
 open class TryCatch {
  open fun testMultiCatch() {
   try {
@@ -123,7 +129,7 @@ open class TryCatch {
   throw this.getT_private_2<Exception?>(java.lang.Exception())!!
  }
 
- fun <T> getT_private_2(t: T): T {
+ fun <T> getT_private_2(@ObjCName("withId", exact = false) t: T): T {
   return t
  }
 

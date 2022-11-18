@@ -1,16 +1,22 @@
 // Generated from "assertsimple/AssertSimple.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package assertsimple
 
 import javaemul.lang.*
 import kotlin.Array
+import kotlin.OptIn
 import kotlin.String
 import kotlin.assert
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("AssertsimpleAssertSimple", exact = true)
 open class AssertSimple {
  companion object {
   @JvmStatic
-  fun main(args: Array<String?>?) {
+  fun main(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {
    assert(1 + 2 == 3)
    assert(1 + 2 == 3) {
     "Error!"

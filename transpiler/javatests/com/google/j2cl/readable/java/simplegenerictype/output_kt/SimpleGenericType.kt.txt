@@ -1,18 +1,24 @@
 // Generated from "simplegenerictype/SimpleGenericType.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package simplegenerictype
 
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Error
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import simplegenerictype.SimpleGenericType
 
+@ObjCName("SimplegenerictypeSimpleGenericType", exact = true)
 open class SimpleGenericType<T, S> {
  @JvmField var first: T = null as T
 
  @JvmField var second: S = null as S
 
- constructor(t: T, s: S) {
+ constructor(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) s: S) {
   this.first = t
   this.second = s
  }

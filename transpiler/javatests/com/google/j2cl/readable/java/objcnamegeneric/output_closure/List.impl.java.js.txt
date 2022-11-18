@@ -1,0 +1,51 @@
+goog.module('objcnamegeneric.List$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+
+/**
+ * @template T
+ */
+class List extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template T @return {!List<T>} */
+ static $create__() {
+  List.$clinit();
+  let $instance = new List();
+  $instance.$ctor__objcnamegeneric_List__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__objcnamegeneric_List__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {boolean} */
+ m_add__java_lang_Object__boolean(/** T */ element) {
+  return true;
+ }
+ /** @nodts */
+ m_forEachRemaining__java_util_function_Consumer__void(/** Consumer<?> */ action) {}
+ /** @nodts */
+ static $clinit() {
+  List.$clinit = () =>{};
+  List.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof List;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(List, 'objcnamegeneric.List');
+
+exports = List;
+
+//# sourceMappingURL=List.js.map

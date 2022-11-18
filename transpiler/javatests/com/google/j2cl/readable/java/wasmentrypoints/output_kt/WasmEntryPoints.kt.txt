@@ -1,20 +1,26 @@
 // Generated from "wasmentrypoints/WasmEntryPoints.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package wasmentrypoints
 
 import javaemul.lang.*
 import kotlin.Array
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("WasmentrypointsWasmEntryPoints", exact = true)
 open class WasmEntryPoints {
  companion object {
   @JvmStatic
-  fun singleMatchedEntryPoint(args: Array<String?>?) {}
+  fun singleMatchedEntryPoint(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {}
 
   @JvmStatic
-  fun matchedEntryPointPattern1(args: Array<String?>?) {}
+  fun matchedEntryPointPattern1(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {}
 
   @JvmStatic
-  fun matchedEntryPointPattern2(args: Array<String?>?) {}
+  fun matchedEntryPointPattern2(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {}
  }
 }

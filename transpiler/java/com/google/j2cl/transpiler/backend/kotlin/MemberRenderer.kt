@@ -188,17 +188,26 @@ private fun Renderer.renderMethodParameters(method: Method) {
   val parameters = method.parameters
   renderInParentheses {
     renderCommaSeparated(0 until parameters.size) { index ->
-      renderParameter(parameterDescriptors[index], parameters[index])
+      renderParameter(
+        parameterDescriptors[index],
+        parameters[index],
+        method.descriptor.isJavaOverride
+      )
     }
   }
 }
 
-private fun Renderer.renderParameter(parameterDescriptor: ParameterDescriptor, name: HasName) {
+private fun Renderer.renderParameter(
+  parameterDescriptor: ParameterDescriptor,
+  name: HasName,
+  isOverride: Boolean
+) {
   val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
   val renderedTypeDescriptor =
     if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
     else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (parameterDescriptor.isVarargs) render("vararg ")
+  if (!isOverride) renderObjCNameAnnotation(parameterDescriptor)
   renderName(name)
   render(": ")
   renderTypeDescriptor(renderedTypeDescriptor)

@@ -1,4 +1,6 @@
 // Generated from "jstype/SomeJsType.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jstype
 
 import javaemul.lang.*
@@ -6,8 +8,12 @@ import jstype.SomeJsType
 import kotlin.Any
 import kotlin.Double
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("JstypeSomeJsType", exact = true)
 open class SomeJsType<T> {
  @JvmField var publicField: Int = 0
 
@@ -33,7 +39,7 @@ open class SomeJsType<T> {
   this.protectedMethod()
  }
 
- open fun testStarAndWildCard(s: SomeJsType.Star?, w: SomeJsType.Wildcard?): SomeJsType.Wildcard? {
+ open fun testStarAndWildCard(@ObjCName("withJstypeStar", exact = false) s: SomeJsType.Star?, @ObjCName("withJstypeWildcard", exact = false) w: SomeJsType.Wildcard?): SomeJsType.Wildcard? {
   val `object`: Any? = Any()
   val star: SomeJsType.Star? = Double.valueOf(3.0) as SomeJsType.Star?
   return star as SomeJsType.Wildcard?

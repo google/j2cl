@@ -1,13 +1,19 @@
 // Generated from "jsasync/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jsasync
 
 import javaemul.lang.*
 import jsasync.Main
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.Unit
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("JsasyncMain", exact = true)
 open class Main {
  @JvmField val x_private_2: Main.IThenable<Int?>? = Main.Promise.resolve<Int?>(Int.valueOf(10))
 
@@ -20,7 +26,7 @@ open class Main {
   return this.parametricAsyncMethod<Int?>(Int.valueOf(result))
  }
 
- open fun <T> parametricAsyncMethod(value: T): Main.IThenable<T>? {
+ open fun <T> parametricAsyncMethod(@ObjCName("withId", exact = false) value: T): Main.IThenable<T>? {
   return Main.Promise.resolve<T>(Main.await_private_2<T>(Main.Promise.resolve<T>(value)))
  }
 
@@ -56,7 +62,7 @@ open class Main {
   }
 
   @JvmStatic
-  external fun <T> await_private_2(thenable: Main.IThenable<T>?): T
+  external fun <T> await_private_2(@ObjCName("withId", exact = false) thenable: Main.IThenable<T>?): T
  }
 
  fun interface BaseInterface {
@@ -86,7 +92,7 @@ open class Main {
  open class Promise<T>: Main.IThenable<T> {
   companion object {
    @JvmStatic
-   external fun <T> resolve(value: T): Main.Promise<T>?
+   external fun <T> resolve(@ObjCName("withId", exact = false) value: T): Main.Promise<T>?
   }
  }
 }

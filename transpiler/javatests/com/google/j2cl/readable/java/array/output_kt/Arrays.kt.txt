@@ -1,4 +1,6 @@
 // Generated from "array/Arrays.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package array
 
 import javaemul.lang.*
@@ -12,13 +14,17 @@ import kotlin.Int
 import kotlin.IntArray
 import kotlin.Long
 import kotlin.LongArray
+import kotlin.OptIn
 import kotlin.String
 import kotlin.arrayOf
 import kotlin.arrayOfNulls
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.intArrayOf
 import kotlin.jvm.JvmField
 import kotlin.longArrayOf
+import kotlin.native.ObjCName
 
+@ObjCName("ArrayArrays", exact = true)
 open class Arrays {
  open fun testObjectArray() {
   var objects: Array<Any?>? = arrayOfNulls<Any>(100)
@@ -142,9 +148,9 @@ open class Arrays {
   this.consumesSerializable(arrayOfNulls<Any>(10))
  }
 
- open fun consumesCloneable(cloneable: Cloneable?) {}
+ open fun consumesCloneable(@ObjCName("withJavaLangCloneable", exact = false) cloneable: Cloneable?) {}
 
- open fun consumesSerializable(serializable: Serializable?) {}
+ open fun consumesSerializable(@ObjCName("withJavaIoSerializable", exact = false) serializable: Serializable?) {}
 
  open inner class SomeObject {}
 

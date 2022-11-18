@@ -1,9 +1,15 @@
 // Generated from "circularimportuse/Left.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package circularimportuse
 
 import javaemul.lang.*
 import circularimportuse.Right
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("CircularimportuseLeft", exact = true)
 open class Left {
  open fun createRight(): Right? {
   return Right()

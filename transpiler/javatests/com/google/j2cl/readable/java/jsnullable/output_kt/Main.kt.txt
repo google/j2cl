@@ -1,15 +1,21 @@
 // Generated from "jsnullable/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jsnullable
 
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Array
+import kotlin.OptIn
 import kotlin.String
 import kotlin.arrayOf
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("JsnullableMain", exact = true)
 open class Main {
  @JvmField var f1_private_2: String = "Hello"
 
@@ -25,5 +31,5 @@ open class Main {
 
  @JvmField var f10_private_2: Array<String>? = arrayOf<String?>() as Array<String>?
 
- fun <T: Any> m_private_2(t: T, nullableT: T?) {}
+ fun <T: Any> m_private_2(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) nullableT: T?) {}
 }

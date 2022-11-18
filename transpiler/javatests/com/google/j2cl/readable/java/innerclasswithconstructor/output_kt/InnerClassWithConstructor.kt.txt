@@ -1,17 +1,23 @@
 // Generated from "innerclasswithconstructor/InnerClassWithConstructor.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package innerclasswithconstructor
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("InnerclasswithconstructorInnerClassWithConstructor", exact = true)
 open class InnerClassWithConstructor {
  @JvmField var a: Int = 0
 
  open inner class InnerClass {
   @JvmField var b: Int = 0
 
-  constructor(b: Int) {
+  constructor(@ObjCName("withInt", exact = false) b: Int) {
    this.b = this@InnerClassWithConstructor.a + b
   }
 

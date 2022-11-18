@@ -1,19 +1,25 @@
 // Generated from "localnamecollision/LocalNameCollision.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package localnamecollision
 
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.RuntimeException
 import kotlin.assert
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import localnamecollision.Asserts
 import localnamecollision.Class
 import localnamecollision.LocalNameCollision
 import localnamecollision.package1.A
 
+@ObjCName("LocalnamecollisionLocalNameCollision", exact = true)
 open class LocalNameCollision {
  open fun testClassLocalVarCollision() {
   var LocalNameCollision: Boolean = false
@@ -29,15 +35,16 @@ open class LocalNameCollision {
   assert(localnamecollision.Asserts().n() == 5)
  }
 
- open fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int): Boolean {
+ open fun testClassParameterCollision(@ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean, @ObjCName("withJavaLangAny", exact = false) Asserts: Any?, @ObjCName("withJavaLangAny", exact = false) ___Asserts: Any?, @ObjCName("withInt", exact = false) l_Asserts: Int, @ObjCName("withInt", exact = false) A: Int): Boolean {
   return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 
- constructor(LocalNameCollision: Boolean, Asserts: Any?, ___Asserts: Any?, l_Asserts: Int, A: Int) {
+ constructor(@ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean, @ObjCName("withJavaLangAny", exact = false) Asserts: Any?, @ObjCName("withJavaLangAny", exact = false) ___Asserts: Any?, @ObjCName("withInt", exact = false) l_Asserts: Int, @ObjCName("withInt", exact = false) A: Int) {
   val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 }
 
+@ObjCName("LocalnamecollisionA", exact = true)
 open class A {
  companion object {
   @JvmField var A: localnamecollision.A? = null

@@ -1,8 +1,14 @@
 // Generated from "nativekttypes/nativekt/KFunctionalInterfaceRequiringBridge.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nativekttypes.nativekt
 
 import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("NativekttypesNativektKFunctionalInterfaceRequiringBridge", exact = true)
 fun interface KFunctionalInterfaceRequiringBridge<V> {
- fun foo(t: V): V
+ fun foo(@ObjCName("withId", exact = false) t: V): V
 }

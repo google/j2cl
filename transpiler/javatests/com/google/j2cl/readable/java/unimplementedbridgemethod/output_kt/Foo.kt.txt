@@ -1,15 +1,21 @@
 // Generated from "unimplementedbridgemethod/Foo.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package unimplementedbridgemethod
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import unimplementedbridgemethod.I
 import unimplementedbridgemethod.J
 
+@ObjCName("UnimplementedbridgemethodI", exact = true)
 fun interface I<T> {
- fun foo(t: T): Int
+ fun foo(@ObjCName("withId", exact = false) t: T): Int
 
  companion object {
   @JvmStatic
@@ -19,8 +25,11 @@ fun interface I<T> {
  }
 }
 
+@ObjCName("UnimplementedbridgemethodJ", exact = true)
 fun interface J: I<String?> {}
 
+@ObjCName("UnimplementedbridgemethodBar", exact = true)
 abstract class Bar: J {}
 
+@ObjCName("UnimplementedbridgemethodFoo", exact = true)
 abstract class Foo: I<String?> {}

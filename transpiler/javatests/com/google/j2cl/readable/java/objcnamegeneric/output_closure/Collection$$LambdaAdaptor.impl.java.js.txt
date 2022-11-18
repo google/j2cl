@@ -1,0 +1,49 @@
+goog.module('objcnamegeneric.Collection.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Collection = goog.require('objcnamegeneric.Collection$impl');
+
+/**
+ * @template T
+ * @implements {Collection<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(T):boolean */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(T):boolean} @nodts*/
+  this.f_fn__objcnamegeneric_Collection_$LambdaAdaptor;
+  this.$ctor__objcnamegeneric_Collection_$LambdaAdaptor__objcnamegeneric_Collection_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__objcnamegeneric_Collection_$LambdaAdaptor__objcnamegeneric_Collection_$JsFunction__void(/** ?function(T):boolean */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__objcnamegeneric_Collection_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts @return {boolean} */
+ m_add__java_lang_Object__boolean(/** T */ arg0) {
+  let /** ?function(T):boolean */ $function;
+  return ($function = this.f_fn__objcnamegeneric_Collection_$LambdaAdaptor, $function(arg0));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+Collection.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'objcnamegeneric.Collection$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Collection$$LambdaAdaptor.js.map

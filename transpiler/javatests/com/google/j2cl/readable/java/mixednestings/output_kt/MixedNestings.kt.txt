@@ -1,14 +1,21 @@
 // Generated from "mixednestings/MixedNestings.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package mixednestings
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 import mixednestings.MyInterface
 
+@ObjCName("MixednestingsMyInterface", exact = true)
 fun interface MyInterface {
- fun `fun`(a: Int): Int
+ fun `fun`(@ObjCName("withInt", exact = false) a: Int): Int
 }
 
+@ObjCName("MixednestingsMixedNestings", exact = true)
 open class MixedNestings {
  open fun mm() {}
 

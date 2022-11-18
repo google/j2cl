@@ -1,17 +1,23 @@
 // Generated from "circularimportuse/Main.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package circularimportuse
 
 import javaemul.lang.*
 import circularimportuse.Left
 import circularimportuse.Right
 import kotlin.Array
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("CircularimportuseMain", exact = true)
 open class Main {
  companion object {
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
    val left: Left? = Left()
    val right: Right? = Right()

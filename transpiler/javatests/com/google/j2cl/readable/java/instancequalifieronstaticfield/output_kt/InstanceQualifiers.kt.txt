@@ -1,15 +1,21 @@
 // Generated from "instancequalifieronstaticfield/InstanceQualifiers.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package instancequalifieronstaticfield
 
 import javaemul.lang.*
 import instancequalifieronstaticfield.InstanceQualifiers
 import kotlin.Array
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import kotlin.run
 
+@ObjCName("InstancequalifieronstaticfieldInstanceQualifiers", exact = true)
 open class InstanceQualifiers {
  companion object {
   @JvmField var staticField: Int = 100
@@ -27,7 +33,7 @@ open class InstanceQualifiers {
   }
 
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
    val args_1: Array<String?>? = args as Array<String?>?
    val main: InstanceQualifiers? = InstanceQualifiers()
    var i: Int = 0

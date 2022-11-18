@@ -1,11 +1,17 @@
 // Generated from "rawtype/RawType.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package rawtype
 
 import javaemul.lang.*
 import kotlin.Any
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import rawtype.RawType
 
+@ObjCName("RawtypeRawType", exact = true)
 open class RawType {
  @JvmField var rawUnbound: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
 
@@ -20,7 +26,7 @@ open class RawType {
  open class BoundRecursively<T: RawType.BoundRecursively<T>?> {}
 
  interface GenericSuperclass<T: RawType?> {
-  fun f(t: T) {}
+  fun f(@ObjCName("withId", exact = false) t: T) {}
  }
 
  open class RawSubclass: RawType.GenericSuperclass<RawType?> {

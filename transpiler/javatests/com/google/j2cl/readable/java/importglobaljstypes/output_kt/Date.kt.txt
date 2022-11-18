@@ -1,19 +1,25 @@
 // Generated from "importglobaljstypes/Date.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package importglobaljstypes
 
 import javaemul.lang.*
 import importglobaljstypes.Date
 import kotlin.Double
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("ImportglobaljstypesDate", exact = true)
 open class Date {
- open fun copy(d: Date.NativeDate?): Date.NativeDate? {
+ open fun copy(@ObjCName("withImportglobaljstypesNativeDate", exact = false) d: Date.NativeDate?): Date.NativeDate? {
   return d
  }
 
  companion object {
   @JvmStatic
-  fun now(x: Double): Double {
+  fun now(@ObjCName("withDouble", exact = false) x: Double): Double {
    return Date.NativeDate.now()
   }
  }

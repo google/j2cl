@@ -1,12 +1,20 @@
 // Generated from "subclassgenericclass/SubclassGenericClass.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package subclassgenericclass
 
 import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 import subclassgenericclass.GenericClass
 import subclassgenericclass.SubclassGenericClass
 
+@ObjCName("SubclassgenericclassGenericClass", exact = true)
 open class GenericClass<T> {}
 
+@ObjCName("SubclassgenericclassGenericSubclassGenericClass", exact = true)
 open class GenericSubclassGenericClass<T>: GenericClass<T>() {}
 
+@ObjCName("SubclassgenericclassSubclassGenericClass", exact = true)
 open class SubclassGenericClass: GenericClass<SubclassGenericClass?>() {}

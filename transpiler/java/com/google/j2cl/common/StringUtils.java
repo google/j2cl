@@ -21,6 +21,14 @@ import static java.util.stream.Collectors.joining;
 /** Utilities to produce Strings in code. */
 public final class StringUtils {
 
+  /** Return the String with first letter capitalized. */
+  public static String capitalize(String string) {
+    if (string.isEmpty()) {
+      return string;
+    }
+    return string.substring(0, 1).toUpperCase() + string.substring(1);
+  }
+
   public static String escapeAsWtf16(String string) {
     // The chars in the CharSequence are already in WTF16. Hence iterate over the 16 bits chars
     // and decide how to encode in the string.

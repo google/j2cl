@@ -1,10 +1,16 @@
 // Generated from "packageinfosubpackage/Foo.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package packageinfosubpackage
 
 import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import packageinfosubpackage.Foo
 
+@ObjCName("PackageinfosubpackageFoo", exact = true)
 open class Foo {
  @JvmField var nativeBar_private_2: Foo.NativeBar? = Foo.NativeBar()
 

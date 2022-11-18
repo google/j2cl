@@ -1,11 +1,17 @@
 // Generated from "aptgeneratorplugin/Foo.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package aptgeneratorplugin
 
 import javaemul.lang.*
 import aptgeneratorplugin.Dummy
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.javaObjectType
+import kotlin.native.ObjCName
 
+@ObjCName("AptgeneratorpluginFoo", exact = true)
 open class Foo {
  open override fun hashCode(): Int {
   return Dummy::class.javaObjectType.hashCode()

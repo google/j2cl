@@ -1,15 +1,21 @@
 // Generated from "castonarrayinit/CastOnArrayInit.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package castonarrayinit
 
 import javaemul.lang.*
 import castonarrayinit.CastOnArrayInit
 import kotlin.Array
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("CastonarrayinitCastOnArrayInit", exact = true)
 open class CastOnArrayInit {
  companion object {
   @JvmStatic
-  fun <E> `fun`(vararg args: CastOnArrayInit.Foo<E>?) {
+  fun <E> `fun`(vararg @ObjCName("withIdArray", exact = false) args: CastOnArrayInit.Foo<E>?) {
    val args_1: Array<CastOnArrayInit.Foo<E>?>? = args as Array<CastOnArrayInit.Foo<E>?>?
   }
 

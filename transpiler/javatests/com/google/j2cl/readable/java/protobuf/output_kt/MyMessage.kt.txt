@@ -1,13 +1,19 @@
 // Generated from "protobuf/MyMessage.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package protobuf
 
 import javaemul.lang.*
 import com.google.protobuf.GeneratedMessage
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import protobuf.MyMessage
 
+@ObjCName("ProtobufMyMessage", exact = true)
 open class MyMessage: GeneratedMessage {
  @JvmField val testField: Int
 
@@ -15,7 +21,7 @@ open class MyMessage: GeneratedMessage {
   return this.testField
  }
 
- constructor(testField: Int) {
+ constructor(@ObjCName("withInt", exact = false) testField: Int) {
   this.testField = testField
  }
 
@@ -38,7 +44,7 @@ open class MyMessage: GeneratedMessage {
    return this.testField
   }
 
-  open fun setTestField(testField: Int): MyMessage.Builder {
+  open fun setTestField(@ObjCName("withInt", exact = false) testField: Int): MyMessage.Builder {
    this.testField = testField
    return this
   }

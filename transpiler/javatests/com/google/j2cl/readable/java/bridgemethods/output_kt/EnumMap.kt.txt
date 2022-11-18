@@ -1,21 +1,29 @@
 // Generated from "bridgemethods/EnumMap.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package bridgemethods
 
 import javaemul.lang.*
 import bridgemethods.AbstractMap
 import bridgemethods.Map
 import kotlin.Enum
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("BridgemethodsMap", exact = true)
 fun interface Map<K, V> {
- fun put(key: K, value: V): V
+ fun put(@ObjCName("withId", exact = false) key: K, @ObjCName("withId", exact = false) value: V): V
 }
 
+@ObjCName("BridgemethodsAbstractMap", exact = true)
 open class AbstractMap<K, V>: Map<K, V> {
  open override fun put(key: K, value: V): V {
   return value
  }
 }
 
+@ObjCName("BridgemethodsEnumMap", exact = true)
 open class EnumMap<K: Enum<K>, V>: AbstractMap<K, V>() {
  open override fun put(key: K, value: V): V {
   return value

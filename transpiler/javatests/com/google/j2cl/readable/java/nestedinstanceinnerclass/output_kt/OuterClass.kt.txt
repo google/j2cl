@@ -1,10 +1,16 @@
 // Generated from "nestedinstanceinnerclass/OuterClass.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nestedinstanceinnerclass
 
 import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import nestedinstanceinnerclass.OuterClass
 
+@ObjCName("NestedinstanceinnerclassOuterClass", exact = true)
 open class OuterClass {
  open fun test() {
   OuterClass().InnerClass().InnerInnerClass()

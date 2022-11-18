@@ -1,4 +1,6 @@
 // Generated from "innerclassinheritance/ChildClass.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package innerclassinheritance
 
 import javaemul.lang.*
@@ -7,20 +9,26 @@ import innerclassinheritance.ParentInner
 import innerclassinheritance.ParentOuter
 import kotlin.Any
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 
+@ObjCName("InnerclassinheritanceParentOuter", exact = true)
 open class ParentOuter {
  @JvmField var fieldInParentOuter: Int = 0
 
  open fun funInParentOuter() {}
 }
 
+@ObjCName("InnerclassinheritanceParentInner", exact = true)
 open class ParentInner {
  @JvmField var fieldInParentInner: Int = 0
 
  open fun funInParentInner() {}
 }
 
+@ObjCName("InnerclassinheritanceChildClass", exact = true)
 open class ChildClass: ParentOuter() {
  @JvmField var fieldInOuter: Int = 0
 

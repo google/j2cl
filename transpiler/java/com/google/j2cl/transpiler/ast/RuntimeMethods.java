@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.j2cl.common.StringUtils.capitalize;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
@@ -333,8 +334,8 @@ public final class RuntimeMethods {
     String methodName =
         String.format(
             "narrow%sTo%s",
-            toProperCase(fromTypeDescriptor.getSimpleSourceName()),
-            toProperCase(toTypeDescriptor.getSimpleSourceName()));
+            capitalize(fromTypeDescriptor.getSimpleSourceName()),
+            capitalize(toTypeDescriptor.getSimpleSourceName()));
 
     return createPrimitivesMethodCall(methodName, expression);
   }
@@ -347,8 +348,8 @@ public final class RuntimeMethods {
     String methodName =
         String.format(
             "widen%sTo%s",
-            toProperCase(fromTypeDescriptor.getSimpleSourceName()),
-            toProperCase(toTypeDescriptor.getSimpleSourceName()));
+            capitalize(fromTypeDescriptor.getSimpleSourceName()),
+            capitalize(toTypeDescriptor.getSimpleSourceName()));
 
     return createPrimitivesMethodCall(methodName, expression);
   }
@@ -361,14 +362,6 @@ public final class RuntimeMethods {
         boxedType.getMethodDescriptor(boxedType.toUnboxedType().getSimpleSourceName() + "Value");
 
     return MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
-  }
-
-  /** Return the String with first letter capitalized. */
-  private static String toProperCase(String string) {
-    if (string.isEmpty()) {
-      return string;
-    }
-    return string.substring(0, 1).toUpperCase() + string.substring(1);
   }
 
   /** Create a call to a Util method. */

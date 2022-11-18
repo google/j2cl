@@ -1,17 +1,23 @@
 // Generated from "deprecated/DeprecatedExample.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package deprecated
 
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("DeprecatedDeprecatedExample", exact = true)
 open class DeprecatedExample {
  @JvmField var deprecatedInstanceField: String? = "deprecated field"
 
- open fun deprecatedInstanceMethod(someArg: String?) {}
+ open fun deprecatedInstanceMethod(@ObjCName("withJavaLangString", exact = false) someArg: String?) {}
 
  constructor()
 
@@ -19,15 +25,15 @@ open class DeprecatedExample {
   const val DEPRECATED_STATIC_FIELD: String = "deprecated field"
 
   @JvmStatic
-  fun deprecatedStaticMethod(someObject: Any?) {}
+  fun deprecatedStaticMethod(@ObjCName("withJavaLangAny", exact = false) someObject: Any?) {}
  }
 
  fun interface DeprecatedInterface {
-  fun doAThing(anInt: Int)
+  fun doAThing(@ObjCName("withInt", exact = false) anInt: Int)
  }
 
  fun interface DeprecatedJsFunction {
-  fun doAThing(aThing: Any?)
+  fun doAThing(@ObjCName("withJavaLangAny", exact = false) aThing: Any?)
  }
 
  enum class DeprecatedEnum {

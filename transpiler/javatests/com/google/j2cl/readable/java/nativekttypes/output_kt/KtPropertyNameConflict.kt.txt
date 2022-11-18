@@ -1,12 +1,18 @@
 // Generated from "nativekttypes/KtPropertyNameConflict.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nativekttypes
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import nativekttypes.KtPropertyNameConflict
 
+@ObjCName("NativekttypesKtPropertyNameConflict", exact = true)
 abstract class KtPropertyNameConflict {
  @JvmField var fieldWithConflictingGetter_ktPropertyConflict: Int = 0
 
@@ -32,7 +38,7 @@ abstract class KtPropertyNameConflict {
 
  companion object {
   @JvmStatic
-  fun test(o: KtPropertyNameConflict?, i: KtPropertyNameConflict.Interface?) {
+  fun test(@ObjCName("withNativekttypesKtPropertyNameConflict", exact = false) o: KtPropertyNameConflict?, @ObjCName("withNativekttypesInterface", exact = false) i: KtPropertyNameConflict.Interface?) {
    val fieldWithConflictingGetter: Int = o!!.fieldWithConflictingGetter_ktPropertyConflict
    val conflictingGetter: Int = o!!.fieldWithConflictingGetter
    val fieldWithConflictingNonGetter: Int = o!!.fieldWithConflictingNonGetter_ktPropertyConflict
@@ -44,7 +50,7 @@ abstract class KtPropertyNameConflict {
   }
 
   @JvmStatic
-  fun test(o: KtPropertyNameConflict.Subclass?) {
+  fun test(@ObjCName("withNativekttypesSubclass", exact = false) o: KtPropertyNameConflict.Subclass?) {
    val fieldWithConflictingGetter: Int = o!!.fieldWithConflictingGetter_ktPropertyConflict
    val conflictingGetter: Int = o!!.fieldWithConflictingGetter
    val fieldWithConflictingNonGetter: Int = o!!.fieldWithConflictingNonGetter_ktPropertyConflict

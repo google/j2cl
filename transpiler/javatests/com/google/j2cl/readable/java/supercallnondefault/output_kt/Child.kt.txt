@@ -1,19 +1,26 @@
 // Generated from "supercallnondefault/Child.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package supercallnondefault
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
 import supercallnondefault.Parent
 
+@ObjCName("SupercallnondefaultParent", exact = true)
 open class Parent {
  @JvmField var field: Int = 0
 
- constructor(f: Int) {
+ constructor(@ObjCName("withInt", exact = false) f: Int) {
   this.field = f
  }
 }
 
+@ObjCName("SupercallnondefaultChild", exact = true)
 open class Child: Parent {
- constructor(a: Int): super(a)
+ constructor(@ObjCName("withInt", exact = false) a: Int): super(a)
 }

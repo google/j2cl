@@ -1,0 +1,16 @@
+// Generated from "objcnamemethod/SubFoo.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package objcnamemethod
+
+import javaemul.lang.*
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+import objcnamemethod.Foo
+
+@ObjCName("ObjcnamemethodSubFoo", exact = true)
+open class SubFoo: Foo() {
+ open override fun instanceMethod(i: Int) {}
+}

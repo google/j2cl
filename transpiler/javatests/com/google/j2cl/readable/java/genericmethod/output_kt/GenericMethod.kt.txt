@@ -1,4 +1,6 @@
 // Generated from "genericmethod/GenericMethod.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package genericmethod
 
 import javaemul.lang.*
@@ -8,28 +10,32 @@ import kotlin.Array
 import kotlin.Error
 import kotlin.Exception
 import kotlin.Number
+import kotlin.OptIn
 import kotlin.String
 import kotlin.arrayOf
 import kotlin.collections.MutableList
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("GenericmethodGenericMethod", exact = true)
 open class GenericMethod<T> {
- open fun <T_1, S> foo(f: T_1, s: S) {}
+ open fun <T_1, S> foo(@ObjCName("withId", exact = false) f: T_1, @ObjCName("withId", exact = false) s: S) {}
 
- open fun `fun`(o: Any?) {}
+ open fun `fun`(@ObjCName("withJavaLangAny", exact = false) o: Any?) {}
 
- open fun <T_1: Exception?> `fun`(t: T_1) {}
+ open fun <T_1: Exception?> `fun`(@ObjCName("withId", exact = false) t: T_1) {}
 
- open fun <T_1: Error?> `fun`(t: T_1) {
+ open fun <T_1: Error?> `fun`(@ObjCName("withId", exact = false) t: T_1) {
   object : GenericMethod<T_1>() {
-   open fun fun2(t: T_1) {}
+   open fun fun2(@ObjCName("withId", exact = false) t: T_1) {}
 
-   open fun <T_1> fun2(t: T_1) {}
+   open fun <T_1> fun2(@ObjCName("withId", exact = false) t: T_1) {}
   }
   open class ___1LocalClass<T>: GenericMethod<T>() {
-   open fun fun2(t: T) {}
+   open fun fun2(@ObjCName("withId", exact = false) t: T) {}
 
-   open fun <T_1: Number?> fun2(t: T_1) {}
+   open fun <T_1: Number?> fun2(@ObjCName("withId", exact = false) t: T_1) {}
   }
   ___1LocalClass<T_1>()
  }
@@ -38,7 +44,7 @@ open class GenericMethod<T> {
   return null
  }
 
- open fun <T_1> `fun`(array: Array<T_1>?): Array<T_1>? {
+ open fun <T_1> `fun`(@ObjCName("withIdArray", exact = false) array: Array<T_1>?): Array<T_1>? {
   return array
  }
 
@@ -66,10 +72,10 @@ open class GenericMethod<T> {
 
  companion object {
   @JvmStatic
-  fun acceptsContent(content: GenericMethod.Content?) {}
+  fun acceptsContent(@ObjCName("withGenericmethodContent", exact = false) content: GenericMethod.Content?) {}
 
   @JvmStatic
-  fun acceptsString(string: String?) {}
+  fun acceptsString(@ObjCName("withJavaLangString", exact = false) string: String?) {}
 
   @JvmStatic
   fun testErasureCast_wildcard() {
@@ -104,12 +110,12 @@ open class GenericMethod<T> {
   }
 
   @JvmStatic
-  fun <V> testLowerWildcardBound(consumer: GenericMethod.Consumer<in V>?, v: V) {
+  fun <V> testLowerWildcardBound(@ObjCName("withId", exact = false) consumer: GenericMethod.Consumer<in V>?, @ObjCName("withId", exact = false) v: V) {
    consumer!!.accept(v)
   }
 
   @JvmStatic
-  fun <V> testUpperWildcardBound(supplier: GenericMethod.Supplier<out V>?): V {
+  fun <V> testUpperWildcardBound(@ObjCName("withId", exact = false) supplier: GenericMethod.Supplier<out V>?): V {
    return supplier!!.get()
   }
 
@@ -141,7 +147,7 @@ open class GenericMethod<T> {
  }
 
  fun interface Consumer<V> {
-  fun accept(v: V)
+  fun accept(@ObjCName("withId", exact = false) v: V)
  }
 
  fun interface Supplier<V> {

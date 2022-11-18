@@ -1,4 +1,6 @@
 // Generated from "nullability/Nullability.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package nullability
 
 import javaemul.lang.*
@@ -8,15 +10,19 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Double
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.String
 import kotlin.arrayOf
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import nullability.Marker
 import nullability.Nullability
 
+@ObjCName("NullabilityNullability", exact = true)
 open class Nullability {
  @JvmField var f1_private_2: String = "Hello"
 
@@ -44,91 +50,91 @@ open class Nullability {
 
  @JvmField var f14_private_2: Any? = null
 
- constructor(a: String) {
+ constructor(@ObjCName("withJavaLangString", exact = false) a: String) {
   this.f13_private_2 = Any()
  }
 
- open fun m1(a: String, b: MutableList<Double>, c: String?): String {
+ open fun m1(@ObjCName("withJavaLangString", exact = false) a: String, @ObjCName("withId", exact = false) b: MutableList<Double>, @ObjCName("withJavaLangString", exact = false) c: String?): String {
   return ""
  }
 
- open fun m2(a: String?, b: MutableList<Double?>): String? {
+ open fun m2(@ObjCName("withJavaLangString", exact = false) a: String?, @ObjCName("withId", exact = false) b: MutableList<Double?>): String? {
   return ""
  }
 
- open fun m3(a: String, vararg args: String): String? {
+ open fun m3(@ObjCName("withJavaLangString", exact = false) a: String, vararg @ObjCName("withJavaLangStringArray", exact = false) args: String): String? {
   val args_1: Array<String>? = args as Array<String>?
   return null
  }
 
- open fun m4(f: Nullability.MyFunction) {}
+ open fun m4(@ObjCName("withNullabilityMyFunction", exact = false) f: Nullability.MyFunction) {}
 
  companion object {
   @JvmStatic
-  fun <T: String?> testDefaultNullabilityBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+  fun <T: String?> testDefaultNullabilityBounds(@ObjCName("withId", exact = false) defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable()!!.length
    defaultNullability!!.getNullable()!!.length
    defaultNullability!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String?> testDefaultNullabilityBounds(nullable: Nullability.ParameterizedNullable<T>?) {
+  fun <T: String?> testDefaultNullabilityBounds(@ObjCName("withId", exact = false) nullable: Nullability.ParameterizedNullable<T>?) {
    nullable!!.getNonNullable()!!.length
    nullable!!.getNullable()!!.length
    nullable!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String?> testNullableBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+  fun <T: String?> testNullableBounds(@ObjCName("withId", exact = false) defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable()!!.length
    defaultNullability!!.getNullable()!!.length
    defaultNullability!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String?> testNullableBounds(nullable: Nullability.ParameterizedNullable<T>?) {
+  fun <T: String?> testNullableBounds(@ObjCName("withId", exact = false) nullable: Nullability.ParameterizedNullable<T>?) {
    nullable!!.getNonNullable()!!.length
    nullable!!.getNullable()!!.length
    nullable!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String> testNonNullableBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+  fun <T: String> testNonNullableBounds(@ObjCName("withId", exact = false) defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
    defaultNullability!!.getNonNullable()!!.length
    defaultNullability!!.getNullable()!!.length
    defaultNullability!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String> testNonNullableBounds(nullable: Nullability.ParameterizedNullable<T>?) {
+  fun <T: String> testNonNullableBounds(@ObjCName("withId", exact = false) nullable: Nullability.ParameterizedNullable<T>?) {
    nullable!!.getNonNullable()!!.length
    nullable!!.getNullable()!!.length
    nullable!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String> testNonNullableBounds(nonNullable: Nullability.ParameterizedNonNullable<T>?) {
+  fun <T: String> testNonNullableBounds(@ObjCName("withId", exact = false) nonNullable: Nullability.ParameterizedNonNullable<T>?) {
    nonNullable!!.getNonNullable()!!.length
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedDefaultNullability<out String?>?) {
+  fun testDefaultNullabilityWildcards(@ObjCName("withId", exact = false) nonNullable: Nullability.ParameterizedDefaultNullability<out String?>?) {
    nonNullable!!.getNonNullable()!!.length
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedNullable<out String?>?) {
+  fun testDefaultNullabilityWildcards(@ObjCName("withId", exact = false) nonNullable: Nullability.ParameterizedNullable<out String?>?) {
    nonNullable!!.getNonNullable()!!.length
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
   }
 
   @JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedNonNullable<out String>?) {
+  fun testDefaultNullabilityWildcards(@ObjCName("withId", exact = false) nonNullable: Nullability.ParameterizedNonNullable<out String>?) {
    nonNullable!!.getNonNullable()!!.length
    nonNullable!!.getNullable()!!.length
    nonNullable!!.getDefaultNullability()!!.length
@@ -148,7 +154,7 @@ open class Nullability {
  }
 
  open class Foo<T> {
-  open fun bar(t: T) {}
+  open fun bar(@ObjCName("withId", exact = false) t: T) {}
 
   open fun baz(): T? {
    return null
@@ -160,7 +166,7 @@ open class Nullability {
  }
 
  fun interface MyFunction {
-  fun x(a: String): String
+  fun x(@ObjCName("withJavaLangString", exact = false) a: String): String
  }
 
  open class StringList: ArrayList<String?>() {}
@@ -230,7 +236,7 @@ open class Nullability {
  }
 
  open class NonNullableInsideNullable<T> {
-  open fun nonNullableTest(nonNullable: Nullability.ParameterizedNonNullable<T & Any>?) {}
+  open fun nonNullableTest(@ObjCName("withId", exact = false) nonNullable: Nullability.ParameterizedNonNullable<T & Any>?) {}
  }
 
  open class Recursive<T> where T: Nullability.Recursive<T>, T: Marker? {}
@@ -246,4 +252,5 @@ open class Nullability {
  open class RecursiveNullableParam<T> where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
 }
 
+@ObjCName("NullabilityMarker", exact = true)
 interface Marker {}

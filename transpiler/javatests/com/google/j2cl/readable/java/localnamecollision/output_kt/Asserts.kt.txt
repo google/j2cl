@@ -1,10 +1,16 @@
 // Generated from "localnamecollision/Asserts.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package localnamecollision
 
 import javaemul.lang.*
 import kotlin.Int
+import kotlin.OptIn
 import kotlin.assert
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("LocalnamecollisionAsserts", exact = true)
 open class Asserts {
  open fun n(): Int {
   assert(5 != 4)

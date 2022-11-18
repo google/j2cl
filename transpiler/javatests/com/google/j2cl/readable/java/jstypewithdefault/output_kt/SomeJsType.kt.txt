@@ -1,11 +1,18 @@
 // Generated from "jstypewithdefault/SomeJsType.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package jstypewithdefault
 
 import javaemul.lang.*
 import jstypewithdefault.Interface
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
+@ObjCName("JstypewithdefaultSomeJsType", exact = true)
 open class SomeJsType: Interface {}
 
+@ObjCName("JstypewithdefaultInterface", exact = true)
 interface Interface {
  fun defaultMethod() {}
 }

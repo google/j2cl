@@ -1,19 +1,27 @@
 // Generated from "overwrittentypevariables/HashFunctions.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package overwrittentypevariables
 
 import javaemul.lang.*
 import kotlin.Enum
+import kotlin.OptIn
 import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 import overwrittentypevariables.HashFunction
 import overwrittentypevariables.MyFunction
 
+@ObjCName("OverwrittentypevariablesMyFunction", exact = true)
 fun interface MyFunction<F, T> {
- fun apply(input: F): T
+ fun apply(@ObjCName("withId", exact = false) input: F): T
 }
 
+@ObjCName("OverwrittentypevariablesHashFunction", exact = true)
 fun interface HashFunction<T>: MyFunction<T, String?> {}
 
+@ObjCName("OverwrittentypevariablesHashFunctions", exact = true)
 open class HashFunctions {
  companion object {
   @JvmStatic

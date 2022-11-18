@@ -1,4 +1,6 @@
 // Generated from "enums/Enum1.java"
+@file:OptIn(ExperimentalObjCName::class)
+
 package enums
 
 import javaemul.lang.*
@@ -9,15 +11,20 @@ import kotlin.Any
 import kotlin.Array
 import kotlin.Enum
 import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
+@ObjCName("EnumsEnum1", exact = true)
 enum class Enum1 {
  V1,
  V2;
 
 }
 
+@ObjCName("EnumsEnum2", exact = true)
 enum class Enum2 {
  VALUE1(2),
  VALUE2(Enum1.V1 as Enum<*>?),
@@ -26,13 +33,13 @@ enum class Enum2 {
 
  @JvmField var foo: Int = Enum1.V1.ordinal
 
- constructor(foo: Int) {
+ constructor(@ObjCName("withInt", exact = false) foo: Int) {
   this.foo = foo
  }
 
- constructor(foo: Enum<*>?): this(foo!!.ordinal)
+ constructor(@ObjCName("withJavaLangEnum", exact = false) foo: Enum<*>?): this(foo!!.ordinal)
 
- constructor(vararg somePars: Any?): this(somePars!!.size) {
+ constructor(vararg @ObjCName("withJavaLangAnyArray", exact = false) somePars: Any?): this(somePars!!.size) {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }
 
@@ -44,7 +51,7 @@ enum class Enum2 {
 
  companion object {
   @JvmStatic
-  fun f(o: Any?): Enum2? {
+  fun f(@ObjCName("withJavaLangAny", exact = false) o: Any?): Enum2? {
    return null
   }
 
@@ -52,10 +59,11 @@ enum class Enum2 {
  }
 }
 
+@ObjCName("EnumsEnum3", exact = true)
 enum class Enum3 {
  VALUE1(Function<Int?, Int?> { v: Int? ->
   return@Function Int.valueOf(1 + v!!.toInt())
  });
 
- constructor(function: Function<Int?, Int?>?)
+ constructor(@ObjCName("withId", exact = false) function: Function<Int?, Int?>?)
 }
