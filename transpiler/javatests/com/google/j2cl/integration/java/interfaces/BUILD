@@ -8,8 +8,6 @@ package(licenses = ["notice"])
 integration_test(
     name = "interfaces",
     srcs = glob(["*.java"]),
-    # Contains JsInterop features which are only applicable for JS output.
-    enable_jvm_test = False,
     enable_kt = False,
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
