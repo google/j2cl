@@ -10,7 +10,7 @@ def get_java_package(path):
     Args:
         path: Path to extra the java package from.
     Returns:
-        Java package name (path from last java or javatest sperated by a '.')
+        Java package name (path from last java or javatest separated by a '.')
     """
 
     return ".".join(_get_java_segments(path))
@@ -25,7 +25,7 @@ def get_java_path(path):
     Args:
         path: Path to extra the java package from.
     Returns:
-        Path to java package (path from last java or javatest sperated by a '/')
+        Path to java package (path from last java or javatest separated by a '/')
     """
 
     return "/".join(_get_java_segments(path))
@@ -34,14 +34,14 @@ def _get_java_segments(path):
     segments = path.split("/")
 
     # Find different root start indecies based on potential java roots.
-    java_root_start_indecies = [_find(segments, root) for root in ["java", "javatests"]]
+    java_root_start_indecies = [_find(segments, root) for root in ["java", "javatests", "kotlin"]]
 
     # Choose the root that starts latest.
     start_index = max(java_root_start_indecies)
 
     if start_index < 0:
-        fail("Cannot find java root: " + path)
-
+        # return segments as workspace-rooted if no matches are found from source root
+        return segments
     return segments[start_index + 1:]
 
 def _find(segments, s):
