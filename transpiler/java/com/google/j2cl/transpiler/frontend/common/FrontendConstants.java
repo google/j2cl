@@ -66,7 +66,6 @@ public final class FrontendConstants {
           "java.util.Iterator",
           "java.util.Objects",
           "javaemul.internal.ArrayHelper",
-          "javaemul.internal.RangeHelper",
           "javaemul.internal.Asserts",
           "javaemul.internal.ValueType",
           "javaemul.internal.InternalPreconditions",

@@ -125,6 +125,11 @@ def j2cl_library(
             "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKolinSupport"
         )
 
+        # TODO(b/259727254): Only add the kotlin stdlib as a dep if the inputs contain kotlin.
+        if (args.get("srcs") or args.get("kt_common_srcs")) and target_name != "//ktstdlib:j2cl_kt_stdlib":
+            kt_stdlib_lib = Label("//build_defs/internal_do_not_use:kotlin_stdlib")
+            args["deps"] = args.get("deps", []) + [kt_stdlib_lib]
+
     j2cl_library_rule(
         name = name,
         **args
