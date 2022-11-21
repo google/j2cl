@@ -111,6 +111,7 @@ public class AddDisambiguatingSuperMethodForwardingStubs extends NormalizationPa
             MethodDescriptor.Builder.from(targetMethod)
                 .setDeclarationDescriptor(null)
                 .setEnclosingTypeDescriptor(type.getTypeDescriptor())
+                .setNative(false)
                 .build())
         .setParameters(parameters)
         .addStatements(
