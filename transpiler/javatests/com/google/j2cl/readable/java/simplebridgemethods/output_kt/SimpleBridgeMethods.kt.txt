@@ -14,7 +14,9 @@ import simplebridgemethods.Superclass
 
 @ObjCName("SimplebridgemethodsSuperclass", exact = true)
 open class Superclass<T: Error?> {
- open fun m1(@ObjCName("withId", exact = false) t: T) {}
+ open fun m1(
+  @ObjCName("withId", exact = false) t: T
+ ) {}
 }
 
 @ObjCName("SimplebridgemethodsSubclass", exact = true)
@@ -27,7 +29,9 @@ open class AnotherSubclass: Superclass<AssertionError?>() {}
 
 @ObjCName("SimplebridgemethodsCallable", exact = true)
 fun interface Callable<V> {
- fun call(@ObjCName("withId", exact = false) v: V)
+ fun call(
+  @ObjCName("withId", exact = false) v: V
+ )
 }
 
 @ObjCName("SimplebridgemethodsTask", exact = true)

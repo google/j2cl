@@ -23,7 +23,9 @@ open class Main {
   @JvmField val propertyWithDefault_private_2: String? = System.getProperty("jre.classMetadata", "default")
 
   @JvmStatic
-  fun main(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {
+  fun main(
+   @ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?
+  ) {
    var x: Boolean = false
    x = Main.property_private_2 === "SIMPLE"
    x = Main.property_private_2!!.equals("SIMPLE")

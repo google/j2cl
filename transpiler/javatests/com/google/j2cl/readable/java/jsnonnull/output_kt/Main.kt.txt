@@ -41,7 +41,9 @@ open class Main {
 
  @JvmField var f12_private_2: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
- constructor(@ObjCName("withJavaLangString", exact = false) a: String)
+ constructor(
+  @ObjCName("withJavaLangString", exact = false) a: String
+ )
 
  open fun m1(
   @ObjCName("withJavaLangString", exact = false) a: String,
@@ -66,10 +68,14 @@ open class Main {
   return null
  }
 
- open fun m4(@ObjCName("withJsnonnullMyFunction", exact = false) f: Main.MyFunction) {}
+ open fun m4(
+  @ObjCName("withJsnonnullMyFunction", exact = false) f: Main.MyFunction
+ ) {}
 
  fun interface MyFunction {
-  fun x(@ObjCName("withJavaLangString", exact = false) a: String): String
+  fun x(
+   @ObjCName("withJavaLangString", exact = false) a: String
+  ): String
  }
 
  open class StringComparator: Comparator<String> {

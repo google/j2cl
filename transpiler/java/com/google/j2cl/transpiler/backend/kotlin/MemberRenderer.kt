@@ -187,7 +187,7 @@ private fun Renderer.renderMethodParameters(method: Method) {
   val parameterDescriptors = method.descriptor.parameterDescriptors
   val parameters = method.parameters
   val renderObjCNameAnnotation = !method.descriptor.isJavaOverride
-  val renderWithNewLines = renderObjCNameAnnotation && parameters.size > 1
+  val renderWithNewLines = renderObjCNameAnnotation && parameters.isNotEmpty()
   renderInParentheses {
     renderIndentedIf(renderWithNewLines) {
       renderCommaSeparated(0 until parameters.size) { index ->

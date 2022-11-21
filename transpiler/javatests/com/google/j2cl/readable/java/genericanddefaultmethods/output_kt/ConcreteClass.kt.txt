@@ -14,14 +14,18 @@ import kotlin.native.ObjCName
 
 @ObjCName("GenericanddefaultmethodsInterfaceWithDefault", exact = true)
 interface InterfaceWithDefault {
- fun foo(@ObjCName("withJavaLangString", exact = false) value: String?) {
+ fun foo(
+  @ObjCName("withJavaLangString", exact = false) value: String?
+ ) {
   System.out!!.println("in InterfaceWithDefault")
  }
 }
 
 @ObjCName("GenericanddefaultmethodsGenericClass", exact = true)
 open class GenericClass<T> {
- open fun foo(@ObjCName("withId", exact = false) value: T) {
+ open fun foo(
+  @ObjCName("withId", exact = false) value: T
+ ) {
   System.out!!.println("in GenericClass")
  }
 }

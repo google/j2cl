@@ -17,7 +17,9 @@ import kotlin.native.ObjCName
 open class DeprecatedExample {
  @JvmField var deprecatedInstanceField: String? = "deprecated field"
 
- open fun deprecatedInstanceMethod(@ObjCName("withJavaLangString", exact = false) someArg: String?) {}
+ open fun deprecatedInstanceMethod(
+  @ObjCName("withJavaLangString", exact = false) someArg: String?
+ ) {}
 
  constructor()
 
@@ -25,15 +27,21 @@ open class DeprecatedExample {
   const val DEPRECATED_STATIC_FIELD: String = "deprecated field"
 
   @JvmStatic
-  fun deprecatedStaticMethod(@ObjCName("withJavaLangAny", exact = false) someObject: Any?) {}
+  fun deprecatedStaticMethod(
+   @ObjCName("withJavaLangAny", exact = false) someObject: Any?
+  ) {}
  }
 
  fun interface DeprecatedInterface {
-  fun doAThing(@ObjCName("withInt", exact = false) anInt: Int)
+  fun doAThing(
+   @ObjCName("withInt", exact = false) anInt: Int
+  )
  }
 
  fun interface DeprecatedJsFunction {
-  fun doAThing(@ObjCName("withJavaLangAny", exact = false) aThing: Any?)
+  fun doAThing(
+   @ObjCName("withJavaLangAny", exact = false) aThing: Any?
+  )
  }
 
  enum class DeprecatedEnum {

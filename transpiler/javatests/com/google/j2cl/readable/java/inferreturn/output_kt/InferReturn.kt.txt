@@ -19,12 +19,16 @@ import kotlin.native.ObjCName
 open class InferReturn<T> {
  companion object {
   @JvmStatic
-  fun <T_1> inferGeneric(@ObjCName("withId", exact = false) foo: T_1): InferReturn<T_1>? {
+  fun <T_1> inferGeneric(
+   @ObjCName("withId", exact = false) foo: T_1
+  ): InferReturn<T_1>? {
    return InferReturn<T_1>()
   }
 
   @JvmStatic
-  fun tightenType(@ObjCName("withId", exact = false) foo: InferReturn<String?>?): InferReturn<InferReturn<String?>?>? {
+  fun tightenType(
+   @ObjCName("withId", exact = false) foo: InferReturn<String?>?
+  ): InferReturn<InferReturn<String?>?>? {
    if (foo != null) {
     return InferReturn.inferGeneric<InferReturn<String?>?>(foo)
    }
@@ -40,19 +44,27 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
-  fun <V> newArrayList(@ObjCName("withId", exact = false) foo: V): ArrayList<V>? {
+  fun <V> newArrayList(
+   @ObjCName("withId", exact = false) foo: V
+  ): ArrayList<V>? {
    return ArrayList<V>()
   }
 
   @JvmStatic
-  fun <V> newArray(@ObjCName("withId", exact = false) foo: V): Array<V>? {
+  fun <V> newArray(
+   @ObjCName("withId", exact = false) foo: V
+  ): Array<V>? {
    return arrayOfNulls<Any>(0) as Array<V>?
   }
 
   @JvmStatic
-  fun acceptsArrayListOfObject(@ObjCName("withId", exact = false) foo: ArrayList<Any?>?) {}
+  fun acceptsArrayListOfObject(
+   @ObjCName("withId", exact = false) foo: ArrayList<Any?>?
+  ) {}
 
   @JvmStatic
-  fun acceptsArrayOfObject(@ObjCName("withJavaLangAnyArray", exact = false) foo: Array<Any?>?) {}
+  fun acceptsArrayOfObject(
+   @ObjCName("withJavaLangAnyArray", exact = false) foo: Array<Any?>?
+  ) {}
  }
 }

@@ -17,7 +17,9 @@ open class LocalClassWithOuterGenerics<A> {
   @JvmStatic
   fun <T> foo() {
    open class ___1Bar {
-    open fun baz(@ObjCName("withId", exact = false) other: ___1Bar?) {}
+    open fun baz(
+     @ObjCName("withId", exact = false) other: ___1Bar?
+    ) {}
    }
    val bar: ___1Bar? = ___1Bar()
    open class ___1Baz<S> {

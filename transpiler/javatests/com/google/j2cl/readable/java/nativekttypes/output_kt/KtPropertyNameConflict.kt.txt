@@ -53,7 +53,9 @@ abstract class KtPropertyNameConflict {
   }
 
   @JvmStatic
-  fun test(@ObjCName("withNativekttypesSubclass", exact = false) o: KtPropertyNameConflict.Subclass?) {
+  fun test(
+   @ObjCName("withNativekttypesSubclass", exact = false) o: KtPropertyNameConflict.Subclass?
+  ) {
    val fieldWithConflictingGetter: Int = o!!.fieldWithConflictingGetter_ktPropertyConflict
    val conflictingGetter: Int = o!!.fieldWithConflictingGetter
    val fieldWithConflictingNonGetter: Int = o!!.fieldWithConflictingNonGetter_ktPropertyConflict

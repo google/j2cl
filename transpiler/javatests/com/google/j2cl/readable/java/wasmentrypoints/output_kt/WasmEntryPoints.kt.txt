@@ -15,12 +15,18 @@ import kotlin.native.ObjCName
 open class WasmEntryPoints {
  companion object {
   @JvmStatic
-  fun singleMatchedEntryPoint(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {}
+  fun singleMatchedEntryPoint(
+   @ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?
+  ) {}
 
   @JvmStatic
-  fun matchedEntryPointPattern1(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {}
+  fun matchedEntryPointPattern1(
+   @ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?
+  ) {}
 
   @JvmStatic
-  fun matchedEntryPointPattern2(@ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?) {}
+  fun matchedEntryPointPattern2(
+   @ObjCName("withJavaLangStringArray", exact = false) args: Array<String?>?
+  ) {}
  }
 }

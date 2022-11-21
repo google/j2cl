@@ -15,12 +15,16 @@ import supercallnondefault.Parent
 open class Parent {
  @JvmField var field: Int = 0
 
- constructor(@ObjCName("withInt", exact = false) f: Int) {
+ constructor(
+  @ObjCName("withInt", exact = false) f: Int
+ ) {
   this.field = f
  }
 }
 
 @ObjCName("SupercallnondefaultChild", exact = true)
 open class Child: Parent {
- constructor(@ObjCName("withInt", exact = false) a: Int): super(a)
+ constructor(
+  @ObjCName("withInt", exact = false) a: Int
+ ): super(a)
 }

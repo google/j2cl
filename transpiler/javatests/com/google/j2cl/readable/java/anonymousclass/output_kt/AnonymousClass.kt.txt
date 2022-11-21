@@ -19,14 +19,18 @@ import kotlin.native.ObjCName
 abstract class SomeClass {
  abstract fun foo(): String?
 
- constructor(@ObjCName("withInt", exact = false) i: Int)
+ constructor(
+  @ObjCName("withInt", exact = false) i: Int
+ )
 }
 
 @ObjCName("AnonymousclassSomeClassWithStaticMembers", exact = true)
 abstract class SomeClassWithStaticMembers {
  abstract fun foo(): String?
 
- constructor(@ObjCName("withInt", exact = false) i: Int)
+ constructor(
+  @ObjCName("withInt", exact = false) i: Int
+ )
 
  companion object {
   @JvmStatic

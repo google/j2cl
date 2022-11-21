@@ -26,7 +26,9 @@ open class RawType {
  open class BoundRecursively<T: RawType.BoundRecursively<T>?> {}
 
  interface GenericSuperclass<T: RawType?> {
-  fun f(@ObjCName("withId", exact = false) t: T) {}
+  fun f(
+   @ObjCName("withId", exact = false) t: T
+  ) {}
  }
 
  open class RawSubclass: RawType.GenericSuperclass<RawType?> {

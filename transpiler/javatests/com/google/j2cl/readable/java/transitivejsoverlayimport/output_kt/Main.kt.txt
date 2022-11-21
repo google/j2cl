@@ -39,14 +39,18 @@ open class NonNativeLower: NonNativeUpper {
 open class Transitive {
  external fun getJsProperty(): Int
 
- fun doTransitiveInstanceMethod(@ObjCName("withJavaLangString", exact = false) arg1: String?) {}
+ fun doTransitiveInstanceMethod(
+  @ObjCName("withJavaLangString", exact = false) arg1: String?
+ ) {}
 }
 
 @ObjCName("TransitivejsoverlayimportMain", exact = true)
 open class Main {
  companion object {
   @JvmStatic
-  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
+  fun main(
+   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+  ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val transitive: Transitive? = null
    transitive!!.doTransitiveInstanceMethod("arg1")

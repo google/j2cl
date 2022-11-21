@@ -22,7 +22,9 @@ import kotlin.native.ObjCName
 open class Main {
  @JvmField var field: Int = 0
 
- constructor(@ObjCName("withInt", exact = false) f: Int) {
+ constructor(
+  @ObjCName("withInt", exact = false) f: Int
+ ) {
   this.field = f
  }
 
@@ -33,7 +35,9 @@ open class Main {
   return this.field + m + numbers!![1]
  }
 
- open fun f4(vararg @ObjCName("withIntArray", exact = false) numbers: Int): Int {
+ open fun f4(
+  vararg @ObjCName("withIntArray", exact = false) numbers: Int
+ ): Int {
   return this.field + numbers!![1]
  }
 
@@ -135,31 +139,41 @@ open class Main {
   }
 
   @JvmStatic
-  fun f2(vararg @ObjCName("withIntArray", exact = false) numbers: Int): Int {
+  fun f2(
+   vararg @ObjCName("withIntArray", exact = false) numbers: Int
+  ): Int {
    return numbers!!.size + numbers!![0]
   }
 
   @JvmStatic
-  fun <T> generics(vararg @ObjCName("withIdArray", exact = false) elements: T): T {
+  fun <T> generics(
+   vararg @ObjCName("withIdArray", exact = false) elements: T
+  ): T {
    val elements_1: Array<T>? = elements as Array<T>?
    return elements_1!![0]
   }
 
   @JvmStatic
-  fun parameterizedType(vararg @ObjCName("withIdArray", exact = false) elements: MutableList<Main?>?): Main? {
+  fun parameterizedType(
+   vararg @ObjCName("withIdArray", exact = false) elements: MutableList<Main?>?
+  ): Main? {
    val elements_1: Array<MutableList<Main?>?>? = elements as Array<MutableList<Main?>?>?
    return elements_1!![0]!!.get(0)
   }
 
   @JvmStatic
-  fun <T> parameterizedByT(vararg @ObjCName("withIdArray", exact = false) elements: MutableList<T>?): T {
+  fun <T> parameterizedByT(
+   vararg @ObjCName("withIdArray", exact = false) elements: MutableList<T>?
+  ): T {
    val elements_1: Array<MutableList<T>?>? = elements as Array<MutableList<T>?>?
    return elements_1!![0]!!.get(0)
   }
  }
 
  open class NativeObject {
-  constructor(vararg @ObjCName("withJavaLangAnyArray", exact = false) pars: Any?) {
+  constructor(
+   vararg @ObjCName("withJavaLangAnyArray", exact = false) pars: Any?
+  ) {
    val pars_1: Array<Any?>? = pars as Array<Any?>?
   }
  }
@@ -181,13 +195,17 @@ open class Main {
  }
 
  abstract class AbstractMethodWithVarargs {
-  abstract fun abstractMethod(vararg @ObjCName("withIntArray", exact = false) args: Int)
+  abstract fun abstractMethod(
+   vararg @ObjCName("withIntArray", exact = false) args: Int
+  )
  }
 
  interface StaticInterfaceMethodWithVarargs {
   companion object {
    @JvmStatic
-   fun staticMethod(vararg @ObjCName("withIntArray", exact = false) args: Int) {}
+   fun staticMethod(
+    vararg @ObjCName("withIntArray", exact = false) args: Int
+   ) {}
   }
  }
 

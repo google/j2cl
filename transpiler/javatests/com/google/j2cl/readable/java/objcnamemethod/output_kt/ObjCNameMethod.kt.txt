@@ -18,9 +18,13 @@ import objcnamemethod.Foo
 open class ObjCNameMethod {
  constructor()
 
- constructor(@ObjCName("withInt", exact = false) i: Int)
+ constructor(
+  @ObjCName("withInt", exact = false) i: Int
+ )
 
- open fun instanceMethod(@ObjCName("withInt", exact = false) i: Int) {}
+ open fun instanceMethod(
+  @ObjCName("withInt", exact = false) i: Int
+ ) {}
 
  open fun instanceMethod(
   @ObjCName("withInt", exact = false) i: Int,
@@ -32,11 +36,15 @@ open class ObjCNameMethod {
   @ObjCName("withLongArray2", exact = false) l: Array<LongArray?>?
  ) {}
 
- open fun instanceMethod(@ObjCName("withObjcnamemethodFoo", exact = false) foo: Foo?) {}
+ open fun instanceMethod(
+  @ObjCName("withObjcnamemethodFoo", exact = false) foo: Foo?
+ ) {}
 
  companion object {
   @JvmStatic
-  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
+  fun main(
+   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+  ) {
    val args_1: Array<String?>? = args as Array<String?>?
   }
  }

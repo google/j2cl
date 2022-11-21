@@ -44,13 +44,17 @@ open class CastGenerics<T, E: Number?> {
 
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
-   fun nestedGenericMethod_private_2(@ObjCName("withJavaLangAny", exact = false) o: Any?) {
+   fun nestedGenericMethod_private_2(
+    @ObjCName("withJavaLangAny", exact = false) o: Any?
+   ) {
     val t: TT? = o as TT?
    }
   }
  }
 
- open fun <EE> method(@ObjCName("withJavaLangAny", exact = false) o: Any?): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
+ open fun <EE> method(
+  @ObjCName("withJavaLangAny", exact = false) o: Any?
+ ): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
   if (o is CastGenerics.Empty1) {
    return (o as EE?) as EE
   }

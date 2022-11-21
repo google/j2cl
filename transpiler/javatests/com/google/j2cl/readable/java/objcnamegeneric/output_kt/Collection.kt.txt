@@ -11,5 +11,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("ObjcnamegenericCollection", exact = true)
 fun interface Collection<T> {
- fun add(@ObjCName("withId", exact = false) element: T): Boolean
+ fun add(
+  @ObjCName("withId", exact = false) element: T
+ ): Boolean
 }

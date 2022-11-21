@@ -29,11 +29,15 @@ open class Main {
  fun interface Interface<T> {
   fun interfaceMethod()
 
-  fun defaultMethod(@ObjCName("withId", exact = false) t: T) {
+  fun defaultMethod(
+   @ObjCName("withId", exact = false) t: T
+  ) {
    this.privateMethod_private_interfaces_Main_Interface(t)
   }
 
-  fun privateMethod_private_interfaces_Main_Interface(@ObjCName("withId", exact = false) t: T) {}
+  fun privateMethod_private_interfaces_Main_Interface(
+   @ObjCName("withId", exact = false) t: T
+  ) {}
 
   companion object {
    const val a: Int = 1

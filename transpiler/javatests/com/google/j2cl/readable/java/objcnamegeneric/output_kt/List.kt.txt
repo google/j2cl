@@ -12,9 +12,13 @@ import kotlin.native.ObjCName
 
 @ObjCName("ObjcnamegenericList", exact = true)
 open class List<T> {
- open fun add(@ObjCName("withId", exact = false) element: T): Boolean {
+ open fun add(
+  @ObjCName("withId", exact = false) element: T
+ ): Boolean {
   return true
  }
 
- open fun forEachRemaining(@ObjCName("withId", exact = false) action: Consumer<in T>?) {}
+ open fun forEachRemaining(
+  @ObjCName("withId", exact = false) action: Consumer<in T>?
+ ) {}
 }

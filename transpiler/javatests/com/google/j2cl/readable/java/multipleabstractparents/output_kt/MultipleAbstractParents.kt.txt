@@ -17,7 +17,9 @@ import multipleabstractparents.MultipleAbstractParents
 open class MultipleAbstractParents {
  companion object {
   @JvmStatic
-  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
+  fun main(
+   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+  ) {
    val args_1: Array<String?>? = args as Array<String?>?
    assert(MultipleAbstractParents.ArrayList<String?>().getFoo(null)!!.equals("AbstractCollection"))
    assert(MultipleAbstractParents.StringList().getFoo(null)!!.equals("AbstractCollection"))
@@ -26,17 +28,23 @@ open class MultipleAbstractParents {
  }
 
  fun interface List<T> {
-  fun getFoo(@ObjCName("withId", exact = false) t: T): String?
+  fun getFoo(
+   @ObjCName("withId", exact = false) t: T
+  ): String?
  }
 
  fun interface Collection<T> {
-  fun getFoo(@ObjCName("withId", exact = false) t: T): String?
+  fun getFoo(
+   @ObjCName("withId", exact = false) t: T
+  ): String?
  }
 
  abstract class AbstractListCollection<T>: MultipleAbstractParents.List<T>, MultipleAbstractParents.Collection<T> {}
 
  abstract class AbstractCollection<T> {
-  open fun getFoo(@ObjCName("withId", exact = false) t: T): String? {
+  open fun getFoo(
+   @ObjCName("withId", exact = false) t: T
+  ): String? {
    return "AbstractCollection"
   }
  }

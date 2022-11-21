@@ -17,12 +17,16 @@ open class MultipleConstructors {
 
  @JvmField var flag_private_2: Boolean = false
 
- constructor(@ObjCName("withInt", exact = false) id: Int) {
+ constructor(
+  @ObjCName("withInt", exact = false) id: Int
+ ) {
   this.id_private_2 = id
   this.flag_private_2 = id == 0
  }
 
- constructor(@ObjCName("withBoolean", exact = false) flag: Boolean) {
+ constructor(
+  @ObjCName("withBoolean", exact = false) flag: Boolean
+ ) {
   this.id_private_2 = - 1
   this.flag_private_2 = flag
  }

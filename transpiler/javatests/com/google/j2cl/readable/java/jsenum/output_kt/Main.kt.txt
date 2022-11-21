@@ -85,7 +85,9 @@ open class Main {
   }
 
   @JvmStatic
-  fun <T> boxingPassthrough_private_2(@ObjCName("withId", exact = false) t: T): T {
+  fun <T> boxingPassthrough_private_2(
+   @ObjCName("withId", exact = false) t: T
+  ): T {
    return t
   }
 
@@ -116,7 +118,9 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(@ObjCName("withInt", exact = false) value: Int) {
+  constructor(
+   @ObjCName("withInt", exact = false) value: Int
+  ) {
    this.value_private_2 = value
   }
  }
@@ -131,7 +135,9 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(@ObjCName("withJavaLangString", exact = false) value: String?) {
+  constructor(
+   @ObjCName("withJavaLangString", exact = false) value: String?
+  ) {
    this.value_private_2 = value
   }
  }
@@ -146,7 +152,9 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(@ObjCName("withJavaLangString", exact = false) value: String?) {
+  constructor(
+   @ObjCName("withJavaLangString", exact = false) value: String?
+  ) {
    this.value_private_2 = value!!
   }
  }
@@ -160,7 +168,9 @@ open class Main {
  open class TemplatedField<T> {
   @JvmField var value: T = null as T
 
-  constructor(@ObjCName("withId", exact = false) value: T) {
+  constructor(
+   @ObjCName("withId", exact = false) value: T
+  ) {
    this.value = value
   }
 
@@ -170,6 +180,8 @@ open class Main {
  }
 
  open class Foo<T> {
-  constructor(@ObjCName("withId", exact = false) c: Optional<Main.IntJsEnum>?)
+  constructor(
+   @ObjCName("withId", exact = false) c: Optional<Main.IntJsEnum>?
+  )
  }
 }

@@ -24,5 +24,7 @@ open class CascadingConstructor {
   this.b_private_2 = b
  }
 
- constructor(@ObjCName("withInt", exact = false) a: Int): this(a, a * 2)
+ constructor(
+  @ObjCName("withInt", exact = false) a: Int
+ ): this(a, a * 2)
 }

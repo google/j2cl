@@ -43,19 +43,27 @@ open class Main {
  }
 
  open class A<T> {
-  open fun `fun`(@ObjCName("withId", exact = false) t: T): T {
+  open fun `fun`(
+   @ObjCName("withId", exact = false) t: T
+  ): T {
    return t
   }
 
-  open fun bar(@ObjCName("withId", exact = false) t: T) {}
+  open fun bar(
+   @ObjCName("withId", exact = false) t: T
+  ) {}
  }
 
  fun interface I<T: Number?> {
-  fun `fun`(@ObjCName("withId", exact = false) t: T): T
+  fun `fun`(
+   @ObjCName("withId", exact = false) t: T
+  ): T
  }
 
  fun interface J<T> {
-  fun bar(@ObjCName("withId", exact = false) t: T)
+  fun bar(
+   @ObjCName("withId", exact = false) t: T
+  )
  }
 
  open class B: Main.A<String?>() {
@@ -83,7 +91,9 @@ open class Main {
  open class F: Main.I<Int?>, Main.A<Int?>() {}
 
  fun interface G<V> {
-  fun enclose(@ObjCName("withId", exact = false) value: V): V
+  fun enclose(
+   @ObjCName("withId", exact = false) value: V
+  ): V
  }
 
  open class H<V>: Main.G<V> {
@@ -138,9 +148,13 @@ open class Main {
  open inner class S: Main.R() {}
 
  open inner class GrandParent<T> {
-  open fun jsMethod(@ObjCName("withId", exact = false) t: T) {}
+  open fun jsMethod(
+   @ObjCName("withId", exact = false) t: T
+  ) {}
 
-  open fun method(@ObjCName("withId", exact = false) t: T) {}
+  open fun method(
+   @ObjCName("withId", exact = false) t: T
+  ) {}
  }
 
  open inner class Parent<T: Main.Parent<T>?>: Main.GrandParent<T>() {

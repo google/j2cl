@@ -30,7 +30,9 @@ open class MethodReferences<T> {
   return this
  }
 
- open fun sameAs(@ObjCName("withJavaLangNumber", exact = false) n: Number?): Boolean? {
+ open fun sameAs(
+  @ObjCName("withJavaLangNumber", exact = false) n: Number?
+ ): Boolean? {
   return Boolean.valueOf(false)
  }
 
@@ -125,11 +127,15 @@ open class MethodReferences<T> {
  }
 
  fun interface Predicate<T> {
-  fun apply(@ObjCName("withId", exact = false) parameter: T): Boolean
+  fun apply(
+   @ObjCName("withId", exact = false) parameter: T
+  ): Boolean
  }
 
  fun interface ArrayProducer<T> {
-  fun produce(@ObjCName("withInt", exact = false) size: Int): Array<T>?
+  fun produce(
+   @ObjCName("withInt", exact = false) size: Int
+  ): Array<T>?
  }
 
  open inner class ObjectCapturingOuter {
@@ -139,7 +145,9 @@ open class MethodReferences<T> {
  }
 
  fun interface Function<T, U> {
-  fun apply(@ObjCName("withId", exact = false) t: T): U
+  fun apply(
+   @ObjCName("withId", exact = false) t: T
+  ): U
  }
 
  fun interface BiFunction<T, U, V> {
@@ -154,7 +162,9 @@ open class MethodReferences<T> {
  }
 
  fun interface JsFunctionInterface<T, U> {
-  fun apply(@ObjCName("withId", exact = false) t: T): U
+  fun apply(
+   @ObjCName("withId", exact = false) t: T
+  ): U
  }
 
  fun interface JsBiFunction<T, U, V> {

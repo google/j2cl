@@ -13,7 +13,9 @@ import kotlin.native.ObjCName
 
 @ObjCName("GenericnativetypeBoundedJsArray", exact = true)
 open class BoundedJsArray<V> {
- constructor(@ObjCName("withInt", exact = false) size: Int)
+ constructor(
+  @ObjCName("withInt", exact = false) size: Int
+ )
 
  companion object {
   @JvmStatic
@@ -23,7 +25,9 @@ open class BoundedJsArray<V> {
   }
 
   @JvmStatic
-  fun <V_1> create(@ObjCName("withInt", exact = false) size: Int): BoundedJsArray<V_1>? {
+  fun <V_1> create(
+   @ObjCName("withInt", exact = false) size: Int
+  ): BoundedJsArray<V_1>? {
    val array: BoundedJsArray<V_1>? = BoundedJsArray<V_1>(size)
    return array
   }

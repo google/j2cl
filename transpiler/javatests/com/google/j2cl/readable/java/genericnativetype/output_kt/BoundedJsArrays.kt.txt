@@ -22,7 +22,9 @@ open class BoundedJsArrays {
   }
 
   @JvmStatic
-  fun <V> createWithSize(@ObjCName("withInt", exact = false) size: Int): BoundedJsArray<V>? {
+  fun <V> createWithSize(
+   @ObjCName("withInt", exact = false) size: Int
+  ): BoundedJsArray<V>? {
    return BoundedJsArray.create<V>(size)
   }
  }

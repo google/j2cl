@@ -13,13 +13,17 @@ import kotlin.native.ObjCName
 
 @ObjCName("ImportglobaljstypesDate", exact = true)
 open class Date {
- open fun copy(@ObjCName("withImportglobaljstypesNativeDate", exact = false) d: Date.NativeDate?): Date.NativeDate? {
+ open fun copy(
+  @ObjCName("withImportglobaljstypesNativeDate", exact = false) d: Date.NativeDate?
+ ): Date.NativeDate? {
   return d
  }
 
  companion object {
   @JvmStatic
-  fun now(@ObjCName("withDouble", exact = false) x: Double): Double {
+  fun now(
+   @ObjCName("withDouble", exact = false) x: Double
+  ): Double {
    return Date.NativeDate.now()
   }
  }

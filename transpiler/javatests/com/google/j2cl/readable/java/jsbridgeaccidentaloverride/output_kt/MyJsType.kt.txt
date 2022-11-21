@@ -14,18 +14,24 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsbridgeaccidentaloverrideOtherInterface", exact = true)
 fun interface OtherInterface {
- fun `fun`(@ObjCName("withInt", exact = false) a: Int): Int
+ fun `fun`(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int
 }
 
 @ObjCName("JsbridgeaccidentaloverrideMyJsType", exact = true)
 open class MyJsType: OtherInterface {
  constructor()
 
- open fun foo(@ObjCName("withInt", exact = false) a: Int): Int {
+ open fun foo(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int {
   return a
  }
 
- open fun bar(@ObjCName("withInt", exact = false) a: Int): Int {
+ open fun bar(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int {
   return a + 1
  }
 
@@ -36,9 +42,13 @@ open class MyJsType: OtherInterface {
 
 @ObjCName("JsbridgeaccidentaloverrideMyInterface", exact = true)
 interface MyInterface {
- fun foo(@ObjCName("withInt", exact = false) a: Int): Int
+ fun foo(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int
 
- fun bar(@ObjCName("withInt", exact = false) a: Int): Int
+ fun bar(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int
 }
 
 @ObjCName("JsbridgeaccidentaloverrideSubJsType", exact = true)

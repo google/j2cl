@@ -20,7 +20,9 @@ open class TypeArgumentsInference {
   }
 
   @JvmStatic
-  fun <K, V> pairIdentity(@ObjCName("withId", exact = false) pair: TypeArgumentsInference.Pair<K, V>): TypeArgumentsInference.Pair<K, V> {
+  fun <K, V> pairIdentity(
+   @ObjCName("withId", exact = false) pair: TypeArgumentsInference.Pair<K, V>
+  ): TypeArgumentsInference.Pair<K, V> {
    return pair
   }
 

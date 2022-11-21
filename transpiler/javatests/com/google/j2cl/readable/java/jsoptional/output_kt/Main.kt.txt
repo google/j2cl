@@ -37,11 +37,17 @@ open class Main {
   return@Function s
  }
 
- constructor(@ObjCName("withJavaLangString", exact = false) a: String?)
+ constructor(
+  @ObjCName("withJavaLangString", exact = false) a: String?
+ )
 
- open fun testFunction(@ObjCName("withJsoptionalFunction", exact = false) f: Main.Function?) {}
+ open fun testFunction(
+  @ObjCName("withJsoptionalFunction", exact = false) f: Main.Function?
+ ) {}
 
- open fun testOptionalFunction(@ObjCName("withJsoptionalFunction", exact = false) f: Main.Function?) {}
+ open fun testOptionalFunction(
+  @ObjCName("withJsoptionalFunction", exact = false) f: Main.Function?
+ ) {}
 
  fun interface Function {
   fun f1(
@@ -69,7 +75,9 @@ open class Main {
  }
 
  open inner class SpecializedSubtype: Main.I<String?> {
-  constructor(@ObjCName("withJavaLangAny", exact = false) a: Any?)
+  constructor(
+   @ObjCName("withJavaLangAny", exact = false) a: Any?
+  )
 
   open override fun m(t: String?, o: Any?) {}
  }

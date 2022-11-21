@@ -14,7 +14,9 @@ import kotlin.native.ObjCName
 open class TypeWildCards {
  companion object {
   @JvmStatic
-  fun testSupplierWithUpperAndLowerBounds(@ObjCName("withId", exact = false) supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?) {
+  fun testSupplierWithUpperAndLowerBounds(
+   @ObjCName("withId", exact = false) supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?
+  ) {
    val parent: TypeWildCards.Parent? = supplier!!.get() as TypeWildCards.Parent?
   }
  }

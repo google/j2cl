@@ -34,7 +34,9 @@ interface ParentInterface {
 open class GrandParent {
  open fun grandParentSimplest() {}
 
- open fun grandParentWithParams(@ObjCName("withInt", exact = false) foo: Int) {}
+ open fun grandParentWithParams(
+  @ObjCName("withInt", exact = false) foo: Int
+ ) {}
 
  open fun grandParentWithChangingReturn(): Any? {
   return null
@@ -49,7 +51,9 @@ open class GrandParent {
 open class Parent: ParentInterface, GrandParent() {
  open fun parentSimplest() {}
 
- open fun parentWithParams(@ObjCName("withInt", exact = false) foo: Int) {}
+ open fun parentWithParams(
+  @ObjCName("withInt", exact = false) foo: Int
+ ) {}
 
  open fun parentWithChangingReturn(): Any? {
   return null

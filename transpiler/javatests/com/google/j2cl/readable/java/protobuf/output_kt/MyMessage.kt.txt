@@ -21,7 +21,9 @@ open class MyMessage: GeneratedMessage {
   return this.testField
  }
 
- constructor(@ObjCName("withInt", exact = false) testField: Int) {
+ constructor(
+  @ObjCName("withInt", exact = false) testField: Int
+ ) {
   this.testField = testField
  }
 
@@ -44,7 +46,9 @@ open class MyMessage: GeneratedMessage {
    return this.testField
   }
 
-  open fun setTestField(@ObjCName("withInt", exact = false) testField: Int): MyMessage.Builder {
+  open fun setTestField(
+   @ObjCName("withInt", exact = false) testField: Int
+  ): MyMessage.Builder {
    this.testField = testField
    return this
   }

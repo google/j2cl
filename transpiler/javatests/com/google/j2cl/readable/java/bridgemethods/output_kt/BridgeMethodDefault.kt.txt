@@ -14,7 +14,9 @@ import kotlin.native.ObjCName
 @ObjCName("BridgemethodsBridgeMethodDefault", exact = true)
 open class BridgeMethodDefault {
  fun interface I<T> {
-  fun m(@ObjCName("withId", exact = false) t: T)
+  fun m(
+   @ObjCName("withId", exact = false) t: T
+  )
  }
 
  interface II: BridgeMethodDefault.I<String?> {

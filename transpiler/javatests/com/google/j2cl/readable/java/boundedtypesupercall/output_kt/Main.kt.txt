@@ -13,7 +13,9 @@ import kotlin.native.ObjCName
 @ObjCName("BoundedtypesupercallMain", exact = true)
 open class Main {
  abstract class Foo<T> {
-  constructor(@ObjCName("withId", exact = false) foo: T)
+  constructor(
+   @ObjCName("withId", exact = false) foo: T
+  )
 
   abstract fun foo()
  }

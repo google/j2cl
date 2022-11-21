@@ -46,7 +46,9 @@ open class Parent: SuperParent() {
   return a * b
  }
 
- open fun foo(@ObjCName("withInt", exact = false) a: Int): Int {
+ open fun foo(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int {
   return a
  }
 }

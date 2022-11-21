@@ -11,5 +11,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("ObjcnamemethodFoo", exact = true)
 open class Foo {
- open fun instanceMethod(@ObjCName("withInt", exact = false) i: Int) {}
+ open fun instanceMethod(
+  @ObjCName("withInt", exact = false) i: Int
+ ) {}
 }

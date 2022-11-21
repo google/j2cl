@@ -16,7 +16,9 @@ import nestedgenericclass.NestedGenericClass
 
 @ObjCName("NestedgenericclassNestedGenericClass", exact = true)
 open class NestedGenericClass<T> {
- open fun <S> `fun`(@ObjCName("withId", exact = false) t: S) {
+ open fun <S> `fun`(
+  @ObjCName("withId", exact = false) t: S
+ ) {
   open class ___1E<S> {}
   open class ___1F {
    @JvmField var f: S = null as S

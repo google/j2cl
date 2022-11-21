@@ -16,7 +16,9 @@ open class InitMethodDispatch<T> {
 
  constructor(): this(1)
 
- constructor(@ObjCName("withInt", exact = false) i: Int) {
+ constructor(
+  @ObjCName("withInt", exact = false) i: Int
+ ) {
   this.value = i
  }
 }

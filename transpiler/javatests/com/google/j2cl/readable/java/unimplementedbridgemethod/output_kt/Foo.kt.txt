@@ -15,7 +15,9 @@ import unimplementedbridgemethod.J
 
 @ObjCName("UnimplementedbridgemethodI", exact = true)
 fun interface I<T> {
- fun foo(@ObjCName("withId", exact = false) t: T): Int
+ fun foo(
+  @ObjCName("withId", exact = false) t: T
+ ): Int
 
  companion object {
   @JvmStatic

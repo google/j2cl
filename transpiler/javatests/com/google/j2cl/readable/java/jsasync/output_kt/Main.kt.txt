@@ -26,7 +26,9 @@ open class Main {
   return this.parametricAsyncMethod<Int?>(Int.valueOf(result))
  }
 
- open fun <T> parametricAsyncMethod(@ObjCName("withId", exact = false) value: T): Main.IThenable<T>? {
+ open fun <T> parametricAsyncMethod(
+  @ObjCName("withId", exact = false) value: T
+ ): Main.IThenable<T>? {
   return Main.Promise.resolve<T>(Main.await_private_2<T>(Main.Promise.resolve<T>(value)))
  }
 
@@ -62,7 +64,9 @@ open class Main {
   }
 
   @JvmStatic
-  external fun <T> await_private_2(@ObjCName("withId", exact = false) thenable: Main.IThenable<T>?): T
+  external fun <T> await_private_2(
+   @ObjCName("withId", exact = false) thenable: Main.IThenable<T>?
+  ): T
  }
 
  fun interface BaseInterface {
@@ -92,7 +96,9 @@ open class Main {
  open class Promise<T>: Main.IThenable<T> {
   companion object {
    @JvmStatic
-   external fun <T> resolve(@ObjCName("withId", exact = false) value: T): Main.Promise<T>?
+   external fun <T> resolve(
+    @ObjCName("withId", exact = false) value: T
+   ): Main.Promise<T>?
   }
  }
 }

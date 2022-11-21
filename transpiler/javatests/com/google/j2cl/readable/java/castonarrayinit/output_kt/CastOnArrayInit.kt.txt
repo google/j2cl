@@ -15,7 +15,9 @@ import kotlin.native.ObjCName
 open class CastOnArrayInit {
  companion object {
   @JvmStatic
-  fun <E> `fun`(vararg @ObjCName("withIdArray", exact = false) args: CastOnArrayInit.Foo<E>?) {
+  fun <E> `fun`(
+   vararg @ObjCName("withIdArray", exact = false) args: CastOnArrayInit.Foo<E>?
+  ) {
    val args_1: Array<CastOnArrayInit.Foo<E>?>? = args as Array<CastOnArrayInit.Foo<E>?>?
   }
 

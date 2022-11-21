@@ -19,7 +19,9 @@ import kotlin.native.ObjCName
 open class Main {
  companion object {
   @JvmStatic
-  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
+  fun main(
+   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+  ) {
    val args_1: Array<String?>? = args as Array<String?>?
    assert(Main.Outer().method() == 5)
   }

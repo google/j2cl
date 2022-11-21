@@ -19,21 +19,29 @@ open class JsMethodExample {
 
  companion object {
   @JvmStatic
-  external fun log(@ObjCName("withJavaLangString", exact = false) message: String?)
+  external fun log(
+   @ObjCName("withJavaLangString", exact = false) message: String?
+  )
 
   @JvmStatic
-  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
+  fun main(
+   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+  ) {
    val args_1: Array<String?>? = args as Array<String?>?
    JsMethodExample.log("test")
   }
  }
 
  abstract class Base<T> {
-  open fun m(@ObjCName("withId", exact = false) t: T) {}
+  open fun m(
+   @ObjCName("withId", exact = false) t: T
+  ) {}
  }
 
  fun interface I {
-  fun m(@ObjCName("withJavaLangString", exact = false) s: String?)
+  fun m(
+   @ObjCName("withJavaLangString", exact = false) s: String?
+  )
  }
 
  open class Sub: JsMethodExample.I, JsMethodExample.Base<String?>() {

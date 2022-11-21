@@ -15,7 +15,9 @@ import overwrittentypevariables.MyFunction
 
 @ObjCName("OverwrittentypevariablesMyFunction", exact = true)
 fun interface MyFunction<F, T> {
- fun apply(@ObjCName("withId", exact = false) input: F): T
+ fun apply(
+  @ObjCName("withId", exact = false) input: F
+ ): T
 }
 
 @ObjCName("OverwrittentypevariablesHashFunction", exact = true)

@@ -14,5 +14,7 @@ import kotlin.native.ObjCName
 class MyJsException: Exception {
  constructor()
 
- constructor(@ObjCName("withJavaLangThrowable", exact = false) cause: Throwable?): this()
+ constructor(
+  @ObjCName("withJavaLangThrowable", exact = false) cause: Throwable?
+ ): this()
 }

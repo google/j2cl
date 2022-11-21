@@ -12,7 +12,9 @@ import kotlin.native.ObjCName
 
 @ObjCName("GenericinterfaceabstractimplMyInterface", exact = true)
 fun interface MyInterface<T> {
- fun `fun`(@ObjCName("withId", exact = false) t: T): T
+ fun `fun`(
+  @ObjCName("withId", exact = false) t: T
+ ): T
 }
 
 @ObjCName("GenericinterfaceabstractimplAbstractImpl", exact = true)

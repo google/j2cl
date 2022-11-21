@@ -148,9 +148,13 @@ open class Arrays {
   this.consumesSerializable(arrayOfNulls<Any>(10))
  }
 
- open fun consumesCloneable(@ObjCName("withJavaLangCloneable", exact = false) cloneable: Cloneable?) {}
+ open fun consumesCloneable(
+  @ObjCName("withJavaLangCloneable", exact = false) cloneable: Cloneable?
+ ) {}
 
- open fun consumesSerializable(@ObjCName("withJavaIoSerializable", exact = false) serializable: Serializable?) {}
+ open fun consumesSerializable(
+  @ObjCName("withJavaIoSerializable", exact = false) serializable: Serializable?
+ ) {}
 
  open inner class SomeObject {}
 

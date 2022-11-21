@@ -19,7 +19,9 @@ interface Entry<K> {}
 
 @ObjCName("NobridgemethodsMap", exact = true)
 abstract class Map<K> {
- abstract fun getCeilingEntry(@ObjCName("withId", exact = false) key: K): Entry<K>?
+ abstract fun getCeilingEntry(
+  @ObjCName("withId", exact = false) key: K
+ ): Entry<K>?
 }
 
 @ObjCName("NobridgemethodsTreeMap", exact = true)
@@ -35,7 +37,9 @@ open class TreeMap<K>: Map<K>() {
 open class CharSet {
  companion object {
   @JvmStatic
-  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
+  fun main(
+   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+  ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val treeMap: TreeMap<String?>? = object : TreeMap<String?>() {}
   }

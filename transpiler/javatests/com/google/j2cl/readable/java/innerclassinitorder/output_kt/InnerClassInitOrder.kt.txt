@@ -67,7 +67,9 @@ open class InnerClassInitOrder {
   abstract class ___1AddNumber {
    @JvmField var num: Int = 0
 
-   constructor(@ObjCName("withInt", exact = false) i: Int) {
+   constructor(
+    @ObjCName("withInt", exact = false) i: Int
+   ) {
     this.num = i
    }
 
@@ -137,7 +139,9 @@ open class InnerClassInitOrder {
 
  companion object {
   @JvmStatic
-  fun main(vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?) {
+  fun main(
+   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+  ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val m: InnerClassInitOrder? = InnerClassInitOrder()
    m!!.testOuterThisFromSuperCall()
@@ -159,7 +163,9 @@ open class InnerClassInitOrder {
  }
 
  open class OuterRefFromSuperCtorBase {
-  constructor(@ObjCName("withJavaLangAny", exact = false) o: Any?) {
+  constructor(
+   @ObjCName("withJavaLangAny", exact = false) o: Any?
+  ) {
    o!!.hashCode()
   }
  }
@@ -174,7 +180,9 @@ open class InnerClassInitOrder {
  }
 
  open inner class OuterRefFromThisCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
-  constructor(@ObjCName("withJavaLangAny", exact = false) `object`: Any?): super(`object`)
+  constructor(
+   @ObjCName("withJavaLangAny", exact = false) `object`: Any?
+  ): super(`object`)
 
   constructor(): this(object : Any() {
    open override fun hashCode(): Int {
@@ -209,19 +217,25 @@ open class InnerClassInitOrder {
 
   constructor(): this(1)
 
-  constructor(@ObjCName("withInt", exact = false) i: Int) {
+  constructor(
+   @ObjCName("withInt", exact = false) i: Int
+  ) {
    this.value = i
   }
 
   open inner class P2<T2>: InnerClassInitOrder.P1<T1> {
    constructor(): this(1)
 
-   constructor(@ObjCName("withInt", exact = false) i: Int): super(i)
+   constructor(
+    @ObjCName("withInt", exact = false) i: Int
+   ): super(i)
 
    open inner class P3<T3>: InnerClassInitOrder.P1<T1>.P2<T2> {
     constructor(): this(1)
 
-    constructor(@ObjCName("withInt", exact = false) i: Int): super(i)
+    constructor(
+     @ObjCName("withInt", exact = false) i: Int
+    ): super(i)
    }
   }
  }
@@ -238,14 +252,18 @@ open class InnerClassInitOrder {
     this.value = 1
    }
 
-   constructor(@ObjCName("withInt", exact = false) value: Int) {
+   constructor(
+    @ObjCName("withInt", exact = false) value: Int
+   ) {
     this.value = value
    }
   }
  }
 
  open class ESInnerSubclass: InnerClassInitOrder.ESOuter.ESInner {
-  constructor(@ObjCName("withInnerclassinitorderESOuter", exact = false) outer: InnerClassInitOrder.ESOuter?): super()
+  constructor(
+   @ObjCName("withInnerclassinitorderESOuter", exact = false) outer: InnerClassInitOrder.ESOuter?
+  ): super()
 
   constructor(
    @ObjCName("withInt", exact = false) value: Int,
@@ -265,14 +283,18 @@ open class InnerClassInitOrder {
     this.value = 1
    }
 
-   constructor(@ObjCName("withInt", exact = false) value: Int) {
+   constructor(
+    @ObjCName("withInt", exact = false) value: Int
+   ) {
     this.value = value
    }
   }
  }
 
  open class ESWGInnerSubclass: InnerClassInitOrder.ESWGOuter<String?>.ESWGInner {
-  constructor(@ObjCName("withId", exact = false) outer: InnerClassInitOrder.ESWGOuter<String?>?): super()
+  constructor(
+   @ObjCName("withId", exact = false) outer: InnerClassInitOrder.ESWGOuter<String?>?
+  ): super()
 
   constructor(
    @ObjCName("withInt", exact = false) value: Int,
@@ -283,7 +305,9 @@ open class InnerClassInitOrder {
  open class Outer {
   @JvmField val value: Int
 
-  constructor(@ObjCName("withInt", exact = false) i: Int) {
+  constructor(
+   @ObjCName("withInt", exact = false) i: Int
+  ) {
    this.value = i
   }
 
@@ -298,7 +322,9 @@ open class InnerClassInitOrder {
   }
 
   open inner class OuterIsSuper: InnerClassInitOrder.Outer {
-   constructor(@ObjCName("withInt", exact = false) i: Int): super(i)
+   constructor(
+    @ObjCName("withInt", exact = false) i: Int
+   ): super(i)
 
    open override fun checkDispatch(): Int {
     return 2

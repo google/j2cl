@@ -253,7 +253,9 @@ open class ArithmeticExpressions {
   d = (20L + l).toDouble() + d
  }
 
- open fun testEffectivelyFinalVariableInAssignmentExpression(@ObjCName("withBoolean", exact = false) condition: Boolean) {
+ open fun testEffectivelyFinalVariableInAssignmentExpression(
+  @ObjCName("withBoolean", exact = false) condition: Boolean
+ ) {
   var effectivelyFinal: Long = 0L
   if (condition && run {
    effectivelyFinal = this.bar

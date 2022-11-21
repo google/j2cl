@@ -14,5 +14,7 @@ import kotlin.native.ObjCName
 class MyException: Exception {
  constructor()
 
- constructor(@ObjCName("withJavaLangThrowable", exact = false) cause: Throwable?): super(cause)
+ constructor(
+  @ObjCName("withJavaLangThrowable", exact = false) cause: Throwable?
+ ): super(cause)
 }

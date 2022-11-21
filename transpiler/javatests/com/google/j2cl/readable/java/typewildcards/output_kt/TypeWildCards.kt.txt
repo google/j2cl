@@ -23,7 +23,9 @@ import typewildcards.TypeWildCards
 
 @ObjCName("TypewildcardsFunction", exact = true)
 fun interface Function<I, O> {
- fun apply(@ObjCName("withId", exact = false) i: I): O
+ fun apply(
+  @ObjCName("withId", exact = false) i: I
+ ): O
 }
 
 @ObjCName("TypewildcardsList", exact = true)
@@ -41,7 +43,9 @@ open class Bar {}
 
 @ObjCName("TypewildcardsRecursiveType", exact = true)
 open class RecursiveType<T: RecursiveType<T>?> {
- constructor(@ObjCName("withId", exact = false) wildcardParameter: RecursiveType<*>?)
+ constructor(
+  @ObjCName("withId", exact = false) wildcardParameter: RecursiveType<*>?
+ )
 }
 
 @ObjCName("TypewildcardsDeepRecursiveType", exact = true)
@@ -49,30 +53,46 @@ interface DeepRecursiveType<T: GenericType<in T>?> {}
 
 @ObjCName("TypewildcardsRecursiveSubtype", exact = true)
 open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
- constructor(@ObjCName("withId", exact = false) wildcardParameter: RecursiveType<*>?): super(wildcardParameter)
+ constructor(
+  @ObjCName("withId", exact = false) wildcardParameter: RecursiveType<*>?
+ ): super(wildcardParameter)
 }
 
 @ObjCName("TypewildcardsTypeWildCards", exact = true)
 open class TypeWildCards {
- open fun unbounded(@ObjCName("withId", exact = false) g: GenericType<*>?): Any? {
+ open fun unbounded(
+  @ObjCName("withId", exact = false) g: GenericType<*>?
+ ): Any? {
   return g!!.get()
  }
 
- open fun upperBound(@ObjCName("withId", exact = false) g: GenericType<out Bar?>?): Bar? {
+ open fun upperBound(
+  @ObjCName("withId", exact = false) g: GenericType<out Bar?>?
+ ): Bar? {
   return g!!.get()
  }
 
- open fun lowerBound(@ObjCName("withId", exact = false) g: GenericType<in Bar?>?): Any? {
+ open fun lowerBound(
+  @ObjCName("withId", exact = false) g: GenericType<in Bar?>?
+ ): Any? {
   return g!!.get()
  }
 
- open fun unboundedRecursive(@ObjCName("withId", exact = false) g: RecursiveType<*>?) {}
+ open fun unboundedRecursive(
+  @ObjCName("withId", exact = false) g: RecursiveType<*>?
+ ) {}
 
- open fun upperBoundRecursive(@ObjCName("withId", exact = false) g: GenericType<out RecursiveType<*>?>?) {}
+ open fun upperBoundRecursive(
+  @ObjCName("withId", exact = false) g: GenericType<out RecursiveType<*>?>?
+ ) {}
 
- open fun lowerBoundRecursive(@ObjCName("withId", exact = false) g: GenericType<in RecursiveType<*>?>?) {}
+ open fun lowerBoundRecursive(
+  @ObjCName("withId", exact = false) g: GenericType<in RecursiveType<*>?>?
+ ) {}
 
- open fun deepRecursiveType(@ObjCName("withId", exact = false) t: DeepRecursiveType<*>?) {}
+ open fun deepRecursiveType(
+  @ObjCName("withId", exact = false) t: DeepRecursiveType<*>?
+ ) {}
 
  open fun test() {
   this.unbounded(GenericType<Bar?>() as GenericType<*>?)
@@ -95,13 +115,17 @@ open class TypeWildCards {
 
  companion object {
   @JvmStatic
-  fun <T: TypeWildCards.A?> testBoundedTypeMemberAccess(@ObjCName("withId", exact = false) t: T) {
+  fun <T: TypeWildCards.A?> testBoundedTypeMemberAccess(
+   @ObjCName("withId", exact = false) t: T
+  ) {
    val i: Int = t!!.f
    t!!.m()
   }
 
   @JvmStatic
-  fun <T> testIntersectionBoundedTypeMemberAccess(@ObjCName("withId", exact = false) t: T) where T: TypeWildCards.A?, T: TypeWildCards.Y? {
+  fun <T> testIntersectionBoundedTypeMemberAccess(
+   @ObjCName("withId", exact = false) t: T
+  ) where T: TypeWildCards.A?, T: TypeWildCards.Y? {
    val i: Int = t!!.f
    t!!.m()
    t!!.n()
@@ -124,15 +148,21 @@ open class TypeWildCards {
   }
 
   @JvmStatic
-  fun takesRecursiveGeneric_private_2(@ObjCName("withId", exact = false) foo: GenericType<TypeWildCards.Foo?>?) {}
+  fun takesRecursiveGeneric_private_2(
+   @ObjCName("withId", exact = false) foo: GenericType<TypeWildCards.Foo?>?
+  ) {}
 
   @JvmStatic
-  fun <C> testInferredIntersectionWithTypeVariable(@ObjCName("withId", exact = false) ri: TypeWildCards.RecursiveInterface<out C, C>?): C {
+  fun <C> testInferredIntersectionWithTypeVariable(
+   @ObjCName("withId", exact = false) ri: TypeWildCards.RecursiveInterface<out C, C>?
+  ): C {
    return ri!!.m()
   }
 
   @JvmStatic
-  fun <D> createMultipleGenerics(@ObjCName("withId", exact = false) foo: List<D>?): TypeWildCards.MultipleGenerics<D, String?, List<D>?>? {
+  fun <D> createMultipleGenerics(
+   @ObjCName("withId", exact = false) foo: List<D>?
+  ): TypeWildCards.MultipleGenerics<D, String?, List<D>?>? {
    return null
   }
 

@@ -13,12 +13,16 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsbridgebackwardMyJsInterface", exact = true)
 fun interface MyJsInterface {
- fun foo(@ObjCName("withInt", exact = false) a: Int): Int
+ fun foo(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int
 }
 
 @ObjCName("JsbridgebackwardA", exact = true)
 open class A {
- open fun foo(@ObjCName("withInt", exact = false) a: Int): Int {
+ open fun foo(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int {
   return a
  }
 }

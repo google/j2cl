@@ -130,20 +130,28 @@ open class OptimizesWithThisConstructorDelegation {
   this.optimizeableField = 2
  }
 
- constructor(@ObjCName("withInt", exact = false) parameter: Int) {
+ constructor(
+  @ObjCName("withInt", exact = false) parameter: Int
+ ) {
   this.optimizeableField = parameter
  }
 
- constructor(@ObjCName("withShort", exact = false) parameter: Short): this(parameter.toInt())
+ constructor(
+  @ObjCName("withShort", exact = false) parameter: Short
+ ): this(parameter.toInt())
 }
 
 @ObjCName("WasmimmutablefieldsOptimizesWithSuperConstructorDelegation", exact = true)
 open class OptimizesWithSuperConstructorDelegation: OptimizesWithThisConstructorDelegation {
  constructor()
 
- constructor(@ObjCName("withInt", exact = false) parameter: Int): super(parameter)
+ constructor(
+  @ObjCName("withInt", exact = false) parameter: Int
+ ): super(parameter)
 
- constructor(@ObjCName("withShort", exact = false) parameter: Short): this(parameter.toInt())
+ constructor(
+  @ObjCName("withShort", exact = false) parameter: Short
+ ): this(parameter.toInt())
 }
 
 @ObjCName("WasmimmutablefieldsFinalizerTest", exact = true)
@@ -183,7 +191,9 @@ open class FinalizerTest {
   this.writtenInInitAndConstructor = 1
  }
 
- constructor(@ObjCName("withInt", exact = false) x: Int): this() {
+ constructor(
+  @ObjCName("withInt", exact = false) x: Int
+ ): this() {
   val i: Int = this.effectivelyFinalField
   this.writtenInDelegatingConstructor = 1
   this.writtenOnlyInDelegatingConstructor = 1

@@ -27,7 +27,9 @@ fun interface Getable<T> {
 
 @ObjCName("IntersectiontypeSetable", exact = true)
 fun interface Setable {
- fun set(@ObjCName("withInt", exact = false) i: Int)
+ fun set(
+  @ObjCName("withInt", exact = false) i: Int
+ )
 }
 
 @ObjCName("IntersectiontypeSerial", exact = true)
@@ -40,12 +42,16 @@ fun interface Cmp {
 
 @ObjCName("IntersectiontypeCmp2", exact = true)
 fun interface Cmp2<T> {
- fun cmp(@ObjCName("withInt", exact = false) a: Int): Int
+ fun cmp(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int
 }
 
 @ObjCName("IntersectiontypeIntersectionTypeTest", exact = true)
 open class IntersectionTypeTest<U> {
- open fun cast3(@ObjCName("withJavaLangAny", exact = false) s: Any?): Any? {
+ open fun cast3(
+  @ObjCName("withJavaLangAny", exact = false) s: Any?
+ ): Any? {
   return s
  }
 
@@ -58,13 +64,17 @@ open class IntersectionTypeTest<U> {
 
  companion object {
   @JvmStatic
-  fun <T> getAndSet(@ObjCName("withId", exact = false) `object`: T) where T: Getable<*>?, T: Setable? {
+  fun <T> getAndSet(
+   @ObjCName("withId", exact = false) `object`: T
+  ) where T: Getable<*>?, T: Setable? {
    `object`!!.set(1)
    `object`!!.get()
   }
 
   @JvmStatic
-  fun <T> cast(@ObjCName("withJavaLangAny", exact = false) o: Any?): Getable<T>? {
+  fun <T> cast(
+   @ObjCName("withJavaLangAny", exact = false) o: Any?
+  ): Getable<T>? {
    if (o == null) {
     return (o).let { it as Getable<T>?; it as Setable?; it }
    }
@@ -72,12 +82,16 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  fun <T> cast1(@ObjCName("withJavaLangAny", exact = false) s: Any?): Getable<Comparable<String>?>? {
+  fun <T> cast1(
+   @ObjCName("withJavaLangAny", exact = false) s: Any?
+  ): Getable<Comparable<String>?>? {
    return (s).let { it as Getable<Comparable<String>?>?; it as Setable?; it }
   }
 
   @JvmStatic
-  fun <T> cast2(@ObjCName("withJavaLangAny", exact = false) s: Any?): Getable<Comparable<T & Any>?>? {
+  fun <T> cast2(
+   @ObjCName("withJavaLangAny", exact = false) s: Any?
+  ): Getable<Comparable<T & Any>?>? {
    return (s).let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
   }
 
@@ -96,14 +110,18 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  fun testClosureAssignment(@ObjCName("withJavaLangAny", exact = false) o: Any?) {
+  fun testClosureAssignment(
+   @ObjCName("withJavaLangAny", exact = false) o: Any?
+  ) {
    val e: IntersectionTypeTest.A? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
    val g: IntersectionTypeTest.EmptyA? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
    val s: IntersectionTypeTest.EmptyB? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
   }
 
   @JvmStatic
-  fun <T> get_private_2(@ObjCName("withId", exact = false) t: T): T {
+  fun <T> get_private_2(
+   @ObjCName("withId", exact = false) t: T
+  ): T {
    return t
   }
 
@@ -118,17 +136,23 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  fun <T> set_private_2(@ObjCName("withId", exact = false) t: T) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
+  fun <T> set_private_2(
+   @ObjCName("withId", exact = false) t: T
+  ) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
 
   @JvmStatic
-  fun <T> callOnIntersetionTypes_private_2(@ObjCName("withId", exact = false) t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
+  fun <T> callOnIntersetionTypes_private_2(
+   @ObjCName("withId", exact = false) t: T
+  ) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
    t!!.cmp()
    ((null).let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it })!!.cmp()
   }
  }
 
  open inner class MapEntry {
-  open fun <T> method(@ObjCName("withJavaLangAny", exact = false) o: Any?): Getable<T>? {
+  open fun <T> method(
+   @ObjCName("withJavaLangAny", exact = false) o: Any?
+  ): Getable<T>? {
    return (o).let { it as Getable<T>?; it as Setable?; it }
   }
  }

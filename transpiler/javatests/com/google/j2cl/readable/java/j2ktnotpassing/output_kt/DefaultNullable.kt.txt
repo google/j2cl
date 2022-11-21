@@ -23,13 +23,17 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  fun accept(@ObjCName("withJavaLangString", exact = false) s: String?) {}
+  fun accept(
+   @ObjCName("withJavaLangString", exact = false) s: String?
+  ) {}
  }
 }
 
 @ObjCName("J2ktnotpassingNotNullable", exact = true)
 open class NotNullable {
  fun interface Consumer<T> {
-  fun accept(@ObjCName("withId", exact = false) t: T)
+  fun accept(
+   @ObjCName("withId", exact = false) t: T
+  )
  }
 }

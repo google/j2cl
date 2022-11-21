@@ -12,12 +12,16 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktnotpassingExplicitNotNullable", exact = true)
 open class ExplicitNotNullable {
- open fun testDependentWildcards(@ObjCName("withId", exact = false) x: ExplicitNotNullable.DependentTypeParameters<*, *>): ExplicitNotNullable.DependentTypeParameters<*, *> {
+ open fun testDependentWildcards(
+  @ObjCName("withId", exact = false) x: ExplicitNotNullable.DependentTypeParameters<*, *>
+ ): ExplicitNotNullable.DependentTypeParameters<*, *> {
   return x!!.getThis()
  }
 
  fun interface Function<I, O> {
-  fun apply(@ObjCName("withId", exact = false) i: I): O
+  fun apply(
+   @ObjCName("withId", exact = false) i: I
+  ): O
  }
 
  open class DependentTypeParameters<E: Any, T: E?> {

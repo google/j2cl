@@ -118,7 +118,9 @@ open class Lambdas {
   return intf!!.m(e)
  }
 
- open fun <T> callWithBiFunction(@ObjCName("withId", exact = false) fn: Lambdas.BiFunction<T, String?, Double?>?): Lambdas.GenericFunctionalInterface<T>? {
+ open fun <T> callWithBiFunction(
+  @ObjCName("withId", exact = false) fn: Lambdas.BiFunction<T, String?, Double?>?
+ ): Lambdas.GenericFunctionalInterface<T>? {
   return null
  }
 
@@ -238,7 +240,9 @@ open class Lambdas {
   }
 
   @JvmStatic
-  fun <T> testIterable(@ObjCName("withId", exact = false) iterable: MutableIterable<T>?) {
+  fun <T> testIterable(
+   @ObjCName("withId", exact = false) iterable: MutableIterable<T>?
+  ) {
    val lambda: MutableIterable<T>? = JavaIterable<T> {
     return@JavaIterable iterable!!.iterator()
    }
@@ -246,15 +250,21 @@ open class Lambdas {
  }
 
  fun interface FunctionalInterface {
-  fun m(@ObjCName("withInt", exact = false) i: Int): Int
+  fun m(
+   @ObjCName("withInt", exact = false) i: Int
+  ): Int
  }
 
  fun interface Functional<T> {
-  fun wrap(@ObjCName("withId", exact = false) f: Lambdas.Functional<T>?): Lambdas.Functional<T>?
+  fun wrap(
+   @ObjCName("withId", exact = false) f: Lambdas.Functional<T>?
+  ): Lambdas.Functional<T>?
  }
 
  fun interface GenericFunctionalInterface<T> {
-  fun m(@ObjCName("withId", exact = false) i: T): T
+  fun m(
+   @ObjCName("withId", exact = false) i: T
+  ): T
  }
 
  fun interface BiFunction<T, U, R> {
@@ -263,7 +273,9 @@ open class Lambdas {
    @ObjCName("withId", exact = false) u: U
   ): R
 
-  fun <V> andThen(@ObjCName("withId", exact = false) after: Lambdas.Function<in R, out V>?): Lambdas.BiFunction<T, U, V>? {
+  fun <V> andThen(
+   @ObjCName("withId", exact = false) after: Lambdas.Function<in R, out V>?
+  ): Lambdas.BiFunction<T, U, V>? {
    return Lambdas.BiFunction<T, U, V> { t: T, u: U ->
     return@BiFunction after!!.apply(this.apply(t, u))
    }
@@ -271,7 +283,9 @@ open class Lambdas {
  }
 
  fun interface Function<T, R> {
-  fun apply(@ObjCName("withId", exact = false) t: T): R
+  fun apply(
+   @ObjCName("withId", exact = false) t: T
+  ): R
 
   companion object {
    @JvmStatic
@@ -308,7 +322,9 @@ open class Lambdas {
  }
 
  fun interface GenericJsFunction<R, T> {
-  fun apply(@ObjCName("withId", exact = false) t: T): R
+  fun apply(
+   @ObjCName("withId", exact = false) t: T
+  ): R
  }
 
  fun interface Thenable<T> {
@@ -342,11 +358,15 @@ open class Lambdas {
  }
 
  interface JustADefaultT<T> {
-  fun method(@ObjCName("withId", exact = false) t: T) {}
+  fun method(
+   @ObjCName("withId", exact = false) t: T
+  ) {}
  }
 
  interface JustADefaultS<S> {
-  fun method(@ObjCName("withId", exact = false) t: S) {}
+  fun method(
+   @ObjCName("withId", exact = false) t: S
+  ) {}
  }
 
  interface MarkerWithDefaultMethod {

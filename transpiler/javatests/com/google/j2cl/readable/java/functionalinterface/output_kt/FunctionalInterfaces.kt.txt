@@ -14,11 +14,15 @@ import kotlin.native.ObjCName
 @ObjCName("FunctionalinterfaceFunctionalInterfaces", exact = true)
 open class FunctionalInterfaces {
  fun interface NonParametrized {
-  fun apply(@ObjCName("withJavaLangString", exact = false) string: String?): String?
+  fun apply(
+   @ObjCName("withJavaLangString", exact = false) string: String?
+  ): String?
  }
 
  fun interface Parametrized<T> {
-  fun apply(@ObjCName("withId", exact = false) t: T): T
+  fun apply(
+   @ObjCName("withId", exact = false) t: T
+  ): T
  }
 
  fun interface Specialized: FunctionalInterfaces.Parametrized<String?> {
@@ -26,19 +30,27 @@ open class FunctionalInterfaces {
  }
 
  fun interface WithDefaultMethod {
-  fun apply(@ObjCName("withJavaLangString", exact = false) string: String?): String?
+  fun apply(
+   @ObjCName("withJavaLangString", exact = false) string: String?
+  ): String?
 
-  fun defaultApply(@ObjCName("withJavaLangString", exact = false) string: String?): String? {
+  fun defaultApply(
+   @ObjCName("withJavaLangString", exact = false) string: String?
+  ): String? {
    return this.apply(string)
   }
  }
 
  fun interface WithObjectMethods {
-  fun apply(@ObjCName("withJavaLangString", exact = false) string: String?): String?
+  fun apply(
+   @ObjCName("withJavaLangString", exact = false) string: String?
+  ): String?
  }
 
  interface WithParametrizedMethod {
-  fun <T> apply(@ObjCName("withId", exact = false) t: T): T
+  fun <T> apply(
+   @ObjCName("withId", exact = false) t: T
+  ): T
  }
 
  interface WithKtProperty {

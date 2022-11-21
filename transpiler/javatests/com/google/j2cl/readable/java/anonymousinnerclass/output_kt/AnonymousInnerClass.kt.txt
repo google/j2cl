@@ -19,7 +19,9 @@ open class A {
 
 @ObjCName("AnonymousinnerclassAnonymousInnerClass", exact = true)
 open class AnonymousInnerClass {
- open fun test(@ObjCName("withInt", exact = false) arg: Int) {
+ open fun test(
+  @ObjCName("withInt", exact = false) arg: Int
+ ) {
   val ic: AnonymousInnerClass.InnerClass? = object : InnerClass() {}
   val a: A? = A()
   val b: A.B? = object : B() {}
