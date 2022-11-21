@@ -21,7 +21,11 @@ open class LocalClassWithOuterGenerics<A> {
    }
    val bar: ___1Bar? = ___1Bar()
    open class ___1Baz<S> {
-    open fun qux(@ObjCName("withId", exact = false) foo: ___1Baz<S>?, @ObjCName("withId", exact = false) bar: ___1Baz<T>?, @ObjCName("withId", exact = false) baz: ___1Baz<String?>?) {}
+    open fun qux(
+     @ObjCName("withId", exact = false) foo: ___1Baz<S>?,
+     @ObjCName("withId", exact = false) bar: ___1Baz<T>?,
+     @ObjCName("withId", exact = false) baz: ___1Baz<String?>?
+    ) {}
    }
    val baz: ___1Baz<Any?>? = ___1Baz<Any?>()
   }

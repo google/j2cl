@@ -93,7 +93,10 @@ open class Main {
  }
 
  open class K<K1, K2> {
-  open fun `fun`(@ObjCName("withId", exact = false) k1: K1, @ObjCName("withId", exact = false) k2: K2) {}
+  open fun `fun`(
+   @ObjCName("withId", exact = false) k1: K1,
+   @ObjCName("withId", exact = false) k2: K2
+  ) {}
  }
 
  open class L<L1>: Main.K<String?, L1>() {

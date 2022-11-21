@@ -102,7 +102,11 @@ open class AssignmentsInConstructor {
 
  @JvmField var finalFieldReference: String? = null
 
- constructor(@ObjCName("withJavaLangAny", exact = false) parameter: Any?, @ObjCName("withInt", exact = false) intParameter: Int, @ObjCName("withWasmimmutablefieldsAssignmentsInConstructor", exact = false) par: AssignmentsInConstructor?) {
+ constructor(
+  @ObjCName("withJavaLangAny", exact = false) parameter: Any?,
+  @ObjCName("withInt", exact = false) intParameter: Int,
+  @ObjCName("withWasmimmutablefieldsAssignmentsInConstructor", exact = false) par: AssignmentsInConstructor?
+ ) {
   this.compileTimeConstant = 12
   this.stringLiteral = "Hello World"
   this.newArray = arrayOfNulls<Any>(intParameter)

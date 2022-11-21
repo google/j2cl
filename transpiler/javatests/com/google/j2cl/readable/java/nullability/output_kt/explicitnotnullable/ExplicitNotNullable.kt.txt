@@ -83,11 +83,17 @@ open class ExplicitNotNullable {
   this.f13_private_2 = Any()
  }
 
- open fun m1(@ObjCName("withJavaLangString", exact = false) a: String, @ObjCName("withId", exact = false) b: MutableList<Double>): String {
+ open fun m1(
+  @ObjCName("withJavaLangString", exact = false) a: String,
+  @ObjCName("withId", exact = false) b: MutableList<Double>
+ ): String {
   return ""
  }
 
- open fun m2(@ObjCName("withJavaLangString", exact = false) a: String?, @ObjCName("withId", exact = false) b: MutableList<Double?>): String? {
+ open fun m2(
+  @ObjCName("withJavaLangString", exact = false) a: String?,
+  @ObjCName("withId", exact = false) b: MutableList<Double?>
+ ): String? {
   return null
  }
 
@@ -113,7 +119,10 @@ open class ExplicitNotNullable {
 
  @JvmField var nonNullableCollection: ExplicitNotNullable.Consumer<*>? = null
 
- open fun unboundedWildCard(@ObjCName("withId", exact = false) c: ExplicitNotNullable.Consumer<*>, @ObjCName("withId", exact = false) nc: ExplicitNotNullable.Consumer<*>) {
+ open fun unboundedWildCard(
+  @ObjCName("withId", exact = false) c: ExplicitNotNullable.Consumer<*>,
+  @ObjCName("withId", exact = false) nc: ExplicitNotNullable.Consumer<*>
+ ) {
   this.collection = c
   this.nonNullableCollection = nc
  }
@@ -130,7 +139,10 @@ open class ExplicitNotNullable {
 
  companion object {
   @JvmStatic
-  fun <N> genericNullableMethod(@ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedNullable<N>, @ObjCName("withId", exact = false) n: N?) {
+  fun <N> genericNullableMethod(
+   @ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedNullable<N>,
+   @ObjCName("withId", exact = false) n: N?
+  ) {
    o!!.setNullable(n)
    o!!.setNonNull(n as N)
    o!!.setDefaultNullability(n as N)
@@ -146,7 +158,10 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
-  fun <N: Any> genericNonNullMethod(@ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedNonNullable<N>, @ObjCName("withId", exact = false) n: N) {
+  fun <N: Any> genericNonNullMethod(
+   @ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedNonNullable<N>,
+   @ObjCName("withId", exact = false) n: N
+  ) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
@@ -162,7 +177,10 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
-  fun <N: Any> genericDefaultNullabilityMethod(@ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedDefaultNullability<N>, @ObjCName("withId", exact = false) n: N) {
+  fun <N: Any> genericDefaultNullabilityMethod(
+   @ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedDefaultNullability<N>,
+   @ObjCName("withId", exact = false) n: N
+  ) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
@@ -178,7 +196,10 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedNullableMethod(@ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedNullable<String?>, @ObjCName("withJavaLangString", exact = false) s: String?) {
+  fun parametrizedNullableMethod(
+   @ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedNullable<String?>,
+   @ObjCName("withJavaLangString", exact = false) s: String?
+  ) {
    o!!.setNullable(s)
    o!!.setNonNull(s!!)
    o!!.setDefaultNullability(s)
@@ -194,7 +215,10 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedNonNullMethod(@ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedNonNullable<String>, @ObjCName("withJavaLangString", exact = false) s: String) {
+  fun parametrizedNonNullMethod(
+   @ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedNonNullable<String>,
+   @ObjCName("withJavaLangString", exact = false) s: String
+  ) {
    o!!.setNullable(s)
    o!!.setNonNull(s)
    o!!.setDefaultNullability(s)
@@ -210,7 +234,10 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedDefaultNullabilityMethod(@ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedDefaultNullability<String>, @ObjCName("withJavaLangString", exact = false) s: String) {
+  fun parametrizedDefaultNullabilityMethod(
+   @ObjCName("withId", exact = false) o: ExplicitNotNullable.ParameterizedDefaultNullability<String>,
+   @ObjCName("withJavaLangString", exact = false) s: String
+  ) {
    o!!.setNullable(s)
    o!!.setNonNull(s)
    o!!.setDefaultNullability(s)
@@ -314,7 +341,10 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
-  fun testParametrizedMethod(@ObjCName("withId", exact = false) f: ExplicitNotNullable.Function<in String, out String>, @ObjCName("withJavaLangString", exact = false) string: String): String {
+  fun testParametrizedMethod(
+   @ObjCName("withId", exact = false) f: ExplicitNotNullable.Function<in String, out String>,
+   @ObjCName("withJavaLangString", exact = false) string: String
+  ): String {
    val localString: String? = string
    return f!!.apply(localString as String)
   }

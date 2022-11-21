@@ -20,7 +20,10 @@ import kotlin.native.ObjCName
 
 @ObjCName("GenericmethodGenericMethod", exact = true)
 open class GenericMethod<T> {
- open fun <T_1, S> foo(@ObjCName("withId", exact = false) f: T_1, @ObjCName("withId", exact = false) s: S) {}
+ open fun <T_1, S> foo(
+  @ObjCName("withId", exact = false) f: T_1,
+  @ObjCName("withId", exact = false) s: S
+ ) {}
 
  open fun `fun`(@ObjCName("withJavaLangAny", exact = false) o: Any?) {}
 
@@ -110,7 +113,10 @@ open class GenericMethod<T> {
   }
 
   @JvmStatic
-  fun <V> testLowerWildcardBound(@ObjCName("withId", exact = false) consumer: GenericMethod.Consumer<in V>?, @ObjCName("withId", exact = false) v: V) {
+  fun <V> testLowerWildcardBound(
+   @ObjCName("withId", exact = false) consumer: GenericMethod.Consumer<in V>?,
+   @ObjCName("withId", exact = false) v: V
+  ) {
    consumer!!.accept(v)
   }
 

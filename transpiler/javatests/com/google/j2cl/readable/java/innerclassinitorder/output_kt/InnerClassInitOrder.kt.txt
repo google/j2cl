@@ -247,7 +247,10 @@ open class InnerClassInitOrder {
  open class ESInnerSubclass: InnerClassInitOrder.ESOuter.ESInner {
   constructor(@ObjCName("withInnerclassinitorderESOuter", exact = false) outer: InnerClassInitOrder.ESOuter?): super()
 
-  constructor(@ObjCName("withInt", exact = false) value: Int, @ObjCName("withInnerclassinitorderESOuter", exact = false) outer: InnerClassInitOrder.ESOuter?): super(value)
+  constructor(
+   @ObjCName("withInt", exact = false) value: Int,
+   @ObjCName("withInnerclassinitorderESOuter", exact = false) outer: InnerClassInitOrder.ESOuter?
+  ): super(value)
  }
 
  open class ESWGOuter<T> {
@@ -271,7 +274,10 @@ open class InnerClassInitOrder {
  open class ESWGInnerSubclass: InnerClassInitOrder.ESWGOuter<String?>.ESWGInner {
   constructor(@ObjCName("withId", exact = false) outer: InnerClassInitOrder.ESWGOuter<String?>?): super()
 
-  constructor(@ObjCName("withInt", exact = false) value: Int, @ObjCName("withId", exact = false) outer: InnerClassInitOrder.ESWGOuter<String?>?): super(value)
+  constructor(
+   @ObjCName("withInt", exact = false) value: Int,
+   @ObjCName("withId", exact = false) outer: InnerClassInitOrder.ESWGOuter<String?>?
+  ): super(value)
  }
 
  open class Outer {

@@ -38,7 +38,10 @@ abstract class KtPropertyNameConflict {
 
  companion object {
   @JvmStatic
-  fun test(@ObjCName("withNativekttypesKtPropertyNameConflict", exact = false) o: KtPropertyNameConflict?, @ObjCName("withNativekttypesInterface", exact = false) i: KtPropertyNameConflict.Interface?) {
+  fun test(
+   @ObjCName("withNativekttypesKtPropertyNameConflict", exact = false) o: KtPropertyNameConflict?,
+   @ObjCName("withNativekttypesInterface", exact = false) i: KtPropertyNameConflict.Interface?
+  ) {
    val fieldWithConflictingGetter: Int = o!!.fieldWithConflictingGetter_ktPropertyConflict
    val conflictingGetter: Int = o!!.fieldWithConflictingGetter
    val fieldWithConflictingNonGetter: Int = o!!.fieldWithConflictingNonGetter_ktPropertyConflict

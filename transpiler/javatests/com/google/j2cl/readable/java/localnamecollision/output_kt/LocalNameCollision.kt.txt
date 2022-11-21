@@ -35,11 +35,23 @@ open class LocalNameCollision {
   assert(localnamecollision.Asserts().n() == 5)
  }
 
- open fun testClassParameterCollision(@ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean, @ObjCName("withJavaLangAny", exact = false) Asserts: Any?, @ObjCName("withJavaLangAny", exact = false) ___Asserts: Any?, @ObjCName("withInt", exact = false) l_Asserts: Int, @ObjCName("withInt", exact = false) A: Int): Boolean {
+ open fun testClassParameterCollision(
+  @ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean,
+  @ObjCName("withJavaLangAny", exact = false) Asserts: Any?,
+  @ObjCName("withJavaLangAny", exact = false) ___Asserts: Any?,
+  @ObjCName("withInt", exact = false) l_Asserts: Int,
+  @ObjCName("withInt", exact = false) A: Int
+ ): Boolean {
   return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 
- constructor(@ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean, @ObjCName("withJavaLangAny", exact = false) Asserts: Any?, @ObjCName("withJavaLangAny", exact = false) ___Asserts: Any?, @ObjCName("withInt", exact = false) l_Asserts: Int, @ObjCName("withInt", exact = false) A: Int) {
+ constructor(
+  @ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean,
+  @ObjCName("withJavaLangAny", exact = false) Asserts: Any?,
+  @ObjCName("withJavaLangAny", exact = false) ___Asserts: Any?,
+  @ObjCName("withInt", exact = false) l_Asserts: Int,
+  @ObjCName("withInt", exact = false) A: Int
+ ) {
   val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 }

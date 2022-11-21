@@ -29,7 +29,10 @@ import lambdas.Lambdas
 open class Lambdas {
  @JvmField var field: Int = 100
 
- open fun call(@ObjCName("withLambdasFunctionalInterface", exact = false) intf: Lambdas.FunctionalInterface?, @ObjCName("withInt", exact = false) n: Int): Int {
+ open fun call(
+  @ObjCName("withLambdasFunctionalInterface", exact = false) intf: Lambdas.FunctionalInterface?,
+  @ObjCName("withInt", exact = false) n: Int
+ ): Int {
   return this.field + intf!!.m(n)
  }
 
@@ -101,11 +104,17 @@ open class Lambdas {
   }
  }
 
- open fun <T> callWithTypeVariable(@ObjCName("withId", exact = false) intf: Lambdas.GenericFunctionalInterface<T>?, @ObjCName("withId", exact = false) e: T): T {
+ open fun <T> callWithTypeVariable(
+  @ObjCName("withId", exact = false) intf: Lambdas.GenericFunctionalInterface<T>?,
+  @ObjCName("withId", exact = false) e: T
+ ): T {
   return intf!!.m(e)
  }
 
- open fun callParameterized(@ObjCName("withId", exact = false) intf: Lambdas.GenericFunctionalInterface<Error?>?, @ObjCName("withJavaLangError", exact = false) e: Error?): Error? {
+ open fun callParameterized(
+  @ObjCName("withId", exact = false) intf: Lambdas.GenericFunctionalInterface<Error?>?,
+  @ObjCName("withJavaLangError", exact = false) e: Error?
+ ): Error? {
   return intf!!.m(e)
  }
 
@@ -169,7 +178,10 @@ open class Lambdas {
   }
 
   @JvmStatic
-  fun <T: Enum<T>> callTypeVariableWithBounds(@ObjCName("withId", exact = false) intf: Lambdas.GenericFunctionalInterface<Enum<T>?>?, @ObjCName("withId", exact = false) e: Enum<T>?): Enum<T>? {
+  fun <T: Enum<T>> callTypeVariableWithBounds(
+   @ObjCName("withId", exact = false) intf: Lambdas.GenericFunctionalInterface<Enum<T>?>?,
+   @ObjCName("withId", exact = false) e: Enum<T>?
+  ): Enum<T>? {
    return intf!!.m(e)
   }
 
@@ -246,7 +258,10 @@ open class Lambdas {
  }
 
  fun interface BiFunction<T, U, R> {
-  fun apply(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) u: U): R
+  fun apply(
+   @ObjCName("withId", exact = false) t: T,
+   @ObjCName("withId", exact = false) u: U
+  ): R
 
   fun <V> andThen(@ObjCName("withId", exact = false) after: Lambdas.Function<in R, out V>?): Lambdas.BiFunction<T, U, V>? {
    return Lambdas.BiFunction<T, U, V> { t: T, u: U ->
@@ -297,11 +312,17 @@ open class Lambdas {
  }
 
  fun interface Thenable<T> {
-  fun then(@ObjCName("withId", exact = false) f1: Lambdas.GenericJsFunction<Unit?, T>?, @ObjCName("withId", exact = false) f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?)
+  fun then(
+   @ObjCName("withId", exact = false) f1: Lambdas.GenericJsFunction<Unit?, T>?,
+   @ObjCName("withId", exact = false) f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?
+  )
  }
 
  fun interface AnotherThenable<T> {
-  fun then(@ObjCName("withId", exact = false) f1: Lambdas.GenericJsFunction<Unit?, T>?, @ObjCName("withId", exact = false) f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?)
+  fun then(
+   @ObjCName("withId", exact = false) f1: Lambdas.GenericJsFunction<Unit?, T>?,
+   @ObjCName("withId", exact = false) f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?
+  )
  }
 
  class IdentityFunction: Lambdas.GenericJsFunction<Any?, Any?> {

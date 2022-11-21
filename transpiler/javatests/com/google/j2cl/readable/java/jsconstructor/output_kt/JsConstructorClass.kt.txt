@@ -36,7 +36,10 @@ open class JsConstructorClass {
    this.fB = 4
   }
 
-  constructor(@ObjCName("withInt", exact = false) x: Int, @ObjCName("withInt", exact = false) y: Int): this(x + y) {
+  constructor(
+   @ObjCName("withInt", exact = false) x: Int,
+   @ObjCName("withInt", exact = false) y: Int
+  ): this(x + y) {
    this.fB = x * y
   }
  }
@@ -48,7 +51,10 @@ open class JsConstructorClass {
    this.fC = 6
   }
 
-  constructor(@ObjCName("withInt", exact = false) x: Int, @ObjCName("withInt", exact = false) y: Int): this(x + y) {
+  constructor(
+   @ObjCName("withInt", exact = false) x: Int,
+   @ObjCName("withInt", exact = false) y: Int
+  ): this(x + y) {
    this.fC = 7
   }
  }
@@ -92,7 +98,10 @@ open class JsConstructorClass {
  }
 
  open class SubVarargs: JsConstructorClass.Varargs {
-  constructor(@ObjCName("withJavaLangAny", exact = false) i: Any?, vararg @ObjCName("withIntArray", exact = false) args: Int): super(*(args)!!)
+  constructor(
+   @ObjCName("withJavaLangAny", exact = false) i: Any?,
+   vararg @ObjCName("withIntArray", exact = false) args: Int
+  ): super(*(args)!!)
 
   constructor(@ObjCName("withInt", exact = false) j: Int): this(Any(), j)
 

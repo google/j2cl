@@ -39,7 +39,10 @@ open class SomeJsType<T> {
   this.protectedMethod()
  }
 
- open fun testStarAndWildCard(@ObjCName("withJstypeStar", exact = false) s: SomeJsType.Star?, @ObjCName("withJstypeWildcard", exact = false) w: SomeJsType.Wildcard?): SomeJsType.Wildcard? {
+ open fun testStarAndWildCard(
+  @ObjCName("withJstypeStar", exact = false) s: SomeJsType.Star?,
+  @ObjCName("withJstypeWildcard", exact = false) w: SomeJsType.Wildcard?
+ ): SomeJsType.Wildcard? {
   val `object`: Any? = Any()
   val star: SomeJsType.Star? = Double.valueOf(3.0) as SomeJsType.Star?
   return star as SomeJsType.Wildcard?

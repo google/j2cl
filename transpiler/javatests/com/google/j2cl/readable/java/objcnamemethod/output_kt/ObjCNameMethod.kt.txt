@@ -22,9 +22,15 @@ open class ObjCNameMethod {
 
  open fun instanceMethod(@ObjCName("withInt", exact = false) i: Int) {}
 
- open fun instanceMethod(@ObjCName("withInt", exact = false) i: Int, @ObjCName("withLongArray", exact = false) l: LongArray?) {}
+ open fun instanceMethod(
+  @ObjCName("withInt", exact = false) i: Int,
+  @ObjCName("withLongArray", exact = false) l: LongArray?
+ ) {}
 
- open fun instanceMethod(@ObjCName("withInt", exact = false) i: Int, @ObjCName("withLongArray2", exact = false) l: Array<LongArray?>?) {}
+ open fun instanceMethod(
+  @ObjCName("withInt", exact = false) i: Int,
+  @ObjCName("withLongArray2", exact = false) l: Array<LongArray?>?
+ ) {}
 
  open fun instanceMethod(@ObjCName("withObjcnamemethodFoo", exact = false) foo: Foo?) {}
 

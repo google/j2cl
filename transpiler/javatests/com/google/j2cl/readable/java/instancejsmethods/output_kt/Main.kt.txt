@@ -21,11 +21,17 @@ fun interface MyInterface {
 
 @ObjCName("InstancejsmethodsSuperParent", exact = true)
 open class SuperParent {
- open fun `fun`(@ObjCName("withInt", exact = false) a: Int, @ObjCName("withInt", exact = false) b: Int): Int {
+ open fun `fun`(
+  @ObjCName("withInt", exact = false) a: Int,
+  @ObjCName("withInt", exact = false) b: Int
+ ): Int {
   return a + b + 111
  }
 
- open fun bar(@ObjCName("withInt", exact = false) a: Int, @ObjCName("withInt", exact = false) b: Int): Int {
+ open fun bar(
+  @ObjCName("withInt", exact = false) a: Int,
+  @ObjCName("withInt", exact = false) b: Int
+ ): Int {
   return a * b + 222
  }
 }

@@ -15,11 +15,18 @@ open class SuperParent {
   return a - 1
  }
 
- open fun `fun`(@ObjCName("withInt", exact = false) a: Int, @ObjCName("withInt", exact = false) b: Int): Int {
+ open fun `fun`(
+  @ObjCName("withInt", exact = false) a: Int,
+  @ObjCName("withInt", exact = false) b: Int
+ ): Int {
   return a + b
  }
 
- open fun bar(@ObjCName("withInt", exact = false) a: Int, @ObjCName("withInt", exact = false) b: Int, @ObjCName("withInt", exact = false) c: Int): Int {
+ open fun bar(
+  @ObjCName("withInt", exact = false) a: Int,
+  @ObjCName("withInt", exact = false) b: Int,
+  @ObjCName("withInt", exact = false) c: Int
+ ): Int {
   return a + b + c
  }
 }

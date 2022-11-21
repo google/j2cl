@@ -62,6 +62,16 @@ data class Renderer(
     sourceBuilder.closeBrace()
   }
 
+  fun renderIndented(renderFn: () -> Unit) {
+    sourceBuilder.indent()
+    renderFn()
+    sourceBuilder.unindent()
+  }
+
+  fun renderIndentedIf(condition: Boolean, renderFn: () -> Unit) {
+    if (condition) renderIndented(renderFn) else renderFn()
+  }
+
   fun renderInParentheses(renderFn: () -> Unit) {
     render("(")
     renderFn()

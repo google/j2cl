@@ -29,14 +29,23 @@ import kotlin.native.ObjCName
 
 @ObjCName("BridgemethodsSomeInterface", exact = true)
 interface SomeInterface<T, S> {
- fun foo(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) s: S)
+ fun foo(
+  @ObjCName("withId", exact = false) t: T,
+  @ObjCName("withId", exact = false) s: S
+ )
 
- fun foo(@ObjCName("withId", exact = false) t: T, @ObjCName("withJavaLangNumber", exact = false) n: Number?)
+ fun foo(
+  @ObjCName("withId", exact = false) t: T,
+  @ObjCName("withJavaLangNumber", exact = false) n: Number?
+ )
 }
 
 @ObjCName("BridgemethodsSuperParent", exact = true)
 open class SuperParent<T, S> {
- open fun foo(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) s: S) {}
+ open fun foo(
+  @ObjCName("withId", exact = false) t: T,
+  @ObjCName("withId", exact = false) s: S
+ ) {}
 }
 
 @ObjCName("BridgemethodsParent", exact = true)
@@ -59,7 +68,10 @@ open class BridgeMethod: SomeInterface<AssertionError?, Number?>, Parent<Asserti
 
 @ObjCName("BridgemethodsSomeOtherFooInterface", exact = true)
 fun interface SomeOtherFooInterface<T> {
- fun foo(@ObjCName("withId", exact = false) t: T, @ObjCName("withJavaLangDouble", exact = false) s: Double?)
+ fun foo(
+  @ObjCName("withId", exact = false) t: T,
+  @ObjCName("withJavaLangDouble", exact = false) s: Double?
+ )
 }
 
 @ObjCName("BridgemethodsDualUnrelatedBridges", exact = true)
@@ -71,9 +83,15 @@ open class DualUnrelatedBridges: SomeInterface<String?, Double?>, SomeOtherFooIn
 
 @ObjCName("BridgemethodsSuperDualUnrelatedAccidentalBridges", exact = true)
 open class SuperDualUnrelatedAccidentalBridges {
- open fun foo(@ObjCName("withJavaLangString", exact = false) s: String?, @ObjCName("withJavaLangDouble", exact = false) n: Double?) {}
+ open fun foo(
+  @ObjCName("withJavaLangString", exact = false) s: String?,
+  @ObjCName("withJavaLangDouble", exact = false) n: Double?
+ ) {}
 
- open fun foo(@ObjCName("withJavaLangString", exact = false) s: String?, @ObjCName("withJavaLangNumber", exact = false) n: Number?) {}
+ open fun foo(
+  @ObjCName("withJavaLangString", exact = false) s: String?,
+  @ObjCName("withJavaLangNumber", exact = false) n: Number?
+ ) {}
 }
 
 @ObjCName("BridgemethodsDualUnrelatedAccidentalBridges", exact = true)

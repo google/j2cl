@@ -26,7 +26,10 @@ open class Main {
   this.field = f
  }
 
- open fun f3(@ObjCName("withInt", exact = false) m: Int, vararg @ObjCName("withIntArray", exact = false) numbers: Int): Int {
+ open fun f3(
+  @ObjCName("withInt", exact = false) m: Int,
+  vararg @ObjCName("withIntArray", exact = false) numbers: Int
+ ): Int {
   return this.field + m + numbers!![1]
  }
 
@@ -124,7 +127,10 @@ open class Main {
 
  companion object {
   @JvmStatic
-  fun f1(@ObjCName("withInt", exact = false) multiplier: Int, vararg @ObjCName("withIntArray", exact = false) numbers: Int): Int {
+  fun f1(
+   @ObjCName("withInt", exact = false) multiplier: Int,
+   vararg @ObjCName("withIntArray", exact = false) numbers: Int
+  ): Int {
    return numbers!!.size + numbers!![0] + multiplier
   }
 
@@ -159,13 +165,19 @@ open class Main {
  }
 
  open class SubVarargsConstructorClass: Main.NativeObject {
-  constructor(@ObjCName("withInt", exact = false) i: Int, vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?): super(*(args as Array<Any?>?)!!) {
+  constructor(
+   @ObjCName("withInt", exact = false) i: Int,
+   vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+  ): super(*(args as Array<Any?>?)!!) {
    val args_1: Array<Any?>? = args as Array<Any?>?
   }
  }
 
  fun interface Function {
-  fun f1(@ObjCName("withInt", exact = false) i: Int, vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?): Any?
+  fun f1(
+   @ObjCName("withInt", exact = false) i: Int,
+   vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+  ): Any?
  }
 
  abstract class AbstractMethodWithVarargs {
@@ -201,6 +213,9 @@ open class Main {
  }
 
  fun interface GenericFunction<T> {
-  fun m(@ObjCName("withId", exact = false) i: T, vararg @ObjCName("withIdArray", exact = false) args: T): Any?
+  fun m(
+   @ObjCName("withId", exact = false) i: T,
+   vararg @ObjCName("withIdArray", exact = false) args: T
+  ): Any?
  }
 }

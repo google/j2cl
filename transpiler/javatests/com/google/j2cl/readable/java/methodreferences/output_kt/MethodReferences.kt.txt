@@ -143,7 +143,10 @@ open class MethodReferences<T> {
  }
 
  fun interface BiFunction<T, U, V> {
-  fun apply(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) u: U): V
+  fun apply(
+   @ObjCName("withId", exact = false) t: T,
+   @ObjCName("withId", exact = false) u: U
+  ): V
  }
 
  fun interface JsProducer<T> {
@@ -155,6 +158,9 @@ open class MethodReferences<T> {
  }
 
  fun interface JsBiFunction<T, U, V> {
-  fun apply(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) u: U): V
+  fun apply(
+   @ObjCName("withId", exact = false) t: T,
+   @ObjCName("withId", exact = false) u: U
+  ): V
  }
 }

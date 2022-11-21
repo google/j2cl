@@ -186,28 +186,34 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor) {
 private fun Renderer.renderMethodParameters(method: Method) {
   val parameterDescriptors = method.descriptor.parameterDescriptors
   val parameters = method.parameters
+  val renderObjCNameAnnotation = !method.descriptor.isJavaOverride
+  val renderWithNewLines = renderObjCNameAnnotation && parameters.size > 1
   renderInParentheses {
-    renderCommaSeparated(0 until parameters.size) { index ->
-      renderParameter(
-        parameterDescriptors[index],
-        parameters[index],
-        method.descriptor.isJavaOverride
-      )
+    renderIndentedIf(renderWithNewLines) {
+      renderCommaSeparated(0 until parameters.size) { index ->
+        if (renderWithNewLines) renderNewLine()
+        renderParameter(
+          parameterDescriptors[index],
+          parameters[index],
+          renderObjCNameAnnotation = renderObjCNameAnnotation
+        )
+      }
     }
+    if (renderWithNewLines) renderNewLine()
   }
 }
 
 private fun Renderer.renderParameter(
   parameterDescriptor: ParameterDescriptor,
   name: HasName,
-  isOverride: Boolean
+  renderObjCNameAnnotation: Boolean = false
 ) {
   val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
   val renderedTypeDescriptor =
     if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
     else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (parameterDescriptor.isVarargs) render("vararg ")
-  if (!isOverride) renderObjCNameAnnotation(parameterDescriptor)
+  if (renderObjCNameAnnotation) renderObjCNameAnnotation(parameterDescriptor)
   renderName(name)
   render(": ")
   renderTypeDescriptor(renderedTypeDescriptor)

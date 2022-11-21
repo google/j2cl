@@ -13,7 +13,10 @@ import kotlin.native.ObjCName
 
 @ObjCName("BridgemethodsMap", exact = true)
 fun interface Map<K, V> {
- fun put(@ObjCName("withId", exact = false) key: K, @ObjCName("withId", exact = false) value: V): V
+ fun put(
+  @ObjCName("withId", exact = false) key: K,
+  @ObjCName("withId", exact = false) value: V
+ ): V
 }
 
 @ObjCName("BridgemethodsAbstractMap", exact = true)

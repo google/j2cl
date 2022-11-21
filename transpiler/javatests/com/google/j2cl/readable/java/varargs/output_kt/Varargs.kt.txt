@@ -25,7 +25,10 @@ open class Varargs {
 
  constructor(): this(1)
 
- open fun test(@ObjCName("withInt", exact = false) a: Int, vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?) {
+ open fun test(
+  @ObjCName("withInt", exact = false) a: Int,
+  vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+ ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
  }
 
@@ -66,7 +69,10 @@ open class Varargs {
   }
 
   @JvmStatic
-  fun <E> bar(@ObjCName("withId", exact = false) a: E, @ObjCName("withId", exact = false) b: E) {
+  fun <E> bar(
+   @ObjCName("withId", exact = false) a: E,
+   @ObjCName("withId", exact = false) b: E
+  ) {
    Varargs.`fun`<E>(a, b)
   }
  }

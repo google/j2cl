@@ -68,7 +68,12 @@ open class SwitchStatement {
   } while (false)
  }
 
- fun testCaseExpressionTypes_private_2(@ObjCName("withChar", exact = false) ch: Char, @ObjCName("withInt", exact = false) i: Int, @ObjCName("withByte", exact = false) b: Byte, @ObjCName("withShort", exact = false) s: Short) {
+ fun testCaseExpressionTypes_private_2(
+  @ObjCName("withChar", exact = false) ch: Char,
+  @ObjCName("withInt", exact = false) i: Int,
+  @ObjCName("withByte", exact = false) b: Byte,
+  @ObjCName("withShort", exact = false) s: Short
+ ) {
   SWITCH@ do {
    when (ch) {
     'a' -> {

@@ -108,12 +108,18 @@ open class TypeWildCards {
   }
 
   @JvmStatic
-  fun <F, V> transform_private_2(@ObjCName("withId", exact = false) from: List<F>?, @ObjCName("withId", exact = false) function: Function<in F, out V>?): List<V>? {
+  fun <F, V> transform_private_2(
+   @ObjCName("withId", exact = false) from: List<F>?,
+   @ObjCName("withId", exact = false) function: Function<in F, out V>?
+  ): List<V>? {
    return null
   }
 
   @JvmStatic
-  fun <E> concat_private_2(@ObjCName("withId", exact = false) a: List<out E>?, @ObjCName("withId", exact = false) b: List<out E>?): List<E>? {
+  fun <E> concat_private_2(
+   @ObjCName("withId", exact = false) a: List<out E>?,
+   @ObjCName("withId", exact = false) b: List<out E>?
+  ): List<E>? {
    return null
   }
 

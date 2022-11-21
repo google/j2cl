@@ -40,7 +40,10 @@ open class Number {
  }
 
  fun interface NativeFunction<T> {
-  fun apply(@ObjCName("withJavaLangAny", exact = false) thisContext: Any?, @ObjCName("withIntArray", exact = false) argsArray: IntArray?): T
+  fun apply(
+   @ObjCName("withJavaLangAny", exact = false) thisContext: Any?,
+   @ObjCName("withIntArray", exact = false) argsArray: IntArray?
+  ): T
  }
 
  interface MyLiteralType {}

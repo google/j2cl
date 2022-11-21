@@ -19,28 +19,47 @@ import parameterassignments.Main
 
 @ObjCName("ParameterassignmentsMain", exact = true)
 open class Main {
- constructor(@ObjCName("withInt", exact = false) nonFinal: Int, @ObjCName("withInt", exact = false) explicitFinal: Int, @ObjCName("withInt", exact = false) implicitFinal: Int): this(nonFinal, explicitFinal, implicitFinal, true) {
+ constructor(
+  @ObjCName("withInt", exact = false) nonFinal: Int,
+  @ObjCName("withInt", exact = false) explicitFinal: Int,
+  @ObjCName("withInt", exact = false) implicitFinal: Int
+ ): this(nonFinal, explicitFinal, implicitFinal, true) {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
- constructor(@ObjCName("withInt", exact = false) nonFinal: Int, @ObjCName("withInt", exact = false) explicitFinal: Int, @ObjCName("withInt", exact = false) implicitFinal: Int, @ObjCName("withBoolean", exact = false) flag: Boolean) {
+ constructor(
+  @ObjCName("withInt", exact = false) nonFinal: Int,
+  @ObjCName("withInt", exact = false) explicitFinal: Int,
+  @ObjCName("withInt", exact = false) implicitFinal: Int,
+  @ObjCName("withBoolean", exact = false) flag: Boolean
+ ) {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
- open fun test(@ObjCName("withInt", exact = false) nonFinal: Int, @ObjCName("withInt", exact = false) explicitFinal: Int, @ObjCName("withInt", exact = false) implicitFinal: Int): Int {
+ open fun test(
+  @ObjCName("withInt", exact = false) nonFinal: Int,
+  @ObjCName("withInt", exact = false) explicitFinal: Int,
+  @ObjCName("withInt", exact = false) implicitFinal: Int
+ ): Int {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   return nonFinal_1
  }
 
- open fun testObjectVarargs(@ObjCName("withJavaLangAny", exact = false) o: Any?, vararg @ObjCName("withJavaLangAnyArray", exact = false) oa: Any?) {
+ open fun testObjectVarargs(
+  @ObjCName("withJavaLangAny", exact = false) o: Any?,
+  vararg @ObjCName("withJavaLangAnyArray", exact = false) oa: Any?
+ ) {
   var oa_1: Array<Any?>? = oa as Array<Any?>?
   oa_1 = (arrayOf<Any?>(o, oa_1!![0]) as Array<*>?) as Array<Any?>?
  }
 
- open fun testPrimitiveVarargs(@ObjCName("withInt", exact = false) i: Int, vararg @ObjCName("withIntArray", exact = false) ia: Int) {
+ open fun testPrimitiveVarargs(
+  @ObjCName("withInt", exact = false) i: Int,
+  vararg @ObjCName("withIntArray", exact = false) ia: Int
+ ) {
   var ia_1: IntArray? = ia
   ia_1 = intArrayOf(i, ia_1!![0])
  }
@@ -61,19 +80,32 @@ open class Main {
  }
 
  fun interface Fn {
-  fun test(@ObjCName("withInt", exact = false) nonFinal: Int, @ObjCName("withInt", exact = false) implicitFinal: Int): Int
+  fun test(
+   @ObjCName("withInt", exact = false) nonFinal: Int,
+   @ObjCName("withInt", exact = false) implicitFinal: Int
+  ): Int
  }
 
  fun interface FnPrimitiveVarargs {
-  fun test(@ObjCName("withInt", exact = false) i: Int, vararg @ObjCName("withIntArray", exact = false) `is`: Int)
+  fun test(
+   @ObjCName("withInt", exact = false) i: Int,
+   vararg @ObjCName("withIntArray", exact = false) `is`: Int
+  )
  }
 
  fun interface FnObjectVarargs {
-  fun test(@ObjCName("withJavaLangAny", exact = false) o: Any?, vararg @ObjCName("withJavaLangAnyArray", exact = false) os: Any?)
+  fun test(
+   @ObjCName("withJavaLangAny", exact = false) o: Any?,
+   vararg @ObjCName("withJavaLangAnyArray", exact = false) os: Any?
+  )
  }
 
  open class SubMain: Main {
-  constructor(@ObjCName("withInt", exact = false) nonFinal: Int, @ObjCName("withInt", exact = false) explicitFinal: Int, @ObjCName("withInt", exact = false) implicitFinal: Int): super(nonFinal, explicitFinal, implicitFinal) {
+  constructor(
+   @ObjCName("withInt", exact = false) nonFinal: Int,
+   @ObjCName("withInt", exact = false) explicitFinal: Int,
+   @ObjCName("withInt", exact = false) implicitFinal: Int
+  ): super(nonFinal, explicitFinal, implicitFinal) {
    var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   }

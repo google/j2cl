@@ -33,7 +33,11 @@ open class Main {
 
  @JvmField var innerField: KTopLevel<String?>.KInner<String?>? = null
 
- open fun methodArguments(@ObjCName("withId", exact = false) foo: KTopLevel<String?>?, @ObjCName("withId", exact = false) nested: KTopLevel.KNested<String?>?, @ObjCName("withId", exact = false) inner: KTopLevel<String?>.KInner<String?>?) {}
+ open fun methodArguments(
+  @ObjCName("withId", exact = false) foo: KTopLevel<String?>?,
+  @ObjCName("withId", exact = false) nested: KTopLevel.KNested<String?>?,
+  @ObjCName("withId", exact = false) inner: KTopLevel<String?>.KInner<String?>?
+ ) {}
 
  open fun memberAccess() {
   val topLevel: KTopLevel<String?>? = KTopLevel<String?>("foo")

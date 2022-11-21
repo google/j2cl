@@ -18,9 +18,17 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsoptionalMain", exact = true)
 open class Main {
- open fun method1(@ObjCName("withInt", exact = false) i1: Int, @ObjCName("withJavaLangDouble", exact = false) d: Double?, @ObjCName("withJavaLangInt", exact = false) i: Int?) {}
+ open fun method1(
+  @ObjCName("withInt", exact = false) i1: Int,
+  @ObjCName("withJavaLangDouble", exact = false) d: Double?,
+  @ObjCName("withJavaLangInt", exact = false) i: Int?
+ ) {}
 
- open fun method2(@ObjCName("withJavaLangString", exact = false) s1: String?, @ObjCName("withJavaLangDouble", exact = false) d: Double?, vararg @ObjCName("withJavaLangBooleanArray", exact = false) i: Boolean?) {
+ open fun method2(
+  @ObjCName("withJavaLangString", exact = false) s1: String?,
+  @ObjCName("withJavaLangDouble", exact = false) d: Double?,
+  vararg @ObjCName("withJavaLangBooleanArray", exact = false) i: Boolean?
+ ) {
   val i_1: Array<Boolean?>? = i as Array<Boolean?>?
  }
 
@@ -36,7 +44,10 @@ open class Main {
  open fun testOptionalFunction(@ObjCName("withJsoptionalFunction", exact = false) f: Main.Function?) {}
 
  fun interface Function {
-  fun f1(@ObjCName("withJavaLangString", exact = false) s: String?, vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?): Any?
+  fun f1(
+   @ObjCName("withJavaLangString", exact = false) s: String?,
+   vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+  ): Any?
  }
 
  class AFunction: Main.Function {
@@ -47,7 +58,10 @@ open class Main {
  }
 
  fun interface I<T> {
-  fun m(@ObjCName("withId", exact = false) t: T, @ObjCName("withJavaLangAny", exact = false) o: Any?)
+  fun m(
+   @ObjCName("withId", exact = false) t: T,
+   @ObjCName("withJavaLangAny", exact = false) o: Any?
+  )
  }
 
  open class TemplatedSubtype<T: String?>: Main.I<T> {

@@ -55,11 +55,17 @@ open class DefaultNotNullable {
   this.f13_private_2 = Any()
  }
 
- open fun m1(@ObjCName("withJavaLangString", exact = false) a: String, @ObjCName("withId", exact = false) b: MutableList<Double>): String {
+ open fun m1(
+  @ObjCName("withJavaLangString", exact = false) a: String,
+  @ObjCName("withId", exact = false) b: MutableList<Double>
+ ): String {
   return ""
  }
 
- open fun m2(@ObjCName("withJavaLangString", exact = false) a: String?, @ObjCName("withId", exact = false) b: MutableList<Double?>): String? {
+ open fun m2(
+  @ObjCName("withJavaLangString", exact = false) a: String?,
+  @ObjCName("withId", exact = false) b: MutableList<Double?>
+ ): String? {
   return null
  }
 
@@ -83,7 +89,10 @@ open class DefaultNotNullable {
 
  companion object {
   @JvmStatic
-  fun <N> genericNullableMethod(@ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedNullable<N>, @ObjCName("withId", exact = false) n: N?) {
+  fun <N> genericNullableMethod(
+   @ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedNullable<N>,
+   @ObjCName("withId", exact = false) n: N?
+  ) {
    o!!.setNullable(n)
    o!!.setNonNull(n as N)
    o!!.setDefaultNullability(n as N)
@@ -99,7 +108,10 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun <N: Any> genericNonNullMethod(@ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedNonNullable<N>, @ObjCName("withId", exact = false) n: N) {
+  fun <N: Any> genericNonNullMethod(
+   @ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedNonNullable<N>,
+   @ObjCName("withId", exact = false) n: N
+  ) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
@@ -115,7 +127,10 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun <N: Any> genericDefaultNullabilityMethod(@ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedDefaultNullability<N>, @ObjCName("withId", exact = false) n: N) {
+  fun <N: Any> genericDefaultNullabilityMethod(
+   @ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedDefaultNullability<N>,
+   @ObjCName("withId", exact = false) n: N
+  ) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
@@ -131,7 +146,10 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedNullableMethod(@ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedNullable<String?>, @ObjCName("withJavaLangString", exact = false) s: String?) {
+  fun parametrizedNullableMethod(
+   @ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedNullable<String?>,
+   @ObjCName("withJavaLangString", exact = false) s: String?
+  ) {
    o!!.setNullable(s)
    o!!.setNonNull(s!!)
    o!!.setDefaultNullability(s)
@@ -147,7 +165,10 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedNonNullMethod(@ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedNonNullable<String>, @ObjCName("withJavaLangString", exact = false) s: String) {
+  fun parametrizedNonNullMethod(
+   @ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedNonNullable<String>,
+   @ObjCName("withJavaLangString", exact = false) s: String
+  ) {
    o!!.setNullable(s)
    o!!.setNonNull(s)
    o!!.setDefaultNullability(s)
@@ -163,7 +184,10 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedDefaultNullabilityMethod(@ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedDefaultNullability<String>, @ObjCName("withJavaLangString", exact = false) s: String) {
+  fun parametrizedDefaultNullabilityMethod(
+   @ObjCName("withId", exact = false) o: DefaultNotNullable.ParameterizedDefaultNullability<String>,
+   @ObjCName("withJavaLangString", exact = false) s: String
+  ) {
    o!!.setNullable(s)
    o!!.setNonNull(s)
    o!!.setDefaultNullability(s)
@@ -230,29 +254,44 @@ open class DefaultNotNullable {
   fun <T: Any> testListOfWildcardSuperNullableVariable(@ObjCName("withId", exact = false) l: MutableList<in T?>) {}
 
   @JvmStatic
-  fun <T: Any> testCaptureNullabilityCast(@ObjCName("withId", exact = false) l: MutableList<in T>, @ObjCName("withId", exact = false) t: T?) {
+  fun <T: Any> testCaptureNullabilityCast(
+   @ObjCName("withId", exact = false) l: MutableList<in T>,
+   @ObjCName("withId", exact = false) t: T?
+  ) {
    l!!.add(t as T)
   }
 
   @JvmStatic
-  fun testParametrizedTypeNullabilityCast(@ObjCName("withId", exact = false) c: DefaultNotNullable.Consumer<String>, @ObjCName("withJavaLangString", exact = false) string: String) {
+  fun testParametrizedTypeNullabilityCast(
+   @ObjCName("withId", exact = false) c: DefaultNotNullable.Consumer<String>,
+   @ObjCName("withJavaLangString", exact = false) string: String
+  ) {
    val localString: String? = string
    c!!.accept(localString!!)
   }
 
   @JvmStatic
-  fun <T: Any> testGenericTypeNullabilityCast(@ObjCName("withId", exact = false) c: DefaultNotNullable.Consumer<T>, @ObjCName("withId", exact = false) element: T) {
+  fun <T: Any> testGenericTypeNullabilityCast(
+   @ObjCName("withId", exact = false) c: DefaultNotNullable.Consumer<T>,
+   @ObjCName("withId", exact = false) element: T
+  ) {
    val localElement: T? = element
    c!!.accept(localElement!!)
   }
 
   @JvmStatic
-  fun testParametrizedWildcardNullabilityCast(@ObjCName("withId", exact = false) c: DefaultNotNullable.Consumer<in String>, @ObjCName("withJavaLangString", exact = false) string: String) {
+  fun testParametrizedWildcardNullabilityCast(
+   @ObjCName("withId", exact = false) c: DefaultNotNullable.Consumer<in String>,
+   @ObjCName("withJavaLangString", exact = false) string: String
+  ) {
    val localString: String? = string
   }
 
   @JvmStatic
-  fun <T: Any> testGenericWildcardNullabilityCast(@ObjCName("withId", exact = false) c: DefaultNotNullable.Consumer<in T>, @ObjCName("withId", exact = false) element: T) {
+  fun <T: Any> testGenericWildcardNullabilityCast(
+   @ObjCName("withId", exact = false) c: DefaultNotNullable.Consumer<in T>,
+   @ObjCName("withId", exact = false) element: T
+  ) {
    val localElement: T? = element
    c!!.accept(localElement as T)
   }

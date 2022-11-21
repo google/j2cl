@@ -18,7 +18,10 @@ open class SimpleGenericType<T, S> {
 
  @JvmField var second: S = null as S
 
- constructor(@ObjCName("withId", exact = false) t: T, @ObjCName("withId", exact = false) s: S) {
+ constructor(
+  @ObjCName("withId", exact = false) t: T,
+  @ObjCName("withId", exact = false) s: S
+ ) {
   this.first = t
   this.second = s
  }
