@@ -21,6 +21,7 @@ import static javaemul.internal.InternalPreconditions.checkArraySize;
 import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
 import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
+import static javaemul.internal.InternalPreconditions.isApiChecked;
 
 import java.io.Serializable;
 import java.util.function.BinaryOperator;
@@ -593,7 +594,10 @@ public class Arrays {
   }
 
   private static void checkCopyOfRange(Object original, int from, int to) {
-    checkArgument(from <= to, from + " > " + to);
+    // TODO(b/259858988): Workaround since string concat is currently side effectful in j2wasm.
+    if (isApiChecked()) {
+      checkArgument(from <= to, from + " > " + to);
+    }
     int len = ArrayHelper.getLength(original);
     checkCriticalArrayBounds(from, from, len);
   }
