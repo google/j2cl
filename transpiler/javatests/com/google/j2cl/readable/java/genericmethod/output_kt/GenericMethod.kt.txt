@@ -21,37 +21,37 @@ import kotlin.native.ObjCName
 @ObjCName("GenericmethodGenericMethod", exact = true)
 open class GenericMethod<T> {
  open fun <T_1, S> foo(
-  @ObjCName("withId", exact = false) f: T_1,
-  @ObjCName("withId", exact = false) s: S
+  @ObjCName("withNSObject", exact = false) f: T_1,
+  @ObjCName("withNSObject", exact = false) s: S
  ) {}
 
  open fun `fun`(
-  @ObjCName("withJavaLangAny", exact = false) o: Any?
+  @ObjCName("withNSObject", exact = false) o: Any?
  ) {}
 
  open fun <T_1: Exception?> `fun`(
-  @ObjCName("withId", exact = false) t: T_1
+  @ObjCName("withJavaLangException", exact = false) t: T_1
  ) {}
 
  open fun <T_1: Error?> `fun`(
-  @ObjCName("withId", exact = false) t: T_1
+  @ObjCName("withJavaLangError", exact = false) t: T_1
  ) {
   object : GenericMethod<T_1>() {
    open fun fun2(
-    @ObjCName("withId", exact = false) t: T_1
+    @ObjCName("withJavaLangError", exact = false) t: T_1
    ) {}
 
    open fun <T_1> fun2(
-    @ObjCName("withId", exact = false) t: T_1
+    @ObjCName("withNSObject", exact = false) t: T_1
    ) {}
   }
   open class ___1LocalClass<T>: GenericMethod<T>() {
    open fun fun2(
-    @ObjCName("withId", exact = false) t: T
+    @ObjCName("withNSObject", exact = false) t: T
    ) {}
 
    open fun <T_1: Number?> fun2(
-    @ObjCName("withId", exact = false) t: T_1
+    @ObjCName("withNSNumber", exact = false) t: T_1
    ) {}
   }
   ___1LocalClass<T_1>()
@@ -62,7 +62,7 @@ open class GenericMethod<T> {
  }
 
  open fun <T_1> `fun`(
-  @ObjCName("withIdArray", exact = false) array: Array<T_1>?
+  @ObjCName("withNSObjectArray", exact = false) array: Array<T_1>?
  ): Array<T_1>? {
   return array
  }
@@ -92,12 +92,12 @@ open class GenericMethod<T> {
  companion object {
   @JvmStatic
   fun acceptsContent(
-   @ObjCName("withGenericmethodContent", exact = false) content: GenericMethod.Content?
+   @ObjCName("withGenericmethodGenericMethod_Content", exact = false) content: GenericMethod.Content?
   ) {}
 
   @JvmStatic
   fun acceptsString(
-   @ObjCName("withJavaLangString", exact = false) string: String?
+   @ObjCName("withNSString", exact = false) string: String?
   ) {}
 
   @JvmStatic
@@ -134,15 +134,15 @@ open class GenericMethod<T> {
 
   @JvmStatic
   fun <V> testLowerWildcardBound(
-   @ObjCName("withId", exact = false) consumer: GenericMethod.Consumer<in V>?,
-   @ObjCName("withId", exact = false) v: V
+   @ObjCName("withGenericmethodGenericMethod_Consumer", exact = false) consumer: GenericMethod.Consumer<in V>?,
+   @ObjCName("withNSObject", exact = false) v: V
   ) {
    consumer!!.accept(v)
   }
 
   @JvmStatic
   fun <V> testUpperWildcardBound(
-   @ObjCName("withId", exact = false) supplier: GenericMethod.Supplier<out V>?
+   @ObjCName("withGenericmethodGenericMethod_Supplier", exact = false) supplier: GenericMethod.Supplier<out V>?
   ): V {
    return supplier!!.get()
   }
@@ -156,30 +156,35 @@ open class GenericMethod<T> {
   }
  }
 
+ @ObjCName("GenericmethodGenericMethod_SuperContainer", exact = true)
  open class SuperContainer<C: GenericMethod.Container<*>?> {
   open fun get(): C {
    return null as C
   }
  }
 
+ @ObjCName("GenericmethodGenericMethod_Container", exact = true)
  open class Container<CT: GenericMethod.Content?> {
   open fun get(): CT {
    return null as CT
   }
  }
 
+ @ObjCName("GenericmethodGenericMethod_Content", exact = true)
  open class Content {
   open fun getProp(): String? {
    return null
   }
  }
 
+ @ObjCName("GenericmethodGenericMethod_Consumer", exact = true)
  fun interface Consumer<V> {
   fun accept(
-   @ObjCName("withId", exact = false) v: V
+   @ObjCName("withNSObject", exact = false) v: V
   )
  }
 
+ @ObjCName("GenericmethodGenericMethod_Supplier", exact = true)
  fun interface Supplier<V> {
   fun get(): V
  }

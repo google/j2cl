@@ -16,6 +16,7 @@ open class Parent {
 
 @ObjCName("QualifiedsupercallQualifiedSuperCall", exact = true)
 open class QualifiedSuperCall: Parent() {
+ @ObjCName("QualifiedsupercallQualifiedSuperCall_InnerClass", exact = true)
  open inner class InnerClass {
   open fun test() {
    super<Parent>@QualifiedSuperCall.`fun`()

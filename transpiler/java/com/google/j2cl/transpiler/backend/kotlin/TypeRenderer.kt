@@ -34,8 +34,7 @@ fun Renderer.renderType(type: Type) {
     return
   }
 
-  // Render ObjCName annotation for top-level types only.
-  if (typeDeclaration.enclosingTypeDeclaration == null) {
+  if (!typeDeclaration.isLocal) {
     renderObjCNameAnnotation(typeDeclaration)
   }
 

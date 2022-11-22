@@ -12,14 +12,16 @@ import kotlin.native.ObjCName
 
 @ObjCName("BoundedtypesupercallMain", exact = true)
 open class Main {
+ @ObjCName("BoundedtypesupercallMain_Foo", exact = true)
  abstract class Foo<T> {
   constructor(
-   @ObjCName("withId", exact = false) foo: T
+   @ObjCName("withNSObject", exact = false) foo: T
   )
 
   abstract fun foo()
  }
 
+ @ObjCName("BoundedtypesupercallMain_Bar", exact = true)
  open class Bar<T: Comparable<*>?> {
   open fun getSomething(): T {
    return null as T

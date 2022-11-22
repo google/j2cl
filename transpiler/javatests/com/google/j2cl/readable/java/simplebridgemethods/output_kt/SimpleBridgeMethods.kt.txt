@@ -15,7 +15,7 @@ import simplebridgemethods.Superclass
 @ObjCName("SimplebridgemethodsSuperclass", exact = true)
 open class Superclass<T: Error?> {
  open fun m1(
-  @ObjCName("withId", exact = false) t: T
+  @ObjCName("withJavaLangError", exact = false) t: T
  ) {}
 }
 
@@ -30,7 +30,7 @@ open class AnotherSubclass: Superclass<AssertionError?>() {}
 @ObjCName("SimplebridgemethodsCallable", exact = true)
 fun interface Callable<V> {
  fun call(
-  @ObjCName("withId", exact = false) v: V
+  @ObjCName("withNSObject", exact = false) v: V
  )
 }
 

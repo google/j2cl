@@ -149,17 +149,20 @@ open class Arrays {
  }
 
  open fun consumesCloneable(
-  @ObjCName("withJavaLangCloneable", exact = false) cloneable: Cloneable?
+  @ObjCName("withNSCopying", exact = false) cloneable: Cloneable?
  ) {}
 
  open fun consumesSerializable(
   @ObjCName("withJavaIoSerializable", exact = false) serializable: Serializable?
  ) {}
 
+ @ObjCName("ArrayArrays_SomeObject", exact = true)
  open inner class SomeObject {}
 
+ @ObjCName("ArrayArrays_NativeType", exact = true)
  open class NativeType {}
 
+ @ObjCName("ArrayArrays_ArrayContainer", exact = true)
  open class ArrayContainer<T> {
   @JvmField var data: Array<T>? = null
  }

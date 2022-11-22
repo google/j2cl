@@ -14,7 +14,7 @@ import kotlin.native.ObjCName
 @ObjCName("ImportglobaljstypesDate", exact = true)
 open class Date {
  open fun copy(
-  @ObjCName("withImportglobaljstypesNativeDate", exact = false) d: Date.NativeDate?
+  @ObjCName("withImportglobaljstypesDate_NativeDate", exact = false) d: Date.NativeDate?
  ): Date.NativeDate? {
   return d
  }
@@ -28,6 +28,7 @@ open class Date {
   }
  }
 
+ @ObjCName("ImportglobaljstypesDate_NativeDate", exact = true)
  open class NativeDate {
   companion object {
    @JvmStatic

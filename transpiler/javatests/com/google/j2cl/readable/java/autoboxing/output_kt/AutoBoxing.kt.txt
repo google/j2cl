@@ -99,7 +99,7 @@ open class AutoBoxing {
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangInt", exact = false) i: Int?
+  @ObjCName("withJavaLangInteger", exact = false) i: Int?
  ): Int {
   return i!!.toInt()
  }
@@ -117,7 +117,7 @@ open class AutoBoxing {
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangChar", exact = false) c: Char?
+  @ObjCName("withJavaLangCharacter", exact = false) c: Char?
  ): Char {
   return c!!.toChar()
  }
@@ -129,7 +129,7 @@ open class AutoBoxing {
  }
 
  open fun takesAndReturnsVoid(
-  @ObjCName("withJavaLangUnit", exact = false) v: Unit?
+  @ObjCName("withJavaLangVoid", exact = false) v: Unit?
  ): Unit? {
   return null
  }
@@ -141,13 +141,13 @@ open class AutoBoxing {
  }
 
  open fun takesObjectAndReturnsPrimitiveDouble(
-  @ObjCName("withJavaLangAny", exact = false) o: Any?
+  @ObjCName("withNSObject", exact = false) o: Any?
  ): Double {
   return o as Double
  }
 
  open fun sumWithoutBoxing(
-  vararg @ObjCName("withJavaLangAnyArray", exact = false) numbers: Any?
+  vararg @ObjCName("withNSObjectArray", exact = false) numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -159,7 +159,7 @@ open class AutoBoxing {
  }
 
  open fun sumWithoutBoxingJsVarargs(
-  vararg @ObjCName("withJavaLangAnyArray", exact = false) numbers: Any?
+  vararg @ObjCName("withNSObjectArray", exact = false) numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -171,7 +171,7 @@ open class AutoBoxing {
  }
 
  open fun sumWithUnboxing(
-  @ObjCName("withId", exact = false) boxedDoubles: MutableIterable<Double?>?
+  @ObjCName("withJavaLangIterable", exact = false) boxedDoubles: MutableIterable<Double?>?
  ): Double {
   var sum: Double = 0.0
   for (d in boxedDoubles!!) {
@@ -434,7 +434,7 @@ open class AutoBoxing {
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___1Local<T: Long?> {
     open fun toLong(
-     @ObjCName("withId", exact = false) l: T
+     @ObjCName("withJavaLangLong", exact = false) l: T
     ): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()

@@ -15,6 +15,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsconstructorJsConstructorClass", exact = true)
 open class JsConstructorClass {
+ @ObjCName("JsconstructorJsConstructorClass_A", exact = true)
  open class A {
   @JvmField var fA: Int = 1
 
@@ -27,6 +28,7 @@ open class JsConstructorClass {
   constructor()
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_B", exact = true)
  open class B: JsConstructorClass.A {
   @JvmField var fB: Int = 2
 
@@ -48,6 +50,7 @@ open class JsConstructorClass {
   }
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_C", exact = true)
  open class C: JsConstructorClass.B {
   @JvmField var fC: Int = 1
 
@@ -65,6 +68,7 @@ open class JsConstructorClass {
   }
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_D", exact = true)
  open class D: JsConstructorClass.B {
   @JvmField var fD: Int = 8
 
@@ -79,6 +83,7 @@ open class JsConstructorClass {
   }
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_E", exact = true)
  open class E: JsConstructorClass.C {
   @JvmField var fE: Int = 11
 
@@ -87,6 +92,7 @@ open class JsConstructorClass {
   }
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_F", exact = true)
  open class F: JsConstructorClass.C {
   @JvmField var fF: Int = 13
 
@@ -97,21 +103,25 @@ open class JsConstructorClass {
   }
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_G", exact = true)
  open class G {}
 
+ @ObjCName("JsconstructorJsConstructorClass_H", exact = true)
  open class H: JsConstructorClass.G {
   constructor()
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_Varargs", exact = true)
  open class Varargs: JsConstructorClass.A {
   constructor(
    vararg @ObjCName("withIntArray", exact = false) args: Int
   ): super(args!![1])
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_SubVarargs", exact = true)
  open class SubVarargs: JsConstructorClass.Varargs {
   constructor(
-   @ObjCName("withJavaLangAny", exact = false) i: Any?,
+   @ObjCName("withNSObject", exact = false) i: Any?,
    vararg @ObjCName("withIntArray", exact = false) args: Int
   ): super(*(args)!!)
 
@@ -128,21 +138,24 @@ open class JsConstructorClass {
   }
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_InstanceVarargs", exact = true)
  open inner class InstanceVarargs: JsConstructorClass.A {
   constructor(
    vararg @ObjCName("withIntArray", exact = false) args: Int
   ): super(args!![1])
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {
   constructor(
-   @ObjCName("withJavaLangAny", exact = false) b: Any?
+   @ObjCName("withNSObject", exact = false) b: Any?
   )
  }
 
+ @ObjCName("JsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", exact = true)
  open class JsConstructorSubtypeOfRegularType: JsConstructorClass.RegularType {
   constructor(
-   @ObjCName("withJavaLangAny", exact = false) `object`: Any?
+   @ObjCName("withNSObject", exact = false) `object`: Any?
   ): super(`object`)
 
   constructor(): this(Any())

@@ -49,8 +49,8 @@ open class Main {
  }
 
  open fun testObjectVarargs(
-  @ObjCName("withJavaLangAny", exact = false) o: Any?,
-  vararg @ObjCName("withJavaLangAnyArray", exact = false) oa: Any?
+  @ObjCName("withNSObject", exact = false) o: Any?,
+  vararg @ObjCName("withNSObjectArray", exact = false) oa: Any?
  ) {
   var oa_1: Array<Any?>? = oa as Array<Any?>?
   oa_1 = (arrayOf<Any?>(o, oa_1!![0]) as Array<*>?) as Array<Any?>?
@@ -79,6 +79,7 @@ open class Main {
   os_1!![0] = os_1!![1]
  }
 
+ @ObjCName("ParameterassignmentsMain_Fn", exact = true)
  fun interface Fn {
   fun test(
    @ObjCName("withInt", exact = false) nonFinal: Int,
@@ -86,6 +87,7 @@ open class Main {
   ): Int
  }
 
+ @ObjCName("ParameterassignmentsMain_FnPrimitiveVarargs", exact = true)
  fun interface FnPrimitiveVarargs {
   fun test(
    @ObjCName("withInt", exact = false) i: Int,
@@ -93,13 +95,15 @@ open class Main {
   )
  }
 
+ @ObjCName("ParameterassignmentsMain_FnObjectVarargs", exact = true)
  fun interface FnObjectVarargs {
   fun test(
-   @ObjCName("withJavaLangAny", exact = false) o: Any?,
-   vararg @ObjCName("withJavaLangAnyArray", exact = false) os: Any?
+   @ObjCName("withNSObject", exact = false) o: Any?,
+   vararg @ObjCName("withNSObjectArray", exact = false) os: Any?
   )
  }
 
+ @ObjCName("ParameterassignmentsMain_SubMain", exact = true)
  open class SubMain: Main {
   constructor(
    @ObjCName("withInt", exact = false) nonFinal: Int,

@@ -18,7 +18,7 @@ import kotlin.native.ObjCName
 @ObjCName("ImportglobaljstypesNumber", exact = true)
 open class Number {
  open fun testJsDocForLiteralType(
-  @ObjCName("withImportglobaljstypesMyLiteralType", exact = false) a: Number.MyLiteralType?
+  @ObjCName("withImportglobaljstypesNumber_MyLiteralType", exact = false) a: Number.MyLiteralType?
  ): Number.MyLiteralType? {
   return a
  }
@@ -47,12 +47,14 @@ open class Number {
   }
  }
 
+ @ObjCName("ImportglobaljstypesNumber_NativeFunction", exact = true)
  fun interface NativeFunction<T> {
   fun apply(
-   @ObjCName("withJavaLangAny", exact = false) thisContext: Any?,
+   @ObjCName("withNSObject", exact = false) thisContext: Any?,
    @ObjCName("withIntArray", exact = false) argsArray: IntArray?
   ): T
  }
 
+ @ObjCName("ImportglobaljstypesNumber_MyLiteralType", exact = true)
  interface MyLiteralType {}
 }

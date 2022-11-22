@@ -10,6 +10,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("NewinnerclasswithsameouterNewInnerClassWithSameOuter", exact = true)
 open class NewInnerClassWithSameOuter {
+ @ObjCName("NewinnerclasswithsameouterNewInnerClassWithSameOuter_A", exact = true)
  open inner class A {
   open fun test() {
    this@NewInnerClassWithSameOuter.B()
@@ -17,7 +18,9 @@ open class NewInnerClassWithSameOuter {
   }
  }
 
+ @ObjCName("NewinnerclasswithsameouterNewInnerClassWithSameOuter_B", exact = true)
  open inner class B {}
 
+ @ObjCName("NewinnerclasswithsameouterNewInnerClassWithSameOuter_C", exact = true)
  open inner class C {}
 }

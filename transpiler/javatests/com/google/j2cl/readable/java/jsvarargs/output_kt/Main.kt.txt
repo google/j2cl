@@ -147,7 +147,7 @@ open class Main {
 
   @JvmStatic
   fun <T> generics(
-   vararg @ObjCName("withIdArray", exact = false) elements: T
+   vararg @ObjCName("withNSObjectArray", exact = false) elements: T
   ): T {
    val elements_1: Array<T>? = elements as Array<T>?
    return elements_1!![0]
@@ -155,7 +155,7 @@ open class Main {
 
   @JvmStatic
   fun parameterizedType(
-   vararg @ObjCName("withIdArray", exact = false) elements: MutableList<Main?>?
+   vararg @ObjCName("withJavaUtilListArray", exact = false) elements: MutableList<Main?>?
   ): Main? {
    val elements_1: Array<MutableList<Main?>?>? = elements as Array<MutableList<Main?>?>?
    return elements_1!![0]!!.get(0)
@@ -163,43 +163,48 @@ open class Main {
 
   @JvmStatic
   fun <T> parameterizedByT(
-   vararg @ObjCName("withIdArray", exact = false) elements: MutableList<T>?
+   vararg @ObjCName("withJavaUtilListArray", exact = false) elements: MutableList<T>?
   ): T {
    val elements_1: Array<MutableList<T>?>? = elements as Array<MutableList<T>?>?
    return elements_1!![0]!!.get(0)
   }
  }
 
+ @ObjCName("JsvarargsMain_NativeObject", exact = true)
  open class NativeObject {
   constructor(
-   vararg @ObjCName("withJavaLangAnyArray", exact = false) pars: Any?
+   vararg @ObjCName("withNSObjectArray", exact = false) pars: Any?
   ) {
    val pars_1: Array<Any?>? = pars as Array<Any?>?
   }
  }
 
+ @ObjCName("JsvarargsMain_SubVarargsConstructorClass", exact = true)
  open class SubVarargsConstructorClass: Main.NativeObject {
   constructor(
    @ObjCName("withInt", exact = false) i: Int,
-   vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+   vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
   ): super(*(args as Array<Any?>?)!!) {
    val args_1: Array<Any?>? = args as Array<Any?>?
   }
  }
 
+ @ObjCName("JsvarargsMain_Function", exact = true)
  fun interface Function {
   fun f1(
    @ObjCName("withInt", exact = false) i: Int,
-   vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+   vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
   ): Any?
  }
 
+ @ObjCName("JsvarargsMain_AbstractMethodWithVarargs", exact = true)
  abstract class AbstractMethodWithVarargs {
   abstract fun abstractMethod(
    vararg @ObjCName("withIntArray", exact = false) args: Int
   )
  }
 
+ @ObjCName("JsvarargsMain_StaticInterfaceMethodWithVarargs", exact = true)
  interface StaticInterfaceMethodWithVarargs {
   companion object {
    @JvmStatic
@@ -209,6 +214,7 @@ open class Main {
   }
  }
 
+ @ObjCName("JsvarargsMain_AFunction", exact = true)
  class AFunction: Main.Function {
   open override fun f1(i: Int, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
@@ -216,6 +222,7 @@ open class Main {
   }
  }
 
+ @ObjCName("JsvarargsMain_SubMain", exact = true)
  open class SubMain: Main {
   constructor(): super(10)
 
@@ -230,10 +237,11 @@ open class Main {
   }
  }
 
+ @ObjCName("JsvarargsMain_GenericFunction", exact = true)
  fun interface GenericFunction<T> {
   fun m(
-   @ObjCName("withId", exact = false) i: T,
-   vararg @ObjCName("withIdArray", exact = false) args: T
+   @ObjCName("withNSObject", exact = false) i: T,
+   vararg @ObjCName("withNSObjectArray", exact = false) args: T
   ): Any?
  }
 }

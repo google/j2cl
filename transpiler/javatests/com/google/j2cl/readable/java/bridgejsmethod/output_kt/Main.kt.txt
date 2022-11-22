@@ -42,30 +42,34 @@ open class Main {
   }
  }
 
+ @ObjCName("BridgejsmethodMain_A", exact = true)
  open class A<T> {
   open fun `fun`(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): T {
    return t
   }
 
   open fun bar(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ) {}
  }
 
+ @ObjCName("BridgejsmethodMain_I", exact = true)
  fun interface I<T: Number?> {
   fun `fun`(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSNumber", exact = false) t: T
   ): T
  }
 
+ @ObjCName("BridgejsmethodMain_J", exact = true)
  fun interface J<T> {
   fun bar(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   )
  }
 
+ @ObjCName("BridgejsmethodMain_B", exact = true)
  open class B: Main.A<String?>() {
   open override fun `fun`(s: String?): String? {
    return s
@@ -74,55 +78,66 @@ open class Main {
   open override fun bar(s: String?) {}
  }
 
+ @ObjCName("BridgejsmethodMain_C", exact = true)
  open class C: Main.A<Int?>() {
   open override fun `fun`(i: Int?): Int? {
    return i
   }
  }
 
+ @ObjCName("BridgejsmethodMain_D", exact = true)
  open class D: Main.I<Int?>, Main.A<Int?>() {
   open override fun `fun`(i: Int?): Int? {
    return i
   }
  }
 
+ @ObjCName("BridgejsmethodMain_E", exact = true)
  open class E: Main.J<String?>, Main.B() {}
 
+ @ObjCName("BridgejsmethodMain_F", exact = true)
  open class F: Main.I<Int?>, Main.A<Int?>() {}
 
+ @ObjCName("BridgejsmethodMain_G", exact = true)
  fun interface G<V> {
   fun enclose(
-   @ObjCName("withId", exact = false) value: V
+   @ObjCName("withNSObject", exact = false) value: V
   ): V
  }
 
+ @ObjCName("BridgejsmethodMain_H", exact = true)
  open class H<V>: Main.G<V> {
   open override fun enclose(value: V): V {
    return null as V
   }
  }
 
+ @ObjCName("BridgejsmethodMain_K", exact = true)
  open class K<K1, K2> {
   open fun `fun`(
-   @ObjCName("withId", exact = false) k1: K1,
-   @ObjCName("withId", exact = false) k2: K2
+   @ObjCName("withNSObject", exact = false) k1: K1,
+   @ObjCName("withNSObject", exact = false) k2: K2
   ) {}
  }
 
+ @ObjCName("BridgejsmethodMain_L", exact = true)
  open class L<L1>: Main.K<String?, L1>() {
   open override fun `fun`(string: String?, l1: L1) {}
  }
 
+ @ObjCName("BridgejsmethodMain_M", exact = true)
  fun interface M {
   fun getB(): Main.B?
  }
 
+ @ObjCName("BridgejsmethodMain_N", exact = true)
  abstract inner class N: Main.M {
   constructor()
 
   abstract override fun getB(): Main.B?
  }
 
+ @ObjCName("BridgejsmethodMain_O", exact = true)
  open inner class O: Main.N() {
   @JvmField var b_private_3: Main.B? = null
 
@@ -131,37 +146,44 @@ open class Main {
   }
  }
 
+ @ObjCName("BridgejsmethodMain_P", exact = true)
  fun interface P {
   fun getKey(): String?
  }
 
+ @ObjCName("BridgejsmethodMain_Q", exact = true)
  abstract inner class Q: Main.P {
   abstract override fun getKey(): String?
  }
 
+ @ObjCName("BridgejsmethodMain_R", exact = true)
  abstract inner class R: Main.Q() {
   open override fun getKey(): String? {
    return null
   }
  }
 
+ @ObjCName("BridgejsmethodMain_S", exact = true)
  open inner class S: Main.R() {}
 
+ @ObjCName("BridgejsmethodMain_GrandParent", exact = true)
  open inner class GrandParent<T> {
   open fun jsMethod(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ) {}
 
   open fun method(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ) {}
  }
 
+ @ObjCName("BridgejsmethodMain_Parent", exact = true)
  open inner class Parent<T: Main.Parent<T>?>: Main.GrandParent<T>() {
   open override fun jsMethod(t: T) {}
 
   open override fun method(t: T) {}
  }
 
+ @ObjCName("BridgejsmethodMain_Child", exact = true)
  open inner class Child: Main.Parent<Main.Child?>() {}
 }

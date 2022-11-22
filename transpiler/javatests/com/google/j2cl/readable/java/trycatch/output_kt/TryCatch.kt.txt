@@ -130,7 +130,7 @@ open class TryCatch {
  }
 
  fun <T> getT_private_2(
-  @ObjCName("withId", exact = false) t: T
+  @ObjCName("withNSObject", exact = false) t: T
  ): T {
   return t
  }
@@ -147,6 +147,7 @@ open class TryCatch {
   @JvmField val closableThing_private_2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 
+ @ObjCName("TrycatchTryCatch_ClosableThing", exact = true)
  open class ClosableThing: AutoCloseable {
   open override fun close() {}
  }

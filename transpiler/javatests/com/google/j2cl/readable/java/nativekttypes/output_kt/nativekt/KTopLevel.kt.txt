@@ -50,11 +50,11 @@ open class KTopLevel<O> {
  }
 
  constructor(
-  @ObjCName("withId", exact = false) o: O
+  @ObjCName("withNSObject", exact = false) o: O
  )
 
  open fun instanceMethod(
-  @ObjCName("withId", exact = false) o: O
+  @ObjCName("withNSObject", exact = false) o: O
  ): O {
   return o
  }
@@ -64,21 +64,22 @@ open class KTopLevel<O> {
 
   @JvmStatic
   fun <S> staticMethod(
-   @ObjCName("withId", exact = false) s: S
+   @ObjCName("withNSObject", exact = false) s: S
   ): S {
    return s
   }
  }
 
+ @ObjCName("NativekttypesNativektKTopLevel_KNested", exact = true)
  open class KNested<N> {
   @JvmField var instanceField: N = null as N
 
   constructor(
-   @ObjCName("withId", exact = false) n: N
+   @ObjCName("withNSObject", exact = false) n: N
   )
 
   open fun instanceMethod(
-   @ObjCName("withId", exact = false) n: N
+   @ObjCName("withNSObject", exact = false) n: N
   ): N {
    return n
   }
@@ -92,16 +93,17 @@ open class KTopLevel<O> {
 
    @JvmStatic
    fun <S> staticMethod(
-    @ObjCName("withId", exact = false) s: S
+    @ObjCName("withNSObject", exact = false) s: S
    ): S {
     return s
    }
   }
  }
 
+ @ObjCName("NativekttypesNativektKTopLevel_KInner", exact = true)
  open inner class KInner<I> {
   constructor(
-   @ObjCName("withId", exact = false) i: I
+   @ObjCName("withNSObject", exact = false) i: I
   )
  }
 }

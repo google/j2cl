@@ -44,7 +44,7 @@ enum class Enum2 {
  ): this(foo!!.ordinal)
 
  constructor(
-  vararg @ObjCName("withJavaLangAnyArray", exact = false) somePars: Any?
+  vararg @ObjCName("withNSObjectArray", exact = false) somePars: Any?
  ): this(somePars!!.size) {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }
@@ -58,7 +58,7 @@ enum class Enum2 {
  companion object {
   @JvmStatic
   fun f(
-   @ObjCName("withJavaLangAny", exact = false) o: Any?
+   @ObjCName("withNSObject", exact = false) o: Any?
   ): Enum2? {
    return null
   }
@@ -74,6 +74,6 @@ enum class Enum3 {
  });
 
  constructor(
-  @ObjCName("withId", exact = false) function: Function<Int?, Int?>?
+  @ObjCName("withJavaUtilFunctionFunction", exact = false) function: Function<Int?, Int?>?
  )
 }

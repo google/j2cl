@@ -42,66 +42,72 @@ open class Main {
  @JvmField var f12_private_2: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
  constructor(
-  @ObjCName("withJavaLangString", exact = false) a: String
+  @ObjCName("withNSString", exact = false) a: String
  )
 
  open fun m1(
-  @ObjCName("withJavaLangString", exact = false) a: String,
-  @ObjCName("withId", exact = false) b: MutableList<Double>,
-  @ObjCName("withJavaLangString", exact = false) c: String?
+  @ObjCName("withNSString", exact = false) a: String,
+  @ObjCName("withJavaUtilList", exact = false) b: MutableList<Double>,
+  @ObjCName("withNSString", exact = false) c: String?
  ): String {
   return ""
  }
 
  open fun m2(
-  @ObjCName("withJavaLangString", exact = false) a: String?,
-  @ObjCName("withId", exact = false) b: MutableList<Double>
+  @ObjCName("withNSString", exact = false) a: String?,
+  @ObjCName("withJavaUtilList", exact = false) b: MutableList<Double>
  ): String? {
   return ""
  }
 
  open fun m3(
-  @ObjCName("withJavaLangString", exact = false) a: String,
-  vararg @ObjCName("withJavaLangStringArray", exact = false) args: String
+  @ObjCName("withNSString", exact = false) a: String,
+  vararg @ObjCName("withNSStringArray", exact = false) args: String
  ): String? {
   val args_1: Array<String>? = args as Array<String>?
   return null
  }
 
  open fun m4(
-  @ObjCName("withJsnonnullMyFunction", exact = false) f: Main.MyFunction
+  @ObjCName("withJsnonnullMain_MyFunction", exact = false) f: Main.MyFunction
  ) {}
 
+ @ObjCName("JsnonnullMain_MyFunction", exact = true)
  fun interface MyFunction {
   fun x(
-   @ObjCName("withJavaLangString", exact = false) a: String
+   @ObjCName("withNSString", exact = false) a: String
   ): String
  }
 
+ @ObjCName("JsnonnullMain_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {
   open override fun compare(a: String, b: String): Int {
    return 0
   }
  }
 
+ @ObjCName("JsnonnullMain_NullableStringComparator", exact = true)
  open class NullableStringComparator: Comparator<String?> {
   open override fun compare(a: String?, b: String?): Int {
    return 0
   }
  }
 
+ @ObjCName("JsnonnullMain_NonNullableStringSubNullableComparator", exact = true)
  open class NonNullableStringSubNullableComparator: Main.NullableStringComparator() {
   open override fun compare(a: String, b: String): Int {
    return 0
   }
  }
 
+ @ObjCName("JsnonnullMain_NonNullableTemplatedReturn", exact = true)
  interface NonNullableTemplatedReturn<T> {
   fun get(): T
 
   fun getArray(): Array<T>?
  }
 
+ @ObjCName("JsnonnullMain_NonNullableTemplate", exact = true)
  interface NonNullableTemplate<T: Any> {
   fun get(): T
 

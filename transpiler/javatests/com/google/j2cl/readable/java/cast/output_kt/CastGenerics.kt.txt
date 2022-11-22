@@ -45,7 +45,7 @@ open class CastGenerics<T, E: Number?> {
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
    fun nestedGenericMethod_private_2(
-    @ObjCName("withJavaLangAny", exact = false) o: Any?
+    @ObjCName("withNSObject", exact = false) o: Any?
    ) {
     val t: TT? = o as TT?
    }
@@ -53,7 +53,7 @@ open class CastGenerics<T, E: Number?> {
  }
 
  open fun <EE> method(
-  @ObjCName("withJavaLangAny", exact = false) o: Any?
+  @ObjCName("withNSObject", exact = false) o: Any?
  ): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
   if (o is CastGenerics.Empty1) {
    return (o as EE?) as EE
@@ -105,31 +105,39 @@ open class CastGenerics<T, E: Number?> {
   }
  }
 
+ @ObjCName("CastCastGenerics_A", exact = true)
  fun interface A {
   fun mA()
  }
 
+ @ObjCName("CastCastGenerics_B", exact = true)
  fun interface B {
   fun mB()
  }
 
+ @ObjCName("CastCastGenerics_BaseImplementor", exact = true)
  abstract class BaseImplementor: CastGenerics.A, CastGenerics.B {}
 
+ @ObjCName("CastCastGenerics_Implementor", exact = true)
  open class Implementor: CastGenerics.BaseImplementor() {
   open override fun mA() {}
 
   open override fun mB() {}
  }
 
+ @ObjCName("CastCastGenerics_Container", exact = true)
  open class Container<T> {
   open fun get(): T {
    return null as T
   }
  }
 
+ @ObjCName("CastCastGenerics_Empty1", exact = true)
  interface Empty1 {}
 
+ @ObjCName("CastCastGenerics_Empty2", exact = true)
  interface Empty2<TT> {}
 
+ @ObjCName("CastCastGenerics_Foo", exact = true)
  open class Foo<V> {}
 }

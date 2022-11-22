@@ -17,14 +17,14 @@ import kotlin.native.ObjCName
 @ObjCName("BridgemethodsI", exact = true)
 fun interface I<T, S> {
  fun `fun`(
-  @ObjCName("withId", exact = false) s: S
+  @ObjCName("withNSObject", exact = false) s: S
  ): T
 }
 
 @ObjCName("BridgemethodsA", exact = true)
 open class A<T, S> {
  open fun `fun`(
-  @ObjCName("withId", exact = false) s: S
+  @ObjCName("withNSObject", exact = false) s: S
  ): T {
   return null as T
  }
@@ -44,7 +44,7 @@ open class B: I<Int?, String?>, A<Number?, String?>() {
 @ObjCName("BridgemethodsSpecializedInterface", exact = true)
 interface SpecializedInterface {
  fun `fun`(
-  @ObjCName("withJavaLangString", exact = false) s: String?
+  @ObjCName("withNSString", exact = false) s: String?
  ): String?
 
  fun get(): String?

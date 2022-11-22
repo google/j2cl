@@ -18,7 +18,7 @@ open class DeprecatedExample {
  @JvmField var deprecatedInstanceField: String? = "deprecated field"
 
  open fun deprecatedInstanceMethod(
-  @ObjCName("withJavaLangString", exact = false) someArg: String?
+  @ObjCName("withNSString", exact = false) someArg: String?
  ) {}
 
  constructor()
@@ -28,27 +28,31 @@ open class DeprecatedExample {
 
   @JvmStatic
   fun deprecatedStaticMethod(
-   @ObjCName("withJavaLangAny", exact = false) someObject: Any?
+   @ObjCName("withNSObject", exact = false) someObject: Any?
   ) {}
  }
 
+ @ObjCName("DeprecatedDeprecatedExample_DeprecatedInterface", exact = true)
  fun interface DeprecatedInterface {
   fun doAThing(
    @ObjCName("withInt", exact = false) anInt: Int
   )
  }
 
+ @ObjCName("DeprecatedDeprecatedExample_DeprecatedJsFunction", exact = true)
  fun interface DeprecatedJsFunction {
   fun doAThing(
-   @ObjCName("withJavaLangAny", exact = false) aThing: Any?
+   @ObjCName("withNSObject", exact = false) aThing: Any?
   )
  }
 
+ @ObjCName("DeprecatedDeprecatedExample_DeprecatedEnum", exact = true)
  enum class DeprecatedEnum {
   A_VALUE;
 
  }
 
+ @ObjCName("DeprecatedDeprecatedExample_DeprecatedJsEnum", exact = true)
  enum class DeprecatedJsEnum {
   A_VALUE;
 

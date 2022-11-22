@@ -50,7 +50,7 @@ fun interface Cmp2<T> {
 @ObjCName("IntersectiontypeIntersectionTypeTest", exact = true)
 open class IntersectionTypeTest<U> {
  open fun cast3(
-  @ObjCName("withJavaLangAny", exact = false) s: Any?
+  @ObjCName("withNSObject", exact = false) s: Any?
  ): Any? {
   return s
  }
@@ -73,7 +73,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun <T> cast(
-   @ObjCName("withJavaLangAny", exact = false) o: Any?
+   @ObjCName("withNSObject", exact = false) o: Any?
   ): Getable<T>? {
    if (o == null) {
     return (o).let { it as Getable<T>?; it as Setable?; it }
@@ -83,14 +83,14 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun <T> cast1(
-   @ObjCName("withJavaLangAny", exact = false) s: Any?
+   @ObjCName("withNSObject", exact = false) s: Any?
   ): Getable<Comparable<String>?>? {
    return (s).let { it as Getable<Comparable<String>?>?; it as Setable?; it }
   }
 
   @JvmStatic
   fun <T> cast2(
-   @ObjCName("withJavaLangAny", exact = false) s: Any?
+   @ObjCName("withNSObject", exact = false) s: Any?
   ): Getable<Comparable<T & Any>?>? {
    return (s).let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
   }
@@ -111,7 +111,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun testClosureAssignment(
-   @ObjCName("withJavaLangAny", exact = false) o: Any?
+   @ObjCName("withNSObject", exact = false) o: Any?
   ) {
    val e: IntersectionTypeTest.A? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
    val g: IntersectionTypeTest.EmptyA? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
@@ -120,7 +120,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun <T> get_private_2(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): T {
    return t
   }
@@ -149,19 +149,24 @@ open class IntersectionTypeTest<U> {
   }
  }
 
+ @ObjCName("IntersectiontypeIntersectionTypeTest_MapEntry", exact = true)
  open inner class MapEntry {
   open fun <T> method(
-   @ObjCName("withJavaLangAny", exact = false) o: Any?
+   @ObjCName("withNSObject", exact = false) o: Any?
   ): Getable<T>? {
    return (o).let { it as Getable<T>?; it as Setable?; it }
   }
  }
 
+ @ObjCName("IntersectiontypeIntersectionTypeTest_A", exact = true)
  open class A {}
 
+ @ObjCName("IntersectiontypeIntersectionTypeTest_EmptyA", exact = true)
  interface EmptyA {}
 
+ @ObjCName("IntersectiontypeIntersectionTypeTest_EmptyB", exact = true)
  interface EmptyB {}
 
+ @ObjCName("IntersectiontypeIntersectionTypeTest_SomeConcreteType", exact = true)
  open class SomeConcreteType {}
 }

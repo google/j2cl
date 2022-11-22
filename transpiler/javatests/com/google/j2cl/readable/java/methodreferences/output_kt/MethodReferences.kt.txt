@@ -31,7 +31,7 @@ open class MethodReferences<T> {
  }
 
  open fun sameAs(
-  @ObjCName("withJavaLangNumber", exact = false) n: Number?
+  @ObjCName("withNSNumber", exact = false) n: Number?
  ): Boolean? {
   return Boolean.valueOf(false)
  }
@@ -122,55 +122,64 @@ open class MethodReferences<T> {
   }
  }
 
+ @ObjCName("MethodreferencesMethodReferences_Producer", exact = true)
  fun interface Producer<T> {
   fun produce(): T
  }
 
+ @ObjCName("MethodreferencesMethodReferences_Predicate", exact = true)
  fun interface Predicate<T> {
   fun apply(
-   @ObjCName("withId", exact = false) parameter: T
+   @ObjCName("withNSObject", exact = false) parameter: T
   ): Boolean
  }
 
+ @ObjCName("MethodreferencesMethodReferences_ArrayProducer", exact = true)
  fun interface ArrayProducer<T> {
   fun produce(
    @ObjCName("withInt", exact = false) size: Int
   ): Array<T>?
  }
 
+ @ObjCName("MethodreferencesMethodReferences_ObjectCapturingOuter", exact = true)
  open inner class ObjectCapturingOuter {
   open fun getMain(): MethodReferences<T>? {
    return this@MethodReferences as MethodReferences<T>?
   }
  }
 
+ @ObjCName("MethodreferencesMethodReferences_Function", exact = true)
  fun interface Function<T, U> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): U
  }
 
+ @ObjCName("MethodreferencesMethodReferences_BiFunction", exact = true)
  fun interface BiFunction<T, U, V> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T,
-   @ObjCName("withId", exact = false) u: U
+   @ObjCName("withNSObject", exact = false) t: T,
+   @ObjCName("withNSObject", exact = false) u: U
   ): V
  }
 
+ @ObjCName("MethodreferencesMethodReferences_JsProducer", exact = true)
  fun interface JsProducer<T> {
   fun produce(): T
  }
 
+ @ObjCName("MethodreferencesMethodReferences_JsFunctionInterface", exact = true)
  fun interface JsFunctionInterface<T, U> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): U
  }
 
+ @ObjCName("MethodreferencesMethodReferences_JsBiFunction", exact = true)
  fun interface JsBiFunction<T, U, V> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T,
-   @ObjCName("withId", exact = false) u: U
+   @ObjCName("withNSObject", exact = false) t: T,
+   @ObjCName("withNSObject", exact = false) u: U
   ): V
  }
 }

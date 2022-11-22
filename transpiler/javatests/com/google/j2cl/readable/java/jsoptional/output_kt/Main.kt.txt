@@ -21,11 +21,11 @@ open class Main {
  open fun method1(
   @ObjCName("withInt", exact = false) i1: Int,
   @ObjCName("withJavaLangDouble", exact = false) d: Double?,
-  @ObjCName("withJavaLangInt", exact = false) i: Int?
+  @ObjCName("withJavaLangInteger", exact = false) i: Int?
  ) {}
 
  open fun method2(
-  @ObjCName("withJavaLangString", exact = false) s1: String?,
+  @ObjCName("withNSString", exact = false) s1: String?,
   @ObjCName("withJavaLangDouble", exact = false) d: Double?,
   vararg @ObjCName("withJavaLangBooleanArray", exact = false) i: Boolean?
  ) {
@@ -38,24 +38,26 @@ open class Main {
  }
 
  constructor(
-  @ObjCName("withJavaLangString", exact = false) a: String?
+  @ObjCName("withNSString", exact = false) a: String?
  )
 
  open fun testFunction(
-  @ObjCName("withJsoptionalFunction", exact = false) f: Main.Function?
+  @ObjCName("withJsoptionalMain_Function", exact = false) f: Main.Function?
  ) {}
 
  open fun testOptionalFunction(
-  @ObjCName("withJsoptionalFunction", exact = false) f: Main.Function?
+  @ObjCName("withJsoptionalMain_Function", exact = false) f: Main.Function?
  ) {}
 
+ @ObjCName("JsoptionalMain_Function", exact = true)
  fun interface Function {
   fun f1(
-   @ObjCName("withJavaLangString", exact = false) s: String?,
-   vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+   @ObjCName("withNSString", exact = false) s: String?,
+   vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
   ): Any?
  }
 
+ @ObjCName("JsoptionalMain_AFunction", exact = true)
  class AFunction: Main.Function {
   open override fun f1(i: String?, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
@@ -63,25 +65,29 @@ open class Main {
   }
  }
 
+ @ObjCName("JsoptionalMain_I", exact = true)
  fun interface I<T> {
   fun m(
-   @ObjCName("withId", exact = false) t: T,
-   @ObjCName("withJavaLangAny", exact = false) o: Any?
+   @ObjCName("withNSObject", exact = false) t: T,
+   @ObjCName("withNSObject", exact = false) o: Any?
   )
  }
 
+ @ObjCName("JsoptionalMain_TemplatedSubtype", exact = true)
  open class TemplatedSubtype<T: String?>: Main.I<T> {
   open override fun m(t: T, o: Any?) {}
  }
 
+ @ObjCName("JsoptionalMain_SpecializedSubtype", exact = true)
  open inner class SpecializedSubtype: Main.I<String?> {
   constructor(
-   @ObjCName("withJavaLangAny", exact = false) a: Any?
+   @ObjCName("withNSObject", exact = false) a: Any?
   )
 
   open override fun m(t: String?, o: Any?) {}
  }
 
+ @ObjCName("JsoptionalMain_NonJsTypeSubtype", exact = true)
  open class NonJsTypeSubtype: Main.I<String?> {
   open override fun m(t: String?, o: Any?) {}
  }

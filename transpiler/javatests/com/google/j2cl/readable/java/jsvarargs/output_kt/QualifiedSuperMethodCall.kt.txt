@@ -15,6 +15,7 @@ import kotlin.native.ObjCName
 open class QualifiedSuperMethodCall: Main {
  constructor(): super(0)
 
+ @ObjCName("JsvarargsQualifiedSuperMethodCall_InnerClass", exact = true)
  open inner class InnerClass {
   open fun test() {
    super<Main>@QualifiedSuperMethodCall.f3(1, 1, 2)

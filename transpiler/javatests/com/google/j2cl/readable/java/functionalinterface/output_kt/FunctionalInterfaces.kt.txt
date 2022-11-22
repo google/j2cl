@@ -13,46 +13,53 @@ import kotlin.native.ObjCName
 
 @ObjCName("FunctionalinterfaceFunctionalInterfaces", exact = true)
 open class FunctionalInterfaces {
+ @ObjCName("FunctionalinterfaceFunctionalInterfaces_NonParametrized", exact = true)
  fun interface NonParametrized {
   fun apply(
-   @ObjCName("withJavaLangString", exact = false) string: String?
+   @ObjCName("withNSString", exact = false) string: String?
   ): String?
  }
 
+ @ObjCName("FunctionalinterfaceFunctionalInterfaces_Parametrized", exact = true)
  fun interface Parametrized<T> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): T
  }
 
+ @ObjCName("FunctionalinterfaceFunctionalInterfaces_Specialized", exact = true)
  fun interface Specialized: FunctionalInterfaces.Parametrized<String?> {
   override fun apply(string: String?): String?
  }
 
+ @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", exact = true)
  fun interface WithDefaultMethod {
   fun apply(
-   @ObjCName("withJavaLangString", exact = false) string: String?
+   @ObjCName("withNSString", exact = false) string: String?
   ): String?
 
   fun defaultApply(
-   @ObjCName("withJavaLangString", exact = false) string: String?
+   @ObjCName("withNSString", exact = false) string: String?
   ): String? {
    return this.apply(string)
   }
  }
 
+ @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithObjectMethods", exact = true)
  fun interface WithObjectMethods {
   fun apply(
-   @ObjCName("withJavaLangString", exact = false) string: String?
+   @ObjCName("withNSString", exact = false) string: String?
   ): String?
  }
 
+ @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", exact = true)
  interface WithParametrizedMethod {
   fun <T> apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): T
  }
 
+ @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithKtProperty", exact = true)
  interface WithKtProperty {
   val size: Int
  }

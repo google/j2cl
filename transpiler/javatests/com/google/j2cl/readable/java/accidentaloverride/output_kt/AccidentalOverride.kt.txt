@@ -15,14 +15,14 @@ import kotlin.native.ObjCName
 @ObjCName("AccidentaloverrideParent", exact = true)
 open class Parent<T: Error?> {
  open fun foo(
-  @ObjCName("withId", exact = false) e: T
+  @ObjCName("withJavaLangError", exact = false) e: T
  ) {}
 }
 
 @ObjCName("AccidentaloverrideSuperInterface", exact = true)
 fun interface SuperInterface<T> {
  fun foo(
-  @ObjCName("withId", exact = false) t: T
+  @ObjCName("withNSObject", exact = false) t: T
  )
 }
 

@@ -86,7 +86,7 @@ open class Main {
 
   @JvmStatic
   fun <T> boxingPassthrough_private_2(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): T {
    return t
   }
@@ -97,6 +97,7 @@ open class Main {
   }
  }
 
+ @ObjCName("JsenumMain_ComparableJsEnum", exact = true)
  enum class ComparableJsEnum {
   ZERO,
   ONE,
@@ -107,6 +108,7 @@ open class Main {
   }
  }
 
+ @ObjCName("JsenumMain_IntJsEnum", exact = true)
  enum class IntJsEnum {
   MINUSONE(-1),
   TWENTY(20),
@@ -125,6 +127,7 @@ open class Main {
   }
  }
 
+ @ObjCName("JsenumMain_StringJsEnum", exact = true)
  enum class StringJsEnum {
   ONE("ONE"),
   THREE("THREE");
@@ -136,12 +139,13 @@ open class Main {
   }
 
   constructor(
-   @ObjCName("withJavaLangString", exact = false) value: String?
+   @ObjCName("withNSString", exact = false) value: String?
   ) {
    this.value_private_2 = value
   }
  }
 
+ @ObjCName("JsenumMain_NonNullableStringJsEnum", exact = true)
  enum class NonNullableStringJsEnum {
   ONE("ONE"),
   THREE("THREE");
@@ -153,23 +157,25 @@ open class Main {
   }
 
   constructor(
-   @ObjCName("withJavaLangString", exact = false) value: String?
+   @ObjCName("withNSString", exact = false) value: String?
   ) {
    this.value_private_2 = value!!
   }
  }
 
+ @ObjCName("JsenumMain_NativeStringEnum", exact = true)
  enum class NativeStringEnum {
   ONE,
   THREE;
 
  }
 
+ @ObjCName("JsenumMain_TemplatedField", exact = true)
  open class TemplatedField<T> {
   @JvmField var value: T = null as T
 
   constructor(
-   @ObjCName("withId", exact = false) value: T
+   @ObjCName("withNSObject", exact = false) value: T
   ) {
    this.value = value
   }
@@ -179,9 +185,10 @@ open class Main {
   }
  }
 
+ @ObjCName("JsenumMain_Foo", exact = true)
  open class Foo<T> {
   constructor(
-   @ObjCName("withId", exact = false) c: Optional<Main.IntJsEnum>?
+   @ObjCName("withJavaUtilOptional", exact = false) c: Optional<Main.IntJsEnum>?
   )
  }
 }

@@ -13,13 +13,16 @@ import kotlin.native.ObjCName
 open class MultipleNestings {
  open fun funInM() {}
 
+ @ObjCName("InnerclassinheritanceMultipleNestings_Parent", exact = true)
  open inner class Parent {
   open fun `fun`() {}
  }
 
+ @ObjCName("InnerclassinheritanceMultipleNestings_InnerClass1", exact = true)
  open inner class InnerClass1: MultipleNestings.Parent() {
   open fun funInI1() {}
 
+  @ObjCName("InnerclassinheritanceMultipleNestings_InnerClass1_InnerClass2", exact = true)
   open inner class InnerClass2: MultipleNestings.Parent() {
    open fun funInI2() {}
 

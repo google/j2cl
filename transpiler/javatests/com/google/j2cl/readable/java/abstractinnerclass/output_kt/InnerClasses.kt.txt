@@ -11,16 +11,19 @@ import kotlin.native.ObjCName
 
 @ObjCName("AbstractinnerclassInnerClasses", exact = true)
 open class InnerClasses {
+ @ObjCName("AbstractinnerclassInnerClasses_A", exact = true)
  fun interface A {
   fun foo()
  }
 
+ @ObjCName("AbstractinnerclassInnerClasses_B", exact = true)
  abstract class B: InnerClasses.A {
   open fun bar() {
    this.foo()
   }
  }
 
+ @ObjCName("AbstractinnerclassInnerClasses_C", exact = true)
  abstract inner class C: InnerClasses.A {
   open fun bar() {
    this.foo()

@@ -18,7 +18,7 @@ open class MultipleAbstractParents {
  companion object {
   @JvmStatic
   fun main(
-   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+   vararg @ObjCName("withNSStringArray", exact = false) args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    assert(MultipleAbstractParents.ArrayList<String?>().getFoo(null)!!.equals("AbstractCollection"))
@@ -27,45 +27,58 @@ open class MultipleAbstractParents {
   }
  }
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_List", exact = true)
  fun interface List<T> {
   fun getFoo(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): String?
  }
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_Collection", exact = true)
  fun interface Collection<T> {
   fun getFoo(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): String?
  }
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractListCollection", exact = true)
  abstract class AbstractListCollection<T>: MultipleAbstractParents.List<T>, MultipleAbstractParents.Collection<T> {}
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractCollection", exact = true)
  abstract class AbstractCollection<T> {
   open fun getFoo(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withNSObject", exact = false) t: T
   ): String? {
    return "AbstractCollection"
   }
  }
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractList", exact = true)
  abstract class AbstractList<T>: MultipleAbstractParents.List<T>, MultipleAbstractParents.AbstractCollection<T>() {}
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractList2", exact = true)
  abstract class AbstractList2<T>: MultipleAbstractParents.List<T> {}
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_ArrayList", exact = true)
  open class ArrayList<T>: MultipleAbstractParents.AbstractList<T>() {}
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_IStringList", exact = true)
  fun interface IStringList: MultipleAbstractParents.List<String?> {
   override fun getFoo(string: String?): String?
  }
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractStringList", exact = true)
  abstract class AbstractStringList: MultipleAbstractParents.IStringList, MultipleAbstractParents.AbstractList<String?>() {}
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractStringList2", exact = true)
  abstract class AbstractStringList2: MultipleAbstractParents.IStringList, MultipleAbstractParents.AbstractList2<String?>() {}
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractStringList3", exact = true)
  abstract class AbstractStringList3: MultipleAbstractParents.AbstractList2<String?>() {}
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_StringList", exact = true)
  open class StringList: MultipleAbstractParents.AbstractStringList() {}
 
+ @ObjCName("MultipleabstractparentsMultipleAbstractParents_StringListChild", exact = true)
  open class StringListChild: MultipleAbstractParents.StringList() {}
 }

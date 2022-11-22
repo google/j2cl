@@ -17,7 +17,7 @@ import nestedgenericclass.NestedGenericClass
 @ObjCName("NestedgenericclassNestedGenericClass", exact = true)
 open class NestedGenericClass<T> {
  open fun <S> `fun`(
-  @ObjCName("withId", exact = false) t: S
+  @ObjCName("withNSObject", exact = false) t: S
  ) {
   open class ___1E<S> {}
   open class ___1F {
@@ -45,26 +45,32 @@ open class NestedGenericClass<T> {
   n!!.C().D()
  }
 
+ @ObjCName("NestedgenericclassNestedGenericClass_A", exact = true)
  open inner class A<T> {
+  @ObjCName("NestedgenericclassNestedGenericClass_A_B", exact = true)
   open inner class B<T> {
    constructor()
   }
  }
 
+ @ObjCName("NestedgenericclassNestedGenericClass_C", exact = true)
  open inner class C {
   @JvmField var c: T = null as T
 
+  @ObjCName("NestedgenericclassNestedGenericClass_C_D", exact = true)
   open inner class D {
    @JvmField var d: T = null as T
   }
  }
 
+ @ObjCName("NestedgenericclassNestedGenericClass_RecursiveTypeVariable", exact = true)
  open inner class RecursiveTypeVariable<T: NestedGenericClass<T>.RecursiveTypeVariable<T>?> {
   open fun test() {
    val t: T? = null
    t!!.Inner()
   }
 
+  @ObjCName("NestedgenericclassNestedGenericClass_RecursiveTypeVariable_Inner", exact = true)
   open inner class Inner {}
  }
 }

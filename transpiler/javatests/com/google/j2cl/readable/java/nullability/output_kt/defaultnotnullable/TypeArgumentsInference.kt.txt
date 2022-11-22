@@ -21,7 +21,7 @@ open class TypeArgumentsInference {
 
   @JvmStatic
   fun <K, V> pairIdentity(
-   @ObjCName("withId", exact = false) pair: TypeArgumentsInference.Pair<K, V>
+   @ObjCName("withNullabilityDefaultnotnullableTypeArgumentsInference_Pair", exact = false) pair: TypeArgumentsInference.Pair<K, V>
   ): TypeArgumentsInference.Pair<K, V> {
    return pair
   }
@@ -32,5 +32,6 @@ open class TypeArgumentsInference {
   }
  }
 
+ @ObjCName("NullabilityDefaultnotnullableTypeArgumentsInference_Pair", exact = true)
  class Pair<K, V> {}
 }

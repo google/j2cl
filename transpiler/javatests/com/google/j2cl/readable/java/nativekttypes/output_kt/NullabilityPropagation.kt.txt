@@ -12,6 +12,7 @@ import nativekttypes.NullabilityPropagation
 
 @ObjCName("NativekttypesNullabilityPropagation", exact = true)
 class NullabilityPropagation {
+ @ObjCName("NativekttypesNullabilityPropagation_NullabilityToPropagate", exact = true)
  interface NullabilityToPropagate {
   fun nullableReturnType1(): String?
 
@@ -22,22 +23,23 @@ class NullabilityPropagation {
   fun nonNullReturnType2(): String
 
   fun nullableParameter1(
-   @ObjCName("withJavaLangString", exact = false) s: String?
+   @ObjCName("withNSString", exact = false) s: String?
   )
 
   fun nullableParameter2(
-   @ObjCName("withJavaLangString", exact = false) s: String?
+   @ObjCName("withNSString", exact = false) s: String?
   )
 
   fun nonNullParameter1(
-   @ObjCName("withJavaLangString", exact = false) s: String
+   @ObjCName("withNSString", exact = false) s: String
   )
 
   fun nonNullParameter2(
-   @ObjCName("withJavaLangString", exact = false) s: String
+   @ObjCName("withNSString", exact = false) s: String
   )
  }
 
+ @ObjCName("NativekttypesNullabilityPropagation_Subtype", exact = true)
  open inner class Subtype: NullabilityPropagation.NullabilityToPropagate {
   open override fun nullableReturnType1(): String? {
    return ""

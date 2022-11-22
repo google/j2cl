@@ -37,8 +37,8 @@ open class LocalNameCollision {
 
  open fun testClassParameterCollision(
   @ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean,
-  @ObjCName("withJavaLangAny", exact = false) Asserts: Any?,
-  @ObjCName("withJavaLangAny", exact = false) ___Asserts: Any?,
+  @ObjCName("withNSObject", exact = false) Asserts: Any?,
+  @ObjCName("withNSObject", exact = false) ___Asserts: Any?,
   @ObjCName("withInt", exact = false) l_Asserts: Int,
   @ObjCName("withInt", exact = false) A: Int
  ): Boolean {
@@ -47,8 +47,8 @@ open class LocalNameCollision {
 
  constructor(
   @ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean,
-  @ObjCName("withJavaLangAny", exact = false) Asserts: Any?,
-  @ObjCName("withJavaLangAny", exact = false) ___Asserts: Any?,
+  @ObjCName("withNSObject", exact = false) Asserts: Any?,
+  @ObjCName("withNSObject", exact = false) ___Asserts: Any?,
   @ObjCName("withInt", exact = false) l_Asserts: Int,
   @ObjCName("withInt", exact = false) A: Int
  ) {
@@ -72,5 +72,6 @@ open class A {
   }
  }
 
+ @ObjCName("LocalnamecollisionA_B", exact = true)
  open class B {}
 }

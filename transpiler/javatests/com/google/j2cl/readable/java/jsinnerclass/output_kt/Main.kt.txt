@@ -20,13 +20,14 @@ open class Main {
  companion object {
   @JvmStatic
   fun main(
-   vararg @ObjCName("withJavaLangStringArray", exact = false) args: String?
+   vararg @ObjCName("withNSStringArray", exact = false) args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    assert(Main.Outer().method() == 5)
   }
  }
 
+ @ObjCName("JsinnerclassMain_Outer", exact = true)
  open class Outer {
   @JvmField var a: Int = 2
 
@@ -34,6 +35,7 @@ open class Main {
    return Inner().getB() + this.a
   }
 
+  @ObjCName("JsinnerclassMain_Outer_Inner", exact = true)
   open inner class Inner {
    @JvmField var b_private_2: Int = 0
 

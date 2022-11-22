@@ -34,9 +34,9 @@ open class Main {
  @JvmField var innerField: KTopLevel<String?>.KInner<String?>? = null
 
  open fun methodArguments(
-  @ObjCName("withId", exact = false) foo: KTopLevel<String?>?,
-  @ObjCName("withId", exact = false) nested: KTopLevel.KNested<String?>?,
-  @ObjCName("withId", exact = false) inner: KTopLevel<String?>.KInner<String?>?
+  @ObjCName("withNativekttypesNativeTopLevel", exact = false) foo: KTopLevel<String?>?,
+  @ObjCName("withNativekttypesNativeTopLevel_Nested", exact = false) nested: KTopLevel.KNested<String?>?,
+  @ObjCName("withNativekttypesNativeTopLevel_Inner", exact = false) inner: KTopLevel<String?>.KInner<String?>?
  ) {}
 
  open fun memberAccess() {
@@ -121,7 +121,7 @@ open class Main {
  }
 
  open fun todoMethod(
-  @ObjCName("withJavaLangString", exact = false) string: String?
+  @ObjCName("withNSString", exact = false) string: String?
  ) {
   TODO("J2KT: not yet supported")
  }
@@ -130,7 +130,7 @@ open class Main {
 @ObjCName("NativekttypesSubclass", exact = true)
 open class Subclass<V>: KInterface<V>, KTopLevel<V> {
  constructor(
-  @ObjCName("withId", exact = false) v: V
+  @ObjCName("withNSObject", exact = false) v: V
  ): super(v)
 
  open override fun renamedMethod(): Int {
@@ -181,7 +181,7 @@ open class Subclass<V>: KInterface<V>, KTopLevel<V> {
 @ObjCName("NativekttypesSubsubclass", exact = true)
 open class Subsubclass<V>: Subclass<V> {
  constructor(
-  @ObjCName("withId", exact = false) v: V
+  @ObjCName("withNSObject", exact = false) v: V
  ): super(v)
 
  open override fun renamedMethod(): Int {

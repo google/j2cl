@@ -16,7 +16,7 @@ open class CastOnArrayInit {
  companion object {
   @JvmStatic
   fun <E> `fun`(
-   vararg @ObjCName("withIdArray", exact = false) args: CastOnArrayInit.Foo<E>?
+   vararg @ObjCName("withCastonarrayinitCastOnArrayInit_FooArray", exact = false) args: CastOnArrayInit.Foo<E>?
   ) {
    val args_1: Array<CastOnArrayInit.Foo<E>?>? = args as Array<CastOnArrayInit.Foo<E>?>?
   }
@@ -29,5 +29,6 @@ open class CastOnArrayInit {
   }
  }
 
+ @ObjCName("CastonarrayinitCastOnArrayInit_Foo", exact = true)
  open class Foo<T> {}
 }

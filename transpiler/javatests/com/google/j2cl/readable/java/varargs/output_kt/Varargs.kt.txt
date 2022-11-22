@@ -29,13 +29,13 @@ open class Varargs {
 
  open fun test(
   @ObjCName("withInt", exact = false) a: Int,
-  vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+  vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
  ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
  }
 
  open fun testCloneable(
-  vararg @ObjCName("withJavaLangCloneableArray", exact = false) args: Cloneable?
+  vararg @ObjCName("withNSCopyingArray", exact = false) args: Cloneable?
  ) {
   val args_1: Array<Cloneable?>? = args as Array<Cloneable?>?
  }
@@ -47,14 +47,14 @@ open class Varargs {
  }
 
  open fun testAssignment(
-  vararg @ObjCName("withJavaLangAnyArray", exact = false) args: Any?
+  vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
  ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
   this.args_private_2 = args_1 as Array<Any?>?
  }
 
  open fun testLambda(
-  @ObjCName("withVarargsFunctionalInterface", exact = false) functionalInterface: Varargs.FunctionalInterface?
+  @ObjCName("withVarargsVarargs_FunctionalInterface", exact = false) functionalInterface: Varargs.FunctionalInterface?
  ) {}
 
  open fun main() {
@@ -75,23 +75,24 @@ open class Varargs {
  companion object {
   @JvmStatic
   fun <T> `fun`(
-   vararg @ObjCName("withIdArray", exact = false) elements: T
+   vararg @ObjCName("withNSObjectArray", exact = false) elements: T
   ) {
    val elements_1: Array<T>? = elements as Array<T>?
   }
 
   @JvmStatic
   fun <E> bar(
-   @ObjCName("withId", exact = false) a: E,
-   @ObjCName("withId", exact = false) b: E
+   @ObjCName("withNSObject", exact = false) a: E,
+   @ObjCName("withNSObject", exact = false) b: E
   ) {
    Varargs.`fun`<E>(a, b)
   }
  }
 
+ @ObjCName("VarargsVarargs_FunctionalInterface", exact = true)
  fun interface FunctionalInterface {
   fun apply(
-   vararg @ObjCName("withJavaLangStringArray", exact = false) strings: String?
+   vararg @ObjCName("withNSStringArray", exact = false) strings: String?
   )
  }
 }

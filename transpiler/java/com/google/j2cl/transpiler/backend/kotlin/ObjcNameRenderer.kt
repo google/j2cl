@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeVariable
 
 internal fun Renderer.renderOptInExperimentalObjCNameFileAnnotation() {
   render("@file:")
@@ -49,24 +50,35 @@ internal fun Renderer.renderObjCNameAnnotation(parameterDescriptor: ParameterDes
   render("@")
   renderQualifiedName("kotlin.native.ObjCName")
   renderInParentheses {
-    render("\"with")
-    render(parameterDescriptor.getTypeDescriptor().objCName.titleCase)
-    render("\", exact = false")
+    renderString("with${parameterDescriptor.typeDescriptor.objCName.titleCase}")
+    render(", exact = false")
   }
   render(" ")
 }
 
 private val TypeDeclaration.objCName: String
-  get() = objCPackagePrefix + objCSimpleName
+  get() =
+    when (qualifiedBinaryName) {
+      "java.lang.Object" -> "NSObject"
+      "java.lang.String" -> "NSString"
+      "java.lang.Class" -> "IOSClass"
+      "java.lang.Number" -> "NSNumber"
+      "java.lang.Cloneable" -> "NSCopying"
+      else -> objCPackagePrefix + objCSimpleName
+    }
 
 private val TypeDeclaration.objCPackagePrefix: String
-  get() = (packageName ?: "").split('.').map { it.titleCase }.joinToString(separator = "")
+  get() =
+    (packageName ?: "").split('.').map { it.titleCase.toObjCName }.joinToString(separator = "")
 
 private val TypeDeclaration.objCSimpleName: String
-  get() = ktSimpleName
+  get() = (enclosingTypeDeclaration?.objCSimpleName?.plus("_") ?: "") + simpleSourceName.toObjCName
 
 private val String.titleCase
   get() = StringUtils.capitalize(this)
+
+private val String.toObjCName
+  get() = replace('$', '_')
 
 private val TypeDescriptor.objCName: String
   get() =
@@ -81,13 +93,15 @@ private val TypeDescriptor.objCName: String
           PrimitiveTypes.CHAR -> "char"
           PrimitiveTypes.FLOAT -> "float"
           PrimitiveTypes.DOUBLE -> "double"
-          // TODO(litstrong): figure out how to hanlde Void or void
+          // TODO(litstrong): figure out how to handle Void or void
           else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
         }
       }
-      is ArrayTypeDescriptor ->
-        leafTypeDescriptor.objCName + "Array" + (if (dimensions > 1) "${dimensions}" else "")
-      is DeclaredTypeDescriptor ->
-        (if (hasTypeArguments()) "id" else typeDeclaration.objCName.titleCase)
+      is ArrayTypeDescriptor -> leafTypeDescriptor.objCName + "Array" + dimensionsSuffix
+      is DeclaredTypeDescriptor -> typeDeclaration.objCName.titleCase
+      is TypeVariable -> upperBoundTypeDescriptor.objCName
       else -> "id"
     }
+
+private val ArrayTypeDescriptor.dimensionsSuffix
+  get() = if (dimensions > 1) "$dimensions" else ""

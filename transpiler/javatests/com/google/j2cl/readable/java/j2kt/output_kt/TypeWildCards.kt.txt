@@ -15,16 +15,19 @@ open class TypeWildCards {
  companion object {
   @JvmStatic
   fun testSupplierWithUpperAndLowerBounds(
-   @ObjCName("withId", exact = false) supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?
+   @ObjCName("withJ2ktTypeWildCards_SupplierWithUpperBound", exact = false) supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?
   ) {
    val parent: TypeWildCards.Parent? = supplier!!.get() as TypeWildCards.Parent?
   }
  }
 
+ @ObjCName("J2ktTypeWildCards_Parent", exact = true)
  open class Parent {}
 
+ @ObjCName("J2ktTypeWildCards_Child", exact = true)
  open class Child: TypeWildCards.Parent() {}
 
+ @ObjCName("J2ktTypeWildCards_SupplierWithUpperBound", exact = true)
  fun interface SupplierWithUpperBound<T: TypeWildCards.Parent?> {
   fun get(): T
  }
