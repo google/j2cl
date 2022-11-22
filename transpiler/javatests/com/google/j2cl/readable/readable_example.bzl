@@ -35,6 +35,7 @@ def readable_example(
         generate_library_info = False,
         j2cl_library_tags = [],
         javacopts = [],
+        generate_js_readables = True,
         generate_wasm_readables = True,
         wasm_entry_points = [],
         generate_kt_readables = True,
@@ -77,32 +78,39 @@ def readable_example(
         **kwargs
     )
 
-    _readable_diff_test(
-        name = "readable_golden",
-        target = ":readable.js",
-        dir_out = "output_closure",
-        tags = ["j2cl"],
-    )
+    if generate_js_readables:
+        # this is just an alias so that we can disable the readable golden generation in replace_all.py.
+        native.alias(
+            name = "readable_js",
+            actual = ":readable",
+        )
 
-    # Verify compilability of generated JS.
-    js_binary(
-        name = "readable_binary",
-        defs = J2CL_OPTIMIZED_DEFS + [
-            "--conformance_config=transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt",
-            "--jscomp_warning=conformanceViolations",
-            "--jscomp_warning=strictPrimitiveOperators",
-            "--summary_detail_level=3",
-        ] + defs,
-        compiler = "//javascript/tools/jscompiler:head",
-        extra_inputs = ["//transpiler/javatests/com/google/j2cl/readable:conformance_proto"],
-        deps = [":readable"],
-    )
+        _readable_diff_test(
+            name = "readable_golden",
+            target = ":readable.js",
+            dir_out = "output_closure",
+            tags = ["j2cl"],
+        )
 
-    build_test(
-        name = "readable_build_test",
-        targets = ["readable_binary"],
-        tags = ["j2cl"],
-    )
+        # Verify compilability of generated JS.
+        js_binary(
+            name = "readable_binary",
+            defs = J2CL_OPTIMIZED_DEFS + [
+                "--conformance_config=transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt",
+                "--jscomp_warning=conformanceViolations",
+                "--jscomp_warning=strictPrimitiveOperators",
+                "--summary_detail_level=3",
+            ] + defs,
+            compiler = "//javascript/tools/jscompiler:head",
+            extra_inputs = ["//transpiler/javatests/com/google/j2cl/readable:conformance_proto"],
+            deps = [":readable"],
+        )
+
+        build_test(
+            name = "readable_build_test",
+            targets = ["readable_binary"],
+            tags = ["j2cl"],
+        )
 
     if generate_wasm_readables:
         j2wasm_application(

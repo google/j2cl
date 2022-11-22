@@ -158,7 +158,7 @@ def main(argv):
 
   readable_pattern = ".*" if build_all else readable_name
   js_readable_dirs = get_readable_dirs(
-      readable_pattern) if "CLOSURE" in args.platforms else []
+      readable_pattern, "_js") if "CLOSURE" in args.platforms else []
   wasm_readable_dirs = get_readable_dirs(
       readable_pattern, "_wasm") if "WASM" in args.platforms else []
   kt_readable_dirs = get_readable_dirs(
