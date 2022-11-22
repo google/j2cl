@@ -27,7 +27,14 @@
 )
 
 ;;; Code for varargs.Varargs [itable.init]
-(global $varargs.Varargs.itable (ref $itable) (array.init_static $itable 
+(global $varargs.Varargs.itable (ref $varargs.Varargs.itable) (struct.new $varargs.Varargs.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for varargs.Child [vtable.init]
@@ -47,7 +54,14 @@
 )
 
 ;;; Code for varargs.Child [itable.init]
-(global $varargs.Child.itable (ref $itable) (array.init_static $itable 
+(global $varargs.Child.itable (ref $varargs.Child.itable) (struct.new $varargs.Child.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [vtable.init]
@@ -62,16 +76,22 @@
 )
 
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [itable.init]
-(global $varargs.Varargs.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+(global $varargs.Varargs.$LambdaImplementor$1.itable (ref $varargs.Varargs.$LambdaImplementor$1.itable) (struct.new $varargs.Varargs.$LambdaImplementor$1.itable 
  (struct.new $varargs.Varargs.FunctionalInterface.vtable
   (ref.func $m_apply__arrayOf_java_lang_String__void@varargs.Varargs.$LambdaImplementor$1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for varargs.Varargs [CLASS]
 (type $varargs.Varargs (struct_subtype 
  (field $vtable (ref $varargs.Varargs.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $varargs.Varargs.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
   $java.lang.Object)
@@ -89,6 +109,15 @@
  (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
 )
+(type $varargs.Varargs.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Varargs Varargs.$create(int... args)
 (func $$create__arrayOf_int@varargs.Varargs
@@ -330,7 +359,7 @@
 ;;; Code for varargs.Child [CLASS]
 (type $varargs.Child (struct_subtype 
  (field $vtable (ref $varargs.Child.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $varargs.Child.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_args__varargs_Varargs_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
   $varargs.Varargs)
@@ -348,6 +377,15 @@
  (field $m_main__void (ref $function.m_main__void))
   $varargs.Varargs.vtable)
 )
+(type $varargs.Child.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $varargs.Varargs.itable))
 
 ;;; Child Child.$create()
 (func $$create__@varargs.Child
@@ -420,7 +458,7 @@
 ;;; Code for varargs.Varargs.$LambdaImplementor$1 [CLASS]
 (type $varargs.Varargs.$LambdaImplementor$1 (struct_subtype 
  (field $vtable (ref $varargs.Varargs.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $varargs.Varargs.$LambdaImplementor$1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__varargs_Varargs_$LambdaImplementor$1 (ref null $varargs.Varargs))
   $java.lang.Object)
@@ -433,6 +471,15 @@
  (field $m_apply__arrayOf_java_lang_String__void (ref $function.m_apply__arrayOf_java_lang_String__void))
   $java.lang.Object.vtable)
 )
+(type $varargs.Varargs.$LambdaImplementor$1.itable (struct_subtype 
+(field $slot0 (ref $varargs.Varargs.FunctionalInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create(Varargs $outer_this)
 (func $$create__varargs_Varargs@varargs.Varargs.$LambdaImplementor$1

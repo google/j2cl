@@ -19,6 +19,7 @@ import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.lang.String.format;
+import static java.util.Arrays.stream;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -41,7 +42,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -110,9 +110,15 @@ public class WasmModuleGenerator {
 
   private void emitItableSupportTypes() {
     builder.newLine();
-    // The itable is an array of interface vtables. However since there is no common super type
-    // for all vtables, the array is defined as array of 'struct' which is the top type for structs.
-    builder.append("(type $itable (array (ref null struct)))");
+    // The itable is a struct that contains only interface vtables. Interfaces are assigned a slot
+    // on this struct based on the classes that implement them.
+    builder.append("(type $itable (struct ");
+    for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
+      builder.newLine();
+      builder.append(String.format("(field $slot%d (ref null struct))", slot));
+    }
+    builder.newLine();
+    builder.append("))");
   }
 
   private void emitGlobals(Library library) {
@@ -215,15 +221,19 @@ public class WasmModuleGenerator {
 
   private void renderType(Type type) {
     if (type.isInterface()) {
-      // Interfaces at runtime are treated as java.lang.Object; they don't have an empty structure
-      // nor rtts.
+      // Interfaces at runtime are treated as java.lang.Object.
       renderInterfaceVtableStruct(type);
     } else {
       renderTypeStruct(type);
       renderClassVtableStruct(type);
+      renderClassItableStruct(type);
     }
-
     renderTypeMethods(type);
+  }
+
+  private void renderClassItableStruct(Type type) {
+    TypeDeclaration typeDeclaration = type.getDeclaration();
+    emitItableType(typeDeclaration, getItableSlots(typeDeclaration));
   }
 
   /** Renders the struct for the vtable of a class. */
@@ -462,7 +472,9 @@ public class WasmModuleGenerator {
             environment.getWasmVtableTypeName(type.getTypeDescriptor())));
     // The second field is always the itable for interface method dispatch.
     builder.newLine();
-    builder.append("(field $itable (ref $itable))");
+    builder.append(
+        format(
+            "(field $itable (ref %s))", environment.getWasmItableTypeName(type.getDeclaration())));
 
     WasmTypeLayout wasmType = environment.getWasmTypeLayout(type.getDeclaration());
     for (Field field : wasmType.getAllInstanceFields()) {
@@ -527,37 +539,70 @@ public class WasmModuleGenerator {
   private void emitItableInitialization(TypeDeclaration typeDeclaration) {
     emitBeginCodeComment(typeDeclaration, "itable.init");
 
-    ImmutableList<TypeDeclaration> superInterfaces =
-        typeDeclaration.getAllSuperTypesIncludingSelf().stream()
-            .filter(TypeDeclaration::isInterface)
-            .collect(toImmutableList());
-
-    // Compute the itable for this type.
-    int maxSlot = superInterfaces.stream().mapToInt(environment::getInterfaceSlot).max().orElse(-1);
-    TypeDeclaration[] itableSlots = new TypeDeclaration[maxSlot + 1];
-    superInterfaces.forEach(
-        superInterface ->
-            itableSlots[environment.getInterfaceSlot(superInterface)] = superInterface);
-
-    // Create the array of interface vtables of the required size and store it in a global variable
+    // Create the struct of interface vtables of the required size and store it in a global variable
     // to be able to use it when objects of this class are instantiated.
     builder.newLine();
     builder.append(
         String.format(
-            "(global %s (ref $itable) (array.init_static $itable ",
-            environment.getWasmItableGlobalName(typeDeclaration)));
+            "(global %s (ref %s) (struct.new %s ",
+            environment.getWasmItableGlobalName(typeDeclaration),
+            environment.getWasmItableTypeName(typeDeclaration),
+            environment.getWasmItableTypeName(typeDeclaration)));
     builder.indent();
     WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
-    Arrays.stream(itableSlots).forEach(i -> initializeInterfaceVtable(wasmTypeLayout, i));
+    stream(getItableSlots(typeDeclaration))
+        .forEach(i -> initializeInterfaceVtable(wasmTypeLayout, i));
     builder.newLine();
     builder.append("))");
     builder.unindent();
     emitEndCodeComment(typeDeclaration, "itable.init");
   }
 
+  private TypeDeclaration[] getItableSlots(TypeDeclaration typeDeclaration) {
+    ImmutableList<TypeDeclaration> superInterfaces =
+        typeDeclaration.getAllSuperTypesIncludingSelf().stream()
+            .filter(TypeDeclaration::isInterface)
+            .collect(toImmutableList());
+
+    // Compute the itable for this type.
+    int numSlots = environment.getNumberOfInterfaceSlots();
+    TypeDeclaration[] itableSlots = new TypeDeclaration[numSlots];
+    superInterfaces.forEach(
+        superInterface ->
+            itableSlots[environment.getInterfaceSlot(superInterface)] = superInterface);
+    return itableSlots;
+  }
+
+  /** Emits a specialized itable type for this type to allow for better optimizations. */
+  private void emitItableType(TypeDeclaration typeDeclaration, TypeDeclaration[] itableSlots) {
+    // Create the specialized struct for the itable for this type. A specialized itable type will
+    // be a subtype of the specialized itable type for its superclass. Note that the struct fields
+    // get incrementally specialized in this struct in the subclasses as the interfaces are
+    // implemented by them.
+    builder.newLine();
+    builder.append(
+        format("(type %s (struct_subtype ", environment.getWasmItableTypeName(typeDeclaration)));
+    for (int slot = 0; slot < environment.getNumberOfInterfaceSlots(); slot++) {
+      builder.newLine();
+      builder.append(String.format("(field $slot%d ", slot));
+      if (itableSlots[slot] == null) {
+        // This type does not use the struct, so it is kept at the generic struct type.
+        builder.append("(ref null struct))");
+      } else {
+        builder.append(
+            String.format("(ref %s))", environment.getWasmVtableTypeName(itableSlots[slot])));
+      }
+    }
+    builder.newLine();
+    builder.append(
+        format(
+            " %s))", environment.getWasmItableTypeName(typeDeclaration.getSuperTypeDeclaration())));
+  }
+
   private void initializeInterfaceVtable(
       WasmTypeLayout wasmTypeLayout, TypeDeclaration interfaceDeclaration) {
     if (interfaceDeclaration == null) {
+      builder.newLine();
       builder.append(" (ref.null struct)");
       return;
     }

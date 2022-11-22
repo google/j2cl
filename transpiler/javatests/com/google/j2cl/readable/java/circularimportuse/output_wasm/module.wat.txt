@@ -19,7 +19,14 @@
 )
 
 ;;; Code for circularimportuse.Left [itable.init]
-(global $circularimportuse.Left.itable (ref $itable) (array.init_static $itable 
+(global $circularimportuse.Left.itable (ref $circularimportuse.Left.itable) (struct.new $circularimportuse.Left.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for circularimportuse.Main [vtable.init]
@@ -33,7 +40,14 @@
 )
 
 ;;; Code for circularimportuse.Main [itable.init]
-(global $circularimportuse.Main.itable (ref $itable) (array.init_static $itable 
+(global $circularimportuse.Main.itable (ref $circularimportuse.Main.itable) (struct.new $circularimportuse.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for circularimportuse.Right [vtable.init]
@@ -48,13 +62,20 @@
 )
 
 ;;; Code for circularimportuse.Right [itable.init]
-(global $circularimportuse.Right.itable (ref $itable) (array.init_static $itable 
+(global $circularimportuse.Right.itable (ref $circularimportuse.Right.itable) (struct.new $circularimportuse.Right.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for circularimportuse.Left [CLASS]
 (type $circularimportuse.Left (struct_subtype 
  (field $vtable (ref $circularimportuse.Left.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $circularimportuse.Left.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -66,6 +87,15 @@
  (field $m_createRight__circularimportuse_Right_$pp_circularimportuse (ref $function.m_createRight__circularimportuse_Right_$pp_circularimportuse))
   $java.lang.Object.vtable)
 )
+(type $circularimportuse.Left.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Left Left.$create()
 (func $$create__@circularimportuse.Left
@@ -154,7 +184,7 @@
 ;;; Code for circularimportuse.Main [CLASS]
 (type $circularimportuse.Main (struct_subtype 
  (field $vtable (ref $circularimportuse.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $circularimportuse.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -165,6 +195,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $circularimportuse.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@circularimportuse.Main
@@ -256,7 +295,7 @@
 ;;; Code for circularimportuse.Right [CLASS]
 (type $circularimportuse.Right (struct_subtype 
  (field $vtable (ref $circularimportuse.Right.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $circularimportuse.Right.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -268,6 +307,15 @@
  (field $m_createLeft__circularimportuse_Left_$pp_circularimportuse (ref $function.m_createLeft__circularimportuse_Left_$pp_circularimportuse))
   $java.lang.Object.vtable)
 )
+(type $circularimportuse.Right.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Right Right.$create()
 (func $$create__@circularimportuse.Right

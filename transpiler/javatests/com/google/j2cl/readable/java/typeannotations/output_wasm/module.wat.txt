@@ -32,7 +32,14 @@
 )
 
 ;;; Code for typeannotations.Parent [itable.init]
-(global $typeannotations.Parent.itable (ref $itable) (array.init_static $itable 
+(global $typeannotations.Parent.itable (ref $typeannotations.Parent.itable) (struct.new $typeannotations.Parent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for typeannotations.ChildWithNullableParent [vtable.init]
@@ -51,12 +58,18 @@
 )
 
 ;;; Code for typeannotations.ChildWithNullableParent [itable.init]
-(global $typeannotations.ChildWithNullableParent.itable (ref $itable) (array.init_static $itable 
+(global $typeannotations.ChildWithNullableParent.itable (ref $typeannotations.ChildWithNullableParent.itable) (struct.new $typeannotations.ChildWithNullableParent.itable 
  (struct.new $typeannotations.ParametricType.vtable
   (ref.func $m_m__java_lang_String__java_lang_Object__java_lang_Object@typeannotations.ChildWithNullableParent)
   (ref.func $m_m__java_util_List__java_lang_Object__java_util_List@typeannotations.ChildWithNullableParent)
   (ref.func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNullableParent)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for typeannotations.ChildWithNonNullableParent [vtable.init]
@@ -75,12 +88,18 @@
 )
 
 ;;; Code for typeannotations.ChildWithNonNullableParent [itable.init]
-(global $typeannotations.ChildWithNonNullableParent.itable (ref $itable) (array.init_static $itable 
+(global $typeannotations.ChildWithNonNullableParent.itable (ref $typeannotations.ChildWithNonNullableParent.itable) (struct.new $typeannotations.ChildWithNonNullableParent.itable 
  (struct.new $typeannotations.ParametricType.vtable
   (ref.func $m_m__java_lang_String__java_lang_Object__java_lang_Object@typeannotations.ChildWithNonNullableParent)
   (ref.func $m_m__java_util_List__java_lang_Object__java_util_List@typeannotations.ChildWithNonNullableParent)
   (ref.func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNonNullableParent)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for typeannotations.TypeAnnotations [vtable.init]
@@ -94,7 +113,14 @@
 )
 
 ;;; Code for typeannotations.TypeAnnotations [itable.init]
-(global $typeannotations.TypeAnnotations.itable (ref $itable) (array.init_static $itable 
+(global $typeannotations.TypeAnnotations.itable (ref $typeannotations.TypeAnnotations.itable) (struct.new $typeannotations.TypeAnnotations.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for typeannotations.ParametricType [INTERFACE]
@@ -152,7 +178,7 @@
 ;;; Code for typeannotations.AbstractType [CLASS]
 (type $typeannotations.AbstractType (struct_subtype 
  (field $vtable (ref $typeannotations.AbstractType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $typeannotations.AbstractType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -164,6 +190,15 @@
  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
   $java.lang.Object.vtable)
 )
+(type $typeannotations.AbstractType.itable (struct_subtype 
+(field $slot0 (ref $typeannotations.ParametricType.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void AbstractType.$ctor()
 (func $$ctor__void_$p_typeannotations_AbstractType@typeannotations.AbstractType
@@ -224,7 +259,7 @@
 ;;; Code for typeannotations.AbstractTypeNonNull [CLASS]
 (type $typeannotations.AbstractTypeNonNull (struct_subtype 
  (field $vtable (ref $typeannotations.AbstractTypeNonNull.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $typeannotations.AbstractTypeNonNull.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -236,6 +271,15 @@
  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
   $java.lang.Object.vtable)
 )
+(type $typeannotations.AbstractTypeNonNull.itable (struct_subtype 
+(field $slot0 (ref $typeannotations.ParametricType.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void AbstractTypeNonNull.$ctor()
 (func $$ctor__void_$p_typeannotations_AbstractTypeNonNull@typeannotations.AbstractTypeNonNull
@@ -296,7 +340,7 @@
 ;;; Code for typeannotations.Parent [CLASS]
 (type $typeannotations.Parent (struct_subtype 
  (field $vtable (ref $typeannotations.Parent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $typeannotations.Parent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -309,6 +353,15 @@
  (field $m_m__java_util_List__typeannotations_Parent__java_util_List (ref $function.m_m__java_util_List__typeannotations_Parent__java_util_List))
   $java.lang.Object.vtable)
 )
+(type $typeannotations.Parent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Parent Parent.$create()
 (func $$create__@typeannotations.Parent
@@ -417,7 +470,7 @@
 ;;; Code for typeannotations.ChildWithNullableParent [CLASS]
 (type $typeannotations.ChildWithNullableParent (struct_subtype 
  (field $vtable (ref $typeannotations.ChildWithNullableParent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $typeannotations.ChildWithNullableParent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $typeannotations.Parent)
 )
@@ -433,6 +486,15 @@
  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
   $typeannotations.Parent.vtable)
 )
+(type $typeannotations.ChildWithNullableParent.itable (struct_subtype 
+(field $slot0 (ref $typeannotations.ParametricType.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $typeannotations.Parent.itable))
 
 ;;; ChildWithNullableParent ChildWithNullableParent.$create()
 (func $$create__@typeannotations.ChildWithNullableParent
@@ -561,7 +623,7 @@
 ;;; Code for typeannotations.ChildWithNonNullableParent [CLASS]
 (type $typeannotations.ChildWithNonNullableParent (struct_subtype 
  (field $vtable (ref $typeannotations.ChildWithNonNullableParent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $typeannotations.ChildWithNonNullableParent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $typeannotations.Parent)
 )
@@ -577,6 +639,15 @@
  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
   $typeannotations.Parent.vtable)
 )
+(type $typeannotations.ChildWithNonNullableParent.itable (struct_subtype 
+(field $slot0 (ref $typeannotations.ParametricType.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $typeannotations.Parent.itable))
 
 ;;; ChildWithNonNullableParent ChildWithNonNullableParent.$create()
 (func $$create__@typeannotations.ChildWithNonNullableParent
@@ -705,7 +776,7 @@
 ;;; Code for typeannotations.TypeAnnotations [CLASS]
 (type $typeannotations.TypeAnnotations (struct_subtype 
  (field $vtable (ref $typeannotations.TypeAnnotations.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $typeannotations.TypeAnnotations.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -716,6 +787,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $typeannotations.TypeAnnotations.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; TypeAnnotations TypeAnnotations.$create()
 (func $$create__@typeannotations.TypeAnnotations

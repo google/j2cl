@@ -29,7 +29,14 @@
 )
 
 ;;; Code for nobridgemethods.TreeMap [itable.init]
-(global $nobridgemethods.TreeMap.itable (ref $itable) (array.init_static $itable 
+(global $nobridgemethods.TreeMap.itable (ref $nobridgemethods.TreeMap.itable) (struct.new $nobridgemethods.TreeMap.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for nobridgemethods.CharSet [vtable.init]
@@ -43,7 +50,14 @@
 )
 
 ;;; Code for nobridgemethods.CharSet [itable.init]
-(global $nobridgemethods.CharSet.itable (ref $itable) (array.init_static $itable 
+(global $nobridgemethods.CharSet.itable (ref $nobridgemethods.CharSet.itable) (struct.new $nobridgemethods.CharSet.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [vtable.init]
@@ -57,9 +71,15 @@
 )
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [itable.init]
-(global $nobridgemethods.TreeMap.InnerEntry.itable (ref $itable) (array.init_static $itable 
+(global $nobridgemethods.TreeMap.InnerEntry.itable (ref $nobridgemethods.TreeMap.InnerEntry.itable) (struct.new $nobridgemethods.TreeMap.InnerEntry.itable 
  (struct.new $nobridgemethods.Entry.vtable
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for nobridgemethods.CharSet.1 [vtable.init]
@@ -75,7 +95,14 @@
 )
 
 ;;; Code for nobridgemethods.CharSet.1 [itable.init]
-(global $nobridgemethods.CharSet.1.itable (ref $itable) (array.init_static $itable 
+(global $nobridgemethods.CharSet.1.itable (ref $nobridgemethods.CharSet.1.itable) (struct.new $nobridgemethods.CharSet.1.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for nobridgemethods.Entry [INTERFACE]
@@ -116,7 +143,7 @@
 ;;; Code for nobridgemethods.Map [CLASS]
 (type $nobridgemethods.Map (struct_subtype 
  (field $vtable (ref $nobridgemethods.Map.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $nobridgemethods.Map.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -128,6 +155,15 @@
  (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry))
   $java.lang.Object.vtable)
 )
+(type $nobridgemethods.Map.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void Map.$ctor()
 (func $$ctor__void_$p_nobridgemethods_Map@nobridgemethods.Map
@@ -168,7 +204,7 @@
 ;;; Code for nobridgemethods.TreeMap [CLASS]
 (type $nobridgemethods.TreeMap (struct_subtype 
  (field $vtable (ref $nobridgemethods.TreeMap.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $nobridgemethods.TreeMap.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $nobridgemethods.Map)
 )
@@ -181,6 +217,15 @@
  (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry))
   $nobridgemethods.Map.vtable)
 )
+(type $nobridgemethods.TreeMap.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $nobridgemethods.Map.itable))
 
 ;;; TreeMap<K> TreeMap.$create()
 (func $$create__@nobridgemethods.TreeMap
@@ -287,7 +332,7 @@
 ;;; Code for nobridgemethods.CharSet [CLASS]
 (type $nobridgemethods.CharSet (struct_subtype 
  (field $vtable (ref $nobridgemethods.CharSet.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $nobridgemethods.CharSet.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -298,6 +343,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $nobridgemethods.CharSet.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; CharSet CharSet.$create()
 (func $$create__@nobridgemethods.CharSet
@@ -385,7 +439,7 @@
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [CLASS]
 (type $nobridgemethods.TreeMap.InnerEntry (struct_subtype 
  (field $vtable (ref $nobridgemethods.TreeMap.InnerEntry.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $nobridgemethods.TreeMap.InnerEntry.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -396,6 +450,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $nobridgemethods.TreeMap.InnerEntry.itable (struct_subtype 
+(field $slot0 (ref $nobridgemethods.Entry.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerEntry<K> InnerEntry.$create()
 (func $$create__@nobridgemethods.TreeMap.InnerEntry
@@ -468,7 +531,7 @@
 ;;; Code for nobridgemethods.CharSet.1 [CLASS]
 (type $nobridgemethods.CharSet.1 (struct_subtype 
  (field $vtable (ref $nobridgemethods.CharSet.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $nobridgemethods.CharSet.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $nobridgemethods.TreeMap)
 )
@@ -481,6 +544,15 @@
  (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (ref $function.m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry))
   $nobridgemethods.TreeMap.vtable)
 )
+(type $nobridgemethods.CharSet.1.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $nobridgemethods.TreeMap.itable))
 
 ;;; <anonymous> extends TreeMap<String> <anonymous> extends TreeMap<String>.$create()
 (func $$create__@nobridgemethods.CharSet.1

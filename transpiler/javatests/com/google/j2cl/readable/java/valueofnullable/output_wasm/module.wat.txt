@@ -12,13 +12,20 @@
 )
 
 ;;; Code for valueofnullable.ValueOfNullable [itable.init]
-(global $valueofnullable.ValueOfNullable.itable (ref $itable) (array.init_static $itable 
+(global $valueofnullable.ValueOfNullable.itable (ref $valueofnullable.ValueOfNullable.itable) (struct.new $valueofnullable.ValueOfNullable.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for valueofnullable.ValueOfNullable [CLASS]
 (type $valueofnullable.ValueOfNullable (struct_subtype 
  (field $vtable (ref $valueofnullable.ValueOfNullable.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $valueofnullable.ValueOfNullable.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nullableString__valueofnullable_ValueOfNullable (ref null $java.lang.String))
  (field $f_someChar__valueofnullable_ValueOfNullable i16)
@@ -32,6 +39,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $valueofnullable.ValueOfNullable.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ValueOfNullable ValueOfNullable.$create()
 (func $$create__@valueofnullable.ValueOfNullable

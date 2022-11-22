@@ -21,7 +21,14 @@
 )
 
 ;;; Code for boundedtypesupercall.Main [itable.init]
-(global $boundedtypesupercall.Main.itable (ref $itable) (array.init_static $itable 
+(global $boundedtypesupercall.Main.itable (ref $boundedtypesupercall.Main.itable) (struct.new $boundedtypesupercall.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for boundedtypesupercall.Main.Bar.1 [vtable.init]
@@ -36,7 +43,14 @@
 )
 
 ;;; Code for boundedtypesupercall.Main.Bar.1 [itable.init]
-(global $boundedtypesupercall.Main.Bar.1.itable (ref $itable) (array.init_static $itable 
+(global $boundedtypesupercall.Main.Bar.1.itable (ref $boundedtypesupercall.Main.Bar.1.itable) (struct.new $boundedtypesupercall.Main.Bar.1.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for boundedtypesupercall.Main.Bar [vtable.init]
@@ -52,13 +66,20 @@
 )
 
 ;;; Code for boundedtypesupercall.Main.Bar [itable.init]
-(global $boundedtypesupercall.Main.Bar.itable (ref $itable) (array.init_static $itable 
+(global $boundedtypesupercall.Main.Bar.itable (ref $boundedtypesupercall.Main.Bar.itable) (struct.new $boundedtypesupercall.Main.Bar.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for boundedtypesupercall.Main [CLASS]
 (type $boundedtypesupercall.Main (struct_subtype 
  (field $vtable (ref $boundedtypesupercall.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $boundedtypesupercall.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -69,6 +90,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $boundedtypesupercall.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@boundedtypesupercall.Main
@@ -141,7 +171,7 @@
 ;;; Code for boundedtypesupercall.Main.Foo [CLASS]
 (type $boundedtypesupercall.Main.Foo (struct_subtype 
  (field $vtable (ref $boundedtypesupercall.Main.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $boundedtypesupercall.Main.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -153,6 +183,15 @@
  (field $m_foo__void (ref $function.m_foo__void))
   $java.lang.Object.vtable)
 )
+(type $boundedtypesupercall.Main.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void Foo.$ctor(T foo)
 (func $$ctor__java_lang_Object__void_$p_boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Foo
@@ -194,7 +233,7 @@
 ;;; Code for boundedtypesupercall.Main.Bar.1 [CLASS]
 (type $boundedtypesupercall.Main.Bar.1 (struct_subtype 
  (field $vtable (ref $boundedtypesupercall.Main.Bar.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $boundedtypesupercall.Main.Bar.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__boundedtypesupercall_Main_Bar_1 (ref null $boundedtypesupercall.Main.Bar))
   $boundedtypesupercall.Main.Foo)
@@ -207,6 +246,15 @@
  (field $m_foo__void (ref $function.m_foo__void))
   $boundedtypesupercall.Main.Foo.vtable)
 )
+(type $boundedtypesupercall.Main.Bar.1.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $boundedtypesupercall.Main.Foo.itable))
 
 ;;; <anonymous> extends Foo<T><T> <anonymous> extends Foo<T>.$create(Bar<T> $outer_this, T $_0)
 (func $$create__boundedtypesupercall_Main_Bar__java_lang_Comparable@boundedtypesupercall.Main.Bar.1
@@ -295,7 +343,7 @@
 ;;; Code for boundedtypesupercall.Main.Bar [CLASS]
 (type $boundedtypesupercall.Main.Bar (struct_subtype 
  (field $vtable (ref $boundedtypesupercall.Main.Bar.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $boundedtypesupercall.Main.Bar.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -308,6 +356,15 @@
  (field $m_doSomething__boundedtypesupercall_Main_Foo (ref $function.m_doSomething__boundedtypesupercall_Main_Foo))
   $java.lang.Object.vtable)
 )
+(type $boundedtypesupercall.Main.Bar.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Bar<T> Bar.$create()
 (func $$create__@boundedtypesupercall.Main.Bar

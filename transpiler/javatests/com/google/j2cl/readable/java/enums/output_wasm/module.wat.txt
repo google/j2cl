@@ -40,12 +40,17 @@
 )
 
 ;;; Code for enums.Enum1 [itable.init]
-(global $enums.Enum1.itable (ref $itable) (array.init_static $itable 
+(global $enums.Enum1.itable (ref $enums.Enum1.itable) (struct.new $enums.Enum1.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for enums.Enum2 [vtable.init]
@@ -65,12 +70,17 @@
 )
 
 ;;; Code for enums.Enum2 [itable.init]
-(global $enums.Enum2.itable (ref $itable) (array.init_static $itable 
+(global $enums.Enum2.itable (ref $enums.Enum2.itable) (struct.new $enums.Enum2.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for enums.Enum3 [vtable.init]
@@ -89,12 +99,17 @@
 )
 
 ;;; Code for enums.Enum3 [itable.init]
-(global $enums.Enum3.itable (ref $itable) (array.init_static $itable 
+(global $enums.Enum3.itable (ref $enums.Enum3.itable) (struct.new $enums.Enum3.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for enums.Enum2.1 [vtable.init]
@@ -114,12 +129,17 @@
 )
 
 ;;; Code for enums.Enum2.1 [itable.init]
-(global $enums.Enum2.1.itable (ref $itable) (array.init_static $itable 
+(global $enums.Enum2.1.itable (ref $enums.Enum2.1.itable) (struct.new $enums.Enum2.1.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [vtable.init]
@@ -136,18 +156,24 @@
 )
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [itable.init]
-(global $enums.Enum3.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+(global $enums.Enum3.$LambdaImplementor$1.itable (ref $enums.Enum3.$LambdaImplementor$1.itable) (struct.new $enums.Enum3.$LambdaImplementor$1.itable 
  (struct.new $java.util.function.Function.vtable
   (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
   (ref.func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for enums.Enum1 [ENUM]
 (type $enums.Enum1 (struct_subtype 
  (field $vtable (ref $enums.Enum1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $enums.Enum1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -165,6 +191,15 @@
  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
   $java.lang.Enum.vtable)
 )
+(type $enums.Enum1.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Enum.itable))
 
 ;;; Enum1 Enum1.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@enums.Enum1
@@ -290,7 +325,7 @@
 ;;; Code for enums.Enum2 [ENUM]
 (type $enums.Enum2 (struct_subtype 
  (field $vtable (ref $enums.Enum2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $enums.Enum2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -310,6 +345,15 @@
  (field $m_specialMethods__void_$pp_enums (ref $function.m_specialMethods__void_$pp_enums))
   $java.lang.Enum.vtable)
 )
+(type $enums.Enum2.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Enum.itable))
 
 ;;; Enum2 Enum2.$create(String $name, int $ordinal, int foo)
 (func $$create__java_lang_String__int__int@enums.Enum2
@@ -605,7 +649,7 @@
 ;;; Code for enums.Enum3 [ENUM]
 (type $enums.Enum3 (struct_subtype 
  (field $vtable (ref $enums.Enum3.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $enums.Enum3.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -623,6 +667,15 @@
  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
   $java.lang.Enum.vtable)
 )
+(type $enums.Enum3.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Enum.itable))
 
 ;;; Enum3 Enum3.$create(String $name, int $ordinal, Function<Integer, Integer> function)
 (func $$create__java_lang_String__int__java_util_function_Function@enums.Enum3
@@ -747,7 +800,7 @@
 ;;; Code for enums.Enum2.1 [CLASS]
 (type $enums.Enum2.1 (struct_subtype 
  (field $vtable (ref $enums.Enum2.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $enums.Enum2.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -767,6 +820,15 @@
  (field $m_specialMethods__void_$pp_enums (ref $function.m_specialMethods__void_$pp_enums))
   $enums.Enum2.vtable)
 )
+(type $enums.Enum2.1.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $enums.Enum2.itable))
 
 ;;; <anonymous> extends Enum2 <anonymous> extends Enum2.$create(String $name, int $ordinal, int $_0)
 (func $$create__java_lang_String__int__int@enums.Enum2.1
@@ -845,7 +907,7 @@
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [CLASS]
 (type $enums.Enum3.$LambdaImplementor$1 (struct_subtype 
  (field $vtable (ref $enums.Enum3.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $enums.Enum3.$LambdaImplementor$1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -859,6 +921,15 @@
  (field $m_compose__java_util_function_Function__java_util_function_Function (ref $function.m_compose__java_util_function_Function__java_util_function_Function))
   $java.lang.Object.vtable)
 )
+(type $enums.Enum3.$LambdaImplementor$1.itable (struct_subtype 
+(field $slot0 (ref $java.util.function.Function.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$1<T, R> $LambdaImplementor$1.$create()
 (func $$create__@enums.Enum3.$LambdaImplementor$1

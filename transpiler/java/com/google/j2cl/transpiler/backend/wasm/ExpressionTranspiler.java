@@ -113,7 +113,7 @@ final class ExpressionTranspiler {
       @CanIgnoreReturnValue
       private boolean renderAssignment(Expression left, Expression right) {
         sourceBuilder.append("(");
-        renderAccessExpression(left, /*setter=*/ true);
+        renderAccessExpression(left, /* setter= */ true);
         sourceBuilder.append(" ");
         render(right);
         sourceBuilder.append(")");
@@ -164,7 +164,7 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterArrayAccess(ArrayAccess arrayAccess) {
         sourceBuilder.append("(");
-        renderAccessExpression(arrayAccess, /*setter=*/ false);
+        renderAccessExpression(arrayAccess, /* setter= */ false);
         sourceBuilder.append(")");
         return false;
       }
@@ -233,7 +233,7 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterFieldAccess(FieldAccess fieldAccess) {
         sourceBuilder.append("(");
-        renderAccessExpression(fieldAccess, /*setter=*/ false);
+        renderAccessExpression(fieldAccess, /* setter= */ false);
         sourceBuilder.append(")");
         return false;
       }
@@ -272,38 +272,21 @@ final class ExpressionTranspiler {
           // Reference is null, return false.
           sourceBuilder.append("(then (i32.const 0))");
           sourceBuilder.newLine();
-          sourceBuilder.append("(else (if (result i32)");
-          // Classes have itables that are large enough to contain the highest slot of its
-          // implemented interfaces. For example a class that does not implement any interface will
-          // have an itable of size 0. So given an interface slot, we first need to see if the slot
-          // is past the end of the itable.
+          sourceBuilder.append("(else ");
           sourceBuilder.indent();
           sourceBuilder.newLine();
-          sourceBuilder.append(
-              String.format(
-                  "(i32.ge_u (i32.const %d) (array.len $itable (struct.get $java.lang.Object"
-                      + " $itable ",
-                  interfaceSlot));
-          render(instanceOfExpression.getExpression());
-          sourceBuilder.append("))) ");
-          sourceBuilder.newLine();
-          // Interface slot is past the end.
-          sourceBuilder.append("(then (i32.const 0))");
-          sourceBuilder.newLine();
-          // itable could contain the interface, so retrieve the vtable in the specific interface
-          // slot and check that it is the vtable for the interface in the instanceof; recall
-          // that slots are shared and a class that does not implement this interface might
-          // implement a different interface that shares the same slot.
+          // Check whether the itable slot assigned to the interface actually contains the
+          // interface vtable, since the slots are reused.
           sourceBuilder.append(
               format(
-                  "(else (ref.test_static %s (array.get $itable (struct.get $java.lang.Object"
+                  "(ref.test_static %s (struct.get $itable $slot%d (struct.get $java.lang.Object"
                       + " $itable ",
-                  environment.getWasmVtableTypeName(targetTypeDescriptor)));
+                  environment.getWasmVtableTypeName(targetTypeDescriptor), interfaceSlot));
           render(instanceOfExpression.getExpression());
-          sourceBuilder.append(String.format(" ) (i32.const %d))))", interfaceSlot));
+          sourceBuilder.append(" )))");
           sourceBuilder.unindent();
           sourceBuilder.newLine();
-          sourceBuilder.append("))");
+          sourceBuilder.append(")");
           sourceBuilder.unindent();
           sourceBuilder.newLine();
           sourceBuilder.append(")");
@@ -348,27 +331,36 @@ final class ExpressionTranspiler {
             render(methodCall.getQualifier());
             sourceBuilder.append(")");
           } else {
-            // For a an interface dynamic dispatch the vtable resides in the $itable array field of
+            // For an interface dynamic dispatch the vtable resides in a field of the $itable struct
             // object passed as the qualifier.
 
-            // Retrieve the interface vtable...
-            sourceBuilder.append(
-                String.format(
-                    "(ref.cast_static %s (array.get $itable (struct.get %s $itable ",
-                    environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                    environment.getWasmTypeName(enclosingTypeDescriptor)));
-            render(methodCall.getQualifier());
-            // ... from the assigned $table array slot and cast to the particular interface vtable.
-            sourceBuilder.append(
-                String.format(
-                    ") (i32.const %d))) ",
-                    environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration())));
+            int itableSlot =
+                environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration());
+            if (itableSlot == -1) {
+              // The interface is not implemented by any class, skip the itable lookup and emit
+              // null instead.
+              sourceBuilder.append(
+                  String.format(
+                      "(ref.null %s)", environment.getWasmVtableTypeName(enclosingTypeDescriptor)));
+            } else {
+
+              // Retrieve the interface vtable from the corresponding slot field in the $itable
+              // and cast it to the appropriate type.
+              sourceBuilder.append(
+                  String.format(
+                      "(ref.cast_static %s (struct.get $itable $slot%d (struct.get %s $itable ",
+                      environment.getWasmVtableTypeName(enclosingTypeDescriptor),
+                      itableSlot,
+                      environment.getWasmTypeName(enclosingTypeDescriptor)));
+              render(methodCall.getQualifier());
+              sourceBuilder.append(")))");
+            }
           }
 
           sourceBuilder.append("))");
           return false;
         } else {
-          // Non polymorphic methods are called directly, regardless of whether they are
+          // Non-polymorphic methods are called directly, regardless of whether they are
           // instance methods or not.
 
           String wasmInfo = target.getWasmInfo();
@@ -571,7 +563,7 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterVariableReference(VariableReference variableReference) {
         sourceBuilder.append("(");
-        renderAccessExpression(variableReference, /*setter=*/ false);
+        renderAccessExpression(variableReference, /* setter= */ false);
         sourceBuilder.append(")");
         return false;
       }

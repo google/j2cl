@@ -53,7 +53,14 @@
 )
 
 ;;; Code for libraryinfo.Main [itable.init]
-(global $libraryinfo.Main.itable (ref $itable) (array.init_static $itable 
+(global $libraryinfo.Main.itable (ref $libraryinfo.Main.itable) (struct.new $libraryinfo.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [vtable.init]
@@ -68,10 +75,16 @@
 )
 
 ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [itable.init]
-(global $libraryinfo.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+(global $libraryinfo.Main.$LambdaImplementor$1.itable (ref $libraryinfo.Main.$LambdaImplementor$1.itable) (struct.new $libraryinfo.Main.$LambdaImplementor$1.itable 
  (struct.new $libraryinfo.Main.Function.vtable
   (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for libraryinfo.Main.1 [vtable.init]
@@ -86,7 +99,14 @@
 )
 
 ;;; Code for libraryinfo.Main.1 [itable.init]
-(global $libraryinfo.Main.1.itable (ref $itable) (array.init_static $itable 
+(global $libraryinfo.Main.1.itable (ref $libraryinfo.Main.1.itable) (struct.new $libraryinfo.Main.1.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for libraryinfo.Main.FunctionImpl [vtable.init]
@@ -101,10 +121,16 @@
 )
 
 ;;; Code for libraryinfo.Main.FunctionImpl [itable.init]
-(global $libraryinfo.Main.FunctionImpl.itable (ref $itable) (array.init_static $itable 
+(global $libraryinfo.Main.FunctionImpl.itable (ref $libraryinfo.Main.FunctionImpl.itable) (struct.new $libraryinfo.Main.FunctionImpl.itable 
  (struct.new $libraryinfo.Main.Function.vtable
   (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for libraryinfo.Main.MyJsEnum [vtable.init]
@@ -123,12 +149,17 @@
 )
 
 ;;; Code for libraryinfo.Main.MyJsEnum [itable.init]
-(global $libraryinfo.Main.MyJsEnum.itable (ref $itable) (array.init_static $itable 
+(global $libraryinfo.Main.MyJsEnum.itable (ref $libraryinfo.Main.MyJsEnum.itable) (struct.new $libraryinfo.Main.MyJsEnum.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for libraryinfo.Main.MyEnum [vtable.init]
@@ -147,12 +178,17 @@
 )
 
 ;;; Code for libraryinfo.Main.MyEnum [itable.init]
-(global $libraryinfo.Main.MyEnum.itable (ref $itable) (array.init_static $itable 
+(global $libraryinfo.Main.MyEnum.itable (ref $libraryinfo.Main.MyEnum.itable) (struct.new $libraryinfo.Main.MyEnum.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for libraryinfo.Main.MyJsType [vtable.init]
@@ -166,7 +202,14 @@
 )
 
 ;;; Code for libraryinfo.Main.MyJsType [itable.init]
-(global $libraryinfo.Main.MyJsType.itable (ref $itable) (array.init_static $itable 
+(global $libraryinfo.Main.MyJsType.itable (ref $libraryinfo.Main.MyJsType.itable) (struct.new $libraryinfo.Main.MyJsType.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for libraryinfo.Main.Foo [vtable.init]
@@ -181,13 +224,20 @@
 )
 
 ;;; Code for libraryinfo.Main.Foo [itable.init]
-(global $libraryinfo.Main.Foo.itable (ref $itable) (array.init_static $itable 
+(global $libraryinfo.Main.Foo.itable (ref $libraryinfo.Main.Foo.itable) (struct.new $libraryinfo.Main.Foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for libraryinfo.Main [CLASS]
 (type $libraryinfo.Main (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $libraryinfo.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -198,6 +248,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $libraryinfo.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@libraryinfo.Main
@@ -250,7 +309,7 @@
   (local.set $jsFunction (call $$create__@libraryinfo.Main.$LambdaImplementor$1 ))
   ;; jsFunction.apply(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ libraryinfo/Main.java:85:4
-  (call_ref $function.m_apply__java_lang_String__void (ref.as_non_null (local.get $jsFunction))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast_static $libraryinfo.Main.Function.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0))) ))
+  (call_ref $function.m_apply__java_lang_String__void (ref.as_non_null (local.get $jsFunction))(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast_static $libraryinfo.Main.Function.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $jsFunction))))))
   ;; libraryinfo.Main.MyJsType.$create();
   ;;@ libraryinfo/Main.java:87:4
   (drop (call $$create__@libraryinfo.Main.MyJsType ))
@@ -355,7 +414,7 @@
 ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [CLASS]
 (type $libraryinfo.Main.$LambdaImplementor$1 (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $libraryinfo.Main.$LambdaImplementor$1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -367,6 +426,15 @@
  (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
   $java.lang.Object.vtable)
 )
+(type $libraryinfo.Main.$LambdaImplementor$1.itable (struct_subtype 
+(field $slot0 (ref $libraryinfo.Main.Function.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
 (func $$create__@libraryinfo.Main.$LambdaImplementor$1
@@ -455,7 +523,7 @@
 ;;; Code for libraryinfo.Main.1 [CLASS]
 (type $libraryinfo.Main.1 (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $libraryinfo.Main.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -467,6 +535,15 @@
  (field $m_foo__void_$pp_libraryinfo (ref $function.m_foo__void_$pp_libraryinfo))
   $java.lang.Object.vtable)
 )
+(type $libraryinfo.Main.1.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create()
 (func $$create__@libraryinfo.Main.1
@@ -696,7 +773,7 @@
 ;;; Code for libraryinfo.Main.FunctionImpl [CLASS]
 (type $libraryinfo.Main.FunctionImpl (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.FunctionImpl.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $libraryinfo.Main.FunctionImpl.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -708,6 +785,15 @@
  (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
   $java.lang.Object.vtable)
 )
+(type $libraryinfo.Main.FunctionImpl.itable (struct_subtype 
+(field $slot0 (ref $libraryinfo.Main.Function.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; FunctionImpl FunctionImpl.$create()
 (func $$create__@libraryinfo.Main.FunctionImpl
@@ -793,7 +879,7 @@
 ;;; Code for libraryinfo.Main.MyJsEnum [ENUM]
 (type $libraryinfo.Main.MyJsEnum (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.MyJsEnum.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $libraryinfo.Main.MyJsEnum.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -811,6 +897,15 @@
  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
   $java.lang.Enum.vtable)
 )
+(type $libraryinfo.Main.MyJsEnum.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Enum.itable))
 
 ;;; MyJsEnum MyJsEnum.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum
@@ -939,7 +1034,7 @@
 ;;; Code for libraryinfo.Main.MyEnum [ENUM]
 (type $libraryinfo.Main.MyEnum (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.MyEnum.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $libraryinfo.Main.MyEnum.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -957,6 +1052,15 @@
  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
   $java.lang.Enum.vtable)
 )
+(type $libraryinfo.Main.MyEnum.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Enum.itable))
 
 ;;; MyEnum MyEnum.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@libraryinfo.Main.MyEnum
@@ -1082,7 +1186,7 @@
 ;;; Code for libraryinfo.Main.MyJsType [CLASS]
 (type $libraryinfo.Main.MyJsType (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.MyJsType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $libraryinfo.Main.MyJsType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_someField__libraryinfo_Main_MyJsType (mut (ref null $java.lang.Object)))
   $java.lang.Object)
@@ -1094,6 +1198,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $libraryinfo.Main.MyJsType.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; MyJsType MyJsType.$create()
 (func $$create__@libraryinfo.Main.MyJsType
@@ -1169,7 +1282,7 @@
 ;;; Code for libraryinfo.Main.Foo [CLASS]
 (type $libraryinfo.Main.Foo (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $libraryinfo.Main.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__libraryinfo_Main_Foo (ref null $libraryinfo.Main))
   $java.lang.Object)
@@ -1182,6 +1295,15 @@
  (field $m_instanceMethod__void_$pp_libraryinfo (ref $function.m_instanceMethod__void_$pp_libraryinfo))
   $java.lang.Object.vtable)
 )
+(type $libraryinfo.Main.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Foo Foo.$create(Main $outer_this)
 (func $$create__libraryinfo_Main@libraryinfo.Main.Foo

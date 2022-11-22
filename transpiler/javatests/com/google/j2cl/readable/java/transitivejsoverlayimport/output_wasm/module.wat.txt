@@ -27,7 +27,14 @@
 )
 
 ;;; Code for transitivejsoverlayimport.Immediate [itable.init]
-(global $transitivejsoverlayimport.Immediate.itable (ref $itable) (array.init_static $itable 
+(global $transitivejsoverlayimport.Immediate.itable (ref $transitivejsoverlayimport.Immediate.itable) (struct.new $transitivejsoverlayimport.Immediate.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for transitivejsoverlayimport.NonNativeUpper [vtable.init]
@@ -45,7 +52,14 @@
 )
 
 ;;; Code for transitivejsoverlayimport.NonNativeUpper [itable.init]
-(global $transitivejsoverlayimport.NonNativeUpper.itable (ref $itable) (array.init_static $itable 
+(global $transitivejsoverlayimport.NonNativeUpper.itable (ref $transitivejsoverlayimport.NonNativeUpper.itable) (struct.new $transitivejsoverlayimport.NonNativeUpper.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for transitivejsoverlayimport.NonNativeLower [vtable.init]
@@ -64,7 +78,14 @@
 )
 
 ;;; Code for transitivejsoverlayimport.NonNativeLower [itable.init]
-(global $transitivejsoverlayimport.NonNativeLower.itable (ref $itable) (array.init_static $itable 
+(global $transitivejsoverlayimport.NonNativeLower.itable (ref $transitivejsoverlayimport.NonNativeLower.itable) (struct.new $transitivejsoverlayimport.NonNativeLower.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for transitivejsoverlayimport.Transitive [vtable.init]
@@ -80,7 +101,14 @@
 )
 
 ;;; Code for transitivejsoverlayimport.Transitive [itable.init]
-(global $transitivejsoverlayimport.Transitive.itable (ref $itable) (array.init_static $itable 
+(global $transitivejsoverlayimport.Transitive.itable (ref $transitivejsoverlayimport.Transitive.itable) (struct.new $transitivejsoverlayimport.Transitive.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for transitivejsoverlayimport.Main [vtable.init]
@@ -94,13 +122,20 @@
 )
 
 ;;; Code for transitivejsoverlayimport.Main [itable.init]
-(global $transitivejsoverlayimport.Main.itable (ref $itable) (array.init_static $itable 
+(global $transitivejsoverlayimport.Main.itable (ref $transitivejsoverlayimport.Main.itable) (struct.new $transitivejsoverlayimport.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for transitivejsoverlayimport.Immediate [CLASS]
 (type $transitivejsoverlayimport.Immediate (struct_subtype 
  (field $vtable (ref $transitivejsoverlayimport.Immediate.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $transitivejsoverlayimport.Immediate.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $transitivejsoverlayimport.Transitive)
 )
@@ -114,6 +149,15 @@
  (field $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport))
   $transitivejsoverlayimport.Transitive.vtable)
 )
+(type $transitivejsoverlayimport.Immediate.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $transitivejsoverlayimport.Transitive.itable))
 
 ;;; Immediate Immediate.$create()
 (func $$create__@transitivejsoverlayimport.Immediate
@@ -195,7 +239,7 @@
 ;;; Code for transitivejsoverlayimport.NonNativeUpper [CLASS]
 (type $transitivejsoverlayimport.NonNativeUpper (struct_subtype 
  (field $vtable (ref $transitivejsoverlayimport.NonNativeUpper.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $transitivejsoverlayimport.NonNativeUpper.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $transitivejsoverlayimport.Immediate)
 )
@@ -210,6 +254,15 @@
  (field $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport))
   $transitivejsoverlayimport.Immediate.vtable)
 )
+(type $transitivejsoverlayimport.NonNativeUpper.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $transitivejsoverlayimport.Immediate.itable))
 
 ;;; NonNativeUpper NonNativeUpper.$create()
 (func $$create__@transitivejsoverlayimport.NonNativeUpper
@@ -291,7 +344,7 @@
 ;;; Code for transitivejsoverlayimport.NonNativeLower [CLASS]
 (type $transitivejsoverlayimport.NonNativeLower (struct_subtype 
  (field $vtable (ref $transitivejsoverlayimport.NonNativeLower.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $transitivejsoverlayimport.NonNativeLower.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $transitivejsoverlayimport.NonNativeUpper)
 )
@@ -307,6 +360,15 @@
  (field $m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport))
   $transitivejsoverlayimport.NonNativeUpper.vtable)
 )
+(type $transitivejsoverlayimport.NonNativeLower.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $transitivejsoverlayimport.NonNativeUpper.itable))
 
 ;;; NonNativeLower NonNativeLower.$create()
 (func $$create__@transitivejsoverlayimport.NonNativeLower
@@ -391,7 +453,7 @@
 ;;; Code for transitivejsoverlayimport.Transitive [CLASS]
 (type $transitivejsoverlayimport.Transitive (struct_subtype 
  (field $vtable (ref $transitivejsoverlayimport.Transitive.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $transitivejsoverlayimport.Transitive.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -404,6 +466,15 @@
  (field $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (ref $function.m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport))
   $java.lang.Object.vtable)
 )
+(type $transitivejsoverlayimport.Transitive.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Transitive Transitive.$create()
 (func $$create__@transitivejsoverlayimport.Transitive
@@ -503,7 +574,7 @@
 ;;; Code for transitivejsoverlayimport.Main [CLASS]
 (type $transitivejsoverlayimport.Main (struct_subtype 
  (field $vtable (ref $transitivejsoverlayimport.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $transitivejsoverlayimport.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -514,6 +585,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $transitivejsoverlayimport.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@transitivejsoverlayimport.Main

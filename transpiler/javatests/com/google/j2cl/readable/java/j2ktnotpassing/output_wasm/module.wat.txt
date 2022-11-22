@@ -30,7 +30,14 @@
 )
 
 ;;; Code for j2ktnotpassing.DefaultNullable [itable.init]
-(global $j2ktnotpassing.DefaultNullable.itable (ref $itable) (array.init_static $itable 
+(global $j2ktnotpassing.DefaultNullable.itable (ref $j2ktnotpassing.DefaultNullable.itable) (struct.new $j2ktnotpassing.DefaultNullable.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2ktnotpassing.NotNullable [vtable.init]
@@ -44,7 +51,14 @@
 )
 
 ;;; Code for j2ktnotpassing.NotNullable [itable.init]
-(global $j2ktnotpassing.NotNullable.itable (ref $itable) (array.init_static $itable 
+(global $j2ktnotpassing.NotNullable.itable (ref $j2ktnotpassing.NotNullable.itable) (struct.new $j2ktnotpassing.NotNullable.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2ktnotpassing.DefaultNullable.$LambdaImplementor$1 [vtable.init]
@@ -59,10 +73,16 @@
 )
 
 ;;; Code for j2ktnotpassing.DefaultNullable.$LambdaImplementor$1 [itable.init]
-(global $j2ktnotpassing.DefaultNullable.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+(global $j2ktnotpassing.DefaultNullable.$LambdaImplementor$1.itable (ref $j2ktnotpassing.DefaultNullable.$LambdaImplementor$1.itable) (struct.new $j2ktnotpassing.DefaultNullable.$LambdaImplementor$1.itable 
  (struct.new $j2ktnotpassing.NotNullable.Consumer.vtable
   (ref.func $m_accept__java_lang_Object__void@j2ktnotpassing.DefaultNullable.$LambdaImplementor$1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2ktnotpassing.ExplicitNotNullable [vtable.init]
@@ -77,7 +97,14 @@
 )
 
 ;;; Code for j2ktnotpassing.ExplicitNotNullable [itable.init]
-(global $j2ktnotpassing.ExplicitNotNullable.itable (ref $itable) (array.init_static $itable 
+(global $j2ktnotpassing.ExplicitNotNullable.itable (ref $j2ktnotpassing.ExplicitNotNullable.itable) (struct.new $j2ktnotpassing.ExplicitNotNullable.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters [vtable.init]
@@ -92,13 +119,20 @@
 )
 
 ;;; Code for j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters [itable.init]
-(global $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable (ref $itable) (array.init_static $itable 
+(global $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable (ref $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable) (struct.new $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2ktnotpassing.DefaultNullable [CLASS]
 (type $j2ktnotpassing.DefaultNullable (struct_subtype 
  (field $vtable (ref $j2ktnotpassing.DefaultNullable.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2ktnotpassing.DefaultNullable.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -109,6 +143,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $j2ktnotpassing.DefaultNullable.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; DefaultNullable DefaultNullable.$create()
 (func $$create__@j2ktnotpassing.DefaultNullable
@@ -206,7 +249,7 @@
 ;;; Code for j2ktnotpassing.NotNullable [CLASS]
 (type $j2ktnotpassing.NotNullable (struct_subtype 
  (field $vtable (ref $j2ktnotpassing.NotNullable.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2ktnotpassing.NotNullable.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -217,6 +260,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $j2ktnotpassing.NotNullable.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; NotNullable NotNullable.$create()
 (func $$create__@j2ktnotpassing.NotNullable
@@ -289,7 +341,7 @@
 ;;; Code for j2ktnotpassing.DefaultNullable.$LambdaImplementor$1 [CLASS]
 (type $j2ktnotpassing.DefaultNullable.$LambdaImplementor$1 (struct_subtype 
  (field $vtable (ref $j2ktnotpassing.DefaultNullable.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2ktnotpassing.DefaultNullable.$LambdaImplementor$1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -301,6 +353,15 @@
  (field $m_accept__java_lang_Object__void (ref $function.m_accept__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
+(type $j2ktnotpassing.DefaultNullable.$LambdaImplementor$1.itable (struct_subtype 
+(field $slot0 (ref $j2ktnotpassing.NotNullable.Consumer.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$1<T> $LambdaImplementor$1.$create()
 (func $$create__@j2ktnotpassing.DefaultNullable.$LambdaImplementor$1
@@ -429,7 +490,7 @@
 ;;; Code for j2ktnotpassing.ExplicitNotNullable [CLASS]
 (type $j2ktnotpassing.ExplicitNotNullable (struct_subtype 
  (field $vtable (ref $j2ktnotpassing.ExplicitNotNullable.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2ktnotpassing.ExplicitNotNullable.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -441,6 +502,15 @@
  (field $m_testDependentWildcards__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing (ref $function.m_testDependentWildcards__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing))
   $java.lang.Object.vtable)
 )
+(type $j2ktnotpassing.ExplicitNotNullable.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ExplicitNotNullable ExplicitNotNullable.$create()
 (func $$create__@j2ktnotpassing.ExplicitNotNullable
@@ -566,7 +636,7 @@
 ;;; Code for j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters [CLASS]
 (type $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters (struct_subtype 
  (field $vtable (ref $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -578,6 +648,15 @@
  (field $m_getThis__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing (ref $function.m_getThis__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters_$pp_j2ktnotpassing))
   $java.lang.Object.vtable)
 )
+(type $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; DependentTypeParameters<E, T> DependentTypeParameters.$create()
 (func $$create__@j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters

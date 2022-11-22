@@ -15,7 +15,14 @@
 )
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [itable.init]
-(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable (ref $itable) (array.init_static $itable 
+(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable) (struct.new $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [vtable.init]
@@ -29,13 +36,20 @@
 )
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [itable.init]
-(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable (ref $itable) (array.init_static $itable 
+(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable) (struct.new $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [CLASS]
 (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (struct_subtype 
  (field $vtable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -46,6 +60,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; JsTypeInnerClassWithNamespace JsTypeInnerClassWithNamespace.$create()
 (func $$create__@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
@@ -118,7 +141,7 @@
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [CLASS]
 (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (struct_subtype 
  (field $vtable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -129,6 +152,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerClass InnerClass.$create()
 (func $$create__@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass

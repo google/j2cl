@@ -15,7 +15,14 @@
 )
 
 ;;; Code for aptgeneratordep.Dummy [itable.init]
-(global $aptgeneratordep.Dummy.itable (ref $itable) (array.init_static $itable 
+(global $aptgeneratordep.Dummy.itable (ref $aptgeneratordep.Dummy.itable) (struct.new $aptgeneratordep.Dummy.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for aptgeneratordep.Foo [vtable.init]
@@ -29,13 +36,20 @@
 )
 
 ;;; Code for aptgeneratordep.Foo [itable.init]
-(global $aptgeneratordep.Foo.itable (ref $itable) (array.init_static $itable 
+(global $aptgeneratordep.Foo.itable (ref $aptgeneratordep.Foo.itable) (struct.new $aptgeneratordep.Foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for aptgeneratordep.Dummy [CLASS]
 (type $aptgeneratordep.Dummy (struct_subtype 
  (field $vtable (ref $aptgeneratordep.Dummy.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $aptgeneratordep.Dummy.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -46,6 +60,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $aptgeneratordep.Dummy.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Dummy Dummy.$create()
 (func $$create__@aptgeneratordep.Dummy
@@ -118,7 +141,7 @@
 ;;; Code for aptgeneratordep.Foo [CLASS]
 (type $aptgeneratordep.Foo (struct_subtype 
  (field $vtable (ref $aptgeneratordep.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $aptgeneratordep.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -129,6 +152,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $aptgeneratordep.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Foo Foo.$create()
 (func $$create__@aptgeneratordep.Foo

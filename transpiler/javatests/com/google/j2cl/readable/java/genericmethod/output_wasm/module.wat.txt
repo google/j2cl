@@ -42,7 +42,14 @@
 )
 
 ;;; Code for genericmethod.GenericMethod [itable.init]
-(global $genericmethod.GenericMethod.itable (ref $itable) (array.init_static $itable 
+(global $genericmethod.GenericMethod.itable (ref $genericmethod.GenericMethod.itable) (struct.new $genericmethod.GenericMethod.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for genericmethod.GenericMethod.1 [vtable.init]
@@ -67,7 +74,14 @@
 )
 
 ;;; Code for genericmethod.GenericMethod.1 [itable.init]
-(global $genericmethod.GenericMethod.1.itable (ref $itable) (array.init_static $itable 
+(global $genericmethod.GenericMethod.1.itable (ref $genericmethod.GenericMethod.1.itable) (struct.new $genericmethod.GenericMethod.1.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for genericmethod.GenericMethod.SuperContainer [vtable.init]
@@ -82,7 +96,14 @@
 )
 
 ;;; Code for genericmethod.GenericMethod.SuperContainer [itable.init]
-(global $genericmethod.GenericMethod.SuperContainer.itable (ref $itable) (array.init_static $itable 
+(global $genericmethod.GenericMethod.SuperContainer.itable (ref $genericmethod.GenericMethod.SuperContainer.itable) (struct.new $genericmethod.GenericMethod.SuperContainer.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for genericmethod.GenericMethod.Container [vtable.init]
@@ -97,7 +118,14 @@
 )
 
 ;;; Code for genericmethod.GenericMethod.Container [itable.init]
-(global $genericmethod.GenericMethod.Container.itable (ref $itable) (array.init_static $itable 
+(global $genericmethod.GenericMethod.Container.itable (ref $genericmethod.GenericMethod.Container.itable) (struct.new $genericmethod.GenericMethod.Container.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for genericmethod.GenericMethod.Content [vtable.init]
@@ -112,7 +140,14 @@
 )
 
 ;;; Code for genericmethod.GenericMethod.Content [itable.init]
-(global $genericmethod.GenericMethod.Content.itable (ref $itable) (array.init_static $itable 
+(global $genericmethod.GenericMethod.Content.itable (ref $genericmethod.GenericMethod.Content.itable) (struct.new $genericmethod.GenericMethod.Content.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for genericmethod.GenericMethod.1LocalClass [vtable.init]
@@ -137,13 +172,20 @@
 )
 
 ;;; Code for genericmethod.GenericMethod.1LocalClass [itable.init]
-(global $genericmethod.GenericMethod.1LocalClass.itable (ref $itable) (array.init_static $itable 
+(global $genericmethod.GenericMethod.1LocalClass.itable (ref $genericmethod.GenericMethod.1LocalClass.itable) (struct.new $genericmethod.GenericMethod.1LocalClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for genericmethod.GenericMethod [CLASS]
 (type $genericmethod.GenericMethod (struct_subtype 
  (field $vtable (ref $genericmethod.GenericMethod.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $genericmethod.GenericMethod.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -163,6 +205,15 @@
  (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
+(type $genericmethod.GenericMethod.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; GenericMethod<T> GenericMethod.$create()
 (func $$create__@genericmethod.GenericMethod
@@ -425,7 +476,7 @@
   ;; Content content = (Container<?> $qualifier = ((Container<?>) list.get(0)),$qualifier.get());
   ;;@ genericmethod/GenericMethod.java:101:4
   (local.set $content (block (result (ref null $genericmethod.GenericMethod.Content))
-   (local.set $$qualifier (ref.cast_static $genericmethod.GenericMethod.Container (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $list))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $list)) (i32.const 4))) ))))
+   (local.set $$qualifier (ref.cast_static $genericmethod.GenericMethod.Container (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $list))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (struct.get $itable $slot4 (struct.get $java.lang.Object $itable (local.get $list))))))))
    (call_ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref.as_non_null (local.get $$qualifier))(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier))))
   ))
   ;; genericmethod.GenericMethod.acceptsString(content.getProp());
@@ -441,7 +492,7 @@
   ;;@ genericmethod/GenericMethod.java:106:4
   (local.set $nestedContent (block (result (ref null $genericmethod.GenericMethod.Content))
    (local.set $$qualifier_1 (block (result (ref null $genericmethod.GenericMethod.Container))
-    (local.set $$qualifier_2 (ref.cast_static $genericmethod.GenericMethod.SuperContainer (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $nestedWildcardList))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $nestedWildcardList)) (i32.const 4))) ))))
+    (local.set $$qualifier_2 (ref.cast_static $genericmethod.GenericMethod.SuperContainer (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $nestedWildcardList))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (struct.get $itable $slot4 (struct.get $java.lang.Object $itable (local.get $nestedWildcardList))))))))
     (call_ref $function.m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (ref.as_non_null (local.get $$qualifier_2))(struct.get $genericmethod.GenericMethod.SuperContainer.vtable $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (struct.get $genericmethod.GenericMethod.SuperContainer $vtable(local.get $$qualifier_2))))
    ))
    (call_ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref.as_non_null (local.get $$qualifier_1))(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier_1))))
@@ -459,7 +510,7 @@
   ;;@ genericmethod/GenericMethod.java:111:4
   (local.set $deepContent (block (result (ref null $genericmethod.GenericMethod.Content))
    (local.set $$qualifier_3 (block (result (ref null $genericmethod.GenericMethod.Container))
-    (local.set $$qualifier_4 (ref.cast_static $genericmethod.GenericMethod.SuperContainer (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $deepWildcardList))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $deepWildcardList)) (i32.const 4))) ))))
+    (local.set $$qualifier_4 (ref.cast_static $genericmethod.GenericMethod.SuperContainer (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $deepWildcardList))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (struct.get $itable $slot4 (struct.get $java.lang.Object $itable (local.get $deepWildcardList))))))))
     (call_ref $function.m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (ref.as_non_null (local.get $$qualifier_4))(struct.get $genericmethod.GenericMethod.SuperContainer.vtable $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (struct.get $genericmethod.GenericMethod.SuperContainer $vtable(local.get $$qualifier_4))))
    ))
    (call_ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref.as_non_null (local.get $$qualifier_3))(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier_3))))
@@ -497,7 +548,7 @@
   ;; Content content = (Container<C> $qualifier = ((Container<C>) list.get(0)),$qualifier.get());
   ;;@ genericmethod/GenericMethod.java:118:4
   (local.set $content (block (result (ref null $genericmethod.GenericMethod.Content))
-   (local.set $$qualifier (ref.cast_static $genericmethod.GenericMethod.Container (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $list))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $list)) (i32.const 4))) ))))
+   (local.set $$qualifier (ref.cast_static $genericmethod.GenericMethod.Container (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $list))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (struct.get $itable $slot4 (struct.get $java.lang.Object $itable (local.get $list))))))))
    (call_ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref.as_non_null (local.get $$qualifier))(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier))))
   ))
   ;; genericmethod.GenericMethod.acceptsString(content.getProp());
@@ -513,7 +564,7 @@
   ;;@ genericmethod/GenericMethod.java:123:4
   (local.set $nestedContent (block (result (ref null $genericmethod.GenericMethod.Content))
    (local.set $$qualifier_1 (block (result (ref null $genericmethod.GenericMethod.Container))
-    (local.set $$qualifier_2 (ref.cast_static $genericmethod.GenericMethod.SuperContainer (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $nestedTypeVariableList))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $nestedTypeVariableList)) (i32.const 4))) ))))
+    (local.set $$qualifier_2 (ref.cast_static $genericmethod.GenericMethod.SuperContainer (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $nestedTypeVariableList))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (struct.get $itable $slot4 (struct.get $java.lang.Object $itable (local.get $nestedTypeVariableList))))))))
     (call_ref $function.m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (ref.as_non_null (local.get $$qualifier_2))(struct.get $genericmethod.GenericMethod.SuperContainer.vtable $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (struct.get $genericmethod.GenericMethod.SuperContainer $vtable(local.get $$qualifier_2))))
    ))
    (call_ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref.as_non_null (local.get $$qualifier_1))(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier_1))))
@@ -531,7 +582,7 @@
   ;;@ genericmethod/GenericMethod.java:128:4
   (local.set $deepContent (block (result (ref null $genericmethod.GenericMethod.Content))
    (local.set $$qualifier_3 (block (result (ref null $genericmethod.GenericMethod.Container))
-    (local.set $$qualifier_4 (ref.cast_static $genericmethod.GenericMethod.SuperContainer (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $deepTypeVariableList))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $deepTypeVariableList)) (i32.const 4))) ))))
+    (local.set $$qualifier_4 (ref.cast_static $genericmethod.GenericMethod.SuperContainer (call_ref $function.m_get__int__java_lang_Object (ref.as_non_null (local.get $deepTypeVariableList))(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast_static $java.util.List.vtable (struct.get $itable $slot4 (struct.get $java.lang.Object $itable (local.get $deepTypeVariableList))))))))
     (call_ref $function.m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (ref.as_non_null (local.get $$qualifier_4))(struct.get $genericmethod.GenericMethod.SuperContainer.vtable $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (struct.get $genericmethod.GenericMethod.SuperContainer $vtable(local.get $$qualifier_4))))
    ))
    (call_ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref.as_non_null (local.get $$qualifier_3))(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier_3))))
@@ -556,7 +607,7 @@
   (call $$clinit__void@genericmethod.GenericMethod )
   ;; consumer.accept(v);
   ;;@ genericmethod/GenericMethod.java:142:4
-  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $consumer))(local.get $v)(struct.get $genericmethod.GenericMethod.Consumer.vtable $m_accept__java_lang_Object__void (ref.cast_static $genericmethod.GenericMethod.Consumer.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $consumer)) (i32.const -1))) ))
+  (call_ref $function.m_accept__java_lang_Object__void (ref.as_non_null (local.get $consumer))(local.get $v)(struct.get $genericmethod.GenericMethod.Consumer.vtable $m_accept__java_lang_Object__void (ref.null $genericmethod.GenericMethod.Consumer.vtable)))
  )
 )
 
@@ -571,7 +622,7 @@
   (call $$clinit__void@genericmethod.GenericMethod )
   ;; return supplier.get();
   ;;@ genericmethod/GenericMethod.java:146:4
-  (return (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $supplier))(struct.get $genericmethod.GenericMethod.Supplier.vtable $m_get__java_lang_Object (ref.cast_static $genericmethod.GenericMethod.Supplier.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $supplier)) (i32.const -1))) )))
+  (return (call_ref $function.m_get__java_lang_Object (ref.as_non_null (local.get $supplier))(struct.get $genericmethod.GenericMethod.Supplier.vtable $m_get__java_lang_Object (ref.null $genericmethod.GenericMethod.Supplier.vtable))))
  )
 )
 
@@ -637,7 +688,7 @@
 ;;; Code for genericmethod.GenericMethod.1 [CLASS]
 (type $genericmethod.GenericMethod.1 (struct_subtype 
  (field $vtable (ref $genericmethod.GenericMethod.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $genericmethod.GenericMethod.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__genericmethod_GenericMethod_1 (ref null $genericmethod.GenericMethod))
   $genericmethod.GenericMethod)
@@ -660,6 +711,15 @@
  (field $m_fun2__java_lang_Object__void (ref $function.m_fun2__java_lang_Object__void))
   $genericmethod.GenericMethod.vtable)
 )
+(type $genericmethod.GenericMethod.1.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $genericmethod.GenericMethod.itable))
 
 ;;; <anonymous> extends GenericMethod<T><T, T> <anonymous> extends GenericMethod<T>.$create(GenericMethod<T> $outer_this)
 (func $$create__genericmethod_GenericMethod@genericmethod.GenericMethod.1
@@ -760,7 +820,7 @@
 ;;; Code for genericmethod.GenericMethod.SuperContainer [CLASS]
 (type $genericmethod.GenericMethod.SuperContainer (struct_subtype 
  (field $vtable (ref $genericmethod.GenericMethod.SuperContainer.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $genericmethod.GenericMethod.SuperContainer.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -772,6 +832,15 @@
  (field $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (ref $function.m_get__genericmethod_GenericMethod_Container_$pp_genericmethod))
   $java.lang.Object.vtable)
 )
+(type $genericmethod.GenericMethod.SuperContainer.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SuperContainer<C> SuperContainer.$create()
 (func $$create__@genericmethod.GenericMethod.SuperContainer
@@ -860,7 +929,7 @@
 ;;; Code for genericmethod.GenericMethod.Container [CLASS]
 (type $genericmethod.GenericMethod.Container (struct_subtype 
  (field $vtable (ref $genericmethod.GenericMethod.Container.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $genericmethod.GenericMethod.Container.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -872,6 +941,15 @@
  (field $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod))
   $java.lang.Object.vtable)
 )
+(type $genericmethod.GenericMethod.Container.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Container<CT> Container.$create()
 (func $$create__@genericmethod.GenericMethod.Container
@@ -960,7 +1038,7 @@
 ;;; Code for genericmethod.GenericMethod.Content [CLASS]
 (type $genericmethod.GenericMethod.Content (struct_subtype 
  (field $vtable (ref $genericmethod.GenericMethod.Content.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $genericmethod.GenericMethod.Content.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -972,6 +1050,15 @@
  (field $m_getProp__java_lang_String_$pp_genericmethod (ref $function.m_getProp__java_lang_String_$pp_genericmethod))
   $java.lang.Object.vtable)
 )
+(type $genericmethod.GenericMethod.Content.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Content Content.$create()
 (func $$create__@genericmethod.GenericMethod.Content
@@ -1132,7 +1219,7 @@
 ;;; Code for genericmethod.GenericMethod.1LocalClass [CLASS]
 (type $genericmethod.GenericMethod.1LocalClass (struct_subtype 
  (field $vtable (ref $genericmethod.GenericMethod.1LocalClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $genericmethod.GenericMethod.1LocalClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__genericmethod_GenericMethod_1LocalClass (ref null $genericmethod.GenericMethod))
   $genericmethod.GenericMethod)
@@ -1155,6 +1242,15 @@
  (field $m_fun2__java_lang_Number__void (ref $function.m_fun2__java_lang_Number__void))
   $genericmethod.GenericMethod.vtable)
 )
+(type $genericmethod.GenericMethod.1LocalClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $genericmethod.GenericMethod.itable))
 
 ;;; LocalClass<T, T, T> LocalClass.$create(GenericMethod<T> $outer_this)
 (func $$create__genericmethod_GenericMethod@genericmethod.GenericMethod.1LocalClass

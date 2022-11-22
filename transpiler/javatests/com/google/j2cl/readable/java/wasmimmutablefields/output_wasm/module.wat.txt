@@ -30,7 +30,14 @@
 )
 
 ;;; Code for wasmimmutablefields.WasmImmutableFields [itable.init]
-(global $wasmimmutablefields.WasmImmutableFields.itable (ref $itable) (array.init_static $itable 
+(global $wasmimmutablefields.WasmImmutableFields.itable (ref $wasmimmutablefields.WasmImmutableFields.itable) (struct.new $wasmimmutablefields.WasmImmutableFields.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for wasmimmutablefields.AssignmentsInDeclaration [vtable.init]
@@ -44,7 +51,14 @@
 )
 
 ;;; Code for wasmimmutablefields.AssignmentsInDeclaration [itable.init]
-(global $wasmimmutablefields.AssignmentsInDeclaration.itable (ref $itable) (array.init_static $itable 
+(global $wasmimmutablefields.AssignmentsInDeclaration.itable (ref $wasmimmutablefields.AssignmentsInDeclaration.itable) (struct.new $wasmimmutablefields.AssignmentsInDeclaration.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for wasmimmutablefields.AssignmentsInInitializer [vtable.init]
@@ -58,7 +72,14 @@
 )
 
 ;;; Code for wasmimmutablefields.AssignmentsInInitializer [itable.init]
-(global $wasmimmutablefields.AssignmentsInInitializer.itable (ref $itable) (array.init_static $itable 
+(global $wasmimmutablefields.AssignmentsInInitializer.itable (ref $wasmimmutablefields.AssignmentsInInitializer.itable) (struct.new $wasmimmutablefields.AssignmentsInInitializer.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for wasmimmutablefields.AssignmentsInConstructor [vtable.init]
@@ -72,7 +93,14 @@
 )
 
 ;;; Code for wasmimmutablefields.AssignmentsInConstructor [itable.init]
-(global $wasmimmutablefields.AssignmentsInConstructor.itable (ref $itable) (array.init_static $itable 
+(global $wasmimmutablefields.AssignmentsInConstructor.itable (ref $wasmimmutablefields.AssignmentsInConstructor.itable) (struct.new $wasmimmutablefields.AssignmentsInConstructor.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for wasmimmutablefields.OptimizesWithThisConstructorDelegation [vtable.init]
@@ -86,7 +114,14 @@
 )
 
 ;;; Code for wasmimmutablefields.OptimizesWithThisConstructorDelegation [itable.init]
-(global $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable (ref $itable) (array.init_static $itable 
+(global $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable (ref $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable) (struct.new $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [vtable.init]
@@ -100,7 +135,14 @@
 )
 
 ;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [itable.init]
-(global $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable (ref $itable) (array.init_static $itable 
+(global $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable (ref $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable) (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for wasmimmutablefields.FinalizerTest [vtable.init]
@@ -115,13 +157,20 @@
 )
 
 ;;; Code for wasmimmutablefields.FinalizerTest [itable.init]
-(global $wasmimmutablefields.FinalizerTest.itable (ref $itable) (array.init_static $itable 
+(global $wasmimmutablefields.FinalizerTest.itable (ref $wasmimmutablefields.FinalizerTest.itable) (struct.new $wasmimmutablefields.FinalizerTest.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for wasmimmutablefields.WasmImmutableFields [CLASS]
 (type $wasmimmutablefields.WasmImmutableFields (struct_subtype 
  (field $vtable (ref $wasmimmutablefields.WasmImmutableFields.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $wasmimmutablefields.WasmImmutableFields.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -132,6 +181,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $wasmimmutablefields.WasmImmutableFields.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; WasmImmutableFields WasmImmutableFields.$create()
 (func $$create__@wasmimmutablefields.WasmImmutableFields
@@ -204,7 +262,7 @@
 ;;; Code for wasmimmutablefields.AssignmentsInDeclaration [CLASS]
 (type $wasmimmutablefields.AssignmentsInDeclaration (struct_subtype 
  (field $vtable (ref $wasmimmutablefields.AssignmentsInDeclaration.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $wasmimmutablefields.AssignmentsInDeclaration.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInDeclaration i32)
  (field $f_stringLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $java.lang.String))
@@ -223,6 +281,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $wasmimmutablefields.AssignmentsInDeclaration.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; AssignmentsInDeclaration AssignmentsInDeclaration.$create()
 (func $$create__@wasmimmutablefields.AssignmentsInDeclaration
@@ -306,7 +373,7 @@
 ;;; Code for wasmimmutablefields.AssignmentsInInitializer [CLASS]
 (type $wasmimmutablefields.AssignmentsInInitializer (struct_subtype 
  (field $vtable (ref $wasmimmutablefields.AssignmentsInInitializer.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $wasmimmutablefields.AssignmentsInInitializer.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInInitializer i32)
  (field $f_stringLiteral__wasmimmutablefields_AssignmentsInInitializer (ref null $java.lang.String))
@@ -325,6 +392,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $wasmimmutablefields.AssignmentsInInitializer.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; AssignmentsInInitializer AssignmentsInInitializer.$create()
 (func $$create__@wasmimmutablefields.AssignmentsInInitializer
@@ -408,7 +484,7 @@
 ;;; Code for wasmimmutablefields.AssignmentsInConstructor [CLASS]
 (type $wasmimmutablefields.AssignmentsInConstructor (struct_subtype 
  (field $vtable (ref $wasmimmutablefields.AssignmentsInConstructor.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $wasmimmutablefields.AssignmentsInConstructor.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInConstructor i32)
  (field $f_stringLiteral__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.String))
@@ -429,6 +505,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $wasmimmutablefields.AssignmentsInConstructor.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; AssignmentsInConstructor AssignmentsInConstructor.$create(Object parameter, int intParameter, AssignmentsInConstructor par)
 (func $$create__java_lang_Object__int__wasmimmutablefields_AssignmentsInConstructor@wasmimmutablefields.AssignmentsInConstructor
@@ -507,7 +592,7 @@
 ;;; Code for wasmimmutablefields.OptimizesWithThisConstructorDelegation [CLASS]
 (type $wasmimmutablefields.OptimizesWithThisConstructorDelegation (struct_subtype 
  (field $vtable (ref $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation i32)
   $java.lang.Object)
@@ -519,6 +604,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; OptimizesWithThisConstructorDelegation OptimizesWithThisConstructorDelegation.$create()
 (func $$create__@wasmimmutablefields.OptimizesWithThisConstructorDelegation
@@ -659,7 +753,7 @@
 ;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [CLASS]
 (type $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (struct_subtype 
  (field $vtable (ref $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation i32)
   $wasmimmutablefields.OptimizesWithThisConstructorDelegation)
@@ -671,6 +765,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)
 )
+(type $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable))
 
 ;;; OptimizesWithSuperConstructorDelegation OptimizesWithSuperConstructorDelegation.$create()
 (func $$create__@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
@@ -811,7 +914,7 @@
 ;;; Code for wasmimmutablefields.FinalizerTest [CLASS]
 (type $wasmimmutablefields.FinalizerTest (struct_subtype 
  (field $vtable (ref $wasmimmutablefields.FinalizerTest.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $wasmimmutablefields.FinalizerTest.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest i32)
  (field $f_readInInit__wasmimmutablefields_FinalizerTest (mut i32))
@@ -834,6 +937,15 @@
  (field $m_foo__void_$pp_wasmimmutablefields (ref $function.m_foo__void_$pp_wasmimmutablefields))
   $java.lang.Object.vtable)
 )
+(type $wasmimmutablefields.FinalizerTest.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; FinalizerTest FinalizerTest.$create()
 (func $$create__@wasmimmutablefields.FinalizerTest

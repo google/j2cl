@@ -137,7 +137,14 @@
 )
 
 ;;; Code for bridgemethods.A [itable.init]
-(global $bridgemethods.A.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.A.itable (ref $bridgemethods.A.itable) (struct.new $bridgemethods.A.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.B [vtable.init]
@@ -154,10 +161,16 @@
 )
 
 ;;; Code for bridgemethods.B [itable.init]
-(global $bridgemethods.B.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.B.itable (ref $bridgemethods.B.itable) (struct.new $bridgemethods.B.itable 
  (struct.new $bridgemethods.I.vtable
   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.AccidentalOverride [vtable.init]
@@ -175,11 +188,17 @@
 )
 
 ;;; Code for bridgemethods.AccidentalOverride [itable.init]
-(global $bridgemethods.AccidentalOverride.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.AccidentalOverride.itable (ref $bridgemethods.AccidentalOverride.itable) (struct.new $bridgemethods.AccidentalOverride.itable 
  (struct.new $bridgemethods.SpecializedInterface.vtable
   (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride)
   (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.SuperParent [vtable.init]
@@ -194,7 +213,14 @@
 )
 
 ;;; Code for bridgemethods.SuperParent [itable.init]
-(global $bridgemethods.SuperParent.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.SuperParent.itable (ref $bridgemethods.SuperParent.itable) (struct.new $bridgemethods.SuperParent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.Parent [vtable.init]
@@ -212,7 +238,14 @@
 )
 
 ;;; Code for bridgemethods.Parent [itable.init]
-(global $bridgemethods.Parent.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.Parent.itable (ref $bridgemethods.Parent.itable) (struct.new $bridgemethods.Parent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.BridgeMethod [vtable.init]
@@ -233,11 +266,17 @@
 )
 
 ;;; Code for bridgemethods.BridgeMethod [itable.init]
-(global $bridgemethods.BridgeMethod.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.BridgeMethod.itable (ref $bridgemethods.BridgeMethod.itable) (struct.new $bridgemethods.BridgeMethod.itable 
  (struct.new $bridgemethods.SomeInterface.vtable
   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.DualUnrelatedBridges [vtable.init]
@@ -256,7 +295,7 @@
 )
 
 ;;; Code for bridgemethods.DualUnrelatedBridges [itable.init]
-(global $bridgemethods.DualUnrelatedBridges.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.DualUnrelatedBridges.itable (ref $bridgemethods.DualUnrelatedBridges.itable) (struct.new $bridgemethods.DualUnrelatedBridges.itable 
  (struct.new $bridgemethods.SomeInterface.vtable
   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges)
   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
@@ -264,6 +303,11 @@
  (struct.new $bridgemethods.SomeOtherFooInterface.vtable
   (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.SuperDualUnrelatedAccidentalBridges [vtable.init]
@@ -279,7 +323,14 @@
 )
 
 ;;; Code for bridgemethods.SuperDualUnrelatedAccidentalBridges [itable.init]
-(global $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable (ref $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable) (struct.new $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.DualUnrelatedAccidentalBridges [vtable.init]
@@ -298,7 +349,7 @@
 )
 
 ;;; Code for bridgemethods.DualUnrelatedAccidentalBridges [itable.init]
-(global $bridgemethods.DualUnrelatedAccidentalBridges.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.DualUnrelatedAccidentalBridges.itable (ref $bridgemethods.DualUnrelatedAccidentalBridges.itable) (struct.new $bridgemethods.DualUnrelatedAccidentalBridges.itable 
  (struct.new $bridgemethods.SomeInterface.vtable
   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges)
   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges)
@@ -306,6 +357,11 @@
  (struct.new $bridgemethods.SomeOtherFooInterface.vtable
   (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.ClassWithParameterizedGet [vtable.init]
@@ -320,7 +376,14 @@
 )
 
 ;;; Code for bridgemethods.ClassWithParameterizedGet [itable.init]
-(global $bridgemethods.ClassWithParameterizedGet.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.ClassWithParameterizedGet.itable (ref $bridgemethods.ClassWithParameterizedGet.itable) (struct.new $bridgemethods.ClassWithParameterizedGet.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.AccidentalOverrideBridge [vtable.init]
@@ -337,10 +400,16 @@
 )
 
 ;;; Code for bridgemethods.AccidentalOverrideBridge [itable.init]
-(global $bridgemethods.AccidentalOverrideBridge.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.AccidentalOverrideBridge.itable (ref $bridgemethods.AccidentalOverrideBridge.itable) (struct.new $bridgemethods.AccidentalOverrideBridge.itable 
  (struct.new $bridgemethods.Getter.vtable
   (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.TestCase10036 [vtable.init]
@@ -354,7 +423,14 @@
 )
 
 ;;; Code for bridgemethods.TestCase10036 [itable.init]
-(global $bridgemethods.TestCase10036.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.TestCase10036.itable (ref $bridgemethods.TestCase10036.itable) (struct.new $bridgemethods.TestCase10036.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.TestCase102 [vtable.init]
@@ -368,7 +444,14 @@
 )
 
 ;;; Code for bridgemethods.TestCase102 [itable.init]
-(global $bridgemethods.TestCase102.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.TestCase102.itable (ref $bridgemethods.TestCase102.itable) (struct.new $bridgemethods.TestCase102.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.ParameterizedParent [vtable.init]
@@ -383,7 +466,14 @@
 )
 
 ;;; Code for bridgemethods.ParameterizedParent [itable.init]
-(global $bridgemethods.ParameterizedParent.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.ParameterizedParent.itable (ref $bridgemethods.ParameterizedParent.itable) (struct.new $bridgemethods.ParameterizedParent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.ReparametrerizedChild [vtable.init]
@@ -399,7 +489,14 @@
 )
 
 ;;; Code for bridgemethods.ReparametrerizedChild [itable.init]
-(global $bridgemethods.ReparametrerizedChild.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.ReparametrerizedChild.itable (ref $bridgemethods.ReparametrerizedChild.itable) (struct.new $bridgemethods.ReparametrerizedChild.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.LeafChild [vtable.init]
@@ -415,7 +512,14 @@
 )
 
 ;;; Code for bridgemethods.LeafChild [itable.init]
-(global $bridgemethods.LeafChild.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.LeafChild.itable (ref $bridgemethods.LeafChild.itable) (struct.new $bridgemethods.LeafChild.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.TestCase102.C [vtable.init]
@@ -431,13 +535,18 @@
 )
 
 ;;; Code for bridgemethods.TestCase102.C [itable.init]
-(global $bridgemethods.TestCase102.C.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.TestCase102.C.itable (ref $bridgemethods.TestCase102.C.itable) (struct.new $bridgemethods.TestCase102.C.itable 
  (struct.new $bridgemethods.TestCase102.BI1.vtable
   (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
  )
  (struct.new $bridgemethods.TestCase102.BI2.vtable
   (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.BridgeMethodDefault [vtable.init]
@@ -451,7 +560,14 @@
 )
 
 ;;; Code for bridgemethods.BridgeMethodDefault [itable.init]
-(global $bridgemethods.BridgeMethodDefault.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.BridgeMethodDefault.itable (ref $bridgemethods.BridgeMethodDefault.itable) (struct.new $bridgemethods.BridgeMethodDefault.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.BridgeMethodDefault.A [vtable.init]
@@ -467,13 +583,18 @@
 )
 
 ;;; Code for bridgemethods.BridgeMethodDefault.A [itable.init]
-(global $bridgemethods.BridgeMethodDefault.A.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.BridgeMethodDefault.A.itable (ref $bridgemethods.BridgeMethodDefault.A.itable) (struct.new $bridgemethods.BridgeMethodDefault.A.itable 
  (struct.new $bridgemethods.BridgeMethodDefault.I.vtable
   (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A)
  )
  (struct.new $bridgemethods.BridgeMethodDefault.II.vtable
   (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.BridgeMethodDefault.B [vtable.init]
@@ -488,13 +609,18 @@
 )
 
 ;;; Code for bridgemethods.BridgeMethodDefault.B [itable.init]
-(global $bridgemethods.BridgeMethodDefault.B.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.BridgeMethodDefault.B.itable (ref $bridgemethods.BridgeMethodDefault.B.itable) (struct.new $bridgemethods.BridgeMethodDefault.B.itable 
  (struct.new $bridgemethods.BridgeMethodDefault.I.vtable
   (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
  )
  (struct.new $bridgemethods.BridgeMethodDefault.JJ.vtable
   (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature [vtable.init]
@@ -508,7 +634,14 @@
 )
 
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature [itable.init]
-(global $bridgemethods.BridgeMethodShadowedSignature.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.BridgeMethodShadowedSignature.itable (ref $bridgemethods.BridgeMethodShadowedSignature.itable) (struct.new $bridgemethods.BridgeMethodShadowedSignature.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature.C [vtable.init]
@@ -524,10 +657,16 @@
 )
 
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature.C [itable.init]
-(global $bridgemethods.BridgeMethodShadowedSignature.C.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.BridgeMethodShadowedSignature.C.itable (ref $bridgemethods.BridgeMethodShadowedSignature.C.itable) (struct.new $bridgemethods.BridgeMethodShadowedSignature.C.itable 
  (struct.new $bridgemethods.BridgeMethodShadowedSignature.I.vtable
   (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.AbstractMap [vtable.init]
@@ -542,10 +681,16 @@
 )
 
 ;;; Code for bridgemethods.AbstractMap [itable.init]
-(global $bridgemethods.AbstractMap.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.AbstractMap.itable (ref $bridgemethods.AbstractMap.itable) (struct.new $bridgemethods.AbstractMap.itable 
  (struct.new $bridgemethods.Map.vtable
   (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.EnumMap [vtable.init]
@@ -561,10 +706,16 @@
 )
 
 ;;; Code for bridgemethods.EnumMap [itable.init]
-(global $bridgemethods.EnumMap.itable (ref $itable) (array.init_static $itable 
+(global $bridgemethods.EnumMap.itable (ref $bridgemethods.EnumMap.itable) (struct.new $bridgemethods.EnumMap.itable 
  (struct.new $bridgemethods.Map.vtable
   (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for bridgemethods.I [INTERFACE]
@@ -606,7 +757,7 @@
 ;;; Code for bridgemethods.A [CLASS]
 (type $bridgemethods.A (struct_subtype 
  (field $vtable (ref $bridgemethods.A.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.A.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -619,6 +770,15 @@
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.A.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; A<T, S> A.$create()
 (func $$create__@bridgemethods.A
@@ -724,7 +884,7 @@
 ;;; Code for bridgemethods.B [CLASS]
 (type $bridgemethods.B (struct_subtype 
  (field $vtable (ref $bridgemethods.B.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.B.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.A)
 )
@@ -738,6 +898,15 @@
  (field $m_fun__java_lang_String__java_lang_Integer (ref $function.m_fun__java_lang_String__java_lang_Integer))
   $bridgemethods.A.vtable)
 )
+(type $bridgemethods.B.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.I.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.A.itable))
 
 ;;; B B.$create()
 (func $$create__@bridgemethods.B
@@ -881,7 +1050,7 @@
 ;;; Code for bridgemethods.AccidentalOverride [CLASS]
 (type $bridgemethods.AccidentalOverride (struct_subtype 
  (field $vtable (ref $bridgemethods.AccidentalOverride.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.AccidentalOverride.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.A)
 )
@@ -896,6 +1065,15 @@
  (field $m_get__java_lang_String (ref $function.m_get__java_lang_String))
   $bridgemethods.A.vtable)
 )
+(type $bridgemethods.AccidentalOverride.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.SpecializedInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.A.itable))
 
 ;;; AccidentalOverride AccidentalOverride.$create()
 (func $$create__@bridgemethods.AccidentalOverride
@@ -1055,7 +1233,7 @@
 ;;; Code for bridgemethods.SuperParent [CLASS]
 (type $bridgemethods.SuperParent (struct_subtype 
  (field $vtable (ref $bridgemethods.SuperParent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.SuperParent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -1067,6 +1245,15 @@
  (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.SuperParent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SuperParent<T, S> SuperParent.$create()
 (func $$create__@bridgemethods.SuperParent
@@ -1153,7 +1340,7 @@
 ;;; Code for bridgemethods.Parent [CLASS]
 (type $bridgemethods.Parent (struct_subtype 
  (field $vtable (ref $bridgemethods.Parent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.Parent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.SuperParent)
 )
@@ -1168,6 +1355,15 @@
  (field $m_fun__java_lang_Object__void (ref $function.m_fun__java_lang_Object__void))
   $bridgemethods.SuperParent.vtable)
 )
+(type $bridgemethods.Parent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.SuperParent.itable))
 
 ;;; Parent<T> Parent.$create()
 (func $$create__@bridgemethods.Parent
@@ -1297,7 +1493,7 @@
 ;;; Code for bridgemethods.BridgeMethod [CLASS]
 (type $bridgemethods.BridgeMethod (struct_subtype 
  (field $vtable (ref $bridgemethods.BridgeMethod.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.BridgeMethod.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.Parent)
 )
@@ -1315,6 +1511,15 @@
  (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.m_foo__java_lang_Object__java_lang_Number__void))
   $bridgemethods.Parent.vtable)
 )
+(type $bridgemethods.BridgeMethod.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.SomeInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.Parent.itable))
 
 ;;; BridgeMethod BridgeMethod.$create()
 (func $$create__@bridgemethods.BridgeMethod
@@ -1497,7 +1702,7 @@
 ;;; Code for bridgemethods.DualUnrelatedBridges [CLASS]
 (type $bridgemethods.DualUnrelatedBridges (struct_subtype 
  (field $vtable (ref $bridgemethods.DualUnrelatedBridges.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.DualUnrelatedBridges.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -1513,6 +1718,15 @@
  (field $m_foo__java_lang_Object__java_lang_Double__void (ref $function.m_foo__java_lang_Object__java_lang_Double__void))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.DualUnrelatedBridges.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.SomeInterface.vtable))
+(field $slot1 (ref $bridgemethods.SomeOtherFooInterface.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; DualUnrelatedBridges DualUnrelatedBridges.$create()
 (func $$create__@bridgemethods.DualUnrelatedBridges
@@ -1664,7 +1878,7 @@
 ;;; Code for bridgemethods.SuperDualUnrelatedAccidentalBridges [CLASS]
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges (struct_subtype 
  (field $vtable (ref $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -1677,6 +1891,15 @@
  (field $m_foo__java_lang_String__java_lang_Number__void (ref $function.m_foo__java_lang_String__java_lang_Number__void))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SuperDualUnrelatedAccidentalBridges SuperDualUnrelatedAccidentalBridges.$create()
 (func $$create__@bridgemethods.SuperDualUnrelatedAccidentalBridges
@@ -1777,7 +2000,7 @@
 ;;; Code for bridgemethods.DualUnrelatedAccidentalBridges [CLASS]
 (type $bridgemethods.DualUnrelatedAccidentalBridges (struct_subtype 
  (field $vtable (ref $bridgemethods.DualUnrelatedAccidentalBridges.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.DualUnrelatedAccidentalBridges.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.SuperDualUnrelatedAccidentalBridges)
 )
@@ -1793,6 +2016,15 @@
  (field $m_foo__java_lang_Object__java_lang_Double__void (ref $function.m_foo__java_lang_Object__java_lang_Double__void))
   $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)
 )
+(type $bridgemethods.DualUnrelatedAccidentalBridges.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.SomeInterface.vtable))
+(field $slot1 (ref $bridgemethods.SomeOtherFooInterface.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable))
 
 ;;; DualUnrelatedAccidentalBridges DualUnrelatedAccidentalBridges.$create()
 (func $$create__@bridgemethods.DualUnrelatedAccidentalBridges
@@ -1952,7 +2184,7 @@
 ;;; Code for bridgemethods.ClassWithParameterizedGet [CLASS]
 (type $bridgemethods.ClassWithParameterizedGet (struct_subtype 
  (field $vtable (ref $bridgemethods.ClassWithParameterizedGet.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.ClassWithParameterizedGet.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -1964,6 +2196,15 @@
  (field $m_get__java_lang_Object__java_lang_Object (ref $function.m_get__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.ClassWithParameterizedGet.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ClassWithParameterizedGet<T> ClassWithParameterizedGet.$create()
 (func $$create__@bridgemethods.ClassWithParameterizedGet
@@ -2053,7 +2294,7 @@
 ;;; Code for bridgemethods.AccidentalOverrideBridge [CLASS]
 (type $bridgemethods.AccidentalOverrideBridge (struct_subtype 
  (field $vtable (ref $bridgemethods.AccidentalOverrideBridge.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.AccidentalOverrideBridge.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.ClassWithParameterizedGet)
 )
@@ -2067,6 +2308,15 @@
  (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
   $bridgemethods.ClassWithParameterizedGet.vtable)
 )
+(type $bridgemethods.AccidentalOverrideBridge.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.Getter.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.ClassWithParameterizedGet.itable))
 
 ;;; AccidentalOverrideBridge AccidentalOverrideBridge.$create()
 (func $$create__@bridgemethods.AccidentalOverrideBridge
@@ -2114,7 +2364,7 @@
   (local.set $g (call $$create__@bridgemethods.AccidentalOverrideBridge ))
   ;; g.get(javaemul.internal.StringPool.$getString_||());
   ;;@ bridgemethods/BridgeMethod.java:100:4
-  (drop (call_ref $function.m_get__java_lang_String__java_lang_String (ref.as_non_null (local.get $g))(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast_static $bridgemethods.Getter.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $g)) (i32.const 0))) )))
+  (drop (call_ref $function.m_get__java_lang_String__java_lang_String (ref.as_non_null (local.get $g))(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast_static $bridgemethods.Getter.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $g)))))))
  )
 )
 (elem declare func $m_test__void@bridgemethods.AccidentalOverrideBridge)
@@ -2192,7 +2442,7 @@
 ;;; Code for bridgemethods.TestCase10036 [CLASS]
 (type $bridgemethods.TestCase10036 (struct_subtype 
  (field $vtable (ref $bridgemethods.TestCase10036.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.TestCase10036.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -2203,6 +2453,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.TestCase10036.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; TestCase10036 TestCase10036.$create()
 (func $$create__@bridgemethods.TestCase10036
@@ -2275,7 +2534,7 @@
 ;;; Code for bridgemethods.TestCase102 [CLASS]
 (type $bridgemethods.TestCase102 (struct_subtype 
  (field $vtable (ref $bridgemethods.TestCase102.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.TestCase102.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -2286,6 +2545,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.TestCase102.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; TestCase102 TestCase102.$create()
 (func $$create__@bridgemethods.TestCase102
@@ -2358,7 +2626,7 @@
 ;;; Code for bridgemethods.ParameterizedParent [CLASS]
 (type $bridgemethods.ParameterizedParent (struct_subtype 
  (field $vtable (ref $bridgemethods.ParameterizedParent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.ParameterizedParent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -2370,6 +2638,15 @@
  (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (ref $function.m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.ParameterizedParent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ParameterizedParent<T> ParameterizedParent.$create()
 (func $$create__@bridgemethods.ParameterizedParent
@@ -2459,7 +2736,7 @@
 ;;; Code for bridgemethods.ReparametrerizedChild [CLASS]
 (type $bridgemethods.ReparametrerizedChild (struct_subtype 
  (field $vtable (ref $bridgemethods.ReparametrerizedChild.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.ReparametrerizedChild.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.ParameterizedParent)
 )
@@ -2472,6 +2749,15 @@
  (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (ref $function.m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods))
   $bridgemethods.ParameterizedParent.vtable)
 )
+(type $bridgemethods.ReparametrerizedChild.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.ParameterizedParent.itable))
 
 ;;; ReparametrerizedChild<E> ReparametrerizedChild.$create()
 (func $$create__@bridgemethods.ReparametrerizedChild
@@ -2578,7 +2864,7 @@
 ;;; Code for bridgemethods.LeafChild [CLASS]
 (type $bridgemethods.LeafChild (struct_subtype 
  (field $vtable (ref $bridgemethods.LeafChild.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.LeafChild.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.ReparametrerizedChild)
 )
@@ -2591,6 +2877,15 @@
  (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (ref $function.m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods))
   $bridgemethods.ReparametrerizedChild.vtable)
 )
+(type $bridgemethods.LeafChild.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.ReparametrerizedChild.itable))
 
 ;;; LeafChild LeafChild.$create()
 (func $$create__@bridgemethods.LeafChild
@@ -2788,7 +3083,7 @@
 ;;; Code for bridgemethods.TestCase10036.B [CLASS]
 (type $bridgemethods.TestCase10036.B (struct_subtype 
  (field $vtable (ref $bridgemethods.TestCase10036.B.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.TestCase10036.B.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -2800,6 +3095,15 @@
  (field $m_get__java_lang_Comparable__java_lang_String (ref $function.m_get__java_lang_Comparable__java_lang_String))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.TestCase10036.B.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.TestCase10036.BI1.vtable))
+(field $slot1 (ref $bridgemethods.TestCase10036.BI3.vtable))
+(field $slot2 (ref $bridgemethods.TestCase10036.BI2.vtable))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void B.$ctor()
 (func $$ctor__void_$p_bridgemethods_TestCase10036_B@bridgemethods.TestCase10036.B
@@ -2915,7 +3219,7 @@
 ;;; Code for bridgemethods.TestCase102.B [CLASS]
 (type $bridgemethods.TestCase102.B (struct_subtype 
  (field $vtable (ref $bridgemethods.TestCase102.B.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.TestCase102.B.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -2927,6 +3231,15 @@
  (field $m_set__java_lang_Object__void (ref $function.m_set__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.TestCase102.B.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.TestCase102.BI1.vtable))
+(field $slot1 (ref $bridgemethods.TestCase102.BI2.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void B.$ctor()
 (func $$ctor__void_$p_bridgemethods_TestCase102_B@bridgemethods.TestCase102.B
@@ -2967,7 +3280,7 @@
 ;;; Code for bridgemethods.TestCase102.C [CLASS]
 (type $bridgemethods.TestCase102.C (struct_subtype 
  (field $vtable (ref $bridgemethods.TestCase102.C.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.TestCase102.C.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__bridgemethods_TestCase102_C (ref null $bridgemethods.TestCase102))
   $bridgemethods.TestCase102.B)
@@ -2981,6 +3294,15 @@
  (field $m_set__java_lang_String__void (ref $function.m_set__java_lang_String__void))
   $bridgemethods.TestCase102.B.vtable)
 )
+(type $bridgemethods.TestCase102.C.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.TestCase102.BI1.vtable))
+(field $slot1 (ref $bridgemethods.TestCase102.BI2.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.TestCase102.B.itable))
 
 ;;; C<B1> C.$create(TestCase102 $outer_this)
 (func $$create__bridgemethods_TestCase102@bridgemethods.TestCase102.C
@@ -3081,7 +3403,7 @@
 ;;; Code for bridgemethods.BridgeMethodDefault [CLASS]
 (type $bridgemethods.BridgeMethodDefault (struct_subtype 
  (field $vtable (ref $bridgemethods.BridgeMethodDefault.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.BridgeMethodDefault.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -3092,6 +3414,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.BridgeMethodDefault.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; BridgeMethodDefault BridgeMethodDefault.$create()
 (func $$create__@bridgemethods.BridgeMethodDefault
@@ -3246,7 +3577,7 @@
 ;;; Code for bridgemethods.BridgeMethodDefault.A [CLASS]
 (type $bridgemethods.BridgeMethodDefault.A (struct_subtype 
  (field $vtable (ref $bridgemethods.BridgeMethodDefault.A.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.BridgeMethodDefault.A.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -3259,6 +3590,15 @@
  (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.BridgeMethodDefault.A.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.BridgeMethodDefault.I.vtable))
+(field $slot1 (ref $bridgemethods.BridgeMethodDefault.II.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; A A.$create()
 (func $$create__@bridgemethods.BridgeMethodDefault.A
@@ -3412,7 +3752,7 @@
 ;;; Code for bridgemethods.BridgeMethodDefault.B [CLASS]
 (type $bridgemethods.BridgeMethodDefault.B (struct_subtype 
  (field $vtable (ref $bridgemethods.BridgeMethodDefault.B.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.BridgeMethodDefault.B.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -3424,6 +3764,15 @@
  (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.BridgeMethodDefault.B.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.BridgeMethodDefault.I.vtable))
+(field $slot1 (ref $bridgemethods.BridgeMethodDefault.JJ.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; B B.$create()
 (func $$create__@bridgemethods.BridgeMethodDefault.B
@@ -3515,7 +3864,7 @@
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature [CLASS]
 (type $bridgemethods.BridgeMethodShadowedSignature (struct_subtype 
  (field $vtable (ref $bridgemethods.BridgeMethodShadowedSignature.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.BridgeMethodShadowedSignature.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -3526,6 +3875,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.BridgeMethodShadowedSignature.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; BridgeMethodShadowedSignature BridgeMethodShadowedSignature.$create()
 (func $$create__@bridgemethods.BridgeMethodShadowedSignature
@@ -3634,7 +3992,7 @@
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature.B [CLASS]
 (type $bridgemethods.BridgeMethodShadowedSignature.B (struct_subtype 
  (field $vtable (ref $bridgemethods.BridgeMethodShadowedSignature.B.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.BridgeMethodShadowedSignature.B.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -3646,6 +4004,15 @@
  (field $m_get__java_lang_Object__java_lang_String (ref $function.m_get__java_lang_Object__java_lang_String))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.BridgeMethodShadowedSignature.B.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.BridgeMethodShadowedSignature.I.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void B.$ctor()
 (func $$ctor__void_$p_bridgemethods_BridgeMethodShadowedSignature_B@bridgemethods.BridgeMethodShadowedSignature.B
@@ -3703,7 +4070,7 @@
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature.C [CLASS]
 (type $bridgemethods.BridgeMethodShadowedSignature.C (struct_subtype 
  (field $vtable (ref $bridgemethods.BridgeMethodShadowedSignature.C.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.BridgeMethodShadowedSignature.C.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.BridgeMethodShadowedSignature.B)
 )
@@ -3716,6 +4083,15 @@
  (field $m_get__java_util_function_Consumer__java_lang_String (ref $function.m_get__java_util_function_Consumer__java_lang_String))
   $bridgemethods.BridgeMethodShadowedSignature.B.vtable)
 )
+(type $bridgemethods.BridgeMethodShadowedSignature.C.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.BridgeMethodShadowedSignature.I.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.BridgeMethodShadowedSignature.B.itable))
 
 ;;; C<C1> C.$create()
 (func $$create__@bridgemethods.BridgeMethodShadowedSignature.C
@@ -3858,7 +4234,7 @@
 ;;; Code for bridgemethods.AbstractMap [CLASS]
 (type $bridgemethods.AbstractMap (struct_subtype 
  (field $vtable (ref $bridgemethods.AbstractMap.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.AbstractMap.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -3870,6 +4246,15 @@
  (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_put__java_lang_Object__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
+(type $bridgemethods.AbstractMap.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.Map.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; AbstractMap<K, V> AbstractMap.$create()
 (func $$create__@bridgemethods.AbstractMap
@@ -3960,7 +4345,7 @@
 ;;; Code for bridgemethods.EnumMap [CLASS]
 (type $bridgemethods.EnumMap (struct_subtype 
  (field $vtable (ref $bridgemethods.EnumMap.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $bridgemethods.EnumMap.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $bridgemethods.AbstractMap)
 )
@@ -3973,6 +4358,15 @@
  (field $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (ref $function.m_put__java_lang_Enum__java_lang_Object__java_lang_Object))
   $bridgemethods.AbstractMap.vtable)
 )
+(type $bridgemethods.EnumMap.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.Map.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.AbstractMap.itable))
 
 ;;; EnumMap<K, V> EnumMap.$create()
 (func $$create__@bridgemethods.EnumMap

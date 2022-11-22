@@ -12,13 +12,20 @@
 )
 
 ;;; Code for jsnullable.Main [itable.init]
-(global $jsnullable.Main.itable (ref $itable) (array.init_static $itable 
+(global $jsnullable.Main.itable (ref $jsnullable.Main.itable) (struct.new $jsnullable.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsnullable.Main [CLASS]
 (type $jsnullable.Main (struct_subtype 
  (field $vtable (ref $jsnullable.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsnullable.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f1__jsnullable_Main_ (ref null $java.lang.String))
  (field $f_f2__jsnullable_Main_ (ref null $java.lang.String))
@@ -36,6 +43,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $jsnullable.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@jsnullable.Main

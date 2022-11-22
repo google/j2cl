@@ -15,7 +15,14 @@
 )
 
 ;;; Code for castonarrayinit.CastOnArrayInit [itable.init]
-(global $castonarrayinit.CastOnArrayInit.itable (ref $itable) (array.init_static $itable 
+(global $castonarrayinit.CastOnArrayInit.itable (ref $castonarrayinit.CastOnArrayInit.itable) (struct.new $castonarrayinit.CastOnArrayInit.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for castonarrayinit.CastOnArrayInit.Foo [vtable.init]
@@ -29,13 +36,20 @@
 )
 
 ;;; Code for castonarrayinit.CastOnArrayInit.Foo [itable.init]
-(global $castonarrayinit.CastOnArrayInit.Foo.itable (ref $itable) (array.init_static $itable 
+(global $castonarrayinit.CastOnArrayInit.Foo.itable (ref $castonarrayinit.CastOnArrayInit.Foo.itable) (struct.new $castonarrayinit.CastOnArrayInit.Foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for castonarrayinit.CastOnArrayInit [CLASS]
 (type $castonarrayinit.CastOnArrayInit (struct_subtype 
  (field $vtable (ref $castonarrayinit.CastOnArrayInit.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $castonarrayinit.CastOnArrayInit.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -46,6 +60,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $castonarrayinit.CastOnArrayInit.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; CastOnArrayInit CastOnArrayInit.$create()
 (func $$create__@castonarrayinit.CastOnArrayInit
@@ -150,7 +173,7 @@
 ;;; Code for castonarrayinit.CastOnArrayInit.Foo [CLASS]
 (type $castonarrayinit.CastOnArrayInit.Foo (struct_subtype 
  (field $vtable (ref $castonarrayinit.CastOnArrayInit.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $castonarrayinit.CastOnArrayInit.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -161,6 +184,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $castonarrayinit.CastOnArrayInit.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Foo<T> Foo.$create()
 (func $$create__@castonarrayinit.CastOnArrayInit.Foo

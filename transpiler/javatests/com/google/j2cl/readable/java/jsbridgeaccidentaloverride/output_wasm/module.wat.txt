@@ -25,7 +25,14 @@
 )
 
 ;;; Code for jsbridgeaccidentaloverride.Main [itable.init]
-(global $jsbridgeaccidentaloverride.Main.itable (ref $itable) (array.init_static $itable 
+(global $jsbridgeaccidentaloverride.Main.itable (ref $jsbridgeaccidentaloverride.Main.itable) (struct.new $jsbridgeaccidentaloverride.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsbridgeaccidentaloverride.MyJsType [vtable.init]
@@ -42,10 +49,16 @@
 )
 
 ;;; Code for jsbridgeaccidentaloverride.MyJsType [itable.init]
-(global $jsbridgeaccidentaloverride.MyJsType.itable (ref $itable) (array.init_static $itable 
+(global $jsbridgeaccidentaloverride.MyJsType.itable (ref $jsbridgeaccidentaloverride.MyJsType.itable) (struct.new $jsbridgeaccidentaloverride.MyJsType.itable 
  (struct.new $jsbridgeaccidentaloverride.OtherInterface.vtable
   (ref.func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsbridgeaccidentaloverride.SubJsType [vtable.init]
@@ -62,7 +75,7 @@
 )
 
 ;;; Code for jsbridgeaccidentaloverride.SubJsType [itable.init]
-(global $jsbridgeaccidentaloverride.SubJsType.itable (ref $itable) (array.init_static $itable 
+(global $jsbridgeaccidentaloverride.SubJsType.itable (ref $jsbridgeaccidentaloverride.SubJsType.itable) (struct.new $jsbridgeaccidentaloverride.SubJsType.itable 
  (struct.new $jsbridgeaccidentaloverride.OtherInterface.vtable
   (ref.func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
@@ -70,12 +83,17 @@
   (ref.func $m_bar__int__int@jsbridgeaccidentaloverride.SubJsType)
   (ref.func $m_foo__int__int@jsbridgeaccidentaloverride.MyJsType)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsbridgeaccidentaloverride.Main [CLASS]
 (type $jsbridgeaccidentaloverride.Main (struct_subtype 
  (field $vtable (ref $jsbridgeaccidentaloverride.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsbridgeaccidentaloverride.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -87,6 +105,15 @@
  (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
+(type $jsbridgeaccidentaloverride.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@jsbridgeaccidentaloverride.Main
@@ -152,7 +179,7 @@
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $b)))))
   ;; c.foo(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:26:4
-  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_foo__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_foo__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $c)))))))
   ;; a.bar(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:27:4
   (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_bar__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
@@ -161,7 +188,7 @@
   (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.SubJsType.vtable $m_bar__int__int (struct.get $jsbridgeaccidentaloverride.SubJsType $vtable(local.get $b)))))
   ;; c.bar(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:29:4
-  (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_bar__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
+  (drop (call_ref $function.m_bar__int__int (ref.as_non_null (local.get $c))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyInterface.vtable $m_bar__int__int (ref.cast_static $jsbridgeaccidentaloverride.MyInterface.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $c)))))))
   ;; a.fun(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:30:4
   (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $a))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_fun__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
@@ -170,7 +197,7 @@
   (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $b))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_fun__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $b)))))
   ;; d.fun(1);
   ;;@ jsbridgeaccidentaloverride/Main.java:32:4
-  (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.OtherInterface.vtable $m_fun__int__int (ref.cast_static $jsbridgeaccidentaloverride.OtherInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $d)) (i32.const 0))) )))
+  (drop (call_ref $function.m_fun__int__int (ref.as_non_null (local.get $d))(i32.const 1)(struct.get $jsbridgeaccidentaloverride.OtherInterface.vtable $m_fun__int__int (ref.cast_static $jsbridgeaccidentaloverride.OtherInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $d)))))))
  )
 )
 (elem declare func $m_test__void@jsbridgeaccidentaloverride.Main)
@@ -250,7 +277,7 @@
 ;;; Code for jsbridgeaccidentaloverride.MyJsType [CLASS]
 (type $jsbridgeaccidentaloverride.MyJsType (struct_subtype 
  (field $vtable (ref $jsbridgeaccidentaloverride.MyJsType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsbridgeaccidentaloverride.MyJsType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -264,6 +291,15 @@
  (field $m_fun__int__int (ref $function.m_fun__int__int))
   $java.lang.Object.vtable)
 )
+(type $jsbridgeaccidentaloverride.MyJsType.itable (struct_subtype 
+(field $slot0 (ref $jsbridgeaccidentaloverride.OtherInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; MyJsType MyJsType.$create()
 (func $$create__@jsbridgeaccidentaloverride.MyJsType
@@ -424,7 +460,7 @@
 ;;; Code for jsbridgeaccidentaloverride.SubJsType [CLASS]
 (type $jsbridgeaccidentaloverride.SubJsType (struct_subtype 
  (field $vtable (ref $jsbridgeaccidentaloverride.SubJsType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsbridgeaccidentaloverride.SubJsType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $jsbridgeaccidentaloverride.MyJsType)
 )
@@ -438,6 +474,15 @@
  (field $m_fun__int__int (ref $function.m_fun__int__int))
   $jsbridgeaccidentaloverride.MyJsType.vtable)
 )
+(type $jsbridgeaccidentaloverride.SubJsType.itable (struct_subtype 
+(field $slot0 (ref $jsbridgeaccidentaloverride.OtherInterface.vtable))
+(field $slot1 (ref $jsbridgeaccidentaloverride.MyInterface.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $jsbridgeaccidentaloverride.MyJsType.itable))
 
 ;;; SubJsType SubJsType.$create()
 (func $$create__@jsbridgeaccidentaloverride.SubJsType

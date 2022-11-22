@@ -186,6 +186,14 @@ class GenerationEnvironment {
     return getWasmVtableTypeName(typeDeclaration.toUnparameterizedTypeDescriptor());
   }
 
+  /** Returns the name of the wasm type of the itable for a Java type. */
+  public String getWasmItableTypeName(TypeDeclaration typeDeclaration) {
+    if (typeDeclaration == null) {
+      return "$itable";
+    }
+    return "$" + getTypeSignature(typeDeclaration.toUnparameterizedTypeDescriptor()) + ".itable";
+  }
+
   /** Returns the name of the global that stores the vtable for a Java type. */
   public String getWasmVtableGlobalName(DeclaredTypeDescriptor typeDescriptor) {
     return getWasmVtableGlobalName(typeDescriptor.getTypeDeclaration());
@@ -257,6 +265,12 @@ class GenerationEnvironment {
     return slotByInterfaceTypeDeclaration.getOrDefault(typeDeclaration, -1);
   }
 
+  private int numberOfInterfaceSlots = -1;
+
+  int getNumberOfInterfaceSlots() {
+    return numberOfInterfaceSlots;
+  }
+
   GenerationEnvironment(Library library) {
     // Resolve variable names into unique wasm identifiers.
     library
@@ -307,17 +321,16 @@ class GenerationEnvironment {
   private void assignInterfaceSlots(Library library) {
     SetMultimap<TypeDeclaration, TypeDeclaration> concreteTypesByInterface =
         LinkedHashMultimap.create();
-    SetMultimap<Integer, TypeDeclaration> concreteTypesBySlot = LinkedHashMultimap.create();
+    SetMultimap<Integer, TypeDeclaration> classesBySlot = LinkedHashMultimap.create();
 
-    // Traverse all concrete classes collecting the interfaces they implement. Actual vtable
+    // Traverse all classes collecting the interfaces they implement. Actual vtable
     // instances are only required for concrete classes, because they provide the references to the
     // methods that will be invoked on a specific instance.
-    // Since all dynamic dispatch is performed by obtaining the vtables from an instance,  if there
-    // are no instances for a type there is no need for instances of vtables it.
+    // Since all dynamic dispatch is performed by obtaining the vtables from an instance, if there
+    // are no instances for a type, there is no need for instances of vtables it.
     library
         .streamTypes()
         .filter(Predicates.not(Type::isInterface))
-        .filter(Predicates.not(Type::isAbstract))
         .forEach(
             t ->
                 t.getDeclaration().getAllSuperTypesIncludingSelf().stream()
@@ -330,8 +343,8 @@ class GenerationEnvironment {
         .sorted(
             comparingInt((TypeDeclaration td) -> concreteTypesByInterface.get(td).size())
                 .reversed())
-        .forEach(
-            i -> assignFirstNonConflictingSlot(i, concreteTypesByInterface, concreteTypesBySlot));
+        .forEach(i -> assignFirstNonConflictingSlot(i, concreteTypesByInterface, classesBySlot));
+    numberOfInterfaceSlots = classesBySlot.keySet().size();
   }
 
   /** Assigns the lowest non conflicting slot to {@code interfaceToAssign}. */

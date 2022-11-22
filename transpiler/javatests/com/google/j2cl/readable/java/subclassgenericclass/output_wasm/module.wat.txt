@@ -18,7 +18,14 @@
 )
 
 ;;; Code for subclassgenericclass.GenericClass [itable.init]
-(global $subclassgenericclass.GenericClass.itable (ref $itable) (array.init_static $itable 
+(global $subclassgenericclass.GenericClass.itable (ref $subclassgenericclass.GenericClass.itable) (struct.new $subclassgenericclass.GenericClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
@@ -32,7 +39,14 @@
 )
 
 ;;; Code for subclassgenericclass.GenericSubclassGenericClass [itable.init]
-(global $subclassgenericclass.GenericSubclassGenericClass.itable (ref $itable) (array.init_static $itable 
+(global $subclassgenericclass.GenericSubclassGenericClass.itable (ref $subclassgenericclass.GenericSubclassGenericClass.itable) (struct.new $subclassgenericclass.GenericSubclassGenericClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for subclassgenericclass.SubclassGenericClass [vtable.init]
@@ -46,13 +60,20 @@
 )
 
 ;;; Code for subclassgenericclass.SubclassGenericClass [itable.init]
-(global $subclassgenericclass.SubclassGenericClass.itable (ref $itable) (array.init_static $itable 
+(global $subclassgenericclass.SubclassGenericClass.itable (ref $subclassgenericclass.SubclassGenericClass.itable) (struct.new $subclassgenericclass.SubclassGenericClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for subclassgenericclass.GenericClass [CLASS]
 (type $subclassgenericclass.GenericClass (struct_subtype 
  (field $vtable (ref $subclassgenericclass.GenericClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $subclassgenericclass.GenericClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -63,6 +84,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $subclassgenericclass.GenericClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; GenericClass<T> GenericClass.$create()
 (func $$create__@subclassgenericclass.GenericClass
@@ -135,7 +165,7 @@
 ;;; Code for subclassgenericclass.GenericSubclassGenericClass [CLASS]
 (type $subclassgenericclass.GenericSubclassGenericClass (struct_subtype 
  (field $vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $subclassgenericclass.GenericSubclassGenericClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $subclassgenericclass.GenericClass)
 )
@@ -146,6 +176,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $subclassgenericclass.GenericClass.vtable)
 )
+(type $subclassgenericclass.GenericSubclassGenericClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $subclassgenericclass.GenericClass.itable))
 
 ;;; GenericSubclassGenericClass<T> GenericSubclassGenericClass.$create()
 (func $$create__@subclassgenericclass.GenericSubclassGenericClass
@@ -218,7 +257,7 @@
 ;;; Code for subclassgenericclass.SubclassGenericClass [CLASS]
 (type $subclassgenericclass.SubclassGenericClass (struct_subtype 
  (field $vtable (ref $subclassgenericclass.SubclassGenericClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $subclassgenericclass.SubclassGenericClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $subclassgenericclass.GenericClass)
 )
@@ -229,6 +268,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $subclassgenericclass.GenericClass.vtable)
 )
+(type $subclassgenericclass.SubclassGenericClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $subclassgenericclass.GenericClass.itable))
 
 ;;; SubclassGenericClass SubclassGenericClass.$create()
 (func $$create__@subclassgenericclass.SubclassGenericClass

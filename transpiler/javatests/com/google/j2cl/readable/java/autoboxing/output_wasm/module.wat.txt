@@ -50,7 +50,14 @@
 )
 
 ;;; Code for autoboxing.AutoBoxing [itable.init]
-(global $autoboxing.AutoBoxing.itable (ref $itable) (array.init_static $itable 
+(global $autoboxing.AutoBoxing.itable (ref $autoboxing.AutoBoxing.itable) (struct.new $autoboxing.AutoBoxing.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for autoboxing.AutoBoxing.1Local [vtable.init]
@@ -65,7 +72,14 @@
 )
 
 ;;; Code for autoboxing.AutoBoxing.1Local [itable.init]
-(global $autoboxing.AutoBoxing.1Local.itable (ref $itable) (array.init_static $itable 
+(global $autoboxing.AutoBoxing.1Local.itable (ref $autoboxing.AutoBoxing.1Local.itable) (struct.new $autoboxing.AutoBoxing.1Local.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for autoboxing.AutoBoxing.2Local [vtable.init]
@@ -80,7 +94,14 @@
 )
 
 ;;; Code for autoboxing.AutoBoxing.2Local [itable.init]
-(global $autoboxing.AutoBoxing.2Local.itable (ref $itable) (array.init_static $itable 
+(global $autoboxing.AutoBoxing.2Local.itable (ref $autoboxing.AutoBoxing.2Local.itable) (struct.new $autoboxing.AutoBoxing.2Local.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for autoboxing.AutoBoxing.1Supplier [vtable.init]
@@ -95,13 +116,20 @@
 )
 
 ;;; Code for autoboxing.AutoBoxing.1Supplier [itable.init]
-(global $autoboxing.AutoBoxing.1Supplier.itable (ref $itable) (array.init_static $itable 
+(global $autoboxing.AutoBoxing.1Supplier.itable (ref $autoboxing.AutoBoxing.1Supplier.itable) (struct.new $autoboxing.AutoBoxing.1Supplier.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for autoboxing.AutoBoxing [CLASS]
 (type $autoboxing.AutoBoxing (struct_subtype 
  (field $vtable (ref $autoboxing.AutoBoxing.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $autoboxing.AutoBoxing.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -141,6 +169,15 @@
  (field $m_testUnbox_withCast__void (ref $function.m_testUnbox_withCast__void))
   $java.lang.Object.vtable)
 )
+(type $autoboxing.AutoBoxing.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; AutoBoxing AutoBoxing.$create()
 (func $$create__@autoboxing.AutoBoxing
@@ -637,16 +674,16 @@
   (local.set $sum (f64.const 0.0))
   ;; LOOP: for (Iterator<Double> $iterator = boxedDoubles.iterator();$iterator.hasNext();) {
   ;;@ autoboxing/AutoBoxing.java:125:4
-  (local.set $$iterator (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $boxedDoubles))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $boxedDoubles)) (i32.const 2))) )))
+  (local.set $$iterator (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $boxedDoubles))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (struct.get $itable $slot2 (struct.get $java.lang.Object $itable (local.get $boxedDoubles)))))))
   (block $LOOP.BREAK
    (loop
-    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) ))))
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
     (block $LOOP.CONTINUE
      (block
       ;; double d = (Double $qualifier = ((Double) $iterator.next()),$qualifier.doubleValue());
       ;;@ autoboxing/AutoBoxing.java:125:4
       (local.set $d (block (result f64)
-       (local.set $$qualifier (ref.cast_static $java.lang.Double (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) ))))
+       (local.set $$qualifier (ref.cast_static $java.lang.Double (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
        (call_ref $function.m_doubleValue__double (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier))))
       ))
       (block
@@ -1438,7 +1475,7 @@
 ;;; Code for autoboxing.AutoBoxing.1Local [CLASS]
 (type $autoboxing.AutoBoxing.1Local (struct_subtype 
  (field $vtable (ref $autoboxing.AutoBoxing.1Local.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $autoboxing.AutoBoxing.1Local.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -1450,6 +1487,15 @@
  (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
   $java.lang.Object.vtable)
 )
+(type $autoboxing.AutoBoxing.1Local.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Local<T, T> Local.$create()
 (func $$create__@autoboxing.AutoBoxing.1Local
@@ -1539,7 +1585,7 @@
 ;;; Code for autoboxing.AutoBoxing.2Local [CLASS]
 (type $autoboxing.AutoBoxing.2Local (struct_subtype 
  (field $vtable (ref $autoboxing.AutoBoxing.2Local.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $autoboxing.AutoBoxing.2Local.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -1551,6 +1597,15 @@
  (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
   $java.lang.Object.vtable)
 )
+(type $autoboxing.AutoBoxing.2Local.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Local<T, T> Local.$create()
 (func $$create__@autoboxing.AutoBoxing.2Local
@@ -1640,7 +1695,7 @@
 ;;; Code for autoboxing.AutoBoxing.1Supplier [CLASS]
 (type $autoboxing.AutoBoxing.1Supplier (struct_subtype 
  (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $autoboxing.AutoBoxing.1Supplier.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__autoboxing_AutoBoxing_1Supplier (ref null $autoboxing.AutoBoxing))
   $java.lang.Object)
@@ -1653,6 +1708,15 @@
  (field $m_get__java_lang_Object_$pp_autoboxing (ref $function.m_get__java_lang_Object_$pp_autoboxing))
   $java.lang.Object.vtable)
 )
+(type $autoboxing.AutoBoxing.1Supplier.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Supplier<T> Supplier.$create(AutoBoxing $outer_this)
 (func $$create__autoboxing_AutoBoxing@autoboxing.AutoBoxing.1Supplier

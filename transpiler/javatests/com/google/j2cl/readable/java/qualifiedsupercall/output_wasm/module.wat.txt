@@ -19,7 +19,14 @@
 )
 
 ;;; Code for qualifiedsupercall.Parent [itable.init]
-(global $qualifiedsupercall.Parent.itable (ref $itable) (array.init_static $itable 
+(global $qualifiedsupercall.Parent.itable (ref $qualifiedsupercall.Parent.itable) (struct.new $qualifiedsupercall.Parent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [vtable.init]
@@ -34,7 +41,14 @@
 )
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [itable.init]
-(global $qualifiedsupercall.QualifiedSuperCall.itable (ref $itable) (array.init_static $itable 
+(global $qualifiedsupercall.QualifiedSuperCall.itable (ref $qualifiedsupercall.QualifiedSuperCall.itable) (struct.new $qualifiedsupercall.QualifiedSuperCall.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [vtable.init]
@@ -49,13 +63,20 @@
 )
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [itable.init]
-(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (ref $itable) (array.init_static $itable 
+(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable) (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for qualifiedsupercall.Parent [CLASS]
 (type $qualifiedsupercall.Parent (struct_subtype 
  (field $vtable (ref $qualifiedsupercall.Parent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $qualifiedsupercall.Parent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -67,6 +88,15 @@
  (field $m_fun__void (ref $function.m_fun__void))
   $java.lang.Object.vtable)
 )
+(type $qualifiedsupercall.Parent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Parent Parent.$create()
 (func $$create__@qualifiedsupercall.Parent
@@ -151,7 +181,7 @@
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [CLASS]
 (type $qualifiedsupercall.QualifiedSuperCall (struct_subtype 
  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $qualifiedsupercall.QualifiedSuperCall.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $qualifiedsupercall.Parent)
 )
@@ -163,6 +193,15 @@
  (field $m_fun__void (ref $function.m_fun__void))
   $qualifiedsupercall.Parent.vtable)
 )
+(type $qualifiedsupercall.QualifiedSuperCall.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $qualifiedsupercall.Parent.itable))
 
 ;;; QualifiedSuperCall QualifiedSuperCall.$create()
 (func $$create__@qualifiedsupercall.QualifiedSuperCall
@@ -235,7 +274,7 @@
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [CLASS]
 (type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct_subtype 
  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (ref null $qualifiedsupercall.QualifiedSuperCall))
   $java.lang.Object)
@@ -248,6 +287,15 @@
  (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
+(type $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerClass InnerClass.$create(QualifiedSuperCall $outer_this)
 (func $$create__qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall.InnerClass

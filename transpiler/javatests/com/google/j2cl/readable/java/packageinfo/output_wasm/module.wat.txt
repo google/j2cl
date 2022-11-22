@@ -18,7 +18,14 @@
 )
 
 ;;; Code for packageinfo.Outer [itable.init]
-(global $packageinfo.Outer.itable (ref $itable) (array.init_static $itable 
+(global $packageinfo.Outer.itable (ref $packageinfo.Outer.itable) (struct.new $packageinfo.Outer.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for packageinfo.Outer.Inner [vtable.init]
@@ -32,7 +39,14 @@
 )
 
 ;;; Code for packageinfo.Outer.Inner [itable.init]
-(global $packageinfo.Outer.Inner.itable (ref $itable) (array.init_static $itable 
+(global $packageinfo.Outer.Inner.itable (ref $packageinfo.Outer.Inner.itable) (struct.new $packageinfo.Outer.Inner.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for packageinfo.subpackage.Foo [vtable.init]
@@ -46,13 +60,20 @@
 )
 
 ;;; Code for packageinfo.subpackage.Foo [itable.init]
-(global $packageinfo.subpackage.Foo.itable (ref $itable) (array.init_static $itable 
+(global $packageinfo.subpackage.Foo.itable (ref $packageinfo.subpackage.Foo.itable) (struct.new $packageinfo.subpackage.Foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for packageinfo.Outer [CLASS]
 (type $packageinfo.Outer (struct_subtype 
  (field $vtable (ref $packageinfo.Outer.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $packageinfo.Outer.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -63,6 +84,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $packageinfo.Outer.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Outer Outer.$create()
 (func $$create__@packageinfo.Outer
@@ -135,7 +165,7 @@
 ;;; Code for packageinfo.Outer.Inner [CLASS]
 (type $packageinfo.Outer.Inner (struct_subtype 
  (field $vtable (ref $packageinfo.Outer.Inner.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $packageinfo.Outer.Inner.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__packageinfo_Outer_Inner (ref null $packageinfo.Outer))
   $java.lang.Object)
@@ -147,6 +177,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $packageinfo.Outer.Inner.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Inner Inner.$create(Outer $outer_this)
 (func $$create__packageinfo_Outer@packageinfo.Outer.Inner
@@ -221,7 +260,7 @@
 ;;; Code for packageinfo.subpackage.Foo [CLASS]
 (type $packageinfo.subpackage.Foo (struct_subtype 
  (field $vtable (ref $packageinfo.subpackage.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $packageinfo.subpackage.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_outer__packageinfo_subpackage_Foo (mut (ref null $packageinfo.Outer)))
   $java.lang.Object)
@@ -233,6 +272,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $packageinfo.subpackage.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Foo Foo.$create()
 (func $$create__@packageinfo.subpackage.Foo

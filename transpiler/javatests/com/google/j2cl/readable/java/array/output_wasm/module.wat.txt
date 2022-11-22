@@ -33,7 +33,14 @@
 )
 
 ;;; Code for array.Arrays [itable.init]
-(global $array.Arrays.itable (ref $itable) (array.init_static $itable 
+(global $array.Arrays.itable (ref $array.Arrays.itable) (struct.new $array.Arrays.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for array.Arrays.SomeObject [vtable.init]
@@ -47,7 +54,14 @@
 )
 
 ;;; Code for array.Arrays.SomeObject [itable.init]
-(global $array.Arrays.SomeObject.itable (ref $itable) (array.init_static $itable 
+(global $array.Arrays.SomeObject.itable (ref $array.Arrays.SomeObject.itable) (struct.new $array.Arrays.SomeObject.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for array.Arrays.NativeType [vtable.init]
@@ -61,7 +75,14 @@
 )
 
 ;;; Code for array.Arrays.NativeType [itable.init]
-(global $array.Arrays.NativeType.itable (ref $itable) (array.init_static $itable 
+(global $array.Arrays.NativeType.itable (ref $array.Arrays.NativeType.itable) (struct.new $array.Arrays.NativeType.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for array.Arrays.ArrayContainer [vtable.init]
@@ -75,13 +96,20 @@
 )
 
 ;;; Code for array.Arrays.ArrayContainer [itable.init]
-(global $array.Arrays.ArrayContainer.itable (ref $itable) (array.init_static $itable 
+(global $array.Arrays.ArrayContainer.itable (ref $array.Arrays.ArrayContainer.itable) (struct.new $array.Arrays.ArrayContainer.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for array.Arrays [CLASS]
 (type $array.Arrays (struct_subtype 
  (field $vtable (ref $array.Arrays.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $array.Arrays.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -104,6 +132,15 @@
  (field $m_consumesSerializable__java_io_Serializable__void (ref $function.m_consumesSerializable__java_io_Serializable__void))
   $java.lang.Object.vtable)
 )
+(type $array.Arrays.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Arrays Arrays.$create()
 (func $$create__@array.Arrays
@@ -590,7 +627,7 @@
 ;;; Code for array.Arrays.SomeObject [CLASS]
 (type $array.Arrays.SomeObject (struct_subtype 
  (field $vtable (ref $array.Arrays.SomeObject.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $array.Arrays.SomeObject.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__array_Arrays_SomeObject (ref null $array.Arrays))
   $java.lang.Object)
@@ -602,6 +639,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $array.Arrays.SomeObject.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SomeObject SomeObject.$create(Arrays $outer_this)
 (func $$create__array_Arrays@array.Arrays.SomeObject
@@ -673,7 +719,7 @@
 ;;; Code for array.Arrays.NativeType [CLASS]
 (type $array.Arrays.NativeType (struct_subtype 
  (field $vtable (ref $array.Arrays.NativeType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $array.Arrays.NativeType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -684,6 +730,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $array.Arrays.NativeType.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; NativeType NativeType.$create()
 (func $$create__@array.Arrays.NativeType
@@ -756,7 +811,7 @@
 ;;; Code for array.Arrays.ArrayContainer [CLASS]
 (type $array.Arrays.ArrayContainer (struct_subtype 
  (field $vtable (ref $array.Arrays.ArrayContainer.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $array.Arrays.ArrayContainer.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_data__array_Arrays_ArrayContainer (mut (ref null $javaemul.internal.WasmArray.OfObject)))
   $java.lang.Object)
@@ -768,6 +823,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $array.Arrays.ArrayContainer.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ArrayContainer<T> ArrayContainer.$create()
 (func $$create__@array.Arrays.ArrayContainer

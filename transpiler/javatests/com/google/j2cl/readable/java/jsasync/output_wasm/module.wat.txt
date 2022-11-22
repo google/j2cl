@@ -52,7 +52,14 @@
 )
 
 ;;; Code for jsasync.Main [itable.init]
-(global $jsasync.Main.itable (ref $itable) (array.init_static $itable 
+(global $jsasync.Main.itable (ref $jsasync.Main.itable) (struct.new $jsasync.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsasync.Main.$LambdaImplementor$1 [vtable.init]
@@ -67,13 +74,18 @@
 )
 
 ;;; Code for jsasync.Main.$LambdaImplementor$1 [itable.init]
-(global $jsasync.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+(global $jsasync.Main.$LambdaImplementor$1.itable (ref $jsasync.Main.$LambdaImplementor$1.itable) (struct.new $jsasync.Main.$LambdaImplementor$1.itable 
  (struct.new $jsasync.Main.BaseInterface.vtable
   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
  )
  (struct.new $jsasync.Main.AsyncInterface.vtable
   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsasync.Main.1 [vtable.init]
@@ -88,10 +100,16 @@
 )
 
 ;;; Code for jsasync.Main.1 [itable.init]
-(global $jsasync.Main.1.itable (ref $itable) (array.init_static $itable 
+(global $jsasync.Main.1.itable (ref $jsasync.Main.1.itable) (struct.new $jsasync.Main.1.itable 
  (struct.new $jsasync.Main.BaseInterface.vtable
   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsasync.Main.$LambdaImplementor$2 [vtable.init]
@@ -106,10 +124,16 @@
 )
 
 ;;; Code for jsasync.Main.$LambdaImplementor$2 [itable.init]
-(global $jsasync.Main.$LambdaImplementor$2.itable (ref $itable) (array.init_static $itable 
+(global $jsasync.Main.$LambdaImplementor$2.itable (ref $jsasync.Main.$LambdaImplementor$2.itable) (struct.new $jsasync.Main.$LambdaImplementor$2.itable 
  (struct.new $jsasync.Main.AsyncJsFunctionInterface.vtable
   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsasync.Main.2 [vtable.init]
@@ -124,10 +148,16 @@
 )
 
 ;;; Code for jsasync.Main.2 [itable.init]
-(global $jsasync.Main.2.itable (ref $itable) (array.init_static $itable 
+(global $jsasync.Main.2.itable (ref $jsasync.Main.2.itable) (struct.new $jsasync.Main.2.itable 
  (struct.new $jsasync.Main.JsFunctionInterface.vtable
   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsasync.Main.3 [vtable.init]
@@ -142,10 +172,16 @@
 )
 
 ;;; Code for jsasync.Main.3 [itable.init]
-(global $jsasync.Main.3.itable (ref $itable) (array.init_static $itable 
+(global $jsasync.Main.3.itable (ref $jsasync.Main.3.itable) (struct.new $jsasync.Main.3.itable 
  (struct.new $jsasync.Main.JsFunctionInterface.vtable
   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsasync.Main.Promise [vtable.init]
@@ -159,15 +195,21 @@
 )
 
 ;;; Code for jsasync.Main.Promise [itable.init]
-(global $jsasync.Main.Promise.itable (ref $itable) (array.init_static $itable 
+(global $jsasync.Main.Promise.itable (ref $jsasync.Main.Promise.itable) (struct.new $jsasync.Main.Promise.itable 
  (struct.new $jsasync.Main.IThenable.vtable
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsasync.Main [CLASS]
 (type $jsasync.Main (struct_subtype 
  (field $vtable (ref $jsasync.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsasync.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_x__jsasync_Main_ (mut (ref null $java.lang.Object)))
   $java.lang.Object)
@@ -183,6 +225,15 @@
  (field $m_testAsyncLambdas__void_$pp_jsasync (ref $function.m_testAsyncLambdas__void_$pp_jsasync))
   $java.lang.Object.vtable)
 )
+(type $jsasync.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@jsasync.Main
@@ -378,7 +429,7 @@
 ;;; Code for jsasync.Main.$LambdaImplementor$1 [CLASS]
 (type $jsasync.Main.$LambdaImplementor$1 (struct_subtype 
  (field $vtable (ref $jsasync.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsasync.Main.$LambdaImplementor$1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -390,6 +441,15 @@
  (field $m_asyncCall__jsasync_Main_IThenable (ref $function.m_asyncCall__jsasync_Main_IThenable))
   $java.lang.Object.vtable)
 )
+(type $jsasync.Main.$LambdaImplementor$1.itable (struct_subtype 
+(field $slot0 (ref $jsasync.Main.BaseInterface.vtable))
+(field $slot1 (ref $jsasync.Main.AsyncInterface.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
 (func $$create__@jsasync.Main.$LambdaImplementor$1
@@ -478,7 +538,7 @@
 ;;; Code for jsasync.Main.1 [CLASS]
 (type $jsasync.Main.1 (struct_subtype 
  (field $vtable (ref $jsasync.Main.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsasync.Main.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsasync_Main_1 (ref null $jsasync.Main))
   $java.lang.Object)
@@ -491,6 +551,15 @@
  (field $m_asyncCall__jsasync_Main_IThenable (ref $function.m_asyncCall__jsasync_Main_IThenable))
   $java.lang.Object.vtable)
 )
+(type $jsasync.Main.1.itable (struct_subtype 
+(field $slot0 (ref $jsasync.Main.BaseInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; <anonymous> implements BaseInterface <anonymous> implements BaseInterface.$create(Main $outer_this)
 (func $$create__jsasync_Main@jsasync.Main.1
@@ -581,7 +650,7 @@
 ;;; Code for jsasync.Main.$LambdaImplementor$2 [CLASS]
 (type $jsasync.Main.$LambdaImplementor$2 (struct_subtype 
  (field $vtable (ref $jsasync.Main.$LambdaImplementor$2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsasync.Main.$LambdaImplementor$2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -593,6 +662,15 @@
  (field $m_doSomething__jsasync_Main_IThenable (ref $function.m_doSomething__jsasync_Main_IThenable))
   $java.lang.Object.vtable)
 )
+(type $jsasync.Main.$LambdaImplementor$2.itable (struct_subtype 
+(field $slot0 (ref $jsasync.Main.AsyncJsFunctionInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$2 $LambdaImplementor$2.$create()
 (func $$create__@jsasync.Main.$LambdaImplementor$2
@@ -681,7 +759,7 @@
 ;;; Code for jsasync.Main.2 [CLASS]
 (type $jsasync.Main.2 (struct_subtype 
  (field $vtable (ref $jsasync.Main.2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsasync.Main.2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsasync_Main_2 (ref null $jsasync.Main))
   $java.lang.Object)
@@ -694,6 +772,15 @@
  (field $m_doSomething__jsasync_Main_IThenable (ref $function.m_doSomething__jsasync_Main_IThenable))
   $java.lang.Object.vtable)
 )
+(type $jsasync.Main.2.itable (struct_subtype 
+(field $slot0 (ref $jsasync.Main.JsFunctionInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; <anonymous> implements JsFunctionInterface <anonymous> implements JsFunctionInterface.$create(Main $outer_this)
 (func $$create__jsasync_Main@jsasync.Main.2
@@ -784,7 +871,7 @@
 ;;; Code for jsasync.Main.3 [CLASS]
 (type $jsasync.Main.3 (struct_subtype 
  (field $vtable (ref $jsasync.Main.3.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsasync.Main.3.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsasync_Main_3 (ref null $jsasync.Main))
   $java.lang.Object)
@@ -797,6 +884,15 @@
  (field $m_doSomething__jsasync_Main_IThenable (ref $function.m_doSomething__jsasync_Main_IThenable))
   $java.lang.Object.vtable)
 )
+(type $jsasync.Main.3.itable (struct_subtype 
+(field $slot0 (ref $jsasync.Main.JsFunctionInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; <anonymous> implements JsFunctionInterface <anonymous> implements JsFunctionInterface.$create(Main $outer_this)
 (func $$create__jsasync_Main@jsasync.Main.3
@@ -1119,7 +1215,7 @@
 ;;; Code for jsasync.Main.Promise [CLASS]
 (type $jsasync.Main.Promise (struct_subtype 
  (field $vtable (ref $jsasync.Main.Promise.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsasync.Main.Promise.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -1130,6 +1226,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $jsasync.Main.Promise.itable (struct_subtype 
+(field $slot0 (ref $jsasync.Main.IThenable.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Promise<T> Promise.$create()
 (func $$create__@jsasync.Main.Promise

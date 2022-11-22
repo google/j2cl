@@ -36,7 +36,14 @@
 )
 
 ;;; Code for j2kt.AccidentalOverride [itable.init]
-(global $j2kt.AccidentalOverride.itable (ref $itable) (array.init_static $itable 
+(global $j2kt.AccidentalOverride.itable (ref $j2kt.AccidentalOverride.itable) (struct.new $j2kt.AccidentalOverride.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2kt.AccidentalOverride.SuperClass [vtable.init]
@@ -51,7 +58,14 @@
 )
 
 ;;; Code for j2kt.AccidentalOverride.SuperClass [itable.init]
-(global $j2kt.AccidentalOverride.SuperClass.itable (ref $itable) (array.init_static $itable 
+(global $j2kt.AccidentalOverride.SuperClass.itable (ref $j2kt.AccidentalOverride.SuperClass.itable) (struct.new $j2kt.AccidentalOverride.SuperClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2kt.AccidentalOverride.TestImplicitOverride [vtable.init]
@@ -66,10 +80,16 @@
 )
 
 ;;; Code for j2kt.AccidentalOverride.TestImplicitOverride [itable.init]
-(global $j2kt.AccidentalOverride.TestImplicitOverride.itable (ref $itable) (array.init_static $itable 
+(global $j2kt.AccidentalOverride.TestImplicitOverride.itable (ref $j2kt.AccidentalOverride.TestImplicitOverride.itable) (struct.new $j2kt.AccidentalOverride.TestImplicitOverride.itable 
  (struct.new $j2kt.AccidentalOverride.Interface.vtable
   (ref.func $m_accidentalOverride__void@j2kt.AccidentalOverride.SuperClass)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2kt.AccidentalOverride.TestExplicitOverride [vtable.init]
@@ -84,10 +104,16 @@
 )
 
 ;;; Code for j2kt.AccidentalOverride.TestExplicitOverride [itable.init]
-(global $j2kt.AccidentalOverride.TestExplicitOverride.itable (ref $itable) (array.init_static $itable 
+(global $j2kt.AccidentalOverride.TestExplicitOverride.itable (ref $j2kt.AccidentalOverride.TestExplicitOverride.itable) (struct.new $j2kt.AccidentalOverride.TestExplicitOverride.itable 
  (struct.new $j2kt.AccidentalOverride.Interface.vtable
   (ref.func $m_accidentalOverride__void@j2kt.AccidentalOverride.TestExplicitOverride)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2kt.TypeWildCards [vtable.init]
@@ -101,7 +127,14 @@
 )
 
 ;;; Code for j2kt.TypeWildCards [itable.init]
-(global $j2kt.TypeWildCards.itable (ref $itable) (array.init_static $itable 
+(global $j2kt.TypeWildCards.itable (ref $j2kt.TypeWildCards.itable) (struct.new $j2kt.TypeWildCards.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2kt.TypeWildCards.Parent [vtable.init]
@@ -115,7 +148,14 @@
 )
 
 ;;; Code for j2kt.TypeWildCards.Parent [itable.init]
-(global $j2kt.TypeWildCards.Parent.itable (ref $itable) (array.init_static $itable 
+(global $j2kt.TypeWildCards.Parent.itable (ref $j2kt.TypeWildCards.Parent.itable) (struct.new $j2kt.TypeWildCards.Parent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2kt.TypeWildCards.Child [vtable.init]
@@ -129,13 +169,20 @@
 )
 
 ;;; Code for j2kt.TypeWildCards.Child [itable.init]
-(global $j2kt.TypeWildCards.Child.itable (ref $itable) (array.init_static $itable 
+(global $j2kt.TypeWildCards.Child.itable (ref $j2kt.TypeWildCards.Child.itable) (struct.new $j2kt.TypeWildCards.Child.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for j2kt.AccidentalOverride [CLASS]
 (type $j2kt.AccidentalOverride (struct_subtype 
  (field $vtable (ref $j2kt.AccidentalOverride.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2kt.AccidentalOverride.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -146,6 +193,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $j2kt.AccidentalOverride.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; AccidentalOverride AccidentalOverride.$create()
 (func $$create__@j2kt.AccidentalOverride
@@ -218,7 +274,7 @@
 ;;; Code for j2kt.AccidentalOverride.SuperClass [CLASS]
 (type $j2kt.AccidentalOverride.SuperClass (struct_subtype 
  (field $vtable (ref $j2kt.AccidentalOverride.SuperClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2kt.AccidentalOverride.SuperClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__j2kt_AccidentalOverride_SuperClass (ref null $j2kt.AccidentalOverride))
   $java.lang.Object)
@@ -231,6 +287,15 @@
  (field $m_accidentalOverride__void (ref $function.m_accidentalOverride__void))
   $java.lang.Object.vtable)
 )
+(type $j2kt.AccidentalOverride.SuperClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SuperClass SuperClass.$create(AccidentalOverride $outer_this)
 (func $$create__j2kt_AccidentalOverride@j2kt.AccidentalOverride.SuperClass
@@ -362,7 +427,7 @@
 ;;; Code for j2kt.AccidentalOverride.TestImplicitOverride [CLASS]
 (type $j2kt.AccidentalOverride.TestImplicitOverride (struct_subtype 
  (field $vtable (ref $j2kt.AccidentalOverride.TestImplicitOverride.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2kt.AccidentalOverride.TestImplicitOverride.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__j2kt_AccidentalOverride_SuperClass (ref null $j2kt.AccidentalOverride))
  (field $$outer_this__j2kt_AccidentalOverride_TestImplicitOverride (ref null $j2kt.AccidentalOverride))
@@ -376,6 +441,15 @@
  (field $m_accidentalOverride__void (ref $function.m_accidentalOverride__void))
   $j2kt.AccidentalOverride.SuperClass.vtable)
 )
+(type $j2kt.AccidentalOverride.TestImplicitOverride.itable (struct_subtype 
+(field $slot0 (ref $j2kt.AccidentalOverride.Interface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $j2kt.AccidentalOverride.SuperClass.itable))
 
 ;;; TestImplicitOverride TestImplicitOverride.$create(AccidentalOverride $outer_this)
 (func $$create__j2kt_AccidentalOverride@j2kt.AccidentalOverride.TestImplicitOverride
@@ -453,7 +527,7 @@
 ;;; Code for j2kt.AccidentalOverride.TestExplicitOverride [CLASS]
 (type $j2kt.AccidentalOverride.TestExplicitOverride (struct_subtype 
  (field $vtable (ref $j2kt.AccidentalOverride.TestExplicitOverride.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2kt.AccidentalOverride.TestExplicitOverride.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__j2kt_AccidentalOverride_SuperClass (ref null $j2kt.AccidentalOverride))
  (field $$outer_this__j2kt_AccidentalOverride_TestExplicitOverride (ref null $j2kt.AccidentalOverride))
@@ -467,6 +541,15 @@
  (field $m_accidentalOverride__void (ref $function.m_accidentalOverride__void))
   $j2kt.AccidentalOverride.SuperClass.vtable)
 )
+(type $j2kt.AccidentalOverride.TestExplicitOverride.itable (struct_subtype 
+(field $slot0 (ref $j2kt.AccidentalOverride.Interface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $j2kt.AccidentalOverride.SuperClass.itable))
 
 ;;; TestExplicitOverride TestExplicitOverride.$create(AccidentalOverride $outer_this)
 (func $$create__j2kt_AccidentalOverride@j2kt.AccidentalOverride.TestExplicitOverride
@@ -559,7 +642,7 @@
 ;;; Code for j2kt.TypeWildCards [CLASS]
 (type $j2kt.TypeWildCards (struct_subtype 
  (field $vtable (ref $j2kt.TypeWildCards.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2kt.TypeWildCards.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -570,6 +653,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $j2kt.TypeWildCards.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; TypeWildCards TypeWildCards.$create()
 (func $$create__@j2kt.TypeWildCards
@@ -614,7 +706,7 @@
   (call $$clinit__void@j2kt.TypeWildCards )
   ;; Parent parent = supplier.get();
   ;;@ j2kt/TypeWildCards.java:30:4
-  (local.set $parent (call_ref $function.m_get__j2kt_TypeWildCards_Parent (ref.as_non_null (local.get $supplier))(struct.get $j2kt.TypeWildCards.SupplierWithUpperBound.vtable $m_get__j2kt_TypeWildCards_Parent (ref.cast_static $j2kt.TypeWildCards.SupplierWithUpperBound.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $supplier)) (i32.const -1))) )))
+  (local.set $parent (call_ref $function.m_get__j2kt_TypeWildCards_Parent (ref.as_non_null (local.get $supplier))(struct.get $j2kt.TypeWildCards.SupplierWithUpperBound.vtable $m_get__j2kt_TypeWildCards_Parent (ref.null $j2kt.TypeWildCards.SupplierWithUpperBound.vtable))))
  )
 )
 
@@ -657,7 +749,7 @@
 ;;; Code for j2kt.TypeWildCards.Parent [CLASS]
 (type $j2kt.TypeWildCards.Parent (struct_subtype 
  (field $vtable (ref $j2kt.TypeWildCards.Parent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2kt.TypeWildCards.Parent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -668,6 +760,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $j2kt.TypeWildCards.Parent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Parent Parent.$create()
 (func $$create__@j2kt.TypeWildCards.Parent
@@ -740,7 +841,7 @@
 ;;; Code for j2kt.TypeWildCards.Child [CLASS]
 (type $j2kt.TypeWildCards.Child (struct_subtype 
  (field $vtable (ref $j2kt.TypeWildCards.Child.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $j2kt.TypeWildCards.Child.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $j2kt.TypeWildCards.Parent)
 )
@@ -751,6 +852,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $j2kt.TypeWildCards.Parent.vtable)
 )
+(type $j2kt.TypeWildCards.Child.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $j2kt.TypeWildCards.Parent.itable))
 
 ;;; Child Child.$create()
 (func $$create__@j2kt.TypeWildCards.Child

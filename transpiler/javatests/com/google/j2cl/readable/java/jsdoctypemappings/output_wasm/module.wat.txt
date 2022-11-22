@@ -78,7 +78,14 @@
 )
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings [itable.init]
-(global $jsdoctypemappings.JsDocTypeMappings.itable (ref $itable) (array.init_static $itable 
+(global $jsdoctypemappings.JsDocTypeMappings.itable (ref $jsdoctypemappings.JsDocTypeMappings.itable) (struct.new $jsdoctypemappings.JsDocTypeMappings.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [vtable.init]
@@ -92,7 +99,14 @@
 )
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [itable.init]
-(global $jsdoctypemappings.JsDocTypeMappings.NativeType.itable (ref $itable) (array.init_static $itable 
+(global $jsdoctypemappings.JsDocTypeMappings.NativeType.itable (ref $jsdoctypemappings.JsDocTypeMappings.NativeType.itable) (struct.new $jsdoctypemappings.JsDocTypeMappings.NativeType.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [vtable.init]
@@ -106,13 +120,20 @@
 )
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [itable.init]
-(global $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable (ref $itable) (array.init_static $itable 
+(global $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable (ref $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable) (struct.new $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings [CLASS]
 (type $jsdoctypemappings.JsDocTypeMappings (struct_subtype 
  (field $vtable (ref $jsdoctypemappings.JsDocTypeMappings.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsdoctypemappings.JsDocTypeMappings.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -156,6 +177,15 @@
  (field $m_returnNativeWildcard__jsdoctypemappings_JsDocTypeMappings_NativeWildcard_$pp_jsdoctypemappings (ref $function.m_returnNativeWildcard__jsdoctypemappings_JsDocTypeMappings_NativeWildcard_$pp_jsdoctypemappings))
   $java.lang.Object.vtable)
 )
+(type $jsdoctypemappings.JsDocTypeMappings.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; JsDocTypeMappings JsDocTypeMappings.$create()
 (func $$create__@jsdoctypemappings.JsDocTypeMappings
@@ -788,7 +818,7 @@
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [CLASS]
 (type $jsdoctypemappings.JsDocTypeMappings.NativeType (struct_subtype 
  (field $vtable (ref $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsdoctypemappings.JsDocTypeMappings.NativeType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -799,6 +829,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $jsdoctypemappings.JsDocTypeMappings.NativeType.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; NativeType NativeType.$create()
 (func $$create__@jsdoctypemappings.JsDocTypeMappings.NativeType
@@ -871,7 +910,7 @@
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [CLASS]
 (type $jsdoctypemappings.JsDocTypeMappings.ExportedType (struct_subtype 
  (field $vtable (ref $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsdoctypemappings_JsDocTypeMappings_ExportedType (ref null $jsdoctypemappings.JsDocTypeMappings))
   $java.lang.Object)
@@ -883,6 +922,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ExportedType ExportedType.$create(JsDocTypeMappings $outer_this)
 (func $$create__jsdoctypemappings_JsDocTypeMappings@jsdoctypemappings.JsDocTypeMappings.ExportedType

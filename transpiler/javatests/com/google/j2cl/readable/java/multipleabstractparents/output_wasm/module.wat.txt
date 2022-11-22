@@ -51,7 +51,14 @@
 )
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents [itable.init]
-(global $multipleabstractparents.MultipleAbstractParents.itable (ref $itable) (array.init_static $itable 
+(global $multipleabstractparents.MultipleAbstractParents.itable (ref $multipleabstractparents.MultipleAbstractParents.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.ArrayList [vtable.init]
@@ -66,10 +73,16 @@
 )
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.ArrayList [itable.init]
-(global $multipleabstractparents.MultipleAbstractParents.ArrayList.itable (ref $itable) (array.init_static $itable 
+(global $multipleabstractparents.MultipleAbstractParents.ArrayList.itable (ref $multipleabstractparents.MultipleAbstractParents.ArrayList.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.ArrayList.itable 
  (struct.new $multipleabstractparents.MultipleAbstractParents.List.vtable
   (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringList [vtable.init]
@@ -85,13 +98,18 @@
 )
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringList [itable.init]
-(global $multipleabstractparents.MultipleAbstractParents.StringList.itable (ref $itable) (array.init_static $itable 
+(global $multipleabstractparents.MultipleAbstractParents.StringList.itable (ref $multipleabstractparents.MultipleAbstractParents.StringList.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.StringList.itable 
  (struct.new $multipleabstractparents.MultipleAbstractParents.List.vtable
   (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
  (struct.new $multipleabstractparents.MultipleAbstractParents.IStringList.vtable
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringListChild [vtable.init]
@@ -107,19 +125,24 @@
 )
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringListChild [itable.init]
-(global $multipleabstractparents.MultipleAbstractParents.StringListChild.itable (ref $itable) (array.init_static $itable 
+(global $multipleabstractparents.MultipleAbstractParents.StringListChild.itable (ref $multipleabstractparents.MultipleAbstractParents.StringListChild.itable) (struct.new $multipleabstractparents.MultipleAbstractParents.StringListChild.itable 
  (struct.new $multipleabstractparents.MultipleAbstractParents.List.vtable
   (ref.func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
  (struct.new $multipleabstractparents.MultipleAbstractParents.IStringList.vtable
   (ref.func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -130,6 +153,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; MultipleAbstractParents MultipleAbstractParents.$create()
 (func $$create__@multipleabstractparents.MultipleAbstractParents
@@ -285,7 +317,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractListCollection [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractListCollection (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.AbstractListCollection.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.AbstractListCollection.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -296,6 +328,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.AbstractListCollection.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref $multipleabstractparents.MultipleAbstractParents.Collection.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void AbstractListCollection.$ctor()
 (func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractListCollection@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
@@ -336,7 +377,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractCollection [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractCollection (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.AbstractCollection.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -348,6 +389,15 @@
  (field $m_getFoo__java_lang_Object__java_lang_String (ref $function.m_getFoo__java_lang_Object__java_lang_String))
   $java.lang.Object.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.AbstractCollection.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void AbstractCollection.$ctor()
 (func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractCollection@multipleabstractparents.MultipleAbstractParents.AbstractCollection
@@ -405,7 +455,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractList [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractList (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.AbstractList.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $multipleabstractparents.MultipleAbstractParents.AbstractCollection)
 )
@@ -417,6 +467,15 @@
  (field $m_getFoo__java_lang_Object__java_lang_String (ref $function.m_getFoo__java_lang_Object__java_lang_String))
   $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.AbstractList.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $multipleabstractparents.MultipleAbstractParents.AbstractCollection.itable))
 
 ;;; void AbstractList.$ctor()
 (func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList@multipleabstractparents.MultipleAbstractParents.AbstractList
@@ -457,7 +516,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractList2 [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractList2 (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.AbstractList2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -468,6 +527,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.AbstractList2.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void AbstractList2.$ctor()
 (func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList2@multipleabstractparents.MultipleAbstractParents.AbstractList2
@@ -508,7 +576,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.ArrayList [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.ArrayList (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.ArrayList.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.ArrayList.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $multipleabstractparents.MultipleAbstractParents.AbstractList)
 )
@@ -520,6 +588,15 @@
  (field $m_getFoo__java_lang_Object__java_lang_String (ref $function.m_getFoo__java_lang_Object__java_lang_String))
   $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.ArrayList.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $multipleabstractparents.MultipleAbstractParents.AbstractList.itable))
 
 ;;; ArrayList<T> ArrayList.$create()
 (func $$create__@multipleabstractparents.MultipleAbstractParents.ArrayList
@@ -628,7 +705,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractStringList [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.AbstractStringList.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $multipleabstractparents.MultipleAbstractParents.AbstractList)
 )
@@ -641,6 +718,15 @@
  (field $m_getFoo__java_lang_String__java_lang_String (ref $function.m_getFoo__java_lang_String__java_lang_String))
   $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.AbstractStringList.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $multipleabstractparents.MultipleAbstractParents.AbstractList.itable))
 
 ;;; void AbstractStringList.$ctor()
 (func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractStringList@multipleabstractparents.MultipleAbstractParents.AbstractStringList
@@ -715,7 +801,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractStringList2 [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList2 (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $multipleabstractparents.MultipleAbstractParents.AbstractList2)
 )
@@ -728,6 +814,15 @@
  (field $m_getFoo__java_lang_Object__java_lang_String (ref $function.m_getFoo__java_lang_Object__java_lang_String))
   $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $multipleabstractparents.MultipleAbstractParents.AbstractList2.itable))
 
 ;;; void AbstractStringList2.$ctor()
 (func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractStringList2@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
@@ -785,7 +880,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractStringList3 [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList3 (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.AbstractStringList3.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.AbstractStringList3.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $multipleabstractparents.MultipleAbstractParents.AbstractList2)
 )
@@ -796,6 +891,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.AbstractStringList3.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $multipleabstractparents.MultipleAbstractParents.AbstractList2.itable))
 
 ;;; void AbstractStringList3.$ctor()
 (func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractStringList3@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
@@ -836,7 +940,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringList [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.StringList (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.StringList.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.StringList.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $multipleabstractparents.MultipleAbstractParents.AbstractStringList)
 )
@@ -849,6 +953,15 @@
  (field $m_getFoo__java_lang_String__java_lang_String (ref $function.m_getFoo__java_lang_String__java_lang_String))
   $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.StringList.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $multipleabstractparents.MultipleAbstractParents.AbstractStringList.itable))
 
 ;;; StringList StringList.$create()
 (func $$create__@multipleabstractparents.MultipleAbstractParents.StringList
@@ -921,7 +1034,7 @@
 ;;; Code for multipleabstractparents.MultipleAbstractParents.StringListChild [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.StringListChild (struct_subtype 
  (field $vtable (ref $multipleabstractparents.MultipleAbstractParents.StringListChild.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleabstractparents.MultipleAbstractParents.StringListChild.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $multipleabstractparents.MultipleAbstractParents.StringList)
 )
@@ -934,6 +1047,15 @@
  (field $m_getFoo__java_lang_String__java_lang_String (ref $function.m_getFoo__java_lang_String__java_lang_String))
   $multipleabstractparents.MultipleAbstractParents.StringList.vtable)
 )
+(type $multipleabstractparents.MultipleAbstractParents.StringListChild.itable (struct_subtype 
+(field $slot0 (ref $multipleabstractparents.MultipleAbstractParents.List.vtable))
+(field $slot1 (ref $multipleabstractparents.MultipleAbstractParents.IStringList.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $multipleabstractparents.MultipleAbstractParents.StringList.itable))
 
 ;;; StringListChild StringListChild.$create()
 (func $$create__@multipleabstractparents.MultipleAbstractParents.StringListChild

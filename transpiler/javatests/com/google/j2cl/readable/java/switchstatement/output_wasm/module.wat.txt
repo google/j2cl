@@ -23,12 +23,17 @@
 )
 
 ;;; Code for switchstatement.Numbers [itable.init]
-(global $switchstatement.Numbers.itable (ref $itable) (array.init_static $itable 
+(global $switchstatement.Numbers.itable (ref $switchstatement.Numbers.itable) (struct.new $switchstatement.Numbers.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for switchstatement.SwitchStatement [vtable.init]
@@ -43,13 +48,20 @@
 )
 
 ;;; Code for switchstatement.SwitchStatement [itable.init]
-(global $switchstatement.SwitchStatement.itable (ref $itable) (array.init_static $itable 
+(global $switchstatement.SwitchStatement.itable (ref $switchstatement.SwitchStatement.itable) (struct.new $switchstatement.SwitchStatement.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for switchstatement.Numbers [ENUM]
 (type $switchstatement.Numbers (struct_subtype 
  (field $vtable (ref $switchstatement.Numbers.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $switchstatement.Numbers.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -67,6 +79,15 @@
  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
   $java.lang.Enum.vtable)
 )
+(type $switchstatement.Numbers.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Enum.itable))
 
 ;;; Numbers Numbers.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@switchstatement.Numbers
@@ -192,7 +213,7 @@
 ;;; Code for switchstatement.SwitchStatement [CLASS]
 (type $switchstatement.SwitchStatement (struct_subtype 
  (field $vtable (ref $switchstatement.SwitchStatement.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $switchstatement.SwitchStatement.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -204,6 +225,15 @@
  (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
 )
+(type $switchstatement.SwitchStatement.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SwitchStatement SwitchStatement.$create()
 (func $$create__@switchstatement.SwitchStatement

@@ -20,7 +20,14 @@
 )
 
 ;;; Code for objcnamegeneric.List [itable.init]
-(global $objcnamegeneric.List.itable (ref $itable) (array.init_static $itable 
+(global $objcnamegeneric.List.itable (ref $objcnamegeneric.List.itable) (struct.new $objcnamegeneric.List.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for objcnamegeneric.StringList [vtable.init]
@@ -36,10 +43,16 @@
 )
 
 ;;; Code for objcnamegeneric.StringList [itable.init]
-(global $objcnamegeneric.StringList.itable (ref $itable) (array.init_static $itable 
+(global $objcnamegeneric.StringList.itable (ref $objcnamegeneric.StringList.itable) (struct.new $objcnamegeneric.StringList.itable 
  (struct.new $objcnamegeneric.Collection.vtable
   (ref.func $m_add__java_lang_Object__boolean@objcnamegeneric.List)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for objcnamegeneric.Collection [INTERFACE]
@@ -81,7 +94,7 @@
 ;;; Code for objcnamegeneric.List [CLASS]
 (type $objcnamegeneric.List (struct_subtype 
  (field $vtable (ref $objcnamegeneric.List.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $objcnamegeneric.List.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -94,6 +107,15 @@
  (field $m_forEachRemaining__java_util_function_Consumer__void (ref $function.m_forEachRemaining__java_util_function_Consumer__void))
   $java.lang.Object.vtable)
 )
+(type $objcnamegeneric.List.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; List<T> List.$create()
 (func $$create__@objcnamegeneric.List
@@ -196,7 +218,7 @@
 ;;; Code for objcnamegeneric.StringList [CLASS]
 (type $objcnamegeneric.StringList (struct_subtype 
  (field $vtable (ref $objcnamegeneric.StringList.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $objcnamegeneric.StringList.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $objcnamegeneric.List)
 )
@@ -209,6 +231,15 @@
  (field $m_forEachRemaining__java_util_function_Consumer__void (ref $function.m_forEachRemaining__java_util_function_Consumer__void))
   $objcnamegeneric.List.vtable)
 )
+(type $objcnamegeneric.StringList.itable (struct_subtype 
+(field $slot0 (ref $objcnamegeneric.Collection.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $objcnamegeneric.List.itable))
 
 ;;; StringList StringList.$create()
 (func $$create__@objcnamegeneric.StringList

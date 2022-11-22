@@ -12,15 +12,21 @@
 )
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [itable.init]
-(global $importsfullyqualified.ImportsFullyQualified.itable (ref $itable) (array.init_static $itable 
+(global $importsfullyqualified.ImportsFullyQualified.itable (ref $importsfullyqualified.ImportsFullyQualified.itable) (struct.new $importsfullyqualified.ImportsFullyQualified.itable 
  (struct.new $java.io.Serializable.vtable
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [CLASS]
 (type $importsfullyqualified.ImportsFullyQualified (struct_subtype 
  (field $vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $importsfullyqualified.ImportsFullyQualified.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -31,6 +37,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $importsfullyqualified.ImportsFullyQualified.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ImportsFullyQualified ImportsFullyQualified.$create()
 (func $$create__@importsfullyqualified.ImportsFullyQualified

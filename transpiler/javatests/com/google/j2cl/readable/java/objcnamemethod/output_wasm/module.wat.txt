@@ -19,7 +19,14 @@
 )
 
 ;;; Code for objcnamemethod.Foo [itable.init]
-(global $objcnamemethod.Foo.itable (ref $itable) (array.init_static $itable 
+(global $objcnamemethod.Foo.itable (ref $objcnamemethod.Foo.itable) (struct.new $objcnamemethod.Foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for objcnamemethod.ObjCNameMethod [vtable.init]
@@ -37,7 +44,14 @@
 )
 
 ;;; Code for objcnamemethod.ObjCNameMethod [itable.init]
-(global $objcnamemethod.ObjCNameMethod.itable (ref $itable) (array.init_static $itable 
+(global $objcnamemethod.ObjCNameMethod.itable (ref $objcnamemethod.ObjCNameMethod.itable) (struct.new $objcnamemethod.ObjCNameMethod.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for objcnamemethod.SubFoo [vtable.init]
@@ -52,13 +66,20 @@
 )
 
 ;;; Code for objcnamemethod.SubFoo [itable.init]
-(global $objcnamemethod.SubFoo.itable (ref $itable) (array.init_static $itable 
+(global $objcnamemethod.SubFoo.itable (ref $objcnamemethod.SubFoo.itable) (struct.new $objcnamemethod.SubFoo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for objcnamemethod.Foo [CLASS]
 (type $objcnamemethod.Foo (struct_subtype 
  (field $vtable (ref $objcnamemethod.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $objcnamemethod.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -70,6 +91,15 @@
  (field $m_instanceMethod__int__void (ref $function.m_instanceMethod__int__void))
   $java.lang.Object.vtable)
 )
+(type $objcnamemethod.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Foo Foo.$create()
 (func $$create__@objcnamemethod.Foo
@@ -155,7 +185,7 @@
 ;;; Code for objcnamemethod.ObjCNameMethod [CLASS]
 (type $objcnamemethod.ObjCNameMethod (struct_subtype 
  (field $vtable (ref $objcnamemethod.ObjCNameMethod.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $objcnamemethod.ObjCNameMethod.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -170,6 +200,15 @@
  (field $m_instanceMethod__objcnamemethod_Foo__void (ref $function.m_instanceMethod__objcnamemethod_Foo__void))
   $java.lang.Object.vtable)
 )
+(type $objcnamemethod.ObjCNameMethod.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ObjCNameMethod ObjCNameMethod.$create()
 (func $$create__@objcnamemethod.ObjCNameMethod
@@ -341,7 +380,7 @@
 ;;; Code for objcnamemethod.SubFoo [CLASS]
 (type $objcnamemethod.SubFoo (struct_subtype 
  (field $vtable (ref $objcnamemethod.SubFoo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $objcnamemethod.SubFoo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $objcnamemethod.Foo)
 )
@@ -353,6 +392,15 @@
  (field $m_instanceMethod__int__void (ref $function.m_instanceMethod__int__void))
   $objcnamemethod.Foo.vtable)
 )
+(type $objcnamemethod.SubFoo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $objcnamemethod.Foo.itable))
 
 ;;; SubFoo SubFoo.$create()
 (func $$create__@objcnamemethod.SubFoo

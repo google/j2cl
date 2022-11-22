@@ -31,7 +31,14 @@
 )
 
 ;;; Code for simplebridgemethods.Superclass [itable.init]
-(global $simplebridgemethods.Superclass.itable (ref $itable) (array.init_static $itable 
+(global $simplebridgemethods.Superclass.itable (ref $simplebridgemethods.Superclass.itable) (struct.new $simplebridgemethods.Superclass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplebridgemethods.Subclass [vtable.init]
@@ -47,7 +54,14 @@
 )
 
 ;;; Code for simplebridgemethods.Subclass [itable.init]
-(global $simplebridgemethods.Subclass.itable (ref $itable) (array.init_static $itable 
+(global $simplebridgemethods.Subclass.itable (ref $simplebridgemethods.Subclass.itable) (struct.new $simplebridgemethods.Subclass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplebridgemethods.AnotherSubclass [vtable.init]
@@ -62,7 +76,14 @@
 )
 
 ;;; Code for simplebridgemethods.AnotherSubclass [itable.init]
-(global $simplebridgemethods.AnotherSubclass.itable (ref $itable) (array.init_static $itable 
+(global $simplebridgemethods.AnotherSubclass.itable (ref $simplebridgemethods.AnotherSubclass.itable) (struct.new $simplebridgemethods.AnotherSubclass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplebridgemethods.Task [vtable.init]
@@ -77,10 +98,16 @@
 )
 
 ;;; Code for simplebridgemethods.Task [itable.init]
-(global $simplebridgemethods.Task.itable (ref $itable) (array.init_static $itable 
+(global $simplebridgemethods.Task.itable (ref $simplebridgemethods.Task.itable) (struct.new $simplebridgemethods.Task.itable 
  (struct.new $simplebridgemethods.Callable.vtable
   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplebridgemethods.AnotherTask [vtable.init]
@@ -96,10 +123,16 @@
 )
 
 ;;; Code for simplebridgemethods.AnotherTask [itable.init]
-(global $simplebridgemethods.AnotherTask.itable (ref $itable) (array.init_static $itable 
+(global $simplebridgemethods.AnotherTask.itable (ref $simplebridgemethods.AnotherTask.itable) (struct.new $simplebridgemethods.AnotherTask.itable 
  (struct.new $simplebridgemethods.Callable.vtable
   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [vtable.init]
@@ -113,13 +146,20 @@
 )
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [itable.init]
-(global $simplebridgemethods.SimpleBridgeMethods.itable (ref $itable) (array.init_static $itable 
+(global $simplebridgemethods.SimpleBridgeMethods.itable (ref $simplebridgemethods.SimpleBridgeMethods.itable) (struct.new $simplebridgemethods.SimpleBridgeMethods.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplebridgemethods.Superclass [CLASS]
 (type $simplebridgemethods.Superclass (struct_subtype 
  (field $vtable (ref $simplebridgemethods.Superclass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplebridgemethods.Superclass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -131,6 +171,15 @@
  (field $m_m1__java_lang_Error__void (ref $function.m_m1__java_lang_Error__void))
   $java.lang.Object.vtable)
 )
+(type $simplebridgemethods.Superclass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Superclass<T> Superclass.$create()
 (func $$create__@simplebridgemethods.Superclass
@@ -216,7 +265,7 @@
 ;;; Code for simplebridgemethods.Subclass [CLASS]
 (type $simplebridgemethods.Subclass (struct_subtype 
  (field $vtable (ref $simplebridgemethods.Subclass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplebridgemethods.Subclass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $simplebridgemethods.Superclass)
 )
@@ -229,6 +278,15 @@
  (field $m_m1__java_lang_AssertionError__void (ref $function.m_m1__java_lang_AssertionError__void))
   $simplebridgemethods.Superclass.vtable)
 )
+(type $simplebridgemethods.Subclass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $simplebridgemethods.Superclass.itable))
 
 ;;; Subclass Subclass.$create()
 (func $$create__@simplebridgemethods.Subclass
@@ -330,7 +388,7 @@
 ;;; Code for simplebridgemethods.AnotherSubclass [CLASS]
 (type $simplebridgemethods.AnotherSubclass (struct_subtype 
  (field $vtable (ref $simplebridgemethods.AnotherSubclass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplebridgemethods.AnotherSubclass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $simplebridgemethods.Superclass)
 )
@@ -342,6 +400,15 @@
  (field $m_m1__java_lang_Error__void (ref $function.m_m1__java_lang_Error__void))
   $simplebridgemethods.Superclass.vtable)
 )
+(type $simplebridgemethods.AnotherSubclass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $simplebridgemethods.Superclass.itable))
 
 ;;; AnotherSubclass AnotherSubclass.$create()
 (func $$create__@simplebridgemethods.AnotherSubclass
@@ -450,7 +517,7 @@
 ;;; Code for simplebridgemethods.Task [CLASS]
 (type $simplebridgemethods.Task (struct_subtype 
  (field $vtable (ref $simplebridgemethods.Task.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplebridgemethods.Task.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -462,6 +529,15 @@
  (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
+(type $simplebridgemethods.Task.itable (struct_subtype 
+(field $slot0 (ref $simplebridgemethods.Callable.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Task<T> Task.$create()
 (func $$create__@simplebridgemethods.Task
@@ -547,7 +623,7 @@
 ;;; Code for simplebridgemethods.AnotherTask [CLASS]
 (type $simplebridgemethods.AnotherTask (struct_subtype 
  (field $vtable (ref $simplebridgemethods.AnotherTask.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplebridgemethods.AnotherTask.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -560,6 +636,15 @@
  (field $m_call__java_lang_Object__void (ref $function.m_call__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
+(type $simplebridgemethods.AnotherTask.itable (struct_subtype 
+(field $slot0 (ref $simplebridgemethods.Callable.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; AnotherTask<T> AnotherTask.$create()
 (func $$create__@simplebridgemethods.AnotherTask
@@ -661,7 +746,7 @@
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [CLASS]
 (type $simplebridgemethods.SimpleBridgeMethods (struct_subtype 
  (field $vtable (ref $simplebridgemethods.SimpleBridgeMethods.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplebridgemethods.SimpleBridgeMethods.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -672,6 +757,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $simplebridgemethods.SimpleBridgeMethods.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SimpleBridgeMethods SimpleBridgeMethods.$create()
 (func $$create__@simplebridgemethods.SimpleBridgeMethods

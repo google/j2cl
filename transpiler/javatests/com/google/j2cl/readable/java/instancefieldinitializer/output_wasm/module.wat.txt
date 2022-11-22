@@ -12,13 +12,20 @@
 )
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [itable.init]
-(global $instancefieldinitializer.InstanceFieldInitializer.itable (ref $itable) (array.init_static $itable 
+(global $instancefieldinitializer.InstanceFieldInitializer.itable (ref $instancefieldinitializer.InstanceFieldInitializer.itable) (struct.new $instancefieldinitializer.InstanceFieldInitializer.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [CLASS]
 (type $instancefieldinitializer.InstanceFieldInitializer (struct_subtype 
  (field $vtable (ref $instancefieldinitializer.InstanceFieldInitializer.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $instancefieldinitializer.InstanceFieldInitializer.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_a__instancefieldinitializer_InstanceFieldInitializer i32)
  (field $f_b__instancefieldinitializer_InstanceFieldInitializer (mut i32))
@@ -31,6 +38,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $instancefieldinitializer.InstanceFieldInitializer.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InstanceFieldInitializer InstanceFieldInitializer.$create()
 (func $$create__@instancefieldinitializer.InstanceFieldInitializer

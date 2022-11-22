@@ -16,7 +16,14 @@
 )
 
 ;;; Code for strings.Strings [itable.init]
-(global $strings.Strings.itable (ref $itable) (array.init_static $itable 
+(global $strings.Strings.itable (ref $strings.Strings.itable) (struct.new $strings.Strings.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for strings.Strings.StringHolder [vtable.init]
@@ -30,13 +37,20 @@
 )
 
 ;;; Code for strings.Strings.StringHolder [itable.init]
-(global $strings.Strings.StringHolder.itable (ref $itable) (array.init_static $itable 
+(global $strings.Strings.StringHolder.itable (ref $strings.Strings.StringHolder.itable) (struct.new $strings.Strings.StringHolder.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for strings.Strings [CLASS]
 (type $strings.Strings (struct_subtype 
  (field $vtable (ref $strings.Strings.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $strings.Strings.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_someString__strings_Strings_ (ref null $java.lang.String))
  (field $f_nonBmpChar__strings_Strings_ (ref null $java.lang.String))
@@ -51,6 +65,15 @@
  (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
+(type $strings.Strings.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Strings Strings.$create()
 (func $$create__@strings.Strings
@@ -347,7 +370,7 @@
 ;;; Code for strings.Strings.StringHolder [CLASS]
 (type $strings.Strings.StringHolder (struct_subtype 
  (field $vtable (ref $strings.Strings.StringHolder.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $strings.Strings.StringHolder.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_s__strings_Strings_StringHolder (mut (ref null $java.lang.String)))
   $java.lang.Object)
@@ -359,6 +382,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $strings.Strings.StringHolder.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; StringHolder StringHolder.$create()
 (func $$create__@strings.Strings.StringHolder

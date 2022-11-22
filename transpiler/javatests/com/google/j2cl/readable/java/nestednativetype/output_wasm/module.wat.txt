@@ -16,7 +16,14 @@
 )
 
 ;;; Code for nestednativetype.NativeArray [itable.init]
-(global $nestednativetype.NativeArray.itable (ref $itable) (array.init_static $itable 
+(global $nestednativetype.NativeArray.itable (ref $nestednativetype.NativeArray.itable) (struct.new $nestednativetype.NativeArray.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for nestednativetype.NativeArray.1 [vtable.init]
@@ -30,13 +37,20 @@
 )
 
 ;;; Code for nestednativetype.NativeArray.1 [itable.init]
-(global $nestednativetype.NativeArray.1.itable (ref $itable) (array.init_static $itable 
+(global $nestednativetype.NativeArray.1.itable (ref $nestednativetype.NativeArray.1.itable) (struct.new $nestednativetype.NativeArray.1.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for nestednativetype.NativeArray [CLASS]
 (type $nestednativetype.NativeArray (struct_subtype 
  (field $vtable (ref $nestednativetype.NativeArray.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $nestednativetype.NativeArray.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -48,6 +62,15 @@
  (field $m_a__java_lang_Object (ref $function.m_a__java_lang_Object))
   $java.lang.Object.vtable)
 )
+(type $nestednativetype.NativeArray.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; NativeArray NativeArray.$create()
 (func $$create__@nestednativetype.NativeArray
@@ -136,7 +159,7 @@
 ;;; Code for nestednativetype.NativeArray.1 [CLASS]
 (type $nestednativetype.NativeArray.1 (struct_subtype 
  (field $vtable (ref $nestednativetype.NativeArray.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $nestednativetype.NativeArray.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__nestednativetype_NativeArray_1 (ref null $nestednativetype.NativeArray))
   $java.lang.Object)
@@ -148,6 +171,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $nestednativetype.NativeArray.1.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create(NativeArray $outer_this)
 (func $$create__nestednativetype_NativeArray@nestednativetype.NativeArray.1

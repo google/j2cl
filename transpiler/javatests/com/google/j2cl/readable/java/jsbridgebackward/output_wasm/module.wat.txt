@@ -19,7 +19,14 @@
 )
 
 ;;; Code for jsbridgebackward.A [itable.init]
-(global $jsbridgebackward.A.itable (ref $itable) (array.init_static $itable 
+(global $jsbridgebackward.A.itable (ref $jsbridgebackward.A.itable) (struct.new $jsbridgebackward.A.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsbridgebackward.InterfaceImpl [vtable.init]
@@ -34,10 +41,16 @@
 )
 
 ;;; Code for jsbridgebackward.InterfaceImpl [itable.init]
-(global $jsbridgebackward.InterfaceImpl.itable (ref $itable) (array.init_static $itable 
+(global $jsbridgebackward.InterfaceImpl.itable (ref $jsbridgebackward.InterfaceImpl.itable) (struct.new $jsbridgebackward.InterfaceImpl.itable 
  (struct.new $jsbridgebackward.MyJsInterface.vtable
   (ref.func $m_foo__int__int@jsbridgebackward.A)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsbridgebackward.MyJsInterface [INTERFACE]
@@ -79,7 +92,7 @@
 ;;; Code for jsbridgebackward.A [CLASS]
 (type $jsbridgebackward.A (struct_subtype 
  (field $vtable (ref $jsbridgebackward.A.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsbridgebackward.A.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -91,6 +104,15 @@
  (field $m_foo__int__int (ref $function.m_foo__int__int))
   $java.lang.Object.vtable)
 )
+(type $jsbridgebackward.A.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; A A.$create()
 (func $$create__@jsbridgebackward.A
@@ -180,7 +202,7 @@
 ;;; Code for jsbridgebackward.InterfaceImpl [CLASS]
 (type $jsbridgebackward.InterfaceImpl (struct_subtype 
  (field $vtable (ref $jsbridgebackward.InterfaceImpl.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsbridgebackward.InterfaceImpl.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $jsbridgebackward.A)
 )
@@ -192,6 +214,15 @@
  (field $m_foo__int__int (ref $function.m_foo__int__int))
   $jsbridgebackward.A.vtable)
 )
+(type $jsbridgebackward.InterfaceImpl.itable (struct_subtype 
+(field $slot0 (ref $jsbridgebackward.MyJsInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $jsbridgebackward.A.itable))
 
 ;;; InterfaceImpl InterfaceImpl.$create()
 (func $$create__@jsbridgebackward.InterfaceImpl

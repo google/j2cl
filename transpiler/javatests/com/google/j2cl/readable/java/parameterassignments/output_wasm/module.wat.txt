@@ -36,7 +36,14 @@
 )
 
 ;;; Code for parameterassignments.Main [itable.init]
-(global $parameterassignments.Main.itable (ref $itable) (array.init_static $itable 
+(global $parameterassignments.Main.itable (ref $parameterassignments.Main.itable) (struct.new $parameterassignments.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for parameterassignments.Main.$LambdaImplementor$1 [vtable.init]
@@ -51,10 +58,16 @@
 )
 
 ;;; Code for parameterassignments.Main.$LambdaImplementor$1 [itable.init]
-(global $parameterassignments.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+(global $parameterassignments.Main.$LambdaImplementor$1.itable (ref $parameterassignments.Main.$LambdaImplementor$1.itable) (struct.new $parameterassignments.Main.$LambdaImplementor$1.itable 
  (struct.new $parameterassignments.Main.Fn.vtable
   (ref.func $m_test__int__int__int@parameterassignments.Main.$LambdaImplementor$1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for parameterassignments.Main.$LambdaImplementor$2 [vtable.init]
@@ -69,10 +82,16 @@
 )
 
 ;;; Code for parameterassignments.Main.$LambdaImplementor$2 [itable.init]
-(global $parameterassignments.Main.$LambdaImplementor$2.itable (ref $itable) (array.init_static $itable 
+(global $parameterassignments.Main.$LambdaImplementor$2.itable (ref $parameterassignments.Main.$LambdaImplementor$2.itable) (struct.new $parameterassignments.Main.$LambdaImplementor$2.itable 
  (struct.new $parameterassignments.Main.FnPrimitiveVarargs.vtable
   (ref.func $m_test__int__arrayOf_int__void@parameterassignments.Main.$LambdaImplementor$2)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for parameterassignments.Main.$LambdaImplementor$3 [vtable.init]
@@ -87,10 +106,16 @@
 )
 
 ;;; Code for parameterassignments.Main.$LambdaImplementor$3 [itable.init]
-(global $parameterassignments.Main.$LambdaImplementor$3.itable (ref $itable) (array.init_static $itable 
+(global $parameterassignments.Main.$LambdaImplementor$3.itable (ref $parameterassignments.Main.$LambdaImplementor$3.itable) (struct.new $parameterassignments.Main.$LambdaImplementor$3.itable 
  (struct.new $parameterassignments.Main.FnObjectVarargs.vtable
   (ref.func $m_test__java_lang_Object__arrayOf_java_lang_Object__void@parameterassignments.Main.$LambdaImplementor$3)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for parameterassignments.Main.SubMain [vtable.init]
@@ -107,13 +132,20 @@
 )
 
 ;;; Code for parameterassignments.Main.SubMain [itable.init]
-(global $parameterassignments.Main.SubMain.itable (ref $itable) (array.init_static $itable 
+(global $parameterassignments.Main.SubMain.itable (ref $parameterassignments.Main.SubMain.itable) (struct.new $parameterassignments.Main.SubMain.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for parameterassignments.Main [CLASS]
 (type $parameterassignments.Main (struct_subtype 
  (field $vtable (ref $parameterassignments.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $parameterassignments.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
  (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
@@ -130,6 +162,15 @@
  (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
   $java.lang.Object.vtable)
 )
+(type $parameterassignments.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create(int nonFinal, int explicitFinal, int implicitFinal)
 (func $$create__int__int__int@parameterassignments.Main
@@ -330,7 +371,7 @@
 ;;; Code for parameterassignments.Main.$LambdaImplementor$1 [CLASS]
 (type $parameterassignments.Main.$LambdaImplementor$1 (struct_subtype 
  (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $parameterassignments.Main.$LambdaImplementor$1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -342,6 +383,15 @@
  (field $m_test__int__int__int (ref $function.m_test__int__int__int))
   $java.lang.Object.vtable)
 )
+(type $parameterassignments.Main.$LambdaImplementor$1.itable (struct_subtype 
+(field $slot0 (ref $parameterassignments.Main.Fn.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$1
@@ -435,7 +485,7 @@
 ;;; Code for parameterassignments.Main.$LambdaImplementor$2 [CLASS]
 (type $parameterassignments.Main.$LambdaImplementor$2 (struct_subtype 
  (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $parameterassignments.Main.$LambdaImplementor$2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -447,6 +497,15 @@
  (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
   $java.lang.Object.vtable)
 )
+(type $parameterassignments.Main.$LambdaImplementor$2.itable (struct_subtype 
+(field $slot0 (ref $parameterassignments.Main.FnPrimitiveVarargs.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$2 $LambdaImplementor$2.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$2
@@ -536,7 +595,7 @@
 ;;; Code for parameterassignments.Main.$LambdaImplementor$3 [CLASS]
 (type $parameterassignments.Main.$LambdaImplementor$3 (struct_subtype 
  (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$3.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $parameterassignments.Main.$LambdaImplementor$3.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -548,6 +607,15 @@
  (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
   $java.lang.Object.vtable)
 )
+(type $parameterassignments.Main.$LambdaImplementor$3.itable (struct_subtype 
+(field $slot0 (ref $parameterassignments.Main.FnObjectVarargs.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; $LambdaImplementor$3 $LambdaImplementor$3.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$3
@@ -745,7 +813,7 @@
 ;;; Code for parameterassignments.Main.SubMain [CLASS]
 (type $parameterassignments.Main.SubMain (struct_subtype 
  (field $vtable (ref $parameterassignments.Main.SubMain.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $parameterassignments.Main.SubMain.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
  (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
@@ -762,6 +830,15 @@
  (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
   $parameterassignments.Main.vtable)
 )
+(type $parameterassignments.Main.SubMain.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $parameterassignments.Main.itable))
 
 ;;; SubMain SubMain.$create(int nonFinal, int explicitFinal, int implicitFinal)
 (func $$create__int__int__int@parameterassignments.Main.SubMain

@@ -22,7 +22,14 @@
 )
 
 ;;; Code for jsproperties.Foo [itable.init]
-(global $jsproperties.Foo.itable (ref $itable) (array.init_static $itable 
+(global $jsproperties.Foo.itable (ref $jsproperties.Foo.itable) (struct.new $jsproperties.Foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsproperties.Bar [vtable.init]
@@ -40,7 +47,14 @@
 )
 
 ;;; Code for jsproperties.Bar [itable.init]
-(global $jsproperties.Bar.itable (ref $itable) (array.init_static $itable 
+(global $jsproperties.Bar.itable (ref $jsproperties.Bar.itable) (struct.new $jsproperties.Bar.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsproperties.NativeFoo [vtable.init]
@@ -55,7 +69,14 @@
 )
 
 ;;; Code for jsproperties.NativeFoo [itable.init]
-(global $jsproperties.NativeFoo.itable (ref $itable) (array.init_static $itable 
+(global $jsproperties.NativeFoo.itable (ref $jsproperties.NativeFoo.itable) (struct.new $jsproperties.NativeFoo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsproperties.Main [vtable.init]
@@ -72,13 +93,20 @@
 )
 
 ;;; Code for jsproperties.Main [itable.init]
-(global $jsproperties.Main.itable (ref $itable) (array.init_static $itable 
+(global $jsproperties.Main.itable (ref $jsproperties.Main.itable) (struct.new $jsproperties.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsproperties.Foo [CLASS]
 (type $jsproperties.Foo (struct_subtype 
  (field $vtable (ref $jsproperties.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsproperties.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -89,6 +117,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $jsproperties.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Foo Foo.$create()
 (func $$create__@jsproperties.Foo
@@ -217,7 +254,7 @@
 ;;; Code for jsproperties.Bar [CLASS]
 (type $jsproperties.Bar (struct_subtype 
  (field $vtable (ref $jsproperties.Bar.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsproperties.Bar.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f__jsproperties_Bar_ (mut i32))
   $java.lang.Object)
@@ -233,6 +270,15 @@
  (field $m_setB__int__void (ref $function.m_setB__int__void))
   $java.lang.Object.vtable)
 )
+(type $jsproperties.Bar.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Bar Bar.$create()
 (func $$create__@jsproperties.Bar
@@ -369,7 +415,7 @@
 ;;; Code for jsproperties.NativeFoo [CLASS]
 (type $jsproperties.NativeFoo (struct_subtype 
  (field $vtable (ref $jsproperties.NativeFoo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsproperties.NativeFoo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -381,6 +427,15 @@
  (field $m_getA__java_lang_Object (ref $function.m_getA__java_lang_Object))
   $java.lang.Object.vtable)
 )
+(type $jsproperties.NativeFoo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; NativeFoo NativeFoo.$create()
 (func $$create__@jsproperties.NativeFoo
@@ -472,7 +527,7 @@
 ;;; Code for jsproperties.Main [CLASS]
 (type $jsproperties.Main (struct_subtype 
  (field $vtable (ref $jsproperties.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsproperties.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -486,6 +541,15 @@
  (field $m_testInstanceJsProperty__void (ref $function.m_testInstanceJsProperty__void))
   $java.lang.Object.vtable)
 )
+(type $jsproperties.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@jsproperties.Main

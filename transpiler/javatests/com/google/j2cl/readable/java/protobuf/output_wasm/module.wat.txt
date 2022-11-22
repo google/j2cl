@@ -19,7 +19,14 @@
 )
 
 ;;; Code for protobuf.MyMessage [itable.init]
-(global $protobuf.MyMessage.itable (ref $itable) (array.init_static $itable 
+(global $protobuf.MyMessage.itable (ref $protobuf.MyMessage.itable) (struct.new $protobuf.MyMessage.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for protobuf.MyMessage.Builder [vtable.init]
@@ -36,7 +43,14 @@
 )
 
 ;;; Code for protobuf.MyMessage.Builder [itable.init]
-(global $protobuf.MyMessage.Builder.itable (ref $itable) (array.init_static $itable 
+(global $protobuf.MyMessage.Builder.itable (ref $protobuf.MyMessage.Builder.itable) (struct.new $protobuf.MyMessage.Builder.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for protobuf.Protobuf [vtable.init]
@@ -51,13 +65,20 @@
 )
 
 ;;; Code for protobuf.Protobuf [itable.init]
-(global $protobuf.Protobuf.itable (ref $itable) (array.init_static $itable 
+(global $protobuf.Protobuf.itable (ref $protobuf.Protobuf.itable) (struct.new $protobuf.Protobuf.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for protobuf.MyMessage [CLASS]
 (type $protobuf.MyMessage (struct_subtype 
  (field $vtable (ref $protobuf.MyMessage.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $protobuf.MyMessage.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_testField__protobuf_MyMessage i32)
   $com.google.protobuf.GeneratedMessage)
@@ -70,6 +91,15 @@
  (field $m_getTestField__int (ref $function.m_getTestField__int))
   $com.google.protobuf.GeneratedMessage.vtable)
 )
+(type $protobuf.MyMessage.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $com.google.protobuf.GeneratedMessage.itable))
 
 ;;; int MyMessage.getTestField()
 (func $m_getTestField__int@protobuf.MyMessage
@@ -188,7 +218,7 @@
 ;;; Code for protobuf.MyMessage.Builder [CLASS]
 (type $protobuf.MyMessage.Builder (struct_subtype 
  (field $vtable (ref $protobuf.MyMessage.Builder.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $protobuf.MyMessage.Builder.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_testField__protobuf_MyMessage_Builder (mut i32))
   $com.google.protobuf.GeneratedMessage.Builder)
@@ -203,6 +233,15 @@
  (field $m_build__protobuf_MyMessage (ref $function.m_build__protobuf_MyMessage))
   $com.google.protobuf.GeneratedMessage.Builder.vtable)
 )
+(type $protobuf.MyMessage.Builder.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $com.google.protobuf.GeneratedMessage.Builder.itable))
 
 ;;; int Builder.getTestField()
 (func $m_getTestField__int@protobuf.MyMessage.Builder
@@ -327,7 +366,7 @@
 ;;; Code for protobuf.Protobuf [CLASS]
 (type $protobuf.Protobuf (struct_subtype 
  (field $vtable (ref $protobuf.Protobuf.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $protobuf.Protobuf.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -339,6 +378,15 @@
  (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
+(type $protobuf.Protobuf.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Protobuf Protobuf.$create()
 (func $$create__@protobuf.Protobuf

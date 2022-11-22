@@ -18,7 +18,14 @@
 )
 
 ;;; Code for jsinnerclass.Main [itable.init]
-(global $jsinnerclass.Main.itable (ref $itable) (array.init_static $itable 
+(global $jsinnerclass.Main.itable (ref $jsinnerclass.Main.itable) (struct.new $jsinnerclass.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsinnerclass.Main.Outer.Inner [vtable.init]
@@ -33,7 +40,14 @@
 )
 
 ;;; Code for jsinnerclass.Main.Outer.Inner [itable.init]
-(global $jsinnerclass.Main.Outer.Inner.itable (ref $itable) (array.init_static $itable 
+(global $jsinnerclass.Main.Outer.Inner.itable (ref $jsinnerclass.Main.Outer.Inner.itable) (struct.new $jsinnerclass.Main.Outer.Inner.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsinnerclass.Main.Outer [vtable.init]
@@ -48,13 +62,20 @@
 )
 
 ;;; Code for jsinnerclass.Main.Outer [itable.init]
-(global $jsinnerclass.Main.Outer.itable (ref $itable) (array.init_static $itable 
+(global $jsinnerclass.Main.Outer.itable (ref $jsinnerclass.Main.Outer.itable) (struct.new $jsinnerclass.Main.Outer.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsinnerclass.Main [CLASS]
 (type $jsinnerclass.Main (struct_subtype 
  (field $vtable (ref $jsinnerclass.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsinnerclass.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -65,6 +86,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $jsinnerclass.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@jsinnerclass.Main
@@ -148,7 +178,7 @@
 ;;; Code for jsinnerclass.Main.Outer.Inner [CLASS]
 (type $jsinnerclass.Main.Outer.Inner (struct_subtype 
  (field $vtable (ref $jsinnerclass.Main.Outer.Inner.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsinnerclass.Main.Outer.Inner.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsinnerclass_Main_Outer_Inner (ref null $jsinnerclass.Main.Outer))
  (field $f_b__jsinnerclass_Main_Outer_Inner_ (mut i32))
@@ -162,6 +192,15 @@
  (field $m_getB__int (ref $function.m_getB__int))
   $java.lang.Object.vtable)
 )
+(type $jsinnerclass.Main.Outer.Inner.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Inner Inner.$create(Outer $outer_this)
 (func $$create__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner
@@ -255,7 +294,7 @@
 ;;; Code for jsinnerclass.Main.Outer [CLASS]
 (type $jsinnerclass.Main.Outer (struct_subtype 
  (field $vtable (ref $jsinnerclass.Main.Outer.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsinnerclass.Main.Outer.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_a__jsinnerclass_Main_Outer i32)
   $java.lang.Object)
@@ -268,6 +307,15 @@
  (field $m_method__int (ref $function.m_method__int))
   $java.lang.Object.vtable)
 )
+(type $jsinnerclass.Main.Outer.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Outer Outer.$create()
 (func $$create__@jsinnerclass.Main.Outer

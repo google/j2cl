@@ -27,7 +27,14 @@
 )
 
 ;;; Code for collisions.goog [itable.init]
-(global $collisions.goog.itable (ref $itable) (array.init_static $itable 
+(global $collisions.goog.itable (ref $collisions.goog.itable) (struct.new $collisions.goog.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for collisions.Blah [vtable.init]
@@ -41,7 +48,14 @@
 )
 
 ;;; Code for collisions.Blah [itable.init]
-(global $collisions.Blah.itable (ref $itable) (array.init_static $itable 
+(global $collisions.Blah.itable (ref $collisions.Blah.itable) (struct.new $collisions.Blah.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for collisions.foo [vtable.init]
@@ -55,7 +69,14 @@
 )
 
 ;;; Code for collisions.foo [itable.init]
-(global $collisions.foo.itable (ref $itable) (array.init_static $itable 
+(global $collisions.foo.itable (ref $collisions.foo.itable) (struct.new $collisions.foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for collisions.bar [vtable.init]
@@ -69,7 +90,14 @@
 )
 
 ;;; Code for collisions.bar [itable.init]
-(global $collisions.bar.itable (ref $itable) (array.init_static $itable 
+(global $collisions.bar.itable (ref $collisions.bar.itable) (struct.new $collisions.bar.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for collisions.Other [vtable.init]
@@ -84,7 +112,14 @@
 )
 
 ;;; Code for collisions.Other [itable.init]
-(global $collisions.Other.itable (ref $itable) (array.init_static $itable 
+(global $collisions.Other.itable (ref $collisions.Other.itable) (struct.new $collisions.Other.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for collisions.T [vtable.init]
@@ -100,13 +135,20 @@
 )
 
 ;;; Code for collisions.T [itable.init]
-(global $collisions.T.itable (ref $itable) (array.init_static $itable 
+(global $collisions.T.itable (ref $collisions.T.itable) (struct.new $collisions.T.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for collisions.goog [CLASS]
 (type $collisions.goog (struct_subtype 
  (field $vtable (ref $collisions.goog.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $collisions.goog.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -117,6 +159,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $collisions.goog.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; goog goog.$create()
 (func $$create__@collisions.goog
@@ -189,7 +240,7 @@
 ;;; Code for collisions.Blah [CLASS]
 (type $collisions.Blah (struct_subtype 
  (field $vtable (ref $collisions.Blah.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $collisions.Blah.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -200,6 +251,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $collisions.Blah.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Blah Blah.$create()
 (func $$create__@collisions.Blah
@@ -281,7 +341,7 @@
 ;;; Code for collisions.foo [CLASS]
 (type $collisions.foo (struct_subtype 
  (field $vtable (ref $collisions.foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $collisions.foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -292,6 +352,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $collisions.foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; foo foo.$create()
 (func $$create__@collisions.foo
@@ -364,7 +433,7 @@
 ;;; Code for collisions.bar [CLASS]
 (type $collisions.bar (struct_subtype 
  (field $vtable (ref $collisions.bar.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $collisions.bar.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -375,6 +444,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $collisions.bar.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; bar bar.$create()
 (func $$create__@collisions.bar
@@ -489,7 +567,7 @@
 ;;; Code for collisions.Other [CLASS]
 (type $collisions.Other (struct_subtype 
  (field $vtable (ref $collisions.Other.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $collisions.Other.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -501,6 +579,15 @@
  (field $m_m__java_lang_Object_$pp_collisions (ref $function.m_m__java_lang_Object_$pp_collisions))
   $java.lang.Object.vtable)
 )
+(type $collisions.Other.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Other<T> Other.$create()
 (func $$create__@collisions.Other
@@ -616,7 +703,7 @@
 ;;; Code for collisions.T [CLASS]
 (type $collisions.T (struct_subtype 
  (field $vtable (ref $collisions.T.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $collisions.T.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -629,6 +716,15 @@
  (field $m_n__java_lang_Number_$pp_collisions (ref $function.m_n__java_lang_Number_$pp_collisions))
   $java.lang.Object.vtable)
 )
+(type $collisions.T.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; T<T> T.$create()
 (func $$create__@collisions.T

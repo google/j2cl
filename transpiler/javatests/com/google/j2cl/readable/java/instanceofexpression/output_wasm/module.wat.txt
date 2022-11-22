@@ -20,7 +20,14 @@
 )
 
 ;;; Code for instanceofexpression.InstanceofExpressions [itable.init]
-(global $instanceofexpression.InstanceofExpressions.itable (ref $itable) (array.init_static $itable 
+(global $instanceofexpression.InstanceofExpressions.itable (ref $instanceofexpression.InstanceofExpressions.itable) (struct.new $instanceofexpression.InstanceofExpressions.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for instanceofexpression.InstanceofExpressions.1 [vtable.init]
@@ -34,15 +41,21 @@
 )
 
 ;;; Code for instanceofexpression.InstanceofExpressions.1 [itable.init]
-(global $instanceofexpression.InstanceofExpressions.1.itable (ref $itable) (array.init_static $itable 
+(global $instanceofexpression.InstanceofExpressions.1.itable (ref $instanceofexpression.InstanceofExpressions.1.itable) (struct.new $instanceofexpression.InstanceofExpressions.1.itable 
  (struct.new $java.io.Serializable.vtable
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for instanceofexpression.InstanceofExpressions [CLASS]
 (type $instanceofexpression.InstanceofExpressions (struct_subtype 
  (field $vtable (ref $instanceofexpression.InstanceofExpressions.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $instanceofexpression.InstanceofExpressions.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -58,6 +71,15 @@
  (field $m_testPrecedence__void (ref $function.m_testPrecedence__void))
   $java.lang.Object.vtable)
 )
+(type $instanceofexpression.InstanceofExpressions.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InstanceofExpressions InstanceofExpressions.$create()
 (func $$create__@instanceofexpression.InstanceofExpressions
@@ -140,21 +162,17 @@
   ;;@ instanceofexpression/InstanceofExpressions.java:33:4
   (local.set $b (if (result i32) (ref.is_null (local.get $o))
    (then (i32.const 0))
-   (else (if (result i32)
-    (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (local.get $o)))) 
-    (then (i32.const 0))
-    (else (ref.test_static $java.io.Serializable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $o) ) (i32.const 0))))
-   ))
+   (else 
+    (ref.test_static $java.io.Serializable.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $o) )))
+   )
   ))
   ;; (b = instanceofexpression.InstanceofExpressions.1.$create(InstanceofExpressions.this) instanceof Serializable);
   ;;@ instanceofexpression/InstanceofExpressions.java:34:4
   (local.set $b (if (result i32) (ref.is_null (call $$create__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1 (local.get $this)))
    (then (i32.const 0))
-   (else (if (result i32)
-    (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1 (local.get $this))))) 
-    (then (i32.const 0))
-    (else (ref.test_static $java.io.Serializable.vtable (array.get $itable (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1 (local.get $this)) ) (i32.const 0))))
-   ))
+   (else 
+    (ref.test_static $java.io.Serializable.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1 (local.get $this)) )))
+   )
   ))
  )
 )
@@ -367,7 +385,7 @@
 ;;; Code for instanceofexpression.InstanceofExpressions.1 [CLASS]
 (type $instanceofexpression.InstanceofExpressions.1 (struct_subtype 
  (field $vtable (ref $instanceofexpression.InstanceofExpressions.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $instanceofexpression.InstanceofExpressions.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__instanceofexpression_InstanceofExpressions_1 (ref null $instanceofexpression.InstanceofExpressions))
   $java.lang.Object)
@@ -379,6 +397,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $instanceofexpression.InstanceofExpressions.1.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; <anonymous> implements Serializable <anonymous> implements Serializable.$create(InstanceofExpressions $outer_this)
 (func $$create__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1

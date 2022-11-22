@@ -43,7 +43,7 @@
 ;;; Code for genericinterfaceabstractimpl.AbstractImpl [CLASS]
 (type $genericinterfaceabstractimpl.AbstractImpl (struct_subtype 
  (field $vtable (ref $genericinterfaceabstractimpl.AbstractImpl.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $genericinterfaceabstractimpl.AbstractImpl.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -54,6 +54,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $genericinterfaceabstractimpl.AbstractImpl.itable (struct_subtype 
+(field $slot0 (ref $genericinterfaceabstractimpl.MyInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void AbstractImpl.$ctor()
 (func $$ctor__void_$p_genericinterfaceabstractimpl_AbstractImpl@genericinterfaceabstractimpl.AbstractImpl

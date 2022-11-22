@@ -24,9 +24,15 @@
 )
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [itable.init]
-(global $devirtualizedsupermethodcall.SubNumber.itable (ref $itable) (array.init_static $itable 
+(global $devirtualizedsupermethodcall.SubNumber.itable (ref $devirtualizedsupermethodcall.SubNumber.itable) (struct.new $devirtualizedsupermethodcall.SubNumber.itable 
  (struct.new $java.io.Serializable.vtable
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [vtable.init]
@@ -40,7 +46,14 @@
 )
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [itable.init]
-(global $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable (ref $itable) (array.init_static $itable 
+(global $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable) (struct.new $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for devirtualizedsupermethodcall.Main [vtable.init]
@@ -55,13 +68,20 @@
 )
 
 ;;; Code for devirtualizedsupermethodcall.Main [itable.init]
-(global $devirtualizedsupermethodcall.Main.itable (ref $itable) (array.init_static $itable 
+(global $devirtualizedsupermethodcall.Main.itable (ref $devirtualizedsupermethodcall.Main.itable) (struct.new $devirtualizedsupermethodcall.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [CLASS]
 (type $devirtualizedsupermethodcall.SubNumber (struct_subtype 
  (field $vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $devirtualizedsupermethodcall.SubNumber.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Number)
 )
@@ -78,6 +98,15 @@
  (field $m_shortValue__short (ref $function.m_shortValue__short))
   $java.lang.Number.vtable)
 )
+(type $devirtualizedsupermethodcall.SubNumber.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Number.itable))
 
 ;;; SubNumber SubNumber.$create()
 (func $$create__@devirtualizedsupermethodcall.SubNumber
@@ -214,7 +243,7 @@
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [CLASS]
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct_subtype 
  (field $vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -225,6 +254,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; FooCallsSuperObjectMethod FooCallsSuperObjectMethod.$create()
 (func $$create__@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
@@ -313,7 +351,7 @@
 ;;; Code for devirtualizedsupermethodcall.Main [CLASS]
 (type $devirtualizedsupermethodcall.Main (struct_subtype 
  (field $vtable (ref $devirtualizedsupermethodcall.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $devirtualizedsupermethodcall.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -325,6 +363,15 @@
  (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
 )
+(type $devirtualizedsupermethodcall.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@devirtualizedsupermethodcall.Main

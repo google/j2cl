@@ -33,13 +33,20 @@
 )
 
 ;;; Code for functionalinterface.FunctionalInterfaces [itable.init]
-(global $functionalinterface.FunctionalInterfaces.itable (ref $itable) (array.init_static $itable 
+(global $functionalinterface.FunctionalInterfaces.itable (ref $functionalinterface.FunctionalInterfaces.itable) (struct.new $functionalinterface.FunctionalInterfaces.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for functionalinterface.FunctionalInterfaces [CLASS]
 (type $functionalinterface.FunctionalInterfaces (struct_subtype 
  (field $vtable (ref $functionalinterface.FunctionalInterfaces.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $functionalinterface.FunctionalInterfaces.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -50,6 +57,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $functionalinterface.FunctionalInterfaces.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; FunctionalInterfaces FunctionalInterfaces.$create()
 (func $$create__@functionalinterface.FunctionalInterfaces
@@ -243,7 +259,7 @@
  (block
   ;; return WithDefaultMethod.this.apply(string);
   ;;@ functionalinterface/FunctionalInterfaces.java:38:6
-  (return (call_ref $function.m_apply__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(local.get $string)(struct.get $functionalinterface.FunctionalInterfaces.WithDefaultMethod.vtable $m_apply__java_lang_String__java_lang_String (ref.cast_static $functionalinterface.FunctionalInterfaces.WithDefaultMethod.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1))) )))
+  (return (call_ref $function.m_apply__java_lang_String__java_lang_String (ref.as_non_null (local.get $this))(local.get $string)(struct.get $functionalinterface.FunctionalInterfaces.WithDefaultMethod.vtable $m_apply__java_lang_String__java_lang_String (ref.null $functionalinterface.FunctionalInterfaces.WithDefaultMethod.vtable))))
  )
 )
 (elem declare func $m_defaultApply__java_lang_String__java_lang_String@functionalinterface.FunctionalInterfaces.WithDefaultMethod)

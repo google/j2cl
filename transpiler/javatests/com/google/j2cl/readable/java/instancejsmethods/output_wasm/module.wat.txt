@@ -26,7 +26,14 @@
 )
 
 ;;; Code for instancejsmethods.SuperParent [itable.init]
-(global $instancejsmethods.SuperParent.itable (ref $itable) (array.init_static $itable 
+(global $instancejsmethods.SuperParent.itable (ref $instancejsmethods.SuperParent.itable) (struct.new $instancejsmethods.SuperParent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for instancejsmethods.Parent [vtable.init]
@@ -43,7 +50,14 @@
 )
 
 ;;; Code for instancejsmethods.Parent [itable.init]
-(global $instancejsmethods.Parent.itable (ref $itable) (array.init_static $itable 
+(global $instancejsmethods.Parent.itable (ref $instancejsmethods.Parent.itable) (struct.new $instancejsmethods.Parent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for instancejsmethods.Child [vtable.init]
@@ -61,10 +75,16 @@
 )
 
 ;;; Code for instancejsmethods.Child [itable.init]
-(global $instancejsmethods.Child.itable (ref $itable) (array.init_static $itable 
+(global $instancejsmethods.Child.itable (ref $instancejsmethods.Child.itable) (struct.new $instancejsmethods.Child.itable 
  (struct.new $instancejsmethods.MyInterface.vtable
   (ref.func $m_intfFoo__int@instancejsmethods.Child)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for instancejsmethods.Main [vtable.init]
@@ -79,7 +99,14 @@
 )
 
 ;;; Code for instancejsmethods.Main [itable.init]
-(global $instancejsmethods.Main.itable (ref $itable) (array.init_static $itable 
+(global $instancejsmethods.Main.itable (ref $instancejsmethods.Main.itable) (struct.new $instancejsmethods.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for instancejsmethods.MyInterface [INTERFACE]
@@ -121,7 +148,7 @@
 ;;; Code for instancejsmethods.SuperParent [CLASS]
 (type $instancejsmethods.SuperParent (struct_subtype 
  (field $vtable (ref $instancejsmethods.SuperParent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $instancejsmethods.SuperParent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -134,6 +161,15 @@
  (field $m_bar__int__int__int (ref $function.m_bar__int__int__int))
   $java.lang.Object.vtable)
 )
+(type $instancejsmethods.SuperParent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SuperParent SuperParent.$create()
 (func $$create__@instancejsmethods.SuperParent
@@ -242,7 +278,7 @@
 ;;; Code for instancejsmethods.Parent [CLASS]
 (type $instancejsmethods.Parent (struct_subtype 
  (field $vtable (ref $instancejsmethods.Parent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $instancejsmethods.Parent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $instancejsmethods.SuperParent)
 )
@@ -256,6 +292,15 @@
  (field $m_foo__int__int (ref $function.m_foo__int__int))
   $instancejsmethods.SuperParent.vtable)
 )
+(type $instancejsmethods.Parent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $instancejsmethods.SuperParent.itable))
 
 ;;; Parent Parent.$create()
 (func $$create__@instancejsmethods.Parent
@@ -381,7 +426,7 @@
 ;;; Code for instancejsmethods.Child [CLASS]
 (type $instancejsmethods.Child (struct_subtype 
  (field $vtable (ref $instancejsmethods.Child.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $instancejsmethods.Child.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $instancejsmethods.Parent)
 )
@@ -396,6 +441,15 @@
  (field $m_intfFoo__int (ref $function.m_intfFoo__int))
   $instancejsmethods.Parent.vtable)
 )
+(type $instancejsmethods.Child.itable (struct_subtype 
+(field $slot0 (ref $instancejsmethods.MyInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $instancejsmethods.Parent.itable))
 
 ;;; Child Child.$create()
 (func $$create__@instancejsmethods.Child
@@ -537,7 +591,7 @@
 ;;; Code for instancejsmethods.Main [CLASS]
 (type $instancejsmethods.Main (struct_subtype 
  (field $vtable (ref $instancejsmethods.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $instancejsmethods.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -549,6 +603,15 @@
  (field $m_testCallBySuperParent__void (ref $function.m_testCallBySuperParent__void))
   $java.lang.Object.vtable)
 )
+(type $instancejsmethods.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@instancejsmethods.Main
@@ -640,7 +703,7 @@
   (drop (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $cc))(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $cc)))))
   ;; intf.intfFoo();
   ;;@ instancejsmethods/Main.java:131:4
-  (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $intf))(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast_static $instancejsmethods.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) )))
+  (drop (call_ref $function.m_intfFoo__int (ref.as_non_null (local.get $intf))(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast_static $instancejsmethods.MyInterface.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $intf)))))))
  )
 )
 (elem declare func $m_testCallBySuperParent__void@instancejsmethods.Main)

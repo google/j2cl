@@ -15,7 +15,14 @@
 )
 
 ;;; Code for aptgeneratorplugin.Dummy [itable.init]
-(global $aptgeneratorplugin.Dummy.itable (ref $itable) (array.init_static $itable 
+(global $aptgeneratorplugin.Dummy.itable (ref $aptgeneratorplugin.Dummy.itable) (struct.new $aptgeneratorplugin.Dummy.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for aptgeneratorplugin.Foo [vtable.init]
@@ -29,13 +36,20 @@
 )
 
 ;;; Code for aptgeneratorplugin.Foo [itable.init]
-(global $aptgeneratorplugin.Foo.itable (ref $itable) (array.init_static $itable 
+(global $aptgeneratorplugin.Foo.itable (ref $aptgeneratorplugin.Foo.itable) (struct.new $aptgeneratorplugin.Foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for aptgeneratorplugin.Dummy [CLASS]
 (type $aptgeneratorplugin.Dummy (struct_subtype 
  (field $vtable (ref $aptgeneratorplugin.Dummy.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $aptgeneratorplugin.Dummy.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -46,6 +60,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $aptgeneratorplugin.Dummy.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Dummy Dummy.$create()
 (func $$create__@aptgeneratorplugin.Dummy
@@ -118,7 +141,7 @@
 ;;; Code for aptgeneratorplugin.Foo [CLASS]
 (type $aptgeneratorplugin.Foo (struct_subtype 
  (field $vtable (ref $aptgeneratorplugin.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $aptgeneratorplugin.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -129,6 +152,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $aptgeneratorplugin.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Foo Foo.$create()
 (func $$create__@aptgeneratorplugin.Foo

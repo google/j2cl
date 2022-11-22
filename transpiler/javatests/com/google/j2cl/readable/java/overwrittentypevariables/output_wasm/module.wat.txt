@@ -24,7 +24,14 @@
 )
 
 ;;; Code for overwrittentypevariables.HashFunctions [itable.init]
-(global $overwrittentypevariables.HashFunctions.itable (ref $itable) (array.init_static $itable 
+(global $overwrittentypevariables.HashFunctions.itable (ref $overwrittentypevariables.HashFunctions.itable) (struct.new $overwrittentypevariables.HashFunctions.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [vtable.init]
@@ -40,12 +47,17 @@
 )
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [itable.init]
-(global $overwrittentypevariables.HashFunctions.1.itable (ref $itable) (array.init_static $itable 
+(global $overwrittentypevariables.HashFunctions.1.itable (ref $overwrittentypevariables.HashFunctions.1.itable) (struct.new $overwrittentypevariables.HashFunctions.1.itable 
  (struct.new $overwrittentypevariables.HashFunction.vtable
  )
  (struct.new $overwrittentypevariables.MyFunction.vtable
   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [vtable.init]
@@ -61,12 +73,17 @@
 )
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [itable.init]
-(global $overwrittentypevariables.HashFunctions.2.itable (ref $itable) (array.init_static $itable 
+(global $overwrittentypevariables.HashFunctions.2.itable (ref $overwrittentypevariables.HashFunctions.2.itable) (struct.new $overwrittentypevariables.HashFunctions.2.itable 
  (struct.new $overwrittentypevariables.HashFunction.vtable
  )
  (struct.new $overwrittentypevariables.MyFunction.vtable
   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for overwrittentypevariables.MyFunction [INTERFACE]
@@ -143,7 +160,7 @@
 ;;; Code for overwrittentypevariables.HashFunctions [CLASS]
 (type $overwrittentypevariables.HashFunctions (struct_subtype 
  (field $vtable (ref $overwrittentypevariables.HashFunctions.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $overwrittentypevariables.HashFunctions.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -154,6 +171,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $overwrittentypevariables.HashFunctions.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; HashFunctions HashFunctions.$create()
 (func $$create__@overwrittentypevariables.HashFunctions
@@ -254,7 +280,7 @@
 ;;; Code for overwrittentypevariables.HashFunctions.1 [CLASS]
 (type $overwrittentypevariables.HashFunctions.1 (struct_subtype 
  (field $vtable (ref $overwrittentypevariables.HashFunctions.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $overwrittentypevariables.HashFunctions.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -267,6 +293,15 @@
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
+(type $overwrittentypevariables.HashFunctions.1.itable (struct_subtype 
+(field $slot0 (ref $overwrittentypevariables.HashFunction.vtable))
+(field $slot1 (ref $overwrittentypevariables.MyFunction.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; <anonymous> implements HashFunction<T><T> <anonymous> implements HashFunction<T>.$create()
 (func $$create__@overwrittentypevariables.HashFunctions.1
@@ -373,7 +408,7 @@
 ;;; Code for overwrittentypevariables.HashFunctions.2 [CLASS]
 (type $overwrittentypevariables.HashFunctions.2 (struct_subtype 
  (field $vtable (ref $overwrittentypevariables.HashFunctions.2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $overwrittentypevariables.HashFunctions.2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -386,6 +421,15 @@
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
+(type $overwrittentypevariables.HashFunctions.2.itable (struct_subtype 
+(field $slot0 (ref $overwrittentypevariables.HashFunction.vtable))
+(field $slot1 (ref $overwrittentypevariables.MyFunction.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; <anonymous> implements HashFunction<T><T> <anonymous> implements HashFunction<T>.$create()
 (func $$create__@overwrittentypevariables.HashFunctions.2

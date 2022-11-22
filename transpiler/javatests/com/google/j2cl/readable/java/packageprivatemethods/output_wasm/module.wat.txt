@@ -30,7 +30,14 @@
 )
 
 ;;; Code for packageprivatemethods.package1.Child [itable.init]
-(global $packageprivatemethods.package1.Child.itable (ref $itable) (array.init_static $itable 
+(global $packageprivatemethods.package1.Child.itable (ref $packageprivatemethods.package1.Child.itable) (struct.new $packageprivatemethods.package1.Child.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for packageprivatemethods.package1.SuperParent [vtable.init]
@@ -47,7 +54,14 @@
 )
 
 ;;; Code for packageprivatemethods.package1.SuperParent [itable.init]
-(global $packageprivatemethods.package1.SuperParent.itable (ref $itable) (array.init_static $itable 
+(global $packageprivatemethods.package1.SuperParent.itable (ref $packageprivatemethods.package1.SuperParent.itable) (struct.new $packageprivatemethods.package1.SuperParent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for packageprivatemethods.package2.SubChild [vtable.init]
@@ -67,13 +81,20 @@
 )
 
 ;;; Code for packageprivatemethods.package2.SubChild [itable.init]
-(global $packageprivatemethods.package2.SubChild.itable (ref $itable) (array.init_static $itable 
+(global $packageprivatemethods.package2.SubChild.itable (ref $packageprivatemethods.package2.SubChild.itable) (struct.new $packageprivatemethods.package2.SubChild.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for packageprivatemethods.package1.Child [CLASS]
 (type $packageprivatemethods.package1.Child (struct_subtype 
  (field $vtable (ref $packageprivatemethods.package1.Child.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $packageprivatemethods.package1.Child.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $packageprivatemethods.package1.Parent)
 )
@@ -90,6 +111,15 @@
  (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
   $packageprivatemethods.package1.Parent.vtable)
 )
+(type $packageprivatemethods.package1.Child.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $packageprivatemethods.package1.Parent.itable))
 
 ;;; Child Child.$create()
 (func $$create__@packageprivatemethods.package1.Child
@@ -251,7 +281,7 @@
 ;;; Code for packageprivatemethods.package1.Parent [CLASS]
 (type $packageprivatemethods.package1.Parent (struct_subtype 
  (field $vtable (ref $packageprivatemethods.package1.Parent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $packageprivatemethods.package1.Parent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $packageprivatemethods.package1.SuperParent)
 )
@@ -266,6 +296,15 @@
  (field $m_bar__int__int__int__int (ref $function.m_bar__int__int__int__int))
   $packageprivatemethods.package1.SuperParent.vtable)
 )
+(type $packageprivatemethods.package1.Parent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $packageprivatemethods.package1.SuperParent.itable))
 
 ;;; void Parent.$ctor()
 (func $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent
@@ -342,7 +381,7 @@
 ;;; Code for packageprivatemethods.package1.SuperParent [CLASS]
 (type $packageprivatemethods.package1.SuperParent (struct_subtype 
  (field $vtable (ref $packageprivatemethods.package1.SuperParent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $packageprivatemethods.package1.SuperParent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -356,6 +395,15 @@
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1))
   $java.lang.Object.vtable)
 )
+(type $packageprivatemethods.package1.SuperParent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SuperParent SuperParent.$create()
 (func $$create__@packageprivatemethods.package1.SuperParent
@@ -482,7 +530,7 @@
 ;;; Code for packageprivatemethods.package2.SubChild [CLASS]
 (type $packageprivatemethods.package2.SubChild (struct_subtype 
  (field $vtable (ref $packageprivatemethods.package2.SubChild.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $packageprivatemethods.package2.SubChild.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $packageprivatemethods.package1.Child)
 )
@@ -499,6 +547,15 @@
  (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
   $packageprivatemethods.package1.Child.vtable)
 )
+(type $packageprivatemethods.package2.SubChild.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $packageprivatemethods.package1.Child.itable))
 
 ;;; SubChild SubChild.$create()
 (func $$create__@packageprivatemethods.package2.SubChild
@@ -588,7 +645,7 @@
 ;;; Code for packageprivatemethods.package2.SubParent [CLASS]
 (type $packageprivatemethods.package2.SubParent (struct_subtype 
  (field $vtable (ref $packageprivatemethods.package2.SubParent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $packageprivatemethods.package2.SubParent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $packageprivatemethods.package1.Parent)
 )
@@ -604,6 +661,15 @@
  (field $m_foo__int__int_$pp_packageprivatemethods_package2 (ref $function.m_foo__int__int_$pp_packageprivatemethods_package2))
   $packageprivatemethods.package1.Parent.vtable)
 )
+(type $packageprivatemethods.package2.SubParent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $packageprivatemethods.package1.Parent.itable))
 
 ;;; void SubParent.$ctor()
 (func $$ctor__void_$p_packageprivatemethods_package2_SubParent@packageprivatemethods.package2.SubParent

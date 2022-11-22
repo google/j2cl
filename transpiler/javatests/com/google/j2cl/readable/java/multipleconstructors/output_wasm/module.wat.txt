@@ -12,13 +12,20 @@
 )
 
 ;;; Code for multipleconstructors.MultipleConstructors [itable.init]
-(global $multipleconstructors.MultipleConstructors.itable (ref $itable) (array.init_static $itable 
+(global $multipleconstructors.MultipleConstructors.itable (ref $multipleconstructors.MultipleConstructors.itable) (struct.new $multipleconstructors.MultipleConstructors.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for multipleconstructors.MultipleConstructors [CLASS]
 (type $multipleconstructors.MultipleConstructors (struct_subtype 
  (field $vtable (ref $multipleconstructors.MultipleConstructors.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $multipleconstructors.MultipleConstructors.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_id__multipleconstructors_MultipleConstructors_ i32)
  (field $f_flag__multipleconstructors_MultipleConstructors_ (mut i8))
@@ -31,6 +38,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $multipleconstructors.MultipleConstructors.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; MultipleConstructors MultipleConstructors.$create(int id)
 (func $$create__int@multipleconstructors.MultipleConstructors

@@ -30,7 +30,14 @@
 )
 
 ;;; Code for simplelocalclass.SimpleLocalClass [itable.init]
-(global $simplelocalclass.SimpleLocalClass.itable (ref $itable) (array.init_static $itable 
+(global $simplelocalclass.SimpleLocalClass.itable (ref $simplelocalclass.SimpleLocalClass.itable) (struct.new $simplelocalclass.SimpleLocalClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [vtable.init]
@@ -45,7 +52,14 @@
 )
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [itable.init]
-(global $simplelocalclass.SimpleLocalClass.1InnerClass.itable (ref $itable) (array.init_static $itable 
+(global $simplelocalclass.SimpleLocalClass.1InnerClass.itable (ref $simplelocalclass.SimpleLocalClass.1InnerClass.itable) (struct.new $simplelocalclass.SimpleLocalClass.1InnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [vtable.init]
@@ -59,7 +73,14 @@
 )
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [itable.init]
-(global $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable (ref $itable) (array.init_static $itable 
+(global $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable (ref $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable) (struct.new $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [vtable.init]
@@ -73,7 +94,14 @@
 )
 
 ;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [itable.init]
-(global $simplelocalclass.SimpleLocalClass.2InnerClass.itable (ref $itable) (array.init_static $itable 
+(global $simplelocalclass.SimpleLocalClass.2InnerClass.itable (ref $simplelocalclass.SimpleLocalClass.2InnerClass.itable) (struct.new $simplelocalclass.SimpleLocalClass.2InnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [vtable.init]
@@ -87,7 +115,14 @@
 )
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [itable.init]
-(global $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable (ref $itable) (array.init_static $itable 
+(global $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable (ref $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable) (struct.new $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [vtable.init]
@@ -101,13 +136,20 @@
 )
 
 ;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [itable.init]
-(global $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable (ref $itable) (array.init_static $itable 
+(global $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable (ref $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable) (struct.new $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for simplelocalclass.SimpleLocalClass [CLASS]
 (type $simplelocalclass.SimpleLocalClass (struct_subtype 
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplelocalclass.SimpleLocalClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -121,6 +163,15 @@
  (field $m_foo__void (ref $function.m_foo__void))
   $java.lang.Object.vtable)
 )
+(type $simplelocalclass.SimpleLocalClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SimpleLocalClass SimpleLocalClass.$create()
 (func $$create__@simplelocalclass.SimpleLocalClass
@@ -250,7 +301,7 @@
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [CLASS]
 (type $simplelocalclass.SimpleLocalClass.1InnerClass (struct_subtype 
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplelocalclass.SimpleLocalClass.1InnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClass (ref null $simplelocalclass.SimpleLocalClass))
  (field $$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass i32)
@@ -265,6 +316,15 @@
  (field $m_fun__int (ref $function.m_fun__int))
   $java.lang.Object.vtable)
 )
+(type $simplelocalclass.SimpleLocalClass.1InnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerClass InnerClass.$create(SimpleLocalClass $outer_this, int $captured_localVar, int $captured_p)
 (func $$create__simplelocalclass_SimpleLocalClass__int__int@simplelocalclass.SimpleLocalClass.1InnerClass
@@ -359,7 +419,7 @@
 ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [CLASS]
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct_subtype 
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (ref null $simplelocalclass.SimpleLocalClass))
   $java.lang.Object)
@@ -371,6 +431,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerClassWithoutCaptures InnerClassWithoutCaptures.$create(SimpleLocalClass $outer_this)
 (func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
@@ -445,7 +514,7 @@
 ;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [CLASS]
 (type $simplelocalclass.SimpleLocalClass.2InnerClass (struct_subtype 
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplelocalclass.SimpleLocalClass.2InnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__simplelocalclass_SimpleLocalClass_2InnerClass (ref null $simplelocalclass.SimpleLocalClass))
  (field $f_field__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32))
@@ -459,6 +528,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $simplelocalclass.SimpleLocalClass.2InnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerClass InnerClass.$create(SimpleLocalClass $outer_this, int $captured_localVar)
 (func $$create__simplelocalclass_SimpleLocalClass__int@simplelocalclass.SimpleLocalClass.2InnerClass
@@ -549,7 +627,7 @@
 ;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [CLASS]
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (struct_subtype 
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (ref null $simplelocalclass.SimpleLocalClass))
   $java.lang.Object)
@@ -561,6 +639,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Abc$InnerClass Abc$InnerClass.$create(SimpleLocalClass $outer_this)
 (func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
@@ -635,7 +722,7 @@
 ;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [CLASS]
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (struct_subtype 
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (ref null $simplelocalclass.SimpleLocalClass))
   $java.lang.Object)
@@ -647,6 +734,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Klm$InnerClass Klm$InnerClass.$create(SimpleLocalClass $outer_this)
 (func $$create__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass

@@ -21,7 +21,14 @@
 )
 
 ;;; Code for annotation.Main [itable.init]
-(global $annotation.Main.itable (ref $itable) (array.init_static $itable 
+(global $annotation.Main.itable (ref $annotation.Main.itable) (struct.new $annotation.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for annotation.Main.Bar [vtable.init]
@@ -36,13 +43,20 @@
 )
 
 ;;; Code for annotation.Main.Bar [itable.init]
-(global $annotation.Main.Bar.itable (ref $itable) (array.init_static $itable 
+(global $annotation.Main.Bar.itable (ref $annotation.Main.Bar.itable) (struct.new $annotation.Main.Bar.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for annotation.Main [CLASS]
 (type $annotation.Main (struct_subtype 
  (field $vtable (ref $annotation.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $annotation.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -53,6 +67,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $annotation.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create()
 (func $$create__@annotation.Main
@@ -196,7 +219,7 @@
 ;;; Code for annotation.Main.Bar [CLASS]
 (type $annotation.Main.Bar (struct_subtype 
  (field $vtable (ref $annotation.Main.Bar.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $annotation.Main.Bar.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__annotation_Main_Bar (ref null $annotation.Main))
   $java.lang.Object)
@@ -209,6 +232,15 @@
  (field $m_baz__int_$pp_annotation (ref $function.m_baz__int_$pp_annotation))
   $java.lang.Object.vtable)
 )
+(type $annotation.Main.Bar.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Bar Bar.$create(Main $outer_this)
 (func $$create__annotation_Main@annotation.Main.Bar
@@ -259,7 +291,7 @@
   (local.set $foo (ref.null $java.lang.Object))
   ;; foo.bar();
   ;;@ annotation/Main.java:34:6
-  (drop (call_ref $function.m_bar__int (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast_static $annotation.Main.Foo.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $foo)) (i32.const -1))) )))
+  (drop (call_ref $function.m_bar__int (ref.as_non_null (local.get $foo))(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.null $annotation.Main.Foo.vtable))))
   ;; return 123;
   ;;@ annotation/Main.java:35:6
   (return (i32.const 123))

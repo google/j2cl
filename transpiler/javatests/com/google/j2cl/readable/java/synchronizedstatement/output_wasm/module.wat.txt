@@ -13,13 +13,20 @@
 )
 
 ;;; Code for synchronizedstatement.SynchronizedStatement [itable.init]
-(global $synchronizedstatement.SynchronizedStatement.itable (ref $itable) (array.init_static $itable 
+(global $synchronizedstatement.SynchronizedStatement.itable (ref $synchronizedstatement.SynchronizedStatement.itable) (struct.new $synchronizedstatement.SynchronizedStatement.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for synchronizedstatement.SynchronizedStatement [CLASS]
 (type $synchronizedstatement.SynchronizedStatement (struct_subtype 
  (field $vtable (ref $synchronizedstatement.SynchronizedStatement.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $synchronizedstatement.SynchronizedStatement.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_a__synchronizedstatement_SynchronizedStatement_ (mut i32))
  (field $f_b__synchronizedstatement_SynchronizedStatement_ (mut i32))
@@ -33,6 +40,15 @@
  (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
 )
+(type $synchronizedstatement.SynchronizedStatement.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SynchronizedStatement SynchronizedStatement.$create()
 (func $$create__@synchronizedstatement.SynchronizedStatement

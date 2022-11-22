@@ -27,7 +27,14 @@
 )
 
 ;;; Code for rawtype.RawType [itable.init]
-(global $rawtype.RawType.itable (ref $itable) (array.init_static $itable 
+(global $rawtype.RawType.itable (ref $rawtype.RawType.itable) (struct.new $rawtype.RawType.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for rawtype.RawType.Unbound [vtable.init]
@@ -41,7 +48,14 @@
 )
 
 ;;; Code for rawtype.RawType.Unbound [itable.init]
-(global $rawtype.RawType.Unbound.itable (ref $itable) (array.init_static $itable 
+(global $rawtype.RawType.Unbound.itable (ref $rawtype.RawType.Unbound.itable) (struct.new $rawtype.RawType.Unbound.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for rawtype.RawType.Bound [vtable.init]
@@ -55,7 +69,14 @@
 )
 
 ;;; Code for rawtype.RawType.Bound [itable.init]
-(global $rawtype.RawType.Bound.itable (ref $itable) (array.init_static $itable 
+(global $rawtype.RawType.Bound.itable (ref $rawtype.RawType.Bound.itable) (struct.new $rawtype.RawType.Bound.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for rawtype.RawType.BoundRecursively [vtable.init]
@@ -69,7 +90,14 @@
 )
 
 ;;; Code for rawtype.RawType.BoundRecursively [itable.init]
-(global $rawtype.RawType.BoundRecursively.itable (ref $itable) (array.init_static $itable 
+(global $rawtype.RawType.BoundRecursively.itable (ref $rawtype.RawType.BoundRecursively.itable) (struct.new $rawtype.RawType.BoundRecursively.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for rawtype.RawType.RawSubclass [vtable.init]
@@ -84,16 +112,22 @@
 )
 
 ;;; Code for rawtype.RawType.RawSubclass [itable.init]
-(global $rawtype.RawType.RawSubclass.itable (ref $itable) (array.init_static $itable 
+(global $rawtype.RawType.RawSubclass.itable (ref $rawtype.RawType.RawSubclass.itable) (struct.new $rawtype.RawType.RawSubclass.itable 
  (struct.new $rawtype.RawType.GenericSuperclass.vtable
   (ref.func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for rawtype.RawType [CLASS]
 (type $rawtype.RawType (struct_subtype 
  (field $vtable (ref $rawtype.RawType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $rawtype.RawType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_rawUnbound__rawtype_RawType (mut (ref null $rawtype.RawType.Unbound)))
  (field $f_rawBound__rawtype_RawType (mut (ref null $rawtype.RawType.Bound)))
@@ -107,6 +141,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $rawtype.RawType.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; RawType RawType.$create()
 (func $$create__@rawtype.RawType
@@ -199,7 +242,7 @@
 ;;; Code for rawtype.RawType.Unbound [CLASS]
 (type $rawtype.RawType.Unbound (struct_subtype 
  (field $vtable (ref $rawtype.RawType.Unbound.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $rawtype.RawType.Unbound.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -210,6 +253,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $rawtype.RawType.Unbound.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Unbound<T> Unbound.$create()
 (func $$create__@rawtype.RawType.Unbound
@@ -282,7 +334,7 @@
 ;;; Code for rawtype.RawType.Bound [CLASS]
 (type $rawtype.RawType.Bound (struct_subtype 
  (field $vtable (ref $rawtype.RawType.Bound.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $rawtype.RawType.Bound.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -293,6 +345,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $rawtype.RawType.Bound.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Bound<T> Bound.$create()
 (func $$create__@rawtype.RawType.Bound
@@ -365,7 +426,7 @@
 ;;; Code for rawtype.RawType.BoundRecursively [CLASS]
 (type $rawtype.RawType.BoundRecursively (struct_subtype 
  (field $vtable (ref $rawtype.RawType.BoundRecursively.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $rawtype.RawType.BoundRecursively.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -376,6 +437,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $rawtype.RawType.BoundRecursively.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; BoundRecursively<T> BoundRecursively.$create()
 (func $$create__@rawtype.RawType.BoundRecursively
@@ -494,7 +564,7 @@
 ;;; Code for rawtype.RawType.RawSubclass [CLASS]
 (type $rawtype.RawType.RawSubclass (struct_subtype 
  (field $vtable (ref $rawtype.RawType.RawSubclass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $rawtype.RawType.RawSubclass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -506,6 +576,15 @@
  (field $m_f__rawtype_RawType__void (ref $function.m_f__rawtype_RawType__void))
   $java.lang.Object.vtable)
 )
+(type $rawtype.RawType.RawSubclass.itable (struct_subtype 
+(field $slot0 (ref $rawtype.RawType.GenericSuperclass.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; RawSubclass RawSubclass.$create()
 (func $$create__@rawtype.RawType.RawSubclass

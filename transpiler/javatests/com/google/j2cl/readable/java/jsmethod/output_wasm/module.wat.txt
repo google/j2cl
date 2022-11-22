@@ -22,7 +22,14 @@
 )
 
 ;;; Code for jsmethod.JsMethodExample [itable.init]
-(global $jsmethod.JsMethodExample.itable (ref $itable) (array.init_static $itable 
+(global $jsmethod.JsMethodExample.itable (ref $jsmethod.JsMethodExample.itable) (struct.new $jsmethod.JsMethodExample.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsmethod.JsMethodExample.Sub [vtable.init]
@@ -38,16 +45,22 @@
 )
 
 ;;; Code for jsmethod.JsMethodExample.Sub [itable.init]
-(global $jsmethod.JsMethodExample.Sub.itable (ref $itable) (array.init_static $itable 
+(global $jsmethod.JsMethodExample.Sub.itable (ref $jsmethod.JsMethodExample.Sub.itable) (struct.new $jsmethod.JsMethodExample.Sub.itable 
  (struct.new $jsmethod.JsMethodExample.I.vtable
   (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsmethod.JsMethodExample [CLASS]
 (type $jsmethod.JsMethodExample (struct_subtype 
  (field $vtable (ref $jsmethod.JsMethodExample.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsmethod.JsMethodExample.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -59,6 +72,15 @@
  (field $m_testMethod__java_util_ArrayList (ref $function.m_testMethod__java_util_ArrayList))
   $java.lang.Object.vtable)
 )
+(type $jsmethod.JsMethodExample.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; JsMethodExample JsMethodExample.$create()
 (func $$create__@jsmethod.JsMethodExample
@@ -164,7 +186,7 @@
 ;;; Code for jsmethod.JsMethodExample.Base [CLASS]
 (type $jsmethod.JsMethodExample.Base (struct_subtype 
  (field $vtable (ref $jsmethod.JsMethodExample.Base.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsmethod.JsMethodExample.Base.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -176,6 +198,15 @@
  (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
+(type $jsmethod.JsMethodExample.Base.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void Base.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base
@@ -265,7 +296,7 @@
 ;;; Code for jsmethod.JsMethodExample.Sub [CLASS]
 (type $jsmethod.JsMethodExample.Sub (struct_subtype 
  (field $vtable (ref $jsmethod.JsMethodExample.Sub.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsmethod.JsMethodExample.Sub.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $jsmethod.JsMethodExample.Base)
 )
@@ -278,6 +309,15 @@
  (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
   $jsmethod.JsMethodExample.Base.vtable)
 )
+(type $jsmethod.JsMethodExample.Sub.itable (struct_subtype 
+(field $slot0 (ref $jsmethod.JsMethodExample.I.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $jsmethod.JsMethodExample.Base.itable))
 
 ;;; Sub Sub.$create()
 (func $$create__@jsmethod.JsMethodExample.Sub

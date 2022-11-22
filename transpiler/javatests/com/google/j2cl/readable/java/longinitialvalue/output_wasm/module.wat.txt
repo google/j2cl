@@ -5,7 +5,7 @@
 ;;; Code for longinitialvalue.LongInitialValue [CLASS]
 (type $longinitialvalue.LongInitialValue (struct_subtype 
  (field $vtable (ref $longinitialvalue.LongInitialValue.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $longinitialvalue.LongInitialValue.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -16,6 +16,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $longinitialvalue.LongInitialValue.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void LongInitialValue.$ctor()
 (func $$ctor__void_$p_longinitialvalue_LongInitialValue@longinitialvalue.LongInitialValue

@@ -15,7 +15,14 @@
 )
 
 ;;; Code for srcjar.Foo [itable.init]
-(global $srcjar.Foo.itable (ref $itable) (array.init_static $itable 
+(global $srcjar.Foo.itable (ref $srcjar.Foo.itable) (struct.new $srcjar.Foo.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for srcjar.Srcjar [vtable.init]
@@ -29,13 +36,20 @@
 )
 
 ;;; Code for srcjar.Srcjar [itable.init]
-(global $srcjar.Srcjar.itable (ref $itable) (array.init_static $itable 
+(global $srcjar.Srcjar.itable (ref $srcjar.Srcjar.itable) (struct.new $srcjar.Srcjar.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for srcjar.Foo [CLASS]
 (type $srcjar.Foo (struct_subtype 
  (field $vtable (ref $srcjar.Foo.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $srcjar.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -46,6 +60,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $srcjar.Foo.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Foo Foo.$create()
 (func $$create__@srcjar.Foo
@@ -118,7 +141,7 @@
 ;;; Code for srcjar.Srcjar [CLASS]
 (type $srcjar.Srcjar (struct_subtype 
  (field $vtable (ref $srcjar.Srcjar.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $srcjar.Srcjar.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -129,6 +152,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $srcjar.Srcjar.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Srcjar Srcjar.$create()
 (func $$create__@srcjar.Srcjar

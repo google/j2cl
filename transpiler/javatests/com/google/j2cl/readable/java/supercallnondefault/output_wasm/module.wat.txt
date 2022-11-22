@@ -15,7 +15,14 @@
 )
 
 ;;; Code for supercallnondefault.Parent [itable.init]
-(global $supercallnondefault.Parent.itable (ref $itable) (array.init_static $itable 
+(global $supercallnondefault.Parent.itable (ref $supercallnondefault.Parent.itable) (struct.new $supercallnondefault.Parent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for supercallnondefault.Child [vtable.init]
@@ -29,13 +36,20 @@
 )
 
 ;;; Code for supercallnondefault.Child [itable.init]
-(global $supercallnondefault.Child.itable (ref $itable) (array.init_static $itable 
+(global $supercallnondefault.Child.itable (ref $supercallnondefault.Child.itable) (struct.new $supercallnondefault.Child.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for supercallnondefault.Parent [CLASS]
 (type $supercallnondefault.Parent (struct_subtype 
  (field $vtable (ref $supercallnondefault.Parent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $supercallnondefault.Parent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_field__supercallnondefault_Parent i32)
   $java.lang.Object)
@@ -47,6 +61,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $supercallnondefault.Parent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Parent Parent.$create(int f)
 (func $$create__int@supercallnondefault.Parent
@@ -121,7 +144,7 @@
 ;;; Code for supercallnondefault.Child [CLASS]
 (type $supercallnondefault.Child (struct_subtype 
  (field $vtable (ref $supercallnondefault.Child.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $supercallnondefault.Child.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_field__supercallnondefault_Parent i32)
   $supercallnondefault.Parent)
@@ -133,6 +156,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $supercallnondefault.Parent.vtable)
 )
+(type $supercallnondefault.Child.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $supercallnondefault.Parent.itable))
 
 ;;; Child Child.$create(int a)
 (func $$create__int@supercallnondefault.Child

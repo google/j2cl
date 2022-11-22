@@ -33,11 +33,16 @@
 )
 
 ;;; Code for gwtincompatible.Implementor [itable.init]
-(global $gwtincompatible.Implementor.itable (ref $itable) (array.init_static $itable 
+(global $gwtincompatible.Implementor.itable (ref $gwtincompatible.Implementor.itable) (struct.new $gwtincompatible.Implementor.itable 
  (struct.new $gwtincompatible.Interface.vtable
  )
  (struct.new $gwtincompatible.Interface.NestedInterface.vtable
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [vtable.init]
@@ -57,12 +62,17 @@
 )
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [itable.init]
-(global $gwtincompatible.Implementor.SomeEnum.1.itable (ref $itable) (array.init_static $itable 
+(global $gwtincompatible.Implementor.SomeEnum.1.itable (ref $gwtincompatible.Implementor.SomeEnum.1.itable) (struct.new $gwtincompatible.Implementor.SomeEnum.1.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for gwtincompatible.GwtIncompatible [INTERFACE]
@@ -103,7 +113,7 @@
 ;;; Code for gwtincompatible.Implementor [CLASS]
 (type $gwtincompatible.Implementor (struct_subtype 
  (field $vtable (ref $gwtincompatible.Implementor.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $gwtincompatible.Implementor.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $gwtincompatible.Interface.ClassWithAbstractMethod)
 )
@@ -115,6 +125,15 @@
  (field $m_compatibleMethod__void (ref $function.m_compatibleMethod__void))
   $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)
 )
+(type $gwtincompatible.Implementor.itable (struct_subtype 
+(field $slot0 (ref $gwtincompatible.Interface.vtable))
+(field $slot1 (ref $gwtincompatible.Interface.NestedInterface.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $gwtincompatible.Interface.ClassWithAbstractMethod.itable))
 
 ;;; Implementor Implementor.$create()
 (func $$create__@gwtincompatible.Implementor
@@ -203,7 +222,7 @@
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [CLASS]
 (type $gwtincompatible.Implementor.SomeEnum.1 (struct_subtype 
  (field $vtable (ref $gwtincompatible.Implementor.SomeEnum.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $gwtincompatible.Implementor.SomeEnum.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -222,6 +241,15 @@
  (field $m_method__void_$pp_gwtincompatible (ref $function.m_method__void_$pp_gwtincompatible))
   $gwtincompatible.Implementor.SomeEnum.vtable)
 )
+(type $gwtincompatible.Implementor.SomeEnum.1.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $gwtincompatible.Implementor.SomeEnum.itable))
 
 ;;; <anonymous> extends SomeEnum <anonymous> extends SomeEnum.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1
@@ -310,7 +338,7 @@
 ;;; Code for gwtincompatible.Implementor.SomeEnum [ENUM]
 (type $gwtincompatible.Implementor.SomeEnum (struct_subtype 
  (field $vtable (ref $gwtincompatible.Implementor.SomeEnum.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $gwtincompatible.Implementor.SomeEnum.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -329,6 +357,15 @@
  (field $m_method__void_$pp_gwtincompatible (ref $function.m_method__void_$pp_gwtincompatible))
   $java.lang.Enum.vtable)
 )
+(type $gwtincompatible.Implementor.SomeEnum.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Comparable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Enum.itable))
 
 ;;; void SomeEnum.$ctor(String $name, int $ordinal)
 (func $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
@@ -490,7 +527,7 @@
 ;;; Code for gwtincompatible.Interface.ClassWithAbstractMethod [CLASS]
 (type $gwtincompatible.Interface.ClassWithAbstractMethod (struct_subtype 
  (field $vtable (ref $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $gwtincompatible.Interface.ClassWithAbstractMethod.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -501,6 +538,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $gwtincompatible.Interface.ClassWithAbstractMethod.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void ClassWithAbstractMethod.$ctor()
 (func $$ctor__void_$p_gwtincompatible_Interface_ClassWithAbstractMethod@gwtincompatible.Interface.ClassWithAbstractMethod

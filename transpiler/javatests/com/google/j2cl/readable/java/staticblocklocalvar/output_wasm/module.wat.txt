@@ -12,13 +12,20 @@
 )
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [itable.init]
-(global $staticblocklocalvar.StaticBlockLocalVar.itable (ref $itable) (array.init_static $itable 
+(global $staticblocklocalvar.StaticBlockLocalVar.itable (ref $staticblocklocalvar.StaticBlockLocalVar.itable) (struct.new $staticblocklocalvar.StaticBlockLocalVar.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [CLASS]
 (type $staticblocklocalvar.StaticBlockLocalVar (struct_subtype 
  (field $vtable (ref $staticblocklocalvar.StaticBlockLocalVar.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $staticblocklocalvar.StaticBlockLocalVar.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -29,6 +36,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $staticblocklocalvar.StaticBlockLocalVar.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; StaticBlockLocalVar StaticBlockLocalVar.$create()
 (func $$create__@staticblocklocalvar.StaticBlockLocalVar

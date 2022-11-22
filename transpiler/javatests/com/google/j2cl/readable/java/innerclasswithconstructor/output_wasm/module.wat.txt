@@ -15,7 +15,14 @@
 )
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [itable.init]
-(global $innerclasswithconstructor.InnerClassWithConstructor.itable (ref $itable) (array.init_static $itable 
+(global $innerclasswithconstructor.InnerClassWithConstructor.itable (ref $innerclasswithconstructor.InnerClassWithConstructor.itable) (struct.new $innerclasswithconstructor.InnerClassWithConstructor.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [vtable.init]
@@ -29,13 +36,20 @@
 )
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [itable.init]
-(global $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable (ref $itable) (array.init_static $itable 
+(global $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable) (struct.new $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [CLASS]
 (type $innerclasswithconstructor.InnerClassWithConstructor (struct_subtype 
  (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $innerclasswithconstructor.InnerClassWithConstructor.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_a__innerclasswithconstructor_InnerClassWithConstructor (mut i32))
   $java.lang.Object)
@@ -47,6 +61,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $innerclasswithconstructor.InnerClassWithConstructor.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerClassWithConstructor InnerClassWithConstructor.$create()
 (func $$create__@innerclasswithconstructor.InnerClassWithConstructor
@@ -119,7 +142,7 @@
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [CLASS]
 (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (struct_subtype 
  (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (field $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32))
@@ -132,6 +155,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerClass InnerClass.$create(InnerClassWithConstructor $outer_this, int b)
 (func $$create__innerclasswithconstructor_InnerClassWithConstructor__int@innerclasswithconstructor.InnerClassWithConstructor.InnerClass

@@ -15,13 +15,20 @@
 )
 
 ;;; Code for staticinitializers.StaticInitializers [itable.init]
-(global $staticinitializers.StaticInitializers.itable (ref $itable) (array.init_static $itable 
+(global $staticinitializers.StaticInitializers.itable (ref $staticinitializers.StaticInitializers.itable) (struct.new $staticinitializers.StaticInitializers.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for staticinitializers.StaticInitializers [CLASS]
 (type $staticinitializers.StaticInitializers (struct_subtype 
  (field $vtable (ref $staticinitializers.StaticInitializers.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $staticinitializers.StaticInitializers.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -32,6 +39,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $staticinitializers.StaticInitializers.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; StaticInitializers StaticInitializers.$create()
 (func $$create__@staticinitializers.StaticInitializers

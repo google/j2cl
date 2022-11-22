@@ -19,7 +19,14 @@
 )
 
 ;;; Code for overridingmethods.Parent [itable.init]
-(global $overridingmethods.Parent.itable (ref $itable) (array.init_static $itable 
+(global $overridingmethods.Parent.itable (ref $overridingmethods.Parent.itable) (struct.new $overridingmethods.Parent.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for overridingmethods.Child [vtable.init]
@@ -35,10 +42,16 @@
 )
 
 ;;; Code for overridingmethods.Child [itable.init]
-(global $overridingmethods.Child.itable (ref $itable) (array.init_static $itable 
+(global $overridingmethods.Child.itable (ref $overridingmethods.Child.itable) (struct.new $overridingmethods.Child.itable 
  (struct.new $overridingmethods.SomeInterface.vtable
   (ref.func $m_bar__void@overridingmethods.Child)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for overridingmethods.SomeInterface [INTERFACE]
@@ -80,7 +93,7 @@
 ;;; Code for overridingmethods.Parent [CLASS]
 (type $overridingmethods.Parent (struct_subtype 
  (field $vtable (ref $overridingmethods.Parent.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $overridingmethods.Parent.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -92,6 +105,15 @@
  (field $m_fun__void (ref $function.m_fun__void))
   $java.lang.Object.vtable)
 )
+(type $overridingmethods.Parent.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Parent Parent.$create()
 (func $$create__@overridingmethods.Parent
@@ -176,7 +198,7 @@
 ;;; Code for overridingmethods.Child [CLASS]
 (type $overridingmethods.Child (struct_subtype 
  (field $vtable (ref $overridingmethods.Child.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $overridingmethods.Child.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $overridingmethods.Parent)
 )
@@ -189,6 +211,15 @@
  (field $m_bar__void (ref $function.m_bar__void))
   $overridingmethods.Parent.vtable)
 )
+(type $overridingmethods.Child.itable (struct_subtype 
+(field $slot0 (ref $overridingmethods.SomeInterface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $overridingmethods.Parent.itable))
 
 ;;; Child Child.$create()
 (func $$create__@overridingmethods.Child

@@ -24,7 +24,14 @@
 )
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions [itable.init]
-(global $arithmeticexpressions.ArithmeticExpressions.itable (ref $itable) (array.init_static $itable 
+(global $arithmeticexpressions.ArithmeticExpressions.itable (ref $arithmeticexpressions.ArithmeticExpressions.itable) (struct.new $arithmeticexpressions.ArithmeticExpressions.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [vtable.init]
@@ -38,13 +45,20 @@
 )
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [itable.init]
-(global $arithmeticexpressions.ArithmeticExpressions.1Ref.itable (ref $itable) (array.init_static $itable 
+(global $arithmeticexpressions.ArithmeticExpressions.1Ref.itable (ref $arithmeticexpressions.ArithmeticExpressions.1Ref.itable) (struct.new $arithmeticexpressions.ArithmeticExpressions.1Ref.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions [CLASS]
 (type $arithmeticexpressions.ArithmeticExpressions (struct_subtype 
  (field $vtable (ref $arithmeticexpressions.ArithmeticExpressions.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $arithmeticexpressions.ArithmeticExpressions.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_bar__arithmeticexpressions_ArithmeticExpressions (mut i64))
  (field $f_intField__arithmeticexpressions_ArithmeticExpressions (mut i64))
@@ -63,6 +77,15 @@
  (field $m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void (ref $function.m_testEffectivelyFinalVariableInAssignmentExpression__boolean__void))
   $java.lang.Object.vtable)
 )
+(type $arithmeticexpressions.ArithmeticExpressions.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ArithmeticExpressions ArithmeticExpressions.$create()
 (func $$create__@arithmeticexpressions.ArithmeticExpressions
@@ -820,7 +843,7 @@
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [CLASS]
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct_subtype 
  (field $vtable (ref $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $arithmeticexpressions.ArithmeticExpressions.1Ref.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__arithmeticexpressions_ArithmeticExpressions_1Ref (ref null $arithmeticexpressions.ArithmeticExpressions))
  (field $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $java.lang.Object)))
@@ -833,6 +856,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $arithmeticexpressions.ArithmeticExpressions.1Ref.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Ref<T> Ref.$create(ArithmeticExpressions $outer_this)
 (func $$create__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions.1Ref

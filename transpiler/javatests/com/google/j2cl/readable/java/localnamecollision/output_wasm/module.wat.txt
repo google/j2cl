@@ -33,7 +33,14 @@
 )
 
 ;;; Code for localnamecollision.Asserts [itable.init]
-(global $localnamecollision.Asserts.itable (ref $itable) (array.init_static $itable 
+(global $localnamecollision.Asserts.itable (ref $localnamecollision.Asserts.itable) (struct.new $localnamecollision.Asserts.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for localnamecollision.Class [vtable.init]
@@ -48,7 +55,14 @@
 )
 
 ;;; Code for localnamecollision.Class [itable.init]
-(global $localnamecollision.Class.itable (ref $itable) (array.init_static $itable 
+(global $localnamecollision.Class.itable (ref $localnamecollision.Class.itable) (struct.new $localnamecollision.Class.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for localnamecollision.LocalNameCollision [vtable.init]
@@ -64,7 +78,14 @@
 )
 
 ;;; Code for localnamecollision.LocalNameCollision [itable.init]
-(global $localnamecollision.LocalNameCollision.itable (ref $itable) (array.init_static $itable 
+(global $localnamecollision.LocalNameCollision.itable (ref $localnamecollision.LocalNameCollision.itable) (struct.new $localnamecollision.LocalNameCollision.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for localnamecollision.A [vtable.init]
@@ -78,7 +99,14 @@
 )
 
 ;;; Code for localnamecollision.A [itable.init]
-(global $localnamecollision.A.itable (ref $itable) (array.init_static $itable 
+(global $localnamecollision.A.itable (ref $localnamecollision.A.itable) (struct.new $localnamecollision.A.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for localnamecollision.A.B [vtable.init]
@@ -92,7 +120,14 @@
 )
 
 ;;; Code for localnamecollision.A.B [itable.init]
-(global $localnamecollision.A.B.itable (ref $itable) (array.init_static $itable 
+(global $localnamecollision.A.B.itable (ref $localnamecollision.A.B.itable) (struct.new $localnamecollision.A.B.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for localnamecollision.package1.A [vtable.init]
@@ -107,7 +142,14 @@
 )
 
 ;;; Code for localnamecollision.package1.A [itable.init]
-(global $localnamecollision.package1.A.itable (ref $itable) (array.init_static $itable 
+(global $localnamecollision.package1.A.itable (ref $localnamecollision.package1.A.itable) (struct.new $localnamecollision.package1.A.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for localnamecollision.package2.A [vtable.init]
@@ -122,13 +164,20 @@
 )
 
 ;;; Code for localnamecollision.package2.A [itable.init]
-(global $localnamecollision.package2.A.itable (ref $itable) (array.init_static $itable 
+(global $localnamecollision.package2.A.itable (ref $localnamecollision.package2.A.itable) (struct.new $localnamecollision.package2.A.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for localnamecollision.Asserts [CLASS]
 (type $localnamecollision.Asserts (struct_subtype 
  (field $vtable (ref $localnamecollision.Asserts.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $localnamecollision.Asserts.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -140,6 +189,15 @@
  (field $m_n__int_$pp_localnamecollision (ref $function.m_n__int_$pp_localnamecollision))
   $java.lang.Object.vtable)
 )
+(type $localnamecollision.Asserts.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Asserts Asserts.$create()
 (func $$create__@localnamecollision.Asserts
@@ -228,7 +286,7 @@
 ;;; Code for localnamecollision.Class [CLASS]
 (type $localnamecollision.Class (struct_subtype 
  (field $vtable (ref $localnamecollision.Class.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $localnamecollision.Class.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -240,6 +298,15 @@
  (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
 )
+(type $localnamecollision.Class.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Class Class.$create()
 (func $$create__@localnamecollision.Class
@@ -333,7 +400,7 @@
 ;;; Code for localnamecollision.LocalNameCollision [CLASS]
 (type $localnamecollision.LocalNameCollision (struct_subtype 
  (field $vtable (ref $localnamecollision.LocalNameCollision.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $localnamecollision.LocalNameCollision.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -346,6 +413,15 @@
  (field $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean (ref $function.m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean))
   $java.lang.Object.vtable)
 )
+(type $localnamecollision.LocalNameCollision.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; void LocalNameCollision.testClassLocalVarCollision()
 (func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision
@@ -504,7 +580,7 @@
 ;;; Code for localnamecollision.A [CLASS]
 (type $localnamecollision.A (struct_subtype 
  (field $vtable (ref $localnamecollision.A.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $localnamecollision.A.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -515,6 +591,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $localnamecollision.A.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; A A.$create()
 (func $$create__@localnamecollision.A
@@ -609,7 +694,7 @@
 ;;; Code for localnamecollision.A.B [CLASS]
 (type $localnamecollision.A.B (struct_subtype 
  (field $vtable (ref $localnamecollision.A.B.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $localnamecollision.A.B.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -620,6 +705,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $localnamecollision.A.B.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; B B.$create()
 (func $$create__@localnamecollision.A.B
@@ -692,7 +786,7 @@
 ;;; Code for localnamecollision.package1.A [CLASS]
 (type $localnamecollision.package1.A (struct_subtype 
  (field $vtable (ref $localnamecollision.package1.A.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $localnamecollision.package1.A.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -704,6 +798,15 @@
  (field $m_m__int (ref $function.m_m__int))
   $java.lang.Object.vtable)
 )
+(type $localnamecollision.package1.A.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; A A.$create()
 (func $$create__@localnamecollision.package1.A
@@ -792,7 +895,7 @@
 ;;; Code for localnamecollision.package2.A [CLASS]
 (type $localnamecollision.package2.A (struct_subtype 
  (field $vtable (ref $localnamecollision.package2.A.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $localnamecollision.package2.A.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -804,6 +907,15 @@
  (field $m_m__int (ref $function.m_m__int))
   $java.lang.Object.vtable)
 )
+(type $localnamecollision.package2.A.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; A A.$create()
 (func $$create__@localnamecollision.package2.A

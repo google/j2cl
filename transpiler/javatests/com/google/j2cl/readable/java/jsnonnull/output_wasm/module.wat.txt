@@ -34,7 +34,14 @@
 )
 
 ;;; Code for jsnonnull.Main [itable.init]
-(global $jsnonnull.Main.itable (ref $itable) (array.init_static $itable 
+(global $jsnonnull.Main.itable (ref $jsnonnull.Main.itable) (struct.new $jsnonnull.Main.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsnonnull.Main.StringComparator [vtable.init]
@@ -57,7 +64,8 @@
 )
 
 ;;; Code for jsnonnull.Main.StringComparator [itable.init]
-(global $jsnonnull.Main.StringComparator.itable (ref $itable) (array.init_static $itable  (ref.null struct)
+(global $jsnonnull.Main.StringComparator.itable (ref $jsnonnull.Main.StringComparator.itable) (struct.new $jsnonnull.Main.StringComparator.itable 
+  (ref.null struct)
  (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.StringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
@@ -69,6 +77,11 @@
   (ref.func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@jsnonnull.Main.StringComparator)
   (ref.func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.StringComparator)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsnonnull.Main.NullableStringComparator [vtable.init]
@@ -91,7 +104,8 @@
 )
 
 ;;; Code for jsnonnull.Main.NullableStringComparator [itable.init]
-(global $jsnonnull.Main.NullableStringComparator.itable (ref $itable) (array.init_static $itable  (ref.null struct)
+(global $jsnonnull.Main.NullableStringComparator.itable (ref $jsnonnull.Main.NullableStringComparator.itable) (struct.new $jsnonnull.Main.NullableStringComparator.itable 
+  (ref.null struct)
  (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.NullableStringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
@@ -103,6 +117,11 @@
   (ref.func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator)
   (ref.func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [vtable.init]
@@ -125,7 +144,8 @@
 )
 
 ;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [itable.init]
-(global $jsnonnull.Main.NonNullableStringSubNullableComparator.itable (ref $itable) (array.init_static $itable  (ref.null struct)
+(global $jsnonnull.Main.NonNullableStringSubNullableComparator.itable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.itable) (struct.new $jsnonnull.Main.NonNullableStringSubNullableComparator.itable 
+  (ref.null struct)
  (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.NullableStringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
@@ -137,12 +157,17 @@
   (ref.func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator)
   (ref.func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jsnonnull.Main [CLASS]
 (type $jsnonnull.Main (struct_subtype 
  (field $vtable (ref $jsnonnull.Main.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsnonnull.Main.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f1__jsnonnull_Main_ (ref null $java.lang.String))
  (field $f_f2__jsnonnull_Main_ (ref null $java.lang.String))
@@ -167,6 +192,15 @@
  (field $m_m4__jsnonnull_Main_MyFunction__void (ref $function.m_m4__jsnonnull_Main_MyFunction__void))
   $java.lang.Object.vtable)
 )
+(type $jsnonnull.Main.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; Main Main.$create(String a)
 (func $$create__java_lang_String@jsnonnull.Main
@@ -368,7 +402,7 @@
 ;;; Code for jsnonnull.Main.StringComparator [CLASS]
 (type $jsnonnull.Main.StringComparator (struct_subtype 
  (field $vtable (ref $jsnonnull.Main.StringComparator.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsnonnull.Main.StringComparator.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -388,6 +422,15 @@
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
   $java.lang.Object.vtable)
 )
+(type $jsnonnull.Main.StringComparator.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref $java.util.Comparator.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; StringComparator StringComparator.$create()
 (func $$create__@jsnonnull.Main.StringComparator
@@ -618,7 +661,7 @@
 ;;; Code for jsnonnull.Main.NullableStringComparator [CLASS]
 (type $jsnonnull.Main.NullableStringComparator (struct_subtype 
  (field $vtable (ref $jsnonnull.Main.NullableStringComparator.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsnonnull.Main.NullableStringComparator.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -638,6 +681,15 @@
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
   $java.lang.Object.vtable)
 )
+(type $jsnonnull.Main.NullableStringComparator.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref $java.util.Comparator.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; NullableStringComparator NullableStringComparator.$create()
 (func $$create__@jsnonnull.Main.NullableStringComparator
@@ -868,7 +920,7 @@
 ;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [CLASS]
 (type $jsnonnull.Main.NonNullableStringSubNullableComparator (struct_subtype 
  (field $vtable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $jsnonnull.Main.NullableStringComparator)
 )
@@ -888,6 +940,15 @@
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
   $jsnonnull.Main.NullableStringComparator.vtable)
 )
+(type $jsnonnull.Main.NonNullableStringSubNullableComparator.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref $java.util.Comparator.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $jsnonnull.Main.NullableStringComparator.itable))
 
 ;;; NonNullableStringSubNullableComparator NonNullableStringSubNullableComparator.$create()
 (func $$create__@jsnonnull.Main.NonNullableStringSubNullableComparator

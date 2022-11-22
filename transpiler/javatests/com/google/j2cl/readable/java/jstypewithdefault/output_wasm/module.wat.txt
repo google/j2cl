@@ -16,16 +16,22 @@
 )
 
 ;;; Code for jstypewithdefault.SomeJsType [itable.init]
-(global $jstypewithdefault.SomeJsType.itable (ref $itable) (array.init_static $itable 
+(global $jstypewithdefault.SomeJsType.itable (ref $jstypewithdefault.SomeJsType.itable) (struct.new $jstypewithdefault.SomeJsType.itable 
  (struct.new $jstypewithdefault.Interface.vtable
   (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for jstypewithdefault.SomeJsType [CLASS]
 (type $jstypewithdefault.SomeJsType (struct_subtype 
  (field $vtable (ref $jstypewithdefault.SomeJsType.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $jstypewithdefault.SomeJsType.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -37,6 +43,15 @@
  (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
   $java.lang.Object.vtable)
 )
+(type $jstypewithdefault.SomeJsType.itable (struct_subtype 
+(field $slot0 (ref $jstypewithdefault.Interface.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; SomeJsType SomeJsType.$create()
 (func $$create__@jstypewithdefault.SomeJsType

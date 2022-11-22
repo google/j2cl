@@ -13,13 +13,20 @@
 )
 
 ;;; Code for continuestatement.ContinueStatement [itable.init]
-(global $continuestatement.ContinueStatement.itable (ref $itable) (array.init_static $itable 
+(global $continuestatement.ContinueStatement.itable (ref $continuestatement.ContinueStatement.itable) (struct.new $continuestatement.ContinueStatement.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for continuestatement.ContinueStatement [CLASS]
 (type $continuestatement.ContinueStatement (struct_subtype 
  (field $vtable (ref $continuestatement.ContinueStatement.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $continuestatement.ContinueStatement.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -31,6 +38,15 @@
  (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
+(type $continuestatement.ContinueStatement.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ContinueStatement ContinueStatement.$create()
 (func $$create__@continuestatement.ContinueStatement

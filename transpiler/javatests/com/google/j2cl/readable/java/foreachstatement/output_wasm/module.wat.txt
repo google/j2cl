@@ -22,7 +22,14 @@
 )
 
 ;;; Code for foreachstatement.ForEachStatement [itable.init]
-(global $foreachstatement.ForEachStatement.itable (ref $itable) (array.init_static $itable 
+(global $foreachstatement.ForEachStatement.itable (ref $foreachstatement.ForEachStatement.itable) (struct.new $foreachstatement.ForEachStatement.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [vtable.init]
@@ -52,7 +59,7 @@
 )
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [itable.init]
-(global $foreachstatement.ForEachStatement.Exception1.itable (ref $itable) (array.init_static $itable 
+(global $foreachstatement.ForEachStatement.Exception1.itable (ref $foreachstatement.ForEachStatement.Exception1.itable) (struct.new $foreachstatement.ForEachStatement.Exception1.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Iterable.vtable
@@ -60,6 +67,11 @@
   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception1)
   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception1)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [vtable.init]
@@ -89,7 +101,7 @@
 )
 
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [itable.init]
-(global $foreachstatement.ForEachStatement.Exception2.itable (ref $itable) (array.init_static $itable 
+(global $foreachstatement.ForEachStatement.Exception2.itable (ref $foreachstatement.ForEachStatement.Exception2.itable) (struct.new $foreachstatement.ForEachStatement.Exception2.itable 
  (struct.new $java.io.Serializable.vtable
  )
  (struct.new $java.lang.Iterable.vtable
@@ -97,6 +109,11 @@
   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception2)
   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception2)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [vtable.init]
@@ -113,18 +130,24 @@
 )
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [itable.init]
-(global $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable (ref $itable) (array.init_static $itable  (ref.null struct)
+(global $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable (ref $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable) (struct.new $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable 
+  (ref.null struct)
  (struct.new $java.lang.Iterable.vtable
   (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
  )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for foreachstatement.ForEachStatement [CLASS]
 (type $foreachstatement.ForEachStatement (struct_subtype 
  (field $vtable (ref $foreachstatement.ForEachStatement.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $foreachstatement.ForEachStatement.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -136,6 +159,15 @@
  (field $m_test__java_lang_Iterable__void (ref $function.m_test__java_lang_Iterable__void))
   $java.lang.Object.vtable)
 )
+(type $foreachstatement.ForEachStatement.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; ForEachStatement ForEachStatement.$create()
 (func $$create__@foreachstatement.ForEachStatement
@@ -185,15 +217,15 @@
  (block
   ;; LOOP: for (Iterator<Throwable> $iterator = iterable.iterator();$iterator.hasNext();) {
   ;;@ foreachstatement/ForEachStatement.java:23:4
-  (local.set $$iterator (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $iterable))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $iterable)) (i32.const 1))) )))
+  (local.set $$iterator (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $iterable))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $iterable)))))))
   (block $LOOP.BREAK
    (loop
-    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) ))))
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
     (block $LOOP.CONTINUE
      (block
       ;; Throwable t = ((Throwable) $iterator.next());
       ;;@ foreachstatement/ForEachStatement.java:23:4
-      (local.set $t (ref.cast_static $java.lang.Throwable (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) ))))
+      (local.set $t (ref.cast_static $java.lang.Throwable (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
       (block
        ;; t.toString();
        ;;@ foreachstatement/ForEachStatement.java:24:6
@@ -267,16 +299,16 @@
        ;;@ foreachstatement/ForEachStatement.java:48:6
        (local.set $$iterator (block (result (ref null $java.lang.Object))
         (local.set $$qualifier (local.get $e))
-        (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 1))) ))
+        (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier))))))
        ))
        (block $LOOP.BREAK
         (loop
-         (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) ))))
+         (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
          (block $LOOP.CONTINUE
           (block
            ;; Object o = $iterator.next();
            ;;@ foreachstatement/ForEachStatement.java:48:6
-           (local.set $o (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) )))
+           (local.set $o (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator)))))))
           )
          )
          (br 0)
@@ -317,16 +349,16 @@
   ;;@ foreachstatement/ForEachStatement.java:61:4
   (local.set $$iterator (block (result (ref null $java.lang.Object))
    (local.set $$qualifier (local.get $iterable))
-   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 1))) ))
+   (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast_static $java.lang.Iterable.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $$qualifier))))))
   ))
   (block $LOOP.BREAK
    (loop
-    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) ))))
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
     (block $LOOP.CONTINUE
      (block
       ;; String s = ((String) $iterator.next());
       ;;@ foreachstatement/ForEachStatement.java:61:4
-      (local.set $s (ref.cast_static $java.lang.String (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) ))))
+      (local.set $s (ref.cast_static $java.lang.String (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator))))))))
      )
     )
     (br 0)
@@ -341,13 +373,13 @@
   (local.set $$iterator_1 (call_ref $function.m_iterator__java_util_Iterator (ref.as_non_null (local.get $anotherIterable))(struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable $m_iterator__java_util_Iterator (struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable $vtable(local.get $anotherIterable)))))
   (block $LOOP_1.BREAK
    (loop
-    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator_1)) (i32.const 0))) ))))
+    (br_if 1 (i32.eqz (call_ref $function.m_hasNext__boolean (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator_1))))))))
     (block $LOOP_1.CONTINUE
      (block
       ;; int s = (Integer $qualifier = ((Integer) $iterator.next()),$qualifier.intValue());
       ;;@ foreachstatement/ForEachStatement.java:64:4
       (local.set $s_1 (block (result i32)
-       (local.set $$qualifier_1 (ref.cast_static $java.lang.Integer (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator_1)) (i32.const 0))) ))))
+       (local.set $$qualifier_1 (ref.cast_static $java.lang.Integer (call_ref $function.m_next__java_lang_Object (ref.as_non_null (local.get $$iterator_1))(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $$iterator_1))))))))
        (call_ref $function.m_intValue__int (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
       ))
      )
@@ -398,7 +430,7 @@
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [CLASS]
 (type $foreachstatement.ForEachStatement.Exception1 (struct_subtype 
  (field $vtable (ref $foreachstatement.ForEachStatement.Exception1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $foreachstatement.ForEachStatement.Exception1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -432,6 +464,15 @@
  (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
   $java.lang.Exception.vtable)
 )
+(type $foreachstatement.ForEachStatement.Exception1.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Iterable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Exception.itable))
 
 ;;; Exception1 Exception1.$create()
 (func $$create__@foreachstatement.ForEachStatement.Exception1
@@ -555,7 +596,7 @@
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [CLASS]
 (type $foreachstatement.ForEachStatement.Exception2 (struct_subtype 
  (field $vtable (ref $foreachstatement.ForEachStatement.Exception2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $foreachstatement.ForEachStatement.Exception2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -589,6 +630,15 @@
  (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
   $java.lang.Exception.vtable)
 )
+(type $foreachstatement.ForEachStatement.Exception2.itable (struct_subtype 
+(field $slot0 (ref $java.io.Serializable.vtable))
+(field $slot1 (ref $java.lang.Iterable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Exception.itable))
 
 ;;; Exception2 Exception2.$create()
 (func $$create__@foreachstatement.ForEachStatement.Exception2
@@ -712,7 +762,7 @@
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [CLASS]
 (type $foreachstatement.ForEachStatement.IterableReturningTypeVariable (struct_subtype 
  (field $vtable (ref $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -726,6 +776,15 @@
  (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
   $java.lang.Object.vtable)
 )
+(type $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref $java.lang.Iterable.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; IterableReturningTypeVariable<T> IterableReturningTypeVariable.$create()
 (func $$create__@foreachstatement.ForEachStatement.IterableReturningTypeVariable

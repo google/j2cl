@@ -33,7 +33,14 @@
 )
 
 ;;; Code for anonymousinnerclass.A [itable.init]
-(global $anonymousinnerclass.A.itable (ref $itable) (array.init_static $itable 
+(global $anonymousinnerclass.A.itable (ref $anonymousinnerclass.A.itable) (struct.new $anonymousinnerclass.A.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass [vtable.init]
@@ -48,7 +55,14 @@
 )
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass [itable.init]
-(global $anonymousinnerclass.AnonymousInnerClass.itable (ref $itable) (array.init_static $itable 
+(global $anonymousinnerclass.AnonymousInnerClass.itable (ref $anonymousinnerclass.AnonymousInnerClass.itable) (struct.new $anonymousinnerclass.AnonymousInnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for anonymousinnerclass.A.B [vtable.init]
@@ -62,7 +76,14 @@
 )
 
 ;;; Code for anonymousinnerclass.A.B [itable.init]
-(global $anonymousinnerclass.A.B.itable (ref $itable) (array.init_static $itable 
+(global $anonymousinnerclass.A.B.itable (ref $anonymousinnerclass.A.B.itable) (struct.new $anonymousinnerclass.A.B.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1 [vtable.init]
@@ -76,7 +97,14 @@
 )
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1 [itable.init]
-(global $anonymousinnerclass.AnonymousInnerClass.1.itable (ref $itable) (array.init_static $itable 
+(global $anonymousinnerclass.AnonymousInnerClass.1.itable (ref $anonymousinnerclass.AnonymousInnerClass.1.itable) (struct.new $anonymousinnerclass.AnonymousInnerClass.1.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.2 [vtable.init]
@@ -90,7 +118,14 @@
 )
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.2 [itable.init]
-(global $anonymousinnerclass.AnonymousInnerClass.2.itable (ref $itable) (array.init_static $itable 
+(global $anonymousinnerclass.AnonymousInnerClass.2.itable (ref $anonymousinnerclass.AnonymousInnerClass.2.itable) (struct.new $anonymousinnerclass.AnonymousInnerClass.2.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.3 [vtable.init]
@@ -104,7 +139,14 @@
 )
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.3 [itable.init]
-(global $anonymousinnerclass.AnonymousInnerClass.3.itable (ref $itable) (array.init_static $itable 
+(global $anonymousinnerclass.AnonymousInnerClass.3.itable (ref $anonymousinnerclass.AnonymousInnerClass.3.itable) (struct.new $anonymousinnerclass.AnonymousInnerClass.3.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.InnerClass [vtable.init]
@@ -118,7 +160,14 @@
 )
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.InnerClass [itable.init]
-(global $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable (ref $itable) (array.init_static $itable 
+(global $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable (ref $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable) (struct.new $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1C [vtable.init]
@@ -132,13 +181,20 @@
 )
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1C [itable.init]
-(global $anonymousinnerclass.AnonymousInnerClass.1C.itable (ref $itable) (array.init_static $itable 
+(global $anonymousinnerclass.AnonymousInnerClass.1C.itable (ref $anonymousinnerclass.AnonymousInnerClass.1C.itable) (struct.new $anonymousinnerclass.AnonymousInnerClass.1C.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
  ))
 
 ;;; Code for anonymousinnerclass.A [CLASS]
 (type $anonymousinnerclass.A (struct_subtype 
  (field $vtable (ref $anonymousinnerclass.A.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $anonymousinnerclass.A.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -149,6 +205,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $anonymousinnerclass.A.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; A A.$create()
 (func $$create__@anonymousinnerclass.A
@@ -221,7 +286,7 @@
 ;;; Code for anonymousinnerclass.AnonymousInnerClass [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass (struct_subtype 
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $anonymousinnerclass.AnonymousInnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   $java.lang.Object)
 )
@@ -233,6 +298,15 @@
  (field $m_test__int__void (ref $function.m_test__int__void))
   $java.lang.Object.vtable)
 )
+(type $anonymousinnerclass.AnonymousInnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; AnonymousInnerClass AnonymousInnerClass.$create()
 (func $$create__@anonymousinnerclass.AnonymousInnerClass
@@ -334,7 +408,7 @@
 ;;; Code for anonymousinnerclass.A.B [CLASS]
 (type $anonymousinnerclass.A.B (struct_subtype 
  (field $vtable (ref $anonymousinnerclass.A.B.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $anonymousinnerclass.A.B.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_A_B (ref null $anonymousinnerclass.A))
   $java.lang.Object)
@@ -346,6 +420,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $anonymousinnerclass.A.B.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; B B.$create(A $outer_this)
 (func $$create__anonymousinnerclass_A@anonymousinnerclass.A.B
@@ -420,7 +503,7 @@
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1 [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.1 (struct_subtype 
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.1.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $anonymousinnerclass.AnonymousInnerClass.1.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass (ref null $anonymousinnerclass.AnonymousInnerClass))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1 (ref null $anonymousinnerclass.AnonymousInnerClass))
@@ -433,6 +516,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)
 )
+(type $anonymousinnerclass.AnonymousInnerClass.1.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable))
 
 ;;; <anonymous> extends InnerClass <anonymous> extends InnerClass.$create(AnonymousInnerClass $outer_this)
 (func $$create__anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass.1
@@ -507,7 +599,7 @@
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.2 [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.2 (struct_subtype 
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.2.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $anonymousinnerclass.AnonymousInnerClass.2.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_A_B (ref null $anonymousinnerclass.A))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_2 (ref null $anonymousinnerclass.AnonymousInnerClass))
@@ -521,6 +613,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $anonymousinnerclass.A.B.vtable)
 )
+(type $anonymousinnerclass.AnonymousInnerClass.2.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $anonymousinnerclass.A.B.itable))
 
 ;;; <anonymous> extends B <anonymous> extends B.$create(AnonymousInnerClass $outer_this, A $captured_a)
 (func $$create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A@anonymousinnerclass.AnonymousInnerClass.2
@@ -597,7 +698,7 @@
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.3 [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.3 (struct_subtype 
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.3.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $anonymousinnerclass.AnonymousInnerClass.3.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C (ref null $anonymousinnerclass.AnonymousInnerClass))
  (field $f_fInC__anonymousinnerclass_AnonymousInnerClass_1C (mut i32))
@@ -613,6 +714,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $anonymousinnerclass.AnonymousInnerClass.1C.vtable)
 )
+(type $anonymousinnerclass.AnonymousInnerClass.3.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $anonymousinnerclass.AnonymousInnerClass.1C.itable))
 
 ;;; <anonymous> extends C <anonymous> extends C.$create(AnonymousInnerClass $outer_this, int $captured_arg)
 (func $$create__anonymousinnerclass_AnonymousInnerClass__int@anonymousinnerclass.AnonymousInnerClass.3
@@ -689,7 +799,7 @@
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.InnerClass [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.InnerClass (struct_subtype 
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass (ref null $anonymousinnerclass.AnonymousInnerClass))
   $java.lang.Object)
@@ -701,6 +811,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; InnerClass InnerClass.$create(AnonymousInnerClass $outer_this)
 (func $$create__anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass
@@ -775,7 +894,7 @@
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1C [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.1C (struct_subtype 
  (field $vtable (ref $anonymousinnerclass.AnonymousInnerClass.1C.vtable)) 
- (field $itable (ref $itable))
+ (field $itable (ref $anonymousinnerclass.AnonymousInnerClass.1C.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C (ref null $anonymousinnerclass.AnonymousInnerClass))
  (field $f_fInC__anonymousinnerclass_AnonymousInnerClass_1C (mut i32))
@@ -789,6 +908,15 @@
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
+(type $anonymousinnerclass.AnonymousInnerClass.1C.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
 ;;; C C.$create(AnonymousInnerClass $outer_this, int $captured_arg)
 (func $$create__anonymousinnerclass_AnonymousInnerClass__int@anonymousinnerclass.AnonymousInnerClass.1C
