@@ -147,7 +147,7 @@ open class AutoBoxing {
  }
 
  open fun sumWithoutBoxing(
-  vararg @ObjCName("withIdArray", exact = false) numbers: Any?
+  vararg @ObjCName("withNSObjectArray", exact = false) numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -159,7 +159,7 @@ open class AutoBoxing {
  }
 
  open fun sumWithoutBoxingJsVarargs(
-  vararg @ObjCName("withIdArray", exact = false) numbers: Any?
+  vararg @ObjCName("withNSObjectArray", exact = false) numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0

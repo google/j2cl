@@ -44,7 +44,7 @@ enum class Enum2 {
  ): this(foo!!.ordinal)
 
  constructor(
-  vararg @ObjCName("withIdArray", exact = false) somePars: Any?
+  vararg @ObjCName("withNSObjectArray", exact = false) somePars: Any?
  ): this(somePars!!.size) {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }

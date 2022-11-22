@@ -147,7 +147,7 @@ open class Main {
 
   @JvmStatic
   fun <T> generics(
-   vararg @ObjCName("withIdArray", exact = false) elements: T
+   vararg @ObjCName("withNSObjectArray", exact = false) elements: T
   ): T {
    val elements_1: Array<T>? = elements as Array<T>?
    return elements_1!![0]
@@ -173,7 +173,7 @@ open class Main {
  @ObjCName("JsvarargsMain_NativeObject", exact = true)
  open class NativeObject {
   constructor(
-   vararg @ObjCName("withIdArray", exact = false) pars: Any?
+   vararg @ObjCName("withNSObjectArray", exact = false) pars: Any?
   ) {
    val pars_1: Array<Any?>? = pars as Array<Any?>?
   }
@@ -183,7 +183,7 @@ open class Main {
  open class SubVarargsConstructorClass: Main.NativeObject {
   constructor(
    @ObjCName("withInt", exact = false) i: Int,
-   vararg @ObjCName("withIdArray", exact = false) args: Any?
+   vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
   ): super(*(args as Array<Any?>?)!!) {
    val args_1: Array<Any?>? = args as Array<Any?>?
   }
@@ -193,7 +193,7 @@ open class Main {
  fun interface Function {
   fun f1(
    @ObjCName("withInt", exact = false) i: Int,
-   vararg @ObjCName("withIdArray", exact = false) args: Any?
+   vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
   ): Any?
  }
 
@@ -241,7 +241,7 @@ open class Main {
  fun interface GenericFunction<T> {
   fun m(
    @ObjCName("withId", exact = false) i: T,
-   vararg @ObjCName("withIdArray", exact = false) args: T
+   vararg @ObjCName("withNSObjectArray", exact = false) args: T
   ): Any?
  }
 }

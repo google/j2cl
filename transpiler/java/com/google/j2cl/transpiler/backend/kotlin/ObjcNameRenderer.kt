@@ -40,7 +40,7 @@ internal fun Renderer.renderObjCNameAnnotation(typeDeclaration: TypeDeclaration)
   render("@")
   renderQualifiedName("kotlin.native.ObjCName")
   renderInParentheses {
-    renderString(typeDeclaration.objCName)
+    renderString(typeDeclaration.objCName(useId = true))
     render(", exact = true")
   }
   renderNewLine()
@@ -50,22 +50,21 @@ internal fun Renderer.renderObjCNameAnnotation(parameterDescriptor: ParameterDes
   render("@")
   renderQualifiedName("kotlin.native.ObjCName")
   renderInParentheses {
-    renderString("with${parameterDescriptor.typeDescriptor.objCName.titleCase}")
+    renderString("with${parameterDescriptor.typeDescriptor.objCName(useId = true).titleCase}")
     render(", exact = false")
   }
   render(" ")
 }
 
-private val TypeDeclaration.objCName: String
-  get() =
-    when (qualifiedBinaryName) {
-      "java.lang.Object" -> "id"
-      "java.lang.String" -> "NSString"
-      "java.lang.Class" -> "IOSClass"
-      "java.lang.Number" -> "NSNumber"
-      "java.lang.Cloneable" -> "NSCopying"
-      else -> objCPackagePrefix + objCSimpleName
-    }
+private fun TypeDeclaration.objCName(useId: Boolean): String =
+  when (qualifiedBinaryName) {
+    "java.lang.Object" -> if (useId) "id" else "NSObject"
+    "java.lang.String" -> "NSString"
+    "java.lang.Class" -> "IOSClass"
+    "java.lang.Number" -> "NSNumber"
+    "java.lang.Cloneable" -> "NSCopying"
+    else -> objCPackagePrefix + objCSimpleName
+  }
 
 private val TypeDeclaration.objCPackagePrefix: String
   get() =
@@ -80,28 +79,28 @@ private val String.titleCase
 private val String.toObjCName
   get() = replace('$', '_')
 
-private val TypeDescriptor.objCName: String
-  get() =
-    when (this) {
-      is PrimitiveTypeDescriptor -> {
-        when (this) {
-          PrimitiveTypes.BOOLEAN -> "boolean"
-          PrimitiveTypes.BYTE -> "byte"
-          PrimitiveTypes.SHORT -> "short"
-          PrimitiveTypes.INT -> "int"
-          PrimitiveTypes.LONG -> "long"
-          PrimitiveTypes.CHAR -> "char"
-          PrimitiveTypes.FLOAT -> "float"
-          PrimitiveTypes.DOUBLE -> "double"
-          // TODO(litstrong): figure out how to handle Void or void
-          else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
-        }
+private fun TypeDescriptor.objCName(useId: Boolean): String =
+  when (this) {
+    is PrimitiveTypeDescriptor -> {
+      when (this) {
+        PrimitiveTypes.BOOLEAN -> "boolean"
+        PrimitiveTypes.BYTE -> "byte"
+        PrimitiveTypes.SHORT -> "short"
+        PrimitiveTypes.INT -> "int"
+        PrimitiveTypes.LONG -> "long"
+        PrimitiveTypes.CHAR -> "char"
+        PrimitiveTypes.FLOAT -> "float"
+        PrimitiveTypes.DOUBLE -> "double"
+        // TODO(litstrong): figure out how to handle Void or void
+        else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
       }
-      is ArrayTypeDescriptor -> leafTypeDescriptor.objCName + "Array" + dimensionsSuffix
-      is DeclaredTypeDescriptor -> typeDeclaration.objCName.titleCase
-      is TypeVariable -> upperBoundTypeDescriptor.objCName
-      else -> "id"
     }
+    is ArrayTypeDescriptor ->
+      leafTypeDescriptor.objCName(useId = false) + "Array" + dimensionsSuffix
+    is DeclaredTypeDescriptor -> typeDeclaration.objCName(useId = useId)
+    is TypeVariable -> upperBoundTypeDescriptor.objCName(useId = useId)
+    else -> "id"
+  }
 
 private val ArrayTypeDescriptor.dimensionsSuffix
   get() = if (dimensions > 1) "$dimensions" else ""
