@@ -130,7 +130,7 @@ open class Main {
 @ObjCName("NativekttypesSubclass", exact = true)
 open class Subclass<V>: KInterface<V>, KTopLevel<V> {
  constructor(
-  @ObjCName("withNSObject", exact = false) v: V
+  @ObjCName("withId", exact = false) v: V
  ): super(v)
 
  open override fun renamedMethod(): Int {
@@ -181,7 +181,7 @@ open class Subclass<V>: KInterface<V>, KTopLevel<V> {
 @ObjCName("NativekttypesSubsubclass", exact = true)
 open class Subsubclass<V>: Subclass<V> {
  constructor(
-  @ObjCName("withNSObject", exact = false) v: V
+  @ObjCName("withId", exact = false) v: V
  ): super(v)
 
  open override fun renamedMethod(): Int {

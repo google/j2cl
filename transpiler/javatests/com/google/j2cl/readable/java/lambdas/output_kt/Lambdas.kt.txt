@@ -106,7 +106,7 @@ open class Lambdas {
 
  open fun <T> callWithTypeVariable(
   @ObjCName("withLambdasLambdas_GenericFunctionalInterface", exact = false) intf: Lambdas.GenericFunctionalInterface<T>?,
-  @ObjCName("withNSObject", exact = false) e: T
+  @ObjCName("withId", exact = false) e: T
  ): T {
   return intf!!.m(e)
  }
@@ -266,15 +266,15 @@ open class Lambdas {
  @ObjCName("LambdasLambdas_GenericFunctionalInterface", exact = true)
  fun interface GenericFunctionalInterface<T> {
   fun m(
-   @ObjCName("withNSObject", exact = false) i: T
+   @ObjCName("withId", exact = false) i: T
   ): T
  }
 
  @ObjCName("LambdasLambdas_BiFunction", exact = true)
  fun interface BiFunction<T, U, R> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) t: T,
-   @ObjCName("withNSObject", exact = false) u: U
+   @ObjCName("withId", exact = false) t: T,
+   @ObjCName("withId", exact = false) u: U
   ): R
 
   fun <V> andThen(
@@ -289,7 +289,7 @@ open class Lambdas {
  @ObjCName("LambdasLambdas_Function", exact = true)
  fun interface Function<T, R> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): R
 
   companion object {
@@ -332,7 +332,7 @@ open class Lambdas {
  @ObjCName("LambdasLambdas_GenericJsFunction", exact = true)
  fun interface GenericJsFunction<R, T> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): R
  }
 
@@ -374,14 +374,14 @@ open class Lambdas {
  @ObjCName("LambdasLambdas_JustADefaultT", exact = true)
  interface JustADefaultT<T> {
   fun method(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ) {}
  }
 
  @ObjCName("LambdasLambdas_JustADefaultS", exact = true)
  interface JustADefaultS<S> {
   fun method(
-   @ObjCName("withNSObject", exact = false) t: S
+   @ObjCName("withId", exact = false) t: S
   ) {}
  }
 

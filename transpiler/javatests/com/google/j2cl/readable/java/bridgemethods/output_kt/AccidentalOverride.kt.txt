@@ -17,14 +17,14 @@ import kotlin.native.ObjCName
 @ObjCName("BridgemethodsI", exact = true)
 fun interface I<T, S> {
  fun `fun`(
-  @ObjCName("withNSObject", exact = false) s: S
+  @ObjCName("withId", exact = false) s: S
  ): T
 }
 
 @ObjCName("BridgemethodsA", exact = true)
 open class A<T, S> {
  open fun `fun`(
-  @ObjCName("withNSObject", exact = false) s: S
+  @ObjCName("withId", exact = false) s: S
  ): T {
   return null as T
  }

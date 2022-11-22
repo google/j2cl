@@ -165,7 +165,7 @@ open class InnerClassInitOrder {
  @ObjCName("InnerclassinitorderInnerClassInitOrder_OuterRefFromSuperCtorBase", exact = true)
  open class OuterRefFromSuperCtorBase {
   constructor(
-   @ObjCName("withNSObject", exact = false) o: Any?
+   @ObjCName("withId", exact = false) o: Any?
   ) {
    o!!.hashCode()
   }
@@ -184,7 +184,7 @@ open class InnerClassInitOrder {
  @ObjCName("InnerclassinitorderInnerClassInitOrder_OuterRefFromThisCtorCall", exact = true)
  open inner class OuterRefFromThisCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
   constructor(
-   @ObjCName("withNSObject", exact = false) `object`: Any?
+   @ObjCName("withId", exact = false) `object`: Any?
   ): super(`object`)
 
   constructor(): this(object : Any() {

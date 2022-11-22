@@ -21,12 +21,12 @@ import kotlin.native.ObjCName
 @ObjCName("GenericmethodGenericMethod", exact = true)
 open class GenericMethod<T> {
  open fun <T_1, S> foo(
-  @ObjCName("withNSObject", exact = false) f: T_1,
-  @ObjCName("withNSObject", exact = false) s: S
+  @ObjCName("withId", exact = false) f: T_1,
+  @ObjCName("withId", exact = false) s: S
  ) {}
 
  open fun `fun`(
-  @ObjCName("withNSObject", exact = false) o: Any?
+  @ObjCName("withId", exact = false) o: Any?
  ) {}
 
  open fun <T_1: Exception?> `fun`(
@@ -42,12 +42,12 @@ open class GenericMethod<T> {
    ) {}
 
    open fun <T_1> fun2(
-    @ObjCName("withNSObject", exact = false) t: T_1
+    @ObjCName("withId", exact = false) t: T_1
    ) {}
   }
   open class ___1LocalClass<T>: GenericMethod<T>() {
    open fun fun2(
-    @ObjCName("withNSObject", exact = false) t: T
+    @ObjCName("withId", exact = false) t: T
    ) {}
 
    open fun <T_1: Number?> fun2(
@@ -62,7 +62,7 @@ open class GenericMethod<T> {
  }
 
  open fun <T_1> `fun`(
-  @ObjCName("withNSObjectArray", exact = false) array: Array<T_1>?
+  @ObjCName("withIdArray", exact = false) array: Array<T_1>?
  ): Array<T_1>? {
   return array
  }
@@ -135,7 +135,7 @@ open class GenericMethod<T> {
   @JvmStatic
   fun <V> testLowerWildcardBound(
    @ObjCName("withGenericmethodGenericMethod_Consumer", exact = false) consumer: GenericMethod.Consumer<in V>?,
-   @ObjCName("withNSObject", exact = false) v: V
+   @ObjCName("withId", exact = false) v: V
   ) {
    consumer!!.accept(v)
   }
@@ -180,7 +180,7 @@ open class GenericMethod<T> {
  @ObjCName("GenericmethodGenericMethod_Consumer", exact = true)
  fun interface Consumer<V> {
   fun accept(
-   @ObjCName("withNSObject", exact = false) v: V
+   @ObjCName("withId", exact = false) v: V
   )
  }
 

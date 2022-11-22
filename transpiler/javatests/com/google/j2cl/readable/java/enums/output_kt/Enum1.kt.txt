@@ -44,7 +44,7 @@ enum class Enum2 {
  ): this(foo!!.ordinal)
 
  constructor(
-  vararg @ObjCName("withNSObjectArray", exact = false) somePars: Any?
+  vararg @ObjCName("withIdArray", exact = false) somePars: Any?
  ): this(somePars!!.size) {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }
@@ -58,7 +58,7 @@ enum class Enum2 {
  companion object {
   @JvmStatic
   fun f(
-   @ObjCName("withNSObject", exact = false) o: Any?
+   @ObjCName("withId", exact = false) o: Any?
   ): Enum2? {
    return null
   }

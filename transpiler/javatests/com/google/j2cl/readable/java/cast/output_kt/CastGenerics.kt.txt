@@ -45,7 +45,7 @@ open class CastGenerics<T, E: Number?> {
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
    fun nestedGenericMethod_private_2(
-    @ObjCName("withNSObject", exact = false) o: Any?
+    @ObjCName("withId", exact = false) o: Any?
    ) {
     val t: TT? = o as TT?
    }
@@ -53,7 +53,7 @@ open class CastGenerics<T, E: Number?> {
  }
 
  open fun <EE> method(
-  @ObjCName("withNSObject", exact = false) o: Any?
+  @ObjCName("withId", exact = false) o: Any?
  ): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
   if (o is CastGenerics.Empty1) {
    return (o as EE?) as EE

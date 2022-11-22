@@ -86,7 +86,7 @@ open class Main {
 
   @JvmStatic
   fun <T> boxingPassthrough_private_2(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): T {
    return t
   }
@@ -175,7 +175,7 @@ open class Main {
   @JvmField var value: T = null as T
 
   constructor(
-   @ObjCName("withNSObject", exact = false) value: T
+   @ObjCName("withId", exact = false) value: T
   ) {
    this.value = value
   }

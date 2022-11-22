@@ -59,7 +59,7 @@ internal fun Renderer.renderObjCNameAnnotation(parameterDescriptor: ParameterDes
 private val TypeDeclaration.objCName: String
   get() =
     when (qualifiedBinaryName) {
-      "java.lang.Object" -> "NSObject"
+      "java.lang.Object" -> "id"
       "java.lang.String" -> "NSString"
       "java.lang.Class" -> "IOSClass"
       "java.lang.Number" -> "NSNumber"

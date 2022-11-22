@@ -53,7 +53,7 @@ open class Main {
  fun interface Function {
   fun f1(
    @ObjCName("withNSString", exact = false) s: String?,
-   vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
+   vararg @ObjCName("withIdArray", exact = false) args: Any?
   ): Any?
  }
 
@@ -68,8 +68,8 @@ open class Main {
  @ObjCName("JsoptionalMain_I", exact = true)
  fun interface I<T> {
   fun m(
-   @ObjCName("withNSObject", exact = false) t: T,
-   @ObjCName("withNSObject", exact = false) o: Any?
+   @ObjCName("withId", exact = false) t: T,
+   @ObjCName("withId", exact = false) o: Any?
   )
  }
 
@@ -81,7 +81,7 @@ open class Main {
  @ObjCName("JsoptionalMain_SpecializedSubtype", exact = true)
  open inner class SpecializedSubtype: Main.I<String?> {
   constructor(
-   @ObjCName("withNSObject", exact = false) a: Any?
+   @ObjCName("withId", exact = false) a: Any?
   )
 
   open override fun m(t: String?, o: Any?) {}

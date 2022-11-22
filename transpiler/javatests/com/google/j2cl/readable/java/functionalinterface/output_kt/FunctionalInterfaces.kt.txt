@@ -23,7 +23,7 @@ open class FunctionalInterfaces {
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_Parametrized", exact = true)
  fun interface Parametrized<T> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): T
  }
 
@@ -55,7 +55,7 @@ open class FunctionalInterfaces {
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", exact = true)
  interface WithParametrizedMethod {
   fun <T> apply(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): T
  }
 

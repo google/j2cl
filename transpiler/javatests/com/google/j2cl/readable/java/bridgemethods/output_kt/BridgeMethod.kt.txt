@@ -30,12 +30,12 @@ import kotlin.native.ObjCName
 @ObjCName("BridgemethodsSomeInterface", exact = true)
 interface SomeInterface<T, S> {
  fun foo(
-  @ObjCName("withNSObject", exact = false) t: T,
-  @ObjCName("withNSObject", exact = false) s: S
+  @ObjCName("withId", exact = false) t: T,
+  @ObjCName("withId", exact = false) s: S
  )
 
  fun foo(
-  @ObjCName("withNSObject", exact = false) t: T,
+  @ObjCName("withId", exact = false) t: T,
   @ObjCName("withNSNumber", exact = false) n: Number?
  )
 }
@@ -43,8 +43,8 @@ interface SomeInterface<T, S> {
 @ObjCName("BridgemethodsSuperParent", exact = true)
 open class SuperParent<T, S> {
  open fun foo(
-  @ObjCName("withNSObject", exact = false) t: T,
-  @ObjCName("withNSObject", exact = false) s: S
+  @ObjCName("withId", exact = false) t: T,
+  @ObjCName("withId", exact = false) s: S
  ) {}
 }
 
@@ -57,7 +57,7 @@ open class Parent<T: Error?>: SuperParent<T, Number?>() {
  ) {}
 
  open fun <T_1> `fun`(
-  @ObjCName("withNSObject", exact = false) t: T_1
+  @ObjCName("withId", exact = false) t: T_1
  ) {}
 }
 
@@ -75,7 +75,7 @@ open class BridgeMethod: SomeInterface<AssertionError?, Number?>, Parent<Asserti
 @ObjCName("BridgemethodsSomeOtherFooInterface", exact = true)
 fun interface SomeOtherFooInterface<T> {
  fun foo(
-  @ObjCName("withNSObject", exact = false) t: T,
+  @ObjCName("withId", exact = false) t: T,
   @ObjCName("withJavaLangDouble", exact = false) s: Double?
  )
 }
@@ -113,7 +113,7 @@ fun interface Getter {
 @ObjCName("BridgemethodsClassWithParameterizedGet", exact = true)
 open class ClassWithParameterizedGet<T> {
  open fun get(
-  @ObjCName("withNSObject", exact = false) t: T
+  @ObjCName("withId", exact = false) t: T
  ): T {
   return null as T
  }
@@ -177,7 +177,7 @@ open class TestCase102 {
  @ObjCName("BridgemethodsTestCase102_B", exact = true)
  abstract class B<B1>: TestCase102.BI1, TestCase102.BI2 {
   abstract fun set(
-   @ObjCName("withNSObject", exact = false) value: B1
+   @ObjCName("withId", exact = false) value: B1
   )
  }
 

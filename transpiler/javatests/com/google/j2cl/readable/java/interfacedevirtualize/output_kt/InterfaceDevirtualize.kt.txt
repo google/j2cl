@@ -17,14 +17,14 @@ import kotlin.native.ObjCName
 open class InterfaceDevirtualize {
  open fun <T> compare0(
   @ObjCName("withJavaLangComparable", exact = false) c: Comparable<T & Any>?,
-  @ObjCName("withNSObject", exact = false) t: T
+  @ObjCName("withId", exact = false) t: T
  ): Int {
   return c!!.compareTo(t!!)
  }
 
  open fun compare1(
   @ObjCName("withJavaLangComparable", exact = false) c: Comparable<Any>?,
-  @ObjCName("withNSObject", exact = false) o: Any?
+  @ObjCName("withId", exact = false) o: Any?
  ): Int {
   return c!!.compareTo(o!!)
  }

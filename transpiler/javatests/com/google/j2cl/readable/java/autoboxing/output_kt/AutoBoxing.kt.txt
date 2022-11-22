@@ -141,13 +141,13 @@ open class AutoBoxing {
  }
 
  open fun takesObjectAndReturnsPrimitiveDouble(
-  @ObjCName("withNSObject", exact = false) o: Any?
+  @ObjCName("withId", exact = false) o: Any?
  ): Double {
   return o as Double
  }
 
  open fun sumWithoutBoxing(
-  vararg @ObjCName("withNSObjectArray", exact = false) numbers: Any?
+  vararg @ObjCName("withIdArray", exact = false) numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -159,7 +159,7 @@ open class AutoBoxing {
  }
 
  open fun sumWithoutBoxingJsVarargs(
-  vararg @ObjCName("withNSObjectArray", exact = false) numbers: Any?
+  vararg @ObjCName("withIdArray", exact = false) numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0

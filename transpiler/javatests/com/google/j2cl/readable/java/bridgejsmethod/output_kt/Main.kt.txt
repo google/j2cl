@@ -45,13 +45,13 @@ open class Main {
  @ObjCName("BridgejsmethodMain_A", exact = true)
  open class A<T> {
   open fun `fun`(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): T {
    return t
   }
 
   open fun bar(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ) {}
  }
 
@@ -65,7 +65,7 @@ open class Main {
  @ObjCName("BridgejsmethodMain_J", exact = true)
  fun interface J<T> {
   fun bar(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   )
  }
 
@@ -101,7 +101,7 @@ open class Main {
  @ObjCName("BridgejsmethodMain_G", exact = true)
  fun interface G<V> {
   fun enclose(
-   @ObjCName("withNSObject", exact = false) value: V
+   @ObjCName("withId", exact = false) value: V
   ): V
  }
 
@@ -115,8 +115,8 @@ open class Main {
  @ObjCName("BridgejsmethodMain_K", exact = true)
  open class K<K1, K2> {
   open fun `fun`(
-   @ObjCName("withNSObject", exact = false) k1: K1,
-   @ObjCName("withNSObject", exact = false) k2: K2
+   @ObjCName("withId", exact = false) k1: K1,
+   @ObjCName("withId", exact = false) k2: K2
   ) {}
  }
 
@@ -169,11 +169,11 @@ open class Main {
  @ObjCName("BridgejsmethodMain_GrandParent", exact = true)
  open inner class GrandParent<T> {
   open fun jsMethod(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ) {}
 
   open fun method(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ) {}
  }
 

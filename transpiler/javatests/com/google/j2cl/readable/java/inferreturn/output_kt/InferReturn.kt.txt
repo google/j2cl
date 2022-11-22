@@ -20,7 +20,7 @@ open class InferReturn<T> {
  companion object {
   @JvmStatic
   fun <T_1> inferGeneric(
-   @ObjCName("withNSObject", exact = false) foo: T_1
+   @ObjCName("withId", exact = false) foo: T_1
   ): InferReturn<T_1>? {
    return InferReturn<T_1>()
   }
@@ -45,14 +45,14 @@ open class InferReturn<T> {
 
   @JvmStatic
   fun <V> newArrayList(
-   @ObjCName("withNSObject", exact = false) foo: V
+   @ObjCName("withId", exact = false) foo: V
   ): ArrayList<V>? {
    return ArrayList<V>()
   }
 
   @JvmStatic
   fun <V> newArray(
-   @ObjCName("withNSObject", exact = false) foo: V
+   @ObjCName("withId", exact = false) foo: V
   ): Array<V>? {
    return arrayOfNulls<Any>(0) as Array<V>?
   }
@@ -64,7 +64,7 @@ open class InferReturn<T> {
 
   @JvmStatic
   fun acceptsArrayOfObject(
-   @ObjCName("withNSObjectArray", exact = false) foo: Array<Any?>?
+   @ObjCName("withIdArray", exact = false) foo: Array<Any?>?
   ) {}
  }
 }

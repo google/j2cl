@@ -30,14 +30,14 @@ open class MultipleAbstractParents {
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_List", exact = true)
  fun interface List<T> {
   fun getFoo(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): String?
  }
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_Collection", exact = true)
  fun interface Collection<T> {
   fun getFoo(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): String?
  }
 
@@ -47,7 +47,7 @@ open class MultipleAbstractParents {
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractCollection", exact = true)
  abstract class AbstractCollection<T> {
   open fun getFoo(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): String? {
    return "AbstractCollection"
   }

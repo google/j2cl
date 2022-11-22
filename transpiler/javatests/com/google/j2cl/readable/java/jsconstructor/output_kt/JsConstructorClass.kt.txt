@@ -121,7 +121,7 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_SubVarargs", exact = true)
  open class SubVarargs: JsConstructorClass.Varargs {
   constructor(
-   @ObjCName("withNSObject", exact = false) i: Any?,
+   @ObjCName("withId", exact = false) i: Any?,
    vararg @ObjCName("withIntArray", exact = false) args: Int
   ): super(*(args)!!)
 
@@ -148,14 +148,14 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {
   constructor(
-   @ObjCName("withNSObject", exact = false) b: Any?
+   @ObjCName("withId", exact = false) b: Any?
   )
  }
 
  @ObjCName("JsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", exact = true)
  open class JsConstructorSubtypeOfRegularType: JsConstructorClass.RegularType {
   constructor(
-   @ObjCName("withNSObject", exact = false) `object`: Any?
+   @ObjCName("withId", exact = false) `object`: Any?
   ): super(`object`)
 
   constructor(): this(Any())

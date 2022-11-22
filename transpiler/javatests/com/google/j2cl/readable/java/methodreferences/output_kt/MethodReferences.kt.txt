@@ -130,7 +130,7 @@ open class MethodReferences<T> {
  @ObjCName("MethodreferencesMethodReferences_Predicate", exact = true)
  fun interface Predicate<T> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) parameter: T
+   @ObjCName("withId", exact = false) parameter: T
   ): Boolean
  }
 
@@ -151,15 +151,15 @@ open class MethodReferences<T> {
  @ObjCName("MethodreferencesMethodReferences_Function", exact = true)
  fun interface Function<T, U> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): U
  }
 
  @ObjCName("MethodreferencesMethodReferences_BiFunction", exact = true)
  fun interface BiFunction<T, U, V> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) t: T,
-   @ObjCName("withNSObject", exact = false) u: U
+   @ObjCName("withId", exact = false) t: T,
+   @ObjCName("withId", exact = false) u: U
   ): V
  }
 
@@ -171,15 +171,15 @@ open class MethodReferences<T> {
  @ObjCName("MethodreferencesMethodReferences_JsFunctionInterface", exact = true)
  fun interface JsFunctionInterface<T, U> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ): U
  }
 
  @ObjCName("MethodreferencesMethodReferences_JsBiFunction", exact = true)
  fun interface JsBiFunction<T, U, V> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) t: T,
-   @ObjCName("withNSObject", exact = false) u: U
+   @ObjCName("withId", exact = false) t: T,
+   @ObjCName("withId", exact = false) u: U
   ): V
  }
 }

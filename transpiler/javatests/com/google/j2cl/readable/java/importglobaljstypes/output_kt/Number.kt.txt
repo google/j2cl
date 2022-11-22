@@ -50,7 +50,7 @@ open class Number {
  @ObjCName("ImportglobaljstypesNumber_NativeFunction", exact = true)
  fun interface NativeFunction<T> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) thisContext: Any?,
+   @ObjCName("withId", exact = false) thisContext: Any?,
    @ObjCName("withIntArray", exact = false) argsArray: IntArray?
   ): T
  }

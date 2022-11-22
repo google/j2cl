@@ -27,7 +27,7 @@ open class Main {
  }
 
  open fun <T> parametricAsyncMethod(
-  @ObjCName("withNSObject", exact = false) value: T
+  @ObjCName("withId", exact = false) value: T
  ): Main.IThenable<T>? {
   return Main.Promise.resolve<T>(Main.await_private_2<T>(Main.Promise.resolve<T>(value)))
  }
@@ -104,7 +104,7 @@ open class Main {
   companion object {
    @JvmStatic
    external fun <T> resolve(
-    @ObjCName("withNSObject", exact = false) value: T
+    @ObjCName("withId", exact = false) value: T
    ): Main.Promise<T>?
   }
  }

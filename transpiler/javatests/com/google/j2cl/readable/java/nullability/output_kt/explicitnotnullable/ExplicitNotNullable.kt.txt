@@ -145,7 +145,7 @@ open class ExplicitNotNullable {
   @JvmStatic
   fun <N> genericNullableMethod(
    @ObjCName("withNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNullable", exact = false) o: ExplicitNotNullable.ParameterizedNullable<N>,
-   @ObjCName("withNSObject", exact = false) n: N?
+   @ObjCName("withId", exact = false) n: N?
   ) {
    o!!.setNullable(n)
    o!!.setNonNull(n as N)
@@ -164,7 +164,7 @@ open class ExplicitNotNullable {
   @JvmStatic
   fun <N: Any> genericNonNullMethod(
    @ObjCName("withNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedNonNullable", exact = false) o: ExplicitNotNullable.ParameterizedNonNullable<N>,
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
@@ -183,7 +183,7 @@ open class ExplicitNotNullable {
   @JvmStatic
   fun <N: Any> genericDefaultNullabilityMethod(
    @ObjCName("withNullabilityExplicitnotnullableExplicitNotNullable_ParameterizedDefaultNullability", exact = false) o: ExplicitNotNullable.ParameterizedDefaultNullability<N>,
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
@@ -366,7 +366,7 @@ open class ExplicitNotNullable {
 
   @JvmStatic
   fun <T: Any> consume(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   ) {}
 
   @JvmStatic
@@ -421,7 +421,7 @@ open class ExplicitNotNullable {
   @JvmField var defaultNullability: N
 
   constructor(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {
    this.nonNullable = n
    this.defaultNullability = n
@@ -440,15 +440,15 @@ open class ExplicitNotNullable {
   }
 
   open fun setNullable(
-   @ObjCName("withNSObject", exact = false) n: N?
+   @ObjCName("withId", exact = false) n: N?
   ) {}
 
   open fun setNonNull(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {}
 
   open fun setDefaultNullability(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {}
  }
 
@@ -461,7 +461,7 @@ open class ExplicitNotNullable {
   @JvmField var defaultNullability: N = null as N
 
   constructor(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {
    this.nonNullable = n
    this.defaultNullability = n
@@ -480,15 +480,15 @@ open class ExplicitNotNullable {
   }
 
   open fun setNullable(
-   @ObjCName("withNSObject", exact = false) n: N?
+   @ObjCName("withId", exact = false) n: N?
   ) {}
 
   open fun setNonNull(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {}
 
   open fun setDefaultNullability(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {}
  }
 
@@ -501,7 +501,7 @@ open class ExplicitNotNullable {
   @JvmField var defaultNullability: N
 
   constructor(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {
    this.nonNullable = n
    this.defaultNullability = n
@@ -520,22 +520,22 @@ open class ExplicitNotNullable {
   }
 
   open fun setNullable(
-   @ObjCName("withNSObject", exact = false) n: N?
+   @ObjCName("withId", exact = false) n: N?
   ) {}
 
   open fun setNonNull(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {}
 
   open fun setDefaultNullability(
-   @ObjCName("withNSObject", exact = false) n: N
+   @ObjCName("withId", exact = false) n: N
   ) {}
  }
 
  @ObjCName("NullabilityExplicitnotnullableExplicitNotNullable_Consumer", exact = true)
  fun interface Consumer<T> {
   fun accept(
-   @ObjCName("withNSObject", exact = false) t: T
+   @ObjCName("withId", exact = false) t: T
   )
  }
 
@@ -554,7 +554,7 @@ open class ExplicitNotNullable {
  @ObjCName("NullabilityExplicitnotnullableExplicitNotNullable_Function", exact = true)
  fun interface Function<I, O> {
   fun apply(
-   @ObjCName("withNSObject", exact = false) i: I
+   @ObjCName("withId", exact = false) i: I
   ): O
  }
 
