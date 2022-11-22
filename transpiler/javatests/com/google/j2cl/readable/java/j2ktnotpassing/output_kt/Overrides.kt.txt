@@ -1,0 +1,28 @@
+// Generated from "j2ktnotpassing/Overrides.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import j2ktnotpassing.Overrides
+import kotlin.OptIn
+import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktnotpassingOverrides", exact = true)
+open class Overrides {
+ @ObjCName("J2ktnotpassingOverrides_Parent", exact = true)
+ interface Parent<T> {
+  fun <E: T> foo(
+   @ObjCName("withId", exact = false) e: E
+  )
+ }
+
+ @ObjCName("J2ktnotpassingOverrides_Child", exact = true)
+ interface Child: Overrides.Parent<String?> {
+  fun <E: String?> foo(
+   @ObjCName("withNSString", exact = false) e: E
+  )
+ }
+}

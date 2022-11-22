@@ -1,0 +1,45 @@
+goog.module('j2ktnotpassing.Overrides.Child$impl');
+
+const Parent = goog.require('j2ktnotpassing.Overrides.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('j2ktnotpassing.Overrides.Child.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {Parent<?string>}
+ */
+class Child {
+ /** @abstract @nodts @template E */
+ m_foo__java_lang_String__void(/** E */ e) {}
+ /** @nodts @return {Child} */
+ static $adapt(/** ?function(?):void */ fn) {
+  Child.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  Child.$clinit = () =>{};
+  Child.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Parent.$markImplementor(ctor);
+  ctor.prototype.$implements__j2ktnotpassing_Overrides_Child = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__j2ktnotpassing_Overrides_Child;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('j2ktnotpassing.Overrides.Child.$LambdaAdaptor$impl');
+ }
+}
+Child.$markImplementor(/**@type {Function}*/ (Child));
+$Util.$setClassMetadataForInterface(Child, 'j2ktnotpassing.Overrides$Child');
+
+exports = Child;
+
+//# sourceMappingURL=Overrides$Child.js.map

@@ -1,0 +1,61 @@
+goog.module('j2ktnotpassing.Overrides.Child.$LambdaAdaptor$impl');
+
+const Child = goog.require('j2ktnotpassing.Overrides.Child$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {Child}
+ */
+class $LambdaAdaptor extends j_l_Object {
+ /** @nodts */
+ constructor(/** ?function(?):void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(?):void} @nodts*/
+  this.f_fn__j2ktnotpassing_Overrides_Child_$LambdaAdaptor;
+  this.$ctor__j2ktnotpassing_Overrides_Child_$LambdaAdaptor__j2ktnotpassing_Overrides_Child_$JsFunction__void(fn);
+ }
+ /** @nodts */
+ $ctor__j2ktnotpassing_Overrides_Child_$LambdaAdaptor__j2ktnotpassing_Overrides_Child_$JsFunction__void(/** ?function(?):void */ fn) {
+  this.$ctor__java_lang_Object__void();
+  this.f_fn__j2ktnotpassing_Overrides_Child_$LambdaAdaptor = fn;
+ }
+ /** @override @nodts */
+ m_foo__java_lang_String__void(/** E */ arg0) {
+  {
+   let $function = this.f_fn__j2ktnotpassing_Overrides_Child_$LambdaAdaptor;
+   $function(arg0);
+  }
+ }
+ //Bridge method.
+ /** @override @nodts */
+ m_foo__java_lang_Object__void(/** E */ arg0) {
+  this.m_foo__java_lang_String__void(/**@type {?}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ /** @nodts */
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+Child.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata($LambdaAdaptor, 'j2ktnotpassing.Overrides$Child$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+
+//# sourceMappingURL=Overrides$Child$$LambdaAdaptor.js.map

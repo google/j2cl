@@ -19,6 +19,15 @@
 ;;; Code for j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters [static fields]
 (global $f_$initialized__j2ktnotpassing_ExplicitNotNullable_DependentTypeParameters (mut i32) (i32.const 0))
 
+;;; Code for j2ktnotpassing.Overrides [static fields]
+(global $f_$initialized__j2ktnotpassing_Overrides (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.Overrides.Parent [static fields]
+(global $f_$initialized__j2ktnotpassing_Overrides_Parent (mut i32) (i32.const 0))
+
+;;; Code for j2ktnotpassing.Overrides.Child [static fields]
+(global $f_$initialized__j2ktnotpassing_Overrides_Child (mut i32) (i32.const 0))
+
 ;;; Code for j2ktnotpassing.DefaultNullable [vtable.init]
 (global $j2ktnotpassing.DefaultNullable.vtable (ref $j2ktnotpassing.DefaultNullable.vtable) 
  (struct.new $j2ktnotpassing.DefaultNullable.vtable
@@ -120,6 +129,27 @@
 
 ;;; Code for j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters [itable.init]
 (global $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable (ref $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable) (struct.new $j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for j2ktnotpassing.Overrides [vtable.init]
+(global $j2ktnotpassing.Overrides.vtable (ref $j2ktnotpassing.Overrides.vtable) 
+ (struct.new $j2ktnotpassing.Overrides.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@j2ktnotpassing.Overrides)
+ )
+)
+
+;;; Code for j2ktnotpassing.Overrides [itable.init]
+(global $j2ktnotpassing.Overrides.itable (ref $j2ktnotpassing.Overrides.itable) (struct.new $j2ktnotpassing.Overrides.itable 
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -741,3 +771,167 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.ExplicitNotNullable.DependentTypeParameters)
+
+;;; Code for j2ktnotpassing.Overrides [CLASS]
+(type $j2ktnotpassing.Overrides (struct_subtype 
+ (field $vtable (ref $j2ktnotpassing.Overrides.vtable)) 
+ (field $itable (ref $j2ktnotpassing.Overrides.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $j2ktnotpassing.Overrides.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+(type $j2ktnotpassing.Overrides.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
+
+;;; Overrides Overrides.$create()
+(func $$create__@j2ktnotpassing.Overrides
+ (result (ref null $j2ktnotpassing.Overrides))
+ ;;@ j2ktnotpassing/Overrides.java:18:13
+ (local $$instance (ref null $j2ktnotpassing.Overrides))
+ (block
+  ;; Overrides $instance = new Overrides.<init>(0);
+  ;;@ j2ktnotpassing/Overrides.java:18:13
+  (local.set $$instance (struct.new $j2ktnotpassing.Overrides (ref.as_non_null (global.get $j2ktnotpassing.Overrides.vtable)) (ref.as_non_null (global.get $j2ktnotpassing.Overrides.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ j2ktnotpassing/Overrides.java:18:13
+  (call $$ctor__void_$p_j2ktnotpassing_Overrides@j2ktnotpassing.Overrides (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ j2ktnotpassing/Overrides.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Overrides.$ctor()
+(func $$ctor__void_$p_j2ktnotpassing_Overrides@j2ktnotpassing.Overrides
+ (param $this (ref null $j2ktnotpassing.Overrides))
+ ;;@ j2ktnotpassing/Overrides.java:18:13
+ (block
+  ;; j2ktnotpassing.Overrides.$clinit();
+  ;;@ j2ktnotpassing/Overrides.java:18:13
+  (call $$clinit__void@j2ktnotpassing.Overrides )
+  ;; Object.this.$ctor();
+  ;;@ j2ktnotpassing/Overrides.java:18:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Overrides.$clinit()
+(func $$clinit__void@j2ktnotpassing.Overrides
+ ;;@ j2ktnotpassing/Overrides.java:18:13
+ (block
+  ;; if (j2ktnotpassing.Overrides.$initialized) return;
+  ;;@ j2ktnotpassing/Overrides.java:18:13
+  (if (global.get $f_$initialized__j2ktnotpassing_Overrides)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/Overrides.java:18:13
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.Overrides.$initialized = true);
+  ;;@ j2ktnotpassing/Overrides.java:18:13
+  (global.set $f_$initialized__j2ktnotpassing_Overrides (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ j2ktnotpassing/Overrides.java:18:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Overrides.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.Overrides
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $j2ktnotpassing.Overrides))
+ (local.set $this (ref.cast_static $j2ktnotpassing.Overrides (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.Overrides();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.Overrides__java_lang_Class (ref.func $$getJ2ktnotpassing.Overrides__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.Overrides)
+
+;;; Code for j2ktnotpassing.Overrides.Parent [INTERFACE]
+(type $j2ktnotpassing.Overrides.Parent.vtable (struct 
+ (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+ )
+)
+
+;;; void Parent.$clinit()
+(func $$clinit__void@j2ktnotpassing.Overrides.Parent
+ ;;@ j2ktnotpassing/Overrides.java:19:19
+ (block
+  ;; if (j2ktnotpassing.Overrides.Parent.$initialized) return;
+  ;;@ j2ktnotpassing/Overrides.java:19:19
+  (if (global.get $f_$initialized__j2ktnotpassing_Overrides_Parent)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/Overrides.java:19:19
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.Overrides.Parent.$initialized = true);
+  ;;@ j2ktnotpassing/Overrides.java:19:19
+  (global.set $f_$initialized__j2ktnotpassing_Overrides_Parent (i32.const 1))
+ )
+)
+
+;;; Class<?> Parent.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.Overrides.Parent
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.Overrides.Parent();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.Overrides.Parent__java_lang_Class (ref.func $$getJ2ktnotpassing.Overrides.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.Overrides.Parent)
+
+;;; Code for j2ktnotpassing.Overrides.Child [INTERFACE]
+(type $j2ktnotpassing.Overrides.Child.vtable (struct 
+ (field $m_foo__java_lang_String__void (ref $function.m_foo__java_lang_String__void))
+ )
+)
+
+;;; void Child.$clinit()
+(func $$clinit__void@j2ktnotpassing.Overrides.Child
+ ;;@ j2ktnotpassing/Overrides.java:23:19
+ (block
+  ;; if (j2ktnotpassing.Overrides.Child.$initialized) return;
+  ;;@ j2ktnotpassing/Overrides.java:23:19
+  (if (global.get $f_$initialized__j2ktnotpassing_Overrides_Child)
+   (then
+    ;; return;
+    ;;@ j2ktnotpassing/Overrides.java:23:19
+    (return )
+   )
+  )
+  ;; (j2ktnotpassing.Overrides.Child.$initialized = true);
+  ;;@ j2ktnotpassing/Overrides.java:23:19
+  (global.set $f_$initialized__j2ktnotpassing_Overrides_Child (i32.const 1))
+ )
+)
+
+;;; Class<?> Child.getClass()
+(func $m_getClass__java_lang_Class@j2ktnotpassing.Overrides.Child
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJ2ktnotpassing.Overrides.Child();
+  (return (call $function.no.side.effects.$getJ2ktnotpassing.Overrides.Child__java_lang_Class (ref.func $$getJ2ktnotpassing.Overrides.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@j2ktnotpassing.Overrides.Child)

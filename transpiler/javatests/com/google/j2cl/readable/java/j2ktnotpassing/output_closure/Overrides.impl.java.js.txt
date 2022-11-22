@@ -1,0 +1,40 @@
+goog.module('j2ktnotpassing.Overrides$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Overrides extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!Overrides} */
+ static $create__() {
+  Overrides.$clinit();
+  let $instance = new Overrides();
+  $instance.$ctor__j2ktnotpassing_Overrides__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__j2ktnotpassing_Overrides__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  Overrides.$clinit = () =>{};
+  Overrides.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Overrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Overrides, 'j2ktnotpassing.Overrides');
+
+exports = Overrides;
+
+//# sourceMappingURL=Overrides.js.map
