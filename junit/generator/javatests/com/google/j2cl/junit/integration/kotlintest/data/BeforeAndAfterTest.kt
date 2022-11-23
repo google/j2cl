@@ -19,15 +19,20 @@ import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 /** TestCase used for integration testing for j2cl JUnit support. */
 open class BeforeAndAfterTest {
+  var ran = "beforeRan"
+
   init {
+    ran = "init"
     TestCaseLogger.log("constructor")
   }
 
   @BeforeTest
   fun setUp() {
+    assertEquals("init", ran, "The value for ran should be init")
     TestCaseLogger.log("setUp")
   }
 

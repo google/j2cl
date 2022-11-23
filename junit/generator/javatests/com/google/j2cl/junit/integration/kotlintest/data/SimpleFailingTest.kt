@@ -17,6 +17,7 @@ package com.google.j2cl.junit.integration.kotlintest.data
 
 import com.google.j2cl.junit.integration.testing.testlogger.TestCaseLogger
 import kotlin.test.Test
+import kotlin.test.fail
 
 /**
  * TestCase used for integration testing for j2cl JUnit support.
@@ -34,6 +35,6 @@ class SimpleFailingTest {
   @Test
   fun testOther() {
     TestCaseLogger.log("testOther")
-    throw RuntimeException()
+    fail("fail testOther")
   }
 }
