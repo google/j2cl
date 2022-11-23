@@ -114,10 +114,7 @@ open class Main {
 
  @ObjCName("BridgejsmethodMain_K", exact = true)
  open class K<K1, K2> {
-  open fun `fun`(
-   @ObjCName("withId", exact = false) k1: K1,
-   @ObjCName("withId", exact = false) k2: K2
-  ) {}
+  open fun `fun`(k1: K1, k2: K2) {}
  }
 
  @ObjCName("BridgejsmethodMain_L", exact = true)
@@ -125,19 +122,16 @@ open class Main {
   open override fun `fun`(string: String?, l1: L1) {}
  }
 
- @ObjCName("BridgejsmethodMain_M", exact = true)
  fun interface M {
   fun getB(): Main.B?
  }
 
- @ObjCName("BridgejsmethodMain_N", exact = true)
  abstract inner class N: Main.M {
   constructor()
 
   abstract override fun getB(): Main.B?
  }
 
- @ObjCName("BridgejsmethodMain_O", exact = true)
  open inner class O: Main.N() {
   @JvmField var b_private_3: Main.B? = null
 
@@ -146,27 +140,22 @@ open class Main {
   }
  }
 
- @ObjCName("BridgejsmethodMain_P", exact = true)
  fun interface P {
   fun getKey(): String?
  }
 
- @ObjCName("BridgejsmethodMain_Q", exact = true)
  abstract inner class Q: Main.P {
   abstract override fun getKey(): String?
  }
 
- @ObjCName("BridgejsmethodMain_R", exact = true)
  abstract inner class R: Main.Q() {
   open override fun getKey(): String? {
    return null
   }
  }
 
- @ObjCName("BridgejsmethodMain_S", exact = true)
  open inner class S: Main.R() {}
 
- @ObjCName("BridgejsmethodMain_GrandParent", exact = true)
  open inner class GrandParent<T> {
   open fun jsMethod(
    @ObjCName("withId", exact = false) t: T
@@ -177,13 +166,11 @@ open class Main {
   ) {}
  }
 
- @ObjCName("BridgejsmethodMain_Parent", exact = true)
  open inner class Parent<T: Main.Parent<T>?>: Main.GrandParent<T>() {
   open override fun jsMethod(t: T) {}
 
   open override fun method(t: T) {}
  }
 
- @ObjCName("BridgejsmethodMain_Child", exact = true)
  open inner class Child: Main.Parent<Main.Child?>() {}
 }

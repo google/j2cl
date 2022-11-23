@@ -27,7 +27,6 @@ import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("BridgemethodsSomeInterface", exact = true)
 interface SomeInterface<T, S> {
  fun foo(
   @ObjCName("withId", exact = false) t: T,
@@ -40,7 +39,6 @@ interface SomeInterface<T, S> {
  )
 }
 
-@ObjCName("BridgemethodsSuperParent", exact = true)
 open class SuperParent<T, S> {
  open fun foo(
   @ObjCName("withId", exact = false) t: T,
@@ -48,7 +46,6 @@ open class SuperParent<T, S> {
  ) {}
 }
 
-@ObjCName("BridgemethodsParent", exact = true)
 open class Parent<T: Error?>: SuperParent<T, Number?>() {
  open override fun foo(t: T, s: Number?) {}
 
@@ -72,7 +69,6 @@ open class BridgeMethod: SomeInterface<AssertionError?, Number?>, Parent<Asserti
  ) {}
 }
 
-@ObjCName("BridgemethodsSomeOtherFooInterface", exact = true)
 fun interface SomeOtherFooInterface<T> {
  fun foo(
   @ObjCName("withId", exact = false) t: T,
@@ -80,14 +76,12 @@ fun interface SomeOtherFooInterface<T> {
  )
 }
 
-@ObjCName("BridgemethodsDualUnrelatedBridges", exact = true)
 open class DualUnrelatedBridges: SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {
  open override fun foo(s: String?, n: Double?) {}
 
  open override fun foo(s: String?, n: Number?) {}
 }
 
-@ObjCName("BridgemethodsSuperDualUnrelatedAccidentalBridges", exact = true)
 open class SuperDualUnrelatedAccidentalBridges {
  open fun foo(
   @ObjCName("withNSString", exact = false) s: String?,
@@ -100,17 +94,14 @@ open class SuperDualUnrelatedAccidentalBridges {
  ) {}
 }
 
-@ObjCName("BridgemethodsDualUnrelatedAccidentalBridges", exact = true)
 open class DualUnrelatedAccidentalBridges: SomeInterface<String?, Double?>, SomeOtherFooInterface<String?>, SuperDualUnrelatedAccidentalBridges() {}
 
-@ObjCName("BridgemethodsGetter", exact = true)
 fun interface Getter {
  fun get(
   @ObjCName("withNSString", exact = false) s: String?
  ): String?
 }
 
-@ObjCName("BridgemethodsClassWithParameterizedGet", exact = true)
 open class ClassWithParameterizedGet<T> {
  open fun get(
   @ObjCName("withId", exact = false) t: T
@@ -119,7 +110,6 @@ open class ClassWithParameterizedGet<T> {
  }
 }
 
-@ObjCName("BridgemethodsAccidentalOverrideBridge", exact = true)
 open class AccidentalOverrideBridge: Getter, ClassWithParameterizedGet<String?>() {
  open fun test() {
   val g: Getter? = AccidentalOverrideBridge()
@@ -127,9 +117,7 @@ open class AccidentalOverrideBridge: Getter, ClassWithParameterizedGet<String?>(
  }
 }
 
-@ObjCName("BridgemethodsTestCase10036", exact = true)
 open class TestCase10036 {
- @ObjCName("BridgemethodsTestCase10036_BI3", exact = true)
  interface BI3 {
   fun get(
    @ObjCName("withNSString", exact = false) value: String?
@@ -138,19 +126,16 @@ open class TestCase10036 {
   }
  }
 
- @ObjCName("BridgemethodsTestCase10036_BI2", exact = true)
  fun interface BI2 {
   fun get(
    @ObjCName("withNSString", exact = false) value: String?
   ): String?
  }
 
- @ObjCName("BridgemethodsTestCase10036_BI1", exact = true)
  fun interface BI1: TestCase10036.BI3 {
   override fun get(value: String?): String?
  }
 
- @ObjCName("BridgemethodsTestCase10036_B", exact = true)
  abstract class B<B1: Comparable<*>?>: TestCase10036.BI1, TestCase10036.BI2 {
   abstract fun get(
    @ObjCName("withJavaLangComparable", exact = false) value: B1
@@ -158,30 +143,25 @@ open class TestCase10036 {
  }
 }
 
-@ObjCName("BridgemethodsTestCase102", exact = true)
 open class TestCase102 {
- @ObjCName("BridgemethodsTestCase102_BI2", exact = true)
  fun interface BI2 {
   fun set(
    @ObjCName("withNSString", exact = false) value: String?
   )
  }
 
- @ObjCName("BridgemethodsTestCase102_BI1", exact = true)
  fun interface BI1 {
   fun set(
    @ObjCName("withNSString", exact = false) value: String?
   )
  }
 
- @ObjCName("BridgemethodsTestCase102_B", exact = true)
  abstract class B<B1>: TestCase102.BI1, TestCase102.BI2 {
   abstract fun set(
    @ObjCName("withId", exact = false) value: B1
   )
  }
 
- @ObjCName("BridgemethodsTestCase102_C", exact = true)
  open inner class C<B1>: TestCase102.B<B1>() {
   open override fun set(value: String?) {}
 
@@ -189,21 +169,16 @@ open class TestCase102 {
  }
 }
 
-@ObjCName("BridgemethodsParameterizedParent", exact = true)
 open class ParameterizedParent<T: ParameterizedParent<T>?> {
- open fun <Q: T> m(
-  @ObjCName("withBridgemethodsParameterizedParent", exact = false) t: Q
- ): Q {
+ open fun <Q: T> m(t: Q): Q {
   return null as Q
  }
 }
 
-@ObjCName("BridgemethodsReparametrerizedChild", exact = true)
 open class ReparametrerizedChild<E: ReparametrerizedChild<E>?>: ParameterizedParent<E>() {
  open override fun <S: E> m(t: S): S {
   return null as S
  }
 }
 
-@ObjCName("BridgemethodsLeafChild", exact = true)
 open class LeafChild: ReparametrerizedChild<LeafChild?>() {}

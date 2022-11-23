@@ -8,26 +8,19 @@ import j2kt.TypeWildCards
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
 
-@ObjCName("J2ktTypeWildCards", exact = true)
 open class TypeWildCards {
  companion object {
   @JvmStatic
-  fun testSupplierWithUpperAndLowerBounds(
-   @ObjCName("withJ2ktTypeWildCards_SupplierWithUpperBound", exact = false) supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?
-  ) {
+  fun testSupplierWithUpperAndLowerBounds(supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?) {
    val parent: TypeWildCards.Parent? = supplier!!.get() as TypeWildCards.Parent?
   }
  }
 
- @ObjCName("J2ktTypeWildCards_Parent", exact = true)
  open class Parent {}
 
- @ObjCName("J2ktTypeWildCards_Child", exact = true)
  open class Child: TypeWildCards.Parent() {}
 
- @ObjCName("J2ktTypeWildCards_SupplierWithUpperBound", exact = true)
  fun interface SupplierWithUpperBound<T: TypeWildCards.Parent?> {
   fun get(): T
  }

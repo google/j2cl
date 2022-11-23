@@ -133,17 +133,12 @@ open class GenericMethod<T> {
   }
 
   @JvmStatic
-  fun <V> testLowerWildcardBound(
-   @ObjCName("withGenericmethodGenericMethod_Consumer", exact = false) consumer: GenericMethod.Consumer<in V>?,
-   @ObjCName("withId", exact = false) v: V
-  ) {
+  fun <V> testLowerWildcardBound(consumer: GenericMethod.Consumer<in V>?, v: V) {
    consumer!!.accept(v)
   }
 
   @JvmStatic
-  fun <V> testUpperWildcardBound(
-   @ObjCName("withGenericmethodGenericMethod_Supplier", exact = false) supplier: GenericMethod.Supplier<out V>?
-  ): V {
+  fun <V> testUpperWildcardBound(supplier: GenericMethod.Supplier<out V>?): V {
    return supplier!!.get()
   }
 
@@ -156,35 +151,30 @@ open class GenericMethod<T> {
   }
  }
 
- @ObjCName("GenericmethodGenericMethod_SuperContainer", exact = true)
  open class SuperContainer<C: GenericMethod.Container<*>?> {
   open fun get(): C {
    return null as C
   }
  }
 
- @ObjCName("GenericmethodGenericMethod_Container", exact = true)
  open class Container<CT: GenericMethod.Content?> {
   open fun get(): CT {
    return null as CT
   }
  }
 
- @ObjCName("GenericmethodGenericMethod_Content", exact = true)
  open class Content {
   open fun getProp(): String? {
    return null
   }
  }
 
- @ObjCName("GenericmethodGenericMethod_Consumer", exact = true)
  fun interface Consumer<V> {
   fun accept(
    @ObjCName("withId", exact = false) v: V
   )
  }
 
- @ObjCName("GenericmethodGenericMethod_Supplier", exact = true)
  fun interface Supplier<V> {
   fun get(): V
  }

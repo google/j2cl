@@ -16,7 +16,6 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("JspropertiesFoo", exact = true)
 open class Foo {
  companion object {
   @JvmField var f_private_2: Int = 0
@@ -47,7 +46,6 @@ open class Foo {
  }
 }
 
-@ObjCName("JspropertiesBar", exact = true)
 open class Bar {
  @JvmField var f_private_2: Int = 0
 
@@ -72,7 +70,6 @@ open class Bar {
  }
 }
 
-@ObjCName("JspropertiesNativeFoo", exact = true)
 open class NativeFoo {
  external open fun getA(): Any?
 

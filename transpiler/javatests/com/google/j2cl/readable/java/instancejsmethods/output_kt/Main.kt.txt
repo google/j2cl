@@ -14,12 +14,10 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("InstancejsmethodsMyInterface", exact = true)
 fun interface MyInterface {
  fun intfFoo(): Int
 }
 
-@ObjCName("InstancejsmethodsSuperParent", exact = true)
 open class SuperParent {
  open fun `fun`(
   @ObjCName("withInt", exact = false) a: Int,
@@ -36,7 +34,6 @@ open class SuperParent {
  }
 }
 
-@ObjCName("InstancejsmethodsParent", exact = true)
 open class Parent: SuperParent() {
  open override fun `fun`(a: Int, b: Int): Int {
   return a + b
@@ -53,7 +50,6 @@ open class Parent: SuperParent() {
  }
 }
 
-@ObjCName("InstancejsmethodsChild", exact = true)
 open class Child: MyInterface, Parent() {
  open override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1

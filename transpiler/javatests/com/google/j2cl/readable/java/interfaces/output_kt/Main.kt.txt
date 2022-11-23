@@ -26,7 +26,6 @@ open class Main {
   } + Main.Interface.b
  }
 
- @ObjCName("InterfacesMain_Interface", exact = true)
  fun interface Interface<T> {
   fun interfaceMethod()
 
@@ -36,9 +35,7 @@ open class Main {
    this.privateMethod_private_interfaces_Main_Interface(t)
   }
 
-  fun privateMethod_private_interfaces_Main_Interface(
-   @ObjCName("withId", exact = false) t: T
-  ) {}
+  fun privateMethod_private_interfaces_Main_Interface(t: T) {}
 
   companion object {
    const val a: Int = 1
@@ -50,18 +47,15 @@ open class Main {
   }
  }
 
- @ObjCName("InterfacesMain_SubInterface", exact = true)
  fun interface SubInterface: Main.Interface<String?> {
   override fun defaultMethod(s: String?) {
    super<Main.Interface>.defaultMethod(s)
   }
  }
 
- @ObjCName("InterfacesMain_Implementor", exact = true)
  open inner class Implementor: Main.SubInterface, Main.Interface<String?> {
   open override fun interfaceMethod() {}
  }
 
- @ObjCName("InterfacesMain_AbstractImplementor", exact = true)
  abstract inner class AbstractImplementor: Main.SubInterface {}
 }

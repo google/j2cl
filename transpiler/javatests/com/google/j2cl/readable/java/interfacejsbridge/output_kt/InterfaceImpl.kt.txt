@@ -12,21 +12,18 @@ import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("InterfacejsbridgeMyJsInterface", exact = true)
 fun interface MyJsInterface {
  fun foo(
   @ObjCName("withInt", exact = false) a: Int
  ): Int
 }
 
-@ObjCName("InterfacejsbridgeMyInterface", exact = true)
 fun interface MyInterface {
  fun foo(
   @ObjCName("withInt", exact = false) a: Int
  ): Int
 }
 
-@ObjCName("InterfacejsbridgeSubInterface", exact = true)
 fun interface SubInterface: MyJsInterface, MyInterface {
  override fun foo(a: Int): Int
 }

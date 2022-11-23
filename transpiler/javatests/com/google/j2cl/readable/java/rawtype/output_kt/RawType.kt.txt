@@ -11,7 +11,6 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 import rawtype.RawType
 
-@ObjCName("RawtypeRawType", exact = true)
 open class RawType {
  @JvmField var rawUnbound: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
 
@@ -19,23 +18,18 @@ open class RawType {
 
  @JvmField var rawBoundRecursively: RawType.BoundRecursively<*>? = RawType.BoundRecursively()
 
- @ObjCName("RawtypeRawType_Unbound", exact = true)
  open class Unbound<T> {}
 
- @ObjCName("RawtypeRawType_Bound", exact = true)
  open class Bound<T: RawType?> {}
 
- @ObjCName("RawtypeRawType_BoundRecursively", exact = true)
  open class BoundRecursively<T: RawType.BoundRecursively<T>?> {}
 
- @ObjCName("RawtypeRawType_GenericSuperclass", exact = true)
  interface GenericSuperclass<T: RawType?> {
   fun f(
    @ObjCName("withRawtypeRawType", exact = false) t: T
   ) {}
  }
 
- @ObjCName("RawtypeRawType_RawSubclass", exact = true)
  open class RawSubclass: RawType.GenericSuperclass<RawType?> {
   open override fun f(t: RawType?) {}
  }

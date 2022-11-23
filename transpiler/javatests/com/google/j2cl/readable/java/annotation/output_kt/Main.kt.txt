@@ -13,7 +13,6 @@ import kotlin.native.ObjCName
 
 @ObjCName("AnnotationMain", exact = true)
 open class Main {
- @ObjCName("AnnotationMain_Foo", exact = true)
  interface Foo: Annotation {
   fun bar(): Int
 
@@ -22,10 +21,8 @@ open class Main {
   }
  }
 
- @ObjCName("AnnotationMain_Zoo", exact = true)
  interface Zoo: Annotation {}
 
- @ObjCName("AnnotationMain_Bar", exact = true)
  open inner class Bar {
   open fun baz(): Int {
    val foo: Main.Foo? = null

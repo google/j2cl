@@ -16,32 +16,26 @@ import transitivejsoverlayimport.NonNativeLower
 import transitivejsoverlayimport.NonNativeUpper
 import transitivejsoverlayimport.Transitive
 
-@ObjCName("TransitivejsoverlayimportImmediate", exact = true)
 open class Immediate: Transitive() {
  fun doImmediateInstanceMethod() {}
 }
 
-@ObjCName("TransitivejsoverlayimportNonNativeUpper", exact = true)
 open class NonNativeUpper: Immediate {
  constructor()
 
  open fun doNonNativeUpperInstanceMethod() {}
 }
 
-@ObjCName("TransitivejsoverlayimportNonNativeLower", exact = true)
 open class NonNativeLower: NonNativeUpper {
  constructor()
 
  open fun doNonNativeLowerInstanceMethod() {}
 }
 
-@ObjCName("TransitivejsoverlayimportTransitive", exact = true)
 open class Transitive {
  external fun getJsProperty(): Int
 
- fun doTransitiveInstanceMethod(
-  @ObjCName("withNSString", exact = false) arg1: String?
- ) {}
+ fun doTransitiveInstanceMethod(arg1: String?) {}
 }
 
 @ObjCName("TransitivejsoverlayimportMain", exact = true)

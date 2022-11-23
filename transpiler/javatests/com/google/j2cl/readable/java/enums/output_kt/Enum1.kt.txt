@@ -24,7 +24,6 @@ enum class Enum1 {
 
 }
 
-@ObjCName("EnumsEnum2", exact = true)
 enum class Enum2 {
  VALUE1(2),
  VALUE2(Enum1.V1 as Enum<*>?),
@@ -33,19 +32,13 @@ enum class Enum2 {
 
  @JvmField var foo: Int = Enum1.V1.ordinal
 
- constructor(
-  @ObjCName("withInt", exact = false) foo: Int
- ) {
+ constructor(foo: Int) {
   this.foo = foo
  }
 
- constructor(
-  @ObjCName("withJavaLangEnum", exact = false) foo: Enum<*>?
- ): this(foo!!.ordinal)
+ constructor(foo: Enum<*>?): this(foo!!.ordinal)
 
- constructor(
-  vararg @ObjCName("withNSObjectArray", exact = false) somePars: Any?
- ): this(somePars!!.size) {
+ constructor(vararg somePars: Any?): this(somePars!!.size) {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }
 
@@ -57,9 +50,7 @@ enum class Enum2 {
 
  companion object {
   @JvmStatic
-  fun f(
-   @ObjCName("withId", exact = false) o: Any?
-  ): Enum2? {
+  fun f(o: Any?): Enum2? {
    return null
   }
 
@@ -67,13 +58,10 @@ enum class Enum2 {
  }
 }
 
-@ObjCName("EnumsEnum3", exact = true)
 enum class Enum3 {
  VALUE1(Function<Int?, Int?> { v: Int? ->
   return@Function Int.valueOf(1 + v!!.toInt())
  });
 
- constructor(
-  @ObjCName("withJavaUtilFunctionFunction", exact = false) function: Function<Int?, Int?>?
- )
+ constructor(function: Function<Int?, Int?>?)
 }

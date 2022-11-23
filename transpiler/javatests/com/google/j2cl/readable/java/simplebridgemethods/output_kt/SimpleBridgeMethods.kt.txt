@@ -12,34 +12,28 @@ import kotlin.native.ObjCName
 import simplebridgemethods.Callable
 import simplebridgemethods.Superclass
 
-@ObjCName("SimplebridgemethodsSuperclass", exact = true)
 open class Superclass<T: Error?> {
  open fun m1(
   @ObjCName("withJavaLangError", exact = false) t: T
  ) {}
 }
 
-@ObjCName("SimplebridgemethodsSubclass", exact = true)
 open class Subclass: Superclass<AssertionError?>() {
  open override fun m1(a: AssertionError?) {}
 }
 
-@ObjCName("SimplebridgemethodsAnotherSubclass", exact = true)
 open class AnotherSubclass: Superclass<AssertionError?>() {}
 
-@ObjCName("SimplebridgemethodsCallable", exact = true)
 fun interface Callable<V> {
  fun call(
   @ObjCName("withId", exact = false) v: V
  )
 }
 
-@ObjCName("SimplebridgemethodsTask", exact = true)
 open class Task<T>: Callable<T> {
  open override fun call(t: T) {}
 }
 
-@ObjCName("SimplebridgemethodsAnotherTask", exact = true)
 open class AnotherTask<T: AssertionError?>: Callable<Superclass<T>?> {
  open override fun call(t: Superclass<T>?) {}
 }

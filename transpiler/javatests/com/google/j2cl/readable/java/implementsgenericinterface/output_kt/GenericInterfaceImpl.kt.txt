@@ -10,13 +10,10 @@ import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("ImplementsgenericinterfaceGenericInterface", exact = true)
 interface GenericInterface<T> {}
 
-@ObjCName("ImplementsgenericinterfaceGenericSubInterface", exact = true)
 interface GenericSubInterface<T>: GenericInterface<T> {}
 
-@ObjCName("ImplementsgenericinterfaceGenericInterfaceGenericImpl", exact = true)
 open class GenericInterfaceGenericImpl<T>: GenericInterface<T> {}
 
 @ObjCName("ImplementsgenericinterfaceGenericInterfaceImpl", exact = true)

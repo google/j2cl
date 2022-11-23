@@ -20,27 +20,22 @@ import kotlin.jvm.JvmStatic
 import kotlin.let
 import kotlin.native.ObjCName
 
-@ObjCName("IntersectiontypeGetable", exact = true)
 fun interface Getable<T> {
  fun get(): T
 }
 
-@ObjCName("IntersectiontypeSetable", exact = true)
 fun interface Setable {
  fun set(
   @ObjCName("withInt", exact = false) i: Int
  )
 }
 
-@ObjCName("IntersectiontypeSerial", exact = true)
 interface Serial {}
 
-@ObjCName("IntersectiontypeCmp", exact = true)
 fun interface Cmp {
  fun cmp(): Int
 }
 
-@ObjCName("IntersectiontypeCmp2", exact = true)
 fun interface Cmp2<T> {
  fun cmp(
   @ObjCName("withInt", exact = false) a: Int
@@ -119,9 +114,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  fun <T> get_private_2(
-   @ObjCName("withId", exact = false) t: T
-  ): T {
+  fun <T> get_private_2(t: T): T {
    return t
   }
 
@@ -136,20 +129,15 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  fun <T> set_private_2(
-   @ObjCName("withId", exact = false) t: T
-  ) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
+  fun <T> set_private_2(t: T) where T: IntersectionTypeTest.A?, T: IntersectionTypeTest.EmptyA? {}
 
   @JvmStatic
-  fun <T> callOnIntersetionTypes_private_2(
-   @ObjCName("withId", exact = false) t: T
-  ) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
+  fun <T> callOnIntersetionTypes_private_2(t: T) where T: IntersectionTypeTest.SomeConcreteType?, T: Cmp? {
    t!!.cmp()
    ((null).let { it as IntersectionTypeTest.SomeConcreteType?; it as Cmp?; it })!!.cmp()
   }
  }
 
- @ObjCName("IntersectiontypeIntersectionTypeTest_MapEntry", exact = true)
  open inner class MapEntry {
   open fun <T> method(
    @ObjCName("withId", exact = false) o: Any?
@@ -158,15 +146,11 @@ open class IntersectionTypeTest<U> {
   }
  }
 
- @ObjCName("IntersectiontypeIntersectionTypeTest_A", exact = true)
  open class A {}
 
- @ObjCName("IntersectiontypeIntersectionTypeTest_EmptyA", exact = true)
  interface EmptyA {}
 
- @ObjCName("IntersectiontypeIntersectionTypeTest_EmptyB", exact = true)
  interface EmptyB {}
 
- @ObjCName("IntersectiontypeIntersectionTypeTest_SomeConcreteType", exact = true)
  open class SomeConcreteType {}
 }

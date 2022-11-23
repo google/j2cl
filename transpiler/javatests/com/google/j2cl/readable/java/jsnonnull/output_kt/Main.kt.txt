@@ -72,7 +72,6 @@ open class Main {
   @ObjCName("withJsnonnullMain_MyFunction", exact = false) f: Main.MyFunction
  ) {}
 
- @ObjCName("JsnonnullMain_MyFunction", exact = true)
  fun interface MyFunction {
   fun x(
    @ObjCName("withNSString", exact = false) a: String
@@ -100,14 +99,12 @@ open class Main {
   }
  }
 
- @ObjCName("JsnonnullMain_NonNullableTemplatedReturn", exact = true)
  interface NonNullableTemplatedReturn<T> {
   fun get(): T
 
   fun getArray(): Array<T>?
  }
 
- @ObjCName("JsnonnullMain_NonNullableTemplate", exact = true)
  interface NonNullableTemplate<T: Any> {
   fun get(): T
 

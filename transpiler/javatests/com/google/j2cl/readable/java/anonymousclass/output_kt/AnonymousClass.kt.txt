@@ -15,22 +15,16 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
-@ObjCName("AnonymousclassSomeClass", exact = true)
 abstract class SomeClass {
  abstract fun foo(): String?
 
- constructor(
-  @ObjCName("withInt", exact = false) i: Int
- )
+ constructor(i: Int)
 }
 
-@ObjCName("AnonymousclassSomeClassWithStaticMembers", exact = true)
 abstract class SomeClassWithStaticMembers {
  abstract fun foo(): String?
 
- constructor(
-  @ObjCName("withInt", exact = false) i: Int
- )
+ constructor(i: Int)
 
  companion object {
   @JvmStatic
@@ -64,7 +58,6 @@ open class AnonymousClass {
  }
 }
 
-@ObjCName("AnonymousclassSomeInterface", exact = true)
 interface SomeInterface {
  companion object {
   @JvmField val implicitlyStatic: SomeClass? = object : SomeClass(1) {

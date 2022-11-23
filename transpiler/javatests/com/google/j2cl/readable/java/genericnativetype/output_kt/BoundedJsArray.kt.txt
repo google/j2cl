@@ -13,9 +13,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("GenericnativetypeBoundedJsArray", exact = true)
 open class BoundedJsArray<V> {
- constructor(
-  @ObjCName("withInt", exact = false) size: Int
- )
+ constructor(size: Int)
 
  companion object {
   @JvmStatic

@@ -14,23 +14,19 @@ import nobridgemethods.Entry
 import nobridgemethods.Map
 import nobridgemethods.TreeMap
 
-@ObjCName("NobridgemethodsEntry", exact = true)
 interface Entry<K> {}
 
-@ObjCName("NobridgemethodsMap", exact = true)
 abstract class Map<K> {
  abstract fun getCeilingEntry(
   @ObjCName("withId", exact = false) key: K
  ): Entry<K>?
 }
 
-@ObjCName("NobridgemethodsTreeMap", exact = true)
 open class TreeMap<K>: Map<K>() {
  open override fun getCeilingEntry(key: K): TreeMap.InnerEntry<K>? {
   return TreeMap.InnerEntry<K>()
  }
 
- @ObjCName("NobridgemethodsTreeMap_InnerEntry", exact = true)
  open class InnerEntry<K>: Entry<K> {}
 }
 

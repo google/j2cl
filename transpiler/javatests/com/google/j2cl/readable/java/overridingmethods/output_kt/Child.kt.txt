@@ -10,12 +10,10 @@ import kotlin.native.ObjCName
 import overridingmethods.Parent
 import overridingmethods.SomeInterface
 
-@ObjCName("OverridingmethodsSomeInterface", exact = true)
 fun interface SomeInterface {
  fun bar()
 }
 
-@ObjCName("OverridingmethodsParent", exact = true)
 open class Parent {
  open fun `fun`() {}
 }

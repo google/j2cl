@@ -23,15 +23,11 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  fun accept(
-   @ObjCName("withNSString", exact = false) s: String?
-  ) {}
+  fun accept(s: String?) {}
  }
 }
 
-@ObjCName("J2ktnotpassingNotNullable", exact = true)
 open class NotNullable {
- @ObjCName("J2ktnotpassingNotNullable_Consumer", exact = true)
  fun interface Consumer<T> {
   fun accept(
    @ObjCName("withId", exact = false) t: T

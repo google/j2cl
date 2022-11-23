@@ -16,10 +16,7 @@ open class CascadingConstructor {
 
  @JvmField var b_private_2: Int = 0
 
- constructor(
-  @ObjCName("withInt", exact = false) a: Int,
-  @ObjCName("withInt", exact = false) b: Int
- ) {
+ constructor(a: Int, b: Int) {
   this.a_private_2 = a
   this.b_private_2 = b
  }

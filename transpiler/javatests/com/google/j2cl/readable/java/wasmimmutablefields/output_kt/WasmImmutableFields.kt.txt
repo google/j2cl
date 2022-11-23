@@ -27,7 +27,6 @@ import wasmimmutablefields.WasmImmutableFields
 @ObjCName("WasmimmutablefieldsWasmImmutableFields", exact = true)
 open class WasmImmutableFields {}
 
-@ObjCName("WasmimmutablefieldsAssignmentsInDeclaration", exact = true)
 open class AssignmentsInDeclaration {
  @JvmField var compileTimeConstant: Int = 12
 
@@ -48,7 +47,6 @@ open class AssignmentsInDeclaration {
  @JvmField var withCast: Array<String?>? = (arrayOfNulls<Any>(0) as Any?) as Array<String?>?
 }
 
-@ObjCName("WasmimmutablefieldsAssignmentsInInitializer", exact = true)
 open class AssignmentsInInitializer {
  @JvmField var compileTimeConstant: Int = 0
 
@@ -80,7 +78,6 @@ open class AssignmentsInInitializer {
  }
 }
 
-@ObjCName("WasmimmutablefieldsAssignmentsInConstructor", exact = true)
 open class AssignmentsInConstructor {
  @JvmField var compileTimeConstant: Int = 0
 
@@ -102,11 +99,7 @@ open class AssignmentsInConstructor {
 
  @JvmField var finalFieldReference: String? = null
 
- constructor(
-  @ObjCName("withId", exact = false) parameter: Any?,
-  @ObjCName("withInt", exact = false) intParameter: Int,
-  @ObjCName("withWasmimmutablefieldsAssignmentsInConstructor", exact = false) par: AssignmentsInConstructor?
- ) {
+ constructor(parameter: Any?, intParameter: Int, par: AssignmentsInConstructor?) {
   this.compileTimeConstant = 12
   this.stringLiteral = "Hello World"
   this.newArray = arrayOfNulls<Any>(intParameter)
@@ -122,7 +115,6 @@ open class AssignmentsInConstructor {
  }
 }
 
-@ObjCName("WasmimmutablefieldsOptimizesWithThisConstructorDelegation", exact = true)
 open class OptimizesWithThisConstructorDelegation {
  @JvmField var optimizeableField: Int = 0
 
@@ -130,31 +122,21 @@ open class OptimizesWithThisConstructorDelegation {
   this.optimizeableField = 2
  }
 
- constructor(
-  @ObjCName("withInt", exact = false) parameter: Int
- ) {
+ constructor(parameter: Int) {
   this.optimizeableField = parameter
  }
 
- constructor(
-  @ObjCName("withShort", exact = false) parameter: Short
- ): this(parameter.toInt())
+ constructor(parameter: Short): this(parameter.toInt())
 }
 
-@ObjCName("WasmimmutablefieldsOptimizesWithSuperConstructorDelegation", exact = true)
 open class OptimizesWithSuperConstructorDelegation: OptimizesWithThisConstructorDelegation {
  constructor()
 
- constructor(
-  @ObjCName("withInt", exact = false) parameter: Int
- ): super(parameter)
+ constructor(parameter: Int): super(parameter)
 
- constructor(
-  @ObjCName("withShort", exact = false) parameter: Short
- ): this(parameter.toInt())
+ constructor(parameter: Short): this(parameter.toInt())
 }
 
-@ObjCName("WasmimmutablefieldsFinalizerTest", exact = true)
 open class FinalizerTest {
  @JvmField var effectivelyFinalField: Int = 1
 
@@ -191,9 +173,7 @@ open class FinalizerTest {
   this.writtenInInitAndConstructor = 1
  }
 
- constructor(
-  @ObjCName("withInt", exact = false) x: Int
- ): this() {
+ constructor(x: Int): this() {
   val i: Int = this.effectivelyFinalField
   this.writtenInDelegatingConstructor = 1
   this.writtenOnlyInDelegatingConstructor = 1

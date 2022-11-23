@@ -129,9 +129,7 @@ open class TryCatch {
   throw this.getT_private_2<Exception?>(java.lang.Exception())!!
  }
 
- fun <T> getT_private_2(
-  @ObjCName("withId", exact = false) t: T
- ): T {
+ fun <T> getT_private_2(t: T): T {
   return t
  }
 
@@ -147,7 +145,6 @@ open class TryCatch {
   @JvmField val closableThing_private_2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 
- @ObjCName("TrycatchTryCatch_ClosableThing", exact = true)
  open class ClosableThing: AutoCloseable {
   open override fun close() {}
  }

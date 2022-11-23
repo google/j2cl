@@ -26,9 +26,7 @@ open class Main {
   return this.parametricAsyncMethod<Int?>(Int.valueOf(result))
  }
 
- open fun <T> parametricAsyncMethod(
-  @ObjCName("withId", exact = false) value: T
- ): Main.IThenable<T>? {
+ open fun <T> parametricAsyncMethod(value: T): Main.IThenable<T>? {
   return Main.Promise.resolve<T>(Main.await_private_2<T>(Main.Promise.resolve<T>(value)))
  }
 
@@ -64,34 +62,27 @@ open class Main {
   }
 
   @JvmStatic
-  external fun <T> await_private_2(
-   @ObjCName("withJsasyncMain_IThenable", exact = false) thenable: Main.IThenable<T>?
-  ): T
+  external fun <T> await_private_2(thenable: Main.IThenable<T>?): T
  }
 
- @ObjCName("JsasyncMain_BaseInterface", exact = true)
  fun interface BaseInterface {
   fun asyncCall(): Main.IThenable<Int?>?
  }
 
- @ObjCName("JsasyncMain_AsyncInterface", exact = true)
  fun interface AsyncInterface: Main.BaseInterface {
   override fun asyncCall(): Main.IThenable<Int?>?
  }
 
- @ObjCName("JsasyncMain_InterfaceWithAsyncDefaultMethod", exact = true)
  interface InterfaceWithAsyncDefaultMethod {
   fun asyncCall(): Main.IThenable<Int?>? {
    return Main.Promise.resolve<Int?>(Main.await_private_2<Int?>(Main.Promise.resolve<Int?>(Int.valueOf(5))))
   }
  }
 
- @ObjCName("JsasyncMain_JsFunctionInterface", exact = true)
  fun interface JsFunctionInterface {
   fun doSomething(): Main.IThenable<Int?>?
  }
 
- @ObjCName("JsasyncMain_AsyncJsFunctionInterface", exact = true)
  fun interface AsyncJsFunctionInterface {
   fun doSomething(): Main.IThenable<Int?>?
  }
@@ -99,7 +90,6 @@ open class Main {
  @ObjCName("JsasyncMain_IThenable", exact = true)
  interface IThenable<T> {}
 
- @ObjCName("JsasyncMain_Promise", exact = true)
  open class Promise<T>: Main.IThenable<T> {
   companion object {
    @JvmStatic

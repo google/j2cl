@@ -91,10 +91,7 @@ open class DefaultNotNullable {
 
  companion object {
   @JvmStatic
-  fun <N> genericNullableMethod(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNullable", exact = false) o: DefaultNotNullable.ParameterizedNullable<N>,
-   @ObjCName("withId", exact = false) n: N?
-  ) {
+  fun <N> genericNullableMethod(o: DefaultNotNullable.ParameterizedNullable<N>, n: N?) {
    o!!.setNullable(n)
    o!!.setNonNull(n as N)
    o!!.setDefaultNullability(n as N)
@@ -110,10 +107,7 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun <N: Any> genericNonNullMethod(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNonNullable", exact = false) o: DefaultNotNullable.ParameterizedNonNullable<N>,
-   @ObjCName("withId", exact = false) n: N
-  ) {
+  fun <N: Any> genericNonNullMethod(o: DefaultNotNullable.ParameterizedNonNullable<N>, n: N) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
@@ -129,10 +123,7 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun <N: Any> genericDefaultNullabilityMethod(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedDefaultNullability", exact = false) o: DefaultNotNullable.ParameterizedDefaultNullability<N>,
-   @ObjCName("withId", exact = false) n: N
-  ) {
+  fun <N: Any> genericDefaultNullabilityMethod(o: DefaultNotNullable.ParameterizedDefaultNullability<N>, n: N) {
    o!!.setNullable(n)
    o!!.setNonNull(n)
    o!!.setDefaultNullability(n)
@@ -148,10 +139,7 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedNullableMethod(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNullable", exact = false) o: DefaultNotNullable.ParameterizedNullable<String?>,
-   @ObjCName("withNSString", exact = false) s: String?
-  ) {
+  fun parametrizedNullableMethod(o: DefaultNotNullable.ParameterizedNullable<String?>, s: String?) {
    o!!.setNullable(s)
    o!!.setNonNull(s!!)
    o!!.setDefaultNullability(s)
@@ -167,10 +155,7 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedNonNullMethod(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNonNullable", exact = false) o: DefaultNotNullable.ParameterizedNonNullable<String>,
-   @ObjCName("withNSString", exact = false) s: String
-  ) {
+  fun parametrizedNonNullMethod(o: DefaultNotNullable.ParameterizedNonNullable<String>, s: String) {
    o!!.setNullable(s)
    o!!.setNonNull(s)
    o!!.setDefaultNullability(s)
@@ -186,10 +171,7 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun parametrizedDefaultNullabilityMethod(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_ParameterizedDefaultNullability", exact = false) o: DefaultNotNullable.ParameterizedDefaultNullability<String>,
-   @ObjCName("withNSString", exact = false) s: String
-  ) {
+  fun parametrizedDefaultNullabilityMethod(o: DefaultNotNullable.ParameterizedDefaultNullability<String>, s: String) {
    o!!.setNullable(s)
    o!!.setNonNull(s)
    o!!.setDefaultNullability(s)
@@ -205,144 +187,91 @@ open class DefaultNotNullable {
   }
 
   @JvmStatic
-  fun testListOfWildcard(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<*>
-  ) {}
+  fun testListOfWildcard(l: MutableList<*>) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityObject(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<*>
-  ) {}
+  fun testListOfWildcardExtendsDefaultNullabilityObject(l: MutableList<*>) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsNullableObject(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<*>
-  ) {}
+  fun testListOfWildcardExtendsNullableObject(l: MutableList<*>) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsNonNullObject(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<*>
-  ) {}
+  fun testListOfWildcardExtendsNonNullObject(l: MutableList<*>) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityString(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<out String>
-  ) {}
+  fun testListOfWildcardExtendsDefaultNullabilityString(l: MutableList<out String>) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsNullableString(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<out String?>
-  ) {}
+  fun testListOfWildcardExtendsNullableString(l: MutableList<out String?>) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsNonNullString(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<out String>
-  ) {}
+  fun testListOfWildcardExtendsNonNullString(l: MutableList<out String>) {}
 
   @JvmStatic
-  fun <T: Any> testListOfWildcardExtendsDefaultNullabilityVariable(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<out T>
-  ) {}
+  fun <T: Any> testListOfWildcardExtendsDefaultNullabilityVariable(l: MutableList<out T>) {}
 
   @JvmStatic
-  fun <T: Any> testListOfWildcardExtendsNullableVariable(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<out T?>
-  ) {}
+  fun <T: Any> testListOfWildcardExtendsNullableVariable(l: MutableList<out T?>) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperDefaultNullabilityObject(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in Any>
-  ) {}
+  fun testListOfWildcardSuperDefaultNullabilityObject(l: MutableList<in Any>) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperNullableObject(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in Any?>
-  ) {}
+  fun testListOfWildcardSuperNullableObject(l: MutableList<in Any?>) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperNonNullObject(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in Any>
-  ) {}
+  fun testListOfWildcardSuperNonNullObject(l: MutableList<in Any>) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperDefaultNullabilityString(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in String>
-  ) {}
+  fun testListOfWildcardSuperDefaultNullabilityString(l: MutableList<in String>) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperNullableString(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in String?>
-  ) {}
+  fun testListOfWildcardSuperNullableString(l: MutableList<in String?>) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperNonNullString(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in String>
-  ) {}
+  fun testListOfWildcardSuperNonNullString(l: MutableList<in String>) {}
 
   @JvmStatic
-  fun <T: Any> testListOfWildcardSuperDefaultNullabilityVariable(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in T>
-  ) {}
+  fun <T: Any> testListOfWildcardSuperDefaultNullabilityVariable(l: MutableList<in T>) {}
 
   @JvmStatic
-  fun <T: Any> testListOfWildcardSuperNullableVariable(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in T?>
-  ) {}
+  fun <T: Any> testListOfWildcardSuperNullableVariable(l: MutableList<in T?>) {}
 
   @JvmStatic
-  fun <T: Any> testCaptureNullabilityCast(
-   @ObjCName("withJavaUtilList", exact = false) l: MutableList<in T>,
-   @ObjCName("withId", exact = false) t: T?
-  ) {
+  fun <T: Any> testCaptureNullabilityCast(l: MutableList<in T>, t: T?) {
    l!!.add(t as T)
   }
 
   @JvmStatic
-  fun testParametrizedTypeNullabilityCast(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_Consumer", exact = false) c: DefaultNotNullable.Consumer<String>,
-   @ObjCName("withNSString", exact = false) string: String
-  ) {
+  fun testParametrizedTypeNullabilityCast(c: DefaultNotNullable.Consumer<String>, string: String) {
    val localString: String? = string
    c!!.accept(localString!!)
   }
 
   @JvmStatic
-  fun <T: Any> testGenericTypeNullabilityCast(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_Consumer", exact = false) c: DefaultNotNullable.Consumer<T>,
-   @ObjCName("withId", exact = false) element: T
-  ) {
+  fun <T: Any> testGenericTypeNullabilityCast(c: DefaultNotNullable.Consumer<T>, element: T) {
    val localElement: T? = element
    c!!.accept(localElement!!)
   }
 
   @JvmStatic
-  fun testParametrizedWildcardNullabilityCast(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_Consumer", exact = false) c: DefaultNotNullable.Consumer<in String>,
-   @ObjCName("withNSString", exact = false) string: String
-  ) {
+  fun testParametrizedWildcardNullabilityCast(c: DefaultNotNullable.Consumer<in String>, string: String) {
    val localString: String? = string
   }
 
   @JvmStatic
-  fun <T: Any> testGenericWildcardNullabilityCast(
-   @ObjCName("withNullabilityDefaultnotnullableDefaultNotNullable_Consumer", exact = false) c: DefaultNotNullable.Consumer<in T>,
-   @ObjCName("withId", exact = false) element: T
-  ) {
+  fun <T: Any> testGenericWildcardNullabilityCast(c: DefaultNotNullable.Consumer<in T>, element: T) {
    val localElement: T? = element
    c!!.accept(localElement as T)
   }
 
   @JvmStatic
-  fun testParametrizedArrayNullabilityCast(
-   @ObjCName("withNSStringArray", exact = false) array: Array<String>
-  ) {
+  fun testParametrizedArrayNullabilityCast(array: Array<String>) {
    val localArray: Array<String>? = array
   }
 
   @JvmStatic
-  fun <T: Any> testGenericArrayNullabilityCast(
-   @ObjCName("withNSObjectArray", exact = false) array: Array<T>
-  ) {
+  fun <T: Any> testGenericArrayNullabilityCast(array: Array<T>) {
    val localArray: Array<T>? = array
   }
 
@@ -355,7 +284,6 @@ open class DefaultNotNullable {
   }
  }
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_ParameterizedInterface", exact = true)
  interface ParameterizedInterface<T: Any> {
   fun add(
    @ObjCName("withId", exact = false) t: T
@@ -366,7 +294,6 @@ open class DefaultNotNullable {
   ): T?
  }
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_ImplementsParameterizedInterface", exact = true)
  open inner class ImplementsParameterizedInterface: DefaultNotNullable.ParameterizedInterface<String> {
   open override fun add(s: String): String {
    return "Hey"
@@ -377,25 +304,18 @@ open class DefaultNotNullable {
   }
  }
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_NullableBound", exact = true)
  interface NullableBound<T: DefaultNotNullable.NullableBound<T>?> {}
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_NonNullableBound", exact = true)
  interface NonNullableBound<T: DefaultNotNullable.NonNullableBound<T>> {}
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNonNullArgument", exact = true)
  interface NullableBoundWithNonNullArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNonNullArgument> {}
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_NullableBoundWithNullableArgument", exact = true)
  interface NullableBoundWithNullableArgument: DefaultNotNullable.NullableBound<DefaultNotNullable.NullableBoundWithNullableArgument?> {}
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNonNullArgument", exact = true)
  interface NonNullBoundWithNonNullArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNonNullArgument> {}
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_NonNullBoundWithNullableArgument", exact = true)
  interface NonNullBoundWithNullableArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNullableArgument> {}
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_ParameterizedDefaultNullability", exact = true)
  open class ParameterizedDefaultNullability<N: Any> {
   @JvmField var nullable: N? = null
 
@@ -403,9 +323,7 @@ open class DefaultNotNullable {
 
   @JvmField var defaultNullability: N
 
-  constructor(
-   @ObjCName("withId", exact = false) n: N
-  ) {
+  constructor(n: N) {
    this.nonNullable = n
    this.defaultNullability = n
   }
@@ -422,20 +340,13 @@ open class DefaultNotNullable {
    return null!!
   }
 
-  open fun setNullable(
-   @ObjCName("withId", exact = false) n: N?
-  ) {}
+  open fun setNullable(n: N?) {}
 
-  open fun setNonNull(
-   @ObjCName("withId", exact = false) n: N
-  ) {}
+  open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(
-   @ObjCName("withId", exact = false) n: N
-  ) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNullable", exact = true)
  open class ParameterizedNullable<N> {
   @JvmField var nullable: N? = null
 
@@ -443,9 +354,7 @@ open class DefaultNotNullable {
 
   @JvmField var defaultNullability: N = null as N
 
-  constructor(
-   @ObjCName("withId", exact = false) n: N
-  ) {
+  constructor(n: N) {
    this.nonNullable = n
    this.defaultNullability = n
   }
@@ -462,20 +371,13 @@ open class DefaultNotNullable {
    return null as N
   }
 
-  open fun setNullable(
-   @ObjCName("withId", exact = false) n: N?
-  ) {}
+  open fun setNullable(n: N?) {}
 
-  open fun setNonNull(
-   @ObjCName("withId", exact = false) n: N
-  ) {}
+  open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(
-   @ObjCName("withId", exact = false) n: N
-  ) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_ParameterizedNonNullable", exact = true)
  open class ParameterizedNonNullable<N: Any> {
   @JvmField var nullable: N? = null
 
@@ -483,9 +385,7 @@ open class DefaultNotNullable {
 
   @JvmField var defaultNullability: N
 
-  constructor(
-   @ObjCName("withId", exact = false) n: N
-  ) {
+  constructor(n: N) {
    this.nonNullable = n
    this.defaultNullability = n
   }
@@ -502,20 +402,13 @@ open class DefaultNotNullable {
    return null!!
   }
 
-  open fun setNullable(
-   @ObjCName("withId", exact = false) n: N?
-  ) {}
+  open fun setNullable(n: N?) {}
 
-  open fun setNonNull(
-   @ObjCName("withId", exact = false) n: N
-  ) {}
+  open fun setNonNull(n: N) {}
 
-  open fun setDefaultNullability(
-   @ObjCName("withId", exact = false) n: N
-  ) {}
+  open fun setDefaultNullability(n: N) {}
  }
 
- @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable_Consumer", exact = true)
  fun interface Consumer<T> {
   fun accept(
    @ObjCName("withId", exact = false) t: T

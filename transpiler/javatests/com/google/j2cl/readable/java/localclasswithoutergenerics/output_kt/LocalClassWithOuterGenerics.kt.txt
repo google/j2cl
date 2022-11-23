@@ -17,17 +17,11 @@ open class LocalClassWithOuterGenerics<A> {
   @JvmStatic
   fun <T> foo() {
    open class ___1Bar {
-    open fun baz(
-     @ObjCName("withLocalclasswithoutergenericsLocalClassWithOuterGenerics__1Bar", exact = false) other: ___1Bar?
-    ) {}
+    open fun baz(other: ___1Bar?) {}
    }
    val bar: ___1Bar? = ___1Bar()
    open class ___1Baz<S> {
-    open fun qux(
-     @ObjCName("withLocalclasswithoutergenericsLocalClassWithOuterGenerics__1Baz", exact = false) foo: ___1Baz<S>?,
-     @ObjCName("withLocalclasswithoutergenericsLocalClassWithOuterGenerics__1Baz", exact = false) bar: ___1Baz<T>?,
-     @ObjCName("withLocalclasswithoutergenericsLocalClassWithOuterGenerics__1Baz", exact = false) baz: ___1Baz<String?>?
-    ) {}
+    open fun qux(foo: ___1Baz<S>?, bar: ___1Baz<T>?, baz: ___1Baz<String?>?) {}
    }
    val baz: ___1Baz<Any?>? = ___1Baz<Any?>()
   }

@@ -170,7 +170,6 @@ open class Main {
   }
  }
 
- @ObjCName("JsvarargsMain_NativeObject", exact = true)
  open class NativeObject {
   constructor(
    vararg @ObjCName("withNSObjectArray", exact = false) pars: Any?
@@ -179,7 +178,6 @@ open class Main {
   }
  }
 
- @ObjCName("JsvarargsMain_SubVarargsConstructorClass", exact = true)
  open class SubVarargsConstructorClass: Main.NativeObject {
   constructor(
    @ObjCName("withInt", exact = false) i: Int,
@@ -189,7 +187,6 @@ open class Main {
   }
  }
 
- @ObjCName("JsvarargsMain_Function", exact = true)
  fun interface Function {
   fun f1(
    @ObjCName("withInt", exact = false) i: Int,
@@ -214,7 +211,6 @@ open class Main {
   }
  }
 
- @ObjCName("JsvarargsMain_AFunction", exact = true)
  class AFunction: Main.Function {
   open override fun f1(i: Int, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
@@ -222,7 +218,6 @@ open class Main {
   }
  }
 
- @ObjCName("JsvarargsMain_SubMain", exact = true)
  open class SubMain: Main {
   constructor(): super(10)
 
@@ -237,7 +232,6 @@ open class Main {
   }
  }
 
- @ObjCName("JsvarargsMain_GenericFunction", exact = true)
  fun interface GenericFunction<T> {
   fun m(
    @ObjCName("withId", exact = false) i: T,

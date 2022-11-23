@@ -25,6 +25,10 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.Visibility
+
+internal val Visibility.needsObjCNameAnnotation
+  get() = this == Visibility.PUBLIC || this == Visibility.PROTECTED
 
 internal fun Renderer.renderOptInExperimentalObjCNameFileAnnotation() {
   render("@file:")

@@ -11,28 +11,22 @@ import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("BridgemethodsBridgeMethodDefault", exact = true)
 open class BridgeMethodDefault {
- @ObjCName("BridgemethodsBridgeMethodDefault_I", exact = true)
  fun interface I<T> {
   fun m(
    @ObjCName("withId", exact = false) t: T
   )
  }
 
- @ObjCName("BridgemethodsBridgeMethodDefault_II", exact = true)
  interface II: BridgeMethodDefault.I<String?> {
   override fun m(s: String?) {}
  }
 
- @ObjCName("BridgemethodsBridgeMethodDefault_A", exact = true)
  open class A: BridgeMethodDefault.II {}
 
- @ObjCName("BridgemethodsBridgeMethodDefault_JJ", exact = true)
  interface JJ: BridgeMethodDefault.I<Any?> {
   override fun m(o: Any?) {}
  }
 
- @ObjCName("BridgemethodsBridgeMethodDefault_B", exact = true)
  open class B: BridgeMethodDefault.JJ {}
 }

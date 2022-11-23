@@ -127,11 +127,8 @@ open class Main {
  }
 }
 
-@ObjCName("NativekttypesSubclass", exact = true)
 open class Subclass<V>: KInterface<V>, KTopLevel<V> {
- constructor(
-  @ObjCName("withId", exact = false) v: V
- ): super(v)
+ constructor(v: V): super(v)
 
  open override fun renamedMethod(): Int {
   return super<KTopLevel>.renamedMethod()
@@ -178,11 +175,8 @@ open class Subclass<V>: KInterface<V>, KTopLevel<V> {
  }
 }
 
-@ObjCName("NativekttypesSubsubclass", exact = true)
 open class Subsubclass<V>: Subclass<V> {
- constructor(
-  @ObjCName("withId", exact = false) v: V
- ): super(v)
+ constructor(v: V): super(v)
 
  open override fun renamedMethod(): Int {
   return super<Subclass>.renamedMethod()
@@ -229,7 +223,6 @@ open class Subsubclass<V>: Subclass<V> {
  }
 }
 
-@ObjCName("NativekttypesBridgeSubclass", exact = true)
 open class BridgeSubclass: KBridge() {
  open override fun method() {
   super<KBridge>.method()

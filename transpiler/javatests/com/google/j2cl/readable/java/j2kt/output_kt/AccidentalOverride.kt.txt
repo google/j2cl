@@ -11,24 +11,20 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktAccidentalOverride", exact = true)
 open class AccidentalOverride {
- @ObjCName("J2ktAccidentalOverride_SuperClass", exact = true)
  open inner class SuperClass {
   open fun accidentalOverride() {}
  }
 
- @ObjCName("J2ktAccidentalOverride_Interface", exact = true)
  interface Interface {
   fun accidentalOverride() {}
  }
 
- @ObjCName("J2ktAccidentalOverride_TestImplicitOverride", exact = true)
  open inner class TestImplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {
   open override fun accidentalOverride() {
    super<AccidentalOverride.SuperClass>.accidentalOverride()
   }
  }
 
- @ObjCName("J2ktAccidentalOverride_TestExplicitOverride", exact = true)
  open inner class TestExplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {
   open override fun accidentalOverride() {
    super<AccidentalOverride.SuperClass>.accidentalOverride()

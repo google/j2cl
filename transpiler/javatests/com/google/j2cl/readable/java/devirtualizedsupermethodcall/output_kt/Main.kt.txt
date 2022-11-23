@@ -15,7 +15,6 @@ import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("DevirtualizedsupermethodcallSubNumber", exact = true)
 open class SubNumber: JavaNumber() {
  open override fun toInt(): Int {
   return 0
@@ -34,7 +33,6 @@ open class SubNumber: JavaNumber() {
  }
 }
 
-@ObjCName("DevirtualizedsupermethodcallFooCallsSuperObjectMethod", exact = true)
 open class FooCallsSuperObjectMethod {
  open override fun hashCode(): Int {
   return super.hashCode()

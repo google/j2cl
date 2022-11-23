@@ -12,7 +12,6 @@ import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("GenericanddefaultmethodsInterfaceWithDefault", exact = true)
 interface InterfaceWithDefault {
  fun foo(
   @ObjCName("withNSString", exact = false) value: String?
@@ -21,7 +20,6 @@ interface InterfaceWithDefault {
  }
 }
 
-@ObjCName("GenericanddefaultmethodsGenericClass", exact = true)
 open class GenericClass<T> {
  open fun foo(
   @ObjCName("withId", exact = false) value: T

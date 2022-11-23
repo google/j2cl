@@ -89,7 +89,6 @@ open class Varargs {
   }
  }
 
- @ObjCName("VarargsVarargs_FunctionalInterface", exact = true)
  fun interface FunctionalInterface {
   fun apply(
    vararg @ObjCName("withNSStringArray", exact = false) strings: String?
@@ -97,7 +96,6 @@ open class Varargs {
  }
 }
 
-@ObjCName("VarargsChild", exact = true)
 open class Child: Varargs {
  constructor(): super(1)
 }

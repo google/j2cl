@@ -85,9 +85,7 @@ open class Main {
   }
 
   @JvmStatic
-  fun <T> boxingPassthrough_private_2(
-   @ObjCName("withId", exact = false) t: T
-  ): T {
+  fun <T> boxingPassthrough_private_2(t: T): T {
    return t
   }
 
@@ -97,7 +95,6 @@ open class Main {
   }
  }
 
- @ObjCName("JsenumMain_ComparableJsEnum", exact = true)
  enum class ComparableJsEnum {
   ZERO,
   ONE,
@@ -108,7 +105,6 @@ open class Main {
   }
  }
 
- @ObjCName("JsenumMain_IntJsEnum", exact = true)
  enum class IntJsEnum {
   MINUSONE(-1),
   TWENTY(20),
@@ -120,14 +116,11 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(
-   @ObjCName("withInt", exact = false) value: Int
-  ) {
+  constructor(value: Int) {
    this.value_private_2 = value
   }
  }
 
- @ObjCName("JsenumMain_StringJsEnum", exact = true)
  enum class StringJsEnum {
   ONE("ONE"),
   THREE("THREE");
@@ -138,14 +131,11 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(
-   @ObjCName("withNSString", exact = false) value: String?
-  ) {
+  constructor(value: String?) {
    this.value_private_2 = value
   }
  }
 
- @ObjCName("JsenumMain_NonNullableStringJsEnum", exact = true)
  enum class NonNullableStringJsEnum {
   ONE("ONE"),
   THREE("THREE");
@@ -156,27 +146,21 @@ open class Main {
    return this.value_private_2
   }
 
-  constructor(
-   @ObjCName("withNSString", exact = false) value: String?
-  ) {
+  constructor(value: String?) {
    this.value_private_2 = value!!
   }
  }
 
- @ObjCName("JsenumMain_NativeStringEnum", exact = true)
  enum class NativeStringEnum {
   ONE,
   THREE;
 
  }
 
- @ObjCName("JsenumMain_TemplatedField", exact = true)
  open class TemplatedField<T> {
   @JvmField var value: T = null as T
 
-  constructor(
-   @ObjCName("withId", exact = false) value: T
-  ) {
+  constructor(value: T) {
    this.value = value
   }
 
@@ -185,10 +169,7 @@ open class Main {
   }
  }
 
- @ObjCName("JsenumMain_Foo", exact = true)
  open class Foo<T> {
-  constructor(
-   @ObjCName("withJavaUtilOptional", exact = false) c: Optional<Main.IntJsEnum>?
-  )
+  constructor(c: Optional<Main.IntJsEnum>?)
  }
 }

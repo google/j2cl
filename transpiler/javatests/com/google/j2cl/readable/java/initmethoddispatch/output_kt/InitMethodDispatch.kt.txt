@@ -8,17 +8,13 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmField
-import kotlin.native.ObjCName
 
-@ObjCName("InitmethoddispatchInitMethodDispatch", exact = true)
 open class InitMethodDispatch<T> {
  @JvmField var value: Int = 0
 
  constructor(): this(1)
 
- constructor(
-  @ObjCName("withInt", exact = false) i: Int
- ) {
+ constructor(i: Int) {
   this.value = i
  }
 }

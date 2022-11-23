@@ -10,7 +10,6 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 import mixednestings.MyInterface
 
-@ObjCName("MixednestingsMyInterface", exact = true)
 fun interface MyInterface {
  fun `fun`(
   @ObjCName("withInt", exact = false) a: Int
@@ -25,7 +24,6 @@ open class MixedNestings {
   A().a()
  }
 
- @ObjCName("MixednestingsMixedNestings_A", exact = true)
  open inner class A {
   open fun aa() {}
 

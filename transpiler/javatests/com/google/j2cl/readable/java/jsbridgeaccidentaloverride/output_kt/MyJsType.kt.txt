@@ -12,7 +12,6 @@ import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("JsbridgeaccidentaloverrideOtherInterface", exact = true)
 fun interface OtherInterface {
  fun `fun`(
   @ObjCName("withInt", exact = false) a: Int
@@ -40,7 +39,6 @@ open class MyJsType: OtherInterface {
  }
 }
 
-@ObjCName("JsbridgeaccidentaloverrideMyInterface", exact = true)
 interface MyInterface {
  fun foo(
   @ObjCName("withInt", exact = false) a: Int
@@ -51,7 +49,6 @@ interface MyInterface {
  ): Int
 }
 
-@ObjCName("JsbridgeaccidentaloverrideSubJsType", exact = true)
 open class SubJsType: MyInterface, MyJsType() {
  open override fun bar(a: Int): Int {
   return a + 2

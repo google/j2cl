@@ -19,47 +19,28 @@ import parameterassignments.Main
 
 @ObjCName("ParameterassignmentsMain", exact = true)
 open class Main {
- constructor(
-  @ObjCName("withInt", exact = false) nonFinal: Int,
-  @ObjCName("withInt", exact = false) explicitFinal: Int,
-  @ObjCName("withInt", exact = false) implicitFinal: Int
- ): this(nonFinal, explicitFinal, implicitFinal, true) {
+ constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): this(nonFinal, explicitFinal, implicitFinal, true) {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
- constructor(
-  @ObjCName("withInt", exact = false) nonFinal: Int,
-  @ObjCName("withInt", exact = false) explicitFinal: Int,
-  @ObjCName("withInt", exact = false) implicitFinal: Int,
-  @ObjCName("withBoolean", exact = false) flag: Boolean
- ) {
+ constructor(nonFinal: Int, explicitFinal: Int, implicitFinal: Int, flag: Boolean) {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
- open fun test(
-  @ObjCName("withInt", exact = false) nonFinal: Int,
-  @ObjCName("withInt", exact = false) explicitFinal: Int,
-  @ObjCName("withInt", exact = false) implicitFinal: Int
- ): Int {
+ open fun test(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   return nonFinal_1
  }
 
- open fun testObjectVarargs(
-  @ObjCName("withId", exact = false) o: Any?,
-  vararg @ObjCName("withNSObjectArray", exact = false) oa: Any?
- ) {
+ open fun testObjectVarargs(o: Any?, vararg oa: Any?) {
   var oa_1: Array<Any?>? = oa as Array<Any?>?
   oa_1 = (arrayOf<Any?>(o, oa_1!![0]) as Array<*>?) as Array<Any?>?
  }
 
- open fun testPrimitiveVarargs(
-  @ObjCName("withInt", exact = false) i: Int,
-  vararg @ObjCName("withIntArray", exact = false) ia: Int
- ) {
+ open fun testPrimitiveVarargs(i: Int, vararg ia: Int) {
   var ia_1: IntArray? = ia
   ia_1 = intArrayOf(i, ia_1!![0])
  }
@@ -79,7 +60,6 @@ open class Main {
   os_1!![0] = os_1!![1]
  }
 
- @ObjCName("ParameterassignmentsMain_Fn", exact = true)
  fun interface Fn {
   fun test(
    @ObjCName("withInt", exact = false) nonFinal: Int,
@@ -87,7 +67,6 @@ open class Main {
   ): Int
  }
 
- @ObjCName("ParameterassignmentsMain_FnPrimitiveVarargs", exact = true)
  fun interface FnPrimitiveVarargs {
   fun test(
    @ObjCName("withInt", exact = false) i: Int,
@@ -95,7 +74,6 @@ open class Main {
   )
  }
 
- @ObjCName("ParameterassignmentsMain_FnObjectVarargs", exact = true)
  fun interface FnObjectVarargs {
   fun test(
    @ObjCName("withId", exact = false) o: Any?,

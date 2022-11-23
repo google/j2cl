@@ -433,9 +433,7 @@ open class AutoBoxing {
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___1Local<T: Long?> {
-    open fun toLong(
-     @ObjCName("withJavaLangLong", exact = false) l: T
-    ): Long {
+    open fun toLong(l: T): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()
     }
@@ -451,9 +449,7 @@ open class AutoBoxing {
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___2Local<T> where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
-    open fun toLong(
-     @ObjCName("withId", exact = false) l: T
-    ): Long {
+    open fun toLong(l: T): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()
     }

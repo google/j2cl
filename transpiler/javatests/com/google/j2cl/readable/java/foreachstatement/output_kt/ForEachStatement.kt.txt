@@ -58,21 +58,18 @@ open class ForEachStatement {
   }
  }
 
- @ObjCName("ForeachstatementForEachStatement_Exception1", exact = true)
  open class Exception1: JavaIterable<String?>, Exception() {
   open override fun iterator(): MutableIterator<String?> {
    return null!!
   }
  }
 
- @ObjCName("ForeachstatementForEachStatement_Exception2", exact = true)
  open class Exception2: JavaIterable<Any?>, Exception() {
   open override fun iterator(): MutableIterator<Any?> {
    return null!!
   }
  }
 
- @ObjCName("ForeachstatementForEachStatement_IterableReturningTypeVariable", exact = true)
  open class IterableReturningTypeVariable<T: MutableIterator<Int?>>: JavaIterable<Int?> {
   open override fun iterator(): T {
    return null!!

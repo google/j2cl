@@ -63,14 +63,12 @@ open class NestedGenericClass<T> {
   }
  }
 
- @ObjCName("NestedgenericclassNestedGenericClass_RecursiveTypeVariable", exact = true)
  open inner class RecursiveTypeVariable<T: NestedGenericClass<T>.RecursiveTypeVariable<T>?> {
   open fun test() {
    val t: T? = null
    t!!.Inner()
   }
 
-  @ObjCName("NestedgenericclassNestedGenericClass_RecursiveTypeVariable_Inner", exact = true)
   open inner class Inner {}
  }
 }

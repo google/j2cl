@@ -13,14 +13,12 @@ import kotlin.native.ObjCName
 import overwrittentypevariables.HashFunction
 import overwrittentypevariables.MyFunction
 
-@ObjCName("OverwrittentypevariablesMyFunction", exact = true)
 fun interface MyFunction<F, T> {
  fun apply(
   @ObjCName("withId", exact = false) input: F
  ): T
 }
 
-@ObjCName("OverwrittentypevariablesHashFunction", exact = true)
 fun interface HashFunction<T>: MyFunction<T, String?> {}
 
 @ObjCName("OverwrittentypevariablesHashFunctions", exact = true)

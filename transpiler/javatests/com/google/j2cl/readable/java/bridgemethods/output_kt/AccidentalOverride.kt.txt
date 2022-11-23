@@ -14,14 +14,12 @@ import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-@ObjCName("BridgemethodsI", exact = true)
 fun interface I<T, S> {
  fun `fun`(
   @ObjCName("withId", exact = false) s: S
  ): T
 }
 
-@ObjCName("BridgemethodsA", exact = true)
 open class A<T, S> {
  open fun `fun`(
   @ObjCName("withId", exact = false) s: S
@@ -34,14 +32,12 @@ open class A<T, S> {
  }
 }
 
-@ObjCName("BridgemethodsB", exact = true)
 open class B: I<Int?, String?>, A<Number?, String?>() {
  open override fun `fun`(s: String?): Int? {
   return Int(1)
  }
 }
 
-@ObjCName("BridgemethodsSpecializedInterface", exact = true)
 interface SpecializedInterface {
  fun `fun`(
   @ObjCName("withNSString", exact = false) s: String?
@@ -50,5 +46,4 @@ interface SpecializedInterface {
  fun get(): String?
 }
 
-@ObjCName("BridgemethodsAccidentalOverride", exact = true)
 open class AccidentalOverride: SpecializedInterface, A<String?, String?>() {}

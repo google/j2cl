@@ -8,13 +8,9 @@ import java.lang.Exception
 import kotlin.OptIn
 import kotlin.Throwable
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("ExceptionMyException", exact = true)
 class MyException: Exception {
  constructor()
 
- constructor(
-  @ObjCName("withJavaLangThrowable", exact = false) cause: Throwable?
- ): super(cause)
+ constructor(cause: Throwable?): super(cause)
 }
