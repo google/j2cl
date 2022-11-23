@@ -200,9 +200,7 @@ open class ParameterizedParent<T: ParameterizedParent<T>?> {
 
 @ObjCName("BridgemethodsReparametrerizedChild", exact = true)
 open class ReparametrerizedChild<E: ReparametrerizedChild<E>?>: ParameterizedParent<E>() {
- open fun <S: E> m(
-  @ObjCName("withBridgemethodsReparametrerizedChild", exact = false) t: S
- ): S {
+ open override fun <S: E> m(t: S): S {
   return null as S
  }
 }

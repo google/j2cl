@@ -29,6 +29,7 @@ public class Main {
     testBridgeSpecializesSuperclassMethod();
     testAbstractHidesSuperGenericMethod();
     testBridgesMultipleOverloads();
+    testParameterizedMethodBridge();
   }
 
   private static void testSimpleBridges() {
@@ -206,6 +207,24 @@ public class Main {
     assertEquals("AnotherChild", callByInterface(ac, int1));
     assertEquals("AnotherChild", ac.foo(int1));
     assertEquals("Parent", ac.foo(short1)); // does not match foo(integer) so this is foo(Number)
+  }
+
+  private static void testParameterizedMethodBridge() {
+    class Parent<T> {
+      public <E extends T> String m(E e) {
+        return "super";
+      }
+    }
+
+    class Child extends Parent<String> {
+      public <F extends String> String m(F e) {
+        return "child";
+      }
+    }
+
+    assertEquals("child", new Child().m(""));
+    Parent<String> p = new Child();
+    assertEquals("child", p.m(""));
   }
 
   interface SomeInterface<T> {

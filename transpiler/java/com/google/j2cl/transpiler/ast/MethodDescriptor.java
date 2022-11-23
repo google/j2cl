@@ -814,7 +814,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     getEnclosingTypeDescriptor()
         .getSuperTypesStream()
-        .flatMap(t -> t.getPolymorphicMethods().stream())
+        .flatMap(
+            t ->
+                Stream.concat(
+                    // TODO(b/225175417): The work around to the problem of computing the
+                    // specialized bounds for a type variable is to look at both the declared
+                    // methods from the super types (which include the right type variable
+                    // specialization, and the computed polymorphic method that contain bridges.
+                    t.getDeclaredMethodDescriptors().stream()
+                        .filter(MethodDescriptor::isPolymorphic),
+                    t.getPolymorphicMethods().stream()))
         .filter(isOverrideFn)
         .forEach(
             m -> {

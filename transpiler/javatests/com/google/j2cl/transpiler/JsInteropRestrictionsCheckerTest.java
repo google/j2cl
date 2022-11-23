@@ -2924,7 +2924,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "('String Object.toString()' with JavaScript name 'toString').",
             "'String Buggy.toString()' cannot be assigned JavaScript name 'string' that is "
                 + "different from the JavaScript name of a method it overrides "
-                + "('String NativeType.toString()' with JavaScript name 'toString').",
+                + "('String Object.toString()' with JavaScript name 'toString').",
             "'int Buggy.hashCode()' cannot be assigned JavaScript name 'blah' "
                 + "that is different from the JavaScript name of a method it overrides "
                 + "('int Object.hashCode()' with JavaScript name 'hashCode').",
