@@ -22,6 +22,7 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -193,10 +194,12 @@ public class Method extends Member implements MethodLike {
       return builder;
     }
 
+    @CanIgnoreReturnValue
     public Builder addParameters(int index, Variable... parameters) {
       return addParameters(index, Arrays.asList(parameters));
     }
 
+    @CanIgnoreReturnValue
     public Builder addParameters(int index, Collection<Variable> newParameters) {
       parameters.addAll(index, newParameters);
       methodDescriptor =
@@ -210,51 +213,66 @@ public class Method extends Member implements MethodLike {
       return this;
     }
 
-    public Builder setStatements(Statement... statements) {
-      this.statements = Arrays.asList(statements);
+    @CanIgnoreReturnValue
+    public Builder setStatements(List<Statement> statements) {
+      this.statements = new ArrayList<>(statements);
       return this;
     }
 
+    @CanIgnoreReturnValue
+    public Builder setStatements(Statement... statements) {
+      return setStatements(Lists.newArrayList(statements));
+    }
+
+    @CanIgnoreReturnValue
     public Builder addStatements(Statement... statements) {
       Collections.addAll(this.statements, statements);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder addStatements(List<Statement> statements) {
       this.statements.addAll(statements);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder addStatement(int index, Statement statement) {
       this.statements.add(index, statement);
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setParameters(Variable... parameters) {
       return setParameters(Arrays.asList(parameters));
     }
 
+    @CanIgnoreReturnValue
     public Builder setParameters(Collection<Variable> parameters) {
       this.parameters = new ArrayList<>(parameters);
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setMethodDescriptor(MethodDescriptor methodDescriptor) {
       this.methodDescriptor = methodDescriptor;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setJsDocDescription(String jsDocDescription) {
       this.jsDocDescription = jsDocDescription;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setBodySourcePosition(SourcePosition sourcePosition) {
       this.bodySourcePosition = sourcePosition;
       return this;
