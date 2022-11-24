@@ -55,7 +55,11 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangEnum;
   public DeclaredTypeDescriptor javaLangRunnable;
   public DeclaredTypeDescriptor javaLangIterable;
+  public DeclaredTypeDescriptor javaUtilCollection;
   public DeclaredTypeDescriptor javaUtilIterator;
+  public DeclaredTypeDescriptor javaUtilList;
+  public DeclaredTypeDescriptor javaUtilMap;
+  public DeclaredTypeDescriptor javaUtilSet;
 
   public DeclaredTypeDescriptor javaLangNumber;
   public DeclaredTypeDescriptor javaLangComparable;
@@ -589,8 +593,20 @@ public class TypeDescriptors {
         case "java.lang.Iterable":
           typeDescriptors.javaLangIterable = referenceType;
           break;
+        case "java.util.Collection":
+          typeDescriptors.javaUtilCollection = referenceType;
+          break;
         case "java.util.Iterator":
           typeDescriptors.javaUtilIterator = referenceType;
+          break;
+        case "java.util.List":
+          typeDescriptors.javaUtilList = referenceType;
+          break;
+        case "java.util.Map":
+          typeDescriptors.javaUtilMap = referenceType;
+          break;
+        case "java.util.Set":
+          typeDescriptors.javaUtilSet = referenceType;
           break;
         case "javaemul.internal.ValueType":
           typeDescriptors.javaemulInternalValueType = referenceType;
