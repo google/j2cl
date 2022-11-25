@@ -67,6 +67,7 @@ _J2KT_NATIVE_PACKAGES = [
 _J2WASM_PACKAGES = [
     "third_party/java/animal_sniffer",
     "third_party/java/auto",
+    "third_party/java/checker_framework_annotations",
     "third_party/java/error_prone",
     "third_party/java/jbox2d",
     "third_party/java/jsr250_annotations",
