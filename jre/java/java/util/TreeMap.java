@@ -919,9 +919,9 @@ public class TreeMap<K, V> extends AbstractMap<K, V>
       if (fromBound != Bound.NO_BOUND && toBound != Bound.NO_BOUND) {
         checkCriticalArgument(comparator.compare(from, to) <= 0);
       } else if (fromBound != Bound.NO_BOUND) {
-        comparator.compare(from, from);
+        int unused = comparator.compare(from, from);
       } else if (toBound != Bound.NO_BOUND) {
-        comparator.compare(to, to);
+        int unused = comparator.compare(to, to);
       }
       this.ascending = ascending;
       this.from = from;
