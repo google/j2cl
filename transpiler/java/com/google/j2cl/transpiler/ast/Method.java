@@ -221,7 +221,7 @@ public class Method extends Member implements MethodLike {
 
     @CanIgnoreReturnValue
     public Builder setStatements(Statement... statements) {
-      return setStatements(Lists.newArrayList(statements));
+      return setStatements(Arrays.asList(statements));
     }
 
     @CanIgnoreReturnValue
