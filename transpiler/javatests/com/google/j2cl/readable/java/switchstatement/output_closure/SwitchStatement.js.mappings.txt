@@ -44,6 +44,7 @@
 ...    return;
   }] "switchstatement.SwitchStatement.main"
 [break;] => [break;] "switchstatement.SwitchStatement.main"
+[break;] => [break;] "switchstatement.SwitchStatement.main"
 [return;] => [return;] "switchstatement.SwitchStatement.main"
 [testSwitchVariableDeclarations] => [m_testSwitchVariableDeclarations__void]
 [{
@@ -482,6 +483,30 @@
 [result += 100;] => [result = result + 100 | 0;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
 [break;] => [break;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
 [return result;] => [return result;] "switchstatement.SwitchStatement.testDefaultNotLast_fallThroughDefault"
+[testNonExhaustive] => [m_testNonExhaustive__switchstatement_Numbers__int_$p_switchstatement_SwitchStatement]
+[numbers] => [numbers] "numbers"
+[switch (numbers) {
+      case ONE:
+...        return 2;
+    }] => [switch (numbers.ordinal()) {
+   case Numbers.$ordinal_ONE__switchstatement_Numbers:
+...    return 2;
+  }] "switchstatement.SwitchStatement.testNonExhaustive"
+[return 1;] => [return 1;] "switchstatement.SwitchStatement.testNonExhaustive"
+[return 2;] => [return 2;] "switchstatement.SwitchStatement.testNonExhaustive"
+[return 3;] => [return 3;] "switchstatement.SwitchStatement.testNonExhaustive"
+[testNonExhaustive_fallThrough] => [m_testNonExhaustive_fallThrough__switchstatement_Numbers__void_$p_switchstatement_SwitchStatement]
+[numbers] => [numbers] "numbers"
+[switch (numbers) {
+      case ONE:
+...        break;
+    }] => [switch (numbers.ordinal()) {
+   case Numbers.$ordinal_ONE__switchstatement_Numbers:
+...    break;
+  }] "switchstatement.SwitchStatement.testNonExhaustive_fallThrough"
+[foo(1);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(1);] "switchstatement.SwitchStatement.testNonExhaustive_fallThrough"
+[foo(2);] => [this.m_foo__int__void_$p_switchstatement_SwitchStatement(2);] "switchstatement.SwitchStatement.testNonExhaustive_fallThrough"
+[break;] => [break;] "switchstatement.SwitchStatement.testNonExhaustive_fallThrough"
 [foo] => [m_foo__int__void_$p_switchstatement_SwitchStatement]
 [i] => [i] "i"
 [SwitchStatement] => [$clinit]

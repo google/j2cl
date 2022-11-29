@@ -17,7 +17,8 @@ package switchstatement;
 
 enum Numbers {
   ONE,
-  TWO
+  TWO,
+  THREE
 }
 
 public class SwitchStatement {
@@ -54,6 +55,8 @@ public class SwitchStatement {
     switch (Numbers.ONE) {
       case ONE:
       case TWO:
+        break;
+      case THREE:
         break;
       default:
         return;
@@ -403,6 +406,27 @@ public class SwitchStatement {
         break;
     }
     return result;
+  }
+
+  private int testNonExhaustive(Numbers numbers) {
+    switch (numbers) {
+      case ONE:
+        return 1;
+      case TWO:
+        return 2;
+    }
+    return 3;
+  }
+
+  private void testNonExhaustive_fallThrough(Numbers numbers) {
+    switch (numbers) {
+      case ONE:
+        foo(1);
+        // fall-through
+      case TWO:
+        foo(2);
+        break;
+    }
   }
 
   private void foo(int i) {}

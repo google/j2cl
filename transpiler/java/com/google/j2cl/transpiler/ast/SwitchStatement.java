@@ -18,12 +18,14 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Iterables;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /** Switch Statement. */
@@ -83,22 +85,32 @@ public class SwitchStatement extends Statement {
           .setCases(switchStatement.getCases());
     }
 
+    @CanIgnoreReturnValue
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setSwitchExpression(Expression switchExpression) {
       this.switchExpression = switchExpression;
       return this;
     }
 
+    @CanIgnoreReturnValue
     public Builder setCases(SwitchCase... cases) {
       return setCases(Arrays.asList(cases));
     }
 
+    @CanIgnoreReturnValue
     public Builder setCases(Collection<SwitchCase> cases) {
       this.switchCases = new ArrayList<>(cases);
+      return this;
+    }
+
+    @CanIgnoreReturnValue
+    public Builder addCases(SwitchCase... cases) {
+      Collections.addAll(switchCases, cases);
       return this;
     }
 

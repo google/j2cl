@@ -1,6 +1,7 @@
 ;;; Code for switchstatement.Numbers [static fields]
 (global $f_ONE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 (global $f_TWO__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
+(global $f_THREE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 (global $f_namesToValuesMap__switchstatement_Numbers_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__switchstatement_Numbers (mut i32) (i32.const 0))
 
@@ -162,9 +163,9 @@
   ;; switchstatement.Numbers.$clinit();
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@switchstatement.Numbers )
-  ;; return javaemul.internal.WasmArray.OfObject.$create([switchstatement.Numbers.ONE,switchstatement.Numbers.TWO]);
+  ;; return javaemul.internal.WasmArray.OfObject.$create([switchstatement.Numbers.ONE,switchstatement.Numbers.TWO,switchstatement.Numbers.THREE]);
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_ONE__switchstatement_Numbers)(global.get $f_TWO__switchstatement_Numbers))))
+  (return (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_ONE__switchstatement_Numbers)(global.get $f_TWO__switchstatement_Numbers)(global.get $f_THREE__switchstatement_Numbers))))
  )
 )
 
@@ -193,6 +194,9 @@
   ;; (switchstatement.Numbers.TWO = switchstatement.Numbers.$create(javaemul.internal.StringPool.$getString_|TWO|(),1));
   ;;@ switchstatement/SwitchStatement.java:20:2
   (global.set $f_TWO__switchstatement_Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|TWO|__java_lang_String (ref.func $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  ;; (switchstatement.Numbers.THREE = switchstatement.Numbers.$create(javaemul.internal.StringPool.$getString_|THREE|(),2));
+  ;;@ switchstatement/SwitchStatement.java:21:2
+  (global.set $f_THREE__switchstatement_Numbers (call $$create__java_lang_String__int@switchstatement.Numbers (call $function.no.side.effects.$getString_|THREE|__java_lang_String (ref.func $$getString_|THREE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
  )
 )
 
@@ -238,17 +242,17 @@
 ;;; SwitchStatement SwitchStatement.$create()
 (func $$create__@switchstatement.SwitchStatement
  (result (ref null $switchstatement.SwitchStatement))
- ;;@ switchstatement/SwitchStatement.java:23:13
+ ;;@ switchstatement/SwitchStatement.java:24:13
  (local $$instance (ref null $switchstatement.SwitchStatement))
  (block
   ;; SwitchStatement $instance = new SwitchStatement.<init>(0);
-  ;;@ switchstatement/SwitchStatement.java:23:13
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (local.set $$instance (struct.new $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $switchstatement.SwitchStatement.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ switchstatement/SwitchStatement.java:23:13
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (call $$ctor__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ switchstatement/SwitchStatement.java:23:13
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (return (local.get $$instance))
  )
 )
@@ -256,13 +260,13 @@
 ;;; void SwitchStatement.$ctor()
 (func $$ctor__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
- ;;@ switchstatement/SwitchStatement.java:23:13
+ ;;@ switchstatement/SwitchStatement.java:24:13
  (block
   ;; switchstatement.SwitchStatement.$clinit();
-  ;;@ switchstatement/SwitchStatement.java:23:13
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (call $$clinit__void@switchstatement.SwitchStatement )
   ;; Object.this.$ctor();
-  ;;@ switchstatement/SwitchStatement.java:23:13
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -271,7 +275,7 @@
 (func $m_main__void@switchstatement.SwitchStatement
  (type $function.m_main__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ switchstatement/SwitchStatement.java:24:14
+ ;;@ switchstatement/SwitchStatement.java:25:14
  (local $$expression (ref null $java.lang.Object))
  (local $$expression_1 i32)
  (local $$qualifier (ref null $switchstatement.Numbers))
@@ -279,14 +283,14 @@
  (local.set $this (ref.cast_static $switchstatement.SwitchStatement (local.get $this.untyped)))
  (block
   ;; SWITCH: {
-  ;;@ switchstatement/SwitchStatement.java:26:4
+  ;;@ switchstatement/SwitchStatement.java:27:4
   (block $SWITCH.BREAK
    (block
     ;; T $expression = javaemul.internal.InternalPreconditions.checkNotNull(javaemul.internal.StringPool.$getString_|one|());
-    ;;@ switchstatement/SwitchStatement.java:26:4
+    ;;@ switchstatement/SwitchStatement.java:27:4
     (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $function.no.side.effects.$getString_|one|__java_lang_String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))
     ;; switch ($expression) {
-    ;;@ switchstatement/SwitchStatement.java:26:4
+    ;;@ switchstatement/SwitchStatement.java:27:4
     (block
      (block
       (block
@@ -299,21 +303,21 @@
       )
       ;; case javaemul.internal.StringPool.$getString_|two|():
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:29:8
+      ;;@ switchstatement/SwitchStatement.java:30:8
       (br $SWITCH.BREAK)
      )
      ;; default:
      ;; return;
-     ;;@ switchstatement/SwitchStatement.java:31:8
+     ;;@ switchstatement/SwitchStatement.java:32:8
      (return )
     )
    )
   )
   ;; SWITCH: switch (49) {
-  ;;@ switchstatement/SwitchStatement.java:35:4
+  ;;@ switchstatement/SwitchStatement.java:36:4
   (block $SWITCH_1.BREAK
    ;; switch (49) {
-   ;;@ switchstatement/SwitchStatement.java:35:4
+   ;;@ switchstatement/SwitchStatement.java:36:4
    (block
     (block
      (block
@@ -324,20 +328,20 @@
      )
      ;; case 50:
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:38:8
+     ;;@ switchstatement/SwitchStatement.java:39:8
      (br $SWITCH_1.BREAK)
     )
     ;; default:
     ;; return;
-    ;;@ switchstatement/SwitchStatement.java:40:8
+    ;;@ switchstatement/SwitchStatement.java:41:8
     (return )
    )
   )
   ;; SWITCH: switch (1) {
-  ;;@ switchstatement/SwitchStatement.java:44:4
+  ;;@ switchstatement/SwitchStatement.java:45:4
   (block $SWITCH_2.BREAK
    ;; switch (1) {
-   ;;@ switchstatement/SwitchStatement.java:44:4
+   ;;@ switchstatement/SwitchStatement.java:45:4
    (block
     (block
      (block
@@ -351,21 +355,21 @@
      )
      ;; case 2:
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:48:8
+     ;;@ switchstatement/SwitchStatement.java:49:8
      (br $SWITCH_2.BREAK)
     )
     ;; default:
     ;; return;
-    ;;@ switchstatement/SwitchStatement.java:50:8
+    ;;@ switchstatement/SwitchStatement.java:51:8
     (return )
    )
   )
   ;; SWITCH: {
-  ;;@ switchstatement/SwitchStatement.java:54:4
+  ;;@ switchstatement/SwitchStatement.java:55:4
   (block $SWITCH_3.BREAK
    (block
     ;; int $expression = (Numbers $qualifier = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.ONE),$qualifier.ordinal());
-    ;;@ switchstatement/SwitchStatement.java:54:4
+    ;;@ switchstatement/SwitchStatement.java:55:4
     (local.set $$expression_1 (block (result i32)
      (local.set $$qualifier (block (result (ref null $switchstatement.Numbers))
       (call $$clinit__void@switchstatement.Numbers )
@@ -374,23 +378,29 @@
      (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
     ))
     ;; switch ($expression) {
-    ;;@ switchstatement/SwitchStatement.java:54:4
+    ;;@ switchstatement/SwitchStatement.java:55:4
     (block
      (block
       (block
-       (block ;; evaluate expression and jump
-        (br_table 0 1 2 (local.get $$expression_1))
+       (block
+        (block ;; evaluate expression and jump
+         (br_table 0 1 2 3 (local.get $$expression_1))
+        )
+        ;; case 0:
        )
-       ;; case 0:
+       ;; case 1:
+       ;; break SWITCH;
+       ;;@ switchstatement/SwitchStatement.java:58:8
+       (br $SWITCH_3.BREAK)
       )
-      ;; case 1:
+      ;; case 2:
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:57:8
+      ;;@ switchstatement/SwitchStatement.java:60:8
       (br $SWITCH_3.BREAK)
      )
      ;; default:
      ;; return;
-     ;;@ switchstatement/SwitchStatement.java:59:8
+     ;;@ switchstatement/SwitchStatement.java:62:8
      (return )
     )
    )
@@ -401,7 +411,7 @@
 
 ;;; void SwitchStatement.testSwitchVariableDeclarations()
 (func $m_testSwitchVariableDeclarations__void@switchstatement.SwitchStatement
- ;;@ switchstatement/SwitchStatement.java:64:22
+ ;;@ switchstatement/SwitchStatement.java:67:22
  (local $unassigned i32)
  (local $unassigned2 i32)
  (local $i i32)
@@ -410,10 +420,10 @@
  (local $i_1 i32)
  (block
   ;; SWITCH: switch (3) {
-  ;;@ switchstatement/SwitchStatement.java:65:4
+  ;;@ switchstatement/SwitchStatement.java:68:4
   (block $SWITCH.BREAK
    ;; switch (3) {
-   ;;@ switchstatement/SwitchStatement.java:65:4
+   ;;@ switchstatement/SwitchStatement.java:68:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -421,43 +431,43 @@
      )
      ;; case 1:
      ;; int unassigned,int unassigned2;
-     ;;@ switchstatement/SwitchStatement.java:67:8
+     ;;@ switchstatement/SwitchStatement.java:70:8
      
      ;; int i = 0;
-     ;;@ switchstatement/SwitchStatement.java:68:8
+     ;;@ switchstatement/SwitchStatement.java:71:8
      (local.set $i (i32.const 0))
      ;; int j = 2,int b = (j + 1);
-     ;;@ switchstatement/SwitchStatement.java:69:8
+     ;;@ switchstatement/SwitchStatement.java:72:8
      (local.set $j (i32.const 2))
      (local.set $b (i32.add (local.get $j) (i32.const 1)))
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:70:8
+     ;;@ switchstatement/SwitchStatement.java:73:8
      (br $SWITCH.BREAK)
     )
     ;; case 3:
     ;; (i = 3);
-    ;;@ switchstatement/SwitchStatement.java:72:8
+    ;;@ switchstatement/SwitchStatement.java:75:8
     (local.set $i (i32.const 3))
     ;; return;
-    ;;@ switchstatement/SwitchStatement.java:74:8
+    ;;@ switchstatement/SwitchStatement.java:77:8
     (return )
    )
   )
   ;; SWITCH: switch (5) {
-  ;;@ switchstatement/SwitchStatement.java:77:4
+  ;;@ switchstatement/SwitchStatement.java:80:4
   (block $SWITCH_1.BREAK
    ;; switch (5) {
-   ;;@ switchstatement/SwitchStatement.java:77:4
+   ;;@ switchstatement/SwitchStatement.java:80:4
    (block
     (block ;; evaluate expression and jump
      (br_table 0 1 (i32.sub (i32.const 5) (i32.const 5)))
     )
     ;; case 5:
     ;; int i = 1;
-    ;;@ switchstatement/SwitchStatement.java:79:8
+    ;;@ switchstatement/SwitchStatement.java:82:8
     (local.set $i_1 (i32.const 1))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:80:8
+    ;;@ switchstatement/SwitchStatement.java:83:8
     (br $SWITCH_1.BREAK)
    )
   )
@@ -471,13 +481,13 @@
  (param $i i32)
  (param $b i32)
  (param $s i32)
- ;;@ switchstatement/SwitchStatement.java:85:15
+ ;;@ switchstatement/SwitchStatement.java:88:15
  (block
   ;; SWITCH: switch (ch) {
-  ;;@ switchstatement/SwitchStatement.java:86:4
+  ;;@ switchstatement/SwitchStatement.java:89:4
   (block $SWITCH.BREAK
    ;; switch (ch) {
-   ;;@ switchstatement/SwitchStatement.java:86:4
+   ;;@ switchstatement/SwitchStatement.java:89:4
    (block
     (block
      (block
@@ -491,30 +501,30 @@
        )
        ;; case 97:
        ;; break SWITCH;
-       ;;@ switchstatement/SwitchStatement.java:88:8
+       ;;@ switchstatement/SwitchStatement.java:91:8
        (br $SWITCH.BREAK)
       )
       ;; case 1:
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:90:8
+      ;;@ switchstatement/SwitchStatement.java:93:8
       (br $SWITCH.BREAK)
      )
      ;; case 2:
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:92:8
+     ;;@ switchstatement/SwitchStatement.java:95:8
      (br $SWITCH.BREAK)
     )
     ;; case 3:
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:94:8
+    ;;@ switchstatement/SwitchStatement.java:97:8
     (br $SWITCH.BREAK)
    )
   )
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:97:4
+  ;;@ switchstatement/SwitchStatement.java:100:4
   (block $SWITCH_1.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:97:4
+   ;;@ switchstatement/SwitchStatement.java:100:4
    (block
     (block
      (block
@@ -528,30 +538,30 @@
        )
        ;; case 97:
        ;; break SWITCH;
-       ;;@ switchstatement/SwitchStatement.java:99:8
+       ;;@ switchstatement/SwitchStatement.java:102:8
        (br $SWITCH_1.BREAK)
       )
       ;; case 1:
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:101:8
+      ;;@ switchstatement/SwitchStatement.java:104:8
       (br $SWITCH_1.BREAK)
      )
      ;; case 2:
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:103:8
+     ;;@ switchstatement/SwitchStatement.java:106:8
      (br $SWITCH_1.BREAK)
     )
     ;; case 3:
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:105:8
+    ;;@ switchstatement/SwitchStatement.java:108:8
     (br $SWITCH_1.BREAK)
    )
   )
   ;; SWITCH: switch (b) {
-  ;;@ switchstatement/SwitchStatement.java:108:4
+  ;;@ switchstatement/SwitchStatement.java:111:4
   (block $SWITCH_2.BREAK
    ;; switch (b) {
-   ;;@ switchstatement/SwitchStatement.java:108:4
+   ;;@ switchstatement/SwitchStatement.java:111:4
    (block
     (block
      (block
@@ -565,30 +575,30 @@
        )
        ;; case 97:
        ;; break SWITCH;
-       ;;@ switchstatement/SwitchStatement.java:110:8
+       ;;@ switchstatement/SwitchStatement.java:113:8
        (br $SWITCH_2.BREAK)
       )
       ;; case 1:
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:112:8
+      ;;@ switchstatement/SwitchStatement.java:115:8
       (br $SWITCH_2.BREAK)
      )
      ;; case 2:
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:114:8
+     ;;@ switchstatement/SwitchStatement.java:117:8
      (br $SWITCH_2.BREAK)
     )
     ;; case 3:
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:116:8
+    ;;@ switchstatement/SwitchStatement.java:119:8
     (br $SWITCH_2.BREAK)
    )
   )
   ;; SWITCH: switch (s) {
-  ;;@ switchstatement/SwitchStatement.java:119:4
+  ;;@ switchstatement/SwitchStatement.java:122:4
   (block $SWITCH_3.BREAK
    ;; switch (s) {
-   ;;@ switchstatement/SwitchStatement.java:119:4
+   ;;@ switchstatement/SwitchStatement.java:122:4
    (block
     (block
      (block
@@ -602,22 +612,22 @@
        )
        ;; case 97:
        ;; break SWITCH;
-       ;;@ switchstatement/SwitchStatement.java:121:8
+       ;;@ switchstatement/SwitchStatement.java:124:8
        (br $SWITCH_3.BREAK)
       )
       ;; case 1:
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:123:8
+      ;;@ switchstatement/SwitchStatement.java:126:8
       (br $SWITCH_3.BREAK)
      )
      ;; case 2:
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:125:8
+     ;;@ switchstatement/SwitchStatement.java:128:8
      (br $SWITCH_3.BREAK)
     )
     ;; case 3:
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:127:8
+    ;;@ switchstatement/SwitchStatement.java:130:8
     (br $SWITCH_3.BREAK)
    )
   )
@@ -628,39 +638,39 @@
 (func $m_testBlocksInSwitchCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:131:15
+ ;;@ switchstatement/SwitchStatement.java:134:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:132:4
+  ;;@ switchstatement/SwitchStatement.java:135:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:132:4
+   ;;@ switchstatement/SwitchStatement.java:135:4
    (block
     (block ;; evaluate expression and jump
      (br_table 0 1 (i32.sub (local.get $i) (i32.const 1)))
     )
     ;; case 1:
     ;; SwitchStatement.this.foo(1);
-    ;;@ switchstatement/SwitchStatement.java:134:8
+    ;;@ switchstatement/SwitchStatement.java:137:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
     (block
      ;; SwitchStatement.this.foo(2);
-     ;;@ switchstatement/SwitchStatement.java:136:10
+     ;;@ switchstatement/SwitchStatement.java:139:10
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     )
     ;; SwitchStatement.this.foo(3);
-    ;;@ switchstatement/SwitchStatement.java:138:8
+    ;;@ switchstatement/SwitchStatement.java:141:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 3))
     (block
      ;; SwitchStatement.this.foo(4);
-     ;;@ switchstatement/SwitchStatement.java:140:10
+     ;;@ switchstatement/SwitchStatement.java:143:10
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 4))
      ;; SwitchStatement.this.foo(5);
-     ;;@ switchstatement/SwitchStatement.java:141:10
+     ;;@ switchstatement/SwitchStatement.java:144:10
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 5))
     )
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:143:8
+    ;;@ switchstatement/SwitchStatement.java:146:8
     (br $SWITCH.BREAK)
    )
   )
@@ -671,26 +681,26 @@
 (func $m_testLabelInSwitchCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:147:15
+ ;;@ switchstatement/SwitchStatement.java:150:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:148:4
+  ;;@ switchstatement/SwitchStatement.java:151:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:148:4
+   ;;@ switchstatement/SwitchStatement.java:151:4
    (block
     (block ;; evaluate expression and jump
      (br_table 0 1 (i32.sub (local.get $i) (i32.const 1)))
     )
     ;; case 1:
     ;; LABEL: do {
-    ;;@ switchstatement/SwitchStatement.java:150:8
+    ;;@ switchstatement/SwitchStatement.java:153:8
     (block $LABEL.BREAK
      (loop
       (block $LABEL.CONTINUE
        (block
         ;; break LABEL;
-        ;;@ switchstatement/SwitchStatement.java:152:10
+        ;;@ switchstatement/SwitchStatement.java:155:10
         (br $LABEL.BREAK)
        )
       )
@@ -707,13 +717,13 @@
 (func $m_testNonFallThroughBreakCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:157:15
+ ;;@ switchstatement/SwitchStatement.java:160:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:158:4
+  ;;@ switchstatement/SwitchStatement.java:161:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:158:4
+   ;;@ switchstatement/SwitchStatement.java:161:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -721,18 +731,18 @@
      )
      ;; case 1:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:160:8
+     ;;@ switchstatement/SwitchStatement.java:163:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:161:8
+     ;;@ switchstatement/SwitchStatement.java:164:8
      (br $SWITCH.BREAK)
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:163:8
+    ;;@ switchstatement/SwitchStatement.java:166:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:164:8
+    ;;@ switchstatement/SwitchStatement.java:167:8
     (br $SWITCH.BREAK)
    )
   )
@@ -743,19 +753,19 @@
 (func $m_testNonFallThroughBreakOuterCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:168:15
+ ;;@ switchstatement/SwitchStatement.java:171:15
  (block
   ;; OUTER_LABEL: do {
-  ;;@ switchstatement/SwitchStatement.java:169:4
+  ;;@ switchstatement/SwitchStatement.java:172:4
   (block $OUTER_LABEL.BREAK
    (loop
     (block $OUTER_LABEL.CONTINUE
      (block
       ;; SWITCH: switch (i) {
-      ;;@ switchstatement/SwitchStatement.java:171:6
+      ;;@ switchstatement/SwitchStatement.java:174:6
       (block $SWITCH.BREAK
        ;; switch (i) {
-       ;;@ switchstatement/SwitchStatement.java:171:6
+       ;;@ switchstatement/SwitchStatement.java:174:6
        (block
         (block
          (block ;; evaluate expression and jump
@@ -763,18 +773,18 @@
          )
          ;; case 1:
          ;; SwitchStatement.this.foo(1);
-         ;;@ switchstatement/SwitchStatement.java:173:10
+         ;;@ switchstatement/SwitchStatement.java:176:10
          (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
          ;; break OUTER_LABEL;
-         ;;@ switchstatement/SwitchStatement.java:174:10
+         ;;@ switchstatement/SwitchStatement.java:177:10
          (br $OUTER_LABEL.BREAK)
         )
         ;; default:
         ;; SwitchStatement.this.foo(2);
-        ;;@ switchstatement/SwitchStatement.java:176:10
+        ;;@ switchstatement/SwitchStatement.java:179:10
         (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
         ;; break SWITCH;
-        ;;@ switchstatement/SwitchStatement.java:177:10
+        ;;@ switchstatement/SwitchStatement.java:180:10
         (br $SWITCH.BREAK)
        )
       )
@@ -790,19 +800,19 @@
 (func $m_testNonFallThroughContinueCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:182:15
+ ;;@ switchstatement/SwitchStatement.java:185:15
  (block
   ;; LOOP: do {
-  ;;@ switchstatement/SwitchStatement.java:183:4
+  ;;@ switchstatement/SwitchStatement.java:186:4
   (block $LOOP.BREAK
    (loop
     (block $LOOP.CONTINUE
      (block
       ;; SWITCH: switch (i) {
-      ;;@ switchstatement/SwitchStatement.java:184:6
+      ;;@ switchstatement/SwitchStatement.java:187:6
       (block $SWITCH.BREAK
        ;; switch (i) {
-       ;;@ switchstatement/SwitchStatement.java:184:6
+       ;;@ switchstatement/SwitchStatement.java:187:6
        (block
         (block
          (block ;; evaluate expression and jump
@@ -810,18 +820,18 @@
          )
          ;; case 3:
          ;; SwitchStatement.this.foo(1);
-         ;;@ switchstatement/SwitchStatement.java:186:10
+         ;;@ switchstatement/SwitchStatement.java:189:10
          (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
          ;; continue LOOP;
-         ;;@ switchstatement/SwitchStatement.java:187:10
+         ;;@ switchstatement/SwitchStatement.java:190:10
          (br $LOOP.CONTINUE)
         )
         ;; default:
         ;; SwitchStatement.this.foo(2);
-        ;;@ switchstatement/SwitchStatement.java:189:10
+        ;;@ switchstatement/SwitchStatement.java:192:10
         (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
         ;; break SWITCH;
-        ;;@ switchstatement/SwitchStatement.java:190:10
+        ;;@ switchstatement/SwitchStatement.java:193:10
         (br $SWITCH.BREAK)
        )
       )
@@ -837,13 +847,13 @@
 (func $m_testNonFallThroughReturnCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:195:15
+ ;;@ switchstatement/SwitchStatement.java:198:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:196:4
+  ;;@ switchstatement/SwitchStatement.java:199:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:196:4
+   ;;@ switchstatement/SwitchStatement.java:199:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -851,18 +861,18 @@
      )
      ;; case 4:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:198:8
+     ;;@ switchstatement/SwitchStatement.java:201:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
      ;; return;
-     ;;@ switchstatement/SwitchStatement.java:199:8
+     ;;@ switchstatement/SwitchStatement.java:202:8
      (return )
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:201:8
+    ;;@ switchstatement/SwitchStatement.java:204:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:202:8
+    ;;@ switchstatement/SwitchStatement.java:205:8
     (br $SWITCH.BREAK)
    )
   )
@@ -873,13 +883,13 @@
 (func $m_testNonFallThroughThrowCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:206:15
+ ;;@ switchstatement/SwitchStatement.java:209:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:207:4
+  ;;@ switchstatement/SwitchStatement.java:210:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:207:4
+   ;;@ switchstatement/SwitchStatement.java:210:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -887,18 +897,18 @@
      )
      ;; case 5:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:209:8
+     ;;@ switchstatement/SwitchStatement.java:212:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
      ;; throw java.lang.RuntimeException.$create();
-     ;;@ switchstatement/SwitchStatement.java:210:8
+     ;;@ switchstatement/SwitchStatement.java:213:8
      (throw $exception.event (call $$create__@java.lang.RuntimeException ))
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:212:8
+    ;;@ switchstatement/SwitchStatement.java:215:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:213:8
+    ;;@ switchstatement/SwitchStatement.java:216:8
     (br $SWITCH.BREAK)
    )
   )
@@ -909,13 +919,13 @@
 (func $m_testNonFallThroughIfCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:217:15
+ ;;@ switchstatement/SwitchStatement.java:220:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:218:4
+  ;;@ switchstatement/SwitchStatement.java:221:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:218:4
+   ;;@ switchstatement/SwitchStatement.java:221:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -923,21 +933,21 @@
      )
      ;; case 1:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:220:8
+     ;;@ switchstatement/SwitchStatement.java:223:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
      ;; if (false) {
-     ;;@ switchstatement/SwitchStatement.java:221:8
+     ;;@ switchstatement/SwitchStatement.java:224:8
      (if (i32.const 0)
       (then
        (block
         ;; break SWITCH;
-        ;;@ switchstatement/SwitchStatement.java:222:10
+        ;;@ switchstatement/SwitchStatement.java:225:10
         (br $SWITCH.BREAK)
        )
       )(else
        (block
         ;; break SWITCH;
-        ;;@ switchstatement/SwitchStatement.java:224:10
+        ;;@ switchstatement/SwitchStatement.java:227:10
         (br $SWITCH.BREAK)
        )
       )
@@ -945,10 +955,10 @@
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:227:8
+    ;;@ switchstatement/SwitchStatement.java:230:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:228:8
+    ;;@ switchstatement/SwitchStatement.java:231:8
     (br $SWITCH.BREAK)
    )
   )
@@ -959,13 +969,13 @@
 (func $m_testNonFallThroughBlockCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:232:15
+ ;;@ switchstatement/SwitchStatement.java:235:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:233:4
+  ;;@ switchstatement/SwitchStatement.java:236:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:233:4
+   ;;@ switchstatement/SwitchStatement.java:236:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -974,19 +984,19 @@
      ;; case 1:
      (block
       ;; SwitchStatement.this.foo(1);
-      ;;@ switchstatement/SwitchStatement.java:236:10
+      ;;@ switchstatement/SwitchStatement.java:239:10
       (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:237:10
+      ;;@ switchstatement/SwitchStatement.java:240:10
       (br $SWITCH.BREAK)
      )
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:240:8
+    ;;@ switchstatement/SwitchStatement.java:243:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:241:8
+    ;;@ switchstatement/SwitchStatement.java:244:8
     (br $SWITCH.BREAK)
    )
   )
@@ -997,13 +1007,13 @@
 (func $m_testNonFallThrough_defaultIsNotLast__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:245:15
+ ;;@ switchstatement/SwitchStatement.java:248:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:246:4
+  ;;@ switchstatement/SwitchStatement.java:249:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:246:4
+   ;;@ switchstatement/SwitchStatement.java:249:4
    (block
     (block
      (block
@@ -1013,34 +1023,34 @@
        )
        ;; case 1:
        ;; SwitchStatement.this.foo(1);
-       ;;@ switchstatement/SwitchStatement.java:248:8
+       ;;@ switchstatement/SwitchStatement.java:251:8
        (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
        ;; break SWITCH;
-       ;;@ switchstatement/SwitchStatement.java:249:8
+       ;;@ switchstatement/SwitchStatement.java:252:8
        (br $SWITCH.BREAK)
       )
       ;; case 2:
       ;; SwitchStatement.this.foo(2);
-      ;;@ switchstatement/SwitchStatement.java:251:8
+      ;;@ switchstatement/SwitchStatement.java:254:8
       (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:252:8
+      ;;@ switchstatement/SwitchStatement.java:255:8
       (br $SWITCH.BREAK)
      )
      ;; default:
      ;; SwitchStatement.this.foo(3);
-     ;;@ switchstatement/SwitchStatement.java:254:8
+     ;;@ switchstatement/SwitchStatement.java:257:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 3))
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:255:8
+     ;;@ switchstatement/SwitchStatement.java:258:8
      (br $SWITCH.BREAK)
     )
     ;; case 3:
     ;; SwitchStatement.this.foo(4);
-    ;;@ switchstatement/SwitchStatement.java:257:8
+    ;;@ switchstatement/SwitchStatement.java:260:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 4))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:258:8
+    ;;@ switchstatement/SwitchStatement.java:261:8
     (br $SWITCH.BREAK)
    )
   )
@@ -1051,13 +1061,13 @@
 (func $m_testFallThroughCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:262:15
+ ;;@ switchstatement/SwitchStatement.java:265:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:263:4
+  ;;@ switchstatement/SwitchStatement.java:266:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:263:4
+   ;;@ switchstatement/SwitchStatement.java:266:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -1065,15 +1075,15 @@
      )
      ;; case 1:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:265:8
+     ;;@ switchstatement/SwitchStatement.java:268:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:268:8
+    ;;@ switchstatement/SwitchStatement.java:271:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:269:8
+    ;;@ switchstatement/SwitchStatement.java:272:8
     (br $SWITCH.BREAK)
    )
   )
@@ -1084,13 +1094,13 @@
 (func $m_testFallThroughBreakInnerCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:273:15
+ ;;@ switchstatement/SwitchStatement.java:276:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:274:4
+  ;;@ switchstatement/SwitchStatement.java:277:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:274:4
+   ;;@ switchstatement/SwitchStatement.java:277:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -1098,16 +1108,16 @@
      )
      ;; case 1:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:276:8
+     ;;@ switchstatement/SwitchStatement.java:279:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
      ;; INNER_LABEL: do {
-     ;;@ switchstatement/SwitchStatement.java:277:8
+     ;;@ switchstatement/SwitchStatement.java:280:8
      (block $INNER_LABEL.BREAK
       (loop
        (block $INNER_LABEL.CONTINUE
         (block
          ;; break INNER_LABEL;
-         ;;@ switchstatement/SwitchStatement.java:279:10
+         ;;@ switchstatement/SwitchStatement.java:282:10
          (br $INNER_LABEL.BREAK)
         )
        )
@@ -1117,10 +1127,10 @@
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:283:8
+    ;;@ switchstatement/SwitchStatement.java:286:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:284:8
+    ;;@ switchstatement/SwitchStatement.java:287:8
     (br $SWITCH.BREAK)
    )
   )
@@ -1131,13 +1141,13 @@
 (func $m_testFallThroughContinueInnerCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:288:15
+ ;;@ switchstatement/SwitchStatement.java:291:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:289:4
+  ;;@ switchstatement/SwitchStatement.java:292:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:289:4
+   ;;@ switchstatement/SwitchStatement.java:292:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -1145,16 +1155,16 @@
      )
      ;; case 1:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:291:8
+     ;;@ switchstatement/SwitchStatement.java:294:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
      ;; INNER_LABEL: do {
-     ;;@ switchstatement/SwitchStatement.java:292:8
+     ;;@ switchstatement/SwitchStatement.java:295:8
      (block $INNER_LABEL.BREAK
       (loop
        (block $INNER_LABEL.CONTINUE
         (block
          ;; continue INNER_LABEL;
-         ;;@ switchstatement/SwitchStatement.java:294:10
+         ;;@ switchstatement/SwitchStatement.java:297:10
          (br $INNER_LABEL.CONTINUE)
         )
        )
@@ -1164,10 +1174,10 @@
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:298:8
+    ;;@ switchstatement/SwitchStatement.java:301:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:299:8
+    ;;@ switchstatement/SwitchStatement.java:302:8
     (br $SWITCH.BREAK)
    )
   )
@@ -1178,13 +1188,13 @@
 (func $m_testFallThroughLabeledStatement__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:303:15
+ ;;@ switchstatement/SwitchStatement.java:306:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:304:4
+  ;;@ switchstatement/SwitchStatement.java:307:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:304:4
+   ;;@ switchstatement/SwitchStatement.java:307:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -1192,32 +1202,32 @@
      )
      ;; case 1:
      ;; INNER_LABEL: {
-     ;;@ switchstatement/SwitchStatement.java:306:8
+     ;;@ switchstatement/SwitchStatement.java:309:8
      (block $INNER_LABEL.BREAK
       (block
        ;; if (false) {
-       ;;@ switchstatement/SwitchStatement.java:308:10
+       ;;@ switchstatement/SwitchStatement.java:311:10
        (if (i32.const 0)
         (then
          (block
           ;; break INNER_LABEL;
-          ;;@ switchstatement/SwitchStatement.java:309:12
+          ;;@ switchstatement/SwitchStatement.java:312:12
           (br $INNER_LABEL.BREAK)
          )
         )
        )
        ;; return;
-       ;;@ switchstatement/SwitchStatement.java:311:10
+       ;;@ switchstatement/SwitchStatement.java:314:10
        (return )
       )
      )
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:315:8
+    ;;@ switchstatement/SwitchStatement.java:318:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:316:8
+    ;;@ switchstatement/SwitchStatement.java:319:8
     (br $SWITCH.BREAK)
    )
   )
@@ -1228,13 +1238,13 @@
 (func $m_testFallThroughIfCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:320:15
+ ;;@ switchstatement/SwitchStatement.java:323:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:321:4
+  ;;@ switchstatement/SwitchStatement.java:324:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:321:4
+   ;;@ switchstatement/SwitchStatement.java:324:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -1242,15 +1252,15 @@
      )
      ;; case 1:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:323:8
+     ;;@ switchstatement/SwitchStatement.java:326:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
      ;; if (false) {
-     ;;@ switchstatement/SwitchStatement.java:324:8
+     ;;@ switchstatement/SwitchStatement.java:327:8
      (if (i32.const 0)
       (then
        (block
         ;; break SWITCH;
-        ;;@ switchstatement/SwitchStatement.java:325:10
+        ;;@ switchstatement/SwitchStatement.java:328:10
         (br $SWITCH.BREAK)
        )
       )
@@ -1258,10 +1268,10 @@
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:329:8
+    ;;@ switchstatement/SwitchStatement.java:332:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:330:8
+    ;;@ switchstatement/SwitchStatement.java:333:8
     (br $SWITCH.BREAK)
    )
   )
@@ -1272,13 +1282,13 @@
 (func $m_testFallThroughIfElseCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:334:15
+ ;;@ switchstatement/SwitchStatement.java:337:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:335:4
+  ;;@ switchstatement/SwitchStatement.java:338:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:335:4
+   ;;@ switchstatement/SwitchStatement.java:338:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -1286,21 +1296,21 @@
      )
      ;; case 1:
      ;; if (true) {
-     ;;@ switchstatement/SwitchStatement.java:337:8
+     ;;@ switchstatement/SwitchStatement.java:340:8
      (if (i32.const 1)
       (then
        (block
         ;; SwitchStatement.this.foo(1);
-        ;;@ switchstatement/SwitchStatement.java:338:10
+        ;;@ switchstatement/SwitchStatement.java:341:10
         (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
         ;; break SWITCH;
-        ;;@ switchstatement/SwitchStatement.java:339:10
+        ;;@ switchstatement/SwitchStatement.java:342:10
         (br $SWITCH.BREAK)
        )
       )(else
        (block
         ;; SwitchStatement.this.foo(2);
-        ;;@ switchstatement/SwitchStatement.java:341:10
+        ;;@ switchstatement/SwitchStatement.java:344:10
         (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
        )
       )
@@ -1308,10 +1318,10 @@
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:345:8
+    ;;@ switchstatement/SwitchStatement.java:348:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:346:8
+    ;;@ switchstatement/SwitchStatement.java:349:8
     (br $SWITCH.BREAK)
    )
   )
@@ -1322,13 +1332,13 @@
 (func $m_testFallThoughLastCase__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:350:15
+ ;;@ switchstatement/SwitchStatement.java:353:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:351:4
+  ;;@ switchstatement/SwitchStatement.java:354:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:351:4
+   ;;@ switchstatement/SwitchStatement.java:354:4
    (block
     (block
      (block ;; evaluate expression and jump
@@ -1336,15 +1346,15 @@
      )
      ;; case 1:
      ;; SwitchStatement.this.foo(1);
-     ;;@ switchstatement/SwitchStatement.java:353:8
+     ;;@ switchstatement/SwitchStatement.java:356:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:354:8
+     ;;@ switchstatement/SwitchStatement.java:357:8
      (br $SWITCH.BREAK)
     )
     ;; default:
     ;; SwitchStatement.this.foo(2);
-    ;;@ switchstatement/SwitchStatement.java:356:8
+    ;;@ switchstatement/SwitchStatement.java:359:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
    )
   )
@@ -1355,13 +1365,13 @@
 (func $m_testDefaultIsNotLast_fallThrough__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:361:15
+ ;;@ switchstatement/SwitchStatement.java:364:15
  (block
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:362:4
+  ;;@ switchstatement/SwitchStatement.java:365:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:362:4
+   ;;@ switchstatement/SwitchStatement.java:365:4
    (block
     (block
      (block
@@ -1371,22 +1381,22 @@
        )
        ;; case 1:
        ;; SwitchStatement.this.foo(1);
-       ;;@ switchstatement/SwitchStatement.java:364:8
+       ;;@ switchstatement/SwitchStatement.java:367:8
        (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
       )
       ;; case 2:
       ;; SwitchStatement.this.foo(2);
-      ;;@ switchstatement/SwitchStatement.java:367:8
+      ;;@ switchstatement/SwitchStatement.java:370:8
       (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
      )
      ;; default:
      ;; SwitchStatement.this.foo(3);
-     ;;@ switchstatement/SwitchStatement.java:370:8
+     ;;@ switchstatement/SwitchStatement.java:373:8
      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 3))
     )
     ;; case 4:
     ;; SwitchStatement.this.foo(4);
-    ;;@ switchstatement/SwitchStatement.java:373:8
+    ;;@ switchstatement/SwitchStatement.java:376:8
     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 4))
    )
   )
@@ -1398,17 +1408,17 @@
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
  (result i32)
- ;;@ switchstatement/SwitchStatement.java:378:14
+ ;;@ switchstatement/SwitchStatement.java:381:14
  (local $result i32)
  (block
   ;; int result = 0;
-  ;;@ switchstatement/SwitchStatement.java:379:4
+  ;;@ switchstatement/SwitchStatement.java:382:4
   (local.set $result (i32.const 0))
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:380:4
+  ;;@ switchstatement/SwitchStatement.java:383:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:380:4
+   ;;@ switchstatement/SwitchStatement.java:383:4
    (block
     (block
      (block
@@ -1419,23 +1429,23 @@
      )
      ;; default:
      ;; (result = (result + 10));
-     ;;@ switchstatement/SwitchStatement.java:384:8
+     ;;@ switchstatement/SwitchStatement.java:387:8
      (local.set $result (i32.add (local.get $result) (i32.const 10)))
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:385:8
+     ;;@ switchstatement/SwitchStatement.java:388:8
      (br $SWITCH.BREAK)
     )
     ;; case 3:
     ;; (result = (result + 100));
-    ;;@ switchstatement/SwitchStatement.java:387:8
+    ;;@ switchstatement/SwitchStatement.java:390:8
     (local.set $result (i32.add (local.get $result) (i32.const 100)))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:388:8
+    ;;@ switchstatement/SwitchStatement.java:391:8
     (br $SWITCH.BREAK)
    )
   )
   ;; return result;
-  ;;@ switchstatement/SwitchStatement.java:390:4
+  ;;@ switchstatement/SwitchStatement.java:393:4
   (return (local.get $result))
  )
 )
@@ -1445,17 +1455,17 @@
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
  (result i32)
- ;;@ switchstatement/SwitchStatement.java:393:14
+ ;;@ switchstatement/SwitchStatement.java:396:14
  (local $result i32)
  (block
   ;; int result = 0;
-  ;;@ switchstatement/SwitchStatement.java:394:4
+  ;;@ switchstatement/SwitchStatement.java:397:4
   (local.set $result (i32.const 0))
   ;; SWITCH: switch (i) {
-  ;;@ switchstatement/SwitchStatement.java:395:4
+  ;;@ switchstatement/SwitchStatement.java:398:4
   (block $SWITCH.BREAK
    ;; switch (i) {
-   ;;@ switchstatement/SwitchStatement.java:395:4
+   ;;@ switchstatement/SwitchStatement.java:398:4
    (block
     (block
      (block
@@ -1464,26 +1474,105 @@
       )
       ;; case 1:
       ;; (result = (result + 10));
-      ;;@ switchstatement/SwitchStatement.java:397:8
+      ;;@ switchstatement/SwitchStatement.java:400:8
       (local.set $result (i32.add (local.get $result) (i32.const 10)))
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:398:8
+      ;;@ switchstatement/SwitchStatement.java:401:8
       (br $SWITCH.BREAK)
      )
      ;; default:
     )
     ;; case 3:
     ;; (result = (result + 100));
-    ;;@ switchstatement/SwitchStatement.java:402:8
+    ;;@ switchstatement/SwitchStatement.java:405:8
     (local.set $result (i32.add (local.get $result) (i32.const 100)))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:403:8
+    ;;@ switchstatement/SwitchStatement.java:406:8
     (br $SWITCH.BREAK)
    )
   )
   ;; return result;
-  ;;@ switchstatement/SwitchStatement.java:405:4
+  ;;@ switchstatement/SwitchStatement.java:408:4
   (return (local.get $result))
+ )
+)
+
+;;; int SwitchStatement.testNonExhaustive(Numbers numbers)
+(func $m_testNonExhaustive__switchstatement_Numbers__int_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
+ (param $this (ref null $switchstatement.SwitchStatement))
+ (param $numbers (ref null $switchstatement.Numbers))
+ (result i32)
+ ;;@ switchstatement/SwitchStatement.java:411:14
+ (local $$expression i32)
+ (block
+  ;; SWITCH: {
+  ;;@ switchstatement/SwitchStatement.java:412:4
+  (block $SWITCH.BREAK
+   (block
+    ;; int $expression = numbers.ordinal();
+    ;;@ switchstatement/SwitchStatement.java:412:4
+    (local.set $$expression (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $numbers))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $numbers)))))
+    ;; switch ($expression) {
+    ;;@ switchstatement/SwitchStatement.java:412:4
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_table 0 1 2 (local.get $$expression))
+      )
+      ;; case 0:
+      ;; return 1;
+      ;;@ switchstatement/SwitchStatement.java:414:8
+      (return (i32.const 1))
+     )
+     ;; case 1:
+     ;; return 2;
+     ;;@ switchstatement/SwitchStatement.java:416:8
+     (return (i32.const 2))
+    )
+   )
+  )
+  ;; return 3;
+  ;;@ switchstatement/SwitchStatement.java:418:4
+  (return (i32.const 3))
+ )
+)
+
+;;; void SwitchStatement.testNonExhaustive_fallThrough(Numbers numbers)
+(func $m_testNonExhaustive_fallThrough__switchstatement_Numbers__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
+ (param $this (ref null $switchstatement.SwitchStatement))
+ (param $numbers (ref null $switchstatement.Numbers))
+ ;;@ switchstatement/SwitchStatement.java:421:15
+ (local $$expression i32)
+ (block
+  ;; SWITCH: {
+  ;;@ switchstatement/SwitchStatement.java:422:4
+  (block $SWITCH.BREAK
+   (block
+    ;; int $expression = numbers.ordinal();
+    ;;@ switchstatement/SwitchStatement.java:422:4
+    (local.set $$expression (call_ref $function.m_ordinal__int (ref.as_non_null (local.get $numbers))(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $numbers)))))
+    ;; switch ($expression) {
+    ;;@ switchstatement/SwitchStatement.java:422:4
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_table 0 1 2 (local.get $$expression))
+      )
+      ;; case 0:
+      ;; SwitchStatement.this.foo(1);
+      ;;@ switchstatement/SwitchStatement.java:424:8
+      (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 1))
+     )
+     ;; case 1:
+     ;; SwitchStatement.this.foo(2);
+     ;;@ switchstatement/SwitchStatement.java:427:8
+     (call $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (ref.as_non_null (local.get $this))(i32.const 2))
+     ;; break SWITCH;
+     ;;@ switchstatement/SwitchStatement.java:428:8
+     (br $SWITCH.BREAK)
+    )
+   )
+  )
  )
 )
 
@@ -1491,29 +1580,29 @@
 (func $m_foo__int__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (param $i i32)
- ;;@ switchstatement/SwitchStatement.java:408:15
+ ;;@ switchstatement/SwitchStatement.java:432:15
  (block
  )
 )
 
 ;;; void SwitchStatement.$clinit()
 (func $$clinit__void@switchstatement.SwitchStatement
- ;;@ switchstatement/SwitchStatement.java:23:13
+ ;;@ switchstatement/SwitchStatement.java:24:13
  (block
   ;; if (switchstatement.SwitchStatement.$initialized) return;
-  ;;@ switchstatement/SwitchStatement.java:23:13
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (if (global.get $f_$initialized__switchstatement_SwitchStatement)
    (then
     ;; return;
-    ;;@ switchstatement/SwitchStatement.java:23:13
+    ;;@ switchstatement/SwitchStatement.java:24:13
     (return )
    )
   )
   ;; (switchstatement.SwitchStatement.$initialized = true);
-  ;;@ switchstatement/SwitchStatement.java:23:13
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (global.set $f_$initialized__switchstatement_SwitchStatement (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ switchstatement/SwitchStatement.java:23:13
+  ;;@ switchstatement/SwitchStatement.java:24:13
   (call $$clinit__void@java.lang.Object )
  )
 )

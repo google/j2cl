@@ -98,7 +98,7 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
-            return normalizeSwitchCaseTypes(switchStatement);
+            return ensureExhaustive(normalizeSwitchCaseTypes(switchStatement));
           }
         });
 
@@ -331,5 +331,16 @@ public class NormalizeSwitchStatementsKotlin extends NormalizationPass {
   private static boolean breaksOutOfSwitchStatement(List<Statement> statements) {
     Statement lastStatement = Iterables.getLast(statements, null);
     return lastStatement != null && breaksOutOfSwitchStatement(lastStatement);
+  }
+
+  private static SwitchStatement ensureExhaustive(SwitchStatement switchStatement) {
+    if (switchStatement.getCases().stream()
+        .anyMatch(switchCase -> switchCase.getCaseExpression() == null)) {
+      return switchStatement;
+    }
+
+    return SwitchStatement.Builder.from(switchStatement)
+        .addCases(SwitchCase.newBuilder().build())
+        .build();
   }
 }
