@@ -216,6 +216,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             # Optimization flags (affecting passes in general) included at top.
             "--partial-inlining-ifs=4",
             "-fimfs=50",
+            "--closed-world",
             # Specific list of passes:
             # Get several rounds of -O3 before intrinsic lowering.
             "-O3",
