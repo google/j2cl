@@ -2167,24 +2167,25 @@ abstract class TreeMapTest<K extends Comparable<K>, V> extends TestMap {
       assertTrue(sortedMap.containsValue(values[0]));
 
       // the map methods the continue to function
-      sortedMap.containsValue(null);
-      sortedMap.containsValue(values[0]);
-      sortedMap.entrySet();
-      sortedMap.equals(createMap());
-      sortedMap.hashCode();
-      sortedMap.isEmpty();
-      sortedMap.keySet();
+      Object unused;
+      unused = sortedMap.containsValue(null);
+      unused = sortedMap.containsValue(values[0]);
+      unused = sortedMap.entrySet();
+      unused = sortedMap.equals(createMap());
+      unused = sortedMap.hashCode();
+      unused = sortedMap.isEmpty();
+      unused = sortedMap.keySet();
       sortedMap.putAll(createMap());
-      sortedMap.size();
-      sortedMap.values();
+      unused = sortedMap.size();
+      unused = sortedMap.values();
 
       // all of the sorted map methods still function
-      sortedMap.comparator();
-      sortedMap.firstKey();
-      sortedMap.lastKey();
-      sortedMap.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey());
-      sortedMap.headMap(getLessThanMinimumKey());
-      sortedMap.tailMap(getLessThanMinimumKey());
+      unused = sortedMap.comparator();
+      unused = sortedMap.firstKey();
+      unused = sortedMap.lastKey();
+      unused = sortedMap.subMap(getLessThanMinimumKey(), getGreaterThanMaximumKey());
+      unused = sortedMap.headMap(getLessThanMinimumKey());
+      unused = sortedMap.tailMap(getLessThanMinimumKey());
     } else if (getJdkVersion() > 6) {
       // nulls are rejected immediately and don't poison the map anymore
       try {

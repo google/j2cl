@@ -69,7 +69,7 @@ public class ArraysTest extends EmulTestBase {
    */
   public void testArraysHashCodeWithNullElements() {
     String[] a = new String[] { "foo", null, "bar", "baz" };
-    Arrays.hashCode(a);
+    int unused = Arrays.hashCode(a);
   }
 
   public void testArraysEqualsWithEmptyArrays() {
