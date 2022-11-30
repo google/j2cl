@@ -90,6 +90,7 @@ public class Nullability {
           "org.apache.avro.reflect.Nullable",
           "org.apache.cxf.jaxrs.ext.Nullable",
           "org.apache.shindig.common.Nullable",
+          "org.json.Nullable", // Used in parts of j2objc instead of libcore.util.Nullable
           "reactor.util.annotation.Nullable");
 
   private static final ImmutableSet<String> RECOGNIZED_NON_NULL_ANNOTATIONS_QUALIFIED_NAMES =
@@ -135,6 +136,7 @@ public class Nullability {
           "net.bytebuddy.utility.nullability.NeverNull",
           "org.antlr.v4.runtime.misc.NotNull",
           "org.eclipse.lsp4j.jsonrpc.validation.NonNull",
+          "org.json.NonNull", // Used in parts of j2objc instead of libcore.util.NonNull
           "reactor.util.annotation.NonNull");
 
   public static boolean isNullMarkedAnnotation(String qualifiedName) {
