@@ -20,7 +20,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -210,11 +209,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
 
   /** Replaces all occurrences of a type for the type specified by the mapping function. */
   public static <T extends TypeDescriptor> T replaceTypeDescriptors(T t, TypeReplacer fn) {
-    return replaceTypeDescriptors(t, fn, new HashSet<TypeDescriptor>());
+    return replaceTypeDescriptors(t, fn, ImmutableSet.of());
   }
 
   static <T extends TypeDescriptor> T replaceTypeDescriptors(
-      T t, TypeReplacer fn, Set<TypeDescriptor> seen) {
+      T t, TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     if (t == null) {
       return null;
     }
@@ -232,17 +231,18 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   /** Replaces all occurrences of a type for the type specified by the mapping function. */
   public static <T extends TypeDescriptor> ImmutableList<T> replaceTypeDescriptors(
       List<T> descriptors, TypeReplacer fn) {
-    return replaceTypeDescriptors(descriptors, fn, new HashSet<TypeDescriptor>());
+    return replaceTypeDescriptors(descriptors, fn, ImmutableSet.of());
   }
 
   static <T extends TypeDescriptor> ImmutableList<T> replaceTypeDescriptors(
-      List<T> descriptors, TypeReplacer fn, Set<TypeDescriptor> seen) {
+      List<T> descriptors, TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     return descriptors.stream()
         .map(t -> replaceTypeDescriptors(t, fn, seen))
         .collect(toImmutableList());
   }
 
-  abstract TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen);
+  abstract TypeDescriptor replaceInternalTypeDescriptors(
+      TypeReplacer fn, ImmutableSet<TypeVariable> seen);
 
   /** Returns all the free type variables that appear in the type. */
   public Set<TypeVariable> getAllTypeVariables() {

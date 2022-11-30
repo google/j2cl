@@ -125,12 +125,13 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   }
 
   @Override
-  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     // Avoid the recursion that might arise from type variable declarations,
     // (e.g. class Enum<T extends Enum<T>>).
-    if (!seen.add(this)) {
+    if (seen.contains(this)) {
       return this;
     }
+    seen = new ImmutableSet.Builder<TypeVariable>().addAll(seen).add(this).build();
     TypeDescriptor upperBound = getUpperBoundTypeDescriptor();
     TypeDescriptor newUpperBound = replaceTypeDescriptors(upperBound, fn, seen);
     TypeDescriptor lowerBound = getLowerBoundTypeDescriptor();

@@ -183,7 +183,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     TypeDescriptor component = getComponentTypeDescriptor();
     TypeDescriptor newComponent = replaceTypeDescriptors(component, fn, seen);
     if (component != newComponent) {

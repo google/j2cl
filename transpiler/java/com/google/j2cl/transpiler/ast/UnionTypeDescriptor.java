@@ -155,7 +155,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     ImmutableList<TypeDescriptor> unionTypes = getUnionTypeDescriptors();
     ImmutableList<TypeDescriptor> newUnionTypes = replaceTypeDescriptors(unionTypes, fn, seen);
     if (!unionTypes.equals(newUnionTypes)) {

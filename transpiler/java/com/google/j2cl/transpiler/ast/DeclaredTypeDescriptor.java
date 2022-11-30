@@ -1012,7 +1012,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
-  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     ImmutableList<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
     ImmutableList<TypeDescriptor> newtypeArguments =
         replaceTypeDescriptors(typeArguments, fn, seen);

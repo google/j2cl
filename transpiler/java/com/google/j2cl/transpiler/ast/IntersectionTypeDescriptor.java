@@ -166,7 +166,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, ImmutableSet<TypeVariable> seen) {
     ImmutableList<TypeDescriptor> intersections = getIntersectionTypeDescriptors();
     ImmutableList<TypeDescriptor> newIntersections =
         replaceTypeDescriptors(intersections, fn, seen);
