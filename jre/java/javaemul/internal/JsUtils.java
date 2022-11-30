@@ -17,9 +17,9 @@ package javaemul.internal;
 
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
 
 /** Provides an interface for simple JavaScript idioms that can not be expressed in Java. */
 @SuppressWarnings("unusable-by-js")
@@ -40,36 +40,18 @@ public final class JsUtils {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "typeof")
   public static native String typeOf(Object obj);
 
-  public static String intToString(int value, int radix) {
-    return numberToString(value, radix);
-  }
-
-  public static String uintToString(int value, int radix) {
-    return numberToString(toDoubleFromUnsignedInt(value), radix);
-  }
-
   @JsMethod
-  public static native int toDoubleFromUnsignedInt(int value);
-
-  private static String numberToString(double value, int radix) {
-    NativeNumber number = JsUtils.uncheckedCast(value);
-    return number.toString(radix);
-  }
-
-  @JsType(isNative = true, name = "Number", namespace = JsPackage.GLOBAL)
-  private interface NativeNumber {
-    String toString(int radix);
-  }
-
-  @JsMethod
+  @Wasm("nop") // Unused in WASM.
   public static native boolean isUndefined(Object value);
 
   @JsMethod
   @UncheckedCast
+  @Wasm("nop") // Unused in WASM.
   public static native <T> T uncheckedCast(@DoNotAutobox Object o);
 
   @JsMethod
   @UncheckedCast
+  @Wasm("nop") // Unused in WASM.
   public static native <T> T getProperty(Object map, String key);
 
   private JsUtils() {}

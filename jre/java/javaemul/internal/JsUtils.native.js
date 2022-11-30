@@ -1,13 +1,4 @@
 /**
- * @param {number} value
- * @return {number}
- */
-javaemul_internal_JsUtils.toDoubleFromUnsignedInt = function(value) {
-  // Might return a number that is larger than int32
-  return (value >>> 0);
-};
-
-/**
  * @param {*} value
  * @return {boolean}
  */

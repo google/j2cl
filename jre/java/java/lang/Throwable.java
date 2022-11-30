@@ -22,11 +22,12 @@ import static javaemul.internal.InternalPreconditions.checkState;
 import java.io.PrintStream;
 import java.io.Serializable;
 import javaemul.internal.ArrayHelper;
+import javaemul.internal.ThrowableUtils;
+import javaemul.internal.ThrowableUtils.NativeError;
+import javaemul.internal.ThrowableUtils.NativeTypeError;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * See <a
@@ -235,9 +236,10 @@ public class Throwable implements Serializable {
 
   @JsMethod
   public static @JsNonNull Throwable of(Object e) {
+    // TODO(b/260631095): Clean up this part. Consider a ThrowableUtils.throwableOf method?
     // If the JS error is already mapped to a Java Exception, use it.
     if (e != null) {
-      Throwable throwable = ((HasJavaThrowable) e).getJavaThrowable();
+      Throwable throwable = ThrowableUtils.getJavaThrowable(e);
       if (throwable != null) {
         return throwable;
       }
@@ -245,25 +247,5 @@ public class Throwable implements Serializable {
 
     // If the JS error is being seen for the first time, map it best corresponding Java exception.
     return e instanceof NativeTypeError ? new NullPointerException(e) : new JsException(e);
-  }
-
-  @JsType(isNative = true, name = "Error", namespace = JsPackage.GLOBAL)
-  private static class NativeError {
-    @JsProperty(name = "captureStackTrace")
-    static boolean hasCaptureStackTraceProperty;
-
-    static native void captureStackTrace(Object error);
-
-    String stack;
-  }
-
-  @JsType(isNative = true, name = "TypeError", namespace = JsPackage.GLOBAL)
-  private static class NativeTypeError {}
-
-  @SuppressWarnings("unusable-by-js")
-  @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
-  private interface HasJavaThrowable {
-    @JsProperty(name = "__java$exception")
-    Throwable getJavaThrowable();
   }
 }

@@ -125,6 +125,61 @@ public final class ArrayHelper {
     }
   }
 
+  public static boolean equals(double[] array1, double[] array2) {
+    if (array1 == array2) {
+      return true;
+    }
+
+    if (array1 == null || array2 == null) {
+      return false;
+    }
+
+    if (array1.length != array2.length) {
+      return false;
+    }
+
+    for (int i = 0; i < array1.length; ++i) {
+      // Make sure we follow Double equality semantics (per spec of the method).
+      if (!((Double) array1[i]).equals(array2[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public static boolean equals(float[] array1, float[] array2) {
+    return equals(JsUtils.<double[]>uncheckedCast(array1), JsUtils.<double[]>uncheckedCast(array2));
+  }
+
+  public static int binarySearch(
+      final double[] sortedArray, int fromIndex, int toIndex, final double key) {
+    int low = fromIndex;
+    int high = toIndex - 1;
+
+    while (low <= high) {
+      final int mid = low + ((high - low) >> 1);
+      final double midVal = sortedArray[mid];
+
+      int cmp = Double.compare(midVal, key);
+      if (cmp < 0) {
+        low = mid + 1;
+      } else if (cmp > 0) {
+        high = mid - 1;
+      } else {
+        // key found
+        return mid;
+      }
+    }
+    // key not found.
+    return -low - 1;
+  }
+
+  public static int binarySearch(
+      final float[] sortedArray, int fromIndex, int toIndex, final float key) {
+    return binarySearch(JsUtils.<double[]>uncheckedCast(sortedArray), fromIndex, toIndex, key);
+  }
+
   @JsType(isNative = true, name = "Function", namespace = JsPackage.GLOBAL)
   private static class NativeFunction {
     public native String apply(Object thisContext, Object[] argsArray);
@@ -141,6 +196,29 @@ public final class ArrayHelper {
 
   public static void sort(Object array, CompareFunction fn) {
     asNativeArray(array).sort(fn);
+  }
+
+  @JsFunction
+  private interface CompareDoubleFunction {
+    double compare(double d1, double d2);
+  }
+
+  public static CompareFunction getIntComparator() {
+    return JsUtils.uncheckedCast((CompareDoubleFunction) (a, b) -> a - b);
+  }
+
+  public static CompareFunction getDoubleComparator() {
+    return JsUtils.uncheckedCast((CompareDoubleFunction) Double::compare);
+  }
+
+  @JsFunction
+  private interface CompareLongFunction {
+    @SuppressWarnings("unusable-by-js")
+    int compare(long d1, long d2);
+  }
+
+  public static CompareFunction getLongComparator() {
+    return JsUtils.uncheckedCast((CompareLongFunction) Long::compare);
   }
 
   // TODO(b/234777938): Remove once the stdlib is in with their implementation of ArrayIterators.

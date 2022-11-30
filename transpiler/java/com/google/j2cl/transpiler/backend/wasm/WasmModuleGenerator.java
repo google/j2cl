@@ -313,28 +313,34 @@ public class WasmModuleGenerator {
   }
 
   private void renderMethod(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    // TODO(b/260914432): Remove isInstance methods in a pass.
+    // $isInstance is unused in WASM, and the explicit implementations in our JRE for Comparable,
+    // etc use a native type in a way that is currently unsupported in WASM.
+    if (methodDescriptor.getName().equals(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
+      return;
+    }
+
     builder.newLine();
     builder.newLine();
     builder.append(";;; " + method.getReadableDescription());
     builder.newLine();
-    builder.append("(func " + environment.getMethodImplementationName(method.getDescriptor()));
+    builder.append("(func " + environment.getMethodImplementationName(methodDescriptor));
 
-    boolean isStaticExtern = method.getDescriptor().isExtern() && method.getDescriptor().isStatic();
+    boolean isStaticExtern = methodDescriptor.isExtern() && methodDescriptor.isStatic();
     if (isStaticExtern) {
       builder.append(
-          String.format(
-              " (import \"imports\" \"%s\") ", method.getDescriptor().getQualifiedJsName()));
+          String.format(" (import \"imports\" \"%s\") ", methodDescriptor.getQualifiedJsName()));
     }
 
     if (method.isStatic() && isEntryPoint(method.getQualifiedBinaryName())) {
-      String methodName = method.getDescriptor().getName();
+      String methodName = methodDescriptor.getName();
       if (exportedMethods.add(methodName)) {
         builder.append(" (export \"" + methodName + "\")");
       } else {
         problems.error("More than one method are exported with the same name \"%s\".", methodName);
       }
     }
-    MethodDescriptor methodDescriptor = method.getDescriptor();
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
     // Emit parameters

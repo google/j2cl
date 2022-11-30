@@ -41,8 +41,6 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.ArrayHelper.CompareFunction;
-import javaemul.internal.JsUtils;
-import jsinterop.annotations.JsFunction;
 
 /**
  * Utility methods related to native arrays. See <a
@@ -234,34 +232,11 @@ public class Arrays {
    */
   public static int binarySearch(double[] sortedArray, int fromIndex, int toIndex, double key) {
     checkCriticalArrayBounds(fromIndex, toIndex, sortedArray.length);
-    return binarySearch0(sortedArray, fromIndex, toIndex, key);
+    return ArrayHelper.binarySearch(sortedArray, fromIndex, toIndex, key);
   }
 
   public static int binarySearch(double[] sortedArray, double key) {
-    return binarySearch0(sortedArray, 0, sortedArray.length, key);
-  }
-
-  private static int binarySearch0(
-      final double[] sortedArray, int fromIndex, int toIndex, final double key) {
-    int low = fromIndex;
-    int high = toIndex - 1;
-
-    while (low <= high) {
-      final int mid = low + ((high - low) >> 1);
-      final double midVal = sortedArray[mid];
-
-      int cmp = Double.compare(midVal, key);
-      if (cmp < 0) {
-        low = mid + 1;
-      } else if (cmp > 0) {
-        high = mid - 1;
-      } else {
-        // key found
-        return mid;
-      }
-    }
-    // key not found.
-    return -low - 1;
+    return ArrayHelper.binarySearch(sortedArray, 0, sortedArray.length, key);
   }
 
   /**
@@ -280,11 +255,11 @@ public class Arrays {
    *     than all elements in the array) minus 1 (to ensure error returns are negative)
    */
   public static int binarySearch(float[] sortedArray, int fromIndex, int toIndex, float key) {
-    return binarySearch(JsUtils.<double[]>uncheckedCast(sortedArray), fromIndex, toIndex, key);
+    return ArrayHelper.binarySearch(sortedArray, fromIndex, toIndex, key);
   }
 
   public static int binarySearch(float[] sortedArray, float key) {
-    return binarySearch(JsUtils.<double[]>uncheckedCast(sortedArray), key);
+    return ArrayHelper.binarySearch(sortedArray, 0, sortedArray.length, key);
   }
 
   /**
@@ -733,30 +708,11 @@ public class Arrays {
   }
 
   public static boolean equals(double[] array1, double[] array2) {
-    if (array1 == array2) {
-      return true;
-    }
-
-    if (array1 == null || array2 == null) {
-      return false;
-    }
-
-    if (array1.length != array2.length) {
-      return false;
-    }
-
-    for (int i = 0; i < array1.length; ++i) {
-      // Make sure we follow Double equality semantics (per spec of the method).
-      if (!((Double) array1[i]).equals(array2[i])) {
-        return false;
-      }
-    }
-
-    return true;
+    return ArrayHelper.equals(array1, array2);
   }
 
   public static boolean equals(float[] array1, float[] array2) {
-    return equals(JsUtils.<double[]>uncheckedCast(array1), JsUtils.<double[]>uncheckedCast(array2));
+    return ArrayHelper.equals(array1, array2);
   }
 
   public static boolean equals(int[] array1, int[] array2) {
@@ -1221,21 +1177,21 @@ public class Arrays {
   }
 
   public static void sort(double[] array) {
-    ArrayHelper.sort(array, getDoubleComparator());
+    ArrayHelper.sort(array, ArrayHelper.getDoubleComparator());
   }
 
   public static void sort(double[] array, int fromIndex, int toIndex) {
     checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeSort(array, fromIndex, toIndex, getDoubleComparator());
+    nativeSort(array, fromIndex, toIndex, ArrayHelper.getDoubleComparator());
   }
 
   public static void sort(float[] array) {
-    ArrayHelper.sort(array, getDoubleComparator());
+    ArrayHelper.sort(array, ArrayHelper.getDoubleComparator());
   }
 
   public static void sort(float[] array, int fromIndex, int toIndex) {
     checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeSort(array, fromIndex, toIndex, getDoubleComparator());
+    nativeSort(array, fromIndex, toIndex, ArrayHelper.getDoubleComparator());
   }
 
   public static void sort(int[] array) {
@@ -1248,12 +1204,12 @@ public class Arrays {
   }
 
   public static void sort(long[] array) {
-    ArrayHelper.sort(array, getLongComparator());
+    ArrayHelper.sort(array, ArrayHelper.getLongComparator());
   }
 
   public static void sort(long[] array, int fromIndex, int toIndex) {
     checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeSort(array, fromIndex, toIndex, getLongComparator());
+    nativeSort(array, fromIndex, toIndex, ArrayHelper.getLongComparator());
   }
 
   public static void sort(Object[] array) {
@@ -1681,35 +1637,12 @@ public class Arrays {
 
   /** Sort an entire array of number primitives of integral type. */
   private static void nativeIntegerSort(Object array) {
-    ArrayHelper.sort(array, getIntComparator());
+    ArrayHelper.sort(array, ArrayHelper.getIntComparator());
   }
 
   /** Sort a subset of an array of primitives of integral type. */
   private static void nativeIntegerSort(Object array, int fromIndex, int toIndex) {
-    nativeSort(array, fromIndex, toIndex, getIntComparator());
-  }
-
-  @JsFunction
-  private interface CompareDoubleFunction {
-    double compare(double d1, double d2);
-  }
-
-  private static CompareFunction getIntComparator() {
-    return JsUtils.uncheckedCast((CompareDoubleFunction) (a, b) -> a - b);
-  }
-
-  private static CompareFunction getDoubleComparator() {
-    return JsUtils.uncheckedCast((CompareDoubleFunction) Double::compare);
-  }
-
-  @JsFunction
-  private interface CompareLongFunction {
-    @SuppressWarnings("unusable-by-js")
-    int compare(long d1, long d2);
-  }
-
-  private static CompareFunction getLongComparator() {
-    return JsUtils.uncheckedCast((CompareLongFunction) Long::compare);
+    nativeSort(array, fromIndex, toIndex, ArrayHelper.getIntComparator());
   }
 
   private Arrays() {}

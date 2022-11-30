@@ -75,6 +75,9 @@ package_sources(
         "java/util/InternalStringMap.java",  # J2WASM HashMap doesn't need it.
         "java/util/AbstractHashMap.java",  # J2WASM HashMap doesn't need it.
         "javaemul/internal/Casts.java",  # J2WASM doesn't need it.
+        "javaemul/internal/ArrayStamper.java",  # Unused in WASM
+        "javaemul/internal/Comparables.java",  # Unused in WASM
+        "javaemul/internal/Objects.java",  # Unused in WASM
     ],
     super_srcs = glob(["super-wasm/**/*.java"]),
 )

@@ -17,6 +17,9 @@ package java.lang;
 
 import javaemul.internal.JsUtils;
 import javaemul.internal.LongUtils;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /** Converts integral types to strings. */
 final class IntegralToString {
@@ -34,7 +37,7 @@ final class IntegralToString {
   }
 
   private static String intToUnsignedString(int value, int radix) {
-    return JsUtils.uintToString(value, radix);
+    return numberToString(toDoubleFromUnsignedInt(value), radix);
   }
 
   public static String intToString(int value) {
@@ -42,7 +45,20 @@ final class IntegralToString {
   }
 
   public static String intToString(int value, int radix) {
-    return JsUtils.intToString(value, radix);
+    return numberToString(value, radix);
+  }
+
+  @JsMethod
+  private static native double toDoubleFromUnsignedInt(int value);
+
+  private static String numberToString(double value, int radix) {
+    NativeNumber number = JsUtils.uncheckedCast(value);
+    return number.toString(radix);
+  }
+
+  @JsType(isNative = true, name = "Number", namespace = JsPackage.GLOBAL)
+  private interface NativeNumber {
+    String toString(int radix);
   }
 
   public static String longToBinaryString(long value) {

@@ -108,6 +108,98 @@ public final class ArrayHelper {
     asWasmArray(dest).copyFrom(destOfs, asWasmArray(array), srcOfs, len);
   }
 
+  public static boolean equals(double[] array1, double[] array2) {
+    if (array1 == array2) {
+      return true;
+    }
+
+    if (array1 == null || array2 == null) {
+      return false;
+    }
+
+    if (array1.length != array2.length) {
+      return false;
+    }
+
+    for (int i = 0; i < array1.length; ++i) {
+      // Make sure we follow Double equality semantics (per spec of the method).
+      if (Double.doubleToLongBits(array1[i]) != Double.doubleToLongBits(array2[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public static boolean equals(float[] array1, float[] array2) {
+    if (array1 == array2) {
+      return true;
+    }
+
+    if (array1 == null || array2 == null) {
+      return false;
+    }
+
+    if (array1.length != array2.length) {
+      return false;
+    }
+
+    for (int i = 0; i < array1.length; ++i) {
+      // Make sure we follow Float equality semantics (per spec of the method).
+      if (Float.floatToIntBits(array1[i]) != Float.floatToIntBits(array2[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public static int binarySearch(
+      final double[] sortedArray, int fromIndex, int toIndex, final double key) {
+    int low = fromIndex;
+    int high = toIndex - 1;
+
+    while (low <= high) {
+      final int mid = low + ((high - low) >> 1);
+      final double midVal = sortedArray[mid];
+
+      int cmp = Double.compare(midVal, key);
+      if (cmp < 0) {
+        low = mid + 1;
+      } else if (cmp > 0) {
+        high = mid - 1;
+      } else {
+        // key found
+        return mid;
+      }
+    }
+    // key not found.
+    return -low - 1;
+  }
+
+  public static int binarySearch(
+      final float[] sortedArray, int fromIndex, int toIndex, final float key) {
+    int low = fromIndex;
+    int high = toIndex - 1;
+
+    while (low <= high) {
+      final int mid = low + ((high - low) >> 1);
+      final float midVal = sortedArray[mid];
+
+      int cmp = Float.compare(midVal, key);
+      if (cmp < 0) {
+        low = mid + 1;
+      } else if (cmp > 0) {
+        high = mid - 1;
+      } else {
+        // key found
+        return mid;
+      }
+    }
+    // key not found.
+    return -low - 1;
+  }
+
   private static WasmArray asWasmArray(Object obj) {
     return (WasmArray) obj;
   }
@@ -118,7 +210,23 @@ public final class ArrayHelper {
   }
 
   public static void sort(Object array, CompareFunction fn) {
+    // TODO(b/194677447): Implement Arrays.sort in WASM.
     throw new UnsupportedOperationException();
+  }
+
+  public static CompareFunction getIntComparator() {
+    // TODO(b/194677447): Implement Arrays.sort in WASM.
+    return null;
+  }
+
+  public static CompareFunction getDoubleComparator() {
+    // TODO(b/194677447): Implement Arrays.sort in WASM.
+    return null;
+  }
+
+  public static CompareFunction getLongComparator() {
+    // TODO(b/194677447): Implement Arrays.sort in WASM.
+    return null;
   }
 
   private ArrayHelper() {}
