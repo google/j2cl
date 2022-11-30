@@ -18,11 +18,19 @@ open class RawType {
 
  @JvmField var rawBoundRecursively: RawType.BoundRecursively<*>? = RawType.BoundRecursively()
 
+ @JvmField var rawBoundDependentDirect: RawType.BoundDependentDirect<Any?, Any>? = RawType.BoundDependentDirect<Any?, Any>()
+
+ @JvmField var rawBoundDependentIndirect: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
+
  open class Unbound<T> {}
 
  open class Bound<T: RawType?> {}
 
  open class BoundRecursively<T: RawType.BoundRecursively<T>?> {}
+
+ open class BoundDependentDirect<A, B: A> {}
+
+ open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> {}
 
  interface GenericSuperclass<T: RawType?> {
   fun f(

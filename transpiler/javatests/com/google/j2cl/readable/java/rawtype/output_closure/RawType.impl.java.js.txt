@@ -4,6 +4,8 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bound = goog.forwardDeclare('rawtype.RawType.Bound$impl');
+let BoundDependentDirect = goog.forwardDeclare('rawtype.RawType.BoundDependentDirect$impl');
+let BoundDependentIndirect = goog.forwardDeclare('rawtype.RawType.BoundDependentIndirect$impl');
 let BoundRecursively = goog.forwardDeclare('rawtype.RawType.BoundRecursively$impl');
 let Unbound = goog.forwardDeclare('rawtype.RawType.Unbound$impl');
 
@@ -17,6 +19,10 @@ class RawType extends j_l_Object {
   this.f_rawBound__rawtype_RawType;
   /**@type {BoundRecursively} @nodts*/
   this.f_rawBoundRecursively__rawtype_RawType;
+  /**@type {BoundDependentDirect} @nodts*/
+  this.f_rawBoundDependentDirect__rawtype_RawType;
+  /**@type {BoundDependentIndirect} @nodts*/
+  this.f_rawBoundDependentIndirect__rawtype_RawType;
  }
  /** @nodts @return {!RawType} */
  static $create__() {
@@ -35,6 +41,8 @@ class RawType extends j_l_Object {
   this.f_rawUnbound__rawtype_RawType = /**@type {!Unbound}*/ (Unbound.$create__());
   this.f_rawBound__rawtype_RawType = /**@type {!Bound}*/ (Bound.$create__());
   this.f_rawBoundRecursively__rawtype_RawType = /**@type {!BoundRecursively}*/ (BoundRecursively.$create__());
+  this.f_rawBoundDependentDirect__rawtype_RawType = /**@type {!BoundDependentDirect}*/ (BoundDependentDirect.$create__());
+  this.f_rawBoundDependentIndirect__rawtype_RawType = /**@type {!BoundDependentIndirect}*/ (BoundDependentIndirect.$create__());
  }
  /** @nodts */
  static $clinit() {
@@ -50,6 +58,8 @@ class RawType extends j_l_Object {
  /** @nodts */
  static $loadModules() {
   Bound = goog.module.get('rawtype.RawType.Bound$impl');
+  BoundDependentDirect = goog.module.get('rawtype.RawType.BoundDependentDirect$impl');
+  BoundDependentIndirect = goog.module.get('rawtype.RawType.BoundDependentIndirect$impl');
   BoundRecursively = goog.module.get('rawtype.RawType.BoundRecursively$impl');
   Unbound = goog.module.get('rawtype.RawType.Unbound$impl');
  }

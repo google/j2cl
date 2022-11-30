@@ -1,0 +1,45 @@
+goog.module('rawtype.RawType.BoundDependentIndirect$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Unbound = goog.forwardDeclare('rawtype.RawType.Unbound$impl');
+
+/**
+ * @template A, B
+ */
+class BoundDependentIndirect extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @template A, B @return {!BoundDependentIndirect<A, B>} */
+ static $create__() {
+  BoundDependentIndirect.$clinit();
+  let $instance = new BoundDependentIndirect();
+  $instance.$ctor__rawtype_RawType_BoundDependentIndirect__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__rawtype_RawType_BoundDependentIndirect__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts */
+ static $clinit() {
+  BoundDependentIndirect.$clinit = () =>{};
+  BoundDependentIndirect.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BoundDependentIndirect;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(BoundDependentIndirect, 'rawtype.RawType$BoundDependentIndirect');
+
+exports = BoundDependentIndirect;
+
+//# sourceMappingURL=RawType$BoundDependentIndirect.js.map

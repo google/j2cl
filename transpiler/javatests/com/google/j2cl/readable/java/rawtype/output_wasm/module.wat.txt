@@ -10,6 +10,12 @@
 ;;; Code for rawtype.RawType.BoundRecursively [static fields]
 (global $f_$initialized__rawtype_RawType_BoundRecursively (mut i32) (i32.const 0))
 
+;;; Code for rawtype.RawType.BoundDependentDirect [static fields]
+(global $f_$initialized__rawtype_RawType_BoundDependentDirect (mut i32) (i32.const 0))
+
+;;; Code for rawtype.RawType.BoundDependentIndirect [static fields]
+(global $f_$initialized__rawtype_RawType_BoundDependentIndirect (mut i32) (i32.const 0))
+
 ;;; Code for rawtype.RawType.GenericSuperclass [static fields]
 (global $f_$initialized__rawtype_RawType_GenericSuperclass (mut i32) (i32.const 0))
 
@@ -100,6 +106,48 @@
   (ref.null struct)
  ))
 
+;;; Code for rawtype.RawType.BoundDependentDirect [vtable.init]
+(global $rawtype.RawType.BoundDependentDirect.vtable (ref $rawtype.RawType.BoundDependentDirect.vtable) 
+ (struct.new $rawtype.RawType.BoundDependentDirect.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@rawtype.RawType.BoundDependentDirect)
+ )
+)
+
+;;; Code for rawtype.RawType.BoundDependentDirect [itable.init]
+(global $rawtype.RawType.BoundDependentDirect.itable (ref $rawtype.RawType.BoundDependentDirect.itable) (struct.new $rawtype.RawType.BoundDependentDirect.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for rawtype.RawType.BoundDependentIndirect [vtable.init]
+(global $rawtype.RawType.BoundDependentIndirect.vtable (ref $rawtype.RawType.BoundDependentIndirect.vtable) 
+ (struct.new $rawtype.RawType.BoundDependentIndirect.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@rawtype.RawType.BoundDependentIndirect)
+ )
+)
+
+;;; Code for rawtype.RawType.BoundDependentIndirect [itable.init]
+(global $rawtype.RawType.BoundDependentIndirect.itable (ref $rawtype.RawType.BoundDependentIndirect.itable) (struct.new $rawtype.RawType.BoundDependentIndirect.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for rawtype.RawType.RawSubclass [vtable.init]
 (global $rawtype.RawType.RawSubclass.vtable (ref $rawtype.RawType.RawSubclass.vtable) 
  (struct.new $rawtype.RawType.RawSubclass.vtable
@@ -132,6 +180,8 @@
  (field $f_rawUnbound__rawtype_RawType (mut (ref null $rawtype.RawType.Unbound)))
  (field $f_rawBound__rawtype_RawType (mut (ref null $rawtype.RawType.Bound)))
  (field $f_rawBoundRecursively__rawtype_RawType (mut (ref null $rawtype.RawType.BoundRecursively)))
+ (field $f_rawBoundDependentDirect__rawtype_RawType (mut (ref null $rawtype.RawType.BoundDependentDirect)))
+ (field $f_rawBoundDependentIndirect__rawtype_RawType (mut (ref null $rawtype.RawType.BoundDependentIndirect)))
   $java.lang.Object)
 )
 (type $rawtype.RawType.vtable (struct_subtype 
@@ -157,9 +207,9 @@
  ;;@ rawtype/RawType.java:19:6
  (local $$instance (ref null $rawtype.RawType))
  (block
-  ;; RawType $instance = new RawType.<init>(0,null,null,null);
+  ;; RawType $instance = new RawType.<init>(0,null,null,null,null,null);
   ;;@ rawtype/RawType.java:19:6
-  (local.set $$instance (struct.new $rawtype.RawType (ref.as_non_null (global.get $rawtype.RawType.vtable)) (ref.as_non_null (global.get $rawtype.RawType.itable)) (i32.const 0) (ref.null $rawtype.RawType.Unbound) (ref.null $rawtype.RawType.Bound) (ref.null $rawtype.RawType.BoundRecursively)))
+  (local.set $$instance (struct.new $rawtype.RawType (ref.as_non_null (global.get $rawtype.RawType.vtable)) (ref.as_non_null (global.get $rawtype.RawType.itable)) (i32.const 0) (ref.null $rawtype.RawType.Unbound) (ref.null $rawtype.RawType.Bound) (ref.null $rawtype.RawType.BoundRecursively) (ref.null $rawtype.RawType.BoundDependentDirect) (ref.null $rawtype.RawType.BoundDependentIndirect)))
   ;; $instance.$ctor();
   ;;@ rawtype/RawType.java:19:6
   (call $$ctor__void_$p_rawtype_RawType@rawtype.RawType (ref.as_non_null (local.get $$instance)))
@@ -200,6 +250,12 @@
   ;; (RawType.this.rawBoundRecursively = rawtype.RawType.BoundRecursively.$create());
   ;;@ rawtype/RawType.java:22:2
   (struct.set $rawtype.RawType $f_rawBoundRecursively__rawtype_RawType(local.get $this) (call $$create__@rawtype.RawType.BoundRecursively ))
+  ;; (RawType.this.rawBoundDependentDirect = rawtype.RawType.BoundDependentDirect.$create());
+  ;;@ rawtype/RawType.java:23:2
+  (struct.set $rawtype.RawType $f_rawBoundDependentDirect__rawtype_RawType(local.get $this) (call $$create__@rawtype.RawType.BoundDependentDirect ))
+  ;; (RawType.this.rawBoundDependentIndirect = rawtype.RawType.BoundDependentIndirect.$create());
+  ;;@ rawtype/RawType.java:24:2
+  (struct.set $rawtype.RawType $f_rawBoundDependentIndirect__rawtype_RawType(local.get $this) (call $$create__@rawtype.RawType.BoundDependentIndirect ))
  )
 )
 
@@ -266,17 +322,17 @@
 ;;; Unbound<T> Unbound.$create()
 (func $$create__@rawtype.RawType.Unbound
  (result (ref null $rawtype.RawType.Unbound))
- ;;@ rawtype/RawType.java:24:15
+ ;;@ rawtype/RawType.java:26:15
  (local $$instance (ref null $rawtype.RawType.Unbound))
  (block
   ;; Unbound<T> $instance = new Unbound.<init>(0);
-  ;;@ rawtype/RawType.java:24:15
+  ;;@ rawtype/RawType.java:26:15
   (local.set $$instance (struct.new $rawtype.RawType.Unbound (ref.as_non_null (global.get $rawtype.RawType.Unbound.vtable)) (ref.as_non_null (global.get $rawtype.RawType.Unbound.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ rawtype/RawType.java:24:15
+  ;;@ rawtype/RawType.java:26:15
   (call $$ctor__void_$p_rawtype_RawType_Unbound@rawtype.RawType.Unbound (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ rawtype/RawType.java:24:15
+  ;;@ rawtype/RawType.java:26:15
   (return (local.get $$instance))
  )
 )
@@ -284,35 +340,35 @@
 ;;; void Unbound.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_Unbound@rawtype.RawType.Unbound
  (param $this (ref null $rawtype.RawType.Unbound))
- ;;@ rawtype/RawType.java:24:15
+ ;;@ rawtype/RawType.java:26:15
  (block
   ;; rawtype.RawType.Unbound.$clinit();
-  ;;@ rawtype/RawType.java:24:15
+  ;;@ rawtype/RawType.java:26:15
   (call $$clinit__void@rawtype.RawType.Unbound )
   ;; Object.this.$ctor();
-  ;;@ rawtype/RawType.java:24:15
+  ;;@ rawtype/RawType.java:26:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Unbound.$clinit()
 (func $$clinit__void@rawtype.RawType.Unbound
- ;;@ rawtype/RawType.java:24:15
+ ;;@ rawtype/RawType.java:26:15
  (block
   ;; if (rawtype.RawType.Unbound.$initialized) return;
-  ;;@ rawtype/RawType.java:24:15
+  ;;@ rawtype/RawType.java:26:15
   (if (global.get $f_$initialized__rawtype_RawType_Unbound)
    (then
     ;; return;
-    ;;@ rawtype/RawType.java:24:15
+    ;;@ rawtype/RawType.java:26:15
     (return )
    )
   )
   ;; (rawtype.RawType.Unbound.$initialized = true);
-  ;;@ rawtype/RawType.java:24:15
+  ;;@ rawtype/RawType.java:26:15
   (global.set $f_$initialized__rawtype_RawType_Unbound (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ rawtype/RawType.java:24:15
+  ;;@ rawtype/RawType.java:26:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -358,17 +414,17 @@
 ;;; Bound<T> Bound.$create()
 (func $$create__@rawtype.RawType.Bound
  (result (ref null $rawtype.RawType.Bound))
- ;;@ rawtype/RawType.java:26:15
+ ;;@ rawtype/RawType.java:28:15
  (local $$instance (ref null $rawtype.RawType.Bound))
  (block
   ;; Bound<T> $instance = new Bound.<init>(0);
-  ;;@ rawtype/RawType.java:26:15
+  ;;@ rawtype/RawType.java:28:15
   (local.set $$instance (struct.new $rawtype.RawType.Bound (ref.as_non_null (global.get $rawtype.RawType.Bound.vtable)) (ref.as_non_null (global.get $rawtype.RawType.Bound.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ rawtype/RawType.java:26:15
+  ;;@ rawtype/RawType.java:28:15
   (call $$ctor__void_$p_rawtype_RawType_Bound@rawtype.RawType.Bound (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ rawtype/RawType.java:26:15
+  ;;@ rawtype/RawType.java:28:15
   (return (local.get $$instance))
  )
 )
@@ -376,35 +432,35 @@
 ;;; void Bound.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_Bound@rawtype.RawType.Bound
  (param $this (ref null $rawtype.RawType.Bound))
- ;;@ rawtype/RawType.java:26:15
+ ;;@ rawtype/RawType.java:28:15
  (block
   ;; rawtype.RawType.Bound.$clinit();
-  ;;@ rawtype/RawType.java:26:15
+  ;;@ rawtype/RawType.java:28:15
   (call $$clinit__void@rawtype.RawType.Bound )
   ;; Object.this.$ctor();
-  ;;@ rawtype/RawType.java:26:15
+  ;;@ rawtype/RawType.java:28:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Bound.$clinit()
 (func $$clinit__void@rawtype.RawType.Bound
- ;;@ rawtype/RawType.java:26:15
+ ;;@ rawtype/RawType.java:28:15
  (block
   ;; if (rawtype.RawType.Bound.$initialized) return;
-  ;;@ rawtype/RawType.java:26:15
+  ;;@ rawtype/RawType.java:28:15
   (if (global.get $f_$initialized__rawtype_RawType_Bound)
    (then
     ;; return;
-    ;;@ rawtype/RawType.java:26:15
+    ;;@ rawtype/RawType.java:28:15
     (return )
    )
   )
   ;; (rawtype.RawType.Bound.$initialized = true);
-  ;;@ rawtype/RawType.java:26:15
+  ;;@ rawtype/RawType.java:28:15
   (global.set $f_$initialized__rawtype_RawType_Bound (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ rawtype/RawType.java:26:15
+  ;;@ rawtype/RawType.java:28:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -450,17 +506,17 @@
 ;;; BoundRecursively<T> BoundRecursively.$create()
 (func $$create__@rawtype.RawType.BoundRecursively
  (result (ref null $rawtype.RawType.BoundRecursively))
- ;;@ rawtype/RawType.java:28:15
+ ;;@ rawtype/RawType.java:30:15
  (local $$instance (ref null $rawtype.RawType.BoundRecursively))
  (block
   ;; BoundRecursively<T> $instance = new BoundRecursively.<init>(0);
-  ;;@ rawtype/RawType.java:28:15
+  ;;@ rawtype/RawType.java:30:15
   (local.set $$instance (struct.new $rawtype.RawType.BoundRecursively (ref.as_non_null (global.get $rawtype.RawType.BoundRecursively.vtable)) (ref.as_non_null (global.get $rawtype.RawType.BoundRecursively.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ rawtype/RawType.java:28:15
+  ;;@ rawtype/RawType.java:30:15
   (call $$ctor__void_$p_rawtype_RawType_BoundRecursively@rawtype.RawType.BoundRecursively (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ rawtype/RawType.java:28:15
+  ;;@ rawtype/RawType.java:30:15
   (return (local.get $$instance))
  )
 )
@@ -468,35 +524,35 @@
 ;;; void BoundRecursively.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_BoundRecursively@rawtype.RawType.BoundRecursively
  (param $this (ref null $rawtype.RawType.BoundRecursively))
- ;;@ rawtype/RawType.java:28:15
+ ;;@ rawtype/RawType.java:30:15
  (block
   ;; rawtype.RawType.BoundRecursively.$clinit();
-  ;;@ rawtype/RawType.java:28:15
+  ;;@ rawtype/RawType.java:30:15
   (call $$clinit__void@rawtype.RawType.BoundRecursively )
   ;; Object.this.$ctor();
-  ;;@ rawtype/RawType.java:28:15
+  ;;@ rawtype/RawType.java:30:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void BoundRecursively.$clinit()
 (func $$clinit__void@rawtype.RawType.BoundRecursively
- ;;@ rawtype/RawType.java:28:15
+ ;;@ rawtype/RawType.java:30:15
  (block
   ;; if (rawtype.RawType.BoundRecursively.$initialized) return;
-  ;;@ rawtype/RawType.java:28:15
+  ;;@ rawtype/RawType.java:30:15
   (if (global.get $f_$initialized__rawtype_RawType_BoundRecursively)
    (then
     ;; return;
-    ;;@ rawtype/RawType.java:28:15
+    ;;@ rawtype/RawType.java:30:15
     (return )
    )
   )
   ;; (rawtype.RawType.BoundRecursively.$initialized = true);
-  ;;@ rawtype/RawType.java:28:15
+  ;;@ rawtype/RawType.java:30:15
   (global.set $f_$initialized__rawtype_RawType_BoundRecursively (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ rawtype/RawType.java:28:15
+  ;;@ rawtype/RawType.java:30:15
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -515,6 +571,190 @@
 )
 (elem declare func $m_getClass__java_lang_Class@rawtype.RawType.BoundRecursively)
 
+;;; Code for rawtype.RawType.BoundDependentDirect [CLASS]
+(type $rawtype.RawType.BoundDependentDirect (struct_subtype 
+ (field $vtable (ref $rawtype.RawType.BoundDependentDirect.vtable)) 
+ (field $itable (ref $rawtype.RawType.BoundDependentDirect.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $rawtype.RawType.BoundDependentDirect.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+(type $rawtype.RawType.BoundDependentDirect.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
+
+;;; BoundDependentDirect<A, B> BoundDependentDirect.$create()
+(func $$create__@rawtype.RawType.BoundDependentDirect
+ (result (ref null $rawtype.RawType.BoundDependentDirect))
+ ;;@ rawtype/RawType.java:32:15
+ (local $$instance (ref null $rawtype.RawType.BoundDependentDirect))
+ (block
+  ;; BoundDependentDirect<A, B> $instance = new BoundDependentDirect.<init>(0);
+  ;;@ rawtype/RawType.java:32:15
+  (local.set $$instance (struct.new $rawtype.RawType.BoundDependentDirect (ref.as_non_null (global.get $rawtype.RawType.BoundDependentDirect.vtable)) (ref.as_non_null (global.get $rawtype.RawType.BoundDependentDirect.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ rawtype/RawType.java:32:15
+  (call $$ctor__void_$p_rawtype_RawType_BoundDependentDirect@rawtype.RawType.BoundDependentDirect (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ rawtype/RawType.java:32:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void BoundDependentDirect.$ctor()
+(func $$ctor__void_$p_rawtype_RawType_BoundDependentDirect@rawtype.RawType.BoundDependentDirect
+ (param $this (ref null $rawtype.RawType.BoundDependentDirect))
+ ;;@ rawtype/RawType.java:32:15
+ (block
+  ;; rawtype.RawType.BoundDependentDirect.$clinit();
+  ;;@ rawtype/RawType.java:32:15
+  (call $$clinit__void@rawtype.RawType.BoundDependentDirect )
+  ;; Object.this.$ctor();
+  ;;@ rawtype/RawType.java:32:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void BoundDependentDirect.$clinit()
+(func $$clinit__void@rawtype.RawType.BoundDependentDirect
+ ;;@ rawtype/RawType.java:32:15
+ (block
+  ;; if (rawtype.RawType.BoundDependentDirect.$initialized) return;
+  ;;@ rawtype/RawType.java:32:15
+  (if (global.get $f_$initialized__rawtype_RawType_BoundDependentDirect)
+   (then
+    ;; return;
+    ;;@ rawtype/RawType.java:32:15
+    (return )
+   )
+  )
+  ;; (rawtype.RawType.BoundDependentDirect.$initialized = true);
+  ;;@ rawtype/RawType.java:32:15
+  (global.set $f_$initialized__rawtype_RawType_BoundDependentDirect (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ rawtype/RawType.java:32:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> BoundDependentDirect.getClass()
+(func $m_getClass__java_lang_Class@rawtype.RawType.BoundDependentDirect
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $rawtype.RawType.BoundDependentDirect))
+ (local.set $this (ref.cast_static $rawtype.RawType.BoundDependentDirect (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.BoundDependentDirect();
+  (return (call $function.no.side.effects.$getRawtype.RawType.BoundDependentDirect__java_lang_Class (ref.func $$getRawtype.RawType.BoundDependentDirect__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@rawtype.RawType.BoundDependentDirect)
+
+;;; Code for rawtype.RawType.BoundDependentIndirect [CLASS]
+(type $rawtype.RawType.BoundDependentIndirect (struct_subtype 
+ (field $vtable (ref $rawtype.RawType.BoundDependentIndirect.vtable)) 
+ (field $itable (ref $rawtype.RawType.BoundDependentIndirect.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $rawtype.RawType.BoundDependentIndirect.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+(type $rawtype.RawType.BoundDependentIndirect.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
+
+;;; BoundDependentIndirect<A, B> BoundDependentIndirect.$create()
+(func $$create__@rawtype.RawType.BoundDependentIndirect
+ (result (ref null $rawtype.RawType.BoundDependentIndirect))
+ ;;@ rawtype/RawType.java:34:15
+ (local $$instance (ref null $rawtype.RawType.BoundDependentIndirect))
+ (block
+  ;; BoundDependentIndirect<A, B> $instance = new BoundDependentIndirect.<init>(0);
+  ;;@ rawtype/RawType.java:34:15
+  (local.set $$instance (struct.new $rawtype.RawType.BoundDependentIndirect (ref.as_non_null (global.get $rawtype.RawType.BoundDependentIndirect.vtable)) (ref.as_non_null (global.get $rawtype.RawType.BoundDependentIndirect.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ rawtype/RawType.java:34:15
+  (call $$ctor__void_$p_rawtype_RawType_BoundDependentIndirect@rawtype.RawType.BoundDependentIndirect (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ rawtype/RawType.java:34:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void BoundDependentIndirect.$ctor()
+(func $$ctor__void_$p_rawtype_RawType_BoundDependentIndirect@rawtype.RawType.BoundDependentIndirect
+ (param $this (ref null $rawtype.RawType.BoundDependentIndirect))
+ ;;@ rawtype/RawType.java:34:15
+ (block
+  ;; rawtype.RawType.BoundDependentIndirect.$clinit();
+  ;;@ rawtype/RawType.java:34:15
+  (call $$clinit__void@rawtype.RawType.BoundDependentIndirect )
+  ;; Object.this.$ctor();
+  ;;@ rawtype/RawType.java:34:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void BoundDependentIndirect.$clinit()
+(func $$clinit__void@rawtype.RawType.BoundDependentIndirect
+ ;;@ rawtype/RawType.java:34:15
+ (block
+  ;; if (rawtype.RawType.BoundDependentIndirect.$initialized) return;
+  ;;@ rawtype/RawType.java:34:15
+  (if (global.get $f_$initialized__rawtype_RawType_BoundDependentIndirect)
+   (then
+    ;; return;
+    ;;@ rawtype/RawType.java:34:15
+    (return )
+   )
+  )
+  ;; (rawtype.RawType.BoundDependentIndirect.$initialized = true);
+  ;;@ rawtype/RawType.java:34:15
+  (global.set $f_$initialized__rawtype_RawType_BoundDependentIndirect (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ rawtype/RawType.java:34:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> BoundDependentIndirect.getClass()
+(func $m_getClass__java_lang_Class@rawtype.RawType.BoundDependentIndirect
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $rawtype.RawType.BoundDependentIndirect))
+ (local.set $this (ref.cast_static $rawtype.RawType.BoundDependentIndirect (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.BoundDependentIndirect();
+  (return (call $function.no.side.effects.$getRawtype.RawType.BoundDependentIndirect__java_lang_Class (ref.func $$getRawtype.RawType.BoundDependentIndirect__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@rawtype.RawType.BoundDependentIndirect)
+
 ;;; Code for rawtype.RawType.GenericSuperclass [INTERFACE]
 (type $rawtype.RawType.GenericSuperclass.vtable (struct 
  (field $m_f__rawtype_RawType__void (ref $function.m_f__rawtype_RawType__void))
@@ -525,7 +765,7 @@
 (func $m_f__rawtype_RawType__void@rawtype.RawType.GenericSuperclass
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $rawtype.RawType))
- ;;@ rawtype/RawType.java:31:17
+ ;;@ rawtype/RawType.java:37:17
  (block
  )
 )
@@ -533,19 +773,19 @@
 
 ;;; void GenericSuperclass.$clinit()
 (func $$clinit__void@rawtype.RawType.GenericSuperclass
- ;;@ rawtype/RawType.java:30:12
+ ;;@ rawtype/RawType.java:36:12
  (block
   ;; if (rawtype.RawType.GenericSuperclass.$initialized) return;
-  ;;@ rawtype/RawType.java:30:12
+  ;;@ rawtype/RawType.java:36:12
   (if (global.get $f_$initialized__rawtype_RawType_GenericSuperclass)
    (then
     ;; return;
-    ;;@ rawtype/RawType.java:30:12
+    ;;@ rawtype/RawType.java:36:12
     (return )
    )
   )
   ;; (rawtype.RawType.GenericSuperclass.$initialized = true);
-  ;;@ rawtype/RawType.java:30:12
+  ;;@ rawtype/RawType.java:36:12
   (global.set $f_$initialized__rawtype_RawType_GenericSuperclass (i32.const 1))
  )
 )
@@ -589,17 +829,17 @@
 ;;; RawSubclass RawSubclass.$create()
 (func $$create__@rawtype.RawType.RawSubclass
  (result (ref null $rawtype.RawType.RawSubclass))
- ;;@ rawtype/RawType.java:34:15
+ ;;@ rawtype/RawType.java:40:15
  (local $$instance (ref null $rawtype.RawType.RawSubclass))
  (block
   ;; RawSubclass $instance = new RawSubclass.<init>(0);
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (local.set $$instance (struct.new $rawtype.RawType.RawSubclass (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.vtable)) (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (call $$ctor__void_$p_rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (return (local.get $$instance))
  )
 )
@@ -607,13 +847,13 @@
 ;;; void RawSubclass.$ctor()
 (func $$ctor__void_$p_rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass
  (param $this (ref null $rawtype.RawType.RawSubclass))
- ;;@ rawtype/RawType.java:34:15
+ ;;@ rawtype/RawType.java:40:15
  (block
   ;; rawtype.RawType.RawSubclass.$clinit();
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (call $$clinit__void@rawtype.RawType.RawSubclass )
   ;; Object.this.$ctor();
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -623,7 +863,7 @@
  (type $function.m_f__rawtype_RawType__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $rawtype.RawType))
- ;;@ rawtype/RawType.java:36:16
+ ;;@ rawtype/RawType.java:42:16
  (local $this (ref null $rawtype.RawType.RawSubclass))
  (local.set $this (ref.cast_static $rawtype.RawType.RawSubclass (local.get $this.untyped)))
  (block
@@ -633,25 +873,25 @@
 
 ;;; void RawSubclass.$clinit()
 (func $$clinit__void@rawtype.RawType.RawSubclass
- ;;@ rawtype/RawType.java:34:15
+ ;;@ rawtype/RawType.java:40:15
  (block
   ;; if (rawtype.RawType.RawSubclass.$initialized) return;
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (if (global.get $f_$initialized__rawtype_RawType_RawSubclass)
    (then
     ;; return;
-    ;;@ rawtype/RawType.java:34:15
+    ;;@ rawtype/RawType.java:40:15
     (return )
    )
   )
   ;; (rawtype.RawType.RawSubclass.$initialized = true);
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (global.set $f_$initialized__rawtype_RawType_RawSubclass (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (call $$clinit__void@java.lang.Object )
   ;; rawtype.RawType.GenericSuperclass.$clinit();
-  ;;@ rawtype/RawType.java:34:15
+  ;;@ rawtype/RawType.java:40:15
   (call $$clinit__void@rawtype.RawType.GenericSuperclass )
  )
 )

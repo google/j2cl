@@ -20,12 +20,18 @@ class RawType {
   Unbound rawUnbound = new Unbound();
   Bound rawBound = new Bound();
   BoundRecursively rawBoundRecursively = new BoundRecursively();
+  BoundDependentDirect rawBoundDependentDirect = new BoundDependentDirect();
+  BoundDependentIndirect rawBoundDependentIndirect = new BoundDependentIndirect();
 
   static class Unbound<T> {}
 
   static class Bound<T extends RawType> {}
 
   static class BoundRecursively<T extends BoundRecursively<T>> {}
+
+  static class BoundDependentDirect<A, B extends A> {}
+
+  static class BoundDependentIndirect<A, B extends Unbound<A>> {}
 
   interface GenericSuperclass<T extends RawType> {
     default void f(T t) {}
