@@ -1030,8 +1030,9 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
-  public DeclaredTypeDescriptor specializeTypeVariables(
-      Function<TypeVariable, ? extends TypeDescriptor> parameterization) {
+  DeclaredTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> parameterization,
+      ImmutableSet<TypeVariable> seen) {
     if (AstUtils.isIdentityFunction(parameterization)) {
       return this;
     }
@@ -1042,7 +1043,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return Builder.from(this)
         .setTypeArgumentDescriptors(
             getTypeArgumentDescriptors().stream()
-                .map(t -> t.specializeTypeVariables(parameterization))
+                .map(t -> t.specializeTypeVariables(parameterization, seen))
                 .collect(toImmutableList()))
         .setSuperTypeDescriptorFactory(
             () ->
@@ -1074,6 +1075,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
                 ? getEnclosingTypeDescriptor().specializeTypeVariables(parameterization)
                 : null)
         .build();
+  }
+
+  @Override
+  public DeclaredTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
   @Override

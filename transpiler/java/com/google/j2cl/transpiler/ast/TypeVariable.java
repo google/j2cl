@@ -155,14 +155,40 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   }
 
   @Override
-  public TypeDescriptor specializeTypeVariables(
-      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+  TypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable,
+      ImmutableSet<TypeVariable> seen) {
+    if (isWildcardOrCapture()) {
+      if (seen.contains(this)) {
+        return this;
+      }
+
+      seen = new ImmutableSet.Builder<TypeVariable>().addAll(seen).add(this).build();
+
+      TypeDescriptor upperBoundTypeDescriptor = getUpperBoundTypeDescriptor();
+      TypeDescriptor lowerBoundTypeDescriptor = getLowerBoundTypeDescriptor();
+
+      return createWildcardWithUpperAndLowerBound(
+          upperBoundTypeDescriptor.specializeTypeVariables(
+              replacementTypeArgumentByTypeVariable, seen),
+          lowerBoundTypeDescriptor != null
+              ? lowerBoundTypeDescriptor.specializeTypeVariables(
+                  replacementTypeArgumentByTypeVariable, seen)
+              : null);
+    }
+
     TypeDescriptor specializedTypeVariable =
         replacementTypeArgumentByTypeVariable.apply(toNonNullable());
     // In our current model if the type variable that is specialized is not isNullable it means that
     // it does not have a @Nullable annotation, so we leave the specialized result alone, since
     // it might be nullable and needs to stay the same.
     return isNullable() ? specializedTypeVariable.toNullable() : specializedTypeVariable;
+  }
+
+  @Override
+  public TypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
   @Override
@@ -184,29 +210,28 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
   /** Creates a wildcard type variable with a specific upper bound. */
   public static TypeVariable createWildcardWithUpperBound(TypeDescriptor bound) {
-    return TypeVariable.newBuilder()
-        .setWildcardOrCapture(true)
-        .setNullable(false)
-        .setUpperBoundTypeDescriptorSupplier(() -> bound)
-        // Create an unique key that does not conflict with the keys used for other types nor for
-        // type variables coming from JDT, which follow "<declaring_type>:<name>...".
-        // {@see org.eclipse.jdt.core.BindingKey}.
-        .setUniqueKey("<??_^_>" + bound.getUniqueId())
-        .setName("?")
-        .build();
+    return createWildcardWithUpperAndLowerBound(bound, null);
   }
 
   /** Creates a wildcard type variable with a specific lower bound. */
   public static TypeVariable createWildcardWithLowerBound(TypeDescriptor bound) {
+    return createWildcardWithUpperAndLowerBound(TypeDescriptors.get().javaLangObject, bound);
+  }
+
+  /** Creates a wildcard type variable with a specific upper and lower bound. */
+  public static TypeVariable createWildcardWithUpperAndLowerBound(
+      TypeDescriptor upperBound, @Nullable TypeDescriptor lowerBound) {
+    String upperBoundKey = "<??_^_>" + upperBound.getUniqueId();
+    String lowerBoundKey = lowerBound == null ? "" : "<??_v_>" + lowerBound.getUniqueId();
     return TypeVariable.newBuilder()
         .setWildcardOrCapture(true)
         .setNullable(false)
-        .setUpperBoundTypeDescriptorSupplier(() -> TypeDescriptors.get().javaLangObject)
-        .setLowerBoundTypeDescriptor(bound)
+        .setUpperBoundTypeDescriptorSupplier(() -> upperBound)
+        .setLowerBoundTypeDescriptor(lowerBound)
         // Create an unique key that does not conflict with the keys used for other types nor for
         // type variables coming from JDT, which follow "<declaring_type>:<name>...".
         // {@see org.eclipse.jdt.core.BindingKey}.
-        .setUniqueKey("<??_v_>" + bound.getUniqueId())
+        .setUniqueKey(upperBoundKey + lowerBoundKey)
         .setName("?")
         .build();
   }

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Set;
 import java.util.function.Function;
@@ -192,16 +193,23 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public ArrayTypeDescriptor specializeTypeVariables(
-      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+  ArrayTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable,
+      ImmutableSet<TypeVariable> seen) {
     if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
     }
     return toBuilder()
         .setComponentTypeDescriptor(
             getComponentTypeDescriptor()
-                .specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                .specializeTypeVariables(replacementTypeArgumentByTypeVariable, seen))
         .build();
+  }
+
+  @Override
+  public ArrayTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
   abstract Builder toBuilder();

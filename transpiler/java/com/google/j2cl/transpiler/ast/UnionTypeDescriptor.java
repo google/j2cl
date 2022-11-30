@@ -21,6 +21,7 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Set;
 import java.util.function.Function;
@@ -164,21 +165,28 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public UnionTypeDescriptor specializeTypeVariables(
-      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+  UnionTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable,
+      ImmutableSet<TypeVariable> seen) {
     if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
     }
 
     ImmutableList<TypeDescriptor> specializedUnionTypes =
-        getUnionTypeDescriptors()
-            .stream()
+        getUnionTypeDescriptors().stream()
             .map(
                 typeDescriptor ->
-                    typeDescriptor.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                    typeDescriptor.specializeTypeVariables(
+                        replacementTypeArgumentByTypeVariable, seen))
             .collect(ImmutableList.toImmutableList());
 
     return newBuilder().setUnionTypeDescriptors(specializedUnionTypes).build();
+  }
+
+  @Override
+  public UnionTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
   public static Builder newBuilder() {

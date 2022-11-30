@@ -22,6 +22,7 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Set;
 import java.util.function.Function;
@@ -176,8 +177,9 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public IntersectionTypeDescriptor specializeTypeVariables(
-      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+  IntersectionTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable,
+      ImmutableSet<TypeVariable> seen) {
     if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
     }
@@ -188,9 +190,15 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
                 .map(
                     typeDescriptor ->
                         typeDescriptor.specializeTypeVariables(
-                            replacementTypeArgumentByTypeVariable))
+                            replacementTypeArgumentByTypeVariable, seen))
                 .collect(ImmutableList.toImmutableList()))
         .build();
+  }
+
+  @Override
+  public IntersectionTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
+    return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
   public static Builder newBuilder() {

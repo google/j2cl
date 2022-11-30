@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.ImmutableSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -182,9 +183,16 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  PrimitiveTypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable,
+      ImmutableSet<TypeVariable> seen) {
+    return this;
+  }
+
+  @Override
   public PrimitiveTypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
-    return this;
+    return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
   /** A unique string for a give type. Used for interning. */

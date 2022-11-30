@@ -256,6 +256,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   }
 
   /** Replaces all occurrences of a type variable for the type specified by the mapping function. */
+  abstract TypeDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable,
+      ImmutableSet<TypeVariable> seen);
+
+  /** Replaces all occurrences of a type variable for the type specified by the mapping function. */
   public abstract TypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable);
 
