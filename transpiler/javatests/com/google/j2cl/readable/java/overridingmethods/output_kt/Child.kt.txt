@@ -19,7 +19,7 @@ open class Parent {
 }
 
 @ObjCName("OverridingmethodsChild", exact = true)
-open class Child: SomeInterface, Parent() {
+open class Child: Parent(), SomeInterface {
  open override fun `fun`() {}
 
  open override fun bar() {}

@@ -127,7 +127,7 @@ open class Main {
  }
 }
 
-open class Subclass<V>: KInterface<V>, KTopLevel<V> {
+open class Subclass<V>: KTopLevel<V>, KInterface<V> {
  constructor(v: V): super(v)
 
  open override fun renamedMethod(): Int {

@@ -185,7 +185,7 @@ open class TypeWildCards {
  abstract inner class OtherElement: TypeWildCards.IntegerSupplier, TypeWildCards.HasKey {}
 
  @ObjCName("TypewildcardsTypeWildCards_SubOtherElement", exact = true)
- abstract inner class SubOtherElement: TypeWildCards.HasKey, TypeWildCards.OtherElement() {}
+ abstract inner class SubOtherElement: TypeWildCards.OtherElement(), TypeWildCards.HasKey {}
 
  open inner class Foo: GenericType<TypeWildCards.Foo?>() {}
 

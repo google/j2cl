@@ -35,9 +35,9 @@ open class Parent {
  }
 }
 
-open class ChildWithNullableParent: ParametricType<Parent?>, Parent() {}
+open class ChildWithNullableParent: Parent(), ParametricType<Parent?> {}
 
-open class ChildWithNonNullableParent: ParametricType<Parent>, Parent() {}
+open class ChildWithNonNullableParent: Parent(), ParametricType<Parent> {}
 
 @ObjCName("TypeannotationsTypeAnnotations", exact = true)
 open class TypeAnnotations {

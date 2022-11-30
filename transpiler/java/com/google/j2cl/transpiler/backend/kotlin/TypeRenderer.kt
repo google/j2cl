@@ -22,7 +22,6 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
-import java.util.stream.Collectors
 
 fun Renderer.renderType(type: Type) {
   val typeDeclaration = type.declaration
@@ -72,10 +71,7 @@ fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
 
 private fun Renderer.renderSuperTypes(type: Type) {
   val superTypes =
-    type.superTypesStream
-      .filter { !isJavaLangObject(it) }
-      .filter { !isJavaLangEnum(it) }
-      .collect(Collectors.toList())
+    type.declaredSuperTypeDescriptors.filter { !isJavaLangObject(it) && !isJavaLangEnum(it) }
   if (superTypes.isNotEmpty()) {
     val hasConstructors = type.constructors.isNotEmpty()
     render(": ")

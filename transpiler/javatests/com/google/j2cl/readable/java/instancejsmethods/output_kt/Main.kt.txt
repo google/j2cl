@@ -50,7 +50,7 @@ open class Parent: SuperParent() {
  }
 }
 
-open class Child: MyInterface, Parent() {
+open class Child: Parent(), MyInterface {
  open override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }

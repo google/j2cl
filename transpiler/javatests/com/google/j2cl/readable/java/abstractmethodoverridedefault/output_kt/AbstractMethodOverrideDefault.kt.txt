@@ -27,7 +27,7 @@ open class AbstractMethodOverrideDefault {
   abstract override fun foo()
  }
 
- abstract class B: AbstractMethodOverrideDefault.J, AbstractMethodOverrideDefault.A() {
+ abstract class B: AbstractMethodOverrideDefault.A(), AbstractMethodOverrideDefault.J {
   open override fun bar() {
    if (false) {
     this.bar()

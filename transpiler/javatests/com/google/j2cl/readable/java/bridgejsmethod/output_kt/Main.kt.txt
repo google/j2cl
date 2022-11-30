@@ -86,17 +86,17 @@ open class Main {
  }
 
  @ObjCName("BridgejsmethodMain_D", exact = true)
- open class D: Main.I<Int?>, Main.A<Int?>() {
+ open class D: Main.A<Int?>(), Main.I<Int?> {
   open override fun `fun`(i: Int?): Int? {
    return i
   }
  }
 
  @ObjCName("BridgejsmethodMain_E", exact = true)
- open class E: Main.J<String?>, Main.B() {}
+ open class E: Main.B(), Main.J<String?> {}
 
  @ObjCName("BridgejsmethodMain_F", exact = true)
- open class F: Main.I<Int?>, Main.A<Int?>() {}
+ open class F: Main.A<Int?>(), Main.I<Int?> {}
 
  @ObjCName("BridgejsmethodMain_G", exact = true)
  fun interface G<V> {

@@ -44,7 +44,7 @@ open class GrandParent {
  open fun defaultGrandParent() {}
 }
 
-open class Parent: ParentInterface, GrandParent() {
+open class Parent: GrandParent(), ParentInterface {
  open fun parentSimplest() {}
 
  open fun parentWithParams(
@@ -62,7 +62,7 @@ open class Parent: ParentInterface, GrandParent() {
 }
 
 @ObjCName("SupermethodcallChild", exact = true)
-open class Child: GrandParentInterface, Parent() {
+open class Child: Parent(), GrandParentInterface {
  open override fun parentSimplest() {
   super<Parent>.parentSimplest()
  }
@@ -109,7 +109,7 @@ open class Super {
  open fun m() {}
 }
 
-open class Sub: I2, I3, Super() {
+open class Sub: Super(), I2, I3 {
  open override fun m() {
   super<I3>.m()
  }

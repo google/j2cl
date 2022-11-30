@@ -263,9 +263,9 @@ open class Nullability {
 
  open class RecursiveNullable<T> where T: Nullability.RecursiveNullable<T>?, T: Marker? {}
 
- open class RecursiveChild: Marker, Nullability.Recursive<Nullability.RecursiveChild>() {}
+ open class RecursiveChild: Nullability.Recursive<Nullability.RecursiveChild>(), Marker {}
 
- open class RecursiveNullableChild: Marker, Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>() {}
+ open class RecursiveNullableChild: Nullability.RecursiveNullable<Nullability.RecursiveNullableChild?>(), Marker {}
 
  open class RecursiveParam<T> where T: Nullability.Recursive<T>, T: Marker? {}
 

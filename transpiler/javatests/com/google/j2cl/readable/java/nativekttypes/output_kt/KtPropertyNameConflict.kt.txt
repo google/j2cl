@@ -75,7 +75,7 @@ abstract class KtPropertyNameConflict {
  }
 
  @ObjCName("NativekttypesKtPropertyNameConflict_Subclass", exact = true)
- abstract inner class Subclass: KtPropertyNameConflict.Interface, KtPropertyNameConflict() {
+ abstract inner class Subclass: KtPropertyNameConflict(), KtPropertyNameConflict.Interface {
   @JvmField var fieldWithConflictingSuperMethod_ktPropertyConflict: Int = 0
 
   @JvmField var fieldWithConflictingInterfaceMethod_ktPropertyConflict: Int = 0

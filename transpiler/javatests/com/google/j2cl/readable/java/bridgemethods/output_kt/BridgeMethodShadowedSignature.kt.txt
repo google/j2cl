@@ -27,5 +27,5 @@ open class BridgeMethodShadowedSignature {
   }
  }
 
- open class C<C1>: BridgeMethodShadowedSignature.I<C1>, BridgeMethodShadowedSignature.B<C1, Consumer<in C1>?>() {}
+ open class C<C1>: BridgeMethodShadowedSignature.B<C1, Consumer<in C1>?>(), BridgeMethodShadowedSignature.I<C1> {}
 }

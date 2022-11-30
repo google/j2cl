@@ -59,7 +59,7 @@ open class Parent<T: Error?>: SuperParent<T, Number?>() {
 }
 
 @ObjCName("BridgemethodsBridgeMethod", exact = true)
-open class BridgeMethod: SomeInterface<AssertionError?, Number?>, Parent<AssertionError?>() {
+open class BridgeMethod: Parent<AssertionError?>(), SomeInterface<AssertionError?, Number?> {
  open override fun foo(a: AssertionError?, n: Number?) {}
 
  open override fun bar(t: Number?) {}
@@ -94,7 +94,7 @@ open class SuperDualUnrelatedAccidentalBridges {
  ) {}
 }
 
-open class DualUnrelatedAccidentalBridges: SomeInterface<String?, Double?>, SomeOtherFooInterface<String?>, SuperDualUnrelatedAccidentalBridges() {}
+open class DualUnrelatedAccidentalBridges: SuperDualUnrelatedAccidentalBridges(), SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {}
 
 fun interface Getter {
  fun get(
@@ -110,7 +110,7 @@ open class ClassWithParameterizedGet<T> {
  }
 }
 
-open class AccidentalOverrideBridge: Getter, ClassWithParameterizedGet<String?>() {
+open class AccidentalOverrideBridge: ClassWithParameterizedGet<String?>(), Getter {
  open fun test() {
   val g: Getter? = AccidentalOverrideBridge()
   g!!.get("")

@@ -24,7 +24,7 @@ fun interface SuperInterface<T> {
  )
 }
 
-open class AnotherAccidentalOverride: SuperInterface<AssertionError?>, Parent<AssertionError?>() {}
+open class AnotherAccidentalOverride: Parent<AssertionError?>(), SuperInterface<AssertionError?> {}
 
 @ObjCName("AccidentaloverrideAccidentalOverride", exact = true)
-open class AccidentalOverride: SuperInterface<Error?>, Parent<Error?>() {}
+open class AccidentalOverride: Parent<Error?>(), SuperInterface<Error?> {}

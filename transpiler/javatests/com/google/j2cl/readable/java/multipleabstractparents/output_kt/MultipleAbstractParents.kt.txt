@@ -54,7 +54,7 @@ open class MultipleAbstractParents {
  }
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractList", exact = true)
- abstract class AbstractList<T>: MultipleAbstractParents.List<T>, MultipleAbstractParents.AbstractCollection<T>() {}
+ abstract class AbstractList<T>: MultipleAbstractParents.AbstractCollection<T>(), MultipleAbstractParents.List<T> {}
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractList2", exact = true)
  abstract class AbstractList2<T>: MultipleAbstractParents.List<T> {}
@@ -68,10 +68,10 @@ open class MultipleAbstractParents {
  }
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractStringList", exact = true)
- abstract class AbstractStringList: MultipleAbstractParents.IStringList, MultipleAbstractParents.AbstractList<String?>() {}
+ abstract class AbstractStringList: MultipleAbstractParents.AbstractList<String?>(), MultipleAbstractParents.IStringList {}
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractStringList2", exact = true)
- abstract class AbstractStringList2: MultipleAbstractParents.IStringList, MultipleAbstractParents.AbstractList2<String?>() {}
+ abstract class AbstractStringList2: MultipleAbstractParents.AbstractList2<String?>(), MultipleAbstractParents.IStringList {}
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractStringList3", exact = true)
  abstract class AbstractStringList3: MultipleAbstractParents.AbstractList2<String?>() {}

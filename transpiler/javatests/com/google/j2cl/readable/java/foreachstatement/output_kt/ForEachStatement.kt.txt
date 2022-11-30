@@ -58,13 +58,13 @@ open class ForEachStatement {
   }
  }
 
- open class Exception1: JavaIterable<String?>, Exception() {
+ open class Exception1: Exception(), JavaIterable<String?> {
   open override fun iterator(): MutableIterator<String?> {
    return null!!
   }
  }
 
- open class Exception2: JavaIterable<Any?>, Exception() {
+ open class Exception2: Exception(), JavaIterable<Any?> {
   open override fun iterator(): MutableIterator<Any?> {
    return null!!
   }

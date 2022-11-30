@@ -49,7 +49,7 @@ interface MyInterface {
  ): Int
 }
 
-open class SubJsType: MyInterface, MyJsType() {
+open class SubJsType: MyJsType(), MyInterface {
  open override fun bar(a: Int): Int {
   return a + 2
  }

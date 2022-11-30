@@ -44,7 +44,7 @@ open class JsMethodExample {
   )
  }
 
- open class Sub: JsMethodExample.I, JsMethodExample.Base<String?>() {
+ open class Sub: JsMethodExample.Base<String?>(), JsMethodExample.I {
   open override fun m(s: String?) {}
  }
 }

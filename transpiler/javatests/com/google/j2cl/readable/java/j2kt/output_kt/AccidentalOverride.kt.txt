@@ -19,13 +19,13 @@ open class AccidentalOverride {
   fun accidentalOverride() {}
  }
 
- open inner class TestImplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {
+ open inner class TestImplicitOverride: AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
   open override fun accidentalOverride() {
    super<AccidentalOverride.SuperClass>.accidentalOverride()
   }
  }
 
- open inner class TestExplicitOverride: AccidentalOverride.Interface, AccidentalOverride.SuperClass() {
+ open inner class TestExplicitOverride: AccidentalOverride.SuperClass(), AccidentalOverride.Interface {
   open override fun accidentalOverride() {
    super<AccidentalOverride.SuperClass>.accidentalOverride()
   }
