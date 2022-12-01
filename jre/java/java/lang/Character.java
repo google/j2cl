@@ -311,7 +311,7 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static boolean isWhitespace(int codePoint) {
-    return isWhitespace(String.fromCodePoint(codePoint));
+    return isValidCodePoint(codePoint) && isWhitespace(String.fromCodePoint(codePoint));
   }
 
   private static NativeRegExp whitespaceRegex;

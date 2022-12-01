@@ -395,6 +395,13 @@ public class CharacterTest extends GWTTestCase {
         0x29D98, // UNICODE HAN CHARACTER 'a general name for perch, etc.'.
     };
 
+    int[] otherNonWhitespaceInts = {
+      Character.MAX_VALUE + 1, //
+      Character.MAX_CODE_POINT + 1,
+      Integer.MAX_VALUE,
+      -1
+    };
+
     // Must match unicode space separator characters.
     for (char c : separators) {
       assertTrue(Character.isWhitespace(c));
@@ -421,6 +428,11 @@ public class CharacterTest extends GWTTestCase {
 
     // Support for non-UCS-2 characters.
     for (int c : supplementaryCounterExamples) {
+      assertFalse(Character.isWhitespace(c));
+    }
+
+    // Test other valid ints
+    for (int c : otherNonWhitespaceInts) {
       assertFalse(Character.isWhitespace(c));
     }
   }
