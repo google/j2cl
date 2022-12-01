@@ -17,11 +17,11 @@ load(
     "//build_defs:rules.bzl",
     "J2CL_OPTIMIZED_DEFS",
     "j2cl_library",
+    "j2kt_apple_framework",
     "j2wasm_application",
 )
 load("@bazel_tools//tools/build_defs/apple:ios.bzl", "ios_build_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("@bazel_tools//tools/build_defs/kotlin/release/rules/native:native_rules.bzl", "kt_apple_framework")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -148,7 +148,7 @@ def readable_example(
             )
 
         if build_kt_native_readables:
-            kt_apple_framework(
+            j2kt_apple_framework(
                 name = "readable_j2kt_test_framework",
                 deps = [":readable-j2kt-native"],
                 tags = ["j2kt", "ios", "manual"],

@@ -30,4 +30,5 @@ integration_test(
     ],
     # @GwtIncompatible is not supported on the JVM.
     enable_jvm_test = False,
+    enable_kt = False,
 )
