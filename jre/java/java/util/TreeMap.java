@@ -82,6 +82,11 @@ public class TreeMap<K, V> extends AbstractMap<K, V>
   }
 
   @Override
+  public V putIfAbsent(K key, V value) {
+    return putInternalIfAbsent(key, value);
+  }
+
+  @Override
   public void clear() {
     root = null;
     size = 0;
@@ -140,6 +145,16 @@ public class TreeMap<K, V> extends AbstractMap<K, V>
 
   private V putInternal(K key, V value) {
     return find(key, Relation.CREATE).setValue(value);
+  }
+
+  private V putInternalIfAbsent(K key, V value) {
+    int prevSize = size;
+    Node<K, V> node = find(key, Relation.CREATE);
+    if (prevSize == size) {
+      // The node already exists, not a new entry.
+      return node.getValue();
+    }
+    return node.setValue(value);
   }
 
   /** Returns the node at or adjacent to the given key, creating it if requested. */
@@ -949,6 +964,12 @@ public class TreeMap<K, V> extends AbstractMap<K, V>
     public V put(K key, V value) {
       checkInBounds(key, fromBound, toBound);
       return putInternal(key, value);
+    }
+
+    @Override
+    public V putIfAbsent(K key, V value) {
+      checkInBounds(key, fromBound, toBound);
+      return putInternalIfAbsent(key, value);
     }
 
     @Override

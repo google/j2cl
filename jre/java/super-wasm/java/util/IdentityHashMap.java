@@ -342,7 +342,16 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
   }
 
   @Override
-  public V put(K k, V v) {
+  public V putIfAbsent(K key, V value) {
+    return putImpl(key, value, /* onlyIfAbsent= */ true);
+  }
+
+  @Override
+  public V put(K key, V value) {
+    return putImpl(key, value, /* onlyIfAbsent= */ false);
+  }
+
+  private V putImpl(K k, V v, boolean onlyIfAbsent) {
     Object key = k == null ? NULL_OBJECT : k;
     Object value = k == null ? NULL_OBJECT : v;
     int index = findIndex(key, elementData);
@@ -355,11 +364,15 @@ public class IdentityHashMap<K, V> extends AbstractMap<K, V>
       }
       // insert the key and assign the value to null initially
       elementData[index] = key;
-      elementData[index + 1] = null;
+      elementData[index + 1] = value;
+      return null;
     }
+
     // insert value to where it needs to go, return the old value
     Object result = elementData[index + 1];
-    elementData[index + 1] = value;
+    if (!onlyIfAbsent) {
+      elementData[index + 1] = value;
+    }
     return massageValue(result);
   }
 

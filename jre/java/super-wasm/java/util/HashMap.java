@@ -268,17 +268,29 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
   }
 
   @Override
+  public V putIfAbsent(K key, V value) {
+    return putImpl(key, value, /* onlyIfAbsent= */ true);
+  }
+
+  @Override
   public V put(K key, V value) {
+    return putImpl(key, value, /* onlyIfAbsent= */ false);
+  }
+
+  private V putImpl(K key, V value, boolean onlyIfAbsent) {
     if (key == null) {
-      return putValueForNullKey(value);
+      return putValueForNullKey(value, onlyIfAbsent);
     }
     int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index]; e != null; e = e.next) {
       if (e.hash == hash && (key == e.key || key.equals(e.key))) {
-        preModify(e);
         V oldValue = e.value;
+        if (onlyIfAbsent) {
+          return oldValue;
+        }
+        preModify(e);
         e.value = value;
         return oldValue;
       }
@@ -293,7 +305,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
     return null;
   }
 
-  private V putValueForNullKey(V value) {
+  private V putValueForNullKey(V value, boolean onlyIfAbsent) {
     HashMapEntry<K, V> entry = entryForNullKey;
     if (entry == null) {
       addNewEntryForNullKey(value);
@@ -301,8 +313,11 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
       modCount++;
       return null;
     } else {
-      preModify(entry);
       V oldValue = entry.value;
+      if (onlyIfAbsent) {
+        return oldValue;
+      }
+      preModify(entry);
       entry.value = value;
       return oldValue;
     }

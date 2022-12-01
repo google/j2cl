@@ -18,6 +18,8 @@
 
 package java.util.concurrent;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -56,15 +58,14 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V> implements Concur
   }
 
   public V putIfAbsent(K key, V value) {
-    if (!containsKey(key)) {
-      return put(key, value);
-    } else {
-      return get(key);
-    }
+    checkNotNull(key);
+    checkNotNull(value);
+    return backingMap.putIfAbsent(key, value);
   }
 
-  public boolean remove(Object key, Object value) {
-    if (containsKey(key) && get(key).equals(value)) {
+  public boolean remove(Object key, Object oldValue) {
+    V mapValue = get(key);
+    if (mapValue != null && mapValue.equals(oldValue)) {
       remove(key);
       return true;
     } else {
@@ -73,9 +74,10 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V> implements Concur
   }
 
   public boolean replace(K key, V oldValue, V newValue) {
-    if (oldValue == null || newValue == null) {
-      throw new NullPointerException();
-    } else if (containsKey(key) && get(key).equals(oldValue)) {
+    checkNotNull(oldValue);
+    checkNotNull(newValue);
+    V mapValue = get(key);
+    if (oldValue.equals(mapValue)) {
       put(key, newValue);
       return true;
     } else {
@@ -84,9 +86,8 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V> implements Concur
   }
 
   public V replace(K key, V value) {
-    if (value == null) {
-      throw new NullPointerException();
-    } else if (containsKey(key)) {
+    checkNotNull(value);
+    if (containsKey(key)) {
       return put(key, value);
     } else {
       return null;
@@ -94,37 +95,28 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V> implements Concur
   }
 
   @Override public boolean containsKey(Object key) {
-    if (key == null) {
-      throw new NullPointerException();
-    }
+    checkNotNull(key);
     return backingMap.containsKey(key);
   }
 
   @Override public V get(Object key) {
-    if (key == null) {
-      throw new NullPointerException();
-    }
+    checkNotNull(key);
     return backingMap.get(key);
   }
 
   @Override public V put(K key, V value) {
-    if (key == null || value == null) {
-      throw new NullPointerException();
-    }
+    checkNotNull(key);
+    checkNotNull(value);
     return backingMap.put(key, value);
   }
 
   @Override public boolean containsValue(Object value) {
-    if (value == null) {
-      throw new NullPointerException();
-    }
+    checkNotNull(value);
     return backingMap.containsValue(value);
   }
 
   @Override public V remove(Object key) {
-    if (key == null) {
-      throw new NullPointerException();
-    }
+    checkNotNull(key);
     return backingMap.remove(key);
   }
 
