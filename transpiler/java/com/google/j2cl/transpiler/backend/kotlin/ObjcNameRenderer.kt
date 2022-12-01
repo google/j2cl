@@ -67,7 +67,7 @@ private fun TypeDeclaration.objCName(useId: Boolean): String =
     "java.lang.Class" -> "IOSClass"
     "java.lang.Number" -> "NSNumber"
     "java.lang.Cloneable" -> "NSCopying"
-    else -> objCPackagePrefix + objCSimpleName
+    else -> getObjectiveCName() ?: (objCPackagePrefix + objCSimpleName)
   }
 
 private val TypeDeclaration.objCPackagePrefix: String

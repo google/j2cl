@@ -19,10 +19,12 @@ import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStri
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtDisabledAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNativeAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropagateNullabilityAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropertyAnnotation;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
+import com.google.j2cl.transpiler.ast.KtObjcInfo;
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -33,6 +35,21 @@ import org.eclipse.jdt.core.dom.IVariableBinding;
 /** Utility functions for Kotlin Interop properties. */
 public class KtInteropUtils {
   private KtInteropUtils() {}
+
+  public static KtObjcInfo getKtObjcInfo(ITypeBinding typeBinding) {
+    return getKtObjcInfo(typeBinding.getAnnotations());
+  }
+
+  @Nullable
+  private static KtObjcInfo getKtObjcInfo(IAnnotationBinding[] annotationBindings) {
+    IAnnotationBinding annotationBinding = getKtObjectiveCNameAnnotation(annotationBindings);
+    if (annotationBinding == null) {
+      return null;
+    }
+    return KtObjcInfo.newBuilder()
+        .setObjectiveCName(getStringAttribute(annotationBinding, "value"))
+        .build();
+  }
 
   public static KtTypeInfo getKtTypeInfo(ITypeBinding typeBinding) {
     return getKtTypeInfo(typeBinding.getAnnotations());

@@ -37,6 +37,7 @@ public final class FrontendConstants {
       "javaemul.internal.annotations.KtDisabled";
   public static final String KT_NAME_ANNOTATION_NAME = "javaemul.internal.annotations.KtName";
   public static final String KT_NATIVE_ANNOTATION_NAME = "javaemul.internal.annotations.KtNative";
+  public static final String KT_OBJECTIVE_C_NAME = "com.google.j2objc.annotations.ObjectiveCName";
   public static final String KT_PROPAGATE_NULLABILITY_ANNOTATION_NAME =
       "javaemul.internal.annotations.KtPropagateNullability";
   public static final String KT_PROPERTY_ANNOTATION_NAME =

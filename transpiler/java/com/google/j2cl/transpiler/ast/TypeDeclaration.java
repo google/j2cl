@@ -300,6 +300,9 @@ public abstract class TypeDeclaration
   @Nullable
   abstract KtTypeInfo getKtTypeInfo();
 
+  @Nullable
+  abstract KtObjcInfo getKtObjcInfo();
+
   public abstract boolean isDeprecated();
 
   public boolean isJsEnum() {
@@ -601,6 +604,13 @@ public abstract class TypeDeclaration
     return ktTypeInfo == null ? null : ktTypeInfo.getCompanionQualifiedName();
   }
 
+  @Nullable
+  @Memoized
+  public String getObjectiveCName() {
+    KtObjcInfo ktObjcInfo = getKtObjcInfo();
+    return ktObjcInfo != null ? ktObjcInfo.getObjectiveCName() : null;
+  }
+
   @Memoized
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {
@@ -846,6 +856,8 @@ public abstract class TypeDeclaration
     public abstract Builder setNative(boolean isNative);
 
     public abstract Builder setKtTypeInfo(KtTypeInfo ktTypeInfo);
+
+    public abstract Builder setKtObjcInfo(KtObjcInfo ktObjcInfo);
 
     public abstract Builder setTypeParameterDescriptors(
         Iterable<TypeVariable> typeParameterDescriptors);
