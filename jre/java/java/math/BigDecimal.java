@@ -2634,7 +2634,7 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       scale = scale - Integer.parseInt(scaleString);
       if (scale != (int) scale) {
         // math.02=Scale out of range.
-        throw new NumberFormatException("Scale out of range."); //$NON-NLS-1$
+        throw new NumberFormatException("Exponent overflow."); // $NON-NLS-1$
       }
     }
     // Parsing the unscaled value

@@ -504,9 +504,7 @@ public class BigDecimalConstructorsTest extends EmulTestBase {
     try {
       new BigDecimal(a);
       fail("NumberFormatException expected");
-    } catch (NumberFormatException e) {
-      assertEquals("Improper exception message", "Scale out of range.",
-          e.getMessage());
+    } catch (NumberFormatException expected) {
     }
   }
 
