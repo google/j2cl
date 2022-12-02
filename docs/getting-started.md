@@ -99,6 +99,17 @@ it, just replace `bazel` with `ibazel` in any command:
 You like build-on-save but you would like to refresh on your own terms? Pass
 `-nolive_reload` while running ibazel.
 
+## Unit testing
+
+You can also write regular JUnit tests for your application and run them under
+J2CL.
+
+To run the sample unit test for our sample app:
+
+```shell
+      $ bazel test src/test/java/com/google/j2cl/samples/helloworldlib:HelloWorldTest
+```
+
 ## Setting up your first project
 
 To setup your first project you can use the sample as template:

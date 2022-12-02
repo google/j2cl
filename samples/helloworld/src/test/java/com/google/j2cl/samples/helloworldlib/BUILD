@@ -7,6 +7,6 @@ j2cl_test(
     srcs = glob(["*.java"]),
     deps = [
         "//src/main/java/com/google/j2cl/samples/helloworldlib",
-        "@com_google_j2cl//third_party:junit-j2cl",
+        "@com_google_j2cl//:junit",
     ],
 )

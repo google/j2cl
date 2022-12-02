@@ -15,11 +15,11 @@
 
 set -e
 
-# Build Hello World sample in its own workspace
-(cd samples/helloworld && bazel build src/main/...)
+# Build and test Hello World sample in its own workspace
+(cd samples/helloworld && bazel test ...)
 
 # Build Guava sample in its own workspace
-(cd samples/guava && bazel build src/main/...)
+(cd samples/guava && bazel build ...)
 
 # Build WASM sample in its own workspace
 # Note that since binaryen dep is not available, we only build the wat file.

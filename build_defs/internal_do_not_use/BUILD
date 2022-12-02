@@ -67,7 +67,7 @@ alias(
 )
 
 # ***************************************************
-# JUnit library related
+# JUnit related
 # ***************************************************
 
 j2cl_library(
@@ -82,6 +82,16 @@ j2cl_library(
 alias(
     name = "internal_parametrized_test_suite",
     actual = "//junit/generator/java/com/google/j2cl/junit/runtime:internal_parametrized_test_suite",
+)
+
+alias(
+    name = "closure_testcase",
+    actual = "//third_party:closure_testcase",
+)
+
+alias(
+    name = "closure_testsuite",
+    actual = "//third_party:closure_testsuite",
 )
 
 # ***************************************************
