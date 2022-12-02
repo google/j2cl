@@ -6,7 +6,11 @@ build --watchfs
 build --spawn_strategy=local
 build --strategy=J2cl=worker
 build --strategy=Closure=worker
-build --experimental_persistent_javac
+build --strategy=Javac=worker
+build --strategy=JavaIjar=local
+build --strategy=JavaDeployJar=local
+build --strategy=JavaSourceJar=local
+build --strategy=Turbine=local
 
 test --test_output=errors
 
