@@ -69,7 +69,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
             "unzip -q $(location %s) *.kt -d zip_out/" % out_jar,
             "cd zip_out/",
             "mkdir -p ../$(RULEDIR)",
-            "for f in $$(find -name *.kt); do mv $$f ../$@; done",
+            "for f in $$(find . -name *.kt); do mv $$f ../$@; done",
         ]),
         testonly = 1,
         tags = ["manual", "notap"],

@@ -79,7 +79,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         cmd = "\n".join([
             "unzip -q $(location %s) *.testsuite *.json -d zip_out/" % out_jar,
             "cd zip_out/",
-            "for f in $$(find -name *.testsuite); do mv $$f $${f/.testsuite/.js}; done",
+            "for f in $$(find . -name *.testsuite); do mv $$f $${f/.testsuite/.js}; done",
             "zip -q -r ../$@ .",
         ]),
         testonly = 1,
