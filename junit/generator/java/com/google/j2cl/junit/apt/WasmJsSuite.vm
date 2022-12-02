@@ -6,6 +6,7 @@ goog.setTestOnly();
 const testSuite = goog.require('goog.testing.testSuite');
 const TestCase = goog.require('goog.testing.TestCase');
 const j2wasm = goog.require('j2wasm');
+const {createUserImports: createRitzUserImports} = goog.require('ritz.client.wasm.calcworkerhost.appImports');
 
 let exports;
 
@@ -17,9 +18,9 @@ testSuite({
 
     const absolutePath = "REPLACEMENT_BUILD_PATH_PLACEHOLDER";
 
-    const userImports = {
+    const userImports = Object.assign({
       'goog.testing.TestCase.saveMessage': msg => TestCase.getActiveTestCase().saveMessage(msg)
-    }
+    }, createRitzUserImports());
     const instance = await j2wasm.instantiateStreaming(absolutePath, userImports);
     exports = instance.exports;
     exports.setUpPageIn${testClass.simpleName()}();
