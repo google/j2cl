@@ -26,10 +26,6 @@ on:
     # Daily at 12pm UTC
     - cron: '0 12 * * *'
 
-env:
-  BAZELISK_VERSION: '1.5.0'
-  BAZELISK_BIN: "${HOME}/bin/bazelisk"
-
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
 jobs:
   build:
@@ -48,31 +44,17 @@ jobs:
 
     steps:
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: '11'
+          distribution: 'zulu'
           java-package: jdk
-          architecture: x64
 
       - name: Checkout current commit
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Mount bazelisk binary cache
-        id: bazelisk-cache
-        uses: actions/cache@v2
-        with:
-          path: ${HOME}/bin/bazelisk
-          key: ${{ runner.os }}-bazelisk-${{ env.BAZELISK_VERSION }}
-
-      - name: Install bazelisk
-        if: steps.bazelisk-cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p ${BAZELISK_BIN}
-          curl -L "https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-${{ matrix.bazelisk-os }}-amd64" -o ${BAZELISK_BIN}/bazel
-          chmod +x "${BAZELISK_BIN}/bazel"
-          alias bazel="${BAZELISK_BIN}/bazel"
       - name: Mount bazel cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: "${HOME}/.cache/bazel"
           key: ${{ runner.os }}-bazel
