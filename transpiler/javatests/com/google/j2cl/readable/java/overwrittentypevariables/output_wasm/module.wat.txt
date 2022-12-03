@@ -111,17 +111,6 @@
  )
 )
 
-;;; Class<?> MyFunction.getClass()
-(func $m_getClass__java_lang_Class@overwrittentypevariables.MyFunction
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getOverwrittentypevariables.MyFunction();
-  (return (call $function.no.side.effects.$getOverwrittentypevariables.MyFunction__java_lang_Class (ref.func $$getOverwrittentypevariables.MyFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@overwrittentypevariables.MyFunction)
-
 ;;; Code for overwrittentypevariables.HashFunction [INTERFACE]
 (type $overwrittentypevariables.HashFunction.vtable (struct 
  )
@@ -145,17 +134,6 @@
   (global.set $f_$initialized__overwrittentypevariables_HashFunction (i32.const 1))
  )
 )
-
-;;; Class<?> HashFunction.getClass()
-(func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunction
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getOverwrittentypevariables.HashFunction();
-  (return (call $function.no.side.effects.$getOverwrittentypevariables.HashFunction__java_lang_Class (ref.func $$getOverwrittentypevariables.HashFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunction)
 
 ;;; Code for overwrittentypevariables.HashFunctions [CLASS]
 (type $overwrittentypevariables.HashFunctions (struct_subtype 

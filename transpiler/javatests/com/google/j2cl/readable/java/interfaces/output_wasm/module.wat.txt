@@ -247,17 +247,6 @@
  )
 )
 
-;;; Class<?> Interface.getClass()
-(func $m_getClass__java_lang_Class@interfaces.Main.Interface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.Interface();
-  (return (call $function.no.side.effects.$getInterfaces.Main.Interface__java_lang_Class (ref.func $$getInterfaces.Main.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@interfaces.Main.Interface)
-
 ;;; Code for interfaces.Main.SubInterface [INTERFACE]
 (type $interfaces.Main.SubInterface.vtable (struct 
  (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
@@ -298,17 +287,6 @@
   (call $$clinit__void@interfaces.Main.Interface )
  )
 )
-
-;;; Class<?> SubInterface.getClass()
-(func $m_getClass__java_lang_Class@interfaces.Main.SubInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.SubInterface();
-  (return (call $function.no.side.effects.$getInterfaces.Main.SubInterface__java_lang_Class (ref.func $$getInterfaces.Main.SubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@interfaces.Main.SubInterface)
 
 ;;; Code for interfaces.Main.Implementor [CLASS]
 (type $interfaces.Main.Implementor (struct_subtype 

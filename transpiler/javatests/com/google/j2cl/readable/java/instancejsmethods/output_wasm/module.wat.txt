@@ -134,17 +134,6 @@
  )
 )
 
-;;; Class<?> MyInterface.getClass()
-(func $m_getClass__java_lang_Class@instancejsmethods.MyInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.MyInterface();
-  (return (call $function.no.side.effects.$getInstancejsmethods.MyInterface__java_lang_Class (ref.func $$getInstancejsmethods.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@instancejsmethods.MyInterface)
-
 ;;; Code for instancejsmethods.SuperParent [CLASS]
 (type $instancejsmethods.SuperParent (struct_subtype 
  (field $vtable (ref $instancejsmethods.SuperParent.vtable)) 

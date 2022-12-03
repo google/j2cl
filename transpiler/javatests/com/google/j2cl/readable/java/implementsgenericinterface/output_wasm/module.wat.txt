@@ -78,17 +78,6 @@
  )
 )
 
-;;; Class<?> GenericInterface.getClass()
-(func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterface();
-  (return (call $function.no.side.effects.$getImplementsgenericinterface.GenericInterface__java_lang_Class (ref.func $$getImplementsgenericinterface.GenericInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterface)
-
 ;;; Code for implementsgenericinterface.GenericSubInterface [INTERFACE]
 (type $implementsgenericinterface.GenericSubInterface.vtable (struct 
  )
@@ -112,17 +101,6 @@
   (global.set $f_$initialized__implementsgenericinterface_GenericSubInterface (i32.const 1))
  )
 )
-
-;;; Class<?> GenericSubInterface.getClass()
-(func $m_getClass__java_lang_Class@implementsgenericinterface.GenericSubInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericSubInterface();
-  (return (call $function.no.side.effects.$getImplementsgenericinterface.GenericSubInterface__java_lang_Class (ref.func $$getImplementsgenericinterface.GenericSubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericSubInterface)
 
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [CLASS]
 (type $implementsgenericinterface.GenericInterfaceGenericImpl (struct_subtype 

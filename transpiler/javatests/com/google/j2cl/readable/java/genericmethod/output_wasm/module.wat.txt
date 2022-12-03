@@ -1169,17 +1169,6 @@
  )
 )
 
-;;; Class<?> Consumer.getClass()
-(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Consumer
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Consumer();
-  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.Consumer__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.Consumer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Consumer)
-
 ;;; Code for genericmethod.GenericMethod.Supplier [INTERFACE]
 (type $genericmethod.GenericMethod.Supplier.vtable (struct 
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
@@ -1204,17 +1193,6 @@
   (global.set $f_$initialized__genericmethod_GenericMethod_Supplier (i32.const 1))
  )
 )
-
-;;; Class<?> Supplier.getClass()
-(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Supplier
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Supplier();
-  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.Supplier__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.Supplier__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Supplier)
 
 ;;; Code for genericmethod.GenericMethod.1LocalClass [CLASS]
 (type $genericmethod.GenericMethod.1LocalClass (struct_subtype 

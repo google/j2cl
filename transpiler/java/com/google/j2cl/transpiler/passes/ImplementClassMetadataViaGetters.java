@@ -68,6 +68,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
   private static void synthesizeGetClassMethods(Library library) {
     library
         .streamTypes()
+        .filter(not(Type::isInterface))
         .filter(not(Type::isAbstract))
         .forEach(
             t -> {

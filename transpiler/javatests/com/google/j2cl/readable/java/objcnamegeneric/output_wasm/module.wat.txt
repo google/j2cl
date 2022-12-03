@@ -80,17 +80,6 @@
  )
 )
 
-;;; Class<?> Collection.getClass()
-(func $m_getClass__java_lang_Class@objcnamegeneric.Collection
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getObjcnamegeneric.Collection();
-  (return (call $function.no.side.effects.$getObjcnamegeneric.Collection__java_lang_Class (ref.func $$getObjcnamegeneric.Collection__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@objcnamegeneric.Collection)
-
 ;;; Code for objcnamegeneric.List [CLASS]
 (type $objcnamegeneric.List (struct_subtype 
  (field $vtable (ref $objcnamegeneric.List.vtable)) 

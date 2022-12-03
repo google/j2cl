@@ -99,17 +99,6 @@
  )
 )
 
-;;; Class<?> GwtIncompatible.getClass()
-(func $m_getClass__java_lang_Class@gwtincompatible.GwtIncompatible
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.GwtIncompatible();
-  (return (call $function.no.side.effects.$getGwtincompatible.GwtIncompatible__java_lang_Class (ref.func $$getGwtincompatible.GwtIncompatible__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@gwtincompatible.GwtIncompatible)
-
 ;;; Code for gwtincompatible.Implementor [CLASS]
 (type $gwtincompatible.Implementor (struct_subtype 
  (field $vtable (ref $gwtincompatible.Implementor.vtable)) 
@@ -478,17 +467,6 @@
  )
 )
 
-;;; Class<?> Interface.getClass()
-(func $m_getClass__java_lang_Class@gwtincompatible.Interface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.Interface();
-  (return (call $function.no.side.effects.$getGwtincompatible.Interface__java_lang_Class (ref.func $$getGwtincompatible.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@gwtincompatible.Interface)
-
 ;;; Code for gwtincompatible.Interface.NestedInterface [INTERFACE]
 (type $gwtincompatible.Interface.NestedInterface.vtable (struct 
  )
@@ -512,17 +490,6 @@
   (global.set $f_$initialized__gwtincompatible_Interface_NestedInterface (i32.const 1))
  )
 )
-
-;;; Class<?> NestedInterface.getClass()
-(func $m_getClass__java_lang_Class@gwtincompatible.Interface.NestedInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.Interface.NestedInterface();
-  (return (call $function.no.side.effects.$getGwtincompatible.Interface.NestedInterface__java_lang_Class (ref.func $$getGwtincompatible.Interface.NestedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@gwtincompatible.Interface.NestedInterface)
 
 ;;; Code for gwtincompatible.Interface.ClassWithAbstractMethod [CLASS]
 (type $gwtincompatible.Interface.ClassWithAbstractMethod (struct_subtype 

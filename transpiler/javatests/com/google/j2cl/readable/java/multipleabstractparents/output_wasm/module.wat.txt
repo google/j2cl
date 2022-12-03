@@ -267,17 +267,6 @@
  )
 )
 
-;;; Class<?> List.getClass()
-(func $m_getClass__java_lang_Class@multipleabstractparents.MultipleAbstractParents.List
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getMultipleabstractparents.MultipleAbstractParents.List();
-  (return (call $function.no.side.effects.$getMultipleabstractparents.MultipleAbstractParents.List__java_lang_Class (ref.func $$getMultipleabstractparents.MultipleAbstractParents.List__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@multipleabstractparents.MultipleAbstractParents.List)
-
 ;;; Code for multipleabstractparents.MultipleAbstractParents.Collection [INTERFACE]
 (type $multipleabstractparents.MultipleAbstractParents.Collection.vtable (struct 
  (field $m_getFoo__java_lang_Object__java_lang_String (ref $function.m_getFoo__java_lang_Object__java_lang_String))
@@ -302,17 +291,6 @@
   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_Collection (i32.const 1))
  )
 )
-
-;;; Class<?> Collection.getClass()
-(func $m_getClass__java_lang_Class@multipleabstractparents.MultipleAbstractParents.Collection
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getMultipleabstractparents.MultipleAbstractParents.Collection();
-  (return (call $function.no.side.effects.$getMultipleabstractparents.MultipleAbstractParents.Collection__java_lang_Class (ref.func $$getMultipleabstractparents.MultipleAbstractParents.Collection__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@multipleabstractparents.MultipleAbstractParents.Collection)
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractListCollection [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractListCollection (struct_subtype 
@@ -690,17 +668,6 @@
   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_IStringList (i32.const 1))
  )
 )
-
-;;; Class<?> IStringList.getClass()
-(func $m_getClass__java_lang_Class@multipleabstractparents.MultipleAbstractParents.IStringList
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getMultipleabstractparents.MultipleAbstractParents.IStringList();
-  (return (call $function.no.side.effects.$getMultipleabstractparents.MultipleAbstractParents.IStringList__java_lang_Class (ref.func $$getMultipleabstractparents.MultipleAbstractParents.IStringList__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@multipleabstractparents.MultipleAbstractParents.IStringList)
 
 ;;; Code for multipleabstractparents.MultipleAbstractParents.AbstractStringList [CLASS]
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList (struct_subtype 

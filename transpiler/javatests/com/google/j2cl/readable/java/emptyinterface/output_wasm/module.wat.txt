@@ -24,14 +24,3 @@
   (global.set $f_$initialized__emptyinterface_EmptyInterface (i32.const 1))
  )
 )
-
-;;; Class<?> EmptyInterface.getClass()
-(func $m_getClass__java_lang_Class@emptyinterface.EmptyInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getEmptyinterface.EmptyInterface();
-  (return (call $function.no.side.effects.$getEmptyinterface.EmptyInterface__java_lang_Class (ref.func $$getEmptyinterface.EmptyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@emptyinterface.EmptyInterface)

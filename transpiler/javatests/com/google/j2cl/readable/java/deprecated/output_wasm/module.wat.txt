@@ -251,17 +251,6 @@
  )
 )
 
-;;; Class<?> DeprecatedInterface.getClass()
-(func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getDeprecated.DeprecatedExample.DeprecatedInterface();
-  (return (call $function.no.side.effects.$getDeprecated.DeprecatedExample.DeprecatedInterface__java_lang_Class (ref.func $$getDeprecated.DeprecatedExample.DeprecatedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedInterface)
-
 ;;; Code for deprecated.DeprecatedExample.DeprecatedJsFunction [INTERFACE]
 (type $deprecated.DeprecatedExample.DeprecatedJsFunction.vtable (struct 
  (field $m_doAThing__java_lang_Object__void (ref $function.m_doAThing__java_lang_Object__void))
@@ -286,17 +275,6 @@
   (global.set $f_$initialized__deprecated_DeprecatedExample_DeprecatedJsFunction (i32.const 1))
  )
 )
-
-;;; Class<?> DeprecatedJsFunction.getClass()
-(func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsFunction
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getDeprecated.DeprecatedExample.DeprecatedJsFunction();
-  (return (call $function.no.side.effects.$getDeprecated.DeprecatedExample.DeprecatedJsFunction__java_lang_Class (ref.func $$getDeprecated.DeprecatedExample.DeprecatedJsFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsFunction)
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [ENUM]
 (type $deprecated.DeprecatedExample.DeprecatedEnum (struct_subtype 

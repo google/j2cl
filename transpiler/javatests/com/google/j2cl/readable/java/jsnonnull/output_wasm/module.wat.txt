@@ -388,17 +388,6 @@
  )
 )
 
-;;; Class<?> MyFunction.getClass()
-(func $m_getClass__java_lang_Class@jsnonnull.Main.MyFunction
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsnonnull.Main.MyFunction();
-  (return (call $function.no.side.effects.$getJsnonnull.Main.MyFunction__java_lang_Class (ref.func $$getJsnonnull.Main.MyFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.MyFunction)
-
 ;;; Code for jsnonnull.Main.StringComparator [CLASS]
 (type $jsnonnull.Main.StringComparator (struct_subtype 
  (field $vtable (ref $jsnonnull.Main.StringComparator.vtable)) 
@@ -1062,17 +1051,6 @@
  )
 )
 
-;;; Class<?> NonNullableTemplatedReturn.getClass()
-(func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableTemplatedReturn
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsnonnull.Main.NonNullableTemplatedReturn();
-  (return (call $function.no.side.effects.$getJsnonnull.Main.NonNullableTemplatedReturn__java_lang_Class (ref.func $$getJsnonnull.Main.NonNullableTemplatedReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableTemplatedReturn)
-
 ;;; Code for jsnonnull.Main.NonNullableTemplate [INTERFACE]
 (type $jsnonnull.Main.NonNullableTemplate.vtable (struct 
  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
@@ -1098,14 +1076,3 @@
   (global.set $f_$initialized__jsnonnull_Main_NonNullableTemplate (i32.const 1))
  )
 )
-
-;;; Class<?> NonNullableTemplate.getClass()
-(func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableTemplate
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsnonnull.Main.NonNullableTemplate();
-  (return (call $function.no.side.effects.$getJsnonnull.Main.NonNullableTemplate__java_lang_Class (ref.func $$getJsnonnull.Main.NonNullableTemplate__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableTemplate)

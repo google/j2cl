@@ -790,17 +790,6 @@
  )
 )
 
-;;; Class<?> GenericSuperclass.getClass()
-(func $m_getClass__java_lang_Class@rawtype.RawType.GenericSuperclass
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.GenericSuperclass();
-  (return (call $function.no.side.effects.$getRawtype.RawType.GenericSuperclass__java_lang_Class (ref.func $$getRawtype.RawType.GenericSuperclass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@rawtype.RawType.GenericSuperclass)
-
 ;;; Code for rawtype.RawType.RawSubclass [CLASS]
 (type $rawtype.RawType.RawSubclass (struct_subtype 
  (field $vtable (ref $rawtype.RawType.RawSubclass.vtable)) 

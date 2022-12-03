@@ -475,17 +475,6 @@
  )
 )
 
-;;; Class<?> Function.getClass()
-(func $m_getClass__java_lang_Class@jsoptional.Main.Function
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.Function();
-  (return (call $function.no.side.effects.$getJsoptional.Main.Function__java_lang_Class (ref.func $$getJsoptional.Main.Function__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jsoptional.Main.Function)
-
 ;;; Code for jsoptional.Main.AFunction [CLASS]
 (type $jsoptional.Main.AFunction (struct_subtype 
  (field $vtable (ref $jsoptional.Main.AFunction.vtable)) 
@@ -621,17 +610,6 @@
   (global.set $f_$initialized__jsoptional_Main_I (i32.const 1))
  )
 )
-
-;;; Class<?> I.getClass()
-(func $m_getClass__java_lang_Class@jsoptional.Main.I
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.I();
-  (return (call $function.no.side.effects.$getJsoptional.Main.I__java_lang_Class (ref.func $$getJsoptional.Main.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jsoptional.Main.I)
 
 ;;; Code for jsoptional.Main.TemplatedSubtype [CLASS]
 (type $jsoptional.Main.TemplatedSubtype (struct_subtype 

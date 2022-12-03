@@ -101,17 +101,6 @@
  )
 )
 
-;;; Class<?> InterfaceWithDefault.getClass()
-(func $m_getClass__java_lang_Class@genericanddefaultmethods.InterfaceWithDefault
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericanddefaultmethods.InterfaceWithDefault();
-  (return (call $function.no.side.effects.$getGenericanddefaultmethods.InterfaceWithDefault__java_lang_Class (ref.func $$getGenericanddefaultmethods.InterfaceWithDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@genericanddefaultmethods.InterfaceWithDefault)
-
 ;;; Code for genericanddefaultmethods.GenericClass [CLASS]
 (type $genericanddefaultmethods.GenericClass (struct_subtype 
  (field $vtable (ref $genericanddefaultmethods.GenericClass.vtable)) 

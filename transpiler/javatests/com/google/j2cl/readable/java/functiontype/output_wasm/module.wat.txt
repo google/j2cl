@@ -51,17 +51,6 @@
  )
 )
 
-;;; Class<?> Function.getClass()
-(func $m_getClass__java_lang_Class@functiontype.Function
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.Function();
-  (return (call $function.no.side.effects.$getFunctiontype.Function__java_lang_Class (ref.func $$getFunctiontype.Function__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@functiontype.Function)
-
 ;;; Code for functiontype.FunctionImpl [CLASS]
 (type $functiontype.FunctionImpl (struct_subtype 
  (field $vtable (ref $functiontype.FunctionImpl.vtable)) 

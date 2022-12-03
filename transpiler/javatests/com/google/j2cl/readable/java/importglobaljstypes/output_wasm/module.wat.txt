@@ -480,17 +480,6 @@
  )
 )
 
-;;; Class<?> NativeFunction.getClass()
-(func $m_getClass__java_lang_Class@importglobaljstypes.Number.NativeFunction
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Number.NativeFunction();
-  (return (call $function.no.side.effects.$getImportglobaljstypes.Number.NativeFunction__java_lang_Class (ref.func $$getImportglobaljstypes.Number.NativeFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number.NativeFunction)
-
 ;;; Code for importglobaljstypes.Number.MyLiteralType [INTERFACE]
 (type $importglobaljstypes.Number.MyLiteralType.vtable (struct 
  )
@@ -514,14 +503,3 @@
   (global.set $f_$initialized__importglobaljstypes_Number_MyLiteralType (i32.const 1))
  )
 )
-
-;;; Class<?> MyLiteralType.getClass()
-(func $m_getClass__java_lang_Class@importglobaljstypes.Number.MyLiteralType
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Number.MyLiteralType();
-  (return (call $function.no.side.effects.$getImportglobaljstypes.Number.MyLiteralType__java_lang_Class (ref.func $$getImportglobaljstypes.Number.MyLiteralType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number.MyLiteralType)

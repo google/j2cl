@@ -79,17 +79,6 @@
  )
 )
 
-;;; Class<?> SomeInterface.getClass()
-(func $m_getClass__java_lang_Class@overridingmethods.SomeInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.SomeInterface();
-  (return (call $function.no.side.effects.$getOverridingmethods.SomeInterface__java_lang_Class (ref.func $$getOverridingmethods.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@overridingmethods.SomeInterface)
-
 ;;; Code for overridingmethods.Parent [CLASS]
 (type $overridingmethods.Parent (struct_subtype 
  (field $vtable (ref $overridingmethods.Parent.vtable)) 

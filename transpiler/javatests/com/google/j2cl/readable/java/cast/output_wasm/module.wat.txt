@@ -847,17 +847,6 @@
  )
 )
 
-;;; Class<?> A.getClass()
-(func $m_getClass__java_lang_Class@cast.CastGenerics.A
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.A();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.A__java_lang_Class (ref.func $$getCast.CastGenerics.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.A)
-
 ;;; Code for cast.CastGenerics.B [INTERFACE]
 (type $cast.CastGenerics.B.vtable (struct 
  (field $m_mB__void (ref $function.m_mB__void))
@@ -882,17 +871,6 @@
   (global.set $f_$initialized__cast_CastGenerics_B (i32.const 1))
  )
 )
-
-;;; Class<?> B.getClass()
-(func $m_getClass__java_lang_Class@cast.CastGenerics.B
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.B();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.B__java_lang_Class (ref.func $$getCast.CastGenerics.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.B)
 
 ;;; Code for cast.CastGenerics.BaseImplementor [CLASS]
 (type $cast.CastGenerics.BaseImplementor (struct_subtype 
@@ -1201,17 +1179,6 @@
  )
 )
 
-;;; Class<?> Empty1.getClass()
-(func $m_getClass__java_lang_Class@cast.CastGenerics.Empty1
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Empty1();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.Empty1__java_lang_Class (ref.func $$getCast.CastGenerics.Empty1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.Empty1)
-
 ;;; Code for cast.CastGenerics.Empty2 [INTERFACE]
 (type $cast.CastGenerics.Empty2.vtable (struct 
  )
@@ -1235,17 +1202,6 @@
   (global.set $f_$initialized__cast_CastGenerics_Empty2 (i32.const 1))
  )
 )
-
-;;; Class<?> Empty2.getClass()
-(func $m_getClass__java_lang_Class@cast.CastGenerics.Empty2
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Empty2();
-  (return (call $function.no.side.effects.$getCast.CastGenerics.Empty2__java_lang_Class (ref.func $$getCast.CastGenerics.Empty2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.Empty2)
 
 ;;; Code for cast.CastGenerics.Foo [CLASS]
 (type $cast.CastGenerics.Foo (struct_subtype 

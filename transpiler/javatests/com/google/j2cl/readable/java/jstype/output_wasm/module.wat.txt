@@ -256,17 +256,6 @@
  )
 )
 
-;;; Class<?> Star.getClass()
-(func $m_getClass__java_lang_Class@jstype.SomeJsType.Star
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType.Star();
-  (return (call $function.no.side.effects.$getJstype.SomeJsType.Star__java_lang_Class (ref.func $$getJstype.SomeJsType.Star__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Star)
-
 ;;; Code for jstype.SomeJsType.Wildcard [INTERFACE]
 (type $jstype.SomeJsType.Wildcard.vtable (struct 
  )
@@ -290,14 +279,3 @@
   (global.set $f_$initialized__jstype_SomeJsType_Wildcard (i32.const 1))
  )
 )
-
-;;; Class<?> Wildcard.getClass()
-(func $m_getClass__java_lang_Class@jstype.SomeJsType.Wildcard
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType.Wildcard();
-  (return (call $function.no.side.effects.$getJstype.SomeJsType.Wildcard__java_lang_Class (ref.func $$getJstype.SomeJsType.Wildcard__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Wildcard)

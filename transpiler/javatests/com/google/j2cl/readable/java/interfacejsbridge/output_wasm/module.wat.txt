@@ -88,17 +88,6 @@
  )
 )
 
-;;; Class<?> MyJsInterface.getClass()
-(func $m_getClass__java_lang_Class@interfacejsbridge.MyJsInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.MyJsInterface();
-  (return (call $function.no.side.effects.$getInterfacejsbridge.MyJsInterface__java_lang_Class (ref.func $$getInterfacejsbridge.MyJsInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@interfacejsbridge.MyJsInterface)
-
 ;;; Code for interfacejsbridge.MyInterface [INTERFACE]
 (type $interfacejsbridge.MyInterface.vtable (struct 
  (field $m_foo__int__int (ref $function.m_foo__int__int))
@@ -124,17 +113,6 @@
  )
 )
 
-;;; Class<?> MyInterface.getClass()
-(func $m_getClass__java_lang_Class@interfacejsbridge.MyInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.MyInterface();
-  (return (call $function.no.side.effects.$getInterfacejsbridge.MyInterface__java_lang_Class (ref.func $$getInterfacejsbridge.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@interfacejsbridge.MyInterface)
-
 ;;; Code for interfacejsbridge.SubInterface [INTERFACE]
 (type $interfacejsbridge.SubInterface.vtable (struct 
  (field $m_foo__int__int (ref $function.m_foo__int__int))
@@ -159,17 +137,6 @@
   (global.set $f_$initialized__interfacejsbridge_SubInterface (i32.const 1))
  )
 )
-
-;;; Class<?> SubInterface.getClass()
-(func $m_getClass__java_lang_Class@interfacejsbridge.SubInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.SubInterface();
-  (return (call $function.no.side.effects.$getInterfacejsbridge.SubInterface__java_lang_Class (ref.func $$getInterfacejsbridge.SubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@interfacejsbridge.SubInterface)
 
 ;;; Code for interfacejsbridge.InterfaceImpl [CLASS]
 (type $interfacejsbridge.InterfaceImpl (struct_subtype 

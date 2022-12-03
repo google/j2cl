@@ -29,17 +29,6 @@
  )
 )
 
-;;; Class<?> MyInterface.getClass()
-(func $m_getClass__java_lang_Class@genericinterfaceabstractimpl.MyInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getGenericinterfaceabstractimpl.MyInterface();
-  (return (call $function.no.side.effects.$getGenericinterfaceabstractimpl.MyInterface__java_lang_Class (ref.func $$getGenericinterfaceabstractimpl.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@genericinterfaceabstractimpl.MyInterface)
-
 ;;; Code for genericinterfaceabstractimpl.AbstractImpl [CLASS]
 (type $genericinterfaceabstractimpl.AbstractImpl (struct_subtype 
  (field $vtable (ref $genericinterfaceabstractimpl.AbstractImpl.vtable)) 

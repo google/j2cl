@@ -170,17 +170,6 @@
  )
 )
 
-;;; Class<?> Foo.getClass()
-(func $m_getClass__java_lang_Class@annotation.Main.Foo
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Foo();
-  (return (call $function.no.side.effects.$getAnnotation.Main.Foo__java_lang_Class (ref.func $$getAnnotation.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@annotation.Main.Foo)
-
 ;;; Code for annotation.Main.Zoo [INTERFACE]
 (type $annotation.Main.Zoo.vtable (struct 
  )
@@ -204,17 +193,6 @@
   (global.set $f_$initialized__annotation_Main_Zoo (i32.const 1))
  )
 )
-
-;;; Class<?> Zoo.getClass()
-(func $m_getClass__java_lang_Class@annotation.Main.Zoo
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Zoo();
-  (return (call $function.no.side.effects.$getAnnotation.Main.Zoo__java_lang_Class (ref.func $$getAnnotation.Main.Zoo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@annotation.Main.Zoo)
 
 ;;; Code for annotation.Main.Bar [CLASS]
 (type $annotation.Main.Bar (struct_subtype 
