@@ -23,28 +23,22 @@ class UnsatisfiedTypeBounds {
     T get();
   }
 
-  static class NonMarkedFoo implements Foo<NonMarkedFoo> {
+  interface Command {}
+
+  static class FooCommand implements Foo<FooCommand>, Command {
     @Override
-    public NonMarkedFoo get() {
+    public FooCommand get() {
       return this;
     }
   }
 
-  interface Marker {}
+  static final class Helper<T> {}
 
-  static class MarkedFoo implements Foo<MarkedFoo>, Marker {
-    @Override
-    public MarkedFoo get() {
-      return this;
-    }
-  }
-
-  <T> T methodWithTypeConstraints(T marker, Foo<? extends T> foo) {
+  static <T> T methodWithTypeConstraints(Helper<T> helper, Foo<? extends T> foo) {
     return foo.get();
   }
 
-  void test() {
-    Object object = methodWithTypeConstraints(new Marker() {}, new NonMarkedFoo());
-    Marker marker = methodWithTypeConstraints(new Marker() {}, new MarkedFoo());
+  static void test() {
+    Command command = methodWithTypeConstraints(new Helper<Command>(), new FooCommand());
   }
 }
