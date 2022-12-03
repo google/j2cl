@@ -1,0 +1,39 @@
+// Generated from "j2ktnotpassing/UnsatisfiedTypeBounds.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import j2ktnotpassing.UnsatisfiedTypeBounds
+import kotlin.Any
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+
+open class UnsatisfiedTypeBounds {
+ open fun <T: Any> methodWithTypeConstraints(marker: T, foo: UnsatisfiedTypeBounds.Foo<out T>): T {
+  return foo!!.get()
+ }
+
+ open fun test() {
+  val `object`: Any? = this.methodWithTypeConstraints<Any>(object : UnsatisfiedTypeBounds.Marker {}, UnsatisfiedTypeBounds.NonMarkedFoo())
+  val marker: UnsatisfiedTypeBounds.Marker? = this.methodWithTypeConstraints<UnsatisfiedTypeBounds.Marker>(object : UnsatisfiedTypeBounds.Marker {}, UnsatisfiedTypeBounds.MarkedFoo())
+ }
+
+ fun interface Foo<T: UnsatisfiedTypeBounds.Foo<T>> {
+  fun get(): T
+ }
+
+ open class NonMarkedFoo: UnsatisfiedTypeBounds.Foo<UnsatisfiedTypeBounds.NonMarkedFoo> {
+  open override fun get(): UnsatisfiedTypeBounds.NonMarkedFoo {
+   return this
+  }
+ }
+
+ interface Marker {}
+
+ open class MarkedFoo: UnsatisfiedTypeBounds.Foo<UnsatisfiedTypeBounds.MarkedFoo>, UnsatisfiedTypeBounds.Marker {
+  open override fun get(): UnsatisfiedTypeBounds.MarkedFoo {
+   return this
+  }
+ }
+}
