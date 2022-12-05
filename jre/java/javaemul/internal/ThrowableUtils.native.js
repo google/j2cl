@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2022 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,20 +15,21 @@
 
 /**
  * @param {*} error
- * @package
+ * @param {!Throwable} throwable
+ * @public
  */
-Throwable.prototype.linkBack = function(error) {
+ThrowableUtils.setJavaThrowable = function(error, throwable) {
   if (error instanceof Object) {
     try {
       // This may throw exception (e.g. frozen object) in strict mode.
-      error.__java$exception = this;
+      error.__java$exception = throwable;
       // TODO(b/142882366): Pass get fn as JsFunction from Java instead.
       Object.defineProperties(error, {
         cause: {
-          get: () => this.getCause() && this.getCause().backingJsObject
+          get: () => throwable.getCause() && throwable.getCause().backingJsObject
         },
         suppressed: {
-          get: () => this.getSuppressed().map(t => t.backingJsObject)
+          get: () => throwable.getSuppressed().map(t => t.backingJsObject)
         }
       });
     } catch (ignored) {}

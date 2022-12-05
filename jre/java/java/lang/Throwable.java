@@ -99,11 +99,8 @@ public class Throwable implements Serializable {
 
   private void setBackingJsObject(Object backingJsObject) {
     this.backingJsObject = backingJsObject;
-    linkBack(backingJsObject);
+    ThrowableUtils.setJavaThrowable(backingJsObject, this);
   }
-
-  @JsMethod
-  private native void linkBack(Object error);
 
   /** Call to add an exception that was suppressed. Used by try-with-resources. */
   public final void addSuppressed(Throwable exception) {

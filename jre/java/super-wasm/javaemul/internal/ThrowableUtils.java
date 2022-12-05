@@ -18,11 +18,14 @@ package javaemul.internal;
 /** Backend-specific utils for Throwable. */
 public final class ThrowableUtils {
 
-  /**
-   * Gets the Java {@link Throwable} of the specified js {@code Error}. Returns {@code null} if not
-   * available.
-   */
+  /** Gets the Java {@link Throwable} of the specified js {@code Error}. */
   public static Throwable getJavaThrowable(Object e) {
+    // Wasm doesn't yet support conversion from JS errors.
+    throw new UnsupportedOperationException();
+  }
+
+  /** Sets the Java {@link Throwable} of the specified js {@code Error}. */
+  public static void setJavaThrowable(Object error, Throwable javaThrowable) {
     // Wasm doesn't yet support conversion from JS errors.
     throw new UnsupportedOperationException();
   }

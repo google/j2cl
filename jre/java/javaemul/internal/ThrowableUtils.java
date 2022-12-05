@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -26,6 +27,10 @@ public final class ThrowableUtils {
   public static Throwable getJavaThrowable(Object e) {
     return ((HasJavaThrowable) e).getJavaThrowable();
   }
+
+  /** Sets the Java {@link Throwable} of the specified js {@code Error}. */
+  @JsMethod
+  public static native void setJavaThrowable(Object error, Throwable javaThrowable);
 
   /** JavaScript {@code Error}. */
   @JsType(isNative = true, name = "Error", namespace = JsPackage.GLOBAL)
