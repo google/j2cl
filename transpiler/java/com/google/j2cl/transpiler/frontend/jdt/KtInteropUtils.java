@@ -40,6 +40,10 @@ public class KtInteropUtils {
     return getKtObjcInfo(typeBinding.getAnnotations());
   }
 
+  public static KtObjcInfo getKtObjcInfo(IMethodBinding typeBinding) {
+    return getKtObjcInfo(typeBinding.getAnnotations());
+  }
+
   @Nullable
   private static KtObjcInfo getKtObjcInfo(IAnnotationBinding[] annotationBindings) {
     IAnnotationBinding annotationBinding = getKtObjectiveCNameAnnotation(annotationBindings);

@@ -19,6 +19,13 @@ import com.google.j2objc.annotations.ObjectiveCName;
 
 @ObjectiveCName("NewObjCName")
 public class ObjCName {
+
   @ObjectiveCName("InnerClassNewName")
   public class InnerClassOldName {}
+
+  @ObjectiveCName("newFoo")
+  public void foo() {}
+
+  @ObjectiveCName("newProtectedFoo")
+  protected void protectedFoo() {}
 }
