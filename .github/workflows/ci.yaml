@@ -29,18 +29,14 @@ on:
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
         test-type: [CI, SAMPLES]
         os: [macos-latest, ubuntu-latest]
-        include:
-          - os: ubuntu-latest
-            bazelisk-os: linux
-          - os: macos-latest
-            bazelisk-os: darwin
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Setup Java
@@ -53,15 +49,27 @@ jobs:
       - name: Checkout current commit
         uses: actions/checkout@v3
 
-      - name: Mount bazel cache
+      - name: Cache Bazel repositories
         uses: actions/cache@v3
         with:
-          path: "${HOME}/.cache/bazel"
-          key: ${{ runner.os }}-bazel
+          path: ~/bazel-repository-cache
+          key: bazel-repositories-${{hashFiles('**/WORKSPACE', '**.bzl')}}
+          restore-keys: |
+            bazel-repositories-
+
+      - name: Cache Bazel results
+        uses: actions/cache@v3
+        with:
+          path: ~/bazel-action-cache
+          key: bazel-actions-${{runner.os}}-${{github.sha}}
+          restore-keys: |
+            bazel-actions-${{runner.os}}-
 
       - name: Configure bazel
         run: |
-          echo "startup --output_base=$HOME/.cache/bazel" >> .bazelrc
-          echo "build --verbose_failures" >> .bazelrc
+          echo "build --repository_cache=~/bazel-repository-cache" >> ~/.bazelrc
+          echo "build --disk_cache=~/bazel-action-cache" >> ~/.bazelrc
+          echo "build --verbose_failures" >> ~/.bazelrc
+          bazel info
       - name: Run tests
         run: ./build_test.sh ${{ matrix['test-type'] }}
