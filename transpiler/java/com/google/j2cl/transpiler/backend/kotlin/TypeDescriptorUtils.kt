@@ -76,9 +76,12 @@ internal fun TypeDescriptor.contains(
   seenTypeVariables: Set<TypeVariable> = setOf()
 ): Boolean =
   when (this) {
-    is DeclaredTypeDescriptor -> typeArgumentDescriptors.any { it.contains(typeVariable) }
-    is IntersectionTypeDescriptor -> intersectionTypeDescriptors.any { it.contains(typeVariable) }
-    is ArrayTypeDescriptor -> componentTypeDescriptor?.contains(typeVariable) ?: false
+    is DeclaredTypeDescriptor ->
+      typeArgumentDescriptors.any { it.contains(typeVariable, seenTypeVariables) }
+    is IntersectionTypeDescriptor ->
+      intersectionTypeDescriptors.any { it.contains(typeVariable, seenTypeVariables) }
+    is ArrayTypeDescriptor -> componentTypeDescriptor?.contains(typeVariable, seenTypeVariables)
+        ?: false
     is TypeVariable ->
       if (seenTypeVariables.contains(this)) false
       else
