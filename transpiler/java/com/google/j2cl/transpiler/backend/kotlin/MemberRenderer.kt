@@ -139,9 +139,6 @@ private fun Renderer.renderMethodHeader(method: Method) {
     renderJvmStaticAnnotation()
   }
   val methodDescriptor = method.descriptor
-  if (methodDescriptor.visibility.needsObjCNameAnnotation && !methodDescriptor.isJavaOverride) {
-    renderObjCNameAnnotation(methodDescriptor)
-  }
   renderMethodModifiers(methodDescriptor)
   if (methodDescriptor.isConstructor) {
     render("constructor")
@@ -189,14 +186,18 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor) {
 private fun Renderer.renderMethodParameters(method: Method) {
   val parameterDescriptors = method.descriptor.parameterDescriptors
   val parameters = method.parameters
-  val includeObjCNameAnnotation =
+  val renderObjCNameAnnotation =
     method.descriptor.visibility.needsObjCNameAnnotation && !method.descriptor.isJavaOverride
-  val renderWithNewLines = includeObjCNameAnnotation && parameters.isNotEmpty()
+  val renderWithNewLines = renderObjCNameAnnotation && parameters.isNotEmpty()
   renderInParentheses {
     renderIndentedIf(renderWithNewLines) {
       renderCommaSeparated(0 until parameters.size) { index ->
         if (renderWithNewLines) renderNewLine()
-        renderParameter(parameterDescriptors[index], parameters[index], includeObjCNameAnnotation)
+        renderParameter(
+          parameterDescriptors[index],
+          parameters[index],
+          renderObjCNameAnnotation = renderObjCNameAnnotation
+        )
       }
     }
     if (renderWithNewLines) renderNewLine()
@@ -206,14 +207,14 @@ private fun Renderer.renderMethodParameters(method: Method) {
 private fun Renderer.renderParameter(
   parameterDescriptor: ParameterDescriptor,
   name: HasName,
-  includeObjCNameAnnotation: Boolean = false
+  renderObjCNameAnnotation: Boolean = false
 ) {
   val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
   val renderedTypeDescriptor =
     if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
     else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (parameterDescriptor.isVarargs) render("vararg ")
-  if (includeObjCNameAnnotation) renderObjCNameAnnotation(parameterDescriptor)
+  if (renderObjCNameAnnotation) renderObjCNameAnnotation(parameterDescriptor)
   renderName(name)
   render(": ")
   renderTypeDescriptor(renderedTypeDescriptor)

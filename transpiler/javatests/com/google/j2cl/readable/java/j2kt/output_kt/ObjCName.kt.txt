@@ -10,12 +10,6 @@ import kotlin.native.ObjCName
 
 @ObjCName("NewObjCName", exact = true)
 open class ObjCName {
- @ObjCName("newFoo", exact = false)
- open fun foo() {}
-
- @ObjCName("newProtectedFoo", exact = false)
- open fun protectedFoo() {}
-
  @ObjCName("InnerClassNewName", exact = true)
  open inner class InnerClassOldName {}
 }
