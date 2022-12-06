@@ -7,5 +7,6 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
+    generate_wasm_readables = False,  # TODO(b/261078322) Support JsOverlay in WASM.
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
