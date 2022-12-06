@@ -80,7 +80,7 @@ private data class TypeDescriptorRenderer(
     get() = copy(asSuperType = false)
 
   fun render(typeDescriptor: TypeDescriptor) {
-    copy(seenTypeDescriptors = seenTypeDescriptors + typeDescriptor.toNonNullable()).run {
+    withSeen(typeDescriptor).run {
       when (typeDescriptor) {
         is ArrayTypeDescriptor -> renderArray(typeDescriptor)
         is DeclaredTypeDescriptor -> renderDeclared(typeDescriptor)
@@ -138,7 +138,7 @@ private data class TypeDescriptorRenderer(
         child.render(lowerBoundTypeDescriptor)
       } else {
         val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
-        val isRecursive = seenTypeDescriptors.contains(boundTypeDescriptor)
+        val isRecursive = didSee(boundTypeDescriptor)
         if (isRecursive || boundTypeDescriptor.isImplicitUpperBound) {
           renderer.render("*")
         } else {
@@ -161,4 +161,10 @@ private data class TypeDescriptorRenderer(
   fun renderNullableSuffix(typeDescriptor: TypeDescriptor) {
     if (typeDescriptor.isNullable) renderer.render("?")
   }
+
+  private fun withSeen(typeDescriptor: TypeDescriptor) =
+    copy(seenTypeDescriptors = seenTypeDescriptors + typeDescriptor.toNonNullable())
+
+  private fun didSee(typeDescriptor: TypeDescriptor) =
+    seenTypeDescriptors.contains(typeDescriptor.toNonNullable())
 }
