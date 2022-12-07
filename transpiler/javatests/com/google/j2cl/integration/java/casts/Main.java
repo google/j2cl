@@ -20,6 +20,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 import java.io.Serializable;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -32,6 +33,7 @@ public class Main {
     testCasts_typeVariableWithNativeBound();
     testCasts_parameterizedNativeType();
     testCasts_exceptionMessages();
+    testCasts_exceptionMessages_jsType();
     testCasts_erasureCastOnThrow();
     testCasts_erasureCastOnConversion();
     testCasts_notOptimizeable();
@@ -470,6 +472,7 @@ public class Main {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Map")
   private static class NativeMap<K, V> {}
 
+  @Wasm("nop") // Casts to/from native types not yet supported in WASM.
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static <T extends NativeMap<?, ?>> void testCasts_typeVariableWithNativeBound() {
     // Casting Object[] to NativeMap[] is invalid on the JVM.
@@ -490,6 +493,7 @@ public class Main {
     }
   }
 
+  @Wasm("nop") // Casts to/from native types not yet supported in WASM.
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void testCasts_parameterizedNativeType() {
     Object a = new NativeMap<String, Object>();
@@ -543,8 +547,12 @@ public class Main {
           Void aVoid = (Void) object;
         },
         Void.class);
+  }
 
+  @Wasm("nop") // Casts to/from native types not yet supported in WASM.
+  private static void testCasts_exceptionMessages_jsType() {
     if (!isJvm()) {
+      Object object = new Foo();
       // Baz is a native JsType pointing to JavaScript string; the assertion does not make sense in
       // Java/JVM.
       assertThrowsClassCastException(
