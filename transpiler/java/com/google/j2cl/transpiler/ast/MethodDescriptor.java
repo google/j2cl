@@ -445,6 +445,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Nullable
   public abstract String getWasmInfo();
 
+  @Nullable
+  abstract KtObjcInfo getKtObjcInfo();
+
   public boolean isPropertyGetter() {
     return isJsPropertyGetter() || getOrigin() == MethodOrigin.SYNTHETIC_PROPERTY_GETTER;
   }
@@ -454,6 +457,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   public abstract boolean isEnumSyntheticMethod();
+
+  @Nullable
+  public String getObjectiveCName() {
+    KtObjcInfo ktObjcInfo = getKtObjcInfo();
+    return ktObjcInfo != null ? ktObjcInfo.getObjectiveCName() : null;
+  }
 
   @Override
   @Memoized
@@ -1029,6 +1038,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setJsInfo(JsInfo jsInfo);
 
     public abstract Builder setKtInfo(KtInfo ktInfo);
+
+    public abstract Builder setKtObjcInfo(KtObjcInfo ktObjcInfo);
 
     public abstract Builder setOrigin(MethodOrigin methodOrigin);
 

@@ -876,6 +876,7 @@ class JdtEnvironment {
         .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
         .setJsInfo(jsInfo)
         .setKtInfo(ktInfo)
+        .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(methodBinding))
         .setWasmInfo(getWasmInfo(methodBinding))
         .setJsFunction(isOrOverridesJsFunctionMethod(methodBinding))
         .setVisibility(visibility)

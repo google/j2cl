@@ -19,6 +19,7 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.common.StringUtils
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
@@ -48,6 +49,20 @@ internal fun Renderer.renderObjCNameAnnotation(typeDeclaration: TypeDeclaration)
     render(", exact = true")
   }
   renderNewLine()
+}
+
+internal fun Renderer.renderObjCNameAnnotation(methodDescriptor: MethodDescriptor) {
+  var objCName = methodDescriptor.getObjectiveCName()
+  // TODO(chenmorris): support the case that one method has >0 params
+  if (objCName != null && !objCName.contains(":")) {
+    render("@")
+    renderQualifiedName("kotlin.native.ObjCName")
+    renderInParentheses {
+      renderString(objCName)
+      render(", exact = false")
+    }
+    renderNewLine()
+  }
 }
 
 internal fun Renderer.renderObjCNameAnnotation(parameterDescriptor: ParameterDescriptor) {

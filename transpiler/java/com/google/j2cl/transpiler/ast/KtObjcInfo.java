@@ -16,11 +16,13 @@
 package com.google.j2cl.transpiler.ast;
 
 import com.google.auto.value.AutoValue;
+import javax.annotation.Nullable;
 
 /** Kotlin objective-c information. */
 @AutoValue
 public abstract class KtObjcInfo {
 
+  @Nullable
   public abstract String getObjectiveCName();
 
   public abstract Builder toBuilder();
