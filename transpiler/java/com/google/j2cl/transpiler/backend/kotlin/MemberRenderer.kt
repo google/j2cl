@@ -139,7 +139,7 @@ private fun Renderer.renderMethodHeader(method: Method) {
     renderJvmStaticAnnotation()
   }
   val methodDescriptor = method.descriptor
-  if (methodDescriptor.visibility.needsObjCNameAnnotation && !methodDescriptor.isJavaOverride) {
+  if (methodDescriptor.visibility.needsObjCNameAnnotation && !methodDescriptor.isKtOverride) {
     renderObjCNameAnnotation(methodDescriptor)
   }
   renderMethodModifiers(methodDescriptor)
@@ -181,7 +181,7 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor) {
       render("open ")
     }
   }
-  if (methodDescriptor.isJavaOverride) {
+  if (methodDescriptor.isKtOverride) {
     render("override ")
   }
 }
@@ -190,7 +190,7 @@ private fun Renderer.renderMethodParameters(method: Method) {
   val parameterDescriptors = method.descriptor.parameterDescriptors
   val parameters = method.parameters
   val includeObjCNameAnnotation =
-    method.descriptor.visibility.needsObjCNameAnnotation && !method.descriptor.isJavaOverride
+    method.descriptor.visibility.needsObjCNameAnnotation && !method.descriptor.isKtOverride
   val renderWithNewLines = includeObjCNameAnnotation && parameters.isNotEmpty()
   renderInParentheses {
     renderIndentedIf(renderWithNewLines) {
@@ -234,3 +234,7 @@ private fun Renderer.renderConstructorInvocation(method: Method) {
     renderInvocationArguments(constructorInvocation)
   }
 }
+
+// TODO(b/202433397): Update to handle visibility bridges.
+private val MethodDescriptor.isKtOverride
+  get() = isJavaOverride
