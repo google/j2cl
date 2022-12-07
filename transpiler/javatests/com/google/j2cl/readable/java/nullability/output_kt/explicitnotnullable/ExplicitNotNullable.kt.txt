@@ -4,6 +4,7 @@
 package nullability.explicitnotnullable
 
 import javaemul.lang.*
+import java.lang.NullPointerException
 import java.lang.RuntimeException
 import kotlin.Any
 import kotlin.Array
@@ -325,6 +326,29 @@ open class ExplicitNotNullable {
   fun testParametrizedMethod_pp_nullability_explicitnotnullable(f: ExplicitNotNullable.Function<in String, out String>, string: String): String {
    val localString: String? = string
    return f!!.apply(localString as String)
+  }
+
+  @JvmStatic
+  fun <T: Any> assertNotNull_pp_nullability_explicitnotnullable(nullable: T?): T {
+   if (nullable == null) {
+    throw NullPointerException()
+   }
+   return nullable!!
+  }
+
+  @JvmStatic
+  fun testAssertNotNull_parametrized_pp_nullability_explicitnotnullable(nullable: String?) {
+   val nonNull: String? = ExplicitNotNullable.assertNotNull_pp_nullability_explicitnotnullable<String>(nullable)
+  }
+
+  @JvmStatic
+  fun <T: Any> testAssertNotNull_notNullBounds_pp_nullability_explicitnotnullable(nullable: T?) {
+   val notNull: T? = ExplicitNotNullable.assertNotNull_pp_nullability_explicitnotnullable<T>(nullable)
+  }
+
+  @JvmStatic
+  fun <T> testAssertNotNull_nullableBounds_pp_nullability_explicitnotnullable(nullable: T?) {
+   val notNull: T? = ExplicitNotNullable.assertNotNull_pp_nullability_explicitnotnullable<T & Any>(nullable)
   }
  }
 

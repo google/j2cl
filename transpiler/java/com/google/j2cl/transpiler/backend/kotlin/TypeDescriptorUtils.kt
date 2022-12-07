@@ -129,17 +129,19 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
     when (this) {
       is DeclaredTypeDescriptor -> toNonNullable()
       is TypeVariable ->
-        if (!isWildcardOrCapture)
-          if (hasNullableBounds)
-          // Convert to {@code T & Any}
-          IntersectionTypeDescriptor.newBuilder()
-              .setIntersectionTypeDescriptors(listOf(this, anyTypeDescriptor))
+        if (!isWildcardOrCapture) {
+          if (hasNullableBounds) {
+            // Convert to {@code T & Any}
+            IntersectionTypeDescriptor.newBuilder()
+              .setIntersectionTypeDescriptors(listOf(toNonNullable(), anyTypeDescriptor))
               .build()
-          else this
-        else if (upperBoundTypeDescriptor.isImplicitUpperBound)
-        // Ignore type variables which will be rendered as star (unbounded wildcard).
-        this
-        else
+          } else {
+            toNonNullable()
+          }
+        } else if (upperBoundTypeDescriptor.isImplicitUpperBound) {
+          // Ignore type variables which will be rendered as star (unbounded wildcard).
+          this
+        } else {
           TypeVariable.Builder.from(this)
             .setUpperBoundTypeDescriptorSupplier { upperBoundTypeDescriptor.makeNonNull() }
             // Set some unique ID to avoid conflict with other type variables.
@@ -151,6 +153,7 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
                 "-${lowerBoundTypeDescriptor?.uniqueId}"
             )
             .build()
+        }
       is IntersectionTypeDescriptor ->
         IntersectionTypeDescriptor.newBuilder()
           .setIntersectionTypeDescriptors(intersectionTypeDescriptors + anyTypeDescriptor)

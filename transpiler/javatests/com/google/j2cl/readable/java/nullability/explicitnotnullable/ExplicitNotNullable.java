@@ -424,6 +424,25 @@ public class ExplicitNotNullable {
     // "fun apply(String): String", and "!!" is required.
     return f.apply(localString);
   }
+
+  static <T> T assertNotNull(@Nullable T nullable) {
+    if (nullable == null) {
+      throw new NullPointerException();
+    }
+    return nullable;
+  }
+
+  static void testAssertNotNull_parametrized(@Nullable String nullable) {
+    String nonNull = assertNotNull(nullable);
+  }
+
+  static <T> void testAssertNotNull_notNullBounds(@Nullable T nullable) {
+    T notNull = assertNotNull(nullable);
+  }
+
+  static <T extends @Nullable Object> void testAssertNotNull_nullableBounds(@Nullable T nullable) {
+    T notNull = assertNotNull(nullable);
+  }
 }
 
 class DefaultNullable {

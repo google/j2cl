@@ -376,6 +376,40 @@
 [String localString = string;] => [let localString = string_1;] "nullability.explicitnotnullable.ExplicitNotNullable.testParametrizedMethod"
 [localString] => [localString] "localString"
 [return f.apply(localString);] => [return /**@type {string}*/ ($Casts.$to(f.m_apply__java_lang_Object__java_lang_Object(localString), j_l_String));] "nullability.explicitnotnullable.ExplicitNotNullable.testParametrizedMethod"
+[assertNotNull] => [m_assertNotNull__java_lang_Object__java_lang_Object]
+[nullable] => [nullable] "nullable"
+[{
+    if (nullable == null) {
+...    return nullable;
+  }] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.assertNotNull"
+[if (nullable == null) {
+      throw new NullPointerException();
+    }] => [if ($Equality.$same(nullable, null)) {
+   throw $Exceptions.toJs(NullPointerException.$create__());
+  }] "nullability.explicitnotnullable.ExplicitNotNullable.assertNotNull"
+[throw new NullPointerException();] => [throw $Exceptions.toJs(NullPointerException.$create__());] "nullability.explicitnotnullable.ExplicitNotNullable.assertNotNull"
+[return nullable;] => [return nullable;] "nullability.explicitnotnullable.ExplicitNotNullable.assertNotNull"
+[testAssertNotNull_parametrized] => [m_testAssertNotNull_parametrized__java_lang_String__void]
+[nullable] => [nullable] "nullable"
+[{
+    String nonNull = assertNotNull(nullable);
+  }] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.testAssertNotNull_parametrized"
+[String nonNull = assertNotNull(nullable);] => [let nonNull = /**@type {?string}*/ ($Casts.$to(ExplicitNotNullable.m_assertNotNull__java_lang_Object__java_lang_Object(nullable), j_l_String));] "nullability.explicitnotnullable.ExplicitNotNullable.testAssertNotNull_parametrized"
+[nonNull] => [nonNull] "nonNull"
+[testAssertNotNull_notNullBounds] => [m_testAssertNotNull_notNullBounds__java_lang_Object__void]
+[nullable] => [nullable] "nullable"
+[{
+    T notNull = assertNotNull(nullable);
+  }] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.testAssertNotNull_notNullBounds"
+[T notNull = assertNotNull(nullable);] => [let notNull = ExplicitNotNullable.m_assertNotNull__java_lang_Object__java_lang_Object(nullable);] "nullability.explicitnotnullable.ExplicitNotNullable.testAssertNotNull_notNullBounds"
+[notNull] => [notNull] "notNull"
+[testAssertNotNull_nullableBounds] => [m_testAssertNotNull_nullableBounds__java_lang_Object__void]
+[nullable] => [nullable] "nullable"
+[{
+    T notNull = assertNotNull(nullable);
+  }] => [ExplicitNotNullable.$clinit();] "nullability.explicitnotnullable.ExplicitNotNullable.testAssertNotNull_nullableBounds"
+[T notNull = assertNotNull(nullable);] => [let notNull = ExplicitNotNullable.m_assertNotNull__java_lang_Object__java_lang_Object(nullable);] "nullability.explicitnotnullable.ExplicitNotNullable.testAssertNotNull_nullableBounds"
+[notNull] => [notNull] "notNull"
 [ExplicitNotNullable] => [$init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable]
 [private String f1 = "Hello";] => [this.f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ = 'Hello';] "nullability.explicitnotnullable.ExplicitNotNullable.<init>"
 [@Nullable private String f2 = null;] => [this.f_f2__nullability_explicitnotnullable_ExplicitNotNullable_ = null;] "nullability.explicitnotnullable.ExplicitNotNullable.<init>"

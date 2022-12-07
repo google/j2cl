@@ -9451,6 +9451,77 @@
  )
 )
 
+;;; T ExplicitNotNullable.assertNotNull(T nullable)
+(func $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable
+ (param $nullable (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:428:15
+ (block
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:428:51
+  (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable )
+  ;; if (javaemul.internal.Platform.isNull(nullable)) {
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:4
+  (if (ref.is_null (local.get $nullable))
+   (then
+    (block
+     ;; throw java.lang.NullPointerException.$create();
+     ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:430:6
+     (throw $exception.event (call $$create__@java.lang.NullPointerException ))
+    )
+   )
+  )
+  ;; return nullable;
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:432:4
+  (return (local.get $nullable))
+ )
+)
+
+;;; void ExplicitNotNullable.testAssertNotNull_parametrized(String nullable)
+(func $m_testAssertNotNull_parametrized__java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable
+ (param $nullable (ref null $java.lang.String))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:14
+ (local $nonNull (ref null $java.lang.String))
+ (block
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:72
+  (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable )
+  ;; String nonNull = ((String) nullability.explicitnotnullable.ExplicitNotNullable.assertNotNull(nullable));
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:4
+  (local.set $nonNull (ref.cast_static $java.lang.String (call $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable))))
+ )
+)
+
+;;; void ExplicitNotNullable.testAssertNotNull_notNullBounds(T nullable)
+(func $m_testAssertNotNull_notNullBounds__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable
+ (param $nullable (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:18
+ (local $notNull (ref null $java.lang.Object))
+ (block
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:72
+  (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable )
+  ;; T notNull = nullability.explicitnotnullable.ExplicitNotNullable.assertNotNull(nullable);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:4
+  (local.set $notNull (call $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
+ )
+)
+
+;;; void ExplicitNotNullable.testAssertNotNull_nullableBounds(T nullable)
+(func $m_testAssertNotNull_nullableBounds__java_lang_Object__void@nullability.explicitnotnullable.ExplicitNotNullable
+ (param $nullable (ref null $java.lang.Object))
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:443:43
+ (local $notNull (ref null $java.lang.Object))
+ (block
+  ;; nullability.explicitnotnullable.ExplicitNotNullable.$clinit();
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:443:98
+  (call $$clinit__void@nullability.explicitnotnullable.ExplicitNotNullable )
+  ;; T notNull = nullability.explicitnotnullable.ExplicitNotNullable.assertNotNull(nullable);
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:444:4
+  (local.set $notNull (call $m_assertNotNull__java_lang_Object__java_lang_Object@nullability.explicitnotnullable.ExplicitNotNullable (local.get $nullable)))
+ )
+)
+
 ;;; void ExplicitNotNullable.$init()
 (func $$init__void_$p_nullability_explicitnotnullable_ExplicitNotNullable@nullability.explicitnotnullable.ExplicitNotNullable
  (param $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
@@ -9597,17 +9668,17 @@
 ;;; DefaultNullable DefaultNullable.$create()
 (func $$create__@nullability.explicitnotnullable.DefaultNullable
  (result (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
  (local $$instance (ref null $nullability.explicitnotnullable.DefaultNullable))
  (block
   ;; DefaultNullable $instance = new DefaultNullable.<init>(0);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
   (local.set $$instance (struct.new $nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.DefaultNullable.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
   (return (local.get $$instance))
  )
 )
@@ -9615,13 +9686,13 @@
 ;;; void DefaultNullable.$ctor()
 (func $$ctor__void_$p_nullability_explicitnotnullable_DefaultNullable@nullability.explicitnotnullable.DefaultNullable
  (param $this (ref null $nullability.explicitnotnullable.DefaultNullable))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
  (block
   ;; nullability.explicitnotnullable.DefaultNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
   (call $$clinit__void@nullability.explicitnotnullable.DefaultNullable )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -9629,32 +9700,32 @@
 ;;; void DefaultNullable.nullableAccept(String s)
 (func $m_nullableAccept__java_lang_String__void@nullability.explicitnotnullable.DefaultNullable
  (param $s (ref null $java.lang.String))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:430:14
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:449:14
  (block
   ;; nullability.explicitnotnullable.DefaultNullable.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:430:39
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:449:39
   (call $$clinit__void@nullability.explicitnotnullable.DefaultNullable )
  )
 )
 
 ;;; void DefaultNullable.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.DefaultNullable
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
  (block
   ;; if (nullability.explicitnotnullable.DefaultNullable.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
   (if (global.get $f_$initialized__nullability_explicitnotnullable_DefaultNullable)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.DefaultNullable.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
   (global.set $f_$initialized__nullability_explicitnotnullable_DefaultNullable (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:429:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:448:6
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -9700,17 +9771,17 @@
 ;;; OuterClass<E> OuterClass.$create()
 (func $$create__@nullability.explicitnotnullable.OuterClass
  (result (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass))
  (block
   ;; OuterClass<E> $instance = new OuterClass.<init>(0);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (call $$ctor__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (return (local.get $$instance))
  )
 )
@@ -9718,16 +9789,16 @@
 ;;; void OuterClass.$ctor()
 (func $$ctor__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass
  (param $this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
  (block
   ;; nullability.explicitnotnullable.OuterClass.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (call $$clinit__void@nullability.explicitnotnullable.OuterClass )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
   ;; OuterClass.this.$init();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (call $$init__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass (ref.as_non_null (local.get $this)))
  )
 )
@@ -9735,35 +9806,35 @@
 ;;; void OuterClass.$init()
 (func $$init__void_$p_nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass
  (param $this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
  (block
   ;; nullability.explicitnotnullable.OuterClass.1.$create(OuterClass.this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:4
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:4
   (drop (call $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.1 (local.get $this)))
   ;; nullability.explicitnotnullable.OuterClass.2.$create(OuterClass.this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:4
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:4
   (drop (call $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.2 (local.get $this)))
  )
 )
 
 ;;; void OuterClass.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.OuterClass
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
  (block
   ;; if (nullability.explicitnotnullable.OuterClass.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (if (global.get $f_$initialized__nullability_explicitnotnullable_OuterClass)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.OuterClass.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (global.set $f_$initialized__nullability_explicitnotnullable_OuterClass (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:435:6
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:454:6
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -11439,17 +11510,17 @@
 (func $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.1
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
  (result (ref null $nullability.explicitnotnullable.OuterClass.1))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.1))
  (block
   ;; <anonymous> extends InnerClass<E, E><E> $instance = new $1.<init>(0,$outer_this,$outer_this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
   (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.1 (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.1.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.1.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_1@nullability.explicitnotnullable.OuterClass.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
   (return (local.get $$instance))
  )
 )
@@ -11458,35 +11529,35 @@
 (func $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_1@nullability.explicitnotnullable.OuterClass.1
  (param $this (ref null $nullability.explicitnotnullable.OuterClass.1))
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
  (block
   ;; nullability.explicitnotnullable.OuterClass.1.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
   (call $$clinit__void@nullability.explicitnotnullable.OuterClass.1 )
   ;; InnerClass.this.$ctor($outer_this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
 )
 
 ;;; void <anonymous> extends InnerClass<E, E>.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.OuterClass.1
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
  (block
   ;; if (nullability.explicitnotnullable.OuterClass.1.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
   (if (global.get $f_$initialized__nullability_explicitnotnullable_OuterClass_1)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.OuterClass.1.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
   (global.set $f_$initialized__nullability_explicitnotnullable_OuterClass_1 (i32.const 1))
   ;; nullability.explicitnotnullable.OuterClass.InnerClass.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:439:24
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:458:24
   (call $$clinit__void@nullability.explicitnotnullable.OuterClass.InnerClass )
  )
 )
@@ -11535,17 +11606,17 @@
 (func $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.2
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
  (result (ref null $nullability.explicitnotnullable.OuterClass.2))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.2))
  (block
   ;; <anonymous> extends InnerClass<String, E><E> $instance = new $2.<init>(0,$outer_this,$outer_this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
   (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.2 (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.2.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.2.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_2@nullability.explicitnotnullable.OuterClass.2 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
   (return (local.get $$instance))
  )
 )
@@ -11554,35 +11625,35 @@
 (func $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_2@nullability.explicitnotnullable.OuterClass.2
  (param $this (ref null $nullability.explicitnotnullable.OuterClass.2))
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
  (block
   ;; nullability.explicitnotnullable.OuterClass.2.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
   (call $$clinit__void@nullability.explicitnotnullable.OuterClass.2 )
   ;; InnerClass.this.$ctor($outer_this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
 )
 
 ;;; void <anonymous> extends InnerClass<String, E>.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.OuterClass.2
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
  (block
   ;; if (nullability.explicitnotnullable.OuterClass.2.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
   (if (global.get $f_$initialized__nullability_explicitnotnullable_OuterClass_2)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.OuterClass.2.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
   (global.set $f_$initialized__nullability_explicitnotnullable_OuterClass_2 (i32.const 1))
   ;; nullability.explicitnotnullable.OuterClass.InnerClass.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:440:29
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:459:29
   (call $$clinit__void@nullability.explicitnotnullable.OuterClass.InnerClass )
  )
 )
@@ -11630,17 +11701,17 @@
 (func $$create__nullability_explicitnotnullable_OuterClass@nullability.explicitnotnullable.OuterClass.InnerClass
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
  (result (ref null $nullability.explicitnotnullable.OuterClass.InnerClass))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
  (local $$instance (ref null $nullability.explicitnotnullable.OuterClass.InnerClass))
  (block
   ;; InnerClass<E, E> $instance = new InnerClass.<init>(0,$outer_this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
   (local.set $$instance (struct.new $nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.InnerClass.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.OuterClass.InnerClass.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
   (call $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
   (return (local.get $$instance))
  )
 )
@@ -11649,35 +11720,35 @@
 (func $$ctor__nullability_explicitnotnullable_OuterClass__void_$p_nullability_explicitnotnullable_OuterClass_InnerClass@nullability.explicitnotnullable.OuterClass.InnerClass
  (param $this (ref null $nullability.explicitnotnullable.OuterClass.InnerClass))
  (param $$outer_this (ref null $nullability.explicitnotnullable.OuterClass))
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
  (block
   ;; nullability.explicitnotnullable.OuterClass.InnerClass.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
   (call $$clinit__void@nullability.explicitnotnullable.OuterClass.InnerClass )
   ;; Object.this.$ctor();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@nullability.explicitnotnullable.OuterClass.InnerClass
- ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+ ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
  (block
   ;; if (nullability.explicitnotnullable.OuterClass.InnerClass.$initialized) return;
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
   (if (global.get $f_$initialized__nullability_explicitnotnullable_OuterClass_InnerClass)
    (then
     ;; return;
-    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+    ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
     (return )
    )
   )
   ;; (nullability.explicitnotnullable.OuterClass.InnerClass.$initialized = true);
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
   (global.set $f_$initialized__nullability_explicitnotnullable_OuterClass_InnerClass (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:436:8
+  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:455:8
   (call $$clinit__void@java.lang.Object )
  )
 )
