@@ -415,12 +415,12 @@ open class AutoBoxing {
 
  open fun testUnbox_withCast() {
   open class ___1Supplier<T> {
-   open fun get(): T {
+   open fun get_pp_autoboxing(): T {
     return null as T
    }
   }
   val supplier: ___1Supplier<Int?>? = ___1Supplier<Int?>()
-  val i: Int = supplier!!.get()!!.toInt()
+  val i: Int = supplier!!.get_pp_autoboxing()!!.toInt()
  }
 
  companion object {
@@ -433,12 +433,12 @@ open class AutoBoxing {
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___1Local<T: Long?> {
-    open fun toLong(l: T): Long {
+    open fun toLong_pp_autoboxing(l: T): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()
     }
    }
-   l = ___1Local<Long?>().toLong(Long.valueOf(11L))
+   l = ___1Local<Long?>().toLong_pp_autoboxing(Long.valueOf(11L))
    assert(l == 11L)
   }
 
@@ -449,12 +449,12 @@ open class AutoBoxing {
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___2Local<T> where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
-    open fun toLong(l: T): Long {
+    open fun toLong_pp_autoboxing(l: T): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()
     }
    }
-   l = ___2Local<Long?>().toLong(Long.valueOf(11L))
+   l = ___2Local<Long?>().toLong_pp_autoboxing(Long.valueOf(11L))
    assert(l == 11L)
    val i: Int = Int.valueOf(10)!!.toInt()
   }

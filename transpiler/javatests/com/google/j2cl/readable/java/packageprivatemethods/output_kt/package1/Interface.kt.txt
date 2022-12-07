@@ -1,0 +1,18 @@
+// Generated from "packageprivatemethods/package1/Interface.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package packageprivatemethods.package1
+
+import javaemul.lang.*
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("PackageprivatemethodsPackage1Interface", exact = true)
+fun interface Interface {
+ fun exposedInChildWithInterface(
+  @ObjCName("withInt", exact = false) a: Int,
+  @ObjCName("withInt", exact = false) b: Int
+ ): Int
+}

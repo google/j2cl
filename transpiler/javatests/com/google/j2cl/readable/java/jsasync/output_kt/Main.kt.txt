@@ -17,20 +17,20 @@ import kotlin.native.ObjCName
 open class Main {
  @JvmField val x_private_2: Main.IThenable<Int?>? = Main.Promise.resolve<Int?>(Int.valueOf(10))
 
- open fun emptyAsyncMethod(): Main.IThenable<Unit?>? {
+ open fun emptyAsyncMethod_pp_jsasync(): Main.IThenable<Unit?>? {
   return null
  }
 
- open fun asyncMethod(): Main.IThenable<Int?>? {
+ open fun asyncMethod_pp_jsasync(): Main.IThenable<Int?>? {
   val result: Int = Main.await_private_2<Int?>(Main.Promise.resolve<Int?>(Int.valueOf(7)))!!.toInt()
-  return this.parametricAsyncMethod<Int?>(Int.valueOf(result))
+  return this.parametricAsyncMethod_pp_jsasync<Int?>(Int.valueOf(result))
  }
 
- open fun <T> parametricAsyncMethod(value: T): Main.IThenable<T>? {
+ open fun <T> parametricAsyncMethod_pp_jsasync(value: T): Main.IThenable<T>? {
   return Main.Promise.resolve<T>(Main.await_private_2<T>(Main.Promise.resolve<T>(value)))
  }
 
- open fun testAsyncLambdas() {
+ open fun testAsyncLambdas_pp_jsasync() {
   val i: Main.AsyncInterface? = Main.AsyncInterface {
    return@AsyncInterface Main.Promise.resolve<Int?>(Main.await_private_2<Int?>(Main.Promise.resolve<Int?>(Int.valueOf(5))))
   }
@@ -57,7 +57,7 @@ open class Main {
 
  companion object {
   @JvmStatic
-  fun staticAsyncMethod(): Main.IThenable<Unit?>? {
+  fun staticAsyncMethod_pp_jsasync(): Main.IThenable<Unit?>? {
    return Main.Promise.resolve<Unit?>(Main.await_private_2<Unit?>(Main.Promise.resolve<Unit?>(null as Unit?)))
   }
 

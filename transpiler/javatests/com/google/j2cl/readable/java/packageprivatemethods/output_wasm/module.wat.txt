@@ -1,6 +1,9 @@
 ;;; Code for packageprivatemethods.package1.Child [static fields]
 (global $f_$initialized__packageprivatemethods_package1_Child (mut i32) (i32.const 0))
 
+;;; Code for packageprivatemethods.package1.Interface [static fields]
+(global $f_$initialized__packageprivatemethods_package1_Interface (mut i32) (i32.const 0))
+
 ;;; Code for packageprivatemethods.package1.Parent [static fields]
 (global $f_$initialized__packageprivatemethods_package1_Parent (mut i32) (i32.const 0))
 
@@ -20,18 +23,22 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@packageprivatemethods.package1.Child)
-  (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
-  (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
-  (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
-  (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child)
-  (ref.func $m_foo__int__int@packageprivatemethods.package1.Child)
-  (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child)
+  (ref.func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
+  (ref.func $m_exposedAbstractInParent__int__int__int__int@packageprivatemethods.package1.Child)
+  (ref.func $m_overrideInParentExposedInChild__int__int@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedInChild__int__int__int@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedInChildWithInterface__int__int__int@packageprivatemethods.package1.Child)
  )
 )
 
 ;;; Code for packageprivatemethods.package1.Child [itable.init]
 (global $packageprivatemethods.package1.Child.itable (ref $packageprivatemethods.package1.Child.itable) (struct.new $packageprivatemethods.package1.Child.itable 
-  (ref.null struct)
+ (struct.new $packageprivatemethods.package1.Interface.vtable
+  (ref.func $m_exposedInChildWithInterface__int__int__int@packageprivatemethods.package1.Child)
+ )
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -47,9 +54,10 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@packageprivatemethods.package1.SuperParent)
-  (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
-  (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
-  (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+  (ref.func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+  (ref.func $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+  (ref.func $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+  (ref.func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
  )
 )
 
@@ -71,18 +79,22 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@packageprivatemethods.package2.SubChild)
-  (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
-  (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
-  (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
-  (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child)
-  (ref.func $m_foo__int__int@packageprivatemethods.package2.SubChild)
-  (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child)
+  (ref.func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
+  (ref.func $m_exposedAbstractInParent__int__int__int__int@packageprivatemethods.package1.Child)
+  (ref.func $m_overrideInParentExposedInChild__int__int@packageprivatemethods.package2.SubChild)
+  (ref.func $m_exposedInChild__int__int__int@packageprivatemethods.package1.Child)
+  (ref.func $m_exposedInChildWithInterface__int__int__int@packageprivatemethods.package1.Child)
  )
 )
 
 ;;; Code for packageprivatemethods.package2.SubChild [itable.init]
 (global $packageprivatemethods.package2.SubChild.itable (ref $packageprivatemethods.package2.SubChild.itable) (struct.new $packageprivatemethods.package2.SubChild.itable 
-  (ref.null struct)
+ (struct.new $packageprivatemethods.package1.Interface.vtable
+  (ref.func $m_exposedInChildWithInterface__int__int__int@packageprivatemethods.package1.Child)
+ )
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -103,16 +115,18 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__int__int_$pp_packageprivatemethods_package1 (ref $function.m_foo__int__int_$pp_packageprivatemethods_package1))
- (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_fun__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int (ref $function.m_bar__int__int__int__int))
- (field $m_foo__int__int (ref $function.m_foo__int__int))
- (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
+ (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int (ref $function.m_exposedAbstractInParent__int__int__int__int))
+ (field $m_overrideInParentExposedInChild__int__int (ref $function.m_overrideInParentExposedInChild__int__int))
+ (field $m_exposedInChild__int__int__int (ref $function.m_exposedInChild__int__int__int))
+ (field $m_exposedInChildWithInterface__int__int__int (ref $function.m_exposedInChildWithInterface__int__int__int))
   $packageprivatemethods.package1.Parent.vtable)
 )
 (type $packageprivatemethods.package1.Child.itable (struct_subtype 
-(field $slot0 (ref null struct))
+(field $slot0 (ref $packageprivatemethods.package1.Interface.vtable))
 (field $slot1 (ref null struct))
 (field $slot2 (ref null struct))
 (field $slot3 (ref null struct))
@@ -153,80 +167,81 @@
  )
 )
 
-;;; int Child.foo(int a)
-(func $m_foo__int__int@packageprivatemethods.package1.Child
- (type $function.m_foo__int__int)
+;;; int Child.overrideInParentExposedInChild(int a)
+(func $m_overrideInParentExposedInChild__int__int@packageprivatemethods.package1.Child
+ (type $function.m_overrideInParentExposedInChild__int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
- ;;@ packageprivatemethods/package1/Child.java:21:13
+ ;;@ packageprivatemethods/package1/Child.java:22:13
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;; return (a + 1);
-  ;;@ packageprivatemethods/package1/Child.java:22:4
+  ;;@ packageprivatemethods/package1/Child.java:23:4
   (return (i32.add (local.get $a) (i32.const 1)))
  )
 )
-(elem declare func $m_foo__int__int@packageprivatemethods.package1.Child)
+(elem declare func $m_overrideInParentExposedInChild__int__int@packageprivatemethods.package1.Child)
 
-;;; int Child.fun(int a, int b)
-(func $m_fun__int__int__int@packageprivatemethods.package1.Child
- (type $function.m_fun__int__int__int)
+;;; int Child.exposedInChild(int a, int b)
+(func $m_exposedInChild__int__int__int@packageprivatemethods.package1.Child
+ (type $function.m_exposedInChild__int__int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (result i32)
- ;;@ packageprivatemethods/package1/Child.java:27:13
+ ;;@ packageprivatemethods/package1/Child.java:28:13
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;; return ((a + b) + 1);
-  ;;@ packageprivatemethods/package1/Child.java:28:4
+  ;;@ packageprivatemethods/package1/Child.java:29:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
  )
 )
-(elem declare func $m_fun__int__int__int@packageprivatemethods.package1.Child)
+(elem declare func $m_exposedInChild__int__int__int@packageprivatemethods.package1.Child)
 
-;;; int Child.bar(int a, int b, int c)
-(func $m_bar__int__int__int__int@packageprivatemethods.package1.Child
- (type $function.m_bar__int__int__int__int)
+;;; int Child.exposedInChildWithInterface(int a, int b)
+(func $m_exposedInChildWithInterface__int__int__int@packageprivatemethods.package1.Child
+ (type $function.m_exposedInChildWithInterface__int__int__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ ;;@ packageprivatemethods/package1/Child.java:35:13
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (block
+  ;; return ((a + b) + 1);
+  ;;@ packageprivatemethods/package1/Child.java:36:4
+  (return (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
+ )
+)
+(elem declare func $m_exposedInChildWithInterface__int__int__int@packageprivatemethods.package1.Child)
+
+;;; int Child.exposedAbstractInParent(int a, int b, int c)
+(func $m_exposedAbstractInParent__int__int__int__int@packageprivatemethods.package1.Child
+ (type $function.m_exposedAbstractInParent__int__int__int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (param $c i32)
  (result i32)
- ;;@ packageprivatemethods/package1/Child.java:33:13
+ ;;@ packageprivatemethods/package1/Child.java:41:13
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
   ;; return (((a + b) + c) + 2);
-  ;;@ packageprivatemethods/package1/Child.java:34:4
+  ;;@ packageprivatemethods/package1/Child.java:42:4
   (return (i32.add (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)) (i32.const 2)))
  )
 )
-(elem declare func $m_bar__int__int__int__int@packageprivatemethods.package1.Child)
+(elem declare func $m_exposedAbstractInParent__int__int__int__int@packageprivatemethods.package1.Child)
 
-;;; int Child.foo(int arg0)
-(func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
- (type $function.m_foo__int__int_$pp_packageprivatemethods_package1)
- (param $this.untyped (ref $java.lang.Object))
- (param $arg0 i32)
- (result i32)
- ;;@ packageprivatemethods/package1/Child.java:18:13
- (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
- (block
-  ;; return Child.this.foo(arg0);
-  ;;@ packageprivatemethods/package1/Child.java:18:13
-  (return (call_ref $function.m_foo__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_foo__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
- )
-)
-(elem declare func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
-
-;;; int Child.fun(int arg0, int arg1)
-(func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
- (type $function.m_fun__int__int__int_$pp_packageprivatemethods_package1)
+;;; int Child.exposedInChild(int arg0, int arg1)
+(func $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
+ (type $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 i32)
@@ -235,12 +250,47 @@
  (local $this (ref null $packageprivatemethods.package1.Child))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
  (block
-  ;; return Child.this.fun(arg0,arg1);
+  ;; return Child.this.exposedInChild(arg0,arg1);
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (return (call_ref $function.m_fun__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_fun__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
+  (return (call_ref $function.m_exposedInChild__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_exposedInChild__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
  )
 )
-(elem declare func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+(elem declare func $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+
+;;; int Child.exposedInChildWithInterface(int arg0, int arg1)
+(func $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
+ (type $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ (param $arg1 i32)
+ (result i32)
+ ;;@ packageprivatemethods/package1/Child.java:18:13
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (block
+  ;; return Child.this.exposedInChildWithInterface(arg0,arg1);
+  ;;@ packageprivatemethods/package1/Child.java:18:13
+  (return (call_ref $function.m_exposedInChildWithInterface__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_exposedInChildWithInterface__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+
+;;; int Child.overrideInParentExposedInChild(int arg0)
+(func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
+ (type $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 i32)
+ (result i32)
+ ;;@ packageprivatemethods/package1/Child.java:18:13
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast_static $packageprivatemethods.package1.Child (local.get $this.untyped)))
+ (block
+  ;; return Child.this.overrideInParentExposedInChild(arg0);
+  ;;@ packageprivatemethods/package1/Child.java:18:13
+  (return (call_ref $function.m_overrideInParentExposedInChild__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_overrideInParentExposedInChild__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
+ )
+)
+(elem declare func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
 
 ;;; void Child.$clinit()
 (func $$clinit__void@packageprivatemethods.package1.Child
@@ -278,6 +328,31 @@
 )
 (elem declare func $m_getClass__java_lang_Class@packageprivatemethods.package1.Child)
 
+;;; Code for packageprivatemethods.package1.Interface [INTERFACE]
+(type $packageprivatemethods.package1.Interface.vtable (struct 
+ (field $m_exposedInChildWithInterface__int__int__int (ref $function.m_exposedInChildWithInterface__int__int__int))
+ )
+)
+
+;;; void Interface.$clinit()
+(func $$clinit__void@packageprivatemethods.package1.Interface
+ ;;@ packageprivatemethods/package1/Interface.java:18:17
+ (block
+  ;; if (packageprivatemethods.package1.Interface.$initialized) return;
+  ;;@ packageprivatemethods/package1/Interface.java:18:17
+  (if (global.get $f_$initialized__packageprivatemethods_package1_Interface)
+   (then
+    ;; return;
+    ;;@ packageprivatemethods/package1/Interface.java:18:17
+    (return )
+   )
+  )
+  ;; (packageprivatemethods.package1.Interface.$initialized = true);
+  ;;@ packageprivatemethods/package1/Interface.java:18:17
+  (global.set $f_$initialized__packageprivatemethods_package1_Interface (i32.const 1))
+ )
+)
+
 ;;; Code for packageprivatemethods.package1.Parent [CLASS]
 (type $packageprivatemethods.package1.Parent (struct_subtype 
  (field $vtable (ref $packageprivatemethods.package1.Parent.vtable)) 
@@ -290,10 +365,11 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__int__int_$pp_packageprivatemethods_package1 (ref $function.m_foo__int__int_$pp_packageprivatemethods_package1))
- (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_fun__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int (ref $function.m_bar__int__int__int__int))
+ (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int (ref $function.m_exposedAbstractInParent__int__int__int__int))
   $packageprivatemethods.package1.SuperParent.vtable)
 )
 (type $packageprivatemethods.package1.Parent.itable (struct_subtype 
@@ -320,9 +396,9 @@
  )
 )
 
-;;; int Parent.foo(int a)
-(func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
- (type $function.m_foo__int__int_$pp_packageprivatemethods_package1)
+;;; int Parent.overrideInParentExposedInChild(int a)
+(func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
+ (type $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -335,11 +411,11 @@
   (return (local.get $a))
  )
 )
-(elem declare func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
+(elem declare func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
 
-;;; int Parent.bar(int arg0, int arg1, int arg2)
-(func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
- (type $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1)
+;;; int Parent.exposedAbstractInParent(int arg0, int arg1, int arg2)
+(func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
+ (type $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 i32)
@@ -349,12 +425,12 @@
  (local $this (ref null $packageprivatemethods.package1.Parent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.Parent (local.get $this.untyped)))
  (block
-  ;; return Parent.this.bar(arg0,arg1,arg2);
+  ;; return Parent.this.exposedAbstractInParent(arg0,arg1,arg2);
   ;;@ packageprivatemethods/package1/Parent.java:18:22
-  (return (call_ref $function.m_bar__int__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(local.get $arg2)(struct.get $packageprivatemethods.package1.Parent.vtable $m_bar__int__int__int__int (struct.get $packageprivatemethods.package1.Parent $vtable(local.get $this)))))
+  (return (call_ref $function.m_exposedAbstractInParent__int__int__int__int (ref.as_non_null (local.get $this))(local.get $arg0)(local.get $arg1)(local.get $arg2)(struct.get $packageprivatemethods.package1.Parent.vtable $m_exposedAbstractInParent__int__int__int__int (struct.get $packageprivatemethods.package1.Parent $vtable(local.get $this)))))
  )
 )
-(elem declare func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
+(elem declare func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
 
 ;;; void Parent.$clinit()
 (func $$clinit__void@packageprivatemethods.package1.Parent
@@ -390,9 +466,10 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__int__int_$pp_packageprivatemethods_package1 (ref $function.m_foo__int__int_$pp_packageprivatemethods_package1))
- (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_fun__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
   $java.lang.Object.vtable)
 )
 (type $packageprivatemethods.package1.SuperParent.itable (struct_subtype 
@@ -437,9 +514,9 @@
  )
 )
 
-;;; int SuperParent.foo(int a)
-(func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
- (type $function.m_foo__int__int_$pp_packageprivatemethods_package1)
+;;; int SuperParent.overrideInParentExposedInChild(int a)
+(func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
+ (type $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -452,11 +529,11 @@
   (return (i32.sub (local.get $a) (i32.const 1)))
  )
 )
-(elem declare func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+(elem declare func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
 
-;;; int SuperParent.fun(int a, int b)
-(func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
- (type $function.m_fun__int__int__int_$pp_packageprivatemethods_package1)
+;;; int SuperParent.exposedInChild(int a, int b)
+(func $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
+ (type $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -470,26 +547,44 @@
   (return (i32.add (local.get $a) (local.get $b)))
  )
 )
-(elem declare func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+(elem declare func $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
 
-;;; int SuperParent.bar(int a, int b, int c)
-(func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
- (type $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1)
+;;; int SuperParent.exposedInChildWithInterface(int a, int b)
+(func $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
+ (type $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ ;;@ packageprivatemethods/package1/SuperParent.java:29:6
+ (local $this (ref null $packageprivatemethods.package1.SuperParent))
+ (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
+ (block
+  ;; return (a + b);
+  ;;@ packageprivatemethods/package1/SuperParent.java:30:4
+  (return (i32.add (local.get $a) (local.get $b)))
+ )
+)
+(elem declare func $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+
+;;; int SuperParent.exposedAbstractInParent(int a, int b, int c)
+(func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
+ (type $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (param $c i32)
  (result i32)
- ;;@ packageprivatemethods/package1/SuperParent.java:30:6
+ ;;@ packageprivatemethods/package1/SuperParent.java:34:6
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
  (local.set $this (ref.cast_static $packageprivatemethods.package1.SuperParent (local.get $this.untyped)))
  (block
   ;; return ((a + b) + c);
-  ;;@ packageprivatemethods/package1/SuperParent.java:31:4
+  ;;@ packageprivatemethods/package1/SuperParent.java:35:4
   (return (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)))
  )
 )
-(elem declare func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+(elem declare func $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
 
 ;;; void SuperParent.$clinit()
 (func $$clinit__void@packageprivatemethods.package1.SuperParent
@@ -539,16 +634,18 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__int__int_$pp_packageprivatemethods_package1 (ref $function.m_foo__int__int_$pp_packageprivatemethods_package1))
- (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_fun__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int (ref $function.m_bar__int__int__int__int))
- (field $m_foo__int__int (ref $function.m_foo__int__int))
- (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
+ (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int (ref $function.m_exposedAbstractInParent__int__int__int__int))
+ (field $m_overrideInParentExposedInChild__int__int (ref $function.m_overrideInParentExposedInChild__int__int))
+ (field $m_exposedInChild__int__int__int (ref $function.m_exposedInChild__int__int__int))
+ (field $m_exposedInChildWithInterface__int__int__int (ref $function.m_exposedInChildWithInterface__int__int__int))
   $packageprivatemethods.package1.Child.vtable)
 )
 (type $packageprivatemethods.package2.SubChild.itable (struct_subtype 
-(field $slot0 (ref null struct))
+(field $slot0 (ref $packageprivatemethods.package1.Interface.vtable))
 (field $slot1 (ref null struct))
 (field $slot2 (ref null struct))
 (field $slot3 (ref null struct))
@@ -589,9 +686,9 @@
  )
 )
 
-;;; int SubChild.foo(int a)
-(func $m_foo__int__int@packageprivatemethods.package2.SubChild
- (type $function.m_foo__int__int)
+;;; int SubChild.overrideInParentExposedInChild(int a)
+(func $m_overrideInParentExposedInChild__int__int@packageprivatemethods.package2.SubChild
+ (type $function.m_overrideInParentExposedInChild__int__int)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -604,7 +701,7 @@
   (return (i32.add (local.get $a) (i32.const 3)))
  )
 )
-(elem declare func $m_foo__int__int@packageprivatemethods.package2.SubChild)
+(elem declare func $m_overrideInParentExposedInChild__int__int@packageprivatemethods.package2.SubChild)
 
 ;;; void SubChild.$clinit()
 (func $$clinit__void@packageprivatemethods.package2.SubChild
@@ -654,11 +751,12 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__int__int_$pp_packageprivatemethods_package1 (ref $function.m_foo__int__int_$pp_packageprivatemethods_package1))
- (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_fun__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_bar__int__int__int__int_$pp_packageprivatemethods_package1))
- (field $m_bar__int__int__int__int (ref $function.m_bar__int__int__int__int))
- (field $m_foo__int__int_$pp_packageprivatemethods_package2 (ref $function.m_foo__int__int_$pp_packageprivatemethods_package2))
+ (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1 (ref $function.m_exposedAbstractInParent__int__int__int__int_$pp_packageprivatemethods_package1))
+ (field $m_exposedAbstractInParent__int__int__int__int (ref $function.m_exposedAbstractInParent__int__int__int__int))
+ (field $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2 (ref $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2))
   $packageprivatemethods.package1.Parent.vtable)
 )
 (type $packageprivatemethods.package2.SubParent.itable (struct_subtype 
@@ -685,9 +783,9 @@
  )
 )
 
-;;; int SubParent.foo(int a)
-(func $m_foo__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent
- (type $function.m_foo__int__int_$pp_packageprivatemethods_package2)
+;;; int SubParent.overrideInParentExposedInChild(int a)
+(func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent
+ (type $function.m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2)
  (param $this.untyped (ref $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -700,7 +798,7 @@
   (return (local.get $a))
  )
 )
-(elem declare func $m_foo__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent)
+(elem declare func $m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent)
 
 ;;; void SubParent.$clinit()
 (func $$clinit__void@packageprivatemethods.package2.SubParent

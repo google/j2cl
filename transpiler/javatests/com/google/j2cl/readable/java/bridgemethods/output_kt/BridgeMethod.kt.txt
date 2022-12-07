@@ -170,13 +170,13 @@ open class TestCase102 {
 }
 
 open class ParameterizedParent<T: ParameterizedParent<T>?> {
- open fun <Q: T> m(t: Q): Q {
+ open fun <Q: T> m_pp_bridgemethods(t: Q): Q {
   return null as Q
  }
 }
 
 open class ReparametrerizedChild<E: ReparametrerizedChild<E>?>: ParameterizedParent<E>() {
- open override fun <S: E> m(t: S): S {
+ open override fun <S: E> m_pp_bridgemethods(t: S): S {
   return null as S
  }
 }

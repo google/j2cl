@@ -85,92 +85,92 @@ open class Nullability {
 
  companion object {
   @JvmStatic
-  fun <T: String?> testDefaultNullabilityBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
-   defaultNullability!!.getNonNullable()!!.length
-   defaultNullability!!.getNullable()!!.length
-   defaultNullability!!.getDefaultNullability()!!.length
+  fun <T: String?> testDefaultNullabilityBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+   defaultNullability!!.getNonNullable_pp_nullability()!!.length
+   defaultNullability!!.getNullable_pp_nullability()!!.length
+   defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String?> testDefaultNullabilityBounds(nullable: Nullability.ParameterizedNullable<T>?) {
-   nullable!!.getNonNullable()!!.length
-   nullable!!.getNullable()!!.length
-   nullable!!.getDefaultNullability()!!.length
+  fun <T: String?> testDefaultNullabilityBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
+   nullable!!.getNonNullable_pp_nullability()!!.length
+   nullable!!.getNullable_pp_nullability()!!.length
+   nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String?> testNullableBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
-   defaultNullability!!.getNonNullable()!!.length
-   defaultNullability!!.getNullable()!!.length
-   defaultNullability!!.getDefaultNullability()!!.length
+  fun <T: String?> testNullableBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+   defaultNullability!!.getNonNullable_pp_nullability()!!.length
+   defaultNullability!!.getNullable_pp_nullability()!!.length
+   defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String?> testNullableBounds(nullable: Nullability.ParameterizedNullable<T>?) {
-   nullable!!.getNonNullable()!!.length
-   nullable!!.getNullable()!!.length
-   nullable!!.getDefaultNullability()!!.length
+  fun <T: String?> testNullableBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
+   nullable!!.getNonNullable_pp_nullability()!!.length
+   nullable!!.getNullable_pp_nullability()!!.length
+   nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String> testNonNullableBounds(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
-   defaultNullability!!.getNonNullable()!!.length
-   defaultNullability!!.getNullable()!!.length
-   defaultNullability!!.getDefaultNullability()!!.length
+  fun <T: String> testNonNullableBounds_pp_nullability(defaultNullability: Nullability.ParameterizedDefaultNullability<T>?) {
+   defaultNullability!!.getNonNullable_pp_nullability()!!.length
+   defaultNullability!!.getNullable_pp_nullability()!!.length
+   defaultNullability!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String> testNonNullableBounds(nullable: Nullability.ParameterizedNullable<T>?) {
-   nullable!!.getNonNullable()!!.length
-   nullable!!.getNullable()!!.length
-   nullable!!.getDefaultNullability()!!.length
+  fun <T: String> testNonNullableBounds_pp_nullability(nullable: Nullability.ParameterizedNullable<T>?) {
+   nullable!!.getNonNullable_pp_nullability()!!.length
+   nullable!!.getNullable_pp_nullability()!!.length
+   nullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun <T: String> testNonNullableBounds(nonNullable: Nullability.ParameterizedNonNullable<T>?) {
-   nonNullable!!.getNonNullable()!!.length
-   nonNullable!!.getNullable()!!.length
-   nonNullable!!.getDefaultNullability()!!.length
+  fun <T: String> testNonNullableBounds_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<T>?) {
+   nonNullable!!.getNonNullable_pp_nullability()!!.length
+   nonNullable!!.getNullable_pp_nullability()!!.length
+   nonNullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedDefaultNullability<out String?>?) {
-   nonNullable!!.getNonNullable()!!.length
-   nonNullable!!.getNullable()!!.length
-   nonNullable!!.getDefaultNullability()!!.length
+  fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedDefaultNullability<out String?>?) {
+   nonNullable!!.getNonNullable_pp_nullability()!!.length
+   nonNullable!!.getNullable_pp_nullability()!!.length
+   nonNullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedNullable<out String?>?) {
-   nonNullable!!.getNonNullable()!!.length
-   nonNullable!!.getNullable()!!.length
-   nonNullable!!.getDefaultNullability()!!.length
+  fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedNullable<out String?>?) {
+   nonNullable!!.getNonNullable_pp_nullability()!!.length
+   nonNullable!!.getNullable_pp_nullability()!!.length
+   nonNullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun testDefaultNullabilityWildcards(nonNullable: Nullability.ParameterizedNonNullable<out String>?) {
-   nonNullable!!.getNonNullable()!!.length
-   nonNullable!!.getNullable()!!.length
-   nonNullable!!.getDefaultNullability()!!.length
+  fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<out String>?) {
+   nonNullable!!.getNonNullable_pp_nullability()!!.length
+   nonNullable!!.getNullable_pp_nullability()!!.length
+   nonNullable!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
-  fun <T> testRecursive() where T: Nullability.Recursive<T>, T: Marker? {
+  fun <T> testRecursive_pp_nullability() where T: Nullability.Recursive<T>, T: Marker? {
    val generic: Nullability.RecursiveParam<T>? = Nullability.RecursiveParam<T>()
    val parametrized: Nullability.RecursiveParam<Nullability.RecursiveChild>? = Nullability.RecursiveParam<Nullability.RecursiveChild>()
   }
 
   @JvmStatic
-  fun <T> testRecursiveNullable() where T: Nullability.RecursiveNullable<T>?, T: Marker? {
+  fun <T> testRecursiveNullable_pp_nullability() where T: Nullability.RecursiveNullable<T>?, T: Marker? {
    val generic: Nullability.RecursiveNullableParam<T>? = Nullability.RecursiveNullableParam<T>()
    val parametrized: Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>? = Nullability.RecursiveNullableParam<Nullability.RecursiveNullableChild?>()
   }
  }
 
  open class Foo<T> {
-  open fun bar(t: T) {}
+  open fun bar_pp_nullability(t: T) {}
 
-  open fun baz(): T? {
+  open fun baz_pp_nullability(): T? {
    return null
   }
 
@@ -214,49 +214,49 @@ open class Nullability {
  }
 
  open class ParameterizedDefaultNullability<N> {
-  open fun getNullable(): N? {
+  open fun getNullable_pp_nullability(): N? {
    return null
   }
 
-  open fun getNonNullable(): N {
+  open fun getNonNullable_pp_nullability(): N {
    throw RuntimeException()
   }
 
-  open fun getDefaultNullability(): N {
+  open fun getDefaultNullability_pp_nullability(): N {
    return null as N
   }
  }
 
  open class ParameterizedNullable<N> {
-  open fun getNullable(): N? {
+  open fun getNullable_pp_nullability(): N? {
    return null
   }
 
-  open fun getNonNullable(): N {
+  open fun getNonNullable_pp_nullability(): N {
    throw RuntimeException()
   }
 
-  open fun getDefaultNullability(): N {
+  open fun getDefaultNullability_pp_nullability(): N {
    return null as N
   }
  }
 
  open class ParameterizedNonNullable<N: Any> {
-  open fun getNullable(): N? {
+  open fun getNullable_pp_nullability(): N? {
    return null
   }
 
-  open fun getNonNullable(): N {
+  open fun getNonNullable_pp_nullability(): N {
    throw RuntimeException()
   }
 
-  open fun getDefaultNullability(): N {
+  open fun getDefaultNullability_pp_nullability(): N {
    return null!!
   }
  }
 
  open class NonNullableInsideNullable<T> {
-  open fun nonNullableTest(nonNullable: Nullability.ParameterizedNonNullable<T & Any>?) {}
+  open fun nonNullableTest_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<T & Any>?) {}
  }
 
  open class Recursive<T> where T: Nullability.Recursive<T>, T: Marker? {}

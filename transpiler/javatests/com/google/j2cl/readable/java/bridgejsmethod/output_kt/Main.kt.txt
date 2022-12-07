@@ -38,7 +38,7 @@ open class Main {
    val h: Main.H<Int?>? = Main.H<Int?>()
    h!!.enclose(Int.valueOf(1))
    val l: Main.L<Int?>? = Main.L<Int?>()
-   l!!.`fun`("foo", Int.valueOf(1))
+   l!!.fun_pp_bridgejsmethod("foo", Int.valueOf(1))
   }
  }
 
@@ -114,12 +114,12 @@ open class Main {
 
  @ObjCName("BridgejsmethodMain_K", exact = true)
  open class K<K1, K2> {
-  open fun `fun`(k1: K1, k2: K2) {}
+  open fun fun_pp_bridgejsmethod(k1: K1, k2: K2) {}
  }
 
  @ObjCName("BridgejsmethodMain_L", exact = true)
  open class L<L1>: Main.K<String?, L1>() {
-  open override fun `fun`(string: String?, l1: L1) {}
+  open override fun fun_pp_bridgejsmethod(string: String?, l1: L1) {}
  }
 
  fun interface M {

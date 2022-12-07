@@ -23,10 +23,10 @@ open class goog {}
 open class Blah {
  companion object {
   @JvmStatic
-  external fun m()
+  external fun m_pp_collisions()
 
   @JvmStatic
-  external fun getN(): Double
+  external fun getN_pp_collisions(): Double
  }
 }
 
@@ -39,8 +39,8 @@ open class bar {
   val goog: Int = 0
   val flip: Int = 0
   val window: Int = 0
-  Blah.m()
-  Blah.getN()
+  Blah.m_pp_collisions()
+  Blah.getN_pp_collisions()
   Blah()
   collisions.goog()
   collisions.foo()
@@ -55,7 +55,7 @@ open class Other<T> {
   val o: Other<T>? = null as Other<T>?
  }
 
- open fun <T_2> m(): T_2 {
+ open fun <T_2> m_pp_collisions(): T_2 {
   val T_1: Int = 5
   val o: Other<T_2>? = null as Other<T_2>?
   return null as T_2
@@ -63,12 +63,12 @@ open class Other<T> {
 }
 
 open class T<T: Number?> {
- open fun m(): T {
+ open fun m_pp_collisions(): T {
   return null as T
  }
 
- open fun n(): T {
-  val t: T? = collisions.T<T>().m()
+ open fun n_pp_collisions(): T {
+  val t: T? = collisions.T<T>().m_pp_collisions()
   t!!.toByte()
   return t as T
  }

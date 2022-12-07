@@ -32,7 +32,7 @@ open class LocalNameCollision {
   val com_google_j2cl_readable_localnamecollision_package2_A: Int = 1
   val A: Int = 1
   LocalNameCollision = RuntimeException is localnamecollision.LocalNameCollision || RuntimeException is kotlin.RuntimeException || RuntimeException is localnamecollision.package1.A || RuntimeException is localnamecollision.package2.A || RuntimeException is Class
-  assert(localnamecollision.Asserts().n() == 5)
+  assert(localnamecollision.Asserts().n_pp_localnamecollision() == 5)
  }
 
  open fun testClassParameterCollision(
@@ -58,16 +58,16 @@ open class LocalNameCollision {
 
 open class A {
  companion object {
-  @JvmField var A: localnamecollision.A? = null
+  @JvmField var A_pp_localnamecollision: localnamecollision.A? = null
 
-  @JvmField var B: localnamecollision.A.B? = null
+  @JvmField var B_pp_localnamecollision: localnamecollision.A.B? = null
 
   @JvmStatic
-  fun test() {
-   localnamecollision.A.A = localnamecollision.A.A
-   localnamecollision.A.B = localnamecollision.A.B
-   localnamecollision.A.A = localnamecollision.A.A
-   localnamecollision.A.B = localnamecollision.A.B
+  fun test_pp_localnamecollision() {
+   localnamecollision.A.A_pp_localnamecollision = localnamecollision.A.A_pp_localnamecollision
+   localnamecollision.A.B_pp_localnamecollision = localnamecollision.A.B_pp_localnamecollision
+   localnamecollision.A.A_pp_localnamecollision = localnamecollision.A.A_pp_localnamecollision
+   localnamecollision.A.B_pp_localnamecollision = localnamecollision.A.B_pp_localnamecollision
   }
  }
 

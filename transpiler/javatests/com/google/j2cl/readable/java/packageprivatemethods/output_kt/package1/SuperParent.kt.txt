@@ -11,15 +11,19 @@ import kotlin.native.ObjCName
 
 @ObjCName("PackageprivatemethodsPackage1SuperParent", exact = true)
 open class SuperParent {
- open fun foo(a: Int): Int {
+ open fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(a: Int): Int {
   return a - 1
  }
 
- open fun `fun`(a: Int, b: Int): Int {
+ open fun exposedInChild_pp_packageprivatemethods_package1(a: Int, b: Int): Int {
   return a + b
  }
 
- open fun bar(a: Int, b: Int, c: Int): Int {
+ open fun exposedInChildWithInterface_pp_packageprivatemethods_package1(a: Int, b: Int): Int {
+  return a + b
+ }
+
+ open fun exposedAbstractInParent_pp_packageprivatemethods_package1(a: Int, b: Int, c: Int): Int {
   return a + b + c
  }
 }

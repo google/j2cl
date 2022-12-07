@@ -28,28 +28,28 @@ abstract class SomeClassWithStaticMembers {
 
  companion object {
   @JvmStatic
-  fun staticMethod() {}
+  fun staticMethod_pp_anonymousclass() {}
  }
 }
 
 @ObjCName("AnonymousclassAnonymousClass", exact = true)
 open class AnonymousClass {
- @JvmField var i: Int = 0
+ @JvmField var i_pp_anonymousclass: Int = 0
 
  open fun main() {
-  val instance: SomeClass? = object : SomeClass(this@AnonymousClass.i) {
-   @JvmField var `object`: Any? = this
+  val instance: SomeClass? = object : SomeClass(this@AnonymousClass.i_pp_anonymousclass) {
+   @JvmField var object_pp_anonymousclass: Any? = this
 
-   @JvmField var outer: Any? = this@AnonymousClass
+   @JvmField var outer_pp_anonymousclass: Any? = this@AnonymousClass
 
    open override fun foo(): String? {
     return "a"
    }
   }
-  val instanceWithStaticMembers: SomeClassWithStaticMembers? = object : SomeClassWithStaticMembers(this@AnonymousClass.i) {
-   @JvmField var `object`: Any? = this
+  val instanceWithStaticMembers: SomeClassWithStaticMembers? = object : SomeClassWithStaticMembers(this@AnonymousClass.i_pp_anonymousclass) {
+   @JvmField var object_pp_anonymousclass: Any? = this
 
-   @JvmField var outer: Any? = this@AnonymousClass
+   @JvmField var outer_pp_anonymousclass: Any? = this@AnonymousClass
 
    open override fun foo(): String? {
     return "a"

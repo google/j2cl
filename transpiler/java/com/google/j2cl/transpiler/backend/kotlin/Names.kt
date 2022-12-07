@@ -33,7 +33,8 @@ private val MemberDescriptor.ktNameSuffix: String
     when (visibility!!) {
       Visibility.PUBLIC -> ktPropertyNameSuffix
       Visibility.PROTECTED -> ktPropertyNameSuffix
-      Visibility.PACKAGE_PRIVATE -> ktPropertyNameSuffix
+      Visibility.PACKAGE_PRIVATE ->
+        "_pp_${enclosingTypeDescriptor.typeDeclaration.packageName?.replace('.', '_') ?: ""}"
       Visibility.PRIVATE ->
         "_private_${enclosingTypeDescriptor.typeDeclaration.privateMemberSuffix}"
     }

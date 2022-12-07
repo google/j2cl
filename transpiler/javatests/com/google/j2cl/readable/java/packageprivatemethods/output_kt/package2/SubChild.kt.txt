@@ -12,7 +12,7 @@ import packageprivatemethods.package1.Child
 
 @ObjCName("PackageprivatemethodsPackage2SubChild", exact = true)
 open class SubChild: Child() {
- open override fun foo(a: Int): Int {
+ open override fun overrideInParentExposedInChild(a: Int): Int {
   return a + 3
  }
 }

@@ -12,7 +12,7 @@ import kotlin.jvm.JvmStatic
 open class TypeWildCards {
  companion object {
   @JvmStatic
-  fun testSupplierWithUpperAndLowerBounds(supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?) {
+  fun testSupplierWithUpperAndLowerBounds_pp_j2kt(supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?) {
    val parent: TypeWildCards.Parent? = supplier!!.get() as TypeWildCards.Parent?
   }
  }

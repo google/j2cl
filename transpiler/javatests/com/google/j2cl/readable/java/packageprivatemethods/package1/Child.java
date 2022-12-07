@@ -15,22 +15,30 @@
  */
 package packageprivatemethods.package1;
 
-public class Child extends Parent {
-  // This directly exposes Parent.foo, there should be one and only one dispatch method here.
+public class Child extends Parent implements Interface {
+  // This directly exposes Parent.overrideInParentExposedInChild, there should be one and only one
+  // dispatch method here.
   @Override
-  public int foo(int a) {
+  public int overrideInParentExposedInChild(int a) {
     return a + 1;
   }
 
-  // This directly exposes SuperParent.fun, there should be a dispatch method here.
+  // This directly exposes SuperParent.exposedInChild, there should be a dispatch method here.
   @Override
-  public int fun(int a, int b) {
+  public int exposedInChild(int a, int b) {
+    return a + b + 1;
+  }
+
+  // This directly exposes SuperParent.exposedInChildWithInterface and implements it from interface,
+  // there should be a dispatch method here.
+  @Override
+  public int exposedInChildWithInterface(int a, int b) {
     return a + b + 1;
   }
 
   // This does not directly expose any methods.
   @Override
-  public int bar(int a, int b, int c) {
+  public int exposedAbstractInParent(int a, int b, int c) {
     return a + b + c + 2;
   }
 }

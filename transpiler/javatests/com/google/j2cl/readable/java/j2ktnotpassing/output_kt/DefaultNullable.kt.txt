@@ -16,14 +16,14 @@ import kotlin.native.ObjCName
 open class DefaultNullable {
  companion object {
   @JvmStatic
-  fun testNonNullableLambdas() {
+  fun testNonNullableLambdas_pp_j2ktnotpassing() {
    val methodReference: NotNullable.Consumer<String?>? = NotNullable.Consumer<String?> { arg0: String ->
-    DefaultNullable.accept(arg0)
+    DefaultNullable.accept_pp_j2ktnotpassing(arg0)
    }
   }
 
   @JvmStatic
-  fun accept(s: String?) {}
+  fun accept_pp_j2ktnotpassing(s: String?) {}
  }
 }
 

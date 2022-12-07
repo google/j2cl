@@ -12,15 +12,15 @@ import kotlin.native.ObjCName
 import rawtype.RawType
 
 open class RawType {
- @JvmField var rawUnbound: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
+ @JvmField var rawUnbound_pp_rawtype: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
 
- @JvmField var rawBound: RawType.Bound<RawType?>? = RawType.Bound<RawType?>()
+ @JvmField var rawBound_pp_rawtype: RawType.Bound<RawType?>? = RawType.Bound<RawType?>()
 
- @JvmField var rawBoundRecursively: RawType.BoundRecursively<*>? = RawType.BoundRecursively()
+ @JvmField var rawBoundRecursively_pp_rawtype: RawType.BoundRecursively<*>? = RawType.BoundRecursively()
 
- @JvmField var rawBoundDependentDirect: RawType.BoundDependentDirect<Any?, Any>? = RawType.BoundDependentDirect<Any?, Any>()
+ @JvmField var rawBoundDependentDirect_pp_rawtype: RawType.BoundDependentDirect<Any?, Any>? = RawType.BoundDependentDirect<Any?, Any>()
 
- @JvmField var rawBoundDependentIndirect: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
+ @JvmField var rawBoundDependentIndirect_pp_rawtype: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
 
  open class Unbound<T> {}
 

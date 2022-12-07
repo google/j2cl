@@ -26,20 +26,20 @@ open class MethodReferences<T> {
   return Boolean.valueOf(true)
  }
 
- open fun self(): Any? {
+ open fun self_pp_methodreferences(): Any? {
   return this
  }
 
- open fun sameAs(n: Number?): Boolean? {
+ open fun sameAs_pp_methodreferences(n: Number?): Boolean? {
   return Boolean.valueOf(false)
  }
 
- open fun main() {
+ open fun main_pp_methodreferences() {
   var objectFactory: MethodReferences.Producer<Any?>? = MethodReferences.Producer<Any?> {
    return@Producer Any()
   }
   objectFactory = MethodReferences.Producer<Any?> {
-   return@Producer MethodReferences.m()
+   return@Producer MethodReferences.m_pp_methodreferences()
   }
   objectFactory = run {
    val ______q: MethodReferences<T> = MethodReferences<T>()
@@ -48,10 +48,10 @@ open class MethodReferences<T> {
    }
   }
   val biFunction: MethodReferences.BiFunction<MethodReferences<T>?, Number?, Boolean?>? = MethodReferences.BiFunction<MethodReferences<T>?, Number?, Boolean?> { arg0: MethodReferences<T>?, arg1: Number? ->
-   return@BiFunction arg0!!.sameAs(arg1)
+   return@BiFunction arg0!!.sameAs_pp_methodreferences(arg1)
   }
   val functionWithParameters: MethodReferences.Function<Number?, Boolean?>? = MethodReferences.Function<Number?, Boolean?> { arg0_1: Number? ->
-   return@Function this.sameAs(arg0_1)
+   return@Function this.sameAs_pp_methodreferences(arg0_1)
   }
   val objectPredicate: MethodReferences.Predicate<MethodReferences<T>?>? = MethodReferences.Predicate<MethodReferences<T>?> { arg0_2: MethodReferences<T>? ->
    return@Predicate arg0_2!!.isA()!!.booleanValue()
@@ -65,11 +65,11 @@ open class MethodReferences<T> {
   objectFactory = run {
    val ______q_1: MethodReferences<Any?> = MethodReferences<Any?>()
    MethodReferences.Producer<Any?> {
-    return@Producer ______q_1!!.self()
+    return@Producer ______q_1!!.self_pp_methodreferences()
    }
   }
   val function: MethodReferences.Function<MethodReferences<T>?, Any?>? = MethodReferences.Function<MethodReferences<T>?, Any?> { arg0_4: MethodReferences<T>? ->
-   return@Function arg0_4!!.self()
+   return@Function arg0_4!!.self_pp_methodreferences()
   }
   val arrayFactory: MethodReferences.Function<Int?, Array<Any?>?>? = MethodReferences.Function<Int?, Array<Any?>?> { arg0_5: Int? ->
    return@Function arrayOfNulls<Any>(arg0_5!!.toInt())
@@ -81,16 +81,16 @@ open class MethodReferences<T> {
    return@JsProducer Any()
   }
   jsobjectFactory = MethodReferences.JsProducer<Any?> {
-   return@JsProducer MethodReferences.m()
+   return@JsProducer MethodReferences.m_pp_methodreferences()
   }
   jsobjectFactory = run {
    val ______q_2: MethodReferences<Any?> = MethodReferences<Any?>()
    MethodReferences.JsProducer<Any?> {
-    return@JsProducer ______q_2!!.self()
+    return@JsProducer ______q_2!!.self_pp_methodreferences()
    }
   }
   val jsfunction: MethodReferences.JsFunctionInterface<MethodReferences<T>?, Any?>? = MethodReferences.JsFunctionInterface<MethodReferences<T>?, Any?> { arg0_6: MethodReferences<T>? ->
-   return@JsFunctionInterface arg0_6!!.self()
+   return@JsFunctionInterface arg0_6!!.self_pp_methodreferences()
   }
   val jsarrayFactory: MethodReferences.JsFunctionInterface<Int?, Array<Any?>?>? = MethodReferences.JsFunctionInterface<Int?, Array<Any?>?> { arg0_7: Int? ->
    return@JsFunctionInterface arrayOfNulls<Any>(arg0_7!!.toInt())
@@ -99,21 +99,21 @@ open class MethodReferences<T> {
    return@JsProducer super.toString()
   }
   val jsbiFunction: MethodReferences.JsBiFunction<MethodReferences<T>?, Number?, Boolean?>? = MethodReferences.JsBiFunction<MethodReferences<T>?, Number?, Boolean?> { arg0_8: MethodReferences<T>?, arg1_1: Number? ->
-   return@JsBiFunction arg0_8!!.sameAs(arg1_1)
+   return@JsBiFunction arg0_8!!.sameAs_pp_methodreferences(arg1_1)
   }
   val jsFunctionWithParameters: MethodReferences.JsFunctionInterface<Number?, Boolean?>? = MethodReferences.JsFunctionInterface<Number?, Boolean?> { arg0_9: Number? ->
-   return@JsFunctionInterface this.sameAs(arg0_9)
+   return@JsFunctionInterface this.sameAs_pp_methodreferences(arg0_9)
   }
  }
 
  companion object {
   @JvmStatic
-  fun m(): Any? {
+  fun m_pp_methodreferences(): Any? {
    return Any()
   }
 
-  @JvmField var staticStringProducer: MethodReferences.Producer<String?>? = run {
-   val ______q: Any? = MethodReferences.m()
+  @JvmField var staticStringProducer_pp_methodreferences: MethodReferences.Producer<String?>? = run {
+   val ______q: Any? = MethodReferences.m_pp_methodreferences()
    MethodReferences.Producer<String?> {
     return@Producer ______q!!.toString()
    }
@@ -137,7 +137,7 @@ open class MethodReferences<T> {
  }
 
  open inner class ObjectCapturingOuter {
-  open fun getMain(): MethodReferences<T>? {
+  open fun getMain_pp_methodreferences(): MethodReferences<T>? {
    return this@MethodReferences as MethodReferences<T>?
   }
  }

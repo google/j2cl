@@ -30,10 +30,10 @@ enum class Enum2 {
  VALUE3(),
  VALUE4(5) {};
 
- @JvmField var foo: Int = Enum1.V1.ordinal
+ @JvmField var foo_pp_enums: Int = Enum1.V1.ordinal
 
  constructor(foo: Int) {
-  this.foo = foo
+  this.foo_pp_enums = foo
  }
 
  constructor(foo: Enum<*>?): this(foo!!.ordinal)
@@ -42,7 +42,7 @@ enum class Enum2 {
   val somePars_1: Array<Any?>? = somePars as Array<Any?>?
  }
 
- open fun specialMethods() {
+ open fun specialMethods_pp_enums() {
   val o1: Int = Enum2.valueOf(null!!)!!.ordinal
   val o2: Int = Enum2.valueOf("VALUE1")!!.ordinal
   val l: Int = Enum2.values()!!.size
@@ -50,11 +50,11 @@ enum class Enum2 {
 
  companion object {
   @JvmStatic
-  fun f(o: Any?): Enum2? {
+  fun f_pp_enums(o: Any?): Enum2? {
    return null
   }
 
-  @JvmField var C: Enum2? = Enum2.f(Any())
+  @JvmField var C_pp_enums: Enum2? = Enum2.f_pp_enums(Any())
  }
 }
 

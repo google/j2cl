@@ -30,7 +30,7 @@ fun interface Function<I, O> {
 interface List<I> {}
 
 open class GenericType<T> {
- open fun get(): T {
+ open fun get_pp_typewildcards(): T {
   return null as T
  }
 }
@@ -56,19 +56,19 @@ open class TypeWildCards {
  open fun unbounded(
   @ObjCName("withTypewildcardsGenericType", exact = false) g: GenericType<*>?
  ): Any? {
-  return g!!.get()
+  return g!!.get_pp_typewildcards()
  }
 
  open fun upperBound(
   @ObjCName("withTypewildcardsGenericType", exact = false) g: GenericType<out Bar?>?
  ): Bar? {
-  return g!!.get()
+  return g!!.get_pp_typewildcards()
  }
 
  open fun lowerBound(
   @ObjCName("withTypewildcardsGenericType", exact = false) g: GenericType<in Bar?>?
  ): Any? {
-  return g!!.get()
+  return g!!.get_pp_typewildcards()
  }
 
  open fun unboundedRecursive(
@@ -111,7 +111,7 @@ open class TypeWildCards {
   fun <T: TypeWildCards.A?> testBoundedTypeMemberAccess(
    @ObjCName("withTypewildcardsTypeWildCards_A", exact = false) t: T
   ) {
-   val i: Int = t!!.f
+   val i: Int = t!!.f_pp_typewildcards
    t!!.m()
   }
 
@@ -119,7 +119,7 @@ open class TypeWildCards {
   fun <T> testIntersectionBoundedTypeMemberAccess(
    @ObjCName("withId", exact = false) t: T
   ) where T: TypeWildCards.A?, T: TypeWildCards.Y? {
-   val i: Int = t!!.f
+   val i: Int = t!!.f_pp_typewildcards
    t!!.m()
    t!!.n()
   }
@@ -145,13 +145,13 @@ open class TypeWildCards {
   }
 
   @JvmStatic
-  fun <D> createMultipleGenerics(foo: List<D>?): TypeWildCards.MultipleGenerics<D, String?, List<D>?>? {
+  fun <D> createMultipleGenerics_pp_typewildcards(foo: List<D>?): TypeWildCards.MultipleGenerics<D, String?, List<D>?>? {
    return null
   }
 
-  @JvmField var listWithWildcard: List<*>? = null
+  @JvmField var listWithWildcard_pp_typewildcards: List<*>? = null
 
-  @JvmField var valMultipleGenerics: TypeWildCards.MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics(TypeWildCards.listWithWildcard) as TypeWildCards.MultipleGenerics<*, String?, *>?
+  @JvmField var valMultipleGenerics_pp_typewildcards: TypeWildCards.MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(TypeWildCards.listWithWildcard_pp_typewildcards) as TypeWildCards.MultipleGenerics<*, String?, *>?
  }
 
  fun interface X {
@@ -163,7 +163,7 @@ open class TypeWildCards {
  }
 
  open class A: TypeWildCards.X {
-  @JvmField var f: Int = 0
+  @JvmField var f_pp_typewildcards: Int = 0
 
   open override fun m() {}
  }

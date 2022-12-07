@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
+import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesKotlin;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
 import com.google.j2cl.transpiler.passes.ControlStatementFormatter;
@@ -457,6 +458,7 @@ public enum Backend {
 
           // Normalizations
           AddDisambiguatingSuperMethodForwardingStubs::new,
+          AddVisibilityMethodBridgesKotlin::new,
           NormalizeSynchronizedMethods::new,
           PropagateNullabilityKotlin::new,
           NormalizeInterfaces::new,

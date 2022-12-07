@@ -77,9 +77,9 @@ open class DefaultNullable {
   val args_1: Array<String?>? = args as Array<String?>?
  }
 
- open fun <T: DefaultNullable.NullableBound<T>?> methodWithNullableBound() {}
+ open fun <T: DefaultNullable.NullableBound<T>?> methodWithNullableBound_pp_nullability_defaultnullable() {}
 
- open fun <T: DefaultNullable.NonNullableBound<T>> methodWithNonNullableBound() {}
+ open fun <T: DefaultNullable.NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_defaultnullable() {}
 
  open fun casts() {
   val listOfString: MutableList<String?>? = null as MutableList<String?>?
@@ -93,154 +93,154 @@ open class DefaultNullable {
 
  companion object {
   @JvmStatic
-  fun <N> genericNullableMethod(o: DefaultNullable.ParameterizedNullable<N>?, n: N?) {
-   o!!.setNullable(n)
-   o!!.setNonNull(n as N)
-   o!!.setDefaultNullability(n as N)
-   o!!.getNullable()!!.hashCode()
-   o!!.getNonNullable()!!.hashCode()
-   o!!.getDefaultNullability()!!.hashCode()
-   o!!.nullable = n
-   o!!.nonNullable = n as N
-   o!!.defaultNullability = n as N
-   o!!.nullable!!.hashCode()
-   o!!.nonNullable!!.hashCode()
-   o!!.defaultNullability!!.hashCode()
+  fun <N> genericNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<N>?, n: N?) {
+   o!!.setNullable_pp_nullability_defaultnullable(n)
+   o!!.setNonNull_pp_nullability_defaultnullable(n as N)
+   o!!.setDefaultNullability_pp_nullability_defaultnullable(n as N)
+   o!!.getNullable_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.getNonNullable_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.nullable_pp_nullability_defaultnullable = n
+   o!!.nonNullable_pp_nullability_defaultnullable = n as N
+   o!!.defaultNullability_pp_nullability_defaultnullable = n as N
+   o!!.nullable_pp_nullability_defaultnullable!!.hashCode()
+   o!!.nonNullable_pp_nullability_defaultnullable!!.hashCode()
+   o!!.defaultNullability_pp_nullability_defaultnullable!!.hashCode()
   }
 
   @JvmStatic
-  fun <N: Any> genericNonNullMethod(o: DefaultNullable.ParameterizedNonNullable<N>?, n: N) {
-   o!!.setNullable(n)
-   o!!.setNonNull(n)
-   o!!.setDefaultNullability(n)
-   o!!.getNullable()!!.hashCode()
-   o!!.getNonNullable()!!.hashCode()
-   o!!.getDefaultNullability()!!.hashCode()
-   o!!.nullable = n
-   o!!.nonNullable = n
-   o!!.defaultNullability = n
-   o!!.nullable!!.hashCode()
-   o!!.nonNullable!!.hashCode()
-   o!!.defaultNullability!!.hashCode()
+  fun <N: Any> genericNonNullMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNonNullable<N>?, n: N) {
+   o!!.setNullable_pp_nullability_defaultnullable(n)
+   o!!.setNonNull_pp_nullability_defaultnullable(n)
+   o!!.setDefaultNullability_pp_nullability_defaultnullable(n)
+   o!!.getNullable_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.getNonNullable_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.nullable_pp_nullability_defaultnullable = n
+   o!!.nonNullable_pp_nullability_defaultnullable = n
+   o!!.defaultNullability_pp_nullability_defaultnullable = n
+   o!!.nullable_pp_nullability_defaultnullable!!.hashCode()
+   o!!.nonNullable_pp_nullability_defaultnullable!!.hashCode()
+   o!!.defaultNullability_pp_nullability_defaultnullable!!.hashCode()
   }
 
   @JvmStatic
-  fun <N> genericDefaultNullabilityMethod(o: DefaultNullable.ParameterizedDefaultNullability<N>?, n: N) {
-   o!!.setNullable(n)
-   o!!.setNonNull(n)
-   o!!.setDefaultNullability(n)
-   o!!.getNullable()!!.hashCode()
-   o!!.getNonNullable()!!.hashCode()
-   o!!.getDefaultNullability()!!.hashCode()
-   o!!.nullable = n
-   o!!.nonNullable = n
-   o!!.defaultNullability = n
-   o!!.nullable!!.hashCode()
-   o!!.nonNullable!!.hashCode()
-   o!!.defaultNullability!!.hashCode()
+  fun <N> genericDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<N>?, n: N) {
+   o!!.setNullable_pp_nullability_defaultnullable(n)
+   o!!.setNonNull_pp_nullability_defaultnullable(n)
+   o!!.setDefaultNullability_pp_nullability_defaultnullable(n)
+   o!!.getNullable_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.getNonNullable_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.hashCode()
+   o!!.nullable_pp_nullability_defaultnullable = n
+   o!!.nonNullable_pp_nullability_defaultnullable = n
+   o!!.defaultNullability_pp_nullability_defaultnullable = n
+   o!!.nullable_pp_nullability_defaultnullable!!.hashCode()
+   o!!.nonNullable_pp_nullability_defaultnullable!!.hashCode()
+   o!!.defaultNullability_pp_nullability_defaultnullable!!.hashCode()
   }
 
   @JvmStatic
-  fun parametrizedNullableMethod(o: DefaultNullable.ParameterizedNullable<String?>?, s: String?) {
-   o!!.setNullable(s)
-   o!!.setNonNull(s!!)
-   o!!.setDefaultNullability(s)
-   o!!.getNullable()!!.length
-   o!!.getNonNullable()!!.length
-   o!!.getDefaultNullability()!!.length
-   o!!.nullable = s
-   o!!.nonNullable = s!!
-   o!!.defaultNullability = s
-   o!!.nullable!!.length
-   o!!.nonNullable!!.length
-   o!!.defaultNullability!!.length
+  fun parametrizedNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<String?>?, s: String?) {
+   o!!.setNullable_pp_nullability_defaultnullable(s)
+   o!!.setNonNull_pp_nullability_defaultnullable(s!!)
+   o!!.setDefaultNullability_pp_nullability_defaultnullable(s)
+   o!!.getNullable_pp_nullability_defaultnullable()!!.length
+   o!!.getNonNullable_pp_nullability_defaultnullable()!!.length
+   o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.length
+   o!!.nullable_pp_nullability_defaultnullable = s
+   o!!.nonNullable_pp_nullability_defaultnullable = s!!
+   o!!.defaultNullability_pp_nullability_defaultnullable = s
+   o!!.nullable_pp_nullability_defaultnullable!!.length
+   o!!.nonNullable_pp_nullability_defaultnullable!!.length
+   o!!.defaultNullability_pp_nullability_defaultnullable!!.length
   }
 
   @JvmStatic
-  fun parametrizedNonNullMethod(o: DefaultNullable.ParameterizedNonNullable<String>?, s: String) {
-   o!!.setNullable(s)
-   o!!.setNonNull(s)
-   o!!.setDefaultNullability(s)
-   o!!.getNullable()!!.length
-   o!!.getNonNullable()!!.length
-   o!!.getDefaultNullability()!!.length
-   o!!.nullable = s
-   o!!.nonNullable = s
-   o!!.defaultNullability = s
-   o!!.nullable!!.length
-   o!!.nonNullable!!.length
-   o!!.defaultNullability!!.length
+  fun parametrizedNonNullMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNonNullable<String>?, s: String) {
+   o!!.setNullable_pp_nullability_defaultnullable(s)
+   o!!.setNonNull_pp_nullability_defaultnullable(s)
+   o!!.setDefaultNullability_pp_nullability_defaultnullable(s)
+   o!!.getNullable_pp_nullability_defaultnullable()!!.length
+   o!!.getNonNullable_pp_nullability_defaultnullable()!!.length
+   o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.length
+   o!!.nullable_pp_nullability_defaultnullable = s
+   o!!.nonNullable_pp_nullability_defaultnullable = s
+   o!!.defaultNullability_pp_nullability_defaultnullable = s
+   o!!.nullable_pp_nullability_defaultnullable!!.length
+   o!!.nonNullable_pp_nullability_defaultnullable!!.length
+   o!!.defaultNullability_pp_nullability_defaultnullable!!.length
   }
 
   @JvmStatic
-  fun parametrizedDefaultNullabilityMethod(o: DefaultNullable.ParameterizedDefaultNullability<String?>?, s: String?) {
-   o!!.setNullable(s)
-   o!!.setNonNull(s!!)
-   o!!.setDefaultNullability(s)
-   o!!.getNullable()!!.length
-   o!!.getNonNullable()!!.length
-   o!!.getDefaultNullability()!!.length
-   o!!.nullable = s
-   o!!.nonNullable = s!!
-   o!!.defaultNullability = s
-   o!!.nullable!!.length
-   o!!.nonNullable!!.length
-   o!!.defaultNullability!!.length
+  fun parametrizedDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<String?>?, s: String?) {
+   o!!.setNullable_pp_nullability_defaultnullable(s)
+   o!!.setNonNull_pp_nullability_defaultnullable(s!!)
+   o!!.setDefaultNullability_pp_nullability_defaultnullable(s)
+   o!!.getNullable_pp_nullability_defaultnullable()!!.length
+   o!!.getNonNullable_pp_nullability_defaultnullable()!!.length
+   o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.length
+   o!!.nullable_pp_nullability_defaultnullable = s
+   o!!.nonNullable_pp_nullability_defaultnullable = s!!
+   o!!.defaultNullability_pp_nullability_defaultnullable = s
+   o!!.nullable_pp_nullability_defaultnullable!!.length
+   o!!.nonNullable_pp_nullability_defaultnullable!!.length
+   o!!.defaultNullability_pp_nullability_defaultnullable!!.length
   }
 
   @JvmStatic
-  fun testListOfWildcard(l: MutableList<*>?) {}
+  fun testListOfWildcard_pp_nullability_defaultnullable(l: MutableList<*>?) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityObject(l: MutableList<*>?) {}
+  fun testListOfWildcardExtendsDefaultNullabilityObject_pp_nullability_defaultnullable(l: MutableList<*>?) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsNullableObject(l: MutableList<*>?) {}
+  fun testListOfWildcardExtendsNullableObject_pp_nullability_defaultnullable(l: MutableList<*>?) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsNonNullObject(l: MutableList<*>?) {}
+  fun testListOfWildcardExtendsNonNullObject_pp_nullability_defaultnullable(l: MutableList<*>?) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsDefaultNullabilityString(l: MutableList<out String?>?) {}
+  fun testListOfWildcardExtendsDefaultNullabilityString_pp_nullability_defaultnullable(l: MutableList<out String?>?) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsNullableString(l: MutableList<out String?>?) {}
+  fun testListOfWildcardExtendsNullableString_pp_nullability_defaultnullable(l: MutableList<out String?>?) {}
 
   @JvmStatic
-  fun testListOfWildcardExtendsNonNullString(l: MutableList<out String>?) {}
+  fun testListOfWildcardExtendsNonNullString_pp_nullability_defaultnullable(l: MutableList<out String>?) {}
 
   @JvmStatic
-  fun <T> testListOfWildcardExtendsDefaultNullabilityVariable(l: MutableList<out T>?) {}
+  fun <T> testListOfWildcardExtendsDefaultNullabilityVariable_pp_nullability_defaultnullable(l: MutableList<out T>?) {}
 
   @JvmStatic
-  fun <T> testListOfWildcardExtendsNullableVariable(l: MutableList<out T?>?) {}
+  fun <T> testListOfWildcardExtendsNullableVariable_pp_nullability_defaultnullable(l: MutableList<out T?>?) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperDefaultNullabilityObject(l: MutableList<in Any?>?) {}
+  fun testListOfWildcardSuperDefaultNullabilityObject_pp_nullability_defaultnullable(l: MutableList<in Any?>?) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperNullableObject(l: MutableList<in Any?>?) {}
+  fun testListOfWildcardSuperNullableObject_pp_nullability_defaultnullable(l: MutableList<in Any?>?) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperNonNullObject(l: MutableList<in Any>?) {}
+  fun testListOfWildcardSuperNonNullObject_pp_nullability_defaultnullable(l: MutableList<in Any>?) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperDefaultNullabilityString(l: MutableList<in String?>?) {}
+  fun testListOfWildcardSuperDefaultNullabilityString_pp_nullability_defaultnullable(l: MutableList<in String?>?) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperNullableString(l: MutableList<in String?>?) {}
+  fun testListOfWildcardSuperNullableString_pp_nullability_defaultnullable(l: MutableList<in String?>?) {}
 
   @JvmStatic
-  fun testListOfWildcardSuperNonNullString(l: MutableList<in String>?) {}
+  fun testListOfWildcardSuperNonNullString_pp_nullability_defaultnullable(l: MutableList<in String>?) {}
 
   @JvmStatic
-  fun <T> testListOfWildcardSuperDefaultNullabilityVariable(l: MutableList<in T>?) {}
+  fun <T> testListOfWildcardSuperDefaultNullabilityVariable_pp_nullability_defaultnullable(l: MutableList<in T>?) {}
 
   @JvmStatic
-  fun <T> testListOfWildcardSuperNullableVariable(l: MutableList<in T?>?) {}
+  fun <T> testListOfWildcardSuperNullableVariable_pp_nullability_defaultnullable(l: MutableList<in T?>?) {}
 
   @JvmStatic
-  fun testLocalNullability() {
+  fun testLocalNullability_pp_nullability_defaultnullable() {
    val stringConsumer: DefaultNullable.Consumer<String?>? = null as DefaultNullable.Consumer<String?>?
    val nullableStringConsumer: DefaultNullable.Consumer<String?>? = null as DefaultNullable.Consumer<String?>?
    val nonNullStringConsumer: DefaultNullable.Consumer<String>? = null as DefaultNullable.Consumer<String>?
@@ -248,7 +248,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  fun testNonNullableLambdas() {
+  fun testNonNullableLambdas_pp_nullability_defaultnullable() {
    val lambda: DefaultNullable.NullMarkedConsumer<String?>? = DefaultNullable.NullMarkedConsumer<String?> { s: String? ->
    }
    val constructorReference: DefaultNullable.NullMarkedSupplier<String?>? = DefaultNullable.NullMarkedSupplier<String> {
@@ -260,7 +260,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
-  fun accept(s: String?) {}
+  fun accept_pp_nullability_defaultnullable(s: String?) {}
  }
 
  interface NullableBound<T: DefaultNullable.NullableBound<T>?> {}
@@ -276,94 +276,94 @@ open class DefaultNullable {
  interface NonNullBoundWithNullableArgument: DefaultNullable.NonNullableBound<DefaultNullable.NonNullBoundWithNullableArgument> {}
 
  open class ParameterizedDefaultNullability<N> {
-  @JvmField var nullable: N? = null
+  @JvmField var nullable_pp_nullability_defaultnullable: N? = null
 
-  @JvmField var nonNullable: N = null as N
+  @JvmField var nonNullable_pp_nullability_defaultnullable: N = null as N
 
-  @JvmField var defaultNullability: N = null as N
+  @JvmField var defaultNullability_pp_nullability_defaultnullable: N = null as N
 
   constructor(n: N) {
-   this.nonNullable = n
+   this.nonNullable_pp_nullability_defaultnullable = n
   }
 
-  open fun getNullable(): N? {
+  open fun getNullable_pp_nullability_defaultnullable(): N? {
    return null
   }
 
-  open fun getNonNullable(): N {
+  open fun getNonNullable_pp_nullability_defaultnullable(): N {
    throw RuntimeException()
   }
 
-  open fun getDefaultNullability(): N {
+  open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
    return null as N
   }
 
-  open fun setNullable(n: N?) {}
+  open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
 
-  open fun setNonNull(n: N) {}
+  open fun setNonNull_pp_nullability_defaultnullable(n: N) {}
 
-  open fun setDefaultNullability(n: N) {}
+  open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 
  open class ParameterizedNullable<N> {
-  @JvmField var nullable: N? = null
+  @JvmField var nullable_pp_nullability_defaultnullable: N? = null
 
-  @JvmField var nonNullable: N = null as N
+  @JvmField var nonNullable_pp_nullability_defaultnullable: N = null as N
 
-  @JvmField var defaultNullability: N = null as N
+  @JvmField var defaultNullability_pp_nullability_defaultnullable: N = null as N
 
   constructor(n: N) {
-   this.nonNullable = n
+   this.nonNullable_pp_nullability_defaultnullable = n
   }
 
-  open fun getNullable(): N? {
+  open fun getNullable_pp_nullability_defaultnullable(): N? {
    return null
   }
 
-  open fun getNonNullable(): N {
+  open fun getNonNullable_pp_nullability_defaultnullable(): N {
    throw RuntimeException()
   }
 
-  open fun getDefaultNullability(): N {
+  open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
    return null as N
   }
 
-  open fun setNullable(n: N?) {}
+  open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
 
-  open fun setNonNull(n: N) {}
+  open fun setNonNull_pp_nullability_defaultnullable(n: N) {}
 
-  open fun setDefaultNullability(n: N) {}
+  open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 
  open class ParameterizedNonNullable<N: Any> {
-  @JvmField var nullable: N? = null
+  @JvmField var nullable_pp_nullability_defaultnullable: N? = null
 
-  @JvmField var nonNullable: N
+  @JvmField var nonNullable_pp_nullability_defaultnullable: N
 
-  @JvmField var defaultNullability: N
+  @JvmField var defaultNullability_pp_nullability_defaultnullable: N
 
   constructor(n: N) {
-   this.nonNullable = n
-   this.defaultNullability = n
+   this.nonNullable_pp_nullability_defaultnullable = n
+   this.defaultNullability_pp_nullability_defaultnullable = n
   }
 
-  open fun getNullable(): N? {
+  open fun getNullable_pp_nullability_defaultnullable(): N? {
    return null
   }
 
-  open fun getNonNullable(): N {
+  open fun getNonNullable_pp_nullability_defaultnullable(): N {
    throw RuntimeException()
   }
 
-  open fun getDefaultNullability(): N {
+  open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
    return null!!
   }
 
-  open fun setNullable(n: N?) {}
+  open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
 
-  open fun setNonNull(n: N) {}
+  open fun setNonNull_pp_nullability_defaultnullable(n: N) {}
 
-  open fun setDefaultNullability(n: N) {}
+  open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 
  fun interface Consumer<T> {

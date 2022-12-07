@@ -20,9 +20,9 @@ import kotlin.native.ObjCName
 
 @ObjCName("CastCastGenerics", exact = true)
 open class CastGenerics<T, E: Number?> {
- @JvmField var field: T = null as T
+ @JvmField var field_pp_cast: T = null as T
 
- open fun method(): T {
+ open fun method_pp_cast(): T {
   return null as T
  }
 
@@ -62,32 +62,32 @@ open class CastGenerics<T, E: Number?> {
  companion object {
   @JvmStatic
   fun <T_1, U: T_1> testErasureCast() where T_1: CastGenerics.A?, T_1: CastGenerics.B? {
-   var str: String? = CastGenerics<String?, Number?>().field
-   str = CastGenerics<String?, Number?>().method()
+   var str: String? = CastGenerics<String?, Number?>().field_pp_cast
+   str = CastGenerics<String?, Number?>().method_pp_cast()
    val containerT: CastGenerics.Container<T_1>? = null
-   containerT!!.get()!!.mA()
-   containerT!!.get()!!.mB()
+   containerT!!.get_pp_cast()!!.mA()
+   containerT!!.get_pp_cast()!!.mB()
    val containerU: CastGenerics.Container<U>? = null
-   containerU!!.get()!!.mA()
-   containerU!!.get()!!.mB()
+   containerU!!.get_pp_cast()!!.mA()
+   containerU!!.get_pp_cast()!!.mB()
    val containerArrT: CastGenerics.Container<Array<T_1>?>? = null
-   val arrT: Array<T_1>? = containerArrT!!.get()
+   val arrT: Array<T_1>? = containerArrT!!.get_pp_cast()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
-   var arrA: Array<CastGenerics.A?>? = containerArrT!!.get() as Array<CastGenerics.A?>?
-   var arrB: Array<CastGenerics.B?>? = containerArrT!!.get() as Array<CastGenerics.B?>?
+   var arrA: Array<CastGenerics.A?>? = containerArrT!!.get_pp_cast() as Array<CastGenerics.A?>?
+   var arrB: Array<CastGenerics.B?>? = containerArrT!!.get_pp_cast() as Array<CastGenerics.B?>?
    val containerArrU: CastGenerics.Container<Array<U>?>? = null
-   val arrU: Array<U>? = containerArrU!!.get()
+   val arrU: Array<U>? = containerArrU!!.get_pp_cast()
    arrU!![0]!!.mA()
    arrU!![0]!!.mB()
-   arrA = containerArrU!!.get() as Array<CastGenerics.A?>?
-   arrB = containerArrU!!.get() as Array<CastGenerics.B?>?
+   arrA = containerArrU!!.get_pp_cast() as Array<CastGenerics.A?>?
+   arrB = containerArrU!!.get_pp_cast() as Array<CastGenerics.B?>?
    val containerBase: CastGenerics.Container<CastGenerics.BaseImplementor?>? = null
-   containerBase!!.get()!!.mA()
-   containerBase!!.get()!!.mB()
+   containerBase!!.get_pp_cast()!!.mA()
+   containerBase!!.get_pp_cast()!!.mB()
    val containerImplementor: CastGenerics.Container<CastGenerics.Implementor?>? = null
-   containerImplementor!!.get()!!.mA()
-   containerImplementor!!.get()!!.mB()
+   containerImplementor!!.get_pp_cast()!!.mA()
+   containerImplementor!!.get_pp_cast()!!.mB()
   }
 
   @JvmStatic
@@ -120,7 +120,7 @@ open class CastGenerics<T, E: Number?> {
  }
 
  open class Container<T> {
-  open fun get(): T {
+  open fun get_pp_cast(): T {
    return null as T
   }
  }

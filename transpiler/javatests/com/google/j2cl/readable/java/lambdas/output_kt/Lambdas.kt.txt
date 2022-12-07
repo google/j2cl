@@ -118,7 +118,7 @@ open class Lambdas {
   return intf!!.m(e)
  }
 
- open fun <T> callWithBiFunction(fn: Lambdas.BiFunction<T, String?, Double?>?): Lambdas.GenericFunctionalInterface<T>? {
+ open fun <T> callWithBiFunction_pp_lambdas(fn: Lambdas.BiFunction<T, String?, Double?>?): Lambdas.GenericFunctionalInterface<T>? {
   return null
  }
 
@@ -132,7 +132,7 @@ open class Lambdas {
   Lambdas.callTypeVariableWithBounds<T>(Lambdas.GenericFunctionalInterface<Enum<T>?> { i_2: Enum<T>? ->
    return@GenericFunctionalInterface i_2
   }, null as Enum<T>?)
-  this.callWithBiFunction<Any?>(Lambdas.BiFunction<Any?, String?, Double?> { x: Any?, y: String? ->
+  this.callWithBiFunction_pp_lambdas<Any?>(Lambdas.BiFunction<Any?, String?, Double?> { x: Any?, y: String? ->
    throw RuntimeException()
   })
   val f: Lambdas.Function<in T, *>? = Lambdas.Function { item: T ->

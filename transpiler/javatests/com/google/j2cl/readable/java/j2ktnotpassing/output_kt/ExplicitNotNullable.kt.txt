@@ -12,8 +12,8 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktnotpassingExplicitNotNullable", exact = true)
 open class ExplicitNotNullable {
- open fun testDependentWildcards(x: ExplicitNotNullable.DependentTypeParameters<*, *>): ExplicitNotNullable.DependentTypeParameters<*, *> {
-  return x!!.getThis()
+ open fun testDependentWildcards_pp_j2ktnotpassing(x: ExplicitNotNullable.DependentTypeParameters<*, *>): ExplicitNotNullable.DependentTypeParameters<*, *> {
+  return x!!.getThis_pp_j2ktnotpassing()
  }
 
  fun interface Function<I, O> {
@@ -23,7 +23,7 @@ open class ExplicitNotNullable {
  }
 
  open class DependentTypeParameters<E: Any, T: E?> {
-  open fun getThis(): ExplicitNotNullable.DependentTypeParameters<E, T> {
+  open fun getThis_pp_j2ktnotpassing(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this
   }
  }

@@ -1,0 +1,42 @@
+goog.module('packageprivatemethods.package1.Interface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('packageprivatemethods.package1.Interface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class Interface {
+ /** @abstract @nodts @return {number} */
+ m_exposedInChildWithInterface__int__int__int(/** number */ a, /** number */ b) {}
+ /** @nodts @return {Interface} */
+ static $adapt(/** ?function(number, number):number */ fn) {
+  Interface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ /** @nodts */
+ static $clinit() {
+  Interface.$clinit = () =>{};
+  Interface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__packageprivatemethods_package1_Interface = true;
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__packageprivatemethods_package1_Interface;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('packageprivatemethods.package1.Interface.$LambdaAdaptor$impl');
+ }
+}
+Interface.$markImplementor(/**@type {Function}*/ (Interface));
+$Util.$setClassMetadataForInterface(Interface, 'packageprivatemethods.package1.Interface');
+
+exports = Interface;
+
+//# sourceMappingURL=Interface.js.map

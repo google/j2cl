@@ -20,25 +20,25 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsvarargsMain", exact = true)
 open class Main {
- @JvmField var field: Int = 0
+ @JvmField var field_pp_jsvarargs: Int = 0
 
  constructor(
   @ObjCName("withInt", exact = false) f: Int
  ) {
-  this.field = f
+  this.field_pp_jsvarargs = f
  }
 
  open fun f3(
   @ObjCName("withInt", exact = false) m: Int,
   vararg @ObjCName("withIntArray", exact = false) numbers: Int
  ): Int {
-  return this.field + m + numbers!![1]
+  return this.field_pp_jsvarargs + m + numbers!![1]
  }
 
  open fun f4(
   vararg @ObjCName("withIntArray", exact = false) numbers: Int
  ): Int {
-  return this.field + numbers!![1]
+  return this.field_pp_jsvarargs + numbers!![1]
  }
 
  open fun testStaticMethodNotFirst() {

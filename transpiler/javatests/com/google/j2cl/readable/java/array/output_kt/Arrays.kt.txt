@@ -57,7 +57,7 @@ open class Arrays {
   objects2d!![0]!![1] = null
  }
 
- open fun testIntArrays() {
+ open fun testIntArrays_pp_array() {
   var ints: IntArray? = IntArray(100)
   ints = IntArray(0)
   ints = intArrayOf(0, 1)
@@ -72,7 +72,7 @@ open class Arrays {
   ints2d!![0]!![1] = 1
  }
 
- open fun testLongArrays() {
+ open fun testLongArrays_pp_array() {
   var longs: LongArray? = LongArray(100)
   longs = LongArray(0)
   longs = longArrayOf(0L, 1L)
@@ -87,7 +87,7 @@ open class Arrays {
   longs2d!![0]!![1] = 1L
  }
 
- open fun testDevirtualizedTypeArrays() {
+ open fun testDevirtualizedTypeArrays_pp_array() {
   var booleans: Array<Boolean?>? = arrayOfNulls<Boolean>(100)
   booleans = arrayOfNulls<Boolean>(0)
   booleans = arrayOf<Boolean?>(Boolean.valueOf(true), Boolean.valueOf(false))
@@ -102,7 +102,7 @@ open class Arrays {
   booleans2d!![0]!![1] = Boolean.valueOf(false)
  }
 
- open fun testStringArrays() {
+ open fun testStringArrays_pp_array() {
   var strings: Array<String?>? = arrayOfNulls<String>(100)
   strings = arrayOfNulls<String>(0)
   strings = arrayOf<String?>(null, null)
@@ -134,7 +134,7 @@ open class Arrays {
 
  open fun testErasureCastsOnArrayAccess() {
   val container: Arrays.ArrayContainer<String?>? = null
-  val s: String? = container!!.data!![0]
+  val s: String? = container!!.data_pp_array!![0]
  }
 
  open fun testCovariance() {
@@ -161,6 +161,6 @@ open class Arrays {
  open class NativeType {}
 
  open class ArrayContainer<T> {
-  @JvmField var data: Array<T>? = null
+  @JvmField var data_pp_array: Array<T>? = null
  }
 }

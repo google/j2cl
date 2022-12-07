@@ -1,8 +1,12 @@
 goog.module('packageprivatemethods.package1.Child$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
+const Interface = goog.require('packageprivatemethods.package1.Interface$impl');
 const Parent = goog.require('packageprivatemethods.package1.Parent$impl');
 
+/**
+ * @implements {Interface}
+ */
 class Child extends Parent {
  /** @protected @nodts */
  constructor() {
@@ -20,26 +24,35 @@ class Child extends Parent {
   this.$ctor__packageprivatemethods_package1_Parent__void();
  }
  /** @nodts @return {number} */
- m_foo__int__int(/** number */ a) {
+ m_overrideInParentExposedInChild__int__int(/** number */ a) {
   return a + 1 | 0;
  }
  /** @nodts @return {number} */
- m_fun__int__int__int(/** number */ a, /** number */ b) {
+ m_exposedInChild__int__int__int(/** number */ a, /** number */ b) {
   return a + b + 1 | 0;
  }
  /** @override @nodts @return {number} */
- m_bar__int__int__int__int(/** number */ a, /** number */ b, /** number */ c) {
+ m_exposedInChildWithInterface__int__int__int(/** number */ a, /** number */ b) {
+  return a + b + 1 | 0;
+ }
+ /** @override @nodts @return {number} */
+ m_exposedAbstractInParent__int__int__int__int(/** number */ a, /** number */ b, /** number */ c) {
   return a + b + c + 2 | 0;
  }
  //Bridge method.
  /** @override @nodts @return {number} */
- m_foo__int__int_$pp_packageprivatemethods_package1(/** number */ arg0) {
-  return this.m_foo__int__int(arg0);
+ m_exposedInChild__int__int__int_$pp_packageprivatemethods_package1(/** number */ arg0, /** number */ arg1) {
+  return this.m_exposedInChild__int__int__int(arg0, arg1);
  }
  //Bridge method.
  /** @override @nodts @return {number} */
- m_fun__int__int__int_$pp_packageprivatemethods_package1(/** number */ arg0, /** number */ arg1) {
-  return this.m_fun__int__int__int(arg0, arg1);
+ m_exposedInChildWithInterface__int__int__int_$pp_packageprivatemethods_package1(/** number */ arg0, /** number */ arg1) {
+  return this.m_exposedInChildWithInterface__int__int__int(arg0, arg1);
+ }
+ //Bridge method.
+ /** @override @nodts @return {number} */
+ m_overrideInParentExposedInChild__int__int_$pp_packageprivatemethods_package1(/** number */ arg0) {
+  return this.m_overrideInParentExposedInChild__int__int(arg0);
  }
  /** @nodts */
  static $clinit() {
@@ -55,6 +68,7 @@ class Child extends Parent {
  /** @nodts */
  static $loadModules() {}
 }
+Interface.$markImplementor(Child);
 $Util.$setClassMetadata(Child, 'packageprivatemethods.package1.Child');
 
 exports = Child;

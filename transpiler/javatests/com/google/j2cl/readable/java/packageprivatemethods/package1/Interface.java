@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2022 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package packageprivatemethods.package2;
+package packageprivatemethods.package1;
 
-import packageprivatemethods.package1.Child;
-
-public class SubChild extends Child {
-  @Override
-  public int overrideInParentExposedInChild(int a) {
-    return a + 3;
-  }
+public interface Interface {
+  int exposedInChildWithInterface(int a, int b);
 }

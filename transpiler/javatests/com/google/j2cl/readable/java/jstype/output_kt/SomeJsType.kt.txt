@@ -19,7 +19,7 @@ open class SomeJsType<T> {
 
  @JvmField var privateField_private_2: Int = 0
 
- @JvmField var packageField: Int = 0
+ @JvmField var packageField_pp_jstype: Int = 0
 
  @JvmField var protectedField: Int = 0
 
@@ -27,15 +27,15 @@ open class SomeJsType<T> {
 
  fun privateMethod_private_2() {}
 
- open fun packageMethod() {}
+ open fun packageMethod_pp_jstype() {}
 
  open fun protectedMethod() {}
 
  open fun useFieldsAndMethods() {
-  val value: Int = this.publicField + this.privateField_private_2 + this.packageField + this.protectedField
+  val value: Int = this.publicField + this.privateField_private_2 + this.packageField_pp_jstype + this.protectedField
   this.publicMethod()
   this.privateMethod_private_2()
-  this.packageMethod()
+  this.packageMethod_pp_jstype()
   this.protectedMethod()
  }
 

@@ -1070,5 +1070,28 @@ public final class AstUtils {
     return body instanceof Block ? ((Block) body).getStatements() : ImmutableList.of(body);
   }
 
+  public static boolean needsVisibilityBridge(MethodDescriptor methodDescriptor) {
+    if (!methodDescriptor.getVisibility().isPublicOrProtected()) {
+      return false;
+    }
+
+    // The method overrides a non-package private method in a super class, no bridge is actually
+    // needed even if there are package-private overridden methods up in the hierarchy.
+    if (methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
+        .anyMatch(
+            md ->
+                !md.getEnclosingTypeDescriptor().isInterface()
+                    && md.getVisibility().isPublicOrProtected())) {
+      return false;
+    }
+
+    // This method overrides and exposes a package-private method from a superclass.
+    return methodDescriptor.getJavaOverriddenMethodDescriptors().stream()
+        .anyMatch(
+            md ->
+                !md.getEnclosingTypeDescriptor().isInterface()
+                    && md.getVisibility().isPackagePrivate());
+  }
+
   private AstUtils() {}
 }

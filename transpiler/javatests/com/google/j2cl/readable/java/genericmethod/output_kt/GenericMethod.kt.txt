@@ -85,8 +85,8 @@ open class GenericMethod<T> {
   g!!.`fun`<String?>(arrayOf<String?>("asdf"))
   var s: String? = this.checked<String?>()
   s = this.unchecked<String?>()
-  this.checked<GenericMethod.Content?>()!!.getProp()
-  this.unchecked<GenericMethod.Content?>()!!.getProp()
+  this.checked<GenericMethod.Content?>()!!.getProp_pp_genericmethod()
+  this.unchecked<GenericMethod.Content?>()!!.getProp_pp_genericmethod()
  }
 
  companion object {
@@ -103,68 +103,68 @@ open class GenericMethod<T> {
   @JvmStatic
   fun testErasureCast_wildcard() {
    val list: MutableList<GenericMethod.Container<*>?>? = null
-   val content: GenericMethod.Content? = list!!.get(0)!!.get()
-   GenericMethod.acceptsString(content!!.getProp())
+   val content: GenericMethod.Content? = list!!.get(0)!!.get_pp_genericmethod()
+   GenericMethod.acceptsString(content!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(content)
    val nestedWildcardList: MutableList<GenericMethod.SuperContainer<out GenericMethod.Container<*>?>?>? = null
-   val nestedContent: GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get()!!.get()
-   GenericMethod.acceptsString(nestedContent!!.getProp())
+   val nestedContent: GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
+   GenericMethod.acceptsString(nestedContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(nestedContent)
    val deepWildcardList: MutableList<GenericMethod.SuperContainer<GenericMethod.Container<*>?>?>? = null
-   val deepContent: GenericMethod.Content? = deepWildcardList!!.get(0)!!.get()!!.get()
-   GenericMethod.acceptsString(deepContent!!.getProp())
+   val deepContent: GenericMethod.Content? = deepWildcardList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
+   GenericMethod.acceptsString(deepContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(deepContent)
   }
 
   @JvmStatic
   fun <CT: GenericMethod.Container<C>?, C: GenericMethod.Content?> testErasureCast_typeVariable() {
    val list: MutableList<GenericMethod.Container<C>?>? = null
-   val content: GenericMethod.Content? = list!!.get(0)!!.get()
-   GenericMethod.acceptsString(content!!.getProp())
+   val content: GenericMethod.Content? = list!!.get(0)!!.get_pp_genericmethod()
+   GenericMethod.acceptsString(content!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(content)
    val nestedTypeVariableList: MutableList<GenericMethod.SuperContainer<CT>?>? = null
-   val nestedContent: GenericMethod.Content? = nestedTypeVariableList!!.get(0)!!.get()!!.get()
-   GenericMethod.acceptsString(nestedContent!!.getProp())
+   val nestedContent: GenericMethod.Content? = nestedTypeVariableList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
+   GenericMethod.acceptsString(nestedContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(nestedContent)
    val deepTypeVariableList: MutableList<GenericMethod.SuperContainer<GenericMethod.Container<C>?>?>? = null
-   val deepContent: GenericMethod.Content? = deepTypeVariableList!!.get(0)!!.get()!!.get()
-   GenericMethod.acceptsString(deepContent!!.getProp())
+   val deepContent: GenericMethod.Content? = deepTypeVariableList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
+   GenericMethod.acceptsString(deepContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(deepContent)
   }
 
   @JvmStatic
-  fun <V> testLowerWildcardBound(consumer: GenericMethod.Consumer<in V>?, v: V) {
+  fun <V> testLowerWildcardBound_pp_genericmethod(consumer: GenericMethod.Consumer<in V>?, v: V) {
    consumer!!.accept(v)
   }
 
   @JvmStatic
-  fun <V> testUpperWildcardBound(supplier: GenericMethod.Supplier<out V>?): V {
+  fun <V> testUpperWildcardBound_pp_genericmethod(supplier: GenericMethod.Supplier<out V>?): V {
    return supplier!!.get()
   }
 
   @JvmStatic
-  fun <T_1: Number?> methodWithBoundTypeVariable() {}
+  fun <T_1: Number?> methodWithBoundTypeVariable_pp_genericmethod() {}
 
   @JvmStatic
-  fun testMethodCallsWithCaptureTypeArguments() {
-   GenericMethod.methodWithBoundTypeVariable<Number?>()
+  fun testMethodCallsWithCaptureTypeArguments_pp_genericmethod() {
+   GenericMethod.methodWithBoundTypeVariable_pp_genericmethod<Number?>()
   }
  }
 
  open class SuperContainer<C: GenericMethod.Container<*>?> {
-  open fun get(): C {
+  open fun get_pp_genericmethod(): C {
    return null as C
   }
  }
 
  open class Container<CT: GenericMethod.Content?> {
-  open fun get(): CT {
+  open fun get_pp_genericmethod(): CT {
    return null as CT
   }
  }
 
  open class Content {
-  open fun getProp(): String? {
+  open fun getProp_pp_genericmethod(): String? {
    return null
   }
  }

@@ -64,7 +64,7 @@ open class NestedGenericClass<T> {
  }
 
  open inner class RecursiveTypeVariable<T: NestedGenericClass<T>.RecursiveTypeVariable<T>?> {
-  open fun test() {
+  open fun test_pp_nestedgenericclass() {
    val t: T? = null
    t!!.Inner()
   }

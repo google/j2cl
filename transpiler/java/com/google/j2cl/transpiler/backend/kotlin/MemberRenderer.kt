@@ -19,6 +19,7 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.AstUtils.isConstructorInvocationStatement
+import com.google.j2cl.transpiler.ast.AstUtils.needsVisibilityBridge
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.InitializerBlock
@@ -235,6 +236,8 @@ private fun Renderer.renderConstructorInvocation(method: Method) {
   }
 }
 
-// TODO(b/202433397): Update to handle visibility bridges.
 private val MethodDescriptor.isKtOverride
-  get() = isJavaOverride
+  get() =
+    isJavaOverride &&
+      (javaOverriddenMethodDescriptors.any { it.enclosingTypeDescriptor.isInterface } ||
+        !needsVisibilityBridge(this))

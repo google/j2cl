@@ -18,12 +18,12 @@ package packageprivatemethods.package1;
 public abstract class Parent extends SuperParent {
   // This is directly exposed by Child
   @Override
-  int foo(int a) {
+  int overrideInParentExposedInChild(int a) {
     return a;
   }
 
-  // This directly exposes SuperParent.bar, not is exposed by Child.
+  // This directly exposes SuperParent.exposedAbstractInParent, not is exposed by Child.
   // There should be a dispatch method for it.
   @Override
-  public abstract int bar(int a, int b, int c);
+  public abstract int exposedAbstractInParent(int a, int b, int c);
 }

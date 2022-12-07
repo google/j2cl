@@ -13,13 +13,13 @@ import kotlin.jvm.JvmStatic
 open class UnsatisfiedTypeBounds {
  companion object {
   @JvmStatic
-  fun <T: Any> methodWithTypeConstraints(helper: UnsatisfiedTypeBounds.Helper<T>, foo: UnsatisfiedTypeBounds.Foo<out T>): T {
+  fun <T: Any> methodWithTypeConstraints_pp_j2ktnotpassing(helper: UnsatisfiedTypeBounds.Helper<T>, foo: UnsatisfiedTypeBounds.Foo<out T>): T {
    return foo!!.get()
   }
 
   @JvmStatic
-  fun test() {
-   val command: UnsatisfiedTypeBounds.Command? = UnsatisfiedTypeBounds.methodWithTypeConstraints<UnsatisfiedTypeBounds.Command>(UnsatisfiedTypeBounds.Helper<UnsatisfiedTypeBounds.Command>(), UnsatisfiedTypeBounds.FooCommand())
+  fun test_pp_j2ktnotpassing() {
+   val command: UnsatisfiedTypeBounds.Command? = UnsatisfiedTypeBounds.methodWithTypeConstraints_pp_j2ktnotpassing<UnsatisfiedTypeBounds.Command>(UnsatisfiedTypeBounds.Helper<UnsatisfiedTypeBounds.Command>(), UnsatisfiedTypeBounds.FooCommand())
   }
  }
 

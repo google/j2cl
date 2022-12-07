@@ -18,7 +18,7 @@ package packageprivatemethods.package2;
 import packageprivatemethods.package1.Parent;
 
 public abstract class SubParent extends Parent {
-  int foo(int a) {
+  int overrideInParentExposedInChild(int a) {
     return a;
   }
 }

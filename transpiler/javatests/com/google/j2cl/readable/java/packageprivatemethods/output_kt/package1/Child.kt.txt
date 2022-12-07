@@ -8,19 +8,41 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
+import packageprivatemethods.package1.Interface
 import packageprivatemethods.package1.Parent
 
 @ObjCName("PackageprivatemethodsPackage1Child", exact = true)
-open class Child: Parent() {
- open override fun foo(a: Int): Int {
+open class Child: Parent(), Interface {
+ open fun overrideInParentExposedInChild(
+  @ObjCName("withInt", exact = false) a: Int
+ ): Int {
   return a + 1
  }
 
- open override fun `fun`(a: Int, b: Int): Int {
+ open fun exposedInChild(
+  @ObjCName("withInt", exact = false) a: Int,
+  @ObjCName("withInt", exact = false) b: Int
+ ): Int {
   return a + b + 1
  }
 
- open override fun bar(a: Int, b: Int, c: Int): Int {
+ open override fun exposedInChildWithInterface(a: Int, b: Int): Int {
+  return a + b + 1
+ }
+
+ open override fun exposedAbstractInParent(a: Int, b: Int, c: Int): Int {
   return a + b + c + 2
+ }
+
+ open override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(arg0: Int): Int {
+  return this.overrideInParentExposedInChild(arg0)
+ }
+
+ open override fun exposedInChild_pp_packageprivatemethods_package1(arg0: Int, arg1: Int): Int {
+  return this.exposedInChild(arg0, arg1)
+ }
+
+ open override fun exposedInChildWithInterface_pp_packageprivatemethods_package1(arg0: Int, arg1: Int): Int {
+  return this.exposedInChildWithInterface(arg0, arg1)
  }
 }

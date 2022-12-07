@@ -29,33 +29,33 @@ open class Main {
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
- open fun test(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
+ open fun test_pp_parameterassignments(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   return nonFinal_1
  }
 
- open fun testObjectVarargs(o: Any?, vararg oa: Any?) {
+ open fun testObjectVarargs_pp_parameterassignments(o: Any?, vararg oa: Any?) {
   var oa_1: Array<Any?>? = oa as Array<Any?>?
   oa_1 = (arrayOf<Any?>(o, oa_1!![0]) as Array<*>?) as Array<Any?>?
  }
 
- open fun testPrimitiveVarargs(i: Int, vararg ia: Int) {
+ open fun testPrimitiveVarargs_pp_parameterassignments(i: Int, vararg ia: Int) {
   var ia_1: IntArray? = ia
   ia_1 = intArrayOf(i, ia_1!![0])
  }
 
- @JvmField val fn: Main.Fn? = Main.Fn { nonFinal: Int, implicitFinal: Int ->
+ @JvmField val fn_pp_parameterassignments: Main.Fn? = Main.Fn { nonFinal: Int, implicitFinal: Int ->
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
   return@Fn nonFinal_1
  }
 
- @JvmField val fnPrimitiveVarargs: Main.FnPrimitiveVarargs? = Main.FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
+ @JvmField val fnPrimitiveVarargs_pp_parameterassignments: Main.FnPrimitiveVarargs? = Main.FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
   `is`!![0] = `is`!![1]
  }
 
- @JvmField val fnObjectVarargs: Main.FnObjectVarargs? = Main.FnObjectVarargs { o: Any?, os: Array<*>? ->
+ @JvmField val fnObjectVarargs_pp_parameterassignments: Main.FnObjectVarargs? = Main.FnObjectVarargs { o: Any?, os: Array<*>? ->
   val os_1: Array<Any?>? = os as Array<Any?>?
   os_1!![0] = os_1!![1]
  }
@@ -92,10 +92,10 @@ open class Main {
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   }
 
-  open override fun test(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
+  open override fun test_pp_parameterassignments(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
    var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
-   return super<Main>.test(nonFinal_1, explicitFinal, implicitFinal)
+   return super<Main>.test_pp_parameterassignments(nonFinal_1, explicitFinal, implicitFinal)
   }
  }
 }

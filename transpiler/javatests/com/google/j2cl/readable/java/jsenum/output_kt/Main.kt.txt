@@ -76,11 +76,11 @@ open class Main {
   @JvmStatic
   fun testBoxUnboxWithTypeInference_private_2() {
    val templatedField: Main.TemplatedField<Main.ComparableJsEnum?>? = Main.TemplatedField<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
-   var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue()
-   unboxed = templatedField!!.value
-   templatedField!!.value = Main.ComparableJsEnum.ONE
+   var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue_pp_jsenum()
+   unboxed = templatedField!!.value_pp_jsenum
+   templatedField!!.value_pp_jsenum = Main.ComparableJsEnum.ONE
    Arrays.asList<Main.ComparableJsEnum>(*(arrayOf<Any?>(Main.ComparableJsEnum.ONE) as Array<Main.ComparableJsEnum>))
-   templatedField!!.getValue()!!.ordinal
+   templatedField!!.getValue_pp_jsenum()!!.ordinal
    val b: Boolean = Main.ComparableJsEnum.ONE === Main.boxingPassthrough_private_2<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
   }
 
@@ -90,7 +90,7 @@ open class Main {
   }
 
   @JvmStatic
-  fun boxingWithGenerics() {
+  fun boxingWithGenerics_pp_jsenum() {
    Main.Foo<Any?>(Optional.of<Main.IntJsEnum>(Main.IntJsEnum.MINUSONE) as Optional<Main.IntJsEnum>?)
   }
  }
@@ -158,14 +158,14 @@ open class Main {
  }
 
  open class TemplatedField<T> {
-  @JvmField var value: T = null as T
+  @JvmField var value_pp_jsenum: T = null as T
 
   constructor(value: T) {
-   this.value = value
+   this.value_pp_jsenum = value
   }
 
-  open fun getValue(): T {
-   return this.value
+  open fun getValue_pp_jsenum(): T {
+   return this.value_pp_jsenum
   }
  }
 

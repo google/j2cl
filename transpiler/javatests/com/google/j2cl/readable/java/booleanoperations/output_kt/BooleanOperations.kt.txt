@@ -79,18 +79,18 @@ open class BooleanOperations {
    r = true
   }
   open class ___1Outer {
-   @JvmField var b: Boolean = false
+   @JvmField var b_pp_booleanoperations: Boolean = false
 
    open inner class Inner {
     init {
-     this@___1Outer.b = this@___1Outer.b.or(true)
+     this@___1Outer.b_pp_booleanoperations = this@___1Outer.b_pp_booleanoperations.or(true)
     }
    }
   }
   val finalOuter: ___1Outer? = ___1Outer()
-  finalOuter!!.b = finalOuter!!.b.or(true)
+  finalOuter!!.b_pp_booleanoperations = finalOuter!!.b_pp_booleanoperations.or(true)
   var outer: ___1Outer? = ___1Outer()
-  outer!!.b = outer!!.b.or(run {
+  outer!!.b_pp_booleanoperations = outer!!.b_pp_booleanoperations.or(run {
    outer = null
    outer
   } == null)
