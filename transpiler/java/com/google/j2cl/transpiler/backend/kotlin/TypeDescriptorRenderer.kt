@@ -65,8 +65,8 @@ private data class TypeDescriptorRenderer(
   /** The underlying renderer. */
   val renderer: Renderer,
 
-  /** Set of seen type descriptors used to detect recursion. */
-  val seenTypeDescriptors: Set<TypeDescriptor> = setOf(),
+  /** Set of seen type variables used to detect recursion. */
+  val seenTypeVariables: Set<TypeVariable> = setOf(),
 
   // TODO(b/246842682): Remove when bridge types are materialized as TypeDescriptors
   /** Whether to render a super-type, using bridge name if present. */
@@ -80,15 +80,13 @@ private data class TypeDescriptorRenderer(
     get() = copy(asSuperType = false)
 
   fun render(typeDescriptor: TypeDescriptor) {
-    withSeen(typeDescriptor).run {
-      when (typeDescriptor) {
-        is ArrayTypeDescriptor -> renderArray(typeDescriptor)
-        is DeclaredTypeDescriptor -> renderDeclared(typeDescriptor)
-        is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor)
-        is TypeVariable -> renderVariable(typeDescriptor)
-        is IntersectionTypeDescriptor -> renderIntersection(typeDescriptor)
-        else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
-      }
+    when (typeDescriptor) {
+      is ArrayTypeDescriptor -> renderArray(typeDescriptor)
+      is DeclaredTypeDescriptor -> renderDeclared(typeDescriptor)
+      is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor)
+      is TypeVariable -> renderVariable(typeDescriptor)
+      is IntersectionTypeDescriptor -> renderIntersection(typeDescriptor)
+      else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
     }
   }
 
@@ -131,24 +129,29 @@ private data class TypeDescriptorRenderer(
   }
 
   fun renderVariable(typeVariable: TypeVariable) {
-    if (typeVariable.isWildcardOrCapture) {
-      val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
-      if (lowerBoundTypeDescriptor != null) {
-        renderer.render("in ")
-        child.render(lowerBoundTypeDescriptor)
-      } else {
-        val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
-        val isRecursive = didSee(boundTypeDescriptor)
-        if (isRecursive || boundTypeDescriptor.isImplicitUpperBound) {
-          renderer.render("*")
+    if (didSee(typeVariable)) {
+      renderer.render("*")
+    } else {
+      withSeen(typeVariable).run {
+        if (typeVariable.isWildcardOrCapture) {
+          val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
+          if (lowerBoundTypeDescriptor != null) {
+            renderer.render("in ")
+            child.render(lowerBoundTypeDescriptor)
+          } else {
+            val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
+            if (boundTypeDescriptor.isImplicitUpperBound) {
+              renderer.render("*")
+            } else {
+              renderer.render("out ")
+              child.render(boundTypeDescriptor)
+            }
+          }
         } else {
-          renderer.render("out ")
-          child.render(boundTypeDescriptor)
+          renderer.renderName(typeVariable.toNullable())
+          renderNullableSuffix(typeVariable)
         }
       }
-    } else {
-      renderer.renderName(typeVariable.toNullable())
-      renderNullableSuffix(typeVariable)
     }
   }
 
@@ -162,9 +165,9 @@ private data class TypeDescriptorRenderer(
     if (typeDescriptor.isNullable) renderer.render("?")
   }
 
-  private fun withSeen(typeDescriptor: TypeDescriptor) =
-    copy(seenTypeDescriptors = seenTypeDescriptors + typeDescriptor.toNonNullable())
+  private fun withSeen(typeVariable: TypeVariable) =
+    copy(seenTypeVariables = seenTypeVariables + typeVariable.toNonNullable())
 
-  private fun didSee(typeDescriptor: TypeDescriptor) =
-    seenTypeDescriptors.contains(typeDescriptor.toNonNullable())
+  private fun didSee(typeVariable: TypeVariable) =
+    seenTypeVariables.contains(typeVariable.toNonNullable())
 }
