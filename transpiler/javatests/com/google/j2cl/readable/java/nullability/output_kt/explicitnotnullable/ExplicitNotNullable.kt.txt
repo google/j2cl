@@ -6,6 +6,7 @@ package nullability.explicitnotnullable
 import javaemul.lang.*
 import java.lang.NullPointerException
 import java.lang.RuntimeException
+import javaemul.lang.uninitializedArrayOf
 import kotlin.Any
 import kotlin.Array
 import kotlin.Boolean
@@ -79,6 +80,14 @@ open class ExplicitNotNullable {
  @JvmField var f25_private_2: Array<CharArray>? = arrayOf<CharArray?>() as Array<CharArray>?
 
  @JvmField var f26_private_2: Array<CharArray?>? = arrayOf<CharArray?>()
+
+ @JvmField var f27_private_2: Array<String> = uninitializedArrayOf<String>(1)
+
+ @JvmField var f28_private_2: Array<String> = arrayOfNulls<String>(1) as Array<String>
+
+ @JvmField var f29_private_2: Array<String?> = uninitializedArrayOf<String>(1) as Array<String?>
+
+ @JvmField var f30_private_2: Array<String?> = arrayOfNulls<String>(1)
 
  constructor() {
   this.f13_private_2 = Any()

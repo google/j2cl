@@ -50,7 +50,6 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
-import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.Variable
@@ -96,7 +95,8 @@ private fun Renderer.renderArrayLength(arrayLength: ArrayLength) {
 }
 
 private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
-  when (val componentTypeDescriptor = arrayLiteral.typeDescriptor.componentTypeDescriptor!!) {
+  val typeArgument = arrayLiteral.typeDescriptor.typeArgument
+  when (typeArgument.typeDescriptor) {
     PrimitiveTypes.BOOLEAN -> renderQualifiedName("kotlin.booleanArrayOf")
     PrimitiveTypes.CHAR -> renderQualifiedName("kotlin.charArrayOf")
     PrimitiveTypes.BYTE -> renderQualifiedName("kotlin.byteArrayOf")
@@ -107,7 +107,7 @@ private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
     PrimitiveTypes.DOUBLE -> renderQualifiedName("kotlin.doubleArrayOf")
     else -> {
       renderQualifiedName("kotlin.arrayOf")
-      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
+      renderTypeArguments(listOf(typeArgument))
     }
   }
   renderInParentheses {
@@ -361,20 +361,21 @@ private fun Renderer.renderNewArray(
   firstDimension: Expression,
   remainingDimensions: Iterator<Expression>
 ) {
-  val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!
+  val typeArgument = arrayTypeDescriptor.typeArgument
+  val componentTypeDescriptor = typeArgument.typeDescriptor
   if (!remainingDimensions.hasNext()) {
     if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
       renderPrimitiveArrayOf(componentTypeDescriptor, firstDimension)
     } else {
-      renderArrayOfNulls(componentTypeDescriptor, firstDimension)
+      renderArrayOfNulls(typeArgument, firstDimension)
     }
   } else {
     val nextDimension = remainingDimensions.next()
     if (nextDimension is NullLiteral) {
-      renderArrayOfNulls(componentTypeDescriptor, firstDimension)
+      renderArrayOfNulls(typeArgument, firstDimension)
     } else {
       renderQualifiedName("kotlin.Array")
-      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
+      renderTypeArguments(listOf(typeArgument))
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
       renderInCurlyBrackets {
@@ -409,12 +410,14 @@ private fun Renderer.renderPrimitiveArrayOf(
   renderInParentheses { renderExpression(dimension) }
 }
 
-private fun Renderer.renderArrayOfNulls(
-  componentTypeDescriptor: TypeDescriptor,
-  dimension: Expression
-) {
-  renderQualifiedName("kotlin.arrayOfNulls")
-  renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor.toNonNullable()) }
+private fun Renderer.renderArrayOfNulls(typeArgument: TypeArgument, dimension: Expression) {
+  if (typeArgument.typeDescriptor.isNullable) {
+    renderQualifiedName("kotlin.arrayOfNulls")
+    renderTypeArguments(listOf(typeArgument.toNonNullable()))
+  } else {
+    renderQualifiedName("javaemul.lang.uninitializedArrayOf")
+    renderTypeArguments(listOf(typeArgument))
+  }
   renderInParentheses { renderExpression(dimension) }
 }
 

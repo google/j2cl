@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
@@ -36,8 +37,13 @@ internal data class TypeArgument(
 
 private fun TypeArgument.makeNonNull() = copy(typeDescriptor = typeDescriptor.makeNonNull())
 
+internal fun TypeArgument.toNonNullable() = copy(typeDescriptor = typeDescriptor.toNonNullable())
+
 internal val TypeArgument.isDenotable
   get() = typeDescriptor.isDenotable
+
+internal val ArrayTypeDescriptor.typeArgument
+  get() = typeArgument(TypeVariable.createWildcard(), componentTypeDescriptor)
 
 internal fun DeclaredTypeDescriptor.typeArguments(
   projectRawToWildcards: Boolean = false

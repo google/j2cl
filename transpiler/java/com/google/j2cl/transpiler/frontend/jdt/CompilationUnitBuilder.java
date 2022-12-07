@@ -186,7 +186,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private boolean isNullMarked(org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-      return environment.isNullMarked(jdtCompilationUnit.getPackage());
+      return JdtEnvironment.isNullMarked(jdtCompilationUnit.getPackage());
     }
 
     private Type convert(AbstractTypeDeclaration typeDeclaration) {
@@ -402,7 +402,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           expression.getInitializer() == null ? null : convert(expression.getInitializer());
 
       ArrayTypeDescriptor typeDescriptor =
-          (ArrayTypeDescriptor) environment.createTypeDescriptor(expression.resolveTypeBinding());
+          (ArrayTypeDescriptor)
+              environment.createTypeDescriptor(
+                  expression.resolveTypeBinding(),
+                  getCurrentType().getDeclaration().isNullMarked());
       return NewArray.newBuilder()
           .setTypeDescriptor(typeDescriptor)
           .setDimensionExpressions(dimensionExpressions)
