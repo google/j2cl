@@ -22,8 +22,6 @@ import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
 
 public class Main {
 
@@ -178,9 +176,6 @@ public class Main {
     AbstractEquals o2 = new AutoValue_Main_AbstractEquals("a");
     assertEquals(o1, o2);
   }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
-  interface JsArray {}
 
   @AutoValue
   abstract static class UsesJsCollection {

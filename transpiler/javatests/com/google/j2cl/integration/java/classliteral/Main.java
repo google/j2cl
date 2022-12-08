@@ -23,7 +23,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
-import jsinterop.annotations.JsConstructor;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
@@ -191,9 +191,6 @@ public class Main {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private interface NativeInterface {}
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  private static class NativeClass {}
-
   private static void testNative() {
     // getClass() and friends on Native JavaScript objects is not supported in WASM.
     if (isWasm()) {
@@ -215,15 +212,9 @@ public class Main {
     assertLiteralType("NativeFunction.class", LiteralType.CLASS, clazz);
   }
 
-  private static class TypeExtendsNativeClass extends NativeClass {
-    @JsConstructor
-    TypeExtendsNativeClass() {}
-  }
-
+  @Wasm("nop") // Extending native types not yet supported in WASM.
   private static void testExtendsNative() {
-    assertEquals(
-        "classliteral.Main$TypeExtendsNativeClass",
-        TypeExtendsNativeClass.class.getName());
+    assertEquals("classliteral.TypeExtendsNativeClass", TypeExtendsNativeClass.class.getName());
 
     // TODO(b/63081128): Uncomment when fixed.
     // assertEquals(NativeClass.class, TypeExtendsNativeClass.class.getSuperclass());
