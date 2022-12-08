@@ -19,18 +19,26 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 
-internal fun MethodDescriptor.isProtobufGetter(orSetter: Boolean = false): Boolean {
-  if (
-    isStatic() ||
-      !getParameterDescriptors().isEmpty() ||
-      !getEnclosingTypeDescriptor().isProtobufMessageOrBuilder()
-  ) {
+internal fun MethodDescriptor.isExtensionChecker() =
+  qualifiedBinaryName ==
+    "com.google.protobuf.GeneratedMessageLite\$ExtendableMessage.hasExtension" ||
+    qualifiedBinaryName == "com.google.protobuf.GeneratedMessage\$ExtendableMessage.hasExtension"
+
+internal fun MethodDescriptor.isExtensionGetter() =
+  qualifiedBinaryName ==
+    "com.google.protobuf.GeneratedMessageLite\$ExtendableMessage.getExtension" ||
+    qualifiedBinaryName == "com.google.protobuf.GeneratedMessage\$ExtendableMessage.getExtension"
+
+internal fun MethodDescriptor.isProtobufGetter(): Boolean {
+  if (!isProtobufMethod() || !getParameterDescriptors().isEmpty()) {
     return false
   }
   val name = name ?: ""
-  return (name.startsWith("get") && name != "getDefaultInstance") ||
-    (orSetter && name.startsWith("set"))
+  return (name.startsWith("get") && name != "getDefaultInstance")
 }
+
+internal fun MethodDescriptor.isProtobufMethod() =
+  !isStatic() && getEnclosingTypeDescriptor().isProtobufMessageOrBuilder()
 
 internal fun TypeDescriptor.isProtobufBuilder(): Boolean {
   if (this !is DeclaredTypeDescriptor) {

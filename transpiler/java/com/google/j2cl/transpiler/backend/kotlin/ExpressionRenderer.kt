@@ -295,13 +295,15 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   val methodDescriptor = expression.target
   if (methodDescriptor.isProtobufGetter()) {
     renderIdentifier(KtInfo.computePropertyName(expression.target.name))
-    return
-  }
-
-  renderIdentifier(expression.target.ktMangledName)
-  if (!expression.target.isKtProperty) {
-    renderInvocationTypeArguments(methodDescriptor.typeArguments)
+  } else if (methodDescriptor.isExtensionChecker()) {
+    renderExtensionFunctionName("com.google.protobuf.kotlin.contains")
     renderInvocationArguments(expression)
+  } else {
+    renderIdentifier(expression.target.ktMangledName)
+    if (!expression.target.isKtProperty) {
+      renderInvocationTypeArguments(methodDescriptor.typeArguments)
+      renderInvocationArguments(expression)
+    }
   }
 }
 
