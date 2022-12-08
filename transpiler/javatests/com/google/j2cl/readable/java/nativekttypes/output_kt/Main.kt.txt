@@ -15,6 +15,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.javaObjectType
 import kotlin.native.ObjCName
 import nativekttypes.BridgeSubclass
+import nativekttypes.Fn
 import nativekttypes.Subclass
 import nativekttypes.nativekt.KBridge
 import nativekttypes.nativekt.KCompanionObject
@@ -118,6 +119,48 @@ open class Main {
 
  open fun disabledNonVoidMethod(): Boolean {
   return false
+ }
+
+ open fun <I, O> acceptFn_generic(
+  @ObjCName("withNativekttypesFn", exact = false) f: Fn<I, O>?,
+  @ObjCName("withId", exact = false) i: I
+ ): O {
+  return f!!.apply(i)
+ }
+
+ open fun acceptFn_parametrized(
+  @ObjCName("withNativekttypesFn", exact = false) f: Fn<String?, String?>?,
+  @ObjCName("withNSString", exact = false) i: String?
+ ): String? {
+  return f!!.apply(i)
+ }
+
+ open fun <I, O> acceptFn_genericWildcard(
+  @ObjCName("withNativekttypesFn", exact = false) f: Fn<in I, out O>?,
+  @ObjCName("withId", exact = false) i: I
+ ): O {
+  return f!!.apply(i)
+ }
+
+ open fun acceptFn_parametrizedWildcard(
+  @ObjCName("withNativekttypesFn", exact = false) f: Fn<in String?, out String?>?,
+  @ObjCName("withNSString", exact = false) i: String?
+ ): String? {
+  return f!!.apply(i)
+ }
+
+ open fun acceptFn_unboundWildcard(
+  @ObjCName("withNativekttypesFn", exact = false) f: Fn<*, *>?,
+  @ObjCName("withId", exact = false) i: Any?
+ ): Any? {
+  return (f as Fn<Any?, Any?>?)!!.apply(i)
+ }
+
+ open fun acceptFn_raw(
+  @ObjCName("withNativekttypesFn", exact = false) f: Fn<Any?, Any?>?,
+  @ObjCName("withId", exact = false) i: Any?
+ ): Any? {
+  return f!!.apply(i)
  }
 
  open fun todoMethod(

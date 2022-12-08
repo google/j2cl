@@ -1,0 +1,16 @@
+// Generated from "nativekttypes/Fn.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package nativekttypes
+
+import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("NativekttypesFn", exact = true)
+fun interface Fn<I, O> {
+ fun apply(
+  @ObjCName("withId", exact = false) i: I
+ ): O
+}

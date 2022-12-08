@@ -128,6 +128,30 @@ public class Main {
     return true;
   }
 
+  public <I, O> O acceptFn_generic(Fn<I, O> f, I i) {
+    return f.apply(i);
+  }
+
+  public String acceptFn_parametrized(Fn<String, String> f, String i) {
+    return f.apply(i);
+  }
+
+  public <I, O> O acceptFn_genericWildcard(Fn<? super I, ? extends O> f, I i) {
+    return f.apply(i);
+  }
+
+  public String acceptFn_parametrizedWildcard(Fn<? super String, ? extends String> f, String i) {
+    return f.apply(i);
+  }
+
+  public Object acceptFn_unboundWildcard(Fn<?, ?> f, Object i) {
+    return ((Fn<Object, Object>) f).apply(i);
+  }
+
+  public Object acceptFn_raw(Fn f, Object i) {
+    return f.apply(i);
+  }
+
   // This method is included in "backend/kotlin/Todo.kt".
   public void todoMethod(String string) {
     System.out.println("Hello: " + string);
