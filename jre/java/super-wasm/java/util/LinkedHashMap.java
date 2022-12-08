@@ -56,8 +56,8 @@ public class LinkedHashMap<K, V> extends HashMap<K, V> {
   }
 
   public LinkedHashMap(Map<? extends K, ? extends V> map) {
-    this(capacityForInitSize(map.size()));
-    constructorPutAll(map);
+    super(map);
+    this.accessOrder = false;
   }
 
   /** LinkedEntry adds nxt/prv double-links to plain HashMapEntry. */

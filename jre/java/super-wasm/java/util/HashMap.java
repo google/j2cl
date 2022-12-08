@@ -118,7 +118,13 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
 
   public HashMap(Map<? extends K, ? extends V> map) {
     this(capacityForInitSize(map.size()));
-    constructorPutAll(map);
+    if (threshold == -1) {
+      // map is empty.
+      return;
+    }
+    for (Entry<? extends K, ? extends V> e : map.entrySet()) {
+      constructorPut(e.getKey(), e.getValue());
+    }
   }
 
   private static int roundUpToPowerOfTwo(int i) {
@@ -144,24 +150,11 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Seria
   }
 
   /**
-   * Inserts all of the elements of map into this HashMap in a manner suitable for use by
-   * constructors and pseudo-constructors (i.e., clone, readObject). Also used by LinkedHashMap.
-   */
-  final void constructorPutAll(Map<? extends K, ? extends V> map) {
-    if (table == EMPTY_TABLE) {
-      doubleCapacity(); // Don't do unchecked puts to a shared table.
-    }
-    for (Entry<? extends K, ? extends V> e : map.entrySet()) {
-      constructorPut(e.getKey(), e.getValue());
-    }
-  }
-
-  /**
    * Returns an appropriate capacity for the specified initial size. Does not round the result up to
    * a power of two; the caller must do this! The returned value will be between 0 and
    * MAXIMUM_CAPACITY (inclusive).
    */
-  static int capacityForInitSize(int size) {
+  private static int capacityForInitSize(int size) {
     int result = (size >> 1) + size; // Multiply by 3/2 to allow for growth
     // boolean expr is equivalent to result >= 0 && result<MAXIMUM_CAPACITY
     return (result & ~(MAXIMUM_CAPACITY - 1)) == 0 ? result : MAXIMUM_CAPACITY;
