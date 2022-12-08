@@ -11,5 +11,4 @@ integration_test(
     # Inconsistent @ObjCName annotation
     enable_kt_native = False,
     suppress = ["JSC_UNKNOWN_OVERRIDE"],
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

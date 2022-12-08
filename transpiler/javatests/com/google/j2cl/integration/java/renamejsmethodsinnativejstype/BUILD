@@ -34,7 +34,6 @@ integration_test(
     deps = [
         ":foo",
         ":native_types",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
 

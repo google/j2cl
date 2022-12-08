@@ -10,5 +10,4 @@ integration_test(
     srcs = glob(["*.java"]),
     enable_kt = False,
     suppress = ["JSC_TYPE_MISMATCH"],
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

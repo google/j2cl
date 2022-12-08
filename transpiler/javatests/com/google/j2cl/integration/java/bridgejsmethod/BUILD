@@ -16,5 +16,4 @@ integration_test(
     enable_kt = False,
     enable_wasm = False,
     suppress = ["JSC_TYPE_MISMATCH"],
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

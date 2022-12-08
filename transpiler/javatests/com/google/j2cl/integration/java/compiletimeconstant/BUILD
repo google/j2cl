@@ -10,8 +10,4 @@ integration_test(
     srcs = glob(["*.java"]),
     # TODO(b/256681746): Improve TestUtils to detect Kotlin and fix the test.
     enable_kt_native = False,
-    deps = [
-        "//jre/java:javaemul_internal_annotations-j2cl",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
-    ],
 )

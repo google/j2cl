@@ -16,7 +16,6 @@ integration_test(
     enable_kt = False,
     enable_wasm = False,
     deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
         "//transpiler/javatests/com/google/j2cl/integration/java/nativeinjectionapt/apt:annotation",
     ],
 )

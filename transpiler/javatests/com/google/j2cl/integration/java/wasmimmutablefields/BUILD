@@ -10,7 +10,4 @@ integration_test(
     srcs = glob([
         "*.java",
     ]),
-    deps = [
-        "//jre/java:javaemul_internal_annotations-j2cl",
-    ],
 )

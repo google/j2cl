@@ -23,5 +23,4 @@ integration_test(
     enable_rta = False,
     enable_wasm = False,
     suppress = ["JSC_BAD_PROTECTED_PROPERTY_ACCESS"],
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

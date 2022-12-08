@@ -15,5 +15,4 @@ integration_test(
     enable_kt = False,
     #  TODO(b/187981979): Class literal stripping is not implemented in WASM.
     enable_wasm = False,
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

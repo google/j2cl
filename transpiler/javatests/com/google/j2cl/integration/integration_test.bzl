@@ -50,7 +50,11 @@ def integration_test(
     if not main_class:
         main_class = java_package + ".Main"
 
-    deps = deps + ["//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2cl"]
+    deps = deps + [
+        "//jre/java:javaemul_internal_annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2cl",
+    ]
 
     define_flags = ["--define=%s=%s" % (k, v) for (k, v) in closure_defines.items()]
 

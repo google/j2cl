@@ -50,6 +50,5 @@ integration_test(
         ":MyInterface",
         ":Parent",
         ":SuperParent",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

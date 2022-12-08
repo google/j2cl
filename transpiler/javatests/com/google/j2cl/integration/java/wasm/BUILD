@@ -27,8 +27,4 @@ integration_test(
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,
     enable_kt = False,
-    deps = [
-        "//jre/java:javaemul_internal_annotations-j2cl",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
-    ],
 )

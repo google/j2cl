@@ -17,6 +17,5 @@ integration_test(
     enable_wasm = False,
     deps = [
         "//third_party:closure_reflect",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

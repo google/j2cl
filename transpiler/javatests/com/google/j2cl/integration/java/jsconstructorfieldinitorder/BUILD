@@ -8,5 +8,4 @@ package(licenses = ["notice"])
 integration_test(
     name = "jsconstructorfieldinitorder",
     srcs = glob(["*.java"]),
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
