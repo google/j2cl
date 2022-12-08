@@ -7,6 +7,7 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["**/*.java"]),
+    generate_js_readables = False,
     generate_wasm_readables = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
