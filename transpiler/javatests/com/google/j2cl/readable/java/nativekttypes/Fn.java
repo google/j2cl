@@ -15,6 +15,9 @@
  */
 package nativekttypes;
 
-public interface Fn<I, O> {
+import javaemul.internal.annotations.KtIn;
+import javaemul.internal.annotations.KtOut;
+
+public interface Fn<@KtIn I, @KtOut O> {
   O apply(I i);
 }

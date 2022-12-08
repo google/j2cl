@@ -16,9 +16,11 @@
 package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_DISABLED_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_IN_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NAME_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_NATIVE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OBJECTIVE_C_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OUT_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPAGATE_NULLABILITY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
@@ -56,5 +58,13 @@ public class KtInteropAnnotationUtils {
   public static IAnnotationBinding getKtObjectiveCNameAnnotation(
       IAnnotationBinding[] annotationBindings) {
     return findAnnotationBindingByName(annotationBindings, KT_OBJECTIVE_C_NAME);
+  }
+
+  public static IAnnotationBinding getKtInAnnotation(IAnnotationBinding[] annotationBindings) {
+    return findAnnotationBindingByName(annotationBindings, KT_IN_ANNOTATION_NAME);
+  }
+
+  public static IAnnotationBinding getKtOutAnnotation(IAnnotationBinding[] annotationBindings) {
+    return findAnnotationBindingByName(annotationBindings, KT_OUT_ANNOTATION_NAME);
   }
 }

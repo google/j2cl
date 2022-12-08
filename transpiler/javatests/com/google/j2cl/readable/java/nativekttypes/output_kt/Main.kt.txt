@@ -136,14 +136,14 @@ open class Main {
  }
 
  open fun <I, O> acceptFn_genericWildcard(
-  @ObjCName("withNativekttypesFn", exact = false) f: Fn<in I, out O>?,
+  @ObjCName("withNativekttypesFn", exact = false) f: Fn<I, O>?,
   @ObjCName("withId", exact = false) i: I
  ): O {
   return f!!.apply(i)
  }
 
  open fun acceptFn_parametrizedWildcard(
-  @ObjCName("withNativekttypesFn", exact = false) f: Fn<in String?, out String?>?,
+  @ObjCName("withNativekttypesFn", exact = false) f: Fn<String?, String?>?,
   @ObjCName("withNSString", exact = false) i: String?
  ): String? {
   return f!!.apply(i)

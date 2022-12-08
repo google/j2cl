@@ -17,15 +17,18 @@ package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtDisabledAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtInAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNameAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNativeAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtObjectiveCNameAnnotation;
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtOutAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropagateNullabilityAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtPropertyAnnotation;
 
 import com.google.j2cl.transpiler.ast.KtInfo;
 import com.google.j2cl.transpiler.ast.KtObjcInfo;
 import com.google.j2cl.transpiler.ast.KtTypeInfo;
+import com.google.j2cl.transpiler.ast.KtVariance;
 import javax.annotation.Nullable;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -109,5 +112,16 @@ public class KtInteropUtils {
 
   public static boolean isKtPropagateNullabilityEnabled(IAnnotationBinding[] annotationBindings) {
     return getKtPropagateNullabilityAnnotation(annotationBindings) != null;
+  }
+
+  @Nullable
+  public static KtVariance getKtVariance(IAnnotationBinding[] annotationBindings) {
+    if (getKtInAnnotation(annotationBindings) != null) {
+      return KtVariance.IN;
+    } else if (getKtOutAnnotation(annotationBindings) != null) {
+      return KtVariance.OUT;
+    } else {
+      return null;
+    }
   }
 }

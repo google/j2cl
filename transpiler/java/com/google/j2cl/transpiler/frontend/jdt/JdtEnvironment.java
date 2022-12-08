@@ -363,6 +363,7 @@ class JdtEnvironment {
         .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
         .setUniqueKey(uniqueKey)
         .setName(typeBinding.getName())
+        .setKtVariance(KtInteropUtils.getKtVariance(typeBinding.getTypeAnnotations()))
         // Wildcards (and captures) are never explicitly nullable, they depend on their bounds.
         .setNullable(false)
         .build();

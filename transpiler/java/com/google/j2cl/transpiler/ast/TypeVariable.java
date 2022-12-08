@@ -63,6 +63,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Override
   public abstract boolean isNullable();
 
+  @Nullable
+  public abstract KtVariance getKtVariance();
+
   @Override
   public TypeVariable toNullable() {
     if (isNullable()) {
@@ -258,6 +261,8 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     public abstract Builder setLowerBoundTypeDescriptor(@Nullable TypeDescriptor typeDescriptor);
 
     public abstract Builder setNullable(boolean isNullable);
+
+    public abstract Builder setKtVariance(@Nullable KtVariance ktVariance);
 
     private static final ThreadLocalInterner<TypeVariable> interner = new ThreadLocalInterner<>();
 

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
+import com.google.j2cl.transpiler.ast.KtVariance
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
@@ -175,3 +176,15 @@ private val anyTypeDescriptor: TypeDescriptor
 
 internal val TypeVariable.isRecursive: Boolean
   get() = upperBoundTypeDescriptor.contains(this)
+
+internal fun TypeDescriptor.applyVariance(variance: KtVariance?) =
+  if (this is TypeVariable) variableApplyVariance(variance) else this
+
+private fun TypeVariable.variableApplyVariance(variance: KtVariance?) =
+  if (!isWildcardOrCapture) this
+  else
+    when (variance) {
+      KtVariance.IN -> lowerBoundTypeDescriptor ?: this
+      KtVariance.OUT -> upperBoundTypeDescriptor.takeIf { !it.isImplicitUpperBound } ?: this
+      else -> this
+    }

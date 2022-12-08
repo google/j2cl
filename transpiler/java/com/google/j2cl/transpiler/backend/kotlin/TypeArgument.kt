@@ -64,9 +64,13 @@ private fun typeArgument(declarationTypeParameter: TypeVariable, typeDescriptor:
   TypeArgument(declarationTypeParameter, typeDescriptor)
     .withFixedUnboundWildcard
     .withInferredNullability
+    .updatedWithParameterVariance
 
 private val TypeArgument.withInferredNullability: TypeArgument
   get() = if (!declarationTypeVariable.hasNullableBounds) makeNonNull() else this
+
+private val TypeArgument.updatedWithParameterVariance: TypeArgument
+  get() = copy(typeDescriptor = typeDescriptor.applyVariance(declarationTypeVariable.ktVariance))
 
 // TODO(b/245807463): Remove this fix when these bugs are fixed in the AST.
 // TODO(b/255722110): Remove this fix when these bugs are fixed in the AST.

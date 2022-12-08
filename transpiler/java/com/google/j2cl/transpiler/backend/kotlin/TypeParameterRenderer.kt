@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
+import com.google.j2cl.transpiler.ast.KtVariance
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 
@@ -40,12 +41,24 @@ internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
       .map { if (!it.canBeNullableAsBound) it.toNonNullable() else it }
 
 private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
+  val variance = typeVariable.ktVariance
+  if (variance != null) {
+    render(variance.identifier)
+    render(" ")
+  }
   renderName(typeVariable)
   typeVariable.upperBoundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
     render(": ")
     renderTypeDescriptor(boundTypeDescriptor, projectRawToWildcards = true)
   }
 }
+
+private val KtVariance.identifier
+  get() =
+    when (this) {
+      KtVariance.IN -> "in"
+      KtVariance.OUT -> "out"
+    }
 
 private data class WhereClauseItem(val hasName: HasName, val boundTypeDescriptor: TypeDescriptor)
 
