@@ -158,7 +158,7 @@ def readable_example(
                 name = "readable_j2kt_native_build_test",
                 targets = [":readable_j2kt_test_framework"],
                 minimum_os_version = "10.0",
-                tags = ["j2kt", "ios"],
+                tags = ["manual", "j2kt", "ios"],
             )
 
 def _readable_diff_test(name, target, dir_out, tags):
