@@ -19,12 +19,12 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 
-internal fun MethodDescriptor.isExtensionChecker() =
+internal fun MethodDescriptor.isProtoExtensionChecker() =
   qualifiedBinaryName ==
     "com.google.protobuf.GeneratedMessageLite\$ExtendableMessage.hasExtension" ||
     qualifiedBinaryName == "com.google.protobuf.GeneratedMessage\$ExtendableMessage.hasExtension"
 
-internal fun MethodDescriptor.isExtensionGetter() =
+internal fun MethodDescriptor.isProtoExtensionGetter() =
   qualifiedBinaryName ==
     "com.google.protobuf.GeneratedMessageLite\$ExtendableMessage.getExtension" ||
     qualifiedBinaryName == "com.google.protobuf.GeneratedMessage\$ExtendableMessage.getExtension"

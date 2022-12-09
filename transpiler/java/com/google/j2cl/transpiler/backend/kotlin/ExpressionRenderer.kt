@@ -290,19 +290,29 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
-  renderQualifier(expression)
-
   val methodDescriptor = expression.target
-  if (methodDescriptor.isProtobufGetter()) {
-    renderIdentifier(KtInfo.computePropertyName(expression.target.name))
-  } else if (methodDescriptor.isExtensionChecker()) {
-    renderExtensionFunctionName("com.google.protobuf.kotlin.contains")
-    renderInvocationArguments(expression)
+
+  if (methodDescriptor.isProtoExtensionGetter()) {
+    environment.importedSimpleNameToQualifiedNameMap.putIfAbsent(
+      "get",
+      "com.google.protobuf.kotlin.get"
+    )
+    renderLeftSubExpression(expression, expression.qualifier)
+    renderInSquareBrackets { renderExpression(expression.arguments.first()) }
   } else {
-    renderIdentifier(expression.target.ktMangledName)
-    if (!expression.target.isKtProperty) {
-      renderInvocationTypeArguments(methodDescriptor.typeArguments)
+    renderQualifier(expression)
+
+    if (methodDescriptor.isProtobufGetter()) {
+      renderIdentifier(KtInfo.computePropertyName(expression.target.name))
+    } else if (methodDescriptor.isProtoExtensionChecker()) {
+      renderExtensionFunctionName("com.google.protobuf.kotlin.contains")
       renderInvocationArguments(expression)
+    } else {
+      renderIdentifier(expression.target.ktMangledName)
+      if (!expression.target.isKtProperty) {
+        renderInvocationTypeArguments(methodDescriptor.typeArguments)
+        renderInvocationArguments(expression)
+      }
     }
   }
 }
