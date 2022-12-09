@@ -157,7 +157,7 @@ def readable_example(
             ios_build_test(
                 name = "readable_j2kt_native_build_test",
                 targets = [":readable_j2kt_test_framework"],
-                minimum_os_version = "10.0",
+                minimum_os_version = "11.0",
                 tags = ["manual", "j2kt", "ios"],
             )
 
