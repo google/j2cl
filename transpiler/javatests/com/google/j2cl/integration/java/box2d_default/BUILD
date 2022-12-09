@@ -14,6 +14,6 @@ integration_test(
     enable_bundle_size_report = True,
     enable_kt = False,
     deps = [
-        "//transpiler/javatests/com/google/j2cl/integration/java/box2d:box2d-j2cl",
+        "//transpiler/javatests/com/google/j2cl/integration/java/box2d",
     ],
 )

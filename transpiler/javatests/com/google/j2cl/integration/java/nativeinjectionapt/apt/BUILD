@@ -15,7 +15,7 @@ java_plugin(
 )
 
 j2cl_library(
-    name = "annotation",
+    name = "annotation-j2cl",
     srcs = ["RunApt.java"],
     exported_plugins = [":apt"],
     generate_j2kt_jvm_library = False,

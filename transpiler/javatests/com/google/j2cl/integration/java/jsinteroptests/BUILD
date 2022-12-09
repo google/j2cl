@@ -5,6 +5,11 @@ load(
 
 package(licenses = ["notice"])
 
+alias(
+    name = "closure_reflect-j2cl",
+    actual = "//third_party:closure_reflect",
+)
+
 integration_test(
     name = "jsinteroptests",
     srcs = glob([
@@ -16,6 +21,6 @@ integration_test(
     enable_kt = False,
     enable_wasm = False,
     deps = [
-        "//third_party:closure_reflect",
+        ":closure_reflect",
     ],
 )

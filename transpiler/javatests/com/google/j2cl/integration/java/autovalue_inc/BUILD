@@ -12,7 +12,7 @@ integration_test(
     enable_kt = False,
     optimize_autovalue = True,
     deps = [
-        "//third_party:auto_value-j2cl",
-        "//transpiler/javatests/com/google/j2cl/integration/java/autovalue:autovalue-j2cl",
+        "//third_party:auto_value",
+        "//transpiler/javatests/com/google/j2cl/integration/java/autovalue",
     ],
 )

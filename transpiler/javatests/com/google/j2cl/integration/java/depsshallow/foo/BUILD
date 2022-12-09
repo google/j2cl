@@ -1,14 +1,11 @@
-load("//build_defs:rules.bzl", "j2cl_library")
+load(
+    "//transpiler/javatests/com/google/j2cl/integration:integration_test.bzl",
+    "integration_library",
+)
 
 package(licenses = ["notice"])
 
-j2cl_library(
-    name = "foo-j2cl",
-    srcs = ["Foo.java"],
-    visibility = ["//transpiler/javatests/com/google/j2cl/integration/java/depsshallow:__subpackages__"],
-)
-
-java_library(
+integration_library(
     name = "foo",
     srcs = ["Foo.java"],
     visibility = ["//transpiler/javatests/com/google/j2cl/integration/java/depsshallow:__subpackages__"],

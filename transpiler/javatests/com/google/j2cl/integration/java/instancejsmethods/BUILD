@@ -7,30 +7,30 @@ load(
 package(licenses = ["notice"])
 
 j2cl_library(
-    name = "SuperParent",
+    name = "SuperParent-j2cl",
     srcs = ["SuperParent.java"],
 )
 
 j2cl_library(
-    name = "MyInterface",
+    name = "MyInterface-j2cl",
     srcs = ["MyInterface.java"],
 )
 
 j2cl_library(
-    name = "Parent",
+    name = "Parent-j2cl",
     srcs = ["Parent.java"],
     deps = [
-        ":SuperParent",
+        ":SuperParent-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
 
 j2cl_library(
-    name = "Child",
+    name = "Child-j2cl",
     srcs = ["Child.java"],
     deps = [
-        ":MyInterface",
-        ":Parent",
+        ":MyInterface-j2cl",
+        ":Parent-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

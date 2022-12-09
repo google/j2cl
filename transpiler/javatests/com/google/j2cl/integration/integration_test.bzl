@@ -19,7 +19,7 @@ integration_test(
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_test")
 load("//build_defs:rules.bzl", "J2CL_TEST_DEFS", "j2cl_library")
-load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
+load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package", "to_parallel_target")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -34,9 +34,7 @@ def integration_test(
         main_class = None,
         closure_defines = dict(),
         suppress = [],
-        j2cl_library_tags = [],
         tags = [],
-        plugins = [],
         **kwargs):
     """Macro that turns Java files into integration test targets.
 
@@ -49,12 +47,6 @@ def integration_test(
 
     if not main_class:
         main_class = java_package + ".Main"
-
-    deps = deps + [
-        "//jre/java:javaemul_internal_annotations-j2cl",
-        "//third_party:gwt-jsinterop-annotations-j2cl",
-        "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2cl",
-    ]
 
     define_flags = ["--define=%s=%s" % (k, v) for (k, v) in closure_defines.items()]
 
@@ -75,21 +67,18 @@ def integration_test(
         srcs = ["TestRunner.java"],
         generate_build_test = False,
         deps = [
-            ":%s" % name,
+            ":%s-j2cl" % name,
             "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2cl",
         ],
         javacopts = JAVAC_FLAGS,
-        tags = tags + j2cl_library_tags,
+        tags = tags,
     )
 
-    j2cl_library(
+    integration_library(
         name = name,
         srcs = srcs,
-        generate_build_test = False,
         deps = deps,
-        javacopts = JAVAC_FLAGS,
-        plugins = plugins,
-        tags = tags + j2cl_library_tags,
+        tags = tags,
         js_suppress = suppress,
     )
 
@@ -115,7 +104,7 @@ def integration_test(
         name = "compiled_test",
         srcs = ["TestHarness_test.js"],
         deps = [
-            ":" + name,
+            ":%s-j2cl" % name,
             ":%s-TestRunner" % name,
             "@com_google_javascript_closure_library//closure/goog/testing:testsuite",
         ],
@@ -127,6 +116,29 @@ def integration_test(
         tags = tags,
         entry_points = ["gen.test.Harness"],
     )
+
+def integration_library(name, srcs = [], deps = [], exports = [], **kwargs):
+    default_deps = [
+        "//jre/java:javaemul_internal_annotations",
+        "//third_party:gwt-jsinterop-annotations",
+        "//transpiler/javatests/com/google/j2cl/integration/testing:testing",
+    ]
+
+    if srcs:
+        deps = default_deps + deps
+
+    # For open-source we only generate J2CL targets for now.
+    j2cl_library(
+        name = _to_j2cl_name(name),
+        srcs = srcs,
+        deps = [to_parallel_target(d, _to_j2cl_name) for d in deps],
+        exports = [to_parallel_target(e, _to_j2cl_name) for e in exports],
+        generate_build_test = False,
+        **kwargs
+    )
+
+def _to_j2cl_name(name):
+    return name + "-j2cl"
 
 def _genfile(name, str, tags):
     native.genrule(

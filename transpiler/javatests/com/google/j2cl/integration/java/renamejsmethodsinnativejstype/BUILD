@@ -7,14 +7,19 @@ load(
 
 package(licenses = ["notice"])
 
+closure_js_library(
+    name = "native_types-j2cl",
+    srcs = ["NativeFoo.js"],
+)
+
 j2cl_library(
-    name = "foo",
+    name = "foo-j2cl",
     # Src's JUST the Foo class.
     srcs = ["Foo.java"],
     generate_j2kt_jvm_library = False,
     generate_j2kt_native_library = False,
     deps = [
-        ":native_types",
+        ":native_types-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
@@ -35,9 +40,4 @@ integration_test(
         ":foo",
         ":native_types",
     ],
-)
-
-closure_js_library(
-    name = "native_types",
-    srcs = ["NativeFoo.js"],
 )

@@ -7,7 +7,7 @@ load(
 package(licenses = ["notice"])
 
 j2cl_library(
-    name = "superinject",
+    name = "superinject-j2cl",
     srcs = glob([
         "super/**/*.java",
         "super/**/*.native.js",
