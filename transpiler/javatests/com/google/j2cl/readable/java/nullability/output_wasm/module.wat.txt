@@ -5113,6 +5113,28 @@
  )
 )
 
+;;; void DefaultNotNullable.testCodeFragments()
+(func $m_testCodeFragments__void@nullability.defaultnotnullable.DefaultNotNullable
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:397:14
+ (local $b i32)
+ (local $c (ref null $java.lang.Object))
+ (local $s (ref null $javaemul.internal.WasmArray.OfObject))
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:397:34
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable )
+  ;; boolean b = true;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:399:4
+  (local.set $b (i32.const 1))
+  ;; Consumer<String> c = (b) ? (((Consumer<String>) null)) : (null);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:400:4
+  (local.set $c (if (result (ref null $java.lang.Object)) (local.get $b) (then (ref.null $java.lang.Object)) (else (ref.null $java.lang.Object))))
+  ;; String[] s = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.StringPool.$getString_|1|(),javaemul.internal.StringPool.$getString_|2|()]);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:403:4
+  (local.set $s (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $function.no.side.effects.$getString_|1|__java_lang_String (ref.func $$getString_|1|__java_lang_String@javaemul.internal.StringPool) )(call $function.no.side.effects.$getString_|2|__java_lang_String (ref.func $$getString_|2|__java_lang_String@javaemul.internal.StringPool) ))))
+ )
+)
+
 ;;; void DefaultNotNullable.$init()
 (func $$init__void_$p_nullability_defaultnotnullable_DefaultNotNullable@nullability.defaultnotnullable.DefaultNotNullable
  (param $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))

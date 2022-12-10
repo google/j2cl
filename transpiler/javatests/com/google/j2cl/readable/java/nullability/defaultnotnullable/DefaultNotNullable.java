@@ -393,4 +393,13 @@ public class DefaultNotNullable {
 
     boolean b = null instanceof Consumer<?>;
   }
+
+  static void testCodeFragments() {
+    // Conditional
+    boolean b = true;
+    @Nullable Consumer<String> c = b ? (Consumer<String>) null : null;
+
+    // Array literal
+    String[] s = new String[] {"1", "2"};
+  }
 }

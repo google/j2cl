@@ -415,7 +415,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
-          (ArrayTypeDescriptor) environment.createTypeDescriptor(expression.resolveTypeBinding()),
+          (ArrayTypeDescriptor)
+              environment.createTypeDescriptor(
+                  expression.resolveTypeBinding(),
+                  getCurrentType().getDeclaration().isNullMarked()),
           convertExpressions(JdtEnvironment.asTypedList(expression.expressions())));
     }
 
@@ -594,12 +597,22 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private ConditionalExpression convert(
         org.eclipse.jdt.core.dom.ConditionalExpression conditionalExpression) {
+      TypeDescriptor conditionalTypeDescriptor =
+          environment.createTypeDescriptor(
+              conditionalExpression.resolveTypeBinding(),
+              getCurrentType().getDeclaration().isNullMarked());
+      Expression condition = convert(conditionalExpression.getExpression());
+      Expression trueExpression = convert(conditionalExpression.getThenExpression());
+      Expression falseExpression = convert(conditionalExpression.getElseExpression());
       return ConditionalExpression.newBuilder()
           .setTypeDescriptor(
-              environment.createTypeDescriptor(conditionalExpression.resolveTypeBinding()))
-          .setConditionExpression(convert(conditionalExpression.getExpression()))
-          .setTrueExpression(convert(conditionalExpression.getThenExpression()))
-          .setFalseExpression(convert(conditionalExpression.getElseExpression()))
+              trueExpression.getTypeDescriptor().isNullable()
+                      || falseExpression.getTypeDescriptor().isNullable()
+                  ? conditionalTypeDescriptor.toNullable()
+                  : conditionalTypeDescriptor)
+          .setConditionExpression(condition)
+          .setTrueExpression(trueExpression)
+          .setFalseExpression(falseExpression)
           .build();
     }
 

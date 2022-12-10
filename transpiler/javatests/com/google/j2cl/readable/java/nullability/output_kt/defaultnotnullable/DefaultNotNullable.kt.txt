@@ -37,11 +37,11 @@ open class DefaultNotNullable {
 
  @JvmField var f7_private_2: MutableList<String?>? = null
 
- @JvmField var f8_private_2: Array<String> = arrayOf<String?>() as Array<String>
+ @JvmField var f8_private_2: Array<String> = arrayOf<String>()
 
  @JvmField var f9_private_2: Array<String?> = arrayOf<String?>()
 
- @JvmField var f10_private_2: Array<String>? = arrayOf<String?>() as Array<String>?
+ @JvmField var f10_private_2: Array<String>? = arrayOf<String>()
 
  @JvmField var f11_private_2: Unit? = null
 
@@ -281,6 +281,13 @@ open class DefaultNotNullable {
    val nullableStringConsumer: DefaultNotNullable.Consumer<String?>? = null as DefaultNotNullable.Consumer<String?>?
    val nonNullStringConsumer: DefaultNotNullable.Consumer<String>? = null as DefaultNotNullable.Consumer<String>?
    val b: Boolean = null is DefaultNotNullable.Consumer<*>
+  }
+
+  @JvmStatic
+  fun testCodeFragments_pp_nullability_defaultnotnullable() {
+   val b: Boolean = true
+   val c: DefaultNotNullable.Consumer<String>? = if (b) null as DefaultNotNullable.Consumer<String>? else null
+   val s: Array<String>? = arrayOf<String>("1", "2")
   }
  }
 
