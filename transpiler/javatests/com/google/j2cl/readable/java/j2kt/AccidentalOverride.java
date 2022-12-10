@@ -16,12 +16,14 @@
 package j2kt;
 
 public class AccidentalOverride {
-  class SuperClass {
+  abstract class SuperClass {
     public void accidentalOverride() {}
   }
 
   interface Interface {
     default void accidentalOverride() {}
+
+    default void abstractAccidentalOverride() {}
   }
 
   class TestImplicitOverride extends SuperClass implements Interface {
@@ -29,6 +31,21 @@ public class AccidentalOverride {
   }
 
   class TestExplicitOverride extends SuperClass implements Interface {
+    @Override
+    public void accidentalOverride() {
+      super.accidentalOverride();
+    }
+  }
+
+  abstract class SubClass extends SuperClass {
+    public abstract void abstractAccidentalOverride();
+  }
+
+  abstract class TestImplicitOverrideInAbstractClass extends SubClass implements Interface {
+    // Kotlin needs explicit abstract override to resolve conflicting method.
+  }
+
+  abstract class TestExplicitOverrideInAbstractClass extends SubClass implements Interface {
     @Override
     public void accidentalOverride() {
       super.accidentalOverride();

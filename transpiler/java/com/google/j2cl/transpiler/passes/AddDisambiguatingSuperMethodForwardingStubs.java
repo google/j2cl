@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
@@ -36,7 +35,7 @@ public class AddDisambiguatingSuperMethodForwardingStubs extends NormalizationPa
 
   @Override
   public void applyTo(Type type) {
-    if (!type.isClass() || type.getDeclaration().isAbstract() || type.isNative()) {
+    if (!type.isClass() || type.isNative()) {
       return;
     }
 
@@ -99,30 +98,36 @@ public class AddDisambiguatingSuperMethodForwardingStubs extends NormalizationPa
   /** Returns disambiguating stub method that calls a method in the super class using super. */
   private static Method createDefaultDisambiguatingStub(Type type, MethodDescriptor targetMethod) {
 
-    checkArgument(!targetMethod.isAbstract());
     List<Variable> parameters =
         AstUtils.createParameterVariables(targetMethod.getParameterTypeDescriptors());
 
     ImmutableList<Expression> arguments =
         parameters.stream().map(Variable::createReference).collect(toImmutableList());
 
-    return Method.newBuilder()
-        .setMethodDescriptor(
-            MethodDescriptor.Builder.from(targetMethod)
-                .setDeclarationDescriptor(null)
-                .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-                .setNative(false)
-                .build())
-        .setParameters(parameters)
-        .addStatements(
-            AstUtils.createForwardingStatement(
-                type.getSourcePosition(),
-                new SuperReference(type.getTypeDescriptor()),
-                targetMethod,
-                false,
-                arguments,
-                targetMethod.getReturnTypeDescriptor()))
-        .setSourcePosition(type.getSourcePosition())
-        .build();
+    Method.Builder builder =
+        Method.newBuilder()
+            .setMethodDescriptor(
+                MethodDescriptor.Builder.from(targetMethod)
+                    .setDeclarationDescriptor(null)
+                    .setEnclosingTypeDescriptor(type.getTypeDescriptor())
+                    .setNative(false)
+                    .build())
+            .setParameters(parameters)
+            .setSourcePosition(type.getSourcePosition());
+
+    // Even if the superclass method is abstract, that is the one that Java chooses, so in that
+    // case create the an abstract stub.
+    if (!targetMethod.isAbstract()) {
+      builder.addStatements(
+          AstUtils.createForwardingStatement(
+              type.getSourcePosition(),
+              new SuperReference(type.getTypeDescriptor()),
+              targetMethod,
+              false,
+              arguments,
+              targetMethod.getReturnTypeDescriptor()));
+    }
+
+    return builder.build();
   }
 }
