@@ -70,6 +70,7 @@ def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimize = F
     out_jar = ":lib" + name + "_lib.jar"
 
     test_defines = dict({
+        "J2WASM_DEBUG": "TRUE",
         "jre.checkedMode": "ENABLED",
         "jre.logging.logLevel": "ALL",
         "jre.logging.simpleConsoleHandler": "ENABLED",

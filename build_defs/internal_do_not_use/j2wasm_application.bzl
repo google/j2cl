@@ -181,6 +181,7 @@ _j2wasm_application = rule(
 
 def j2wasm_application(name, defines = dict(), **kwargs):
     default_defines = {
+        "J2WASM_DEBUG": "TRUE",
         "jre.checkedMode": "ENABLED",
         "jre.checks.checkLevel": "MINIMAL",
         "jre.checks.bounds": "AUTO",
@@ -197,6 +198,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     optimized_defines = dict(default_defines)
     optimized_defines.update({
+        "J2WASM_DEBUG": "FALSE",
         "jre.checkedMode": "DISABLED",
         "jre.logging.logLevel": "SEVERE",
         "jre.logging.simpleConsoleHandler": "DISABLED",
