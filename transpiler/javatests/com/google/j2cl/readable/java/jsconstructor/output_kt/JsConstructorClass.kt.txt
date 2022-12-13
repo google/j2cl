@@ -20,7 +20,7 @@ open class JsConstructorClass {
   @JvmField var fA: Int = 1
 
   constructor(
-   @ObjCName("withInt", exact = false) x: Int
+   @ObjCName("Int", exact = false) x: Int
   ) {
    this.fA = x
   }
@@ -33,7 +33,7 @@ open class JsConstructorClass {
   @JvmField var fB: Int = 2
 
   constructor(
-   @ObjCName("withInt", exact = false) x: Int
+   @ObjCName("Int", exact = false) x: Int
   ): super(x + 1) {
    this.fB = 3
   }
@@ -43,7 +43,7 @@ open class JsConstructorClass {
   }
 
   constructor(
-   @ObjCName("withInt", exact = false) x: Int,
+   @ObjCName("Int", exact = false) x: Int,
    @ObjCName("withInt", exact = false) y: Int
   ): this(x + y) {
    this.fB = x * y
@@ -55,13 +55,13 @@ open class JsConstructorClass {
   @JvmField var fC: Int = 1
 
   constructor(
-   @ObjCName("withInt", exact = false) x: Int
+   @ObjCName("Int", exact = false) x: Int
   ): super(x * 2) {
    this.fC = 6
   }
 
   constructor(
-   @ObjCName("withInt", exact = false) x: Int,
+   @ObjCName("Int", exact = false) x: Int,
    @ObjCName("withInt", exact = false) y: Int
   ): this(x + y) {
    this.fC = 7
@@ -77,7 +77,7 @@ open class JsConstructorClass {
   }
 
   constructor(
-   @ObjCName("withInt", exact = false) x: Int
+   @ObjCName("Int", exact = false) x: Int
   ): this() {
    this.fD = x
   }
@@ -97,7 +97,7 @@ open class JsConstructorClass {
   @JvmField var fF: Int = 13
 
   constructor(
-   @ObjCName("withInt", exact = false) x: Int
+   @ObjCName("Int", exact = false) x: Int
   ): super(x + 2) {
    this.fF = x + 3
   }
@@ -114,19 +114,19 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_Varargs", exact = true)
  open class Varargs: JsConstructorClass.A {
   constructor(
-   vararg @ObjCName("withIntArray", exact = false) args: Int
+   vararg @ObjCName("IntArray", exact = false) args: Int
   ): super(args!![1])
  }
 
  @ObjCName("JsconstructorJsConstructorClass_SubVarargs", exact = true)
  open class SubVarargs: JsConstructorClass.Varargs {
   constructor(
-   @ObjCName("withId", exact = false) i: Any?,
+   @ObjCName("Id", exact = false) i: Any?,
    vararg @ObjCName("withIntArray", exact = false) args: Int
   ): super(*(args)!!)
 
   constructor(
-   @ObjCName("withInt", exact = false) j: Int
+   @ObjCName("Int", exact = false) j: Int
   ): this(Any(), j)
 
   companion object {
@@ -141,21 +141,21 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_InstanceVarargs", exact = true)
  open inner class InstanceVarargs: JsConstructorClass.A {
   constructor(
-   vararg @ObjCName("withIntArray", exact = false) args: Int
+   vararg @ObjCName("IntArray", exact = false) args: Int
   ): super(args!![1])
  }
 
  @ObjCName("JsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {
   constructor(
-   @ObjCName("withId", exact = false) b: Any?
+   @ObjCName("Id", exact = false) b: Any?
   )
  }
 
  @ObjCName("JsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", exact = true)
  open class JsConstructorSubtypeOfRegularType: JsConstructorClass.RegularType {
   constructor(
-   @ObjCName("withId", exact = false) `object`: Any?
+   @ObjCName("Id", exact = false) `object`: Any?
   ): super(`object`)
 
   constructor(): this(Any())

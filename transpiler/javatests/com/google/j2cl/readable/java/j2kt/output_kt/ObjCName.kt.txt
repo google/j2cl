@@ -4,12 +4,26 @@
 package j2kt
 
 import javaemul.lang.*
+import kotlin.Int
 import kotlin.OptIn
+import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 @ObjCName("NewObjCName", exact = true)
 open class ObjCName {
+ constructor()
+
+ @ObjCName("ObjCNameConstructor", exact = false)
+ constructor(
+  @ObjCName("Int", exact = false) i: Int
+ )
+
+ constructor(
+  @ObjCName("Int", exact = false) i: Int,
+  @ObjCName("withNSString", exact = false) s: String?
+ )
+
  @ObjCName("newFoo", exact = false)
  open fun foo() {}
 

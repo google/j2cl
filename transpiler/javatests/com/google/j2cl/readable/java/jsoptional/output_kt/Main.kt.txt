@@ -38,7 +38,7 @@ open class Main {
  }
 
  constructor(
-  @ObjCName("withNSString", exact = false) a: String?
+  @ObjCName("NSString", exact = false) a: String?
  )
 
  open fun testFunction(
@@ -76,7 +76,7 @@ open class Main {
 
  open inner class SpecializedSubtype: Main.I<String?> {
   constructor(
-   @ObjCName("withId", exact = false) a: Any?
+   @ObjCName("Id", exact = false) a: Any?
   )
 
   open override fun m(t: String?, o: Any?) {}

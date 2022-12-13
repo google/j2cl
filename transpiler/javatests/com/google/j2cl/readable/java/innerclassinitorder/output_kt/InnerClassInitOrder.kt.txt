@@ -68,7 +68,7 @@ open class InnerClassInitOrder {
    @JvmField var num_pp_innerclassinitorder: Int = 0
 
    constructor(
-    @ObjCName("withInt", exact = false) i: Int
+    @ObjCName("Int", exact = false) i: Int
    ) {
     this.num_pp_innerclassinitorder = i
    }
@@ -179,7 +179,7 @@ open class InnerClassInitOrder {
 
  open inner class OuterRefFromThisCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
   constructor(
-   @ObjCName("withId", exact = false) `object`: Any?
+   @ObjCName("Id", exact = false) `object`: Any?
   ): super(`object`)
 
   constructor(): this(object : Any() {
@@ -245,7 +245,7 @@ open class InnerClassInitOrder {
    }
 
    constructor(
-    @ObjCName("withInt", exact = false) value: Int
+    @ObjCName("Int", exact = false) value: Int
    ) {
     this.value = value
    }
@@ -271,7 +271,7 @@ open class InnerClassInitOrder {
    }
 
    constructor(
-    @ObjCName("withInt", exact = false) value: Int
+    @ObjCName("Int", exact = false) value: Int
    ) {
     this.value = value
    }
@@ -289,7 +289,7 @@ open class InnerClassInitOrder {
   @JvmField val value: Int
 
   constructor(
-   @ObjCName("withInt", exact = false) i: Int
+   @ObjCName("Int", exact = false) i: Int
   ) {
    this.value = i
   }
@@ -308,7 +308,7 @@ open class InnerClassInitOrder {
   @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer_OuterIsSuper", exact = true)
   open inner class OuterIsSuper: InnerClassInitOrder.Outer {
    constructor(
-    @ObjCName("withInt", exact = false) i: Int
+    @ObjCName("Int", exact = false) i: Int
    ): super(i)
 
    open override fun checkDispatch(): Int {

@@ -20,6 +20,13 @@ import com.google.j2objc.annotations.ObjectiveCName;
 @ObjectiveCName("NewObjCName")
 public class ObjCName {
 
+  public ObjCName() {}
+
+  @ObjectiveCName("ObjCNameConstructor")
+  public ObjCName(int i) {}
+
+  public ObjCName(int i, String s) {}
+
   @ObjectiveCName("InnerClassNewName")
   public class InnerClassOldName {}
 

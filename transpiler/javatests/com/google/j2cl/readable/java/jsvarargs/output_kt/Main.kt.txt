@@ -23,7 +23,7 @@ open class Main {
  @JvmField var field_pp_jsvarargs: Int = 0
 
  constructor(
-  @ObjCName("withInt", exact = false) f: Int
+  @ObjCName("Int", exact = false) f: Int
  ) {
   this.field_pp_jsvarargs = f
  }
@@ -172,7 +172,7 @@ open class Main {
 
  open class NativeObject {
   constructor(
-   vararg @ObjCName("withNSObjectArray", exact = false) pars: Any?
+   vararg @ObjCName("NSObjectArray", exact = false) pars: Any?
   ) {
    val pars_1: Array<Any?>? = pars as Array<Any?>?
   }
@@ -180,7 +180,7 @@ open class Main {
 
  open class SubVarargsConstructorClass: Main.NativeObject {
   constructor(
-   @ObjCName("withInt", exact = false) i: Int,
+   @ObjCName("Int", exact = false) i: Int,
    vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
   ): super(*(args as Array<Any?>?)!!) {
    val args_1: Array<Any?>? = args as Array<Any?>?

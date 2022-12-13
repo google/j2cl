@@ -39,7 +39,7 @@ open class Bar {}
 
 open class RecursiveType<T: RecursiveType<T>?> {
  constructor(
-  @ObjCName("withTypewildcardsRecursiveType", exact = false) wildcardParameter: RecursiveType<*>?
+  @ObjCName("TypewildcardsRecursiveType", exact = false) wildcardParameter: RecursiveType<*>?
  )
 }
 
@@ -47,7 +47,7 @@ interface DeepRecursiveType<T: GenericType<in T>?> {}
 
 open class RecursiveSubtype: RecursiveType<RecursiveSubtype?> {
  constructor(
-  @ObjCName("withTypewildcardsRecursiveType", exact = false) wildcardParameter: RecursiveType<*>?
+  @ObjCName("TypewildcardsRecursiveType", exact = false) wildcardParameter: RecursiveType<*>?
  ): super(wildcardParameter)
 }
 

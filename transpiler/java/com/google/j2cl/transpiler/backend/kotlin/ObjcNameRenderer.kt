@@ -65,11 +65,16 @@ internal fun Renderer.renderObjCNameAnnotation(methodDescriptor: MethodDescripto
   }
 }
 
-internal fun Renderer.renderObjCNameAnnotation(parameterDescriptor: ParameterDescriptor) {
+internal fun Renderer.renderObjCNameAnnotation(
+  parameterDescriptor: ParameterDescriptor,
+  omitWithPrefix: Boolean = false
+) {
   render("@")
   renderQualifiedName("kotlin.native.ObjCName")
   renderInParentheses {
-    renderString("with${parameterDescriptor.typeDescriptor.objCName(useId = true).titleCase}")
+    var objCName = parameterDescriptor.typeDescriptor.objCName(useId = true).titleCase
+    if (omitWithPrefix) renderString("${objCName}") else renderString("with${objCName}")
+
     render(", exact = false")
   }
   render(" ")

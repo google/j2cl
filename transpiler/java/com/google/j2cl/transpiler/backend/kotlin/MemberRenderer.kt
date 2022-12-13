@@ -197,7 +197,12 @@ private fun Renderer.renderMethodParameters(method: Method) {
     renderIndentedIf(renderWithNewLines) {
       renderCommaSeparated(0 until parameters.size) { index ->
         if (renderWithNewLines) renderNewLine()
-        renderParameter(parameterDescriptors[index], parameters[index], includeObjCNameAnnotation)
+        renderParameter(
+          parameterDescriptors[index],
+          parameters[index],
+          method.isConstructor && index == 0,
+          includeObjCNameAnnotation = includeObjCNameAnnotation
+        )
       }
     }
     if (renderWithNewLines) renderNewLine()
@@ -207,6 +212,7 @@ private fun Renderer.renderMethodParameters(method: Method) {
 private fun Renderer.renderParameter(
   parameterDescriptor: ParameterDescriptor,
   name: HasName,
+  omitWithPrefix: Boolean,
   includeObjCNameAnnotation: Boolean = false
 ) {
   val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
@@ -214,7 +220,7 @@ private fun Renderer.renderParameter(
     if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
     else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (parameterDescriptor.isVarargs) render("vararg ")
-  if (includeObjCNameAnnotation) renderObjCNameAnnotation(parameterDescriptor)
+  if (includeObjCNameAnnotation) renderObjCNameAnnotation(parameterDescriptor, omitWithPrefix)
   renderName(name)
   render(": ")
   renderTypeDescriptor(renderedTypeDescriptor)
