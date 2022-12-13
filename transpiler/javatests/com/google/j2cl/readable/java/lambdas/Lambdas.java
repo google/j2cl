@@ -15,6 +15,7 @@
  */
 package lambdas;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -265,6 +266,7 @@ public class Lambdas {
     T get();
   }
 
+  @Wasm("nop") // Converting lambdas to native types not supported in WASM.
   public static void testJsInteropLambdas() {
     Thenable<String> thenable = (f1, f2) -> f1.apply(null);
     AnotherThenable<String> otherThenable = (f1, f2) -> f1.apply(null);
