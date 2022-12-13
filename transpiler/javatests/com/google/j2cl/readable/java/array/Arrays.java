@@ -16,6 +16,7 @@
 package array;
 
 import java.io.Serializable;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -135,7 +136,8 @@ public class Arrays {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
   private static class NativeType {}
 
-  public void testNativeArray() {
+  @Wasm("nop") // TODO(b/261079024) Remove when arrays of native types are supported.
+  private void testNativeArray() {
     // Creation
     NativeType[] nativeObjects = new NativeType[100];
     nativeObjects = new NativeType[0];

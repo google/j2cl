@@ -23,7 +23,6 @@
   (ref.func $m_testLongArrays__void_$pp_array@array.Arrays)
   (ref.func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays)
   (ref.func $m_testStringArrays__void_$pp_array@array.Arrays)
-  (ref.func $m_testNativeArray__void@array.Arrays)
   (ref.func $m_testErasureCastsOnArrayAccess__void@array.Arrays)
   (ref.func $m_testCovariance__void@array.Arrays)
   (ref.func $m_testArraysSupertypeClosureTypes__void@array.Arrays)
@@ -124,7 +123,6 @@
  (field $m_testLongArrays__void_$pp_array (ref $function.m_testLongArrays__void_$pp_array))
  (field $m_testDevirtualizedTypeArrays__void_$pp_array (ref $function.m_testDevirtualizedTypeArrays__void_$pp_array))
  (field $m_testStringArrays__void_$pp_array (ref $function.m_testStringArrays__void_$pp_array))
- (field $m_testNativeArray__void (ref $function.m_testNativeArray__void))
  (field $m_testErasureCastsOnArrayAccess__void (ref $function.m_testErasureCastsOnArrayAccess__void))
  (field $m_testCovariance__void (ref $function.m_testCovariance__void))
  (field $m_testArraysSupertypeClosureTypes__void (ref $function.m_testArraysSupertypeClosureTypes__void))
@@ -145,17 +143,17 @@
 ;;; Arrays Arrays.$create()
 (func $$create__@array.Arrays
  (result (ref null $array.Arrays))
- ;;@ array/Arrays.java:22:13
+ ;;@ array/Arrays.java:23:13
  (local $$instance (ref null $array.Arrays))
  (block
   ;; Arrays $instance = new Arrays.<init>(0);
-  ;;@ array/Arrays.java:22:13
+  ;;@ array/Arrays.java:23:13
   (local.set $$instance (struct.new $array.Arrays (ref.as_non_null (global.get $array.Arrays.vtable)) (ref.as_non_null (global.get $array.Arrays.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ array/Arrays.java:22:13
+  ;;@ array/Arrays.java:23:13
   (call $$ctor__void_$p_array_Arrays@array.Arrays (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ array/Arrays.java:22:13
+  ;;@ array/Arrays.java:23:13
   (return (local.get $$instance))
  )
 )
@@ -163,13 +161,13 @@
 ;;; void Arrays.$ctor()
 (func $$ctor__void_$p_array_Arrays@array.Arrays
  (param $this (ref null $array.Arrays))
- ;;@ array/Arrays.java:22:13
+ ;;@ array/Arrays.java:23:13
  (block
   ;; array.Arrays.$clinit();
-  ;;@ array/Arrays.java:22:13
+  ;;@ array/Arrays.java:23:13
   (call $$clinit__void@array.Arrays )
   ;; Object.this.$ctor();
-  ;;@ array/Arrays.java:22:13
+  ;;@ array/Arrays.java:23:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -178,7 +176,7 @@
 (func $m_testObjectArray__void@array.Arrays
  (type $function.m_testObjectArray__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:23:14
+ ;;@ array/Arrays.java:24:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objects2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $arrayLiteral2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -187,37 +185,37 @@
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; Object[] objects = javaemul.internal.WasmArray.OfObject.$create(100);
-  ;;@ array/Arrays.java:25:4
+  ;;@ array/Arrays.java:26:4
   (local.set $objects (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 100)))
   ;; (objects = javaemul.internal.WasmArray.OfObject.$create(0));
-  ;;@ array/Arrays.java:26:4
+  ;;@ array/Arrays.java:27:4
   (local.set $objects (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))
   ;; (objects = javaemul.internal.WasmArray.OfObject.$create([null,null]));
-  ;;@ array/Arrays.java:27:4
+  ;;@ array/Arrays.java:28:4
   (local.set $objects (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object))))
   ;; Object[][] objects2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([5,10]),-1);
-  ;;@ array/Arrays.java:28:4
+  ;;@ array/Arrays.java:29:4
   (local.set $objects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 5)(i32.const 10)))(i32.const -1)))
   ;; (objects2d = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfObject.$create([null,null]),null]));
-  ;;@ array/Arrays.java:29:4
+  ;;@ array/Arrays.java:30:4
   (local.set $objects2d (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
   ;; (objects2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([20,-1]),-1));
-  ;;@ array/Arrays.java:30:4
+  ;;@ array/Arrays.java:31:4
   (local.set $objects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const -1)))
   ;; Object[][] arrayLiteral2d = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfObject.$create([null,null]),null]);
-  ;;@ array/Arrays.java:31:4
+  ;;@ array/Arrays.java:32:4
   (local.set $arrayLiteral2d (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
   ;; Object object = ((Object) objects.elements[0]);
-  ;;@ array/Arrays.java:34:4
+  ;;@ array/Arrays.java:35:4
   (local.set $object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0)))
   ;; (object = ((Object) ((Object[]) objects2d.elements[0]).elements[1]));
-  ;;@ array/Arrays.java:35:4
+  ;;@ array/Arrays.java:36:4
   (local.set $object (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))) (i32.const 1)))
   ;; (objects.elements[0] = null);
-  ;;@ array/Arrays.java:38:4
+  ;;@ array/Arrays.java:39:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))
   ;; (((Object[]) objects2d.elements[0]).elements[1] = null);
-  ;;@ array/Arrays.java:39:4
+  ;;@ array/Arrays.java:40:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))) (i32.const 1) (ref.null $java.lang.Object))
  )
 )
@@ -227,7 +225,7 @@
 (func $m_testJavaTypeArray__void@array.Arrays
  (type $function.m_testJavaTypeArray__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:44:14
+ ;;@ array/Arrays.java:45:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objects2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $someObject (ref null $array.Arrays.SomeObject))
@@ -235,34 +233,34 @@
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; SomeObject[] objects = javaemul.internal.WasmArray.OfObject.$create(100);
-  ;;@ array/Arrays.java:46:4
+  ;;@ array/Arrays.java:47:4
   (local.set $objects (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 100)))
   ;; (objects = javaemul.internal.WasmArray.OfObject.$create(0));
-  ;;@ array/Arrays.java:47:4
+  ;;@ array/Arrays.java:48:4
   (local.set $objects (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))
   ;; (objects = javaemul.internal.WasmArray.OfObject.$create([null,null]));
-  ;;@ array/Arrays.java:48:4
+  ;;@ array/Arrays.java:49:4
   (local.set $objects (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object))))
   ;; SomeObject[][] objects2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([5,10]),-1);
-  ;;@ array/Arrays.java:49:4
+  ;;@ array/Arrays.java:50:4
   (local.set $objects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 5)(i32.const 10)))(i32.const -1)))
   ;; (objects2d = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfObject.$create([null,null]),null]));
-  ;;@ array/Arrays.java:50:4
+  ;;@ array/Arrays.java:51:4
   (local.set $objects2d (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
   ;; (objects2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([20,-1]),-1));
-  ;;@ array/Arrays.java:51:4
+  ;;@ array/Arrays.java:52:4
   (local.set $objects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const -1)))
   ;; SomeObject someObject = ((SomeObject) objects.elements[0]);
-  ;;@ array/Arrays.java:54:4
+  ;;@ array/Arrays.java:55:4
   (local.set $someObject (ref.cast_static $array.Arrays.SomeObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0))))
   ;; (someObject = ((SomeObject) ((SomeObject[]) objects2d.elements[0]).elements[1]));
-  ;;@ array/Arrays.java:55:4
+  ;;@ array/Arrays.java:56:4
   (local.set $someObject (ref.cast_static $array.Arrays.SomeObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))) (i32.const 1))))
   ;; (objects.elements[0] = null);
-  ;;@ array/Arrays.java:58:4
+  ;;@ array/Arrays.java:59:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))
   ;; (((SomeObject[]) objects2d.elements[0]).elements[1] = null);
-  ;;@ array/Arrays.java:59:4
+  ;;@ array/Arrays.java:60:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))) (i32.const 1) (ref.null $java.lang.Object))
  )
 )
@@ -272,7 +270,7 @@
 (func $m_testIntArrays__void_$pp_array@array.Arrays
  (type $function.m_testIntArrays__void_$pp_array)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:62:7
+ ;;@ array/Arrays.java:63:7
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
  (local $ints2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $n i32)
@@ -280,34 +278,34 @@
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; int[] ints = javaemul.internal.WasmArray.OfInt.$create(100);
-  ;;@ array/Arrays.java:64:4
+  ;;@ array/Arrays.java:65:4
   (local.set $ints (call $$create__int@javaemul.internal.WasmArray.OfInt (i32.const 100)))
   ;; (ints = javaemul.internal.WasmArray.OfInt.$create(0));
-  ;;@ array/Arrays.java:65:4
+  ;;@ array/Arrays.java:66:4
   (local.set $ints (call $$create__int@javaemul.internal.WasmArray.OfInt (i32.const 0)))
   ;; (ints = javaemul.internal.WasmArray.OfInt.$create([0,1]));
-  ;;@ array/Arrays.java:66:4
+  ;;@ array/Arrays.java:67:4
   (local.set $ints (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 0)(i32.const 1))))
   ;; int[][] ints2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([5,10]),5);
-  ;;@ array/Arrays.java:67:4
+  ;;@ array/Arrays.java:68:4
   (local.set $ints2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 5)(i32.const 10)))(i32.const 5)))
   ;; (ints2d = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfInt.$create([1,2]),null]));
-  ;;@ array/Arrays.java:68:4
+  ;;@ array/Arrays.java:69:4
   (local.set $ints2d (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 1)(i32.const 2)))(ref.null $java.lang.Object))))
   ;; (ints2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([20,-1]),5));
-  ;;@ array/Arrays.java:69:4
+  ;;@ array/Arrays.java:70:4
   (local.set $ints2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const 5)))
   ;; int n = ints.elements[0];
-  ;;@ array/Arrays.java:72:4
+  ;;@ array/Arrays.java:73:4
   (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0)))
   ;; (n = ((int[]) ints2d.elements[0]).elements[1]);
-  ;;@ array/Arrays.java:73:4
+  ;;@ array/Arrays.java:74:4
   (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(ref.cast_static $javaemul.internal.WasmArray.OfInt (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)))) (i32.const 1)))
   ;; (ints.elements[0] = 1);
-  ;;@ array/Arrays.java:76:4
+  ;;@ array/Arrays.java:77:4
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0) (i32.const 1))
   ;; (((int[]) ints2d.elements[0]).elements[1] = 1);
-  ;;@ array/Arrays.java:77:4
+  ;;@ array/Arrays.java:78:4
   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(ref.cast_static $javaemul.internal.WasmArray.OfInt (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)))) (i32.const 1) (i32.const 1))
  )
 )
@@ -317,7 +315,7 @@
 (func $m_testLongArrays__void_$pp_array@array.Arrays
  (type $function.m_testLongArrays__void_$pp_array)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:80:7
+ ;;@ array/Arrays.java:81:7
  (local $longs (ref null $javaemul.internal.WasmArray.OfLong))
  (local $longs2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $n i64)
@@ -325,34 +323,34 @@
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; long[] longs = javaemul.internal.WasmArray.OfLong.$create(100);
-  ;;@ array/Arrays.java:82:4
+  ;;@ array/Arrays.java:83:4
   (local.set $longs (call $$create__int@javaemul.internal.WasmArray.OfLong (i32.const 100)))
   ;; (longs = javaemul.internal.WasmArray.OfLong.$create(0));
-  ;;@ array/Arrays.java:83:4
+  ;;@ array/Arrays.java:84:4
   (local.set $longs (call $$create__int@javaemul.internal.WasmArray.OfLong (i32.const 0)))
   ;; (longs = javaemul.internal.WasmArray.OfLong.$create([0,1]));
-  ;;@ array/Arrays.java:84:4
+  ;;@ array/Arrays.java:85:4
   (local.set $longs (call $$create__arrayOf_long@javaemul.internal.WasmArray.OfLong (array.init_static $long.array (i64.const 0)(i64.const 1))))
   ;; long[][] longs2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([5,10]),6);
-  ;;@ array/Arrays.java:85:4
+  ;;@ array/Arrays.java:86:4
   (local.set $longs2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 5)(i32.const 10)))(i32.const 6)))
   ;; (longs2d = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfLong.$create([1,2]),null]));
-  ;;@ array/Arrays.java:86:4
+  ;;@ array/Arrays.java:87:4
   (local.set $longs2d (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_long@javaemul.internal.WasmArray.OfLong (array.init_static $long.array (i64.const 1)(i64.const 2)))(ref.null $java.lang.Object))))
   ;; (longs2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([20,-1]),6));
-  ;;@ array/Arrays.java:87:4
+  ;;@ array/Arrays.java:88:4
   (local.set $longs2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const 6)))
   ;; long n = longs.elements[0];
-  ;;@ array/Arrays.java:90:4
+  ;;@ array/Arrays.java:91:4
   (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(local.get $longs)) (i32.const 0)))
   ;; (n = ((long[]) longs2d.elements[0]).elements[1]);
-  ;;@ array/Arrays.java:91:4
+  ;;@ array/Arrays.java:92:4
   (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(ref.cast_static $javaemul.internal.WasmArray.OfLong (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)))) (i32.const 1)))
   ;; (longs.elements[0] = 1);
-  ;;@ array/Arrays.java:94:4
+  ;;@ array/Arrays.java:95:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(local.get $longs)) (i32.const 0) (i64.const 1))
   ;; (((long[]) longs2d.elements[0]).elements[1] = 1);
-  ;;@ array/Arrays.java:95:4
+  ;;@ array/Arrays.java:96:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(ref.cast_static $javaemul.internal.WasmArray.OfLong (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)))) (i32.const 1) (i64.const 1))
  )
 )
@@ -362,7 +360,7 @@
 (func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays
  (type $function.m_testDevirtualizedTypeArrays__void_$pp_array)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:99:7
+ ;;@ array/Arrays.java:100:7
  (local $booleans (ref null $javaemul.internal.WasmArray.OfObject))
  (local $booleans2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $b i32)
@@ -372,40 +370,40 @@
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; Boolean[] booleans = javaemul.internal.WasmArray.OfObject.$create(100);
-  ;;@ array/Arrays.java:101:4
+  ;;@ array/Arrays.java:102:4
   (local.set $booleans (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 100)))
   ;; (booleans = javaemul.internal.WasmArray.OfObject.$create(0));
-  ;;@ array/Arrays.java:102:4
+  ;;@ array/Arrays.java:103:4
   (local.set $booleans (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))
   ;; (booleans = javaemul.internal.WasmArray.OfObject.$create([java.lang.Boolean.valueOf(true),java.lang.Boolean.valueOf(false)]));
-  ;;@ array/Arrays.java:103:4
+  ;;@ array/Arrays.java:104:4
   (local.set $booleans (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1))(call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))))
   ;; Boolean[][] booleans2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([5,10]),-1);
-  ;;@ array/Arrays.java:104:4
+  ;;@ array/Arrays.java:105:4
   (local.set $booleans2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 5)(i32.const 10)))(i32.const -1)))
   ;; (booleans2d = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfObject.$create([java.lang.Boolean.valueOf(true),java.lang.Boolean.valueOf(false)]),null]));
-  ;;@ array/Arrays.java:105:4
+  ;;@ array/Arrays.java:106:4
   (local.set $booleans2d (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1))(call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0))))(ref.null $java.lang.Object))))
   ;; (booleans2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([20,-1]),-1));
-  ;;@ array/Arrays.java:106:4
+  ;;@ array/Arrays.java:107:4
   (local.set $booleans2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const -1)))
   ;; boolean b = (Boolean $qualifier = ((Boolean) booleans.elements[0]),$qualifier.booleanValue());
-  ;;@ array/Arrays.java:109:4
+  ;;@ array/Arrays.java:110:4
   (local.set $b (block (result i32)
    (local.set $$qualifier (ref.cast_static $java.lang.Boolean (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans)) (i32.const 0))))
    (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $$qualifier))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
   ))
   ;; (b = (Boolean $qualifier = ((Boolean) ((Boolean[]) booleans2d.elements[0]).elements[1]),$qualifier.booleanValue()));
-  ;;@ array/Arrays.java:110:4
+  ;;@ array/Arrays.java:111:4
   (local.set $b (block (result i32)
    (local.set $$qualifier_1 (ref.cast_static $java.lang.Boolean (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans2d)) (i32.const 0)))) (i32.const 1))))
    (call_ref $function.m_booleanValue__boolean (ref.as_non_null (local.get $$qualifier_1))(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_1))))
   ))
   ;; (booleans.elements[0] = java.lang.Boolean.valueOf(true));
-  ;;@ array/Arrays.java:113:4
+  ;;@ array/Arrays.java:114:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans)) (i32.const 0) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
   ;; (((Boolean[]) booleans2d.elements[0]).elements[1] = java.lang.Boolean.valueOf(false));
-  ;;@ array/Arrays.java:114:4
+  ;;@ array/Arrays.java:115:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans2d)) (i32.const 0)))) (i32.const 1) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
  )
 )
@@ -415,7 +413,7 @@
 (func $m_testStringArrays__void_$pp_array@array.Arrays
  (type $function.m_testStringArrays__void_$pp_array)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:117:7
+ ;;@ array/Arrays.java:118:7
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
  (local $strings2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $b (ref null $java.lang.String))
@@ -423,99 +421,54 @@
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; String[] strings = javaemul.internal.WasmArray.OfObject.$create(100);
-  ;;@ array/Arrays.java:119:4
+  ;;@ array/Arrays.java:120:4
   (local.set $strings (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 100)))
   ;; (strings = javaemul.internal.WasmArray.OfObject.$create(0));
-  ;;@ array/Arrays.java:120:4
+  ;;@ array/Arrays.java:121:4
   (local.set $strings (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))
   ;; (strings = javaemul.internal.WasmArray.OfObject.$create([null,null]));
-  ;;@ array/Arrays.java:121:4
+  ;;@ array/Arrays.java:122:4
   (local.set $strings (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object))))
   ;; String[][] strings2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([5,10]),-1);
-  ;;@ array/Arrays.java:122:4
+  ;;@ array/Arrays.java:123:4
   (local.set $strings2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 5)(i32.const 10)))(i32.const -1)))
   ;; (strings2d = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfObject.$create([null,null]),null]));
-  ;;@ array/Arrays.java:123:4
+  ;;@ array/Arrays.java:124:4
   (local.set $strings2d (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
   ;; (strings2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([20,-1]),-1));
-  ;;@ array/Arrays.java:124:4
+  ;;@ array/Arrays.java:125:4
   (local.set $strings2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const -1)))
   ;; String b = ((String) strings.elements[0]);
-  ;;@ array/Arrays.java:127:4
+  ;;@ array/Arrays.java:128:4
   (local.set $b (ref.cast_static $java.lang.String (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0))))
   ;; (b = ((String) ((String[]) strings2d.elements[0]).elements[1]));
-  ;;@ array/Arrays.java:128:4
+  ;;@ array/Arrays.java:129:4
   (local.set $b (ref.cast_static $java.lang.String (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings2d)) (i32.const 0)))) (i32.const 1))))
   ;; (strings.elements[0] = null);
-  ;;@ array/Arrays.java:131:4
+  ;;@ array/Arrays.java:132:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0) (ref.null $java.lang.Object))
   ;; (((String[]) strings2d.elements[0]).elements[1] = null);
-  ;;@ array/Arrays.java:132:4
+  ;;@ array/Arrays.java:133:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings2d)) (i32.const 0)))) (i32.const 1) (ref.null $java.lang.Object))
  )
 )
 (elem declare func $m_testStringArrays__void_$pp_array@array.Arrays)
 
-;;; void Arrays.testNativeArray()
-(func $m_testNativeArray__void@array.Arrays
- (type $function.m_testNativeArray__void)
- (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:138:14
- (local $nativeObjects (ref null $javaemul.internal.WasmArray.OfObject))
- (local $nativeObjects2d (ref null $javaemul.internal.WasmArray.OfObject))
- (local $nativeObject (ref null $array.Arrays.NativeType))
- (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
- (block
-  ;; NativeType[] nativeObjects = javaemul.internal.WasmArray.OfObject.$create(100);
-  ;;@ array/Arrays.java:140:4
-  (local.set $nativeObjects (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 100)))
-  ;; (nativeObjects = javaemul.internal.WasmArray.OfObject.$create(0));
-  ;;@ array/Arrays.java:141:4
-  (local.set $nativeObjects (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0)))
-  ;; (nativeObjects = javaemul.internal.WasmArray.OfObject.$create([null,null]));
-  ;;@ array/Arrays.java:142:4
-  (local.set $nativeObjects (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object))))
-  ;; NativeType[][] nativeObjects2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([5,10]),-1);
-  ;;@ array/Arrays.java:143:4
-  (local.set $nativeObjects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 5)(i32.const 10)))(i32.const -1)))
-  ;; (nativeObjects2d = javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.WasmArray.OfObject.$create([null,null]),null]));
-  ;;@ array/Arrays.java:144:4
-  (local.set $nativeObjects2d (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $$create__arrayOf_java_lang_Object@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (ref.null $java.lang.Object)(ref.null $java.lang.Object)))(ref.null $java.lang.Object))))
-  ;; (nativeObjects2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([20,-1]),-1));
-  ;;@ array/Arrays.java:145:4
-  (local.set $nativeObjects2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const -1)))
-  ;; NativeType nativeObject = ((NativeType) nativeObjects.elements[0]);
-  ;;@ array/Arrays.java:148:4
-  (local.set $nativeObject (ref.cast_static $array.Arrays.NativeType (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects)) (i32.const 0))))
-  ;; (nativeObject = ((NativeType) ((NativeType[]) nativeObjects2d.elements[0]).elements[1]));
-  ;;@ array/Arrays.java:149:4
-  (local.set $nativeObject (ref.cast_static $array.Arrays.NativeType (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects2d)) (i32.const 0)))) (i32.const 1))))
-  ;; (nativeObjects.elements[0] = null);
-  ;;@ array/Arrays.java:152:4
-  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects)) (i32.const 0) (ref.null $java.lang.Object))
-  ;; (((NativeType[]) nativeObjects2d.elements[0]).elements[1] = null);
-  ;;@ array/Arrays.java:153:4
-  (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects2d)) (i32.const 0)))) (i32.const 1) (ref.null $java.lang.Object))
- )
-)
-(elem declare func $m_testNativeArray__void@array.Arrays)
-
 ;;; void Arrays.testErasureCastsOnArrayAccess()
 (func $m_testErasureCastsOnArrayAccess__void@array.Arrays
  (type $function.m_testErasureCastsOnArrayAccess__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:156:14
+ ;;@ array/Arrays.java:158:14
  (local $container (ref null $array.Arrays.ArrayContainer))
  (local $s (ref null $java.lang.String))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; ArrayContainer<String> container = null;
-  ;;@ array/Arrays.java:157:4
+  ;;@ array/Arrays.java:159:4
   (local.set $container (ref.null $array.Arrays.ArrayContainer))
   ;; String s = ((String) ((String[]) container.data).elements[0]);
-  ;;@ array/Arrays.java:158:4
+  ;;@ array/Arrays.java:160:4
   (local.set $s (ref.cast_static $java.lang.String (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast_static $javaemul.internal.WasmArray.OfObject (struct.get $array.Arrays.ArrayContainer $f_data__array_Arrays_ArrayContainer(local.get $container)))) (i32.const 0))))
  )
 )
@@ -525,20 +478,20 @@
 (func $m_testCovariance__void@array.Arrays
  (type $function.m_testCovariance__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:161:14
+ ;;@ array/Arrays.java:163:14
  (local $objectArray (ref null $javaemul.internal.WasmArray.OfObject))
  (local $stringArray (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; Object[] objectArray = null;
-  ;;@ array/Arrays.java:162:4
+  ;;@ array/Arrays.java:164:4
   (local.set $objectArray (ref.null $javaemul.internal.WasmArray.OfObject))
   ;; String[] stringArray = null;
-  ;;@ array/Arrays.java:163:4
+  ;;@ array/Arrays.java:165:4
   (local.set $stringArray (ref.null $javaemul.internal.WasmArray.OfObject))
   ;; (objectArray = stringArray);
-  ;;@ array/Arrays.java:164:4
+  ;;@ array/Arrays.java:166:4
   (local.set $objectArray (local.get $stringArray))
  )
 )
@@ -548,15 +501,15 @@
 (func $m_testArraysSupertypeClosureTypes__void@array.Arrays
  (type $function.m_testArraysSupertypeClosureTypes__void)
  (param $this.untyped (ref $java.lang.Object))
- ;;@ array/Arrays.java:171:14
+ ;;@ array/Arrays.java:173:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; Arrays.this.consumesCloneable(javaemul.internal.WasmArray.OfObject.$create(10));
-  ;;@ array/Arrays.java:172:4
+  ;;@ array/Arrays.java:174:4
   (call_ref $function.m_consumesCloneable__java_lang_Cloneable__void (ref.as_non_null (local.get $this))(call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
   ;; Arrays.this.consumesSerializable(javaemul.internal.WasmArray.OfObject.$create(10));
-  ;;@ array/Arrays.java:173:4
+  ;;@ array/Arrays.java:175:4
   (call_ref $function.m_consumesSerializable__java_io_Serializable__void (ref.as_non_null (local.get $this))(call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
  )
 )
@@ -567,7 +520,7 @@
  (type $function.m_consumesCloneable__java_lang_Cloneable__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
- ;;@ array/Arrays.java:176:14
+ ;;@ array/Arrays.java:178:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
@@ -580,7 +533,7 @@
  (type $function.m_consumesSerializable__java_io_Serializable__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
- ;;@ array/Arrays.java:178:14
+ ;;@ array/Arrays.java:180:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
@@ -590,22 +543,22 @@
 
 ;;; void Arrays.$clinit()
 (func $$clinit__void@array.Arrays
- ;;@ array/Arrays.java:22:13
+ ;;@ array/Arrays.java:23:13
  (block
   ;; if (array.Arrays.$initialized) return;
-  ;;@ array/Arrays.java:22:13
+  ;;@ array/Arrays.java:23:13
   (if (global.get $f_$initialized__array_Arrays)
    (then
     ;; return;
-    ;;@ array/Arrays.java:22:13
+    ;;@ array/Arrays.java:23:13
     (return )
    )
   )
   ;; (array.Arrays.$initialized = true);
-  ;;@ array/Arrays.java:22:13
+  ;;@ array/Arrays.java:23:13
   (global.set $f_$initialized__array_Arrays (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ array/Arrays.java:22:13
+  ;;@ array/Arrays.java:23:13
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -653,17 +606,17 @@
 (func $$create__array_Arrays@array.Arrays.SomeObject
  (param $$outer_this (ref null $array.Arrays))
  (result (ref null $array.Arrays.SomeObject))
- ;;@ array/Arrays.java:42:16
+ ;;@ array/Arrays.java:43:16
  (local $$instance (ref null $array.Arrays.SomeObject))
  (block
   ;; SomeObject $instance = new SomeObject.<init>(0,$outer_this);
-  ;;@ array/Arrays.java:42:16
+  ;;@ array/Arrays.java:43:16
   (local.set $$instance (struct.new $array.Arrays.SomeObject (ref.as_non_null (global.get $array.Arrays.SomeObject.vtable)) (ref.as_non_null (global.get $array.Arrays.SomeObject.itable)) (i32.const 0) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
-  ;;@ array/Arrays.java:42:16
+  ;;@ array/Arrays.java:43:16
   (call $$ctor__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
-  ;;@ array/Arrays.java:42:16
+  ;;@ array/Arrays.java:43:16
   (return (local.get $$instance))
  )
 )
@@ -672,32 +625,32 @@
 (func $$ctor__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject
  (param $this (ref null $array.Arrays.SomeObject))
  (param $$outer_this (ref null $array.Arrays))
- ;;@ array/Arrays.java:42:16
+ ;;@ array/Arrays.java:43:16
  (block
   ;; Object.this.$ctor();
-  ;;@ array/Arrays.java:42:16
+  ;;@ array/Arrays.java:43:16
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void SomeObject.$clinit()
 (func $$clinit__void@array.Arrays.SomeObject
- ;;@ array/Arrays.java:42:16
+ ;;@ array/Arrays.java:43:16
  (block
   ;; if (array.Arrays.SomeObject.$initialized) return;
-  ;;@ array/Arrays.java:42:16
+  ;;@ array/Arrays.java:43:16
   (if (global.get $f_$initialized__array_Arrays_SomeObject)
    (then
     ;; return;
-    ;;@ array/Arrays.java:42:16
+    ;;@ array/Arrays.java:43:16
     (return )
    )
   )
   ;; (array.Arrays.SomeObject.$initialized = true);
-  ;;@ array/Arrays.java:42:16
+  ;;@ array/Arrays.java:43:16
   (global.set $f_$initialized__array_Arrays_SomeObject (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ array/Arrays.java:42:16
+  ;;@ array/Arrays.java:43:16
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -743,17 +696,17 @@
 ;;; NativeType NativeType.$create()
 (func $$create__@array.Arrays.NativeType
  (result (ref null $array.Arrays.NativeType))
- ;;@ array/Arrays.java:136:23
+ ;;@ array/Arrays.java:137:23
  (local $$instance (ref null $array.Arrays.NativeType))
  (block
   ;; NativeType $instance = new NativeType.<init>(0);
-  ;;@ array/Arrays.java:136:23
+  ;;@ array/Arrays.java:137:23
   (local.set $$instance (struct.new $array.Arrays.NativeType (ref.as_non_null (global.get $array.Arrays.NativeType.vtable)) (ref.as_non_null (global.get $array.Arrays.NativeType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ array/Arrays.java:136:23
+  ;;@ array/Arrays.java:137:23
   (call $$ctor__void_$p_array_Arrays_NativeType@array.Arrays.NativeType (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ array/Arrays.java:136:23
+  ;;@ array/Arrays.java:137:23
   (return (local.get $$instance))
  )
 )
@@ -761,35 +714,35 @@
 ;;; void NativeType.$ctor()
 (func $$ctor__void_$p_array_Arrays_NativeType@array.Arrays.NativeType
  (param $this (ref null $array.Arrays.NativeType))
- ;;@ array/Arrays.java:136:23
+ ;;@ array/Arrays.java:137:23
  (block
   ;; array.Arrays.NativeType.$clinit();
-  ;;@ array/Arrays.java:136:23
+  ;;@ array/Arrays.java:137:23
   (call $$clinit__void@array.Arrays.NativeType )
   ;; Object.this.$ctor();
-  ;;@ array/Arrays.java:136:23
+  ;;@ array/Arrays.java:137:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void NativeType.$clinit()
 (func $$clinit__void@array.Arrays.NativeType
- ;;@ array/Arrays.java:136:23
+ ;;@ array/Arrays.java:137:23
  (block
   ;; if (array.Arrays.NativeType.$initialized) return;
-  ;;@ array/Arrays.java:136:23
+  ;;@ array/Arrays.java:137:23
   (if (global.get $f_$initialized__array_Arrays_NativeType)
    (then
     ;; return;
-    ;;@ array/Arrays.java:136:23
+    ;;@ array/Arrays.java:137:23
     (return )
    )
   )
   ;; (array.Arrays.NativeType.$initialized = true);
-  ;;@ array/Arrays.java:136:23
+  ;;@ array/Arrays.java:137:23
   (global.set $f_$initialized__array_Arrays_NativeType (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ array/Arrays.java:136:23
+  ;;@ array/Arrays.java:137:23
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -836,17 +789,17 @@
 ;;; ArrayContainer<T> ArrayContainer.$create()
 (func $$create__@array.Arrays.ArrayContainer
  (result (ref null $array.Arrays.ArrayContainer))
- ;;@ array/Arrays.java:167:23
+ ;;@ array/Arrays.java:169:23
  (local $$instance (ref null $array.Arrays.ArrayContainer))
  (block
   ;; ArrayContainer<T> $instance = new ArrayContainer.<init>(0,null);
-  ;;@ array/Arrays.java:167:23
+  ;;@ array/Arrays.java:169:23
   (local.set $$instance (struct.new $array.Arrays.ArrayContainer (ref.as_non_null (global.get $array.Arrays.ArrayContainer.vtable)) (ref.as_non_null (global.get $array.Arrays.ArrayContainer.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;; $instance.$ctor();
-  ;;@ array/Arrays.java:167:23
+  ;;@ array/Arrays.java:169:23
   (call $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ array/Arrays.java:167:23
+  ;;@ array/Arrays.java:169:23
   (return (local.get $$instance))
  )
 )
@@ -854,32 +807,32 @@
 ;;; void ArrayContainer.$ctor()
 (func $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer
  (param $this (ref null $array.Arrays.ArrayContainer))
- ;;@ array/Arrays.java:167:23
+ ;;@ array/Arrays.java:169:23
  (block
   ;; Object.this.$ctor();
-  ;;@ array/Arrays.java:167:23
+  ;;@ array/Arrays.java:169:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void ArrayContainer.$clinit()
 (func $$clinit__void@array.Arrays.ArrayContainer
- ;;@ array/Arrays.java:167:23
+ ;;@ array/Arrays.java:169:23
  (block
   ;; if (array.Arrays.ArrayContainer.$initialized) return;
-  ;;@ array/Arrays.java:167:23
+  ;;@ array/Arrays.java:169:23
   (if (global.get $f_$initialized__array_Arrays_ArrayContainer)
    (then
     ;; return;
-    ;;@ array/Arrays.java:167:23
+    ;;@ array/Arrays.java:169:23
     (return )
    )
   )
   ;; (array.Arrays.ArrayContainer.$initialized = true);
-  ;;@ array/Arrays.java:167:23
+  ;;@ array/Arrays.java:169:23
   (global.set $f_$initialized__array_Arrays_ArrayContainer (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ array/Arrays.java:167:23
+  ;;@ array/Arrays.java:169:23
   (call $$clinit__void@java.lang.Object )
  )
 )

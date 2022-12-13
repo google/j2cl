@@ -15,6 +15,7 @@
  */
 package jstype;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -48,7 +49,8 @@ public class SomeJsType<T> {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   interface Wildcard {}
 
-  public Wildcard testStarAndWildCard(Star s, Wildcard w) {
+  @Wasm("nop") // TODO(b/262009761): Casts between Object and JsTypes not supported in WASM.
+  private Wildcard testStarAndWildCard(Star s, Wildcard w) {
     Object object = new Object();
 
     Star star = (Star) (Object) 3.0;
