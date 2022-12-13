@@ -45,12 +45,14 @@ open class KotlinKeywords {
   val `val`: Int = this.`val` + `in`
   val `var`: Int = this.`var` + `in`
   val `when`: Int = this.`when` + `in`
-  return KotlinKeywords.BIG_ENDIAN___forbidden + KotlinKeywords.LITTLE_ENDIAN___forbidden + `in`
+  return KotlinKeywords.BIG_ENDIAN___forbidden + KotlinKeywords.LITTLE_ENDIAN___forbidden + KotlinKeywords.NULL___forbidden + `in`
  }
 
  companion object {
   @JvmField var BIG_ENDIAN___forbidden: Int = 7
 
   @JvmField var LITTLE_ENDIAN___forbidden: Int = - 7
+
+  @JvmField var NULL___forbidden: Int = 745
  }
 }

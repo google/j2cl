@@ -18,6 +18,7 @@ package kotlinkeywords;
 public class KotlinKeywords {
   public static int BIG_ENDIAN = 7;
   public static int LITTLE_ENDIAN = -7;
+  public static int NULL = 745;
 
   public int as = 0;
   public int fun = 0;
@@ -29,7 +30,7 @@ public class KotlinKeywords {
   public int val = 0;
   public int var = 0;
   public int when = 0;
-
+  
   public int test(int in) {
     int as = this.as + in;
     int fun = this.fun + in;
@@ -41,6 +42,6 @@ public class KotlinKeywords {
     int var = this.var + in;
     int when = this.when + in;
 
-    return BIG_ENDIAN + LITTLE_ENDIAN + in;
+    return BIG_ENDIAN + LITTLE_ENDIAN + NULL + in;
   }
 }
