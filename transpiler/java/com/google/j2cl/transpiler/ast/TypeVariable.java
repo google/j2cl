@@ -94,7 +94,15 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   }
 
   /** Return true if it is an unnamed type variable, i.e. a wildcard or capture. */
-  public abstract boolean isWildcardOrCapture();
+  public final boolean isWildcardOrCapture() {
+    return isWildcard() || isCapture();
+  }
+
+  /** Return true if it is a wildcard. */
+  public abstract boolean isWildcard();
+
+  /** Return true if it is a capture. */
+  public abstract boolean isCapture();
 
   @Override
   public boolean isNoopCast() {
@@ -209,7 +217,10 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
-    return new AutoValue_TypeVariable.Builder().setWildcardOrCapture(false).setNullable(false);
+    return new AutoValue_TypeVariable.Builder()
+        .setWildcard(false)
+        .setCapture(false)
+        .setNullable(false);
   }
 
   /** Creates a wildcard type variable with a specific upper bound. */
@@ -228,7 +239,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     String upperBoundKey = "<??_^_>" + upperBound.getUniqueId();
     String lowerBoundKey = lowerBound == null ? "" : "<??_v_>" + lowerBound.getUniqueId();
     return TypeVariable.newBuilder()
-        .setWildcardOrCapture(true)
+        .setWildcard(true)
         .setNullable(false)
         .setUpperBoundTypeDescriptorSupplier(() -> upperBound)
         .setLowerBoundTypeDescriptor(lowerBound)
@@ -256,7 +267,9 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
     public abstract Builder setName(String name);
 
-    public abstract Builder setWildcardOrCapture(boolean isWildcardOrCapture);
+    public abstract Builder setWildcard(boolean isCapture);
+
+    public abstract Builder setCapture(boolean isCapture);
 
     public abstract Builder setLowerBoundTypeDescriptor(@Nullable TypeDescriptor typeDescriptor);
 

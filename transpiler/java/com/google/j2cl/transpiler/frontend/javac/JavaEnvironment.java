@@ -386,7 +386,6 @@ class JavaEnvironment {
     List<String> classComponents = getClassComponents(typeVariable);
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorSupplier(boundTypeDescriptorFactory)
-        .setWildcardOrCapture(false)
         .setUniqueKey(
             String.join("::", classComponents)
                 + (typeVariable.getUpperBound() != null
@@ -399,7 +398,7 @@ class JavaEnvironment {
   private TypeVariable createWildcardTypeVariable(TypeMirror bound) {
     return TypeVariable.newBuilder()
         .setUpperBoundTypeDescriptorSupplier(() -> createTypeDescriptor(bound))
-        .setWildcardOrCapture(true)
+        .setWildcard(true)
         .setName("?")
         .setUniqueKey("::?::" + (bound != null ? bound.toString() : ""))
         .build();
