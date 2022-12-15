@@ -128,15 +128,10 @@ def _impl_j2wasm_application(ctx):
         ),
     )
 
-    # Trigger a parallel Javac build to provide better error messages than JDT.
-    ctx.actions.run_shell(
-        outputs = [ctx.outputs.validate],
-        arguments = [ctx.outputs.validate.path],
-        command = "touch $1",
-        inputs = _trigger_javac_build(ctx.attr.deps),
-    )
-
-    return DefaultInfo(data_runfiles = ctx.runfiles(files = runfiles))
+    return [
+        DefaultInfo(data_runfiles = ctx.runfiles(files = runfiles)),
+        OutputGroupInfo(_validation = _trigger_javac_build(ctx.attr.deps)),
+    ]
 
 def _get_transitive_srcs(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_srcs for d in deps])
@@ -144,6 +139,7 @@ def _get_transitive_srcs(deps):
 def _get_transitive_classpath(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_classpath for d in deps])
 
+# Trigger a parallel Javac build to provide better error messages than JDT.
 def _trigger_javac_build(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.java_info.transitive_runtime_jars for d in deps])
 
@@ -175,7 +171,6 @@ _j2wasm_application = rule(
     outputs = {
         "wat": "%{name}.wat",
         "wasm": "%{name}.wasm",
-        "validate": "%{name}.validate",
     },
 )
 
