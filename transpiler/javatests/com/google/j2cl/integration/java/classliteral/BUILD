@@ -14,6 +14,7 @@ j2wasm_library(
     ) + glob(["super-wasm/*.java"]),
     deps = [
         "//jre/java:javaemul_internal_annotations-j2wasm",
+        "//third_party:gwt-jsinterop-annotations-j2wasm",
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm",
     ],
 )
