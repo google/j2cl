@@ -15,10 +15,13 @@
  */
 package kotlinkeywords;
 
+
 public class KotlinKeywords {
   public static int BIG_ENDIAN = 7;
   public static int LITTLE_ENDIAN = -7;
   public static int NULL = 745;
+  public static int OVERFLOW = -24;
+  public static int DOMAIN = -32;
 
   public int as = 0;
   public int fun = 0;
@@ -41,6 +44,8 @@ public class KotlinKeywords {
     int val = this.val + in;
     int var = this.var + in;
     int when = this.when + in;
+
+    int temp = OVERFLOW + DOMAIN + in;
 
     return BIG_ENDIAN + LITTLE_ENDIAN + NULL + in;
   }

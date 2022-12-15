@@ -56,7 +56,9 @@ private val forbiddenKeywordSet =
     "typeof", // Reserved word in swift.
     "BIG_ENDIAN", // Reserved as part of ObjectiveC on iOS see endian.h.
     "LITTLE_ENDIAN", // Reserved as part of ObjectiveC on iOS see endian.h.
-    "NULL" // Reserved in stddef.h.
+    "NULL", // Reserved in stddef.h.
+    "OVERFLOW", // Reserved in math.h
+    "DOMAIN" // Reserved in math.h
   )
 
 /**

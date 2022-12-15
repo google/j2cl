@@ -45,6 +45,7 @@ open class KotlinKeywords {
   val `val`: Int = this.`val` + `in`
   val `var`: Int = this.`var` + `in`
   val `when`: Int = this.`when` + `in`
+  val temp: Int = KotlinKeywords.OVERFLOW___forbidden + KotlinKeywords.DOMAIN___forbidden + `in`
   return KotlinKeywords.BIG_ENDIAN___forbidden + KotlinKeywords.LITTLE_ENDIAN___forbidden + KotlinKeywords.NULL___forbidden + `in`
  }
 
@@ -54,5 +55,9 @@ open class KotlinKeywords {
   @JvmField var LITTLE_ENDIAN___forbidden: Int = - 7
 
   @JvmField var NULL___forbidden: Int = 745
+
+  @JvmField var OVERFLOW___forbidden: Int = - 24
+
+  @JvmField var DOMAIN___forbidden: Int = - 32
  }
 }
