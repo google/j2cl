@@ -30,7 +30,6 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
 
     test_input = generate_test_input(name, test_class)
 
-    adapter_file_name = test_class.split(".")[-1] + "_Adapter_" + platform + ".kt"
     if platform == "J2KT-JVM":
         j2kt_jvm_library(
             name = name + "_lib",
@@ -61,23 +60,15 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
     # and then use kt_jvm_library to compile kotlin srcs and finally used it as runtime dependency in kt_jvm_test
     out_jar = ":lib" + name + "_lib.jar"
 
-    native.genrule(
+    extract_kotlin_srcjar(
         name = name + "_transpile_gen",
-        srcs = [out_jar],
-        outs = [adapter_file_name],
-        cmd = "\n".join([
-            "unzip -q $(location %s) *.kt -d zip_out/" % out_jar,
-            "cd zip_out/",
-            "mkdir -p ../$(RULEDIR)",
-            "for f in $$(find . -name *.kt); do mv $$f ../$@; done",
-        ]),
-        testonly = 1,
-        tags = ["manual", "notap"],
+        input_jar = out_jar,
     )
+
     if platform == "J2KT-JVM":
         kt_jvm_library(
             name = name,
-            srcs = [":" + adapter_file_name],
+            srcs = [":" + name + "_transpile_gen"],
             deps = [
                 ":" + name + "_lib",
                 "//third_party/kotlin/kotlin:kotlin_test_junit",
@@ -89,10 +80,35 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
     else:
         kt_apple_test_library(
             name = name,
-            srcs = [":" + adapter_file_name],
+            srcs = [":" + name + "_transpile_gen"],
             target_compatible_with = ["//third_party/bazel_platforms/os:ios"],
             deps = [
                 ":" + name + "_lib",
                 "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-native",
             ],
         )
+
+def _extract_kotlin_srcjar(ctx):
+    """Extracts the generated kotlin files from transpiled source jar.
+
+    Returns tree artifact outputs of the extracted kotlin sources.
+    """
+
+    # The name of the artifact directory should be unique for each test target to avoid conflicts.
+    # The last segment of each artifact name should be kotlin
+    output_dir = ctx.actions.declare_directory(ctx.label.name + "/kotlin")
+
+    ctx.actions.run_shell(
+        inputs = [ctx.file.input_jar],
+        outputs = [output_dir],
+        command = "unzip -q %s *.kt -d %s" % (ctx.file.input_jar.path, output_dir.path),
+    )
+
+    return [DefaultInfo(files = depset([output_dir]))]
+
+extract_kotlin_srcjar = rule(
+    implementation = _extract_kotlin_srcjar,
+    attrs = {
+        "input_jar": attr.label(allow_single_file = [".jar"], mandatory = True),
+    },
+)

@@ -10,18 +10,19 @@ $classOrInstance.${testMethod.javaMethodName()}();
 /**
  * Generated test suite from j2kt_test target
  */
+@file:Suppress("PackageName")
 package ${testClass.jsUnitPackageName()}
 
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-var times = 0
-fun beforeClass() {
+private var times = 0
+private fun beforeClass() {
   #methodExecutions(${testClass.qualifiedName()} $testClass.beforeClassMethods())
 }
 
-fun afterClass() {
+private fun afterClass() {
   #methodExecutions(${testClass.qualifiedName()} ${testClass.afterClassMethods()})
 }
 
