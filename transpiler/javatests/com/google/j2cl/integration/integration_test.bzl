@@ -133,6 +133,7 @@ def integration_library(name, srcs = [], deps = [], exports = [], **kwargs):
         srcs = srcs,
         deps = [to_parallel_target(d, _to_j2cl_name) for d in deps],
         exports = [to_parallel_target(e, _to_j2cl_name) for e in exports],
+        javacopts = JAVAC_FLAGS,
         generate_build_test = False,
         **kwargs
     )
