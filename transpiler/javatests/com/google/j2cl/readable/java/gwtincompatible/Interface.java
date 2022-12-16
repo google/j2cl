@@ -15,8 +15,6 @@
  */
 package gwtincompatible;
 
-import com.google.common.annotations.GwtIncompatible;
-
 interface Interface {
   @GwtIncompatible
   void incompatible();

@@ -15,8 +15,6 @@
  */
 package gwtincompatible;
 
-import com.google.common.annotations.GwtIncompatible;
-
 public class Implementor extends Interface.ClassWithAbstractMethod
     implements Interface, Interface.NestedInterface {
   @GwtIncompatible
