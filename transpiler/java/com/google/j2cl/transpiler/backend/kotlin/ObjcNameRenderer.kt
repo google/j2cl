@@ -102,17 +102,22 @@ private fun Method.computeObjcNameComponents(): Pair<String?, List<String>?> {
 private fun Method.computeObjCConstructorComponents(): Pair<String?, List<String>> {
   var objCParameterNames = mutableListOf<String>()
   var objCName = descriptor.getObjectiveCName()
-  if (objCName != null) {
-    objCParameterNames = objCName.split(":").toMutableList()
-    if (objCParameterNames[0].startsWith(INIT_WITH_PREFIX))
-      objCParameterNames[0] = objCParameterNames[0].substring(INIT_WITH_PREFIX.length)
-    else objCParameterNames[0] = "${objCName}"
-  } else if (parameters.isNotEmpty()) {
-    objCParameterNames =
-      parameters.map { "with${it.typeDescriptor.objCName(useId = true).titleCase}" }.toMutableList()
-    objCParameterNames[0] = objCParameterNames[0].substring(4)
-  }
 
+  if (parameters.isNotEmpty()) {
+    if (objCName != null) {
+      objCParameterNames = objCName.split(":").toMutableList()
+      if (objCParameterNames[0].startsWith(INIT_WITH_PREFIX))
+        objCParameterNames[0] = objCParameterNames[0].substring(INIT_WITH_PREFIX.length)
+      else
+        objCParameterNames[0] = "${parameters[0].typeDescriptor.objCName(useId = true).titleCase}"
+    } else {
+      objCParameterNames =
+        parameters
+          .map { "with${it.typeDescriptor.objCName(useId = true).titleCase}" }
+          .toMutableList()
+      objCParameterNames[0] = objCParameterNames[0].substring(4)
+    }
+  }
   return Pair(objCName, objCParameterNames)
 }
 
