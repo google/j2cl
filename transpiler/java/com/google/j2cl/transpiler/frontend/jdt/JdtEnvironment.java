@@ -58,6 +58,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
@@ -1234,20 +1235,27 @@ class JdtEnvironment {
   }
 
   @Nullable
+  private String getObjectiveCNamePrefix(
+      ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
+    return getPropertyIfTopLevel(typeBinding, packageInfoCache::getObjectiveCName);
+  }
+
+  @Nullable
   private String getJsNamespace(ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
     checkArgument(!typeBinding.isPrimitive());
     String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(typeBinding);
-    if (jsNamespace != null) {
-      return jsNamespace;
-    }
+    return jsNamespace != null
+        ? jsNamespace
+        : getPropertyIfTopLevel(typeBinding, packageInfoCache::getJsNamespace);
+  }
 
-    // Maybe namespace is set via package-info file?
+  @Nullable
+  private String getPropertyIfTopLevel(
+      ITypeBinding typeBinding, Function<String, String> propertyForBinaryName) {
     boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
-    if (isTopLevelType) {
-      return packageInfoCache.getJsNamespace(
-          getBinaryNameFromTypeBinding(toTopLevelTypeBinding(typeBinding)));
-    }
-    return null;
+    return isTopLevelType
+        ? propertyForBinaryName.apply(getBinaryNameFromTypeBinding(typeBinding))
+        : null;
   }
 
   @Nullable
@@ -1331,6 +1339,7 @@ class JdtEnvironment {
         .setLocal(isLocal(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
         .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
+        .setObjectiveCNamePrefix(getObjectiveCNamePrefix(typeBinding, packageInfoCache))
         .setKtTypeInfo(KtInteropUtils.getKtTypeInfo(typeBinding))
         .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(typeBinding))
         .setNullMarked(isNullMarked)

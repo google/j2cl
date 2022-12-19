@@ -48,9 +48,13 @@ public abstract class AbstractCompilationUnitBuilder {
    * compiled from source.
    */
   protected void setPackagePropertiesFromSource(
-      String packageName, String jsNamespace, boolean isNullMarked) {
+      String packageName, String jsNamespace, String objectiveCName, boolean isNullMarked) {
     packageInfoCache.setPackageProperties(
-        PackageInfoCache.SOURCE_CLASS_PATH_ENTRY, packageName, jsNamespace, isNullMarked);
+        PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
+        packageName,
+        jsNamespace,
+        objectiveCName,
+        isNullMarked);
   }
 
   protected String getCurrentSourceFile() {

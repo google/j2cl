@@ -1298,6 +1298,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
               packageName,
               packageJsNamespace,
+              // TODO(b/135123615): need to support ObjectiveCName extraction.
+              null,
               isNullMarked);
     }
     setCurrentCompilationUnit(

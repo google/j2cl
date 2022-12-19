@@ -6,10 +6,10 @@ load(
 package(licenses = ["notice"])
 
 readable_example(
-    srcs = glob(["*.java"]),
+    srcs = glob(["**/*.java"]),
     generate_js_readables = False,
     generate_wasm_readables = False,
     deps = [
-        "//third_party/java/j2objc:annotations-j2cl",
+        "//third_party:j2objc_annotations-j2cl",
     ],
 )

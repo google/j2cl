@@ -25,6 +25,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2objc.annotations.ObjectiveCName;
 import java.lang.annotation.Annotation;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -59,6 +60,9 @@ public class PackageInfoCache {
     @Nullable
     public abstract String getJsNamespace();
 
+    @Nullable
+    public abstract String getObjectiveCName();
+
     public abstract boolean isNullMarked();
 
     public static Builder newBuilder() {
@@ -70,6 +74,8 @@ public class PackageInfoCache {
     public abstract static class Builder {
 
       public abstract Builder setJsNamespace(String jsNamespace);
+
+      public abstract Builder setObjectiveCName(String objectiveCName);
 
       public abstract Builder setNullMarked(boolean isNullMarked);
 
@@ -145,6 +151,14 @@ public class PackageInfoCache {
     return getPackageReport(topLevelTypeSourceName).getJsNamespace();
   }
 
+  /**
+   * Returns the ObjectiveCName for the given type which must be a top level type and referenced by
+   * its fully qualified source name.
+   */
+  public String getObjectiveCName(String topLevelTypeSourceName) {
+    return getPackageReport(topLevelTypeSourceName).getObjectiveCName();
+  }
+
   public boolean isNullMarked(String topLevelTypeSourceName) {
     return getPackageReport(topLevelTypeSourceName).isNullMarked();
   }
@@ -164,12 +178,17 @@ public class PackageInfoCache {
    * (as identified by the combination of class path entry and package path).
    */
   public void setPackageProperties(
-      String classPathEntry, String packagePath, String packageJsNamespace, boolean isNullMarked) {
+      String classPathEntry,
+      String packagePath,
+      String packageJsNamespace,
+      String objectiveCName,
+      boolean isNullMarked) {
     setReportForPackage(
         classPathEntry,
         packagePath,
         PackageReport.newBuilder()
             .setJsNamespace(packageJsNamespace)
+            .setObjectiveCName(objectiveCName)
             .setNullMarked(isNullMarked)
             .build());
   }
@@ -269,12 +288,14 @@ public class PackageInfoCache {
 
   private void parsePackageInfo(
       String classPathEntry, String packagePath, String topLevelTypeSourceName) {
+    
     Annotation[] packageAnnotations = findBytecodePackageAnnotations(classPathEntry, packagePath);
 
     setPackageProperties(
         classPathEntry,
         packagePath,
         getPackageJsNamespace(packageAnnotations),
+        getPackageObjectiveCName(packageAnnotations),
         hasNullMarkedAnnotation(packageAnnotations));
     propagateSpecificInfo(classPathEntry, topLevelTypeSourceName);
   }
@@ -290,6 +311,20 @@ public class PackageInfoCache {
         .findFirst()
         .map(JsPackage.class::cast)
         .map(JsPackage::namespace)
+        .orElse(null);
+  }
+
+  @Nullable
+  private static String getPackageObjectiveCName(Annotation[] packageAnnotations) {
+    if (packageAnnotations == null) {
+      return null;
+    }
+
+    return stream(packageAnnotations)
+        .filter(ObjectiveCName.class::isInstance)
+        .findFirst()
+        .map(ObjectiveCName.class::cast)
+        .map(ObjectiveCName::value)
         .orElse(null);
   }
 

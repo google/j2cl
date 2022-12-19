@@ -51,6 +51,13 @@ def setup_j2cl_workspace(**kwargs):
     )
 
     jvm_maven_import_external(
+        name = "j2objc_annotations",
+        artifact = "com.google.j2objc:j2objc-annotations:1.3",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
+    )
+
+    jvm_maven_import_external(
         name = "org_jspecify",
         artifact = "org.jspecify:jspecify:0.2.0",
         server_urls = _MAVEN_CENTRAL_URLS,

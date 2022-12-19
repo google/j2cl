@@ -24,6 +24,7 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_OU
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPAGATE_NULLABILITY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.KT_PROPERTY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.findAnnotationBindingByName;
+import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 
@@ -53,6 +54,14 @@ public class KtInteropAnnotationUtils {
       IAnnotationBinding[] annotationBindings) {
     return findAnnotationBindingByName(
         annotationBindings, KT_PROPAGATE_NULLABILITY_ANNOTATION_NAME);
+  }
+
+  public static String getKtObjectiveCName(IAnnotationBinding annotationBinding) {
+    return getStringAttribute(annotationBinding, "value");
+  }
+
+  public static boolean isKtObjectiveCName(IAnnotationBinding annotationBinding) {
+    return annotationBinding.getAnnotationType().getQualifiedName().equals(KT_OBJECTIVE_C_NAME);
   }
 
   public static IAnnotationBinding getKtObjectiveCNameAnnotation(

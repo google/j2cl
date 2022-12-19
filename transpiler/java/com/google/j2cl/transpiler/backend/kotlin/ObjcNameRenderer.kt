@@ -80,6 +80,7 @@ internal fun Renderer.renderObjCNameAnnotation(
   render(" ")
 }
 
+// TODO(259416922): move objcCName computation into TypeDeclaration.java
 private fun TypeDeclaration.objCName(useId: Boolean): String =
   when (qualifiedBinaryName) {
     "java.lang.Object" -> if (useId) "id" else "NSObject"
@@ -87,15 +88,30 @@ private fun TypeDeclaration.objCName(useId: Boolean): String =
     "java.lang.Class" -> "IOSClass"
     "java.lang.Number" -> "NSNumber"
     "java.lang.Cloneable" -> "NSCopying"
-    else -> getObjectiveCName() ?: (objCPackagePrefix + objCSimpleName)
+    else -> customOrDefaultObjcName
+  }
+
+private val TypeDeclaration.customOrDefaultObjcName: String
+  get() {
+    val objectiveCName = getObjectiveCName()
+    val prefixName = getObjectiveCNamePrefix()
+    if (objectiveCName != null) return objectiveCName
+
+    val objcName = simpleSourceName.toObjCName
+    return if (enclosingTypeDeclaration == null) {
+      if (prefixName != null) {
+        prefixName + objcName
+      } else {
+        objCPackagePrefix + objcName
+      }
+    } else {
+      getEnclosingTypeDeclaration()!!.customOrDefaultObjcName + "_" + objcName
+    }
   }
 
 private val TypeDeclaration.objCPackagePrefix: String
   get() =
     (packageName ?: "").split('.').map { it.titleCase.toObjCName }.joinToString(separator = "")
-
-private val TypeDeclaration.objCSimpleName: String
-  get() = (enclosingTypeDeclaration?.objCSimpleName?.plus("_") ?: "") + simpleSourceName.toObjCName
 
 private val String.titleCase
   get() = StringUtils.capitalize(this)

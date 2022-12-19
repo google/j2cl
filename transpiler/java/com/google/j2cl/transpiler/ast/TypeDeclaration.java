@@ -451,6 +451,9 @@ public abstract class TypeDeclaration
   @Nullable
   abstract String getCustomizedJsNamespace();
 
+  @Nullable
+  public abstract String getObjectiveCNamePrefix();
+
   public abstract boolean isNullMarked();
 
   @Memoized
@@ -869,6 +872,8 @@ public abstract class TypeDeclaration
     public abstract Builder setSimpleJsName(String simpleJsName);
 
     public abstract Builder setCustomizedJsNamespace(String jsNamespace);
+
+    public abstract Builder setObjectiveCNamePrefix(String objectiveCNamePreifx);
 
     public abstract Builder setNullMarked(boolean isNullMarked);
 

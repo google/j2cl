@@ -15,6 +15,7 @@ java_library(
         "//third_party:auto_value",
         "//third_party:guava",
         "//third_party:gwt-jsinterop-annotations",
+        "//third_party:j2objc_annotations",
         "//third_party:jspecify_annotations",
         "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/common",

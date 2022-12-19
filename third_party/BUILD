@@ -19,6 +19,16 @@ alias(
 )
 
 alias(
+    name = "j2objc_annotations",
+    actual = "@j2objc_annotations",
+)
+
+j2cl_import(
+    name = "j2objc_annotations-j2cl",
+    jar = "@j2objc_annotations//jar",
+)
+
+alias(
     name = "jspecify_annotations",
     actual = "@org_jspecify",
 )

@@ -13,26 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2kt;
+package j2kt.objcname;
 
 import com.google.j2objc.annotations.ObjectiveCName;
 
-@ObjectiveCName("NewObjCName")
-public class ObjCName {
+public class ConstructorExample {
+  public class ObjCName {
+    public ObjCName() {}
 
-  public ObjCName() {}
+    @ObjectiveCName("ObjCNameConstructor")
+    public ObjCName(int i) {}
 
-  @ObjectiveCName("ObjCNameConstructor")
-  public ObjCName(int i) {}
-
-  public ObjCName(int i, String s) {}
-
-  @ObjectiveCName("InnerClassNewName")
-  public class InnerClassOldName {}
-
-  @ObjectiveCName("newFoo")
-  public void foo() {}
-
-  @ObjectiveCName("newProtectedFoo")
-  protected void protectedFoo() {}
+    public ObjCName(int i, String s) {}
+  }
 }
