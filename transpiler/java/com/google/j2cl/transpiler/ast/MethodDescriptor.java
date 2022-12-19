@@ -655,9 +655,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Returns a signature suitable for override checking from the Java source perspective. */
   @Memoized
   public String getSignature() {
-    boolean isKotlinType =
-        getEnclosingTypeDescriptor().getTypeDeclaration().getSourceLanguage()
-            == SourceLanguage.KOTLIN;
+    return getSignature(getEnclosingTypeDescriptor().getTypeDeclaration().getSourceLanguage());
+  }
+
+  public String getSignature(SourceLanguage sourceLanguage) {
+    boolean isKotlinType = sourceLanguage == SourceLanguage.KOTLIN;
     ImmutableList<TypeDescriptor> parameterTypeDescriptors =
         isKotlinType
             // In Kotlin types, non-nullable Int has the signature of primitive int (same
@@ -687,9 +689,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * will be different for package private methods in different packages even if they have the same
    * signature.
    */
-  String getOverrideKey() {
+  String getOverrideKey(SourceLanguage sourceLanguage) {
     checkState(isPolymorphic());
-    return getVisibility().isPackagePrivate() ? getPackagePrivateOverrideKey() : getSignature();
+    return getVisibility().isPackagePrivate()
+        ? getPackagePrivateOverrideKey(sourceLanguage)
+        : getSignature(sourceLanguage);
   }
 
   // This is a somewhat hacky way to differentiate package private override keys. A more principled
@@ -697,8 +701,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   // the maps used for the bridge method computations.
   private static final String PACKAGE_PRIVATE_MARKER = "{pp}-";
 
-  String getPackagePrivateOverrideKey() {
-    return getSignature()
+  String getPackagePrivateOverrideKey(SourceLanguage sourceLanguage) {
+    return getSignature(sourceLanguage)
         + PACKAGE_PRIVATE_MARKER
         + getEnclosingTypeDescriptor().getTypeDeclaration().getPackageName();
   }

@@ -32,6 +32,7 @@ import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -591,9 +592,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     // what is the method that is handling those before the bridge computation.
     // In what follows we will have to determine whether the method handling the mangled name is
     // at the right target or not, and if not a bridge will be created.
-    Map<String, String> overrideKeysByMangledName = getMangledNameToOverrideKeyMap();
+    SourceLanguage sourceLanguage = getTypeDeclaration().getSourceLanguage();
+    Map<String, String> overrideKeysByMangledName = getMangledNameToOverrideKeyMap(sourceLanguage);
     Map<String, MethodDescriptor> targetMethodsByOverrideKey =
-        new LinkedHashMap<>(getOverrideKeyToTargetMap());
+        new LinkedHashMap<>(getOverrideKeyToTargetMap(sourceLanguage));
 
     // Bridge method creation proceeds in two stages: the first stage determines the bridges that
     // are specialized overrides of the targets (see MethodDescriptor.isSpecializingBridge); since
@@ -623,7 +625,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         continue;
       }
 
-      if (needsSpecializingBridge(targetImplementation) || targetImplementation.isDefaultMethod()) {
+      if (needsSpecializingBridge(targetImplementation, sourceLanguage)
+          || targetImplementation.isDefaultMethod()) {
         MethodOrigin methodOrigin =
             targetImplementation.isDefaultMethod()
                 ? MethodOrigin.DEFAULT_METHOD_BRIDGE
@@ -636,7 +639,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
         // Now that the specializing bridge is in the class, it acts exactly as if a user wrote
         // the override by hand and this method becomes the target for the other bridges.
-        targetMethodsByOverrideKey.put(newBridge.getOverrideKey(), newBridge);
+        targetMethodsByOverrideKey.put(newBridge.getOverrideKey(sourceLanguage), newBridge);
       }
     }
 
@@ -704,12 +707,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   // TODO(b/70853239): This computation should be done in the traversal in getPolymorphicMethods(),
   // but due to inaccuracies in specializeTypeVariables it cannot be move there yet. Move
   // once specializeTypeVariables is fixed.
-  @Memoized
-  Map<String, String> getMangledNameToOverrideKeyMap() {
+  private Map<String, String> getMangledNameToOverrideKeyMap(SourceLanguage sourceLanguage) {
     Map<String, String> overrideKeysByMangledName = new LinkedHashMap<>();
 
     getSuperTypesStream()
-        .forEach(t -> overrideKeysByMangledName.putAll(t.getMangledNameToOverrideKeyMap()));
+        .forEach(
+            t ->
+                overrideKeysByMangledName.putAll(t.getMangledNameToOverrideKeyMap(sourceLanguage)));
 
     for (MethodDescriptor declaredMethod : getDeclaredMethodDescriptors()) {
       if (!declaredMethod.isPolymorphic()) {
@@ -724,7 +728,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       // the override keys corresponding to a JsMethod will have the same target otherwise it
       // would not have passed restriction checking.
       overrideKeysByMangledName.put(
-          declaredMethod.getMangledName(), declaredMethod.getOverrideKey());
+          declaredMethod.getMangledName(), declaredMethod.getOverrideKey(sourceLanguage));
     }
 
     return overrideKeysByMangledName;
@@ -737,13 +741,13 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   // TODO(b/70853239): This computation should be done in the traversal in getPolymorphicMethods(),
   // but due to inaccuracies in specializeTypeVariables it cannot be move there yet. Move
   // once specializeTypeVariables is fixed.
-  @Memoized
-  Map<String, MethodDescriptor> getOverrideKeyToTargetMap() {
+  private Map<String, MethodDescriptor> getOverrideKeyToTargetMap(SourceLanguage sourceLanguage) {
     Map<String, MethodDescriptor> targetByOverrideKey = new LinkedHashMap<>();
 
     // 1. Initially the implementations for each override key will be the same as in the superclass.
     if (getSuperTypeDescriptor() != null) {
-      targetByOverrideKey.putAll(getSuperTypeDescriptor().getOverrideKeyToTargetMap());
+      targetByOverrideKey.putAll(
+          getSuperTypeDescriptor().getOverrideKeyToTargetMap(sourceLanguage));
     }
 
     // 2. Now replace the ones that are overridden in this class and add the new override keys and
@@ -754,11 +758,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .filter(MethodDescriptor::isPolymorphic)
         .forEach(
             m -> {
-              targetByOverrideKey.put(m.getOverrideKey(), m);
+              targetByOverrideKey.put(m.getOverrideKey(sourceLanguage), m);
               if (!m.getVisibility().isPackagePrivate()) {
                 // The non package private methods are ALSO targets for the package private
                 // signature.
-                String packagePrivateOverridingKey = m.getPackagePrivateOverrideKey();
+                String packagePrivateOverridingKey = m.getPackagePrivateOverrideKey(sourceLanguage);
                 targetByOverrideKey.put(packagePrivateOverridingKey, m);
               }
             });
@@ -770,8 +774,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     // override a default method that is not implemented in the class.
     for (DeclaredTypeDescriptor superInterface : getInterfaceTypeDescriptors()) {
       for (MethodDescriptor methodDescriptor :
-          superInterface.getOverrideKeyToTargetMap().values()) {
-        String overrideKey = methodDescriptor.getOverrideKey();
+          superInterface.getOverrideKeyToTargetMap(sourceLanguage).values()) {
+        String overrideKey = methodDescriptor.getOverrideKey(sourceLanguage);
         MethodDescriptor overriddenMethod = targetByOverrideKey.get(overrideKey);
         // Looking at the superinterfaces to see if we find new targets for new override chains
         // introduced by this interface, or default methods that will need to replace an overridden
@@ -811,11 +815,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   /** Returns true if the method needs a specializing bridge. */
-  private static boolean needsSpecializingBridge(MethodDescriptor method) {
+  private static boolean needsSpecializingBridge(
+      MethodDescriptor method, SourceLanguage sourceLanguage) {
     // The method is a superclass method that is specialized by the current type and that
     // specialization introduced an new overridden method from some interface.
     return !method.getEnclosingTypeDescriptor().isInterface()
-        && !method.getOverrideKey().equals(method.getDeclarationDescriptor().getOverrideKey());
+        && !method
+            .getOverrideKey(sourceLanguage)
+            .equals(method.getDeclarationDescriptor().getOverrideKey(sourceLanguage));
   }
 
   private MethodDescriptor createBridgeMethodDescriptor(
