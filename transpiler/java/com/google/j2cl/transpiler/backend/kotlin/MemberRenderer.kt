@@ -21,7 +21,6 @@ import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.AstUtils.isConstructorInvocationStatement
 import com.google.j2cl.transpiler.ast.AstUtils.needsVisibilityBridge
 import com.google.j2cl.transpiler.ast.Field
-import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Member as JavaMember
 import com.google.j2cl.transpiler.ast.Method
@@ -31,6 +30,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 
@@ -139,9 +139,14 @@ private fun Renderer.renderMethodHeader(method: Method) {
   if (method.isStatic) {
     renderJvmStaticAnnotation()
   }
+
   val methodDescriptor = method.descriptor
-  if (methodDescriptor.visibility.needsObjCNameAnnotation && !methodDescriptor.isKtOverride) {
-    renderObjCNameAnnotation(methodDescriptor)
+  if (
+    method.needsObjCNameAnnotations &&
+      !methodDescriptor.isConstructor &&
+      methodDescriptor.getObjectiveCName() != null
+  ) {
+    renderObjCNameAnnotation(method.getObjCMethodName())
   }
   renderMethodModifiers(methodDescriptor)
   if (methodDescriptor.isConstructor) {
@@ -188,11 +193,11 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor) {
 }
 
 private fun Renderer.renderMethodParameters(method: Method) {
-  val parameterDescriptors = method.descriptor.parameterDescriptors
+  val methodDescriptor = method.descriptor
+  val parameterDescriptors = methodDescriptor.parameterDescriptors
   val parameters = method.parameters
-  val includeObjCNameAnnotation =
-    method.descriptor.visibility.needsObjCNameAnnotation && !method.descriptor.isKtOverride
-  val renderWithNewLines = includeObjCNameAnnotation && parameters.isNotEmpty()
+  val renderWithNewLines = method.needsObjCNameAnnotations && parameters.isNotEmpty()
+  val objCParameterNames = method.getObjCParameterNames()
   renderInParentheses {
     renderIndentedIf(renderWithNewLines) {
       renderCommaSeparated(0 until parameters.size) { index ->
@@ -200,8 +205,7 @@ private fun Renderer.renderMethodParameters(method: Method) {
         renderParameter(
           parameterDescriptors[index],
           parameters[index],
-          method.isConstructor && index == 0,
-          includeObjCNameAnnotation = includeObjCNameAnnotation
+          objCParameterNames?.get(index)
         )
       }
     }
@@ -211,17 +215,16 @@ private fun Renderer.renderMethodParameters(method: Method) {
 
 private fun Renderer.renderParameter(
   parameterDescriptor: ParameterDescriptor,
-  name: HasName,
-  omitWithPrefix: Boolean,
-  includeObjCNameAnnotation: Boolean = false
+  parameter: Variable,
+  objCParameterName: String? = null
 ) {
   val parameterTypeDescriptor = parameterDescriptor.typeDescriptor
   val renderedTypeDescriptor =
     if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
     else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (parameterDescriptor.isVarargs) render("vararg ")
-  if (includeObjCNameAnnotation) renderObjCNameAnnotation(parameterDescriptor, omitWithPrefix)
-  renderName(name)
+  renderObjCParameterNameAnnotation(objCParameterName)
+  renderName(parameter)
   render(": ")
   renderTypeDescriptor(renderedTypeDescriptor)
 }
@@ -247,3 +250,10 @@ private val MethodDescriptor.isKtOverride
     isJavaOverride &&
       (javaOverriddenMethodDescriptors.any { it.enclosingTypeDescriptor.isInterface } ||
         !needsVisibilityBridge(this))
+
+/**
+ * Property for checking if the visibility of the method is public or protected, and isn't an
+ * overriden method for the purpose of deciding whether to generate ObjectiveCName annotations
+ */
+internal val Method.needsObjCNameAnnotations
+  get() = descriptor.visibility.needsObjCNameAnnotation && !descriptor.isKtOverride
