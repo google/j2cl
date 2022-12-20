@@ -61,7 +61,8 @@ public class JavacParser {
 
   /** Returns a map from file paths to compilation units after Javac parsing. */
   @Nullable
-  public List<CompilationUnit> parseFiles(List<FileInfo> filePaths, boolean useTargetPath) {
+  public List<CompilationUnit> parseFiles(
+      List<FileInfo> filePaths, boolean useTargetPath, ImmutableList<String> forbiddenAnnotations) {
 
     if (filePaths.isEmpty()) {
       return ImmutableList.of();
@@ -100,7 +101,7 @@ public class JavacParser {
                       targetPathBySourcePath.keySet().stream().map(File::new).collect(toList())));
       List<CompilationUnitTree> javacCompilationUnits = Lists.newArrayList(task.parse());
       task.analyze();
-      if (hasErrors(diagnostics, javacCompilationUnits)) {
+      if (hasErrors(diagnostics, javacCompilationUnits, forbiddenAnnotations)) {
         return ImmutableList.of();
       }
 
@@ -116,15 +117,20 @@ public class JavacParser {
 
   private boolean hasErrors(
       DiagnosticCollector<JavaFileObject> diagnosticCollector,
-      List<CompilationUnitTree> javacCompilationUnits) {
+      List<CompilationUnitTree> javacCompilationUnits,
+      ImmutableList<String> forbiddenAnnotations) {
     boolean hasErrors = false;
     // Here we check for instances of @GwtIncompatible in the ast. If that is the case, we throw an
     // error since these should have been stripped by the build system already.
-    Set<String> filesWithGwtIncompatible =
-        GwtIncompatibleNodeCollector.filesWithGwtIncompatible(javacCompilationUnits);
-    if (!filesWithGwtIncompatible.isEmpty()) {
-      problems.fatal(
-          FatalError.GWT_INCOMPATIBLE_FOUND_IN_COMPILE, filesWithGwtIncompatible.iterator().next());
+    for (String forbiddenAnnotation : forbiddenAnnotations) {
+      Set<String> filesWithGwtIncompatible =
+          AnnotatedNodeCollector.filesWithAnnotation(javacCompilationUnits, forbiddenAnnotation);
+      if (!filesWithGwtIncompatible.isEmpty()) {
+        problems.fatal(
+            FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE,
+            forbiddenAnnotation,
+            filesWithGwtIncompatible.iterator().next());
+      }
     }
     for (Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollector.getDiagnostics()) {
       if (diagnostic.getKind() == Kind.ERROR) {

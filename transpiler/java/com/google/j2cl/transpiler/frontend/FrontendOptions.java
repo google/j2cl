@@ -31,4 +31,6 @@ public interface FrontendOptions {
   boolean isNullMarkedSupported();
 
   ImmutableList<String> getKotlincOptions();
+
+  ImmutableList<String> getForbiddenAnnotations();
 }

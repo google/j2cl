@@ -12,12 +12,21 @@ import kotlin.native.ObjCName
 
 @ObjCName("GwtincompatibleImplementor", exact = true)
 open class Implementor: Interface.ClassWithAbstractMethod(), Interface, Interface.NestedInterface {
+ open override fun incompatible() {}
+
+ open override fun nestedIncompatible() {}
+
+ open override fun incompatibleFromClass() {}
+
  open fun compatibleMethod() {
   val a: Int = 4
  }
 
  enum class SomeEnum {
   COMPATIBLE {
+   open override fun method_pp_gwtincompatible() {}
+  },
+  INCOMPATIBLE {
    open override fun method_pp_gwtincompatible() {}
   };
 

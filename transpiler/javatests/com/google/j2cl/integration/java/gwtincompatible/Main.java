@@ -27,6 +27,7 @@ public class Main {
   }
 
   @GwtIncompatible
+  @J2ktIncompatible
   public static void incompatible() {
     SomeEnum a = SomeEnum.INCOMPATIBLE;
   }
@@ -38,6 +39,7 @@ public class Main {
     },
 
     @GwtIncompatible
+    @J2ktIncompatible
     INCOMPATIBLE {
       @Override
       void method() {
@@ -49,6 +51,7 @@ public class Main {
   }
 
   @GwtIncompatible
+  @J2ktIncompatible
   public static void incompatibleMissingInDep() {
     new SimpleDateFormat();
   }

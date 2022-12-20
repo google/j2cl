@@ -35,9 +35,15 @@ final class BazelGwtIncompatibleStripper extends BazelWorker {
       usage = "The directory or zip file into which to place the output.")
   Path outputPath;
 
+  @Option(
+      name = "-annotation",
+      metaVar = "<annotation>",
+      usage = "The name of hte annoation to strip; defaults to 'GwtIncompatible'")
+  String annotation = "GwtIncompatible";
+
   @Override
   protected void run(Problems problems) {
-    GwtIncompatibleStripper.strip(files, outputPath, problems);
+    GwtIncompatibleStripper.strip(files, outputPath, problems, annotation);
   }
 
   public static void main(String[] workerArgs) throws Exception {

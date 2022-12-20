@@ -48,9 +48,9 @@ public class Problems {
     CANNOT_COPY_FILE("Cannot copy file: %s.", 1),
     PACKAGE_INFO_PARSE("Resource '%s' was found but it failed to parse.", 1),
     CLASS_PATH_URL("Class path entry '%s' is not a valid url.", 1),
-    GWT_INCOMPATIBLE_FOUND_IN_COMPILE(
-        "@GwtIncompatible annotations found in %s "
-            + "Please run this library through the @GwtIncompatible stripper tool.",
+    INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE(
+        "@$s annotations found in $s "
+            + "Please run this library through the incompatible annotated code stripper tool.",
         1),
     LIBRARY_INFO_OUTPUT_ARG_MISSING("-libraryinfooutput option is mandatory", 0),
     INVALID_JAVA_FRONTEND("%s is not a valid Java frontend.", 1),

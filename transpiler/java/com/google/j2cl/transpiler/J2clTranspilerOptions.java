@@ -46,6 +46,12 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
         .setNullMarkedSupported(false);
   }
 
+  @Override
+  public ImmutableList<String> getForbiddenAnnotations() {
+    return ImmutableList.of(
+        getBackend() == Backend.KOTLIN ? "J2ktIncompatible" : "GwtIncompatible");
+  }
+
   /** A Builder for J2clTranspilerOptions. */
   @AutoValue.Builder
   public abstract static class Builder {

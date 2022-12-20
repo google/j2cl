@@ -24,7 +24,10 @@ import java.util.List;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 
-/** A javac-like command line driver for @GwtIncompatible stripper. */
+/**
+ * A javac-like command line driver for stripping code annotated with "incompatible" annotations
+ * (e.g. @GwtIncompatible).
+ */
 public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineTool {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
   List<String> files = new ArrayList<>();
@@ -35,6 +38,12 @@ public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineT
       usage = "The directory or zip file into which to place the output.")
   Path outputPath = Paths.get(".");
 
+  @Option(
+      name = "-annotation",
+      metaVar = "<annotation>",
+      usage = "The name of hte annoation to strip; defaults to 'GwtIncompatible'")
+  String annotation = "GwtIncompatible";
+
   private GwtIncompatibleStripperCommandLineRunner() {
     super("gwt-incompatible-stripper");
   }
@@ -42,7 +51,7 @@ public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineT
   @Override
   protected void run(Problems problems) {
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
-    GwtIncompatibleStripper.strip(files, outputPath, problems);
+    GwtIncompatibleStripper.strip(files, outputPath, problems, annotation);
   }
 
   public static int run(String[] args) {

@@ -38,7 +38,8 @@ public enum Frontend {
       CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
           parser.parseFiles(
               options.getSources(),
-              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata());
+              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
+              options.getForbiddenAnnotations());
       problems.abortIfHasErrors();
       return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
     }
@@ -54,7 +55,8 @@ public enum Frontend {
       return new JavacParser(options.getClasspaths(), problems)
           .parseFiles(
               options.getSources(),
-              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata());
+              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata(),
+              options.getForbiddenAnnotations());
     }
 
     @Override

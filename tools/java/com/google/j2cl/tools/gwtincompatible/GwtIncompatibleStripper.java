@@ -25,7 +25,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.transpiler.frontend.jdt.GwtIncompatibleNodeCollector;
+import com.google.j2cl.transpiler.frontend.jdt.AnnotatedNodeCollector;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,28 +40,30 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 
 /**
- * A helper to comment out source code elements annotated with @GwtIncompatible so that they are
- * ignored by tools taking that source as input such as the java compile or the j2cl transpile.
+ * A helper to comment out source code elements annotated with "incompatible" annotations
+ * (e.g. @GwtIncompatible) so that they are ignored by tools taking that source as input such as the
+ * java compile or the j2cl transpile.
  */
 public final class GwtIncompatibleStripper {
 
-  static void strip(List<String> files, Path outputPath, Problems problems) {
+  static void strip(List<String> files, Path outputPath, Problems problems, String annotationName) {
     try (Output out = OutputUtils.initOutput(outputPath, problems)) {
       List<FileInfo> allPaths =
           SourceUtils.getAllSources(files, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(toImmutableList());
-      preprocessFiles(allPaths, out, problems);
+      preprocessFiles(allPaths, out, problems, annotationName);
     }
   }
 
   /** Preprocess all provided files and put them to provided output path. */
-  private static void preprocessFiles(List<FileInfo> fileInfos, Output output, Problems problems) {
+  private static void preprocessFiles(
+      List<FileInfo> fileInfos, Output output, Problems problems, String annotationName) {
     for (FileInfo fileInfo : fileInfos) {
       String processedFileContent;
       try {
         String fileContent = MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), UTF_8).read();
-        processedFileContent = strip(fileContent);
+        processedFileContent = strip(fileContent, annotationName);
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
         return;
@@ -72,9 +74,9 @@ public final class GwtIncompatibleStripper {
     }
   }
 
-  public static String strip(String fileContent) {
-    // Avoid parsing if there are no textual references to GwtIncompatible.
-    if (!fileContent.contains("GwtIncompatible")) {
+  public static String strip(String fileContent, String annotationName) {
+    // Avoid parsing if there are no textual references to the annotation name.
+    if (!fileContent.contains(annotationName)) {
       return fileContent;
     }
 
@@ -90,8 +92,8 @@ public final class GwtIncompatibleStripper {
     parser.setSource(fileContent.toCharArray());
     CompilationUnit compilationUnit = (CompilationUnit) parser.createAST(null);
 
-    // Find all the declarations with @GwtIncompatible.
-    GwtIncompatibleNodeCollector gwtIncompatibleVisitor = new GwtIncompatibleNodeCollector();
+    // Find all the declarations with the annotation name
+    AnnotatedNodeCollector gwtIncompatibleVisitor = new AnnotatedNodeCollector(annotationName);
     compilationUnit.accept(gwtIncompatibleVisitor);
     List<ASTNode> gwtIncompatibleNodes = gwtIncompatibleVisitor.getNodes();
 

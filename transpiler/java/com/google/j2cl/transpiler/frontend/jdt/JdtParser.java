@@ -64,7 +64,7 @@ public class JdtParser {
 
   /** Returns a map from file paths to compilation units after JDT parsing. */
   public CompilationUnitsAndTypeBindings parseFiles(
-      List<FileInfo> filePaths, boolean useTargetPath) {
+      List<FileInfo> filePaths, boolean useTargetPath, ImmutableList<String> forbiddenAnnotations) {
 
     // Parse and create a compilation unit for every file.
     ASTParser parser = newASTParser(true);
@@ -80,7 +80,7 @@ public class JdtParser {
         new FileASTRequestor() {
           @Override
           public void acceptAST(String filePath, CompilationUnit compilationUnit) {
-            if (compilationHasErrors(filePath, compilationUnit)) {
+            if (compilationHasErrors(filePath, compilationUnit, forbiddenAnnotations)) {
               return;
             }
             String filePathKey = filePath;
@@ -127,14 +127,18 @@ public class JdtParser {
     return encodings;
   }
 
-  private boolean compilationHasErrors(String filename, CompilationUnit unit) {
+  private boolean compilationHasErrors(
+      String filename, CompilationUnit unit, ImmutableList<String> forbiddenAnnotations) {
     boolean hasErrors = false;
     // Here we check for instances of @GwtIncompatible in the ast. If that is the case, we throw an
     // error since these should have been stripped by the build system already.
-    GwtIncompatibleNodeCollector collector = new GwtIncompatibleNodeCollector();
-    unit.accept(collector);
-    if (!collector.getNodes().isEmpty()) {
-      problems.fatal(FatalError.GWT_INCOMPATIBLE_FOUND_IN_COMPILE, filename);
+    for (String forbiddenAnnotation : forbiddenAnnotations) {
+      AnnotatedNodeCollector collector = new AnnotatedNodeCollector(forbiddenAnnotation);
+      unit.accept(collector);
+      if (!collector.getNodes().isEmpty()) {
+        problems.fatal(
+            FatalError.INCOMPATIBLE_ANNOTATION_FOUND_IN_COMPILE, forbiddenAnnotation, filename);
+      }
     }
     for (IProblem problem : unit.getProblems()) {
       if (problem.isError()) {

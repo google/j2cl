@@ -30,13 +30,19 @@ public class GwtIncompatibleStripperTest {
   @Test
   public void testNoProcess() {
     String content = "public class Foo {}";
-    assertEquals(content, GwtIncompatibleStripper.strip(content));
+    assertEquals(content, GwtIncompatibleStripper.strip(content, "GwtIncompatible"));
+  }
+
+  @Test
+  public void testNoProcessOtherIncompatible() {
+    String content = "@J2kIncompatible\npublic class Foo {}";
+    assertEquals(content, GwtIncompatibleStripper.strip(content, "GwtIncompatible"));
   }
 
   @Test
   public void testNoProcessString() {
     String content = "public class Foo {String a = \"@GwtIncompatible\");}";
-    assertEquals(content, GwtIncompatibleStripper.strip(content));
+    assertEquals(content, GwtIncompatibleStripper.strip(content, "GwtIncompatible"));
   }
 
   @Test
@@ -57,7 +63,51 @@ public class GwtIncompatibleStripperTest {
                 Strings.repeat(" ", "public class Foo {".length()),
                 Strings.repeat(" ", "  public X m() {return null;}".length()),
                 Strings.repeat(" ", "}".length()));
-    assertEquals(after, GwtIncompatibleStripper.strip(before));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
+  }
+
+  @Test
+  public void testProcessJ2ktIncompatibleClass() {
+    String before =
+        Joiner.on("\n")
+            .join(
+                "import a.b.X;",
+                "@J2ktIncompatible",
+                "public class Foo {",
+                "  public X m() {return null;}",
+                "}");
+    String after =
+        Joiner.on("\n")
+            .join(
+                Strings.repeat(" ", "import a.b.X;".length()),
+                Strings.repeat(" ", "@J2ktIncompatible".length()),
+                Strings.repeat(" ", "public class Foo {".length()),
+                Strings.repeat(" ", "  public X m() {return null;}".length()),
+                Strings.repeat(" ", "}".length()));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "J2ktIncompatible"));
+  }
+
+  @Test
+  public void testProcessMultipleAnnotatons() {
+    String before =
+        Joiner.on("\n")
+            .join(
+                "import a.b.X;",
+                "@GwtIncompatible",
+                "@J2ktIncompatible",
+                "public class Foo {",
+                "  public X m() {return null;}",
+                "}");
+    String after =
+        Joiner.on("\n")
+            .join(
+                Strings.repeat(" ", "import a.b.X;".length()),
+                Strings.repeat(" ", "@GwtIncompatible".length()),
+                Strings.repeat(" ", "@J2ktIncompatible".length()),
+                Strings.repeat(" ", "public class Foo {".length()),
+                Strings.repeat(" ", "  public X m() {return null;}".length()),
+                Strings.repeat(" ", "}".length()));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "J2ktIncompatible"));
   }
 
   @Test
@@ -84,7 +134,7 @@ public class GwtIncompatibleStripperTest {
                 Strings.repeat(" ", "  @GwtIncompatible".length()),
                 Strings.repeat(" ", "  public D n() {}".length()),
                 "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
   }
 
   @Test
@@ -107,7 +157,7 @@ public class GwtIncompatibleStripperTest {
                 Strings.repeat(" ", "  public String b;".length()),
                 "  public String c;",
                 "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
   }
 
   @Test
@@ -148,7 +198,7 @@ public class GwtIncompatibleStripperTest {
                 Strings.repeat(" ", "  }".length()),
                 "  String s;",
                 "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
   }
 
   @Test
@@ -169,7 +219,7 @@ public class GwtIncompatibleStripperTest {
                 Strings.repeat(" ", "  @GwtIncompatible".length()),
                 Strings.repeat(" ", "  public void n() {foo(x /* the value of x */);}".length()),
                 "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
   }
 
   @Test
@@ -190,7 +240,7 @@ public class GwtIncompatibleStripperTest {
                 Strings.repeat(" ", "  @GwtIncompatible".length()),
                 "  \t" + Strings.repeat(" ", "public B n() {}".length()),
                 "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
   }
 
   @Test
@@ -213,6 +263,6 @@ public class GwtIncompatibleStripperTest {
                 Strings.repeat(" ", "  //மெ.பை.".length()),
                 Strings.repeat(" ", "  public B n() {}".length()),
                 "}");
-    assertEquals(after, GwtIncompatibleStripper.strip(before));
+    assertEquals(after, GwtIncompatibleStripper.strip(before, "GwtIncompatible"));
   }
 }

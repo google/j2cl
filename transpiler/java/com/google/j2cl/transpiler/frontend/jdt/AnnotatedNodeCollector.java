@@ -29,11 +29,16 @@ import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 /**
- * A visitor that finds all the classes, methods and fields marked with a {@code GwtIncompatible}
- * annotation.
+ * A visitor that finds all the classes, methods and fields marked with a given annotation, e.g.
+ * {@code GwtIncompatible}.
  */
-public class GwtIncompatibleNodeCollector extends ASTVisitor {
+public class AnnotatedNodeCollector extends ASTVisitor {
   private final List<ASTNode> nodes = new ArrayList<>();
+  private final String annotationName;
+
+  public AnnotatedNodeCollector(String annotationName) {
+    this.annotationName = annotationName;
+  }
 
   @Override
   public boolean visit(TypeDeclaration typeDeclaration) {
@@ -56,8 +61,8 @@ public class GwtIncompatibleNodeCollector extends ASTVisitor {
   }
 
   /**
-   * Returns all the class, method or field nodes that are marked with a {@code GwtIncompatible}
-   * annotation. The nodes are returned in order based on the position on the file and won't
+   * Returns all the class, method or field nodes that are marked with the annotation provided in
+   * the constructor. The nodes are returned in order based on the position on the file and won't
    * overlap.
    */
   public List<ASTNode> getNodes() {
@@ -65,14 +70,15 @@ public class GwtIncompatibleNodeCollector extends ASTVisitor {
   }
 
   private boolean visitBodyDeclaration(BodyDeclaration bodyDeclaration) {
-    if (hasGwtIncompatibleAnnotation(bodyDeclaration)) {
+    if (hasGwtIncompatibleAnnotation(bodyDeclaration, annotationName)) {
       nodes.add(bodyDeclaration);
       return false;
     }
     return true;
   }
 
-  private static boolean hasGwtIncompatibleAnnotation(BodyDeclaration declaration) {
+  private static boolean hasGwtIncompatibleAnnotation(
+      BodyDeclaration declaration, String annotationName) {
     for (Object modifier : declaration.modifiers()) {
       if (modifier instanceof Annotation) {
         Name name = ((Annotation) modifier).getTypeName();
@@ -80,7 +86,7 @@ public class GwtIncompatibleNodeCollector extends ASTVisitor {
         // can be defined anywhere.
         String simpleName =
             name.isSimpleName() ? name.toString() : ((QualifiedName) name).getName().toString();
-        if (simpleName.equals("GwtIncompatible")) {
+        if (simpleName.equals(annotationName)) {
           return true;
         }
       }

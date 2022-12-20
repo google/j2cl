@@ -141,9 +141,10 @@ def _java_compile(
         exported_plugins = [],
         output_jar = None,
         javac_opts = [],
-        mnemonic = "J2cl"):
+        mnemonic = "J2cl",
+        strip_annotation = "GwtIncompatible"):
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
-    stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []
+    stripped_java_srcs = [_strip_incompatible_annotation(ctx, name, srcs, mnemonic, strip_annotation)] if srcs else []
     javac_opts = DEFAULT_J2CL_JAVAC_OPTS + javac_opts
 
     if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
@@ -192,7 +193,7 @@ def _kt_compile(
 def _get_java_toolchain(ctx):
     return ctx.attr._java_toolchain[java_common.JavaToolchainInfo]
 
-def _strip_gwt_incompatible(ctx, name, java_srcs, mnemonic):
+def _strip_incompatible_annotation(ctx, name, java_srcs, mnemonic, strip_annotation):
     # Paths are matched by Kythe to identify generated J2CL sources.
     output_file = ctx.actions.declare_file(name + "_j2cl_stripped-src.jar")
 
@@ -200,10 +201,11 @@ def _strip_gwt_incompatible(ctx, name, java_srcs, mnemonic):
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add("-d", output_file)
+    args.add("-annotation", strip_annotation)
     args.add_all(java_srcs)
 
     ctx.actions.run(
-        progress_message = "Stripping @GwtIncompatible from %s" % name,
+        progress_message = "Stripping @%s from %s" % (strip_annotation, name),
         inputs = java_srcs,
         outputs = [output_file],
         executable = ctx.executable._j2cl_stripper,

@@ -30,17 +30,17 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * A visitor that finds all the classes, methods and fields marked with a {@code GwtIncompatible}
- * annotation.
+ * A visitor that finds all the classes, methods and fields marked with a given annotation, e.g.
+ * {@code GwtIncompatible}
  */
-public final class GwtIncompatibleNodeCollector {
+public final class AnnotatedNodeCollector {
 
   /**
-   * Returns all the class, method or field nodes that are marked with a {@code GwtIncompatible}
-   * annotation. The nodes are returned in order based on the position on the file and won't
-   * overlap.
+   * Returns all the class, method or field nodes that are marked with a the given annotation. The
+   * nodes are returned in order based on the position on the file and won't overlap.
    */
-  public static Set<String> filesWithGwtIncompatible(List<CompilationUnitTree> compilationUnits) {
+  public static Set<String> filesWithAnnotation(
+      List<CompilationUnitTree> compilationUnits, String annotationName) {
     Set<String> filenames = new LinkedHashSet<>();
     for (CompilationUnitTree compilationUnit : compilationUnits) {
       compilationUnit.accept(
@@ -78,8 +78,7 @@ public final class GwtIncompatibleNodeCollector {
             private void checkGwtIncompatibleAnnotations(
                 List<? extends AnnotationTree> annotations) {
               if (annotations.stream()
-                  .anyMatch(
-                      a -> getLastComponent(a.getAnnotationType()).equals("GwtIncompatible"))) {
+                  .anyMatch(a -> getLastComponent(a.getAnnotationType()).equals(annotationName))) {
                 filenames.add(compilationUnit.getSourceFile().getName());
               }
             }
@@ -100,5 +99,5 @@ public final class GwtIncompatibleNodeCollector {
     }
   }
 
-  private GwtIncompatibleNodeCollector() {}
+  private AnnotatedNodeCollector() {}
 }
