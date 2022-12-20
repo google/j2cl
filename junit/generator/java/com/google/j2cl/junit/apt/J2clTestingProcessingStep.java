@@ -43,6 +43,7 @@ public class J2clTestingProcessingStep implements ProcessingStep {
   private final ErrorReporter errorReporter;
   private final JUnit3Validator junit3Validator;
   private final JUnit4Validator junit4Validator;
+  private final String testPlatform;
   private final TemplateWriter writer;
   private boolean noTestInput = true;
 
@@ -54,7 +55,7 @@ public class J2clTestingProcessingStep implements ProcessingStep {
         new JUnit4Validator(
             errorReporter, processingEnv.getTypeUtils(), processingEnv.getElementUtils());
     Map<String, String> options = processingEnv.getOptions();
-    String testPlatform =
+    this.testPlatform =
         options.getOrDefault(J2clTestingProcessor.JAVAC_OPTS_FLAG_TEST_PLATFORM, "UNKNOWN");
     this.writer = new TemplateWriter(errorReporter, processingEnv.getFiler(), testPlatform);
   }
@@ -140,6 +141,7 @@ public class J2clTestingProcessingStep implements ProcessingStep {
     if (classes.isEmpty()) {
       errorReporter.report(ErrorMessage.EMPTY_SUITE, typeElement);
     }
+    writer.handleTestSuiteFile(junit4Extractor.extractJUnit4Test(typeElement), classes);
     for (String clazzName : classes) {
       TypeElement t = processingEnv.getElementUtils().getTypeElement(clazzName);
       handleClass(t);

@@ -50,6 +50,8 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimplePassingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:IgnoreTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleFailingTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleSuite",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SuiteOfSuite",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:BeforeAndAfterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsOnConstructionTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ThrowsInBeforeClassTest",

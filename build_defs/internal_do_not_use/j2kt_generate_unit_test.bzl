@@ -38,7 +38,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-jvm",
             ],
             exports = deps,
-            javacopts = ["-AtestPlatform=J2KT"],
+            javacopts = ["-AtestPlatform=J2KT-JVM"],
             testonly = 1,
             tags = tags,
         )
@@ -51,7 +51,7 @@ def j2kt_generate_unit_test(name, test_class, deps, platform = "J2KT-JVM", tags 
                 "//build_defs/internal_do_not_use:internal_junit_runtime-j2kt-native",
             ],
             exports = deps,
-            javacopts = ["-AtestPlatform=J2KT"],
+            javacopts = ["-AtestPlatform=J2KT-NATIVE"],
             testonly = 1,
             tags = tags,
         )

@@ -44,6 +44,60 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
     TestResult testResult = createTestResultForSimplePassingTest(testName);
 
     List<String> logLines = runTest(testName);
+
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testIgnore() throws Exception {
+    String testName = "IgnoreTest";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSuccess("testOverriddenWithTest")
+            .addTestSuccess("testOverriddenWithoutTest")
+            .addTestSuccess("testOverriddenWithIgnoreButNoTest")
+            .build();
+
+    List<String> logLines = runTest(testName);
+
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testFailingTest() throws Exception {
+    String testName = "SimpleFailingTest";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestFailure("test")
+            .addTestFailure("testOther")
+            .addJavaLogLineSequence("test")
+            .addJavaLogLineSequence("testOther")
+            .build();
+
+    List<String> logLines = runTest(testName);
+
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testSimpleSuite() throws Exception {
+    String testName = "SimpleSuite";
+    TestResult testResult = createTestResultForSimplePassingTest(testName);
+
+    List<String> logLines = runTest(testName);
+
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testSuiteOfSuite() throws Exception {
+    String testName = "SuiteOfSuite";
+    TestResult testResult = createTestResultForSimplePassingTest(testName);
+
+    List<String> logLines = runTest(testName);
+
     assertThat(logLines).matches(testResult);
   }
 
@@ -61,37 +115,6 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
   }
 
   @Test
-  public void testIgnore() throws Exception {
-    String testName = "IgnoreTest";
-    TestResult testResult =
-        newTestResultBuilder()
-            .testClassName(testName)
-            .addTestSuccess("testOverriddenWithTest")
-            .addTestSuccess("testOverriddenWithoutTest")
-            .addTestSuccess("testOverriddenWithIgnoreButNoTest")
-            .build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
-  public void testFailingTest() throws Exception {
-    String testName = "SimpleFailingTest";
-    TestResult testResult =
-        newTestResultBuilder()
-            .testClassName(testName)
-            .addTestFailure("test")
-            .addTestFailure("testOther")
-            .addJavaLogLineSequence("test")
-            .addJavaLogLineSequence("testOther")
-            .build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
   public void testBeforeAndAfter() throws Exception {
     String testName = "BeforeAndAfterTest";
     TestSequencer testSequence = t -> new String[] {"constructor", "setUp", t, "tearDown"};
@@ -106,6 +129,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
             .build();
 
     List<String> logLines = runTest(testName);
+
     assertThat(logLines).matches(testResult);
   }
 
@@ -126,6 +150,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
             .build();
 
     List<String> logLines = runTest(testName);
+
     assertThat(logLines).matches(testResult);
   }
 
@@ -154,6 +179,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
     }
 
     List<String> logLines = runTest(testName);
+
     assertThat(logLines).matches(testResult);
   }
 
@@ -171,6 +197,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
             .build();
 
     List<String> logLines = runTest(testName);
+
     assertThat(logLines).matches(testResult);
   }
 
@@ -188,6 +215,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
             .build();
 
     List<String> logLines = runTest(testName);
+
     assertThat(logLines).matches(testResult);
   }
 
@@ -206,6 +234,7 @@ public class J2ktJUnit4IntegrationTest extends IntegrationTestBase {
             .build();
 
     List<String> logLines = runTest(testName);
+
     assertThat(logLines).matches(testResult);
   }
 }

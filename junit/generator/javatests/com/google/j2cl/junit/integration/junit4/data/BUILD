@@ -111,6 +111,7 @@ j2cl_test_integration_test_data(
     platforms = [
         "CLOSURE",
         "WASM",
+        "J2KT",
     ],
     deps = [":SimplePassingLib"],
 )
@@ -120,6 +121,7 @@ j2cl_test_integration_test_data(
     platforms = [
         "CLOSURE",
         "WASM",
+        "J2KT",
     ],
     deps = [":SimpleSuite-lib"],
 )

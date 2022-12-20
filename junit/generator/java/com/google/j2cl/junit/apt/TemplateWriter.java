@@ -25,7 +25,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
 import javax.tools.StandardLocation;
@@ -33,8 +32,10 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 class TemplateWriter {
+  private static final ImmutableSet<String> VALID_PLATFORMS =
+      ImmutableSet.of("CLOSURE", "WASM", "J2KT-JVM", "J2KT-NATIVE");
+
   private final List<String> testSummary = new ArrayList<>();
-  private final Set<String> validPlatforms = ImmutableSet.of("CLOSURE", "WASM", "J2KT");
   private final VelocityEngine velocityEngine = J2clTestingVelocityUtil.createEngine();
   private final ErrorReporter errorReporter;
   private final Filer filer;
@@ -44,13 +45,13 @@ class TemplateWriter {
     this.errorReporter = errorReporter;
     this.filer = filer;
     this.testPlatform = testPlatform;
-    if (!validPlatforms.contains(testPlatform)) {
+    if (!VALID_PLATFORMS.contains(testPlatform)) {
       errorReporter.report(ErrorMessage.UNSUPPORTED_PLATFORM, testPlatform);
     }
   }
 
   public void writeSummary() {
-    if (testPlatform.equals("J2KT")) {
+    if (testPlatform.startsWith("J2KT")) {
       return;
     }
     if (testSummary.isEmpty()) {
@@ -69,7 +70,7 @@ class TemplateWriter {
 
   public void writeTestClass(TestClass testClass) {
     String testSuiteFileName = testClass.qualifiedName().replace('.', '/');
-    if (testPlatform.equals("J2KT")) {
+    if (testPlatform.startsWith("J2KT")) {
       try {
         String mergedKotlinTemplate =
             mergeTemplate(testClass, "com/google/j2cl/junit/apt/KotlinJUnitAdapter.vm");
@@ -92,6 +93,35 @@ class TemplateWriter {
       writeResource(testSuiteFileName + ".testsuite", mergedJsTemplate);
       String mergedJavaTemplate = mergeTemplate(testClass, jsUnitAdapter);
       writeClass(testClass.jsUnitAdapterQualifiedClassName(), mergedJavaTemplate);
+    } catch (Exception e) {
+      errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(e));
+    }
+  }
+
+  public void handleTestSuiteFile(TestClass testClass, List<String> actualTestClasses) {
+    // Test suites rely upon JUnit infrastructure which is only supported for the JVM.
+    if (!testPlatform.equals("J2KT-JVM")) {
+      return;
+    }
+
+    String testSuiteFileName = testClass.qualifiedName().replace('.', '/');
+    VelocityContext velocityContext = new VelocityContext();
+    velocityContext.put("testClass", testClass);
+    velocityContext.put("actualTestClasses", actualTestClasses);
+    StringWriter outputBuffer = new StringWriter();
+
+    try {
+      boolean success =
+          velocityEngine.mergeTemplate(
+              "com/google/j2cl/junit/apt/J2ktJvmJUnitTestSuiteAdapter.vm",
+              UTF_8.name(),
+              velocityContext,
+              outputBuffer);
+      if (!success) {
+        throw new Exception("Unable to merge velocity template");
+      }
+
+      writeResource(testSuiteFileName + "_Adapter.kt", outputBuffer.toString());
     } catch (Exception e) {
       errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(e));
     }
