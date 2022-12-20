@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
 
@@ -46,7 +47,7 @@ internal fun Renderer.renderObjCNameAnnotation(typeDeclaration: TypeDeclaration)
   render("@")
   renderQualifiedName("kotlin.native.ObjCName")
   renderInParentheses {
-    renderString(typeDeclaration.objCName(useId = true))
+    renderString(typeDeclaration.objCName)
     render(", exact = true")
   }
   renderNewLine()
@@ -159,43 +160,38 @@ private fun Method.computeObjcMethodComponents(): Pair<String?, List<String>> {
   return Pair(objCName, objCParameterNames)
 }
 
-// TODO(259416922): move objcCName computation into TypeDeclaration.java
-private fun TypeDeclaration.objCName(useId: Boolean): String =
-  when (qualifiedBinaryName) {
-    "java.lang.Object" -> if (useId) "id" else "NSObject"
-    "java.lang.String" -> "NSString"
-    "java.lang.Class" -> "IOSClass"
-    "java.lang.Number" -> "NSNumber"
-    "java.lang.Cloneable" -> "NSCopying"
-    else -> customOrDefaultObjcName
-  }
+internal val TypeDeclaration.objCName: String
+  get() = objectiveCName ?: mappedObjCName ?: defaultObjCName
 
-private val TypeDeclaration.customOrDefaultObjcName: String
-  get() {
-    val objectiveCName = getObjectiveCName()
-    val prefixName = getObjectiveCNamePrefix()
-    if (objectiveCName != null) return objectiveCName
-
-    val objcName = simpleSourceName.toObjCName
-    return if (enclosingTypeDeclaration == null) {
-      if (prefixName != null) {
-        prefixName + objcName
-      } else {
-        objCPackagePrefix + objcName
-      }
-    } else {
-      getEnclosingTypeDeclaration()!!.customOrDefaultObjcName + "_" + objcName
+private val TypeDeclaration.mappedObjCName: String?
+  get() =
+    when (qualifiedBinaryName) {
+      "java.lang.Object" -> "NSObject"
+      "java.lang.String" -> "NSString"
+      "java.lang.Class" -> "IOSClass"
+      "java.lang.Number" -> "NSNumber"
+      "java.lang.Cloneable" -> "NSCopying"
+      else -> null
     }
-  }
+
+private val TypeDeclaration.defaultObjCName: String
+  get() =
+    simpleObjCName.let { simpleObjCName ->
+      enclosingTypeDeclaration?.let { it.objCName + "_" + simpleObjCName }
+        ?: objectiveCNamePrefix?.let { it + simpleObjCName }
+        ?: (objCPackagePrefix + simpleObjCName)
+    }
+
+private val TypeDeclaration.simpleObjCName: String
+  get() = simpleSourceName.objCName
 
 private val TypeDeclaration.objCPackagePrefix: String
-  get() =
-    (packageName ?: "").split('.').map { it.titleCase.toObjCName }.joinToString(separator = "")
+  get() = packageName?.split('.')?.joinToString(separator = "") { it.titleCase.objCName } ?: ""
 
 private val String.titleCase
   get() = StringUtils.capitalize(this)
 
-private val String.toObjCName
+private val String.objCName
   get() = replace('$', '_')
 
 private fun TypeDescriptor.objCName(useId: Boolean): String =
@@ -210,13 +206,14 @@ private fun TypeDescriptor.objCName(useId: Boolean): String =
         PrimitiveTypes.CHAR -> "char"
         PrimitiveTypes.FLOAT -> "float"
         PrimitiveTypes.DOUBLE -> "double"
-        // TODO(litstrong): figure out how to handle Void or void
+        // TODO(b/259416922): figure out how to handle Void or void
         else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
       }
     }
     is ArrayTypeDescriptor ->
       leafTypeDescriptor.objCName(useId = false) + "Array" + dimensionsSuffix
-    is DeclaredTypeDescriptor -> typeDeclaration.objCName(useId = useId)
+    is DeclaredTypeDescriptor ->
+      if (useId && isJavaLangObject(this)) "id" else typeDeclaration.objCName
     is TypeVariable -> upperBoundTypeDescriptor.objCName(useId = useId)
     else -> "id"
   }
