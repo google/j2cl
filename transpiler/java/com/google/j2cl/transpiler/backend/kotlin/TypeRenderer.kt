@@ -34,7 +34,8 @@ fun Renderer.renderType(type: Type) {
   }
 
   if (typeDeclaration.visibility.needsObjCNameAnnotation && !typeDeclaration.isLocal) {
-    renderObjCNameAnnotation(typeDeclaration)
+    renderObjCNameAnnotation(typeDeclaration.objCName, exact = true)
+    renderNewLine()
   }
 
   if (type.isClass && !typeDeclaration.isFinal) {

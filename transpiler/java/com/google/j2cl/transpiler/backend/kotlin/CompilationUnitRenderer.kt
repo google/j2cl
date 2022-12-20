@@ -30,6 +30,7 @@ private fun Renderer.renderFileComment(compilationUnit: CompilationUnit) {
 private fun Renderer.renderFileAnnotations() {
   renderOptInExperimentalObjCNameFileAnnotation()
   renderNewLine()
+  renderNewLine()
 }
 
 internal fun Renderer.renderPackageAndImports(compilationUnit: CompilationUnit) {

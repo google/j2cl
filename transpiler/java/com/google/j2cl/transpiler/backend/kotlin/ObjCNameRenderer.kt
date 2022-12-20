@@ -40,38 +40,14 @@ internal fun Renderer.renderOptInExperimentalObjCNameFileAnnotation() {
     renderQualifiedName("kotlin.experimental.ExperimentalObjCName")
     render("::class")
   }
-  renderNewLine()
 }
 
-internal fun Renderer.renderObjCNameAnnotation(typeDeclaration: TypeDeclaration) {
+internal fun Renderer.renderObjCNameAnnotation(name: String, exact: Boolean? = null) {
   render("@")
   renderQualifiedName("kotlin.native.ObjCName")
   renderInParentheses {
-    renderString(typeDeclaration.objCName)
-    render(", exact = true")
-  }
-  renderNewLine()
-}
-
-internal fun Renderer.renderObjCNameAnnotation(objCName: String) {
-  render("@")
-  renderQualifiedName("kotlin.native.ObjCName")
-  renderInParentheses {
-    renderString(objCName)
-    render(", exact = false")
-  }
-  renderNewLine()
-}
-
-internal fun Renderer.renderObjCParameterNameAnnotation(renamedParam: String?) {
-  if (renamedParam != null) {
-    render("@")
-    renderQualifiedName("kotlin.native.ObjCName")
-    renderInParentheses {
-      renderString(renamedParam)
-      render(", exact = false")
-    }
-    render(" ")
+    renderString(name)
+    exact?.let { render(", exact = $it") }
   }
 }
 

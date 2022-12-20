@@ -142,7 +142,10 @@ private fun Renderer.renderMethodHeader(method: Method) {
 
   val methodDescriptor = method.descriptor
   if (!method.isConstructor) {
-    method.toObjCNames()?.methodName?.let(::renderObjCNameAnnotation)
+    method.toObjCNames()?.methodName?.let {
+      renderObjCNameAnnotation(it, exact = false)
+      renderNewLine()
+    }
   }
   renderMethodModifiers(methodDescriptor)
   if (methodDescriptor.isConstructor) {
@@ -219,7 +222,10 @@ private fun Renderer.renderParameter(
     if (!parameterDescriptor.isVarargs) parameterTypeDescriptor
     else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (parameterDescriptor.isVarargs) render("vararg ")
-  renderObjCParameterNameAnnotation(objCParameterName)
+  objCParameterName?.let {
+    renderObjCNameAnnotation(it, exact = false)
+    render(" ")
+  }
   renderName(parameter)
   render(": ")
   renderTypeDescriptor(renderedTypeDescriptor)
