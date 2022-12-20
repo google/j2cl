@@ -75,42 +75,34 @@ internal fun Renderer.renderObjCParameterNameAnnotation(renamedParam: String?) {
   }
 }
 
-internal fun Method.getObjCMethodName(): String {
-  val (objCName, _) = computeObjcMethodComponents()
-  return objCName!!
-}
-
-internal fun Method.getObjCParameterNames(): List<String>? {
-  val (_, objCParameterNames) = computeObjcNameComponents()
-  return objCParameterNames
-}
+internal data class MethodObjCNames(
+  val methodName: String? = null,
+  val parameterNames: List<String>
+)
 
 /**
  * Parses ObjectiveCName annotation, extracting method name and parameters to be used in the
  * ObjCName annotation kotlin requires.
  */
-private fun Method.computeObjcNameComponents(): Pair<String?, List<String>?> {
-  if (!needsObjCNameAnnotations) return Pair(null, null)
-  else if (descriptor.isConstructor) return computeObjCConstructorComponents()
-  else return computeObjcMethodComponents()
-}
+internal fun Method.toObjCNames(): MethodObjCNames? =
+  if (!needsObjCNameAnnotations) null
+  else if (descriptor.isConstructor) toConstructorObjCNames() else toNonConstructorObjCNames()
 
 /**
  * Parses constructor ObjectiveCName annotations for which only parameter annotations need to be
  * outputted. Constructor annotations are expected to begin with "initWith" and the first parameter
  * should always exclude "with" prefix since it is automatically generated.
  */
-private fun Method.computeObjCConstructorComponents(): Pair<String?, List<String>> {
+private fun Method.toConstructorObjCNames(): MethodObjCNames {
   var objCParameterNames = mutableListOf<String>()
-  var objCName = descriptor.getObjectiveCName()
+  var objCName = descriptor.objectiveCName
 
   if (parameters.isNotEmpty()) {
     if (objCName != null) {
       objCParameterNames = objCName.split(":").toMutableList()
       if (objCParameterNames[0].startsWith(INIT_WITH_PREFIX))
         objCParameterNames[0] = objCParameterNames[0].substring(INIT_WITH_PREFIX.length)
-      else
-        objCParameterNames[0] = "${parameters[0].typeDescriptor.objCName(useId = true).titleCase}"
+      else objCParameterNames[0] = parameters[0].typeDescriptor.objCName(useId = true).titleCase
     } else {
       objCParameterNames =
         parameters
@@ -119,7 +111,7 @@ private fun Method.computeObjCConstructorComponents(): Pair<String?, List<String
       objCParameterNames[0] = objCParameterNames[0].substring(4)
     }
   }
-  return Pair(objCName, objCParameterNames)
+  return MethodObjCNames(objCName, objCParameterNames.toList())
 }
 
 /**
@@ -128,9 +120,9 @@ private fun Method.computeObjCConstructorComponents(): Pair<String?, List<String
  * unnamed. However, the first element in the delimited string needs to be split into the method
  * name and first parameter name because in Kotlin, ObjC annotations are required for each element.
  */
-private fun Method.computeObjcMethodComponents(): Pair<String?, List<String>> {
+private fun Method.toNonConstructorObjCNames(): MethodObjCNames {
   var objCParameterNames = mutableListOf<String>()
-  var objCName = descriptor.getObjectiveCName()
+  var objCName = descriptor.objectiveCName
   if (parameters.isNotEmpty()) {
     if (objCName != null) {
       val methodName = descriptor.name!!
@@ -157,7 +149,7 @@ private fun Method.computeObjcMethodComponents(): Pair<String?, List<String>> {
     }
   }
 
-  return Pair(objCName, objCParameterNames)
+  return MethodObjCNames(objCName, objCParameterNames.toList())
 }
 
 internal val TypeDeclaration.objCName: String
@@ -178,8 +170,7 @@ private val TypeDeclaration.defaultObjCName: String
   get() =
     simpleObjCName.let { simpleObjCName ->
       enclosingTypeDeclaration?.let { it.objCName + "_" + simpleObjCName }
-        ?: objectiveCNamePrefix?.let { it + simpleObjCName }
-        ?: (objCPackagePrefix + simpleObjCName)
+        ?: objectiveCNamePrefix?.let { it + simpleObjCName } ?: (objCPackagePrefix + simpleObjCName)
     }
 
 private val TypeDeclaration.simpleObjCName: String

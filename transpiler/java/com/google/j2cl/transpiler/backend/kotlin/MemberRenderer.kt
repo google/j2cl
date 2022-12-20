@@ -141,12 +141,8 @@ private fun Renderer.renderMethodHeader(method: Method) {
   }
 
   val methodDescriptor = method.descriptor
-  if (
-    method.needsObjCNameAnnotations &&
-      !methodDescriptor.isConstructor &&
-      methodDescriptor.getObjectiveCName() != null
-  ) {
-    renderObjCNameAnnotation(method.getObjCMethodName())
+  if (!method.isConstructor) {
+    method.toObjCNames()?.methodName?.let(::renderObjCNameAnnotation)
   }
   renderMethodModifiers(methodDescriptor)
   if (methodDescriptor.isConstructor) {
@@ -197,7 +193,7 @@ private fun Renderer.renderMethodParameters(method: Method) {
   val parameterDescriptors = methodDescriptor.parameterDescriptors
   val parameters = method.parameters
   val renderWithNewLines = method.needsObjCNameAnnotations && parameters.isNotEmpty()
-  val objCParameterNames = method.getObjCParameterNames()
+  val objCParameterNames = method.toObjCNames()?.parameterNames
   renderInParentheses {
     renderIndentedIf(renderWithNewLines) {
       renderCommaSeparated(0 until parameters.size) { index ->
