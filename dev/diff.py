@@ -42,7 +42,7 @@ def main(argv):
 
   print("  Starting diff")
   subprocess.call(
-      "$P4DIFF %s %s" % (orig_js_file, modified_js_file), shell=True)
+      "${P4DIFF:-diff} %s %s" % (orig_js_file, modified_js_file), shell=True)
 
 
 def add_arguments(parser):
