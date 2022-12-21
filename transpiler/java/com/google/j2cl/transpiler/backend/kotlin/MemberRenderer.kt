@@ -141,8 +141,9 @@ private fun Renderer.renderMethodHeader(method: Method) {
   }
 
   val methodDescriptor = method.descriptor
+  val methodObjCNames = method.toObjCNames()
   if (!method.isConstructor) {
-    method.toObjCNames()?.methodName?.let {
+    methodObjCNames?.methodName?.let {
       renderObjCNameAnnotation(it, exact = false)
       renderNewLine()
     }
@@ -160,7 +161,7 @@ private fun Renderer.renderMethodHeader(method: Method) {
     renderIdentifier(methodDescriptor.ktMangledName)
   }
   if (!method.descriptor.isKtProperty) {
-    renderMethodParameters(method)
+    renderMethodParameters(method, methodObjCNames?.parameterNames)
   }
   if (methodDescriptor.isConstructor) {
     renderConstructorInvocation(method)
@@ -191,12 +192,11 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor) {
   }
 }
 
-private fun Renderer.renderMethodParameters(method: Method) {
+private fun Renderer.renderMethodParameters(method: Method, objCParameterNames: List<String>?) {
   val methodDescriptor = method.descriptor
   val parameterDescriptors = methodDescriptor.parameterDescriptors
   val parameters = method.parameters
-  val renderWithNewLines = method.needsObjCNameAnnotations && parameters.isNotEmpty()
-  val objCParameterNames = method.toObjCNames()?.parameterNames
+  val renderWithNewLines = objCParameterNames != null && parameters.isNotEmpty()
   renderInParentheses {
     renderIndentedIf(renderWithNewLines) {
       renderCommaSeparated(0 until parameters.size) { index ->
@@ -247,15 +247,8 @@ private fun Renderer.renderConstructorInvocation(method: Method) {
   }
 }
 
-private val MethodDescriptor.isKtOverride
+internal val MethodDescriptor.isKtOverride
   get() =
     isJavaOverride &&
       (javaOverriddenMethodDescriptors.any { it.enclosingTypeDescriptor.isInterface } ||
         !needsVisibilityBridge(this))
-
-/**
- * Property for checking if the visibility of the method is public or protected, and isn't an
- * overriden method for the purpose of deciding whether to generate ObjectiveCName annotations
- */
-internal val Method.needsObjCNameAnnotations
-  get() = descriptor.visibility.needsObjCNameAnnotation && !descriptor.isKtOverride

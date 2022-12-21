@@ -20,6 +20,7 @@ import com.google.j2cl.common.StringUtils
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.Method
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -27,11 +28,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Visibility
-
-private const val INIT_WITH_PREFIX = "initWith"
-
-internal val Visibility.needsObjCNameAnnotation
-  get() = this == Visibility.PUBLIC || this == Visibility.PROTECTED
 
 internal fun Renderer.renderOptInExperimentalObjCNameFileAnnotation() {
   render("@file:")
@@ -61,7 +57,7 @@ internal data class MethodObjCNames(
  * ObjCName annotation kotlin requires.
  */
 internal fun Method.toObjCNames(): MethodObjCNames? =
-  if (!needsObjCNameAnnotations) null
+  if (!descriptor.needsObjCNameAnnotations) null
   else if (descriptor.isConstructor) toConstructorObjCNames() else toNonConstructorObjCNames()
 
 /**
@@ -76,8 +72,9 @@ private fun Method.toConstructorObjCNames(): MethodObjCNames {
   if (parameters.isNotEmpty()) {
     if (objCName != null) {
       objCParameterNames = objCName.split(":").toMutableList()
-      if (objCParameterNames[0].startsWith(INIT_WITH_PREFIX))
-        objCParameterNames[0] = objCParameterNames[0].substring(INIT_WITH_PREFIX.length)
+      val initWithPrefix = "initWith"
+      if (objCParameterNames[0].startsWith(initWithPrefix))
+        objCParameterNames[0] = objCParameterNames[0].substring(initWithPrefix.length)
       else objCParameterNames[0] = parameters[0].typeDescriptor.objCName(useId = true).titleCase
     } else {
       objCParameterNames =
@@ -187,3 +184,9 @@ private fun TypeDescriptor.objCName(useId: Boolean): String =
 
 private val ArrayTypeDescriptor.dimensionsSuffix
   get() = if (dimensions > 1) "$dimensions" else ""
+
+private val MethodDescriptor.needsObjCNameAnnotations
+  get() = visibility.needsObjCNameAnnotation && !isKtOverride
+
+internal val Visibility.needsObjCNameAnnotation
+  get() = this == Visibility.PUBLIC || this == Visibility.PROTECTED
