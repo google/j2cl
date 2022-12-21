@@ -27,7 +27,10 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.backend.kotlin.common.letIf
+import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 
 internal fun Renderer.renderOptInExperimentalObjCNameFileAnnotation() {
   render("@file:")
@@ -52,78 +55,54 @@ internal data class MethodObjCNames(
   val parameterNames: List<String>
 )
 
-/**
- * Parses ObjectiveCName annotation, extracting method name and parameters to be used in the
- * ObjCName annotation kotlin requires.
- */
 internal fun Method.toObjCNames(): MethodObjCNames? =
   if (!descriptor.needsObjCNameAnnotations) null
   else if (descriptor.isConstructor) toConstructorObjCNames() else toNonConstructorObjCNames()
 
-/**
- * Parses constructor ObjectiveCName annotations for which only parameter annotations need to be
- * outputted. Constructor annotations are expected to begin with "initWith" and the first parameter
- * should always exclude "with" prefix since it is automatically generated.
- */
-private fun Method.toConstructorObjCNames(): MethodObjCNames {
-  var objCParameterNames = mutableListOf<String>()
-  var objCName = descriptor.objectiveCName
-
-  if (parameters.isNotEmpty()) {
-    if (objCName != null) {
-      objCParameterNames = objCName.split(":").toMutableList()
-      val initWithPrefix = "initWith"
-      if (objCParameterNames[0].startsWith(initWithPrefix))
-        objCParameterNames[0] = objCParameterNames[0].substring(initWithPrefix.length)
-      else objCParameterNames[0] = parameters[0].typeDescriptor.objCName(useId = true).titleCase
-    } else {
-      objCParameterNames =
-        parameters
-          .map { "with${it.typeDescriptor.objCName(useId = true).titleCase}" }
-          .toMutableList()
-      objCParameterNames[0] = objCParameterNames[0].substring(4)
-    }
+private fun Method.toConstructorObjCNames(): MethodObjCNames =
+  descriptor.objectiveCName.let { objectiveCName ->
+    MethodObjCNames(
+      objectiveCName,
+      if (objectiveCName != null) {
+        objectiveCName.split(":").mapFirst {
+          val prefix = "initWith"
+          if (it.startsWith(prefix)) it.substring(prefix.length) else parameters.first().objCName
+        }
+      } else {
+        parameters.mapIndexed { index, parameter ->
+          parameter.objCName.letIf(index != 0) { "with$it" }
+        }
+      }
+    )
   }
-  return MethodObjCNames(objCName, objCParameterNames.toList())
-}
 
-/**
- * Computes method and parameter annotation names from the ObjectiveCName annotation which is in
- * ObjC style with method name and parameters delimited by colons, and the first parameter left
- * unnamed. However, the first element in the delimited string needs to be split into the method
- * name and first parameter name because in Kotlin, ObjC annotations are required for each element.
- */
-private fun Method.toNonConstructorObjCNames(): MethodObjCNames {
-  var objCParameterNames = mutableListOf<String>()
-  var objCName = descriptor.objectiveCName
-  if (parameters.isNotEmpty()) {
-    if (objCName != null) {
+private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
+  descriptor.objectiveCName.let { objectiveCName ->
+    if (objectiveCName == null || parameters.isEmpty()) {
+      MethodObjCNames(objectiveCName, parameters.map { "with${it.objCName}" })
+    } else {
       val methodName = descriptor.name!!
-      val prefix = methodName.commonPrefixWith(objCName)
-      objCParameterNames = objCName.split(":").toMutableList()
-
-      // If possible, split method name and first parameter by shared prefix
-      if (prefix.isNotEmpty() && prefix.length != objCParameterNames[0].length) {
-        objCName = prefix
-        objCParameterNames[0] = objCParameterNames[0].substring(prefix.length)
+      val prefix = methodName.commonPrefixWith(objectiveCName)
+      val objCParameterNames = objectiveCName.split(":")
+      val firstObjCParameterName = objCParameterNames.firstOrNull()
+      if (firstObjCParameterName == null) {
+        MethodObjCNames(objectiveCName, objCParameterNames)
+      } else {
+        // If possible, split method name and first parameter by shared prefix.
+        // Otherwise, split string in half arbitrarily. Does not handle single character objc name.
+        if (prefix.isNotEmpty() && prefix.length != firstObjCParameterName.length) {
+          MethodObjCNames(prefix, objCParameterNames.mapFirst { it.substring(prefix.length) })
+        } else {
+          check(firstObjCParameterName.length > 1)
+          val midIndex = firstObjCParameterName.length / 2
+          MethodObjCNames(
+            firstObjCParameterName.substring(0, midIndex),
+            objCParameterNames.mapFirst { it.substring(midIndex) }
+          )
+        }
       }
-      // Otherwise, split string in half arbitrarily. Does not handle single character objc name
-      else {
-        check(objCParameterNames[0].length > 1)
-        val midIndex = (objCParameterNames[0].length / 2).toInt()
-        objCName = objCParameterNames[0].substring(0, midIndex)
-        objCParameterNames[0] = objCParameterNames[0].substring(midIndex)
-      }
-    } else {
-      objCParameterNames =
-        parameters
-          .map { "with${it.typeDescriptor.objCName(useId = true).titleCase}" }
-          .toMutableList()
     }
   }
-
-  return MethodObjCNames(objCName, objCParameterNames.toList())
-}
 
 internal val TypeDeclaration.objCName: String
   get() = objectiveCName ?: mappedObjCName ?: defaultObjCName
@@ -184,6 +163,9 @@ private fun TypeDescriptor.objCName(useId: Boolean): String =
 
 private val ArrayTypeDescriptor.dimensionsSuffix
   get() = if (dimensions > 1) "$dimensions" else ""
+
+private val Variable.objCName
+  get() = typeDescriptor.objCName(useId = true).titleCase
 
 private val MethodDescriptor.needsObjCNameAnnotations
   get() = visibility.needsObjCNameAnnotation && !isKtOverride
