@@ -57,3 +57,9 @@ val String.escapedString: String
   get() =
     // Surrogate pairs must be escaped separately in Kotlin, so escaping each Char separately is OK.
     StringBuilder().also { builder -> forEach { builder.append(it.escapedString) } }.toString()
+
+val Char.literalString: String
+  get() = "'$escapedString'"
+
+val String.literalString: String
+  get() = "\"$escapedString\""

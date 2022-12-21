@@ -96,12 +96,6 @@ data class Renderer(
     render(" */")
   }
 
-  fun renderInBackticks(renderFn: () -> Unit) {
-    render("`")
-    renderFn()
-    render("`")
-  }
-
   fun <V> renderSeparatedWith(values: Iterable<V>, separator: String, renderFn: (V) -> Unit) {
     var first = true
     for (value in values) {
@@ -139,6 +133,6 @@ data class Renderer(
   }
 
   fun renderString(string: String) {
-    render("\"${string.escapedString}\"")
+    render(string.literalString)
   }
 }

@@ -19,20 +19,19 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.isForbiddenKeyword
 import com.google.j2cl.transpiler.backend.kotlin.ast.isHardKeyword
 
 internal fun Renderer.renderIdentifier(identifier: String) {
-  // Dollar sign ($) is not a valid identifier character since Kotlin 1.7, as well as many other
-  // characters. For now, it is replaced with triple underscores (___) to minimise a risk of
-  // conflict.
-  // TODO(b/236360941): Implement escaping which would work across all platforms.
-  var kotlinIdentifier = identifier.replace("$", "___")
-  if (isForbiddenKeyword(kotlinIdentifier)) {
-    kotlinIdentifier = kotlinIdentifier + "___forbidden"
-  }
-  if (isHardKeyword(kotlinIdentifier) || !kotlinIdentifier.isValidIdentifier) {
-    renderInBackticks { render(kotlinIdentifier) }
-  } else {
-    render(kotlinIdentifier)
-  }
+  render(identifier.identifierString)
 }
+
+// Dollar sign ($) is not a valid identifier character since Kotlin 1.7, as well as many other
+// characters. For now, it is replaced with triple underscores (___) to minimise a risk of
+// conflict.
+// TODO(b/236360941): Implement escaping which would work across all platforms.
+internal val String.identifierString
+  get() =
+    replace("$", "___").run {
+      if (isForbiddenKeyword(this)) this + "___forbidden"
+      else if (isHardKeyword(this) || !isValidIdentifier) "`$this`" else this
+    }
 
 internal fun Renderer.renderPackageName(packageName: String) {
   renderQualifiedIdentifier(packageName)
