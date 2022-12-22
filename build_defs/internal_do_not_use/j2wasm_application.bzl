@@ -174,7 +174,7 @@ _j2wasm_application = rule(
     },
 )
 
-def j2wasm_application(name, defines = dict(), **kwargs):
+def j2wasm_application(name, defines = dict(), binaryen_stage1_args = None, binaryen_stage2_args = None, **kwargs):
     default_defines = {
         "J2WASM_DEBUG": "TRUE",
         "jre.checkedMode": "ENABLED",
@@ -202,7 +202,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     _j2wasm_application(
         name = name,
-        binaryen_stage1_args = [
+        binaryen_stage1_args = binaryen_stage1_args or [
             # Specific list of passes: The order and count of these flags does
             # matter. First -O3 will be the slowest, so we isolate it in a
             # stage1 invocation (due to go/forge-limits for time).
@@ -210,7 +210,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--gufa",
             "-O3",
         ],
-        binaryen_stage2_args = [
+        binaryen_stage2_args = binaryen_stage2_args or [
             # Optimization flags (affecting passes in general) included at top.
             "--partial-inlining-ifs=4",
             "-fimfs=50",
