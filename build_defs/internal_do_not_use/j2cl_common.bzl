@@ -269,7 +269,6 @@ def _j2cl_transpile(
     ):
         args.add("-generatekytheindexingmetadata")
     args.add_all(kotlincopts, format_each = "-kotlincOptions=%s")
-    args.add_all(kt_common_srcs, format_each = "-ktcommonsources=%s")
     args.add_all(srcs)
 
     #  TODO(b/217287994): Remove the ability to do transpiler override.

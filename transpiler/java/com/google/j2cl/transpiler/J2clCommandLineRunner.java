@@ -40,15 +40,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   List<String> files = new ArrayList<>();
 
   @Option(
-      name = "-ktcommonsources",
-      metaVar = "<common source filepaths>",
-      usage =
-          "Specifies which individual files are considered common sources. The filepaths might"
-              + " refer to source files passed directly as arguments or be relative paths for"
-              + " sources in the source jars passed as arguments.")
-  List<String> kotlinCommonSources = new ArrayList<>();
-
-  @Option(
       name = "-classpath",
       aliases = "-cp",
       metaVar = "<path>",
@@ -127,7 +118,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
             SourceUtils.getAllSources(this.files, problems)
                 .filter(p -> p.sourcePath().endsWith(".java"))
                 .collect(toImmutableList()))
-        .setKotlinCommonSources(this.kotlinCommonSources)
         .setNativeSources(
             SourceUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
                 .filter(p -> p.sourcePath().endsWith(".native.js"))

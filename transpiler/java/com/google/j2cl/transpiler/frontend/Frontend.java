@@ -80,8 +80,8 @@ public enum Frontend {
         List<CompilationUnit> compilationUnits =
             (List<CompilationUnit>)
                 kotlinParser
-                    .getMethod("parseFiles", List.class, List.class)
-                    .invoke(parserInstance, options.getSources(), options.getKotlinCommonSources());
+                    .getMethod("parseFiles", List.class)
+                    .invoke(parserInstance, options.getSources());
         problems.abortIfHasErrors();
         return compilationUnits;
       } catch (Exception e) {

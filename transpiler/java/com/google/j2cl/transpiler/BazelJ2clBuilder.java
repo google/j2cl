@@ -14,14 +14,11 @@
 package com.google.j2cl.transpiler;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -37,7 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.spi.MapOptionHandler;
@@ -55,15 +51,6 @@ final class BazelJ2clBuilder extends BazelWorker {
       required = true,
       usage = "Specifies individual files and jars/zips of sources (.java, .js, .native.js).")
   List<String> sources = new ArrayList<>();
-
-  @Option(
-      name = "-ktcommonsources",
-      metaVar = "<common source filepaths>",
-      usage =
-          "Specifies which individual files are considered common sources. The filepaths might"
-              + " refer to source files passed directly as arguments or be relative paths for"
-              + " sources in the source jars passed as arguments.")
-  List<String> kotlinCommonSources = new ArrayList<>();
 
   @Option(
       name = "-classpath",
@@ -173,28 +160,9 @@ final class BazelJ2clBuilder extends BazelWorker {
         allSources.stream().filter(p -> p.sourcePath().endsWith(".kt")).collect(toImmutableList());
 
     // TODO(dramaix): add support for transpiling java and kotlin simultaneously.
-    if (!allJavaSources.isEmpty()
-        && (!allKotlinSources.isEmpty() || !kotlinCommonSources.isEmpty())) {
+    if (!allJavaSources.isEmpty() && (!allKotlinSources.isEmpty())) {
       throw new AssertionError(
           "Transpilation of Java and Kotlin files together is not supported yet.");
-    }
-
-    // TODO(b/144721781): Remove this guard when we now that common srcs will always end up in the
-    //  srcjar under a common-srcs/ root folder.
-    boolean isUsingNewKotlinSrcJarZipper =
-        allKotlinSources.stream()
-            .anyMatch(fileInfo -> fileInfo.originalPath().startsWith("common-srcs/"));
-    if (!isUsingNewKotlinSrcJarZipper) {
-      // Common kotlin file paths should be a strict subset of the sources.
-      Set<String> unmatchedKotlinCommonSources =
-          Sets.difference(
-              ImmutableSet.copyOf(kotlinCommonSources),
-              allKotlinSources.stream().map(FileInfo::originalPath).collect(toImmutableSet()));
-      if (!unmatchedKotlinCommonSources.isEmpty()) {
-        problems.fatal(
-            FatalError.INVALID_KOTLIN_COMMON_SOURCES,
-            Joiner.on(", ").join(unmatchedKotlinCommonSources));
-      }
     }
 
     ImmutableList<FileInfo> allNativeSources =
@@ -210,7 +178,6 @@ final class BazelJ2clBuilder extends BazelWorker {
     return J2clTranspilerOptions.newBuilder()
         .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
         .setNativeSources(allNativeSources)
-        .setKotlinCommonSources(this.kotlinCommonSources)
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(output)
         .setLibraryInfoOutput(this.libraryInfoOutput)

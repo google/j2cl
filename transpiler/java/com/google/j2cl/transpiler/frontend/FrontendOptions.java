@@ -22,8 +22,6 @@ import com.google.j2cl.common.SourceUtils.FileInfo;
 public interface FrontendOptions {
   ImmutableList<FileInfo> getSources();
 
-  ImmutableList<String> getKotlinCommonSources();
-
   ImmutableList<String> getClasspaths();
 
   boolean getGenerateKytheIndexingMetadata();
