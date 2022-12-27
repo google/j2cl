@@ -8,8 +8,7 @@ const TestCase = goog.require('goog.testing.TestCase');
 const j2wasm = goog.require('j2wasm');
 const {createUserImports: createRitzUserImports} = goog.require('ritz.client.wasm.calcworkerhost.appImports');
 
-let exports;
-
+let instance;
 testSuite({
   async setUpPage() {
     // Set a 30 * 1000 timeout to ensure that the wasm module has enough time to load
@@ -21,27 +20,26 @@ testSuite({
     const userImports = Object.assign({
       'goog.testing.TestCase.saveMessage': msg => TestCase.getActiveTestCase().saveMessage(msg)
     }, createRitzUserImports());
-    const instance = await j2wasm.instantiateStreaming(absolutePath, userImports);
-    exports = instance.exports;
-    exports.setUpPageIn${testClass.simpleName()}();
+    instance = await j2wasm.instantiateStreaming(absolutePath, userImports);
+    instance.exports.setUpPageIn${testClass.simpleName()}();
   },
 
   tearDownPage() {
     // Note that exports might be null due to a failed instantiation.
-    exports?.tearDownPageIn${testClass.simpleName()}();
+    instance?.exports?.tearDownPageIn${testClass.simpleName()}();
   },
 
   setUp() {
-    exports.setUpIn${testClass.simpleName()}();
+    instance.exports.setUpIn${testClass.simpleName()}();
   },
 
   tearDown() {
-    exports.tearDownIn${testClass.simpleName()}();
+    instance.exports.tearDownIn${testClass.simpleName()}();
   },
 
 #foreach($testMethod in ${testClass.testMethods()})
   ${testMethod.jsTestMethodName()}() {
-    exports.${testMethod.jsTestMethodName()}In${testClass.simpleName()}();
+    instance.exports.${testMethod.jsTestMethodName()}In${testClass.simpleName()}();
   },
 
 #end
