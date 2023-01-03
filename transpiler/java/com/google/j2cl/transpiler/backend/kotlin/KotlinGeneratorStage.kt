@@ -53,7 +53,15 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 
     val renderedSource = { renderFn: Renderer.() -> Unit ->
       SourceBuilder()
-        .also { Renderer(environment, it, problems).renderFn() }
+        .also {
+          Renderer(
+              environment,
+              it,
+              problems,
+              topLevelQualifiedNames = compilationUnit.topLevelQualifiedNames
+            )
+            .renderFn()
+        }
         .build()
         .trimTrailingWhitespaces()
     }

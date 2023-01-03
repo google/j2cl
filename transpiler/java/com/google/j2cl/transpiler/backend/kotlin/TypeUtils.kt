@@ -15,24 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.backend.kotlin.ast.Member
-import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
-
-internal val Type.localNames: Set<String>
-  get() =
-    kotlinMembers
-      .map { member ->
-        when (member) {
-          is Member.WithCompanionObject -> null
-          is Member.WithJavaMember -> (member.javaMember as? Field)?.descriptor?.ktName
-          is Member.WithType -> member.type.declaration.ktSimpleName
-        }
-      }
-      .filterNotNull()
-      .toSet()
 
 internal val Type.declaredSuperTypeDescriptors: List<TypeDescriptor>
   get() = listOfNotNull(superTypeDescriptor).plus(superInterfaceTypeDescriptors)

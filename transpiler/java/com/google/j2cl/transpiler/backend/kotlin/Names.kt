@@ -16,14 +16,35 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
+import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
+import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.Member
+import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
+
+internal val Type.localNames: Set<String>
+  get() =
+    kotlinMembers
+      .map { member ->
+        when (member) {
+          is Member.WithCompanionObject -> null
+          is Member.WithJavaMember -> (member.javaMember as? Field)?.descriptor?.ktName
+          is Member.WithType -> member.type.declaration.ktSimpleName
+        }
+      }
+      .filterNotNull()
+      .toSet()
+
+internal val CompilationUnit.topLevelQualifiedNames: Set<String>
+  get() = types.map { it.declaration.ktQualifiedName }.toSet()
 
 internal val MemberDescriptor.ktMangledName: String
   get() = ktName + ktNameSuffix
@@ -90,4 +111,4 @@ internal fun String.qualifiedNameComponents(): List<String> = split(".")
 
 internal fun String.qualifiedNameToSimpleName(): String = qualifiedNameComponents().last()
 
-private fun String.toTitleCase() = if (isEmpty()) "" else get(0).toUpperCase() + drop(1)
+internal fun String.qualifiedNameToAlias(): String = qualifiedNameComponents().joinToString("_")

@@ -37,30 +37,50 @@ internal fun Renderer.renderPackageName(packageName: String) {
   renderQualifiedIdentifier(packageName)
 }
 
-internal fun Renderer.renderQualifiedName(qualifiedName: String) {
-  renderQualifiedName(qualifiedName, forceSimple = false)
-}
-
-internal fun Renderer.renderExtensionFunctionName(qualifiedName: String) {
-  renderQualifiedName(qualifiedName, forceSimple = true)
-}
-
-private fun Renderer.renderQualifiedName(qualifiedName: String, forceSimple: Boolean) {
-  val simpleName = qualifiedName.qualifiedNameToSimpleName()
-
-  // Import only the first occurrence of simple name
-  // TODO(b/226922954): Implement import aliases.
-  environment.importedSimpleNameToQualifiedNameMap.putIfAbsent(simpleName, qualifiedName)
-
-  val canRenderSimpleName =
-    forceSimple ||
-      (environment.importedSimpleNameToQualifiedNameMap[simpleName] == qualifiedName &&
-        !localNames.contains(simpleName) &&
-        !environment.containsIdentifier(simpleName))
-  if (canRenderSimpleName) {
+internal fun Renderer.renderTopLevelQualifiedName(qualifiedName: String) {
+  val simpleName = qualifiedToNonAliasedSimpleName(qualifiedName)
+  if (simpleName != null) {
     renderIdentifier(simpleName)
   } else {
     renderQualifiedIdentifier(qualifiedName)
+  }
+}
+
+internal fun Renderer.renderExtensionMemberQualifiedName(qualifiedName: String) {
+  renderIdentifier(qualifiedToSimpleName(qualifiedName))
+}
+
+internal fun Renderer.qualifiedToSimpleName(qualifiedName: String): String {
+  return qualifiedToNonAliasedSimpleName(qualifiedName)
+    ?: qualifiedToAliasedSimpleName(qualifiedName)
+}
+
+internal fun Renderer.qualifiedToNonAliasedSimpleName(qualifiedName: String): String? {
+  val simpleName = qualifiedName.qualifiedNameToSimpleName()
+  if (localNames.contains(simpleName) || environment.containsIdentifier(simpleName)) {
+    return null
+  }
+  if (topLevelQualifiedNames.contains(qualifiedName)) {
+    return simpleName
+  }
+  val importMap = environment.importedSimpleNameToQualifiedNameMap
+  val importedQualifiedName = importMap[simpleName]
+  if (importedQualifiedName == null) {
+    if (topLevelQualifiedNames.any { it.qualifiedNameToSimpleName() == simpleName }) {
+      return null
+    }
+    importMap[simpleName] = qualifiedName
+    return simpleName
+  }
+  if (importedQualifiedName == qualifiedName) {
+    return simpleName
+  }
+  return null
+}
+
+internal fun Renderer.qualifiedToAliasedSimpleName(qualifiedName: String): String {
+  return qualifiedName.qualifiedNameToAlias().also {
+    environment.importedSimpleNameToQualifiedNameMap[it] = qualifiedName
   }
 }
 

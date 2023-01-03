@@ -27,6 +27,8 @@ import com.google.j2cl.transpiler.ast.CastExpression
 import com.google.j2cl.transpiler.ast.ConditionalExpression
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.Expression
+import com.google.j2cl.transpiler.ast.Expression.Associativity
+import com.google.j2cl.transpiler.ast.Expression.Precedence
 import com.google.j2cl.transpiler.ast.ExpressionWithComment
 import com.google.j2cl.transpiler.ast.FieldAccess
 import com.google.j2cl.transpiler.ast.FunctionExpression
@@ -85,28 +87,35 @@ fun Renderer.renderExpression(expression: Expression) {
 }
 
 private fun Renderer.renderArrayAccess(arrayAccess: ArrayAccess) {
-  renderLeftSubExpression(arrayAccess, arrayAccess.arrayExpression)
-  renderInSquareBrackets { renderExpression(arrayAccess.indexExpression) }
+  renderGetOperator(arrayAccess.arrayExpression, arrayAccess.indexExpression)
+}
+
+private fun Renderer.renderGetOperator(qualifier: Expression, argument: Expression) {
+  renderExpressionInParens(
+    qualifier,
+    Precedence.MEMBER_ACCESS.requiresParensOnLeft(qualifier.precedence)
+  )
+  renderInSquareBrackets { renderExpression(argument) }
 }
 
 private fun Renderer.renderArrayLength(arrayLength: ArrayLength) {
-  renderLeftSubExpression(arrayLength, arrayLength.arrayExpression)
+  renderLeftSubExpression(arrayLength.precedence, arrayLength.arrayExpression)
   render(".size")
 }
 
 private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
   val typeArgument = arrayLiteral.typeDescriptor.typeArgument
   when (typeArgument.typeDescriptor) {
-    PrimitiveTypes.BOOLEAN -> renderQualifiedName("kotlin.booleanArrayOf")
-    PrimitiveTypes.CHAR -> renderQualifiedName("kotlin.charArrayOf")
-    PrimitiveTypes.BYTE -> renderQualifiedName("kotlin.byteArrayOf")
-    PrimitiveTypes.SHORT -> renderQualifiedName("kotlin.shortArrayOf")
-    PrimitiveTypes.INT -> renderQualifiedName("kotlin.intArrayOf")
-    PrimitiveTypes.LONG -> renderQualifiedName("kotlin.longArrayOf")
-    PrimitiveTypes.FLOAT -> renderQualifiedName("kotlin.floatArrayOf")
-    PrimitiveTypes.DOUBLE -> renderQualifiedName("kotlin.doubleArrayOf")
+    PrimitiveTypes.BOOLEAN -> renderTopLevelQualifiedName("kotlin.booleanArrayOf")
+    PrimitiveTypes.CHAR -> renderTopLevelQualifiedName("kotlin.charArrayOf")
+    PrimitiveTypes.BYTE -> renderTopLevelQualifiedName("kotlin.byteArrayOf")
+    PrimitiveTypes.SHORT -> renderTopLevelQualifiedName("kotlin.shortArrayOf")
+    PrimitiveTypes.INT -> renderTopLevelQualifiedName("kotlin.intArrayOf")
+    PrimitiveTypes.LONG -> renderTopLevelQualifiedName("kotlin.longArrayOf")
+    PrimitiveTypes.FLOAT -> renderTopLevelQualifiedName("kotlin.floatArrayOf")
+    PrimitiveTypes.DOUBLE -> renderTopLevelQualifiedName("kotlin.doubleArrayOf")
     else -> {
-      renderQualifiedName("kotlin.arrayOf")
+      renderTopLevelQualifiedName("kotlin.arrayOf")
       renderTypeArguments(listOf(typeArgument))
     }
   }
@@ -128,7 +137,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
   ) {
     renderIdentifier(leftOperand.target.ktMangledName)
   } else {
-    renderLeftSubExpression(expression, leftOperand)
+    renderLeftSubExpression(expression.precedence, leftOperand)
   }
   render(" ")
   renderBinaryOperator(
@@ -139,7 +148,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
         (leftOperand.typeDescriptor.isPrimitive && rightOperand.typeDescriptor.isPrimitive)
   )
   render(" ")
-  renderRightSubExpression(expression, rightOperand)
+  renderRightSubExpression(expression.precedence, rightOperand)
 }
 
 private fun Renderer.renderCastExpression(castExpression: CastExpression) {
@@ -149,7 +158,7 @@ private fun Renderer.renderCastExpression(castExpression: CastExpression) {
     // using smart casts: (x).let { it as A; it as B; it as C; it }
     renderInParentheses { renderExpression(castExpression.expression) }
     render(".")
-    renderExtensionFunctionName("kotlin.let")
+    renderExtensionMemberQualifiedName("kotlin.let")
     render(" { ")
     castTypeDescriptor.intersectionTypeDescriptors.forEach {
       render("it as ")
@@ -158,7 +167,7 @@ private fun Renderer.renderCastExpression(castExpression: CastExpression) {
     }
     render("it }")
   } else {
-    renderLeftSubExpression(castExpression, castExpression.expression)
+    renderLeftSubExpression(castExpression.precedence, castExpression.expression)
     render(" as ")
     renderTypeDescriptor(castExpression.castTypeDescriptor)
   }
@@ -219,14 +228,14 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
 }
 
 private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOfExpression) {
-  renderLeftSubExpression(instanceOfExpression, instanceOfExpression.expression)
+  renderLeftSubExpression(instanceOfExpression.precedence, instanceOfExpression.expression)
   render(" is ")
   val testTypeDescriptor = instanceOfExpression.testTypeDescriptor
   if (
     testTypeDescriptor is ArrayTypeDescriptor &&
       !testTypeDescriptor.componentTypeDescriptor!!.isPrimitive
   ) {
-    renderQualifiedName("kotlin.Array")
+    renderTopLevelQualifiedName("kotlin.Array")
     render("<*>")
   } else {
     renderTypeDescriptor(
@@ -260,10 +269,10 @@ private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
   render("::class")
   render(".")
   if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-    renderExtensionFunctionName("kotlin.jvm.javaPrimitiveType")
+    renderExtensionMemberQualifiedName("kotlin.jvm.javaPrimitiveType")
     renderNonNullAssertion()
   } else {
-    renderExtensionFunctionName("kotlin.jvm.javaObjectType")
+    renderExtensionMemberQualifiedName("kotlin.jvm.javaObjectType")
   }
 }
 
@@ -290,29 +299,22 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
+  renderQualifier(expression)
+
   val methodDescriptor = expression.target
-
   if (methodDescriptor.isProtoExtensionGetter()) {
-    environment.importedSimpleNameToQualifiedNameMap.putIfAbsent(
-      "get",
-      "com.google.protobuf.kotlin.get"
-    )
-    renderLeftSubExpression(expression, expression.qualifier)
-    renderInSquareBrackets { renderExpression(expression.arguments.first()) }
+    renderExtensionMemberQualifiedName("com.google.protobuf.kotlin.get")
+    renderInvocationArguments(expression)
+  } else if (methodDescriptor.isProtobufGetter()) {
+    renderIdentifier(KtInfo.computePropertyName(expression.target.name))
+  } else if (methodDescriptor.isProtoExtensionChecker()) {
+    renderExtensionMemberQualifiedName("com.google.protobuf.kotlin.contains")
+    renderInvocationArguments(expression)
   } else {
-    renderQualifier(expression)
-
-    if (methodDescriptor.isProtobufGetter()) {
-      renderIdentifier(KtInfo.computePropertyName(expression.target.name))
-    } else if (methodDescriptor.isProtoExtensionChecker()) {
-      renderExtensionFunctionName("com.google.protobuf.kotlin.contains")
+    renderIdentifier(expression.target.ktMangledName)
+    if (!expression.target.isKtProperty) {
+      renderInvocationTypeArguments(methodDescriptor.typeArguments)
       renderInvocationArguments(expression)
-    } else {
-      renderIdentifier(expression.target.ktMangledName)
-      if (!expression.target.isKtProperty) {
-        renderInvocationTypeArguments(methodDescriptor.typeArguments)
-        renderInvocationArguments(expression)
-      }
     }
   }
 }
@@ -352,7 +354,7 @@ internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
 }
 
 private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
-  renderQualifiedName("kotlin.run")
+  renderExtensionMemberQualifiedName("kotlin.run")
   render(" ")
   renderInCurlyBrackets {
     renderStartingWithNewLines(multiExpression.expressions) { expression ->
@@ -386,7 +388,7 @@ private fun Renderer.renderNewArray(
     if (nextDimension is NullLiteral) {
       renderArrayOfNulls(typeArgument, firstDimension)
     } else {
-      renderQualifiedName("kotlin.Array")
+      renderTopLevelQualifiedName("kotlin.Array")
       renderTypeArguments(listOf(typeArgument))
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
@@ -406,7 +408,7 @@ private fun Renderer.renderPrimitiveArrayOf(
   componentTypeDescriptor: PrimitiveTypeDescriptor,
   dimension: Expression
 ) {
-  renderQualifiedName(
+  renderTopLevelQualifiedName(
     when (componentTypeDescriptor) {
       PrimitiveTypes.BOOLEAN -> "kotlin.BooleanArray"
       PrimitiveTypes.CHAR -> "kotlin.CharArray"
@@ -424,10 +426,10 @@ private fun Renderer.renderPrimitiveArrayOf(
 
 private fun Renderer.renderArrayOfNulls(typeArgument: TypeArgument, dimension: Expression) {
   if (typeArgument.typeDescriptor.isNullable) {
-    renderQualifiedName("kotlin.arrayOfNulls")
+    renderExtensionMemberQualifiedName("kotlin.arrayOfNulls")
     renderTypeArguments(listOf(typeArgument.toNonNullable()))
   } else {
-    renderQualifiedName("javaemul.lang.uninitializedArrayOf")
+    renderExtensionMemberQualifiedName("javaemul.lang.uninitializedArrayOf")
     renderTypeArguments(listOf(typeArgument))
   }
   renderInParentheses { renderExpression(dimension) }
@@ -470,7 +472,7 @@ private val DeclaredTypeDescriptor.nonAnonymousTypeDescriptor: DeclaredTypeDescr
     else this
 
 private fun Renderer.renderPostfixExpression(expression: PostfixExpression) {
-  renderLeftSubExpression(expression, expression.operand)
+  renderLeftSubExpression(expression.precedence, expression.operand)
   render(expression.operator.symbol)
 }
 
@@ -480,7 +482,7 @@ private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
     // Emit a space after + and minus to avoid emitting + + as ++ and - -  and --.
     if (it == PrefixOperator.PLUS || it == PrefixOperator.MINUS) sourceBuilder.append(" ")
   }
-  renderRightSubExpression(expression, expression.operand)
+  renderRightSubExpression(expression.precedence, expression.operand)
 }
 
 private fun Renderer.renderSuperReference(superReference: SuperReference) {
@@ -552,7 +554,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       val ktCompanionQualifiedName =
         enclosingTypeDescriptor.typeDeclaration.ktCompanionQualifiedName
       if (ktCompanionQualifiedName != null) {
-        renderQualifiedName(ktCompanionQualifiedName)
+        renderTopLevelQualifiedName(ktCompanionQualifiedName)
       } else {
         renderQualifiedName(enclosingTypeDescriptor)
       }
@@ -578,21 +580,18 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       // TODO(b/219950593): Implement a pass which will remove unnecessary qualifiers, and then
       // remove this `if` branch.
     } else if (memberReference.target.isInstanceMember || !qualifier.isNonQualifiedThisReference) {
-      renderLeftSubExpression(memberReference, qualifier)
+      renderLeftSubExpression(memberReference.precedence, qualifier)
       render(".")
     }
   }
 }
 
-private fun Renderer.renderLeftSubExpression(expression: Expression, operand: Expression) {
-  renderExpressionInParens(
-    operand,
-    expression.requiresParensOnLeft(operand) || operand is ConditionalExpression
-  )
+private fun Renderer.renderLeftSubExpression(precedence: Precedence, operand: Expression) {
+  renderExpressionInParens(operand, precedence.requiresParensOnLeft(operand.precedence))
 }
 
-private fun Renderer.renderRightSubExpression(expression: Expression, operand: Expression) {
-  renderExpressionInParens(operand, expression.requiresParensOnRight(operand))
+private fun Renderer.renderRightSubExpression(precedence: Precedence, operand: Expression) {
+  renderExpressionInParens(operand, precedence.requiresParensOnRight(operand.precedence))
 }
 
 private fun Renderer.renderExpressionInParens(expression: Expression, needsParentheses: Boolean) {
@@ -606,3 +605,11 @@ private fun Renderer.renderNonNullAssertion() {
 
 private val Expression.isNonQualifiedThisReference
   get() = this is ThisReference && !isQualified
+
+private fun Precedence.requiresParensOnLeft(operand: Precedence) =
+  operand == Precedence.CONDITIONAL ||
+    value > operand.value ||
+    (associativity != Associativity.LEFT && this == operand)
+
+private fun Precedence.requiresParensOnRight(operand: Precedence) =
+  value > operand.value || (associativity != Associativity.RIGHT && this == operand)

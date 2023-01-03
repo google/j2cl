@@ -120,13 +120,13 @@ private fun Renderer.renderField(field: Field) {
 
 private fun Renderer.renderJvmFieldAnnotation() {
   render("@")
-  renderQualifiedName("kotlin.jvm.JvmField")
+  renderTopLevelQualifiedName("kotlin.jvm.JvmField")
   render(" ")
 }
 
 private fun Renderer.renderJvmStaticAnnotation() {
   render("@")
-  renderQualifiedName("kotlin.jvm.JvmStatic")
+  renderTopLevelQualifiedName("kotlin.jvm.JvmStatic")
   renderNewLine()
 }
 

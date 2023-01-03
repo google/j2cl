@@ -8,43 +8,42 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.native.ObjCName
 
-@ObjCName("NewObjCName", exact = true)
+@kotlin.native.ObjCName("NewObjCName", exact = true)
 open class ObjCName {
  constructor()
 
  constructor(
-  @ObjCName("Integer", exact = false) i: Int
+  @kotlin.native.ObjCName("Integer", exact = false) i: Int
  )
 
  constructor(
-  @ObjCName("Int", exact = false) i: Int,
-  @ObjCName("withNSString", exact = false) s: String?
+  @kotlin.native.ObjCName("Int", exact = false) i: Int,
+  @kotlin.native.ObjCName("withNSString", exact = false) s: String?
  )
 
- @ObjCName("newFoo", exact = false)
+ @kotlin.native.ObjCName("newFoo", exact = false)
  open fun foo() {}
 
- @ObjCName("newProtectedFoo", exact = false)
+ @kotlin.native.ObjCName("newProtectedFoo", exact = false)
  open fun protectedFoo() {}
 
- @ObjCName("newFoo", exact = false)
+ @kotlin.native.ObjCName("newFoo", exact = false)
  open fun newFoo(
-  @ObjCName("FromInt", exact = false) i: Int
+  @kotlin.native.ObjCName("FromInt", exact = false) i: Int
  ) {}
 
- @ObjCName("newFoo", exact = false)
+ @kotlin.native.ObjCName("newFoo", exact = false)
  open fun foo(
-  @ObjCName("FromInt", exact = false) s: String?,
-  @ObjCName("withInteger", exact = false) i: Int
+  @kotlin.native.ObjCName("FromInt", exact = false) s: String?,
+  @kotlin.native.ObjCName("withInteger", exact = false) i: Int
  ) {}
 
  open fun foo(
-  @ObjCName("withNSString", exact = false) s: String?,
-  @ObjCName("withNSString", exact = false) i: String?
+  @kotlin.native.ObjCName("withNSString", exact = false) s: String?,
+  @kotlin.native.ObjCName("withNSString", exact = false) i: String?
  ) {}
 
- @ObjCName("InnerClassNewName", exact = true)
+ @kotlin.native.ObjCName("InnerClassNewName", exact = true)
  open inner class InnerClassOldName {}
 }

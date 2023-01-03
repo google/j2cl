@@ -35,7 +35,7 @@ private fun Renderer.renderFileAnnotations() {
 
 internal fun Renderer.renderPackageAndImports(compilationUnit: CompilationUnit) {
   renderPackage(compilationUnit)
-  renderImports(environment.importedSimpleNameToQualifiedNameMap.values.toSet())
+  renderImports()
 }
 
 private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {

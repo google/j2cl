@@ -18,8 +18,17 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
 import com.google.j2cl.transpiler.backend.kotlin.ast.defaultImports
 
-internal fun Renderer.renderImports(importedQualifiedNames: Set<String>) {
-  val imports = defaultImports + importedQualifiedNames.map { Import(it.qualifiedNameComponents()) }
+internal fun Renderer.renderImports() {
+  val imports =
+    defaultImports +
+      environment.importedSimpleNameToQualifiedNameMap.entries.map { (simpleName, qualifiedName) ->
+        Import(
+          qualifiedName.qualifiedNameComponents(),
+          if (qualifiedName.qualifiedNameToSimpleName() == simpleName) null
+          else Import.Suffix.Alias(simpleName)
+        )
+      }
+
   if (imports.isNotEmpty()) {
     renderSeparatedWith(imports.sorted(), "\n") { render(it) }
     renderNewLine()
@@ -30,5 +39,15 @@ internal fun Renderer.renderImports(importedQualifiedNames: Set<String>) {
 private fun Renderer.render(import: Import) {
   render("import ")
   renderSeparatedWith(import.components, ".") { renderIdentifier(it) }
-  if (import.isStar) render(".*")
+  import.suffixOrNull?.let { render(it) }
+}
+
+private fun Renderer.render(suffix: Import.Suffix) {
+  when (suffix) {
+    is Import.Suffix.Alias -> {
+      render(" as ")
+      renderIdentifier(suffix.alias)
+    }
+    is Import.Suffix.Star -> render(".*")
+  }
 }

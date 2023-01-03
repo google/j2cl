@@ -45,7 +45,7 @@ internal fun Renderer.renderQualifiedName(
     } else {
       val enclosingTypeDescriptor = typeDescriptor.enclosingTypeDescriptor
       if (enclosingTypeDescriptor == null) {
-        renderQualifiedName(typeDescriptor.ktQualifiedName(asSuperType))
+        renderTopLevelQualifiedName(typeDescriptor.ktQualifiedName(asSuperType))
       } else {
         renderQualifiedName(enclosingTypeDescriptor)
         render(".")
@@ -53,7 +53,7 @@ internal fun Renderer.renderQualifiedName(
       }
     }
   } else {
-    renderQualifiedName(typeDescriptor.ktQualifiedName(asSuperType))
+    renderTopLevelQualifiedName(typeDescriptor.ktQualifiedName(asSuperType))
   }
 }
 

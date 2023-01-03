@@ -42,7 +42,10 @@ data class Renderer(
   val renderThisReferenceWithLabel: Boolean = false,
 
   /** A set of local names which are potentially shadowing imports. */
-  val localNames: Set<String> = setOf()
+  val localNames: Set<String> = setOf(),
+
+  /** Top-level qualified names, which will be rendered as simple name without import. */
+  val topLevelQualifiedNames: Set<String> = setOf()
 ) {
   fun renderNewLine() {
     sourceBuilder.newLine()

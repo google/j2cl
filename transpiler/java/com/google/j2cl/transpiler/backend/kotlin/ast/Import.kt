@@ -17,20 +17,33 @@ package com.google.j2cl.transpiler.backend.kotlin.ast
 
 import com.google.j2cl.transpiler.backend.kotlin.common.ofList
 
-data class Import(val components: List<String>, val isStar: Boolean = false) : Comparable<Import> {
+data class Import(val components: List<String>, val suffixOrNull: Suffix? = null) :
+  Comparable<Import> {
   override fun compareTo(other: Import) = comparator.compare(this, other)
 
   companion object {
     private val comparator =
-      compareBy(Import::isStar)
+      compareBy<Import> { it.suffixOrNull == Suffix.Star }
         .reversed()
-        .then(compareBy(naturalOrder<String>().ofList(), Import::components))
+        .then(
+          compareBy<Import, List<String>>(naturalOrder<String>().ofList()) {
+            it.components.run {
+              if (it.suffixOrNull is Suffix.Alias) plus(it.suffixOrNull.alias) else this
+            }
+          }
+        )
+  }
+
+  sealed class Suffix {
+    object Star : Suffix()
+    data class Alias(val alias: String) : Suffix()
   }
 }
 
 fun import(vararg components: String) = Import(components.toList())
 
-fun starImport(vararg components: String) = Import(components.toList(), isStar = true)
+fun starImport(vararg components: String) =
+  Import(components.toList(), suffixOrNull = Import.Suffix.Star)
 
 val defaultImports: Set<Import>
   get() = setOf(starImport("javaemul", "lang"))
