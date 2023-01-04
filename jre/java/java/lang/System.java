@@ -22,8 +22,8 @@ import static javaemul.internal.InternalPreconditions.isTypeChecked;
 import java.io.PrintStream;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.HashCodes;
-import javaemul.internal.JsUtils;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /**
  * General-purpose low-level utility methods. GWT only supports a limited subset
@@ -105,12 +105,24 @@ public final class System {
   }
 
   public static long currentTimeMillis() {
-    return (long) JsUtils.getTime();
+    return (long) currentTimeMillisAsDouble();
   }
 
+  /** System.currentTimeMillis in double that avoids long conversion. */
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Date.now")
+  public static native double currentTimeMillisAsDouble();
+
   public static long nanoTime() {
-    return (long) (JsUtils.performanceNow() * MILLIS_TO_NANOS);
+    return (long) nanoTimeAsDouble();
   }
+
+  /** System.nanoTime in double that avoids long conversion. */
+  public static double nanoTimeAsDouble() {
+    return performanceNow() * MILLIS_TO_NANOS;
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "performance.now")
+  private static native double performanceNow();
 
   /**
    * Has no effect; just here for source compatibility.

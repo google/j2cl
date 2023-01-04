@@ -158,14 +158,6 @@ function createImportObject(userImports) {
         void date.setSeconds(seconds),
     'Date.setTime': (/** !Date */ date, /** number */ milliseconds) =>
         void date.setTime(milliseconds),
-
-    // The following are declared in the JRE but unimplemented for now.
-    'Error.captureStackTrace': unimplemented,
-    'Object.getPrototypeOf': unimplemented,
-    'Object.keys': unimplemented,
-    'Object.values': unimplemented,
-    'parseInt': unimplemented,
-    'typeof': unimplemented,
   };
 
   return {
@@ -231,11 +223,6 @@ function dateSetHours(date, ...timeParts) {
 function isValidDouble(str) {
   return /^\s*[+-]?(NaN|Infinity|((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?[dDfF]?)\s*$/
       .test(str);
-}
-
-/** @return {void} */
-function unimplemented() {
-  throw new Error('Unimplemented extern');
 }
 
 exports = {

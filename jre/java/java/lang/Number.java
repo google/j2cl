@@ -19,6 +19,7 @@ import java.io.Serializable;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
@@ -190,8 +191,11 @@ public abstract class Number implements Serializable {
     if (!__isValidDouble(s)) {
       throw NumberFormatException.forInputString(s);
     }
-    return JsUtils.parseFloat(s);
+    return parseFloat(s);
   }
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native double parseFloat(String str);
 
   /**
    * @skip
@@ -217,7 +221,7 @@ public abstract class Number implements Serializable {
       }
     }
 
-    int toReturn = JsUtils.parseInt(s, radix);
+    int toReturn = parseInt(s, radix);
     // isTooLow is separated into its own variable to avoid a bug in BlackBerry OS 7. See
     // https://code.google.com/p/google-web-toolkit/issues/detail?id=7291.
     boolean isTooLow = toReturn < lowerBound;
@@ -289,14 +293,14 @@ public abstract class Number implements Serializable {
     if (head > 0) {
       // accumulate negative numbers, as -Long.MAX_VALUE == Long.MIN_VALUE + 1
       // (in other words, -Long.MIN_VALUE overflows, see issue 7308)
-      toReturn = - JsUtils.parseInt(s.substring(0, head), radix);
+      toReturn = -parseInt(s.substring(0, head), radix);
       s = s.substring(head);
       length -= head;
       firstTime = false;
     }
 
     while (length >= maxDigits) {
-      head = JsUtils.parseInt(s.substring(0, maxDigits), radix);
+      head = parseInt(s.substring(0, maxDigits), radix);
       s = s.substring(maxDigits);
       length -= maxDigits;
       if (!firstTime) {
@@ -340,6 +344,9 @@ public abstract class Number implements Serializable {
     }
     return floatRegex.test(str);
   }
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native int parseInt(String s, int radix);
 
   // CHECKSTYLE_ON
 

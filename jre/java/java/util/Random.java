@@ -37,8 +37,6 @@ package java.util;
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
-import javaemul.internal.JsUtils;
-
 /**
  * This class provides methods that generates pseudo-random numbers of different
  * types, such as {@code int}, {@code long}, {@code double}, and {@code float}.
@@ -112,9 +110,7 @@ public class Random {
    * @see #setSeed
    */
   public Random() {
-    // JsDate.now used instead of System.currentTimeMillis()
-    // as it returns a double in order to avoid the use os LongLib.
-    double seed = uniqueSeed++ + JsUtils.getTime();
+    double seed = uniqueSeed++ + System.currentTimeMillisAsDouble();
     int hi = (int) Math.floor(seed * twoToTheMinus24) & 0xffffff;
     int lo = (int) (seed - (hi * twoToThe24));
     setSeed(hi, lo);

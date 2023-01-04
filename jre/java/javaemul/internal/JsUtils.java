@@ -25,19 +25,8 @@ import jsinterop.annotations.JsPackage;
 @SuppressWarnings("unusable-by-js")
 public final class JsUtils {
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "Date.now")
-  public static native double getTime();
-
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "performance.now")
-  public static native double performanceNow();
-
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  public static native int parseInt(String s, int radix);
-
-  @JsMethod(namespace = JsPackage.GLOBAL)
-  public static native double parseFloat(String str);
-
   @JsMethod(namespace = JsPackage.GLOBAL, name = "typeof")
+  @Wasm("nop") // Unused in WASM.
   public static native String typeOf(Object obj);
 
   @JsMethod
