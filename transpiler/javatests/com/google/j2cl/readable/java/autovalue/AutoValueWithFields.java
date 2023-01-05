@@ -20,6 +20,9 @@ import com.google.auto.value.extension.memoized.Memoized;
 
 @AutoValue
 abstract class AutoValueWithFields extends Parent {
+
+  private static final long staticField = 42L;
+
   int userField2;
 
   public abstract int getIntField();

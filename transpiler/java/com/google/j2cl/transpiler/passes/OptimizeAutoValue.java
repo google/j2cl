@@ -430,7 +430,9 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       for (TypeDeclaration t = type;
           !TypeDescriptors.isJavaLangObject(t.toRawTypeDescriptor());
           t = t.getSuperTypeDeclaration()) {
-        excludedFields.putAll(type, t.getDeclaredFieldDescriptors());
+        excludedFields.putAll(
+            type,
+            Iterables.filter(t.getDeclaredFieldDescriptors(), FieldDescriptor::isInstanceMember));
       }
     }
 
