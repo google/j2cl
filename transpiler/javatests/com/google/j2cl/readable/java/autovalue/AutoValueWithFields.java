@@ -17,9 +17,13 @@ package autovalue;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import java.io.Serializable;
 
 @AutoValue
-abstract class AutoValueWithFields extends Parent {
+abstract class AutoValueWithFields extends Parent implements Serializable {
+
+  // Special cased by AutoValue when class implements Serializable.
+  private static final long serialVersionUID = 42L;
 
   private static final long staticField = 42L;
 

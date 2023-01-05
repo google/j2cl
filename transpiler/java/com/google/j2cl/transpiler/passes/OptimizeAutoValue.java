@@ -176,15 +176,28 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     // implicit super() call was targeting the parent default constructor).
     addThisCallToInlinedConstructors(from, to);
 
+    List<Member> movedMembers = from.getMembers();
+
+    // Ensure no static fields, they are not expected and wouldn't be handled properly.
+    // TODO(b/193926520): Remove this when we start rewriting enclosing type of fields.
+    movedMembers.removeIf(
+        m -> {
+          if (m.isStatic()) {
+            checkState(m.getDescriptor().getName().equals("serialVersionUID"), "Unexpected field");
+            return true;
+          }
+          return false;
+        });
+
     // Note that the collection here will error out in duplicate keys so if any our
     // assumptions incorrect (e.g. no multiple static initializer), we should fail-fast.
-    ImmutableMap<String, Member> movedMembers =
-        Maps.uniqueIndex(from.getMembers(), Member::getMangledName);
+    ImmutableMap<String, Member> movedMembersByMangledName =
+        Maps.uniqueIndex(movedMembers, Member::getMangledName);
 
     to.getMembers()
         .removeIf(
             m -> {
-              if (movedMembers.containsKey(m.getMangledName())) {
+              if (movedMembersByMangledName.containsKey(m.getMangledName())) {
                 // We should never end up replacing a non-empty method.
                 checkState(!m.isMethod() || ((Method) m).isEmpty(), m);
                 return true;
@@ -194,7 +207,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
     // Note that the adding to end here matters since later preserveFields will assume last
     // constructor is the one that is coming from AutoValue implementation class.
-    to.addMembers(movedMembers.values());
+    to.addMembers(movedMembers);
   }
 
   private static void addThisCallToInlinedConstructors(Type from, Type to) {

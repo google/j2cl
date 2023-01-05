@@ -2,12 +2,14 @@ goog.module('autovalue.AutoValueWithFields$impl');
 
 const Parent = goog.require('autovalue.Parent$impl');
 const reflect = goog.require('goog.reflect');
+const Serializable = goog.require('java.io.Serializable$impl');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
  * @abstract
+ * @implements {Serializable}
  */
 class AutoValueWithFields extends Parent {
  /** @protected @nodts */
@@ -26,7 +28,7 @@ class AutoValueWithFields extends Parent {
  $ctor__autovalue_AutoValueWithFields__int__void(/** number */ intField) {
   this.$ctor__autovalue_Parent__void();
   this.f_intField__autovalue_$AutoValue_AutoValueWithFields_ = intField;
-  $J2CL_PRESERVE$(AutoValueWithFields.f_staticField__autovalue_AutoValueWithFields_, this.f_intField__autovalue_$AutoValue_AutoValueWithFields_);
+  $J2CL_PRESERVE$(AutoValueWithFields.f_serialVersionUID__autovalue_AutoValueWithFields_, AutoValueWithFields.f_staticField__autovalue_AutoValueWithFields_, this.f_intField__autovalue_$AutoValue_AutoValueWithFields_);
  }
  /** @nodts @return {number} */
  m_getIntField__int() {
@@ -48,7 +50,10 @@ class AutoValueWithFields extends Parent {
 }
 ValueType.mixin(AutoValueWithFields, ValueType, 7, reflect.objectProperty('f_userField2__autovalue_AutoValueWithFields', AutoValueWithFields), reflect.objectProperty('f_userField1__autovalue_Parent', AutoValueWithFields), reflect.objectProperty('f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_', AutoValueWithFields), reflect.objectProperty('f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_', AutoValueWithFields));
 /**@const {!$Long} @nodts*/
+AutoValueWithFields.f_serialVersionUID__autovalue_AutoValueWithFields_ = $Long.fromInt(42);
+/**@const {!$Long} @nodts*/
 AutoValueWithFields.f_staticField__autovalue_AutoValueWithFields_ = $Long.fromInt(42);
+Serializable.$markImplementor(AutoValueWithFields);
 $Util.$setClassMetadata(AutoValueWithFields, 'autovalue.AutoValueWithFields');
 
 exports = AutoValueWithFields;

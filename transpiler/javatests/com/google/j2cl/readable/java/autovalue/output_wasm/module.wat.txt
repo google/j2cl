@@ -187,7 +187,8 @@
 
 ;;; Code for autovalue.AutoValue_AutoValueWithFields [itable.init]
 (global $autovalue.AutoValue_AutoValueWithFields.itable (ref $autovalue.AutoValue_AutoValueWithFields.itable) (struct.new $autovalue.AutoValue_AutoValueWithFields.itable 
-  (ref.null struct)
+ (struct.new $java.io.Serializable.vtable
+ )
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -844,7 +845,7 @@
   $autovalue.AutoValueWithFields.vtable)
 )
 (type $autovalue.$AutoValue_AutoValueWithFields.itable (struct_subtype 
-(field $slot0 (ref null struct))
+(field $slot0 (ref $java.io.Serializable.vtable))
 (field $slot1 (ref null struct))
 (field $slot2 (ref null struct))
 (field $slot3 (ref null struct))
@@ -1640,7 +1641,7 @@
   $autovalue.$AutoValue_AutoValueWithFields.vtable)
 )
 (type $autovalue.AutoValue_AutoValueWithFields.itable (struct_subtype 
-(field $slot0 (ref null struct))
+(field $slot0 (ref $java.io.Serializable.vtable))
 (field $slot1 (ref null struct))
 (field $slot2 (ref null struct))
 (field $slot3 (ref null struct))
@@ -4017,7 +4018,7 @@
   $autovalue.Parent.vtable)
 )
 (type $autovalue.AutoValueWithFields.itable (struct_subtype 
-(field $slot0 (ref null struct))
+(field $slot0 (ref $java.io.Serializable.vtable))
 (field $slot1 (ref null struct))
 (field $slot2 (ref null struct))
 (field $slot3 (ref null struct))
@@ -4029,13 +4030,13 @@
 ;;; void AutoValueWithFields.$ctor()
 (func $$ctor__void_$p_autovalue_AutoValueWithFields@autovalue.AutoValueWithFields
  (param $this (ref null $autovalue.AutoValueWithFields))
- ;;@ autovalue/AutoValueWithFields.java:22:15
+ ;;@ autovalue/AutoValueWithFields.java:23:15
  (block
   ;; autovalue.AutoValueWithFields.$clinit();
-  ;;@ autovalue/AutoValueWithFields.java:22:15
+  ;;@ autovalue/AutoValueWithFields.java:23:15
   (call $$clinit__void@autovalue.AutoValueWithFields )
   ;; Parent.this.$ctor();
-  ;;@ autovalue/AutoValueWithFields.java:22:15
+  ;;@ autovalue/AutoValueWithFields.java:23:15
   (call $$ctor__void_$p_autovalue_Parent@autovalue.Parent (ref.as_non_null (local.get $this)))
  )
 )
@@ -4045,12 +4046,12 @@
  (type $function.m_getMemoizedNative__int_$pp_autovalue)
  (param $this.untyped (ref $java.lang.Object))
  (result i32)
- ;;@ autovalue/AutoValueWithFields.java:31:6
+ ;;@ autovalue/AutoValueWithFields.java:35:6
  (local $this (ref null $autovalue.AutoValueWithFields))
  (local.set $this (ref.cast_static $autovalue.AutoValueWithFields (local.get $this.untyped)))
  (block
   ;; return (AutoValueWithFields.this.getIntField() * 2);
-  ;;@ autovalue/AutoValueWithFields.java:32:4
+  ;;@ autovalue/AutoValueWithFields.java:36:4
   (return (i32.mul (call_ref $function.m_getIntField__int (ref.as_non_null (local.get $this))(struct.get $autovalue.AutoValueWithFields.vtable $m_getIntField__int (struct.get $autovalue.AutoValueWithFields $vtable(local.get $this)))) (i32.const 2)))
  )
 )
@@ -4058,22 +4059,22 @@
 
 ;;; void AutoValueWithFields.$clinit()
 (func $$clinit__void@autovalue.AutoValueWithFields
- ;;@ autovalue/AutoValueWithFields.java:22:15
+ ;;@ autovalue/AutoValueWithFields.java:23:15
  (block
   ;; if (autovalue.AutoValueWithFields.$initialized) return;
-  ;;@ autovalue/AutoValueWithFields.java:22:15
+  ;;@ autovalue/AutoValueWithFields.java:23:15
   (if (global.get $f_$initialized__autovalue_AutoValueWithFields)
    (then
     ;; return;
-    ;;@ autovalue/AutoValueWithFields.java:22:15
+    ;;@ autovalue/AutoValueWithFields.java:23:15
     (return )
    )
   )
   ;; (autovalue.AutoValueWithFields.$initialized = true);
-  ;;@ autovalue/AutoValueWithFields.java:22:15
+  ;;@ autovalue/AutoValueWithFields.java:23:15
   (global.set $f_$initialized__autovalue_AutoValueWithFields (i32.const 1))
   ;; autovalue.Parent.$clinit();
-  ;;@ autovalue/AutoValueWithFields.java:22:15
+  ;;@ autovalue/AutoValueWithFields.java:23:15
   (call $$clinit__void@autovalue.Parent )
  )
 )
@@ -4106,17 +4107,17 @@
 ;;; Parent Parent.$create()
 (func $$create__@autovalue.Parent
  (result (ref null $autovalue.Parent))
- ;;@ autovalue/AutoValueWithFields.java:36:6
+ ;;@ autovalue/AutoValueWithFields.java:40:6
  (local $$instance (ref null $autovalue.Parent))
  (block
   ;; Parent $instance = new Parent.<init>(0,0);
-  ;;@ autovalue/AutoValueWithFields.java:36:6
+  ;;@ autovalue/AutoValueWithFields.java:40:6
   (local.set $$instance (struct.new $autovalue.Parent (ref.as_non_null (global.get $autovalue.Parent.vtable)) (ref.as_non_null (global.get $autovalue.Parent.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ autovalue/AutoValueWithFields.java:36:6
+  ;;@ autovalue/AutoValueWithFields.java:40:6
   (call $$ctor__void_$p_autovalue_Parent@autovalue.Parent (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ autovalue/AutoValueWithFields.java:36:6
+  ;;@ autovalue/AutoValueWithFields.java:40:6
   (return (local.get $$instance))
  )
 )
@@ -4124,35 +4125,35 @@
 ;;; void Parent.$ctor()
 (func $$ctor__void_$p_autovalue_Parent@autovalue.Parent
  (param $this (ref null $autovalue.Parent))
- ;;@ autovalue/AutoValueWithFields.java:36:6
+ ;;@ autovalue/AutoValueWithFields.java:40:6
  (block
   ;; autovalue.Parent.$clinit();
-  ;;@ autovalue/AutoValueWithFields.java:36:6
+  ;;@ autovalue/AutoValueWithFields.java:40:6
   (call $$clinit__void@autovalue.Parent )
   ;; Object.this.$ctor();
-  ;;@ autovalue/AutoValueWithFields.java:36:6
+  ;;@ autovalue/AutoValueWithFields.java:40:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void Parent.$clinit()
 (func $$clinit__void@autovalue.Parent
- ;;@ autovalue/AutoValueWithFields.java:36:6
+ ;;@ autovalue/AutoValueWithFields.java:40:6
  (block
   ;; if (autovalue.Parent.$initialized) return;
-  ;;@ autovalue/AutoValueWithFields.java:36:6
+  ;;@ autovalue/AutoValueWithFields.java:40:6
   (if (global.get $f_$initialized__autovalue_Parent)
    (then
     ;; return;
-    ;;@ autovalue/AutoValueWithFields.java:36:6
+    ;;@ autovalue/AutoValueWithFields.java:40:6
     (return )
    )
   )
   ;; (autovalue.Parent.$initialized = true);
-  ;;@ autovalue/AutoValueWithFields.java:36:6
+  ;;@ autovalue/AutoValueWithFields.java:40:6
   (global.set $f_$initialized__autovalue_Parent (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ autovalue/AutoValueWithFields.java:36:6
+  ;;@ autovalue/AutoValueWithFields.java:40:6
   (call $$clinit__void@java.lang.Object )
  )
 )
