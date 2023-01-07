@@ -19,6 +19,9 @@ import com.google.auto.value.AutoValue;
 
 @AutoValue
 abstract class ComponentA {
+
+  private static final long staticField = 42L;
+
   public abstract int getIntField();
 
   public abstract boolean getBooleanField();
