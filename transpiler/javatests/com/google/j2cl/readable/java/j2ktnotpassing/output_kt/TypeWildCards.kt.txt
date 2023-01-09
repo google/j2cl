@@ -1,0 +1,35 @@
+// Generated from "j2ktnotpassing/TypeWildCards.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package j2ktnotpassing
+
+import javaemul.lang.*
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktnotpassingTypeWildCards", exact = true)
+open class TypeWildCards {
+ companion object {
+  @JvmStatic
+  fun testObservable(
+   @ObjCName("withJ2ktnotpassingTypeWildCards_Observable", exact = false) observable: TypeWildCards.Observable<*>?
+  ) {
+   observable!!.addObserver(TypeWildCards.Observer { e ->
+   })
+  }
+ }
+
+ fun interface Observer<E> {
+  fun on(
+   @ObjCName("withId", exact = false) event: E
+  )
+ }
+
+ fun interface Observable<E> {
+  fun addObserver(
+   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer", exact = false) observer: TypeWildCards.Observer<E>?
+  )
+ }
+}

@@ -7,12 +7,34 @@ import javaemul.lang.*
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
 open class TypeWildCards {
  companion object {
   @JvmStatic
   fun testSupplierWithUpperAndLowerBounds_pp_j2kt(supplier: TypeWildCards.SupplierWithUpperBound<in TypeWildCards.Child?>?) {
    val parent: TypeWildCards.Parent? = supplier!!.get() as TypeWildCards.Parent?
+  }
+
+  @JvmStatic
+  fun testObservable(
+   @ObjCName("withJ2ktTypeWildCards_Observable", exact = false) observable: TypeWildCards.Observable<*>?
+  ) {}
+
+  @JvmStatic
+  fun testSuperWildcardObservable(
+   @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable", exact = false) observable: TypeWildCards.SuperWildcardObservable<*>?
+  ) {
+   observable!!.addObserver(TypeWildCards.Observer { e ->
+   })
+  }
+
+  @JvmStatic
+  fun testKtInObservable(
+   @ObjCName("withJ2ktTypeWildCards_KtInObservable", exact = false) observable: TypeWildCards.KtInObservable<*>?
+  ) {
+   observable!!.addObserver(TypeWildCards.KtInObserver { e ->
+   })
   }
  }
 
@@ -22,5 +44,35 @@ open class TypeWildCards {
 
  fun interface SupplierWithUpperBound<T: TypeWildCards.Parent?> {
   fun get(): T
+ }
+
+ fun interface Observer<E> {
+  fun on(
+   @ObjCName("withId", exact = false) event: E
+  )
+ }
+
+ fun interface KtInObserver<in E> {
+  fun on(
+   @ObjCName("withId", exact = false) event: E
+  )
+ }
+
+ fun interface Observable<E> {
+  fun addObserver(
+   @ObjCName("withJ2ktTypeWildCards_Observer", exact = false) observer: TypeWildCards.Observer<E>?
+  )
+ }
+
+ fun interface SuperWildcardObservable<E> {
+  fun addObserver(
+   @ObjCName("withJ2ktTypeWildCards_Observer", exact = false) observer: TypeWildCards.Observer<in E>?
+  )
+ }
+
+ fun interface KtInObservable<E> {
+  fun addObserver(
+   @ObjCName("withJ2ktTypeWildCards_KtInObserver", exact = false) observer: TypeWildCards.KtInObserver<E>?
+  )
  }
 }

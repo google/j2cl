@@ -15,6 +15,8 @@
  */
 package j2kt;
 
+import javaemul.internal.annotations.KtIn;
+
 // TODO(b/202428351): Move to typewildcards readable when generics are fully supported.
 class TypeWildCards {
   static class Parent {}
@@ -28,5 +30,38 @@ class TypeWildCards {
   static void testSupplierWithUpperAndLowerBounds(SupplierWithUpperBound<? super Child> supplier) {
     // Upper bound in Supplier should be respected so assignment to Parent should be possible.
     Parent parent = supplier.get();
+  }
+
+  interface Observer<E> {
+    void on(E event);
+  }
+
+  interface KtInObserver<@KtIn E> {
+    void on(E event);
+  }
+
+  interface Observable<E> {
+    void addObserver(Observer<E> observer);
+  }
+
+  interface SuperWildcardObservable<E> {
+    void addObserver(Observer<? super E> observer);
+  }
+
+  interface KtInObservable<E> {
+    void addObserver(KtInObserver<E> observer);
+  }
+
+  public static void testObservable(Observable<?> observable) {
+    // TODO(b/261839232): It does not compile in Kotlin: observable needs a cast to Observable<Any?>
+    // observable.addObserver(e -> {});
+  }
+
+  public static void testSuperWildcardObservable(SuperWildcardObservable<?> observable) {
+    observable.addObserver(e -> {});
+  }
+
+  public static void testKtInObservable(KtInObservable<?> observable) {
+    observable.addObserver(e -> {});
   }
 }
