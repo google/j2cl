@@ -92,11 +92,7 @@ def integration_test(
       var testSuite = goog.require('goog.testing.testSuite');
       var TestRunner = goog.require('TestRunner');
 
-      testSuite({
-        test_Main: function() {
-          return TestRunner.testMain();
-        }
-      });
+      testSuite({ testJ2cl: TestRunner.testMain });
     """
     _genfile("TestHarness_test.js", test_harness, tags)
 
