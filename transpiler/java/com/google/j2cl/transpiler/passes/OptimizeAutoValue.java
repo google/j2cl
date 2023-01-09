@@ -104,7 +104,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             .streamTypes()
             .filter(t -> optimizableTypes.contains(t.getDeclaration().getSuperTypeDeclaration()))
             // Filter the unlikely empty AutoValue case to avoid handling edge cases.
-            .filter(t -> !t.getDeclaration().getDeclaredFieldDescriptors().isEmpty())
+            .filter(t -> !Iterables.isEmpty(getInstanceFields(t.getDeclaration())))
             .collect(
                 toImmutableMap(
                     t -> t.getSuperTypeDescriptor().getTypeDeclaration(), Function.identity()));
@@ -443,9 +443,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       for (TypeDeclaration t = type;
           !TypeDescriptors.isJavaLangObject(t.toRawTypeDescriptor());
           t = t.getSuperTypeDeclaration()) {
-        excludedFields.putAll(
-            type,
-            Iterables.filter(t.getDeclaredFieldDescriptors(), FieldDescriptor::isInstanceMember));
+        excludedFields.putAll(type, getInstanceFields(t));
       }
     }
 
@@ -455,9 +453,13 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         .map(Type::getDeclaration)
         // Skip the AutoValue impl.
         .filter(t -> !t.getSuperTypeDeclaration().isAnnotatedWithAutoValue())
-        .forEach(t -> excludedFields.putAll(type, t.getDeclaredFieldDescriptors()));
+        .forEach(t -> excludedFields.putAll(type, getInstanceFields(t)));
 
     return excludedFields;
+  }
+
+  private static Iterable<FieldDescriptor> getInstanceFields(TypeDeclaration t) {
+    return Iterables.filter(t.getDeclaredFieldDescriptors(), FieldDescriptor::isInstanceMember);
   }
 
   /** @return mask summarizes the removed methods. */
@@ -523,7 +525,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     List<Expression> fieldReferences =
         type.getFields().stream()
             .map(Field::getDescriptor)
-            .filter(f -> !excludedFields.contains(f))
+            .filter(f -> f.isInstanceMember() && !excludedFields.contains(f))
             .map(
                 f ->
                     FieldAccess.Builder.from(f)

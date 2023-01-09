@@ -1,6 +1,7 @@
 goog.module('autovalue.Parent$impl');
 
 const j_l_Object = goog.require('java.lang.Object$impl');
+const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Parent extends j_l_Object {
@@ -35,6 +36,8 @@ class Parent extends j_l_Object {
  /** @nodts */
  static $loadModules() {}
 }
+/**@const {!$Long} @nodts*/
+Parent.f_staticField__autovalue_Parent_ = $Long.fromInt(42);
 $Util.$setClassMetadata(Parent, 'autovalue.Parent');
 
 exports = Parent;

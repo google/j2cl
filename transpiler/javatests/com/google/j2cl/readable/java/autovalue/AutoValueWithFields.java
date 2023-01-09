@@ -38,5 +38,8 @@ abstract class AutoValueWithFields extends Parent implements Serializable {
 }
 
 class Parent {
+
+  private static final long staticField = 42L;
+
   int userField1;
 }
