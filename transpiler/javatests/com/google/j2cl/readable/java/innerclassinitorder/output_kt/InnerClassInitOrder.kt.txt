@@ -18,6 +18,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("InnerclassinitorderInnerClassInitOrder", exact = true)
 open class InnerClassInitOrder {
+ @ObjCName("number_", exact = false)
  @JvmField var number: Int = 0
 
  open fun testOuterThisFromSuperCall() {
@@ -237,6 +238,7 @@ open class InnerClassInitOrder {
   }
 
   open inner class ESInner {
+   @ObjCName("value_", exact = false)
    @JvmField var value: Int = 0
 
    constructor() {
@@ -263,6 +265,7 @@ open class InnerClassInitOrder {
   }
 
   open inner class ESWGInner {
+   @ObjCName("value_", exact = false)
    @JvmField var value: Int = 0
 
    constructor() {
@@ -285,6 +288,7 @@ open class InnerClassInitOrder {
 
  @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer", exact = true)
  open class Outer {
+  @ObjCName("value_", exact = false)
   @JvmField val value: Int
 
   constructor(

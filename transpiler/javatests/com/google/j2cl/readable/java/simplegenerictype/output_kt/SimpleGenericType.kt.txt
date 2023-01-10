@@ -13,8 +13,10 @@ import kotlin.native.ObjCName
 
 @ObjCName("SimplegenerictypeSimpleGenericType", exact = true)
 open class SimpleGenericType<T, S> {
+ @ObjCName("first_", exact = false)
  @JvmField var first: T = null as T
 
+ @ObjCName("second_", exact = false)
  @JvmField var second: S = null as S
 
  constructor(

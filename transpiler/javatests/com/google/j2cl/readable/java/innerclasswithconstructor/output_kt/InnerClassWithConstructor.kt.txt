@@ -12,9 +12,11 @@ import kotlin.native.ObjCName
 
 @ObjCName("InnerclasswithconstructorInnerClassWithConstructor", exact = true)
 open class InnerClassWithConstructor {
+ @ObjCName("a_", exact = false)
  @JvmField var a: Int = 0
 
  open inner class InnerClass {
+  @ObjCName("b_", exact = false)
   @JvmField var b: Int = 0
 
   constructor(

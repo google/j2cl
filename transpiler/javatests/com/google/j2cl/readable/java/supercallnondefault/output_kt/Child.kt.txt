@@ -11,6 +11,7 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 open class Parent {
+ @ObjCName("field_", exact = false)
  @JvmField var field: Int = 0
 
  constructor(

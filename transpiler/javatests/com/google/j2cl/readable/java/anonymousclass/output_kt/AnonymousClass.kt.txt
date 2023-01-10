@@ -58,6 +58,7 @@ open class AnonymousClass {
 
 interface SomeInterface {
  companion object {
+  @ObjCName("AnonymousclassSomeInterface_implicitlyStatic", exact = false)
   @JvmField val implicitlyStatic: SomeClass? = object : SomeClass(1) {
    open override fun foo(): String? {
     return "a"

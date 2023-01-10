@@ -14,6 +14,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("ProtobufMyMessage", exact = true)
 open class MyMessage: GeneratedMessage {
+ @ObjCName("testField_", exact = false)
  @JvmField val testField: Int
 
  open fun getTestField(): Int {
@@ -38,6 +39,7 @@ open class MyMessage: GeneratedMessage {
 
  @ObjCName("ProtobufMyMessage_Builder", exact = true)
  open class Builder: GeneratedMessage.Builder {
+  @ObjCName("testField_", exact = false)
   @JvmField var testField: Int = 0
 
   open fun getTestField(): Int {

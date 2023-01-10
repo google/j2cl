@@ -15,6 +15,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("DeprecatedDeprecatedExample", exact = true)
 open class DeprecatedExample {
+ @ObjCName("deprecatedInstanceField_", exact = false)
  @JvmField var deprecatedInstanceField: String? = "deprecated field"
 
  open fun deprecatedInstanceMethod(
@@ -24,6 +25,7 @@ open class DeprecatedExample {
  constructor()
 
  companion object {
+  @ObjCName("DeprecatedDeprecatedExample_DEPRECATED_STATIC_FIELD", exact = false)
   const val DEPRECATED_STATIC_FIELD: String = "deprecated field"
 
   @JvmStatic

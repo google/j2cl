@@ -12,5 +12,6 @@ import packageinfo.Outer
 
 @ObjCName("PackageinfoSubpackageFoo", exact = true)
 open class Foo {
+ @ObjCName("outer_", exact = false)
  @JvmField var outer: Outer? = Outer()
 }

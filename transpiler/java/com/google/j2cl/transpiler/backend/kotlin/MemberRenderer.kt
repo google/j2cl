@@ -103,6 +103,11 @@ private fun Renderer.renderField(field: Field) {
   val isFinal = field.descriptor.isFinal
   val typeDescriptor = field.descriptor.typeDescriptor
 
+  field.objCName?.let { objCName ->
+    renderObjCNameAnnotation(objCName, exact = false)
+    renderNewLine()
+  }
+
   if (field.isCompileTimeConstant && field.isStatic) {
     render("const ")
   } else {

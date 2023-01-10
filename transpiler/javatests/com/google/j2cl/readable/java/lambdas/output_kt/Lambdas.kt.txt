@@ -26,6 +26,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("LambdasLambdas", exact = true)
 open class Lambdas {
+ @ObjCName("field_", exact = false)
  @JvmField var field: Int = 100
 
  open fun call(
@@ -299,6 +300,7 @@ open class Lambdas {
  }
 
  open class Parent {
+  @ObjCName("fieldInParent_", exact = false)
   @JvmField var fieldInParent: Int = 0
 
   open fun funInParent() {}

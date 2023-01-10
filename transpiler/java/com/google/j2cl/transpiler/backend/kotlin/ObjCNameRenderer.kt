@@ -19,6 +19,7 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.common.StringUtils
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -49,6 +50,14 @@ internal fun Renderer.renderObjCNameAnnotation(name: String, exact: Boolean? = n
     exact?.let { render(", exact = $it") }
   }
 }
+
+internal val Field.objCName: String?
+  get() =
+    if (descriptor.visibility.needsObjCNameAnnotation) {
+      val objCPrefix = descriptor.enclosingTypeDescriptor.typeDeclaration.objCName
+      val name = descriptor.ktMangledName
+      if (descriptor.isStatic) "${objCPrefix}_${name.identifierString}" else "${name}_"
+    } else null
 
 internal data class MethodObjCNames(
   val methodName: String? = null,
