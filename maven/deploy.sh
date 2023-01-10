@@ -15,8 +15,8 @@
 
 #
 # The script generates the open source artifacts needed for uploading a library to oss sonatype.
-# The artifacts includes the jar file, the sources jar file and the javadoc jar file.
-# The script signs each jar and upload them to sonatype.
+# The artifacts include the jar file, the sources jar file and the javadoc jar file.
+# The script signs each jar and uploads them to sonatype.
 #
 # You need to install maven (3.0.5) before to run this script:
 #  sudo apt-get install maven
@@ -29,7 +29,7 @@
 #
 # The script will ask you the passphrase of your key.
 #
-# You have to also configure the repository credentials by create a settings.xml
+# You have to also configure the repository credentials by creating a settings.xml
 # file in the ~/.m2/ directory and add this section :
 # <servers>
 #   <server>
@@ -137,7 +137,7 @@ jar xf ${jar_file}
 create_artifact "${artifact}.jar" ${artifact_directory}
 
 # Create javadoc jar file
-find ${srcs_directory} -type f -name "*.java" | xargs javadoc -d ${javadoc_directory}
+find ${srcs_directory} -type f -name "*.java" | xargs javadoc -d ${javadoc_directory} --ignore-source-errors
 
 cd ${javadoc_directory}
 create_artifact "${artifact}-javadoc.jar" ${artifact_directory}
