@@ -29,7 +29,7 @@ internal fun Renderer.renderIdentifier(identifier: String) {
 internal val String.identifierString
   get() =
     replace("$", "___").run {
-      if (isForbiddenKeyword(this)) this + "___forbidden"
+      if (isForbiddenKeyword(this)) this + "__" // This needs to be __ for consistency with J2ObjC.
       else if (isHardKeyword(this) || !isValidIdentifier) "`$this`" else this
     }
 

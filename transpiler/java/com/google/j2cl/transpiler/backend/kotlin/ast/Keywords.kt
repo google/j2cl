@@ -53,6 +53,9 @@ private val hardKeywordSet =
 // These keywords are forbidden for some reason or another and need to be mangled.
 private val forbiddenKeywordSet =
   setOf(
+    "delete", // Reserved word in ObjectiveC++
+    "initialize", // Selector name in NSObject
+    "scale", // Foundation method with conflicting return types
     "typeof", // Reserved word in swift.
     "BIG_ENDIAN", // Reserved as part of ObjectiveC on iOS see endian.h.
     "LITTLE_ENDIAN", // Reserved as part of ObjectiveC on iOS see endian.h.

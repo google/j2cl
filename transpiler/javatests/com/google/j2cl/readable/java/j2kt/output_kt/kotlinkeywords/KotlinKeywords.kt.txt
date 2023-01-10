@@ -14,17 +14,23 @@ import kotlin.native.ObjCName
 open class KotlinKeywords {
  @JvmField var `as`: Int = 0
 
+ @JvmField var delete__: Int = 0
+
  @JvmField var `fun`: Int = 0
 
  @JvmField var `in`: Int = 0
+
+ @JvmField var initialize__: Int = 0
 
  @JvmField var `is`: Int = 0
 
  @JvmField var `object`: Int = 0
 
+ @JvmField var scale__: Int = 0
+
  @JvmField var `typealias`: Int = 0
 
- @JvmField var typeof___forbidden: Int = 0
+ @JvmField var typeof__: Int = 0
 
  @JvmField var `val`: Int = 0
 
@@ -36,27 +42,30 @@ open class KotlinKeywords {
   @ObjCName("withInt", exact = false) `in`: Int
  ): Int {
   val `as`: Int = this.`as` + `in`
+  val delete__: Int = this.delete__ + `in`
   val `fun`: Int = this.`fun` + `in`
+  val initialize__: Int = this.initialize__ + `in`
   val `is`: Int = this.`is` + `in`
   val `object`: Int = this.`object` + `in`
+  val scale__: Int = this.scale__ + `in`
   val `typealias`: Int = this.`typealias` + `in`
-  val typeof___forbidden: Int = this.typeof___forbidden + `in`
+  val typeof__: Int = this.typeof__ + `in`
   val `val`: Int = this.`val` + `in`
   val `var`: Int = this.`var` + `in`
   val `when`: Int = this.`when` + `in`
-  val temp: Int = KotlinKeywords.OVERFLOW___forbidden + KotlinKeywords.DOMAIN___forbidden + `in`
-  return KotlinKeywords.BIG_ENDIAN___forbidden + KotlinKeywords.LITTLE_ENDIAN___forbidden + KotlinKeywords.NULL___forbidden + `in`
+  val temp: Int = KotlinKeywords.OVERFLOW__ + KotlinKeywords.DOMAIN__ + `in`
+  return KotlinKeywords.BIG_ENDIAN__ + KotlinKeywords.LITTLE_ENDIAN__ + KotlinKeywords.NULL__ + `in`
  }
 
  companion object {
-  @JvmField var BIG_ENDIAN___forbidden: Int = 7
+  @JvmField var BIG_ENDIAN__: Int = 7
 
-  @JvmField var LITTLE_ENDIAN___forbidden: Int = - 7
+  @JvmField var LITTLE_ENDIAN__: Int = - 7
 
-  @JvmField var NULL___forbidden: Int = 745
+  @JvmField var NULL__: Int = 745
 
-  @JvmField var OVERFLOW___forbidden: Int = - 24
+  @JvmField var OVERFLOW__: Int = - 24
 
-  @JvmField var DOMAIN___forbidden: Int = - 32
+  @JvmField var DOMAIN__: Int = - 32
  }
 }

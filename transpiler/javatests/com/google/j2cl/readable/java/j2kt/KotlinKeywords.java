@@ -24,10 +24,13 @@ public class KotlinKeywords {
   public static int DOMAIN = -32;
 
   public int as = 0;
+  public int delete = 0;
   public int fun = 0;
   public int in = 0;
+  public int initialize = 0;
   public int is = 0;
   public int object = 0;
+  public int scale = 0;
   public int typealias = 0;
   public int typeof = 0;
   public int val = 0;
@@ -36,9 +39,12 @@ public class KotlinKeywords {
   
   public int test(int in) {
     int as = this.as + in;
+    int delete = this.delete + in;
     int fun = this.fun + in;
+    int initialize = this.initialize + in;
     int is = this.is + in;
     int object = this.object + in;
+    int scale = this.scale + in;
     int typealias = this.typealias + in;
     int typeof = this.typeof + in;
     int val = this.val + in;
