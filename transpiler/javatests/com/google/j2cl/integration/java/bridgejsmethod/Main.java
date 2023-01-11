@@ -124,8 +124,7 @@ public class Main {
     assertTrue(callFunByA(new C(), 1).equals(new Integer(6)));
     assertTrue(callFunByA(new D(), 2).equals(new Integer(8)));
     assertTrue(callFunByA(new E(), "xyz").equals("xyzabc"));
-    // TODO(b/150876433): enable when fixed.
-    // assertThrowsClassCastException(() -> callFunByA(new B(), 1), String.class);
+    assertThrowsClassCastException(() -> callFunByA(new B(), 1), String.class);
 
     assertEquals("A-bar", callBarByA(new A<String>(), "abc"));
     assertEquals("B-bar", callBarByA(new B(), "abc"));
@@ -136,8 +135,7 @@ public class Main {
     assertThrowsClassCastException(() -> callBarByA(new B(), 1), String.class);
 
     assertTrue(callFunByI(new D(), 2).equals(new Integer(8)));
-    // TODO(b/150876433): enable when fixed.
-    // assertThrowsClassCastException(() -> callFunByI(new D(), new Float(2.2)), Integer.class);
+    assertThrowsClassCastException(() -> callFunByI(new D(), new Float(2.2)), Integer.class);
 
     assertEquals("B-bar", callBarByJ(new E(), "xyz"));
     assertThrowsClassCastException(() -> callBarByJ(new E(), new Object()), String.class);
@@ -183,13 +181,16 @@ public class Main {
 
   private static void testJsMethodForwarding() {
     Top o = new GrandChild();
-    // TODO(b/150876433): Uncomment when fixed.
-    // assertThrowsClassCastException(
-    //     () -> {
-    //       o.m(null, new Object());
-    //     },
-    //     String.class);
-    // assertThrowsClassCastException(() -> { o.m(new Object(), null ); }, String.class);
+    assertThrowsClassCastException(
+        () -> {
+          o.m(null, new Object());
+        },
+        String.class);
+    assertThrowsClassCastException(
+        () -> {
+          o.m(new Object(), null);
+        },
+        String.class);
 
     Accidental a = new GrandChild();
     assertThrowsClassCastException(

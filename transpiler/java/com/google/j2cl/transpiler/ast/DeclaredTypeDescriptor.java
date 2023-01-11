@@ -719,11 +719,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       if (!declaredMethod.isPolymorphic()) {
         continue;
       }
-      // TODO(b/150876433): Select the target override key in a principled manner when there is a
-      // collision due to JsMethod. If it wasn't for JsMethods the mapping would be 1-1, because
-      // the override key uses the same elements as the mangled name (i.e. name, parameter types
-      // and the package if it is package private).
-      // However, two different JsMethods with different override key might have the same name. In
+      // Two different JsMethods with different override key might have the same name. In
       // those cases, we choose the last one in the super type hierarchy. It is safe because all
       // the override keys corresponding to a JsMethod will have the same target otherwise it
       // would not have passed restriction checking.

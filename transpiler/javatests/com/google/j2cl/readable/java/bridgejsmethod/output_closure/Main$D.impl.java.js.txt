@@ -5,6 +5,7 @@ const I = goog.require('bridgejsmethod.Main.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @extends {A<Integer>}
@@ -28,7 +29,10 @@ class D extends A {
  }
  /** @override @return {Integer} */
  fun(/** Integer */ i) {
-  return i;
+  let i_1 = /**@type {Integer}*/ ($Casts.$to(i, Integer));
+  {
+   return i_1;
+  }
  }
  /** @nodts */
  static $clinit() {
@@ -42,7 +46,10 @@ class D extends A {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 I.$markImplementor(D);
 $Util.$setClassMetadata(D, 'bridgejsmethod.Main$D');

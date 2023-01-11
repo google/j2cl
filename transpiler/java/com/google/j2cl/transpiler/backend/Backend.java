@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
+import com.google.j2cl.transpiler.passes.AddJsMethodOverridesCastChecks;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesKotlin;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
@@ -210,6 +211,7 @@ public enum Backend {
           // Compute bridge methods before optimizing autovalue, since inlining the autovalue
           // classes requires inlining the bridges as well.
           BridgeMethodsCreator::new,
+          AddJsMethodOverridesCastChecks::new,
           () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
 
           // Default constructors and explicit super calls should be synthesized first.

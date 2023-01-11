@@ -4,6 +4,9 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const I = goog.require('jsoptional.Main.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
 /**
  * @implements {I<?string>}
  */
@@ -24,7 +27,9 @@ class NonJsTypeSubtype extends j_l_Object {
   this.$ctor__java_lang_Object__void();
  }
  /** @override */
- m(/** ?string */ t, /** *= */ o) {}
+ m(/** ?string */ t, /** *= */ o) {
+  let t_1 = /**@type {?string}*/ ($Casts.$to(t, j_l_String));
+ }
  /** @nodts */
  static $clinit() {
   NonJsTypeSubtype.$clinit = () =>{};
@@ -37,7 +42,10 @@ class NonJsTypeSubtype extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 I.$markImplementor(NonJsTypeSubtype);
 $Util.$setClassMetadata(NonJsTypeSubtype, 'jsoptional.Main$NonJsTypeSubtype');

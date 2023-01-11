@@ -4,6 +4,9 @@ const Base = goog.require('jsmethod.JsMethodExample.Base$impl');
 const I = goog.require('jsmethod.JsMethodExample.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
 /**
  * @extends {Base<?string>}
  * @implements {I}
@@ -25,7 +28,9 @@ class Sub extends Base {
   this.$ctor__jsmethod_JsMethodExample_Base__void();
  }
  /** @override */
- m(/** ?string */ s) {}
+ m(/** ?string */ s) {
+  let s_1 = /**@type {?string}*/ ($Casts.$to(s, j_l_String));
+ }
  /** @nodts */
  static $clinit() {
   Sub.$clinit = () =>{};
@@ -38,7 +43,10 @@ class Sub extends Base {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 I.$markImplementor(Sub);
 $Util.$setClassMetadata(Sub, 'jsmethod.JsMethodExample$Sub');

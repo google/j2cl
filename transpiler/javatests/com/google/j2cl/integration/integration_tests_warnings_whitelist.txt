@@ -40,6 +40,14 @@ transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmet
 #found   : *
 #required: (null|string)
 
+transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmethod-j2cl.js/bridgejsmethod/Main.impl.java.js:115  actual parameter 2 of module$exports$bridgejsmethod$Main$GrandChild$impl.prototype.m does not match formal parameter
+#found   : *
+#required: (null|string)
+
+transpiler/javatests/com/google/j2cl/integration/java/bridgejsmethod/bridgejsmethod-j2cl.js/bridgejsmethod/Main.impl.java.js:118  actual parameter 1 of module$exports$bridgejsmethod$Main$GrandChild$impl.prototype.m does not match formal parameter
+#found   : *
+#required: (null|string)
+
 transpiler/javatests/com/google/j2cl/integration/kotlin/instanceofs/instanceofs-j2cl.js/com/google/j2cl/integration/kotlin/instanceofs/NumberSubclass.impl.java.js:8  property m_doubleValue__double on abstract class module$exports$java$lang$Number$impl is not implemented by type module$exports$com$google$j2cl$integration$kotlin$instanceofs$NumberSubclass$impl
 
 transpiler/javatests/com/google/j2cl/integration/kotlin/instanceofs/instanceofs-j2cl.js/com/google/j2cl/integration/kotlin/instanceofs/NumberSubclass.impl.java.js:8  property m_floatValue__float on abstract class module$exports$java$lang$Number$impl is not implemented by type module$exports$com$google$j2cl$integration$kotlin$instanceofs$NumberSubclass$impl
@@ -104,8 +112,6 @@ transpiler/javatests/com/google/j2cl/integration/kotlin/typewildcards/typewildca
 #found   : module$exports$com$google$j2cl$integration$kotlin$typewildcards$Foo$GenericType$impl<module$exports$com$google$j2cl$integration$kotlin$typewildcards$Foo$SubClass$impl>
 #required: module$exports$com$google$j2cl$integration$kotlin$typewildcards$Foo$GenericType$impl<module$exports$com$google$j2cl$integration$kotlin$typewildcards$Foo$impl>
 
-
 transpiler/javatests/com/google/j2cl/integration/kotlin/foreachstatement/foreachstatement-j2cl.js/com/google/j2cl/integration/kotlin/foreachstatement/MyIterable$MyIterator.impl.java.js:49  mismatch of the m_next__java_lang_Object property on type module$exports$com$google$j2cl$integration$kotlin$foreachstatement$MyIterable$MyIterator$impl and the type of the property it overrides from interface module$exports$java$util$Iterator$impl
 #original: function(this:module$exports$java$util$Iterator$impl): module$exports$java$lang$Integer$impl
 #override: function(this:module$exports$com$google$j2cl$integration$kotlin$foreachstatement$MyIterable$MyIterator$impl): number
-#  internal inner class MyIterator : Iterator<Int> {

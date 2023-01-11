@@ -15,6 +15,8 @@
  */
 package morebridgemethods;
 
+import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
+
 import jsinterop.annotations.JsMethod;
 
 public class BridgeJsMethodMain {
@@ -39,7 +41,6 @@ public class BridgeJsMethodMain {
   }
 
   public static void test(String... args) {
-    // TODO(b/150876433): enable when fixed.
-    // Asserts.assertThrowsClassCastException(() -> callFunByA(new B(), 1));
+    assertThrowsClassCastException(() -> callFunByA(new B(), 1));
   }
 }
