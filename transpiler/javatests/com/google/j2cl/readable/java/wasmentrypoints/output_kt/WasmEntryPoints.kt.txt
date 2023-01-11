@@ -4,9 +4,9 @@
 package wasmentrypoints
 
 import javaemul.lang.*
-import kotlin.Array
+import kotlin.Float
+import kotlin.Int
 import kotlin.OptIn
-import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
@@ -15,18 +15,16 @@ import kotlin.native.ObjCName
 open class WasmEntryPoints {
  companion object {
   @JvmStatic
-  fun singleMatchedEntryPoint(
-   @ObjCName("withNSStringArray", exact = false) args: Array<String?>?
-  ) {}
+  fun singleMatchedEntryPoint() {}
 
   @JvmStatic
   fun matchedEntryPointPattern1(
-   @ObjCName("withNSStringArray", exact = false) args: Array<String?>?
+   @ObjCName("withInt", exact = false) x: Int
   ) {}
 
   @JvmStatic
   fun matchedEntryPointPattern2(
-   @ObjCName("withNSStringArray", exact = false) args: Array<String?>?
+   @ObjCName("withFloat", exact = false) y: Float
   ) {}
  }
 }

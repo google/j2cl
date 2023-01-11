@@ -17,9 +17,9 @@ package wasmentrypoints;
 
 public class WasmEntryPoints {
 
-  public static void singleMatchedEntryPoint(String[] args) {}
+  public static void singleMatchedEntryPoint() {}
 
-  public static void matchedEntryPointPattern1(String[] args) {}
+  public static void matchedEntryPointPattern1(int x) {}
 
-  public static void matchedEntryPointPattern2(String[] args) {}
+  public static void matchedEntryPointPattern2(float y) {}
 }
