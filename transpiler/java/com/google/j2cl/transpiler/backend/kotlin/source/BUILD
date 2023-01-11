@@ -1,0 +1,14 @@
+load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
+
+package(
+    default_visibility = ["//transpiler:__subpackages__"],
+    licenses = ["notice"],
+)
+
+kt_jvm_library(
+    name = "source",
+    srcs = glob(["*.kt"]),
+    deps = [
+        "//transpiler/java/com/google/j2cl/transpiler/backend/common",
+    ],
+)
