@@ -7,7 +7,6 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
-    ],
+    generate_wasm_readables = False,  # JS varargs is not supported in WASM.
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
