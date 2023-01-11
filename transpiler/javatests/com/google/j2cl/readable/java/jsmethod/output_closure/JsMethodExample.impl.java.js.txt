@@ -1,0 +1,44 @@
+goog.module('jsmethod.JsMethodExample$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+
+class JsMethodExample extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!JsMethodExample} */
+ static $create__() {
+  JsMethodExample.$clinit();
+  let $instance = new JsMethodExample();
+  $instance.$ctor__jsmethod_JsMethodExample__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__jsmethod_JsMethodExample__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ // /** @template T @return {T} */
+ // native testMethod() 
+ /** @nodts */
+ static $clinit() {
+  JsMethodExample.$clinit = () =>{};
+  JsMethodExample.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsMethodExample;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(JsMethodExample, 'jsmethod.JsMethodExample');
+
+exports = JsMethodExample;
+
+//# sourceMappingURL=JsMethodExample.js.map

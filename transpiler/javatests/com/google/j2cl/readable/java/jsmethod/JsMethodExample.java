@@ -17,20 +17,9 @@ package jsmethod;
 
 import java.util.ArrayList;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
 
-@JsType(isNative = true, name = "console", namespace = JsPackage.GLOBAL)
 public class JsMethodExample {
-  public static native void log(String message);
 
-  @JsOverlay
-  public static void main(String... args) {
-    log("test");
-  }
-
-  @JsMethod
   // Regression readable for b/70040143.
   // The following declaration indirectly triggers the code in MethodDescriptor that fails a
   // precondition check when building the constructor of a raw type.
@@ -38,6 +27,7 @@ public class JsMethodExample {
   //    1. be a @JsMethod
   //    2. return a type variable that is bounded by a generic class that has a constructor.
   // This would better be handled in a unit test.
+  @JsMethod
   public native <T extends ArrayList<String>> T testMethod();
 
   abstract static class Base<T> {

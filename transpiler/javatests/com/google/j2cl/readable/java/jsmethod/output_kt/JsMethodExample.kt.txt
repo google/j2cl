@@ -4,32 +4,15 @@
 package jsmethod
 
 import javaemul.lang.*
-import kotlin.Array
 import kotlin.OptIn
 import kotlin.String
 import kotlin.collections.ArrayList
 import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 @ObjCName("JsmethodJsMethodExample", exact = true)
 open class JsMethodExample {
  external open fun <T: ArrayList<String?>?> testMethod(): T
-
- companion object {
-  @JvmStatic
-  external fun log(
-   @ObjCName("withNSString", exact = false) message: String?
-  )
-
-  @JvmStatic
-  fun main(
-   vararg @ObjCName("withNSStringArray", exact = false) args: String?
-  ) {
-   val args_1: Array<String?>? = args as Array<String?>?
-   JsMethodExample.log("test")
-  }
- }
 
  abstract class Base<T> {
   open fun m(

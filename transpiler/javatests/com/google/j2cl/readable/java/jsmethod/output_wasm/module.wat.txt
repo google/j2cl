@@ -85,17 +85,17 @@
 ;;; JsMethodExample JsMethodExample.$create()
 (func $$create__@jsmethod.JsMethodExample
  (result (ref null $jsmethod.JsMethodExample))
- ;;@ jsmethod/JsMethodExample.java:25:13
+ ;;@ jsmethod/JsMethodExample.java:21:13
  (local $$instance (ref null $jsmethod.JsMethodExample))
  (block
   ;; JsMethodExample $instance = new JsMethodExample.<init>(0);
-  ;;@ jsmethod/JsMethodExample.java:25:13
+  ;;@ jsmethod/JsMethodExample.java:21:13
   (local.set $$instance (struct.new $jsmethod.JsMethodExample (ref.as_non_null (global.get $jsmethod.JsMethodExample.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ jsmethod/JsMethodExample.java:25:13
+  ;;@ jsmethod/JsMethodExample.java:21:13
   (call $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ jsmethod/JsMethodExample.java:25:13
+  ;;@ jsmethod/JsMethodExample.java:21:13
   (return (local.get $$instance))
  )
 )
@@ -103,33 +103,14 @@
 ;;; void JsMethodExample.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample
  (param $this (ref null $jsmethod.JsMethodExample))
- ;;@ jsmethod/JsMethodExample.java:25:13
+ ;;@ jsmethod/JsMethodExample.java:21:13
  (block
   ;; jsmethod.JsMethodExample.$clinit();
-  ;;@ jsmethod/JsMethodExample.java:25:13
+  ;;@ jsmethod/JsMethodExample.java:21:13
   (call $$clinit__void@jsmethod.JsMethodExample )
   ;; Object.this.$ctor();
-  ;;@ jsmethod/JsMethodExample.java:25:13
+  ;;@ jsmethod/JsMethodExample.java:21:13
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; void JsMethodExample.log(String message)
-(func $m_log__java_lang_String__void@jsmethod.JsMethodExample (import "imports" "console.log") 
- (param $message (ref null $java.lang.String))
-)
-
-;;; void JsMethodExample.main(String... args)
-(func $m_main__arrayOf_java_lang_String__void@jsmethod.JsMethodExample
- (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ jsmethod/JsMethodExample.java:29:21
- (block
-  ;; jsmethod.JsMethodExample.$clinit();
-  ;;@ jsmethod/JsMethodExample.java:29:42
-  (call $$clinit__void@jsmethod.JsMethodExample )
-  ;; jsmethod.JsMethodExample.log(javaemul.internal.StringPool.$getString_|test|());
-  ;;@ jsmethod/JsMethodExample.java:30:4
-  (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (call $function.no.side.effects.$getString_|test|__java_lang_String (ref.func $$getString_|test|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 
@@ -138,7 +119,7 @@
  (type $function.m_testMethod__java_util_ArrayList)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.util.ArrayList))
- ;;@ jsmethod/JsMethodExample.java:41:48
+ ;;@ jsmethod/JsMethodExample.java:31:48
  (local $this (ref null $jsmethod.JsMethodExample))
  (local.set $this (ref.cast_static $jsmethod.JsMethodExample (local.get $this.untyped)))
  (block
@@ -149,22 +130,22 @@
 
 ;;; void JsMethodExample.$clinit()
 (func $$clinit__void@jsmethod.JsMethodExample
- ;;@ jsmethod/JsMethodExample.java:25:13
+ ;;@ jsmethod/JsMethodExample.java:21:13
  (block
   ;; if (jsmethod.JsMethodExample.$initialized) return;
-  ;;@ jsmethod/JsMethodExample.java:25:13
+  ;;@ jsmethod/JsMethodExample.java:21:13
   (if (global.get $f_$initialized__jsmethod_JsMethodExample)
    (then
     ;; return;
-    ;;@ jsmethod/JsMethodExample.java:25:13
+    ;;@ jsmethod/JsMethodExample.java:21:13
     (return )
    )
   )
   ;; (jsmethod.JsMethodExample.$initialized = true);
-  ;;@ jsmethod/JsMethodExample.java:25:13
+  ;;@ jsmethod/JsMethodExample.java:21:13
   (global.set $f_$initialized__jsmethod_JsMethodExample (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ jsmethod/JsMethodExample.java:25:13
+  ;;@ jsmethod/JsMethodExample.java:21:13
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -211,13 +192,13 @@
 ;;; void Base.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base
  (param $this (ref null $jsmethod.JsMethodExample.Base))
- ;;@ jsmethod/JsMethodExample.java:43:24
+ ;;@ jsmethod/JsMethodExample.java:33:24
  (block
   ;; jsmethod.JsMethodExample.Base.$clinit();
-  ;;@ jsmethod/JsMethodExample.java:43:24
+  ;;@ jsmethod/JsMethodExample.java:33:24
   (call $$clinit__void@jsmethod.JsMethodExample.Base )
   ;; Object.this.$ctor();
-  ;;@ jsmethod/JsMethodExample.java:43:24
+  ;;@ jsmethod/JsMethodExample.java:33:24
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
@@ -227,7 +208,7 @@
  (type $function.m_m__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $t (ref null $java.lang.Object))
- ;;@ jsmethod/JsMethodExample.java:45:16
+ ;;@ jsmethod/JsMethodExample.java:35:16
  (local $this (ref null $jsmethod.JsMethodExample.Base))
  (local.set $this (ref.cast_static $jsmethod.JsMethodExample.Base (local.get $this.untyped)))
  (block
@@ -237,22 +218,22 @@
 
 ;;; void Base.$clinit()
 (func $$clinit__void@jsmethod.JsMethodExample.Base
- ;;@ jsmethod/JsMethodExample.java:43:24
+ ;;@ jsmethod/JsMethodExample.java:33:24
  (block
   ;; if (jsmethod.JsMethodExample.Base.$initialized) return;
-  ;;@ jsmethod/JsMethodExample.java:43:24
+  ;;@ jsmethod/JsMethodExample.java:33:24
   (if (global.get $f_$initialized__jsmethod_JsMethodExample_Base)
    (then
     ;; return;
-    ;;@ jsmethod/JsMethodExample.java:43:24
+    ;;@ jsmethod/JsMethodExample.java:33:24
     (return )
    )
   )
   ;; (jsmethod.JsMethodExample.Base.$initialized = true);
-  ;;@ jsmethod/JsMethodExample.java:43:24
+  ;;@ jsmethod/JsMethodExample.java:33:24
   (global.set $f_$initialized__jsmethod_JsMethodExample_Base (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ jsmethod/JsMethodExample.java:43:24
+  ;;@ jsmethod/JsMethodExample.java:33:24
   (call $$clinit__void@java.lang.Object )
  )
 )
@@ -265,19 +246,19 @@
 
 ;;; void I.$clinit()
 (func $$clinit__void@jsmethod.JsMethodExample.I
- ;;@ jsmethod/JsMethodExample.java:48:12
+ ;;@ jsmethod/JsMethodExample.java:38:12
  (block
   ;; if (jsmethod.JsMethodExample.I.$initialized) return;
-  ;;@ jsmethod/JsMethodExample.java:48:12
+  ;;@ jsmethod/JsMethodExample.java:38:12
   (if (global.get $f_$initialized__jsmethod_JsMethodExample_I)
    (then
     ;; return;
-    ;;@ jsmethod/JsMethodExample.java:48:12
+    ;;@ jsmethod/JsMethodExample.java:38:12
     (return )
    )
   )
   ;; (jsmethod.JsMethodExample.I.$initialized = true);
-  ;;@ jsmethod/JsMethodExample.java:48:12
+  ;;@ jsmethod/JsMethodExample.java:38:12
   (global.set $f_$initialized__jsmethod_JsMethodExample_I (i32.const 1))
  )
 )
@@ -311,17 +292,17 @@
 ;;; Sub Sub.$create()
 (func $$create__@jsmethod.JsMethodExample.Sub
  (result (ref null $jsmethod.JsMethodExample.Sub))
- ;;@ jsmethod/JsMethodExample.java:54:15
+ ;;@ jsmethod/JsMethodExample.java:44:15
  (local $$instance (ref null $jsmethod.JsMethodExample.Sub))
  (block
   ;; Sub $instance = new Sub.<init>(0);
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (local.set $$instance (struct.new $jsmethod.JsMethodExample.Sub (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.itable)) (i32.const 0)))
   ;; $instance.$ctor();
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (return (local.get $$instance))
  )
 )
@@ -329,13 +310,13 @@
 ;;; void Sub.$ctor()
 (func $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub
  (param $this (ref null $jsmethod.JsMethodExample.Sub))
- ;;@ jsmethod/JsMethodExample.java:54:15
+ ;;@ jsmethod/JsMethodExample.java:44:15
  (block
   ;; jsmethod.JsMethodExample.Sub.$clinit();
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (call $$clinit__void@jsmethod.JsMethodExample.Sub )
   ;; Base.this.$ctor();
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base (ref.as_non_null (local.get $this)))
  )
 )
@@ -345,7 +326,7 @@
  (type $function.m_m__java_lang_String__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $s (ref null $java.lang.String))
- ;;@ jsmethod/JsMethodExample.java:55:16
+ ;;@ jsmethod/JsMethodExample.java:45:16
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast_static $jsmethod.JsMethodExample.Sub (local.get $this.untyped)))
  (block
@@ -358,12 +339,12 @@
  (type $function.m_m__java_lang_Object__void)
  (param $this.untyped (ref $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- ;;@ jsmethod/JsMethodExample.java:54:15
+ ;;@ jsmethod/JsMethodExample.java:44:15
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast_static $jsmethod.JsMethodExample.Sub (local.get $this.untyped)))
  (block
   ;; Sub.this.m(((String) arg0));
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
  )
 )
@@ -371,22 +352,22 @@
 
 ;;; void Sub.$clinit()
 (func $$clinit__void@jsmethod.JsMethodExample.Sub
- ;;@ jsmethod/JsMethodExample.java:54:15
+ ;;@ jsmethod/JsMethodExample.java:44:15
  (block
   ;; if (jsmethod.JsMethodExample.Sub.$initialized) return;
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (if (global.get $f_$initialized__jsmethod_JsMethodExample_Sub)
    (then
     ;; return;
-    ;;@ jsmethod/JsMethodExample.java:54:15
+    ;;@ jsmethod/JsMethodExample.java:44:15
     (return )
    )
   )
   ;; (jsmethod.JsMethodExample.Sub.$initialized = true);
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (global.set $f_$initialized__jsmethod_JsMethodExample_Sub (i32.const 1))
   ;; jsmethod.JsMethodExample.Base.$clinit();
-  ;;@ jsmethod/JsMethodExample.java:54:15
+  ;;@ jsmethod/JsMethodExample.java:44:15
   (call $$clinit__void@jsmethod.JsMethodExample.Base )
  )
 )
