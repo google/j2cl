@@ -289,7 +289,7 @@ public final class Integer extends Number implements Comparable<Integer> {
 
   @Override
   public int hashCode() {
-    return hashCode(value);
+    return value;
   }
 
   @Override
