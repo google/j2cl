@@ -81,7 +81,7 @@ public class Main {
     new Main().execute();
 
     Function jsFunction = new FunctionImpl();
-    jsFunction = s -> log(s);
+    jsFunction = s -> log(42);
     jsFunction.apply("foo");
 
     new MyJsType();
@@ -93,7 +93,7 @@ public class Main {
   }
 
   private void execute() {
-    log("Foo");
+    log(42);
   }
 
   @Override
@@ -102,7 +102,7 @@ public class Main {
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "console.log")
-  public static native void log(Object o);
+  public static native void log(int o);
 
   public class Foo {
     void instanceMethod() {}

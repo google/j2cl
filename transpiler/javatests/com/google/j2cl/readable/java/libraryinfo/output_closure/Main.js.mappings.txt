@@ -16,11 +16,11 @@
 [new Main().execute();] => [Main.$create__().m_execute__void_$p_libraryinfo_Main();] "libraryinfo.Main.entryPoint"
 [Function jsFunction = new FunctionImpl();] => [let jsFunction = FunctionImpl.$create__();] "libraryinfo.Main.entryPoint"
 [jsFunction] => [jsFunction] "jsFunction"
-[jsFunction = s -> log(s);] => [jsFunction = (/** ?string */ s) =>{
-   console.log(s);
+[jsFunction = s -> log(42);] => [jsFunction = (/** ?string */ s) =>{
+   console.log(42);
   };] "libraryinfo.Main.entryPoint"
 [s] => [s] "s"
-[log(s)] => [console.log(s);] "libraryinfo.Main.<lambda in entryPoint>"
+[log(42)] => [console.log(42);] "libraryinfo.Main.<lambda in entryPoint>"
 [jsFunction.apply("foo");] => [jsFunction('foo');] "libraryinfo.Main.entryPoint"
 [new MyJsType();] => [new MyJsType();] "libraryinfo.Main.entryPoint"
 [new Object() {
@@ -28,7 +28,7 @@
       void foo() {}
     };] => [$1.$create__();] "libraryinfo.Main.entryPoint"
 [execute] => [m_execute__void_$p_libraryinfo_Main]
-[log("Foo");] => [console.log('Foo');] "libraryinfo.Main.execute"
+[log(42);] => [console.log(42);] "libraryinfo.Main.execute"
 [toString] => [toString]
 [return super.toString();] => [return super.toString();] "libraryinfo.Main.toString"
 [main] => [main]

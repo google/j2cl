@@ -324,9 +324,9 @@
  (param $this (ref null $libraryinfo.Main))
  ;;@ libraryinfo/Main.java:95:15
  (block
-  ;; libraryinfo.Main.log(javaemul.internal.StringPool.$getString_|Foo|());
+  ;; libraryinfo.Main.log(42);
   ;;@ libraryinfo/Main.java:96:4
-  (call $m_log__java_lang_Object__void@libraryinfo.Main (call $function.no.side.effects.$getString_|Foo|__java_lang_String (ref.func $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool) ))
+  (call $m_log__int__void@libraryinfo.Main (i32.const 42))
  )
 )
 
@@ -346,9 +346,9 @@
 )
 (elem declare func $m_toString__java_lang_String@libraryinfo.Main)
 
-;;; void Main.log(Object o)
-(func $m_log__java_lang_Object__void@libraryinfo.Main (import "imports" "console.log") 
- (param $o (ref null $java.lang.Object))
+;;; void Main.log(int o)
+(func $m_log__int__void@libraryinfo.Main (import "imports" "console.log") 
+ (param $o i32)
 )
 
 ;;; void Main.main()
@@ -477,9 +477,9 @@
  (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $libraryinfo.Main.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
-  ;; libraryinfo.Main.log(s);
+  ;; libraryinfo.Main.log(42);
   ;;@ libraryinfo/Main.java:84:22
-  (call $m_log__java_lang_Object__void@libraryinfo.Main (local.get $s))
+  (call $m_log__int__void@libraryinfo.Main (i32.const 42))
  )
 )
 (elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
