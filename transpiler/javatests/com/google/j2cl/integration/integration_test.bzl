@@ -68,7 +68,7 @@ def integration_test(
         generate_build_test = False,
         deps = [
             ":%s-j2cl" % name,
-            "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2cl",
+            "//third_party:gwt-jsinterop-annotations-j2cl",
         ],
         javacopts = JAVAC_FLAGS,
         tags = tags,
