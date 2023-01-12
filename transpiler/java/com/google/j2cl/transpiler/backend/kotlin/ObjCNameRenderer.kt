@@ -54,7 +54,7 @@ internal fun Renderer.renderObjCNameAnnotation(name: String, exact: Boolean? = n
 internal val Field.objCName: String?
   get() =
     if (descriptor.visibility.needsObjCNameAnnotation) {
-      val objCPrefix = descriptor.enclosingTypeDescriptor.typeDeclaration.objCName
+      val objCPrefix = descriptor.enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true)
       val name = descriptor.ktMangledName
       if (descriptor.isStatic) "${objCPrefix}_${name.identifierString}" else "${name}_"
     } else null
@@ -114,7 +114,10 @@ private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
   }
 
 internal val TypeDeclaration.objCName: String
-  get() = objectiveCName ?: mappedObjCName ?: defaultObjCName
+  get() = objCName(forMember = false)
+
+internal fun TypeDeclaration.objCName(forMember: Boolean): String =
+  objectiveCName ?: mappedObjCName ?: defaultObjCName(forMember = forMember)
 
 private val TypeDeclaration.mappedObjCName: String?
   get() =
@@ -127,18 +130,25 @@ private val TypeDeclaration.mappedObjCName: String?
       else -> null
     }
 
-private val TypeDeclaration.defaultObjCName: String
-  get() =
-    simpleObjCName.let { simpleObjCName ->
-      enclosingTypeDeclaration?.let { it.objCName + "_" + simpleObjCName }
-        ?: objectiveCNamePrefix?.let { it + simpleObjCName } ?: (objCPackagePrefix + simpleObjCName)
-    }
+private fun TypeDeclaration.defaultObjCName(forMember: Boolean): String =
+  simpleObjCName.let { simpleObjCName ->
+    enclosingTypeDeclaration?.let { it.objCName(forMember = forMember) + "_" + simpleObjCName }
+      ?: objectiveCNamePrefix?.let { it + simpleObjCName }
+        ?: (objCPackagePrefix(forMember = forMember) + simpleObjCName)
+  }
 
 private val TypeDeclaration.simpleObjCName: String
   get() = simpleSourceName.objCName
 
-private val TypeDeclaration.objCPackagePrefix: String
-  get() = packageName?.split('.')?.joinToString(separator = "") { it.titleCase.objCName } ?: ""
+private fun TypeDeclaration.objCPackagePrefix(forMember: Boolean): String =
+  packageName?.objCPackagePrefix(forMember = forMember) ?: ""
+
+private fun String.objCPackagePrefix(forMember: Boolean): String =
+  this
+    // TODO(b/265295531): This line is a temporary hack, remove when not needed.
+    .letIf(!forMember && (startsWith("java.") || startsWith("javax."))) { "j2kt.$it" }
+    .split('.')
+    .joinToString(separator = "") { it.titleCase.objCName }
 
 private val String.titleCase
   get() = StringUtils.capitalize(this)
@@ -146,7 +156,7 @@ private val String.titleCase
 private val String.objCName
   get() = replace('$', '_')
 
-private fun TypeDescriptor.objCName(useId: Boolean): String =
+private fun TypeDescriptor.objCName(useId: Boolean, forMember: Boolean): String =
   when (this) {
     is PrimitiveTypeDescriptor -> {
       when (this) {
@@ -163,10 +173,10 @@ private fun TypeDescriptor.objCName(useId: Boolean): String =
       }
     }
     is ArrayTypeDescriptor ->
-      leafTypeDescriptor.objCName(useId = false) + "Array" + dimensionsSuffix
+      leafTypeDescriptor.objCName(useId = false, forMember = forMember) + "Array" + dimensionsSuffix
     is DeclaredTypeDescriptor ->
-      if (useId && isJavaLangObject(this)) "id" else typeDeclaration.objCName
-    is TypeVariable -> upperBoundTypeDescriptor.objCName(useId = useId)
+      if (useId && isJavaLangObject(this)) "id" else typeDeclaration.objCName(forMember = forMember)
+    is TypeVariable -> upperBoundTypeDescriptor.objCName(useId = useId, forMember = forMember)
     else -> "id"
   }
 
@@ -174,7 +184,7 @@ private val ArrayTypeDescriptor.dimensionsSuffix
   get() = if (dimensions > 1) "$dimensions" else ""
 
 private val Variable.objCName
-  get() = typeDescriptor.objCName(useId = true).titleCase
+  get() = typeDescriptor.objCName(useId = true, forMember = true).titleCase
 
 private val MethodDescriptor.needsObjCNameAnnotations
   get() = visibility.needsObjCNameAnnotation && !isKtOverride
