@@ -68,6 +68,15 @@ internal fun Method.toObjCNames(): MethodObjCNames? =
   if (!descriptor.needsObjCNameAnnotations) null
   else if (descriptor.isConstructor) toConstructorObjCNames() else toNonConstructorObjCNames()
 
+private val MethodDescriptor.needsObjCNameAnnotations
+  get() = visibility.needsObjCNameAnnotation && !isKtOverride
+
+internal val TypeDeclaration.needsObjCNameAnnotation
+  get() = visibility.needsObjCNameAnnotation && !isLocal
+
+private val Visibility.needsObjCNameAnnotation
+  get() = this == Visibility.PUBLIC || this == Visibility.PROTECTED
+
 private fun Method.toConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     MethodObjCNames(
@@ -131,11 +140,16 @@ private val TypeDeclaration.mappedObjCName: String?
     }
 
 private fun TypeDeclaration.defaultObjCName(forMember: Boolean): String =
-  simpleObjCName.let { simpleObjCName ->
-    enclosingTypeDeclaration?.let { it.objCName(forMember = forMember) + "_" + simpleObjCName }
-      ?: objectiveCNamePrefix?.let { it + simpleObjCName }
-        ?: (objCPackagePrefix(forMember = forMember) + simpleObjCName)
+  objCNamePrefix(forMember) + simpleObjCName
+
+private fun TypeDeclaration.objCNamePrefix(forMember: Boolean) =
+  enclosingTypeDeclaration.run {
+    if (this != null) objCName(forMember = forMember) + "_"
+    else simpleObjCNamePrefix(forMember = forMember)
   }
+
+private fun TypeDeclaration.simpleObjCNamePrefix(forMember: Boolean) =
+  objectiveCNamePrefix ?: objCPackagePrefix(forMember = forMember)
 
 private val TypeDeclaration.simpleObjCName: String
   get() = simpleSourceName.objCName
@@ -156,38 +170,44 @@ private val String.titleCase
 private val String.objCName
   get() = replace('$', '_')
 
+private const val idObjCName = "id"
+
 private fun TypeDescriptor.objCName(useId: Boolean, forMember: Boolean): String =
   when (this) {
-    is PrimitiveTypeDescriptor -> {
-      when (this) {
-        PrimitiveTypes.BOOLEAN -> "boolean"
-        PrimitiveTypes.BYTE -> "byte"
-        PrimitiveTypes.SHORT -> "short"
-        PrimitiveTypes.INT -> "int"
-        PrimitiveTypes.LONG -> "long"
-        PrimitiveTypes.CHAR -> "char"
-        PrimitiveTypes.FLOAT -> "float"
-        PrimitiveTypes.DOUBLE -> "double"
-        // TODO(b/259416922): figure out how to handle Void or void
-        else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
-      }
-    }
-    is ArrayTypeDescriptor ->
-      leafTypeDescriptor.objCName(useId = false, forMember = forMember) + "Array" + dimensionsSuffix
-    is DeclaredTypeDescriptor ->
-      if (useId && isJavaLangObject(this)) "id" else typeDeclaration.objCName(forMember = forMember)
-    is TypeVariable -> upperBoundTypeDescriptor.objCName(useId = useId, forMember = forMember)
-    else -> "id"
+    is PrimitiveTypeDescriptor -> primitiveObjCName
+    is ArrayTypeDescriptor -> arrayObjCName(forMember = forMember)
+    is DeclaredTypeDescriptor -> declaredObjCName(useId = useId, forMember = forMember)
+    is TypeVariable -> variableObjCName(useId = useId, forMember = forMember)
+    else -> idObjCName
   }
+
+private val PrimitiveTypeDescriptor.primitiveObjCName: String
+  get() =
+    when (this) {
+      PrimitiveTypes.VOID -> "void"
+      PrimitiveTypes.BOOLEAN -> "boolean"
+      PrimitiveTypes.BYTE -> "byte"
+      PrimitiveTypes.SHORT -> "short"
+      PrimitiveTypes.INT -> "int"
+      PrimitiveTypes.LONG -> "long"
+      PrimitiveTypes.CHAR -> "char"
+      PrimitiveTypes.FLOAT -> "float"
+      PrimitiveTypes.DOUBLE -> "double"
+      else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
+    }
+
+private fun DeclaredTypeDescriptor.declaredObjCName(useId: Boolean, forMember: Boolean): String =
+  if (useId && isJavaLangObject(this)) idObjCName
+  else typeDeclaration.objCName(forMember = forMember)
+
+private fun ArrayTypeDescriptor.arrayObjCName(forMember: Boolean): String =
+  leafTypeDescriptor.objCName(useId = false, forMember = forMember) + "Array" + dimensionsSuffix
 
 private val ArrayTypeDescriptor.dimensionsSuffix
   get() = if (dimensions > 1) "$dimensions" else ""
 
+private fun TypeVariable.variableObjCName(useId: Boolean, forMember: Boolean): String =
+  upperBoundTypeDescriptor.objCName(useId = useId, forMember = forMember)
+
 private val Variable.objCName
   get() = typeDescriptor.objCName(useId = true, forMember = true).titleCase
-
-private val MethodDescriptor.needsObjCNameAnnotations
-  get() = visibility.needsObjCNameAnnotation && !isKtOverride
-
-internal val Visibility.needsObjCNameAnnotation
-  get() = this == Visibility.PUBLIC || this == Visibility.PROTECTED
