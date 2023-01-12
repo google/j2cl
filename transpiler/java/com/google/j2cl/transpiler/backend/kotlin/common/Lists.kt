@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.common
 
+// TODO(b/204366308): Remove when the corresponding function in Kotlin stdlib is standarized.
+fun <V> buildList(fn: MutableList<V>.() -> Unit): List<V> = mutableListOf<V>().apply(fn).toList()
+
 fun <T> List<T>.mapFirst(fn: (T) -> T) = mapIndexed { mapIndex, mapValue ->
   if (mapIndex == 0) fn(mapValue) else mapValue
 }
