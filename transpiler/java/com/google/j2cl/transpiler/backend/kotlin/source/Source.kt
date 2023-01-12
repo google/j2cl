@@ -18,21 +18,30 @@ package com.google.j2cl.transpiler.backend.kotlin.source
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 
 /** A piece of source which can be appended to SourceBuilder. */
-data class Source(val appendTo: (SourceBuilder) -> Unit) {
+data class Source(val isEmpty: Boolean, val appendTo: (SourceBuilder) -> Unit) {
   override fun toString(): String = SourceBuilder().also { it.append(this) }.build()
 }
 
 fun SourceBuilder.append(source: Source) = source.appendTo(this)
 
-fun source(string: String) = Source { it.append(string) }
+val emptySource
+  get() = Source(isEmpty = true) {}
 
-operator fun Source.plus(source: Source) = Source {
-  appendTo(it)
-  source.appendTo(it)
-}
+fun Source.ifNotEmpty(fn: (Source) -> Source) = if (isEmpty) this else fn(this)
+
+fun source(string: String) = Source(string.isEmpty()) { it.append(string) }
+
+operator fun Source.plus(source: Source) =
+  Source(isEmpty && source.isEmpty) {
+    appendTo(it)
+    source.appendTo(it)
+  }
 
 val Source.plusSemicolon
   get() = this + source(";")
+
+val Source.plusComma
+  get() = this + source(",")
 
 val Source.plusNewLine
   get() = this + source("\n")
@@ -43,21 +52,28 @@ fun inRoundBrackets(source: Source) = join(source("("), source, source(")"))
 
 fun inAngleBrackets(source: Source) = join(source("<"), source, source(">"))
 
-fun inCurlyBrackets(source: Source) = Source {
-  it.openBrace()
-  it.append(source)
-  it.closeBrace()
-}
+fun inDoubleQuotes(source: Source) = join(source("\""), source, source("\""))
 
-fun join(sources: Iterable<Source>) = Source { sources.forEach<Source>(it::append) }
-
-infix fun String.separated(sources: Iterable<Source>): Source = Source {
-  var first = true
-  for (source in sources) {
-    if (first) first = false else it.append(this)
+fun inCurlyBrackets(source: Source) =
+  Source(isEmpty = false) {
+    it.openBrace()
     it.append(source)
+    it.closeBrace()
   }
-}
+
+fun join(sources: Iterable<Source>) =
+  Source(sources.all { it.isEmpty }) { sources.forEach<Source>(it::append) }
+
+infix fun String.separated(sources: Iterable<Source>) =
+  Source(sources.all { it.isEmpty }) {
+    var first = true
+    for (source in sources) {
+      if (!source.isEmpty) {
+        if (first) first = false else it.append(this)
+        it.append(source)
+      }
+    }
+  }
 
 fun spaceSeparated(sources: Iterable<Source>) = " " separated sources
 
@@ -69,15 +85,18 @@ fun emptyLineSeparated(sources: Iterable<Source>) = "\n\n" separated sources
 
 fun inNewLines(sources: Iterable<Source>) = join(sources.map(::inNewLine))
 
-fun join(source: Source?, vararg sources: Source?) = join(listOfNotNull(source, *sources))
+fun join(source: Source, vararg sources: Source) = join(listOfNotNull(source, *sources))
 
-fun spaceSeparated(source: Source?, vararg sources: Source?) =
+fun spaceSeparated(source: Source, vararg sources: Source) =
   spaceSeparated(listOfNotNull(source, *sources))
 
-fun commaSeparated(source: Source?, vararg sources: Source?) =
+fun commaSeparated(source: Source, vararg sources: Source) =
   commaSeparated(listOfNotNull(source, *sources))
 
-fun emptyLineSeparated(source: Source?, vararg sources: Source?) =
+fun newLineSeparated(source: Source, vararg sources: Source) =
+  newLineSeparated(listOfNotNull(source, *sources))
+
+fun emptyLineSeparated(source: Source, vararg sources: Source) =
   emptyLineSeparated(listOfNotNull(source, *sources))
 
 fun infix(lhs: Source, operator: String, rhs: Source) = spaceSeparated(lhs, source(operator), rhs)
