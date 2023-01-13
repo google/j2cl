@@ -45,10 +45,10 @@ open class IntersectionTypeTest<U> {
  }
 
  open fun testMethodCall() {
-  val o: Any? = IntersectionTypeTest.m_private_2/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */()
-  IntersectionTypeTest.set_private_2/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */((o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
-  IntersectionTypeTest.set_private_2/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */(IntersectionTypeTest.m_private_2/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */())
-  val g: Getable<*>? = IntersectionTypeTest.n_private_2/* <IntersectionTypeTest.A? & IntersectionTypeTest.EmptyA?> */() as Getable<*>?
+  val o: Any? = IntersectionTypeTest.m_private_2()
+  IntersectionTypeTest.set_private_2((o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
+  IntersectionTypeTest.set_private_2(IntersectionTypeTest.m_private_2())
+  val g: Getable<*>? = IntersectionTypeTest.n_private_2() as Getable<*>?
  }
 
  companion object {

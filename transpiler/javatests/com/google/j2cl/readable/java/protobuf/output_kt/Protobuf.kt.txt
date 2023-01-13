@@ -12,7 +12,7 @@ import protobuf.MyMessage
 @ObjCName("ProtobufProtobuf", exact = true)
 open class Protobuf {
  open fun test() {
-  val builder /* MyMessage.Builder? */ = MyMessage.newBuilder()
+  val builder = MyMessage.newBuilder()
   builder!!.setTestField(42)
   builder!!.testField
   val message: MyMessage? = builder!!.build()

@@ -320,12 +320,8 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 }
 
 private fun Renderer.renderInvocationTypeArguments(typeArguments: List<TypeArgument>) {
-  if (typeArguments.isNotEmpty()) {
-    if (typeArguments.all { it.isDenotable }) {
-      renderTypeArguments(typeArguments)
-    } else {
-      renderInCommentBrackets { renderTypeArguments(typeArguments) }
-    }
+  if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
+    renderTypeArguments(typeArguments)
   }
 }
 
@@ -546,9 +542,6 @@ fun Renderer.renderVariable(variable: Variable) {
   if (typeDescriptor.isDenotable && !typeDescriptor.isProtobufBuilder()) {
     render(": ")
     renderTypeDescriptor(typeDescriptor)
-  } else {
-    render(" ")
-    renderInCommentBrackets { renderTypeDescriptor(typeDescriptor) }
   }
 }
 
