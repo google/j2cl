@@ -15,7 +15,15 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.inCurlyBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inNewLines
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.plusComma
 import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 const val foundationPath = "Foundation/Foundation.h"
 val foundationImport = systemImport(foundationPath)
@@ -42,3 +50,24 @@ val nsMutableSetRendering = foundationRendering("NSMutableSet")
 val nsMutableDictionaryRendering = foundationRendering("NSMutableDictionary")
 
 val classRendering = foundationRendering("Class")
+
+fun nsEnumTypedefRendering(name: String, typeRendering: Rendering, values: List<String>) =
+  nsEnumRendering.bindSource { nsEnumSource ->
+    typeRendering.bindSource { typeSource ->
+      rendering(
+        semicolonEnded(
+          spaceSeparated(
+            source("typedef"),
+            join(nsEnumSource, inRoundBrackets(commaSeparated(typeSource, source(name)))),
+            inCurlyBrackets(
+              inNewLines(
+                values.mapIndexed { index, name ->
+                  infix(source(name), "=", source("$index")).plusComma
+                }
+              )
+            )
+          )
+        )
+      )
+    }
+  }
