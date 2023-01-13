@@ -17,44 +17,28 @@ package com.google.j2cl.transpiler.backend.kotlin.objc
 
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 
-val objcImport
-  get() = systemImport("objc/objc.h")
+const val foundationPath = "Foundation/Foundation.h"
+val foundationImport = systemImport(foundationPath)
+val foundationDependency = dependency(foundationImport)
 
-val nsObjCRuntimeImport
-  get() = systemImport("Foundation/NSObjCRuntime.h")
+fun foundationRendering(string: String) = source(string) renderingWith foundationDependency
 
-val nsObjectImport
-  get() = systemImport("Foundation/NSObject.h")
+val nullRendering = foundationRendering("NULL")
+val noRendering = foundationRendering("NO")
+val yesRendering = foundationRendering("YES")
 
-val nsValueImport
-  get() = systemImport("Foundation/NSValue.h")
+val nsEnumRendering = foundationRendering("NS_ENUM")
+val nsInlineRendering = foundationRendering("NS_INLINE")
 
-val nsStringImport
-  get() = systemImport("Foundation/NSString.h")
+val idRendering = foundationRendering("id")
+val nsUIntegerRendering = foundationRendering("NSUInteger")
+val nsCopyingRendering = foundationRendering("NSCopying")
+val nsObjectRendering = foundationRendering("NSObject")
+val nsNumberRendering = foundationRendering("NSNumber")
+val nsStringRendering = foundationRendering("NSString")
 
-val nsEnumRendering
-  get() = source("NS_ENUM") renderingWith dependency(nsObjCRuntimeImport)
+val nsMutableArrayRendering = foundationRendering("NSMutableArray")
+val nsMutableSetRendering = foundationRendering("NSMutableSet")
+val nsMutableDictionaryRendering = foundationRendering("NSMutableDictionary")
 
-val foundationExportRendering
-  get() = source("FOUNDATION_EXPORT") renderingWith dependency(nsObjCRuntimeImport)
-
-val idRendering
-  get() = source("id") renderingWith dependency(objcImport)
-
-val nsUIntegerRendering
-  get() = source("NSUInteger") renderingWith dependency(nsObjCRuntimeImport)
-
-val nsCopyingRendering
-  get() = source("NSCopying") renderingWith dependency(nsObjectImport)
-
-val nsObjectRendering
-  get() = source("NSObject") renderingWith dependency(nsObjectImport)
-
-val nsNumberRendering
-  get() = source("NSNumber") renderingWith dependency(nsValueImport)
-
-val nsStringRendering
-  get() = source("NSString") renderingWith dependency(nsStringImport)
-
-val classRendering
-  get() = source("Class") renderingWith dependency(objcImport)
+val classRendering = foundationRendering("Class")

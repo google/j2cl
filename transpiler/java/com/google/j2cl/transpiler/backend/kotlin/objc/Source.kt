@@ -25,4 +25,6 @@ fun comment(source: Source) = spaceSeparated(source("//"), source)
 
 fun pointerDeclarator(source: Source) = source("*") + source
 
-fun semicolonDeclaration(source: Source) = source.plusSemicolon
+fun semicolonEnded(source: Source) = source.plusSemicolon
+
+fun return_(source: Source) = spaceSeparated(source("return"), source)

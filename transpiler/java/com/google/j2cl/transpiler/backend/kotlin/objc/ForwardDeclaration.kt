@@ -34,7 +34,7 @@ fun protocolForwardDeclaration(name: String) =
   ForwardDeclaration(ForwardDeclaration.Kind.PROTOCOL, name)
 
 val ForwardDeclaration.source
-  get() = semicolonDeclaration(spaceSeparated(kind.source, source(name)))
+  get() = semicolonEnded(spaceSeparated(kind.source, source(name)))
 
 val ForwardDeclaration.Kind.source
   get() = source("@$objCName")

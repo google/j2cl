@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin.objc
 
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 
 /**
  * A piece of Objective-C code, which can be rendered as a source while collecting its dependencies
@@ -50,3 +51,6 @@ fun Iterable<Rendering>.bindSources(fn: (Iterable<Source>) -> Rendering) =
 fun Iterable<Rendering>.combineSources(fn: (Iterable<Source>) -> Source) = bindSources {
   rendering(fn(it))
 }
+
+val Rendering?.orEmpty
+  get() = this ?: rendering(emptySource)
