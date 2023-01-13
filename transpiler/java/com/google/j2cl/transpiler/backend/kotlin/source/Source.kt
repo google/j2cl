@@ -27,6 +27,9 @@ fun SourceBuilder.append(source: Source) = source.appendTo(this)
 val emptySource
   get() = Source(isEmpty = true) {}
 
+val Source?.orEmpty
+  get() = this ?: emptySource
+
 fun Source.ifNotEmpty(fn: (Source) -> Source) = if (isEmpty) this else fn(this)
 
 fun source(string: String) = Source(string.isEmpty()) { it.append(string) }
@@ -79,6 +82,8 @@ fun spaceSeparated(sources: Iterable<Source>) = " " separated sources
 
 fun commaSeparated(sources: Iterable<Source>) = ", " separated sources
 
+fun dotSeparated(sources: Iterable<Source>) = "." separated sources
+
 fun newLineSeparated(sources: Iterable<Source>) = "\n" separated sources
 
 fun emptyLineSeparated(sources: Iterable<Source>) = "\n\n" separated sources
@@ -93,10 +98,15 @@ fun spaceSeparated(source: Source, vararg sources: Source) =
 fun commaSeparated(source: Source, vararg sources: Source) =
   commaSeparated(listOfNotNull(source, *sources))
 
+fun dotSeparated(source: Source, vararg sources: Source) =
+  dotSeparated(listOfNotNull(source, *sources))
+
 fun newLineSeparated(source: Source, vararg sources: Source) =
   newLineSeparated(listOfNotNull(source, *sources))
 
 fun emptyLineSeparated(source: Source, vararg sources: Source) =
   emptyLineSeparated(listOfNotNull(source, *sources))
+
+fun inNewLines(source: Source, vararg sources: Source) = inNewLines(listOfNotNull(source, *sources))
 
 fun infix(lhs: Source, operator: String, rhs: Source) = spaceSeparated(lhs, source(operator), rhs)
