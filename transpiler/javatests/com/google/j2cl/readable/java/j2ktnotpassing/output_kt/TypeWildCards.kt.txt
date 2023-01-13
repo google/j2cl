@@ -16,7 +16,7 @@ open class TypeWildCards {
   fun testObservable(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observable", exact = false) observable: TypeWildCards.Observable<*>?
   ) {
-   observable!!.addObserver(TypeWildCards.Observer { e ->
+   observable!!.addObserver(TypeWildCards.Observer/* <*> */ { e /* capture * */ ->
    })
   }
  }

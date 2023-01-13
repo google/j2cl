@@ -25,7 +25,7 @@ open class TypeWildCards {
   fun testSuperWildcardObservable(
    @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable", exact = false) observable: TypeWildCards.SuperWildcardObservable<*>?
   ) {
-   observable!!.addObserver(TypeWildCards.Observer { e ->
+   observable!!.addObserver(TypeWildCards.Observer/* <in capture *> */ { e /* capture * */ ->
    })
   }
 
@@ -33,7 +33,7 @@ open class TypeWildCards {
   fun testKtInObservable(
    @ObjCName("withJ2ktTypeWildCards_KtInObservable", exact = false) observable: TypeWildCards.KtInObservable<*>?
   ) {
-   observable!!.addObserver(TypeWildCards.KtInObserver { e ->
+   observable!!.addObserver(TypeWildCards.KtInObserver/* <*> */ { e /* capture * */ ->
    })
   }
  }

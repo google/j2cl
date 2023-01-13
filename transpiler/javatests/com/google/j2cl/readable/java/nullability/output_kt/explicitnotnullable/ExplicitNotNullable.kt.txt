@@ -318,7 +318,7 @@ open class ExplicitNotNullable {
 
   @JvmStatic
   fun testUnboundWildcardTypeArgumentInference_pp_nullability_explicitnotnullable(c: ExplicitNotNullable.Consumer<*>) {
-   ExplicitNotNullable.consume_pp_nullability_explicitnotnullable(c)
+   ExplicitNotNullable.consume_pp_nullability_explicitnotnullable/* <ExplicitNotNullable.Consumer<*>> */(c)
   }
 
   @JvmStatic

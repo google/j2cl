@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 
 internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
@@ -86,6 +87,7 @@ private data class TypeDescriptorRenderer(
       is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor)
       is TypeVariable -> renderVariable(typeDescriptor)
       is IntersectionTypeDescriptor -> renderIntersection(typeDescriptor)
+      is UnionTypeDescriptor -> renderUnion(typeDescriptor)
       else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
     }
   }
@@ -134,6 +136,9 @@ private data class TypeDescriptorRenderer(
     } else {
       withSeen(typeVariable).run {
         if (typeVariable.isWildcardOrCapture) {
+          if (typeVariable.isCapture) {
+            renderer.render("capture ")
+          }
           val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
           if (lowerBoundTypeDescriptor != null) {
             renderer.render("in ")
@@ -157,6 +162,12 @@ private data class TypeDescriptorRenderer(
 
   fun renderIntersection(typeDescriptor: IntersectionTypeDescriptor) {
     renderer.renderSeparatedWith(typeDescriptor.intersectionTypeDescriptors, " & ") {
+      renderer.renderTypeDescriptor(it)
+    }
+  }
+
+  fun renderUnion(typeDescriptor: UnionTypeDescriptor) {
+    renderer.renderSeparatedWith(typeDescriptor.unionTypeDescriptors, " | ") {
       renderer.renderTypeDescriptor(it)
     }
   }
