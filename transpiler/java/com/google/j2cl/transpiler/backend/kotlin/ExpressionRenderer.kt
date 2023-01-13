@@ -539,7 +539,7 @@ fun Renderer.renderVariable(variable: Variable) {
   renderName(variable)
 
   val typeDescriptor = variable.typeDescriptor
-  if (typeDescriptor.isDenotable && !typeDescriptor.isProtobufBuilder()) {
+  if (typeDescriptor.isKtDenotable && !typeDescriptor.isProtobufBuilder()) {
     render(": ")
     renderTypeDescriptor(typeDescriptor)
   }

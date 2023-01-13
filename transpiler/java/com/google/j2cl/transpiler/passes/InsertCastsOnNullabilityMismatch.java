@@ -16,18 +16,14 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
-import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
 /** Inserts casts in places where necessary due to nullability differences in type arguments. */
@@ -62,7 +58,7 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
   }
 
   private static boolean needsCast(TypeDescriptor from, TypeDescriptor to) {
-    if (!isDenotable(to, /* seenTypeVariables= */ ImmutableSet.of())) {
+    if (!to.isDenotable()) {
       return false;
     }
 
@@ -105,53 +101,6 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
     }
 
     return typeDescriptor;
-  }
-
-  /** Returns whether this type is denotable as a top-level type or type argument. */
-  private static boolean isDenotable(
-      TypeDescriptor to, ImmutableSet<TypeVariable> seenTypeVariables) {
-    if (to instanceof PrimitiveTypeDescriptor) {
-      return true;
-    }
-
-    if (to instanceof IntersectionTypeDescriptor || to instanceof UnionTypeDescriptor) {
-      return false;
-    }
-
-    if (to instanceof DeclaredTypeDescriptor) {
-      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) to;
-      return !declaredTypeDescriptor.getTypeDeclaration().isAnonymous()
-          && declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-              .allMatch(it -> isDenotable(it, seenTypeVariables));
-    }
-
-    if (to instanceof ArrayTypeDescriptor) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) to;
-      return isDenotable(arrayTypeDescriptor.getComponentTypeDescriptor(), seenTypeVariables);
-    }
-
-    if (to instanceof TypeVariable) {
-      TypeVariable typeVariable = (TypeVariable) to;
-      if (!typeVariable.isWildcardOrCapture()) {
-        return true;
-      }
-      if (seenTypeVariables.contains(typeVariable)) {
-        return true;
-      }
-      TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
-      if (lowerBound != null && !isDenotable(lowerBound, seenTypeVariables)) {
-        return false;
-      }
-      TypeDescriptor upperBound = typeVariable.getUpperBoundTypeDescriptor();
-      return isDenotable(
-          upperBound,
-          new ImmutableSet.Builder<TypeVariable>()
-              .addAll(seenTypeVariables)
-              .add(typeVariable)
-              .build());
-    }
-
-    throw new IllegalArgumentException();
   }
 
   private static boolean isWildcard(TypeDescriptor typeDescriptor) {

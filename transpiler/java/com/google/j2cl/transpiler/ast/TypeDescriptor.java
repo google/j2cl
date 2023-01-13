@@ -337,4 +337,9 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return getUniqueId();
   }
 
+  public final boolean isDenotable() {
+    return isDenotable(/* seen= */ ImmutableSet.of());
+  }
+
+  abstract boolean isDenotable(ImmutableSet<TypeVariable> seen);
 }

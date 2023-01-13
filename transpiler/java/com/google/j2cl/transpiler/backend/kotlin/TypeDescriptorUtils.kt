@@ -94,29 +94,25 @@ internal fun TypeDescriptor.contains(
     else -> false
   }
 
-/** Returns whether this type is denotable as a top-level type. */
-internal val TypeDescriptor.isDenotable: Boolean
+internal val TypeDescriptor.isKtDenotableAsTypeArgument: Boolean
   get() =
     when (this) {
-      is DeclaredTypeDescriptor ->
-        !typeDeclaration.isAnonymous && typeArgumentDescriptors.all { it.isDenotableAsTypeArgument }
-      is TypeVariable -> !isWildcardOrCapture
-      is IntersectionTypeDescriptor ->
-        // The only intersection type currently supported in kotlin syntax is "T & Any".
-        intersectionTypeDescriptors.let {
-          it.size == 2 &&
-            it[0].let { it is TypeVariable && !it.isWildcardOrCapture } &&
-            it[1] == anyTypeDescriptor
-        }
-      is UnionTypeDescriptor -> false
-      is PrimitiveTypeDescriptor -> true
-      is ArrayTypeDescriptor -> componentTypeDescriptor.isDenotableAsTypeArgument
-      else -> error("Unhandled $this")
+      is TypeVariable -> !isWildcard && isKtDenotable
+      else -> isKtDenotable
     }
 
-/** Returns whether this type is denotable as a type argument. */
-internal val TypeDescriptor.isDenotableAsTypeArgument: Boolean
-  get() = isDenotable || (this is TypeVariable && !isCapture)
+internal val TypeDescriptor.isKtDenotable: Boolean
+  get() =
+    when (this) {
+      is IntersectionTypeDescriptor ->
+        // Kotlin supports "T & Any" intersection.
+        intersectionTypeDescriptors.let { intersections ->
+          intersections.size == 2 &&
+            intersections[0].let { it is TypeVariable && !it.isWildcardOrCapture } &&
+            intersections[1] == anyTypeDescriptor
+        }
+      else -> isDenotable
+    }
 
 internal val TypeVariable.hasNullableBounds: Boolean
   get() = upperBoundTypeDescriptor.isNullable && hasNullableRecursiveBounds

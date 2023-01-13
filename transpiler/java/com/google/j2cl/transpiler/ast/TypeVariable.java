@@ -256,6 +256,31 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     return createWildcardWithUpperBound(TypeDescriptors.get().javaLangObject);
   }
 
+  @Override
+  boolean isDenotable(ImmutableSet<TypeVariable> seen) {
+    if (isCapture()) {
+      return false;
+    }
+
+    if (!isWildcard()) {
+      return true;
+    }
+
+    if (seen.contains(this)) {
+      return true;
+    }
+
+    seen = ImmutableSet.<TypeVariable>builder().addAll(seen).add(this).build();
+
+    TypeDescriptor lowerBound = getLowerBoundTypeDescriptor();
+    if (lowerBound != null && !lowerBound.isDenotable(seen)) {
+      return false;
+    }
+
+    TypeDescriptor upperBound = getUpperBoundTypeDescriptor();
+    return upperBound.isDenotable(seen);
+  }
+
   /** Builder for a TypeVariableDeclaration. */
   @AutoValue.Builder
   public abstract static class Builder {

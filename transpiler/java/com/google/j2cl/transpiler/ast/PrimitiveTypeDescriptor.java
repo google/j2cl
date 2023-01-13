@@ -200,6 +200,11 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
     return getSimpleSourceName();
   }
 
+  @Override
+  boolean isDenotable(ImmutableSet<TypeVariable> seen) {
+    return true;
+  }
+
   PrimitiveTypeDescriptor(
       String name, String signature, String boxedClassName, int precisionOrder) {
     this.name = name;

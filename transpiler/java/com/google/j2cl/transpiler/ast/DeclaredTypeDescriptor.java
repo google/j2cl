@@ -1096,6 +1096,23 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
             : "");
   }
 
+  @Override
+  boolean isDenotable(ImmutableSet<TypeVariable> seen) {
+    TypeDeclaration typeDeclaration = getTypeDeclaration();
+    if (typeDeclaration.isAnonymous()) {
+      return false;
+    }
+
+    if (!typeDeclaration.isLocal()) {
+      DeclaredTypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+      if (enclosingTypeDescriptor != null && !enclosingTypeDescriptor.isDenotable(seen)) {
+        return false;
+      }
+    }
+
+    return getTypeArgumentDescriptors().stream().allMatch(it -> it.isDenotable(seen));
+  }
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {

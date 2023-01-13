@@ -212,6 +212,11 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
+  @Override
+  boolean isDenotable(ImmutableSet<TypeVariable> seen) {
+    return getComponentTypeDescriptor().isDenotable(seen);
+  }
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {

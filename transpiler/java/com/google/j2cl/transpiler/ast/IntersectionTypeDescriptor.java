@@ -201,6 +201,11 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return specializeTypeVariables(replacementTypeArgumentByTypeVariable, ImmutableSet.of());
   }
 
+  @Override
+  boolean isDenotable(ImmutableSet<TypeVariable> seen) {
+    return false;
+  }
+
   public static Builder newBuilder() {
     return new AutoValue_IntersectionTypeDescriptor.Builder();
   }
