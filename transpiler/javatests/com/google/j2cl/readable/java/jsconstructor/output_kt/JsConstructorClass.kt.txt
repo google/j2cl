@@ -16,7 +16,6 @@ import kotlin.native.ObjCName
 open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_A", exact = true)
  open class A {
-  @ObjCName("fA_", exact = false)
   @JvmField var fA: Int = 1
 
   constructor(
@@ -30,7 +29,6 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_B", exact = true)
  open class B: JsConstructorClass.A {
-  @ObjCName("fB_", exact = false)
   @JvmField var fB: Int = 2
 
   constructor(
@@ -53,7 +51,6 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_C", exact = true)
  open class C: JsConstructorClass.B {
-  @ObjCName("fC_", exact = false)
   @JvmField var fC: Int = 1
 
   constructor(
@@ -72,7 +69,6 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_D", exact = true)
  open class D: JsConstructorClass.B {
-  @ObjCName("fD_", exact = false)
   @JvmField var fD: Int = 8
 
   constructor(): super(9) {
@@ -88,7 +84,6 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_E", exact = true)
  open class E: JsConstructorClass.C {
-  @ObjCName("fE_", exact = false)
   @JvmField var fE: Int = 11
 
   constructor(): super(10) {
@@ -98,7 +93,6 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_F", exact = true)
  open class F: JsConstructorClass.C {
-  @ObjCName("fF_", exact = false)
   @JvmField var fF: Int = 13
 
   constructor(

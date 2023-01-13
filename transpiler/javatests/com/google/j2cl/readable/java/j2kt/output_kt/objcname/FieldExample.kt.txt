@@ -13,23 +13,17 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktObjcnameFieldExample", exact = true)
 open class FieldExample {
- @ObjCName("myInt_", exact = false)
  @JvmField var myInt: Int = 0
 
- @ObjCName("myString_", exact = false)
  @JvmField var myString: String? = null
 
  companion object {
-  @ObjCName("J2ktObjcnameFieldExample_MY_FINAL_INT", exact = false)
   const val MY_FINAL_INT: Int = 5
 
-  @ObjCName("J2ktObjcnameFieldExample_myStaticInt", exact = false)
   @JvmField var myStaticInt: Int = 0
 
-  @ObjCName("J2ktObjcnameFieldExample_myStaticString", exact = false)
   @JvmField var myStaticString: String? = null
 
-  @ObjCName("J2ktObjcnameFieldExample_BIG_ENDIAN__", exact = false)
   @JvmField var BIG_ENDIAN__: Int = 7
  }
 }
