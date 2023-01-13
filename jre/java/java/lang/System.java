@@ -22,6 +22,7 @@ import static javaemul.internal.InternalPreconditions.isTypeChecked;
 import java.io.PrintStream;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.HashCodes;
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
@@ -132,15 +133,11 @@ public final class System {
   public static void gc() {
   }
 
-  /**
-   * The compiler replaces getProperty by the actual value of the property.
-   */
+  @Wasm("nop") // Calls are replaced by a pass for WASM.
   @JsMethod(name = "$getDefine", namespace = "nativebootstrap.Util")
   public static native String getProperty(String key);
 
-  /**
-   * The compiler replaces getProperty by the actual value of the property.
-   */
+  @Wasm("nop") // Calls are replaced by a pass for WASM.
   @JsMethod(name = "$getDefine", namespace = "nativebootstrap.Util")
   public static native String getProperty(String key, String def);
 
