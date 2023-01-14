@@ -51,9 +51,9 @@ val nsMutableDictionaryRendering = foundationRendering("NSMutableDictionary")
 
 val classRendering = foundationRendering("Class")
 
-fun nsEnumTypedefRendering(name: String, typeRendering: Rendering, values: List<String>) =
+fun nsEnumTypedef(name: String, type: Rendering, values: List<String>) =
   nsEnumRendering.bindSource { nsEnumSource ->
-    typeRendering.bindSource { typeSource ->
+    type.bindSource { typeSource ->
       rendering(
         semicolonEnded(
           spaceSeparated(

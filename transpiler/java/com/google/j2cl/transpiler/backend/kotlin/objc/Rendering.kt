@@ -16,8 +16,15 @@
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
+import com.google.j2cl.transpiler.backend.kotlin.source.inCurlyBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inNewLines
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 /**
  * A piece of Objective-C code, which can be rendered as a source while collecting its dependencies
@@ -54,3 +61,49 @@ fun Iterable<Rendering>.combineSources(fn: (Iterable<Source>) -> Source) = bindS
 
 val Rendering?.orEmpty
   get() = this ?: rendering(emptySource)
+
+fun declarator(type: Rendering, name: String, isPointer: Boolean) =
+  type.bindSource { typeSource ->
+    source(name).let { nameSource ->
+      rendering(
+        if (isPointer) join(typeSource, nameSource) else spaceSeparated(typeSource, nameSource)
+      )
+    }
+  }
+
+fun return_(expression: Rendering) =
+  expression.bindSource { expressionSource -> rendering(semicolonEnded(return_(expressionSource))) }
+
+fun function(
+  modifiers: List<Rendering>,
+  declarator: Rendering,
+  parameters: List<Rendering>,
+  statements: List<Rendering>
+) =
+  modifiers.bindSources { modifierSources ->
+    declarator.bindSource { declaratorSource ->
+      invocation(parameters).bindSource { invocationSource ->
+        block(statements).bindSource { blockSource ->
+          rendering(
+            spaceSeparated(
+              spaceSeparated(modifierSources),
+              join(declaratorSource, invocationSource),
+              blockSource
+            )
+          )
+        }
+      }
+    }
+  }
+
+private fun invocation(parameters: List<Rendering>) =
+  parameters.bindSources { sources ->
+    rendering(
+      inRoundBrackets(
+        sources.toList().let { if (it.isEmpty()) source("void") else commaSeparated(it) }
+      )
+    )
+  }
+
+private fun block(statements: List<Rendering>) =
+  statements.bindSources { sources -> rendering(inCurlyBrackets(inNewLines(sources))) }

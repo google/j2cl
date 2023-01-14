@@ -23,8 +23,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 fun comment(source: Source) = spaceSeparated(source("//"), source)
 
-fun pointerDeclarator(source: Source) = source("*") + source
-
 fun semicolonEnded(source: Source) = source.plusSemicolon
 
 fun return_(source: Source) = spaceSeparated(source("return"), source)
