@@ -130,7 +130,7 @@ private val TypeDeclaration.mappedObjCName: String?
       else -> null
     }
 
-private fun TypeDeclaration.defaultObjCName(forMember: Boolean): String =
+internal fun TypeDeclaration.defaultObjCName(forMember: Boolean): String =
   objCNamePrefix(forMember) + simpleObjCName
 
 private fun TypeDeclaration.objCNamePrefix(forMember: Boolean) =
@@ -158,12 +158,12 @@ private fun String.objCPackagePrefix(forMember: Boolean): String =
 private val String.titleCase
   get() = StringUtils.capitalize(this)
 
-private val String.objCName
+internal val String.objCName
   get() = replace('$', '_')
 
 private const val idObjCName = "id"
 
-private fun TypeDescriptor.objCName(useId: Boolean, forMember: Boolean): String =
+internal fun TypeDescriptor.objCName(useId: Boolean, forMember: Boolean): String =
   when (this) {
     is PrimitiveTypeDescriptor -> primitiveObjCName
     is ArrayTypeDescriptor -> arrayObjCName(forMember = forMember)

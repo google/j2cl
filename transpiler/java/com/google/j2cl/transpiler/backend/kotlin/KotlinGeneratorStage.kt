@@ -37,12 +37,26 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
   }
 
   private fun generateOutputs(compilationUnit: CompilationUnit) {
-    val source = renderSource(compilationUnit)
+    generateKtOutputs(compilationUnit)
+    // TODO(b/263416948): Uncomment after cl/501829004 is submitted.
+    // generateObjCOutputs(compilationUnit)
+  }
+
+  private fun generateKtOutputs(compilationUnit: CompilationUnit) {
+    val source = ktSource(compilationUnit)
     val path = compilationUnit.packageRelativePath.replace(".java", ".kt")
     output.write(path, source)
   }
 
-  private fun renderSource(compilationUnit: CompilationUnit): String {
+  private fun generateObjCOutputs(compilationUnit: CompilationUnit) {
+    val source = compilationUnit.j2ObjCCompatHeaderSource
+    if (!source.isEmpty) {
+      val path = compilationUnit.packageRelativePath.replace(".java", "+J2ObjCCompat.h")
+      output.write(path, source.toString())
+    }
+  }
+
+  private fun ktSource(compilationUnit: CompilationUnit): String {
     val nameToIdentifierMap = compilationUnit.buildNameToIdentifierMap()
 
     val environment =

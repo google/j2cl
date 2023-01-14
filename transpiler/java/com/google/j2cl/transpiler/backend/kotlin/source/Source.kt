@@ -30,6 +30,8 @@ val emptySource
 val Source?.orEmpty
   get() = this ?: emptySource
 
+fun Source.ifEmpty(fn: () -> Source) = if (isEmpty) fn() else this
+
 fun Source.ifNotEmpty(fn: (Source) -> Source) = if (isEmpty) this else fn(this)
 
 fun source(string: String) = Source(string.isEmpty()) { it.append(string) }

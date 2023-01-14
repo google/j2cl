@@ -17,5 +17,7 @@ kt_jvm_library(
         "//transpiler/java/com/google/j2cl/transpiler/backend/common",
         "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/ast",
         "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/common",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/objc",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin/source",
     ],
 )
