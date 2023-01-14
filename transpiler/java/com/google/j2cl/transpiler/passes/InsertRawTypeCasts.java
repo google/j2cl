@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 
@@ -33,6 +34,12 @@ public final class InsertRawTypeCasts extends NormalizationPass {
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor actualTypeDescriptor,
                   Expression expression) {
+                // "super" is not an expression in Kotlin (nor in Java). It can only be used
+                // directly as a qualifier, hence it can not be cast.
+                if (expression instanceof SuperReference) {
+                  return expression;
+                }
+
                 return expression.getTypeDescriptor().isRaw() != inferredTypeDescriptor.isRaw()
                     ? convertToCastExpression(expression, inferredTypeDescriptor)
                     : expression;

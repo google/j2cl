@@ -21,7 +21,11 @@ open class RawType {
 
  @JvmField var rawBoundDependentIndirect_pp_rawtype: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
 
- open class Unbound<T> {}
+ open class Unbound<T> {
+  open fun method_pp_rawtype(t: T): T {
+   return t
+  }
+ }
 
  open class Bound<T: RawType?> {}
 
@@ -30,6 +34,12 @@ open class RawType {
  open class BoundDependentDirect<A, B: A> {}
 
  open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> {}
+
+ open class RawUnboundChild: RawType.Unbound<Any?>() {
+  open override fun method_pp_rawtype(o: Any?): Any? {
+   return super<RawType.Unbound>.method_pp_rawtype(o)
+  }
+ }
 
  interface GenericSuperclass<T: RawType?> {
   fun f(

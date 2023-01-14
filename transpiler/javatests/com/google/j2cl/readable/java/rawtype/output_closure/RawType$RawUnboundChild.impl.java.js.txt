@@ -1,0 +1,44 @@
+goog.module('rawtype.RawType.RawUnboundChild$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Unbound = goog.require('rawtype.RawType.Unbound$impl');
+
+class RawUnboundChild extends Unbound {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!RawUnboundChild} */
+ static $create__() {
+  RawUnboundChild.$clinit();
+  let $instance = new RawUnboundChild();
+  $instance.$ctor__rawtype_RawType_RawUnboundChild__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__rawtype_RawType_RawUnboundChild__void() {
+  this.$ctor__rawtype_RawType_Unbound__void();
+ }
+ /** @override @nodts @return {*} */
+ m_method__java_lang_Object__java_lang_Object_$pp_rawtype(/** * */ o) {
+  return super.m_method__java_lang_Object__java_lang_Object_$pp_rawtype(o);
+ }
+ /** @nodts */
+ static $clinit() {
+  RawUnboundChild.$clinit = () =>{};
+  RawUnboundChild.$loadModules();
+  Unbound.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof RawUnboundChild;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(RawUnboundChild, 'rawtype.RawType$RawUnboundChild');
+
+exports = RawUnboundChild;
+
+//# sourceMappingURL=RawType$RawUnboundChild.js.map

@@ -23,7 +23,11 @@ class RawType {
   BoundDependentDirect rawBoundDependentDirect = new BoundDependentDirect();
   BoundDependentIndirect rawBoundDependentIndirect = new BoundDependentIndirect();
 
-  static class Unbound<T> {}
+  static class Unbound<T> {
+    T method(T t) {
+      return t;
+    }
+  }
 
   static class Bound<T extends RawType> {}
 
@@ -32,6 +36,13 @@ class RawType {
   static class BoundDependentDirect<A, B extends A> {}
 
   static class BoundDependentIndirect<A, B extends Unbound<A>> {}
+
+  static class RawUnboundChild extends Unbound {
+    @Override
+    Object method(Object o) {
+      return super.method(o);
+    }
+  }
 
   interface GenericSuperclass<T extends RawType> {
     default void f(T t) {}
