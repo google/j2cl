@@ -28,7 +28,7 @@ private fun Renderer.renderFileComment(compilationUnit: CompilationUnit) {
 }
 
 private fun Renderer.renderFileAnnotations() {
-  renderOptInExperimentalObjCNameFileAnnotation()
+  render(optInExperimentalObjCNameFileAnnotationSource())
   renderNewLine()
   renderNewLine()
 }

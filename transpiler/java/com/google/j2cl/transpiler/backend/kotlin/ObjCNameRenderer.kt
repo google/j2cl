@@ -31,24 +31,40 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.source
 
-internal fun Renderer.renderOptInExperimentalObjCNameFileAnnotation() {
-  render("@file:")
-  render(topLevelQualifiedNameSource("kotlin.OptIn"))
-  renderInParentheses {
-    render(topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCName"))
-    render("::class")
-  }
-}
+internal fun Renderer.optInExperimentalObjCNameFileAnnotationSource(): Source =
+  join(
+    source("@file:"),
+    topLevelQualifiedNameSource("kotlin.OptIn"),
+    inRoundBrackets(
+      join(
+        topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCName"),
+        source("::class")
+      )
+    )
+  )
 
-internal fun Renderer.renderObjCNameAnnotation(name: String, exact: Boolean? = null) {
-  render("@")
-  render(topLevelQualifiedNameSource("kotlin.native.ObjCName"))
-  renderInParentheses {
-    renderString(name)
-    exact?.let { render(", exact = $it") }
-  }
-}
+internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
+  join(
+    source("@"),
+    topLevelQualifiedNameSource("kotlin.native.ObjCName"),
+    inRoundBrackets(
+      commaSeparated(
+        literalSource(name),
+        exact?.let { parameterSource("exact", literalSource(it)) }.orEmpty
+      )
+    )
+  )
+
+private fun parameterSource(name: String, valueSource: Source): Source =
+  infix(source(name), "=", valueSource)
 
 internal data class MethodObjCNames(
   val methodName: String? = null,

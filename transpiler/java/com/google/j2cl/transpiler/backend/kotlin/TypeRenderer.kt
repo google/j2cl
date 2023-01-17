@@ -36,7 +36,7 @@ fun Renderer.renderType(type: Type) {
   }
 
   if (typeDeclaration.needsObjCNameAnnotation) {
-    renderObjCNameAnnotation(typeDeclaration.objCName, exact = true)
+    render(objCNameAnnotationSource(typeDeclaration.objCName, exact = true))
     renderNewLine()
   }
 
