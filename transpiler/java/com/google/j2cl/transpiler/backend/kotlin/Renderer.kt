@@ -19,6 +19,8 @@ import com.google.j2cl.common.Problems
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.source
 
 /** Renderer of the Kotlin source code. */
 data class Renderer(
@@ -47,6 +49,11 @@ data class Renderer(
   /** Top-level qualified names, which will be rendered as simple name without import. */
   val topLevelQualifiedNames: Set<String> = setOf()
 ) {
+  // TODO(b/263161219): Remove when Renderer is converted to idiomatic Kotlin.
+  fun render(source: Source) {
+    source.appendTo(sourceBuilder)
+  }
+
   fun renderNewLine() {
     sourceBuilder.newLine()
   }
@@ -56,8 +63,10 @@ data class Renderer(
   }
 
   fun renderName(hasName: HasName) {
-    renderIdentifier(environment.identifier(hasName))
+    render(nameSource(hasName))
   }
+
+  fun nameSource(hasName: HasName) = identifierSource(environment.identifier(hasName))
 
   fun renderInCurlyBrackets(renderFn: () -> Unit) {
     sourceBuilder.openBrace()

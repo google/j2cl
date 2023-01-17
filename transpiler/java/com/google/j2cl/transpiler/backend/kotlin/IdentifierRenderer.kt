@@ -17,10 +17,14 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.backend.kotlin.ast.isForbiddenKeyword
 import com.google.j2cl.transpiler.backend.kotlin.ast.isHardKeyword
+import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.source
 
 internal fun Renderer.renderIdentifier(identifier: String) {
-  render(identifier.identifierString)
+  render(identifierSource(identifier))
 }
+
+internal fun identifierSource(identifier: String) = source(identifier.identifierString)
 
 // Dollar sign ($) is not a valid identifier character since Kotlin 1.7, as well as many other
 // characters. For now, it is replaced with triple underscores (___) to minimise a risk of
@@ -38,13 +42,14 @@ internal fun Renderer.renderPackageName(packageName: String) {
 }
 
 internal fun Renderer.renderTopLevelQualifiedName(qualifiedName: String) {
-  val simpleName = qualifiedToNonAliasedSimpleName(qualifiedName)
-  if (simpleName != null) {
-    renderIdentifier(simpleName)
-  } else {
-    renderQualifiedIdentifier(qualifiedName)
-  }
+  render(topLevelQualifiedNameSource(qualifiedName))
 }
+
+internal fun Renderer.topLevelQualifiedNameSource(qualifiedName: String) =
+  qualifiedToNonAliasedSimpleName(qualifiedName).let { simpleName ->
+    if (simpleName != null) identifierSource(simpleName)
+    else qualifiedIdentifierSource(qualifiedName)
+  }
 
 internal fun Renderer.renderExtensionMemberQualifiedName(qualifiedName: String) {
   renderIdentifier(qualifiedToSimpleName(qualifiedName))
@@ -85,8 +90,11 @@ internal fun Renderer.qualifiedToAliasedSimpleName(qualifiedName: String): Strin
 }
 
 private fun Renderer.renderQualifiedIdentifier(identifier: String) {
-  renderDotSeparated(identifier.split('.')) { renderIdentifier(it) }
+  render(qualifiedIdentifierSource(identifier))
 }
+
+private fun Renderer.qualifiedIdentifierSource(identifier: String) =
+  dotSeparated(identifier.split('.').map(::identifierSource))
 
 private val String.isValidIdentifier
   get() = first().isValidIdentifierFirstChar && all { it.isValidIdentifierChar }

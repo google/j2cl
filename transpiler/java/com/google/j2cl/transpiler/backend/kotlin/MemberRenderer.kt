@@ -111,7 +111,7 @@ private fun Renderer.renderField(field: Field) {
   render(if (isFinal) "val " else "var ")
   renderIdentifier(field.descriptor.ktMangledName)
   render(": ")
-  renderTypeDescriptor(typeDescriptor)
+  render(typeDescriptorSource(typeDescriptor))
   field.initializer?.let { initializer ->
     render(" = ")
     renderExpression(initializer)
@@ -228,14 +228,14 @@ private fun Renderer.renderParameter(
   }
   renderName(parameter)
   render(": ")
-  renderTypeDescriptor(renderedTypeDescriptor)
+  render(typeDescriptorSource(renderedTypeDescriptor))
 }
 
 internal fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {
   val returnTypeDescriptor = methodDescriptor.returnTypeDescriptor
   if (returnTypeDescriptor != PrimitiveTypes.VOID) {
     render(": ")
-    renderTypeDescriptor(returnTypeDescriptor)
+    render(typeDescriptorSource(returnTypeDescriptor))
   }
 }
 

@@ -22,43 +22,50 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.ampersandSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
+import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-internal fun Renderer.renderTypeDescriptor(
+internal fun Renderer.typeDescriptorSource(
   typeDescriptor: TypeDescriptor,
   asSuperType: Boolean = false,
   projectRawToWildcards: Boolean = false
-) =
+): Source =
   TypeDescriptorRenderer(
       this,
       asSuperType = asSuperType,
       projectRawToWildcards = projectRawToWildcards
     )
-    .render(typeDescriptor)
+    .source(typeDescriptor)
 
-internal fun Renderer.renderQualifiedName(
+internal fun Renderer.typeArgumentsSource(typeArguments: List<TypeArgument>): Source =
+  TypeDescriptorRenderer(this).argumentsSource(typeArguments)
+
+internal fun Renderer.qualifiedNameSource(
   typeDescriptor: TypeDescriptor,
   asSuperType: Boolean = false
-) {
-  if (typeDescriptor is DeclaredTypeDescriptor) {
-    if (typeDescriptor.typeDeclaration.isLocal) {
-      renderIdentifier(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
-    } else {
-      val enclosingTypeDescriptor = typeDescriptor.enclosingTypeDescriptor
-      if (enclosingTypeDescriptor == null) {
-        renderTopLevelQualifiedName(typeDescriptor.ktQualifiedName(asSuperType))
-      } else {
-        renderQualifiedName(enclosingTypeDescriptor)
-        render(".")
-        renderIdentifier(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
+): Source =
+  if (typeDescriptor is DeclaredTypeDescriptor)
+    if (typeDescriptor.typeDeclaration.isLocal)
+      identifierSource(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
+    else
+      typeDescriptor.enclosingTypeDescriptor.let { enclosingTypeDescriptor ->
+        if (enclosingTypeDescriptor == null)
+          topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName(asSuperType))
+        else
+          dotSeparated(
+            qualifiedNameSource(enclosingTypeDescriptor),
+            identifierSource(typeDescriptor.typeDeclaration.ktSimpleName(asSuperType))
+          )
       }
-    }
-  } else {
-    renderTopLevelQualifiedName(typeDescriptor.ktQualifiedName(asSuperType))
-  }
-}
-
-internal fun Renderer.renderTypeArguments(typeArguments: List<TypeArgument>) =
-  TypeDescriptorRenderer(this).renderArguments(typeArguments)
+  else topLevelQualifiedNameSource(typeDescriptor.ktQualifiedName(asSuperType))
 
 /** Type descriptor renderer. */
 private data class TypeDescriptorRenderer(
@@ -79,95 +86,80 @@ private data class TypeDescriptorRenderer(
   val child
     get() = copy(asSuperType = false)
 
-  fun render(typeDescriptor: TypeDescriptor) {
+  fun source(typeDescriptor: TypeDescriptor): Source =
     when (typeDescriptor) {
-      is ArrayTypeDescriptor -> renderArray(typeDescriptor)
-      is DeclaredTypeDescriptor -> renderDeclared(typeDescriptor)
-      is PrimitiveTypeDescriptor -> renderer.renderQualifiedName(typeDescriptor)
-      is TypeVariable -> renderVariable(typeDescriptor)
-      is IntersectionTypeDescriptor -> renderIntersection(typeDescriptor)
+      is ArrayTypeDescriptor -> arraySource(typeDescriptor)
+      is DeclaredTypeDescriptor -> declaredSource(typeDescriptor)
+      is PrimitiveTypeDescriptor -> renderer.qualifiedNameSource(typeDescriptor)
+      is TypeVariable -> variableSource(typeDescriptor)
+      is IntersectionTypeDescriptor -> intersectionSource(typeDescriptor)
       else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
     }
-  }
 
-  fun renderArray(arrayTypeDescriptor: ArrayTypeDescriptor) {
-    renderer.renderQualifiedName(arrayTypeDescriptor)
-    val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor
-    if (!componentTypeDescriptor.isPrimitive) {
-      renderer.renderInAngleBrackets { child.render(componentTypeDescriptor) }
-    }
-    renderNullableSuffix(arrayTypeDescriptor)
-  }
+  fun arraySource(arrayTypeDescriptor: ArrayTypeDescriptor): Source =
+    join(
+      renderer.qualifiedNameSource(arrayTypeDescriptor),
+      arrayTypeDescriptor.componentTypeDescriptor.let {
+        if (!it.isPrimitive) inAngleBrackets(child.source(it)) else emptySource
+      },
+      nullableSuffixSource(arrayTypeDescriptor)
+    )
 
-  fun renderDeclared(declaredTypeDescriptor: DeclaredTypeDescriptor) {
+  fun declaredSource(declaredTypeDescriptor: DeclaredTypeDescriptor): Source {
     val typeDeclaration = declaredTypeDescriptor.typeDeclaration
     val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
     val isStatic = !typeDeclaration.isCapturingEnclosingInstance
-    if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic) {
-      renderer.renderQualifiedName(declaredTypeDescriptor, asSuperType)
-    } else {
-      child.renderDeclared(enclosingTypeDescriptor.toNonNullable())
-      renderer.render(".")
-      renderer.renderIdentifier(typeDeclaration.ktSimpleName(asSuperType))
-    }
-    renderArguments(declaredTypeDescriptor)
-    renderNullableSuffix(declaredTypeDescriptor)
+    return join(
+      if (typeDeclaration.isLocal || enclosingTypeDescriptor == null || isStatic)
+        renderer.qualifiedNameSource(declaredTypeDescriptor, asSuperType)
+      else
+        dotSeparated(
+          child.declaredSource(enclosingTypeDescriptor.toNonNullable()),
+          identifierSource(typeDeclaration.ktSimpleName(asSuperType))
+        ),
+      argumentsSource(declaredTypeDescriptor),
+      nullableSuffixSource(declaredTypeDescriptor)
+    )
   }
 
-  fun renderArguments(declaredTypeDescriptor: DeclaredTypeDescriptor) {
-    val arguments =
-      declaredTypeDescriptor.typeArguments(projectRawToWildcards = projectRawToWildcards)
-    if (arguments.isNotEmpty()) {
-      renderArguments(arguments)
-    }
-  }
+  fun argumentsSource(declaredTypeDescriptor: DeclaredTypeDescriptor): Source =
+    declaredTypeDescriptor
+      .typeArguments(projectRawToWildcards = projectRawToWildcards)
+      .takeIf { it.isNotEmpty() }
+      ?.let(::argumentsSource)
+      .orEmpty
 
-  fun renderArguments(arguments: List<TypeArgument>) {
-    renderer.renderInAngleBrackets {
-      renderer.renderCommaSeparated(arguments) { child.render(it.typeDescriptor) }
-    }
-  }
+  fun argumentsSource(arguments: List<TypeArgument>): Source =
+    inAngleBrackets(commaSeparated(arguments.map(::source)))
 
-  fun renderVariable(typeVariable: TypeVariable) {
-    if (didSee(typeVariable)) {
-      renderer.render("*")
-    } else {
+  fun source(typeArgument: TypeArgument): Source = child.source(typeArgument.typeDescriptor)
+
+  fun variableSource(typeVariable: TypeVariable): Source =
+    if (didSee(typeVariable)) source("*")
+    else
       withSeen(typeVariable).run {
-        if (typeVariable.isWildcardOrCapture) {
-          val lowerBoundTypeDescriptor = typeVariable.lowerBoundTypeDescriptor
-          if (lowerBoundTypeDescriptor != null) {
-            renderer.render("in ")
-            child.render(lowerBoundTypeDescriptor)
-          } else {
-            val boundTypeDescriptor = typeVariable.upperBoundTypeDescriptor
-            if (boundTypeDescriptor.isImplicitUpperBound) {
-              renderer.render("*")
-            } else {
-              renderer.render("out ")
-              child.render(boundTypeDescriptor)
-            }
+        if (typeVariable.isWildcardOrCapture)
+          typeVariable.lowerBoundTypeDescriptor.let { lowerBound ->
+            if (lowerBound != null) spaceSeparated(source("in"), child.source(lowerBound))
+            else
+              typeVariable.upperBoundTypeDescriptor.let { upperBound ->
+                if (upperBound.isImplicitUpperBound) source("*")
+                else spaceSeparated(source("out"), child.source(upperBound))
+              }
           }
-        } else {
-          renderer.renderName(typeVariable.toNullable())
-          renderNullableSuffix(typeVariable)
-        }
+        else
+          join(renderer.nameSource(typeVariable.toNullable()), nullableSuffixSource(typeVariable))
       }
-    }
-  }
 
-  fun renderIntersection(typeDescriptor: IntersectionTypeDescriptor) {
-    renderer.renderSeparatedWith(typeDescriptor.intersectionTypeDescriptors, " & ") {
-      renderer.renderTypeDescriptor(it)
-    }
-  }
+  fun intersectionSource(typeDescriptor: IntersectionTypeDescriptor): Source =
+    ampersandSeparated(typeDescriptor.intersectionTypeDescriptors.map(::source))
 
-  fun renderNullableSuffix(typeDescriptor: TypeDescriptor) {
-    if (typeDescriptor.isNullable) renderer.render("?")
-  }
+  fun nullableSuffixSource(typeDescriptor: TypeDescriptor): Source =
+    if (typeDescriptor.isNullable) source("?") else emptySource
 
-  private fun withSeen(typeVariable: TypeVariable) =
+  private fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
     copy(seenTypeVariables = seenTypeVariables + typeVariable.toNonNullable())
 
-  private fun didSee(typeVariable: TypeVariable) =
+  private fun didSee(typeVariable: TypeVariable): Boolean =
     seenTypeVariables.contains(typeVariable.toNonNullable())
 }

@@ -116,7 +116,7 @@ private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
     PrimitiveTypes.DOUBLE -> renderTopLevelQualifiedName("kotlin.doubleArrayOf")
     else -> {
       renderTopLevelQualifiedName("kotlin.arrayOf")
-      renderTypeArguments(listOf(typeArgument))
+      render(typeArgumentsSource(listOf(typeArgument)))
     }
   }
   renderInParentheses {
@@ -162,14 +162,14 @@ private fun Renderer.renderCastExpression(castExpression: CastExpression) {
     render(" { ")
     castTypeDescriptor.intersectionTypeDescriptors.forEach {
       render("it as ")
-      renderTypeDescriptor(it)
+      render(typeDescriptorSource(it))
       render("; ")
     }
     render("it }")
   } else {
     renderLeftSubExpression(castExpression.precedence, castExpression.expression)
     render(" as ")
-    renderTypeDescriptor(castExpression.castTypeDescriptor)
+    render(typeDescriptorSource(castExpression.castTypeDescriptor))
   }
 }
 
@@ -238,9 +238,11 @@ private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOf
     renderTopLevelQualifiedName("kotlin.Array")
     render("<*>")
   } else {
-    renderTypeDescriptor(
-      instanceOfExpression.testTypeDescriptor.toNonNullable(),
-      projectRawToWildcards = true
+    render(
+      typeDescriptorSource(
+        instanceOfExpression.testTypeDescriptor.toNonNullable(),
+        projectRawToWildcards = true
+      )
     )
   }
 }
@@ -265,7 +267,7 @@ private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
-  renderQualifiedName(typeLiteral.referencedTypeDescriptor)
+  render(qualifiedNameSource(typeLiteral.referencedTypeDescriptor))
   render("::class")
   render(".")
   if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
@@ -321,7 +323,7 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
 private fun Renderer.renderInvocationTypeArguments(typeArguments: List<TypeArgument>) {
   if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
-    renderTypeArguments(typeArguments)
+    render(typeArgumentsSource(typeArguments))
   }
 }
 
@@ -389,7 +391,7 @@ private fun Renderer.renderNewArray(
       renderArrayOfNulls(typeArgument, firstDimension)
     } else {
       renderTopLevelQualifiedName("kotlin.Array")
-      renderTypeArguments(listOf(typeArgument))
+      render(typeArgumentsSource(listOf(typeArgument)))
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
       renderInCurlyBrackets {
@@ -427,10 +429,10 @@ private fun Renderer.renderPrimitiveArrayOf(
 private fun Renderer.renderArrayOfNulls(typeArgument: TypeArgument, dimension: Expression) {
   if (typeArgument.typeDescriptor.isNullable) {
     renderExtensionMemberQualifiedName("kotlin.arrayOfNulls")
-    renderTypeArguments(listOf(typeArgument.toNonNullable()))
+    render(typeArgumentsSource(listOf(typeArgument.toNonNullable())))
   } else {
     renderExtensionMemberQualifiedName("javaemul.lang.uninitializedArrayOf")
-    renderTypeArguments(listOf(typeArgument))
+    render(typeArgumentsSource(listOf(typeArgument)))
   }
   renderInParentheses { renderExpression(dimension) }
 }
@@ -460,7 +462,7 @@ private fun Renderer.renderNewInstanceTypeDescriptor(typeDescriptor: DeclaredTyp
   if (typeDeclaration.isCapturingEnclosingInstance) {
     renderIdentifier(typeDeclaration.ktSimpleName(asSuperType = true))
   } else {
-    renderQualifiedName(typeDescriptor, asSuperType = true)
+    render(qualifiedNameSource(typeDescriptor, asSuperType = true))
   }
 
   renderInvocationTypeArguments(typeDescriptor.typeArguments())
@@ -495,7 +497,7 @@ private fun Renderer.renderSuperReference(
 ) {
   render("super")
   if (superTypeDescriptor != null) {
-    renderInAngleBrackets { renderQualifiedName(superTypeDescriptor, asSuperType = true) }
+    renderInAngleBrackets { render(qualifiedNameSource(superTypeDescriptor, asSuperType = true)) }
   }
   if (qualifierTypeDescriptor != null) {
     renderLabelReference(qualifierTypeDescriptor)
@@ -541,7 +543,7 @@ fun Renderer.renderVariable(variable: Variable) {
   val typeDescriptor = variable.typeDescriptor
   if (typeDescriptor.isKtDenotable && !typeDescriptor.isProtobufBuilder()) {
     render(": ")
-    renderTypeDescriptor(typeDescriptor)
+    render(typeDescriptorSource(typeDescriptor))
   }
 }
 
@@ -556,7 +558,7 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       if (ktCompanionQualifiedName != null) {
         renderTopLevelQualifiedName(ktCompanionQualifiedName)
       } else {
-        renderQualifiedName(enclosingTypeDescriptor)
+        render(qualifiedNameSource(enclosingTypeDescriptor))
       }
       render(".")
     }
