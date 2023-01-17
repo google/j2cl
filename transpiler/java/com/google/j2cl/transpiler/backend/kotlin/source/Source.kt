@@ -57,6 +57,8 @@ fun inRoundBrackets(source: Source) = join(source("("), source, source(")"))
 
 fun inAngleBrackets(source: Source) = join(source("<"), source, source(">"))
 
+fun inSquareBrackets(source: Source) = join(source("["), source, source("]"))
+
 fun inDoubleQuotes(source: Source) = join(source("\""), source, source("\""))
 
 fun inCurlyBrackets(source: Source) =
@@ -86,6 +88,8 @@ fun commaSeparated(sources: Iterable<Source>) = ", " separated sources
 
 fun dotSeparated(sources: Iterable<Source>) = "." separated sources
 
+fun ampersandSeparated(sources: Iterable<Source>) = " & " separated sources
+
 fun newLineSeparated(sources: Iterable<Source>) = "\n" separated sources
 
 fun emptyLineSeparated(sources: Iterable<Source>) = "\n\n" separated sources
@@ -102,6 +106,9 @@ fun commaSeparated(source: Source, vararg sources: Source) =
 
 fun dotSeparated(source: Source, vararg sources: Source) =
   dotSeparated(listOfNotNull(source, *sources))
+
+fun ampersandSeparated(source: Source, vararg sources: Source) =
+  ampersandSeparated(listOfNotNull(source, *sources))
 
 fun newLineSeparated(source: Source, vararg sources: Source) =
   newLineSeparated(listOfNotNull(source, *sources))
