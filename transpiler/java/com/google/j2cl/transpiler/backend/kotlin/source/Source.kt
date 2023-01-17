@@ -42,6 +42,9 @@ operator fun Source.plus(source: Source) =
     source.appendTo(it)
   }
 
+val Source.plusColon
+  get() = this + source(":")
+
 val Source.plusSemicolon
   get() = this + source(";")
 
@@ -50,6 +53,8 @@ val Source.plusComma
 
 val Source.plusNewLine
   get() = this + source("\n")
+
+fun afterSpace(source: Source) = join(source(" "), source)
 
 fun inNewLine(source: Source) = source("\n") + source
 

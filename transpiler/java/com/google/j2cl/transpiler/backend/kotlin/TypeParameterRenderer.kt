@@ -20,18 +20,26 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.KtVariance
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.plusColon
+import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-internal fun Renderer.renderTypeParameters(typeVariables: List<TypeVariable>) {
-  renderInAngleBrackets { renderCommaSeparated(typeVariables) { renderTypeParameter(it) } }
-}
+internal fun Renderer.typeParametersSource(typeVariables: List<TypeVariable>): Source =
+  inAngleBrackets(commaSeparated(typeVariables.map(::typeParameterSource)))
 
-internal fun Renderer.renderWhereClause(typeVariables: List<TypeVariable>) {
-  val whereClauseItems = typeVariables.map { it.whereClauseItems }.flatten()
-  if (whereClauseItems.isNotEmpty()) {
-    render(" where ")
-    renderCommaSeparated(whereClauseItems) { render(it) }
-  }
-}
+internal fun Renderer.whereClauseSource(typeVariables: List<TypeVariable>): Source =
+  whereClauseSource(
+    commaSeparated(typeVariables.map { it.whereClauseItems }.flatten().map(::source))
+  )
+
+fun whereClauseSource(itemsSource: Source): Source =
+  itemsSource.ifNotEmpty { spaceSeparated(source("where"), it) }
 
 internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
   get() =
@@ -40,20 +48,27 @@ internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
       .filter { !it.isImplicitUpperBound }
       .map { if (!it.canBeNullableAsBound) it.toNonNullable() else it }
 
-private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
-  val variance = typeVariable.ktVariance
-  if (variance != null) {
-    render(variance.identifier)
-    render(" ")
-  }
-  renderName(typeVariable)
-  typeVariable.upperBoundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
-    render(": ")
-    render(typeDescriptorSource(boundTypeDescriptor, projectRawToWildcards = true))
-  }
-}
+private fun Renderer.typeParameterSource(typeVariable: TypeVariable): Source =
+  spaceSeparated(
+    typeParameterVarianceSource(typeVariable),
+    join(nameSource(typeVariable), typeParameterBoundSource(typeVariable))
+  )
 
-private val KtVariance.identifier
+private fun Renderer.typeParameterBoundSource(typeVariable: TypeVariable): Source =
+  typeVariable.upperBoundTypeDescriptors
+    .singleOrNull()
+    ?.let { boundTypeDescriptor ->
+      spaceSeparated(
+        source(":"),
+        typeDescriptorSource(boundTypeDescriptor, projectRawToWildcards = true)
+      )
+    }
+    .orEmpty
+
+private fun typeParameterVarianceSource(typeVariable: TypeVariable): Source =
+  typeVariable.ktVariance?.identifier?.let { source(it) }.orEmpty
+
+private val KtVariance.identifier: String
   get() =
     when (this) {
       KtVariance.IN -> "in"
@@ -66,8 +81,8 @@ private val TypeVariable.whereClauseItems: List<WhereClauseItem>
   get() =
     upperBoundTypeDescriptors.takeIf { it.size > 1 }?.map { WhereClauseItem(this, it) } ?: listOf()
 
-private fun Renderer.render(whereClauseItem: WhereClauseItem) {
-  renderName(whereClauseItem.hasName)
-  render(": ")
-  render(typeDescriptorSource(whereClauseItem.boundTypeDescriptor))
-}
+private fun Renderer.source(whereClauseItem: WhereClauseItem): Source =
+  spaceSeparated(
+    nameSource(whereClauseItem.hasName).plusColon,
+    typeDescriptorSource(whereClauseItem.boundTypeDescriptor)
+  )

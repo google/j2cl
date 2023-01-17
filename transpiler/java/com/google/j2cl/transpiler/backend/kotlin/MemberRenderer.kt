@@ -33,6 +33,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.Member
+import com.google.j2cl.transpiler.backend.kotlin.source.afterSpace
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 
 internal fun Renderer.render(member: Member) {
   when (member) {
@@ -155,7 +157,7 @@ private fun Renderer.renderMethodHeader(method: Method) {
     render(if (method.descriptor.isKtProperty) "val " else "fun ")
     val typeParameters = methodDescriptor.typeParameterTypeDescriptors
     if (typeParameters.isNotEmpty()) {
-      renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors)
+      render(typeParametersSource(methodDescriptor.typeParameterTypeDescriptors))
       render(" ")
     }
     render(identifierSource(methodDescriptor.ktMangledName))
@@ -168,7 +170,7 @@ private fun Renderer.renderMethodHeader(method: Method) {
   } else {
     renderMethodReturnType(methodDescriptor)
   }
-  renderWhereClause(methodDescriptor.typeParameterTypeDescriptors)
+  render(whereClauseSource(methodDescriptor.typeParameterTypeDescriptors).ifNotEmpty(::afterSpace))
 }
 
 private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor) {

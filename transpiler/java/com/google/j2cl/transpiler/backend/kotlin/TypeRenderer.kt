@@ -22,6 +22,8 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
+import com.google.j2cl.transpiler.backend.kotlin.source.afterSpace
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 
 fun Renderer.renderType(type: Type) {
   val typeDeclaration = type.declaration
@@ -59,7 +61,7 @@ fun Renderer.renderType(type: Type) {
   renderTypeDeclaration(typeDeclaration)
 
   renderSuperTypes(type)
-  renderWhereClause(typeDeclaration.typeParameterDescriptors)
+  render(whereClauseSource(typeDeclaration.typeParameterDescriptors).ifNotEmpty(::afterSpace))
   renderTypeBody(type)
 }
 
@@ -67,7 +69,7 @@ fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
   render(identifierSource(declaration.ktSimpleName))
   declaration.directlyDeclaredTypeParameterDescriptors
     .takeIf { it.isNotEmpty() }
-    ?.let { parameters -> renderTypeParameters(parameters) }
+    ?.let { render(typeParametersSource(it)) }
 }
 
 private fun Renderer.renderSuperTypes(type: Type) {
