@@ -16,13 +16,63 @@
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.plus
+import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inDoubleQuotes
+import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.plusSemicolon
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-fun comment(source: Source) = spaceSeparated(source("//"), source)
+fun comment(source: Source): Source = spaceSeparated(source("//"), source)
 
-fun semicolonEnded(source: Source) = source.plusSemicolon
+fun semicolonEnded(source: Source): Source = source.plusSemicolon
 
-fun return_(source: Source) = spaceSeparated(source("return"), source)
+fun dependenciesSource(dependencies: Iterable<Dependency>): Source =
+  emptyLineSeparated(
+    importsSource(dependencies.imports),
+    forwardDeclarationsSource(dependencies.forwardDeclarations)
+  )
+
+fun importsSource(imports: List<Import>): Source =
+  emptyLineSeparated(
+    newLineSeparated(imports.filter { !it.isLocal }.sortedBy { it.path }.map { it.source }),
+    newLineSeparated(imports.filter { it.isLocal }.sortedBy { it.path }.map { it.source })
+  )
+
+fun forwardDeclarationsSource(forwardDeclarations: List<ForwardDeclaration>): Source =
+  emptyLineSeparated(
+    forwardDeclarations
+      .groupBy { it.kind }
+      .entries
+      .sortedBy { it.key }
+      .map { it.value.sortedBy(ForwardDeclaration::name) }
+      .map { newLineSeparated(it.map(ForwardDeclaration::source)) }
+  )
+
+val ForwardDeclaration.source: Source
+  get() = semicolonEnded(spaceSeparated(kind.source, source(name)))
+
+val ForwardDeclaration.Kind.source: Source
+  get() =
+    source(
+      when (this) {
+        ForwardDeclaration.Kind.CLASS -> "@class"
+        ForwardDeclaration.Kind.PROTOCOL -> "@protocol"
+      }
+    )
+
+val Import.source: Source
+  get() =
+    spaceSeparated(
+      source("#import"),
+      source(path).let { if (isLocal) inDoubleQuotes(it) else inAngleBrackets(it) }
+    )
+
+val Renderer<Source>.sourceWithDependencies: Source
+  get() =
+    mutableSetOf<Dependency>().let { mutableDependencies ->
+      val renderedSource = renderAddingDependencies(mutableDependencies)
+      val dependenciesSource = dependenciesSource(mutableDependencies)
+      emptyLineSeparated(dependenciesSource, renderedSource)
+    }

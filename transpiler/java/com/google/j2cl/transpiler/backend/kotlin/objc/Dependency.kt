@@ -15,23 +15,38 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
-import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
-
-/** Rendering dependency: an import or a forward declaration. */
+/** Renderer dependency: an import or a forward declaration. */
 sealed class Dependency {
   data class WithImport(val import: Import) : Dependency()
   data class WithForwardDeclaration(val forwardDeclaration: ForwardDeclaration) : Dependency()
 }
 
+/** Forward declaration: @class or @protocol. */
+data class ForwardDeclaration(val kind: Kind, val name: String) {
+  enum class Kind {
+    CLASS,
+    PROTOCOL
+  }
+}
+
+data class Import(val path: String, val isLocal: Boolean)
+
 fun dependency(it: Import): Dependency = Dependency.WithImport(it)
 
 fun dependency(it: ForwardDeclaration): Dependency = Dependency.WithForwardDeclaration(it)
 
-val Iterable<Dependency>.imports
+val Iterable<Dependency>.imports: List<Import>
   get() = filterIsInstance<Dependency.WithImport>().map { it.import }
 
-val Iterable<Dependency>.forwardDeclarations
+val Iterable<Dependency>.forwardDeclarations: List<ForwardDeclaration>
   get() = filterIsInstance<Dependency.WithForwardDeclaration>().map { it.forwardDeclaration }
 
-fun source(dependencies: Iterable<Dependency>) =
-  emptyLineSeparated(source(dependencies.imports), source(dependencies.forwardDeclarations))
+fun systemImport(path: String): Import = Import(path, isLocal = false)
+
+fun localImport(path: String): Import = Import(path, isLocal = true)
+
+fun classForwardDeclaration(name: String): ForwardDeclaration =
+  ForwardDeclaration(ForwardDeclaration.Kind.CLASS, name)
+
+fun protocolForwardDeclaration(name: String): ForwardDeclaration =
+  ForwardDeclaration(ForwardDeclaration.Kind.PROTOCOL, name)
