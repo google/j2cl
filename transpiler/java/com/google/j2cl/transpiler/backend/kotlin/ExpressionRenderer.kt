@@ -106,16 +106,16 @@ private fun Renderer.renderArrayLength(arrayLength: ArrayLength) {
 private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
   val typeArgument = arrayLiteral.typeDescriptor.typeArgument
   when (typeArgument.typeDescriptor) {
-    PrimitiveTypes.BOOLEAN -> renderTopLevelQualifiedName("kotlin.booleanArrayOf")
-    PrimitiveTypes.CHAR -> renderTopLevelQualifiedName("kotlin.charArrayOf")
-    PrimitiveTypes.BYTE -> renderTopLevelQualifiedName("kotlin.byteArrayOf")
-    PrimitiveTypes.SHORT -> renderTopLevelQualifiedName("kotlin.shortArrayOf")
-    PrimitiveTypes.INT -> renderTopLevelQualifiedName("kotlin.intArrayOf")
-    PrimitiveTypes.LONG -> renderTopLevelQualifiedName("kotlin.longArrayOf")
-    PrimitiveTypes.FLOAT -> renderTopLevelQualifiedName("kotlin.floatArrayOf")
-    PrimitiveTypes.DOUBLE -> renderTopLevelQualifiedName("kotlin.doubleArrayOf")
+    PrimitiveTypes.BOOLEAN -> render(topLevelQualifiedNameSource("kotlin.booleanArrayOf"))
+    PrimitiveTypes.CHAR -> render(topLevelQualifiedNameSource("kotlin.charArrayOf"))
+    PrimitiveTypes.BYTE -> render(topLevelQualifiedNameSource("kotlin.byteArrayOf"))
+    PrimitiveTypes.SHORT -> render(topLevelQualifiedNameSource("kotlin.shortArrayOf"))
+    PrimitiveTypes.INT -> render(topLevelQualifiedNameSource("kotlin.intArrayOf"))
+    PrimitiveTypes.LONG -> render(topLevelQualifiedNameSource("kotlin.longArrayOf"))
+    PrimitiveTypes.FLOAT -> render(topLevelQualifiedNameSource("kotlin.floatArrayOf"))
+    PrimitiveTypes.DOUBLE -> render(topLevelQualifiedNameSource("kotlin.doubleArrayOf"))
     else -> {
-      renderTopLevelQualifiedName("kotlin.arrayOf")
+      render(topLevelQualifiedNameSource("kotlin.arrayOf"))
       render(typeArgumentsSource(listOf(typeArgument)))
     }
   }
@@ -135,7 +135,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
       leftOperand.target.isStatic &&
       leftOperand.target.isFinal
   ) {
-    renderIdentifier(leftOperand.target.ktMangledName)
+    render(identifierSource(leftOperand.target.ktMangledName))
   } else {
     renderLeftSubExpression(expression.precedence, leftOperand)
   }
@@ -158,7 +158,7 @@ private fun Renderer.renderCastExpression(castExpression: CastExpression) {
     // using smart casts: (x).let { it as A; it as B; it as C; it }
     renderInParentheses { renderExpression(castExpression.expression) }
     render(".")
-    renderExtensionMemberQualifiedName("kotlin.let")
+    render(extensionMemberQualifiedNameSource("kotlin.let"))
     render(" { ")
     castTypeDescriptor.intersectionTypeDescriptors.forEach {
       render("it as ")
@@ -205,7 +205,7 @@ private fun Renderer.renderExpressionWithComment(expressionWithComment: Expressi
 
 private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
   renderQualifier(fieldAccess)
-  renderIdentifier(fieldAccess.target.ktMangledName)
+  render(identifierSource(fieldAccess.target.ktMangledName))
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
@@ -235,7 +235,7 @@ private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOf
     testTypeDescriptor is ArrayTypeDescriptor &&
       !testTypeDescriptor.componentTypeDescriptor!!.isPrimitive
   ) {
-    renderTopLevelQualifiedName("kotlin.Array")
+    render(topLevelQualifiedNameSource("kotlin.Array"))
     render("<*>")
   } else {
     render(
@@ -271,10 +271,10 @@ private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
   render("::class")
   render(".")
   if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-    renderExtensionMemberQualifiedName("kotlin.jvm.javaPrimitiveType")
+    render(extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
     renderNonNullAssertion()
   } else {
-    renderExtensionMemberQualifiedName("kotlin.jvm.javaObjectType")
+    render(extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType"))
   }
 }
 
@@ -305,15 +305,15 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
   val methodDescriptor = expression.target
   if (methodDescriptor.isProtoExtensionGetter()) {
-    renderExtensionMemberQualifiedName("com.google.protobuf.kotlin.get")
+    render(extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"))
     renderInvocationArguments(expression)
   } else if (methodDescriptor.isProtobufGetter()) {
-    renderIdentifier(KtInfo.computePropertyName(expression.target.name))
+    render(identifierSource(KtInfo.computePropertyName(expression.target.name)))
   } else if (methodDescriptor.isProtoExtensionChecker()) {
-    renderExtensionMemberQualifiedName("com.google.protobuf.kotlin.contains")
+    render(extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"))
     renderInvocationArguments(expression)
   } else {
-    renderIdentifier(expression.target.ktMangledName)
+    render(identifierSource(expression.target.ktMangledName))
     if (!expression.target.isKtProperty) {
       renderInvocationTypeArguments(methodDescriptor.typeArguments)
       renderInvocationArguments(expression)
@@ -356,7 +356,7 @@ internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
 }
 
 private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
-  renderExtensionMemberQualifiedName("kotlin.run")
+  render(extensionMemberQualifiedNameSource("kotlin.run"))
   render(" ")
   renderInCurlyBrackets {
     renderStartingWithNewLines(multiExpression.expressions) { expression ->
@@ -390,7 +390,7 @@ private fun Renderer.renderNewArray(
     if (nextDimension is NullLiteral) {
       renderArrayOfNulls(typeArgument, firstDimension)
     } else {
-      renderTopLevelQualifiedName("kotlin.Array")
+      render(topLevelQualifiedNameSource("kotlin.Array"))
       render(typeArgumentsSource(listOf(typeArgument)))
       renderInParentheses { renderExpression(firstDimension) }
       render(" ")
@@ -410,28 +410,30 @@ private fun Renderer.renderPrimitiveArrayOf(
   componentTypeDescriptor: PrimitiveTypeDescriptor,
   dimension: Expression
 ) {
-  renderTopLevelQualifiedName(
-    when (componentTypeDescriptor) {
-      PrimitiveTypes.BOOLEAN -> "kotlin.BooleanArray"
-      PrimitiveTypes.CHAR -> "kotlin.CharArray"
-      PrimitiveTypes.BYTE -> "kotlin.ByteArray"
-      PrimitiveTypes.SHORT -> "kotlin.ShortArray"
-      PrimitiveTypes.INT -> "kotlin.IntArray"
-      PrimitiveTypes.LONG -> "kotlin.LongArray"
-      PrimitiveTypes.FLOAT -> "kotlin.FloatArray"
-      PrimitiveTypes.DOUBLE -> "kotlin.DoubleArray"
-      else -> throw InternalCompilerError("renderPrimitiveArrayOf($componentTypeDescriptor)")
-    }
+  render(
+    topLevelQualifiedNameSource(
+      when (componentTypeDescriptor) {
+        PrimitiveTypes.BOOLEAN -> "kotlin.BooleanArray"
+        PrimitiveTypes.CHAR -> "kotlin.CharArray"
+        PrimitiveTypes.BYTE -> "kotlin.ByteArray"
+        PrimitiveTypes.SHORT -> "kotlin.ShortArray"
+        PrimitiveTypes.INT -> "kotlin.IntArray"
+        PrimitiveTypes.LONG -> "kotlin.LongArray"
+        PrimitiveTypes.FLOAT -> "kotlin.FloatArray"
+        PrimitiveTypes.DOUBLE -> "kotlin.DoubleArray"
+        else -> throw InternalCompilerError("renderPrimitiveArrayOf($componentTypeDescriptor)")
+      }
+    )
   )
   renderInParentheses { renderExpression(dimension) }
 }
 
 private fun Renderer.renderArrayOfNulls(typeArgument: TypeArgument, dimension: Expression) {
   if (typeArgument.typeDescriptor.isNullable) {
-    renderExtensionMemberQualifiedName("kotlin.arrayOfNulls")
+    render(extensionMemberQualifiedNameSource("kotlin.arrayOfNulls"))
     render(typeArgumentsSource(listOf(typeArgument.toNonNullable())))
   } else {
-    renderExtensionMemberQualifiedName("javaemul.lang.uninitializedArrayOf")
+    render(extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"))
     render(typeArgumentsSource(listOf(typeArgument)))
   }
   renderInParentheses { renderExpression(dimension) }
@@ -460,7 +462,7 @@ private fun Renderer.renderNewInstanceTypeDescriptor(typeDescriptor: DeclaredTyp
   // Render qualified name if there's no qualifier, otherwise render simple name.
   val typeDeclaration = typeDescriptor.typeDeclaration
   if (typeDeclaration.isCapturingEnclosingInstance) {
-    renderIdentifier(typeDeclaration.ktSimpleName(asSuperType = true))
+    render(identifierSource(typeDeclaration.ktSimpleName(asSuperType = true)))
   } else {
     render(qualifiedNameSource(typeDescriptor, asSuperType = true))
   }
@@ -513,7 +515,7 @@ private fun Renderer.renderThisReference(thisReference: ThisReference) {
 
 private fun Renderer.renderLabelReference(typeDescriptor: DeclaredTypeDescriptor) {
   render("@")
-  renderIdentifier(typeDescriptor.typeDeclaration.ktSimpleName)
+  render(identifierSource(typeDescriptor.typeDeclaration.ktSimpleName))
 }
 
 private fun Renderer.renderVariableDeclarationExpression(
@@ -555,11 +557,10 @@ private fun Renderer.renderQualifier(memberReference: MemberReference) {
       val enclosingTypeDescriptor = memberReference.target.enclosingTypeDescriptor!!
       val ktCompanionQualifiedName =
         enclosingTypeDescriptor.typeDeclaration.ktCompanionQualifiedName
-      if (ktCompanionQualifiedName != null) {
-        renderTopLevelQualifiedName(ktCompanionQualifiedName)
-      } else {
-        render(qualifiedNameSource(enclosingTypeDescriptor))
-      }
+      render(
+        if (ktCompanionQualifiedName != null) topLevelQualifiedNameSource(ktCompanionQualifiedName)
+        else qualifiedNameSource(enclosingTypeDescriptor)
+      )
       render(".")
     }
   } else {

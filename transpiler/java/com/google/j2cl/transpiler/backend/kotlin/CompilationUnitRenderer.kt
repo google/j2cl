@@ -43,7 +43,7 @@ private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {
     .takeIf { it.isNotEmpty() }
     ?.let { packageName ->
       render("package ")
-      renderPackageName(packageName)
+      render(packageNameSource(packageName))
       renderNewLine()
       renderNewLine()
     }

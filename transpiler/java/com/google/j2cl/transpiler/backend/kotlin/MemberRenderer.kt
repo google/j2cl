@@ -109,7 +109,7 @@ private fun Renderer.renderField(field: Field) {
     renderJvmFieldAnnotation()
   }
   render(if (isFinal) "val " else "var ")
-  renderIdentifier(field.descriptor.ktMangledName)
+  render(identifierSource(field.descriptor.ktMangledName))
   render(": ")
   render(typeDescriptorSource(typeDescriptor))
   field.initializer?.let { initializer ->
@@ -120,13 +120,13 @@ private fun Renderer.renderField(field: Field) {
 
 private fun Renderer.renderJvmFieldAnnotation() {
   render("@")
-  renderTopLevelQualifiedName("kotlin.jvm.JvmField")
+  render(topLevelQualifiedNameSource("kotlin.jvm.JvmField"))
   render(" ")
 }
 
 private fun Renderer.renderJvmStaticAnnotation() {
   render("@")
-  renderTopLevelQualifiedName("kotlin.jvm.JvmStatic")
+  render(topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
   renderNewLine()
 }
 
@@ -158,7 +158,7 @@ private fun Renderer.renderMethodHeader(method: Method) {
       renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors)
       render(" ")
     }
-    renderIdentifier(methodDescriptor.ktMangledName)
+    render(identifierSource(methodDescriptor.ktMangledName))
   }
   if (!method.descriptor.isKtProperty) {
     renderMethodParameters(method, methodObjCNames?.parameterNames)

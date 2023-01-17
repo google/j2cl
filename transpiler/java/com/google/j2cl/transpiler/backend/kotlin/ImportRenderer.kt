@@ -38,7 +38,7 @@ internal fun Renderer.renderImports() {
 
 private fun Renderer.render(import: Import) {
   render("import ")
-  renderSeparatedWith(import.components, ".") { renderIdentifier(it) }
+  renderSeparatedWith(import.components, ".") { render(identifierSource(it)) }
   import.suffixOrNull?.let { render(it) }
 }
 
@@ -46,7 +46,7 @@ private fun Renderer.render(suffix: Import.Suffix) {
   when (suffix) {
     is Import.Suffix.Alias -> {
       render(" as ")
-      renderIdentifier(suffix.alias)
+      render(identifierSource(suffix.alias))
     }
     is Import.Suffix.Star -> render(".*")
   }

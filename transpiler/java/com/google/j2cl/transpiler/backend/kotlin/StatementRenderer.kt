@@ -65,7 +65,7 @@ fun Renderer.renderStatement(statement: Statement) {
 }
 
 private fun Renderer.renderAssertStatement(assertStatement: AssertStatement) {
-  renderExtensionMemberQualifiedName("kotlin.assert")
+  render(extensionMemberQualifiedNameSource("kotlin.assert"))
   renderInParentheses { renderExpression(assertStatement.expression) }
   assertStatement.message?.let {
     render(" ")
@@ -131,7 +131,7 @@ private fun Renderer.renderIfStatement(ifStatement: IfStatement) {
 private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarationStatement) {
   var fieldDescriptor = declaration.fieldDescriptor
   render("var ")
-  renderIdentifier(fieldDescriptor.name!!)
+  render(identifierSource(fieldDescriptor.name!!))
   if (!fieldDescriptor.typeDescriptor.isProtobufBuilder()) {
     render(": ")
     render(typeDescriptorSource(fieldDescriptor.typeDescriptor))
@@ -158,7 +158,7 @@ private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
   render("return")
   currentReturnLabelIdentifier?.let {
     render("@")
-    renderIdentifier(it)
+    render(identifierSource(it))
   }
   returnStatement.expression?.let {
     render(" ")
@@ -197,7 +197,7 @@ private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {
 }
 
 private fun Renderer.renderSynchronizedStatement(synchronizedStatement: SynchronizedStatement) {
-  renderExtensionMemberQualifiedName("kotlin.synchronized")
+  render(extensionMemberQualifiedNameSource("kotlin.synchronized"))
   renderInParentheses { renderExpression(synchronizedStatement.expression) }
   render(" ")
   renderBlock(synchronizedStatement.body)

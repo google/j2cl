@@ -29,7 +29,7 @@ fun Renderer.renderType(type: Type) {
   // Don't render KtNative types. We should never see them except readables.
   if (typeDeclaration.isKtNative) {
     render("// native class ")
-    renderIdentifier(typeDeclaration.ktSimpleName)
+    render(identifierSource(typeDeclaration.ktSimpleName))
     return
   }
 
@@ -64,7 +64,7 @@ fun Renderer.renderType(type: Type) {
 }
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
-  renderIdentifier(declaration.ktSimpleName)
+  render(identifierSource(declaration.ktSimpleName))
   declaration.directlyDeclaredTypeParameterDescriptors
     .takeIf { it.isNotEmpty() }
     ?.let { parameters -> renderTypeParameters(parameters) }
@@ -108,7 +108,7 @@ internal fun Renderer.renderTypeBody(type: Type) {
 private fun Renderer.renderEnumValues(type: Type) {
   renderNewLine()
   renderSeparatedWith(type.enumFields, ",\n") { field ->
-    renderIdentifier(field.descriptor.name!!)
+    render(identifierSource(field.descriptor.name!!))
     val newInstance = field.initializer as NewInstance
 
     if (newInstance.arguments.isNotEmpty()) {

@@ -34,16 +34,16 @@ import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 
 internal fun Renderer.renderOptInExperimentalObjCNameFileAnnotation() {
   render("@file:")
-  renderTopLevelQualifiedName("kotlin.OptIn")
+  render(topLevelQualifiedNameSource("kotlin.OptIn"))
   renderInParentheses {
-    renderTopLevelQualifiedName("kotlin.experimental.ExperimentalObjCName")
+    render(topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCName"))
     render("::class")
   }
 }
 
 internal fun Renderer.renderObjCNameAnnotation(name: String, exact: Boolean? = null) {
   render("@")
-  renderTopLevelQualifiedName("kotlin.native.ObjCName")
+  render(topLevelQualifiedNameSource("kotlin.native.ObjCName"))
   renderInParentheses {
     renderString(name)
     exact?.let { render(", exact = $it") }
