@@ -15,109 +15,136 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
+import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
-import com.google.j2cl.transpiler.backend.kotlin.source.afterSpace
-import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.objc.comment
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.block
+import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.commaAndNewLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.plusSemicolon
+import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-fun Renderer.renderType(type: Type) {
-  val typeDeclaration = type.declaration
-
-  // Don't render KtNative types. We should never see them except readables.
-  if (typeDeclaration.isKtNative) {
-    render("// native class ")
-    render(identifierSource(typeDeclaration.ktSimpleName))
-    return
+fun Renderer.typeSource(type: Type): Source =
+  type.declaration.let { typeDeclaration ->
+    if (typeDeclaration.isKtNative) nativeTypeSource(typeDeclaration)
+    else
+      newLineSeparated(
+        objCNameAnnotationSource(typeDeclaration),
+        spaceSeparated(
+          inheritanceModifierSource(typeDeclaration),
+          classModifiersSource(type),
+          kindModifiersSource(typeDeclaration),
+          colonSeparated(typeDeclarationSource(typeDeclaration), superTypesSource(type)),
+          whereClauseSource(typeDeclaration.typeParameterDescriptors),
+          typeBodySource(type)
+        )
+      )
   }
 
-  if (typeDeclaration.needsObjCNameAnnotation) {
-    render(objCNameAnnotationSource(typeDeclaration.objCName, exact = true))
-    renderNewLine()
-  }
+fun nativeTypeSource(type: TypeDeclaration): Source =
+  comment(spaceSeparated(source("native"), source("class"), identifierSource(type.ktSimpleName)))
 
-  if (type.isClass && !typeDeclaration.isFinal) {
-    if (typeDeclaration.isAbstract) render("abstract ") else render("open ")
-  }
+fun Renderer.objCNameAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+  if (typeDeclaration.needsObjCNameAnnotation)
+    objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
+  else emptySource
+
+fun classModifiersSource(type: Type): Source =
   if (
-    typeDeclaration.enclosingTypeDeclaration != null &&
-      type.kind == Kind.CLASS &&
+    type.declaration.enclosingTypeDeclaration != null &&
+      type.declaration.kind == Kind.CLASS &&
       !type.isStatic &&
-      !typeDeclaration.isLocal
-  ) {
-    render("inner ")
-  }
-  render(
-    when (type.kind) {
-      Kind.CLASS -> "class "
-      Kind.ENUM -> "enum class "
-      Kind.INTERFACE -> (if (typeDeclaration.isKtFunctionalInterface) "fun " else "") + "interface "
-    }
+      !type.declaration.isLocal
   )
-  renderTypeDeclaration(typeDeclaration)
+    source("inner")
+  else emptySource
 
-  renderSuperTypes(type)
-  render(whereClauseSource(typeDeclaration.typeParameterDescriptors).ifNotEmpty(::afterSpace))
-  renderTypeBody(type)
-}
+fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
+  if (typeDeclaration.isClass && !typeDeclaration.isFinal) {
+    if (typeDeclaration.isAbstract) source("abstract") else source("open")
+  } else emptySource
 
-fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
-  render(identifierSource(declaration.ktSimpleName))
-  declaration.directlyDeclaredTypeParameterDescriptors
-    .takeIf { it.isNotEmpty() }
-    ?.let { render(typeParametersSource(it)) }
-}
-
-private fun Renderer.renderSuperTypes(type: Type) {
-  val superTypes =
-    type.declaredSuperTypeDescriptors.filter { !isJavaLangObject(it) && !isJavaLangEnum(it) }
-  if (superTypes.isNotEmpty()) {
-    val hasConstructors = type.constructors.isNotEmpty()
-    render(": ")
-    renderCommaSeparated(superTypes) { superType ->
-      render(typeDescriptorSource(superType.toNonNullable(), asSuperType = true))
-      if (superType.isClass && !hasConstructors) render("()")
-    }
+fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
+  when (typeDeclaration.kind!!) {
+    Kind.CLASS -> source("class")
+    Kind.INTERFACE -> spaceSeparated(funModifierSource(typeDeclaration), source("interface"))
+    Kind.ENUM -> spaceSeparated(source("enum"), source("class"))
   }
-}
 
-internal fun Renderer.renderTypeBody(type: Type) {
-  copy(
-      currentType = type,
-      renderThisReferenceWithLabel = false,
-      localNames = localNames + type.localNames
+fun funModifierSource(typeDeclaration: TypeDeclaration): Source =
+  if (typeDeclaration.isKtFunctionalInterface) source("fun") else emptySource
+
+fun Renderer.typeDeclarationSource(declaration: TypeDeclaration): Source =
+  join(
+    identifierSource(declaration.ktSimpleName),
+    declaration.directlyDeclaredTypeParameterDescriptors
+      .takeIf { it.isNotEmpty() }
+      ?.let { typeParametersSource(it) }
+      .orEmpty
+  )
+
+private fun Renderer.superTypesSource(type: Type): Source =
+  type.declaredSuperTypeDescriptors
+    .filter { !isJavaLangObject(it) && !isJavaLangEnum(it) }
+    .let { superTypeDescriptors ->
+      commaSeparated(superTypeDescriptors.map { superTypeSource(type, it) })
+    }
+
+private fun Renderer.superTypeSource(type: Type, superTypeDescriptor: TypeDescriptor): Source =
+  join(
+    typeDescriptorSource(superTypeDescriptor.toNonNullable(), asSuperType = true),
+    if (superTypeDescriptor.isClass && type.constructors.isEmpty()) inRoundBrackets(emptySource)
+    else emptySource
+  )
+
+internal fun Renderer.typeBodySource(type: Type): Source =
+  forTypeBody(type).run {
+    block(
+      emptyLineSeparated(
+        if (type.isEnum) enumValuesSource(type) else emptySource,
+        emptyLineSeparated(type.kotlinMembers.map(::source))
+      )
     )
-    .run {
-      render(" ")
-      renderInCurlyBrackets {
-        if (type.isEnum) {
-          renderEnumValues(type)
-        }
-
-        val kotlinMembers = type.kotlinMembers
-        if (kotlinMembers.isNotEmpty()) {
-          renderNewLine()
-          renderSeparatedWithEmptyLine(kotlinMembers) { render(it) }
-        }
-      }
-    }
-}
-
-private fun Renderer.renderEnumValues(type: Type) {
-  renderNewLine()
-  renderSeparatedWith(type.enumFields, ",\n") { field ->
-    render(identifierSource(field.descriptor.name!!))
-    val newInstance = field.initializer as NewInstance
-
-    if (newInstance.arguments.isNotEmpty()) {
-      renderInvocationArguments(newInstance)
-    }
-
-    newInstance.anonymousInnerClass?.let { renderTypeBody(it) }
   }
-  render(";\n")
-}
+
+internal fun Renderer.forTypeBody(type: Type): Renderer =
+  copy(
+    currentType = type,
+    renderThisReferenceWithLabel = false,
+    localNames = localNames + type.localNames
+  )
+
+private fun Renderer.enumValuesSource(type: Type): Source =
+  commaAndNewLineSeparated(type.enumFields.map(::enumValueSource)).plusSemicolon
+
+private fun Renderer.enumValueSource(field: Field): Source =
+  field.initializer
+    .let { it as NewInstance }
+    .let { newInstance ->
+      spaceSeparated(
+        join(
+          identifierSource(field.descriptor.name!!),
+          newInstance.arguments
+            .takeIf { it.isNotEmpty() }
+            ?.let { renderedSource { renderInvocation(newInstance) } }
+            .orEmpty
+        ),
+        newInstance.anonymousInnerClass?.let(::typeBodySource).orEmpty
+      )
+    }

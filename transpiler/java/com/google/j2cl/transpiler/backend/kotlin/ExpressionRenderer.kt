@@ -58,6 +58,8 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.VariableReference
+import com.google.j2cl.transpiler.backend.kotlin.source.afterSpace
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 
 fun Renderer.renderExpression(expression: Expression) {
   when (expression) {
@@ -306,17 +308,17 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   val methodDescriptor = expression.target
   if (methodDescriptor.isProtoExtensionGetter()) {
     render(extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"))
-    renderInvocationArguments(expression)
+    renderInvocation(expression)
   } else if (methodDescriptor.isProtobufGetter()) {
     render(identifierSource(KtInfo.computePropertyName(expression.target.name)))
   } else if (methodDescriptor.isProtoExtensionChecker()) {
     render(extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"))
-    renderInvocationArguments(expression)
+    renderInvocation(expression)
   } else {
     render(identifierSource(expression.target.ktMangledName))
     if (!expression.target.isKtProperty) {
       renderInvocationTypeArguments(methodDescriptor.typeArguments)
-      renderInvocationArguments(expression)
+      renderInvocation(expression)
     }
   }
 }
@@ -327,7 +329,7 @@ private fun Renderer.renderInvocationTypeArguments(typeArguments: List<TypeArgum
   }
 }
 
-internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
+internal fun Renderer.renderInvocation(invocation: Invocation) {
   renderInParentheses {
     // Take last argument if it's an array literal passed as a vararg parameter.
     val varargArrayLiteral =
@@ -452,10 +454,10 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   // Render invocation arguments for classes only - interfaces don't need it.
   if (typeDescriptor.isClass) {
     // Explicit label is necessary to workaround https://youtrack.jetbrains.com/issue/KT-54349
-    copy(renderThisReferenceWithLabel = true).renderInvocationArguments(expression)
+    copy(renderThisReferenceWithLabel = true).renderInvocation(expression)
   }
 
-  expression.anonymousInnerClass?.let { renderTypeBody(it) }
+  expression.anonymousInnerClass?.let { render(typeBodySource(it).ifNotEmpty(::afterSpace)) }
 }
 
 private fun Renderer.renderNewInstanceTypeDescriptor(typeDescriptor: DeclaredTypeDescriptor) {

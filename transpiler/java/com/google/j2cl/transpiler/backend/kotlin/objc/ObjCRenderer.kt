@@ -16,15 +16,15 @@
 package com.google.j2cl.transpiler.backend.kotlin.objc
 
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.block
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 import com.google.j2cl.transpiler.backend.kotlin.source.ifEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.inCurlyBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.inNewLines
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.plusComma
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
@@ -62,8 +62,8 @@ fun nsEnumTypedef(name: String, type: Renderer<Source>, values: List<String>): R
       spaceSeparated(
         source("typedef"),
         join(nsEnumSource, inRoundBrackets(commaSeparated(typeSource, source(name)))),
-        inCurlyBrackets(
-          inNewLines(
+        block(
+          newLineSeparated(
             values.mapIndexed { index, name ->
               infix(source(name), "=", source("$index")).plusComma
             }
@@ -92,7 +92,7 @@ fun functionDeclaration(
         source(name),
         inRoundBrackets(commaSeparated(parameterSources).ifEmpty { source("void") })
       ),
-      inCurlyBrackets(inNewLines(statementSources))
+      block(newLineSeparated(statementSources))
     )
   }
 
@@ -117,7 +117,7 @@ fun methodCall(
   }
 
 fun block(statements: List<Renderer<Source>> = listOf()): Renderer<Source> =
-  statements.flatten.map { inCurlyBrackets(inNewLines(it)) }
+  statements.flatten.map { block(newLineSeparated(it)) }
 
 fun returnStatement(expression: Renderer<Source>): Renderer<Source> =
   expression.map { semicolonEnded(spaceSeparated(source("return"), it)) }

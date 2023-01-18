@@ -50,6 +50,6 @@ private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {
 }
 
 internal fun Renderer.renderTypes(compilationUnit: CompilationUnit) {
-  renderSeparatedWithEmptyLine(compilationUnit.types) { renderType(it) }
+  renderSeparatedWithEmptyLine(compilationUnit.types) { render(typeSource(it)) }
   renderNewLine()
 }

@@ -151,7 +151,7 @@ private fun Renderer.renderLabeledStatement(labelStatement: LabeledStatement) {
 private fun Renderer.renderLocalClassDeclarationStatement(
   localClassDeclarationStatement: LocalClassDeclarationStatement
 ) {
-  renderType(localClassDeclarationStatement.localClass)
+  render(typeSource(localClassDeclarationStatement.localClass))
 }
 
 private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {

@@ -36,11 +36,13 @@ import com.google.j2cl.transpiler.backend.kotlin.ast.Member
 import com.google.j2cl.transpiler.backend.kotlin.source.afterSpace
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 
+internal fun Renderer.source(member: Member) = renderedSource { render(member) }
+
 internal fun Renderer.render(member: Member) {
   when (member) {
     is Member.WithCompanionObject -> render(member.companionObject)
     is Member.WithJavaMember -> renderMember(member.javaMember)
-    is Member.WithType -> renderType(member.type)
+    is Member.WithType -> render(typeSource(member.type))
   }
 }
 
@@ -245,7 +247,7 @@ private fun Renderer.renderConstructorInvocation(method: Method) {
   getConstructorInvocation(method)?.let { constructorInvocation ->
     render(": ")
     render(if (constructorInvocation.target.inSameTypeAs(method.descriptor)) "this" else "super")
-    renderInvocationArguments(constructorInvocation)
+    renderInvocation(constructorInvocation)
   }
 }
 

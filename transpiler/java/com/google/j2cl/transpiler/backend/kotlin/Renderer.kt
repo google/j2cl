@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.source
 
 /** Renderer of the Kotlin source code. */
 data class Renderer(
@@ -52,6 +53,10 @@ data class Renderer(
   fun render(source: Source) {
     source.appendTo(sourceBuilder)
   }
+
+  // TODO(b/263161219): Remove when Renderer is converted to idiomatic Kotlin.
+  fun renderedSource(fn: Renderer.() -> Unit): Source =
+    source(SourceBuilder().also { copy(sourceBuilder = it).fn() }.build())
 
   fun renderNewLine() {
     sourceBuilder.newLine()

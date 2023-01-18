@@ -42,9 +42,6 @@ operator fun Source.plus(source: Source) =
     source.appendTo(it)
   }
 
-val Source.plusColon
-  get() = this + source(":")
-
 val Source.plusSemicolon
   get() = this + source(";")
 
@@ -73,6 +70,9 @@ fun inCurlyBrackets(source: Source) =
     it.closeBrace()
   }
 
+fun block(source: Source) =
+  if (source.isEmpty) inCurlyBrackets(emptySource) else inCurlyBrackets(inNewLine(source))
+
 fun join(sources: Iterable<Source>) =
   Source(sources.all { it.isEmpty }) { sources.forEach<Source>(it::append) }
 
@@ -91,9 +91,13 @@ fun spaceSeparated(sources: Iterable<Source>) = " " separated sources
 
 fun commaSeparated(sources: Iterable<Source>) = ", " separated sources
 
+fun commaAndNewLineSeparated(sources: Iterable<Source>) = ",\n" separated sources
+
 fun dotSeparated(sources: Iterable<Source>) = "." separated sources
 
 fun ampersandSeparated(sources: Iterable<Source>) = " & " separated sources
+
+fun colonSeparated(sources: Iterable<Source>) = ": " separated sources
 
 fun newLineSeparated(sources: Iterable<Source>) = "\n" separated sources
 
@@ -101,26 +105,28 @@ fun emptyLineSeparated(sources: Iterable<Source>) = "\n\n" separated sources
 
 fun inNewLines(sources: Iterable<Source>) = join(sources.map(::inNewLine))
 
-fun join(source: Source, vararg sources: Source) = join(listOfNotNull(source, *sources))
+fun join(source: Source, vararg sources: Source) = join(listOf(source, *sources))
 
 fun spaceSeparated(source: Source, vararg sources: Source) =
-  spaceSeparated(listOfNotNull(source, *sources))
+  spaceSeparated(listOf(source, *sources))
 
 fun commaSeparated(source: Source, vararg sources: Source) =
-  commaSeparated(listOfNotNull(source, *sources))
+  commaSeparated(listOf(source, *sources))
 
-fun dotSeparated(source: Source, vararg sources: Source) =
-  dotSeparated(listOfNotNull(source, *sources))
+fun dotSeparated(source: Source, vararg sources: Source) = dotSeparated(listOf(source, *sources))
 
 fun ampersandSeparated(source: Source, vararg sources: Source) =
-  ampersandSeparated(listOfNotNull(source, *sources))
+  ampersandSeparated(listOf(source, *sources))
+
+fun colonSeparated(source: Source, vararg sources: Source) =
+  colonSeparated(listOf(source, *sources))
 
 fun newLineSeparated(source: Source, vararg sources: Source) =
-  newLineSeparated(listOfNotNull(source, *sources))
+  newLineSeparated(listOf(source, *sources))
 
 fun emptyLineSeparated(source: Source, vararg sources: Source) =
-  emptyLineSeparated(listOfNotNull(source, *sources))
+  emptyLineSeparated(listOf(source, *sources))
 
-fun inNewLines(source: Source, vararg sources: Source) = inNewLines(listOfNotNull(source, *sources))
+fun inNewLines(source: Source, vararg sources: Source) = inNewLines(listOf(source, *sources))
 
 fun infix(lhs: Source, operator: String, rhs: Source) = spaceSeparated(lhs, source(operator), rhs)

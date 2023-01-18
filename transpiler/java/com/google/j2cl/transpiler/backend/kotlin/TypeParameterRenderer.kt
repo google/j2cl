@@ -21,12 +21,12 @@ import com.google.j2cl.transpiler.ast.KtVariance
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.plusColon
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
@@ -82,7 +82,7 @@ private val TypeVariable.whereClauseItems: List<WhereClauseItem>
     upperBoundTypeDescriptors.takeIf { it.size > 1 }?.map { WhereClauseItem(this, it) } ?: listOf()
 
 private fun Renderer.source(whereClauseItem: WhereClauseItem): Source =
-  spaceSeparated(
-    nameSource(whereClauseItem.hasName).plusColon,
+  colonSeparated(
+    nameSource(whereClauseItem.hasName),
     typeDescriptorSource(whereClauseItem.boundTypeDescriptor)
   )
