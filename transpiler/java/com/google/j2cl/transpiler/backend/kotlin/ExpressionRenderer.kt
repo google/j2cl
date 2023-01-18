@@ -58,8 +58,13 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.VariableReference
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.afterSpace
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
+
+fun Renderer.expressionSource(expression: Expression): Source = renderedSource {
+  renderExpression(expression)
+}
 
 fun Renderer.renderExpression(expression: Expression) {
   when (expression) {
@@ -329,6 +334,10 @@ private fun Renderer.renderInvocationTypeArguments(typeArguments: List<TypeArgum
   }
 }
 
+internal fun Renderer.invocationSource(invocation: Invocation) = renderedSource {
+  renderInvocation(invocation)
+}
+
 internal fun Renderer.renderInvocation(invocation: Invocation) {
   renderInParentheses {
     // Take last argument if it's an array literal passed as a vararg parameter.
@@ -516,8 +525,7 @@ private fun Renderer.renderThisReference(thisReference: ThisReference) {
 }
 
 private fun Renderer.renderLabelReference(typeDescriptor: DeclaredTypeDescriptor) {
-  render("@")
-  render(identifierSource(typeDescriptor.typeDeclaration.ktSimpleName))
+  render(at(identifierSource(typeDescriptor.typeDeclaration.ktSimpleName)))
 }
 
 private fun Renderer.renderVariableDeclarationExpression(

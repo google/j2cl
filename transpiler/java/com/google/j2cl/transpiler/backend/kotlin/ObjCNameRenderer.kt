@@ -33,10 +33,9 @@ import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 
 internal fun Renderer.optInExperimentalObjCNameFileAnnotationSource(): Source =
@@ -53,18 +52,17 @@ internal fun Renderer.optInExperimentalObjCNameFileAnnotationSource(): Source =
 
 internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
   join(
-    source("@"),
-    topLevelQualifiedNameSource("kotlin.native.ObjCName"),
+    at(topLevelQualifiedNameSource("kotlin.native.ObjCName")),
     inRoundBrackets(
       commaSeparated(
         literalSource(name),
-        exact?.let { parameterSource("exact", literalSource(it)) }.orEmpty
+        exact.ifNotNullSource { parameterSource("exact", literalSource(it)) }
       )
     )
   )
 
 private fun parameterSource(name: String, valueSource: Source): Source =
-  infix(source(name), "=", valueSource)
+  assignment(source(name), valueSource)
 
 internal data class MethodObjCNames(
   val methodName: String? = null,

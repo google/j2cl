@@ -24,18 +24,17 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 internal fun Renderer.typeParametersSource(typeVariables: List<TypeVariable>): Source =
-  inAngleBrackets(commaSeparated(typeVariables.map(::typeParameterSource)))
+  commaSeparated(typeVariables.map(::typeParameterSource)).ifNotEmpty(::inAngleBrackets)
 
 internal fun Renderer.whereClauseSource(typeVariables: List<TypeVariable>): Source =
   whereClauseSource(
-    commaSeparated(typeVariables.map { it.whereClauseItems }.flatten().map(::source))
+    commaSeparated(typeVariables.map { it.whereClauseItems }.flatten().map { source(it) })
   )
 
 fun whereClauseSource(itemsSource: Source): Source =
@@ -51,22 +50,16 @@ internal val TypeVariable.upperBoundTypeDescriptors: List<TypeDescriptor>
 private fun Renderer.typeParameterSource(typeVariable: TypeVariable): Source =
   spaceSeparated(
     typeParameterVarianceSource(typeVariable),
-    join(nameSource(typeVariable), typeParameterBoundSource(typeVariable))
+    colonSeparated(nameSource(typeVariable), typeParameterBoundSource(typeVariable))
   )
 
 private fun Renderer.typeParameterBoundSource(typeVariable: TypeVariable): Source =
-  typeVariable.upperBoundTypeDescriptors
-    .singleOrNull()
-    ?.let { boundTypeDescriptor ->
-      spaceSeparated(
-        source(":"),
-        typeDescriptorSource(boundTypeDescriptor, projectRawToWildcards = true)
-      )
-    }
-    .orEmpty
+  typeVariable.upperBoundTypeDescriptors.singleOrNull().ifNotNullSource {
+    typeDescriptorSource(it, projectRawToWildcards = true)
+  }
 
 private fun typeParameterVarianceSource(typeVariable: TypeVariable): Source =
-  typeVariable.ktVariance?.identifier?.let { source(it) }.orEmpty
+  typeVariable.ktVariance?.identifier.ifNotNullSource { source(it) }
 
 private val KtVariance.identifier: String
   get() =

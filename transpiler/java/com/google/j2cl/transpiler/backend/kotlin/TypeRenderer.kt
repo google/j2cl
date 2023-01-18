@@ -32,12 +32,13 @@ import com.google.j2cl.transpiler.backend.kotlin.source.commaAndNewLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.plusSemicolon
 import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 fun Renderer.typeSource(type: Type): Source =
@@ -61,24 +62,24 @@ fun nativeTypeSource(type: TypeDeclaration): Source =
   comment(spaceSeparated(source("native"), source("class"), identifierSource(type.ktSimpleName)))
 
 fun Renderer.objCNameAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-  if (typeDeclaration.needsObjCNameAnnotation)
+  sourceIf(typeDeclaration.needsObjCNameAnnotation) {
     objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
-  else emptySource
+  }
 
 fun classModifiersSource(type: Type): Source =
-  if (
+  sourceIf(
     type.declaration.enclosingTypeDeclaration != null &&
       type.declaration.kind == Kind.CLASS &&
       !type.isStatic &&
       !type.declaration.isLocal
-  )
+  ) {
     source("inner")
-  else emptySource
+  }
 
 fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
-  if (typeDeclaration.isClass && !typeDeclaration.isFinal) {
+  sourceIf(typeDeclaration.isClass && !typeDeclaration.isFinal) {
     if (typeDeclaration.isAbstract) source("abstract") else source("open")
-  } else emptySource
+  }
 
 fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
   when (typeDeclaration.kind!!) {
@@ -88,15 +89,12 @@ fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
   }
 
 fun funModifierSource(typeDeclaration: TypeDeclaration): Source =
-  if (typeDeclaration.isKtFunctionalInterface) source("fun") else emptySource
+  sourceIf(typeDeclaration.isKtFunctionalInterface) { source("fun") }
 
 fun Renderer.typeDeclarationSource(declaration: TypeDeclaration): Source =
   join(
     identifierSource(declaration.ktSimpleName),
-    declaration.directlyDeclaredTypeParameterDescriptors
-      .takeIf { it.isNotEmpty() }
-      ?.let { typeParametersSource(it) }
-      .orEmpty
+    typeParametersSource(declaration.directlyDeclaredTypeParameterDescriptors)
   )
 
 private fun Renderer.superTypesSource(type: Type): Source =
@@ -109,16 +107,17 @@ private fun Renderer.superTypesSource(type: Type): Source =
 private fun Renderer.superTypeSource(type: Type, superTypeDescriptor: TypeDescriptor): Source =
   join(
     typeDescriptorSource(superTypeDescriptor.toNonNullable(), asSuperType = true),
-    if (superTypeDescriptor.isClass && type.constructors.isEmpty()) inRoundBrackets(emptySource)
-    else emptySource
+    sourceIf(superTypeDescriptor.isClass && type.constructors.isEmpty()) {
+      inRoundBrackets(emptySource)
+    }
   )
 
 internal fun Renderer.typeBodySource(type: Type): Source =
   forTypeBody(type).run {
     block(
       emptyLineSeparated(
-        if (type.isEnum) enumValuesSource(type) else emptySource,
-        emptyLineSeparated(type.kotlinMembers.map(::source))
+        sourceIf(type.isEnum) { enumValuesSource(type) },
+        emptyLineSeparated(type.kotlinMembers.map { source(it) })
       )
     )
   }
@@ -142,9 +141,8 @@ private fun Renderer.enumValueSource(field: Field): Source =
           identifierSource(field.descriptor.name!!),
           newInstance.arguments
             .takeIf { it.isNotEmpty() }
-            ?.let { renderedSource { renderInvocation(newInstance) } }
-            .orEmpty
+            .ifNotNullSource { invocationSource(newInstance) }
         ),
-        newInstance.anonymousInnerClass?.let(::typeBodySource).orEmpty
+        newInstance.anonymousInnerClass.ifNotNullSource(::typeBodySource)
       )
     }

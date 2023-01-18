@@ -16,6 +16,8 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 
 fun literalSource(it: Boolean): Source = source("$it")
@@ -23,3 +25,7 @@ fun literalSource(it: Boolean): Source = source("$it")
 fun literalSource(it: Char): Source = source(it.literalString)
 
 fun literalSource(it: String): Source = source(it.literalString)
+
+fun assignment(lhs: Source, rhs: Source): Source = infix(lhs, "=", rhs)
+
+fun at(source: Source) = join(source("@"), source)

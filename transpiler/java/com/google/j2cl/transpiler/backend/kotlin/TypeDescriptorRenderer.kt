@@ -26,11 +26,11 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.ampersandSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.orEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 internal fun Renderer.typeDescriptorSource(
@@ -100,7 +100,7 @@ private data class TypeDescriptorRenderer(
     join(
       renderer.qualifiedNameSource(arrayTypeDescriptor),
       arrayTypeDescriptor.componentTypeDescriptor.let {
-        if (!it.isPrimitive) inAngleBrackets(child.source(it)) else emptySource
+        sourceIf(!it.isPrimitive) { inAngleBrackets(child.source(it)) }
       },
       nullableSuffixSource(arrayTypeDescriptor)
     )
@@ -126,11 +126,10 @@ private data class TypeDescriptorRenderer(
     declaredTypeDescriptor
       .typeArguments(projectRawToWildcards = projectRawToWildcards)
       .takeIf { it.isNotEmpty() }
-      ?.let(::argumentsSource)
-      .orEmpty
+      .ifNotNullSource(::argumentsSource)
 
   fun argumentsSource(arguments: List<TypeArgument>): Source =
-    inAngleBrackets(commaSeparated(arguments.map(::source)))
+    inAngleBrackets(commaSeparated(arguments.map { source(it) }))
 
   fun source(typeArgument: TypeArgument): Source = child.source(typeArgument.typeDescriptor)
 
@@ -152,10 +151,10 @@ private data class TypeDescriptorRenderer(
       }
 
   fun intersectionSource(typeDescriptor: IntersectionTypeDescriptor): Source =
-    ampersandSeparated(typeDescriptor.intersectionTypeDescriptors.map(::source))
+    ampersandSeparated(typeDescriptor.intersectionTypeDescriptors.map { source(it) })
 
   fun nullableSuffixSource(typeDescriptor: TypeDescriptor): Source =
-    if (typeDescriptor.isNullable) source("?") else emptySource
+    sourceIf(typeDescriptor.isNullable) { source("?") }
 
   private fun withSeen(typeVariable: TypeVariable): TypeDescriptorRenderer =
     copy(seenTypeVariables = seenTypeVariables + typeVariable.toNonNullable())

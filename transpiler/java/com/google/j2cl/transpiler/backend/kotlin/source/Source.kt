@@ -27,8 +27,9 @@ fun SourceBuilder.append(source: Source) = source.appendTo(this)
 val emptySource
   get() = Source(isEmpty = true) {}
 
-val Source?.orEmpty
-  get() = this ?: emptySource
+fun <T> T?.ifNotNullSource(fn: (T) -> Source) = if (this != null) fn(this) else emptySource
+
+fun sourceIf(condition: Boolean, fn: () -> Source) = if (condition) fn() else emptySource
 
 fun Source.ifEmpty(fn: () -> Source) = if (isEmpty) fn() else this
 
@@ -70,6 +71,15 @@ fun inCurlyBrackets(source: Source) =
     it.closeBrace()
   }
 
+fun indented(source: Source) =
+  Source(source.isEmpty) { sourceBuilder ->
+    sourceBuilder.indent()
+    source.appendTo(sourceBuilder)
+    sourceBuilder.unindent()
+  }
+
+fun indentedIf(condition: Boolean, source: Source) = if (condition) indented(source) else source
+
 fun block(source: Source) =
   if (source.isEmpty) inCurlyBrackets(emptySource) else inCurlyBrackets(inNewLine(source))
 
@@ -103,8 +113,6 @@ fun newLineSeparated(sources: Iterable<Source>) = "\n" separated sources
 
 fun emptyLineSeparated(sources: Iterable<Source>) = "\n\n" separated sources
 
-fun inNewLines(sources: Iterable<Source>) = join(sources.map(::inNewLine))
-
 fun join(source: Source, vararg sources: Source) = join(listOf(source, *sources))
 
 fun spaceSeparated(source: Source, vararg sources: Source) =
@@ -115,9 +123,6 @@ fun commaSeparated(source: Source, vararg sources: Source) =
 
 fun dotSeparated(source: Source, vararg sources: Source) = dotSeparated(listOf(source, *sources))
 
-fun ampersandSeparated(source: Source, vararg sources: Source) =
-  ampersandSeparated(listOf(source, *sources))
-
 fun colonSeparated(source: Source, vararg sources: Source) =
   colonSeparated(listOf(source, *sources))
 
@@ -127,6 +132,4 @@ fun newLineSeparated(source: Source, vararg sources: Source) =
 fun emptyLineSeparated(source: Source, vararg sources: Source) =
   emptyLineSeparated(listOf(source, *sources))
 
-fun inNewLines(source: Source, vararg sources: Source) = inNewLines(listOf(source, *sources))
-
-fun infix(lhs: Source, operator: String, rhs: Source) = spaceSeparated(lhs, source(operator), rhs)
+fun infix(lhs: Source, operator: String, rhs: Source) = " $operator " separated listOf(lhs, rhs)

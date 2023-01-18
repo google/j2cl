@@ -22,7 +22,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 import com.google.j2cl.transpiler.backend.kotlin.source.ifEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.plusComma
@@ -65,7 +64,7 @@ fun nsEnumTypedef(name: String, type: Renderer<Source>, values: List<String>): R
         block(
           newLineSeparated(
             values.mapIndexed { index, name ->
-              infix(source(name), "=", source("$index")).plusComma
+              assignment(source(name), source("$index")).plusComma
             }
           )
         )
@@ -108,8 +107,8 @@ fun methodCall(
         if (argumentSources.isEmpty()) source(name)
         else
           spaceSeparated(
-            name.dropLast(1).split(":").zip(argumentSources).map { (name, argumentSource) ->
-              join(source(name), source(":"), argumentSource)
+            name.dropLast(1).split(":").zip(argumentSources).map {
+              parameter(source(it.first), it.second)
             }
           )
       )

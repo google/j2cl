@@ -56,6 +56,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.nsNumber
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsObject
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsString
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsUInteger
+import com.google.j2cl.transpiler.backend.kotlin.objc.pointer
 import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererOf
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererWith
@@ -67,7 +68,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.plus
 import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
@@ -89,7 +89,7 @@ private val CompilationUnit.declarationsRenderer: Renderer<Source>
   get() = declarationsRenderers.flatten.map(::emptyLineSeparated)
 
 private val CompilationUnit.declarationsRenderers: List<Renderer<Source>>
-  get() = allTypes.filter { it.shouldRender }.flatMap { it.declarationsRenderers }
+  get() = allTypes.filter { it.shouldRender }.flatMap(Type::declarationsRenderers)
 
 private val CompilationUnit.allTypes: List<Type>
   get() = streamTypes().collect(toList())
@@ -141,8 +141,7 @@ private val FieldDescriptor.enumGetExpressionRenderer: Renderer<Source>
     }
 
 private val Method.functionRenderer: Renderer<Source>
-  get() =
-    takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let { functionRenderer(it) } ?: empty
+  get() = takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let(::functionRenderer) ?: empty
 
 private val MethodDescriptor.shouldRender: Boolean
   get() =
@@ -253,9 +252,14 @@ private val DeclaredTypeDescriptor.declaredObjCRenderer: Renderer<Source>
   get() =
     when {
       isJavaLangObject(this) -> id
-      isInterface ->
-        typeDeclaration.objCNameRenderer.map { join(source("id"), inAngleBrackets(it)) }
-      else -> typeDeclaration.objCNameRenderer.map { it + source("*") }
+      isInterface -> interfaceObjCRenderer
+      else -> typeDeclaration.objCNameRenderer.map(::pointer)
+    }
+
+private val DeclaredTypeDescriptor.interfaceObjCRenderer: Renderer<Source>
+  get() =
+    map2(id, typeDeclaration.objCNameRenderer) { idSource, typeSource ->
+      join(idSource, inAngleBrackets(typeSource))
     }
 
 private val j2ObjCTypesImport: Import

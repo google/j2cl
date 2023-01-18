@@ -36,9 +36,18 @@ import com.google.j2cl.transpiler.ast.ThrowStatement
 import com.google.j2cl.transpiler.ast.TryStatement
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.WhileStatement
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
+
+internal fun Renderer.statementsSource(statements: List<Statement>): Source =
+  newLineSeparated(statements.map(::statementSource))
 
 internal fun Renderer.renderStatements(statements: List<Statement>) {
   renderStartingWithNewLines(statements) { renderStatement(it) }
+}
+
+fun Renderer.statementSource(statement: Statement): Source = renderedSource {
+  renderStatement(statement)
 }
 
 fun Renderer.renderStatement(statement: Statement) {
@@ -156,10 +165,7 @@ private fun Renderer.renderLocalClassDeclarationStatement(
 
 private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
   render("return")
-  currentReturnLabelIdentifier?.let {
-    render("@")
-    render(identifierSource(it))
-  }
+  currentReturnLabelIdentifier?.let { render(at(identifierSource(it))) }
   returnStatement.expression?.let {
     render(" ")
     renderExpression(it)

@@ -19,7 +19,10 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.inDoubleQuotes
+import com.google.j2cl.transpiler.backend.kotlin.source.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.plus
 import com.google.j2cl.transpiler.backend.kotlin.source.plusSemicolon
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
@@ -27,6 +30,12 @@ import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 fun comment(source: Source): Source = spaceSeparated(source("//"), source)
 
 fun semicolonEnded(source: Source): Source = source.plusSemicolon
+
+fun assignment(lhs: Source, rhs: Source): Source = infix(lhs, "=", rhs)
+
+fun parameter(name: Source, value: Source): Source = join(name, source(":"), value)
+
+fun pointer(source: Source) = source + source("*")
 
 fun dependenciesSource(dependencies: Iterable<Dependency>): Source =
   emptyLineSeparated(
@@ -46,8 +55,8 @@ fun forwardDeclarationsSource(forwardDeclarations: List<ForwardDeclaration>): So
       .groupBy { it.kind }
       .entries
       .sortedBy { it.key }
-      .map { it.value.sortedBy(ForwardDeclaration::name) }
-      .map { newLineSeparated(it.map(ForwardDeclaration::source)) }
+      .map { it.value.sortedBy { it.name } }
+      .map { newLineSeparated(it.map { it.source }) }
   )
 
 val ForwardDeclaration.source: Source
