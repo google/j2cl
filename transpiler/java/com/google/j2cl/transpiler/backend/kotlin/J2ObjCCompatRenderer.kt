@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.empty
+import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.flatten
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.objc.id
@@ -57,6 +58,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.nsObject
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsString
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsUInteger
 import com.google.j2cl.transpiler.backend.kotlin.objc.pointer
+import com.google.j2cl.transpiler.backend.kotlin.objc.propertyGet
 import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererOf
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererWith
@@ -95,7 +97,7 @@ private val CompilationUnit.allTypes: List<Type>
   get() = streamTypes().collect(toList())
 
 private val Type.shouldRender: Boolean
-  get() = !visibility.isPrivate && !declaration.isKtNative
+  get() = visibility.isPublic && !declaration.isKtNative
 
 private val Type.declarationsRenderers: List<Renderer<Source>>
   get() =
@@ -105,7 +107,8 @@ private val Type.declarationsRenderers: List<Renderer<Source>>
         addAll(enumGetFunctionRenderers)
       }
 
-      addAll(methods.map { it.functionRenderer })
+      // TODO(b/263471576): Static methods are not generated for now.
+      // addAll(methods.map { it.functionRenderer })
     }
 
 private val Type.nsEnumTypedefRenderer: Renderer<Source>
@@ -183,12 +186,13 @@ private fun MethodDescriptor.functionName(objCNames: MethodObjCNames): String =
     }
 
 private fun Method.statementRenderers(objCNames: MethodObjCNames): List<Renderer<Source>> =
-  if (isPrimitiveVoid(descriptor.returnTypeDescriptor)) listOf()
+  if (isPrimitiveVoid(descriptor.returnTypeDescriptor))
+    listOf(expressionStatement(methodCallRenderer(objCNames)))
   else listOf(returnStatement(methodCallRenderer(objCNames)))
 
 private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Source> =
   methodCall(
-    target = descriptor.enclosingTypeDescriptor.typeDeclaration.objCNameRenderer,
+    target = descriptor.enclosingTypeDescriptor.typeDeclaration.companionRenderer,
     name = objCNames.objCName(descriptor.ktName),
     arguments = parameters.map { it.nameRenderer }
   )
@@ -208,6 +212,9 @@ private val Variable.renderer: Renderer<Source>
 
 private val Variable.nameRenderer: Renderer<Source>
   get() = rendererOf(source(name.objCName))
+
+private val TypeDeclaration.companionRenderer: Renderer<Source>
+  get() = propertyGet(objCNameRenderer, "companion")
 
 private val TypeDeclaration.objCNameRenderer: Renderer<Source>
   get() = objectiveCNameRenderer ?: mappedObjCNameRenderer ?: defaultObjCNameRenderer

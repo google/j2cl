@@ -38,8 +38,7 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 
   private fun generateOutputs(compilationUnit: CompilationUnit) {
     generateKtOutputs(compilationUnit)
-    // TODO(b/263416948): Uncomment after cl/501829004 is submitted.
-    // generateObjCOutputs(compilationUnit)
+    generateObjCOutputs(compilationUnit)
   }
 
   private fun generateKtOutputs(compilationUnit: CompilationUnit) {

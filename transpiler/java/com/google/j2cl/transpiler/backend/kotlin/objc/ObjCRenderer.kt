@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin.objc
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.block
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 import com.google.j2cl.transpiler.backend.kotlin.source.ifEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
@@ -115,8 +116,14 @@ fun methodCall(
     )
   }
 
+fun propertyGet(target: Renderer<Source>, name: String): Renderer<Source> =
+  target.map { dotSeparated(it, source(name)) }
+
 fun block(statements: List<Renderer<Source>> = listOf()): Renderer<Source> =
   statements.flatten.map { block(newLineSeparated(it)) }
 
 fun returnStatement(expression: Renderer<Source>): Renderer<Source> =
   expression.map { semicolonEnded(spaceSeparated(source("return"), it)) }
+
+fun expressionStatement(expression: Renderer<Source>): Renderer<Source> =
+  expression.map { semicolonEnded(it) }
