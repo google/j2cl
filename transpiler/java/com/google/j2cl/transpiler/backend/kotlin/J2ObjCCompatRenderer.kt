@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.common.base.CaseFormat
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
@@ -26,6 +27,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
@@ -42,6 +44,8 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.objc.id
 import com.google.j2cl.transpiler.backend.kotlin.objc.localImport
 import com.google.j2cl.transpiler.backend.kotlin.objc.map
+import com.google.j2cl.transpiler.backend.kotlin.objc.map2
+import com.google.j2cl.transpiler.backend.kotlin.objc.methodCall
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsCopying
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsEnumTypedef
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsInline
@@ -63,9 +67,11 @@ import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.plus
 import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
+import java.util.stream.Collectors.toList
 
 internal val CompilationUnit.j2ObjCCompatHeaderSource: Source
   get() =
@@ -83,15 +89,17 @@ private val CompilationUnit.declarationsRenderer: Renderer<Source>
   get() = declarationsRenderers.flatten.map(::emptyLineSeparated)
 
 private val CompilationUnit.declarationsRenderers: List<Renderer<Source>>
-  get() = types.flatMap { it.declarationsRenderers }
+  get() = allTypes.filter { it.shouldRender }.flatMap { it.declarationsRenderers }
+
+private val CompilationUnit.allTypes: List<Type>
+  get() = streamTypes().collect(toList())
+
+private val Type.shouldRender: Boolean
+  get() = !visibility.isPrivate && !declaration.isKtNative
 
 private val Type.declarationsRenderers: List<Renderer<Source>>
   get() =
     buildList<Renderer<Source>> {
-      if (visibility.isPrivate || declaration.isKtNative) {
-        return@buildList
-      }
-
       if (isEnum) {
         add(nsEnumTypedefRenderer)
         addAll(enumGetFunctionRenderers)
@@ -134,8 +142,24 @@ private val FieldDescriptor.enumGetExpressionRenderer: Renderer<Source>
 
 private val Method.functionRenderer: Renderer<Source>
   get() =
-    takeIf { it.isStatic && !it.isConstructor }?.toObjCNames()?.let { functionRenderer(it) }
-      ?: empty
+    takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let { functionRenderer(it) } ?: empty
+
+private val MethodDescriptor.shouldRender: Boolean
+  get() =
+    enclosingTypeDescriptor.isClass &&
+      isStatic &&
+      !isConstructor &&
+      returnTypeDescriptor.existsInObjC &&
+      parameterTypeDescriptors.all { it.existsInObjC }
+
+private val TypeDescriptor.existsInObjC: Boolean
+  get() =
+    when (this) {
+      is DeclaredTypeDescriptor ->
+        !typeDeclaration.isKtNative && !isAssignableTo(TypeDescriptors.get().javaUtilCollection)
+      is ArrayTypeDescriptor -> false
+      else -> true
+    }
 
 private fun Method.functionRenderer(objCNames: MethodObjCNames): Renderer<Source> =
   functionDeclaration(
@@ -143,7 +167,7 @@ private fun Method.functionRenderer(objCNames: MethodObjCNames): Renderer<Source
     returnType = descriptor.returnTypeDescriptor.objCRenderer,
     name = descriptor.functionName(objCNames),
     parameters = parameters.map { it.renderer },
-    statements = statementRenderers
+    statements = statementRenderers(objCNames)
   )
 
 private fun MethodDescriptor.functionName(objCNames: MethodObjCNames): String =
@@ -151,17 +175,40 @@ private fun MethodDescriptor.functionName(objCNames: MethodObjCNames): String =
     .objCName(useId = true, forMember = true)
     .plus("_")
     .plus(objCNames.methodName ?: ktName)
-    .letIf(objCNames.parameterNames.isNotEmpty()) {
-      it.plus("_").plus(objCNames.parameterNames.map { it + "_" }.joinToString(""))
+    .letIf(objCNames.parameterNames.isNotEmpty()) { parameterName ->
+      parameterName.plus(
+        objCNames.parameterNames
+          .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCase } + "_" }
+          .joinToString("")
+      )
     }
 
-private val Method.statementRenderers: List<Renderer<Source>>
-  get() =
-    if (isPrimitiveVoid(descriptor.returnTypeDescriptor)) listOf()
-    else listOf(returnStatement(rendererOf(source("0"))))
+private fun Method.statementRenderers(objCNames: MethodObjCNames): List<Renderer<Source>> =
+  if (isPrimitiveVoid(descriptor.returnTypeDescriptor)) listOf()
+  else listOf(returnStatement(methodCallRenderer(objCNames)))
+
+private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Source> =
+  methodCall(
+    target = descriptor.enclosingTypeDescriptor.typeDeclaration.objCNameRenderer,
+    name = objCNames.objCName(descriptor.ktName),
+    arguments = parameters.map { it.nameRenderer }
+  )
+
+private fun MethodObjCNames.objCName(defaultMethodName: String) =
+  (methodName
+    ?: defaultMethodName) +
+    parameterNames
+      .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCase } + ":" }
+      .joinToString("")
 
 private val Variable.renderer: Renderer<Source>
-  get() = typeDescriptor.objCRenderer.map { spaceSeparated(it, source(name.objCName)) }
+  get() =
+    map2(typeDescriptor.objCRenderer, nameRenderer) { typeSource, nameSource ->
+      spaceSeparated(typeSource, nameSource)
+    }
+
+private val Variable.nameRenderer: Renderer<Source>
+  get() = rendererOf(source(name.objCName))
 
 private val TypeDeclaration.objCNameRenderer: Renderer<Source>
   get() = objectiveCNameRenderer ?: mappedObjCNameRenderer ?: defaultObjCNameRenderer
@@ -208,7 +255,7 @@ private val DeclaredTypeDescriptor.declaredObjCRenderer: Renderer<Source>
       isJavaLangObject(this) -> id
       isInterface ->
         typeDeclaration.objCNameRenderer.map { join(source("id"), inAngleBrackets(it)) }
-      else -> typeDeclaration.objCNameRenderer.map { spaceSeparated(it, source("*")) }
+      else -> typeDeclaration.objCNameRenderer.map { it + source("*") }
     }
 
 private val j2ObjCTypesImport: Import

@@ -171,7 +171,7 @@ private fun String.objCPackagePrefix(forMember: Boolean): String =
     .split('.')
     .joinToString(separator = "") { it.titleCase.objCName }
 
-private val String.titleCase
+internal val String.titleCase
   get() = StringUtils.capitalize(this)
 
 internal val String.objCName
