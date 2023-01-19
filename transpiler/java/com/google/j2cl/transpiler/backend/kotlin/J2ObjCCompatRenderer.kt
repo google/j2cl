@@ -135,7 +135,20 @@ private val FieldDescriptor.enumGetFunctionName: String
   get() = enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_get_" + name!!
 
 private val FieldDescriptor.enumObjCName: String
-  get() = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, name!!)
+  get() =
+    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, name!!).let { name ->
+      if (name.startsWith("new") || name.startsWith("copy")) "the" + name.titleCase
+      else
+        when (name) {
+          "default",
+          "continue",
+          "struct",
+          "delete",
+          "inline",
+          "register" -> name + "_"
+          else -> name
+        }
+    }
 
 private val FieldDescriptor.enumGetExpressionRenderer: Renderer<Source>
   get() =
