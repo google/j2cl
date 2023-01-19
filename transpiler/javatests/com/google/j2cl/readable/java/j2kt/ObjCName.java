@@ -43,4 +43,26 @@ public class ObjCName {
   public void foo(String s, int i) {}
 
   public void foo(String s, String i) {}
+
+  public static void allocFoo() {}
+
+  public static void initFoo() {}
+
+  public static void newFoo() {}
+
+  public static void copyFoo() {}
+
+  public static void mutableCopyFoo() {}
+
+  public static void params(int extern, int struct, int register, int inline) {}
+
+  public enum Foo {
+    allocFoo,
+    initFoo,
+    newFoo,
+    copyFoo,
+    mutableCopyFoo,
+    register,
+    struct
+  }
 }

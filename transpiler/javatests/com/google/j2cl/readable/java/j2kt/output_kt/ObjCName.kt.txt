@@ -8,6 +8,7 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
 
 @kotlin.native.ObjCName("NewObjCName", exact = true)
 open class ObjCName {
@@ -44,6 +45,49 @@ open class ObjCName {
   @kotlin.native.ObjCName("withNSString", exact = false) i: String?
  ) {}
 
+ companion object {
+  @JvmStatic
+  fun allocFoo() {}
+
+  @JvmStatic
+  fun initFoo() {}
+
+  @JvmStatic
+  fun newFoo() {}
+
+  @JvmStatic
+  fun copyFoo() {}
+
+  @JvmStatic
+  fun mutableCopyFoo() {}
+
+  @JvmStatic
+  fun params(
+   @kotlin.native.ObjCName("withInt", exact = false) extern: Int,
+   @kotlin.native.ObjCName("withInt", exact = false) struct: Int,
+   @kotlin.native.ObjCName("withInt", exact = false) register: Int,
+   @kotlin.native.ObjCName("withInt", exact = false) inline: Int
+  ) {}
+ }
+
  @kotlin.native.ObjCName("InnerClassNewName", exact = true)
  open inner class InnerClassOldName {}
+
+ @kotlin.native.ObjCName("NewObjCName_Foo", exact = true)
+ enum class Foo {
+  @kotlin.native.ObjCName("allocFoo", exact = false)
+  allocFoo,
+  @kotlin.native.ObjCName("initFoo", exact = false)
+  initFoo,
+  @kotlin.native.ObjCName("newFoo", exact = false)
+  newFoo,
+  @kotlin.native.ObjCName("copyFoo", exact = false)
+  copyFoo,
+  @kotlin.native.ObjCName("mutableCopyFoo", exact = false)
+  mutableCopyFoo,
+  @kotlin.native.ObjCName("register", exact = false)
+  register,
+  @kotlin.native.ObjCName("struct", exact = false)
+  struct;
+ }
 }
