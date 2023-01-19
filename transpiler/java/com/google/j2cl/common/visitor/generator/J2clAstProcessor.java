@@ -38,9 +38,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.annotation.Annotation;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
 import javax.annotation.processing.AbstractProcessor;
@@ -58,8 +59,6 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
 
 /**
  * The J2clAstProcessor emits a single AbstractVisitor class and a Visitor helper class for each
@@ -252,8 +251,8 @@ public class J2clAstProcessor extends AbstractProcessor {
     }
   }
 
-  private VelocityContext createVelocityContextForVisitorHelper(VisitableClass visitableClass) {
-    VelocityContext vc = new VelocityContext();
+  private Map<String, ?> createVelocityContextForVisitorHelper(VisitableClass visitableClass) {
+    Map<String, Object> vc = new HashMap<>();
     vc.put("className", visitableClass.simpleName);
     vc.put("packageName", visitableClass.packageName);
     vc.put("fields", visitableClass.fields);
@@ -270,19 +269,15 @@ public class J2clAstProcessor extends AbstractProcessor {
   private final SetMultimap<String, VisitableClass> processedVisitableClassesByPackageName =
       LinkedHashMultimap.create();
 
-  private static final String ABSTRACT_VISITOR_TEMPLATE_FILE =
-      "com/google/j2cl/common/visitor/generator/AbstractVisitorClass.vm";
+  private final VelocityRenderer velocityRenderer = new VelocityRenderer(getClass());
 
-  private static final String ABSTRACT_REWRITER_TEMPLATE_FILE =
-      "com/google/j2cl/common/visitor/generator/AbstractRewriterClass.vm";
+  private static final String ABSTRACT_VISITOR_TEMPLATE_FILE = "AbstractVisitorClass.vm";
 
-  private static final String PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE =
-      "com/google/j2cl/common/visitor/generator/ProcessorPrivateClass.vm";
+  private static final String ABSTRACT_REWRITER_TEMPLATE_FILE = "AbstractRewriterClass.vm";
 
-  private static final String VISITABLE_CLASS_TEMPLATE_FILE =
-      "com/google/j2cl/common/visitor/generator/Visitable_Class.vm";
+  private static final String PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE = "ProcessorPrivateClass.vm";
 
-  private static final VelocityEngine velocityEngine = VelocityUtil.createEngine();
+  private static final String VISITABLE_CLASS_TEMPLATE_FILE = "Visitable_Class.vm";
 
   public J2clAstProcessor() {}
 
@@ -291,9 +286,9 @@ public class J2clAstProcessor extends AbstractProcessor {
     return ImmutableSet.of();
   }
 
-  private VelocityContext createVelocityContextForVisitor(
+  private Map<String, ?> createVelocityContextForVisitor(
       String packageName, List<VisitableClass> visitableClasses) {
-    VelocityContext vc = new VelocityContext();
+    Map<String, Object> vc = new HashMap<>();
     vc.put("classes", visitableClasses);
     vc.put("packageName", packageName);
     return vc;
@@ -385,7 +380,7 @@ public class J2clAstProcessor extends AbstractProcessor {
 
   private void processType(TypeElement type) {
     VisitableClass visitableClass = extractVisitableClass(type);
-    writeVisitableClasssHelper(visitableClass);
+    writeVisitableClassHelper(visitableClass);
     processedVisitableClassesByPackageName.put(visitableClass.packageName, visitableClass);
   }
 
@@ -409,20 +404,15 @@ public class J2clAstProcessor extends AbstractProcessor {
     }
   }
 
-  private void writeVisitableClasssHelper(VisitableClass visitableClass) {
+  private void writeVisitableClassHelper(VisitableClass visitableClass) {
     boolean success = false;
     try {
-      VelocityContext velocityContext = createVelocityContextForVisitorHelper(visitableClass);
-      StringWriter writer = new StringWriter();
-
-      success =
-          velocityEngine.mergeTemplate(
-              VISITABLE_CLASS_TEMPLATE_FILE,
-              StandardCharsets.UTF_8.name(),
-              velocityContext,
-              writer);
+      String renderedTemplate =
+          velocityRenderer.renderTemplate(
+              VISITABLE_CLASS_TEMPLATE_FILE, createVelocityContextForVisitorHelper(visitableClass));
       writeString(
-          visitableClass.packageName + ".Visitor_" + visitableClass.simpleName, writer.toString());
+          visitableClass.packageName + ".Visitor_" + visitableClass.simpleName, renderedTemplate);
+      success = true;
     } catch (IOException e) {
       success = false;
     } finally {
@@ -440,14 +430,11 @@ public class J2clAstProcessor extends AbstractProcessor {
 
     boolean success = false;
     try {
-      VelocityContext velocityContext =
-          createVelocityContextForVisitor(packageName, visitableClasses);
-      StringWriter writer = new StringWriter();
-
-      success =
-          velocityEngine.mergeTemplate(
-              templateName, StandardCharsets.UTF_8.name(), velocityContext, writer);
-      writeString(Joiner.on('.').join(packageName, className), writer.toString());
+      String renderedTemplate =
+          velocityRenderer.renderTemplate(
+              templateName, createVelocityContextForVisitor(packageName, visitableClasses));
+      writeString(Joiner.on('.').join(packageName, className), renderedTemplate);
+      success = true;
     } catch (Throwable e) {
       StringWriter stringWriter = new StringWriter();
       e.printStackTrace(new PrintWriter(stringWriter));

@@ -10,8 +10,8 @@ java_library(
     deps = [
         "//third_party:auto_common",
         "//third_party:auto_service",
+        "//third_party:escapevelocity",
         "//third_party:guava",
-        "//third_party:jakarta_velocity",
         "//third_party:jsr305_annotations",
         "//transpiler/java/com/google/j2cl/common/visitor:visitor-internal",
     ],

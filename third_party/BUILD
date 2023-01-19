@@ -112,13 +112,9 @@ alias(
 )
 
 java_library(
-    name = "jakarta_velocity",
+    name = "escapevelocity",
     exports = [
-        "@org_apache_velocity//jar",
-    ],
-    runtime_deps = [
-        "@org_apache_commons_collections//jar",
-        "@org_apache_commons_lang2//jar",
+        "@com_google_escapevelocity//jar",
     ],
 )
 

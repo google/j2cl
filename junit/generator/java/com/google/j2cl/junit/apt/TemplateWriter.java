@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.junit.apt;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.stream.Collectors.joining;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,15 +28,13 @@ import java.util.List;
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Element;
 import javax.tools.StandardLocation;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
 
 class TemplateWriter {
   private static final ImmutableSet<String> VALID_PLATFORMS =
       ImmutableSet.of("CLOSURE", "WASM", "J2KT-JVM", "J2KT-NATIVE");
 
   private final List<String> testSummary = new ArrayList<>();
-  private final VelocityEngine velocityEngine = J2clTestingVelocityUtil.createEngine();
+  private final VelocityRenderer velocityRenderer = new VelocityRenderer(getClass());
   private final ErrorReporter errorReporter;
   private final Filer filer;
   private final String testPlatform;
@@ -72,8 +70,7 @@ class TemplateWriter {
     String testSuiteFileName = testClass.qualifiedName().replace('.', '/');
     if (testPlatform.startsWith("J2KT")) {
       try {
-        String mergedKotlinTemplate =
-            mergeTemplate(testClass, "com/google/j2cl/junit/apt/KotlinJUnitAdapter.vm");
+        String mergedKotlinTemplate = mergeTemplate(testClass, "KotlinJUnitAdapter.vm");
         writeResource(testSuiteFileName + ".kt", mergedKotlinTemplate);
       } catch (Exception e) {
         errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(e));
@@ -82,11 +79,11 @@ class TemplateWriter {
     }
 
     testSummary.add(testSuiteFileName + ".js");
-    String jsSuite = "com/google/j2cl/junit/apt/JsSuite.vm";
-    String jsUnitAdapter = "com/google/j2cl/junit/apt/JsUnitAdapter.vm";
+    String jsSuite = "JsSuite.vm";
+    String jsUnitAdapter = "JsUnitAdapter.vm";
     if (testPlatform.equals("WASM")) {
-      jsSuite = "com/google/j2cl/junit/apt/WasmJsSuite.vm";
-      jsUnitAdapter = "com/google/j2cl/junit/apt/WasmJsUnitAdapter.vm";
+      jsSuite = "WasmJsSuite.vm";
+      jsUnitAdapter = "WasmJsUnitAdapter.vm";
     }
     try {
       String mergedJsTemplate = mergeTemplate(testClass, jsSuite);
@@ -105,40 +102,21 @@ class TemplateWriter {
     }
 
     String testSuiteFileName = testClass.qualifiedName().replace('.', '/');
-    VelocityContext velocityContext = new VelocityContext();
-    velocityContext.put("testClass", testClass);
-    velocityContext.put("actualTestClasses", actualTestClasses);
-    StringWriter outputBuffer = new StringWriter();
-
+    ImmutableMap<String, Object> velocityContext =
+        ImmutableMap.of(
+            "testClass", testClass,
+            "actualTestClasses", actualTestClasses);
     try {
-      boolean success =
-          velocityEngine.mergeTemplate(
-              "com/google/j2cl/junit/apt/J2ktJvmJUnitTestSuiteAdapter.vm",
-              UTF_8.name(),
-              velocityContext,
-              outputBuffer);
-      if (!success) {
-        throw new Exception("Unable to merge velocity template");
-      }
-
-      writeResource(testSuiteFileName + "_Adapter.kt", outputBuffer.toString());
-    } catch (Exception e) {
-      errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(e));
+      String renderedTemplate =
+          velocityRenderer.renderTemplate("J2ktJvmJUnitTestSuiteAdapter.vm", velocityContext);
+      writeResource(testSuiteFileName + "_Adapter.kt", renderedTemplate);
+    } catch (IOException ex) {
+      errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(ex));
     }
   }
 
-  private String mergeTemplate(TestClass testClass, String template) throws Exception {
-    VelocityContext velocityContext = new VelocityContext();
-    velocityContext.put("testClass", testClass);
-    StringWriter outputBuffer = new StringWriter();
-
-    boolean success =
-        velocityEngine.mergeTemplate(template, UTF_8.name(), velocityContext, outputBuffer);
-
-    if (!success) {
-      throw new Exception("Unable to merge velocity template");
-    }
-    return outputBuffer.toString();
+  private String mergeTemplate(TestClass testClass, String template) throws IOException {
+    return velocityRenderer.renderTemplate(template, ImmutableMap.of("testClass", testClass));
   }
 
   private void writeResource(String qualifiedName, String content) throws IOException {

@@ -89,6 +89,14 @@ def setup_j2cl_workspace(**kwargs):
     )
 
     jvm_maven_import_external(
+        name = "com_google_escapevelocity",
+        artifact = "com.google.escapevelocity:escapevelocity:1.0",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
+        artifact_sha256 = "be02c045358f367b84ae72adb65104766a9e274124e2eb8d13106ce5c1519692",
+    )
+
+    jvm_maven_import_external(
         name = "org_junit",
         artifact = "junit:junit:4.13.2",
         server_urls = _MAVEN_CENTRAL_URLS,
