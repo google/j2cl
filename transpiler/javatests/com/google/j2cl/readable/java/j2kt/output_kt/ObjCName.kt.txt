@@ -4,7 +4,9 @@
 package j2kt
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Int
+import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
@@ -47,7 +49,13 @@ open class ObjCName {
 
  companion object {
   @JvmStatic
+  fun alloc() {}
+
+  @JvmStatic
   fun allocFoo() {}
+
+  @JvmStatic
+  fun allocatedFoo() {}
 
   @JvmStatic
   fun initFoo() {}
@@ -62,12 +70,21 @@ open class ObjCName {
   fun mutableCopyFoo() {}
 
   @JvmStatic
-  fun params(
+  fun reservedParamNames(
    @kotlin.native.ObjCName("withInt", exact = false) extern: Int,
    @kotlin.native.ObjCName("withInt", exact = false) struct: Int,
    @kotlin.native.ObjCName("withInt", exact = false) register: Int,
    @kotlin.native.ObjCName("withInt", exact = false) inline: Int
   ) {}
+
+  @JvmStatic
+  fun nativeTypes(
+   @kotlin.native.ObjCName("withNSString", exact = false) s: String?,
+   @kotlin.native.ObjCName("withId", exact = false) o: Any?,
+   @kotlin.native.ObjCName("withNSNumber", exact = false) n: Number?
+  ): String? {
+   return s
+  }
  }
 
  @kotlin.native.ObjCName("InnerClassNewName", exact = true)
@@ -95,5 +112,14 @@ open class ObjCName {
   YES,
   @kotlin.native.ObjCName("NO", exact = false)
   NO;
+
+  companion object {
+   @JvmStatic
+   fun withOrdinal(
+    @kotlin.native.ObjCName("withInt", exact = false) ordinal: Int
+   ): ObjCName.Foo? {
+    return ObjCName.Foo.values()!![ordinal]
+   }
+  }
  }
 }

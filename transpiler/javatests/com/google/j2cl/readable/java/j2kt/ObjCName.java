@@ -44,7 +44,11 @@ public class ObjCName {
 
   public void foo(String s, String i) {}
 
+  public static void alloc() {}
+
   public static void allocFoo() {}
+
+  public static void allocatedFoo() {}
 
   public static void initFoo() {}
 
@@ -54,7 +58,11 @@ public class ObjCName {
 
   public static void mutableCopyFoo() {}
 
-  public static void params(int extern, int struct, int register, int inline) {}
+  public static void reservedParamNames(int extern, int struct, int register, int inline) {}
+
+  public static String nativeTypes(String s, Object o, Number n) {
+    return s;
+  }
 
   public enum Foo {
     allocFoo,
@@ -66,6 +74,10 @@ public class ObjCName {
     struct,
     NULL,
     YES,
-    NO
+    NO;
+
+    public static Foo withOrdinal(int ordinal) {
+      return Foo.values()[ordinal];
+    }
   }
 }
