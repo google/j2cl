@@ -24,4 +24,5 @@ val Type.companionObjectOrNull: CompanionObject?
     members
       .filter { it.isStatic && !it.isEnumField }
       .map { Member.WithJavaMember(it) }
-      .let { if (it.isNotEmpty()) CompanionObject(it) else null }
+      .takeIf { it.isNotEmpty() }
+      ?.let(::CompanionObject)
