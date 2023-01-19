@@ -12,6 +12,9 @@ typedef NS_ENUM(NSUInteger, NewObjCName_Foo_Enum) {
  NewObjCName_Foo_Enum_mutableCopyFoo = 4,
  NewObjCName_Foo_Enum_register = 5,
  NewObjCName_Foo_Enum_struct = 6,
+ NewObjCName_Foo_Enum_NULL = 7,
+ NewObjCName_Foo_Enum_YES = 8,
+ NewObjCName_Foo_Enum_NO = 9,
 };
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_allocFoo(void) {
@@ -40,4 +43,16 @@ NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_register(void) {
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_struct(void) {
  return NewObjCName_Foo.struct_;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NULL(void) {
+ return NewObjCName_Foo.NULL;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_YES(void) {
+ return NewObjCName_Foo.YES;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
+ return NewObjCName_Foo.NO;
 }

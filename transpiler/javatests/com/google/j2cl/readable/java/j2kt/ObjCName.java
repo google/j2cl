@@ -63,6 +63,9 @@ public class ObjCName {
     copyFoo,
     mutableCopyFoo,
     register,
-    struct
+    struct,
+    NULL,
+    YES,
+    NO
   }
 }
