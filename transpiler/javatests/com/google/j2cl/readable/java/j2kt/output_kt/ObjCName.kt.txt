@@ -29,14 +29,14 @@ open class ObjCName {
  @kotlin.native.ObjCName("newProtectedFoo", exact = false)
  open fun protectedFoo() {}
 
- @kotlin.native.ObjCName("newFoo", exact = false)
+ @kotlin.native.ObjCName("newFooFrom", exact = false)
  open fun newFoo(
-  @kotlin.native.ObjCName("FromInt", exact = false) i: Int
+  @kotlin.native.ObjCName("Int", exact = false) i: Int
  ) {}
 
- @kotlin.native.ObjCName("newFoo", exact = false)
+ @kotlin.native.ObjCName("newFooFrom", exact = false)
  open fun foo(
-  @kotlin.native.ObjCName("FromInt", exact = false) s: String?,
+  @kotlin.native.ObjCName("Int", exact = false) s: String?,
   @kotlin.native.ObjCName("withInteger", exact = false) i: Int
  ) {}
 

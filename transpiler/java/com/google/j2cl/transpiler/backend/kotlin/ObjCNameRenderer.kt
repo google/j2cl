@@ -127,25 +127,21 @@ private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
     if (objectiveCName == null || parameters.isEmpty()) {
       MethodObjCNames(objectiveCName, parameters.map { "with${it.objCName}" })
     } else {
-      val methodName = descriptor.name!!
-      val prefix = methodName.commonPrefixWith(objectiveCName)
       val objCParameterNames = objectiveCName.split(":")
       val firstObjCParameterName = objCParameterNames.firstOrNull()
       if (firstObjCParameterName == null) {
         MethodObjCNames(objectiveCName, objCParameterNames)
       } else {
-        // If possible, split method name and first parameter by shared prefix.
-        // Otherwise, split string in half arbitrarily. Does not handle single character objc name.
-        if (prefix.isNotEmpty() && prefix.length != firstObjCParameterName.length) {
-          MethodObjCNames(prefix, objCParameterNames.mapFirst { it.substring(prefix.length) })
-        } else {
-          check(firstObjCParameterName.length > 1)
-          val midIndex = firstObjCParameterName.length / 2
-          MethodObjCNames(
-            firstObjCParameterName.substring(0, midIndex),
-            objCParameterNames.mapFirst { it.substring(midIndex) }
-          )
-        }
+        // Split string by index of last uppercase or in half arbitrarily. Does not
+        // handle single character objc name.
+        check(firstObjCParameterName.length > 1)
+        val splitIndex =
+          firstObjCParameterName.indexOfLast { it.isUpperCase() }.takeIf { it > 0 }
+            ?: (firstObjCParameterName.length / 2)
+        MethodObjCNames(
+          firstObjCParameterName.substring(0, splitIndex),
+          objCParameterNames.mapFirst { it.substring(splitIndex) }
+        )
       }
     }
   }
