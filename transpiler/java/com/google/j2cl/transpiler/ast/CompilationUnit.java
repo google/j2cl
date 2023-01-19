@@ -15,8 +15,11 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.base.Suppliers;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.visitor.Context;
 import com.google.j2cl.common.visitor.Processor;
@@ -24,7 +27,9 @@ import com.google.j2cl.common.visitor.Visitable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 
 /**
  * A model class that represents a Java Compilation Unit.
@@ -32,25 +37,46 @@ import java.util.stream.Stream;
 @Visitable
 @Context
 public class CompilationUnit extends Node {
-  private final String filePath;
+
+  public static CompilationUnit createForFile(String filePath, String packageName) {
+    return new CompilationUnit(filePath, packageName, /* isSynthetic= */ false);
+  }
+
+  public static CompilationUnit createSynthetic(String packageName) {
+    return new CompilationUnit(/* filePath= */ null, packageName, /* isSynthetic= */ true);
+  }
+
+  @Nullable private final String filePath;
   private final String packageName;
-  private final String packageRelativePath;
+  private final Supplier<String> packageRelativePathSupplier;
+  private final boolean isSynthetic;
   private boolean flattened = false;
 
   @Visitable List<Type> types = new ArrayList<>();
 
-  public CompilationUnit(String filePath, String packageName) {
-    this.filePath = checkNotNull(filePath);
+  private CompilationUnit(@Nullable String filePath, String packageName, boolean isSynthetic) {
+    checkArgument(
+        isSynthetic ^ filePath != null,
+        "A compilation must be synthetic or have a corresponding file path, but not both.");
+    this.filePath = filePath;
     this.packageName = checkNotNull(packageName);
-    this.packageRelativePath =
-        OutputUtils.getPackageRelativePath(packageName, new File(filePath).getName());
+    this.packageRelativePathSupplier =
+        Suppliers.memoize(
+            () -> OutputUtils.getPackageRelativePath(packageName, new File(filePath).getName()));
+    this.isSynthetic = isSynthetic;
+  }
+
+  public boolean isSynthetic() {
+    return isSynthetic;
   }
 
   public String getFilePath() {
-    return filePath;
+    checkState(!isSynthetic, "Cannot get file path for a synthetic CompilationUnit");
+    return checkNotNull(filePath);
   }
 
   public String getDirectoryPath() {
+    String filePath = getFilePath();
     if (!filePath.contains(File.separator)) {
       return "";
     }
@@ -58,7 +84,8 @@ public class CompilationUnit extends Node {
   }
 
   public String getPackageRelativePath() {
-    return packageRelativePath;
+    checkState(!isSynthetic, "Cannot get relative package path for a synthetic CompilationUnit");
+    return packageRelativePathSupplier.get();
   }
 
   public String getPackageName() {

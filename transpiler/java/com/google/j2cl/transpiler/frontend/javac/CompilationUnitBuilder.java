@@ -1303,7 +1303,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               isNullMarked);
     }
     setCurrentCompilationUnit(
-        new CompilationUnit(
+        CompilationUnit.createForFile(
             javacUnit.getSourceFile().getName(),
             javacUnit.getPackageName() == null ? "" : javacUnit.getPackageName().toString()));
     for (JCTree tree : javacUnit.getTypeDecls()) {

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -83,7 +85,9 @@ public class OutputGeneratorStage {
         String typeRelativePath = getPackageRelativePath(type.getDeclaration());
 
         NativeJavaScriptFile matchingNativeFile =
-            getMatchingNativeFile(nativeFilesByPath, compilationUnit, type);
+            compilationUnit.isSynthetic()
+                ? null
+                : getMatchingNativeFile(nativeFilesByPath, compilationUnit, type);
 
         if (matchingNativeFile != null) {
           jsImplGenerator.setNativeSource(matchingNativeFile);
@@ -102,6 +106,8 @@ public class OutputGeneratorStage {
             continue;
           }
 
+          // Copy native js file to output.
+          output.write(matchingNativeFile.getRelativeFilePath(), matchingNativeFile.getContent());
         }
 
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
@@ -129,7 +135,7 @@ public class OutputGeneratorStage {
           }
         }
 
-        if (shouldGenerateReadableSourceMaps) {
+        if (shouldGenerateReadableSourceMaps && !compilationUnit.isSynthetic()) {
           outputReadableSourceMap(
               compilationUnit,
               type,
@@ -151,14 +157,9 @@ public class OutputGeneratorStage {
               implRelativePath,
               jsImplGenerator.getOutputSourceInfoByMember());
         }
-
-        if (matchingNativeFile != null) {
-          // Copy native js file to output.
-          output.write(matchingNativeFile.getRelativeFilePath(), matchingNativeFile.getContent());
-        }
       }
 
-      if (!generateKytheIndexingMetadata) {
+      if (!generateKytheIndexingMetadata && !compilationUnit.isSynthetic()) {
         // Copy java sources to output.
         output.copyFile(compilationUnit.getFilePath(), compilationUnit.getPackageRelativePath());
       }
@@ -226,6 +227,8 @@ public class OutputGeneratorStage {
       String javaScriptImplementationFileContents,
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
       NativeJavaScriptFile nativeJavaScriptFile) {
+    checkArgument(
+        !j2clUnit.isSynthetic(), "Cannot generate sourcemap for synthetic CompilationUnit");
     String readableOutput =
         ReadableSourceMapGenerator.generate(
             javaSourcePositionByOutputSourcePosition,
@@ -250,6 +253,9 @@ public class OutputGeneratorStage {
       Map<String, NativeJavaScriptFile> nativeFilesByPath,
       CompilationUnit j2clCompilationUnit,
       Type type) {
+    checkArgument(
+        !j2clCompilationUnit.isSynthetic(),
+        "Synthetic CompilationUnit cannot have a corresponding .native.js file.");
 
     // Locate the files that have a package path relative to the root according to Java convention.
     // This is useful when the files are in different directories on disk.

@@ -75,9 +75,12 @@ public class WasmModuleGenerator {
   }
 
   private void copyJavaSources(Library library) {
-    for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
-      output.copyFile(compilationUnit.getFilePath(), compilationUnit.getPackageRelativePath());
-    }
+    library.getCompilationUnits().stream()
+        .filter(not(CompilationUnit::isSynthetic))
+        .forEach(
+            compilationUnit ->
+                output.copyFile(
+                    compilationUnit.getFilePath(), compilationUnit.getPackageRelativePath()));
   }
 
   private void generateWasmModule(Library library) {

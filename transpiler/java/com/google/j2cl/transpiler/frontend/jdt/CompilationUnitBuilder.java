@@ -154,7 +154,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           jdtCompilationUnit.getPackage() == null
               ? ""
               : jdtCompilationUnit.getPackage().getName().getFullyQualifiedName();
-      setCurrentCompilationUnit(new CompilationUnit(sourceFilePath, packageName));
+      setCurrentCompilationUnit(CompilationUnit.createForFile(sourceFilePath, packageName));
       // Records information about package-info files supplied as source code.
       if (getCurrentSourceFile().endsWith("package-info.java")
           && jdtCompilationUnit.getPackage() != null) {
