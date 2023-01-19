@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.common.base.CaseFormat
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
@@ -97,7 +96,7 @@ private val CompilationUnit.allTypes: List<Type>
   get() = streamTypes().collect(toList())
 
 private val Type.shouldRender: Boolean
-  get() = visibility.isPublic && !declaration.isKtNative
+  get() = visibility.isPublic && !declaration.isKtNative && !declaration.isLocal
 
 private val Type.declarationsRenderers: List<Renderer<Source>>
   get() =
@@ -250,7 +249,7 @@ internal val cKeywords =
 
 private val FieldDescriptor.enumObjCName: String
   get() =
-    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, name!!).let { name ->
+    objCName.let { name ->
       if (objCReservedPrefixes.any { name.startsWith(it) }) "the" + name.titleCase
       else if (cKeywords.contains(name)) name + "_" else name
     }

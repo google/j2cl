@@ -19,6 +19,7 @@ import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.common.StringUtils
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -37,6 +38,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 
 internal fun Renderer.optInExperimentalObjCNameFileAnnotationSource(): Source =
   join(
@@ -61,6 +63,24 @@ internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = n
     )
   )
 
+internal fun Renderer.objCNameAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+  sourceIf(typeDeclaration.needsObjCNameAnnotation) {
+    objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
+  }
+
+internal fun Renderer.objCNameAnnotationSource(
+  methodDescriptor: MethodDescriptor,
+  methodObjCNames: MethodObjCNames?
+): Source =
+  sourceIf(!methodDescriptor.isConstructor) {
+    methodObjCNames?.methodName.ifNotNullSource { objCNameAnnotationSource(it, exact = false) }
+  }
+
+internal fun Renderer.objCNameAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
+  sourceIf(fieldDescriptor.needsObjCNameAnnotations) {
+    objCNameAnnotationSource(fieldDescriptor.objCName, exact = false)
+  }
+
 private fun parameterSource(name: String, valueSource: Source): Source =
   assignment(source(name), valueSource)
 
@@ -76,7 +96,10 @@ internal fun Method.toObjCNames(): MethodObjCNames? =
 private val MethodDescriptor.needsObjCNameAnnotations
   get() = visibility.needsObjCNameAnnotation && !isKtOverride
 
-internal val TypeDeclaration.needsObjCNameAnnotation
+private val FieldDescriptor.needsObjCNameAnnotations
+  get() = enclosingTypeDescriptor.typeDeclaration.needsObjCNameAnnotation && isEnumConstant
+
+private val TypeDeclaration.needsObjCNameAnnotation
   get() = visibility.needsObjCNameAnnotation && !isLocal
 
 private val Visibility.needsObjCNameAnnotation
@@ -216,3 +239,6 @@ private fun TypeVariable.variableObjCName(useId: Boolean, forMember: Boolean): S
 
 private val Variable.objCName
   get() = typeDescriptor.objCName(useId = true, forMember = true).titleCase
+
+internal val FieldDescriptor.objCName: String
+  get() = name!!.objCName

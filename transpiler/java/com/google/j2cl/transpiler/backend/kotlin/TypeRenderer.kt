@@ -61,11 +61,6 @@ fun Renderer.typeSource(type: Type): Source =
 fun nativeTypeSource(type: TypeDeclaration): Source =
   comment(spaceSeparated(source("native"), source("class"), identifierSource(type.ktSimpleName)))
 
-fun Renderer.objCNameAnnotationSource(typeDeclaration: TypeDeclaration): Source =
-  sourceIf(typeDeclaration.needsObjCNameAnnotation) {
-    objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
-  }
-
 fun classModifiersSource(type: Type): Source =
   sourceIf(
     type.declaration.enclosingTypeDeclaration != null &&
@@ -136,13 +131,16 @@ private fun Renderer.enumValueSource(field: Field): Source =
   field.initializer
     .let { it as NewInstance }
     .let { newInstance ->
-      spaceSeparated(
-        join(
-          identifierSource(field.descriptor.name!!),
-          newInstance.arguments
-            .takeIf { it.isNotEmpty() }
-            .ifNotNullSource { invocationSource(newInstance) }
-        ),
-        newInstance.anonymousInnerClass.ifNotNullSource(::typeBodySource)
+      newLineSeparated(
+        objCNameAnnotationSource(field.descriptor),
+        spaceSeparated(
+          join(
+            identifierSource(field.descriptor.name!!),
+            newInstance.arguments
+              .takeIf { it.isNotEmpty() }
+              .ifNotNullSource { invocationSource(newInstance) }
+          ),
+          newInstance.anonymousInnerClass.ifNotNullSource(::typeBodySource)
+        )
       )
     }

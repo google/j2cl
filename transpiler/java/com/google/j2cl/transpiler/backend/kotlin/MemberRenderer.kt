@@ -165,14 +165,6 @@ private fun Renderer.methodKindAndNameSource(methodDescriptor: MethodDescriptor)
       identifierSource(methodDescriptor.ktMangledName)
     )
 
-private fun Renderer.objCNameAnnotationSource(
-  methodDescriptor: MethodDescriptor,
-  methodObjCNames: MethodObjCNames?
-): Source =
-  sourceIf(!methodDescriptor.isConstructor) {
-    methodObjCNames?.methodName.ifNotNullSource { objCNameAnnotationSource(it, exact = false) }
-  }
-
 private fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
   spaceSeparated(
     sourceIf(!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
