@@ -2,6 +2,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
+
+@class NewObjCName;
 @class NewObjCName_Foo;
 
 typedef NS_ENUM(NSUInteger, NewObjCName_Foo_Enum) {
@@ -38,21 +41,61 @@ NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_mutableCopyFoo(void) {
 }
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_register(void) {
- return NewObjCName_Foo.register_;
+ return NewObjCName_Foo.register__;
 }
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_struct(void) {
- return NewObjCName_Foo.struct_;
+ return NewObjCName_Foo.struct__;
 }
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NULL(void) {
- return NewObjCName_Foo.NULL;
+ return NewObjCName_Foo.NULL__;
 }
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_YES(void) {
- return NewObjCName_Foo.YES;
+ return NewObjCName_Foo.YES__;
 }
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
- return NewObjCName_Foo.NO;
+ return NewObjCName_Foo.NO__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
+ return [NewObjCName_Foo.companion withOrdinalWithInt:ordinal];
+}
+
+NS_INLINE void NewObjCName_alloc(void) {
+ [NewObjCName.companion doAlloc];
+}
+
+NS_INLINE void NewObjCName_allocFoo(void) {
+ [NewObjCName.companion doAllocFoo];
+}
+
+NS_INLINE void NewObjCName_allocatedFoo(void) {
+ [NewObjCName.companion allocatedFoo];
+}
+
+NS_INLINE void NewObjCName_initFoo(void) {
+ [NewObjCName.companion doInitFoo];
+}
+
+NS_INLINE void NewObjCName_newFoo(void) {
+ [NewObjCName.companion doNewFoo];
+}
+
+NS_INLINE void NewObjCName_copyFoo(void) {
+ [NewObjCName.companion doCopyFoo];
+}
+
+NS_INLINE void NewObjCName_mutableCopyFoo(void) {
+ [NewObjCName.companion doMutableCopyFoo];
+}
+
+NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(jint extern_, jint struct_, jint register_, jint inline_) {
+ [NewObjCName.companion reservedParamNamesWithInt:extern_ withInt:struct_ withInt:register_ withInt:inline_];
+}
+
+NS_INLINE NSString* NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* s, id o, NSNumber* n) {
+ return [NewObjCName.companion nativeTypesWithNSString:s withId:o withNSNumber:n];
 }

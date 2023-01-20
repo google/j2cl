@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
+import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
@@ -106,8 +107,7 @@ private val Type.declarationsRenderers: List<Renderer<Source>>
         addAll(enumGetFunctionRenderers)
       }
 
-      // TODO(b/263471576): Static methods are not generated for now.
-      // addAll(methods.map { it.functionRenderer })
+      addAll(methods.map { it.functionRenderer })
     }
 
 private val Type.nsEnumTypedefRenderer: Renderer<Source>
@@ -250,7 +250,7 @@ internal val cKeywords =
 private val FieldDescriptor.enumObjCName: String
   get() =
     objCName.let { name ->
-      if (objCReservedPrefixes.any { name.startsWith(it) }) "the" + name.titleCase
+      if (objCReservedPrefixes.any { name.camelCaseStartsWith(it) }) "the" + name.titleCase
       else if (cKeywords.contains(name)) name + "_" else name
     }
 
@@ -265,7 +265,7 @@ private val Method.functionRenderer: Renderer<Source>
 
 private val MethodDescriptor.shouldRender: Boolean
   get() =
-    enclosingTypeDescriptor.isClass &&
+    (enclosingTypeDescriptor.isClass || enclosingTypeDescriptor.isEnum) &&
       isStatic &&
       !isConstructor &&
       returnTypeDescriptor.existsInObjC &&
@@ -275,7 +275,9 @@ private val TypeDescriptor.existsInObjC: Boolean
   get() =
     when (this) {
       is DeclaredTypeDescriptor ->
-        !typeDeclaration.isKtNative && !isAssignableTo(TypeDescriptors.get().javaUtilCollection)
+        (!typeDeclaration.isKtNative || typeDeclaration.mappedObjCNameRenderer != null) &&
+          !isAssignableTo(TypeDescriptors.get().javaUtilCollection) &&
+          !isAssignableTo(TypeDescriptors.get().javaUtilMap)
       is ArrayTypeDescriptor -> false
       else -> true
     }
@@ -315,11 +317,13 @@ private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Sour
   )
 
 private fun MethodObjCNames.objCName(defaultMethodName: String) =
-  (methodName
-    ?: defaultMethodName) +
-    parameterNames
-      .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCase } + ":" }
-      .joinToString("")
+  (methodName ?: defaultMethodName)
+    .plus(
+      parameterNames
+        .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCase } + ":" }
+        .joinToString("")
+    )
+    .run { letIf(objCReservedPrefixes.any { camelCaseStartsWith(it) }) { "do$titleCase" } }
 
 private val Variable.renderer: Renderer<Source>
   get() =
@@ -328,7 +332,7 @@ private val Variable.renderer: Renderer<Source>
     }
 
 private val Variable.nameRenderer: Renderer<Source>
-  get() = rendererOf(source(name.objCName))
+  get() = rendererOf(source(name.objCName.run { letIf(cKeywords.contains(this)) { plus("_") } }))
 
 private val TypeDeclaration.companionRenderer: Renderer<Source>
   get() = propertyGet(objCNameRenderer, "companion")
