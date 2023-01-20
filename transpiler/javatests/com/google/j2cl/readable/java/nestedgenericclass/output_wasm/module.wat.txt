@@ -167,7 +167,7 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable)
-  (ref.func $m_test__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable)
+  (ref.func $m_test__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable)
  )
 )
 
@@ -922,7 +922,7 @@
  (field $m_hashCode__int (ref $function.m_hashCode__int))
  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__void_$pp_nestedgenericclass (ref $function.m_test__void_$pp_nestedgenericclass))
+ (field $m_test__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable__void_$pp_nestedgenericclass (ref $function.m_test__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable__void_$pp_nestedgenericclass))
   $java.lang.Object.vtable)
 )
 (type $nestedgenericclass.NestedGenericClass.RecursiveTypeVariable.itable (struct_subtype 
@@ -969,24 +969,21 @@
  )
 )
 
-;;; void RecursiveTypeVariable.test()
-(func $m_test__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable
- (type $function.m_test__void_$pp_nestedgenericclass)
+;;; void RecursiveTypeVariable.test(T t)
+(func $m_test__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable
+ (type $function.m_test__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable__void_$pp_nestedgenericclass)
  (param $this.untyped (ref $java.lang.Object))
+ (param $t (ref null $nestedgenericclass.NestedGenericClass.RecursiveTypeVariable))
  ;;@ nestedgenericclass/NestedGenericClass.java:68:9
- (local $t (ref null $nestedgenericclass.NestedGenericClass.RecursiveTypeVariable))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.RecursiveTypeVariable))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.RecursiveTypeVariable (local.get $this.untyped)))
  (block
-  ;; T t = null;
-  ;;@ nestedgenericclass/NestedGenericClass.java:69:6
-  (local.set $t (ref.null $nestedgenericclass.NestedGenericClass.RecursiveTypeVariable))
   ;; nestedgenericclass.NestedGenericClass.RecursiveTypeVariable.Inner.$create(t);
-  ;;@ nestedgenericclass/NestedGenericClass.java:70:6
+  ;;@ nestedgenericclass/NestedGenericClass.java:69:6
   (drop (call $$create__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable.Inner (local.get $t)))
  )
 )
-(elem declare func $m_test__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable)
+(elem declare func $m_test__nestedgenericclass_NestedGenericClass_RecursiveTypeVariable__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable)
 
 ;;; void RecursiveTypeVariable.$clinit()
 (func $$clinit__void@nestedgenericclass.NestedGenericClass.RecursiveTypeVariable

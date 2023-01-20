@@ -151,10 +151,10 @@ public class TypeWildCards {
     return ri.m();
   }
 
-  class MultipleGenerics<A, B, C> {}
+  static class MultipleGenerics<A, B, C> {}
 
   static <D> MultipleGenerics<D, String, List<D>> createMultipleGenerics(List<D> foo) {
-    return null;
+    return new MultipleGenerics<>();
   }
 
   static List<?> listWithWildcard = null;

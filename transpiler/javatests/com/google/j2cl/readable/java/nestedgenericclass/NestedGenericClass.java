@@ -65,8 +65,7 @@ public class NestedGenericClass<T> {
   class RecursiveTypeVariable<T extends RecursiveTypeVariable<T>> {
     class Inner {}
 
-    void test() {
-      T t = null;
+    void test(T t) {
       t.new Inner();
     }
   }

@@ -86,9 +86,9 @@
 [createMultipleGenerics] => [m_createMultipleGenerics__typewildcards_List__typewildcards_TypeWildCards_MultipleGenerics]
 [foo] => [foo] "foo"
 [{
-    return null;
+    return new MultipleGenerics<>();
   }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.createMultipleGenerics"
-[return null;] => [return null;] "typewildcards.TypeWildCards.createMultipleGenerics"
+[return new MultipleGenerics<>();] => [return /**@type {!MultipleGenerics<D, ?string, List<D>>}*/ (MultipleGenerics.$create__());] "typewildcards.TypeWildCards.createMultipleGenerics"
 [static List<?> listWithWildcard = null;] => [get f_listWithWildcard__typewildcards_TypeWildCards]
 [static List<?> listWithWildcard = null;] => [return (TypeWildCards.$clinit(), TypeWildCards.$static_listWithWildcard__typewildcards_TypeWildCards);] "typewildcards.TypeWildCards.<synthetic: getter>"
 [static List<?> listWithWildcard = null;] => [set f_listWithWildcard__typewildcards_TypeWildCards]

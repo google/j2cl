@@ -53,22 +53,23 @@
 [{}] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.acceptsString"
 [testErasureCast_wildcard] => [m_testErasureCast_wildcard__void]
 [{
-    List<Container<?>> list = null;
+    List<Container<?>> list = new ArrayList<>();
 ...    acceptsContent(deepContent);
   }] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testErasureCast_wildcard"
-[List<Container<?>> list = null;] => [let list = null;] "genericmethod.GenericMethod.testErasureCast_wildcard"
+[List<Container<?>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<Container<?>>}*/ (ArrayList.$create__());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [list] => [list] "list"
 [Content content = list.get(0).get();] => [let content = /**@type {Content}*/ (/**@type {Container<Content>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [content] => [content] "content"
 [acceptsString(content.getProp());] => [GenericMethod.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [acceptsContent(content);] => [GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(content);] "genericmethod.GenericMethod.testErasureCast_wildcard"
-[List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList = null;] => [let nestedWildcardList = null;] "genericmethod.GenericMethod.testErasureCast_wildcard"
+[List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList =
+        new ArrayList<>();] => [let nestedWildcardList = /**@type {!ArrayList<SuperContainer<?>>}*/ (ArrayList.$create__());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [nestedWildcardList] => [nestedWildcardList] "nestedWildcardList"
 [Content nestedContent = nestedWildcardList.get(0).get().get();] => [let nestedContent = /**@type {Content}*/ (/**@type {!Container<Content>}*/ (/**@type {SuperContainer<Container>}*/ ($Casts.$to(nestedWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [nestedContent] => [nestedContent] "nestedContent"
 [acceptsString(nestedContent.getProp());] => [GenericMethod.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [acceptsContent(nestedContent);] => [GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(nestedContent);] "genericmethod.GenericMethod.testErasureCast_wildcard"
-[List<SuperContainer<Container<? extends Content>>> deepWildcardList = null;] => [let deepWildcardList = null;] "genericmethod.GenericMethod.testErasureCast_wildcard"
+[List<SuperContainer<Container<? extends Content>>> deepWildcardList = new ArrayList<>();] => [let deepWildcardList = /**@type {!ArrayList<SuperContainer<Container<?>>>}*/ (ArrayList.$create__());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [deepWildcardList] => [deepWildcardList] "deepWildcardList"
 [Content deepContent = deepWildcardList.get(0).get().get();] => [let deepContent = /**@type {Content}*/ (/**@type {SuperContainer<Container<?>>}*/ ($Casts.$to(deepWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [deepContent] => [deepContent] "deepContent"
@@ -76,22 +77,22 @@
 [acceptsContent(deepContent);] => [GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(deepContent);] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [testErasureCast_typeVariable] => [m_testErasureCast_typeVariable__void]
 [{
-    List<Container<C>> list = null;
+    List<Container<C>> list = new ArrayList<>();
 ...    acceptsContent(deepContent);
   }] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testErasureCast_typeVariable"
-[List<Container<C>> list = null;] => [let list = null;] "genericmethod.GenericMethod.testErasureCast_typeVariable"
+[List<Container<C>> list = new ArrayList<>();] => [let list = /**@type {!ArrayList<Container<C>>}*/ (ArrayList.$create__());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [list] => [list] "list"
 [Content content = list.get(0).get();] => [let content = /**@type {Content}*/ (/**@type {Container<C>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [content] => [content] "content"
 [acceptsString(content.getProp());] => [GenericMethod.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [acceptsContent(content);] => [GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(content);] "genericmethod.GenericMethod.testErasureCast_typeVariable"
-[List<SuperContainer<CT>> nestedTypeVariableList = null;] => [let nestedTypeVariableList = null;] "genericmethod.GenericMethod.testErasureCast_typeVariable"
+[List<SuperContainer<CT>> nestedTypeVariableList = new ArrayList<>();] => [let nestedTypeVariableList = /**@type {!ArrayList<SuperContainer<CT>>}*/ (ArrayList.$create__());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [nestedTypeVariableList] => [nestedTypeVariableList] "nestedTypeVariableList"
 [Content nestedContent = nestedTypeVariableList.get(0).get().get();] => [let nestedContent = /**@type {Content}*/ (/**@type {!Container<C>}*/ (/**@type {SuperContainer<CT>}*/ ($Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [nestedContent] => [nestedContent] "nestedContent"
 [acceptsString(nestedContent.getProp());] => [GenericMethod.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [acceptsContent(nestedContent);] => [GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(nestedContent);] "genericmethod.GenericMethod.testErasureCast_typeVariable"
-[List<SuperContainer<Container<C>>> deepTypeVariableList = null;] => [let deepTypeVariableList = null;] "genericmethod.GenericMethod.testErasureCast_typeVariable"
+[List<SuperContainer<Container<C>>> deepTypeVariableList = new ArrayList<>();] => [let deepTypeVariableList = /**@type {!ArrayList<SuperContainer<Container<C>>>}*/ (ArrayList.$create__());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [deepTypeVariableList] => [deepTypeVariableList] "deepTypeVariableList"
 [Content deepContent = deepTypeVariableList.get(0).get().get();] => [let deepContent = /**@type {Content}*/ (/**@type {SuperContainer<Container<C>>}*/ ($Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [deepContent] => [deepContent] "deepContent"

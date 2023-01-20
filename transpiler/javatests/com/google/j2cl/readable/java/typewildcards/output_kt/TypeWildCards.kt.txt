@@ -138,7 +138,7 @@ open class TypeWildCards {
 
   @JvmStatic
   fun <D> createMultipleGenerics_pp_typewildcards(foo: List<D>?): TypeWildCards.MultipleGenerics<D, String?, List<D>?>? {
-   return null
+   return TypeWildCards.MultipleGenerics<D, String?, List<D>?>()
   }
 
   @JvmField var listWithWildcard_pp_typewildcards: List<*>? = null
@@ -185,5 +185,5 @@ open class TypeWildCards {
   fun m(): T
  }
 
- open inner class MultipleGenerics<A, B, C> {}
+ open class MultipleGenerics<A, B, C> {}
 }

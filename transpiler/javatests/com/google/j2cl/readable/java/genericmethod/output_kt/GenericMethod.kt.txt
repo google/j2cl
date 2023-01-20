@@ -12,6 +12,7 @@ import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
 import kotlin.arrayOf
+import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
@@ -101,15 +102,15 @@ open class GenericMethod<T> {
 
   @JvmStatic
   fun testErasureCast_wildcard() {
-   val list: MutableList<GenericMethod.Container<*>?>? = null
+   val list: MutableList<GenericMethod.Container<*>?>? = ArrayList<GenericMethod.Container<*>>() as MutableList<GenericMethod.Container<*>?>?
    val content: GenericMethod.Content? = list!!.get(0)!!.get_pp_genericmethod()
    GenericMethod.acceptsString(content!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(content)
-   val nestedWildcardList: MutableList<GenericMethod.SuperContainer<out GenericMethod.Container<*>?>?>? = null
+   val nestedWildcardList: MutableList<GenericMethod.SuperContainer<out GenericMethod.Container<*>?>?>? = ArrayList<GenericMethod.SuperContainer<out GenericMethod.Container<*>>>() as MutableList<GenericMethod.SuperContainer<out GenericMethod.Container<*>?>?>?
    val nestedContent: GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(nestedContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(nestedContent)
-   val deepWildcardList: MutableList<GenericMethod.SuperContainer<GenericMethod.Container<*>?>?>? = null
+   val deepWildcardList: MutableList<GenericMethod.SuperContainer<GenericMethod.Container<*>?>?>? = ArrayList<GenericMethod.SuperContainer<GenericMethod.Container<*>>>() as MutableList<GenericMethod.SuperContainer<GenericMethod.Container<*>?>?>?
    val deepContent: GenericMethod.Content? = deepWildcardList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(deepContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(deepContent)
@@ -117,15 +118,15 @@ open class GenericMethod<T> {
 
   @JvmStatic
   fun <CT: GenericMethod.Container<C>?, C: GenericMethod.Content?> testErasureCast_typeVariable() {
-   val list: MutableList<GenericMethod.Container<C>?>? = null
+   val list: MutableList<GenericMethod.Container<C>?>? = ArrayList<GenericMethod.Container<C>>() as MutableList<GenericMethod.Container<C>?>?
    val content: GenericMethod.Content? = list!!.get(0)!!.get_pp_genericmethod()
    GenericMethod.acceptsString(content!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(content)
-   val nestedTypeVariableList: MutableList<GenericMethod.SuperContainer<CT>?>? = null
+   val nestedTypeVariableList: MutableList<GenericMethod.SuperContainer<CT>?>? = ArrayList<GenericMethod.SuperContainer<CT>>() as MutableList<GenericMethod.SuperContainer<CT>?>?
    val nestedContent: GenericMethod.Content? = nestedTypeVariableList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(nestedContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(nestedContent)
-   val deepTypeVariableList: MutableList<GenericMethod.SuperContainer<GenericMethod.Container<C>?>?>? = null
+   val deepTypeVariableList: MutableList<GenericMethod.SuperContainer<GenericMethod.Container<C>?>?>? = ArrayList<GenericMethod.SuperContainer<GenericMethod.Container<C>>>() as MutableList<GenericMethod.SuperContainer<GenericMethod.Container<C>?>?>?
    val deepContent: GenericMethod.Content? = deepTypeVariableList!!.get(0)!!.get_pp_genericmethod()!!.get_pp_genericmethod()
    GenericMethod.acceptsString(deepContent!!.getProp_pp_genericmethod())
    GenericMethod.acceptsContent(deepContent)

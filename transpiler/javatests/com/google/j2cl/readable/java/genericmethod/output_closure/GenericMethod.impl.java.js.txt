@@ -14,6 +14,7 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -88,15 +89,15 @@ class GenericMethod extends j_l_Object {
  /** @nodts */
  static m_testErasureCast_wildcard__void() {
   GenericMethod.$clinit();
-  let list = null;
+  let list = /**@type {!ArrayList<Container<?>>}*/ (ArrayList.$create__());
   let content = /**@type {Content}*/ (/**@type {Container<Content>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(content);
-  let nestedWildcardList = null;
+  let nestedWildcardList = /**@type {!ArrayList<SuperContainer<?>>}*/ (ArrayList.$create__());
   let nestedContent = /**@type {Content}*/ (/**@type {!Container<Content>}*/ (/**@type {SuperContainer<Container>}*/ ($Casts.$to(nestedWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(nestedContent);
-  let deepWildcardList = null;
+  let deepWildcardList = /**@type {!ArrayList<SuperContainer<Container<?>>>}*/ (ArrayList.$create__());
   let deepContent = /**@type {Content}*/ (/**@type {SuperContainer<Container<?>>}*/ ($Casts.$to(deepWildcardList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(deepContent.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(deepContent);
@@ -104,15 +105,15 @@ class GenericMethod extends j_l_Object {
  /** @nodts @template CT, C */
  static m_testErasureCast_typeVariable__void() {
   GenericMethod.$clinit();
-  let list = null;
+  let list = /**@type {!ArrayList<Container<C>>}*/ (ArrayList.$create__());
   let content = /**@type {Content}*/ (/**@type {Container<C>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(content.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(content);
-  let nestedTypeVariableList = null;
+  let nestedTypeVariableList = /**@type {!ArrayList<SuperContainer<CT>>}*/ (ArrayList.$create__());
   let nestedContent = /**@type {Content}*/ (/**@type {!Container<C>}*/ (/**@type {SuperContainer<CT>}*/ ($Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod()).m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(nestedContent.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(nestedContent);
-  let deepTypeVariableList = null;
+  let deepTypeVariableList = /**@type {!ArrayList<SuperContainer<Container<C>>>}*/ (ArrayList.$create__());
   let deepContent = /**@type {Content}*/ (/**@type {SuperContainer<Container<C>>}*/ ($Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer)).m_get__genericmethod_GenericMethod_Container_$pp_genericmethod().m_get__genericmethod_GenericMethod_Content_$pp_genericmethod());
   GenericMethod.m_acceptsString__java_lang_String__void(deepContent.m_getProp__java_lang_String_$pp_genericmethod());
   GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content__void(deepContent);
@@ -157,6 +158,7 @@ class GenericMethod extends j_l_Object {
   Error = goog.module.get('java.lang.Error$impl');
   Exception = goog.module.get('java.lang.Exception$impl');
   j_l_String = goog.module.get('java.lang.String$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   $Casts = goog.module.get('vmbootstrap.Casts$impl');
  }

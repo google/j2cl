@@ -15,6 +15,7 @@
  */
 package genericmethod;
 
+import java.util.ArrayList;
 import java.util.List;
 import javaemul.internal.annotations.UncheckedCast;
 
@@ -97,34 +98,35 @@ public class GenericMethod<T> {
   public static void acceptsString(String string) {}
 
   public static void testErasureCast_wildcard() {
-    List<Container<?>> list = null;
+    List<Container<?>> list = new ArrayList<>();
     Content content = list.get(0).get();
     acceptsString(content.getProp());
     acceptsContent(content);
 
-    List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList = null;
+    List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList =
+        new ArrayList<>();
     Content nestedContent = nestedWildcardList.get(0).get().get();
     acceptsString(nestedContent.getProp());
     acceptsContent(nestedContent);
 
-    List<SuperContainer<Container<? extends Content>>> deepWildcardList = null;
+    List<SuperContainer<Container<? extends Content>>> deepWildcardList = new ArrayList<>();
     Content deepContent = deepWildcardList.get(0).get().get();
     acceptsString(deepContent.getProp());
     acceptsContent(deepContent);
   }
 
   public static <CT extends Container<C>, C extends Content> void testErasureCast_typeVariable() {
-    List<Container<C>> list = null;
+    List<Container<C>> list = new ArrayList<>();
     Content content = list.get(0).get();
     acceptsString(content.getProp());
     acceptsContent(content);
 
-    List<SuperContainer<CT>> nestedTypeVariableList = null;
+    List<SuperContainer<CT>> nestedTypeVariableList = new ArrayList<>();
     Content nestedContent = nestedTypeVariableList.get(0).get().get();
     acceptsString(nestedContent.getProp());
     acceptsContent(nestedContent);
 
-    List<SuperContainer<Container<C>>> deepTypeVariableList = null;
+    List<SuperContainer<Container<C>>> deepTypeVariableList = new ArrayList<>();
     Content deepContent = deepTypeVariableList.get(0).get().get();
     acceptsString(deepContent.getProp());
     acceptsContent(deepContent);

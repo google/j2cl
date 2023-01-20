@@ -1061,9 +1061,9 @@
   ;; typewildcards.TypeWildCards.$clinit();
   ;;@ typewildcards/TypeWildCards.java:156:86
   (call $$clinit__void@typewildcards.TypeWildCards )
-  ;; return null;
+  ;; return typewildcards.TypeWildCards.MultipleGenerics.$create();
   ;;@ typewildcards/TypeWildCards.java:157:4
-  (return (ref.null $typewildcards.TypeWildCards.MultipleGenerics))
+  (return (call $$create__@typewildcards.TypeWildCards.MultipleGenerics ))
  )
 )
 
@@ -1752,7 +1752,6 @@
  (field $vtable (ref $typewildcards.TypeWildCards.MultipleGenerics.vtable)) 
  (field $itable (ref $typewildcards.TypeWildCards.MultipleGenerics.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__typewildcards_TypeWildCards_MultipleGenerics (ref null $typewildcards.TypeWildCards))
   $java.lang.Object)
 )
 (type $typewildcards.TypeWildCards.MultipleGenerics.vtable (struct_subtype 
@@ -1772,58 +1771,56 @@
 (field $slot6 (ref null struct))
  $java.lang.Object.itable))
 
-;;; MultipleGenerics<A, B, C> MultipleGenerics.$create(TypeWildCards $outer_this)
-(func $$create__typewildcards_TypeWildCards@typewildcards.TypeWildCards.MultipleGenerics
- (param $$outer_this (ref null $typewildcards.TypeWildCards))
+;;; MultipleGenerics<A, B, C> MultipleGenerics.$create()
+(func $$create__@typewildcards.TypeWildCards.MultipleGenerics
  (result (ref null $typewildcards.TypeWildCards.MultipleGenerics))
- ;;@ typewildcards/TypeWildCards.java:154:8
+ ;;@ typewildcards/TypeWildCards.java:154:15
  (local $$instance (ref null $typewildcards.TypeWildCards.MultipleGenerics))
  (block
-  ;; MultipleGenerics<A, B, C> $instance = new MultipleGenerics.<init>(0,$outer_this);
-  ;;@ typewildcards/TypeWildCards.java:154:8
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
-  ;;@ typewildcards/TypeWildCards.java:154:8
-  (call $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; MultipleGenerics<A, B, C> $instance = new MultipleGenerics.<init>(0);
+  ;;@ typewildcards/TypeWildCards.java:154:15
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.MultipleGenerics.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ typewildcards/TypeWildCards.java:154:15
+  (call $$ctor__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics (ref.as_non_null (local.get $$instance)))
   ;; return $instance;
-  ;;@ typewildcards/TypeWildCards.java:154:8
+  ;;@ typewildcards/TypeWildCards.java:154:15
   (return (local.get $$instance))
  )
 )
 
-;;; void MultipleGenerics.$ctor(TypeWildCards $outer_this)
-(func $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics
+;;; void MultipleGenerics.$ctor()
+(func $$ctor__void_$p_typewildcards_TypeWildCards_MultipleGenerics@typewildcards.TypeWildCards.MultipleGenerics
  (param $this (ref null $typewildcards.TypeWildCards.MultipleGenerics))
- (param $$outer_this (ref null $typewildcards.TypeWildCards))
- ;;@ typewildcards/TypeWildCards.java:154:8
+ ;;@ typewildcards/TypeWildCards.java:154:15
  (block
   ;; typewildcards.TypeWildCards.MultipleGenerics.$clinit();
-  ;;@ typewildcards/TypeWildCards.java:154:8
+  ;;@ typewildcards/TypeWildCards.java:154:15
   (call $$clinit__void@typewildcards.TypeWildCards.MultipleGenerics )
   ;; Object.this.$ctor();
-  ;;@ typewildcards/TypeWildCards.java:154:8
+  ;;@ typewildcards/TypeWildCards.java:154:15
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
  )
 )
 
 ;;; void MultipleGenerics.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.MultipleGenerics
- ;;@ typewildcards/TypeWildCards.java:154:8
+ ;;@ typewildcards/TypeWildCards.java:154:15
  (block
   ;; if (typewildcards.TypeWildCards.MultipleGenerics.$initialized) return;
-  ;;@ typewildcards/TypeWildCards.java:154:8
+  ;;@ typewildcards/TypeWildCards.java:154:15
   (if (global.get $f_$initialized__typewildcards_TypeWildCards_MultipleGenerics)
    (then
     ;; return;
-    ;;@ typewildcards/TypeWildCards.java:154:8
+    ;;@ typewildcards/TypeWildCards.java:154:15
     (return )
    )
   )
   ;; (typewildcards.TypeWildCards.MultipleGenerics.$initialized = true);
-  ;;@ typewildcards/TypeWildCards.java:154:8
+  ;;@ typewildcards/TypeWildCards.java:154:15
   (global.set $f_$initialized__typewildcards_TypeWildCards_MultipleGenerics (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ typewildcards/TypeWildCards.java:154:8
+  ;;@ typewildcards/TypeWildCards.java:154:15
   (call $$clinit__void@java.lang.Object )
  )
 )

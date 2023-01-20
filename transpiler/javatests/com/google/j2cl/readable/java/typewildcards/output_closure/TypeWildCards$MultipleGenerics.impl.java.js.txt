@@ -3,8 +3,6 @@ goog.module('typewildcards.TypeWildCards.MultipleGenerics$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let TypeWildCards = goog.forwardDeclare('typewildcards.TypeWildCards$impl');
-
 /**
  * @template A, B, C
  */
@@ -12,19 +10,16 @@ class MultipleGenerics extends j_l_Object {
  /** @protected @nodts */
  constructor() {
   super();
-  /**@type {TypeWildCards} @nodts*/
-  this.$outer_this__typewildcards_TypeWildCards_MultipleGenerics;
  }
  /** @nodts @template A, B, C @return {!MultipleGenerics<A, B, C>} */
- static $create__typewildcards_TypeWildCards(/** TypeWildCards */ $outer_this) {
+ static $create__() {
   MultipleGenerics.$clinit();
   let $instance = new MultipleGenerics();
-  $instance.$ctor__typewildcards_TypeWildCards_MultipleGenerics__typewildcards_TypeWildCards__void($outer_this);
+  $instance.$ctor__typewildcards_TypeWildCards_MultipleGenerics__void();
   return $instance;
  }
  /** @nodts */
- $ctor__typewildcards_TypeWildCards_MultipleGenerics__typewildcards_TypeWildCards__void(/** TypeWildCards */ $outer_this) {
-  this.$outer_this__typewildcards_TypeWildCards_MultipleGenerics = $outer_this;
+ $ctor__typewildcards_TypeWildCards_MultipleGenerics__void() {
   this.$ctor__java_lang_Object__void();
  }
  /** @nodts */
