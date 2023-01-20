@@ -4,11 +4,21 @@
 package j2kt
 
 import javaemul.lang.*
+import java.util.HashMap
+import java.util.LinkedList
 import kotlin.Any
 import kotlin.Int
 import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
+import kotlin.collections.HashSet
+import kotlin.collections.MutableCollection
+import kotlin.collections.MutableIterable
+import kotlin.collections.MutableIterator
+import kotlin.collections.MutableList
+import kotlin.collections.MutableListIterator
+import kotlin.collections.MutableMap
+import kotlin.collections.MutableSet
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 
@@ -85,6 +95,56 @@ open class ObjCName {
   ): String? {
    return s
   }
+
+  @JvmStatic
+  fun iterableType(
+   @kotlin.native.ObjCName("withJavaLangIterable", exact = false) l: MutableIterable<String?>?
+  ) {}
+
+  @JvmStatic
+  fun iteratorType(
+   @kotlin.native.ObjCName("withJavaUtilIterator", exact = false) l: MutableIterator<String?>?
+  ) {}
+
+  @JvmStatic
+  fun listIteratorType(
+   @kotlin.native.ObjCName("withJavaUtilListIterator", exact = false) l: MutableListIterator<String?>?
+  ) {}
+
+  @JvmStatic
+  fun collectionType(
+   @kotlin.native.ObjCName("withJavaUtilCollection", exact = false) l: MutableCollection<String?>?
+  ) {}
+
+  @JvmStatic
+  fun listType(
+   @kotlin.native.ObjCName("withJavaUtilList", exact = false) l: MutableList<String?>?
+  ) {}
+
+  @JvmStatic
+  fun setType(
+   @kotlin.native.ObjCName("withJavaUtilSet", exact = false) l: MutableSet<String?>?
+  ) {}
+
+  @JvmStatic
+  fun mapType(
+   @kotlin.native.ObjCName("withJavaUtilMap", exact = false) l: MutableMap<String?, String?>?
+  ) {}
+
+  @JvmStatic
+  fun linkedListType(
+   @kotlin.native.ObjCName("withJavaUtilLinkedList", exact = false) l: LinkedList<String?>?
+  ) {}
+
+  @JvmStatic
+  fun hashSetType(
+   @kotlin.native.ObjCName("withJavaUtilHashSet", exact = false) l: HashSet<String?>?
+  ) {}
+
+  @JvmStatic
+  fun hashMapType(
+   @kotlin.native.ObjCName("withJavaUtilHashMap", exact = false) l: HashMap<String?, String?>?
+  ) {}
  }
 
  @kotlin.native.ObjCName("InnerClassNewName", exact = true)

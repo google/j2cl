@@ -16,6 +16,15 @@
 package j2kt;
 
 import com.google.j2objc.annotations.ObjectiveCName;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
 
 @ObjectiveCName("NewObjCName")
 public class ObjCName {
@@ -63,6 +72,26 @@ public class ObjCName {
   public static String nativeTypes(String s, Object o, Number n) {
     return s;
   }
+
+  public static void iterableType(Iterable<String> l) {}
+
+  public static void iteratorType(Iterator<String> l) {}
+
+  public static void listIteratorType(ListIterator<String> l) {}
+
+  public static void collectionType(Collection<String> l) {}
+
+  public static void listType(List<String> l) {}
+
+  public static void setType(Set<String> l) {}
+
+  public static void mapType(Map<String, String> l) {}
+
+  public static void linkedListType(LinkedList<String> l) {}
+
+  public static void hashSetType(HashSet<String> l) {}
+
+  public static void hashMapType(HashMap<String, String> l) {}
 
   public enum Foo {
     allocFoo,
