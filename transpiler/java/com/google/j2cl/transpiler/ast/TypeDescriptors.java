@@ -100,6 +100,9 @@ public class TypeDescriptors {
   public final DeclaredTypeDescriptor nativeTypeError =
       createGlobalNativeTypeDescriptor("TypeError");
 
+  // Kotlin-specific types
+  public DeclaredTypeDescriptor kotlinNothing;
+
   /**
    * Global window reference that is the enclosing class of native global methods and properties.
    */
@@ -274,6 +277,10 @@ public class TypeDescriptors {
 
   public static boolean isJavaLangThrowable(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isSameBaseType(get().javaLangThrowable);
+  }
+
+  public static boolean isKotlinNothing(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isSameBaseType(get().kotlinNothing);
   }
 
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
@@ -670,6 +677,9 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.Asserts":
           typeDescriptors.javaemulInternalAsserts = referenceType;
+          break;
+        case "kotlin.jvm.internal.NothingStub":
+          typeDescriptors.kotlinNothing = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);

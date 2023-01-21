@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
 import com.google.j2cl.transpiler.passes.AddAbstractMethodStubs;
 import com.google.j2cl.transpiler.passes.AddDisambiguatingSuperMethodForwardingStubs;
 import com.google.j2cl.transpiler.passes.AddJsMethodOverridesCastChecks;
+import com.google.j2cl.transpiler.passes.AddNothingReturnStatements;
 import com.google.j2cl.transpiler.passes.AddVisibilityMethodBridgesKotlin;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
@@ -140,6 +141,7 @@ import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
+import com.google.j2cl.transpiler.passes.RemoveUnreachableCode;
 import com.google.j2cl.transpiler.passes.RemoveUnusedLabeledStatements;
 import com.google.j2cl.transpiler.passes.RemoveWasmAnnotatedMethodBodies;
 import com.google.j2cl.transpiler.passes.ResolveCaptures;
@@ -304,12 +306,14 @@ public enum Backend {
           RemoveUnneededJsDocCasts::new,
           NormalizeJsDocCastExpressions::new,
           NormalizeJsAwaitMethodInvocations::new,
+          RemoveUnreachableCode::new,
           RemoveNoopStatements::new,
 
           // Add qualifiers to static members after all transformations to simplify the handling
           // in the backend.
           ResolveImplicitStaticQualifiers::new,
           AddAbstractMethodStubs::new,
+          AddNothingReturnStatements::new,
 
           // Enrich source mapping information for better stack deobfuscation.
           FilloutMissingSourceMapInformation::new,
