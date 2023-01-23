@@ -1,0 +1,56 @@
+// Generated from "j2ktobjcname/MethodExample.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package j2ktobjcname
+
+import javaemul.lang.*
+import kotlin.Array
+import kotlin.Int
+import kotlin.LongArray
+import kotlin.OptIn
+import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktobjcnameMethodExample", exact = true)
+open class MethodExample {
+ companion object {
+  @JvmStatic
+  fun main(
+   vararg @kotlin.native.ObjCName("withNSStringArray", exact = false) args: String?
+  ) {
+   val args_1: Array<String?>? = args as Array<String?>?
+  }
+ }
+
+ @kotlin.native.ObjCName("J2ktobjcnameMethodExample_Foo", exact = true)
+ open inner class Foo {}
+
+ @kotlin.native.ObjCName("J2ktobjcnameMethodExample_ObjCName", exact = true)
+ open inner class ObjCName {
+  open fun instanceMethod(
+   @kotlin.native.ObjCName("withInt", exact = false) i: Int
+  ) {}
+
+  open fun instanceMethod(
+   @kotlin.native.ObjCName("withInt", exact = false) i: Int,
+   @kotlin.native.ObjCName("withLongArray", exact = false) l: LongArray?
+  ) {}
+
+  open fun instanceMethod(
+   @kotlin.native.ObjCName("withInt", exact = false) i: Int,
+   @kotlin.native.ObjCName("withLongArray2", exact = false) l: Array<LongArray?>?
+  ) {}
+
+  open fun instanceMethod(
+   @kotlin.native.ObjCName("withJ2ktobjcnameMethodExample_Foo", exact = false) foo: MethodExample.Foo?
+  ) {}
+
+  @kotlin.native.ObjCName("newFoo", exact = false)
+  open fun foo() {}
+
+  @kotlin.native.ObjCName("newProtectedFoo", exact = false)
+  open fun protectedFoo() {}
+ }
+}

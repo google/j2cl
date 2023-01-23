@@ -1,0 +1,33 @@
+// Generated from "j2ktobjcname/FieldExample.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package j2ktobjcname
+
+import javaemul.lang.*
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktobjcnameFieldExample", exact = true)
+open class FieldExample {
+ @JvmField var myInt: Int = 0
+
+ @JvmField var myString: String? = null
+
+ companion object {
+  @ObjCName("MY_FINAL_INT", exact = false)
+  const val MY_FINAL_INT: Int = 5
+
+  @ObjCName("myStaticInt", exact = false)
+  @JvmField var myStaticInt: Int = 0
+
+  @ObjCName("myStaticString", exact = false)
+  @JvmField var myStaticString: String? = null
+
+  @ObjCName("BIG_ENDIAN__", exact = false)
+  @JvmField var BIG_ENDIAN__: Int = 7
+ }
+}

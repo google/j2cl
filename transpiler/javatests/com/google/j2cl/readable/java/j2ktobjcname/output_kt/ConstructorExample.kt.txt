@@ -1,0 +1,28 @@
+// Generated from "j2ktobjcname/ConstructorExample.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package j2ktobjcname
+
+import javaemul.lang.*
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktobjcnameConstructorExample", exact = true)
+open class ConstructorExample {
+ @kotlin.native.ObjCName("J2ktobjcnameConstructorExample_ObjCName", exact = true)
+ open inner class ObjCName {
+  constructor()
+
+  constructor(
+   @kotlin.native.ObjCName("Int", exact = false) i: Int
+  )
+
+  constructor(
+   @kotlin.native.ObjCName("Int", exact = false) i: Int,
+   @kotlin.native.ObjCName("withNSString", exact = false) s: String?
+  )
+ }
+}
