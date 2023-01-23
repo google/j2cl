@@ -29,6 +29,33 @@ import java.util.Set;
 @ObjectiveCName("NewObjCName")
 public class ObjCName {
 
+  // Instance fields.
+  public int publicField;
+  protected int protectedField;
+  int packagePrivateField;
+  private int privateField;
+
+  // Static fields.
+  public static int publicStaticField;
+  protected static int protectedStaticField;
+  static int packagePrivateStaticField;
+  private static int privateStaticField;
+
+  // Fields with reference types.
+  public static Object objectField;
+  public static String stringField;
+  public static ObjCName selfField;
+  public static Iterable<String> iterable;
+  public static Iterator<String> iterator;
+  public static Collection collection;
+
+  // Fields with reserved names.
+  public static int alloc;
+  public static int init;
+  public static int extern;
+  public static int inline;
+  public static int NULL;
+
   public ObjCName() {}
 
   @ObjectiveCName("initWithInteger")
@@ -40,18 +67,18 @@ public class ObjCName {
   public class InnerClassOldName {}
 
   @ObjectiveCName("newFoo")
-  public void foo() {}
+  public static void foo() {}
 
   @ObjectiveCName("newProtectedFoo")
-  protected void protectedFoo() {}
+  protected static void protectedFoo() {}
 
   @ObjectiveCName("newFooFromInt:")
-  public void newFoo(int i) {}
+  public static void newFoo(int i) {}
 
   @ObjectiveCName("newFooFromInt:withInteger:")
-  public void foo(String s, int i) {}
+  public static void foo(String s, int i) {}
 
-  public void foo(String s, String i) {}
+  public static void foo(String s, String i) {}
 
   public static void alloc() {}
 

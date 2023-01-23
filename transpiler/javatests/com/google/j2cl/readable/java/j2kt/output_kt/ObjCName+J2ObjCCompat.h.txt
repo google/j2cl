@@ -64,6 +64,26 @@ NS_INLINE NewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
  return [NewObjCName_Foo.companion withOrdinalWithInt:ordinal];
 }
 
+NS_INLINE void NewObjCName_newFoo(void) {
+ [NewObjCName.companion doNewFoo];
+}
+
+NS_INLINE void NewObjCName_newProtectedFoo(void) {
+ [NewObjCName.companion doNewProtectedFoo];
+}
+
+NS_INLINE void NewObjCName_newFooFromInt__(jint i) {
+ [NewObjCName.companion doNewFooFromInt:i];
+}
+
+NS_INLINE void NewObjCName_newFooFromInt_withInteger__(NSString* s, jint i) {
+ [NewObjCName.companion doNewFooFromInt:s withInteger:i];
+}
+
+NS_INLINE void NewObjCName_fooWithNSString_withNSString_(NSString* s, NSString* i) {
+ [NewObjCName.companion fooWithNSString:s withNSString:i];
+}
+
 NS_INLINE void NewObjCName_alloc(void) {
  [NewObjCName.companion doAlloc];
 }

@@ -20,10 +20,19 @@ import kotlin.collections.MutableListIterator
 import kotlin.collections.MutableMap
 import kotlin.collections.MutableSet
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 
 @kotlin.native.ObjCName("NewObjCName", exact = true)
 open class ObjCName {
+ @JvmField var publicField: Int = 0
+
+ @JvmField var protectedField: Int = 0
+
+ @JvmField var packagePrivateField_pp_j2kt: Int = 0
+
+ @JvmField var privateField_private_2: Int = 0
+
  constructor()
 
  constructor(
@@ -35,29 +44,64 @@ open class ObjCName {
   @kotlin.native.ObjCName("withNSString", exact = false) s: String?
  )
 
- @kotlin.native.ObjCName("newFoo", exact = false)
- open fun foo() {}
-
- @kotlin.native.ObjCName("newProtectedFoo", exact = false)
- open fun protectedFoo() {}
-
- @kotlin.native.ObjCName("newFooFrom", exact = false)
- open fun newFoo(
-  @kotlin.native.ObjCName("Int", exact = false) i: Int
- ) {}
-
- @kotlin.native.ObjCName("newFooFrom", exact = false)
- open fun foo(
-  @kotlin.native.ObjCName("Int", exact = false) s: String?,
-  @kotlin.native.ObjCName("withInteger", exact = false) i: Int
- ) {}
-
- open fun foo(
-  @kotlin.native.ObjCName("withNSString", exact = false) s: String?,
-  @kotlin.native.ObjCName("withNSString", exact = false) i: String?
- ) {}
-
  companion object {
+  @JvmField var publicStaticField: Int = 0
+
+  @JvmField var protectedStaticField: Int = 0
+
+  @JvmField var packagePrivateStaticField_pp_j2kt: Int = 0
+
+  @JvmField var privateStaticField_private_2: Int = 0
+
+  @JvmField var objectField: Any? = null
+
+  @JvmField var stringField: String? = null
+
+  @JvmField var selfField: ObjCName? = null
+
+  @JvmField var iterable: MutableIterable<String?>? = null
+
+  @JvmField var iterator: MutableIterator<String?>? = null
+
+  @JvmField var collection: MutableCollection<Any?>? = null
+
+  @JvmField var alloc: Int = 0
+
+  @JvmField var init: Int = 0
+
+  @JvmField var extern: Int = 0
+
+  @JvmField var inline: Int = 0
+
+  @JvmField var NULL__: Int = 0
+
+  @JvmStatic
+  @kotlin.native.ObjCName("newFoo", exact = false)
+  fun foo() {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("newProtectedFoo", exact = false)
+  fun protectedFoo() {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("newFooFrom", exact = false)
+  fun newFoo(
+   @kotlin.native.ObjCName("Int", exact = false) i: Int
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("newFooFrom", exact = false)
+  fun foo(
+   @kotlin.native.ObjCName("Int", exact = false) s: String?,
+   @kotlin.native.ObjCName("withInteger", exact = false) i: Int
+  ) {}
+
+  @JvmStatic
+  fun foo(
+   @kotlin.native.ObjCName("withNSString", exact = false) s: String?,
+   @kotlin.native.ObjCName("withNSString", exact = false) i: String?
+  ) {}
+
   @JvmStatic
   fun alloc() {}
 
