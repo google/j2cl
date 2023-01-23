@@ -2,7 +2,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
+
 @class AutoboxingAutoBoxing;
+
+NS_INLINE jfloat AutoboxingAutoBoxing_get_COMPILE_TIME_CONSTANT(void) {
+ return AutoboxingAutoBoxing.companion.COMPILE_TIME_CONSTANT;
+}
 
 NS_INLINE void AutoboxingAutoBoxing_testUnboxingFromTypeVariable(void) {
  [AutoboxingAutoBoxing.companion testUnboxingFromTypeVariable];

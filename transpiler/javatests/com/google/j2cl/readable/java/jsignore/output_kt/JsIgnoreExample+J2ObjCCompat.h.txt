@@ -2,6 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
+
 @class JsignoreJsIgnoreExample;
 
 NS_INLINE void JsignoreJsIgnoreExample_exportedFunction(void) {
@@ -10,4 +12,16 @@ NS_INLINE void JsignoreJsIgnoreExample_exportedFunction(void) {
 
 NS_INLINE void JsignoreJsIgnoreExample_notExportedFunction(void) {
  [JsignoreJsIgnoreExample.companion notExportedFunction];
+}
+
+NS_INLINE jint JsignoreJsIgnoreExample_get_exportedField(void) {
+ return JsignoreJsIgnoreExample.companion.exportedField;
+}
+
+NS_INLINE jint JsignoreJsIgnoreExample_get_notExportedField(void) {
+ return JsignoreJsIgnoreExample.companion.notExportedField;
+}
+
+NS_INLINE id JsignoreJsIgnoreExample_get_CONSTNAME(void) {
+ return JsignoreJsIgnoreExample.companion.CONSTNAME;
 }

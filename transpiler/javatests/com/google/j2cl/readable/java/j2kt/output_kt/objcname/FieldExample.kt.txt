@@ -18,12 +18,16 @@ open class FieldExample {
  @JvmField var myString: String? = null
 
  companion object {
+  @ObjCName("MY_FINAL_INT", exact = false)
   const val MY_FINAL_INT: Int = 5
 
+  @ObjCName("myStaticInt", exact = false)
   @JvmField var myStaticInt: Int = 0
 
+  @ObjCName("myStaticString", exact = false)
   @JvmField var myStaticString: String? = null
 
+  @ObjCName("BIG_ENDIAN__", exact = false)
   @JvmField var BIG_ENDIAN__: Int = 7
  }
 }

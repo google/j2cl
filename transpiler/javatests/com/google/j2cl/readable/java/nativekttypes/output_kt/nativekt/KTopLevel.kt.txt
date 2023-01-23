@@ -60,6 +60,7 @@ open class KTopLevel<O> {
  }
 
  companion object {
+  @ObjCName("staticField", exact = false)
   @JvmField var staticField: Any? = null
 
   @JvmStatic
@@ -89,6 +90,7 @@ open class KTopLevel<O> {
   }
 
   companion object {
+   @ObjCName("staticField", exact = false)
    @JvmField var staticField: Any? = null
 
    @JvmStatic

@@ -18,7 +18,9 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -37,6 +39,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
+import com.google.j2cl.transpiler.backend.kotlin.objc.companionGet
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.empty
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
@@ -58,7 +61,6 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.nsObject
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsString
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsUInteger
 import com.google.j2cl.transpiler.backend.kotlin.objc.pointer
-import com.google.j2cl.transpiler.backend.kotlin.objc.propertyGet
 import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererOf
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererWith
@@ -104,10 +106,9 @@ private val Type.declarationsRenderers: List<Renderer<Source>>
     buildList<Renderer<Source>> {
       if (isEnum) {
         add(nsEnumTypedefRenderer)
-        addAll(enumGetFunctionRenderers)
       }
 
-      addAll(methods.map { it.functionRenderer })
+      addAll(members.map { it.functionRenderer })
     }
 
 private val Type.nsEnumTypedefRenderer: Renderer<Source>
@@ -118,24 +119,24 @@ private val Type.nsEnumTypedefRenderer: Renderer<Source>
       values = enumFields.map { it.descriptor.objCEnumName }
     )
 
-private val Type.enumGetFunctionRenderers: List<Renderer<Source>>
-  get() = enumFields.map { it.descriptor.enumGetFunctionRenderer }
+private val Field.fieldGetFunctionRenderer: Renderer<Source>
+  get() = descriptor.takeIf { it.shouldRender }?.getFunctionRenderer ?: empty
 
-private val FieldDescriptor.enumGetFunctionRenderer: Renderer<Source>
+private val FieldDescriptor.getFunctionRenderer: Renderer<Source>
   get() =
     functionDeclaration(
       modifiers = listOf(nsInline),
-      returnType = enclosingTypeDescriptor.objCRenderer,
-      name = enumGetFunctionName,
-      statements = listOf(returnStatement(enumGetExpressionRenderer))
+      returnType = typeDescriptor.objCRenderer,
+      name = getFunctionName,
+      statements = listOf(returnStatement(getExpressionRenderer))
     )
 
-private val FieldDescriptor.enumGetFunctionName: String
+private val FieldDescriptor.getFunctionName: String
   get() = enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_get_" + name!!
 
 // Taken from GitHub:
 // "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/objcexport/ObjCExportNamer.kt"
-private val objCReservedPrefixes = setOf("alloc", "copy", "mutableCopy", "new", "init")
+internal val objCReservedPrefixes = setOf("alloc", "copy", "mutableCopy", "new", "init")
 
 // Taken from GitHub:
 // "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/CAdapterGenerator.kt"
@@ -247,29 +248,45 @@ internal val cKeywords =
     "xor_eq"
   )
 
-private val FieldDescriptor.enumObjCName: String
+private val FieldDescriptor.getObjCName: String
   get() =
     objCName.let { name ->
       if (objCReservedPrefixes.any { name.camelCaseStartsWith(it) }) "the" + name.titleCase
       else if (cKeywords.contains(name)) name + "_" else name
     }
 
-private val FieldDescriptor.enumGetExpressionRenderer: Renderer<Source>
+private val FieldDescriptor.getExpressionRenderer: Renderer<Source>
   get() =
-    enclosingTypeDescriptor.typeDeclaration.objCNameRenderer.map {
-      dotSeparated(it, source(enumObjCName))
+    enclosingTypeDescriptor.typeDeclaration.objCNameRenderer
+      .letIf(isStatic && !isEnumConstant) { companionGet(it) }
+      .map { dotSeparated(it, source(getObjCName)) }
+
+private val Member.functionRenderer: Renderer<Source>
+  get() =
+    when (this) {
+      is Method -> methodFunctionRenderer
+      is Field -> fieldGetFunctionRenderer
+      else -> empty
     }
 
-private val Method.functionRenderer: Renderer<Source>
+private val Method.methodFunctionRenderer: Renderer<Source>
   get() = takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let(::functionRenderer) ?: empty
 
 private val MethodDescriptor.shouldRender: Boolean
   get() =
     (enclosingTypeDescriptor.isClass || enclosingTypeDescriptor.isEnum) &&
+      visibility.isPublic &&
       isStatic &&
       !isConstructor &&
       returnTypeDescriptor.existsInObjC &&
       parameterTypeDescriptors.all { it.existsInObjC }
+
+private val FieldDescriptor.shouldRender: Boolean
+  get() =
+    (enclosingTypeDescriptor.isClass || enclosingTypeDescriptor.isEnum) &&
+      visibility.isPublic &&
+      isStatic &&
+      typeDescriptor.existsInObjC
 
 private val TypeDescriptor.existsInObjC: Boolean
   get() =
@@ -335,7 +352,7 @@ private val Variable.nameRenderer: Renderer<Source>
   get() = rendererOf(source(name.objCName.run { letIf(cKeywords.contains(this)) { plus("_") } }))
 
 private val TypeDeclaration.companionRenderer: Renderer<Source>
-  get() = propertyGet(objCNameRenderer, "companion")
+  get() = companionGet(objCNameRenderer)
 
 private val TypeDeclaration.objCNameRenderer: Renderer<Source>
   get() = objectiveCNameRenderer ?: mappedObjCNameRenderer ?: defaultObjCNameRenderer

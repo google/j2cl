@@ -2,7 +2,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
+
 @class NativekttypesNativektKCompanionObject;
+
+NS_INLINE jint NativekttypesNativektKCompanionObject_get_staticField(void) {
+ return NativekttypesNativektKCompanionObject.companion.staticField;
+}
 
 NS_INLINE void NativekttypesNativektKCompanionObject_staticMethod(void) {
  [NativekttypesNativektKCompanionObject.companion staticMethod];

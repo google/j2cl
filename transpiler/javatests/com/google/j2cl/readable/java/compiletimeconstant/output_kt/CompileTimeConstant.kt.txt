@@ -47,36 +47,52 @@ open class CompileTimeConstant<T> {
  }
 
  companion object {
+  @ObjCName("OBJ", exact = false)
   @JvmField val OBJ: Any? = null
 
+  @ObjCName("A", exact = false)
   const val A: Int = 10
 
+  @ObjCName("B", exact = false)
   const val B: Int = 20
 
+  @ObjCName("C", exact = false)
   const val C: Int = 200
 
+  @ObjCName("D", exact = false)
   const val D: String = "Tur\"tle"
 
+  @ObjCName("E", exact = false)
   const val E: String = "Do\'ve"
 
+  @ObjCName("F", exact = false)
   const val F: String = "Tur\"tleDo\'ve"
 
+  @ObjCName("J", exact = false)
   const val J: String = "Tur\"tleDo\'veTur\"tleDo\'ve"
 
+  @ObjCName("K", exact = false)
   @JvmField val K: String? = null
 
+  @ObjCName("L", exact = false)
   const val L: String = "ThisIsALongString"
 
+  @ObjCName("M", exact = false)
   const val M: String = "ThisIsALongStringAlso"
 
+  @ObjCName("N", exact = false)
   const val N: String = "ThisIsALongStringAlsoButLonger"
 
+  @ObjCName("G", exact = false)
   const val G: Long = 10000L
 
+  @ObjCName("H", exact = false)
   const val H: Char = 'A'
 
+  @ObjCName("I", exact = false)
   const val I: Boolean = true
 
+  @ObjCName("classLiteral", exact = false)
   @JvmField val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType
  }
 }

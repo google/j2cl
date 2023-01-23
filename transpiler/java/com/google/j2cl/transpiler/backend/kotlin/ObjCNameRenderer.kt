@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -97,7 +98,10 @@ private val MethodDescriptor.needsObjCNameAnnotations
   get() = visibility.needsObjCNameAnnotation && !isKtOverride
 
 private val FieldDescriptor.needsObjCNameAnnotations
-  get() = enclosingTypeDescriptor.typeDeclaration.needsObjCNameAnnotation && isEnumConstant
+  get() =
+    enclosingTypeDescriptor.typeDeclaration.needsObjCNameAnnotation &&
+      visibility.needsObjCNameAnnotation &&
+      isStatic
 
 private val TypeDeclaration.needsObjCNameAnnotation
   get() = visibility.needsObjCNameAnnotation && !isLocal
@@ -110,7 +114,7 @@ private fun Method.toConstructorObjCNames(): MethodObjCNames =
     MethodObjCNames(
       objectiveCName,
       if (objectiveCName != null) {
-        objectiveCName.split(":").mapFirst {
+        objectiveCName.objCMethodParameterNames.mapFirst {
           val prefix = "initWith"
           if (it.startsWith(prefix)) it.substring(prefix.length) else parameters.first().objCName
         }
@@ -127,7 +131,7 @@ private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
     if (objectiveCName == null || parameters.isEmpty()) {
       MethodObjCNames(objectiveCName, parameters.map { "with${it.objCName}" })
     } else {
-      val objCParameterNames = objectiveCName.split(":")
+      val objCParameterNames = objectiveCName.objCMethodParameterNames
       val firstObjCParameterName = objCParameterNames.firstOrNull()
       if (firstObjCParameterName == null) {
         MethodObjCNames(objectiveCName, objCParameterNames)
@@ -145,6 +149,9 @@ private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
       }
     }
   }
+
+private val String.objCMethodParameterNames: List<String>
+  get() = letIf(lastOrNull() == ':') { dropLast(1) }.split(":")
 
 internal val TypeDeclaration.objCName: String
   get() = objCName(forMember = false)
@@ -237,7 +244,18 @@ private val Variable.objCName
   get() = typeDescriptor.objCName(useId = true, forMember = true).titleCase
 
 internal val FieldDescriptor.objCName: String
-  get() = name!!.objCName.run { letIf(reservedKeywords.contains(this)) { it + "__" } }
+  get() =
+    name!!
+      .objCName
+      .let { name ->
+        if (objCReservedPrefixes.any { name.camelCaseStartsWith(it) }) "the" + name.titleCase
+        else name
+      }
+      .let { name ->
+        if (reservedKeywords.contains(name)) {
+          name + "__"
+        } else name
+      }
 
 // Taken from
 // "google3/third_party/java_src/j2objc/translator/src/main/resources/com/google/devtools/j2objc/reserved_names.txt"

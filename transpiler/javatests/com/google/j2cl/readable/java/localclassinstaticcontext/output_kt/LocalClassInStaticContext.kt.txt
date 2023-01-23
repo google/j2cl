@@ -15,6 +15,7 @@ import kotlin.native.ObjCName
 @ObjCName("LocalclassinstaticcontextLocalClassInStaticContext", exact = true)
 open class LocalClassInStaticContext {
  companion object {
+  @ObjCName("f", exact = false)
   @JvmField var f: Any? = object : Any() {}
 
   @JvmStatic

@@ -5,8 +5,16 @@
 @class NativekttypesNativektKTopLevel;
 @class NativekttypesNativektKTopLevel_KNested;
 
+NS_INLINE id NativekttypesNativektKTopLevel_KNested_get_staticField(void) {
+ return NativekttypesNativektKTopLevel_KNested.companion.staticField;
+}
+
 NS_INLINE id NativekttypesNativektKTopLevel_KNested_staticMethodWithId_(id s) {
  return [NativekttypesNativektKTopLevel_KNested.companion staticMethodWithId:s];
+}
+
+NS_INLINE id NativekttypesNativektKTopLevel_get_staticField(void) {
+ return NativekttypesNativektKTopLevel.companion.staticField;
 }
 
 NS_INLINE id NativekttypesNativektKTopLevel_staticMethodWithId_(id s) {

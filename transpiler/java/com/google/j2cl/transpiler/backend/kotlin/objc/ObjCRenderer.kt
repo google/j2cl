@@ -119,6 +119,8 @@ fun methodCall(
 fun propertyGet(target: Renderer<Source>, name: String): Renderer<Source> =
   target.map { dotSeparated(it, source(name)) }
 
+fun companionGet(target: Renderer<Source>): Renderer<Source> = propertyGet(target, "companion")
+
 fun block(statements: List<Renderer<Source>> = listOf()): Renderer<Source> =
   statements.flatten.map { block(newLineSeparated(it)) }
 

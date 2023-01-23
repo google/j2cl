@@ -17,8 +17,10 @@ import kotlin.run
 @ObjCName("InstancequalifieronstaticfieldInstanceQualifiers", exact = true)
 open class InstanceQualifiers {
  companion object {
+  @ObjCName("staticField", exact = false)
   @JvmField var staticField: Int = 100
 
+  @ObjCName("sideEffectCount", exact = false)
   @JvmField var sideEffectCount: Int = 0
 
   @JvmStatic

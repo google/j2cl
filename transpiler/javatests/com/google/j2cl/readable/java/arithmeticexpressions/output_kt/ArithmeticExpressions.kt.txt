@@ -271,8 +271,10 @@ open class ArithmeticExpressions {
 
   const val DOUBLE_CONSTANT_WITH_ARITHMETIC_private_2: Double = 2.200000047683716
 
+  @ObjCName("one", exact = false)
   @JvmField var one: Long = 1L
 
+  @ObjCName("foo", exact = false)
   @JvmField var foo: Long = run {
    val ___value: Long = ArithmeticExpressions.one
    ArithmeticExpressions.one = ArithmeticExpressions.one + 1L
