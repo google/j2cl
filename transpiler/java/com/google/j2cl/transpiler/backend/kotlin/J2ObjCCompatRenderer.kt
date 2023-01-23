@@ -33,7 +33,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
-import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
@@ -134,126 +133,8 @@ private val FieldDescriptor.getFunctionRenderer: Renderer<Source>
 private val FieldDescriptor.getFunctionName: String
   get() = enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_get_" + name!!
 
-// Taken from GitHub:
-// "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/objcexport/ObjCExportNamer.kt"
-internal val objCReservedPrefixes = setOf("alloc", "copy", "mutableCopy", "new", "init")
-
-// Taken from GitHub:
-// "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/CAdapterGenerator.kt"
-internal val cKeywords =
-  setOf(
-    // Actual C keywords.
-    "auto",
-    "break",
-    "case",
-    "char",
-    "const",
-    "continue",
-    "default",
-    "do",
-    "double",
-    "else",
-    "enum",
-    "extern",
-    "float",
-    "for",
-    "goto",
-    "if",
-    "int",
-    "long",
-    "register",
-    "return",
-    "short",
-    "signed",
-    "sizeof",
-    "static",
-    "struct",
-    "switch",
-    "typedef",
-    "union",
-    "unsigned",
-    "void",
-    "volatile",
-    "while",
-    // C99-specific.
-    "_Bool",
-    "_Complex",
-    "_Imaginary",
-    "inline",
-    "restrict",
-    // C11-specific.
-    "_Alignas",
-    "_Alignof",
-    "_Atomic",
-    "_Generic",
-    "_Noreturn",
-    "_Static_assert",
-    "_Thread_local",
-    // Not exactly keywords, but reserved or standard-defined.
-    "and",
-    "not",
-    "or",
-    "xor",
-    "bool",
-    "complex",
-    "imaginary",
-
-    // C++ keywords not listed above.
-    "alignas",
-    "alignof",
-    "and_eq",
-    "asm",
-    "bitand",
-    "bitor",
-    "bool",
-    "catch",
-    "char16_t",
-    "char32_t",
-    "class",
-    "compl",
-    "constexpr",
-    "const_cast",
-    "decltype",
-    "delete",
-    "dynamic_cast",
-    "explicit",
-    "export",
-    "false",
-    "friend",
-    "inline",
-    "mutable",
-    "namespace",
-    "new",
-    "noexcept",
-    "not_eq",
-    "nullptr",
-    "operator",
-    "or_eq",
-    "private",
-    "protected",
-    "public",
-    "reinterpret_cast",
-    "static_assert",
-    "template",
-    "this",
-    "thread_local",
-    "throw",
-    "true",
-    "try",
-    "typeid",
-    "typename",
-    "using",
-    "virtual",
-    "wchar_t",
-    "xor_eq"
-  )
-
 private val FieldDescriptor.getObjCName: String
-  get() =
-    objCName.let { name ->
-      if (objCReservedPrefixes.any { name.camelCaseStartsWith(it) }) "the" + name.titleCase
-      else if (cKeywords.contains(name)) name + "_" else name
-    }
+  get() = objCName.escapeObjCKeyword.escapeReservedObjCPrefixWith("the")
 
 private val FieldDescriptor.getExpressionRenderer: Renderer<Source>
   get() =
@@ -340,7 +221,7 @@ private fun MethodObjCNames.objCName(defaultMethodName: String) =
         .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCase } + ":" }
         .joinToString("")
     )
-    .run { letIf(objCReservedPrefixes.any { camelCaseStartsWith(it) }) { "do$titleCase" } }
+    .escapeReservedObjCPrefixWith("do")
 
 private val Variable.renderer: Renderer<Source>
   get() =
@@ -349,7 +230,7 @@ private val Variable.renderer: Renderer<Source>
     }
 
 private val Variable.nameRenderer: Renderer<Source>
-  get() = rendererOf(source(name.objCName.run { letIf(cKeywords.contains(this)) { plus("_") } }))
+  get() = rendererOf(source(name.objCName.escapeObjCKeyword))
 
 private val TypeDeclaration.companionRenderer: Renderer<Source>
   get() = companionGet(objCNameRenderer)
