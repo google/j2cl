@@ -29,3 +29,5 @@ fun literalSource(it: String): Source = source(it.literalString)
 fun assignment(lhs: Source, rhs: Source): Source = infix(lhs, "=", rhs)
 
 fun at(source: Source) = join(source("@"), source)
+
+fun labelReference(name: String) = at(identifierSource(name))

@@ -20,6 +20,8 @@ import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 
 /** Renderer of the Kotlin source code. */
@@ -143,12 +145,5 @@ data class Renderer(
     renderSeparatedWith(values, "\n\n", renderFn)
   }
 
-  fun renderTodo(string: String) {
-    render("TODO")
-    renderInParentheses { renderString(string) }
-  }
-
-  fun renderString(string: String) {
-    render(string.literalString)
-  }
+  fun todoSource(string: String) = join(source("TODO"), inRoundBrackets(literalSource(string)))
 }

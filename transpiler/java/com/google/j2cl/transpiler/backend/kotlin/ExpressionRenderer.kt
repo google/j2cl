@@ -61,6 +61,7 @@ import com.google.j2cl.transpiler.ast.VariableReference
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.afterSpace
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.inNewLine
 
 fun Renderer.expressionSource(expression: Expression): Source = renderedSource {
   renderExpression(expression)
@@ -89,7 +90,7 @@ fun Renderer.renderExpression(expression: Expression) {
     is ThisReference -> renderThisReference(expression)
     is VariableDeclarationExpression -> renderVariableDeclarationExpression(expression)
     is VariableReference -> renderVariableReference(expression)
-    else -> renderTodo(expression::class.java.simpleName)
+    else -> render(todoSource(expression::class.java.simpleName))
   }
 }
 
@@ -229,7 +230,7 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
     val returnLabelIdentifier =
       with(functionalInterface.typeDeclaration) { ktBridgeSimpleName ?: ktSimpleName }
     copy(currentReturnLabelIdentifier = returnLabelIdentifier).run {
-      renderStatements(functionExpression.body.statements)
+      render(statementsSource(functionExpression.body.statements).ifNotEmpty(::inNewLine))
     }
   }
 }
@@ -270,7 +271,7 @@ private fun Renderer.renderBooleanLiteral(booleanLiteral: BooleanLiteral) {
 }
 
 private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
-  renderString(stringLiteral.value)
+  render(literalSource(stringLiteral.value))
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {

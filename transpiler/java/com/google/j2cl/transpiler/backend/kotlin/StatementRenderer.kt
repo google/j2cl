@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.AssertStatement
 import com.google.j2cl.transpiler.ast.Block
 import com.google.j2cl.transpiler.ast.BreakStatement
+import com.google.j2cl.transpiler.ast.CatchClause
 import com.google.j2cl.transpiler.ast.ContinueStatement
 import com.google.j2cl.transpiler.ast.DoWhileStatement
 import com.google.j2cl.transpiler.ast.Expression
@@ -34,217 +35,227 @@ import com.google.j2cl.transpiler.ast.SwitchStatement
 import com.google.j2cl.transpiler.ast.SynchronizedStatement
 import com.google.j2cl.transpiler.ast.ThrowStatement
 import com.google.j2cl.transpiler.ast.TryStatement
+import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
+import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.WhileStatement
+import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.block
+import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
 internal fun Renderer.statementsSource(statements: List<Statement>): Source =
   newLineSeparated(statements.map(::statementSource))
 
-internal fun Renderer.renderStatements(statements: List<Statement>) {
-  renderStartingWithNewLines(statements) { renderStatement(it) }
-}
-
-fun Renderer.statementSource(statement: Statement): Source = renderedSource {
-  renderStatement(statement)
-}
-
-fun Renderer.renderStatement(statement: Statement) {
+fun Renderer.statementSource(statement: Statement): Source =
   when (statement) {
-    is AssertStatement -> renderAssertStatement(statement)
-    is Block -> renderBlock(statement)
-    is BreakStatement -> renderBreakStatement(statement)
-    is ContinueStatement -> renderContinueStatement(statement)
-    is DoWhileStatement -> renderDoWhileStatement(statement)
-    is ExpressionStatement -> renderExpressionStatement(statement)
-    is FieldDeclarationStatement -> renderFieldDeclarationStatement(statement)
-    is ForEachStatement -> renderForEachStatement(statement)
-    is IfStatement -> renderIfStatement(statement)
-    is LabeledStatement -> renderLabeledStatement(statement)
-    is LocalClassDeclarationStatement -> renderLocalClassDeclarationStatement(statement)
-    is ReturnStatement -> renderReturnStatement(statement)
-    is SwitchStatement -> renderSwitchStatement(statement)
-    is SynchronizedStatement -> renderSynchronizedStatement(statement)
-    is WhileStatement -> renderWhileStatement(statement)
-    is ThrowStatement -> renderThrowStatement(statement)
-    is TryStatement -> renderTryStatement(statement)
-    else -> renderTodo(statement::class.java.simpleName)
+    is AssertStatement -> assertStatementSource(statement)
+    is Block -> blockSource(statement)
+    is BreakStatement -> breakStatementSource(statement)
+    is ContinueStatement -> continueStatementSource(statement)
+    is DoWhileStatement -> doWhileStatementSource(statement)
+    is ExpressionStatement -> expressionStatementSource(statement)
+    is FieldDeclarationStatement -> fieldDeclarationStatementSource(statement)
+    is ForEachStatement -> forEachStatementSource(statement)
+    is IfStatement -> ifStatementSource(statement)
+    is LabeledStatement -> labeledStatementSource(statement)
+    is LocalClassDeclarationStatement -> localClassDeclarationStatementSource(statement)
+    is ReturnStatement -> returnStatementSource(statement)
+    is SwitchStatement -> switchStatementSource(statement)
+    is SynchronizedStatement -> synchronizedStatementSource(statement)
+    is WhileStatement -> whileStatementSource(statement)
+    is ThrowStatement -> throwStatementSource(statement)
+    is TryStatement -> tryStatementSource(statement)
+    else -> todoSource(statement::class.java.simpleName)
   }
-}
 
-private fun Renderer.renderAssertStatement(assertStatement: AssertStatement) {
-  render(extensionMemberQualifiedNameSource("kotlin.assert"))
-  renderInParentheses { renderExpression(assertStatement.expression) }
-  assertStatement.message?.let {
-    render(" ")
-    renderInCurlyBrackets {
-      renderNewLine()
-      renderExpression(it)
+private fun Renderer.assertStatementSource(assertStatement: AssertStatement): Source =
+  spaceSeparated(
+    join(
+      extensionMemberQualifiedNameSource("kotlin.assert"),
+      inRoundBrackets(expressionSource(assertStatement.expression))
+    ),
+    assertStatement.message.ifNotNullSource { block(expressionSource(it)) }
+  )
+
+private fun Renderer.blockSource(block: Block): Source = block(statementsSource(block.statements))
+
+private fun Renderer.breakStatementSource(breakStatement: BreakStatement): Source =
+  join(source("break"), breakStatement.labelReference.ifNotNullSource(::labelReferenceSource))
+
+private fun Renderer.continueStatementSource(continueStatement: ContinueStatement): Source =
+  join(source("continue"), continueStatement.labelReference.ifNotNullSource(::labelReferenceSource))
+
+private fun Renderer.labelReferenceSource(labelReference: LabelReference): Source =
+  at(nameSource(labelReference.target))
+
+private fun Renderer.doWhileStatementSource(doWhileStatement: DoWhileStatement): Source =
+  spaceSeparated(
+    source("do"),
+    statementSource(doWhileStatement.body),
+    source("while"),
+    inRoundBrackets(expressionSource(doWhileStatement.conditionExpression))
+  )
+
+private fun Renderer.expressionStatementSource(expressionStatement: ExpressionStatement): Source =
+  expressionSource(expressionStatement.expression)
+
+private fun Renderer.forEachStatementSource(forEachStatement: ForEachStatement): Source =
+  spaceSeparated(
+    source("for"),
+    inRoundBrackets(
+      infix(
+        nameSource(forEachStatement.loopVariable),
+        "in",
+        expressionSource(forEachStatement.iterableExpression)
+      )
+    ),
+    statementSource(forEachStatement.body)
+  )
+
+private fun Renderer.ifStatementSource(ifStatement: IfStatement): Source =
+  spaceSeparated(
+    source("if"),
+    inRoundBrackets(expressionSource(ifStatement.conditionExpression)),
+    statementSource(ifStatement.thenStatement),
+    ifStatement.elseStatement.ifNotNullSource {
+      spaceSeparated(source("else"), statementSource(it))
     }
+  )
+
+private fun Renderer.fieldDeclarationStatementSource(
+  declaration: FieldDeclarationStatement
+): Source =
+  declaration.fieldDescriptor.let { fieldDescriptor ->
+    spaceSeparated(
+      source("var"),
+      assignment(
+        colonSeparated(
+          identifierSource(fieldDescriptor.name!!),
+          sourceIf(!fieldDescriptor.typeDescriptor.isProtobufBuilder()) {
+            typeDescriptorSource(fieldDescriptor.typeDescriptor)
+          }
+        ),
+        expressionSource(declaration.expression)
+      )
+    )
   }
-}
 
-private fun Renderer.renderBlock(block: Block) {
-  renderInCurlyBrackets { renderStatements(block.statements) }
-}
+private fun Renderer.labeledStatementSource(labelStatement: LabeledStatement): Source =
+  spaceSeparated(
+    join(nameSource(labelStatement.label), source("@")),
+    labelStatement.statement.let { statementSource(it).letIf(it is LabeledStatement, ::block) }
+  )
 
-private fun Renderer.renderBreakStatement(breakStatement: BreakStatement) {
-  render("break")
-  breakStatement.labelReference?.let { renderLabelReference(it) }
-}
-
-private fun Renderer.renderContinueStatement(continueStatement: ContinueStatement) {
-  render("continue")
-  continueStatement.labelReference?.let { renderLabelReference(it) }
-}
-
-private fun Renderer.renderLabelReference(labelReference: LabelReference) {
-  render("@")
-  renderName(labelReference.target)
-}
-
-private fun Renderer.renderDoWhileStatement(doWhileStatement: DoWhileStatement) {
-  render("do ")
-  renderStatement(doWhileStatement.body)
-  render(" while ")
-  renderInParentheses { renderExpression(doWhileStatement.conditionExpression) }
-}
-
-private fun Renderer.renderExpressionStatement(expressionStatement: ExpressionStatement) {
-  renderExpression(expressionStatement.expression)
-}
-
-private fun Renderer.renderForEachStatement(forEachStatement: ForEachStatement) {
-  render("for ")
-  renderInParentheses {
-    renderName(forEachStatement.loopVariable)
-    render(" in ")
-    renderExpression(forEachStatement.iterableExpression)
-  }
-  render(" ")
-  renderStatement(forEachStatement.body)
-}
-
-private fun Renderer.renderIfStatement(ifStatement: IfStatement) {
-  render("if ")
-  renderInParentheses { renderExpression(ifStatement.conditionExpression) }
-  render(" ")
-  renderStatement(ifStatement.thenStatement)
-  ifStatement.elseStatement?.let {
-    render(" else ")
-    renderStatement(it)
-  }
-}
-
-private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarationStatement) {
-  var fieldDescriptor = declaration.fieldDescriptor
-  render("var ")
-  render(identifierSource(fieldDescriptor.name!!))
-  if (!fieldDescriptor.typeDescriptor.isProtobufBuilder()) {
-    render(": ")
-    render(typeDescriptorSource(fieldDescriptor.typeDescriptor))
-  }
-  render(" = ")
-  renderExpression(declaration.expression)
-}
-
-private fun Renderer.renderLabeledStatement(labelStatement: LabeledStatement) {
-  renderName(labelStatement.label)
-  render("@ ")
-  val innerStatement = labelStatement.statement
-  if (innerStatement is LabeledStatement) renderInCurlyBrackets { renderStatement(innerStatement) }
-  else renderStatement(innerStatement)
-}
-
-private fun Renderer.renderLocalClassDeclarationStatement(
+private fun Renderer.localClassDeclarationStatementSource(
   localClassDeclarationStatement: LocalClassDeclarationStatement
-) {
-  render(typeSource(localClassDeclarationStatement.localClass))
-}
+): Source = typeSource(localClassDeclarationStatement.localClass)
 
-private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
-  render("return")
-  currentReturnLabelIdentifier?.let { render(at(identifierSource(it))) }
-  returnStatement.expression?.let {
-    render(" ")
-    renderExpression(it)
-  }
-}
+private fun Renderer.returnStatementSource(returnStatement: ReturnStatement): Source =
+  spaceSeparated(
+    join(source("return"), currentReturnLabelIdentifier.ifNotNullSource(::labelReference)),
+    returnStatement.expression.ifNotNullSource(::expressionSource)
+  )
 
-private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {
-  render("when ")
-  renderInParentheses { renderExpression(switchStatement.switchExpression) }
-  render(" ")
-  renderInCurlyBrackets {
-    val caseExpressions = mutableListOf<Expression>()
-    for (case in switchStatement.cases) {
-      val caseExpression = case.caseExpression
-      if (caseExpression == null) {
-        // It's OK to skip empty cases, since they will fall-through to the default case, and since
-        // these are case clauses from Java, their evaluation does never have side effects.
-        caseExpressions.clear()
-        renderNewLine()
-        render("else -> ")
-        renderInCurlyBrackets { renderStatements(case.statements) }
-      } else {
-        caseExpressions.add(caseExpression)
-        val caseStatements = case.statements
-        if (caseStatements.isNotEmpty()) {
-          renderNewLine()
-          renderCommaSeparated(caseExpressions) { renderExpression(it) }
-          caseExpressions.clear()
-          render(" -> ")
-          renderInCurlyBrackets { renderStatements(caseStatements) }
+private fun Renderer.switchStatementSource(switchStatement: SwitchStatement): Source =
+  spaceSeparated(
+    source("when"),
+    inRoundBrackets(expressionSource(switchStatement.switchExpression)),
+    block(
+      newLineSeparated(
+        // TODO(b/263161219): Represent WhenStatement as a data class, convert from SwitchStatement
+        // and render as Source.
+        run {
+          val caseExpressions = mutableListOf<Expression>()
+          switchStatement.cases.map { case ->
+            val caseExpression = case.caseExpression
+            if (caseExpression == null) {
+              // It's OK to skip empty cases, since they will fall-through to the default case, and
+              // since
+              // these are case clauses from Java, their evaluation does never have side effects.
+              caseExpressions.clear()
+              infix(source("else"), "->", block(statementsSource(case.statements)))
+            } else {
+              caseExpressions.add(caseExpression)
+              val caseStatements = case.statements
+              if (caseStatements.isNotEmpty()) {
+                infix(
+                    commaSeparated(caseExpressions.map(::expressionSource)),
+                    "->",
+                    block(statementsSource(caseStatements))
+                  )
+                  .also { caseExpressions.clear() }
+              } else {
+                emptySource
+              }
+            }
+          }
         }
-      }
+      )
+    )
+  )
+
+private fun Renderer.synchronizedStatementSource(
+  synchronizedStatement: SynchronizedStatement
+): Source =
+  spaceSeparated(
+    join(
+      extensionMemberQualifiedNameSource("kotlin.synchronized"),
+      inRoundBrackets(expressionSource(synchronizedStatement.expression))
+    ),
+    statementSource(synchronizedStatement.body)
+  )
+
+private fun Renderer.whileStatementSource(whileStatement: WhileStatement): Source =
+  spaceSeparated(
+    source("while"),
+    inRoundBrackets(expressionSource(whileStatement.conditionExpression)),
+    statementSource(whileStatement.body)
+  )
+
+private fun Renderer.throwStatementSource(throwStatement: ThrowStatement): Source =
+  spaceSeparated(source("throw"), expressionSource(throwStatement.expression))
+
+private fun Renderer.tryStatementSource(tryStatement: TryStatement): Source =
+  spaceSeparated(
+    source("try"),
+    statementSource(tryStatement.body),
+    spaceSeparated(tryStatement.catchClauses.map(::catchClauseSource)),
+    tryStatement.finallyBlock.ifNotNullSource {
+      spaceSeparated(source("finally"), statementSource(it))
     }
-  }
-}
+  )
 
-private fun Renderer.renderSynchronizedStatement(synchronizedStatement: SynchronizedStatement) {
-  render(extensionMemberQualifiedNameSource("kotlin.synchronized"))
-  renderInParentheses { renderExpression(synchronizedStatement.expression) }
-  render(" ")
-  renderBlock(synchronizedStatement.body)
-}
+private val TypeDescriptor.catchTypeDescriptors
+  get() = if (this is UnionTypeDescriptor) unionTypeDescriptors else listOf(this)
 
-private fun Renderer.renderWhileStatement(whileStatement: WhileStatement) {
-  render("while ")
-  renderInParentheses { renderExpression(whileStatement.conditionExpression) }
-  render(" ")
-  renderStatement(whileStatement.body)
-}
-
-private fun Renderer.renderThrowStatement(throwStatement: ThrowStatement) {
-  render("throw ")
-  renderExpression(throwStatement.expression)
-}
-
-private fun Renderer.renderTryStatement(tryStatement: TryStatement) {
-  // Render try/catch/finally.
-  render("try ")
-  renderStatement(tryStatement.body)
-  tryStatement.catchClauses.forEach { catchClause ->
-    val catchVariable = catchClause.exceptionVariable
+private fun Renderer.catchClauseSource(catchClause: CatchClause): Source =
+  spaceSeparated(
     // Duplicate catch block for each type in the union, which are not available in Kotlin.
-    val catchTypeDescriptors =
-      catchVariable.typeDescriptor.let {
-        if (it is UnionTypeDescriptor) it.unionTypeDescriptors else listOf(it)
-      }
-    catchTypeDescriptors.forEach { catchType ->
-      render(" catch ")
-      renderInParentheses {
-        renderName(catchVariable)
-        render(": ")
-        render(typeDescriptorSource(catchType.toNonNullable()))
-      }
-      render(" ")
-      renderBlock(catchClause.body)
+    catchClause.exceptionVariable.typeDescriptor.catchTypeDescriptors.map {
+      catchClauseSource(catchClause.exceptionVariable, it, catchClause.body)
     }
-  }
-  tryStatement.finallyBlock?.let {
-    render(" finally ")
-    renderStatement(it)
-  }
-}
+  )
+
+private fun Renderer.catchClauseSource(
+  variable: Variable,
+  type: TypeDescriptor,
+  body: Block
+): Source =
+  spaceSeparated(
+    source("catch"),
+    inRoundBrackets(
+      colonSeparated(nameSource(variable), typeDescriptorSource(type.toNonNullable()))
+    ),
+    blockSource(body)
+  )
