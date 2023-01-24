@@ -102,6 +102,7 @@ public class TypeDescriptors {
 
   // Kotlin-specific types
   public DeclaredTypeDescriptor kotlinNothing;
+  public DeclaredTypeDescriptor kotlinJvmInternalIntrinsics;
 
   /**
    * Global window reference that is the enclosing class of native global methods and properties.
@@ -680,6 +681,9 @@ public class TypeDescriptors {
           break;
         case "kotlin.jvm.internal.NothingStub":
           typeDescriptors.kotlinNothing = referenceType;
+          break;
+        case "kotlin.jvm.internal.Intrinsics":
+          typeDescriptors.kotlinJvmInternalIntrinsics = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);
