@@ -7,9 +7,16 @@ import javaemul.lang.*
 import java.util.HashMap
 import java.util.LinkedList
 import kotlin.Any
+import kotlin.Boolean
+import kotlin.Byte
+import kotlin.Char
+import kotlin.Double
+import kotlin.Float
 import kotlin.Int
+import kotlin.Long
 import kotlin.Number
 import kotlin.OptIn
+import kotlin.Short
 import kotlin.String
 import kotlin.collections.HashSet
 import kotlin.collections.MutableCollection
@@ -87,6 +94,105 @@ open class ObjCName {
 
   @kotlin.native.ObjCName("NULL__", exact = false)
   @JvmField var NULL__: Int = 0
+
+  @kotlin.native.ObjCName("BOOLEAN_FALSE", exact = false)
+  const val BOOLEAN_FALSE: Boolean = false
+
+  @kotlin.native.ObjCName("BOOLEAN_TRUE", exact = false)
+  const val BOOLEAN_TRUE: Boolean = true
+
+  @kotlin.native.ObjCName("CHAR", exact = false)
+  const val CHAR: Char = 'a'
+
+  @kotlin.native.ObjCName("CHAR_APOSTROPHE", exact = false)
+  const val CHAR_APOSTROPHE: Char = '\''
+
+  @kotlin.native.ObjCName("CHAR_BACKSLASH", exact = false)
+  const val CHAR_BACKSLASH: Char = '\\'
+
+  @kotlin.native.ObjCName("CHAR_UNICODE", exact = false)
+  const val CHAR_UNICODE: Char = '\u1231'
+
+  @kotlin.native.ObjCName("BYTE", exact = false)
+  const val BYTE: Byte = (123).toByte()
+
+  @kotlin.native.ObjCName("SHORT", exact = false)
+  const val SHORT: Short = (123).toShort()
+
+  @kotlin.native.ObjCName("INT", exact = false)
+  const val INT: Int = 123
+
+  @kotlin.native.ObjCName("INT_MIN_VALUE", exact = false)
+  @JvmField val INT_MIN_VALUE: Int = Int.MIN_VALUE
+
+  @kotlin.native.ObjCName("INT_MAX_VALUE", exact = false)
+  @JvmField val INT_MAX_VALUE: Int = Int.MIN_VALUE
+
+  @kotlin.native.ObjCName("LONG", exact = false)
+  const val LONG: Long = 123L
+
+  @kotlin.native.ObjCName("LONG_MIN_VALUE", exact = false)
+  @JvmField val LONG_MIN_VALUE: Long = Long.MIN_VALUE
+
+  @kotlin.native.ObjCName("LONG_MAX_VALUE", exact = false)
+  @JvmField val LONG_MAX_VALUE: Long = Long.MAX_VALUE
+
+  @kotlin.native.ObjCName("FLOAT", exact = false)
+  const val FLOAT: Float = 123.0f
+
+  @kotlin.native.ObjCName("FLOAT_NAN", exact = false)
+  @JvmField val FLOAT_NAN: Float = Float.NaN
+
+  @kotlin.native.ObjCName("FLOAT_NEGATIVE_INFINITY", exact = false)
+  @JvmField val FLOAT_NEGATIVE_INFINITY: Float = Float.NEGATIVE_INFINITY
+
+  @kotlin.native.ObjCName("FLOAT_POSITIVE_INFINITY", exact = false)
+  @JvmField val FLOAT_POSITIVE_INFINITY: Float = Float.POSITIVE_INFINITY
+
+  @kotlin.native.ObjCName("FLOAT_MIN_VALUE", exact = false)
+  @JvmField val FLOAT_MIN_VALUE: Float = Float.MIN_VALUE
+
+  @kotlin.native.ObjCName("FLOAT_MIN_NORMAL", exact = false)
+  @JvmField val FLOAT_MIN_NORMAL: Float = Float.MIN_NORMAL
+
+  @kotlin.native.ObjCName("FLOAT_MIN_EXPONENT", exact = false)
+  @JvmField val FLOAT_MIN_EXPONENT: Float = Float.MIN_EXPONENT.toFloat()
+
+  @kotlin.native.ObjCName("FLOAT_MAX_VALUE", exact = false)
+  @JvmField val FLOAT_MAX_VALUE: Float = Float.MAX_VALUE
+
+  @kotlin.native.ObjCName("FLOAT_MAX_EXPONENT", exact = false)
+  @JvmField val FLOAT_MAX_EXPONENT: Float = Float.MAX_EXPONENT.toFloat()
+
+  @kotlin.native.ObjCName("DOUBLE", exact = false)
+  const val DOUBLE: Double = 123.0
+
+  @kotlin.native.ObjCName("DOUBLE_NAN", exact = false)
+  @JvmField val DOUBLE_NAN: Double = Double.NaN
+
+  @kotlin.native.ObjCName("DOUBLE_NEGATIVE_INFINITY", exact = false)
+  @JvmField val DOUBLE_NEGATIVE_INFINITY: Double = Double.NEGATIVE_INFINITY
+
+  @kotlin.native.ObjCName("DOUBLE_POSITIVE_INFINITY", exact = false)
+  @JvmField val DOUBLE_POSITIVE_INFINITY: Double = Double.POSITIVE_INFINITY
+
+  @kotlin.native.ObjCName("DOUBLE_MIN_VALUE", exact = false)
+  @JvmField val DOUBLE_MIN_VALUE: Double = Double.MIN_VALUE
+
+  @kotlin.native.ObjCName("DOUBLE_MIN_NORMAL", exact = false)
+  @JvmField val DOUBLE_MIN_NORMAL: Double = Double.MIN_NORMAL
+
+  @kotlin.native.ObjCName("DOUBLE_MIN_EXPONENT", exact = false)
+  @JvmField val DOUBLE_MIN_EXPONENT: Double = Double.MIN_EXPONENT.toDouble()
+
+  @kotlin.native.ObjCName("DOUBLE_MAX_VALUE", exact = false)
+  @JvmField val DOUBLE_MAX_VALUE: Double = Double.MAX_VALUE
+
+  @kotlin.native.ObjCName("DOUBLE_MAX_EXPONENT", exact = false)
+  @JvmField val DOUBLE_MAX_EXPONENT: Double = Double.MAX_EXPONENT.toDouble()
+
+  @kotlin.native.ObjCName("STRING", exact = false)
+  const val STRING: String = "foo"
 
   @JvmStatic
   @kotlin.native.ObjCName("newFoo", exact = false)

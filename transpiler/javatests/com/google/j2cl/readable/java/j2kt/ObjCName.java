@@ -56,6 +56,48 @@ public class ObjCName {
   public static int inline;
   public static int NULL;
 
+  // Compile-time constants
+  public static final boolean BOOLEAN_FALSE = false;
+  public static final boolean BOOLEAN_TRUE = true;
+
+  public static final char CHAR = 'a';
+  public static final char CHAR_APOSTROPHE = '\'';
+  public static final char CHAR_BACKSLASH = '\\';
+  public static final char CHAR_UNICODE = 0x1231;
+
+  public static final byte BYTE = 123;
+  public static final short SHORT = (short) 123;
+
+  public static final int INT = 123;
+  public static final int INT_MIN_VALUE = Integer.MIN_VALUE;
+  public static final int INT_MAX_VALUE = Integer.MIN_VALUE;
+
+  public static final long LONG = 123L;
+  public static final long LONG_MIN_VALUE = Long.MIN_VALUE;
+  public static final long LONG_MAX_VALUE = Long.MAX_VALUE;
+
+  public static final float FLOAT = 123f;
+  public static final float FLOAT_NAN = Float.NaN;
+  public static final float FLOAT_NEGATIVE_INFINITY = Float.NEGATIVE_INFINITY;
+  public static final float FLOAT_POSITIVE_INFINITY = Float.POSITIVE_INFINITY;
+  public static final float FLOAT_MIN_VALUE = Float.MIN_VALUE;
+  public static final float FLOAT_MIN_NORMAL = Float.MIN_NORMAL;
+  public static final float FLOAT_MIN_EXPONENT = Float.MIN_EXPONENT;
+  public static final float FLOAT_MAX_VALUE = Float.MAX_VALUE;
+  public static final float FLOAT_MAX_EXPONENT = Float.MAX_EXPONENT;
+
+  public static final double DOUBLE = 123.0;
+  public static final double DOUBLE_NAN = Double.NaN;
+  public static final double DOUBLE_NEGATIVE_INFINITY = Double.NEGATIVE_INFINITY;
+  public static final double DOUBLE_POSITIVE_INFINITY = Double.POSITIVE_INFINITY;
+  public static final double DOUBLE_MIN_VALUE = Double.MIN_VALUE;
+  public static final double DOUBLE_MIN_NORMAL = Double.MIN_NORMAL;
+  public static final double DOUBLE_MIN_EXPONENT = Double.MIN_EXPONENT;
+  public static final double DOUBLE_MAX_VALUE = Double.MAX_VALUE;
+  public static final double DOUBLE_MAX_EXPONENT = Double.MAX_EXPONENT;
+
+  public static final String STRING = "foo";
+
   public ObjCName() {}
 
   @ObjectiveCName("initWithInteger")
