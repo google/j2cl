@@ -49,6 +49,11 @@ public class ImplementStaticInitializationViaConditionChecks
 
   @Override
   public void applyTo(Type type) {
+    // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this check could
+    // be removed.
+    if (type.isNative()) {
+      return;
+    }
     synthesizeClinitCallsOnFieldAccess(type);
     synthesizeClinitMethod(type);
   }

@@ -17,9 +17,17 @@ package wasmjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
+
 /** Tests J2WASM jsinterop features. */
 public final class Main {
   public static void main(String... args) throws Exception {
+    testJsString();
+    testJsType();
+  }
+
+  public static void testJsString() {
     assertEquals(null, String.fromJsString(null));
 
     String empty = "";
@@ -27,5 +35,19 @@ public final class Main {
 
     String foo = "String with special chars like $'%$\"^";
     assertEquals(foo, String.fromJsString(foo.toJsString()));
+  }
+
+  private static void testJsType() {
+    RegExp regExp = new RegExp("test".toJsString());
+    assertEquals(true, regExp.test("test".toJsString()));
+    assertEquals(false, regExp.test("rest".toJsString()));
+  }
+
+  // TODO(b/262789003): Make this take String when NativeString autoconversion is implemented.
+  @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
+  public static class RegExp {
+    public RegExp(String.NativeString pattern) {}
+
+    public native boolean test(String.NativeString value);
   }
 }

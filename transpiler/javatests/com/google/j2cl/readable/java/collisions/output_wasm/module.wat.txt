@@ -2,7 +2,6 @@
 (global $f_$initialized__collisions_goog (mut i32) (i32.const 0))
 
 ;;; Code for collisions.Blah [static fields]
-(global $f_$initialized__collisions_Blah (mut i32) (i32.const 0))
 
 ;;; Code for collisions.foo [static fields]
 (global $f_$initialized__collisions_foo (mut i32) (i32.const 0))
@@ -28,27 +27,6 @@
 
 ;;; Code for collisions.goog [itable.init]
 (global $collisions.goog.itable (ref $collisions.goog.itable) (struct.new $collisions.goog.itable 
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
-;;; Code for collisions.Blah [vtable.init]
-(global $collisions.Blah.vtable (ref $collisions.Blah.vtable) 
- (struct.new $collisions.Blah.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@collisions.Blah)
- )
-)
-
-;;; Code for collisions.Blah [itable.init]
-(global $collisions.Blah.itable (ref $collisions.Blah.itable) (struct.new $collisions.Blah.itable 
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -238,59 +216,10 @@
 (elem declare func $m_getClass__java_lang_Class@collisions.goog)
 
 ;;; Code for collisions.Blah [CLASS]
-(type $collisions.Blah (struct_subtype 
- (field $vtable (ref $collisions.Blah.vtable)) 
- (field $itable (ref $collisions.Blah.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $collisions.Blah.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $collisions.Blah.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
 
-;;; Blah Blah.$create()
-(func $$create__@collisions.Blah
- (result (ref null $collisions.Blah))
- ;;@ collisions/goog.java:26:6
- (local $$instance (ref null $collisions.Blah))
- (block
-  ;; Blah $instance = new Blah.<init>(0);
-  ;;@ collisions/goog.java:26:6
-  (local.set $$instance (struct.new $collisions.Blah (ref.as_non_null (global.get $collisions.Blah.vtable)) (ref.as_non_null (global.get $collisions.Blah.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ collisions/goog.java:26:6
-  (call $$ctor__void_$p_collisions_Blah@collisions.Blah (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
-  ;;@ collisions/goog.java:26:6
-  (return (local.get $$instance))
- )
-)
-
-;;; void Blah.$ctor()
-(func $$ctor__void_$p_collisions_Blah@collisions.Blah
- (param $this (ref null $collisions.Blah))
- ;;@ collisions/goog.java:26:6
- (block
-  ;; collisions.Blah.$clinit();
-  ;;@ collisions/goog.java:26:6
-  (call $$clinit__void@collisions.Blah )
-  ;; Object.this.$ctor();
-  ;;@ collisions/goog.java:26:6
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
+;;; Blah()
+(func $m_<init>__@collisions.Blah (import "imports" "String.constructor") 
+ (result (ref null extern))
 )
 
 ;;; void Blah.m()
@@ -298,45 +227,9 @@
 )
 
 ;;; double Blah.getN()
-(func $m_getN__double@collisions.Blah (import "imports" "String.prototype.length") 
+(func $m_getN__double@collisions.Blah (import "imports" "get String.prototype.length") 
  (result f64)
 )
-
-;;; void Blah.$clinit()
-(func $$clinit__void@collisions.Blah
- ;;@ collisions/goog.java:26:6
- (block
-  ;; if (collisions.Blah.$initialized) return;
-  ;;@ collisions/goog.java:26:6
-  (if (global.get $f_$initialized__collisions_Blah)
-   (then
-    ;; return;
-    ;;@ collisions/goog.java:26:6
-    (return )
-   )
-  )
-  ;; (collisions.Blah.$initialized = true);
-  ;;@ collisions/goog.java:26:6
-  (global.set $f_$initialized__collisions_Blah (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ collisions/goog.java:26:6
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> Blah.getClass()
-(func $m_getClass__java_lang_Class@collisions.Blah
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $collisions.Blah))
- (local.set $this (ref.cast_static $collisions.Blah (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.Blah();
-  (return (call $function.no.side.effects.$getCollisions.Blah__java_lang_Class (ref.func $$getCollisions.Blah__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@collisions.Blah)
 
 ;;; Code for collisions.foo [CLASS]
 (type $collisions.foo (struct_subtype 
@@ -510,9 +403,9 @@
   ;; collisions.Blah.getN();
   ;;@ collisions/goog.java:40:4
   (drop (call $m_getN__double@collisions.Blah ))
-  ;; collisions.Blah.$create();
+  ;; new Blah.<init>();
   ;;@ collisions/goog.java:41:4
-  (drop (call $$create__@collisions.Blah ))
+  (drop (call $m_<init>__@collisions.Blah ))
   ;; collisions.goog.$create();
   ;;@ collisions/goog.java:42:4
   (drop (call $$create__@collisions.goog ))

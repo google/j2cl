@@ -17,6 +17,7 @@ package importglobaljstypes;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -38,12 +39,20 @@ public class Number {
    */
   @JsType(isNative = true, namespace = GLOBAL, name = "Function")
   private interface NativeFunction<T> {
+    // TODO(b/193532287): Enable when arrays are supported in wasm jsinterop. Upon enabling,
+    // `thisContext` will also need to be made a wasm extern, because wasm does not support
+    // accepting a non-native type in a native method.
+    @Wasm("nop")
     T apply(Object thisContext, int[] argsArray);
   }
 
   @JsProperty(name = "String.fromCharCode", namespace = GLOBAL)
+  // TODO(b/262789003,b/193532287): Enable when arrays and strings are supported in wasm jsinterop.
+  @Wasm("nop")
   private static native NativeFunction<String> getFromCharCodeFunction();
 
+  // TODO(b/262789003,b/193532287): Enable when arrays and strings are supported in wasm jsinterop.
+  @Wasm("nop")
   public static String fromCharCode(int[] array) {
     return getFromCharCodeFunction().apply(null, array);
   }

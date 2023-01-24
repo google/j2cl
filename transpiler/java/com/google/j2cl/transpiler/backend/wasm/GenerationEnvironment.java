@@ -132,6 +132,10 @@ class GenerationEnvironment {
       return ((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration().getWasmInfo();
     }
 
+    if (typeDescriptor.isNative()) {
+      return "extern";
+    }
+
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
       if (arrayTypeDescriptor.isNativeWasmArray()) {
