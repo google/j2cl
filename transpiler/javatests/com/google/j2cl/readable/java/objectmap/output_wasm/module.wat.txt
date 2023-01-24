@@ -1,30 +1,143 @@
 ;;; Code for objectmap.ObjectMap [static fields]
+(global $f_$initialized__objectmap_ObjectMap (mut i32) (i32.const 0))
+
+;;; Code for objectmap.ObjectMap [vtable.init]
+(global $objectmap.ObjectMap.vtable (ref $objectmap.ObjectMap.vtable) 
+ (struct.new $objectmap.ObjectMap.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@objectmap.ObjectMap)
+ )
+)
+
+;;; Code for objectmap.ObjectMap [itable.init]
+(global $objectmap.ObjectMap.itable (ref $objectmap.ObjectMap.itable) (struct.new $objectmap.ObjectMap.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
 
 ;;; Code for objectmap.ObjectMap [CLASS]
+(type $objectmap.ObjectMap (struct_subtype 
+ (field $vtable (ref $objectmap.ObjectMap.vtable)) 
+ (field $itable (ref $objectmap.ObjectMap.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $objectmap.ObjectMap.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+(type $objectmap.ObjectMap.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
 
-;;; ObjectMap()
-(func $m_<init>__@objectmap.ObjectMap (import "imports" "Object.constructor") 
- (result (ref null extern))
+;;; ObjectMap<T> ObjectMap.$create()
+(func $$create__@objectmap.ObjectMap
+ (result (ref null $objectmap.ObjectMap))
+ ;;@ objectmap/ObjectMap.java:23:13
+ (local $$instance (ref null $objectmap.ObjectMap))
+ (block
+  ;; ObjectMap<T> $instance = new ObjectMap.<init>(0);
+  ;;@ objectmap/ObjectMap.java:23:13
+  (local.set $$instance (struct.new $objectmap.ObjectMap (ref.as_non_null (global.get $objectmap.ObjectMap.vtable)) (ref.as_non_null (global.get $objectmap.ObjectMap.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ objectmap/ObjectMap.java:23:13
+  (call $$ctor__void_$p_objectmap_ObjectMap@objectmap.ObjectMap (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ objectmap/ObjectMap.java:23:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ObjectMap.$ctor()
+(func $$ctor__void_$p_objectmap_ObjectMap@objectmap.ObjectMap
+ (param $this (ref null $objectmap.ObjectMap))
+ ;;@ objectmap/ObjectMap.java:23:13
+ (block
+  ;; objectmap.ObjectMap.$clinit();
+  ;;@ objectmap/ObjectMap.java:23:13
+  (call $$clinit__void@objectmap.ObjectMap )
+  ;; Object.this.$ctor();
+  ;;@ objectmap/ObjectMap.java:23:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
 )
 
 ;;; ObjectMap<T> ObjectMap.create()
 (func $m_create__objectmap_ObjectMap@objectmap.ObjectMap
- (result (ref null extern))
+ (result (ref null $objectmap.ObjectMap))
  ;;@ objectmap/ObjectMap.java:25:26
  (block
+  ;; objectmap.ObjectMap.$clinit();
+  ;;@ objectmap/ObjectMap.java:25:35
+  (call $$clinit__void@objectmap.ObjectMap )
   ;; return null;
   ;;@ objectmap/ObjectMap.java:26:4
-  (return (ref.null extern))
+  (return (ref.null $objectmap.ObjectMap))
  )
 )
 
 ;;; ObjectMap<String> ObjectMap.createForString()
 (func $m_createForString__objectmap_ObjectMap@objectmap.ObjectMap
- (result (ref null extern))
+ (result (ref null $objectmap.ObjectMap))
  ;;@ objectmap/ObjectMap.java:30:27
  (block
+  ;; objectmap.ObjectMap.$clinit();
+  ;;@ objectmap/ObjectMap.java:30:45
+  (call $$clinit__void@objectmap.ObjectMap )
   ;; return null;
   ;;@ objectmap/ObjectMap.java:31:4
-  (return (ref.null extern))
+  (return (ref.null $objectmap.ObjectMap))
  )
 )
+
+;;; void ObjectMap.$clinit()
+(func $$clinit__void@objectmap.ObjectMap
+ ;;@ objectmap/ObjectMap.java:23:13
+ (block
+  ;; if (objectmap.ObjectMap.$initialized) return;
+  ;;@ objectmap/ObjectMap.java:23:13
+  (if (global.get $f_$initialized__objectmap_ObjectMap)
+   (then
+    ;; return;
+    ;;@ objectmap/ObjectMap.java:23:13
+    (return )
+   )
+  )
+  ;; (objectmap.ObjectMap.$initialized = true);
+  ;;@ objectmap/ObjectMap.java:23:13
+  (global.set $f_$initialized__objectmap_ObjectMap (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ objectmap/ObjectMap.java:23:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> ObjectMap.getClass()
+(func $m_getClass__java_lang_Class@objectmap.ObjectMap
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $objectmap.ObjectMap))
+ (local.set $this (ref.cast_static $objectmap.ObjectMap (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getObjectmap.ObjectMap();
+  (return (call $function.no.side.effects.$getObjectmap.ObjectMap__java_lang_Class (ref.func $$getObjectmap.ObjectMap__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@objectmap.ObjectMap)

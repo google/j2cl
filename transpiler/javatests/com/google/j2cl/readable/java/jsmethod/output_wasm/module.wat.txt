@@ -1,0 +1,387 @@
+;;; Code for jsmethod.JsMethodExample [static fields]
+(global $f_$initialized__jsmethod_JsMethodExample (mut i32) (i32.const 0))
+
+;;; Code for jsmethod.JsMethodExample.Base [static fields]
+(global $f_$initialized__jsmethod_JsMethodExample_Base (mut i32) (i32.const 0))
+
+;;; Code for jsmethod.JsMethodExample.I [static fields]
+(global $f_$initialized__jsmethod_JsMethodExample_I (mut i32) (i32.const 0))
+
+;;; Code for jsmethod.JsMethodExample.Sub [static fields]
+(global $f_$initialized__jsmethod_JsMethodExample_Sub (mut i32) (i32.const 0))
+
+;;; Code for jsmethod.JsMethodExample [vtable.init]
+(global $jsmethod.JsMethodExample.vtable (ref $jsmethod.JsMethodExample.vtable) 
+ (struct.new $jsmethod.JsMethodExample.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsmethod.JsMethodExample)
+  (ref.func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample)
+ )
+)
+
+;;; Code for jsmethod.JsMethodExample [itable.init]
+(global $jsmethod.JsMethodExample.itable (ref $jsmethod.JsMethodExample.itable) (struct.new $jsmethod.JsMethodExample.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for jsmethod.JsMethodExample.Sub [vtable.init]
+(global $jsmethod.JsMethodExample.Sub.vtable (ref $jsmethod.JsMethodExample.Sub.vtable) 
+ (struct.new $jsmethod.JsMethodExample.Sub.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub)
+  (ref.func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub)
+  (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
+ )
+)
+
+;;; Code for jsmethod.JsMethodExample.Sub [itable.init]
+(global $jsmethod.JsMethodExample.Sub.itable (ref $jsmethod.JsMethodExample.Sub.itable) (struct.new $jsmethod.JsMethodExample.Sub.itable 
+ (struct.new $jsmethod.JsMethodExample.I.vtable
+  (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
+ )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for jsmethod.JsMethodExample [CLASS]
+(type $jsmethod.JsMethodExample (struct_subtype 
+ (field $vtable (ref $jsmethod.JsMethodExample.vtable)) 
+ (field $itable (ref $jsmethod.JsMethodExample.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $jsmethod.JsMethodExample.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testMethod__java_util_ArrayList (ref $function.m_testMethod__java_util_ArrayList))
+  $java.lang.Object.vtable)
+)
+(type $jsmethod.JsMethodExample.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
+
+;;; JsMethodExample JsMethodExample.$create()
+(func $$create__@jsmethod.JsMethodExample
+ (result (ref null $jsmethod.JsMethodExample))
+ ;;@ jsmethod/JsMethodExample.java:21:13
+ (local $$instance (ref null $jsmethod.JsMethodExample))
+ (block
+  ;; JsMethodExample $instance = new JsMethodExample.<init>(0);
+  ;;@ jsmethod/JsMethodExample.java:21:13
+  (local.set $$instance (struct.new $jsmethod.JsMethodExample (ref.as_non_null (global.get $jsmethod.JsMethodExample.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ jsmethod/JsMethodExample.java:21:13
+  (call $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ jsmethod/JsMethodExample.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsMethodExample.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample
+ (param $this (ref null $jsmethod.JsMethodExample))
+ ;;@ jsmethod/JsMethodExample.java:21:13
+ (block
+  ;; jsmethod.JsMethodExample.$clinit();
+  ;;@ jsmethod/JsMethodExample.java:21:13
+  (call $$clinit__void@jsmethod.JsMethodExample )
+  ;; Object.this.$ctor();
+  ;;@ jsmethod/JsMethodExample.java:21:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; T JsMethodExample.testMethod()
+(func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample
+ (type $function.m_testMethod__java_util_ArrayList)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.util.ArrayList))
+ ;;@ jsmethod/JsMethodExample.java:31:48
+ (local $this (ref null $jsmethod.JsMethodExample))
+ (local.set $this (ref.cast_static $jsmethod.JsMethodExample (local.get $this.untyped)))
+ (block
+ )
+ (unreachable)
+)
+(elem declare func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample)
+
+;;; void JsMethodExample.$clinit()
+(func $$clinit__void@jsmethod.JsMethodExample
+ ;;@ jsmethod/JsMethodExample.java:21:13
+ (block
+  ;; if (jsmethod.JsMethodExample.$initialized) return;
+  ;;@ jsmethod/JsMethodExample.java:21:13
+  (if (global.get $f_$initialized__jsmethod_JsMethodExample)
+   (then
+    ;; return;
+    ;;@ jsmethod/JsMethodExample.java:21:13
+    (return )
+   )
+  )
+  ;; (jsmethod.JsMethodExample.$initialized = true);
+  ;;@ jsmethod/JsMethodExample.java:21:13
+  (global.set $f_$initialized__jsmethod_JsMethodExample (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsmethod/JsMethodExample.java:21:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> JsMethodExample.getClass()
+(func $m_getClass__java_lang_Class@jsmethod.JsMethodExample
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethod.JsMethodExample))
+ (local.set $this (ref.cast_static $jsmethod.JsMethodExample (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample();
+  (return (call $function.no.side.effects.$getJsmethod.JsMethodExample__java_lang_Class (ref.func $$getJsmethod.JsMethodExample__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample)
+
+;;; Code for jsmethod.JsMethodExample.Base [CLASS]
+(type $jsmethod.JsMethodExample.Base (struct_subtype 
+ (field $vtable (ref $jsmethod.JsMethodExample.Base.vtable)) 
+ (field $itable (ref $jsmethod.JsMethodExample.Base.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $jsmethod.JsMethodExample.Base.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
+  $java.lang.Object.vtable)
+)
+(type $jsmethod.JsMethodExample.Base.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
+
+;;; void Base.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base
+ (param $this (ref null $jsmethod.JsMethodExample.Base))
+ ;;@ jsmethod/JsMethodExample.java:33:24
+ (block
+  ;; jsmethod.JsMethodExample.Base.$clinit();
+  ;;@ jsmethod/JsMethodExample.java:33:24
+  (call $$clinit__void@jsmethod.JsMethodExample.Base )
+  ;; Object.this.$ctor();
+  ;;@ jsmethod/JsMethodExample.java:33:24
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Base.m(T t)
+(func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Base
+ (type $function.m_m__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ ;;@ jsmethod/JsMethodExample.java:35:16
+ (local $this (ref null $jsmethod.JsMethodExample.Base))
+ (local.set $this (ref.cast_static $jsmethod.JsMethodExample.Base (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Base)
+
+;;; void Base.$clinit()
+(func $$clinit__void@jsmethod.JsMethodExample.Base
+ ;;@ jsmethod/JsMethodExample.java:33:24
+ (block
+  ;; if (jsmethod.JsMethodExample.Base.$initialized) return;
+  ;;@ jsmethod/JsMethodExample.java:33:24
+  (if (global.get $f_$initialized__jsmethod_JsMethodExample_Base)
+   (then
+    ;; return;
+    ;;@ jsmethod/JsMethodExample.java:33:24
+    (return )
+   )
+  )
+  ;; (jsmethod.JsMethodExample.Base.$initialized = true);
+  ;;@ jsmethod/JsMethodExample.java:33:24
+  (global.set $f_$initialized__jsmethod_JsMethodExample_Base (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsmethod/JsMethodExample.java:33:24
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Code for jsmethod.JsMethodExample.I [INTERFACE]
+(type $jsmethod.JsMethodExample.I.vtable (struct 
+ (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
+ )
+)
+
+;;; void I.$clinit()
+(func $$clinit__void@jsmethod.JsMethodExample.I
+ ;;@ jsmethod/JsMethodExample.java:38:12
+ (block
+  ;; if (jsmethod.JsMethodExample.I.$initialized) return;
+  ;;@ jsmethod/JsMethodExample.java:38:12
+  (if (global.get $f_$initialized__jsmethod_JsMethodExample_I)
+   (then
+    ;; return;
+    ;;@ jsmethod/JsMethodExample.java:38:12
+    (return )
+   )
+  )
+  ;; (jsmethod.JsMethodExample.I.$initialized = true);
+  ;;@ jsmethod/JsMethodExample.java:38:12
+  (global.set $f_$initialized__jsmethod_JsMethodExample_I (i32.const 1))
+ )
+)
+
+;;; Code for jsmethod.JsMethodExample.Sub [CLASS]
+(type $jsmethod.JsMethodExample.Sub (struct_subtype 
+ (field $vtable (ref $jsmethod.JsMethodExample.Sub.vtable)) 
+ (field $itable (ref $jsmethod.JsMethodExample.Sub.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $jsmethod.JsMethodExample.Base)
+)
+(type $jsmethod.JsMethodExample.Sub.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
+ (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
+  $jsmethod.JsMethodExample.Base.vtable)
+)
+(type $jsmethod.JsMethodExample.Sub.itable (struct_subtype 
+(field $slot0 (ref $jsmethod.JsMethodExample.I.vtable))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $jsmethod.JsMethodExample.Base.itable))
+
+;;; Sub Sub.$create()
+(func $$create__@jsmethod.JsMethodExample.Sub
+ (result (ref null $jsmethod.JsMethodExample.Sub))
+ ;;@ jsmethod/JsMethodExample.java:44:15
+ (local $$instance (ref null $jsmethod.JsMethodExample.Sub))
+ (block
+  ;; Sub $instance = new Sub.<init>(0);
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (local.set $$instance (struct.new $jsmethod.JsMethodExample.Sub (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (call $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Sub.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub
+ (param $this (ref null $jsmethod.JsMethodExample.Sub))
+ ;;@ jsmethod/JsMethodExample.java:44:15
+ (block
+  ;; jsmethod.JsMethodExample.Sub.$clinit();
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (call $$clinit__void@jsmethod.JsMethodExample.Sub )
+  ;; Base.this.$ctor();
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (call $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Sub.m(String s)
+(func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub
+ (type $function.m_m__java_lang_String__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ jsmethod/JsMethodExample.java:45:16
+ (local $this (ref null $jsmethod.JsMethodExample.Sub))
+ (local.set $this (ref.cast_static $jsmethod.JsMethodExample.Sub (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
+
+;;; void Sub.m(Object arg0)
+(func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub
+ (type $function.m_m__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ jsmethod/JsMethodExample.java:44:15
+ (local $this (ref null $jsmethod.JsMethodExample.Sub))
+ (local.set $this (ref.cast_static $jsmethod.JsMethodExample.Sub (local.get $this.untyped)))
+ (block
+  ;; Sub.this.m(((String) arg0));
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (call_ref $function.m_m__java_lang_String__void (ref.as_non_null (local.get $this))(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub)
+
+;;; void Sub.$clinit()
+(func $$clinit__void@jsmethod.JsMethodExample.Sub
+ ;;@ jsmethod/JsMethodExample.java:44:15
+ (block
+  ;; if (jsmethod.JsMethodExample.Sub.$initialized) return;
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (if (global.get $f_$initialized__jsmethod_JsMethodExample_Sub)
+   (then
+    ;; return;
+    ;;@ jsmethod/JsMethodExample.java:44:15
+    (return )
+   )
+  )
+  ;; (jsmethod.JsMethodExample.Sub.$initialized = true);
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (global.set $f_$initialized__jsmethod_JsMethodExample_Sub (i32.const 1))
+  ;; jsmethod.JsMethodExample.Base.$clinit();
+  ;;@ jsmethod/JsMethodExample.java:44:15
+  (call $$clinit__void@jsmethod.JsMethodExample.Base )
+ )
+)
+
+;;; Class<?> Sub.getClass()
+(func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmethod.JsMethodExample.Sub))
+ (local.set $this (ref.cast_static $jsmethod.JsMethodExample.Sub (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample.Sub();
+  (return (call $function.no.side.effects.$getJsmethod.JsMethodExample.Sub__java_lang_Class (ref.func $$getJsmethod.JsMethodExample.Sub__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub)

@@ -224,14 +224,12 @@ public class Lambdas {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   public interface Thenable<T> {
-    @Wasm("nop") // Taking a non-native argument in a native method not supported in WASM.
     void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Throwable> f2);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   @java.lang.FunctionalInterface
   public interface AnotherThenable<T> {
-    @Wasm("nop") // Taking a non-native argument in a native method not supported in WASM.
     void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Throwable> f2);
   }
 

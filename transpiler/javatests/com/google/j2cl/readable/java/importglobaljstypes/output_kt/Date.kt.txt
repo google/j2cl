@@ -5,7 +5,6 @@ package importglobaljstypes
 
 import javaemul.lang.*
 import kotlin.Double
-import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
@@ -30,8 +29,6 @@ open class Date {
 
  @ObjCName("ImportglobaljstypesDate_NativeDate", exact = true)
  open class NativeDate {
-  external open fun getSeconds(): Int
-
   companion object {
    @JvmStatic
    external fun now(): Double
