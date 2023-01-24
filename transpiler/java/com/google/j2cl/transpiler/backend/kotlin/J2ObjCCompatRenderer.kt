@@ -16,13 +16,16 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
+import com.google.j2cl.transpiler.ast.BooleanLiteral
 import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.Type
@@ -33,7 +36,9 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
+import com.google.j2cl.transpiler.backend.kotlin.common.code
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
+import com.google.j2cl.transpiler.backend.kotlin.objc.Dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
@@ -46,6 +51,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.objc.getProperty
 import com.google.j2cl.transpiler.backend.kotlin.objc.id
 import com.google.j2cl.transpiler.backend.kotlin.objc.localImport
+import com.google.j2cl.transpiler.backend.kotlin.objc.macroDefine
 import com.google.j2cl.transpiler.backend.kotlin.objc.map
 import com.google.j2cl.transpiler.backend.kotlin.objc.map2
 import com.google.j2cl.transpiler.backend.kotlin.objc.methodCall
@@ -70,6 +76,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.source
@@ -107,6 +114,8 @@ private val Type.declarationsRenderers: List<Renderer<Source>>
         add(nsEnumTypedefRenderer)
       }
 
+      addAll(fields.map { it.fieldConstantDefineRenderer })
+
       addAll(members.map { it.functionRenderer })
     }
 
@@ -141,6 +150,20 @@ private val FieldDescriptor.getExpressionRenderer: Renderer<Source>
     enclosingTypeDescriptor.typeDeclaration
       .run { if (isStatic && !isEnumConstant) companionSharedRenderer else objCNameRenderer }
       .map { dotSeparated(it, source(getObjCName)) }
+
+private val Field.fieldConstantDefineRenderer: Renderer<Source>
+  get() =
+    if (descriptor.shouldRender && descriptor.isCompileTimeConstant) constantDefineRenderer ?: empty
+    else empty
+
+private val Field.constantDefineRenderer: Renderer<Source>?
+  get() =
+    initializer?.let(::literalRenderer)?.map { literalSource ->
+      macroDefine(spaceSeparated(source(descriptor.defineConstantName), literalSource))
+    }
+
+private val FieldDescriptor.defineConstantName: String
+  get() = enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_" + name!!
 
 private val Member.functionRenderer: Renderer<Source>
   get() =
@@ -272,7 +295,15 @@ private val PrimitiveTypeDescriptor.primitiveObjCRenderer: Renderer<Source>
   get() =
     when (this) {
       PrimitiveTypes.VOID -> rendererOf(source("void"))
-      else -> source("j$simpleSourceName") rendererWith dependency(j2ObjCTypesImport)
+      PrimitiveTypes.BOOLEAN -> jbooleanTypeRenderer
+      PrimitiveTypes.CHAR -> jcharTypeRenderer
+      PrimitiveTypes.BYTE -> jbyteTypeRenderer
+      PrimitiveTypes.SHORT -> jshortTypeRenderer
+      PrimitiveTypes.INT -> jintTypeRenderer
+      PrimitiveTypes.LONG -> jlongTypeRenderer
+      PrimitiveTypes.FLOAT -> jfloatTypeRenderer
+      PrimitiveTypes.DOUBLE -> jdoubleTypeRenderer
+      else -> error("$this.primitiveObjCRenderer")
     }
 
 private val DeclaredTypeDescriptor.declaredObjCRenderer: Renderer<Source>
@@ -292,8 +323,120 @@ private val DeclaredTypeDescriptor.interfaceObjCRenderer: Renderer<Source>
 private val j2ObjCTypesImport: Import
   get() = localImport("third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h")
 
+private val j2ObjCTypesDependency: Dependency
+  get() = dependency(j2ObjCTypesImport)
+
+private fun j2ObjCTypeRenderer(name: String): Renderer<Source> =
+  source(name) rendererWith j2ObjCTypesDependency
+
+private val jbooleanTypeRenderer: Renderer<Source>
+  get() = j2ObjCTypeRenderer("jboolean")
+
+private val jcharTypeRenderer: Renderer<Source>
+  get() = j2ObjCTypeRenderer("jchar")
+
+private val jbyteTypeRenderer: Renderer<Source>
+  get() = j2ObjCTypeRenderer("jbyte")
+
+private val jshortTypeRenderer: Renderer<Source>
+  get() = j2ObjCTypeRenderer("jshort")
+
+private val jintTypeRenderer: Renderer<Source>
+  get() = j2ObjCTypeRenderer("jint")
+
+private val jlongTypeRenderer: Renderer<Source>
+  get() = j2ObjCTypeRenderer("jlong")
+
+private val jfloatTypeRenderer: Renderer<Source>
+  get() = j2ObjCTypeRenderer("jfloat")
+
+private val jdoubleTypeRenderer: Renderer<Source>
+  get() = j2ObjCTypeRenderer("jdouble")
+
 private val TypeDeclaration.objCEnumName: String
   get() = "${objCName}_Enum"
 
 private val FieldDescriptor.objCEnumName: String
   get() = "${enclosingTypeDescriptor.typeDeclaration.objCEnumName}_$name"
+
+private fun literalRenderer(expression: Expression): Renderer<Source>? =
+  when (expression) {
+    is BooleanLiteral -> booleanLiteralRenderer(expression)
+    is NumberLiteral -> numberLiteralRenderer(expression)
+    // TODO(b/263471576): Render expressions which evaluate to compile-time constants.
+    else -> null
+  }
+
+// Literal rendering code is based on:
+// /google3/third_party/java_src/j2objc/translator/src/main/java/com/google/devtools/j2objc/gen/LiteralGenerator.java
+
+private fun booleanLiteralRenderer(booleanLiteral: BooleanLiteral): Renderer<Source>? =
+  literalRenderer(booleanLiteral.value)
+
+private fun numberLiteralRenderer(numberLiteral: NumberLiteral): Renderer<Source>? =
+  when (numberLiteral.typeDescriptor) {
+    PrimitiveTypes.CHAR -> literalRenderer(numberLiteral.value.toChar())
+    PrimitiveTypes.BYTE -> literalRenderer(numberLiteral.value.toByte())
+    PrimitiveTypes.SHORT -> literalRenderer(numberLiteral.value.toShort())
+    PrimitiveTypes.INT -> literalRenderer(numberLiteral.value.toInt())
+    PrimitiveTypes.LONG -> literalRenderer(numberLiteral.value.toLong())
+    PrimitiveTypes.FLOAT -> literalRenderer(numberLiteral.value.toFloat())
+    PrimitiveTypes.DOUBLE -> literalRenderer(numberLiteral.value.toDouble())
+    else -> null
+  }
+
+private fun literalRenderer(boolean: Boolean): Renderer<Source> =
+  rendererOf(source(if (boolean) "true" else "false"))
+
+private fun literalRenderer(char: Char): Renderer<Source> =
+  char.code.let { code ->
+    if (code in 0x20..0x7E)
+      when (char) {
+        '\'' -> rendererOf(source("'\\''"))
+        '\\' -> rendererOf(source("'\\\\'"))
+        else -> rendererOf(source("'$char'"))
+      }
+    else rendererOf(source(String.format("0x%04x", code)))
+  }
+
+private fun literalRenderer(byte: Byte): Renderer<Source> = rendererOf(source("$byte"))
+
+private fun literalRenderer(short: Short): Renderer<Source> = rendererOf(source("$short"))
+
+private fun literalRenderer(int: Int): Renderer<Source> =
+  when (int) {
+    Int.MIN_VALUE ->
+      jintTypeRenderer.map {
+        inRoundBrackets(spaceSeparated(inRoundBrackets(it), source("0x80000000")))
+      }
+    else -> rendererOf(source("$int"))
+  }
+
+private fun literalRenderer(long: Long): Renderer<Source> =
+  when (long) {
+    Long.MIN_VALUE ->
+      jlongTypeRenderer.map {
+        inRoundBrackets(spaceSeparated(inRoundBrackets(it), source("0x8000000000000000LL")))
+      }
+    else -> rendererOf(source("${long}LL"))
+  }
+
+private fun literalRenderer(float: Float): Renderer<Source> =
+  if (float.isNaN()) rendererOf(source("NAN"))
+  else
+    when (float) {
+      Float.POSITIVE_INFINITY -> rendererOf(source("INFINITY"))
+      Float.NEGATIVE_INFINITY -> rendererOf(source("-INFINITY"))
+      Float.MAX_VALUE -> rendererOf(source("__FLT_MAX__"))
+      else -> rendererOf(source("${float}f"))
+    }
+
+private fun literalRenderer(double: Double): Renderer<Source> =
+  if (double.isNaN()) rendererOf(source("NAN"))
+  else
+    when (double) {
+      Double.POSITIVE_INFINITY -> rendererOf(source("INFINITY"))
+      Double.NEGATIVE_INFINITY -> rendererOf(source("-INFINITY"))
+      Double.MAX_VALUE -> rendererOf(source("__DLB_MAX__"))
+      else -> rendererOf(source("$double"))
+    }

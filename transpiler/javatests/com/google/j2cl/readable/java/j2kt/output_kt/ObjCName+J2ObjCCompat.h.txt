@@ -64,6 +64,30 @@ NS_INLINE NewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
  return [NewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
 }
 
+#define NewObjCName_BOOLEAN_FALSE false
+
+#define NewObjCName_BOOLEAN_TRUE true
+
+#define NewObjCName_CHAR 'a'
+
+#define NewObjCName_CHAR_APOSTROPHE '\''
+
+#define NewObjCName_CHAR_BACKSLASH '\\'
+
+#define NewObjCName_CHAR_UNICODE 0x1231
+
+#define NewObjCName_BYTE 123
+
+#define NewObjCName_SHORT 123
+
+#define NewObjCName_INT 123
+
+#define NewObjCName_LONG 123LL
+
+#define NewObjCName_FLOAT 123.0f
+
+#define NewObjCName_DOUBLE 123.0
+
 NS_INLINE jint NewObjCName_get_publicStaticField(void) {
  return NewObjCNameCompanion.shared.publicStaticField;
 }

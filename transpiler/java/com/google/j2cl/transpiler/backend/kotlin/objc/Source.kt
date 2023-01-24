@@ -37,6 +37,10 @@ fun parameter(name: Source, value: Source): Source = join(name, source(":"), val
 
 fun pointer(source: Source) = source + source("*")
 
+fun macroDeclaration(source: Source) = join(source("#"), source)
+
+fun macroDefine(source: Source) = macroDeclaration(spaceSeparated(source("define"), source))
+
 fun dependenciesSource(dependencies: Iterable<Dependency>): Source =
   emptyLineSeparated(
     importsSource(dependencies.imports),
