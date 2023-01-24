@@ -6,9 +6,9 @@
 @class ProtobufMyMessage_Builder;
 
 NS_INLINE ProtobufMyMessage* ProtobufMyMessage_getDefaultInstance(void) {
- return [ProtobufMyMessage.companion getDefaultInstance];
+ return [ProtobufMyMessageCompanion.shared getDefaultInstance];
 }
 
 NS_INLINE ProtobufMyMessage_Builder* ProtobufMyMessage_newBuilder(void) {
- return [ProtobufMyMessage.companion doNewBuilder];
+ return [ProtobufMyMessageCompanion.shared doNewBuilder];
 }

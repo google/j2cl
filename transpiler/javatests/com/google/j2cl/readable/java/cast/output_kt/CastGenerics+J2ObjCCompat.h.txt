@@ -6,13 +6,13 @@
 @class CastCastGenerics_Foo;
 
 NS_INLINE void CastCastGenerics_testErasureCast(void) {
- [CastCastGenerics.companion testErasureCast];
+ [CastCastGenericsCompanion.shared testErasureCast];
 }
 
 NS_INLINE void CastCastGenerics_testCastToParamterizedType(void) {
- [CastCastGenerics.companion testCastToParamterizedType];
+ [CastCastGenericsCompanion.shared testCastToParamterizedType];
 }
 
 NS_INLINE CastCastGenerics_Foo* CastCastGenerics_doSomething(void) {
- return [CastCastGenerics.companion doSomething];
+ return [CastCastGenericsCompanion.shared doSomething];
 }

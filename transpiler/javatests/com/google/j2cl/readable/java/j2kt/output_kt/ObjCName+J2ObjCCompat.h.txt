@@ -61,93 +61,93 @@ NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
 }
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
- return [NewObjCName_Foo.companion withOrdinalWithInt:ordinal];
+ return [NewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
 }
 
 NS_INLINE jint NewObjCName_get_publicStaticField(void) {
- return NewObjCName.companion.publicStaticField;
+ return NewObjCNameCompanion.shared.publicStaticField;
 }
 
 NS_INLINE id NewObjCName_get_objectField(void) {
- return NewObjCName.companion.objectField;
+ return NewObjCNameCompanion.shared.objectField;
 }
 
 NS_INLINE NSString* NewObjCName_get_stringField(void) {
- return NewObjCName.companion.stringField;
+ return NewObjCNameCompanion.shared.stringField;
 }
 
 NS_INLINE NewObjCName* NewObjCName_get_selfField(void) {
- return NewObjCName.companion.selfField;
+ return NewObjCNameCompanion.shared.selfField;
 }
 
 NS_INLINE jint NewObjCName_get_alloc(void) {
- return NewObjCName.companion.theAlloc;
+ return NewObjCNameCompanion.shared.theAlloc;
 }
 
 NS_INLINE jint NewObjCName_get_init(void) {
- return NewObjCName.companion.theInit;
+ return NewObjCNameCompanion.shared.theInit;
 }
 
 NS_INLINE jint NewObjCName_get_extern(void) {
- return NewObjCName.companion.extern__;
+ return NewObjCNameCompanion.shared.extern__;
 }
 
 NS_INLINE jint NewObjCName_get_inline(void) {
- return NewObjCName.companion.inline__;
+ return NewObjCNameCompanion.shared.inline__;
 }
 
 NS_INLINE jint NewObjCName_get_NULL(void) {
- return NewObjCName.companion.NULL__;
+ return NewObjCNameCompanion.shared.NULL__;
 }
 
 NS_INLINE void NewObjCName_newFoo(void) {
- [NewObjCName.companion doNewFoo];
+ [NewObjCNameCompanion.shared doNewFoo];
 }
 
 NS_INLINE void NewObjCName_newFooFromInt_(jint i) {
- [NewObjCName.companion doNewFooFromInt:i];
+ [NewObjCNameCompanion.shared doNewFooFromInt:i];
 }
 
 NS_INLINE void NewObjCName_newFooFromInt_withInteger_(NSString* s, jint i) {
- [NewObjCName.companion doNewFooFromInt:s withInteger:i];
+ [NewObjCNameCompanion.shared doNewFooFromInt:s withInteger:i];
 }
 
 NS_INLINE void NewObjCName_fooWithNSString_withNSString_(NSString* s, NSString* i) {
- [NewObjCName.companion fooWithNSString:s withNSString:i];
+ [NewObjCNameCompanion.shared fooWithNSString:s withNSString:i];
 }
 
 NS_INLINE void NewObjCName_alloc(void) {
- [NewObjCName.companion doAlloc];
+ [NewObjCNameCompanion.shared doAlloc];
 }
 
 NS_INLINE void NewObjCName_allocFoo(void) {
- [NewObjCName.companion doAllocFoo];
+ [NewObjCNameCompanion.shared doAllocFoo];
 }
 
 NS_INLINE void NewObjCName_allocatedFoo(void) {
- [NewObjCName.companion allocatedFoo];
+ [NewObjCNameCompanion.shared allocatedFoo];
 }
 
 NS_INLINE void NewObjCName_initFoo(void) {
- [NewObjCName.companion doInitFoo];
+ [NewObjCNameCompanion.shared doInitFoo];
 }
 
 NS_INLINE void NewObjCName_newFoo(void) {
- [NewObjCName.companion doNewFoo];
+ [NewObjCNameCompanion.shared doNewFoo];
 }
 
 NS_INLINE void NewObjCName_copyFoo(void) {
- [NewObjCName.companion doCopyFoo];
+ [NewObjCNameCompanion.shared doCopyFoo];
 }
 
 NS_INLINE void NewObjCName_mutableCopyFoo(void) {
- [NewObjCName.companion doMutableCopyFoo];
+ [NewObjCNameCompanion.shared doMutableCopyFoo];
 }
 
 NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(jint extern_, jint struct_, jint register_, jint inline_) {
- [NewObjCName.companion reservedParamNamesWithInt:extern_ withInt:struct_ withInt:register_ withInt:inline_];
+ [NewObjCNameCompanion.shared reservedParamNamesWithInt:extern_ withInt:struct_ withInt:register_ withInt:inline_];
 }
 
 NS_INLINE NSString* NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* s, id o, NSNumber* n) {
- return [NewObjCName.companion nativeTypesWithNSString:s withId:o withNSNumber:n];
+ return [NewObjCNameCompanion.shared nativeTypesWithNSString:s withId:o withNSNumber:n];
 }

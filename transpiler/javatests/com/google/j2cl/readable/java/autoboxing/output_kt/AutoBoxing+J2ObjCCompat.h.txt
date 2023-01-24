@@ -7,13 +7,13 @@
 @class AutoboxingAutoBoxing;
 
 NS_INLINE jfloat AutoboxingAutoBoxing_get_COMPILE_TIME_CONSTANT(void) {
- return AutoboxingAutoBoxing.companion.COMPILE_TIME_CONSTANT;
+ return AutoboxingAutoBoxingCompanion.shared.COMPILE_TIME_CONSTANT;
 }
 
 NS_INLINE void AutoboxingAutoBoxing_testUnboxingFromTypeVariable(void) {
- [AutoboxingAutoBoxing.companion testUnboxingFromTypeVariable];
+ [AutoboxingAutoBoxingCompanion.shared testUnboxingFromTypeVariable];
 }
 
 NS_INLINE void AutoboxingAutoBoxing_testUnboxingFromIntersectionType(void) {
- [AutoboxingAutoBoxing.companion testUnboxingFromIntersectionType];
+ [AutoboxingAutoBoxingCompanion.shared testUnboxingFromIntersectionType];
 }

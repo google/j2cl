@@ -38,12 +38,12 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
-import com.google.j2cl.transpiler.backend.kotlin.objc.companionGet
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.empty
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.flatten
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
+import com.google.j2cl.transpiler.backend.kotlin.objc.getProperty
 import com.google.j2cl.transpiler.backend.kotlin.objc.id
 import com.google.j2cl.transpiler.backend.kotlin.objc.localImport
 import com.google.j2cl.transpiler.backend.kotlin.objc.map
@@ -138,8 +138,8 @@ private val FieldDescriptor.getObjCName: String
 
 private val FieldDescriptor.getExpressionRenderer: Renderer<Source>
   get() =
-    enclosingTypeDescriptor.typeDeclaration.objCNameRenderer
-      .letIf(isStatic && !isEnumConstant) { companionGet(it) }
+    enclosingTypeDescriptor.typeDeclaration
+      .run { if (isStatic && !isEnumConstant) companionSharedRenderer else objCNameRenderer }
       .map { dotSeparated(it, source(getObjCName)) }
 
 private val Member.functionRenderer: Renderer<Source>
@@ -155,8 +155,7 @@ private val Method.methodFunctionRenderer: Renderer<Source>
 
 private val MethodDescriptor.shouldRender: Boolean
   get() =
-    (enclosingTypeDescriptor.isClass || enclosingTypeDescriptor.isEnum) &&
-      visibility.isPublic &&
+    visibility.isPublic &&
       isStatic &&
       !isConstructor &&
       returnTypeDescriptor.existsInObjC &&
@@ -164,9 +163,8 @@ private val MethodDescriptor.shouldRender: Boolean
 
 private val FieldDescriptor.shouldRender: Boolean
   get() =
-    (enclosingTypeDescriptor.isClass || enclosingTypeDescriptor.isEnum) &&
-      visibility.isPublic &&
-      isStatic &&
+    visibility.isPublic &&
+      (isStatic || enclosingTypeDescriptor.isInterface) &&
       typeDescriptor.existsInObjC
 
 private val TypeDescriptor.existsInObjC: Boolean
@@ -209,7 +207,7 @@ private fun Method.statementRenderers(objCNames: MethodObjCNames): List<Renderer
 
 private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Source> =
   methodCall(
-    target = descriptor.enclosingTypeDescriptor.typeDeclaration.companionRenderer,
+    target = descriptor.enclosingTypeDescriptor.typeDeclaration.companionSharedRenderer,
     name = objCNames.objCName(descriptor.ktName),
     arguments = parameters.map { it.nameRenderer }
   )
@@ -232,8 +230,11 @@ private val Variable.renderer: Renderer<Source>
 private val Variable.nameRenderer: Renderer<Source>
   get() = rendererOf(source(name.objCName.escapeObjCKeyword))
 
-private val TypeDeclaration.companionRenderer: Renderer<Source>
-  get() = companionGet(objCNameRenderer)
+private val TypeDeclaration.objCCompanionNameRenderer: Renderer<Source>
+  get() = objCNameRenderer.map { join(it, source("Companion")) }
+
+private val TypeDeclaration.companionSharedRenderer: Renderer<Source>
+  get() = getProperty(objCCompanionNameRenderer, "shared")
 
 private val TypeDeclaration.objCNameRenderer: Renderer<Source>
   get() = objectiveCNameRenderer ?: mappedObjCNameRenderer ?: defaultObjCNameRenderer

@@ -7,9 +7,9 @@
 @class GenericnativetypeBoundedJsArray;
 
 NS_INLINE GenericnativetypeBoundedJsArray* GenericnativetypeBoundedJsArray_create(void) {
- return [GenericnativetypeBoundedJsArray.companion create];
+ return [GenericnativetypeBoundedJsArrayCompanion.shared create];
 }
 
 NS_INLINE GenericnativetypeBoundedJsArray* GenericnativetypeBoundedJsArray_createWithInt_(jint size) {
- return [GenericnativetypeBoundedJsArray.companion createWithInt:size];
+ return [GenericnativetypeBoundedJsArrayCompanion.shared createWithInt:size];
 }
