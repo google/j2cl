@@ -115,7 +115,6 @@ import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
 import com.google.j2cl.transpiler.passes.NormalizeLabeledStatements;
 import com.google.j2cl.transpiler.passes.NormalizeLabels;
 import com.google.j2cl.transpiler.passes.NormalizeLiterals;
-import com.google.j2cl.transpiler.passes.NormalizeLiteralsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMethodParametersKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
@@ -481,7 +480,6 @@ public enum Backend {
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           NormalizeVarargParametersKotlin::new,
-          NormalizeLiteralsKotlin::new,
           NormalizeFieldInitializationKotlin::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,

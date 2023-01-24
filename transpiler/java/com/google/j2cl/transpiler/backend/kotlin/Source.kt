@@ -15,7 +15,11 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
@@ -26,8 +30,46 @@ fun literalSource(it: Char): Source = source(it.literalString)
 
 fun literalSource(it: String): Source = source(it.literalString)
 
+fun literalSource(it: Byte): Source =
+  literalSource(it.toInt()).letIf(it < 0, ::inRoundBrackets).functionCall("toByte")
+
+fun literalSource(it: Short): Source =
+  literalSource(it.toInt()).letIf(it < 0, ::inRoundBrackets).functionCall("toShort")
+
+fun literalSource(it: Int): Source = source("$it")
+
+fun literalSource(it: Long): Source =
+  when (it) {
+    // Long.MIN_VALUE can not be represented as a literal in Kotlin.
+    Long.MIN_VALUE -> inRoundBrackets(infix(literalSource(Long.MAX_VALUE), "+", literalSource(1L)))
+    else -> source("${it}L")
+  }
+
+fun literalSource(it: Float): Source =
+  if (it.isNaN()) inRoundBrackets(infix(literalSource(0f), "/", literalSource(0f)))
+  else
+    when (it) {
+      Float.NEGATIVE_INFINITY -> inRoundBrackets(infix(literalSource(-1f), "/", literalSource(0f)))
+      Float.POSITIVE_INFINITY -> inRoundBrackets(infix(literalSource(1f), "/", literalSource(0f)))
+      else -> source("${it}f")
+    }
+
+fun literalSource(it: Double): Source =
+  if (it.isNaN()) inRoundBrackets(infix(literalSource(0.0), "/", literalSource(0.0)))
+  else
+    when (it) {
+      Double.NEGATIVE_INFINITY ->
+        inRoundBrackets(infix(literalSource(-1.0), "/", literalSource(0.0)))
+      Double.POSITIVE_INFINITY ->
+        inRoundBrackets(infix(literalSource(1.0), "/", literalSource(0.0)))
+      else -> source("$it")
+    }
+
 fun assignment(lhs: Source, rhs: Source): Source = infix(lhs, "=", rhs)
 
 fun at(source: Source) = join(source("@"), source)
 
 fun labelReference(name: String) = at(identifierSource(name))
+
+fun Source.functionCall(name: String, vararg args: Source) =
+  dotSeparated(this, join(source(name), inRoundBrackets(commaSeparated(args.toList()))))

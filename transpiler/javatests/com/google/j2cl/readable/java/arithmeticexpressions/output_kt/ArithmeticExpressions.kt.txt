@@ -86,7 +86,7 @@ open class ArithmeticExpressions {
   a = (a.toLong() / 1L).toInt()
   a = (a.toDouble() + Double.MAX_VALUE).toInt()
   k = k.or(true)
-  var s: Short = (10).toShort()
+  var s: Short = 10.toShort()
   k = run {
    s = (s.toInt() + 1).toShort()
    s
@@ -202,7 +202,7 @@ open class ArithmeticExpressions {
    c = Int.valueOf(c!!.toInt() + 1)
    ___value_1
   }
-  var b: Byte? = Byte.valueOf((0).toByte())
+  var b: Byte? = Byte.valueOf(0.toByte())
   b = Byte.valueOf((b!!.toByte().toInt() + 1).toByte())
   var ch: Char? = Char.valueOf('c')
   ch = Char.valueOf((ch!!.toChar().code + 1).toChar())

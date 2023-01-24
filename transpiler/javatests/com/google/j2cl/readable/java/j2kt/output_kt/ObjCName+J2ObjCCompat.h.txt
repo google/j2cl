@@ -82,11 +82,59 @@ NS_INLINE NewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
 
 #define NewObjCName_INT 123
 
+#define NewObjCName_INT_MIN_VALUE ((jint) 0x80000000)
+
+#define NewObjCName_INT_MAX_VALUE 2147483647
+
 #define NewObjCName_LONG 123LL
+
+#define NewObjCName_LONG_MIN_VALUE ((jlong) 0x8000000000000000LL)
+
+#define NewObjCName_LONG_MAX_VALUE 9223372036854775807LL
 
 #define NewObjCName_FLOAT 123.0f
 
+#define NewObjCName_FLOAT_ZER0 0.0f
+
+#define NewObjCName_FLOAT_NEGATIVE_ZERO -0.0f
+
+#define NewObjCName_FLOAT_NAN NAN
+
+#define NewObjCName_FLOAT_NEGATIVE_INFINITY -INFINITY
+
+#define NewObjCName_FLOAT_POSITIVE_INFINITY INFINITY
+
+#define NewObjCName_FLOAT_MIN_VALUE 1.4E-45f
+
+#define NewObjCName_FLOAT_MIN_NORMAL 1.1754944E-38f
+
+#define NewObjCName_FLOAT_MIN_EXPONENT -126.0f
+
+#define NewObjCName_FLOAT_MAX_VALUE __FLT_MAX__
+
+#define NewObjCName_FLOAT_MAX_EXPONENT 127.0f
+
 #define NewObjCName_DOUBLE 123.0
+
+#define NewObjCName_DOUBLE_ZER0 0.0
+
+#define NewObjCName_DOUBLE_NEGATIVE_ZERO -0.0
+
+#define NewObjCName_DOUBLE_NAN NAN
+
+#define NewObjCName_DOUBLE_NEGATIVE_INFINITY -INFINITY
+
+#define NewObjCName_DOUBLE_POSITIVE_INFINITY INFINITY
+
+#define NewObjCName_DOUBLE_MIN_VALUE 4.9E-324
+
+#define NewObjCName_DOUBLE_MIN_NORMAL 2.2250738585072014E-308
+
+#define NewObjCName_DOUBLE_MIN_EXPONENT -1022.0
+
+#define NewObjCName_DOUBLE_MAX_VALUE __DLB_MAX__
+
+#define NewObjCName_DOUBLE_MAX_EXPONENT 1023.0
 
 NS_INLINE jint NewObjCName_get_publicStaticField(void) {
  return NewObjCNameCompanion.shared.publicStaticField;
@@ -184,6 +232,14 @@ NS_INLINE jfloat NewObjCName_get_FLOAT(void) {
  return NewObjCNameCompanion.shared.FLOAT;
 }
 
+NS_INLINE jfloat NewObjCName_get_FLOAT_ZER0(void) {
+ return NewObjCNameCompanion.shared.FLOAT_ZER0;
+}
+
+NS_INLINE jfloat NewObjCName_get_FLOAT_NEGATIVE_ZERO(void) {
+ return NewObjCNameCompanion.shared.FLOAT_NEGATIVE_ZERO;
+}
+
 NS_INLINE jfloat NewObjCName_get_FLOAT_NAN(void) {
  return NewObjCNameCompanion.shared.FLOAT_NAN;
 }
@@ -218,6 +274,14 @@ NS_INLINE jfloat NewObjCName_get_FLOAT_MAX_EXPONENT(void) {
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE(void) {
  return NewObjCNameCompanion.shared.DOUBLE;
+}
+
+NS_INLINE jdouble NewObjCName_get_DOUBLE_ZER0(void) {
+ return NewObjCNameCompanion.shared.DOUBLE_ZER0;
+}
+
+NS_INLINE jdouble NewObjCName_get_DOUBLE_NEGATIVE_ZERO(void) {
+ return NewObjCNameCompanion.shared.DOUBLE_NEGATIVE_ZERO;
 }
 
 NS_INLINE jdouble NewObjCName_get_DOUBLE_NAN(void) {

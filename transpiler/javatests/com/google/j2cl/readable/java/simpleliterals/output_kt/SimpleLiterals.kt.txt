@@ -25,12 +25,22 @@ open class SimpleLiterals {
  open fun main() {
   val bool: Boolean = false
   val ch: Char = 'a'
-  val b: Byte = (101).toByte()
-  val s: Short = (101).toShort()
+  val b: Byte = 127.toByte()
+  val nb: Byte = - 128
+  val s: Short = 32767.toShort()
+  val ns: Short = - 32768
   val i: Int = 101
+  val ni: Int = - 101
   val l: Long = 101L
+  val nl: Long = - 101L
   val f: Float = 101.0f
+  val nf: Float = - 101.0f
+  val zf: Float = 0.0f
+  val nzf: Float = - 0.0f
   val d: Double = 101.0
+  val nd: Double = - 101.0
+  val zd: Double = 0.0
+  val nzd: Double = - 0.0
   val o: Any? = null
   val str: String? = "foo"
   val c: Class<*>? = SimpleLiterals::class.javaObjectType

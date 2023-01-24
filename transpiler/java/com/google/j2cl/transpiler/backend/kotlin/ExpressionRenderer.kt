@@ -288,13 +288,13 @@ private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
 
 private fun Renderer.renderNumberLiteral(numberLiteral: NumberLiteral) {
   when (numberLiteral.typeDescriptor.toUnboxedType()) {
-    PrimitiveTypes.CHAR -> render(numberLiteral.value.toChar().literalString)
-    PrimitiveTypes.BYTE -> render("(${numberLiteral.value.toInt()}).toByte()")
-    PrimitiveTypes.SHORT -> render("(${numberLiteral.value.toInt()}).toShort()")
-    PrimitiveTypes.INT -> render("${numberLiteral.value.toInt()}")
-    PrimitiveTypes.LONG -> render("${numberLiteral.value.toLong()}L")
-    PrimitiveTypes.FLOAT -> render("${numberLiteral.value.toFloat()}f")
-    PrimitiveTypes.DOUBLE -> render("${numberLiteral.value.toDouble()}")
+    PrimitiveTypes.CHAR -> render(literalSource(numberLiteral.value.toChar()))
+    PrimitiveTypes.BYTE -> render(literalSource(numberLiteral.value.toByte()))
+    PrimitiveTypes.SHORT -> render(literalSource(numberLiteral.value.toShort()))
+    PrimitiveTypes.INT -> render(literalSource(numberLiteral.value.toInt()))
+    PrimitiveTypes.LONG -> render(literalSource(numberLiteral.value.toLong()))
+    PrimitiveTypes.FLOAT -> render(literalSource(numberLiteral.value.toFloat()))
+    PrimitiveTypes.DOUBLE -> render(literalSource(numberLiteral.value.toDouble()))
     else -> throw InternalCompilerError("renderNumberLiteral($numberLiteral)")
   }
 }

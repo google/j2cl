@@ -20,12 +20,22 @@ public class SimpleLiterals {
   public void main() {
     boolean bool = false;
     char ch = 'a';
-    byte b = 101;
-    short s = 101;
+    byte b = 127;
+    byte nb = -128;
+    short s = 32767;
+    short ns = -32768;
     int i = 101;
+    int ni = -101;
     long l = 101L;
+    long nl = -101L;
     float f = 101.0f;
+    float nf = -101.0f;
+    float zf = 0.0f;
+    float nzf = -0.0f;
     double d = 101.0;
+    double nd = -101.0;
+    double zd = 0.0;
+    double nzd = -0.0;
     Object o = null;
     String str = "foo";
     Class<?> c = SimpleLiterals.class;

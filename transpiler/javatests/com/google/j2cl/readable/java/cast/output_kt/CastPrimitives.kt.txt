@@ -22,9 +22,9 @@ import kotlin.native.ObjCName
 @ObjCName("CastCastPrimitives", exact = true)
 open class CastPrimitives {
  open fun testPrimitiveCasts() {
-  var b: Byte = (1).toByte()
+  var b: Byte = 1.toByte()
   var c: Char = '\u0001'
-  var s: Short = (1).toShort()
+  var s: Short = 1.toShort()
   var i: Int = 1
   var l: Long = 1L
   var f: Float = 1.1f
@@ -102,9 +102,9 @@ open class CastPrimitives {
  }
 
  open fun testImplicitArgumentCasts() {
-  val b: Byte = (127).toByte()
+  val b: Byte = 127.toByte()
   val c: Char = '\uFFFF'
-  val s: Short = (32767).toShort()
+  val s: Short = 32767.toShort()
   val i: Int = 2147483647
   val l: Long = 9223372036854775807L
   val f: Float = 3.4028235E38f
@@ -128,11 +128,11 @@ open class CastPrimitives {
  open fun testImplicitArrayIndexCasts(
   @ObjCName("withByteArray", exact = false) array: ByteArray?
  ) {
-  val b: Byte = (127).toByte()
+  val b: Byte = 127.toByte()
   val c: Char = '\uFFFF'
-  val s: Short = (32767).toShort()
+  val s: Short = 32767.toShort()
   val i: Int = 2147483647
-  var result: Byte = (0).toByte()
+  var result: Byte = 0.toByte()
   result = array!![b.toInt()]
   result = array!![c.code]
   result = array!![s.toInt()]
@@ -142,9 +142,9 @@ open class CastPrimitives {
  }
 
  open fun testImplicitLongAssignmentCasts() {
-  val fbyte: Byte = (11).toByte()
+  val fbyte: Byte = 11.toByte()
   val fchar: Char = '\u000C'
-  val fshort: Short = (13).toShort()
+  val fshort: Short = 13.toShort()
   val fint: Int = 14
   val flong: Long = 15L
   val ffloat: Float = 16.0f

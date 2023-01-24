@@ -70,13 +70,15 @@ public class ObjCName {
 
   public static final int INT = 123;
   public static final int INT_MIN_VALUE = Integer.MIN_VALUE;
-  public static final int INT_MAX_VALUE = Integer.MIN_VALUE;
+  public static final int INT_MAX_VALUE = Integer.MAX_VALUE;
 
   public static final long LONG = 123L;
   public static final long LONG_MIN_VALUE = Long.MIN_VALUE;
   public static final long LONG_MAX_VALUE = Long.MAX_VALUE;
 
   public static final float FLOAT = 123f;
+  public static final float FLOAT_ZER0 = 0f;
+  public static final float FLOAT_NEGATIVE_ZERO = -0f;
   public static final float FLOAT_NAN = Float.NaN;
   public static final float FLOAT_NEGATIVE_INFINITY = Float.NEGATIVE_INFINITY;
   public static final float FLOAT_POSITIVE_INFINITY = Float.POSITIVE_INFINITY;
@@ -87,6 +89,8 @@ public class ObjCName {
   public static final float FLOAT_MAX_EXPONENT = Float.MAX_EXPONENT;
 
   public static final double DOUBLE = 123.0;
+  public static final double DOUBLE_ZER0 = 0.0;
+  public static final double DOUBLE_NEGATIVE_ZERO = -0.0;
   public static final double DOUBLE_NAN = Double.NaN;
   public static final double DOUBLE_NEGATIVE_INFINITY = Double.NEGATIVE_INFINITY;
   public static final double DOUBLE_POSITIVE_INFINITY = Double.POSITIVE_INFINITY;
