@@ -23,7 +23,7 @@ open class BoundedJsArray<V> {
 
   @JvmStatic
   fun <V_1> create(
-   @ObjCName("withInt", exact = false) size: Int
+   @ObjCName("withInt") size: Int
   ): BoundedJsArray<V_1>? {
    val array: BoundedJsArray<V_1>? = BoundedJsArray<V_1>(size)
    return array

@@ -13,7 +13,7 @@ import kotlin.native.ObjCName
 
 fun interface MyFunction<F, T> {
  fun apply(
-  @ObjCName("withId", exact = false) input: F
+  @ObjCName("withId") input: F
  ): T
 }
 

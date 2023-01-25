@@ -26,11 +26,12 @@ import kotlin.native.ObjCName
 
 @ObjCName("LambdasLambdas", exact = true)
 open class Lambdas {
- @JvmField var field: Int = 100
+ @JvmField
+ var field: Int = 100
 
  open fun call(
-  @ObjCName("withLambdasLambdas_FunctionalInterface", exact = false) intf: Lambdas.FunctionalInterface?,
-  @ObjCName("withInt", exact = false) n: Int
+  @ObjCName("withLambdasLambdas_FunctionalInterface") intf: Lambdas.FunctionalInterface?,
+  @ObjCName("withInt") n: Int
  ): Int {
   return this.field + intf!!.m(n)
  }
@@ -104,15 +105,15 @@ open class Lambdas {
  }
 
  open fun <T> callWithTypeVariable(
-  @ObjCName("withLambdasLambdas_GenericFunctionalInterface", exact = false) intf: Lambdas.GenericFunctionalInterface<T>?,
-  @ObjCName("withId", exact = false) e: T
+  @ObjCName("withLambdasLambdas_GenericFunctionalInterface") intf: Lambdas.GenericFunctionalInterface<T>?,
+  @ObjCName("withId") e: T
  ): T {
   return intf!!.m(e)
  }
 
  open fun callParameterized(
-  @ObjCName("withLambdasLambdas_GenericFunctionalInterface", exact = false) intf: Lambdas.GenericFunctionalInterface<Error?>?,
-  @ObjCName("withJavaLangError", exact = false) e: Error?
+  @ObjCName("withLambdasLambdas_GenericFunctionalInterface") intf: Lambdas.GenericFunctionalInterface<Error?>?,
+  @ObjCName("withJavaLangError") e: Error?
  ): Error? {
   return intf!!.m(e)
  }
@@ -178,8 +179,8 @@ open class Lambdas {
 
   @JvmStatic
   fun <T: Enum<T>> callTypeVariableWithBounds(
-   @ObjCName("withLambdasLambdas_GenericFunctionalInterface", exact = false) intf: Lambdas.GenericFunctionalInterface<Enum<T>?>?,
-   @ObjCName("withJavaLangEnum", exact = false) e: Enum<T>?
+   @ObjCName("withLambdasLambdas_GenericFunctionalInterface") intf: Lambdas.GenericFunctionalInterface<Enum<T>?>?,
+   @ObjCName("withJavaLangEnum") e: Enum<T>?
   ): Enum<T>? {
    return intf!!.m(e)
   }
@@ -196,7 +197,8 @@ open class Lambdas {
    }
   }
 
-  @JvmField var identityFunction_private_2: Lambdas.IdentityFunction? = null
+  @JvmField
+  var identityFunction_private_2: Lambdas.IdentityFunction? = null
 
   @JvmStatic
   fun <E> identity(): Lambdas.GenericJsFunction<E, E>? {
@@ -238,7 +240,7 @@ open class Lambdas {
 
   @JvmStatic
   fun <T> testIterable(
-   @ObjCName("withJavaLangIterable", exact = false) iterable: MutableIterable<T>?
+   @ObjCName("withJavaLangIterable") iterable: MutableIterable<T>?
   ) {
    val lambda: MutableIterable<T>? = JavaIterable<T> {
     return@JavaIterable iterable!!.iterator()
@@ -248,30 +250,30 @@ open class Lambdas {
 
  fun interface FunctionalInterface {
   fun m(
-   @ObjCName("withInt", exact = false) i: Int
+   @ObjCName("withInt") i: Int
   ): Int
  }
 
  fun interface Functional<T> {
   fun wrap(
-   @ObjCName("withLambdasLambdas_Functional", exact = false) f: Lambdas.Functional<T>?
+   @ObjCName("withLambdasLambdas_Functional") f: Lambdas.Functional<T>?
   ): Lambdas.Functional<T>?
  }
 
  fun interface GenericFunctionalInterface<T> {
   fun m(
-   @ObjCName("withId", exact = false) i: T
+   @ObjCName("withId") i: T
   ): T
  }
 
  fun interface BiFunction<T, U, R> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T,
-   @ObjCName("withId", exact = false) u: U
+   @ObjCName("withId") t: T,
+   @ObjCName("withId") u: U
   ): R
 
   fun <V> andThen(
-   @ObjCName("withLambdasLambdas_Function", exact = false) after: Lambdas.Function<in R, out V>?
+   @ObjCName("withLambdasLambdas_Function") after: Lambdas.Function<in R, out V>?
   ): Lambdas.BiFunction<T, U, V>? {
    return Lambdas.BiFunction<T, U, V> { t: T, u: U ->
     return@BiFunction after!!.apply(this.apply(t, u))
@@ -281,7 +283,7 @@ open class Lambdas {
 
  fun interface Function<T, R> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ): R
 
   companion object {
@@ -299,7 +301,8 @@ open class Lambdas {
  }
 
  open class Parent {
-  @JvmField var fieldInParent: Int = 0
+  @JvmField
+  var fieldInParent: Int = 0
 
   open fun funInParent() {}
  }
@@ -321,23 +324,23 @@ open class Lambdas {
  @ObjCName("LambdasLambdas_GenericJsFunction", exact = true)
  fun interface GenericJsFunction<R, T> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ): R
  }
 
  @ObjCName("LambdasLambdas_Thenable", exact = true)
  fun interface Thenable<T> {
   fun then(
-   @ObjCName("withLambdasLambdas_GenericJsFunction", exact = false) f1: Lambdas.GenericJsFunction<Unit?, T>?,
-   @ObjCName("withLambdasLambdas_GenericJsFunction", exact = false) f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?
+   @ObjCName("withLambdasLambdas_GenericJsFunction") f1: Lambdas.GenericJsFunction<Unit?, T>?,
+   @ObjCName("withLambdasLambdas_GenericJsFunction") f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?
   )
  }
 
  @ObjCName("LambdasLambdas_AnotherThenable", exact = true)
  fun interface AnotherThenable<T> {
   fun then(
-   @ObjCName("withLambdasLambdas_GenericJsFunction", exact = false) f1: Lambdas.GenericJsFunction<Unit?, T>?,
-   @ObjCName("withLambdasLambdas_GenericJsFunction", exact = false) f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?
+   @ObjCName("withLambdasLambdas_GenericJsFunction") f1: Lambdas.GenericJsFunction<Unit?, T>?,
+   @ObjCName("withLambdasLambdas_GenericJsFunction") f2: Lambdas.GenericJsFunction<Unit?, Throwable?>?
   )
  }
 
@@ -359,13 +362,13 @@ open class Lambdas {
 
  interface JustADefaultT<T> {
   fun method(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ) {}
  }
 
  interface JustADefaultS<S> {
   fun method(
-   @ObjCName("withId", exact = false) t: S
+   @ObjCName("withId") t: S
   ) {}
  }
 

@@ -15,33 +15,34 @@ import kotlin.native.ObjCName
 
 @ObjCName("DeprecatedDeprecatedExample", exact = true)
 open class DeprecatedExample {
- @JvmField var deprecatedInstanceField: String? = "deprecated field"
+ @JvmField
+ var deprecatedInstanceField: String? = "deprecated field"
 
  open fun deprecatedInstanceMethod(
-  @ObjCName("withNSString", exact = false) someArg: String?
+  @ObjCName("withNSString") someArg: String?
  ) {}
 
  constructor()
 
  companion object {
-  @ObjCName("DEPRECATED_STATIC_FIELD", exact = false)
+  @ObjCName("DEPRECATED_STATIC_FIELD")
   const val DEPRECATED_STATIC_FIELD: String = "deprecated field"
 
   @JvmStatic
   fun deprecatedStaticMethod(
-   @ObjCName("withId", exact = false) someObject: Any?
+   @ObjCName("withId") someObject: Any?
   ) {}
  }
 
  fun interface DeprecatedInterface {
   fun doAThing(
-   @ObjCName("withInt", exact = false) anInt: Int
+   @ObjCName("withInt") anInt: Int
   )
  }
 
  fun interface DeprecatedJsFunction {
   fun doAThing(
-   @ObjCName("withId", exact = false) aThing: Any?
+   @ObjCName("withId") aThing: Any?
   )
  }
 

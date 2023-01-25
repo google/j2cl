@@ -21,19 +21,19 @@ class NullabilityPropagation {
   fun nonNullReturnType2(): String
 
   fun nullableParameter1(
-   @ObjCName("withNSString", exact = false) s: String?
+   @ObjCName("withNSString") s: String?
   )
 
   fun nullableParameter2(
-   @ObjCName("withNSString", exact = false) s: String?
+   @ObjCName("withNSString") s: String?
   )
 
   fun nonNullParameter1(
-   @ObjCName("withNSString", exact = false) s: String
+   @ObjCName("withNSString") s: String
   )
 
   fun nonNullParameter2(
-   @ObjCName("withNSString", exact = false) s: String
+   @ObjCName("withNSString") s: String
   )
  }
 

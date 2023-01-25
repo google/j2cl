@@ -16,11 +16,12 @@ import kotlin.native.ObjCName
 @ObjCName("NestedgenericclassNestedGenericClass", exact = true)
 open class NestedGenericClass<T> {
  open fun <S> `fun`(
-  @ObjCName("withId", exact = false) t: S
+  @ObjCName("withId") t: S
  ) {
   open class ___1E<S> {}
   open class ___1F {
-   @JvmField var f: S = null as S
+   @JvmField
+   var f: S = null as S
   }
   ___1E<Number?>()
   ___1F()
@@ -54,11 +55,13 @@ open class NestedGenericClass<T> {
 
  @ObjCName("NestedgenericclassNestedGenericClass_C", exact = true)
  open inner class C {
-  @JvmField var c: T = null as T
+  @JvmField
+  var c: T = null as T
 
   @ObjCName("NestedgenericclassNestedGenericClass_C_D", exact = true)
   open inner class D {
-   @JvmField var d: T = null as T
+   @JvmField
+   var d: T = null as T
   }
  }
 

@@ -11,15 +11,20 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 open class RawType {
- @JvmField var rawUnbound_pp_rawtype: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
+ @JvmField
+ var rawUnbound_pp_rawtype: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
 
- @JvmField var rawBound_pp_rawtype: RawType.Bound<RawType?>? = RawType.Bound<RawType?>()
+ @JvmField
+ var rawBound_pp_rawtype: RawType.Bound<RawType?>? = RawType.Bound<RawType?>()
 
- @JvmField var rawBoundRecursively_pp_rawtype: RawType.BoundRecursively<*>? = RawType.BoundRecursively()
+ @JvmField
+ var rawBoundRecursively_pp_rawtype: RawType.BoundRecursively<*>? = RawType.BoundRecursively()
 
- @JvmField var rawBoundDependentDirect_pp_rawtype: RawType.BoundDependentDirect<Any?, Any>? = RawType.BoundDependentDirect<Any?, Any>()
+ @JvmField
+ var rawBoundDependentDirect_pp_rawtype: RawType.BoundDependentDirect<Any?, Any>? = RawType.BoundDependentDirect<Any?, Any>()
 
- @JvmField var rawBoundDependentIndirect_pp_rawtype: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
+ @JvmField
+ var rawBoundDependentIndirect_pp_rawtype: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
 
  open class Unbound<T> {
   open fun method_pp_rawtype(t: T): T {
@@ -43,7 +48,7 @@ open class RawType {
 
  interface GenericSuperclass<T: RawType?> {
   fun f(
-   @ObjCName("withRawtypeRawType", exact = false) t: T
+   @ObjCName("withRawtypeRawType") t: T
   ) {}
  }
 

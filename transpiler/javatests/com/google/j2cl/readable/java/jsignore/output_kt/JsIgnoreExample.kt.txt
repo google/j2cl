@@ -21,13 +21,16 @@ open class JsIgnoreExample {
   @JvmStatic
   fun notExportedFunction() {}
 
-  @ObjCName("exportedField", exact = false)
-  @JvmField var exportedField: Int = 10
+  @JvmField
+  @ObjCName("exportedField")
+  var exportedField: Int = 10
 
-  @ObjCName("notExportedField", exact = false)
-  @JvmField var notExportedField: Int = 20
+  @JvmField
+  @ObjCName("notExportedField")
+  var notExportedField: Int = 20
 
-  @ObjCName("CONSTNAME", exact = false)
-  @JvmField val CONSTNAME: Any? = Any()
+  @JvmField
+  @ObjCName("CONSTNAME")
+  val CONSTNAME: Any? = Any()
  }
 }

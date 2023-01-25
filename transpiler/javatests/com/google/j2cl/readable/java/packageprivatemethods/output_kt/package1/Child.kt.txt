@@ -14,14 +14,14 @@ import packageprivatemethods.package1.Parent
 @ObjCName("PackageprivatemethodsPackage1Child", exact = true)
 open class Child: Parent(), Interface {
  open fun overrideInParentExposedInChild(
-  @ObjCName("withInt", exact = false) a: Int
+  @ObjCName("withInt") a: Int
  ): Int {
   return a + 1
  }
 
  open fun exposedInChild(
-  @ObjCName("withInt", exact = false) a: Int,
-  @ObjCName("withInt", exact = false) b: Int
+  @ObjCName("withInt") a: Int,
+  @ObjCName("withInt") b: Int
  ): Int {
   return a + b + 1
  }

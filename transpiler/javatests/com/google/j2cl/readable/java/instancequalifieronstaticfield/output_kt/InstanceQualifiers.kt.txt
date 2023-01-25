@@ -17,11 +17,13 @@ import kotlin.run
 @ObjCName("InstancequalifieronstaticfieldInstanceQualifiers", exact = true)
 open class InstanceQualifiers {
  companion object {
-  @ObjCName("staticField", exact = false)
-  @JvmField var staticField: Int = 100
+  @JvmField
+  @ObjCName("staticField")
+  var staticField: Int = 100
 
-  @ObjCName("sideEffectCount", exact = false)
-  @JvmField var sideEffectCount: Int = 0
+  @JvmField
+  @ObjCName("sideEffectCount")
+  var sideEffectCount: Int = 0
 
   @JvmStatic
   fun getStaticValue(): Int {
@@ -35,7 +37,7 @@ open class InstanceQualifiers {
 
   @JvmStatic
   fun main(
-   vararg @ObjCName("withNSStringArray", exact = false) args: String?
+   vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val main: InstanceQualifiers? = InstanceQualifiers()

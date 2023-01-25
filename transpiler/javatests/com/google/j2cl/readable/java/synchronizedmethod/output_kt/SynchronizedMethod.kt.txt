@@ -15,9 +15,11 @@ import kotlin.synchronized
 
 @ObjCName("SynchronizedmethodSynchronizedMethod", exact = true)
 open class SynchronizedMethod {
- @JvmField var a_private_2: Int = 0
+ @JvmField
+ var a_private_2: Int = 0
 
- @JvmField var b_private_2: Int = 0
+ @JvmField
+ var b_private_2: Int = 0
 
  open fun method() {
   synchronized(this) {
@@ -27,9 +29,11 @@ open class SynchronizedMethod {
  }
 
  companion object {
-  @JvmField var sa_private_2: Int = 0
+  @JvmField
+  var sa_private_2: Int = 0
 
-  @JvmField var sb_private_2: Int = 0
+  @JvmField
+  var sb_private_2: Int = 0
 
   @JvmStatic
   fun staticMethod() {

@@ -24,41 +24,57 @@ import kotlin.native.ObjCName
 open class WasmImmutableFields {}
 
 open class AssignmentsInDeclaration {
- @JvmField var compileTimeConstant_pp_wasmimmutablefields: Int = 12
+ @JvmField
+ var compileTimeConstant_pp_wasmimmutablefields: Int = 12
 
- @JvmField var stringLiteral_pp_wasmimmutablefields: String? = "Hello World"
+ @JvmField
+ var stringLiteral_pp_wasmimmutablefields: String? = "Hello World"
 
- @JvmField var newArray_pp_wasmimmutablefields: Array<Any?>? = arrayOfNulls<Any>(4)
+ @JvmField
+ var newArray_pp_wasmimmutablefields: Array<Any?>? = arrayOfNulls<Any>(4)
 
- @JvmField var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = Array<Array<Array<Any?>?>?>(3) {
+ @JvmField
+ var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = Array<Array<Array<Any?>?>?>(3) {
   arrayOfNulls<Array<Any?>>(4)
  }
 
- @JvmField var arrayLiteral_pp_wasmimmutablefields: IntArray? = intArrayOf(1, 2, 3, 4)
+ @JvmField
+ var arrayLiteral_pp_wasmimmutablefields: IntArray? = intArrayOf(1, 2, 3, 4)
 
- @JvmField var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = arrayOf<IntArray?>(intArrayOf(1, 2), intArrayOf(3, 4))
+ @JvmField
+ var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = arrayOf<IntArray?>(intArrayOf(1, 2), intArrayOf(3, 4))
 
- @JvmField var classLiteral_pp_wasmimmutablefields: Class<*>? = WasmImmutableFields::class.javaObjectType
+ @JvmField
+ var classLiteral_pp_wasmimmutablefields: Class<*>? = WasmImmutableFields::class.javaObjectType
 
- @JvmField var withCast_pp_wasmimmutablefields: Array<String?>? = (arrayOfNulls<Any>(0) as Any?) as Array<String?>?
+ @JvmField
+ var withCast_pp_wasmimmutablefields: Array<String?>? = (arrayOfNulls<Any>(0) as Any?) as Array<String?>?
 }
 
 open class AssignmentsInInitializer {
- @JvmField var compileTimeConstant_pp_wasmimmutablefields: Int = 0
+ @JvmField
+ var compileTimeConstant_pp_wasmimmutablefields: Int = 0
 
- @JvmField var stringLiteral_pp_wasmimmutablefields: String? = null
+ @JvmField
+ var stringLiteral_pp_wasmimmutablefields: String? = null
 
- @JvmField var newArray_pp_wasmimmutablefields: Array<Any?>? = null
+ @JvmField
+ var newArray_pp_wasmimmutablefields: Array<Any?>? = null
 
- @JvmField var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = null
+ @JvmField
+ var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = null
 
- @JvmField var arrayLiteral_pp_wasmimmutablefields: IntArray? = null
+ @JvmField
+ var arrayLiteral_pp_wasmimmutablefields: IntArray? = null
 
- @JvmField var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = null
+ @JvmField
+ var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = null
 
- @JvmField var classLiteral_pp_wasmimmutablefields: Class<*>? = null
+ @JvmField
+ var classLiteral_pp_wasmimmutablefields: Class<*>? = null
 
- @JvmField var withCast_pp_wasmimmutablefields: Array<String?>? = null
+ @JvmField
+ var withCast_pp_wasmimmutablefields: Array<String?>? = null
 
  init {
   this.compileTimeConstant_pp_wasmimmutablefields = 12
@@ -75,25 +91,35 @@ open class AssignmentsInInitializer {
 }
 
 open class AssignmentsInConstructor {
- @JvmField var compileTimeConstant_pp_wasmimmutablefields: Int = 0
+ @JvmField
+ var compileTimeConstant_pp_wasmimmutablefields: Int = 0
 
- @JvmField var stringLiteral_pp_wasmimmutablefields: String? = null
+ @JvmField
+ var stringLiteral_pp_wasmimmutablefields: String? = null
 
- @JvmField var newArray_pp_wasmimmutablefields: Array<Any?>? = null
+ @JvmField
+ var newArray_pp_wasmimmutablefields: Array<Any?>? = null
 
- @JvmField var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = null
+ @JvmField
+ var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = null
 
- @JvmField var arrayLiteral_pp_wasmimmutablefields: IntArray? = null
+ @JvmField
+ var arrayLiteral_pp_wasmimmutablefields: IntArray? = null
 
- @JvmField var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = null
+ @JvmField
+ var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = null
 
- @JvmField var classLiteral_pp_wasmimmutablefields: Class<*>? = null
+ @JvmField
+ var classLiteral_pp_wasmimmutablefields: Class<*>? = null
 
- @JvmField var withCast_pp_wasmimmutablefields: Array<String?>? = null
+ @JvmField
+ var withCast_pp_wasmimmutablefields: Array<String?>? = null
 
- @JvmField var fromParameter_pp_wasmimmutablefields: Any? = null
+ @JvmField
+ var fromParameter_pp_wasmimmutablefields: Any? = null
 
- @JvmField var finalFieldReference_pp_wasmimmutablefields: String? = null
+ @JvmField
+ var finalFieldReference_pp_wasmimmutablefields: String? = null
 
  constructor(parameter: Any?, intParameter: Int, par: AssignmentsInConstructor?) {
   this.compileTimeConstant_pp_wasmimmutablefields = 12
@@ -112,7 +138,8 @@ open class AssignmentsInConstructor {
 }
 
 open class OptimizesWithThisConstructorDelegation {
- @JvmField var optimizeableField_pp_wasmimmutablefields: Int = 0
+ @JvmField
+ var optimizeableField_pp_wasmimmutablefields: Int = 0
 
  constructor() {
   this.optimizeableField_pp_wasmimmutablefields = 2
@@ -134,27 +161,38 @@ open class OptimizesWithSuperConstructorDelegation: OptimizesWithThisConstructor
 }
 
 open class FinalizerTest {
- @JvmField var effectivelyFinalField_pp_wasmimmutablefields: Int = 1
+ @JvmField
+ var effectivelyFinalField_pp_wasmimmutablefields: Int = 1
 
- @JvmField var readInInit_pp_wasmimmutablefields: Int = this.effectivelyFinalField_pp_wasmimmutablefields
+ @JvmField
+ var readInInit_pp_wasmimmutablefields: Int = this.effectivelyFinalField_pp_wasmimmutablefields
 
- @JvmField var writtenOutsideConstructor_pp_wasmimmutablefields: Int = 1
+ @JvmField
+ var writtenOutsideConstructor_pp_wasmimmutablefields: Int = 1
 
- @JvmField var readBeforeWrite_pp_wasmimmutablefields: Int = 0
+ @JvmField
+ var readBeforeWrite_pp_wasmimmutablefields: Int = 0
 
- @JvmField var writtenInDelegatingConstructor_pp_wasmimmutablefields: Int = 1
+ @JvmField
+ var writtenInDelegatingConstructor_pp_wasmimmutablefields: Int = 1
 
- @JvmField var compoundAssignment_pp_wasmimmutablefields: Int = 0
+ @JvmField
+ var compoundAssignment_pp_wasmimmutablefields: Int = 0
 
- @JvmField var effectivelyFinalButNotOptimizedIfBranches_pp_wasmimmutablefields: Int = 0
+ @JvmField
+ var effectivelyFinalButNotOptimizedIfBranches_pp_wasmimmutablefields: Int = 0
 
- @JvmField var effectivelyFinalButNotOptimizedNestedBlock_pp_wasmimmutablefields: Int = 0
+ @JvmField
+ var effectivelyFinalButNotOptimizedNestedBlock_pp_wasmimmutablefields: Int = 0
 
- @JvmField var writtenInInitAndConstructor_pp_wasmimmutablefields: Int = 1
+ @JvmField
+ var writtenInInitAndConstructor_pp_wasmimmutablefields: Int = 1
 
- @JvmField var writtenInInitializerAndInDelegatingConstructor_pp_wasmimmutablefields: Int = 1
+ @JvmField
+ var writtenInInitializerAndInDelegatingConstructor_pp_wasmimmutablefields: Int = 1
 
- @JvmField var writtenOnlyInDelegatingConstructor_pp_wasmimmutablefields: Int = 0
+ @JvmField
+ var writtenOnlyInDelegatingConstructor_pp_wasmimmutablefields: Int = 0
 
  constructor() {
   this.readBeforeWrite_pp_wasmimmutablefields = this.readBeforeWrite_pp_wasmimmutablefields + 1

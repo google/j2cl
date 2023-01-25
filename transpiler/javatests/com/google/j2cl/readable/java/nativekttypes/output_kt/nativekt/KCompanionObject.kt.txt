@@ -14,8 +14,9 @@ import kotlin.native.ObjCName
 @ObjCName("NativekttypesNativektKCompanionObject", exact = true)
 open class KCompanionObject {
  companion object {
-  @ObjCName("staticField", exact = false)
-  @JvmField var staticField: Int = 0
+  @JvmField
+  @ObjCName("staticField")
+  var staticField: Int = 0
 
   @JvmStatic
   fun staticMethod() {}

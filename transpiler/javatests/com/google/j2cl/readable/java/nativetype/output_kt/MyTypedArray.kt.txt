@@ -12,14 +12,15 @@ import kotlin.native.ObjCName
 
 @ObjCName("NativetypeMyTypedArray", exact = true)
 open class MyTypedArray<T> {
- @JvmField var length_private_2: Int = 0
+ @JvmField
+ var length_private_2: Int = 0
 
  fun size(): Int {
   return this.length_private_2
  }
 
  fun get(
-  @ObjCName("withInt", exact = false) index: Int
+  @ObjCName("withInt") index: Int
  ): T {
   return null as T
  }

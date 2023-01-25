@@ -18,7 +18,8 @@ import kotlin.native.ObjCName
 
 @ObjCName("InnerclassinitorderInnerClassInitOrder", exact = true)
 open class InnerClassInitOrder {
- @JvmField var number: Int = 0
+ @JvmField
+ var number: Int = 0
 
  open fun testOuterThisFromSuperCall() {
   OuterRefFromSuperCtorCall()
@@ -64,10 +65,11 @@ open class InnerClassInitOrder {
 
  open fun testInnerClassLoop() {
   abstract class ___1AddNumber {
-   @JvmField var num_pp_innerclassinitorder: Int = 0
+   @JvmField
+   var num_pp_innerclassinitorder: Int = 0
 
    constructor(
-    @ObjCName("Int", exact = false) i: Int
+    @ObjCName("Int") i: Int
    ) {
     this.num_pp_innerclassinitorder = i
    }
@@ -92,9 +94,11 @@ open class InnerClassInitOrder {
   assert(this.number == 1156)
  }
 
- @JvmField val outer_private_2: InnerClassInitOrder.Outer? = InnerClassInitOrder.Outer(1)
+ @JvmField
+ val outer_private_2: InnerClassInitOrder.Outer? = InnerClassInitOrder.Outer(1)
 
- @JvmField val outerIsSuper_private_2: InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_2!!.OuterIsSuper(2)
+ @JvmField
+ val outerIsSuper_private_2: InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_2!!.OuterIsSuper(2)
 
  open fun testOuterIsNotSuper() {
   val x: InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper_private_2!!.OuterIsNotSuper()
@@ -139,7 +143,7 @@ open class InnerClassInitOrder {
  companion object {
   @JvmStatic
   fun main(
-   vararg @ObjCName("withNSStringArray", exact = false) args: String?
+   vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val m: InnerClassInitOrder? = InnerClassInitOrder()
@@ -178,7 +182,7 @@ open class InnerClassInitOrder {
 
  open inner class OuterRefFromThisCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
   constructor(
-   @ObjCName("Id", exact = false) `object`: Any?
+   @ObjCName("Id") `object`: Any?
   ): super(`object`)
 
   constructor(): this(object : Any() {
@@ -210,7 +214,8 @@ open class InnerClassInitOrder {
  }
 
  open class P1<T1> {
-  @JvmField val value_pp_innerclassinitorder: Int
+  @JvmField
+  val value_pp_innerclassinitorder: Int
 
   constructor(): this(1)
 
@@ -237,14 +242,15 @@ open class InnerClassInitOrder {
   }
 
   open inner class ESInner {
-   @JvmField var value: Int = 0
+   @JvmField
+   var value: Int = 0
 
    constructor() {
     this.value = 1
    }
 
    constructor(
-    @ObjCName("Int", exact = false) value: Int
+    @ObjCName("Int") value: Int
    ) {
     this.value = value
    }
@@ -263,14 +269,15 @@ open class InnerClassInitOrder {
   }
 
   open inner class ESWGInner {
-   @JvmField var value: Int = 0
+   @JvmField
+   var value: Int = 0
 
    constructor() {
     this.value = 1
    }
 
    constructor(
-    @ObjCName("Int", exact = false) value: Int
+    @ObjCName("Int") value: Int
    ) {
     this.value = value
    }
@@ -285,10 +292,11 @@ open class InnerClassInitOrder {
 
  @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer", exact = true)
  open class Outer {
-  @JvmField val value: Int
+  @JvmField
+  val value: Int
 
   constructor(
-   @ObjCName("Int", exact = false) i: Int
+   @ObjCName("Int") i: Int
   ) {
    this.value = i
   }
@@ -307,7 +315,7 @@ open class InnerClassInitOrder {
   @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer_OuterIsSuper", exact = true)
   open inner class OuterIsSuper: InnerClassInitOrder.Outer {
    constructor(
-    @ObjCName("Int", exact = false) i: Int
+    @ObjCName("Int") i: Int
    ): super(i)
 
    open override fun checkDispatch(): Int {

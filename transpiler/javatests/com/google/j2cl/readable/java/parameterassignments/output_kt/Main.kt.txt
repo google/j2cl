@@ -44,48 +44,51 @@ open class Main {
   ia_1 = intArrayOf(i, ia_1!![0])
  }
 
- @JvmField val fn_pp_parameterassignments: Main.Fn? = Main.Fn { nonFinal: Int, implicitFinal: Int ->
+ @JvmField
+ val fn_pp_parameterassignments: Main.Fn? = Main.Fn { nonFinal: Int, implicitFinal: Int ->
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
   return@Fn nonFinal_1
  }
 
- @JvmField val fnPrimitiveVarargs_pp_parameterassignments: Main.FnPrimitiveVarargs? = Main.FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
+ @JvmField
+ val fnPrimitiveVarargs_pp_parameterassignments: Main.FnPrimitiveVarargs? = Main.FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
   `is`!![0] = `is`!![1]
  }
 
- @JvmField val fnObjectVarargs_pp_parameterassignments: Main.FnObjectVarargs? = Main.FnObjectVarargs { o: Any?, os: Array<*>? ->
+ @JvmField
+ val fnObjectVarargs_pp_parameterassignments: Main.FnObjectVarargs? = Main.FnObjectVarargs { o: Any?, os: Array<*>? ->
   val os_1: Array<Any?>? = os as Array<Any?>?
   os_1!![0] = os_1!![1]
  }
 
  fun interface Fn {
   fun test(
-   @ObjCName("withInt", exact = false) nonFinal: Int,
-   @ObjCName("withInt", exact = false) implicitFinal: Int
+   @ObjCName("withInt") nonFinal: Int,
+   @ObjCName("withInt") implicitFinal: Int
   ): Int
  }
 
  fun interface FnPrimitiveVarargs {
   fun test(
-   @ObjCName("withInt", exact = false) i: Int,
-   vararg @ObjCName("withIntArray", exact = false) `is`: Int
+   @ObjCName("withInt") i: Int,
+   vararg @ObjCName("withIntArray") `is`: Int
   )
  }
 
  fun interface FnObjectVarargs {
   fun test(
-   @ObjCName("withId", exact = false) o: Any?,
-   vararg @ObjCName("withNSObjectArray", exact = false) os: Any?
+   @ObjCName("withId") o: Any?,
+   vararg @ObjCName("withNSObjectArray") os: Any?
   )
  }
 
  @ObjCName("ParameterassignmentsMain_SubMain", exact = true)
  open class SubMain: Main {
   constructor(
-   @ObjCName("Int", exact = false) nonFinal: Int,
-   @ObjCName("withInt", exact = false) explicitFinal: Int,
-   @ObjCName("withInt", exact = false) implicitFinal: Int
+   @ObjCName("Int") nonFinal: Int,
+   @ObjCName("withInt") explicitFinal: Int,
+   @ObjCName("withInt") implicitFinal: Int
   ): super(nonFinal, explicitFinal, implicitFinal) {
    var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal

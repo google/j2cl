@@ -17,7 +17,7 @@ import kotlin.native.ObjCName
 @ObjCName("ImportglobaljstypesNumber", exact = true)
 open class Number {
  open fun testJsDocForLiteralType(
-  @ObjCName("withImportglobaljstypesNumber_MyLiteralType", exact = false) a: Number.MyLiteralType?
+  @ObjCName("withImportglobaljstypesNumber_MyLiteralType") a: Number.MyLiteralType?
  ): Number.MyLiteralType? {
   return a
  }
@@ -25,12 +25,12 @@ open class Number {
  companion object {
   @JvmStatic
   external fun `fun`(
-   @ObjCName("withDouble", exact = false) x: Double
+   @ObjCName("withDouble") x: Double
   ): Boolean
 
   @JvmStatic
   fun test(
-   @ObjCName("withDouble", exact = false) x: Double
+   @ObjCName("withDouble") x: Double
   ): Boolean {
    return Number.`fun`(x)
   }
@@ -40,7 +40,7 @@ open class Number {
 
   @JvmStatic
   fun fromCharCode(
-   @ObjCName("withIntArray", exact = false) array: IntArray?
+   @ObjCName("withIntArray") array: IntArray?
   ): String? {
    return Number.getFromCharCodeFunction_private_2()!!.apply(null, array)
   }
@@ -48,8 +48,8 @@ open class Number {
 
  fun interface NativeFunction<T> {
   fun apply(
-   @ObjCName("withId", exact = false) thisContext: Any?,
-   @ObjCName("withIntArray", exact = false) argsArray: IntArray?
+   @ObjCName("withId") thisContext: Any?,
+   @ObjCName("withIntArray") argsArray: IntArray?
   ): T
  }
 

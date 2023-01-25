@@ -23,7 +23,7 @@ open class GrandParent {
  open fun grandParentSimplest() {}
 
  open fun grandParentWithParams(
-  @ObjCName("withInt", exact = false) foo: Int
+  @ObjCName("withInt") foo: Int
  ) {}
 
  open fun grandParentWithChangingReturn(): Any? {
@@ -39,7 +39,7 @@ open class Parent: GrandParent(), ParentInterface {
  open fun parentSimplest() {}
 
  open fun parentWithParams(
-  @ObjCName("withInt", exact = false) foo: Int
+  @ObjCName("withInt") foo: Int
  ) {}
 
  open fun parentWithChangingReturn(): Any? {

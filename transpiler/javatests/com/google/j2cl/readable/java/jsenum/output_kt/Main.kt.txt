@@ -109,7 +109,8 @@ open class Main {
   TWENTY(20),
   ELEVEN(11);
 
-  @JvmField var value_private_2: Int = 0
+  @JvmField
+  var value_private_2: Int = 0
 
   open fun getValue(): Int {
    return this.value_private_2
@@ -124,7 +125,8 @@ open class Main {
   ONE("ONE"),
   THREE("THREE");
 
-  @JvmField var value_private_2: String? = null
+  @JvmField
+  var value_private_2: String? = null
 
   open fun getValue(): String? {
    return this.value_private_2
@@ -139,7 +141,8 @@ open class Main {
   ONE("ONE"),
   THREE("THREE");
 
-  @JvmField var value_private_2: String
+  @JvmField
+  var value_private_2: String
 
   open fun getValue(): String? {
    return this.value_private_2
@@ -156,7 +159,8 @@ open class Main {
  }
 
  open class TemplatedField<T> {
-  @JvmField var value_pp_jsenum: T = null as T
+  @JvmField
+  var value_pp_jsenum: T = null as T
 
   constructor(value: T) {
    this.value_pp_jsenum = value

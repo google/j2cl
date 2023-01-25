@@ -26,16 +26,19 @@ import nativekttypes.nativekt.KWithCompanionObject
 
 @ObjCName("NativekttypesMain", exact = true)
 open class Main {
- @JvmField var topLevelField: KTopLevel<String?>? = null
+ @JvmField
+ var topLevelField: KTopLevel<String?>? = null
 
- @JvmField var nestedField: KTopLevel.KNested<String?>? = null
+ @JvmField
+ var nestedField: KTopLevel.KNested<String?>? = null
 
- @JvmField var innerField: KTopLevel<String?>.KInner<String?>? = null
+ @JvmField
+ var innerField: KTopLevel<String?>.KInner<String?>? = null
 
  open fun methodArguments(
-  @ObjCName("withNativekttypesNativeTopLevel", exact = false) foo: KTopLevel<String?>?,
-  @ObjCName("withNativekttypesNativeTopLevel_Nested", exact = false) nested: KTopLevel.KNested<String?>?,
-  @ObjCName("withNativekttypesNativeTopLevel_Inner", exact = false) inner: KTopLevel<String?>.KInner<String?>?
+  @ObjCName("withNativekttypesNativeTopLevel") foo: KTopLevel<String?>?,
+  @ObjCName("withNativekttypesNativeTopLevel_Nested") nested: KTopLevel.KNested<String?>?,
+  @ObjCName("withNativekttypesNativeTopLevel_Inner") inner: KTopLevel<String?>.KInner<String?>?
  ) {}
 
  open fun memberAccess() {
@@ -120,49 +123,49 @@ open class Main {
  }
 
  open fun <I, O> acceptFn_generic(
-  @ObjCName("withNativekttypesFn", exact = false) f: Fn<I, O>?,
-  @ObjCName("withId", exact = false) i: I
+  @ObjCName("withNativekttypesFn") f: Fn<I, O>?,
+  @ObjCName("withId") i: I
  ): O {
   return f!!.apply(i)
  }
 
  open fun acceptFn_parametrized(
-  @ObjCName("withNativekttypesFn", exact = false) f: Fn<String?, String?>?,
-  @ObjCName("withNSString", exact = false) i: String?
+  @ObjCName("withNativekttypesFn") f: Fn<String?, String?>?,
+  @ObjCName("withNSString") i: String?
  ): String? {
   return f!!.apply(i)
  }
 
  open fun <I, O> acceptFn_genericWildcard(
-  @ObjCName("withNativekttypesFn", exact = false) f: Fn<I, O>?,
-  @ObjCName("withId", exact = false) i: I
+  @ObjCName("withNativekttypesFn") f: Fn<I, O>?,
+  @ObjCName("withId") i: I
  ): O {
   return f!!.apply(i)
  }
 
  open fun acceptFn_parametrizedWildcard(
-  @ObjCName("withNativekttypesFn", exact = false) f: Fn<String?, String?>?,
-  @ObjCName("withNSString", exact = false) i: String?
+  @ObjCName("withNativekttypesFn") f: Fn<String?, String?>?,
+  @ObjCName("withNSString") i: String?
  ): String? {
   return f!!.apply(i)
  }
 
  open fun acceptFn_unboundWildcard(
-  @ObjCName("withNativekttypesFn", exact = false) f: Fn<*, *>?,
-  @ObjCName("withId", exact = false) i: Any?
+  @ObjCName("withNativekttypesFn") f: Fn<*, *>?,
+  @ObjCName("withId") i: Any?
  ): Any? {
   return (f as Fn<Any?, Any?>?)!!.apply(i)
  }
 
  open fun acceptFn_raw(
-  @ObjCName("withNativekttypesFn", exact = false) f: Fn<Any?, Any?>?,
-  @ObjCName("withId", exact = false) i: Any?
+  @ObjCName("withNativekttypesFn") f: Fn<Any?, Any?>?,
+  @ObjCName("withId") i: Any?
  ): Any? {
   return f!!.apply(i)
  }
 
  open fun todoMethod(
-  @ObjCName("withNSString", exact = false) string: String?
+  @ObjCName("withNSString") string: String?
  ) {
   TODO("J2KT: not yet supported")
  }

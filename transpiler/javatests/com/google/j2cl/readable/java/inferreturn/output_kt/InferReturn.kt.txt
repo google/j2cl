@@ -19,14 +19,14 @@ open class InferReturn<T> {
  companion object {
   @JvmStatic
   fun <T_1> inferGeneric(
-   @ObjCName("withId", exact = false) foo: T_1
+   @ObjCName("withId") foo: T_1
   ): InferReturn<T_1>? {
    return InferReturn<T_1>()
   }
 
   @JvmStatic
   fun tightenType(
-   @ObjCName("withInferreturnInferReturn", exact = false) foo: InferReturn<String?>?
+   @ObjCName("withInferreturnInferReturn") foo: InferReturn<String?>?
   ): InferReturn<InferReturn<String?>?>? {
    if (foo != null) {
     return InferReturn.inferGeneric<InferReturn<String?>?>(foo)
@@ -44,26 +44,26 @@ open class InferReturn<T> {
 
   @JvmStatic
   fun <V> newArrayList(
-   @ObjCName("withId", exact = false) foo: V
+   @ObjCName("withId") foo: V
   ): ArrayList<V>? {
    return ArrayList<V>()
   }
 
   @JvmStatic
   fun <V> newArray(
-   @ObjCName("withId", exact = false) foo: V
+   @ObjCName("withId") foo: V
   ): Array<V>? {
    return arrayOfNulls<Any>(0) as Array<V>?
   }
 
   @JvmStatic
   fun acceptsArrayListOfObject(
-   @ObjCName("withJavaUtilArrayList", exact = false) foo: ArrayList<Any?>?
+   @ObjCName("withJavaUtilArrayList") foo: ArrayList<Any?>?
   ) {}
 
   @JvmStatic
   fun acceptsArrayOfObject(
-   @ObjCName("withNSObjectArray", exact = false) foo: Array<Any?>?
+   @ObjCName("withNSObjectArray") foo: Array<Any?>?
   ) {}
  }
 }

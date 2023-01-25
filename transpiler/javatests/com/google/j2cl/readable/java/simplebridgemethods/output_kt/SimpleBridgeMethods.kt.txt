@@ -12,7 +12,7 @@ import kotlin.native.ObjCName
 
 open class Superclass<T: Error?> {
  open fun m1(
-  @ObjCName("withJavaLangError", exact = false) t: T
+  @ObjCName("withJavaLangError") t: T
  ) {}
 }
 
@@ -24,7 +24,7 @@ open class AnotherSubclass: Superclass<AssertionError?>() {}
 
 fun interface Callable<V> {
  fun call(
-  @ObjCName("withId", exact = false) v: V
+  @ObjCName("withId") v: V
  )
 }
 

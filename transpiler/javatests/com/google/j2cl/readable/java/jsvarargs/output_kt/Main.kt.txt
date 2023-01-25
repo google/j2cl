@@ -19,23 +19,24 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsvarargsMain", exact = true)
 open class Main {
- @JvmField var field_pp_jsvarargs: Int = 0
+ @JvmField
+ var field_pp_jsvarargs: Int = 0
 
  constructor(
-  @ObjCName("Int", exact = false) f: Int
+  @ObjCName("Int") f: Int
  ) {
   this.field_pp_jsvarargs = f
  }
 
  open fun f3(
-  @ObjCName("withInt", exact = false) m: Int,
-  vararg @ObjCName("withIntArray", exact = false) numbers: Int
+  @ObjCName("withInt") m: Int,
+  vararg @ObjCName("withIntArray") numbers: Int
  ): Int {
   return this.field_pp_jsvarargs + m + numbers!![1]
  }
 
  open fun f4(
-  vararg @ObjCName("withIntArray", exact = false) numbers: Int
+  vararg @ObjCName("withIntArray") numbers: Int
  ): Int {
   return this.field_pp_jsvarargs + numbers!![1]
  }
@@ -131,22 +132,22 @@ open class Main {
  companion object {
   @JvmStatic
   fun f1(
-   @ObjCName("withInt", exact = false) multiplier: Int,
-   vararg @ObjCName("withIntArray", exact = false) numbers: Int
+   @ObjCName("withInt") multiplier: Int,
+   vararg @ObjCName("withIntArray") numbers: Int
   ): Int {
    return numbers!!.size + numbers!![0] + multiplier
   }
 
   @JvmStatic
   fun f2(
-   vararg @ObjCName("withIntArray", exact = false) numbers: Int
+   vararg @ObjCName("withIntArray") numbers: Int
   ): Int {
    return numbers!!.size + numbers!![0]
   }
 
   @JvmStatic
   fun <T> generics(
-   vararg @ObjCName("withNSObjectArray", exact = false) elements: T
+   vararg @ObjCName("withNSObjectArray") elements: T
   ): T {
    val elements_1: Array<T>? = elements as Array<T>?
    return elements_1!![0]
@@ -154,7 +155,7 @@ open class Main {
 
   @JvmStatic
   fun parameterizedType(
-   vararg @ObjCName("withJavaUtilListArray", exact = false) elements: MutableList<Main?>?
+   vararg @ObjCName("withJavaUtilListArray") elements: MutableList<Main?>?
   ): Main? {
    val elements_1: Array<MutableList<Main?>?>? = elements as Array<MutableList<Main?>?>?
    return elements_1!![0]!!.get(0)
@@ -162,7 +163,7 @@ open class Main {
 
   @JvmStatic
   fun <T> parameterizedByT(
-   vararg @ObjCName("withJavaUtilListArray", exact = false) elements: MutableList<T>?
+   vararg @ObjCName("withJavaUtilListArray") elements: MutableList<T>?
   ): T {
    val elements_1: Array<MutableList<T>?>? = elements as Array<MutableList<T>?>?
    return elements_1!![0]!!.get(0)
@@ -171,7 +172,7 @@ open class Main {
 
  open class NativeObject {
   constructor(
-   vararg @ObjCName("NSObjectArray", exact = false) pars: Any?
+   vararg @ObjCName("NSObjectArray") pars: Any?
   ) {
    val pars_1: Array<Any?>? = pars as Array<Any?>?
   }
@@ -179,8 +180,8 @@ open class Main {
 
  open class SubVarargsConstructorClass: Main.NativeObject {
   constructor(
-   @ObjCName("Int", exact = false) i: Int,
-   vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
+   @ObjCName("Int") i: Int,
+   vararg @ObjCName("withNSObjectArray") args: Any?
   ): super(*(args as Array<Any?>?)!!) {
    val args_1: Array<Any?>? = args as Array<Any?>?
   }
@@ -188,15 +189,15 @@ open class Main {
 
  fun interface Function {
   fun f1(
-   @ObjCName("withInt", exact = false) i: Int,
-   vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
+   @ObjCName("withInt") i: Int,
+   vararg @ObjCName("withNSObjectArray") args: Any?
   ): Any?
  }
 
  @ObjCName("JsvarargsMain_AbstractMethodWithVarargs", exact = true)
  abstract class AbstractMethodWithVarargs {
   abstract fun abstractMethod(
-   vararg @ObjCName("withIntArray", exact = false) args: Int
+   vararg @ObjCName("withIntArray") args: Int
   )
  }
 
@@ -205,7 +206,7 @@ open class Main {
   companion object {
    @JvmStatic
    fun staticMethod(
-    vararg @ObjCName("withIntArray", exact = false) args: Int
+    vararg @ObjCName("withIntArray") args: Int
    ) {}
   }
  }
@@ -233,8 +234,8 @@ open class Main {
 
  fun interface GenericFunction<T> {
   fun m(
-   @ObjCName("withId", exact = false) i: T,
-   vararg @ObjCName("withNSObjectArray", exact = false) args: T
+   @ObjCName("withId") i: T,
+   vararg @ObjCName("withNSObjectArray") args: T
   ): Any?
  }
 }

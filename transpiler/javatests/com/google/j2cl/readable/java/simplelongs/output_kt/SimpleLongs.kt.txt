@@ -14,13 +14,15 @@ import kotlin.run
 
 @ObjCName("SimplelongsSimpleLongs", exact = true)
 open class SimpleLongs {
- @JvmField var foo: Long = 0L
+ @JvmField
+ var foo: Long = 0L
 
  open fun getBar(): Long {
   return 0L
  }
 
- @JvmField var sideEffect_private_2: Int = 0
+ @JvmField
+ var sideEffect_private_2: Int = 0
 
  open fun getWithSideEffect(): SimpleLongs? {
   this.sideEffect_private_2 = this.sideEffect_private_2 + 1

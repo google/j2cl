@@ -15,7 +15,7 @@ interface Entry<K> {}
 
 abstract class Map<K> {
  abstract fun getCeilingEntry(
-  @ObjCName("withId", exact = false) key: K
+  @ObjCName("withId") key: K
  ): Entry<K>?
 }
 
@@ -32,7 +32,7 @@ open class CharSet {
  companion object {
   @JvmStatic
   fun main(
-   vararg @ObjCName("withNSStringArray", exact = false) args: String?
+   vararg @ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
    val treeMap: TreeMap<String?>? = object : TreeMap<String?>() {}

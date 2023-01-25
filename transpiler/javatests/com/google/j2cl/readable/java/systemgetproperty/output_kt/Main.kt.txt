@@ -17,13 +17,15 @@ import kotlin.native.ObjCName
 @ObjCName("SystemgetpropertyMain", exact = true)
 open class Main {
  companion object {
-  @JvmField val property_private_2: String? = System.getProperty("jre.classMetadata")
+  @JvmField
+  val property_private_2: String? = System.getProperty("jre.classMetadata")
 
-  @JvmField val propertyWithDefault_private_2: String? = System.getProperty("jre.classMetadata", "default")
+  @JvmField
+  val propertyWithDefault_private_2: String? = System.getProperty("jre.classMetadata", "default")
 
   @JvmStatic
   fun main(
-   @ObjCName("withNSStringArray", exact = false) args: Array<String?>?
+   @ObjCName("withNSStringArray") args: Array<String?>?
   ) {
    var x: Boolean = false
    x = Main.property_private_2 === "SIMPLE"

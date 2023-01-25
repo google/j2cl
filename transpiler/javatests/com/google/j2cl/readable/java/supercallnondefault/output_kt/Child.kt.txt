@@ -11,10 +11,11 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 open class Parent {
- @JvmField var field: Int = 0
+ @JvmField
+ var field: Int = 0
 
  constructor(
-  @ObjCName("Int", exact = false) f: Int
+  @ObjCName("Int") f: Int
  ) {
   this.field = f
  }
@@ -23,6 +24,6 @@ open class Parent {
 @ObjCName("SupercallnondefaultChild", exact = true)
 open class Child: Parent {
  constructor(
-  @ObjCName("Int", exact = false) a: Int
+  @ObjCName("Int") a: Int
  ): super(a)
 }

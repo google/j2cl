@@ -15,14 +15,14 @@ open class FunctionalInterfaces {
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_NonParametrized", exact = true)
  fun interface NonParametrized {
   fun apply(
-   @ObjCName("withNSString", exact = false) string: String?
+   @ObjCName("withNSString") string: String?
   ): String?
  }
 
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_Parametrized", exact = true)
  fun interface Parametrized<T> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ): T
  }
 
@@ -34,11 +34,11 @@ open class FunctionalInterfaces {
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", exact = true)
  fun interface WithDefaultMethod {
   fun apply(
-   @ObjCName("withNSString", exact = false) string: String?
+   @ObjCName("withNSString") string: String?
   ): String?
 
   fun defaultApply(
-   @ObjCName("withNSString", exact = false) string: String?
+   @ObjCName("withNSString") string: String?
   ): String? {
    return this.apply(string)
   }
@@ -47,14 +47,14 @@ open class FunctionalInterfaces {
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithObjectMethods", exact = true)
  fun interface WithObjectMethods {
   fun apply(
-   @ObjCName("withNSString", exact = false) string: String?
+   @ObjCName("withNSString") string: String?
   ): String?
  }
 
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", exact = true)
  interface WithParametrizedMethod {
   fun <T> apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ): T
  }
 

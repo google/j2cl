@@ -11,13 +11,13 @@ import kotlin.native.ObjCName
 
 fun interface MyJsInterface {
  fun foo(
-  @ObjCName("withInt", exact = false) a: Int
+  @ObjCName("withInt") a: Int
  ): Int
 }
 
 open class A {
  open fun foo(
-  @ObjCName("withInt", exact = false) a: Int
+  @ObjCName("withInt") a: Int
  ): Int {
   return a
  }

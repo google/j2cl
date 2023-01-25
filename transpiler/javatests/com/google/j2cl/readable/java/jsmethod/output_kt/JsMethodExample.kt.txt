@@ -16,13 +16,13 @@ open class JsMethodExample {
 
  abstract class Base<T> {
   open fun m(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ) {}
  }
 
  fun interface I {
   fun m(
-   @ObjCName("withNSString", exact = false) s: String?
+   @ObjCName("withNSString") s: String?
   )
  }
 

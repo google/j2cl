@@ -13,7 +13,7 @@ import kotlin.native.ObjCName
 
 fun interface I<T> {
  fun foo(
-  @ObjCName("withId", exact = false) t: T
+  @ObjCName("withId") t: T
  ): Int
 
  companion object {

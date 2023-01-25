@@ -15,9 +15,11 @@ import kotlin.native.ObjCName
 
 @ObjCName("NativekttypesNativektKTopLevel", exact = true)
 open class KTopLevel<O> {
- @JvmField var instanceField: O = null as O
+ @JvmField
+ var instanceField: O = null as O
 
- @JvmField var renamedField: Int = 0
+ @JvmField
+ var renamedField: Int = 0
 
  open fun renamedMethod(): Int {
   return 0
@@ -39,7 +41,8 @@ open class KTopLevel<O> {
   return 0
  }
 
- @JvmField var isRenamedField: Boolean = false
+ @JvmField
+ var isRenamedField: Boolean = false
 
  open val isMethodAsProperty: Boolean get() {
   return false
@@ -50,22 +53,23 @@ open class KTopLevel<O> {
  }
 
  constructor(
-  @ObjCName("Id", exact = false) o: O
+  @ObjCName("Id") o: O
  )
 
  open fun instanceMethod(
-  @ObjCName("withId", exact = false) o: O
+  @ObjCName("withId") o: O
  ): O {
   return o
  }
 
  companion object {
-  @ObjCName("staticField", exact = false)
-  @JvmField var staticField: Any? = null
+  @JvmField
+  @ObjCName("staticField")
+  var staticField: Any? = null
 
   @JvmStatic
   fun <S> staticMethod(
-   @ObjCName("withId", exact = false) s: S
+   @ObjCName("withId") s: S
   ): S {
    return s
   }
@@ -73,14 +77,15 @@ open class KTopLevel<O> {
 
  @ObjCName("NativekttypesNativektKTopLevel_KNested", exact = true)
  open class KNested<N> {
-  @JvmField var instanceField: N = null as N
+  @JvmField
+  var instanceField: N = null as N
 
   constructor(
-   @ObjCName("Id", exact = false) n: N
+   @ObjCName("Id") n: N
   )
 
   open fun instanceMethod(
-   @ObjCName("withId", exact = false) n: N
+   @ObjCName("withId") n: N
   ): N {
    return n
   }
@@ -90,12 +95,13 @@ open class KTopLevel<O> {
   }
 
   companion object {
-   @ObjCName("staticField", exact = false)
-   @JvmField var staticField: Any? = null
+   @JvmField
+   @ObjCName("staticField")
+   var staticField: Any? = null
 
    @JvmStatic
    fun <S> staticMethod(
-    @ObjCName("withId", exact = false) s: S
+    @ObjCName("withId") s: S
    ): S {
     return s
    }
@@ -105,7 +111,7 @@ open class KTopLevel<O> {
  @ObjCName("NativekttypesNativektKTopLevel_KInner", exact = true)
  open inner class KInner<I> {
   constructor(
-   @ObjCName("Id", exact = false) i: I
+   @ObjCName("Id") i: I
   )
  }
 }

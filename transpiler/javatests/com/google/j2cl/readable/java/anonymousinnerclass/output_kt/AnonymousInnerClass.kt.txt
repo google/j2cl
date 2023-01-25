@@ -17,13 +17,14 @@ open class A {
 @ObjCName("AnonymousinnerclassAnonymousInnerClass", exact = true)
 open class AnonymousInnerClass {
  open fun test(
-  @ObjCName("withInt", exact = false) arg: Int
+  @ObjCName("withInt") arg: Int
  ) {
   val ic: AnonymousInnerClass.InnerClass? = object : InnerClass() {}
   val a: A? = A()
   val b: A.B? = object : B() {}
   open class ___1C {
-   @JvmField var fInC: Int = arg
+   @JvmField
+   var fInC: Int = arg
   }
   val c: ___1C? = object : ___1C() {}
  }

@@ -12,7 +12,8 @@ import kotlin.native.ObjCName
 
 @ObjCName("InstanceinnerclassInstanceInnerClass", exact = true)
 open class InstanceInnerClass {
- @JvmField var instanceField: Int = 0
+ @JvmField
+ var instanceField: Int = 0
 
  open fun funOuter() {}
 
@@ -22,9 +23,11 @@ open class InstanceInnerClass {
 
  @ObjCName("InstanceinnerclassInstanceInnerClass_InnerClass", exact = true)
  open inner class InnerClass {
-  @JvmField var field: Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
+  @JvmField
+  var field: Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
 
-  @JvmField var enclosingInstance: InstanceInnerClass? = this@InstanceInnerClass
+  @JvmField
+  var enclosingInstance: InstanceInnerClass? = this@InstanceInnerClass
 
   open fun funInner() {
    this@InstanceInnerClass.funOuter()

@@ -15,8 +15,9 @@ import kotlin.native.ObjCName
 @ObjCName("LocalclassinstaticcontextLocalClassInStaticContext", exact = true)
 open class LocalClassInStaticContext {
  companion object {
-  @ObjCName("f", exact = false)
-  @JvmField var f: Any? = object : Any() {}
+  @JvmField
+  @ObjCName("f")
+  var f: Any? = object : Any() {}
 
   @JvmStatic
   fun test() {
@@ -38,7 +39,8 @@ open class LocalClassInStaticContext {
 
  @ObjCName("LocalclassinstaticcontextLocalClassInStaticContext_C", exact = true)
  open class C {
-  @JvmField var f: Int = 1
+  @JvmField
+  var f: Int = 1
 
   open fun test() {
    open class ___1D {

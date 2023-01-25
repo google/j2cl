@@ -12,26 +12,30 @@ import kotlin.jvm.JvmField
 import kotlin.native.ObjCName
 
 open class ParentOuter {
- @JvmField var fieldInParentOuter: Int = 0
+ @JvmField
+ var fieldInParentOuter: Int = 0
 
  open fun funInParentOuter() {}
 }
 
 open class ParentInner {
- @JvmField var fieldInParentInner: Int = 0
+ @JvmField
+ var fieldInParentInner: Int = 0
 
  open fun funInParentInner() {}
 }
 
 @ObjCName("InnerclassinheritanceChildClass", exact = true)
 open class ChildClass: ParentOuter() {
- @JvmField var fieldInOuter: Int = 0
+ @JvmField
+ var fieldInOuter: Int = 0
 
  open fun funInOuter() {}
 
  open fun testLocalClass() {
   open class ___1LocalClass: ChildClass() {
-   @JvmField var object_pp_innerclassinheritance: Any? = this
+   @JvmField
+   var object_pp_innerclassinheritance: Any? = this
 
    open override fun funInParentOuter() {}
 
@@ -47,7 +51,8 @@ open class ChildClass: ParentOuter() {
  }
 
  open inner class InnerClass: ParentInner() {
-  @JvmField var fieldInInner: Int = 0
+  @JvmField
+  var fieldInInner: Int = 0
 
   open fun funInInner() {}
 

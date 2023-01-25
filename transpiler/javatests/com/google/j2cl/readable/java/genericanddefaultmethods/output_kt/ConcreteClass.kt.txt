@@ -12,7 +12,7 @@ import kotlin.native.ObjCName
 
 interface InterfaceWithDefault {
  fun foo(
-  @ObjCName("withNSString", exact = false) value: String?
+  @ObjCName("withNSString") value: String?
  ) {
   System.out!!.println("in InterfaceWithDefault")
  }
@@ -20,7 +20,7 @@ interface InterfaceWithDefault {
 
 open class GenericClass<T> {
  open fun foo(
-  @ObjCName("withId", exact = false) value: T
+  @ObjCName("withId") value: T
  ) {
   System.out!!.println("in GenericClass")
  }

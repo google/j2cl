@@ -16,15 +16,15 @@ fun interface MyInterface {
 
 open class SuperParent {
  open fun `fun`(
-  @ObjCName("withInt", exact = false) a: Int,
-  @ObjCName("withInt", exact = false) b: Int
+  @ObjCName("withInt") a: Int,
+  @ObjCName("withInt") b: Int
  ): Int {
   return a + b + 111
  }
 
  open fun bar(
-  @ObjCName("withInt", exact = false) a: Int,
-  @ObjCName("withInt", exact = false) b: Int
+  @ObjCName("withInt") a: Int,
+  @ObjCName("withInt") b: Int
  ): Int {
   return a * b + 222
  }
@@ -40,7 +40,7 @@ open class Parent: SuperParent() {
  }
 
  open fun foo(
-  @ObjCName("withInt", exact = false) a: Int
+  @ObjCName("withInt") a: Int
  ): Int {
   return a
  }

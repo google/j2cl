@@ -12,11 +12,11 @@ import kotlin.native.ObjCName
 @ObjCName("NativekttypesNativektKInterface", exact = true)
 interface KInterface<V> {
  fun interfaceMethod(
-  @ObjCName("withId", exact = false) v: V
+  @ObjCName("withId") v: V
  ): Int
 
  fun renamedInterfaceMethod(
-  @ObjCName("withId", exact = false) v: V
+  @ObjCName("withId") v: V
  ): Int
 
  val interfaceMethodAsProperty: Int

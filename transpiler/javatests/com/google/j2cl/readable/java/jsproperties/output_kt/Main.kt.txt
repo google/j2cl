@@ -15,7 +15,8 @@ import kotlin.native.ObjCName
 
 open class Foo {
  companion object {
-  @JvmField var f_private_2: Int = 0
+  @JvmField
+  var f_private_2: Int = 0
 
   @JvmStatic
   fun getA(): Int {
@@ -24,7 +25,7 @@ open class Foo {
 
   @JvmStatic
   fun setA(
-   @ObjCName("withInt", exact = false) x: Int
+   @ObjCName("withInt") x: Int
   ) {
    Foo.f_private_2 = x + 2
   }
@@ -36,7 +37,7 @@ open class Foo {
 
   @JvmStatic
   fun setB(
-   @ObjCName("withInt", exact = false) x: Int
+   @ObjCName("withInt") x: Int
   ) {
    Foo.f_private_2 = x + 4
   }
@@ -44,14 +45,15 @@ open class Foo {
 }
 
 open class Bar {
- @JvmField var f_private_2: Int = 0
+ @JvmField
+ var f_private_2: Int = 0
 
  open fun getA(): Int {
   return this.f_private_2 + 1
  }
 
  open fun setA(
-  @ObjCName("withInt", exact = false) x: Int
+  @ObjCName("withInt") x: Int
  ) {
   this.f_private_2 = x + 2
  }
@@ -61,7 +63,7 @@ open class Bar {
  }
 
  open fun setB(
-  @ObjCName("withInt", exact = false) x: Int
+  @ObjCName("withInt") x: Int
  ) {
   this.f_private_2 = x + 4
  }

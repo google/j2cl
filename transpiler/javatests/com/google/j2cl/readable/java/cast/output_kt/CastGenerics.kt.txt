@@ -19,7 +19,8 @@ import kotlin.native.ObjCName
 
 @ObjCName("CastCastGenerics", exact = true)
 open class CastGenerics<T, E: Number?> {
- @JvmField var field_pp_cast: T = null as T
+ @JvmField
+ var field_pp_cast: T = null as T
 
  open fun method_pp_cast(): T {
   return null as T
@@ -50,7 +51,7 @@ open class CastGenerics<T, E: Number?> {
  }
 
  open fun <EE> method(
-  @ObjCName("withId", exact = false) o: Any?
+  @ObjCName("withId") o: Any?
  ): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
   if (o is CastGenerics.Empty1) {
    return (o as EE?) as EE

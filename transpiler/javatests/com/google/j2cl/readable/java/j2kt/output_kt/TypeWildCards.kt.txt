@@ -18,12 +18,12 @@ open class TypeWildCards {
 
   @JvmStatic
   fun testObservable(
-   @ObjCName("withJ2ktTypeWildCards_Observable", exact = false) observable: TypeWildCards.Observable<*>?
+   @ObjCName("withJ2ktTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
   ) {}
 
   @JvmStatic
   fun testSuperWildcardObservable(
-   @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable", exact = false) observable: TypeWildCards.SuperWildcardObservable<*>?
+   @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable") observable: TypeWildCards.SuperWildcardObservable<*>?
   ) {
    observable!!.addObserver(TypeWildCards.Observer { e ->
    })
@@ -31,7 +31,7 @@ open class TypeWildCards {
 
   @JvmStatic
   fun testKtInObservable(
-   @ObjCName("withJ2ktTypeWildCards_KtInObservable", exact = false) observable: TypeWildCards.KtInObservable<*>?
+   @ObjCName("withJ2ktTypeWildCards_KtInObservable") observable: TypeWildCards.KtInObservable<*>?
   ) {
    observable!!.addObserver(TypeWildCards.KtInObserver { e ->
    })
@@ -48,31 +48,31 @@ open class TypeWildCards {
 
  fun interface Observer<E> {
   fun on(
-   @ObjCName("withId", exact = false) event: E
+   @ObjCName("withId") event: E
   )
  }
 
  fun interface KtInObserver<in E> {
   fun on(
-   @ObjCName("withId", exact = false) event: E
+   @ObjCName("withId") event: E
   )
  }
 
  fun interface Observable<E> {
   fun addObserver(
-   @ObjCName("withJ2ktTypeWildCards_Observer", exact = false) observer: TypeWildCards.Observer<E>?
+   @ObjCName("withJ2ktTypeWildCards_Observer") observer: TypeWildCards.Observer<E>?
   )
  }
 
  fun interface SuperWildcardObservable<E> {
   fun addObserver(
-   @ObjCName("withJ2ktTypeWildCards_Observer", exact = false) observer: TypeWildCards.Observer<in E>?
+   @ObjCName("withJ2ktTypeWildCards_Observer") observer: TypeWildCards.Observer<in E>?
   )
  }
 
  fun interface KtInObservable<E> {
   fun addObserver(
-   @ObjCName("withJ2ktTypeWildCards_KtInObserver", exact = false) observer: TypeWildCards.KtInObserver<E>?
+   @ObjCName("withJ2ktTypeWildCards_KtInObserver") observer: TypeWildCards.KtInObserver<E>?
   )
  }
 }

@@ -11,8 +11,8 @@ import kotlin.native.ObjCName
 
 fun interface Map<K, V> {
  fun put(
-  @ObjCName("withId", exact = false) key: K,
-  @ObjCName("withId", exact = false) value: V
+  @ObjCName("withId") key: K,
+  @ObjCName("withId") value: V
  ): V
 }
 

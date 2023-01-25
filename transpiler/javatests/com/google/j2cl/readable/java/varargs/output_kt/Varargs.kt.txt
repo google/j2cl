@@ -18,42 +18,43 @@ import kotlin.native.ObjCName
 
 @ObjCName("VarargsVarargs", exact = true)
 open class Varargs {
- @JvmField var args_private_2: Array<Any?>? = null
+ @JvmField
+ var args_private_2: Array<Any?>? = null
 
  constructor(
-  vararg @ObjCName("IntArray", exact = false) args: Int
+  vararg @ObjCName("IntArray") args: Int
  )
 
  constructor(): this(1)
 
  open fun test(
-  @ObjCName("withInt", exact = false) a: Int,
-  vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
+  @ObjCName("withInt") a: Int,
+  vararg @ObjCName("withNSObjectArray") args: Any?
  ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
  }
 
  open fun testCloneable(
-  vararg @ObjCName("withNSCopyingArray", exact = false) args: Cloneable?
+  vararg @ObjCName("withNSCopyingArray") args: Cloneable?
  ) {
   val args_1: Array<Cloneable?>? = args as Array<Cloneable?>?
  }
 
  open fun testSerializable(
-  vararg @ObjCName("withJavaIoSerializableArray", exact = false) args: Serializable?
+  vararg @ObjCName("withJavaIoSerializableArray") args: Serializable?
  ) {
   val args_1: Array<Serializable?>? = args as Array<Serializable?>?
  }
 
  open fun testAssignment(
-  vararg @ObjCName("withNSObjectArray", exact = false) args: Any?
+  vararg @ObjCName("withNSObjectArray") args: Any?
  ) {
   val args_1: Array<Any?>? = args as Array<Any?>?
   this.args_private_2 = args_1 as Array<Any?>?
  }
 
  open fun testLambda(
-  @ObjCName("withVarargsVarargs_FunctionalInterface", exact = false) functionalInterface: Varargs.FunctionalInterface?
+  @ObjCName("withVarargsVarargs_FunctionalInterface") functionalInterface: Varargs.FunctionalInterface?
  ) {}
 
  open fun main() {
@@ -74,15 +75,15 @@ open class Varargs {
  companion object {
   @JvmStatic
   fun <T> `fun`(
-   vararg @ObjCName("withNSObjectArray", exact = false) elements: T
+   vararg @ObjCName("withNSObjectArray") elements: T
   ) {
    val elements_1: Array<T>? = elements as Array<T>?
   }
 
   @JvmStatic
   fun <E> bar(
-   @ObjCName("withId", exact = false) a: E,
-   @ObjCName("withId", exact = false) b: E
+   @ObjCName("withId") a: E,
+   @ObjCName("withId") b: E
   ) {
    Varargs.`fun`<E>(a, b)
   }
@@ -90,7 +91,7 @@ open class Varargs {
 
  fun interface FunctionalInterface {
   fun apply(
-   vararg @ObjCName("withNSStringArray", exact = false) strings: String?
+   vararg @ObjCName("withNSStringArray") strings: String?
   )
  }
 }

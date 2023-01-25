@@ -16,10 +16,11 @@ import kotlin.native.ObjCName
 open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_A", exact = true)
  open class A {
-  @JvmField var fA: Int = 1
+  @JvmField
+  var fA: Int = 1
 
   constructor(
-   @ObjCName("Int", exact = false) x: Int
+   @ObjCName("Int") x: Int
   ) {
    this.fA = x
   }
@@ -29,10 +30,11 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_B", exact = true)
  open class B: JsConstructorClass.A {
-  @JvmField var fB: Int = 2
+  @JvmField
+  var fB: Int = 2
 
   constructor(
-   @ObjCName("Int", exact = false) x: Int
+   @ObjCName("Int") x: Int
   ): super(x + 1) {
    this.fB = 3
   }
@@ -42,8 +44,8 @@ open class JsConstructorClass {
   }
 
   constructor(
-   @ObjCName("Int", exact = false) x: Int,
-   @ObjCName("withInt", exact = false) y: Int
+   @ObjCName("Int") x: Int,
+   @ObjCName("withInt") y: Int
   ): this(x + y) {
    this.fB = x * y
   }
@@ -51,17 +53,18 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_C", exact = true)
  open class C: JsConstructorClass.B {
-  @JvmField var fC: Int = 1
+  @JvmField
+  var fC: Int = 1
 
   constructor(
-   @ObjCName("Int", exact = false) x: Int
+   @ObjCName("Int") x: Int
   ): super(x * 2) {
    this.fC = 6
   }
 
   constructor(
-   @ObjCName("Int", exact = false) x: Int,
-   @ObjCName("withInt", exact = false) y: Int
+   @ObjCName("Int") x: Int,
+   @ObjCName("withInt") y: Int
   ): this(x + y) {
    this.fC = 7
   }
@@ -69,14 +72,15 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_D", exact = true)
  open class D: JsConstructorClass.B {
-  @JvmField var fD: Int = 8
+  @JvmField
+  var fD: Int = 8
 
   constructor(): super(9) {
    this.fD = 10
   }
 
   constructor(
-   @ObjCName("Int", exact = false) x: Int
+   @ObjCName("Int") x: Int
   ): this() {
    this.fD = x
   }
@@ -84,7 +88,8 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_E", exact = true)
  open class E: JsConstructorClass.C {
-  @JvmField var fE: Int = 11
+  @JvmField
+  var fE: Int = 11
 
   constructor(): super(10) {
    this.fE = 12
@@ -93,10 +98,11 @@ open class JsConstructorClass {
 
  @ObjCName("JsconstructorJsConstructorClass_F", exact = true)
  open class F: JsConstructorClass.C {
-  @JvmField var fF: Int = 13
+  @JvmField
+  var fF: Int = 13
 
   constructor(
-   @ObjCName("Int", exact = false) x: Int
+   @ObjCName("Int") x: Int
   ): super(x + 2) {
    this.fF = x + 3
   }
@@ -113,19 +119,19 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_Varargs", exact = true)
  open class Varargs: JsConstructorClass.A {
   constructor(
-   vararg @ObjCName("IntArray", exact = false) args: Int
+   vararg @ObjCName("IntArray") args: Int
   ): super(args!![1])
  }
 
  @ObjCName("JsconstructorJsConstructorClass_SubVarargs", exact = true)
  open class SubVarargs: JsConstructorClass.Varargs {
   constructor(
-   @ObjCName("Id", exact = false) i: Any?,
-   vararg @ObjCName("withIntArray", exact = false) args: Int
+   @ObjCName("Id") i: Any?,
+   vararg @ObjCName("withIntArray") args: Int
   ): super(*(args)!!)
 
   constructor(
-   @ObjCName("Int", exact = false) j: Int
+   @ObjCName("Int") j: Int
   ): this(Any(), j)
 
   companion object {
@@ -140,21 +146,21 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_InstanceVarargs", exact = true)
  open inner class InstanceVarargs: JsConstructorClass.A {
   constructor(
-   vararg @ObjCName("IntArray", exact = false) args: Int
+   vararg @ObjCName("IntArray") args: Int
   ): super(args!![1])
  }
 
  @ObjCName("JsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {
   constructor(
-   @ObjCName("Id", exact = false) b: Any?
+   @ObjCName("Id") b: Any?
   )
  }
 
  @ObjCName("JsconstructorJsConstructorClass_JsConstructorSubtypeOfRegularType", exact = true)
  open class JsConstructorSubtypeOfRegularType: JsConstructorClass.RegularType {
   constructor(
-   @ObjCName("Id", exact = false) `object`: Any?
+   @ObjCName("Id") `object`: Any?
   ): super(`object`)
 
   constructor(): this(Any())

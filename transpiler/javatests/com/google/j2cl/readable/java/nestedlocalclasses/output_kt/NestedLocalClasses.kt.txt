@@ -13,14 +13,15 @@ import kotlin.native.ObjCName
 @ObjCName("NestedlocalclassesNestedLocalClasses", exact = true)
 open class NestedLocalClasses {
  open fun test(
-  @ObjCName("withInt", exact = false) p: Int
+  @ObjCName("withInt") p: Int
  ) {
   val localVar: Int = 1
   open class ___1InnerClass {
    open fun `fun`() {
     val localVarInInnerClass: Int = 1
     open class ___1InnerInnerClass {
-     @JvmField var fieldInInnerInnerClass: Int = localVar + localVarInInnerClass
+     @JvmField
+     var fieldInInnerInnerClass: Int = localVar + localVarInInnerClass
     }
     ___1InnerInnerClass()
     open class ___1ClassIndirectlyCapturingLocal {

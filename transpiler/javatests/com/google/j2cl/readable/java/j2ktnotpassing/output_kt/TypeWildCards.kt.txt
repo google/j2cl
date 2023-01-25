@@ -14,7 +14,7 @@ open class TypeWildCards {
  companion object {
   @JvmStatic
   fun testObservable(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_Observable", exact = false) observable: TypeWildCards.Observable<*>?
+   @ObjCName("withJ2ktnotpassingTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
   ) {
    observable!!.addObserver(TypeWildCards.Observer { e ->
    })
@@ -23,13 +23,13 @@ open class TypeWildCards {
 
  fun interface Observer<E> {
   fun on(
-   @ObjCName("withId", exact = false) event: E
+   @ObjCName("withId") event: E
   )
  }
 
  fun interface Observable<E> {
   fun addObserver(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer", exact = false) observer: TypeWildCards.Observer<E>?
+   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer") observer: TypeWildCards.Observer<E>?
   )
  }
 }

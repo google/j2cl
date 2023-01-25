@@ -32,21 +32,21 @@ open class LocalNameCollision {
  }
 
  open fun testClassParameterCollision(
-  @ObjCName("withBoolean", exact = false) LocalNameCollision: Boolean,
-  @ObjCName("withId", exact = false) Asserts: Any?,
-  @ObjCName("withId", exact = false) ___Asserts: Any?,
-  @ObjCName("withInt", exact = false) l_Asserts: Int,
-  @ObjCName("withInt", exact = false) A: Int
+  @ObjCName("withBoolean") LocalNameCollision: Boolean,
+  @ObjCName("withId") Asserts: Any?,
+  @ObjCName("withId") ___Asserts: Any?,
+  @ObjCName("withInt") l_Asserts: Int,
+  @ObjCName("withInt") A: Int
  ): Boolean {
   return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 
  constructor(
-  @ObjCName("Boolean", exact = false) LocalNameCollision: Boolean,
-  @ObjCName("withId", exact = false) Asserts: Any?,
-  @ObjCName("withId", exact = false) ___Asserts: Any?,
-  @ObjCName("withInt", exact = false) l_Asserts: Int,
-  @ObjCName("withInt", exact = false) A: Int
+  @ObjCName("Boolean") LocalNameCollision: Boolean,
+  @ObjCName("withId") Asserts: Any?,
+  @ObjCName("withId") ___Asserts: Any?,
+  @ObjCName("withInt") l_Asserts: Int,
+  @ObjCName("withInt") A: Int
  ) {
   val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && ___Asserts is localnamecollision.Asserts && l_Asserts == A
  }
@@ -54,9 +54,11 @@ open class LocalNameCollision {
 
 open class A {
  companion object {
-  @JvmField var A_pp_localnamecollision: localnamecollision.A? = null
+  @JvmField
+  var A_pp_localnamecollision: localnamecollision.A? = null
 
-  @JvmField var B_pp_localnamecollision: localnamecollision.A.B? = null
+  @JvmField
+  var B_pp_localnamecollision: localnamecollision.A.B? = null
 
   @JvmStatic
   fun test_pp_localnamecollision() {

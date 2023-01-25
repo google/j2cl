@@ -19,9 +19,11 @@ open class OuterClass {
  open inner class InnerClass {
   @ObjCName("NestedinstanceinnerclassOuterClass_InnerClass_InnerInnerClass", exact = true)
   open inner class InnerInnerClass {
-   @JvmField var x: OuterClass.InnerClass? = this@InnerClass
+   @JvmField
+   var x: OuterClass.InnerClass? = this@InnerClass
 
-   @JvmField var y: OuterClass? = this@OuterClass
+   @JvmField
+   var y: OuterClass? = this@OuterClass
   }
  }
 }

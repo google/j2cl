@@ -13,14 +13,17 @@ import kotlin.native.ObjCName
 @ObjCName("StaticinitializersStaticInitializers", exact = true)
 open class StaticInitializers {
  companion object {
-  @ObjCName("a", exact = false)
-  @JvmField var a: Int = 5
+  @JvmField
+  @ObjCName("a")
+  var a: Int = 5
 
-  @ObjCName("b", exact = false)
-  @JvmField var b: Int = StaticInitializers.a * 2
+  @JvmField
+  @ObjCName("b")
+  var b: Int = StaticInitializers.a * 2
 
-  @ObjCName("c", exact = false)
-  @JvmField val c: Int
+  @JvmField
+  @ObjCName("c")
+  val c: Int
 
   init {
    StaticInitializers.a = 10

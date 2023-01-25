@@ -13,11 +13,14 @@ import kotlin.native.ObjCName
 
 @ObjCName("StringsStrings", exact = true)
 open class Strings {
- @JvmField var someString_private_2: String? = "This is a string literal"
+ @JvmField
+ var someString_private_2: String? = "This is a string literal"
 
- @JvmField var nonBmpChar_private_2: String? = "\uD800\uDF46"
+ @JvmField
+ var nonBmpChar_private_2: String? = "\uD800\uDF46"
 
- @JvmField var wideColon_private_2: String? = "\uFF1A"
+ @JvmField
+ var wideColon_private_2: String? = "\uFF1A"
 
  open fun test() {
   var s1: String? = null
@@ -61,6 +64,7 @@ open class Strings {
  }
 
  open class StringHolder {
-  @JvmField var s_pp_strings: String? = "A"
+  @JvmField
+  var s_pp_strings: String? = "A"
  }
 }

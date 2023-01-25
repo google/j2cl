@@ -13,7 +13,7 @@ import kotlin.native.ObjCName
 @ObjCName("DevirtualizedcallsCharSequenceCalls", exact = true)
 open class CharSequenceCalls {
  open fun test(
-  @ObjCName("withJavaLangCharSequence", exact = false) cs: CharSequence?
+  @ObjCName("withJavaLangCharSequence") cs: CharSequence?
  ) {
   cs!!.get(0)
  }

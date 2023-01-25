@@ -32,22 +32,27 @@ abstract class SomeClassWithStaticMembers {
 
 @ObjCName("AnonymousclassAnonymousClass", exact = true)
 open class AnonymousClass {
- @JvmField var i_pp_anonymousclass: Int = 0
+ @JvmField
+ var i_pp_anonymousclass: Int = 0
 
  open fun main() {
   val instance: SomeClass? = object : SomeClass(this@AnonymousClass.i_pp_anonymousclass) {
-   @JvmField var object_pp_anonymousclass: Any? = this
+   @JvmField
+   var object_pp_anonymousclass: Any? = this
 
-   @JvmField var outer_pp_anonymousclass: Any? = this@AnonymousClass
+   @JvmField
+   var outer_pp_anonymousclass: Any? = this@AnonymousClass
 
    open override fun foo(): String? {
     return "a"
    }
   }
   val instanceWithStaticMembers: SomeClassWithStaticMembers? = object : SomeClassWithStaticMembers(this@AnonymousClass.i_pp_anonymousclass) {
-   @JvmField var object_pp_anonymousclass: Any? = this
+   @JvmField
+   var object_pp_anonymousclass: Any? = this
 
-   @JvmField var outer_pp_anonymousclass: Any? = this@AnonymousClass
+   @JvmField
+   var outer_pp_anonymousclass: Any? = this@AnonymousClass
 
    open override fun foo(): String? {
     return "a"
@@ -58,7 +63,8 @@ open class AnonymousClass {
 
 interface SomeInterface {
  companion object {
-  @JvmField val implicitlyStatic: SomeClass? = object : SomeClass(1) {
+  @JvmField
+  val implicitlyStatic: SomeClass? = object : SomeClass(1) {
    open override fun foo(): String? {
     return "a"
    }

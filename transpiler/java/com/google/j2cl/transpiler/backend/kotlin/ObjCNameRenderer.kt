@@ -73,12 +73,12 @@ internal fun Renderer.objCNameAnnotationSource(
   methodObjCNames: MethodObjCNames?
 ): Source =
   sourceIf(!methodDescriptor.isConstructor) {
-    methodObjCNames?.methodName.ifNotNullSource { objCNameAnnotationSource(it, exact = false) }
+    methodObjCNames?.methodName.ifNotNullSource { objCNameAnnotationSource(it) }
   }
 
 internal fun Renderer.objCNameAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
   sourceIf(fieldDescriptor.needsObjCNameAnnotations) {
-    objCNameAnnotationSource(fieldDescriptor.objCName, exact = false)
+    objCNameAnnotationSource(fieldDescriptor.objCName)
   }
 
 private fun parameterSource(name: String, valueSource: Source): Source =

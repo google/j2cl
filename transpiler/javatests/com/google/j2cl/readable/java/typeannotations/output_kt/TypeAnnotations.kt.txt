@@ -19,15 +19,15 @@ abstract class AbstractTypeNonNull: ParametricType<AbstractType> {}
 
 open class Parent {
  open fun m(
-  @ObjCName("withNSString", exact = false) s: String,
-  @ObjCName("withTypeannotationsParent", exact = false) c: Parent?
+  @ObjCName("withNSString") s: String,
+  @ObjCName("withTypeannotationsParent") c: Parent?
  ): Parent? {
   return c
  }
 
  open fun m(
-  @ObjCName("withJavaUtilList", exact = false) l: MutableList<String>?,
-  @ObjCName("withTypeannotationsParent", exact = false) c: Parent?
+  @ObjCName("withJavaUtilList") l: MutableList<String>?,
+  @ObjCName("withTypeannotationsParent") c: Parent?
  ): MutableList<Parent>? {
   return ArrayList<Parent>()
  }

@@ -14,13 +14,13 @@ import kotlin.native.ObjCName
 open class BridgeMethodShadowedSignature {
  fun interface I<I1> {
   fun get(
-   @ObjCName("withJavaUtilFunctionConsumer", exact = false) consumer: Consumer<in I1>?
+   @ObjCName("withJavaUtilFunctionConsumer") consumer: Consumer<in I1>?
   ): String?
  }
 
  abstract class B<B1, B2>: BridgeMethodShadowedSignature.I<B1> {
   open fun get(
-   @ObjCName("withId", exact = false) consumer: B2
+   @ObjCName("withId") consumer: B2
   ): String? {
    return "B get B2"
   }

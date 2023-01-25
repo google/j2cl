@@ -18,7 +18,7 @@ open class MethodExample {
  companion object {
   @JvmStatic
   fun main(
-   vararg @kotlin.native.ObjCName("withNSStringArray", exact = false) args: String?
+   vararg @kotlin.native.ObjCName("withNSStringArray") args: String?
   ) {
    val args_1: Array<String?>? = args as Array<String?>?
   }
@@ -30,27 +30,27 @@ open class MethodExample {
  @kotlin.native.ObjCName("J2ktobjcnameMethodExample_ObjCName", exact = true)
  open inner class ObjCName {
   open fun instanceMethod(
-   @kotlin.native.ObjCName("withInt", exact = false) i: Int
+   @kotlin.native.ObjCName("withInt") i: Int
   ) {}
 
   open fun instanceMethod(
-   @kotlin.native.ObjCName("withInt", exact = false) i: Int,
-   @kotlin.native.ObjCName("withLongArray", exact = false) l: LongArray?
+   @kotlin.native.ObjCName("withInt") i: Int,
+   @kotlin.native.ObjCName("withLongArray") l: LongArray?
   ) {}
 
   open fun instanceMethod(
-   @kotlin.native.ObjCName("withInt", exact = false) i: Int,
-   @kotlin.native.ObjCName("withLongArray2", exact = false) l: Array<LongArray?>?
+   @kotlin.native.ObjCName("withInt") i: Int,
+   @kotlin.native.ObjCName("withLongArray2") l: Array<LongArray?>?
   ) {}
 
   open fun instanceMethod(
-   @kotlin.native.ObjCName("withJ2ktobjcnameMethodExample_Foo", exact = false) foo: MethodExample.Foo?
+   @kotlin.native.ObjCName("withJ2ktobjcnameMethodExample_Foo") foo: MethodExample.Foo?
   ) {}
 
-  @kotlin.native.ObjCName("newFoo", exact = false)
+  @kotlin.native.ObjCName("newFoo")
   open fun foo() {}
 
-  @kotlin.native.ObjCName("newProtectedFoo", exact = false)
+  @kotlin.native.ObjCName("newProtectedFoo")
   open fun protectedFoo() {}
  }
 }

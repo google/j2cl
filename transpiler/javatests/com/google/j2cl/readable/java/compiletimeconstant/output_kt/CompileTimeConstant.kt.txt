@@ -19,23 +19,32 @@ import kotlin.native.ObjCName
 
 @ObjCName("CompiletimeconstantCompileTimeConstant", exact = true)
 open class CompileTimeConstant<T> {
- @JvmField val A2: Int = 10
+ @JvmField
+ val A2: Int = 10
 
- @JvmField val B2: Int = 20
+ @JvmField
+ val B2: Int = 20
 
- @JvmField val C2: Int = 200
+ @JvmField
+ val C2: Int = 200
 
- @JvmField val D2: String = "Tur\"tle"
+ @JvmField
+ val D2: String = "Tur\"tle"
 
- @JvmField val E2: String = "Do\"ve"
+ @JvmField
+ val E2: String = "Do\"ve"
 
- @JvmField val F2: String = "Tur\"tleDo\"ve"
+ @JvmField
+ val F2: String = "Tur\"tleDo\"ve"
 
- @JvmField val G2: Long = 10000L
+ @JvmField
+ val G2: Long = 10000L
 
- @JvmField val H2: Char = 'A'
+ @JvmField
+ val H2: Char = 'A'
 
- @JvmField val I2: Boolean = true
+ @JvmField
+ val I2: Boolean = true
 
  init {
   val b: Boolean = this.I2
@@ -47,52 +56,55 @@ open class CompileTimeConstant<T> {
  }
 
  companion object {
-  @ObjCName("OBJ", exact = false)
-  @JvmField val OBJ: Any? = null
+  @JvmField
+  @ObjCName("OBJ")
+  val OBJ: Any? = null
 
-  @ObjCName("A", exact = false)
+  @ObjCName("A")
   const val A: Int = 10
 
-  @ObjCName("B", exact = false)
+  @ObjCName("B")
   const val B: Int = 20
 
-  @ObjCName("C", exact = false)
+  @ObjCName("C")
   const val C: Int = 200
 
-  @ObjCName("D", exact = false)
+  @ObjCName("D")
   const val D: String = "Tur\"tle"
 
-  @ObjCName("E", exact = false)
+  @ObjCName("E")
   const val E: String = "Do\'ve"
 
-  @ObjCName("F", exact = false)
+  @ObjCName("F")
   const val F: String = "Tur\"tleDo\'ve"
 
-  @ObjCName("J", exact = false)
+  @ObjCName("J")
   const val J: String = "Tur\"tleDo\'veTur\"tleDo\'ve"
 
-  @ObjCName("K", exact = false)
-  @JvmField val K: String? = null
+  @JvmField
+  @ObjCName("K")
+  val K: String? = null
 
-  @ObjCName("L", exact = false)
+  @ObjCName("L")
   const val L: String = "ThisIsALongString"
 
-  @ObjCName("M", exact = false)
+  @ObjCName("M")
   const val M: String = "ThisIsALongStringAlso"
 
-  @ObjCName("N", exact = false)
+  @ObjCName("N")
   const val N: String = "ThisIsALongStringAlsoButLonger"
 
-  @ObjCName("G", exact = false)
+  @ObjCName("G")
   const val G: Long = 10000L
 
-  @ObjCName("H", exact = false)
+  @ObjCName("H")
   const val H: Char = 'A'
 
-  @ObjCName("I", exact = false)
+  @ObjCName("I")
   const val I: Boolean = true
 
-  @ObjCName("classLiteral", exact = false)
-  @JvmField val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType
+  @JvmField
+  @ObjCName("classLiteral")
+  val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType
  }
 }

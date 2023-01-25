@@ -13,27 +13,29 @@ import kotlin.native.ObjCName
 
 @ObjCName("MultipleconstructorsMultipleConstructors", exact = true)
 open class MultipleConstructors {
- @JvmField var id_private_2: Int = 0
+ @JvmField
+ var id_private_2: Int = 0
 
- @JvmField var flag_private_2: Boolean = false
+ @JvmField
+ var flag_private_2: Boolean = false
 
  constructor(
-  @ObjCName("Int", exact = false) id: Int
+  @ObjCName("Int") id: Int
  ) {
   this.id_private_2 = id
   this.flag_private_2 = id == 0
  }
 
  constructor(
-  @ObjCName("Boolean", exact = false) flag: Boolean
+  @ObjCName("Boolean") flag: Boolean
  ) {
   this.id_private_2 = - 1
   this.flag_private_2 = flag
  }
 
  constructor(
-  @ObjCName("Int", exact = false) id: Int,
-  @ObjCName("withBoolean", exact = false) flag: Boolean
+  @ObjCName("Int") id: Int,
+  @ObjCName("withBoolean") flag: Boolean
  ) {
   this.id_private_2 = id
   this.flag_private_2 = flag

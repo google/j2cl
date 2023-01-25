@@ -115,9 +115,9 @@ private fun Renderer.fieldSource(field: Field): Source {
   val typeDescriptor = field.descriptor.typeDescriptor
   val isConst = field.isCompileTimeConstant && field.isStatic
   return newLineSeparated(
+    sourceIf(!isConst) { jvmFieldAnnotationSource() },
     objCNameAnnotationSource(field.descriptor),
     spaceSeparated(
-      sourceIf(!isConst) { jvmFieldAnnotationSource() },
       sourceIf(isConst) { source("const") },
       if (isFinal) source("val") else source("var"),
       assignment(
@@ -233,7 +233,7 @@ private fun Renderer.parameterSource(
     else (parameterTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   return spaceSeparated(
     sourceIf(parameterDescriptor.isVarargs) { source("vararg") },
-    objCParameterName.ifNotNullSource { objCNameAnnotationSource(it, exact = false) },
+    objCParameterName.ifNotNullSource { objCNameAnnotationSource(it) },
     colonSeparated(nameSource(parameter), typeDescriptorSource(renderedTypeDescriptor))
   )
 }

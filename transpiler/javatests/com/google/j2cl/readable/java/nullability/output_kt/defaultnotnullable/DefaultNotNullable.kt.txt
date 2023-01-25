@@ -22,54 +22,68 @@ import kotlin.native.ObjCName
 
 @ObjCName("NullabilityDefaultnotnullableDefaultNotNullable", exact = true)
 open class DefaultNotNullable {
- @JvmField var f1_private_2: String = "Hello"
+ @JvmField
+ var f1_private_2: String = "Hello"
 
- @JvmField var f2_private_2: String? = null
+ @JvmField
+ var f2_private_2: String? = null
 
- @JvmField var f3_private_2: String? = null
+ @JvmField
+ var f3_private_2: String? = null
 
- @JvmField var f4_private_2: MutableList<String> = ArrayList<String>()
+ @JvmField
+ var f4_private_2: MutableList<String> = ArrayList<String>()
 
- @JvmField var f5_private_2: MutableList<String>? = ArrayList<String>()
+ @JvmField
+ var f5_private_2: MutableList<String>? = ArrayList<String>()
 
- @JvmField var f6_private_2: MutableList<String?> = ArrayList<String?>()
+ @JvmField
+ var f6_private_2: MutableList<String?> = ArrayList<String?>()
 
- @JvmField var f7_private_2: MutableList<String?>? = null
+ @JvmField
+ var f7_private_2: MutableList<String?>? = null
 
- @JvmField var f8_private_2: Array<String> = arrayOf<String>()
+ @JvmField
+ var f8_private_2: Array<String> = arrayOf<String>()
 
- @JvmField var f9_private_2: Array<String?> = arrayOf<String?>()
+ @JvmField
+ var f9_private_2: Array<String?> = arrayOf<String?>()
 
- @JvmField var f10_private_2: Array<String>? = arrayOf<String>()
+ @JvmField
+ var f10_private_2: Array<String>? = arrayOf<String>()
 
- @JvmField var f11_private_2: Unit? = null
+ @JvmField
+ var f11_private_2: Unit? = null
 
- @JvmField var f12_private_2: Any = Any()
+ @JvmField
+ var f12_private_2: Any = Any()
 
- @JvmField var f13_private_2: Any
+ @JvmField
+ var f13_private_2: Any
 
- @JvmField var f14_private_2: Any? = null
+ @JvmField
+ var f14_private_2: Any? = null
 
  constructor() {
   this.f13_private_2 = Any()
  }
 
  open fun m1(
-  @ObjCName("withNSString", exact = false) a: String,
-  @ObjCName("withJavaUtilList", exact = false) b: MutableList<Double>
+  @ObjCName("withNSString") a: String,
+  @ObjCName("withJavaUtilList") b: MutableList<Double>
  ): String {
   return ""
  }
 
  open fun m2(
-  @ObjCName("withNSString", exact = false) a: String?,
-  @ObjCName("withJavaUtilList", exact = false) b: MutableList<Double?>
+  @ObjCName("withNSString") a: String?,
+  @ObjCName("withJavaUtilList") b: MutableList<Double?>
  ): String? {
   return null
  }
 
  open fun m3(
-  vararg @ObjCName("withNSStringArray", exact = false) args: String
+  vararg @ObjCName("withNSStringArray") args: String
  ) {
   val args_1: Array<String> = args as Array<String>
  }
@@ -292,11 +306,11 @@ open class DefaultNotNullable {
 
  interface ParameterizedInterface<T: Any> {
   fun add(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ): T
 
   fun nullableAdd(
-   @ObjCName("withId", exact = false) t: T?
+   @ObjCName("withId") t: T?
   ): T?
  }
 
@@ -323,11 +337,14 @@ open class DefaultNotNullable {
  interface NonNullBoundWithNullableArgument: DefaultNotNullable.NonNullableBound<DefaultNotNullable.NonNullBoundWithNullableArgument> {}
 
  open class ParameterizedDefaultNullability<N: Any> {
-  @JvmField var nullable_pp_nullability_defaultnotnullable: N? = null
+  @JvmField
+  var nullable_pp_nullability_defaultnotnullable: N? = null
 
-  @JvmField var nonNullable_pp_nullability_defaultnotnullable: N
+  @JvmField
+  var nonNullable_pp_nullability_defaultnotnullable: N
 
-  @JvmField var defaultNullability_pp_nullability_defaultnotnullable: N
+  @JvmField
+  var defaultNullability_pp_nullability_defaultnotnullable: N
 
   constructor(n: N) {
    this.nonNullable_pp_nullability_defaultnotnullable = n
@@ -354,11 +371,14 @@ open class DefaultNotNullable {
  }
 
  open class ParameterizedNullable<N> {
-  @JvmField var nullable_pp_nullability_defaultnotnullable: N? = null
+  @JvmField
+  var nullable_pp_nullability_defaultnotnullable: N? = null
 
-  @JvmField var nonNullable_pp_nullability_defaultnotnullable: N = null as N
+  @JvmField
+  var nonNullable_pp_nullability_defaultnotnullable: N = null as N
 
-  @JvmField var defaultNullability_pp_nullability_defaultnotnullable: N = null as N
+  @JvmField
+  var defaultNullability_pp_nullability_defaultnotnullable: N = null as N
 
   constructor(n: N) {
    this.nonNullable_pp_nullability_defaultnotnullable = n
@@ -385,11 +405,14 @@ open class DefaultNotNullable {
  }
 
  open class ParameterizedNonNullable<N: Any> {
-  @JvmField var nullable_pp_nullability_defaultnotnullable: N? = null
+  @JvmField
+  var nullable_pp_nullability_defaultnotnullable: N? = null
 
-  @JvmField var nonNullable_pp_nullability_defaultnotnullable: N
+  @JvmField
+  var nonNullable_pp_nullability_defaultnotnullable: N
 
-  @JvmField var defaultNullability_pp_nullability_defaultnotnullable: N
+  @JvmField
+  var defaultNullability_pp_nullability_defaultnotnullable: N
 
   constructor(n: N) {
    this.nonNullable_pp_nullability_defaultnotnullable = n
@@ -417,7 +440,7 @@ open class DefaultNotNullable {
 
  fun interface Consumer<T> {
   fun accept(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   )
  }
 }

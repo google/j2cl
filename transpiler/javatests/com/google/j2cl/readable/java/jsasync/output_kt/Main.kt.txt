@@ -14,7 +14,8 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsasyncMain", exact = true)
 open class Main {
- @JvmField val x_private_2: Main.IThenable<Int?>? = Main.Promise.resolve<Int?>(Int.valueOf(10))
+ @JvmField
+ val x_private_2: Main.IThenable<Int?>? = Main.Promise.resolve<Int?>(Int.valueOf(10))
 
  open fun emptyAsyncMethod_pp_jsasync(): Main.IThenable<Unit?>? {
   return null
@@ -93,7 +94,7 @@ open class Main {
   companion object {
    @JvmStatic
    external fun <T> resolve(
-    @ObjCName("withId", exact = false) value: T
+    @ObjCName("withId") value: T
    ): Main.Promise<T>?
   }
  }

@@ -17,9 +17,9 @@ import kotlin.native.ObjCName
 
 @ObjCName("EnumsEnum1", exact = true)
 enum class Enum1 {
- @ObjCName("V1", exact = false)
+ @ObjCName("V1")
  V1,
- @ObjCName("V2", exact = false)
+ @ObjCName("V2")
  V2;
 }
 
@@ -29,7 +29,8 @@ enum class Enum2 {
  VALUE3(),
  VALUE4(5) {};
 
- @JvmField var foo_pp_enums: Int = Enum1.V1.ordinal
+ @JvmField
+ var foo_pp_enums: Int = Enum1.V1.ordinal
 
  constructor(foo: Int) {
   this.foo_pp_enums = foo
@@ -53,7 +54,8 @@ enum class Enum2 {
    return null
   }
 
-  @JvmField var C_pp_enums: Enum2? = Enum2.f_pp_enums(Any())
+  @JvmField
+  var C_pp_enums: Enum2? = Enum2.f_pp_enums(Any())
  }
 }
 

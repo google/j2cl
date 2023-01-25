@@ -13,7 +13,7 @@ import kotlin.native.ObjCName
 @ObjCName("SimplelocalclassSimpleLocalClass", exact = true)
 open class SimpleLocalClass {
  open fun test(
-  @ObjCName("withInt", exact = false) p: Int
+  @ObjCName("withInt") p: Int
  ) {
   val localVar: Int = 1
   open class ___1InnerClass {
@@ -29,7 +29,8 @@ open class SimpleLocalClass {
  open fun `fun`() {
   val localVar: Int = 1
   open class ___2InnerClass {
-   @JvmField var field_pp_simplelocalclass: Int = localVar
+   @JvmField
+   var field_pp_simplelocalclass: Int = localVar
   }
  }
 

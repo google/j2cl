@@ -27,127 +27,127 @@ import kotlin.run
 @ObjCName("AutoboxingAutoBoxing", exact = true)
 open class AutoBoxing {
  open fun box(
-  @ObjCName("withBoolean", exact = false) b: Boolean
+  @ObjCName("withBoolean") b: Boolean
  ): Boolean? {
   return Boolean.valueOf(b)
  }
 
  open fun box(
-  @ObjCName("withDouble", exact = false) d: Double
+  @ObjCName("withDouble") d: Double
  ): Double? {
   return Double.valueOf(d)
  }
 
  open fun box(
-  @ObjCName("withByte", exact = false) b: Byte
+  @ObjCName("withByte") b: Byte
  ): Byte? {
   return Byte.valueOf(b)
  }
 
  open fun box(
-  @ObjCName("withFloat", exact = false) f: Float
+  @ObjCName("withFloat") f: Float
  ): Float? {
   return Float.valueOf(f)
  }
 
  open fun box(
-  @ObjCName("withInt", exact = false) i: Int
+  @ObjCName("withInt") i: Int
  ): Int? {
   return Int.valueOf(i)
  }
 
  open fun box(
-  @ObjCName("withLong", exact = false) l: Long
+  @ObjCName("withLong") l: Long
  ): Long? {
   return Long.valueOf(l)
  }
 
  open fun box(
-  @ObjCName("withShort", exact = false) s: Short
+  @ObjCName("withShort") s: Short
  ): Short? {
   return Short.valueOf(s)
  }
 
  open fun box(
-  @ObjCName("withChar", exact = false) c: Char
+  @ObjCName("withChar") c: Char
  ): Char? {
   return Char.valueOf(c)
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangBoolean", exact = false) b: Boolean?
+  @ObjCName("withJavaLangBoolean") b: Boolean?
  ): Boolean {
   return b!!.booleanValue()
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangDouble", exact = false) d: Double?
+  @ObjCName("withJavaLangDouble") d: Double?
  ): Double {
   return d!!.toDouble()
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangByte", exact = false) b: Byte?
+  @ObjCName("withJavaLangByte") b: Byte?
  ): Byte {
   return b!!.toByte()
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangFloat", exact = false) f: Float?
+  @ObjCName("withJavaLangFloat") f: Float?
  ): Float {
   return f!!.toFloat()
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangInteger", exact = false) i: Int?
+  @ObjCName("withJavaLangInteger") i: Int?
  ): Int {
   return i!!.toInt()
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangLong", exact = false) l: Long?
+  @ObjCName("withJavaLangLong") l: Long?
  ): Long {
   return l!!.toLong()
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangShort", exact = false) s: Short?
+  @ObjCName("withJavaLangShort") s: Short?
  ): Short {
   return s!!.toShort()
  }
 
  open fun unbox(
-  @ObjCName("withJavaLangCharacter", exact = false) c: Char?
+  @ObjCName("withJavaLangCharacter") c: Char?
  ): Char {
   return c!!.toChar()
  }
 
  open fun takesAndReturnsPrimitiveDouble(
-  @ObjCName("withDouble", exact = false) d: Double
+  @ObjCName("withDouble") d: Double
  ): Double {
   return d
  }
 
  open fun takesAndReturnsVoid(
-  @ObjCName("withJavaLangVoid", exact = false) v: Unit?
+  @ObjCName("withJavaLangVoid") v: Unit?
  ): Unit? {
   return null
  }
 
  open fun takesFloatVarArgs(
-  vararg @ObjCName("withJavaLangFloatArray", exact = false) elements: Float?
+  vararg @ObjCName("withJavaLangFloatArray") elements: Float?
  ) {
   val elements_1: Array<Float?>? = elements as Array<Float?>?
  }
 
  open fun takesObjectAndReturnsPrimitiveDouble(
-  @ObjCName("withId", exact = false) o: Any?
+  @ObjCName("withId") o: Any?
  ): Double {
   return o as Double
  }
 
  open fun sumWithoutBoxing(
-  vararg @ObjCName("withNSObjectArray", exact = false) numbers: Any?
+  vararg @ObjCName("withNSObjectArray") numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -159,7 +159,7 @@ open class AutoBoxing {
  }
 
  open fun sumWithoutBoxingJsVarargs(
-  vararg @ObjCName("withNSObjectArray", exact = false) numbers: Any?
+  vararg @ObjCName("withNSObjectArray") numbers: Any?
  ): Double {
   val numbers_1: Array<Any?>? = numbers as Array<Any?>?
   var sum: Double = 0.0
@@ -171,7 +171,7 @@ open class AutoBoxing {
  }
 
  open fun sumWithUnboxing(
-  @ObjCName("withJavaLangIterable", exact = false) boxedDoubles: MutableIterable<Double?>?
+  @ObjCName("withJavaLangIterable") boxedDoubles: MutableIterable<Double?>?
  ): Double {
   var sum: Double = 0.0
   for (d in boxedDoubles!!) {
@@ -424,7 +424,7 @@ open class AutoBoxing {
  }
 
  companion object {
-  @ObjCName("COMPILE_TIME_CONSTANT", exact = false)
+  @ObjCName("COMPILE_TIME_CONSTANT")
   const val COMPILE_TIME_CONSTANT: Float = 1.1f
 
   @JvmStatic

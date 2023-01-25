@@ -111,7 +111,8 @@ open class MethodReferences<T> {
    return Any()
   }
 
-  @JvmField var staticStringProducer_pp_methodreferences: MethodReferences.Producer<String?>? = run {
+  @JvmField
+  var staticStringProducer_pp_methodreferences: MethodReferences.Producer<String?>? = run {
    val ______q: Any? = MethodReferences.m_pp_methodreferences()
    MethodReferences.Producer<String?> {
     return@Producer ______q!!.toString()
@@ -125,13 +126,13 @@ open class MethodReferences<T> {
 
  fun interface Predicate<T> {
   fun apply(
-   @ObjCName("withId", exact = false) parameter: T
+   @ObjCName("withId") parameter: T
   ): Boolean
  }
 
  fun interface ArrayProducer<T> {
   fun produce(
-   @ObjCName("withInt", exact = false) size: Int
+   @ObjCName("withInt") size: Int
   ): Array<T>?
  }
 
@@ -143,14 +144,14 @@ open class MethodReferences<T> {
 
  fun interface Function<T, U> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ): U
  }
 
  fun interface BiFunction<T, U, V> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T,
-   @ObjCName("withId", exact = false) u: U
+   @ObjCName("withId") t: T,
+   @ObjCName("withId") u: U
   ): V
  }
 
@@ -160,14 +161,14 @@ open class MethodReferences<T> {
 
  fun interface JsFunctionInterface<T, U> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T
+   @ObjCName("withId") t: T
   ): U
  }
 
  fun interface JsBiFunction<T, U, V> {
   fun apply(
-   @ObjCName("withId", exact = false) t: T,
-   @ObjCName("withId", exact = false) u: U
+   @ObjCName("withId") t: T,
+   @ObjCName("withId") u: U
   ): V
  }
 }

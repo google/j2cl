@@ -18,20 +18,20 @@ open class ConflictInterfaceExample {
  @ObjCName("J2ktobjcnameConflictInterfaceExample_Collection", exact = true)
  fun interface Collection<T> {
   fun add(
-   @ObjCName("withId", exact = false) element: T
+   @ObjCName("withId") element: T
   ): Boolean
  }
 
  @ObjCName("J2ktobjcnameConflictInterfaceExample_List", exact = true)
  open inner class List<T> {
   open fun add(
-   @ObjCName("withId", exact = false) element: T
+   @ObjCName("withId") element: T
   ): Boolean {
    return true
   }
 
   open fun forEachRemaining(
-   @ObjCName("withJavaUtilFunctionConsumer", exact = false) action: Consumer<in T>?
+   @ObjCName("withJavaUtilFunctionConsumer") action: Consumer<in T>?
   ) {}
  }
 

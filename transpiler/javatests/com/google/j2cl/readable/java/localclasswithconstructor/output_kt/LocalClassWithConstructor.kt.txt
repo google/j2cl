@@ -13,21 +13,22 @@ import kotlin.native.ObjCName
 @ObjCName("LocalclasswithconstructorLocalClassWithConstructor", exact = true)
 open class LocalClassWithConstructor {
  open fun test(
-  @ObjCName("withInt", exact = false) p: Int
+  @ObjCName("withInt") p: Int
  ) {
   val localVar: Int = 1
   open class ___1LocalClass {
-   @JvmField var field: Int = 0
+   @JvmField
+   var field: Int = 0
 
    constructor(
-    @ObjCName("Int", exact = false) a: Int,
-    @ObjCName("withInt", exact = false) b: Int
+    @ObjCName("Int") a: Int,
+    @ObjCName("withInt") b: Int
    ) {
     this.field = localVar + a + b
    }
 
    constructor(
-    @ObjCName("Int", exact = false) a: Int
+    @ObjCName("Int") a: Int
    ): this(a, p) {
     this.field = localVar
    }

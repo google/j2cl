@@ -20,7 +20,7 @@ fun interface Getable<T> {
 
 fun interface Setable {
  fun set(
-  @ObjCName("withInt", exact = false) i: Int
+  @ObjCName("withInt") i: Int
  )
 }
 
@@ -32,14 +32,14 @@ fun interface Cmp {
 
 fun interface Cmp2<T> {
  fun cmp(
-  @ObjCName("withInt", exact = false) a: Int
+  @ObjCName("withInt") a: Int
  ): Int
 }
 
 @ObjCName("IntersectiontypeIntersectionTypeTest", exact = true)
 open class IntersectionTypeTest<U> {
  open fun cast3(
-  @ObjCName("withId", exact = false) s: Any?
+  @ObjCName("withId") s: Any?
  ): Any? {
   return s
  }
@@ -54,7 +54,7 @@ open class IntersectionTypeTest<U> {
  companion object {
   @JvmStatic
   fun <T> getAndSet(
-   @ObjCName("withId", exact = false) `object`: T
+   @ObjCName("withId") `object`: T
   ) where T: Getable<*>?, T: Setable? {
    `object`!!.set(1)
    `object`!!.get()
@@ -62,7 +62,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun <T> cast(
-   @ObjCName("withId", exact = false) o: Any?
+   @ObjCName("withId") o: Any?
   ): Getable<T>? {
    if (o == null) {
     return (o).let { it as Getable<T>?; it as Setable?; it }
@@ -72,14 +72,14 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun <T> cast1(
-   @ObjCName("withId", exact = false) s: Any?
+   @ObjCName("withId") s: Any?
   ): Getable<Comparable<String>?>? {
    return (s).let { it as Getable<Comparable<String>?>?; it as Setable?; it }
   }
 
   @JvmStatic
   fun <T> cast2(
-   @ObjCName("withId", exact = false) s: Any?
+   @ObjCName("withId") s: Any?
   ): Getable<Comparable<T & Any>?>? {
    return (s).let { it as Getable<Comparable<T & Any>?>?; it as Setable?; it }
   }
@@ -100,7 +100,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun testClosureAssignment(
-   @ObjCName("withId", exact = false) o: Any?
+   @ObjCName("withId") o: Any?
   ) {
    val e: IntersectionTypeTest.A? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
    val g: IntersectionTypeTest.EmptyA? = (o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it as IntersectionTypeTest.EmptyB?; it }
@@ -134,7 +134,7 @@ open class IntersectionTypeTest<U> {
 
  open inner class MapEntry {
   open fun <T> method(
-   @ObjCName("withId", exact = false) o: Any?
+   @ObjCName("withId") o: Any?
   ): Getable<T>? {
    return (o).let { it as Getable<T>?; it as Setable?; it }
   }

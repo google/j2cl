@@ -13,13 +13,13 @@ import kotlin.native.ObjCName
 
 fun interface I<T, S> {
  fun `fun`(
-  @ObjCName("withId", exact = false) s: S
+  @ObjCName("withId") s: S
  ): T
 }
 
 open class A<T, S> {
  open fun `fun`(
-  @ObjCName("withId", exact = false) s: S
+  @ObjCName("withId") s: S
  ): T {
   return null as T
  }
@@ -37,7 +37,7 @@ open class B: A<Number?, String?>(), I<Int?, String?> {
 
 interface SpecializedInterface {
  fun `fun`(
-  @ObjCName("withNSString", exact = false) s: String?
+  @ObjCName("withNSString") s: String?
  ): String?
 
  fun get(): String?
