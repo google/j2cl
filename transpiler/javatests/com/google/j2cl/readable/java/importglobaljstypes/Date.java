@@ -36,6 +36,10 @@ public class Date {
 
   @JsType(isNative = true, name = "Date", namespace = GLOBAL)
   public static class NativeDate {
+    // Test a static method.
     public static native double now();
+
+    // Test an instance method.
+    public native int getSeconds();
   }
 }

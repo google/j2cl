@@ -38,6 +38,7 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
+import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -296,117 +297,12 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
-        MethodDescriptor target = methodCall.getTarget();
-        DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
-
-        if (methodCall.isPolymorphic()) {
-          if (methodCall.hasSideEffects()) {
-            sourceBuilder.append(format("(call_ref %s ", environment.getFunctionTypeName(target)));
-          } else {
-            sourceBuilder.append(
-                format("(call %s ", environment.getNoSideEffectWrapperFunctionName(target)));
-          }
-
-          // Pass the implicit parameter.
-          renderReceiver(methodCall);
-
-          // Pass the rest of the parameters.
-          methodCall.getArguments().forEach(this::render);
-
-          // Retrieve the method reference from the appropriate vtable to provide it to call_ref.
-          sourceBuilder.append(
-              format(
-                  "(struct.get %s %s ",
-                  environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                  environment.getVtableSlot(target)));
-
-          // Retrieve the corresponding vtable.
-          if (target.isClassDynamicDispatch()) {
-            // For a class dynamic dispatch the vtable resides in the $vtable field of object passed
-            // as the qualifier.
-            sourceBuilder.append(
-                format(
-                    "(struct.get %s $vtable",
-                    environment.getWasmTypeName(enclosingTypeDescriptor)));
-            render(methodCall.getQualifier());
-            sourceBuilder.append(")");
-          } else {
-            // For an interface dynamic dispatch the vtable resides in a field of the $itable struct
-            // object passed as the qualifier.
-
-            int itableSlot =
-                environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration());
-            if (itableSlot == -1) {
-              // The interface is not implemented by any class, skip the itable lookup and emit
-              // null instead.
-              sourceBuilder.append(
-                  String.format(
-                      "(ref.null %s)", environment.getWasmVtableTypeName(enclosingTypeDescriptor)));
-            } else {
-
-              // Retrieve the interface vtable from the corresponding slot field in the $itable
-              // and cast it to the appropriate type.
-              sourceBuilder.append(
-                  String.format(
-                      "(ref.cast_static %s (struct.get $itable $slot%d (struct.get %s $itable ",
-                      environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                      itableSlot,
-                      environment.getWasmTypeName(enclosingTypeDescriptor)));
-              render(methodCall.getQualifier());
-              sourceBuilder.append(")))");
-            }
-          }
-
-          sourceBuilder.append("))");
-          return false;
+        if (methodCall.isPolymorphic() && !methodCall.getTarget().isNative()) {
+          renderPolymorphicMethodCall(methodCall);
         } else {
-          // Non-polymorphic methods are called directly, regardless of whether they are
-          // instance methods or not.
-
-          String wasmInfo = target.getWasmInfo();
-          if (wasmInfo == null) {
-            sourceBuilder.append(
-                String.format(
-                    "(call %s ",
-                    methodCall.hasSideEffects()
-                        ? environment.getMethodImplementationName(target)
-                        : environment.getNoSideEffectWrapperFunctionName(target)));
-          } else {
-            Matcher m = Pattern.compile("typeof\\((\\d+)\\)").matcher(wasmInfo);
-            while (m.find()) {
-              TypeDescriptor type =
-                  methodCall.getArguments().get(Integer.parseInt(m.group(1))).getTypeDescriptor();
-              wasmInfo = wasmInfo.replace(m.group(), environment.getWasmTypeName(type));
-            }
-            sourceBuilder.append("(" + wasmInfo + " ");
-          }
-
-          if (!target.isStatic()) {
-            // Constructors, non static private methods and super method calls receive the qualifier
-            // as the first parameter, then the corresponding arguments.
-            renderReceiver(methodCall);
-          }
-          // Render the parameters.
-          methodCall.getArguments().forEach(this::render);
-
-          // The binaryen intrinsic that implements calls without side effect needs the function
-          // reference to the function to be called as the last parameter.
-          if (!methodCall.hasSideEffects()) {
-            sourceBuilder.append(
-                String.format("(ref.func %s) ", environment.getMethodImplementationName(target)));
-          }
-
-          sourceBuilder.append(")");
+          renderNonPolymorphicMethodCall(methodCall);
         }
         return false;
-      }
-
-      private void renderReceiver(MethodCall methodCall) {
-        // The receiver parameters is always declared as non-nullable, so perform the not null
-        // check before passing it.
-        sourceBuilder.append("(ref.as_non_null ");
-        render(methodCall.getQualifier());
-        sourceBuilder.append(")");
       }
 
       @Override
@@ -475,6 +371,13 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterNewInstance(NewInstance newInstance) {
+        // For native JS constructors, we have to call the imported method to get a new instance of
+        // the JS type.
+        if (isNativeConstructor(newInstance.getTarget())) {
+          renderNonPolymorphicMethodCall(newInstance);
+          return false;
+        }
+
         sourceBuilder.append(
             format(
                 "(struct.new %s "
@@ -501,6 +404,120 @@ final class ExpressionTranspiler {
 
         sourceBuilder.append(")");
         return false;
+      }
+
+      private void renderPolymorphicMethodCall(MethodCall methodCall) {
+        MethodDescriptor target = methodCall.getTarget();
+        DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
+        if (methodCall.hasSideEffects()) {
+          sourceBuilder.append(format("(call_ref %s ", environment.getFunctionTypeName(target)));
+        } else {
+          sourceBuilder.append(
+              format("(call %s ", environment.getNoSideEffectWrapperFunctionName(target)));
+        }
+
+        // Pass the implicit parameter.
+        renderReceiver(methodCall);
+
+        // Pass the rest of the parameters.
+        methodCall.getArguments().forEach(this::render);
+
+        // Retrieve the method reference from the appropriate vtable to provide it to call_ref.
+        sourceBuilder.append(
+            format(
+                "(struct.get %s %s ",
+                environment.getWasmVtableTypeName(enclosingTypeDescriptor),
+                environment.getVtableSlot(target)));
+
+        // Retrieve the corresponding vtable.
+        if (target.isClassDynamicDispatch()) {
+          // For a class dynamic dispatch the vtable resides in the $vtable field of object passed
+          // as the qualifier.
+          sourceBuilder.append(
+              format(
+                  "(struct.get %s $vtable", environment.getWasmTypeName(enclosingTypeDescriptor)));
+          render(methodCall.getQualifier());
+          sourceBuilder.append(")");
+        } else {
+          // For an interface dynamic dispatch the vtable resides in a field of the $itable struct
+          // object passed as the qualifier.
+
+          int itableSlot =
+              environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration());
+          if (itableSlot == -1) {
+            // The interface is not implemented by any class, skip the itable lookup and emit
+            // null instead.
+            sourceBuilder.append(
+                String.format(
+                    "(ref.null %s)", environment.getWasmVtableTypeName(enclosingTypeDescriptor)));
+          } else {
+
+            // Retrieve the interface vtable from the corresponding slot field in the $itable
+            // and cast it to the appropriate type.
+            sourceBuilder.append(
+                String.format(
+                    "(ref.cast_static %s (struct.get $itable $slot%d (struct.get %s $itable ",
+                    environment.getWasmVtableTypeName(enclosingTypeDescriptor),
+                    itableSlot,
+                    environment.getWasmTypeName(enclosingTypeDescriptor)));
+            render(methodCall.getQualifier());
+            sourceBuilder.append(")))");
+          }
+        }
+
+        sourceBuilder.append("))");
+      }
+
+      /**
+       * Renders a non-polymorphic method call. Non-polymorphic methods (static methods, private
+       * methods, etc) and native methods are called directly, regardless of whether they are
+       * instance methods or not.
+       */
+      private void renderNonPolymorphicMethodCall(Invocation methodCall) {
+        MethodDescriptor target = methodCall.getTarget();
+        String wasmInfo = target.getWasmInfo();
+        if (wasmInfo == null) {
+          sourceBuilder.append(
+              String.format(
+                  "(call %s ",
+                  methodCall.hasSideEffects()
+                      ? environment.getMethodImplementationName(target)
+                      : environment.getNoSideEffectWrapperFunctionName(target)));
+        } else {
+          Matcher m = Pattern.compile("typeof\\((\\d+)\\)").matcher(wasmInfo);
+          while (m.find()) {
+            TypeDescriptor type =
+                methodCall.getArguments().get(Integer.parseInt(m.group(1))).getTypeDescriptor();
+            wasmInfo = wasmInfo.replace(m.group(), environment.getWasmTypeName(type));
+          }
+          sourceBuilder.append("(" + wasmInfo + " ");
+        }
+
+        if (!target.isStatic() && !target.isConstructor()) {
+          // Synthetic ctors, non-static private methods, and super method calls receive the
+          // qualifier
+          // as the first parameter, then the corresponding arguments.
+          renderReceiver(methodCall);
+        }
+        // Render the parameters.
+        methodCall.getArguments().forEach(this::render);
+
+        // The binaryen intrinsic that implements calls without side effect needs the function
+        // reference to the function to be called as the last parameter.
+        if (!methodCall.hasSideEffects()) {
+          sourceBuilder.append(
+              String.format("(ref.func %s) ", environment.getMethodImplementationName(target)));
+        }
+
+        sourceBuilder.append(")");
+      }
+
+      private void renderReceiver(Invocation methodCall) {
+        // The receiver parameters is always declared as non-nullable, so perform the not null
+        // check before passing it.
+        sourceBuilder.append("(ref.as_non_null ");
+        render(methodCall.getQualifier());
+        sourceBuilder.append(")");
       }
 
       @Override
@@ -589,6 +606,12 @@ final class ExpressionTranspiler {
     // its rhs, the AST is transformed so that the resulting value is never used and the assignment
     // can be safely considered not to produce a value.
     return isPrimitiveVoid(expression.getTypeDescriptor()) || expression.isSimpleAssignment();
+  }
+
+  // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
+  // native constructors, or exposing isNativeConstructor from MethodDescriptor.
+  private static boolean isNativeConstructor(MethodDescriptor method) {
+    return method.getEnclosingTypeDescriptor().isNative() && method.isConstructor();
   }
 
   private ExpressionTranspiler() {}

@@ -53,6 +53,11 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   public final void applyTo(CompilationUnit compilationUnit) {
     collectPrivateMemberReferences(compilationUnit);
     for (Type type : compilationUnit.getTypes()) {
+      // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this check
+      // could be removed.
+      if (type.isNative()) {
+        continue;
+      }
       synthesizeClinitCallsInMethods(type);
       synthesizeSuperClinitCalls(type);
       // Apply the additional normalizations defined in subclasses.

@@ -5,7 +5,6 @@
 (global $f_$initialized__array_Arrays_SomeObject (mut i32) (i32.const 0))
 
 ;;; Code for array.Arrays.NativeType [static fields]
-(global $f_$initialized__array_Arrays_NativeType (mut i32) (i32.const 0))
 
 ;;; Code for array.Arrays.ArrayContainer [static fields]
 (global $f_$initialized__array_Arrays_ArrayContainer (mut i32) (i32.const 0))
@@ -54,27 +53,6 @@
 
 ;;; Code for array.Arrays.SomeObject [itable.init]
 (global $array.Arrays.SomeObject.itable (ref $array.Arrays.SomeObject.itable) (struct.new $array.Arrays.SomeObject.itable 
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
-;;; Code for array.Arrays.NativeType [vtable.init]
-(global $array.Arrays.NativeType.vtable (ref $array.Arrays.NativeType.vtable) 
- (struct.new $array.Arrays.NativeType.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@array.Arrays.NativeType)
- )
-)
-
-;;; Code for array.Arrays.NativeType [itable.init]
-(global $array.Arrays.NativeType.itable (ref $array.Arrays.NativeType.itable) (struct.new $array.Arrays.NativeType.itable 
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -670,96 +648,11 @@
 (elem declare func $m_getClass__java_lang_Class@array.Arrays.SomeObject)
 
 ;;; Code for array.Arrays.NativeType [CLASS]
-(type $array.Arrays.NativeType (struct_subtype 
- (field $vtable (ref $array.Arrays.NativeType.vtable)) 
- (field $itable (ref $array.Arrays.NativeType.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $array.Arrays.NativeType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $array.Arrays.NativeType.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
 
-;;; NativeType NativeType.$create()
-(func $$create__@array.Arrays.NativeType
- (result (ref null $array.Arrays.NativeType))
- ;;@ array/Arrays.java:137:23
- (local $$instance (ref null $array.Arrays.NativeType))
- (block
-  ;; NativeType $instance = new NativeType.<init>(0);
-  ;;@ array/Arrays.java:137:23
-  (local.set $$instance (struct.new $array.Arrays.NativeType (ref.as_non_null (global.get $array.Arrays.NativeType.vtable)) (ref.as_non_null (global.get $array.Arrays.NativeType.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ array/Arrays.java:137:23
-  (call $$ctor__void_$p_array_Arrays_NativeType@array.Arrays.NativeType (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
-  ;;@ array/Arrays.java:137:23
-  (return (local.get $$instance))
- )
+;;; NativeType()
+(func $m_<init>__@array.Arrays.NativeType (import "imports" "String.constructor") 
+ (result (ref null extern))
 )
-
-;;; void NativeType.$ctor()
-(func $$ctor__void_$p_array_Arrays_NativeType@array.Arrays.NativeType
- (param $this (ref null $array.Arrays.NativeType))
- ;;@ array/Arrays.java:137:23
- (block
-  ;; array.Arrays.NativeType.$clinit();
-  ;;@ array/Arrays.java:137:23
-  (call $$clinit__void@array.Arrays.NativeType )
-  ;; Object.this.$ctor();
-  ;;@ array/Arrays.java:137:23
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; void NativeType.$clinit()
-(func $$clinit__void@array.Arrays.NativeType
- ;;@ array/Arrays.java:137:23
- (block
-  ;; if (array.Arrays.NativeType.$initialized) return;
-  ;;@ array/Arrays.java:137:23
-  (if (global.get $f_$initialized__array_Arrays_NativeType)
-   (then
-    ;; return;
-    ;;@ array/Arrays.java:137:23
-    (return )
-   )
-  )
-  ;; (array.Arrays.NativeType.$initialized = true);
-  ;;@ array/Arrays.java:137:23
-  (global.set $f_$initialized__array_Arrays_NativeType (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ array/Arrays.java:137:23
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> NativeType.getClass()
-(func $m_getClass__java_lang_Class@array.Arrays.NativeType
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $array.Arrays.NativeType))
- (local.set $this (ref.cast_static $array.Arrays.NativeType (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays.NativeType();
-  (return (call $function.no.side.effects.$getArray.Arrays.NativeType__java_lang_Class (ref.func $$getArray.Arrays.NativeType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@array.Arrays.NativeType)
 
 ;;; Code for array.Arrays.ArrayContainer [CLASS]
 (type $array.Arrays.ArrayContainer (struct_subtype 

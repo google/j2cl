@@ -223,13 +223,17 @@ public class WasmModuleGenerator {
   }
 
   private void renderType(Type type) {
-    if (type.isInterface()) {
-      // Interfaces at runtime are treated as java.lang.Object.
-      renderInterfaceVtableStruct(type);
-    } else {
-      renderTypeStruct(type);
-      renderClassVtableStruct(type);
-      renderClassItableStruct(type);
+    // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this check could
+    // be removed.
+    if (!type.isNative()) {
+      if (type.isInterface()) {
+        // Interfaces at runtime are treated as java.lang.Object.
+        renderInterfaceVtableStruct(type);
+      } else {
+        renderTypeStruct(type);
+        renderClassVtableStruct(type);
+        renderClassItableStruct(type);
+      }
     }
     renderTypeMethods(type);
   }
@@ -310,7 +314,7 @@ public class WasmModuleGenerator {
 
   private void renderTypeMethods(Type type) {
     type.getMethods().stream()
-        .filter(not(Method::isAbstract))
+        .filter(method -> !method.isAbstract() || method.isNative())
         .filter(m -> m.getDescriptor().getWasmInfo() == null)
         .forEach(this::renderMethod);
   }
@@ -330,10 +334,17 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append("(func " + environment.getMethodImplementationName(methodDescriptor));
 
-    boolean isStaticExtern = methodDescriptor.isExtern() && methodDescriptor.isStatic();
-    if (isStaticExtern) {
+    // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
+    // native constructors, or exposing isNativeConstructor from MethodDescriptor.
+    boolean isNativeConstructor =
+        methodDescriptor.getEnclosingTypeDescriptor().isNative()
+            && methodDescriptor.isConstructor();
+    boolean isImport = methodDescriptor.isNative() || isNativeConstructor;
+    // Generate an import if the method is native. We don't use the normal qualified js name,
+    // because it doesn't differentiate between js property getters and setters.
+    if (isImport) {
       builder.append(
-          String.format(" (import \"imports\" \"%s\") ", methodDescriptor.getQualifiedJsName()));
+          String.format(" (import \"imports\" \"%s\") ", getJsImportName(methodDescriptor)));
     }
 
     if (method.isStatic() && isEntryPoint(method.getQualifiedBinaryName())) {
@@ -344,6 +355,7 @@ public class WasmModuleGenerator {
         problems.error("More than one method are exported with the same name \"%s\".", methodName);
       }
     }
+
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
     // Emit parameters
@@ -353,7 +365,7 @@ public class WasmModuleGenerator {
     // enclosing type because they are not overridden but normal instance methods have to
     // declare the parameter more generically as java.lang.Object, since all the overrides need
     // to have matching signatures.
-    if (methodDescriptor.isClassDynamicDispatch()) {
+    if (methodDescriptor.isClassDynamicDispatch() && !methodDescriptor.isNative()) {
       builder.newLine();
       builder.append(String.format("(type %s)", environment.getFunctionTypeName(methodDescriptor)));
       builder.newLine();
@@ -361,8 +373,9 @@ public class WasmModuleGenerator {
           String.format(
               "(param $this.untyped (ref %s))",
               environment.getWasmTypeName(TypeDescriptors.get().javaLangObject)));
-    } else if (!method.isStatic()) {
+    } else if (!method.isStatic() && !isNativeConstructor) {
       // Private methods and constructors receive the instance with the actual type.
+      // Native constructors do not receive the instance.
       builder.newLine();
       builder.append(
           String.format("(param $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
@@ -386,7 +399,7 @@ public class WasmModuleGenerator {
       builder.append("(result " + environment.getWasmType(returnTypeDescriptor) + ")");
     }
 
-    if (isStaticExtern) {
+    if (isImport) {
       // Imports don't define locals nor body.
       builder.unindent();
       builder.newLine();
@@ -440,6 +453,22 @@ public class WasmModuleGenerator {
               "(elem declare func %s)",
               environment.getMethodImplementationName(method.getDescriptor())));
     }
+  }
+
+  /** Gets the name of the JS import for the specified JS method. */
+  private static String getJsImportName(MethodDescriptor methodDescriptor) {
+    String qualifiedJsName = methodDescriptor.getQualifiedJsName();
+    if (methodDescriptor.isConstructor()) {
+      // TODO(b/264466634): This is a hack that won't be needed after JS import generation is
+      // implemented. After JS imports are generated, we won't need the constructor to be a
+      // human-readable name, and this can be removed.
+      qualifiedJsName = qualifiedJsName.replace("<init>", "constructor");
+    } else if (methodDescriptor.isPropertyGetter()) {
+      qualifiedJsName = "get " + qualifiedJsName;
+    } else if (methodDescriptor.isPropertySetter()) {
+      qualifiedJsName = "set " + qualifiedJsName;
+    }
+    return qualifiedJsName;
   }
 
   private boolean isEntryPoint(String methodName) {
@@ -508,6 +537,7 @@ public class WasmModuleGenerator {
     library
         .streamTypes()
         .filter(Predicates.not(Type::isInterface))
+        .filter(Predicates.not(Type::isNative))
         .map(Type::getDeclaration)
         .filter(Predicates.not(TypeDeclaration::isAbstract))
         .forEach(this::emitDispatchTablesInitialization);

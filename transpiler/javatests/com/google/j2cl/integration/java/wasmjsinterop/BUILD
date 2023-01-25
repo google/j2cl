@@ -9,7 +9,10 @@ package(licenses = ["notice"])
 j2wasm_library(
     name = "wasmjsinterop-j2wasm",
     srcs = glob(["super-wasm/*.java"]),
-    deps = ["//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm"],
+    deps = [
+        "//third_party:gwt-jsinterop-annotations-j2wasm",
+        "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm",
+    ],
 )
 
 integration_test(

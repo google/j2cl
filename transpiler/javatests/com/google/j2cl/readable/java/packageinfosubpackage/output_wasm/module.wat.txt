@@ -2,7 +2,6 @@
 (global $f_$initialized__packageinfosubpackage_Foo (mut i32) (i32.const 0))
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [static fields]
-(global $f_$initialized__packageinfosubpackage_Foo_NativeBar (mut i32) (i32.const 0))
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [static fields]
 (global $f_$initialized__packageinfosubpackage_subpackage_Bar (mut i32) (i32.const 0))
@@ -19,27 +18,6 @@
 
 ;;; Code for packageinfosubpackage.Foo [itable.init]
 (global $packageinfosubpackage.Foo.itable (ref $packageinfosubpackage.Foo.itable) (struct.new $packageinfosubpackage.Foo.itable 
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
-  (ref.null struct)
- ))
-
-;;; Code for packageinfosubpackage.Foo.NativeBar [vtable.init]
-(global $packageinfosubpackage.Foo.NativeBar.vtable (ref $packageinfosubpackage.Foo.NativeBar.vtable) 
- (struct.new $packageinfosubpackage.Foo.NativeBar.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar)
- )
-)
-
-;;; Code for packageinfosubpackage.Foo.NativeBar [itable.init]
-(global $packageinfosubpackage.Foo.NativeBar.itable (ref $packageinfosubpackage.Foo.NativeBar.itable) (struct.new $packageinfosubpackage.Foo.NativeBar.itable 
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -75,7 +53,7 @@
  (field $vtable (ref $packageinfosubpackage.Foo.vtable)) 
  (field $itable (ref $packageinfosubpackage.Foo.itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null $packageinfosubpackage.Foo.NativeBar)))
+ (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null extern)))
   $java.lang.Object)
 )
 (type $packageinfosubpackage.Foo.vtable (struct_subtype 
@@ -103,7 +81,7 @@
  (block
   ;; Foo $instance = new Foo.<init>(0,null);
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfosubpackage.Foo.NativeBar)))
+  (local.set $$instance (struct.new $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.itable)) (i32.const 0) (ref.null extern)))
   ;; $instance.$ctor();
   ;;@ packageinfosubpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (ref.as_non_null (local.get $$instance)))
@@ -135,9 +113,9 @@
  (param $this (ref null $packageinfosubpackage.Foo))
  ;;@ packageinfosubpackage/Foo.java:20:13
  (block
-  ;; (Foo.this.nativeBar = packageinfosubpackage.Foo.NativeBar.$create());
+  ;; (Foo.this.nativeBar = new NativeBar.<init>());
   ;;@ packageinfosubpackage/Foo.java:25:2
-  (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $$create__@packageinfosubpackage.Foo.NativeBar ))
+  (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $m_<init>__@packageinfosubpackage.Foo.NativeBar ))
  )
 )
 
@@ -178,96 +156,11 @@
 (elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo)
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [CLASS]
-(type $packageinfosubpackage.Foo.NativeBar (struct_subtype 
- (field $vtable (ref $packageinfosubpackage.Foo.NativeBar.vtable)) 
- (field $itable (ref $packageinfosubpackage.Foo.NativeBar.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $packageinfosubpackage.Foo.NativeBar.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $packageinfosubpackage.Foo.NativeBar.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
 
-;;; NativeBar NativeBar.$create()
-(func $$create__@packageinfosubpackage.Foo.NativeBar
- (result (ref null $packageinfosubpackage.Foo.NativeBar))
- ;;@ packageinfosubpackage/Foo.java:23:23
- (local $$instance (ref null $packageinfosubpackage.Foo.NativeBar))
- (block
-  ;; NativeBar $instance = new NativeBar.<init>(0);
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (local.set $$instance (struct.new $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (call $$ctor__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (return (local.get $$instance))
- )
+;;; NativeBar()
+(func $m_<init>__@packageinfosubpackage.Foo.NativeBar (import "imports" "packageinfosubpackage.subpackage.Bar.constructor") 
+ (result (ref null extern))
 )
-
-;;; void NativeBar.$ctor()
-(func $$ctor__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar
- (param $this (ref null $packageinfosubpackage.Foo.NativeBar))
- ;;@ packageinfosubpackage/Foo.java:23:23
- (block
-  ;; packageinfosubpackage.Foo.NativeBar.$clinit();
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (call $$clinit__void@packageinfosubpackage.Foo.NativeBar )
-  ;; Object.this.$ctor();
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; void NativeBar.$clinit()
-(func $$clinit__void@packageinfosubpackage.Foo.NativeBar
- ;;@ packageinfosubpackage/Foo.java:23:23
- (block
-  ;; if (packageinfosubpackage.Foo.NativeBar.$initialized) return;
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (if (global.get $f_$initialized__packageinfosubpackage_Foo_NativeBar)
-   (then
-    ;; return;
-    ;;@ packageinfosubpackage/Foo.java:23:23
-    (return )
-   )
-  )
-  ;; (packageinfosubpackage.Foo.NativeBar.$initialized = true);
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (global.set $f_$initialized__packageinfosubpackage_Foo_NativeBar (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> NativeBar.getClass()
-(func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $packageinfosubpackage.Foo.NativeBar))
- (local.set $this (ref.cast_static $packageinfosubpackage.Foo.NativeBar (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.Foo.NativeBar();
-  (return (call $function.no.side.effects.$getPackageinfosubpackage.Foo.NativeBar__java_lang_Class (ref.func $$getPackageinfosubpackage.Foo.NativeBar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar)
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [CLASS]
 (type $packageinfosubpackage.subpackage.Bar (struct_subtype 

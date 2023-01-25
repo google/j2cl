@@ -5,7 +5,6 @@
 (global $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (mut i32) (i32.const 0))
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [static fields]
-(global $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (mut i32) (i32.const 0))
 
 ;;; Code for equalsandhashcodeininterface.BothInInterface [INTERFACE]
 (type $equalsandhashcodeininterface.BothInInterface.vtable (struct 
@@ -58,27 +57,13 @@
 )
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [INTERFACE]
-(type $equalsandhashcodeininterface.ViaJsMethodInInterface.vtable (struct 
- (field $m_notEquals__void (ref $function.m_notEquals__void))
- (field $m_notHashCode__void (ref $function.m_notHashCode__void))
- )
+
+;;; void ViaJsMethodInInterface.notEquals()
+(func $m_notEquals__void@equalsandhashcodeininterface.ViaJsMethodInInterface (import "imports" "?.equals") 
+ (param $this (ref null extern))
 )
 
-;;; void ViaJsMethodInInterface.$clinit()
-(func $$clinit__void@equalsandhashcodeininterface.ViaJsMethodInInterface
- ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
- (block
-  ;; if (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized) return;
-  ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-  (if (global.get $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface)
-   (then
-    ;; return;
-    ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-    (return )
-   )
-  )
-  ;; (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized = true);
-  ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-  (global.set $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (i32.const 1))
- )
+;;; void ViaJsMethodInInterface.notHashCode()
+(func $m_notHashCode__void@equalsandhashcodeininterface.ViaJsMethodInInterface (import "imports" "?.hashCode") 
+ (param $this (ref null extern))
 )

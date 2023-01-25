@@ -2,10 +2,8 @@
 (global $f_$initialized__jstype_SomeJsType (mut i32) (i32.const 0))
 
 ;;; Code for jstype.SomeJsType.Star [static fields]
-(global $f_$initialized__jstype_SomeJsType_Star (mut i32) (i32.const 0))
 
 ;;; Code for jstype.SomeJsType.Wildcard [static fields]
-(global $f_$initialized__jstype_SomeJsType_Wildcard (mut i32) (i32.const 0))
 
 ;;; Code for jstype.SomeJsType [vtable.init]
 (global $jstype.SomeJsType.vtable (ref $jstype.SomeJsType.vtable) 
@@ -205,49 +203,5 @@
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType)
 
 ;;; Code for jstype.SomeJsType.Star [INTERFACE]
-(type $jstype.SomeJsType.Star.vtable (struct 
- )
-)
-
-;;; void Star.$clinit()
-(func $$clinit__void@jstype.SomeJsType.Star
- ;;@ jstype/SomeJsType.java:47:12
- (block
-  ;; if (jstype.SomeJsType.Star.$initialized) return;
-  ;;@ jstype/SomeJsType.java:47:12
-  (if (global.get $f_$initialized__jstype_SomeJsType_Star)
-   (then
-    ;; return;
-    ;;@ jstype/SomeJsType.java:47:12
-    (return )
-   )
-  )
-  ;; (jstype.SomeJsType.Star.$initialized = true);
-  ;;@ jstype/SomeJsType.java:47:12
-  (global.set $f_$initialized__jstype_SomeJsType_Star (i32.const 1))
- )
-)
 
 ;;; Code for jstype.SomeJsType.Wildcard [INTERFACE]
-(type $jstype.SomeJsType.Wildcard.vtable (struct 
- )
-)
-
-;;; void Wildcard.$clinit()
-(func $$clinit__void@jstype.SomeJsType.Wildcard
- ;;@ jstype/SomeJsType.java:50:12
- (block
-  ;; if (jstype.SomeJsType.Wildcard.$initialized) return;
-  ;;@ jstype/SomeJsType.java:50:12
-  (if (global.get $f_$initialized__jstype_SomeJsType_Wildcard)
-   (then
-    ;; return;
-    ;;@ jstype/SomeJsType.java:50:12
-    (return )
-   )
-  )
-  ;; (jstype.SomeJsType.Wildcard.$initialized = true);
-  ;;@ jstype/SomeJsType.java:50:12
-  (global.set $f_$initialized__jstype_SomeJsType_Wildcard (i32.const 1))
- )
-)

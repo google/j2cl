@@ -106,7 +106,8 @@ function createImportObject(userImports) {
         a.toLowerCase() == b.toLowerCase(),
     'String.fromNumber': (/** number */ n, /** number */ r) => n.toString(r),
     // Regex
-    'RegExp.create': (/** string */ p, /** string */ f) => new RegExp(p, f),
+    'RegExp.constructor': (/** string */ p, /** string */ f) =>
+        new RegExp(p, f),
     'RegExp.setLastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex =
         i,
     'RegExp.exec': (/** !RegExp */ r, /** string */ s) => r.exec(s),

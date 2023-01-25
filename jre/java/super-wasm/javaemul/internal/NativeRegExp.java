@@ -77,10 +77,10 @@ public class NativeRegExp {
     private static native int getLength(WasmExtern o);
   }
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.create")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.constructor")
   private static native WasmExtern create(String.NativeString pattern);
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.create")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.constructor")
   private static native WasmExtern create(String.NativeString pattern, String.NativeString flags);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.setLastIndex")
