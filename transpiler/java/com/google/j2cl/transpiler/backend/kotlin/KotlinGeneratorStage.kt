@@ -26,6 +26,8 @@ import com.google.j2cl.transpiler.backend.common.SourceBuilder
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
 import com.google.j2cl.transpiler.backend.kotlin.common.buildMap
 import com.google.j2cl.transpiler.backend.kotlin.common.buildSet
+import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the Kotlin output for
@@ -64,31 +66,27 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
         identifierSet = nameToIdentifierMap.values.toSet()
       )
 
-    val renderedSource = { renderFn: Renderer.() -> Unit ->
-      SourceBuilder()
-        .also {
-          Renderer(
-              environment,
-              it,
-              problems,
-              topLevelQualifiedNames = compilationUnit.topLevelQualifiedNames
-            )
-            .renderFn()
-        }
-        .build()
-        .trimTrailingWhitespaces()
+    val newRenderer = {
+      Renderer(
+        environment,
+        SourceBuilder(),
+        problems,
+        topLevelQualifiedNames = compilationUnit.topLevelQualifiedNames
+      )
     }
 
     // Render file header, collecting qualified names to import
-    val fileHeaderSource = renderedSource { renderFileHeader(compilationUnit) }
+    val fileHeaderSource = newRenderer().fileHeaderSource(compilationUnit)
 
     // Render types, collecting qualified names to import
-    val typesSource = renderedSource { renderTypes(compilationUnit) }
+    val typesSource = newRenderer().typesSource(compilationUnit)
 
     // Render package and collected imports
-    val packageAndImportsSource = renderedSource { renderPackageAndImports(compilationUnit) }
+    val packageAndImportsSource = newRenderer().packageAndImportsSource(compilationUnit)
 
-    return fileHeaderSource + packageAndImportsSource + typesSource
+    val completeSource = emptyLineSeparated(fileHeaderSource, packageAndImportsSource, typesSource)
+
+    return completeSource.plusNewLine.toString().trimTrailingWhitespaces()
   }
 }
 

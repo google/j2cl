@@ -16,40 +16,27 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
+import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-internal fun Renderer.renderFileHeader(compilationUnit: CompilationUnit) {
-  renderFileComment(compilationUnit)
-  renderFileAnnotations()
-}
+internal fun Renderer.fileHeaderSource(compilationUnit: CompilationUnit): Source =
+  newLineSeparated(fileCommentSource(compilationUnit), fileAnnotationsSource())
 
-private fun Renderer.renderFileComment(compilationUnit: CompilationUnit) {
-  render("// Generated from \"${compilationUnit.packageRelativePath}\"")
-  renderNewLine()
-}
+private fun fileCommentSource(compilationUnit: CompilationUnit) =
+  source("// Generated from \"${compilationUnit.packageRelativePath}\"")
 
-private fun Renderer.renderFileAnnotations() {
-  render(optInExperimentalObjCNameFileAnnotationSource())
-  renderNewLine()
-  renderNewLine()
-}
+private fun Renderer.fileAnnotationsSource(): Source =
+  newLineSeparated(optInExperimentalObjCNameFileAnnotationSource())
 
-internal fun Renderer.renderPackageAndImports(compilationUnit: CompilationUnit) {
-  renderPackage(compilationUnit)
-  renderImports()
-}
+internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit): Source =
+  emptyLineSeparated(packageSource(compilationUnit), importsSource())
 
-private fun Renderer.renderPackage(compilationUnit: CompilationUnit) {
-  compilationUnit.packageName
-    .takeIf { it.isNotEmpty() }
-    ?.let { packageName ->
-      render("package ")
-      render(packageNameSource(packageName))
-      renderNewLine()
-      renderNewLine()
-    }
-}
+private fun packageSource(compilationUnit: CompilationUnit): Source =
+  source(compilationUnit.packageName).ifNotEmpty { spaceSeparated(source("package"), it) }
 
-internal fun Renderer.renderTypes(compilationUnit: CompilationUnit) {
-  renderSeparatedWithEmptyLine(compilationUnit.types) { render(typeSource(it)) }
-  renderNewLine()
-}
+internal fun Renderer.typesSource(compilationUnit: CompilationUnit): Source =
+  emptyLineSeparated(compilationUnit.types.map(::typeSource))

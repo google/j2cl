@@ -17,37 +17,39 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.backend.kotlin.ast.Import
 import com.google.j2cl.transpiler.backend.kotlin.ast.defaultImports
+import com.google.j2cl.transpiler.backend.kotlin.source.Source
+import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-internal fun Renderer.renderImports() {
-  val imports =
-    defaultImports +
-      environment.importedSimpleNameToQualifiedNameMap.entries.map { (simpleName, qualifiedName) ->
-        Import(
-          qualifiedName.qualifiedNameComponents(),
-          if (qualifiedName.qualifiedNameToSimpleName() == simpleName) null
-          else Import.Suffix.Alias(simpleName)
-        )
-      }
+private val Renderer.imports: List<Import>
+  get() =
+    defaultImports
+      .plus(
+        environment.importedSimpleNameToQualifiedNameMap.entries.map { (simpleName, qualifiedName)
+          ->
+          Import(
+            qualifiedName.qualifiedNameComponents(),
+            if (qualifiedName.qualifiedNameToSimpleName() == simpleName) null
+            else Import.Suffix.Alias(simpleName)
+          )
+        }
+      )
+      .sorted()
 
-  if (imports.isNotEmpty()) {
-    renderSeparatedWith(imports.sorted(), "\n") { render(it) }
-    renderNewLine()
-    renderNewLine()
-  }
-}
+internal fun Renderer.importsSource(): Source = newLineSeparated(imports.map { source(it) })
 
-private fun Renderer.render(import: Import) {
-  render("import ")
-  renderSeparatedWith(import.components, ".") { render(identifierSource(it)) }
-  import.suffixOrNull?.let { render(it) }
-}
+private fun source(import: Import): Source =
+  spaceSeparated(
+    source("import"),
+    dotSeparated(import.components.map(::identifierSource)).plus(import.suffixOrNull)
+  )
 
-private fun Renderer.render(suffix: Import.Suffix) {
+private fun Source.plus(suffix: Import.Suffix?): Source =
   when (suffix) {
-    is Import.Suffix.Alias -> {
-      render(" as ")
-      render(identifierSource(suffix.alias))
-    }
-    is Import.Suffix.Star -> render(".*")
+    is Import.Suffix.Alias -> infix(this, "as", identifierSource(suffix.alias))
+    is Import.Suffix.Star -> dotSeparated(this, source("*"))
+    null -> this
   }
-}
