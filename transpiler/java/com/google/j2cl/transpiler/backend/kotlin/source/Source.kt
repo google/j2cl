@@ -71,6 +71,8 @@ fun inCurlyBrackets(source: Source) =
     it.closeBrace()
   }
 
+fun inInlineCurlyBrackets(source: Source) = spaceSeparated(source("{"), source, source("}"))
+
 fun indented(source: Source) =
   Source(source.isEmpty) { sourceBuilder ->
     sourceBuilder.indent()
@@ -80,8 +82,12 @@ fun indented(source: Source) =
 
 fun indentedIf(condition: Boolean, source: Source) = if (condition) indented(source) else source
 
-fun block(source: Source) =
-  if (source.isEmpty) inCurlyBrackets(emptySource) else inCurlyBrackets(inNewLine(source))
+fun block(body: Source) =
+  if (body.isEmpty) inCurlyBrackets(emptySource) else inCurlyBrackets(inNewLine(body))
+
+fun block(parameters: Source, body: Source) =
+  if (parameters.isEmpty) block(body)
+  else inCurlyBrackets(newLineSeparated(join(source(" "), parameters), body))
 
 fun join(sources: Iterable<Source>) =
   Source(sources.all { it.isEmpty }) { sources.forEach<Source>(it::append) }
@@ -106,6 +112,8 @@ fun commaAndNewLineSeparated(sources: Iterable<Source>) = ",\n" separated source
 fun dotSeparated(sources: Iterable<Source>) = "." separated sources
 
 fun ampersandSeparated(sources: Iterable<Source>) = " & " separated sources
+
+fun semicolonSeparated(sources: Iterable<Source>) = "; " separated sources
 
 fun colonSeparated(sources: Iterable<Source>) = ": " separated sources
 

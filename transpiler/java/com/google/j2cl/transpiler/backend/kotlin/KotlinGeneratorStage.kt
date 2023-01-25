@@ -22,7 +22,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Library
-import com.google.j2cl.transpiler.backend.common.SourceBuilder
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
 import com.google.j2cl.transpiler.backend.kotlin.common.buildMap
 import com.google.j2cl.transpiler.backend.kotlin.common.buildSet
@@ -69,7 +68,6 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
     val newRenderer = {
       Renderer(
         environment,
-        SourceBuilder(),
         problems,
         topLevelQualifiedNames = compilationUnit.topLevelQualifiedNames
       )

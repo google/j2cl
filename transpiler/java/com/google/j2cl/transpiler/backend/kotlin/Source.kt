@@ -73,3 +73,15 @@ fun labelReference(name: String) = at(identifierSource(name))
 
 fun Source.functionCall(name: String, vararg args: Source) =
   dotSeparated(this, join(source(name), inRoundBrackets(commaSeparated(args.toList()))))
+
+fun classLiteral(type: Source) = join(type, source("::class"))
+
+fun nonNull(type: Source) = join(type, source("!!"))
+
+fun spreadExpression(array: Source) = join(source("*"), array)
+
+fun asExpression(lhs: Source, rhs: Source) = infix(lhs, "as", rhs)
+
+fun isExpression(lhs: Source, rhs: Source) = infix(lhs, "is", rhs)
+
+fun itSource() = source("it")

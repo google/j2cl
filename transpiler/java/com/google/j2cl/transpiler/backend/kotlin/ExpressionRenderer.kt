@@ -52,140 +52,157 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
+import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
 import com.google.j2cl.transpiler.ast.VariableReference
+import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.afterSpace
+import com.google.j2cl.transpiler.backend.kotlin.source.block
+import com.google.j2cl.transpiler.backend.kotlin.source.colonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
-import com.google.j2cl.transpiler.backend.kotlin.source.inNewLine
+import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
+import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inInlineCurlyBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.infix
+import com.google.j2cl.transpiler.backend.kotlin.source.join
+import com.google.j2cl.transpiler.backend.kotlin.source.newLineSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.semicolonSeparated
+import com.google.j2cl.transpiler.backend.kotlin.source.source
+import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
+import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-fun Renderer.expressionSource(expression: Expression): Source = renderedSource {
-  renderExpression(expression)
-}
-
-fun Renderer.renderExpression(expression: Expression) {
+fun Renderer.expressionSource(expression: Expression): Source =
   when (expression) {
-    is ArrayAccess -> renderArrayAccess(expression)
-    is ArrayLength -> renderArrayLength(expression)
-    is ArrayLiteral -> renderArrayLiteral(expression)
-    is BinaryExpression -> renderBinaryExpression(expression)
-    is CastExpression -> renderCastExpression(expression)
-    is ConditionalExpression -> renderConditionalExpression(expression)
-    is ExpressionWithComment -> renderExpressionWithComment(expression)
-    is FieldAccess -> renderFieldAccess(expression)
-    is FunctionExpression -> renderFunctionExpression(expression)
-    is InstanceOfExpression -> renderInstanceOfExpression(expression)
-    is Literal -> renderLiteral(expression)
-    is MethodCall -> renderMethodCall(expression)
-    is MultiExpression -> renderMultiExpression(expression)
-    is NewArray -> renderNewArray(expression)
-    is NewInstance -> renderNewInstance(expression)
-    is PostfixExpression -> renderPostfixExpression(expression)
-    is PrefixExpression -> renderPrefixExpression(expression)
-    is SuperReference -> renderSuperReference(expression)
-    is ThisReference -> renderThisReference(expression)
-    is VariableDeclarationExpression -> renderVariableDeclarationExpression(expression)
-    is VariableReference -> renderVariableReference(expression)
-    else -> render(todoSource(expression::class.java.simpleName))
+    is ArrayAccess -> arrayAccessSource(expression)
+    is ArrayLength -> arrayLengthSource(expression)
+    is ArrayLiteral -> arrayLiteralSource(expression)
+    is BinaryExpression -> binaryExpressionSource(expression)
+    is CastExpression -> castExpressionSource(expression)
+    is ConditionalExpression -> conditionalExpressionSource(expression)
+    is ExpressionWithComment -> expressionWithCommentSource(expression)
+    is FieldAccess -> fieldAccessSource(expression)
+    is FunctionExpression -> functionExpressionSource(expression)
+    is InstanceOfExpression -> instanceOfExpressionSource(expression)
+    is Literal -> literalSource(expression)
+    is MethodCall -> methodCallSource(expression)
+    is MultiExpression -> multiExpressionSource(expression)
+    is NewArray -> newArraySource(expression)
+    is NewInstance -> newInstanceSource(expression)
+    is PostfixExpression -> postfixExpressionSource(expression)
+    is PrefixExpression -> prefixExpressionSource(expression)
+    is SuperReference -> superReferenceSource(expression)
+    is ThisReference -> thisReferenceSource(expression)
+    is VariableDeclarationExpression -> variableDeclarationExpressionSource(expression)
+    is VariableReference -> variableReferenceSource(expression)
+    else -> todoSource(expression::class.java.simpleName)
   }
-}
 
-private fun Renderer.renderArrayAccess(arrayAccess: ArrayAccess) {
-  renderGetOperator(arrayAccess.arrayExpression, arrayAccess.indexExpression)
-}
+private fun Renderer.arrayAccessSource(arrayAccess: ArrayAccess): Source =
+  getOperatorSource(arrayAccess.arrayExpression, arrayAccess.indexExpression)
 
-private fun Renderer.renderGetOperator(qualifier: Expression, argument: Expression) {
-  renderExpressionInParens(
-    qualifier,
-    Precedence.MEMBER_ACCESS.requiresParensOnLeft(qualifier.precedence)
+private fun Renderer.getOperatorSource(qualifier: Expression, argument: Expression): Source =
+  join(
+    expressionInParensSource(
+      qualifier,
+      Precedence.MEMBER_ACCESS.requiresParensOnLeft(qualifier.precedence)
+    ),
+    inSquareBrackets(expressionSource(argument))
   )
-  renderInSquareBrackets { renderExpression(argument) }
-}
 
-private fun Renderer.renderArrayLength(arrayLength: ArrayLength) {
-  renderLeftSubExpression(arrayLength.precedence, arrayLength.arrayExpression)
-  render(".size")
-}
+private fun Renderer.arrayLengthSource(arrayLength: ArrayLength): Source =
+  dotSeparated(
+    leftSubExpressionSource(arrayLength.precedence, arrayLength.arrayExpression),
+    source("size")
+  )
 
-private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
-  val typeArgument = arrayLiteral.typeDescriptor.typeArgument
-  when (typeArgument.typeDescriptor) {
-    PrimitiveTypes.BOOLEAN -> render(topLevelQualifiedNameSource("kotlin.booleanArrayOf"))
-    PrimitiveTypes.CHAR -> render(topLevelQualifiedNameSource("kotlin.charArrayOf"))
-    PrimitiveTypes.BYTE -> render(topLevelQualifiedNameSource("kotlin.byteArrayOf"))
-    PrimitiveTypes.SHORT -> render(topLevelQualifiedNameSource("kotlin.shortArrayOf"))
-    PrimitiveTypes.INT -> render(topLevelQualifiedNameSource("kotlin.intArrayOf"))
-    PrimitiveTypes.LONG -> render(topLevelQualifiedNameSource("kotlin.longArrayOf"))
-    PrimitiveTypes.FLOAT -> render(topLevelQualifiedNameSource("kotlin.floatArrayOf"))
-    PrimitiveTypes.DOUBLE -> render(topLevelQualifiedNameSource("kotlin.doubleArrayOf"))
-    else -> {
-      render(topLevelQualifiedNameSource("kotlin.arrayOf"))
-      render(typeArgumentsSource(listOf(typeArgument)))
-    }
+private fun Renderer.arrayLiteralSource(arrayLiteral: ArrayLiteral): Source =
+  arrayLiteral.typeDescriptor.typeArgument.let { typeArgument ->
+    join(
+      when (typeArgument.typeDescriptor) {
+        PrimitiveTypes.BOOLEAN -> topLevelQualifiedNameSource("kotlin.booleanArrayOf")
+        PrimitiveTypes.CHAR -> topLevelQualifiedNameSource("kotlin.charArrayOf")
+        PrimitiveTypes.BYTE -> topLevelQualifiedNameSource("kotlin.byteArrayOf")
+        PrimitiveTypes.SHORT -> topLevelQualifiedNameSource("kotlin.shortArrayOf")
+        PrimitiveTypes.INT -> topLevelQualifiedNameSource("kotlin.intArrayOf")
+        PrimitiveTypes.LONG -> topLevelQualifiedNameSource("kotlin.longArrayOf")
+        PrimitiveTypes.FLOAT -> topLevelQualifiedNameSource("kotlin.floatArrayOf")
+        PrimitiveTypes.DOUBLE -> topLevelQualifiedNameSource("kotlin.doubleArrayOf")
+        else ->
+          join(
+            topLevelQualifiedNameSource("kotlin.arrayOf"),
+            typeArgumentsSource(listOf(typeArgument))
+          )
+      },
+      inRoundBrackets(commaSeparated(arrayLiteral.valueExpressions.map(::expressionSource)))
+    )
   }
-  renderInParentheses {
-    renderCommaSeparated(arrayLiteral.valueExpressions) { renderExpression(it) }
-  }
-}
 
-private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
+private fun Renderer.binaryExpressionSource(expression: BinaryExpression): Source =
+  infix(
+    leftOperandSource(expression),
+    expression.operator.ktSymbol(expression.useEquality),
+    rightOperandSource(expression)
+  )
+
+private fun Renderer.leftOperandSource(expression: BinaryExpression): Source =
   // Java and Kotlin does not allow initializing static final fields with type qualifier, so it
   // needs to be rendered without the qualifier.
-  val leftOperand = expression.leftOperand
-  val rightOperand = expression.rightOperand
-  if (
-    leftOperand is FieldAccess &&
-      expression.isSimpleAssignment &&
-      leftOperand.target.isStatic &&
-      leftOperand.target.isFinal
-  ) {
-    render(identifierSource(leftOperand.target.ktMangledName))
-  } else {
-    renderLeftSubExpression(expression.precedence, leftOperand)
+  expression.leftOperand.let { leftOperand ->
+    if (
+      leftOperand is FieldAccess &&
+        expression.isSimpleAssignment &&
+        leftOperand.target.isStatic &&
+        leftOperand.target.isFinal
+    )
+      identifierSource(leftOperand.target.ktMangledName)
+    else leftSubExpressionSource(expression.precedence, leftOperand)
   }
-  render(" ")
-  renderBinaryOperator(
-    expression.operator,
-    useEquality =
-      leftOperand is NullLiteral ||
-        rightOperand is NullLiteral ||
-        (leftOperand.typeDescriptor.isPrimitive && rightOperand.typeDescriptor.isPrimitive)
-  )
-  render(" ")
-  renderRightSubExpression(expression.precedence, rightOperand)
-}
 
-private fun Renderer.renderCastExpression(castExpression: CastExpression) {
-  val castTypeDescriptor = castExpression.castTypeDescriptor
-  if (castTypeDescriptor is IntersectionTypeDescriptor) {
+private fun Renderer.rightOperandSource(expression: BinaryExpression): Source =
+  rightSubExpressionSource(expression.precedence, expression.rightOperand)
+
+private val BinaryExpression.useEquality: Boolean
+  get() =
+    leftOperand is NullLiteral ||
+      rightOperand is NullLiteral ||
+      (leftOperand.typeDescriptor.isPrimitive && rightOperand.typeDescriptor.isPrimitive)
+
+private fun Renderer.castExpressionSource(castExpression: CastExpression): Source =
+  castExpression.castTypeDescriptor.let { castTypeDescriptor ->
+    if (castTypeDescriptor is IntersectionTypeDescriptor)
     // Render cast to intersection type descriptor: (A & B & C) x
     // using smart casts: (x).let { it as A; it as B; it as C; it }
-    renderInParentheses { renderExpression(castExpression.expression) }
-    render(".")
-    render(extensionMemberQualifiedNameSource("kotlin.let"))
-    render(" { ")
-    castTypeDescriptor.intersectionTypeDescriptors.forEach {
-      render("it as ")
-      render(typeDescriptorSource(it))
-      render("; ")
-    }
-    render("it }")
-  } else {
-    renderLeftSubExpression(castExpression.precedence, castExpression.expression)
-    render(" as ")
-    render(typeDescriptorSource(castExpression.castTypeDescriptor))
+    dotSeparated(
+        inRoundBrackets(expressionSource(castExpression.expression)),
+        spaceSeparated(
+          extensionMemberQualifiedNameSource("kotlin.let"),
+          inInlineCurlyBrackets(
+            semicolonSeparated(
+              castTypeDescriptor.intersectionTypeDescriptors
+                .map { asExpression(itSource(), typeDescriptorSource(it)) }
+                .plus(itSource())
+            )
+          )
+        )
+      )
+    else
+      asExpression(
+        leftSubExpressionSource(castExpression.precedence, castExpression.expression),
+        typeDescriptorSource(castExpression.castTypeDescriptor)
+      )
   }
-}
 
-private fun Renderer.renderBinaryOperator(operator: BinaryOperator, useEquality: Boolean) {
-  render(operator.ktSymbol(useEquality))
-}
-
-private fun BinaryOperator.ktSymbol(useEquality: Boolean) =
+private fun BinaryOperator.ktSymbol(useEquality: Boolean): String =
   when (this) {
     BinaryOperator.TIMES -> "*"
     BinaryOperator.DIVIDE -> "/"
@@ -204,225 +221,215 @@ private fun BinaryOperator.ktSymbol(useEquality: Boolean) =
     else -> throw InternalCompilerError("$this.ktSymbol")
   }
 
-private fun Renderer.renderExpressionWithComment(expressionWithComment: ExpressionWithComment) {
-  // Comments do not count as operations, but parenthesis will be emitted by the
-  // outer context if needed given that getPrecedence is just a passthrough to the inner
-  // expression.
-  renderExpression(expressionWithComment.expression)
-}
+private fun Renderer.conditionalExpressionSource(
+  conditionalExpression: ConditionalExpression
+): Source =
+  spaceSeparated(
+    source("if"),
+    inRoundBrackets(expressionSource(conditionalExpression.conditionExpression)),
+    expressionSource(conditionalExpression.trueExpression),
+    source("else"),
+    expressionSource(conditionalExpression.falseExpression)
+  )
 
-private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
-  renderQualifier(fieldAccess)
-  render(identifierSource(fieldAccess.target.ktMangledName))
-}
+private fun Renderer.expressionWithCommentSource(
+  expressionWithComment: ExpressionWithComment
+): Source = expressionSource(expressionWithComment.expression)
 
-private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
-  val functionalInterface = functionExpression.typeDescriptor.functionalInterface!!
-  renderNewInstanceTypeDescriptor(functionalInterface)
-  render(" ")
-  renderInCurlyBrackets {
-    val parameters = functionExpression.parameters
-    if (parameters.isNotEmpty()) {
-      render(" ")
-      renderCommaSeparated(parameters) { renderVariable(it) }
-      render(" ->")
+private fun Renderer.fieldAccessSource(fieldAccess: FieldAccess): Source =
+  dotSeparated(qualifierSource(fieldAccess), identifierSource(fieldAccess.target.ktMangledName))
+
+private fun Renderer.functionExpressionSource(functionExpression: FunctionExpression): Source =
+  spaceSeparated(
+    newInstanceTypeDescriptorSource(functionExpression.typeDescriptor.functionalInterface!!),
+    block(parametersSource(functionExpression), bodySource(functionExpression))
+  )
+
+private fun Renderer.bodySource(functionExpression: FunctionExpression): Source =
+  functionExpression.typeDescriptor.functionalInterface!!
+    .typeDeclaration
+    .returnLabelIdentifier
+    .let {
+      copy(currentReturnLabelIdentifier = it).statementsSource(functionExpression.body.statements)
     }
-    val returnLabelIdentifier =
-      with(functionalInterface.typeDeclaration) { ktBridgeSimpleName ?: ktSimpleName }
-    copy(currentReturnLabelIdentifier = returnLabelIdentifier).run {
-      render(statementsSource(functionExpression.body.statements).ifNotEmpty(::inNewLine))
-    }
-  }
-}
 
-private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOfExpression) {
-  renderLeftSubExpression(instanceOfExpression.precedence, instanceOfExpression.expression)
-  render(" is ")
-  val testTypeDescriptor = instanceOfExpression.testTypeDescriptor
-  if (
-    testTypeDescriptor is ArrayTypeDescriptor &&
-      !testTypeDescriptor.componentTypeDescriptor!!.isPrimitive
-  ) {
-    render(topLevelQualifiedNameSource("kotlin.Array"))
-    render("<*>")
-  } else {
-    render(
-      typeDescriptorSource(
-        instanceOfExpression.testTypeDescriptor.toNonNullable(),
-        projectRawToWildcards = true
-      )
-    )
+private fun Renderer.parametersSource(functionExpression: FunctionExpression): Source =
+  commaSeparated(functionExpression.parameters.map(::variableSource)).ifNotEmpty {
+    spaceSeparated(it, source("->"))
   }
-}
 
-private fun Renderer.renderLiteral(literal: Literal) {
+private val TypeDeclaration.returnLabelIdentifier: String
+  get() = ktBridgeSimpleName ?: ktSimpleName
+
+private fun Renderer.instanceOfExpressionSource(
+  instanceOfExpression: InstanceOfExpression
+): Source =
+  isExpression(
+    leftSubExpressionSource(instanceOfExpression.precedence, instanceOfExpression.expression),
+    instanceOfTestTypeDescriptorSource(instanceOfExpression.testTypeDescriptor)
+  )
+
+private fun Renderer.instanceOfTestTypeDescriptorSource(typeDescriptor: TypeDescriptor): Source =
+  if (typeDescriptor is ArrayTypeDescriptor && !typeDescriptor.isPrimitiveArray)
+    join(topLevelQualifiedNameSource("kotlin.Array"), inAngleBrackets(source("*")))
+  else typeDescriptorSource(typeDescriptor.toNonNullable(), projectRawToWildcards = true)
+
+private fun Renderer.literalSource(literal: Literal): Source =
   when (literal) {
-    is NullLiteral -> render("null")
-    is BooleanLiteral -> renderBooleanLiteral(literal)
-    is StringLiteral -> renderStringLiteral(literal)
-    is TypeLiteral -> renderTypeLiteral(literal)
-    is NumberLiteral -> renderNumberLiteral(literal)
+    is NullLiteral -> source("null")
+    is BooleanLiteral -> booleanLiteralSource(literal)
+    is StringLiteral -> stringLiteralSource(literal)
+    is TypeLiteral -> typeLiteralSource(literal)
+    is NumberLiteral -> numberLiteralSource(literal)
     else -> throw InternalCompilerError("renderLiteral($literal)")
   }
-}
 
-private fun Renderer.renderBooleanLiteral(booleanLiteral: BooleanLiteral) {
-  render("${booleanLiteral.value}")
-}
+private fun booleanLiteralSource(booleanLiteral: BooleanLiteral): Source =
+  literalSource(booleanLiteral.value)
 
-private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
-  render(literalSource(stringLiteral.value))
-}
+private fun stringLiteralSource(stringLiteral: StringLiteral): Source =
+  literalSource(stringLiteral.value)
 
-private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
-  render(qualifiedNameSource(typeLiteral.referencedTypeDescriptor))
-  render("::class")
-  render(".")
-  if (typeLiteral.referencedTypeDescriptor.isPrimitive) {
-    render(extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
-    renderNonNullAssertion()
-  } else {
-    render(extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType"))
-  }
-}
+private fun Renderer.typeLiteralSource(typeLiteral: TypeLiteral): Source =
+  dotSeparated(
+    classLiteral(qualifiedNameSource(typeLiteral.referencedTypeDescriptor)),
+    if (typeLiteral.referencedTypeDescriptor.isPrimitive)
+      nonNull(extensionMemberQualifiedNameSource("kotlin.jvm.javaPrimitiveType"))
+    else extensionMemberQualifiedNameSource("kotlin.jvm.javaObjectType")
+  )
 
-private fun Renderer.renderNumberLiteral(numberLiteral: NumberLiteral) {
+private fun numberLiteralSource(numberLiteral: NumberLiteral): Source =
   when (numberLiteral.typeDescriptor.toUnboxedType()) {
-    PrimitiveTypes.CHAR -> render(literalSource(numberLiteral.value.toChar()))
-    PrimitiveTypes.BYTE -> render(literalSource(numberLiteral.value.toByte()))
-    PrimitiveTypes.SHORT -> render(literalSource(numberLiteral.value.toShort()))
-    PrimitiveTypes.INT -> render(literalSource(numberLiteral.value.toInt()))
-    PrimitiveTypes.LONG -> render(literalSource(numberLiteral.value.toLong()))
-    PrimitiveTypes.FLOAT -> render(literalSource(numberLiteral.value.toFloat()))
-    PrimitiveTypes.DOUBLE -> render(literalSource(numberLiteral.value.toDouble()))
+    PrimitiveTypes.CHAR -> literalSource(numberLiteral.value.toChar())
+    PrimitiveTypes.BYTE -> literalSource(numberLiteral.value.toByte())
+    PrimitiveTypes.SHORT -> literalSource(numberLiteral.value.toShort())
+    PrimitiveTypes.INT -> literalSource(numberLiteral.value.toInt())
+    PrimitiveTypes.LONG -> literalSource(numberLiteral.value.toLong())
+    PrimitiveTypes.FLOAT -> literalSource(numberLiteral.value.toFloat())
+    PrimitiveTypes.DOUBLE -> literalSource(numberLiteral.value.toDouble())
     else -> throw InternalCompilerError("renderNumberLiteral($numberLiteral)")
   }
-}
 
-private fun Renderer.renderConditionalExpression(conditionalExpression: ConditionalExpression) {
-  render("if ")
-  renderInParentheses { renderExpression(conditionalExpression.conditionExpression) }
-  render(" ")
-  renderExpression(conditionalExpression.trueExpression)
-  render(" else ")
-  renderExpression(conditionalExpression.falseExpression)
-}
+private fun Renderer.methodCallSource(expression: MethodCall): Source =
+  dotSeparated(qualifierSource(expression), methodInvocationSource(expression))
 
-private fun Renderer.renderMethodCall(expression: MethodCall) {
-  renderQualifier(expression)
-
-  val methodDescriptor = expression.target
-  if (methodDescriptor.isProtoExtensionGetter()) {
-    render(extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"))
-    renderInvocation(expression)
-  } else if (methodDescriptor.isProtobufGetter()) {
-    render(identifierSource(KtInfo.computePropertyName(expression.target.name)))
-  } else if (methodDescriptor.isProtoExtensionChecker()) {
-    render(extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"))
-    renderInvocation(expression)
-  } else {
-    render(identifierSource(expression.target.ktMangledName))
-    if (!expression.target.isKtProperty) {
-      renderInvocationTypeArguments(methodDescriptor.typeArguments)
-      renderInvocation(expression)
+private fun Renderer.methodInvocationSource(expression: MethodCall): Source =
+  expression.target.let { methodDescriptor ->
+    when {
+      methodDescriptor.isProtoExtensionGetter() ->
+        join(
+          extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.get"),
+          invocationSource(expression)
+        )
+      methodDescriptor.isProtobufGetter() ->
+        identifierSource(KtInfo.computePropertyName(expression.target.name))
+      methodDescriptor.isProtoExtensionChecker() ->
+        join(
+          extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"),
+          invocationSource(expression)
+        )
+      else ->
+        join(
+          identifierSource(expression.target.ktMangledName),
+          sourceIf(!expression.target.isKtProperty) {
+            join(
+              invocationTypeArgumentsSource(methodDescriptor.typeArguments),
+              invocationSource(expression)
+            )
+          }
+        )
     }
   }
-}
 
-private fun Renderer.renderInvocationTypeArguments(typeArguments: List<TypeArgument>) {
-  if (typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
-    render(typeArgumentsSource(typeArguments))
+private fun Renderer.invocationTypeArgumentsSource(typeArguments: List<TypeArgument>): Source =
+  sourceIf(typeArguments.isNotEmpty() && typeArguments.all { it.isDenotable }) {
+    typeArgumentsSource(typeArguments)
   }
-}
 
-internal fun Renderer.invocationSource(invocation: Invocation) = renderedSource {
-  renderInvocation(invocation)
-}
-
-internal fun Renderer.renderInvocation(invocation: Invocation) {
-  renderInParentheses {
+internal fun Renderer.invocationSource(invocation: Invocation) =
+  inRoundBrackets(
     // Take last argument if it's an array literal passed as a vararg parameter.
-    val varargArrayLiteral =
-      (invocation.arguments.lastOrNull() as? ArrayLiteral).takeIf {
-        invocation.target.parameterDescriptors.lastOrNull()?.isVarargs == true
-      }
-
-    if (varargArrayLiteral != null) {
-      val expandedArguments = invocation.arguments.dropLast(1) + varargArrayLiteral.valueExpressions
-      renderCommaSeparated(expandedArguments) { renderExpression(it) }
-    } else {
-      val parameters = invocation.target.parameterDescriptors.zip(invocation.arguments)
-      renderCommaSeparated(parameters) { (parameterDescriptor, argument) ->
-        // TODO(b/216523245): Handle spread operator using a pass in the AST.
-        if (parameterDescriptor.isVarargs) {
-          render("*")
-          renderInParentheses { renderExpression(argument) }
-          // Spread operator requires non-null array.
-          if (argument.typeDescriptor.isNullable) renderNonNullAssertion()
-        } else {
-          renderExpression(argument)
-        }
-      }
+    invocation.varargArrayLiteral.let { varargArrayLiteral ->
+      if (varargArrayLiteral != null)
+        commaSeparated(
+          invocation.arguments
+            .dropLast(1)
+            .plus(varargArrayLiteral.valueExpressions)
+            .map(::expressionSource)
+        )
+      else
+        commaSeparated(
+          invocation.target.parameterDescriptors.zip(invocation.arguments).map {
+            (parameterDescriptor, argument) ->
+            // TODO(b/216523245): Handle spread operator using a pass in the AST.
+            if (parameterDescriptor.isVarargs)
+              spreadExpression(
+                inRoundBrackets(expressionSource(argument))
+                  .letIf(argument.typeDescriptor.isNullable, ::nonNull)
+              )
+            else expressionSource(argument)
+          }
+        )
     }
-  }
-}
+  )
 
-private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
-  render(extensionMemberQualifiedNameSource("kotlin.run"))
-  render(" ")
-  renderInCurlyBrackets {
-    renderStartingWithNewLines(multiExpression.expressions) { expression ->
-      renderExpression(expression)
+private val Invocation.varargArrayLiteral
+  get() =
+    (arguments.lastOrNull() as? ArrayLiteral).takeIf {
+      target.parameterDescriptors.lastOrNull()?.isVarargs == true
     }
-  }
-}
 
-private fun Renderer.renderNewArray(newArray: NewArray) {
-  require(newArray.arrayLiteral == null)
-  val dimensions = newArray.dimensionExpressions.iterator()
-  val firstDimension = dimensions.next()
-  renderNewArray(newArray.typeDescriptor, firstDimension, dimensions)
-}
+private fun Renderer.multiExpressionSource(multiExpression: MultiExpression): Source =
+  spaceSeparated(
+    extensionMemberQualifiedNameSource("kotlin.run"),
+    block(newLineSeparated(multiExpression.expressions.map(::expressionSource)))
+  )
 
-private fun Renderer.renderNewArray(
+private fun Renderer.newArraySource(newArray: NewArray): Source =
+  newArraySource(
+    newArray.typeDescriptor,
+    newArray.dimensionExpressions.first(),
+    newArray.dimensionExpressions.drop(1)
+  )
+
+private fun Renderer.newArraySource(
   arrayTypeDescriptor: ArrayTypeDescriptor,
   firstDimension: Expression,
-  remainingDimensions: Iterator<Expression>
-) {
-  val typeArgument = arrayTypeDescriptor.typeArgument
-  val componentTypeDescriptor = typeArgument.typeDescriptor
-  if (!remainingDimensions.hasNext()) {
-    if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
-      renderPrimitiveArrayOf(componentTypeDescriptor, firstDimension)
-    } else {
-      renderArrayOfNulls(typeArgument, firstDimension)
-    }
-  } else {
-    val nextDimension = remainingDimensions.next()
-    if (nextDimension is NullLiteral) {
-      renderArrayOfNulls(typeArgument, firstDimension)
-    } else {
-      render(topLevelQualifiedNameSource("kotlin.Array"))
-      render(typeArgumentsSource(listOf(typeArgument)))
-      renderInParentheses { renderExpression(firstDimension) }
-      render(" ")
-      renderInCurlyBrackets {
-        renderNewLine()
-        renderNewArray(
-          componentTypeDescriptor as ArrayTypeDescriptor,
-          nextDimension,
-          remainingDimensions
-        )
-      }
+  remainingDimensions: List<Expression>
+): Source =
+  arrayTypeDescriptor.typeArgument.let { typeArgument ->
+    typeArgument.typeDescriptor.let { componentTypeDescriptor ->
+      if (remainingDimensions.isEmpty())
+        if (componentTypeDescriptor is PrimitiveTypeDescriptor)
+          primitiveArrayOfSource(componentTypeDescriptor, firstDimension)
+        else arrayOfNullsSource(typeArgument, firstDimension)
+      else
+        remainingDimensions.first().let { nextDimension ->
+          if (nextDimension is NullLiteral) arrayOfNullsSource(typeArgument, firstDimension)
+          else
+            spaceSeparated(
+              join(
+                topLevelQualifiedNameSource("kotlin.Array"),
+                typeArgumentsSource(listOf(typeArgument)),
+                inRoundBrackets(expressionSource(firstDimension))
+              ),
+              block(
+                newArraySource(
+                  componentTypeDescriptor as ArrayTypeDescriptor,
+                  nextDimension,
+                  remainingDimensions.drop(1)
+                )
+              )
+            )
+        }
     }
   }
-}
 
-private fun Renderer.renderPrimitiveArrayOf(
+private fun Renderer.primitiveArrayOfSource(
   componentTypeDescriptor: PrimitiveTypeDescriptor,
   dimension: Expression
-) {
-  render(
+): Source =
+  join(
     topLevelQualifiedNameSource(
       when (componentTypeDescriptor) {
         PrimitiveTypes.BOOLEAN -> "kotlin.BooleanArray"
@@ -435,195 +442,200 @@ private fun Renderer.renderPrimitiveArrayOf(
         PrimitiveTypes.DOUBLE -> "kotlin.DoubleArray"
         else -> throw InternalCompilerError("renderPrimitiveArrayOf($componentTypeDescriptor)")
       }
-    )
+    ),
+    inRoundBrackets(expressionSource(dimension))
   )
-  renderInParentheses { renderExpression(dimension) }
-}
 
-private fun Renderer.renderArrayOfNulls(typeArgument: TypeArgument, dimension: Expression) {
-  if (typeArgument.typeDescriptor.isNullable) {
-    render(extensionMemberQualifiedNameSource("kotlin.arrayOfNulls"))
-    render(typeArgumentsSource(listOf(typeArgument.toNonNullable())))
-  } else {
-    render(extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"))
-    render(typeArgumentsSource(listOf(typeArgument)))
+private fun Renderer.arrayOfNullsSource(typeArgument: TypeArgument, dimension: Expression): Source =
+  join(
+    if (typeArgument.typeDescriptor.isNullable)
+      join(
+        extensionMemberQualifiedNameSource("kotlin.arrayOfNulls"),
+        typeArgumentsSource(listOf(typeArgument.toNonNullable()))
+      )
+    else
+      join(
+        extensionMemberQualifiedNameSource("javaemul.lang.uninitializedArrayOf"),
+        typeArgumentsSource(listOf(typeArgument))
+      ),
+    inRoundBrackets(expressionSource(dimension))
+  )
+
+private fun Renderer.newInstanceSource(expression: NewInstance): Source =
+  expression.typeDescriptor.nonAnonymousTypeDescriptor.toNonNullable().let { typeDescriptor ->
+    dotSeparated(
+      qualifierSource(expression),
+      spaceSeparated(
+        sourceIf(expression.anonymousInnerClass != null) {
+          spaceSeparated(source("object"), source(":"))
+        },
+        join(
+          newInstanceTypeDescriptorSource(typeDescriptor),
+          // Render invocation arguments for classes only - interfaces don't need it.
+          sourceIf(typeDescriptor.isClass) {
+            // Explicit label is necessary to workaround
+            // https://youtrack.jetbrains.com/issue/KT-54349
+            copy(renderThisReferenceWithLabel = true).invocationSource(expression)
+          }
+        ),
+        expression.anonymousInnerClass.ifNotNullSource { typeBodySource(it) }
+      )
+    )
   }
-  renderInParentheses { renderExpression(dimension) }
-}
 
-private fun Renderer.renderNewInstance(expression: NewInstance) {
-  renderQualifier(expression)
-
-  var typeDescriptor = expression.typeDescriptor.nonAnonymousTypeDescriptor.toNonNullable()
-  if (expression.anonymousInnerClass != null) {
-    render("object : ")
-  }
-
-  renderNewInstanceTypeDescriptor(typeDescriptor)
-
-  // Render invocation arguments for classes only - interfaces don't need it.
-  if (typeDescriptor.isClass) {
-    // Explicit label is necessary to workaround https://youtrack.jetbrains.com/issue/KT-54349
-    copy(renderThisReferenceWithLabel = true).renderInvocation(expression)
-  }
-
-  expression.anonymousInnerClass?.let { render(typeBodySource(it).ifNotEmpty(::afterSpace)) }
-}
-
-private fun Renderer.renderNewInstanceTypeDescriptor(typeDescriptor: DeclaredTypeDescriptor) {
+private fun Renderer.newInstanceTypeDescriptorSource(
+  typeDescriptor: DeclaredTypeDescriptor
+): Source =
   // Render qualified name if there's no qualifier, otherwise render simple name.
-  val typeDeclaration = typeDescriptor.typeDeclaration
-  if (typeDeclaration.isCapturingEnclosingInstance) {
-    render(identifierSource(typeDeclaration.ktSimpleName(asSuperType = true)))
-  } else {
-    render(qualifiedNameSource(typeDescriptor, asSuperType = true))
+  typeDescriptor.typeDeclaration.let { typeDeclaration ->
+    join(
+      if (typeDeclaration.isCapturingEnclosingInstance)
+        identifierSource(typeDeclaration.ktSimpleName(asSuperType = true))
+      else qualifiedNameSource(typeDescriptor, asSuperType = true),
+      invocationTypeArgumentsSource(typeDescriptor.typeArguments())
+    )
   }
-
-  renderInvocationTypeArguments(typeDescriptor.typeArguments())
-}
 
 private val DeclaredTypeDescriptor.nonAnonymousTypeDescriptor: DeclaredTypeDescriptor
   get() =
     if (typeDeclaration.isAnonymous) interfaceTypeDescriptors.firstOrNull() ?: superTypeDescriptor!!
     else this
 
-private fun Renderer.renderPostfixExpression(expression: PostfixExpression) {
-  renderLeftSubExpression(expression.precedence, expression.operand)
-  render(expression.operator.symbol)
-}
+private fun Renderer.postfixExpressionSource(expression: PostfixExpression): Source =
+  join(
+    leftSubExpressionSource(expression.precedence, expression.operand),
+    source(expression.operator.symbol)
+  )
 
-private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
-  expression.operator.let {
-    render(it.symbol)
-    // Emit a space after + and minus to avoid emitting + + as ++ and - -  and --.
-    if (it == PrefixOperator.PLUS || it == PrefixOperator.MINUS) sourceBuilder.append(" ")
+private fun Renderer.prefixExpressionSource(expression: PrefixExpression): Source =
+  expression.operator.let { operator ->
+    source(operator.symbol).let { symbolSource ->
+      rightSubExpressionSource(expression.precedence, expression.operand).let { operandSource ->
+        if (operator.needsSpace) spaceSeparated(symbolSource, operandSource)
+        else join(symbolSource, operandSource)
+      }
+    }
   }
-  renderRightSubExpression(expression.precedence, expression.operand)
-}
 
-private fun Renderer.renderSuperReference(superReference: SuperReference) {
-  renderSuperReference(superTypeDescriptor = null, qualifierTypeDescriptor = null)
-}
+private val PrefixOperator.needsSpace: Boolean
+  get() = this == PrefixOperator.PLUS || this == PrefixOperator.MINUS
 
-private fun Renderer.renderSuperReference(
+private fun Renderer.superReferenceSource(superReference: SuperReference): Source =
+  superReferenceSource(superTypeDescriptor = null, qualifierTypeDescriptor = null)
+
+private fun Renderer.superReferenceSource(
   superTypeDescriptor: DeclaredTypeDescriptor?,
   qualifierTypeDescriptor: DeclaredTypeDescriptor?
-) {
-  render("super")
-  if (superTypeDescriptor != null) {
-    renderInAngleBrackets { render(qualifiedNameSource(superTypeDescriptor, asSuperType = true)) }
-  }
-  if (qualifierTypeDescriptor != null) {
-    renderLabelReference(qualifierTypeDescriptor)
-  }
-}
+): Source =
+  join(
+    source("super"),
+    superTypeDescriptor.ifNotNullSource {
+      inAngleBrackets(qualifiedNameSource(it, asSuperType = true))
+    },
+    qualifierTypeDescriptor.ifNotNullSource { labelReferenceSource(it) }
+  )
 
-private fun Renderer.renderThisReference(thisReference: ThisReference) {
-  render("this")
-  if (thisReference.isQualified || renderThisReferenceWithLabel) {
-    renderLabelReference(thisReference.typeDescriptor)
-  }
-}
+private fun Renderer.thisReferenceSource(thisReference: ThisReference): Source =
+  join(
+    source("this"),
+    sourceIf(thisReference.isQualified || renderThisReferenceWithLabel) {
+      labelReferenceSource(thisReference.typeDescriptor)
+    }
+  )
 
-private fun Renderer.renderLabelReference(typeDescriptor: DeclaredTypeDescriptor) {
-  render(at(identifierSource(typeDescriptor.typeDeclaration.ktSimpleName)))
-}
+private fun labelReferenceSource(typeDescriptor: DeclaredTypeDescriptor): Source =
+  at(identifierSource(typeDescriptor.typeDeclaration.ktSimpleName))
 
-private fun Renderer.renderVariableDeclarationExpression(
+private fun Renderer.variableDeclarationExpressionSource(
   expression: VariableDeclarationExpression
-) {
-  renderSeparatedWith(expression.fragments, "\n") {
-    render(if (it.variable.isFinal) "val " else "var ")
-    renderVariableDeclarationFragment(it)
-  }
-}
+): Source =
+  newLineSeparated(
+    expression.fragments.map {
+      spaceSeparated(
+        source(if (it.variable.isFinal) "val" else "var"),
+        variableDeclarationFragmentSource(it)
+      )
+    }
+  )
 
-private fun Renderer.renderVariableReference(variableReference: VariableReference) {
-  renderName(variableReference.target)
-}
+private fun Renderer.variableReferenceSource(variableReference: VariableReference): Source =
+  nameSource(variableReference.target)
 
-private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclarationFragment) {
-  renderVariable(fragment.variable)
-  fragment.initializer?.let {
-    render(" = ")
-    renderExpression(it)
-  }
-}
+private fun Renderer.variableDeclarationFragmentSource(
+  fragment: VariableDeclarationFragment
+): Source =
+  assignment(
+    variableSource(fragment.variable),
+    fragment.initializer.ifNotNullSource(::expressionSource)
+  )
 
-fun Renderer.renderVariable(variable: Variable) {
-  renderName(variable)
+fun Renderer.variableSource(variable: Variable): Source =
+  colonSeparated(
+    nameSource(variable),
+    variable.typeDescriptor.let {
+      sourceIf(it.isKtDenotable && !it.isProtobufBuilder()) { typeDescriptorSource(it) }
+    }
+  )
 
-  val typeDescriptor = variable.typeDescriptor
-  if (typeDescriptor.isKtDenotable && !typeDescriptor.isProtobufBuilder()) {
-    render(": ")
-    render(typeDescriptorSource(typeDescriptor))
-  }
-}
-
-private fun Renderer.renderQualifier(memberReference: MemberReference) {
-  val qualifier = memberReference.qualifier
-  if (qualifier == null) {
-    if (memberReference.target.isStatic) {
-      // TODO(b/206482966): Move the checks in the backend to a verifier pass.
-      val enclosingTypeDescriptor = memberReference.target.enclosingTypeDescriptor!!
-      val ktCompanionQualifiedName =
-        enclosingTypeDescriptor.typeDeclaration.ktCompanionQualifiedName
-      render(
+private fun Renderer.qualifierSource(memberReference: MemberReference): Source =
+  memberReference.qualifier.let { qualifier ->
+    if (qualifier == null) {
+      if (memberReference.target.isStatic) {
+        // TODO(b/206482966): Move the checks in the backend to a verifier pass.
+        val enclosingTypeDescriptor = memberReference.target.enclosingTypeDescriptor!!
+        val ktCompanionQualifiedName =
+          enclosingTypeDescriptor.typeDeclaration.ktCompanionQualifiedName
         if (ktCompanionQualifiedName != null) topLevelQualifiedNameSource(ktCompanionQualifiedName)
         else qualifiedNameSource(enclosingTypeDescriptor)
-      )
-      render(".")
-    }
-  } else {
-    if (memberReference is MethodCall && qualifier is SuperReference) {
-      val qualifierTypeDescriptor = qualifier.typeDescriptor
-      renderSuperReference(
-        superTypeDescriptor =
-          qualifierTypeDescriptor
-            .directSuperTypeForMethodCall(memberReference.target)
-            // Don't render <Any> (see: KT-54346)
-            ?.takeIf { !isJavaLangObject(it) },
-        qualifierTypeDescriptor =
-          qualifierTypeDescriptor.takeIf { it.typeDeclaration != currentType!!.declaration }
-      )
-      render(".")
-    } else if (
-      memberReference is NewInstance && memberReference.typeDescriptor.typeDeclaration.isLocal
-    ) {
-      // Don't render qualifier for local classes.
-      // TODO(b/219950593): Implement a pass which will remove unnecessary qualifiers, and then
-      // remove this `if` branch.
-    } else if (memberReference.target.isInstanceMember || !qualifier.isNonQualifiedThisReference) {
-      renderLeftSubExpression(memberReference.precedence, qualifier)
-      render(".")
+      } else {
+        emptySource
+      }
+    } else {
+      if (memberReference is MethodCall && qualifier is SuperReference) {
+        qualifier.typeDescriptor.let { qualifierTypeDescriptor ->
+          superReferenceSource(
+            superTypeDescriptor =
+              qualifierTypeDescriptor
+                .directSuperTypeForMethodCall(memberReference.target)
+                // Don't render <Any> (see: KT-54346)
+                ?.takeIf { !isJavaLangObject(it) },
+            qualifierTypeDescriptor =
+              qualifierTypeDescriptor.takeIf { it.typeDeclaration != currentType!!.declaration }
+          )
+        }
+      } else if (
+        memberReference is NewInstance && memberReference.typeDescriptor.typeDeclaration.isLocal
+      ) {
+        // Don't render qualifier for local classes.
+        // TODO(b/219950593): Implement a pass which will remove unnecessary qualifiers, and then
+        // remove this `if` branch.
+        emptySource
+      } else if (
+        memberReference.target.isInstanceMember || !qualifier.isNonQualifiedThisReference
+      ) {
+        leftSubExpressionSource(memberReference.precedence, qualifier)
+      } else {
+        emptySource
+      }
     }
   }
-}
 
-private fun Renderer.renderLeftSubExpression(precedence: Precedence, operand: Expression) {
-  renderExpressionInParens(operand, precedence.requiresParensOnLeft(operand.precedence))
-}
+private fun Renderer.leftSubExpressionSource(precedence: Precedence, operand: Expression) =
+  expressionInParensSource(operand, precedence.requiresParensOnLeft(operand.precedence))
 
-private fun Renderer.renderRightSubExpression(precedence: Precedence, operand: Expression) {
-  renderExpressionInParens(operand, precedence.requiresParensOnRight(operand.precedence))
-}
+private fun Renderer.rightSubExpressionSource(precedence: Precedence, operand: Expression) =
+  expressionInParensSource(operand, precedence.requiresParensOnRight(operand.precedence))
 
-private fun Renderer.renderExpressionInParens(expression: Expression, needsParentheses: Boolean) {
-  if (needsParentheses) renderInParentheses { renderExpression(expression) }
-  else renderExpression(expression)
-}
+private fun Renderer.expressionInParensSource(expression: Expression, needsParentheses: Boolean) =
+  expressionSource(expression).letIf(needsParentheses, ::inRoundBrackets)
 
-private fun Renderer.renderNonNullAssertion() {
-  render("!!")
-}
-
-private val Expression.isNonQualifiedThisReference
+private val Expression.isNonQualifiedThisReference: Boolean
   get() = this is ThisReference && !isQualified
 
-private fun Precedence.requiresParensOnLeft(operand: Precedence) =
+private fun Precedence.requiresParensOnLeft(operand: Precedence): Boolean =
   operand == Precedence.CONDITIONAL ||
     value > operand.value ||
     (associativity != Associativity.LEFT && this == operand)
 
-private fun Precedence.requiresParensOnRight(operand: Precedence) =
+private fun Precedence.requiresParensOnRight(operand: Precedence): Boolean =
   value > operand.value || (associativity != Associativity.RIGHT && this == operand)

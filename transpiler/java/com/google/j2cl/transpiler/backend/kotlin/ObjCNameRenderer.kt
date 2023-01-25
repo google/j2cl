@@ -45,10 +45,7 @@ internal fun Renderer.optInExperimentalObjCNameFileAnnotationSource(): Source =
     source("@file:"),
     topLevelQualifiedNameSource("kotlin.OptIn"),
     inRoundBrackets(
-      join(
-        topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCName"),
-        source("::class")
-      )
+      classLiteral(topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCName"))
     )
   )
 

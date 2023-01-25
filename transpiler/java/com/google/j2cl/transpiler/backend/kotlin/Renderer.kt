@@ -18,8 +18,6 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.Problems
 import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Type
-import com.google.j2cl.transpiler.backend.common.SourceBuilder
-import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
@@ -28,9 +26,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.source
 data class Renderer(
   /** Rendering environment. */
   val environment: Environment,
-
-  /** Output source builder. */
-  val sourceBuilder: SourceBuilder,
 
   /** Rendering problems. */
   val problems: Problems,
@@ -51,99 +46,7 @@ data class Renderer(
   /** Top-level qualified names, which will be rendered as simple name without import. */
   val topLevelQualifiedNames: Set<String> = setOf()
 ) {
-  // TODO(b/263161219): Remove when Renderer is converted to idiomatic Kotlin.
-  fun render(source: Source) {
-    source.appendTo(sourceBuilder)
-  }
-
-  // TODO(b/263161219): Remove when Renderer is converted to idiomatic Kotlin.
-  fun renderedSource(fn: Renderer.() -> Unit): Source =
-    source(SourceBuilder().also { copy(sourceBuilder = it).fn() }.build())
-
-  fun renderNewLine() {
-    sourceBuilder.newLine()
-  }
-
-  fun render(string: String) {
-    sourceBuilder.append(string)
-  }
-
-  fun renderName(hasName: HasName) {
-    render(nameSource(hasName))
-  }
-
   fun nameSource(hasName: HasName) = identifierSource(environment.identifier(hasName))
-
-  fun renderInCurlyBrackets(renderFn: () -> Unit) {
-    sourceBuilder.openBrace()
-    renderFn()
-    sourceBuilder.closeBrace()
-  }
-
-  fun renderIndented(renderFn: () -> Unit) {
-    sourceBuilder.indent()
-    renderFn()
-    sourceBuilder.unindent()
-  }
-
-  fun renderIndentedIf(condition: Boolean, renderFn: () -> Unit) {
-    if (condition) renderIndented(renderFn) else renderFn()
-  }
-
-  fun renderInParentheses(renderFn: () -> Unit) {
-    render("(")
-    renderFn()
-    render(")")
-  }
-
-  fun renderInSquareBrackets(renderFn: () -> Unit) {
-    render("[")
-    renderFn()
-    render("]")
-  }
-
-  fun renderInAngleBrackets(renderFn: () -> Unit) {
-    render("<")
-    renderFn()
-    render(">")
-  }
-
-  fun renderInCommentBrackets(renderFn: () -> Unit) {
-    render("/* ")
-    renderFn()
-    render(" */")
-  }
-
-  fun <V> renderSeparatedWith(values: Iterable<V>, separator: String, renderFn: (V) -> Unit) {
-    var first = true
-    for (value in values) {
-      if (first) {
-        first = false
-      } else {
-        render(separator)
-      }
-      renderFn(value)
-    }
-  }
-
-  fun <V> renderCommaSeparated(values: Iterable<V>, renderFn: (V) -> Unit) {
-    renderSeparatedWith(values, ", ", renderFn)
-  }
-
-  fun <V> renderDotSeparated(values: Iterable<V>, renderFn: (V) -> Unit) {
-    renderSeparatedWith(values, ".", renderFn)
-  }
-
-  fun <V> renderStartingWithNewLines(values: Iterable<V>, renderFn: (V) -> Unit) {
-    for (value in values) {
-      renderNewLine()
-      renderFn(value)
-    }
-  }
-
-  fun <V> renderSeparatedWithEmptyLine(values: Iterable<V>, renderFn: (V) -> Unit) {
-    renderSeparatedWith(values, "\n\n", renderFn)
-  }
 
   fun todoSource(string: String) = join(source("TODO"), inRoundBrackets(literalSource(string)))
 }
