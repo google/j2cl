@@ -1,5 +1,5 @@
 // Generated from "genericequals/GenericEquals.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package genericequals
 
@@ -8,15 +8,19 @@ import kotlin.Any
 import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("GenericequalsGenericEquals", exact = true)
 open class GenericEquals<T> {
  @JvmField
+ @HiddenFromObjC
  val value_private_2: T
 
  @JvmField
+ @HiddenFromObjC
  val value2_private_2: GenericEquals<T>?
 
  constructor(

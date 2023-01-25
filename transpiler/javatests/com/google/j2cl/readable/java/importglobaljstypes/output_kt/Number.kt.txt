@@ -1,5 +1,5 @@
 // Generated from "importglobaljstypes/Number.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package importglobaljstypes
 
@@ -11,7 +11,9 @@ import kotlin.IntArray
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("ImportglobaljstypesNumber", exact = true)
@@ -36,6 +38,7 @@ open class Number {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   external fun getFromCharCodeFunction_private_2(): Number.NativeFunction<String?>?
 
   @JvmStatic

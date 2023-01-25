@@ -1,5 +1,5 @@
 // Generated from "unreachableclass/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package unreachableclass
 
@@ -8,6 +8,8 @@ import kotlin.Any
 import kotlin.OptIn
 import kotlin.RuntimeException
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("UnreachableclassMain", exact = true)
@@ -15,8 +17,10 @@ open class Main {
  init {
   try {} catch (e: RuntimeException) {
    open class ___1A {
+    @HiddenFromObjC
     open fun m_pp_unreachableclass() {
      open class ___1B {
+      @HiddenFromObjC
       fun n_private_2() {}
      }
     }

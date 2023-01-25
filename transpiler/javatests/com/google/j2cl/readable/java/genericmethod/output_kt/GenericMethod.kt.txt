@@ -1,5 +1,5 @@
 // Generated from "genericmethod/GenericMethod.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package genericmethod
 
@@ -15,7 +15,9 @@ import kotlin.arrayOf
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("GenericmethodGenericMethod", exact = true)
@@ -133,37 +135,44 @@ open class GenericMethod<T> {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <V> testLowerWildcardBound_pp_genericmethod(consumer: GenericMethod.Consumer<in V>?, v: V) {
    consumer!!.accept(v)
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <V> testUpperWildcardBound_pp_genericmethod(supplier: GenericMethod.Supplier<out V>?): V {
    return supplier!!.get()
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T_1: Number?> methodWithBoundTypeVariable_pp_genericmethod() {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testMethodCallsWithCaptureTypeArguments_pp_genericmethod() {
    GenericMethod.methodWithBoundTypeVariable_pp_genericmethod<Number?>()
   }
  }
 
  open class SuperContainer<C: GenericMethod.Container<*>?> {
+  @HiddenFromObjC
   open fun get_pp_genericmethod(): C {
    return null as C
   }
  }
 
  open class Container<CT: GenericMethod.Content?> {
+  @HiddenFromObjC
   open fun get_pp_genericmethod(): CT {
    return null as CT
   }
  }
 
  open class Content {
+  @HiddenFromObjC
   open fun getProp_pp_genericmethod(): String? {
    return null
   }

@@ -1,5 +1,5 @@
 // Generated from "systemgetproperty/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package systemgetproperty
 
@@ -10,17 +10,21 @@ import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("SystemgetpropertyMain", exact = true)
 open class Main {
  companion object {
   @JvmField
+  @HiddenFromObjC
   val property_private_2: String? = System.getProperty("jre.classMetadata")
 
   @JvmField
+  @HiddenFromObjC
   val propertyWithDefault_private_2: String? = System.getProperty("jre.classMetadata", "default")
 
   @JvmStatic
@@ -38,6 +42,7 @@ open class Main {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun mightHaveSideEffects_private_2(): String? {
    return "Foo"
   }

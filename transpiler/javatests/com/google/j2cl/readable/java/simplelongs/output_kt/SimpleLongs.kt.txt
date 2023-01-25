@@ -1,5 +1,5 @@
 // Generated from "simplelongs/SimpleLongs.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package simplelongs
 
@@ -8,7 +8,9 @@ import kotlin.Int
 import kotlin.Long
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import kotlin.run
 
@@ -22,6 +24,7 @@ open class SimpleLongs {
  }
 
  @JvmField
+ @HiddenFromObjC
  var sideEffect_private_2: Int = 0
 
  open fun getWithSideEffect(): SimpleLongs? {

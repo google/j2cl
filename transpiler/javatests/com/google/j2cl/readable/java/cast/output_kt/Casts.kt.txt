@@ -1,5 +1,5 @@
 // Generated from "cast/Casts.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package cast
 
@@ -19,7 +19,9 @@ import kotlin.OptIn
 import kotlin.Short
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("CastCasts", exact = true)
@@ -52,6 +54,7 @@ open class Casts {
   val bar: Any? = null as Array<Array<Any?>?>?
  }
 
+ @HiddenFromObjC
  fun functionForInstanceofTest_private_2() {}
 
  open fun testCastObjectAfterInstanceOf() {

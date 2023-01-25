@@ -1,5 +1,5 @@
 // Generated from "localnamecollision/LocalNameCollision.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package localnamecollision
 
@@ -10,8 +10,10 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import localnamecollision.Class
 
@@ -55,12 +57,15 @@ open class LocalNameCollision {
 open class A {
  companion object {
   @JvmField
+  @HiddenFromObjC
   var A_pp_localnamecollision: localnamecollision.A? = null
 
   @JvmField
+  @HiddenFromObjC
   var B_pp_localnamecollision: localnamecollision.A.B? = null
 
   @JvmStatic
+  @HiddenFromObjC
   fun test_pp_localnamecollision() {
    localnamecollision.A.A_pp_localnamecollision = localnamecollision.A.A_pp_localnamecollision
    localnamecollision.A.B_pp_localnamecollision = localnamecollision.A.B_pp_localnamecollision

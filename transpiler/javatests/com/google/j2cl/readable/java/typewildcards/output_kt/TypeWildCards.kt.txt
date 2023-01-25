@@ -1,5 +1,5 @@
 // Generated from "typewildcards/TypeWildCards.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package typewildcards
 
@@ -9,8 +9,10 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 fun interface Function<I, O> {
@@ -22,6 +24,7 @@ fun interface Function<I, O> {
 interface List<I> {}
 
 open class GenericType<T> {
+ @HiddenFromObjC
  open fun get_pp_typewildcards(): T {
   return null as T
  }
@@ -117,16 +120,19 @@ open class TypeWildCards {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <F, V> transform_private_2(from: List<F>?, function: Function<in F, out V>?): List<V>? {
    return null
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <E> concat_private_2(a: List<out E>?, b: List<out E>?): List<E>? {
    return null
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun takesRecursiveGeneric_private_2(foo: GenericType<TypeWildCards.Foo?>?) {}
 
   @JvmStatic
@@ -137,14 +143,17 @@ open class TypeWildCards {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <D> createMultipleGenerics_pp_typewildcards(foo: List<D>?): TypeWildCards.MultipleGenerics<D, String?, List<D>?>? {
    return TypeWildCards.MultipleGenerics<D, String?, List<D>?>()
   }
 
   @JvmField
+  @HiddenFromObjC
   var listWithWildcard_pp_typewildcards: List<*>? = null
 
   @JvmField
+  @HiddenFromObjC
   var valMultipleGenerics_pp_typewildcards: TypeWildCards.MultipleGenerics<*, String?, *>? = TypeWildCards.createMultipleGenerics_pp_typewildcards(TypeWildCards.listWithWildcard_pp_typewildcards) as TypeWildCards.MultipleGenerics<*, String?, *>?
  }
 
@@ -158,6 +167,7 @@ open class TypeWildCards {
 
  open class A: TypeWildCards.X {
   @JvmField
+  @HiddenFromObjC
   var f_pp_typewildcards: Int = 0
 
   open override fun m() {}

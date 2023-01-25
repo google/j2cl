@@ -1,5 +1,5 @@
 // Generated from "rawtype/RawType.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package rawtype
 
@@ -7,26 +7,34 @@ import javaemul.lang.*
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 open class RawType {
  @JvmField
+ @HiddenFromObjC
  var rawUnbound_pp_rawtype: RawType.Unbound<Any?>? = RawType.Unbound<Any?>()
 
  @JvmField
+ @HiddenFromObjC
  var rawBound_pp_rawtype: RawType.Bound<RawType?>? = RawType.Bound<RawType?>()
 
  @JvmField
+ @HiddenFromObjC
  var rawBoundRecursively_pp_rawtype: RawType.BoundRecursively<*>? = RawType.BoundRecursively()
 
  @JvmField
+ @HiddenFromObjC
  var rawBoundDependentDirect_pp_rawtype: RawType.BoundDependentDirect<Any?, Any>? = RawType.BoundDependentDirect<Any?, Any>()
 
  @JvmField
+ @HiddenFromObjC
  var rawBoundDependentIndirect_pp_rawtype: RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>? = RawType.BoundDependentIndirect<Any?, RawType.Unbound<Any?>?>()
 
  open class Unbound<T> {
+  @HiddenFromObjC
   open fun method_pp_rawtype(t: T): T {
    return t
   }
@@ -41,6 +49,7 @@ open class RawType {
  open class BoundDependentIndirect<A, B: RawType.Unbound<A>?> {}
 
  open class RawUnboundChild: RawType.Unbound<Any?>() {
+  @HiddenFromObjC
   open override fun method_pp_rawtype(o: Any?): Any? {
    return super<RawType.Unbound>.method_pp_rawtype(o)
   }

@@ -1,5 +1,5 @@
 // Generated from "lambdas/Lambdas.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package lambdas
 
@@ -19,9 +19,11 @@ import kotlin.Throwable
 import kotlin.Unit
 import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.let
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("LambdasLambdas", exact = true)
@@ -118,6 +120,7 @@ open class Lambdas {
   return intf!!.m(e)
  }
 
+ @HiddenFromObjC
  open fun <T> callWithBiFunction_pp_lambdas(fn: Lambdas.BiFunction<T, String?, Double?>?): Lambdas.GenericFunctionalInterface<T>? {
   return null
  }
@@ -198,6 +201,7 @@ open class Lambdas {
   }
 
   @JvmField
+  @HiddenFromObjC
   var identityFunction_private_2: Lambdas.IdentityFunction? = null
 
   @JvmStatic

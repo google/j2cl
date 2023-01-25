@@ -20,6 +20,7 @@ import com.google.j2cl.common.StringUtils
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
+import com.google.j2cl.transpiler.ast.MemberDescriptor
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
@@ -40,14 +41,22 @@ import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 
-internal fun Renderer.optInExperimentalObjCNameFileAnnotationSource(): Source =
+private fun Renderer.fileOptInAnnotationSource(feature: Source, vararg features: Source): Source =
   join(
     source("@file:"),
     topLevelQualifiedNameSource("kotlin.OptIn"),
-    inRoundBrackets(
-      classLiteral(topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCName"))
-    )
+    inRoundBrackets(commaSeparated(feature, *features))
   )
+
+internal val Renderer.fileOptInAnnotationSource: Source
+  get() =
+    fileOptInAnnotationSource(
+      classLiteral(topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCName")),
+      classLiteral(topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCRefinement"))
+    )
+
+internal val Renderer.hiddenFromObjCAnnotationSource: Source
+  get() = at(topLevelQualifiedNameSource("kotlin.native.HiddenFromObjC"))
 
 internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
   join(
@@ -60,23 +69,29 @@ internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = n
     )
   )
 
-internal fun Renderer.objCNameAnnotationSource(typeDeclaration: TypeDeclaration): Source =
+internal fun Renderer.objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
   sourceIf(typeDeclaration.needsObjCNameAnnotation) {
     objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
   }
 
-internal fun Renderer.objCNameAnnotationSource(
+internal fun Renderer.objCAnnotationSource(
   methodDescriptor: MethodDescriptor,
   methodObjCNames: MethodObjCNames?
 ): Source =
   sourceIf(!methodDescriptor.isConstructor) {
-    methodObjCNames?.methodName.ifNotNullSource { objCNameAnnotationSource(it) }
+    if (methodDescriptor.isHiddenFromObjC) hiddenFromObjCAnnotationSource
+    else methodObjCNames?.methodName.ifNotNullSource { objCNameAnnotationSource(it) }
   }
 
-internal fun Renderer.objCNameAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
-  sourceIf(fieldDescriptor.needsObjCNameAnnotations) {
-    objCNameAnnotationSource(fieldDescriptor.objCName)
-  }
+internal fun Renderer.objCAnnotationSource(fieldDescriptor: FieldDescriptor): Source =
+  if (fieldDescriptor.isHiddenFromObjC) hiddenFromObjCAnnotationSource
+  else
+    sourceIf(fieldDescriptor.needsObjCNameAnnotations) {
+      objCNameAnnotationSource(fieldDescriptor.objCName)
+    }
+
+private val MemberDescriptor.isHiddenFromObjC
+  get() = !visibility.needsObjCNameAnnotation
 
 private fun parameterSource(name: String, valueSource: Source): Source =
   assignment(source(name), valueSource)

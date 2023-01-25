@@ -1,5 +1,5 @@
 // Generated from "innerclassinitorder/InnerClassInitOrder.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package innerclassinitorder
 
@@ -12,8 +12,10 @@ import kotlin.String
 import kotlin.arrayOfNulls
 import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("InnerclassinitorderInnerClassInitOrder", exact = true)
@@ -66,6 +68,7 @@ open class InnerClassInitOrder {
  open fun testInnerClassLoop() {
   abstract class ___1AddNumber {
    @JvmField
+   @HiddenFromObjC
    var num_pp_innerclassinitorder: Int = 0
 
    constructor(
@@ -95,9 +98,11 @@ open class InnerClassInitOrder {
  }
 
  @JvmField
+ @HiddenFromObjC
  val outer_private_2: InnerClassInitOrder.Outer? = InnerClassInitOrder.Outer(1)
 
  @JvmField
+ @HiddenFromObjC
  val outerIsSuper_private_2: InnerClassInitOrder.Outer.OuterIsSuper? = this.outer_private_2!!.OuterIsSuper(2)
 
  open fun testOuterIsNotSuper() {
@@ -198,6 +203,7 @@ open class InnerClassInitOrder {
    this.callInner_pp_innerclassinitorder()
   }
 
+  @HiddenFromObjC
   open fun callInner_pp_innerclassinitorder() {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1
    open class ___1ReallyInnerClass {
@@ -205,6 +211,7 @@ open class InnerClassInitOrder {
      this.callReallyInner_pp_innerclassinitorder()
     }
 
+    @HiddenFromObjC
     open fun callReallyInner_pp_innerclassinitorder() {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 10
     }
@@ -215,6 +222,7 @@ open class InnerClassInitOrder {
 
  open class P1<T1> {
   @JvmField
+  @HiddenFromObjC
   val value_pp_innerclassinitorder: Int
 
   constructor(): this(1)

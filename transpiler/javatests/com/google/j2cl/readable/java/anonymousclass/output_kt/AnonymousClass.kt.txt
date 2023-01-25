@@ -1,5 +1,5 @@
 // Generated from "anonymousclass/AnonymousClass.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package anonymousclass
 
@@ -9,8 +9,10 @@ import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 abstract class SomeClass {
@@ -26,6 +28,7 @@ abstract class SomeClassWithStaticMembers {
 
  companion object {
   @JvmStatic
+  @HiddenFromObjC
   fun staticMethod_pp_anonymousclass() {}
  }
 }
@@ -33,14 +36,17 @@ abstract class SomeClassWithStaticMembers {
 @ObjCName("AnonymousclassAnonymousClass", exact = true)
 open class AnonymousClass {
  @JvmField
+ @HiddenFromObjC
  var i_pp_anonymousclass: Int = 0
 
  open fun main() {
   val instance: SomeClass? = object : SomeClass(this@AnonymousClass.i_pp_anonymousclass) {
    @JvmField
+   @HiddenFromObjC
    var object_pp_anonymousclass: Any? = this
 
    @JvmField
+   @HiddenFromObjC
    var outer_pp_anonymousclass: Any? = this@AnonymousClass
 
    open override fun foo(): String? {
@@ -49,9 +55,11 @@ open class AnonymousClass {
   }
   val instanceWithStaticMembers: SomeClassWithStaticMembers? = object : SomeClassWithStaticMembers(this@AnonymousClass.i_pp_anonymousclass) {
    @JvmField
+   @HiddenFromObjC
    var object_pp_anonymousclass: Any? = this
 
    @JvmField
+   @HiddenFromObjC
    var outer_pp_anonymousclass: Any? = this@AnonymousClass
 
    open override fun foo(): String? {

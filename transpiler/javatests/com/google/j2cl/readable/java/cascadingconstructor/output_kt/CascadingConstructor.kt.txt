@@ -1,5 +1,5 @@
 // Generated from "cascadingconstructor/CascadingConstructor.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package cascadingconstructor
 
@@ -7,15 +7,19 @@ import javaemul.lang.*
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("CascadingconstructorCascadingConstructor", exact = true)
 open class CascadingConstructor {
  @JvmField
+ @HiddenFromObjC
  var a_private_2: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var b_private_2: Int = 0
 
  constructor(a: Int, b: Int) {

@@ -1,5 +1,5 @@
 // Generated from "parameterassignments/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package parameterassignments
 
@@ -12,8 +12,10 @@ import kotlin.IntArray
 import kotlin.OptIn
 import kotlin.arrayOf
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.intArrayOf
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("ParameterassignmentsMain", exact = true)
@@ -28,23 +30,27 @@ open class Main {
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
  }
 
+ @HiddenFromObjC
  open fun test_pp_parameterassignments(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   return nonFinal_1
  }
 
+ @HiddenFromObjC
  open fun testObjectVarargs_pp_parameterassignments(o: Any?, vararg oa: Any?) {
   var oa_1: Array<Any?>? = oa as Array<Any?>?
   oa_1 = (arrayOf<Any?>(o, oa_1!![0]) as Array<*>?) as Array<Any?>?
  }
 
+ @HiddenFromObjC
  open fun testPrimitiveVarargs_pp_parameterassignments(i: Int, vararg ia: Int) {
   var ia_1: IntArray? = ia
   ia_1 = intArrayOf(i, ia_1!![0])
  }
 
  @JvmField
+ @HiddenFromObjC
  val fn_pp_parameterassignments: Main.Fn? = Main.Fn { nonFinal: Int, implicitFinal: Int ->
   var nonFinal_1: Int = nonFinal
   nonFinal_1 = nonFinal_1 + implicitFinal
@@ -52,11 +58,13 @@ open class Main {
  }
 
  @JvmField
+ @HiddenFromObjC
  val fnPrimitiveVarargs_pp_parameterassignments: Main.FnPrimitiveVarargs? = Main.FnPrimitiveVarargs { i: Int, `is`: IntArray? ->
   `is`!![0] = `is`!![1]
  }
 
  @JvmField
+ @HiddenFromObjC
  val fnObjectVarargs_pp_parameterassignments: Main.FnObjectVarargs? = Main.FnObjectVarargs { o: Any?, os: Array<*>? ->
   val os_1: Array<Any?>? = os as Array<Any?>?
   os_1!![0] = os_1!![1]
@@ -94,6 +102,7 @@ open class Main {
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal
   }
 
+  @HiddenFromObjC
   open override fun test_pp_parameterassignments(nonFinal: Int, explicitFinal: Int, implicitFinal: Int): Int {
    var nonFinal_1: Int = nonFinal
    nonFinal_1 = nonFinal_1 + explicitFinal + implicitFinal

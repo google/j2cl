@@ -1,5 +1,5 @@
 // Generated from "jstype/SomeJsType.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package jstype
 
@@ -9,7 +9,9 @@ import kotlin.Double
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("JstypeSomeJsType", exact = true)
@@ -18,9 +20,11 @@ open class SomeJsType<T> {
  var publicField: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var privateField_private_2: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var packageField_pp_jstype: Int = 0
 
  @JvmField
@@ -28,8 +32,10 @@ open class SomeJsType<T> {
 
  open fun publicMethod() {}
 
+ @HiddenFromObjC
  fun privateMethod_private_2() {}
 
+ @HiddenFromObjC
  open fun packageMethod_pp_jstype() {}
 
  open fun protectedMethod() {}
@@ -42,6 +48,7 @@ open class SomeJsType<T> {
   this.protectedMethod()
  }
 
+ @HiddenFromObjC
  fun testStarAndWildCard_private_2(s: SomeJsType.Star?, w: SomeJsType.Wildcard?): SomeJsType.Wildcard? {
   val `object`: Any? = Any()
   val star: SomeJsType.Star? = Double.valueOf(3.0) as SomeJsType.Star?

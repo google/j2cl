@@ -1,5 +1,5 @@
 // Generated from "localclasswithoutergenerics/LocalClassWithOuterGenerics.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package localclasswithoutergenerics
 
@@ -8,7 +8,9 @@ import kotlin.Any
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("LocalclasswithoutergenericsLocalClassWithOuterGenerics", exact = true)
@@ -17,10 +19,12 @@ open class LocalClassWithOuterGenerics<A> {
   @JvmStatic
   fun <T> foo() {
    open class ___1Bar {
+    @HiddenFromObjC
     open fun baz_pp_localclasswithoutergenerics(other: ___1Bar?) {}
    }
    val bar: ___1Bar? = ___1Bar()
    open class ___1Baz<S> {
+    @HiddenFromObjC
     open fun qux_pp_localclasswithoutergenerics(foo: ___1Baz<S>?, bar: ___1Baz<T>?, baz: ___1Baz<String?>?) {}
    }
    val baz: ___1Baz<Any?>? = ___1Baz<Any?>()

@@ -1,5 +1,5 @@
 // Generated from "autoboxing/AutoBoxing.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package autoboxing
 
@@ -20,7 +20,9 @@ import kotlin.Unit
 import kotlin.assert
 import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import kotlin.run
 
@@ -415,6 +417,7 @@ open class AutoBoxing {
 
  open fun testUnbox_withCast() {
   open class ___1Supplier<T> {
+   @HiddenFromObjC
    open fun get_pp_autoboxing(): T {
     return null as T
    }
@@ -434,6 +437,7 @@ open class AutoBoxing {
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___1Local<T: Long?> {
+    @HiddenFromObjC
     open fun toLong_pp_autoboxing(l: T): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()
@@ -450,6 +454,7 @@ open class AutoBoxing {
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
    open class ___2Local<T> where T: Long?, T: Comparable<Long>?, T: Long?, T: Comparable<Long>? {
+    @HiddenFromObjC
     open fun toLong_pp_autoboxing(l: T): Long {
      assert(l!!.equals(Long.valueOf(11L)))
      return l!!.toLong()

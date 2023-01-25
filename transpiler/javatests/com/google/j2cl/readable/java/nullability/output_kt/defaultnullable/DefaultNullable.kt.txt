@@ -1,5 +1,5 @@
 // Generated from "nullability/defaultnullable/DefaultNullable.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package nullability.defaultnullable
 
@@ -18,46 +18,60 @@ import kotlin.arrayOfNulls
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("NullabilityDefaultnullableDefaultNullable", exact = true)
 open class DefaultNullable {
  @JvmField
+ @HiddenFromObjC
  var f1_private_2: String? = "Hello"
 
  @JvmField
+ @HiddenFromObjC
  var f2_private_2: String? = null
 
  @JvmField
+ @HiddenFromObjC
  var f3_private_2: String? = null
 
  @JvmField
+ @HiddenFromObjC
  var f4_private_2: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
  @JvmField
+ @HiddenFromObjC
  var f5_private_2: MutableList<String?>? = ArrayList<String>() as MutableList<String?>?
 
  @JvmField
+ @HiddenFromObjC
  var f6_private_2: MutableList<String?>? = ArrayList<String?>()
 
  @JvmField
+ @HiddenFromObjC
  var f7_private_2: MutableList<String?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var f8_private_2: Array<String?>? = arrayOf<String?>()
 
  @JvmField
+ @HiddenFromObjC
  var f9_private_2: Array<String?>? = arrayOf<String?>()
 
  @JvmField
+ @HiddenFromObjC
  var f10_private_2: Array<String?>? = arrayOf<String?>()
 
  @JvmField
+ @HiddenFromObjC
  var f11_private_2: Unit? = null
 
  @JvmField
+ @HiddenFromObjC
  var f12_private_2: Any = Any()
 
  open fun m1(
@@ -68,9 +82,11 @@ open class DefaultNullable {
  }
 
  @JvmField
+ @HiddenFromObjC
  var f13_private_2: Any
 
  @JvmField
+ @HiddenFromObjC
  var f14_private_2: Any? = null
 
  constructor() {
@@ -90,8 +106,10 @@ open class DefaultNullable {
   val args_1: Array<String?>? = args as Array<String?>?
  }
 
+ @HiddenFromObjC
  open fun <T: DefaultNullable.NullableBound<T>?> methodWithNullableBound_pp_nullability_defaultnullable() {}
 
+ @HiddenFromObjC
  open fun <T: DefaultNullable.NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_defaultnullable() {}
 
  open fun casts() {
@@ -106,6 +124,7 @@ open class DefaultNullable {
 
  companion object {
   @JvmStatic
+  @HiddenFromObjC
   fun <N> genericNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<N>?, n: N?) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
    o!!.setNonNull_pp_nullability_defaultnullable(n as N)
@@ -122,6 +141,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <N: Any> genericNonNullMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNonNullable<N>?, n: N) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
    o!!.setNonNull_pp_nullability_defaultnullable(n)
@@ -138,6 +158,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <N> genericDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<N>?, n: N) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
    o!!.setNonNull_pp_nullability_defaultnullable(n)
@@ -154,6 +175,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun parametrizedNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<String?>?, s: String?) {
    o!!.setNullable_pp_nullability_defaultnullable(s)
    o!!.setNonNull_pp_nullability_defaultnullable(s!!)
@@ -170,6 +192,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun parametrizedNonNullMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNonNullable<String>?, s: String) {
    o!!.setNullable_pp_nullability_defaultnullable(s)
    o!!.setNonNull_pp_nullability_defaultnullable(s)
@@ -186,6 +209,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun parametrizedDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<String?>?, s: String?) {
    o!!.setNullable_pp_nullability_defaultnullable(s)
    o!!.setNonNull_pp_nullability_defaultnullable(s!!)
@@ -202,57 +226,75 @@ open class DefaultNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcard_pp_nullability_defaultnullable(l: MutableList<*>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsDefaultNullabilityObject_pp_nullability_defaultnullable(l: MutableList<*>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsNullableObject_pp_nullability_defaultnullable(l: MutableList<*>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsNonNullObject_pp_nullability_defaultnullable(l: MutableList<*>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsDefaultNullabilityString_pp_nullability_defaultnullable(l: MutableList<out String?>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsNullableString_pp_nullability_defaultnullable(l: MutableList<out String?>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsNonNullString_pp_nullability_defaultnullable(l: MutableList<out String>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T> testListOfWildcardExtendsDefaultNullabilityVariable_pp_nullability_defaultnullable(l: MutableList<out T>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T> testListOfWildcardExtendsNullableVariable_pp_nullability_defaultnullable(l: MutableList<out T?>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperDefaultNullabilityObject_pp_nullability_defaultnullable(l: MutableList<in Any?>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperNullableObject_pp_nullability_defaultnullable(l: MutableList<in Any?>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperNonNullObject_pp_nullability_defaultnullable(l: MutableList<in Any>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperDefaultNullabilityString_pp_nullability_defaultnullable(l: MutableList<in String?>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperNullableString_pp_nullability_defaultnullable(l: MutableList<in String?>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperNonNullString_pp_nullability_defaultnullable(l: MutableList<in String>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T> testListOfWildcardSuperDefaultNullabilityVariable_pp_nullability_defaultnullable(l: MutableList<in T>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T> testListOfWildcardSuperNullableVariable_pp_nullability_defaultnullable(l: MutableList<in T?>?) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testLocalNullability_pp_nullability_defaultnullable() {
    val stringConsumer: DefaultNullable.Consumer<String?>? = null as DefaultNullable.Consumer<String?>?
    val nullableStringConsumer: DefaultNullable.Consumer<String?>? = null as DefaultNullable.Consumer<String?>?
@@ -261,6 +303,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun testNonNullableLambdas_pp_nullability_defaultnullable() {
    val lambda: DefaultNullable.NullMarkedConsumer<String?>? = DefaultNullable.NullMarkedConsumer<String?> { s: String? ->
    }
@@ -273,6 +316,7 @@ open class DefaultNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun accept_pp_nullability_defaultnullable(s: String?) {}
  }
 
@@ -290,78 +334,99 @@ open class DefaultNullable {
 
  open class ParameterizedDefaultNullability<N> {
   @JvmField
+  @HiddenFromObjC
   var nullable_pp_nullability_defaultnullable: N? = null
 
   @JvmField
+  @HiddenFromObjC
   var nonNullable_pp_nullability_defaultnullable: N = null as N
 
   @JvmField
+  @HiddenFromObjC
   var defaultNullability_pp_nullability_defaultnullable: N = null as N
 
   constructor(n: N) {
    this.nonNullable_pp_nullability_defaultnullable = n
   }
 
+  @HiddenFromObjC
   open fun getNullable_pp_nullability_defaultnullable(): N? {
    return null
   }
 
+  @HiddenFromObjC
   open fun getNonNullable_pp_nullability_defaultnullable(): N {
    throw RuntimeException()
   }
 
+  @HiddenFromObjC
   open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
    return null as N
   }
 
+  @HiddenFromObjC
   open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
 
+  @HiddenFromObjC
   open fun setNonNull_pp_nullability_defaultnullable(n: N) {}
 
+  @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 
  open class ParameterizedNullable<N> {
   @JvmField
+  @HiddenFromObjC
   var nullable_pp_nullability_defaultnullable: N? = null
 
   @JvmField
+  @HiddenFromObjC
   var nonNullable_pp_nullability_defaultnullable: N = null as N
 
   @JvmField
+  @HiddenFromObjC
   var defaultNullability_pp_nullability_defaultnullable: N = null as N
 
   constructor(n: N) {
    this.nonNullable_pp_nullability_defaultnullable = n
   }
 
+  @HiddenFromObjC
   open fun getNullable_pp_nullability_defaultnullable(): N? {
    return null
   }
 
+  @HiddenFromObjC
   open fun getNonNullable_pp_nullability_defaultnullable(): N {
    throw RuntimeException()
   }
 
+  @HiddenFromObjC
   open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
    return null as N
   }
 
+  @HiddenFromObjC
   open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
 
+  @HiddenFromObjC
   open fun setNonNull_pp_nullability_defaultnullable(n: N) {}
 
+  @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 
  open class ParameterizedNonNullable<N: Any> {
   @JvmField
+  @HiddenFromObjC
   var nullable_pp_nullability_defaultnullable: N? = null
 
   @JvmField
+  @HiddenFromObjC
   var nonNullable_pp_nullability_defaultnullable: N
 
   @JvmField
+  @HiddenFromObjC
   var defaultNullability_pp_nullability_defaultnullable: N
 
   constructor(n: N) {
@@ -369,22 +434,28 @@ open class DefaultNullable {
    this.defaultNullability_pp_nullability_defaultnullable = n
   }
 
+  @HiddenFromObjC
   open fun getNullable_pp_nullability_defaultnullable(): N? {
    return null
   }
 
+  @HiddenFromObjC
   open fun getNonNullable_pp_nullability_defaultnullable(): N {
    throw RuntimeException()
   }
 
+  @HiddenFromObjC
   open fun getDefaultNullability_pp_nullability_defaultnullable(): N {
    return null!!
   }
 
+  @HiddenFromObjC
   open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
 
+  @HiddenFromObjC
   open fun setNonNull_pp_nullability_defaultnullable(n: N) {}
 
+  @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
  }
 

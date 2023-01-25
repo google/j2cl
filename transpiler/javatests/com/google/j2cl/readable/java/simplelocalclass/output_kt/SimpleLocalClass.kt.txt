@@ -1,5 +1,5 @@
 // Generated from "simplelocalclass/SimpleLocalClass.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package simplelocalclass
 
@@ -7,7 +7,9 @@ import javaemul.lang.*
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("SimplelocalclassSimpleLocalClass", exact = true)
@@ -30,6 +32,7 @@ open class SimpleLocalClass {
   val localVar: Int = 1
   open class ___2InnerClass {
    @JvmField
+   @HiddenFromObjC
    var field_pp_simplelocalclass: Int = localVar
   }
  }

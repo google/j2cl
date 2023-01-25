@@ -29,8 +29,7 @@ internal fun Renderer.fileHeaderSource(compilationUnit: CompilationUnit): Source
 private fun fileCommentSource(compilationUnit: CompilationUnit) =
   source("// Generated from \"${compilationUnit.packageRelativePath}\"")
 
-private fun Renderer.fileAnnotationsSource(): Source =
-  newLineSeparated(optInExperimentalObjCNameFileAnnotationSource())
+private fun Renderer.fileAnnotationsSource(): Source = newLineSeparated(fileOptInAnnotationSource)
 
 internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit): Source =
   emptyLineSeparated(packageSource(compilationUnit), importsSource())

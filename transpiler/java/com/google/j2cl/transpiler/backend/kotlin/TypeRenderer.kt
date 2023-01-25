@@ -46,7 +46,7 @@ fun Renderer.typeSource(type: Type): Source =
     if (typeDeclaration.isKtNative) nativeTypeSource(typeDeclaration)
     else
       newLineSeparated(
-        objCNameAnnotationSource(typeDeclaration),
+        objCAnnotationSource(typeDeclaration),
         spaceSeparated(
           inheritanceModifierSource(typeDeclaration),
           classModifiersSource(type),
@@ -132,7 +132,7 @@ private fun Renderer.enumValueSource(field: Field): Source =
     .let { it as NewInstance }
     .let { newInstance ->
       newLineSeparated(
-        objCNameAnnotationSource(field.descriptor),
+        objCAnnotationSource(field.descriptor),
         spaceSeparated(
           join(
             identifierSource(field.descriptor.name!!),

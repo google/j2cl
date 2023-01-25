@@ -1,5 +1,5 @@
 // Generated from "strings/Strings.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package strings
 
@@ -8,18 +8,23 @@ import kotlin.Char
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("StringsStrings", exact = true)
 open class Strings {
  @JvmField
+ @HiddenFromObjC
  var someString_private_2: String? = "This is a string literal"
 
  @JvmField
+ @HiddenFromObjC
  var nonBmpChar_private_2: String? = "\uD800\uDF46"
 
  @JvmField
+ @HiddenFromObjC
  var wideColon_private_2: String? = "\uFF1A"
 
  open fun test() {
@@ -58,13 +63,16 @@ open class Strings {
  }
 
  companion object {
+  @HiddenFromObjC
   const val ESCAPE_CODES_private_2: String = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
 
+  @HiddenFromObjC
   const val ESCAPE_CODES_COPY_private_2: String = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
 
  open class StringHolder {
   @JvmField
+  @HiddenFromObjC
   var s_pp_strings: String? = "A"
  }
 }

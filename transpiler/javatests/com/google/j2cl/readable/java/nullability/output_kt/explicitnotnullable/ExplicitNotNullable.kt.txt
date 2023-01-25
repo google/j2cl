@@ -1,5 +1,5 @@
 // Generated from "nullability/explicitnotnullable/ExplicitNotNullable.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package nullability.explicitnotnullable
 
@@ -21,100 +21,132 @@ import kotlin.arrayOfNulls
 import kotlin.collections.ArrayList
 import kotlin.collections.MutableList
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("NullabilityExplicitnotnullableExplicitNotNullable", exact = true)
 open class ExplicitNotNullable {
  @JvmField
+ @HiddenFromObjC
  var f1_private_2: String = "Hello"
 
  @JvmField
+ @HiddenFromObjC
  var f2_private_2: String? = null
 
  @JvmField
+ @HiddenFromObjC
  var f3_private_2: String? = null
 
  @JvmField
+ @HiddenFromObjC
  var f4_private_2: MutableList<String> = ArrayList<String>()
 
  @JvmField
+ @HiddenFromObjC
  var f5_private_2: MutableList<String>? = ArrayList<String>()
 
  @JvmField
+ @HiddenFromObjC
  var f6_private_2: MutableList<String?> = ArrayList<String?>()
 
  @JvmField
+ @HiddenFromObjC
  var f7_private_2: MutableList<String?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var f8_private_2: Array<String> = arrayOf<String>()
 
  @JvmField
+ @HiddenFromObjC
  var f9_private_2: Array<String?> = arrayOf<String?>()
 
  @JvmField
+ @HiddenFromObjC
  var f10_private_2: Array<String>? = arrayOf<String>()
 
  @JvmField
+ @HiddenFromObjC
  var f11_private_2: Unit? = null
 
  @JvmField
+ @HiddenFromObjC
  var f12_private_2: Any = Any()
 
  @JvmField
+ @HiddenFromObjC
  var f13_private_2: Any
 
  @JvmField
+ @HiddenFromObjC
  var f14_private_2: Any? = null
 
  @JvmField
+ @HiddenFromObjC
  var f15_private_2: Array<Array<String>> = arrayOf<Array<String>>()
 
  @JvmField
+ @HiddenFromObjC
  var f16_private_2: Array<Array<String>?> = arrayOf<Array<String>?>()
 
  @JvmField
+ @HiddenFromObjC
  var f17_private_2: Array<Array<String>>? = arrayOf<Array<String>>()
 
  @JvmField
+ @HiddenFromObjC
  var f18_private_2: Array<Array<String>?>? = arrayOf<Array<String>?>()
 
  @JvmField
+ @HiddenFromObjC
  var f19_private_2: Array<Array<String?>> = arrayOf<Array<String?>>()
 
  @JvmField
+ @HiddenFromObjC
  var f20_private_2: Array<Array<String?>?> = arrayOf<Array<String?>?>()
 
  @JvmField
+ @HiddenFromObjC
  var f21_private_2: Array<Array<String?>>? = arrayOf<Array<String?>>()
 
  @JvmField
+ @HiddenFromObjC
  var f22_private_2: Array<Array<String?>?>? = arrayOf<Array<String?>?>()
 
  @JvmField
+ @HiddenFromObjC
  var f23_private_2: Array<CharArray> = arrayOf<CharArray>()
 
  @JvmField
+ @HiddenFromObjC
  var f24_private_2: Array<CharArray?> = arrayOf<CharArray?>()
 
  @JvmField
+ @HiddenFromObjC
  var f25_private_2: Array<CharArray>? = arrayOf<CharArray>()
 
  @JvmField
+ @HiddenFromObjC
  var f26_private_2: Array<CharArray?>? = arrayOf<CharArray?>()
 
  @JvmField
+ @HiddenFromObjC
  var f27_private_2: Array<String> = uninitializedArrayOf<String>(1)
 
  @JvmField
+ @HiddenFromObjC
  var f28_private_2: Array<String> = arrayOfNulls<String>(1) as Array<String>
 
  @JvmField
+ @HiddenFromObjC
  var f29_private_2: Array<String?> = uninitializedArrayOf<String>(1) as Array<String?>
 
  @JvmField
+ @HiddenFromObjC
  var f30_private_2: Array<String?> = arrayOfNulls<String>(1)
 
  constructor() {
@@ -141,8 +173,10 @@ open class ExplicitNotNullable {
   val args_1: Array<String> = args as Array<String>
  }
 
+ @HiddenFromObjC
  open fun <T: ExplicitNotNullable.NullableBound<T>?> methodWithNullableBound_pp_nullability_explicitnotnullable() {}
 
+ @HiddenFromObjC
  open fun <T: ExplicitNotNullable.NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_explicitnotnullable() {}
 
  open fun casts() {
@@ -156,29 +190,35 @@ open class ExplicitNotNullable {
  }
 
  @JvmField
+ @HiddenFromObjC
  var collection_pp_nullability_explicitnotnullable: ExplicitNotNullable.Consumer<*>? = null
 
  @JvmField
+ @HiddenFromObjC
  var nonNullableCollection_pp_nullability_explicitnotnullable: ExplicitNotNullable.Consumer<*>? = null
 
+ @HiddenFromObjC
  open fun unboundedWildCard_pp_nullability_explicitnotnullable(c: ExplicitNotNullable.Consumer<*>, nc: ExplicitNotNullable.Consumer<*>) {
   this.collection_pp_nullability_explicitnotnullable = c
   this.nonNullableCollection_pp_nullability_explicitnotnullable = nc
  }
 
  @JvmField
+ @HiddenFromObjC
  var i_pp_nullability_explicitnotnullable: ExplicitNotNullable.Function<String, String> = object : ExplicitNotNullable.Function<String, String> {
   open override fun apply(s: String): String {
    return s
   }
  }
 
+ @HiddenFromObjC
  open fun testDependentWildcards_pp_nullability_explicitnotnullable(x: ExplicitNotNullable.DependentTypeParameters<*, *>): ExplicitNotNullable.DependentTypeParameters<*, *> {
   return x
  }
 
  companion object {
   @JvmStatic
+  @HiddenFromObjC
   fun <N> genericNullableMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedNullable<N>, n: N?) {
    o!!.setNullable_pp_nullability_explicitnotnullable(n)
    o!!.setNonNull_pp_nullability_explicitnotnullable(n as N)
@@ -195,6 +235,7 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <N: Any> genericNonNullMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedNonNullable<N>, n: N) {
    o!!.setNullable_pp_nullability_explicitnotnullable(n)
    o!!.setNonNull_pp_nullability_explicitnotnullable(n)
@@ -211,6 +252,7 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <N: Any> genericDefaultNullabilityMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedDefaultNullability<N>, n: N) {
    o!!.setNullable_pp_nullability_explicitnotnullable(n)
    o!!.setNonNull_pp_nullability_explicitnotnullable(n)
@@ -227,6 +269,7 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun parametrizedNullableMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedNullable<String?>, s: String?) {
    o!!.setNullable_pp_nullability_explicitnotnullable(s)
    o!!.setNonNull_pp_nullability_explicitnotnullable(s!!)
@@ -243,6 +286,7 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun parametrizedNonNullMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedNonNullable<String>, s: String) {
    o!!.setNullable_pp_nullability_explicitnotnullable(s)
    o!!.setNonNull_pp_nullability_explicitnotnullable(s)
@@ -259,6 +303,7 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun parametrizedDefaultNullabilityMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedDefaultNullability<String>, s: String) {
    o!!.setNullable_pp_nullability_explicitnotnullable(s)
    o!!.setNonNull_pp_nullability_explicitnotnullable(s)
@@ -275,57 +320,75 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcard_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsDefaultNullabilityObject_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsNullableObject_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsNonNullObject_pp_nullability_explicitnotnullable(l: MutableList<*>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsDefaultNullabilityString_pp_nullability_explicitnotnullable(l: MutableList<out String>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsNullableString_pp_nullability_explicitnotnullable(l: MutableList<out String?>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardExtendsNonNullString_pp_nullability_explicitnotnullable(l: MutableList<out String>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T: Any> testListOfWildcardExtendsDefaultNullabilityVariable_pp_nullability_explicitnotnullable(l: MutableList<out T>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T: Any> testListOfWildcardExtendsNullableVariable_pp_nullability_explicitnotnullable(l: MutableList<out T?>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperDefaultNullabilityObject_pp_nullability_explicitnotnullable(l: MutableList<in Any>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperNullableObject_pp_nullability_explicitnotnullable(l: MutableList<in Any?>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperNonNullObject_pp_nullability_explicitnotnullable(l: MutableList<in Any>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperDefaultNullabilityString_pp_nullability_explicitnotnullable(l: MutableList<in String>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperNullableString_pp_nullability_explicitnotnullable(l: MutableList<in String?>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testListOfWildcardSuperNonNullString_pp_nullability_explicitnotnullable(l: MutableList<in String>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T: Any> testListOfWildcardSuperDefaultNullabilityVariable_pp_nullability_explicitnotnullable(l: MutableList<in T>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T: Any> testListOfWildcardSuperNullableVariable_pp_nullability_explicitnotnullable(l: MutableList<in T?>) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testLambdaNullability_pp_nullability_explicitnotnullable() {
    val lambda: ExplicitNotNullable.Consumer<String>? = ExplicitNotNullable.Consumer<String> { s: String ->
    }
@@ -344,17 +407,21 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun nonNullableAccept_pp_nullability_explicitnotnullable(s: String) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T: Any> consume_pp_nullability_explicitnotnullable(t: T) {}
 
   @JvmStatic
+  @HiddenFromObjC
   fun testUnboundWildcardTypeArgumentInference_pp_nullability_explicitnotnullable(c: ExplicitNotNullable.Consumer<*>) {
    ExplicitNotNullable.consume_pp_nullability_explicitnotnullable(c)
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun testLocalNullability_pp_nullability_explicitnotnullable() {
    val stringConsumer: ExplicitNotNullable.Consumer<String>? = null as ExplicitNotNullable.Consumer<String>?
    val nullableStringConsumer: ExplicitNotNullable.Consumer<String?>? = null as ExplicitNotNullable.Consumer<String?>?
@@ -363,12 +430,14 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun testParametrizedMethod_pp_nullability_explicitnotnullable(f: ExplicitNotNullable.Function<in String, out String>, string: String): String {
    val localString: String? = string
    return f!!.apply(localString as String)
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T: Any> assertNotNull_pp_nullability_explicitnotnullable(nullable: T?): T {
    if (nullable == null) {
     throw NullPointerException()
@@ -377,16 +446,19 @@ open class ExplicitNotNullable {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun testAssertNotNull_parametrized_pp_nullability_explicitnotnullable(nullable: String?) {
    val nonNull: String? = ExplicitNotNullable.assertNotNull_pp_nullability_explicitnotnullable<String>(nullable)
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T: Any> testAssertNotNull_notNullBounds_pp_nullability_explicitnotnullable(nullable: T?) {
    val notNull: T? = ExplicitNotNullable.assertNotNull_pp_nullability_explicitnotnullable<T>(nullable)
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T> testAssertNotNull_nullableBounds_pp_nullability_explicitnotnullable(nullable: T?) {
    val notNull: T? = ExplicitNotNullable.assertNotNull_pp_nullability_explicitnotnullable<T & Any>(nullable)
   }
@@ -406,12 +478,15 @@ open class ExplicitNotNullable {
 
  open class ParameterizedDefaultNullability<N: Any> {
   @JvmField
+  @HiddenFromObjC
   var nullable_pp_nullability_explicitnotnullable: N? = null
 
   @JvmField
+  @HiddenFromObjC
   var nonNullable_pp_nullability_explicitnotnullable: N
 
   @JvmField
+  @HiddenFromObjC
   var defaultNullability_pp_nullability_explicitnotnullable: N
 
   constructor(n: N) {
@@ -419,33 +494,42 @@ open class ExplicitNotNullable {
    this.defaultNullability_pp_nullability_explicitnotnullable = n
   }
 
+  @HiddenFromObjC
   open fun getNullable_pp_nullability_explicitnotnullable(): N? {
    return null
   }
 
+  @HiddenFromObjC
   open fun getNonNullable_pp_nullability_explicitnotnullable(): N {
    throw RuntimeException()
   }
 
+  @HiddenFromObjC
   open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N {
    return null!!
   }
 
+  @HiddenFromObjC
   open fun setNullable_pp_nullability_explicitnotnullable(n: N?) {}
 
+  @HiddenFromObjC
   open fun setNonNull_pp_nullability_explicitnotnullable(n: N) {}
 
+  @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
 
  open class ParameterizedNullable<N> {
   @JvmField
+  @HiddenFromObjC
   var nullable_pp_nullability_explicitnotnullable: N? = null
 
   @JvmField
+  @HiddenFromObjC
   var nonNullable_pp_nullability_explicitnotnullable: N = null as N
 
   @JvmField
+  @HiddenFromObjC
   var defaultNullability_pp_nullability_explicitnotnullable: N = null as N
 
   constructor(n: N) {
@@ -453,33 +537,42 @@ open class ExplicitNotNullable {
    this.defaultNullability_pp_nullability_explicitnotnullable = n
   }
 
+  @HiddenFromObjC
   open fun getNullable_pp_nullability_explicitnotnullable(): N? {
    return null
   }
 
+  @HiddenFromObjC
   open fun getNonNullable_pp_nullability_explicitnotnullable(): N {
    throw RuntimeException()
   }
 
+  @HiddenFromObjC
   open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N {
    return null as N
   }
 
+  @HiddenFromObjC
   open fun setNullable_pp_nullability_explicitnotnullable(n: N?) {}
 
+  @HiddenFromObjC
   open fun setNonNull_pp_nullability_explicitnotnullable(n: N) {}
 
+  @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
 
  open class ParameterizedNonNullable<N: Any> {
   @JvmField
+  @HiddenFromObjC
   var nullable_pp_nullability_explicitnotnullable: N? = null
 
   @JvmField
+  @HiddenFromObjC
   var nonNullable_pp_nullability_explicitnotnullable: N
 
   @JvmField
+  @HiddenFromObjC
   var defaultNullability_pp_nullability_explicitnotnullable: N
 
   constructor(n: N) {
@@ -487,22 +580,28 @@ open class ExplicitNotNullable {
    this.defaultNullability_pp_nullability_explicitnotnullable = n
   }
 
+  @HiddenFromObjC
   open fun getNullable_pp_nullability_explicitnotnullable(): N? {
    return null
   }
 
+  @HiddenFromObjC
   open fun getNonNullable_pp_nullability_explicitnotnullable(): N {
    throw RuntimeException()
   }
 
+  @HiddenFromObjC
   open fun getDefaultNullability_pp_nullability_explicitnotnullable(): N {
    return null!!
   }
 
+  @HiddenFromObjC
   open fun setNullable_pp_nullability_explicitnotnullable(n: N?) {}
 
+  @HiddenFromObjC
   open fun setNonNull_pp_nullability_explicitnotnullable(n: N) {}
 
+  @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}
  }
 
@@ -529,6 +628,7 @@ open class ExplicitNotNullable {
  }
 
  open class DependentTypeParameters<E: Any, T: E?> {
+  @HiddenFromObjC
   open fun getThis_pp_nullability_explicitnotnullable(): ExplicitNotNullable.DependentTypeParameters<E, T> {
    return this
   }
@@ -538,6 +638,7 @@ open class ExplicitNotNullable {
 open class DefaultNullable {
  companion object {
   @JvmStatic
+  @HiddenFromObjC
   fun nullableAccept_pp_nullability_explicitnotnullable(s: String?) {}
  }
 }

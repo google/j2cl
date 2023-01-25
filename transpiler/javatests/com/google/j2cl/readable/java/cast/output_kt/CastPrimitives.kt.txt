@@ -1,5 +1,5 @@
 // Generated from "cast/CastPrimitives.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package cast
 
@@ -16,7 +16,9 @@ import kotlin.Long
 import kotlin.OptIn
 import kotlin.Short
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("CastCastPrimitives", exact = true)
@@ -169,26 +171,31 @@ open class CastPrimitives {
 
  companion object {
   @JvmStatic
+  @HiddenFromObjC
   fun getShort_private_2(value: Short): Short {
    return value
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun getInt_private_2(value: Int): Int {
    return value
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun getLong_private_2(value: Long): Long {
    return value
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun getFloat_private_2(value: Float): Float {
    return value
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun getDouble_private_2(value: Double): Double {
    return value
   }

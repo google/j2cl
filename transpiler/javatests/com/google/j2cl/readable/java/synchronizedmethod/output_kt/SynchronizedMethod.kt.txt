@@ -1,5 +1,5 @@
 // Generated from "synchronizedmethod/SynchronizedMethod.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package synchronizedmethod
 
@@ -7,18 +7,22 @@ import javaemul.lang.*
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.jvm.javaObjectType
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import kotlin.synchronized
 
 @ObjCName("SynchronizedmethodSynchronizedMethod", exact = true)
 open class SynchronizedMethod {
  @JvmField
+ @HiddenFromObjC
  var a_private_2: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var b_private_2: Int = 0
 
  open fun method() {
@@ -30,9 +34,11 @@ open class SynchronizedMethod {
 
  companion object {
   @JvmField
+  @HiddenFromObjC
   var sa_private_2: Int = 0
 
   @JvmField
+  @HiddenFromObjC
   var sb_private_2: Int = 0
 
   @JvmStatic

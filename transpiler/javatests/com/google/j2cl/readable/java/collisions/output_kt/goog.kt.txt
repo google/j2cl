@@ -1,5 +1,5 @@
 // Generated from "collisions/goog.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package collisions
 
@@ -9,7 +9,9 @@ import kotlin.Int
 import kotlin.Number
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("Collisionsgoog", exact = true)
@@ -18,9 +20,11 @@ open class goog {}
 open class Blah {
  companion object {
   @JvmStatic
+  @HiddenFromObjC
   external fun m_pp_collisions()
 
   @JvmStatic
+  @HiddenFromObjC
   external fun getN_pp_collisions(): Double
  }
 }
@@ -50,6 +54,7 @@ open class Other<T> {
   val o: Other<T>? = null as Other<T>?
  }
 
+ @HiddenFromObjC
  open fun <T_2> m_pp_collisions(): T_2 {
   val T_1: Int = 5
   val o: Other<T_2>? = null as Other<T_2>?
@@ -58,10 +63,12 @@ open class Other<T> {
 }
 
 open class T<T: Number?> {
+ @HiddenFromObjC
  open fun m_pp_collisions(): T {
   return null as T
  }
 
+ @HiddenFromObjC
  open fun n_pp_collisions(): T {
   val t: T? = collisions.T<T>().m_pp_collisions()
   t!!.toByte()

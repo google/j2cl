@@ -1,5 +1,5 @@
 // Generated from "booleanoperations/BooleanOperations.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package booleanoperations
 
@@ -7,8 +7,10 @@ import javaemul.lang.*
 import kotlin.Boolean
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import kotlin.run
 
@@ -79,6 +81,7 @@ open class BooleanOperations {
   }
   open class ___1Outer {
    @JvmField
+   @HiddenFromObjC
    var b_pp_booleanoperations: Boolean = false
 
    open inner class Inner {
@@ -98,6 +101,7 @@ open class BooleanOperations {
 
  companion object {
   @JvmStatic
+  @HiddenFromObjC
   fun acceptBoolean_private_2(b: Boolean) {}
  }
 }

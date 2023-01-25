@@ -115,7 +115,7 @@ private fun Renderer.fieldSource(field: Field): Source {
   val isConst = field.isCompileTimeConstant && field.isStatic
   return newLineSeparated(
     sourceIf(!isConst) { jvmFieldAnnotationSource() },
-    objCNameAnnotationSource(field.descriptor),
+    objCAnnotationSource(field.descriptor),
     spaceSeparated(
       sourceIf(isConst) { source("const") },
       if (isFinal) source("val") else source("var"),
@@ -144,7 +144,7 @@ private fun Renderer.methodHeaderSource(method: Method): Source {
   val methodObjCNames = method.toObjCNames()
   return newLineSeparated(
     sourceIf(method.isStatic) { jvmStaticAnnotationSource() },
-    objCNameAnnotationSource(methodDescriptor, methodObjCNames),
+    objCAnnotationSource(methodDescriptor, methodObjCNames),
     spaceSeparated(
       methodModifiersSource(methodDescriptor),
       colonSeparated(

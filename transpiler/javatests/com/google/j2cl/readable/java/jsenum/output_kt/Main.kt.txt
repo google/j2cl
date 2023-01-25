@@ -1,5 +1,5 @@
 // Generated from "jsenum/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package jsenum
 
@@ -17,8 +17,10 @@ import kotlin.OptIn
 import kotlin.String
 import kotlin.arrayOf
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("JsenumMain", exact = true)
@@ -73,6 +75,7 @@ open class Main {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun testBoxUnboxWithTypeInference_private_2() {
    val templatedField: Main.TemplatedField<Main.ComparableJsEnum?>? = Main.TemplatedField<Main.ComparableJsEnum?>(Main.ComparableJsEnum.ONE)
    var unboxed: Main.ComparableJsEnum? = templatedField!!.getValue_pp_jsenum()
@@ -84,11 +87,13 @@ open class Main {
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun <T> boxingPassthrough_private_2(t: T): T {
    return t
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun boxingWithGenerics_pp_jsenum() {
    Main.Foo<Any?>(Optional.of<Main.IntJsEnum>(Main.IntJsEnum.MINUSONE) as Optional<Main.IntJsEnum>?)
   }
@@ -110,6 +115,7 @@ open class Main {
   ELEVEN(11);
 
   @JvmField
+  @HiddenFromObjC
   var value_private_2: Int = 0
 
   open fun getValue(): Int {
@@ -126,6 +132,7 @@ open class Main {
   THREE("THREE");
 
   @JvmField
+  @HiddenFromObjC
   var value_private_2: String? = null
 
   open fun getValue(): String? {
@@ -142,6 +149,7 @@ open class Main {
   THREE("THREE");
 
   @JvmField
+  @HiddenFromObjC
   var value_private_2: String
 
   open fun getValue(): String? {
@@ -160,12 +168,14 @@ open class Main {
 
  open class TemplatedField<T> {
   @JvmField
+  @HiddenFromObjC
   var value_pp_jsenum: T = null as T
 
   constructor(value: T) {
    this.value_pp_jsenum = value
   }
 
+  @HiddenFromObjC
   open fun getValue_pp_jsenum(): T {
    return this.value_pp_jsenum
   }

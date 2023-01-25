@@ -1,5 +1,5 @@
 // Generated from "trycatch/TryCatch.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package trycatch
 
@@ -14,7 +14,9 @@ import kotlin.RuntimeException
 import kotlin.Throwable
 import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("TrycatchTryCatch", exact = true)
@@ -128,6 +130,7 @@ open class TryCatch {
   throw this.getT_private_2<Exception?>(java.lang.Exception())!!
  }
 
+ @HiddenFromObjC
  fun <T> getT_private_2(t: T): T {
   return t
  }
@@ -136,12 +139,14 @@ open class TryCatch {
   throw this.getThrowable_private_2<Throwable?>()!!
  }
 
+ @HiddenFromObjC
  fun <T: Throwable?> getThrowable_private_2(): T {
   return null as T
  }
 
  companion object {
   @JvmField
+  @HiddenFromObjC
   val closableThing_private_2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
  }
 

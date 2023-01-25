@@ -1,11 +1,13 @@
 // Generated from "labelstatement/LabeledStatement.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package labelstatement
 
 import javaemul.lang.*
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("LabelstatementLabeledStatement", exact = true)
@@ -59,5 +61,6 @@ open class LabeledStatement {
   } while (false)
  }
 
+ @HiddenFromObjC
  fun foo_private_2() {}
 }

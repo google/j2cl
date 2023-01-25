@@ -1,5 +1,5 @@
 // Generated from "jsinnerclass/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package jsinnerclass
 
@@ -10,8 +10,10 @@ import kotlin.OptIn
 import kotlin.String
 import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("JsinnerclassMain", exact = true)
@@ -28,6 +30,7 @@ open class Main {
 
  open class Outer {
   @JvmField
+  @HiddenFromObjC
   var a_pp_jsinnerclass: Int = 2
 
   open fun method(): Int {
@@ -37,6 +40,7 @@ open class Main {
   @ObjCName("JsinnerclassMain_Outer_Inner", exact = true)
   open inner class Inner {
    @JvmField
+   @HiddenFromObjC
    var b_private_2: Int = 0
 
    constructor() {

@@ -1,5 +1,5 @@
 // Generated from "array/Arrays.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package array
 
@@ -18,9 +18,11 @@ import kotlin.String
 import kotlin.arrayOf
 import kotlin.arrayOfNulls
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.intArrayOf
 import kotlin.jvm.JvmField
 import kotlin.longArrayOf
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("ArrayArrays", exact = true)
@@ -56,6 +58,7 @@ open class Arrays {
   objects2d!![0]!![1] = null
  }
 
+ @HiddenFromObjC
  open fun testIntArrays_pp_array() {
   var ints: IntArray? = IntArray(100)
   ints = IntArray(0)
@@ -71,6 +74,7 @@ open class Arrays {
   ints2d!![0]!![1] = 1
  }
 
+ @HiddenFromObjC
  open fun testLongArrays_pp_array() {
   var longs: LongArray? = LongArray(100)
   longs = LongArray(0)
@@ -86,6 +90,7 @@ open class Arrays {
   longs2d!![0]!![1] = 1L
  }
 
+ @HiddenFromObjC
  open fun testDevirtualizedTypeArrays_pp_array() {
   var booleans: Array<Boolean?>? = arrayOfNulls<Boolean>(100)
   booleans = arrayOfNulls<Boolean>(0)
@@ -101,6 +106,7 @@ open class Arrays {
   booleans2d!![0]!![1] = Boolean.valueOf(false)
  }
 
+ @HiddenFromObjC
  open fun testStringArrays_pp_array() {
   var strings: Array<String?>? = arrayOfNulls<String>(100)
   strings = arrayOfNulls<String>(0)
@@ -116,6 +122,7 @@ open class Arrays {
   strings2d!![0]!![1] = null
  }
 
+ @HiddenFromObjC
  fun testNativeArray_private_2() {
   var nativeObjects: Array<Arrays.NativeType?>? = arrayOfNulls<Arrays.NativeType>(100)
   nativeObjects = arrayOfNulls<Arrays.NativeType>(0)
@@ -161,6 +168,7 @@ open class Arrays {
 
  open class ArrayContainer<T> {
   @JvmField
+  @HiddenFromObjC
   var data_pp_array: Array<T>? = null
  }
 }

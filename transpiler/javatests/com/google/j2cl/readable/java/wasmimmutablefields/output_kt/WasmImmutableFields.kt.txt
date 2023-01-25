@@ -1,5 +1,5 @@
 // Generated from "wasmimmutablefields/WasmImmutableFields.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package wasmimmutablefields
 
@@ -15,9 +15,11 @@ import kotlin.String
 import kotlin.arrayOf
 import kotlin.arrayOfNulls
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.intArrayOf
 import kotlin.jvm.JvmField
 import kotlin.jvm.javaObjectType
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("WasmimmutablefieldsWasmImmutableFields", exact = true)
@@ -25,55 +27,71 @@ open class WasmImmutableFields {}
 
 open class AssignmentsInDeclaration {
  @JvmField
+ @HiddenFromObjC
  var compileTimeConstant_pp_wasmimmutablefields: Int = 12
 
  @JvmField
+ @HiddenFromObjC
  var stringLiteral_pp_wasmimmutablefields: String? = "Hello World"
 
  @JvmField
+ @HiddenFromObjC
  var newArray_pp_wasmimmutablefields: Array<Any?>? = arrayOfNulls<Any>(4)
 
  @JvmField
+ @HiddenFromObjC
  var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = Array<Array<Array<Any?>?>?>(3) {
   arrayOfNulls<Array<Any?>>(4)
  }
 
  @JvmField
+ @HiddenFromObjC
  var arrayLiteral_pp_wasmimmutablefields: IntArray? = intArrayOf(1, 2, 3, 4)
 
  @JvmField
+ @HiddenFromObjC
  var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = arrayOf<IntArray?>(intArrayOf(1, 2), intArrayOf(3, 4))
 
  @JvmField
+ @HiddenFromObjC
  var classLiteral_pp_wasmimmutablefields: Class<*>? = WasmImmutableFields::class.javaObjectType
 
  @JvmField
+ @HiddenFromObjC
  var withCast_pp_wasmimmutablefields: Array<String?>? = (arrayOfNulls<Any>(0) as Any?) as Array<String?>?
 }
 
 open class AssignmentsInInitializer {
  @JvmField
+ @HiddenFromObjC
  var compileTimeConstant_pp_wasmimmutablefields: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var stringLiteral_pp_wasmimmutablefields: String? = null
 
  @JvmField
+ @HiddenFromObjC
  var newArray_pp_wasmimmutablefields: Array<Any?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var arrayLiteral_pp_wasmimmutablefields: IntArray? = null
 
  @JvmField
+ @HiddenFromObjC
  var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var classLiteral_pp_wasmimmutablefields: Class<*>? = null
 
  @JvmField
+ @HiddenFromObjC
  var withCast_pp_wasmimmutablefields: Array<String?>? = null
 
  init {
@@ -92,33 +110,43 @@ open class AssignmentsInInitializer {
 
 open class AssignmentsInConstructor {
  @JvmField
+ @HiddenFromObjC
  var compileTimeConstant_pp_wasmimmutablefields: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var stringLiteral_pp_wasmimmutablefields: String? = null
 
  @JvmField
+ @HiddenFromObjC
  var newArray_pp_wasmimmutablefields: Array<Any?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var newArrayMultidimensional_pp_wasmimmutablefields: Array<Array<Array<Any?>?>?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var arrayLiteral_pp_wasmimmutablefields: IntArray? = null
 
  @JvmField
+ @HiddenFromObjC
  var arrayLiteralMultidimensional_pp_wasmimmutablefields: Array<IntArray?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var classLiteral_pp_wasmimmutablefields: Class<*>? = null
 
  @JvmField
+ @HiddenFromObjC
  var withCast_pp_wasmimmutablefields: Array<String?>? = null
 
  @JvmField
+ @HiddenFromObjC
  var fromParameter_pp_wasmimmutablefields: Any? = null
 
  @JvmField
+ @HiddenFromObjC
  var finalFieldReference_pp_wasmimmutablefields: String? = null
 
  constructor(parameter: Any?, intParameter: Int, par: AssignmentsInConstructor?) {
@@ -139,6 +167,7 @@ open class AssignmentsInConstructor {
 
 open class OptimizesWithThisConstructorDelegation {
  @JvmField
+ @HiddenFromObjC
  var optimizeableField_pp_wasmimmutablefields: Int = 0
 
  constructor() {
@@ -162,36 +191,47 @@ open class OptimizesWithSuperConstructorDelegation: OptimizesWithThisConstructor
 
 open class FinalizerTest {
  @JvmField
+ @HiddenFromObjC
  var effectivelyFinalField_pp_wasmimmutablefields: Int = 1
 
  @JvmField
+ @HiddenFromObjC
  var readInInit_pp_wasmimmutablefields: Int = this.effectivelyFinalField_pp_wasmimmutablefields
 
  @JvmField
+ @HiddenFromObjC
  var writtenOutsideConstructor_pp_wasmimmutablefields: Int = 1
 
  @JvmField
+ @HiddenFromObjC
  var readBeforeWrite_pp_wasmimmutablefields: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var writtenInDelegatingConstructor_pp_wasmimmutablefields: Int = 1
 
  @JvmField
+ @HiddenFromObjC
  var compoundAssignment_pp_wasmimmutablefields: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var effectivelyFinalButNotOptimizedIfBranches_pp_wasmimmutablefields: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var effectivelyFinalButNotOptimizedNestedBlock_pp_wasmimmutablefields: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var writtenInInitAndConstructor_pp_wasmimmutablefields: Int = 1
 
  @JvmField
+ @HiddenFromObjC
  var writtenInInitializerAndInDelegatingConstructor_pp_wasmimmutablefields: Int = 1
 
  @JvmField
+ @HiddenFromObjC
  var writtenOnlyInDelegatingConstructor_pp_wasmimmutablefields: Int = 0
 
  constructor() {
@@ -214,6 +254,7 @@ open class FinalizerTest {
   this.writtenInInitializerAndInDelegatingConstructor_pp_wasmimmutablefields = 1
  }
 
+ @HiddenFromObjC
  open fun foo_pp_wasmimmutablefields() {
   val o: FinalizerTest? = null
   o!!.writtenOutsideConstructor_pp_wasmimmutablefields = 1

@@ -1,5 +1,5 @@
 // Generated from "valueofnullable/ValueOfNullable.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package valueofnullable
 
@@ -8,17 +8,22 @@ import kotlin.Char
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("ValueofnullableValueOfNullable", exact = true)
 open class ValueOfNullable {
  @JvmField
+ @HiddenFromObjC
  var nullableString_pp_valueofnullable: String? = "b"
 
  @JvmField
+ @HiddenFromObjC
  var someChar_pp_valueofnullable: Char = 'a'
 
  @JvmField
+ @HiddenFromObjC
  var result_pp_valueofnullable: String? = "" + this.someChar_pp_valueofnullable + this.nullableString_pp_valueofnullable
 }

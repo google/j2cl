@@ -1,5 +1,5 @@
 // Generated from "j2ktnotpassing/UnsatisfiedTypeBounds.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package j2ktnotpassing
 
@@ -7,16 +7,20 @@ import javaemul.lang.*
 import kotlin.Any
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 
 open class UnsatisfiedTypeBounds {
  companion object {
   @JvmStatic
+  @HiddenFromObjC
   fun <T: Any> methodWithTypeConstraints_pp_j2ktnotpassing(helper: UnsatisfiedTypeBounds.Helper<T>, foo: UnsatisfiedTypeBounds.Foo<out T>): T {
    return foo!!.get()
   }
 
   @JvmStatic
+  @HiddenFromObjC
   fun test_pp_j2ktnotpassing() {
    val command: UnsatisfiedTypeBounds.Command? = UnsatisfiedTypeBounds.methodWithTypeConstraints_pp_j2ktnotpassing<UnsatisfiedTypeBounds.Command>(UnsatisfiedTypeBounds.Helper<UnsatisfiedTypeBounds.Command>(), UnsatisfiedTypeBounds.FooCommand())
   }

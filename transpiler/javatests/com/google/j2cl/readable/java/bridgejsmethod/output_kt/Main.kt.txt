@@ -1,5 +1,5 @@
 // Generated from "bridgejsmethod/Main.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package bridgejsmethod
 
@@ -10,8 +10,10 @@ import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("BridgejsmethodMain", exact = true)
@@ -113,11 +115,13 @@ open class Main {
 
  @ObjCName("BridgejsmethodMain_K", exact = true)
  open class K<K1, K2> {
+  @HiddenFromObjC
   open fun fun_pp_bridgejsmethod(k1: K1, k2: K2) {}
  }
 
  @ObjCName("BridgejsmethodMain_L", exact = true)
  open class L<L1>: Main.K<String?, L1>() {
+  @HiddenFromObjC
   open override fun fun_pp_bridgejsmethod(string: String?, l1: L1) {}
  }
 
@@ -133,6 +137,7 @@ open class Main {
 
  open inner class O: Main.N() {
   @JvmField
+  @HiddenFromObjC
   var b_private_3: Main.B? = null
 
   open override fun getB(): Main.B? {

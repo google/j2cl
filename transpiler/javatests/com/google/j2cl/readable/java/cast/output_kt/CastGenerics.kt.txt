@@ -1,5 +1,5 @@
 // Generated from "cast/CastGenerics.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package cast
 
@@ -13,15 +13,19 @@ import kotlin.Number
 import kotlin.OptIn
 import kotlin.String
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("CastCastGenerics", exact = true)
 open class CastGenerics<T, E: Number?> {
  @JvmField
+ @HiddenFromObjC
  var field_pp_cast: T = null as T
 
+ @HiddenFromObjC
  open fun method_pp_cast(): T {
   return null as T
  }
@@ -44,6 +48,7 @@ open class CastGenerics<T, E: Number?> {
 
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
+   @HiddenFromObjC
    fun nestedGenericMethod_private_2(o: Any?) {
     val t: TT? = o as TT?
    }
@@ -120,6 +125,7 @@ open class CastGenerics<T, E: Number?> {
  }
 
  open class Container<T> {
+  @HiddenFromObjC
   open fun get_pp_cast(): T {
    return null as T
   }

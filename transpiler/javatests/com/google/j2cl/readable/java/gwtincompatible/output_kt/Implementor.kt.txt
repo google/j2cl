@@ -1,5 +1,5 @@
 // Generated from "gwtincompatible/Implementor.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package gwtincompatible
 
@@ -8,6 +8,8 @@ import gwtincompatible.Interface
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 @ObjCName("GwtincompatibleImplementor", exact = true)
@@ -24,12 +26,15 @@ open class Implementor: Interface.ClassWithAbstractMethod(), Interface, Interfac
 
  enum class SomeEnum {
   COMPATIBLE {
+   @HiddenFromObjC
    open override fun method_pp_gwtincompatible() {}
   },
   INCOMPATIBLE {
+   @HiddenFromObjC
    open override fun method_pp_gwtincompatible() {}
   };
 
+  @HiddenFromObjC
   abstract fun method_pp_gwtincompatible()
  }
 }

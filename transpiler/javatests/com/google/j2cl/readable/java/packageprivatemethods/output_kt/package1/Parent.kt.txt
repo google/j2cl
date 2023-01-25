@@ -1,5 +1,5 @@
 // Generated from "packageprivatemethods/package1/Parent.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package packageprivatemethods.package1
 
@@ -7,11 +7,14 @@ import javaemul.lang.*
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 import packageprivatemethods.package1.SuperParent
 
 @ObjCName("PackageprivatemethodsPackage1Parent", exact = true)
 abstract class Parent: SuperParent() {
+ @HiddenFromObjC
  open override fun overrideInParentExposedInChild_pp_packageprivatemethods_package1(a: Int): Int {
   return a
  }
@@ -22,6 +25,7 @@ abstract class Parent: SuperParent() {
   @ObjCName("withInt") c: Int
  ): Int
 
+ @HiddenFromObjC
  open override fun exposedAbstractInParent_pp_packageprivatemethods_package1(arg0: Int, arg1: Int, arg2: Int): Int {
   return this.exposedAbstractInParent(arg0, arg1, arg2)
  }

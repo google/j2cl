@@ -1,5 +1,5 @@
 // Generated from "j2kt/ObjCName.java"
-@file:OptIn(ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package j2kt
 
@@ -27,8 +27,10 @@ import kotlin.collections.MutableListIterator
 import kotlin.collections.MutableMap
 import kotlin.collections.MutableSet
 import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
+import kotlin.native.HiddenFromObjC
 
 @kotlin.native.ObjCName("NewObjCName", exact = true)
 open class ObjCName {
@@ -39,9 +41,11 @@ open class ObjCName {
  var protectedField: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var packagePrivateField_pp_j2kt: Int = 0
 
  @JvmField
+ @HiddenFromObjC
  var privateField_private_2: Int = 0
 
  constructor()
@@ -65,9 +69,11 @@ open class ObjCName {
   var protectedStaticField: Int = 0
 
   @JvmField
+  @HiddenFromObjC
   var packagePrivateStaticField_pp_j2kt: Int = 0
 
   @JvmField
+  @HiddenFromObjC
   var privateStaticField_private_2: Int = 0
 
   @JvmField
