@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.Field
+import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -23,6 +24,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import com.google.j2cl.transpiler.backend.kotlin.ast.isForbiddenInEnumValueDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.kotlinMembers
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
@@ -135,7 +137,7 @@ private fun Renderer.enumValueSource(field: Field): Source =
         objCAnnotationSource(field.descriptor),
         spaceSeparated(
           join(
-            identifierSource(field.descriptor.name!!),
+            field.descriptor.enumValueDeclarationNameSource,
             newInstance.arguments
               .takeIf { it.isNotEmpty() }
               .ifNotNullSource { invocationSource(newInstance) }
@@ -143,4 +145,10 @@ private fun Renderer.enumValueSource(field: Field): Source =
           newInstance.anonymousInnerClass.ifNotNullSource(::typeBodySource)
         )
       )
+    }
+
+private val FieldDescriptor.enumValueDeclarationNameSource: Source
+  get() =
+    name!!.let {
+      if (isForbiddenInEnumValueDeclaration(it)) source(it.inBackTicks) else identifierSource(it)
     }

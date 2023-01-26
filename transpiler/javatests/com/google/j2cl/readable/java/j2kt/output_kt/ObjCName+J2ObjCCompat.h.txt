@@ -8,17 +8,47 @@
 @class NewObjCName_Foo;
 
 typedef NS_ENUM(NSUInteger, NewObjCName_Foo_Enum) {
- NewObjCName_Foo_Enum_allocFoo = 0,
- NewObjCName_Foo_Enum_initFoo = 1,
- NewObjCName_Foo_Enum_newFoo = 2,
- NewObjCName_Foo_Enum_copyFoo = 3,
- NewObjCName_Foo_Enum_mutableCopyFoo = 4,
- NewObjCName_Foo_Enum_register = 5,
- NewObjCName_Foo_Enum_struct = 6,
- NewObjCName_Foo_Enum_NULL = 7,
- NewObjCName_Foo_Enum_YES = 8,
- NewObjCName_Foo_Enum_NO = 9,
+ NewObjCName_Foo_Enum_val = 0,
+ NewObjCName_Foo_Enum_var = 1,
+ NewObjCName_Foo_Enum_fun = 2,
+ NewObjCName_Foo_Enum_alloc = 3,
+ NewObjCName_Foo_Enum_init = 4,
+ NewObjCName_Foo_Enum_initialize = 5,
+ NewObjCName_Foo_Enum_allocFoo = 6,
+ NewObjCName_Foo_Enum_initFoo = 7,
+ NewObjCName_Foo_Enum_newFoo = 8,
+ NewObjCName_Foo_Enum_copyFoo = 9,
+ NewObjCName_Foo_Enum_mutableCopyFoo = 10,
+ NewObjCName_Foo_Enum_register = 11,
+ NewObjCName_Foo_Enum_struct = 12,
+ NewObjCName_Foo_Enum_NULL = 13,
+ NewObjCName_Foo_Enum_YES = 14,
+ NewObjCName_Foo_Enum_NO = 15,
 };
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_val(void) {
+ return NewObjCName_Foo.val;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_var(void) {
+ return NewObjCName_Foo.var;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_fun(void) {
+ return NewObjCName_Foo.fun;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_alloc(void) {
+ return NewObjCName_Foo.theAlloc;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_init(void) {
+ return NewObjCName_Foo.theInit;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_initialize(void) {
+ return NewObjCName_Foo.initialize;
+}
 
 NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_allocFoo(void) {
  return NewObjCName_Foo.theAllocFoo;
@@ -152,6 +182,18 @@ NS_INLINE NewObjCName* NewObjCName_get_selfField(void) {
  return NewObjCNameCompanion.shared.selfField;
 }
 
+NS_INLINE jint NewObjCName_get_val(void) {
+ return NewObjCNameCompanion.shared.val;
+}
+
+NS_INLINE jint NewObjCName_get_var(void) {
+ return NewObjCNameCompanion.shared.var;
+}
+
+NS_INLINE jint NewObjCName_get_fun(void) {
+ return NewObjCNameCompanion.shared.fun;
+}
+
 NS_INLINE jint NewObjCName_get_alloc(void) {
  return NewObjCNameCompanion.shared.theAlloc;
 }
@@ -170,6 +212,18 @@ NS_INLINE jint NewObjCName_get_inline(void) {
 
 NS_INLINE jint NewObjCName_get_NULL(void) {
  return NewObjCNameCompanion.shared.NULL__;
+}
+
+NS_INLINE jint NewObjCName_get_allocFoo(void) {
+ return NewObjCNameCompanion.shared.theAllocFoo;
+}
+
+NS_INLINE jint NewObjCName_get_initFoo(void) {
+ return NewObjCNameCompanion.shared.theInitFoo;
+}
+
+NS_INLINE jint NewObjCName_get_newFoo(void) {
+ return NewObjCNameCompanion.shared.theNewFoo;
 }
 
 NS_INLINE jboolean NewObjCName_get_BOOLEAN_FALSE(void) {
@@ -336,6 +390,18 @@ NS_INLINE void NewObjCName_fooWithNSString_withNSString_(NSString* s, NSString* 
  [NewObjCNameCompanion.shared fooWithNSString:s withNSString:i];
 }
 
+NS_INLINE void NewObjCName_val(void) {
+ [NewObjCNameCompanion.shared val];
+}
+
+NS_INLINE void NewObjCName_var(void) {
+ [NewObjCNameCompanion.shared var];
+}
+
+NS_INLINE void NewObjCName_fun(void) {
+ [NewObjCNameCompanion.shared fun];
+}
+
 NS_INLINE void NewObjCName_alloc(void) {
  [NewObjCNameCompanion.shared doAlloc];
 }
@@ -346,6 +412,14 @@ NS_INLINE void NewObjCName_allocFoo(void) {
 
 NS_INLINE void NewObjCName_allocatedFoo(void) {
  [NewObjCNameCompanion.shared allocatedFoo];
+}
+
+NS_INLINE void NewObjCName_init(void) {
+ [NewObjCNameCompanion.shared doInit];
+}
+
+NS_INLINE void NewObjCName_initialize(void) {
+ [NewObjCNameCompanion.shared initialize];
 }
 
 NS_INLINE void NewObjCName_initFoo(void) {

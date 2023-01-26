@@ -70,4 +70,6 @@ private val forbiddenKeywordSet =
  */
 fun isHardKeyword(string: String) = hardKeywordSet.contains(string)
 
+fun isForbiddenInEnumValueDeclaration(string: String) = string == "init"
+
 fun isForbiddenKeyword(string: String) = forbiddenKeywordSet.contains(string)

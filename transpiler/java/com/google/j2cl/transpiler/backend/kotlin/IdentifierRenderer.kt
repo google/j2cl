@@ -35,8 +35,11 @@ internal val String.identifierString
   get() =
     replace("$", "___").run {
       if (isForbiddenKeyword(this)) this + "__" // This needs to be __ for consistency with J2ObjC.
-      else if (isHardKeyword(this) || !isValidIdentifier) "`$this`" else this
+      else if (isHardKeyword(this) || !isValidIdentifier) inBackTicks else this
     }
+
+internal val String.inBackTicks
+  get() = "`$this`"
 
 internal fun Renderer.topLevelQualifiedNameSource(
   qualifiedName: String,

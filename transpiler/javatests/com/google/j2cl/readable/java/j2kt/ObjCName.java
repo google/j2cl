@@ -50,11 +50,18 @@ public class ObjCName {
   public static Collection collection;
 
   // Fields with reserved names.
+  public static int val;
+  public static int var;
+  public static int fun;
   public static int alloc;
   public static int init;
   public static int extern;
   public static int inline;
   public static int NULL;
+
+  public static int allocFoo;
+  public static int initFoo;
+  public static int newFoo;
 
   // Compile-time constants
   public static final boolean BOOLEAN_FALSE = false;
@@ -126,11 +133,21 @@ public class ObjCName {
 
   public static void foo(String s, String i) {}
 
+  public static void val() {}
+
+  public static void var() {}
+
+  public static void fun() {}
+
   public static void alloc() {}
 
   public static void allocFoo() {}
 
   public static void allocatedFoo() {}
+
+  public static void init() {}
+
+  public static void initialize() {}
 
   public static void initFoo() {}
 
@@ -167,6 +184,12 @@ public class ObjCName {
   public static void hashMapType(HashMap<String, String> l) {}
 
   public enum Foo {
+    val,
+    var,
+    fun,
+    alloc,
+    init,
+    initialize,
     allocFoo,
     initFoo,
     newFoo,

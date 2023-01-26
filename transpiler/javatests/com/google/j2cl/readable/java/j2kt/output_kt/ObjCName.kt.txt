@@ -101,6 +101,18 @@ open class ObjCName {
   var collection: MutableCollection<Any?>? = null
 
   @JvmField
+  @kotlin.native.ObjCName("val")
+  var `val`: Int = 0
+
+  @JvmField
+  @kotlin.native.ObjCName("var")
+  var `var`: Int = 0
+
+  @JvmField
+  @kotlin.native.ObjCName("fun")
+  var `fun`: Int = 0
+
+  @JvmField
   @kotlin.native.ObjCName("theAlloc")
   var alloc: Int = 0
 
@@ -119,6 +131,18 @@ open class ObjCName {
   @JvmField
   @kotlin.native.ObjCName("NULL__")
   var NULL__: Int = 0
+
+  @JvmField
+  @kotlin.native.ObjCName("theAllocFoo")
+  var allocFoo: Int = 0
+
+  @JvmField
+  @kotlin.native.ObjCName("theInitFoo")
+  var initFoo: Int = 0
+
+  @JvmField
+  @kotlin.native.ObjCName("theNewFoo")
+  var newFoo: Int = 0
 
   @kotlin.native.ObjCName("BOOLEAN_FALSE")
   const val BOOLEAN_FALSE: Boolean = false
@@ -259,6 +283,15 @@ open class ObjCName {
   ) {}
 
   @JvmStatic
+  fun `val`() {}
+
+  @JvmStatic
+  fun `var`() {}
+
+  @JvmStatic
+  fun `fun`() {}
+
+  @JvmStatic
   fun alloc() {}
 
   @JvmStatic
@@ -266,6 +299,12 @@ open class ObjCName {
 
   @JvmStatic
   fun allocatedFoo() {}
+
+  @JvmStatic
+  fun init() {}
+
+  @JvmStatic
+  fun initialize__() {}
 
   @JvmStatic
   fun initFoo() {}
@@ -352,6 +391,18 @@ open class ObjCName {
 
  @kotlin.native.ObjCName("NewObjCName_Foo", exact = true)
  enum class Foo {
+  @kotlin.native.ObjCName("val")
+  `val`,
+  @kotlin.native.ObjCName("var")
+  `var`,
+  @kotlin.native.ObjCName("fun")
+  `fun`,
+  @kotlin.native.ObjCName("theAlloc")
+  alloc,
+  @kotlin.native.ObjCName("theInit")
+  `init`,
+  @kotlin.native.ObjCName("initialize")
+  initialize__,
   @kotlin.native.ObjCName("theAllocFoo")
   allocFoo,
   @kotlin.native.ObjCName("theInitFoo")
