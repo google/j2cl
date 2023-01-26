@@ -15,11 +15,15 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.backend.kotlin.ast.isForbiddenKeyword
 import com.google.j2cl.transpiler.backend.kotlin.ast.isHardKeyword
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.source
+
+internal fun Renderer.nameSource(hasName: HasName) =
+  identifierSource(environment.identifier(hasName))
 
 internal fun identifierSource(identifier: String): Source = source(identifier.identifierString)
 

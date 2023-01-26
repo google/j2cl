@@ -85,3 +85,5 @@ fun asExpression(lhs: Source, rhs: Source) = infix(lhs, "as", rhs)
 fun isExpression(lhs: Source, rhs: Source) = infix(lhs, "is", rhs)
 
 fun itSource() = source("it")
+
+fun todo(source: Source) = join(source("TODO"), inRoundBrackets(source))

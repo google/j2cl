@@ -16,11 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.Problems
-import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Type
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
-import com.google.j2cl.transpiler.backend.kotlin.source.join
-import com.google.j2cl.transpiler.backend.kotlin.source.source
 
 /** Renderer of the Kotlin source code. */
 data class Renderer(
@@ -45,8 +41,4 @@ data class Renderer(
 
   /** Top-level qualified names, which will be rendered as simple name without import. */
   val topLevelQualifiedNames: Set<String> = setOf()
-) {
-  fun nameSource(hasName: HasName) = identifierSource(environment.identifier(hasName))
-
-  fun todoSource(string: String) = join(source("TODO"), inRoundBrackets(literalSource(string)))
-}
+)

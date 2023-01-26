@@ -218,8 +218,8 @@ open class AutoBoxing {
   s = this.unbox(Short.valueOf(s))
   c = this.unbox(Char.valueOf(c))
   var unusedDouble: Double = this.takesObjectAndReturnsPrimitiveDouble(4)
-  unusedDouble = this.sumWithoutBoxing(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"))
-  unusedDouble = this.sumWithoutBoxingJsVarargs(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"))
+  unusedDouble = this.sumWithoutBoxing(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat())
+  unusedDouble = this.sumWithoutBoxingJsVarargs(1, 2.2, 1.toByte(), 1.toShort(), 2.2.toFloat())
   this.takesFloatVarArgs(Float.valueOf(1.1f), Float.valueOf(97.0f), Float.valueOf(2.2.toFloat()))
   var o: Any? = null
   o = Double.valueOf(2.2)

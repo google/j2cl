@@ -35,6 +35,8 @@ import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InstanceOfExpression
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Invocation
+import com.google.j2cl.transpiler.ast.JsDocCastExpression
+import com.google.j2cl.transpiler.ast.JsDocExpression
 import com.google.j2cl.transpiler.ast.KtInfo
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
@@ -93,6 +95,8 @@ fun Renderer.expressionSource(expression: Expression): Source =
     is FieldAccess -> fieldAccessSource(expression)
     is FunctionExpression -> functionExpressionSource(expression)
     is InstanceOfExpression -> instanceOfExpressionSource(expression)
+    is JsDocExpression -> jsDocExpressionSource(expression)
+    is JsDocCastExpression -> jsDocCastExpressionSource(expression)
     is Literal -> literalSource(expression)
     is MethodCall -> methodCallSource(expression)
     is MultiExpression -> multiExpressionSource(expression)
@@ -104,7 +108,7 @@ fun Renderer.expressionSource(expression: Expression): Source =
     is ThisReference -> thisReferenceSource(expression)
     is VariableDeclarationExpression -> variableDeclarationExpressionSource(expression)
     is VariableReference -> variableReferenceSource(expression)
-    else -> todoSource(expression::class.java.simpleName)
+    else -> throw InternalCompilerError("Unexpected ${expression::class.java.simpleName}")
   }
 
 private fun Renderer.arrayAccessSource(arrayAccess: ArrayAccess): Source =
@@ -268,6 +272,12 @@ private fun Renderer.instanceOfExpressionSource(
     leftSubExpressionSource(instanceOfExpression.precedence, instanceOfExpression.expression),
     instanceOfTestTypeDescriptorSource(instanceOfExpression.testTypeDescriptor)
   )
+
+private fun Renderer.jsDocExpressionSource(expression: JsDocExpression): Source =
+  expressionSource(expression.expression)
+
+private fun Renderer.jsDocCastExpressionSource(expression: JsDocCastExpression): Source =
+  expressionSource(expression.expression)
 
 private fun Renderer.instanceOfTestTypeDescriptorSource(typeDescriptor: TypeDescriptor): Source =
   if (typeDescriptor is ArrayTypeDescriptor && !typeDescriptor.isPrimitiveArray)

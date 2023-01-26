@@ -82,7 +82,7 @@ private fun Renderer.methodSource(method: Method): Source =
           sourceIf(method.descriptor.isKtProperty) { source("get()") },
           copy(currentReturnLabelIdentifier = null).run {
             block(
-              if (method.descriptor.isTodo) todoSource("J2KT: not yet supported")
+              if (method.descriptor.isTodo) todo(literalSource("J2KT: not yet supported"))
               else statementsSource(statements)
             )
           }

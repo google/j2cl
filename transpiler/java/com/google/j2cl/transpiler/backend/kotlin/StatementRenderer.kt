@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.AssertStatement
 import com.google.j2cl.transpiler.ast.Block
 import com.google.j2cl.transpiler.ast.BreakStatement
@@ -76,7 +77,7 @@ fun Renderer.statementSource(statement: Statement): Source =
     is WhileStatement -> whileStatementSource(statement)
     is ThrowStatement -> throwStatementSource(statement)
     is TryStatement -> tryStatementSource(statement)
-    else -> todoSource(statement::class.java.simpleName)
+    else -> throw InternalCompilerError("Unexpected ${statement::class.java.simpleName}")
   }
 
 private fun Renderer.assertStatementSource(assertStatement: AssertStatement): Source =

@@ -65,22 +65,21 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
         identifierSet = nameToIdentifierMap.values.toSet()
       )
 
-    val newRenderer = {
+    val renderer =
       Renderer(
         environment,
         problems,
         topLevelQualifiedNames = compilationUnit.topLevelQualifiedNames
       )
-    }
 
     // Render file header, collecting qualified names to import
-    val fileHeaderSource = newRenderer().fileHeaderSource(compilationUnit)
+    val fileHeaderSource = renderer.fileHeaderSource(compilationUnit)
 
     // Render types, collecting qualified names to import
-    val typesSource = newRenderer().typesSource(compilationUnit)
+    val typesSource = renderer.typesSource(compilationUnit)
 
     // Render package and collected imports
-    val packageAndImportsSource = newRenderer().packageAndImportsSource(compilationUnit)
+    val packageAndImportsSource = renderer.packageAndImportsSource(compilationUnit)
 
     val completeSource = emptyLineSeparated(fileHeaderSource, packageAndImportsSource, typesSource)
 
