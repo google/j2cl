@@ -41,26 +41,37 @@ import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 
-private fun Renderer.fileOptInAnnotationSource(feature: Source, vararg features: Source): Source =
+private fun Renderer.fileOptInAnnotationSource(features: List<Source>): Source =
   join(
     source("@file:"),
     topLevelQualifiedNameSource("kotlin.OptIn"),
-    inRoundBrackets(commaSeparated(feature, *features))
+    inRoundBrackets(commaSeparated(features))
   )
 
 internal val Renderer.fileOptInAnnotationSource: Source
   get() =
-    fileOptInAnnotationSource(
-      classLiteral(topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCName")),
-      classLiteral(topLevelQualifiedNameSource("kotlin.experimental.ExperimentalObjCRefinement"))
-    )
+    environment.importedOptInQualifiedNames
+      .takeIf { it.isNotEmpty() }
+      ?.map { classLiteral(topLevelQualifiedNameSource(it)) }
+      .ifNotNullSource { fileOptInAnnotationSource(it) }
 
 internal val Renderer.hiddenFromObjCAnnotationSource: Source
-  get() = at(topLevelQualifiedNameSource("kotlin.native.HiddenFromObjC"))
+  get() =
+    at(
+      topLevelQualifiedNameSource(
+        "kotlin.native.HiddenFromObjC",
+        optInQualifiedName = "kotlin.experimental.ExperimentalObjCRefinement"
+      )
+    )
 
 internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
   join(
-    at(topLevelQualifiedNameSource("kotlin.native.ObjCName")),
+    at(
+      topLevelQualifiedNameSource(
+        "kotlin.native.ObjCName",
+        optInQualifiedName = "kotlin.experimental.ExperimentalObjCName"
+      )
+    ),
     inRoundBrackets(
       commaSeparated(
         literalSource(name),

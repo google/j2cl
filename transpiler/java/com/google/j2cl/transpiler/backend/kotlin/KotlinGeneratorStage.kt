@@ -72,11 +72,11 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
         topLevelQualifiedNames = compilationUnit.topLevelQualifiedNames
       )
 
-    // Render file header, collecting qualified names to import
-    val fileHeaderSource = renderer.fileHeaderSource(compilationUnit)
-
     // Render types, collecting qualified names to import
     val typesSource = renderer.typesSource(compilationUnit)
+
+    // Render file header, collecting qualified names to import
+    val fileHeaderSource = renderer.fileHeaderSource(compilationUnit)
 
     // Render package and collected imports
     val packageAndImportsSource = renderer.packageAndImportsSource(compilationUnit)

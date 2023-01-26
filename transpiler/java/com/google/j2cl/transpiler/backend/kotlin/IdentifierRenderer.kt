@@ -38,13 +38,16 @@ internal val String.identifierString
       else if (isHardKeyword(this) || !isValidIdentifier) "`$this`" else this
     }
 
-internal fun packageNameSource(packageName: String): Source = qualifiedIdentifierSource(packageName)
-
-internal fun Renderer.topLevelQualifiedNameSource(qualifiedName: String): Source =
-  qualifiedToNonAliasedSimpleName(qualifiedName).let { simpleName ->
-    if (simpleName != null) identifierSource(simpleName)
-    else qualifiedIdentifierSource(qualifiedName)
-  }
+internal fun Renderer.topLevelQualifiedNameSource(
+  qualifiedName: String,
+  optInQualifiedName: String? = null
+): Source =
+  qualifiedToNonAliasedSimpleName(qualifiedName)
+    .let { simpleName ->
+      if (simpleName != null) identifierSource(simpleName)
+      else qualifiedIdentifierSource(qualifiedName)
+    }
+    .also { optInQualifiedName?.let { environment.importedOptInQualifiedNames.add(it) } }
 
 internal fun Renderer.extensionMemberQualifiedNameSource(qualifiedName: String): Source =
   identifierSource(qualifiedToSimpleName(qualifiedName))

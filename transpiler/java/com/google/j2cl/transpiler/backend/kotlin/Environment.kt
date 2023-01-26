@@ -26,7 +26,10 @@ data class Environment(
   private val identifierSet: Set<String> = emptySet(),
 
   /** Mutable map from simple name to qualified name of types to be imported. */
-  val importedSimpleNameToQualifiedNameMap: MutableMap<String, String> = mutableMapOf()
+  val importedSimpleNameToQualifiedNameMap: MutableMap<String, String> = mutableMapOf(),
+
+  /** Mutable map with imported classes for OptIn annotation. */
+  val importedOptInQualifiedNames: MutableSet<String> = mutableSetOf()
 ) {
   /** Returns identifier for the given name */
   fun identifier(hasName: HasName): String =
