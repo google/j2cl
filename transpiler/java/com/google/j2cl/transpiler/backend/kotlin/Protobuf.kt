@@ -50,6 +50,11 @@ internal fun TypeDescriptor.isProtobufBuilder(): Boolean {
     name == "com.google.protobuf.GeneratedMessageLite.Builder"
 }
 
+internal fun computeProtobufPropertyName(methodName: String) =
+  if (methodName.startsWith("get") && methodName.length > 3 && methodName[3].isUpperCase())
+    methodName[3].toLowerCase() + methodName.substring(4)
+  else methodName
+
 private fun DeclaredTypeDescriptor.isProtobufMessage(): Boolean {
   val superTypeDescriptor: DeclaredTypeDescriptor = getSuperTypeDescriptor() ?: return false
   val name = superTypeDescriptor.qualifiedSourceName

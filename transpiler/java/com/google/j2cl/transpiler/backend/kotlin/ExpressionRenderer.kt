@@ -37,7 +37,6 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.Invocation
 import com.google.j2cl.transpiler.ast.JsDocCastExpression
 import com.google.j2cl.transpiler.ast.JsDocExpression
-import com.google.j2cl.transpiler.ast.KtInfo
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -332,7 +331,7 @@ private fun Renderer.methodInvocationSource(expression: MethodCall): Source =
           invocationSource(expression)
         )
       methodDescriptor.isProtobufGetter() ->
-        identifierSource(KtInfo.computePropertyName(expression.target.name))
+        identifierSource(computeProtobufPropertyName(expression.target.name!!))
       methodDescriptor.isProtoExtensionChecker() ->
         join(
           extensionMemberQualifiedNameSource("com.google.protobuf.kotlin.contains"),
