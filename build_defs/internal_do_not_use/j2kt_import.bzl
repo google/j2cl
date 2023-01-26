@@ -18,7 +18,8 @@ def _j2kt_jvm_import_impl(ctx):
         J2ktInfo(
             _private_ = struct(
                 java_info = ctx.attr.jar[JavaInfo],
-                java_srcs = depset(),
+                transpile_header_out = [],
+                j2kt_exports = depset(),
             ),
         ),
     ] + kt_runtime_java_infos
@@ -30,7 +31,8 @@ def _j2kt_native_import_impl(ctx):
         J2ktInfo(
             _private_ = struct(
                 java_info = ctx.attr.jar[JavaInfo],
-                java_srcs = depset(),
+                transpile_header_out = [],
+                j2kt_exports = depset(),
             ),
         ),
     ] + kt_native_infos
