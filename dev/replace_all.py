@@ -16,7 +16,6 @@
 import argparse
 import os
 import re
-import time
 import repo_util
 
 
@@ -141,13 +140,7 @@ def _replace_readable_outputs(readable_dirs, tree_artifact_dir, output_dir):
     transpiler_output = "blaze-bin/%s/%s" % (readable_dir, tree_artifact_dir)
     output = "%s/%s" % (readable_dir, output_dir)
     repo_util.run_cmd(["rm", "-Rf", output])
-    # Short sleep to workaround CitC struggling with the directory removal and
-    # recreation happening back-to-back.
-    time.sleep(0.1)
     repo_util.run_cmd(["mkdir", output])
-    # Short sleep to workaround CitC struggling with the directory removal and
-    # recreation happening back-to-back.
-    time.sleep(0.1)
     repo_util.run_cmd(
         ["cp --no-preserve=mode -r %s/* %s" % (transpiler_output, output)],
         shell=True)
