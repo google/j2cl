@@ -39,22 +39,14 @@ open class GenericMethod<T> {
   @ObjCName("withJavaLangError") t: T_1
  ) {
   object : GenericMethod<T_1>() {
-   open fun fun2(
-    @ObjCName("withJavaLangError") t: T_1
-   ) {}
+   open fun fun2(t: T_1) {}
 
-   open fun <T_1> fun2(
-    @ObjCName("withId") t: T_1
-   ) {}
+   open fun <T_1> fun2(t: T_1) {}
   }
   open class ___1LocalClass<T>: GenericMethod<T>() {
-   open fun fun2(
-    @ObjCName("withId") t: T
-   ) {}
+   open fun fun2(t: T) {}
 
-   open fun <T_1: Number?> fun2(
-    @ObjCName("withNSNumber") t: T_1
-   ) {}
+   open fun <T_1: Number?> fun2(t: T_1) {}
   }
   ___1LocalClass<T_1>()
  }

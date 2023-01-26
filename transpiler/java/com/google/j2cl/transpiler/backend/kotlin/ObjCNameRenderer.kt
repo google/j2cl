@@ -106,16 +106,26 @@ internal fun Method.toObjCNames(): MethodObjCNames? =
   else if (descriptor.isConstructor) toConstructorObjCNames() else toNonConstructorObjCNames()
 
 private val MethodDescriptor.needsObjCNameAnnotations
-  get() = visibility.needsObjCNameAnnotation && !isKtOverride
+  get() =
+    enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+      !enclosingTypeDeclaration.isLocal &&
+        !enclosingTypeDeclaration.isAnonymous &&
+        visibility.needsObjCNameAnnotation &&
+        !isKtOverride
+    }
 
 private val FieldDescriptor.needsObjCNameAnnotations
   get() =
-    enclosingTypeDescriptor.typeDeclaration.needsObjCNameAnnotation &&
-      visibility.needsObjCNameAnnotation &&
-      isStatic
+    enclosingTypeDescriptor.typeDeclaration.let { enclosingTypeDeclaration ->
+      enclosingTypeDeclaration.visibility.needsObjCNameAnnotation &&
+        !enclosingTypeDeclaration.isLocal &&
+        !enclosingTypeDeclaration.isAnonymous &&
+        visibility.needsObjCNameAnnotation &&
+        isStatic
+    }
 
 private val TypeDeclaration.needsObjCNameAnnotation
-  get() = visibility.needsObjCNameAnnotation && !isLocal
+  get() = visibility.needsObjCNameAnnotation && !isLocal && !isAnonymous
 
 private val Visibility.needsObjCNameAnnotation
   get() = this == Visibility.PUBLIC || this == Visibility.PROTECTED

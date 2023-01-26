@@ -21,16 +21,11 @@ open class LocalClassWithConstructor {
    @JvmField
    var field: Int = 0
 
-   constructor(
-    @ObjCName("Int") a: Int,
-    @ObjCName("withInt") b: Int
-   ) {
+   constructor(a: Int, b: Int) {
     this.field = localVar + a + b
    }
 
-   constructor(
-    @ObjCName("Int") a: Int
-   ): this(a, p) {
+   constructor(a: Int): this(a, p) {
     this.field = localVar
    }
   }
