@@ -141,21 +141,21 @@ public class ObjCName {
 
   public static void alloc() {}
 
-  public static void allocFoo() {}
+  public static void allocBar() {}
 
-  public static void allocatedFoo() {}
+  public static void allocatedBar() {}
 
   public static void init() {}
 
   public static void initialize() {}
 
-  public static void initFoo() {}
+  public static void initBar() {}
 
-  public static void newFoo() {}
+  public static void newBar() {}
 
-  public static void copyFoo() {}
+  public static void copyBar() {}
 
-  public static void mutableCopyFoo() {}
+  public static void mutableCopyBar() {}
 
   public static void reservedParamNames(int extern, int struct, int register, int inline) {}
 
