@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
 
 internal fun MethodDescriptor.isProtoExtensionChecker() =
   qualifiedBinaryName ==
@@ -51,8 +52,7 @@ internal fun TypeDescriptor.isProtobufBuilder(): Boolean {
 }
 
 internal fun computeProtobufPropertyName(methodName: String) =
-  if (methodName.startsWith("get") && methodName.length > 3 && methodName[3].isUpperCase())
-    methodName[3].toLowerCase() + methodName.substring(4)
+  if (methodName.camelCaseStartsWith("get")) methodName[3].toLowerCase() + methodName.substring(4)
   else methodName
 
 private fun DeclaredTypeDescriptor.isProtobufMessage(): Boolean {

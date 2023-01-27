@@ -21,22 +21,27 @@ open class KTopLevel<O> {
  @JvmField
  var renamedField: Int = 0
 
+ @ObjCName("renamedMethod")
  open fun renamedMethod(): Int {
   return 0
  }
 
+ @ObjCName("methodAsProperty")
  open val methodAsProperty: Int get() {
   return 0
  }
 
+ @ObjCName("nonGetMethodAsProperty")
  open val nonGetMethodAsProperty: Int get() {
   return 0
  }
 
+ @ObjCName("renamedMethodAsProperty")
  open val renamedMethodAsProperty: Int get() {
   return 0
  }
 
+ @ObjCName("getRenamedMethodAsProperty")
  open val getRenamedMethodAsProperty: Int get() {
   return 0
  }
@@ -44,10 +49,12 @@ open class KTopLevel<O> {
  @JvmField
  var isRenamedField: Boolean = false
 
+ @ObjCName("isMethodAsProperty")
  open val isMethodAsProperty: Boolean get() {
   return false
  }
 
+ @ObjCName("getstartingmethodAsProperty")
  open val getstartingmethodAsProperty: Int get() {
   return 0
  }
@@ -56,6 +63,7 @@ open class KTopLevel<O> {
   @ObjCName("Id") o: O
  )
 
+ @ObjCName("instanceMethod")
  open fun instanceMethod(
   @ObjCName("withId") o: O
  ): O {
@@ -64,10 +72,11 @@ open class KTopLevel<O> {
 
  companion object {
   @JvmField
-  @ObjCName("staticField")
+  @ObjCName("staticField_")
   var staticField: Any? = null
 
   @JvmStatic
+  @ObjCName("staticMethod")
   fun <S> staticMethod(
    @ObjCName("withId") s: S
   ): S {
@@ -84,22 +93,25 @@ open class KTopLevel<O> {
    @ObjCName("Id") n: N
   )
 
+  @ObjCName("instanceMethod")
   open fun instanceMethod(
    @ObjCName("withId") n: N
   ): N {
    return n
   }
 
+  @ObjCName("renamedMethod")
   open fun renamedMethod(): Int {
    return 0
   }
 
   companion object {
    @JvmField
-   @ObjCName("staticField")
+   @ObjCName("staticField_")
    var staticField: Any? = null
 
    @JvmStatic
+   @ObjCName("staticMethod")
    fun <S> staticMethod(
     @ObjCName("withId") s: S
    ): S {

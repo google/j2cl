@@ -11,6 +11,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("DevirtualizedcallsStringCalls", exact = true)
 open class StringCalls {
+ @ObjCName("main")
  open fun main() {
   val literal: String? = "String"
   val sub: String? = literal!!.substring(1)

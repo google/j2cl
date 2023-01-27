@@ -11,6 +11,7 @@ import protobuf.MyMessage
 
 @ObjCName("ProtobufProtobuf", exact = true)
 open class Protobuf {
+ @ObjCName("test")
  open fun test() {
   val builder = MyMessage.newBuilder()
   builder!!.setTestField(42)

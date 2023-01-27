@@ -20,11 +20,13 @@ open class TypeWildCards {
   }
 
   @JvmStatic
+  @ObjCName("testObservable")
   fun testObservable(
    @ObjCName("withJ2ktTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
   ) {}
 
   @JvmStatic
+  @ObjCName("testSuperWildcardObservable")
   fun testSuperWildcardObservable(
    @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable") observable: TypeWildCards.SuperWildcardObservable<*>?
   ) {
@@ -33,6 +35,7 @@ open class TypeWildCards {
   }
 
   @JvmStatic
+  @ObjCName("testKtInObservable")
   fun testKtInObservable(
    @ObjCName("withJ2ktTypeWildCards_KtInObservable") observable: TypeWildCards.KtInObservable<*>?
   ) {
@@ -46,34 +49,40 @@ open class TypeWildCards {
  open class Child: TypeWildCards.Parent() {}
 
  fun interface SupplierWithUpperBound<T: TypeWildCards.Parent?> {
+  @ObjCName("get")
   fun get(): T
  }
 
  fun interface Observer<E> {
+  @ObjCName("on")
   fun on(
    @ObjCName("withId") event: E
   )
  }
 
  fun interface KtInObserver<in E> {
+  @ObjCName("on")
   fun on(
    @ObjCName("withId") event: E
   )
  }
 
  fun interface Observable<E> {
+  @ObjCName("addObserver")
   fun addObserver(
    @ObjCName("withJ2ktTypeWildCards_Observer") observer: TypeWildCards.Observer<E>?
   )
  }
 
  fun interface SuperWildcardObservable<E> {
+  @ObjCName("addObserver")
   fun addObserver(
    @ObjCName("withJ2ktTypeWildCards_Observer") observer: TypeWildCards.Observer<in E>?
   )
  }
 
  fun interface KtInObservable<E> {
+  @ObjCName("addObserver")
   fun addObserver(
    @ObjCName("withJ2ktTypeWildCards_KtInObserver") observer: TypeWildCards.KtInObserver<E>?
   )

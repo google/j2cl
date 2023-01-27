@@ -12,12 +12,14 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 fun interface I<T> {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withId") t: T
  ): Int
 
  companion object {
   @JvmStatic
+  @ObjCName("staticFoo")
   fun staticFoo(): Int {
    return 0
   }

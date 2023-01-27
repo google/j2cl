@@ -71,6 +71,7 @@ open class Main {
  }
 
  fun interface Fn {
+  @ObjCName("test")
   fun test(
    @ObjCName("withInt") nonFinal: Int,
    @ObjCName("withInt") implicitFinal: Int
@@ -78,6 +79,7 @@ open class Main {
  }
 
  fun interface FnPrimitiveVarargs {
+  @ObjCName("test")
   fun test(
    @ObjCName("withInt") i: Int,
    vararg @ObjCName("withIntArray") `is`: Int
@@ -85,6 +87,7 @@ open class Main {
  }
 
  fun interface FnObjectVarargs {
+  @ObjCName("test")
   fun test(
    @ObjCName("withId") o: Any?,
    vararg @ObjCName("withNSObjectArray") os: Any?

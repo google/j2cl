@@ -19,6 +19,7 @@ open class SimpleLongs {
  @JvmField
  var foo: Long = 0L
 
+ @ObjCName("getBar")
  open fun getBar(): Long {
   return 0L
  }
@@ -27,11 +28,13 @@ open class SimpleLongs {
  @HiddenFromObjC
  var sideEffect_private_2: Int = 0
 
+ @ObjCName("getWithSideEffect")
  open fun getWithSideEffect(): SimpleLongs? {
   this.sideEffect_private_2 = this.sideEffect_private_2 + 1
   return this
  }
 
+ @ObjCName("main")
  open fun main() {
   var a: Long = 0L
   a = - 100000L

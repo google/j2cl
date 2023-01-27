@@ -30,6 +30,7 @@ open class Varargs {
 
  constructor(): this(1)
 
+ @ObjCName("test")
  open fun test(
   @ObjCName("withInt") a: Int,
   vararg @ObjCName("withNSObjectArray") args: Any?
@@ -37,18 +38,21 @@ open class Varargs {
   val args_1: Array<Any?>? = args as Array<Any?>?
  }
 
+ @ObjCName("testCloneable")
  open fun testCloneable(
   vararg @ObjCName("withNSCopyingArray") args: Cloneable?
  ) {
   val args_1: Array<Cloneable?>? = args as Array<Cloneable?>?
  }
 
+ @ObjCName("testSerializable")
  open fun testSerializable(
   vararg @ObjCName("withJavaIoSerializableArray") args: Serializable?
  ) {
   val args_1: Array<Serializable?>? = args as Array<Serializable?>?
  }
 
+ @ObjCName("testAssignment")
  open fun testAssignment(
   vararg @ObjCName("withNSObjectArray") args: Any?
  ) {
@@ -56,10 +60,12 @@ open class Varargs {
   this.args_private_2 = args_1 as Array<Any?>?
  }
 
+ @ObjCName("testLambda")
  open fun testLambda(
   @ObjCName("withVarargsVarargs_FunctionalInterface") functionalInterface: Varargs.FunctionalInterface?
  ) {}
 
+ @ObjCName("main")
  open fun main() {
   val v: Varargs? = Varargs()
   v!!.test(1)
@@ -77,6 +83,7 @@ open class Varargs {
 
  companion object {
   @JvmStatic
+  @ObjCName("fun")
   fun <T> `fun`(
    vararg @ObjCName("withNSObjectArray") elements: T
   ) {
@@ -84,6 +91,7 @@ open class Varargs {
   }
 
   @JvmStatic
+  @ObjCName("bar")
   fun <E> bar(
    @ObjCName("withId") a: E,
    @ObjCName("withId") b: E
@@ -93,6 +101,7 @@ open class Varargs {
  }
 
  fun interface FunctionalInterface {
+  @ObjCName("apply")
   fun apply(
    vararg @ObjCName("withNSStringArray") strings: String?
   )

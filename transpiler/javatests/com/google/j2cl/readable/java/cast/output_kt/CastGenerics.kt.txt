@@ -30,6 +30,7 @@ open class CastGenerics<T, E: Number?> {
   return null as T
  }
 
+ @ObjCName("testCastToTypeVariable")
  open fun testCastToTypeVariable() {
   val o: Any? = Int(1)
   val e: E? = o as E?
@@ -38,6 +39,7 @@ open class CastGenerics<T, E: Number?> {
   val ts: Array<T>? = o as Array<T>?
  }
 
+ @ObjCName("testCastToMethodTypeVariable")
  open fun <S, V: Enum<V>> testCastToMethodTypeVariable() {
   val o: Any? = Int(1)
   val s: S? = o as S?
@@ -46,6 +48,7 @@ open class CastGenerics<T, E: Number?> {
   c = o as V?
  }
 
+ @ObjCName("outerGenericMethod")
  open fun <TT: Enum<*>> outerGenericMethod() {
   open class ___1Nested<SS> {
    @HiddenFromObjC
@@ -55,6 +58,7 @@ open class CastGenerics<T, E: Number?> {
   }
  }
 
+ @ObjCName("method")
  open fun <EE> method(
   @ObjCName("withId") o: Any?
  ): EE where EE: CastGenerics.Empty1?, EE: CastGenerics.Empty2<EE>? {
@@ -66,6 +70,7 @@ open class CastGenerics<T, E: Number?> {
 
  companion object {
   @JvmStatic
+  @ObjCName("testErasureCast")
   fun <T_1, U: T_1> testErasureCast() where T_1: CastGenerics.A?, T_1: CastGenerics.B? {
    var str: String? = CastGenerics<String?, Number?>().field_pp_cast
    str = CastGenerics<String?, Number?>().method_pp_cast()
@@ -96,6 +101,7 @@ open class CastGenerics<T, E: Number?> {
   }
 
   @JvmStatic
+  @ObjCName("testCastToParamterizedType")
   fun testCastToParamterizedType() {
    val o: Any? = Int(1)
    var cc: CastGenerics<Error?, Number?>? = o as CastGenerics<Error?, Number?>?
@@ -103,16 +109,19 @@ open class CastGenerics<T, E: Number?> {
   }
 
   @JvmStatic
+  @ObjCName("doSomething")
   fun <T_1> doSomething(): CastGenerics.Foo<T_1>? {
    return object : CastGenerics.Foo<T_1>() {}
   }
  }
 
  fun interface A {
+  @ObjCName("mA")
   fun mA()
  }
 
  fun interface B {
+  @ObjCName("mB")
   fun mB()
  }
 

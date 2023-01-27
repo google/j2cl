@@ -14,11 +14,13 @@ import kotlin.native.ObjCName
 open class TypeArgumentsInference {
  companion object {
   @JvmStatic
+  @ObjCName("wildcardPair")
   fun <K> wildcardPair(): TypeArgumentsInference.Pair<K, *> {
    return TypeArgumentsInference.Pair<K, Any>()
   }
 
   @JvmStatic
+  @ObjCName("pairIdentity")
   fun <K, V> pairIdentity(
    @ObjCName("withNullabilityDefaultnotnullableTypeArgumentsInference_Pair") pair: TypeArgumentsInference.Pair<K, V>
   ): TypeArgumentsInference.Pair<K, V> {
@@ -26,6 +28,7 @@ open class TypeArgumentsInference {
   }
 
   @JvmStatic
+  @ObjCName("wildcardPairAndIdentity")
   fun <K> wildcardPairAndIdentity(): TypeArgumentsInference.Pair<K, *> {
    return TypeArgumentsInference.pairIdentity<K, Any>(TypeArgumentsInference.wildcardPair<K>() as TypeArgumentsInference.Pair<K, Any>)
   }

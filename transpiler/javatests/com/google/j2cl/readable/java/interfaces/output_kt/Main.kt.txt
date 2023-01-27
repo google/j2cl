@@ -29,8 +29,10 @@ open class Main {
  }
 
  fun interface Interface<T> {
+  @ObjCName("interfaceMethod")
   fun interfaceMethod()
 
+  @ObjCName("defaultMethod")
   fun defaultMethod(
    @ObjCName("withId") t: T
   ) {
@@ -46,6 +48,7 @@ open class Main {
    const val b: Int = 2
 
    @JvmStatic
+   @ObjCName("staticInterfaceMethod")
    fun staticInterfaceMethod() {}
   }
  }

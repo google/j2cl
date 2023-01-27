@@ -16,6 +16,7 @@ import kotlin.native.ObjCName
 open class MultipleAbstractParents {
  companion object {
   @JvmStatic
+  @ObjCName("main")
   fun main(
    vararg @ObjCName("withNSStringArray") args: String?
   ) {
@@ -28,6 +29,7 @@ open class MultipleAbstractParents {
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_List", exact = true)
  fun interface List<T> {
+  @ObjCName("getFoo")
   fun getFoo(
    @ObjCName("withId") t: T
   ): String?
@@ -35,6 +37,7 @@ open class MultipleAbstractParents {
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_Collection", exact = true)
  fun interface Collection<T> {
+  @ObjCName("getFoo")
   fun getFoo(
    @ObjCName("withId") t: T
   ): String?
@@ -45,6 +48,7 @@ open class MultipleAbstractParents {
 
  @ObjCName("MultipleabstractparentsMultipleAbstractParents_AbstractCollection", exact = true)
  abstract class AbstractCollection<T> {
+  @ObjCName("getFoo")
   open fun getFoo(
    @ObjCName("withId") t: T
   ): String? {

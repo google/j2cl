@@ -25,6 +25,7 @@ open class SynchronizedMethod {
  @HiddenFromObjC
  var b_private_2: Int = 0
 
+ @ObjCName("method")
  open fun method() {
   synchronized(this) {
    this.a_private_2 = this.a_private_2 + 1
@@ -42,6 +43,7 @@ open class SynchronizedMethod {
   var sb_private_2: Int = 0
 
   @JvmStatic
+  @ObjCName("staticMethod")
   fun staticMethod() {
    synchronized(SynchronizedMethod::class.javaObjectType) {
     SynchronizedMethod.sa_private_2 = SynchronizedMethod.sa_private_2 + 1

@@ -15,6 +15,7 @@ import kotlin.native.ObjCName
 @ObjCName("AnnotationMain", exact = true)
 open class Main {
  interface Foo: Annotation {
+  @ObjCName("bar")
   fun bar(): Int
 
   companion object {

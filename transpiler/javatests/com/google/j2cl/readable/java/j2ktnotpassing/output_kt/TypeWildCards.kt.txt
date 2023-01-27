@@ -13,6 +13,7 @@ import kotlin.native.ObjCName
 open class TypeWildCards {
  companion object {
   @JvmStatic
+  @ObjCName("testObservable")
   fun testObservable(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
   ) {
@@ -22,12 +23,14 @@ open class TypeWildCards {
  }
 
  fun interface Observer<E> {
+  @ObjCName("on")
   fun on(
    @ObjCName("withId") event: E
   )
  }
 
  fun interface Observable<E> {
+  @ObjCName("addObserver")
   fun addObserver(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observer") observer: TypeWildCards.Observer<E>?
   )

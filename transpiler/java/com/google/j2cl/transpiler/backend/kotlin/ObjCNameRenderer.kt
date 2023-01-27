@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.InternalCompilerError
-import com.google.j2cl.common.StringUtils
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.FieldDescriptor
@@ -33,6 +32,7 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
+import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
@@ -107,10 +107,8 @@ private val MemberDescriptor.isHiddenFromObjC
 private fun parameterSource(name: String, valueSource: Source): Source =
   assignment(source(name), valueSource)
 
-internal data class MethodObjCNames(
-  val methodName: String? = null,
-  val parameterNames: List<String>
-)
+/** The names are mangled according to J2ObjC rules. */
+internal data class MethodObjCNames(val methodName: String, val parameterNames: List<String>)
 
 internal fun Method.toObjCNames(): MethodObjCNames? =
   if (!descriptor.needsObjCNameAnnotations) null
@@ -144,7 +142,7 @@ private val Visibility.needsObjCNameAnnotation
 private fun Method.toConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     MethodObjCNames(
-      objectiveCName,
+      objectiveCName ?: "init",
       if (objectiveCName != null) {
         objectiveCName.objCMethodParameterNames.mapFirst {
           val prefix = "initWith"
@@ -161,7 +159,10 @@ private fun Method.toConstructorObjCNames(): MethodObjCNames =
 private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     if (objectiveCName == null || parameters.isEmpty()) {
-      MethodObjCNames(objectiveCName, parameters.map { "with${it.objCName}" })
+      MethodObjCNames(
+        objectiveCName ?: descriptor.ktName.escapeJ2ObjCKeyword,
+        parameters.map { "with${it.objCName}" }
+      )
     } else {
       val objCParameterNames = objectiveCName.objCMethodParameterNames
       val firstObjCParameterName = objCParameterNames.firstOrNull()
@@ -227,9 +228,6 @@ private fun String.objCPackagePrefix(forMember: Boolean): String =
     .split('.')
     .joinToString(separator = "") { it.titleCase.objCName }
 
-internal val String.titleCase
-  get() = StringUtils.capitalize(this)
-
 internal val String.objCName
   get() = replace('$', '_')
 
@@ -276,4 +274,4 @@ private val Variable.objCName
   get() = typeDescriptor.objCName(useId = true, forMember = true).titleCase
 
 internal val FieldDescriptor.objCName: String
-  get() = name!!.objCName.escapeJ2ObjCKeyword.escapeReservedObjCPrefixWith("the")
+  get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant) { it + "_" }

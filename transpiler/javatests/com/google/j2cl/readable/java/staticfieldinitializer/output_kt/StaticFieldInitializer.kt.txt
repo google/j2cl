@@ -14,11 +14,11 @@ import kotlin.native.ObjCName
 open class StaticFieldInitializer {
  companion object {
   @JvmField
-  @ObjCName("a")
+  @ObjCName("a_")
   var a: Int = 2
 
   @JvmField
-  @ObjCName("b")
+  @ObjCName("b_")
   var b: Int = StaticFieldInitializer.a * 4
  }
 }

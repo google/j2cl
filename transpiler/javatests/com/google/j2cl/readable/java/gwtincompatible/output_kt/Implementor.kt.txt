@@ -20,6 +20,7 @@ open class Implementor: Interface.ClassWithAbstractMethod(), Interface, Interfac
 
  open override fun incompatibleFromClass() {}
 
+ @ObjCName("compatibleMethod")
  open fun compatibleMethod() {
   val a: Int = 4
  }

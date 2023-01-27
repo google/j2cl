@@ -14,6 +14,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("DevirtualizedcallsObjectCalls", exact = true)
 open class ObjectCalls {
+ @ObjCName("main")
  open fun main() {
   val `object`: Any? = Any()
   `object`!!.equals(`object`)
@@ -27,6 +28,7 @@ open class ObjectCalls {
   objectCalls!!.getClass()
  }
 
+ @ObjCName("test")
  open fun test() {
   this.equals(Any())
   this.hashCode()
@@ -38,6 +40,7 @@ open class ObjectCalls {
   this.getClass()
  }
 
+ @ObjCName("testNotEquals")
  open fun testNotEquals(): Boolean {
   return !this.equals(Any())
  }

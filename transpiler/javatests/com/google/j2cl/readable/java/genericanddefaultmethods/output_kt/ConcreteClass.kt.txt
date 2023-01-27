@@ -11,6 +11,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 interface InterfaceWithDefault {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withNSString") value: String?
  ) {
@@ -19,6 +20,7 @@ interface InterfaceWithDefault {
 }
 
 open class GenericClass<T> {
+ @ObjCName("foo")
  open fun foo(
   @ObjCName("withId") value: T
  ) {

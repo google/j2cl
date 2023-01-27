@@ -30,6 +30,7 @@ open class SomeJsType<T> {
  @JvmField
  var protectedField: Int = 0
 
+ @ObjCName("publicMethod")
  open fun publicMethod() {}
 
  @HiddenFromObjC
@@ -38,8 +39,10 @@ open class SomeJsType<T> {
  @HiddenFromObjC
  open fun packageMethod_pp_jstype() {}
 
+ @ObjCName("protectedMethod")
  open fun protectedMethod() {}
 
+ @ObjCName("useFieldsAndMethods")
  open fun useFieldsAndMethods() {
   val value: Int = this.publicField + this.privateField_private_2 + this.packageField_pp_jstype + this.protectedField
   this.publicMethod()

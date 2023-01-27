@@ -27,6 +27,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("ArrayArrays", exact = true)
 open class Arrays {
+ @ObjCName("testObjectArray")
  open fun testObjectArray() {
   var objects: Array<Any?>? = arrayOfNulls<Any>(100)
   objects = arrayOfNulls<Any>(0)
@@ -43,6 +44,7 @@ open class Arrays {
   objects2d!![0]!![1] = null
  }
 
+ @ObjCName("testJavaTypeArray")
  open fun testJavaTypeArray() {
   var objects: Array<Arrays.SomeObject?>? = arrayOfNulls<Arrays.SomeObject>(100)
   objects = arrayOfNulls<Arrays.SomeObject>(0)
@@ -138,26 +140,31 @@ open class Arrays {
   nativeObjects2d!![0]!![1] = null
  }
 
+ @ObjCName("testErasureCastsOnArrayAccess")
  open fun testErasureCastsOnArrayAccess() {
   val container: Arrays.ArrayContainer<String?>? = null
   val s: String? = container!!.data_pp_array!![0]
  }
 
+ @ObjCName("testCovariance")
  open fun testCovariance() {
   var objectArray: Array<Any?>? = null
   val stringArray: Array<String?>? = null
   objectArray = stringArray as Array<Any?>?
  }
 
+ @ObjCName("testArraysSupertypeClosureTypes")
  open fun testArraysSupertypeClosureTypes() {
   this.consumesCloneable(arrayOfNulls<Any>(10))
   this.consumesSerializable(arrayOfNulls<Any>(10))
  }
 
+ @ObjCName("consumesCloneable")
  open fun consumesCloneable(
   @ObjCName("withNSCopying") cloneable: Cloneable?
  ) {}
 
+ @ObjCName("consumesSerializable")
  open fun consumesSerializable(
   @ObjCName("withJavaIoSerializable") serializable: Serializable?
  ) {}

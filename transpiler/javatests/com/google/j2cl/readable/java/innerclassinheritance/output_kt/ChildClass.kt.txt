@@ -17,6 +17,7 @@ open class ParentOuter {
  @JvmField
  var fieldInParentOuter: Int = 0
 
+ @ObjCName("funInParentOuter")
  open fun funInParentOuter() {}
 }
 
@@ -24,6 +25,7 @@ open class ParentInner {
  @JvmField
  var fieldInParentInner: Int = 0
 
+ @ObjCName("funInParentInner")
  open fun funInParentInner() {}
 }
 
@@ -32,8 +34,10 @@ open class ChildClass: ParentOuter() {
  @JvmField
  var fieldInOuter: Int = 0
 
+ @ObjCName("funInOuter")
  open fun funInOuter() {}
 
+ @ObjCName("testLocalClass")
  open fun testLocalClass() {
   open class ___1LocalClass: ChildClass() {
    @JvmField
@@ -57,8 +61,10 @@ open class ChildClass: ParentOuter() {
   @JvmField
   var fieldInInner: Int = 0
 
+  @ObjCName("funInInner")
   open fun funInInner() {}
 
+  @ObjCName("testInnerClass")
   open fun testInnerClass(): Int {
    this@ChildClass.funInParentOuter()
    this@ChildClass.funInParentOuter()

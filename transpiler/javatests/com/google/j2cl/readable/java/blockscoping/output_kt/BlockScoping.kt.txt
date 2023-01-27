@@ -11,11 +11,13 @@ import kotlin.native.ObjCName
 
 @ObjCName("BlockscopingBlockScoping", exact = true)
 open class BlockScoping {
+ @ObjCName("localScopes")
  open fun localScopes() {
   val i: Int = 0
   val i_1: Int = 1
  }
 
+ @ObjCName("nestedScopes")
  open fun nestedScopes() {
   var x: Int = 0
   var y: Int = 0

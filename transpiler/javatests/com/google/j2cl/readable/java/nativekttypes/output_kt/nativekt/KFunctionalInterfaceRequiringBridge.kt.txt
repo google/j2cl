@@ -10,6 +10,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("NativekttypesNativektKFunctionalInterfaceRequiringBridge", exact = true)
 fun interface KFunctionalInterfaceRequiringBridge<V> {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withId") t: V
  ): V

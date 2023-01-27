@@ -15,8 +15,10 @@ open class InstanceInnerClass {
  @JvmField
  var instanceField: Int = 0
 
+ @ObjCName("funOuter")
  open fun funOuter() {}
 
+ @ObjCName("test")
  open fun test() {
   InstanceInnerClass().InnerClass()
  }
@@ -29,6 +31,7 @@ open class InstanceInnerClass {
   @JvmField
   var enclosingInstance: InstanceInnerClass? = this@InstanceInnerClass
 
+  @ObjCName("funInner")
   open fun funInner() {
    this@InstanceInnerClass.funOuter()
    this@InstanceInnerClass.funOuter()

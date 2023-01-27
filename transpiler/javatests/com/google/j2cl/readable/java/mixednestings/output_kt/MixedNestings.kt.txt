@@ -10,6 +10,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface MyInterface {
+ @ObjCName("fun")
  fun `fun`(
   @ObjCName("withInt") a: Int
  ): Int
@@ -17,15 +18,19 @@ fun interface MyInterface {
 
 @ObjCName("MixednestingsMixedNestings", exact = true)
 open class MixedNestings {
+ @ObjCName("mm")
  open fun mm() {}
 
+ @ObjCName("test")
  open fun test() {
   A().a()
  }
 
  open inner class A {
+  @ObjCName("aa")
   open fun aa() {}
 
+  @ObjCName("a")
   open fun a() {
    open class ___1B {
     open fun bb() {}

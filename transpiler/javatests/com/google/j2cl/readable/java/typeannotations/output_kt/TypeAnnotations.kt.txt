@@ -18,6 +18,7 @@ abstract class AbstractType: ParametricType<AbstractType?> {}
 abstract class AbstractTypeNonNull: ParametricType<AbstractType> {}
 
 open class Parent {
+ @ObjCName("m")
  open fun m(
   @ObjCName("withNSString") s: String,
   @ObjCName("withTypeannotationsParent") c: Parent?
@@ -25,6 +26,7 @@ open class Parent {
   return c
  }
 
+ @ObjCName("m")
  open fun m(
   @ObjCName("withJavaUtilList") l: MutableList<String>?,
   @ObjCName("withTypeannotationsParent") c: Parent?
@@ -41,6 +43,7 @@ open class ChildWithNonNullableParent: Parent(), ParametricType<Parent> {}
 open class TypeAnnotations {
  companion object {
   @JvmStatic
+  @ObjCName("main")
   fun main() {
    val list: MutableList<String>? = ArrayList<String>()
   }

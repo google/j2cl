@@ -11,14 +11,18 @@ import kotlin.native.ObjCName
 @ObjCName("AbstractmethodoverridedefaultAbstractMethodOverrideDefault", exact = true)
 open class AbstractMethodOverrideDefault {
  fun interface I {
+  @ObjCName("foo")
   fun foo()
 
+  @ObjCName("bar")
   fun bar() {}
  }
 
  fun interface J {
+  @ObjCName("foo")
   fun foo() {}
 
+  @ObjCName("bar")
   fun bar()
  }
 

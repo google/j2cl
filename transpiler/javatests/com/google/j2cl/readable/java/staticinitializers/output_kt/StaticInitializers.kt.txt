@@ -14,15 +14,15 @@ import kotlin.native.ObjCName
 open class StaticInitializers {
  companion object {
   @JvmField
-  @ObjCName("a")
+  @ObjCName("a_")
   var a: Int = 5
 
   @JvmField
-  @ObjCName("b")
+  @ObjCName("b_")
   var b: Int = StaticInitializers.a * 2
 
   @JvmField
-  @ObjCName("c")
+  @ObjCName("c_")
   val c: Int
 
   init {

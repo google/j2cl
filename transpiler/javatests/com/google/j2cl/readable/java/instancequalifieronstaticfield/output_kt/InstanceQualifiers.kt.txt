@@ -18,24 +18,27 @@ import kotlin.run
 open class InstanceQualifiers {
  companion object {
   @JvmField
-  @ObjCName("staticField")
+  @ObjCName("staticField_")
   var staticField: Int = 100
 
   @JvmField
-  @ObjCName("sideEffectCount")
+  @ObjCName("sideEffectCount_")
   var sideEffectCount: Int = 0
 
   @JvmStatic
+  @ObjCName("getStaticValue")
   fun getStaticValue(): Int {
    return InstanceQualifiers.staticField
   }
 
   @JvmStatic
+  @ObjCName("getStaticInstanceQualifiers")
   fun getStaticInstanceQualifiers(): InstanceQualifiers? {
    return null
   }
 
   @JvmStatic
+  @ObjCName("main")
   fun main(
    vararg @ObjCName("withNSStringArray") args: String?
   ) {

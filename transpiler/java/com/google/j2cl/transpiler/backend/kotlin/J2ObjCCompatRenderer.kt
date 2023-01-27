@@ -38,6 +38,7 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
 import com.google.j2cl.transpiler.backend.kotlin.common.code
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
+import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.Import
 import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
@@ -140,10 +141,11 @@ private val FieldDescriptor.getFunctionRenderer: Renderer<Source>
     )
 
 private val FieldDescriptor.getFunctionName: String
-  get() = enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_get_" + name!!
+  get() =
+    enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_get_" + name!!.objCName
 
 private val FieldDescriptor.getObjCName: String
-  get() = objCName.escapeObjCKeyword.escapeReservedObjCPrefixWith("the")
+  get() = if (isEnumConstant) objCName.escapeObjCEnumProperty else objCName.escapeObjCProperty
 
 private val FieldDescriptor.getExpressionRenderer: Renderer<Source>
   get() =
@@ -207,14 +209,14 @@ private fun Method.functionRenderer(objCNames: MethodObjCNames): Renderer<Source
     returnType = descriptor.returnTypeDescriptor.objCRenderer,
     name = descriptor.functionName(objCNames),
     parameters = parameters.map { it.renderer },
-    statements = statementRenderers(objCNames)
+    statements = statementRenderers(objCNames.escapeObjCMethod)
   )
 
 private fun MethodDescriptor.functionName(objCNames: MethodObjCNames): String =
   enclosingTypeDescriptor
     .objCName(useId = true, forMember = true)
     .plus("_")
-    .plus(objCNames.methodName ?: ktName)
+    .plus(objCNames.methodName)
     .letIf(objCNames.parameterNames.isNotEmpty()) { parameterName ->
       parameterName.plus(
         objCNames.parameterNames
@@ -231,18 +233,17 @@ private fun Method.statementRenderers(objCNames: MethodObjCNames): List<Renderer
 private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Source> =
   methodCall(
     target = descriptor.enclosingTypeDescriptor.typeDeclaration.companionSharedRenderer,
-    name = objCNames.objCName(descriptor.ktName),
+    name = objCNames.objCSelector,
     arguments = parameters.map { it.nameRenderer }
   )
 
-private fun MethodObjCNames.objCName(defaultMethodName: String) =
-  (methodName ?: defaultMethodName)
-    .plus(
+private val MethodObjCNames.objCSelector: String
+  get() =
+    methodName.plus(
       parameterNames
         .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCase } + ":" }
         .joinToString("")
     )
-    .escapeReservedObjCPrefixWith("do")
 
 private val Variable.renderer: Renderer<Source>
   get() =

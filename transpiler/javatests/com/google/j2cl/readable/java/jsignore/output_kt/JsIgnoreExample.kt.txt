@@ -16,21 +16,23 @@ import kotlin.native.ObjCName
 open class JsIgnoreExample {
  companion object {
   @JvmStatic
+  @ObjCName("exportedFunction")
   fun exportedFunction() {}
 
   @JvmStatic
+  @ObjCName("notExportedFunction")
   fun notExportedFunction() {}
 
   @JvmField
-  @ObjCName("exportedField")
+  @ObjCName("exportedField_")
   var exportedField: Int = 10
 
   @JvmField
-  @ObjCName("notExportedField")
+  @ObjCName("notExportedField_")
   var notExportedField: Int = 20
 
   @JvmField
-  @ObjCName("CONSTNAME")
+  @ObjCName("CONSTNAME_")
   val CONSTNAME: Any? = Any()
  }
 }

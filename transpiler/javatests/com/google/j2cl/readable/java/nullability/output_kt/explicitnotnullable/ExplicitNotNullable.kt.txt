@@ -153,6 +153,7 @@ open class ExplicitNotNullable {
   this.f13_private_2 = Any()
  }
 
+ @ObjCName("m1")
  open fun m1(
   @ObjCName("withNSString") a: String,
   @ObjCName("withJavaUtilList") b: MutableList<Double>
@@ -160,6 +161,7 @@ open class ExplicitNotNullable {
   return ""
  }
 
+ @ObjCName("m2")
  open fun m2(
   @ObjCName("withNSString") a: String?,
   @ObjCName("withJavaUtilList") b: MutableList<Double?>
@@ -167,6 +169,7 @@ open class ExplicitNotNullable {
   return null
  }
 
+ @ObjCName("m3")
  open fun m3(
   vararg @ObjCName("withNSStringArray") args: String
  ) {
@@ -179,6 +182,7 @@ open class ExplicitNotNullable {
  @HiddenFromObjC
  open fun <T: ExplicitNotNullable.NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_explicitnotnullable() {}
 
+ @ObjCName("casts")
  open fun casts() {
   val listOfString: MutableList<String>? = null as MutableList<String>?
   val nullableListOfString: MutableList<String>? = null as MutableList<String>?
@@ -606,22 +610,26 @@ open class ExplicitNotNullable {
  }
 
  fun interface Consumer<T> {
+  @ObjCName("accept")
   fun accept(
    @ObjCName("withId") t: T
   )
  }
 
  fun interface Supplier<T> {
+  @ObjCName("get")
   fun get(): T
  }
 
  fun interface IntFunction<T> {
+  @ObjCName("accept")
   fun accept(
    @ObjCName("withInt") i: Int
   ): T
  }
 
  fun interface Function<I, O> {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withId") i: I
   ): O

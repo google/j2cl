@@ -20,6 +20,7 @@ import kotlin.native.ObjCName
 open class Main {
  companion object {
   @JvmStatic
+  @ObjCName("test")
   fun test() {
    val a: Main.A<Any?>? = Main.A<Int?>() as Main.A<Any?>?
    a!!.`fun`(Int.valueOf(1))
@@ -45,12 +46,14 @@ open class Main {
 
  @ObjCName("BridgejsmethodMain_A", exact = true)
  open class A<T> {
+  @ObjCName("fun")
   open fun `fun`(
    @ObjCName("withId") t: T
   ): T {
    return t
   }
 
+  @ObjCName("bar")
   open fun bar(
    @ObjCName("withId") t: T
   ) {}
@@ -58,6 +61,7 @@ open class Main {
 
  @ObjCName("BridgejsmethodMain_I", exact = true)
  fun interface I<T: Number?> {
+  @ObjCName("fun")
   fun `fun`(
    @ObjCName("withNSNumber") t: T
   ): T
@@ -65,6 +69,7 @@ open class Main {
 
  @ObjCName("BridgejsmethodMain_J", exact = true)
  fun interface J<T> {
+  @ObjCName("bar")
   fun bar(
    @ObjCName("withId") t: T
   )
@@ -101,6 +106,7 @@ open class Main {
 
  @ObjCName("BridgejsmethodMain_G", exact = true)
  fun interface G<V> {
+  @ObjCName("enclose")
   fun enclose(
    @ObjCName("withId") value: V
   ): V
@@ -126,6 +132,7 @@ open class Main {
  }
 
  fun interface M {
+  @ObjCName("getB")
   fun getB(): Main.B?
  }
 
@@ -146,6 +153,7 @@ open class Main {
  }
 
  fun interface P {
+  @ObjCName("getKey")
   fun getKey(): String?
  }
 
@@ -162,10 +170,12 @@ open class Main {
  open inner class S: Main.R() {}
 
  open inner class GrandParent<T> {
+  @ObjCName("jsMethod")
   open fun jsMethod(
    @ObjCName("withId") t: T
   ) {}
 
+  @ObjCName("method")
   open fun method(
    @ObjCName("withId") t: T
   ) {}

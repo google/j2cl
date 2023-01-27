@@ -14,6 +14,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("SimplelocalclassSimpleLocalClass", exact = true)
 open class SimpleLocalClass {
+ @ObjCName("test")
  open fun test(
   @ObjCName("withInt") p: Int
  ) {
@@ -28,6 +29,7 @@ open class SimpleLocalClass {
   ___1InnerClassWithoutCaptures()
  }
 
+ @ObjCName("fun")
  open fun `fun`() {
   val localVar: Int = 1
   open class ___2InnerClass {
@@ -37,6 +39,7 @@ open class SimpleLocalClass {
   }
  }
 
+ @ObjCName("foo")
  open fun foo() {
   open class ___1Abc___InnerClass {}
   open class ___1Klm___InnerClass {}

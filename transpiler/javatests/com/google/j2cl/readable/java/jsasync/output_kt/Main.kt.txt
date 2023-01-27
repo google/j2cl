@@ -75,6 +75,7 @@ open class Main {
  }
 
  fun interface BaseInterface {
+  @ObjCName("asyncCall")
   fun asyncCall(): Main.IThenable<Int?>?
  }
 
@@ -83,16 +84,19 @@ open class Main {
  }
 
  interface InterfaceWithAsyncDefaultMethod {
+  @ObjCName("asyncCall")
   fun asyncCall(): Main.IThenable<Int?>? {
    return Main.Promise.resolve<Int?>(Main.await_private_2<Int?>(Main.Promise.resolve<Int?>(Int.valueOf(5))))
   }
  }
 
  fun interface JsFunctionInterface {
+  @ObjCName("doSomething")
   fun doSomething(): Main.IThenable<Int?>?
  }
 
  fun interface AsyncJsFunctionInterface {
+  @ObjCName("doSomething")
   fun doSomething(): Main.IThenable<Int?>?
  }
 
@@ -102,6 +106,7 @@ open class Main {
  open class Promise<T>: Main.IThenable<T> {
   companion object {
    @JvmStatic
+   @ObjCName("resolve")
    external fun <T> resolve(
     @ObjCName("withId") value: T
    ): Main.Promise<T>?

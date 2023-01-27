@@ -18,6 +18,7 @@ import kotlin.native.ObjCName
 open class InferReturn<T> {
  companion object {
   @JvmStatic
+  @ObjCName("inferGeneric")
   fun <T_1> inferGeneric(
    @ObjCName("withId") foo: T_1
   ): InferReturn<T_1>? {
@@ -25,6 +26,7 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
+  @ObjCName("tightenType")
   fun tightenType(
    @ObjCName("withInferreturnInferReturn") foo: InferReturn<String?>?
   ): InferReturn<InferReturn<String?>?>? {
@@ -35,6 +37,7 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
+  @ObjCName("main")
   fun main() {
    val list: ArrayList<Any?>? = InferReturn.newArrayList<Any?>("foo")
    InferReturn.acceptsArrayListOfObject(list)
@@ -43,6 +46,7 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
+  @ObjCName("newArrayList")
   fun <V> newArrayList(
    @ObjCName("withId") foo: V
   ): ArrayList<V>? {
@@ -50,6 +54,7 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
+  @ObjCName("newArray")
   fun <V> newArray(
    @ObjCName("withId") foo: V
   ): Array<V>? {
@@ -57,11 +62,13 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
+  @ObjCName("acceptsArrayListOfObject")
   fun acceptsArrayListOfObject(
    @ObjCName("withJavaUtilArrayList") foo: ArrayList<Any?>?
   ) {}
 
   @JvmStatic
+  @ObjCName("acceptsArrayOfObject")
   fun acceptsArrayOfObject(
    @ObjCName("withNSObjectArray") foo: Array<Any?>?
   ) {}

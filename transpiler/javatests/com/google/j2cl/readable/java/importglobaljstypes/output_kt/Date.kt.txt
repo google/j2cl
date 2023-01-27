@@ -13,6 +13,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("ImportglobaljstypesDate", exact = true)
 open class Date {
+ @ObjCName("copy__")
  open fun copy(
   @ObjCName("withImportglobaljstypesDate_NativeDate") d: Date.NativeDate?
  ): Date.NativeDate? {
@@ -21,6 +22,7 @@ open class Date {
 
  companion object {
   @JvmStatic
+  @ObjCName("now")
   fun now(
    @ObjCName("withDouble") x: Double
   ): Double {
@@ -30,10 +32,12 @@ open class Date {
 
  @ObjCName("ImportglobaljstypesDate_NativeDate", exact = true)
  open class NativeDate {
+  @ObjCName("getSeconds")
   external open fun getSeconds(): Int
 
   companion object {
    @JvmStatic
+   @ObjCName("now")
    external fun now(): Double
   }
  }

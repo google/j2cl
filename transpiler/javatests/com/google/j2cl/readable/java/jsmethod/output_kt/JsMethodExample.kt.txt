@@ -12,15 +12,18 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsmethodJsMethodExample", exact = true)
 open class JsMethodExample {
+ @ObjCName("testMethod")
  external open fun <T: ArrayList<String?>?> testMethod(): T
 
  abstract class Base<T> {
+  @ObjCName("m")
   open fun m(
    @ObjCName("withId") t: T
   ) {}
  }
 
  fun interface I {
+  @ObjCName("m")
   fun m(
    @ObjCName("withNSString") s: String?
   )

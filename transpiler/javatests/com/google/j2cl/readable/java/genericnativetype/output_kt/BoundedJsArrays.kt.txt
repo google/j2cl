@@ -17,11 +17,13 @@ open class BoundedJsArrays {
 
  companion object {
   @JvmStatic
+  @ObjCName("create")
   fun <V> create(): BoundedJsArray<V>? {
    return BoundedJsArray.create<V>()
   }
 
   @JvmStatic
+  @ObjCName("createWithSize")
   fun <V> createWithSize(
    @ObjCName("withInt") size: Int
   ): BoundedJsArray<V>? {

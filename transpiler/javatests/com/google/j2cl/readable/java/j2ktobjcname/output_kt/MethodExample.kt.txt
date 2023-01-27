@@ -17,6 +17,7 @@ import kotlin.native.ObjCName
 open class MethodExample {
  companion object {
   @JvmStatic
+  @kotlin.native.ObjCName("main")
   fun main(
    vararg @kotlin.native.ObjCName("withNSStringArray") args: String?
   ) {
@@ -29,20 +30,24 @@ open class MethodExample {
 
  @kotlin.native.ObjCName("J2ktobjcnameMethodExample_ObjCName", exact = true)
  open inner class ObjCName {
+  @kotlin.native.ObjCName("instanceMethod")
   open fun instanceMethod(
    @kotlin.native.ObjCName("withInt") i: Int
   ) {}
 
+  @kotlin.native.ObjCName("instanceMethod")
   open fun instanceMethod(
    @kotlin.native.ObjCName("withInt") i: Int,
    @kotlin.native.ObjCName("withLongArray") l: LongArray?
   ) {}
 
+  @kotlin.native.ObjCName("instanceMethod")
   open fun instanceMethod(
    @kotlin.native.ObjCName("withInt") i: Int,
    @kotlin.native.ObjCName("withLongArray2") l: Array<LongArray?>?
   ) {}
 
+  @kotlin.native.ObjCName("instanceMethod")
   open fun instanceMethod(
    @kotlin.native.ObjCName("withJ2ktobjcnameMethodExample_Foo") foo: MethodExample.Foo?
   ) {}

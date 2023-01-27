@@ -16,4 +16,11 @@
 package com.google.j2cl.transpiler.backend.kotlin.common
 
 fun String.camelCaseStartsWith(prefix: String): Boolean =
-  startsWith(prefix) && getOrNull(prefix.length).run { this == null || isUpperCase() }
+  startsWith(prefix) && getOrNull(prefix.length).run { this == null || !isLowerCase() }
+
+val String.titleCase
+  get() = replaceFirstChar { it.toUpperCase() }
+
+// TODO(b/204366308): Remove after switch to Kotlin 1.5.
+fun String.replaceFirstChar(fn: (Char) -> Char): String =
+  firstOrNull()?.let { fn(it) + drop(1) } ?: this

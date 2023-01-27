@@ -12,18 +12,21 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface I<T, S> {
+ @ObjCName("fun")
  fun `fun`(
   @ObjCName("withId") s: S
  ): T
 }
 
 open class A<T, S> {
+ @ObjCName("fun")
  open fun `fun`(
   @ObjCName("withId") s: S
  ): T {
   return null as T
  }
 
+ @ObjCName("get")
  open fun get(): T {
   return null as T
  }
@@ -36,10 +39,12 @@ open class B: A<Number?, String?>(), I<Int?, String?> {
 }
 
 interface SpecializedInterface {
+ @ObjCName("fun")
  fun `fun`(
   @ObjCName("withNSString") s: String?
  ): String?
 
+ @ObjCName("get")
  fun get(): String?
 }
 

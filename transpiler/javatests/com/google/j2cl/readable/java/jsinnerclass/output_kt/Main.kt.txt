@@ -20,6 +20,7 @@ import kotlin.native.ObjCName
 open class Main {
  companion object {
   @JvmStatic
+  @ObjCName("main")
   fun main(
    vararg @ObjCName("withNSStringArray") args: String?
   ) {
@@ -33,6 +34,7 @@ open class Main {
   @HiddenFromObjC
   var a_pp_jsinnerclass: Int = 2
 
+  @ObjCName("method")
   open fun method(): Int {
    return Inner().getB() + this.a_pp_jsinnerclass
   }
@@ -47,6 +49,7 @@ open class Main {
     this.b_private_2 = this@Outer.a_pp_jsinnerclass + 1
    }
 
+   @ObjCName("getB")
    open fun getB(): Int {
     return this.b_private_2
    }

@@ -12,6 +12,7 @@ import kotlin.native.ObjCName
 
 open class BridgeMethodDefault {
  fun interface I<T> {
+  @ObjCName("m")
   fun m(
    @ObjCName("withId") t: T
   )

@@ -10,12 +10,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface MyJsInterface {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withInt") a: Int
  ): Int
 }
 
 fun interface MyInterface {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withInt") a: Int
  ): Int

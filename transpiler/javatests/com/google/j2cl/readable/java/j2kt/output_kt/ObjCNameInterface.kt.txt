@@ -13,10 +13,11 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktObjCNameInterface", exact = true)
 interface ObjCNameInterface {
  companion object {
-  @ObjCName("FIELD")
+  @ObjCName("FIELD_")
   const val FIELD: Int = 0
 
   @JvmStatic
+  @ObjCName("staticMethod")
   fun staticMethod() {}
  }
 }

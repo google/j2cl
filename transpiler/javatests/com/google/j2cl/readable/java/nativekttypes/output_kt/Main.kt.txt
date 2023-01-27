@@ -35,12 +35,14 @@ open class Main {
  @JvmField
  var innerField: KTopLevel<String?>.KInner<String?>? = null
 
+ @ObjCName("methodArguments")
  open fun methodArguments(
   @ObjCName("withNativekttypesNativeTopLevel") foo: KTopLevel<String?>?,
   @ObjCName("withNativekttypesNativeTopLevel_Nested") nested: KTopLevel.KNested<String?>?,
   @ObjCName("withNativekttypesNativeTopLevel_Inner") inner: KTopLevel<String?>.KInner<String?>?
  ) {}
 
+ @ObjCName("memberAccess")
  open fun memberAccess() {
   val topLevel: KTopLevel<String?>? = KTopLevel<String?>("foo")
   val fooInstanceMethod: String? = topLevel!!.instanceMethod("foo")
@@ -78,6 +80,7 @@ open class Main {
   }
  }
 
+ @ObjCName("bridges")
  open fun bridges() {
   var o: KRequiringBridge? = KBridge()
   o = object : KBridge() {}
@@ -95,12 +98,14 @@ open class Main {
   val instanceofCheck: Boolean = o is KRequiringBridge
  }
 
+ @ObjCName("casts")
  open fun casts() {
   val o1: KTopLevel<String?>? = null as KTopLevel<String?>?
   val o2: KTopLevel.KNested<String?>? = null as KTopLevel.KNested<String?>?
   val o3: KTopLevel<String?>.KInner<String?>? = null as KTopLevel<String?>.KInner<String?>?
  }
 
+ @ObjCName("companionObject")
  open fun companionObject() {
   val o: KWithCompanionObject? = KWithCompanionObject()
   val i1: Int = o!!.instanceField
@@ -110,18 +115,22 @@ open class Main {
   KCompanionObject.staticField = i2
  }
 
+ @ObjCName("typeLiterals")
  open fun typeLiterals() {
   val c1: Class<*>? = KTopLevel::class.javaObjectType
   val c2: Class<*>? = KTopLevel.KNested::class.javaObjectType
   val c3: Class<*>? = KTopLevel.KInner::class.javaObjectType
  }
 
+ @ObjCName("disabledVoidMethod")
  open fun disabledVoidMethod() {}
 
+ @ObjCName("disabledNonVoidMethod")
  open fun disabledNonVoidMethod(): Boolean {
   return false
  }
 
+ @ObjCName("acceptFn_generic")
  open fun <I, O> acceptFn_generic(
   @ObjCName("withNativekttypesFn") f: Fn<I, O>?,
   @ObjCName("withId") i: I
@@ -129,6 +138,7 @@ open class Main {
   return f!!.apply(i)
  }
 
+ @ObjCName("acceptFn_parametrized")
  open fun acceptFn_parametrized(
   @ObjCName("withNativekttypesFn") f: Fn<String?, String?>?,
   @ObjCName("withNSString") i: String?
@@ -136,6 +146,7 @@ open class Main {
   return f!!.apply(i)
  }
 
+ @ObjCName("acceptFn_genericWildcard")
  open fun <I, O> acceptFn_genericWildcard(
   @ObjCName("withNativekttypesFn") f: Fn<I, O>?,
   @ObjCName("withId") i: I
@@ -143,6 +154,7 @@ open class Main {
   return f!!.apply(i)
  }
 
+ @ObjCName("acceptFn_parametrizedWildcard")
  open fun acceptFn_parametrizedWildcard(
   @ObjCName("withNativekttypesFn") f: Fn<String?, String?>?,
   @ObjCName("withNSString") i: String?
@@ -150,6 +162,7 @@ open class Main {
   return f!!.apply(i)
  }
 
+ @ObjCName("acceptFn_unboundWildcard")
  open fun acceptFn_unboundWildcard(
   @ObjCName("withNativekttypesFn") f: Fn<*, *>?,
   @ObjCName("withId") i: Any?
@@ -157,6 +170,7 @@ open class Main {
   return (f as Fn<Any?, Any?>?)!!.apply(i)
  }
 
+ @ObjCName("acceptFn_raw")
  open fun acceptFn_raw(
   @ObjCName("withNativekttypesFn") f: Fn<Any?, Any?>?,
   @ObjCName("withId") i: Any?
@@ -164,6 +178,7 @@ open class Main {
   return f!!.apply(i)
  }
 
+ @ObjCName("todoMethod")
  open fun todoMethod(
   @ObjCName("withNSString") string: String?
  ) {

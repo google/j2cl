@@ -12,6 +12,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("NestedlocalclassesNestedLocalClasses", exact = true)
 open class NestedLocalClasses {
+ @ObjCName("test")
  open fun test(
   @ObjCName("withInt") p: Int
  ) {
@@ -34,6 +35,7 @@ open class NestedLocalClasses {
  }
 
  interface InterfaceWithThisReference {
+  @ObjCName("foo")
   fun foo() {
    open class ___1Super: NestedLocalClasses.InterfaceWithThisReference {}
    object : ___1Super() {}

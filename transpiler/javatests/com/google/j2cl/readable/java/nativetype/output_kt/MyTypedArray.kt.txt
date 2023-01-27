@@ -18,10 +18,12 @@ open class MyTypedArray<T> {
  @HiddenFromObjC
  var length_private_2: Int = 0
 
+ @ObjCName("size")
  fun size(): Int {
   return this.length_private_2
  }
 
+ @ObjCName("get")
  fun get(
   @ObjCName("withInt") index: Int
  ): T {

@@ -10,6 +10,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface Map<K, V> {
+ @ObjCName("put")
  fun put(
   @ObjCName("withId") key: K,
   @ObjCName("withId") value: V

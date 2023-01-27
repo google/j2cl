@@ -28,126 +28,147 @@ import kotlin.run
 
 @ObjCName("AutoboxingAutoBoxing", exact = true)
 open class AutoBoxing {
+ @ObjCName("box")
  open fun box(
   @ObjCName("withBoolean") b: Boolean
  ): Boolean? {
   return Boolean.valueOf(b)
  }
 
+ @ObjCName("box")
  open fun box(
   @ObjCName("withDouble") d: Double
  ): Double? {
   return Double.valueOf(d)
  }
 
+ @ObjCName("box")
  open fun box(
   @ObjCName("withByte") b: Byte
  ): Byte? {
   return Byte.valueOf(b)
  }
 
+ @ObjCName("box")
  open fun box(
   @ObjCName("withFloat") f: Float
  ): Float? {
   return Float.valueOf(f)
  }
 
+ @ObjCName("box")
  open fun box(
   @ObjCName("withInt") i: Int
  ): Int? {
   return Int.valueOf(i)
  }
 
+ @ObjCName("box")
  open fun box(
   @ObjCName("withLong") l: Long
  ): Long? {
   return Long.valueOf(l)
  }
 
+ @ObjCName("box")
  open fun box(
   @ObjCName("withShort") s: Short
  ): Short? {
   return Short.valueOf(s)
  }
 
+ @ObjCName("box")
  open fun box(
   @ObjCName("withChar") c: Char
  ): Char? {
   return Char.valueOf(c)
  }
 
+ @ObjCName("unbox")
  open fun unbox(
   @ObjCName("withJavaLangBoolean") b: Boolean?
  ): Boolean {
   return b!!.booleanValue()
  }
 
+ @ObjCName("unbox")
  open fun unbox(
   @ObjCName("withJavaLangDouble") d: Double?
  ): Double {
   return d!!.toDouble()
  }
 
+ @ObjCName("unbox")
  open fun unbox(
   @ObjCName("withJavaLangByte") b: Byte?
  ): Byte {
   return b!!.toByte()
  }
 
+ @ObjCName("unbox")
  open fun unbox(
   @ObjCName("withJavaLangFloat") f: Float?
  ): Float {
   return f!!.toFloat()
  }
 
+ @ObjCName("unbox")
  open fun unbox(
   @ObjCName("withJavaLangInteger") i: Int?
  ): Int {
   return i!!.toInt()
  }
 
+ @ObjCName("unbox")
  open fun unbox(
   @ObjCName("withJavaLangLong") l: Long?
  ): Long {
   return l!!.toLong()
  }
 
+ @ObjCName("unbox")
  open fun unbox(
   @ObjCName("withJavaLangShort") s: Short?
  ): Short {
   return s!!.toShort()
  }
 
+ @ObjCName("unbox")
  open fun unbox(
   @ObjCName("withJavaLangCharacter") c: Char?
  ): Char {
   return c!!.toChar()
  }
 
+ @ObjCName("takesAndReturnsPrimitiveDouble")
  open fun takesAndReturnsPrimitiveDouble(
   @ObjCName("withDouble") d: Double
  ): Double {
   return d
  }
 
+ @ObjCName("takesAndReturnsVoid")
  open fun takesAndReturnsVoid(
   @ObjCName("withJavaLangVoid") v: Unit?
  ): Unit? {
   return null
  }
 
+ @ObjCName("takesFloatVarArgs")
  open fun takesFloatVarArgs(
   vararg @ObjCName("withJavaLangFloatArray") elements: Float?
  ) {
   val elements_1: Array<Float?>? = elements as Array<Float?>?
  }
 
+ @ObjCName("takesObjectAndReturnsPrimitiveDouble")
  open fun takesObjectAndReturnsPrimitiveDouble(
   @ObjCName("withId") o: Any?
  ): Double {
   return o as Double
  }
 
+ @ObjCName("sumWithoutBoxing")
  open fun sumWithoutBoxing(
   vararg @ObjCName("withNSObjectArray") numbers: Any?
  ): Double {
@@ -160,6 +181,7 @@ open class AutoBoxing {
   return sum
  }
 
+ @ObjCName("sumWithoutBoxingJsVarargs")
  open fun sumWithoutBoxingJsVarargs(
   vararg @ObjCName("withNSObjectArray") numbers: Any?
  ): Double {
@@ -172,6 +194,7 @@ open class AutoBoxing {
   return sum
  }
 
+ @ObjCName("sumWithUnboxing")
  open fun sumWithUnboxing(
   @ObjCName("withJavaLangIterable") boxedDoubles: MutableIterable<Double?>?
  ): Double {
@@ -183,6 +206,7 @@ open class AutoBoxing {
   return sum
  }
 
+ @ObjCName("testBoxing")
  open fun testBoxing() {
   var bool: Boolean = true
   var d: Double = 2.2
@@ -240,6 +264,7 @@ open class AutoBoxing {
   o = Int.valueOf(15)
  }
 
+ @ObjCName("testUnboxing")
  open fun testUnboxing() {
   var boxBool: Boolean? = Boolean(true)
   var boxD: Double? = Double(2.2)
@@ -305,6 +330,7 @@ open class AutoBoxing {
   l = l.shl(boxL!!.toLong().toInt())
  }
 
+ @ObjCName("testUnboxingBoolean")
  open fun testUnboxingBoolean() {
   var boxB1: Boolean? = Boolean(true)
   val boxB2: Boolean? = Boolean(false)
@@ -393,6 +419,7 @@ open class AutoBoxing {
   }!!.booleanValue())
  }
 
+ @ObjCName("testUnboxingEquality")
  open fun testUnboxingEquality() {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = false
@@ -408,6 +435,7 @@ open class AutoBoxing {
   assert(i != boxI!!.toInt())
  }
 
+ @ObjCName("testAssertStatement")
  open fun testAssertStatement() {
   val boxB: Boolean? = Boolean(true)
   val b: Boolean = true
@@ -415,6 +443,7 @@ open class AutoBoxing {
   assert(b)
  }
 
+ @ObjCName("testUnbox_withCast")
  open fun testUnbox_withCast() {
   open class ___1Supplier<T> {
    @HiddenFromObjC
@@ -427,10 +456,11 @@ open class AutoBoxing {
  }
 
  companion object {
-  @ObjCName("COMPILE_TIME_CONSTANT")
+  @ObjCName("COMPILE_TIME_CONSTANT_")
   const val COMPILE_TIME_CONSTANT: Float = 1.1f
 
   @JvmStatic
+  @ObjCName("testUnboxingFromTypeVariable")
   fun <T: Long?> testUnboxingFromTypeVariable() {
    var n: T? = Long.valueOf(10L)
    var l: Long = n!!.toLong()
@@ -448,6 +478,7 @@ open class AutoBoxing {
   }
 
   @JvmStatic
+  @ObjCName("testUnboxingFromIntersectionType")
   fun <T> testUnboxingFromIntersectionType() where T: Long?, T: Comparable<Long>? {
    var n: T? = Long.valueOf(10L)
    var l: Long = n!!.toLong()

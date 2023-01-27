@@ -10,6 +10,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("NativekttypesFn", exact = true)
 fun interface Fn<in I, out O> {
+ @ObjCName("apply")
  fun apply(
   @ObjCName("withId") i: I
  ): O

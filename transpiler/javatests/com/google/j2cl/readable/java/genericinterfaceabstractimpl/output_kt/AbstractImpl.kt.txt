@@ -10,6 +10,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface MyInterface<T> {
+ @ObjCName("fun")
  fun `fun`(
   @ObjCName("withId") t: T
  ): T

@@ -11,6 +11,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 open class Superclass<T: Error?> {
+ @ObjCName("m1")
  open fun m1(
   @ObjCName("withJavaLangError") t: T
  ) {}
@@ -23,6 +24,7 @@ open class Subclass: Superclass<AssertionError?>() {
 open class AnotherSubclass: Superclass<AssertionError?>() {}
 
 fun interface Callable<V> {
+ @ObjCName("call")
  fun call(
   @ObjCName("withId") v: V
  )

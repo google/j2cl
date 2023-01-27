@@ -17,12 +17,28 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.backend.kotlin.common.camelCaseStartsWith
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
+import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
 
 internal val String.escapeObjCKeyword
   get() = letIf(objCKeywords.contains(this)) { it + "_" }
 
 internal fun String.escapeReservedObjCPrefixWith(newPrefix: String) =
   letIf(objCReservedPrefixes.any { camelCaseStartsWith(it) }) { "$newPrefix$titleCase" }
+
+internal val String.escapeObjCProperty: String
+  get() = escapeObjCKeyword.escapeReservedObjCPrefixWith("do")
+
+internal val String.escapeObjCEnumProperty: String
+  get() = escapeObjCKeyword.escapeReservedObjCPrefixWith("the")
+
+internal val MethodObjCNames.escapeObjCMethod: MethodObjCNames
+  get() =
+    copy(
+      methodName =
+        methodName
+          .letIf(parameterNames.isEmpty()) { it.escapeObjCKeyword }
+          .escapeReservedObjCPrefixWith("do")
+    )
 
 // Taken from GitHub:
 // "JetBrains/kotlin-native/backend.native/compiler/ir/backend.native/src/org/jetbrains/kotlin/backend/konan/objcexport/ObjCExportNamer.kt"

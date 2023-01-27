@@ -13,6 +13,7 @@ import kotlin.native.ObjCName
 open class Overrides {
  @ObjCName("J2ktOverrides_Parent", exact = true)
  interface Parent<T> {
+  @ObjCName("foo")
   fun <E: T> foo(
    @ObjCName("withId") e: E
   )

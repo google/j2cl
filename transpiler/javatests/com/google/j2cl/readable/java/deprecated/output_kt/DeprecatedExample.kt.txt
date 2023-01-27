@@ -18,6 +18,7 @@ open class DeprecatedExample {
  @JvmField
  var deprecatedInstanceField: String? = "deprecated field"
 
+ @ObjCName("deprecatedInstanceMethod")
  open fun deprecatedInstanceMethod(
   @ObjCName("withNSString") someArg: String?
  ) {}
@@ -25,22 +26,25 @@ open class DeprecatedExample {
  constructor()
 
  companion object {
-  @ObjCName("DEPRECATED_STATIC_FIELD")
+  @ObjCName("DEPRECATED_STATIC_FIELD_")
   const val DEPRECATED_STATIC_FIELD: String = "deprecated field"
 
   @JvmStatic
+  @ObjCName("deprecatedStaticMethod")
   fun deprecatedStaticMethod(
    @ObjCName("withId") someObject: Any?
   ) {}
  }
 
  fun interface DeprecatedInterface {
+  @ObjCName("doAThing")
   fun doAThing(
    @ObjCName("withInt") anInt: Int
   )
  }
 
  fun interface DeprecatedJsFunction {
+  @ObjCName("doAThing")
   fun doAThing(
    @ObjCName("withId") aThing: Any?
   )

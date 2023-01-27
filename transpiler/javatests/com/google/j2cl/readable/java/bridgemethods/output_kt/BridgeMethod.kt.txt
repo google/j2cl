@@ -17,11 +17,13 @@ import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 interface SomeInterface<T, S> {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withId") t: T,
   @ObjCName("withId") s: S
  )
 
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withId") t: T,
   @ObjCName("withNSNumber") n: Number?
@@ -29,6 +31,7 @@ interface SomeInterface<T, S> {
 }
 
 open class SuperParent<T, S> {
+ @ObjCName("foo")
  open fun foo(
   @ObjCName("withId") t: T,
   @ObjCName("withId") s: S
@@ -38,10 +41,12 @@ open class SuperParent<T, S> {
 open class Parent<T: Error?>: SuperParent<T, Number?>() {
  open override fun foo(t: T, s: Number?) {}
 
+ @ObjCName("bar")
  open fun <T_1: Number?> bar(
   @ObjCName("withNSNumber") t: T_1
  ) {}
 
+ @ObjCName("fun")
  open fun <T_1> `fun`(
   @ObjCName("withId") t: T_1
  ) {}
@@ -53,12 +58,14 @@ open class BridgeMethod: Parent<AssertionError?>(), SomeInterface<AssertionError
 
  open override fun bar(t: Number?) {}
 
+ @ObjCName("fun")
  open fun `fun`(
   @ObjCName("withNSNumber") t: Number?
  ) {}
 }
 
 fun interface SomeOtherFooInterface<T> {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withId") t: T,
   @ObjCName("withJavaLangDouble") s: Double?
@@ -72,11 +79,13 @@ open class DualUnrelatedBridges: SomeInterface<String?, Double?>, SomeOtherFooIn
 }
 
 open class SuperDualUnrelatedAccidentalBridges {
+ @ObjCName("foo")
  open fun foo(
   @ObjCName("withNSString") s: String?,
   @ObjCName("withJavaLangDouble") n: Double?
  ) {}
 
+ @ObjCName("foo")
  open fun foo(
   @ObjCName("withNSString") s: String?,
   @ObjCName("withNSNumber") n: Number?
@@ -86,12 +95,14 @@ open class SuperDualUnrelatedAccidentalBridges {
 open class DualUnrelatedAccidentalBridges: SuperDualUnrelatedAccidentalBridges(), SomeInterface<String?, Double?>, SomeOtherFooInterface<String?> {}
 
 fun interface Getter {
+ @ObjCName("get")
  fun get(
   @ObjCName("withNSString") s: String?
  ): String?
 }
 
 open class ClassWithParameterizedGet<T> {
+ @ObjCName("get")
  open fun get(
   @ObjCName("withId") t: T
  ): T {
@@ -100,6 +111,7 @@ open class ClassWithParameterizedGet<T> {
 }
 
 open class AccidentalOverrideBridge: ClassWithParameterizedGet<String?>(), Getter {
+ @ObjCName("test")
  open fun test() {
   val g: Getter? = AccidentalOverrideBridge()
   g!!.get("")
@@ -108,6 +120,7 @@ open class AccidentalOverrideBridge: ClassWithParameterizedGet<String?>(), Gette
 
 open class TestCase10036 {
  interface BI3 {
+  @ObjCName("get")
   fun get(
    @ObjCName("withNSString") value: String?
   ): String? {
@@ -116,6 +129,7 @@ open class TestCase10036 {
  }
 
  fun interface BI2 {
+  @ObjCName("get")
   fun get(
    @ObjCName("withNSString") value: String?
   ): String?
@@ -126,6 +140,7 @@ open class TestCase10036 {
  }
 
  abstract class B<B1: Comparable<*>?>: TestCase10036.BI1, TestCase10036.BI2 {
+  @ObjCName("get")
   abstract fun get(
    @ObjCName("withJavaLangComparable") value: B1
   ): String?
@@ -134,18 +149,21 @@ open class TestCase10036 {
 
 open class TestCase102 {
  fun interface BI2 {
+  @ObjCName("set")
   fun set(
    @ObjCName("withNSString") value: String?
   )
  }
 
  fun interface BI1 {
+  @ObjCName("set")
   fun set(
    @ObjCName("withNSString") value: String?
   )
  }
 
  abstract class B<B1>: TestCase102.BI1, TestCase102.BI2 {
+  @ObjCName("set")
   abstract fun set(
    @ObjCName("withId") value: B1
   )

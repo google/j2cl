@@ -17,6 +17,7 @@ open class MyMessage: GeneratedMessage {
  @JvmField
  val testField: Int
 
+ @ObjCName("getTestField")
  open fun getTestField(): Int {
   return this.testField
  }
@@ -27,11 +28,13 @@ open class MyMessage: GeneratedMessage {
 
  companion object {
   @JvmStatic
+  @ObjCName("getDefaultInstance")
   fun getDefaultInstance(): MyMessage {
    return MyMessage(0)
   }
 
   @JvmStatic
+  @ObjCName("newBuilder")
   fun newBuilder(): MyMessage.Builder {
    return MyMessage.Builder()
   }
@@ -42,10 +45,12 @@ open class MyMessage: GeneratedMessage {
   @JvmField
   var testField: Int = 0
 
+  @ObjCName("getTestField")
   open fun getTestField(): Int {
    return this.testField
   }
 
+  @ObjCName("setTestField")
   open fun setTestField(
    @ObjCName("withInt") testField: Int
   ): MyMessage.Builder {
@@ -53,6 +58,7 @@ open class MyMessage: GeneratedMessage {
    return this
   }
 
+  @ObjCName("build")
   open fun build(): MyMessage {
    return MyMessage(this@Builder.testField)
   }

@@ -19,6 +19,7 @@ import localnamecollision.Class
 
 @ObjCName("LocalnamecollisionLocalNameCollision", exact = true)
 open class LocalNameCollision {
+ @ObjCName("testClassLocalVarCollision")
  open fun testClassLocalVarCollision() {
   var LocalNameCollision: Boolean = false
   val RuntimeException: Any? = null
@@ -33,6 +34,7 @@ open class LocalNameCollision {
   assert(localnamecollision.Asserts().n_pp_localnamecollision() == 5)
  }
 
+ @ObjCName("testClassParameterCollision")
  open fun testClassParameterCollision(
   @ObjCName("withBoolean") LocalNameCollision: Boolean,
   @ObjCName("withId") Asserts: Any?,

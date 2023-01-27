@@ -44,24 +44,11 @@ private val hardKeywordSet =
     "true",
     "try",
     "typealias",
+    "typeof",
     "val",
     "var",
     "when",
     "while"
-  )
-
-// These keywords are forbidden for some reason or another and need to be mangled.
-private val forbiddenKeywordSet =
-  setOf(
-    "delete", // Reserved word in ObjectiveC++
-    "initialize", // Selector name in NSObject
-    "scale", // Foundation method with conflicting return types
-    "typeof", // Reserved word in swift.
-    "BIG_ENDIAN", // Reserved as part of ObjectiveC on iOS see endian.h.
-    "LITTLE_ENDIAN", // Reserved as part of ObjectiveC on iOS see endian.h.
-    "NULL", // Reserved in stddef.h.
-    "OVERFLOW", // Reserved in math.h
-    "DOMAIN" // Reserved in math.h
   )
 
 /**
@@ -71,5 +58,3 @@ private val forbiddenKeywordSet =
 fun isHardKeyword(string: String) = hardKeywordSet.contains(string)
 
 fun isForbiddenInEnumValueDeclaration(string: String) = string == "init"
-
-fun isForbiddenKeyword(string: String) = forbiddenKeywordSet.contains(string)

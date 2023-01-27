@@ -15,14 +15,17 @@ import kotlin.native.ObjCName
 open class WasmEntryPoints {
  companion object {
   @JvmStatic
+  @ObjCName("singleMatchedEntryPoint")
   fun singleMatchedEntryPoint() {}
 
   @JvmStatic
+  @ObjCName("matchedEntryPointPattern1")
   fun matchedEntryPointPattern1(
    @ObjCName("withInt") x: Int
   ) {}
 
   @JvmStatic
+  @ObjCName("matchedEntryPointPattern2")
   fun matchedEntryPointPattern2(
    @ObjCName("withFloat") y: Float
   ) {}

@@ -16,8 +16,8 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.HasName
-import com.google.j2cl.transpiler.backend.kotlin.ast.isForbiddenKeyword
 import com.google.j2cl.transpiler.backend.kotlin.ast.isHardKeyword
+import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.source
@@ -27,15 +27,12 @@ internal fun Renderer.nameSource(hasName: HasName) =
 
 internal fun identifierSource(identifier: String): Source = source(identifier.identifierString)
 
-// Dollar sign ($) is not a valid identifier character since Kotlin 1.7, as well as many other
-// characters. For now, it is replaced with triple underscores (___) to minimise a risk of
-// conflict.
-// TODO(b/236360941): Implement escaping which would work across all platforms.
 internal val String.identifierString
   get() =
-    replace("$", "___").run {
-      if (isForbiddenKeyword(this)) this + "__" // This needs to be __ for consistency with J2ObjC.
-      else if (isHardKeyword(this) || !isValidIdentifier) inBackTicks else this
+    replace("$", "___").let { withoutDollars ->
+      withoutDollars.letIf(isHardKeyword(withoutDollars) || !withoutDollars.isValidIdentifier) {
+        withoutDollars.inBackTicks
+      }
     }
 
 internal val String.inBackTicks
@@ -87,8 +84,8 @@ internal fun Renderer.qualifiedToAliasedSimpleName(qualifiedName: String): Strin
   }
 }
 
-private fun qualifiedIdentifierSource(identifier: String): Source =
-  dotSeparated(identifier.split('.').map(::identifierSource))
+internal fun qualifiedIdentifierSource(identifier: String): Source =
+  dotSeparated(identifier.qualifiedNameComponents().map(::identifierSource))
 
 private val String.isValidIdentifier: Boolean
   get() = first().isValidIdentifierFirstChar && all { it.isValidIdentifierChar }

@@ -14,6 +14,7 @@ import kotlin.native.ObjCName
 open class FunctionalInterfaces {
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_NonParametrized", exact = true)
  fun interface NonParametrized {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withNSString") string: String?
   ): String?
@@ -21,6 +22,7 @@ open class FunctionalInterfaces {
 
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_Parametrized", exact = true)
  fun interface Parametrized<T> {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withId") t: T
   ): T
@@ -33,10 +35,12 @@ open class FunctionalInterfaces {
 
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithDefaultMethod", exact = true)
  fun interface WithDefaultMethod {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withNSString") string: String?
   ): String?
 
+  @ObjCName("defaultApply")
   fun defaultApply(
    @ObjCName("withNSString") string: String?
   ): String? {
@@ -46,6 +50,7 @@ open class FunctionalInterfaces {
 
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithObjectMethods", exact = true)
  fun interface WithObjectMethods {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withNSString") string: String?
   ): String?
@@ -53,6 +58,7 @@ open class FunctionalInterfaces {
 
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithParametrizedMethod", exact = true)
  interface WithParametrizedMethod {
+  @ObjCName("apply")
   fun <T> apply(
    @ObjCName("withId") t: T
   ): T
@@ -60,6 +66,7 @@ open class FunctionalInterfaces {
 
  @ObjCName("FunctionalinterfaceFunctionalInterfaces_WithKtProperty", exact = true)
  interface WithKtProperty {
+  @ObjCName("size")
   val size: Int
  }
 }

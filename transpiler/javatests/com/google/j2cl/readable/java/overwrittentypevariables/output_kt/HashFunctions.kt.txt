@@ -12,6 +12,7 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 fun interface MyFunction<F, T> {
+ @ObjCName("apply")
  fun apply(
   @ObjCName("withId") input: F
  ): T
@@ -23,6 +24,7 @@ fun interface HashFunction<T>: MyFunction<T, String?> {}
 open class HashFunctions {
  companion object {
   @JvmStatic
+  @ObjCName("hashFunction")
   fun <T> hashFunction(): HashFunction<T>? {
    return object : HashFunction<T> {
     open override fun apply(input: T): String? {
@@ -32,6 +34,7 @@ open class HashFunctions {
   }
 
   @JvmStatic
+  @ObjCName("enumHashFunction")
   fun <T: Enum<T>> enumHashFunction(): HashFunction<T>? {
    return object : HashFunction<T> {
     open override fun apply(input: T): String? {

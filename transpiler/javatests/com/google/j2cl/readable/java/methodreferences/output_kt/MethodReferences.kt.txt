@@ -23,6 +23,7 @@ import kotlin.run
 
 @ObjCName("MethodreferencesMethodReferences", exact = true)
 open class MethodReferences<T> {
+ @ObjCName("isA")
  open fun isA(): Boolean? {
   return Boolean.valueOf(true)
  }
@@ -128,16 +129,19 @@ open class MethodReferences<T> {
  }
 
  fun interface Producer<T> {
+  @ObjCName("produce")
   fun produce(): T
  }
 
  fun interface Predicate<T> {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withId") parameter: T
   ): Boolean
  }
 
  fun interface ArrayProducer<T> {
+  @ObjCName("produce")
   fun produce(
    @ObjCName("withInt") size: Int
   ): Array<T>?
@@ -151,12 +155,14 @@ open class MethodReferences<T> {
  }
 
  fun interface Function<T, U> {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withId") t: T
   ): U
  }
 
  fun interface BiFunction<T, U, V> {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withId") t: T,
    @ObjCName("withId") u: U
@@ -164,16 +170,19 @@ open class MethodReferences<T> {
  }
 
  fun interface JsProducer<T> {
+  @ObjCName("produce")
   fun produce(): T
  }
 
  fun interface JsFunctionInterface<T, U> {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withId") t: T
   ): U
  }
 
  fun interface JsBiFunction<T, U, V> {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withId") t: T,
    @ObjCName("withId") u: U

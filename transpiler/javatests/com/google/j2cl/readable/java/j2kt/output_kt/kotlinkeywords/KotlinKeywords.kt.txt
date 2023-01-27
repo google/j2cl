@@ -16,7 +16,7 @@ open class KotlinKeywords {
  var `as`: Int = 0
 
  @JvmField
- var delete__: Int = 0
+ var delete: Int = 0
 
  @JvmField
  var `fun`: Int = 0
@@ -25,7 +25,7 @@ open class KotlinKeywords {
  var `in`: Int = 0
 
  @JvmField
- var initialize__: Int = 0
+ var initialize: Int = 0
 
  @JvmField
  var `is`: Int = 0
@@ -34,13 +34,13 @@ open class KotlinKeywords {
  var `object`: Int = 0
 
  @JvmField
- var scale__: Int = 0
+ var scale: Int = 0
 
  @JvmField
  var `typealias`: Int = 0
 
  @JvmField
- var typeof__: Int = 0
+ var `typeof`: Int = 0
 
  @JvmField
  var `val`: Int = 0
@@ -51,44 +51,45 @@ open class KotlinKeywords {
  @JvmField
  var `when`: Int = 0
 
+ @ObjCName("test")
  open fun test(
   @ObjCName("withInt") `in`: Int
  ): Int {
   val `as`: Int = this.`as` + `in`
-  val delete__: Int = this.delete__ + `in`
+  val delete: Int = this.delete + `in`
   val `fun`: Int = this.`fun` + `in`
-  val initialize__: Int = this.initialize__ + `in`
+  val initialize: Int = this.initialize + `in`
   val `is`: Int = this.`is` + `in`
   val `object`: Int = this.`object` + `in`
-  val scale__: Int = this.scale__ + `in`
+  val scale: Int = this.scale + `in`
   val `typealias`: Int = this.`typealias` + `in`
-  val typeof__: Int = this.typeof__ + `in`
+  val `typeof`: Int = this.`typeof` + `in`
   val `val`: Int = this.`val` + `in`
   val `var`: Int = this.`var` + `in`
   val `when`: Int = this.`when` + `in`
-  val temp: Int = KotlinKeywords.OVERFLOW__ + KotlinKeywords.DOMAIN__ + `in`
-  return KotlinKeywords.BIG_ENDIAN__ + KotlinKeywords.LITTLE_ENDIAN__ + KotlinKeywords.NULL__ + `in`
+  val temp: Int = KotlinKeywords.OVERFLOW + KotlinKeywords.DOMAIN + `in`
+  return KotlinKeywords.BIG_ENDIAN + KotlinKeywords.LITTLE_ENDIAN + KotlinKeywords.NULL + `in`
  }
 
  companion object {
   @JvmField
-  @ObjCName("BIG_ENDIAN__")
-  var BIG_ENDIAN__: Int = 7
+  @ObjCName("BIG_ENDIAN___")
+  var BIG_ENDIAN: Int = 7
 
   @JvmField
-  @ObjCName("LITTLE_ENDIAN__")
-  var LITTLE_ENDIAN__: Int = - 7
+  @ObjCName("LITTLE_ENDIAN___")
+  var LITTLE_ENDIAN: Int = - 7
 
   @JvmField
-  @ObjCName("NULL__")
-  var NULL__: Int = 745
+  @ObjCName("NULL___")
+  var NULL: Int = 745
 
   @JvmField
-  @ObjCName("OVERFLOW__")
-  var OVERFLOW__: Int = - 24
+  @ObjCName("OVERFLOW___")
+  var OVERFLOW: Int = - 24
 
   @JvmField
-  @ObjCName("DOMAIN__")
-  var DOMAIN__: Int = - 32
+  @ObjCName("DOMAIN___")
+  var DOMAIN: Int = - 32
  }
 }

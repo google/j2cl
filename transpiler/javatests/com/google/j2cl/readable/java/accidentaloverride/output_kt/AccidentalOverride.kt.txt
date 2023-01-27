@@ -11,12 +11,14 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 open class Parent<T: Error?> {
+ @ObjCName("foo")
  open fun foo(
   @ObjCName("withJavaLangError") e: T
  ) {}
 }
 
 fun interface SuperInterface<T> {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withId") t: T
  )

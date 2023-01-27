@@ -12,26 +12,34 @@ import kotlin.native.ObjCName
 @ObjCName("NativekttypesNullabilityPropagation", exact = true)
 class NullabilityPropagation {
  interface NullabilityToPropagate {
+  @ObjCName("nullableReturnType1")
   fun nullableReturnType1(): String?
 
+  @ObjCName("nullableReturnType2")
   fun nullableReturnType2(): String?
 
+  @ObjCName("nonNullReturnType1")
   fun nonNullReturnType1(): String
 
+  @ObjCName("nonNullReturnType2")
   fun nonNullReturnType2(): String
 
+  @ObjCName("nullableParameter1")
   fun nullableParameter1(
    @ObjCName("withNSString") s: String?
   )
 
+  @ObjCName("nullableParameter2")
   fun nullableParameter2(
    @ObjCName("withNSString") s: String?
   )
 
+  @ObjCName("nonNullParameter1")
   fun nonNullParameter1(
    @ObjCName("withNSString") s: String
   )
 
+  @ObjCName("nonNullParameter2")
   fun nonNullParameter2(
    @ObjCName("withNSString") s: String
   )

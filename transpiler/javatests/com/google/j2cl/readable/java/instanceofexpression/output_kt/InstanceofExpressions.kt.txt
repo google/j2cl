@@ -32,6 +32,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("InstanceofexpressionInstanceofExpressions", exact = true)
 open class InstanceofExpressions {
+ @ObjCName("testInstanceofClass")
  open fun testInstanceofClass() {
   val `object`: Any? = InstanceofExpressions()
   var b: Boolean = false
@@ -40,6 +41,7 @@ open class InstanceofExpressions {
   b = `object` is String
  }
 
+ @ObjCName("testInstanceofInterface")
  open fun testInstanceofInterface() {
   val o: Any? = Any()
   var b: Boolean = false
@@ -47,6 +49,7 @@ open class InstanceofExpressions {
   b = object : Serializable {} is Serializable
  }
 
+ @ObjCName("testInstanceofBoxedType")
  open fun testInstanceofBoxedType() {
   val b: Any? = Int(1)
   var a: Boolean = b is Byte
@@ -64,6 +67,7 @@ open class InstanceofExpressions {
   a = d is Double
  }
 
+ @ObjCName("testInstanceOfArray")
  open fun testInstanceOfArray() {
   val `object`: Any? = Any()
   val objectArray: Array<Any?>? = arrayOfNulls<Any>(0)
@@ -93,6 +97,7 @@ open class InstanceofExpressions {
   a = `object` is BooleanArray
  }
 
+ @ObjCName("testPrecedence")
  open fun testPrecedence() {
   val b: Boolean = (if (false) "foo" else "bar") is String
  }

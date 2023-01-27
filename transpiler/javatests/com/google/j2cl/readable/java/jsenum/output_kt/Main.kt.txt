@@ -27,6 +27,7 @@ import kotlin.native.ObjCName
 open class Main {
  companion object {
   @JvmStatic
+  @ObjCName("testJsEnumSwitch")
   fun testJsEnumSwitch() {
    var comparableJsEnum: Main.ComparableJsEnum? = if (Main.ComparableJsEnum.ONE.getValue() == 1) Main.ComparableJsEnum.TWO else null
    SWITCH@ do {
@@ -104,6 +105,7 @@ open class Main {
   ONE,
   TWO;
 
+  @ObjCName("getValue")
   open fun getValue(): Int {
    return this.ordinal
   }
@@ -118,6 +120,7 @@ open class Main {
   @HiddenFromObjC
   var value_private_2: Int = 0
 
+  @ObjCName("getValue")
   open fun getValue(): Int {
    return this.value_private_2
   }
@@ -135,6 +138,7 @@ open class Main {
   @HiddenFromObjC
   var value_private_2: String? = null
 
+  @ObjCName("getValue")
   open fun getValue(): String? {
    return this.value_private_2
   }
@@ -152,6 +156,7 @@ open class Main {
   @HiddenFromObjC
   var value_private_2: String
 
+  @ObjCName("getValue")
   open fun getValue(): String? {
    return this.value_private_2
   }

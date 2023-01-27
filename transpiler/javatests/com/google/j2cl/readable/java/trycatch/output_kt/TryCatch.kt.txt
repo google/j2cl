@@ -21,6 +21,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("TrycatchTryCatch", exact = true)
 open class TryCatch {
+ @ObjCName("testMultiCatch")
  open fun testMultiCatch() {
   try {
    throw ClassCastException()
@@ -34,6 +35,7 @@ open class TryCatch {
   }
  }
 
+ @ObjCName("testEmptyThrowableCatch")
  open fun testEmptyThrowableCatch() {
   try {
    throw ClassCastException()
@@ -43,6 +45,7 @@ open class TryCatch {
   } catch (e_1: Exception) {} catch (e_2: Throwable) {}
  }
 
+ @ObjCName("testEmptyThrowableRethrow")
  open fun testEmptyThrowableRethrow() {
   try {
    throw ClassCastException()
@@ -51,12 +54,14 @@ open class TryCatch {
   }
  }
 
+ @ObjCName("testFinally")
  open fun testFinally() {
   try {
    assert(true)
   } finally {}
  }
 
+ @ObjCName("testTryWithResource")
  open fun testTryWithResource() {
   try {
    var ___primaryExc: Throwable? = null
@@ -77,6 +82,7 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
+ @ObjCName("testTryWithResourceJava9")
  open fun testTryWithResourceJava9() {
   val thing: TryCatch.ClosableThing? = TryCatch.ClosableThing()
   val thing2: TryCatch.ClosableThing? = TryCatch.ClosableThing()
@@ -99,6 +105,7 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
+ @ObjCName("testTryWithResouceOnStaticField")
  open fun testTryWithResouceOnStaticField() {
   try {
    var ___primaryExc: Throwable? = null
@@ -116,6 +123,7 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
+ @ObjCName("testNestedTryCatch")
  open fun testNestedTryCatch() {
   try {
    throw java.lang.Exception()
@@ -126,6 +134,7 @@ open class TryCatch {
   }
  }
 
+ @ObjCName("testThrowGenerics")
  open fun testThrowGenerics() {
   throw this.getT_private_2<Exception?>(java.lang.Exception())!!
  }
@@ -135,6 +144,7 @@ open class TryCatch {
   return t
  }
 
+ @ObjCName("testThrowBoundGenerics")
  open fun testThrowBoundGenerics() {
   throw this.getThrowable_private_2<Throwable?>()!!
  }

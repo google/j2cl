@@ -74,6 +74,7 @@ open class DefaultNullable {
  @HiddenFromObjC
  var f12_private_2: Any = Any()
 
+ @ObjCName("m1")
  open fun m1(
   @ObjCName("withNSString") a: String?,
   @ObjCName("withJavaUtilList") b: MutableList<Double?>?
@@ -93,6 +94,7 @@ open class DefaultNullable {
   this.f13_private_2 = Any()
  }
 
+ @ObjCName("m2")
  open fun m2(
   @ObjCName("withNSString") a: String?,
   @ObjCName("withJavaUtilList") b: MutableList<Double?>?
@@ -100,6 +102,7 @@ open class DefaultNullable {
   return null
  }
 
+ @ObjCName("m3")
  open fun m3(
   vararg @ObjCName("withNSStringArray") args: String?
  ) {
@@ -112,6 +115,7 @@ open class DefaultNullable {
  @HiddenFromObjC
  open fun <T: DefaultNullable.NonNullableBound<T>> methodWithNonNullableBound_pp_nullability_defaultnullable() {}
 
+ @ObjCName("casts")
  open fun casts() {
   val listOfString: MutableList<String?>? = null as MutableList<String?>?
   val nullableListOfString: MutableList<String?>? = null as MutableList<String?>?
@@ -460,22 +464,26 @@ open class DefaultNullable {
  }
 
  fun interface Consumer<T> {
+  @ObjCName("accept")
   fun accept(
    @ObjCName("withId") t: T
   )
  }
 
  fun interface NullMarkedSupplier<T> {
+  @ObjCName("get")
   fun get(): T
  }
 
  fun interface NullMarkedConsumer<T> {
+  @ObjCName("accept")
   fun accept(
    @ObjCName("withId") t: T
   )
  }
 
  fun interface NullMarkedIntFunction<T> {
+  @ObjCName("accept")
   fun accept(
    @ObjCName("withInt") i: Int
   ): T

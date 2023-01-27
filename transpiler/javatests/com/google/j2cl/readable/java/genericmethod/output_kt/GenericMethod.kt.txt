@@ -22,19 +22,23 @@ import kotlin.native.ObjCName
 
 @ObjCName("GenericmethodGenericMethod", exact = true)
 open class GenericMethod<T> {
+ @ObjCName("foo")
  open fun <T_1, S> foo(
   @ObjCName("withId") f: T_1,
   @ObjCName("withId") s: S
  ) {}
 
+ @ObjCName("fun")
  open fun `fun`(
   @ObjCName("withId") o: Any?
  ) {}
 
+ @ObjCName("fun")
  open fun <T_1: Exception?> `fun`(
   @ObjCName("withJavaLangException") t: T_1
  ) {}
 
+ @ObjCName("fun")
  open fun <T_1: Error?> `fun`(
   @ObjCName("withJavaLangError") t: T_1
  ) {
@@ -51,24 +55,29 @@ open class GenericMethod<T> {
   ___1LocalClass<T_1>()
  }
 
+ @ObjCName("bar")
  open fun <T_1> bar(): GenericMethod<T_1>? {
   return null
  }
 
+ @ObjCName("fun")
  open fun <T_1> `fun`(
   @ObjCName("withNSObjectArray") array: Array<T_1>?
  ): Array<T_1>? {
   return array
  }
 
+ @ObjCName("checked")
  open fun <T_1> checked(): T_1 {
   return null as T_1
  }
 
+ @ObjCName("unchecked")
  open fun <T_1> unchecked(): T_1 {
   return null as T_1
  }
 
+ @ObjCName("test")
  open fun test() {
   val g: GenericMethod<Number?>? = GenericMethod<Number?>()
   g!!.foo<GenericMethod<Number?>?, GenericMethod<Number?>?>(g, g)
@@ -85,16 +94,19 @@ open class GenericMethod<T> {
 
  companion object {
   @JvmStatic
+  @ObjCName("acceptsContent")
   fun acceptsContent(
    @ObjCName("withGenericmethodGenericMethod_Content") content: GenericMethod.Content?
   ) {}
 
   @JvmStatic
+  @ObjCName("acceptsString")
   fun acceptsString(
    @ObjCName("withNSString") string: String?
   ) {}
 
   @JvmStatic
+  @ObjCName("testErasureCast_wildcard")
   fun testErasureCast_wildcard() {
    val list: MutableList<GenericMethod.Container<*>?>? = ArrayList<GenericMethod.Container<*>>() as MutableList<GenericMethod.Container<*>?>?
    val content: GenericMethod.Content? = list!!.get(0)!!.get_pp_genericmethod()
@@ -111,6 +123,7 @@ open class GenericMethod<T> {
   }
 
   @JvmStatic
+  @ObjCName("testErasureCast_typeVariable")
   fun <CT: GenericMethod.Container<C>?, C: GenericMethod.Content?> testErasureCast_typeVariable() {
    val list: MutableList<GenericMethod.Container<C>?>? = ArrayList<GenericMethod.Container<C>>() as MutableList<GenericMethod.Container<C>?>?
    val content: GenericMethod.Content? = list!!.get(0)!!.get_pp_genericmethod()
@@ -171,12 +184,14 @@ open class GenericMethod<T> {
  }
 
  fun interface Consumer<V> {
+  @ObjCName("accept")
   fun accept(
    @ObjCName("withId") v: V
   )
  }
 
  fun interface Supplier<V> {
+  @ObjCName("get")
   fun get(): V
  }
 }

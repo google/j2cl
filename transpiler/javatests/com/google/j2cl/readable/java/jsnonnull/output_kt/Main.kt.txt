@@ -66,6 +66,7 @@ open class Main {
   @ObjCName("NSString") a: String
  )
 
+ @ObjCName("m1")
  open fun m1(
   @ObjCName("withNSString") a: String,
   @ObjCName("withJavaUtilList") b: MutableList<Double>,
@@ -74,6 +75,7 @@ open class Main {
   return ""
  }
 
+ @ObjCName("m2")
  open fun m2(
   @ObjCName("withNSString") a: String?,
   @ObjCName("withJavaUtilList") b: MutableList<Double>
@@ -81,6 +83,7 @@ open class Main {
   return ""
  }
 
+ @ObjCName("m3")
  open fun m3(
   @ObjCName("withNSString") a: String,
   vararg @ObjCName("withNSStringArray") args: String
@@ -89,11 +92,13 @@ open class Main {
   return null
  }
 
+ @ObjCName("m4")
  open fun m4(
   @ObjCName("withJsnonnullMain_MyFunction") f: Main.MyFunction
  ) {}
 
  fun interface MyFunction {
+  @ObjCName("x")
   fun x(
    @ObjCName("withNSString") a: String
   ): String
@@ -121,14 +126,18 @@ open class Main {
  }
 
  interface NonNullableTemplatedReturn<T> {
+  @ObjCName("get")
   fun get(): T
 
+  @ObjCName("getArray")
   fun getArray(): Array<T>?
  }
 
  interface NonNullableTemplate<T: Any> {
+  @ObjCName("get")
   fun get(): T
 
+  @ObjCName("getArray")
   fun getArray(): Array<T>?
  }
 }

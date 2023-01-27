@@ -23,6 +23,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("CastCastPrimitives", exact = true)
 open class CastPrimitives {
+ @ObjCName("testPrimitiveCasts")
  open fun testPrimitiveCasts() {
   var b: Byte = 1.toByte()
   var c: Char = '\u0001'
@@ -82,6 +83,7 @@ open class CastPrimitives {
   d = d
  }
 
+ @ObjCName("testReferenceToPrimitive")
  open fun testReferenceToPrimitive() {
   val o: Any? = Any()
   val bool: Boolean = o as Boolean
@@ -94,6 +96,7 @@ open class CastPrimitives {
   val d: Double = o as Double
  }
 
+ @ObjCName("testUnboxAndWiden")
  open fun testUnboxAndWiden() {
   val boxedByte: Byte? = Byte.valueOf(0.toByte())
   val s: Short = boxedByte!!.toByte().toShort()
@@ -103,6 +106,7 @@ open class CastPrimitives {
   val d: Double = boxedByte!!.toByte().toDouble()
  }
 
+ @ObjCName("testImplicitArgumentCasts")
  open fun testImplicitArgumentCasts() {
   val b: Byte = 127.toByte()
   val c: Char = '\uFFFF'
@@ -127,6 +131,7 @@ open class CastPrimitives {
   CastPrimitives.LongValueHolder(i.toLong())
  }
 
+ @ObjCName("testImplicitArrayIndexCasts")
  open fun testImplicitArrayIndexCasts(
   @ObjCName("withByteArray") array: ByteArray?
  ) {
@@ -143,6 +148,7 @@ open class CastPrimitives {
   result = array!![97]
  }
 
+ @ObjCName("testImplicitLongAssignmentCasts")
  open fun testImplicitLongAssignmentCasts() {
   val fbyte: Byte = 11.toByte()
   val fchar: Char = '\u000C'

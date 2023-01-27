@@ -17,6 +17,7 @@ import kotlin.native.ObjCName
 open class LocalClassWithOuterGenerics<A> {
  companion object {
   @JvmStatic
+  @ObjCName("foo")
   fun <T> foo() {
    open class ___1Bar {
     @HiddenFromObjC

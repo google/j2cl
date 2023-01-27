@@ -31,6 +31,7 @@ open class Main {
   this.field_pp_jsvarargs = f
  }
 
+ @ObjCName("f3")
  open fun f3(
   @ObjCName("withInt") m: Int,
   vararg @ObjCName("withIntArray") numbers: Int
@@ -38,12 +39,14 @@ open class Main {
   return this.field_pp_jsvarargs + m + numbers!![1]
  }
 
+ @ObjCName("f4")
  open fun f4(
   vararg @ObjCName("withIntArray") numbers: Int
  ): Int {
   return this.field_pp_jsvarargs + numbers!![1]
  }
 
+ @ObjCName("testStaticMethodNotFirst")
  open fun testStaticMethodNotFirst() {
   Main.f1(1, 1, 2)
   Main.f1(1, 1, 2)
@@ -59,6 +62,7 @@ open class Main {
   Main.f1(1, *(null)!!)
  }
 
+ @ObjCName("testStaticMethodFirst")
  open fun testStaticMethodFirst() {
   Main.f2(1, 2)
   Main.generics<Int?>(Int.valueOf(1), Int.valueOf(2))
@@ -83,6 +87,7 @@ open class Main {
   Main.generics<Int?>(*(integers)!!)
  }
 
+ @ObjCName("testInstanceMethodNotFirst")
  open fun testInstanceMethodNotFirst() {
   val m: Main? = Main(1)
   m!!.f3(1, 1, 2)
@@ -93,6 +98,7 @@ open class Main {
   m!!.f3(1, *(ints)!!)
  }
 
+ @ObjCName("testInstanceMethodFirst")
  open fun testInstanceMethodFirst() {
   val m: Main? = Main(1)
   m!!.f4(1, 2)
@@ -103,6 +109,7 @@ open class Main {
   m!!.f4(*(ints)!!)
  }
 
+ @ObjCName("testJsFunction")
  open fun testJsFunction() {
   val a: Main.AFunction? = Main.AFunction()
   val o1: Any? = Any()
@@ -115,16 +122,19 @@ open class Main {
   a!!.f1(0, *(os)!!)
  }
 
+ @ObjCName("testSideEffect")
  open fun testSideEffect() {
   val ints: IntArray? = intArrayOf(1, 2)
   Main(1).f3(1, *(ints)!!)
  }
 
+ @ObjCName("testNullJsVarargs")
  open fun testNullJsVarargs() {
   val ints: IntArray? = null
   Main.f2(*(ints)!!)
  }
 
+ @ObjCName("testGenericJsFunctionWithVarags")
  open fun <U> testGenericJsFunctionWithVarags() {
   val function: Main.GenericFunction<U>? = Main.GenericFunction<U> { n: U, param: Array<out U>? ->
    val param_1: Array<U>? = param as Array<U>?
@@ -134,6 +144,7 @@ open class Main {
 
  companion object {
   @JvmStatic
+  @ObjCName("f1")
   fun f1(
    @ObjCName("withInt") multiplier: Int,
    vararg @ObjCName("withIntArray") numbers: Int
@@ -142,6 +153,7 @@ open class Main {
   }
 
   @JvmStatic
+  @ObjCName("f2")
   fun f2(
    vararg @ObjCName("withIntArray") numbers: Int
   ): Int {
@@ -149,6 +161,7 @@ open class Main {
   }
 
   @JvmStatic
+  @ObjCName("generics")
   fun <T> generics(
    vararg @ObjCName("withNSObjectArray") elements: T
   ): T {
@@ -157,6 +170,7 @@ open class Main {
   }
 
   @JvmStatic
+  @ObjCName("parameterizedType")
   fun parameterizedType(
    vararg @ObjCName("withJavaUtilListArray") elements: MutableList<Main?>?
   ): Main? {
@@ -165,6 +179,7 @@ open class Main {
   }
 
   @JvmStatic
+  @ObjCName("parameterizedByT")
   fun <T> parameterizedByT(
    vararg @ObjCName("withJavaUtilListArray") elements: MutableList<T>?
   ): T {
@@ -191,6 +206,7 @@ open class Main {
  }
 
  fun interface Function {
+  @ObjCName("f1")
   fun f1(
    @ObjCName("withInt") i: Int,
    vararg @ObjCName("withNSObjectArray") args: Any?
@@ -199,6 +215,7 @@ open class Main {
 
  @ObjCName("JsvarargsMain_AbstractMethodWithVarargs", exact = true)
  abstract class AbstractMethodWithVarargs {
+  @ObjCName("abstractMethod")
   abstract fun abstractMethod(
    vararg @ObjCName("withIntArray") args: Int
   )
@@ -208,6 +225,7 @@ open class Main {
  interface StaticInterfaceMethodWithVarargs {
   companion object {
    @JvmStatic
+   @ObjCName("staticMethod")
    fun staticMethod(
     vararg @ObjCName("withIntArray") args: Int
    ) {}
@@ -236,6 +254,7 @@ open class Main {
  }
 
  fun interface GenericFunction<T> {
+  @ObjCName("m")
   fun m(
    @ObjCName("withId") i: T,
    vararg @ObjCName("withNSObjectArray") args: T

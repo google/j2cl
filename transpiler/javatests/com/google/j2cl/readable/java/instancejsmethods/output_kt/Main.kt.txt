@@ -11,10 +11,12 @@ import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
 
 fun interface MyInterface {
+ @ObjCName("intfFoo")
  fun intfFoo(): Int
 }
 
 open class SuperParent {
+ @ObjCName("fun")
  open fun `fun`(
   @ObjCName("withInt") a: Int,
   @ObjCName("withInt") b: Int
@@ -22,6 +24,7 @@ open class SuperParent {
   return a + b + 111
  }
 
+ @ObjCName("bar")
  open fun bar(
   @ObjCName("withInt") a: Int,
   @ObjCName("withInt") b: Int
@@ -39,6 +42,7 @@ open class Parent: SuperParent() {
   return a * b
  }
 
+ @ObjCName("foo")
  open fun foo(
   @ObjCName("withInt") a: Int
  ): Int {
@@ -66,6 +70,7 @@ open class Child: Parent(), MyInterface {
 
 @ObjCName("InstancejsmethodsMain", exact = true)
 open class Main {
+ @ObjCName("testCallBySuperParent")
  open fun testCallBySuperParent() {
   val sp: SuperParent? = SuperParent()
   val p: SuperParent? = Parent()
@@ -86,6 +91,7 @@ open class Main {
 
  companion object {
   @JvmStatic
+  @ObjCName("testCallByConcreteType")
   fun testCallByConcreteType() {
    val sp: SuperParent? = SuperParent()
    val p: Parent? = Parent()

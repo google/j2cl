@@ -17,10 +17,12 @@ import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 fun interface Getable<T> {
+ @ObjCName("get")
  fun get(): T
 }
 
 fun interface Setable {
+ @ObjCName("set")
  fun set(
   @ObjCName("withInt") i: Int
  )
@@ -29,10 +31,12 @@ fun interface Setable {
 interface Serial {}
 
 fun interface Cmp {
+ @ObjCName("cmp")
  fun cmp(): Int
 }
 
 fun interface Cmp2<T> {
+ @ObjCName("cmp")
  fun cmp(
   @ObjCName("withInt") a: Int
  ): Int
@@ -40,12 +44,14 @@ fun interface Cmp2<T> {
 
 @ObjCName("IntersectiontypeIntersectionTypeTest", exact = true)
 open class IntersectionTypeTest<U> {
+ @ObjCName("cast3")
  open fun cast3(
   @ObjCName("withId") s: Any?
  ): Any? {
   return s
  }
 
+ @ObjCName("testMethodCall")
  open fun testMethodCall() {
   val o: Any? = IntersectionTypeTest.m_private_2()
   IntersectionTypeTest.set_private_2((o).let { it as IntersectionTypeTest.A?; it as IntersectionTypeTest.EmptyA?; it })
@@ -55,6 +61,7 @@ open class IntersectionTypeTest<U> {
 
  companion object {
   @JvmStatic
+  @ObjCName("getAndSet")
   fun <T> getAndSet(
    @ObjCName("withId") `object`: T
   ) where T: Getable<*>?, T: Setable? {
@@ -63,6 +70,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
+  @ObjCName("cast")
   fun <T> cast(
    @ObjCName("withId") o: Any?
   ): Getable<T>? {
@@ -73,6 +81,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
+  @ObjCName("cast1")
   fun <T> cast1(
    @ObjCName("withId") s: Any?
   ): Getable<Comparable<String>?>? {
@@ -80,6 +89,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
+  @ObjCName("cast2")
   fun <T> cast2(
    @ObjCName("withId") s: Any?
   ): Getable<Comparable<T & Any>?>? {
@@ -87,6 +97,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
+  @ObjCName("method")
   fun method(): Cmp? {
    return (Cmp {
     return@Cmp 1
@@ -94,6 +105,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
+  @ObjCName("method2")
   fun method2(): Cmp2<Any?>? {
    return Cmp2<Any?> { a: Int ->
     return@Cmp2 1
@@ -101,6 +113,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
+  @ObjCName("testClosureAssignment")
   fun testClosureAssignment(
    @ObjCName("withId") o: Any?
   ) {
@@ -140,6 +153,7 @@ open class IntersectionTypeTest<U> {
  }
 
  open inner class MapEntry {
+  @ObjCName("method")
   open fun <T> method(
    @ObjCName("withId") o: Any?
   ): Getable<T>? {

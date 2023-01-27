@@ -19,12 +19,14 @@ import kotlin.native.ObjCName
 
 @ObjCName("JsoptionalMain", exact = true)
 open class Main {
+ @ObjCName("method1")
  open fun method1(
   @ObjCName("withInt") i1: Int,
   @ObjCName("withJavaLangDouble") d: Double?,
   @ObjCName("withJavaLangInteger") i: Int?
  ) {}
 
+ @ObjCName("method2")
  open fun method2(
   @ObjCName("withNSString") s1: String?,
   @ObjCName("withJavaLangDouble") d: Double?,
@@ -44,15 +46,18 @@ open class Main {
   @ObjCName("NSString") a: String?
  )
 
+ @ObjCName("testFunction")
  open fun testFunction(
   @ObjCName("withJsoptionalMain_Function") f: Main.Function?
  ) {}
 
+ @ObjCName("testOptionalFunction")
  open fun testOptionalFunction(
   @ObjCName("withJsoptionalMain_Function") f: Main.Function?
  ) {}
 
  fun interface Function {
+  @ObjCName("f1")
   fun f1(
    @ObjCName("withNSString") s: String?,
    vararg @ObjCName("withNSObjectArray") args: Any?
@@ -67,6 +72,7 @@ open class Main {
  }
 
  fun interface I<T> {
+  @ObjCName("m")
   fun m(
    @ObjCName("withId") t: T,
    @ObjCName("withId") o: Any?

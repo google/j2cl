@@ -24,24 +24,29 @@ abstract class KtPropertyNameConflict {
  @JvmField
  var fieldWithConflictingRenamedMethod_ktPropertyConflict: Int = 0
 
+ @ObjCName("fieldWithConflictingGetter")
  open val fieldWithConflictingGetter: Int get() {
   return this.fieldWithConflictingGetter_ktPropertyConflict
  }
 
+ @ObjCName("fieldWithConflictingNonGetter")
  open val fieldWithConflictingNonGetter: Int get() {
   return this.fieldWithConflictingNonGetter_ktPropertyConflict
  }
 
+ @ObjCName("fieldWithConflictingRenamedMethod")
  open val fieldWithConflictingRenamedMethod: Int get() {
   return this.fieldWithConflictingRenamedMethod_ktPropertyConflict
  }
 
+ @ObjCName("fieldWithConflictingSuperMethod")
  open val fieldWithConflictingSuperMethod: Int get() {
   return 0
  }
 
  companion object {
   @JvmStatic
+  @ObjCName("test")
   fun test(
    @ObjCName("withNativekttypesKtPropertyNameConflict") o: KtPropertyNameConflict?,
    @ObjCName("withNativekttypesKtPropertyNameConflict_Interface") i: KtPropertyNameConflict.Interface?
@@ -57,6 +62,7 @@ abstract class KtPropertyNameConflict {
   }
 
   @JvmStatic
+  @ObjCName("test")
   fun test(
    @ObjCName("withNativekttypesKtPropertyNameConflict_Subclass") o: KtPropertyNameConflict.Subclass?
   ) {
@@ -75,6 +81,7 @@ abstract class KtPropertyNameConflict {
 
  @ObjCName("NativekttypesKtPropertyNameConflict_Interface", exact = true)
  interface Interface {
+  @ObjCName("fieldWithConflictingInterfaceMethod")
   val fieldWithConflictingInterfaceMethod: Int
  }
 

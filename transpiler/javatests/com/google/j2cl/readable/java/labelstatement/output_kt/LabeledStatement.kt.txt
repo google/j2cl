@@ -12,12 +12,14 @@ import kotlin.native.ObjCName
 
 @ObjCName("LabelstatementLabeledStatement", exact = true)
 open class LabeledStatement {
+ @ObjCName("loopStatements")
  open fun loopStatements() {
   LABEL@ while (true) {
    break@LABEL
   }
  }
 
+ @ObjCName("simpleStatement")
  open fun simpleStatement() {
   this.foo_private_2()
   LOOP@ do {
@@ -26,12 +28,14 @@ open class LabeledStatement {
   return
  }
 
+ @ObjCName("block")
  open fun block() {
   LABEL@ do {
    break@LABEL
   } while (false)
  }
 
+ @ObjCName("ifStatement")
  open fun ifStatement() {
   LABEL@ do {
    if (true) {
@@ -40,6 +44,7 @@ open class LabeledStatement {
   } while (false)
  }
 
+ @ObjCName("switchStatement")
  open fun switchStatement() {
   LABEL@ do {
    CASE@ do {

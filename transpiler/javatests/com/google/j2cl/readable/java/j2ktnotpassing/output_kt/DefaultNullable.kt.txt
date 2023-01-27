@@ -31,6 +31,7 @@ open class DefaultNullable {
 
 open class NotNullable {
  fun interface Consumer<T> {
+  @ObjCName("accept")
   fun accept(
    @ObjCName("withId") t: T
   )

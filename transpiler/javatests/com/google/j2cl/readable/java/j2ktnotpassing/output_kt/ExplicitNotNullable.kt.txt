@@ -19,6 +19,7 @@ open class ExplicitNotNullable {
  }
 
  fun interface Function<I, O> {
+  @ObjCName("apply")
   fun apply(
    @ObjCName("withId") i: I
   ): O

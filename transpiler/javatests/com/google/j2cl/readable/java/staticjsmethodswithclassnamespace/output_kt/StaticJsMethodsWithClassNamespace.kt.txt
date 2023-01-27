@@ -11,6 +11,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("StaticjsmethodswithclassnamespaceStaticJsMethodsWithClassNamespace", exact = true)
 open class StaticJsMethodsWithClassNamespace {
+ @ObjCName("test")
  open fun test() {
   StaticJsMethodsWithClassNamespace.originalName()
   StaticJsMethodsWithClassNamespace.originalName()
@@ -18,11 +19,13 @@ open class StaticJsMethodsWithClassNamespace {
 
  companion object {
   @JvmStatic
+  @ObjCName("originalName")
   fun originalName() {}
  }
 }
 
 open class ExternalCaller {
+ @ObjCName("test")
  open fun test() {
   StaticJsMethodsWithClassNamespace.originalName()
  }

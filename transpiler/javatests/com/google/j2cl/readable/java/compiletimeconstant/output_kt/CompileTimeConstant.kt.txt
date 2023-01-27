@@ -57,54 +57,54 @@ open class CompileTimeConstant<T> {
 
  companion object {
   @JvmField
-  @ObjCName("OBJ")
+  @ObjCName("OBJ_")
   val OBJ: Any? = null
 
-  @ObjCName("A")
+  @ObjCName("A_")
   const val A: Int = 10
 
-  @ObjCName("B")
+  @ObjCName("B_")
   const val B: Int = 20
 
-  @ObjCName("C")
+  @ObjCName("C_")
   const val C: Int = 200
 
-  @ObjCName("D")
+  @ObjCName("D_")
   const val D: String = "Tur\"tle"
 
-  @ObjCName("E")
+  @ObjCName("E_")
   const val E: String = "Do\'ve"
 
-  @ObjCName("F")
+  @ObjCName("F_")
   const val F: String = "Tur\"tleDo\'ve"
 
-  @ObjCName("J")
+  @ObjCName("J_")
   const val J: String = "Tur\"tleDo\'veTur\"tleDo\'ve"
 
   @JvmField
-  @ObjCName("K")
+  @ObjCName("K_")
   val K: String? = null
 
-  @ObjCName("L")
+  @ObjCName("L_")
   const val L: String = "ThisIsALongString"
 
-  @ObjCName("M")
+  @ObjCName("M_")
   const val M: String = "ThisIsALongStringAlso"
 
-  @ObjCName("N")
+  @ObjCName("N_")
   const val N: String = "ThisIsALongStringAlsoButLonger"
 
-  @ObjCName("G")
+  @ObjCName("G_")
   const val G: Long = 10000L
 
-  @ObjCName("H")
+  @ObjCName("H_")
   const val H: Char = 'A'
 
-  @ObjCName("I")
+  @ObjCName("I_")
   const val I: Boolean = true
 
   @JvmField
-  @ObjCName("classLiteral")
+  @ObjCName("classLiteral_")
   val classLiteral: Class<*>? = CompileTimeConstant::class.javaObjectType
  }
 }

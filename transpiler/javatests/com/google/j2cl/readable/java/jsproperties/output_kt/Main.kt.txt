@@ -22,11 +22,13 @@ open class Foo {
   var f_private_2: Int = 0
 
   @JvmStatic
+  @ObjCName("getA")
   fun getA(): Int {
    return Foo.f_private_2 + 1
   }
 
   @JvmStatic
+  @ObjCName("setA")
   fun setA(
    @ObjCName("withInt") x: Int
   ) {
@@ -34,11 +36,13 @@ open class Foo {
   }
 
   @JvmStatic
+  @ObjCName("getB")
   fun getB(): Int {
    return Foo.f_private_2 + 3
   }
 
   @JvmStatic
+  @ObjCName("setB")
   fun setB(
    @ObjCName("withInt") x: Int
   ) {
@@ -52,20 +56,24 @@ open class Bar {
  @HiddenFromObjC
  var f_private_2: Int = 0
 
+ @ObjCName("getA")
  open fun getA(): Int {
   return this.f_private_2 + 1
  }
 
+ @ObjCName("setA")
  open fun setA(
   @ObjCName("withInt") x: Int
  ) {
   this.f_private_2 = x + 2
  }
 
+ @ObjCName("getB")
  open fun getB(): Int {
   return this.f_private_2 + 3
  }
 
+ @ObjCName("setB")
  open fun setB(
   @ObjCName("withInt") x: Int
  ) {
@@ -74,21 +82,25 @@ open class Bar {
 }
 
 open class NativeFoo {
+ @ObjCName("getA")
  external open fun getA(): Any?
 
  companion object {
   @JvmStatic
+  @ObjCName("getB")
   external fun getB(): Double
  }
 }
 
 @ObjCName("JspropertiesMain", exact = true)
 open class Main {
+ @ObjCName("testNativeJsProperty")
  open fun testNativeJsProperty() {
   NativeFoo().getA()
   NativeFoo.getB()
  }
 
+ @ObjCName("testStaticJsProperty")
  open fun testStaticJsProperty() {
   Foo.getA()
   Foo.setA(10)
@@ -96,6 +108,7 @@ open class Main {
   Foo.setB(10)
  }
 
+ @ObjCName("testInstanceJsProperty")
  open fun testInstanceJsProperty() {
   val bar: Bar? = Bar()
   bar!!.getA()

@@ -17,15 +17,18 @@ open class Main {
    @ObjCName("Id") foo: T
   )
 
+  @ObjCName("foo")
   abstract fun foo()
  }
 
  @ObjCName("BoundedtypesupercallMain_Bar", exact = true)
  open class Bar<T: Comparable<*>?> {
+  @ObjCName("getSomething")
   open fun getSomething(): T {
    return null as T
   }
 
+  @ObjCName("doSomething")
   open fun doSomething(): Main.Foo<T>? {
    return object : Main.Foo<T>(this@Bar.getSomething()) {
     open override fun foo() {}

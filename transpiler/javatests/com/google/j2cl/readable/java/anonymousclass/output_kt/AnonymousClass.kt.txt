@@ -1,5 +1,5 @@
 // Generated from "anonymousclass/AnonymousClass.java"
-@file:OptIn(ExperimentalObjCRefinement::class, ExperimentalObjCName::class)
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
 
 package anonymousclass
 
@@ -16,12 +16,14 @@ import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
 abstract class SomeClass {
+ @ObjCName("foo")
  abstract fun foo(): String?
 
  constructor(i: Int)
 }
 
 abstract class SomeClassWithStaticMembers {
+ @ObjCName("foo")
  abstract fun foo(): String?
 
  constructor(i: Int)
@@ -39,6 +41,7 @@ open class AnonymousClass {
  @HiddenFromObjC
  var i_pp_anonymousclass: Int = 0
 
+ @ObjCName("main")
  open fun main() {
   val instance: SomeClass? = object : SomeClass(this@AnonymousClass.i_pp_anonymousclass) {
    @JvmField

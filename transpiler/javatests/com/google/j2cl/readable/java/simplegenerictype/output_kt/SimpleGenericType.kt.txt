@@ -27,6 +27,7 @@ open class SimpleGenericType<T, S> {
   this.second = s
  }
 
+ @ObjCName("test")
  open fun test() {
   val g: SimpleGenericType<Any?, Error?>? = SimpleGenericType<Any?, Error?>(Any(), java.lang.Error())
  }

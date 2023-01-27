@@ -10,6 +10,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface OtherInterface {
+ @ObjCName("fun")
  fun `fun`(
   @ObjCName("withInt") a: Int
  ): Int
@@ -19,12 +20,14 @@ fun interface OtherInterface {
 open class MyJsType: OtherInterface {
  constructor()
 
+ @ObjCName("foo")
  open fun foo(
   @ObjCName("withInt") a: Int
  ): Int {
   return a
  }
 
+ @ObjCName("bar")
  open fun bar(
   @ObjCName("withInt") a: Int
  ): Int {
@@ -37,10 +40,12 @@ open class MyJsType: OtherInterface {
 }
 
 interface MyInterface {
+ @ObjCName("foo")
  fun foo(
   @ObjCName("withInt") a: Int
  ): Int
 
+ @ObjCName("bar")
  fun bar(
   @ObjCName("withInt") a: Int
  ): Int

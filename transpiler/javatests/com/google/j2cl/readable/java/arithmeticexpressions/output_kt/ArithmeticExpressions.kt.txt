@@ -30,6 +30,7 @@ import kotlin.run
 
 @ObjCName("ArithmeticexpressionsArithmeticExpressions", exact = true)
 open class ArithmeticExpressions {
+ @ObjCName("testCoercions")
  open fun testCoercions() {
   var b: Byte = 1L.toByte()
   var c: Char = 1L.toInt().toChar()
@@ -47,6 +48,7 @@ open class ArithmeticExpressions {
   s = (o as Char).code.toShort()
  }
 
+ @ObjCName("testPrimitives")
  open fun testPrimitives() {
   var a: Int = 10
   val b: Int = run {
@@ -108,6 +110,7 @@ open class ArithmeticExpressions {
   ___value
  }
 
+ @ObjCName("testCompoundArray")
  open fun testCompoundArray() {
   val ints: IntArray? = null
   ints!![0] = ints!![0] + 1
@@ -177,6 +180,7 @@ open class ArithmeticExpressions {
   }.toInt() == 10
  }
 
+ @ObjCName("testCompoundBoxedTypes")
  open fun testCompoundBoxedTypes() {
   var c: Int? = Int.valueOf(1000)
   var d: Int? = Int.valueOf(10000)
@@ -232,6 +236,7 @@ open class ArithmeticExpressions {
  @HiddenFromObjC
  var intField_pp_arithmeticexpressions: Long = 0L
 
+ @ObjCName("testExtendedOperands")
  open fun testExtendedOperands() {
   var boxedInteger: Int? = Int.valueOf(3)
   var i: Int = 0
@@ -259,6 +264,7 @@ open class ArithmeticExpressions {
   d = (20L + l).toDouble() + d
  }
 
+ @ObjCName("testEffectivelyFinalVariableInAssignmentExpression")
  open fun testEffectivelyFinalVariableInAssignmentExpression(
   @ObjCName("withBoolean") condition: Boolean
  ) {
@@ -282,11 +288,11 @@ open class ArithmeticExpressions {
   const val DOUBLE_CONSTANT_WITH_ARITHMETIC_private_2: Double = 2.200000047683716
 
   @JvmField
-  @ObjCName("one")
+  @ObjCName("one_")
   var one: Long = 1L
 
   @JvmField
-  @ObjCName("foo")
+  @ObjCName("foo_")
   var foo: Long = run {
    val ___value: Long = ArithmeticExpressions.one
    ArithmeticExpressions.one = ArithmeticExpressions.one + 1L

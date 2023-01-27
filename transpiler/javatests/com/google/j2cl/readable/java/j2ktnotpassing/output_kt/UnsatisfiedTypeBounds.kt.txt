@@ -1,14 +1,16 @@
 // Generated from "j2ktnotpassing/UnsatisfiedTypeBounds.java"
-@file:OptIn(ExperimentalObjCRefinement::class)
+@file:OptIn(ExperimentalObjCRefinement::class, ExperimentalObjCName::class)
 
 package j2ktnotpassing
 
 import javaemul.lang.*
 import kotlin.Any
 import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
+import kotlin.native.ObjCName
 
 open class UnsatisfiedTypeBounds {
  companion object {
@@ -26,6 +28,7 @@ open class UnsatisfiedTypeBounds {
  }
 
  fun interface Foo<T: UnsatisfiedTypeBounds.Foo<T>> {
+  @ObjCName("get")
   fun get(): T
  }
 

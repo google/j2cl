@@ -26,16 +26,19 @@ import kotlin.native.ObjCName
 
 @ObjCName("CastCasts", exact = true)
 open class Casts {
+ @ObjCName("testCastToClass")
  open fun testCastToClass() {
   val o: Any? = Any()
   val c: Casts? = o as Casts?
  }
 
+ @ObjCName("testCasToInterface")
  open fun testCasToInterface() {
   val o: Any? = Any()
   val s: Serializable? = o as Serializable?
  }
 
+ @ObjCName("testCastToBoxedType")
  open fun testCastToBoxedType() {
   val o: Any? = Int(1)
   val b: Byte? = o as Byte?
@@ -49,6 +52,7 @@ open class Casts {
   val bool: Boolean? = o as Boolean?
  }
 
+ @ObjCName("testCastToArray")
  open fun testCastToArray() {
   val foo: Any? = null as Array<Any?>?
   val bar: Any? = null as Array<Array<Any?>?>?
@@ -57,6 +61,7 @@ open class Casts {
  @HiddenFromObjC
  fun functionForInstanceofTest_private_2() {}
 
+ @ObjCName("testCastObjectAfterInstanceOf")
  open fun testCastObjectAfterInstanceOf() {
   var o: Any? = Any()
   if (o is Casts) {
@@ -84,6 +89,7 @@ open class Casts {
   }
  }
 
+ @ObjCName("testCastFieldAfterInstanceOf")
  open fun testCastFieldAfterInstanceOf() {
   var foo: Casts.Foo? = Foo()
   if (foo!!.field is Casts) {
@@ -106,6 +112,7 @@ open class Casts {
   }
  }
 
+ @ObjCName("testCaseMethodAfterInstanceOf")
  open fun testCaseMethodAfterInstanceOf() {
   val foo: Casts.Foo? = Foo()
   if (foo!!.method() is Casts) {
@@ -113,6 +120,7 @@ open class Casts {
   }
  }
 
+ @ObjCName("testPrecedence")
  open fun testPrecedence() {
   val foo: Any? = "foo"
   val bar: Any? = "bar"
@@ -123,6 +131,7 @@ open class Casts {
   @JvmField
   var field: Any? = Any()
 
+  @ObjCName("method")
   open fun method(): Any? {
    return Any()
   }

@@ -14,6 +14,7 @@ import kotlin.native.ObjCName
 open class CastOnArrayInit {
  companion object {
   @JvmStatic
+  @ObjCName("fun")
   fun <E> `fun`(
    vararg @ObjCName("withCastonarrayinitCastOnArrayInit_FooArray") args: CastOnArrayInit.Foo<E>?
   ) {
@@ -21,6 +22,7 @@ open class CastOnArrayInit {
   }
 
   @JvmStatic
+  @ObjCName("test")
   fun <E> test() {
    val f1: CastOnArrayInit.Foo<E>? = CastOnArrayInit.Foo<E>()
    val f2: CastOnArrayInit.Foo<E>? = CastOnArrayInit.Foo<E>()

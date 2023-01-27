@@ -11,6 +11,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("PackageprivatemethodsPackage1Interface", exact = true)
 fun interface Interface {
+ @ObjCName("exposedInChildWithInterface")
  fun exposedInChildWithInterface(
   @ObjCName("withInt") a: Int,
   @ObjCName("withInt") b: Int

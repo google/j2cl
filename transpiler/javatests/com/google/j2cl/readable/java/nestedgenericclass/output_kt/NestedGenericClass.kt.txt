@@ -17,6 +17,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("NestedgenericclassNestedGenericClass", exact = true)
 open class NestedGenericClass<T> {
+ @ObjCName("fun")
  open fun <S> `fun`(
   @ObjCName("withId") t: S
  ) {
@@ -29,6 +30,7 @@ open class NestedGenericClass<T> {
   ___1F()
  }
 
+ @ObjCName("bar")
  open fun <T_1> bar() {
   open class ___1G<T> {
    open fun <T_1> bar() {
@@ -39,6 +41,7 @@ open class NestedGenericClass<T> {
   ___1G<Error?>().bar<Any?>()
  }
 
+ @ObjCName("test")
  open fun test() {
   val n: NestedGenericClass<Number?>? = NestedGenericClass<Number?>()
   val a: NestedGenericClass<Number?>.A<Error?>? = n!!.A<Error?>()

@@ -9,6 +9,7 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 open class Parent {
+ @ObjCName("fun")
  open fun `fun`() {}
 }
 
@@ -16,6 +17,7 @@ open class Parent {
 open class QualifiedSuperCall: Parent() {
  @ObjCName("QualifiedsupercallQualifiedSuperCall_InnerClass", exact = true)
  open inner class InnerClass {
+  @ObjCName("test")
   open fun test() {
    super<Parent>@QualifiedSuperCall.`fun`()
   }

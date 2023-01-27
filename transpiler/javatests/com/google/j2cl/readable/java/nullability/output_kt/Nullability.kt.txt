@@ -82,6 +82,7 @@ open class Nullability {
   this.f13_private_2 = Any()
  }
 
+ @ObjCName("m1")
  open fun m1(
   @ObjCName("withNSString") a: String,
   @ObjCName("withJavaUtilList") b: MutableList<Double>,
@@ -90,6 +91,7 @@ open class Nullability {
   return ""
  }
 
+ @ObjCName("m2")
  open fun m2(
   @ObjCName("withNSString") a: String?,
   @ObjCName("withJavaUtilList") b: MutableList<Double?>
@@ -97,6 +99,7 @@ open class Nullability {
   return ""
  }
 
+ @ObjCName("m3")
  open fun m3(
   @ObjCName("withNSString") a: String,
   vararg @ObjCName("withNSStringArray") args: String
@@ -105,6 +108,7 @@ open class Nullability {
   return null
  }
 
+ @ObjCName("m4")
  open fun m4(
   @ObjCName("withNullabilityNullability_MyFunction") f: Nullability.MyFunction
  ) {}
@@ -220,6 +224,7 @@ open class Nullability {
  }
 
  fun interface MyFunction {
+  @ObjCName("x")
   fun x(
    @ObjCName("withNSString") a: String
   ): String
@@ -243,6 +248,7 @@ open class Nullability {
  }
 
  fun interface NullableTemplatedReturn<T> {
+  @ObjCName("foo")
   fun foo(): T?
  }
 

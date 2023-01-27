@@ -35,7 +35,9 @@ internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit):
   emptyLineSeparated(packageSource(compilationUnit), importsSource())
 
 private fun packageSource(compilationUnit: CompilationUnit): Source =
-  source(compilationUnit.packageName).ifNotEmpty { spaceSeparated(source("package"), it) }
+  qualifiedIdentifierSource(compilationUnit.packageName).ifNotEmpty {
+    spaceSeparated(source("package"), it)
+  }
 
 internal fun Renderer.typesSource(compilationUnit: CompilationUnit): Source =
   emptyLineSeparated(compilationUnit.types.map(::typeSource))

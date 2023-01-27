@@ -9,10 +9,12 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 fun interface SomeInterface {
+ @ObjCName("bar")
  fun bar()
 }
 
 open class Parent {
+ @ObjCName("fun")
  open fun `fun`() {}
 }
 

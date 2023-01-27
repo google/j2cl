@@ -18,7 +18,43 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 
 internal val String.escapeJ2ObjCKeyword: String
-  get() = letIf(j2ObjCKeywords.contains(this)) { it + "__" }
+  get() = letIf(nsObjectMessages.contains(this) || j2ObjCKeywords.contains(this)) { it + "__" }
+
+// Taken from
+// "google3/third_party/java_src/j2objc/translator/src/main/java/com/google/devtools/j2objc/util/NameTable.java"
+private val nsObjectMessages =
+  setOf(
+    "alloc",
+    "attributeKeys",
+    "autoContentAccessingProxy",
+    "autorelease",
+    "classCode",
+    "classDescription",
+    "classForArchiver",
+    "classForKeyedArchiver",
+    "classFallbacksForKeyedArchiver",
+    "classForPortCoder",
+    "className",
+    "copy",
+    "dealloc",
+    "description",
+    "hash",
+    "init",
+    "initialize",
+    "isProxy",
+    "load",
+    "mutableCopy",
+    "new",
+    "release",
+    "retain",
+    "retainCount",
+    "scriptingProperties",
+    "self",
+    "superclass",
+    "toManyRelationshipKeys",
+    "toOneRelationshipKeys",
+    "version"
+  )
 
 // Taken from
 // "google3/third_party/java_src/j2objc/translator/src/main/resources/com/google/devtools/j2objc/reserved_names.txt"
