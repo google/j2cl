@@ -8,97 +8,6 @@
 @class NewObjCName_Foo;
 @class NewObjCName_NonCollection;
 
-NS_INLINE void NewObjCName_NonCollection_staticMethod(void) {
- [NewObjCName_NonCollectionCompanion.shared staticMethod];
-}
-
-typedef NS_ENUM(NSUInteger, NewObjCName_Foo_Enum) {
- NewObjCName_Foo_Enum_val = 0,
- NewObjCName_Foo_Enum_var = 1,
- NewObjCName_Foo_Enum_fun = 2,
- NewObjCName_Foo_Enum_alloc = 3,
- NewObjCName_Foo_Enum_init = 4,
- NewObjCName_Foo_Enum_initialize = 5,
- NewObjCName_Foo_Enum_allocFoo = 6,
- NewObjCName_Foo_Enum_initFoo = 7,
- NewObjCName_Foo_Enum_newFoo = 8,
- NewObjCName_Foo_Enum_copyFoo = 9,
- NewObjCName_Foo_Enum_mutableCopyFoo = 10,
- NewObjCName_Foo_Enum_register = 11,
- NewObjCName_Foo_Enum_struct = 12,
- NewObjCName_Foo_Enum_NULL = 13,
- NewObjCName_Foo_Enum_YES = 14,
- NewObjCName_Foo_Enum_NO = 15,
-};
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_val(void) {
- return NewObjCName_Foo.val;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_var(void) {
- return NewObjCName_Foo.var;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_fun(void) {
- return NewObjCName_Foo.fun;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_alloc(void) {
- return NewObjCName_Foo.theAlloc__;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_init(void) {
- return NewObjCName_Foo.theInit__;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_initialize(void) {
- return NewObjCName_Foo.initialize__;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_allocFoo(void) {
- return NewObjCName_Foo.theAllocFoo;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_initFoo(void) {
- return NewObjCName_Foo.theInitFoo;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_newFoo(void) {
- return NewObjCName_Foo.theNewFoo;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_copyFoo(void) {
- return NewObjCName_Foo.theCopyFoo;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_mutableCopyFoo(void) {
- return NewObjCName_Foo.theMutableCopyFoo;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_register(void) {
- return NewObjCName_Foo.register__;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_struct(void) {
- return NewObjCName_Foo.struct__;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NULL(void) {
- return NewObjCName_Foo.NULL__;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_YES(void) {
- return NewObjCName_Foo.YES__;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
- return NewObjCName_Foo.NO__;
-}
-
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
- return [NewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
-}
-
 #define NewObjCName_BOOLEAN_FALSE false
 
 #define NewObjCName_BOOLEAN_TRUE true
@@ -449,4 +358,95 @@ NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(ji
 
 NS_INLINE NSString* NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* s, id o, NSNumber* n) {
  return [NewObjCNameCompanion.shared nativeTypesWithNSString:s withId:o withNSNumber:n];
+}
+
+typedef NS_ENUM(NSUInteger, NewObjCName_Foo_Enum) {
+ NewObjCName_Foo_Enum_val = 0,
+ NewObjCName_Foo_Enum_var = 1,
+ NewObjCName_Foo_Enum_fun = 2,
+ NewObjCName_Foo_Enum_alloc = 3,
+ NewObjCName_Foo_Enum_init = 4,
+ NewObjCName_Foo_Enum_initialize = 5,
+ NewObjCName_Foo_Enum_allocFoo = 6,
+ NewObjCName_Foo_Enum_initFoo = 7,
+ NewObjCName_Foo_Enum_newFoo = 8,
+ NewObjCName_Foo_Enum_copyFoo = 9,
+ NewObjCName_Foo_Enum_mutableCopyFoo = 10,
+ NewObjCName_Foo_Enum_register = 11,
+ NewObjCName_Foo_Enum_struct = 12,
+ NewObjCName_Foo_Enum_NULL = 13,
+ NewObjCName_Foo_Enum_YES = 14,
+ NewObjCName_Foo_Enum_NO = 15,
+};
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_val(void) {
+ return NewObjCName_Foo.val;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_var(void) {
+ return NewObjCName_Foo.var;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_fun(void) {
+ return NewObjCName_Foo.fun;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_alloc(void) {
+ return NewObjCName_Foo.theAlloc__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_init(void) {
+ return NewObjCName_Foo.theInit__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_initialize(void) {
+ return NewObjCName_Foo.initialize__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_allocFoo(void) {
+ return NewObjCName_Foo.theAllocFoo;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_initFoo(void) {
+ return NewObjCName_Foo.theInitFoo;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_newFoo(void) {
+ return NewObjCName_Foo.theNewFoo;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_copyFoo(void) {
+ return NewObjCName_Foo.theCopyFoo;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_mutableCopyFoo(void) {
+ return NewObjCName_Foo.theMutableCopyFoo;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_register(void) {
+ return NewObjCName_Foo.register__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_struct(void) {
+ return NewObjCName_Foo.struct__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NULL(void) {
+ return NewObjCName_Foo.NULL__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_YES(void) {
+ return NewObjCName_Foo.YES__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
+ return NewObjCName_Foo.NO__;
+}
+
+NS_INLINE NewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
+ return [NewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
+}
+
+NS_INLINE void NewObjCName_NonCollection_staticMethod(void) {
+ [NewObjCName_NonCollectionCompanion.shared staticMethod];
 }

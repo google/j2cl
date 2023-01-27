@@ -102,12 +102,10 @@ private val CompilationUnit.declarationsRenderers: List<Renderer<Source>>
   get() = includedTypes.flatMap(Type::declarationsRenderers)
 
 private val CompilationUnit.includedTypes: List<Type>
-  // TODO(b/263471576): Change order from reversed to normal.
-  get() = types.filter { it.shouldRender }.flatMap { it.includedTypes.reversed() + it }
+  get() = types.filter { it.shouldRender }.flatMap { listOf(it) + it.includedTypes }
 
 private val Type.includedTypes: List<Type>
-  // TODO(b/263471576): Change order from reversed to normal.
-  get() = types.filter { it.shouldRender }.flatMap { it.includedTypes.reversed() + it }
+  get() = types.filter { it.shouldRender }.flatMap { listOf(it) + it.includedTypes }
 
 private val Type.shouldRender: Boolean
   get() = visibility.isPublic && typeDescriptor.existsInObjC
@@ -204,11 +202,11 @@ private val TypeDescriptor.existsInObjC: Boolean
       else -> true
     }
 
-private val collectionTypes: Set<TypeDescriptor>
+private val collectionTypeDescriptors: Set<TypeDescriptor>
   get() = setOf(TypeDescriptors.get().javaUtilCollection, TypeDescriptors.get().javaUtilMap)
 
 private val DeclaredTypeDescriptor.isCollectionType: Boolean
-  get() = collectionTypes.any { isAssignableTo(it) }
+  get() = collectionTypeDescriptors.any { isAssignableTo(it) }
 
 private val TypeDeclaration.existsInObjC: Boolean
   get() = (!isKtNative || mappedObjCNameRenderer != null)

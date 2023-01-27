@@ -7,10 +7,10 @@
 @class ImportglobaljstypesDate;
 @class ImportglobaljstypesDate_NativeDate;
 
-NS_INLINE jdouble ImportglobaljstypesDate_NativeDate_now(void) {
- return [ImportglobaljstypesDate_NativeDateCompanion.shared now];
-}
-
 NS_INLINE jdouble ImportglobaljstypesDate_nowWithDouble_(jdouble x) {
  return [ImportglobaljstypesDateCompanion.shared nowWithDouble:x];
+}
+
+NS_INLINE jdouble ImportglobaljstypesDate_NativeDate_now(void) {
+ return [ImportglobaljstypesDate_NativeDateCompanion.shared now];
 }
