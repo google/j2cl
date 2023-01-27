@@ -13,6 +13,7 @@ readable_example(
 """
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "js_binary")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
     "//build_defs:rules.bzl",
     "J2CL_OPTIMIZED_DEFS",
@@ -155,9 +156,27 @@ def readable_example(
                 tags = ["j2kt", "ios", "manual"],
             )
 
+            # Generate a objective library to force parsing of the header file.
+            write_file(
+                name = "ParseHeaders_m",
+                out = "ParseHeaders.m",
+                content = ["""#import "%s/%s.h" """ % (native.package_name(), src[:-5]) for src in srcs],
+                tags = ["j2kt", "ios", "manual"],
+            )
+
+            native.objc_library(
+                name = "ios_parse_headers",
+                testonly = 1,
+                srcs = ["ParseHeaders.m"],
+                tags = ["j2kt", "ios", "manual"],
+                deps = [
+                    ":readable_j2kt_test_framework",
+                ],
+            )
+
             ios_build_test(
                 name = "readable_j2kt_native_build_test",
-                targets = [":readable_j2kt_test_framework"],
+                targets = [":readable_j2kt_test_framework", ":ios_parse_headers"],
                 minimum_os_version = "11.0",
                 tags = ["manual", "j2kt", "ios"],
             )

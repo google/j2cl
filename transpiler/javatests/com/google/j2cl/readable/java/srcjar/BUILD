@@ -10,4 +10,7 @@ readable_example(
         "Foo.srcjar",  # Provides Foo.java
         "Srcjar.java",  # References Foo
     ],
+    # The command that auto-generates the ObjectiveC file to force build
+    # does not handle source jars.
+    build_kt_native_readables = False,
 )
