@@ -40,7 +40,7 @@ def readable_example(
         wasm_entry_points = [],
         generate_kt_readables = True,
         build_kt_readables = True,
-        build_kt_native_readables = False,
+        build_kt_native_readables = True,
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -54,13 +54,14 @@ def readable_example(
       javacopts: javacopts to apply j2cl_library
       **kwargs: passes to j2cl_library
     """
-
     if any([src for src in srcs if src.endswith(".kt")]):
         # J2KT doesn't make sense for Kotlin Frontend.
         generate_kt_readables = False
 
         # WASM is currently not planned for Kotlin Frontend.
         generate_wasm_readables = False
+
+    build_kt_native_readables = generate_kt_readables and build_kt_readables and build_kt_native_readables
 
     # Transpile the Java files.
     j2cl_library(
@@ -74,7 +75,7 @@ def readable_example(
         readable_source_maps = True,
         readable_library_info = generate_library_info,
         generate_j2kt_jvm_library = generate_kt_readables,
-        generate_j2kt_native_library = generate_kt_readables and build_kt_native_readables,
+        generate_j2kt_native_library = build_kt_native_readables,
         **kwargs
     )
 

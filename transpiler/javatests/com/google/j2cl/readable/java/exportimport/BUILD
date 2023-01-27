@@ -8,7 +8,6 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = ["Main.java"],
-    build_kt_native_readables = True,
     deps = [":exports_my_simple_annoation_import"],
 )
 

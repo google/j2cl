@@ -7,6 +7,8 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/266930418): Unexpected build failure.
+    build_kt_native_readables = False,
     generate_wasm_readables = False,  # TODO(b/261078322) Support JsOverlay in WASM.
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
