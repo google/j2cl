@@ -17,6 +17,7 @@ import kotlin.native.ObjCName
 @ObjCName("JstypeSomeJsType", exact = true)
 open class SomeJsType<T> {
  @JvmField
+ @ObjCName("publicField_")
  var publicField: Int = 0
 
  @JvmField
@@ -28,6 +29,7 @@ open class SomeJsType<T> {
  var packageField_pp_jstype: Int = 0
 
  @JvmField
+ @ObjCName("protectedField_")
  var protectedField: Int = 0
 
  @ObjCName("publicMethod")

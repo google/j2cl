@@ -19,6 +19,7 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_A", exact = true)
  open class A {
   @JvmField
+  @ObjCName("fA_")
   var fA: Int = 1
 
   constructor(
@@ -33,6 +34,7 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_B", exact = true)
  open class B: JsConstructorClass.A {
   @JvmField
+  @ObjCName("fB_")
   var fB: Int = 2
 
   constructor(
@@ -56,6 +58,7 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_C", exact = true)
  open class C: JsConstructorClass.B {
   @JvmField
+  @ObjCName("fC_")
   var fC: Int = 1
 
   constructor(
@@ -75,6 +78,7 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_D", exact = true)
  open class D: JsConstructorClass.B {
   @JvmField
+  @ObjCName("fD_")
   var fD: Int = 8
 
   constructor(): super(9) {
@@ -91,6 +95,7 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_E", exact = true)
  open class E: JsConstructorClass.C {
   @JvmField
+  @ObjCName("fE_")
   var fE: Int = 11
 
   constructor(): super(10) {
@@ -101,6 +106,7 @@ open class JsConstructorClass {
  @ObjCName("JsconstructorJsConstructorClass_F", exact = true)
  open class F: JsConstructorClass.C {
   @JvmField
+  @ObjCName("fF_")
   var fF: Int = 13
 
   constructor(

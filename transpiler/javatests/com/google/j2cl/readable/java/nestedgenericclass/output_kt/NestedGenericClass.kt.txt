@@ -61,11 +61,13 @@ open class NestedGenericClass<T> {
  @ObjCName("NestedgenericclassNestedGenericClass_C", exact = true)
  open inner class C {
   @JvmField
+  @ObjCName("c_")
   var c: T = null as T
 
   @ObjCName("NestedgenericclassNestedGenericClass_C_D", exact = true)
   open inner class D {
    @JvmField
+   @ObjCName("d_")
    var d: T = null as T
   }
  }

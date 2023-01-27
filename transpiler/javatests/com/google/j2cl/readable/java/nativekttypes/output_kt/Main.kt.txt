@@ -27,12 +27,15 @@ import nativekttypes.nativekt.KWithCompanionObject
 @ObjCName("NativekttypesMain", exact = true)
 open class Main {
  @JvmField
+ @ObjCName("topLevelField_")
  var topLevelField: KTopLevel<String?>? = null
 
  @JvmField
+ @ObjCName("nestedField_")
  var nestedField: KTopLevel.KNested<String?>? = null
 
  @JvmField
+ @ObjCName("innerField_")
  var innerField: KTopLevel<String?>.KInner<String?>? = null
 
  @ObjCName("methodArguments")

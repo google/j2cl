@@ -14,9 +14,11 @@ import kotlin.native.ObjCName
 @ObjCName("J2ktobjcnameFieldExample", exact = true)
 open class FieldExample {
  @JvmField
+ @ObjCName("myInt_")
  var myInt: Int = 0
 
  @JvmField
+ @ObjCName("myString_")
  var myString: String? = null
 
  companion object {

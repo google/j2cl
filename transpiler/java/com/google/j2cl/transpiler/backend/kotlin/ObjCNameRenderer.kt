@@ -129,8 +129,7 @@ private val FieldDescriptor.needsObjCNameAnnotations
       enclosingTypeDeclaration.visibility.needsObjCNameAnnotation &&
         !enclosingTypeDeclaration.isLocal &&
         !enclosingTypeDeclaration.isAnonymous &&
-        visibility.needsObjCNameAnnotation &&
-        isStatic
+        visibility.needsObjCNameAnnotation
     }
 
 private val TypeDeclaration.needsObjCNameAnnotation

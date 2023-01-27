@@ -16,12 +16,15 @@ import kotlin.native.ObjCName
 @ObjCName("NativekttypesKtPropertyNameConflict", exact = true)
 abstract class KtPropertyNameConflict {
  @JvmField
+ @ObjCName("fieldWithConflictingGetter_")
  var fieldWithConflictingGetter_ktPropertyConflict: Int = 0
 
  @JvmField
+ @ObjCName("fieldWithConflictingNonGetter_")
  var fieldWithConflictingNonGetter_ktPropertyConflict: Int = 0
 
  @JvmField
+ @ObjCName("fieldWithConflictingRenamedMethod_")
  var fieldWithConflictingRenamedMethod_ktPropertyConflict: Int = 0
 
  @ObjCName("fieldWithConflictingGetter")

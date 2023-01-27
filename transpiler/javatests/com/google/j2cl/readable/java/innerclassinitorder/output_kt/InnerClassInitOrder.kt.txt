@@ -21,6 +21,7 @@ import kotlin.native.ObjCName
 @ObjCName("InnerclassinitorderInnerClassInitOrder", exact = true)
 open class InnerClassInitOrder {
  @JvmField
+ @ObjCName("number_")
  var number: Int = 0
 
  @ObjCName("testOuterThisFromSuperCall")
@@ -317,6 +318,7 @@ open class InnerClassInitOrder {
  @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer", exact = true)
  open class Outer {
   @JvmField
+  @ObjCName("value_")
   val value: Int
 
   constructor(

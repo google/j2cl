@@ -16,9 +16,11 @@ import kotlin.native.ObjCName
 @ObjCName("NativekttypesNativektKTopLevel", exact = true)
 open class KTopLevel<O> {
  @JvmField
+ @ObjCName("instanceField_")
  var instanceField: O = null as O
 
  @JvmField
+ @ObjCName("renamedField_")
  var renamedField: Int = 0
 
  @ObjCName("renamedMethod")
@@ -47,6 +49,7 @@ open class KTopLevel<O> {
  }
 
  @JvmField
+ @ObjCName("isRenamedField_")
  var isRenamedField: Boolean = false
 
  @ObjCName("isMethodAsProperty")
@@ -87,6 +90,7 @@ open class KTopLevel<O> {
  @ObjCName("NativekttypesNativektKTopLevel_KNested", exact = true)
  open class KNested<N> {
   @JvmField
+  @ObjCName("instanceField_")
   var instanceField: N = null as N
 
   constructor(

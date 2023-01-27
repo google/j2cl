@@ -21,9 +21,11 @@ open class OuterClass {
   @ObjCName("NestedinstanceinnerclassOuterClass_InnerClass_InnerInnerClass", exact = true)
   open inner class InnerInnerClass {
    @JvmField
+   @ObjCName("x_")
    var x: OuterClass.InnerClass? = this@InnerClass
 
    @JvmField
+   @ObjCName("y_")
    var y: OuterClass? = this@OuterClass
   }
  }

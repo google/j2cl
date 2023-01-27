@@ -35,9 +35,11 @@ import kotlin.native.HiddenFromObjC
 @kotlin.native.ObjCName("NewObjCName", exact = true)
 open class ObjCName {
  @JvmField
+ @kotlin.native.ObjCName("publicField_")
  var publicField: Int = 0
 
  @JvmField
+ @kotlin.native.ObjCName("protectedField_")
  var protectedField: Int = 0
 
  @JvmField
