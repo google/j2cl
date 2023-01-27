@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
@@ -81,7 +82,7 @@ public class AddJsMethodOverridesCastChecks extends NormalizationPass {
             return Method.Builder.from(method)
                 .setParameters(parameters)
                 .setStatements(preamble)
-                .addStatements(method.getBody())
+                .addStatements(method.getBody().getStatements())
                 .build();
           }
         });
@@ -89,42 +90,35 @@ public class AddJsMethodOverridesCastChecks extends NormalizationPass {
 
   private boolean doesParameterNeedCast(Method method, int index) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    ImmutableList<ParameterDescriptor> parameterDescriptors =
-        methodDescriptor.getParameterDescriptors();
+    ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(index);
+    TypeDescriptor parameterTypeDescriptor = parameterDescriptor.getTypeDescriptor();
+
+    if (parameterDescriptor.isVarargs()
+        || parameterTypeDescriptor.isNoopCast()
+        || parameterTypeDescriptor.isPrimitive()
+        // TODO(b/263261275): find out why unboxed JsEnums can be passed to methods expecting
+        // Enums and remove the workaround of not checking Enum parameters.
+        || TypeDescriptors.isJavaLangEnum(parameterTypeDescriptor.toRawTypeDescriptor())) {
+      return false;
+    }
 
     // Look only at the overridden jsmethods which is the case in which there in no bridge
     // and the override takes the same name as the overridden method.
     for (MethodDescriptor overriddenMethod : methodDescriptor.getJsOverriddenMethodDescriptors()) {
-      ImmutableList<ParameterDescriptor> overriddenParameterDescriptors =
-          overriddenMethod.getDeclarationDescriptor().getParameterDescriptors();
+      ImmutableList<TypeDescriptor> overriddenParameteTypeDescriptors =
+          overriddenMethod.getDeclarationDescriptor().getParameterTypeDescriptors();
 
-      if (overriddenParameterDescriptors.size() <= index) {
+      if (overriddenParameteTypeDescriptors.size() <= index) {
         // J2CL allows to define a native method method  with the same jsname with less parameters,
         // that will be overridden in JavaScript by a Java JsMethod that is not an override (e.g.
         // the Java method declared an extra optional parameter).
         continue;
       }
 
-      if (isCastNeeded(
-          parameterDescriptors.get(index), overriddenParameterDescriptors.get(index))) {
+      if (!overriddenParameteTypeDescriptors.get(index).isAssignableTo(parameterTypeDescriptor)) {
         return true;
       }
     }
     return false;
-  }
-
-  private boolean isCastNeeded(
-      ParameterDescriptor parameterDescriptor, ParameterDescriptor overriddenParameterDescriptor) {
-    return !parameterDescriptor.isVarargs()
-        && !parameterDescriptor.getTypeDescriptor().isPrimitive()
-        // TODO(b/263261275): find out why unboxed JsEnums can be passed to methods expecting
-        // Enums and remove the workaround of not checking Enum parameters.
-        && !TypeDescriptors.isJavaLangEnum(
-            parameterDescriptor.getTypeDescriptor().toRawTypeDescriptor())
-        && !parameterDescriptor
-            .getTypeDescriptor()
-            .toRawTypeDescriptor()
-            .isSameBaseType(
-                overriddenParameterDescriptor.getTypeDescriptor().toRawTypeDescriptor());
   }
 }
