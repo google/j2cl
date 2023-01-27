@@ -16,6 +16,7 @@
 package j2kt;
 
 import com.google.j2objc.annotations.ObjectiveCName;
+import java.util.AbstractList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -204,5 +205,27 @@ public class ObjCName {
     public static Foo withOrdinal(int ordinal) {
       return Foo.values()[ordinal];
     }
+  }
+
+  public static class SubCollection<E> extends AbstractList<E> {
+    @Override
+    public E get(int index) {
+      return null;
+    }
+
+    @Override
+    public int size() {
+      return 0;
+    }
+
+    public static void staticMethod() {}
+
+    public static class InnerClass {
+      public static void staticMethod() {}
+    }
+  }
+
+  public static class NonCollection {
+    public static void staticMethod() {}
   }
 }

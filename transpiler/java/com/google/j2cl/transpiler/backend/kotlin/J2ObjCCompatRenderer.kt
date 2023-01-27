@@ -82,7 +82,6 @@ import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
-import java.util.stream.Collectors.toList
 
 internal val CompilationUnit.j2ObjCCompatHeaderSource: Source
   get() =
@@ -100,13 +99,18 @@ private val CompilationUnit.declarationsRenderer: Renderer<Source>
   get() = declarationsRenderers.flatten.map(::emptyLineSeparated)
 
 private val CompilationUnit.declarationsRenderers: List<Renderer<Source>>
-  get() = allTypes.filter { it.shouldRender }.flatMap(Type::declarationsRenderers)
+  get() = includedTypes.flatMap(Type::declarationsRenderers)
 
-private val CompilationUnit.allTypes: List<Type>
-  get() = streamTypes().collect(toList())
+private val CompilationUnit.includedTypes: List<Type>
+  // TODO(b/263471576): Change order from reversed to normal.
+  get() = types.filter { it.shouldRender }.flatMap { it.includedTypes.reversed() + it }
+
+private val Type.includedTypes: List<Type>
+  // TODO(b/263471576): Change order from reversed to normal.
+  get() = types.filter { it.shouldRender }.flatMap { it.includedTypes.reversed() + it }
 
 private val Type.shouldRender: Boolean
-  get() = visibility.isPublic && !declaration.isKtNative && !declaration.isLocal
+  get() = visibility.isPublic && typeDescriptor.existsInObjC
 
 private val Type.declarationsRenderers: List<Renderer<Source>>
   get() =
@@ -195,13 +199,19 @@ private val FieldDescriptor.shouldRender: Boolean
 private val TypeDescriptor.existsInObjC: Boolean
   get() =
     when (this) {
-      is DeclaredTypeDescriptor ->
-        (!typeDeclaration.isKtNative || typeDeclaration.mappedObjCNameRenderer != null) &&
-          !isAssignableTo(TypeDescriptors.get().javaUtilCollection) &&
-          !isAssignableTo(TypeDescriptors.get().javaUtilMap)
+      is DeclaredTypeDescriptor -> typeDeclaration.existsInObjC && !isCollectionType
       is ArrayTypeDescriptor -> false
       else -> true
     }
+
+private val collectionTypes: Set<TypeDescriptor>
+  get() = setOf(TypeDescriptors.get().javaUtilCollection, TypeDescriptors.get().javaUtilMap)
+
+private val DeclaredTypeDescriptor.isCollectionType: Boolean
+  get() = collectionTypes.any { isAssignableTo(it) }
+
+private val TypeDeclaration.existsInObjC: Boolean
+  get() = (!isKtNative || mappedObjCNameRenderer != null)
 
 private fun Method.functionRenderer(objCNames: MethodObjCNames): Renderer<Source> =
   functionDeclaration(

@@ -6,6 +6,7 @@ package j2kt
 import javaemul.lang.*
 import java.util.HashMap
 import java.util.LinkedList
+import javaemul.lang.JavaAbstractList
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Byte
@@ -459,6 +460,41 @@ open class ObjCName {
    ): ObjCName.Foo? {
     return ObjCName.Foo.values()!![ordinal]
    }
+  }
+ }
+
+ @kotlin.native.ObjCName("NewObjCName_SubCollection", exact = true)
+ open class SubCollection<E>: JavaAbstractList<E>() {
+  open override fun get(index: Int): E {
+   return null as E
+  }
+
+  open override val size: Int get() {
+   return 0
+  }
+
+  companion object {
+   @JvmStatic
+   @kotlin.native.ObjCName("staticMethod")
+   fun staticMethod() {}
+  }
+
+  @kotlin.native.ObjCName("NewObjCName_SubCollection_InnerClass", exact = true)
+  open class InnerClass {
+   companion object {
+    @JvmStatic
+    @kotlin.native.ObjCName("staticMethod")
+    fun staticMethod() {}
+   }
+  }
+ }
+
+ @kotlin.native.ObjCName("NewObjCName_NonCollection", exact = true)
+ open class NonCollection {
+  companion object {
+   @JvmStatic
+   @kotlin.native.ObjCName("staticMethod")
+   fun staticMethod() {}
   }
  }
 }

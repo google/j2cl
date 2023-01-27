@@ -6,6 +6,11 @@
 
 @class NewObjCName;
 @class NewObjCName_Foo;
+@class NewObjCName_NonCollection;
+
+NS_INLINE void NewObjCName_NonCollection_staticMethod(void) {
+ [NewObjCName_NonCollectionCompanion.shared staticMethod];
+}
 
 typedef NS_ENUM(NSUInteger, NewObjCName_Foo_Enum) {
  NewObjCName_Foo_Enum_val = 0,
