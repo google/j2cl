@@ -6,6 +6,7 @@ package j2kt
 import javaemul.lang.*
 import java.util.HashMap
 import java.util.LinkedList
+import java.util.StringJoiner
 import javaemul.lang.JavaAbstractList
 import kotlin.Any
 import kotlin.Boolean
@@ -354,6 +355,60 @@ open class ObjCName {
   }
 
   @JvmStatic
+  @kotlin.native.ObjCName("numberType")
+  fun numberType(
+   @kotlin.native.ObjCName("withNSNumber") l: Number?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("booleanType")
+  fun booleanType(
+   @kotlin.native.ObjCName("withJavaLangBoolean") l: Boolean?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("characterType")
+  fun characterType(
+   @kotlin.native.ObjCName("withJavaLangCharacter") l: Char?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("byteType")
+  fun byteType(
+   @kotlin.native.ObjCName("withJavaLangByte") l: Byte?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("shortType")
+  fun shortType(
+   @kotlin.native.ObjCName("withJavaLangShort") l: Short?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("integerType")
+  fun integerType(
+   @kotlin.native.ObjCName("withJavaLangInteger") l: Int?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("longType")
+  fun longType(
+   @kotlin.native.ObjCName("withJavaLangLong") l: Long?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("floatType")
+  fun floatType(
+   @kotlin.native.ObjCName("withJavaLangFloat") l: Float?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("doubleType")
+  fun doubleType(
+   @kotlin.native.ObjCName("withJavaLangDouble") l: Double?
+  ) {}
+
+  @JvmStatic
   @kotlin.native.ObjCName("iterableType")
   fun iterableType(
    @kotlin.native.ObjCName("withJavaLangIterable") l: MutableIterable<String?>?
@@ -411,6 +466,12 @@ open class ObjCName {
   @kotlin.native.ObjCName("hashMapType")
   fun hashMapType(
    @kotlin.native.ObjCName("withJavaUtilHashMap") l: HashMap<String?, String?>?
+  ) {}
+
+  @JvmStatic
+  @kotlin.native.ObjCName("nonNativeJavaType")
+  fun nonNativeJavaType(
+   @kotlin.native.ObjCName("withJavaUtilStringJoiner") l: StringJoiner?
   ) {}
  }
 

@@ -4,6 +4,7 @@
 
 #import "third_party/java_src/j2objc/jre_emul/Classes/J2ObjC_types.h"
 
+@class J2ktJavaUtilStringJoiner;
 @class NewObjCName;
 @class NewObjCName_Foo;
 @class NewObjCName_NonCollection;
@@ -358,6 +359,14 @@ NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(ji
 
 NS_INLINE NSString* NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* s, id o, NSNumber* n) {
  return [NewObjCNameCompanion.shared nativeTypesWithNSString:s withId:o withNSNumber:n];
+}
+
+NS_INLINE void NewObjCName_numberTypeWithNSNumber_(NSNumber* l) {
+ [NewObjCNameCompanion.shared numberTypeWithNSNumber:l];
+}
+
+NS_INLINE void NewObjCName_nonNativeJavaTypeWithJavaUtilStringJoiner_(J2ktJavaUtilStringJoiner* l) {
+ [NewObjCNameCompanion.shared nonNativeJavaTypeWithJavaUtilStringJoiner:l];
 }
 
 typedef NS_ENUM(NSUInteger, NewObjCName_Foo_Enum) {

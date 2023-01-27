@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringJoiner;
 
 @ObjectiveCName("NewObjCName")
 public class ObjCName {
@@ -164,6 +165,24 @@ public class ObjCName {
     return s;
   }
 
+  public static void numberType(Number l) {}
+
+  public static void booleanType(Boolean l) {}
+
+  public static void characterType(Character l) {}
+
+  public static void byteType(Byte l) {}
+
+  public static void shortType(Short l) {}
+
+  public static void integerType(Integer l) {}
+
+  public static void longType(Long l) {}
+
+  public static void floatType(Float l) {}
+
+  public static void doubleType(Double l) {}
+
   public static void iterableType(Iterable<String> l) {}
 
   public static void iteratorType(Iterator<String> l) {}
@@ -183,6 +202,8 @@ public class ObjCName {
   public static void hashSetType(HashSet<String> l) {}
 
   public static void hashMapType(HashMap<String, String> l) {}
+
+  public static void nonNativeJavaType(StringJoiner l) {}
 
   public enum Foo {
     val,
