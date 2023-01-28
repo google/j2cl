@@ -28,16 +28,16 @@ public final class ArrayHelper {
 
   public static final int ARRAY_PROCESS_BATCH_SIZE = 10000;
 
-  public static <T> T[] clone(T[] array) {
+  public static <T> T clone(T array) {
     Object result = asNativeArray(array).slice();
-    return ArrayStamper.stampJavaTypeInfo(result, array);
+    return ArrayStamper.stampJavaTypeInfo(JsUtils.uncheckedCast(result), array);
   }
 
-  public static <T> T[] clone(T[] array, int fromIndex, int toIndex) {
+  public static <T> T clone(T array, int fromIndex, int toIndex) {
     Object result = unsafeClone(array, fromIndex, toIndex);
     // array.slice doesn't expand if toIndex > array.length
     setLength(result, toIndex - fromIndex);
-    return ArrayStamper.stampJavaTypeInfo(result, array);
+    return ArrayStamper.stampJavaTypeInfo(JsUtils.uncheckedCast(result), array);
   }
 
   /**
@@ -123,6 +123,13 @@ public final class ArrayHelper {
       batchStart = batchEnd;
       destOfs += len;
     }
+  }
+
+  public static <T> T concat(T a, T b) {
+    Object[] result = asNativeArray(a).slice();
+    ArrayStamper.stampJavaTypeInfo(result, a);
+    copy(b, 0, result, getLength(a), getLength(b), /* overwrite= */ false);
+    return JsUtils.uncheckedCast(result);
   }
 
   public static boolean equals(double[] array1, double[] array2) {

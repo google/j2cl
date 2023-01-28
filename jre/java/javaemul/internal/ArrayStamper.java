@@ -26,8 +26,13 @@ public class ArrayStamper {
     return asArray;
   }
 
+  static <T> T stampJavaTypeInfo(T array, T referenceType) {
+    $copyType(JsUtils.uncheckedCast(array), JsUtils.uncheckedCast(referenceType));
+    return array;
+  }
+
   @JsMethod(namespace = "vmbootstrap.Arrays")
-  public static native <T> void $copyType(T[] array, T[] referenceType);
+  private static native void $copyType(Object[] array, Object[] referenceType);
 
   @JsMethod(namespace = "vmbootstrap.Arrays", name = "$isStamped")
   public static native boolean isStamped(Object array);
