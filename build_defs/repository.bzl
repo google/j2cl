@@ -20,6 +20,15 @@ def load_j2cl_repo_deps():
         sha256 = "f014b04be5e90ec2b4e8ac598556895160a2ccd5c97624a60ca6df335bb4b97f",
     )
 
+    # TODO(goktug): Consider moving to setup_j2cl_workspace after licences migration
+    # is completed.
+    _github_repo(
+        name = "rules_license",
+        repo = "bazelbuild/rules_license",
+        sha256 = "792aad709d8abfbf9e1b523e4c82b6f7cb6035222241f51901e80a7b64a58f94",
+        tag = "0.0.4",
+    )
+
     _github_repo(
         name = "bazel_skylib",
         repo = "bazelbuild/bazel-skylib",
