@@ -10,8 +10,16 @@ NS_INLINE jint StaticinitializersStaticInitializers_get_a(void) {
  return StaticinitializersStaticInitializersCompanion.shared.a_;
 }
 
+NS_INLINE void StaticinitializersStaticInitializers_set_a(jint value) {
+ StaticinitializersStaticInitializersCompanion.shared.a_ = value;
+}
+
 NS_INLINE jint StaticinitializersStaticInitializers_get_b(void) {
  return StaticinitializersStaticInitializersCompanion.shared.b_;
+}
+
+NS_INLINE void StaticinitializersStaticInitializers_set_b(jint value) {
+ StaticinitializersStaticInitializersCompanion.shared.b_ = value;
 }
 
 NS_INLINE jint StaticinitializersStaticInitializers_get_c(void) {

@@ -70,6 +70,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererOf
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererWith
 import com.google.j2cl.transpiler.backend.kotlin.objc.returnStatement
+import com.google.j2cl.transpiler.backend.kotlin.objc.semicolonEnded
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceWithDependencies
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
@@ -118,7 +119,7 @@ private val Type.declarationsRenderers: List<Renderer<Source>>
 
       addAll(fields.map { it.fieldConstantDefineRenderer })
 
-      addAll(members.map { it.functionRenderer })
+      addAll(members.flatMap { it.functionRenderers })
     }
 
 private val Type.nsEnumTypedefRenderer: Renderer<Source>
@@ -128,6 +129,15 @@ private val Type.nsEnumTypedefRenderer: Renderer<Source>
       type = jintTypeRenderer,
       values = enumFields.map { it.descriptor.objCEnumName }
     )
+
+private val FieldDescriptor.propertyQualifierRenderer: Renderer<Source>
+  get() =
+    enclosingTypeDescriptor.typeDeclaration.run {
+      if (isStatic && !isEnumConstant) companionSharedRenderer else objCNameRenderer
+    }
+
+private val FieldDescriptor.getPropertyObjCName: String
+  get() = if (isEnumConstant) objCName.escapeObjCEnumProperty else objCName.escapeObjCProperty
 
 private val Field.fieldGetFunctionRenderer: Renderer<Source>
   get() = descriptor.takeIf { it.shouldRender }?.getFunctionRenderer ?: empty
@@ -145,14 +155,42 @@ private val FieldDescriptor.getFunctionName: String
   get() =
     enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_get_" + name!!.objCName
 
-private val FieldDescriptor.getObjCName: String
-  get() = if (isEnumConstant) objCName.escapeObjCEnumProperty else objCName.escapeObjCProperty
-
 private val FieldDescriptor.getExpressionRenderer: Renderer<Source>
+  get() = propertyQualifierRenderer.map { dotSeparated(it, source(getPropertyObjCName)) }
+
+private val FieldDescriptor.setPropertyObjCName: String
+  get() = objCName.escapeObjCKeyword
+
+private val Field.fieldSetFunctionRenderer: Renderer<Source>
+  get() = descriptor.takeIf { !it.isFinal && it.shouldRender }?.setFunctionRenderer ?: empty
+
+private val FieldDescriptor.setFunctionRenderer: Renderer<Source>
   get() =
-    enclosingTypeDescriptor.typeDeclaration
-      .run { if (isStatic && !isEnumConstant) companionSharedRenderer else objCNameRenderer }
-      .map { dotSeparated(it, source(getObjCName)) }
+    functionDeclaration(
+      modifiers = listOf(nsInline),
+      returnType = PrimitiveTypes.VOID.objCRenderer,
+      name = setFunctionName,
+      parameters = listOf(setParameterRenderer),
+      statements = listOf(setStatementRenderer)
+    )
+
+private val FieldDescriptor.setFunctionName: String
+  get() =
+    enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_set_" + name!!.objCName
+
+private val FieldDescriptor.setStatementRenderer: Renderer<Source>
+  get() =
+    propertyQualifierRenderer.map {
+      semicolonEnded(
+        assignment(dotSeparated(it, source(setPropertyObjCName)), source(setFunctionParameterName))
+      )
+    }
+
+private val FieldDescriptor.setParameterRenderer: Renderer<Source>
+  get() = typeDescriptor.objCRenderer.map { spaceSeparated(it, source(setFunctionParameterName)) }
+
+private val setFunctionParameterName: String
+  get() = "value"
 
 private val Field.fieldConstantDefineRenderer: Renderer<Source>
   get() =
@@ -168,12 +206,12 @@ private val Field.constantDefineRenderer: Renderer<Source>?
 private val FieldDescriptor.defineConstantName: String
   get() = enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_" + name!!
 
-private val Member.functionRenderer: Renderer<Source>
+private val Member.functionRenderers: List<Renderer<Source>>
   get() =
     when (this) {
-      is Method -> methodFunctionRenderer
-      is Field -> fieldGetFunctionRenderer
-      else -> empty
+      is Method -> listOf(methodFunctionRenderer)
+      is Field -> listOf(fieldGetFunctionRenderer, fieldSetFunctionRenderer)
+      else -> listOf()
     }
 
 private val Method.methodFunctionRenderer: Renderer<Source>

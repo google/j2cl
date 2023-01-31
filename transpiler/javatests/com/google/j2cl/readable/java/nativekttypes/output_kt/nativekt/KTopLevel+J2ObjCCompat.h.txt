@@ -9,12 +9,20 @@ NS_INLINE id NativekttypesNativektKTopLevel_get_staticField(void) {
  return NativekttypesNativektKTopLevelCompanion.shared.staticField_;
 }
 
+NS_INLINE void NativekttypesNativektKTopLevel_set_staticField(id value) {
+ NativekttypesNativektKTopLevelCompanion.shared.staticField_ = value;
+}
+
 NS_INLINE id NativekttypesNativektKTopLevel_staticMethodWithId_(id s) {
  return [NativekttypesNativektKTopLevelCompanion.shared staticMethodWithId:s];
 }
 
 NS_INLINE id NativekttypesNativektKTopLevel_KNested_get_staticField(void) {
  return NativekttypesNativektKTopLevel_KNestedCompanion.shared.staticField_;
+}
+
+NS_INLINE void NativekttypesNativektKTopLevel_KNested_set_staticField(id value) {
+ NativekttypesNativektKTopLevel_KNestedCompanion.shared.staticField_ = value;
 }
 
 NS_INLINE id NativekttypesNativektKTopLevel_KNested_staticMethodWithId_(id s) {
