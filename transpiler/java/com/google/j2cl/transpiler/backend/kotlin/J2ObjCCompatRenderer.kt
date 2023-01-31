@@ -65,7 +65,6 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.nsMutableSet
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsNumber
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsObject
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsString
-import com.google.j2cl.transpiler.backend.kotlin.objc.nsUInteger
 import com.google.j2cl.transpiler.backend.kotlin.objc.pointer
 import com.google.j2cl.transpiler.backend.kotlin.objc.protocolName
 import com.google.j2cl.transpiler.backend.kotlin.objc.rendererOf
@@ -126,7 +125,7 @@ private val Type.nsEnumTypedefRenderer: Renderer<Source>
   get() =
     nsEnumTypedef(
       name = declaration.objCEnumName,
-      type = nsUInteger,
+      type = jintTypeRenderer,
       values = enumFields.map { it.descriptor.objCEnumName }
     )
 
