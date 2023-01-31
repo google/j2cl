@@ -136,6 +136,7 @@ import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityKotlin;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
+import com.google.j2cl.transpiler.passes.RemoveIsInstanceMethods;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
@@ -428,6 +429,7 @@ public enum Backend {
           MakeVariablesFinal::new,
           NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
+          RemoveIsInstanceMethods::new,
           RemoveNoopStatements::new,
           UpgradeInterfaceDispatch::new,
 

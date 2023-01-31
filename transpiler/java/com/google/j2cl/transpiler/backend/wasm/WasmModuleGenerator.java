@@ -321,13 +321,6 @@ public class WasmModuleGenerator {
 
   private void renderMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
-    // TODO(b/260914432): Remove isInstance methods in a pass.
-    // $isInstance is unused in WASM, and the explicit implementations in our JRE for Comparable,
-    // etc use a native type in a way that is currently unsupported in WASM.
-    if (methodDescriptor.getName().equals(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
-      return;
-    }
-
     builder.newLine();
     builder.newLine();
     builder.append(";;; " + method.getReadableDescription());
