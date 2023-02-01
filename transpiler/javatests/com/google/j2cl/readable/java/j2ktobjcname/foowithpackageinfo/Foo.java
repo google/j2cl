@@ -13,6 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktobjcname.foowithpacakgeinfo;
+package j2ktobjcname.foowithpackageinfo;
 
 public final class Foo {}

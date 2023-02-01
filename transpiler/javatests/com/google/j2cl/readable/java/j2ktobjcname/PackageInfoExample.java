@@ -15,7 +15,7 @@
  */
 package j2ktobjcname;
 
-import j2ktobjcname.foowithpacakgeinfo.Foo;
+import j2ktobjcname.foowithpackageinfo.Foo;
 
 public final class PackageInfoExample {
   public void doNothing(Foo foo) {}
