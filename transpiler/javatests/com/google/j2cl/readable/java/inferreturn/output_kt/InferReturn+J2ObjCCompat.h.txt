@@ -4,14 +4,18 @@
 
 @class InferreturnInferReturn;
 
-NS_INLINE InferreturnInferReturn* InferreturnInferReturn_inferGenericWithId_(id foo) {
+NS_ASSUME_NONNULL_BEGIN
+
+NS_INLINE InferreturnInferReturn* _Nullable InferreturnInferReturn_inferGenericWithId_(id foo) {
  return [InferreturnInferReturnCompanion.shared inferGenericWithId:foo];
 }
 
-NS_INLINE InferreturnInferReturn* InferreturnInferReturn_tightenTypeWithInferreturnInferReturn_(InferreturnInferReturn* foo) {
+NS_INLINE InferreturnInferReturn* _Nullable InferreturnInferReturn_tightenTypeWithInferreturnInferReturn_(InferreturnInferReturn* _Nullable foo) {
  return [InferreturnInferReturnCompanion.shared tightenTypeWithInferreturnInferReturn:foo];
 }
 
 NS_INLINE void InferreturnInferReturn_main(void) {
  [InferreturnInferReturnCompanion.shared main];
 }
+
+NS_ASSUME_NONNULL_END

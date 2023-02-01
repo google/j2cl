@@ -6,6 +6,8 @@
 
 @class AutoboxingAutoBoxing;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define AutoboxingAutoBoxing_COMPILE_TIME_CONSTANT 1.1f
 
 NS_INLINE jfloat AutoboxingAutoBoxing_get_COMPILE_TIME_CONSTANT(void) {
@@ -19,3 +21,5 @@ NS_INLINE void AutoboxingAutoBoxing_testUnboxingFromTypeVariable(void) {
 NS_INLINE void AutoboxingAutoBoxing_testUnboxingFromIntersectionType(void) {
  [AutoboxingAutoBoxingCompanion.shared testUnboxingFromIntersectionType];
 }
+
+NS_ASSUME_NONNULL_END

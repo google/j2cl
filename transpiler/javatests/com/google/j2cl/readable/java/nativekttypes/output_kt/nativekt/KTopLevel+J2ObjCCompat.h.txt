@@ -5,11 +5,13 @@
 @class NativekttypesNativektKTopLevel;
 @class NativekttypesNativektKTopLevel_KNested;
 
-NS_INLINE id NativekttypesNativektKTopLevel_get_staticField(void) {
+NS_ASSUME_NONNULL_BEGIN
+
+NS_INLINE id _Nullable NativekttypesNativektKTopLevel_get_staticField(void) {
  return NativekttypesNativektKTopLevelCompanion.shared.staticField_;
 }
 
-NS_INLINE void NativekttypesNativektKTopLevel_set_staticField(id value) {
+NS_INLINE void NativekttypesNativektKTopLevel_set_staticField(id _Nullable value) {
  NativekttypesNativektKTopLevelCompanion.shared.staticField_ = value;
 }
 
@@ -17,14 +19,16 @@ NS_INLINE id NativekttypesNativektKTopLevel_staticMethodWithId_(id s) {
  return [NativekttypesNativektKTopLevelCompanion.shared staticMethodWithId:s];
 }
 
-NS_INLINE id NativekttypesNativektKTopLevel_KNested_get_staticField(void) {
+NS_INLINE id _Nullable NativekttypesNativektKTopLevel_KNested_get_staticField(void) {
  return NativekttypesNativektKTopLevel_KNestedCompanion.shared.staticField_;
 }
 
-NS_INLINE void NativekttypesNativektKTopLevel_KNested_set_staticField(id value) {
+NS_INLINE void NativekttypesNativektKTopLevel_KNested_set_staticField(id _Nullable value) {
  NativekttypesNativektKTopLevel_KNestedCompanion.shared.staticField_ = value;
 }
 
 NS_INLINE id NativekttypesNativektKTopLevel_KNested_staticMethodWithId_(id s) {
  return [NativekttypesNativektKTopLevel_KNestedCompanion.shared staticMethodWithId:s];
 }
+
+NS_ASSUME_NONNULL_END

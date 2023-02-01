@@ -5,6 +5,8 @@
 @class ProtobufMyMessage;
 @class ProtobufMyMessage_Builder;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_INLINE ProtobufMyMessage* ProtobufMyMessage_getDefaultInstance(void) {
  return [ProtobufMyMessageCompanion.shared getDefaultInstance];
 }
@@ -12,3 +14,5 @@ NS_INLINE ProtobufMyMessage* ProtobufMyMessage_getDefaultInstance(void) {
 NS_INLINE ProtobufMyMessage_Builder* ProtobufMyMessage_newBuilder(void) {
  return [ProtobufMyMessageCompanion.shared doNewBuilder];
 }
+
+NS_ASSUME_NONNULL_END

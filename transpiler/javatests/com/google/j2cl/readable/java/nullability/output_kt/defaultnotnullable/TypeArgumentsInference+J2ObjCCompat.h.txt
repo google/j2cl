@@ -5,6 +5,8 @@
 @class NullabilityDefaultnotnullableTypeArgumentsInference;
 @class NullabilityDefaultnotnullableTypeArgumentsInference_Pair;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_INLINE NullabilityDefaultnotnullableTypeArgumentsInference_Pair* NullabilityDefaultnotnullableTypeArgumentsInference_wildcardPair(void) {
  return [NullabilityDefaultnotnullableTypeArgumentsInferenceCompanion.shared wildcardPair];
 }
@@ -16,3 +18,5 @@ NS_INLINE NullabilityDefaultnotnullableTypeArgumentsInference_Pair* NullabilityD
 NS_INLINE NullabilityDefaultnotnullableTypeArgumentsInference_Pair* NullabilityDefaultnotnullableTypeArgumentsInference_wildcardPairAndIdentity(void) {
  return [NullabilityDefaultnotnullableTypeArgumentsInferenceCompanion.shared wildcardPairAndIdentity];
 }
+
+NS_ASSUME_NONNULL_END

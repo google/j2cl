@@ -6,6 +6,8 @@
 
 @class JsignoreJsIgnoreExample;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_INLINE void JsignoreJsIgnoreExample_exportedFunction(void) {
  [JsignoreJsIgnoreExampleCompanion.shared exportedFunction];
 }
@@ -30,6 +32,8 @@ NS_INLINE void JsignoreJsIgnoreExample_set_notExportedField(jint value) {
  JsignoreJsIgnoreExampleCompanion.shared.notExportedField_ = value;
 }
 
-NS_INLINE id JsignoreJsIgnoreExample_get_CONSTNAME(void) {
+NS_INLINE id _Nullable JsignoreJsIgnoreExample_get_CONSTNAME(void) {
  return JsignoreJsIgnoreExampleCompanion.shared.CONSTNAME_;
 }
+
+NS_ASSUME_NONNULL_END

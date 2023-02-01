@@ -17,5 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin.common
 
 fun <T> T.letIf(condition: Boolean, fn: (T) -> T): T = if (condition) fn(this) else this
 
+fun <T> T.runIf(condition: Boolean, fn: T.() -> T): T = if (condition) fn() else this
+
 fun <T, V : Any> T.runIfNotNull(value: V?, fn: T.(V) -> T): T =
   if (value != null) fn(value) else this

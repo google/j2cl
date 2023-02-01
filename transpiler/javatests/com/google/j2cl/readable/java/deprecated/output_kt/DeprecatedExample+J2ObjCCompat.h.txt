@@ -4,10 +4,14 @@
 
 @class DeprecatedDeprecatedExample;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_INLINE NSString* DeprecatedDeprecatedExample_get_DEPRECATED_STATIC_FIELD(void) {
  return DeprecatedDeprecatedExampleCompanion.shared.DEPRECATED_STATIC_FIELD_;
 }
 
-NS_INLINE void DeprecatedDeprecatedExample_deprecatedStaticMethodWithId_(id someObject) {
+NS_INLINE void DeprecatedDeprecatedExample_deprecatedStaticMethodWithId_(id _Nullable someObject) {
  [DeprecatedDeprecatedExampleCompanion.shared deprecatedStaticMethodWithId:someObject];
 }
+
+NS_ASSUME_NONNULL_END

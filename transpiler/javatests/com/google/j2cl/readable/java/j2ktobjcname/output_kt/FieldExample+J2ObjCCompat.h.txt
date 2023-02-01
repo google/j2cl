@@ -6,6 +6,8 @@
 
 @class J2ktobjcnameFieldExample;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define J2ktobjcnameFieldExample_MY_FINAL_INT 5
 
 NS_INLINE jint J2ktobjcnameFieldExample_get_MY_FINAL_INT(void) {
@@ -20,11 +22,11 @@ NS_INLINE void J2ktobjcnameFieldExample_set_myStaticInt(jint value) {
  J2ktobjcnameFieldExampleCompanion.shared.myStaticInt_ = value;
 }
 
-NS_INLINE NSString* J2ktobjcnameFieldExample_get_myStaticString(void) {
+NS_INLINE NSString* _Nullable J2ktobjcnameFieldExample_get_myStaticString(void) {
  return J2ktobjcnameFieldExampleCompanion.shared.myStaticString_;
 }
 
-NS_INLINE void J2ktobjcnameFieldExample_set_myStaticString(NSString* value) {
+NS_INLINE void J2ktobjcnameFieldExample_set_myStaticString(NSString* _Nullable value) {
  J2ktobjcnameFieldExampleCompanion.shared.myStaticString_ = value;
 }
 
@@ -35,3 +37,5 @@ NS_INLINE jint J2ktobjcnameFieldExample_get_BIG_ENDIAN(void) {
 NS_INLINE void J2ktobjcnameFieldExample_set_BIG_ENDIAN(jint value) {
  J2ktobjcnameFieldExampleCompanion.shared.BIG_ENDIAN___ = value;
 }
+
+NS_ASSUME_NONNULL_END

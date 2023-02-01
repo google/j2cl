@@ -6,6 +6,8 @@
 
 @protocol LambdasLambdas_GenericJsFunction;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_INLINE void LambdasLambdas_testLambdaInStaticContext(void) {
  [LambdasLambdasCompanion.shared testLambdaInStaticContext];
 }
@@ -14,7 +16,7 @@ NS_INLINE void LambdasLambdas_testStaticMethodTypeVariableThroughLambda(void) {
  [LambdasLambdasCompanion.shared testStaticMethodTypeVariableThroughLambda];
 }
 
-NS_INLINE id LambdasLambdas_m(void) {
+NS_INLINE id _Nullable LambdasLambdas_m(void) {
  return [LambdasLambdasCompanion.shared m];
 }
 
@@ -22,7 +24,7 @@ NS_INLINE void LambdasLambdas_testLambdaCallingStaticMethod(void) {
  [LambdasLambdasCompanion.shared testLambdaCallingStaticMethod];
 }
 
-NS_INLINE id<LambdasLambdas_GenericJsFunction> LambdasLambdas_identity(void) {
+NS_INLINE id<LambdasLambdas_GenericJsFunction> _Nullable LambdasLambdas_identity(void) {
  return [LambdasLambdasCompanion.shared identity];
 }
 
@@ -33,3 +35,5 @@ NS_INLINE void LambdasLambdas_testJsInteropLambdas(void) {
 NS_INLINE void LambdasLambdas_testIntersectionTyping(void) {
  [LambdasLambdasCompanion.shared testIntersectionTyping];
 }
+
+NS_ASSUME_NONNULL_END

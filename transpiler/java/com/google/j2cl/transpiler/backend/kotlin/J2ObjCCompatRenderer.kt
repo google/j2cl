@@ -38,6 +38,7 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
 import com.google.j2cl.transpiler.backend.kotlin.common.code
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
+import com.google.j2cl.transpiler.backend.kotlin.common.runIf
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
 import com.google.j2cl.transpiler.backend.kotlin.objc.Dependency
 import com.google.j2cl.transpiler.backend.kotlin.objc.Import
@@ -45,7 +46,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.Renderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.className
 import com.google.j2cl.transpiler.backend.kotlin.objc.comment
 import com.google.j2cl.transpiler.backend.kotlin.objc.dependency
-import com.google.j2cl.transpiler.backend.kotlin.objc.empty
+import com.google.j2cl.transpiler.backend.kotlin.objc.emptyRenderer
 import com.google.j2cl.transpiler.backend.kotlin.objc.expressionStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.flatten
 import com.google.j2cl.transpiler.backend.kotlin.objc.functionDeclaration
@@ -56,6 +57,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.macroDefine
 import com.google.j2cl.transpiler.backend.kotlin.objc.map
 import com.google.j2cl.transpiler.backend.kotlin.objc.map2
 import com.google.j2cl.transpiler.backend.kotlin.objc.methodCall
+import com.google.j2cl.transpiler.backend.kotlin.objc.nsAssumeNonnull
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsCopying
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsEnumTypedef
 import com.google.j2cl.transpiler.backend.kotlin.objc.nsInline
@@ -72,6 +74,7 @@ import com.google.j2cl.transpiler.backend.kotlin.objc.rendererWith
 import com.google.j2cl.transpiler.backend.kotlin.objc.returnStatement
 import com.google.j2cl.transpiler.backend.kotlin.objc.semicolonEnded
 import com.google.j2cl.transpiler.backend.kotlin.objc.sourceWithDependencies
+import com.google.j2cl.transpiler.backend.kotlin.objc.toNullable
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
@@ -96,7 +99,7 @@ private val CompilationUnit.dependenciesAndDeclarationsSource: Source
   get() = declarationsRenderer.sourceWithDependencies
 
 private val CompilationUnit.declarationsRenderer: Renderer<Source>
-  get() = declarationsRenderers.flatten.map(::emptyLineSeparated)
+  get() = nsAssumeNonnull(declarationsRenderers.flatten.map(::emptyLineSeparated))
 
 private val CompilationUnit.declarationsRenderers: List<Renderer<Source>>
   get() = includedTypes.flatMap(Type::declarationsRenderers)
@@ -140,7 +143,7 @@ private val FieldDescriptor.getPropertyObjCName: String
   get() = if (isEnumConstant) objCName.escapeObjCEnumProperty else objCName.escapeObjCProperty
 
 private val Field.fieldGetFunctionRenderer: Renderer<Source>
-  get() = descriptor.takeIf { it.shouldRender }?.getFunctionRenderer ?: empty
+  get() = descriptor.takeIf { it.shouldRender }?.getFunctionRenderer ?: emptyRenderer
 
 private val FieldDescriptor.getFunctionRenderer: Renderer<Source>
   get() =
@@ -162,7 +165,7 @@ private val FieldDescriptor.setPropertyObjCName: String
   get() = objCName.escapeObjCKeyword
 
 private val Field.fieldSetFunctionRenderer: Renderer<Source>
-  get() = descriptor.takeIf { !it.isFinal && it.shouldRender }?.setFunctionRenderer ?: empty
+  get() = descriptor.takeIf { !it.isFinal && it.shouldRender }?.setFunctionRenderer ?: emptyRenderer
 
 private val FieldDescriptor.setFunctionRenderer: Renderer<Source>
   get() =
@@ -194,8 +197,9 @@ private val setFunctionParameterName: String
 
 private val Field.fieldConstantDefineRenderer: Renderer<Source>
   get() =
-    if (descriptor.shouldRender && descriptor.isCompileTimeConstant) constantDefineRenderer ?: empty
-    else empty
+    if (descriptor.shouldRender && descriptor.isCompileTimeConstant)
+      constantDefineRenderer ?: emptyRenderer
+    else emptyRenderer
 
 private val Field.constantDefineRenderer: Renderer<Source>?
   get() =
@@ -215,7 +219,8 @@ private val Member.functionRenderers: List<Renderer<Source>>
     }
 
 private val Method.methodFunctionRenderer: Renderer<Source>
-  get() = takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let(::functionRenderer) ?: empty
+  get() =
+    takeIf { it.descriptor.shouldRender }?.toObjCNames()?.let(::functionRenderer) ?: emptyRenderer
 
 private val MethodDescriptor.shouldRender: Boolean
   get() =
@@ -335,7 +340,7 @@ private val TypeDescriptor.objCRenderer: Renderer<Source>
       is DeclaredTypeDescriptor -> declaredObjCRenderer
       // TODO: Handle TypeVariable and Array
       else -> id
-    }
+    }.runIf(isNullable) { toNullable() }
 
 private val PrimitiveTypeDescriptor.primitiveObjCRenderer: Renderer<Source>
   get() =

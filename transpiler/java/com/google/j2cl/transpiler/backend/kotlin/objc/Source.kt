@@ -85,7 +85,7 @@ val Import.source: Source
 val Renderer<Source>.sourceWithDependencies: Source
   get() =
     mutableSetOf<Dependency>().let { mutableDependencies ->
-      val renderedSource = renderAddingDependencies(mutableDependencies)
-      val dependenciesSource = dependenciesSource(mutableDependencies)
-      emptyLineSeparated(dependenciesSource, renderedSource)
+      renderAddingDependencies(mutableDependencies).let { source ->
+        emptyLineSeparated(dependenciesSource(mutableDependencies), source)
+      }
     }

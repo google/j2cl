@@ -9,6 +9,8 @@
 @class NewObjCName_Foo;
 @class NewObjCName_NonCollection;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define NewObjCName_BOOLEAN_FALSE false
 
 #define NewObjCName_BOOLEAN_TRUE true
@@ -89,27 +91,27 @@ NS_INLINE void NewObjCName_set_publicStaticField(jint value) {
  NewObjCNameCompanion.shared.publicStaticField_ = value;
 }
 
-NS_INLINE id NewObjCName_get_objectField(void) {
+NS_INLINE id _Nullable NewObjCName_get_objectField(void) {
  return NewObjCNameCompanion.shared.objectField_;
 }
 
-NS_INLINE void NewObjCName_set_objectField(id value) {
+NS_INLINE void NewObjCName_set_objectField(id _Nullable value) {
  NewObjCNameCompanion.shared.objectField_ = value;
 }
 
-NS_INLINE NSString* NewObjCName_get_stringField(void) {
+NS_INLINE NSString* _Nullable NewObjCName_get_stringField(void) {
  return NewObjCNameCompanion.shared.stringField_;
 }
 
-NS_INLINE void NewObjCName_set_stringField(NSString* value) {
+NS_INLINE void NewObjCName_set_stringField(NSString* _Nullable value) {
  NewObjCNameCompanion.shared.stringField_ = value;
 }
 
-NS_INLINE NewObjCName* NewObjCName_get_selfField(void) {
+NS_INLINE NewObjCName* _Nullable NewObjCName_get_selfField(void) {
  return NewObjCNameCompanion.shared.selfField_;
 }
 
-NS_INLINE void NewObjCName_set_selfField(NewObjCName* value) {
+NS_INLINE void NewObjCName_set_selfField(NewObjCName* _Nullable value) {
  NewObjCNameCompanion.shared.selfField_ = value;
 }
 
@@ -357,11 +359,11 @@ NS_INLINE void NewObjCName_newFooFromInt_(jint i) {
  [NewObjCNameCompanion.shared doNewFooFromInt:i];
 }
 
-NS_INLINE void NewObjCName_newFooFromInt_withInteger_(NSString* s, jint i) {
+NS_INLINE void NewObjCName_newFooFromInt_withInteger_(NSString* _Nullable s, jint i) {
  [NewObjCNameCompanion.shared doNewFooFromInt:s withInteger:i];
 }
 
-NS_INLINE void NewObjCName_fooWithNSString_withNSString_(NSString* s, NSString* i) {
+NS_INLINE void NewObjCName_fooWithNSString_withNSString_(NSString* _Nullable s, NSString* _Nullable i) {
  [NewObjCNameCompanion.shared fooWithNSString:s withNSString:i];
 }
 
@@ -417,15 +419,15 @@ NS_INLINE void NewObjCName_reservedParamNamesWithInt_withInt_withInt_withInt_(ji
  [NewObjCNameCompanion.shared reservedParamNamesWithInt:extern_ withInt:struct_ withInt:register_ withInt:inline_];
 }
 
-NS_INLINE NSString* NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* s, id o, NSNumber* n) {
+NS_INLINE NSString* _Nullable NewObjCName_nativeTypesWithNSString_withId_withNSNumber_(NSString* _Nullable s, id _Nullable o, NSNumber* _Nullable n) {
  return [NewObjCNameCompanion.shared nativeTypesWithNSString:s withId:o withNSNumber:n];
 }
 
-NS_INLINE void NewObjCName_numberTypeWithNSNumber_(NSNumber* l) {
+NS_INLINE void NewObjCName_numberTypeWithNSNumber_(NSNumber* _Nullable l) {
  [NewObjCNameCompanion.shared numberTypeWithNSNumber:l];
 }
 
-NS_INLINE void NewObjCName_nonNativeJavaTypeWithJavaUtilStringJoiner_(J2ktJavaUtilStringJoiner* l) {
+NS_INLINE void NewObjCName_nonNativeJavaTypeWithJavaUtilStringJoiner_(J2ktJavaUtilStringJoiner* _Nullable l) {
  [NewObjCNameCompanion.shared nonNativeJavaTypeWithJavaUtilStringJoiner:l];
 }
 
@@ -512,10 +514,12 @@ NS_INLINE NewObjCName_Foo* NewObjCName_Foo_get_NO(void) {
  return NewObjCName_Foo.NO__;
 }
 
-NS_INLINE NewObjCName_Foo* NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
+NS_INLINE NewObjCName_Foo* _Nullable NewObjCName_Foo_withOrdinalWithInt_(jint ordinal) {
  return [NewObjCName_FooCompanion.shared withOrdinalWithInt:ordinal];
 }
 
 NS_INLINE void NewObjCName_NonCollection_staticMethod(void) {
  [NewObjCName_NonCollectionCompanion.shared staticMethod];
 }
+
+NS_ASSUME_NONNULL_END

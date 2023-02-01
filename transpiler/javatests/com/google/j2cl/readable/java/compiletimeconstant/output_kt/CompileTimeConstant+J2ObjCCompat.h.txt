@@ -6,6 +6,8 @@
 
 @class CompiletimeconstantCompileTimeConstant;
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define CompiletimeconstantCompileTimeConstant_A 10
 
 #define CompiletimeconstantCompileTimeConstant_B 20
@@ -18,7 +20,7 @@
 
 #define CompiletimeconstantCompileTimeConstant_I true
 
-NS_INLINE id CompiletimeconstantCompileTimeConstant_get_OBJ(void) {
+NS_INLINE id _Nullable CompiletimeconstantCompileTimeConstant_get_OBJ(void) {
  return CompiletimeconstantCompileTimeConstantCompanion.shared.OBJ_;
 }
 
@@ -50,7 +52,7 @@ NS_INLINE NSString* CompiletimeconstantCompileTimeConstant_get_J(void) {
  return CompiletimeconstantCompileTimeConstantCompanion.shared.J_;
 }
 
-NS_INLINE NSString* CompiletimeconstantCompileTimeConstant_get_K(void) {
+NS_INLINE NSString* _Nullable CompiletimeconstantCompileTimeConstant_get_K(void) {
  return CompiletimeconstantCompileTimeConstantCompanion.shared.K_;
 }
 
@@ -77,3 +79,5 @@ NS_INLINE jchar CompiletimeconstantCompileTimeConstant_get_H(void) {
 NS_INLINE jboolean CompiletimeconstantCompileTimeConstant_get_I(void) {
  return CompiletimeconstantCompileTimeConstantCompanion.shared.I_;
 }
+
+NS_ASSUME_NONNULL_END

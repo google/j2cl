@@ -7,10 +7,14 @@
 @class GenericnativetypeBoundedJsArray;
 @class GenericnativetypeBoundedJsArrays;
 
-NS_INLINE GenericnativetypeBoundedJsArray* GenericnativetypeBoundedJsArrays_create(void) {
+NS_ASSUME_NONNULL_BEGIN
+
+NS_INLINE GenericnativetypeBoundedJsArray* _Nullable GenericnativetypeBoundedJsArrays_create(void) {
  return [GenericnativetypeBoundedJsArraysCompanion.shared create];
 }
 
-NS_INLINE GenericnativetypeBoundedJsArray* GenericnativetypeBoundedJsArrays_createWithSizeWithInt_(jint size) {
+NS_INLINE GenericnativetypeBoundedJsArray* _Nullable GenericnativetypeBoundedJsArrays_createWithSizeWithInt_(jint size) {
  return [GenericnativetypeBoundedJsArraysCompanion.shared createWithSizeWithInt:size];
 }
+
+NS_ASSUME_NONNULL_END

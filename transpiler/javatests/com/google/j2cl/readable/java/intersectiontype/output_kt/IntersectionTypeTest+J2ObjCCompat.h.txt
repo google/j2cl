@@ -8,30 +8,34 @@
 @protocol IntersectiontypeCmp2;
 @protocol IntersectiontypeGetable;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_INLINE void IntersectiontypeIntersectionTypeTest_getAndSetWithId_(id object) {
  [IntersectiontypeIntersectionTypeTestCompanion.shared getAndSetWithId:object];
 }
 
-NS_INLINE id<IntersectiontypeGetable> IntersectiontypeIntersectionTypeTest_castWithId_(id o) {
+NS_INLINE id<IntersectiontypeGetable> _Nullable IntersectiontypeIntersectionTypeTest_castWithId_(id _Nullable o) {
  return [IntersectiontypeIntersectionTypeTestCompanion.shared castWithId:o];
 }
 
-NS_INLINE id<IntersectiontypeGetable> IntersectiontypeIntersectionTypeTest_cast1WithId_(id s) {
+NS_INLINE id<IntersectiontypeGetable> _Nullable IntersectiontypeIntersectionTypeTest_cast1WithId_(id _Nullable s) {
  return [IntersectiontypeIntersectionTypeTestCompanion.shared cast1WithId:s];
 }
 
-NS_INLINE id<IntersectiontypeGetable> IntersectiontypeIntersectionTypeTest_cast2WithId_(id s) {
+NS_INLINE id<IntersectiontypeGetable> _Nullable IntersectiontypeIntersectionTypeTest_cast2WithId_(id _Nullable s) {
  return [IntersectiontypeIntersectionTypeTestCompanion.shared cast2WithId:s];
 }
 
-NS_INLINE id<IntersectiontypeCmp> IntersectiontypeIntersectionTypeTest_method(void) {
+NS_INLINE id<IntersectiontypeCmp> _Nullable IntersectiontypeIntersectionTypeTest_method(void) {
  return [IntersectiontypeIntersectionTypeTestCompanion.shared method];
 }
 
-NS_INLINE id<IntersectiontypeCmp2> IntersectiontypeIntersectionTypeTest_method2(void) {
+NS_INLINE id<IntersectiontypeCmp2> _Nullable IntersectiontypeIntersectionTypeTest_method2(void) {
  return [IntersectiontypeIntersectionTypeTestCompanion.shared method2];
 }
 
-NS_INLINE void IntersectiontypeIntersectionTypeTest_testClosureAssignmentWithId_(id o) {
+NS_INLINE void IntersectiontypeIntersectionTypeTest_testClosureAssignmentWithId_(id _Nullable o) {
  [IntersectiontypeIntersectionTypeTestCompanion.shared testClosureAssignmentWithId:o];
 }
+
+NS_ASSUME_NONNULL_END

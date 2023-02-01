@@ -4,14 +4,18 @@
 
 @class LocalclassinstaticcontextLocalClassInStaticContext;
 
-NS_INLINE id LocalclassinstaticcontextLocalClassInStaticContext_get_f(void) {
+NS_ASSUME_NONNULL_BEGIN
+
+NS_INLINE id _Nullable LocalclassinstaticcontextLocalClassInStaticContext_get_f(void) {
  return LocalclassinstaticcontextLocalClassInStaticContextCompanion.shared.f_;
 }
 
-NS_INLINE void LocalclassinstaticcontextLocalClassInStaticContext_set_f(id value) {
+NS_INLINE void LocalclassinstaticcontextLocalClassInStaticContext_set_f(id _Nullable value) {
  LocalclassinstaticcontextLocalClassInStaticContextCompanion.shared.f_ = value;
 }
 
 NS_INLINE void LocalclassinstaticcontextLocalClassInStaticContext_test(void) {
  [LocalclassinstaticcontextLocalClassInStaticContextCompanion.shared test];
 }
+
+NS_ASSUME_NONNULL_END

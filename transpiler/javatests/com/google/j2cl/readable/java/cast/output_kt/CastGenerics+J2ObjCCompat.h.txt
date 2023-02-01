@@ -5,6 +5,8 @@
 @class CastCastGenerics;
 @class CastCastGenerics_Foo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NS_INLINE void CastCastGenerics_testErasureCast(void) {
  [CastCastGenericsCompanion.shared testErasureCast];
 }
@@ -13,6 +15,8 @@ NS_INLINE void CastCastGenerics_testCastToParamterizedType(void) {
  [CastCastGenericsCompanion.shared testCastToParamterizedType];
 }
 
-NS_INLINE CastCastGenerics_Foo* CastCastGenerics_doSomething(void) {
+NS_INLINE CastCastGenerics_Foo* _Nullable CastCastGenerics_doSomething(void) {
  return [CastCastGenericsCompanion.shared doSomething];
 }
+
+NS_ASSUME_NONNULL_END

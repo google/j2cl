@@ -19,7 +19,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.block
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
-import com.google.j2cl.transpiler.backend.kotlin.source.emptySource
+import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
@@ -29,17 +29,16 @@ import com.google.j2cl.transpiler.backend.kotlin.source.plusComma
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.spaceSeparated
 
-val empty: Renderer<Source>
-  get() = rendererOf(emptySource)
-
 private fun foundation(string: String): Renderer<Source> =
   source(string) rendererWith dependency(systemImport("Foundation/Foundation.h"))
 
 val nsEnum: Renderer<Source> = foundation("NS_ENUM")
 val nsInline: Renderer<Source> = foundation("NS_INLINE")
+val nsAssumeNonnullBegin: Renderer<Source> = foundation("NS_ASSUME_NONNULL_BEGIN")
+val nsAssumeNonnullEnd: Renderer<Source> = foundation("NS_ASSUME_NONNULL_END")
+val nullable: Renderer<Source> = foundation("_Nullable") // Does it come from foundation?
 
 val id: Renderer<Source> = foundation("id")
-val nsUInteger: Renderer<Source> = foundation("NSUInteger")
 val nsCopying: Renderer<Source> = foundation("NSCopying")
 val nsObject: Renderer<Source> = foundation("NSObject")
 val nsNumber: Renderer<Source> = foundation("NSNumber")
@@ -127,3 +126,13 @@ fun returnStatement(expression: Renderer<Source>): Renderer<Source> =
 
 fun expressionStatement(expression: Renderer<Source>): Renderer<Source> =
   expression.map { semicolonEnded(it) }
+
+fun nsAssumeNonnull(body: Renderer<Source>): Renderer<Source> =
+  body.ifNotEmpty {
+    map2(nsAssumeNonnullBegin, nsAssumeNonnullEnd) { begin, end ->
+      emptyLineSeparated(begin, it, end)
+    }
+  }
+
+fun Renderer<Source>.toNullable(): Renderer<Source> =
+  map2(this, nullable) { thisSource, nullableSource -> spaceSeparated(thisSource, nullableSource) }
