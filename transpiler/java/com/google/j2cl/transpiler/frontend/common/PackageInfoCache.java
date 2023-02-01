@@ -27,6 +27,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2objc.annotations.ObjectiveCName;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -122,9 +123,15 @@ public class PackageInfoCache {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
       }
     }
+
+    // Create a parent-less classloader to make sure it does not load anything from the classpath
+    // the compiler is running with. This allows to load supersourced versions of the annotations;
+    // however, the classes loaded by this classloader do not share the same class instances and
+    // are considered different classes than the ones loaded by the compiler *even* if they load
+    // the same classfile. Any manipulation of instances loaded by this classloader need to be done
+    // reflectively.
     URLClassLoader resourcesClassLoader =
-        new URLClassLoader(
-            Iterables.toArray(classPathUrls, URL.class), PackageInfoCache.class.getClassLoader());
+        new URLClassLoader(Iterables.toArray(classPathUrls, URL.class), null);
 
     packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader, problems));
   }
@@ -302,38 +309,50 @@ public class PackageInfoCache {
 
   @Nullable
   private static String getPackageJsNamespace(Annotation[] packageAnnotations) {
-    if (packageAnnotations == null) {
-      return null;
-    }
-
-    return stream(packageAnnotations)
-        .filter(JsPackage.class::isInstance)
-        .findFirst()
-        .map(JsPackage.class::cast)
-        .map(JsPackage::namespace)
-        .orElse(null);
+    return getAnnotationField(packageAnnotations, JsPackage.class, "namespace");
   }
 
   @Nullable
   private static String getPackageObjectiveCName(Annotation[] packageAnnotations) {
-    if (packageAnnotations == null) {
-      return null;
-    }
-
-    return stream(packageAnnotations)
-        .filter(ObjectiveCName.class::isInstance)
-        .findFirst()
-        .map(ObjectiveCName.class::cast)
-        .map(ObjectiveCName::value)
-        .orElse(null);
+    return getAnnotationField(packageAnnotations, ObjectiveCName.class, "value");
   }
 
   private static boolean hasNullMarkedAnnotation(Annotation[] packageAnnotations) {
-    if (packageAnnotations == null) {
-      return false;
+    return getAnnotation(packageAnnotations, NullMarked.class) != null;
+  }
+
+  /**
+   * Finds an annotation and retrieves a field value via reflection.
+   *
+   * <p>Note that reflection needs to be used to access these annotations since they are loaded
+   * using a different classloader that does not share state with the classloader the compiler is
+   * running with.
+   */
+  @Nullable
+  private static String getAnnotationField(
+      Annotation[] annotations, Class<?> annotationClass, String field) {
+    Annotation annotation = getAnnotation(annotations, annotationClass);
+    if (annotation == null) {
+      return null;
     }
 
-    return stream(packageAnnotations).anyMatch(NullMarked.class::isInstance);
+    try {
+      Method fieldAccessor = annotation.annotationType().getMethod(field);
+      return (String) fieldAccessor.invoke(annotation);
+    } catch (Exception e) {
+      return null;
+    }
+  }
+
+  @Nullable
+  private static Annotation getAnnotation(Annotation[] annotations, Class<?> annotationClass) {
+    if (annotations == null) {
+      return null;
+    }
+    return stream(annotations)
+        .filter(a -> a.annotationType().getName().equals(annotationClass.getName()))
+        .findFirst()
+        .orElse(null);
   }
 
   /**
