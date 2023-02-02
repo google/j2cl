@@ -30,7 +30,14 @@ load(":j2wasm_application.bzl", "j2wasm_application")
 load(":generate_test_input.bzl", "generate_test_input")
 
 # buildifier: disable=function-docstring-args
-def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimize = False, defines = {}):
+def j2wasm_generate_jsunit_suite(
+        name,
+        test_class,
+        deps,
+        tags = [],
+        optimize = False,
+        defines = {},
+        exec_properties = {}):
     """Macro for cross compiling a JUnit Suite to .wasm file.
 
     Args:
@@ -87,6 +94,7 @@ def j2wasm_generate_jsunit_suite(name, test_class, deps, tags = [], optimize = F
             ".*_Adapter.tearDown.*",
         ],
         testonly = 1,
+        exec_properties = exec_properties,
     )
 
     # This genrule takes the jar file as input and creates

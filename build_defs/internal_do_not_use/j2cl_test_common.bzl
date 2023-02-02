@@ -244,6 +244,7 @@ def j2cl_test_common(
         )
 
         # Trigger our code generation
+        exec_properties = (kwargs.get("exec_properties") or {})
         j2wasm_generate_jsunit_suite(
             name = generated_suite_name,
             test_class = test_class,
@@ -251,6 +252,7 @@ def j2cl_test_common(
             tags = tags,
             optimize = optimize_wasm,
             defines = wasm_defs,
+            exec_properties = exec_properties,
         )
 
         deps = [
