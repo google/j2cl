@@ -7,6 +7,6 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/266930418): Unexpected build failure.
+    # TODO(b/267597247):  Inconsistent @ObjCName annotation in a subclass
     build_kt_native_readables = False,
 )

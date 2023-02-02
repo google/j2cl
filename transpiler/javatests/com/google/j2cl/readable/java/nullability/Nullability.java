@@ -84,7 +84,7 @@ public class Nullability {
     String x(@Nonnull String a);
   }
 
-  public static class StringList extends ArrayList<String> {}
+  public interface StringList extends List<String> {}
 
   // Should implement Comparator<string>
   public static class StringComparator implements Comparator<@JsNonNull String> {

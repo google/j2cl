@@ -7,8 +7,6 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["**/*.java"]),
-    # TODO(b/266930418): Unexpected build failure.
-    build_kt_native_readables = False,
     experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage = True,
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",

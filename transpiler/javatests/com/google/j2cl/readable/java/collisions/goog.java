@@ -15,6 +15,7 @@
  */
 package collisions;
 
+import javaemul.internal.annotations.KtNative;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -23,12 +24,21 @@ import jsinterop.annotations.JsType;
 public class goog {}
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
+@KtNative("collisions.KtBlah")
 class Blah {
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.random")
   static native void m();
 
   @JsProperty(name = "prototype.length")
   static native double getN();
+}
+
+class KtBlah {
+  static void m() {}
+
+  static double getN() {
+    return 1.0;
+  }
 }
 
 class foo {}

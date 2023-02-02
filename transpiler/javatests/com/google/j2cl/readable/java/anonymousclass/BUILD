@@ -7,6 +7,4 @@ package(licenses = ["notice"])
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/266930418): Unexpected build failure.
-    build_kt_native_readables = False,
 )

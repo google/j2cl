@@ -277,102 +277,6 @@
   (ref.null struct)
  ))
 
-;;; Code for nullability.Nullability.StringList [vtable.init]
-(global $nullability.Nullability.StringList.vtable (ref $nullability.Nullability.StringList.vtable) 
- (struct.new $nullability.Nullability.StringList.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.util.AbstractList)
-  (ref.func $m_hashCode__int@java.util.AbstractList)
-  (ref.func $m_toString__java_lang_String@java.util.AbstractCollection)
-  (ref.func $m_getClass__java_lang_Class@nullability.Nullability.StringList)
-  (ref.func $m_add__java_lang_Object__boolean@java.util.ArrayList)
-  (ref.func $m_addAll__java_util_Collection__boolean@java.util.ArrayList)
-  (ref.func $m_clear__void@java.util.ArrayList)
-  (ref.func $m_contains__java_lang_Object__boolean@java.util.ArrayList)
-  (ref.func $m_containsAll__java_util_Collection__boolean@java.util.AbstractCollection)
-  (ref.func $m_isEmpty__boolean@java.util.ArrayList)
-  (ref.func $m_remove__java_lang_Object__boolean@java.util.ArrayList)
-  (ref.func $m_removeAll__java_util_Collection__boolean@java.util.AbstractCollection)
-  (ref.func $m_retainAll__java_util_Collection__boolean@java.util.AbstractCollection)
-  (ref.func $m_toArray__arrayOf_java_lang_Object@java.util.ArrayList)
-  (ref.func $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object@java.util.ArrayList)
-  (ref.func $m_forEach__java_util_function_Consumer__void@java.util.ArrayList)
-  (ref.func $m_spliterator__java_util_Spliterator@java.util.AbstractList)
-  (ref.func $m_parallelStream__java_util_stream_Stream@java.util.AbstractCollection)
-  (ref.func $m_removeIf__java_util_function_Predicate__boolean@java.util.ArrayList)
-  (ref.func $m_stream__java_util_stream_Stream@java.util.AbstractCollection)
-  (ref.func $m_iterator__java_util_Iterator@java.util.ArrayList)
-  (ref.func $m_size__int@java.util.ArrayList)
-  (ref.func $m_add__int__java_lang_Object__void@java.util.ArrayList)
-  (ref.func $m_addAll__int__java_util_Collection__boolean@java.util.ArrayList)
-  (ref.func $m_indexOf__java_lang_Object__int@java.util.ArrayList)
-  (ref.func $m_lastIndexOf__java_lang_Object__int@java.util.ArrayList)
-  (ref.func $m_listIterator__java_util_ListIterator@java.util.AbstractList)
-  (ref.func $m_listIterator__int__java_util_ListIterator@java.util.AbstractList)
-  (ref.func $m_remove__int__java_lang_Object@java.util.ArrayList)
-  (ref.func $m_set__int__java_lang_Object__java_lang_Object@java.util.ArrayList)
-  (ref.func $m_subList__int__int__java_util_List@java.util.AbstractList)
-  (ref.func $m_removeRange__int__int__void@java.util.ArrayList)
-  (ref.func $m_replaceAll__java_util_function_UnaryOperator__void@java.util.ArrayList)
-  (ref.func $m_sort__java_util_Comparator__void@java.util.ArrayList)
-  (ref.func $m_get__int__java_lang_Object@java.util.ArrayList)
-  (ref.func $m_clone__java_lang_Object@java.util.ArrayList)
-  (ref.func $m_ensureCapacity__int__void@java.util.ArrayList)
-  (ref.func $m_trimToSize__void@java.util.ArrayList)
-  (ref.func $m_indexOf__java_lang_Object__int__int_$pp_java_util@java.util.ArrayList)
-  (ref.func $m_lastIndexOf__java_lang_Object__int__int_$pp_java_util@java.util.ArrayList)
-  (ref.func $m_setSize__int__void_$pp_java_util@java.util.ArrayList)
- )
-)
-
-;;; Code for nullability.Nullability.StringList [itable.init]
-(global $nullability.Nullability.StringList.itable (ref $nullability.Nullability.StringList.itable) (struct.new $nullability.Nullability.StringList.itable 
- (struct.new $java.io.Serializable.vtable
- )
- (struct.new $java.util.Collection.vtable
-  (ref.func $m_add__java_lang_Object__boolean@java.util.ArrayList)
-  (ref.func $m_addAll__java_util_Collection__boolean@java.util.ArrayList)
-  (ref.func $m_clear__void@java.util.ArrayList)
-  (ref.func $m_contains__java_lang_Object__boolean@java.util.ArrayList)
-  (ref.func $m_containsAll__java_util_Collection__boolean@java.util.AbstractCollection)
-  (ref.func $m_isEmpty__boolean@java.util.ArrayList)
-  (ref.func $m_parallelStream__java_util_stream_Stream@java.util.AbstractCollection)
-  (ref.func $m_remove__java_lang_Object__boolean@java.util.ArrayList)
-  (ref.func $m_removeAll__java_util_Collection__boolean@java.util.AbstractCollection)
-  (ref.func $m_removeIf__java_util_function_Predicate__boolean@java.util.ArrayList)
-  (ref.func $m_retainAll__java_util_Collection__boolean@java.util.AbstractCollection)
-  (ref.func $m_size__int@java.util.ArrayList)
-  (ref.func $m_spliterator__java_util_Spliterator@java.util.AbstractList)
-  (ref.func $m_stream__java_util_stream_Stream@java.util.AbstractCollection)
-  (ref.func $m_toArray__arrayOf_java_lang_Object@java.util.ArrayList)
-  (ref.func $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object@java.util.ArrayList)
- )
- (struct.new $java.lang.Iterable.vtable
-  (ref.func $m_forEach__java_util_function_Consumer__void@java.util.ArrayList)
-  (ref.func $m_iterator__java_util_Iterator@java.util.ArrayList)
-  (ref.func $m_spliterator__java_util_Spliterator@java.util.AbstractList)
- )
- (struct.new $java.lang.Cloneable.vtable
- )
- (struct.new $java.util.List.vtable
-  (ref.func $m_add__int__java_lang_Object__void@java.util.ArrayList)
-  (ref.func $m_addAll__int__java_util_Collection__boolean@java.util.ArrayList)
-  (ref.func $m_get__int__java_lang_Object@java.util.ArrayList)
-  (ref.func $m_indexOf__java_lang_Object__int@java.util.ArrayList)
-  (ref.func $m_lastIndexOf__java_lang_Object__int@java.util.ArrayList)
-  (ref.func $m_listIterator__java_util_ListIterator@java.util.AbstractList)
-  (ref.func $m_listIterator__int__java_util_ListIterator@java.util.AbstractList)
-  (ref.func $m_remove__int__java_lang_Object@java.util.ArrayList)
-  (ref.func $m_replaceAll__java_util_function_UnaryOperator__void@java.util.ArrayList)
-  (ref.func $m_set__int__java_lang_Object__java_lang_Object@java.util.ArrayList)
-  (ref.func $m_sort__java_util_Comparator__void@java.util.ArrayList)
-  (ref.func $m_spliterator__java_util_Spliterator@java.util.AbstractList)
-  (ref.func $m_subList__int__int__java_util_List@java.util.AbstractList)
- )
- (struct.new $java.util.RandomAccess.vtable
- )
-  (ref.null struct)
- ))
-
 ;;; Code for nullability.Nullability.StringComparator [vtable.init]
 (global $nullability.Nullability.StringComparator.vtable (ref $nullability.Nullability.StringComparator.vtable) 
  (struct.new $nullability.Nullability.StringComparator.vtable
@@ -2249,137 +2153,32 @@
  )
 )
 
-;;; Code for nullability.Nullability.StringList [CLASS]
-(type $nullability.Nullability.StringList (struct_subtype 
- (field $vtable (ref $nullability.Nullability.StringList.vtable)) 
- (field $itable (ref $nullability.Nullability.StringList.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_modCount__java_util_AbstractList (mut i32))
- (field $f_array__java_util_ArrayList_ (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_exposeElement__java_util_ArrayList_ (mut (ref null $java.lang.Object)))
-  $java.util.ArrayList)
-)
-(type $nullability.Nullability.StringList.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_add__java_lang_Object__boolean (ref $function.m_add__java_lang_Object__boolean))
- (field $m_addAll__java_util_Collection__boolean (ref $function.m_addAll__java_util_Collection__boolean))
- (field $m_clear__void (ref $function.m_clear__void))
- (field $m_contains__java_lang_Object__boolean (ref $function.m_contains__java_lang_Object__boolean))
- (field $m_containsAll__java_util_Collection__boolean (ref $function.m_containsAll__java_util_Collection__boolean))
- (field $m_isEmpty__boolean (ref $function.m_isEmpty__boolean))
- (field $m_remove__java_lang_Object__boolean (ref $function.m_remove__java_lang_Object__boolean))
- (field $m_removeAll__java_util_Collection__boolean (ref $function.m_removeAll__java_util_Collection__boolean))
- (field $m_retainAll__java_util_Collection__boolean (ref $function.m_retainAll__java_util_Collection__boolean))
- (field $m_toArray__arrayOf_java_lang_Object (ref $function.m_toArray__arrayOf_java_lang_Object))
- (field $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object))
- (field $m_forEach__java_util_function_Consumer__void (ref $function.m_forEach__java_util_function_Consumer__void))
- (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
- (field $m_parallelStream__java_util_stream_Stream (ref $function.m_parallelStream__java_util_stream_Stream))
- (field $m_removeIf__java_util_function_Predicate__boolean (ref $function.m_removeIf__java_util_function_Predicate__boolean))
- (field $m_stream__java_util_stream_Stream (ref $function.m_stream__java_util_stream_Stream))
- (field $m_iterator__java_util_Iterator (ref $function.m_iterator__java_util_Iterator))
- (field $m_size__int (ref $function.m_size__int))
- (field $m_add__int__java_lang_Object__void (ref $function.m_add__int__java_lang_Object__void))
- (field $m_addAll__int__java_util_Collection__boolean (ref $function.m_addAll__int__java_util_Collection__boolean))
- (field $m_indexOf__java_lang_Object__int (ref $function.m_indexOf__java_lang_Object__int))
- (field $m_lastIndexOf__java_lang_Object__int (ref $function.m_lastIndexOf__java_lang_Object__int))
- (field $m_listIterator__java_util_ListIterator (ref $function.m_listIterator__java_util_ListIterator))
- (field $m_listIterator__int__java_util_ListIterator (ref $function.m_listIterator__int__java_util_ListIterator))
- (field $m_remove__int__java_lang_Object (ref $function.m_remove__int__java_lang_Object))
- (field $m_set__int__java_lang_Object__java_lang_Object (ref $function.m_set__int__java_lang_Object__java_lang_Object))
- (field $m_subList__int__int__java_util_List (ref $function.m_subList__int__int__java_util_List))
- (field $m_removeRange__int__int__void (ref $function.m_removeRange__int__int__void))
- (field $m_replaceAll__java_util_function_UnaryOperator__void (ref $function.m_replaceAll__java_util_function_UnaryOperator__void))
- (field $m_sort__java_util_Comparator__void (ref $function.m_sort__java_util_Comparator__void))
- (field $m_get__int__java_lang_Object (ref $function.m_get__int__java_lang_Object))
- (field $m_clone__java_lang_Object (ref $function.m_clone__java_lang_Object))
- (field $m_ensureCapacity__int__void (ref $function.m_ensureCapacity__int__void))
- (field $m_trimToSize__void (ref $function.m_trimToSize__void))
- (field $m_indexOf__java_lang_Object__int__int_$pp_java_util (ref $function.m_indexOf__java_lang_Object__int__int_$pp_java_util))
- (field $m_lastIndexOf__java_lang_Object__int__int_$pp_java_util (ref $function.m_lastIndexOf__java_lang_Object__int__int_$pp_java_util))
- (field $m_setSize__int__void_$pp_java_util (ref $function.m_setSize__int__void_$pp_java_util))
-  $java.util.ArrayList.vtable)
-)
-(type $nullability.Nullability.StringList.itable (struct_subtype 
-(field $slot0 (ref $java.io.Serializable.vtable))
-(field $slot1 (ref $java.util.Collection.vtable))
-(field $slot2 (ref $java.lang.Iterable.vtable))
-(field $slot3 (ref $java.lang.Cloneable.vtable))
-(field $slot4 (ref $java.util.List.vtable))
-(field $slot5 (ref $java.util.RandomAccess.vtable))
-(field $slot6 (ref null struct))
- $java.util.ArrayList.itable))
-
-;;; StringList StringList.$create()
-(func $$create__@nullability.Nullability.StringList
- (result (ref null $nullability.Nullability.StringList))
- ;;@ nullability/Nullability.java:87:22
- (local $$instance (ref null $nullability.Nullability.StringList))
- (block
-  ;; StringList $instance = new StringList.<init>(0,0,((E[]) javaemul.internal.WasmArray.OfObject.$create(0)),null);
-  ;;@ nullability/Nullability.java:87:22
-  (local.set $$instance (struct.new $nullability.Nullability.StringList (ref.as_non_null (global.get $nullability.Nullability.StringList.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringList.itable)) (i32.const 0) (i32.const 0) (ref.cast_static $javaemul.internal.WasmArray.OfObject (call $$create__int@javaemul.internal.WasmArray.OfObject (i32.const 0))) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ nullability/Nullability.java:87:22
-  (call $$ctor__void_$p_nullability_Nullability_StringList@nullability.Nullability.StringList (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
-  ;;@ nullability/Nullability.java:87:22
-  (return (local.get $$instance))
- )
-)
-
-;;; void StringList.$ctor()
-(func $$ctor__void_$p_nullability_Nullability_StringList@nullability.Nullability.StringList
- (param $this (ref null $nullability.Nullability.StringList))
- ;;@ nullability/Nullability.java:87:22
- (block
-  ;; nullability.Nullability.StringList.$clinit();
-  ;;@ nullability/Nullability.java:87:22
-  (call $$clinit__void@nullability.Nullability.StringList )
-  ;; ArrayList.this.$ctor();
-  ;;@ nullability/Nullability.java:87:22
-  (call $$ctor__void_$p_java_util_ArrayList@java.util.ArrayList (ref.as_non_null (local.get $this)))
+;;; Code for nullability.Nullability.StringList [INTERFACE]
+(type $nullability.Nullability.StringList.vtable (struct 
  )
 )
 
 ;;; void StringList.$clinit()
 (func $$clinit__void@nullability.Nullability.StringList
- ;;@ nullability/Nullability.java:87:22
+ ;;@ nullability/Nullability.java:87:19
  (block
   ;; if (nullability.Nullability.StringList.$initialized) return;
-  ;;@ nullability/Nullability.java:87:22
+  ;;@ nullability/Nullability.java:87:19
   (if (global.get $f_$initialized__nullability_Nullability_StringList)
    (then
     ;; return;
-    ;;@ nullability/Nullability.java:87:22
+    ;;@ nullability/Nullability.java:87:19
     (return )
    )
   )
   ;; (nullability.Nullability.StringList.$initialized = true);
-  ;;@ nullability/Nullability.java:87:22
+  ;;@ nullability/Nullability.java:87:19
   (global.set $f_$initialized__nullability_Nullability_StringList (i32.const 1))
-  ;; java.util.ArrayList.$clinit();
-  ;;@ nullability/Nullability.java:87:22
-  (call $$clinit__void@java.util.ArrayList )
+  ;; java.util.List.$clinit();
+  ;;@ nullability/Nullability.java:87:19
+  (call $$clinit__void@java.util.List )
  )
 )
-
-;;; Class<?> StringList.getClass()
-(func $m_getClass__java_lang_Class@nullability.Nullability.StringList
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $nullability.Nullability.StringList))
- (local.set $this (ref.cast_static $nullability.Nullability.StringList (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.StringList();
-  (return (call $function.no.side.effects.$getNullability.Nullability.StringList__java_lang_Class (ref.func $$getNullability.Nullability.StringList__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@nullability.Nullability.StringList)
 
 ;;; Code for nullability.Nullability.StringComparator [CLASS]
 (type $nullability.Nullability.StringComparator (struct_subtype 

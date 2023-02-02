@@ -6,6 +6,7 @@ package nullability
 import javaemul.lang.*
 import java.lang.RuntimeException
 import java.util.Comparator
+import javaemul.lang.JavaList
 import kotlin.Any
 import kotlin.Array
 import kotlin.Double
@@ -231,7 +232,7 @@ open class Nullability {
  }
 
  @ObjCName("NullabilityNullability_StringList", exact = true)
- open class StringList: ArrayList<String?>() {}
+ interface StringList: JavaList<String?> {}
 
  @ObjCName("NullabilityNullability_StringComparator", exact = true)
  open class StringComparator: Comparator<String> {

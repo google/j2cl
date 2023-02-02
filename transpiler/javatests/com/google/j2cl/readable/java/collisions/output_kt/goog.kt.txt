@@ -17,15 +17,19 @@ import kotlin.native.ObjCName
 @ObjCName("Collisionsgoog", exact = true)
 open class goog {}
 
-open class Blah {
+// native class KtBlah
+
+open class KtBlah {
  companion object {
   @JvmStatic
   @HiddenFromObjC
-  external fun m_pp_collisions()
+  fun m_pp_collisions() {}
 
   @JvmStatic
   @HiddenFromObjC
-  external fun getN_pp_collisions(): Double
+  fun getN_pp_collisions(): Double {
+   return 1.0
+  }
  }
 }
 
@@ -38,9 +42,9 @@ open class bar {
   val goog: Int = 0
   val flip: Int = 0
   val window: Int = 0
-  Blah.m_pp_collisions()
-  Blah.getN_pp_collisions()
-  Blah()
+  KtBlah.m_pp_collisions()
+  KtBlah.getN_pp_collisions()
+  KtBlah()
   collisions.goog()
   collisions.foo()
   val delete: Int = 1

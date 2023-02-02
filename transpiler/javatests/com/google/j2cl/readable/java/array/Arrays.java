@@ -16,6 +16,7 @@
 package array;
 
 import java.io.Serializable;
+import javaemul.internal.annotations.KtDisabled;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -170,6 +171,8 @@ public class Arrays {
     T[] data;
   }
 
+  // TODO(b/267597125): Array is not Cloneable and Serializable in Kotlin-Native
+  @KtDisabled
   public void testArraysSupertypeClosureTypes() {
     consumesCloneable(new Object[10]);
     consumesSerializable(new Object[10]);
