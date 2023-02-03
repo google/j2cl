@@ -50,6 +50,13 @@ def setup_j2cl_workspace(**kwargs):
         sha256 = "0bfb1eca6b47d779b40e0fdb6e6e1bdad5a2abfcef1d325448b2dee3a5ab6e47",
     )
 
+    http_archive(
+      name = "bazel_common_javadoc",
+      strip_prefix = "bazel-common-213ecb74698948ce4e1597c9247f2ab8933553d7/tools/javadoc",
+      urls = ["https://github.com/google/bazel-common/archive/213ecb74698948ce4e1597c9247f2ab8933553d7.zip"],
+      sha256 = "dcefae7d8561f684f305223aad530e5dccb4e8068a653edfc2c89abe9570d2a6",
+    )
+
     jvm_maven_import_external(
         name = "j2objc_annotations",
         artifact = "com.google.j2objc:j2objc-annotations:1.3",
