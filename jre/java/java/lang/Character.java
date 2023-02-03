@@ -19,6 +19,7 @@ import static javaemul.internal.InternalPreconditions.checkArgument;
 
 import java.io.Serializable;
 import javaemul.internal.NativeRegExp;
+import javaemul.internal.Strings;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
@@ -307,26 +308,11 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static boolean isWhitespace(char ch) {
-    return isWhitespace(String.valueOf(ch));
+    return Strings.isWhitespace(String.valueOf(ch));
   }
 
   public static boolean isWhitespace(int codePoint) {
-    return isValidCodePoint(codePoint) && isWhitespace(String.fromCodePoint(codePoint));
-  }
-
-  private static NativeRegExp whitespaceRegex;
-
-  private static boolean isWhitespace(String ch) {
-    if (whitespaceRegex == null) {
-      // The regex would just be /\s/, but browsers handle non-breaking spaces inconsistently. Also,
-      // the Java definition includes separators.
-      whitespaceRegex =
-          new NativeRegExp(
-              "[\\u1680\\u180E\\u2000-\\u2006\\u2008-\\u200A\\u2028\\u2029\\u205F\\u3000\\uFEFF]"
-                  + "|[\\t-\\r ]"
-                  + "|[\\x1C-\\x1F]");
-    }
-    return whitespaceRegex.test(ch);
+    return isValidCodePoint(codePoint) && Strings.isWhitespace(String.fromCodePoint(codePoint));
   }
 
   public static boolean isSupplementaryCodePoint(int codePoint) {
