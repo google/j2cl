@@ -100,11 +100,11 @@ final class IntegralToString {
   }
 
   public static String intToString(int i, int radix) {
-    return new String(fromNumber(i, radix));
+    return fromNumber(i, radix);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "String.fromNumber")
-  private static native String.NativeString fromNumber(int i, int radix);
+  private static native String fromNumber(int i, int radix);
 
   private static final int SMI_MAX = Integer.MAX_VALUE >> 1;
   private static final int SMI_MIN = Integer.MIN_VALUE >> 1;
