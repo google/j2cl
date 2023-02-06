@@ -38,16 +38,15 @@ public final class Main {
   }
 
   private static void testJsType() {
-    RegExp regExp = new RegExp("test".toJsString());
-    assertEquals(true, regExp.test("test".toJsString()));
-    assertEquals(false, regExp.test("rest".toJsString()));
+    RegExp regExp = new RegExp("test");
+    assertEquals(true, regExp.test("test"));
+    assertEquals(false, regExp.test("rest"));
   }
 
-  // TODO(b/262789003): Make this take String when NativeString autoconversion is implemented.
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
   public static class RegExp {
-    public RegExp(String.NativeString pattern) {}
+    public RegExp(String pattern) {}
 
-    public native boolean test(String.NativeString value);
+    public native boolean test(String value);
   }
 }

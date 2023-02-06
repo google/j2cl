@@ -19,15 +19,16 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
 /** Simple class to work with native js regular expressions. */
+// TODO(b/261078322,b/193532287) Remove super source when JsOverlay & arrays are supported.
 public class NativeRegExp {
   private final WasmExtern instance;
 
   public NativeRegExp(String regex) {
-    this.instance = create(regex.toJsString());
+    this.instance = create(regex);
   }
 
   public NativeRegExp(String regex, String mode) {
-    this.instance = create(regex.toJsString(), mode.toJsString());
+    this.instance = create(regex, mode);
   }
 
   public void setLastIndex(int index) {
@@ -35,12 +36,12 @@ public class NativeRegExp {
   }
 
   public Match exec(String value) {
-    WasmExtern result = exec(this.instance, value.toJsString());
+    WasmExtern result = exec(this.instance, value);
     return result == null ? null : new Match(result);
   }
 
   public boolean test(String value) {
-    return test(this.instance, value.toJsString());
+    return test(this.instance, value);
   }
 
   public WasmExtern toJs() {
@@ -64,31 +65,31 @@ public class NativeRegExp {
     }
 
     public String getAt(int index) {
-      return String.fromJsString(getBufferAt(instance, index));
+      return getBufferAt(instance, index);
     }
 
     @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExpResult.index")
     private static native int index(WasmExtern match);
 
     @JsMethod(namespace = JsPackage.GLOBAL)
-    private static native String.NativeString getBufferAt(WasmExtern o, int i);
+    private static native String getBufferAt(WasmExtern o, int i);
 
     @JsMethod(namespace = JsPackage.GLOBAL)
     private static native int getLength(WasmExtern o);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.constructor")
-  private static native WasmExtern create(String.NativeString pattern);
+  private static native WasmExtern create(String pattern);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.constructor")
-  private static native WasmExtern create(String.NativeString pattern, String.NativeString flags);
+  private static native WasmExtern create(String pattern, String flags);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.setLastIndex")
   private static native void setLastIndex(WasmExtern regExp, int index);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.exec")
-  private static native WasmExtern exec(WasmExtern regExp, String.NativeString text);
+  private static native WasmExtern exec(WasmExtern regExp, String text);
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExp.test")
-  private static native boolean test(WasmExtern regExp, String.NativeString text);
+  private static native boolean test(WasmExtern regExp, String text);
 }

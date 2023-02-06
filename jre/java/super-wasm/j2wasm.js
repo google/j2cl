@@ -129,7 +129,7 @@ function createImportObject(userImports) {
          /** number */ millis) =>
             Date.UTC(year, month, dayOfMonth, hours, minutes, seconds, millis),
     'Date.parse': (/** string */ dateString) => Date.parse(dateString),
-    'Date.create': (...args) => new Date(...args),
+    'Date.constructor': (...args) => new Date(...args),
     'Date.getDate': (/** !Date */ date) => date.getDate(),
     'Date.getDay': (/** !Date */ date) => date.getDay(),
     'Date.getFullYear': (/** !Date */ date) => date.getFullYear(),

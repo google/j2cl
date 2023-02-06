@@ -716,15 +716,23 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return start > 0 || end < length ? substring(start, end) : this;
   }
 
+  // TODO(b/262789003): Hide this helper once external references are cleaned up.
   public static String fromJsString(NativeString o) {
     return o == null ? null : new String(o);
   }
 
+  // TODO(b/262789003): Hide this helper once external references are cleaned up.
+  public static NativeString toJsString(String string) {
+    return string == null ? null : string.value;
+  }
+
+  // TODO(b/262789003): Hide this helper once external references are cleaned up.
   public NativeString toJsString() {
     return this.value;
   }
 
   /** Native JS compatible representation of a string. */
+  // TODO(b/262789003): Hide NativeString once external references are cleaned up.
   @Wasm("string")
   public interface NativeString {}
 

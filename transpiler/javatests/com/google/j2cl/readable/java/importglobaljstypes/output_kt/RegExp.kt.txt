@@ -1,0 +1,34 @@
+// Generated from "importglobaljstypes/RegExp.java"
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+
+package importglobaljstypes
+
+import javaemul.lang.*
+import kotlin.Boolean
+import kotlin.OptIn
+import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
+
+class RegExp {
+ companion object {
+  @JvmStatic
+  fun test() {
+   val regExp: RegExp.NativeRegExp? = RegExp.NativeRegExp("teststring")
+   regExp!!.test("restString")
+  }
+ }
+
+ @ObjCName("ImportglobaljstypesRegExp_NativeRegExp", exact = true)
+ open class NativeRegExp {
+  constructor(
+   @ObjCName("NSString") pattern: String?
+  )
+
+  external open fun test(
+   @ObjCName("withNSString") value: String?
+  ): Boolean
+ }
+}

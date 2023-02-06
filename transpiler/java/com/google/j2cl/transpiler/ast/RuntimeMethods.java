@@ -113,12 +113,22 @@ public final class RuntimeMethods {
         .build();
   }
 
-  public static MethodCall createStringFromJsStringMethodCall(StringLiteral stringLiteral) {
+  public static MethodCall createStringFromJsStringMethodCall(Expression expression) {
     // Use the imprecise getMethodDescriptorByName to avoid having NativeString as a
     // known type descriptor.
     MethodDescriptor stringCreator =
         TypeDescriptors.get().javaLangString.getMethodDescriptorByName("fromJsString");
-    return MethodCall.Builder.from(stringCreator).setArguments(stringLiteral).build();
+    return MethodCall.Builder.from(stringCreator).setArguments(expression).build();
+  }
+
+  public static MethodCall createJsStringFromStringMethodCall(Expression expression) {
+    return MethodCall.Builder.from(getJsStringFromStringMethod()).setArguments(expression).build();
+  }
+
+  static MethodDescriptor getJsStringFromStringMethod() {
+    return TypeDescriptors.get()
+        .javaLangString
+        .getMethodDescriptor("toJsString", TypeDescriptors.get().javaLangString);
   }
 
   /** Create a call to an Class method. */

@@ -29,13 +29,13 @@ public class ConsoleLogger {
   }
 
   public void log(String level, String message) {
-    log(level.toJsString(), message.toJsString());
+    nativeLog(level, message);
   }
 
   public void log(String level, Throwable t) {
-    log(level.toJsString(), t.toString().toJsString());
+    nativeLog(level, t.toString());
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "ConsoleLogger.log")
-  private static native void log(String.NativeString level, String.NativeString message);
+  public static native void nativeLog(String level, String message);
 }

@@ -77,6 +77,7 @@ import com.google.j2cl.transpiler.passes.InsertStringConversions;
 import com.google.j2cl.transpiler.passes.InsertStringConversionsKotlin;
 import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
+import com.google.j2cl.transpiler.passes.InsertWasmExternConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
 import com.google.j2cl.transpiler.passes.J2ktRestrictionsChecker;
@@ -393,6 +394,7 @@ public enum Backend {
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
+          InsertWasmExternConversions::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),

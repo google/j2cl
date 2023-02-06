@@ -10,6 +10,11 @@
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [static fields]
 
+;;; Code for importglobaljstypes.RegExp [static fields]
+(global $f_$initialized__importglobaljstypes_RegExp (mut i32) (i32.const 0))
+
+;;; Code for importglobaljstypes.RegExp.NativeRegExp [static fields]
+
 ;;; Code for importglobaljstypes.Date [vtable.init]
 (global $importglobaljstypes.Date.vtable (ref $importglobaljstypes.Date.vtable) 
  (struct.new $importglobaljstypes.Date.vtable
@@ -45,6 +50,27 @@
 
 ;;; Code for importglobaljstypes.Number [itable.init]
 (global $importglobaljstypes.Number.itable (ref $importglobaljstypes.Number.itable) (struct.new $importglobaljstypes.Number.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for importglobaljstypes.RegExp [vtable.init]
+(global $importglobaljstypes.RegExp.vtable (ref $importglobaljstypes.RegExp.vtable) 
+ (struct.new $importglobaljstypes.RegExp.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@importglobaljstypes.RegExp)
+ )
+)
+
+;;; Code for importglobaljstypes.RegExp [itable.init]
+(global $importglobaljstypes.RegExp.itable (ref $importglobaljstypes.RegExp.itable) (struct.new $importglobaljstypes.RegExp.itable 
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -331,3 +357,137 @@
 ;;; Code for importglobaljstypes.Number.NativeFunction [INTERFACE]
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [INTERFACE]
+
+;;; Code for importglobaljstypes.RegExp [CLASS]
+(type $importglobaljstypes.RegExp (struct_subtype 
+ (field $vtable (ref $importglobaljstypes.RegExp.vtable)) 
+ (field $itable (ref $importglobaljstypes.RegExp.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $importglobaljstypes.RegExp.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+(type $importglobaljstypes.RegExp.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
+
+;;; RegExp RegExp.$create()
+(func $$create__@importglobaljstypes.RegExp
+ (result (ref null $importglobaljstypes.RegExp))
+ ;;@ importglobaljstypes/RegExp.java:21:12
+ (local $$instance (ref null $importglobaljstypes.RegExp))
+ (block
+  ;; RegExp $instance = new RegExp.<init>(0);
+  ;;@ importglobaljstypes/RegExp.java:21:12
+  (local.set $$instance (struct.new $importglobaljstypes.RegExp (ref.as_non_null (global.get $importglobaljstypes.RegExp.vtable)) (ref.as_non_null (global.get $importglobaljstypes.RegExp.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ importglobaljstypes/RegExp.java:21:12
+  (call $$ctor__void_$p_importglobaljstypes_RegExp@importglobaljstypes.RegExp (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ importglobaljstypes/RegExp.java:21:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RegExp.$ctor()
+(func $$ctor__void_$p_importglobaljstypes_RegExp@importglobaljstypes.RegExp
+ (param $this (ref null $importglobaljstypes.RegExp))
+ ;;@ importglobaljstypes/RegExp.java:21:12
+ (block
+  ;; importglobaljstypes.RegExp.$clinit();
+  ;;@ importglobaljstypes/RegExp.java:21:12
+  (call $$clinit__void@importglobaljstypes.RegExp )
+  ;; Object.this.$ctor();
+  ;;@ importglobaljstypes/RegExp.java:21:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void RegExp.test()
+(func $m_test__void@importglobaljstypes.RegExp
+ ;;@ importglobaljstypes/RegExp.java:23:21
+ (local $regExp (ref null extern))
+ (local $str (ref null $java.lang.String))
+ (block
+  ;; importglobaljstypes.RegExp.$clinit();
+  ;;@ importglobaljstypes/RegExp.java:23:28
+  (call $$clinit__void@importglobaljstypes.RegExp )
+  ;; NativeRegExp regExp = new NativeRegExp.<init>(java.lang.String.toJsString(javaemul.internal.StringPool.$getString_|teststring|()));
+  ;;@ importglobaljstypes/RegExp.java:24:4
+  (local.set $regExp (call $m_<init>__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $function.no.side.effects.$getString_|teststring|__java_lang_String (ref.func $$getString_|teststring|__java_lang_String@javaemul.internal.StringPool) ))))
+  ;; regExp.test(java.lang.String.toJsString(javaemul.internal.StringPool.$getString_|restString|()));
+  ;;@ importglobaljstypes/RegExp.java:25:4
+  (drop (call $m_test__java_lang_String_NativeString__boolean@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp))(call $m_toJsString__java_lang_String__java_lang_String_NativeString@java.lang.String (call $function.no.side.effects.$getString_|restString|__java_lang_String (ref.func $$getString_|restString|__java_lang_String@javaemul.internal.StringPool) ))))
+  ;; String str = java.lang.String.fromJsString(regExp.toString());
+  ;;@ importglobaljstypes/RegExp.java:26:4
+  (local.set $str (call $m_fromJsString__java_lang_String_NativeString__java_lang_String@java.lang.String (call $m_toString__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (ref.as_non_null (local.get $regExp)))))
+ )
+)
+
+;;; void RegExp.$clinit()
+(func $$clinit__void@importglobaljstypes.RegExp
+ ;;@ importglobaljstypes/RegExp.java:21:12
+ (block
+  ;; if (importglobaljstypes.RegExp.$initialized) return;
+  ;;@ importglobaljstypes/RegExp.java:21:12
+  (if (global.get $f_$initialized__importglobaljstypes_RegExp)
+   (then
+    ;; return;
+    ;;@ importglobaljstypes/RegExp.java:21:12
+    (return )
+   )
+  )
+  ;; (importglobaljstypes.RegExp.$initialized = true);
+  ;;@ importglobaljstypes/RegExp.java:21:12
+  (global.set $f_$initialized__importglobaljstypes_RegExp (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ importglobaljstypes/RegExp.java:21:12
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> RegExp.getClass()
+(func $m_getClass__java_lang_Class@importglobaljstypes.RegExp
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $importglobaljstypes.RegExp))
+ (local.set $this (ref.cast_static $importglobaljstypes.RegExp (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.RegExp();
+  (return (call $function.no.side.effects.$getImportglobaljstypes.RegExp__java_lang_Class (ref.func $$getImportglobaljstypes.RegExp__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.RegExp)
+
+;;; Code for importglobaljstypes.RegExp.NativeRegExp [CLASS]
+
+;;; NativeRegExp(NativeString pattern)
+(func $m_<init>__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.constructor") 
+ (param $pattern (ref null string))
+ (result (ref null extern))
+)
+
+;;; boolean NativeRegExp.test(NativeString value)
+(func $m_test__java_lang_String_NativeString__boolean@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.test") 
+ (param $this (ref null extern))
+ (param $value (ref null string))
+ (result i32)
+)
+
+;;; NativeString NativeRegExp.toString()
+(func $m_toString__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.toString") 
+ (param $this (ref null extern))
+ (result (ref null string))
+)

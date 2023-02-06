@@ -340,6 +340,14 @@ public class TypeDescriptors {
     return typeDescriptor.isNullable() ? specializedType : specializedType.toNonNullable();
   }
 
+  /** Gets the type descriptor representing a native string. */
+  // TODO(b/257574608): This can be refactored along with improvements to well-known types.
+  public static TypeDescriptor getNativeStringType() {
+    // NativeString is not visible on all frontends so get it from a String method instead of
+    // returning a cached value.
+    return RuntimeMethods.getJsStringFromStringMethod().getReturnTypeDescriptor();
+  }
+
   static Function<TypeVariable, ? extends TypeDescriptor> mappingFunctionFromMap(
       Map<TypeVariable, TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
     return replacingTypeDescriptorByTypeVariable.isEmpty()
