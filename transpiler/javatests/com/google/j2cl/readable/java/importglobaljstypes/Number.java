@@ -47,11 +47,11 @@ public class Number {
   }
 
   @JsProperty(name = "String.fromCharCode", namespace = GLOBAL)
-  // TODO(b/262789003,b/193532287): Enable when arrays and strings are supported in wasm jsinterop.
+  // TODO(b/193532287): Enable when arrays are supported in wasm jsinterop.
   @Wasm("nop")
   private static native NativeFunction<String> getFromCharCodeFunction();
 
-  // TODO(b/262789003,b/193532287): Enable when arrays and strings are supported in wasm jsinterop.
+  // TODO(b/193532287): Enable when arrays are supported in wasm jsinterop.
   @Wasm("nop")
   public static String fromCharCode(int[] array) {
     return getFromCharCodeFunction().apply(null, array);
