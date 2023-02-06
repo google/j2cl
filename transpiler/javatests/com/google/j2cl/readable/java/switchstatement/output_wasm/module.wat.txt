@@ -295,8 +295,8 @@
      (block
       (block
        (block ;; evaluate expression and jump
-        (br_if 0 (ref.eq (local.get $$expression) (call $function.no.side.effects.$getString_|one|__java_lang_String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))
-        (br_if 1 (ref.eq (local.get $$expression) (call $function.no.side.effects.$getString_|two|__java_lang_String (ref.func $$getString_|two|__java_lang_String@javaemul.internal.StringPool) )))
+        (br_if 0 (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (call $function.no.side.effects.$getString_|one|__java_lang_String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) ))(local.get $$expression)(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(call $function.no.side.effects.$getString_|one|__java_lang_String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))))
+        (br_if 1 (call_ref $function.m_equals__java_lang_Object__boolean (ref.as_non_null (call $function.no.side.effects.$getString_|two|__java_lang_String (ref.func $$getString_|two|__java_lang_String@javaemul.internal.StringPool) ))(local.get $$expression)(struct.get $java.lang.String.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.String $vtable(call $function.no.side.effects.$getString_|two|__java_lang_String (ref.func $$getString_|two|__java_lang_String@javaemul.internal.StringPool) )))))
         (br 2)
        )
        ;; case javaemul.internal.StringPool.$getString_|one|():

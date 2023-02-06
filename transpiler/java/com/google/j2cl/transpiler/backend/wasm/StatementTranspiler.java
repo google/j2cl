@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Predicates.not;
 import static java.util.Arrays.stream;
 
@@ -37,6 +38,7 @@ import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
@@ -345,10 +347,10 @@ final class StatementTranspiler {
           }
           // If the condition for this case is met, jump to the start of the case, i.e. jump out
           // of all of the previous enclosing blocks.
-          renderConditionalBranch(
-              switchStatement.getSourcePosition(),
-              switchStatement.getSwitchExpression().infixEquals(switchCase.getCaseExpression()),
-              casePosition);
+          Expression condition =
+              createCaseCondition(
+                  switchCase.getCaseExpression(), switchStatement.getSwitchExpression());
+          renderConditionalBranch(switchStatement.getSourcePosition(), condition, casePosition);
         }
 
         // When no other condition was met, jump to the default case if exists.
@@ -356,6 +358,19 @@ final class StatementTranspiler {
         renderUnconditionalBranch(
             defaultCasePosition != -1 ? defaultCasePosition : switchStatement.getCases().size());
         builder.closeParens();
+      }
+
+      /** Creates the condition to compare the switch expression with the case expression. */
+      private Expression createCaseCondition(
+          Expression switchCaseExpression, Expression switchExpression) {
+        if (TypeDescriptors.isJavaLangString(switchCaseExpression.getTypeDescriptor())) {
+          // Strings are compared using equals.
+          return RuntimeMethods.createStringEqualsMethodCall(
+              switchCaseExpression, switchExpression);
+        }
+
+        checkState(switchCaseExpression.getTypeDescriptor().isPrimitive());
+        return switchExpression.infixEquals(switchCaseExpression);
       }
 
       @Override

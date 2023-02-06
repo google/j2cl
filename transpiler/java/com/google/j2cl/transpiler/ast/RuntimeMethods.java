@@ -102,6 +102,17 @@ public final class RuntimeMethods {
     return MethodCall.Builder.from(methodDescriptor).setArguments(expression).build();
   }
 
+  /** Create a call to String.equals method. */
+  public static MethodCall createStringEqualsMethodCall(Expression qualifier, Expression argument) {
+    return MethodCall.Builder.from(
+            TypeDescriptors.get()
+                .javaLangString
+                .getMethodDescriptor("equals", TypeDescriptors.get().javaLangObject))
+        .setQualifier(qualifier)
+        .setArguments(argument)
+        .build();
+  }
+
   public static MethodCall createStringFromJsStringMethodCall(StringLiteral stringLiteral) {
     // Use the imprecise getMethodDescriptorByName to avoid having NativeString as a
     // known type descriptor.

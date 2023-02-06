@@ -31,6 +31,7 @@ public class Main {
     testSwitchNull();
     testSwitchWithErasureCast();
     testCascades();
+    testStringSwitch();
   }
 
   private static void testSwitchValues() {
@@ -306,5 +307,10 @@ public class Main {
         break;
     }
     return result;
+  }
+
+  private static void testStringSwitch() {
+    // Test that switch on strings uses .equals() semantics.
+    assertTrue(getStringValue(new String(new char[] {'o', 'n', 'e'})) == 1);
   }
 }
