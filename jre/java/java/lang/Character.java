@@ -19,7 +19,7 @@ import static javaemul.internal.InternalPreconditions.checkArgument;
 
 import java.io.Serializable;
 import javaemul.internal.NativeRegExp;
-import javaemul.internal.Strings;
+import javaemul.internal.StringUtil;
 import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
@@ -308,11 +308,11 @@ public final class Character implements Comparable<Character>, Serializable {
   }
 
   public static boolean isWhitespace(char ch) {
-    return Strings.isWhitespace(String.valueOf(ch));
+    return StringUtil.isWhitespace(String.valueOf(ch));
   }
 
   public static boolean isWhitespace(int codePoint) {
-    return isValidCodePoint(codePoint) && Strings.isWhitespace(String.fromCodePoint(codePoint));
+    return isValidCodePoint(codePoint) && StringUtil.isWhitespace(String.fromCodePoint(codePoint));
   }
 
   public static boolean isSupplementaryCodePoint(int codePoint) {

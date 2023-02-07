@@ -16,7 +16,7 @@
 package javaemul.internal;
 
 /** Utility methods for operating with Strings. */
-public final class Strings {
+public final class StringUtil {
 
   private static NativeRegExp whitespaceRegex;
 
@@ -34,5 +34,5 @@ public final class Strings {
     return whitespaceRegex.test(str);
   }
 
-  private Strings() {}
+  private StringUtil() {}
 }
