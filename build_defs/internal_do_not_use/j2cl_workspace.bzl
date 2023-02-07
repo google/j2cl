@@ -196,50 +196,6 @@ def setup_j2cl_workspace(**kwargs):
         sha256 = "83ce07ec2058d8d629feb4e269216e286560b0e4587dea883f4e16b64ea51cad",
     )
 
-    http_archive(
-        name = "org_jbox2d",
-        strip_prefix = "jbox2d-jbox2d-2.2.1.1/jbox2d-library",
-        urls = ["https://github.com/jbox2d/jbox2d/archive/jbox2d-2.2.1.1.zip"],
-        sha256 = "088e5fc0f56c75f82c289c4721d9faf46a309e258d3ee647799622ef82e60303",
-        patches = ["@com_google_j2cl//transpiler/javatests/com/google/j2cl/integration/java/box2d:jbox2d.patch"],
-        build_file_content = '''
-load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_library")
-
-package(default_visibility = ["//visibility:public"])
-
-_JAVACOPTS = [
-    "-Xep:EqualsHashCode:OFF",  # See go/equals-hashcode-lsc
-]
-
-java_library(
-    name = "jbox2d",
-    srcs = glob(["**/*.java"]),
-    javacopts = _JAVACOPTS,
-    deps = [
-        "@com_google_j2cl//:jsinterop-annotations",
-    ],
-)
-j2cl_library(
-    name = "jbox2d-j2cl",
-    srcs = glob(
-        ["src/main/java/**/*.java"],
-        exclude = [
-            "**/StrictMath.java",
-            "**/PlatformMathUtils.java",
-            "**/Timer.java",
-            "**/profile/**",
-        ],
-    ) + glob(["src/main/java/org/jbox2d/gwtemul/**/*.java"],
-        exclude = ["**/StrictMath.java"],
-    ),
-    javacopts = _JAVACOPTS,
-    deps = [
-        "@com_google_j2cl//:jsinterop-annotations-j2cl",
-    ],
-)
-''',
-    )
-
     kotlin_repositories(
         compiler_release = {
             "urls": [

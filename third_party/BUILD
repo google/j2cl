@@ -188,21 +188,6 @@ j2cl_alias(
     actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2cl",
 )
 
-alias(
-    name = "jbox2d",
-    actual = "@org_jbox2d//:jbox2d",
-)
-
-alias(
-    name = "jbox2d-j2cl",
-    actual = "@org_jbox2d//:jbox2d-j2cl",
-)
-
-alias(
-    name = "jbox2d-j2wasm",
-    actual = "@org_jbox2d//:jbox2d-j2wasm",
-)
-
 # Reimport the jar file without "neverlink=1" so we can use it as a runtime dependency
 java_import(
     name = "kotlin_compiler",

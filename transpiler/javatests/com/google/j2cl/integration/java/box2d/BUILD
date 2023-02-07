@@ -9,5 +9,5 @@ integration_library(
     name = "box2d",
     srcs = glob(["*.java"]),
     visibility = ["//transpiler/javatests/com/google/j2cl/integration:__subpackages__"],
-    deps = ["//third_party:jbox2d"],
+    deps = ["//samples/box2d/src/main/java:box2d_library"],
 )
