@@ -55,6 +55,9 @@ while [[ "$1" != "" ]]; do
     --src-jar )         shift
                         src_jar=$1
                         ;;
+    --javadoc-jar)      shift
+                        javadoc_jar=$1
+                        ;;
     --license-header )  shift
                         license_header=$1
                         ;;
@@ -101,7 +104,6 @@ create_artifact() {
 
 classes_directory=$(mktemp -d)
 srcs_directory=$(mktemp -d)
-javadoc_directory=$(mktemp -d)
 if [[ -z ${artifact_directory} ]]; then
   artifact_directory=$(mktemp -d)
 fi
@@ -137,11 +139,7 @@ jar xf ${jar_file}
 create_artifact "${artifact}.jar" ${artifact_directory}
 
 # Create javadoc jar file
-find ${srcs_directory} -type f -name "*.java" | xargs javadoc -d ${javadoc_directory} --ignore-source-errors
-
-cd ${javadoc_directory}
-create_artifact "${artifact}-javadoc.jar" ${artifact_directory}
-
+cp ${javadoc_jar} "${artifact_directory}/${artifact}-javadoc.jar"
 # Replace version in template and generate the final pom.xml
 sed -e "s/__VERSION__/${lib_version}/g" -e "s/__ARTIFACT_ID__/${artifact}/g" -e "s/__GROUP_ID__/${group_id}/g"  ${pom_template} > ${artifact_directory}/pom.xml
 
@@ -174,7 +172,6 @@ else
   echo "Artifacts created in ${artifact_directory}"
 fi
 
-rm -rf ${javadoc_directory}
 rm -rf ${classes_directory}
 rm -rf ${srcs_directory}
 
