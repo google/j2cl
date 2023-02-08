@@ -103,6 +103,9 @@
 ;;; Code for bridgemethods.BridgeMethodDefault.B [static fields]
 (global $f_$initialized__bridgemethods_BridgeMethodDefault_B (mut i32) (i32.const 0))
 
+;;; Code for bridgemethods.BridgeMethodDefault.C [static fields]
+(global $f_$initialized__bridgemethods_BridgeMethodDefault_C (mut i32) (i32.const 0))
+
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature [static fields]
 (global $f_$initialized__bridgemethods_BridgeMethodShadowedSignature (mut i32) (i32.const 0))
 
@@ -615,6 +618,32 @@
  )
  (struct.new $bridgemethods.BridgeMethodDefault.JJ.vtable
   (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
+ )
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for bridgemethods.BridgeMethodDefault.C [vtable.init]
+(global $bridgemethods.BridgeMethodDefault.C.vtable (ref $bridgemethods.BridgeMethodDefault.C.vtable) 
+ (struct.new $bridgemethods.BridgeMethodDefault.C.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.C)
+  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.C)
+ )
+)
+
+;;; Code for bridgemethods.BridgeMethodDefault.C [itable.init]
+(global $bridgemethods.BridgeMethodDefault.C.itable (ref $bridgemethods.BridgeMethodDefault.C.itable) (struct.new $bridgemethods.BridgeMethodDefault.C.itable 
+ (struct.new $bridgemethods.BridgeMethodDefault.I.vtable
+  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.C)
+ )
+ (struct.new $bridgemethods.BridgeMethodDefault.JJ.vtable
+  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.C)
  )
   (ref.null struct)
   (ref.null struct)
@@ -3343,6 +3372,31 @@
   ;; Object.this.$ctor();
   ;;@ bridgemethods/BridgeMethodDefault.java:20:6
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;; BridgeMethodDefault.this.$init();
+  ;;@ bridgemethods/BridgeMethodDefault.java:20:6
+  (call $$init__void_$p_bridgemethods_BridgeMethodDefault@bridgemethods.BridgeMethodDefault (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void BridgeMethodDefault.$init()
+(func $$init__void_$p_bridgemethods_BridgeMethodDefault@bridgemethods.BridgeMethodDefault
+ (param $this (ref null $bridgemethods.BridgeMethodDefault))
+ ;;@ bridgemethods/BridgeMethodDefault.java:20:6
+ (local $jj (ref null $java.lang.Object))
+ (local $i (ref null $java.lang.Object))
+ (block
+  ;; JJ jj = bridgemethods.BridgeMethodDefault.C.$create();
+  ;;@ bridgemethods/BridgeMethodDefault.java:46:4
+  (local.set $jj (call $$create__@bridgemethods.BridgeMethodDefault.C ))
+  ;; jj.m(java.lang.Object.$create());
+  ;;@ bridgemethods/BridgeMethodDefault.java:47:4
+  (call_ref $function.m_m__java_lang_Object__void (ref.as_non_null (local.get $jj))(call $$create__@java.lang.Object )(struct.get $bridgemethods.BridgeMethodDefault.JJ.vtable $m_m__java_lang_Object__void (ref.cast_static $bridgemethods.BridgeMethodDefault.JJ.vtable (struct.get $itable $slot1 (struct.get $java.lang.Object $itable (local.get $jj))))))
+  ;; I<Object> i = jj;
+  ;;@ bridgemethods/BridgeMethodDefault.java:48:4
+  (local.set $i (local.get $jj))
+  ;; i.m(java.lang.Object.$create());
+  ;;@ bridgemethods/BridgeMethodDefault.java:49:4
+  (call_ref $function.m_m__java_lang_Object__void (ref.as_non_null (local.get $i))(call $$create__@java.lang.Object )(struct.get $bridgemethods.BridgeMethodDefault.I.vtable $m_m__java_lang_Object__void (ref.cast_static $bridgemethods.BridgeMethodDefault.I.vtable (struct.get $itable $slot0 (struct.get $java.lang.Object $itable (local.get $i))))))
  )
 )
 
@@ -3717,6 +3771,112 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.B)
+
+;;; Code for bridgemethods.BridgeMethodDefault.C [CLASS]
+(type $bridgemethods.BridgeMethodDefault.C (struct_subtype 
+ (field $vtable (ref $bridgemethods.BridgeMethodDefault.C.vtable)) 
+ (field $itable (ref $bridgemethods.BridgeMethodDefault.C.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $bridgemethods.BridgeMethodDefault.B)
+)
+(type $bridgemethods.BridgeMethodDefault.C.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
+  $bridgemethods.BridgeMethodDefault.B.vtable)
+)
+(type $bridgemethods.BridgeMethodDefault.C.itable (struct_subtype 
+(field $slot0 (ref $bridgemethods.BridgeMethodDefault.I.vtable))
+(field $slot1 (ref $bridgemethods.BridgeMethodDefault.JJ.vtable))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $bridgemethods.BridgeMethodDefault.B.itable))
+
+;;; C C.$create()
+(func $$create__@bridgemethods.BridgeMethodDefault.C
+ (result (ref null $bridgemethods.BridgeMethodDefault.C))
+ ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+ (local $$instance (ref null $bridgemethods.BridgeMethodDefault.C))
+ (block
+  ;; C $instance = new C.<init>(0);
+  ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+  (local.set $$instance (struct.new $bridgemethods.BridgeMethodDefault.C (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.C.vtable)) (ref.as_non_null (global.get $bridgemethods.BridgeMethodDefault.C.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+  (call $$ctor__void_$p_bridgemethods_BridgeMethodDefault_C@bridgemethods.BridgeMethodDefault.C (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void C.$ctor()
+(func $$ctor__void_$p_bridgemethods_BridgeMethodDefault_C@bridgemethods.BridgeMethodDefault.C
+ (param $this (ref null $bridgemethods.BridgeMethodDefault.C))
+ ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+ (block
+  ;; bridgemethods.BridgeMethodDefault.C.$clinit();
+  ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+  (call $$clinit__void@bridgemethods.BridgeMethodDefault.C )
+  ;; B.this.$ctor();
+  ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+  (call $$ctor__void_$p_bridgemethods_BridgeMethodDefault_B@bridgemethods.BridgeMethodDefault.B (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void C.m(Object o)
+(func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.C
+ (type $function.m_m__java_lang_Object__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ ;;@ bridgemethods/BridgeMethodDefault.java:42:16
+ (local $this (ref null $bridgemethods.BridgeMethodDefault.C))
+ (local.set $this (ref.cast_static $bridgemethods.BridgeMethodDefault.C (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.C)
+
+;;; void C.$clinit()
+(func $$clinit__void@bridgemethods.BridgeMethodDefault.C
+ ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+ (block
+  ;; if (bridgemethods.BridgeMethodDefault.C.$initialized) return;
+  ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+  (if (global.get $f_$initialized__bridgemethods_BridgeMethodDefault_C)
+   (then
+    ;; return;
+    ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+    (return )
+   )
+  )
+  ;; (bridgemethods.BridgeMethodDefault.C.$initialized = true);
+  ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+  (global.set $f_$initialized__bridgemethods_BridgeMethodDefault_C (i32.const 1))
+  ;; bridgemethods.BridgeMethodDefault.B.$clinit();
+  ;;@ bridgemethods/BridgeMethodDefault.java:40:15
+  (call $$clinit__void@bridgemethods.BridgeMethodDefault.B )
+ )
+)
+
+;;; Class<?> C.getClass()
+(func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.C
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgemethods.BridgeMethodDefault.C))
+ (local.set $this (ref.cast_static $bridgemethods.BridgeMethodDefault.C (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodDefault.C();
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodDefault.C__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodDefault.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.C)
 
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature [CLASS]
 (type $bridgemethods.BridgeMethodShadowedSignature (struct_subtype 

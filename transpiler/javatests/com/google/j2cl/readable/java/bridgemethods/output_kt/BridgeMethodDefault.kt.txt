@@ -11,6 +11,13 @@ import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
 open class BridgeMethodDefault {
+ init {
+  val jj: BridgeMethodDefault.JJ? = BridgeMethodDefault.C()
+  jj!!.m(Any())
+  val i: BridgeMethodDefault.I<Any?>? = jj
+  i!!.m(Any())
+ }
+
  fun interface I<T> {
   @ObjCName("m")
   fun m(
@@ -29,4 +36,8 @@ open class BridgeMethodDefault {
  }
 
  open class B: BridgeMethodDefault.JJ {}
+
+ open class C: BridgeMethodDefault.B() {
+  open override fun m(o: Any?) {}
+ }
 }

@@ -1,0 +1,47 @@
+goog.module('bridgemethods.BridgeMethodDefault.C$impl');
+
+const B = goog.require('bridgemethods.BridgeMethodDefault.B$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class C extends B {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!C} */
+ static $create__() {
+  C.$clinit();
+  let $instance = new C();
+  $instance.$ctor__bridgemethods_BridgeMethodDefault_C__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgemethods_BridgeMethodDefault_C__void() {
+  this.$ctor__bridgemethods_BridgeMethodDefault_B__void();
+ }
+ /** @override */
+ m(/** * */ o) {}
+ //Bridge method.
+ /** @override @nodts */
+ m_m__java_lang_Object__void(/** * */ arg0) {
+  this.m(arg0);
+ }
+ /** @nodts */
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  B.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(C, 'bridgemethods.BridgeMethodDefault$C');
+
+exports = C;
+
+//# sourceMappingURL=BridgeMethodDefault$C.js.map

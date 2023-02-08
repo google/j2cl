@@ -3,6 +3,8 @@ goog.module('bridgemethods.BridgeMethodDefault$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let C = goog.forwardDeclare('bridgemethods.BridgeMethodDefault.C$impl');
+
 class BridgeMethodDefault extends j_l_Object {
  /** @protected @nodts */
  constructor() {
@@ -18,6 +20,14 @@ class BridgeMethodDefault extends j_l_Object {
  /** @nodts */
  $ctor__bridgemethods_BridgeMethodDefault__void() {
   this.$ctor__java_lang_Object__void();
+  this.$init__void_$p_bridgemethods_BridgeMethodDefault();
+ }
+ /** @private @nodts */
+ $init__void_$p_bridgemethods_BridgeMethodDefault() {
+  let jj = C.$create__();
+  jj.m(j_l_Object.$create__());
+  let i = jj;
+  i.m_m__java_lang_Object__void(j_l_Object.$create__());
  }
  /** @nodts */
  static $clinit() {
@@ -31,7 +41,9 @@ class BridgeMethodDefault extends j_l_Object {
  }
  
  /** @nodts */
- static $loadModules() {}
+ static $loadModules() {
+  C = goog.module.get('bridgemethods.BridgeMethodDefault.C$impl');
+ }
 }
 $Util.$setClassMetadata(BridgeMethodDefault, 'bridgemethods.BridgeMethodDefault');
 

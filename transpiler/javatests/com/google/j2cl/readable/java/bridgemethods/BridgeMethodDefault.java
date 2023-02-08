@@ -36,4 +36,16 @@ class BridgeMethodDefault {
   }
 
   static class B implements JJ {}
+
+  static class C extends B {
+    @Override
+    public void m(Object o) {}
+  }
+
+  {
+    JJ jj = new C();
+    jj.m(new Object());
+    I<Object> i = jj;
+    i.m(new Object());
+  }
 }
