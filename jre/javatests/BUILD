@@ -6,7 +6,6 @@ load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load("//testing/web/build_defs:web.bzl", "custom_browser")
 
 package(licenses = ["notice"])
 
@@ -233,9 +232,4 @@ j2cl_library(
         "//javatests/com/google/protobuf/contrib/gwt:__subpackages__",
     ],
     deps = ["//third_party:junit-j2cl"],
-)
-
-custom_browser(
-    name = "firefox-linux",
-    browser = "//testing/web/browsers/v63_0:firefox-linux",
 )
