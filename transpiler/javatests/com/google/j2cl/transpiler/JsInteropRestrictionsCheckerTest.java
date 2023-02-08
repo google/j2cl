@@ -2875,6 +2875,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "'int SomeClass.hashCode()' cannot be assigned JavaScript name 'something' that is "
                 + "different from the JavaScript name of a method it "
                 + "overrides ('int Object.hashCode()' with JavaScript name 'hashCode').",
+            "'int A.hashCode()' cannot be assigned JavaScript name 'something' that is different "
+                + "from the JavaScript name of a method it overrides ('int Object.hashCode()' with "
+                + "JavaScript name 'hashCode').",
             "Native JsType method 'String NativeTypeWithBridge.foo()' should be native"
                 + ", abstract or JsOverlay.",
             "[unusable-by-js] Native 'void Interface.n()' is exposed to JavaScript without "

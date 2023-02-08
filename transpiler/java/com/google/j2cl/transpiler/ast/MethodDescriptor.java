@@ -806,7 +806,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Memoized
   public ImmutableSet<MethodDescriptor> getJsOverriddenMethodDescriptors() {
     return getOverriddenMethodDescriptors(
-        m -> m.getMangledName().equals(getMangledName()),
+        m ->
+            m.getMangledName().equals(getMangledName())
+                // Interface methods never override class methods in JavaScript, but in our model
+                // we see the methods on all supertypes including those of java.lang.Object.
+                && (!getEnclosingTypeDescriptor().isInterface()
+                    || m.getEnclosingTypeDescriptor().isInterface()),
         MethodDescriptor::getJsOverriddenMethodDescriptors);
   }
 

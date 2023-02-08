@@ -50,6 +50,8 @@ internal fun DeclaredTypeDescriptor.directSuperTypeForMethodCall(
   methodDescriptor: MethodDescriptor
 ): DeclaredTypeDescriptor? =
   superTypesStream
+    // Skip java.lang.Object as a supertype of interfaces.
+    .filter { superType -> superType.isInterface || !isInterface }
     .map { superType ->
       // See if the method is in this supertype (in which case we are done) or if it is
       // overridden here (in which case this supertype is not the target).

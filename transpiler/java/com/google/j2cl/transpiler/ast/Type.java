@@ -250,10 +250,15 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public Stream<DeclaredTypeDescriptor> getSuperTypesStream() {
-    return superTypeDescriptor == null
-        ? getSuperInterfaceTypeDescriptors().stream()
-        : Stream.concat(
-            getSuperInterfaceTypeDescriptors().stream(), Stream.of(superTypeDescriptor));
+    DeclaredTypeDescriptor superTypeDescriptor = this.superTypeDescriptor;
+    if (isInterface()) {
+      // Add java.lang.Object as an implicit supertype of interfaces.
+      checkState(superTypeDescriptor == null);
+      superTypeDescriptor = TypeDescriptors.get().javaLangObject;
+    }
+    return Stream.concat(
+            getSuperInterfaceTypeDescriptors().stream(), Stream.of(superTypeDescriptor))
+        .filter(Predicates.notNull());
   }
 
   public TypeDeclaration getDeclaration() {

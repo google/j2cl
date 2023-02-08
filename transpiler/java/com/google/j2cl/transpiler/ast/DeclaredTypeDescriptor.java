@@ -992,10 +992,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   public Stream<DeclaredTypeDescriptor> getSuperTypesStream() {
-    return getSuperTypeDescriptor() == null
-        ? getInterfaceTypeDescriptors().stream()
-        : Stream.concat(
-            getInterfaceTypeDescriptors().stream(), Stream.of(getSuperTypeDescriptor()));
+    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    if (isInterface()) {
+      // Add java.lang.Object as an implicit supertype of interfaces.
+      checkState(superTypeDescriptor == null);
+      superTypeDescriptor = TypeDescriptors.get().javaLangObject;
+    }
+    return Stream.concat(getInterfaceTypeDescriptors().stream(), Stream.of(superTypeDescriptor))
+        .filter(Predicates.notNull());
   }
 
   private Map<TypeVariable, TypeDescriptor> getLocalParameterization() {

@@ -932,6 +932,8 @@ public abstract class TypeDeclaration
 
     abstract Optional<JsEnumInfo> getJsEnumInfo();
 
+    abstract Kind getKind();
+
     private static final ThreadLocalInterner<TypeDeclaration> interner =
         new ThreadLocalInterner<>();
 
@@ -945,7 +947,12 @@ public abstract class TypeDeclaration
           // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
           // and modeling that fact in the type model allows passes that query assignability (e.g.
           // to implement casts, instance ofs and JsEnum boxing etc.) to get the right answer.
-          setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
+          if (getKind() == Kind.ENUM) {
+            // Users can write code that marks an interface as JsEnum that will be rejected
+            // by JsInteropRestrictionsChecker, but we need to preserve our invariants that
+            // interfaces don't have supertype.
+            setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
+          }
         }
       }
 
