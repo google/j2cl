@@ -344,6 +344,99 @@ public class CharacterTest extends GWTTestCase {
     assertTrue(Character.isSpace('\n'));
   }
 
+  public void testIsSpaceChar() {
+    char[] separators = {
+      '\u0020', // SPACE.
+      '\u1680', // OGHAM SPACE MARK.
+      '\u2000', // EN QUAD.
+      '\u2001', // EM QUAD.
+      '\u2002', // EN SPACE.
+      '\u2003', // EM SPACE.
+      '\u2004', // THREE-PER-EM SPACE.
+      '\u2005', // FOUR-PER-EM SPACE.
+      '\u2006', // SIX-PER-EM SPACE.
+      '\u2008', // PUNCTUATION SPACE.
+      '\u2009', // THIN SPACE.
+      '\u200A', // HAIR SPACE.
+      '\u2028', // LINE SEPARATOR.
+      '\u2029', // PARAGRAPH SEPARATOR.
+      '\u205F', // MEDIUM MATHEMATICAL SPACE.
+      '\u3000' // IDEOGRAPHIC SPACE.
+    };
+
+    char[] nonBreakingSpaceSeparators = {
+      '\u00A0', // NO-BREAK SPACE.
+      '\u2007', // FIGURE SPACE.
+      '\u202F' // NARROW NO-BREAK SPACE.
+    };
+
+    char[] specialCases = {
+      '\t', // HORIZONTAL TABULATION.
+      '\n', // LINE FEED.
+      '\u000B', // VERTICAL TABULATION.
+      '\f', // FORM FEED.
+      '\r', // CARRIAGE RETURN.
+      '\u001C', // FILE SEPARATOR.
+      '\u001D', // GROUP SEPARATOR.
+      '\u001E', // RECORD SEPARATOR.
+      '\u001F' // UNIT SEPARATOR.
+    };
+
+    char[] typicalCounterExamples = {
+      'a', // LATIN SMALL LETTER A.
+      'B', // LATIN CAPITAL LETTER B.
+      '_', // LOW LINE.
+      '\u2500' // BOX DRAWINGS LIGHT HORIZONTAL.
+    };
+
+    int[] supplementaryCounterExamples = {
+      0x2070E, // UNICODE HAN CHARACTER 'to castrate a fowl, a capon'.
+      0x20731, // UNICODE HAN CHARACTER 'to peel, pare'.
+      0x29D98, // UNICODE HAN CHARACTER 'a general name for perch, etc.'.
+    };
+
+    int[] otherNonWhitespaceInts = {
+      Character.MAX_VALUE + 1, //
+      Character.MAX_CODE_POINT + 1,
+      Integer.MAX_VALUE,
+      -1
+    };
+
+    // Must match unicode space separator characters.
+    for (char c : separators) {
+      assertTrue(Character.isSpaceChar(c));
+      assertTrue(Character.isSpaceChar((int) c));
+    }
+
+    // Non-breaking space separate ARE considered space chars, unlike isWhitespace().
+    for (char c : nonBreakingSpaceSeparators) {
+      assertTrue(Character.isSpaceChar(c));
+      assertTrue(Character.isSpaceChar((int) c));
+    }
+
+    // The ASCII legacy cases are not consider space chars.
+    for (char c : specialCases) {
+      assertFalse(Character.isSpaceChar(c));
+      assertFalse(Character.isSpaceChar((int) c));
+    }
+
+    // Behave appropriately on other characters, like the alphabet.
+    for (char c : typicalCounterExamples) {
+      assertFalse(Character.isSpaceChar(c));
+      assertFalse(Character.isSpaceChar((int) c));
+    }
+
+    // Support for non-UCS-2 characters.
+    for (int c : supplementaryCounterExamples) {
+      assertFalse(Character.isSpaceChar(c));
+    }
+
+    // Test other valid ints
+    for (int c : otherNonWhitespaceInts) {
+      assertFalse(Character.isSpaceChar(c));
+    }
+  }
+
   public void testIsWhitepace() {
     char[] separators = {
         '\u0020', // SPACE.

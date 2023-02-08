@@ -44,7 +44,6 @@ import javaemul.internal.annotations.HasNoSideEffects;
  *  - isJavaLetterOrDigit(char) -- deprecated, so probably not
  *  - isISOControl(char)
  *  - isMirrored(char)
- *  - isSpaceChar(char)
  *  - isUnicodeIdentifierPart(char)
  *  - isUnicodeIdentifierStart(char)
  *  - getDirectionality(*)
@@ -313,6 +312,14 @@ public final class Character implements Comparable<Character>, Serializable {
 
   public static boolean isWhitespace(int codePoint) {
     return isValidCodePoint(codePoint) && StringUtil.isWhitespace(String.fromCodePoint(codePoint));
+  }
+
+  public static boolean isSpaceChar(char ch) {
+    return StringUtil.isSpace(String.valueOf(ch));
+  }
+
+  public static boolean isSpaceChar(int codePoint) {
+    return isValidCodePoint(codePoint) && StringUtil.isSpace(String.fromCodePoint(codePoint));
   }
 
   public static boolean isSupplementaryCodePoint(int codePoint) {

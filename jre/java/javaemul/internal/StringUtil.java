@@ -34,5 +34,16 @@ public final class StringUtil {
     return whitespaceRegex.test(str);
   }
 
+  private static NativeRegExp spaceRegex;
+
+  public static boolean isSpace(String str) {
+    if (spaceRegex == null) {
+      spaceRegex =
+          new NativeRegExp(
+              "^[\\u0020\\u00A0\\u1680\\u2000-\\u200A\\u202F\\u2028\\u2029\\u205F\\u3000]$");
+    }
+    return spaceRegex.test(str);
+  }
+
   private StringUtil() {}
 }
