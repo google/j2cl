@@ -7,6 +7,9 @@
 ;;; Code for autovalue.$AutoValue_AutoValueWithFields [static fields]
 (global $f_$initialized__autovalue_$AutoValue_AutoValueWithFields (mut i32) (i32.const 0))
 
+;;; Code for autovalue.AutoValue_AutoValueJsType [static fields]
+(global $f_$initialized__autovalue_AutoValue_AutoValueJsType (mut i32) (i32.const 0))
+
 ;;; Code for autovalue.AutoValue_AutoValueWithBuilder [static fields]
 (global $f_$initialized__autovalue_AutoValue_AutoValueWithBuilder (mut i32) (i32.const 0))
 
@@ -48,6 +51,9 @@
 
 ;;; Code for autovalue.AutoValue_SimpleAutoValue [static fields]
 (global $f_$initialized__autovalue_AutoValue_SimpleAutoValue (mut i32) (i32.const 0))
+
+;;; Code for autovalue.AutoValueJsType [static fields]
+(global $f_$initialized__autovalue_AutoValueJsType (mut i32) (i32.const 0))
 
 ;;; Code for autovalue.AutoValueWithBuilder [static fields]
 (global $f_$initialized__autovalue_AutoValueWithBuilder (mut i32) (i32.const 0))
@@ -99,6 +105,29 @@
 
 ;;; Code for autovalue.SimpleAutoValue.GenericType [static fields]
 (global $f_$initialized__autovalue_SimpleAutoValue_GenericType (mut i32) (i32.const 0))
+
+;;; Code for autovalue.AutoValue_AutoValueJsType [vtable.init]
+(global $autovalue.AutoValue_AutoValueJsType.vtable (ref $autovalue.AutoValue_AutoValueJsType.vtable) 
+ (struct.new $autovalue.AutoValue_AutoValueJsType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_AutoValueJsType)
+  (ref.func $m_hashCode__int@autovalue.AutoValue_AutoValueJsType)
+  (ref.func $m_toString__java_lang_String@autovalue.AutoValue_AutoValueJsType)
+  (ref.func $m_getClass__java_lang_Class@autovalue.AutoValue_AutoValueJsType)
+  (ref.func $m_getField__int@autovalue.AutoValue_AutoValueJsType)
+  (ref.func $m_getWithJsMethod__int_$pp_autovalue@autovalue.AutoValue_AutoValueJsType)
+ )
+)
+
+;;; Code for autovalue.AutoValue_AutoValueJsType [itable.init]
+(global $autovalue.AutoValue_AutoValueJsType.itable (ref $autovalue.AutoValue_AutoValueJsType.itable) (struct.new $autovalue.AutoValue_AutoValueJsType.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
 
 ;;; Code for autovalue.AutoValue_AutoValueWithBuilder [vtable.init]
 (global $autovalue.AutoValue_AutoValueWithBuilder.vtable (ref $autovalue.AutoValue_AutoValueWithBuilder.vtable) 
@@ -998,6 +1027,239 @@
   (call $$clinit__void@autovalue.AutoValueWithFields )
  )
 )
+
+;;; Code for autovalue.AutoValue_AutoValueJsType [CLASS]
+(type $autovalue.AutoValue_AutoValueJsType (struct_subtype 
+ (field $vtable (ref $autovalue.AutoValue_AutoValueJsType.vtable)) 
+ (field $itable (ref $autovalue.AutoValue_AutoValueJsType.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_field__autovalue_AutoValue_AutoValueJsType_ i32)
+ (field $f_withJsMethod__autovalue_AutoValue_AutoValueJsType_ i32)
+  $autovalue.AutoValueJsType)
+)
+(type $autovalue.AutoValue_AutoValueJsType.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getField__int (ref $function.m_getField__int))
+ (field $m_getWithJsMethod__int_$pp_autovalue (ref $function.m_getWithJsMethod__int_$pp_autovalue))
+  $autovalue.AutoValueJsType.vtable)
+)
+(type $autovalue.AutoValue_AutoValueJsType.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $autovalue.AutoValueJsType.itable))
+
+;;; AutoValue_AutoValueJsType AutoValue_AutoValueJsType.$create(int field, int withJsMethod)
+(func $$create__int__int@autovalue.AutoValue_AutoValueJsType
+ (param $field i32)
+ (param $withJsMethod i32)
+ (result (ref null $autovalue.AutoValue_AutoValueJsType))
+ ;;@ autovalue/AutoValue_AutoValueJsType.java:14:2
+ (local $$instance (ref null $autovalue.AutoValue_AutoValueJsType))
+ (block
+  ;; AutoValue_AutoValueJsType $instance = new AutoValue_AutoValueJsType.<init>(0,field,withJsMethod);
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:14:2
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueJsType (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueJsType.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueJsType.itable)) (i32.const 0) (local.get $field) (local.get $withJsMethod)))
+  ;; $instance.$ctor(field,withJsMethod);
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:14:2
+  (call $$ctor__int__int__void_$p_autovalue_AutoValue_AutoValueJsType@autovalue.AutoValue_AutoValueJsType (ref.as_non_null (local.get $$instance))(local.get $field)(local.get $withJsMethod))
+  ;; return $instance;
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:14:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AutoValue_AutoValueJsType.$ctor(int field, int withJsMethod)
+(func $$ctor__int__int__void_$p_autovalue_AutoValue_AutoValueJsType@autovalue.AutoValue_AutoValueJsType
+ (param $this (ref null $autovalue.AutoValue_AutoValueJsType))
+ (param $field i32)
+ (param $withJsMethod i32)
+ ;;@ autovalue/AutoValue_AutoValueJsType.java:14:2
+ (block
+  ;; autovalue.AutoValue_AutoValueJsType.$clinit();
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:16:24
+  (call $$clinit__void@autovalue.AutoValue_AutoValueJsType )
+  ;; AutoValueJsType.this.$ctor();
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:16:24
+  (call $$ctor__void_$p_autovalue_AutoValueJsType@autovalue.AutoValueJsType (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; int AutoValue_AutoValueJsType.getField()
+(func $m_getField__int@autovalue.AutoValue_AutoValueJsType
+ (type $function.m_getField__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ autovalue/AutoValue_AutoValueJsType.java:22:13
+ (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (block
+  ;; return AutoValue_AutoValueJsType.this.field;
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:23:4
+  (return (struct.get $autovalue.AutoValue_AutoValueJsType $f_field__autovalue_AutoValue_AutoValueJsType_(local.get $this)))
+ )
+)
+(elem declare func $m_getField__int@autovalue.AutoValue_AutoValueJsType)
+
+;;; int AutoValue_AutoValueJsType.getWithJsMethod()
+(func $m_getWithJsMethod__int_$pp_autovalue@autovalue.AutoValue_AutoValueJsType
+ (type $function.m_getWithJsMethod__int_$pp_autovalue)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ autovalue/AutoValue_AutoValueJsType.java:28:6
+ (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (block
+  ;; return AutoValue_AutoValueJsType.this.withJsMethod;
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:29:4
+  (return (struct.get $autovalue.AutoValue_AutoValueJsType $f_withJsMethod__autovalue_AutoValue_AutoValueJsType_(local.get $this)))
+ )
+)
+(elem declare func $m_getWithJsMethod__int_$pp_autovalue@autovalue.AutoValue_AutoValueJsType)
+
+;;; String AutoValue_AutoValueJsType.toString()
+(func $m_toString__java_lang_String@autovalue.AutoValue_AutoValueJsType
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ autovalue/AutoValue_AutoValueJsType.java:33:16
+ (local $$stringBuilder (ref null $java.lang.StringBuilder))
+ (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (block
+  ;; return (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|AutoValueJsT...|()),$stringBuilder.append(AutoValue_AutoValueJsType.this.field),$stringBuilder.append(javaemul.internal.StringPool.$getString_|__|()),$stringBuilder.append(javaemul.internal.StringPool.$getString_|withJsMethod_|()),$stringBuilder.append(AutoValue_AutoValueJsType.this.withJsMethod),$stringBuilder.append(javaemul.internal.StringPool.$getString_|_|()),$stringBuilder.toString());
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:34:4
+  (return (block (result (ref null $java.lang.String))
+   (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|AutoValueJsT...|__java_lang_String (ref.func $$getString_|AutoValueJsT...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_AutoValueJsType $f_field__autovalue_AutoValue_AutoValueJsType_(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|withJsMethod_|__java_lang_String (ref.func $$getString_|withJsMethod_|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__int__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(struct.get $autovalue.AutoValue_AutoValueJsType $f_withJsMethod__autovalue_AutoValue_AutoValueJsType_(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
+  ))
+ )
+)
+(elem declare func $m_toString__java_lang_String@autovalue.AutoValue_AutoValueJsType)
+
+;;; boolean AutoValue_AutoValueJsType.equals(Object o)
+(func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_AutoValueJsType
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (result i32)
+ ;;@ autovalue/AutoValue_AutoValueJsType.java:41:17
+ (local $that (ref null $autovalue.AutoValueJsType))
+ (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (block
+  ;; if ((o == AutoValue_AutoValueJsType.this)) {
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:42:4
+  (if (ref.eq (local.get $o) (local.get $this))
+   (then
+    (block
+     ;; return true;
+     ;;@ autovalue/AutoValue_AutoValueJsType.java:43:6
+     (return (i32.const 1))
+    )
+   )
+  )
+  ;; if (o instanceof AutoValueJsType) {
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:45:4
+  (if (ref.test_static $autovalue.AutoValueJsType (local.get $o))
+   (then
+    (block
+     ;; AutoValueJsType that = ((AutoValueJsType) o);
+     ;;@ autovalue/AutoValue_AutoValueJsType.java:46:6
+     (local.set $that (ref.cast_static $autovalue.AutoValueJsType (local.get $o)))
+     ;; return ((AutoValue_AutoValueJsType.this.field == that.getField())) ? ((AutoValue_AutoValueJsType.this.withJsMethod == that.getWithJsMethod())) : (false);
+     ;;@ autovalue/AutoValue_AutoValueJsType.java:47:6
+     (return (if (result i32) (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $f_field__autovalue_AutoValue_AutoValueJsType_(local.get $this)) (call_ref $function.m_getField__int (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_getField__int (struct.get $autovalue.AutoValueJsType $vtable(local.get $that))))) (then (i32.eq (struct.get $autovalue.AutoValue_AutoValueJsType $f_withJsMethod__autovalue_AutoValue_AutoValueJsType_(local.get $this)) (call_ref $function.m_getWithJsMethod__int_$pp_autovalue (ref.as_non_null (local.get $that))(struct.get $autovalue.AutoValueJsType.vtable $m_getWithJsMethod__int_$pp_autovalue (struct.get $autovalue.AutoValueJsType $vtable(local.get $that)))))) (else (i32.const 0))))
+    )
+   )
+  )
+  ;; return false;
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:50:4
+  (return (i32.const 0))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_AutoValueJsType)
+
+;;; int AutoValue_AutoValueJsType.hashCode()
+(func $m_hashCode__int@autovalue.AutoValue_AutoValueJsType
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref $java.lang.Object))
+ (result i32)
+ ;;@ autovalue/AutoValue_AutoValueJsType.java:54:13
+ (local $h$ i32)
+ (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (block
+  ;; int h$ = 1;
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:55:4
+  (local.set $h$ (i32.const 1))
+  ;; (h$ = (h$ * 1000003));
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:56:4
+  (local.set $h$ (i32.mul (local.get $h$) (i32.const 1000003)))
+  ;; (h$ = (h$ ^ AutoValue_AutoValueJsType.this.field));
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:57:4
+  (local.set $h$ (i32.xor (local.get $h$) (struct.get $autovalue.AutoValue_AutoValueJsType $f_field__autovalue_AutoValue_AutoValueJsType_(local.get $this))))
+  ;; (h$ = (h$ * 1000003));
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:58:4
+  (local.set $h$ (i32.mul (local.get $h$) (i32.const 1000003)))
+  ;; (h$ = (h$ ^ AutoValue_AutoValueJsType.this.withJsMethod));
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:59:4
+  (local.set $h$ (i32.xor (local.get $h$) (struct.get $autovalue.AutoValue_AutoValueJsType $f_withJsMethod__autovalue_AutoValue_AutoValueJsType_(local.get $this))))
+  ;; return h$;
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:60:4
+  (return (local.get $h$))
+ )
+)
+(elem declare func $m_hashCode__int@autovalue.AutoValue_AutoValueJsType)
+
+;;; void AutoValue_AutoValueJsType.$clinit()
+(func $$clinit__void@autovalue.AutoValue_AutoValueJsType
+ ;;@ autovalue/AutoValue_AutoValueJsType.java:8:12
+ (block
+  ;; if (autovalue.AutoValue_AutoValueJsType.$initialized) return;
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:8:12
+  (if (global.get $f_$initialized__autovalue_AutoValue_AutoValueJsType)
+   (then
+    ;; return;
+    ;;@ autovalue/AutoValue_AutoValueJsType.java:8:12
+    (return )
+   )
+  )
+  ;; (autovalue.AutoValue_AutoValueJsType.$initialized = true);
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:8:12
+  (global.set $f_$initialized__autovalue_AutoValue_AutoValueJsType (i32.const 1))
+  ;; autovalue.AutoValueJsType.$clinit();
+  ;;@ autovalue/AutoValue_AutoValueJsType.java:8:12
+  (call $$clinit__void@autovalue.AutoValueJsType )
+ )
+)
+
+;;; Class<?> AutoValue_AutoValueJsType.getClass()
+(func $m_getClass__java_lang_Class@autovalue.AutoValue_AutoValueJsType
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $autovalue.AutoValue_AutoValueJsType))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_AutoValueJsType (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAutovalue.AutoValue_AutoValueJsType();
+  (return (call $function.no.side.effects.$getAutovalue.AutoValue_AutoValueJsType__java_lang_Class (ref.func $$getAutovalue.AutoValue_AutoValueJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@autovalue.AutoValue_AutoValueJsType)
 
 ;;; Code for autovalue.AutoValue_AutoValueWithBuilder [CLASS]
 (type $autovalue.AutoValue_AutoValueWithBuilder (struct_subtype 
@@ -3756,6 +4018,68 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@autovalue.AutoValue_SimpleAutoValue)
+
+;;; Code for autovalue.AutoValueJsType [CLASS]
+(type $autovalue.AutoValueJsType (struct_subtype 
+ (field $vtable (ref $autovalue.AutoValueJsType.vtable)) 
+ (field $itable (ref $autovalue.AutoValueJsType.itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $autovalue.AutoValueJsType.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getField__int (ref $function.m_getField__int))
+ (field $m_getWithJsMethod__int_$pp_autovalue (ref $function.m_getWithJsMethod__int_$pp_autovalue))
+  $java.lang.Object.vtable)
+)
+(type $autovalue.AutoValueJsType.itable (struct_subtype 
+(field $slot0 (ref null struct))
+(field $slot1 (ref null struct))
+(field $slot2 (ref null struct))
+(field $slot3 (ref null struct))
+(field $slot4 (ref null struct))
+(field $slot5 (ref null struct))
+(field $slot6 (ref null struct))
+ $java.lang.Object.itable))
+
+;;; void AutoValueJsType.$ctor()
+(func $$ctor__void_$p_autovalue_AutoValueJsType@autovalue.AutoValueJsType
+ (param $this (ref null $autovalue.AutoValueJsType))
+ ;;@ autovalue/AutoValueJsType.java:25:12
+ (block
+  ;; autovalue.AutoValueJsType.$clinit();
+  ;;@ autovalue/AutoValueJsType.java:25:30
+  (call $$clinit__void@autovalue.AutoValueJsType )
+  ;; Object.this.$ctor();
+  ;;@ autovalue/AutoValueJsType.java:25:30
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void AutoValueJsType.$clinit()
+(func $$clinit__void@autovalue.AutoValueJsType
+ ;;@ autovalue/AutoValueJsType.java:24:22
+ (block
+  ;; if (autovalue.AutoValueJsType.$initialized) return;
+  ;;@ autovalue/AutoValueJsType.java:24:22
+  (if (global.get $f_$initialized__autovalue_AutoValueJsType)
+   (then
+    ;; return;
+    ;;@ autovalue/AutoValueJsType.java:24:22
+    (return )
+   )
+  )
+  ;; (autovalue.AutoValueJsType.$initialized = true);
+  ;;@ autovalue/AutoValueJsType.java:24:22
+  (global.set $f_$initialized__autovalue_AutoValueJsType (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ autovalue/AutoValueJsType.java:24:22
+  (call $$clinit__void@java.lang.Object )
+ )
+)
 
 ;;; Code for autovalue.AutoValueWithBuilder [CLASS]
 (type $autovalue.AutoValueWithBuilder (struct_subtype 

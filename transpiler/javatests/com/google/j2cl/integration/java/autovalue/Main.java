@@ -22,6 +22,10 @@ import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 public class Main {
 
@@ -36,6 +40,7 @@ public class Main {
     testUnusedType();
     testUnusedTypeExtending();
     testClinit();
+    testJsInterop();
   }
 
   private static void testComposite() {
@@ -256,5 +261,36 @@ public class Main {
   private static void testClinit() {
     AutoValueWithBuilderAndClinit o = AutoValueWithBuilderAndClinit.Builder.create();
     assertEquals(1, o.getField());
+  }
+
+  @AutoValue
+  @JsType
+  abstract static class AutoValueJsType {
+    protected AutoValueJsType() {}
+
+    public abstract int getField();
+
+    @JsMethod(name = "getField2")
+    abstract int getWithJsMethod();
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface Accessor {
+    int getField();
+
+    int getField2();
+  }
+
+  @Wasm("nop")
+  private static void testJsInterop() {
+    if (!isJavaScript()) {
+      // Testing JsInterop.
+      return;
+    }
+
+    Accessor autoValueJsType = (Accessor) (Object) new AutoValue_Main_AutoValueJsType(0, 1);
+
+    assertEquals(0, autoValueJsType.getField());
+    assertEquals(1, autoValueJsType.getField2());
   }
 }

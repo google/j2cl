@@ -1,0 +1,66 @@
+goog.module('autovalue.AutoValueJsType$impl');
+
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class AutoValueJsType extends ValueType {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {number} @nodts*/
+  this.f_field__autovalue_AutoValue_AutoValueJsType_ = 0;
+  /**@type {number} @nodts*/
+  this.f_withJsMethod__autovalue_AutoValue_AutoValueJsType_ = 0;
+ }
+ /** @nodts @return {!AutoValueJsType} */
+ static $create__() {
+  AutoValueJsType.$clinit();
+  let $instance = new AutoValueJsType();
+  $instance.$ctor__autovalue_AutoValueJsType__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueJsType__void() {
+  this.$ctor__javaemul_internal_ValueType__void();
+ }
+ /** @nodts @return {!AutoValueJsType} */
+ static $create__int__int(/** number */ field, /** number */ withJsMethod) {
+  AutoValueJsType.$clinit();
+  let $instance = new AutoValueJsType();
+  $instance.$ctor__autovalue_AutoValueJsType__int__int__void(field, withJsMethod);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__autovalue_AutoValueJsType__int__int__void(/** number */ field, /** number */ withJsMethod) {
+  this.$ctor__autovalue_AutoValueJsType__void();
+  this.f_field__autovalue_AutoValue_AutoValueJsType_ = field;
+  this.f_withJsMethod__autovalue_AutoValue_AutoValueJsType_ = withJsMethod;
+  $J2CL_PRESERVE$(this.f_field__autovalue_AutoValue_AutoValueJsType_, this.f_withJsMethod__autovalue_AutoValue_AutoValueJsType_);
+ }
+ /** @return {number} */
+ getField() {
+  return this.f_field__autovalue_AutoValue_AutoValueJsType_;
+ }
+ /** @return {number} */
+ getField2() {
+  return this.f_withJsMethod__autovalue_AutoValue_AutoValueJsType_;
+ }
+ /** @nodts */
+ static $clinit() {
+  AutoValueJsType.$clinit = () =>{};
+  AutoValueJsType.$loadModules();
+  ValueType.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValueJsType;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AutoValueJsType, 'autovalue.AutoValueJsType');
+
+exports = AutoValueJsType;
+
+//# sourceMappingURL=AutoValueJsType.js.map
