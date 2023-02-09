@@ -1,0 +1,18 @@
+# Recommended bazel settings for working with J2CL.
+# You can copy this into root of your workspace.
+
+build --watchfs
+
+build --spawn_strategy=local
+build --strategy=J2cl=worker
+build --strategy=Closure=worker
+build --strategy=Javac=worker
+build --strategy=JavaIjar=local
+build --strategy=JavaDeployJar=local
+build --strategy=JavaSourceJar=local
+build --strategy=Turbine=local
+
+test --test_output=errors
+
+# Enable Java 11
+build --java_language_version=11
