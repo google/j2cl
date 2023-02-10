@@ -9,7 +9,7 @@
 package(licenses = ["notice"])
 
 filegroup(
-    name = "integration_tests_warnings_whitelist",
-    srcs = ["integration_tests_warnings_whitelist.txt"],
+    name = "integration_tests_warnings_allowlist",
+    srcs = ["integration_tests_warnings_allowlist.txt"],
     visibility = [":__subpackages__"],
 )
