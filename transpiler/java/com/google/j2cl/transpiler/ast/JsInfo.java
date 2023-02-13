@@ -42,6 +42,13 @@ public abstract class JsInfo {
 
   public abstract boolean isJsAsync();
 
+  /**
+   * Returns true if the JsInfo where computed from a JsInterop annotation defined explicitly on the
+   * member.
+   */
+  // TODO(b/266614719): Remove when the annotation data is part of our model.
+  public abstract boolean getHasJsMemberAnnotation();
+
   abstract Builder toBuilder();
 
   /** Not a JS member. */
@@ -64,7 +71,8 @@ public abstract class JsInfo {
     return new AutoValue_JsInfo.Builder()
         // Default values.
         .setJsOverlay(false)
-        .setJsAsync(false);
+        .setJsAsync(false)
+        .setHasJsMemberAnnotation(false);
   }
 
   /** A Builder for JsInfo. */
@@ -80,6 +88,8 @@ public abstract class JsInfo {
     public abstract Builder setJsOverlay(boolean isJsOverlay);
 
     public abstract Builder setJsAsync(boolean isJsAsync);
+
+    public abstract Builder setHasJsMemberAnnotation(boolean hasJsMemberAnnotation);
 
     abstract JsInfo autoBuild();
 

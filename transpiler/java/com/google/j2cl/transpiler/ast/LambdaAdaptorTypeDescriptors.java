@@ -148,7 +148,7 @@ public final class LambdaAdaptorTypeDescriptors {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         .setConstructor(true)
-        .setJsInfo(JsInfo.RAW_CTOR)
+        .setOriginalJsInfo(JsInfo.RAW_CTOR)
         .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
         .setParameterTypeDescriptors(jsFunctionInterface)
         .build();
@@ -274,7 +274,7 @@ public final class LambdaAdaptorTypeDescriptors {
                     createJsFunctionMethodDescriptor(
                         t, singleAbstractMethod.getDeclarationDescriptor()),
                 jsfunctionTypeDescriptor))
-        .setJsInfo(
+        .setOriginalJsInfo(
             JsInfo.newBuilder()
                 .setJsMemberType(JsMemberType.NONE)
                 .setJsAsync(singleAbstractMethod.getJsInfo().isJsAsync())

@@ -759,7 +759,7 @@ class JdtEnvironment {
         .setTypeDescriptor(thisTypeDescriptor)
         .setStatic(isStatic)
         .setVisibility(visibility)
-        .setJsInfo(jsInfo)
+        .setOriginalJsInfo(jsInfo)
         .setKtInfo(ktInfo)
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
@@ -790,7 +790,7 @@ class JdtEnvironment {
     boolean isStatic = isStatic(methodBinding);
     Visibility visibility = getVisibility(methodBinding);
     boolean isDefault = isDefaultMethod(methodBinding);
-    JsInfo jsInfo = computeJsInfo(methodBinding);
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
     KtInfo ktInfo = computeKtInfo(methodBinding);
 
     boolean isNative =
@@ -877,7 +877,7 @@ class JdtEnvironment {
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setTypeArgumentTypeDescriptors(typeArgumentTypeDescriptors)
-        .setJsInfo(jsInfo)
+        .setOriginalJsInfo(jsInfo)
         .setKtInfo(ktInfo)
         .setKtObjcInfo(KtInteropUtils.getKtObjcInfo(methodBinding))
         .setWasmInfo(getWasmInfo(methodBinding))
@@ -960,52 +960,6 @@ class JdtEnvironment {
     return false;
   }
 
-  /** Checks overriding chain to compute JsInfo. */
-  private JsInfo computeJsInfo(IMethodBinding methodBinding) {
-    JsInfo originalJsInfo = JsInteropUtils.getJsInfo(methodBinding);
-
-    if (originalJsInfo.isJsOverlay()
-        || originalJsInfo.getJsName() != null
-        || originalJsInfo.getJsNamespace() != null) {
-      // Do not examine overridden methods if the method is marked as JsOverlay or it has a JsMember
-      // annotation that customizes the name.
-      return originalJsInfo;
-    }
-
-    boolean hasExplicitJsMemberAnnotation = hasJsMemberAnnotation(methodBinding);
-    JsInfo defaultJsInfo = originalJsInfo;
-    for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
-      JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
-      if (inheritedJsInfo.getJsMemberType() == JsMemberType.NONE) {
-        continue;
-      }
-
-      if (hasExplicitJsMemberAnnotation
-          && originalJsInfo.getJsMemberType() != inheritedJsInfo.getJsMemberType()) {
-        // Only inherit from the overridden method if the JsMember types are consistent.
-        continue;
-      }
-
-      if (inheritedJsInfo.getJsName() != null) {
-        // Found an overridden method of the same JsMember type one that customizes the name, done.
-        // If there are any conflicts with other overrides they will be reported by
-        // JsInteropRestrictionsChecker.
-        return JsInfo.Builder.from(inheritedJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
-      }
-
-      if (defaultJsInfo == originalJsInfo && !hasExplicitJsMemberAnnotation) {
-        // The original method does not have a JsMember annotation and traversing the list of
-        // overridden methods we found the first that has an explicit JsMember annotation.
-        // Keep it as the one to be used if none is found that customizes the name.
-        // This allows to "inherit" the JsMember type from the override.
-        defaultJsInfo = inheritedJsInfo;
-      }
-    }
-
-    // Don't inherit @JsAsync annotation from overridden methods.
-    return JsInfo.Builder.from(defaultJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
-  }
-
   /** Checks overriding chain to compute KtInfo. */
   private KtInfo computeKtInfo(IMethodBinding methodBinding) {
     KtInfo ktInfo = KtInteropUtils.getKtInfo(methodBinding);
@@ -1025,12 +979,6 @@ class JdtEnvironment {
 
   private static KtInfo computeKtInfo(IVariableBinding variableBinding) {
     return KtInteropUtils.getKtInfo(variableBinding);
-  }
-
-  private static boolean hasJsMemberAnnotation(IMethodBinding methodBinding) {
-    return JsInteropAnnotationUtils.getJsMethodAnnotation(methodBinding) != null
-        || JsInteropAnnotationUtils.getJsPropertyAnnotation(methodBinding) != null
-        || JsInteropAnnotationUtils.getJsConstructorAnnotation(methodBinding) != null;
   }
 
   public Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {

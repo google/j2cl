@@ -983,7 +983,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
                 // Set to private to avoid putting the method in the vtable. (These methods might
                 // be called by a subclass though)
                 .setVisibility(Visibility.PRIVATE)
-                .setJsInfo(JsInfo.NONE)
+                .setOriginalJsInfo(JsInfo.NONE)
                 // Clear side effect free flag since the ctor method does not return a value and
                 // would be
                 // pruned incorrectly.
@@ -1007,7 +1007,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
                         .getTypeDeclaration()
                         .getTypeParameterDescriptors())
                 .setOrigin(MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR)
-                .setJsInfo(JsInfo.NONE)
+                .setOriginalJsInfo(JsInfo.NONE)
                 .setVisibility(Visibility.PUBLIC));
   }
 

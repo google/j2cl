@@ -120,7 +120,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     // If both a method and the bridge method are JsMethod, only the bridge method is a JsMethod,
     // and it targets the *real* implementation, which should be emit as non-JsMethod.
     if (causeMethod.isJsMethod() && targetMethod.inSameTypeAs(causeMethod)) {
-      methodDescriptorBuilder.removeParameterOptionality().setJsInfo(JsInfo.NONE);
+      methodDescriptorBuilder.removeParameterOptionality().setOriginalJsInfo(JsInfo.NONE);
     }
 
     return methodDescriptorBuilder.setJsFunction(false).build();

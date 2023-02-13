@@ -64,7 +64,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
+            .setOriginalJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setEnclosingTypeDescriptor(
                 checkTypeDescriptor.getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())

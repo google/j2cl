@@ -236,7 +236,7 @@ public class NormalizeCasts extends NormalizationPass {
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
+            .setOriginalJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setEnclosingTypeDescriptor(BootstrapType.CASTS.getDescriptor())
             .setName("$to")

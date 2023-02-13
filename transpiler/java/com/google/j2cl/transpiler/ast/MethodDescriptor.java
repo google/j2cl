@@ -448,6 +448,65 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Nullable
   abstract KtObjcInfo getKtObjcInfo();
 
+  /** Compute the JsInfo of the function by traversing its overriding chain. */
+  @Override
+  @Memoized
+  public JsInfo getJsInfo() {
+    if (getManglingDescriptor() != this) {
+      return getManglingDescriptor().getJsInfo();
+    }
+
+    JsInfo originalJsInfo = getDeclarationDescriptor().getOriginalJsInfo();
+
+    if (originalJsInfo.isJsOverlay()
+        || originalJsInfo.getJsName() != null
+        || originalJsInfo.getJsNamespace() != null) {
+      // Do not examine overridden methods if the method is marked as JsOverlay or it has a JsMember
+      // annotation that customizes the name.
+      return originalJsInfo;
+    }
+
+    boolean hasExplicitJsMemberAnnotation = originalJsInfo.getHasJsMemberAnnotation();
+    JsInfo defaultJsInfo = originalJsInfo;
+
+    for (MethodDescriptor overriddenMethodDescriptor : getJavaOverriddenMethodDescriptors()) {
+      JsInfo inheritedJsInfo =
+          overriddenMethodDescriptor.getDeclarationDescriptor().getOriginalJsInfo();
+
+      if (inheritedJsInfo.getJsMemberType() == JsMemberType.NONE) {
+        continue;
+      }
+
+      if (hasExplicitJsMemberAnnotation
+          && originalJsInfo.getJsMemberType() != inheritedJsInfo.getJsMemberType()) {
+        // If they are inconsistent preserve the explicit annotation on the member so that the
+        // restriction checker can report the error.
+        continue;
+      }
+
+      if (inheritedJsInfo.getJsName() != null) {
+        // Found an overridden method of the same JsMember type one that customizes the name, done.
+        // If there are any conflicts with other overrides they will be reported by
+        // JsInteropRestrictionsChecker.
+        return JsInfo.Builder.from(inheritedJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
+      }
+
+      if (defaultJsInfo == originalJsInfo && !hasExplicitJsMemberAnnotation) {
+        // The original method does not have a JsMember annotation and traversing the list of
+        // overridden methods we found the first that has an explicit JsMember annotation.
+        // Keep it as the one to be used if none is found that customizes the name.
+        // This allows to "inherit" the JsMember type from the override.
+        defaultJsInfo = inheritedJsInfo;
+      }
+    }
+
+    // Don't inherit @JsAsync annotation from overridden methods.
+    return JsInfo.Builder.from(defaultJsInfo)
+        .setJsAsync(originalJsInfo.isJsAsync())
+        .setHasJsMemberAnnotation(hasExplicitJsMemberAnnotation)
+        .build();
+  }
+
   public boolean isPropertyGetter() {
     return isJsPropertyGetter() || getOrigin() == MethodOrigin.SYNTHETIC_PROPERTY_GETTER;
   }
@@ -722,7 +781,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return new AutoValue_MethodDescriptor.Builder()
         // Default values.
         .setVisibility(Visibility.PUBLIC)
-        .setJsInfo(JsInfo.NONE)
+        .setOriginalJsInfo(JsInfo.NONE)
         .setKtInfo(KtInfo.NONE)
         .setAbstract(false)
         .setSynchronized(false)
@@ -1044,7 +1103,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setVisibility(Visibility visibility);
 
-    public abstract Builder setJsInfo(JsInfo jsInfo);
+    public abstract Builder setOriginalJsInfo(JsInfo jsInfo);
 
     public abstract Builder setKtInfo(KtInfo ktInfo);
 

@@ -368,7 +368,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
         .setEnclosingTypeDescriptor(this)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
-        .setJsInfo(isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
         .setStatic(true)
         .build();
   }
@@ -828,7 +828,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     return MethodDescriptor.Builder.from(
             adjustParametersAndReturn(origin, targetMethodDescriptor, bridgeMethodDescriptor))
-        .setJsInfo(bridgeMethodDescriptor.getJsInfo())
+        .setOriginalJsInfo(bridgeMethodDescriptor.getJsInfo())
         .setEnclosingTypeDescriptor(this)
         .setDeclarationDescriptor(null)
         .makeBridge(origin, bridgeMethodDescriptor, targetMethodDescriptor)

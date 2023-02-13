@@ -37,6 +37,9 @@ public abstract class MemberDescriptor
     boolean isInstanceOfSupportMember();
   }
 
+  /** Return JsInfo computed from the member's annotation. */
+  public abstract JsInfo getOriginalJsInfo();
+
   public abstract JsInfo getJsInfo();
 
   abstract KtInfo getKtInfo();

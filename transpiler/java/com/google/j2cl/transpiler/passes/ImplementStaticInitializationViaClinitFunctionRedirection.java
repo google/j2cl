@@ -191,7 +191,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
             && fieldDescriptor.getOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD);
     return FieldDescriptor.Builder.from(fieldDescriptor)
         .setEnumConstant(false)
-        .setJsInfo(JsInfo.NONE)
+        .setOriginalJsInfo(JsInfo.NONE)
         .setOrigin(FieldOrigin.SYNTHETIC_BACKING_FIELD)
         .build();
   }
@@ -204,7 +204,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
         .setParameterTypeDescriptors(fieldDescriptor.getTypeDescriptor())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setVisibility(fieldDescriptor.getVisibility())
-        .setJsInfo(
+        .setOriginalJsInfo(
             fieldDescriptor.isJsProperty()
                 ? JsInfo.Builder.from(fieldDescriptor.getJsInfo())
                     .setJsMemberType(JsMemberType.SETTER)
@@ -223,7 +223,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
         .setOrigin(MethodOrigin.SYNTHETIC_PROPERTY_GETTER)
         .setReturnTypeDescriptor(fieldDescriptor.getTypeDescriptor())
         .setVisibility(fieldDescriptor.getVisibility())
-        .setJsInfo(
+        .setOriginalJsInfo(
             fieldDescriptor.isJsProperty()
                 ? JsInfo.Builder.from(fieldDescriptor.getJsInfo())
                     .setJsMemberType(JsMemberType.GETTER)
@@ -290,7 +290,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
-        .setJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
         .build();
   }
 }

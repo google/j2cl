@@ -53,7 +53,7 @@ public final class RuntimeMethods {
     // Create and return the method descriptor.
     return MethodCall.Builder.from(
             MethodDescriptor.newBuilder()
-                .setJsInfo(JsInfo.RAW)
+                .setOriginalJsInfo(JsInfo.RAW)
                 .setStatic(true)
                 .setEnclosingTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
                 .setName("$set")
@@ -139,7 +139,7 @@ public final class RuntimeMethods {
         ImmutableList.of(TypeDescriptors.get().nativeFunction, PrimitiveTypes.INT);
     return MethodCall.Builder.from(
             MethodDescriptor.newBuilder()
-                .setJsInfo(JsInfo.RAW)
+                .setOriginalJsInfo(JsInfo.RAW)
                 .setStatic(true)
                 .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangClass)
                 .setName("$get")
@@ -293,7 +293,7 @@ public final class RuntimeMethods {
       Expression rightOperand) {
     MethodDescriptor longUtilsMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
+            .setOriginalJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setEnclosingTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor())
             .setName(name)
@@ -322,7 +322,7 @@ public final class RuntimeMethods {
       Expression leftOperand, Expression rightOperand) {
     return MethodCall.Builder.from(
             MethodDescriptor.newBuilder()
-                .setJsInfo(
+                .setOriginalJsInfo(
                     JsInfo.newBuilder()
                         .setJsMemberType(JsMemberType.METHOD)
                         .setJsName("Math.imul")
@@ -605,7 +605,7 @@ public final class RuntimeMethods {
     MethodDescriptor methodDescriptor =
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(vmTypeDescriptor)
-            .setJsInfo(JsInfo.RAW)
+            .setOriginalJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setName(methodName)
             .setParameterDescriptors(parameterDescriptors.subList(0, arguments.size()))

@@ -196,7 +196,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   public Expression getPrototypeFieldAccess() {
     FieldDescriptor prototypeFieldDescriptor =
         FieldDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW_FIELD)
+            .setOriginalJsInfo(JsInfo.RAW_FIELD)
             .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .setName("prototype")

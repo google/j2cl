@@ -344,14 +344,23 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
           private MethodDescriptor rewriteMethodDescriptor(MethodDescriptor descriptor) {
             return descriptor.transform(
-                builder ->
-                    builder
-                        .setEnclosingTypeDescriptor(
-                            replaceTypeDescriptors(builder.getEnclosingTypeDescriptor(), fn))
-                        .setReturnTypeDescriptor(
-                            replaceTypeDescriptors(builder.getReturnTypeDescriptor(), fn))
-                        .updateParameterTypeDescriptors(
-                            replaceTypeDescriptors(builder.getParameterTypeDescriptors(), fn)));
+                builder -> {
+                  DeclaredTypeDescriptor newEnclosingTypeDescriptor =
+                      replaceTypeDescriptors(builder.getEnclosingTypeDescriptor(), fn);
+                  if (!newEnclosingTypeDescriptor.equals(builder.getEnclosingTypeDescriptor())
+                      && descriptor.isJsMember()) {
+                    // When a method moves from one class to another, it might no longer override
+                    // a JsMethod and loose the fact that it needs to remain a JsMethod in the
+                    // new class.
+                    builder.setOriginalJsInfo(descriptor.getJsInfo());
+                  }
+                  builder
+                      .setEnclosingTypeDescriptor(newEnclosingTypeDescriptor)
+                      .setReturnTypeDescriptor(
+                          replaceTypeDescriptors(builder.getReturnTypeDescriptor(), fn))
+                      .updateParameterTypeDescriptors(
+                          replaceTypeDescriptors(builder.getParameterTypeDescriptors(), fn));
+                });
           }
 
           private FieldDescriptor rewriteFieldDescriptor(FieldDescriptor descriptor) {
@@ -550,7 +559,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       Type autoValue, Collection<FieldDescriptor> excludedFields) {
     FieldDescriptor excludedFieldDescriptor =
         FieldDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW_FIELD)
+            .setOriginalJsInfo(JsInfo.RAW_FIELD)
             .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .setName("$excluded_fields")

@@ -50,7 +50,7 @@ public final class AstUtils {
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setName(MethodDescriptor.LOAD_MODULES_METHOD_NAME)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
-        .setJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setOriginalJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
         .build();
   }
 
@@ -66,7 +66,7 @@ public final class AstUtils {
             getImplicitConstructorVisibility(enclosingTypeDescriptor.getTypeDeclaration()))
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setConstructor(true)
-        .setJsInfo(jsInfo)
+        .setOriginalJsInfo(jsInfo)
         .build();
   }
 
@@ -451,7 +451,7 @@ public final class AstUtils {
                     .setEnclosingTypeDescriptor(lambdaType)
                     .setName(functionalMethodMangledName)
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
-                    .setJsInfo(JsInfo.RAW_FIELD)
+                    .setOriginalJsInfo(JsInfo.RAW_FIELD)
                     .build())
             .setQualifier(
                 new JavaScriptConstructorReference(lambdaType.getTypeDeclaration())
@@ -464,7 +464,7 @@ public final class AstUtils {
                     .setEnclosingTypeDescriptor(lambdaType)
                     .setName("$copy")
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
-                    .setJsInfo(JsInfo.RAW_FIELD)
+                    .setOriginalJsInfo(JsInfo.RAW_FIELD)
                     .setDeprecated(lambdaType.isDeprecated())
                     .build())
             .setQualifier(new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()))
@@ -700,7 +700,7 @@ public final class AstUtils {
     return Method.Builder.from(method)
         .setMethodDescriptor(
             MethodDescriptor.Builder.from(methodDescriptor)
-                .setJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
+                .setOriginalJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
                 .setEnclosingTypeDescriptor(targetTypeDescriptor)
                 .removeParameterOptionality()
                 .build())
@@ -856,7 +856,7 @@ public final class AstUtils {
                 .setConstructor(false)
                 .setAbstract(false)
                 .setDefaultMethod(false)
-                .setJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
+                .setOriginalJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
                 .removeParameterOptionality());
   }
 
@@ -958,7 +958,7 @@ public final class AstUtils {
         .setCompileTimeConstant(true)
         .setSynthetic(true)
         .setTypeDescriptor(PrimitiveTypes.INT)
-        .setJsInfo(JsInfo.NONE)
+        .setOriginalJsInfo(JsInfo.NONE)
         .setOrigin(FieldOrigin.SYNTHETIC_ORDINAL_FIELD)
         .build();
   }

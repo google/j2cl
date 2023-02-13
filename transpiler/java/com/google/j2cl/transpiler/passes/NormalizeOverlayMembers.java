@@ -146,7 +146,10 @@ public class NormalizeOverlayMembers extends NormalizationPass {
       return MethodCall.Builder.from(methodCall)
           .setTarget(
               methodDescriptor.transform(
-                  builder -> builder.setEnclosingTypeDescriptor(targetType).setJsInfo(JsInfo.NONE)))
+                  builder ->
+                      builder
+                          .setEnclosingTypeDescriptor(targetType)
+                          .setOriginalJsInfo(JsInfo.NONE)))
           .setQualifier(null)
           .build();
     }

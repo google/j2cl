@@ -557,7 +557,7 @@ class JavaEnvironment {
         .setTypeDescriptor(thisTypeDescriptor)
         .setStatic(isStatic)
         .setVisibility(visibility)
-        .setJsInfo(jsInfo)
+        .setOriginalJsInfo(jsInfo)
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
         .setDeclarationDescriptor(declarationFieldDescriptor)
@@ -844,7 +844,7 @@ class JavaEnvironment {
     boolean isStatic = isStatic(declarationMethodElement);
     Visibility visibility = getVisibility(declarationMethodElement);
     boolean isDefault = isDefaultMethod(declarationMethodElement);
-    JsInfo jsInfo = computeJsInfo(declarationMethodElement);
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(declarationMethodElement);
 
     boolean isNative =
         isNative(declarationMethodElement)
@@ -880,7 +880,7 @@ class JavaEnvironment {
         .setDeclarationDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
-        .setJsInfo(jsInfo)
+        .setOriginalJsInfo(jsInfo)
         .setJsFunction(isOrOverridesJsFunctionMethod(declarationMethodElement))
         .setVisibility(visibility)
         .setStatic(isStatic)
@@ -907,57 +907,6 @@ class JavaEnvironment {
   /** Returns true if the element is annotated with @HasNoSideEffects. */
   private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
     return AnnotationUtils.hasAnnotation(element, "javaemul.internal.annotations.HasNoSideEffects");
-  }
-
-  /** Checks overriding chain to compute JsInfo. */
-  private JsInfo computeJsInfo(ExecutableElement method) {
-    JsInfo originalJsInfo = JsInteropUtils.getJsInfo(method);
-    if (originalJsInfo.isJsOverlay()
-        || originalJsInfo.getJsName() != null
-        || originalJsInfo.getJsNamespace() != null) {
-      // Do not examine overridden methods if the method is marked as JsOverlay or it has a JsMember
-      // annotation that customizes the name.
-      return originalJsInfo;
-    }
-
-    boolean hasExplicitJsMemberAnnotation = hasJsMemberAnnotation(method);
-    JsInfo defaultJsInfo = originalJsInfo;
-    for (MethodSymbol overriddenMethod : getOverriddenMethods(method)) {
-      JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
-      if (inheritedJsInfo.getJsMemberType() == JsMemberType.NONE) {
-        continue;
-      }
-
-      if (hasExplicitJsMemberAnnotation
-          && originalJsInfo.getJsMemberType() != inheritedJsInfo.getJsMemberType()) {
-        // Only inherit from the overridden method if the JsMember types are consistent.
-        continue;
-      }
-
-      if (inheritedJsInfo.getJsName() != null) {
-        // Found an overridden method of the same JsMember type one that customizes the name, done.
-        // If there are any conflicts with other overrides they will be reported by
-        // JsInteropRestrictionsChecker.
-        return JsInfo.Builder.from(inheritedJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
-      }
-
-      if (defaultJsInfo == originalJsInfo && !hasExplicitJsMemberAnnotation) {
-        // The original method does not have a JsMember annotation and traversing the list of
-        // overridden methods we found the first that has an explicit JsMember annotation.
-        // Keep it as the one to be used if none is found that customizes the name.
-        // This allows to "inherit" the JsMember type from the override.
-        defaultJsInfo = inheritedJsInfo;
-      }
-    }
-
-    // Don't inherit @JsAsync annotation from overridden methods.
-    return JsInfo.Builder.from(defaultJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
-  }
-
-  private static boolean hasJsMemberAnnotation(ExecutableElement method) {
-    return JsInteropAnnotationUtils.getJsMethodAnnotation(method) != null
-        || JsInteropAnnotationUtils.getJsPropertyAnnotation(method) != null
-        || JsInteropAnnotationUtils.getJsConstructorAnnotation(method) != null;
   }
 
   public Set<MethodSymbol> getOverriddenMethods(ExecutableElement method) {

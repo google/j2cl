@@ -78,6 +78,7 @@ public final class JsInteropUtils {
             .setJsNamespace(JsInteropAnnotationUtils.getJsNamespace(memberAnnotation))
             .setJsOverlay(jsOverlay)
             .setJsAsync(jsAsync)
+            .setHasJsMemberAnnotation(memberAnnotation != null)
             .build();
       }
     }

@@ -544,7 +544,7 @@ public class NormalizeConstructors extends NormalizationPass {
                 .setName(getCtorName(constructor))
                 .setConstructor(false)
                 .setStatic(false)
-                .setJsInfo(JsInfo.NONE)
+                .setOriginalJsInfo(JsInfo.NONE)
                 .removeParameterOptionality()
                 .setOrigin(MethodOrigin.SYNTHETIC_CTOR_FOR_CONSTRUCTOR)
                 .setVisibility(Visibility.PUBLIC));
@@ -599,7 +599,8 @@ public class NormalizeConstructors extends NormalizationPass {
             .setConstructor(true)
             .setParameterDescriptors(
                 constructorDescriptor.getDeclarationDescriptor().getParameterDescriptors())
-            .setJsInfo(JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build())
+            .setOriginalJsInfo(
+                JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build())
             .build();
 
     return MethodDescriptor.Builder.from(javascriptConstructorDeclaration)
