@@ -1109,13 +1109,15 @@ class JavaEnvironment {
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(createDeclaredTypeDescriptor(classType.getEnclosingType()))
             .setSuperTypeDescriptorFactory(
-                () ->
-                    createDeclaredTypeDescriptor(
-                        javacTypes.directSupertypes(classType).stream()
-                            .filter(Predicates.not(Type::isInterface))
-                            .findFirst()
-                            .orElse(null),
-                        inNullMarkedScope))
+                td ->
+                    td.isInterface()
+                        ? null
+                        : createDeclaredTypeDescriptor(
+                            javacTypes.directSupertypes(classType).stream()
+                                .filter(Predicates.not(Type::isInterface))
+                                .findFirst()
+                                .orElse(null),
+                            inNullMarkedScope))
             .setInterfaceTypeDescriptorsFactory(
                 td ->
                     createTypeDescriptors(
