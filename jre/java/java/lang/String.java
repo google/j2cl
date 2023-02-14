@@ -32,6 +32,7 @@ import javaemul.internal.ArrayHelper;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
+import javaemul.internal.StringUtil;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
@@ -188,26 +189,6 @@ public final class String implements Comparable<String>, CharSequence,
   // J2cl uses it for String concat and thus it can not use string concatenation itself.
   public static @JsNonNull String valueOf(Object x) {
     return x == null ? "null" : x.toString();
-  }
-
-  /**
-   * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped
-   * dollar signs "$$", and removes all other lone backslashes, which serve as
-   * escapes in Java but are passed through literally in JavaScript.
-   *
-   * @skip
-   */
-  private static String translateReplaceString(String replaceStr) {
-    int pos = 0;
-    while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
-      if (replaceStr.charAt(pos + 1) == '$') {
-        replaceStr = replaceStr.substring(0, pos) + "$"
-            + replaceStr.substring(++pos);
-      } else {
-        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
-      }
-    }
-    return replaceStr;
   }
 
   private static Charset getCharset(String charsetName) throws UnsupportedEncodingException {
@@ -486,30 +467,11 @@ public final class String implements Comparable<String>, CharSequence,
   }
 
   public String replace(char from, char to) {
-    // Translate 'from' into unicode escape sequence (\\u and a four-digit hexadecimal number).
-    // Escape sequence replacement is used instead of a string literal replacement
-    // in order to escape regexp special characters (e.g. '.').
-    String hex = Integer.toHexString(from);
-    String regex = "\\u" + "0000".substring(hex.length()) + hex;
-    String replace = NativeString.fromCharCode(to);
-    return nativeReplaceAll(regex, replace);
+    return StringUtil.replace(this, from, to, /* ignoreCase= */ false);
   }
 
   public String replace(CharSequence from, CharSequence to) {
-    // Implementation note: This uses a regex replacement instead of
-    // a string literal replacement because Safari does not
-    // follow the spec for "$$" in the replacement string: it
-    // will insert a literal "$$". IE and Firefox, meanwhile,
-    // treat "$$" as "$".
-
-    // Escape regex special characters from literal replacement string.
-    String regex =
-        from.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
-    // Escape $ since it is for match backrefs and \ since it is used to escape
-    // $.
-    String replacement = to.toString().replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
-
-    return replaceAll(regex, replacement);
+    return StringUtil.replace(this, from, to, /* ignoreCase= */ false);
   }
 
   /**
@@ -521,12 +483,7 @@ public final class String implements Comparable<String>, CharSequence,
    * TODO(jat): properly handle Java regex syntax
    */
   public String replaceAll(String regex, String replace) {
-    replace = translateReplaceString(replace);
-    return nativeReplaceAll(regex, replace);
-  }
-
-  private String nativeReplaceAll(String regex, String replace) {
-    return asNativeString().replace(new NativeRegExp(regex, "g"), replace);
+    return StringUtil.replaceAll(this, regex, replace, /* ignoreCase= */ false);
   }
 
   /**
@@ -538,9 +495,17 @@ public final class String implements Comparable<String>, CharSequence,
    * TODO(jat): properly handle Java regex syntax
    */
   public String replaceFirst(String regex, String replace) {
-    replace = translateReplaceString(replace);
-    NativeRegExp jsRegEx = new NativeRegExp(regex);
-    return asNativeString().replace(jsRegEx, replace);
+    return StringUtil.replaceFirst(this, regex, replace, /* ignoreCase= */ false);
+  }
+
+  // TODO: should live on a utility instead of the String API.
+  public String nativeReplace(NativeRegExp regExp, char replacement) {
+    return asNativeString().replace(regExp, NativeString.fromCharCode(replacement));
+  }
+
+  // TODO: should live on a utility instead of the String API.
+  public String nativeReplace(NativeRegExp regExp, String replacement) {
+    return asNativeString().replace(regExp, replacement);
   }
 
   /**

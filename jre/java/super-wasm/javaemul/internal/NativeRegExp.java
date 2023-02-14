@@ -44,6 +44,42 @@ public class NativeRegExp {
     return test(this.instance, value);
   }
 
+  /**
+   * This method converts Java-escaped dollar signs "\$" into JavaScript-escaped dollar signs "$$",
+   * and removes all other lone backslashes, which serve as escapes in Java but are passed through
+   * literally in JavaScript.
+   */
+  public static String translateReplaceString(String replaceStr) {
+    int pos = 0;
+    while (0 <= (pos = replaceStr.indexOf("\\", pos))) {
+      if (replaceStr.charAt(pos + 1) == '$') {
+        replaceStr = replaceStr.substring(0, pos) + "$" + replaceStr.substring(++pos);
+      } else {
+        replaceStr = replaceStr.substring(0, pos) + replaceStr.substring(++pos);
+      }
+    }
+    return replaceStr;
+  }
+
+  public static String escapeForRegExpSearch(char c) {
+    // Translate 'from' into unicode escape sequence (\\u and a four-digit hexadecimal number).
+    // Escape sequence replacement is used instead of a string literal replacement
+    // in order to escape regexp special characters (e.g. '.').
+    String hex = Integer.toHexString(c);
+    return "\\u" + "0000".substring(hex.length()) + hex;
+  }
+
+  /** Escapes the given CharSerquence such that is can be used in a RegExp search. */
+  public static String escapeForRegExpSearch(CharSequence str) {
+    return str.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
+  }
+
+  /** Escapes the given CharSerquence such that is can be used in a RegExp repleacement. */
+  public static String escapeForRegExpReplacement(CharSequence str) {
+    // Escape $ since it is for match backrefs and \ since it is used to escape $.
+    return str.toString().toString().replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
+  }
+
   public WasmExtern toJs() {
     return instance;
   }
