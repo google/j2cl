@@ -1,11 +1,76 @@
-;;; Code for packageinfo.Outer [static fields]
-(global $f_$initialized__packageinfo_Outer (mut i32) (i32.const 0))
+ ;;; Code for packageinfo.Outer [type definition]
+ (type $packageinfo.Outer (struct_subtype 
+  (field $vtable (ref $packageinfo.Outer.vtable)) 
+  (field $itable (ref $packageinfo.Outer.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $packageinfo.Outer.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $packageinfo.Outer.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for packageinfo.Outer.Inner [static fields]
-(global $f_$initialized__packageinfo_Outer_Inner (mut i32) (i32.const 0))
+ ;;; Code for packageinfo.Outer.Inner [type definition]
+ (type $packageinfo.Outer.Inner (struct_subtype 
+  (field $vtable (ref $packageinfo.Outer.Inner.vtable)) 
+  (field $itable (ref $packageinfo.Outer.Inner.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__packageinfo_Outer_Inner (ref null $packageinfo.Outer))
+   $java.lang.Object)
+ )
+ (type $packageinfo.Outer.Inner.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $packageinfo.Outer.Inner.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for packageinfo.subpackage.Foo [static fields]
-(global $f_$initialized__packageinfo_subpackage_Foo (mut i32) (i32.const 0))
+ ;;; Code for packageinfo.subpackage.Foo [type definition]
+ (type $packageinfo.subpackage.Foo (struct_subtype 
+  (field $vtable (ref $packageinfo.subpackage.Foo.vtable)) 
+  (field $itable (ref $packageinfo.subpackage.Foo.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_outer__packageinfo_subpackage_Foo (mut (ref null $packageinfo.Outer)))
+   $java.lang.Object)
+ )
+ (type $packageinfo.subpackage.Foo.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $packageinfo.subpackage.Foo.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for packageinfo.Outer [vtable.init]
 (global $packageinfo.Outer.vtable (ref $packageinfo.Outer.vtable) 
@@ -70,29 +135,16 @@
   (ref.null struct)
  ))
 
-;;; Code for packageinfo.Outer [CLASS]
-(type $packageinfo.Outer (struct_subtype 
- (field $vtable (ref $packageinfo.Outer.vtable)) 
- (field $itable (ref $packageinfo.Outer.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $packageinfo.Outer.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $packageinfo.Outer.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for packageinfo.Outer [static fields]
+(global $f_$initialized__packageinfo_Outer (mut i32) (i32.const 0))
+
+;;; Code for packageinfo.Outer.Inner [static fields]
+(global $f_$initialized__packageinfo_Outer_Inner (mut i32) (i32.const 0))
+
+;;; Code for packageinfo.subpackage.Foo [static fields]
+(global $f_$initialized__packageinfo_subpackage_Foo (mut i32) (i32.const 0))
+
+;;; Code for packageinfo.Outer [methods]
 
 ;;; Outer Outer.$create()
 (func $$create__@packageinfo.Outer
@@ -162,30 +214,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@packageinfo.Outer)
 
-;;; Code for packageinfo.Outer.Inner [CLASS]
-(type $packageinfo.Outer.Inner (struct_subtype 
- (field $vtable (ref $packageinfo.Outer.Inner.vtable)) 
- (field $itable (ref $packageinfo.Outer.Inner.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__packageinfo_Outer_Inner (ref null $packageinfo.Outer))
-  $java.lang.Object)
-)
-(type $packageinfo.Outer.Inner.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $packageinfo.Outer.Inner.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for packageinfo.Outer.Inner [methods]
 
 ;;; Inner Inner.$create(Outer $outer_this)
 (func $$create__packageinfo_Outer@packageinfo.Outer.Inner
@@ -257,30 +286,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@packageinfo.Outer.Inner)
 
-;;; Code for packageinfo.subpackage.Foo [CLASS]
-(type $packageinfo.subpackage.Foo (struct_subtype 
- (field $vtable (ref $packageinfo.subpackage.Foo.vtable)) 
- (field $itable (ref $packageinfo.subpackage.Foo.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_outer__packageinfo_subpackage_Foo (mut (ref null $packageinfo.Outer)))
-  $java.lang.Object)
-)
-(type $packageinfo.subpackage.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $packageinfo.subpackage.Foo.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for packageinfo.subpackage.Foo [methods]
 
 ;;; Foo Foo.$create()
 (func $$create__@packageinfo.subpackage.Foo

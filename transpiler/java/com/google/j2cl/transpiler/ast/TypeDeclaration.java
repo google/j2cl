@@ -347,7 +347,6 @@ public abstract class TypeDeclaration
   /** Returns the depths of this type in the class hierarchy tree. */
   @Memoized
   public int getClassHierarchyDepth() {
-    checkState(!isInterface());
     if (getSuperTypeDeclaration() == null) {
       return 1;
     }

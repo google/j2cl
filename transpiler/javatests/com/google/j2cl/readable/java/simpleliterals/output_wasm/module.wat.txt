@@ -1,5 +1,27 @@
-;;; Code for simpleliterals.SimpleLiterals [static fields]
-(global $f_$initialized__simpleliterals_SimpleLiterals (mut i32) (i32.const 0))
+ ;;; Code for simpleliterals.SimpleLiterals [type definition]
+ (type $simpleliterals.SimpleLiterals (struct_subtype 
+  (field $vtable (ref $simpleliterals.SimpleLiterals.vtable)) 
+  (field $itable (ref $simpleliterals.SimpleLiterals.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $simpleliterals.SimpleLiterals.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_main__void (ref $function.m_main__void))
+   $java.lang.Object.vtable)
+ )
+ (type $simpleliterals.SimpleLiterals.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for simpleliterals.SimpleLiterals [vtable.init]
 (global $simpleliterals.SimpleLiterals.vtable (ref $simpleliterals.SimpleLiterals.vtable) 
@@ -23,30 +45,10 @@
   (ref.null struct)
  ))
 
-;;; Code for simpleliterals.SimpleLiterals [CLASS]
-(type $simpleliterals.SimpleLiterals (struct_subtype 
- (field $vtable (ref $simpleliterals.SimpleLiterals.vtable)) 
- (field $itable (ref $simpleliterals.SimpleLiterals.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $simpleliterals.SimpleLiterals.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_main__void (ref $function.m_main__void))
-  $java.lang.Object.vtable)
-)
-(type $simpleliterals.SimpleLiterals.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for simpleliterals.SimpleLiterals [static fields]
+(global $f_$initialized__simpleliterals_SimpleLiterals (mut i32) (i32.const 0))
+
+;;; Code for simpleliterals.SimpleLiterals [methods]
 
 ;;; SimpleLiterals SimpleLiterals.$create()
 (func $$create__@simpleliterals.SimpleLiterals

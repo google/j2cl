@@ -1,5 +1,26 @@
-;;; Code for importsfullyqualified.ImportsFullyQualified [static fields]
-(global $f_$initialized__importsfullyqualified_ImportsFullyQualified (mut i32) (i32.const 0))
+ ;;; Code for importsfullyqualified.ImportsFullyQualified [type definition]
+ (type $importsfullyqualified.ImportsFullyQualified (struct_subtype 
+  (field $vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable)) 
+  (field $itable (ref $importsfullyqualified.ImportsFullyQualified.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $importsfullyqualified.ImportsFullyQualified.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $importsfullyqualified.ImportsFullyQualified.itable (struct_subtype 
+ (field $slot0 (ref $java.io.Serializable.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [vtable.init]
 (global $importsfullyqualified.ImportsFullyQualified.vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable) 
@@ -23,29 +44,10 @@
   (ref.null struct)
  ))
 
-;;; Code for importsfullyqualified.ImportsFullyQualified [CLASS]
-(type $importsfullyqualified.ImportsFullyQualified (struct_subtype 
- (field $vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable)) 
- (field $itable (ref $importsfullyqualified.ImportsFullyQualified.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $importsfullyqualified.ImportsFullyQualified.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $importsfullyqualified.ImportsFullyQualified.itable (struct_subtype 
-(field $slot0 (ref $java.io.Serializable.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for importsfullyqualified.ImportsFullyQualified [static fields]
+(global $f_$initialized__importsfullyqualified_ImportsFullyQualified (mut i32) (i32.const 0))
+
+;;; Code for importsfullyqualified.ImportsFullyQualified [methods]
 
 ;;; ImportsFullyQualified ImportsFullyQualified.$create()
 (func $$create__@importsfullyqualified.ImportsFullyQualified

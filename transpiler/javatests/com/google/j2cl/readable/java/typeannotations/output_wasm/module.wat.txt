@@ -1,23 +1,168 @@
-;;; Code for typeannotations.ParametricType [static fields]
-(global $f_$initialized__typeannotations_ParametricType (mut i32) (i32.const 0))
+ ;;; Code for typeannotations.ParametricType [type definition]
+ (type $typeannotations.ParametricType.vtable (struct 
+  (field $m_m__java_lang_String__java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_String__java_lang_Object__java_lang_Object))
+  (field $m_m__java_util_List__java_lang_Object__java_util_List (ref $function.m_m__java_util_List__java_lang_Object__java_util_List))
+  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
+  )
+ )
 
-;;; Code for typeannotations.AbstractType [static fields]
-(global $f_$initialized__typeannotations_AbstractType (mut i32) (i32.const 0))
+ ;;; Code for typeannotations.AbstractType [type definition]
+ (type $typeannotations.AbstractType (struct_subtype 
+  (field $vtable (ref $typeannotations.AbstractType.vtable)) 
+  (field $itable (ref $typeannotations.AbstractType.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $typeannotations.AbstractType.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
+   $java.lang.Object.vtable)
+ )
+ (type $typeannotations.AbstractType.itable (struct_subtype 
+ (field $slot0 (ref $typeannotations.ParametricType.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for typeannotations.AbstractTypeNonNull [static fields]
-(global $f_$initialized__typeannotations_AbstractTypeNonNull (mut i32) (i32.const 0))
+ ;;; Code for typeannotations.AbstractTypeNonNull [type definition]
+ (type $typeannotations.AbstractTypeNonNull (struct_subtype 
+  (field $vtable (ref $typeannotations.AbstractTypeNonNull.vtable)) 
+  (field $itable (ref $typeannotations.AbstractTypeNonNull.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $typeannotations.AbstractTypeNonNull.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
+   $java.lang.Object.vtable)
+ )
+ (type $typeannotations.AbstractTypeNonNull.itable (struct_subtype 
+ (field $slot0 (ref $typeannotations.ParametricType.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for typeannotations.Parent [static fields]
-(global $f_$initialized__typeannotations_Parent (mut i32) (i32.const 0))
+ ;;; Code for typeannotations.Parent [type definition]
+ (type $typeannotations.Parent (struct_subtype 
+  (field $vtable (ref $typeannotations.Parent.vtable)) 
+  (field $itable (ref $typeannotations.Parent.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $typeannotations.Parent.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (ref $function.m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent))
+  (field $m_m__java_util_List__typeannotations_Parent__java_util_List (ref $function.m_m__java_util_List__typeannotations_Parent__java_util_List))
+   $java.lang.Object.vtable)
+ )
+ (type $typeannotations.Parent.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for typeannotations.ChildWithNullableParent [static fields]
-(global $f_$initialized__typeannotations_ChildWithNullableParent (mut i32) (i32.const 0))
+ ;;; Code for typeannotations.TypeAnnotations [type definition]
+ (type $typeannotations.TypeAnnotations (struct_subtype 
+  (field $vtable (ref $typeannotations.TypeAnnotations.vtable)) 
+  (field $itable (ref $typeannotations.TypeAnnotations.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $typeannotations.TypeAnnotations.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $typeannotations.TypeAnnotations.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for typeannotations.ChildWithNonNullableParent [static fields]
-(global $f_$initialized__typeannotations_ChildWithNonNullableParent (mut i32) (i32.const 0))
+ ;;; Code for typeannotations.ChildWithNullableParent [type definition]
+ (type $typeannotations.ChildWithNullableParent (struct_subtype 
+  (field $vtable (ref $typeannotations.ChildWithNullableParent.vtable)) 
+  (field $itable (ref $typeannotations.ChildWithNullableParent.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $typeannotations.Parent)
+ )
+ (type $typeannotations.ChildWithNullableParent.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (ref $function.m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent))
+  (field $m_m__java_util_List__typeannotations_Parent__java_util_List (ref $function.m_m__java_util_List__typeannotations_Parent__java_util_List))
+  (field $m_m__java_lang_String__java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_String__java_lang_Object__java_lang_Object))
+  (field $m_m__java_util_List__java_lang_Object__java_util_List (ref $function.m_m__java_util_List__java_lang_Object__java_util_List))
+  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
+   $typeannotations.Parent.vtable)
+ )
+ (type $typeannotations.ChildWithNullableParent.itable (struct_subtype 
+ (field $slot0 (ref $typeannotations.ParametricType.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $typeannotations.Parent.itable))
 
-;;; Code for typeannotations.TypeAnnotations [static fields]
-(global $f_$initialized__typeannotations_TypeAnnotations (mut i32) (i32.const 0))
+ ;;; Code for typeannotations.ChildWithNonNullableParent [type definition]
+ (type $typeannotations.ChildWithNonNullableParent (struct_subtype 
+  (field $vtable (ref $typeannotations.ChildWithNonNullableParent.vtable)) 
+  (field $itable (ref $typeannotations.ChildWithNonNullableParent.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $typeannotations.Parent)
+ )
+ (type $typeannotations.ChildWithNonNullableParent.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (ref $function.m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent))
+  (field $m_m__java_util_List__typeannotations_Parent__java_util_List (ref $function.m_m__java_util_List__typeannotations_Parent__java_util_List))
+  (field $m_m__java_lang_String__java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_String__java_lang_Object__java_lang_Object))
+  (field $m_m__java_util_List__java_lang_Object__java_util_List (ref $function.m_m__java_util_List__java_lang_Object__java_util_List))
+  (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
+   $typeannotations.Parent.vtable)
+ )
+ (type $typeannotations.ChildWithNonNullableParent.itable (struct_subtype 
+ (field $slot0 (ref $typeannotations.ParametricType.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $typeannotations.Parent.itable))
 
 ;;; Code for typeannotations.Parent [vtable.init]
 (global $typeannotations.Parent.vtable (ref $typeannotations.Parent.vtable) 
@@ -123,13 +268,28 @@
   (ref.null struct)
  ))
 
-;;; Code for typeannotations.ParametricType [INTERFACE]
-(type $typeannotations.ParametricType.vtable (struct 
- (field $m_m__java_lang_String__java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_String__java_lang_Object__java_lang_Object))
- (field $m_m__java_util_List__java_lang_Object__java_util_List (ref $function.m_m__java_util_List__java_lang_Object__java_util_List))
- (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
- )
-)
+;;; Code for typeannotations.ParametricType [static fields]
+(global $f_$initialized__typeannotations_ParametricType (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.AbstractType [static fields]
+(global $f_$initialized__typeannotations_AbstractType (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.AbstractTypeNonNull [static fields]
+(global $f_$initialized__typeannotations_AbstractTypeNonNull (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.Parent [static fields]
+(global $f_$initialized__typeannotations_Parent (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.ChildWithNullableParent [static fields]
+(global $f_$initialized__typeannotations_ChildWithNullableParent (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.ChildWithNonNullableParent [static fields]
+(global $f_$initialized__typeannotations_ChildWithNonNullableParent (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.TypeAnnotations [static fields]
+(global $f_$initialized__typeannotations_TypeAnnotations (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.ParametricType [methods]
 
 ;;; List<T> ParametricType.m(List<Map<String[], Map<List<String>[], String[]>>> l)
 (func $m_m__java_util_List__java_util_List@typeannotations.ParametricType
@@ -164,30 +324,7 @@
  )
 )
 
-;;; Code for typeannotations.AbstractType [CLASS]
-(type $typeannotations.AbstractType (struct_subtype 
- (field $vtable (ref $typeannotations.AbstractType.vtable)) 
- (field $itable (ref $typeannotations.AbstractType.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $typeannotations.AbstractType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
-  $java.lang.Object.vtable)
-)
-(type $typeannotations.AbstractType.itable (struct_subtype 
-(field $slot0 (ref $typeannotations.ParametricType.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for typeannotations.AbstractType [methods]
 
 ;;; void AbstractType.$ctor()
 (func $$ctor__void_$p_typeannotations_AbstractType@typeannotations.AbstractType
@@ -245,30 +382,7 @@
  )
 )
 
-;;; Code for typeannotations.AbstractTypeNonNull [CLASS]
-(type $typeannotations.AbstractTypeNonNull (struct_subtype 
- (field $vtable (ref $typeannotations.AbstractTypeNonNull.vtable)) 
- (field $itable (ref $typeannotations.AbstractTypeNonNull.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $typeannotations.AbstractTypeNonNull.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
-  $java.lang.Object.vtable)
-)
-(type $typeannotations.AbstractTypeNonNull.itable (struct_subtype 
-(field $slot0 (ref $typeannotations.ParametricType.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for typeannotations.AbstractTypeNonNull [methods]
 
 ;;; void AbstractTypeNonNull.$ctor()
 (func $$ctor__void_$p_typeannotations_AbstractTypeNonNull@typeannotations.AbstractTypeNonNull
@@ -326,31 +440,7 @@
  )
 )
 
-;;; Code for typeannotations.Parent [CLASS]
-(type $typeannotations.Parent (struct_subtype 
- (field $vtable (ref $typeannotations.Parent.vtable)) 
- (field $itable (ref $typeannotations.Parent.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $typeannotations.Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (ref $function.m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent))
- (field $m_m__java_util_List__typeannotations_Parent__java_util_List (ref $function.m_m__java_util_List__typeannotations_Parent__java_util_List))
-  $java.lang.Object.vtable)
-)
-(type $typeannotations.Parent.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for typeannotations.Parent [methods]
 
 ;;; Parent Parent.$create()
 (func $$create__@typeannotations.Parent
@@ -456,34 +546,91 @@
 )
 (elem declare func $m_getClass__java_lang_Class@typeannotations.Parent)
 
-;;; Code for typeannotations.ChildWithNullableParent [CLASS]
-(type $typeannotations.ChildWithNullableParent (struct_subtype 
- (field $vtable (ref $typeannotations.ChildWithNullableParent.vtable)) 
- (field $itable (ref $typeannotations.ChildWithNullableParent.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $typeannotations.Parent)
+;;; Code for typeannotations.TypeAnnotations [methods]
+
+;;; TypeAnnotations TypeAnnotations.$create()
+(func $$create__@typeannotations.TypeAnnotations
+ (result (ref null $typeannotations.TypeAnnotations))
+ ;;@ typeannotations/TypeAnnotations.java:50:13
+ (local $$instance (ref null $typeannotations.TypeAnnotations))
+ (block
+  ;; TypeAnnotations $instance = new TypeAnnotations.<init>(0);
+  ;;@ typeannotations/TypeAnnotations.java:50:13
+  (local.set $$instance (struct.new $typeannotations.TypeAnnotations (ref.as_non_null (global.get $typeannotations.TypeAnnotations.vtable)) (ref.as_non_null (global.get $typeannotations.TypeAnnotations.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ typeannotations/TypeAnnotations.java:50:13
+  (call $$ctor__void_$p_typeannotations_TypeAnnotations@typeannotations.TypeAnnotations (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ typeannotations/TypeAnnotations.java:50:13
+  (return (local.get $$instance))
+ )
 )
-(type $typeannotations.ChildWithNullableParent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (ref $function.m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent))
- (field $m_m__java_util_List__typeannotations_Parent__java_util_List (ref $function.m_m__java_util_List__typeannotations_Parent__java_util_List))
- (field $m_m__java_lang_String__java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_String__java_lang_Object__java_lang_Object))
- (field $m_m__java_util_List__java_lang_Object__java_util_List (ref $function.m_m__java_util_List__java_lang_Object__java_util_List))
- (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
-  $typeannotations.Parent.vtable)
+
+;;; void TypeAnnotations.$ctor()
+(func $$ctor__void_$p_typeannotations_TypeAnnotations@typeannotations.TypeAnnotations
+ (param $this (ref null $typeannotations.TypeAnnotations))
+ ;;@ typeannotations/TypeAnnotations.java:50:13
+ (block
+  ;; typeannotations.TypeAnnotations.$clinit();
+  ;;@ typeannotations/TypeAnnotations.java:50:13
+  (call $$clinit__void@typeannotations.TypeAnnotations )
+  ;; Object.this.$ctor();
+  ;;@ typeannotations/TypeAnnotations.java:50:13
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
 )
-(type $typeannotations.ChildWithNullableParent.itable (struct_subtype 
-(field $slot0 (ref $typeannotations.ParametricType.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $typeannotations.Parent.itable))
+
+;;; void TypeAnnotations.main()
+(func $m_main__void@typeannotations.TypeAnnotations
+ ;;@ typeannotations/TypeAnnotations.java:51:21
+ (local $list (ref null $java.lang.Object))
+ (block
+  ;; typeannotations.TypeAnnotations.$clinit();
+  ;;@ typeannotations/TypeAnnotations.java:51:28
+  (call $$clinit__void@typeannotations.TypeAnnotations )
+  ;; List<String> list = java.util.ArrayList.$create();
+  ;;@ typeannotations/TypeAnnotations.java:53:4
+  (local.set $list (call $$create__@java.util.ArrayList ))
+ )
+)
+
+;;; void TypeAnnotations.$clinit()
+(func $$clinit__void@typeannotations.TypeAnnotations
+ ;;@ typeannotations/TypeAnnotations.java:50:13
+ (block
+  ;; if (typeannotations.TypeAnnotations.$initialized) return;
+  ;;@ typeannotations/TypeAnnotations.java:50:13
+  (if (global.get $f_$initialized__typeannotations_TypeAnnotations)
+   (then
+    ;; return;
+    ;;@ typeannotations/TypeAnnotations.java:50:13
+    (return )
+   )
+  )
+  ;; (typeannotations.TypeAnnotations.$initialized = true);
+  ;;@ typeannotations/TypeAnnotations.java:50:13
+  (global.set $f_$initialized__typeannotations_TypeAnnotations (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ typeannotations/TypeAnnotations.java:50:13
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> TypeAnnotations.getClass()
+(func $m_getClass__java_lang_Class@typeannotations.TypeAnnotations
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $typeannotations.TypeAnnotations))
+ (local.set $this (ref.cast_static $typeannotations.TypeAnnotations (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getTypeannotations.TypeAnnotations();
+  (return (call $function.no.side.effects.$getTypeannotations.TypeAnnotations__java_lang_Class (ref.func $$getTypeannotations.TypeAnnotations__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@typeannotations.TypeAnnotations)
+
+;;; Code for typeannotations.ChildWithNullableParent [methods]
 
 ;;; ChildWithNullableParent ChildWithNullableParent.$create()
 (func $$create__@typeannotations.ChildWithNullableParent
@@ -609,34 +756,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@typeannotations.ChildWithNullableParent)
 
-;;; Code for typeannotations.ChildWithNonNullableParent [CLASS]
-(type $typeannotations.ChildWithNonNullableParent (struct_subtype 
- (field $vtable (ref $typeannotations.ChildWithNonNullableParent.vtable)) 
- (field $itable (ref $typeannotations.ChildWithNonNullableParent.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $typeannotations.Parent)
-)
-(type $typeannotations.ChildWithNonNullableParent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (ref $function.m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent))
- (field $m_m__java_util_List__typeannotations_Parent__java_util_List (ref $function.m_m__java_util_List__typeannotations_Parent__java_util_List))
- (field $m_m__java_lang_String__java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_String__java_lang_Object__java_lang_Object))
- (field $m_m__java_util_List__java_lang_Object__java_util_List (ref $function.m_m__java_util_List__java_lang_Object__java_util_List))
- (field $m_m__java_util_List__java_util_List (ref $function.m_m__java_util_List__java_util_List))
-  $typeannotations.Parent.vtable)
-)
-(type $typeannotations.ChildWithNonNullableParent.itable (struct_subtype 
-(field $slot0 (ref $typeannotations.ParametricType.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $typeannotations.Parent.itable))
+;;; Code for typeannotations.ChildWithNonNullableParent [methods]
 
 ;;; ChildWithNonNullableParent ChildWithNonNullableParent.$create()
 (func $$create__@typeannotations.ChildWithNonNullableParent
@@ -761,109 +881,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@typeannotations.ChildWithNonNullableParent)
-
-;;; Code for typeannotations.TypeAnnotations [CLASS]
-(type $typeannotations.TypeAnnotations (struct_subtype 
- (field $vtable (ref $typeannotations.TypeAnnotations.vtable)) 
- (field $itable (ref $typeannotations.TypeAnnotations.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $typeannotations.TypeAnnotations.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $typeannotations.TypeAnnotations.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
-
-;;; TypeAnnotations TypeAnnotations.$create()
-(func $$create__@typeannotations.TypeAnnotations
- (result (ref null $typeannotations.TypeAnnotations))
- ;;@ typeannotations/TypeAnnotations.java:50:13
- (local $$instance (ref null $typeannotations.TypeAnnotations))
- (block
-  ;; TypeAnnotations $instance = new TypeAnnotations.<init>(0);
-  ;;@ typeannotations/TypeAnnotations.java:50:13
-  (local.set $$instance (struct.new $typeannotations.TypeAnnotations (ref.as_non_null (global.get $typeannotations.TypeAnnotations.vtable)) (ref.as_non_null (global.get $typeannotations.TypeAnnotations.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ typeannotations/TypeAnnotations.java:50:13
-  (call $$ctor__void_$p_typeannotations_TypeAnnotations@typeannotations.TypeAnnotations (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
-  ;;@ typeannotations/TypeAnnotations.java:50:13
-  (return (local.get $$instance))
- )
-)
-
-;;; void TypeAnnotations.$ctor()
-(func $$ctor__void_$p_typeannotations_TypeAnnotations@typeannotations.TypeAnnotations
- (param $this (ref null $typeannotations.TypeAnnotations))
- ;;@ typeannotations/TypeAnnotations.java:50:13
- (block
-  ;; typeannotations.TypeAnnotations.$clinit();
-  ;;@ typeannotations/TypeAnnotations.java:50:13
-  (call $$clinit__void@typeannotations.TypeAnnotations )
-  ;; Object.this.$ctor();
-  ;;@ typeannotations/TypeAnnotations.java:50:13
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; void TypeAnnotations.main()
-(func $m_main__void@typeannotations.TypeAnnotations
- ;;@ typeannotations/TypeAnnotations.java:51:21
- (local $list (ref null $java.lang.Object))
- (block
-  ;; typeannotations.TypeAnnotations.$clinit();
-  ;;@ typeannotations/TypeAnnotations.java:51:28
-  (call $$clinit__void@typeannotations.TypeAnnotations )
-  ;; List<String> list = java.util.ArrayList.$create();
-  ;;@ typeannotations/TypeAnnotations.java:53:4
-  (local.set $list (call $$create__@java.util.ArrayList ))
- )
-)
-
-;;; void TypeAnnotations.$clinit()
-(func $$clinit__void@typeannotations.TypeAnnotations
- ;;@ typeannotations/TypeAnnotations.java:50:13
- (block
-  ;; if (typeannotations.TypeAnnotations.$initialized) return;
-  ;;@ typeannotations/TypeAnnotations.java:50:13
-  (if (global.get $f_$initialized__typeannotations_TypeAnnotations)
-   (then
-    ;; return;
-    ;;@ typeannotations/TypeAnnotations.java:50:13
-    (return )
-   )
-  )
-  ;; (typeannotations.TypeAnnotations.$initialized = true);
-  ;;@ typeannotations/TypeAnnotations.java:50:13
-  (global.set $f_$initialized__typeannotations_TypeAnnotations (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ typeannotations/TypeAnnotations.java:50:13
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> TypeAnnotations.getClass()
-(func $m_getClass__java_lang_Class@typeannotations.TypeAnnotations
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $typeannotations.TypeAnnotations))
- (local.set $this (ref.cast_static $typeannotations.TypeAnnotations (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTypeannotations.TypeAnnotations();
-  (return (call $function.no.side.effects.$getTypeannotations.TypeAnnotations__java_lang_Class (ref.func $$getTypeannotations.TypeAnnotations__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@typeannotations.TypeAnnotations)

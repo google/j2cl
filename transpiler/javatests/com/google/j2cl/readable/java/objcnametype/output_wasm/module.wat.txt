@@ -1,5 +1,26 @@
-;;; Code for objcnametype.ObjCNameType [static fields]
-(global $f_$initialized__objcnametype_ObjCNameType (mut i32) (i32.const 0))
+ ;;; Code for objcnametype.ObjCNameType [type definition]
+ (type $objcnametype.ObjCNameType (struct_subtype 
+  (field $vtable (ref $objcnametype.ObjCNameType.vtable)) 
+  (field $itable (ref $objcnametype.ObjCNameType.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $objcnametype.ObjCNameType.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $objcnametype.ObjCNameType.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for objcnametype.ObjCNameType [vtable.init]
 (global $objcnametype.ObjCNameType.vtable (ref $objcnametype.ObjCNameType.vtable) 
@@ -22,29 +43,10 @@
   (ref.null struct)
  ))
 
-;;; Code for objcnametype.ObjCNameType [CLASS]
-(type $objcnametype.ObjCNameType (struct_subtype 
- (field $vtable (ref $objcnametype.ObjCNameType.vtable)) 
- (field $itable (ref $objcnametype.ObjCNameType.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $objcnametype.ObjCNameType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $objcnametype.ObjCNameType.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for objcnametype.ObjCNameType [static fields]
+(global $f_$initialized__objcnametype_ObjCNameType (mut i32) (i32.const 0))
+
+;;; Code for objcnametype.ObjCNameType [methods]
 
 ;;; ObjCNameType ObjCNameType.$create()
 (func $$create__@objcnametype.ObjCNameType

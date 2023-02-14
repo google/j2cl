@@ -1,11 +1,79 @@
-;;; Code for jsinnerclass.Main [static fields]
-(global $f_$initialized__jsinnerclass_Main (mut i32) (i32.const 0))
+ ;;; Code for jsinnerclass.Main [type definition]
+ (type $jsinnerclass.Main (struct_subtype 
+  (field $vtable (ref $jsinnerclass.Main.vtable)) 
+  (field $itable (ref $jsinnerclass.Main.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsinnerclass.Main.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $jsinnerclass.Main.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsinnerclass.Main.Outer.Inner [static fields]
-(global $f_$initialized__jsinnerclass_Main_Outer_Inner (mut i32) (i32.const 0))
+ ;;; Code for jsinnerclass.Main.Outer.Inner [type definition]
+ (type $jsinnerclass.Main.Outer.Inner (struct_subtype 
+  (field $vtable (ref $jsinnerclass.Main.Outer.Inner.vtable)) 
+  (field $itable (ref $jsinnerclass.Main.Outer.Inner.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__jsinnerclass_Main_Outer_Inner (ref null $jsinnerclass.Main.Outer))
+  (field $f_b__jsinnerclass_Main_Outer_Inner_ (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsinnerclass.Main.Outer.Inner.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_getB__int (ref $function.m_getB__int))
+   $java.lang.Object.vtable)
+ )
+ (type $jsinnerclass.Main.Outer.Inner.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsinnerclass.Main.Outer [static fields]
-(global $f_$initialized__jsinnerclass_Main_Outer (mut i32) (i32.const 0))
+ ;;; Code for jsinnerclass.Main.Outer [type definition]
+ (type $jsinnerclass.Main.Outer (struct_subtype 
+  (field $vtable (ref $jsinnerclass.Main.Outer.vtable)) 
+  (field $itable (ref $jsinnerclass.Main.Outer.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_a__jsinnerclass_Main_Outer i32)
+   $java.lang.Object)
+ )
+ (type $jsinnerclass.Main.Outer.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_method__int (ref $function.m_method__int))
+   $java.lang.Object.vtable)
+ )
+ (type $jsinnerclass.Main.Outer.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for jsinnerclass.Main [vtable.init]
 (global $jsinnerclass.Main.vtable (ref $jsinnerclass.Main.vtable) 
@@ -72,29 +140,16 @@
   (ref.null struct)
  ))
 
-;;; Code for jsinnerclass.Main [CLASS]
-(type $jsinnerclass.Main (struct_subtype 
- (field $vtable (ref $jsinnerclass.Main.vtable)) 
- (field $itable (ref $jsinnerclass.Main.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsinnerclass.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $jsinnerclass.Main.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsinnerclass.Main [static fields]
+(global $f_$initialized__jsinnerclass_Main (mut i32) (i32.const 0))
+
+;;; Code for jsinnerclass.Main.Outer.Inner [static fields]
+(global $f_$initialized__jsinnerclass_Main_Outer_Inner (mut i32) (i32.const 0))
+
+;;; Code for jsinnerclass.Main.Outer [static fields]
+(global $f_$initialized__jsinnerclass_Main_Outer (mut i32) (i32.const 0))
+
+;;; Code for jsinnerclass.Main [methods]
 
 ;;; Main Main.$create()
 (func $$create__@jsinnerclass.Main
@@ -175,32 +230,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main)
 
-;;; Code for jsinnerclass.Main.Outer.Inner [CLASS]
-(type $jsinnerclass.Main.Outer.Inner (struct_subtype 
- (field $vtable (ref $jsinnerclass.Main.Outer.Inner.vtable)) 
- (field $itable (ref $jsinnerclass.Main.Outer.Inner.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__jsinnerclass_Main_Outer_Inner (ref null $jsinnerclass.Main.Outer))
- (field $f_b__jsinnerclass_Main_Outer_Inner_ (mut i32))
-  $java.lang.Object)
-)
-(type $jsinnerclass.Main.Outer.Inner.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_getB__int (ref $function.m_getB__int))
-  $java.lang.Object.vtable)
-)
-(type $jsinnerclass.Main.Outer.Inner.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsinnerclass.Main.Outer.Inner [methods]
 
 ;;; Inner Inner.$create(Outer $outer_this)
 (func $$create__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner
@@ -291,31 +321,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner)
 
-;;; Code for jsinnerclass.Main.Outer [CLASS]
-(type $jsinnerclass.Main.Outer (struct_subtype 
- (field $vtable (ref $jsinnerclass.Main.Outer.vtable)) 
- (field $itable (ref $jsinnerclass.Main.Outer.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_a__jsinnerclass_Main_Outer i32)
-  $java.lang.Object)
-)
-(type $jsinnerclass.Main.Outer.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_method__int (ref $function.m_method__int))
-  $java.lang.Object.vtable)
-)
-(type $jsinnerclass.Main.Outer.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsinnerclass.Main.Outer [methods]
 
 ;;; Outer Outer.$create()
 (func $$create__@jsinnerclass.Main.Outer

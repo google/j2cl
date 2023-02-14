@@ -1,14 +1,131 @@
-;;; Code for autoboxing.AutoBoxing [static fields]
-(global $f_$initialized__autoboxing_AutoBoxing (mut i32) (i32.const 0))
+ ;;; Code for autoboxing.AutoBoxing [type definition]
+ (type $autoboxing.AutoBoxing (struct_subtype 
+  (field $vtable (ref $autoboxing.AutoBoxing.vtable)) 
+  (field $itable (ref $autoboxing.AutoBoxing.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $autoboxing.AutoBoxing.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_box__boolean__java_lang_Boolean (ref $function.m_box__boolean__java_lang_Boolean))
+  (field $m_box__double__java_lang_Double (ref $function.m_box__double__java_lang_Double))
+  (field $m_box__byte__java_lang_Byte (ref $function.m_box__byte__java_lang_Byte))
+  (field $m_box__float__java_lang_Float (ref $function.m_box__float__java_lang_Float))
+  (field $m_box__int__java_lang_Integer (ref $function.m_box__int__java_lang_Integer))
+  (field $m_box__long__java_lang_Long (ref $function.m_box__long__java_lang_Long))
+  (field $m_box__short__java_lang_Short (ref $function.m_box__short__java_lang_Short))
+  (field $m_box__char__java_lang_Character (ref $function.m_box__char__java_lang_Character))
+  (field $m_unbox__java_lang_Boolean__boolean (ref $function.m_unbox__java_lang_Boolean__boolean))
+  (field $m_unbox__java_lang_Double__double (ref $function.m_unbox__java_lang_Double__double))
+  (field $m_unbox__java_lang_Byte__byte (ref $function.m_unbox__java_lang_Byte__byte))
+  (field $m_unbox__java_lang_Float__float (ref $function.m_unbox__java_lang_Float__float))
+  (field $m_unbox__java_lang_Integer__int (ref $function.m_unbox__java_lang_Integer__int))
+  (field $m_unbox__java_lang_Long__long (ref $function.m_unbox__java_lang_Long__long))
+  (field $m_unbox__java_lang_Short__short (ref $function.m_unbox__java_lang_Short__short))
+  (field $m_unbox__java_lang_Character__char (ref $function.m_unbox__java_lang_Character__char))
+  (field $m_takesAndReturnsPrimitiveDouble__double__double (ref $function.m_takesAndReturnsPrimitiveDouble__double__double))
+  (field $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void (ref $function.m_takesAndReturnsVoid__java_lang_Void__java_lang_Void))
+  (field $m_takesFloatVarArgs__arrayOf_java_lang_Float__void (ref $function.m_takesFloatVarArgs__arrayOf_java_lang_Float__void))
+  (field $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double (ref $function.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double))
+  (field $m_sumWithoutBoxing__arrayOf_java_lang_Object__double (ref $function.m_sumWithoutBoxing__arrayOf_java_lang_Object__double))
+  (field $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double (ref $function.m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double))
+  (field $m_sumWithUnboxing__java_lang_Iterable__double (ref $function.m_sumWithUnboxing__java_lang_Iterable__double))
+  (field $m_testBoxing__void (ref $function.m_testBoxing__void))
+  (field $m_testUnboxing__void (ref $function.m_testUnboxing__void))
+  (field $m_testUnboxingBoolean__void (ref $function.m_testUnboxingBoolean__void))
+  (field $m_testUnboxingEquality__void (ref $function.m_testUnboxingEquality__void))
+  (field $m_testAssertStatement__void (ref $function.m_testAssertStatement__void))
+  (field $m_testUnbox_withCast__void (ref $function.m_testUnbox_withCast__void))
+   $java.lang.Object.vtable)
+ )
+ (type $autoboxing.AutoBoxing.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for autoboxing.AutoBoxing.1Local [static fields]
-(global $f_$initialized__autoboxing_AutoBoxing_1Local (mut i32) (i32.const 0))
+ ;;; Code for autoboxing.AutoBoxing.1Local [type definition]
+ (type $autoboxing.AutoBoxing.1Local (struct_subtype 
+  (field $vtable (ref $autoboxing.AutoBoxing.1Local.vtable)) 
+  (field $itable (ref $autoboxing.AutoBoxing.1Local.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $autoboxing.AutoBoxing.1Local.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
+   $java.lang.Object.vtable)
+ )
+ (type $autoboxing.AutoBoxing.1Local.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for autoboxing.AutoBoxing.2Local [static fields]
-(global $f_$initialized__autoboxing_AutoBoxing_2Local (mut i32) (i32.const 0))
+ ;;; Code for autoboxing.AutoBoxing.2Local [type definition]
+ (type $autoboxing.AutoBoxing.2Local (struct_subtype 
+  (field $vtable (ref $autoboxing.AutoBoxing.2Local.vtable)) 
+  (field $itable (ref $autoboxing.AutoBoxing.2Local.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $autoboxing.AutoBoxing.2Local.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
+   $java.lang.Object.vtable)
+ )
+ (type $autoboxing.AutoBoxing.2Local.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for autoboxing.AutoBoxing.1Supplier [static fields]
-(global $f_$initialized__autoboxing_AutoBoxing_1Supplier (mut i32) (i32.const 0))
+ ;;; Code for autoboxing.AutoBoxing.1Supplier [type definition]
+ (type $autoboxing.AutoBoxing.1Supplier (struct_subtype 
+  (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable)) 
+  (field $itable (ref $autoboxing.AutoBoxing.1Supplier.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__autoboxing_AutoBoxing_1Supplier (ref null $autoboxing.AutoBoxing))
+   $java.lang.Object)
+ )
+ (type $autoboxing.AutoBoxing.1Supplier.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_get__java_lang_Object_$pp_autoboxing (ref $function.m_get__java_lang_Object_$pp_autoboxing))
+   $java.lang.Object.vtable)
+ )
+ (type $autoboxing.AutoBoxing.1Supplier.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for autoboxing.AutoBoxing [vtable.init]
 (global $autoboxing.AutoBoxing.vtable (ref $autoboxing.AutoBoxing.vtable) 
@@ -126,58 +243,19 @@
   (ref.null struct)
  ))
 
-;;; Code for autoboxing.AutoBoxing [CLASS]
-(type $autoboxing.AutoBoxing (struct_subtype 
- (field $vtable (ref $autoboxing.AutoBoxing.vtable)) 
- (field $itable (ref $autoboxing.AutoBoxing.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $autoboxing.AutoBoxing.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_box__boolean__java_lang_Boolean (ref $function.m_box__boolean__java_lang_Boolean))
- (field $m_box__double__java_lang_Double (ref $function.m_box__double__java_lang_Double))
- (field $m_box__byte__java_lang_Byte (ref $function.m_box__byte__java_lang_Byte))
- (field $m_box__float__java_lang_Float (ref $function.m_box__float__java_lang_Float))
- (field $m_box__int__java_lang_Integer (ref $function.m_box__int__java_lang_Integer))
- (field $m_box__long__java_lang_Long (ref $function.m_box__long__java_lang_Long))
- (field $m_box__short__java_lang_Short (ref $function.m_box__short__java_lang_Short))
- (field $m_box__char__java_lang_Character (ref $function.m_box__char__java_lang_Character))
- (field $m_unbox__java_lang_Boolean__boolean (ref $function.m_unbox__java_lang_Boolean__boolean))
- (field $m_unbox__java_lang_Double__double (ref $function.m_unbox__java_lang_Double__double))
- (field $m_unbox__java_lang_Byte__byte (ref $function.m_unbox__java_lang_Byte__byte))
- (field $m_unbox__java_lang_Float__float (ref $function.m_unbox__java_lang_Float__float))
- (field $m_unbox__java_lang_Integer__int (ref $function.m_unbox__java_lang_Integer__int))
- (field $m_unbox__java_lang_Long__long (ref $function.m_unbox__java_lang_Long__long))
- (field $m_unbox__java_lang_Short__short (ref $function.m_unbox__java_lang_Short__short))
- (field $m_unbox__java_lang_Character__char (ref $function.m_unbox__java_lang_Character__char))
- (field $m_takesAndReturnsPrimitiveDouble__double__double (ref $function.m_takesAndReturnsPrimitiveDouble__double__double))
- (field $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void (ref $function.m_takesAndReturnsVoid__java_lang_Void__java_lang_Void))
- (field $m_takesFloatVarArgs__arrayOf_java_lang_Float__void (ref $function.m_takesFloatVarArgs__arrayOf_java_lang_Float__void))
- (field $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double (ref $function.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double))
- (field $m_sumWithoutBoxing__arrayOf_java_lang_Object__double (ref $function.m_sumWithoutBoxing__arrayOf_java_lang_Object__double))
- (field $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double (ref $function.m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double))
- (field $m_sumWithUnboxing__java_lang_Iterable__double (ref $function.m_sumWithUnboxing__java_lang_Iterable__double))
- (field $m_testBoxing__void (ref $function.m_testBoxing__void))
- (field $m_testUnboxing__void (ref $function.m_testUnboxing__void))
- (field $m_testUnboxingBoolean__void (ref $function.m_testUnboxingBoolean__void))
- (field $m_testUnboxingEquality__void (ref $function.m_testUnboxingEquality__void))
- (field $m_testAssertStatement__void (ref $function.m_testAssertStatement__void))
- (field $m_testUnbox_withCast__void (ref $function.m_testUnbox_withCast__void))
-  $java.lang.Object.vtable)
-)
-(type $autoboxing.AutoBoxing.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for autoboxing.AutoBoxing [static fields]
+(global $f_$initialized__autoboxing_AutoBoxing (mut i32) (i32.const 0))
+
+;;; Code for autoboxing.AutoBoxing.1Local [static fields]
+(global $f_$initialized__autoboxing_AutoBoxing_1Local (mut i32) (i32.const 0))
+
+;;; Code for autoboxing.AutoBoxing.2Local [static fields]
+(global $f_$initialized__autoboxing_AutoBoxing_2Local (mut i32) (i32.const 0))
+
+;;; Code for autoboxing.AutoBoxing.1Supplier [static fields]
+(global $f_$initialized__autoboxing_AutoBoxing_1Supplier (mut i32) (i32.const 0))
+
+;;; Code for autoboxing.AutoBoxing [methods]
 
 ;;; AutoBoxing AutoBoxing.$create()
 (func $$create__@autoboxing.AutoBoxing
@@ -1472,30 +1550,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing)
 
-;;; Code for autoboxing.AutoBoxing.1Local [CLASS]
-(type $autoboxing.AutoBoxing.1Local (struct_subtype 
- (field $vtable (ref $autoboxing.AutoBoxing.1Local.vtable)) 
- (field $itable (ref $autoboxing.AutoBoxing.1Local.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $autoboxing.AutoBoxing.1Local.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
-  $java.lang.Object.vtable)
-)
-(type $autoboxing.AutoBoxing.1Local.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for autoboxing.AutoBoxing.1Local [methods]
 
 ;;; Local<T, T> Local.$create()
 (func $$create__@autoboxing.AutoBoxing.1Local
@@ -1582,30 +1637,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local)
 
-;;; Code for autoboxing.AutoBoxing.2Local [CLASS]
-(type $autoboxing.AutoBoxing.2Local (struct_subtype 
- (field $vtable (ref $autoboxing.AutoBoxing.2Local.vtable)) 
- (field $itable (ref $autoboxing.AutoBoxing.2Local.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $autoboxing.AutoBoxing.2Local.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.m_toLong__java_lang_Long__long_$pp_autoboxing))
-  $java.lang.Object.vtable)
-)
-(type $autoboxing.AutoBoxing.2Local.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for autoboxing.AutoBoxing.2Local [methods]
 
 ;;; Local<T, T> Local.$create()
 (func $$create__@autoboxing.AutoBoxing.2Local
@@ -1692,31 +1724,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local)
 
-;;; Code for autoboxing.AutoBoxing.1Supplier [CLASS]
-(type $autoboxing.AutoBoxing.1Supplier (struct_subtype 
- (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable)) 
- (field $itable (ref $autoboxing.AutoBoxing.1Supplier.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__autoboxing_AutoBoxing_1Supplier (ref null $autoboxing.AutoBoxing))
-  $java.lang.Object)
-)
-(type $autoboxing.AutoBoxing.1Supplier.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_get__java_lang_Object_$pp_autoboxing (ref $function.m_get__java_lang_Object_$pp_autoboxing))
-  $java.lang.Object.vtable)
-)
-(type $autoboxing.AutoBoxing.1Supplier.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for autoboxing.AutoBoxing.1Supplier [methods]
 
 ;;; Supplier<T> Supplier.$create(AutoBoxing $outer_this)
 (func $$create__autoboxing_AutoBoxing@autoboxing.AutoBoxing.1Supplier

@@ -1,17 +1,130 @@
-;;; Code for devirtualizedcalls.ArrayCalls [static fields]
-(global $f_$initialized__devirtualizedcalls_ArrayCalls (mut i32) (i32.const 0))
+ ;;; Code for devirtualizedcalls.ArrayCalls [type definition]
+ (type $devirtualizedcalls.ArrayCalls (struct_subtype 
+  (field $vtable (ref $devirtualizedcalls.ArrayCalls.vtable)) 
+  (field $itable (ref $devirtualizedcalls.ArrayCalls.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $devirtualizedcalls.ArrayCalls.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_main__void (ref $function.m_main__void))
+   $java.lang.Object.vtable)
+ )
+ (type $devirtualizedcalls.ArrayCalls.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for devirtualizedcalls.CharSequenceCalls [static fields]
-(global $f_$initialized__devirtualizedcalls_CharSequenceCalls (mut i32) (i32.const 0))
+ ;;; Code for devirtualizedcalls.CharSequenceCalls [type definition]
+ (type $devirtualizedcalls.CharSequenceCalls (struct_subtype 
+  (field $vtable (ref $devirtualizedcalls.CharSequenceCalls.vtable)) 
+  (field $itable (ref $devirtualizedcalls.CharSequenceCalls.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $devirtualizedcalls.CharSequenceCalls.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__java_lang_CharSequence__void (ref $function.m_test__java_lang_CharSequence__void))
+  (field $m_main__void (ref $function.m_main__void))
+   $java.lang.Object.vtable)
+ )
+ (type $devirtualizedcalls.CharSequenceCalls.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for devirtualizedcalls.NumberCalls [static fields]
-(global $f_$initialized__devirtualizedcalls_NumberCalls (mut i32) (i32.const 0))
+ ;;; Code for devirtualizedcalls.NumberCalls [type definition]
+ (type $devirtualizedcalls.NumberCalls (struct_subtype 
+  (field $vtable (ref $devirtualizedcalls.NumberCalls.vtable)) 
+  (field $itable (ref $devirtualizedcalls.NumberCalls.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $devirtualizedcalls.NumberCalls.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_main__void (ref $function.m_main__void))
+   $java.lang.Object.vtable)
+ )
+ (type $devirtualizedcalls.NumberCalls.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for devirtualizedcalls.ObjectCalls [static fields]
-(global $f_$initialized__devirtualizedcalls_ObjectCalls (mut i32) (i32.const 0))
+ ;;; Code for devirtualizedcalls.ObjectCalls [type definition]
+ (type $devirtualizedcalls.ObjectCalls (struct_subtype 
+  (field $vtable (ref $devirtualizedcalls.ObjectCalls.vtable)) 
+  (field $itable (ref $devirtualizedcalls.ObjectCalls.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $devirtualizedcalls.ObjectCalls.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_main__void (ref $function.m_main__void))
+  (field $m_test__void (ref $function.m_test__void))
+  (field $m_testNotEquals__boolean (ref $function.m_testNotEquals__boolean))
+   $java.lang.Object.vtable)
+ )
+ (type $devirtualizedcalls.ObjectCalls.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for devirtualizedcalls.StringCalls [static fields]
-(global $f_$initialized__devirtualizedcalls_StringCalls (mut i32) (i32.const 0))
+ ;;; Code for devirtualizedcalls.StringCalls [type definition]
+ (type $devirtualizedcalls.StringCalls (struct_subtype 
+  (field $vtable (ref $devirtualizedcalls.StringCalls.vtable)) 
+  (field $itable (ref $devirtualizedcalls.StringCalls.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $devirtualizedcalls.StringCalls.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_main__void (ref $function.m_main__void))
+   $java.lang.Object.vtable)
+ )
+ (type $devirtualizedcalls.StringCalls.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for devirtualizedcalls.ArrayCalls [vtable.init]
 (global $devirtualizedcalls.ArrayCalls.vtable (ref $devirtualizedcalls.ArrayCalls.vtable) 
@@ -126,30 +239,22 @@
   (ref.null struct)
  ))
 
-;;; Code for devirtualizedcalls.ArrayCalls [CLASS]
-(type $devirtualizedcalls.ArrayCalls (struct_subtype 
- (field $vtable (ref $devirtualizedcalls.ArrayCalls.vtable)) 
- (field $itable (ref $devirtualizedcalls.ArrayCalls.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $devirtualizedcalls.ArrayCalls.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_main__void (ref $function.m_main__void))
-  $java.lang.Object.vtable)
-)
-(type $devirtualizedcalls.ArrayCalls.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for devirtualizedcalls.ArrayCalls [static fields]
+(global $f_$initialized__devirtualizedcalls_ArrayCalls (mut i32) (i32.const 0))
+
+;;; Code for devirtualizedcalls.CharSequenceCalls [static fields]
+(global $f_$initialized__devirtualizedcalls_CharSequenceCalls (mut i32) (i32.const 0))
+
+;;; Code for devirtualizedcalls.NumberCalls [static fields]
+(global $f_$initialized__devirtualizedcalls_NumberCalls (mut i32) (i32.const 0))
+
+;;; Code for devirtualizedcalls.ObjectCalls [static fields]
+(global $f_$initialized__devirtualizedcalls_ObjectCalls (mut i32) (i32.const 0))
+
+;;; Code for devirtualizedcalls.StringCalls [static fields]
+(global $f_$initialized__devirtualizedcalls_StringCalls (mut i32) (i32.const 0))
+
+;;; Code for devirtualizedcalls.ArrayCalls [methods]
 
 ;;; ArrayCalls ArrayCalls.$create()
 (func $$create__@devirtualizedcalls.ArrayCalls
@@ -243,31 +348,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.ArrayCalls)
 
-;;; Code for devirtualizedcalls.CharSequenceCalls [CLASS]
-(type $devirtualizedcalls.CharSequenceCalls (struct_subtype 
- (field $vtable (ref $devirtualizedcalls.CharSequenceCalls.vtable)) 
- (field $itable (ref $devirtualizedcalls.CharSequenceCalls.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $devirtualizedcalls.CharSequenceCalls.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__java_lang_CharSequence__void (ref $function.m_test__java_lang_CharSequence__void))
- (field $m_main__void (ref $function.m_main__void))
-  $java.lang.Object.vtable)
-)
-(type $devirtualizedcalls.CharSequenceCalls.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for devirtualizedcalls.CharSequenceCalls [methods]
 
 ;;; CharSequenceCalls CharSequenceCalls.$create()
 (func $$create__@devirtualizedcalls.CharSequenceCalls
@@ -372,30 +453,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
 
-;;; Code for devirtualizedcalls.NumberCalls [CLASS]
-(type $devirtualizedcalls.NumberCalls (struct_subtype 
- (field $vtable (ref $devirtualizedcalls.NumberCalls.vtable)) 
- (field $itable (ref $devirtualizedcalls.NumberCalls.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $devirtualizedcalls.NumberCalls.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_main__void (ref $function.m_main__void))
-  $java.lang.Object.vtable)
-)
-(type $devirtualizedcalls.NumberCalls.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for devirtualizedcalls.NumberCalls [methods]
 
 ;;; NumberCalls NumberCalls.$create()
 (func $$create__@devirtualizedcalls.NumberCalls
@@ -755,32 +813,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.NumberCalls)
 
-;;; Code for devirtualizedcalls.ObjectCalls [CLASS]
-(type $devirtualizedcalls.ObjectCalls (struct_subtype 
- (field $vtable (ref $devirtualizedcalls.ObjectCalls.vtable)) 
- (field $itable (ref $devirtualizedcalls.ObjectCalls.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $devirtualizedcalls.ObjectCalls.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_main__void (ref $function.m_main__void))
- (field $m_test__void (ref $function.m_test__void))
- (field $m_testNotEquals__boolean (ref $function.m_testNotEquals__boolean))
-  $java.lang.Object.vtable)
-)
-(type $devirtualizedcalls.ObjectCalls.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for devirtualizedcalls.ObjectCalls [methods]
 
 ;;; ObjectCalls ObjectCalls.$create()
 (func $$create__@devirtualizedcalls.ObjectCalls
@@ -946,30 +979,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.ObjectCalls)
 
-;;; Code for devirtualizedcalls.StringCalls [CLASS]
-(type $devirtualizedcalls.StringCalls (struct_subtype 
- (field $vtable (ref $devirtualizedcalls.StringCalls.vtable)) 
- (field $itable (ref $devirtualizedcalls.StringCalls.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $devirtualizedcalls.StringCalls.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_main__void (ref $function.m_main__void))
-  $java.lang.Object.vtable)
-)
-(type $devirtualizedcalls.StringCalls.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for devirtualizedcalls.StringCalls [methods]
 
 ;;; StringCalls StringCalls.$create()
 (func $$create__@devirtualizedcalls.StringCalls

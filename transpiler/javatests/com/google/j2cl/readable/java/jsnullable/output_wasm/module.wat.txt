@@ -1,5 +1,33 @@
-;;; Code for jsnullable.Main [static fields]
-(global $f_$initialized__jsnullable_Main (mut i32) (i32.const 0))
+ ;;; Code for jsnullable.Main [type definition]
+ (type $jsnullable.Main (struct_subtype 
+  (field $vtable (ref $jsnullable.Main.vtable)) 
+  (field $itable (ref $jsnullable.Main.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_f1__jsnullable_Main_ (ref null $java.lang.String))
+  (field $f_f2__jsnullable_Main_ (ref null $java.lang.String))
+  (field $f_f4__jsnullable_Main_ (mut (ref null $java.lang.Object)))
+  (field $f_f5__jsnullable_Main_ (mut (ref null $java.lang.Object)))
+  (field $f_f6__jsnullable_Main_ (mut (ref null $java.lang.Object)))
+  (field $f_f9__jsnullable_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_f10__jsnullable_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
+   $java.lang.Object)
+ )
+ (type $jsnullable.Main.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $jsnullable.Main.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for jsnullable.Main [vtable.init]
 (global $jsnullable.Main.vtable (ref $jsnullable.Main.vtable) 
@@ -22,36 +50,10 @@
   (ref.null struct)
  ))
 
-;;; Code for jsnullable.Main [CLASS]
-(type $jsnullable.Main (struct_subtype 
- (field $vtable (ref $jsnullable.Main.vtable)) 
- (field $itable (ref $jsnullable.Main.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f1__jsnullable_Main_ (ref null $java.lang.String))
- (field $f_f2__jsnullable_Main_ (ref null $java.lang.String))
- (field $f_f4__jsnullable_Main_ (mut (ref null $java.lang.Object)))
- (field $f_f5__jsnullable_Main_ (mut (ref null $java.lang.Object)))
- (field $f_f6__jsnullable_Main_ (mut (ref null $java.lang.Object)))
- (field $f_f9__jsnullable_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_f10__jsnullable_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
-  $java.lang.Object)
-)
-(type $jsnullable.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $jsnullable.Main.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsnullable.Main [static fields]
+(global $f_$initialized__jsnullable_Main (mut i32) (i32.const 0))
+
+;;; Code for jsnullable.Main [methods]
 
 ;;; Main Main.$create()
 (func $$create__@jsnullable.Main

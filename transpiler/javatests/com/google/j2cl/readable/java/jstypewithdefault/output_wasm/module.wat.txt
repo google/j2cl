@@ -1,8 +1,33 @@
-;;; Code for jstypewithdefault.SomeJsType [static fields]
-(global $f_$initialized__jstypewithdefault_SomeJsType (mut i32) (i32.const 0))
+ ;;; Code for jstypewithdefault.Interface [type definition]
+ (type $jstypewithdefault.Interface.vtable (struct 
+  (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
+  )
+ )
 
-;;; Code for jstypewithdefault.Interface [static fields]
-(global $f_$initialized__jstypewithdefault_Interface (mut i32) (i32.const 0))
+ ;;; Code for jstypewithdefault.SomeJsType [type definition]
+ (type $jstypewithdefault.SomeJsType (struct_subtype 
+  (field $vtable (ref $jstypewithdefault.SomeJsType.vtable)) 
+  (field $itable (ref $jstypewithdefault.SomeJsType.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jstypewithdefault.SomeJsType.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
+   $java.lang.Object.vtable)
+ )
+ (type $jstypewithdefault.SomeJsType.itable (struct_subtype 
+ (field $slot0 (ref $jstypewithdefault.Interface.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for jstypewithdefault.SomeJsType [vtable.init]
 (global $jstypewithdefault.SomeJsType.vtable (ref $jstypewithdefault.SomeJsType.vtable) 
@@ -28,30 +53,43 @@
   (ref.null struct)
  ))
 
-;;; Code for jstypewithdefault.SomeJsType [CLASS]
-(type $jstypewithdefault.SomeJsType (struct_subtype 
- (field $vtable (ref $jstypewithdefault.SomeJsType.vtable)) 
- (field $itable (ref $jstypewithdefault.SomeJsType.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+;;; Code for jstypewithdefault.SomeJsType [static fields]
+(global $f_$initialized__jstypewithdefault_SomeJsType (mut i32) (i32.const 0))
+
+;;; Code for jstypewithdefault.Interface [static fields]
+(global $f_$initialized__jstypewithdefault_Interface (mut i32) (i32.const 0))
+
+;;; Code for jstypewithdefault.Interface [methods]
+
+;;; void Interface.defaultMethod()
+(func $m_defaultMethod__void@jstypewithdefault.Interface
+ (param $this (ref null $java.lang.Object))
+ ;;@ jstypewithdefault/SomeJsType.java:24:15
+ (block
+ )
 )
-(type $jstypewithdefault.SomeJsType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
-  $java.lang.Object.vtable)
+(elem declare func $m_defaultMethod__void@jstypewithdefault.Interface)
+
+;;; void Interface.$clinit()
+(func $$clinit__void@jstypewithdefault.Interface
+ ;;@ jstypewithdefault/SomeJsType.java:23:10
+ (block
+  ;; if (jstypewithdefault.Interface.$initialized) return;
+  ;;@ jstypewithdefault/SomeJsType.java:23:10
+  (if (global.get $f_$initialized__jstypewithdefault_Interface)
+   (then
+    ;; return;
+    ;;@ jstypewithdefault/SomeJsType.java:23:10
+    (return )
+   )
+  )
+  ;; (jstypewithdefault.Interface.$initialized = true);
+  ;;@ jstypewithdefault/SomeJsType.java:23:10
+  (global.set $f_$initialized__jstypewithdefault_Interface (i32.const 1))
+ )
 )
-(type $jstypewithdefault.SomeJsType.itable (struct_subtype 
-(field $slot0 (ref $jstypewithdefault.Interface.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+
+;;; Code for jstypewithdefault.SomeJsType [methods]
 
 ;;; SomeJsType SomeJsType.$create()
 (func $$create__@jstypewithdefault.SomeJsType
@@ -138,37 +176,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType)
-
-;;; Code for jstypewithdefault.Interface [INTERFACE]
-(type $jstypewithdefault.Interface.vtable (struct 
- (field $m_defaultMethod__void (ref $function.m_defaultMethod__void))
- )
-)
-
-;;; void Interface.defaultMethod()
-(func $m_defaultMethod__void@jstypewithdefault.Interface
- (param $this (ref null $java.lang.Object))
- ;;@ jstypewithdefault/SomeJsType.java:24:15
- (block
- )
-)
-(elem declare func $m_defaultMethod__void@jstypewithdefault.Interface)
-
-;;; void Interface.$clinit()
-(func $$clinit__void@jstypewithdefault.Interface
- ;;@ jstypewithdefault/SomeJsType.java:23:10
- (block
-  ;; if (jstypewithdefault.Interface.$initialized) return;
-  ;;@ jstypewithdefault/SomeJsType.java:23:10
-  (if (global.get $f_$initialized__jstypewithdefault_Interface)
-   (then
-    ;; return;
-    ;;@ jstypewithdefault/SomeJsType.java:23:10
-    (return )
-   )
-  )
-  ;; (jstypewithdefault.Interface.$initialized = true);
-  ;;@ jstypewithdefault/SomeJsType.java:23:10
-  (global.set $f_$initialized__jstypewithdefault_Interface (i32.const 1))
- )
-)

@@ -1,11 +1,83 @@
-;;; Code for localclassinheritance.LocalClassInheritance [static fields]
-(global $f_$initialized__localclassinheritance_LocalClassInheritance (mut i32) (i32.const 0))
+ ;;; Code for localclassinheritance.LocalClassInheritance [type definition]
+ (type $localclassinheritance.LocalClassInheritance (struct_subtype 
+  (field $vtable (ref $localclassinheritance.LocalClassInheritance.vtable)) 
+  (field $itable (ref $localclassinheritance.LocalClassInheritance.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $localclassinheritance.LocalClassInheritance.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__void (ref $function.m_test__void))
+   $java.lang.Object.vtable)
+ )
+ (type $localclassinheritance.LocalClassInheritance.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for localclassinheritance.LocalClassInheritance.1Parent [static fields]
-(global $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent (mut i32) (i32.const 0))
+ ;;; Code for localclassinheritance.LocalClassInheritance.1Parent [type definition]
+ (type $localclassinheritance.LocalClassInheritance.1Parent (struct_subtype 
+  (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Parent.vtable)) 
+  (field $itable (ref $localclassinheritance.LocalClassInheritance.1Parent.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (ref null $localclassinheritance.LocalClassInheritance))
+  (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent i32)
+   $java.lang.Object)
+ )
+ (type $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_n__void (ref $function.m_n__void))
+   $java.lang.Object.vtable)
+ )
+ (type $localclassinheritance.LocalClassInheritance.1Parent.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for localclassinheritance.LocalClassInheritance.1Child [static fields]
-(global $f_$initialized__localclassinheritance_LocalClassInheritance_1Child (mut i32) (i32.const 0))
+ ;;; Code for localclassinheritance.LocalClassInheritance.1Child [type definition]
+ (type $localclassinheritance.LocalClassInheritance.1Child (struct_subtype 
+  (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Child.vtable)) 
+  (field $itable (ref $localclassinheritance.LocalClassInheritance.1Child.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (ref null $localclassinheritance.LocalClassInheritance))
+  (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent i32)
+  (field $$outer_this__localclassinheritance_LocalClassInheritance_1Child (ref null $localclassinheritance.LocalClassInheritance))
+  (field $$captured_f__localclassinheritance_LocalClassInheritance_1Child i32)
+   $localclassinheritance.LocalClassInheritance.1Parent)
+ )
+ (type $localclassinheritance.LocalClassInheritance.1Child.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_n__void (ref $function.m_n__void))
+   $localclassinheritance.LocalClassInheritance.1Parent.vtable)
+ )
+ (type $localclassinheritance.LocalClassInheritance.1Child.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $localclassinheritance.LocalClassInheritance.1Parent.itable))
 
 ;;; Code for localclassinheritance.LocalClassInheritance [vtable.init]
 (global $localclassinheritance.LocalClassInheritance.vtable (ref $localclassinheritance.LocalClassInheritance.vtable) 
@@ -73,30 +145,16 @@
   (ref.null struct)
  ))
 
-;;; Code for localclassinheritance.LocalClassInheritance [CLASS]
-(type $localclassinheritance.LocalClassInheritance (struct_subtype 
- (field $vtable (ref $localclassinheritance.LocalClassInheritance.vtable)) 
- (field $itable (ref $localclassinheritance.LocalClassInheritance.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $localclassinheritance.LocalClassInheritance.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__void (ref $function.m_test__void))
-  $java.lang.Object.vtable)
-)
-(type $localclassinheritance.LocalClassInheritance.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for localclassinheritance.LocalClassInheritance [static fields]
+(global $f_$initialized__localclassinheritance_LocalClassInheritance (mut i32) (i32.const 0))
+
+;;; Code for localclassinheritance.LocalClassInheritance.1Parent [static fields]
+(global $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent (mut i32) (i32.const 0))
+
+;;; Code for localclassinheritance.LocalClassInheritance.1Child [static fields]
+(global $f_$initialized__localclassinheritance_LocalClassInheritance_1Child (mut i32) (i32.const 0))
+
+;;; Code for localclassinheritance.LocalClassInheritance [methods]
 
 ;;; LocalClassInheritance LocalClassInheritance.$create()
 (func $$create__@localclassinheritance.LocalClassInheritance
@@ -182,32 +240,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance)
 
-;;; Code for localclassinheritance.LocalClassInheritance.1Parent [CLASS]
-(type $localclassinheritance.LocalClassInheritance.1Parent (struct_subtype 
- (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Parent.vtable)) 
- (field $itable (ref $localclassinheritance.LocalClassInheritance.1Parent.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (ref null $localclassinheritance.LocalClassInheritance))
- (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent i32)
-  $java.lang.Object)
-)
-(type $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_n__void (ref $function.m_n__void))
-  $java.lang.Object.vtable)
-)
-(type $localclassinheritance.LocalClassInheritance.1Parent.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for localclassinheritance.LocalClassInheritance.1Parent [methods]
 
 ;;; Parent Parent.$create(LocalClassInheritance $outer_this, int $captured_f)
 (func $$create__localclassinheritance_LocalClassInheritance__int@localclassinheritance.LocalClassInheritance.1Parent
@@ -297,34 +330,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
 
-;;; Code for localclassinheritance.LocalClassInheritance.1Child [CLASS]
-(type $localclassinheritance.LocalClassInheritance.1Child (struct_subtype 
- (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Child.vtable)) 
- (field $itable (ref $localclassinheritance.LocalClassInheritance.1Child.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (ref null $localclassinheritance.LocalClassInheritance))
- (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent i32)
- (field $$outer_this__localclassinheritance_LocalClassInheritance_1Child (ref null $localclassinheritance.LocalClassInheritance))
- (field $$captured_f__localclassinheritance_LocalClassInheritance_1Child i32)
-  $localclassinheritance.LocalClassInheritance.1Parent)
-)
-(type $localclassinheritance.LocalClassInheritance.1Child.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_n__void (ref $function.m_n__void))
-  $localclassinheritance.LocalClassInheritance.1Parent.vtable)
-)
-(type $localclassinheritance.LocalClassInheritance.1Child.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $localclassinheritance.LocalClassInheritance.1Parent.itable))
+;;; Code for localclassinheritance.LocalClassInheritance.1Child [methods]
 
 ;;; Child Child.$create(LocalClassInheritance $outer_this, int $captured_f)
 (func $$create__localclassinheritance_LocalClassInheritance__int@localclassinheritance.LocalClassInheritance.1Child

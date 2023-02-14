@@ -1,13 +1,89 @@
-;;; Code for array.Arrays [static fields]
-(global $f_$initialized__array_Arrays (mut i32) (i32.const 0))
+ ;;; Code for array.Arrays [type definition]
+ (type $array.Arrays (struct_subtype 
+  (field $vtable (ref $array.Arrays.vtable)) 
+  (field $itable (ref $array.Arrays.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $array.Arrays.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_testObjectArray__void (ref $function.m_testObjectArray__void))
+  (field $m_testJavaTypeArray__void (ref $function.m_testJavaTypeArray__void))
+  (field $m_testIntArrays__void_$pp_array (ref $function.m_testIntArrays__void_$pp_array))
+  (field $m_testLongArrays__void_$pp_array (ref $function.m_testLongArrays__void_$pp_array))
+  (field $m_testDevirtualizedTypeArrays__void_$pp_array (ref $function.m_testDevirtualizedTypeArrays__void_$pp_array))
+  (field $m_testStringArrays__void_$pp_array (ref $function.m_testStringArrays__void_$pp_array))
+  (field $m_testErasureCastsOnArrayAccess__void (ref $function.m_testErasureCastsOnArrayAccess__void))
+  (field $m_testCovariance__void (ref $function.m_testCovariance__void))
+  (field $m_testArraysSupertypeClosureTypes__void (ref $function.m_testArraysSupertypeClosureTypes__void))
+  (field $m_consumesCloneable__java_lang_Cloneable__void (ref $function.m_consumesCloneable__java_lang_Cloneable__void))
+  (field $m_consumesSerializable__java_io_Serializable__void (ref $function.m_consumesSerializable__java_io_Serializable__void))
+   $java.lang.Object.vtable)
+ )
+ (type $array.Arrays.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for array.Arrays.SomeObject [static fields]
-(global $f_$initialized__array_Arrays_SomeObject (mut i32) (i32.const 0))
+ ;;; Code for array.Arrays.SomeObject [type definition]
+ (type $array.Arrays.SomeObject (struct_subtype 
+  (field $vtable (ref $array.Arrays.SomeObject.vtable)) 
+  (field $itable (ref $array.Arrays.SomeObject.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__array_Arrays_SomeObject (ref null $array.Arrays))
+   $java.lang.Object)
+ )
+ (type $array.Arrays.SomeObject.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $array.Arrays.SomeObject.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for array.Arrays.NativeType [static fields]
+ ;;; Code for array.Arrays.NativeType [type definition]
 
-;;; Code for array.Arrays.ArrayContainer [static fields]
-(global $f_$initialized__array_Arrays_ArrayContainer (mut i32) (i32.const 0))
+ ;;; Code for array.Arrays.ArrayContainer [type definition]
+ (type $array.Arrays.ArrayContainer (struct_subtype 
+  (field $vtable (ref $array.Arrays.ArrayContainer.vtable)) 
+  (field $itable (ref $array.Arrays.ArrayContainer.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_data__array_Arrays_ArrayContainer (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+   $java.lang.Object)
+ )
+ (type $array.Arrays.ArrayContainer.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $array.Arrays.ArrayContainer.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for array.Arrays [vtable.init]
 (global $array.Arrays.vtable (ref $array.Arrays.vtable) 
@@ -83,40 +159,18 @@
   (ref.null struct)
  ))
 
-;;; Code for array.Arrays [CLASS]
-(type $array.Arrays (struct_subtype 
- (field $vtable (ref $array.Arrays.vtable)) 
- (field $itable (ref $array.Arrays.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $array.Arrays.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_testObjectArray__void (ref $function.m_testObjectArray__void))
- (field $m_testJavaTypeArray__void (ref $function.m_testJavaTypeArray__void))
- (field $m_testIntArrays__void_$pp_array (ref $function.m_testIntArrays__void_$pp_array))
- (field $m_testLongArrays__void_$pp_array (ref $function.m_testLongArrays__void_$pp_array))
- (field $m_testDevirtualizedTypeArrays__void_$pp_array (ref $function.m_testDevirtualizedTypeArrays__void_$pp_array))
- (field $m_testStringArrays__void_$pp_array (ref $function.m_testStringArrays__void_$pp_array))
- (field $m_testErasureCastsOnArrayAccess__void (ref $function.m_testErasureCastsOnArrayAccess__void))
- (field $m_testCovariance__void (ref $function.m_testCovariance__void))
- (field $m_testArraysSupertypeClosureTypes__void (ref $function.m_testArraysSupertypeClosureTypes__void))
- (field $m_consumesCloneable__java_lang_Cloneable__void (ref $function.m_consumesCloneable__java_lang_Cloneable__void))
- (field $m_consumesSerializable__java_io_Serializable__void (ref $function.m_consumesSerializable__java_io_Serializable__void))
-  $java.lang.Object.vtable)
-)
-(type $array.Arrays.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for array.Arrays [static fields]
+(global $f_$initialized__array_Arrays (mut i32) (i32.const 0))
+
+;;; Code for array.Arrays.SomeObject [static fields]
+(global $f_$initialized__array_Arrays_SomeObject (mut i32) (i32.const 0))
+
+;;; Code for array.Arrays.NativeType [static fields]
+
+;;; Code for array.Arrays.ArrayContainer [static fields]
+(global $f_$initialized__array_Arrays_ArrayContainer (mut i32) (i32.const 0))
+
+;;; Code for array.Arrays [methods]
 
 ;;; Arrays Arrays.$create()
 (func $$create__@array.Arrays
@@ -555,30 +609,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@array.Arrays)
 
-;;; Code for array.Arrays.SomeObject [CLASS]
-(type $array.Arrays.SomeObject (struct_subtype 
- (field $vtable (ref $array.Arrays.SomeObject.vtable)) 
- (field $itable (ref $array.Arrays.SomeObject.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__array_Arrays_SomeObject (ref null $array.Arrays))
-  $java.lang.Object)
-)
-(type $array.Arrays.SomeObject.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $array.Arrays.SomeObject.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for array.Arrays.SomeObject [methods]
 
 ;;; SomeObject SomeObject.$create(Arrays $outer_this)
 (func $$create__array_Arrays@array.Arrays.SomeObject
@@ -647,37 +678,14 @@
 )
 (elem declare func $m_getClass__java_lang_Class@array.Arrays.SomeObject)
 
-;;; Code for array.Arrays.NativeType [CLASS]
+;;; Code for array.Arrays.NativeType [methods]
 
 ;;; NativeType()
 (func $m_<init>__@array.Arrays.NativeType (import "imports" "String.constructor") 
  (result (ref null extern))
 )
 
-;;; Code for array.Arrays.ArrayContainer [CLASS]
-(type $array.Arrays.ArrayContainer (struct_subtype 
- (field $vtable (ref $array.Arrays.ArrayContainer.vtable)) 
- (field $itable (ref $array.Arrays.ArrayContainer.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_data__array_Arrays_ArrayContainer (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-  $java.lang.Object)
-)
-(type $array.Arrays.ArrayContainer.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $array.Arrays.ArrayContainer.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for array.Arrays.ArrayContainer [methods]
 
 ;;; ArrayContainer<T> ArrayContainer.$create()
 (func $$create__@array.Arrays.ArrayContainer

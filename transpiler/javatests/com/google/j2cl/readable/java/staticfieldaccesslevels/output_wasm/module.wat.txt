@@ -1,9 +1,27 @@
-;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [static fields]
-(global $f_a__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
-(global $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_ (mut i32) (i32.const 0))
-(global $f_c__staticfieldaccesslevels_StaticFieldAccessLevels (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_d__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
-(global $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
+ ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [type definition]
+ (type $staticfieldaccesslevels.StaticFieldAccessLevels (struct_subtype 
+  (field $vtable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) 
+  (field $itable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__int (ref $function.m_test__int))
+   $java.lang.Object.vtable)
+ )
+ (type $staticfieldaccesslevels.StaticFieldAccessLevels.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [vtable.init]
 (global $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.vtable) 
@@ -27,30 +45,14 @@
   (ref.null struct)
  ))
 
-;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [CLASS]
-(type $staticfieldaccesslevels.StaticFieldAccessLevels (struct_subtype 
- (field $vtable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) 
- (field $itable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__int (ref $function.m_test__int))
-  $java.lang.Object.vtable)
-)
-(type $staticfieldaccesslevels.StaticFieldAccessLevels.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [static fields]
+(global $f_a__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
+(global $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_ (mut i32) (i32.const 0))
+(global $f_c__staticfieldaccesslevels_StaticFieldAccessLevels (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_d__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
+(global $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
+
+;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [methods]
 
 ;;; StaticFieldAccessLevels StaticFieldAccessLevels.$create()
 (func $$create__@staticfieldaccesslevels.StaticFieldAccessLevels

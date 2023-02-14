@@ -1,7 +1,26 @@
-;;; Code for instancequalifieronstaticfield.InstanceQualifiers [static fields]
-(global $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
-(global $f_sideEffectCount__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
-(global $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
+ ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [type definition]
+ (type $instancequalifieronstaticfield.InstanceQualifiers (struct_subtype 
+  (field $vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable)) 
+  (field $itable (ref $instancequalifieronstaticfield.InstanceQualifiers.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $instancequalifieronstaticfield.InstanceQualifiers.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable.init]
 (global $instancequalifieronstaticfield.InstanceQualifiers.vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable) 
@@ -24,29 +43,12 @@
   (ref.null struct)
  ))
 
-;;; Code for instancequalifieronstaticfield.InstanceQualifiers [CLASS]
-(type $instancequalifieronstaticfield.InstanceQualifiers (struct_subtype 
- (field $vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable)) 
- (field $itable (ref $instancequalifieronstaticfield.InstanceQualifiers.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $instancequalifieronstaticfield.InstanceQualifiers.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for instancequalifieronstaticfield.InstanceQualifiers [static fields]
+(global $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
+(global $f_sideEffectCount__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
+(global $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
+
+;;; Code for instancequalifieronstaticfield.InstanceQualifiers [methods]
 
 ;;; InstanceQualifiers InstanceQualifiers.$create()
 (func $$create__@instancequalifieronstaticfield.InstanceQualifiers

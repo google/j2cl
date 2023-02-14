@@ -1,5 +1,26 @@
-;;; Code for supercalldefault.SuperCallDefault [static fields]
-(global $f_$initialized__supercalldefault_SuperCallDefault (mut i32) (i32.const 0))
+ ;;; Code for supercalldefault.SuperCallDefault [type definition]
+ (type $supercalldefault.SuperCallDefault (struct_subtype 
+  (field $vtable (ref $supercalldefault.SuperCallDefault.vtable)) 
+  (field $itable (ref $supercalldefault.SuperCallDefault.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $supercalldefault.SuperCallDefault.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $supercalldefault.SuperCallDefault.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for supercalldefault.SuperCallDefault [vtable.init]
 (global $supercalldefault.SuperCallDefault.vtable (ref $supercalldefault.SuperCallDefault.vtable) 
@@ -22,29 +43,10 @@
   (ref.null struct)
  ))
 
-;;; Code for supercalldefault.SuperCallDefault [CLASS]
-(type $supercalldefault.SuperCallDefault (struct_subtype 
- (field $vtable (ref $supercalldefault.SuperCallDefault.vtable)) 
- (field $itable (ref $supercalldefault.SuperCallDefault.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $supercalldefault.SuperCallDefault.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $supercalldefault.SuperCallDefault.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for supercalldefault.SuperCallDefault [static fields]
+(global $f_$initialized__supercalldefault_SuperCallDefault (mut i32) (i32.const 0))
+
+;;; Code for supercalldefault.SuperCallDefault [methods]
 
 ;;; SuperCallDefault SuperCallDefault.$create()
 (func $$create__@supercalldefault.SuperCallDefault

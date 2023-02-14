@@ -1,3 +1,17 @@
+ ;;; Code for equalsandhashcodeininterface.BothInInterface [type definition]
+ (type $equalsandhashcodeininterface.BothInInterface.vtable (struct 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  )
+ )
+
+ ;;; Code for equalsandhashcodeininterface.NeitherInInterface [type definition]
+ (type $equalsandhashcodeininterface.NeitherInInterface.vtable (struct 
+  )
+ )
+
+ ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [type definition]
+
 ;;; Code for equalsandhashcodeininterface.BothInInterface [static fields]
 (global $f_$initialized__equalsandhashcodeininterface_BothInInterface (mut i32) (i32.const 0))
 
@@ -6,12 +20,7 @@
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [static fields]
 
-;;; Code for equalsandhashcodeininterface.BothInInterface [INTERFACE]
-(type $equalsandhashcodeininterface.BothInInterface.vtable (struct 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- )
-)
+;;; Code for equalsandhashcodeininterface.BothInInterface [methods]
 
 ;;; void BothInInterface.$clinit()
 (func $$clinit__void@equalsandhashcodeininterface.BothInInterface
@@ -32,10 +41,7 @@
  )
 )
 
-;;; Code for equalsandhashcodeininterface.NeitherInInterface [INTERFACE]
-(type $equalsandhashcodeininterface.NeitherInInterface.vtable (struct 
- )
-)
+;;; Code for equalsandhashcodeininterface.NeitherInInterface [methods]
 
 ;;; void NeitherInInterface.$clinit()
 (func $$clinit__void@equalsandhashcodeininterface.NeitherInInterface
@@ -56,7 +62,7 @@
  )
 )
 
-;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [INTERFACE]
+;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [methods]
 
 ;;; void ViaJsMethodInInterface.notEquals()
 (func $m_notEquals__void@equalsandhashcodeininterface.ViaJsMethodInInterface (import "imports" "?.equals") 

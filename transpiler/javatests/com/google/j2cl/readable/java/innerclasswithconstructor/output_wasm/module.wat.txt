@@ -1,8 +1,53 @@
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor [static fields]
-(global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor (mut i32) (i32.const 0))
+ ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [type definition]
+ (type $innerclasswithconstructor.InnerClassWithConstructor (struct_subtype 
+  (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.vtable)) 
+  (field $itable (ref $innerclasswithconstructor.InnerClassWithConstructor.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_a__innerclasswithconstructor_InnerClassWithConstructor (mut i32))
+   $java.lang.Object)
+ )
+ (type $innerclasswithconstructor.InnerClassWithConstructor.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $innerclasswithconstructor.InnerClassWithConstructor.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [static fields]
-(global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32) (i32.const 0))
+ ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [type definition]
+ (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (struct_subtype 
+  (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) 
+  (field $itable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (ref null $innerclasswithconstructor.InnerClassWithConstructor))
+  (field $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32))
+   $java.lang.Object)
+ )
+ (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [vtable.init]
 (global $innerclasswithconstructor.InnerClassWithConstructor.vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.vtable) 
@@ -46,30 +91,13 @@
   (ref.null struct)
  ))
 
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor [CLASS]
-(type $innerclasswithconstructor.InnerClassWithConstructor (struct_subtype 
- (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.vtable)) 
- (field $itable (ref $innerclasswithconstructor.InnerClassWithConstructor.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_a__innerclasswithconstructor_InnerClassWithConstructor (mut i32))
-  $java.lang.Object)
-)
-(type $innerclasswithconstructor.InnerClassWithConstructor.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $innerclasswithconstructor.InnerClassWithConstructor.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor [static fields]
+(global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor (mut i32) (i32.const 0))
+
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [static fields]
+(global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32) (i32.const 0))
+
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor [methods]
 
 ;;; InnerClassWithConstructor InnerClassWithConstructor.$create()
 (func $$create__@innerclasswithconstructor.InnerClassWithConstructor
@@ -139,31 +167,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
 
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [CLASS]
-(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (struct_subtype 
- (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) 
- (field $itable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (ref null $innerclasswithconstructor.InnerClassWithConstructor))
- (field $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32))
-  $java.lang.Object)
-)
-(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [methods]
 
 ;;; InnerClass InnerClass.$create(InnerClassWithConstructor $outer_this, int b)
 (func $$create__innerclasswithconstructor_InnerClassWithConstructor__int@innerclasswithconstructor.InnerClassWithConstructor.InnerClass

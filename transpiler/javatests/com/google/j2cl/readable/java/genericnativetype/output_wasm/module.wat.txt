@@ -1,7 +1,28 @@
-;;; Code for genericnativetype.BoundedJsArray [static fields]
+ ;;; Code for genericnativetype.BoundedJsArray [type definition]
 
-;;; Code for genericnativetype.BoundedJsArrays [static fields]
-(global $f_$initialized__genericnativetype_BoundedJsArrays (mut i32) (i32.const 0))
+ ;;; Code for genericnativetype.BoundedJsArrays [type definition]
+ (type $genericnativetype.BoundedJsArrays (struct_subtype 
+  (field $vtable (ref $genericnativetype.BoundedJsArrays.vtable)) 
+  (field $itable (ref $genericnativetype.BoundedJsArrays.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $genericnativetype.BoundedJsArrays.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $genericnativetype.BoundedJsArrays.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for genericnativetype.BoundedJsArrays [vtable.init]
 (global $genericnativetype.BoundedJsArrays.vtable (ref $genericnativetype.BoundedJsArrays.vtable) 
@@ -24,7 +45,12 @@
   (ref.null struct)
  ))
 
-;;; Code for genericnativetype.BoundedJsArray [CLASS]
+;;; Code for genericnativetype.BoundedJsArray [static fields]
+
+;;; Code for genericnativetype.BoundedJsArrays [static fields]
+(global $f_$initialized__genericnativetype_BoundedJsArrays (mut i32) (i32.const 0))
+
+;;; Code for genericnativetype.BoundedJsArray [methods]
 
 ;;; BoundedJsArray(int size)
 (func $m_<init>__int@genericnativetype.BoundedJsArray (import "imports" "Array.constructor") 
@@ -63,29 +89,7 @@
  )
 )
 
-;;; Code for genericnativetype.BoundedJsArrays [CLASS]
-(type $genericnativetype.BoundedJsArrays (struct_subtype 
- (field $vtable (ref $genericnativetype.BoundedJsArrays.vtable)) 
- (field $itable (ref $genericnativetype.BoundedJsArrays.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $genericnativetype.BoundedJsArrays.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $genericnativetype.BoundedJsArrays.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for genericnativetype.BoundedJsArrays [methods]
 
 ;;; BoundedJsArrays BoundedJsArrays.$create()
 (func $$create__@genericnativetype.BoundedJsArrays

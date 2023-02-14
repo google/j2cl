@@ -1,9 +1,38 @@
-;;; Code for jstype.SomeJsType [static fields]
-(global $f_$initialized__jstype_SomeJsType (mut i32) (i32.const 0))
+ ;;; Code for jstype.SomeJsType.Star [type definition]
 
-;;; Code for jstype.SomeJsType.Star [static fields]
+ ;;; Code for jstype.SomeJsType.Wildcard [type definition]
 
-;;; Code for jstype.SomeJsType.Wildcard [static fields]
+ ;;; Code for jstype.SomeJsType [type definition]
+ (type $jstype.SomeJsType (struct_subtype 
+  (field $vtable (ref $jstype.SomeJsType.vtable)) 
+  (field $itable (ref $jstype.SomeJsType.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_publicField__jstype_SomeJsType (mut i32))
+  (field $f_privateField__jstype_SomeJsType_ (mut i32))
+  (field $f_packageField__jstype_SomeJsType (mut i32))
+  (field $f_protectedField__jstype_SomeJsType (mut i32))
+   $java.lang.Object)
+ )
+ (type $jstype.SomeJsType.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_publicMethod__void (ref $function.m_publicMethod__void))
+  (field $m_packageMethod__void_$pp_jstype (ref $function.m_packageMethod__void_$pp_jstype))
+  (field $m_protectedMethod__void (ref $function.m_protectedMethod__void))
+  (field $m_useFieldsAndMethods__void (ref $function.m_useFieldsAndMethods__void))
+   $java.lang.Object.vtable)
+ )
+ (type $jstype.SomeJsType.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for jstype.SomeJsType [vtable.init]
 (global $jstype.SomeJsType.vtable (ref $jstype.SomeJsType.vtable) 
@@ -30,37 +59,18 @@
   (ref.null struct)
  ))
 
-;;; Code for jstype.SomeJsType [CLASS]
-(type $jstype.SomeJsType (struct_subtype 
- (field $vtable (ref $jstype.SomeJsType.vtable)) 
- (field $itable (ref $jstype.SomeJsType.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_publicField__jstype_SomeJsType (mut i32))
- (field $f_privateField__jstype_SomeJsType_ (mut i32))
- (field $f_packageField__jstype_SomeJsType (mut i32))
- (field $f_protectedField__jstype_SomeJsType (mut i32))
-  $java.lang.Object)
-)
-(type $jstype.SomeJsType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_publicMethod__void (ref $function.m_publicMethod__void))
- (field $m_packageMethod__void_$pp_jstype (ref $function.m_packageMethod__void_$pp_jstype))
- (field $m_protectedMethod__void (ref $function.m_protectedMethod__void))
- (field $m_useFieldsAndMethods__void (ref $function.m_useFieldsAndMethods__void))
-  $java.lang.Object.vtable)
-)
-(type $jstype.SomeJsType.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jstype.SomeJsType [static fields]
+(global $f_$initialized__jstype_SomeJsType (mut i32) (i32.const 0))
+
+;;; Code for jstype.SomeJsType.Star [static fields]
+
+;;; Code for jstype.SomeJsType.Wildcard [static fields]
+
+;;; Code for jstype.SomeJsType.Star [methods]
+
+;;; Code for jstype.SomeJsType.Wildcard [methods]
+
+;;; Code for jstype.SomeJsType [methods]
 
 ;;; SomeJsType<T> SomeJsType.$create()
 (func $$create__@jstype.SomeJsType
@@ -201,7 +211,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType)
-
-;;; Code for jstype.SomeJsType.Star [INTERFACE]
-
-;;; Code for jstype.SomeJsType.Wildcard [INTERFACE]

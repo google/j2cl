@@ -1,46 +1,239 @@
-;;; Code for libraryinfo.Main [static fields]
-(global $f_STATIC_FIELD__libraryinfo_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_$initialized__libraryinfo_Main (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.JsTypeInterface [type definition]
+ (type $libraryinfo.Main.JsTypeInterface.vtable (struct 
+  (field $m_bar__void (ref $function.m_bar__void))
+  (field $m_foo__void (ref $function.m_foo__void))
+  )
+ )
 
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.FunctionnalInterface [type definition]
+ (type $libraryinfo.Main.FunctionnalInterface.vtable (struct 
+  (field $m_foo__void (ref $function.m_foo__void))
+  )
+ )
 
-;;; Code for libraryinfo.Main.1 [static fields]
-(global $f_$initialized__libraryinfo_Main_1 (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface [type definition]
+ (type $libraryinfo.Main.JsAccessibleFunctionnalInterface.vtable (struct 
+  (field $m_accessibleFunctionalInterfaceMethod__void (ref $function.m_accessibleFunctionalInterfaceMethod__void))
+  )
+ )
 
-;;; Code for libraryinfo.Main.JsTypeInterface [static fields]
-(global $f_$initialized__libraryinfo_Main_JsTypeInterface (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.Function [type definition]
+ (type $libraryinfo.Main.Function.vtable (struct 
+  (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
+  )
+ )
 
-;;; Code for libraryinfo.Main.FunctionnalInterface [static fields]
-(global $f_$initialized__libraryinfo_Main_FunctionnalInterface (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main [type definition]
+ (type $libraryinfo.Main (struct_subtype 
+  (field $vtable (ref $libraryinfo.Main.vtable)) 
+  (field $itable (ref $libraryinfo.Main.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $libraryinfo.Main.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $libraryinfo.Main.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface [static fields]
-(global $f_$initialized__libraryinfo_Main_JsAccessibleFunctionnalInterface (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [type definition]
+ (type $libraryinfo.Main.$LambdaImplementor$1 (struct_subtype 
+  (field $vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable)) 
+  (field $itable (ref $libraryinfo.Main.$LambdaImplementor$1.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $libraryinfo.Main.$LambdaImplementor$1.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
+   $java.lang.Object.vtable)
+ )
+ (type $libraryinfo.Main.$LambdaImplementor$1.itable (struct_subtype 
+ (field $slot0 (ref $libraryinfo.Main.Function.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for libraryinfo.Main.Function [static fields]
-(global $f_$initialized__libraryinfo_Main_Function (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.1 [type definition]
+ (type $libraryinfo.Main.1 (struct_subtype 
+  (field $vtable (ref $libraryinfo.Main.1.vtable)) 
+  (field $itable (ref $libraryinfo.Main.1.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $libraryinfo.Main.1.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_foo__void_$pp_libraryinfo (ref $function.m_foo__void_$pp_libraryinfo))
+   $java.lang.Object.vtable)
+ )
+ (type $libraryinfo.Main.1.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for libraryinfo.Main.FunctionImpl [static fields]
-(global $f_$initialized__libraryinfo_Main_FunctionImpl (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.FunctionImpl [type definition]
+ (type $libraryinfo.Main.FunctionImpl (struct_subtype 
+  (field $vtable (ref $libraryinfo.Main.FunctionImpl.vtable)) 
+  (field $itable (ref $libraryinfo.Main.FunctionImpl.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $libraryinfo.Main.FunctionImpl.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
+   $java.lang.Object.vtable)
+ )
+ (type $libraryinfo.Main.FunctionImpl.itable (struct_subtype 
+ (field $slot0 (ref $libraryinfo.Main.Function.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for libraryinfo.Main.MyJsEnum [static fields]
-(global $f_A__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum)) (ref.null $libraryinfo.Main.MyJsEnum))
-(global $f_B__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum)) (ref.null $libraryinfo.Main.MyJsEnum))
-(global $f_C__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum)) (ref.null $libraryinfo.Main.MyJsEnum))
-(global $f_namesToValuesMap__libraryinfo_Main_MyJsEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__libraryinfo_Main_MyJsEnum (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.MyJsType [type definition]
+ (type $libraryinfo.Main.MyJsType (struct_subtype 
+  (field $vtable (ref $libraryinfo.Main.MyJsType.vtable)) 
+  (field $itable (ref $libraryinfo.Main.MyJsType.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_someField__libraryinfo_Main_MyJsType (mut (ref null $java.lang.Object)))
+   $java.lang.Object)
+ )
+ (type $libraryinfo.Main.MyJsType.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $libraryinfo.Main.MyJsType.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for libraryinfo.Main.MyEnum [static fields]
-(global $f_FOO__libraryinfo_Main_MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
-(global $f_BAR__libraryinfo_Main_MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
-(global $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__libraryinfo_Main_MyEnum (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.Foo [type definition]
+ (type $libraryinfo.Main.Foo (struct_subtype 
+  (field $vtable (ref $libraryinfo.Main.Foo.vtable)) 
+  (field $itable (ref $libraryinfo.Main.Foo.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__libraryinfo_Main_Foo (ref null $libraryinfo.Main))
+   $java.lang.Object)
+ )
+ (type $libraryinfo.Main.Foo.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_instanceMethod__void_$pp_libraryinfo (ref $function.m_instanceMethod__void_$pp_libraryinfo))
+   $java.lang.Object.vtable)
+ )
+ (type $libraryinfo.Main.Foo.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for libraryinfo.Main.MyJsType [static fields]
-(global $f_$initialized__libraryinfo_Main_MyJsType (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.MyJsEnum [type definition]
+ (type $libraryinfo.Main.MyJsEnum (struct_subtype 
+  (field $vtable (ref $libraryinfo.Main.MyJsEnum.vtable)) 
+  (field $itable (ref $libraryinfo.Main.MyJsEnum.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
+  (field $f_ordinal__java_lang_Enum_ (mut i32))
+   $java.lang.Enum)
+ )
+ (type $libraryinfo.Main.MyJsEnum.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+  (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+  (field $m_ordinal__int (ref $function.m_ordinal__int))
+  (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
+  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+   $java.lang.Enum.vtable)
+ )
+ (type $libraryinfo.Main.MyJsEnum.itable (struct_subtype 
+ (field $slot0 (ref $java.io.Serializable.vtable))
+ (field $slot1 (ref $java.lang.Comparable.vtable))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Enum.itable))
 
-;;; Code for libraryinfo.Main.Foo [static fields]
-(global $f_$initialized__libraryinfo_Main_Foo (mut i32) (i32.const 0))
+ ;;; Code for libraryinfo.Main.MyEnum [type definition]
+ (type $libraryinfo.Main.MyEnum (struct_subtype 
+  (field $vtable (ref $libraryinfo.Main.MyEnum.vtable)) 
+  (field $itable (ref $libraryinfo.Main.MyEnum.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
+  (field $f_ordinal__java_lang_Enum_ (mut i32))
+   $java.lang.Enum)
+ )
+ (type $libraryinfo.Main.MyEnum.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+  (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+  (field $m_ordinal__int (ref $function.m_ordinal__int))
+  (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
+  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+   $java.lang.Enum.vtable)
+ )
+ (type $libraryinfo.Main.MyEnum.itable (struct_subtype 
+ (field $slot0 (ref $java.io.Serializable.vtable))
+ (field $slot1 (ref $java.lang.Comparable.vtable))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Enum.itable))
 
 ;;; Code for libraryinfo.Main [vtable.init]
 (global $libraryinfo.Main.vtable (ref $libraryinfo.Main.vtable) 
@@ -234,29 +427,135 @@
   (ref.null struct)
  ))
 
-;;; Code for libraryinfo.Main [CLASS]
-(type $libraryinfo.Main (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.vtable)) 
- (field $itable (ref $libraryinfo.Main.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+;;; Code for libraryinfo.Main [static fields]
+(global $f_STATIC_FIELD__libraryinfo_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__libraryinfo_Main (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.1 [static fields]
+(global $f_$initialized__libraryinfo_Main_1 (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.JsTypeInterface [static fields]
+(global $f_$initialized__libraryinfo_Main_JsTypeInterface (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.FunctionnalInterface [static fields]
+(global $f_$initialized__libraryinfo_Main_FunctionnalInterface (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface [static fields]
+(global $f_$initialized__libraryinfo_Main_JsAccessibleFunctionnalInterface (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.Function [static fields]
+(global $f_$initialized__libraryinfo_Main_Function (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.FunctionImpl [static fields]
+(global $f_$initialized__libraryinfo_Main_FunctionImpl (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.MyJsEnum [static fields]
+(global $f_A__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum)) (ref.null $libraryinfo.Main.MyJsEnum))
+(global $f_B__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum)) (ref.null $libraryinfo.Main.MyJsEnum))
+(global $f_C__libraryinfo_Main_MyJsEnum (mut (ref null $libraryinfo.Main.MyJsEnum)) (ref.null $libraryinfo.Main.MyJsEnum))
+(global $f_namesToValuesMap__libraryinfo_Main_MyJsEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__libraryinfo_Main_MyJsEnum (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.MyEnum [static fields]
+(global $f_FOO__libraryinfo_Main_MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
+(global $f_BAR__libraryinfo_Main_MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
+(global $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__libraryinfo_Main_MyEnum (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.MyJsType [static fields]
+(global $f_$initialized__libraryinfo_Main_MyJsType (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.Foo [static fields]
+(global $f_$initialized__libraryinfo_Main_Foo (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.JsTypeInterface [methods]
+
+;;; void JsTypeInterface.$clinit()
+(func $$clinit__void@libraryinfo.Main.JsTypeInterface
+ ;;@ libraryinfo/Main.java:34:12
+ (block
+  ;; if (libraryinfo.Main.JsTypeInterface.$initialized) return;
+  ;;@ libraryinfo/Main.java:34:12
+  (if (global.get $f_$initialized__libraryinfo_Main_JsTypeInterface)
+   (then
+    ;; return;
+    ;;@ libraryinfo/Main.java:34:12
+    (return )
+   )
+  )
+  ;; (libraryinfo.Main.JsTypeInterface.$initialized = true);
+  ;;@ libraryinfo/Main.java:34:12
+  (global.set $f_$initialized__libraryinfo_Main_JsTypeInterface (i32.const 1))
+ )
 )
-(type $libraryinfo.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
+
+;;; Code for libraryinfo.Main.FunctionnalInterface [methods]
+
+;;; void FunctionnalInterface.$clinit()
+(func $$clinit__void@libraryinfo.Main.FunctionnalInterface
+ ;;@ libraryinfo/Main.java:40:12
+ (block
+  ;; if (libraryinfo.Main.FunctionnalInterface.$initialized) return;
+  ;;@ libraryinfo/Main.java:40:12
+  (if (global.get $f_$initialized__libraryinfo_Main_FunctionnalInterface)
+   (then
+    ;; return;
+    ;;@ libraryinfo/Main.java:40:12
+    (return )
+   )
+  )
+  ;; (libraryinfo.Main.FunctionnalInterface.$initialized = true);
+  ;;@ libraryinfo/Main.java:40:12
+  (global.set $f_$initialized__libraryinfo_Main_FunctionnalInterface (i32.const 1))
+ )
 )
-(type $libraryinfo.Main.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+
+;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface [methods]
+
+;;; void JsAccessibleFunctionnalInterface.$clinit()
+(func $$clinit__void@libraryinfo.Main.JsAccessibleFunctionnalInterface
+ ;;@ libraryinfo/Main.java:44:12
+ (block
+  ;; if (libraryinfo.Main.JsAccessibleFunctionnalInterface.$initialized) return;
+  ;;@ libraryinfo/Main.java:44:12
+  (if (global.get $f_$initialized__libraryinfo_Main_JsAccessibleFunctionnalInterface)
+   (then
+    ;; return;
+    ;;@ libraryinfo/Main.java:44:12
+    (return )
+   )
+  )
+  ;; (libraryinfo.Main.JsAccessibleFunctionnalInterface.$initialized = true);
+  ;;@ libraryinfo/Main.java:44:12
+  (global.set $f_$initialized__libraryinfo_Main_JsAccessibleFunctionnalInterface (i32.const 1))
+ )
+)
+
+;;; Code for libraryinfo.Main.Function [methods]
+
+;;; void Function.$clinit()
+(func $$clinit__void@libraryinfo.Main.Function
+ ;;@ libraryinfo/Main.java:50:12
+ (block
+  ;; if (libraryinfo.Main.Function.$initialized) return;
+  ;;@ libraryinfo/Main.java:50:12
+  (if (global.get $f_$initialized__libraryinfo_Main_Function)
+   (then
+    ;; return;
+    ;;@ libraryinfo/Main.java:50:12
+    (return )
+   )
+  )
+  ;; (libraryinfo.Main.Function.$initialized = true);
+  ;;@ libraryinfo/Main.java:50:12
+  (global.set $f_$initialized__libraryinfo_Main_Function (i32.const 1))
+ )
+)
+
+;;; Code for libraryinfo.Main [methods]
 
 ;;; Main Main.$create()
 (func $$create__@libraryinfo.Main
@@ -411,30 +710,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main)
 
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [CLASS]
-(type $libraryinfo.Main.$LambdaImplementor$1 (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $libraryinfo.Main.$LambdaImplementor$1.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $libraryinfo.Main.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
-  $java.lang.Object.vtable)
-)
-(type $libraryinfo.Main.$LambdaImplementor$1.itable (struct_subtype 
-(field $slot0 (ref $libraryinfo.Main.Function.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [methods]
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
 (func $$create__@libraryinfo.Main.$LambdaImplementor$1
@@ -520,30 +796,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
 
-;;; Code for libraryinfo.Main.1 [CLASS]
-(type $libraryinfo.Main.1 (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.1.vtable)) 
- (field $itable (ref $libraryinfo.Main.1.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $libraryinfo.Main.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__void_$pp_libraryinfo (ref $function.m_foo__void_$pp_libraryinfo))
-  $java.lang.Object.vtable)
-)
-(type $libraryinfo.Main.1.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for libraryinfo.Main.1 [methods]
 
 ;;; <anonymous> extends Object <anonymous> extends Object.$create()
 (func $$create__@libraryinfo.Main.1
@@ -625,131 +878,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.1)
 
-;;; Code for libraryinfo.Main.JsTypeInterface [INTERFACE]
-(type $libraryinfo.Main.JsTypeInterface.vtable (struct 
- (field $m_bar__void (ref $function.m_bar__void))
- (field $m_foo__void (ref $function.m_foo__void))
- )
-)
-
-;;; void JsTypeInterface.$clinit()
-(func $$clinit__void@libraryinfo.Main.JsTypeInterface
- ;;@ libraryinfo/Main.java:34:12
- (block
-  ;; if (libraryinfo.Main.JsTypeInterface.$initialized) return;
-  ;;@ libraryinfo/Main.java:34:12
-  (if (global.get $f_$initialized__libraryinfo_Main_JsTypeInterface)
-   (then
-    ;; return;
-    ;;@ libraryinfo/Main.java:34:12
-    (return )
-   )
-  )
-  ;; (libraryinfo.Main.JsTypeInterface.$initialized = true);
-  ;;@ libraryinfo/Main.java:34:12
-  (global.set $f_$initialized__libraryinfo_Main_JsTypeInterface (i32.const 1))
- )
-)
-
-;;; Code for libraryinfo.Main.FunctionnalInterface [INTERFACE]
-(type $libraryinfo.Main.FunctionnalInterface.vtable (struct 
- (field $m_foo__void (ref $function.m_foo__void))
- )
-)
-
-;;; void FunctionnalInterface.$clinit()
-(func $$clinit__void@libraryinfo.Main.FunctionnalInterface
- ;;@ libraryinfo/Main.java:40:12
- (block
-  ;; if (libraryinfo.Main.FunctionnalInterface.$initialized) return;
-  ;;@ libraryinfo/Main.java:40:12
-  (if (global.get $f_$initialized__libraryinfo_Main_FunctionnalInterface)
-   (then
-    ;; return;
-    ;;@ libraryinfo/Main.java:40:12
-    (return )
-   )
-  )
-  ;; (libraryinfo.Main.FunctionnalInterface.$initialized = true);
-  ;;@ libraryinfo/Main.java:40:12
-  (global.set $f_$initialized__libraryinfo_Main_FunctionnalInterface (i32.const 1))
- )
-)
-
-;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface [INTERFACE]
-(type $libraryinfo.Main.JsAccessibleFunctionnalInterface.vtable (struct 
- (field $m_accessibleFunctionalInterfaceMethod__void (ref $function.m_accessibleFunctionalInterfaceMethod__void))
- )
-)
-
-;;; void JsAccessibleFunctionnalInterface.$clinit()
-(func $$clinit__void@libraryinfo.Main.JsAccessibleFunctionnalInterface
- ;;@ libraryinfo/Main.java:44:12
- (block
-  ;; if (libraryinfo.Main.JsAccessibleFunctionnalInterface.$initialized) return;
-  ;;@ libraryinfo/Main.java:44:12
-  (if (global.get $f_$initialized__libraryinfo_Main_JsAccessibleFunctionnalInterface)
-   (then
-    ;; return;
-    ;;@ libraryinfo/Main.java:44:12
-    (return )
-   )
-  )
-  ;; (libraryinfo.Main.JsAccessibleFunctionnalInterface.$initialized = true);
-  ;;@ libraryinfo/Main.java:44:12
-  (global.set $f_$initialized__libraryinfo_Main_JsAccessibleFunctionnalInterface (i32.const 1))
- )
-)
-
-;;; Code for libraryinfo.Main.Function [INTERFACE]
-(type $libraryinfo.Main.Function.vtable (struct 
- (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
- )
-)
-
-;;; void Function.$clinit()
-(func $$clinit__void@libraryinfo.Main.Function
- ;;@ libraryinfo/Main.java:50:12
- (block
-  ;; if (libraryinfo.Main.Function.$initialized) return;
-  ;;@ libraryinfo/Main.java:50:12
-  (if (global.get $f_$initialized__libraryinfo_Main_Function)
-   (then
-    ;; return;
-    ;;@ libraryinfo/Main.java:50:12
-    (return )
-   )
-  )
-  ;; (libraryinfo.Main.Function.$initialized = true);
-  ;;@ libraryinfo/Main.java:50:12
-  (global.set $f_$initialized__libraryinfo_Main_Function (i32.const 1))
- )
-)
-
-;;; Code for libraryinfo.Main.FunctionImpl [CLASS]
-(type $libraryinfo.Main.FunctionImpl (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.FunctionImpl.vtable)) 
- (field $itable (ref $libraryinfo.Main.FunctionImpl.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $libraryinfo.Main.FunctionImpl.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
-  $java.lang.Object.vtable)
-)
-(type $libraryinfo.Main.FunctionImpl.itable (struct_subtype 
-(field $slot0 (ref $libraryinfo.Main.Function.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for libraryinfo.Main.FunctionImpl [methods]
 
 ;;; FunctionImpl FunctionImpl.$create()
 (func $$create__@libraryinfo.Main.FunctionImpl
@@ -832,36 +961,164 @@
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionImpl)
 
-;;; Code for libraryinfo.Main.MyJsEnum [ENUM]
-(type $libraryinfo.Main.MyJsEnum (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.MyJsEnum.vtable)) 
- (field $itable (ref $libraryinfo.Main.MyJsEnum.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-  $java.lang.Enum)
+;;; Code for libraryinfo.Main.MyJsType [methods]
+
+;;; MyJsType MyJsType.$create()
+(func $$create__@libraryinfo.Main.MyJsType
+ (result (ref null $libraryinfo.Main.MyJsType))
+ ;;@ libraryinfo/Main.java:74:11
+ (local $$instance (ref null $libraryinfo.Main.MyJsType))
+ (block
+  ;; MyJsType $instance = new MyJsType.<init>(0,null);
+  ;;@ libraryinfo/Main.java:74:11
+  (local.set $$instance (struct.new $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.itable)) (i32.const 0) (ref.null $java.lang.Object)))
+  ;; $instance.$ctor();
+  ;;@ libraryinfo/Main.java:74:11
+  (call $$ctor__void_$p_libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ libraryinfo/Main.java:74:11
+  (return (local.get $$instance))
+ )
 )
-(type $libraryinfo.Main.MyJsEnum.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
- (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
- (field $m_ordinal__int (ref $function.m_ordinal__int))
- (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
- (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
-  $java.lang.Enum.vtable)
+
+;;; void MyJsType.$ctor()
+(func $$ctor__void_$p_libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType
+ (param $this (ref null $libraryinfo.Main.MyJsType))
+ ;;@ libraryinfo/Main.java:74:11
+ (block
+  ;; libraryinfo.Main.MyJsType.$clinit();
+  ;;@ libraryinfo/Main.java:74:22
+  (call $$clinit__void@libraryinfo.Main.MyJsType )
+  ;; Object.this.$ctor();
+  ;;@ libraryinfo/Main.java:74:22
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+  ;; (MyJsType.this.someField = libraryinfo.Main.$create());
+  ;;@ libraryinfo/Main.java:75:6
+  (struct.set $libraryinfo.Main.MyJsType $f_someField__libraryinfo_Main_MyJsType(local.get $this) (call $$create__@libraryinfo.Main ))
+ )
 )
-(type $libraryinfo.Main.MyJsEnum.itable (struct_subtype 
-(field $slot0 (ref $java.io.Serializable.vtable))
-(field $slot1 (ref $java.lang.Comparable.vtable))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Enum.itable))
+
+;;; void MyJsType.$clinit()
+(func $$clinit__void@libraryinfo.Main.MyJsType
+ ;;@ libraryinfo/Main.java:71:22
+ (block
+  ;; if (libraryinfo.Main.MyJsType.$initialized) return;
+  ;;@ libraryinfo/Main.java:71:22
+  (if (global.get $f_$initialized__libraryinfo_Main_MyJsType)
+   (then
+    ;; return;
+    ;;@ libraryinfo/Main.java:71:22
+    (return )
+   )
+  )
+  ;; (libraryinfo.Main.MyJsType.$initialized = true);
+  ;;@ libraryinfo/Main.java:71:22
+  (global.set $f_$initialized__libraryinfo_Main_MyJsType (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ libraryinfo/Main.java:71:22
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> MyJsType.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.MyJsType))
+ (local.set $this (ref.cast_static $libraryinfo.Main.MyJsType (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.MyJsType();
+  (return (call $function.no.side.effects.$getLibraryinfo.Main.MyJsType__java_lang_Class (ref.func $$getLibraryinfo.Main.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType)
+
+;;; Code for libraryinfo.Main.Foo [methods]
+
+;;; Foo Foo.$create(Main $outer_this)
+(func $$create__libraryinfo_Main@libraryinfo.Main.Foo
+ (param $$outer_this (ref null $libraryinfo.Main))
+ (result (ref null $libraryinfo.Main.Foo))
+ ;;@ libraryinfo/Main.java:107:15
+ (local $$instance (ref null $libraryinfo.Main.Foo))
+ (block
+  ;; Foo $instance = new Foo.<init>(0,$outer_this);
+  ;;@ libraryinfo/Main.java:107:15
+  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.Foo.itable)) (i32.const 0) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ libraryinfo/Main.java:107:15
+  (call $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ libraryinfo/Main.java:107:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Foo.$ctor(Main $outer_this)
+(func $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo
+ (param $this (ref null $libraryinfo.Main.Foo))
+ (param $$outer_this (ref null $libraryinfo.Main))
+ ;;@ libraryinfo/Main.java:107:15
+ (block
+  ;; libraryinfo.Main.Foo.$clinit();
+  ;;@ libraryinfo/Main.java:107:15
+  (call $$clinit__void@libraryinfo.Main.Foo )
+  ;; Object.this.$ctor();
+  ;;@ libraryinfo/Main.java:107:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void Foo.instanceMethod()
+(func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo
+ (type $function.m_instanceMethod__void_$pp_libraryinfo)
+ (param $this.untyped (ref $java.lang.Object))
+ ;;@ libraryinfo/Main.java:108:9
+ (local $this (ref null $libraryinfo.Main.Foo))
+ (local.set $this (ref.cast_static $libraryinfo.Main.Foo (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@libraryinfo.Main.Foo
+ ;;@ libraryinfo/Main.java:107:15
+ (block
+  ;; if (libraryinfo.Main.Foo.$initialized) return;
+  ;;@ libraryinfo/Main.java:107:15
+  (if (global.get $f_$initialized__libraryinfo_Main_Foo)
+   (then
+    ;; return;
+    ;;@ libraryinfo/Main.java:107:15
+    (return )
+   )
+  )
+  ;; (libraryinfo.Main.Foo.$initialized = true);
+  ;;@ libraryinfo/Main.java:107:15
+  (global.set $f_$initialized__libraryinfo_Main_Foo (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ libraryinfo/Main.java:107:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.Foo
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.Foo))
+ (local.set $this (ref.cast_static $libraryinfo.Main.Foo (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
+  (return (call $function.no.side.effects.$getLibraryinfo.Main.Foo__java_lang_Class (ref.func $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Foo)
+
+;;; Code for libraryinfo.Main.MyJsEnum [methods]
 
 ;;; MyJsEnum MyJsEnum.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@libraryinfo.Main.MyJsEnum
@@ -987,36 +1244,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsEnum)
 
-;;; Code for libraryinfo.Main.MyEnum [ENUM]
-(type $libraryinfo.Main.MyEnum (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.MyEnum.vtable)) 
- (field $itable (ref $libraryinfo.Main.MyEnum.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-  $java.lang.Enum)
-)
-(type $libraryinfo.Main.MyEnum.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
- (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
- (field $m_ordinal__int (ref $function.m_ordinal__int))
- (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
- (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
-  $java.lang.Enum.vtable)
-)
-(type $libraryinfo.Main.MyEnum.itable (struct_subtype 
-(field $slot0 (ref $java.io.Serializable.vtable))
-(field $slot1 (ref $java.lang.Comparable.vtable))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Enum.itable))
+;;; Code for libraryinfo.Main.MyEnum [methods]
 
 ;;; MyEnum MyEnum.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@libraryinfo.Main.MyEnum
@@ -1138,207 +1366,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyEnum)
-
-;;; Code for libraryinfo.Main.MyJsType [CLASS]
-(type $libraryinfo.Main.MyJsType (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.MyJsType.vtable)) 
- (field $itable (ref $libraryinfo.Main.MyJsType.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_someField__libraryinfo_Main_MyJsType (mut (ref null $java.lang.Object)))
-  $java.lang.Object)
-)
-(type $libraryinfo.Main.MyJsType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $libraryinfo.Main.MyJsType.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
-
-;;; MyJsType MyJsType.$create()
-(func $$create__@libraryinfo.Main.MyJsType
- (result (ref null $libraryinfo.Main.MyJsType))
- ;;@ libraryinfo/Main.java:74:11
- (local $$instance (ref null $libraryinfo.Main.MyJsType))
- (block
-  ;; MyJsType $instance = new MyJsType.<init>(0,null);
-  ;;@ libraryinfo/Main.java:74:11
-  (local.set $$instance (struct.new $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.itable)) (i32.const 0) (ref.null $java.lang.Object)))
-  ;; $instance.$ctor();
-  ;;@ libraryinfo/Main.java:74:11
-  (call $$ctor__void_$p_libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
-  ;;@ libraryinfo/Main.java:74:11
-  (return (local.get $$instance))
- )
-)
-
-;;; void MyJsType.$ctor()
-(func $$ctor__void_$p_libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType
- (param $this (ref null $libraryinfo.Main.MyJsType))
- ;;@ libraryinfo/Main.java:74:11
- (block
-  ;; libraryinfo.Main.MyJsType.$clinit();
-  ;;@ libraryinfo/Main.java:74:22
-  (call $$clinit__void@libraryinfo.Main.MyJsType )
-  ;; Object.this.$ctor();
-  ;;@ libraryinfo/Main.java:74:22
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
-  ;; (MyJsType.this.someField = libraryinfo.Main.$create());
-  ;;@ libraryinfo/Main.java:75:6
-  (struct.set $libraryinfo.Main.MyJsType $f_someField__libraryinfo_Main_MyJsType(local.get $this) (call $$create__@libraryinfo.Main ))
- )
-)
-
-;;; void MyJsType.$clinit()
-(func $$clinit__void@libraryinfo.Main.MyJsType
- ;;@ libraryinfo/Main.java:71:22
- (block
-  ;; if (libraryinfo.Main.MyJsType.$initialized) return;
-  ;;@ libraryinfo/Main.java:71:22
-  (if (global.get $f_$initialized__libraryinfo_Main_MyJsType)
-   (then
-    ;; return;
-    ;;@ libraryinfo/Main.java:71:22
-    (return )
-   )
-  )
-  ;; (libraryinfo.Main.MyJsType.$initialized = true);
-  ;;@ libraryinfo/Main.java:71:22
-  (global.set $f_$initialized__libraryinfo_Main_MyJsType (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ libraryinfo/Main.java:71:22
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> MyJsType.getClass()
-(func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $libraryinfo.Main.MyJsType))
- (local.set $this (ref.cast_static $libraryinfo.Main.MyJsType (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.MyJsType();
-  (return (call $function.no.side.effects.$getLibraryinfo.Main.MyJsType__java_lang_Class (ref.func $$getLibraryinfo.Main.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType)
-
-;;; Code for libraryinfo.Main.Foo [CLASS]
-(type $libraryinfo.Main.Foo (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.Foo.vtable)) 
- (field $itable (ref $libraryinfo.Main.Foo.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__libraryinfo_Main_Foo (ref null $libraryinfo.Main))
-  $java.lang.Object)
-)
-(type $libraryinfo.Main.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_instanceMethod__void_$pp_libraryinfo (ref $function.m_instanceMethod__void_$pp_libraryinfo))
-  $java.lang.Object.vtable)
-)
-(type $libraryinfo.Main.Foo.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
-
-;;; Foo Foo.$create(Main $outer_this)
-(func $$create__libraryinfo_Main@libraryinfo.Main.Foo
- (param $$outer_this (ref null $libraryinfo.Main))
- (result (ref null $libraryinfo.Main.Foo))
- ;;@ libraryinfo/Main.java:107:15
- (local $$instance (ref null $libraryinfo.Main.Foo))
- (block
-  ;; Foo $instance = new Foo.<init>(0,$outer_this);
-  ;;@ libraryinfo/Main.java:107:15
-  (local.set $$instance (struct.new $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.Foo.itable)) (i32.const 0) (local.get $$outer_this)))
-  ;; $instance.$ctor($outer_this);
-  ;;@ libraryinfo/Main.java:107:15
-  (call $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
-  ;; return $instance;
-  ;;@ libraryinfo/Main.java:107:15
-  (return (local.get $$instance))
- )
-)
-
-;;; void Foo.$ctor(Main $outer_this)
-(func $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo
- (param $this (ref null $libraryinfo.Main.Foo))
- (param $$outer_this (ref null $libraryinfo.Main))
- ;;@ libraryinfo/Main.java:107:15
- (block
-  ;; libraryinfo.Main.Foo.$clinit();
-  ;;@ libraryinfo/Main.java:107:15
-  (call $$clinit__void@libraryinfo.Main.Foo )
-  ;; Object.this.$ctor();
-  ;;@ libraryinfo/Main.java:107:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; void Foo.instanceMethod()
-(func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo
- (type $function.m_instanceMethod__void_$pp_libraryinfo)
- (param $this.untyped (ref $java.lang.Object))
- ;;@ libraryinfo/Main.java:108:9
- (local $this (ref null $libraryinfo.Main.Foo))
- (local.set $this (ref.cast_static $libraryinfo.Main.Foo (local.get $this.untyped)))
- (block
- )
-)
-(elem declare func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo)
-
-;;; void Foo.$clinit()
-(func $$clinit__void@libraryinfo.Main.Foo
- ;;@ libraryinfo/Main.java:107:15
- (block
-  ;; if (libraryinfo.Main.Foo.$initialized) return;
-  ;;@ libraryinfo/Main.java:107:15
-  (if (global.get $f_$initialized__libraryinfo_Main_Foo)
-   (then
-    ;; return;
-    ;;@ libraryinfo/Main.java:107:15
-    (return )
-   )
-  )
-  ;; (libraryinfo.Main.Foo.$initialized = true);
-  ;;@ libraryinfo/Main.java:107:15
-  (global.set $f_$initialized__libraryinfo_Main_Foo (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ libraryinfo/Main.java:107:15
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> Foo.getClass()
-(func $m_getClass__java_lang_Class@libraryinfo.Main.Foo
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $libraryinfo.Main.Foo))
- (local.set $this (ref.cast_static $libraryinfo.Main.Foo (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
-  (return (call $function.no.side.effects.$getLibraryinfo.Main.Foo__java_lang_Class (ref.func $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Foo)

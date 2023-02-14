@@ -1,23 +1,210 @@
-;;; Code for wasmimmutablefields.WasmImmutableFields [static fields]
-(global $f_$initialized__wasmimmutablefields_WasmImmutableFields (mut i32) (i32.const 0))
+ ;;; Code for wasmimmutablefields.WasmImmutableFields [type definition]
+ (type $wasmimmutablefields.WasmImmutableFields (struct_subtype 
+  (field $vtable (ref $wasmimmutablefields.WasmImmutableFields.vtable)) 
+  (field $itable (ref $wasmimmutablefields.WasmImmutableFields.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $wasmimmutablefields.WasmImmutableFields.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $wasmimmutablefields.WasmImmutableFields.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for wasmimmutablefields.AssignmentsInDeclaration [static fields]
-(global $f_$initialized__wasmimmutablefields_AssignmentsInDeclaration (mut i32) (i32.const 0))
+ ;;; Code for wasmimmutablefields.AssignmentsInDeclaration [type definition]
+ (type $wasmimmutablefields.AssignmentsInDeclaration (struct_subtype 
+  (field $vtable (ref $wasmimmutablefields.AssignmentsInDeclaration.vtable)) 
+  (field $itable (ref $wasmimmutablefields.AssignmentsInDeclaration.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInDeclaration i32)
+  (field $f_stringLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $java.lang.String))
+  (field $f_newArray__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_newArrayMultidimensional__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_arrayLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfInt))
+  (field $f_arrayLiteralMultidimensional__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_classLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $java.lang.Class))
+  (field $f_withCast__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
+   $java.lang.Object)
+ )
+ (type $wasmimmutablefields.AssignmentsInDeclaration.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $wasmimmutablefields.AssignmentsInDeclaration.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for wasmimmutablefields.AssignmentsInInitializer [static fields]
-(global $f_$initialized__wasmimmutablefields_AssignmentsInInitializer (mut i32) (i32.const 0))
+ ;;; Code for wasmimmutablefields.AssignmentsInInitializer [type definition]
+ (type $wasmimmutablefields.AssignmentsInInitializer (struct_subtype 
+  (field $vtable (ref $wasmimmutablefields.AssignmentsInInitializer.vtable)) 
+  (field $itable (ref $wasmimmutablefields.AssignmentsInInitializer.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInInitializer i32)
+  (field $f_stringLiteral__wasmimmutablefields_AssignmentsInInitializer (ref null $java.lang.String))
+  (field $f_newArray__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_newArrayMultidimensional__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_arrayLiteral__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfInt))
+  (field $f_arrayLiteralMultidimensional__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_classLiteral__wasmimmutablefields_AssignmentsInInitializer (ref null $java.lang.Class))
+  (field $f_withCast__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfObject))
+   $java.lang.Object)
+ )
+ (type $wasmimmutablefields.AssignmentsInInitializer.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $wasmimmutablefields.AssignmentsInInitializer.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for wasmimmutablefields.AssignmentsInConstructor [static fields]
-(global $f_$initialized__wasmimmutablefields_AssignmentsInConstructor (mut i32) (i32.const 0))
+ ;;; Code for wasmimmutablefields.AssignmentsInConstructor [type definition]
+ (type $wasmimmutablefields.AssignmentsInConstructor (struct_subtype 
+  (field $vtable (ref $wasmimmutablefields.AssignmentsInConstructor.vtable)) 
+  (field $itable (ref $wasmimmutablefields.AssignmentsInConstructor.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInConstructor i32)
+  (field $f_stringLiteral__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.String))
+  (field $f_newArray__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_newArrayMultidimensional__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_arrayLiteral__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfInt))
+  (field $f_arrayLiteralMultidimensional__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_classLiteral__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.Class))
+  (field $f_withCast__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_fromParameter__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.Object))
+  (field $f_finalFieldReference__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.String))
+   $java.lang.Object)
+ )
+ (type $wasmimmutablefields.AssignmentsInConstructor.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $wasmimmutablefields.AssignmentsInConstructor.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for wasmimmutablefields.OptimizesWithThisConstructorDelegation [static fields]
-(global $f_$initialized__wasmimmutablefields_OptimizesWithThisConstructorDelegation (mut i32) (i32.const 0))
+ ;;; Code for wasmimmutablefields.OptimizesWithThisConstructorDelegation [type definition]
+ (type $wasmimmutablefields.OptimizesWithThisConstructorDelegation (struct_subtype 
+  (field $vtable (ref $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)) 
+  (field $itable (ref $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation i32)
+   $java.lang.Object)
+ )
+ (type $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [static fields]
-(global $f_$initialized__wasmimmutablefields_OptimizesWithSuperConstructorDelegation (mut i32) (i32.const 0))
+ ;;; Code for wasmimmutablefields.FinalizerTest [type definition]
+ (type $wasmimmutablefields.FinalizerTest (struct_subtype 
+  (field $vtable (ref $wasmimmutablefields.FinalizerTest.vtable)) 
+  (field $itable (ref $wasmimmutablefields.FinalizerTest.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest i32)
+  (field $f_readInInit__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_writtenOutsideConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_readBeforeWrite__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_writtenInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_compoundAssignment__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_effectivelyFinalButNotOptimizedIfBranches__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_effectivelyFinalButNotOptimizedNestedBlock__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_writtenInInitAndConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_writtenInInitializerAndInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+  (field $f_writtenOnlyInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
+   $java.lang.Object)
+ )
+ (type $wasmimmutablefields.FinalizerTest.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_foo__void_$pp_wasmimmutablefields (ref $function.m_foo__void_$pp_wasmimmutablefields))
+   $java.lang.Object.vtable)
+ )
+ (type $wasmimmutablefields.FinalizerTest.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for wasmimmutablefields.FinalizerTest [static fields]
-(global $f_$initialized__wasmimmutablefields_FinalizerTest (mut i32) (i32.const 0))
+ ;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [type definition]
+ (type $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (struct_subtype 
+  (field $vtable (ref $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) 
+  (field $itable (ref $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation i32)
+   $wasmimmutablefields.OptimizesWithThisConstructorDelegation)
+ )
+ (type $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)
+ )
+ (type $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable))
 
 ;;; Code for wasmimmutablefields.WasmImmutableFields [vtable.init]
 (global $wasmimmutablefields.WasmImmutableFields.vtable (ref $wasmimmutablefields.WasmImmutableFields.vtable) 
@@ -167,29 +354,28 @@
   (ref.null struct)
  ))
 
-;;; Code for wasmimmutablefields.WasmImmutableFields [CLASS]
-(type $wasmimmutablefields.WasmImmutableFields (struct_subtype 
- (field $vtable (ref $wasmimmutablefields.WasmImmutableFields.vtable)) 
- (field $itable (ref $wasmimmutablefields.WasmImmutableFields.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $wasmimmutablefields.WasmImmutableFields.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $wasmimmutablefields.WasmImmutableFields.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for wasmimmutablefields.WasmImmutableFields [static fields]
+(global $f_$initialized__wasmimmutablefields_WasmImmutableFields (mut i32) (i32.const 0))
+
+;;; Code for wasmimmutablefields.AssignmentsInDeclaration [static fields]
+(global $f_$initialized__wasmimmutablefields_AssignmentsInDeclaration (mut i32) (i32.const 0))
+
+;;; Code for wasmimmutablefields.AssignmentsInInitializer [static fields]
+(global $f_$initialized__wasmimmutablefields_AssignmentsInInitializer (mut i32) (i32.const 0))
+
+;;; Code for wasmimmutablefields.AssignmentsInConstructor [static fields]
+(global $f_$initialized__wasmimmutablefields_AssignmentsInConstructor (mut i32) (i32.const 0))
+
+;;; Code for wasmimmutablefields.OptimizesWithThisConstructorDelegation [static fields]
+(global $f_$initialized__wasmimmutablefields_OptimizesWithThisConstructorDelegation (mut i32) (i32.const 0))
+
+;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [static fields]
+(global $f_$initialized__wasmimmutablefields_OptimizesWithSuperConstructorDelegation (mut i32) (i32.const 0))
+
+;;; Code for wasmimmutablefields.FinalizerTest [static fields]
+(global $f_$initialized__wasmimmutablefields_FinalizerTest (mut i32) (i32.const 0))
+
+;;; Code for wasmimmutablefields.WasmImmutableFields [methods]
 
 ;;; WasmImmutableFields WasmImmutableFields.$create()
 (func $$create__@wasmimmutablefields.WasmImmutableFields
@@ -259,37 +445,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.WasmImmutableFields)
 
-;;; Code for wasmimmutablefields.AssignmentsInDeclaration [CLASS]
-(type $wasmimmutablefields.AssignmentsInDeclaration (struct_subtype 
- (field $vtable (ref $wasmimmutablefields.AssignmentsInDeclaration.vtable)) 
- (field $itable (ref $wasmimmutablefields.AssignmentsInDeclaration.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInDeclaration i32)
- (field $f_stringLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $java.lang.String))
- (field $f_newArray__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_newArrayMultidimensional__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_arrayLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfInt))
- (field $f_arrayLiteralMultidimensional__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_classLiteral__wasmimmutablefields_AssignmentsInDeclaration (ref null $java.lang.Class))
- (field $f_withCast__wasmimmutablefields_AssignmentsInDeclaration (ref null $javaemul.internal.WasmArray.OfObject))
-  $java.lang.Object)
-)
-(type $wasmimmutablefields.AssignmentsInDeclaration.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $wasmimmutablefields.AssignmentsInDeclaration.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for wasmimmutablefields.AssignmentsInDeclaration [methods]
 
 ;;; AssignmentsInDeclaration AssignmentsInDeclaration.$create()
 (func $$create__@wasmimmutablefields.AssignmentsInDeclaration
@@ -370,37 +526,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.AssignmentsInDeclaration)
 
-;;; Code for wasmimmutablefields.AssignmentsInInitializer [CLASS]
-(type $wasmimmutablefields.AssignmentsInInitializer (struct_subtype 
- (field $vtable (ref $wasmimmutablefields.AssignmentsInInitializer.vtable)) 
- (field $itable (ref $wasmimmutablefields.AssignmentsInInitializer.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInInitializer i32)
- (field $f_stringLiteral__wasmimmutablefields_AssignmentsInInitializer (ref null $java.lang.String))
- (field $f_newArray__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_newArrayMultidimensional__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_arrayLiteral__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfInt))
- (field $f_arrayLiteralMultidimensional__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_classLiteral__wasmimmutablefields_AssignmentsInInitializer (ref null $java.lang.Class))
- (field $f_withCast__wasmimmutablefields_AssignmentsInInitializer (ref null $javaemul.internal.WasmArray.OfObject))
-  $java.lang.Object)
-)
-(type $wasmimmutablefields.AssignmentsInInitializer.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $wasmimmutablefields.AssignmentsInInitializer.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for wasmimmutablefields.AssignmentsInInitializer [methods]
 
 ;;; AssignmentsInInitializer AssignmentsInInitializer.$create()
 (func $$create__@wasmimmutablefields.AssignmentsInInitializer
@@ -481,39 +607,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.AssignmentsInInitializer)
 
-;;; Code for wasmimmutablefields.AssignmentsInConstructor [CLASS]
-(type $wasmimmutablefields.AssignmentsInConstructor (struct_subtype 
- (field $vtable (ref $wasmimmutablefields.AssignmentsInConstructor.vtable)) 
- (field $itable (ref $wasmimmutablefields.AssignmentsInConstructor.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_compileTimeConstant__wasmimmutablefields_AssignmentsInConstructor i32)
- (field $f_stringLiteral__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.String))
- (field $f_newArray__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_newArrayMultidimensional__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_arrayLiteral__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfInt))
- (field $f_arrayLiteralMultidimensional__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_classLiteral__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.Class))
- (field $f_withCast__wasmimmutablefields_AssignmentsInConstructor (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_fromParameter__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.Object))
- (field $f_finalFieldReference__wasmimmutablefields_AssignmentsInConstructor (ref null $java.lang.String))
-  $java.lang.Object)
-)
-(type $wasmimmutablefields.AssignmentsInConstructor.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $wasmimmutablefields.AssignmentsInConstructor.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for wasmimmutablefields.AssignmentsInConstructor [methods]
 
 ;;; AssignmentsInConstructor AssignmentsInConstructor.$create(Object parameter, int intParameter, AssignmentsInConstructor par)
 (func $$create__java_lang_Object__int__wasmimmutablefields_AssignmentsInConstructor@wasmimmutablefields.AssignmentsInConstructor
@@ -589,30 +683,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.AssignmentsInConstructor)
 
-;;; Code for wasmimmutablefields.OptimizesWithThisConstructorDelegation [CLASS]
-(type $wasmimmutablefields.OptimizesWithThisConstructorDelegation (struct_subtype 
- (field $vtable (ref $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)) 
- (field $itable (ref $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation i32)
-  $java.lang.Object)
-)
-(type $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for wasmimmutablefields.OptimizesWithThisConstructorDelegation [methods]
 
 ;;; OptimizesWithThisConstructorDelegation OptimizesWithThisConstructorDelegation.$create()
 (func $$create__@wasmimmutablefields.OptimizesWithThisConstructorDelegation
@@ -750,202 +821,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.OptimizesWithThisConstructorDelegation)
 
-;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [CLASS]
-(type $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (struct_subtype 
- (field $vtable (ref $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) 
- (field $itable (ref $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_optimizeableField__wasmimmutablefields_OptimizesWithThisConstructorDelegation i32)
-  $wasmimmutablefields.OptimizesWithThisConstructorDelegation)
-)
-(type $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $wasmimmutablefields.OptimizesWithThisConstructorDelegation.vtable)
-)
-(type $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $wasmimmutablefields.OptimizesWithThisConstructorDelegation.itable))
-
-;;; OptimizesWithSuperConstructorDelegation OptimizesWithSuperConstructorDelegation.$create()
-(func $$create__@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
- (result (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
- (local $$instance (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- (block
-  ;; OptimizesWithSuperConstructorDelegation $instance = new OptimizesWithSuperConstructorDelegation.<init>(0,2);
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
-  (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (i32.const 2)))
-  ;; $instance.$ctor();
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
-  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance)))
-  ;; return $instance;
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
-  (return (local.get $$instance))
- )
-)
-
-;;; void OptimizesWithSuperConstructorDelegation.$ctor()
-(func $$ctor__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
- (param $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
- (block
-  ;; wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$clinit();
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:44
-  (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
-  ;; OptimizesWithThisConstructorDelegation.this.$ctor();
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:44
-  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $this)))
- )
-)
-
-;;; OptimizesWithSuperConstructorDelegation OptimizesWithSuperConstructorDelegation.$create(int parameter)
-(func $$create__int@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
- (param $parameter i32)
- (result (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
- (local $$instance (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- (block
-  ;; OptimizesWithSuperConstructorDelegation $instance = new OptimizesWithSuperConstructorDelegation.<init>(0,parameter);
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
-  (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (local.get $parameter)))
-  ;; $instance.$ctor(parameter);
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
-  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance))(local.get $parameter))
-  ;; return $instance;
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
-  (return (local.get $$instance))
- )
-)
-
-;;; void OptimizesWithSuperConstructorDelegation.$ctor(int parameter)
-(func $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
- (param $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- (param $parameter i32)
- ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
- (block
-  ;; wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$clinit();
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:99:57
-  (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
-  ;; OptimizesWithThisConstructorDelegation.this.$ctor(parameter);
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:101:4
-  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $this))(local.get $parameter))
- )
-)
-
-;;; OptimizesWithSuperConstructorDelegation OptimizesWithSuperConstructorDelegation.$create(short parameter)
-(func $$create__short@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
- (param $parameter i32)
- (result (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
- (local $$instance (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- (block
-  ;; OptimizesWithSuperConstructorDelegation $instance = new OptimizesWithSuperConstructorDelegation.<init>(0,parameter);
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
-  (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (local.get $parameter)))
-  ;; $instance.$ctor(parameter);
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
-  (call $$ctor__short__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance))(local.get $parameter))
-  ;; return $instance;
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
-  (return (local.get $$instance))
- )
-)
-
-;;; void OptimizesWithSuperConstructorDelegation.$ctor(short parameter)
-(func $$ctor__short__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
- (param $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- (param $parameter i32)
- ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
- (block
-  ;; wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$clinit();
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:104:59
-  (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
-  ;; OptimizesWithSuperConstructorDelegation.this.$ctor(parameter);
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:105:4
-  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $this))(local.get $parameter))
- )
-)
-
-;;; void OptimizesWithSuperConstructorDelegation.$clinit()
-(func $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
- ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
- (block
-  ;; if (wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$initialized) return;
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
-  (if (global.get $f_$initialized__wasmimmutablefields_OptimizesWithSuperConstructorDelegation)
-   (then
-    ;; return;
-    ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
-    (return )
-   )
-  )
-  ;; (wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$initialized = true);
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
-  (global.set $f_$initialized__wasmimmutablefields_OptimizesWithSuperConstructorDelegation (i32.const 1))
-  ;; wasmimmutablefields.OptimizesWithThisConstructorDelegation.$clinit();
-  ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
-  (call $$clinit__void@wasmimmutablefields.OptimizesWithThisConstructorDelegation )
- )
-)
-
-;;; Class<?> OptimizesWithSuperConstructorDelegation.getClass()
-(func $m_getClass__java_lang_Class@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
- (local.set $this (ref.cast_static $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getWasmimmutablefields.OptimizesWithSuperConstructorDelegation();
-  (return (call $function.no.side.effects.$getWasmimmutablefields.OptimizesWithSuperConstructorDelegation__java_lang_Class (ref.func $$getWasmimmutablefields.OptimizesWithSuperConstructorDelegation__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.OptimizesWithSuperConstructorDelegation)
-
-;;; Code for wasmimmutablefields.FinalizerTest [CLASS]
-(type $wasmimmutablefields.FinalizerTest (struct_subtype 
- (field $vtable (ref $wasmimmutablefields.FinalizerTest.vtable)) 
- (field $itable (ref $wasmimmutablefields.FinalizerTest.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_effectivelyFinalField__wasmimmutablefields_FinalizerTest i32)
- (field $f_readInInit__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_writtenOutsideConstructor__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_readBeforeWrite__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_writtenInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_compoundAssignment__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_effectivelyFinalButNotOptimizedIfBranches__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_effectivelyFinalButNotOptimizedNestedBlock__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_writtenInInitAndConstructor__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_writtenInInitializerAndInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
- (field $f_writtenOnlyInDelegatingConstructor__wasmimmutablefields_FinalizerTest (mut i32))
-  $java.lang.Object)
-)
-(type $wasmimmutablefields.FinalizerTest.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__void_$pp_wasmimmutablefields (ref $function.m_foo__void_$pp_wasmimmutablefields))
-  $java.lang.Object.vtable)
-)
-(type $wasmimmutablefields.FinalizerTest.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for wasmimmutablefields.FinalizerTest [methods]
 
 ;;; FinalizerTest FinalizerTest.$create()
 (func $$create__@wasmimmutablefields.FinalizerTest
@@ -1145,3 +1021,141 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.FinalizerTest)
+
+;;; Code for wasmimmutablefields.OptimizesWithSuperConstructorDelegation [methods]
+
+;;; OptimizesWithSuperConstructorDelegation OptimizesWithSuperConstructorDelegation.$create()
+(func $$create__@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
+ (result (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
+ (local $$instance (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ (block
+  ;; OptimizesWithSuperConstructorDelegation $instance = new OptimizesWithSuperConstructorDelegation.<init>(0,2);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
+  (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (i32.const 2)))
+  ;; $instance.$ctor();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
+  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance)))
+  ;; return $instance;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void OptimizesWithSuperConstructorDelegation.$ctor()
+(func $$ctor__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
+ (param $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:97:2
+ (block
+  ;; wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$clinit();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:44
+  (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
+  ;; OptimizesWithThisConstructorDelegation.this.$ctor();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:97:44
+  (call $$ctor__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; OptimizesWithSuperConstructorDelegation OptimizesWithSuperConstructorDelegation.$create(int parameter)
+(func $$create__int@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
+ (param $parameter i32)
+ (result (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
+ (local $$instance (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ (block
+  ;; OptimizesWithSuperConstructorDelegation $instance = new OptimizesWithSuperConstructorDelegation.<init>(0,parameter);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
+  (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (local.get $parameter)))
+  ;; $instance.$ctor(parameter);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
+  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance))(local.get $parameter))
+  ;; return $instance;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void OptimizesWithSuperConstructorDelegation.$ctor(int parameter)
+(func $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
+ (param $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ (param $parameter i32)
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:99:2
+ (block
+  ;; wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$clinit();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:99:57
+  (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
+  ;; OptimizesWithThisConstructorDelegation.this.$ctor(parameter);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:101:4
+  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithThisConstructorDelegation@wasmimmutablefields.OptimizesWithThisConstructorDelegation (ref.as_non_null (local.get $this))(local.get $parameter))
+ )
+)
+
+;;; OptimizesWithSuperConstructorDelegation OptimizesWithSuperConstructorDelegation.$create(short parameter)
+(func $$create__short@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
+ (param $parameter i32)
+ (result (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
+ (local $$instance (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ (block
+  ;; OptimizesWithSuperConstructorDelegation $instance = new OptimizesWithSuperConstructorDelegation.<init>(0,parameter);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
+  (local.set $$instance (struct.new $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.vtable)) (ref.as_non_null (global.get $wasmimmutablefields.OptimizesWithSuperConstructorDelegation.itable)) (i32.const 0) (local.get $parameter)))
+  ;; $instance.$ctor(parameter);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
+  (call $$ctor__short__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $$instance))(local.get $parameter))
+  ;; return $instance;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void OptimizesWithSuperConstructorDelegation.$ctor(short parameter)
+(func $$ctor__short__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
+ (param $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ (param $parameter i32)
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:104:2
+ (block
+  ;; wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$clinit();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:104:59
+  (call $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation )
+  ;; OptimizesWithSuperConstructorDelegation.this.$ctor(parameter);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:105:4
+  (call $$ctor__int__void_$p_wasmimmutablefields_OptimizesWithSuperConstructorDelegation@wasmimmutablefields.OptimizesWithSuperConstructorDelegation (ref.as_non_null (local.get $this))(local.get $parameter))
+ )
+)
+
+;;; void OptimizesWithSuperConstructorDelegation.$clinit()
+(func $$clinit__void@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
+ ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
+ (block
+  ;; if (wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$initialized) return;
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
+  (if (global.get $f_$initialized__wasmimmutablefields_OptimizesWithSuperConstructorDelegation)
+   (then
+    ;; return;
+    ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
+    (return )
+   )
+  )
+  ;; (wasmimmutablefields.OptimizesWithSuperConstructorDelegation.$initialized = true);
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
+  (global.set $f_$initialized__wasmimmutablefields_OptimizesWithSuperConstructorDelegation (i32.const 1))
+  ;; wasmimmutablefields.OptimizesWithThisConstructorDelegation.$clinit();
+  ;;@ wasmimmutablefields/WasmImmutableFields.java:96:6
+  (call $$clinit__void@wasmimmutablefields.OptimizesWithThisConstructorDelegation )
+ )
+)
+
+;;; Class<?> OptimizesWithSuperConstructorDelegation.getClass()
+(func $m_getClass__java_lang_Class@wasmimmutablefields.OptimizesWithSuperConstructorDelegation
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $wasmimmutablefields.OptimizesWithSuperConstructorDelegation))
+ (local.set $this (ref.cast_static $wasmimmutablefields.OptimizesWithSuperConstructorDelegation (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getWasmimmutablefields.OptimizesWithSuperConstructorDelegation();
+  (return (call $function.no.side.effects.$getWasmimmutablefields.OptimizesWithSuperConstructorDelegation__java_lang_Class (ref.func $$getWasmimmutablefields.OptimizesWithSuperConstructorDelegation__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@wasmimmutablefields.OptimizesWithSuperConstructorDelegation)

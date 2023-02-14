@@ -1,8 +1,50 @@
-;;; Code for staticnestedclass.StaticNestedClassParent [static fields]
-(global $f_$initialized__staticnestedclass_StaticNestedClassParent (mut i32) (i32.const 0))
+ ;;; Code for staticnestedclass.StaticNestedClassParent [type definition]
+ (type $staticnestedclass.StaticNestedClassParent (struct_subtype 
+  (field $vtable (ref $staticnestedclass.StaticNestedClassParent.vtable)) 
+  (field $itable (ref $staticnestedclass.StaticNestedClassParent.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $staticnestedclass.StaticNestedClassParent.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $staticnestedclass.StaticNestedClassParent.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [static fields]
-(global $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass (mut i32) (i32.const 0))
+ ;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [type definition]
+ (type $staticnestedclass.StaticNestedClassParent.StaticNestedClass (struct_subtype 
+  (field $vtable (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) 
+  (field $itable (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for staticnestedclass.StaticNestedClassParent [vtable.init]
 (global $staticnestedclass.StaticNestedClassParent.vtable (ref $staticnestedclass.StaticNestedClassParent.vtable) 
@@ -46,29 +88,13 @@
   (ref.null struct)
  ))
 
-;;; Code for staticnestedclass.StaticNestedClassParent [CLASS]
-(type $staticnestedclass.StaticNestedClassParent (struct_subtype 
- (field $vtable (ref $staticnestedclass.StaticNestedClassParent.vtable)) 
- (field $itable (ref $staticnestedclass.StaticNestedClassParent.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $staticnestedclass.StaticNestedClassParent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $staticnestedclass.StaticNestedClassParent.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for staticnestedclass.StaticNestedClassParent [static fields]
+(global $f_$initialized__staticnestedclass_StaticNestedClassParent (mut i32) (i32.const 0))
+
+;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [static fields]
+(global $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass (mut i32) (i32.const 0))
+
+;;; Code for staticnestedclass.StaticNestedClassParent [methods]
 
 ;;; StaticNestedClassParent StaticNestedClassParent.$create()
 (func $$create__@staticnestedclass.StaticNestedClassParent
@@ -138,29 +164,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent)
 
-;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [CLASS]
-(type $staticnestedclass.StaticNestedClassParent.StaticNestedClass (struct_subtype 
- (field $vtable (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) 
- (field $itable (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [methods]
 
 ;;; StaticNestedClass StaticNestedClass.$create()
 (func $$create__@staticnestedclass.StaticNestedClassParent.StaticNestedClass

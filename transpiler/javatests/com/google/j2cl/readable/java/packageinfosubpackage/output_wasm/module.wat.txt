@@ -1,10 +1,53 @@
-;;; Code for packageinfosubpackage.Foo [static fields]
-(global $f_$initialized__packageinfosubpackage_Foo (mut i32) (i32.const 0))
+ ;;; Code for packageinfosubpackage.Foo [type definition]
+ (type $packageinfosubpackage.Foo (struct_subtype 
+  (field $vtable (ref $packageinfosubpackage.Foo.vtable)) 
+  (field $itable (ref $packageinfosubpackage.Foo.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null extern)))
+   $java.lang.Object)
+ )
+ (type $packageinfosubpackage.Foo.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $packageinfosubpackage.Foo.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for packageinfosubpackage.Foo.NativeBar [static fields]
+ ;;; Code for packageinfosubpackage.Foo.NativeBar [type definition]
 
-;;; Code for packageinfosubpackage.subpackage.Bar [static fields]
-(global $f_$initialized__packageinfosubpackage_subpackage_Bar (mut i32) (i32.const 0))
+ ;;; Code for packageinfosubpackage.subpackage.Bar [type definition]
+ (type $packageinfosubpackage.subpackage.Bar (struct_subtype 
+  (field $vtable (ref $packageinfosubpackage.subpackage.Bar.vtable)) 
+  (field $itable (ref $packageinfosubpackage.subpackage.Bar.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $packageinfosubpackage.subpackage.Bar.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $packageinfosubpackage.subpackage.Bar.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for packageinfosubpackage.Foo [vtable.init]
 (global $packageinfosubpackage.Foo.vtable (ref $packageinfosubpackage.Foo.vtable) 
@@ -48,30 +91,15 @@
   (ref.null struct)
  ))
 
-;;; Code for packageinfosubpackage.Foo [CLASS]
-(type $packageinfosubpackage.Foo (struct_subtype 
- (field $vtable (ref $packageinfosubpackage.Foo.vtable)) 
- (field $itable (ref $packageinfosubpackage.Foo.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null extern)))
-  $java.lang.Object)
-)
-(type $packageinfosubpackage.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $packageinfosubpackage.Foo.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for packageinfosubpackage.Foo [static fields]
+(global $f_$initialized__packageinfosubpackage_Foo (mut i32) (i32.const 0))
+
+;;; Code for packageinfosubpackage.Foo.NativeBar [static fields]
+
+;;; Code for packageinfosubpackage.subpackage.Bar [static fields]
+(global $f_$initialized__packageinfosubpackage_subpackage_Bar (mut i32) (i32.const 0))
+
+;;; Code for packageinfosubpackage.Foo [methods]
 
 ;;; Foo Foo.$create()
 (func $$create__@packageinfosubpackage.Foo
@@ -155,36 +183,14 @@
 )
 (elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo)
 
-;;; Code for packageinfosubpackage.Foo.NativeBar [CLASS]
+;;; Code for packageinfosubpackage.Foo.NativeBar [methods]
 
 ;;; NativeBar()
 (func $m_<init>__@packageinfosubpackage.Foo.NativeBar (import "imports" "packageinfosubpackage.subpackage.Bar.constructor") 
  (result (ref null extern))
 )
 
-;;; Code for packageinfosubpackage.subpackage.Bar [CLASS]
-(type $packageinfosubpackage.subpackage.Bar (struct_subtype 
- (field $vtable (ref $packageinfosubpackage.subpackage.Bar.vtable)) 
- (field $itable (ref $packageinfosubpackage.subpackage.Bar.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $packageinfosubpackage.subpackage.Bar.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $packageinfosubpackage.subpackage.Bar.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for packageinfosubpackage.subpackage.Bar [methods]
 
 ;;; Bar Bar.$create()
 (func $$create__@packageinfosubpackage.subpackage.Bar

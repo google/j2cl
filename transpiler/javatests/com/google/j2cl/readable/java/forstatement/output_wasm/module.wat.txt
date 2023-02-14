@@ -1,5 +1,29 @@
-;;; Code for forstatement.ForStatement [static fields]
-(global $f_$initialized__forstatement_ForStatement (mut i32) (i32.const 0))
+ ;;; Code for forstatement.ForStatement [type definition]
+ (type $forstatement.ForStatement (struct_subtype 
+  (field $vtable (ref $forstatement.ForStatement.vtable)) 
+  (field $itable (ref $forstatement.ForStatement.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $forstatement.ForStatement.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__void (ref $function.m_test__void))
+  (field $m_testContinue__void (ref $function.m_testContinue__void))
+  (field $m_testInitializeInForCondition__void (ref $function.m_testInitializeInForCondition__void))
+   $java.lang.Object.vtable)
+ )
+ (type $forstatement.ForStatement.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for forstatement.ForStatement [vtable.init]
 (global $forstatement.ForStatement.vtable (ref $forstatement.ForStatement.vtable) 
@@ -25,32 +49,10 @@
   (ref.null struct)
  ))
 
-;;; Code for forstatement.ForStatement [CLASS]
-(type $forstatement.ForStatement (struct_subtype 
- (field $vtable (ref $forstatement.ForStatement.vtable)) 
- (field $itable (ref $forstatement.ForStatement.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $forstatement.ForStatement.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__void (ref $function.m_test__void))
- (field $m_testContinue__void (ref $function.m_testContinue__void))
- (field $m_testInitializeInForCondition__void (ref $function.m_testInitializeInForCondition__void))
-  $java.lang.Object.vtable)
-)
-(type $forstatement.ForStatement.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for forstatement.ForStatement [static fields]
+(global $f_$initialized__forstatement_ForStatement (mut i32) (i32.const 0))
+
+;;; Code for forstatement.ForStatement [methods]
 
 ;;; ForStatement ForStatement.$create()
 (func $$create__@forstatement.ForStatement

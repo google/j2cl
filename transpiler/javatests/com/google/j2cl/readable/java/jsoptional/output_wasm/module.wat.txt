@@ -1,26 +1,172 @@
-;;; Code for jsoptional.Main [static fields]
-(global $f_$initialized__jsoptional_Main (mut i32) (i32.const 0))
+ ;;; Code for jsoptional.Main.Function [type definition]
+ (type $jsoptional.Main.Function.vtable (struct 
+  (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object))
+  )
+ )
 
-;;; Code for jsoptional.Main.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__jsoptional_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+ ;;; Code for jsoptional.Main.I [type definition]
+ (type $jsoptional.Main.I.vtable (struct 
+  (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.m_m__java_lang_Object__java_lang_Object__void))
+  )
+ )
 
-;;; Code for jsoptional.Main.Function [static fields]
-(global $f_$initialized__jsoptional_Main_Function (mut i32) (i32.const 0))
+ ;;; Code for jsoptional.Main [type definition]
+ (type $jsoptional.Main (struct_subtype 
+  (field $vtable (ref $jsoptional.Main.vtable)) 
+  (field $itable (ref $jsoptional.Main.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_f__jsoptional_Main (mut (ref null $java.lang.Object)))
+   $java.lang.Object)
+ )
+ (type $jsoptional.Main.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_method1__int__java_lang_Double__java_lang_Integer__void (ref $function.m_method1__int__java_lang_Double__java_lang_Integer__void))
+  (field $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void (ref $function.m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void))
+  (field $m_testFunction__jsoptional_Main_Function__void (ref $function.m_testFunction__jsoptional_Main_Function__void))
+  (field $m_testOptionalFunction__jsoptional_Main_Function__void (ref $function.m_testOptionalFunction__jsoptional_Main_Function__void))
+   $java.lang.Object.vtable)
+ )
+ (type $jsoptional.Main.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsoptional.Main.AFunction [static fields]
-(global $f_$initialized__jsoptional_Main_AFunction (mut i32) (i32.const 0))
+ ;;; Code for jsoptional.Main.$LambdaImplementor$1 [type definition]
+ (type $jsoptional.Main.$LambdaImplementor$1 (struct_subtype 
+  (field $vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable)) 
+  (field $itable (ref $jsoptional.Main.$LambdaImplementor$1.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsoptional.Main.$LambdaImplementor$1.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object))
+   $java.lang.Object.vtable)
+ )
+ (type $jsoptional.Main.$LambdaImplementor$1.itable (struct_subtype 
+ (field $slot0 (ref $jsoptional.Main.Function.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsoptional.Main.I [static fields]
-(global $f_$initialized__jsoptional_Main_I (mut i32) (i32.const 0))
+ ;;; Code for jsoptional.Main.AFunction [type definition]
+ (type $jsoptional.Main.AFunction (struct_subtype 
+  (field $vtable (ref $jsoptional.Main.AFunction.vtable)) 
+  (field $itable (ref $jsoptional.Main.AFunction.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsoptional.Main.AFunction.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object))
+   $java.lang.Object.vtable)
+ )
+ (type $jsoptional.Main.AFunction.itable (struct_subtype 
+ (field $slot0 (ref $jsoptional.Main.Function.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsoptional.Main.TemplatedSubtype [static fields]
-(global $f_$initialized__jsoptional_Main_TemplatedSubtype (mut i32) (i32.const 0))
+ ;;; Code for jsoptional.Main.TemplatedSubtype [type definition]
+ (type $jsoptional.Main.TemplatedSubtype (struct_subtype 
+  (field $vtable (ref $jsoptional.Main.TemplatedSubtype.vtable)) 
+  (field $itable (ref $jsoptional.Main.TemplatedSubtype.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsoptional.Main.TemplatedSubtype.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m__java_lang_String__java_lang_Object__void (ref $function.m_m__java_lang_String__java_lang_Object__void))
+  (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.m_m__java_lang_Object__java_lang_Object__void))
+   $java.lang.Object.vtable)
+ )
+ (type $jsoptional.Main.TemplatedSubtype.itable (struct_subtype 
+ (field $slot0 (ref $jsoptional.Main.I.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsoptional.Main.SpecializedSubtype [static fields]
-(global $f_$initialized__jsoptional_Main_SpecializedSubtype (mut i32) (i32.const 0))
+ ;;; Code for jsoptional.Main.SpecializedSubtype [type definition]
+ (type $jsoptional.Main.SpecializedSubtype (struct_subtype 
+  (field $vtable (ref $jsoptional.Main.SpecializedSubtype.vtable)) 
+  (field $itable (ref $jsoptional.Main.SpecializedSubtype.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__jsoptional_Main_SpecializedSubtype (ref null $jsoptional.Main))
+   $java.lang.Object)
+ )
+ (type $jsoptional.Main.SpecializedSubtype.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m__java_lang_String__java_lang_Object__void (ref $function.m_m__java_lang_String__java_lang_Object__void))
+  (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.m_m__java_lang_Object__java_lang_Object__void))
+   $java.lang.Object.vtable)
+ )
+ (type $jsoptional.Main.SpecializedSubtype.itable (struct_subtype 
+ (field $slot0 (ref $jsoptional.Main.I.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsoptional.Main.NonJsTypeSubtype [static fields]
-(global $f_$initialized__jsoptional_Main_NonJsTypeSubtype (mut i32) (i32.const 0))
+ ;;; Code for jsoptional.Main.NonJsTypeSubtype [type definition]
+ (type $jsoptional.Main.NonJsTypeSubtype (struct_subtype 
+  (field $vtable (ref $jsoptional.Main.NonJsTypeSubtype.vtable)) 
+  (field $itable (ref $jsoptional.Main.NonJsTypeSubtype.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsoptional.Main.NonJsTypeSubtype.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m__java_lang_String__java_lang_Object__void (ref $function.m_m__java_lang_String__java_lang_Object__void))
+  (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.m_m__java_lang_Object__java_lang_Object__void))
+   $java.lang.Object.vtable)
+ )
+ (type $jsoptional.Main.NonJsTypeSubtype.itable (struct_subtype 
+ (field $slot0 (ref $jsoptional.Main.I.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for jsoptional.Main [vtable.init]
 (global $jsoptional.Main.vtable (ref $jsoptional.Main.vtable) 
@@ -170,34 +316,73 @@
   (ref.null struct)
  ))
 
-;;; Code for jsoptional.Main [CLASS]
-(type $jsoptional.Main (struct_subtype 
- (field $vtable (ref $jsoptional.Main.vtable)) 
- (field $itable (ref $jsoptional.Main.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f__jsoptional_Main (mut (ref null $java.lang.Object)))
-  $java.lang.Object)
+;;; Code for jsoptional.Main [static fields]
+(global $f_$initialized__jsoptional_Main (mut i32) (i32.const 0))
+
+;;; Code for jsoptional.Main.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__jsoptional_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
+;;; Code for jsoptional.Main.Function [static fields]
+(global $f_$initialized__jsoptional_Main_Function (mut i32) (i32.const 0))
+
+;;; Code for jsoptional.Main.AFunction [static fields]
+(global $f_$initialized__jsoptional_Main_AFunction (mut i32) (i32.const 0))
+
+;;; Code for jsoptional.Main.I [static fields]
+(global $f_$initialized__jsoptional_Main_I (mut i32) (i32.const 0))
+
+;;; Code for jsoptional.Main.TemplatedSubtype [static fields]
+(global $f_$initialized__jsoptional_Main_TemplatedSubtype (mut i32) (i32.const 0))
+
+;;; Code for jsoptional.Main.SpecializedSubtype [static fields]
+(global $f_$initialized__jsoptional_Main_SpecializedSubtype (mut i32) (i32.const 0))
+
+;;; Code for jsoptional.Main.NonJsTypeSubtype [static fields]
+(global $f_$initialized__jsoptional_Main_NonJsTypeSubtype (mut i32) (i32.const 0))
+
+;;; Code for jsoptional.Main.Function [methods]
+
+;;; void Function.$clinit()
+(func $$clinit__void@jsoptional.Main.Function
+ ;;@ jsoptional/Main.java:32:12
+ (block
+  ;; if (jsoptional.Main.Function.$initialized) return;
+  ;;@ jsoptional/Main.java:32:12
+  (if (global.get $f_$initialized__jsoptional_Main_Function)
+   (then
+    ;; return;
+    ;;@ jsoptional/Main.java:32:12
+    (return )
+   )
+  )
+  ;; (jsoptional.Main.Function.$initialized = true);
+  ;;@ jsoptional/Main.java:32:12
+  (global.set $f_$initialized__jsoptional_Main_Function (i32.const 1))
+ )
 )
-(type $jsoptional.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_method1__int__java_lang_Double__java_lang_Integer__void (ref $function.m_method1__int__java_lang_Double__java_lang_Integer__void))
- (field $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void (ref $function.m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void))
- (field $m_testFunction__jsoptional_Main_Function__void (ref $function.m_testFunction__jsoptional_Main_Function__void))
- (field $m_testOptionalFunction__jsoptional_Main_Function__void (ref $function.m_testOptionalFunction__jsoptional_Main_Function__void))
-  $java.lang.Object.vtable)
+
+;;; Code for jsoptional.Main.I [methods]
+
+;;; void I.$clinit()
+(func $$clinit__void@jsoptional.Main.I
+ ;;@ jsoptional/Main.java:54:12
+ (block
+  ;; if (jsoptional.Main.I.$initialized) return;
+  ;;@ jsoptional/Main.java:54:12
+  (if (global.get $f_$initialized__jsoptional_Main_I)
+   (then
+    ;; return;
+    ;;@ jsoptional/Main.java:54:12
+    (return )
+   )
+  )
+  ;; (jsoptional.Main.I.$initialized = true);
+  ;;@ jsoptional/Main.java:54:12
+  (global.set $f_$initialized__jsoptional_Main_I (i32.const 1))
+ )
 )
-(type $jsoptional.Main.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+
+;;; Code for jsoptional.Main [methods]
 
 ;;; void Main.method1(int i1, Double d, Integer i)
 (func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main
@@ -339,30 +524,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main)
 
-;;; Code for jsoptional.Main.$LambdaImplementor$1 [CLASS]
-(type $jsoptional.Main.$LambdaImplementor$1 (struct_subtype 
- (field $vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $jsoptional.Main.$LambdaImplementor$1.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsoptional.Main.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object))
-  $java.lang.Object.vtable)
-)
-(type $jsoptional.Main.$LambdaImplementor$1.itable (struct_subtype 
-(field $slot0 (ref $jsoptional.Main.Function.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsoptional.Main.$LambdaImplementor$1 [methods]
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
 (func $$create__@jsoptional.Main.$LambdaImplementor$1
@@ -450,55 +612,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.$LambdaImplementor$1)
 
-;;; Code for jsoptional.Main.Function [INTERFACE]
-(type $jsoptional.Main.Function.vtable (struct 
- (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object))
- )
-)
-
-;;; void Function.$clinit()
-(func $$clinit__void@jsoptional.Main.Function
- ;;@ jsoptional/Main.java:32:12
- (block
-  ;; if (jsoptional.Main.Function.$initialized) return;
-  ;;@ jsoptional/Main.java:32:12
-  (if (global.get $f_$initialized__jsoptional_Main_Function)
-   (then
-    ;; return;
-    ;;@ jsoptional/Main.java:32:12
-    (return )
-   )
-  )
-  ;; (jsoptional.Main.Function.$initialized = true);
-  ;;@ jsoptional/Main.java:32:12
-  (global.set $f_$initialized__jsoptional_Main_Function (i32.const 1))
- )
-)
-
-;;; Code for jsoptional.Main.AFunction [CLASS]
-(type $jsoptional.Main.AFunction (struct_subtype 
- (field $vtable (ref $jsoptional.Main.AFunction.vtable)) 
- (field $itable (ref $jsoptional.Main.AFunction.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsoptional.Main.AFunction.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object))
-  $java.lang.Object.vtable)
-)
-(type $jsoptional.Main.AFunction.itable (struct_subtype 
-(field $slot0 (ref $jsoptional.Main.Function.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsoptional.Main.AFunction [methods]
 
 ;;; AFunction AFunction.$create()
 (func $$create__@jsoptional.Main.AFunction
@@ -586,56 +700,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.AFunction)
 
-;;; Code for jsoptional.Main.I [INTERFACE]
-(type $jsoptional.Main.I.vtable (struct 
- (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.m_m__java_lang_Object__java_lang_Object__void))
- )
-)
-
-;;; void I.$clinit()
-(func $$clinit__void@jsoptional.Main.I
- ;;@ jsoptional/Main.java:54:12
- (block
-  ;; if (jsoptional.Main.I.$initialized) return;
-  ;;@ jsoptional/Main.java:54:12
-  (if (global.get $f_$initialized__jsoptional_Main_I)
-   (then
-    ;; return;
-    ;;@ jsoptional/Main.java:54:12
-    (return )
-   )
-  )
-  ;; (jsoptional.Main.I.$initialized = true);
-  ;;@ jsoptional/Main.java:54:12
-  (global.set $f_$initialized__jsoptional_Main_I (i32.const 1))
- )
-)
-
-;;; Code for jsoptional.Main.TemplatedSubtype [CLASS]
-(type $jsoptional.Main.TemplatedSubtype (struct_subtype 
- (field $vtable (ref $jsoptional.Main.TemplatedSubtype.vtable)) 
- (field $itable (ref $jsoptional.Main.TemplatedSubtype.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsoptional.Main.TemplatedSubtype.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m__java_lang_String__java_lang_Object__void (ref $function.m_m__java_lang_String__java_lang_Object__void))
- (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.m_m__java_lang_Object__java_lang_Object__void))
-  $java.lang.Object.vtable)
-)
-(type $jsoptional.Main.TemplatedSubtype.itable (struct_subtype 
-(field $slot0 (ref $jsoptional.Main.I.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsoptional.Main.TemplatedSubtype [methods]
 
 ;;; TemplatedSubtype<T> TemplatedSubtype.$create()
 (func $$create__@jsoptional.Main.TemplatedSubtype
@@ -736,32 +801,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.TemplatedSubtype)
 
-;;; Code for jsoptional.Main.SpecializedSubtype [CLASS]
-(type $jsoptional.Main.SpecializedSubtype (struct_subtype 
- (field $vtable (ref $jsoptional.Main.SpecializedSubtype.vtable)) 
- (field $itable (ref $jsoptional.Main.SpecializedSubtype.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__jsoptional_Main_SpecializedSubtype (ref null $jsoptional.Main))
-  $java.lang.Object)
-)
-(type $jsoptional.Main.SpecializedSubtype.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m__java_lang_String__java_lang_Object__void (ref $function.m_m__java_lang_String__java_lang_Object__void))
- (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.m_m__java_lang_Object__java_lang_Object__void))
-  $java.lang.Object.vtable)
-)
-(type $jsoptional.Main.SpecializedSubtype.itable (struct_subtype 
-(field $slot0 (ref $jsoptional.Main.I.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsoptional.Main.SpecializedSubtype [methods]
 
 ;;; SpecializedSubtype SpecializedSubtype.$create(Main $outer_this, Object a)
 (func $$create__jsoptional_Main__java_lang_Object@jsoptional.Main.SpecializedSubtype
@@ -866,31 +906,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.SpecializedSubtype)
 
-;;; Code for jsoptional.Main.NonJsTypeSubtype [CLASS]
-(type $jsoptional.Main.NonJsTypeSubtype (struct_subtype 
- (field $vtable (ref $jsoptional.Main.NonJsTypeSubtype.vtable)) 
- (field $itable (ref $jsoptional.Main.NonJsTypeSubtype.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsoptional.Main.NonJsTypeSubtype.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m__java_lang_String__java_lang_Object__void (ref $function.m_m__java_lang_String__java_lang_Object__void))
- (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.m_m__java_lang_Object__java_lang_Object__void))
-  $java.lang.Object.vtable)
-)
-(type $jsoptional.Main.NonJsTypeSubtype.itable (struct_subtype 
-(field $slot0 (ref $jsoptional.Main.I.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsoptional.Main.NonJsTypeSubtype [methods]
 
 ;;; NonJsTypeSubtype NonJsTypeSubtype.$create()
 (func $$create__@jsoptional.Main.NonJsTypeSubtype

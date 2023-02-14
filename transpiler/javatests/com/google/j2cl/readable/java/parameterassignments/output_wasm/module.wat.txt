@@ -1,26 +1,155 @@
-;;; Code for parameterassignments.Main [static fields]
-(global $f_$initialized__parameterassignments_Main (mut i32) (i32.const 0))
+ ;;; Code for parameterassignments.Main.Fn [type definition]
+ (type $parameterassignments.Main.Fn.vtable (struct 
+  (field $m_test__int__int__int (ref $function.m_test__int__int__int))
+  )
+ )
 
-;;; Code for parameterassignments.Main.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__parameterassignments_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+ ;;; Code for parameterassignments.Main.FnPrimitiveVarargs [type definition]
+ (type $parameterassignments.Main.FnPrimitiveVarargs.vtable (struct 
+  (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
+  )
+ )
 
-;;; Code for parameterassignments.Main.$LambdaImplementor$2 [static fields]
-(global $f_$initialized__parameterassignments_Main_$LambdaImplementor$2 (mut i32) (i32.const 0))
+ ;;; Code for parameterassignments.Main.FnObjectVarargs [type definition]
+ (type $parameterassignments.Main.FnObjectVarargs.vtable (struct 
+  (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
+  )
+ )
 
-;;; Code for parameterassignments.Main.$LambdaImplementor$3 [static fields]
-(global $f_$initialized__parameterassignments_Main_$LambdaImplementor$3 (mut i32) (i32.const 0))
+ ;;; Code for parameterassignments.Main [type definition]
+ (type $parameterassignments.Main (struct_subtype 
+  (field $vtable (ref $parameterassignments.Main.vtable)) 
+  (field $itable (ref $parameterassignments.Main.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
+  (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
+  (field $f_fnObjectVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
+   $java.lang.Object)
+ )
+ (type $parameterassignments.Main.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__int__int__int__int_$pp_parameterassignments (ref $function.m_test__int__int__int__int_$pp_parameterassignments))
+  (field $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments (ref $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments))
+  (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
+   $java.lang.Object.vtable)
+ )
+ (type $parameterassignments.Main.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for parameterassignments.Main.Fn [static fields]
-(global $f_$initialized__parameterassignments_Main_Fn (mut i32) (i32.const 0))
+ ;;; Code for parameterassignments.Main.$LambdaImplementor$1 [type definition]
+ (type $parameterassignments.Main.$LambdaImplementor$1 (struct_subtype 
+  (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$1.vtable)) 
+  (field $itable (ref $parameterassignments.Main.$LambdaImplementor$1.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $parameterassignments.Main.$LambdaImplementor$1.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__int__int__int (ref $function.m_test__int__int__int))
+   $java.lang.Object.vtable)
+ )
+ (type $parameterassignments.Main.$LambdaImplementor$1.itable (struct_subtype 
+ (field $slot0 (ref $parameterassignments.Main.Fn.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for parameterassignments.Main.FnPrimitiveVarargs [static fields]
-(global $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs (mut i32) (i32.const 0))
+ ;;; Code for parameterassignments.Main.$LambdaImplementor$2 [type definition]
+ (type $parameterassignments.Main.$LambdaImplementor$2 (struct_subtype 
+  (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$2.vtable)) 
+  (field $itable (ref $parameterassignments.Main.$LambdaImplementor$2.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $parameterassignments.Main.$LambdaImplementor$2.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
+   $java.lang.Object.vtable)
+ )
+ (type $parameterassignments.Main.$LambdaImplementor$2.itable (struct_subtype 
+ (field $slot0 (ref $parameterassignments.Main.FnPrimitiveVarargs.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for parameterassignments.Main.FnObjectVarargs [static fields]
-(global $f_$initialized__parameterassignments_Main_FnObjectVarargs (mut i32) (i32.const 0))
+ ;;; Code for parameterassignments.Main.$LambdaImplementor$3 [type definition]
+ (type $parameterassignments.Main.$LambdaImplementor$3 (struct_subtype 
+  (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$3.vtable)) 
+  (field $itable (ref $parameterassignments.Main.$LambdaImplementor$3.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $parameterassignments.Main.$LambdaImplementor$3.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
+   $java.lang.Object.vtable)
+ )
+ (type $parameterassignments.Main.$LambdaImplementor$3.itable (struct_subtype 
+ (field $slot0 (ref $parameterassignments.Main.FnObjectVarargs.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for parameterassignments.Main.SubMain [static fields]
-(global $f_$initialized__parameterassignments_Main_SubMain (mut i32) (i32.const 0))
+ ;;; Code for parameterassignments.Main.SubMain [type definition]
+ (type $parameterassignments.Main.SubMain (struct_subtype 
+  (field $vtable (ref $parameterassignments.Main.SubMain.vtable)) 
+  (field $itable (ref $parameterassignments.Main.SubMain.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
+  (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
+  (field $f_fnObjectVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
+   $parameterassignments.Main)
+ )
+ (type $parameterassignments.Main.SubMain.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__int__int__int__int_$pp_parameterassignments (ref $function.m_test__int__int__int__int_$pp_parameterassignments))
+  (field $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments (ref $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments))
+  (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
+   $parameterassignments.Main.vtable)
+ )
+ (type $parameterassignments.Main.SubMain.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $parameterassignments.Main.itable))
 
 ;;; Code for parameterassignments.Main [vtable.init]
 (global $parameterassignments.Main.vtable (ref $parameterassignments.Main.vtable) 
@@ -142,35 +271,94 @@
   (ref.null struct)
  ))
 
-;;; Code for parameterassignments.Main [CLASS]
-(type $parameterassignments.Main (struct_subtype 
- (field $vtable (ref $parameterassignments.Main.vtable)) 
- (field $itable (ref $parameterassignments.Main.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
- (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
- (field $f_fnObjectVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
-  $java.lang.Object)
+;;; Code for parameterassignments.Main [static fields]
+(global $f_$initialized__parameterassignments_Main (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__parameterassignments_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.$LambdaImplementor$2 [static fields]
+(global $f_$initialized__parameterassignments_Main_$LambdaImplementor$2 (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.$LambdaImplementor$3 [static fields]
+(global $f_$initialized__parameterassignments_Main_$LambdaImplementor$3 (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.Fn [static fields]
+(global $f_$initialized__parameterassignments_Main_Fn (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.FnPrimitiveVarargs [static fields]
+(global $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.FnObjectVarargs [static fields]
+(global $f_$initialized__parameterassignments_Main_FnObjectVarargs (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.SubMain [static fields]
+(global $f_$initialized__parameterassignments_Main_SubMain (mut i32) (i32.const 0))
+
+;;; Code for parameterassignments.Main.Fn [methods]
+
+;;; void Fn.$clinit()
+(func $$clinit__void@parameterassignments.Main.Fn
+ ;;@ parameterassignments/Main.java:41:12
+ (block
+  ;; if (parameterassignments.Main.Fn.$initialized) return;
+  ;;@ parameterassignments/Main.java:41:12
+  (if (global.get $f_$initialized__parameterassignments_Main_Fn)
+   (then
+    ;; return;
+    ;;@ parameterassignments/Main.java:41:12
+    (return )
+   )
+  )
+  ;; (parameterassignments.Main.Fn.$initialized = true);
+  ;;@ parameterassignments/Main.java:41:12
+  (global.set $f_$initialized__parameterassignments_Main_Fn (i32.const 1))
+ )
 )
-(type $parameterassignments.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__int__int__int__int_$pp_parameterassignments (ref $function.m_test__int__int__int__int_$pp_parameterassignments))
- (field $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments (ref $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments))
- (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
-  $java.lang.Object.vtable)
+
+;;; Code for parameterassignments.Main.FnPrimitiveVarargs [methods]
+
+;;; void FnPrimitiveVarargs.$clinit()
+(func $$clinit__void@parameterassignments.Main.FnPrimitiveVarargs
+ ;;@ parameterassignments/Main.java:51:12
+ (block
+  ;; if (parameterassignments.Main.FnPrimitiveVarargs.$initialized) return;
+  ;;@ parameterassignments/Main.java:51:12
+  (if (global.get $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs)
+   (then
+    ;; return;
+    ;;@ parameterassignments/Main.java:51:12
+    (return )
+   )
+  )
+  ;; (parameterassignments.Main.FnPrimitiveVarargs.$initialized = true);
+  ;;@ parameterassignments/Main.java:51:12
+  (global.set $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs (i32.const 1))
+ )
 )
-(type $parameterassignments.Main.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+
+;;; Code for parameterassignments.Main.FnObjectVarargs [methods]
+
+;;; void FnObjectVarargs.$clinit()
+(func $$clinit__void@parameterassignments.Main.FnObjectVarargs
+ ;;@ parameterassignments/Main.java:60:12
+ (block
+  ;; if (parameterassignments.Main.FnObjectVarargs.$initialized) return;
+  ;;@ parameterassignments/Main.java:60:12
+  (if (global.get $f_$initialized__parameterassignments_Main_FnObjectVarargs)
+   (then
+    ;; return;
+    ;;@ parameterassignments/Main.java:60:12
+    (return )
+   )
+  )
+  ;; (parameterassignments.Main.FnObjectVarargs.$initialized = true);
+  ;;@ parameterassignments/Main.java:60:12
+  (global.set $f_$initialized__parameterassignments_Main_FnObjectVarargs (i32.const 1))
+ )
+)
+
+;;; Code for parameterassignments.Main [methods]
 
 ;;; Main Main.$create(int nonFinal, int explicitFinal, int implicitFinal)
 (func $$create__int__int__int@parameterassignments.Main
@@ -368,30 +556,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@parameterassignments.Main)
 
-;;; Code for parameterassignments.Main.$LambdaImplementor$1 [CLASS]
-(type $parameterassignments.Main.$LambdaImplementor$1 (struct_subtype 
- (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $parameterassignments.Main.$LambdaImplementor$1.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $parameterassignments.Main.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__int__int__int (ref $function.m_test__int__int__int))
-  $java.lang.Object.vtable)
-)
-(type $parameterassignments.Main.$LambdaImplementor$1.itable (struct_subtype 
-(field $slot0 (ref $parameterassignments.Main.Fn.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for parameterassignments.Main.$LambdaImplementor$1 [methods]
 
 ;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$1
@@ -482,30 +647,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$1)
 
-;;; Code for parameterassignments.Main.$LambdaImplementor$2 [CLASS]
-(type $parameterassignments.Main.$LambdaImplementor$2 (struct_subtype 
- (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$2.vtable)) 
- (field $itable (ref $parameterassignments.Main.$LambdaImplementor$2.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $parameterassignments.Main.$LambdaImplementor$2.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
-  $java.lang.Object.vtable)
-)
-(type $parameterassignments.Main.$LambdaImplementor$2.itable (struct_subtype 
-(field $slot0 (ref $parameterassignments.Main.FnPrimitiveVarargs.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for parameterassignments.Main.$LambdaImplementor$2 [methods]
 
 ;;; $LambdaImplementor$2 $LambdaImplementor$2.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$2
@@ -592,30 +734,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$2)
 
-;;; Code for parameterassignments.Main.$LambdaImplementor$3 [CLASS]
-(type $parameterassignments.Main.$LambdaImplementor$3 (struct_subtype 
- (field $vtable (ref $parameterassignments.Main.$LambdaImplementor$3.vtable)) 
- (field $itable (ref $parameterassignments.Main.$LambdaImplementor$3.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $parameterassignments.Main.$LambdaImplementor$3.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
-  $java.lang.Object.vtable)
-)
-(type $parameterassignments.Main.$LambdaImplementor$3.itable (struct_subtype 
-(field $slot0 (ref $parameterassignments.Main.FnObjectVarargs.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for parameterassignments.Main.$LambdaImplementor$3 [methods]
 
 ;;; $LambdaImplementor$3 $LambdaImplementor$3.$create()
 (func $$create__@parameterassignments.Main.$LambdaImplementor$3
@@ -702,110 +821,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@parameterassignments.Main.$LambdaImplementor$3)
 
-;;; Code for parameterassignments.Main.Fn [INTERFACE]
-(type $parameterassignments.Main.Fn.vtable (struct 
- (field $m_test__int__int__int (ref $function.m_test__int__int__int))
- )
-)
-
-;;; void Fn.$clinit()
-(func $$clinit__void@parameterassignments.Main.Fn
- ;;@ parameterassignments/Main.java:41:12
- (block
-  ;; if (parameterassignments.Main.Fn.$initialized) return;
-  ;;@ parameterassignments/Main.java:41:12
-  (if (global.get $f_$initialized__parameterassignments_Main_Fn)
-   (then
-    ;; return;
-    ;;@ parameterassignments/Main.java:41:12
-    (return )
-   )
-  )
-  ;; (parameterassignments.Main.Fn.$initialized = true);
-  ;;@ parameterassignments/Main.java:41:12
-  (global.set $f_$initialized__parameterassignments_Main_Fn (i32.const 1))
- )
-)
-
-;;; Code for parameterassignments.Main.FnPrimitiveVarargs [INTERFACE]
-(type $parameterassignments.Main.FnPrimitiveVarargs.vtable (struct 
- (field $m_test__int__arrayOf_int__void (ref $function.m_test__int__arrayOf_int__void))
- )
-)
-
-;;; void FnPrimitiveVarargs.$clinit()
-(func $$clinit__void@parameterassignments.Main.FnPrimitiveVarargs
- ;;@ parameterassignments/Main.java:51:12
- (block
-  ;; if (parameterassignments.Main.FnPrimitiveVarargs.$initialized) return;
-  ;;@ parameterassignments/Main.java:51:12
-  (if (global.get $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs)
-   (then
-    ;; return;
-    ;;@ parameterassignments/Main.java:51:12
-    (return )
-   )
-  )
-  ;; (parameterassignments.Main.FnPrimitiveVarargs.$initialized = true);
-  ;;@ parameterassignments/Main.java:51:12
-  (global.set $f_$initialized__parameterassignments_Main_FnPrimitiveVarargs (i32.const 1))
- )
-)
-
-;;; Code for parameterassignments.Main.FnObjectVarargs [INTERFACE]
-(type $parameterassignments.Main.FnObjectVarargs.vtable (struct 
- (field $m_test__java_lang_Object__arrayOf_java_lang_Object__void (ref $function.m_test__java_lang_Object__arrayOf_java_lang_Object__void))
- )
-)
-
-;;; void FnObjectVarargs.$clinit()
-(func $$clinit__void@parameterassignments.Main.FnObjectVarargs
- ;;@ parameterassignments/Main.java:60:12
- (block
-  ;; if (parameterassignments.Main.FnObjectVarargs.$initialized) return;
-  ;;@ parameterassignments/Main.java:60:12
-  (if (global.get $f_$initialized__parameterassignments_Main_FnObjectVarargs)
-   (then
-    ;; return;
-    ;;@ parameterassignments/Main.java:60:12
-    (return )
-   )
-  )
-  ;; (parameterassignments.Main.FnObjectVarargs.$initialized = true);
-  ;;@ parameterassignments/Main.java:60:12
-  (global.set $f_$initialized__parameterassignments_Main_FnObjectVarargs (i32.const 1))
- )
-)
-
-;;; Code for parameterassignments.Main.SubMain [CLASS]
-(type $parameterassignments.Main.SubMain (struct_subtype 
- (field $vtable (ref $parameterassignments.Main.SubMain.vtable)) 
- (field $itable (ref $parameterassignments.Main.SubMain.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_fn__parameterassignments_Main (mut (ref null $java.lang.Object)))
- (field $f_fnPrimitiveVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
- (field $f_fnObjectVarargs__parameterassignments_Main (mut (ref null $java.lang.Object)))
-  $parameterassignments.Main)
-)
-(type $parameterassignments.Main.SubMain.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__int__int__int__int_$pp_parameterassignments (ref $function.m_test__int__int__int__int_$pp_parameterassignments))
- (field $m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments (ref $function.m_testObjectVarargs__java_lang_Object__arrayOf_java_lang_Object__void_$pp_parameterassignments))
- (field $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments (ref $function.m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments))
-  $parameterassignments.Main.vtable)
-)
-(type $parameterassignments.Main.SubMain.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $parameterassignments.Main.itable))
+;;; Code for parameterassignments.Main.SubMain [methods]
 
 ;;; SubMain SubMain.$create(int nonFinal, int explicitFinal, int implicitFinal)
 (func $$create__int__int__int@parameterassignments.Main.SubMain

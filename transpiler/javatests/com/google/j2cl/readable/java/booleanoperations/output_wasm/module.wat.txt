@@ -1,11 +1,78 @@
-;;; Code for booleanoperations.BooleanOperations [static fields]
-(global $f_$initialized__booleanoperations_BooleanOperations (mut i32) (i32.const 0))
+ ;;; Code for booleanoperations.BooleanOperations [type definition]
+ (type $booleanoperations.BooleanOperations (struct_subtype 
+  (field $vtable (ref $booleanoperations.BooleanOperations.vtable)) 
+  (field $itable (ref $booleanoperations.BooleanOperations.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $booleanoperations.BooleanOperations.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__void (ref $function.m_test__void))
+   $java.lang.Object.vtable)
+ )
+ (type $booleanoperations.BooleanOperations.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [static fields]
-(global $f_$initialized__booleanoperations_BooleanOperations_1Outer_Inner (mut i32) (i32.const 0))
+ ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [type definition]
+ (type $booleanoperations.BooleanOperations.1Outer.Inner (struct_subtype 
+  (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) 
+  (field $itable (ref $booleanoperations.BooleanOperations.1Outer.Inner.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__booleanoperations_BooleanOperations_1Outer_Inner (ref null $booleanoperations.BooleanOperations.1Outer))
+   $java.lang.Object)
+ )
+ (type $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $booleanoperations.BooleanOperations.1Outer.Inner.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for booleanoperations.BooleanOperations.1Outer [static fields]
-(global $f_$initialized__booleanoperations_BooleanOperations_1Outer (mut i32) (i32.const 0))
+ ;;; Code for booleanoperations.BooleanOperations.1Outer [type definition]
+ (type $booleanoperations.BooleanOperations.1Outer (struct_subtype 
+  (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.vtable)) 
+  (field $itable (ref $booleanoperations.BooleanOperations.1Outer.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__booleanoperations_BooleanOperations_1Outer (ref null $booleanoperations.BooleanOperations))
+  (field $f_b__booleanoperations_BooleanOperations_1Outer (mut i8))
+   $java.lang.Object)
+ )
+ (type $booleanoperations.BooleanOperations.1Outer.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $booleanoperations.BooleanOperations.1Outer.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for booleanoperations.BooleanOperations [vtable.init]
 (global $booleanoperations.BooleanOperations.vtable (ref $booleanoperations.BooleanOperations.vtable) 
@@ -71,30 +138,16 @@
   (ref.null struct)
  ))
 
-;;; Code for booleanoperations.BooleanOperations [CLASS]
-(type $booleanoperations.BooleanOperations (struct_subtype 
- (field $vtable (ref $booleanoperations.BooleanOperations.vtable)) 
- (field $itable (ref $booleanoperations.BooleanOperations.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $booleanoperations.BooleanOperations.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__void (ref $function.m_test__void))
-  $java.lang.Object.vtable)
-)
-(type $booleanoperations.BooleanOperations.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for booleanoperations.BooleanOperations [static fields]
+(global $f_$initialized__booleanoperations_BooleanOperations (mut i32) (i32.const 0))
+
+;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [static fields]
+(global $f_$initialized__booleanoperations_BooleanOperations_1Outer_Inner (mut i32) (i32.const 0))
+
+;;; Code for booleanoperations.BooleanOperations.1Outer [static fields]
+(global $f_$initialized__booleanoperations_BooleanOperations_1Outer (mut i32) (i32.const 0))
+
+;;; Code for booleanoperations.BooleanOperations [methods]
 
 ;;; BooleanOperations BooleanOperations.$create()
 (func $$create__@booleanoperations.BooleanOperations
@@ -388,30 +441,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations)
 
-;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [CLASS]
-(type $booleanoperations.BooleanOperations.1Outer.Inner (struct_subtype 
- (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) 
- (field $itable (ref $booleanoperations.BooleanOperations.1Outer.Inner.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__booleanoperations_BooleanOperations_1Outer_Inner (ref null $booleanoperations.BooleanOperations.1Outer))
-  $java.lang.Object)
-)
-(type $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $booleanoperations.BooleanOperations.1Outer.Inner.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [methods]
 
 ;;; Inner Inner.$create(Outer $outer_this)
 (func $$create__booleanoperations_BooleanOperations_1Outer@booleanoperations.BooleanOperations.1Outer.Inner
@@ -497,31 +527,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
 
-;;; Code for booleanoperations.BooleanOperations.1Outer [CLASS]
-(type $booleanoperations.BooleanOperations.1Outer (struct_subtype 
- (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.vtable)) 
- (field $itable (ref $booleanoperations.BooleanOperations.1Outer.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__booleanoperations_BooleanOperations_1Outer (ref null $booleanoperations.BooleanOperations))
- (field $f_b__booleanoperations_BooleanOperations_1Outer (mut i8))
-  $java.lang.Object)
-)
-(type $booleanoperations.BooleanOperations.1Outer.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $booleanoperations.BooleanOperations.1Outer.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for booleanoperations.BooleanOperations.1Outer [methods]
 
 ;;; Outer Outer.$create(BooleanOperations $outer_this)
 (func $$create__booleanoperations_BooleanOperations@booleanoperations.BooleanOperations.1Outer

@@ -1,8 +1,50 @@
-;;; Code for srcjar.Foo [static fields]
-(global $f_$initialized__srcjar_Foo (mut i32) (i32.const 0))
+ ;;; Code for srcjar.Foo [type definition]
+ (type $srcjar.Foo (struct_subtype 
+  (field $vtable (ref $srcjar.Foo.vtable)) 
+  (field $itable (ref $srcjar.Foo.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $srcjar.Foo.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $srcjar.Foo.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for srcjar.Srcjar [static fields]
-(global $f_$initialized__srcjar_Srcjar (mut i32) (i32.const 0))
+ ;;; Code for srcjar.Srcjar [type definition]
+ (type $srcjar.Srcjar (struct_subtype 
+  (field $vtable (ref $srcjar.Srcjar.vtable)) 
+  (field $itable (ref $srcjar.Srcjar.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $srcjar.Srcjar.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $srcjar.Srcjar.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for srcjar.Foo [vtable.init]
 (global $srcjar.Foo.vtable (ref $srcjar.Foo.vtable) 
@@ -46,29 +88,13 @@
   (ref.null struct)
  ))
 
-;;; Code for srcjar.Foo [CLASS]
-(type $srcjar.Foo (struct_subtype 
- (field $vtable (ref $srcjar.Foo.vtable)) 
- (field $itable (ref $srcjar.Foo.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $srcjar.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $srcjar.Foo.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for srcjar.Foo [static fields]
+(global $f_$initialized__srcjar_Foo (mut i32) (i32.const 0))
+
+;;; Code for srcjar.Srcjar [static fields]
+(global $f_$initialized__srcjar_Srcjar (mut i32) (i32.const 0))
+
+;;; Code for srcjar.Foo [methods]
 
 ;;; Foo Foo.$create()
 (func $$create__@srcjar.Foo
@@ -138,29 +164,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@srcjar.Foo)
 
-;;; Code for srcjar.Srcjar [CLASS]
-(type $srcjar.Srcjar (struct_subtype 
- (field $vtable (ref $srcjar.Srcjar.vtable)) 
- (field $itable (ref $srcjar.Srcjar.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $srcjar.Srcjar.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $srcjar.Srcjar.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for srcjar.Srcjar [methods]
 
 ;;; Srcjar Srcjar.$create()
 (func $$create__@srcjar.Srcjar

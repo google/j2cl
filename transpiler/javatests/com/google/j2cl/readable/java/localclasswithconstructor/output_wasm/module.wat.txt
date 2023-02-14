@@ -1,8 +1,55 @@
-;;; Code for localclasswithconstructor.LocalClassWithConstructor [static fields]
-(global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor (mut i32) (i32.const 0))
+ ;;; Code for localclasswithconstructor.LocalClassWithConstructor [type definition]
+ (type $localclasswithconstructor.LocalClassWithConstructor (struct_subtype 
+  (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.vtable)) 
+  (field $itable (ref $localclasswithconstructor.LocalClassWithConstructor.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $localclasswithconstructor.LocalClassWithConstructor.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__int__void (ref $function.m_test__int__void))
+   $java.lang.Object.vtable)
+ )
+ (type $localclasswithconstructor.LocalClassWithConstructor.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [static fields]
-(global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32) (i32.const 0))
+ ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [type definition]
+ (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct_subtype 
+  (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) 
+  (field $itable (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (ref null $localclasswithconstructor.LocalClassWithConstructor))
+  (field $f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))
+  (field $$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass i32)
+  (field $$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass i32)
+   $java.lang.Object)
+ )
+ (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [vtable.init]
 (global $localclasswithconstructor.LocalClassWithConstructor.vtable (ref $localclasswithconstructor.LocalClassWithConstructor.vtable) 
@@ -47,30 +94,13 @@
   (ref.null struct)
  ))
 
-;;; Code for localclasswithconstructor.LocalClassWithConstructor [CLASS]
-(type $localclasswithconstructor.LocalClassWithConstructor (struct_subtype 
- (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.vtable)) 
- (field $itable (ref $localclasswithconstructor.LocalClassWithConstructor.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $localclasswithconstructor.LocalClassWithConstructor.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__int__void (ref $function.m_test__int__void))
-  $java.lang.Object.vtable)
-)
-(type $localclasswithconstructor.LocalClassWithConstructor.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for localclasswithconstructor.LocalClassWithConstructor [static fields]
+(global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor (mut i32) (i32.const 0))
+
+;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [static fields]
+(global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32) (i32.const 0))
+
+;;; Code for localclasswithconstructor.LocalClassWithConstructor [methods]
 
 ;;; LocalClassWithConstructor LocalClassWithConstructor.$create()
 (func $$create__@localclasswithconstructor.LocalClassWithConstructor
@@ -160,33 +190,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
 
-;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [CLASS]
-(type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct_subtype 
- (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) 
- (field $itable (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (ref null $localclasswithconstructor.LocalClassWithConstructor))
- (field $f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))
- (field $$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass i32)
- (field $$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass i32)
-  $java.lang.Object)
-)
-(type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [methods]
 
 ;;; LocalClass LocalClass.$create(LocalClassWithConstructor $outer_this, int $captured_localVar, int $captured_p, int a, int b)
 (func $$create__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int@localclasswithconstructor.LocalClassWithConstructor.1LocalClass

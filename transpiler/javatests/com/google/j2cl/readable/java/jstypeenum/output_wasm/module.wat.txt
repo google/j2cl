@@ -1,9 +1,33 @@
-;;; Code for jstypeenum.Color [static fields]
-(global $f_RED__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
-(global $f_GREEN__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
-(global $f_BLUE__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
-(global $f_namesToValuesMap__jstypeenum_Color_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__jstypeenum_Color (mut i32) (i32.const 0))
+ ;;; Code for jstypeenum.Color [type definition]
+ (type $jstypeenum.Color (struct_subtype 
+  (field $vtable (ref $jstypeenum.Color.vtable)) 
+  (field $itable (ref $jstypeenum.Color.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
+  (field $f_ordinal__java_lang_Enum_ (mut i32))
+   $java.lang.Enum)
+ )
+ (type $jstypeenum.Color.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+  (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+  (field $m_ordinal__int (ref $function.m_ordinal__int))
+  (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
+  (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+   $java.lang.Enum.vtable)
+ )
+ (type $jstypeenum.Color.itable (struct_subtype 
+ (field $slot0 (ref $java.io.Serializable.vtable))
+ (field $slot1 (ref $java.lang.Comparable.vtable))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Enum.itable))
 
 ;;; Code for jstypeenum.Color [vtable.init]
 (global $jstypeenum.Color.vtable (ref $jstypeenum.Color.vtable) 
@@ -34,36 +58,14 @@
   (ref.null struct)
  ))
 
-;;; Code for jstypeenum.Color [ENUM]
-(type $jstypeenum.Color (struct_subtype 
- (field $vtable (ref $jstypeenum.Color.vtable)) 
- (field $itable (ref $jstypeenum.Color.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-  $java.lang.Enum)
-)
-(type $jstypeenum.Color.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
- (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
- (field $m_ordinal__int (ref $function.m_ordinal__int))
- (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
- (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
-  $java.lang.Enum.vtable)
-)
-(type $jstypeenum.Color.itable (struct_subtype 
-(field $slot0 (ref $java.io.Serializable.vtable))
-(field $slot1 (ref $java.lang.Comparable.vtable))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Enum.itable))
+;;; Code for jstypeenum.Color [static fields]
+(global $f_RED__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $f_GREEN__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $f_BLUE__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $f_namesToValuesMap__jstypeenum_Color_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__jstypeenum_Color (mut i32) (i32.const 0))
+
+;;; Code for jstypeenum.Color [methods]
 
 ;;; Color Color.$create(String $name, int $ordinal)
 (func $$create__java_lang_String__int@jstypeenum.Color

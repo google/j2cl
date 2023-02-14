@@ -1,8 +1,52 @@
-;;; Code for supercallnondefault.Parent [static fields]
-(global $f_$initialized__supercallnondefault_Parent (mut i32) (i32.const 0))
+ ;;; Code for supercallnondefault.Parent [type definition]
+ (type $supercallnondefault.Parent (struct_subtype 
+  (field $vtable (ref $supercallnondefault.Parent.vtable)) 
+  (field $itable (ref $supercallnondefault.Parent.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_field__supercallnondefault_Parent i32)
+   $java.lang.Object)
+ )
+ (type $supercallnondefault.Parent.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $supercallnondefault.Parent.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for supercallnondefault.Child [static fields]
-(global $f_$initialized__supercallnondefault_Child (mut i32) (i32.const 0))
+ ;;; Code for supercallnondefault.Child [type definition]
+ (type $supercallnondefault.Child (struct_subtype 
+  (field $vtable (ref $supercallnondefault.Child.vtable)) 
+  (field $itable (ref $supercallnondefault.Child.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_field__supercallnondefault_Parent i32)
+   $supercallnondefault.Parent)
+ )
+ (type $supercallnondefault.Child.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $supercallnondefault.Parent.vtable)
+ )
+ (type $supercallnondefault.Child.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $supercallnondefault.Parent.itable))
 
 ;;; Code for supercallnondefault.Parent [vtable.init]
 (global $supercallnondefault.Parent.vtable (ref $supercallnondefault.Parent.vtable) 
@@ -46,30 +90,13 @@
   (ref.null struct)
  ))
 
-;;; Code for supercallnondefault.Parent [CLASS]
-(type $supercallnondefault.Parent (struct_subtype 
- (field $vtable (ref $supercallnondefault.Parent.vtable)) 
- (field $itable (ref $supercallnondefault.Parent.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__supercallnondefault_Parent i32)
-  $java.lang.Object)
-)
-(type $supercallnondefault.Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $supercallnondefault.Parent.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for supercallnondefault.Parent [static fields]
+(global $f_$initialized__supercallnondefault_Parent (mut i32) (i32.const 0))
+
+;;; Code for supercallnondefault.Child [static fields]
+(global $f_$initialized__supercallnondefault_Child (mut i32) (i32.const 0))
+
+;;; Code for supercallnondefault.Parent [methods]
 
 ;;; Parent Parent.$create(int f)
 (func $$create__int@supercallnondefault.Parent
@@ -141,30 +168,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@supercallnondefault.Parent)
 
-;;; Code for supercallnondefault.Child [CLASS]
-(type $supercallnondefault.Child (struct_subtype 
- (field $vtable (ref $supercallnondefault.Child.vtable)) 
- (field $itable (ref $supercallnondefault.Child.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__supercallnondefault_Parent i32)
-  $supercallnondefault.Parent)
-)
-(type $supercallnondefault.Child.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $supercallnondefault.Parent.vtable)
-)
-(type $supercallnondefault.Child.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $supercallnondefault.Parent.itable))
+;;; Code for supercallnondefault.Child [methods]
 
 ;;; Child Child.$create(int a)
 (func $$create__int@supercallnondefault.Child

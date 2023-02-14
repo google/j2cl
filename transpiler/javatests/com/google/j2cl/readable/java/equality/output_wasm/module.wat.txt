@@ -1,5 +1,27 @@
-;;; Code for equality.Equality [static fields]
-(global $f_$initialized__equality_Equality (mut i32) (i32.const 0))
+ ;;; Code for equality.Equality [type definition]
+ (type $equality.Equality (struct_subtype 
+  (field $vtable (ref $equality.Equality.vtable)) 
+  (field $itable (ref $equality.Equality.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $equality.Equality.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__void (ref $function.m_test__void))
+   $java.lang.Object.vtable)
+ )
+ (type $equality.Equality.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for equality.Equality [vtable.init]
 (global $equality.Equality.vtable (ref $equality.Equality.vtable) 
@@ -23,30 +45,10 @@
   (ref.null struct)
  ))
 
-;;; Code for equality.Equality [CLASS]
-(type $equality.Equality (struct_subtype 
- (field $vtable (ref $equality.Equality.vtable)) 
- (field $itable (ref $equality.Equality.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $equality.Equality.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__void (ref $function.m_test__void))
-  $java.lang.Object.vtable)
-)
-(type $equality.Equality.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for equality.Equality [static fields]
+(global $f_$initialized__equality_Equality (mut i32) (i32.const 0))
+
+;;; Code for equality.Equality [methods]
 
 ;;; Equality Equality.$create()
 (func $$create__@equality.Equality

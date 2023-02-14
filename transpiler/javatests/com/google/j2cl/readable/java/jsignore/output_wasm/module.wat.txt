@@ -1,8 +1,26 @@
-;;; Code for jsignore.JsIgnoreExample [static fields]
-(global $f_exportedField__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
-(global $f_notExportedField__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
-(global $f_CONSTNAME__jsignore_JsIgnoreExample (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
+ ;;; Code for jsignore.JsIgnoreExample [type definition]
+ (type $jsignore.JsIgnoreExample (struct_subtype 
+  (field $vtable (ref $jsignore.JsIgnoreExample.vtable)) 
+  (field $itable (ref $jsignore.JsIgnoreExample.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsignore.JsIgnoreExample.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $jsignore.JsIgnoreExample.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for jsignore.JsIgnoreExample [vtable.init]
 (global $jsignore.JsIgnoreExample.vtable (ref $jsignore.JsIgnoreExample.vtable) 
@@ -25,29 +43,13 @@
   (ref.null struct)
  ))
 
-;;; Code for jsignore.JsIgnoreExample [CLASS]
-(type $jsignore.JsIgnoreExample (struct_subtype 
- (field $vtable (ref $jsignore.JsIgnoreExample.vtable)) 
- (field $itable (ref $jsignore.JsIgnoreExample.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsignore.JsIgnoreExample.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $jsignore.JsIgnoreExample.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsignore.JsIgnoreExample [static fields]
+(global $f_exportedField__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
+(global $f_notExportedField__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
+(global $f_CONSTNAME__jsignore_JsIgnoreExample (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
+
+;;; Code for jsignore.JsIgnoreExample [methods]
 
 ;;; JsIgnoreExample JsIgnoreExample.$create()
 (func $$create__@jsignore.JsIgnoreExample

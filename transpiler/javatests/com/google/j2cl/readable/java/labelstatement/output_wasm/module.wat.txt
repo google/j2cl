@@ -1,5 +1,31 @@
-;;; Code for labelstatement.LabeledStatement [static fields]
-(global $f_$initialized__labelstatement_LabeledStatement (mut i32) (i32.const 0))
+ ;;; Code for labelstatement.LabeledStatement [type definition]
+ (type $labelstatement.LabeledStatement (struct_subtype 
+  (field $vtable (ref $labelstatement.LabeledStatement.vtable)) 
+  (field $itable (ref $labelstatement.LabeledStatement.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $labelstatement.LabeledStatement.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_loopStatements__void (ref $function.m_loopStatements__void))
+  (field $m_simpleStatement__void (ref $function.m_simpleStatement__void))
+  (field $m_block__void (ref $function.m_block__void))
+  (field $m_ifStatement__void (ref $function.m_ifStatement__void))
+  (field $m_switchStatement__void (ref $function.m_switchStatement__void))
+   $java.lang.Object.vtable)
+ )
+ (type $labelstatement.LabeledStatement.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for labelstatement.LabeledStatement [vtable.init]
 (global $labelstatement.LabeledStatement.vtable (ref $labelstatement.LabeledStatement.vtable) 
@@ -27,34 +53,10 @@
   (ref.null struct)
  ))
 
-;;; Code for labelstatement.LabeledStatement [CLASS]
-(type $labelstatement.LabeledStatement (struct_subtype 
- (field $vtable (ref $labelstatement.LabeledStatement.vtable)) 
- (field $itable (ref $labelstatement.LabeledStatement.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $labelstatement.LabeledStatement.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_loopStatements__void (ref $function.m_loopStatements__void))
- (field $m_simpleStatement__void (ref $function.m_simpleStatement__void))
- (field $m_block__void (ref $function.m_block__void))
- (field $m_ifStatement__void (ref $function.m_ifStatement__void))
- (field $m_switchStatement__void (ref $function.m_switchStatement__void))
-  $java.lang.Object.vtable)
-)
-(type $labelstatement.LabeledStatement.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for labelstatement.LabeledStatement [static fields]
+(global $f_$initialized__labelstatement_LabeledStatement (mut i32) (i32.const 0))
+
+;;; Code for labelstatement.LabeledStatement [methods]
 
 ;;; LabeledStatement LabeledStatement.$create()
 (func $$create__@labelstatement.LabeledStatement

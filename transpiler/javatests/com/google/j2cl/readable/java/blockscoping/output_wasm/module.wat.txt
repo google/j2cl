@@ -1,5 +1,28 @@
-;;; Code for blockscoping.BlockScoping [static fields]
-(global $f_$initialized__blockscoping_BlockScoping (mut i32) (i32.const 0))
+ ;;; Code for blockscoping.BlockScoping [type definition]
+ (type $blockscoping.BlockScoping (struct_subtype 
+  (field $vtable (ref $blockscoping.BlockScoping.vtable)) 
+  (field $itable (ref $blockscoping.BlockScoping.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $blockscoping.BlockScoping.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_localScopes__void (ref $function.m_localScopes__void))
+  (field $m_nestedScopes__void (ref $function.m_nestedScopes__void))
+   $java.lang.Object.vtable)
+ )
+ (type $blockscoping.BlockScoping.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for blockscoping.BlockScoping [vtable.init]
 (global $blockscoping.BlockScoping.vtable (ref $blockscoping.BlockScoping.vtable) 
@@ -24,31 +47,10 @@
   (ref.null struct)
  ))
 
-;;; Code for blockscoping.BlockScoping [CLASS]
-(type $blockscoping.BlockScoping (struct_subtype 
- (field $vtable (ref $blockscoping.BlockScoping.vtable)) 
- (field $itable (ref $blockscoping.BlockScoping.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $blockscoping.BlockScoping.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_localScopes__void (ref $function.m_localScopes__void))
- (field $m_nestedScopes__void (ref $function.m_nestedScopes__void))
-  $java.lang.Object.vtable)
-)
-(type $blockscoping.BlockScoping.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for blockscoping.BlockScoping [static fields]
+(global $f_$initialized__blockscoping_BlockScoping (mut i32) (i32.const 0))
+
+;;; Code for blockscoping.BlockScoping [methods]
 
 ;;; BlockScoping BlockScoping.$create()
 (func $$create__@blockscoping.BlockScoping

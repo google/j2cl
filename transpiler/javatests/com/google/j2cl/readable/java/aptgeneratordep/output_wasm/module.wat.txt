@@ -1,8 +1,50 @@
-;;; Code for aptgeneratordep.Dummy [static fields]
-(global $f_$initialized__aptgeneratordep_Dummy (mut i32) (i32.const 0))
+ ;;; Code for aptgeneratordep.Dummy [type definition]
+ (type $aptgeneratordep.Dummy (struct_subtype 
+  (field $vtable (ref $aptgeneratordep.Dummy.vtable)) 
+  (field $itable (ref $aptgeneratordep.Dummy.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $aptgeneratordep.Dummy.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $aptgeneratordep.Dummy.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for aptgeneratordep.Foo [static fields]
-(global $f_$initialized__aptgeneratordep_Foo (mut i32) (i32.const 0))
+ ;;; Code for aptgeneratordep.Foo [type definition]
+ (type $aptgeneratordep.Foo (struct_subtype 
+  (field $vtable (ref $aptgeneratordep.Foo.vtable)) 
+  (field $itable (ref $aptgeneratordep.Foo.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $aptgeneratordep.Foo.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $aptgeneratordep.Foo.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for aptgeneratordep.Dummy [vtable.init]
 (global $aptgeneratordep.Dummy.vtable (ref $aptgeneratordep.Dummy.vtable) 
@@ -46,29 +88,13 @@
   (ref.null struct)
  ))
 
-;;; Code for aptgeneratordep.Dummy [CLASS]
-(type $aptgeneratordep.Dummy (struct_subtype 
- (field $vtable (ref $aptgeneratordep.Dummy.vtable)) 
- (field $itable (ref $aptgeneratordep.Dummy.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $aptgeneratordep.Dummy.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $aptgeneratordep.Dummy.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for aptgeneratordep.Dummy [static fields]
+(global $f_$initialized__aptgeneratordep_Dummy (mut i32) (i32.const 0))
+
+;;; Code for aptgeneratordep.Foo [static fields]
+(global $f_$initialized__aptgeneratordep_Foo (mut i32) (i32.const 0))
+
+;;; Code for aptgeneratordep.Dummy [methods]
 
 ;;; Dummy Dummy.$create()
 (func $$create__@aptgeneratordep.Dummy
@@ -138,29 +164,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@aptgeneratordep.Dummy)
 
-;;; Code for aptgeneratordep.Foo [CLASS]
-(type $aptgeneratordep.Foo (struct_subtype 
- (field $vtable (ref $aptgeneratordep.Foo.vtable)) 
- (field $itable (ref $aptgeneratordep.Foo.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $aptgeneratordep.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $aptgeneratordep.Foo.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for aptgeneratordep.Foo [methods]
 
 ;;; Foo Foo.$create()
 (func $$create__@aptgeneratordep.Foo

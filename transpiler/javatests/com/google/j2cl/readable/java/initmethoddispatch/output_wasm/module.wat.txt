@@ -1,5 +1,27 @@
-;;; Code for initmethoddispatch.InitMethodDispatch [static fields]
-(global $f_$initialized__initmethoddispatch_InitMethodDispatch (mut i32) (i32.const 0))
+ ;;; Code for initmethoddispatch.InitMethodDispatch [type definition]
+ (type $initmethoddispatch.InitMethodDispatch (struct_subtype 
+  (field $vtable (ref $initmethoddispatch.InitMethodDispatch.vtable)) 
+  (field $itable (ref $initmethoddispatch.InitMethodDispatch.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_value__initmethoddispatch_InitMethodDispatch i32)
+   $java.lang.Object)
+ )
+ (type $initmethoddispatch.InitMethodDispatch.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $initmethoddispatch.InitMethodDispatch.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for initmethoddispatch.InitMethodDispatch [vtable.init]
 (global $initmethoddispatch.InitMethodDispatch.vtable (ref $initmethoddispatch.InitMethodDispatch.vtable) 
@@ -22,30 +44,10 @@
   (ref.null struct)
  ))
 
-;;; Code for initmethoddispatch.InitMethodDispatch [CLASS]
-(type $initmethoddispatch.InitMethodDispatch (struct_subtype 
- (field $vtable (ref $initmethoddispatch.InitMethodDispatch.vtable)) 
- (field $itable (ref $initmethoddispatch.InitMethodDispatch.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_value__initmethoddispatch_InitMethodDispatch i32)
-  $java.lang.Object)
-)
-(type $initmethoddispatch.InitMethodDispatch.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $initmethoddispatch.InitMethodDispatch.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for initmethoddispatch.InitMethodDispatch [static fields]
+(global $f_$initialized__initmethoddispatch_InitMethodDispatch (mut i32) (i32.const 0))
+
+;;; Code for initmethoddispatch.InitMethodDispatch [methods]
 
 ;;; InitMethodDispatch<T> InitMethodDispatch.$create()
 (func $$create__@initmethoddispatch.InitMethodDispatch

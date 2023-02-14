@@ -1,5 +1,34 @@
-;;; Code for interfacedevirtualize.InterfaceDevirtualize [static fields]
-(global $f_$initialized__interfacedevirtualize_InterfaceDevirtualize (mut i32) (i32.const 0))
+ ;;; Code for interfacedevirtualize.InterfaceDevirtualize [type definition]
+ (type $interfacedevirtualize.InterfaceDevirtualize (struct_subtype 
+  (field $vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable)) 
+  (field $itable (ref $interfacedevirtualize.InterfaceDevirtualize.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $interfacedevirtualize.InterfaceDevirtualize.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_compare0__java_lang_Comparable__java_lang_Object__int (ref $function.m_compare0__java_lang_Comparable__java_lang_Object__int))
+  (field $m_compare1__java_lang_Comparable__java_lang_Object__int (ref $function.m_compare1__java_lang_Comparable__java_lang_Object__int))
+  (field $m_compare2__java_lang_Comparable__java_lang_Double__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Double__int))
+  (field $m_compare3__java_lang_Double__java_lang_Double__int (ref $function.m_compare3__java_lang_Double__java_lang_Double__int))
+  (field $m_compare2__java_lang_Comparable__java_lang_Boolean__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Boolean__int))
+  (field $m_compare3__java_lang_Boolean__java_lang_Boolean__int (ref $function.m_compare3__java_lang_Boolean__java_lang_Boolean__int))
+  (field $m_compare2__java_lang_Comparable__java_lang_Integer__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Integer__int))
+  (field $m_compare3__java_lang_Integer__java_lang_Integer__int (ref $function.m_compare3__java_lang_Integer__java_lang_Integer__int))
+   $java.lang.Object.vtable)
+ )
+ (type $interfacedevirtualize.InterfaceDevirtualize.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable.init]
 (global $interfacedevirtualize.InterfaceDevirtualize.vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable) 
@@ -30,37 +59,10 @@
   (ref.null struct)
  ))
 
-;;; Code for interfacedevirtualize.InterfaceDevirtualize [CLASS]
-(type $interfacedevirtualize.InterfaceDevirtualize (struct_subtype 
- (field $vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable)) 
- (field $itable (ref $interfacedevirtualize.InterfaceDevirtualize.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $interfacedevirtualize.InterfaceDevirtualize.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_compare0__java_lang_Comparable__java_lang_Object__int (ref $function.m_compare0__java_lang_Comparable__java_lang_Object__int))
- (field $m_compare1__java_lang_Comparable__java_lang_Object__int (ref $function.m_compare1__java_lang_Comparable__java_lang_Object__int))
- (field $m_compare2__java_lang_Comparable__java_lang_Double__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Double__int))
- (field $m_compare3__java_lang_Double__java_lang_Double__int (ref $function.m_compare3__java_lang_Double__java_lang_Double__int))
- (field $m_compare2__java_lang_Comparable__java_lang_Boolean__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Boolean__int))
- (field $m_compare3__java_lang_Boolean__java_lang_Boolean__int (ref $function.m_compare3__java_lang_Boolean__java_lang_Boolean__int))
- (field $m_compare2__java_lang_Comparable__java_lang_Integer__int (ref $function.m_compare2__java_lang_Comparable__java_lang_Integer__int))
- (field $m_compare3__java_lang_Integer__java_lang_Integer__int (ref $function.m_compare3__java_lang_Integer__java_lang_Integer__int))
-  $java.lang.Object.vtable)
-)
-(type $interfacedevirtualize.InterfaceDevirtualize.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for interfacedevirtualize.InterfaceDevirtualize [static fields]
+(global $f_$initialized__interfacedevirtualize_InterfaceDevirtualize (mut i32) (i32.const 0))
+
+;;; Code for interfacedevirtualize.InterfaceDevirtualize [methods]
 
 ;;; InterfaceDevirtualize InterfaceDevirtualize.$create()
 (func $$create__@interfacedevirtualize.InterfaceDevirtualize

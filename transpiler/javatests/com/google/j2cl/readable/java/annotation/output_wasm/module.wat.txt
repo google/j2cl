@@ -1,14 +1,63 @@
-;;; Code for annotation.Main [static fields]
-(global $f_$initialized__annotation_Main (mut i32) (i32.const 0))
+ ;;; Code for annotation.Main.Foo [type definition]
+ (type $annotation.Main.Foo.vtable (struct 
+  (field $m_bar__int (ref $function.m_bar__int))
+  )
+ )
 
-;;; Code for annotation.Main.Foo [static fields]
-(global $f_$initialized__annotation_Main_Foo (mut i32) (i32.const 0))
+ ;;; Code for annotation.Main.Zoo [type definition]
+ (type $annotation.Main.Zoo.vtable (struct 
+  )
+ )
 
-;;; Code for annotation.Main.Zoo [static fields]
-(global $f_$initialized__annotation_Main_Zoo (mut i32) (i32.const 0))
+ ;;; Code for annotation.Main [type definition]
+ (type $annotation.Main (struct_subtype 
+  (field $vtable (ref $annotation.Main.vtable)) 
+  (field $itable (ref $annotation.Main.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $annotation.Main.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $annotation.Main.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for annotation.Main.Bar [static fields]
-(global $f_$initialized__annotation_Main_Bar (mut i32) (i32.const 0))
+ ;;; Code for annotation.Main.Bar [type definition]
+ (type $annotation.Main.Bar (struct_subtype 
+  (field $vtable (ref $annotation.Main.Bar.vtable)) 
+  (field $itable (ref $annotation.Main.Bar.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__annotation_Main_Bar (ref null $annotation.Main))
+   $java.lang.Object)
+ )
+ (type $annotation.Main.Bar.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_baz__int_$pp_annotation (ref $function.m_baz__int_$pp_annotation))
+   $java.lang.Object.vtable)
+ )
+ (type $annotation.Main.Bar.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for annotation.Main [vtable.init]
 (global $annotation.Main.vtable (ref $annotation.Main.vtable) 
@@ -53,29 +102,61 @@
   (ref.null struct)
  ))
 
-;;; Code for annotation.Main [CLASS]
-(type $annotation.Main (struct_subtype 
- (field $vtable (ref $annotation.Main.vtable)) 
- (field $itable (ref $annotation.Main.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+;;; Code for annotation.Main [static fields]
+(global $f_$initialized__annotation_Main (mut i32) (i32.const 0))
+
+;;; Code for annotation.Main.Foo [static fields]
+(global $f_$initialized__annotation_Main_Foo (mut i32) (i32.const 0))
+
+;;; Code for annotation.Main.Zoo [static fields]
+(global $f_$initialized__annotation_Main_Zoo (mut i32) (i32.const 0))
+
+;;; Code for annotation.Main.Bar [static fields]
+(global $f_$initialized__annotation_Main_Bar (mut i32) (i32.const 0))
+
+;;; Code for annotation.Main.Foo [methods]
+
+;;; void Foo.$clinit()
+(func $$clinit__void@annotation.Main.Foo
+ ;;@ annotation/Main.java:19:13
+ (block
+  ;; if (annotation.Main.Foo.$initialized) return;
+  ;;@ annotation/Main.java:19:13
+  (if (global.get $f_$initialized__annotation_Main_Foo)
+   (then
+    ;; return;
+    ;;@ annotation/Main.java:19:13
+    (return )
+   )
+  )
+  ;; (annotation.Main.Foo.$initialized = true);
+  ;;@ annotation/Main.java:19:13
+  (global.set $f_$initialized__annotation_Main_Foo (i32.const 1))
+ )
 )
-(type $annotation.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
+
+;;; Code for annotation.Main.Zoo [methods]
+
+;;; void Zoo.$clinit()
+(func $$clinit__void@annotation.Main.Zoo
+ ;;@ annotation/Main.java:28:13
+ (block
+  ;; if (annotation.Main.Zoo.$initialized) return;
+  ;;@ annotation/Main.java:28:13
+  (if (global.get $f_$initialized__annotation_Main_Zoo)
+   (then
+    ;; return;
+    ;;@ annotation/Main.java:28:13
+    (return )
+   )
+  )
+  ;; (annotation.Main.Zoo.$initialized = true);
+  ;;@ annotation/Main.java:28:13
+  (global.set $f_$initialized__annotation_Main_Zoo (i32.const 1))
+ )
 )
-(type $annotation.Main.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+
+;;; Code for annotation.Main [methods]
 
 ;;; Main Main.$create()
 (func $$create__@annotation.Main
@@ -145,80 +226,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main)
 
-;;; Code for annotation.Main.Foo [INTERFACE]
-(type $annotation.Main.Foo.vtable (struct 
- (field $m_bar__int (ref $function.m_bar__int))
- )
-)
-
-;;; void Foo.$clinit()
-(func $$clinit__void@annotation.Main.Foo
- ;;@ annotation/Main.java:19:13
- (block
-  ;; if (annotation.Main.Foo.$initialized) return;
-  ;;@ annotation/Main.java:19:13
-  (if (global.get $f_$initialized__annotation_Main_Foo)
-   (then
-    ;; return;
-    ;;@ annotation/Main.java:19:13
-    (return )
-   )
-  )
-  ;; (annotation.Main.Foo.$initialized = true);
-  ;;@ annotation/Main.java:19:13
-  (global.set $f_$initialized__annotation_Main_Foo (i32.const 1))
- )
-)
-
-;;; Code for annotation.Main.Zoo [INTERFACE]
-(type $annotation.Main.Zoo.vtable (struct 
- )
-)
-
-;;; void Zoo.$clinit()
-(func $$clinit__void@annotation.Main.Zoo
- ;;@ annotation/Main.java:28:13
- (block
-  ;; if (annotation.Main.Zoo.$initialized) return;
-  ;;@ annotation/Main.java:28:13
-  (if (global.get $f_$initialized__annotation_Main_Zoo)
-   (then
-    ;; return;
-    ;;@ annotation/Main.java:28:13
-    (return )
-   )
-  )
-  ;; (annotation.Main.Zoo.$initialized = true);
-  ;;@ annotation/Main.java:28:13
-  (global.set $f_$initialized__annotation_Main_Zoo (i32.const 1))
- )
-)
-
-;;; Code for annotation.Main.Bar [CLASS]
-(type $annotation.Main.Bar (struct_subtype 
- (field $vtable (ref $annotation.Main.Bar.vtable)) 
- (field $itable (ref $annotation.Main.Bar.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__annotation_Main_Bar (ref null $annotation.Main))
-  $java.lang.Object)
-)
-(type $annotation.Main.Bar.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_baz__int_$pp_annotation (ref $function.m_baz__int_$pp_annotation))
-  $java.lang.Object.vtable)
-)
-(type $annotation.Main.Bar.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for annotation.Main.Bar [methods]
 
 ;;; Bar Bar.$create(Main $outer_this)
 (func $$create__annotation_Main@annotation.Main.Bar

@@ -1,8 +1,50 @@
-;;; Code for castonarrayinit.CastOnArrayInit [static fields]
-(global $f_$initialized__castonarrayinit_CastOnArrayInit (mut i32) (i32.const 0))
+ ;;; Code for castonarrayinit.CastOnArrayInit [type definition]
+ (type $castonarrayinit.CastOnArrayInit (struct_subtype 
+  (field $vtable (ref $castonarrayinit.CastOnArrayInit.vtable)) 
+  (field $itable (ref $castonarrayinit.CastOnArrayInit.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $castonarrayinit.CastOnArrayInit.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $castonarrayinit.CastOnArrayInit.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for castonarrayinit.CastOnArrayInit.Foo [static fields]
-(global $f_$initialized__castonarrayinit_CastOnArrayInit_Foo (mut i32) (i32.const 0))
+ ;;; Code for castonarrayinit.CastOnArrayInit.Foo [type definition]
+ (type $castonarrayinit.CastOnArrayInit.Foo (struct_subtype 
+  (field $vtable (ref $castonarrayinit.CastOnArrayInit.Foo.vtable)) 
+  (field $itable (ref $castonarrayinit.CastOnArrayInit.Foo.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $castonarrayinit.CastOnArrayInit.Foo.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $castonarrayinit.CastOnArrayInit.Foo.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for castonarrayinit.CastOnArrayInit [vtable.init]
 (global $castonarrayinit.CastOnArrayInit.vtable (ref $castonarrayinit.CastOnArrayInit.vtable) 
@@ -46,29 +88,13 @@
   (ref.null struct)
  ))
 
-;;; Code for castonarrayinit.CastOnArrayInit [CLASS]
-(type $castonarrayinit.CastOnArrayInit (struct_subtype 
- (field $vtable (ref $castonarrayinit.CastOnArrayInit.vtable)) 
- (field $itable (ref $castonarrayinit.CastOnArrayInit.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $castonarrayinit.CastOnArrayInit.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $castonarrayinit.CastOnArrayInit.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for castonarrayinit.CastOnArrayInit [static fields]
+(global $f_$initialized__castonarrayinit_CastOnArrayInit (mut i32) (i32.const 0))
+
+;;; Code for castonarrayinit.CastOnArrayInit.Foo [static fields]
+(global $f_$initialized__castonarrayinit_CastOnArrayInit_Foo (mut i32) (i32.const 0))
+
+;;; Code for castonarrayinit.CastOnArrayInit [methods]
 
 ;;; CastOnArrayInit CastOnArrayInit.$create()
 (func $$create__@castonarrayinit.CastOnArrayInit
@@ -170,29 +196,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@castonarrayinit.CastOnArrayInit)
 
-;;; Code for castonarrayinit.CastOnArrayInit.Foo [CLASS]
-(type $castonarrayinit.CastOnArrayInit.Foo (struct_subtype 
- (field $vtable (ref $castonarrayinit.CastOnArrayInit.Foo.vtable)) 
- (field $itable (ref $castonarrayinit.CastOnArrayInit.Foo.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $castonarrayinit.CastOnArrayInit.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $castonarrayinit.CastOnArrayInit.Foo.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for castonarrayinit.CastOnArrayInit.Foo [methods]
 
 ;;; Foo<T> Foo.$create()
 (func $$create__@castonarrayinit.CastOnArrayInit.Foo

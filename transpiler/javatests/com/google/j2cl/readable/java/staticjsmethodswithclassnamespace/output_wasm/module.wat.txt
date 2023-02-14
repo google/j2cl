@@ -1,8 +1,52 @@
-;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [static fields]
-(global $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (mut i32) (i32.const 0))
+ ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [type definition]
+ (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (struct_subtype 
+  (field $vtable (ref $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) 
+  (field $itable (ref $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__void (ref $function.m_test__void))
+   $java.lang.Object.vtable)
+ )
+ (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [static fields]
-(global $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller (mut i32) (i32.const 0))
+ ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [type definition]
+ (type $staticjsmethodswithclassnamespace.ExternalCaller (struct_subtype 
+  (field $vtable (ref $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) 
+  (field $itable (ref $staticjsmethodswithclassnamespace.ExternalCaller.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $staticjsmethodswithclassnamespace.ExternalCaller.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_test__void (ref $function.m_test__void))
+   $java.lang.Object.vtable)
+ )
+ (type $staticjsmethodswithclassnamespace.ExternalCaller.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [vtable.init]
 (global $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (ref $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable) 
@@ -48,30 +92,13 @@
   (ref.null struct)
  ))
 
-;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [CLASS]
-(type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (struct_subtype 
- (field $vtable (ref $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) 
- (field $itable (ref $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__void (ref $function.m_test__void))
-  $java.lang.Object.vtable)
-)
-(type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [static fields]
+(global $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (mut i32) (i32.const 0))
+
+;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [static fields]
+(global $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller (mut i32) (i32.const 0))
+
+;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [methods]
 
 ;;; StaticJsMethodsWithClassNamespace StaticJsMethodsWithClassNamespace.$create()
 (func $$create__@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
@@ -169,30 +196,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)
 
-;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [CLASS]
-(type $staticjsmethodswithclassnamespace.ExternalCaller (struct_subtype 
- (field $vtable (ref $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) 
- (field $itable (ref $staticjsmethodswithclassnamespace.ExternalCaller.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $staticjsmethodswithclassnamespace.ExternalCaller.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_test__void (ref $function.m_test__void))
-  $java.lang.Object.vtable)
-)
-(type $staticjsmethodswithclassnamespace.ExternalCaller.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [methods]
 
 ;;; ExternalCaller ExternalCaller.$create()
 (func $$create__@staticjsmethodswithclassnamespace.ExternalCaller

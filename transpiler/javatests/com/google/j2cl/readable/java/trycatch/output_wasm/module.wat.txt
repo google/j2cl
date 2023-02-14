@@ -1,9 +1,61 @@
-;;; Code for trycatch.TryCatch [static fields]
-(global $f_closableThing__trycatch_TryCatch_ (mut (ref null $trycatch.TryCatch.ClosableThing)) (ref.null $trycatch.TryCatch.ClosableThing))
-(global $f_$initialized__trycatch_TryCatch (mut i32) (i32.const 0))
+ ;;; Code for trycatch.TryCatch [type definition]
+ (type $trycatch.TryCatch (struct_subtype 
+  (field $vtable (ref $trycatch.TryCatch.vtable)) 
+  (field $itable (ref $trycatch.TryCatch.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $trycatch.TryCatch.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_testMultiCatch__void (ref $function.m_testMultiCatch__void))
+  (field $m_testEmptyThrowableCatch__void (ref $function.m_testEmptyThrowableCatch__void))
+  (field $m_testEmptyThrowableRethrow__void (ref $function.m_testEmptyThrowableRethrow__void))
+  (field $m_testFinally__void (ref $function.m_testFinally__void))
+  (field $m_testTryWithResource__void (ref $function.m_testTryWithResource__void))
+  (field $m_testTryWithResourceJava9__void (ref $function.m_testTryWithResourceJava9__void))
+  (field $m_testTryWithResouceOnStaticField__void (ref $function.m_testTryWithResouceOnStaticField__void))
+  (field $m_testNestedTryCatch__void (ref $function.m_testNestedTryCatch__void))
+  (field $m_testThrowGenerics__void (ref $function.m_testThrowGenerics__void))
+  (field $m_testThrowBoundGenerics__void (ref $function.m_testThrowBoundGenerics__void))
+   $java.lang.Object.vtable)
+ )
+ (type $trycatch.TryCatch.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for trycatch.TryCatch.ClosableThing [static fields]
-(global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32) (i32.const 0))
+ ;;; Code for trycatch.TryCatch.ClosableThing [type definition]
+ (type $trycatch.TryCatch.ClosableThing (struct_subtype 
+  (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable)) 
+  (field $itable (ref $trycatch.TryCatch.ClosableThing.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $trycatch.TryCatch.ClosableThing.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_close__void (ref $function.m_close__void))
+   $java.lang.Object.vtable)
+ )
+ (type $trycatch.TryCatch.ClosableThing.itable (struct_subtype 
+ (field $slot0 (ref $java.lang.AutoCloseable.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for trycatch.TryCatch [vtable.init]
 (global $trycatch.TryCatch.vtable (ref $trycatch.TryCatch.vtable) 
@@ -60,39 +112,14 @@
   (ref.null struct)
  ))
 
-;;; Code for trycatch.TryCatch [CLASS]
-(type $trycatch.TryCatch (struct_subtype 
- (field $vtable (ref $trycatch.TryCatch.vtable)) 
- (field $itable (ref $trycatch.TryCatch.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $trycatch.TryCatch.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_testMultiCatch__void (ref $function.m_testMultiCatch__void))
- (field $m_testEmptyThrowableCatch__void (ref $function.m_testEmptyThrowableCatch__void))
- (field $m_testEmptyThrowableRethrow__void (ref $function.m_testEmptyThrowableRethrow__void))
- (field $m_testFinally__void (ref $function.m_testFinally__void))
- (field $m_testTryWithResource__void (ref $function.m_testTryWithResource__void))
- (field $m_testTryWithResourceJava9__void (ref $function.m_testTryWithResourceJava9__void))
- (field $m_testTryWithResouceOnStaticField__void (ref $function.m_testTryWithResouceOnStaticField__void))
- (field $m_testNestedTryCatch__void (ref $function.m_testNestedTryCatch__void))
- (field $m_testThrowGenerics__void (ref $function.m_testThrowGenerics__void))
- (field $m_testThrowBoundGenerics__void (ref $function.m_testThrowBoundGenerics__void))
-  $java.lang.Object.vtable)
-)
-(type $trycatch.TryCatch.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for trycatch.TryCatch [static fields]
+(global $f_closableThing__trycatch_TryCatch_ (mut (ref null $trycatch.TryCatch.ClosableThing)) (ref.null $trycatch.TryCatch.ClosableThing))
+(global $f_$initialized__trycatch_TryCatch (mut i32) (i32.const 0))
+
+;;; Code for trycatch.TryCatch.ClosableThing [static fields]
+(global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32) (i32.const 0))
+
+;;; Code for trycatch.TryCatch [methods]
 
 ;;; TryCatch TryCatch.$create()
 (func $$create__@trycatch.TryCatch
@@ -764,30 +791,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@trycatch.TryCatch)
 
-;;; Code for trycatch.TryCatch.ClosableThing [CLASS]
-(type $trycatch.TryCatch.ClosableThing (struct_subtype 
- (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable)) 
- (field $itable (ref $trycatch.TryCatch.ClosableThing.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $trycatch.TryCatch.ClosableThing.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_close__void (ref $function.m_close__void))
-  $java.lang.Object.vtable)
-)
-(type $trycatch.TryCatch.ClosableThing.itable (struct_subtype 
-(field $slot0 (ref $java.lang.AutoCloseable.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for trycatch.TryCatch.ClosableThing [methods]
 
 ;;; ClosableThing ClosableThing.$create()
 (func $$create__@trycatch.TryCatch.ClosableThing

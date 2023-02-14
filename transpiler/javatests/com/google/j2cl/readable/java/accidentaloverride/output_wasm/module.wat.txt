@@ -1,14 +1,86 @@
-;;; Code for accidentaloverride.Parent [static fields]
-(global $f_$initialized__accidentaloverride_Parent (mut i32) (i32.const 0))
+ ;;; Code for accidentaloverride.SuperInterface [type definition]
+ (type $accidentaloverride.SuperInterface.vtable (struct 
+  (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+  )
+ )
 
-;;; Code for accidentaloverride.SuperInterface [static fields]
-(global $f_$initialized__accidentaloverride_SuperInterface (mut i32) (i32.const 0))
+ ;;; Code for accidentaloverride.Parent [type definition]
+ (type $accidentaloverride.Parent (struct_subtype 
+  (field $vtable (ref $accidentaloverride.Parent.vtable)) 
+  (field $itable (ref $accidentaloverride.Parent.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $accidentaloverride.Parent.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
+   $java.lang.Object.vtable)
+ )
+ (type $accidentaloverride.Parent.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for accidentaloverride.AnotherAccidentalOverride [static fields]
-(global $f_$initialized__accidentaloverride_AnotherAccidentalOverride (mut i32) (i32.const 0))
+ ;;; Code for accidentaloverride.AnotherAccidentalOverride [type definition]
+ (type $accidentaloverride.AnotherAccidentalOverride (struct_subtype 
+  (field $vtable (ref $accidentaloverride.AnotherAccidentalOverride.vtable)) 
+  (field $itable (ref $accidentaloverride.AnotherAccidentalOverride.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $accidentaloverride.Parent)
+ )
+ (type $accidentaloverride.AnotherAccidentalOverride.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
+  (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+  (field $m_foo__java_lang_AssertionError__void (ref $function.m_foo__java_lang_AssertionError__void))
+   $accidentaloverride.Parent.vtable)
+ )
+ (type $accidentaloverride.AnotherAccidentalOverride.itable (struct_subtype 
+ (field $slot0 (ref $accidentaloverride.SuperInterface.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $accidentaloverride.Parent.itable))
 
-;;; Code for accidentaloverride.AccidentalOverride [static fields]
-(global $f_$initialized__accidentaloverride_AccidentalOverride (mut i32) (i32.const 0))
+ ;;; Code for accidentaloverride.AccidentalOverride [type definition]
+ (type $accidentaloverride.AccidentalOverride (struct_subtype 
+  (field $vtable (ref $accidentaloverride.AccidentalOverride.vtable)) 
+  (field $itable (ref $accidentaloverride.AccidentalOverride.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $accidentaloverride.Parent)
+ )
+ (type $accidentaloverride.AccidentalOverride.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
+  (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+   $accidentaloverride.Parent.vtable)
+ )
+ (type $accidentaloverride.AccidentalOverride.itable (struct_subtype 
+ (field $slot0 (ref $accidentaloverride.SuperInterface.vtable))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $accidentaloverride.Parent.itable))
 
 ;;; Code for accidentaloverride.Parent [vtable.init]
 (global $accidentaloverride.Parent.vtable (ref $accidentaloverride.Parent.vtable) 
@@ -83,30 +155,40 @@
   (ref.null struct)
  ))
 
-;;; Code for accidentaloverride.Parent [CLASS]
-(type $accidentaloverride.Parent (struct_subtype 
- (field $vtable (ref $accidentaloverride.Parent.vtable)) 
- (field $itable (ref $accidentaloverride.Parent.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
+;;; Code for accidentaloverride.Parent [static fields]
+(global $f_$initialized__accidentaloverride_Parent (mut i32) (i32.const 0))
+
+;;; Code for accidentaloverride.SuperInterface [static fields]
+(global $f_$initialized__accidentaloverride_SuperInterface (mut i32) (i32.const 0))
+
+;;; Code for accidentaloverride.AnotherAccidentalOverride [static fields]
+(global $f_$initialized__accidentaloverride_AnotherAccidentalOverride (mut i32) (i32.const 0))
+
+;;; Code for accidentaloverride.AccidentalOverride [static fields]
+(global $f_$initialized__accidentaloverride_AccidentalOverride (mut i32) (i32.const 0))
+
+;;; Code for accidentaloverride.SuperInterface [methods]
+
+;;; void SuperInterface.$clinit()
+(func $$clinit__void@accidentaloverride.SuperInterface
+ ;;@ accidentaloverride/AccidentalOverride.java:23:10
+ (block
+  ;; if (accidentaloverride.SuperInterface.$initialized) return;
+  ;;@ accidentaloverride/AccidentalOverride.java:23:10
+  (if (global.get $f_$initialized__accidentaloverride_SuperInterface)
+   (then
+    ;; return;
+    ;;@ accidentaloverride/AccidentalOverride.java:23:10
+    (return )
+   )
+  )
+  ;; (accidentaloverride.SuperInterface.$initialized = true);
+  ;;@ accidentaloverride/AccidentalOverride.java:23:10
+  (global.set $f_$initialized__accidentaloverride_SuperInterface (i32.const 1))
+ )
 )
-(type $accidentaloverride.Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
-  $java.lang.Object.vtable)
-)
-(type $accidentaloverride.Parent.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+
+;;; Code for accidentaloverride.Parent [methods]
 
 ;;; Parent<T> Parent.$create()
 (func $$create__@accidentaloverride.Parent
@@ -189,57 +271,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.Parent)
 
-;;; Code for accidentaloverride.SuperInterface [INTERFACE]
-(type $accidentaloverride.SuperInterface.vtable (struct 
- (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
- )
-)
-
-;;; void SuperInterface.$clinit()
-(func $$clinit__void@accidentaloverride.SuperInterface
- ;;@ accidentaloverride/AccidentalOverride.java:23:10
- (block
-  ;; if (accidentaloverride.SuperInterface.$initialized) return;
-  ;;@ accidentaloverride/AccidentalOverride.java:23:10
-  (if (global.get $f_$initialized__accidentaloverride_SuperInterface)
-   (then
-    ;; return;
-    ;;@ accidentaloverride/AccidentalOverride.java:23:10
-    (return )
-   )
-  )
-  ;; (accidentaloverride.SuperInterface.$initialized = true);
-  ;;@ accidentaloverride/AccidentalOverride.java:23:10
-  (global.set $f_$initialized__accidentaloverride_SuperInterface (i32.const 1))
- )
-)
-
-;;; Code for accidentaloverride.AnotherAccidentalOverride [CLASS]
-(type $accidentaloverride.AnotherAccidentalOverride (struct_subtype 
- (field $vtable (ref $accidentaloverride.AnotherAccidentalOverride.vtable)) 
- (field $itable (ref $accidentaloverride.AnotherAccidentalOverride.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $accidentaloverride.Parent)
-)
-(type $accidentaloverride.AnotherAccidentalOverride.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
- (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
- (field $m_foo__java_lang_AssertionError__void (ref $function.m_foo__java_lang_AssertionError__void))
-  $accidentaloverride.Parent.vtable)
-)
-(type $accidentaloverride.AnotherAccidentalOverride.itable (struct_subtype 
-(field $slot0 (ref $accidentaloverride.SuperInterface.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $accidentaloverride.Parent.itable))
+;;; Code for accidentaloverride.AnotherAccidentalOverride [methods]
 
 ;;; AnotherAccidentalOverride AnotherAccidentalOverride.$create()
 (func $$create__@accidentaloverride.AnotherAccidentalOverride
@@ -357,31 +389,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
 
-;;; Code for accidentaloverride.AccidentalOverride [CLASS]
-(type $accidentaloverride.AccidentalOverride (struct_subtype 
- (field $vtable (ref $accidentaloverride.AccidentalOverride.vtable)) 
- (field $itable (ref $accidentaloverride.AccidentalOverride.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $accidentaloverride.Parent)
-)
-(type $accidentaloverride.AccidentalOverride.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__java_lang_Error__void (ref $function.m_foo__java_lang_Error__void))
- (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
-  $accidentaloverride.Parent.vtable)
-)
-(type $accidentaloverride.AccidentalOverride.itable (struct_subtype 
-(field $slot0 (ref $accidentaloverride.SuperInterface.vtable))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $accidentaloverride.Parent.itable))
+;;; Code for accidentaloverride.AccidentalOverride [methods]
 
 ;;; AccidentalOverride AccidentalOverride.$create()
 (func $$create__@accidentaloverride.AccidentalOverride

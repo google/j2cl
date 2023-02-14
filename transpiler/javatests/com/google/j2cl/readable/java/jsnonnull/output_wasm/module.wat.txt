@@ -1,23 +1,159 @@
-;;; Code for jsnonnull.Main [static fields]
-(global $f_$initialized__jsnonnull_Main (mut i32) (i32.const 0))
+ ;;; Code for jsnonnull.Main.MyFunction [type definition]
+ (type $jsnonnull.Main.MyFunction.vtable (struct 
+  (field $m_x__java_lang_String__java_lang_String (ref $function.m_x__java_lang_String__java_lang_String))
+  )
+ )
 
-;;; Code for jsnonnull.Main.MyFunction [static fields]
-(global $f_$initialized__jsnonnull_Main_MyFunction (mut i32) (i32.const 0))
+ ;;; Code for jsnonnull.Main.NonNullableTemplatedReturn [type definition]
+ (type $jsnonnull.Main.NonNullableTemplatedReturn.vtable (struct 
+  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+  (field $m_getArray__arrayOf_java_lang_Object (ref $function.m_getArray__arrayOf_java_lang_Object))
+  )
+ )
 
-;;; Code for jsnonnull.Main.StringComparator [static fields]
-(global $f_$initialized__jsnonnull_Main_StringComparator (mut i32) (i32.const 0))
+ ;;; Code for jsnonnull.Main.NonNullableTemplate [type definition]
+ (type $jsnonnull.Main.NonNullableTemplate.vtable (struct 
+  (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+  (field $m_getArray__arrayOf_java_lang_Object (ref $function.m_getArray__arrayOf_java_lang_Object))
+  )
+ )
 
-;;; Code for jsnonnull.Main.NullableStringComparator [static fields]
-(global $f_$initialized__jsnonnull_Main_NullableStringComparator (mut i32) (i32.const 0))
+ ;;; Code for jsnonnull.Main [type definition]
+ (type $jsnonnull.Main (struct_subtype 
+  (field $vtable (ref $jsnonnull.Main.vtable)) 
+  (field $itable (ref $jsnonnull.Main.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $f_f1__jsnonnull_Main_ (ref null $java.lang.String))
+  (field $f_f2__jsnonnull_Main_ (ref null $java.lang.String))
+  (field $f_f4__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
+  (field $f_f5__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
+  (field $f_f6__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
+  (field $f_f7__jsnonnull_Main_ (ref null $java.lang.Object))
+  (field $f_f8__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_f9__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_f10__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
+  (field $f_f12__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
+   $java.lang.Object)
+ )
+ (type $jsnonnull.Main.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String))
+  (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+  (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String))
+  (field $m_m4__jsnonnull_Main_MyFunction__void (ref $function.m_m4__jsnonnull_Main_MyFunction__void))
+   $java.lang.Object.vtable)
+ )
+ (type $jsnonnull.Main.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [static fields]
-(global $f_$initialized__jsnonnull_Main_NonNullableStringSubNullableComparator (mut i32) (i32.const 0))
+ ;;; Code for jsnonnull.Main.StringComparator [type definition]
+ (type $jsnonnull.Main.StringComparator (struct_subtype 
+  (field $vtable (ref $jsnonnull.Main.StringComparator.vtable)) 
+  (field $itable (ref $jsnonnull.Main.StringComparator.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsnonnull.Main.StringComparator.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_compare__java_lang_String__java_lang_String__int (ref $function.m_compare__java_lang_String__java_lang_String__int))
+  (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.m_compare__java_lang_Object__java_lang_Object__int))
+  (field $m_reversed__java_util_Comparator (ref $function.m_reversed__java_util_Comparator))
+  (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_Comparator__java_util_Comparator))
+  (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
+  (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator))
+  (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator))
+  (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator))
+  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
+   $java.lang.Object.vtable)
+ )
+ (type $jsnonnull.Main.StringComparator.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref $java.util.Comparator.vtable))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsnonnull.Main.NonNullableTemplatedReturn [static fields]
-(global $f_$initialized__jsnonnull_Main_NonNullableTemplatedReturn (mut i32) (i32.const 0))
+ ;;; Code for jsnonnull.Main.NullableStringComparator [type definition]
+ (type $jsnonnull.Main.NullableStringComparator (struct_subtype 
+  (field $vtable (ref $jsnonnull.Main.NullableStringComparator.vtable)) 
+  (field $itable (ref $jsnonnull.Main.NullableStringComparator.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $jsnonnull.Main.NullableStringComparator.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_compare__java_lang_String__java_lang_String__int (ref $function.m_compare__java_lang_String__java_lang_String__int))
+  (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.m_compare__java_lang_Object__java_lang_Object__int))
+  (field $m_reversed__java_util_Comparator (ref $function.m_reversed__java_util_Comparator))
+  (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_Comparator__java_util_Comparator))
+  (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
+  (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator))
+  (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator))
+  (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator))
+  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
+   $java.lang.Object.vtable)
+ )
+ (type $jsnonnull.Main.NullableStringComparator.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref $java.util.Comparator.vtable))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
-;;; Code for jsnonnull.Main.NonNullableTemplate [static fields]
-(global $f_$initialized__jsnonnull_Main_NonNullableTemplate (mut i32) (i32.const 0))
+ ;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [type definition]
+ (type $jsnonnull.Main.NonNullableStringSubNullableComparator (struct_subtype 
+  (field $vtable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) 
+  (field $itable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $jsnonnull.Main.NullableStringComparator)
+ )
+ (type $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_compare__java_lang_String__java_lang_String__int (ref $function.m_compare__java_lang_String__java_lang_String__int))
+  (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.m_compare__java_lang_Object__java_lang_Object__int))
+  (field $m_reversed__java_util_Comparator (ref $function.m_reversed__java_util_Comparator))
+  (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_Comparator__java_util_Comparator))
+  (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
+  (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator))
+  (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator))
+  (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator))
+  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
+   $jsnonnull.Main.NullableStringComparator.vtable)
+ )
+ (type $jsnonnull.Main.NonNullableStringSubNullableComparator.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref $java.util.Comparator.vtable))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $jsnonnull.Main.NullableStringComparator.itable))
 
 ;;; Code for jsnonnull.Main [vtable.init]
 (global $jsnonnull.Main.vtable (ref $jsnonnull.Main.vtable) 
@@ -164,43 +300,91 @@
   (ref.null struct)
  ))
 
-;;; Code for jsnonnull.Main [CLASS]
-(type $jsnonnull.Main (struct_subtype 
- (field $vtable (ref $jsnonnull.Main.vtable)) 
- (field $itable (ref $jsnonnull.Main.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f1__jsnonnull_Main_ (ref null $java.lang.String))
- (field $f_f2__jsnonnull_Main_ (ref null $java.lang.String))
- (field $f_f4__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
- (field $f_f5__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
- (field $f_f6__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
- (field $f_f7__jsnonnull_Main_ (ref null $java.lang.Object))
- (field $f_f8__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_f9__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_f10__jsnonnull_Main_ (ref null $javaemul.internal.WasmArray.OfObject))
- (field $f_f12__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
-  $java.lang.Object)
+;;; Code for jsnonnull.Main [static fields]
+(global $f_$initialized__jsnonnull_Main (mut i32) (i32.const 0))
+
+;;; Code for jsnonnull.Main.MyFunction [static fields]
+(global $f_$initialized__jsnonnull_Main_MyFunction (mut i32) (i32.const 0))
+
+;;; Code for jsnonnull.Main.StringComparator [static fields]
+(global $f_$initialized__jsnonnull_Main_StringComparator (mut i32) (i32.const 0))
+
+;;; Code for jsnonnull.Main.NullableStringComparator [static fields]
+(global $f_$initialized__jsnonnull_Main_NullableStringComparator (mut i32) (i32.const 0))
+
+;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [static fields]
+(global $f_$initialized__jsnonnull_Main_NonNullableStringSubNullableComparator (mut i32) (i32.const 0))
+
+;;; Code for jsnonnull.Main.NonNullableTemplatedReturn [static fields]
+(global $f_$initialized__jsnonnull_Main_NonNullableTemplatedReturn (mut i32) (i32.const 0))
+
+;;; Code for jsnonnull.Main.NonNullableTemplate [static fields]
+(global $f_$initialized__jsnonnull_Main_NonNullableTemplate (mut i32) (i32.const 0))
+
+;;; Code for jsnonnull.Main.MyFunction [methods]
+
+;;; void MyFunction.$clinit()
+(func $$clinit__void@jsnonnull.Main.MyFunction
+ ;;@ jsnonnull/Main.java:61:12
+ (block
+  ;; if (jsnonnull.Main.MyFunction.$initialized) return;
+  ;;@ jsnonnull/Main.java:61:12
+  (if (global.get $f_$initialized__jsnonnull_Main_MyFunction)
+   (then
+    ;; return;
+    ;;@ jsnonnull/Main.java:61:12
+    (return )
+   )
+  )
+  ;; (jsnonnull.Main.MyFunction.$initialized = true);
+  ;;@ jsnonnull/Main.java:61:12
+  (global.set $f_$initialized__jsnonnull_Main_MyFunction (i32.const 1))
+ )
 )
-(type $jsnonnull.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
- (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String))
- (field $m_m4__jsnonnull_Main_MyFunction__void (ref $function.m_m4__jsnonnull_Main_MyFunction__void))
-  $java.lang.Object.vtable)
+
+;;; Code for jsnonnull.Main.NonNullableTemplatedReturn [methods]
+
+;;; void NonNullableTemplatedReturn.$clinit()
+(func $$clinit__void@jsnonnull.Main.NonNullableTemplatedReturn
+ ;;@ jsnonnull/Main.java:90:12
+ (block
+  ;; if (jsnonnull.Main.NonNullableTemplatedReturn.$initialized) return;
+  ;;@ jsnonnull/Main.java:90:12
+  (if (global.get $f_$initialized__jsnonnull_Main_NonNullableTemplatedReturn)
+   (then
+    ;; return;
+    ;;@ jsnonnull/Main.java:90:12
+    (return )
+   )
+  )
+  ;; (jsnonnull.Main.NonNullableTemplatedReturn.$initialized = true);
+  ;;@ jsnonnull/Main.java:90:12
+  (global.set $f_$initialized__jsnonnull_Main_NonNullableTemplatedReturn (i32.const 1))
+ )
 )
-(type $jsnonnull.Main.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+
+;;; Code for jsnonnull.Main.NonNullableTemplate [methods]
+
+;;; void NonNullableTemplate.$clinit()
+(func $$clinit__void@jsnonnull.Main.NonNullableTemplate
+ ;;@ jsnonnull/Main.java:98:12
+ (block
+  ;; if (jsnonnull.Main.NonNullableTemplate.$initialized) return;
+  ;;@ jsnonnull/Main.java:98:12
+  (if (global.get $f_$initialized__jsnonnull_Main_NonNullableTemplate)
+   (then
+    ;; return;
+    ;;@ jsnonnull/Main.java:98:12
+    (return )
+   )
+  )
+  ;; (jsnonnull.Main.NonNullableTemplate.$initialized = true);
+  ;;@ jsnonnull/Main.java:98:12
+  (global.set $f_$initialized__jsnonnull_Main_NonNullableTemplate (i32.const 1))
+ )
+)
+
+;;; Code for jsnonnull.Main [methods]
 
 ;;; Main Main.$create(String a)
 (func $$create__java_lang_String@jsnonnull.Main
@@ -363,63 +547,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main)
 
-;;; Code for jsnonnull.Main.MyFunction [INTERFACE]
-(type $jsnonnull.Main.MyFunction.vtable (struct 
- (field $m_x__java_lang_String__java_lang_String (ref $function.m_x__java_lang_String__java_lang_String))
- )
-)
-
-;;; void MyFunction.$clinit()
-(func $$clinit__void@jsnonnull.Main.MyFunction
- ;;@ jsnonnull/Main.java:61:12
- (block
-  ;; if (jsnonnull.Main.MyFunction.$initialized) return;
-  ;;@ jsnonnull/Main.java:61:12
-  (if (global.get $f_$initialized__jsnonnull_Main_MyFunction)
-   (then
-    ;; return;
-    ;;@ jsnonnull/Main.java:61:12
-    (return )
-   )
-  )
-  ;; (jsnonnull.Main.MyFunction.$initialized = true);
-  ;;@ jsnonnull/Main.java:61:12
-  (global.set $f_$initialized__jsnonnull_Main_MyFunction (i32.const 1))
- )
-)
-
-;;; Code for jsnonnull.Main.StringComparator [CLASS]
-(type $jsnonnull.Main.StringComparator (struct_subtype 
- (field $vtable (ref $jsnonnull.Main.StringComparator.vtable)) 
- (field $itable (ref $jsnonnull.Main.StringComparator.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsnonnull.Main.StringComparator.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_compare__java_lang_String__java_lang_String__int (ref $function.m_compare__java_lang_String__java_lang_String__int))
- (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.m_compare__java_lang_Object__java_lang_Object__int))
- (field $m_reversed__java_util_Comparator (ref $function.m_reversed__java_util_Comparator))
- (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_Comparator__java_util_Comparator))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator))
- (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator))
- (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator))
- (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
-  $java.lang.Object.vtable)
-)
-(type $jsnonnull.Main.StringComparator.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref $java.util.Comparator.vtable))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsnonnull.Main.StringComparator [methods]
 
 ;;; StringComparator StringComparator.$create()
 (func $$create__@jsnonnull.Main.StringComparator
@@ -647,38 +775,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.StringComparator)
 
-;;; Code for jsnonnull.Main.NullableStringComparator [CLASS]
-(type $jsnonnull.Main.NullableStringComparator (struct_subtype 
- (field $vtable (ref $jsnonnull.Main.NullableStringComparator.vtable)) 
- (field $itable (ref $jsnonnull.Main.NullableStringComparator.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsnonnull.Main.NullableStringComparator.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_compare__java_lang_String__java_lang_String__int (ref $function.m_compare__java_lang_String__java_lang_String__int))
- (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.m_compare__java_lang_Object__java_lang_Object__int))
- (field $m_reversed__java_util_Comparator (ref $function.m_reversed__java_util_Comparator))
- (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_Comparator__java_util_Comparator))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator))
- (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator))
- (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator))
- (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
-  $java.lang.Object.vtable)
-)
-(type $jsnonnull.Main.NullableStringComparator.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref $java.util.Comparator.vtable))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for jsnonnull.Main.NullableStringComparator [methods]
 
 ;;; NullableStringComparator NullableStringComparator.$create()
 (func $$create__@jsnonnull.Main.NullableStringComparator
@@ -906,38 +1003,7 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NullableStringComparator)
 
-;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [CLASS]
-(type $jsnonnull.Main.NonNullableStringSubNullableComparator (struct_subtype 
- (field $vtable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) 
- (field $itable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $jsnonnull.Main.NullableStringComparator)
-)
-(type $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_compare__java_lang_String__java_lang_String__int (ref $function.m_compare__java_lang_String__java_lang_String__int))
- (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.m_compare__java_lang_Object__java_lang_Object__int))
- (field $m_reversed__java_util_Comparator (ref $function.m_reversed__java_util_Comparator))
- (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_Comparator__java_util_Comparator))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator))
- (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator))
- (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator))
- (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
-  $jsnonnull.Main.NullableStringComparator.vtable)
-)
-(type $jsnonnull.Main.NonNullableStringSubNullableComparator.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref $java.util.Comparator.vtable))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $jsnonnull.Main.NullableStringComparator.itable))
+;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [methods]
 
 ;;; NonNullableStringSubNullableComparator NonNullableStringSubNullableComparator.$create()
 (func $$create__@jsnonnull.Main.NonNullableStringSubNullableComparator
@@ -1024,55 +1090,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableStringSubNullableComparator)
-
-;;; Code for jsnonnull.Main.NonNullableTemplatedReturn [INTERFACE]
-(type $jsnonnull.Main.NonNullableTemplatedReturn.vtable (struct 
- (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
- (field $m_getArray__arrayOf_java_lang_Object (ref $function.m_getArray__arrayOf_java_lang_Object))
- )
-)
-
-;;; void NonNullableTemplatedReturn.$clinit()
-(func $$clinit__void@jsnonnull.Main.NonNullableTemplatedReturn
- ;;@ jsnonnull/Main.java:90:12
- (block
-  ;; if (jsnonnull.Main.NonNullableTemplatedReturn.$initialized) return;
-  ;;@ jsnonnull/Main.java:90:12
-  (if (global.get $f_$initialized__jsnonnull_Main_NonNullableTemplatedReturn)
-   (then
-    ;; return;
-    ;;@ jsnonnull/Main.java:90:12
-    (return )
-   )
-  )
-  ;; (jsnonnull.Main.NonNullableTemplatedReturn.$initialized = true);
-  ;;@ jsnonnull/Main.java:90:12
-  (global.set $f_$initialized__jsnonnull_Main_NonNullableTemplatedReturn (i32.const 1))
- )
-)
-
-;;; Code for jsnonnull.Main.NonNullableTemplate [INTERFACE]
-(type $jsnonnull.Main.NonNullableTemplate.vtable (struct 
- (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
- (field $m_getArray__arrayOf_java_lang_Object (ref $function.m_getArray__arrayOf_java_lang_Object))
- )
-)
-
-;;; void NonNullableTemplate.$clinit()
-(func $$clinit__void@jsnonnull.Main.NonNullableTemplate
- ;;@ jsnonnull/Main.java:98:12
- (block
-  ;; if (jsnonnull.Main.NonNullableTemplate.$initialized) return;
-  ;;@ jsnonnull/Main.java:98:12
-  (if (global.get $f_$initialized__jsnonnull_Main_NonNullableTemplate)
-   (then
-    ;; return;
-    ;;@ jsnonnull/Main.java:98:12
-    (return )
-   )
-  )
-  ;; (jsnonnull.Main.NonNullableTemplate.$initialized = true);
-  ;;@ jsnonnull/Main.java:98:12
-  (global.set $f_$initialized__jsnonnull_Main_NonNullableTemplate (i32.const 1))
- )
-)

@@ -1,5 +1,26 @@
-;;; Code for inferreturn.InferReturn [static fields]
-(global $f_$initialized__inferreturn_InferReturn (mut i32) (i32.const 0))
+ ;;; Code for inferreturn.InferReturn [type definition]
+ (type $inferreturn.InferReturn (struct_subtype 
+  (field $vtable (ref $inferreturn.InferReturn.vtable)) 
+  (field $itable (ref $inferreturn.InferReturn.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+   $java.lang.Object)
+ )
+ (type $inferreturn.InferReturn.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $inferreturn.InferReturn.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
 
 ;;; Code for inferreturn.InferReturn [vtable.init]
 (global $inferreturn.InferReturn.vtable (ref $inferreturn.InferReturn.vtable) 
@@ -22,29 +43,10 @@
   (ref.null struct)
  ))
 
-;;; Code for inferreturn.InferReturn [CLASS]
-(type $inferreturn.InferReturn (struct_subtype 
- (field $vtable (ref $inferreturn.InferReturn.vtable)) 
- (field $itable (ref $inferreturn.InferReturn.itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $inferreturn.InferReturn.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
-  $java.lang.Object.vtable)
-)
-(type $inferreturn.InferReturn.itable (struct_subtype 
-(field $slot0 (ref null struct))
-(field $slot1 (ref null struct))
-(field $slot2 (ref null struct))
-(field $slot3 (ref null struct))
-(field $slot4 (ref null struct))
-(field $slot5 (ref null struct))
-(field $slot6 (ref null struct))
- $java.lang.Object.itable))
+;;; Code for inferreturn.InferReturn [static fields]
+(global $f_$initialized__inferreturn_InferReturn (mut i32) (i32.const 0))
+
+;;; Code for inferreturn.InferReturn [methods]
 
 ;;; InferReturn<T> InferReturn.$create()
 (func $$create__@inferreturn.InferReturn
