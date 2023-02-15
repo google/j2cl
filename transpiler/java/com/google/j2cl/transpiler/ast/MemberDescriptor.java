@@ -178,12 +178,7 @@ public abstract class MemberDescriptor
   }
 
   public boolean isExtern() {
-    return isNative() && hasExternNamespace();
-  }
-
-  private boolean hasExternNamespace() {
-    checkArgument(isNative());
-    // A native type descriptor is an extern if its namespace is the global namespace or if
+    // A member descriptor is an extern if its namespace is the global namespace or if
     // it inherited the namespace from its (enclosing) extern type.
     return JsUtils.isGlobal(getJsNamespace())
         || (getEnclosingTypeDescriptor().getTypeDeclaration().isExtern()
