@@ -76,8 +76,8 @@ function createImportObject(userImports) {
     'Math.sinh': Math.sinh,
     'Math.tan': Math.tan,
     'Math.tanh': Math.tanh,
-    'Number.toPrecision': (/** number */ n, /** number */ p) =>
-        n.toPrecision(p),
+    'Number.prototype.toPrecision.call': (/** number */ n, /** number */ p) =>
+        Number.prototype.toPrecision.call(n, p),
     'Character.codePointToLowerCase': codePointToLowerCase,
     'Character.codePointToUpperCase': codePointToUpperCase,
     'Character.charToLowerCase': charToLowerCase,
@@ -104,7 +104,8 @@ function createImportObject(userImports) {
         a == b ? 0 : (a < b ? -1 : 1),
     'String.equalsIgnoreCase': (/** string */ a, /** string */ b) =>
         a.toLowerCase() == b.toLowerCase(),
-    'String.fromNumber': (/** number */ n, /** number */ r) => n.toString(r),
+    'Number.prototype.toString.call': (/** number */ n, /** number */ r) =>
+        Number.prototype.toString.call(n, r),
     // Regex
     'RegExp.constructor': (/** string */ p, /** string */ f) =>
         new RegExp(p, f),

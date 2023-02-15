@@ -80,9 +80,6 @@ public final class Platform {
     return JsUtils.<double[]>uncheckedCast(new Float64Array(buf))[0];
   }
 
-  @JsMethod(name = "Number.prototype.toPrecision.call", namespace = JsPackage.GLOBAL)
-  public static native String toPrecision(double value, int precision);
-
   @SuppressWarnings("StringEquality")
   public static boolean objectsStringEquals(String x, String y) {
     // In JS, strings have identity equality.

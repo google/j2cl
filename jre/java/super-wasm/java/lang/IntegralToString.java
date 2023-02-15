@@ -103,7 +103,7 @@ final class IntegralToString {
     return fromNumber(i, radix);
   }
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "String.fromNumber")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Number.prototype.toString.call")
   private static native String fromNumber(int i, int radix);
 
   private static final int SMI_MAX = Integer.MAX_VALUE >> 1;

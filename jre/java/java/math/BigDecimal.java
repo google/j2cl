@@ -38,7 +38,8 @@ import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 import javaemul.internal.NativeRegExp;
-import javaemul.internal.Platform;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /**
  * This class represents immutable arbitrary precision decimal numbers. Each
@@ -707,8 +708,11 @@ public class BigDecimal extends Number implements Comparable<BigDecimal>,
       // math.03=Infinity or NaN
       throw new NumberFormatException("Infinite or NaN"); //$NON-NLS-1$
     }
-    initFrom(Platform.toPrecision(val, 20));
+    initFrom(toPrecision(val, 20));
   }
+
+  @JsMethod(name = "Number.prototype.toPrecision.call", namespace = JsPackage.GLOBAL)
+  private static native String toPrecision(double value, int precision);
 
   /**
    * Constructs a new {@code BigDecimal} instance from the given double {@code
