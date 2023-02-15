@@ -119,9 +119,20 @@ j2wasm_library(
 )
 
 closure_js_library(
+    name = "j2wasm_jsutils",
+    srcs = [
+        "super-wasm/char_utils.js",
+        "super-wasm/console_utils.js",
+        "super-wasm/double_utils.js",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+closure_js_library(
     name = "j2wasm_js",
     srcs = ["super-wasm/j2wasm.js"],
     visibility = ["//:__pkg__"],
+    deps = [":j2wasm_jsutils"],
 )
 
 j2cl_library(

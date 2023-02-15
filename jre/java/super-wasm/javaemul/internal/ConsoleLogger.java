@@ -16,7 +16,6 @@
 package javaemul.internal;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 
 /**
  * A helper to print log messages to console.
@@ -36,6 +35,6 @@ public class ConsoleLogger {
     nativeLog(level, t.toString());
   }
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "ConsoleLogger.log")
+  @JsMethod(namespace = "j2wasm.ConsoleUtils", name = "log")
   public static native void nativeLog(String level, String message);
 }

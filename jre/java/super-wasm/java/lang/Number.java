@@ -95,7 +95,7 @@ public abstract class Number implements Serializable {
    * <p>If false, then the caller should throw {@link NumberFormatException} rather than trying to
    * parse the value.
    */
-  @JsMethod(namespace = JsPackage.GLOBAL)
+  @JsMethod(namespace = "j2wasm.DoubleUtils")
   private static native boolean isValidDouble(String.NativeString str);
 
   @JsMethod(namespace = JsPackage.GLOBAL)

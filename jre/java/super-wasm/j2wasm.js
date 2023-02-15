@@ -14,6 +14,10 @@
 
 goog.module('j2wasm');
 
+const CharUtils = goog.require('j2wasm.CharUtils');
+const ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
+const DoubleUtils = goog.require('j2wasm.DoubleUtils');
+
 
 /**
  * Instantiates a web assembly module passing the necessary imports and any
@@ -78,12 +82,12 @@ function createImportObject(userImports) {
     'Math.tanh': Math.tanh,
     'Number.prototype.toPrecision.call': (/** number */ n, /** number */ p) =>
         Number.prototype.toPrecision.call(n, p),
-    'Character.codePointToLowerCase': codePointToLowerCase,
-    'Character.codePointToUpperCase': codePointToUpperCase,
-    'Character.charToLowerCase': charToLowerCase,
-    'Character.charToUpperCase': charToUpperCase,
-    'ConsoleLogger.log': (level, message) => console[level](message),
-    'isValidDouble': isValidDouble,
+    'j2wasm.CharUtils.codePointToLowerCase': CharUtils.codePointToLowerCase,
+    'j2wasm.CharUtils.codePointToUpperCase': CharUtils.codePointToUpperCase,
+    'j2wasm.CharUtils.charToLowerCase': CharUtils.charToLowerCase,
+    'j2wasm.CharUtils.charToUpperCase': CharUtils.charToUpperCase,
+    'j2wasm.ConsoleUtils.log': ConsoleUtils.log,
+    'j2wasm.DoubleUtils.isValidDouble': DoubleUtils.isValidDouble,
     'parseFloat': parseFloat,
     'performance.now': () => performance.now(),
 
@@ -171,38 +175,6 @@ function createImportObject(userImports) {
 }
 
 /**
- * @param {number} value
- * @return {number}
- */
-function codePointToLowerCase(value) {
-  return String.fromCodePoint(value).toLowerCase().codePointAt(0);
-}
-
-/**
- * @param {number} value
- * @return {number}
- */
-function codePointToUpperCase(value) {
-  return String.fromCodePoint(value).toUpperCase().codePointAt(0);
-}
-
-/**
- * @param {number} value
- * @return {number}
- */
-function charToLowerCase(value) {
-  return String.fromCharCode(value).toLowerCase().charCodeAt(0);
-}
-
-/**
- * @param {number} value
- * @return {number}
- */
-function charToUpperCase(value) {
-  return String.fromCharCode(value).toUpperCase().charCodeAt(0);
-}
-
-/**
  * @param {!Date} date
  * @param {...number} dateParts
  */
@@ -216,15 +188,6 @@ function dateSetFullYear(date, ...dateParts) {
  */
 function dateSetHours(date, ...timeParts) {
   date.setHours(...timeParts);
-}
-
-/**
- * @param {string} str
- * @return {boolean} Whether the argument is a valid Java double parsing input.
- */
-function isValidDouble(str) {
-  return /^\s*[+-]?(NaN|Infinity|((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?[dDfF]?)\s*$/
-      .test(str);
 }
 
 exports = {

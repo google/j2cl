@@ -16,7 +16,6 @@
 package java.lang;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 
 /** Performs case operations as described by http://unicode.org/reports/tr21/tr21-5.html. */
 class CaseMapper {
@@ -33,7 +32,7 @@ class CaseMapper {
     return nativeCodePointToLowerCase(value);
   }
 
-  @JsMethod(name = "Character.codePointToLowerCase", namespace = JsPackage.GLOBAL)
+  @JsMethod(namespace = "j2wasm.CharUtils", name = "codePointToLowerCase")
   private static native int nativeCodePointToLowerCase(int value);
 
   public static int codePointToUpperCase(int value) {
@@ -46,7 +45,7 @@ class CaseMapper {
     return nativeCodePointToUpperCase(value);
   }
 
-  @JsMethod(name = "Character.codePointToUpperCase", namespace = JsPackage.GLOBAL)
+  @JsMethod(namespace = "j2wasm.CharUtils", name = "codePointToUpperCase")
   private static native int nativeCodePointToUpperCase(int value);
 
   public static char charToLowerCase(char value) {
@@ -59,7 +58,7 @@ class CaseMapper {
     return nativeCharToLowerCase(value);
   }
 
-  @JsMethod(name = "Character.charToLowerCase", namespace = JsPackage.GLOBAL)
+  @JsMethod(namespace = "j2wasm.CharUtils", name = "charToLowerCase")
   private static native char nativeCharToLowerCase(char value);
 
   public static char charToUpperCase(char value) {
@@ -72,6 +71,6 @@ class CaseMapper {
     return nativeCharToUpperCase(value);
   }
 
-  @JsMethod(name = "Character.charToUpperCase", namespace = JsPackage.GLOBAL)
+  @JsMethod(namespace = "j2wasm.CharUtils", name = "charToUpperCase")
   private static native char nativeCharToUpperCase(char value);
 }
