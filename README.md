@@ -55,6 +55,10 @@ J2CL is production ready and actively used by many of Google's products, but the
 process of adapting workflows and tooling for the open-source version is not yet
 finalized.
 
+Wasm support is fully working but should be considered as work-in-progress since
+the related parts of the spec is not finalized yet. We are working closely with
+W3C and V8 team to finalize it and make it available in all browsers.
+
 You can see what we are working on [here](https://github.com/google/j2cl/issues/93).
 
 Last, the workflow is **not** yet supported in Windows. You can contribute to
