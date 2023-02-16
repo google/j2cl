@@ -109,6 +109,12 @@ public class StringTest extends GWTTestCase {
     assertEquals(0, hideFromCompiler("a").compareTo("a"));
     assertEquals(-1, hideFromCompiler("a").compareTo("b"));
     assertEquals(1, hideFromCompiler("b").compareTo("a"));
+
+    assertEquals(-1, hideFromCompiler("a").compareTo("aa"));
+    assertEquals(1, hideFromCompiler("aa").compareTo("a"));
+
+    // Ensure it's not a locale-sensitive comparison per Java spec.
+    assertTrue(hideFromCompiler("ä").compareTo("z") > 0);
   }
 
   public static void testCompareToNull() {

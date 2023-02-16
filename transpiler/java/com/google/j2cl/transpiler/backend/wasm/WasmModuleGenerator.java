@@ -240,17 +240,16 @@ public class WasmModuleGenerator {
   }
 
   private void renderTypeStructs(Type type) {
-    // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this check could
-    // be removed.
-    if (!type.isNative()) {
-      if (type.isInterface()) {
-        // Interfaces at runtime are treated as java.lang.Object.
-        renderInterfaceVtableStruct(type);
-      } else {
-        renderTypeStruct(type);
-        renderClassVtableStruct(type);
-        renderClassItableStruct(type);
-      }
+    if (type.isNative() || type.getDeclaration().getWasmInfo() != null) {
+      return;
+    }
+    if (type.isInterface()) {
+      // Interfaces at runtime are treated as java.lang.Object.
+      renderInterfaceVtableStruct(type);
+    } else {
+      renderTypeStruct(type);
+      renderClassVtableStruct(type);
+      renderClassItableStruct(type);
     }
   }
 
@@ -775,7 +774,6 @@ public class WasmModuleGenerator {
   private void emitForEachType(Library library, Consumer<Type> emitter, String comment) {
     library
         .streamTypes()
-        .filter(t -> t.getDeclaration().getWasmInfo() == null)
         // Emit the types supertypes first.
         .sorted(Comparator.comparing(t -> t.getDeclaration().getClassHierarchyDepth()))
         .forEach(

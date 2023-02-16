@@ -37,6 +37,7 @@ import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /** Intrinsic string class. */
 public final class String implements Comparable<String>, CharSequence, Serializable {
@@ -130,7 +131,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   public static String valueOf(char x) {
     // TODO(b/244496016): Consider improving the performance of this.
-    return new String(nativeFromCharCode(x));
+    return new String(NativeString.fromCharCode(x));
   }
 
   public static String valueOf(char[] x, int offset, int count) {
@@ -192,7 +193,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   static String fromCodePoint(int x) {
     // TODO(b/244496016): Consider improving the performance of this.
-    return new String(nativeFromCodePoint(x));
+    return new String(NativeString.fromCodePoint(x));
   }
 
   private final NativeString value;
@@ -438,11 +439,11 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public int indexOf(String str) {
-    return nativeIndexOf(value, str.value, 0);
+    return value.indexOf(str.value, 0);
   }
 
   public int indexOf(String str, int startIndex) {
-    return nativeIndexOf(value, str.value, startIndex);
+    return value.indexOf(str.value, startIndex);
   }
 
   public boolean isEmpty() {
@@ -458,11 +459,11 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public int lastIndexOf(String str) {
-    return nativeLastIndexOf(value, str.value, Integer.MAX_VALUE);
+    return value.lastIndexOf(str.value, Integer.MAX_VALUE);
   }
 
   public int lastIndexOf(String str, int start) {
-    return nativeLastIndexOf(value, str.value, start);
+    return value.lastIndexOf(str.value, start);
   }
 
   @Override
@@ -540,12 +541,12 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   // TODO: should live on a utility instead of the String API.
   public String nativeReplace(NativeRegExp regExp, char replacement) {
-    return new String(nativeReplace(value, regExp.toJs(), nativeFromCharCode(replacement)));
+    return new String(value.replace(regExp.toJs(), NativeString.fromCharCode(replacement)));
   }
 
   // TODO: should live on a utility instead of the String API.
   public String nativeReplace(NativeRegExp regExp, String replacement) {
-    return new String(nativeReplace(value, regExp.toJs(), replacement.value));
+    return new String(value.replace(regExp.toJs(), replacement.value));
   }
 
   /**
@@ -656,7 +657,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
    * toLowerCase(Locale.getDefault())} instead.
    */
   public String toLowerCase() {
-    return new String(nativeToLowerCase(value));
+    return new String(value.toLowerCase());
   }
 
   /**
@@ -667,20 +668,20 @@ public final class String implements Comparable<String>, CharSequence, Serializa
    */
   public String toLowerCase(Locale locale) {
     return locale == Locale.getDefault()
-        ? new String(nativeToLocaleLowerCase(value))
-        : new String(nativeToLowerCase(value));
+        ? new String(value.toLocaleLowerCase())
+        : new String(value.toLowerCase());
   }
 
   // See the notes in lowerCase pair.
   public String toUpperCase() {
-    return new String(nativeToUpperCase(value));
+    return new String(value.toUpperCase());
   }
 
   // See the notes in lowerCase pair.
   public String toUpperCase(Locale locale) {
     return locale == Locale.getDefault()
-        ? new String(nativeToLocaleUpperCase(value))
-        : new String(nativeToUpperCase(value));
+        ? new String(value.toLocaleUpperCase())
+        : new String(value.toUpperCase());
   }
 
   @Override
@@ -717,21 +718,44 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   /** Native JS compatible representation of a string. */
-  // TODO(b/262789003): Hide NativeString once external references are cleaned up.
+  // TODO(b/262789003): Hide NativeString once external references are cleaned up. Once NativeString
+  // is hidden, the methods should be made PUBLIC, for consistency with NativeString in Closure, and
+  // J2CL practices around go/java-practices/redundancy#visibility-specifiers-in-private-classes.
   @Wasm("string")
-  public interface NativeString {}
+  @JsType(isNative = true, name = "String", namespace = JsPackage.GLOBAL)
+  public static class NativeString {
+    static native NativeString fromCodePoint(int x);
+
+    static native NativeString fromCharCode(char x);
+
+    native int indexOf(NativeString str);
+
+    native int indexOf(NativeString str, int startIndex);
+
+    native int lastIndexOf(NativeString str);
+
+    native int lastIndexOf(NativeString str, int start);
+
+    native NativeString replace(WasmExtern regex, NativeString replace);
+
+    native NativeString substr(int beginIndex);
+
+    native NativeString substr(int beginIndex, int len);
+
+    native NativeString toLocaleLowerCase();
+
+    native NativeString toLocaleUpperCase();
+
+    native NativeString toLowerCase();
+
+    native NativeString toUpperCase();
+  }
 
   @Wasm("stringview_wtf16")
   private interface NativeStringView {}
 
   @Wasm("string.as_wtf16")
   private static native NativeStringView asStringView(NativeString stringView);
-
-  @JsMethod(name = "String.fromCodePoint", namespace = JsPackage.GLOBAL)
-  private static native NativeString nativeFromCodePoint(int x);
-
-  @JsMethod(name = "String.fromCharCode", namespace = JsPackage.GLOBAL)
-  private static native NativeString nativeFromCharCode(char x);
 
   @Wasm("string.new_wtf16_array")
   private static native NativeString nativeFromCharCodeArray(char[] x, int start, int end);
@@ -745,34 +769,13 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   @Wasm("stringview_wtf16.get_codeunit")
   private static native char nativeCharCodeAt(NativeStringView stringView, int index);
 
-  @JsMethod(name = "String.indexOf", namespace = JsPackage.GLOBAL)
-  private static native int nativeIndexOf(NativeString s, NativeString r, int startIndex);
-
-  @JsMethod(name = "String.lastIndexOf", namespace = JsPackage.GLOBAL)
-  private static native int nativeLastIndexOf(NativeString s, NativeString r, int startIndex);
-
-  @JsMethod(name = "String.replace", namespace = JsPackage.GLOBAL)
-  private static native NativeString nativeReplace(NativeString s, WasmExtern reg, NativeString r);
-
   @Wasm("stringview_wtf16.slice")
   private static native NativeString nativeSubstr(NativeStringView s, int beginIndex, int end);
 
-  @JsMethod(name = "String.toLocaleLowerCase", namespace = JsPackage.GLOBAL)
-  private static native NativeString nativeToLocaleLowerCase(NativeString s);
-
-  @JsMethod(name = "String.toLocaleUpperCase", namespace = JsPackage.GLOBAL)
-  private static native NativeString nativeToLocaleUpperCase(NativeString s);
-
-  @JsMethod(name = "String.toLowerCase", namespace = JsPackage.GLOBAL)
-  private static native NativeString nativeToLowerCase(NativeString s);
-
-  @JsMethod(name = "String.toUpperCase", namespace = JsPackage.GLOBAL)
-  private static native NativeString nativeToUpperCase(NativeString s);
-
-  @JsMethod(name = "String.compareTo", namespace = JsPackage.GLOBAL)
+  @JsMethod(namespace = "j2wasm.StringUtils", name = "compareTo")
   private static native int nativeCompareTo(NativeString a, NativeString b);
 
-  @JsMethod(name = "String.equalsIgnoreCase", namespace = JsPackage.GLOBAL)
+  @JsMethod(namespace = "j2wasm.StringUtils", name = "equalsIgnoreCase")
   private static native boolean nativeEqualsIgnoreCase(NativeString a, NativeString b);
 
   @Wasm("string.eq")

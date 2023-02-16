@@ -17,6 +17,7 @@ goog.module('j2wasm');
 const CharUtils = goog.require('j2wasm.CharUtils');
 const ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
 const DoubleUtils = goog.require('j2wasm.DoubleUtils');
+const StringUtils = goog.require('j2wasm.StringUtils');
 
 
 /**
@@ -104,10 +105,8 @@ function createImportObject(userImports) {
     'String.toUpperCase': (/** string */ s) => s.toUpperCase(),
     'String.toLocaleLowerCase': (/** string */ s) => s.toLocaleLowerCase(),
     'String.toLocaleUpperCase': (/** string */ s) => s.toLocaleUpperCase(),
-    'String.compareTo': (/** string */ a, /** string */ b) =>
-        a == b ? 0 : (a < b ? -1 : 1),
-    'String.equalsIgnoreCase': (/** string */ a, /** string */ b) =>
-        a.toLowerCase() == b.toLowerCase(),
+    'j2wasm.StringUtils.compareTo': StringUtils.compareTo,
+    'j2wasm.StringUtils.equalsIgnoreCase': StringUtils.equalsIgnoreCase,
     'Number.prototype.toString.call': (/** number */ n, /** number */ r) =>
         Number.prototype.toString.call(n, r),
     // Regex
