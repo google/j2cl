@@ -702,23 +702,23 @@ public final class String implements Comparable<String>, CharSequence, Serializa
     return start > 0 || end < length ? substring(start, end) : this;
   }
 
-  // TODO(b/262789003): Hide this helper once external references are cleaned up.
+  // TODO(b/268386628): Hide this helper once external references are cleaned up.
   public static String fromJsString(NativeString o) {
     return o == null ? null : new String(o);
   }
 
-  // TODO(b/262789003): Hide this helper once external references are cleaned up.
+  // TODO(b/268386628): Hide this helper once external references are cleaned up.
   public static NativeString toJsString(String string) {
     return string == null ? null : string.value;
   }
 
-  // TODO(b/262789003): Hide this helper once external references are cleaned up.
+  // TODO(b/268386628): Hide this helper once external references are cleaned up.
   public NativeString toJsString() {
     return this.value;
   }
 
   /** Native JS compatible representation of a string. */
-  // TODO(b/262789003): Hide NativeString once external references are cleaned up. Once NativeString
+  // TODO(b/268386628): Hide NativeString once external references are cleaned up. Once NativeString
   // is hidden, the methods should be made PUBLIC, for consistency with NativeString in Closure, and
   // J2CL practices around go/java-practices/redundancy#visibility-specifiers-in-private-classes.
   @Wasm("string")
