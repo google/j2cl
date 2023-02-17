@@ -40,17 +40,6 @@ final class IntegralToString {
   // Note that we can reuse the instance since the String construction will copy the array.
   private static final char[] BUFFER = new char[BUFFER_LENGTH];
 
-  /**
-   * These tables are used to special-case toString computation for small values. This serves three
-   * purposes: it reduces memory usage; it increases performance for small values; and it decreases
-   * the number of comparisons required to do the length computation. Elements of this table are
-   * lazily initialized on first use. No locking is necessary, i.e., we use the non-volatile, racy
-   * single-check idiom.
-   */
-  private static final String[] SMALL_NONNEGATIVE_VALUES = new String[100];
-
-  private static final String[] SMALL_NEGATIVE_VALUES = new String[100];
-
   /** TENS[i] contains the tens digit of the number i, 0 <= i <= 99. */
   private static final char[] TENS = {
     '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',
