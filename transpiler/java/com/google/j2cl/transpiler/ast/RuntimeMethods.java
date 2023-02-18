@@ -32,6 +32,13 @@ import java.util.OptionalInt;
 /** Utilities to create method calls to the runtime. */
 public final class RuntimeMethods {
 
+  /** Create a call to Object#getClass() */
+  public static MethodCall createGetClassMethodCall(Expression qualifier) {
+    MethodDescriptor methodDescriptor =
+        TypeDescriptors.get().javaLangObject.getMethodDescriptorByName("getClass");
+    return MethodCall.Builder.from(methodDescriptor).setQualifier(qualifier).build();
+  }
+
   /** Create a call to an Arrays method. */
   public static MethodCall createArraysMethodCall(String methodName, Expression... arguments) {
     return createArraysMethodCall(methodName, Arrays.asList(arguments));

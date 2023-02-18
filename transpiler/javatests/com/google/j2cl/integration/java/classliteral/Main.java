@@ -21,6 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJavaScript;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 import static com.google.j2cl.integration.testing.TestUtils.isWasm;
 
 import javaemul.internal.annotations.Wasm;
@@ -59,8 +60,12 @@ public class Main {
     assertEquals("classliteral.Main$Foo", Foo.class.getName());
 
     assertEquals("classliteral.Main", Main.class.getCanonicalName());
-    // J2CL doesn't follow JLS here:
-    assertEquals("classliteral.Main$Foo", Foo.class.getCanonicalName());
+    if (!isJvm()) {
+      // J2CL doesn't follow JLS here:
+      assertEquals("classliteral.Main$Foo", Foo.class.getCanonicalName());
+    } else {
+      assertEquals("classliteral.Main.Foo", Foo.class.getCanonicalName());
+    }
 
     assertEquals("Main", Main.class.getSimpleName());
     assertEquals("Foo", Foo.class.getSimpleName());
@@ -77,13 +82,14 @@ public class Main {
     assertSame(null, IFoo.class.getSuperclass());
 
     assertEquals("classliteral.Main$IFoo", IFoo.class.getName());
-    // J2CL doesn't follow JLS here:
-    assertEquals(
-        "classliteral.Main$IFoo", IFoo.class.getCanonicalName());
+    if (!isJvm()) {
+      // J2CL doesn't follow JLS here:
+      assertEquals("classliteral.Main$IFoo", IFoo.class.getCanonicalName());
+    } else {
+      assertEquals("classliteral.Main.IFoo", IFoo.class.getCanonicalName());
+    }
     assertEquals("IFoo", IFoo.class.getSimpleName());
-    // J2CL doesn't follow JLS here:
-    assertEquals(
-        "interface classliteral.Main$IFoo", IFoo.class.toString());
+    assertEquals("interface classliteral.Main$IFoo", IFoo.class.toString());
 
     assertLiteralType("IFoo.class", LiteralType.INTERFACE, IFoo.class);
   }
@@ -110,9 +116,12 @@ public class Main {
     assertSame(Enum.class, o.getClass().getSuperclass());
 
     assertEquals("classliteral.Main$Bar", o.getClass().getName());
-    // J2CL doesn't follow JLS here:
-    assertEquals(
-        "classliteral.Main$Bar", o.getClass().getCanonicalName());
+    if (!isJvm()) {
+      // J2CL doesn't follow JLS here:
+      assertEquals("classliteral.Main$Bar", o.getClass().getCanonicalName());
+    } else {
+      assertEquals("classliteral.Main.Bar", o.getClass().getCanonicalName());
+    }
     assertEquals("Bar", o.getClass().getSimpleName());
     assertEquals(
         "class classliteral.Main$Bar", o.getClass().toString());
@@ -145,9 +154,12 @@ public class Main {
     assertSame(isJavaScript() ? null : Enum.class, o.getClass().getSuperclass());
 
     assertEquals("classliteral.Main$MyJsEnum", o.getClass().getName());
-    // J2CL doesn't follow JLS here:
-    assertEquals(
-        "classliteral.Main$MyJsEnum", o.getClass().getCanonicalName());
+    if (!isJvm()) {
+      // J2CL doesn't follow JLS here:
+      assertEquals("classliteral.Main$MyJsEnum", o.getClass().getCanonicalName());
+    } else {
+      assertEquals("classliteral.Main.MyJsEnum", o.getClass().getCanonicalName());
+    }
     assertEquals("MyJsEnum", o.getClass().getSimpleName());
     assertEquals(
         "class classliteral.Main$MyJsEnum", o.getClass().toString());
@@ -192,8 +204,9 @@ public class Main {
   private interface NativeInterface {}
 
   private static void testNative() {
-    // getClass() and friends on Native JavaScript objects is not supported in WASM.
-    if (isWasm()) {
+    // getClass() and friends on Native JavaScript objects is not supported in WASM; native types
+    // don't apply in the context of the JVM.
+    if (!isJavaScript()) {
       return;
     }
     Class<?> clazz = NativeFunction.class;
