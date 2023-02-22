@@ -104,13 +104,14 @@ public class NativeRegExp {
       return getBufferAt(instance, index);
     }
 
-    @JsMethod(namespace = JsPackage.GLOBAL, name = "RegExpResult.index")
+    // TODO(b/264468253) Change to JsProperty/field once it is supported.
+    @JsMethod(namespace = "j2wasm.RegExpUtils", name = "getIndex")
     private static native int index(WasmExtern match);
 
-    @JsMethod(namespace = JsPackage.GLOBAL)
+    @JsMethod(namespace = "j2wasm.ArrayUtils")
     private static native String getBufferAt(WasmExtern o, int i);
 
-    @JsMethod(namespace = JsPackage.GLOBAL)
+    @JsMethod(namespace = "j2wasm.ArrayUtils")
     private static native int getLength(WasmExtern o);
   }
 

@@ -14,9 +14,11 @@
 
 goog.module('j2wasm');
 
+const ArrayUtils = goog.require('j2wasm.ArrayUtils');
 const CharUtils = goog.require('j2wasm.CharUtils');
 const ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
 const DoubleUtils = goog.require('j2wasm.DoubleUtils');
+const RegExpUtils = goog.require('j2wasm.RegExpUtils');
 const StringUtils = goog.require('j2wasm.StringUtils');
 
 
@@ -116,14 +118,14 @@ function createImportObject(userImports) {
         i,
     'RegExp.exec': (/** !RegExp */ r, /** string */ s) => r.exec(s),
     'RegExp.test': (/** !RegExp */ r, /** string */ s) => r.test(s),
-    'RegExpResult.index': (/** !RegExpResult */ r) => r.index,
+    'j2wasm.RegExpUtils.getIndex': RegExpUtils.getIndex,
 
     // TODO(b/193532287): These will be removed after Array interop support in
     // WASM is implemented.
-    'createBuffer': size => new Array(size),
-    'setBufferAt': (buffer, index, value) => buffer[index] = value,
-    'getBufferAt': (buffer, index) => buffer[index],
-    'getLength': s => s.length,
+    'j2wasm.ArrayUtils.createBuffer': ArrayUtils.createBuffer,
+    'j2wasm.ArrayUtils.setBufferAt': ArrayUtils.setBufferAt,
+    'j2wasm.ArrayUtils.getBufferAt': ArrayUtils.getBufferAt,
+    'j2wasm.ArrayUtils.getLength': ArrayUtils.getLength,
 
     // Date
     'Date.now': Date.now,

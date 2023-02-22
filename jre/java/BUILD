@@ -121,9 +121,11 @@ j2wasm_library(
 closure_js_library(
     name = "j2wasm_jsutils",
     srcs = [
+        "super-wasm/array_utils.js",
         "super-wasm/char_utils.js",
         "super-wasm/console_utils.js",
         "super-wasm/double_utils.js",
+        "super-wasm/regexp_utils.js",
         "super-wasm/string_utils.js",
     ],
     visibility = ["//visibility:private"],
