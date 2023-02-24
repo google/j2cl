@@ -17,19 +17,10 @@ goog.module('j2wasm.StringUtils');
 /**
  * @param {string} a
  * @param {string} b
- * @return {number}
- */
-function compareTo(a, b) {
-  return a == b ? 0 : (a < b) ? -1 : 1;
-}
-
-/**
- * @param {string} a
- * @param {string} b
  * @return {boolean}
  */
 function equalsIgnoreCase(a, b) {
   return a.toLowerCase() == b.toLowerCase();
 }
 
-exports = {compareTo, equalsIgnoreCase};
+exports = {equalsIgnoreCase};

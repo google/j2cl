@@ -107,7 +107,6 @@ function createImportObject(userImports) {
     'String.toUpperCase': (/** string */ s) => s.toUpperCase(),
     'String.toLocaleLowerCase': (/** string */ s) => s.toLocaleLowerCase(),
     'String.toLocaleUpperCase': (/** string */ s) => s.toLocaleUpperCase(),
-    'j2wasm.StringUtils.compareTo': StringUtils.compareTo,
     'j2wasm.StringUtils.equalsIgnoreCase': StringUtils.equalsIgnoreCase,
     'Number.prototype.toString.call': (/** number */ n, /** number */ r) =>
         Number.prototype.toString.call(n, r),

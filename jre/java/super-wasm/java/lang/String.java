@@ -772,7 +772,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   @Wasm("stringview_wtf16.slice")
   private static native NativeString nativeSubstr(NativeStringView s, int beginIndex, int end);
 
-  @JsMethod(namespace = "j2wasm.StringUtils", name = "compareTo")
+  @Wasm("string.compare")
   private static native int nativeCompareTo(NativeString a, NativeString b);
 
   @JsMethod(namespace = "j2wasm.StringUtils", name = "equalsIgnoreCase")
