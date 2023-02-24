@@ -92,11 +92,9 @@ def _impl_j2wasm_application(ctx):
     outputs.append(ctx.outputs.wasm)
     runfiles.append(ctx.outputs.wasm)
 
-    source_map_name = ctx.label.name + "_source.map"
-    source_map = ctx.actions.declare_file(source_map_name)
-    args.add("--output-source-map", source_map)
-    outputs.append(source_map)
-    args.add("--output-source-map-url", debug_dir_name + "/" + source_map_name)
+    args.add("--output-source-map", ctx.outputs.srcmap)
+    outputs.append(ctx.outputs.srcmap)
+    args.add("--output-source-map-url", debug_dir_name + "/" + ctx.outputs.srcmap.basename)
 
     ctx.actions.run(
         executable = ctx.executable._binaryen,
@@ -119,12 +117,12 @@ def _impl_j2wasm_application(ctx):
     debug_dir = ctx.actions.declare_directory(debug_dir_name)
     runfiles.append(debug_dir)
     ctx.actions.run_shell(
-        inputs = [transpile_out, source_map],
+        inputs = [transpile_out, ctx.outputs.srcmap],
         outputs = [debug_dir],
         # TODO(b/176105504): Link instead copy when native tree support lands.
         command = (
             "cp -rL %s/* %s;" % (transpile_out.path, debug_dir.path) +
-            "cp %s %s" % (source_map.path, debug_dir.path)
+            "cp %s %s" % (ctx.outputs.srcmap.path, debug_dir.path)
         ),
     )
 
@@ -171,6 +169,7 @@ _j2wasm_application = rule(
     outputs = {
         "wat": "%{name}.wat",
         "wasm": "%{name}.wasm",
+        "srcmap": "%{name}.sourcemap",
     },
 )
 
