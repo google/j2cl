@@ -832,7 +832,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setEnclosingTypeDescriptor(this)
         .setDeclarationDescriptor(null)
         .makeBridge(origin, bridgeMethodDescriptor, targetMethodDescriptor)
-        .setFinal(bridgeMethodDescriptor.isGeneralizingdBridge())
+        .setFinal(origin == MethodOrigin.GENERALIZING_BRIDGE)
         .build();
   }
 

@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
@@ -357,6 +358,19 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     StringBuilder jsDocBuilder = new StringBuilder();
     if (methodDescriptor.getJsVisibility() != Visibility.PUBLIC) {
       jsDocBuilder.append(" @").append(methodDescriptor.getJsVisibility().jsText);
+    }
+    if (methodDescriptor.isFinal()
+        // TODO(b/270966851): Remove the JsMember exclusion once general bridges are enabled for
+        // JsMethods.
+        && !methodDescriptor.isJsMember()
+        // TODO(b/269866419): Enable final for Kotlin, once it is guaranteed that final methods are
+        //  never overridden by synthetic methods from the lowerings.
+        && methodDescriptor
+            .getEnclosingTypeDescriptor()
+            .getTypeDeclaration()
+            .getSourceLanguage()
+            .equals(SourceLanguage.JAVA)) {
+      jsDocBuilder.append(" @final");
     }
     if (methodDescriptor.isAbstract()) {
       jsDocBuilder.append(" @abstract");
