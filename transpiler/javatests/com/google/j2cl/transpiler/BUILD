@@ -12,6 +12,9 @@ java_import(
     name = "jre",
     jars = ["//jre/java:libjre.jar"],
     srcjar = "//jre/java:libjre-src.jar",
+    tags = [
+        "incomplete-deps",
+    ],
     deps = ["//jre/java:jre_bootclasspath"],
 )
 
