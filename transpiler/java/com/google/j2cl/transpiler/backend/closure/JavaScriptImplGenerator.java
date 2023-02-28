@@ -230,6 +230,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         || TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
       appendln(sb, " * @abstract");
     }
+    if (type.getDeclaration().isFinal()) {
+      appendln(sb, " * @final");
+    }
     if (type.getDeclaration().hasTypeParameters()) {
       String templates =
           closureTypesGenerator.getCommaSeparatedClosureTypesString(
