@@ -131,10 +131,10 @@ private fun Renderer.fieldSource(field: Field): Source {
 }
 
 private fun Renderer.jvmFieldAnnotationSource(): Source =
-  at(topLevelQualifiedNameSource("kotlin.jvm.JvmField"))
+  annotation(topLevelQualifiedNameSource("kotlin.jvm.JvmField"))
 
 private fun Renderer.jvmStaticAnnotationSource(): Source =
-  at(topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
+  annotation(topLevelQualifiedNameSource("kotlin.jvm.JvmStatic"))
 
 private fun Renderer.initializerBlockSource(initializerBlock: InitializerBlock): Source =
   spaceSeparated(source("init"), statementSource(initializerBlock.block))

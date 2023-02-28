@@ -34,19 +34,13 @@ import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
-import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 
 private fun Renderer.fileOptInAnnotationSource(features: List<Source>): Source =
-  join(
-    source("@file:"),
-    topLevelQualifiedNameSource("kotlin.OptIn"),
-    inRoundBrackets(commaSeparated(features))
-  )
+  annotation(join(source("file:"), topLevelQualifiedNameSource("kotlin.OptIn")), features)
 
 internal val Renderer.fileOptInAnnotationSource: Source
   get() =
@@ -57,7 +51,7 @@ internal val Renderer.fileOptInAnnotationSource: Source
 
 internal val Renderer.hiddenFromObjCAnnotationSource: Source
   get() =
-    at(
+    annotation(
       topLevelQualifiedNameSource(
         "kotlin.native.HiddenFromObjC",
         optInQualifiedName = "kotlin.experimental.ExperimentalObjCRefinement"
@@ -65,19 +59,13 @@ internal val Renderer.hiddenFromObjCAnnotationSource: Source
     )
 
 internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = null): Source =
-  join(
-    at(
-      topLevelQualifiedNameSource(
-        "kotlin.native.ObjCName",
-        optInQualifiedName = "kotlin.experimental.ExperimentalObjCName"
-      )
+  annotation(
+    topLevelQualifiedNameSource(
+      "kotlin.native.ObjCName",
+      optInQualifiedName = "kotlin.experimental.ExperimentalObjCName"
     ),
-    inRoundBrackets(
-      commaSeparated(
-        literalSource(name),
-        exact.ifNotNullSource { parameterSource("exact", literalSource(it)) }
-      )
-    )
+    literalSource(name),
+    exact.ifNotNullSource { parameterSource("exact", literalSource(it)) }
   )
 
 internal fun Renderer.objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =

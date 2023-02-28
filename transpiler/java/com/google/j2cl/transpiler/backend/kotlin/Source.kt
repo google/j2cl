@@ -87,3 +87,11 @@ fun isExpression(lhs: Source, rhs: Source) = infix(lhs, "is", rhs)
 fun itSource() = source("it")
 
 fun todo(source: Source) = join(source("TODO"), inRoundBrackets(source))
+
+fun annotation(name: Source) = join(at(name))
+
+fun annotation(name: Source, parameter: Source, vararg parameters: Source) =
+  join(at(name), inRoundBrackets(commaSeparated(parameter, *parameters)))
+
+fun annotation(name: Source, parameters: Iterable<Source>) =
+  join(at(name), inRoundBrackets(commaSeparated(parameters)))
