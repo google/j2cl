@@ -443,12 +443,6 @@ public class WasmModuleGenerator {
     }
 
     StatementTranspiler.render(method.getBody(), builder, environment);
-    if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor) && method.isNative()) {
-      // Unforunately we still have native method calls in JRE so we need to synthesize stubs for
-      // such methods to pass WASM checks.
-      builder.newLine();
-      builder.append("(unreachable)");
-    }
     builder.unindent();
     builder.newLine();
     builder.append(")");
