@@ -53,7 +53,6 @@ public class Nullability {
           "javax.annotation.CheckForNull",
           "org.checkerframework.checker.nullness.compatqual.NullableDecl",
           "org.checkerframework.checker.nullness.compatqual.NullableType",
-          "org.checkerframework.checker.nullness.qual.MonotonicNonNull",
           "org.checkerframework.checker.nullness.qual.Nullable",
           "org.codehaus.commons.nullanalysis.Nullable",
           "org.eclipse.jdt.annotation.Nullable",
