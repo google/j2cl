@@ -738,10 +738,6 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
     native NativeString replace(WasmExtern regex, NativeString replace);
 
-    native NativeString substr(int beginIndex);
-
-    native NativeString substr(int beginIndex, int len);
-
     native NativeString toLocaleLowerCase();
 
     native NativeString toLocaleUpperCase();
