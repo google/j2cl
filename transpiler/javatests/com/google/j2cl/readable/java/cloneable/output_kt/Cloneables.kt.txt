@@ -1,0 +1,43 @@
+// Generated from "cloneable/Cloneables.java"
+@file:OptIn(ExperimentalObjCName::class)
+
+package cloneable
+
+import javaemul.lang.*
+import kotlin.Any
+import kotlin.Cloneable
+import kotlin.OptIn
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@ObjCName("CloneableCloneables", exact = true)
+open class Cloneables {
+ @ObjCName("CloneableCloneables_WithoutCloneable", exact = true)
+ open class WithoutCloneable {
+  @ObjCName("clone")
+  open fun clone(): Any {
+   return Cloneables.WithoutCloneable()
+  }
+ }
+
+ @ObjCName("CloneableCloneables_WithCloneable", exact = true)
+ open class WithCloneable: Cloneable {
+  open override fun clone(): Any {
+   return Cloneables.WithCloneable()
+  }
+ }
+
+ @ObjCName("CloneableCloneables_WithoutCloneableChild", exact = true)
+ class WithoutCloneableChild: Cloneables.WithoutCloneable() {
+  open override fun clone(): Any {
+   return Cloneables.WithoutCloneableChild()
+  }
+ }
+
+ @ObjCName("CloneableCloneables_WithCloneableChild", exact = true)
+ class WithCloneableChild: Cloneables.WithCloneable() {
+  open override fun clone(): Any {
+   return Cloneables.WithCloneableChild()
+  }
+ }
+}

@@ -254,5 +254,14 @@ private fun Renderer.constructorInvocationSource(method: Method) =
 internal val MethodDescriptor.isKtOverride
   get() =
     isJavaOverride &&
+      !directlyOverridesJavaObjectClone &&
       (javaOverriddenMethodDescriptors.any { it.enclosingTypeDescriptor.isInterface } ||
         !needsVisibilityBridge(this))
+
+private val MethodDescriptor.directlyOverridesJavaObjectClone: Boolean
+  get() =
+    signature == "clone()" &&
+      !enclosingTypeDescriptor.isSubtypeOf(typeDescriptors.javaLangCloneable) &&
+      javaOverriddenMethodDescriptors.all {
+        it.declarationDescriptor.isMemberOf(typeDescriptors.javaLangObject)
+      }

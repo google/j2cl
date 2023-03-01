@@ -172,7 +172,7 @@ internal fun TypeDescriptor.makeNonNull(): TypeDescriptor =
     }
 
 private val nullableAnyTypeDescriptor: TypeDescriptor
-  get() = TypeDescriptors.get().javaLangObject
+  get() = typeDescriptors.javaLangObject
 
 private val anyTypeDescriptor: TypeDescriptor
   get() = nullableAnyTypeDescriptor.toNonNullable()
@@ -191,3 +191,6 @@ private fun TypeVariable.variableApplyVariance(variance: KtVariance?) =
       KtVariance.OUT -> upperBoundTypeDescriptor.takeIf { !it.isImplicitUpperBound } ?: this
       else -> this
     }
+
+internal val typeDescriptors
+  get() = TypeDescriptors.get()

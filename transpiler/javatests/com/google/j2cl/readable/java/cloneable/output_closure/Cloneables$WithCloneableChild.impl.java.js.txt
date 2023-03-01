@@ -1,0 +1,47 @@
+goog.module('cloneable.Cloneables.WithCloneableChild$impl');
+
+const WithCloneable = goog.require('cloneable.Cloneables.WithCloneable$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @final
+ */
+class WithCloneableChild extends WithCloneable {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!WithCloneableChild} */
+ static $create__() {
+  WithCloneableChild.$clinit();
+  let $instance = new WithCloneableChild();
+  $instance.$ctor__cloneable_Cloneables_WithCloneableChild__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cloneable_Cloneables_WithCloneableChild__void() {
+  this.$ctor__cloneable_Cloneables_WithCloneable__void();
+ }
+ /** @override @nodts @return {*} */
+ m_clone__java_lang_Object() {
+  return WithCloneableChild.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  WithCloneableChild.$clinit = () =>{};
+  WithCloneableChild.$loadModules();
+  WithCloneable.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof WithCloneableChild;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(WithCloneableChild, 'cloneable.Cloneables$WithCloneableChild');
+
+exports = WithCloneableChild;
+
+//# sourceMappingURL=Cloneables$WithCloneableChild.js.map

@@ -31,7 +31,6 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
@@ -245,7 +244,7 @@ private val TypeDescriptor.shouldRender: Boolean
     }
 
 private val collectionTypeDescriptors: Set<TypeDescriptor>
-  get() = setOf(TypeDescriptors.get().javaUtilCollection, TypeDescriptors.get().javaUtilMap)
+  get() = setOf(typeDescriptors.javaUtilCollection, typeDescriptors.javaUtilMap)
 
 private val TypeDeclaration.isCollection: Boolean
   get() =

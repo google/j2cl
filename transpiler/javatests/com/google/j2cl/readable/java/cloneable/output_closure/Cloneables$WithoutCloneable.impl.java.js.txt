@@ -1,0 +1,44 @@
+goog.module('cloneable.Cloneables.WithoutCloneable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class WithoutCloneable extends j_l_Object {
+ /** @protected @nodts */
+ constructor() {
+  super();
+ }
+ /** @nodts @return {!WithoutCloneable} */
+ static $create__() {
+  WithoutCloneable.$clinit();
+  let $instance = new WithoutCloneable();
+  $instance.$ctor__cloneable_Cloneables_WithoutCloneable__void();
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__cloneable_Cloneables_WithoutCloneable__void() {
+  this.$ctor__java_lang_Object__void();
+ }
+ /** @nodts @return {*} */
+ m_clone__java_lang_Object() {
+  return WithoutCloneable.$create__();
+ }
+ /** @nodts */
+ static $clinit() {
+  WithoutCloneable.$clinit = () =>{};
+  WithoutCloneable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof WithoutCloneable;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(WithoutCloneable, 'cloneable.Cloneables$WithoutCloneable');
+
+exports = WithoutCloneable;
+
+//# sourceMappingURL=Cloneables$WithoutCloneable.js.map
