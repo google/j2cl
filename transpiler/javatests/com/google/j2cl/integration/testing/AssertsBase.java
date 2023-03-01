@@ -82,11 +82,6 @@ public class AssertsBase {
     assertThrows(NullPointerException.class, runnable);
   }
 
-  // TODO(b/228136773): Inline when java class literal is supported in K2CL.
-  public static void assertThrowsIllegalArgumentException(JsRunnable runnable) {
-    assertThrows(IllegalArgumentException.class, runnable);
-  }
-
   public static void assertThrows(Class<? extends Exception> exceptionClass, JsRunnable runnable) {
     try {
       runnable.run();
