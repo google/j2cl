@@ -176,6 +176,7 @@ _j2wasm_application = rule(
 def j2wasm_application(name, defines = dict(), **kwargs):
     default_defines = {
         "J2WASM_DEBUG": "TRUE",
+        "jre.strictFpToString": "DISABLED",
         "jre.checkedMode": "ENABLED",
         "jre.checks.checkLevel": "MINIMAL",
         "jre.checks.bounds": "AUTO",

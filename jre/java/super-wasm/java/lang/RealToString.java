@@ -13,23 +13,48 @@
  */
 package java.lang;
 
+import static java.lang.System.getProperty;
+
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+
 final class RealToString {
+
+  private static final boolean STRICT = getProperty("jre.strictFpToString").equals("ENABLED");
 
   private RealToString() {}
 
   public static String doubleToString(double d) {
-    return RyuDouble.doubleToString(null, d);
+    if (STRICT) {
+      return RyuDouble.doubleToString(null, d);
+    }
+    return fromNumber(d);
   }
 
   public static void appendDouble(AbstractStringBuilder sb, double d) {
-    var unused = RyuDouble.doubleToString(sb, d);
+    if (STRICT) {
+      var unused = RyuDouble.doubleToString(sb, d);
+    }
+    sb.append0(fromNumber(d));
   }
 
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Number.prototype.toString.call")
+  private static native String fromNumber(double d);
+
   public static String floatToString(float f) {
+    if (STRICT) {
     return RyuFloat.floatToString(null, f);
+    }
+    return fromNumber(f);
   }
 
   public static void appendFloat(AbstractStringBuilder sb, float f) {
-    var unused = RyuFloat.floatToString(sb, f);
+    if (STRICT) {
+      var unused = RyuFloat.floatToString(sb, f);
+    }
+    sb.append0(fromNumber(f));
   }
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Number.prototype.toString.call")
+  private static native String fromNumber(float f);
 }
