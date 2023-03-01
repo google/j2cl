@@ -65,6 +65,7 @@ public class AddAbstractMethodStubs extends NormalizationPass {
     type.getTypeDescriptor().getPolymorphicMethods().stream()
         .filter(MethodDescriptor::isAbstract)
         .filter(m -> !m.isMemberOf(type.getDeclaration()))
+        .filter(m -> m.getEnclosingTypeDescriptor().isInterface())
         .forEach(
             m -> {
               if (type.containsMethod(m.getDeclarationDescriptor().getMangledName())) {
