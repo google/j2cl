@@ -547,10 +547,11 @@ private fun Renderer.superReferenceSource(
 private fun Renderer.thisReferenceSource(thisReference: ThisReference): Source =
   join(
     source("this"),
-    sourceIf(thisReference.isQualified || renderThisReferenceWithLabel) {
-      labelReferenceSource(thisReference.typeDescriptor)
-    }
+    sourceIf(needsQualifier(thisReference)) { labelReferenceSource(thisReference.typeDescriptor) }
   )
+
+private fun Renderer.needsQualifier(thisReference: ThisReference): Boolean =
+  renderThisReferenceWithLabel || thisReference.isQualified
 
 private fun labelReferenceSource(typeDescriptor: DeclaredTypeDescriptor): Source =
   at(identifierSource(typeDescriptor.typeDeclaration.ktSimpleName))
@@ -612,12 +613,12 @@ private fun Renderer.qualifierSource(memberReference: MemberReference): Source =
               qualifierTypeDescriptor.takeIf { it.typeDeclaration != currentType!!.declaration }
           )
         }
-      } else if (
-        memberReference is NewInstance && memberReference.typeDescriptor.typeDeclaration.isLocal
-      ) {
+      } else if (memberReference.isLocalNewInstance) {
         // Don't render qualifier for local classes.
         // TODO(b/219950593): Implement a pass which will remove unnecessary qualifiers, and then
         // remove this `if` branch.
+        emptySource
+      } else if (qualifier.isAnonymousThisReference) {
         emptySource
       } else if (
         memberReference.target.isInstanceMember || !qualifier.isNonQualifiedThisReference
@@ -639,7 +640,13 @@ private fun Renderer.expressionInParensSource(expression: Expression, needsParen
   expressionSource(expression).letIf(needsParentheses, ::inRoundBrackets)
 
 private val Expression.isNonQualifiedThisReference: Boolean
-  get() = this is ThisReference && !isQualified
+  get() = this is ThisReference && (!isQualified || this.typeDescriptor.typeDeclaration.isAnonymous)
+
+private val Expression.isAnonymousThisReference: Boolean
+  get() = this is ThisReference && typeDescriptor.typeDeclaration.isAnonymous
+
+private val MemberReference.isLocalNewInstance: Boolean
+  get() = this is NewInstance && typeDescriptor.typeDeclaration.isLocal
 
 private fun Precedence.requiresParensOnLeft(operand: Precedence): Boolean =
   operand == Precedence.CONDITIONAL ||
