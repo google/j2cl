@@ -4,8 +4,6 @@
 
 @class TypewildcardsTypeWildCards;
 
-@protocol TypewildcardsTypeWildCards_RecursiveInterface;
-
 NS_ASSUME_NONNULL_BEGIN
 
 NS_INLINE void TypewildcardsTypeWildCards_testBoundedTypeMemberAccessWithTypewildcardsTypeWildCards_A_(id t) {
@@ -14,10 +12,6 @@ NS_INLINE void TypewildcardsTypeWildCards_testBoundedTypeMemberAccessWithTypewil
 
 NS_INLINE void TypewildcardsTypeWildCards_testIntersectionBoundedTypeMemberAccessWithId_(id t) {
  [TypewildcardsTypeWildCardsCompanion.shared testIntersectionBoundedTypeMemberAccessWithId:t];
-}
-
-NS_INLINE id TypewildcardsTypeWildCards_testInferredIntersectionWithTypeVariableWithTypewildcardsTypeWildCards_RecursiveInterface_(id<TypewildcardsTypeWildCards_RecursiveInterface> _Nullable ri) {
- return [TypewildcardsTypeWildCardsCompanion.shared testInferredIntersectionWithTypeVariableWithTypewildcardsTypeWildCards_RecursiveInterface:ri];
 }
 
 NS_ASSUME_NONNULL_END

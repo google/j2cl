@@ -111,7 +111,7 @@ private val Type.includedTypes: List<Type>
   get() = types.filter { it.shouldRender }.flatMap { listOf(it) + it.includedTypes }
 
 private val Type.shouldRender: Boolean
-  get() = visibility.isPublic && typeDescriptor.existsInObjC
+  get() = declaration.shouldRender
 
 private val Type.declarationsRenderers: List<Renderer<Source>>
   get() =
@@ -227,19 +227,19 @@ private val MethodDescriptor.shouldRender: Boolean
     visibility.isPublic &&
       isStatic &&
       !isConstructor &&
-      returnTypeDescriptor.existsInObjC &&
-      parameterTypeDescriptors.all { it.existsInObjC }
+      returnTypeDescriptor.shouldRender &&
+      parameterTypeDescriptors.all { it.shouldRender }
 
 private val FieldDescriptor.shouldRender: Boolean
   get() =
     visibility.isPublic &&
       (isStatic || enclosingTypeDescriptor.isInterface) &&
-      typeDescriptor.existsInObjC
+      typeDescriptor.shouldRender
 
-private val TypeDescriptor.existsInObjC: Boolean
+private val TypeDescriptor.shouldRender: Boolean
   get() =
     when (this) {
-      is DeclaredTypeDescriptor -> typeDeclaration.existsInObjC && !isCollectionType
+      is DeclaredTypeDescriptor -> typeDeclaration.shouldRender
       is ArrayTypeDescriptor -> false
       else -> true
     }
@@ -247,11 +247,15 @@ private val TypeDescriptor.existsInObjC: Boolean
 private val collectionTypeDescriptors: Set<TypeDescriptor>
   get() = setOf(TypeDescriptors.get().javaUtilCollection, TypeDescriptors.get().javaUtilMap)
 
-private val DeclaredTypeDescriptor.isCollectionType: Boolean
-  get() = collectionTypeDescriptors.any { isAssignableTo(it) }
+private val TypeDeclaration.isCollection: Boolean
+  get() =
+    toUnparameterizedTypeDescriptor().run { collectionTypeDescriptors.any { isAssignableTo(it) } }
+
+private val TypeDeclaration.shouldRender: Boolean
+  get() = visibility.isPublic && existsInObjC && !isCollection
 
 private val TypeDeclaration.existsInObjC: Boolean
-  get() = (!isKtNative || mappedObjCNameRenderer != null)
+  get() = !isKtNative || mappedObjCNameRenderer != null
 
 private fun Method.functionRenderer(objCNames: MethodObjCNames): Renderer<Source> =
   functionDeclaration(
