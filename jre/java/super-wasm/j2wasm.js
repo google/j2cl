@@ -128,12 +128,8 @@ function createImportObject(userImports) {
 
     // Date
     'Date.now': Date.now,
-    'Date.UTC':
-        (/** number */ year, /** number */ month, /** number */ dayOfMonth,
-         /** number */ hours, /** number */ minutes, /** number */ seconds,
-         /** number */ millis) =>
-            Date.UTC(year, month, dayOfMonth, hours, minutes, seconds, millis),
-    'Date.parse': (/** string */ dateString) => Date.parse(dateString),
+    'Date.UTC': Date.UTC,
+    'Date.parse': Date.parse,
     'Date.constructor': (...args) => new Date(...args),
     'Date.getDate': (/** !Date */ date) => date.getDate(),
     'Date.getDay': (/** !Date */ date) => date.getDay(),
