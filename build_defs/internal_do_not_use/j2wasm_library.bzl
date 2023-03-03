@@ -46,7 +46,7 @@ def _j2wasm_or_js_providers_of(deps):
     return [_j2wasm_or_js_provider_of(d) for d in deps]
 
 def _j2wasm_or_js_provider_of(dep):
-    return dep[J2wasmInfo] if J2wasmInfo in dep else dep[JS_PROVIDER_NAME]
+    return dep[J2wasmInfo] if J2wasmInfo in dep else dep
 
 j2wasm_library = rule(
     implementation = _impl_j2wasm_library_rule,

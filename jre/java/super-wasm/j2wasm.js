@@ -31,10 +31,21 @@ const StringUtils = goog.require('j2wasm.StringUtils');
  * @return {!Promise<!WebAssembly.Instance>}
  */
 async function instantiateStreaming(urlOrResponse, userImports) {
+  return instantiateStreamingOverridingImports(
+      urlOrResponse, createImportObject(userImports));
+}
+
+/**
+ * Instantiates a web assembly module passing the specified imports.
+ *
+ * @param {string|!Promise<!Response>} urlOrResponse
+ * @param {!Object<!Object>} imports
+ * @return {!Promise<!WebAssembly.Instance>}
+ */
+async function instantiateStreamingOverridingImports(urlOrResponse, imports) {
   const response =
       typeof urlOrResponse == 'string' ? fetch(urlOrResponse) : urlOrResponse;
-  const {instance} = await WebAssembly.instantiateStreaming(
-      response, createImportObject(userImports));
+  const {instance} = await WebAssembly.instantiateStreaming(response, imports);
   return instance;
 }
 
@@ -52,8 +63,25 @@ async function instantiateStreaming(urlOrResponse, userImports) {
  * @return {!WebAssembly.Instance}
  */
 function instantiateBlocking(moduleObject, userImports) {
+  return instantiateBlockingOverridingImports(
+      moduleObject, createImportObject(userImports));
+}
+
+/**
+ * Instantiates a web assembly module passing the specified imports.
+ *
+ * Use of this function is discouraged. Many browsers require when calling the
+ * WebAssembly constructor that the number of bytes of the module is under a
+ * small threshold, mandating the async functions for all non-trivial apps. This
+ * function can be used in other contexts, such as the D8 command line.
+ *
+ * @param {!BufferSource} moduleObject
+ * @param {!Object<!Object>} imports
+ * @return {!WebAssembly.Instance}
+ */
+function instantiateBlockingOverridingImports(moduleObject, imports) {
   return new WebAssembly.Instance(
-      new WebAssembly.Module(moduleObject), createImportObject(userImports));
+      new WebAssembly.Module(moduleObject), imports);
 }
 
 /**
@@ -189,4 +217,6 @@ function dateSetHours(date, ...timeParts) {
 exports = {
   instantiateStreaming,
   instantiateBlocking,
+  instantiateStreamingOverridingImports,
+  instantiateBlockingOverridingImports,
 };

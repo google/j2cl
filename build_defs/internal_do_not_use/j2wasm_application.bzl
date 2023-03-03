@@ -7,6 +7,44 @@ This is an experimental tool and should not be used.
 load(":provider.bzl", "J2wasmInfo")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 
+# Template for the generated JS imports file.
+# The `getImports` function referenced by `instantiateStreaming` is defined by the WASM backend.
+_JS_IMPORTS_TEMPLATE = """// GENERATED CODE.
+goog.module("%MODULE_NAME%.j2wasm");
+
+const j2wasm = goog.require("j2wasm");
+
+%IMPORTS%
+
+/**
+ * Instantiates the web assembly module.
+ *
+ * @param {string|!Promise<!Response>} urlOrResponse
+ * @return {!Promise<!WebAssembly.Instance>}
+ */
+async function instantiateStreaming(urlOrResponse) {
+    return j2wasm.instantiateStreamingOverridingImports(urlOrResponse, getImports());
+}
+
+/**
+ * Instantiates a web assembly module passing the necessary imports and any
+ * additional import the user might need to provide for their application.
+ *
+ * Use of this function is discouraged. Many browsers require when calling the
+ * WebAssembly constructor that the number of bytes of the module is under a
+ * small threshold, mandating the async functions for all non-trivial apps. This
+ * function can be used in other contexts, such as the D8 command line.
+ *
+ * @param {!BufferSource} moduleObject
+ * @return {!WebAssembly.Instance}
+ */
+function instantiateBlocking(moduleObject) {
+    return j2wasm.instantiateBlockingOverridingImports(moduleObject, getImports());
+}
+
+exports = {instantiateStreaming, instantiateBlocking};
+"""
+
 def _impl_j2wasm_application(ctx):
     deps = ctx.attr.deps + [ctx.attr._jre]
     srcs = _get_transitive_srcs(deps)
@@ -47,6 +85,14 @@ def _impl_j2wasm_application(ctx):
         outputs = [ctx.outputs.wat],
         # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
         command = "cp %s/module.wat %s" % (transpile_out.path, ctx.outputs.wat.path),
+    )
+
+    # Link the imports JS file for the named output.
+    ctx.actions.run_shell(
+        inputs = [transpile_out],
+        outputs = [ctx.outputs.jsimports],
+        # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
+        command = "cp %s/imports.txt %s" % (transpile_out.path, ctx.outputs.jsimports.path),
     )
 
     args = ctx.actions.args()
@@ -127,11 +173,22 @@ def _impl_j2wasm_application(ctx):
         ),
     )
 
+    # Make the actual JS imports mapping file using the template.
+    js_module = ctx.actions.declare_file(ctx.label.name + ".js")
+    ctx.actions.run_shell(
+        inputs = [ctx.outputs.jsimports],
+        outputs = [js_module],
+        command = "echo '%s' " % _JS_IMPORTS_TEMPLATE +
+                  "| sed -e 's/%%MODULE_NAME%%/%s/g' " % ctx.label.name +
+                  "| sed -e '/%%IMPORTS%%/r %s' -e '//d ' " % ctx.outputs.jsimports.path +
+                  ">> %s" % js_module.path,
+    )
+
     # Build a JS provider exposing the JS imports mapping.
     js_info = j2cl_js_provider(
         ctx,
-        # TODO(b/264466634): Once JS imports are generated, 'deps' can be used instead of 'exports'.
-        exports = [d[J2wasmInfo]._private_.js_info for d in deps],
+        srcs = [js_module],
+        deps = [d[J2wasmInfo]._private_.js_info for d in deps] + [ctx.attr._j2wasm_js],
     )
 
     return [
@@ -158,6 +215,7 @@ _J2WASM_APP_ATTRS = {
     "transpiler_args": attr.string_list(),
     "defines": attr.string_list(),
     "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
+    "_j2wasm_js": attr.label(default = Label("//:j2wasm_js")),
     "_j2cl_transpiler": attr.label(
         cfg = "exec",
         executable = True,
@@ -183,6 +241,7 @@ _j2wasm_application = rule(
         "wat": "%{name}.wat",
         "wasm": "%{name}.wasm",
         "srcmap": "%{name}.sourcemap",
+        "jsimports": "%{name}.imports.js.txt",
     },
 )
 

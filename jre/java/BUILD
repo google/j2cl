@@ -113,6 +113,7 @@ j2wasm_library(
     javacopts = JRE_JAVAC_OPTS,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     deps = [
+        ":j2wasm_jsutils",
         ":javaemul_internal_annotations-j2wasm",
         "//third_party:gwt-jsinterop-annotations-j2wasm",
     ],

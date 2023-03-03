@@ -75,6 +75,7 @@ public class WasmModuleGenerator {
   public void generateOutputs(Library library) {
     copyJavaSources(library);
     generateWasmModule(library);
+    generateJsImportsFile(library);
   }
 
   private void copyJavaSources(Library library) {
@@ -352,7 +353,9 @@ public class WasmModuleGenerator {
     // because it doesn't differentiate between js property getters and setters.
     if (isImport) {
       builder.append(
-          String.format(" (import \"imports\" \"%s\") ", getJsImportName(methodDescriptor)));
+          String.format(
+              " (import \"%s\" \"%s\") ",
+              JsImportsGenerator.MODULE, JsImportsGenerator.getJsImportName(methodDescriptor)));
     }
 
     if (method.isStatic() && isEntryPoint(method.getQualifiedBinaryName())) {
@@ -455,22 +458,6 @@ public class WasmModuleGenerator {
               "(elem declare func %s)",
               environment.getMethodImplementationName(method.getDescriptor())));
     }
-  }
-
-  /** Gets the name of the JS import for the specified JS method. */
-  private static String getJsImportName(MethodDescriptor methodDescriptor) {
-    String qualifiedJsName = methodDescriptor.getQualifiedJsName();
-    if (methodDescriptor.isConstructor()) {
-      // TODO(b/264466634): This is a hack that won't be needed after JS import generation is
-      // implemented. After JS imports are generated, we won't need the constructor to be a
-      // human-readable name, and this can be removed.
-      qualifiedJsName = qualifiedJsName.replace("<init>", "constructor");
-    } else if (methodDescriptor.isPropertyGetter()) {
-      qualifiedJsName = "get " + qualifiedJsName;
-    } else if (methodDescriptor.isPropertySetter()) {
-      qualifiedJsName = "set " + qualifiedJsName;
-    }
-    return qualifiedJsName;
   }
 
   private boolean isEntryPoint(String methodName) {
@@ -803,5 +790,9 @@ public class WasmModuleGenerator {
   private void emitEndCodeComment(String commentId) {
     builder.newLine();
     builder.append(";;; End of code for " + commentId);
+  }
+
+  private void generateJsImportsFile(Library library) {
+    new JsImportsGenerator(output, problems).generateOutputs(library);
   }
 }
