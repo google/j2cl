@@ -3,13 +3,21 @@ load(
     "integration_test",
 )
 load("//build_defs:rules.bzl", "j2wasm_library")
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
 package(licenses = ["notice"])
+
+closure_js_library(
+    name = "foo",
+    srcs = ["Foo.js"],
+    deps = ["//javascript/closure:base"],
+)
 
 j2wasm_library(
     name = "wasmjsinterop-j2wasm",
     srcs = glob(["super-wasm/*.java"]),
     deps = [
+        ":foo",
         "//third_party:gwt-jsinterop-annotations-j2wasm",
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm",
     ],

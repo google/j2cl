@@ -49,4 +49,10 @@ public final class Main {
 
     public native boolean test(String value);
   }
+
+  // TODO(b/264466634): Test when JS imports are generated.
+  // @JsType(isNative = true, name = "Foo", namespace = "test")
+  // public static class Foo {
+  //   public native int sum(int a, int b);
+  // }
 }

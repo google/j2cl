@@ -5,6 +5,7 @@ This is an experimental tool and should not be used.
 """
 
 load(":provider.bzl", "J2wasmInfo")
+load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 
 def _impl_j2wasm_application(ctx):
     deps = ctx.attr.deps + [ctx.attr._jre]
@@ -126,9 +127,17 @@ def _impl_j2wasm_application(ctx):
         ),
     )
 
+    # Build a JS provider exposing the JS imports mapping.
+    js_info = j2cl_js_provider(
+        ctx,
+        # TODO(b/264466634): Once JS imports are generated, 'deps' can be used instead of 'exports'.
+        exports = [d[J2wasmInfo]._private_.js_info for d in deps],
+    )
+
     return [
         DefaultInfo(data_runfiles = ctx.runfiles(files = runfiles)),
         OutputGroupInfo(_validation = _trigger_javac_build(ctx.attr.deps)),
+        js_info,
     ]
 
 def _get_transitive_srcs(deps):
@@ -141,31 +150,35 @@ def _get_transitive_classpath(deps):
 def _trigger_javac_build(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.java_info.transitive_runtime_jars for d in deps])
 
+_J2WASM_APP_ATTRS = {
+    "deps": attr.label_list(providers = [J2wasmInfo]),
+    "entry_points": attr.string_list(),
+    "binaryen_stage1_args": attr.string_list(),
+    "binaryen_stage2_args": attr.string_list(),
+    "transpiler_args": attr.string_list(),
+    "defines": attr.string_list(),
+    "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
+    "_j2cl_transpiler": attr.label(
+        cfg = "exec",
+        executable = True,
+        default = Label(
+            "//build_defs/internal_do_not_use:BazelJ2clBuilder",
+        ),
+    ),
+    "_binaryen": attr.label(
+        cfg = "exec",
+        executable = True,
+        default = Label(
+            "//build_defs/internal_do_not_use:binaryen",
+        ),
+    ),
+}
+_J2WASM_APP_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
+
 _j2wasm_application = rule(
     implementation = _impl_j2wasm_application,
-    attrs = {
-        "deps": attr.label_list(providers = [J2wasmInfo]),
-        "entry_points": attr.string_list(),
-        "binaryen_stage1_args": attr.string_list(),
-        "binaryen_stage2_args": attr.string_list(),
-        "transpiler_args": attr.string_list(),
-        "defines": attr.string_list(),
-        "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
-        "_j2cl_transpiler": attr.label(
-            default = Label(
-                "//build_defs/internal_do_not_use:BazelJ2clBuilder",
-            ),
-            cfg = "exec",
-            executable = True,
-        ),
-        "_binaryen": attr.label(
-            cfg = "exec",
-            executable = True,
-            default = Label(
-                "//build_defs/internal_do_not_use:binaryen",
-            ),
-        ),
-    },
+    attrs = _J2WASM_APP_ATTRS,
+    fragments = ["js"],
     outputs = {
         "wat": "%{name}.wat",
         "wasm": "%{name}.wasm",

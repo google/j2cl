@@ -43,8 +43,8 @@ def _compile(
         if kotlincopts:
             fail("kotlincopts not allowed without kotlin sources")
 
-    jvm_deps, js_deps = _split_deps(deps)
-    jvm_exports, js_exports = _split_deps(exports)
+    jvm_deps, js_deps = split_deps(deps)
+    jvm_exports, js_exports = split_deps(exports)
 
     kotlincopts = DEFAULT_J2CL_KOTLINCOPTS + kotlincopts
 
@@ -114,7 +114,7 @@ def _compile(
         _is_j2cl_provider = 1,
     )
 
-def _split_deps(deps):
+def split_deps(deps):
     """ Split the provider deps into Jvm and JS groups. """
     jvm_deps = []
     js_deps = []
