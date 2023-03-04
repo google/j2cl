@@ -9,7 +9,7 @@ def _impl(ctx):
     zip_tool = ctx.executable._zip
     src_jar = ctx.outputs.srcjar
     super_excludes = [
-        x.label.name.replace("super-wasm/", "").replace("super-kt/", "")
+        x.label.name.replace("super-wasm/", "")
         for x in ctx.attr.super_srcs
     ]
     all_srcs = _filter(ctx.files.srcs, super_excludes)
