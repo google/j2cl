@@ -10,7 +10,6 @@ package(licenses = ["notice"])
 closure_js_library(
     name = "foo",
     srcs = ["Foo.js"],
-    deps = ["//javascript/closure:base"],
 )
 
 j2wasm_library(
