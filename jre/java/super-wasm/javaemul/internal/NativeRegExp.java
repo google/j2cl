@@ -61,25 +61,6 @@ public class NativeRegExp {
     return replaceStr;
   }
 
-  public static String escapeForRegExpSearch(char c) {
-    // Translate 'from' into unicode escape sequence (\\u and a four-digit hexadecimal number).
-    // Escape sequence replacement is used instead of a string literal replacement
-    // in order to escape regexp special characters (e.g. '.').
-    String hex = Integer.toHexString(c);
-    return "\\u" + "0000".substring(hex.length()) + hex;
-  }
-
-  /** Escapes the given CharSerquence such that is can be used in a RegExp search. */
-  public static String escapeForRegExpSearch(CharSequence str) {
-    return str.toString().replaceAll("([/\\\\\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}$^])", "\\\\$1");
-  }
-
-  /** Escapes the given CharSerquence such that is can be used in a RegExp repleacement. */
-  public static String escapeForRegExpReplacement(CharSequence str) {
-    // Escape $ since it is for match backrefs and \ since it is used to escape $.
-    return str.toString().toString().replaceAll("\\\\", "\\\\\\\\").replaceAll("\\$", "\\\\$");
-  }
-
   public WasmExtern toJs() {
     return instance;
   }
