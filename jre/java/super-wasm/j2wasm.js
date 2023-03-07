@@ -123,8 +123,6 @@ function createImportObject(userImports) {
     'performance.now': () => performance.now(),
 
     // String
-    'String.fromCodePoint': String.fromCodePoint,
-    'String.fromCharCode': String.fromCharCode,
     'String.indexOf': (/** string */ s, /** string */ r, /** number */ i) =>
         s.indexOf(r, i),
     'String.lastIndexOf': (/** string */ s, /** string */ r, /** number */ i) =>

@@ -130,8 +130,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public static String valueOf(char x) {
-    // TODO(b/244496016): Consider improving the performance of this.
-    return new String(NativeString.fromCharCode(x));
+    return new String(nativeFromCodePoint(x));
   }
 
   public static String valueOf(char[] x, int offset, int count) {
@@ -192,8 +191,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   static String fromCodePoint(int x) {
-    // TODO(b/244496016): Consider improving the performance of this.
-    return new String(NativeString.fromCodePoint(x));
+    return new String(nativeFromCodePoint(x));
   }
 
   private final NativeString value;
@@ -541,7 +539,7 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   // TODO: should live on a utility instead of the String API.
   public String nativeReplace(NativeRegExp regExp, char replacement) {
-    return new String(value.replace(regExp.toJs(), NativeString.fromCharCode(replacement)));
+    return new String(value.replace(regExp.toJs(), nativeFromCodePoint(replacement)));
   }
 
   // TODO: should live on a utility instead of the String API.
@@ -724,9 +722,6 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   @Wasm("string")
   @JsType(isNative = true, name = "String", namespace = JsPackage.GLOBAL)
   public static class NativeString {
-    static native NativeString fromCodePoint(int x);
-
-    static native NativeString fromCharCode(char x);
 
     native int indexOf(NativeString str);
 
@@ -752,6 +747,9 @@ public final class String implements Comparable<String>, CharSequence, Serializa
 
   @Wasm("string.as_wtf16")
   private static native NativeStringView asStringView(NativeString stringView);
+
+  @Wasm("string.from_code_point")
+  private static native NativeString nativeFromCodePoint(int x);
 
   @Wasm("string.new_wtf16_array")
   private static native NativeString nativeFromCharCodeArray(char[] x, int start, int end);
