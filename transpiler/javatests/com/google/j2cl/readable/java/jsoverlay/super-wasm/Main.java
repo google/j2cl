@@ -35,12 +35,6 @@ public class Main {
     }
   }
 
-  static class NativeJsTypeInterfaceWithOverlayImpl implements NativeJsTypeInterfaceWithOverlay {
-    public int m() {
-      return 0;
-    }
-  }
-
   @JsType(isNative = true, namespace = "test.foo")
   public static class NativeJsTypeWithOverlay {
     public static int nonJsOverlayField;
@@ -54,6 +48,8 @@ public class Main {
     // non JsOverlay static method.
     public static native void n();
 
+    // TODO(b/271900868): clinit should be called for instance JsOverlay methods. After implementing
+    // the proper behavior, verify the output and this TODO can be removed.
     @JsOverlay
     public final int callM() {
       return m();
@@ -123,12 +119,6 @@ public class Main {
   }
 
   public void testOverlayInterface(NativeJsTypeInterfaceWithOverlay foo) {
-    foo.m();
-    foo.callM();
-  }
-
-  public static void testOverlayInterfaceImpl() {
-    NativeJsTypeInterfaceWithOverlay foo = new NativeJsTypeInterfaceWithOverlayImpl();
     foo.m();
     foo.callM();
   }

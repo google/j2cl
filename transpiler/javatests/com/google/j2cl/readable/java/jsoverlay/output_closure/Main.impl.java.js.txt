@@ -7,6 +7,7 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let NativeJsTypeInterfaceWithOverlay_$Overlay = goog.forwardDeclare('jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
 let NativeJsTypeInterfaceWithOverlayImpl = goog.forwardDeclare('jsoverlay.Main.NativeJsTypeInterfaceWithOverlayImpl$impl');
 let $Overlay = goog.forwardDeclare('jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay$impl');
+let NativeJsTypeInterfaceWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeInterfaceWithOverlay');
 let NativeJsTypeWithOverlay = goog.forwardDeclare('test.foo.NativeJsTypeWithOverlay');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -39,10 +40,19 @@ class Main extends j_l_Object {
   $Overlay.f_staticField__jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay = null;
   $Overlay.m_varargs__arrayOf_int__int(/**@type {!Array<number>}*/ ($Arrays.$init([1, 2, 3], $$int)));
   $Overlay.m_baz__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int(n);
+  let b = j_l_String.m_valueOf__java_lang_Object__java_lang_String(NativeJsTypeInterfaceWithOverlay_$Overlay.f_COMPILE_TIME_CONSTANT__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(NativeJsTypeInterfaceWithOverlay_$Overlay.f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);
+ }
+ /** @nodts */
+ m_testOverlayInterface__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__void(/** NativeJsTypeInterfaceWithOverlay */ foo) {
+  foo.m();
+  NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__int(foo);
+ }
+ /** @nodts */
+ static m_testOverlayInterfaceImpl__void() {
+  Main.$clinit();
   let foo = NativeJsTypeInterfaceWithOverlayImpl.$create__();
   foo.m();
   NativeJsTypeInterfaceWithOverlay_$Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay__int(foo);
-  let b = j_l_String.m_valueOf__java_lang_Object__java_lang_String(NativeJsTypeInterfaceWithOverlay_$Overlay.f_COMPILE_TIME_CONSTANT__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay) + j_l_String.m_valueOf__java_lang_Object__java_lang_String(NativeJsTypeInterfaceWithOverlay_$Overlay.f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);
  }
  /** @nodts */
  static $clinit() {

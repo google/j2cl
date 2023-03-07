@@ -95,6 +95,7 @@
 (global $f_$initialized__packageinfosubpackage_Foo (mut i32) (i32.const 0))
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [static fields]
+(global $f_$initialized__packageinfosubpackage_Foo_NativeBar (mut i32) (i32.const 0))
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [static fields]
 (global $f_$initialized__packageinfosubpackage_subpackage_Bar (mut i32) (i32.const 0))
@@ -188,6 +189,28 @@
 ;;; NativeBar()
 (func $m_<init>__@packageinfosubpackage.Foo.NativeBar (import "imports" "packageinfosubpackage.subpackage.Bar.constructor") 
  (result (ref null extern))
+)
+
+;;; void NativeBar.$clinit()
+(func $$clinit__void@packageinfosubpackage.Foo.NativeBar
+ ;;@ packageinfosubpackage/Foo.java:23:23
+ (block
+  ;; if (packageinfosubpackage.Foo.NativeBar.$initialized) return;
+  ;;@ packageinfosubpackage/Foo.java:23:23
+  (if (global.get $f_$initialized__packageinfosubpackage_Foo_NativeBar)
+   (then
+    ;; return;
+    ;;@ packageinfosubpackage/Foo.java:23:23
+    (return )
+   )
+  )
+  ;; (packageinfosubpackage.Foo.NativeBar.$initialized = true);
+  ;;@ packageinfosubpackage/Foo.java:23:23
+  (global.set $f_$initialized__packageinfosubpackage_Foo_NativeBar (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ packageinfosubpackage/Foo.java:23:23
+  (call $$clinit__void@java.lang.Object )
+ )
 )
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [methods]

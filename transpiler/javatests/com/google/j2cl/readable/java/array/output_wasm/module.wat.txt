@@ -166,6 +166,7 @@
 (global $f_$initialized__array_Arrays_SomeObject (mut i32) (i32.const 0))
 
 ;;; Code for array.Arrays.NativeType [static fields]
+(global $f_$initialized__array_Arrays_NativeType (mut i32) (i32.const 0))
 
 ;;; Code for array.Arrays.ArrayContainer [static fields]
 (global $f_$initialized__array_Arrays_ArrayContainer (mut i32) (i32.const 0))
@@ -683,6 +684,28 @@
 ;;; NativeType()
 (func $m_<init>__@array.Arrays.NativeType (import "imports" "String.constructor") 
  (result (ref null extern))
+)
+
+;;; void NativeType.$clinit()
+(func $$clinit__void@array.Arrays.NativeType
+ ;;@ array/Arrays.java:138:23
+ (block
+  ;; if (array.Arrays.NativeType.$initialized) return;
+  ;;@ array/Arrays.java:138:23
+  (if (global.get $f_$initialized__array_Arrays_NativeType)
+   (then
+    ;; return;
+    ;;@ array/Arrays.java:138:23
+    (return )
+   )
+  )
+  ;; (array.Arrays.NativeType.$initialized = true);
+  ;;@ array/Arrays.java:138:23
+  (global.set $f_$initialized__array_Arrays_NativeType (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ array/Arrays.java:138:23
+  (call $$clinit__void@java.lang.Object )
+ )
 )
 
 ;;; Code for array.Arrays.ArrayContainer [methods]

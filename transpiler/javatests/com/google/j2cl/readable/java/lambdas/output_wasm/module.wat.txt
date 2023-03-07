@@ -1990,8 +1990,10 @@
 (global $f_$initialized__lambdas_Lambdas_GenericJsFunction (mut i32) (i32.const 0))
 
 ;;; Code for lambdas.Lambdas.Thenable [static fields]
+(global $f_$initialized__lambdas_Lambdas_Thenable (mut i32) (i32.const 0))
 
 ;;; Code for lambdas.Lambdas.AnotherThenable [static fields]
+(global $f_$initialized__lambdas_Lambdas_AnotherThenable (mut i32) (i32.const 0))
 
 ;;; Code for lambdas.Lambdas.IdentityFunction [static fields]
 (global $f_$initialized__lambdas_Lambdas_IdentityFunction (mut i32) (i32.const 0))
@@ -2188,7 +2190,45 @@
 
 ;;; Code for lambdas.Lambdas.Thenable [methods]
 
+;;; void Thenable.$clinit()
+(func $$clinit__void@lambdas.Lambdas.Thenable
+ ;;@ lambdas/Lambdas.java:226:19
+ (block
+  ;; if (lambdas.Lambdas.Thenable.$initialized) return;
+  ;;@ lambdas/Lambdas.java:226:19
+  (if (global.get $f_$initialized__lambdas_Lambdas_Thenable)
+   (then
+    ;; return;
+    ;;@ lambdas/Lambdas.java:226:19
+    (return )
+   )
+  )
+  ;; (lambdas.Lambdas.Thenable.$initialized = true);
+  ;;@ lambdas/Lambdas.java:226:19
+  (global.set $f_$initialized__lambdas_Lambdas_Thenable (i32.const 1))
+ )
+)
+
 ;;; Code for lambdas.Lambdas.AnotherThenable [methods]
+
+;;; void AnotherThenable.$clinit()
+(func $$clinit__void@lambdas.Lambdas.AnotherThenable
+ ;;@ lambdas/Lambdas.java:233:19
+ (block
+  ;; if (lambdas.Lambdas.AnotherThenable.$initialized) return;
+  ;;@ lambdas/Lambdas.java:233:19
+  (if (global.get $f_$initialized__lambdas_Lambdas_AnotherThenable)
+   (then
+    ;; return;
+    ;;@ lambdas/Lambdas.java:233:19
+    (return )
+   )
+  )
+  ;; (lambdas.Lambdas.AnotherThenable.$initialized = true);
+  ;;@ lambdas/Lambdas.java:233:19
+  (global.set $f_$initialized__lambdas_Lambdas_AnotherThenable (i32.const 1))
+ )
+)
 
 ;;; Code for lambdas.Lambdas.Equals [methods]
 

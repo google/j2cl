@@ -52,6 +52,11 @@ public class Main {
     private int baz() {
       return 30;
     }
+
+    @JsOverlay
+    private Object getStaticField() {
+      return staticField;
+    }
   }
 
   @JsType(isNative = true, namespace = "test.foo")
@@ -79,6 +84,7 @@ public class Main {
     assertTrue(6 == object.callM());
     assertTrue(20 == NativeJsTypeWithOverlay.fun(4, 5));
     assertTrue(1 == NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT);
+    assertTrue(object.getStaticField() != null);
     assertTrue(NativeJsTypeWithOverlay.staticField != null);
     NativeJsTypeWithOverlay.staticField = null;
     assertTrue(NativeJsTypeWithOverlay.staticField == null);

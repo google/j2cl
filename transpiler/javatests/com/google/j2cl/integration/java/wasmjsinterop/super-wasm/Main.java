@@ -17,6 +17,7 @@ package wasmjsinterop;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -25,6 +26,9 @@ public final class Main {
   public static void main(String... args) throws Exception {
     testJsString();
     testJsType();
+    // TODO(b/264466634): After generating imports and enabling integration/jsoverlay tests, this
+    // can be removed.
+    testJsOverlay();
   }
 
   public static void testJsString() {
@@ -43,11 +47,55 @@ public final class Main {
     assertEquals(false, regExp.test("rest"));
   }
 
+  // TODO(b/264466634): After generating imports and enabling integration/jsoverlay tests, this
+  // can be removed.
+  private static void testJsOverlay() {
+    // Static overlay field.
+    assertEquals(2000, Date.staticOverlayValue.getFullYear());
+    Date.staticOverlayValue = new Date(2001, 1);
+    assertEquals(2001, Date.staticOverlayValue.getFullYear());
+
+    // Static overlay method.
+    Date date2 = Date.createMultiplyByTwo(1011, 2);
+    assertEquals(2022, date2.getFullYear());
+    assertEquals(4, date2.getMonth());
+
+    // Instance overlay method.
+    Date date = new Date(2023, 3);
+    assertEquals(2026, date.getYearPlusMonth());
+  }
+
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
   public static class RegExp {
     public RegExp(String pattern) {}
 
     public native boolean test(String value);
+  }
+
+  // TODO(b/264466634): After generating imports and enabling integration/jsoverlay tests, this
+  // can be removed.
+  @JsType(isNative = true, name = "Date", namespace = JsPackage.GLOBAL)
+  public static class Date {
+    // Static overlay field.
+    @JsOverlay public static Date staticOverlayValue = new Date(2000, 1);
+
+    // Static overlay method.
+    @JsOverlay
+    public static Date createMultiplyByTwo(int year, int month) {
+      return new Date(year * 2, month * 2);
+    }
+
+    public Date(int year, int month) {}
+
+    public native int getFullYear();
+
+    public native int getMonth();
+
+    // Instance overlay method.
+    @JsOverlay
+    public int getYearPlusMonth() {
+      return getFullYear() + getMonth();
+    }
   }
 
   // TODO(b/264466634): Test when JS imports are generated.

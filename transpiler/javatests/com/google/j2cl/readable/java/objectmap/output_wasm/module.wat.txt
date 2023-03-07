@@ -1,6 +1,7 @@
  ;;; Code for objectmap.ObjectMap [type definition]
 
 ;;; Code for objectmap.ObjectMap [static fields]
+(global $f_$initialized__objectmap_ObjectMap (mut i32) (i32.const 0))
 
 ;;; Code for objectmap.ObjectMap [methods]
 
@@ -14,6 +15,9 @@
  (result (ref null extern))
  ;;@ objectmap/ObjectMap.java:25:26
  (block
+  ;; objectmap.ObjectMap.$clinit();
+  ;;@ objectmap/ObjectMap.java:25:35
+  (call $$clinit__void@objectmap.ObjectMap )
   ;; return null;
   ;;@ objectmap/ObjectMap.java:26:4
   (return (ref.null extern))
@@ -25,8 +29,33 @@
  (result (ref null extern))
  ;;@ objectmap/ObjectMap.java:30:27
  (block
+  ;; objectmap.ObjectMap.$clinit();
+  ;;@ objectmap/ObjectMap.java:30:45
+  (call $$clinit__void@objectmap.ObjectMap )
   ;; return null;
   ;;@ objectmap/ObjectMap.java:31:4
   (return (ref.null extern))
+ )
+)
+
+;;; void ObjectMap.$clinit()
+(func $$clinit__void@objectmap.ObjectMap
+ ;;@ objectmap/ObjectMap.java:23:13
+ (block
+  ;; if (objectmap.ObjectMap.$initialized) return;
+  ;;@ objectmap/ObjectMap.java:23:13
+  (if (global.get $f_$initialized__objectmap_ObjectMap)
+   (then
+    ;; return;
+    ;;@ objectmap/ObjectMap.java:23:13
+    (return )
+   )
+  )
+  ;; (objectmap.ObjectMap.$initialized = true);
+  ;;@ objectmap/ObjectMap.java:23:13
+  (global.set $f_$initialized__objectmap_ObjectMap (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ objectmap/ObjectMap.java:23:13
+  (call $$clinit__void@java.lang.Object )
  )
 )

@@ -280,6 +280,7 @@
 (global $f_$initialized__collisions_goog (mut i32) (i32.const 0))
 
 ;;; Code for collisions.Blah [static fields]
+(global $f_$initialized__collisions_Blah (mut i32) (i32.const 0))
 
 ;;; Code for collisions.KtBlah [static fields]
 (global $f_$initialized__collisions_KtBlah (mut i32) (i32.const 0))
@@ -380,6 +381,28 @@
 ;;; double Blah.getN()
 (func $m_getN__double@collisions.Blah (import "imports" "get String.prototype.length") 
  (result f64)
+)
+
+;;; void Blah.$clinit()
+(func $$clinit__void@collisions.Blah
+ ;;@ collisions/goog.java:28:6
+ (block
+  ;; if (collisions.Blah.$initialized) return;
+  ;;@ collisions/goog.java:28:6
+  (if (global.get $f_$initialized__collisions_Blah)
+   (then
+    ;; return;
+    ;;@ collisions/goog.java:28:6
+    (return )
+   )
+  )
+  ;; (collisions.Blah.$initialized = true);
+  ;;@ collisions/goog.java:28:6
+  (global.set $f_$initialized__collisions_Blah (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ collisions/goog.java:28:6
+  (call $$clinit__void@java.lang.Object )
+ )
 )
 
 ;;; Code for collisions.KtBlah [methods]

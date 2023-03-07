@@ -297,10 +297,12 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
-        if (methodCall.isPolymorphic() && !methodCall.getTarget().isNative()) {
-          renderPolymorphicMethodCall(methodCall);
-        } else {
+        if (!methodCall.isPolymorphic()
+            || methodCall.getTarget().isNative()
+            || methodCall.getTarget().isJsOverlay()) {
           renderNonPolymorphicMethodCall(methodCall);
+        } else {
+          renderPolymorphicMethodCall(methodCall);
         }
         return false;
       }

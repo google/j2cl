@@ -376,7 +376,9 @@ public class WasmModuleGenerator {
     // enclosing type because they are not overridden but normal instance methods have to
     // declare the parameter more generically as java.lang.Object, since all the overrides need
     // to have matching signatures.
-    if (methodDescriptor.isClassDynamicDispatch() && !methodDescriptor.isNative()) {
+    if (methodDescriptor.isClassDynamicDispatch()
+        && !methodDescriptor.isNative()
+        && !methodDescriptor.isJsOverlay()) {
       builder.newLine();
       builder.append(String.format("(type %s)", environment.getFunctionTypeName(methodDescriptor)));
       builder.newLine();
@@ -434,7 +436,7 @@ public class WasmModuleGenerator {
     }
     // Introduce the actual $this variable for polymorphic methods and cast the parameter to
     // the right type.
-    if (methodDescriptor.isClassDynamicDispatch()) {
+    if (methodDescriptor.isClassDynamicDispatch() && !methodDescriptor.isJsOverlay()) {
       builder.newLine();
       builder.append(
           String.format("(local $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
@@ -529,6 +531,7 @@ public class WasmModuleGenerator {
         .filter(Predicates.not(Type::isNative))
         .map(Type::getDeclaration)
         .filter(Predicates.not(TypeDeclaration::isAbstract))
+        .filter(type -> type.getWasmInfo() == null)
         .forEach(this::emitDispatchTablesInitialization);
     builder.newLine();
   }

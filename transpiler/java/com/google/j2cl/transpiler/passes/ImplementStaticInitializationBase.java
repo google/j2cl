@@ -53,11 +53,6 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   public final void applyTo(CompilationUnit compilationUnit) {
     collectPrivateMemberReferences(compilationUnit);
     for (Type type : compilationUnit.getTypes()) {
-      // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this check
-      // could be removed.
-      if (type.isNative()) {
-        continue;
-      }
       synthesizeClinitCallsInMethods(type);
       synthesizeSuperClinitCalls(type);
       // Apply the additional normalizations defined in subclasses.
@@ -173,6 +168,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
    * Returns {@code true} if a class initialization (clinit) needs to be called when accessing this
    * member (i.e. calling it if if a method, or referencing it if it is a field)
    */
+  // TODO(b/271900868): clinit should be called for instance JsOverlay methods for WASM.
   boolean triggersClinit(MemberDescriptor memberDescriptor, Type enclosingType) {
     if (memberDescriptor.isNative()) {
       // Skip native members.

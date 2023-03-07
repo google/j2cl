@@ -149,22 +149,64 @@
 (global $f_$initialized__importglobaljstypes_Date (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Date.NativeDate [static fields]
+(global $f_$initialized__importglobaljstypes_Date_NativeDate (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Number [static fields]
 (global $f_$initialized__importglobaljstypes_Number (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Number.NativeFunction [static fields]
+(global $f_$initialized__importglobaljstypes_Number_NativeFunction (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [static fields]
+(global $f_$initialized__importglobaljstypes_Number_MyLiteralType (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.RegExp [static fields]
 (global $f_$initialized__importglobaljstypes_RegExp (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.RegExp.NativeRegExp [static fields]
+(global $f_$initialized__importglobaljstypes_RegExp_NativeRegExp (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Number.NativeFunction [methods]
 
+;;; void NativeFunction.$clinit()
+(func $$clinit__void@importglobaljstypes.Number.NativeFunction
+ ;;@ importglobaljstypes/Number.java:41:20
+ (block
+  ;; if (importglobaljstypes.Number.NativeFunction.$initialized) return;
+  ;;@ importglobaljstypes/Number.java:41:20
+  (if (global.get $f_$initialized__importglobaljstypes_Number_NativeFunction)
+   (then
+    ;; return;
+    ;;@ importglobaljstypes/Number.java:41:20
+    (return )
+   )
+  )
+  ;; (importglobaljstypes.Number.NativeFunction.$initialized = true);
+  ;;@ importglobaljstypes/Number.java:41:20
+  (global.set $f_$initialized__importglobaljstypes_Number_NativeFunction (i32.const 1))
+ )
+)
+
 ;;; Code for importglobaljstypes.Number.MyLiteralType [methods]
+
+;;; void MyLiteralType.$clinit()
+(func $$clinit__void@importglobaljstypes.Number.MyLiteralType
+ ;;@ importglobaljstypes/Number.java:61:26
+ (block
+  ;; if (importglobaljstypes.Number.MyLiteralType.$initialized) return;
+  ;;@ importglobaljstypes/Number.java:61:26
+  (if (global.get $f_$initialized__importglobaljstypes_Number_MyLiteralType)
+   (then
+    ;; return;
+    ;;@ importglobaljstypes/Number.java:61:26
+    (return )
+   )
+  )
+  ;; (importglobaljstypes.Number.MyLiteralType.$initialized = true);
+  ;;@ importglobaljstypes/Number.java:61:26
+  (global.set $f_$initialized__importglobaljstypes_Number_MyLiteralType (i32.const 1))
+ )
+)
 
 ;;; Code for importglobaljstypes.Date [methods]
 
@@ -284,6 +326,28 @@
 (func $m_getSeconds__int@importglobaljstypes.Date.NativeDate (import "imports" "Date.getSeconds") 
  (param $this (ref null extern))
  (result i32)
+)
+
+;;; void NativeDate.$clinit()
+(func $$clinit__void@importglobaljstypes.Date.NativeDate
+ ;;@ importglobaljstypes/Date.java:38:22
+ (block
+  ;; if (importglobaljstypes.Date.NativeDate.$initialized) return;
+  ;;@ importglobaljstypes/Date.java:38:22
+  (if (global.get $f_$initialized__importglobaljstypes_Date_NativeDate)
+   (then
+    ;; return;
+    ;;@ importglobaljstypes/Date.java:38:22
+    (return )
+   )
+  )
+  ;; (importglobaljstypes.Date.NativeDate.$initialized = true);
+  ;;@ importglobaljstypes/Date.java:38:22
+  (global.set $f_$initialized__importglobaljstypes_Date_NativeDate (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ importglobaljstypes/Date.java:38:22
+  (call $$clinit__void@java.lang.Object )
+ )
 )
 
 ;;; Code for importglobaljstypes.Number [methods]
@@ -504,4 +568,26 @@
 (func $m_toString__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.toString") 
  (param $this (ref null extern))
  (result (ref null string))
+)
+
+;;; void NativeRegExp.$clinit()
+(func $$clinit__void@importglobaljstypes.RegExp.NativeRegExp
+ ;;@ importglobaljstypes/RegExp.java:30:22
+ (block
+  ;; if (importglobaljstypes.RegExp.NativeRegExp.$initialized) return;
+  ;;@ importglobaljstypes/RegExp.java:30:22
+  (if (global.get $f_$initialized__importglobaljstypes_RegExp_NativeRegExp)
+   (then
+    ;; return;
+    ;;@ importglobaljstypes/RegExp.java:30:22
+    (return )
+   )
+  )
+  ;; (importglobaljstypes.RegExp.NativeRegExp.$initialized = true);
+  ;;@ importglobaljstypes/RegExp.java:30:22
+  (global.set $f_$initialized__importglobaljstypes_RegExp_NativeRegExp (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ importglobaljstypes/RegExp.java:30:22
+  (call $$clinit__void@java.lang.Object )
+ )
 )

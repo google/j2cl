@@ -46,6 +46,7 @@
  ))
 
 ;;; Code for genericnativetype.BoundedJsArray [static fields]
+(global $f_$initialized__genericnativetype_BoundedJsArray (mut i32) (i32.const 0))
 
 ;;; Code for genericnativetype.BoundedJsArrays [static fields]
 (global $f_$initialized__genericnativetype_BoundedJsArrays (mut i32) (i32.const 0))
@@ -64,6 +65,9 @@
  ;;@ genericnativetype/BoundedJsArray.java:30:38
  (local $array (ref null extern))
  (block
+  ;; genericnativetype.BoundedJsArray.$clinit();
+  ;;@ genericnativetype/BoundedJsArray.java:30:47
+  (call $$clinit__void@genericnativetype.BoundedJsArray )
   ;; BoundedJsArray<V> array = null;
   ;;@ genericnativetype/BoundedJsArray.java:31:4
   (local.set $array (ref.null extern))
@@ -80,12 +84,37 @@
  ;;@ genericnativetype/BoundedJsArray.java:39:38
  (local $array (ref null extern))
  (block
+  ;; genericnativetype.BoundedJsArray.$clinit();
+  ;;@ genericnativetype/BoundedJsArray.java:39:55
+  (call $$clinit__void@genericnativetype.BoundedJsArray )
   ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
   ;;@ genericnativetype/BoundedJsArray.java:40:4
   (local.set $array (call $m_<init>__int@genericnativetype.BoundedJsArray (local.get $size)))
   ;; return array;
   ;;@ genericnativetype/BoundedJsArray.java:41:4
   (return (local.get $array))
+ )
+)
+
+;;; void BoundedJsArray.$clinit()
+(func $$clinit__void@genericnativetype.BoundedJsArray
+ ;;@ genericnativetype/BoundedJsArray.java:23:13
+ (block
+  ;; if (genericnativetype.BoundedJsArray.$initialized) return;
+  ;;@ genericnativetype/BoundedJsArray.java:23:13
+  (if (global.get $f_$initialized__genericnativetype_BoundedJsArray)
+   (then
+    ;; return;
+    ;;@ genericnativetype/BoundedJsArray.java:23:13
+    (return )
+   )
+  )
+  ;; (genericnativetype.BoundedJsArray.$initialized = true);
+  ;;@ genericnativetype/BoundedJsArray.java:23:13
+  (global.set $f_$initialized__genericnativetype_BoundedJsArray (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ genericnativetype/BoundedJsArray.java:23:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 

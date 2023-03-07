@@ -9,4 +9,6 @@ integration_test(
     name = "jsfunction",
     srcs = glob(["*.java"]),
     enable_kt = False,
+    # JsFunction not supported in WASM.
+    enable_wasm = False,
 )
