@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
+import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getSuppressWarningsAnnotation;
+import static java.util.Arrays.stream;
+
 import com.google.common.base.VerifyException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -125,6 +128,17 @@ public final class JdtAnnotationUtils {
       throw new VerifyException(
           "Unexpectedly unable to access AnnotationBinding.binding via reflection", e);
     }
+  }
+
+  public static boolean isWarningSuppressed(
+      IAnnotationBinding[] annotationBindings, String warning) {
+    IAnnotationBinding annotationBinding = getSuppressWarningsAnnotation(annotationBindings);
+    if (annotationBinding == null) {
+      return false;
+    }
+
+    Object[] suppressions = JdtAnnotationUtils.getArrayAttribute(annotationBinding, "value");
+    return stream(suppressions).anyMatch(warning::equals);
   }
 
   private JdtAnnotationUtils() {}

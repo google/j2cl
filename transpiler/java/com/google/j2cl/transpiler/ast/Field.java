@@ -70,6 +70,14 @@ public class Field extends Member {
     return fieldDescriptor.isCompileTimeConstant();
   }
 
+  public boolean isKtLateInit() {
+    FieldDescriptor descriptor = getDescriptor();
+    return descriptor.getKtInfo().isUninitializedWarningSuppressed()
+        && !descriptor.isFinal()
+        && !descriptor.getTypeDescriptor().isNullable()
+        && !hasInitializer();
+  }
+
   @Override
   public boolean isField() {
     return true;

@@ -1,0 +1,54 @@
+// Generated from "j2kt/LateInit.java"
+@file:OptIn(ExperimentalObjCName::class, ExperimentalObjCRefinement::class)
+
+package j2kt
+
+import javaemul.lang.*
+import kotlin.Int
+import kotlin.OptIn
+import kotlin.String
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.jvm.JvmField
+import kotlin.native.HiddenFromObjC
+import kotlin.native.ObjCName
+
+@ObjCName("J2ktLateInit", exact = true)
+open class LateInit {
+ @ObjCName("publicField_")
+ lateinit var publicField: String
+
+ @HiddenFromObjC
+ lateinit var privateField_private_2: String
+
+ @JvmField
+ @HiddenFromObjC
+ var initializedField_private_2: String = "initialized"
+
+ @JvmField
+ @HiddenFromObjC
+ var nullableField_private_2: String? = null
+
+ @JvmField
+ @HiddenFromObjC
+ val finalField_private_2: String = "final"
+
+ @JvmField
+ @HiddenFromObjC
+ var primitiveField_private_2: Int = 0
+
+ constructor() {
+  this.init_private_2()
+ }
+
+ @HiddenFromObjC
+ fun init_private_2() {
+  this.publicField = "public"
+  this.privateField_private_2 = "private"
+ }
+
+ @ObjCName("test")
+ open fun test(): Int {
+  return this.publicField!!.length + this.privateField_private_2!!.length + this.initializedField_private_2!!.length + this.nullableField_private_2!!.length + this.finalField_private_2!!.length + this.primitiveField_private_2
+ }
+}

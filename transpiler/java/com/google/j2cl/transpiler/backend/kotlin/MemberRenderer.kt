@@ -110,18 +110,21 @@ private val Method.renderedStatements: List<Statement>
   }
 
 private fun Renderer.fieldSource(field: Field): Source {
-  val isFinal = field.descriptor.isFinal
-  val typeDescriptor = field.descriptor.typeDescriptor
+  val fieldDescriptor = field.descriptor
+  val isFinal = fieldDescriptor.isFinal
+  val typeDescriptor = fieldDescriptor.typeDescriptor
   val isConst = field.isCompileTimeConstant && field.isStatic
+  val isJvmField = !isConst && !field.isKtLateInit
   return newLineSeparated(
-    sourceIf(!isConst) { jvmFieldAnnotationSource() },
-    objCAnnotationSource(field.descriptor),
+    sourceIf(isJvmField) { jvmFieldAnnotationSource() },
+    objCAnnotationSource(fieldDescriptor),
     spaceSeparated(
       sourceIf(isConst) { source("const") },
+      sourceIf(field.isKtLateInit) { source("lateinit") },
       if (isFinal) source("val") else source("var"),
       assignment(
         colonSeparated(
-          identifierSource(field.descriptor.ktMangledName),
+          identifierSource(fieldDescriptor.ktMangledName),
           typeDescriptorSource(typeDescriptor)
         ),
         field.initializer.ifNotNullSource(::expressionSource)

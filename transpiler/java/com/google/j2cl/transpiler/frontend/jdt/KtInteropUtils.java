@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.getStringAttribute;
+import static com.google.j2cl.transpiler.frontend.jdt.JdtAnnotationUtils.isWarningSuppressed;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtDisabledAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtInAnnotation;
 import static com.google.j2cl.transpiler.frontend.jdt.KtInteropAnnotationUtils.getKtNameAnnotation;
@@ -93,6 +94,7 @@ public class KtInteropUtils {
         .setName(getKtName(annotationBindings))
         .setDisabled(isKtDisabled(annotationBindings))
         .setNullabilityPropagationEnabled(isKtPropagateNullabilityEnabled(annotationBindings))
+        .setUninitializedWarningSuppressed(isUninitializedWarningSuppressed(annotationBindings))
         .build();
   }
 
@@ -112,6 +114,10 @@ public class KtInteropUtils {
 
   public static boolean isKtPropagateNullabilityEnabled(IAnnotationBinding[] annotationBindings) {
     return getKtPropagateNullabilityAnnotation(annotationBindings) != null;
+  }
+
+  public static boolean isUninitializedWarningSuppressed(IAnnotationBinding[] annotationBindings) {
+    return isWarningSuppressed(annotationBindings, "nullness:initialization.field.uninitialized");
   }
 
   @Nullable
