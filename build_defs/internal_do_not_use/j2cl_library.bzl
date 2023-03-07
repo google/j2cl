@@ -52,7 +52,7 @@ _J2KT_JVM_PACKAGES = [
     "third_party/java/junit",
 ]
 
-# Packages that j2cl rule will generage j2kt native packages by default. Used to simplify test
+# Packages that j2cl rule will generate j2kt native packages by default. Used to simplify test
 # rules.
 _J2KT_NATIVE_PACKAGES = [
     "build_defs/internal_do_not_use",
