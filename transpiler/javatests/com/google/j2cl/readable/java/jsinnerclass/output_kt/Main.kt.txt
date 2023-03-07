@@ -40,12 +40,12 @@ open class Main {
   }
 
   @ObjCName("JsinnerclassMain_Outer_Inner", exact = true)
-  open inner class Inner {
+  open inner class Inner() {
    @JvmField
    @HiddenFromObjC
    var b_private_2: Int = 0
 
-   constructor() {
+   init {
     this.b_private_2 = this@Outer.a_pp_jsinnerclass + 1
    }
 

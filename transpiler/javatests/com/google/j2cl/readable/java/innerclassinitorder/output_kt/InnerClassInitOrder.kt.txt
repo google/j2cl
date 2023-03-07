@@ -191,14 +191,12 @@ open class InnerClassInitOrder {
   }
  }
 
- open inner class OuterRefFromSuperCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
-  constructor(): super(object : Any() {
-   open override fun hashCode(): Int {
-    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
-    return 0
-   }
-  })
- }
+ open inner class OuterRefFromSuperCtorCall(): InnerClassInitOrder.OuterRefFromSuperCtorBase(object : Any() {
+  open override fun hashCode(): Int {
+   this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
+   return 0
+  }
+ }) {}
 
  open inner class OuterRefFromThisCtorCall: InnerClassInitOrder.OuterRefFromSuperCtorBase {
   constructor(
@@ -341,11 +339,9 @@ open class InnerClassInitOrder {
   }
 
   @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer_OuterIsSuper", exact = true)
-  open inner class OuterIsSuper: InnerClassInitOrder.Outer {
-   constructor(
-    @ObjCName("Int") i: Int
-   ): super(i)
-
+  open inner class OuterIsSuper(
+   @ObjCName("Int") i: Int
+  ): InnerClassInitOrder.Outer(i) {
    open override fun checkDispatch(): Int {
     return 2
    }
@@ -376,8 +372,6 @@ open class InnerClassInitOrder {
   }
 
   @ObjCName("InnerclassinitorderInnerClassInitOrder_Outer_TestUnqualifiedSuperCall", exact = true)
-  open inner class TestUnqualifiedSuperCall: InnerClassInitOrder.Outer.OuterIsNotSuper {
-   constructor(): super()
-  }
+  open inner class TestUnqualifiedSuperCall(): InnerClassInitOrder.Outer.OuterIsNotSuper() {}
  }
 }

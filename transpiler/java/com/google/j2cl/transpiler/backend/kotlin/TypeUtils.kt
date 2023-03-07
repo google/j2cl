@@ -15,8 +15,21 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 
 internal val Type.declaredSuperTypeDescriptors: List<TypeDescriptor>
   get() = listOfNotNull(superTypeDescriptor).plus(superInterfaceTypeDescriptors)
+
+internal val Type.hasConstructors: Boolean
+  get() = constructors.isNotEmpty()
+
+// Returns the constructor to render as primary in Kotlin.
+internal val Type.ktPrimaryConstructor: Method?
+  get() =
+    constructors.singleOrNull()?.takeIf {
+      // Render primary constructors for inner classes only, where it's necessary.
+      // Don't do it all classes, because Kotlin does not allow using `return` inside `init {}`.
+      it.descriptor.enclosingTypeDescriptor.typeDeclaration.isKtInner
+    }

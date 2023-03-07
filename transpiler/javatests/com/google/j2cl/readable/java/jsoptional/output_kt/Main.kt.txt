@@ -83,11 +83,9 @@ open class Main {
   open override fun m(t: T, o: Any?) {}
  }
 
- open inner class SpecializedSubtype: Main.I<String?> {
-  constructor(
-   @ObjCName("Id") a: Any?
-  )
-
+ open inner class SpecializedSubtype(
+  @ObjCName("Id") a: Any?
+ ): Main.I<String?> {
   open override fun m(t: String?, o: Any?) {}
  }
 

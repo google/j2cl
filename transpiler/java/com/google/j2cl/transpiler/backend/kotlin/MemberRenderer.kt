@@ -71,25 +71,28 @@ private fun Renderer.memberSource(member: JavaMember): Source =
   }
 
 private fun Renderer.methodSource(method: Method): Source =
-  spaceSeparated(
-    methodHeaderSource(method),
-    sourceIf(!method.isAbstract && !method.isNative) {
-      val statements = method.renderedStatements
-
-      // Constructors with no statements can be rendered without curly braces.
-      sourceIf(!method.isConstructor || statements.isNotEmpty()) {
-        spaceSeparated(
-          sourceIf(method.descriptor.isKtProperty) { source("get()") },
-          copy(currentReturnLabelIdentifier = null).run {
-            block(
-              if (method.descriptor.isTodo) todo(literalSource("J2KT: not yet supported"))
-              else statementsSource(statements)
+  method.renderedStatements.let { statements ->
+    // Don't render primary constructor if it's empty.
+    sourceIf(!isKtPrimaryConstructor(method) || !statements.isEmpty()) {
+      spaceSeparated(
+        methodHeaderSource(method),
+        sourceIf(!method.isAbstract && !method.isNative) {
+          // Constructors with no statements can be rendered without curly braces.
+          sourceIf(!method.isConstructor || statements.isNotEmpty()) {
+            spaceSeparated(
+              sourceIf(method.descriptor.isKtProperty) { source("get()") },
+              copy(currentReturnLabelIdentifier = null).run {
+                block(
+                  if (method.descriptor.isTodo) todo(literalSource("J2KT: not yet supported"))
+                  else statementsSource(statements)
+                )
+              }
             )
           }
-        )
-      }
+        }
+      )
     }
-  )
+  }
 
 private val Method.renderedStatements: List<Statement>
   get() {
@@ -108,6 +111,9 @@ private val Method.renderedStatements: List<Statement>
         .build()
     )
   }
+
+private fun Renderer.isKtPrimaryConstructor(method: Method): Boolean =
+  method == currentType!!.ktPrimaryConstructor
 
 private fun Renderer.fieldSource(field: Field): Source {
   val fieldDescriptor = field.descriptor
@@ -142,26 +148,28 @@ private fun Renderer.jvmStaticAnnotationSource(): Source =
 private fun Renderer.initializerBlockSource(initializerBlock: InitializerBlock): Source =
   spaceSeparated(source("init"), statementSource(initializerBlock.block))
 
-private fun Renderer.methodHeaderSource(method: Method): Source {
-  val methodDescriptor = method.descriptor
-  val methodObjCNames = method.toObjCNames()
-  return newLineSeparated(
-    sourceIf(method.isStatic) { jvmStaticAnnotationSource() },
-    objCAnnotationSource(methodDescriptor, methodObjCNames),
-    spaceSeparated(
-      methodModifiersSource(methodDescriptor),
-      colonSeparated(
-        join(
-          methodKindAndNameSource(methodDescriptor),
-          methodParametersSource(method, methodObjCNames?.parameterNames)
+private fun Renderer.methodHeaderSource(method: Method): Source =
+  if (isKtPrimaryConstructor(method)) source("init")
+  else {
+    val methodDescriptor = method.descriptor
+    val methodObjCNames = method.toObjCNames()
+    newLineSeparated(
+      sourceIf(method.isStatic) { jvmStaticAnnotationSource() },
+      objCAnnotationSource(methodDescriptor, methodObjCNames),
+      spaceSeparated(
+        methodModifiersSource(methodDescriptor),
+        colonSeparated(
+          join(
+            methodKindAndNameSource(methodDescriptor),
+            methodParametersSource(method, methodObjCNames?.parameterNames)
+          ),
+          if (methodDescriptor.isConstructor) constructorInvocationSource(method)
+          else methodReturnTypeSource(methodDescriptor)
         ),
-        if (methodDescriptor.isConstructor) constructorInvocationSource(method)
-        else methodReturnTypeSource(methodDescriptor)
-      ),
-      whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
+        whereClauseSource(methodDescriptor.typeParameterTypeDescriptors)
+      )
     )
-  )
-}
+  }
 
 private fun Renderer.methodKindAndNameSource(methodDescriptor: MethodDescriptor): Source =
   if (methodDescriptor.isConstructor) source("constructor")
@@ -191,7 +199,7 @@ private fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
     sourceIf(methodDescriptor.isKtOverride) { source("override") }
   )
 
-private fun Renderer.methodParametersSource(
+internal fun Renderer.methodParametersSource(
   method: Method,
   objCParameterNames: List<String>?
 ): Source {

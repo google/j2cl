@@ -29,4 +29,12 @@ public class InnerClassWithConstructor {
       this(a);
     }
   }
+
+  class InnerClassWithSingleConstructor {
+    public int b;
+
+    public InnerClassWithSingleConstructor(int b) {
+      this.b = a + b;
+    }
+  }
 }

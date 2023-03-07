@@ -28,4 +28,15 @@ open class InnerClassWithConstructor {
 
   constructor(): this(this@InnerClassWithConstructor.a)
  }
+
+ open inner class InnerClassWithSingleConstructor(
+  @ObjCName("Int") b: Int
+ ) {
+  @JvmField
+  var b: Int = 0
+
+  init {
+   this.b = this@InnerClassWithConstructor.a + b
+  }
+ }
 }

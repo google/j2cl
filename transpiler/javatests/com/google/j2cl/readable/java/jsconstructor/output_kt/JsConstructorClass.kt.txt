@@ -153,11 +153,9 @@ open class JsConstructorClass {
  }
 
  @ObjCName("JsconstructorJsConstructorClass_InstanceVarargs", exact = true)
- open inner class InstanceVarargs: JsConstructorClass.A {
-  constructor(
-   vararg @ObjCName("IntArray") args: Int
-  ): super(args!![1])
- }
+ open inner class InstanceVarargs(
+  vararg @ObjCName("IntArray") args: Int
+ ): JsConstructorClass.A(args!![1]) {}
 
  @ObjCName("JsconstructorJsConstructorClass_RegularType", exact = true)
  open class RegularType {

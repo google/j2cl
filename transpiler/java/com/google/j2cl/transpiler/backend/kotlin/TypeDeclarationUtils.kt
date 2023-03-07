@@ -52,3 +52,10 @@ internal val TypeDeclaration.isKtFunctionalInterface
       toUnparameterizedTypeDescriptor().singleAbstractMethodDescriptor!!.let { methodDescriptor ->
         !methodDescriptor.isKtProperty && methodDescriptor.typeParameterTypeDescriptors.isEmpty()
       }
+
+internal val TypeDeclaration.isKtInner: Boolean
+  get() =
+    enclosingTypeDeclaration != null &&
+      kind == TypeDeclaration.Kind.CLASS &&
+      isCapturingEnclosingInstance &&
+      !isLocal

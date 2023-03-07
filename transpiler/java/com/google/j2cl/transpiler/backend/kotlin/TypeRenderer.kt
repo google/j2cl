@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.NewInstance
@@ -53,25 +54,29 @@ fun Renderer.typeSource(type: Type): Source =
           inheritanceModifierSource(typeDeclaration),
           classModifiersSource(type),
           kindModifiersSource(typeDeclaration),
-          colonSeparated(typeDeclarationSource(typeDeclaration), superTypesSource(type)),
+          colonSeparated(
+            join(
+              typeDeclarationSource(typeDeclaration),
+              ktPrimaryConstructorParametersSource(type)
+            ),
+            superTypesSource(type)
+          ),
           whereClauseSource(typeDeclaration.typeParameterDescriptors),
           typeBodySource(type)
         )
       )
   }
 
+fun Renderer.ktPrimaryConstructorParametersSource(type: Type): Source =
+  type.ktPrimaryConstructor.ifNotNullSource { method ->
+    methodParametersSource(method, method.toObjCNames()?.parameterNames)
+  }
+
 fun nativeTypeSource(type: TypeDeclaration): Source =
   comment(spaceSeparated(source("native"), source("class"), identifierSource(type.ktSimpleName)))
 
 fun classModifiersSource(type: Type): Source =
-  sourceIf(
-    type.declaration.enclosingTypeDeclaration != null &&
-      type.declaration.kind == Kind.CLASS &&
-      !type.isStatic &&
-      !type.declaration.isLocal
-  ) {
-    source("inner")
-  }
+  sourceIf(type.declaration.isKtInner) { source("inner") }
 
 fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
   sourceIf(typeDeclaration.isClass && !typeDeclaration.isFinal) {
@@ -104,10 +109,24 @@ private fun Renderer.superTypesSource(type: Type): Source =
 private fun Renderer.superTypeSource(type: Type, superTypeDescriptor: TypeDescriptor): Source =
   join(
     typeDescriptorSource(superTypeDescriptor.toNonNullable(), asSuperType = true),
-    sourceIf(superTypeDescriptor.isClass && type.constructors.isEmpty()) {
-      inRoundBrackets(emptySource)
-    }
+    superTypeInvocationSource(type, superTypeDescriptor)
   )
+
+private fun Renderer.superTypeInvocationSource(
+  type: Type,
+  superTypeDescriptor: TypeDescriptor
+): Source =
+  sourceIf(superTypeDescriptor.isClass) {
+    if (!type.hasConstructors) inRoundBrackets(emptySource)
+    else
+      type.ktPrimaryConstructor.let { ktPrimaryConstructor ->
+        sourceIf(ktPrimaryConstructor != null) {
+          getConstructorInvocation(ktPrimaryConstructor).let {
+            if (it == null) inRoundBrackets(emptySource) else invocationSource(it)
+          }
+        }
+      }
+  }
 
 internal fun Renderer.typeBodySource(type: Type): Source =
   forTypeBody(type).run {
