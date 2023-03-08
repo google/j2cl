@@ -91,6 +91,17 @@ public class StringBufferTest extends GWTTestCase {
     assertEquals("!nul", x.toString());
   }
 
+  public void testAppend_largeInt() {
+    // Test extreme cases since Wasm has a different code path for StringBuilder.append(int)
+    StringBuffer x = new StringBuffer();
+    x.append(Integer.MAX_VALUE);
+    assertEquals("2147483647", x.toString());
+
+    x = new StringBuffer();
+    x.append(Integer.MIN_VALUE);
+    assertEquals("-2147483648", x.toString());
+  }
+
   /**
    * Check that capacity methods are present, even though they do nothing.
    */

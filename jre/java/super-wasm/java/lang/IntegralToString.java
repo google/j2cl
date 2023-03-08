@@ -104,6 +104,16 @@ final class IntegralToString {
       sb.append0(intToString(i));
       return;
     }
+
+    boolean negative = i < 0;
+    if (negative) {
+      i = -i;
+      if (i < 0) {
+        // If it is still negative, it is the MIN_VALUE
+        sb.append0("-2147483648");
+        return;
+      }
+    }
     int bufLen = BUFFER_LENGTH;
     char[] buf = BUFFER;
     int cursor = bufLen;
@@ -124,7 +134,7 @@ final class IntegralToString {
       buf[--cursor] = DIGITS[r];
       i = q;
     }
-    if (i < 0) {
+    if (negative) {
       buf[--cursor] = '-';
     }
     sb.append0(buf, cursor, bufLen - cursor);
