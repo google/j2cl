@@ -351,6 +351,18 @@ NS_INLINE NSString* NewObjCName_get_STRING(void) {
  return NewObjCNameCompanion.shared.STRING_;
 }
 
+NS_INLINE NewObjCName* create_NewObjCName_init(void) {
+ return [[NewObjCName alloc] init];
+}
+
+NS_INLINE NewObjCName* create_NewObjCName_initWithInteger_(jint i) {
+ return [[NewObjCName alloc] initWithInteger:i];
+}
+
+NS_INLINE NewObjCName* create_NewObjCName_initWithInt_withNSString_(jint i, NSString* _Nullable s) {
+ return [[NewObjCName alloc] initWithInt:i withNSString:s];
+}
+
 NS_INLINE void NewObjCName_newFoo(void) {
  [NewObjCNameCompanion.shared doNewFoo];
 }

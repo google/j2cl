@@ -6,6 +6,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_INLINE VarargsVarargs* create_VarargsVarargs_init(void) {
+ return [[VarargsVarargs alloc] init];
+}
+
 NS_INLINE void VarargsVarargs_barWithId_withId_(id a, id b) {
  [VarargsVarargsCompanion.shared barWithId:a withId:b];
 }

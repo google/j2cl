@@ -80,6 +80,7 @@ import com.google.j2cl.transpiler.backend.kotlin.source.emptyLineSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotEmpty
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.inRoundBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.inSquareBrackets
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.plusNewLine
 import com.google.j2cl.transpiler.backend.kotlin.source.source
@@ -224,8 +225,8 @@ private val Method.methodFunctionRenderer: Renderer<Source>
 private val MethodDescriptor.shouldRender: Boolean
   get() =
     visibility.isPublic &&
-      isStatic &&
-      !isConstructor &&
+      // Don't render constructors for inner-classes, because they have implicit `outer` parameter.
+      (isStatic || (isConstructor && !enclosingTypeDescriptor.typeDeclaration.isKtInner)) &&
       returnTypeDescriptor.shouldRender &&
       parameterTypeDescriptors.all { it.shouldRender }
 
@@ -262,18 +263,21 @@ private fun Method.functionRenderer(objCNames: MethodObjCNames): Renderer<Source
     returnType = descriptor.returnTypeDescriptor.objCRenderer,
     name = descriptor.functionName(objCNames),
     parameters = parameters.map { it.renderer },
-    statements = statementRenderers(objCNames.escapeObjCMethod)
+    statements = statementRenderers(objCNames.escapeObjCMethod(isConstructor))
   )
 
 private fun MethodDescriptor.functionName(objCNames: MethodObjCNames): String =
   enclosingTypeDescriptor
     .objCName(useId = true, forMember = true)
+    .letIf(isConstructor) { "create_$it" }
     .plus("_")
     .plus(objCNames.methodName)
     .letIf(objCNames.parameterNames.isNotEmpty()) { parameterName ->
       parameterName.plus(
         objCNames.parameterNames
-          .mapIndexed { index, name -> name.letIf(index == 0) { it.titleCase } + "_" }
+          .mapIndexed { index, name ->
+            name.letIf(index == 0) { it.titleCase.letIf(isConstructor) { "With$it" } }.plus("_")
+          }
           .joinToString("")
       )
     }
@@ -285,10 +289,15 @@ private fun Method.statementRenderers(objCNames: MethodObjCNames): List<Renderer
 
 private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Source> =
   methodCall(
-    target = descriptor.enclosingTypeDescriptor.typeDeclaration.companionSharedRenderer,
+    target = methodCallTargetRenderer,
     name = objCNames.objCSelector,
     arguments = parameters.map { it.nameRenderer }
   )
+
+private val Method.methodCallTargetRenderer: Renderer<Source>
+  get() =
+    if (isConstructor) descriptor.enclosingTypeDescriptor.typeDeclaration.allocRenderer
+    else descriptor.enclosingTypeDescriptor.typeDeclaration.companionSharedRenderer
 
 private val MethodObjCNames.objCSelector: String
   get() =
@@ -312,6 +321,9 @@ private val TypeDeclaration.objCCompanionNameRenderer: Renderer<Source>
 
 private val TypeDeclaration.companionSharedRenderer: Renderer<Source>
   get() = getProperty(objCCompanionNameRenderer, "shared")
+
+private val TypeDeclaration.allocRenderer: Renderer<Source>
+  get() = objCNameRenderer.map { inSquareBrackets(spaceSeparated(it, source("alloc"))) }
 
 private val TypeDeclaration.objCNameRenderer: Renderer<Source>
   get() = objectiveCNameRenderer ?: mappedObjCNameRenderer ?: defaultObjCNameRenderer

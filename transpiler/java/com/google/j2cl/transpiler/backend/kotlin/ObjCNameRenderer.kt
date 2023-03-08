@@ -129,7 +129,7 @@ private val Visibility.needsObjCNameAnnotation
 private fun Method.toConstructorObjCNames(): MethodObjCNames =
   descriptor.objectiveCName.let { objectiveCName ->
     MethodObjCNames(
-      objectiveCName ?: "init",
+      "init",
       if (objectiveCName != null) {
         objectiveCName.objCMethodParameterNames.mapFirst {
           val prefix = "initWith"
