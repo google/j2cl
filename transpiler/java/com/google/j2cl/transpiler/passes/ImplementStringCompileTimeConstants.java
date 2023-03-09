@@ -21,15 +21,19 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -86,8 +90,7 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
 
     String holderName = "string_" + createSnippet(value);
     MethodDescriptor getLiteralMethod =
-        type.synthesizeLazilyInitializedField(
-            holderName, RuntimeMethods.createStringFromJsStringMethodCall(stringLiteral));
+        type.synthesizeLazilyInitializedField(holderName, synthesizeStringCreation(stringLiteral));
 
     literalMethodByString.put(value, getLiteralMethod);
 
@@ -107,5 +110,26 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
     } else {
       return String.format("|%s|", prefix);
     }
+  }
+
+  /**
+   * Converts the StringLiteral into a call to the runtime to initialize create a String from a char
+   * array.
+   */
+  private static Expression synthesizeStringCreation(StringLiteral stringLiteral) {
+    ArrayTypeDescriptor charArrayDescriptor =
+        ArrayTypeDescriptor.newBuilder().setComponentTypeDescriptor(PrimitiveTypes.CHAR).build();
+    MethodDescriptor fromInternalArray =
+        TypeDescriptors.get()
+            .javaLangString
+            .getMethodDescriptor("fromInternalArray", charArrayDescriptor);
+    if (fromInternalArray != null) {
+      // TODO(b/272381112): Remove after non-stringref experiment.
+      // This is the non-stringref j.l.String.
+      return MethodCall.Builder.from(fromInternalArray)
+          .setArguments(new ArrayLiteral(charArrayDescriptor, stringLiteral.toCharLiterals()))
+          .build();
+    }
+    return RuntimeMethods.createStringFromJsStringMethodCall(stringLiteral);
   }
 }

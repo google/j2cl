@@ -68,20 +68,41 @@ package_sources(
     srcs = BASE_JRE_SRCS,
 )
 
+WASM_EXCLUDED_SRCS = [
+    "java/util/InternalHashCodeMap.java",  # J2WASM HashMap doesn't need it.
+    "java/util/InternalJsMap.java",  # J2WASM HashMap doesn't need it.
+    "java/util/InternalStringMap.java",  # J2WASM HashMap doesn't need it.
+    "java/util/AbstractHashMap.java",  # J2WASM HashMap doesn't need it.
+    "javaemul/internal/Casts.java",  # J2WASM doesn't need it.
+    "javaemul/internal/ArrayStamper.java",  # Unused in WASM
+    "javaemul/internal/Comparables.java",  # Unused in WASM
+    "javaemul/internal/Objects.java",  # Unused in WASM
+]
+
 package_sources(
     name = "jre_java_files-j2wasm",
     srcs = BASE_JRE_SRCS,
-    excludes = [
-        "java/util/InternalHashCodeMap.java",  # J2WASM HashMap doesn't need it.
-        "java/util/InternalJsMap.java",  # J2WASM HashMap doesn't need it.
-        "java/util/InternalStringMap.java",  # J2WASM HashMap doesn't need it.
-        "java/util/AbstractHashMap.java",  # J2WASM HashMap doesn't need it.
-        "javaemul/internal/Casts.java",  # J2WASM doesn't need it.
-        "javaemul/internal/ArrayStamper.java",  # Unused in WASM
-        "javaemul/internal/Comparables.java",  # Unused in WASM
-        "javaemul/internal/Objects.java",  # Unused in WASM
-    ],
+    excludes = WASM_EXCLUDED_SRCS,
     super_srcs = glob(["super-wasm/**/*.java"]),
+)
+
+package_sources(
+    name = "jre_java_files-alt-j2wasm",
+    srcs = BASE_JRE_SRCS,
+    excludes = WASM_EXCLUDED_SRCS,
+    super_srcs = glob(
+        [
+            "super-wasm/**/*.java",
+            "super-wasm-alt/**/*.java",
+        ],
+        exclude = [
+            # We provide alternative implementation for following sources.
+            "super-wasm/java/lang/AbstractStringBuilder.java",
+            "super-wasm/java/lang/CaseMapper.java",
+            "super-wasm/java/lang/IntegralToString.java",
+            "super-wasm/java/lang/String.java",
+        ],
+    ),
 )
 
 filegroup(

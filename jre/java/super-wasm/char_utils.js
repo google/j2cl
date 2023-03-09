@@ -47,9 +47,19 @@ function charToUpperCase(value) {
   return String.fromCharCode(value).toUpperCase().charCodeAt(0);
 }
 
+// TODO(b/272381112): Remove after non-stringref experiment.
+/**
+ * @param {number} value
+ * @return {number}
+ */
+function charFoldCase(value) {
+  return String.fromCharCode(value).toUpperCase().toLowerCase().charCodeAt(0);
+}
+
 exports = {
   codePointToLowerCase,
   codePointToUpperCase,
   charToLowerCase,
   charToUpperCase,
+  charFoldCase,
 };

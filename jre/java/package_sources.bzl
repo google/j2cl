@@ -2,19 +2,15 @@
 Creates a well formed srcjar from sources (i.e. properly rooted according to packages).
 """
 
-def _filter(srcs, excludes):
-    return [f for f in srcs if not any([f.path.endswith(x) for x in excludes])]
-
 def _impl(ctx):
     zip_tool = ctx.executable._zip
     src_jar = ctx.outputs.srcjar
-    super_excludes = [
-        x.label.name.replace("super-wasm/", "")
-        for x in ctx.attr.super_srcs
+    excludes = [
+        x.label.name.replace("super-wasm/", "").replace("super-wasm-alt/", "")
+        for x in (ctx.attr.super_srcs + ctx.attr.excludes)
     ]
-    all_srcs = _filter(ctx.files.srcs, super_excludes)
+    all_srcs = [f for f in ctx.files.srcs if not any([f.path.endswith(x) for x in excludes])]
     all_srcs += ctx.files.super_srcs
-    all_srcs = _filter(all_srcs, ctx.attr.excludes)
 
     ctx.actions.run_shell(
         inputs = all_srcs,
@@ -45,7 +41,7 @@ package_sources = rule(
     attrs = {
         "srcs": attr.label_list(mandatory = True, allow_files = [".java"]),
         "super_srcs": attr.label_list(allow_files = [".java"]),
-        "excludes": attr.string_list(),
+        "excludes": attr.label_list(allow_files = [".java"]),
         "_zip": attr.label(
             executable = True,
             cfg = "exec",
