@@ -207,7 +207,7 @@ public final class LibraryInfoBuilder {
 
     // The set of types that are explicitly referenced in this member; these come from
     // JavaScriptConstructorReferences that appear in the AST from type literals, casts,
-    // instanceofs and ALSO also the qualifier in every static member reference.
+    // instanceofs and also the qualifier in every static member reference.
     // References to static members already include the enclosing class, so in order to avoid
     // redundancy in library info these types are tracked separately and removed.
     Set<Integer> explicitlyReferencedTypes =
@@ -239,7 +239,7 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            // In Javascript a Class is statically referenced by using it's constructor function.
+            // In Javascript a Class is statically referenced by using its constructor function.
             explicitlyReferencedTypes.add(getTypeId(referencedType));
           }
 
@@ -356,7 +356,7 @@ public final class LibraryInfoBuilder {
             ? memberDescriptor.computePropertyMangledName()
             : memberDescriptor.getMangledName();
 
-    // Avoid unintented collisions by using the seperate namespace for static and non-static.
+    // Avoid unintended collisions by using the separate namespace for static and non-static.
     return memberDescriptor.isInstanceMember() ? mangledName + "_$i" : mangledName;
   }
 
