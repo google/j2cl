@@ -18,12 +18,14 @@ package j2ktobjcname;
 import com.google.j2objc.annotations.ObjectiveCName;
 
 public class ConstructorExample {
-  public class ObjCName {
+  public static class ObjCName {
     public ObjCName() {}
 
     @ObjectiveCName("ObjCNameConstructor")
     public ObjCName(int i) {}
 
     public ObjCName(int i, String s) {}
+
+    public ObjCName(int i, String s, Object id) {}
   }
 }

@@ -25,7 +25,7 @@ public class ConflictInterfaceExample {
     boolean add(T element);
   }
 
-  public class List<T> {
+  public static class List<T> {
     public boolean add(T element) {
       return true;
     }
@@ -33,5 +33,5 @@ public class ConflictInterfaceExample {
     public void forEachRemaining(Consumer<? super T> action) {}
   }
 
-  public class StringList extends List<String> implements Collection<String> {}
+  public static class StringList extends List<String> implements Collection<String> {}
 }

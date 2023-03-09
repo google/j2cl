@@ -19,9 +19,9 @@ import com.google.j2objc.annotations.ObjectiveCName;
 
 public class MethodExample {
 
-  public class Foo {}
+  public static class Foo {}
 
-  public class ObjCName {
+  public static class ObjCName {
 
     public void instanceMethod(int i) {}
 
@@ -29,7 +29,19 @@ public class MethodExample {
 
     public void instanceMethod(int i, long[][] l) {}
 
+    public void instanceMethod(int i, Object id) {}
+
     public void instanceMethod(Foo foo) {}
+
+    public static void staticMethod(int i) {}
+
+    public static void staticMethod(int i, long[] l) {}
+
+    public static void staticMethod(int i, long[][] l) {}
+
+    public static void staticMethod(int i, Object id) {}
+
+    public static void staticMethod(Foo foo) {}
 
     @ObjectiveCName("newFoo")
     public void foo() {}

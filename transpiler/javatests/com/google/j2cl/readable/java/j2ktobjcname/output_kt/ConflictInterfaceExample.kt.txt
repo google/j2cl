@@ -24,7 +24,7 @@ open class ConflictInterfaceExample {
  }
 
  @ObjCName("J2ktobjcnameConflictInterfaceExample_List", exact = true)
- open inner class List<T> {
+ open class List<T> {
   @ObjCName("add")
   open fun add(
    @ObjCName("withId") element: T
@@ -39,5 +39,5 @@ open class ConflictInterfaceExample {
  }
 
  @ObjCName("J2ktobjcnameConflictInterfaceExample_StringList", exact = true)
- open inner class StringList: ConflictInterfaceExample.List<String?>(), ConflictInterfaceExample.Collection<String?> {}
+ open class StringList: ConflictInterfaceExample.List<String?>(), ConflictInterfaceExample.Collection<String?> {}
 }

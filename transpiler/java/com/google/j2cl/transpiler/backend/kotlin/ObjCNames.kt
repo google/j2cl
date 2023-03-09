@@ -97,6 +97,7 @@ private val objCKeywords =
     "_Static_assert",
     "_Thread_local",
     // Not exactly keywords, but reserved or standard-defined.
+    "id",
     "and",
     "not",
     "or",

@@ -15,4 +15,10 @@ open class NestedClassesExample {
   @kotlin.native.ObjCName("InnerClassNewName", exact = true)
   open inner class InnerClassOldName {}
  }
+
+ @kotlin.native.ObjCName("NewObjCName", exact = true)
+ open class StaticObjCName {
+  @kotlin.native.ObjCName("StaticInnerClassNewName", exact = true)
+  open inner class InnerClassOldName {}
+ }
 }

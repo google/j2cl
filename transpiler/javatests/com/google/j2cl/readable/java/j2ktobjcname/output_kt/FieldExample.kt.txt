@@ -4,6 +4,7 @@
 package j2ktobjcname
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Int
 import kotlin.OptIn
 import kotlin.String
@@ -20,6 +21,10 @@ open class FieldExample {
  @JvmField
  @ObjCName("myString_")
  var myString: String? = null
+
+ @JvmField
+ @ObjCName("id___")
+ var id: Any? = null
 
  companion object {
   @ObjCName("MY_FINAL_INT_")

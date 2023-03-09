@@ -23,4 +23,5 @@ public class FieldExample {
 
   public int myInt;
   public String myString;
+  public Object id;
 }

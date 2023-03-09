@@ -4,6 +4,7 @@
 package j2ktobjcname
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Array
 import kotlin.Int
 import kotlin.LongArray
@@ -26,10 +27,10 @@ open class MethodExample {
  }
 
  @kotlin.native.ObjCName("J2ktobjcnameMethodExample_Foo", exact = true)
- open inner class Foo {}
+ open class Foo {}
 
  @kotlin.native.ObjCName("J2ktobjcnameMethodExample_ObjCName", exact = true)
- open inner class ObjCName {
+ open class ObjCName {
   @kotlin.native.ObjCName("instanceMethod")
   open fun instanceMethod(
    @kotlin.native.ObjCName("withInt") i: Int
@@ -49,6 +50,12 @@ open class MethodExample {
 
   @kotlin.native.ObjCName("instanceMethod")
   open fun instanceMethod(
+   @kotlin.native.ObjCName("withInt") i: Int,
+   @kotlin.native.ObjCName("withId") id: Any?
+  ) {}
+
+  @kotlin.native.ObjCName("instanceMethod")
+  open fun instanceMethod(
    @kotlin.native.ObjCName("withJ2ktobjcnameMethodExample_Foo") foo: MethodExample.Foo?
   ) {}
 
@@ -57,5 +64,40 @@ open class MethodExample {
 
   @kotlin.native.ObjCName("newProtectedFoo")
   open fun protectedFoo() {}
+
+  companion object {
+   @JvmStatic
+   @kotlin.native.ObjCName("staticMethod")
+   fun staticMethod(
+    @kotlin.native.ObjCName("withInt") i: Int
+   ) {}
+
+   @JvmStatic
+   @kotlin.native.ObjCName("staticMethod")
+   fun staticMethod(
+    @kotlin.native.ObjCName("withInt") i: Int,
+    @kotlin.native.ObjCName("withLongArray") l: LongArray?
+   ) {}
+
+   @JvmStatic
+   @kotlin.native.ObjCName("staticMethod")
+   fun staticMethod(
+    @kotlin.native.ObjCName("withInt") i: Int,
+    @kotlin.native.ObjCName("withLongArray2") l: Array<LongArray?>?
+   ) {}
+
+   @JvmStatic
+   @kotlin.native.ObjCName("staticMethod")
+   fun staticMethod(
+    @kotlin.native.ObjCName("withInt") i: Int,
+    @kotlin.native.ObjCName("withId") id: Any?
+   ) {}
+
+   @JvmStatic
+   @kotlin.native.ObjCName("staticMethod")
+   fun staticMethod(
+    @kotlin.native.ObjCName("withJ2ktobjcnameMethodExample_Foo") foo: MethodExample.Foo?
+   ) {}
+  }
  }
 }
