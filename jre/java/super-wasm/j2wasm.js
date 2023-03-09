@@ -148,7 +148,7 @@ function createImportObject(userImports) {
     'j2wasm.RegExpUtils.getIndex': RegExpUtils.getIndex,
 
     // TODO(b/193532287): These will be removed after Array interop support in
-    // WASM is implemented.
+    // Wasm is implemented.
     'j2wasm.ArrayUtils.createBuffer': ArrayUtils.createBuffer,
     'j2wasm.ArrayUtils.setBufferAt': ArrayUtils.setBufferAt,
     'j2wasm.ArrayUtils.getBufferAt': ArrayUtils.getBufferAt,

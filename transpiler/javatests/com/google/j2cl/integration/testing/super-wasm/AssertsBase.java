@@ -19,7 +19,7 @@ import com.google.j2cl.integration.testing.Asserts.JsRunnable;
 
 /**
  * Re-implement assertThrows methods as no-op operations because J2WASM does not have proper
- * exception emulation. This will allow us to enable some integration tests for WASM that uses these
+ * exception emulation. This will allow us to enable some integration tests for Wasm that uses these
  * methods without modifying them directly.
  */
 // TODO(b/170691676): Get rid of this class when proper exception support is implemented by J2WASM.

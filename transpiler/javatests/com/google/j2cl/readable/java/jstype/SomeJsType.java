@@ -49,7 +49,7 @@ public class SomeJsType<T> {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   interface Wildcard {}
 
-  @Wasm("nop") // TODO(b/262009761): Casts between Object and JsTypes not supported in WASM.
+  @Wasm("nop") // TODO(b/262009761): Casts between Object and JsTypes not supported in Wasm.
   private Wildcard testStarAndWildCard(Star s, Wildcard w) {
     Object object = new Object();
 

@@ -21,7 +21,7 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 
-/** Generates a JavaScript imports mapping for the WASM module. */
+/** Generates a JavaScript imports mapping for the Wasm module. */
 final class JsImportsGenerator {
 
   /** Top-level module name in the imports map containing all generated imports. */
@@ -29,7 +29,7 @@ final class JsImportsGenerator {
 
   /**
    * Gets the name of the JS import for the specified JS method. This is suitable for referencing
-   * the function in WASM.
+   * the function in Wasm.
    */
   public static String getJsImportName(MethodDescriptor methodDescriptor) {
     String qualifiedJsName = methodDescriptor.getQualifiedJsName();
@@ -73,7 +73,7 @@ final class JsImportsGenerator {
 
   private void emitJsImports() {
     builder.newLine();
-    builder.append("/** @return {!Object<!Object>} WASM import object */");
+    builder.append("/** @return {!Object<!Object>} Wasm import object */");
     builder.newLine();
     builder.append("function getImports() ");
     builder.openBrace();

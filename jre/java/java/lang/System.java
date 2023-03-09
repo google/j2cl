@@ -133,11 +133,11 @@ public final class System {
   public static void gc() {
   }
 
-  @Wasm("nop") // Calls are replaced by a pass for WASM.
+  @Wasm("nop") // Calls are replaced by a pass for Wasm.
   @JsMethod(name = "$getDefine", namespace = "nativebootstrap.Util")
   public static native String getProperty(String key);
 
-  @Wasm("nop") // Calls are replaced by a pass for WASM.
+  @Wasm("nop") // Calls are replaced by a pass for Wasm.
   @JsMethod(name = "$getDefine", namespace = "nativebootstrap.Util")
   public static native String getProperty(String key, String def);
 

@@ -98,7 +98,7 @@ public class Main {
 
   @SuppressWarnings("cast")
   private static void testInstanceOf_array() {
-    // TODO(b/184675805): Enable for WASM when array metadata is fully implemented.
+    // TODO(b/184675805): Enable for Wasm when array metadata is fully implemented.
     if (isWasm()) {
       return;
     }

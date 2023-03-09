@@ -96,7 +96,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void exitField(Field field) {
             verifyMemberUniqueness(field);
             if (verifyForWasm) {
-              // This is only running for WASM due to the transformations in Closure that result in
+              // This is only running for Wasm due to the transformations in Closure that result in
               // primitive long initializers to be method calls to the runtime.
               checkState(
                   field.getInitializer() == null || field.getInitializer().isCompileTimeConstant());

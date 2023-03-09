@@ -23,7 +23,7 @@ import jsinterop.annotations.JsMethod;
  * A common base abstraction for the arrays in Wasm.
  *
  * <p>NOTE: All arrays declared as fields, parameters, etc in the subclasses of WasmArray will be
- * considered native WASM arrays, whereas all arrays declared in the WasmArray class itself will be
+ * considered native Wasm arrays, whereas all arrays declared in the WasmArray class itself will be
  * rewritten to be instances of one of the subclasses.
  */
 abstract class WasmArray implements Serializable, Cloneable {

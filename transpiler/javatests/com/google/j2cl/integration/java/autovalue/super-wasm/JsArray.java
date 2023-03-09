@@ -16,7 +16,7 @@
 package autovalue;
 
 /**
- * Placeholder for WASM. WASM does not yet support using native types in {@code AutoValue}. {@code
+ * Placeholder for Wasm. Wasm does not yet support using native types in {@code AutoValue}. {@code
  * AutoValue} relies on functionality such as {@link Object.equals} which are not available yet on
  * JS objects.
  */

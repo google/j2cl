@@ -30,7 +30,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 /**
  * Extracts non-idempotent expressions into local variables to avoid double evaluation.
  *
- * <p>WASM does not provide a good alternative solution that could be used at generation time, e.g.
+ * <p>Wasm does not provide a good alternative solution that could be used at generation time, e.g.
  * a 'dup' instruction which would allow duplicating a value in the stack.
  */
 public class ExtractNonIdempotentExpressions extends NormalizationPass {

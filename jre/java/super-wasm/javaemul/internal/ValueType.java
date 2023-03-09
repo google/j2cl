@@ -16,7 +16,7 @@
 package javaemul.internal;
 
 /**
- * Placeholder for WASM. Allows {@code TypeDescriptors.javaemulInternalValueType} to be populated
+ * Placeholder for Wasm. Allows {@code TypeDescriptors.javaemulInternalValueType} to be populated
  * without being used.
  */
 // TODO(b/257574608): Remove this branch after per-backend well-known-types are supported.

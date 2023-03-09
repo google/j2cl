@@ -14,6 +14,6 @@ integration_test(
     # Contains JsInterop features which are only applicable for JS output.
     enable_jvm_test = False,
     enable_kt = False,
-    # TODO(b/264466634): WASM can be enabled after generating imports.
+    # TODO(b/264466634): Wasm can be enabled after generating imports.
     enable_wasm = False,
 )

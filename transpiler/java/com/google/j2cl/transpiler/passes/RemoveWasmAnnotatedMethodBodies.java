@@ -23,7 +23,7 @@ import com.google.j2cl.transpiler.ast.Node;
 
 /**
  * Makes the bodies of {@code @Wasm}-annotated methods empty. Methods annotated with {@code Wasm}
- * are not transpiled into the module. Instead, callers invoke the specified WASM function.
+ * are not transpiled into the module. Instead, callers invoke the specified Wasm function.
  */
 public final class RemoveWasmAnnotatedMethodBodies extends NormalizationPass {
 

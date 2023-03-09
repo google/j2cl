@@ -174,7 +174,7 @@ public class Primitives {
   public static native float narrowDoubleToFloat(double instance);
 
   public static int safeDivision(int dividend, int divisor) {
-    // Division may trap with overflow in WASM division; special case the overflow scenario.
+    // Division may trap with overflow in Wasm division; special case the overflow scenario.
     if (dividend == Integer.MIN_VALUE && divisor == -1) {
       return Integer.MIN_VALUE;
     }
@@ -185,7 +185,7 @@ public class Primitives {
   private static native int wasmDivision(int dividend, int divisor);
 
   public static long safeDivision(long dividend, long divisor) {
-    // Division may trap with overflow in WASM division; special case the overflow scenario.
+    // Division may trap with overflow in Wasm division; special case the overflow scenario.
     if (dividend == Long.MIN_VALUE && divisor == -1L) {
       return Long.MIN_VALUE;
     }

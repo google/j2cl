@@ -279,7 +279,7 @@ public abstract class MemberDescriptor
   public abstract String getMangledName();
 
   // TODO(b/178738483): This is a temporary hack to be able to reuse bridging logic in Closure
-  // and WASM.
+  // and Wasm.
   private static final ThreadLocal<Boolean> useWasmManglingPatterns =
       ThreadLocal.withInitial(() -> false);
 

@@ -69,9 +69,9 @@ class J2clTranspiler {
     if (options.getBackend() == Backend.WASM) {
       // TODO(b/178738483): Remove hack that makes mangling backend dependent.
       MemberDescriptor.setWasmManglingPatterns();
-      // TODO(b/181615162): Remove hack that makes it possible to ignore JsEnum in WASM.
+      // TODO(b/181615162): Remove hack that makes it possible to ignore JsEnum in Wasm.
       TypeDeclaration.setIgnoreJsEnumAnnotations();
-      // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in WASM.
+      // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in Wasm.
       MethodDescriptor.ParameterDescriptor.setIgnoreDoNotAutoboxAnnotations();
     }
     Library library = options.getFrontend().getLibrary(options, problems);

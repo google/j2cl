@@ -64,7 +64,7 @@ def readable_example(
         # TODO(b/217479735): Kotlin sources don't currently generate useful source maps
         readable_source_maps = False
 
-        # WASM is currently not planned for Kotlin Frontend.
+        # Wasm is currently not planned for Kotlin Frontend.
         generate_wasm_readables = False
 
     build_kt_native_readables = generate_kt_readables and build_kt_readables and build_kt_native_readables

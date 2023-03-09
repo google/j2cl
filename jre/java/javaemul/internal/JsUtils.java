@@ -26,21 +26,21 @@ import jsinterop.annotations.JsPackage;
 public final class JsUtils {
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "typeof")
-  @Wasm("nop") // Unused in WASM.
+  @Wasm("nop") // Unused in Wasm.
   public static native String typeOf(Object obj);
 
   @JsMethod
-  @Wasm("nop") // Unused in WASM.
+  @Wasm("nop") // Unused in Wasm.
   public static native boolean isUndefined(Object value);
 
   @JsMethod
   @UncheckedCast
-  @Wasm("nop") // Unused in WASM.
+  @Wasm("nop") // Unused in Wasm.
   public static native <T> T uncheckedCast(@DoNotAutobox Object o);
 
   @JsMethod
   @UncheckedCast
-  @Wasm("nop") // Unused in WASM.
+  @Wasm("nop") // Unused in Wasm.
   public static native <T> T getProperty(Object map, String key);
 
   private JsUtils() {}

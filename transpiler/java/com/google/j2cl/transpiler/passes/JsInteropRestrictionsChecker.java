@@ -1088,7 +1088,7 @@ public class JsInteropRestrictionsChecker {
       }
       problems.error(
           method.getSourcePosition(),
-          "Native method '%s' is not supported in WASM backend",
+          "Native method '%s' is not supported in Wasm backend",
           methodDescriptor.getReadableDescription());
       return;
     }
@@ -1288,7 +1288,7 @@ public class JsInteropRestrictionsChecker {
       if (!type.isInterface() && !isWasmNativeAllowed(typeDeclaration.getQualifiedBinaryName())) {
         problems.error(
             type.getSourcePosition(),
-            "Native type '%s' is not supported in WASM backend",
+            "Native type '%s' is not supported in Wasm backend",
             readableDescription);
       }
       return false;
