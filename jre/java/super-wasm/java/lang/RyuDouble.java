@@ -35,7 +35,8 @@ final class RyuDouble {
   private static final int POW5_INV_QUARTER_BITCOUNT = 31;
   private static final int[][] POW5_INV_SPLIT = new int[NEG_TABLE_SIZE][4];
 
-  private static final char[] BUFFER = new char[24];
+  private static final int BUFFER_SIZE = 24;
+  private static final char[] BUFFER = new char[BUFFER_SIZE];
 
   static {
     BigInteger mask =
@@ -235,7 +236,7 @@ final class RyuDouble {
 
     // Step 5: Print the decimal representation.
     // We follow Double.toString semantics here.
-    char[] result = BUFFER;
+    char[] result = (String.STRINGREF_ENABLED || sb != null) ? BUFFER : new char[BUFFER_SIZE];
     int index = 0;
     if (sign) {
       result[index++] = '-';
@@ -312,7 +313,7 @@ final class RyuDouble {
       }
     }
     if (sb == null) {
-      return new String(result, 0, index);
+      return new String(0, index, result);
     }
     sb.append0(result, 0, index);
     return null;

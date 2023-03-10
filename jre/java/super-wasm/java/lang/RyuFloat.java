@@ -48,7 +48,8 @@ final class RyuFloat {
   private static final int POW5_INV_HALF_BITCOUNT = 31;
   private static final int[][] POW5_INV_SPLIT = new int[INV_TABLE_SIZE][2];
 
-  private static final char[] BUFFER = new char[15];
+  private static final int BUFFER_SIZE = 15;
+  private static final char[] BUFFER = new char[BUFFER_SIZE];
 
   static {
     BigInteger mask = BigInteger.valueOf(1).shiftLeft(POW5_HALF_BITCOUNT).subtract(BigInteger.ONE);
@@ -222,7 +223,8 @@ final class RyuFloat {
 
     // Step 5: Print the decimal representation.
     // We follow Float.toString semantics here.
-    char[] result = BUFFER;
+    // TODO: do not regress stringref version!
+    char[] result = (String.STRINGREF_ENABLED || sb != null) ? BUFFER : new char[BUFFER_SIZE];
     int index = 0;
     if (sign) {
       result[index++] = '-';
@@ -294,7 +296,7 @@ final class RyuFloat {
       }
     }
     if (sb == null) {
-      return new String(result, 0, index);
+      return new String(0, index, result);
     }
     sb.append0(result, 0, index);
     return null;

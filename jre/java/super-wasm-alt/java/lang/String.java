@@ -45,6 +45,9 @@ import jsinterop.annotations.JsType;
  */
 public final class String implements Serializable, Comparable<String>, CharSequence {
 
+  // TODO(b/272381112): Remove after non-stringref experiment.
+  public static final boolean STRINGREF_ENABLED = false;
+
   private static final char REPLACEMENT_CHAR = (char) 0xfffd;
 
   private static final class CaseInsensitiveComparator implements Comparator<String>, Serializable {

@@ -41,6 +41,10 @@ import jsinterop.annotations.JsType;
 
 /** Intrinsic string class. */
 public final class String implements Comparable<String>, CharSequence, Serializable {
+
+  // TODO(b/272381112): Remove after non-stringref experiment.
+  public static final boolean STRINGREF_ENABLED = true;
+
   /* TODO(jat): consider whether we want to support the following methods;
    *
    * <ul>
@@ -247,6 +251,13 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public String(char[] x, int offset, int count) {
+    int end = offset + count;
+    checkStringBounds(offset, end, x.length);
+    this.value = nativeFromCharCodeArray(x, offset, end);
+  }
+
+  // TODO(b/272381112): Remove after non-stringref experiment.
+  String(int offset, int count, char[] x) {
     int end = offset + count;
     checkStringBounds(offset, end, x.length);
     this.value = nativeFromCharCodeArray(x, offset, end);

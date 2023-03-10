@@ -20,39 +20,42 @@ import jsinterop.annotations.JsPackage;
 
 final class RealToString {
 
-  private static final boolean STRICT = getProperty("jre.strictFpToString").equals("ENABLED");
+  private static final boolean JS_TOSTRING =
+      String.STRINGREF_ENABLED && getProperty("jre.strictFpToString").equals("DISABLED");
 
   private RealToString() {}
 
   public static String doubleToString(double d) {
-    if (STRICT) {
-      return RyuDouble.doubleToString(null, d);
+    if (JS_TOSTRING) {
+      return fromNumber(d);
     }
-    return fromNumber(d);
+    return RyuDouble.doubleToString(null, d);
   }
 
   public static void appendDouble(AbstractStringBuilder sb, double d) {
-    if (STRICT) {
-      var unused = RyuDouble.doubleToString(sb, d);
+    if (JS_TOSTRING) {
+      sb.append0(fromNumber(d));
+      return;
     }
-    sb.append0(fromNumber(d));
+    var unused = RyuDouble.doubleToString(sb, d);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Number.prototype.toString.call")
   private static native String fromNumber(double d);
 
   public static String floatToString(float f) {
-    if (STRICT) {
-    return RyuFloat.floatToString(null, f);
+    if (JS_TOSTRING) {
+      return fromNumber(f);
     }
-    return fromNumber(f);
+    return RyuFloat.floatToString(null, f);
   }
 
   public static void appendFloat(AbstractStringBuilder sb, float f) {
-    if (STRICT) {
-      var unused = RyuFloat.floatToString(sb, f);
+    if (JS_TOSTRING) {
+      sb.append0(fromNumber(f));
+      return;
     }
-    sb.append0(fromNumber(f));
+    var unused = RyuFloat.floatToString(sb, f);
   }
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "Number.prototype.toString.call")
