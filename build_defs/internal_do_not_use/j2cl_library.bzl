@@ -67,6 +67,7 @@ _J2KT_NATIVE_PACKAGES = [
     "third_party/java/checker_framework_annotations",
     "third_party/java/error_prone",
     "third_party/java/j2objc",
+    "third_party/java/joda_time",
     "third_party/java/jsr330_inject",
     "third_party/java/junit",
 ]
