@@ -1,7 +1,6 @@
 # Description:
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
-load(":kotlin_allowlist.bzl", "KOTLIN_ALLOWED_PACKAGES")
 load(":j2cl_library.bzl", "j2cl_library")
 
 package(
@@ -42,9 +41,11 @@ alias(
     visibility = ["//build_defs/internal_do_not_use:kotlin_allowlist"],
 )
 
+# WARNING: Don't increase the visibility without talking to Kotlin team.
 package_group(
     name = "kotlin_allowlist",
-    packages = ["//%s/..." % p for p in KOTLIN_ALLOWED_PACKAGES],
+    packages = [
+    ],
 )
 
 # ***************************************************

@@ -33,7 +33,6 @@ load(":j2kt_common.bzl", "j2kt_common")
 load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_jvm_library", "j2kt_native_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
-load(":kotlin_allowlist.bzl", "KOTLIN_ALLOWED_PACKAGES")
 
 # Packages that j2cl rule will generage j2kt jvm packages by default. Used to simplify test
 # rules.
@@ -126,15 +125,17 @@ def j2cl_library(
         jre = Label("//:jre")
         args["deps"] = args.get("deps", []) + [jre]
 
-    # TODO(b/217287994): Replace with more traditional allow-listing.
-    kotlin_allowed = any([p for p in KOTLIN_ALLOWED_PACKAGES if native.package_name().startswith(p)])
-    if kotlin_allowed:
+    # TODO(b/259727254): This doesn't cover all scenarios.
+    has_kotlin_srcs = args.get("kt_common_srcs") or (
+        args.get("srcs") and any([s for s in args.get("srcs") if s.endswith(".kt")])
+    )
+    if has_kotlin_srcs:
+        # TODO(b/217287994): Replace with more traditional allow-listing.
         args["j2cl_transpiler_override"] = (
             "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKolinSupport"
         )
 
-        # TODO(b/259727254): Only add the kotlin stdlib as a dep if the inputs contain kotlin.
-        if (args.get("srcs") or args.get("kt_common_srcs")) and target_name != "//ktstdlib:j2cl_kt_stdlib":
+        if target_name != "//ktstdlib:j2cl_kt_stdlib":
             kt_stdlib_lib = Label("//build_defs/internal_do_not_use:kotlin_stdlib")
             args["deps"] = args.get("deps", []) + [kt_stdlib_lib]
 
