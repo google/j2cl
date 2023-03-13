@@ -186,15 +186,17 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public int compareTo(String string) {
-    int o1 = offset, o2 = string.offset, result;
-    int end = offset + (count < string.count ? count : string.count);
-    char c1, c2;
-    char[] target = string.value;
+    if (this == string) {
+      return 0;
+    }
+    int o1 = offset, o2 = string.offset;
+    int end = offset + Math.min(count, string.count);
+    char[] otherArray = string.value;
     while (o1 < end) {
-      if ((c1 = value[o1++]) == (c2 = target[o2++])) {
-        continue;
-      }
-      if ((result = c1 - c2) != 0) {
+      char c1 = value[o1++];
+      char c2 = otherArray[o2++];
+      int result = c1 - c2;
+      if (result != 0) {
         return result;
       }
     }
@@ -202,8 +204,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public int compareToIgnoreCase(String string) {
+    if (this == string) {
+      return 0;
+    }
     int o1 = offset, o2 = string.offset;
-    int end = offset + (count < string.count ? count : string.count);
+    int end = offset + Math.min(count, string.count);
     char[] target = string.value;
     while (o1 < end) {
       char c1 = value[o1++];
