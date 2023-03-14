@@ -17,6 +17,7 @@
 package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
+import static javaemul.internal.InternalPreconditions.checkNotNull;
 import static javaemul.internal.InternalPreconditions.checkStringBounds;
 import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
 
@@ -151,10 +152,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   public String(StringBuffer stringBuffer) {
     offset = 0;
-    synchronized (stringBuffer) {
-      value = stringBuffer.shareValue();
-      count = stringBuffer.length();
-    }
+    value = stringBuffer.shareValue();
+    count = stringBuffer.length();
   }
 
   public String(int[] codePoints, int offset, int count) {
@@ -171,9 +170,6 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public String(StringBuilder stringBuilder) {
-    if (stringBuilder == null) {
-      throw new NullPointerException("stringBuilder == null");
-    }
     this.offset = 0;
     this.count = stringBuilder.length();
     this.value = new char[this.count];
@@ -568,9 +564,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public boolean regionMatches(int thisStart, String string, int start, int length) {
-    if (string == null) {
-      throw new NullPointerException("string == null");
-    }
+    checkNotNull(string);
     if (start < 0 || string.count - start < length) {
       return false;
     }
@@ -593,11 +587,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   public boolean regionMatches(
       boolean ignoreCase, int thisStart, String string, int start, int length) {
+    checkNotNull(string);
     if (!ignoreCase) {
       return regionMatches(thisStart, string, start, length);
-    }
-    if (string == null) {
-      throw new NullPointerException("string == null");
     }
     if (thisStart < 0 || length > count - thisStart) {
       return false;
@@ -644,12 +636,6 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public String replace(CharSequence target, CharSequence replacement) {
-    if (target == null) {
-      throw new NullPointerException("target == null");
-    }
-    if (replacement == null) {
-      throw new NullPointerException("replacement == null");
-    }
     String targetString = target.toString();
     int matchStart = indexOf(targetString, 0);
     if (matchStart == -1) {
@@ -840,19 +826,14 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public boolean contentEquals(StringBuffer strbuf) {
-    synchronized (strbuf) {
-      int size = strbuf.length();
-      if (count != size) {
-        return false;
-      }
-      return regionMatches(0, new String(0, size, strbuf.getValue()), 0, size);
+    int size = strbuf.length();
+    if (count != size) {
+      return false;
     }
+    return regionMatches(0, new String(0, size, strbuf.getValue()), 0, size);
   }
 
   public boolean contentEquals(CharSequence cs) {
-    if (cs == null) {
-      throw new NullPointerException("cs == null");
-    }
     int len = cs.length();
     if (len != count) {
       return false;
@@ -979,9 +960,6 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public boolean contains(CharSequence cs) {
-    if (cs == null) {
-      throw new NullPointerException("cs == null");
-    }
     return indexOf(cs.toString()) >= 0;
   }
 
