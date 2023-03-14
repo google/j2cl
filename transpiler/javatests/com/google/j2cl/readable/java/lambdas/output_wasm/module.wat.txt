@@ -76,6 +76,16 @@
   )
  )
 
+ ;;; Code for lambdas.Lambdas.Thenable.$Overlay [type definition]
+ (type $lambdas.Lambdas.Thenable.$Overlay.vtable (struct 
+  )
+ )
+
+ ;;; Code for lambdas.Lambdas.AnotherThenable.$Overlay [type definition]
+ (type $lambdas.Lambdas.AnotherThenable.$Overlay.vtable (struct 
+  )
+ )
+
  ;;; Code for lambdas.Lambdas [type definition]
  (type $lambdas.Lambdas (struct_subtype 
   (field $vtable (ref $lambdas.Lambdas.vtable)) 
@@ -1990,10 +2000,8 @@
 (global $f_$initialized__lambdas_Lambdas_GenericJsFunction (mut i32) (i32.const 0))
 
 ;;; Code for lambdas.Lambdas.Thenable [static fields]
-(global $f_$initialized__lambdas_Lambdas_Thenable (mut i32) (i32.const 0))
 
 ;;; Code for lambdas.Lambdas.AnotherThenable [static fields]
-(global $f_$initialized__lambdas_Lambdas_AnotherThenable (mut i32) (i32.const 0))
 
 ;;; Code for lambdas.Lambdas.IdentityFunction [static fields]
 (global $f_$initialized__lambdas_Lambdas_IdentityFunction (mut i32) (i32.const 0))
@@ -2012,6 +2020,12 @@
 
 ;;; Code for lambdas.Lambdas.MarkerWithDefaultMethod [static fields]
 (global $f_$initialized__lambdas_Lambdas_MarkerWithDefaultMethod (mut i32) (i32.const 0))
+
+;;; Code for lambdas.Lambdas.Thenable.$Overlay [static fields]
+(global $f_$initialized__lambdas_Lambdas_Thenable_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for lambdas.Lambdas.AnotherThenable.$Overlay [static fields]
+(global $f_$initialized__lambdas_Lambdas_AnotherThenable_$Overlay (mut i32) (i32.const 0))
 
 ;;; Code for lambdas.Lambdas.FunctionalInterface [methods]
 
@@ -2190,45 +2204,7 @@
 
 ;;; Code for lambdas.Lambdas.Thenable [methods]
 
-;;; void Thenable.$clinit()
-(func $$clinit__void@lambdas.Lambdas.Thenable
- ;;@ lambdas/Lambdas.java:226:19
- (block
-  ;; if (lambdas.Lambdas.Thenable.$initialized) return;
-  ;;@ lambdas/Lambdas.java:226:19
-  (if (global.get $f_$initialized__lambdas_Lambdas_Thenable)
-   (then
-    ;; return;
-    ;;@ lambdas/Lambdas.java:226:19
-    (return )
-   )
-  )
-  ;; (lambdas.Lambdas.Thenable.$initialized = true);
-  ;;@ lambdas/Lambdas.java:226:19
-  (global.set $f_$initialized__lambdas_Lambdas_Thenable (i32.const 1))
- )
-)
-
 ;;; Code for lambdas.Lambdas.AnotherThenable [methods]
-
-;;; void AnotherThenable.$clinit()
-(func $$clinit__void@lambdas.Lambdas.AnotherThenable
- ;;@ lambdas/Lambdas.java:233:19
- (block
-  ;; if (lambdas.Lambdas.AnotherThenable.$initialized) return;
-  ;;@ lambdas/Lambdas.java:233:19
-  (if (global.get $f_$initialized__lambdas_Lambdas_AnotherThenable)
-   (then
-    ;; return;
-    ;;@ lambdas/Lambdas.java:233:19
-    (return )
-   )
-  )
-  ;; (lambdas.Lambdas.AnotherThenable.$initialized = true);
-  ;;@ lambdas/Lambdas.java:233:19
-  (global.set $f_$initialized__lambdas_Lambdas_AnotherThenable (i32.const 1))
- )
-)
 
 ;;; Code for lambdas.Lambdas.Equals [methods]
 
@@ -2377,6 +2353,48 @@
   ;; (lambdas.Lambdas.MarkerWithDefaultMethod.$initialized = true);
   ;;@ lambdas/Lambdas.java:304:12
   (global.set $f_$initialized__lambdas_Lambdas_MarkerWithDefaultMethod (i32.const 1))
+ )
+)
+
+;;; Code for lambdas.Lambdas.Thenable.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@lambdas.Lambdas.Thenable.$Overlay
+ ;;@ lambdas/Lambdas.java:226:19
+ (block
+  ;; if (lambdas.Lambdas.Thenable.$Overlay.$initialized) return;
+  ;;@ lambdas/Lambdas.java:226:19
+  (if (global.get $f_$initialized__lambdas_Lambdas_Thenable_$Overlay)
+   (then
+    ;; return;
+    ;;@ lambdas/Lambdas.java:226:19
+    (return )
+   )
+  )
+  ;; (lambdas.Lambdas.Thenable.$Overlay.$initialized = true);
+  ;;@ lambdas/Lambdas.java:226:19
+  (global.set $f_$initialized__lambdas_Lambdas_Thenable_$Overlay (i32.const 1))
+ )
+)
+
+;;; Code for lambdas.Lambdas.AnotherThenable.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@lambdas.Lambdas.AnotherThenable.$Overlay
+ ;;@ lambdas/Lambdas.java:233:19
+ (block
+  ;; if (lambdas.Lambdas.AnotherThenable.$Overlay.$initialized) return;
+  ;;@ lambdas/Lambdas.java:233:19
+  (if (global.get $f_$initialized__lambdas_Lambdas_AnotherThenable_$Overlay)
+   (then
+    ;; return;
+    ;;@ lambdas/Lambdas.java:233:19
+    (return )
+   )
+  )
+  ;; (lambdas.Lambdas.AnotherThenable.$Overlay.$initialized = true);
+  ;;@ lambdas/Lambdas.java:233:19
+  (global.set $f_$initialized__lambdas_Lambdas_AnotherThenable_$Overlay (i32.const 1))
  )
 )
 

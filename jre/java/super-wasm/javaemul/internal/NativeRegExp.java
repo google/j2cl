@@ -19,7 +19,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
 /** Simple class to work with native js regular expressions. */
-// TODO(b/261078322,b/193532287) Remove super source when JsOverlay & arrays are supported.
+// TODO(b/264468253) Remove super source when JsProperty is supported.
 public class NativeRegExp {
   private final WasmExtern instance;
 

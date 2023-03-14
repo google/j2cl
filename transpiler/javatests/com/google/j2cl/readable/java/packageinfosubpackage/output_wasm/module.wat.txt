@@ -1,3 +1,23 @@
+ ;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [type definition]
+ (type $packageinfosubpackage.Foo.NativeBar.$Overlay (struct 
+  (field $vtable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable)) 
+  (field $itable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.itable))
+  )
+ )
+ (type $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $packageinfosubpackage.Foo.NativeBar.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
  ;;; Code for packageinfosubpackage.Foo [type definition]
  (type $packageinfosubpackage.Foo (struct_subtype 
   (field $vtable (ref $packageinfosubpackage.Foo.vtable)) 
@@ -70,6 +90,24 @@
   (ref.null struct)
  ))
 
+;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [vtable.init]
+(global $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable) 
+ (struct.new $packageinfosubpackage.Foo.NativeBar.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
+ )
+)
+
+;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [itable.init]
+(global $packageinfosubpackage.Foo.NativeBar.$Overlay.itable (ref $packageinfosubpackage.Foo.NativeBar.$Overlay.itable) (struct.new $packageinfosubpackage.Foo.NativeBar.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for packageinfosubpackage.subpackage.Bar [vtable.init]
 (global $packageinfosubpackage.subpackage.Bar.vtable (ref $packageinfosubpackage.subpackage.Bar.vtable) 
  (struct.new $packageinfosubpackage.subpackage.Bar.vtable
@@ -95,10 +133,47 @@
 (global $f_$initialized__packageinfosubpackage_Foo (mut i32) (i32.const 0))
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [static fields]
-(global $f_$initialized__packageinfosubpackage_Foo_NativeBar (mut i32) (i32.const 0))
+
+;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [static fields]
+(global $f_$initialized__packageinfosubpackage_Foo_NativeBar_$Overlay (mut i32) (i32.const 0))
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [static fields]
 (global $f_$initialized__packageinfosubpackage_subpackage_Bar (mut i32) (i32.const 0))
+
+;;; Code for packageinfosubpackage.Foo.NativeBar.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@packageinfosubpackage.Foo.NativeBar.$Overlay
+ ;;@ packageinfosubpackage/Foo.java:23:23
+ (block
+  ;; if (packageinfosubpackage.Foo.NativeBar.$Overlay.$initialized) return;
+  ;;@ packageinfosubpackage/Foo.java:23:23
+  (if (global.get $f_$initialized__packageinfosubpackage_Foo_NativeBar_$Overlay)
+   (then
+    ;; return;
+    ;;@ packageinfosubpackage/Foo.java:23:23
+    (return )
+   )
+  )
+  ;; (packageinfosubpackage.Foo.NativeBar.$Overlay.$initialized = true);
+  ;;@ packageinfosubpackage/Foo.java:23:23
+  (global.set $f_$initialized__packageinfosubpackage_Foo_NativeBar_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $packageinfosubpackage.Foo.NativeBar.$Overlay))
+ (local.set $this (ref.cast_static $packageinfosubpackage.Foo.NativeBar.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.Foo.NativeBar.$Overlay();
+  (return (call $function.no.side.effects.$getPackageinfosubpackage.Foo.NativeBar.$Overlay__java_lang_Class (ref.func $$getPackageinfosubpackage.Foo.NativeBar.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar.$Overlay)
 
 ;;; Code for packageinfosubpackage.Foo [methods]
 
@@ -189,28 +264,6 @@
 ;;; NativeBar()
 (func $m_<init>__@packageinfosubpackage.Foo.NativeBar (import "imports" "packageinfosubpackage.subpackage.Bar.constructor") 
  (result (ref null extern))
-)
-
-;;; void NativeBar.$clinit()
-(func $$clinit__void@packageinfosubpackage.Foo.NativeBar
- ;;@ packageinfosubpackage/Foo.java:23:23
- (block
-  ;; if (packageinfosubpackage.Foo.NativeBar.$initialized) return;
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (if (global.get $f_$initialized__packageinfosubpackage_Foo_NativeBar)
-   (then
-    ;; return;
-    ;;@ packageinfosubpackage/Foo.java:23:23
-    (return )
-   )
-  )
-  ;; (packageinfosubpackage.Foo.NativeBar.$initialized = true);
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (global.set $f_$initialized__packageinfosubpackage_Foo_NativeBar (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (call $$clinit__void@java.lang.Object )
- )
 )
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [methods]

@@ -9,6 +9,6 @@ readable_example(
     srcs = glob(["*.java"]),
     # @JsType not supported in Kotlin.
     generate_kt_readables = False,
-    generate_wasm_readables = False,  # TODO(b/261078322) Support JsOverlay in WASM.
+    generate_wasm_readables = False,  # WASM doesn't allow extending native types.
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

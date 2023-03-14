@@ -1,3 +1,23 @@
+ ;;; Code for genericnativetype.BoundedJsArray.$Overlay [type definition]
+ (type $genericnativetype.BoundedJsArray.$Overlay (struct 
+  (field $vtable (ref $genericnativetype.BoundedJsArray.$Overlay.vtable)) 
+  (field $itable (ref $genericnativetype.BoundedJsArray.$Overlay.itable))
+  )
+ )
+ (type $genericnativetype.BoundedJsArray.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $genericnativetype.BoundedJsArray.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
  ;;; Code for genericnativetype.BoundedJsArray [type definition]
 
  ;;; Code for genericnativetype.BoundedJsArrays [type definition]
@@ -24,6 +44,24 @@
  (field $slot6 (ref null struct))
   $java.lang.Object.itable))
 
+;;; Code for genericnativetype.BoundedJsArray.$Overlay [vtable.init]
+(global $genericnativetype.BoundedJsArray.$Overlay.vtable (ref $genericnativetype.BoundedJsArray.$Overlay.vtable) 
+ (struct.new $genericnativetype.BoundedJsArray.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay)
+ )
+)
+
+;;; Code for genericnativetype.BoundedJsArray.$Overlay [itable.init]
+(global $genericnativetype.BoundedJsArray.$Overlay.itable (ref $genericnativetype.BoundedJsArray.$Overlay.itable) (struct.new $genericnativetype.BoundedJsArray.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for genericnativetype.BoundedJsArrays [vtable.init]
 (global $genericnativetype.BoundedJsArrays.vtable (ref $genericnativetype.BoundedJsArrays.vtable) 
  (struct.new $genericnativetype.BoundedJsArrays.vtable
@@ -46,28 +84,24 @@
  ))
 
 ;;; Code for genericnativetype.BoundedJsArray [static fields]
-(global $f_$initialized__genericnativetype_BoundedJsArray (mut i32) (i32.const 0))
+
+;;; Code for genericnativetype.BoundedJsArray.$Overlay [static fields]
+(global $f_$initialized__genericnativetype_BoundedJsArray_$Overlay (mut i32) (i32.const 0))
 
 ;;; Code for genericnativetype.BoundedJsArrays [static fields]
 (global $f_$initialized__genericnativetype_BoundedJsArrays (mut i32) (i32.const 0))
 
-;;; Code for genericnativetype.BoundedJsArray [methods]
+;;; Code for genericnativetype.BoundedJsArray.$Overlay [methods]
 
-;;; BoundedJsArray(int size)
-(func $m_<init>__int@genericnativetype.BoundedJsArray (import "imports" "Array.constructor") 
- (param $size i32)
- (result (ref null extern))
-)
-
-;;; BoundedJsArray<V> BoundedJsArray.create()
-(func $m_create__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray
+;;; BoundedJsArray<V> $Overlay.create()
+(func $m_create__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray.$Overlay
  (result (ref null extern))
  ;;@ genericnativetype/BoundedJsArray.java:30:38
  (local $array (ref null extern))
  (block
-  ;; genericnativetype.BoundedJsArray.$clinit();
+  ;; genericnativetype.BoundedJsArray.$Overlay.$clinit();
   ;;@ genericnativetype/BoundedJsArray.java:30:47
-  (call $$clinit__void@genericnativetype.BoundedJsArray )
+  (call $$clinit__void@genericnativetype.BoundedJsArray.$Overlay )
   ;; BoundedJsArray<V> array = null;
   ;;@ genericnativetype/BoundedJsArray.java:31:4
   (local.set $array (ref.null extern))
@@ -77,16 +111,16 @@
  )
 )
 
-;;; BoundedJsArray<V> BoundedJsArray.create(int size)
-(func $m_create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray
+;;; BoundedJsArray<V> $Overlay.create(int size)
+(func $m_create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray.$Overlay
  (param $size i32)
  (result (ref null extern))
  ;;@ genericnativetype/BoundedJsArray.java:39:38
  (local $array (ref null extern))
  (block
-  ;; genericnativetype.BoundedJsArray.$clinit();
+  ;; genericnativetype.BoundedJsArray.$Overlay.$clinit();
   ;;@ genericnativetype/BoundedJsArray.java:39:55
-  (call $$clinit__void@genericnativetype.BoundedJsArray )
+  (call $$clinit__void@genericnativetype.BoundedJsArray.$Overlay )
   ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
   ;;@ genericnativetype/BoundedJsArray.java:40:4
   (local.set $array (call $m_<init>__int@genericnativetype.BoundedJsArray (local.get $size)))
@@ -96,26 +130,45 @@
  )
 )
 
-;;; void BoundedJsArray.$clinit()
-(func $$clinit__void@genericnativetype.BoundedJsArray
+;;; void $Overlay.$clinit()
+(func $$clinit__void@genericnativetype.BoundedJsArray.$Overlay
  ;;@ genericnativetype/BoundedJsArray.java:23:13
  (block
-  ;; if (genericnativetype.BoundedJsArray.$initialized) return;
+  ;; if (genericnativetype.BoundedJsArray.$Overlay.$initialized) return;
   ;;@ genericnativetype/BoundedJsArray.java:23:13
-  (if (global.get $f_$initialized__genericnativetype_BoundedJsArray)
+  (if (global.get $f_$initialized__genericnativetype_BoundedJsArray_$Overlay)
    (then
     ;; return;
     ;;@ genericnativetype/BoundedJsArray.java:23:13
     (return )
    )
   )
-  ;; (genericnativetype.BoundedJsArray.$initialized = true);
+  ;; (genericnativetype.BoundedJsArray.$Overlay.$initialized = true);
   ;;@ genericnativetype/BoundedJsArray.java:23:13
-  (global.set $f_$initialized__genericnativetype_BoundedJsArray (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ genericnativetype/BoundedJsArray.java:23:13
-  (call $$clinit__void@java.lang.Object )
+  (global.set $f_$initialized__genericnativetype_BoundedJsArray_$Overlay (i32.const 1))
  )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $genericnativetype.BoundedJsArray.$Overlay))
+ (local.set $this (ref.cast_static $genericnativetype.BoundedJsArray.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getGenericnativetype.BoundedJsArray.$Overlay();
+  (return (call $function.no.side.effects.$getGenericnativetype.BoundedJsArray.$Overlay__java_lang_Class (ref.func $$getGenericnativetype.BoundedJsArray.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray.$Overlay)
+
+;;; Code for genericnativetype.BoundedJsArray [methods]
+
+;;; BoundedJsArray(int size)
+(func $m_<init>__int@genericnativetype.BoundedJsArray (import "imports" "Array.constructor") 
+ (param $size i32)
+ (result (ref null extern))
 )
 
 ;;; Code for genericnativetype.BoundedJsArrays [methods]
@@ -157,9 +210,9 @@
   ;; genericnativetype.BoundedJsArrays.$clinit();
   ;;@ genericnativetype/BoundedJsArrays.java:21:47
   (call $$clinit__void@genericnativetype.BoundedJsArrays )
-  ;; return genericnativetype.BoundedJsArray.create();
+  ;; return genericnativetype.BoundedJsArray.$Overlay.create();
   ;;@ genericnativetype/BoundedJsArrays.java:22:4
-  (return (call $m_create__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray ))
+  (return (call $m_create__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray.$Overlay ))
  )
 )
 
@@ -172,9 +225,9 @@
   ;; genericnativetype.BoundedJsArrays.$clinit();
   ;;@ genericnativetype/BoundedJsArrays.java:25:63
   (call $$clinit__void@genericnativetype.BoundedJsArrays )
-  ;; return genericnativetype.BoundedJsArray.create(size);
+  ;; return genericnativetype.BoundedJsArray.$Overlay.create(size);
   ;;@ genericnativetype/BoundedJsArrays.java:26:4
-  (return (call $m_create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (local.get $size)))
+  (return (call $m_create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray.$Overlay (local.get $size)))
  )
 )
 

@@ -1,6 +1,56 @@
+ ;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [type definition]
+ (type $importglobaljstypes.Date.NativeDate.$Overlay (struct 
+  (field $vtable (ref $importglobaljstypes.Date.NativeDate.$Overlay.vtable)) 
+  (field $itable (ref $importglobaljstypes.Date.NativeDate.$Overlay.itable))
+  )
+ )
+ (type $importglobaljstypes.Date.NativeDate.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $importglobaljstypes.Date.NativeDate.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
  ;;; Code for importglobaljstypes.Number.NativeFunction [type definition]
 
  ;;; Code for importglobaljstypes.Number.MyLiteralType [type definition]
+
+ ;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [type definition]
+ (type $importglobaljstypes.Number.NativeFunction.$Overlay.vtable (struct 
+  )
+ )
+
+ ;;; Code for importglobaljstypes.Number.MyLiteralType.$Overlay [type definition]
+ (type $importglobaljstypes.Number.MyLiteralType.$Overlay.vtable (struct 
+  )
+ )
+
+ ;;; Code for importglobaljstypes.RegExp.NativeRegExp.$Overlay [type definition]
+ (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay (struct 
+  (field $vtable (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable)) 
+  (field $itable (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay.itable))
+  )
+ )
+ (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $importglobaljstypes.RegExp.NativeRegExp.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
 
  ;;; Code for importglobaljstypes.Date [type definition]
  (type $importglobaljstypes.Date (struct_subtype 
@@ -102,6 +152,24 @@
   (ref.null struct)
  ))
 
+;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [vtable.init]
+(global $importglobaljstypes.Date.NativeDate.$Overlay.vtable (ref $importglobaljstypes.Date.NativeDate.$Overlay.vtable) 
+ (struct.new $importglobaljstypes.Date.NativeDate.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
+ )
+)
+
+;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [itable.init]
+(global $importglobaljstypes.Date.NativeDate.$Overlay.itable (ref $importglobaljstypes.Date.NativeDate.$Overlay.itable) (struct.new $importglobaljstypes.Date.NativeDate.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for importglobaljstypes.Number [vtable.init]
 (global $importglobaljstypes.Number.vtable (ref $importglobaljstypes.Number.vtable) 
  (struct.new $importglobaljstypes.Number.vtable
@@ -145,68 +213,168 @@
   (ref.null struct)
  ))
 
+;;; Code for importglobaljstypes.RegExp.NativeRegExp.$Overlay [vtable.init]
+(global $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable) 
+ (struct.new $importglobaljstypes.RegExp.NativeRegExp.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
+ )
+)
+
+;;; Code for importglobaljstypes.RegExp.NativeRegExp.$Overlay [itable.init]
+(global $importglobaljstypes.RegExp.NativeRegExp.$Overlay.itable (ref $importglobaljstypes.RegExp.NativeRegExp.$Overlay.itable) (struct.new $importglobaljstypes.RegExp.NativeRegExp.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for importglobaljstypes.Date [static fields]
 (global $f_$initialized__importglobaljstypes_Date (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Date.NativeDate [static fields]
-(global $f_$initialized__importglobaljstypes_Date_NativeDate (mut i32) (i32.const 0))
+
+;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [static fields]
+(global $f_$initialized__importglobaljstypes_Date_NativeDate_$Overlay (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Number [static fields]
 (global $f_$initialized__importglobaljstypes_Number (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Number.NativeFunction [static fields]
-(global $f_$initialized__importglobaljstypes_Number_NativeFunction (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [static fields]
-(global $f_$initialized__importglobaljstypes_Number_MyLiteralType (mut i32) (i32.const 0))
+
+;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [static fields]
+(global $f_$initialized__importglobaljstypes_Number_NativeFunction_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for importglobaljstypes.Number.MyLiteralType.$Overlay [static fields]
+(global $f_$initialized__importglobaljstypes_Number_MyLiteralType_$Overlay (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.RegExp [static fields]
 (global $f_$initialized__importglobaljstypes_RegExp (mut i32) (i32.const 0))
 
 ;;; Code for importglobaljstypes.RegExp.NativeRegExp [static fields]
-(global $f_$initialized__importglobaljstypes_RegExp_NativeRegExp (mut i32) (i32.const 0))
+
+;;; Code for importglobaljstypes.RegExp.NativeRegExp.$Overlay [static fields]
+(global $f_$initialized__importglobaljstypes_RegExp_NativeRegExp_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for importglobaljstypes.Date.NativeDate.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@importglobaljstypes.Date.NativeDate.$Overlay
+ ;;@ importglobaljstypes/Date.java:38:22
+ (block
+  ;; if (importglobaljstypes.Date.NativeDate.$Overlay.$initialized) return;
+  ;;@ importglobaljstypes/Date.java:38:22
+  (if (global.get $f_$initialized__importglobaljstypes_Date_NativeDate_$Overlay)
+   (then
+    ;; return;
+    ;;@ importglobaljstypes/Date.java:38:22
+    (return )
+   )
+  )
+  ;; (importglobaljstypes.Date.NativeDate.$Overlay.$initialized = true);
+  ;;@ importglobaljstypes/Date.java:38:22
+  (global.set $f_$initialized__importglobaljstypes_Date_NativeDate_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $importglobaljstypes.Date.NativeDate.$Overlay))
+ (local.set $this (ref.cast_static $importglobaljstypes.Date.NativeDate.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Date.NativeDate.$Overlay();
+  (return (call $function.no.side.effects.$getImportglobaljstypes.Date.NativeDate.$Overlay__java_lang_Class (ref.func $$getImportglobaljstypes.Date.NativeDate.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate.$Overlay)
 
 ;;; Code for importglobaljstypes.Number.NativeFunction [methods]
 
-;;; void NativeFunction.$clinit()
-(func $$clinit__void@importglobaljstypes.Number.NativeFunction
+;;; Code for importglobaljstypes.Number.MyLiteralType [methods]
+
+;;; Code for importglobaljstypes.Number.NativeFunction.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@importglobaljstypes.Number.NativeFunction.$Overlay
  ;;@ importglobaljstypes/Number.java:41:20
  (block
-  ;; if (importglobaljstypes.Number.NativeFunction.$initialized) return;
+  ;; if (importglobaljstypes.Number.NativeFunction.$Overlay.$initialized) return;
   ;;@ importglobaljstypes/Number.java:41:20
-  (if (global.get $f_$initialized__importglobaljstypes_Number_NativeFunction)
+  (if (global.get $f_$initialized__importglobaljstypes_Number_NativeFunction_$Overlay)
    (then
     ;; return;
     ;;@ importglobaljstypes/Number.java:41:20
     (return )
    )
   )
-  ;; (importglobaljstypes.Number.NativeFunction.$initialized = true);
+  ;; (importglobaljstypes.Number.NativeFunction.$Overlay.$initialized = true);
   ;;@ importglobaljstypes/Number.java:41:20
-  (global.set $f_$initialized__importglobaljstypes_Number_NativeFunction (i32.const 1))
+  (global.set $f_$initialized__importglobaljstypes_Number_NativeFunction_$Overlay (i32.const 1))
  )
 )
 
-;;; Code for importglobaljstypes.Number.MyLiteralType [methods]
+;;; Code for importglobaljstypes.Number.MyLiteralType.$Overlay [methods]
 
-;;; void MyLiteralType.$clinit()
-(func $$clinit__void@importglobaljstypes.Number.MyLiteralType
+;;; void $Overlay.$clinit()
+(func $$clinit__void@importglobaljstypes.Number.MyLiteralType.$Overlay
  ;;@ importglobaljstypes/Number.java:61:26
  (block
-  ;; if (importglobaljstypes.Number.MyLiteralType.$initialized) return;
+  ;; if (importglobaljstypes.Number.MyLiteralType.$Overlay.$initialized) return;
   ;;@ importglobaljstypes/Number.java:61:26
-  (if (global.get $f_$initialized__importglobaljstypes_Number_MyLiteralType)
+  (if (global.get $f_$initialized__importglobaljstypes_Number_MyLiteralType_$Overlay)
    (then
     ;; return;
     ;;@ importglobaljstypes/Number.java:61:26
     (return )
    )
   )
-  ;; (importglobaljstypes.Number.MyLiteralType.$initialized = true);
+  ;; (importglobaljstypes.Number.MyLiteralType.$Overlay.$initialized = true);
   ;;@ importglobaljstypes/Number.java:61:26
-  (global.set $f_$initialized__importglobaljstypes_Number_MyLiteralType (i32.const 1))
+  (global.set $f_$initialized__importglobaljstypes_Number_MyLiteralType_$Overlay (i32.const 1))
  )
 )
+
+;;; Code for importglobaljstypes.RegExp.NativeRegExp.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@importglobaljstypes.RegExp.NativeRegExp.$Overlay
+ ;;@ importglobaljstypes/RegExp.java:30:22
+ (block
+  ;; if (importglobaljstypes.RegExp.NativeRegExp.$Overlay.$initialized) return;
+  ;;@ importglobaljstypes/RegExp.java:30:22
+  (if (global.get $f_$initialized__importglobaljstypes_RegExp_NativeRegExp_$Overlay)
+   (then
+    ;; return;
+    ;;@ importglobaljstypes/RegExp.java:30:22
+    (return )
+   )
+  )
+  ;; (importglobaljstypes.RegExp.NativeRegExp.$Overlay.$initialized = true);
+  ;;@ importglobaljstypes/RegExp.java:30:22
+  (global.set $f_$initialized__importglobaljstypes_RegExp_NativeRegExp_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $importglobaljstypes.RegExp.NativeRegExp.$Overlay))
+ (local.set $this (ref.cast_static $importglobaljstypes.RegExp.NativeRegExp.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.RegExp.NativeRegExp.$Overlay();
+  (return (call $function.no.side.effects.$getImportglobaljstypes.RegExp.NativeRegExp.$Overlay__java_lang_Class (ref.func $$getImportglobaljstypes.RegExp.NativeRegExp.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.RegExp.NativeRegExp.$Overlay)
 
 ;;; Code for importglobaljstypes.Date [methods]
 
@@ -326,28 +494,6 @@
 (func $m_getSeconds__int@importglobaljstypes.Date.NativeDate (import "imports" "Date.getSeconds") 
  (param $this (ref null extern))
  (result i32)
-)
-
-;;; void NativeDate.$clinit()
-(func $$clinit__void@importglobaljstypes.Date.NativeDate
- ;;@ importglobaljstypes/Date.java:38:22
- (block
-  ;; if (importglobaljstypes.Date.NativeDate.$initialized) return;
-  ;;@ importglobaljstypes/Date.java:38:22
-  (if (global.get $f_$initialized__importglobaljstypes_Date_NativeDate)
-   (then
-    ;; return;
-    ;;@ importglobaljstypes/Date.java:38:22
-    (return )
-   )
-  )
-  ;; (importglobaljstypes.Date.NativeDate.$initialized = true);
-  ;;@ importglobaljstypes/Date.java:38:22
-  (global.set $f_$initialized__importglobaljstypes_Date_NativeDate (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ importglobaljstypes/Date.java:38:22
-  (call $$clinit__void@java.lang.Object )
- )
 )
 
 ;;; Code for importglobaljstypes.Number [methods]
@@ -568,26 +714,4 @@
 (func $m_toString__java_lang_String_NativeString@importglobaljstypes.RegExp.NativeRegExp (import "imports" "RegExp.toString") 
  (param $this (ref null extern))
  (result (ref null string))
-)
-
-;;; void NativeRegExp.$clinit()
-(func $$clinit__void@importglobaljstypes.RegExp.NativeRegExp
- ;;@ importglobaljstypes/RegExp.java:30:22
- (block
-  ;; if (importglobaljstypes.RegExp.NativeRegExp.$initialized) return;
-  ;;@ importglobaljstypes/RegExp.java:30:22
-  (if (global.get $f_$initialized__importglobaljstypes_RegExp_NativeRegExp)
-   (then
-    ;; return;
-    ;;@ importglobaljstypes/RegExp.java:30:22
-    (return )
-   )
-  )
-  ;; (importglobaljstypes.RegExp.NativeRegExp.$initialized = true);
-  ;;@ importglobaljstypes/RegExp.java:30:22
-  (global.set $f_$initialized__importglobaljstypes_RegExp_NativeRegExp (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ importglobaljstypes/RegExp.java:30:22
-  (call $$clinit__void@java.lang.Object )
- )
 )

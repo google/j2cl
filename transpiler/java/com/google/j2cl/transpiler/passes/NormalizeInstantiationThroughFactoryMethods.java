@@ -775,9 +775,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
         new AbstractRewriter() {
           @Override
           public Expression rewriteNewInstance(NewInstance constructorInvocation) {
-            // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this
-            // check could be removed.
-            if (isNativeConstructor(constructorInvocation.getTarget())) {
+            if (constructorInvocation.getTarget().getEnclosingTypeDescriptor().isNative()) {
               return constructorInvocation;
             }
             return MethodCall.Builder.from(
@@ -791,6 +789,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
   private void rewriteConstructors(Library library) {
     library
         .streamTypes()
+        .filter(Predicates.not(Type::isNative))
         .filter(t -> !t.getConstructors().isEmpty())
         .forEach(
             t -> {
@@ -810,11 +809,6 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
         continue;
       }
       Method method = (Method) members.get(i);
-      // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this check
-      // could be removed.
-      if (isNativeConstructor(method.getDescriptor())) {
-        continue;
-      }
 
       // Insert the factory method just before the corresponding constructor, and advance.
       members.add(i++, synthesizeFactoryMethod(method, type.getTypeDescriptor()));
@@ -826,10 +820,7 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
         new AbstractRewriter() {
           @Override
           public Method rewriteMethod(Method method) {
-            if (!method.isConstructor()
-                // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this
-                // check could be removed.
-                || isNativeConstructor(method.getDescriptor())) {
+            if (!method.isConstructor()) {
               return method;
             }
 
@@ -841,12 +832,10 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
                 .build();
           }
 
+          // Rewrite super() constructor calls.
           @Override
           public Expression rewriteMethodCall(MethodCall methodCall) {
-            if (!methodCall.getTarget().isConstructor()
-                // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this
-                // check could be removed.
-                || isNativeConstructor(methodCall.getTarget())) {
+            if (!methodCall.getTarget().isConstructor()) {
               return methodCall;
             }
 
@@ -860,13 +849,6 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
                 .build();
           }
         });
-  }
-
-  // TODO(b/264676817): Consider refactoring to have MethodDescriptor.isNative return true for
-  // native constructors, or exposing isNativeConstructor from MethodDescriptor.
-  private static boolean isNativeConstructor(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.isConstructor()
-        && methodDescriptor.getEnclosingTypeDescriptor().isNative();
   }
 
   /**

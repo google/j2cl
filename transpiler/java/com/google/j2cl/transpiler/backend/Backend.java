@@ -138,6 +138,7 @@ import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.PropagateNullabilityKotlin;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveIsInstanceMethods;
+import com.google.j2cl.transpiler.passes.RemoveNativeTypes;
 import com.google.j2cl.transpiler.passes.RemoveNestedBlocks;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
@@ -235,6 +236,7 @@ public enum Backend {
           NormalizeEnumClasses::new,
           NormalizeJsEnums::new,
           NormalizeOverlayMembers::new,
+          RemoveNativeTypes::new,
           NormalizeInterfaceMethods::new,
           // End of class structure normalization.
 
@@ -375,6 +377,7 @@ public enum Backend {
           () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
+          NormalizeOverlayMembers::new,
           NormalizeInstanceCompileTimeConstants::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),

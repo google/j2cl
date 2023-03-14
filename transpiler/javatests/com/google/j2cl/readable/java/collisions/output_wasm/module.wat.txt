@@ -1,3 +1,23 @@
+ ;;; Code for collisions.Blah.$Overlay [type definition]
+ (type $collisions.Blah.$Overlay (struct 
+  (field $vtable (ref $collisions.Blah.$Overlay.vtable)) 
+  (field $itable (ref $collisions.Blah.$Overlay.itable))
+  )
+ )
+ (type $collisions.Blah.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $collisions.Blah.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
  ;;; Code for collisions.goog [type definition]
  (type $collisions.goog (struct_subtype 
   (field $vtable (ref $collisions.goog.vtable)) 
@@ -276,11 +296,28 @@
   (ref.null struct)
  ))
 
+;;; Code for collisions.Blah.$Overlay [vtable.init]
+(global $collisions.Blah.$Overlay.vtable (ref $collisions.Blah.$Overlay.vtable) 
+ (struct.new $collisions.Blah.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@collisions.Blah.$Overlay)
+ )
+)
+
+;;; Code for collisions.Blah.$Overlay [itable.init]
+(global $collisions.Blah.$Overlay.itable (ref $collisions.Blah.$Overlay.itable) (struct.new $collisions.Blah.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for collisions.goog [static fields]
 (global $f_$initialized__collisions_goog (mut i32) (i32.const 0))
 
 ;;; Code for collisions.Blah [static fields]
-(global $f_$initialized__collisions_Blah (mut i32) (i32.const 0))
 
 ;;; Code for collisions.KtBlah [static fields]
 (global $f_$initialized__collisions_KtBlah (mut i32) (i32.const 0))
@@ -296,6 +333,44 @@
 
 ;;; Code for collisions.T [static fields]
 (global $f_$initialized__collisions_T (mut i32) (i32.const 0))
+
+;;; Code for collisions.Blah.$Overlay [static fields]
+(global $f_$initialized__collisions_Blah_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for collisions.Blah.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@collisions.Blah.$Overlay
+ ;;@ collisions/goog.java:28:6
+ (block
+  ;; if (collisions.Blah.$Overlay.$initialized) return;
+  ;;@ collisions/goog.java:28:6
+  (if (global.get $f_$initialized__collisions_Blah_$Overlay)
+   (then
+    ;; return;
+    ;;@ collisions/goog.java:28:6
+    (return )
+   )
+  )
+  ;; (collisions.Blah.$Overlay.$initialized = true);
+  ;;@ collisions/goog.java:28:6
+  (global.set $f_$initialized__collisions_Blah_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@collisions.Blah.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $collisions.Blah.$Overlay))
+ (local.set $this (ref.cast_static $collisions.Blah.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getCollisions.Blah.$Overlay();
+  (return (call $function.no.side.effects.$getCollisions.Blah.$Overlay__java_lang_Class (ref.func $$getCollisions.Blah.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@collisions.Blah.$Overlay)
 
 ;;; Code for collisions.goog [methods]
 
@@ -381,28 +456,6 @@
 ;;; double Blah.getN()
 (func $m_getN__double@collisions.Blah (import "imports" "get String.prototype.length") 
  (result f64)
-)
-
-;;; void Blah.$clinit()
-(func $$clinit__void@collisions.Blah
- ;;@ collisions/goog.java:28:6
- (block
-  ;; if (collisions.Blah.$initialized) return;
-  ;;@ collisions/goog.java:28:6
-  (if (global.get $f_$initialized__collisions_Blah)
-   (then
-    ;; return;
-    ;;@ collisions/goog.java:28:6
-    (return )
-   )
-  )
-  ;; (collisions.Blah.$initialized = true);
-  ;;@ collisions/goog.java:28:6
-  (global.set $f_$initialized__collisions_Blah (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ collisions/goog.java:28:6
-  (call $$clinit__void@java.lang.Object )
- )
 )
 
 ;;; Code for collisions.KtBlah [methods]

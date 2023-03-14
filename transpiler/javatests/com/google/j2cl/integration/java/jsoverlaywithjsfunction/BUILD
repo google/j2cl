@@ -8,5 +8,5 @@ package(licenses = ["notice"])
 integration_test(
     name = "jsoverlaywithjsfunction",
     srcs = glob(["*.java"]),
-    enable_wasm = False,  # TODO(b/261078322) Support JsOverlay in WASM.
+    enable_wasm = False,  # TODO(b/273552727) JsFunction not supported in WASM.
 )

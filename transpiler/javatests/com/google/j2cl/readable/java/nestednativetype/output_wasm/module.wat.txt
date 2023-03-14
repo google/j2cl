@@ -1,0 +1,222 @@
+ ;;; Code for nestednativetype.NativeArray.$Overlay [type definition]
+ (type $nestednativetype.NativeArray.$Overlay (struct 
+  (field $vtable (ref $nestednativetype.NativeArray.$Overlay.vtable)) 
+  (field $itable (ref $nestednativetype.NativeArray.$Overlay.itable))
+  )
+ )
+ (type $nestednativetype.NativeArray.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $nestednativetype.NativeArray.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
+ ;;; Code for nestednativetype.NativeArray [type definition]
+
+ ;;; Code for nestednativetype.NativeArray.1 [type definition]
+ (type $nestednativetype.NativeArray.1 (struct_subtype 
+  (field $vtable (ref $nestednativetype.NativeArray.1.vtable)) 
+  (field $itable (ref $nestednativetype.NativeArray.1.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__nestednativetype_NativeArray_1 (ref null extern))
+   $java.lang.Object)
+ )
+ (type $nestednativetype.NativeArray.1.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+   $java.lang.Object.vtable)
+ )
+ (type $nestednativetype.NativeArray.1.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $java.lang.Object.itable))
+
+;;; Code for nestednativetype.NativeArray.1 [vtable.init]
+(global $nestednativetype.NativeArray.1.vtable (ref $nestednativetype.NativeArray.1.vtable) 
+ (struct.new $nestednativetype.NativeArray.1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1)
+ )
+)
+
+;;; Code for nestednativetype.NativeArray.1 [itable.init]
+(global $nestednativetype.NativeArray.1.itable (ref $nestednativetype.NativeArray.1.itable) (struct.new $nestednativetype.NativeArray.1.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for nestednativetype.NativeArray.$Overlay [vtable.init]
+(global $nestednativetype.NativeArray.$Overlay.vtable (ref $nestednativetype.NativeArray.$Overlay.vtable) 
+ (struct.new $nestednativetype.NativeArray.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray.$Overlay)
+ )
+)
+
+;;; Code for nestednativetype.NativeArray.$Overlay [itable.init]
+(global $nestednativetype.NativeArray.$Overlay.itable (ref $nestednativetype.NativeArray.$Overlay.itable) (struct.new $nestednativetype.NativeArray.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for nestednativetype.NativeArray [static fields]
+
+;;; Code for nestednativetype.NativeArray.1 [static fields]
+(global $f_$initialized__nestednativetype_NativeArray_1 (mut i32) (i32.const 0))
+
+;;; Code for nestednativetype.NativeArray.$Overlay [static fields]
+(global $f_$initialized__nestednativetype_NativeArray_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for nestednativetype.NativeArray.$Overlay [methods]
+
+;;; Object $Overlay.a__$devirt(NativeArray $thisArg)
+(func $m_a__$devirt__nestednativetype_NativeArray__java_lang_Object@nestednativetype.NativeArray.$Overlay
+ (param $$thisArg (ref null extern))
+ (result (ref null $java.lang.Object))
+ ;;@ nestednativetype/NativeArray.java:25:22
+ (block
+  ;; nestednativetype.NativeArray.$Overlay.$clinit();
+  ;;@ nestednativetype/NativeArray.java:25:22
+  (call $$clinit__void@nestednativetype.NativeArray.$Overlay )
+  ;; return nestednativetype.NativeArray.1.$create($thisArg);
+  ;;@ nestednativetype/NativeArray.java:26:4
+  (return (call $$create__nestednativetype_NativeArray@nestednativetype.NativeArray.1 (local.get $$thisArg)))
+ )
+)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@nestednativetype.NativeArray.$Overlay
+ ;;@ nestednativetype/NativeArray.java:23:19
+ (block
+  ;; if (nestednativetype.NativeArray.$Overlay.$initialized) return;
+  ;;@ nestednativetype/NativeArray.java:23:19
+  (if (global.get $f_$initialized__nestednativetype_NativeArray_$Overlay)
+   (then
+    ;; return;
+    ;;@ nestednativetype/NativeArray.java:23:19
+    (return )
+   )
+  )
+  ;; (nestednativetype.NativeArray.$Overlay.$initialized = true);
+  ;;@ nestednativetype/NativeArray.java:23:19
+  (global.set $f_$initialized__nestednativetype_NativeArray_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@nestednativetype.NativeArray.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nestednativetype.NativeArray.$Overlay))
+ (local.set $this (ref.cast_static $nestednativetype.NativeArray.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNestednativetype.NativeArray.$Overlay();
+  (return (call $function.no.side.effects.$getNestednativetype.NativeArray.$Overlay__java_lang_Class (ref.func $$getNestednativetype.NativeArray.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nestednativetype.NativeArray.$Overlay)
+
+;;; Code for nestednativetype.NativeArray [methods]
+
+;;; NativeArray()
+(func $m_<init>__@nestednativetype.NativeArray (import "imports" "Array.constructor") 
+ (result (ref null extern))
+)
+
+;;; Code for nestednativetype.NativeArray.1 [methods]
+
+;;; <anonymous> extends Object <anonymous> extends Object.$create(NativeArray $outer_this)
+(func $$create__nestednativetype_NativeArray@nestednativetype.NativeArray.1
+ (param $$outer_this (ref null extern))
+ (result (ref null $nestednativetype.NativeArray.1))
+ ;;@ nestednativetype/NativeArray.java:26:24
+ (local $$instance (ref null $nestednativetype.NativeArray.1))
+ (block
+  ;; <anonymous> extends Object $instance = new $1.<init>(0,$outer_this);
+  ;;@ nestednativetype/NativeArray.java:26:24
+  (local.set $$instance (struct.new $nestednativetype.NativeArray.1 (ref.as_non_null (global.get $nestednativetype.NativeArray.1.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.1.itable)) (i32.const 0) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ nestednativetype/NativeArray.java:26:24
+  (call $$ctor__nestednativetype_NativeArray__void_$p_nestednativetype_NativeArray_1@nestednativetype.NativeArray.1 (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ nestednativetype/NativeArray.java:26:24
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor(NativeArray $outer_this)
+(func $$ctor__nestednativetype_NativeArray__void_$p_nestednativetype_NativeArray_1@nestednativetype.NativeArray.1
+ (param $this (ref null $nestednativetype.NativeArray.1))
+ (param $$outer_this (ref null extern))
+ ;;@ nestednativetype/NativeArray.java:26:24
+ (block
+  ;; nestednativetype.NativeArray.1.$clinit();
+  ;;@ nestednativetype/NativeArray.java:26:24
+  (call $$clinit__void@nestednativetype.NativeArray.1 )
+  ;; Object.this.$ctor();
+  ;;@ nestednativetype/NativeArray.java:26:24
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (ref.as_non_null (local.get $this)))
+ )
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void@nestednativetype.NativeArray.1
+ ;;@ nestednativetype/NativeArray.java:26:24
+ (block
+  ;; if (nestednativetype.NativeArray.1.$initialized) return;
+  ;;@ nestednativetype/NativeArray.java:26:24
+  (if (global.get $f_$initialized__nestednativetype_NativeArray_1)
+   (then
+    ;; return;
+    ;;@ nestednativetype/NativeArray.java:26:24
+    (return )
+   )
+  )
+  ;; (nestednativetype.NativeArray.1.$initialized = true);
+  ;;@ nestednativetype/NativeArray.java:26:24
+  (global.set $f_$initialized__nestednativetype_NativeArray_1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nestednativetype/NativeArray.java:26:24
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> <anonymous> extends Object.getClass()
+(func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nestednativetype.NativeArray.1))
+ (local.set $this (ref.cast_static $nestednativetype.NativeArray.1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNestednativetype.NativeArray.1();
+  (return (call $function.no.side.effects.$getNestednativetype.NativeArray.1__java_lang_Class (ref.func $$getNestednativetype.NativeArray.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1)

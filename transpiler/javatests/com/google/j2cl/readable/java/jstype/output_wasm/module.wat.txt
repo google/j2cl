@@ -2,6 +2,16 @@
 
  ;;; Code for jstype.SomeJsType.Wildcard [type definition]
 
+ ;;; Code for jstype.SomeJsType.Star.$Overlay [type definition]
+ (type $jstype.SomeJsType.Star.$Overlay.vtable (struct 
+  )
+ )
+
+ ;;; Code for jstype.SomeJsType.Wildcard.$Overlay [type definition]
+ (type $jstype.SomeJsType.Wildcard.$Overlay.vtable (struct 
+  )
+ )
+
  ;;; Code for jstype.SomeJsType [type definition]
  (type $jstype.SomeJsType (struct_subtype 
   (field $vtable (ref $jstype.SomeJsType.vtable)) 
@@ -63,50 +73,58 @@
 (global $f_$initialized__jstype_SomeJsType (mut i32) (i32.const 0))
 
 ;;; Code for jstype.SomeJsType.Star [static fields]
-(global $f_$initialized__jstype_SomeJsType_Star (mut i32) (i32.const 0))
 
 ;;; Code for jstype.SomeJsType.Wildcard [static fields]
-(global $f_$initialized__jstype_SomeJsType_Wildcard (mut i32) (i32.const 0))
+
+;;; Code for jstype.SomeJsType.Star.$Overlay [static fields]
+(global $f_$initialized__jstype_SomeJsType_Star_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for jstype.SomeJsType.Wildcard.$Overlay [static fields]
+(global $f_$initialized__jstype_SomeJsType_Wildcard_$Overlay (mut i32) (i32.const 0))
 
 ;;; Code for jstype.SomeJsType.Star [methods]
 
-;;; void Star.$clinit()
-(func $$clinit__void@jstype.SomeJsType.Star
+;;; Code for jstype.SomeJsType.Wildcard [methods]
+
+;;; Code for jstype.SomeJsType.Star.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@jstype.SomeJsType.Star.$Overlay
  ;;@ jstype/SomeJsType.java:47:12
  (block
-  ;; if (jstype.SomeJsType.Star.$initialized) return;
+  ;; if (jstype.SomeJsType.Star.$Overlay.$initialized) return;
   ;;@ jstype/SomeJsType.java:47:12
-  (if (global.get $f_$initialized__jstype_SomeJsType_Star)
+  (if (global.get $f_$initialized__jstype_SomeJsType_Star_$Overlay)
    (then
     ;; return;
     ;;@ jstype/SomeJsType.java:47:12
     (return )
    )
   )
-  ;; (jstype.SomeJsType.Star.$initialized = true);
+  ;; (jstype.SomeJsType.Star.$Overlay.$initialized = true);
   ;;@ jstype/SomeJsType.java:47:12
-  (global.set $f_$initialized__jstype_SomeJsType_Star (i32.const 1))
+  (global.set $f_$initialized__jstype_SomeJsType_Star_$Overlay (i32.const 1))
  )
 )
 
-;;; Code for jstype.SomeJsType.Wildcard [methods]
+;;; Code for jstype.SomeJsType.Wildcard.$Overlay [methods]
 
-;;; void Wildcard.$clinit()
-(func $$clinit__void@jstype.SomeJsType.Wildcard
+;;; void $Overlay.$clinit()
+(func $$clinit__void@jstype.SomeJsType.Wildcard.$Overlay
  ;;@ jstype/SomeJsType.java:50:12
  (block
-  ;; if (jstype.SomeJsType.Wildcard.$initialized) return;
+  ;; if (jstype.SomeJsType.Wildcard.$Overlay.$initialized) return;
   ;;@ jstype/SomeJsType.java:50:12
-  (if (global.get $f_$initialized__jstype_SomeJsType_Wildcard)
+  (if (global.get $f_$initialized__jstype_SomeJsType_Wildcard_$Overlay)
    (then
     ;; return;
     ;;@ jstype/SomeJsType.java:50:12
     (return )
    )
   )
-  ;; (jstype.SomeJsType.Wildcard.$initialized = true);
+  ;; (jstype.SomeJsType.Wildcard.$Overlay.$initialized = true);
   ;;@ jstype/SomeJsType.java:50:12
-  (global.set $f_$initialized__jstype_SomeJsType_Wildcard (i32.const 1))
+  (global.set $f_$initialized__jstype_SomeJsType_Wildcard_$Overlay (i32.const 1))
  )
 )
 

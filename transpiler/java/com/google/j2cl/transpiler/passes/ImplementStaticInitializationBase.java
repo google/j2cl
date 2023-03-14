@@ -53,6 +53,10 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   public final void applyTo(CompilationUnit compilationUnit) {
     collectPrivateMemberReferences(compilationUnit);
     for (Type type : compilationUnit.getTypes()) {
+      // Native types are not removed for the WASM backend. Ignore them here.
+      if (type.isNative()) {
+        continue;
+      }
       synthesizeClinitCallsInMethods(type);
       synthesizeSuperClinitCalls(type);
       // Apply the additional normalizations defined in subclasses.

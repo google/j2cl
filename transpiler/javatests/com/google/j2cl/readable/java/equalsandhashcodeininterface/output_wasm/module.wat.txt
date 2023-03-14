@@ -12,6 +12,11 @@
 
  ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [type definition]
 
+ ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay [type definition]
+ (type $equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay.vtable (struct 
+  )
+ )
+
 ;;; Code for equalsandhashcodeininterface.BothInInterface [static fields]
 (global $f_$initialized__equalsandhashcodeininterface_BothInInterface (mut i32) (i32.const 0))
 
@@ -19,7 +24,9 @@
 (global $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (mut i32) (i32.const 0))
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [static fields]
-(global $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (mut i32) (i32.const 0))
+
+;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay [static fields]
+(global $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (mut i32) (i32.const 0))
 
 ;;; Code for equalsandhashcodeininterface.BothInInterface [methods]
 
@@ -75,21 +82,23 @@
  (param $this (ref null extern))
 )
 
-;;; void ViaJsMethodInInterface.$clinit()
-(func $$clinit__void@equalsandhashcodeininterface.ViaJsMethodInInterface
+;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay
  ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
  (block
-  ;; if (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized) return;
+  ;; if (equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay.$initialized) return;
   ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-  (if (global.get $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface)
+  (if (global.get $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay)
    (then
     ;; return;
     ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
     (return )
    )
   )
-  ;; (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized = true);
+  ;; (equalsandhashcodeininterface.ViaJsMethodInInterface.$Overlay.$initialized = true);
   ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-  (global.set $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (i32.const 1))
+  (global.set $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface_$Overlay (i32.const 1))
  )
 )

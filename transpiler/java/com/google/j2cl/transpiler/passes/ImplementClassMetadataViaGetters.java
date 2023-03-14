@@ -70,8 +70,6 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
         .streamTypes()
         .filter(not(Type::isInterface))
         .filter(not(Type::isAbstract))
-        // TODO(b/261078322) JsOverlay support may remove native types from the AST, so this filter
-        // could be removed.
         .filter(not(Type::isNative))
         .forEach(
             t -> {

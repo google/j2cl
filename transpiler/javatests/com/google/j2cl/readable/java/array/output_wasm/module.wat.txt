@@ -1,3 +1,23 @@
+ ;;; Code for array.Arrays.NativeType.$Overlay [type definition]
+ (type $array.Arrays.NativeType.$Overlay (struct 
+  (field $vtable (ref $array.Arrays.NativeType.$Overlay.vtable)) 
+  (field $itable (ref $array.Arrays.NativeType.$Overlay.itable))
+  )
+ )
+ (type $array.Arrays.NativeType.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $array.Arrays.NativeType.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
  ;;; Code for array.Arrays [type definition]
  (type $array.Arrays (struct_subtype 
   (field $vtable (ref $array.Arrays.vtable)) 
@@ -159,6 +179,24 @@
   (ref.null struct)
  ))
 
+;;; Code for array.Arrays.NativeType.$Overlay [vtable.init]
+(global $array.Arrays.NativeType.$Overlay.vtable (ref $array.Arrays.NativeType.$Overlay.vtable) 
+ (struct.new $array.Arrays.NativeType.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@array.Arrays.NativeType.$Overlay)
+ )
+)
+
+;;; Code for array.Arrays.NativeType.$Overlay [itable.init]
+(global $array.Arrays.NativeType.$Overlay.itable (ref $array.Arrays.NativeType.$Overlay.itable) (struct.new $array.Arrays.NativeType.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
 ;;; Code for array.Arrays [static fields]
 (global $f_$initialized__array_Arrays (mut i32) (i32.const 0))
 
@@ -166,10 +204,47 @@
 (global $f_$initialized__array_Arrays_SomeObject (mut i32) (i32.const 0))
 
 ;;; Code for array.Arrays.NativeType [static fields]
-(global $f_$initialized__array_Arrays_NativeType (mut i32) (i32.const 0))
 
 ;;; Code for array.Arrays.ArrayContainer [static fields]
 (global $f_$initialized__array_Arrays_ArrayContainer (mut i32) (i32.const 0))
+
+;;; Code for array.Arrays.NativeType.$Overlay [static fields]
+(global $f_$initialized__array_Arrays_NativeType_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for array.Arrays.NativeType.$Overlay [methods]
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@array.Arrays.NativeType.$Overlay
+ ;;@ array/Arrays.java:138:23
+ (block
+  ;; if (array.Arrays.NativeType.$Overlay.$initialized) return;
+  ;;@ array/Arrays.java:138:23
+  (if (global.get $f_$initialized__array_Arrays_NativeType_$Overlay)
+   (then
+    ;; return;
+    ;;@ array/Arrays.java:138:23
+    (return )
+   )
+  )
+  ;; (array.Arrays.NativeType.$Overlay.$initialized = true);
+  ;;@ array/Arrays.java:138:23
+  (global.set $f_$initialized__array_Arrays_NativeType_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@array.Arrays.NativeType.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $array.Arrays.NativeType.$Overlay))
+ (local.set $this (ref.cast_static $array.Arrays.NativeType.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays.NativeType.$Overlay();
+  (return (call $function.no.side.effects.$getArray.Arrays.NativeType.$Overlay__java_lang_Class (ref.func $$getArray.Arrays.NativeType.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@array.Arrays.NativeType.$Overlay)
 
 ;;; Code for array.Arrays [methods]
 
@@ -684,28 +759,6 @@
 ;;; NativeType()
 (func $m_<init>__@array.Arrays.NativeType (import "imports" "String.constructor") 
  (result (ref null extern))
-)
-
-;;; void NativeType.$clinit()
-(func $$clinit__void@array.Arrays.NativeType
- ;;@ array/Arrays.java:138:23
- (block
-  ;; if (array.Arrays.NativeType.$initialized) return;
-  ;;@ array/Arrays.java:138:23
-  (if (global.get $f_$initialized__array_Arrays_NativeType)
-   (then
-    ;; return;
-    ;;@ array/Arrays.java:138:23
-    (return )
-   )
-  )
-  ;; (array.Arrays.NativeType.$initialized = true);
-  ;;@ array/Arrays.java:138:23
-  (global.set $f_$initialized__array_Arrays_NativeType (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ array/Arrays.java:138:23
-  (call $$clinit__void@java.lang.Object )
- )
 )
 
 ;;; Code for array.Arrays.ArrayContainer [methods]
