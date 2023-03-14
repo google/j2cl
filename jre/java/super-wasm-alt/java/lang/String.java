@@ -301,11 +301,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         continue;
       }
       if (c1 > 127 && c2 > 127) {
-        // Branch into native implementation since we cannot handle folding for non-ascii space.
-        int remainingCount = end - o1;
-        return equalsIgnoreCase(
-            nativeFromCharCodeArray(value, o1, remainingCount),
-            nativeFromCharCodeArray(other.value, o2, remainingCount));
+        // Branch into native implementation since we cannot handle case folding for non-ascii
+        // space.
+        return nativeEqualsIgnoreCase(
+            nativeFromCharCodeArray(value, o1 - 1, offset + length),
+            nativeFromCharCodeArray(target, o2 - 1, other.offset + length));
       }
       if (foldAscii(c1) != foldAscii(c2)) {
         return false;
@@ -315,7 +315,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   @JsMethod(namespace = "j2wasm.StringUtils", name = "equalsIgnoreCase")
-  private static native boolean equalsIgnoreCase(NativeString a, NativeString b);
+  private static native boolean nativeEqualsIgnoreCase(NativeString a, NativeString b);
 
   private static char foldAscii(char value) {
     if ('A' <= value && value <= 'Z') {

@@ -492,6 +492,10 @@ public class StringTest extends GWTTestCase {
     assertTrue(
         hideFromCompiler("ö=>Ö, ç=>Ç, ş=>Ş, ğ=>Ğ, ü=>Ü, ı")
             .equalsIgnoreCase("Ö=>ö, Ç=>ç, Ş=>ş, Ğ=>ğ, Ü=>ü, ı")); // a.k.a "Turkey Test"
+
+    assertTrue(hideFromCompiler("abcğa").equalsIgnoreCase("abcĞa"));
+    assertFalse(hideFromCompiler("abcğa").equalsIgnoreCase("abcĞb"));
+    assertFalse(hideFromCompiler("abcğa").equalsIgnoreCase("abcŞa"));
   }
 
   public void testGetBytesAscii() {
