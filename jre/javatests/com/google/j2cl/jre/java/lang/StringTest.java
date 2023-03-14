@@ -114,6 +114,7 @@ public class StringTest extends GWTTestCase {
     assertEquals(1, hideFromCompiler("aa").compareTo("a"));
 
     // Ensure it's not a locale-sensitive comparison per Java spec.
+    assertEquals(0, hideFromCompiler("ä").compareTo("ä"));
     assertTrue(hideFromCompiler("ä").compareTo("z") > 0);
   }
 
@@ -143,6 +144,29 @@ public class StringTest extends GWTTestCase {
     } catch (NullPointerException e) {
       // expected
     }
+  }
+
+  public void testCompareToIgnoreCase() {
+    assertEquals(0, hideFromCompiler("a").compareToIgnoreCase("a"));
+    assertEquals(0, hideFromCompiler("a").compareToIgnoreCase("A"));
+    assertEquals(-1, hideFromCompiler("a").compareToIgnoreCase("b"));
+    assertEquals(-1, hideFromCompiler("a").compareToIgnoreCase("B"));
+    assertEquals(1, hideFromCompiler("b").compareToIgnoreCase("a"));
+    assertEquals(1, hideFromCompiler("B").compareToIgnoreCase("a"));
+
+    assertEquals(-1, hideFromCompiler("a").compareToIgnoreCase("aa"));
+    assertEquals(-1, hideFromCompiler("a").compareToIgnoreCase("AA"));
+    assertEquals(1, hideFromCompiler("aa").compareToIgnoreCase("a"));
+    assertEquals(1, hideFromCompiler("aa").compareToIgnoreCase("A"));
+
+    // Ensure it's not a locale-sensitive comparison per Java spec.
+    assertEquals(0, hideFromCompiler("ä").compareToIgnoreCase("ä"));
+    assertEquals(0, hideFromCompiler("ä").compareToIgnoreCase("Ä"));
+    assertTrue(hideFromCompiler("ä").compareToIgnoreCase("z") > 0);
+    assertTrue(hideFromCompiler("ä").compareToIgnoreCase("Z") > 0);
+    assertTrue(hideFromCompiler("aä").compareToIgnoreCase("aa") > 0);
+    assertTrue(hideFromCompiler("aä").compareToIgnoreCase("ab") > 0);
+    assertEquals(0, hideFromCompiler("aä").compareToIgnoreCase("aä"));
   }
 
   public void testConcat() {
