@@ -52,11 +52,6 @@ public class ArrayLength extends Expression {
   }
 
   @Override
-  public boolean isLValue() {
-    return false;
-  }
-
-  @Override
   public Precedence getPrecedence() {
     return Precedence.MEMBER_ACCESS;
   }
