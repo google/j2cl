@@ -23,4 +23,16 @@ function equalsIgnoreCase(a, b) {
   return a.toLowerCase() == b.toLowerCase();
 }
 
-exports = {equalsIgnoreCase};
+// TODO(b/272381112): Remove after non-stringref experiment.
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {number}
+ */
+function compareToIgnoreCase(a, b) {
+  a = a.toLowerCase();
+  b = b.toLowerCase();
+  return a == b ? 0 : (a < b) ? -1 : 1;
+}
+
+exports = {equalsIgnoreCase, compareToIgnoreCase};

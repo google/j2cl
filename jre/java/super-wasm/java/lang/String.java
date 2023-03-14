@@ -308,7 +308,30 @@ public final class String implements Comparable<String>, CharSequence, Serializa
   }
 
   public int compareToIgnoreCase(String other) {
-    return toLowerCase().compareTo(other.toLowerCase());
+    if (other == this) {
+      return 0;
+    }
+
+    int end = Math.min(length(), other.length());
+    for (int i = 0; i < end; i++) {
+      char c1 = charAt(i);
+      char c2 = other.charAt(i);
+      if (c1 != c2) {
+        if (c1 > 127 && c2 > 127) {
+          // Branch into native implementation since we cannot handle case folding for non-ascii
+          // chars.
+          return nativeCompareTo(
+              nativeSubstr(asStringView(value), i - 1, length()),
+              nativeSubstr(asStringView(other.value), i - 1, other.length()));
+        }
+
+        int result = foldCaseAscii(c1) - foldCaseAscii(c2);
+        if (result != 0) {
+          return result;
+        }
+      }
+    }
+    return length() - other.length();
   }
 
   public String concat(String str) {
@@ -377,19 +400,20 @@ public final class String implements Comparable<String>, CharSequence, Serializa
         continue;
       }
       if (c1 > 127 && c2 > 127) {
-        // Branch into native implementation since we cannot handle folding for non-ascii space.
+        // Branch into native implementation since we cannot handle case folding for non-ascii
+        // chars.
         return nativeEqualsIgnoreCase(
             nativeSubstr(asStringView(value), i, length),
             nativeSubstr(asStringView(other.value), i, length));
       }
-      if (foldAscii(c1) != foldAscii(c2)) {
+      if (foldCaseAscii(c1) != foldCaseAscii(c2)) {
         return false;
       }
     }
     return true;
   }
 
-  private static char foldAscii(char value) {
+  private static char foldCaseAscii(char value) {
     if ('A' <= value && value <= 'Z') {
       return (char) (value + ('a' - 'A'));
     }

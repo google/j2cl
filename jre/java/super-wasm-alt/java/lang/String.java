@@ -199,25 +199,36 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     return count - string.count;
   }
 
-  public int compareToIgnoreCase(String string) {
-    if (this == string) {
+  public int compareToIgnoreCase(String other) {
+    if (this == other) {
       return 0;
     }
-    int o1 = offset, o2 = string.offset;
-    int end = offset + Math.min(count, string.count);
-    char[] target = string.value;
+
+    int o1 = offset, o2 = other.offset;
+    int end = offset + Math.min(count, other.count);
+    char[] target = other.value;
     while (o1 < end) {
       char c1 = value[o1++];
       char c2 = target[o2++];
       if (c1 != c2) {
-        int result = CaseMapper.foldCase(c1) - CaseMapper.foldCase(c2);
+        if (c1 > 127 && c2 > 127) {
+          // Branch into native implementation since we cannot handle case folding for non-ascii
+          // chars.
+          return nativeCompareToIgnoreCase(
+              nativeFromCharCodeArray(value, o1 - 1, offset + count),
+              nativeFromCharCodeArray(target, o2 - 1, other.offset + other.count));
+        }
+        int result = foldCaseAscii(c1) - foldCaseAscii(c2);
         if (result != 0) {
           return result;
         }
       }
     }
-    return count - string.count;
+    return count - other.count;
   }
+
+  @JsMethod(namespace = "j2wasm.StringUtils", name = "compareToIgnoreCase")
+  private static native int nativeCompareToIgnoreCase(NativeString a, NativeString b);
 
   public String concat(String string) {
     if (string.count > 0 && count > 0) {
@@ -307,7 +318,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             nativeFromCharCodeArray(value, o1 - 1, offset + length),
             nativeFromCharCodeArray(target, o2 - 1, other.offset + length));
       }
-      if (foldAscii(c1) != foldAscii(c2)) {
+      if (foldCaseAscii(c1) != foldCaseAscii(c2)) {
         return false;
       }
     }
@@ -317,7 +328,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   @JsMethod(namespace = "j2wasm.StringUtils", name = "equalsIgnoreCase")
   private static native boolean nativeEqualsIgnoreCase(NativeString a, NativeString b);
 
-  private static char foldAscii(char value) {
+  private static char foldCaseAscii(char value) {
     if ('A' <= value && value <= 'Z') {
       return (char) (value + ('a' - 'A'));
     }
