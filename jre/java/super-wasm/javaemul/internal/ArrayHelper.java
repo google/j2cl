@@ -15,6 +15,10 @@
  */
 package javaemul.internal;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
+
+import java.util.Comparator;
+
 /** Provides utilities to perform operations on Arrays. */
 public final class ArrayHelper {
 
@@ -204,29 +208,23 @@ public final class ArrayHelper {
     return (WasmArray) obj;
   }
 
-  /** Compare function for sort. */
-  public interface CompareFunction {
-    double compare(Object d1, Object d2);
-  }
-
-  public static void sort(Object array, CompareFunction fn) {
+  public static void sortPrimitive(Object array) {
     // TODO(b/194677447): Implement Arrays.sort in WASM.
     throw new UnsupportedOperationException();
   }
 
-  public static CompareFunction getIntComparator() {
+  public static void sortPrimitive(Object array, int fromIndex, int toIndex) {
     // TODO(b/194677447): Implement Arrays.sort in WASM.
-    return null;
+    throw new UnsupportedOperationException();
   }
 
-  public static CompareFunction getDoubleComparator() {
-    // TODO(b/194677447): Implement Arrays.sort in WASM.
-    return null;
+  public static <T> void sort(T[] array, Comparator<? super T> c) {
+    MergeSorter.sort(array, 0, array.length, c);
   }
 
-  public static CompareFunction getLongComparator() {
-    // TODO(b/194677447): Implement Arrays.sort in WASM.
-    return null;
+  public static <T> void sort(T[] array, int fromIndex, int toIndex, Comparator<? super T> c) {
+    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
+    MergeSorter.sort(array, fromIndex, toIndex, c);
   }
 
   private ArrayHelper() {}

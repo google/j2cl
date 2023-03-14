@@ -15,6 +15,9 @@
  */
 package javaemul.internal;
 
+import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
+
+import java.util.Comparator;
 import java.util.Iterator;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsFunction;
@@ -195,14 +198,62 @@ public final class ArrayHelper {
   @JsProperty(name = "Array.prototype.splice", namespace = JsPackage.GLOBAL)
   private static native NativeFunction getSpliceFunction();
 
+  public static void sortPrimitive(float[] array) {
+    sortPrimitive(array, getDoubleComparator());
+  }
+
+  public static void sortPrimitive(double[] array) {
+    sortPrimitive(array, getDoubleComparator());
+  }
+
+  public static void sortPrimitive(long[] array) {
+    sortPrimitive(array, getLongComparator());
+  }
+
+  public static void sortPrimitive(Object array) {
+    sortPrimitive(array, getIntComparator());
+  }
+
+  public static void sortPrimitive(float[] array, int fromIndex, int toIndex) {
+    sortPrimitive(array, fromIndex, toIndex, getDoubleComparator());
+  }
+
+  public static void sortPrimitive(double[] array, int fromIndex, int toIndex) {
+    sortPrimitive(array, fromIndex, toIndex, getDoubleComparator());
+  }
+
+  public static void sortPrimitive(long[] array, int fromIndex, int toIndex) {
+    sortPrimitive(array, fromIndex, toIndex, getLongComparator());
+  }
+
+  public static void sortPrimitive(Object array, int fromIndex, int toIndex) {
+    sortPrimitive(array, fromIndex, toIndex, getIntComparator());
+  }
+
   /** Compare function for sort. */
   @JsFunction
-  public interface CompareFunction {
+  private interface CompareFunction {
     double compare(Object d1, Object d2);
   }
 
-  public static void sort(Object array, CompareFunction fn) {
+  private static void sortPrimitive(Object array, CompareFunction fn) {
     asNativeArray(array).sort(fn);
+  }
+
+  private static void sortPrimitive(Object array, int fromIndex, int toIndex, CompareFunction fn) {
+    checkCriticalArrayBounds(fromIndex, toIndex, getLength(array));
+    Object temp = ArrayHelper.unsafeClone(array, fromIndex, toIndex);
+    sortPrimitive(temp, fn);
+    copy(temp, 0, array, fromIndex, toIndex - fromIndex);
+  }
+
+  public static <T> void sort(T[] array, Comparator<? super T> c) {
+    MergeSorter.sort(array, 0, array.length, c);
+  }
+
+  public static <T> void sort(T[] array, int fromIndex, int toIndex, Comparator<? super T> c) {
+    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
+    MergeSorter.sort(array, fromIndex, toIndex, c);
   }
 
   @JsFunction
@@ -210,11 +261,11 @@ public final class ArrayHelper {
     double compare(double d1, double d2);
   }
 
-  public static CompareFunction getIntComparator() {
+  private static CompareFunction getIntComparator() {
     return JsUtils.uncheckedCast((CompareDoubleFunction) (a, b) -> a - b);
   }
 
-  public static CompareFunction getDoubleComparator() {
+  private static CompareFunction getDoubleComparator() {
     return JsUtils.uncheckedCast((CompareDoubleFunction) Double::compare);
   }
 
@@ -224,7 +275,7 @@ public final class ArrayHelper {
     int compare(long d1, long d2);
   }
 
-  public static CompareFunction getLongComparator() {
+  private static CompareFunction getLongComparator() {
     return JsUtils.uncheckedCast((CompareLongFunction) Long::compare);
   }
 

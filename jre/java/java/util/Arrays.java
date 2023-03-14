@@ -40,7 +40,6 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import javaemul.internal.ArrayHelper;
-import javaemul.internal.ArrayHelper.CompareFunction;
 
 /**
  * Utility methods related to native arrays. See <a
@@ -1159,57 +1158,59 @@ public class Arrays {
   }
 
   public static void sort(byte[] array) {
-    nativeIntegerSort(array);
+    ArrayHelper.sortPrimitive(array);
   }
 
   public static void sort(byte[] array, int fromIndex, int toIndex) {
-    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeIntegerSort(array, fromIndex, toIndex);
+    ArrayHelper.sortPrimitive(array, fromIndex, toIndex);
   }
 
   public static void sort(char[] array) {
-    nativeIntegerSort(array);
+    ArrayHelper.sortPrimitive(array);
   }
 
   public static void sort(char[] array, int fromIndex, int toIndex) {
-    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeIntegerSort(array, fromIndex, toIndex);
+    ArrayHelper.sortPrimitive(array, fromIndex, toIndex);
   }
 
   public static void sort(double[] array) {
-    ArrayHelper.sort(array, ArrayHelper.getDoubleComparator());
+    ArrayHelper.sortPrimitive(array);
   }
 
   public static void sort(double[] array, int fromIndex, int toIndex) {
-    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeSort(array, fromIndex, toIndex, ArrayHelper.getDoubleComparator());
+    ArrayHelper.sortPrimitive(array, fromIndex, toIndex);
   }
 
   public static void sort(float[] array) {
-    ArrayHelper.sort(array, ArrayHelper.getDoubleComparator());
+    ArrayHelper.sortPrimitive(array);
   }
 
   public static void sort(float[] array, int fromIndex, int toIndex) {
-    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeSort(array, fromIndex, toIndex, ArrayHelper.getDoubleComparator());
+    ArrayHelper.sortPrimitive(array, fromIndex, toIndex);
+  }
+
+  public static void sort(short[] array) {
+    ArrayHelper.sortPrimitive(array);
+  }
+
+  public static void sort(short[] array, int fromIndex, int toIndex) {
+    ArrayHelper.sortPrimitive(array, fromIndex, toIndex);
   }
 
   public static void sort(int[] array) {
-    nativeIntegerSort(array);
+    ArrayHelper.sortPrimitive(array);
   }
 
   public static void sort(int[] array, int fromIndex, int toIndex) {
-    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeIntegerSort(array, fromIndex, toIndex);
+    ArrayHelper.sortPrimitive(array, fromIndex, toIndex);
   }
 
   public static void sort(long[] array) {
-    ArrayHelper.sort(array, ArrayHelper.getLongComparator());
+    ArrayHelper.sortPrimitive(array);
   }
 
   public static void sort(long[] array, int fromIndex, int toIndex) {
-    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeSort(array, fromIndex, toIndex, ArrayHelper.getLongComparator());
+    ArrayHelper.sortPrimitive(array, fromIndex, toIndex);
   }
 
   public static void sort(Object[] array) {
@@ -1220,22 +1221,12 @@ public class Arrays {
     sort(array, fromIndex, toIndex, null);
   }
 
-  public static void sort(short[] array) {
-    nativeIntegerSort(array);
-  }
-
-  public static void sort(short[] array, int fromIndex, int toIndex) {
-    checkCriticalArrayBounds(fromIndex, toIndex, array.length);
-    nativeIntegerSort(array, fromIndex, toIndex);
-  }
-
   public static <T> void sort(T[] x, Comparator<? super T> c) {
-    mergeSort(x, 0, x.length, c);
+    ArrayHelper.sort(x, Comparators.nullToNaturalOrder(c));
   }
 
   public static <T> void sort(T[] x, int fromIndex, int toIndex, Comparator<? super T> c) {
-    checkCriticalArrayBounds(fromIndex, toIndex, x.length);
-    mergeSort(x, fromIndex, toIndex, c);
+    ArrayHelper.sort(x, fromIndex, toIndex, Comparators.nullToNaturalOrder(c));
   }
 
   public static void parallelSort(byte[] array) {
@@ -1522,127 +1513,6 @@ public class Arrays {
       }
     }
     return joiner.toString();
-  }
-
-  /**
-   * Sort a small subsection of an array by insertion sort.
-   *
-   * @param array array to sort
-   * @param low lower bound of range to sort
-   * @param high upper bound of range to sort
-   * @param comp comparator to use
-   */
-  private static void insertionSort(Object[] array, int low, int high, Comparator<Object> comp) {
-    for (int i = low + 1; i < high; ++i) {
-      for (int j = i; j > low && comp.compare(array[j - 1], array[j]) > 0; --j) {
-        Object t = array[j];
-        array[j] = array[j - 1];
-        array[j - 1] = t;
-      }
-    }
-  }
-
-  /**
-   * Merge the two sorted subarrays (srcLow,srcMid] and (srcMid,srcHigh] into dest.
-   *
-   * @param src source array for merge
-   * @param srcLow lower bound of bottom sorted half
-   * @param srcMid upper bound of bottom sorted half & lower bound of top sorted half
-   * @param srcHigh upper bound of top sorted half
-   * @param dest destination array for merge
-   * @param destLow lower bound of destination
-   * @param destHigh upper bound of destination
-   * @param comp comparator to use
-   */
-  private static void merge(
-      Object[] src,
-      int srcLow,
-      int srcMid,
-      int srcHigh,
-      Object[] dest,
-      int destLow,
-      int destHigh,
-      Comparator<Object> comp) {
-    // can't destroy srcMid because we need it as a bound on the lower half
-    int topIdx = srcMid;
-    while (destLow < destHigh) {
-      if (topIdx >= srcHigh || (srcLow < srcMid && comp.compare(src[srcLow], src[topIdx]) <= 0)) {
-        dest[destLow++] = src[srcLow++];
-      } else {
-        dest[destLow++] = src[topIdx++];
-      }
-    }
-  }
-
-  /**
-   * Performs a merge sort on the specified portion of an object array.
-   *
-   * <p>Uses O(n) temporary space to perform the merge, but is stable.
-   */
-  @SuppressWarnings("unchecked")
-  private static void mergeSort(Object[] x, int fromIndex, int toIndex, Comparator<?> comp) {
-    comp = Comparators.nullToNaturalOrder(comp);
-    Object[] temp = ArrayHelper.unsafeClone(x, fromIndex, toIndex);
-    mergeSort(temp, x, fromIndex, toIndex, -fromIndex, (Comparator<Object>) comp);
-  }
-
-  /**
-   * Recursive helper function for {@link Arrays#mergeSort(Object[], int, int, Comparator)}.
-   *
-   * @param temp temporary space, as large as the range of elements being sorted. On entry, temp
-   *     should contain a copy of the sort range from array.
-   * @param array array to sort
-   * @param low lower bound of range to sort
-   * @param high upper bound of range to sort
-   * @param ofs offset to convert an array index into a temp index
-   * @param comp comparison function
-   */
-  private static void mergeSort(
-      Object[] temp, Object[] array, int low, int high, int ofs, Comparator<Object> comp) {
-    int length = high - low;
-
-    // insertion sort for small arrays
-    if (length < 7) {
-      insertionSort(array, low, high, comp);
-      return;
-    }
-
-    // recursively sort both halves, using the array as temp space
-    int tempLow = low + ofs;
-    int tempHigh = high + ofs;
-    int tempMid = tempLow + ((tempHigh - tempLow) >> 1);
-    mergeSort(array, temp, tempLow, tempMid, -ofs, comp);
-    mergeSort(array, temp, tempMid, tempHigh, -ofs, comp);
-
-    // Skip merge if already in order - just copy from temp
-    if (comp.compare(temp[tempMid - 1], temp[tempMid]) <= 0) {
-      // TODO(jat): use System.arraycopy when that is implemented and more
-      // efficient than this
-      while (low < high) {
-        array[low++] = temp[tempLow++];
-      }
-      return;
-    }
-
-    // merge sorted halves
-    merge(temp, tempLow, tempMid, tempHigh, array, low, high, comp);
-  }
-
-  /** Sort a subset of an array using the given comparator */
-  private static void nativeSort(Object array, int fromIndex, int toIndex, CompareFunction fn) {
-    Object temp = ArrayHelper.unsafeClone(array, fromIndex, toIndex);
-    ArrayHelper.sort(temp, fn);
-    ArrayHelper.copy(temp, 0, array, fromIndex, toIndex - fromIndex);
-  }
-
-  /** Sort an entire array of number primitives of integral type. */
-  private static void nativeIntegerSort(Object array) {
-    ArrayHelper.sort(array, ArrayHelper.getIntComparator());
-  }
-
-  /** Sort a subset of an array of primitives of integral type. */
-  private static void nativeIntegerSort(Object array, int fromIndex, int toIndex) {
-    nativeSort(array, fromIndex, toIndex, ArrayHelper.getIntComparator());
   }
 
   private Arrays() {}
