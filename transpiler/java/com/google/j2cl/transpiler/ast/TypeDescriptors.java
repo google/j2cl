@@ -105,6 +105,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor kotlinJvmInternalIntrinsics;
   public DeclaredTypeDescriptor kotlinJvmInternalMutableKProperty0Impl;
   public DeclaredTypeDescriptor kotlinJvmInternalMutableKProperty1Impl;
+  public DeclaredTypeDescriptor kotlinJvmInternalReflectionFactory;
 
   /**
    * Global window reference that is the enclosing class of native global methods and properties.
@@ -700,6 +701,9 @@ public class TypeDescriptors {
           break;
         case "kotlin.jvm.internal.MutableKProperty1Impl":
           typeDescriptors.kotlinJvmInternalMutableKProperty1Impl = referenceType;
+          break;
+        case "kotlin.jvm.internal.ReflectionFactory":
+          typeDescriptors.kotlinJvmInternalReflectionFactory = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);

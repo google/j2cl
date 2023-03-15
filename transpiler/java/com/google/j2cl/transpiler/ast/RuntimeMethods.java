@@ -39,6 +39,22 @@ public final class RuntimeMethods {
     return MethodCall.Builder.from(methodDescriptor).setQualifier(qualifier).build();
   }
 
+  public static MethodCall createKClassCall(TypeLiteral typeLiteral) {
+    MethodDescriptor methodDescriptor =
+        TypeDescriptors.get()
+            .kotlinJvmInternalReflectionFactory
+            .getMethodDescriptor("createKClass", TypeDescriptors.get().javaLangClass);
+    return MethodCall.Builder.from(methodDescriptor).setArguments(typeLiteral).build();
+  }
+
+  public static MethodCall createKClassCall(Expression expression) {
+    MethodDescriptor methodDescriptor =
+        TypeDescriptors.get()
+            .kotlinJvmInternalReflectionFactory
+            .getMethodDescriptor("createKClass", TypeDescriptors.get().javaLangObject);
+    return MethodCall.Builder.from(methodDescriptor).setArguments(expression).build();
+  }
+
   /** Create a call to an Arrays method. */
   public static MethodCall createArraysMethodCall(String methodName, Expression... arguments) {
     return createArraysMethodCall(methodName, Arrays.asList(arguments));
