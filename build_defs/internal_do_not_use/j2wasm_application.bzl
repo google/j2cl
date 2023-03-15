@@ -131,9 +131,8 @@ def _impl_j2wasm_application(ctx):
 
     debug_dir_name = ctx.label.name + "_debug"
 
-    symbolmap = ctx.actions.declare_file(ctx.label.name + ".map")
-    args.add("--symbolmap=" + symbolmap.path)
-    outputs.append(symbolmap)
+    args.add("--symbolmap=" + ctx.outputs.symbolmap.path)
+    outputs.append(ctx.outputs.symbolmap)
 
     args.add("-o", ctx.outputs.wasm)
     outputs.append(ctx.outputs.wasm)
@@ -240,8 +239,9 @@ _j2wasm_application = rule(
     outputs = {
         "wat": "%{name}.wat",
         "wasm": "%{name}.wasm",
-        "srcmap": "%{name}.sourcemap",
+        "srcmap": "%{name}.wasm.map",
         "jsimports": "%{name}.imports.js.txt",
+        "symbolmap": "%{name}.symbols",
     },
 )
 
