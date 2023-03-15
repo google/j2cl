@@ -15,7 +15,6 @@
  */
 package java.lang;
 
-import java.util.Locale;
 import jsinterop.annotations.JsMethod;
 
 /** Performs case operations as described by http://unicode.org/reports/tr21/tr21-5.html. */
@@ -40,7 +39,7 @@ class CaseMapper {
    * if nothing changes. We need 'value', 'offset', and 'count' because they're not otherwise
    * accessible.
    */
-  public static String toLowerCase(Locale locale, String s, char[] value, int offset, int count) {
+  public static String toLowerCase(String s, char[] value, int offset, int count) {
     char[] newValue = null;
     int newCount = 0;
     for (int i = offset, end = offset + count; i < end; ++i) {
@@ -103,7 +102,7 @@ class CaseMapper {
     return index;
   }
 
-  public static String toUpperCase(Locale locale, String s, char[] value, int offset, int count) {
+  public static String toUpperCase(String s, char[] value, int offset, int count) {
     char[] output = null;
     int i = 0;
     for (int o = offset, end = offset + count; o < end; o++) {

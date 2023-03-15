@@ -719,11 +719,13 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public String toLowerCase() {
-    return CaseMapper.toLowerCase(Locale.getDefault(), this, value, offset, count);
+    return CaseMapper.toLowerCase(this, value, offset, count);
   }
 
   public String toLowerCase(Locale locale) {
-    return CaseMapper.toLowerCase(locale, this, value, offset, count);
+    return locale == Locale.getDefault()
+        ? fromJsString(toJsString().toLocaleLowerCase())
+        : toLowerCase();
   }
 
   @Override
@@ -732,11 +734,13 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public String toUpperCase() {
-    return CaseMapper.toUpperCase(Locale.getDefault(), this, value, offset, count);
+    return CaseMapper.toUpperCase(this, value, offset, count);
   }
 
   public String toUpperCase(Locale locale) {
-    return CaseMapper.toUpperCase(locale, this, value, offset, count);
+    return locale == Locale.getDefault()
+        ? fromJsString(toJsString().toLocaleUpperCase())
+        : toUpperCase();
   }
 
   public String trim() {
@@ -1023,6 +1027,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     static native NativeString fromCharCode(char x);
 
     native NativeString replace(WasmExtern regex, NativeString replace);
+
+    native NativeString toLocaleLowerCase();
+
+    native NativeString toLocaleUpperCase();
   }
 
   @Wasm("stringview_wtf16")
