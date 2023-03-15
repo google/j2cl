@@ -3,11 +3,18 @@
 
 load("//build_defs:rules.bzl", "j2cl_alias")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@rules_license//rules:license.bzl", "license")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 
 package(
+    default_applicable_licenses = [":j2cl_license"],
     default_visibility = ["//visibility:public"],
     licenses = ["notice"],
+)
+
+license(
+    name = "j2cl_license",
+    package_name = "j2cl",
 )
 
 exports_files(["LICENSE"])
