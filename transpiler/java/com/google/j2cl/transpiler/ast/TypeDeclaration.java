@@ -624,6 +624,10 @@ public abstract class TypeDeclaration
     return getSuperTypeDescriptor() == null ? null : getSuperTypeDescriptor().getTypeDeclaration();
   }
 
+  public final boolean hasRecursiveTypeBounds() {
+    return getTypeParameterDescriptors().stream().anyMatch(TypeVariable::hasRecursiveDefinition);
+  }
+
   /**
    * Returns the usage site TypeDescriptor corresponding to this declaration site TypeDeclaration.
    *

@@ -38,7 +38,7 @@ internal fun DeclaredTypeDescriptor.directlyDeclaredNonRawTypeArgumentDescriptor
 ): List<TypeDescriptor> =
   if (!isRaw) directlyDeclaredTypeArgumentDescriptors
   else
-    projectToWildcards.or(typeDeclaration.isRecursive).let { mapToWildcard ->
+    projectToWildcards.or(typeDeclaration.hasRecursiveTypeBounds()).let { mapToWildcard ->
       typeDeclaration.directlyDeclaredTypeParameterDescriptors.map {
         if (mapToWildcard) TypeVariable.createWildcard()
         else it.upperBoundTypeDescriptor.toRawTypeDescriptor()!!
@@ -176,9 +176,6 @@ private val nullableAnyTypeDescriptor: TypeDescriptor
 
 private val anyTypeDescriptor: TypeDescriptor
   get() = nullableAnyTypeDescriptor.toNonNullable()
-
-internal val TypeVariable.isRecursive: Boolean
-  get() = upperBoundTypeDescriptor.contains(this)
 
 internal fun TypeDescriptor.applyVariance(variance: KtVariance?) =
   if (this is TypeVariable) variableApplyVariance(variance) else this

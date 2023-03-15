@@ -342,4 +342,9 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   }
 
   abstract boolean isDenotable(ImmutableSet<TypeVariable> seen);
+
+  /**
+   * Returns true if the definition of this type variable as a reference to {@code typeVariable}.
+   */
+  abstract boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen);
 }

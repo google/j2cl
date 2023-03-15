@@ -217,6 +217,11 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return getComponentTypeDescriptor().isDenotable(seen);
   }
 
+  @Override
+  boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
+    return getComponentTypeDescriptor().hasReferenceTo(typeVariable, seen);
+  }
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {

@@ -1117,6 +1117,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeArgumentDescriptors().stream().allMatch(it -> it.isDenotable(seen));
   }
 
+  @Override
+  boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
+    return getTypeArgumentDescriptors().stream()
+        .anyMatch(it -> it.hasReferenceTo(typeVariable, seen));
+  }
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {

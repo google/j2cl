@@ -214,6 +214,10 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     return prefix + getUniqueKey();
   }
 
+  public final boolean hasRecursiveDefinition() {
+    return getUpperBoundTypeDescriptor().hasReferenceTo(this, ImmutableSet.of());
+  }
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
@@ -279,6 +283,27 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
     TypeDescriptor upperBound = getUpperBoundTypeDescriptor();
     return upperBound.isDenotable(seen);
+  }
+
+  @Override
+  boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
+    if (seen.contains(this)) {
+      return false;
+    }
+
+    if (equals(typeVariable)) {
+      return true;
+    }
+
+    seen = new ImmutableSet.Builder<TypeVariable>().addAll(seen).add(this).build();
+
+    TypeDescriptor lowerBoundTypeDescriptor = getLowerBoundTypeDescriptor();
+    if (lowerBoundTypeDescriptor != null
+        && lowerBoundTypeDescriptor.hasReferenceTo(typeVariable, seen)) {
+      return true;
+    }
+
+    return getUpperBoundTypeDescriptor().hasReferenceTo(typeVariable, seen);
   }
 
   /** Builder for a TypeVariableDeclaration. */

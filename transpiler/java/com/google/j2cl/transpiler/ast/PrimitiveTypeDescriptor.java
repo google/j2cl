@@ -205,6 +205,11 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
     return true;
   }
 
+  @Override
+  boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
+    return false;
+  }
+
   PrimitiveTypeDescriptor(
       String name, String signature, String boxedClassName, int precisionOrder) {
     this.name = name;

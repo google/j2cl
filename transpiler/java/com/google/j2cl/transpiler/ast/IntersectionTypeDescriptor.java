@@ -206,6 +206,12 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return false;
   }
 
+  @Override
+  boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
+    return getIntersectionTypeDescriptors().stream()
+        .anyMatch(it -> it.hasReferenceTo(typeVariable, seen));
+  }
+
   public static Builder newBuilder() {
     return new AutoValue_IntersectionTypeDescriptor.Builder();
   }

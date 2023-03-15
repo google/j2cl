@@ -40,11 +40,10 @@ internal val TypeDeclaration.directlyDeclaredTypeParameterCount: Int
       .minus(enclosingMethodTypeParameterCount)
   }
 
-internal val TypeDeclaration.isRecursive: Boolean
-  get() = typeParameterDescriptors.any { it.isRecursive }
-
 internal val TypeDeclaration.canBeNullableAsBound: Boolean
-  get() = !isRecursive || typeParameterDescriptors.all { it.upperBoundTypeDescriptor.isNullable }
+  get() =
+    !hasRecursiveTypeBounds() ||
+      typeParameterDescriptors.all { it.upperBoundTypeDescriptor.isNullable }
 
 internal val TypeDeclaration.isKtFunctionalInterface
   get() =

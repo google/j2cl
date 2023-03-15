@@ -194,6 +194,11 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
     return false;
   }
 
+  @Override
+  boolean hasReferenceTo(TypeVariable typeVariable, ImmutableSet<TypeVariable> seen) {
+    return getUnionTypeDescriptors().stream().anyMatch(it -> it.hasReferenceTo(typeVariable, seen));
+  }
+
   public static Builder newBuilder() {
     return new AutoValue_UnionTypeDescriptor.Builder();
   }
