@@ -7,7 +7,10 @@ load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 JS_ONLY_SRCS = glob([
     "**/Js*.java",

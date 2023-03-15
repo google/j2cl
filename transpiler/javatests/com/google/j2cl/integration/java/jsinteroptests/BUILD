@@ -3,7 +3,10 @@ load(
     "integration_test",
 )
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 alias(
     name = "closure_reflect-j2cl",

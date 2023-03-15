@@ -6,7 +6,10 @@
 # Other integration tests will want to run transpiled output as JS and
 # should make use of j2cl_library macro.
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 filegroup(
     name = "integration_tests_warnings_allowlist",

@@ -3,7 +3,10 @@ load(
     "integration_library",
 )
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 integration_library(
     name = "foo",

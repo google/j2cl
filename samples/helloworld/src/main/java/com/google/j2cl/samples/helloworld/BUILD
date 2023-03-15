@@ -1,7 +1,10 @@
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_application")
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["@com_google_j2cl//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 closure_js_library(
     name = "app",

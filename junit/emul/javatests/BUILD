@@ -1,6 +1,7 @@
 load("//build_defs:rules.bzl", "j2cl_test", "j2wasm_test")
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     # Apache2. These tests are written for J2CL emulation, not copied over.
     licenses = ["notice"],
 )

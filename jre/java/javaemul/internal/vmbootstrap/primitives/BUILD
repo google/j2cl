@@ -6,6 +6,7 @@
 load(":generate_primitive.bzl", "generate_primitive_type")
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = ["//jre/java:__pkg__"],
     licenses = ["notice"],
 )

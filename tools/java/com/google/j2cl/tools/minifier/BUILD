@@ -1,7 +1,10 @@
 # Description:
 #  A minifier library for J2CL generated source. Applicable in dev servers.
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 java_binary(
     name = "J2clMinifier",

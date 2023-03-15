@@ -4,7 +4,10 @@ load(
 )
 load("//java/com/google/protobuf/contrib/gwt:j2cl_proto.bzl", "j2cl_proto_library")
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 proto_library(
     name = "foo",

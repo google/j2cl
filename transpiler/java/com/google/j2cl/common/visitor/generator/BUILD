@@ -1,4 +1,5 @@
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = ["//transpiler:__subpackages__"],
     licenses = ["notice"],
 )

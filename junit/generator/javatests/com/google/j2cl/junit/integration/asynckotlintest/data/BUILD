@@ -4,6 +4,7 @@ load(
 )
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [
         "//junit/generator/javatests/com/google/j2cl/junit/apt:__pkg__",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/asynckotlintest:__pkg__",

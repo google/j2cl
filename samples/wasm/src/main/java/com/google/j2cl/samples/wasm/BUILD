@@ -15,7 +15,10 @@ load(
     "j2wasm_library",
 )
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["@com_google_j2cl//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 # This is the bazel target that compiles our J2WASM library.
 # Since J2WASM currently does global compilation this only serves as a way

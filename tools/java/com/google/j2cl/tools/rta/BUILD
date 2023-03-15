@@ -1,7 +1,10 @@
 # Description:
 #  Implementation of RTA algorithm used to do fast method pruning.
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 proto_library(
     name = "code_removal_info_proto",

@@ -5,6 +5,7 @@ load(
 )
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration/junit3:__pkg__"],
     licenses = ["notice"],
 )

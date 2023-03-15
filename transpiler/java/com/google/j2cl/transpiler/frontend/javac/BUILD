@@ -2,9 +2,12 @@
 #   This package contains frontend code that uses OpenJDK/javac to parse, typecheck and resolve
 #   Java code.
 
-package(default_visibility = [
-    "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
-])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    default_visibility = [
+        "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
+    ],
+)
 
 licenses(["notice"])
 

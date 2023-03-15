@@ -5,7 +5,10 @@ load(
 load("//build_defs:rules.bzl", "j2wasm_library")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 # TODO(b/269494058) Remove if js srcs are allowed in j2wasm_library.
 closure_js_library(

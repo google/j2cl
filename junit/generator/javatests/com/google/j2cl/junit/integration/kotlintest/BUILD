@@ -3,7 +3,10 @@ load(
     "j2cl_test_integration_test",
 )
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 j2cl_test_integration_test(
     name = "KotlinIntegrationTest",

@@ -1,7 +1,10 @@
 load("//build_defs:rules.bzl", "j2cl_library")
 load("//tools/javatests/com/google/j2cl/tools/rta:rta_test.bzl", "rta_test")
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 j2cl_library(
     name = "keepjstypeinterface_library",

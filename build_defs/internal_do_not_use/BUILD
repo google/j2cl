@@ -4,6 +4,7 @@
 load(":j2cl_library.bzl", "j2cl_library")
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = ["//visibility:public"],
     licenses = ["notice"],
 )

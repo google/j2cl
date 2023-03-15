@@ -1,6 +1,9 @@
 load("//build_defs:rules.bzl", "j2cl_library")
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 j2cl_library(
     name = "internal_junit_annotations",

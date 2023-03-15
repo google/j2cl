@@ -5,6 +5,7 @@
 load("//build_defs:rules.bzl", "j2cl_library")
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [
         "//:__pkg__",
         "//junit/generator:__subpackages__",

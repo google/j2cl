@@ -2,6 +2,7 @@
 #   This package contains backend driver code.
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [
         "//transpiler:__subpackages__",
     ],

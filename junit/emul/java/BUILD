@@ -1,6 +1,7 @@
 load("//build_defs:rules.bzl", "j2cl_library", "j2kt_jvm_import", "j2kt_native_library")
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     licenses = ["reciprocal"],  # Eclipse Public License - v 1.0
 )
 

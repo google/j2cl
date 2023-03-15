@@ -4,6 +4,7 @@ load(
 )
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     # Google owns the copyright
     licenses = ["unencumbered"],
 )

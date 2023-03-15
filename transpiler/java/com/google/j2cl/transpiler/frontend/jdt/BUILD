@@ -2,6 +2,7 @@
 #   This package contains frontend that uses Eclispe/JDT to parse, typecheck and resolve Java code.
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [
         "//tools/java/com/google/j2cl/tools/gwtincompatible:__pkg__",
         "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",

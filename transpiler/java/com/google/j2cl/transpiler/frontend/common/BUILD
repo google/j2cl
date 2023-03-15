@@ -2,6 +2,7 @@
 #   This package contains frontend common code that is agnostic of the actual frontend used.
 
 package(
+    default_applicable_licenses = ["//:j2cl_license"],
     default_visibility = [
         "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
     ],

@@ -7,7 +7,10 @@ load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load(":j2cl_java_toolchain.bzl", "j2cl_java_toolchain")
 load(":package_sources.bzl", "package_sources")
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 JRE_JAVAC_VERSION_OPTS = [
     # Remove the system (aka pre Java9 'bootclasspath').

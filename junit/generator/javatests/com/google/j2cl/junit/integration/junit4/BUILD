@@ -3,7 +3,10 @@ load(
     "j2cl_test_integration_test",
 )
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 # For debugging purposes it can be helpful to have the test log results of
 # the integration tests to stdout. This can be done with:

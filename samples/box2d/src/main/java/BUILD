@@ -3,7 +3,10 @@ load("//build_defs:rules.bzl", "j2cl_library")
 licenses(["notice"])
 
 # This package is for internal testing/benchmarks, should not be used outside.
-package(default_visibility = ["//:__subpackages__"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    default_visibility = ["//:__subpackages__"],
+)
 
 _JAVACOPTS = [
     "-Xep:EqualsHashCode:OFF",  # See go/equals-hashcode-lsc

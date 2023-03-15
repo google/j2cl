@@ -5,7 +5,10 @@ load(
     "integration_test",
 )
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 closure_js_library(
     name = "native_types-j2cl",

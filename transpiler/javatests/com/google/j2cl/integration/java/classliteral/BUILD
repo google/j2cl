@@ -4,7 +4,10 @@ load(
 )
 load("//build_defs:rules.bzl", "j2wasm_library")
 
-package(licenses = ["notice"])
+package(
+    default_applicable_licenses = ["//:j2cl_license"],
+    licenses = ["notice"],
+)
 
 j2wasm_library(
     name = "classliteral-j2wasm",
