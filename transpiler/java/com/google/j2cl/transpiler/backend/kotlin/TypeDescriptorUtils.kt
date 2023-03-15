@@ -117,7 +117,7 @@ internal val TypeDescriptor.isKtDenotable: Boolean
     }
 
 internal val TypeVariable.hasNullableBounds: Boolean
-  get() = upperBoundTypeDescriptor.isNullable && hasNullableRecursiveBounds
+  get() = upperBoundTypeDescriptor.canBeNull() && hasNullableRecursiveBounds
 
 internal val TypeVariable.hasNullableRecursiveBounds: Boolean
   get() = upperBoundTypeDescriptors.all { it.canBeNullableAsBound }

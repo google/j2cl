@@ -5,12 +5,10 @@ package j2ktnotpassing
 
 import javaemul.lang.*
 import java.lang.RuntimeException
-import kotlin.Any
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
-import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
@@ -26,14 +24,6 @@ open class DefinitelyNotNull {
   open fun <S: T> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
    throw RuntimeException()
   }
-
-  companion object {
-   @JvmStatic
-   @HiddenFromObjC
-   fun <E> reversed_pp_j2ktnotpassing(ordering: DefinitelyNotNull.Ordering<in E>): DefinitelyNotNull.Ordering<in E> {
-    return ordering!!.reverse_pp_j2ktnotpassing<E & Any>()
-   }
-  }
  }
 
  inner class NullsFirstOrdering<T>(ordering: DefinitelyNotNull.Ordering<in T>): DefinitelyNotNull.Ordering<T?>() {
@@ -47,12 +37,12 @@ open class DefinitelyNotNull {
 
   @ObjCName("reverse")
   open fun <S: T?> reverse(): DefinitelyNotNull.Ordering<S> {
-   return this.ordering_pp_j2ktnotpassing!!.reverse_pp_j2ktnotpassing()!!.nullsLast_pp_j2ktnotpassing<S & Any>() as DefinitelyNotNull.Ordering<S>
+   return this.ordering_pp_j2ktnotpassing!!.reverse_pp_j2ktnotpassing()!!.nullsLast_pp_j2ktnotpassing<S>() as DefinitelyNotNull.Ordering<S>
   }
 
   @ObjCName("nullsLast")
   open fun <S: T?> nullsLast(): DefinitelyNotNull.Ordering<S?> {
-   return this.ordering_pp_j2ktnotpassing!!.nullsLast_pp_j2ktnotpassing<S & Any>()
+   return this.ordering_pp_j2ktnotpassing!!.nullsLast_pp_j2ktnotpassing<S?>()
   }
 
   @HiddenFromObjC

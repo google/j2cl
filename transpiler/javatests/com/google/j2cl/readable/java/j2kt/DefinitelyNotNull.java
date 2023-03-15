@@ -13,42 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package j2ktnotpassing;
+package j2kt;
 
 import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@NullMarked
 public class DefinitelyNotNull {
+  @NullMarked
   static class Ordering<T extends @Nullable Object> {
     <S extends T> Ordering<S> reverse() {
       throw new RuntimeException();
     }
 
-    <S extends T> Ordering<@Nullable S> nullsLast() {
-      throw new RuntimeException();
-    }
-  }
-
-  final class NullsFirstOrdering<T extends @Nullable Object> extends Ordering<@Nullable T> {
-    @SuppressWarnings("nullness")
-    final Ordering<? super T> ordering;
-
-    NullsFirstOrdering(Ordering<? super T> ordering) {
-      this.ordering = ordering;
-    }
-
-    @Override
-    public <S extends @Nullable T> Ordering<S> reverse() {
-      // Type inference problem detected in Guava.
-      return ordering.reverse().nullsLast();
-    }
-
-    @Override
-    @SuppressWarnings("nullness") // probably a bug in our checker?
-    public <S extends @Nullable T> Ordering<@Nullable S> nullsLast() {
-      // Type inference problem detected in Guava.
-      return ordering.nullsLast();
+    static <E extends @Nullable Object> Ordering<? super E> reversed(Ordering<? super E> ordering) {
+      // The inferred type parameter for reverse() should be <E> and not <E & Any>
+      // See: b/268006049, b/272714235.
+      return ordering.reverse();
     }
   }
 }
