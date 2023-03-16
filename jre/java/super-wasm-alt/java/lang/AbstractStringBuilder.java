@@ -32,10 +32,12 @@ abstract class AbstractStringBuilder {
   final char[] getValue() {
     return value;
   }
-  /*
-   * Returns the underlying buffer and sets the shared flag.
-   */
+
   final char[] shareValue() {
+    int wasted = value.length - count;
+    if (wasted >= 256 || (wasted >= INITIAL_CAPACITY && wasted >= (count >> 1))) {
+      return Arrays.copyOf(value, count);
+    }
     shared = true;
     return value;
   }
@@ -456,13 +458,7 @@ abstract class AbstractStringBuilder {
     if (count == 0) {
       return "";
     }
-    // Optimize String sharing for more performance
-    int wasted = value.length - count;
-    if (wasted >= 256 || (wasted >= INITIAL_CAPACITY && wasted >= (count >> 1))) {
-      return new String(value, 0, count);
-    }
-    shared = true;
-    return new String(0, count, value);
+    return new String(this);
   }
 
   public CharSequence subSequence(int start, int end) {

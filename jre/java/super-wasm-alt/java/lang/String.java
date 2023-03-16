@@ -151,9 +151,17 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public String(StringBuffer stringBuffer) {
+    this((AbstractStringBuilder) stringBuffer);
+  }
+
+  public String(StringBuilder stringBuilder) {
+    this((AbstractStringBuilder) stringBuilder);
+  }
+
+  private String(AbstractStringBuilder builder) {
     offset = 0;
-    value = stringBuffer.shareValue();
-    count = stringBuffer.length();
+    value = builder.shareValue();
+    count = builder.length();
   }
 
   public String(int[] codePoints, int offset, int count) {
@@ -167,13 +175,6 @@ public final class String implements Serializable, Comparable<String>, CharSeque
       c += Character.toChars(codePoints[i], this.value, c);
     }
     this.count = c;
-  }
-
-  public String(StringBuilder stringBuilder) {
-    this.offset = 0;
-    this.count = stringBuilder.length();
-    this.value = new char[this.count];
-    stringBuilder.getChars(0, this.count, this.value, 0);
   }
 
   public char charAt(int index) {
