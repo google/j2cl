@@ -30,7 +30,7 @@ public final class ThrowableUtils {
     throw new UnsupportedOperationException();
   }
 
-  /** JavaScript {@code Error}. Placeholder in WASM. */
+  /** JavaScript {@code Error}. Placeholder in Wasm. */
   public static class NativeError {
     public static boolean hasCaptureStackTraceProperty;
 
@@ -39,7 +39,7 @@ public final class ThrowableUtils {
     public String stack;
   }
 
-  /** JavaScript {@code TypeError}. Placeholder in WASM. */
+  /** JavaScript {@code TypeError}. Placeholder in Wasm. */
   public static class NativeTypeError {}
 
   private ThrowableUtils() {}

@@ -1324,7 +1324,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           ? SwitchCase.newBuilder()
           : SwitchCase.newBuilder()
               // Fold the constant in the switch case to avoid complex expressions. Otherwise JDT
-              // would represent negative values as unary expressions, e.g - <constant>. The WASM
+              // would represent negative values as unary expressions, e.g - <constant>. The Wasm
               // backend relies on switch case constant for switch on integral values to be
               // literals.
               .setCaseExpression(convertAndFoldExpression(statement.getExpression()));

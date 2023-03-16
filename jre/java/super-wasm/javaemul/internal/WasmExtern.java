@@ -17,6 +17,6 @@ package javaemul.internal;
 
 import javaemul.internal.annotations.Wasm;
 
-/** A special interface that to deal with JavaScript values as externs in WASM. */
+/** A special interface that to deal with JavaScript values as externs in Wasm. */
 @Wasm("extern")
 public interface WasmExtern {}

@@ -53,7 +53,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
   public final void applyTo(CompilationUnit compilationUnit) {
     collectPrivateMemberReferences(compilationUnit);
     for (Type type : compilationUnit.getTypes()) {
-      // Native types are not removed for the WASM backend. Ignore them here.
+      // Native types are not removed for the Wasm backend. Ignore them here.
       if (type.isNative()) {
         continue;
       }
@@ -172,7 +172,7 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
    * Returns {@code true} if a class initialization (clinit) needs to be called when accessing this
    * member (i.e. calling it if if a method, or referencing it if it is a field)
    */
-  // TODO(b/271900868): clinit should be called for instance JsOverlay methods for WASM.
+  // TODO(b/271900868): clinit should be called for instance JsOverlay methods for Wasm.
   boolean triggersClinit(MemberDescriptor memberDescriptor, Type enclosingType) {
     if (memberDescriptor.isNative()) {
       // Skip native members.

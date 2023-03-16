@@ -21,7 +21,7 @@ import com.google.j2cl.integration.testing.Asserts.JsRunnable;
 
 /**
  * This class introduces an indirection for assertThrows methods so we can super source them and
- * make them noop for WASM.
+ * make them noop for Wasm.
  */
 public class AssertsBase {
   public static void fail() {

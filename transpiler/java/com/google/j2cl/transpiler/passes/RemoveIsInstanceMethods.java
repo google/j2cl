@@ -20,9 +20,9 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 
 /**
- * Removes {@code $isInstance} support methods. {@code $isInstance} is unused in WASM, and the
+ * Removes {@code $isInstance} support methods. {@code $isInstance} is unused in Wasm, and the
  * explicit implementations in our JRE in {@code Comparable}, etc use a native type in a way that is
- * unsupported in WASM.
+ * unsupported in Wasm.
  */
 public class RemoveIsInstanceMethods extends NormalizationPass {
 

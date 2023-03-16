@@ -472,7 +472,7 @@ public class Main {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Map")
   private static class NativeMap<K, V> {}
 
-  @Wasm("nop") // Casts to/from native types not yet supported in WASM.
+  @Wasm("nop") // Casts to/from native types not yet supported in Wasm.
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static <T extends NativeMap<?, ?>> void testCasts_typeVariableWithNativeBound() {
     // Casting Object[] to NativeMap[] is invalid on the JVM.
@@ -493,7 +493,7 @@ public class Main {
     }
   }
 
-  @Wasm("nop") // Casts to/from native types not yet supported in WASM.
+  @Wasm("nop") // Casts to/from native types not yet supported in Wasm.
   @SuppressWarnings({"rawtypes", "unchecked"})
   private static void testCasts_parameterizedNativeType() {
     Object a = new NativeMap<String, Object>();
@@ -549,7 +549,7 @@ public class Main {
         Void.class);
   }
 
-  @Wasm("nop") // Casts to/from native types not yet supported in WASM.
+  @Wasm("nop") // Casts to/from native types not yet supported in Wasm.
   private static void testCasts_exceptionMessages_jsType() {
     if (!isJvm()) {
       Object object = new Foo();

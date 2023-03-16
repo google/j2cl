@@ -53,7 +53,7 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/** Generates a WASM module containing all the code for the application. */
+/** Generates a Wasm module containing all the code for the application. */
 public class WasmModuleGenerator {
 
   private final Problems problems;
@@ -673,7 +673,7 @@ public class WasmModuleGenerator {
     builder.append(")");
   }
 
-  /** Emits a WASM struct using nominal inheritance. */
+  /** Emits a Wasm struct using nominal inheritance. */
   private void emitWasmStruct(
       Type type, Function<DeclaredTypeDescriptor, String> structNamer, Runnable fieldsRenderer) {
     boolean hasSuperType = type.getSuperTypeDescriptor() != null;

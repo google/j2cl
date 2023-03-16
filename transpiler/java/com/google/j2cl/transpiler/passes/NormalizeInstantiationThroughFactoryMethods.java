@@ -81,7 +81,7 @@ import javax.annotation.Nullable;
  * Creates factory methods for each constructor to encapsulate instantiations.
  *
  * <p>During this process it also optimizes fields to be initialized upfront in the struct creation
- * and marks them immutable. This allows optimizations both in the WASM toolchain and runtime.
+ * and marks them immutable. This allows optimizations both in the Wasm toolchain and runtime.
  *
  * <p>To decide which fields can be hoisted to the struct creation, constructors need to be analyzed
  * to keep track how the parameters flow from the constructor of a subclass to the place where field

@@ -246,7 +246,7 @@ class GenerationEnvironment {
   /**
    * Returns the name for the type associated with a function signature.
    *
-   * <p>In WASM in order to use function references as structure fields (e.g. in the vtable), their
+   * <p>In Wasm in order to use function references as structure fields (e.g. in the vtable), their
    * types needs to be declared.
    */
   String getFunctionTypeName(MethodDescriptor methodDescriptor) {

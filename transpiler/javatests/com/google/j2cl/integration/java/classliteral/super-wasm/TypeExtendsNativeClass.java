@@ -15,5 +15,5 @@
  */
 package classliteral;
 
-/** Placeholder for WASM. WASM does not yet support extending native types. */
+/** Placeholder for Wasm. Wasm does not yet support extending native types. */
 class TypeExtendsNativeClass {}

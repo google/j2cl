@@ -172,7 +172,7 @@ public class Main {
   }
 
   private static void testArray() {
-    // TODO(b/184675805): enable for WASM when class metadata is implemented for array
+    // TODO(b/184675805): enable for Wasm when class metadata is implemented for array
     if (isWasm()) {
       return;
     }
@@ -204,7 +204,7 @@ public class Main {
   private interface NativeInterface {}
 
   private static void testNative() {
-    // getClass() and friends on Native JavaScript objects is not supported in WASM; native types
+    // getClass() and friends on Native JavaScript objects is not supported in Wasm; native types
     // don't apply in the context of the JVM.
     if (!isJavaScript()) {
       return;
@@ -225,7 +225,7 @@ public class Main {
     assertLiteralType("NativeFunction.class", LiteralType.CLASS, clazz);
   }
 
-  @Wasm("nop") // Extending native types not yet supported in WASM.
+  @Wasm("nop") // Extending native types not yet supported in Wasm.
   private static void testExtendsNative() {
     assertEquals("classliteral.TypeExtendsNativeClass", TypeExtendsNativeClass.class.getName());
 

@@ -70,13 +70,13 @@ def blaze_build(
 
 
 def replace_transpiled_wasm(readable_dirs):
-  """Copy and replace with Blaze built WASM."""
+  """Copy and replace with Blaze built Wasm."""
   _replace_readable_outputs(readable_dirs, "readable_wasm_golden",
                             "output_wasm")
 
 
 def replace_transpiled_wasm_imports(readable_dirs):
-  """Copy and replace with Blaze built WASM imports."""
+  """Copy and replace with Blaze built Wasm imports."""
   _replace_readable_outputs(readable_dirs, "readable_wasm_imports_golden",
                             "output_wasm_imports")
 
@@ -195,7 +195,7 @@ def main(argv):
   else:
     print("  Blaze building JS:")
     print("\n".join(["    " + d for d in js_readable_dirs or ["No matches"]]))
-    print("  Blaze building WASM:")
+    print("  Blaze building Wasm:")
     print("\n".join(["    " + d for d in wasm_readable_dirs or ["No matches"]]))
     print("  Blaze building J2KT:")
     print("\n".join(["    " + d for d in kt_readable_dirs or ["No matches"]]))
@@ -214,11 +214,11 @@ def main(argv):
     replace_transpiled_js(js_readable_dirs)
 
   if wasm_readable_dirs:
-    print("  Copying and reformatting transpiled WASM")
+    print("  Copying and reformatting transpiled Wasm")
     replace_transpiled_wasm(wasm_readable_dirs)
 
   if wasm_imports_readable_dirs:
-    print("  Copying and reformatting transpiled WASM imports")
+    print("  Copying and reformatting transpiled Wasm imports")
     replace_transpiled_wasm_imports(wasm_imports_readable_dirs)
 
   if kt_readable_dirs:

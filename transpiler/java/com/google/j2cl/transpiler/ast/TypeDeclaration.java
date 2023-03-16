@@ -805,7 +805,7 @@ public abstract class TypeDeclaration
   }
 
   // TODO(b/181615162): This is a temporary hack to be able to reuse bridging logic in Closure
-  // and WASM.
+  // and Wasm.
   private static final ThreadLocal<Boolean> ignoreJsEnumAnnotations =
       ThreadLocal.withInitial(() -> false);
 

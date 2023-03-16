@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nullable;
 
-/** Runtime representation of a Java class in WASM. */
+/** Runtime representation of a Java class in Wasm. */
 @AutoValue
 abstract class WasmTypeLayout {
 
@@ -37,7 +37,7 @@ abstract class WasmTypeLayout {
     return new AutoValue_WasmTypeLayout(javaType, wasmSupertypeLayout);
   }
 
-  /** The Java class represented by this WASM type. */
+  /** The Java class represented by this Wasm type. */
   abstract Type getJavaType();
   /** The wasm representation of the superclass for this Java class. */
   @Nullable

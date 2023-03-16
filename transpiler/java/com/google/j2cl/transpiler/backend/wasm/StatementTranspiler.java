@@ -51,7 +51,7 @@ import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Arrays;
 import java.util.List;
 
-/** Transforms Statements into WASM code. */
+/** Transforms Statements into Wasm code. */
 final class StatementTranspiler {
 
   public static void render(
@@ -519,7 +519,7 @@ final class StatementTranspiler {
         if (condition.equals(BooleanLiteral.get(false))) {
           // Do not emit the conditional exit if it will never be taken. This covers cases like:
           //    while (true) { ... }
-          // Removing this condition in these cases brings the WASM verifier to be inline with
+          // Removing this condition in these cases brings the Wasm verifier to be inline with
           // the static analysis performed by Java and allows us to avoid inserting unnecessary
           // (unreachable) operations.
           return;
@@ -595,7 +595,7 @@ final class StatementTranspiler {
     }
   }
 
-  /** Render first line of the source code for {@code statement} as a WASM comment. * */
+  /** Render first line of the source code for {@code statement} as a Wasm comment. * */
   private static void renderFirstLineAsComment(Statement s, SourceBuilder builder) {
     String[] parts = s.toString().split("\n", 2);
     builder.newLine();

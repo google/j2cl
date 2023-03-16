@@ -15,7 +15,7 @@ integration_test(
         "jre.checks.numeric": "DISABLED",
         "jre.checkedMode": "DISABLED",
     },
-    # Arithmetic exceptions cannot be disabled for JVM, WASM or J2KT.
+    # Arithmetic exceptions cannot be disabled for JVM, Wasm or J2KT.
     enable_jvm_test = False,
     enable_kt = False,
     enable_wasm = False,

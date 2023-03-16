@@ -209,12 +209,12 @@ public final class ArrayHelper {
   }
 
   public static void sortPrimitive(Object array) {
-    // TODO(b/194677447): Implement Arrays.sort in WASM.
+    // TODO(b/194677447): Implement Arrays.sort in Wasm.
     throw new UnsupportedOperationException();
   }
 
   public static void sortPrimitive(Object array, int fromIndex, int toIndex) {
-    // TODO(b/194677447): Implement Arrays.sort in WASM.
+    // TODO(b/194677447): Implement Arrays.sort in Wasm.
     throw new UnsupportedOperationException();
   }
 

@@ -33,8 +33,8 @@ import jsinterop.annotations.JsMethod;
 /**
  * Incrementally tests wasm features as they are being added.
  *
- * <p>This test will be removed when all WASM features are implemented and all integration tests are
- * enabled for WASM.
+ * <p>This test will be removed when all Wasm features are implemented and all integration tests are
+ * enabled for Wasm.
  */
 public class Main {
 

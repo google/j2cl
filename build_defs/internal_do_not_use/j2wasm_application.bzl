@@ -8,7 +8,7 @@ load(":provider.bzl", "J2wasmInfo")
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 
 # Template for the generated JS imports file.
-# The `getImports` function referenced by `instantiateStreaming` is defined by the WASM backend.
+# The `getImports` function referenced by `instantiateStreaming` is defined by the Wasm backend.
 _JS_IMPORTS_TEMPLATE = """// GENERATED CODE.
 goog.module("%MODULE_NAME%.j2wasm");
 
@@ -69,7 +69,7 @@ def _impl_j2wasm_application(ctx):
     enable_wasm_checks = ctx.var.get("j2cl_wasm_checks", None) == "1"
 
     ctx.actions.run(
-        progress_message = "Transpiling to WASM %s" % ctx.label,
+        progress_message = "Transpiling to Wasm %s" % ctx.label,
         inputs = depset(transitive = [srcs, classpath]),
         outputs = [transpile_out],
         executable = ctx.executable._j2cl_transpiler,
@@ -124,7 +124,7 @@ def _impl_j2wasm_application(ctx):
         inputs = [ctx.outputs.wat],
         outputs = [intermediate_source_map, intermediate_wasm_output],
         mnemonic = "J2wasm",
-        progress_message = "Compiling to WASM (stage 1)",
+        progress_message = "Compiling to Wasm (stage 1)",
         # Binaryen can leverage 4 cores with some amount of parallelism.
         execution_requirements = {"cpu:4": ""},
     )
@@ -152,7 +152,7 @@ def _impl_j2wasm_application(ctx):
         inputs = [intermediate_wasm_output, intermediate_source_map],
         outputs = outputs,
         mnemonic = "J2wasm",
-        progress_message = "Compiling to WASM (stage 2)",
+        progress_message = "Compiling to Wasm (stage 2)",
         # Binaryen can leverage 4 cores with some amount of parallelism.
         execution_requirements = {"cpu:4": ""},
     )

@@ -62,7 +62,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Transforms expressions into WASM code.
+ * Transforms expressions into Wasm code.
  *
  * <p>As is typical in stack based VMs, expressions evaluate leaving the result in the stack.
  */
@@ -184,7 +184,7 @@ final class ExpressionTranspiler {
             castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
 
         if (TypeDescriptors.isJavaLangObject(castTypeDescriptor)) {
-          // Avoid unncessary casts to j.l.Object. This also helps avoiding a WASM cast whem going
+          // Avoid unncessary casts to j.l.Object. This also helps avoiding a Wasm cast whem going
           // from native arrays to WasmOpaque objects (and vice versa) which would otherwise fail.
           render(castExpression.getExpression());
           return false;
@@ -192,7 +192,7 @@ final class ExpressionTranspiler {
 
         if (castTypeDescriptor.isInterface()) {
           // TODO(b/183769034): At the moment the actual cast check is performed at interface
-          // method call. Depending on whether WASM NPEs become catchable there might need to be
+          // method call. Depending on whether Wasm NPEs become catchable there might need to be
           // instrumentation code here.
           render(castExpression.getExpression());
           return false;
@@ -598,7 +598,7 @@ final class ExpressionTranspiler {
 
   public static boolean returnsVoid(Expression expression) {
     if (expression instanceof MethodCall && ((MethodCall) expression).getTarget().isConstructor()) {
-      // This is a super() or this() call and the generated constructor for WASM is actually returns
+      // This is a super() or this() call and the generated constructor for Wasm is actually returns
       // the instance (as opposed to how it is modeled in the AST where the return is void).
       return false;
     }

@@ -2,10 +2,10 @@
 #
 # Note that J2WASM is experimental and it is NOT production ready.
 #
-# It is mostly developed to help with the evolution of WASM GC specification and
+# It is mostly developed to help with the evolution of Wasm GC specification and
 # what is released externally here is minimal working version to provide .wat files
 # for community experimentation and it doesn't reflect final workings of the product
-# nor the WASM spec.
+# nor the Wasm spec.
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load(
