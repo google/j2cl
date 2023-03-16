@@ -116,7 +116,7 @@ public final class Character implements Comparable<Character>, Serializable {
     }
   }
 
-  public static final Class<Character> TYPE = Character.class;
+  public static final Class<Character> TYPE = char.class;
   public static final int MIN_RADIX = 2;
 
   public static final int MAX_RADIX = 36;
