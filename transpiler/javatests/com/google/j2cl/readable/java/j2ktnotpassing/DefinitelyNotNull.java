@@ -51,4 +51,17 @@ public class DefinitelyNotNull {
       return ordering.nullsLast();
     }
   }
+
+  // Reproduction of Guava code with immutable lists.
+  public static class ImmutableList<E> {
+    public static <E> ImmutableList<E> copyOf(Iterable<E> iterable) {
+      throw new RuntimeException();
+    }
+
+    @SuppressWarnings("nullness")
+    public static <E extends @Nullable Object> ImmutableList<E> copyOfNullable(
+        Iterable<E> iterable) {
+      return ImmutableList.copyOf(iterable);
+    }
+  }
 }

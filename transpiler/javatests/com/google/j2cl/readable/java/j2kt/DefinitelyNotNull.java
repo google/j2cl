@@ -18,8 +18,8 @@ package j2kt;
 import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
+@NullMarked
 public class DefinitelyNotNull {
-  @NullMarked
   static class Ordering<T extends @Nullable Object> {
     <S extends T> Ordering<S> reverse() {
       throw new RuntimeException();

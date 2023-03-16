@@ -5,10 +5,13 @@ package j2ktnotpassing
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import kotlin.Any
 import kotlin.OptIn
+import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmField
+import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
 
@@ -53,6 +56,27 @@ open class DefinitelyNotNull {
   @HiddenFromObjC
   open override fun <S: T?> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
    return this.nullsLast()
+  }
+ }
+
+ @ObjCName("J2ktnotpassingDefinitelyNotNull_ImmutableList", exact = true)
+ open class ImmutableList<E: Any> {
+  companion object {
+   @JvmStatic
+   @ObjCName("copyOf")
+   fun <E: Any> copyOf(
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
+   ): DefinitelyNotNull.ImmutableList<E> {
+    throw RuntimeException()
+   }
+
+   @JvmStatic
+   @ObjCName("copyOfNullable")
+   fun <E> copyOfNullable(
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
+   ): DefinitelyNotNull.ImmutableList<E & Any> {
+    return DefinitelyNotNull.ImmutableList.copyOf<E & Any>(iterable)
+   }
   }
  }
 }
