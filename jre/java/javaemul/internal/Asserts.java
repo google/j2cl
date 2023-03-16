@@ -19,7 +19,7 @@ import jsinterop.annotations.JsType;
 
 /** Defines helper functions used for generating assert statements. */
 @JsType(namespace = "vmbootstrap")
-class Asserts {
+public class Asserts {
   public static void $assert(boolean condition) {
     if (!condition) {
       throw new AssertionError();
