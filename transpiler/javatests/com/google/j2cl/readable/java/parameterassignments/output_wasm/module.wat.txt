@@ -498,7 +498,7 @@
  (block
   ;; (ia = javaemul.internal.WasmArray.OfInt.$create([i,ia.elements[0]]));
   ;;@ parameterassignments/Main.java:38:4
-  (local.set $ia (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $i)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ia)) (i32.const 0)))))
+  (local.set $ia (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (local.get $i)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $ia)) (i32.const 0)))))
  )
 )
 (elem declare func $m_testPrimitiveVarargs__int__arrayOf_int__void_$pp_parameterassignments@parameterassignments.Main)
@@ -693,7 +693,7 @@
  (block
   ;; (is.elements[0] = is.elements[1]);
   ;;@ parameterassignments/Main.java:57:8
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $is)) (i32.const 0) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $is)) (i32.const 1)))
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $is)) (i32.const 0) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $is)) (i32.const 1)))
  )
 )
 (elem declare func $m_test__int__arrayOf_int__void@parameterassignments.Main.$LambdaImplementor$2)

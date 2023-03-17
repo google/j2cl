@@ -405,16 +405,16 @@
   (local.set $ints2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const 5)))
   ;; int n = ints.elements[0];
   ;;@ array/Arrays.java:74:4
-  (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0)))
+  (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $ints)) (i32.const 0)))
   ;; (n = ((int[]) ints2d.elements[0]).elements[1]);
   ;;@ array/Arrays.java:75:4
-  (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(ref.cast_static $javaemul.internal.WasmArray.OfInt (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)))) (i32.const 1)))
+  (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(ref.cast_static $javaemul.internal.WasmArray.OfInt (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)))) (i32.const 1)))
   ;; (ints.elements[0] = 1);
   ;;@ array/Arrays.java:78:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0) (i32.const 1))
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(local.get $ints)) (i32.const 0) (i32.const 1))
   ;; (((int[]) ints2d.elements[0]).elements[1] = 1);
   ;;@ array/Arrays.java:79:4
-  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(ref.cast_static $javaemul.internal.WasmArray.OfInt (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)))) (i32.const 1) (i32.const 1))
+  (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt(ref.cast_static $javaemul.internal.WasmArray.OfInt (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)))) (i32.const 1) (i32.const 1))
  )
 )
 (elem declare func $m_testIntArrays__void_$pp_array@array.Arrays)
@@ -450,16 +450,16 @@
   (local.set $longs2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int@javaemul.internal.WasmArray.OfInt (array.init_static $int.array (i32.const 20)(i32.const -1)))(i32.const 6)))
   ;; long n = longs.elements[0];
   ;;@ array/Arrays.java:92:4
-  (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(local.get $longs)) (i32.const 0)))
+  (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong(local.get $longs)) (i32.const 0)))
   ;; (n = ((long[]) longs2d.elements[0]).elements[1]);
   ;;@ array/Arrays.java:93:4
-  (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(ref.cast_static $javaemul.internal.WasmArray.OfLong (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)))) (i32.const 1)))
+  (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong(ref.cast_static $javaemul.internal.WasmArray.OfLong (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)))) (i32.const 1)))
   ;; (longs.elements[0] = 1);
   ;;@ array/Arrays.java:96:4
-  (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(local.get $longs)) (i32.const 0) (i64.const 1))
+  (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong(local.get $longs)) (i32.const 0) (i64.const 1))
   ;; (((long[]) longs2d.elements[0]).elements[1] = 1);
   ;;@ array/Arrays.java:97:4
-  (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(ref.cast_static $javaemul.internal.WasmArray.OfLong (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)))) (i32.const 1) (i64.const 1))
+  (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong(ref.cast_static $javaemul.internal.WasmArray.OfLong (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)))) (i32.const 1) (i64.const 1))
  )
 )
 (elem declare func $m_testLongArrays__void_$pp_array@array.Arrays)

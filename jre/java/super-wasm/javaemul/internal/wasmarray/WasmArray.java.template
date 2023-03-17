@@ -1,0 +1,91 @@
+package javaemul.internal;
+
+import java.io.Serializable;
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
+
+/**
+ * A common base abstraction for the arrays in Wasm.
+ *
+ * <p>NOTE: All arrays declared as fields, parameters, etc in the subclasses of WasmArray will be
+ * considered native WASM arrays, whereas all arrays declared in the WasmArray class itself will be
+ * rewritten to be instances of one of the subclasses.
+ */
+abstract class WasmArray implements Serializable, Cloneable {
+
+  int length;
+
+  protected WasmArray(int length) {
+    this.length = length;
+  }
+
+  public final int getLength() {
+    return length;
+  }
+
+  /** Create a new array of same type with given length. */
+  abstract Object newArray(int length);
+
+  /** Change the length of the array. May resize storage if necessary. */
+  abstract void setLength(int length);
+
+  abstract void copyFrom(int offset, WasmArray values, int valueOffset, int len);
+
+  public static Object[] createMultiDimensional(int[] dimensionLengths, int leafType) {
+    return (Object[]) createRecursively(dimensionLengths, 0, leafType);
+  }
+
+  private static Object createRecursively(int[] dimensions, int dimensionIndex, int leafType) {
+    int length = dimensions[dimensionIndex];
+    if (length == -1) {
+      // We reach a sub array that doesn't have a dimension (e.g. 3rd dimension in int[3][2][][])
+      return null;
+    }
+
+    if (dimensionIndex == dimensions.length - 1) {
+      // We have reached the leaf dimension.
+      return createLeaf(length, leafType);
+    } else {
+      Object[] array = new Object[length];
+      for (int i = 0; i < length; i++) {
+        array[i] = createRecursively(dimensions, dimensionIndex + 1, leafType);
+      }
+      return array;
+    }
+  }
+
+  private static Object createLeaf(int length, int leafType) {
+    switch (leafType) {
+      case 1:
+        return new boolean[length];
+      case 2:
+        return new byte[length];
+      case 3:
+        return new short[length];
+      case 4:
+        return new char[length];
+      case 5:
+        return new int[length];
+      case 6:
+        return new long[length];
+      case 7:
+        return new float[length];
+      case 8:
+        return new double[length];
+      default:
+        return new Object[length];
+    }
+  }
+
+  %SUBTYPES%
+
+  private static int getNewCapacity(int originalCapacity, int requestedCapacity) {
+    // Grow roughly with 1.5x rate at minimum.
+    int minCapacity = originalCapacity + (originalCapacity >> 1) + 1;
+    return Math.max(minCapacity, requestedCapacity);
+  }
+
+  @JsMethod // Keep JsInteropRestrictionsChecker happy.
+  @Wasm("array.copy typeof(0) typeof(2)")
+  private static native void copy(Object dest, int destOfs, Object src, int srcOfs, int len);
+}

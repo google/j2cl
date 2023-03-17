@@ -1,0 +1,78 @@
+  static class %ARRAY_TYPE_NAME% extends WasmArray {
+
+    %TYPE_NAME%[] elements;
+
+    %ARRAY_TYPE_NAME%(int length) {
+      super(length);
+      // Do explicit construction of 0 length arrays because those are optimized to preallocated
+      // singletons.
+      this.elements = (length == 0) ? new %TYPE_NAME%[0] : new %TYPE_NAME%[length];
+    }
+
+    %ARRAY_TYPE_NAME%(%TYPE_NAME%[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
+    }
+
+    @Override
+    Object newArray(int length) {
+      return new WasmArray.%ARRAY_TYPE_NAME%(length);
+    }
+
+    @Override
+    void setLength(int newLength) {
+      ensureCapacity(newLength);
+      if (newLength < length) {
+        // Clear to outside contents
+        for (int i = newLength; i < length; i++) {
+          elements[i] = %DEFAULT_VALUE%;
+        }
+      }
+      length = newLength;
+    }
+
+    public void push(%TYPE_NAME% o) {
+      int newLength = length + 1;
+      ensureCapacity(newLength);
+      elements[length] = o;
+      length = newLength;
+    }
+
+    private void ensureCapacity(int newLength) {
+      if (newLength > elements.length) {
+        // Not enough capacity, increase it.
+        %TYPE_NAME%[] original = elements;
+        elements = new %TYPE_NAME%[getNewCapacity(length, newLength)];
+        copy(elements, 0, original, 0, original.length);
+      }
+    }
+
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(elements, offset, ((WasmArray.%ARRAY_TYPE_NAME%) values).elements, valueOffset, len);
+    }
+
+    public void insertFrom(int insertIndex, WasmArray.%ARRAY_TYPE_NAME% values) {
+      %TYPE_NAME%[] original = elements;
+      int newLength = length + values.length;
+
+      // Ensure enough capacity.
+      if (newLength > elements.length) {
+        elements = new %TYPE_NAME%[getNewCapacity(elements.length, newLength)];
+        // Copy only up to index since the other will be moved anyway.
+        copy(this.elements, 0, original, 0, insertIndex);
+      }
+
+      // Make room for the values that will be inserted by moving the existing elements to the
+      // end so that they are not overwritten.
+      int insertEndIndex = insertIndex + values.length;
+      copy(this.elements, insertEndIndex, original, insertIndex, newLength - insertEndIndex);
+
+      // Copy new values into the insert location.
+      copy(this.elements, insertIndex, values.elements, 0, values.length);
+
+      // Adjust the final size to cover all copied items
+      length = newLength;
+    }
+  }
+

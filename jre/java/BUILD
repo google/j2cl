@@ -80,13 +80,16 @@ WASM_EXCLUDED_SRCS = [
     "javaemul/internal/ArrayStamper.java",  # Unused in Wasm
     "javaemul/internal/Comparables.java",  # Unused in Wasm
     "javaemul/internal/Objects.java",  # Unused in Wasm
+    "javaemul/internal/WasmArray.java",  # Generated in Wasm.
 ]
 
 package_sources(
     name = "jre_java_files-j2wasm",
     srcs = BASE_JRE_SRCS,
     excludes = WASM_EXCLUDED_SRCS,
-    super_srcs = glob(["super-wasm/**/*.java"]),
+    super_srcs = glob(["super-wasm/**/*.java"]) + [
+        "//jre/java/super-wasm/javaemul/internal/wasmarray",
+    ],
 )
 
 package_sources(
@@ -105,7 +108,9 @@ package_sources(
             "super-wasm/java/lang/IntegralToString.java",
             "super-wasm/java/lang/String.java",
         ],
-    ),
+    ) + [
+        "//jre/java/super-wasm/javaemul/internal/wasmarray",
+    ],
 )
 
 filegroup(
