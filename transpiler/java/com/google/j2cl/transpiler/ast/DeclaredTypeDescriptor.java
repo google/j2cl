@@ -32,6 +32,7 @@ import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.SourceLanguage;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -859,25 +860,32 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return targetMethodDescriptor.transform(
         builder ->
             builder
-                .setParameterTypeDescriptors(
+                // Use the ParameterDescriptors (rather than just their TypeDescriptors) to avoid
+                // losing information like @JsOptional when creating a JsMethod to JsMethod bridge.
+                .setParameterDescriptors(
                     Streams.zip(
-                            bridgeOrigin.getParameterTypeDescriptors().stream(),
-                            targetMethodDescriptor.getParameterTypeDescriptors().stream(),
-                            DeclaredTypeDescriptor::getTypeFromBridge)
+                            bridgeOrigin.getParameterDescriptors().stream(),
+                            targetMethodDescriptor.getParameterDescriptors().stream(),
+                            (fromBridge, fromTarget) ->
+                                getParameterOrReturnForBridge(
+                                    fromBridge, fromTarget, ParameterDescriptor::getTypeDescriptor))
                         .collect(toImmutableList()))
                 .setReturnTypeDescriptor(
-                    getTypeFromBridge(
+                    getParameterOrReturnForBridge(
                         bridgeOrigin.getReturnTypeDescriptor(),
-                        targetMethodDescriptor.getReturnTypeDescriptor())));
+                        targetMethodDescriptor.getReturnTypeDescriptor(),
+                        Function.identity())));
   }
 
   /**
    * If the bridge and the target differ w.r.t being a primitive or not, use the type from the
    * bridge, since the method we are implementing needs to follow the bridge override.
    */
-  private static TypeDescriptor getTypeFromBridge(
-      TypeDescriptor fromBridge, TypeDescriptor fromTarget) {
-    return fromBridge.isPrimitive() != fromTarget.isPrimitive() ? fromBridge : fromTarget;
+  private static <T> T getParameterOrReturnForBridge(
+      T fromBridge, T fromTarget, Function<T, TypeDescriptor> typeGetter) {
+    return typeGetter.apply(fromBridge).isPrimitive() != typeGetter.apply(fromTarget).isPrimitive()
+        ? fromBridge
+        : fromTarget;
   }
 
   /** Returns the default (parameterless) constructor for the type. */

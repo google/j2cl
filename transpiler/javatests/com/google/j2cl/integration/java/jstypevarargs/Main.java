@@ -15,14 +15,28 @@
  */
 package jstypevarargs;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 
 public class Main {
+  public static void main(String... args) {
+    testInstanceMethodFirst();
+    testInstanceMethodNotFirst();
+    testStaticMethodFirst();
+    testStaticMethodNotFirst();
+    testJsFunction();
+    testSideEffect();
+    testSuperMethodCall();
+    testCallVarargsWithNull();
+    testUnboxedType();
+    QualifiedSuperMethodCall.test();
+  }
+
   @JsFunction
-  static interface Function {
+  interface Function {
     int f1(int i, Main... args);
   }
 
@@ -138,7 +152,7 @@ public class Main {
     return elements[0];
   }
 
-  public static void testUnboxedType() {
+  private static void testUnboxedType() {
     // multiple arguments.
     assertTrue(sumAndMultiply(10.0, 1.0, 2.0) == 30.0);
     assertTrue(Main.sumAndMultiply(10.0, 1.0, 2.0) == 30);
@@ -159,7 +173,7 @@ public class Main {
     assertTrue(callSumAndMultiply() == 30.0);
   }
 
-  public static void testStaticMethodNotFirst() {
+  private static void testStaticMethodNotFirst() {
     // multiple arguments.
     assertTrue(f1(10, 1, 2) == 30);
     assertTrue(Main.f1(10, 1, 2) == 30);
@@ -180,7 +194,7 @@ public class Main {
     assertTrue(callF1() == 30);
   }
 
-  public static void testStaticMethodFirst() {
+  private static void testStaticMethodFirst() {
     // multiple arguments.
     assertTrue(f2(1, 2) == 300);
     assertTrue(Main.f2(1, 2) == 300);
@@ -203,7 +217,7 @@ public class Main {
     assertTrue("abc".equals(Main.generics("abc", "def")));
   }
 
-  public static void testInstanceMethodNotFirst() {
+  private static void testInstanceMethodNotFirst() {
     Main m = new Main(1);
     // multiple arguments.
     assertTrue(m.f3(10, 1, 2) == 40);
@@ -220,7 +234,7 @@ public class Main {
     assertTrue(callF3(m) == 40);
   }
 
-  public static void testInstanceMethodFirst() {
+  private static void testInstanceMethodFirst() {
     Main m = new Main(1);
     // multiple arguments.
     assertTrue(m.f4(1, 2) == 400);
@@ -237,7 +251,7 @@ public class Main {
     assertTrue(callF4(m) == 400);
   }
 
-  public static void testJsFunction() {
+  private static void testJsFunction() {
     AFunction a = new AFunction();
     Main m1 = new Main(12);
     Main m2 = new Main(34);
@@ -256,7 +270,7 @@ public class Main {
     assertTrue(callJsFunction(a) == -1);
   }
 
-  public static void testSideEffect() {
+  private static void testSideEffect() {
     Main m = new Main(10);
     assertTrue(m.field == 10);
     int[] ints = new int[] {1, 2};
@@ -264,7 +278,7 @@ public class Main {
     assertTrue(m.field == 15);
   }
 
-  public static void testSuperMethodCall() {
+  private static void testSuperMethodCall() {
     SubMain sm = new SubMain(1, 0);
     assertTrue(sm.test1() == 40);
     assertTrue(sm.test2() == 10);
@@ -278,7 +292,7 @@ public class Main {
     return strings.length;
   }
 
-  public static void testCallVarargsWithNull() {
+  private static void testCallVarargsWithNull() {
     assertTrue(count("Hello") == 1);
     try {
       String[] strings = null;
@@ -288,6 +302,31 @@ public class Main {
       return;
     }
     assertTrue(false);
+  }
+
+  private static class IntegerSummarizer {
+    public int summarize(Integer... values) {
+      int sum = 0;
+      for (int value : values) {
+        sum += value;
+      }
+      return sum;
+    }
+  }
+
+  interface Summarizer<T> {
+    @JsMethod
+    int summarize(T... values);
+  }
+
+  private static class SummarizerImplementor extends IntegerSummarizer
+      implements Summarizer<Integer> {}
+
+  private static void testBridgeWithVarargs() {
+    assertEquals(6, new SummarizerImplementor().summarize(1, 2, 3));
+    Summarizer rawSummarizer = new SummarizerImplementor();
+    // Simulate a call from JS with an untyped array.
+    assertEquals(6, rawSummarizer.summarize(1, 2, 3));
   }
 
   @JsMethod
@@ -308,16 +347,4 @@ public class Main {
   @JsMethod
   private static native int callJsFunction(AFunction a);
 
-  public static void main(String... args) {
-    testInstanceMethodFirst();
-    testInstanceMethodNotFirst();
-    testStaticMethodFirst();
-    testStaticMethodNotFirst();
-    testJsFunction();
-    testSideEffect();
-    testSuperMethodCall();
-    testCallVarargsWithNull();
-    testUnboxedType();
-    QualifiedSuperMethodCall.test();
-  }
 }

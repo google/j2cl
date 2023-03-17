@@ -61,8 +61,11 @@ public class NormalizeJsVarargs extends NormalizationPass {
       if (!functionExpression.isJsVarargs()) {
         return functionExpression;
       }
+      Variable varargsParameter = functionExpression.getJsVarargsParameter();
       maybeAddVarargsPreamble(
-          functionExpression.getJsVarargsParameter(), functionExpression.getBody());
+          (ArrayTypeDescriptor) varargsParameter.getTypeDescriptor(),
+          varargsParameter,
+          functionExpression.getBody());
       return functionExpression;
     }
 
@@ -72,14 +75,23 @@ public class NormalizeJsVarargs extends NormalizationPass {
         return method;
       }
 
-      maybeAddVarargsPreamble(method.getJsVarargsParameter(), method.getBody());
+      Variable varargsParameter = method.getJsVarargsParameter();
+      // If this method (which is a JsMethod) is a bridge then stamp to the expected type of the
+      // bridged method. Otherwise there might be a ClassCastException due to the array being of
+      // incompatible type.
+      ArrayTypeDescriptor varargsStampTypeDescriptor =
+          (ArrayTypeDescriptor)
+              (method.getDescriptor().isBridge()
+                  ? Iterables.getLast(
+                      method.getDescriptor().getBridgeTarget().getParameterTypeDescriptors())
+                  : varargsParameter.getTypeDescriptor());
+      maybeAddVarargsPreamble(varargsStampTypeDescriptor, varargsParameter, method.getBody());
       return method;
     }
 
-    private static void maybeAddVarargsPreamble(Variable varargsParameter, Block body) {
-      ArrayTypeDescriptor varargsParameterTypeDescriptor =
-          (ArrayTypeDescriptor) varargsParameter.getTypeDescriptor();
-      if (varargsParameterTypeDescriptor.isUntypedArray()) {
+    private static void maybeAddVarargsPreamble(
+        ArrayTypeDescriptor varargsStampTypeDescriptor, Variable varargsParameter, Block body) {
+      if (varargsStampTypeDescriptor.isUntypedArray()) {
         return;
       }
 
@@ -93,10 +105,8 @@ public class NormalizeJsVarargs extends NormalizationPass {
           RuntimeMethods.createArraysMethodCall(
               "$stampType",
               varargsParameter.createReference(),
-              varargsParameterTypeDescriptor
-                  .getLeafTypeDescriptor()
-                  .getMetadataConstructorReference(),
-              NumberLiteral.fromInt(varargsParameterTypeDescriptor.getDimensions()));
+              varargsStampTypeDescriptor.getLeafTypeDescriptor().getMetadataConstructorReference(),
+              NumberLiteral.fromInt(varargsStampTypeDescriptor.getDimensions()));
 
       List<Statement> statements = body.getStatements();
       statements.add(0, arrayStampTypeMethodCall.makeStatement(body.getSourcePosition()));
