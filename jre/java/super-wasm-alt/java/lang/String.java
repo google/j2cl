@@ -158,7 +158,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     this((AbstractStringBuilder) stringBuilder);
   }
 
-  private String(AbstractStringBuilder builder) {
+  String(AbstractStringBuilder builder) {
     offset = 0;
     value = builder.shareValue();
     count = builder.length();
