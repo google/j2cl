@@ -331,8 +331,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   /**
    * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
-   * places where original name is useful (like aliasing, identifying the corressponding java type,
-   * Debug/Error output, etc.
+   * places where original name is useful (like aliasing, identifying the corresponding java type,
+   * Debug/Error output, etc.)
    */
   public String getQualifiedSourceName() {
     return getTypeDeclaration().getQualifiedSourceName();
