@@ -63,6 +63,9 @@ def _create_j2wasm_provider(java_provider, js_provider, deps):
 
 def _to_j2wasm_name(name):
     """Convert a label name used in j2cl to be used in j2wasm"""
+    if name.endswith("j2cl_proto"):
+        name = name[:-10]
+        return "%sj2wasm_proto" % name
     if name.endswith("-j2cl"):
         name = name[:-5]
     return "%s-j2wasm" % name
