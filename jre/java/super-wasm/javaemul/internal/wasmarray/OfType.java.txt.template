@@ -47,11 +47,137 @@
       }
     }
 
+#IF OfByte OfShort OfInt OfLong OfChar OfFloat OfDouble
+    /**
+     * Performs a merge sort on the specified portion of an object array.
+     *
+     * <p>Uses O(n) temporary space to perform the merge, but is stable.
+     */
+    @Override
+    void sort(int fromIndex, int toIndex) {
+      %TYPE_NAME%[] temp = new %TYPE_NAME%[toIndex - fromIndex];
+      copy(temp, 0, elements, fromIndex, temp.length);
+      mergeSort(temp, elements, fromIndex, toIndex, -fromIndex);
+    }
+
+    /**
+    * Recursive helper function for {@link #sort(T[], int, int)}.
+    *
+    * @param temp temporary space, as large as the range of elements being sorted. On entry, temp
+    *     should contain a copy of the sort range from array.
+    * @param array array to sort
+    * @param low lower bound of range to sort
+    * @param high upper bound of range to sort
+    * @param ofs offset to convert an array index into a temp index
+    */
+    private static void mergeSort(
+        %TYPE_NAME%[] temp, %TYPE_NAME%[] array, int low, int high, int ofs) {
+      int length = high - low;
+
+      // insertion sort for small arrays
+      if (length < 7) {
+        insertionSort(array, low, high);
+        return;
+      }
+
+      // recursively sort both halves, using the array as temp space
+      int tempLow = low + ofs;
+      int tempHigh = high + ofs;
+      int tempMid = tempLow + ((tempHigh - tempLow) >> 1);
+      mergeSort(array, temp, tempLow, tempMid, -ofs);
+      mergeSort(array, temp, tempMid, tempHigh, -ofs);
+
+      // Skip merge if already in order - just copy from temp
+      if (!isGreaterThan(temp[tempMid - 1], temp[tempMid])) {
+        while (low < high) {
+          array[low++] = temp[tempLow++];
+        }
+        return;
+      }
+
+      // merge sorted halves
+      merge(temp, tempLow, tempMid, tempHigh, array, low, high);
+    }
+
+    /**
+     * Sort a small subsection of an array by insertion sort.
+     *
+     * @param array array to sort
+     * @param low lower bound of range to sort
+     * @param high upper bound of range to sort
+     */
+    private static void insertionSort(%TYPE_NAME%[] array, int low, int high) {
+      for (int i = low + 1; i < high; ++i) {
+        for (int j = i; j > low && isGreaterThan(array[j - 1], array[j]); --j) {
+          %TYPE_NAME% t = array[j];
+          array[j] = array[j - 1];
+          array[j - 1] = t;
+        }
+      }
+    }
+
+    /**
+     * Merge the two sorted subarrays (srcLow,srcMid] and (srcMid,srcHigh] into dest.
+     *
+     * @param src source array for merge
+     * @param srcLow lower bound of bottom sorted half
+     * @param srcMid upper bound of bottom sorted half & lower bound of top sorted half
+     * @param srcHigh upper bound of top sorted half
+     * @param dest destination array for merge
+     * @param destLow lower bound of destination
+     * @param destHigh upper bound of destination
+     */
+    private static void merge(
+        %TYPE_NAME%[] src,
+        int srcLow,
+        int srcMid,
+        int srcHigh,
+        %TYPE_NAME%[] dest,
+        int destLow,
+        int destHigh) {
+      // can't destroy srcMid because we need it as a bound on the lower half
+      int topIdx = srcMid;
+      while (destLow < destHigh) {
+        if (topIdx >= srcHigh || (srcLow < srcMid && !isGreaterThan(src[srcLow], src[topIdx]))) {
+          dest[destLow++] = src[srcLow++];
+        } else {
+          dest[destLow++] = src[topIdx++];
+        }
+      }
+    }
+#ENDIF
+#IF OfByte OfShort OfInt OfLong OfChar
+
+    private static boolean isGreaterThan(%TYPE_NAME% x, %TYPE_NAME% y) {
+      return x > y;
+    }
+#ENDIF
+#IF OfFloat
+
+    private static boolean isGreaterThan(%TYPE_NAME% x, %TYPE_NAME% y) {
+      return Float.compare(x, y) > 0;
+    }
+#ENDIF
+#IF OfDouble
+
+    private static boolean isGreaterThan(%TYPE_NAME% x, %TYPE_NAME% y) {
+      return Double.compare(x, y) > 0;
+    }
+#ENDIF
+
+#IF OfObject OfBoolean
+    @Override
+    void sort(int fromIndex, int toIndex) {
+      throw new UnsupportedOperationException();
+    }
+#ENDIF
+
     @Override
     void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
       copy(elements, offset, ((WasmArray.%ARRAY_TYPE_NAME%) values).elements, valueOffset, len);
     }
 
+#IF OfObject
     public void insertFrom(int insertIndex, WasmArray.%ARRAY_TYPE_NAME% values) {
       %TYPE_NAME%[] original = elements;
       int newLength = length + values.length;
@@ -74,5 +200,5 @@
       // Adjust the final size to cover all copied items
       length = newLength;
     }
+#ENDIF
   }
-

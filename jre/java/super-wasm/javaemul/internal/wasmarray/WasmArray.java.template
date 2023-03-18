@@ -31,6 +31,14 @@ abstract class WasmArray implements Serializable, Cloneable {
 
   abstract void copyFrom(int offset, WasmArray values, int valueOffset, int len);
 
+  /**
+   * Sorts the array between the specified indices.
+   *
+   * @param fromIndex the starting index, inclusive.
+   * @param toIndex the ending index, exclusive.
+   */
+  abstract void sort(int fromIndex, int toIndex);
+
   public static Object[] createMultiDimensional(int[] dimensionLengths, int leafType) {
     return (Object[]) createRecursively(dimensionLengths, 0, leafType);
   }

@@ -204,18 +204,13 @@ public final class ArrayHelper {
     return -low - 1;
   }
 
-  private static WasmArray asWasmArray(Object obj) {
-    return (WasmArray) obj;
-  }
-
   public static void sortPrimitive(Object array) {
-    // TODO(b/194677447): Implement Arrays.sort in Wasm.
-    throw new UnsupportedOperationException();
+    WasmArray wasmArray = asWasmArray(array);
+    wasmArray.sort(0, wasmArray.getLength());
   }
 
   public static void sortPrimitive(Object array, int fromIndex, int toIndex) {
-    // TODO(b/194677447): Implement Arrays.sort in Wasm.
-    throw new UnsupportedOperationException();
+    asWasmArray(array).sort(fromIndex, toIndex);
   }
 
   public static <T> void sort(T[] array, Comparator<? super T> c) {
@@ -225,6 +220,10 @@ public final class ArrayHelper {
   public static <T> void sort(T[] array, int fromIndex, int toIndex, Comparator<? super T> c) {
     checkCriticalArrayBounds(fromIndex, toIndex, array.length);
     MergeSorter.sort(array, fromIndex, toIndex, c);
+  }
+
+  private static WasmArray asWasmArray(Object obj) {
+    return (WasmArray) obj;
   }
 
   private ArrayHelper() {}

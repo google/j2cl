@@ -1340,6 +1340,23 @@ public class ArraysTest extends EmulTestBase {
     assertTrue(Arrays.equals(new int[]{Integer.MIN_VALUE, 1, 2, 3, 3, Integer.MAX_VALUE}, array));
   }
 
+  /** Tests sorting char. */
+  public void testCharSort() {
+    char[] array = new char[0];
+    Arrays.sort(array);
+
+    array = new char[] {Character.MIN_VALUE, 'a', 'b', 'c', Character.MAX_VALUE};
+    Arrays.sort(array);
+    assertTrue(
+        Arrays.equals(new char[] {Character.MIN_VALUE, 'a', 'b', 'c', Character.MAX_VALUE}, array));
+
+    array = new char[] {'z', Character.MAX_VALUE, 'c', 'b', 'a', Character.MIN_VALUE};
+    Arrays.sort(array);
+    assertTrue(
+        Arrays.equals(
+            new char[] {Character.MIN_VALUE, 'a', 'b', 'c', 'z', Character.MAX_VALUE}, array));
+  }
+
   /**
    * Tests sorting of doubles
    */

@@ -56,6 +56,21 @@ def _gen_subtype_src_from_template(
               "| sed -e 's/%ARRAY_TYPE_NAME%/" + name + "/g' " +
               "| sed -e 's/%TYPE_NAME%/" + elementTypeName + "/g' " +
               "| sed -e 's/%DEFAULT_VALUE%/" + elementDefaultValue + "/g' " +
+              # Exclude or include type-specific sections
+              # For example, on generating OfObject, we include code between:
+              #   #IF OfObject
+              #     ... include ...
+              #   #ENDIF
+              # And exclude:
+              #   #IF OfInt OfLong
+              #     ... exclude ...
+              #   #ENDIF
+              "| awk '" +
+              "  /^#IF( |\\w)* %s( |$$)/ { exclude = 0; next; } " % name +
+              "  /^#IF( |\\w)*$$/ { exclude = 1; next; } " +
+              "  /^#ENDIF$$/ { exclude = 0; next; } " +
+              "  !exclude " +
+              "' " +
               ">> $@",
     )
 
