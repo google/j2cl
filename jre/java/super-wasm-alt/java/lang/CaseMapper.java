@@ -205,17 +205,4 @@ class CaseMapper {
 
   @JsMethod(namespace = "j2wasm.CharUtils", name = "charToUpperCase")
   private static native char nativeCharToUpperCase(char value);
-
-  public static char foldCase(char value) {
-    if (value < 128) {
-      if ('A' <= value && value <= 'Z') {
-        return (char) (value + ('a' - 'A'));
-      }
-      return value;
-    }
-    return nativeFoldCase(value);
-  }
-
-  @JsMethod(namespace = "j2wasm.CharUtils", name = "charFoldCase")
-  private static native char nativeFoldCase(char value);
 }

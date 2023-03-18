@@ -260,8 +260,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     if (other instanceof String) {
       String s = (String) other;
-      int count = this.count;
-      if (s.count != count) {
+      int length = count;
+      if (s.count != length) {
         return false;
       }
 
@@ -274,21 +274,21 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         }
       }
 
-      char[] value1 = value;
-      int offset1 = offset;
-      char[] value2 = s.value;
-      int offset2 = s.offset;
-      for (int end = offset1 + count; offset1 < end; ) {
-        if (value1[offset1] != value2[offset2]) {
-          return false;
-        }
-        offset1++;
-        offset2++;
-      }
-      return true;
+      return isRegionEqual(value, offset, s.value, s.offset, length);
     } else {
       return false;
     }
+  }
+
+  private static boolean isRegionEqual(char[] a, int aOffset, char[] b, int bOffset, int length) {
+    for (int end = aOffset + length; aOffset < end; ) {
+      if (a[aOffset] != b[bOffset]) {
+        return false;
+      }
+      aOffset++;
+      bOffset++;
+    }
+    return true;
   }
 
   public boolean equalsIgnoreCase(String other) {
@@ -303,25 +303,29 @@ public final class String implements Serializable, Comparable<String>, CharSeque
       return false;
     }
 
-    int o1 = offset, o2 = other.offset;
-    int end = offset + length;
-    char[] target = other.value;
-    while (o1 < end) {
-      char c1 = value[o1++];
-      char c2 = target[o2++];
-      if (c1 == c2) {
-        continue;
+    return isRegionEqualIgnoreCase(value, offset, other.value, other.offset, length);
+  }
+
+  private static boolean isRegionEqualIgnoreCase(
+      char[] a, int aOffset, char[] b, int bOffset, int length) {
+    for (int end = aOffset + length; aOffset < end; ) {
+      char c1 = a[aOffset];
+      char c2 = b[bOffset];
+      if (c1 != c2) {
+        if (c1 > 127 && c2 > 127) {
+          // Branch into native implementation since we cannot handle case folding for non-ascii
+          // space.
+          int remaining = end - aOffset;
+          return nativeEqualsIgnoreCase(
+              nativeFromCharCodeArray(a, aOffset, end),
+              nativeFromCharCodeArray(b, bOffset, bOffset + remaining));
+        }
+        if (foldCaseAscii(c1) != foldCaseAscii(c2)) {
+          return false;
+        }
       }
-      if (c1 > 127 && c2 > 127) {
-        // Branch into native implementation since we cannot handle case folding for non-ascii
-        // space.
-        return nativeEqualsIgnoreCase(
-            nativeFromCharCodeArray(value, o1 - 1, offset + length),
-            nativeFromCharCodeArray(target, o2 - 1, other.offset + length));
-      }
-      if (foldCaseAscii(c1) != foldCaseAscii(c2)) {
-        return false;
-      }
+      aOffset++;
+      bOffset++;
     }
     return true;
   }
@@ -576,6 +580,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public boolean regionMatches(int thisStart, String string, int start, int length) {
+    return regionMatches(false, thisStart, string, start, length);
+  }
+
+  public boolean regionMatches(
+      boolean ignoreCase, int thisStart, String string, int start, int length) {
     checkNotNull(string);
     if (start < 0 || string.count - start < length) {
       return false;
@@ -583,44 +592,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     if (thisStart < 0 || count - thisStart < length) {
       return false;
     }
-    if (length <= 0) {
-      return true;
-    }
-    int o1 = offset + thisStart, o2 = string.offset + start;
-    char[] value1 = value;
-    char[] value2 = string.value;
-    for (int i = 0; i < length; ++i) {
-      if (value1[o1 + i] != value2[o2 + i]) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  public boolean regionMatches(
-      boolean ignoreCase, int thisStart, String string, int start, int length) {
-    checkNotNull(string);
-    if (!ignoreCase) {
-      return regionMatches(thisStart, string, start, length);
-    }
-    if (thisStart < 0 || length > count - thisStart) {
-      return false;
-    }
-    if (start < 0 || length > string.count - start) {
-      return false;
-    }
-    thisStart += offset;
-    start += string.offset;
-    int end = thisStart + length;
-    char[] target = string.value;
-    while (thisStart < end) {
-      char c1 = value[thisStart++];
-      char c2 = target[start++];
-      if (c1 != c2 && CaseMapper.foldCase(c1) != CaseMapper.foldCase(c2)) {
-        return false;
-      }
-    }
-    return true;
+    return ignoreCase
+        ? isRegionEqualIgnoreCase(
+            value, offset + thisStart, string.value, string.offset + start, length)
+        : isRegionEqual(value, offset + thisStart, string.value, string.offset + start, length);
   }
 
   public String replace(char oldChar, char newChar) {
@@ -842,22 +817,26 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public boolean contentEquals(StringBuffer strbuf) {
-    int size = strbuf.length();
-    if (count != size) {
+    int len = strbuf.length();
+    if (len != count) {
       return false;
     }
-    return regionMatches(0, new String(0, size, strbuf.getValue()), 0, size);
+    return isRegionEqual(value, offset, strbuf.getValue(), 0, len);
   }
 
   public boolean contentEquals(CharSequence cs) {
+    if (cs == this) {
+      return true;
+    }
     int len = cs.length();
     if (len != count) {
       return false;
     }
-    if (len == 0 && count == 0) {
+    if (len == 0) {
       return true; // since both are empty strings
     }
-    return regionMatches(0, cs.toString(), 0, len);
+    String str = cs.toString();
+    return isRegionEqual(value, offset, str.value, str.offset, len);
   }
 
   public boolean matches(String regex) {

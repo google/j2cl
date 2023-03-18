@@ -498,6 +498,20 @@ public class StringTest extends GWTTestCase {
     assertFalse(hideFromCompiler("abcğa").equalsIgnoreCase("abcŞa"));
   }
 
+  public void testContentEquals() throws Exception {
+    String s = "abc";
+    assertTrue(s.contentEquals(new StringBuffer("abc")));
+    assertFalse(s.contentEquals(new StringBuffer("abd")));
+    assertTrue(s.contentEquals(new StringBuffer("ab").append("c")));
+    assertFalse(s.contentEquals(new StringBuffer("ab").append("d")));
+
+    // Test also CharSequence overload.
+    assertTrue(s.contentEquals((CharSequence) new StringBuffer("abc")));
+    assertFalse(s.contentEquals((CharSequence) new StringBuffer("abd")));
+    assertTrue(s.contentEquals((CharSequence) new StringBuffer("ab").append("c")));
+    assertFalse(s.contentEquals((CharSequence) new StringBuffer("ab").append("d")));
+  }
+
   public void testGetBytesAscii() {
     // Simple ASCII should get through any standard encoding (EBCDIC users,
     // you're out of luck).
