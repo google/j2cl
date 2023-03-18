@@ -66,8 +66,8 @@ def _gen_subtype_src_from_template(
               #     ... exclude ...
               #   #ENDIF
               "| awk '" +
-              "  /^#IF( |\\w)* %s( |$$)/ { exclude = 0; next; } " % name +
-              "  /^#IF( |\\w)*$$/ { exclude = 1; next; } " +
+              "  /^#IF[a-zA-Z ]* %s( |$$)/ { exclude = 0; next; } " % name +
+              "  /^#IF[a-zA-Z ]*$$/ { exclude = 1; next; } " +
               "  /^#ENDIF$$/ { exclude = 0; next; } " +
               "  !exclude " +
               "' " +
