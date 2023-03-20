@@ -4,6 +4,7 @@
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
+load("//third_party/bazel_rules/rules_closure/closure:defs.bzl", "closure_js_binary")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 

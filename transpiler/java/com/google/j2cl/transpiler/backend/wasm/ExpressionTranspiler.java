@@ -58,8 +58,6 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Transforms expressions into Wasm code.
@@ -484,12 +482,6 @@ final class ExpressionTranspiler {
                       ? environment.getMethodImplementationName(target)
                       : environment.getNoSideEffectWrapperFunctionName(target)));
         } else {
-          Matcher m = Pattern.compile("typeof\\((\\d+)\\)").matcher(wasmInfo);
-          while (m.find()) {
-            TypeDescriptor type =
-                methodCall.getArguments().get(Integer.parseInt(m.group(1))).getTypeDescriptor();
-            wasmInfo = wasmInfo.replace(m.group(), environment.getWasmTypeName(type));
-          }
           sourceBuilder.append("(" + wasmInfo + " ");
         }
 

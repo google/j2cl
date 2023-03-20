@@ -92,8 +92,4 @@ abstract class WasmArray implements Serializable, Cloneable {
     int minCapacity = originalCapacity + (originalCapacity >> 1) + 1;
     return Math.max(minCapacity, requestedCapacity);
   }
-
-  @JsMethod // Keep JsInteropRestrictionsChecker happy.
-  @Wasm("array.copy typeof(0) typeof(2)")
-  private static native void copy(Object dest, int destOfs, Object src, int srcOfs, int len);
 }

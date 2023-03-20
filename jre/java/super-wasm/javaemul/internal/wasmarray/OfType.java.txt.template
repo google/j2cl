@@ -177,6 +177,10 @@
       copy(elements, offset, ((WasmArray.%ARRAY_TYPE_NAME%) values).elements, valueOffset, len);
     }
 
+    @JsMethod // Keep JsInteropRestrictionsChecker happy.
+    @Wasm("array.copy $%TYPE_NAME%.array $%TYPE_NAME%.array ")
+    private static native void copy(Object dest, int destOfs, Object src, int srcOfs, int len);
+
 #IF OfObject
     public void insertFrom(int insertIndex, WasmArray.%ARRAY_TYPE_NAME% values) {
       %TYPE_NAME%[] original = elements;

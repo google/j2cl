@@ -35,7 +35,7 @@ generate_wasm_array(
 generate_wasm_array_subtype(
     name = "OfObject",
     elementDefaultValue = "null",
-    elementTypeName = "Object",
+    elementTypeName = "java.lang.Object",
 )
 
 generate_wasm_array_subtype(
