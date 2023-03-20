@@ -1,6 +1,7 @@
 goog.module('vmbootstrap.primitives.$%PRIMITIVE_NAME%$impl');
 
 const $Util = goog.require('nativebootstrap.Util$impl');
+const %BOXED_NAME% = goog.require('%BOXED_TYPE%$impl');
 %long_ONLY% const Long = goog.require('nativebootstrap.Long$impl');
 
 
@@ -34,7 +35,7 @@ class $%PRIMITIVE_NAME% {
 $%PRIMITIVE_NAME%.$initialArrayValue = %PRIMITIVE_INIT_VALUE%;
 
 
-$Util.$setClassMetadataForPrimitive($%PRIMITIVE_NAME%, '%PRIMITIVE_NAME%', '%PRIMITIVE_SHORT_NAME%');
+$Util.$setClassMetadataForPrimitive($%PRIMITIVE_NAME%, %BOXED_NAME%, '%PRIMITIVE_NAME%', '%PRIMITIVE_SHORT_NAME%');
 
 
 /**

@@ -74,6 +74,16 @@ public class Constructor {
     return Util.$isPrimitiveType(this);
   }
 
+  @JsOverlay
+  public final Constructor getBoxedConstructor() {
+    return Util.$getBoxedConstructor(this);
+  }
+
+  @JsOverlay
+  public final Constructor getPrimitiveConstructor() {
+    return Util.$getPrimitiveConstructor(this);
+  }
+
   @JsType(isNative = true, namespace = "nativebootstrap")
   private static class Util {
     public static int TYPE_ENUM;
@@ -87,5 +97,9 @@ public class Constructor {
     public static native int $extractClassType(Constructor ctor);
 
     public static native boolean $isPrimitiveType(Constructor ctor);
+
+    public static native Constructor $getPrimitiveConstructor(Constructor ctor);
+
+    public static native Constructor $getBoxedConstructor(Constructor ctor);
   }
 }

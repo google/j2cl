@@ -124,4 +124,22 @@ public final class Class<T> implements Type, Serializable {
     }
     return rv;
   }
+
+  public Class<?> $getBoxedClass() {
+    return isPrimitive() ? $get(ctor.getBoxedConstructor()) : this;
+  }
+
+  public Class<?> $getPrimitiveClass() {
+    if (isArray()) {
+      return null;
+    }
+    if (isPrimitive()) {
+      return this;
+    }
+    Constructor primitiveCtor = ctor.getPrimitiveConstructor();
+    if (primitiveCtor == null) {
+      return null;
+    }
+    return $get(primitiveCtor);
+  }
 }

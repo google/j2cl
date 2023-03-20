@@ -404,16 +404,22 @@ public final class LibraryInfoBuilder {
   // is completed and the references removed.
   private static final ImmutableSet<String> TYPES_ACCESSED_FROM_J2CL_BOOTSTRAP_JS =
       ImmutableSet.of(
-          "javaemul.internal.InternalPreconditions",
-          "java.lang.Object",
-          "java.lang.Double",
           "java.lang.Boolean",
-          "java.lang.Number",
+          "java.lang.Byte",
+          "java.lang.Character",
           "java.lang.CharSequence",
-          "java.lang.String",
           "java.lang.Class",
           "java.lang.Comparable",
-          "java.lang.Integer");
+          "java.lang.Double",
+          "java.lang.Float",
+          "java.lang.Integer",
+          "java.lang.Long",
+          "java.lang.Number",
+          "java.lang.Object",
+          "java.lang.Short",
+          "java.lang.String",
+          "java.lang.Void",
+          "javaemul.internal.InternalPreconditions");
 
   private static boolean isAccesssedFromJ2clBootstrapJsFiles(
       DeclaredTypeDescriptor typeDescriptor) {

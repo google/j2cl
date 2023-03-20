@@ -12,10 +12,12 @@ def generate_primitive_type(name, **kwargs):
 def _gen_src_from_template(
         template,
         name,
+        boxedType,
         shortName,
         jsTypeName = "number",
         initValue = "0"):
     targetName = "src_" + name + template.replace(".", "_")
+    boxedName = boxedType.replace(".", "_")
 
     native.genrule(
         name = targetName,
@@ -28,6 +30,8 @@ def _gen_src_from_template(
               "| sed -e 's/%PRIMITIVE_JS_TYPE%/" + jsTypeName + "/g' " +
               "| sed -e 's/%PRIMITIVE_INIT_VALUE%/" + initValue + "/g' " +
               "| sed -e 's/%" + name + "_ONLY% //g' " + "| sed -e '/_ONLY%/d' " +
+              "| sed -e 's/%BOXED_NAME%/" + boxedName + "/g' " +
+              "| sed -e 's/%BOXED_TYPE%/" + boxedType + "/g' " +
               ">> $@",
     )
 

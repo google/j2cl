@@ -75,15 +75,18 @@ class Util {
 
   /**
    * @param {Constructor} ctor
+   * @param {Constructor} boxedCtor
    * @param {string} name
    * @param {string} shortName
    * @public
    */
-  static $setClassMetadataForPrimitive(ctor, name, shortName) {
+  static $setClassMetadataForPrimitive(ctor, boxedCtor, name, shortName) {
     ctor.prototype.$$classMetadata = [Util.$makeClassName(name), Util.TYPE_PRIMITIVE, shortName];
     // Primitives also marked separately as $isPrimitiveType works even without
     // class metadata.
     ctor.prototype.$$isPrimitive = true;
+    ctor.prototype.$$boxedType = boxedCtor;
+    boxedCtor.prototype.$$primitiveType = ctor;
   }
 
   /**
@@ -94,6 +97,26 @@ class Util {
    */
   static $isPrimitiveType(ctor) {
     return !!ctor && ctor.prototype.$$isPrimitive;
+  }
+
+  /**
+   * Return the corresponding primitive constructor, if it exists.
+   * @param {Constructor} ctor
+   * @return {?Constructor}
+   * @public
+   */
+  static $getPrimitiveConstructor(ctor) {
+    return ctor.prototype.$$primitiveType;
+  }
+
+  /**
+   * Return the corresponding boxed constructor, if ctor is a primitive.
+   * @param {Constructor} ctor
+   * @return {?Constructor}
+   * @public
+   */
+  static $getBoxedConstructor(ctor) {
+    return ctor.prototype.$$boxedType || ctor;
   }
 
   /**
