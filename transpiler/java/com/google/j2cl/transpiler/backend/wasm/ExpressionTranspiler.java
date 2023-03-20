@@ -407,11 +407,11 @@ final class ExpressionTranspiler {
       private void renderPolymorphicMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
         DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
-        if (methodCall.hasSideEffects()) {
-          sourceBuilder.append(format("(call_ref %s ", environment.getFunctionTypeName(target)));
-        } else {
+        if (target.isSideEffectFree()) {
           sourceBuilder.append(
               format("(call %s ", environment.getNoSideEffectWrapperFunctionName(target)));
+        } else {
+          sourceBuilder.append(format("(call_ref %s ", environment.getFunctionTypeName(target)));
         }
 
         // Pass the implicit parameter.
@@ -478,9 +478,9 @@ final class ExpressionTranspiler {
           sourceBuilder.append(
               String.format(
                   "(call %s ",
-                  methodCall.hasSideEffects()
-                      ? environment.getMethodImplementationName(target)
-                      : environment.getNoSideEffectWrapperFunctionName(target)));
+                  target.isSideEffectFree()
+                      ? environment.getNoSideEffectWrapperFunctionName(target)
+                      : environment.getMethodImplementationName(target)));
         } else {
           sourceBuilder.append("(" + wasmInfo + " ");
         }
@@ -496,7 +496,7 @@ final class ExpressionTranspiler {
 
         // The binaryen intrinsic that implements calls without side effect needs the function
         // reference to the function to be called as the last parameter.
-        if (!methodCall.hasSideEffects()) {
+        if (target.isSideEffectFree()) {
           sourceBuilder.append(
               String.format("(ref.func %s) ", environment.getMethodImplementationName(target)));
         }

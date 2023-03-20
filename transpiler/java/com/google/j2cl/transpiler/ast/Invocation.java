@@ -46,7 +46,8 @@ public abstract class Invocation extends MemberReference {
 
   @Override
   public boolean hasSideEffects() {
-    return !getTarget().isSideEffectFree();
+    return (getQualifier() != null && getQualifier().hasSideEffects())
+        || !getTarget().isSideEffectFree();
   }
 
   @Override
