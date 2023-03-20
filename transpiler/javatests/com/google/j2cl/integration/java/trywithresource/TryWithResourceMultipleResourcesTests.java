@@ -18,9 +18,9 @@ package trywithresource;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
-import trywithresource.FailableResource.FailureMode;
 import java.util.ArrayList;
 import java.util.List;
+import trywithresource.FailableResource.FailureMode;
 
 public class TryWithResourceMultipleResourcesTests {
 
@@ -70,10 +70,13 @@ public class TryWithResourceMultipleResourcesTests {
     // exception list of V1 (where V1 is the exception from the rightmost resource failing to
     // close and Vn is the exception from the leftmost resource failing to close).
     List<String> orderLog = new ArrayList<>();
-    try (FailableResource r1 = new FailableResource("r1", orderLog, FailureMode.OnClose);
-        FailableResource r2 = new FailableResource("r2", orderLog, FailureMode.OnClose);
-        FailableResource r3 = new FailableResource("r3", orderLog, FailureMode.OnClose)) {
-      orderLog.add("try block");
+    try {
+      try (FailableResource r1 = new FailableResource("r1", orderLog, FailureMode.OnClose);
+          FailableResource r2 = new FailableResource("r2", orderLog, FailureMode.OnClose);
+          FailableResource r3 = new FailableResource("r3", orderLog, FailureMode.OnClose)) {
+        orderLog.add("try block");
+      }
+      fail("Should have throw exception.");
     } catch (Exception e) {
       assertTrue(e.getMessage().equals("OnClose"));
       assertTrue(e.getSuppressed().length == 2);
@@ -155,7 +158,7 @@ public class TryWithResourceMultipleResourcesTests {
         try (FailableResource r1 = new FailableResource("r1", orderLog, FailureMode.None);
             FailableResource r2 =
                 new FailableResource("r2", orderLog, FailureMode.OnConstruction)) {
-          orderLog.add("try block"); // note that this is never reached.
+          fail("Should have throw exception.");
         }
       } catch (Exception e) {
         assertTrue(e.getMessage().equals("OnConstruction"));
@@ -175,7 +178,7 @@ public class TryWithResourceMultipleResourcesTests {
         try (FailableResource r1 = new FailableResource("r1", orderLog, FailureMode.OnClose);
             FailableResource r2 =
                 new FailableResource("r2", orderLog, FailureMode.OnConstruction)) {
-          orderLog.add("try block"); // note that this is never reached.
+          fail("Should have throw exception.");
         }
       } catch (Exception e) {
         assertTrue(e.getMessage().equals("OnConstruction"));
@@ -193,7 +196,7 @@ public class TryWithResourceMultipleResourcesTests {
             FailableResource r2 = new FailableResource("r2", orderLog, FailureMode.OnClose);
             FailableResource r3 =
                 new FailableResource("r3", orderLog, FailureMode.OnConstruction)) {
-          orderLog.add("try block"); // note that this is never reached.
+          fail("Should have throw exception.");
         }
       } catch (Exception e) {
         assertTrue(e.getMessage().equals("OnConstruction"));
@@ -216,7 +219,7 @@ public class TryWithResourceMultipleResourcesTests {
             FailableResource r2 = new FailableResource("r2", orderLog, FailureMode.None);
             FailableResource r3 =
                 new FailableResource("r3", orderLog, FailureMode.OnConstruction)) {
-          orderLog.add("try block"); // note that this is never reached.
+          fail("Should have throw exception.");
         }
       } catch (Exception e) {
         assertTrue(e.getMessage().equals("OnConstruction"));

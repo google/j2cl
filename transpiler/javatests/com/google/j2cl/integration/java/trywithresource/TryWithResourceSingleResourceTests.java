@@ -16,9 +16,10 @@
 package trywithresource;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.Asserts.fail;
 
-import trywithresource.FailableResource.FailureMode;
 import java.util.ArrayList;
+import trywithresource.FailableResource.FailureMode;
 
 public class TryWithResourceSingleResourceTests {
   /**
@@ -41,12 +42,14 @@ public class TryWithResourceSingleResourceTests {
     int numCaught = 0;
     try {
       testSingleResource(FailureMode.OnConstruction, false);
+      fail("Should have throw exception.");
     } catch (Exception e) {
       assertTrue("Should fail on construction", e.getMessage().equals("OnConstruction"));
       numCaught++;
     }
     try {
       testSingleResource(FailureMode.OnConstruction, true);
+      fail("Should have throw exception.");
     } catch (Exception e) {
       assertTrue("Should fail on construction", e.getMessage().equals("OnConstruction"));
       numCaught++;
@@ -64,6 +67,7 @@ public class TryWithResourceSingleResourceTests {
     int numCaught = 0;
     try {
       testSingleResource(FailureMode.None, true);
+      fail("Should have throw exception.");
     } catch (Exception e) {
       assertTrue("Should fail to complete try block.", e.getMessage().equals("try"));
       numCaught++;
@@ -75,6 +79,7 @@ public class TryWithResourceSingleResourceTests {
     // V2 added to the suppressed exception list of V.
     try {
       testSingleResource(FailureMode.OnClose, true);
+      fail("Should have throw exception.");
     } catch (Exception e) {
       assertTrue("Should fail to complete try block.", e.getMessage().equals("try"));
       assertTrue(e.getSuppressed().length == 1);
@@ -93,6 +98,7 @@ public class TryWithResourceSingleResourceTests {
     int numCaught = 0;
     try {
       testSingleResource(FailureMode.OnClose, false);
+      fail("Should have throw exception.");
     } catch (Exception e) {
       assertTrue("Should fail to close resource.", e.getMessage().equals("OnClose"));
       numCaught++;
