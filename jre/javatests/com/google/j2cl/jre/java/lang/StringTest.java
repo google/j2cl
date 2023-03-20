@@ -429,6 +429,18 @@ public class StringTest extends GWTTestCase {
     assertFalse(hideFromCompiler("AbC").equals("aBC"));
     assertTrue(hideFromCompiler("").equals(""));
     assertFalse(hideFromCompiler("").equals(null));
+
+    // Test various variation of common prefix and suffix.
+    assertTrue(hideFromCompiler("a").equals("a"));
+    assertFalse(hideFromCompiler("a").equals("b"));
+    assertTrue(hideFromCompiler("aa").equals("aa"));
+    assertFalse(hideFromCompiler("aa").equals("ab"));
+    assertFalse(hideFromCompiler("ba").equals("aa"));
+    assertTrue(hideFromCompiler("aba").equals("aba"));
+    assertFalse(hideFromCompiler("aba").equals("aca"));
+    assertTrue(hideFromCompiler("abba").equals("abba"));
+    assertFalse(hideFromCompiler("abca").equals("acba"));
+    assertFalse(hideFromCompiler("acba").equals("abca"));
   }
 
   public static void testEqualsNull() {
@@ -465,6 +477,18 @@ public class StringTest extends GWTTestCase {
     assertTrue(hideFromCompiler("ß").equalsIgnoreCase("ß"));
     assertFalse(hideFromCompiler("ß").equalsIgnoreCase("ss"));
     assertFalse(hideFromCompiler("ß").equalsIgnoreCase("SS"));
+
+    // Test various variation of common prefix and suffix.
+    assertTrue(hideFromCompiler("a").equalsIgnoreCase("A"));
+    assertFalse(hideFromCompiler("a").equalsIgnoreCase("b"));
+    assertTrue(hideFromCompiler("aa").equalsIgnoreCase("AA"));
+    assertFalse(hideFromCompiler("aa").equalsIgnoreCase("ab"));
+    assertFalse(hideFromCompiler("ba").equalsIgnoreCase("aa"));
+    assertTrue(hideFromCompiler("aba").equalsIgnoreCase("aBa"));
+    assertFalse(hideFromCompiler("aba").equalsIgnoreCase("aca"));
+    assertTrue(hideFromCompiler("abba").equalsIgnoreCase("aBBa"));
+    assertFalse(hideFromCompiler("abca").equalsIgnoreCase("acba"));
+    assertFalse(hideFromCompiler("acba").equalsIgnoreCase("abca"));
   }
 
   public static void testEqualsIgnoreCaseNull() {
@@ -496,6 +520,17 @@ public class StringTest extends GWTTestCase {
     assertTrue(hideFromCompiler("abcğa").equalsIgnoreCase("abcĞa"));
     assertFalse(hideFromCompiler("abcğa").equalsIgnoreCase("abcĞb"));
     assertFalse(hideFromCompiler("abcğa").equalsIgnoreCase("abcŞa"));
+
+    // Test various variation of common prefix and suffix.
+    assertTrue(hideFromCompiler("ğ").equalsIgnoreCase("Ğ"));
+    assertFalse(hideFromCompiler("ğ").equalsIgnoreCase("ş"));
+    assertTrue(hideFromCompiler("ağ").equalsIgnoreCase("aĞ"));
+    assertFalse(hideFromCompiler("ğa").equalsIgnoreCase("aa"));
+    assertTrue(hideFromCompiler("ağa").equalsIgnoreCase("aĞa"));
+    assertFalse(hideFromCompiler("ağa").equalsIgnoreCase("aşa"));
+    assertTrue(hideFromCompiler("ağğa").equalsIgnoreCase("aĞĞa"));
+    assertFalse(hideFromCompiler("ağşa").equalsIgnoreCase("aşğa"));
+    assertFalse(hideFromCompiler("aşğa").equalsIgnoreCase("ağşa"));
   }
 
   public void testContentEquals() throws Exception {

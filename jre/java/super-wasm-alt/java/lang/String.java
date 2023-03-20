@@ -281,12 +281,16 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   private static boolean isRegionEqual(char[] a, int aOffset, char[] b, int bOffset, int length) {
-    for (int end = aOffset + length; aOffset < end; ) {
-      if (a[aOffset] != b[bOffset]) {
+    // CHeck both ends so that we can catch early if only differs on suffix and reduce jumps.
+    int aEnd = aOffset + length - 1;
+    int bEnd = bOffset + length - 1;
+    int iterLength = (length + 1) / 2;
+    // Note that we may end up checking an index twice for half of the time but that is likely
+    // better than trying to guard against that edge case in each iteration.
+    for (int i = 0; i < iterLength; i++) {
+      if (a[aOffset + i] != b[bOffset + i] || a[aEnd - i] != b[bEnd - i]) {
         return false;
       }
-      aOffset++;
-      bOffset++;
     }
     return true;
   }
@@ -308,24 +312,45 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   private static boolean isRegionEqualIgnoreCase(
       char[] a, int aOffset, char[] b, int bOffset, int length) {
-    for (int end = aOffset + length; aOffset < end; ) {
-      char c1 = a[aOffset];
-      char c2 = b[bOffset];
-      if (c1 != c2) {
-        if (c1 > 127 && c2 > 127) {
-          // Branch into native implementation since we cannot handle case folding for non-ascii
-          // space.
-          int remaining = end - aOffset;
-          return nativeEqualsIgnoreCase(
-              nativeFromCharCodeArray(a, aOffset, end),
-              nativeFromCharCodeArray(b, bOffset, bOffset + remaining));
-        }
-        if (foldCaseAscii(c1) != foldCaseAscii(c2)) {
-          return false;
+    // CHeck both ends so that we can catch early if only differs on suffix and reduce jumps.
+    int aEnd = aOffset + length - 1;
+    int bEnd = bOffset + length - 1;
+    int iterLength = (length + 1) / 2;
+    // Note that we may end up checking an index twice for half of the time but that is likely
+    // better than trying to guard against that edge case in each iteration.
+    for (int i = 0; i < iterLength; i++) {
+      {
+        char c1 = a[aOffset + i];
+        char c2 = b[bOffset + i];
+        if (c1 != c2) {
+          if (c1 > 127 && c2 > 127) {
+            // Branch into native implementation since we cannot handle case folding for non-ascii
+            // space.
+            return nativeEqualsIgnoreCase(
+                nativeFromCharCodeArray(a, aOffset + i, aEnd - i + 1),
+                nativeFromCharCodeArray(b, bOffset + i, bEnd - i + 1));
+          }
+          if (foldCaseAscii(c1) != foldCaseAscii(c2)) {
+            return false;
+          }
         }
       }
-      aOffset++;
-      bOffset++;
+      {
+        char c1 = a[aEnd - i];
+        char c2 = b[bEnd - i];
+        if (c1 != c2) {
+          if (c1 > 127 && c2 > 127) {
+            // Branch into native implementation since we cannot handle case folding for non-ascii
+            // space.
+            return nativeEqualsIgnoreCase(
+                nativeFromCharCodeArray(a, aOffset + i + 1, aEnd - i + 1),
+                nativeFromCharCodeArray(b, bOffset + i + 1, bEnd - i + 1));
+          }
+          if (foldCaseAscii(c1) != foldCaseAscii(c2)) {
+            return false;
+          }
+        }
+      }
     }
     return true;
   }
