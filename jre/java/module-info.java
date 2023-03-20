@@ -21,7 +21,6 @@ module java.base {
   exports java.nio.charset;
   exports java.security;
   exports java.sql;
-  exports java.text;
   exports java.util;
   exports java.util.concurrent;
   exports java.util.concurrent.atomic;
