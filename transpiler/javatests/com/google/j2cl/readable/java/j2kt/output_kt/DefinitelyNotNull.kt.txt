@@ -5,7 +5,10 @@ package j2kt
 
 import javaemul.lang.*
 import java.lang.RuntimeException
+import kotlin.Any
+import kotlin.Boolean
 import kotlin.OptIn
+import kotlin.collections.MutableIterable
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
 import kotlin.jvm.JvmStatic
@@ -14,6 +17,18 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
+ companion object {
+  @JvmStatic
+  @ObjCName("testEquivalence")
+  fun <T> testEquivalence(
+   @ObjCName("withJ2ktDefinitelyNotNull_Equivalence") equivalence: DefinitelyNotNull.Equivalence<in T & Any>,
+   @ObjCName("withId") a: T?,
+   @ObjCName("withId") b: T?
+  ): Boolean {
+   return equivalence!!.equivalent(a, b)
+  }
+ }
+
  open class Ordering<T> {
   @HiddenFromObjC
   open fun <S: T> reverse_pp_j2kt(): DefinitelyNotNull.Ordering<S> {
@@ -27,5 +42,34 @@ open class DefinitelyNotNull {
     return ordering!!.reverse_pp_j2kt<E>()
    }
   }
+ }
+
+ @ObjCName("J2ktDefinitelyNotNull_ImmutableList", exact = true)
+ open class ImmutableList<E: Any> {
+  companion object {
+   @JvmStatic
+   @ObjCName("copyOf")
+   fun <E: Any> copyOf(
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
+   ): DefinitelyNotNull.ImmutableList<E> {
+    throw RuntimeException()
+   }
+
+   @JvmStatic
+   @ObjCName("copyOfNullable")
+   fun <E> copyOfNullable(
+    @ObjCName("withJavaLangIterable") iterable: MutableIterable<E>
+   ): DefinitelyNotNull.ImmutableList<E & Any> {
+    return DefinitelyNotNull.ImmutableList.copyOf<E & Any>((iterable as MutableIterable<E & Any>?)!!)
+   }
+  }
+ }
+
+ fun interface Equivalence<T: Any> {
+  @ObjCName("equivalent")
+  fun equivalent(
+   @ObjCName("withId") a: T?,
+   @ObjCName("withId") b: T?
+  ): Boolean
  }
 }

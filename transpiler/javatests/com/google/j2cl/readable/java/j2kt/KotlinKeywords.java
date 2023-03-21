@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kotlinkeywords;
-
+package j2kt;
 
 public class KotlinKeywords {
   public static int BIG_ENDIAN = 7;

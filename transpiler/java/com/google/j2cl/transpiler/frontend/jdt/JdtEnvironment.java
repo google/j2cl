@@ -307,13 +307,10 @@ class JdtEnvironment {
     }
 
     if (typeBinding.isTypeVariable() || typeBinding.isCapture() || typeBinding.isWildcardType()) {
-      // Only mark a type variable as nullable if it has an explicit nullable annotation.
-      // TODO(b/236987392): Revisit when nullability tri-state is added to TypeVariable.
-      boolean hasNullableAnnotation =
-          getNullabilityAnnotation(typeBinding, elementAnnotations)
-              == NullabilityAnnotation.NULLABLE;
-      return withNullability(
-          createTypeVariable(typeBinding, inNullMarkedScope), hasNullableAnnotation);
+      return createTypeVariable(
+          typeBinding,
+          inNullMarkedScope,
+          getNullabilityAnnotation(typeBinding, elementAnnotations));
     }
 
     boolean isNullable = isNullable(typeBinding, elementAnnotations, inNullMarkedScope);
@@ -331,7 +328,10 @@ class JdtEnvironment {
     return withNullability(createDeclaredType(typeBinding, inNullMarkedScope), isNullable);
   }
 
-  private TypeDescriptor createTypeVariable(ITypeBinding typeBinding, boolean inNullMarkedScope) {
+  private TypeDescriptor createTypeVariable(
+      ITypeBinding typeBinding,
+      boolean inNullMarkedScope,
+      NullabilityAnnotation nullabilityAnnotation) {
     Supplier<TypeDescriptor> upperBoundTypeDescriptorFactory =
         () -> getUpperBoundTypeDescriptor(typeBinding, inNullMarkedScope);
 
@@ -367,7 +367,10 @@ class JdtEnvironment {
         .setName(typeBinding.getName())
         .setKtVariance(KtInteropUtils.getKtVariance(typeBinding.getTypeAnnotations()))
         // Wildcards (and captures) are never explicitly nullable, they depend on their bounds.
-        .setNullable(false)
+        // Only mark a type variable as nullable if it has an explicit nullable annotation.
+        // TODO(b/236987392): Revisit when nullability tri-state is added to TypeVariable.
+        .setNullable(nullabilityAnnotation == NullabilityAnnotation.NULLABLE)
+        .setAnnotatedNonNullable(nullabilityAnnotation == NullabilityAnnotation.NON_NULLABLE)
         .build();
   }
 

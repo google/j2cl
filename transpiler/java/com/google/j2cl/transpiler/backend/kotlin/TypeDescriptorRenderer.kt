@@ -22,12 +22,14 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.ampersandSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.commaSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.dotSeparated
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
 import com.google.j2cl.transpiler.backend.kotlin.source.inAngleBrackets
+import com.google.j2cl.transpiler.backend.kotlin.source.infix
 import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
@@ -148,6 +150,7 @@ private data class TypeDescriptorRenderer(
           }
         else
           join(renderer.nameSource(typeVariable.toNullable()), nullableSuffixSource(typeVariable))
+            .letIf(typeVariable.hasAmpersandAny) { infix(it, "&", source("Any")) }
       }
 
   fun intersectionSource(typeDescriptor: IntersectionTypeDescriptor): Source =

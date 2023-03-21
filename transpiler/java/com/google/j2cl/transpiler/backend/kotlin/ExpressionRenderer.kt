@@ -192,7 +192,7 @@ private fun Renderer.castExpressionSource(castExpression: CastExpression): Sourc
           inInlineCurlyBrackets(
             semicolonSeparated(
               castTypeDescriptor.intersectionTypeDescriptors
-                .map { asExpression(itSource(), typeDescriptorSource(it)) }
+                .map { asExpression(itSource(), castTypeDescriptorSource(it)) }
                 .plus(itSource())
             )
           )
@@ -201,8 +201,13 @@ private fun Renderer.castExpressionSource(castExpression: CastExpression): Sourc
     else
       asExpression(
         leftSubExpressionSource(castExpression.precedence, castExpression.expression),
-        typeDescriptorSource(castExpression.castTypeDescriptor)
+        castTypeDescriptorSource(castExpression.castTypeDescriptor)
       )
+  }
+
+private fun Renderer.castTypeDescriptorSource(typeDescriptor: TypeDescriptor): Source =
+  typeDescriptorSource(typeDescriptor).letIf(typeDescriptor.variableHasAmpersandAny) {
+    inRoundBrackets(it)
   }
 
 private fun BinaryOperator.ktSymbol(useEquality: Boolean): String =

@@ -225,13 +225,13 @@ open class ExplicitNotNullable {
   @HiddenFromObjC
   fun <N> genericNullableMethod_pp_nullability_explicitnotnullable(o: ExplicitNotNullable.ParameterizedNullable<N>, n: N?) {
    o!!.setNullable_pp_nullability_explicitnotnullable(n)
-   o!!.setNonNull_pp_nullability_explicitnotnullable(n as N)
+   o!!.setNonNull_pp_nullability_explicitnotnullable(n!!)
    o!!.setDefaultNullability_pp_nullability_explicitnotnullable(n as N)
    o!!.getNullable_pp_nullability_explicitnotnullable()!!.hashCode()
    o!!.getNonNullable_pp_nullability_explicitnotnullable()!!.hashCode()
    o!!.getDefaultNullability_pp_nullability_explicitnotnullable()!!.hashCode()
    o!!.nullable_pp_nullability_explicitnotnullable = n
-   o!!.nonNullable_pp_nullability_explicitnotnullable = n as N
+   o!!.nonNullable_pp_nullability_explicitnotnullable = n!!
    o!!.defaultNullability_pp_nullability_explicitnotnullable = n as N
    o!!.nullable_pp_nullability_explicitnotnullable!!.hashCode()
    o!!.nonNullable_pp_nullability_explicitnotnullable!!.hashCode()
@@ -530,14 +530,14 @@ open class ExplicitNotNullable {
 
   @JvmField
   @HiddenFromObjC
-  var nonNullable_pp_nullability_explicitnotnullable: N = null as N
+  var nonNullable_pp_nullability_explicitnotnullable: N & Any
 
   @JvmField
   @HiddenFromObjC
   var defaultNullability_pp_nullability_explicitnotnullable: N = null as N
 
   constructor(n: N) {
-   this.nonNullable_pp_nullability_explicitnotnullable = n
+   this.nonNullable_pp_nullability_explicitnotnullable = n!!
    this.defaultNullability_pp_nullability_explicitnotnullable = n
   }
 
@@ -547,7 +547,7 @@ open class ExplicitNotNullable {
   }
 
   @HiddenFromObjC
-  open fun getNonNullable_pp_nullability_explicitnotnullable(): N {
+  open fun getNonNullable_pp_nullability_explicitnotnullable(): N & Any {
    throw RuntimeException()
   }
 
@@ -560,7 +560,7 @@ open class ExplicitNotNullable {
   open fun setNullable_pp_nullability_explicitnotnullable(n: N?) {}
 
   @HiddenFromObjC
-  open fun setNonNull_pp_nullability_explicitnotnullable(n: N) {}
+  open fun setNonNull_pp_nullability_explicitnotnullable(n: N & Any) {}
 
   @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_explicitnotnullable(n: N) {}

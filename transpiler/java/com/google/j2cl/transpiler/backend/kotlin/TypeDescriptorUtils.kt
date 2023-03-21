@@ -191,3 +191,9 @@ private fun TypeVariable.variableApplyVariance(variance: KtVariance?) =
 
 internal val typeDescriptors
   get() = TypeDescriptors.get()
+
+internal val TypeVariable.hasAmpersandAny: Boolean
+  get() = isAnnotatedNonNullable && (isNullable || upperBoundTypeDescriptor.canBeNull())
+
+internal val TypeDescriptor.variableHasAmpersandAny: Boolean
+  get() = this is TypeVariable && hasAmpersandAny

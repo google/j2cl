@@ -129,13 +129,13 @@ open class DefaultNotNullable {
   @HiddenFromObjC
   fun <N> genericNullableMethod_pp_nullability_defaultnotnullable(o: DefaultNotNullable.ParameterizedNullable<N>, n: N?) {
    o!!.setNullable_pp_nullability_defaultnotnullable(n)
-   o!!.setNonNull_pp_nullability_defaultnotnullable(n as N)
+   o!!.setNonNull_pp_nullability_defaultnotnullable(n!!)
    o!!.setDefaultNullability_pp_nullability_defaultnotnullable(n as N)
    o!!.getNullable_pp_nullability_defaultnotnullable()!!.hashCode()
    o!!.getNonNullable_pp_nullability_defaultnotnullable()!!.hashCode()
    o!!.getDefaultNullability_pp_nullability_defaultnotnullable()!!.hashCode()
    o!!.nullable_pp_nullability_defaultnotnullable = n
-   o!!.nonNullable_pp_nullability_defaultnotnullable = n as N
+   o!!.nonNullable_pp_nullability_defaultnotnullable = n!!
    o!!.defaultNullability_pp_nullability_defaultnotnullable = n as N
    o!!.nullable_pp_nullability_defaultnotnullable!!.hashCode()
    o!!.nonNullable_pp_nullability_defaultnotnullable!!.hashCode()
@@ -442,14 +442,14 @@ open class DefaultNotNullable {
 
   @JvmField
   @HiddenFromObjC
-  var nonNullable_pp_nullability_defaultnotnullable: N = null as N
+  var nonNullable_pp_nullability_defaultnotnullable: N & Any
 
   @JvmField
   @HiddenFromObjC
   var defaultNullability_pp_nullability_defaultnotnullable: N = null as N
 
   constructor(n: N) {
-   this.nonNullable_pp_nullability_defaultnotnullable = n
+   this.nonNullable_pp_nullability_defaultnotnullable = n!!
    this.defaultNullability_pp_nullability_defaultnotnullable = n
   }
 
@@ -459,7 +459,7 @@ open class DefaultNotNullable {
   }
 
   @HiddenFromObjC
-  open fun getNonNullable_pp_nullability_defaultnotnullable(): N {
+  open fun getNonNullable_pp_nullability_defaultnotnullable(): N & Any {
    throw RuntimeException()
   }
 
@@ -472,7 +472,7 @@ open class DefaultNotNullable {
   open fun setNullable_pp_nullability_defaultnotnullable(n: N?) {}
 
   @HiddenFromObjC
-  open fun setNonNull_pp_nullability_defaultnotnullable(n: N) {}
+  open fun setNonNull_pp_nullability_defaultnotnullable(n: N & Any) {}
 
   @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_defaultnotnullable(n: N) {}

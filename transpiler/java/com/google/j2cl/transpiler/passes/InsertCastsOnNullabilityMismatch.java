@@ -91,12 +91,18 @@ public final class InsertCastsOnNullabilityMismatch extends NormalizationPass {
     if (typeDescriptor instanceof TypeVariable) {
       TypeVariable typeVariable = (TypeVariable) typeDescriptor;
       if (typeVariable.isWildcardOrCapture()) {
+        TypeDescriptor projected;
         TypeDescriptor lowerBound = typeVariable.getLowerBoundTypeDescriptor();
         if (lowerBound != null) {
-          return project(lowerBound);
+          projected = project(lowerBound);
+        } else {
+          TypeDescriptor upperBound = typeVariable.getUpperBoundTypeDescriptor();
+          projected = project(upperBound);
         }
-        TypeDescriptor upperBound = typeVariable.getUpperBoundTypeDescriptor();
-        return project(upperBound);
+        if (typeVariable.isNullable()) {
+          projected = projected.toNullable();
+        }
+        return projected;
       }
     }
 

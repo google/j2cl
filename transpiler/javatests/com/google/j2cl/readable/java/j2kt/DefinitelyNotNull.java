@@ -15,6 +15,7 @@
  */
 package j2kt;
 
+import jsinterop.annotations.JsNonNull;
 import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
@@ -30,5 +31,27 @@ public class DefinitelyNotNull {
       // See: b/268006049, b/272714235.
       return ordering.reverse();
     }
+  }
+
+  // Reproduction of Guava code with immutable lists.
+  public static class ImmutableList<E> {
+    public static <E> ImmutableList<E> copyOf(Iterable<E> iterable) {
+      throw new RuntimeException();
+    }
+
+    @SuppressWarnings("nullness")
+    public static <E extends @Nullable Object> ImmutableList<E> copyOfNullable(
+        Iterable<E> iterable) {
+      return ImmutableList.copyOf((Iterable<@JsNonNull E>) iterable);
+    }
+  }
+
+  interface Equivalence<T> {
+    boolean equivalent(@Nullable T a, @Nullable T b);
+  }
+
+  public static <T extends @Nullable Object> boolean testEquivalence(
+      Equivalence<? super @JsNonNull T> equivalence, @Nullable T a, @Nullable T b) {
+    return equivalence.equivalent(a, b);
   }
 }

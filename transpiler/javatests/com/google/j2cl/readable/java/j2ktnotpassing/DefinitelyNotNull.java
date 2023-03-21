@@ -61,6 +61,7 @@ public class DefinitelyNotNull {
     @SuppressWarnings("nullness")
     public static <E extends @Nullable Object> ImmutableList<E> copyOfNullable(
         Iterable<E> iterable) {
+      // "iterable" requires manual "as Iterable<E & Any>" unchecked cast in Kotlin.
       return ImmutableList.copyOf(iterable);
     }
   }

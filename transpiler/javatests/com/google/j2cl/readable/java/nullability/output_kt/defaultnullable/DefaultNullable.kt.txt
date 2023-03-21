@@ -131,13 +131,13 @@ open class DefaultNullable {
   @HiddenFromObjC
   fun <N> genericNullableMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedNullable<N>?, n: N?) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
-   o!!.setNonNull_pp_nullability_defaultnullable(n as N)
+   o!!.setNonNull_pp_nullability_defaultnullable(n!!)
    o!!.setDefaultNullability_pp_nullability_defaultnullable(n as N)
    o!!.getNullable_pp_nullability_defaultnullable()!!.hashCode()
    o!!.getNonNullable_pp_nullability_defaultnullable()!!.hashCode()
    o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.hashCode()
    o!!.nullable_pp_nullability_defaultnullable = n
-   o!!.nonNullable_pp_nullability_defaultnullable = n as N
+   o!!.nonNullable_pp_nullability_defaultnullable = n!!
    o!!.defaultNullability_pp_nullability_defaultnullable = n as N
    o!!.nullable_pp_nullability_defaultnullable!!.hashCode()
    o!!.nonNullable_pp_nullability_defaultnullable!!.hashCode()
@@ -165,13 +165,13 @@ open class DefaultNullable {
   @HiddenFromObjC
   fun <N> genericDefaultNullabilityMethod_pp_nullability_defaultnullable(o: DefaultNullable.ParameterizedDefaultNullability<N>?, n: N) {
    o!!.setNullable_pp_nullability_defaultnullable(n)
-   o!!.setNonNull_pp_nullability_defaultnullable(n)
+   o!!.setNonNull_pp_nullability_defaultnullable(n!!)
    o!!.setDefaultNullability_pp_nullability_defaultnullable(n)
    o!!.getNullable_pp_nullability_defaultnullable()!!.hashCode()
    o!!.getNonNullable_pp_nullability_defaultnullable()!!.hashCode()
    o!!.getDefaultNullability_pp_nullability_defaultnullable()!!.hashCode()
    o!!.nullable_pp_nullability_defaultnullable = n
-   o!!.nonNullable_pp_nullability_defaultnullable = n
+   o!!.nonNullable_pp_nullability_defaultnullable = n!!
    o!!.defaultNullability_pp_nullability_defaultnullable = n
    o!!.nullable_pp_nullability_defaultnullable!!.hashCode()
    o!!.nonNullable_pp_nullability_defaultnullable!!.hashCode()
@@ -343,13 +343,13 @@ open class DefaultNullable {
 
   @JvmField
   @HiddenFromObjC
-  var nonNullable_pp_nullability_defaultnullable: N = null as N
+  var nonNullable_pp_nullability_defaultnullable: N & Any
 
   @JvmField
   @HiddenFromObjC
   var defaultNullability_pp_nullability_defaultnullable: N = null as N
 
-  constructor(n: N) {
+  constructor(n: N & Any) {
    this.nonNullable_pp_nullability_defaultnullable = n
   }
 
@@ -359,7 +359,7 @@ open class DefaultNullable {
   }
 
   @HiddenFromObjC
-  open fun getNonNullable_pp_nullability_defaultnullable(): N {
+  open fun getNonNullable_pp_nullability_defaultnullable(): N & Any {
    throw RuntimeException()
   }
 
@@ -372,7 +372,7 @@ open class DefaultNullable {
   open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
 
   @HiddenFromObjC
-  open fun setNonNull_pp_nullability_defaultnullable(n: N) {}
+  open fun setNonNull_pp_nullability_defaultnullable(n: N & Any) {}
 
   @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}
@@ -385,13 +385,13 @@ open class DefaultNullable {
 
   @JvmField
   @HiddenFromObjC
-  var nonNullable_pp_nullability_defaultnullable: N = null as N
+  var nonNullable_pp_nullability_defaultnullable: N & Any
 
   @JvmField
   @HiddenFromObjC
   var defaultNullability_pp_nullability_defaultnullable: N = null as N
 
-  constructor(n: N) {
+  constructor(n: N & Any) {
    this.nonNullable_pp_nullability_defaultnullable = n
   }
 
@@ -401,7 +401,7 @@ open class DefaultNullable {
   }
 
   @HiddenFromObjC
-  open fun getNonNullable_pp_nullability_defaultnullable(): N {
+  open fun getNonNullable_pp_nullability_defaultnullable(): N & Any {
    throw RuntimeException()
   }
 
@@ -414,7 +414,7 @@ open class DefaultNullable {
   open fun setNullable_pp_nullability_defaultnullable(n: N?) {}
 
   @HiddenFromObjC
-  open fun setNonNull_pp_nullability_defaultnullable(n: N) {}
+  open fun setNonNull_pp_nullability_defaultnullable(n: N & Any) {}
 
   @HiddenFromObjC
   open fun setDefaultNullability_pp_nullability_defaultnullable(n: N) {}

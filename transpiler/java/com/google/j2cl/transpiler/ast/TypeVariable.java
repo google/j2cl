@@ -66,12 +66,14 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Nullable
   public abstract KtVariance getKtVariance();
 
+  public abstract boolean isAnnotatedNonNullable();
+
   @Override
   public TypeVariable toNullable() {
     if (isNullable()) {
       return this;
     }
-    return TypeVariable.Builder.from(this).setNullable(true).build();
+    return TypeVariable.Builder.from(this).setNullable(true).setAnnotatedNonNullable(false).build();
   }
 
   @Override
@@ -85,7 +87,7 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Override
   public boolean canBeNull() {
     // TODO(b/244319605): Review semantics of nullability for lower bounded type variables.
-    return isNullable() || getUpperBoundTypeDescriptor().canBeNull();
+    return !isAnnotatedNonNullable() && (isNullable() || getUpperBoundTypeDescriptor().canBeNull());
   }
 
   @Override
@@ -211,7 +213,8 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Override
   public String getUniqueId() {
     String prefix = isNullable() ? "?" : "!";
-    return prefix + getUniqueKey();
+    String nonNullableAnnotationSuffix = isAnnotatedNonNullable() ? "&Any" : "";
+    return prefix + getUniqueKey() + nonNullableAnnotationSuffix;
   }
 
   public final boolean hasRecursiveDefinition() {
@@ -224,7 +227,8 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     return new AutoValue_TypeVariable.Builder()
         .setWildcard(false)
         .setCapture(false)
-        .setNullable(false);
+        .setNullable(false)
+        .setAnnotatedNonNullable(false);
   }
 
   /** Creates a wildcard type variable with a specific upper bound. */
@@ -326,6 +330,8 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
     public abstract Builder setNullable(boolean isNullable);
 
     public abstract Builder setKtVariance(@Nullable KtVariance ktVariance);
+
+    public abstract Builder setAnnotatedNonNullable(boolean hasNonNullAnnotation);
 
     private static final ThreadLocalInterner<TypeVariable> interner = new ThreadLocalInterner<>();
 

@@ -127,10 +127,10 @@ open class Main {
 
  interface NonNullableTemplatedReturn<T> {
   @ObjCName("get")
-  fun get(): T
+  fun get(): T & Any
 
   @ObjCName("getArray")
-  fun getArray(): Array<T>?
+  fun getArray(): Array<T & Any>?
  }
 
  interface NonNullableTemplate<T: Any> {
