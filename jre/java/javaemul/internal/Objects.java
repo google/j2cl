@@ -30,6 +30,7 @@ class Objects {
     if (((ObjectLike) obj).hasEquals()) {
       return obj.equals(other);
     }
+    assertEqualsAndHashCodePresentIfExpected(obj);
 
     // Boxed Types: overrides 'equals' but doesn't need special casing as
     // fallback covers them.
@@ -49,6 +50,7 @@ class Objects {
     if (((ObjectLike) obj).hasHashCode()) {
       return obj.hashCode();
     }
+    assertEqualsAndHashCodePresentIfExpected(obj);
 
     // Boxed Types: overrides 'hashCode'  but doesn't need special casing as
     // fallback covers them.
@@ -99,6 +101,9 @@ class Objects {
 
   @JsMethod
   private static native Class<?> throwTypeError();
+
+  @JsMethod
+  private static native void assertEqualsAndHashCodePresentIfExpected(Object value);
 
   @JsType(isNative = true, name = "*", namespace = JsPackage.GLOBAL)
   private interface ObjectLike {
