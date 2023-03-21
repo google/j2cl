@@ -174,25 +174,25 @@ open class Nullability {
   @JvmStatic
   @HiddenFromObjC
   fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedDefaultNullability<out String?>?) {
-   nonNullable!!.getNonNullable_pp_nullability()!!.length
-   nonNullable!!.getNullable_pp_nullability()!!.length
-   nonNullable!!.getDefaultNullability_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedDefaultNullability<String?>?)!!.getNonNullable_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedDefaultNullability<String?>?)!!.getNullable_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedDefaultNullability<String?>?)!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   @HiddenFromObjC
   fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedNullable<out String?>?) {
-   nonNullable!!.getNonNullable_pp_nullability()!!.length
-   nonNullable!!.getNullable_pp_nullability()!!.length
-   nonNullable!!.getDefaultNullability_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedNullable<String?>?)!!.getNonNullable_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedNullable<String?>?)!!.getNullable_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedNullable<String?>?)!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic
   @HiddenFromObjC
   fun testDefaultNullabilityWildcards_pp_nullability(nonNullable: Nullability.ParameterizedNonNullable<out String>?) {
-   nonNullable!!.getNonNullable_pp_nullability()!!.length
-   nonNullable!!.getNullable_pp_nullability()!!.length
-   nonNullable!!.getDefaultNullability_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedNonNullable<String>?)!!.getNonNullable_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedNonNullable<String>?)!!.getNullable_pp_nullability()!!.length
+   (nonNullable as Nullability.ParameterizedNonNullable<String>?)!!.getDefaultNullability_pp_nullability()!!.length
   }
 
   @JvmStatic

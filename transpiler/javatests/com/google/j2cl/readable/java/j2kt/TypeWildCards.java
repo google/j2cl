@@ -52,8 +52,20 @@ class TypeWildCards {
     void addObserver(KtInObserver<E> observer);
   }
 
+  interface RecursiveObservable<E extends RecursiveObservable<E>> {
+    void addObserver(Observer<E> observer);
+  }
+
+  static class ObserverHolder<E> {
+    Observer<E> observer;
+  }
+
   public static void testObservable(Observable<?> observable) {
-    // TODO(b/261839232): It does not compile in Kotlin: observable needs a cast to Observable<Any?>
+    observable.addObserver(e -> {});
+  }
+
+  public static <T extends Observable<?>> void testObservableParameterized(T observable) {
+    // TODO(b/261839232): "Expected Nothing" issue
     // observable.addObserver(e -> {});
   }
 
@@ -63,5 +75,14 @@ class TypeWildCards {
 
   public static void testKtInObservable(KtInObservable<?> observable) {
     observable.addObserver(e -> {});
+  }
+
+  public static void testRecursiveObservable(RecursiveObservable<?> observable) {
+    // TODO(b/261839232): No idea how to convert it to a correct Kotlin code.
+    // observable.addObserver(e -> {});
+  }
+
+  public static void testObserverHolder(ObserverHolder<?> observerHolder) {
+    observerHolder.observer = e -> {};
   }
 }

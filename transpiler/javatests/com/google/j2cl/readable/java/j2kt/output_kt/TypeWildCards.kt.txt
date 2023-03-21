@@ -4,9 +4,11 @@
 package j2kt
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.OptIn
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.experimental.ExperimentalObjCRefinement
+import kotlin.jvm.JvmField
 import kotlin.jvm.JvmStatic
 import kotlin.native.HiddenFromObjC
 import kotlin.native.ObjCName
@@ -23,6 +25,15 @@ open class TypeWildCards {
   @ObjCName("testObservable")
   fun testObservable(
    @ObjCName("withJ2ktTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
+  ) {
+   (observable as TypeWildCards.Observable<Any?>?)!!.addObserver(TypeWildCards.Observer { e ->
+   })
+  }
+
+  @JvmStatic
+  @ObjCName("testObservableParameterized")
+  fun <T: TypeWildCards.Observable<*>?> testObservableParameterized(
+   @ObjCName("withJ2ktTypeWildCards_Observable") observable: T
   ) {}
 
   @JvmStatic
@@ -30,7 +41,7 @@ open class TypeWildCards {
   fun testSuperWildcardObservable(
    @ObjCName("withJ2ktTypeWildCards_SuperWildcardObservable") observable: TypeWildCards.SuperWildcardObservable<*>?
   ) {
-   observable!!.addObserver(TypeWildCards.Observer { e ->
+   (observable as TypeWildCards.SuperWildcardObservable<Any?>?)!!.addObserver(TypeWildCards.Observer { e ->
    })
   }
 
@@ -39,8 +50,23 @@ open class TypeWildCards {
   fun testKtInObservable(
    @ObjCName("withJ2ktTypeWildCards_KtInObservable") observable: TypeWildCards.KtInObservable<*>?
   ) {
-   observable!!.addObserver(TypeWildCards.KtInObserver { e ->
+   (observable as TypeWildCards.KtInObservable<Any?>?)!!.addObserver(TypeWildCards.KtInObserver { e ->
    })
+  }
+
+  @JvmStatic
+  @ObjCName("testRecursiveObservable")
+  fun testRecursiveObservable(
+   @ObjCName("withJ2ktTypeWildCards_RecursiveObservable") observable: TypeWildCards.RecursiveObservable<*>?
+  ) {}
+
+  @JvmStatic
+  @ObjCName("testObserverHolder")
+  fun testObserverHolder(
+   @ObjCName("withJ2ktTypeWildCards_ObserverHolder") observerHolder: TypeWildCards.ObserverHolder<*>?
+  ) {
+   (observerHolder as TypeWildCards.ObserverHolder<Any?>?)!!.observer_pp_j2kt = TypeWildCards.Observer { e ->
+   }
   }
  }
 
@@ -86,5 +112,18 @@ open class TypeWildCards {
   fun addObserver(
    @ObjCName("withJ2ktTypeWildCards_KtInObserver") observer: TypeWildCards.KtInObserver<E>?
   )
+ }
+
+ fun interface RecursiveObservable<E: TypeWildCards.RecursiveObservable<E>?> {
+  @ObjCName("addObserver")
+  fun addObserver(
+   @ObjCName("withJ2ktTypeWildCards_Observer") observer: TypeWildCards.Observer<E>?
+  )
+ }
+
+ open class ObserverHolder<E> {
+  @JvmField
+  @HiddenFromObjC
+  var observer_pp_j2kt: TypeWildCards.Observer<E>? = null
  }
 }

@@ -32,3 +32,14 @@ class NotNullable {
     void accept(T t);
   }
 }
+
+@NullMarked
+abstract class Ordering<T extends @Nullable Object> {
+  <S extends T> Ordering<S> reverse() {
+    return null;
+  }
+
+  static <E extends @Nullable Object> Ordering<? super E> reversed(Ordering<? super E> ordering) {
+    return ordering.reverse();
+  }
+}

@@ -24,9 +24,19 @@ public class TypeWildCards {
     void addObserver(Observer<E> observer);
   }
 
-  public static void testObservable(Observable<?> observable) {
-    // TODO(b/261839232): observable needs a cast to Observable<Any?>. However, in this case Java
-    // code could be fixed to declare "addObserver(Observer<? super E> observer)".
+  interface RecursiveObservable<E extends RecursiveObservable<E>> {
+    void addObserver(Observer<E> observer);
+  }
+
+  public static <T extends Observable<?>> void testObservableParameterized(T observable) {
+    // TODO(b/261839232): "Expected Nothing" issue
+    observable.addObserver(e -> {});
+  }
+
+  public static void testRecursiveObservable(RecursiveObservable<?> observable) {
+    // TODO(b/261839232): In this case, even a cast RecursiveObservable<Any?> does not help.
+    // In this case the only solution is to refactor Java code to:
+    // "addObserver(Observer<? super E> observer)".
     observable.addObserver(e -> {});
   }
 }

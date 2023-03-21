@@ -312,7 +312,7 @@ open class Lambdas {
    @ObjCName("withLambdasLambdas_Function") after: Lambdas.Function<in R, out V>?
   ): Lambdas.BiFunction<T, U, V>? {
    return Lambdas.BiFunction<T, U, V> { t: T, u: U ->
-    return@BiFunction after!!.apply(this.apply(t, u))
+    return@BiFunction (after as Lambdas.Function<in R, V>?)!!.apply(this.apply(t, u))
    }
   }
  }

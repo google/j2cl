@@ -53,14 +53,14 @@ open class TypeWildCards {
  open fun unbounded(
   @ObjCName("withTypewildcardsGenericType") g: GenericType<*>?
  ): Any? {
-  return g!!.get_pp_typewildcards()
+  return (g as GenericType<Any?>?)!!.get_pp_typewildcards()
  }
 
  @ObjCName("upperBound")
  open fun upperBound(
   @ObjCName("withTypewildcardsGenericType") g: GenericType<out Bar?>?
  ): Bar? {
-  return g!!.get_pp_typewildcards()
+  return (g as GenericType<Bar?>?)!!.get_pp_typewildcards()
  }
 
  @ObjCName("lowerBound")

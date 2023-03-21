@@ -37,3 +37,18 @@ open class NotNullable {
   )
  }
 }
+
+abstract class Ordering<T> {
+ @HiddenFromObjC
+ open fun <S: T> reverse_pp_j2ktnotpassing(): Ordering<S> {
+  return null!!
+ }
+
+ companion object {
+  @JvmStatic
+  @HiddenFromObjC
+  fun <E> reversed_pp_j2ktnotpassing(ordering: Ordering<in E>): Ordering<in E> {
+   return ordering!!.reverse_pp_j2ktnotpassing<E>()
+  }
+ }
+}

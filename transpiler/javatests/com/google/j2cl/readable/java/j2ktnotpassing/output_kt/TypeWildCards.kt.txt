@@ -13,9 +13,18 @@ import kotlin.native.ObjCName
 open class TypeWildCards {
  companion object {
   @JvmStatic
-  @ObjCName("testObservable")
-  fun testObservable(
-   @ObjCName("withJ2ktnotpassingTypeWildCards_Observable") observable: TypeWildCards.Observable<*>?
+  @ObjCName("testObservableParameterized")
+  fun <T: TypeWildCards.Observable<*>?> testObservableParameterized(
+   @ObjCName("withJ2ktnotpassingTypeWildCards_Observable") observable: T
+  ) {
+   observable!!.addObserver(TypeWildCards.Observer { e ->
+   })
+  }
+
+  @JvmStatic
+  @ObjCName("testRecursiveObservable")
+  fun testRecursiveObservable(
+   @ObjCName("withJ2ktnotpassingTypeWildCards_RecursiveObservable") observable: TypeWildCards.RecursiveObservable<*>?
   ) {
    observable!!.addObserver(TypeWildCards.Observer { e ->
    })
@@ -30,6 +39,13 @@ open class TypeWildCards {
  }
 
  fun interface Observable<E> {
+  @ObjCName("addObserver")
+  fun addObserver(
+   @ObjCName("withJ2ktnotpassingTypeWildCards_Observer") observer: TypeWildCards.Observer<E>?
+  )
+ }
+
+ fun interface RecursiveObservable<E: TypeWildCards.RecursiveObservable<E>?> {
   @ObjCName("addObserver")
   fun addObserver(
    @ObjCName("withJ2ktnotpassingTypeWildCards_Observer") observer: TypeWildCards.Observer<E>?

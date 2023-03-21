@@ -72,6 +72,7 @@ import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsKotlin;
 import com.google.j2cl.transpiler.passes.InsertNarrowingReferenceConversions;
 import com.google.j2cl.transpiler.passes.InsertNotNullAssertions;
+import com.google.j2cl.transpiler.passes.InsertQualifierProjectionCasts;
 import com.google.j2cl.transpiler.passes.InsertRawTypeCasts;
 import com.google.j2cl.transpiler.passes.InsertStringConversions;
 import com.google.j2cl.transpiler.passes.InsertStringConversionsKotlin;
@@ -497,6 +498,7 @@ public enum Backend {
           InsertNarrowingPrimitiveConversionsKotlin::new,
           NormalizeBasicCasts::new,
           ImplementKotlinBitLevelOperators::new,
+          InsertQualifierProjectionCasts::new,
           InsertNotNullAssertions::new,
           InsertCastsOnNullabilityMismatch::new,
           InsertCastForLowerBounds::new,

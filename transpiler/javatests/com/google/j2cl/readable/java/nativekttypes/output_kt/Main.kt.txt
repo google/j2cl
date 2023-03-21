@@ -154,7 +154,7 @@ open class Main {
   @ObjCName("withNativekttypesFn") f: Fn<I, O>?,
   @ObjCName("withId") i: I
  ): O {
-  return f!!.apply(i)
+  return (f as Fn<I, O>?)!!.apply(i)
  }
 
  @ObjCName("acceptFn_parametrizedWildcard")
@@ -162,7 +162,7 @@ open class Main {
   @ObjCName("withNativekttypesFn") f: Fn<String?, String?>?,
   @ObjCName("withNSString") i: String?
  ): String? {
-  return f!!.apply(i)
+  return (f as Fn<String?, String?>?)!!.apply(i)
  }
 
  @ObjCName("acceptFn_unboundWildcard")
