@@ -188,14 +188,15 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     int o1 = offset, o2 = string.offset;
     int end = offset + Math.min(count, string.count);
+    char[] thisArray = value;
     char[] otherArray = string.value;
     while (o1 < end) {
-      char c1 = value[o1++];
-      char c2 = otherArray[o2++];
-      int result = c1 - c2;
+      int result = thisArray[o1] - otherArray[o2];
       if (result != 0) {
         return result;
       }
+      o1++;
+      o2++;
     }
     return count - string.count;
   }
@@ -207,23 +208,26 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
     int o1 = offset, o2 = other.offset;
     int end = offset + Math.min(count, other.count);
-    char[] target = other.value;
+    char[] thisArray = value;
+    char[] otherArray = other.value;
     while (o1 < end) {
-      char c1 = value[o1++];
-      char c2 = target[o2++];
+      char c1 = thisArray[o1];
+      char c2 = otherArray[o2];
       if (c1 != c2) {
         if (c1 > 127 && c2 > 127) {
           // Branch into native implementation since we cannot handle case folding for non-ascii
           // chars.
           return nativeCompareToIgnoreCase(
-              nativeFromCharCodeArray(value, o1 - 1, offset + count),
-              nativeFromCharCodeArray(target, o2 - 1, other.offset + other.count));
+              nativeFromCharCodeArray(thisArray, o1, offset + count),
+              nativeFromCharCodeArray(otherArray, o2, other.offset + other.count));
         }
         int result = foldCaseAscii(c1) - foldCaseAscii(c2);
         if (result != 0) {
           return result;
         }
       }
+      o1++;
+      o2++;
     }
     return count - other.count;
   }
@@ -449,59 +453,29 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     return indexOf(needle, start);
   }
 
-  public int indexOf(String string) {
-    int start = 0;
-    int subCount = string.count;
-    int _count = count;
-    if (subCount > 0) {
-      if (subCount > _count) {
-        return -1;
-      }
-      char[] target = string.value;
-      int subOffset = string.offset;
-      char firstChar = target[subOffset];
-      int end = subOffset + subCount;
-      while (true) {
-        int i = indexOf(firstChar, start);
-        if (i == -1 || subCount + i > _count) {
-          return -1; // handles subCount > count || start >= count
-        }
-        int o1 = offset + i, o2 = subOffset;
-        char[] _value = value;
-        while (++o2 < end && _value[++o1] == target[o2]) {
-          // Intentionally empty
-        }
-        if (o2 == end) {
-          return i;
-        }
-        start = i + 1;
-      }
-    }
-    return start < _count ? start : _count;
+  public int indexOf(String subString) {
+    return indexOf(subString, 0);
   }
 
-  public int indexOf(String subString, int start) {
-    if (start < 0) {
-      start = 0;
-    }
-    int subCount = subString.count;
-    int _count = count;
+  public int indexOf(String string, int start) {
+    int subCount = string.count;
+    int length = count;
     if (subCount > 0) {
-      if (subCount + start > _count) {
+      if (subCount > length) {
         return -1;
       }
-      char[] target = subString.value;
-      int subOffset = subString.offset;
-      char firstChar = target[subOffset];
+      char[] thisArray = value;
+      char[] otherArray = string.value;
+      int subOffset = string.offset;
+      char firstChar = otherArray[subOffset];
       int end = subOffset + subCount;
       while (true) {
         int i = indexOf(firstChar, start);
-        if (i == -1 || subCount + i > _count) {
+        if (i == -1 || subCount + i > length) {
           return -1; // handles subCount > count || start >= count
         }
         int o1 = offset + i, o2 = subOffset;
-        char[] _value = value;
-        while (++o2 < end && _value[++o1] == target[o2]) {
+        while (++o2 < end && thisArray[++o1] == otherArray[o2]) {
           // Intentionally empty
         }
         if (o2 == end) {
@@ -510,7 +484,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         start = i + 1;
       }
     }
-    return start < _count ? start : _count;
+    return start < length ? start : length;
   }
 
   // public native String intern();
@@ -523,12 +497,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     if (c > 0xffff) {
       return lastIndexOfSupplementary(c, Integer.MAX_VALUE);
     }
-    int _count = count;
-    int _offset = offset;
-    char[] _value = value;
-    for (int i = _offset + _count - 1; i >= _offset; --i) {
-      if (_value[i] == c) {
-        return i - _offset;
+    int length = count;
+    int thisOffset = offset;
+    char[] thisArray = value;
+    for (int i = thisOffset + length - 1; i >= thisOffset; --i) {
+      if (thisArray[i] == c) {
+        return i - thisOffset;
       }
     }
     return -1;
@@ -538,16 +512,16 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     if (c > 0xffff) {
       return lastIndexOfSupplementary(c, start);
     }
-    int _count = count;
-    int _offset = offset;
-    char[] _value = value;
+    int length = count;
+    int thisOffset = offset;
+    char[] thisArray = value;
     if (start >= 0) {
-      if (start >= _count) {
-        start = _count - 1;
+      if (start >= length) {
+        start = length - 1;
       }
-      for (int i = _offset + start; i >= _offset; --i) {
-        if (_value[i] == c) {
-          return i - _offset;
+      for (int i = thisOffset + start; i >= thisOffset; --i) {
+        if (thisArray[i] == c) {
+          return i - thisOffset;
         }
       }
     }
@@ -576,9 +550,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
           start = count - subCount;
         }
         // count and subCount are both >= 1
-        char[] target = subString.value;
+        char[] thisArray = value;
+        char[] otherArray = subString.value;
         int subOffset = subString.offset;
-        char firstChar = target[subOffset];
+        char firstChar = otherArray[subOffset];
         int end = subOffset + subCount;
         while (true) {
           int i = lastIndexOf(firstChar, start);
@@ -586,7 +561,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             return -1;
           }
           int o1 = offset + i, o2 = subOffset;
-          while (++o2 < end && value[++o1] == target[o2]) {
+          while (++o2 < end && thisArray[++o1] == otherArray[o2]) {
             // Intentionally empty
           }
           if (o2 == end) {
@@ -625,19 +600,19 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   public String replace(char oldChar, char newChar) {
     char[] buffer = value;
-    int _offset = offset;
-    int _count = count;
-    int idx = _offset;
-    int last = _offset + _count;
+    int thisOffset = offset;
+    int length = count;
+    int idx = thisOffset;
+    int last = thisOffset + length;
     boolean copied = false;
     while (idx < last) {
       if (buffer[idx] == oldChar) {
         if (!copied) {
-          char[] newBuffer = new char[_count];
-          System.arraycopy(buffer, _offset, newBuffer, 0, _count);
+          char[] newBuffer = new char[length];
+          System.arraycopy(buffer, thisOffset, newBuffer, 0, length);
           buffer = newBuffer;
-          idx -= _offset;
-          last -= _offset;
+          idx -= thisOffset;
+          last -= thisOffset;
           copied = true;
         }
         buffer[idx] = newChar;
@@ -747,10 +722,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   public String trim() {
     int start = offset, last = offset + count - 1;
     int end = last;
-    while ((start <= end) && (value[start] <= ' ')) {
+    char[] thisArray = value;
+    while ((start <= end) && (thisArray[start] <= ' ')) {
       start++;
     }
-    while ((end >= start) && (value[end] <= ' ')) {
+    while ((end >= start) && (thisArray[end] <= ' ')) {
       end--;
     }
     if (start == offset && end == last) {
