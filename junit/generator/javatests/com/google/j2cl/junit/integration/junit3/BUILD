@@ -36,8 +36,8 @@ j2cl_test_integration_test(
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:ParentMethodTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:SetupAndTearDownTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:SimplePassingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:SimpleFailingTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:SimplePassingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:StaticMethodTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:ThrowsInConstructorTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit3/data:ThrowsInSetupTest",

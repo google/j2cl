@@ -14,14 +14,14 @@ package(
 j2cl_test_integration_test(
     name = "J2clParameterizedIntegrationTest1",
     test_data = [
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SimpleParameterizedTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ParameterizedTestInitializedByConstructor",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:MultipleDataMethodsTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:MultipleIterableParametersTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ParameterizedTestInitializedByConstructor",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SimpleParameterizedTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleArrayParameterTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleIterableParameterProvidedByArrayTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleIterableParameterTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleParameterInitializedByConstructor",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleIterableParameterProvidedByArrayTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:SingleParameterOfArrayTypeTest",
     ],
 )
@@ -29,13 +29,13 @@ j2cl_test_integration_test(
 j2cl_test_integration_test(
     name = "J2clParameterizedIntegrationTest2",
     test_data = [
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ParentTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ChildTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:BeforeAndAfterParamTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:BeforeAndAfterParamWithFailingTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ChildTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ConstructorWithIncorrectParameterCount",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:IncorrectInjectedFieldCount",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ThrowsInFloatToIntegerTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:IntegerToIntTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ParentTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/parameterizedtest/data:ThrowsInFloatToIntegerTest",
     ],
 )
