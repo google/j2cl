@@ -140,8 +140,13 @@ function createImportObject(userImports) {
     // Regex
     'RegExp.constructor': (/** string */ p, /** string */ f) =>
         new RegExp(p, f),
+    // TODO(b/261078322,b/264468253): Remove when JsOverlay and JsProperty are
+    // supported and NativeRegExp is refactored.
     'RegExp.setLastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex =
         i,
+    'get RegExp.lastIndex': (/** !RegExp */ r) => r.lastIndex,
+    'set RegExp.lastIndex': (/** !RegExp */ r, /** number */ i) =>
+        r.lastIndex = i,
     'RegExp.exec': (/** !RegExp */ r, /** string */ s) => r.exec(s),
     'RegExp.test': (/** !RegExp */ r, /** string */ s) => r.test(s),
     'j2wasm.RegExpUtils.getIndex': RegExpUtils.getIndex,

@@ -13,4 +13,7 @@ integration_test(
     srcs = glob(["*.java"]),
     # TODO(b/256681746): Improve TestUtils to detect Kotlin and fix the test.
     enable_kt_native = False,
+    # TODO(b/264466634): After generating imports, verify that the JS properties are working and
+    # then this WASM test can be enabled.
+    enable_wasm = False,
 )

@@ -42,4 +42,9 @@ class MyNativeType {
   protectedMethod() {}
 }
 
+/**
+ * @public {number}
+ */
+MyNativeType.staticField = 0;
+
 exports = MyNativeType;

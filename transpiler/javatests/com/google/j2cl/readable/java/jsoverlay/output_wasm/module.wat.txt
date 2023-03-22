@@ -159,7 +159,6 @@
 (global $f_$initialized__jsoverlay_Main_NativeJsTypeWithOverlay_1 (mut i32) (i32.const 0))
 
 ;;; Code for jsoverlay.Main.NativeJsTypeWithOverlay [static fields]
-(global $f_nonJsOverlayField__jsoverlay_Main_NativeJsTypeWithOverlay (mut i32) (i32.const 0))
 
 ;;; Code for jsoverlay.Main.Intf [static fields]
 (global $f_$initialized__jsoverlay_Main_Intf (mut i32) (i32.const 0))
@@ -472,9 +471,9 @@
   ;; jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.foo__$devirt(n);
   ;;@ jsoverlay/Main.java:109:4
   (drop (call $m_foo__$devirt__jsoverlay_Main_NativeJsTypeWithOverlay__int@jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay (local.get $n)))
-  ;; int a = (10 + jsoverlay.Main.NativeJsTypeWithOverlay.nonJsOverlayField);
+  ;; int a = (10 + jsoverlay.Main.NativeJsTypeWithOverlay.nonJsOverlayField());
   ;;@ jsoverlay/Main.java:110:4
-  (local.set $a (i32.add (i32.const 10) (global.get $f_nonJsOverlayField__jsoverlay_Main_NativeJsTypeWithOverlay)))
+  (local.set $a (i32.add (i32.const 10) (call $f_nonJsOverlayField__int@jsoverlay.Main.NativeJsTypeWithOverlay )))
   (block
    ;; jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay.$clinit();
    ;;@ jsoverlay/Main.java:112:4
@@ -658,4 +657,14 @@
 
 ;;; void NativeJsTypeWithOverlay.n()
 (func $m_n__void@jsoverlay.Main.NativeJsTypeWithOverlay (import "imports" "test.foo.NativeJsTypeWithOverlay.n") 
+)
+
+;;; int NativeJsTypeWithOverlay.nonJsOverlayField()
+(func $f_nonJsOverlayField__int@jsoverlay.Main.NativeJsTypeWithOverlay (import "imports" "get test.foo.NativeJsTypeWithOverlay.nonJsOverlayField") 
+ (result i32)
+)
+
+;;; void NativeJsTypeWithOverlay.nonJsOverlayField(int value)
+(func $f_nonJsOverlayField__int__void@jsoverlay.Main.NativeJsTypeWithOverlay (import "imports" "set test.foo.NativeJsTypeWithOverlay.nonJsOverlayField") 
+ (param $value i32)
 )

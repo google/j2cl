@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /** Tests J2WASM jsinterop features. */
@@ -42,8 +43,19 @@ public final class Main {
   }
 
   private static void testJsType() {
-    RegExp regExp = new RegExp("test");
+    RegExp regExp = new RegExp("test", "g");
     assertEquals(true, regExp.test("test"));
+    assertEquals(4, regExp.lastIndex);
+    assertEquals(4, regExp.getLastIndex());
+
+    regExp.lastIndex = 0;
+    assertEquals(0, regExp.lastIndex);
+    assertEquals(0, regExp.getLastIndex());
+
+    regExp.setLastIndex(1);
+    assertEquals(1, regExp.lastIndex);
+    assertEquals(1, regExp.getLastIndex());
+
     assertEquals(false, regExp.test("rest"));
   }
 
@@ -67,9 +79,18 @@ public final class Main {
 
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
   public static class RegExp {
-    public RegExp(String pattern) {}
+    @JsProperty public int lastIndex;
+
+    public RegExp(String pattern, String flags) {}
 
     public native boolean test(String value);
+
+    // JsProperty methods.
+    @JsProperty
+    public native int getLastIndex();
+
+    @JsProperty
+    public native void setLastIndex(int value);
   }
 
   // TODO(b/264466634): After generating imports and enabling integration/jsoverlay tests, this

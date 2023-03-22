@@ -949,6 +949,48 @@ public final class AstUtils {
     return function == Function.identity();
   }
 
+  /** Creates a synthetic property setter descriptor for the specified field. */
+  public static MethodDescriptor getSetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
+    return createMethodDescriptorBuilderFrom(fieldDescriptor)
+        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_PROPERTY_SETTER)
+        .setParameterTypeDescriptors(fieldDescriptor.getTypeDescriptor())
+        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
+        .setOriginalJsInfo(
+            fieldDescriptor.isJsProperty()
+                ? JsInfo.Builder.from(fieldDescriptor.getJsInfo())
+                    .setJsMemberType(JsMemberType.SETTER)
+                    .setJsName(fieldDescriptor.getSimpleJsName())
+                    .build()
+                : JsInfo.NONE)
+        .build();
+  }
+
+  /** Creates a synthetic property getter descriptor for the specified field. */
+  public static MethodDescriptor getGetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
+    return createMethodDescriptorBuilderFrom(fieldDescriptor)
+        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_PROPERTY_GETTER)
+        .setReturnTypeDescriptor(fieldDescriptor.getTypeDescriptor())
+        .setOriginalJsInfo(
+            fieldDescriptor.isJsProperty()
+                ? JsInfo.Builder.from(fieldDescriptor.getJsInfo())
+                    .setJsMemberType(JsMemberType.GETTER)
+                    .setJsName(fieldDescriptor.getSimpleJsName())
+                    .build()
+                : JsInfo.NONE)
+        .build();
+  }
+
+  private static MethodDescriptor.Builder createMethodDescriptorBuilderFrom(
+      FieldDescriptor fieldDescriptor) {
+    return MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
+        .setName(fieldDescriptor.getName())
+        .setVisibility(fieldDescriptor.getVisibility())
+        .setStatic(fieldDescriptor.isStatic())
+        .setDeprecated(fieldDescriptor.isDeprecated())
+        .setNative(fieldDescriptor.isNative());
+  }
+
   /** Returns the field descriptor for the const field that holds the ordinal value. */
   public static FieldDescriptor getEnumOrdinalConstantFieldDescriptor(
       FieldDescriptor fieldDescriptor) {

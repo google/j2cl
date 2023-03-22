@@ -120,6 +120,7 @@ import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMethodParametersKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
+import com.google.j2cl.transpiler.passes.NormalizeNativePropertyAccesses;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
@@ -398,7 +399,6 @@ public enum Backend {
           StaticallyEvaluateStringConcatenation::new,
           StaticallyEvaluateStringComparison::new,
           ImplementStringConcatenation::new,
-          InsertWasmExternConversions::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed= */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ true),
@@ -416,7 +416,6 @@ public enum Backend {
           ImplementStringCompileTimeConstants::new,
           NormalizeArrayCreationsWasm::new,
           InsertCastOnArrayAccess::new,
-          ExtractNonIdempotentExpressions::new,
           options.getWasmRemoveAssertStatement()
               ? RemoveAssertStatements::new
               : ImplementAssertStatements::new,
@@ -427,6 +426,14 @@ public enum Backend {
 
           // a = b => (a = b, a)
           RewriteAssignmentExpressions::new,
+          // Must happen after RewriteAssignmentExpressions
+          NormalizeNativePropertyAccesses::new,
+          // NormalizeNativePropertyAccesses creates method calls whose qualifiers might need to be
+          // extracted. After extracting qualifiers, we must again normalize multi-expressions.
+          ExtractNonIdempotentExpressions::new,
+          NormalizeMultiExpressions::new,
+          InsertWasmExternConversions::new,
+
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
 

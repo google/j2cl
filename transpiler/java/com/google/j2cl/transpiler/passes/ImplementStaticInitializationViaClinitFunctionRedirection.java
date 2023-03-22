@@ -30,15 +30,12 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.MultiExpression;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -145,7 +142,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
     type.addMember(
         Method.newBuilder()
             .setSourcePosition(field.getSourcePosition())
-            .setMethodDescriptor(getGetterMethodDescriptor(fieldDescriptor))
+            .setMethodDescriptor(AstUtils.getGetterMethodDescriptor(fieldDescriptor))
             .addStatements(
                 AstUtils.createReturnOrExpressionStatement(
                     field.getSourcePosition(),
@@ -170,7 +167,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
     type.addMember(
         Method.newBuilder()
             .setSourcePosition(field.getSourcePosition())
-            .setMethodDescriptor(getSetterMethodDescriptor(fieldDescriptor))
+            .setMethodDescriptor(AstUtils.getSetterMethodDescriptor(fieldDescriptor))
             .setParameters(parameter)
             .addStatements(
                 MultiExpression.newBuilder()
@@ -193,45 +190,6 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
         .setEnumConstant(false)
         .setOriginalJsInfo(JsInfo.NONE)
         .setOrigin(FieldOrigin.SYNTHETIC_BACKING_FIELD)
-        .build();
-  }
-
-  private static MethodDescriptor getSetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
-    return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
-        .setName(fieldDescriptor.getName())
-        .setOrigin(MethodOrigin.SYNTHETIC_PROPERTY_SETTER)
-        .setParameterTypeDescriptors(fieldDescriptor.getTypeDescriptor())
-        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
-        .setVisibility(fieldDescriptor.getVisibility())
-        .setOriginalJsInfo(
-            fieldDescriptor.isJsProperty()
-                ? JsInfo.Builder.from(fieldDescriptor.getJsInfo())
-                    .setJsMemberType(JsMemberType.SETTER)
-                    .setJsName(fieldDescriptor.getSimpleJsName())
-                    .build()
-                : JsInfo.NONE)
-        .setStatic(true)
-        .setDeprecated(fieldDescriptor.isDeprecated())
-        .build();
-  }
-
-  private static MethodDescriptor getGetterMethodDescriptor(FieldDescriptor fieldDescriptor) {
-    return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(fieldDescriptor.getEnclosingTypeDescriptor())
-        .setName(fieldDescriptor.getName())
-        .setOrigin(MethodOrigin.SYNTHETIC_PROPERTY_GETTER)
-        .setReturnTypeDescriptor(fieldDescriptor.getTypeDescriptor())
-        .setVisibility(fieldDescriptor.getVisibility())
-        .setOriginalJsInfo(
-            fieldDescriptor.isJsProperty()
-                ? JsInfo.Builder.from(fieldDescriptor.getJsInfo())
-                    .setJsMemberType(JsMemberType.GETTER)
-                    .setJsName(fieldDescriptor.getSimpleJsName())
-                    .build()
-                : JsInfo.NONE)
-        .setStatic(true)
-        .setDeprecated(fieldDescriptor.isDeprecated())
         .build();
   }
 

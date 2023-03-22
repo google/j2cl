@@ -16,14 +16,29 @@
 package jsmemberinnativetype;
 
 import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = "test.foo")
 public class MyNativeType {
+  static int staticField;
+
+  @JsProperty
+  public static native int getStaticField();
+
+  @JsProperty
+  public static native void setStaticField(int value);
+
   public int publicField;
   private int privateField;
   int packageField;
   protected int protectedField;
+
+  @JsProperty
+  public native int getPublicField();
+
+  @JsProperty
+  public native void setPublicField(int value);
 
   public native void publicMethod();
 
@@ -35,8 +50,12 @@ public class MyNativeType {
 
   @JsOverlay
   public final void useFieldsAndMethods() {
-    @SuppressWarnings("unused")
-    int value = publicField + privateField + packageField + protectedField;
+    int jsProperties = publicField + privateField + packageField + protectedField + staticField;
+
+    int jsPropertyMethods = getPublicField() + getStaticField();
+    setPublicField(1);
+    setStaticField(2);
+
     publicMethod();
     privateMethod();
     packageMethod();

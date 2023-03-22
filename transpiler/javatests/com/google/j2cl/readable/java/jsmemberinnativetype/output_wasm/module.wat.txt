@@ -1,0 +1,223 @@
+ ;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [type definition]
+ (type $jsmemberinnativetype.MyNativeType.$Overlay (struct 
+  (field $vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable)) 
+  (field $itable (ref $jsmemberinnativetype.MyNativeType.$Overlay.itable))
+  )
+ )
+ (type $jsmemberinnativetype.MyNativeType.$Overlay.vtable (struct 
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  )
+ )
+ (type $jsmemberinnativetype.MyNativeType.$Overlay.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $itable))
+
+ ;;; Code for jsmemberinnativetype.MyNativeType [type definition]
+
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [vtable.init]
+(global $jsmemberinnativetype.MyNativeType.$Overlay.vtable (ref $jsmemberinnativetype.MyNativeType.$Overlay.vtable) 
+ (struct.new $jsmemberinnativetype.MyNativeType.$Overlay.vtable
+  (ref.func $m_getClass__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
+ )
+)
+
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [itable.init]
+(global $jsmemberinnativetype.MyNativeType.$Overlay.itable (ref $jsmemberinnativetype.MyNativeType.$Overlay.itable) (struct.new $jsmemberinnativetype.MyNativeType.$Overlay.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for jsmemberinnativetype.MyNativeType [static fields]
+
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [static fields]
+(global $f_$initialized__jsmemberinnativetype_MyNativeType_$Overlay (mut i32) (i32.const 0))
+
+;;; Code for jsmemberinnativetype.MyNativeType.$Overlay [methods]
+
+;;; void $Overlay.useFieldsAndMethods__$devirt(MyNativeType $thisArg)
+(func $m_useFieldsAndMethods__$devirt__jsmemberinnativetype_MyNativeType__void@jsmemberinnativetype.MyNativeType.$Overlay
+ (param $$thisArg (ref null extern))
+ ;;@ jsmemberinnativetype/MyNativeType.java:52:20
+ (local $jsProperties i32)
+ (local $jsPropertyMethods i32)
+ (block
+  ;; jsmemberinnativetype.MyNativeType.$Overlay.$clinit();
+  ;;@ jsmemberinnativetype/MyNativeType.java:52:20
+  (call $$clinit__void@jsmemberinnativetype.MyNativeType.$Overlay )
+  ;; int jsProperties = (((($thisArg.publicField() + $thisArg.privateField()) + $thisArg.packageField()) + $thisArg.protectedField()) + jsmemberinnativetype.MyNativeType.staticField());
+  ;;@ jsmemberinnativetype/MyNativeType.java:53:4
+  (local.set $jsProperties (i32.add (i32.add (i32.add (i32.add (call $f_publicField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))) (call $f_privateField__int_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_packageField__int_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_protectedField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))) (call $f_staticField__int@jsmemberinnativetype.MyNativeType )))
+  ;; int jsPropertyMethods = ($thisArg.getPublicField() + jsmemberinnativetype.MyNativeType.getStaticField());
+  ;;@ jsmemberinnativetype/MyNativeType.java:55:4
+  (local.set $jsPropertyMethods (i32.add (call $m_getPublicField__int@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))) (call $m_getStaticField__int@jsmemberinnativetype.MyNativeType )))
+  ;; $thisArg.setPublicField(1);
+  ;;@ jsmemberinnativetype/MyNativeType.java:56:4
+  (call $m_setPublicField__int__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg))(i32.const 1))
+  ;; jsmemberinnativetype.MyNativeType.setStaticField(2);
+  ;;@ jsmemberinnativetype/MyNativeType.java:57:4
+  (call $m_setStaticField__int__void@jsmemberinnativetype.MyNativeType (i32.const 2))
+  ;; $thisArg.publicMethod();
+  ;;@ jsmemberinnativetype/MyNativeType.java:59:4
+  (call $m_publicMethod__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
+  ;; $thisArg.privateMethod();
+  ;;@ jsmemberinnativetype/MyNativeType.java:60:4
+  (call $m_privateMethod__void_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
+  ;; $thisArg.packageMethod();
+  ;;@ jsmemberinnativetype/MyNativeType.java:61:4
+  (call $m_packageMethod__void_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
+  ;; $thisArg.protectedMethod();
+  ;;@ jsmemberinnativetype/MyNativeType.java:62:4
+  (call $m_protectedMethod__void@jsmemberinnativetype.MyNativeType (ref.as_non_null (local.get $$thisArg)))
+ )
+)
+
+;;; void $Overlay.$clinit()
+(func $$clinit__void@jsmemberinnativetype.MyNativeType.$Overlay
+ ;;@ jsmemberinnativetype/MyNativeType.java:23:13
+ (block
+  ;; if (jsmemberinnativetype.MyNativeType.$Overlay.$initialized) return;
+  ;;@ jsmemberinnativetype/MyNativeType.java:23:13
+  (if (global.get $f_$initialized__jsmemberinnativetype_MyNativeType_$Overlay)
+   (then
+    ;; return;
+    ;;@ jsmemberinnativetype/MyNativeType.java:23:13
+    (return )
+   )
+  )
+  ;; (jsmemberinnativetype.MyNativeType.$Overlay.$initialized = true);
+  ;;@ jsmemberinnativetype/MyNativeType.java:23:13
+  (global.set $f_$initialized__jsmemberinnativetype_MyNativeType_$Overlay (i32.const 1))
+ )
+)
+
+;;; Class<?> $Overlay.getClass()
+(func $m_getClass__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsmemberinnativetype.MyNativeType.$Overlay))
+ (local.set $this (ref.cast_static $jsmemberinnativetype.MyNativeType.$Overlay (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsmemberinnativetype.MyNativeType.$Overlay();
+  (return (call $function.no.side.effects.$getJsmemberinnativetype.MyNativeType.$Overlay__java_lang_Class (ref.func $$getJsmemberinnativetype.MyNativeType.$Overlay__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@jsmemberinnativetype.MyNativeType.$Overlay)
+
+;;; Code for jsmemberinnativetype.MyNativeType [methods]
+
+;;; MyNativeType()
+(func $m_<init>__@jsmemberinnativetype.MyNativeType (import "imports" "test.foo.MyNativeType.constructor") 
+ (result (ref null extern))
+)
+
+;;; int MyNativeType.getStaticField()
+(func $m_getStaticField__int@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.staticField") 
+ (result i32)
+)
+
+;;; void MyNativeType.setStaticField(int value)
+(func $m_setStaticField__int__void@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.staticField") 
+ (param $value i32)
+)
+
+;;; int MyNativeType.getPublicField()
+(func $m_getPublicField__int@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.publicField") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void MyNativeType.setPublicField(int value)
+(func $m_setPublicField__int__void@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.publicField") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; void MyNativeType.publicMethod()
+(func $m_publicMethod__void@jsmemberinnativetype.MyNativeType (import "imports" "test.foo.MyNativeType.publicMethod") 
+ (param $this (ref null extern))
+)
+
+;;; void MyNativeType.privateMethod()
+(func $m_privateMethod__void_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (import "imports" "test.foo.MyNativeType.privateMethod") 
+ (param $this (ref null extern))
+)
+
+;;; void MyNativeType.packageMethod()
+(func $m_packageMethod__void_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (import "imports" "test.foo.MyNativeType.packageMethod") 
+ (param $this (ref null extern))
+)
+
+;;; void MyNativeType.protectedMethod()
+(func $m_protectedMethod__void@jsmemberinnativetype.MyNativeType (import "imports" "test.foo.MyNativeType.protectedMethod") 
+ (param $this (ref null extern))
+)
+
+;;; int MyNativeType.staticField()
+(func $f_staticField__int@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.staticField") 
+ (result i32)
+)
+
+;;; void MyNativeType.staticField(int value)
+(func $f_staticField__int__void@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.staticField") 
+ (param $value i32)
+)
+
+;;; int MyNativeType.publicField()
+(func $f_publicField__int@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.publicField") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void MyNativeType.publicField(int value)
+(func $f_publicField__int__void@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.publicField") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; int MyNativeType.privateField()
+(func $f_privateField__int_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.privateField") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void MyNativeType.privateField(int value)
+(func $f_privateField__int__void_$p_jsmemberinnativetype_MyNativeType@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.privateField") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; int MyNativeType.packageField()
+(func $f_packageField__int_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.packageField") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void MyNativeType.packageField(int value)
+(func $f_packageField__int__void_$pp_jsmemberinnativetype@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.packageField") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
+
+;;; int MyNativeType.protectedField()
+(func $f_protectedField__int@jsmemberinnativetype.MyNativeType (import "imports" "get test.foo.MyNativeType.protectedField") 
+ (param $this (ref null extern))
+ (result i32)
+)
+
+;;; void MyNativeType.protectedField(int value)
+(func $f_protectedField__int__void@jsmemberinnativetype.MyNativeType (import "imports" "set test.foo.MyNativeType.protectedField") 
+ (param $this (ref null extern))
+ (param $value i32)
+)
