@@ -44,7 +44,7 @@ internal val Type.localNames: Set<String>
       .toSet()
 
 internal val CompilationUnit.topLevelQualifiedNames: Set<String>
-  get() = types.map { it.declaration.ktQualifiedName }.toSet()
+  get() = types.map { it.declaration }.filter { !it.isKtNative }.map { it.ktQualifiedName }.toSet()
 
 internal val MemberDescriptor.ktMangledName: String
   get() = ktName + ktNameSuffix
