@@ -9,33 +9,28 @@ in hard to debug errors!
 
 load(":provider.bzl", "J2ktInfo")
 
+def create_J2ktInfo_for_java_import(java_info):
+    return J2ktInfo(
+        _private_ = struct(
+            java_info = java_info,
+            transpile_header_out = [],
+            j2kt_exports = depset(),
+        ),
+    )
+
 def _j2kt_jvm_import_impl(ctx):
     kt_runtime_java_infos = []
     if ctx.attr.runtime:
         kt_runtime_java_infos.append(ctx.attr.runtime[JavaInfo])
+    else:
+        kt_runtime_java_infos.append(ctx.attr.jar[JavaInfo])
 
-    return [
-        J2ktInfo(
-            _private_ = struct(
-                java_info = ctx.attr.jar[JavaInfo],
-                transpile_header_out = [],
-                j2kt_exports = depset(),
-            ),
-        ),
-    ] + kt_runtime_java_infos
+    return [create_J2ktInfo_for_java_import(ctx.attr.jar[JavaInfo])] + kt_runtime_java_infos
 
 def _j2kt_native_import_impl(ctx):
     kt_native_infos = []
 
-    return [
-        J2ktInfo(
-            _private_ = struct(
-                java_info = ctx.attr.jar[JavaInfo],
-                transpile_header_out = [],
-                j2kt_exports = depset(),
-            ),
-        ),
-    ] + kt_native_infos
+    return [create_J2ktInfo_for_java_import(ctx.attr.jar[JavaInfo])] + kt_native_infos
 
 j2kt_jvm_import = rule(
     implementation = _j2kt_jvm_import_impl,

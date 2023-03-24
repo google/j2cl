@@ -30,7 +30,7 @@ load(":j2cl_common.bzl", "J2clInfo")
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
 load(":j2cl_util.bzl", "to_parallel_targets")
 load(":j2kt_common.bzl", "j2kt_common")
-load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_jvm_library", "j2kt_native_library")
+load(":j2kt_library.bzl", "J2KT_JVM_LIB_ATTRS", "J2KT_NATIVE_LIB_ATTRS", "j2kt_jvm_library", "j2kt_native_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 
@@ -190,7 +190,7 @@ def j2cl_library(
         )
 
     if generate_j2kt_native_library:
-        j2kt_args = _filter_j2kt_attrs(dict(kwargs))
+        j2kt_args = _filter_j2kt_native_attrs(dict(kwargs))
 
         to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_native_name)
         to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_native_name)
@@ -211,7 +211,7 @@ def j2cl_library(
         )
 
     if generate_j2kt_jvm_library:
-        j2kt_args = _filter_j2kt_attrs(dict(kwargs))
+        j2kt_args = _filter_j2kt_jvm_attrs(dict(kwargs))
 
         to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_jvm_name)
         to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_jvm_name)
@@ -222,10 +222,15 @@ def j2cl_library(
             **j2kt_args
         )
 
-_ALLOWED_ATTRS_KT = [key for key in J2KT_LIB_ATTRS] + ["visibility", "testonly"]
+_ALLOWED_ATTRS_J2KT_JVM = [key for key in J2KT_JVM_LIB_ATTRS] + ["visibility", "testonly"]
 
-def _filter_j2kt_attrs(args):
-    return {key: args[key] for key in _ALLOWED_ATTRS_KT if key in args}
+def _filter_j2kt_jvm_attrs(args):
+    return {key: args[key] for key in _ALLOWED_ATTRS_J2KT_JVM if key in args}
+
+_ALLOWED_ATTRS_J2KT_NATIVE = [key for key in J2KT_NATIVE_LIB_ATTRS] + ["visibility", "testonly"]
+
+def _filter_j2kt_native_attrs(args):
+    return {key: args[key] for key in _ALLOWED_ATTRS_J2KT_NATIVE if key in args}
 
 _ALLOWED_ATTRS_WASM = [key for key in J2WASM_LIB_ATTRS] + ["visibility", "testonly"]
 
