@@ -25,7 +25,6 @@ j2kt_jvm_import(
     name = "junit_emul-j2kt-jvm",
     testonly = 1,
     jar = "//third_party:junit",
-    runtime = "//third_party:junit",
     visibility = ["//:__pkg__"],
 )
 
