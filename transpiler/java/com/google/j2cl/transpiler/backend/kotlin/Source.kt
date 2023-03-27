@@ -95,3 +95,9 @@ fun annotation(name: Source, parameter: Source, vararg parameters: Source) =
 
 fun annotation(name: Source, parameters: Iterable<Source>) =
   join(at(name), inRoundBrackets(commaSeparated(parameters)))
+
+fun fileAnnotation(name: Source, parameter: Source, vararg parameters: Source) =
+  fileAnnotation(name, listOf(parameter, *parameters))
+
+fun fileAnnotation(name: Source, parameters: Iterable<Source>) =
+  annotation(join(source("file:"), name), parameters)

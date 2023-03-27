@@ -35,12 +35,11 @@ import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
 import com.google.j2cl.transpiler.backend.kotlin.source.Source
 import com.google.j2cl.transpiler.backend.kotlin.source.ifNotNullSource
-import com.google.j2cl.transpiler.backend.kotlin.source.join
 import com.google.j2cl.transpiler.backend.kotlin.source.source
 import com.google.j2cl.transpiler.backend.kotlin.source.sourceIf
 
 private fun Renderer.fileOptInAnnotationSource(features: List<Source>): Source =
-  annotation(join(source("file:"), topLevelQualifiedNameSource("kotlin.OptIn")), features)
+  fileAnnotation(topLevelQualifiedNameSource("kotlin.OptIn"), features)
 
 internal val Renderer.fileOptInAnnotationSource: Source
   get() =

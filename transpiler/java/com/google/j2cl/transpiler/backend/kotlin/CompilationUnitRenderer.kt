@@ -29,7 +29,25 @@ internal fun Renderer.fileHeaderSource(compilationUnit: CompilationUnit): Source
 private fun fileCommentSource(compilationUnit: CompilationUnit) =
   source("// Generated from \"${compilationUnit.packageRelativePath}\"")
 
-private fun Renderer.fileAnnotationsSource(): Source = newLineSeparated(fileOptInAnnotationSource)
+private fun Renderer.fileAnnotationsSource(): Source =
+  newLineSeparated(fileOptInAnnotationSource, suppressFileAnnotationsSource)
+
+private val Renderer.suppressFileAnnotationsSource: Source
+  get() =
+    fileAnnotation(
+      topLevelQualifiedNameSource("kotlin.Suppress"),
+      listOf(
+          "REPEATED_BOUND",
+          "UNNECESSARY_NOT_NULL_ASSERTION",
+          "VARIABLE_WITH_REDUNDANT_INITIALIZER",
+          "UNCHECKED_CAST",
+          "PARAMETER_NAME_CHANGED_ON_OVERRIDE",
+          "ALWAYS_NULL",
+          "SENSELESS_COMPARISON",
+          "UNUSED_PARAMETER"
+        )
+        .map(::literalSource)
+    )
 
 internal fun Renderer.packageAndImportsSource(compilationUnit: CompilationUnit): Source =
   emptyLineSeparated(packageSource(compilationUnit), importsSource())
