@@ -5,7 +5,7 @@ load(
     "j2cl_common",
 )
 load("//build_defs/internal_do_not_use:provider.bzl", "J2wasmInfo")
-load(":j2cl_common.bzl", "split_deps")
+load(":j2cl_common.bzl", "split_deps", "split_srcs")
 load(":j2cl_js_common.bzl", "j2cl_js_provider")
 
 def _compile(
@@ -19,13 +19,14 @@ def _compile(
         output_jar = None,
         javac_opts = [],
         mnemonic = "J2Wasm"):
+    java_srcs, js_srcs = split_srcs(srcs)
     java_deps, js_deps = split_deps(deps)
     java_exports, js_exports = split_deps(exports)
 
     java_provider = j2cl_common.java_compile(
         ctx = ctx,
         name = name,
-        srcs = srcs,
+        srcs = java_srcs,
         deps = java_deps,
         exports = java_exports,
         plugins = plugins,
@@ -37,6 +38,7 @@ def _compile(
 
     js_provider = j2cl_js_provider(
         ctx = ctx,
+        srcs = js_srcs,
         # These are exports, because they will need to be referenced by the j2wasm_application
         # eventually downstream. They may not be direct dependencies.
         exports = js_deps + js_exports,

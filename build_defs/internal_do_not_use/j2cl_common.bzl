@@ -25,11 +25,7 @@ def _compile(
         artifact_suffix = ""):
     name = ctx.label.name + artifact_suffix
 
-    # Categorize the sources.
-    js_srcs = []
-    jvm_srcs = []
-    for src in srcs:
-        (js_srcs if src.extension in ["js", "zip"] else jvm_srcs).append(src)
+    jvm_srcs, js_srcs = split_srcs(srcs)
 
     has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"]) or kt_common_srcs
 
@@ -113,6 +109,14 @@ def _compile(
         ),
         _is_j2cl_provider = 1,
     )
+
+def split_srcs(srcs):
+    """ Split the srcs into Jvm and JS groups. """
+    jvm_srcs = []
+    js_srcs = []
+    for src in srcs:
+        (js_srcs if src.extension in ["js", "zip"] else jvm_srcs).append(src)
+    return (jvm_srcs, js_srcs)
 
 def split_deps(deps):
     """ Split the provider deps into Jvm and JS groups. """
