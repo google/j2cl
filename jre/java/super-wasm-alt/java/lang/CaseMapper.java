@@ -27,6 +27,9 @@ class CaseMapper {
       "\u000b\u0000\f\u0000\r"
           + "\u0000\u000e\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f!\"#$%&'()*+,-./0123456789:;<=>\u0000\u0000?@A\u0000BC\u0000\u0000\u0000\u0000D\u0000\u0000\u0000\u0000\u0000EFG\u0000HI\u0000\u0000\u0000\u0000J\u0000\u0000\u0000\u0000\u0000KL\u0000\u0000MN\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000OPQ\u0000RS\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000TUV\u0000WX\u0000\u0000\u0000\u0000Y";
 
+  private static final char LATIN_CAPITAL_I_WITH_DOT = '\u0130';
+  private static final char GREEK_CAPITAL_SIGMA = '\u03a3';
+
   /*
    * Our current GC makes short-lived objects more expensive than we'd like. When that's fixed, this
    * class should be changed so that you instantiate it with the String and its value, offset, and
@@ -44,6 +47,12 @@ class CaseMapper {
     int newCount = 0;
     for (int i = offset, end = offset + count; i < end; ++i) {
       char ch = value[i];
+      if (ch == LATIN_CAPITAL_I_WITH_DOT
+          || ch == GREEK_CAPITAL_SIGMA
+          || Character.isHighSurrogate(ch)) {
+        // Punt these hard cases.
+        return String.fromJsString(s.toJsString().toLowerCase());
+      }
       char newCh = charToLowerCase(ch);
       if (newValue == null && ch != newCh) {
         newValue = new char[count]; // The result can't be longer than the input.
@@ -107,6 +116,10 @@ class CaseMapper {
     int i = 0;
     for (int o = offset, end = offset + count; o < end; o++) {
       char ch = value[o];
+      if (Character.isHighSurrogate(ch)) {
+        // Punt these hard cases.
+        return String.fromJsString(s.toJsString().toUpperCase());
+      }
       int index = upperIndex(ch);
       if (index == -1) {
         if (output != null && i >= output.length) {

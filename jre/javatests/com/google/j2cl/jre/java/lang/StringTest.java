@@ -738,7 +738,12 @@ public class StringTest extends GWTTestCase {
   }
 
   public void testLowerCaseNonAscii() {
-    assertEquals("öçşğü", hideFromCompiler("ÖÇŞĞÜ").toLowerCase()); // a.k.a "Turkey Test"
+    assertEquals("i̇öçşğü", hideFromCompiler("İÖÇŞĞÜ").toLowerCase()); // a.k.a "Turkey Test"
+
+    // Greek sigma
+    assertEquals("\u03C3", hideFromCompiler("\u03A3").toLowerCase());
+    assertEquals("abc\u03C2", hideFromCompiler("ABC\u03A3").toLowerCase());
+    assertEquals("abc\u03C3abc", hideFromCompiler("ABC\u03A3ABC").toLowerCase());
   }
 
   public void testMatch() {
@@ -1064,7 +1069,13 @@ public class StringTest extends GWTTestCase {
   }
 
   public void testUpperCaseNonAscii() {
-    assertEquals("ÖÇŞĞÜ", hideFromCompiler("öçşğü").toUpperCase()); // a.k.a "Turkey Test"
+    assertEquals("İÖÇŞĞÜ", hideFromCompiler("i̇öçşğü").toUpperCase()); // a.k.a "Turkey Test"
+
+    assertEquals("SS", hideFromCompiler("ß").toUpperCase());
+    assertEquals("ʼN", hideFromCompiler("ŉ").toUpperCase());
+
+    // surrogate example
+    assertEquals("\uD801\uDC1c", hideFromCompiler("\uD801\uDC44").toUpperCase());
   }
 
   /*

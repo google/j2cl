@@ -1009,6 +1009,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
     native NativeString replace(WasmExtern regex, NativeString replace);
 
+    native NativeString toLowerCase();
+
+    native NativeString toUpperCase();
+
     native NativeString toLocaleLowerCase();
 
     native NativeString toLocaleUpperCase();
