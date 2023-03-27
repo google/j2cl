@@ -29,7 +29,7 @@ open class HashFunctions {
   @ObjCName("hashFunction")
   fun <T> hashFunction(): HashFunction<T>? {
    return object : HashFunction<T> {
-    open override fun apply(input: T): String? {
+    override fun apply(input: T): String? {
      return ""
     }
    }
@@ -39,7 +39,7 @@ open class HashFunctions {
   @ObjCName("enumHashFunction")
   fun <T: Enum<T>> enumHashFunction(): HashFunction<T>? {
    return object : HashFunction<T> {
-    open override fun apply(input: T): String? {
+    override fun apply(input: T): String? {
      return "" + input!!.ordinal
     }
    }

@@ -113,7 +113,7 @@ open class Lambdas {
  open fun <T> testInstanceMethodTypeVariableThroughLambda() {
   val wrapped: Lambdas.Functional<T>? = Lambdas.Functional<T> { f: Lambdas.Functional<T>? ->
    return@Functional object : Lambdas.Functional<T> {
-    open override fun wrap(f: Lambdas.Functional<T>?): Lambdas.Functional<T>? {
+    override fun wrap(f: Lambdas.Functional<T>?): Lambdas.Functional<T>? {
      return null
     }
    }
@@ -195,7 +195,7 @@ open class Lambdas {
   fun <T> testStaticMethodTypeVariableThroughLambda() {
    val wrapped: Lambdas.Functional<T>? = Lambdas.Functional<T> { f: Lambdas.Functional<T>? ->
     return@Functional object : Lambdas.Functional<T> {
-     open override fun wrap(f: Lambdas.Functional<T>?): Lambdas.Functional<T>? {
+     override fun wrap(f: Lambdas.Functional<T>?): Lambdas.Functional<T>? {
       return null
      }
     }
@@ -391,7 +391,7 @@ open class Lambdas {
  }
 
  class IdentityFunction: Lambdas.GenericJsFunction<Any?, Any?> {
-  open override fun apply(o: Any?): Any? {
+  override fun apply(o: Any?): Any? {
    return o
   }
  }

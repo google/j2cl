@@ -30,11 +30,11 @@ open class Implementor: Interface.ClassWithAbstractMethod(), Interface, Interfac
  enum class SomeEnum {
   COMPATIBLE {
    @HiddenFromObjC
-   open override fun method_pp_gwtincompatible() {}
+   override fun method_pp_gwtincompatible() {}
   },
   INCOMPATIBLE {
    @HiddenFromObjC
-   open override fun method_pp_gwtincompatible() {}
+   override fun method_pp_gwtincompatible() {}
   };
 
   @HiddenFromObjC

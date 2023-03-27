@@ -33,7 +33,7 @@ open class Main {
   @ObjCName("doSomething")
   open fun doSomething(): Main.Foo<T>? {
    return object : Main.Foo<T>(this@Bar.getSomething()) {
-    open override fun foo() {}
+    override fun foo() {}
    }
   }
  }

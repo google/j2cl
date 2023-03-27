@@ -185,19 +185,19 @@ private fun methodModifiersSource(methodDescriptor: MethodDescriptor): Source =
     sourceIf(!methodDescriptor.enclosingTypeDescriptor.typeDeclaration.isInterface) {
       spaceSeparated(
         sourceIf(methodDescriptor.isNative) { source("external") },
-        if (methodDescriptor.isAbstract) source("abstract")
-        else if (
-          !methodDescriptor.isFinal &&
-            !methodDescriptor.isConstructor &&
-            !methodDescriptor.isStatic &&
-            !methodDescriptor.visibility.isPrivate
-        )
-          source("open")
-        else emptySource
+        methodDescriptor.inheritanceModifierSource
       )
     },
     sourceIf(methodDescriptor.isKtOverride) { source("override") }
   )
+
+private val MethodDescriptor.inheritanceModifierSource
+  get() =
+    when {
+      isAbstract -> source("abstract")
+      isOpen -> source("open")
+      else -> emptySource
+    }
 
 internal fun Renderer.methodParametersSource(
   method: Method,

@@ -78,7 +78,7 @@ open class Main {
   val i10: Int = subclass!!.interfaceMethod("foo")
   val i11: Int = subclass!!.renamedInterfaceMethod("foo")
   val interfaceAnonymousSubclass: KInterface.KFunctionalInterface? = object : KInterface.KFunctionalInterface {
-   open override fun run() {}
+   override fun run() {}
   }
   val interfaceExpression: KInterface.KFunctionalInterface? = KInterface.KFunctionalInterface {
    return@KFunctionalInterface
@@ -95,7 +95,7 @@ open class Main {
    return@KFunctionalInterfaceBridge s
   }
   fi = object : KFunctionalInterfaceBridge<String?> {
-   open override fun foo(s: String?): String? {
+   override fun foo(s: String?): String? {
     return s
    }
   }

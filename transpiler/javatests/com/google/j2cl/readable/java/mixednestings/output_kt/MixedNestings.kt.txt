@@ -39,7 +39,7 @@ open class MixedNestings {
 
     open fun b(): Int {
      val i: MyInterface? = object : MyInterface {
-      open override fun `fun`(a: Int): Int {
+      override fun `fun`(a: Int): Int {
        val ii: MyInterface? = MyInterface { n: Int ->
         this@MixedNestings.mm()
         this@A.aa()
@@ -49,7 +49,7 @@ open class MixedNestings {
          this@A.aa()
          this@___1B.bb()
          return@MyInterface object : MyInterface {
-          open override fun `fun`(b: Int): Int {
+          override fun `fun`(b: Int): Int {
            return b
           }
          }.`fun`(100)

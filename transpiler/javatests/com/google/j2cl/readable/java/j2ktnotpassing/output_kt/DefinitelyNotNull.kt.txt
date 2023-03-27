@@ -41,22 +41,22 @@ open class DefinitelyNotNull {
   }
 
   @ObjCName("reverse")
-  open fun <S: T?> reverse(): DefinitelyNotNull.Ordering<S> {
+  fun <S: T?> reverse(): DefinitelyNotNull.Ordering<S> {
    return this.ordering_pp_j2ktnotpassing!!.reverse_pp_j2ktnotpassing()!!.nullsLast_pp_j2ktnotpassing<S>() as DefinitelyNotNull.Ordering<S>
   }
 
   @ObjCName("nullsLast")
-  open fun <S: T?> nullsLast(): DefinitelyNotNull.Ordering<S?> {
+  fun <S: T?> nullsLast(): DefinitelyNotNull.Ordering<S?> {
    return this.ordering_pp_j2ktnotpassing!!.nullsLast_pp_j2ktnotpassing<S?>()
   }
 
   @HiddenFromObjC
-  open override fun <S: T?> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
+  override fun <S: T?> reverse_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S> {
    return this.reverse()
   }
 
   @HiddenFromObjC
-  open override fun <S: T?> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
+  override fun <S: T?> nullsLast_pp_j2ktnotpassing(): DefinitelyNotNull.Ordering<S?> {
    return this.nullsLast()
   }
  }

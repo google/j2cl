@@ -235,7 +235,7 @@ open class Main {
  }
 
  class AFunction: Main.Function {
-  open override fun f1(i: Int, vararg args: Any?): Any? {
+  override fun f1(i: Int, vararg args: Any?): Any? {
    val args_1: Array<Any?>? = args as Array<Any?>?
    return args_1!![i]
   }

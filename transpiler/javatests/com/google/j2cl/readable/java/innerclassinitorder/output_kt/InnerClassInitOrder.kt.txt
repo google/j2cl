@@ -91,7 +91,7 @@ open class InnerClassInitOrder {
   var i: Int = 0
   while (i < 10) {
    val ap: ___1AddNumber? = object : ___1AddNumber(i) {
-    open override fun act() {
+    override fun act() {
      this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + num_pp_innerclassinitorder
     }
    }
@@ -194,7 +194,7 @@ open class InnerClassInitOrder {
  }
 
  open inner class OuterRefFromSuperCtorCall(): InnerClassInitOrder.OuterRefFromSuperCtorBase(object : Any() {
-  open override fun hashCode(): Int {
+  override fun hashCode(): Int {
    this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 100
    return 0
   }
@@ -206,7 +206,7 @@ open class InnerClassInitOrder {
   ): super(`object`)
 
   constructor(): this(object : Any() {
-   open override fun hashCode(): Int {
+   override fun hashCode(): Int {
     this@InnerClassInitOrder.number = this@InnerClassInitOrder.number + 1000
     return 0
    }
@@ -356,7 +356,7 @@ open class InnerClassInitOrder {
    @ObjCName("checkDispatchFromSub2")
    open fun checkDispatchFromSub2(): Int {
     return object : InnerClassInitOrder.Outer(1) {
-     open fun go(): Int {
+     fun go(): Int {
       return super<InnerClassInitOrder.Outer>@OuterIsSuper.checkDispatch()
      }
     }.go()

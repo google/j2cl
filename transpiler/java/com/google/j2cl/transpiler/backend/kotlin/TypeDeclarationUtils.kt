@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeVariable
 
@@ -58,3 +59,14 @@ internal val TypeDeclaration.isKtInner: Boolean
       kind == TypeDeclaration.Kind.CLASS &&
       isCapturingEnclosingInstance &&
       !isLocal
+
+internal val TypeDeclaration.isOpen: Boolean
+  get() = !isFinal && !isAnonymous
+
+internal val MethodDescriptor.isOpen: Boolean
+  get() =
+    enclosingTypeDescriptor.typeDeclaration.isOpen &&
+      !isFinal &&
+      !isConstructor &&
+      !isStatic &&
+      !visibility.isPrivate

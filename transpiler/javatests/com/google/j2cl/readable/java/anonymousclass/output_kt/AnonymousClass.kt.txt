@@ -54,7 +54,7 @@ open class AnonymousClass {
    @HiddenFromObjC
    var outer_pp_anonymousclass: Any? = this@AnonymousClass
 
-   open override fun foo(): String? {
+   override fun foo(): String? {
     return "a"
    }
   }
@@ -67,7 +67,7 @@ open class AnonymousClass {
    @HiddenFromObjC
    var outer_pp_anonymousclass: Any? = this@AnonymousClass
 
-   open override fun foo(): String? {
+   override fun foo(): String? {
     return "a"
    }
   }
@@ -78,7 +78,7 @@ interface SomeInterface {
  companion object {
   @JvmField
   val implicitlyStatic: SomeClass? = object : SomeClass(1) {
-   open override fun foo(): String? {
+   override fun foo(): String? {
     return "a"
    }
   }

@@ -80,7 +80,11 @@ fun classModifiersSource(type: Type): Source =
 
 fun inheritanceModifierSource(typeDeclaration: TypeDeclaration): Source =
   sourceIf(typeDeclaration.isClass && !typeDeclaration.isFinal) {
-    if (typeDeclaration.isAbstract) source("abstract") else source("open")
+    when {
+      typeDeclaration.isAbstract -> source("abstract")
+      typeDeclaration.isOpen -> source("open")
+      else -> emptySource
+    }
   }
 
 fun kindModifiersSource(typeDeclaration: TypeDeclaration): Source =
