@@ -1073,6 +1073,8 @@ public class StringTest extends GWTTestCase {
 
     assertEquals("SS", hideFromCompiler("ß").toUpperCase());
     assertEquals("ʼN", hideFromCompiler("ŉ").toUpperCase());
+    assertEquals("ΩΙ", hideFromCompiler("ῼ").toUpperCase());
+    assertEquals("ὮΙ", hideFromCompiler("ᾮ").toUpperCase());
 
     // surrogate example
     assertEquals("\uD801\uDC1c", hideFromCompiler("\uD801\uDC44").toUpperCase());
