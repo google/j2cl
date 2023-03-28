@@ -137,7 +137,7 @@ closure_js_library(
 j2wasm_library(
     name = "jre-j2wasm",
     srcs = [
-        ":jre_java_files-alt-j2wasm",
+        ":jre_java_files-j2wasm",
     ],
     javacopts = JRE_JAVAC_OPTS,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
