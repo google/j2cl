@@ -92,7 +92,7 @@ import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeArrayLiterals;
-import com.google.j2cl.transpiler.passes.NormalizeBasicCasts;
+import com.google.j2cl.transpiler.passes.NormalizeBasicCastsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeCasts;
 import com.google.j2cl.transpiler.passes.NormalizeCatchClauses;
 import com.google.j2cl.transpiler.passes.NormalizeConstructors;
@@ -503,7 +503,7 @@ public enum Backend {
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
           InsertWideningPrimitiveConversionsKotlin::new,
           InsertNarrowingPrimitiveConversionsKotlin::new,
-          NormalizeBasicCasts::new,
+          NormalizeBasicCastsKotlin::new,
           ImplementKotlinBitLevelOperators::new,
           InsertQualifierProjectionCasts::new,
           InsertNotNullAssertions::new,

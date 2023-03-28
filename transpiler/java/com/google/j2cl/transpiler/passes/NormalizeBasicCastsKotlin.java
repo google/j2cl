@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.CaseFormat.LOWER_CAMEL;
 import static com.google.common.base.CaseFormat.UPPER_CAMEL;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isBoxedType;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveChar;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveFloatOrDouble;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveInt;
@@ -37,10 +38,11 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDeclaration.Kind;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
-/** Replaces cast expression on primitive &amp; boxed types with corresponding cast method call. */
-public class NormalizeBasicCasts extends NormalizationPass {
+/**
+ * Replaces cast expression on primitive and boxed types with corresponding Kotlin cast method call.
+ */
+public class NormalizeBasicCastsKotlin extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -90,7 +92,11 @@ public class NormalizeBasicCasts extends NormalizationPass {
   }
 
   private static boolean isBasicType(TypeDescriptor type) {
-    return type.isPrimitive() || TypeDescriptors.isBoxedType(type);
+    return type.isPrimitive() || isBoxedClass(type);
+  }
+
+  private static boolean isBoxedClass(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isClass() && isBoxedType(typeDescriptor);
   }
 
   private static final DeclaredTypeDescriptor KOTLIN_BASIC_TYPE =

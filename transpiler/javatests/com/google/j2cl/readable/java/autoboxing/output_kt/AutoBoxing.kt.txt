@@ -464,7 +464,7 @@ open class AutoBoxing {
   @JvmStatic
   @ObjCName("testUnboxingFromTypeVariable")
   fun <T: Long?> testUnboxingFromTypeVariable() {
-   var n: T? = Long.valueOf(10L)
+   var n: T? = Long.valueOf(10L) as T?
    var l: Long = n!!.toLong()
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
@@ -482,7 +482,7 @@ open class AutoBoxing {
   @JvmStatic
   @ObjCName("testUnboxingFromIntersectionType")
   fun <T> testUnboxingFromIntersectionType() where T: Long?, T: Comparable<Long>? {
-   var n: T? = Long.valueOf(10L)
+   var n: T? = Long.valueOf(10L) as T?
    var l: Long = n!!.toLong()
    assert(l == 10L)
    n = Long.valueOf(n!!.toLong() + 1L)
