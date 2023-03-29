@@ -154,8 +154,7 @@ public class TypeDescriptors {
   }
 
   public static boolean isNonVoidPrimitiveType(TypeDescriptor typeDescriptor) {
-    return get().boxedTypeByPrimitiveType.containsKey(typeDescriptor.toRawTypeDescriptor())
-        && !isPrimitiveVoid(typeDescriptor);
+    return typeDescriptor.isPrimitive() && !isPrimitiveVoid(typeDescriptor);
   }
 
   public static boolean isBoxedBooleanOrDouble(TypeDescriptor typeDescriptor) {
