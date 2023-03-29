@@ -15,75 +15,90 @@
  */
 package assertsimple;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertNull;
+import static com.google.j2cl.integration.testing.Asserts.fail;
+import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 /** Test method body, assert statement, and binary expression with number literals work fine. */
 @SuppressWarnings("ComplexBooleanConstant") // literal boolean expressions
 public class Main {
   public static void main(String[] args) {
-    assert 1 + 2 == 3;
+    testAssert_succeeds();
+    testAssert_fails_differentMessageExpressionTypes();
+    // TODO(b/202076599): Remove conditional once bug is fixed.
+    if (isJvm()) {
+      testAssert_sideEffects();
+    }
+  }
 
+  private static void testAssert_succeeds() {
+    assert 1 + 2 == 3;
+  }
+
+  private static void testAssert_fails_differentMessageExpressionTypes() {
     try {
       assert 2 == 3;
-      throw new RuntimeException("Failed to throw assert!");
+      fail("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      assert expected.getMessage() == null;
+      assertNull(expected.getMessage());
     }
 
     try {
       assert 2 == 3 : getDescription();
-      throw new RuntimeException("Failed to throw assert!");
+      fail("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      assert expected.getMessage().equals("custom message");
+      assertEquals("custom message", expected.getMessage());
     }
 
     try {
       assert 2 == 3 : new RuntimeException("42");
-      throw new RuntimeException("Failed to throw assert!");
+      fail("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      assert expected.getCause().getMessage().equals("42");
+      assertEquals("42", expected.getCause().getMessage());
     }
 
     try {
       assert 2 == 3 : 42;
-      throw new RuntimeException("Failed to throw assert!");
+      fail("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      assert expected.getMessage().equals("42");
+      assertEquals("42", expected.getMessage());
     }
 
     try {
       assert 2 == 3 : 42L;
-      throw new RuntimeException("Failed to throw assert!");
+      fail("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      assert expected.getMessage().equals("42");
+      assertEquals("42", expected.getMessage());
     }
 
     try {
       assert 2 == 3 : true;
-      throw new RuntimeException("Failed to throw assert!");
+      fail("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      assert expected.getMessage().equals("true");
+      assertEquals("true", expected.getMessage());
     }
 
     try {
       assert 2 == 3 : null;
-      throw new RuntimeException("Failed to throw assert!");
+      fail("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      assert expected.getMessage().equals("null");
+      assertEquals("null", expected.getMessage());
     }
 
     try {
       assert 2 == 3 : 'g';
-      throw new RuntimeException("Failed to throw assert!");
+      fail("Failed to throw assert!");
     } catch (AssertionError expected) {
       // Success
-      assert expected.getMessage().equals("g");
+      assertEquals("g", expected.getMessage());
     }
   }
 
@@ -94,5 +109,27 @@ public class Main {
         return "custom message";
       }
     };
+  }
+
+  private static void testAssert_sideEffects() {
+
+    assertEquals(0, sideEffects);
+    assert 1 + 2 == 3 : getMessageWithSideEffects();
+    assertEquals(0, sideEffects);
+
+    try {
+      assert 2 == 3 : getMessageWithSideEffects();
+      fail("Failed to throw assert!");
+    } catch (AssertionError expected) {
+      // Success
+      assertEquals(1, sideEffects);
+    }
+  }
+
+  private static int sideEffects = 0;
+
+  private static String getMessageWithSideEffects() {
+    sideEffects++;
+    return "message";
   }
 }

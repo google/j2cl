@@ -19,5 +19,6 @@ public class AssertSimple {
   public static void main(String[] args) {
     assert 1 + 2 == 3;
     assert 1 + 2 == 3 : "Error!";
+    assert 1 + 2 == 3 : new Object();
   }
 }

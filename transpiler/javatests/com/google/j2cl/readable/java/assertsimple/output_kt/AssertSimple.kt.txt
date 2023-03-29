@@ -5,6 +5,7 @@
 package assertsimple
 
 import javaemul.lang.*
+import kotlin.Any
 import kotlin.Array
 import kotlin.OptIn
 import kotlin.String
@@ -25,6 +26,9 @@ open class AssertSimple {
    assert(1 + 2 == 3)
    assert(1 + 2 == 3) {
     "Error!"
+   }
+   assert(1 + 2 == 3) {
+    Any()
    }
   }
  }
