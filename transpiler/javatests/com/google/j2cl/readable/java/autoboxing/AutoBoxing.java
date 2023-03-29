@@ -382,6 +382,9 @@ public class AutoBoxing {
     assert l == 10L;
 
     n++;
+    ++n;
+    n = n++;
+    n = ++n;
 
     class Local<T extends Long> {
       long toLong(T l) {
@@ -401,6 +404,9 @@ public class AutoBoxing {
     assert l == 10L;
 
     n++;
+    ++n;
+    n = n++;
+    n = ++n;
 
     class Local<T extends Long & Comparable<Long>> {
       long toLong(T l) {

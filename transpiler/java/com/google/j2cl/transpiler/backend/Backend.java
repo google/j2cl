@@ -257,7 +257,7 @@ public enum Backend {
           InsertStringConversions::new,
           InsertNarrowingReferenceConversions::new,
           InsertUnboxingConversions::new,
-          InsertBoxingConversions::new,
+          () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed= */ false),
           InsertNarrowingPrimitiveConversions::new,
           InsertWideningPrimitiveConversions::new,
           NormalizeLongs::new,
