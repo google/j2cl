@@ -149,12 +149,8 @@ def _replace_readable_outputs(readable_dirs, tree_artifact_dir, output_dir):
   for readable_dir in readable_dirs:
     transpiler_output = "blaze-bin/%s/%s" % (readable_dir, tree_artifact_dir)
     output = "%s/%s" % (readable_dir, output_dir)
-    # Some quick checks to make sure the output path is expected -- we're about
-    # to rm -rf so let's be careful!
-    if output_dir not in output or "/readable/" not in output:
-      raise Exception("Invalid readable output path: %s" % output)
-    repo_util.run_cmd(["rm", "-Rf", "%s/*" % output])
-    repo_util.run_cmd(["mkdir", "-p", output])
+    repo_util.run_cmd(["rm", "-Rf", output])
+    repo_util.run_cmd(["mkdir", output])
     repo_util.run_cmd(
         ["cp --no-preserve=mode -r %s/* %s" % (transpiler_output, output)],
         shell=True)
