@@ -25,7 +25,7 @@ public class NestedClassesExample {
     public class InnerClassOldName {}
   }
 
-  @ObjectiveCName("NewObjCName")
+  @ObjectiveCName("NewStaticObjCName")
   public static class StaticObjCName {
     @ObjectiveCName("StaticInnerClassNewName")
     public class InnerClassOldName {}
