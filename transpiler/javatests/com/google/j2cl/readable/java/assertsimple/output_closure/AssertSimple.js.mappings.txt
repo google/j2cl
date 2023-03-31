@@ -16,6 +16,9 @@
   }] => [AssertSimple.$clinit();] "assertsimple.AssertSimple.main"
 [assert 1 + 2 == 3;] => [$Asserts.$assert((1 + 2 | 0) == 3);] "assertsimple.AssertSimple.main"
 [assert 1 + 2 == 3 : "Error!";] => [$Asserts.$assertWithMessage((1 + 2 | 0) == 3, 'Error!');] "assertsimple.AssertSimple.main"
+[assert 1 + 2 == 3 : null;] => [$Asserts.$assertWithMessage((1 + 2 | 0) == 3, null);] "assertsimple.AssertSimple.main"
+[assert 1 + 2 == 3 : args;] => [$Asserts.$assertWithMessage((1 + 2 | 0) == 3, args);] "assertsimple.AssertSimple.main"
+[assert 1 + 2 == 3 : args[0];] => [$Asserts.$assertWithMessage((1 + 2 | 0) == 3, args[0]);] "assertsimple.AssertSimple.main"
 [assert 1 + 2 == 3 : new Object();] => [$Asserts.$assertWithMessage((1 + 2 | 0) == 3, j_l_Object.$create__());] "assertsimple.AssertSimple.main"
 [AssertSimple] => [$clinit]
 [AssertSimple] => [AssertSimple.$clinit = () =>{};] "assertsimple.AssertSimple.<clinit>"

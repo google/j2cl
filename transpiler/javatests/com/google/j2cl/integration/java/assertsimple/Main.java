@@ -16,8 +16,8 @@
 package assertsimple;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
-import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.fail;
+import static com.google.j2cl.integration.testing.AssertsBase.assertTrue;
 import static com.google.j2cl.integration.testing.TestUtils.isJvm;
 
 /** Test method body, assert statement, and binary expression with number literals work fine. */
@@ -41,8 +41,9 @@ public class Main {
       assert 2 == 3;
       fail("Failed to throw assert!");
     } catch (AssertionError expected) {
-      // Success
-      assertNull(expected.getMessage());
+      // Success. In Kotlin, exception message is never null and defaults to "Assertion failed".
+      String message = expected.getMessage();
+      assertTrue(message == null || message.equals("Assertion failed"));
     }
 
     try {

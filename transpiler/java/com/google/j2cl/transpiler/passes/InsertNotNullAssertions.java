@@ -15,27 +15,37 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.AssertStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
+import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.passes.ConversionContextVisitor.ContextRewriter;
 import java.util.function.Function;
 
@@ -48,6 +58,14 @@ public final class InsertNotNullAssertions extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
+          @Override
+          public Node rewriteAssertStatement(AssertStatement assertStatement) {
+            return AssertStatement.Builder.from(assertStatement)
+                .setMessage(
+                    insertElvisIfNeeded(assertStatement.getMessage(), new StringLiteral("null")))
+                .build();
+          }
+
           @Override
           public Node rewriteArrayAccess(ArrayAccess arrayAccess) {
             return ArrayAccess.Builder.from(arrayAccess)
@@ -67,10 +85,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           @Override
           public Node rewriteFieldAccess(FieldAccess fieldAccess) {
             return FieldAccess.Builder.from(fieldAccess)
-                .setQualifier(
-                    applyIfNotNull(
-                        fieldAccess.getQualifier(),
-                        InsertNotNullAssertions::insertNotNullAssertionIfNeeded))
+                .setQualifier(insertNotNullAssertionIfNeeded(fieldAccess.getQualifier()))
                 .build();
           }
 
@@ -85,20 +100,14 @@ public final class InsertNotNullAssertions extends NormalizationPass {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
             return MethodCall.Builder.from(methodCall)
-                .setQualifier(
-                    applyIfNotNull(
-                        methodCall.getQualifier(),
-                        InsertNotNullAssertions::insertNotNullAssertionIfNeeded))
+                .setQualifier(insertNotNullAssertionIfNeeded(methodCall.getQualifier()))
                 .build();
           }
 
           @Override
           public Node rewriteNewInstance(NewInstance newInstance) {
             return NewInstance.Builder.from(newInstance)
-                .setQualifier(
-                    applyIfNotNull(
-                        newInstance.getQualifier(),
-                        InsertNotNullAssertions::insertNotNullAssertionIfNeeded))
+                .setQualifier(insertNotNullAssertionIfNeeded(newInstance.getQualifier()))
                 .build();
           }
 
@@ -153,7 +162,7 @@ public final class InsertNotNullAssertions extends NormalizationPass {
         || expression instanceof ArrayLiteral
         || expression instanceof FunctionExpression
         || expression instanceof NewArray
-        || expression instanceof Literal
+        || (expression instanceof Literal && !(expression instanceof NullLiteral))
         || (expression instanceof FieldAccess
             && ((FieldAccess) expression).getTarget().isEnumConstant());
   }
@@ -165,7 +174,9 @@ public final class InsertNotNullAssertions extends NormalizationPass {
   }
 
   private static Expression insertNotNullAssertionIfNeeded(Expression expression) {
-    return !doesNotNeedNullCheck(expression) ? insertNotNullAssertion(expression) : expression;
+    return expression != null && !doesNotNeedNullCheck(expression)
+        ? insertNotNullAssertion(expression)
+        : expression;
   }
 
   private static Expression insertNotNullAssertion(Expression expression) {
@@ -175,7 +186,54 @@ public final class InsertNotNullAssertions extends NormalizationPass {
         .build();
   }
 
-  private static <T> T applyIfNotNull(T t, Function<T, T> fn) {
-    return t == null ? null : fn.apply(t);
+  private static Expression insertElvisIfNeeded(
+      Expression expression, Expression nonNullExpression) {
+    if (expression == null || doesNotNeedNullCheck(expression)) {
+      return expression;
+    }
+
+    if (expression instanceof NullLiteral) {
+      return nonNullExpression;
+    }
+
+    return introduceTemporaryVariableIfNeeded(
+        expression,
+        variable ->
+            ConditionalExpression.newBuilder()
+                .setConditionExpression(
+                    variable
+                        .createReference()
+                        .infixEquals(expression.getTypeDescriptor().getNullValue()))
+                .setTrueExpression(nonNullExpression)
+                .setFalseExpression(variable.createReference())
+                .setTypeDescriptor(TypeDescriptors.get().javaLangObject.toNonNullable())
+                .build());
+  }
+
+  private static Expression introduceTemporaryVariableIfNeeded(
+      Expression expression, Function<Variable, Expression> expressionBuilder) {
+    if (expression instanceof VariableReference) {
+      VariableReference variableReference = (VariableReference) expression;
+      Variable variable = variableReference.getTarget();
+      if (variable.isFinal()) {
+        return expressionBuilder.apply(variableReference.getTarget());
+      }
+    }
+
+    Variable variable =
+        Variable.newBuilder()
+            .setFinal(true)
+            .setTypeDescriptor(expression.getTypeDescriptor())
+            .setName("tmp")
+            .setSourcePosition(SourcePosition.NONE)
+            .build();
+
+    return MultiExpression.newBuilder()
+        .addExpressions(
+            VariableDeclarationExpression.newBuilder()
+                .addVariableDeclaration(variable, expression)
+                .build(),
+            expressionBuilder.apply(variable))
+        .build();
   }
 }

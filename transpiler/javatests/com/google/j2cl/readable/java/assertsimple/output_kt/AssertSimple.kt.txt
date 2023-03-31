@@ -14,6 +14,7 @@ import kotlin.assert
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.jvm.JvmStatic
 import kotlin.native.ObjCName
+import kotlin.run
 
 @ObjCName("AssertsimpleAssertSimple", exact = true)
 open class AssertSimple {
@@ -27,6 +28,18 @@ open class AssertSimple {
    assert(1 + 2 == 3)
    assert(1 + 2 == 3) {
     "Error!"
+   }
+   assert(1 + 2 == 3) {
+    "null"
+   }
+   assert(1 + 2 == 3) {
+    if (args == null) "null" else args!!
+   }
+   assert(1 + 2 == 3) {
+    run {
+     val tmp: String? = args!![0]
+     if (tmp == null) "null" else tmp!!
+    }
    }
    assert(1 + 2 == 3) {
     Any()
