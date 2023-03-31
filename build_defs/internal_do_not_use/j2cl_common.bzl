@@ -27,10 +27,11 @@ def _compile(
 
     jvm_srcs, js_srcs = split_srcs(srcs)
 
+    has_srcs_to_transpile = jvm_srcs or kt_common_srcs
     has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"]) or kt_common_srcs
 
     # Validate the attributes.
-    if not jvm_srcs:
+    if not has_srcs_to_transpile:
         if deps:
             fail("deps not allowed without java or kotlin srcs")
         if js_srcs:
@@ -72,7 +73,7 @@ def _compile(
             kotlincopts = kotlincopts,
         )
 
-    if jvm_srcs:
+    if has_srcs_to_transpile:
         output_js = ctx.actions.declare_directory("%s.js" % name)
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
         _j2cl_transpile(
@@ -92,7 +93,7 @@ def _compile(
 
     # Don't pass anything to the js provider if we didn't transpile anything.
     # This case happens when j2cl_library exports another j2cl_library.
-    js_provider_srcs = [output_js] if jvm_srcs else []
+    js_provider_srcs = [output_js] if has_srcs_to_transpile else []
 
     return J2clInfo(
         _private_ = struct(
