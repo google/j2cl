@@ -176,7 +176,10 @@ internal val TypeDeclaration.objCName: String
   get() = objCName(forMember = false)
 
 internal fun TypeDeclaration.objCName(forMember: Boolean): String =
-  objectiveCName ?: mappedObjCName ?: defaultObjCName(forMember = forMember)
+  mappedObjCName ?: nonMappedObjCName(forMember)
+
+internal fun TypeDeclaration.nonMappedObjCName(forMember: Boolean): String =
+  objectiveCName ?: defaultObjCName(forMember = forMember)
 
 private val TypeDeclaration.mappedObjCName: String?
   get() =

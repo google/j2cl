@@ -326,10 +326,13 @@ private val TypeDeclaration.allocRenderer: Renderer<Source>
   get() = objCNameRenderer.map { inSquareBrackets(spaceSeparated(it, source("alloc"))) }
 
 private val TypeDeclaration.objCNameRenderer: Renderer<Source>
-  get() = objectiveCNameRenderer ?: mappedObjCNameRenderer ?: defaultObjCNameRenderer
+  get() = mappedObjCNameRenderer ?: nonMappedObjCNameRenderer
 
-private val TypeDeclaration.objectiveCNameRenderer: Renderer<Source>?
-  get() = objectiveCName?.let { if (isInterface) protocolName(it) else className(it) }
+private val TypeDeclaration.nonMappedObjCNameRenderer: Renderer<Source>
+  get() =
+    nonMappedObjCName(forMember = false).let {
+      if (isInterface) protocolName(it) else className(it)
+    }
 
 private val TypeDeclaration.mappedObjCNameRenderer: Renderer<Source>?
   get() =
@@ -343,10 +346,6 @@ private val TypeDeclaration.mappedObjCNameRenderer: Renderer<Source>?
       "java.util.Map" -> nsMutableDictionary
       else -> null
     }
-
-private val TypeDeclaration.defaultObjCNameRenderer: Renderer<Source>
-  get() =
-    defaultObjCName(forMember = false).let { if (isInterface) protocolName(it) else className(it) }
 
 private val TypeDescriptor.objCRenderer: Renderer<Source>
   get() =
