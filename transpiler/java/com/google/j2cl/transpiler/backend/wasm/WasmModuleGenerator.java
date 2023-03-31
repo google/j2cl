@@ -101,7 +101,13 @@ public class WasmModuleGenerator {
     // The throw instruction will refer to this tag and will expect a single element in the stack
     // with the type $java.lang.Throwable.
     builder.newLine();
-    builder.append("(tag $exception.event (param (ref null $java.lang.Throwable)))");
+    builder.append(
+        "(import \"imports\" \"j2wasm.ExceptionUtils.tag\" (tag $exception.event (param"
+            + " externref)))");
+    // Add an export that uses the tag to workarund binaryen assuming the tag is never instantiated.
+    builder.append(
+        "(func $keep_tag_alive_hack (export \"_tag_hack_\") (param $param externref)  "
+            + "(throw $exception.event (local.get $param)))");
 
     // Emit all the globals, e.g. vtable instances, etc.
     emitDispatchTablesInitialization(library);

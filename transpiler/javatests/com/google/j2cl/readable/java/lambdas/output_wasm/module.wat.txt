@@ -4496,9 +4496,10 @@
   ;; String y = ((String) ((U) y));
   ;;@ lambdas/Lambdas.java:170:8
   (local.set $y_1 (ref.cast_static $java.lang.String (local.get $y)))
-  ;; throw java.lang.RuntimeException.$create();
+  ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.RuntimeException.$create());
   ;;@ lambdas/Lambdas.java:171:10
-  (throw $exception.event (call $$create__@java.lang.RuntimeException ))
+  (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.RuntimeException ))
+  (unreachable)
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$16)

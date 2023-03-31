@@ -247,7 +247,7 @@
    (block
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (pop (ref null $java.lang.Throwable)))
+   (local.set $__$exc (ref.cast_static $java.lang.Throwable (extern.internalize (pop externref))))
    (block
     ;; if (__$exc instanceof RuntimeException) {
     ;;@ unreachableclass/Main.java:21:33
@@ -271,9 +271,10 @@
       )
      )(else
       (block
-       ;; throw __$exc;
+       ;; throw javaemul.internal.Exceptions.throwJsError(__$exc);
        ;;@ unreachableclass/Main.java:21:33
-       (throw $exception.event (local.get $__$exc))
+       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc))
+       (unreachable)
       )
      )
     )

@@ -18,6 +18,7 @@ const ArrayUtils = goog.require('j2wasm.ArrayUtils');
 const CharUtils = goog.require('j2wasm.CharUtils');
 const ConsoleUtils = goog.require('j2wasm.ConsoleUtils');
 const DoubleUtils = goog.require('j2wasm.DoubleUtils');
+const ExceptionUtils = goog.require('j2wasm.ExceptionUtils');
 const RegExpUtils = goog.require('j2wasm.RegExpUtils');
 const StringUtils = goog.require('j2wasm.StringUtils');
 
@@ -145,8 +146,8 @@ function createImportObject(userImports) {
     'RegExp.setLastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex =
         i,
     'get RegExp.lastIndex': (/** !RegExp */ r) => r.lastIndex,
-    'set RegExp.lastIndex': (/** !RegExp */ r, /** number */ i) =>
-        r.lastIndex = i,
+    'set RegExp.lastIndex': (/** !RegExp */ r, /** number */ i) => r.lastIndex =
+        i,
     'RegExp.exec': (/** !RegExp */ r, /** string */ s) => r.exec(s),
     'RegExp.test': (/** !RegExp */ r, /** string */ s) => r.test(s),
     'j2wasm.RegExpUtils.getIndex': RegExpUtils.getIndex,
@@ -157,6 +158,11 @@ function createImportObject(userImports) {
     'j2wasm.ArrayUtils.setBufferAt': ArrayUtils.setBufferAt,
     'j2wasm.ArrayUtils.getBufferAt': ArrayUtils.getBufferAt,
     'j2wasm.ArrayUtils.getLength': ArrayUtils.getLength,
+
+    // Exception Support
+    'j2wasm.ExceptionUtils.tag': ExceptionUtils.tag,
+    'j2wasm.ExceptionUtils.create': ExceptionUtils.create,
+    'j2wasm.ExceptionUtils.throwException': ExceptionUtils.throwException,
 
     // Date
     'Date.now': Date.now,

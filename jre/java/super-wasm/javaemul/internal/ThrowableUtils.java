@@ -26,8 +26,8 @@ public final class ThrowableUtils {
 
   /** Sets the Java {@link Throwable} of the specified js {@code Error}. */
   public static void setJavaThrowable(Object error, Throwable javaThrowable) {
-    // Wasm doesn't yet support conversion from JS errors.
-    throw new UnsupportedOperationException();
+    // We are currently not linking the error back so this is no-op.
+    // In the future if JS errors become accessible from Wasm, we should reconsider this.
   }
 
   /** JavaScript {@code Error}. Placeholder in Wasm. */

@@ -56,6 +56,7 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThisOrSuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
@@ -906,6 +907,13 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
             .makeStatement(constructorSourcePosition);
     statements.add(ctorCallStatement);
 
+    if (enclosingType.isAssignableTo(TypeDescriptors.get().javaLangThrowable)) {
+      // $instance.privateInitError(Exceptions.createJsError);
+      statements.add(
+          createThrowableInit(newInstance.createReference())
+              .makeStatement(constructorSourcePosition));
+    }
+
     // return $instance
     Statement returnStatement =
         ReturnStatement.newBuilder()
@@ -1032,5 +1040,11 @@ public class NormalizeInstantiationThroughFactoryMethods extends LibraryNormaliz
         .filter(m -> m.getDescriptor().isInitMethod())
         .collect(toOptional())
         .orElse(null);
+  }
+
+  private static Expression createThrowableInit(Expression newInstanceRef) {
+    return RuntimeMethods.createThrowableInitMethodCall(
+        newInstanceRef,
+        RuntimeMethods.createExceptionsMethodCall("createJsError", newInstanceRef.clone()));
   }
 }

@@ -389,9 +389,10 @@ final class StatementTranspiler {
         builder.emitWithMapping(
             throwStatement.getSourcePosition(),
             () -> {
-              builder.append("(throw $exception.event ");
               renderExpression(throwStatement.getExpression());
-              builder.append(")");
+              // Since throw in JS invisible, adding unreachable keeps the Wasm invariants.
+              builder.newLine();
+              builder.append("(unreachable)");
             });
         return false;
       }
@@ -412,9 +413,9 @@ final class StatementTranspiler {
           builder.newLine();
           builder.append(
               String.format(
-                  "(local.set %s (pop %s))",
+                  "(local.set %s (ref.cast_static %s (extern.internalize (pop externref))))",
                   environment.getDeclarationName(catchClause.getExceptionVariable()),
-                  environment.getWasmType(TypeDescriptors.get().javaLangThrowable)));
+                  environment.getWasmTypeName(TypeDescriptors.get().javaLangThrowable)));
           render(catchClause.getBody());
           builder.unindent();
           builder.newLine();

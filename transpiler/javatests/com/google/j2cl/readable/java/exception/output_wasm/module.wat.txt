@@ -176,6 +176,9 @@
   ;; $instance.$ctor();
   ;;@ exception/MyException.java:19:2
   (call $$ctor__void_$p_exception_MyException@exception.MyException (ref.as_non_null (local.get $$instance)))
+  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
+  ;;@ exception/MyException.java:19:2
+  (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
   ;; return $instance;
   ;;@ exception/MyException.java:19:2
   (return (local.get $$instance))
@@ -209,6 +212,9 @@
   ;; $instance.$ctor(cause);
   ;;@ exception/MyException.java:21:2
   (call $$ctor__java_lang_Throwable__void_$p_exception_MyException@exception.MyException (ref.as_non_null (local.get $$instance))(local.get $cause))
+  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
+  ;;@ exception/MyException.java:21:2
+  (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
   ;; return $instance;
   ;;@ exception/MyException.java:21:2
   (return (local.get $$instance))
@@ -280,6 +286,9 @@
   ;; $instance.$ctor();
   ;;@ exception/MyJsException.java:23:9
   (call $$ctor__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $$instance)))
+  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
+  ;;@ exception/MyJsException.java:23:9
+  (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
   ;; return $instance;
   ;;@ exception/MyJsException.java:23:9
   (return (local.get $$instance))
@@ -313,6 +322,9 @@
   ;; $instance.$ctor(cause);
   ;;@ exception/MyJsException.java:26:9
   (call $$ctor__java_lang_Throwable__void_$p_exception_MyJsException@exception.MyJsException (ref.as_non_null (local.get $$instance))(local.get $cause))
+  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
+  ;;@ exception/MyJsException.java:26:9
+  (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
   ;; return $instance;
   ;;@ exception/MyJsException.java:26:9
   (return (local.get $$instance))

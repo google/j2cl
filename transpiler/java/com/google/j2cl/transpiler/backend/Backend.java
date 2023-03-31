@@ -63,6 +63,7 @@ import com.google.j2cl.transpiler.passes.InsertCastOnNewInstances;
 import com.google.j2cl.transpiler.passes.InsertCastsOnNullabilityMismatch;
 import com.google.j2cl.transpiler.passes.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.transpiler.passes.InsertExceptionConversions;
+import com.google.j2cl.transpiler.passes.InsertExceptionConversionsWasm;
 import com.google.j2cl.transpiler.passes.InsertExplicitArrayCoercionCasts;
 import com.google.j2cl.transpiler.passes.InsertExplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.InsertIntegerCoercions;
@@ -436,6 +437,7 @@ public enum Backend {
 
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
+          InsertExceptionConversionsWasm::new,
 
           // Passes required for immutable fields.
           MakeFieldsFinal::new,

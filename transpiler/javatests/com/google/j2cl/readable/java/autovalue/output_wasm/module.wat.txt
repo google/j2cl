@@ -2213,9 +2213,10 @@
   (if (ref.is_null (local.get $stringField))
    (then
     (block
-     ;; throw java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_stringF...|());
+     ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_stringF...|()));
      ;;@ autovalue/$$AutoValue_AutoValueWithExtensions.java:18:6
-     (throw $exception.event (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_stringF...|__java_lang_String (ref.func $$getString_|Null_stringF...|__java_lang_String@javaemul.internal.StringPool) )))
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_stringF...|__java_lang_String (ref.func $$getString_|Null_stringF...|__java_lang_String@javaemul.internal.StringPool) )))
+     (unreachable)
     )
    )
   )
@@ -2946,14 +2947,15 @@
      ;; String missing = javaemul.internal.StringPool.$getString_|_booleanField|();
      ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:91:8
      (local.set $missing (call $function.no.side.effects.$getString_|_booleanField|__java_lang_String (ref.func $$getString_|_booleanField|__java_lang_String@javaemul.internal.StringPool) ))
-     ;; throw java.lang.IllegalStateException.$create((StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Missing_requ...|()),$stringBuilder.append(missing),$stringBuilder.toString()));
+     ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.IllegalStateException.$create((StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Missing_requ...|()),$stringBuilder.append(missing),$stringBuilder.toString())));
      ;;@ autovalue/AutoValue_AutoValueWithBuilder.java:92:8
-     (throw $exception.event (call $$create__java_lang_String@java.lang.IllegalStateException (block (result (ref null $java.lang.String))
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__java_lang_String@java.lang.IllegalStateException (block (result (ref null $java.lang.String))
       (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
       (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|Missing_requ...|__java_lang_String (ref.func $$getString_|Missing_requ...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
       (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(local.get $missing)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
       (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
      )))
+     (unreachable)
     )
    )
   )
@@ -3436,14 +3438,15 @@
      ;; String missing = javaemul.internal.StringPool.$getString_|_booleanField|();
      ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:62:8
      (local.set $missing (call $function.no.side.effects.$getString_|_booleanField|__java_lang_String (ref.func $$getString_|_booleanField|__java_lang_String@javaemul.internal.StringPool) ))
-     ;; throw java.lang.IllegalStateException.$create((StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Missing_requ...|()),$stringBuilder.append(missing),$stringBuilder.toString()));
+     ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.IllegalStateException.$create((StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Missing_requ...|()),$stringBuilder.append(missing),$stringBuilder.toString())));
      ;;@ autovalue/AutoValue_DefaultConstructorAutoValue.java:63:8
-     (throw $exception.event (call $$create__java_lang_String@java.lang.IllegalStateException (block (result (ref null $java.lang.String))
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__java_lang_String@java.lang.IllegalStateException (block (result (ref null $java.lang.String))
       (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
       (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|Missing_requ...|__java_lang_String (ref.func $$getString_|Missing_requ...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
       (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(local.get $missing)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
       (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
      )))
+     (unreachable)
     )
    )
   )
@@ -3746,14 +3749,15 @@
      ;; String missing = javaemul.internal.StringPool.$getString_|_booleanField|();
      ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:62:8
      (local.set $missing (call $function.no.side.effects.$getString_|_booleanField|__java_lang_String (ref.func $$getString_|_booleanField|__java_lang_String@javaemul.internal.StringPool) ))
-     ;; throw java.lang.IllegalStateException.$create((StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Missing_requ...|()),$stringBuilder.append(missing),$stringBuilder.toString()));
+     ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.IllegalStateException.$create((StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Missing_requ...|()),$stringBuilder.append(missing),$stringBuilder.toString())));
      ;;@ autovalue/AutoValue_DefaultNonEmptyConstructorAutoValue.java:63:8
-     (throw $exception.event (call $$create__java_lang_String@java.lang.IllegalStateException (block (result (ref null $java.lang.String))
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__java_lang_String@java.lang.IllegalStateException (block (result (ref null $java.lang.String))
       (local.set $$stringBuilder (call $$create__@java.lang.StringBuilder ))
       (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(call $function.no.side.effects.$getString_|Missing_requ...|__java_lang_String (ref.func $$getString_|Missing_requ...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
       (drop (call_ref $function.m_append__java_lang_String__java_lang_StringBuilder (ref.as_non_null (local.get $$stringBuilder))(local.get $missing)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
       (call_ref $function.m_toString__java_lang_String (ref.as_non_null (local.get $$stringBuilder))(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
      )))
+     (unreachable)
     )
    )
   )
@@ -4079,9 +4083,10 @@
   (if (ref.is_null (local.get $stringField))
    (then
     (block
-     ;; throw java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_stringF...|());
+     ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_stringF...|()));
      ;;@ autovalue/AutoValue_SimpleAutoValue.java:31:6
-     (throw $exception.event (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_stringF...|__java_lang_String (ref.func $$getString_|Null_stringF...|__java_lang_String@javaemul.internal.StringPool) )))
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_stringF...|__java_lang_String (ref.func $$getString_|Null_stringF...|__java_lang_String@javaemul.internal.StringPool) )))
+     (unreachable)
     )
    )
   )
@@ -4090,9 +4095,10 @@
   (if (ref.is_null (local.get $doubleField))
    (then
     (block
-     ;; throw java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_doubleF...|());
+     ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_doubleF...|()));
      ;;@ autovalue/AutoValue_SimpleAutoValue.java:35:6
-     (throw $exception.event (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_doubleF...|__java_lang_String (ref.func $$getString_|Null_doubleF...|__java_lang_String@javaemul.internal.StringPool) )))
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_doubleF...|__java_lang_String (ref.func $$getString_|Null_doubleF...|__java_lang_String@javaemul.internal.StringPool) )))
+     (unreachable)
     )
    )
   )
@@ -4101,9 +4107,10 @@
   (if (ref.is_null (local.get $arrayField))
    (then
     (block
-     ;; throw java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_arrayField|());
+     ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_arrayField|()));
      ;;@ autovalue/AutoValue_SimpleAutoValue.java:40:6
-     (throw $exception.event (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_arrayField|__java_lang_String (ref.func $$getString_|Null_arrayField|__java_lang_String@javaemul.internal.StringPool) )))
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_arrayField|__java_lang_String (ref.func $$getString_|Null_arrayField|__java_lang_String@javaemul.internal.StringPool) )))
+     (unreachable)
     )
    )
   )
@@ -5060,9 +5067,10 @@
   (if (ref.is_null (local.get $stringField))
    (then
     (block
-     ;; throw java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_stringF...|());
+     ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.NullPointerException.$create(javaemul.internal.StringPool.$getString_|Null_stringF...|()));
      ;;@ autovalue/AutoValue_ExtendingAutoValue.java:22:6
-     (throw $exception.event (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_stringF...|__java_lang_String (ref.func $$getString_|Null_stringF...|__java_lang_String@javaemul.internal.StringPool) )))
+     (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__java_lang_String@java.lang.NullPointerException (call $function.no.side.effects.$getString_|Null_stringF...|__java_lang_String (ref.func $$getString_|Null_stringF...|__java_lang_String@javaemul.internal.StringPool) )))
+     (unreachable)
     )
    )
   )

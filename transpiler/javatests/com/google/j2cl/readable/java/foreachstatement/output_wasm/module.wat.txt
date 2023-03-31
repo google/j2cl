@@ -403,12 +403,13 @@
   (try (do 
    
    (block
-    ;; throw java.lang.Exception.$create();
+    ;; throw javaemul.internal.Exceptions.throwJsError(java.lang.Exception.$create());
     ;;@ foreachstatement/ForEachStatement.java:46:6
-    (throw $exception.event (call $$create__@java.lang.Exception ))
+    (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (call $$create__@java.lang.Exception ))
+    (unreachable)
    )
   ) (catch $exception.event (block
-   (local.set $__$exc (pop (ref null $java.lang.Throwable)))
+   (local.set $__$exc (ref.cast_static $java.lang.Throwable (extern.internalize (pop externref))))
    (block
     ;; if ((__$exc instanceof Exception1) ? (true) : (__$exc instanceof Exception2)) {
     ;;@ foreachstatement/ForEachStatement.java:47:40
@@ -441,9 +442,10 @@
       )
      )(else
       (block
-       ;; throw __$exc;
+       ;; throw javaemul.internal.Exceptions.throwJsError(__$exc);
        ;;@ foreachstatement/ForEachStatement.java:47:40
-       (throw $exception.event (local.get $__$exc))
+       (call $m_throwJsError__java_lang_Throwable__void@javaemul.internal.Exceptions (local.get $__$exc))
+       (unreachable)
       )
      )
     )
@@ -685,6 +687,9 @@
   ;; $instance.$ctor();
   ;;@ foreachstatement/ForEachStatement.java:32:15
   (call $$ctor__void_$p_foreachstatement_ForEachStatement_Exception1@foreachstatement.ForEachStatement.Exception1 (ref.as_non_null (local.get $$instance)))
+  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
+  ;;@ foreachstatement/ForEachStatement.java:32:15
+  (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
   ;; return $instance;
   ;;@ foreachstatement/ForEachStatement.java:32:15
   (return (local.get $$instance))
@@ -806,6 +811,9 @@
   ;; $instance.$ctor();
   ;;@ foreachstatement/ForEachStatement.java:38:15
   (call $$ctor__void_$p_foreachstatement_ForEachStatement_Exception2@foreachstatement.ForEachStatement.Exception2 (ref.as_non_null (local.get $$instance)))
+  ;; $instance.privateInitError(javaemul.internal.Exceptions.createJsError($instance));
+  ;;@ foreachstatement/ForEachStatement.java:38:15
+  (call_ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang (ref.as_non_null (local.get $$instance))(call $m_createJsError__java_lang_Throwable__javaemul_internal_Exceptions_JsErrorWrapper@javaemul.internal.Exceptions (local.get $$instance))(struct.get $java.lang.Throwable.vtable $m_privateInitError__java_lang_Object__void_$pp_java_lang (struct.get $java.lang.Throwable $vtable(local.get $$instance))))
   ;; return $instance;
   ;;@ foreachstatement/ForEachStatement.java:38:15
   (return (local.get $$instance))
