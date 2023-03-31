@@ -19,6 +19,7 @@ import kotlin.native.ObjCName
 
 @ObjCName("J2ktDefinitelyNotNull", exact = true)
 open class DefinitelyNotNull {
+ @ObjCName("J2ktDefinitelyNotNullCompanion", exact = true)
  companion object {
   @JvmStatic
   @ObjCName("testEquivalence")
@@ -48,6 +49,7 @@ open class DefinitelyNotNull {
 
  @ObjCName("J2ktDefinitelyNotNull_ImmutableList", exact = true)
  open class ImmutableList<E: Any> {
+  @ObjCName("J2ktDefinitelyNotNull_ImmutableListCompanion", exact = true)
   companion object {
    @JvmStatic
    @ObjCName("copyOf")

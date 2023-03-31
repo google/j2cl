@@ -16,8 +16,12 @@
 package com.google.j2cl.transpiler.backend.kotlin.ast
 
 import com.google.j2cl.transpiler.ast.Type
+import com.google.j2cl.transpiler.ast.TypeDeclaration
 
-data class CompanionObject(val members: List<Member>)
+data class CompanionObject(
+  val enclosingTypeDeclaration: TypeDeclaration,
+  val members: List<Member>
+)
 
 val Type.companionObjectOrNull: CompanionObject?
   get() =
@@ -25,4 +29,4 @@ val Type.companionObjectOrNull: CompanionObject?
       .filter { it.isStatic && !it.isEnumField }
       .map { Member.WithJavaMember(it) }
       .takeIf { it.isNotEmpty() }
-      ?.let(::CompanionObject)
+      ?.let { CompanionObject(declaration, it) }

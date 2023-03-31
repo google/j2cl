@@ -65,6 +65,7 @@ open class ObjCName {
   @kotlin.native.ObjCName("withNSString") s: String?
  )
 
+ @kotlin.native.ObjCName("NewObjCNameCompanion", exact = true)
  companion object {
   @JvmField
   @kotlin.native.ObjCName("publicStaticField_")
@@ -515,6 +516,7 @@ open class ObjCName {
   @kotlin.native.ObjCName("NO__")
   NO;
 
+  @kotlin.native.ObjCName("NewObjCName_FooCompanion", exact = true)
   companion object {
    @JvmStatic
    @kotlin.native.ObjCName("withOrdinal")
@@ -536,6 +538,7 @@ open class ObjCName {
    return 0
   }
 
+  @kotlin.native.ObjCName("NewObjCName_SubCollectionCompanion", exact = true)
   companion object {
    @JvmStatic
    @kotlin.native.ObjCName("staticMethod")
@@ -544,6 +547,7 @@ open class ObjCName {
 
   @kotlin.native.ObjCName("NewObjCName_SubCollection_InnerClass", exact = true)
   open class InnerClass {
+   @kotlin.native.ObjCName("NewObjCName_SubCollection_InnerClassCompanion", exact = true)
    companion object {
     @JvmStatic
     @kotlin.native.ObjCName("staticMethod")
@@ -554,6 +558,7 @@ open class ObjCName {
 
  @kotlin.native.ObjCName("NewObjCName_NonCollection", exact = true)
  open class NonCollection {
+  @kotlin.native.ObjCName("NewObjCName_NonCollectionCompanion", exact = true)
   companion object {
    @JvmStatic
    @kotlin.native.ObjCName("staticMethod")

@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
@@ -70,6 +71,11 @@ internal fun Renderer.objCNameAnnotationSource(name: String, exact: Boolean? = n
 internal fun Renderer.objCAnnotationSource(typeDeclaration: TypeDeclaration): Source =
   sourceIf(typeDeclaration.needsObjCNameAnnotation) {
     objCNameAnnotationSource(typeDeclaration.objCName, exact = true)
+  }
+
+internal fun Renderer.objCAnnotationSource(companionObject: CompanionObject): Source =
+  sourceIf(companionObject.needsObjCNameAnnotation) {
+    objCNameAnnotationSource(companionObject.objCName, exact = true)
   }
 
 internal fun Renderer.objCAnnotationSource(
@@ -121,6 +127,9 @@ private val FieldDescriptor.needsObjCNameAnnotations
 
 private val TypeDeclaration.needsObjCNameAnnotation
   get() = visibility.needsObjCNameAnnotation && !isLocal && !isAnonymous
+
+private val CompanionObject.needsObjCNameAnnotation
+  get() = enclosingTypeDeclaration.needsObjCNameAnnotation
 
 private val Visibility.needsObjCNameAnnotation
   get() = this == Visibility.PUBLIC || this == Visibility.PROTECTED
@@ -174,6 +183,12 @@ private val String.objCMethodParameterNames: List<String>
 
 internal val TypeDeclaration.objCName: String
   get() = objCName(forMember = false)
+
+internal val TypeDeclaration.objCCompanionName: String
+  get() = objCName + "Companion"
+
+internal val CompanionObject.objCName: String
+  get() = enclosingTypeDeclaration.objCCompanionName
 
 internal fun TypeDeclaration.objCName(forMember: Boolean): String =
   mappedObjCName ?: nonMappedObjCName(forMember)

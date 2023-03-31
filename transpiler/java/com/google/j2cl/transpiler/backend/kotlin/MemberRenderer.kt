@@ -56,10 +56,13 @@ internal fun Renderer.source(member: Member): Source =
   }
 
 private fun Renderer.source(companionObject: CompanionObject): Source =
-  spaceSeparated(
-    source("companion"),
-    source("object"),
-    block(emptyLineSeparated(companionObject.members.map { source(it) }))
+  newLineSeparated(
+    objCAnnotationSource(companionObject),
+    spaceSeparated(
+      source("companion"),
+      source("object"),
+      block(emptyLineSeparated(companionObject.members.map { source(it) }))
+    )
   )
 
 private fun Renderer.memberSource(member: JavaMember): Source =

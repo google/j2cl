@@ -317,7 +317,7 @@ private val Variable.nameRenderer: Renderer<Source>
   get() = rendererOf(source(name.objCName.escapeObjCKeyword))
 
 private val TypeDeclaration.objCCompanionNameRenderer: Renderer<Source>
-  get() = objCNameRenderer.map { join(it, source("Companion")) }
+  get() = className(objCCompanionName)
 
 private val TypeDeclaration.companionSharedRenderer: Renderer<Source>
   get() = getProperty(objCCompanionNameRenderer, "shared")
