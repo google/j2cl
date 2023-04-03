@@ -23,6 +23,9 @@ data class CompanionObject(
   val members: List<Member>
 )
 
+val CompanionObject.declaration: CompanionDeclaration
+  get() = enclosingTypeDeclaration.companionDeclaration
+
 val Type.companionObjectOrNull: CompanionObject?
   get() =
     members

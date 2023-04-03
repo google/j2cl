@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
+import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
 import com.google.j2cl.transpiler.backend.kotlin.common.code
@@ -137,7 +138,7 @@ private val Type.nsEnumTypedefRenderer: Renderer<Source>
 private val FieldDescriptor.propertyQualifierRenderer: Renderer<Source>
   get() =
     enclosingTypeDescriptor.typeDeclaration.run {
-      if (isStatic && !isEnumConstant) companionSharedRenderer else objCNameRenderer
+      if (isStatic && !isEnumConstant) companionDeclaration.sharedRenderer else objCNameRenderer
     }
 
 private val FieldDescriptor.getPropertyObjCName: String
@@ -296,7 +297,7 @@ private fun Method.methodCallRenderer(objCNames: MethodObjCNames): Renderer<Sour
 private val Method.methodCallTargetRenderer: Renderer<Source>
   get() =
     if (isConstructor) descriptor.enclosingTypeDescriptor.typeDeclaration.allocRenderer
-    else descriptor.enclosingTypeDescriptor.typeDeclaration.companionSharedRenderer
+    else descriptor.enclosingTypeDescriptor.typeDeclaration.companionDeclaration.sharedRenderer
 
 private val MethodObjCNames.objCSelector: String
   get() =
@@ -315,11 +316,11 @@ private val Variable.renderer: Renderer<Source>
 private val Variable.nameRenderer: Renderer<Source>
   get() = rendererOf(source(name.objCName.escapeObjCKeyword))
 
-private val TypeDeclaration.objCCompanionNameRenderer: Renderer<Source>
-  get() = className(companionDeclaration.objCName)
+private val CompanionDeclaration.objCNameRenderer: Renderer<Source>
+  get() = className(objCName)
 
-private val TypeDeclaration.companionSharedRenderer: Renderer<Source>
-  get() = getProperty(objCCompanionNameRenderer, "shared")
+private val CompanionDeclaration.sharedRenderer: Renderer<Source>
+  get() = getProperty(objCNameRenderer, "shared")
 
 private val TypeDeclaration.allocRenderer: Renderer<Source>
   get() = objCNameRenderer.map { inSquareBrackets(spaceSeparated(it, source("alloc"))) }

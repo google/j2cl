@@ -32,7 +32,7 @@ import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
-import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
+import com.google.j2cl.transpiler.backend.kotlin.ast.declaration
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
@@ -77,7 +77,7 @@ internal fun Renderer.objCAnnotationSource(typeDeclaration: TypeDeclaration): So
 
 internal fun Renderer.objCAnnotationSource(companionObject: CompanionObject): Source =
   sourceIf(companionObject.needsObjCNameAnnotation) {
-    objCNameAnnotationSource(companionObject.objCName, exact = true)
+    objCNameAnnotationSource(companionObject.declaration.objCName, exact = true)
   }
 
 internal fun Renderer.objCAnnotationSource(
@@ -205,9 +205,6 @@ internal val CompanionDeclaration.objCNameWithoutPrefix
 
 private val TypeDeclaration.nonMappedObjCName: String
   get() = objectiveCName ?: defaultObjCName
-
-private val CompanionObject.objCName: String
-  get() = enclosingTypeDeclaration.companionDeclaration.objCName
 
 private val TypeDeclaration.mappedObjCName: String?
   get() =
