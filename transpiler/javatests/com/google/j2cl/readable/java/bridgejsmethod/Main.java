@@ -207,5 +207,18 @@ public class Main {
   // here it determines that it needs a two bridges one jsMethod(Parent) to super.jsMethod(Parent)
   // and one from jsMethod(Object) to super.jsMethod(Object) but since they are JsMethod and the
   // names collide only one is created resulting in an inconsistent override.
-  class Child extends Parent<Child> {}
+  class ChildWithoutOverrides extends Parent<ChildWithoutOverrides> {}
+
+  class ChildWithOverrides<T extends ChildWithOverrides<T>> extends Parent<T> {
+    @Override
+    @JsMethod
+    // This method would have the signature jsMethod(ChildWithOverrides) hence it would be mangled
+    // as jsMethod_ChildWithOverrides if it was not a jsMethod, requiring a bridge from
+    // jsMethod_Object. But since they are JsMethods the bridge is not created and jsMethod takes
+    // a ChildWithOverrides as a parameter.
+    public void jsMethod(T t) {}
+
+    @Override
+    public void method(T t) {}
+  }
 }

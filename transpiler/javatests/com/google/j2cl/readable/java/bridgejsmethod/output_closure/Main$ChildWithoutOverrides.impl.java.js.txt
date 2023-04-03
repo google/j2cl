@@ -1,0 +1,48 @@
+goog.module('bridgejsmethod.Main.ChildWithoutOverrides$impl');
+
+const Parent = goog.require('bridgejsmethod.Main.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
+
+/**
+ * @extends {Parent<ChildWithoutOverrides>}
+ */
+class ChildWithoutOverrides extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Main} @nodts*/
+  this.$outer_this__bridgejsmethod_Main_ChildWithoutOverrides;
+ }
+ /** @nodts @return {!ChildWithoutOverrides} */
+ static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
+  ChildWithoutOverrides.$clinit();
+  let $instance = new ChildWithoutOverrides();
+  $instance.$ctor__bridgejsmethod_Main_ChildWithoutOverrides__bridgejsmethod_Main__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_ChildWithoutOverrides__bridgejsmethod_Main__void(/** Main */ $outer_this) {
+  this.$outer_this__bridgejsmethod_Main_ChildWithoutOverrides = $outer_this;
+  this.$ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main__void($outer_this);
+ }
+ /** @nodts */
+ static $clinit() {
+  ChildWithoutOverrides.$clinit = () =>{};
+  ChildWithoutOverrides.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ChildWithoutOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(ChildWithoutOverrides, 'bridgejsmethod.Main$ChildWithoutOverrides');
+
+exports = ChildWithoutOverrides;
+
+//# sourceMappingURL=Main$ChildWithoutOverrides.js.map

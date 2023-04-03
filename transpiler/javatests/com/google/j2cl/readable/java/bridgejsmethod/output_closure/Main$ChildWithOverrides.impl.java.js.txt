@@ -1,0 +1,63 @@
+goog.module('bridgejsmethod.Main.ChildWithOverrides$impl');
+
+const Parent = goog.require('bridgejsmethod.Main.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template T
+ * @extends {Parent<T>}
+ */
+class ChildWithOverrides extends Parent {
+ /** @protected @nodts */
+ constructor() {
+  super();
+  /**@type {Main} @nodts*/
+  this.$outer_this__bridgejsmethod_Main_ChildWithOverrides;
+ }
+ /** @nodts @template T @return {!ChildWithOverrides<T>} */
+ static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
+  ChildWithOverrides.$clinit();
+  let $instance = new ChildWithOverrides();
+  $instance.$ctor__bridgejsmethod_Main_ChildWithOverrides__bridgejsmethod_Main__void($outer_this);
+  return $instance;
+ }
+ /** @nodts */
+ $ctor__bridgejsmethod_Main_ChildWithOverrides__bridgejsmethod_Main__void(/** Main */ $outer_this) {
+  this.$outer_this__bridgejsmethod_Main_ChildWithOverrides = $outer_this;
+  this.$ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main__void($outer_this);
+ }
+ /** @override */
+ jsMethod(/** T */ t) {
+  let t_1 = /**@type {T}*/ ($Casts.$to(t, ChildWithOverrides));
+ }
+ /** @nodts */
+ m_method__bridgejsmethod_Main_ChildWithOverrides__void(/** T */ t) {}
+ //Bridge method.
+ /** @final @override @nodts */
+ m_method__bridgejsmethod_Main_Parent__void(/** T */ arg0) {
+  this.m_method__bridgejsmethod_Main_ChildWithOverrides__void(/**@type {T}*/ ($Casts.$to(arg0, ChildWithOverrides)));
+ }
+ /** @nodts */
+ static $clinit() {
+  ChildWithOverrides.$clinit = () =>{};
+  ChildWithOverrides.$loadModules();
+  Parent.$clinit();
+ }
+ /** @nodts @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ChildWithOverrides;
+ }
+ 
+ /** @nodts */
+ static $loadModules() {
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(ChildWithOverrides, 'bridgejsmethod.Main$ChildWithOverrides');
+
+exports = ChildWithOverrides;
+
+//# sourceMappingURL=Main$ChildWithOverrides.js.map

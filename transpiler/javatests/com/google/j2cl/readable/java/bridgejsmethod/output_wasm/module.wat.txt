@@ -485,17 +485,17 @@
  (field $slot6 (ref null struct))
   $bridgejsmethod.Main.R.itable))
 
- ;;; Code for bridgejsmethod.Main.Child [type definition]
- (type $bridgejsmethod.Main.Child (struct_subtype 
-  (field $vtable (ref $bridgejsmethod.Main.Child.vtable)) 
-  (field $itable (ref $bridgejsmethod.Main.Child.itable))
+ ;;; Code for bridgejsmethod.Main.ChildWithoutOverrides [type definition]
+ (type $bridgejsmethod.Main.ChildWithoutOverrides (struct_subtype 
+  (field $vtable (ref $bridgejsmethod.Main.ChildWithoutOverrides.vtable)) 
+  (field $itable (ref $bridgejsmethod.Main.ChildWithoutOverrides.itable))
   (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
   (field $$outer_this__bridgejsmethod_Main_GrandParent (ref null $bridgejsmethod.Main))
   (field $$outer_this__bridgejsmethod_Main_Parent (ref null $bridgejsmethod.Main))
-  (field $$outer_this__bridgejsmethod_Main_Child (ref null $bridgejsmethod.Main))
+  (field $$outer_this__bridgejsmethod_Main_ChildWithoutOverrides (ref null $bridgejsmethod.Main))
    $bridgejsmethod.Main.Parent)
  )
- (type $bridgejsmethod.Main.Child.vtable (struct_subtype 
+ (type $bridgejsmethod.Main.ChildWithoutOverrides.vtable (struct_subtype 
   (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
   (field $m_hashCode__int (ref $function.m_hashCode__int))
   (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
@@ -506,7 +506,40 @@
   (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.m_method__bridgejsmethod_Main_Parent__void))
    $bridgejsmethod.Main.Parent.vtable)
  )
- (type $bridgejsmethod.Main.Child.itable (struct_subtype 
+ (type $bridgejsmethod.Main.ChildWithoutOverrides.itable (struct_subtype 
+ (field $slot0 (ref null struct))
+ (field $slot1 (ref null struct))
+ (field $slot2 (ref null struct))
+ (field $slot3 (ref null struct))
+ (field $slot4 (ref null struct))
+ (field $slot5 (ref null struct))
+ (field $slot6 (ref null struct))
+  $bridgejsmethod.Main.Parent.itable))
+
+ ;;; Code for bridgejsmethod.Main.ChildWithOverrides [type definition]
+ (type $bridgejsmethod.Main.ChildWithOverrides (struct_subtype 
+  (field $vtable (ref $bridgejsmethod.Main.ChildWithOverrides.vtable)) 
+  (field $itable (ref $bridgejsmethod.Main.ChildWithOverrides.itable))
+  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  (field $$outer_this__bridgejsmethod_Main_GrandParent (ref null $bridgejsmethod.Main))
+  (field $$outer_this__bridgejsmethod_Main_Parent (ref null $bridgejsmethod.Main))
+  (field $$outer_this__bridgejsmethod_Main_ChildWithOverrides (ref null $bridgejsmethod.Main))
+   $bridgejsmethod.Main.Parent)
+ )
+ (type $bridgejsmethod.Main.ChildWithOverrides.vtable (struct_subtype 
+  (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+  (field $m_hashCode__int (ref $function.m_hashCode__int))
+  (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+  (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  (field $m_jsMethod__java_lang_Object__void (ref $function.m_jsMethod__java_lang_Object__void))
+  (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
+  (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.m_jsMethod__bridgejsmethod_Main_Parent__void))
+  (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.m_method__bridgejsmethod_Main_Parent__void))
+  (field $m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void (ref $function.m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void))
+  (field $m_method__bridgejsmethod_Main_ChildWithOverrides__void (ref $function.m_method__bridgejsmethod_Main_ChildWithOverrides__void))
+   $bridgejsmethod.Main.Parent.vtable)
+ )
+ (type $bridgejsmethod.Main.ChildWithOverrides.itable (struct_subtype 
  (field $slot0 (ref null struct))
  (field $slot1 (ref null struct))
  (field $slot2 (ref null struct))
@@ -855,13 +888,13 @@
   (ref.null struct)
  ))
 
-;;; Code for bridgejsmethod.Main.Child [vtable.init]
-(global $bridgejsmethod.Main.Child.vtable (ref $bridgejsmethod.Main.Child.vtable) 
- (struct.new $bridgejsmethod.Main.Child.vtable
+;;; Code for bridgejsmethod.Main.ChildWithoutOverrides [vtable.init]
+(global $bridgejsmethod.Main.ChildWithoutOverrides.vtable (ref $bridgejsmethod.Main.ChildWithoutOverrides.vtable) 
+ (struct.new $bridgejsmethod.Main.ChildWithoutOverrides.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.Child)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.ChildWithoutOverrides)
   (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent)
   (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent)
   (ref.func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
@@ -869,8 +902,35 @@
  )
 )
 
-;;; Code for bridgejsmethod.Main.Child [itable.init]
-(global $bridgejsmethod.Main.Child.itable (ref $bridgejsmethod.Main.Child.itable) (struct.new $bridgejsmethod.Main.Child.itable 
+;;; Code for bridgejsmethod.Main.ChildWithoutOverrides [itable.init]
+(global $bridgejsmethod.Main.ChildWithoutOverrides.itable (ref $bridgejsmethod.Main.ChildWithoutOverrides.itable) (struct.new $bridgejsmethod.Main.ChildWithoutOverrides.itable 
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+  (ref.null struct)
+ ))
+
+;;; Code for bridgejsmethod.Main.ChildWithOverrides [vtable.init]
+(global $bridgejsmethod.Main.ChildWithOverrides.vtable (ref $bridgejsmethod.Main.ChildWithOverrides.vtable) 
+ (struct.new $bridgejsmethod.Main.ChildWithOverrides.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.ChildWithOverrides)
+  (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent)
+  (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent)
+  (ref.func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.ChildWithOverrides)
+  (ref.func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.ChildWithOverrides)
+  (ref.func $m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void@bridgejsmethod.Main.ChildWithOverrides)
+  (ref.func $m_method__bridgejsmethod_Main_ChildWithOverrides__void@bridgejsmethod.Main.ChildWithOverrides)
+ )
+)
+
+;;; Code for bridgejsmethod.Main.ChildWithOverrides [itable.init]
+(global $bridgejsmethod.Main.ChildWithOverrides.itable (ref $bridgejsmethod.Main.ChildWithOverrides.itable) (struct.new $bridgejsmethod.Main.ChildWithOverrides.itable 
   (ref.null struct)
   (ref.null struct)
   (ref.null struct)
@@ -946,8 +1006,11 @@
 ;;; Code for bridgejsmethod.Main.Parent [static fields]
 (global $f_$initialized__bridgejsmethod_Main_Parent (mut i32) (i32.const 0))
 
-;;; Code for bridgejsmethod.Main.Child [static fields]
-(global $f_$initialized__bridgejsmethod_Main_Child (mut i32) (i32.const 0))
+;;; Code for bridgejsmethod.Main.ChildWithoutOverrides [static fields]
+(global $f_$initialized__bridgejsmethod_Main_ChildWithoutOverrides (mut i32) (i32.const 0))
+
+;;; Code for bridgejsmethod.Main.ChildWithOverrides [static fields]
+(global $f_$initialized__bridgejsmethod_Main_ChildWithOverrides (mut i32) (i32.const 0))
 
 ;;; Code for bridgejsmethod.Main.I [methods]
 
@@ -2640,74 +2703,204 @@
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.S)
 
-;;; Code for bridgejsmethod.Main.Child [methods]
+;;; Code for bridgejsmethod.Main.ChildWithoutOverrides [methods]
 
-;;; Child Child.$create(Main $outer_this)
-(func $$create__bridgejsmethod_Main@bridgejsmethod.Main.Child
+;;; ChildWithoutOverrides ChildWithoutOverrides.$create(Main $outer_this)
+(func $$create__bridgejsmethod_Main@bridgejsmethod.Main.ChildWithoutOverrides
  (param $$outer_this (ref null $bridgejsmethod.Main))
- (result (ref null $bridgejsmethod.Main.Child))
+ (result (ref null $bridgejsmethod.Main.ChildWithoutOverrides))
  ;;@ bridgejsmethod/Main.java:210:8
- (local $$instance (ref null $bridgejsmethod.Main.Child))
+ (local $$instance (ref null $bridgejsmethod.Main.ChildWithoutOverrides))
  (block
-  ;; Child $instance = new Child.<init>(0,$outer_this,$outer_this,$outer_this);
+  ;; ChildWithoutOverrides $instance = new ChildWithoutOverrides.<init>(0,$outer_this,$outer_this,$outer_this);
   ;;@ bridgejsmethod/Main.java:210:8
-  (local.set $$instance (struct.new $bridgejsmethod.Main.Child (ref.as_non_null (global.get $bridgejsmethod.Main.Child.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.Child.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this) (local.get $$outer_this)))
+  (local.set $$instance (struct.new $bridgejsmethod.Main.ChildWithoutOverrides (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithoutOverrides.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithoutOverrides.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this) (local.get $$outer_this)))
   ;; $instance.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:210:8
-  (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_Child@bridgejsmethod.Main.Child (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_ChildWithoutOverrides@bridgejsmethod.Main.ChildWithoutOverrides (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
   ;; return $instance;
   ;;@ bridgejsmethod/Main.java:210:8
   (return (local.get $$instance))
  )
 )
 
-;;; void Child.$ctor(Main $outer_this)
-(func $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_Child@bridgejsmethod.Main.Child
- (param $this (ref null $bridgejsmethod.Main.Child))
+;;; void ChildWithoutOverrides.$ctor(Main $outer_this)
+(func $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_ChildWithoutOverrides@bridgejsmethod.Main.ChildWithoutOverrides
+ (param $this (ref null $bridgejsmethod.Main.ChildWithoutOverrides))
  (param $$outer_this (ref null $bridgejsmethod.Main))
  ;;@ bridgejsmethod/Main.java:210:8
  (block
-  ;; bridgejsmethod.Main.Child.$clinit();
+  ;; bridgejsmethod.Main.ChildWithoutOverrides.$clinit();
   ;;@ bridgejsmethod/Main.java:210:8
-  (call $$clinit__void@bridgejsmethod.Main.Child )
+  (call $$clinit__void@bridgejsmethod.Main.ChildWithoutOverrides )
   ;; Parent.this.$ctor($outer_this);
   ;;@ bridgejsmethod/Main.java:210:8
   (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_Parent@bridgejsmethod.Main.Parent (ref.as_non_null (local.get $this))(local.get $$outer_this))
  )
 )
 
-;;; void Child.$clinit()
-(func $$clinit__void@bridgejsmethod.Main.Child
+;;; void ChildWithoutOverrides.$clinit()
+(func $$clinit__void@bridgejsmethod.Main.ChildWithoutOverrides
  ;;@ bridgejsmethod/Main.java:210:8
  (block
-  ;; if (bridgejsmethod.Main.Child.$initialized) return;
+  ;; if (bridgejsmethod.Main.ChildWithoutOverrides.$initialized) return;
   ;;@ bridgejsmethod/Main.java:210:8
-  (if (global.get $f_$initialized__bridgejsmethod_Main_Child)
+  (if (global.get $f_$initialized__bridgejsmethod_Main_ChildWithoutOverrides)
    (then
     ;; return;
     ;;@ bridgejsmethod/Main.java:210:8
     (return )
    )
   )
-  ;; (bridgejsmethod.Main.Child.$initialized = true);
+  ;; (bridgejsmethod.Main.ChildWithoutOverrides.$initialized = true);
   ;;@ bridgejsmethod/Main.java:210:8
-  (global.set $f_$initialized__bridgejsmethod_Main_Child (i32.const 1))
+  (global.set $f_$initialized__bridgejsmethod_Main_ChildWithoutOverrides (i32.const 1))
   ;; bridgejsmethod.Main.Parent.$clinit();
   ;;@ bridgejsmethod/Main.java:210:8
   (call $$clinit__void@bridgejsmethod.Main.Parent )
  )
 )
 
-;;; Class<?> Child.getClass()
-(func $m_getClass__java_lang_Class@bridgejsmethod.Main.Child
+;;; Class<?> ChildWithoutOverrides.getClass()
+(func $m_getClass__java_lang_Class@bridgejsmethod.Main.ChildWithoutOverrides
  (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $this (ref null $bridgejsmethod.Main.Child))
- (local.set $this (ref.cast_static $bridgejsmethod.Main.Child (local.get $this.untyped)))
+ (local $this (ref null $bridgejsmethod.Main.ChildWithoutOverrides))
+ (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithoutOverrides (local.get $this.untyped)))
  (block
-  ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.Child();
-  (return (call $function.no.side.effects.$getBridgejsmethod.Main.Child__java_lang_Class (ref.func $$getBridgejsmethod.Main.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.ChildWithoutOverrides();
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.ChildWithoutOverrides__java_lang_Class (ref.func $$getBridgejsmethod.Main.ChildWithoutOverrides__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
-(elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.Child)
+(elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.ChildWithoutOverrides)
+
+;;; Code for bridgejsmethod.Main.ChildWithOverrides [methods]
+
+;;; ChildWithOverrides<T> ChildWithOverrides.$create(Main $outer_this)
+(func $$create__bridgejsmethod_Main@bridgejsmethod.Main.ChildWithOverrides
+ (param $$outer_this (ref null $bridgejsmethod.Main))
+ (result (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ ;;@ bridgejsmethod/Main.java:212:8
+ (local $$instance (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ (block
+  ;; ChildWithOverrides<T> $instance = new ChildWithOverrides.<init>(0,$outer_this,$outer_this,$outer_this);
+  ;;@ bridgejsmethod/Main.java:212:8
+  (local.set $$instance (struct.new $bridgejsmethod.Main.ChildWithOverrides (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithOverrides.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.ChildWithOverrides.itable)) (i32.const 0) (local.get $$outer_this) (local.get $$outer_this) (local.get $$outer_this)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ bridgejsmethod/Main.java:212:8
+  (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_ChildWithOverrides@bridgejsmethod.Main.ChildWithOverrides (ref.as_non_null (local.get $$instance))(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ bridgejsmethod/Main.java:212:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ChildWithOverrides.$ctor(Main $outer_this)
+(func $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_ChildWithOverrides@bridgejsmethod.Main.ChildWithOverrides
+ (param $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
+ ;;@ bridgejsmethod/Main.java:212:8
+ (block
+  ;; bridgejsmethod.Main.ChildWithOverrides.$clinit();
+  ;;@ bridgejsmethod/Main.java:212:8
+  (call $$clinit__void@bridgejsmethod.Main.ChildWithOverrides )
+  ;; Parent.this.$ctor($outer_this);
+  ;;@ bridgejsmethod/Main.java:212:8
+  (call $$ctor__bridgejsmethod_Main__void_$p_bridgejsmethod_Main_Parent@bridgejsmethod.Main.Parent (ref.as_non_null (local.get $this))(local.get $$outer_this))
+ )
+)
+
+;;; void ChildWithOverrides.jsMethod(T t)
+(func $m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void@bridgejsmethod.Main.ChildWithOverrides
+ (type $function.m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $t (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ ;;@ bridgejsmethod/Main.java:219:16
+ (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void@bridgejsmethod.Main.ChildWithOverrides)
+
+;;; void ChildWithOverrides.method(T t)
+(func $m_method__bridgejsmethod_Main_ChildWithOverrides__void@bridgejsmethod.Main.ChildWithOverrides
+ (type $function.m_method__bridgejsmethod_Main_ChildWithOverrides__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $t (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ ;;@ bridgejsmethod/Main.java:222:16
+ (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_method__bridgejsmethod_Main_ChildWithOverrides__void@bridgejsmethod.Main.ChildWithOverrides)
+
+;;; void ChildWithOverrides.jsMethod(Parent arg0)
+(func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.ChildWithOverrides
+ (type $function.m_jsMethod__bridgejsmethod_Main_Parent__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $bridgejsmethod.Main.Parent))
+ ;;@ bridgejsmethod/Main.java:212:8
+ (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $this.untyped)))
+ (block
+  ;; ChildWithOverrides.this.jsMethod(((T) arg0));
+  ;;@ bridgejsmethod/Main.java:212:8
+  (call_ref $function.m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $arg0))(struct.get $bridgejsmethod.Main.ChildWithOverrides.vtable $m_jsMethod__bridgejsmethod_Main_ChildWithOverrides__void (struct.get $bridgejsmethod.Main.ChildWithOverrides $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.ChildWithOverrides)
+
+;;; void ChildWithOverrides.method(Parent arg0)
+(func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.ChildWithOverrides
+ (type $function.m_method__bridgejsmethod_Main_Parent__void)
+ (param $this.untyped (ref $java.lang.Object))
+ (param $arg0 (ref null $bridgejsmethod.Main.Parent))
+ ;;@ bridgejsmethod/Main.java:212:8
+ (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $this.untyped)))
+ (block
+  ;; ChildWithOverrides.this.method(((T) arg0));
+  ;;@ bridgejsmethod/Main.java:212:8
+  (call_ref $function.m_method__bridgejsmethod_Main_ChildWithOverrides__void (ref.as_non_null (local.get $this))(ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $arg0))(struct.get $bridgejsmethod.Main.ChildWithOverrides.vtable $m_method__bridgejsmethod_Main_ChildWithOverrides__void (struct.get $bridgejsmethod.Main.ChildWithOverrides $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.ChildWithOverrides)
+
+;;; void ChildWithOverrides.$clinit()
+(func $$clinit__void@bridgejsmethod.Main.ChildWithOverrides
+ ;;@ bridgejsmethod/Main.java:212:8
+ (block
+  ;; if (bridgejsmethod.Main.ChildWithOverrides.$initialized) return;
+  ;;@ bridgejsmethod/Main.java:212:8
+  (if (global.get $f_$initialized__bridgejsmethod_Main_ChildWithOverrides)
+   (then
+    ;; return;
+    ;;@ bridgejsmethod/Main.java:212:8
+    (return )
+   )
+  )
+  ;; (bridgejsmethod.Main.ChildWithOverrides.$initialized = true);
+  ;;@ bridgejsmethod/Main.java:212:8
+  (global.set $f_$initialized__bridgejsmethod_Main_ChildWithOverrides (i32.const 1))
+  ;; bridgejsmethod.Main.Parent.$clinit();
+  ;;@ bridgejsmethod/Main.java:212:8
+  (call $$clinit__void@bridgejsmethod.Main.Parent )
+ )
+)
+
+;;; Class<?> ChildWithOverrides.getClass()
+(func $m_getClass__java_lang_Class@bridgejsmethod.Main.ChildWithOverrides
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $bridgejsmethod.Main.ChildWithOverrides))
+ (local.set $this (ref.cast_static $bridgejsmethod.Main.ChildWithOverrides (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.ChildWithOverrides();
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.ChildWithOverrides__java_lang_Class (ref.func $$getBridgejsmethod.Main.ChildWithOverrides__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.ChildWithOverrides)
