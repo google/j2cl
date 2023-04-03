@@ -30,7 +30,9 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
+import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.ast.CompanionObject
+import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
 import com.google.j2cl.transpiler.backend.kotlin.common.mapFirst
 import com.google.j2cl.transpiler.backend.kotlin.common.titleCase
@@ -181,20 +183,31 @@ private fun Method.toNonConstructorObjCNames(): MethodObjCNames =
 private val String.objCMethodParameterNames: List<String>
   get() = letIf(lastOrNull() == ':') { dropLast(1) }.split(":")
 
+private const val objCTypeNamePrefix: String = "J2kt"
+
 internal val TypeDeclaration.objCName: String
-  get() = objCName(forMember = false)
+  get() = objCNameWithoutPrefix.letIf(needsPrefix) { objCTypeNamePrefix + it }
 
-internal val TypeDeclaration.objCCompanionName: String
-  get() = objCName + "Companion"
+internal val TypeDeclaration.needsPrefix: Boolean
+  get() = packageName?.run { startsWith("java.") || startsWith("javax.") } ?: false
 
-internal val CompanionObject.objCName: String
-  get() = enclosingTypeDeclaration.objCCompanionName
+internal val TypeDeclaration.objCNameWithoutPrefix: String
+  get() = mappedObjCName ?: nonMappedObjCName
 
-internal fun TypeDeclaration.objCName(forMember: Boolean): String =
-  mappedObjCName ?: nonMappedObjCName(forMember)
+private val String.objCCompanionTypeName: String
+  get() = this + "Companion"
 
-internal fun TypeDeclaration.nonMappedObjCName(forMember: Boolean): String =
-  objectiveCName ?: defaultObjCName(forMember = forMember)
+internal val CompanionDeclaration.objCName
+  get() = typeDeclaration.objCName.objCCompanionTypeName
+
+internal val CompanionDeclaration.objCNameWithoutPrefix
+  get() = typeDeclaration.objCNameWithoutPrefix.objCCompanionTypeName
+
+private val TypeDeclaration.nonMappedObjCName: String
+  get() = objectiveCName ?: defaultObjCName
+
+private val CompanionObject.objCName: String
+  get() = enclosingTypeDeclaration.companionDeclaration.objCName
 
 private val TypeDeclaration.mappedObjCName: String?
   get() =
@@ -207,42 +220,38 @@ private val TypeDeclaration.mappedObjCName: String?
       else -> null
     }
 
-internal fun TypeDeclaration.defaultObjCName(forMember: Boolean): String =
-  objCNamePrefix(forMember) + simpleObjCName
+private val TypeDeclaration.defaultObjCName: String
+  get() = objCNamePrefix + simpleObjCName
 
-private fun TypeDeclaration.objCNamePrefix(forMember: Boolean) =
-  enclosingTypeDeclaration.run {
-    if (this != null) objCName(forMember = forMember) + "_"
-    else simpleObjCNamePrefix(forMember = forMember)
-  }
+private val TypeDeclaration.objCNamePrefix: String
+  get() =
+    enclosingTypeDeclaration.run {
+      if (this != null) objCNameWithoutPrefix + "_" else simpleObjCNamePrefix
+    }
 
-private fun TypeDeclaration.simpleObjCNamePrefix(forMember: Boolean) =
-  objectiveCNamePrefix ?: objCPackagePrefix(forMember = forMember)
+private val TypeDeclaration.simpleObjCNamePrefix: String
+  get() = objectiveCNamePrefix ?: objCPackagePrefix
 
 private val TypeDeclaration.simpleObjCName: String
   get() = simpleSourceName.objCName
 
-private fun TypeDeclaration.objCPackagePrefix(forMember: Boolean): String =
-  packageName?.objCPackagePrefix(forMember = forMember) ?: ""
+private val TypeDeclaration.objCPackagePrefix: String
+  get() = packageName?.objCPackagePrefix ?: ""
 
-private fun String.objCPackagePrefix(forMember: Boolean): String =
-  this
-    // TODO(b/265295531): This line is a temporary hack, remove when not needed.
-    .letIf(!forMember && (startsWith("java.") || startsWith("javax."))) { "j2kt.$it" }
-    .split('.')
-    .joinToString(separator = "") { it.titleCase.objCName }
+private val String.objCPackagePrefix: String
+  get() = split('.').joinToString(separator = "") { it.titleCase.objCName }
 
 internal val String.objCName
   get() = replace('$', '_')
 
 private const val idObjCName = "id"
 
-internal fun TypeDescriptor.objCName(useId: Boolean, forMember: Boolean): String =
+internal fun TypeDescriptor.objCName(useId: Boolean): String =
   when (this) {
     is PrimitiveTypeDescriptor -> primitiveObjCName
-    is ArrayTypeDescriptor -> arrayObjCName(forMember = forMember)
-    is DeclaredTypeDescriptor -> declaredObjCName(useId = useId, forMember = forMember)
-    is TypeVariable -> variableObjCName(useId = useId, forMember = forMember)
+    is ArrayTypeDescriptor -> arrayObjCName
+    is DeclaredTypeDescriptor -> declaredObjCName(useId = useId)
+    is TypeVariable -> variableObjCName(useId = useId)
     else -> idObjCName
   }
 
@@ -261,21 +270,20 @@ private val PrimitiveTypeDescriptor.primitiveObjCName: String
       else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
     }
 
-private fun DeclaredTypeDescriptor.declaredObjCName(useId: Boolean, forMember: Boolean): String =
-  if (useId && isJavaLangObject(this)) idObjCName
-  else typeDeclaration.objCName(forMember = forMember)
+private fun DeclaredTypeDescriptor.declaredObjCName(useId: Boolean): String =
+  if (useId && isJavaLangObject(this)) idObjCName else typeDeclaration.objCNameWithoutPrefix
 
-private fun ArrayTypeDescriptor.arrayObjCName(forMember: Boolean): String =
-  leafTypeDescriptor.objCName(useId = false, forMember = forMember) + "Array" + dimensionsSuffix
+private val ArrayTypeDescriptor.arrayObjCName: String
+  get() = leafTypeDescriptor.objCName(useId = false) + "Array" + dimensionsSuffix
 
 private val ArrayTypeDescriptor.dimensionsSuffix
   get() = if (dimensions > 1) "$dimensions" else ""
 
-private fun TypeVariable.variableObjCName(useId: Boolean, forMember: Boolean): String =
-  upperBoundTypeDescriptor.objCName(useId = useId, forMember = forMember)
+private fun TypeVariable.variableObjCName(useId: Boolean): String =
+  upperBoundTypeDescriptor.objCName(useId = useId)
 
 private val Variable.objCName
-  get() = typeDescriptor.objCName(useId = true, forMember = true).titleCase
+  get() = typeDescriptor.objCName(useId = true).titleCase
 
 internal val FieldDescriptor.objCName: String
   get() = name!!.objCName.escapeJ2ObjCKeyword.letIf(!isEnumConstant) { it + "_" }

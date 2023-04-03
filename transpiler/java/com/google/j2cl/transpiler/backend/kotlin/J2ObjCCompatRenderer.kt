@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 import com.google.j2cl.transpiler.ast.Variable
+import com.google.j2cl.transpiler.backend.kotlin.ast.companionDeclaration
 import com.google.j2cl.transpiler.backend.kotlin.common.buildList
 import com.google.j2cl.transpiler.backend.kotlin.common.code
 import com.google.j2cl.transpiler.backend.kotlin.common.letIf
@@ -155,8 +156,7 @@ private val FieldDescriptor.getFunctionRenderer: Renderer<Source>
     )
 
 private val FieldDescriptor.getFunctionName: String
-  get() =
-    enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_get_" + name!!.objCName
+  get() = enclosingTypeDescriptor.typeDeclaration.objCNameWithoutPrefix + "_get_" + name!!.objCName
 
 private val FieldDescriptor.getExpressionRenderer: Renderer<Source>
   get() = propertyQualifierRenderer.map { dotSeparated(it, source(getPropertyObjCName)) }
@@ -178,8 +178,7 @@ private val FieldDescriptor.setFunctionRenderer: Renderer<Source>
     )
 
 private val FieldDescriptor.setFunctionName: String
-  get() =
-    enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_set_" + name!!.objCName
+  get() = enclosingTypeDescriptor.typeDeclaration.objCNameWithoutPrefix + "_set_" + name!!.objCName
 
 private val FieldDescriptor.setStatementRenderer: Renderer<Source>
   get() =
@@ -208,7 +207,7 @@ private val Field.constantDefineRenderer: Renderer<Source>?
     }
 
 private val FieldDescriptor.defineConstantName: String
-  get() = enclosingTypeDescriptor.typeDeclaration.objCName(forMember = true) + "_" + name!!
+  get() = enclosingTypeDescriptor.typeDeclaration.objCNameWithoutPrefix + "_" + name!!
 
 private val Member.functionRenderers: List<Renderer<Source>>
   get() =
@@ -268,7 +267,7 @@ private fun Method.functionRenderer(objCNames: MethodObjCNames): Renderer<Source
 
 private fun MethodDescriptor.functionName(objCNames: MethodObjCNames): String =
   enclosingTypeDescriptor
-    .objCName(useId = true, forMember = true)
+    .objCName(useId = true)
     .letIf(isConstructor) { "create_$it" }
     .plus("_")
     .plus(objCNames.methodName)
@@ -317,7 +316,7 @@ private val Variable.nameRenderer: Renderer<Source>
   get() = rendererOf(source(name.objCName.escapeObjCKeyword))
 
 private val TypeDeclaration.objCCompanionNameRenderer: Renderer<Source>
-  get() = className(objCCompanionName)
+  get() = className(companionDeclaration.objCName)
 
 private val TypeDeclaration.companionSharedRenderer: Renderer<Source>
   get() = getProperty(objCCompanionNameRenderer, "shared")
@@ -327,12 +326,6 @@ private val TypeDeclaration.allocRenderer: Renderer<Source>
 
 private val TypeDeclaration.objCNameRenderer: Renderer<Source>
   get() = mappedObjCNameRenderer ?: nonMappedObjCNameRenderer
-
-private val TypeDeclaration.nonMappedObjCNameRenderer: Renderer<Source>
-  get() =
-    nonMappedObjCName(forMember = false).let {
-      if (isInterface) protocolName(it) else className(it)
-    }
 
 private val TypeDeclaration.mappedObjCNameRenderer: Renderer<Source>?
   get() =
@@ -346,6 +339,16 @@ private val TypeDeclaration.mappedObjCNameRenderer: Renderer<Source>?
       "java.util.Map" -> nsMutableDictionary
       else -> null
     }
+
+private val TypeDeclaration.nonMappedObjCNameRenderer: Renderer<Source>
+  get() = kind.objCNameRenderer(objCName)
+
+private fun TypeDeclaration.Kind.objCNameRenderer(name: String): Renderer<Source> =
+  when (this) {
+    TypeDeclaration.Kind.CLASS,
+    TypeDeclaration.Kind.ENUM -> className(name)
+    TypeDeclaration.Kind.INTERFACE -> protocolName(name)
+  }
 
 private val TypeDescriptor.objCRenderer: Renderer<Source>
   get() =
@@ -419,7 +422,7 @@ private val jdoubleTypeRenderer: Renderer<Source>
   get() = j2ObjCTypeRenderer("jdouble")
 
 private val TypeDeclaration.objCEnumName: String
-  get() = "${objCName}_Enum"
+  get() = "${objCNameWithoutPrefix}_Enum"
 
 private val FieldDescriptor.objCEnumName: String
   get() = "${enclosingTypeDescriptor.typeDeclaration.objCEnumName}_$name"
