@@ -54,6 +54,7 @@ _J2KT_JVM_PACKAGES = [
 # Packages that j2cl rule will generate j2kt native packages by default. Used to simplify test
 # rules.
 _J2KT_NATIVE_PACKAGES = [
+    "third_party/java_src/animal_sniffer",
     "build_defs/internal_do_not_use",
     "transpiler/javatests/com/google/j2cl/integration/java",
     "transpiler/javatests/com/google/j2cl/integration/testing",
@@ -63,6 +64,7 @@ _J2KT_NATIVE_PACKAGES = [
     "junit/generator/javatests/com/google/j2cl/junit/integration",
     "third_party/java_src/j2objc/annotations",
     "third_party/java_src/jsr330_inject",
+    "third_party/java/animal_sniffer",
     "third_party/java/checker_framework_annotations",
     "third_party/java/error_prone",
     "third_party/java/j2objc",
