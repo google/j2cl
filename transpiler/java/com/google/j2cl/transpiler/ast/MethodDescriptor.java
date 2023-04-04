@@ -635,7 +635,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       // name. In both cases, the parameter/return types for these methods do not determine the
       // actual method name, since the mangling needs to match the method that they are actually
       // overriding.
-      return getBridgeOrigin().getManglingDescriptor().toRawMemberDescriptor();
+      return getBridgeOrigin().getManglingDescriptor();
     }
     return this;
   }
