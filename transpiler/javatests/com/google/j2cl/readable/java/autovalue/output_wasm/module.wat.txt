@@ -4636,19 +4636,19 @@
 
 ;;; Code for autovalue.$AutoValue_AutoValueWithExtensions [methods]
 
-;;; void $AutoValue_AutoValueWithExtensions.$ctor(int intField$, String stringField$)
+;;; void $AutoValue_AutoValueWithExtensions.$ctor(int intField, String stringField)
 (func $$ctor__int__java_lang_String__void_$p_autovalue_$AutoValue_AutoValueWithExtensions@autovalue.$AutoValue_AutoValueWithExtensions
  (param $this (ref null $autovalue.$AutoValue_AutoValueWithExtensions))
- (param $intField$ i32)
- (param $stringField$ (ref null $java.lang.String))
+ (param $intField i32)
+ (param $stringField (ref null $java.lang.String))
  ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:7:2
  (block
   ;; autovalue.$AutoValue_AutoValueWithExtensions.$clinit();
-  ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:7:73
+  ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:7:71
   (call $$clinit__void@autovalue.$AutoValue_AutoValueWithExtensions )
-  ;; $$AutoValue_AutoValueWithExtensions.this.$ctor(intField$,stringField$);
+  ;; $$AutoValue_AutoValueWithExtensions.this.$ctor(intField,stringField);
   ;;@ autovalue/$AutoValue_AutoValueWithExtensions.java:8:4
-  (call $$ctor__int__java_lang_String__void_$p_autovalue_$$AutoValue_AutoValueWithExtensions@autovalue.$$AutoValue_AutoValueWithExtensions (ref.as_non_null (local.get $this))(local.get $intField$)(local.get $stringField$))
+  (call $$ctor__int__java_lang_String__void_$p_autovalue_$$AutoValue_AutoValueWithExtensions@autovalue.$$AutoValue_AutoValueWithExtensions (ref.as_non_null (local.get $this))(local.get $intField)(local.get $stringField))
  )
 )
 
@@ -5273,39 +5273,39 @@
 
 ;;; Code for autovalue.AutoValue_AutoValueWithExtensions [methods]
 
-;;; AutoValue_AutoValueWithExtensions AutoValue_AutoValueWithExtensions.$create(int intField$, String stringField$)
+;;; AutoValue_AutoValueWithExtensions AutoValue_AutoValueWithExtensions.$create(int intField, String stringField)
 (func $$create__int__java_lang_String@autovalue.AutoValue_AutoValueWithExtensions
- (param $intField$ i32)
- (param $stringField$ (ref null $java.lang.String))
+ (param $intField i32)
+ (param $stringField (ref null $java.lang.String))
  (result (ref null $autovalue.AutoValue_AutoValueWithExtensions))
  ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:2
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithExtensions))
  (block
-  ;; AutoValue_AutoValueWithExtensions $instance = new AutoValue_AutoValueWithExtensions.<init>(0,intField$,stringField$,0,false);
+  ;; AutoValue_AutoValueWithExtensions $instance = new AutoValue_AutoValueWithExtensions.<init>(0,intField,stringField,0,false);
   ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithExtensions (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.itable)) (i32.const 0) (local.get $intField$) (local.get $stringField$) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(intField$,stringField$);
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithExtensions (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithExtensions.itable)) (i32.const 0) (local.get $intField) (local.get $stringField) (i32.const 0) (i32.const 0)))
+  ;; $instance.$ctor(intField,stringField);
   ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:2
-  (call $$ctor__int__java_lang_String__void_$p_autovalue_AutoValue_AutoValueWithExtensions@autovalue.AutoValue_AutoValueWithExtensions (ref.as_non_null (local.get $$instance))(local.get $intField$)(local.get $stringField$))
+  (call $$ctor__int__java_lang_String__void_$p_autovalue_AutoValue_AutoValueWithExtensions@autovalue.AutoValue_AutoValueWithExtensions (ref.as_non_null (local.get $$instance))(local.get $intField)(local.get $stringField))
   ;; return $instance;
   ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:2
   (return (local.get $$instance))
  )
 )
 
-;;; void AutoValue_AutoValueWithExtensions.$ctor(int intField$, String stringField$)
+;;; void AutoValue_AutoValueWithExtensions.$ctor(int intField, String stringField)
 (func $$ctor__int__java_lang_String__void_$p_autovalue_AutoValue_AutoValueWithExtensions@autovalue.AutoValue_AutoValueWithExtensions
  (param $this (ref null $autovalue.AutoValue_AutoValueWithExtensions))
- (param $intField$ i32)
- (param $stringField$ (ref null $java.lang.String))
+ (param $intField i32)
+ (param $stringField (ref null $java.lang.String))
  ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:2
  (block
   ;; autovalue.AutoValue_AutoValueWithExtensions.$clinit();
-  ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:72
+  ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:19:70
   (call $$clinit__void@autovalue.AutoValue_AutoValueWithExtensions )
-  ;; $AutoValue_AutoValueWithExtensions.this.$ctor(intField$,stringField$);
+  ;; $AutoValue_AutoValueWithExtensions.this.$ctor(intField,stringField);
   ;;@ autovalue/AutoValue_AutoValueWithExtensions.java:20:4
-  (call $$ctor__int__java_lang_String__void_$p_autovalue_$AutoValue_AutoValueWithExtensions@autovalue.$AutoValue_AutoValueWithExtensions (ref.as_non_null (local.get $this))(local.get $intField$)(local.get $stringField$))
+  (call $$ctor__int__java_lang_String__void_$p_autovalue_$AutoValue_AutoValueWithExtensions@autovalue.$AutoValue_AutoValueWithExtensions (ref.as_non_null (local.get $this))(local.get $intField)(local.get $stringField))
  )
 )
 
@@ -5392,37 +5392,37 @@
 
 ;;; Code for autovalue.AutoValue_AutoValueWithFields [methods]
 
-;;; AutoValue_AutoValueWithFields AutoValue_AutoValueWithFields.$create(int intField$)
+;;; AutoValue_AutoValueWithFields AutoValue_AutoValueWithFields.$create(int intField)
 (func $$create__int@autovalue.AutoValue_AutoValueWithFields
- (param $intField$ i32)
+ (param $intField i32)
  (result (ref null $autovalue.AutoValue_AutoValueWithFields))
  ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:2
  (local $$instance (ref null $autovalue.AutoValue_AutoValueWithFields))
  (block
-  ;; AutoValue_AutoValueWithFields $instance = new AutoValue_AutoValueWithFields.<init>(0,0,0,intField$,0,false);
+  ;; AutoValue_AutoValueWithFields $instance = new AutoValue_AutoValueWithFields.<init>(0,0,0,intField,0,false);
   ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:2
-  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithFields (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (local.get $intField$) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor(intField$);
+  (local.set $$instance (struct.new $autovalue.AutoValue_AutoValueWithFields (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_AutoValueWithFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (local.get $intField) (i32.const 0) (i32.const 0)))
+  ;; $instance.$ctor(intField);
   ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:2
-  (call $$ctor__int__void_$p_autovalue_AutoValue_AutoValueWithFields@autovalue.AutoValue_AutoValueWithFields (ref.as_non_null (local.get $$instance))(local.get $intField$))
+  (call $$ctor__int__void_$p_autovalue_AutoValue_AutoValueWithFields@autovalue.AutoValue_AutoValueWithFields (ref.as_non_null (local.get $$instance))(local.get $intField))
   ;; return $instance;
   ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:2
   (return (local.get $$instance))
  )
 )
 
-;;; void AutoValue_AutoValueWithFields.$ctor(int intField$)
+;;; void AutoValue_AutoValueWithFields.$ctor(int intField)
 (func $$ctor__int__void_$p_autovalue_AutoValue_AutoValueWithFields@autovalue.AutoValue_AutoValueWithFields
  (param $this (ref null $autovalue.AutoValue_AutoValueWithFields))
- (param $intField$ i32)
+ (param $intField i32)
  ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:2
  (block
   ;; autovalue.AutoValue_AutoValueWithFields.$clinit();
-  ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:47
+  ;;@ autovalue/AutoValue_AutoValueWithFields.java:18:46
   (call $$clinit__void@autovalue.AutoValue_AutoValueWithFields )
-  ;; $AutoValue_AutoValueWithFields.this.$ctor(intField$);
+  ;; $AutoValue_AutoValueWithFields.this.$ctor(intField);
   ;;@ autovalue/AutoValue_AutoValueWithFields.java:19:4
-  (call $$ctor__int__void_$p_autovalue_$AutoValue_AutoValueWithFields@autovalue.$AutoValue_AutoValueWithFields (ref.as_non_null (local.get $this))(local.get $intField$))
+  (call $$ctor__int__void_$p_autovalue_$AutoValue_AutoValueWithFields@autovalue.$AutoValue_AutoValueWithFields (ref.as_non_null (local.get $this))(local.get $intField))
  )
 )
 
