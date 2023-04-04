@@ -131,7 +131,6 @@ def _impl_j2wasm_application(ctx):
 
     debug_dir_name = ctx.label.name + "_debug"
 
-    args.add("--symbolmap=" + ctx.outputs.symbolmap.path)
     outputs.append(ctx.outputs.symbolmap)
 
     args.add("-o", ctx.outputs.wasm)
@@ -145,6 +144,9 @@ def _impl_j2wasm_application(ctx):
     ctx.actions.run(
         executable = ctx.executable._binaryen,
         arguments = [args] + ctx.attr.binaryen_stage2_args + [
+            # SymbolMap flag must be after optimization passes to get the final
+            # symbol names.
+            "--symbolmap=" + ctx.outputs.symbolmap.path,
             "--input-source-map",
             intermediate_source_map.path,
             intermediate_wasm_output.path,
